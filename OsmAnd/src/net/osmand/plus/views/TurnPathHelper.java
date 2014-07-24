@@ -140,16 +140,36 @@ public class TurnPathHelper {
 			pathForTurn.rQuadTo(0, -(quadShiftY+th), -b * (quadShiftX+th), -(quadShiftY+th));
 			pathForTurn.rQuadTo(-b * (quadShiftX+th), 0, -b * (quadShiftX+th), (quadShiftY+th));
 			pathForTurn.rLineTo(0, sm);
-			
+
 			pathForTurn.rLineTo(-b * hpartArrowL, 0);
 			pathForTurn.rLineTo(b * harrowL/2, harrowL/2); // center
 			pathForTurn.rLineTo(b * harrowL/2, -harrowL/2);
 			pathForTurn.rLineTo(-b  *hpartArrowL, 0);
-			
+
 			pathForTurn.rLineTo(0, -sm);
 			pathForTurn.rQuadTo(0, -quadShiftX, b *quadShiftX, -quadShiftY);
 			pathForTurn.rQuadTo(b * quadShiftX, 0, b * quadShiftX, quadShiftY);
 			pathForTurn.rLineTo(0, h);
+		} else if (TurnType.OFFR.equals(turnType.getValue())){
+			int h = (int) (ha - hpartArrowL - 16);
+			pathForTurn.rMoveTo(th, 0); //12 0
+			//first square
+			pathForTurn.rLineTo(0, -h / 4); //0 -7
+			pathForTurn.rLineTo(-th, 0); //-12 0
+			pathForTurn.rLineTo(0, h / 4); //0 7
+			pathForTurn.rLineTo(th, 0); //12 0
+			pathForTurn.rMoveTo(0, -h / 2); //12 0
+			//second square
+			pathForTurn.rLineTo(0, -h / 4); //0 -7
+			pathForTurn.rLineTo(-th, 0); //-12 0
+			pathForTurn.rLineTo(0, h / 4); //0 7
+			pathForTurn.rLineTo(th, 0); //12 0
+			pathForTurn.rMoveTo(0, -h / 2 + 1); //31 0
+			//arrow
+			pathForTurn.rLineTo(hpartArrowL, 0); //9 0
+			pathForTurn.rLineTo(-harrowL / 2, -harrowL / 2); // center -15 -15
+			pathForTurn.rLineTo(-harrowL / 2, harrowL / 2); // -15 15
+			pathForTurn.rLineTo(hpartArrowL + th, 0); //9 0
 		} else if (turnType != null && turnType.isRoundAbout()) {
 			float t = turnType.getTurnAngle();
 			if (t >= 170 && t < 220) {

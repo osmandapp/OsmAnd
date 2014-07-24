@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors-ligne</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
 \n\t- Modification hors-ligne des PI
@@ -1744,4 +1745,42 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_group_by_invite">Admission sur invitation</string>
     <string name="osmo_auth_error_short">Échec de l\'autorisation</string>
     <string name="osmo_auth_error">Erreur d\\\'autorisation OsMo : %1$s.\n Le service est temporairement hors-service ou votre inscription a expiré.\n Voulez-vous procéder à nouvelle inscription?</string>
-    </resources>
+    <string name="keep_navigation_service">Garder</string>
+	<string name="stop_navigation_service">Stop</string>
+	<string name="enable_sleep_mode">Activer le mode veille</string>
+	<string name="gps_wake_up_timer">Intervalle de réveil du GPS</string>
+	<string name="sleep_mode_stop_dialog">Garder le GPS actif ?</string>
+	<string name="map_preferred_locale_descr">Langue préférée pour les étiquettes sur la carte (noms anglais ou locaux en cas d\\\'indisponibilité)</string>
+    <string name="map_preferred_locale">Langue préférée pour la carte</string>
+    <string name="local_map_names">Noms locaux</string>
+    <string name="lang_sw">swahili</string>
+    <string name="lang_he">hébreux</string>
+    <string name="forward">Avancer</string>
+    <string name="home">Home</string>
+    <string name="live_monitoring_m_descr">Envoyer le suivi à un service Web si l\'enregistrement GPX est activé.</string>
+	<string name="live_monitoring_m">Suivi en ligne (GPX requis)</string>
+    <string name="live_monitoring_start">Démarrer suivi en ligne</string>
+	<string name="live_monitoring_stop">Arrêter suivi en ligne</string>
+	<string name="gpx_monitoring_start">Démarrer enregistrement GPX</string>
+	<string name="gpx_monitoring_stop">Arrêter enregistrement GPX</string>
+    <string name="gpx_start_new_segment">Débuter un nouveau segment</string>
+    <string name="rendering_attr_hideBuildings_name">Cacher les bâtiments</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Cacher les voies non adaptées aux véhicules</string>
+    <string name="rendering_attr_hideText_name">Cacher les textes</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Cacher forêts et scrubs</string>
+    <string name="rendering_attr_buildings15zoom_name">Bâtiments en zoom 15</string>
+    <string name="rendering_attr_moreDetailed_name">Plus détaillé</string>
+    <string name="rendering_attr_lessDetailed_name">Moins détaillé</string>
+    <string name="rendering_attr_hideAccess_name">Cacher le type d\\\'accès</string>
+    <string name="rendering_attr_showAccess_name">Montrer le type d\\\'accès</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Montrer la qualité des routes</string>
+    <string name="rendering_attr_showSurfaces_name">Montrer la surface des routes</string>
+    <string name="rendering_attr_showCycleRoutes_name">Montrer les pistes cyclables</string>
+    <string name="lang_fa">perse</string>
+	<string name="lang_al">albanais</string>
+	<string name="lang_ar">arabe</string>
+	<string name="lang_sc">sarde</string>
+	<string name="lang_sr">serbe</string>
+	<string name="lang_zh_CN">chinois simplifié</string>
+	<string name="lang_zh_TW">chinois traditionnel</string>
+	</resources>

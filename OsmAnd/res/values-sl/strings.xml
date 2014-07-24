@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	<string name="settings_Button">Nastavitve</string>
@@ -1701,7 +1701,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     </string>
     <string name="osmo_settings_uuid">Enolični ID naprave</string>
     <string name="osmo_settings_descr">Nastavi možnosti sledenja in osebni sledilni kanal</string>
-    <string name="osmo_plugin_description">OpenStreetMap-sledenje - Napredno sledenje v živo. Omogoča možnosti sledenja drugih naprav in biti sleden. Ustvarite anonimne skupine, katerih člani si med seboj delite lokacije. Ponuja različne možnosti za trajno sledenje ali sledenje v okviru sej. Anonimne skupine so omejene na nekaj dni in nekatere funkcije, npr. ni upravljanja na daljavo in ni skrbnika skupine. Polno delujoče skupine je potrebno ustvariti na spletnem mestu in le registrirani uporabniki imajo dostop do njih. Več o tem na http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">"OpenStreetMap napredno sledenje v živo, oglejte si http://osmo.mobi. Omogoča možnosti sledenja drugih naprav in biti sleden. Ustvarite anonimne skupine, katerih člani si med seboj delite lokacije. Ponuja različne možnosti za trajno sledenje ali sledenje v okviru sej. Anonimne skupine so omejene na nekaj dni in nekatere funkcije, npr. ni upravljanja na daljavo in ni skrbnika skupine. Polno delujoče skupine je potrebno ustvariti na spletnem mestu in le registrirani uporabniki imajo dostop do njih. "</string>
     <string name="osmo_plugin_name">OsMo (Napredno sledenje v živo)</string>
     <string name="keep_informing_never">Nikoli</string>
     <string name="keep_informing_descr">Napoveduj navigacijska navodila v rednih časovnih presledkih</string>
@@ -1845,4 +1845,46 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="sleep_mode_stop_dialog">Obdržati vključen GPS?</string>
 	<string name="map_preferred_locale_descr">Jezik za oznake na zemljevidu (če ni na voljo bodo uporabljena angleška ali lokalna imena)</string>
     <string name="map_preferred_locale">Jezik za zemljevid</string>
-    </resources>
+    <string name="local_map_names">Lokalna imena</string>
+    <string name="lang_sw">Svahili</string>
+    <string name="lang_he">Hebrejščina</string>
+    <string name="forward">Naprej</string>
+    <string name="home">Dom</string>
+    <string name="live_monitoring_m_descr">Pošlji sledenje določeni spletni storitvi, če je GPX snemanje omogočeno.</string>
+	<string name="live_monitoring_m">Sledenje v živo (zahteva GPX)</string>
+    <string name="live_monitoring_start">Začni sledenje v živo</string>
+	<string name="live_monitoring_stop">Končaj sledenje v živo</string>
+	<string name="gpx_monitoring_start">Začni GPX snemanje</string>
+	<string name="gpx_monitoring_stop">Končaj GPX snemanje</string>
+    <string name="gpx_start_new_segment">Začni nov segment</string>
+    <string name="rendering_attr_hideBuildings_name">Skrij stavbe</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Skrij ne-vozne ceste</string>
+    <string name="rendering_attr_hideText_name">Skrij besedilo</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Skrij gozdove in grmičevje</string>
+    <string name="rendering_attr_buildings15zoom_name">Zgradbe v povečavi 15</string>
+    <string name="rendering_attr_moreDetailed_name">Bolj podrobno</string>
+    <string name="rendering_attr_lessDetailed_name">Manj podrobno</string>
+    <string name="rendering_attr_hideAccess_name">Skrij vrsto dostopa</string>
+    <string name="rendering_attr_showAccess_name">Prikaži vrsto dostopa</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Pokaži kakovost cest</string>
+    <string name="rendering_attr_showSurfaces_name">Pokaži površine cest</string>
+    <string name="rendering_attr_showCycleRoutes_name">Pokaži kolesarske poti</string>
+    <string name="osmo_auth_error_short">Dovoljenje neuspešno</string>
+    <string name="osmo_group_by_invite">Vstop s povabilom</string>
+    <string name="osmo_group_information">Prosimo, preberite preden ustvarite skupino!</string>
+    <string name="osmo_not_signed_in">OsMo prijava ni uspela</string>
+    <string name="osmo_gpx_points_downloaded">Prejeto %1$s OsMo točk.</string>
+    <string name="osmo_auto_connect_descr">Samodejna povezava s storitvijo po zagonu aplikacije</string>
+    <string name="osmo_auto_connect">Samodejna povezava</string>
+    <string name="osmo_start_service">OsMo storitev</string>
+    <string name="osmo_gpx_track_downloaded">Prejeta OsMo sled %1$s.</string>
+    <string name="lang_fa">Perzijščina</string>
+	<string name="osmo_auth_error">OsMo dovoljenje javlja napako: %1$s.\n Lahko je samo začasni problem storitve ali pa je vaša registracija potekla.\n Ali želite nadaljevati z novo registracijo?</string>
+    <string name="osmo_group_information_desc">" - Vse ustvarjene skupine so javne! Če želite biti anonimni, povežite naprave neposredno preko Tracker ID-ja.\n - V skupino se lahko registrira do 16 oseb.\n - Pri nedejavnosti ali če je samo ena oseba dejavna v obdobju dveh tednov, bo skupina izbrisana.\n - Omejite lahko vstop v skupino samo s povabilom, vendar za kontrolo skupine morate uporabiti admin konzolo.\n - Če želite ustvariti skupino, vendar z drugimi pogoji, se obrnite na http://osmo.mobi"</string>
+    <string name="lang_al">Albanščina</string>
+	<string name="lang_ar">Arabščina</string>
+	<string name="lang_sr">Srbščina</string>
+	<string name="lang_zh_CN">Poenostavljena kitajščina</string>
+	<string name="lang_zh_TW">Tradicionalna kitajščina</string>
+	<string name="lang_sc">Sardinščina</string>
+	</resources>

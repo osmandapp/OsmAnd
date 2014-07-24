@@ -57,17 +57,21 @@ public class ShareDialog {
 		return this;
 	}
 	
-	public ShareDialog shareURLOrText(String url, String shortExplanation, String longExplanation){
-		if(shortExplanation == null) {
+	public ShareDialog shareURLOrText(String url, String shortExplanation, String longExplanation) {
+		if (shortExplanation == null) {
 			shortExplanation = url;
 		}
-		if(longExplanation == null){
+		if (longExplanation == null) {
 			longExplanation = shortExplanation;
 		}
 		share.add(new ShareType(longExplanation, EMAIL));
 		share.add(new ShareType(shortExplanation, SMS));
-		share.add(new ShareType(url, CLIPBOARD));
-		share.add(new ShareType(url, QR));
+		if (url != null) {
+			share.add(new ShareType(url, CLIPBOARD));
+			share.add(new ShareType(url, QR));
+		} else {
+			share.add(new ShareType(shortExplanation, CLIPBOARD));
+		}
 		return this;
 	}
 	

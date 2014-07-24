@@ -94,7 +94,7 @@
  - 可選擇車道引導、速限顯示、使用真人語音或 TTS 語音
 	</string>
 	<string name="tip_update_index">更新離線地圖</string>
-	<string name="tip_update_index_t">"離線地圖的查看與 POI/位址查尋，以及離線導航，有最新的圖資是不可或缺的。OsmAnd 提供地圖檔案管理用以下載那些離線圖資，並且檢查能用的更新。
+	<string name="tip_update_index_t">"離線地圖的查看與 POI/位址查尋，以及離線導航，有最新的圖資是不可或缺的。OsmAnd 提供了地圖檔案的管理用以下載那些離線圖資，並且檢查能用的更新。
 \n\n下載圖資更新由\'設定\' -&gt; \'管理地圖檔案\' -&gt; \'下載\'。
 \n\n經由網路取得區域列表後，點選任意一個進入，做下載或更新檔案。請注意檔案類型選擇，在畫面上方的附近，選取您想要的類型下載（正常地圖、地形陰影覆疊等）。
 \n\n您可以在篩選區域清單中輸入一些文字，或者您可以按選項的\'設定\' -&gt; \'篩選已下載的\'可看見已篩選出在您裝置上的更新資料。
@@ -231,7 +231,7 @@
 	<string name="local_indexes_cat_tile">線上地圖圖磚</string>
 	<string name="local_indexes_cat_map">離線地圖(向量地圖)</string>
 	
-	<string name="index_settings_descr">下載與管理離線地圖檔案存儲在您的裝置</string>
+	<string name="index_settings_descr">在您的裝置下載與管理離線地圖和檔案的存儲</string>
 	<string name="map_online_plugin_is_not_installed">啟用線上地圖外掛元件，來選擇不同的地圖來源</string>
 	<string name="map_online_data">線上地圖圖磚</string>
 	<string name="map_online_data_descr">使用線上地圖(下載暫存地圖圖磚到SD卡)</string>
@@ -300,7 +300,7 @@
 	<string name="front_right">右前方</string>
 	<string name="right">右邊</string>
 	<string name="back_right">右後方</string>
-	<string name="back">後方</string>
+	<string name="back">往後</string>
 	<string name="back_left">左後方</string>
 	<string name="left">左邊</string>
 	<string name="front_left">左前方</string>
@@ -765,10 +765,10 @@
 	<string name="int_min">分。</string>
 	<string name="background_service_int_descr">設定休眠模式背景喚醒間隔</string>
 	<string name="background_service_int">喚醒間隔</string>
-	<string name="background_service_provider_descr">選擇位置提供給休眠模式服務使用</string>
-	<string name="background_service_provider">位置提供者</string>
+	<string name="background_service_provider_descr">選擇位置提供使用於休眠模式服務</string>
+	<string name="background_service_provider">位置提供</string>
 	<string name="background_router_service_descr">當螢幕關閉時，在背景執行 OsmAnd 追蹤您的位置</string>
-	<string name="background_router_service">背景執行</string>
+	<string name="background_router_service">在背景執行</string>
 	<string name="off_router_service_no_gps_available">休眠模式導航服務，需要提供一個已開啟的位置。</string>
 	<string name="hide_poi_filter">隱藏篩選器</string>
 	<string name="show_poi_filter">顯示篩選</string>
@@ -1199,7 +1199,7 @@
     <string name="background_service_is_enabled_question">OsmAnd 休眠模式服務仍在執行。您想要關閉它嗎？</string>
     <string name="osmand_play_title_30_chars">OsmAnd 地圖和導航</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ 地圖和導航</string>
-	<string name="native_app_allocated_memory_descr">原生記憶體總計由應用程式 %1$s MB (Dalvik %2$s MB，其它 %3$s MB) 。Proportional memory %4$s MB (Android 限制 %5$s MB，Dalvik %6$ MB)分配佔用。</string>
+	<string name="native_app_allocated_memory_descr">原生記憶體總計由應用程式 %1$s MB (Dalvik %2$s MB，其它 %3$s MB) 。Proportional memory %4$s MB (Android 限制 %5$s MB，Dalvik %6$s MB)分配佔用。</string>
 	<string name="context_menu_item_destination_point">設定為目的地</string>
     <string name="please_select_address">首先選擇城市或街道</string>
     <string name="available_downloads_left">還可下載 %1$d 個檔案</string>
@@ -1420,10 +1420,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t* EGM96 geoid offset correction for GPS altitude readings
     </string>
     <string name="osmodroid_plugin_description">OsMoDroid 外掛元件是 OsmAnd 的延伸，為 OsModroid 線上追蹤功能的應用程式。在 http://esya.ru 上有相關服務的資訊。</string>
-    <string name="tip_altitude_offset_t">大多數 GPS 裝置回報的高度測量在於橢球體為基礎的 WGS84 參考系統，從哪一個轉換到本地的使用系統需要依賴位置的矯正。
-		\n\n到這些地方系統有一個更好的近似值參考是 EGM96。
-		\n\n在您透過\'設定\' -&gt; \'管理地圖檔案\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球高度校正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。
-	</string>
+    <string name="tip_altitude_offset_t">"大多數 GPS 裝置回報的高度測量在於橢球體為基礎的 WGS84 參考系統，從哪一個轉換到本地的使用系統需要依賴位置的矯正。
+\n\n到這些地方系統有一個更好的近似值參考是 EGM96。
+\n\n在您透過\'設定\' -&gt; \'管理地圖檔案\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球海拔矯正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。 "</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="tip_recent_changes_1_0_0_t">在1.0.0的變更：
 	\n\t* Improved routing: faster, more precise, up to 250 km
@@ -1522,8 +1521,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="clear_intermediate_points">清除中間點</string>
     <string name="keep_intermediate_points">保留中間點</string>
     <string name="new_directions_point_dialog">您已經有中間點設定。</string>
-    <string name="context_menu_item_directions_to">指引到</string>
-    <string name="context_menu_item_directions_from">指引來自</string>
+    <string name="context_menu_item_directions_to">導引到</string>
+    <string name="context_menu_item_directions_from">從此導引</string>
     <string name="route_descr_map_location">地圖： </string>
     <string name="route_to">到：</string>
     <string name="route_via">經過：</string>
@@ -1593,12 +1592,12 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="map_magnifier">地圖放大鏡</string>
     
     
-    <string name="auto_zoom_none">無自動變焦</string>
-    <string name="auto_zoom_close">特寫</string>
-    <string name="auto_zoom_far">中等</string>
-    <string name="auto_zoom_farthest">遠程</string>
+    <string name="auto_zoom_none">不自動縮放</string>
+    <string name="auto_zoom_close">近距</string>
+    <string name="auto_zoom_far">中距</string>
+    <string name="auto_zoom_farthest">遠距</string>
     <string name="route_is_too_long">在兩點間距離超過 200 公里以外時，OsmAnd 的離線路線可能要花很長的時間(或有時無動作)。為了有更好的效能，您或許需要增加中途點。</string>
-    <string name="default_and">與</string>
+    <string name="default_and">和</string>
     <string name="default_or">或</string>
 	<string name="remember_choice">記住我的選擇</string>
     <string name="gps_status_eclipsim">GPS 狀態</string>
@@ -1682,20 +1681,20 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="lang_da">丹麥</string>
 	<string name="lang_nl">荷蘭</string>
 	<string name="lang_fi">芬蘭</string>
-	<string name="lang_fr">法文</string>
+	<string name="lang_fr">法語</string>
 	<string name="lang_ka">喬治亞</string>
 	<string name="lang_de">德語</string>
-	<string name="lang_el">希臘語</string>
-	<string name="lang_iw">希伯來語</string>
+	<string name="lang_el">希臘</string>
+	<string name="lang_iw">希伯來</string>
 	<string name="lang_hi">印地語</string>
 	<string name="lang_hu">匈牙利</string>
 	<string name="lang_id">印尼</string>
 	<string name="lang_it">意大利</string>
-	<string name="lang_ja">日語</string>
-	<string name="lang_ko">韓文</string>
+	<string name="lang_ja">日本</string>
+	<string name="lang_ko">南韓</string>
 	<string name="lang_lv">拉脫維亞</string>
 	<string name="lang_lt">立陶宛</string>
-	<string name="lang_mr">馬拉地語</string>
+	<string name="lang_mr">馬拉地</string>
 	<string name="lang_no">挪威</string>
 	<string name="lang_pl">波蘭</string>
 	<string name="lang_pt">葡萄牙</string>
@@ -1707,18 +1706,18 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="lang_sv">瑞典</string>
 	<string name="lang_tr">土耳其</string>
 	<string name="lang_uk">烏克蘭</string>
-	<string name="lang_vi">越南話</string>
+	<string name="lang_vi">越南</string>
 	<string name="lang_cy">威爾斯</string>
     <string name="index_name_italy">歐洲 - 意大利</string>
     <string name="index_name_gb">歐洲 - 英國</string>
     <string name="index_item_nation_addresses">全國範圍的地址</string>
-	<string name="index_item_world_altitude_correction">全球海拔校正</string>
+	<string name="index_item_world_altitude_correction">全球海拔矯正</string>
 	<string name="index_item_world_seamarks">全球航線標識</string>
 	<string name="index_item_world_bitcoin_payments">全球比特幣支付</string>
 	<string name="index_item_world_basemap">全球地圖總覽</string>
     <string name="index_item_world_ski">全球滑雪地圖</string>
     <string name="lang_hr">克羅埃西亞</string>
-    <string name="lang_zh">正體中文</string>
+    <string name="lang_zh">中文</string>
     <string name="lang_pt_br">葡萄牙語(巴西)</string>
     <string name="index_name_canada">北美洲 - 加拿大</string>
     <string name="always_center_position_on_map">位置顯示始終處於中心</string>
@@ -1734,34 +1733,30 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_plugin_name">OsMo (進階即時監視)</string>
     <string name="osmo_settings">OsMo OpenStreetMap 監視（測試版）</string>
    	<string name="osmo_settings_descr">組態監視設定值和設定個人監視頻道</string>
-    <string name="osmo_plugin_description">OpenStreetMap-監視 - 進階的即時監視。它提供了去追蹤其它裝置和被追蹤的可能性。
-        建立匿名群組，分享彼此的位置和交流。它具有各種設定用於區段追蹤或持續的追蹤。
-        匿名群組是有限制天數和一些功能，也就是沒有遠端控制和群組管理員。
-        需在網站上建立完整功能的群組，並且只有已註冊的使用者才能進入他們。
-        要更進一步的了解請到 http://osmo.mobi。</string>
+    <string name="osmo_plugin_description">"OpenStreetMap 進階即時監視，跟蹤其它裝置並進行追蹤，請參閱 http://osmo.mobi。建立匿名群組，分享彼此的位置和交流。它具有各種設定用於連線階段追蹤或持續的追蹤。匿名群組是有限制天數和一些功能，也就是沒有遠端控制和群組管理員。完整的功能需在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
     <string name="keep_informing_never">永不</string>
     <string name="keep_informing_descr">按照定期間隔重新通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
 	<string name="arrival_distance">抵達通告</string>
     <string name="arrival_distance_descr">您希望抵達通告要有多快？</string>
     <string name="osmo_io_error">OsMo 連線問題： </string>
-    <string name="osmo_mode_on">停止 OsMo 工作階段</string>    
-    <string name="osmo_mode_off">啟動 OsMo 工作階段</string>
+    <string name="osmo_mode_on">停止 OsMo 連線階段</string>    
+    <string name="osmo_mode_off">啟動 OsMo 連線階段</string>
     
     <string name="share_fav">分享</string>
 	<string name="share_fav_subject">經由 OsmAnd 分享我的最愛</string>
 	<string name="use_points_as_intermediates">預估兩點之間的路線</string>
     <string name="tip_recent_changes_1_8_alpha">"在1.8的變更： * 預估 GPX 軌跡路線標點之間的路線 * 為下載變更了各國的配置（支援當地名稱搜索） * 支援 GPX/KML 匯入(由 KML 轉換為 GPX ) * GPX 軌跡已經移到\'我的資料\' * 您可以按路程分割 GPX 軌跡和查對海拔高度差異/速度 * 自動開始導航後延遲 "</string>
-    <string name="osmo_auto_send_locations_descr">自動開始追蹤區段和發送位置之後啟動應用程式</string>
-    <string name="osmo_auto_send_locations">自動開始追蹤區段</string>
+    <string name="osmo_auto_send_locations_descr">自動開始追蹤連線階段和發送位置之後啟動應用程式</string>
+    <string name="osmo_auto_send_locations">自動開始追蹤連線階段</string>
     <string name="osmo_tracker_id">個人追蹤 ID</string>
     <string name="osmo_tracker_id_descr">點擊查看或分享追蹤 ID。
          使用追蹤 ID 連線的裝置將能夠監視該裝置的所有動作！ 要斷開選擇恢復選項。</string>
-    <string name="osmo_session_token">區段記號：%1$s</string>
+    <string name="osmo_session_token">連線階段標記：%1$s</string>
     <string name="osmo_auth_pending">等候授權...</string>
     <string name="osmo_locations_sent">發送位置 %1$d（在緩衝區 %2$d） </string>
     <string name="osmo_conn_successfull">已建立的連線：%1$s </string>
-    <string name="osmo_mode_restart">重新啟動 OsMo 區段</string>
+    <string name="osmo_mode_restart">重新啟動 OsMo 連線階段</string>
     <string name="osmo_settings_debug">除錯資訊</string>
     <string name="hours_ago">小時前</string>
     <string name="minutes_ago">分鐘前</string>
@@ -1777,10 +1772,10 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_group_info">資訊</string>
     <string name="osmo_group_share">為了連接到群組 %2$s，指定群組 ID (%1$s)或是點選 %3$s。</string>
     <string name="osmo_share_connect_device">允許持續的跟隨這個裝置</string>
-    <string name="osmo_share_current_session">在瀏覽器分享目前的區段</string>
-    <string name="osmo_session_not_available">無有效的區段，請檢查\'傳送位置\'是否有開。</string>
-    <string name="osmo_share_session">分享區段</string>
-    <string name="osmo_session_id_share">區段網址至追蹤裝置(%1$s)</string>
+    <string name="osmo_share_current_session">在瀏覽器分享目前的連線階段</string>
+    <string name="osmo_session_not_available">無效的連線階段，請檢查\'傳送位置\'是否有開。</string>
+    <string name="osmo_share_session">分享連線階段</string>
+    <string name="osmo_session_id_share">連線階段網址至追蹤裝置(%1$s)</string>
     <string name="osmo_tracker_id_share">為了連接到目標裝置 %2$s，點選連接 %3$s 或是指定追蹤 ID (%1$s)</string>
     <string name="osmo_track_interval">記錄間隔</string>
 	<string name="osmo_track_interval_descr">選擇發送位置間隔時間</string>
@@ -1901,24 +1896,30 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="rendering_attr_showSurfaces_name">顯示道路表面</string>
     
     <string name="rendering_attr_showCycleRoutes_name">顯示自行車道</string>
-    <string name="map_preferred_locale">地圖優先的語言</string>
+    <string name="map_preferred_locale">地圖上優先的語言</string>
     <string name="local_map_names">本地名稱</string>
-    <string name="lang_sw">Kiswahili</string>
-    <string name="lang_he">עברית ʿIvrit</string>
+    <string name="lang_sw">斯瓦希里</string>
+    <string name="lang_he">希伯來</string>
     <string name="forward">往前</string>
-    <string name="home">住家</string>
+    <string name="home">主頁</string>
     <string name="live_monitoring_m">線上即時追蹤 (需要 GPX)</string>
     <string name="live_monitoring_start">開始線上即時追蹤</string>
 	<string name="live_monitoring_stop">停止線上即時追蹤</string>
 	<string name="gpx_monitoring_start">開始 GPX 記錄</string>
 	<string name="gpx_monitoring_stop">停止 GPX 記錄</string>
     <string name="gpx_start_new_segment">開始新區段</string>
-    <string name="lang_fa">پارسی</string>
-	<string name="map_preferred_locale_descr">在地圖標籤上優先的語言(如果優先的語言無法使用，將會切換成英文或本地名稱)</string>
+    <string name="lang_fa">波斯</string>
+	<string name="map_preferred_locale_descr">在地圖標簽上優先的語言(如果優先的語言無法使用，將會切換成英文或本地名稱)</string>
     <string name="live_monitoring_m_descr">如果已啟用了 GPX 記錄，發送軌跡到指定的 web 服務。</string>
 	<string name="keep_navigation_service">保持</string>
 	<string name="stop_navigation_service">停止</string>
 	<string name="enable_sleep_mode">啟用休眠模式</string>
 	<string name="gps_wake_up_timer">GPS 喚醒間隔</string>
 	<string name="sleep_mode_stop_dialog">維持 GPS 開啟？</string>
+	<string name="lang_al">阿爾巴尼亞</string>
+	<string name="lang_ar">阿拉伯</string>
+	<string name="lang_sc">薩丁尼亞島</string>
+	<string name="lang_sr">塞爾維亞</string>
+	<string name="lang_zh_CN">簡體中文</string>
+	<string name="lang_zh_TW">正體中文</string>
 	</resources>

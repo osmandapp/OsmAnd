@@ -1229,7 +1229,7 @@
     <string name="download_using_mobile_internet">No teniu habilitada la connexió Wi-Fi. Voleu continuar baixant amb la connexió a Internet actual?</string>
     <string name="street_name">Carrer</string>
 	<string name="hno">Número</string>
-    <string name="monitoring_settings">Serveis d\'enregistrament i mode en suspensió</string>
+    <string name="monitoring_settings">Serveis d\'enregistrament</string>
     <string name="choose_osmand_theme_descr">Seleccioneu el tema de l\'aplicació</string>
     <string name="choose_osmand_theme">Aspecte gràfic</string>
     <string name="accessibility_options">Opcions d\'accessibilitat</string>
@@ -1250,7 +1250,7 @@
     <string name="max_speed_none">cap</string>
     <string name="local_indexes_cat_srtm">Dades de les corbes de nivell</string>
     <string name="monitoring_settings_descr">Podeu configurar com enregistrar els recorreguts i habilitar el mode en suspensió</string>
-    <string name="osmand_monitoring_plugin_name">Serveis d\'enregistrament i mode en suspensió</string>
+    <string name="osmand_monitoring_plugin_name">Serveis d\'enregistrament</string>
     <string name="av_use_external_camera_descr">Usa l\\\'aplicació del sistema per a les fotografies</string>
     <string name="av_use_external_camera">Usa l\\\'aplicació de la càmera</string>
     <string name="osmand_play_title_30_chars">Mapes i navegació OsmAnd</string>
@@ -1563,7 +1563,7 @@
 	</string>
     <string name="osmo_settings_uuid">Identificació única de dispositiu</string>
     <string name="osmo_settings_descr">Configurar paràmetres de monitorització i fixar el canal de seguiment personal</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitorització avançada en temps real. Proporciona la possibilitat de fer el seguiment d\'altres dispositius així com de ser seguit. Crea grups anònims, comparteix posicions amb els altres membres i permet comunicar-se. Hi ha diferents paràmetres de seguiment, tant permanents com de la sessió actual. Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup. Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés. Si us plau, llegiu-ne més a http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">"Monitorització avançada en temps real OpenStreetMap, veieu http://osmo.mobi. Seguiment d\'altres dispositius així com de ser seguit. Crea grups anònims, comparteix posicions amb els altres membres i permet comunicar-se. Hi ha diferents paràmetres de seguiment puntual així com de seguiment permanent. Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup. Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés. Si us plau, llegiu-ne més a http://osmo.mobi. "</string>
     <string name="osmo_plugin_name">OsMo (Monitorització avançada en temps real)</string>
     <string name="osmo_settings">OsMo Monitorització OpenStreetMap (beta)</string>
    	
@@ -1904,4 +1904,15 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="gpx_monitoring_stop">Atura gravació GPX</string>
     <string name="gpx_start_new_segment">Inicia nou segment</string>
     <string name="lang_fa">Persa</string>
+	<string name="keep_navigation_service">Mantenir</string>
+	<string name="stop_navigation_service">Aturar</string>
+	<string name="enable_sleep_mode">Activar mode baixa activitat</string>
+	<string name="gps_wake_up_timer">Interval d\'activació GPS</string>
+	<string name="sleep_mode_stop_dialog">Mantenir GPS activat?</string>
+	<string name="lang_al">Albanés</string>
+	<string name="lang_ar">Àrab</string>
+	<string name="lang_sc">Sard</string>
+	<string name="lang_sr">Serbi</string>
+	<string name="lang_zh_CN">Xinès simplificat</string>
+	<string name="lang_zh_TW">Xinès tradicional</string>
 	</resources>

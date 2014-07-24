@@ -57,7 +57,8 @@ public class GeneralRouter implements VehicleRouter {
 		ACCESS("access"),
 		OBSTACLES("obstacle_time"),
 		ROUTING_OBSTACLES("obstacle"),
-		ONEWAY("oneway");
+		ONEWAY("oneway"),
+		PENALTY_TRANSITION("penalty_transition");
 		public final String nm; 
 		RouteDataObjectAttribute(String name) {
 			nm = name;
@@ -272,6 +273,11 @@ public class GeneralRouter implements VehicleRouter {
 	public int isOneWay(RouteDataObject road) {
 		return getObjContext(RouteDataObjectAttribute.ONEWAY).evaluateInt(road, 0);
 	}
+	
+	@Override
+	public float getPenaltyTransition(RouteDataObject road) {
+		return getObjContext(RouteDataObjectAttribute.PENALTY_TRANSITION).evaluateInt(road, 0);
+	}
 
 	@Override
 	public float defineRoutingSpeed(RouteDataObject road) {
@@ -321,6 +327,12 @@ public class GeneralRouter implements VehicleRouter {
 					return 0;
 				}
 			}
+		}
+		
+		float ts = getPenaltyTransition(segment.getRoad());
+		float prevTs = getPenaltyTransition(prev.getRoad());
+		if(prevTs != ts) {
+			if(ts > prevTs) return (ts - prevTs);
 		}
 		
 		if(segment.getRoad().roundabout() && !prev.getRoad().roundabout()) {

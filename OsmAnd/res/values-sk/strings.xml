@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -1914,8 +1914,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="map_preferred_locale_descr">Preferovaný jazyk pre nápisy na mape (ak nie je dostupný budú použité anglické alebo lokálne názvy)</string>
     <string name="map_preferred_locale">Preferovaný jazyk mapy</string>
     <string name="local_map_names">Lokálne názvy</string>
-    <string name="lang_sw">Svahilský</string>
-    <string name="lang_he">Hebrejský</string>
+    <string name="lang_sw">Svahilsky (Kiswahili)</string>
+    <string name="lang_he">Hebrejsky (עִבְרִית)</string>
     <string name="forward">Dopredu</string>
     <string name="home">Domov</string>
     <string name="live_monitoring_m_descr">Odosielať stopovanie určenej webovej službe ak je zaznamenávanie GPX zapnuté.</string>
@@ -1929,7 +1929,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_hideNonVehicleHighways_name">Skryť cesty, ktoré nie sú pre vozidlá</string>
     <string name="rendering_attr_hideText_name">Skryť text</string>
     <string name="rendering_attr_hideWoodScrubs_name">Skryť lesy a kríky</string>
-    <string name="rendering_attr_buildings15zoom_name">Budovy na priblížení 15</string>
+    <string name="rendering_attr_buildings15zoom_name">Budovy pri priblížení 15</string>
     <string name="rendering_attr_moreDetailed_name">Viac detailov</string>
     <string name="rendering_attr_lessDetailed_name">Menej detailov</string>
     <string name="rendering_attr_hideAccess_name">Skryť typ prístupu</string>

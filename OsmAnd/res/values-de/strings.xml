@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -1738,10 +1738,11 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="navigation_intent_invalid">Ungültiges Format: %s</string>
 <string name="osmo_settings_uuid">Geräte-ID</string>
     <string name="osmo_settings_descr">Konfigurieren der Überwachungs-Einstellungen und des persönlichen Überwachungs-Kanals</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Überwachung - Erweiterte Live-Überwachung. Dies ermöglicht die Verfolgung von anderen Geräten und diesem Gerät.
-	Erstellen anonymer Gruppen, teilen des Standortes sowie Kommunizieren untereinander. Es gibt verschiedene Einstellungen zum Aufzeichnen einer Sitzung oder einer permanenten Aufzeichnung.
+    <string name="osmo_plugin_description">OpenStreetMap erweiterte Live-Überwachung, siehe http://osmo.mobi. Ermöglicht die Verfolgung des eigenen oder anderer Geräten.
+	Erstellen anonymer Gruppen, teilen des Standortes sowie Kommunizieren untereinander. Es gibt verschiedene Einstellungen für Sitzungs- oder Permanenet-Aufzeichnung.
+	Anonyme Gruppen sind-zeit-oder funktionslimitiert, ohne Fernkonfiguration oder Gruppen-Adminisrator
 	Voll funktionsfähige Gruppen müssen auf der Internetseite erstellt werden, auf diese haben nur registrierte Nutzer Zugriff.
-	Weitere Informationen unter: http://osmo.mobi.</string>
+    </string>
     <string name="osmo_plugin_name">OsMo (Erweiterte Live-Überwachung)</string>
     <string name="osmo_settings">OsMo OpenStreetMap-Überwachung (beta)</string>
    	<string name="keep_informing_never">Niemals</string>

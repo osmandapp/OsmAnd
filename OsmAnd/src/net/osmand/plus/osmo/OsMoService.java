@@ -248,6 +248,7 @@ public class OsMoService implements OsMoReactor {
 		try {
 			// Add your data
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+			nameValuePairs.add(new BasicNameValuePair("app", Version.getFullVersion(app)));
 			nameValuePairs.add(new BasicNameValuePair("key", deviceKey));
 			if(app.getSettings().OSMO_USER_PWD.get() != null) {
 				nameValuePairs.add(new BasicNameValuePair("auth", app.getSettings().OSMO_USER_PWD.get()));

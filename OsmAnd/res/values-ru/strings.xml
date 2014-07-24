@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -190,10 +191,10 @@
   <string name="local_openstreetmap_settings_descr">Управление локальными POI/Bugs</string>
   
   
-  <string name="live_monitoring_interval_descr">Укажите интервал Live слежения</string>
-  <string name="live_monitoring_interval">Интервал Live слежения</string>
+  <string name="live_monitoring_interval_descr">Укажите интервал онлайн слежения</string>
+  <string name="live_monitoring_interval">Интервал онлайн слежения</string>
   <string name="live_monitoring_url_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
-  <string name="live_monitoring_url">Web адрес Live слежения</string>
+  <string name="live_monitoring_url">Web адрес онлайн слежения</string>
   <string name="gpx_monitoring_disabled_warn">Пожалуйста включите \'Записывать путь в GPX\' в Настройках.</string>
   <string name="show_current_gpx_title">Показывать текущий путь</string>
   <string name="tip_recent_changes_0_7_0_t">Изменения в 0.7.0:
@@ -1655,7 +1656,7 @@ OsmAnd - открытый источник и активно развается.
 	<string name="color_blue">синий</string>
 	
 	<string name="color_green">зелёный</string>
-    <string name="osmo_create_groups_confirm">Чтобы создать группу, необходимо авторизоваться в OsMo.</string>
+    <string name="osmo_create_groups_confirm">Чтобы создавать группы Вы должны быть зарегистрированным пользователем OsMo.</string>
     <string name="osmo_sign_in">Войти</string>
     <string name="osmo_regenerate_login_ids_confirm">Вы уверены в необходимости регенерации персональных ID? Все устройства, соединённые с Вами, больше не смогут отследить Вас.</string>
     <string name="osmo_regenerate_login_ids">Регенерировать ID трекера</string>
@@ -1734,4 +1735,42 @@ OsmAnd - открытый источник и активно развается.
     <string name="rendering_attr_showAccess_name">Показать тип доступа</string>
     <string name="rendering_attr_showCycleRoutes_name">Показать веломаршруты</string>
     <string name="osmo_auth_error_short">Сбой авторизации</string>
-    </resources>
+    <string name="map_preferred_locale_descr">Предпочтительный язык для меток на карте (если он не доступен, то английский язык или местные названия)</string>
+    <string name="map_preferred_locale">Предпочтительный язык на карте</string>
+    <string name="lang_sw">Суахили</string>
+    <string name="lang_he">Иврит</string>
+    <string name="forward">Вперёд</string>
+    <string name="home">В начало</string>
+    <string name="osmo_group_information">Пожалуйста, прочтите перед созданием группы!</string>
+    <string name="osmo_auto_connect_descr">Автоматическое подключение к сервису при запуске приложения</string>
+    <string name="osmo_auto_connect">Автоматическое подключение</string>
+    <string name="osmo_start_service">Сервис OsMo</string>
+    <string name="local_map_names">Местные названия</string>
+    <string name="gpx_monitoring_start">Начать запись GPX</string>
+	<string name="gpx_monitoring_stop">Остановить запись GPX</string>
+    <string name="gpx_start_new_segment">Начать новый сегмент</string>
+    <string name="enable_sleep_mode">Включить режим сна</string>
+	<string name="gps_wake_up_timer">Интервал пробуждения GPS</string>
+	<string name="sleep_mode_stop_dialog">Оставить GPS включенным?</string>
+	<string name="stop_navigation_service">Выключить</string>
+	<string name="keep_navigation_service">Оставить</string>
+	<string name="live_monitoring_m_descr">Отправлять отслеживание на указанный веб-сервис, если включена запись GPX.</string>
+	<string name="live_monitoring_m">Онлайн слежение (требуется GPX)</string>
+    <string name="live_monitoring_start">Начать онлайн слежение</string>
+	<string name="live_monitoring_stop">Остановить онлайн слежение</string>
+	<string name="osmo_auth_error">Ошибка авторизации OsMo : %1$s.↵\n Это может быть временно недоступный сервис или срок вашей регистрации истек.↵\n Желаете продолжить с новой регистрацией.</string>
+    <string name="osmo_not_signed_in">Не удалось войти в OsMo</string>
+    <string name="osmo_gpx_track_downloaded">OsMo трек %1$s загружен.</string>
+    <string name="no_index_file_to_download">Ничего не загружено, пожалуйста, проверьте подключение к Интернету.</string>
+    <string name="osmo_expire_group">Истекает</string>
+    <string name="osmo_gpx_points_downloaded">Точки OsMo %1$s загружены.</string>
+    <string name="osmo_session_not_available">Сессия недоступна, пожалуйста проверьте, что \"отправка местоположения\" включена.</string>
+    <string name="osmo_tracker_id_share">Чтобы присоединиться к устройству %2$s, нажмите на ссылку %3$s или укажите ID трекера (%1$s)</string>
+    <string name="lang_al">Албанский</string>
+	<string name="lang_ar">Арабский</string>
+	<string name="lang_fa">Персидский</string>
+	<string name="lang_sc">Сардинский</string>
+	<string name="lang_sr">Сербский</string>
+	<string name="lang_zh_CN">Упрощенный китайский</string>
+	<string name="lang_zh_TW">Традиционный китайский</string>
+	</resources>

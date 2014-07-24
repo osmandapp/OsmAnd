@@ -86,8 +86,8 @@ public class BinaryMapAddressReaderAdapter {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if(region.enName == null || region.enName.length() == 0){
-					region.enName = Junidecode.unidecode(region.name);
+				if (region.enName == null || region.enName.length() == 0) {
+					region.enName = region.name == null ? "" : Junidecode.unidecode(region.name);
 				}
 				return;
 			case OsmandOdb.OsmAndAddressIndex.NAME_FIELD_NUMBER :

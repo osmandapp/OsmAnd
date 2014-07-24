@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -370,7 +370,7 @@
 	<string name="osmand_extra_settings_description">Vis indstillinger for avanceret kortkonfiguration (som at øge kortdetaljer) og nogle enhedsspecifikke indstillinger.</string>
 	<string name="osmand_development_plugin_description">Vis indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller optegningsydeevne.</string>
 	<string name="plugins_screen">Udvidelser</string>
-	<string name="select_plugin_to_activate">Tryk på en udvidelse for at aktivere eller deaktivere den. (Kan kræve genstart af OsmAnd.)</string>
+	<string name="select_plugin_to_activate">Tryk på en udvidelse for at aktivere eller deaktivere den. (Genstart af OsmAnd kan være nødvendig.)</string>
 	<string name="prefs_plugins_descr">Udvidelser aktiverer avancerede indstillinger og ekstra funktionalitet</string>
 	<string name="prefs_plugins">Udvidelser</string>
 	<string name="osm_editing_plugin_description">Vis indstillinger, der kræves for OSM tilbagemelding, som f.eks. at indsamle/ændre OSM interessepunkter (IP), åbne/kommentere OSM fejl, og bidrage med optagede GPX-filer (kræver OSM legitimationsoplysninger).</string>
@@ -426,7 +426,7 @@
 	<string name="front_right">Front til højre</string>
 	<string name="right">Højre</string>
 	<string name="back_right">Bagerst til højre</string>
-	<string name="back">Bagerst</string>
+	<string name="back">Tilbage</string>
 	<string name="back_left">Bagerst til venstre</string>
 	<string name="left">Venstre</string>
 	<string name="front_left">Front til venstre</string>
@@ -817,12 +817,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n * \'Nat\': Brug altid nattilstand
 \n * \'Lysføler\': Kortvisning styres af lysføleren i enheden (kun hvis der er en)
 	</string>	
-	<string name="tip_osm_improve_t">OsmAnd bruger kort baseret på OpenStreetMap.org (OSM) data og ud over kortvisning og navigation, kan den bruges til at forbedre OSM datakvaliteten. Man kan nemt oprettet og sende nye interessepunkter (IP) eller OSM fejlrapporter med blot et par tryk.
-\n\nFor dette skal man aktivere \'OSM redigering\' udvidelsen under \'Indstillinger\' → \'Udvidelser\', skal man indtaste sine logind-oplysninger til OSM i \'Indstillinger\' → \' OSM redigering\'. 
-\n\nFor at oprette et nyt interessepunkt, brug valgmuligheden \'Opret interessepunkt\' i  \'Brug placeringer\' i genvejsmenuen. Fortsæt med at indtaste informationer for det nye interessepunkt i dialogen \'Opret interessepunkt\' og til sidst sende det.
+	<string name="tip_osm_improve_t">"OsmAnd bruger kort baseret på OpenStreetMap.org (OSM) data og ud over kortvisning og navigation, kan den bruges til at forbedre OSM datakvaliteten. Man kan nemt oprettet og sende nye interessepunkter (IP) eller OSM fejlrapporter med blot et par tryk.
+\n\nFor dette skal man aktivere \'OSM redigering\' udvidelsen under \'Indstillinger\' → \'Udvidelser\', skal man indtaste sine log ind oplysninger til OSM i \'Indstillinger\' → \' OSM redigering\'.
+\n\nFor at oprette et nyt interessepunkt, brug valgmuligheden \'Opret interessepunkt\' i \'Brug placeringer\' i genvejsmenuen. Fortsæt med at indtaste informationer for det nye interessepunkt i dialogen \'Opret interessepunkt\' og til sidst sende det.
 \n\nFor at tilføje en OSM fejl brug valgmuligheden \'Åben OSM fejlregistrering\' i \'Brug placeringer\' i genvejsmenuen. Indtast derefter en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
-\n\nOsmAnd understøtter cachelagring af indtastninger offline (se pågældende indstilling), men internetforbindelser er naturligvis nødvendig for at sende OSM IP og OSM fejlrapporter.
-	</string>
+\n\nOsmAnd understøtter cachelagring af indtastninger offline (se pågældende indstilling), men internetforbindelser er naturligvis nødvendig for at sende OSM IP og OSM fejlrapporter. "</string>
 	 
 	<string name="tip_recent_changes_0_6_9_t">Ændringer i 0.6.9:
 \n - Forbedret offline kortoptegning
@@ -933,7 +932,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="map_overlay_descr">Vælg kort til overlejring</string>
 	<string name="tile_source_already_installed">Kort er allerede installeret, indstillinger bliver opdateret</string>
 	<string name="select_tile_source_to_install">Vælg (del)kort der skal installeres eller opdateres</string>
-	<string name="internet_not_available">Internetforbindelse krævet for handlingen, men er ikke tilgængelig</string>
+	<string name="internet_not_available">Internetforbindelse er nødvendig for handlingen, men er ikke tilgængelig</string>
 	<string name="install_more">Installer flere…</string>
 	<string name="level_to_switch_vector_raster_descr">Minimum zoomniveau for at bruge vektorkort</string>
 	<string name="level_to_switch_vector_raster">Min. vektor zoomniveau</string>
@@ -1752,7 +1751,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="navigation_intent_invalid">Ugyldigt format: %s</string>
 <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
-    <string name="osmo_plugin_description">OpenStreetMap - Overvågning - Advanced Live- Monitoring, giver muligheder for at spore andre enheder og selv at blive sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing. Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator. Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem. Læs mere på http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">"OpenStreetMap - avanceret live overvågning, se http://osmo.mobi. Spor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing. Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator. Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem. "</string>
     <string name="osmo_plugin_name">OsMo (avanceret live overvågning)</string>
     <string name="osmo_settings">OsMo OpenStreetMap overvågning (beta)</string>
    	<string name="keep_informing_never">Aldrig</string>
@@ -1896,7 +1895,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_auto_connect">Automatisk forbindelse</string>
     <string name="osmo_start_service">OsMo tjeneste</string>
     <string name="osmo_gpx_track_downloaded">OsMo spor %1$s hentet.</string>
-    <string name="osmo_not_signed_in">OsMo logind mislykkedes</string>
+    <string name="osmo_not_signed_in">OsMo log ind mislykkedes</string>
     <string name="osmo_group_information">Læs dette før du opretter en gruppe!</string>
     <string name="osmo_group_by_invite">Tilslut med invitation</string>
     <string name="osmo_group_information_desc">" -Alle grupper der oprettes er offentlige! Hvis de skal være anonyme, tilsluttes enheder direkte via sporings-id\'er.\n -Op til 16 personer kan registreres i gruppen.\n -I tilfælde af inaktivitet eller aktivitet af kun 1 person i 2 uger, vil gruppen blive slettet.\n -Du kan begrænse adgangen til gruppen, til kun med invitation, men for at kontrollere gruppen skal man bruge administrationskonsollen.\n -Hvis du har brug at oprette en gruppe, men med andre betingelser, kontakt http://osmo.mobi"</string>
@@ -1917,10 +1916,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="local_map_names">Lokale navne</string>
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebræisk</string>
-    <string name="forward">Fremad</string>
+    <string name="forward">Frem</string>
     <string name="home">Hjem</string>
     <string name="live_monitoring_m_descr">Send sporing til en beestemt webtjeneste, hvis GPX optagelse er aktiveret.</string>
-	<string name="live_monitoring_m">Online sporing (GPX påkrævet)</string>
+	<string name="live_monitoring_m">Online sporing (GPX nødvendig)</string>
     <string name="live_monitoring_start">Start online sporing</string>
 	<string name="live_monitoring_stop">Stop online sporing</string>
 	<string name="gpx_monitoring_start">Start GPX optagelse</string>
@@ -1931,7 +1930,13 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="map_preferred_locale">Foretrukket sprog på kort</string>
     <string name="stop_navigation_service">Stop</string>
 	<string name="enable_sleep_mode">Aktiver dvaletilstand</string>
-	<string name="gps_wake_up_timer">GPS vågn-op interval: %s</string>
+	<string name="gps_wake_up_timer">GPS vågn-op interval</string>
 	<string name="sleep_mode_stop_dialog">Hold GPS aktiv?</string>
-	<string name="keep_navigation_service">Holde</string>
+	<string name="keep_navigation_service">Hold</string>
+	<string name="lang_al">Albansk</string>
+	<string name="lang_ar">Arabisk</string>
+	<string name="lang_sr">Serbisk</string>
+	<string name="lang_zh_CN">Kinesisk, forenklet</string>
+	<string name="lang_zh_TW">Kinesisk, traditionelt</string>
+	<string name="lang_sc">Sardisk</string>
 	</resources>

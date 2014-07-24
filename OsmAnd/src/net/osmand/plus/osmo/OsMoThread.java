@@ -439,6 +439,7 @@ public class OsMoThread {
 	}
 
 	public void reconnect() {
+		sessionInfo = null;
 		reconnect = true;
 	}
 }

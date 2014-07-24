@@ -34,10 +34,15 @@
 				<include name="*.xml"/>
 			</fileset>
 		</copy>
-		<copy todir="assets/help/">
+		<sync todir="assets/help/">
 			<fileset dir="../../help/" >
 				<include name="*.html"/>
 				<include name="images/**/*.png"/>
+			</fileset>
+		</sync>
+		<copy todir="assets/help">
+		    <fileset dir="assets/" >
+				<include name="style.css"/>
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/render/">
@@ -58,7 +63,8 @@
 	</target>
 
 
-
+	<target name="generate-resources" depends="">
+	</target>
 
 	<!-- Extra target -->
 	<target name="-pre-build" depends="copy_resources,fix_apostrophe_issues">
@@ -78,7 +84,7 @@
 			<then>
 				<property name="package.name" value="net.osmand.sherpafy" />
 				<property name="app.name" value="Sherpafy" />
-				<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon_sherpafy"' byline="true" />
+				<replaceregexp file="AndroidManifest.xml" match='"@drawable/([^\s]*)"' replace='"@drawable/icon_sherpafy"' byline="true" />
 			</then>
 		</if>
 		<if>
@@ -88,7 +94,7 @@
   			<then>
   			    <property name="package.name" value="net.osmand" />
 				<property name="app.name" value="OsmAnd" />
-				<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon_free"' byline="true" />
+				<replaceregexp file="AndroidManifest.xml" match='"@drawable/([^\s]*)"' replace='"@drawable/icon_free"' byline="true" />
   		    </then>
   		</if>
 		<if>
@@ -98,7 +104,7 @@
   				<then>
   				    <property name="package.name" value="net.osmand.plus" />
 			    	<property name="app.name" value="OsmAnd+" />
-			    	<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon"' byline="true" />
+			    	<replaceregexp file="AndroidManifest.xml" match='"@drawable/([^\s]*)"' replace='"@drawable/icon"' byline="true" />
   			    </then>
   		</if>
 		<if>
@@ -134,6 +140,14 @@
 			</then>
 		</if>
 
+	</target>
+	<target name="copy_sherpafy">
+	    <copy todir="gen/net/osmand/plus">
+					<fileset dir="gen/net/osmand/sherpafy">
+						<include name="R.java" />
+					</fileset>
+		</copy>
+		<replaceregexp file="gen/net/osmand/plus/R.java" match='package (.*);' replace='package net.osmand.plus;' byline="true" />
 	</target>
 
 	<!-- Compiles this project's .java files into .class files. -->

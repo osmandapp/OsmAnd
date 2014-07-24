@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
     <string name="localization_pref_title">Localizatzione</string>
@@ -54,7 +55,7 @@
     <string name="index_name_italy">Europa - Itàlia</string>
     <string name="index_name_gb">Europa - Britannia Manna</string>
     <string name="calculate_osmand_route_without_internet">Càlcula un\'àndala cun OsmAnd sena impreare internet</string>
-    <string name="gpx_option_calculate_first_last_segment">Càlcula un\'àndala cun OsmAnd pro su primu e s\'ùrtimu tretu de sa caminera</string>
+    <string name="gpx_option_calculate_first_last_segment">Càlcula un\'àndala cun OsmAnd pro su primu e s\'ùrtimu segmentu de sa caminera</string>
     <string name="use_displayed_track_for_navigation">Boles impreare s\'àndala visualizada pro su nàvigu?</string>
     <string name="keep_and_add_destination_point">Annànghe unu puntu de destinatzione</string>
     <string name="select_gpx">Issèbera GPX…</string>
@@ -102,7 +103,7 @@
 	\n\t* Impostaduras pro sa lestresa de sa bogalizzatzione
     </string>
     <string name="complex_route_calculation_failed">Càlculu lestru de s\'àndala faddida (%s), rinviu a su calculu lentu.</string>
-    <string name="disable_complex_routing_descr">Istuda su calculu de s\'àndala in duas fases pro s\'impreu in màchina.</string>
+    <string name="disable_complex_routing_descr">Istuda su calculu de s\'àndala in duas fases pro s\'impreu in màchina</string>
     <string name="disable_complex_routing">Istuta su calculu cumplessu de s\'àndala</string>
     <string name="amenity_type_seamark">Pidagnu</string>
     <string name="app_modes_choose_descr">Issèbera intre sas modalidades de impreu de s\'aplicu</string>
@@ -187,7 +188,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="driving_region_japan">Giappone</string>
 	<string name="announce_gpx_waypoints">Annuntzia sos puntos de coladòrgiu GPX</string>
     <string name="speak_title">Annuntzia…</string>
-	<string name="speak_descr">Cunfigura pro annuntziare sos nùmenes de sas istradas, sos avèrtimentos (pasadas fortzadas, dossos), sos annuntzios de s\'autovelox, sos lìmites de lestresa.</string>
+	<string name="speak_descr">Cunfigura pro annuntziare sos nùmenes de sas istradas, sos avèrtimentos (pasadas fortzadas, dossos), sos annuntzios de s\'autovelox, sos lìmites de lestresa</string>
 	<string name="speak_street_names">Annuntzia sos nùmenes de sas istradas (TTS)</string>
     <string name="speak_speed_limit">Annuntzia sos lìmites de lestresa</string>
     <string name="speak_cameras">Annuntzia sos autovelox</string>
@@ -279,16 +280,16 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
         \n\t* Prus impostaduras pro s\'istabilizatzione de sa bùssola
         \n\t* Su butone a manca in s\'ischermada de sa mapa remplesa su butone "Menu"
     </string>
-    <string name="monitoring_settings">Servitzios de registratzione e modalidade "a reposu"</string>
+    <string name="monitoring_settings">Servitzios de registratzione</string>
     <string name="monitoring_settings_descr">Cunfigura comente registrare biàgios e ativare sa modalidade "a reposu"</string>
     <string name="osmo_settings_uuid">ID ùnicu de su dispositivu</string>
-    <string name="osmo_settings_descr">Cunfigura sas impostaduras de compidada de su dispositivu e imposta su canale de compidada pessonale.</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Compidada - Compidada avantzada in dereta cun medas tareas pro su tentu remotu http://osmo.mobi</string>
+    <string name="osmo_settings_descr">Cunfigura sas impostaduras de compidada de su dispositivu e imposta su canale de compidada pessonale</string>
+    <string name="osmo_plugin_description">"OpenStreetMap Compidada - Compidada avantzada in dereta, bie http://osmo.mobi. Sighi àteros dispositivos  e fàghedi sighire. Crea grupos anònimos, cumpartzi sa positzione a manera retzìproca e comunica. Sunt disponìbiles meda impostaduras pro sa compidada, pro sa sessione in corso o permanentes. Sos grupos anònimos sunt limidados pro su nùmeru de dies e calicuna de sas funtziones, ad es. non b\'est su controllu remotu e nemmancu s\'amministradore de su grupu.Grupos cun totu sas funtzionalidades podent èssere creados in su giassu e petzi sos impitadores registrados podent atzèdere. Pro àteras informatziones: http://osmo.mobi. "</string>
     <string name="osmo_plugin_name">OsMo (Compidada Avantzada in Dereta)</string>
     <string name="osmo_settings">OsMo OpenStreetMap Compidada (beta)</string>
    	<string name="osmand_monitoring_plugin_description">Ativa sa compidada e su nàvigu in sa modalidade "a reposu" (ischermu istudau)impreande ischidaduras periòdicas de su dispositivu GPS.
         Ammustra sas impostaduras chi fatzititana sa regitratzione de sos biàgios in documentos GPX locales o in lìnia, impreande unu servitziu in retza.</string>
-    <string name="osmand_monitoring_plugin_name">Servitzios de registratzione e modalidade "a reposu"</string>
+    <string name="osmand_monitoring_plugin_name">Servitzios de registratzione</string>
     <string name="osmand_background_plugin_description">Ammustra sas impostaduras pro abilitare sa compidada e su nàvigu in modalidade " a reposu" (ischermu istudau)pro mèdiu de ischidaduras periòdicas de su GPS.</string>
     <string name="contribution_activity">Installa sa versione</string>
     <string name="choose_osmand_theme_descr">Issèbera su tema de s\'aplicu</string>
@@ -401,7 +402,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="audionotes_plugin_name">Plugin notas àudio/vìdeo</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Lìnias de livellu</string>
-    <string name="srtm_plugin_description">Fatzìlita s\'isgarrigamentu de sas lìnias de livellu e s\'umbradura de sos rilievos (\'Impostaduras\' → \'Gestione datos\' → \'Isgarrigamentu\' → Issèbera su tipu de mapa disigiatu).</string>
+    <string name="srtm_plugin_description">Fatzìlita s\'isgarrigamentu de sas lìnias de livellu e s\'umbradura de sos rilievos (\'Impostaduras\' → \'Gestione documentos mapa\' → \'Isgarrigamentu\' → Issèbera su tipu de mapa disigiatu).</string>
     <string name="srtm_plugin_name">Plugin lìnias de livellu</string>
     <string name="download_select_map_types">Àteras mapas</string>
     <string name="download_roads_only_item">Petzi istradas</string>
@@ -415,10 +416,9 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="osmodroid_plugin_description">Su plugin OsMoDroid est un estensione OsmAnd pro s\'aplicu pro sas tareas de compidada in tempus reale OsModroid. Sas informatziones sunt disponìbiles in su giassu http://esya.ru.</string>
     <string name="osmodroid_plugin_name">Plugin OsMoDroid</string>
 	<string name="tip_altitude_offset">Curretzione artària</string>
-	<string name="tip_altitude_offset_t">Sa majoria de sos dispositivos GPS marcana sa medida de s\'artaria in su sistema de referèntzia WGS84 basadu in supra de un ellissoide. Pro custu una conversione in sos sistemas de referèntzia impreados localmente rechedidi una curretzione dipendente dae sa positzione.
-		\n\nUna aprossimassione a custos sistemas de referèntzia locales est su EGM96. OsmAnd como suportada sa bisualizzatzione automàtica de s\'artaria in su sistema EGM96.
-		\n\nPro l\'ativare, isgàrriga su documentu WW15MGH.DAC impreande sa \'Gestione datos\' (su documentu orizinale s\'agatat a s\'indiritzu http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)
-	</string>
+	<string name="tip_altitude_offset_t">"Sa majoria de sos dispositivos GPS marcana sa medida de s\'artaria in su sistema de referèntzia WGS84 basadu in supra de un ellissoide. Pro custu una conversione in sos sistemas de referèntzia impreados localmente rechedidi una curretzione dipendente dae sa positzione.
+\n\nUna aprossimassione a custos sistemas de referèntzia locales est su EGM96. OsmAnd como suportada sa bisualizzatzione automàtica de s\'artaria in su sistema EGM96.
+\n\nPro l\'ativare, isgàrriga su documentu WW15MGH.DAC impreande sa \'Gestione documentos mapa\' (su documentu orizinale s\'agatat a s\'indiritzu http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC) "</string>
     <string name="map_widget_max_speed">Lìmite de lestresa</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Perunu edifìtziu agatau.</string>
@@ -501,13 +501,12 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="snap_to_road">Arrea in subra de sas istradas</string>
 	<string name="interrupt_music_descr">Interrumpe sa mùsica pro faghere sos annuntzios</string>
 	<string name="interrupt_music">Interrumpe sa mùsica</string>
-	<string name="tip_recent_changes_0_8_2_t">Mudas in sa 0.8.2:
-		\n\t* Megiorau su calculu de s\'àndalas
-		\n\t* Widgets dinàmicos pro sas mapas
-		\n\t* Impostaduras de sa mapa iscostiadas in s\'ischermu de sa mapa
-		\n\t* Butone firma ischermu cun servitzios de registratzione
-		\n\t* Megiorada s\'iscritura in àrabu, kannada e limbas RTL 
-	</string>
+	<string name="tip_recent_changes_0_8_2_t">"Mudas in sa 0.8.2:
+\n\t* Megiorau su calculu de sas àndalas
+\n\t* Widgets dinàmicos pro sas mapas
+\n\t* Impostaduras de sa mapa iscostiadas in s\'ischermu de sa mapa
+\n\t* Butone firma ischermu cun servitzios de registratzione
+\n\t* Megiorada s\'iscritura in àrabu, kannada e limbas RTL "</string>
 	<string name="osmand_play_title_30_chars">OsmAnd Mapas &amp; Nàvigu</string>
 	<string name="osmand_short_description_80_chars">Aplicu a datos apertos (opensource) pro su nàvigu cun mapas in lìnia e sena lìnia</string>
 	<string name="edit_filter_save_as_menu_item">Sarba comente</string>
@@ -526,4 +525,193 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="day_night_info_description">Arbèschida: %1$s \nIntrinada: %2$s</string>
 	<string name="day_night_info">Informatziones die/note</string>
 	<string name="map_widget_day_night">Mapa die/note</string>
+	<string name="keep_navigation_service">Mantènne</string>
+	<string name="stop_navigation_service">Firma</string>
+	<string name="enable_sleep_mode">Abìlita sa modalidade \"a reposu\"</string>
+	<string name="gps_wake_up_timer">Intervallu ischidada GPS</string>
+	<string name="sleep_mode_stop_dialog">Mantènnere su GPS allutu?</string>
+	<string name="map_preferred_locale_descr">Limba preferida pro sas etichettas de sa mapa (si no est disponìbile at a colare a s\'inglesu o sos nùmenes locales)</string>
+    <string name="map_preferred_locale">Limba prefèrrida de sa mapa</string>
+    <string name="local_map_names">Nùmenes locales</string>
+    <string name="lang_sw">Swahili</string>
+    <string name="lang_he">Ebràicu</string>
+    <string name="forward">In antis</string>
+    <string name="home">Domo</string>
+    <string name="live_monitoring_m_descr">Imbia s\'arrasta a unu servìtziu web dislindadu si sa registratzione GPX est abilitada.</string>
+	<string name="live_monitoring_m">Arrastamentu in lìnia (GPX rechestu)</string>
+    <string name="live_monitoring_start">Inghitza s\'arrastamentu in lìnia</string>
+	<string name="live_monitoring_stop">Firma s\'arrastamentu in lìnia</string>
+	<string name="gpx_monitoring_start">Inghitza sa registratzione GPX</string>
+	<string name="gpx_monitoring_stop">Firma sa registratzione GPX</string>
+    <string name="gpx_start_new_segment">Inghitza unu segmentu nou</string>
+    <string name="rendering_attr_hideBuildings_name">Cua sos edifìtzios</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Cua sas istradas non carrabiles</string>
+    <string name="rendering_attr_hideText_name">Cua su testu</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Cua padentes e buschedos</string>
+    <string name="rendering_attr_buildings15zoom_name">Edifìtzios dae su zoom 15</string>
+    <string name="rendering_attr_moreDetailed_name">Prus detalliau</string>
+    <string name="rendering_attr_lessDetailed_name">Detalliau de mancu</string>
+    <string name="rendering_attr_hideAccess_name">Cua su tipu de atzessu</string>
+    <string name="rendering_attr_showAccess_name">Ammustra su tipu de atzessu</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Ammustra sa calidade de sas istradas</string>
+    <string name="rendering_attr_showSurfaces_name">Ammustra su tipu de superfìtzie de sas istradas</string>
+    <string name="rendering_attr_showCycleRoutes_name">Ammustra sas àndalas pro bitzicleta</string>
+    <string name="osmo_auth_error_short">Autorizatzione fallia</string>
+    <string name="osmo_auth_error">Errore de autorizatzione OsMo: %1$s.\nDiat podet èssere unu disservitziu temporaneu o sa registratzione tua est iscadia.\nBoles protzèdere cun una registratzione noa?</string>
+    <string name="osmo_group_by_invite">Atzèdere pro mèdiu de invitu</string>
+    <string name="osmo_group_information_desc">" - Totu sos grupos creados sunt pùblicos! Si bolies abarrare anònimos connettìe sos dispositìvos a manera dereta pro mèdiu de sos id de arrastamentu.\n- A su grupu podent èssere registradas finas a 16 pessones.\n- In su casu de inatividade o de atividade de una pessone sola pro duas chidas, su grupu at a èssere burrau.\n- Est possìbile limidare s\'atzèssu a su grupu, petzi prò mèdiu de invitu, pro nàrrere, pro amministrare su grupu depies andare a su pannellu di amministratzione.\n- Si tenies bisòngiu de creare unu grupu ad àteras cunditziones pro piaghere visitae http://osmo.mobi"</string>
+    <string name="osmo_group_information">Pro piaghere leghide in antis de creare unu grupu!</string>
+    <string name="osmo_gpx_points_downloaded">Igarrigados puntos %1$s de OsMo.</string>
+    <string name="osmo_start_service">Servìtziu OsMo</string>
+    <string name="osmo_gpx_track_downloaded">Igarrigadas rastas %1$s de OsMo.</string>
+    <string name="no_index_file_to_download">Nudda de isgarrigare, pro piaghere compida sa connessione internet.</string>
+    <string name="select_index_file_to_download">No est istadu agatau nudda. Si no agatades sa zona vostra la podies ingendrare bois (bie http://osmand.net).</string>
+    <string name="none_selected_gpx">Perunu documentu GPX ischertau. Pro ischertare tene carcau in supra de una de sas rastas disponìbiles.</string>
+    <string name="local_index_unselect_gpx_file">Boga s\'ischerta</string>
+    <string name="local_index_select_gpx_file">Ischerta pro lu visualizare</string>
+    <string name="gpx_split_interval">Intervallu partidura</string>
+    <string name="sort_by_distance">Òrdina pro distàntzia</string>
+    <string name="sort_by_name">Òrdina pro nùmene</string>
+    <string name="visible_element">Ammustra in sa mapa</string>
+    <string name="show_zoom_buttons_navigation_descr">Ammustra sos pursantes de su zoom durante su nàvigu</string>
+    <string name="show_zoom_buttons_navigation">Ammustra sos pursantes de su zoom</string>
+    <string name="save_as_favorites_points">Sarba comente grupu de prefèrridos</string>
+    <string name="select_destination_and_intermediate_points">Issèbera sas tapas</string>
+    <string name="layer_amenity_label">Etichetas de sos puntos</string>
+    <string name="loading_smth">Carrigamentu de %1$s …</string>
+    <string name="map_widget_plain_time">Oràriu atuale</string>
+    <string name="gpx_wpt">Tapa</string>
+    <string name="selected_gpx_info_show">\n\nTene carcau pro lu bìere in sa mapa</string>
+    <string name="delay_navigation_start">Inghitza su nàvigu passu pro passu automaticamente</string>
+    <string name="selected">ischertau</string>
+    <string name="local_index_gpx_info_show">\n\ntene carcau pro sas optziones</string>
+	<string name="gpx_info_subtracks">"Suta-rastas: %1$s "</string>
+	<string name="gpx_info_waypoints">"Tapas de s\'àndala: %1$s "</string>
+	<string name="gpx_info_distance">"Distàntzia: %1$s (%2$s points) "</string>
+	<string name="gpx_info_start_time">"Oràriu de tzuccada: %1$tF, %1$tT "</string>
+	<string name="gpx_info_end_time">"Oràriu de lòmpida: %1$tF, %1$tT "</string>
+	<string name="gpx_info_average_speed">"Lestresa mèdia: %1$s "</string>
+	<string name="gpx_info_maximum_speed">"Lestresa màssima: %1$s "</string>
+	<string name="gpx_info_avg_altitude">Artària mèdia: %1$s</string>
+	<string name="gpx_info_diff_altitude">Variedade àrtària: %1$s</string>
+	<string name="gpx_info_asc_altitude">Falada/artziada: %1$s</string>
+    <string name="gpx_timespan">Durada: %1$s</string>
+	<string name="gpx_timemoving">Tempus in movimentu: %1$s</string>
+    <string name="gpx_selection_segment_title">Segmentu</string>
+    <string name="gpx_selection_number_of_points">" %1$s puntos"</string>
+    <string name="gpx_selection_point">Puntu %1$s</string>
+    <string name="gpx_selection_current_track">registrande</string>
+    <string name="gpx_selection_route_points">%1$s
+\nPuntos àndala: %2$s</string>
+    <string name="gpx_selection_points">%1$s
+\nPuntos</string>
+    <string name="gpx_selection_track">%1$s
+\nRasta %2$s</string>
+    <string name="gpx_available_current_track">Rasta currentemente in registratzione</string>
+    <string name="gpx_file_is_empty">Sa rasta Gpx est boida</string>
+    <string name="selected_track">Rastas ischertadas</string>
+    <string name="my_tracks">Totu sas rastas</string>
+    <string name="my_favorites">Prefèrridos meos</string>
+    <string name="my_data_Button">Logos meos</string>
+    <string name="my_data_activity">Logos meos</string>
+    <string name="osmo_user_joined">S\'impitadore %1$s est intrau in su grupu %2$s</string>
+    <string name="osmo_user_left">S\'impitadore %1$s at lassau su grupu %2$s</string>
+    <string name="osmo_show_group_notifications">Ammustra sas notìficas de su grupu</string>
+    <string name="osmo_show_group_notifications_descr">Ammustra unu messàgiu cando s\'impitadore adèridi o lassada su grupu</string>
+    <string name="osmo_follow">Sighi</string>
+    <string name="osmo_sign_in">Autènticadi</string>
+    <string name="osmo_create_groups_confirm">Pro creare grupos est netzessàriu èssere impitadores registrados de OsMo.</string>
+    <string name="osmo_credentials_not_valid">Sas credenziales de OsMo tuas non sunt vàlidas.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Ses seguru de bòlere reingendrare sos id pessonales? Totu sos dispositivos collegaos a tie non ant a èssere prus capassios de t\'arrastare.</string>
+    <string name="osmo_regenerate_login_ids">Reingendra s\'id</string>
+    <string name="osmo_cancel_moving_target">Burra s\'obietivu mòbile</string>
+    <string name="osmo_center_location">Tzentra in s\'ischermu</string>
+    <string name="osmo_set_moving_target">Imposta comente obietivu mòbile</string>
+    <string name="osmo_use_server_name">Nùmene registrau</string>
+    <string name="osmo_connect_to_my_nickname">Zistru meu</string>
+    <string name="osmo_user_name">Impitadore</string>
+	<string name="color_red">ruju</string>
+	<string name="color_pink">rosa</string>
+	<string name="color_orange">arantzu</string>
+	<string name="color_brown">castàngiu</string>
+	<string name="color_yellow">grogu</string>
+	<string name="color_lightblue">blu lepiu</string>
+	<string name="color_blue">blu</string>
+	<string name="color_green">birde</string>
+	
+    <string name="osmo_edit_device">Muda sas propriedades de s\'impitadore</string>
+    <string name="osmo_edit_color">Colore visualizzau</string>
+    <string name="osmo_group_info">Informatziones</string>
+    <string name="osmo_group">Grupu OsMo</string>
+    <string name="osmo_group_share">Pro si collegare a su grupu %2$s, dislindare s\'id de su grupu (%1$s) o carcare %3$s.</string>
+    <string name="osmo_share_connect_device">Permìti de sighire permanentemente custu dispositivu</string>
+    <string name="osmo_share_current_session">Cumpartzi custa sessione in su browser</string>
+    <string name="osmo_session_not_available">Sessione non disponìbile, pro piaghere controlla chi \'Imbia positziones\' siat ativu.</string>
+    <string name="osmo_share_session">Cumpartzi sessione</string>
+    <string name="osmo_session_id_share">Url de sa sessione pro arrastare su dispositivu (%1$s)</string>
+    <string name="osmo_tracker_id_share">Pro si collegare a su dispositivu disigiau %2$s, carcare su ligòngiu %3$s o dislindare s\'id de compidada (%1$s)</string>
+    <string name="osmo_track_interval">Intervallu de registratzione</string>
+	<string name="osmo_track_interval_descr">Issèbera s\'intervallu de tempus pro s\'imbiu de sa positzione</string>
+    <string name="int_days">dies</string>
+    <string name="osmo_connect_menu">Connete</string>
+    <string name="osmo_expire_group">Iscadidi intre</string>
+    <string name="osmo_group_description">Descritzione</string>
+    <string name="osmo_group_policy">Règulas</string>
+    <string name="osmo_connect_to_device_tracker_id">Id de arrastamentu</string>
+    <string name="osmo_connect_to_device_name">Nùmene impitadore</string>
+    <string name="osmo_connect_to_group_id">Id grupu</string>
+    <string name="osmo_group_name">Nùmene grupu</string>
+    <string name="osmo_connect_to_device">Cullegamentu cun su dispositivu</string>
+    <string name="osmo_connect_to_group">Cullegamentu cun su grupu</string>
+    <string name="osmo_connect">Cullega a</string>
+    <string name="osmo_create_group">Crea grupu</string>
+    <string name="osmo_server_operation_failed">Operatzione de su server Osmo fallida</string>
+    <string name="osmo_activity">Compidada OpenStreetMap</string>
+    <string name="osmo_enable_tracker">Imbia sas positziones meas</string>
+    <string name="osmo_control">Atzessu lestru ad OsMo</string>
+    <string name="hours_ago">oras àchede</string>
+    <string name="minutes_ago">minutos àchede</string>
+    <string name="seconds_ago">secundos àchede</string>
+    <string name="osmo_connected_devices">Dispositivos cullegaos</string>
+    <string name="osmo_groups">Grupos/Dispositivos OsMo</string>
+    <string name="osmo_auto_send_locations_descr">Avia/Inghitza automaticamente sa registratzione de sa sessione e imbia sa localizatzione a pustis de s\'aviu de s\'aplicu</string>
+    <string name="osmo_auto_send_locations">Avia automaticamente sa sessione de arrastamentu</string>
+    <string name="osmo_tracker_id">Id pessonale arrastamentu</string>
+    <string name="osmo_tracker_id_descr">Carca pro visualizzare o cumpartzire s\'id de arrastamentu. Impreande s\'id de arrastamentu sos dispositivos connessos ant a èssere capatzes de sighire totu sos movimentos de custu dispositivu! Pro ti disconnèttere ischerta s\'optzione Reingendra.</string>
+    <string name="osmo_session_token">Token de sa sessione: %1$s</string>
+    <string name="osmo_auth_pending">Isetande pro s\'autorizatzione...</string>
+    <string name="osmo_locations_sent">"Localizatziones imbiadas %1$d (in su buffer %2$d) "</string>
+    <string name="osmo_conn_successfull">"Connessione istabilida: %1$s "</string>
+    <string name="tip_recent_changes_1_8_alpha">"Mudas in sa 1.8: * Càlcula s\'àndala intre duos puntos de una rasta GPX * Mudada s\'aspetu pro s\'isgarrigamentu de sos istados (suportu pro sa chirca cun nùmenes locales) * Suportu pro s\'importatzione GPX/KML (cunvertere dae KML a GPX) * Sas rastas GPX sunt istadas mòvidas in \'Datos meos\' * Como podes partzire sas rastas GPX pro distantzia e compidare sa diferèntzia de artària/ lestresa * Aviu automàticu de su nàvigu a pustis de un isetu curtzu "</string>
+    <string name="use_points_as_intermediates">Càlcula s\'àndala intre sos puntos</string>
+    <string name="osmo_mode_restart">Reavia sa sessione OsMo</string>
+    <string name="osmo_settings_debug">Informatziones de debug</string>
+    <string name="lang_fa">Persianu</string>
+	<string name="route_descr_destination"/>
+    <string name="osmo_not_signed_in">Atzessu ad OsMo falliu</string>
+    <string name="osmo_auto_connect_descr">Connèttidi automaticamente a su servìtziu a pustis de s\'allughinzu</string>
+    <string name="osmo_auto_connect">Connessione automàtica</string>
+    <string name="map_widget_renderer">Istile de sa mapa</string>
+	<string name="layer_map_appearance">Cunfigura s\'ischermu</string>
+	<string name="show_lanes">Visualizza sas corsias</string>
+	<string name="avoid_unpaved">Instransi sas istradas no asfaltadas</string>
+	<string name="avoid_ferries">Istransi sos traghetos</string>
+	<string name="avoid_in_routing_title">Istransi…</string>
+	<string name="avoid_in_routing_descr">Istransi sas istradas a pagamentu, isterradas, traghetos</string>
+	<string name="map_widget_fluorescent">Camineras fluorescentes</string>
+	<string name="map_widget_show_ruler">Iscala gràfica</string>
+	<string name="map_widget_view_direction">Diretzione de sa visuale</string>
+	<string name="map_widget_transparent">Bisura trasparente</string>
+	<string name="bg_service_sleep_mode_off">Abìlita\n modalidade \"a reposu\"</string>
+	<string name="bg_service_sleep_mode_on">Firma\n modalidade \"a reposu\"</string>
+	<string name="gps_wakeup_interval">Intervallu de ischidada GPS: %s</string>
+	<string name="int_continuosly">Sighidu</string>
+	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd est un aplicu pro su nàvigu chi impreat sa cantidade manna de datos a mitza aberta de OpenStreetMap (OSM). Totu sas mapas (vetoriales o a tasseddos) podent èssere sarbadas in s\'ischeda de su telèfono pro èssere impreadas sena lìnia. OsmAnd offridi fintzas sa funtzionalidade de su càlculu de s\'àndala in lìnia (online) e sena lìnia (offline) cumpresa sa boghe de ghia curva pro curva. Calicunas de sas caraterìsticas printzipales: - Funtzionalidade cumprida sena lìnia (Sarba sas mapas vetoriales o a tasseddos in una cartella isseberada) - Mapas sena lìnia cumpatas isgarrigàbiles pro totu su mundu - Igariiramentu de sas mapas de regiones o istados deretamente dae sa mapa - Possibilidade de sovrapposizione de diferentes istrados, comente rastas GPX o de nàvigu, puntos de interesse, preffèrridos, curvas de livellu, firmadas de sos mezos pùblicos, mapas annangàbiles cun trasparentzia pessonalizzàbile - Chirca sena lìnia pro indiritzos e locos (POIs) - Càlculu de s\'àndala pro distàntzias curtzas (isperimentale) - Modalidades màchina, bitzicleta, e pedone cun: - Mudadura automàtica optzionale de sa vista die/note - Zoom automàticu optzionale basau in supra de sa lestresa - Allineamentu de sa mapa basandesi in supra de sa diretzione o a de sa bùssola - indicatore de corsia optzionale, segnalatzione de su lìmite de lestresa, boghes registradas e TTS  -  Limitatziones de custa versione gratùita de OsmAnd: - Nùmeru limitadu de isgarrigamentu de mapas - Atzessu a Wikipedia pro sos POIs sena lìnia fartante- OsmAnd est totora in fase de isvilupu e su progetu nostru e su  progressu suo si basada in supra de sos contributos finantziarios pro s\'isvilupu e s\'iscumprou (sa prova) de funtzionalidades noas. Pro piaghere cunsidera s\'optzione de comporare OsmAnd+, de finantziare novas funtziones didlindadas o de fàghere una donatzione generale a osmand.net. "</string>
+	<string name="lang_al">Albanesu</string>
+	<string name="lang_ar">Àrabu</string>
+	<string name="lang_sc">Sardu</string>
+	<string name="lang_sr">Serbu</string>
+	<string name="lang_zh_CN">Tzinesu semplificau</string>
+	<string name="lang_zh_TW">Tzinesu traditzionale</string>
+	<string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) est un aplicu pro su nàvigu chi impreat sa  cantidade manna de datos a mitza aberta de OpenStreetMap (OSM). Totu sas mapas (vetoriales o a tasseddos) podent èssere sarbadas in s\'ischeda de su telèfono pro èssere impreadas sena lìnia. Impreande su GPS de su dispositivu OsmAnd ofèrridi su nàvigu cun, s\'in casu, sa ghia vocale, pro sa màchina, sa bitzicleta e a pedes. Totu sas funtzionalidades sunt disponìbiles siat in lìnia chi sena lìnia (non serbit connessione ad ìnternet).↵ ↵ Calicuna de sas caraterìsticas printzipales: Nàvigu - Funtziònada in lìnia (lestru) o sena lìnia (sena costos candu ses in s\'èstero) - Ghia bogale bortada pro bortada(boghes registradas e sintetizzadas) - Indicatzione de corsia optzionale, indicatzione de su nùmene de s\'istrada, indicatzione de su tempus de lòmpida istimadu - Suportada puntos mesanos in s\'àndala - Recàlculu automàticu cada borta chi èssis dae s\'àndala - Chirca pro indiritzu, pro gasta (es.: ristorante, albergu, istatzione de servìtziu, museu) e pro coordinatas geogràficas de sos locos Visualizatzione de sa mapa - Ammustra sa positzione e s\'orientamentu tuo in sa mapa - Allìnia optzionalmente sa mapa sighinde sa bùssola o sa diretzione de movimentu - Sarba sos locos prus importantes pro tie in sos Prefèrridos - Ammustra sos POIs (puntos de interesse) inghìriu a tie - Podet ammustrare mapas spetzializadas a tasseddos in lìnia - Podet ammustrare vistas satellitares (dae Bing) - Podet ammustrare istratos subraponìbiles diferentes, comente rastas GPX pro nàvigu e mapas additzionales cun trasparentzia pessonalizzàbile - Ammustra sos nùmenes in inglesu, limba locale, o pronùntzia fonètica Imprea datos OpenStreetMap e Wikipedia: - Datos de arta calidade dae sos mègius progetos collaborativos de su mundu - Mapas globales pro OpenStreetMap, disponìbiles pro istadu o regione - Wikipedia POIs, òtimos pro giros turìsticos (non disponìbiles in sa versione gratùita) - Isgarrigamentos gratuitos sena lìmites, diretamente dae s\'aplicu (lìmite de isgarrigamentu de 16 documentos de sa mapa in sa versione gratùita) - Mapas sèmpere agiornadas (a su mancu una borta a su mese) - Mapas vetoriales compatas sena lìnia - Issèbera intre mapas cumpridas e petzi istradales (es: totu su Giapone est 700 MB, o 200 MB pro petzi sas istradas) - Suportada fintzas mapas a tasseddos in lìnia o in sa cache Carateristicas pro sa segurantzia - Mudadura automàtica optzionale de sa vista die/note - Ammustradura optzionale de su lìmite de lestresa, cun avisos si lu barigas - Zoom automàticu optzionale basau in supra de sa lestresa - Cumpartzi sa positzione tua pro permìtere a sos amicos tuos de t\'agatare Funtziones pro sa bitzicleta e a pede - Sa mapa inclùidi àndalas prp bitzicleta, escursionimu e pedonales, òtimas pro sas atividades a s\'àera aberta - Modalidades ispetziales pro sa bitzicleta e a pedes - Firmadas de su trasportu pùblicu (postales, trams, trenos) optzionales, cun sos nùmenes de sas lìnias incluidos  - Registratzione optionales in documentos GPX locales o servìtzios in lìnia - Ammustradura optzionale de sa lestresa e de s\'artaria - Ammustradura de sas lìnias de livellu e de sas umbraduras de su rilievu (impreande unu componente agiuntivu, o plugin, apòsitu) Contributzione dereta ad OpenStreetMap - Sinnala errores in sa mapa - Càrriga rastas GPX in OSM dderetamente dae s\'aplicu - Annanghe POIs e càrrigalos deretamente in OSM (o prus a tardu si ses sena lìnia) - Registratzione optzionale fintzas in modalidade \"in s\'isfondu\" (cando su dispositivu est in modalidade \"a reposu\") OsmAnd est unu progetu a mitza aberta e est ativamente isvilupau. Cadaunu podet cuntribuire a s\'aplicu marcande errores, megiorande sas bortaduras, o programmande funtzionalidades noas. Su progetu est totora in unu istadu sighidu e vitale de megioramentu pro mèdiu de totu custas formas de interatziones intre impitadores e isvilupadores. Su progetu andada in antis gràtzias fintzas a sas cuntributziones finantziarias, pro titu s\'isvilupu e s\'isperimentatzione de caraterìsticas noas. Comporande OsmAnd+ podes agiudare s\'aplicu a divènnere fintzas prus ispantosu! Est fintzas possìbile finantziare funtziones dislindadas, o fàghere una donatzione generale in osmand.net. Calidade e cubertura aprosimativa: - Western Europe: **** - Eastern Europe: *** - Russia: *** - North America: *** - South America: ** - Asia: ** - Japan &amp; Korea: *** - Middle East: ** - Africa: ** - Antarctica: * Lista de sa regiones suportadas (praticamente totu su mundu!): Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe. "</string>
 	</resources>

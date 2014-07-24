@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
 \n\t- Offline editace POI
@@ -48,7 +49,7 @@
   <string name="front_right">Vpravo vpředu</string>
   <string name="right">Vpravo</string>
   <string name="back_right">Vpravo vzadu</string>
-  <string name="back">Vzadu</string>
+  <string name="back">Zpět</string>
   <string name="back_left">Vlevo vzadu</string>
   <string name="left">Vlevo</string>
   <string name="front_left">Vlevo vpředu</string>
@@ -1645,10 +1646,35 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_hideWoodScrubs_name">Skrýt lesy a křoviny</string>
     <string name="rendering_attr_showSurfaces_name">Ukázat povrchy cest</string>
     <string name="osmo_group_information">Prosím čtěte před vytvářením skupiny!</string>
-    <string name="osmo_group_information_desc">" - Všechny vytvořené skupiny jsou veřejné! Pokud chcete být anonymní, připojte zařízení přímo přes ID\n - Do skupiny se může registrovat až 16 lidí.
+    <string name="osmo_group_information_desc">" - Všechny vytvořené skupiny jsou veřejné! Pokud chcete být anonymní, připojte zařízení přímo přes ID.\n - Do skupiny se může registrovat až 16 lidí.
 \n - V případě neaktivity nebo aktivity pouze jedné osoby v průběhu dvou týdnů, bude skupina zrušena.\n - Můžete omezit vstup do skupiny pozvánkami, ale pro ovládání skupiny musíte použít administrátorskou konzoli.\n - Pokud potřebujete vytvořit skupinu s jinými podmínkami prosím kontaktujte http://osmo.mobi"</string>
     <string name="osmo_auth_error">Chyba při autorizaci OsMo: %1$s.\n Služba může být dočasně nedostupná nebo vám vypršela registrace.
 \n Chcete pokračovat v nové registraci.</string>
     <string name="osmo_auth_error_short">Autorizace selhala</string>
     <string name="rendering_attr_showCycleRoutes_name">Zobrazit cyklostezky</string>
+    <string name="forward">Vpřed</string>
+    <string name="home">Domů</string>
+    <string name="keep_navigation_service">Ponechat</string>
+	<string name="stop_navigation_service">Zastavit</string>
+	<string name="enable_sleep_mode">Zapnout režim spánku</string>
+	<string name="gps_wake_up_timer">Interval probouzení GPS</string>
+	<string name="sleep_mode_stop_dialog">Udržovat GPS zapnutou?</string>
+	<string name="map_preferred_locale_descr">Preferovaný jazyk pro nápisy na mapě (pokud není dostupný budou použité anglické nebo lokální názvy)</string>
+    <string name="map_preferred_locale">Preferovaný jazyk mapy</string>
+    <string name="local_map_names">Lokální názvy</string>
+    <string name="live_monitoring_m_descr">Pokud je zapnutý záznam GPX trasy, odesílat trasování určené webové službě.</string>
+	<string name="live_monitoring_m">Online záznam trasy (nutné GPX)</string>
+    <string name="live_monitoring_start">Zapnout online záznam trasy</string>
+	<string name="live_monitoring_stop">Zastavit online záznam trasy</string>
+	<string name="gpx_monitoring_start">Zapnout záznam GPX</string>
+	<string name="gpx_monitoring_stop">Zastavit záznam GPX</string>
+    <string name="gpx_start_new_segment">Začít nový segment</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Skrýt cesty které nejsou pro vozidla</string>
+    <string name="rendering_attr_buildings15zoom_name">Budovy při přiblížení 15</string>
+    <string name="rendering_attr_moreDetailed_name">Více detailů</string>
+    <string name="rendering_attr_lessDetailed_name">Méně detailů</string>
+    <string name="rendering_attr_hideAccess_name">Skrýt typ přístupu</string>
+    <string name="rendering_attr_showAccess_name">Zobrazit typ přístupu</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cest</string>
+    <string name="osmo_group_by_invite">Vstoupit na pozvánku</string>
     </resources>

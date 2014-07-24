@@ -60,12 +60,13 @@ public class RouteInfoWidgetsFactory {
 				boolean visible = false;
 				boolean followingMode = routingHelper.isFollowingMode() || ctx.getLocationProvider().getLocationSimulation().isRouteAnimating();
 				if (routingHelper != null && routingHelper.isRouteCalculated() && followingMode) {
-					makeUturnWhenPossible = routingHelper.makeUturnWhenPossible() ;
-					if (makeUturnWhenPossible) {
+					deviatedFromRoute = routingHelper.isDeviatedFromRoute() ;
+					if (deviatedFromRoute) {
 						visible = true;
 						turnImminent = 0;
-						turnType = TurnType.valueOf(TurnType.TU, settings.DRIVING_REGION.get().leftHandDriving);
+						turnType = TurnType.valueOf(TurnType.OFFR, settings.DRIVING_REGION.get().leftHandDriving);
 						TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
+						deviatedPath = routingHelper.getRouteDeviation();
 						invalidate();
 					} else {
 						boolean showStraight = false;
@@ -147,9 +148,9 @@ public class RouteInfoWidgetsFactory {
 				boolean visible = false;
 				boolean followingMode = routingHelper.isFollowingMode() || ctx.getLocationProvider().getLocationSimulation().isRouteAnimating();
 				if (routingHelper != null && routingHelper.isRouteCalculated() && followingMode) {
-					boolean uturnWhenPossible = routingHelper.makeUturnWhenPossible() ;
+					boolean devitedFromRoute = routingHelper.isDeviatedFromRoute() ;
 					NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
-					if (!uturnWhenPossible) {
+					if (!devitedFromRoute) {
 						if (r != null) {
 							// next turn is very close (show next next with false to speak)
 //							if (r.imminent >= 0 && r.imminent < 2) {

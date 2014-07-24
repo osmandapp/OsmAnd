@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -1430,11 +1430,11 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	\n\t* Extra instellingen voor kompasstabilisatie
 	\n\t* Menuknop vervangen door knop linksboven in het kaartvenster
     </string>
-    <string name="monitoring_settings">Registratiediensten &amp; Slaapmodus</string>
+    <string name="monitoring_settings">Logboek registratie</string>
     <string name="monitoring_settings_descr">Stel in hoe lokaal of via online tracking reizen op te nemen</string>
     <string name="osmand_monitoring_plugin_description">Activeren van tracking en navigatie in slaapmodus (scherm uit). De GPS gaat dan regelmatig aan. Toon de instellingen om uw reis vast te leggen als GPX-bestand of online via een webdienst.</string>
     <string name="street_name">Straat</string>
-	<string name="osmand_monitoring_plugin_name">Registratiediensten &amp; Slaapmodus</string>
+	<string name="osmand_monitoring_plugin_name">Logboek registratie</string>
     <string name="choose_osmand_theme_descr">Kies applicatie-thema</string>
     <string name="choose_osmand_theme">Applicatie-thema</string>
     <string name="accessibility_options">Toegankelijkheidsopties</string>
@@ -1724,7 +1724,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="navigation_intent_invalid">ongeldig formaat: %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">OpenStreetmap-monitoring - Geavanceerde live monitoring. Volg andere toestellen en/of laat jezelf volgen. Maak een anonieme of eigen groep en deel je positie met elkaar. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen. Anonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Een eigen groep is niet beperkt. Als geregistreerde gebruiker, maak je eigen groep aan op de de website. Voor meer info, ga naar http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">"Geavanceerde live monitoring - zie http://osmo.mobi. Volg andere toestellen en laat jezelf volgen. Maak anonieme groepen, deel je positie en communiceer. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen. Anonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden: zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde gebruikers kunnen ze gebruiken. "</string>
     <string name="osmo_plugin_name">OsMo (geavanceerde live monitoring)</string>
     <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
    	<string name="keep_informing_never">Niet herhalen</string>
@@ -1854,7 +1854,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="loading_smth">Laad %1$s …</string>
     <string name="map_widget_plain_time">Huidige tijd</string>
     <string name="select_destination_and_intermediate_points">Kies routepunten</string>
-    <string name="layer_amenity_label">Punt-labels</string>
+    <string name="layer_amenity_label">Namen van interessepunten</string>
     <string name="gpx_wpt">Routepunt</string>
     <string name="selected_gpx_info_show">\n\nLang drukken om op de kaart te bekijken</string>
     <string name="delay_navigation_start">Start navigatie automatisch</string>
@@ -1883,29 +1883,41 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_auth_error_short">Aanmelding mislukt</string>
     <string name="osmo_auth_error">OsMo aanmeldings fout: %1$s.\nMogelijk is de service tijdelijk niet beschikbaar of is uw registratie verlopen.\nWilt u verder gaan met een nieuwe registratie.</string>
     <string name="rendering_attr_hideBuildings_name">Verberg gebouwen</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Verberg voet- en fietspaden</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Verberg voetpaden</string>
     <string name="rendering_attr_hideText_name">Verberg tekst</string>
     <string name="rendering_attr_hideWoodScrubs_name">Verberg bossen en beplanting</string>
-    <string name="rendering_attr_buildings15zoom_name">Gebouwen op zoom 15</string>
+    <string name="rendering_attr_buildings15zoom_name">Gebouwen op zoomniveau 15</string>
     <string name="rendering_attr_moreDetailed_name">Meer details</string>
     <string name="rendering_attr_lessDetailed_name">Minder details</string>
-    <string name="rendering_attr_hideAccess_name">Verberg toegestane gebruik</string>
-    <string name="rendering_attr_showAccess_name">Toon toegestane gebruik</string>
+    <string name="rendering_attr_hideAccess_name">Het type toegang verbergen</string>
+    <string name="rendering_attr_showAccess_name">Het type toegang tonen</string>
     <string name="rendering_attr_showSurfaceGrade_name">Toon kwaliteit van wegen</string>
     <string name="rendering_attr_showSurfaces_name">Toon wegoppervlak</string>
     <string name="rendering_attr_showCycleRoutes_name">Toon fietsroutes</string>
-    <string name="map_preferred_locale_descr">Gewenste taal voor aanduidingen op de kaart (indien niet beschikbaar worden Engelse of plaatselijke namen getoond)</string>
-    <string name="map_preferred_locale">Taalkeuze kaart</string>
+    <string name="map_preferred_locale_descr">Gewenste taal voor aanduidingen op de kaart (indien niet beschikbaar worden Engelse of plaatselijke namen gebruikt)</string>
+    <string name="map_preferred_locale">Kaart voorkeurstaal</string>
     <string name="local_map_names">Plaatselijke namen</string>
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebreeuws</string>
     <string name="forward">Vooruit</string>
     <string name="home">Thuis</string>
     <string name="live_monitoring_m_descr">Stuur tracking naar een webservice als een GPX-track wordt gemaakt</string>
-	<string name="live_monitoring_m">Track on line vastleggen (GPX tracking nodig)</string>
+	<string name="live_monitoring_m">Online tracking (GPX vereist)</string>
     <string name="live_monitoring_start">Start online tracking</string>
 	<string name="live_monitoring_stop">Stop online tracking</string>
-	<string name="gpx_monitoring_start">GPX-track opnemen</string>
-	<string name="gpx_monitoring_stop">GPX-track opname stoppen</string>
+	<string name="gpx_monitoring_start">Start GPX opname</string>
+	<string name="gpx_monitoring_stop">Stop GPX opname</string>
     <string name="gpx_start_new_segment">Start nieuw segment</string>
-    </resources>
+    <string name="keep_navigation_service">Houden</string>
+	<string name="stop_navigation_service">Stop</string>
+	<string name="enable_sleep_mode">Slaapstand inschakelen</string>
+	<string name="gps_wake_up_timer">GPS ontwaak interval</string>
+	<string name="sleep_mode_stop_dialog">GPS aanlaten?</string>
+	<string name="lang_fa">Perzisch</string>
+	<string name="lang_al">Albanees</string>
+	<string name="lang_ar">Arabisch</string>
+	<string name="lang_sc">Sardijns</string>
+	<string name="lang_sr">Servisch</string>
+	<string name="lang_zh_CN">Vereenvoudigd Chinees</string>
+	<string name="lang_zh_TW">Traditioneel Chinees</string>
+	</resources>

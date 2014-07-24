@@ -2,7 +2,7 @@
 <project name="SherlockBar" default="help">
 
 	<loadproperties srcFile="project.properties" />
-
+	<property file="local.properties" />
 
 	<!-- quick check on sdk.dir -->
 	<fail

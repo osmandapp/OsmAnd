@@ -71,8 +71,8 @@ public class RoutingHelper {
 	private RouteProvider provider = new RouteProvider();
 	private VoiceRouter voiceRouter;
 
-	private boolean makeUturnWhenPossible = false;
-	private long makeUTwpDetected = 0;
+	private boolean isDeviatedFromRoute = false;
+	private long deviateFromRouteDetected = 0;
 	//private long wrongMovementDetected = 0;
 
 	private RouteCalculationProgressCallback progressRoute;
@@ -80,10 +80,9 @@ public class RoutingHelper {
 //	private ProgressBar progress;
 //	private Handler progressHandler;
 
-	public boolean makeUturnWhenPossible() {
-		return makeUturnWhenPossible;
+	public boolean isDeviatedFromRoute() {
+		return isDeviatedFromRoute;
 	}
-
 
 	public RoutingHelper(OsmandApplication context, CommandPlayer player){
 		this.app = context;
@@ -125,7 +124,7 @@ public class RoutingHelper {
 	
 	public synchronized void clearCurrentRoute(LatLon newFinalLocation, List<LatLon> newIntermediatePoints) {
 		route = new RouteCalculationResult("");
-		makeUturnWhenPossible = false;
+		isDeviatedFromRoute = false;
 		evalWaitInterval = 3000;
 		app.runInUIThread(new Runnable() {
 			@Override
@@ -210,11 +209,21 @@ public class RoutingHelper {
 	public Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation) {
 		return setCurrentLocation(currentLocation, returnUpdatedLocation, route);
 	}
+
+	public double getRouteDeviation(){
+		if (route == null ||
+			route.getImmutableAllDirections().size() < 2 ||
+			route.currentRoute == 0){
+			return 0;
+		}
+		List<Location> routeNodes = route.getImmutableAllLocations();
+		return getOrthogonalDistance(lastFixedLocation, routeNodes.get(route.currentRoute -1), routeNodes.get(route.currentRoute));
+	}
 	
 	private Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation, RouteCalculationResult previousRoute) {
 		Location locationProjection = currentLocation;
 		if (finalLocation == null || currentLocation == null) {
-			makeUturnWhenPossible = false;
+			isDeviatedFromRoute = false;
 			return locationProjection;
 		}
 		float posTolerance = POSITION_TOLERANCE;
@@ -261,10 +270,10 @@ public class RoutingHelper {
 					// don't update in route planing mode
 					announceGpxWaypoints(currentLocation);
 					boolean inRecalc = calculateRoute || isRouteBeingCalculated();
-					if (!inRecalc && !uTurnIsNeeded && !wrongMovementDirection) {
+					if (!inRecalc && !wrongMovementDirection) {
 						voiceRouter.updateStatus(currentLocation, false);
-					} else if (uTurnIsNeeded) {
-						voiceRouter.makeUTStatus();
+					} else if(isDeviatedFromRoute){
+						voiceRouter.interruptRouteCommands();
 					}
 				}
 				
@@ -463,10 +472,10 @@ public class RoutingHelper {
 
 	public boolean identifyUTurnIsNeeded(Location currentLocation, float posTolerance) {
 		if (finalLocation == null || currentLocation == null || !route.isCalculated()) {
-			this.makeUturnWhenPossible = false;
-			return makeUturnWhenPossible;
+			this.isDeviatedFromRoute = false;
+			return isDeviatedFromRoute;
 		}
-		boolean makeUturnWhenPossible = false;
+		boolean isOffRoute = false;
 		if (currentLocation.hasBearing()) {
 			float bearingMotion = currentLocation.getBearing() ;
 			Location nextRoutePosition = route.getNextRouteLocation();
@@ -479,19 +488,19 @@ public class RoutingHelper {
 				// 60m tolerance to allow for GPS inaccuracy
 				if (d > posTolerance) {
 					// require x sec continuous since first detection
-					if (makeUTwpDetected == 0) {
-						makeUTwpDetected = System.currentTimeMillis();
-					} else if ((System.currentTimeMillis() - makeUTwpDetected > 10000)) {
-						makeUturnWhenPossible = true;
+					if (deviateFromRouteDetected == 0) {
+						deviateFromRouteDetected = System.currentTimeMillis();
+					} else if ((System.currentTimeMillis() - deviateFromRouteDetected > 10000)) {
+						isOffRoute = true;
 						//log.info("bearingMotion is opposite to bearingRoute"); //$NON-NLS-1$
 					}
 				}
 			} else {
-				makeUTwpDetected = 0;
+				deviateFromRouteDetected = 0;
 			}
 		}
-		this.makeUturnWhenPossible = makeUturnWhenPossible;
-		return makeUturnWhenPossible;
+		this.isDeviatedFromRoute = isOffRoute;
+		return isOffRoute;
 	}
 	
 	/**
@@ -868,8 +877,8 @@ public class RoutingHelper {
 				@Override
 				public void run() {
 					if (isRouteBeingCalculated()) {
-						float p = calculationProgress.distanceFromBegin + calculationProgress.distanceFromEnd;
-						float all = calculationProgress.totalEstimatedDistance * 1.5f;
+						float p = Math.max(calculationProgress.distanceFromBegin, calculationProgress.distanceFromEnd);
+						float all = calculationProgress.totalEstimatedDistance * 1.25f;
 						if (all > 0) {
 							int t = (int) Math.min(p * p / (all * all) * 100f, 99);
 							progressRoute.updateProgress(t);
