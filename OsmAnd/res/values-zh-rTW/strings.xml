@@ -1522,7 +1522,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="keep_intermediate_points">保留中間點</string>
     <string name="new_directions_point_dialog">您已經有中間點設定。</string>
     <string name="context_menu_item_directions_to">導引到</string>
-    <string name="context_menu_item_directions_from">導引來自</string>
+    <string name="context_menu_item_directions_from">從此導引</string>
     <string name="route_descr_map_location">地圖： </string>
     <string name="route_to">到：</string>
     <string name="route_via">經過：</string>
