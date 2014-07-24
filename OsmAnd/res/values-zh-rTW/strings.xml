@@ -765,8 +765,8 @@
 	<string name="int_min">分。</string>
 	<string name="background_service_int_descr">設定休眠模式背景喚醒間隔</string>
 	<string name="background_service_int">喚醒間隔</string>
-	<string name="background_service_provider_descr">選擇位置提供給休眠模式服務使用</string>
-	<string name="background_service_provider">位置提供者</string>
+	<string name="background_service_provider_descr">選擇位置提供使用於休眠模式服務</string>
+	<string name="background_service_provider">位置提供</string>
 	<string name="background_router_service_descr">當螢幕關閉時，在背景執行 OsmAnd 追蹤您的位置</string>
 	<string name="background_router_service">在背景執行</string>
 	<string name="off_router_service_no_gps_available">休眠模式導航服務，需要提供一個已開啟的位置。</string>
@@ -1521,8 +1521,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="clear_intermediate_points">清除中間點</string>
     <string name="keep_intermediate_points">保留中間點</string>
     <string name="new_directions_point_dialog">您已經有中間點設定。</string>
-    <string name="context_menu_item_directions_to">指引到</string>
-    <string name="context_menu_item_directions_from">指引來自</string>
+    <string name="context_menu_item_directions_to">導引到</string>
+    <string name="context_menu_item_directions_from">導引來自</string>
     <string name="route_descr_map_location">地圖： </string>
     <string name="route_to">到：</string>
     <string name="route_via">經過：</string>
