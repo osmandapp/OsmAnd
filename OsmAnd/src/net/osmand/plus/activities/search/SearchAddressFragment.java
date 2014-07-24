@@ -274,7 +274,7 @@ public class SearchAddressFragment extends SherlockFragment {
 			String city = settings.getLastSearchedCityName();
 			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
 			ai.objectName = settings.getLastSearchedStreet();
-			ai.historyName = MessageFormat.format(ctx. getString(R.string.search_history_int_streets), settings.getLastSearchedStreet(), 
+			ai.historyName = MessageFormat.format(ctx != null ? ctx.getString(R.string.search_history_int_streets) : "", settings.getLastSearchedStreet(),
 					settings.getLastSearchedIntersectedStreet(), cityName);
 			ai.zoom = 17;
 			return ai;
@@ -287,7 +287,7 @@ public class SearchAddressFragment extends SherlockFragment {
 			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
 			String street = settings.getLastSearchedStreet();
 			ai.objectName = street;
-			ai.historyName = MessageFormat.format(ctx.getString(R.string.search_history_street), street, cityName);
+			ai.historyName = MessageFormat.format(ctx != null ? ctx.getString(R.string.search_history_street) : "", street, cityName);
 			ai.zoom = 16;
 			return ai;
 		}
@@ -301,7 +301,7 @@ public class SearchAddressFragment extends SherlockFragment {
 			String street = settings.getLastSearchedStreet();
 			String building = settings.getLastSearchedBuilding();
 			ai.objectName = street + " " + building;
-			ai.historyName = MessageFormat.format(ctx.getString(R.string.search_history_building), building, street,
+			ai.historyName = MessageFormat.format(ctx != null ? ctx.getString(R.string.search_history_building) : "", building, street,
 					cityName);
 			ai.zoom = 17;
 			return ai;
@@ -310,7 +310,7 @@ public class SearchAddressFragment extends SherlockFragment {
 		public static AddressInformation buildCity(Context ctx, OsmandSettings settings){
 			AddressInformation ai = new AddressInformation();
 			String city = settings.getLastSearchedCityName();
-			ai.historyName = MessageFormat.format(ctx.getString(R.string.search_history_city), city);
+			ai.historyName = MessageFormat.format(ctx != null ? ctx.getString(R.string.search_history_city) : "", city);
 			ai.objectName = city;
 			ai.zoom = 14;
 			return ai;

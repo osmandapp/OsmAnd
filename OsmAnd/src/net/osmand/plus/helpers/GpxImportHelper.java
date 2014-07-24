@@ -255,7 +255,7 @@ public class GpxImportHelper {
 	private String saveImport(final GPXUtilities.GPXFile gpxFile, final String fileName) {
 		final String warning;
 
-		if (gpxFile.isEmpty()) {
+		if (gpxFile.isEmpty() || fileName == null) {
 			warning = application.getString(R.string.error_reading_gpx);
 		} else {
 			final File importDir = application.getAppPath(IndexConstants.GPX_IMPORT_DIR);
