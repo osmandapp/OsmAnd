@@ -1913,4 +1913,9 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="osmo_edit_color">表示色</string>
     <string name="osmo_group_info">インフォメーション</string>
     <string name="osmo_group">OsMoグループ</string>
+    <string name="osmo_group_share">グループ %2$sに接続するには、グループID(%1$s)を指定するか %3$sをクリックして下さい。</string>
+    <string name="osmo_share_connect_device">このデバイスをフォローしてみましょう</string>
+    <string name="osmo_share_current_session">ブラウザで現在のセッションを共有する</string>
+    <string name="osmo_session_not_available">セッションはが利用できません「送信場所」がオンになっていることを確認してください。</string>
+    <string name="osmo_share_session">セッションの共有</string>
     </resources>
