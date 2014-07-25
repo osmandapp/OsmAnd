@@ -148,8 +148,8 @@ public class SherpafyTourFragment extends SherlockListFragment {
 				getString(R.string.sherpafy_overview_desr), false));
 		items.add(new StageItem(StageItemType.INSTRUCTIONS, getString(R.string.sherpafy_instructions),
 				getString(R.string.sherpafy_instructions_desr), false));
-		items.add(new StageItem(StageItemType.GALLERY, getString(R.string.sherpafy_gallery),
-				getString(R.string.sherpafy_gallery_descr), false));
+//		items.add(new StageItem(StageItemType.GALLERY, getString(R.string.sherpafy_gallery),
+//				getString(R.string.sherpafy_gallery_descr), false));
 		items.add(new StageItem(StageItemType.TEXT, "", getString(R.string.sherpafy_stages_txt), true));
 		if (tour != null) {
 			for (StageInformation si : tour.getStageInformation()) {

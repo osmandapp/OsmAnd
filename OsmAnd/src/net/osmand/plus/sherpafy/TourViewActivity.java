@@ -4,6 +4,7 @@ import java.util.WeakHashMap;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -304,6 +305,19 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		}
 	}
 
+	
+	public void showFavoriteFragment(StageInformation stage, StageFavorite sf) {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		setDrawerIndicatorVisible(false);
+		SherpafyFavoriteFragment fragment = new SherpafyFavoriteFragment();
+		Bundle bl = new Bundle();
+		bl.putInt(SherpafyFavoriteFragment.STAGE_PARAM, stage.getOrder());
+		bl.putString(SherpafyFavoriteFragment.TOUR_PARAM, stage.getTour().getId());
+		bl.putInt(SherpafyFavoriteFragment.FAV_PARAM, sf.getOrder());
+		fragment.setArguments(bl);
+		fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+	}
+	
 	public void showHtmlFragment(String title, String cont) {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		setDrawerIndicatorVisible(false);

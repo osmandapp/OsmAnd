@@ -22,7 +22,7 @@ public class SherpafyStageInfoFragment extends SherlockFragment {
 	OsmandApplication app;
 	private SherpafyCustomization customization;
 	protected StageInformation stage;
-	private TourInformation tour;
+	protected TourInformation tour;
 	private View view;
 
 	public SherpafyStageInfoFragment() {
@@ -40,7 +40,6 @@ public class SherpafyStageInfoFragment extends SherlockFragment {
 		for(TourInformation ti : customization.getTourInformations()) {
 			if(ti.getId().equals(id)) {
 				tour = ti;
-				getSherlockActivity().getSupportActionBar().setTitle(tour.getName());
 				break;
 			}
 		}
@@ -60,7 +59,6 @@ public class SherpafyStageInfoFragment extends SherlockFragment {
 		TextView additional = (TextView) view.findViewById(R.id.AdditionalText);
 		TextView text = (TextView) view.findViewById(R.id.Text);
 		TextView header = (TextView) view.findViewById(R.id.HeaderText);
-
 		updateView(description, icon, additional, text, header);
 		return view;
 	}
