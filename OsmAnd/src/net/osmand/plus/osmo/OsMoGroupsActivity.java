@@ -167,17 +167,23 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		header = getLayoutInflater().inflate(R.layout.osmo_groups_list_header, null);
 		getExpandableListView().addHeaderView(header);
 		CompoundButton trackr = (CompoundButton) header.findViewById(R.id.enable_tracker);
-		trackr.setChecked(osMoPlugin.getTracker().isEnabledTracker());
+		if(osMoPlugin != null && osMoPlugin.getTracker() != null){
+			trackr.setChecked(osMoPlugin.getTracker().isEnabledTracker());
+		}
 		trackr.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if(isChecked) {
-					osMoPlugin.getTracker().enableTracker();
+					if (osMoPlugin != null && osMoPlugin.getTracker() != null){
+						osMoPlugin.getTracker().enableTracker();
+					}
 					app.startNavigationService(NavigationService.USED_BY_LIVE);
 					app.getSettings().SERVICE_OFF_INTERVAL.set(0);
 				} else {
-					osMoPlugin.getTracker().disableTracker();
+					if (osMoPlugin != null && osMoPlugin.getTracker() != null){
+						osMoPlugin.getTracker().disableTracker();
+					}
 					if (app.getNavigationService() != null) {
 						app.getNavigationService().stopIfNeeded(app,NavigationService.USED_BY_LIVE);
 					}
@@ -449,8 +455,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					if(device != null) {
 						Location location = device.getLastLocation();
 						MapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
-						app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), app.getSettings().getLastKnownMapZoom(), 
-								null, device.getVisibleName(), device);
+						if (location != null){
+							app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), app.getSettings().getLastKnownMapZoom(),
+									null, device.getVisibleName(), device);
+						}
 						OsMoPositionLayer.setFollowTrackerId(device);
 						MapActivity.launchMapActivityMoveToTop(OsMoGroupsActivity.this);
 					}
@@ -496,17 +504,19 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		Builder bld = new AlertDialog.Builder(this);
 		bld.setTitle(R.string.osmo_group);
 		StringBuilder sb = new StringBuilder();
-		setFields(sb, R.string.osmo_group_name, group.name);
-		if(group.description != null) {
-			setFields(sb, R.string.osmo_group_description, group.description);
+		if (group != null){
+			setFields(sb, R.string.osmo_group_name, group.name);
+			if(group.description != null) {
+				setFields(sb, R.string.osmo_group_description, group.description);
+			}
+			if(group.expireTime != 0) {
+				setFields(sb, R.string.osmo_expire_group, new Date(group.expireTime).toString());
+			}
+			if(group.policy != null) {
+				setFields(sb, R.string.osmo_group_policy, group.policy);
+			}
+			setFields(sb, R.string.osmo_connect_to_group_id, group.groupId);
 		}
-		if(group.expireTime != 0) {
-			setFields(sb, R.string.osmo_expire_group, new Date(group.expireTime).toString());
-		}
-		if(group.policy != null) {
-			setFields(sb, R.string.osmo_group_policy, group.policy);
-		}
-		setFields(sb, R.string.osmo_connect_to_group_id, group.groupId);
 		ScrollView sv = new ScrollView(this);
 		TextView tv = new TextView(this);
 		sv.addView(tv);

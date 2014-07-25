@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   
   <string name="layer_map_appearance">Configura pantalla</string>
@@ -1822,4 +1822,10 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="gpx_monitoring_stop">Parar grabación GPX</string>
     <string name="gpx_start_new_segment">Iniciar nuevo segmento</string>
     <string name="lang_fa">Persa</string>
+	<string name="lang_al">Albano</string>
+	<string name="lang_ar">Árabe</string>
+	<string name="lang_sc">Sardo</string>
+	<string name="lang_sr">Serbio</string>
+	<string name="lang_zh_CN">Chino Simplificado</string>
+	<string name="lang_zh_TW">Chino Tradicional</string>
 	</resources>
