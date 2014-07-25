@@ -439,7 +439,7 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 	}
 
 	public LatLon getEndStop(int position){
-		if(position == -1){
+		if(position < 0){
 			return lastKnownMapLocation;
 		}
 		RouteInfoLocation item = intermediateListAdapater.getItem(position);
