@@ -9,9 +9,12 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.WeakHashMap;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -29,10 +32,8 @@ public class TourInformation {
 	private String shortDescription = "";
 	private String fulldescription = "";
 	private String instructions = "";
-	private Bitmap defaultImg = null;
 	private File imgFile;
 	private List<StageInformation> stageInformation = new ArrayList<TourInformation.StageInformation>();
-
 
 	public TourInformation(File f) {
 		this.folder = f;
@@ -45,6 +46,18 @@ public class TourInformation {
 	
 	public String getInstructions() {
 		return instructions;
+	}
+	
+	private static WeakHashMap<File, Bitmap> androidBitmaps = new WeakHashMap<File, Bitmap>();
+	private static Bitmap decodeImage(File f) {
+		if(!androidBitmaps.containsKey(f)) {
+			Bitmap img =null;
+			if(f != null && f.exists()) {
+				img = BitmapFactory.decodeFile(f.getAbsolutePath());
+			}
+			androidBitmaps.put(f, img);
+		}
+		return androidBitmaps.get(f);
 	}
 	
 	
@@ -71,6 +84,8 @@ public class TourInformation {
 		int tok;
 		String text = "";
 		StageInformation stage = null;
+		StageFavoriteGroup group = null;
+		StageFavorite favorite = null;
 		stageInformation.clear();
 		while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 			if (tok == XmlPullParser.START_TAG) {
@@ -84,16 +99,39 @@ public class TourInformation {
 					stage.name = name;
 				} else if (tag.equals("itinerary") && stage != null){
 					String img = getDefAttribute(parser, "image", "");
+					stage.distance = Double.parseDouble(getDefAttribute(parser, "distance", "0"));
+					stage.duration = Integer.parseInt(getDefAttribute(parser, "duration", "0"));
+					double slat = Double.parseDouble(getDefAttribute(parser, "startLat", "0"));
+					double slon = Double.parseDouble(getDefAttribute(parser, "startLon", "0"));
+					if(slat != 0 || slon != 0) {
+						stage.startPoint = new LatLon(slat, slon);
+					}
 					if(img.startsWith(FILE_PREFIX)) {
 						stage.itineraryFile = getFile(img);
 					}
 					stage.itinerary = getInnerXml(parser);
+				} else if(stage != null && tag.equals("group")) {
+					group = new StageFavoriteGroup();
+					group.color = Algorithms.parseColor(getDefAttribute(parser, "color", Algorithms.colorToString(StageImageDrawable.INFO_COLOR)));
+					group.name = getDefAttribute(parser, "name", "");
+					group.id = getDefAttribute(parser, "id", "");
+					group.order = stage.favorites.size();
+					stage.favorites.add(group);
+				} else if(group != null && tag.equals("favorite")) {
+					favorite = new StageFavorite();
+					favorite.location = new LatLon(Double.parseDouble(getDefAttribute(parser, "lat", "0")),
+							Double.parseDouble(getDefAttribute(parser, "lon", "0")));
+					favorite.name = getDefAttribute(parser, "name", "");
+					favorite.group = group;
+					favorite.order = stage.favorites.size(); 
+					group.favorites.add(favorite);
+					stage.favorites.add(favorite);
 				} else if (tag.equals("fullDescription")){
 					fulldescription = getInnerXml(parser);
 				} else if (tag.equals("instructions")){
 					instructions = getInnerXml(parser);
-				} else if (stage != null && tag.equals("interval")){
-					stage.distance = Double.parseDouble(getDefAttribute(parser, "distance", "0"));
+				} else if (favorite != null && tag.equals("description")){
+					favorite.fullDescription = getInnerXml(parser);
 				} else if (stage != null && tag.equals("description")){
 					stage.fullDescription = getInnerXml(parser);
 				}
@@ -104,12 +142,18 @@ public class TourInformation {
 				if(tag.equals("stage")) {
 					stageInformation.add(stage);
 					stage = null;
-				} else if(stage != null && tag.equals("fullDescription")) {
-					stage.fullDescription = text;
+				} else if(favorite != null && tag.equals("defaultImage")) {
+					if(text.startsWith(FILE_PREFIX)) {
+						favorite.imgFile = getFile(text);
+					}
 				} else if(stage != null && tag.equals("defaultImage")) {
 					if(text.startsWith(FILE_PREFIX)) {
 						stage.imgFile = getFile(text);
 					}
+				} else if(stage != null && tag.equals("group")) {
+					group = null;
+				} else if(stage != null && tag.equals("favorite")) {
+					favorite = null;
 				} else if(tag.equals("defaultImage")) {
 					if(text.startsWith(FILE_PREFIX)) {
 						imgFile = getFile(text);
@@ -119,7 +163,9 @@ public class TourInformation {
 						stage.gpxFile = getFile(text);
 					}
 				} else if(tag.equals("shortDescription")) {
-					if(stage != null) {
+					if(favorite != null) {
+						favorite.shortDescription = text;
+					} else if(stage != null) {
 						stage.shortDescription = text;
 					} else {
 						shortDescription = text;
@@ -168,10 +214,7 @@ public class TourInformation {
 
 
 	public Bitmap getImageBitmap() {
-		if(defaultImg == null && imgFile != null && imgFile.exists()) {
-			defaultImg = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-		}
-		return defaultImg;
+		return decodeImage(imgFile);
 	}
 
 	//returns image bitmap from selected relative path
@@ -189,21 +232,104 @@ public class TourInformation {
 	}
 	
 	
-	public static class StageInformation {
+	public static class StageFavoriteGroup {
+		String id;
+		int order;
+		int color;
+		String name = "";
+		List<StageFavorite> favorites = new ArrayList<StageFavorite>();
 		
-		String itinerary = "";
-		File gpxFile;
-		public GPXFile gpx;
+		public int getColor() {
+			return color;
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public List<StageFavorite> getFavorites() {
+			return favorites;
+		}
+		
+		public int getOrder() {
+			return order;
+		}
+	}
+	
+	public static class StageFavorite {
+		int order;
+		LatLon location;
 		String name = "";
 		String shortDescription = "";
 		String fullDescription = "";
-		Bitmap img;
 		File imgFile;
-		private Bitmap itineraryImg;
+		StageFavoriteGroup group;
+		
+		public StageFavoriteGroup getGroup() {
+			return group;
+		}
+		
+		public int getOrder() {
+			return order;
+		}
+
+		public LatLon getLatLon() {
+			return location;
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public String getShortDescription() {
+			return shortDescription;
+		}
+		
+		public String getFullDescription() {
+			return fullDescription;
+		}
+		
+		public Bitmap getImage() {
+			return decodeImage(imgFile);
+		}
+
+	}
+	
+	public static class StageInformation {
+		int duration;
+		String itinerary = "";
+		File gpxFile;
+		GPXFile gpx;
+		String name = "";
+		String shortDescription = "";
+		String fullDescription = "";
+		File imgFile;
 		File itineraryFile;
 		double distance;
-		private TourInformation tour;
-		private int order;
+		LatLon startPoint = null;
+		List<Object> favorites = new ArrayList<Object>();
+		
+		TourInformation tour;
+		int order;
+		
+		public List<Object> getFavorites() {
+			return favorites;
+		}
+		
+		public StageFavoriteGroup getGroupById(String id) {
+			for(Object o : favorites) {
+				if(o instanceof StageFavoriteGroup) {
+					if(id.equals(((StageFavoriteGroup)o).id)) {
+						return (StageFavoriteGroup) o;
+					}
+				}
+			}
+			return null;
+		}
+		
+		public LatLon getStartPoint() {
+			return startPoint;
+		}
 		
 		public String getItinerary() {
 			return itinerary;
@@ -244,17 +370,12 @@ public class TourInformation {
 		
 
 		public Bitmap getImageBitmap() {
-			if(img == null && imgFile != null && imgFile.exists()) {
-				img = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-			}
-			return img;
+			return decodeImage(imgFile);
 		}
 		
+		
 		public Bitmap getItineraryBitmap() {
-			if(itineraryImg == null && itineraryFile != null && itineraryFile.exists()) {
-				itineraryImg = BitmapFactory.decodeFile(itineraryFile.getAbsolutePath());
-			}
-			return itineraryImg;
+			return decodeImage(itineraryFile);
 		}
 		
 		@Override
