@@ -464,7 +464,7 @@
 	<string name="filename_input">檔名： </string>
 	<string name="file_with_name_already_exist">已有同檔名存在。</string>
 	<string name="default_buttons_save">儲存</string>
-	<string name="menu_save_directions">儲存指引</string>
+	<string name="menu_save_directions">儲存導引</string>
 	<string name="local_index_upload_gpx_description">上傳 GPX 到 OSM 社群，這些將有助於改善地圖。</string>
 	<string name="local_index_items_uploaded">%2$d 項中的 %1$d 項已上傳成功。</string>
 	<string name="local_index_mi_upload_gpx">傳送到 OSM</string>
@@ -574,22 +574,20 @@
 		\n\n您可透過地圖畫面左下角的設定檔按鈕(汽車、自行車、步行三種圖示)更改使用設定檔 ，或是作路線規劃。
 	</string>
 	<string name="tip_navigation">導航</string>
-	<string name="tip_navigation_t">為了取得指引到一個地方，可以直接在地圖上長按它，然然後再點選其敘述框\'指引到\'，或著選擇\'指引\'後在查尋結果清單或是我的最愛清單點選進入。
-		\n\n目的地標點以橙色旗標在地圖上，同時 OsmAnd 會顯示達到目的地的距離與它的方位(橙色三角形)。
-		\n\n您可以選擇到任何一個\'隨行\'的路線，這意味著 OsmAnd 將實地引導您，給您語音指示（如果有啟用語音），或者您可以選擇\'只顯示\'路線在地圖上，它會產生一個靜態的路線不會有任何實地引導或隨著您的移動而調整。
-		\n\n顯示從非您目前的位置中，選擇任意標點到目的地的路線，接著在地圖上選擇\'指引來自\'。
-		\n\n如果您選擇\'指引來自\'連同\'隨行\'，只要它發現則 OsmAnd 將切換到您的實際位置（所以這個可以用於在快速啟動路線之前找到位置），當\'指引來自\'在與\'只顯示\'結合，只是告訴您從任意標點的路線，您可選擇不包括後續的更新。
-	</string>
+	<string name="tip_navigation_t">"需要導引到一個地點，可以直接在地圖上選擇並長按該地點，(然後再點選其功能說明單的\'導引到\')，或著選擇\'導引\'後在查尋結果清單或是我的最愛清單點選進入。
+\n\n目的地標點以橙色旗標在地圖上，同時 OsmAnd 會顯示達到目的地的距離與它的方位(橙色三角形)。
+\n\n您可以選擇到任何一個\'隨行\'的路線，這意味著 OsmAnd 將實地引導您，給您語音指示（如果有啟用語音），或者您可以選擇\'只顯示\'路線在地圖上，它會產生一個靜態的路線不會有任何實地引導或隨著您的移動而調整。
+\n\n顯示從非您目前的位置中，選擇任意標點到目的地的路線，接著在地圖上選擇\'從此導引\'。
+\n\n如果您選擇\'從此導引\'連同\'開始導航\'，只要它發現則 OsmAnd 將切換到您的實際位置（所以這個可以用於在快速啟動路線之前找到位置），當\'從此導引\'在與\'只顯示\'結合，只是告訴您從任意標點的路線，您可選擇不包括隨後的更新。 "</string>
 	<string name="tip_search">查尋</string>
-	<string name="tip_search_t">您可以在地圖上直接查尋地點，經由 \'使用位置 \' → \'附近查尋\'，或是透過 \'選單 \'→ \'查尋 \'。
-		\n\n在查尋畫面上有提供查尋範本
-		\n\t*經由地址
-		\n\t*透過坐標
-		\n\t*興趣點（按類型或名稱）
-		\n\t*透過您的查尋履歷
-		\n\t*或透過您事先定義的我的最愛
-		\n\n在主畫面上按\'查尋\'進行查尋的動作。所有在快顯功能表中或動作列被點選中的，都提供有例如\'指引\'或\'在地圖上顯示\'等等的選項。
-	</string>
+	<string name="tip_search_t">"您可以在地圖上直接查尋地點，經由 \'使用位置 \' → \'附近查尋\'，或是透過 \'選單 \'→ \'查尋 \'。
+\n\n在查尋畫面上有提供查尋範本
+\n\t*經由地址
+\n\t*透過坐標
+\n\t*興趣點（按類型或名稱）
+\n\t*透過您的查尋履歷
+\n\t*或透過您事先定義的我的最愛
+\n\n在主畫面上按\'查尋\'進行查尋的動作。所有在快顯功能表中或動作列被點選中的，都提供有例如\'導引\'或\'在地圖上顯示\'等等的選項。 "</string>
 	<string name="tip_map_context_menu">\'使用位置\'選單</string>
 	<string name="tip_map_context_menu_t">地圖快顯功能表(\'使用位置\')，包含了所有操作的參考點（位置）。
 		\n\n它可長按地圖上的任何一點（然後輕點其標記），或按軌跡球的按鈕，或者選擇由\'選單\' → \'使用位置\'（最後兩種方式以地圖中心作為參考）。
@@ -866,7 +864,7 @@
 	<string name="only_show">顯示路線</string>
 	<string name="follow">開始導航</string>
 	<string name="mark_final_location_first">請先設定目的地</string>
-	<string name="get_directions">指引</string>
+	<string name="get_directions">導引</string>
 	<string name="show_gps_status">顯示 GPS 狀態</string>
 	<string name="opening_hours">營業時間</string>
 	<string name="opening_changeset">正在開啟異動清單…</string>
