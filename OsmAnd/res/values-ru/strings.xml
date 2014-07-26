@@ -1773,4 +1773,5 @@ OsmAnd - открытый источник и активно развается.
 	<string name="lang_sr">Сербский</string>
 	<string name="lang_zh_CN">Упрощенный китайский</string>
 	<string name="lang_zh_TW">Традиционный китайский</string>
+    <string name="rendering_attr_subwayMode_name">Режим метро</string>
 	</resources>
