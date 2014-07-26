@@ -1645,4 +1645,5 @@
 	<string name="lang_sr">Serbiska</string>
 	<string name="lang_zh_CN">Förenklad kinesiska</string>
 	<string name="lang_zh_TW">Traditionell kinesiska</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Tunnelbaneläge</string>
+ 	</resources>
