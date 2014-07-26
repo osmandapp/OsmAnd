@@ -103,7 +103,7 @@ public class OsmandApplication extends Application {
 	private RoutingConfiguration.Builder defaultRoutingConfig;
 
 	private boolean applicationInitializing = false;
-	private Locale prefferedLocale = null;
+	private Locale preferredLocale = null;
 	
 	SQLiteAPI sqliteAPI;
 	BRouterServiceConnection bRouterServiceConnection;
@@ -157,7 +157,7 @@ public class OsmandApplication extends Application {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
 		
-		checkPrefferedLocale();
+		checkPreferredLocale();
 		startApplication();
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
@@ -254,26 +254,26 @@ public class OsmandApplication extends Application {
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-		if (prefferedLocale != null && !newConfig.locale.getLanguage().equals(prefferedLocale.getLanguage())) {
+		if (preferredLocale != null && !newConfig.locale.getLanguage().equals(preferredLocale.getLanguage())) {
 			super.onConfigurationChanged(newConfig);
 			// ugly fix ! On devices after 4.0 screen is blinking when you rotate device!
 			if (Build.VERSION.SDK_INT < 14) {
-				newConfig.locale = prefferedLocale;
+				newConfig.locale = preferredLocale;
 			}
 			getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
-			Locale.setDefault(prefferedLocale);
+			Locale.setDefault(preferredLocale);
 		} else {
 			super.onConfigurationChanged(newConfig);
 		}
 	}
 
-	public void checkPrefferedLocale() {
+	public void checkPreferredLocale() {
 		Configuration config = getBaseContext().getResources().getConfiguration();
 		String lang = osmandSettings.PREFERRED_LOCALE.get();
 		if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
-			prefferedLocale = new Locale(lang);
-			Locale.setDefault(prefferedLocale);
-			config.locale = prefferedLocale;
+			preferredLocale = new Locale(lang);
+			Locale.setDefault(preferredLocale);
+			config.locale = preferredLocale;
 			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 		}
 		String clang = "".equals(lang) ? config.locale.getLanguage() : lang;
@@ -763,13 +763,13 @@ public class OsmandApplication extends Application {
 	}
 	
 	public void setLanguage(Context context) {
-		if (prefferedLocale != null) {
+		if (preferredLocale != null) {
 			Configuration config = context.getResources().getConfiguration();
-			String lang = prefferedLocale.getLanguage();
+			String lang = preferredLocale.getLanguage();
 			if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
-				prefferedLocale = new Locale(lang);
-				Locale.setDefault(prefferedLocale);
-				config.locale = prefferedLocale;
+				preferredLocale = new Locale(lang);
+				Locale.setDefault(preferredLocale);
+				config.locale = preferredLocale;
 				context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
 			}
 		}
