@@ -392,7 +392,7 @@
 	<string name="show_details">Vis detaljer</string>
 	<string name="accessibility_extensions_descr">Tilgængelighedsudvidelser for gamle Android versioner</string>
 	<string name="accessibility_extensions">Tilgængelighedsudvidelser</string>
-	<string name="accessibility_mode">Tilgængelighedsmodus</string>
+	<string name="accessibility_mode">Tilgængelighedstilstand</string>
 	<string name="osmand_parking_pm">PM</string>
 	<string name="default_buttons_support">Støt</string>
 	<string name="info_button">Information</string>
@@ -1939,5 +1939,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="lang_zh_CN">Kinesisk, forenklet</string>
 	<string name="lang_zh_TW">Kinesisk, traditionelt</string>
 	<string name="lang_sc">Sardisk</string>
-	<string name="rendering_attr_subwayMode_name">Undergrundsbanetilstand</string>
+	<string name="rendering_attr_subwayMode_name">Metrotilstand</string>
  	</resources>
