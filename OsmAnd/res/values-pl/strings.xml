@@ -1896,4 +1896,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="lang_sr">Serbski</string>
 	<string name="lang_zh_CN">Chiński uproszczony</string>
 	<string name="lang_zh_TW">Chiński tradycyjny</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Tryb metra</string>
+ 	</resources>
