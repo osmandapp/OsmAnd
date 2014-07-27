@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -1938,4 +1938,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="lang_sr">Serbo</string>
 	<string name="lang_zh_CN">Cinese semplificato</string>
 	<string name="lang_zh_TW">Cinese tradizionale</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Modalità metro</string>
+ 	</resources>
