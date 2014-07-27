@@ -1912,4 +1912,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="lang_zh_CN">кітайская спрошчаная</string>
 	<string name="lang_zh_TW">кітайская традыцыйная</string>
 	<string name="lang_sc">сардынская</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Рэжым метро</string>
+ 	</resources>
