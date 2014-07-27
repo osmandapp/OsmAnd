@@ -1858,7 +1858,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="gpx_monitoring_stop">Končaj GPX snemanje</string>
     <string name="gpx_start_new_segment">Začni nov segment</string>
     <string name="rendering_attr_hideBuildings_name">Skrij stavbe</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Skrij ne-vozne ceste</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Skrij neprevozne ceste</string>
     <string name="rendering_attr_hideText_name">Skrij besedilo</string>
     <string name="rendering_attr_hideWoodScrubs_name">Skrij gozdove in grmičevje</string>
     <string name="rendering_attr_buildings15zoom_name">Zgradbe v povečavi 15</string>
