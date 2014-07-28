@@ -31,12 +31,25 @@ public class WaypointDialogHelper {
 	public static boolean OVERLAP_LAYOUT = true;
 
 	public WaypointDialogHelper(OsmandApplication app) {
-		this.mapActivity = app.mapActivity;
 		this.app = app;
-		this.mainLayout = (FrameLayout) ((FrameLayout) mapActivity.getLayout()).getChildAt(0);
+		if (mapActivity != null){
+			this.mainLayout = (FrameLayout) ((FrameLayout) mapActivity.getLayout()).getChildAt(0);
+			this.mapActivity = app.mapActivity;
+		}
 	}
 
 	public void addDialogWithShift() {
+		//if map activity is null - try to get it from app again
+		if (mapActivity == null){
+			mapActivity = app.mapActivity;
+
+			if (mapActivity != null){
+				mainLayout = (FrameLayout) ((FrameLayout) mapActivity.getLayout()).getChildAt(0);
+			} else {
+				return;
+			}
+		}
+
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 		params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
 		final LayoutInflater vi = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
