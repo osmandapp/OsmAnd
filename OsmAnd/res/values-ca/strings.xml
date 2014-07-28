@@ -1915,4 +1915,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="lang_sr">Serbi</string>
 	<string name="lang_zh_CN">Xinès simplificat</string>
 	<string name="lang_zh_TW">Xinès tradicional</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Mode subsol</string>
+ 	</resources>

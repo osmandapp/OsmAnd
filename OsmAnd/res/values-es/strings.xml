@@ -1828,4 +1828,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="lang_sr">Serbio</string>
 	<string name="lang_zh_CN">Chino Simplificado</string>
 	<string name="lang_zh_TW">Chino Tradicional</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Modo subterráneo</string>
+ 	</resources>

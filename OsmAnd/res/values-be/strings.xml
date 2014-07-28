@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага масштабіраваньня</string>
     <string name="auto_zoom_close">Зачыніць</string>
     <string name="auto_zoom_far">Для сярэдняга масштаба</string>
@@ -1906,4 +1906,11 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="live_monitoring_stop">Спыніць адсочваньне праз Інтэрнэт</string>
 	<string name="live_monitoring_m">Адсочваньне праз Інтэрнэт (патрабуецца GPX)</string>
     <string name="live_monitoring_m_descr">Адсылаць месцазнаходжаньне на пазначаны вэб сэрвіс пры ўключаным запісе GPX.</string>
-	</resources>
+	<string name="lang_al">альбанская</string>
+	<string name="lang_ar">арабская</string>
+	<string name="lang_sr">сэрбская</string>
+	<string name="lang_zh_CN">кітайская спрошчаная</string>
+	<string name="lang_zh_TW">кітайская традыцыйная</string>
+	<string name="lang_sc">сардынская</string>
+	<string name="rendering_attr_subwayMode_name">Рэжым метро</string>
+ 	</resources>

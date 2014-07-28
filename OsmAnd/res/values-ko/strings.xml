@@ -2067,4 +2067,5 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="lang_sr">세르비아어</string>
 	<string name="lang_zh_CN">중국어 간체</string>
 	<string name="lang_zh_TW">중국어 번체</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">지하철 모드</string>
+ 	</resources>
