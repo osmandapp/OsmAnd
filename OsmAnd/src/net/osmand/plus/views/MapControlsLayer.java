@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.view.ViewParent;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -298,6 +299,43 @@ public class MapControlsLayer extends OsmandMapLayer {
 			transparencyBarLayout.setVisibility(View.GONE);
 			settingsToTransparency = null;
 		}
-	}	
+	}
 
+	public void shiftControl() {
+		boolean routePlanningMode = false;
+		RoutingHelper rh = mapActivity.getRoutingHelper();
+		if(rh.isRoutePlanningMode() ) {
+			routePlanningMode = true;
+		} else if((rh.isRouteCalculated() || rh.isRouteBeingCalculated()) &&
+				!rh.isFollowingMode()){
+			routePlanningMode = true;
+		}
+		FrameLayout parent = (FrameLayout) mapActivity.getMapView().getParent();
+
+		if (routePlanningMode){
+			//hiding controls
+			mapSmallMenuControls.forceHide(parent);
+			mapCancelNavigationControl.forceHide(parent);
+			mapInfoNavigationControl.forceHide(parent);
+			mapAppModeControl.forceHide(parent);
+			mapNavigationControl.forceHide(parent);
+			zoomSideControls.forceHide(parent);
+
+			//showing controls again
+			mapSmallMenuControls.show(parent);
+			mapCancelNavigationControl.show(parent);
+			mapInfoNavigationControl.show(parent);
+			mapAppModeControl.show(parent);
+			mapNavigationControl.show(parent);
+			zoomSideControls.show(parent);
+		} else {
+			//hiding controls
+			zoomControls.forceHide(parent);
+			mapMenuControls.forceHide(parent);
+
+			//showing controls again
+			zoomControls.show(parent);
+			mapMenuControls.show(parent);
+		}
+	}
 }

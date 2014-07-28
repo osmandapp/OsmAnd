@@ -1,6 +1,7 @@
 package net.osmand.plus.views.controls;
 
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.content.Context;
@@ -96,7 +97,13 @@ public abstract class MapControls {
 		} else {
 			params.topMargin = vmargin;
 		}
-		parent.addView(button, params);
+		//if there's dialog opened we need to shift elements top
+		View sherpafyDialog = parent.findViewById(R.id.package_delivered_layout);
+		if (sherpafyDialog != null && ((gravity & Gravity.BOTTOM) == Gravity.BOTTOM)){
+			params.bottomMargin = sherpafyDialog.getHeight();
+		}
+		button.setLayoutParams(params);
+		parent.addView(button);
 		button.setEnabled(true);
 		mapActivity.accessibleContent.add(button);
 	}
