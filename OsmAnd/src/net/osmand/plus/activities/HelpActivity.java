@@ -106,10 +106,10 @@ public class HelpActivity extends SherlockActivity {
 		createMenuItem(menu, HOME, R.string.home, 
 				R.drawable.ic_action_home_light, R.drawable.ic_action_home_dark,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM );
-		createMenuItem(menu, BACK, R.string.back, 
+		createMenuItem(menu, BACK, R.string.previous_button, 
 				0, 0, //R.drawable.ic_action_home_light, R.drawable.ic_action_home_dark,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM );
-		createMenuItem(menu, FORWARD, R.string.forward, 
+		createMenuItem(menu, FORWARD, R.string.next_button, 
 				0, 0, //R.drawable.ic_action_home_light, R.drawable.ic_action_home_dark,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM );
 		createMenuItem(menu, CLOSE, R.string.close, 
