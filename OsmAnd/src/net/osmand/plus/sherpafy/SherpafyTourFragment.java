@@ -126,6 +126,9 @@ public class SherpafyTourFragment extends SherlockListFragment {
 			}
 			sd.showDialog();
 			return true;
+		} else if(item.getItemId() == START) {
+			((TourViewActivity) getSherlockActivity()).startTour(tour);
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

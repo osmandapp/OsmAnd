@@ -53,7 +53,7 @@ public class SherpafyFavoriteFragment extends SherpafyStageInfoFragment {
 	
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		if (item.getItemId() == SHOW_ON_MAP) {
-			// TODO actions
+			((TourViewActivity) getSherlockActivity()).goToMap(fav.location);
 			return true;
 		} else  if (item.getItemId() == android.R.id.home) {
 			((TourViewActivity) getSherlockActivity()).showSelectedItem();

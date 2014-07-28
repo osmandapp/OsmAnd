@@ -554,6 +554,19 @@ public class GPXUtilities {
 			}
 			return tpoints;
 		}
+		
+		public WptPt getLastPoint() {
+			if (tracks.size() > 0) {
+				Track tk = tracks.get(tracks.size() - 1);
+				if (tk.segments.size() > 0) {
+					TrkSegment ts = tk.segments.get(tk.segments.size() - 1);
+					if (ts.points.size() > 0) {
+						return ts.points.get(ts.points.size() - 1);
+					}
+				}
+			}
+			return null;
+		}
 
 		public WptPt findPointToShow() {
 			for (Track t : tracks) {

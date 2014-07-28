@@ -2,38 +2,24 @@ package net.osmand.plus.sherpafy;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 
-import net.osmand.access.AccessibleAlertBuilder;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.sherpafy.TourInformation.StageFavoriteGroup;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.Html;
-import android.text.Html.ImageGetter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
@@ -100,6 +86,7 @@ public class SherpafyStageFragment extends SherlockFragment {
 			((TourViewActivity) getSherlockActivity()).selectMenu(tour);
 			return true;
 		} else if(item.getItemId() == START) {
+			((TourViewActivity) getSherlockActivity()).startStage(stage);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -155,88 +142,7 @@ public class SherpafyStageFragment extends SherlockFragment {
 	    	e.printStackTrace();
 	    }
 	}
-	
-/////////
-	private ImageGetter getImageGetter(final View v) {
-		return new Html.ImageGetter() {
-			@Override
-			public Drawable getDrawable(String s) {
-				Bitmap file = customization.getSelectedTour().getImageBitmapFromPath(s);
-				v.setTag(file);
-				Drawable bmp = new BitmapDrawable(getResources(), file);
-				// if image is thicker than screen - it may cause some problems, so we need to scale it
-				int imagewidth = bmp.getIntrinsicWidth();
-				// TODO
-//				if (displaySize.x - 1 > imagewidth) {
-//					bmp.setBounds(0, 0, bmp.getIntrinsicWidth(), bmp.getIntrinsicHeight());
-//				} else {
-//					double scale = (double) (displaySize.x - 1) / imagewidth;
-//					bmp.setBounds(0, 0, (int) (scale * bmp.getIntrinsicWidth()),
-//							(int) (scale * bmp.getIntrinsicHeight()));
-//				}
-				return bmp;
-			}
 
-		};
-	}
-	
-
-
-	private void addOnClickListener(final TextView tv) {
-		tv.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				if (v.getTag() instanceof Bitmap) {
-					final AccessibleAlertBuilder dlg = new AccessibleAlertBuilder(getActivity());
-					dlg.setPositiveButton(R.string.default_buttons_ok, null);
-					ScrollView sv = new ScrollView(getActivity());
-					ImageView img = new ImageView(getActivity());
-					img.setImageBitmap((Bitmap) tv.getTag());
-					sv.addView(img);
-					dlg.setView(sv);
-					dlg.show();
-				}
-			}
-		});
-	}
-
-	private void prepareBitmap(Bitmap imageBitmap) {
-		ImageView img = null;
-		if (imageBitmap != null) {
-			img.setImageBitmap(imageBitmap);
-			img.setAdjustViewBounds(true);
-			img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-			img.setCropToPadding(true);
-			img.setVisibility(View.VISIBLE);
-		} else {
-			img.setVisibility(View.GONE);
-		}
-	}
-
-	private void goToMap() {
-		if (customization.getSelectedStage() != null) {
-			GPXFile gpx = customization.getSelectedStage().getGpx();
-			List<SelectedGpxFile> sgpx = getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
-			if (gpx == null && sgpx.size() > 0) {
-				getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
-			} else if (sgpx.size() != 1 || sgpx.get(0).getGpxFile() != gpx) {
-				getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
-				if (gpx != null && gpx.findPointToShow() != null) {
-					WptPt p = gpx.findPointToShow();
-					getMyApplication().getSettings().setMapLocationToShow(p.lat, p.lon, 16, null);
-					getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(gpx);
-				}
-			}
-		}
-		Intent newIntent = new Intent(getActivity(), customization.getMapActivity());
-		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		this.startActivityForResult(newIntent, 0);
-	}
-	
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
-	}
 	
 	   /**
      * This is a helper class that implements the management of tabs and all
