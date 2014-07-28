@@ -3,6 +3,7 @@ package net.osmand.plus.views.controls;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.sherpafy.WaypointDialogHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -99,7 +100,7 @@ public abstract class MapControls {
 		}
 		//if there's dialog opened we need to shift elements top
 		View sherpafyDialog = parent.findViewById(R.id.package_delivered_layout);
-		if (sherpafyDialog != null && ((gravity & Gravity.BOTTOM) == Gravity.BOTTOM)){
+		if (sherpafyDialog != null && ((gravity & Gravity.BOTTOM) == Gravity.BOTTOM) && WaypointDialogHelper.OVERLAP_LAYOUT){
 			params.bottomMargin = sherpafyDialog.getHeight();
 		}
 		button.setLayoutParams(params);

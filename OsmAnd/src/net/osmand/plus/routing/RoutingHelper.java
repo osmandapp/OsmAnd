@@ -25,6 +25,7 @@ import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.sherpafy.WaypointDialogHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
@@ -328,6 +329,8 @@ public class RoutingHelper {
 				}
 				if(!Algorithms.isEmpty(s)) {
 					voiceRouter.announceWaypoint(s);
+					WaypointDialogHelper dialogHelper = new WaypointDialogHelper(app);
+					dialogHelper.addDialogWithShift();
 				}
 			}
 		}

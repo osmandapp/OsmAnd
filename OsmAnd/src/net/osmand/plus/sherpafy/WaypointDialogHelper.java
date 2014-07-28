@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.api.render.Paint;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.*;
@@ -27,10 +28,12 @@ public class WaypointDialogHelper {
 	private OsmandApplication app;
 	private FrameLayout mainLayout;
 
-	public WaypointDialogHelper(MapActivity activity, OsmandApplication app, FrameLayout layout) {
-		this.mapActivity = activity;
+	public static boolean OVERLAP_LAYOUT = true;
+
+	public WaypointDialogHelper(OsmandApplication app) {
+		this.mapActivity = app.mapActivity;
 		this.app = app;
-		this.mainLayout = (FrameLayout) layout.getChildAt(0);
+		this.mainLayout = (FrameLayout) ((FrameLayout) mapActivity.getLayout()).getChildAt(0);
 	}
 
 	public void addDialogWithShift() {
@@ -62,101 +65,39 @@ public class WaypointDialogHelper {
 
 				if (mainLayout != null) {
 					mainLayout.removeView(parent);
-					if (checkIfDialogExists()) {
-						shiftButtons(0, 120, 120);
+					if (checkIfDialogExists() && OVERLAP_LAYOUT) {
+						shiftButtons();
 					}
 				}
 			}
 		});
 
-		if (reachedView != null) {
-			mainLayout.addView(reachedView, 1, params);
+		if (reachedView != null && mainLayout != null) {
+			mainLayout.addView(reachedView, params);
 			waitBeforeLayoutIsResized(reachedView);
 		}
 	}
 
 	private boolean checkIfDialogExists() {
+		if (mainLayout == null){
+			return true;
+		}
+
 		if (mainLayout.findViewById(R.id.package_delivered_layout) != null) {
 			return false;
 		}
 		return true;
 	}
 
-	private void shiftButtons(int marginBottom, int marginRight, int marginLeft) {
-		if (mainLayout == null) {
+	private void shiftButtons() {
+		if (mainLayout == null || mapActivity == null) {
 			return;
 		}
 
 		MapControlsLayer mapControls = mapActivity.getMapLayers().getMapControlsLayer();
-		mapControls.shiftControl();
-
-//		FrameLayout.LayoutParams btnp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//		Button menu = (Button) mainLayout.findViewById(MapMenuControls.BACK_TO_MENU_BTN_ID);
-//		if (menu == null){
-//			menu = (Button) mainLayout.findViewById(SmallMapMenuControls.SMALL_MENU_CONTROL_ID);
-//		}
-//		if (menu != null) {
-//			btnp.setMargins(0, 0, 0, marginBottom);
-//			btnp.gravity = Gravity.BOTTOM;
-//			menu.setLayoutParams(btnp);
-//		}
-//
-//		Button navigate = (Button) mainLayout.findViewById(MapNavigateControl.NAVIGATE_BUTTON_ID);
-//		if (navigate != null) {
-//			btnp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//			btnp.gravity = Gravity.BOTTOM | Gravity.RIGHT;
-//			btnp.setMargins(0, 0, 0, marginBottom);
-//			//btnp.setMargins(0, 0, 120, marginBottom);
-//			navigate.setLayoutParams(btnp);
-//		}
-//
-//		Button stop = (Button) mainLayout.findViewById(MapCancelControl.CANCEL_BUTTON_ID);
-//		if (stop != null) {
-//			btnp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//			btnp.gravity = Gravity.BOTTOM;
-//			//TODO calculate left margin
-//			btnp.setMargins(139, 0, 0, marginBottom);
-//			stop.setLayoutParams(btnp);
-//		}
-//
-//		ImageButton routePref = (ImageButton) mainLayout.findViewById(MapRoutePreferencesControl.ROUTE_PREFERENCES_BTN_ID);
-//		if (routePref != null){
-//			btnp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//			btnp.gravity = Gravity.BOTTOM | Gravity.RIGHT;
-//			//TODO right left margin
-//			btnp.setMargins(0, 0, 120, marginBottom);
-//			routePref.setLayoutParams(btnp);
-//		}
-//
-//		Button routeInfo = (Button) mainLayout.findViewById(MapRouteInfoControl.ROUTE_INFO_BUTTON_ID);
-//		if (routeInfo != null) {
-//			btnp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//			btnp.gravity = Gravity.BOTTOM;
-//			//TODO calculate left margin
-//			btnp.setMargins(259, 0, 0, marginBottom);
-//			routeInfo.setLayoutParams(btnp);
-//		} else {
-//			//if navigation doesnt exists - we need to push zoom buttons top
-//			// otherwise they're placed at the right side
-//			//image resource to know layout size
-//			Button zoomIn = (Button) mainLayout.findViewById(MapZoomControls.ZOOM_IN_BTN_ID);
-//			Drawable d = mapActivity.getApplicationContext().getResources().getDrawable(R.drawable.map_zoom_in);
-//			if (zoomIn != null) {
-//				btnp = new FrameLayout.LayoutParams(d.getMinimumWidth(), d.getMinimumHeight());
-//				btnp.gravity = Gravity.BOTTOM | Gravity.RIGHT;
-//				btnp.setMargins(0, 0, marginRight, marginBottom);
-//				zoomIn.setLayoutParams(btnp);
-//			}
-//
-//			Button zoomOut = (Button) mainLayout.findViewById(MapZoomControls.ZOOM_OUT_BTN_ID);
-//			if (zoomOut != null) {
-//				d = mapActivity.getApplicationContext().getResources().getDrawable(R.drawable.map_zoom_out);
-//				btnp = new FrameLayout.LayoutParams(d.getMinimumWidth(), d.getMinimumHeight());
-//				btnp.gravity = Gravity.BOTTOM | Gravity.RIGHT;
-//				btnp.setMargins(0, 0, 0, marginBottom);
-//				zoomOut.setLayoutParams(btnp);
-//			}
-//		}
+		if (mapControls != null){
+			mapControls.shiftControl();
+		}
 	}
 
 
@@ -179,8 +120,8 @@ public class WaypointDialogHelper {
 			}
 
 			protected void onPostExecute(Void result) {
-				if (height > 0) {
-					shiftButtons(height, 120, 120);
+				if (height > 0 && OVERLAP_LAYOUT) {
+					shiftButtons();
 				}
 			}
 		}.execute(reachedView);
