@@ -1868,7 +1868,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="local_map_names">Nazwy lokalne</string>
     <string name="lang_sw">Suahili</string>
     <string name="lang_he">Hebrajski</string>
-    <string name="forward">Do przodu</string>
+    <string name="forward">Prosto</string>
     <string name="home">Dom</string>
     <string name="live_monitoring_m_descr">Wysyłaj aktualną pozycję do określonej usługi internetowej, jeśli nagrywanie GPX jest włączone.</string>
 	<string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>
