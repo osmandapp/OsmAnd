@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="continue_navigation">Continue Navigation</string>
+    <string name="pause_navigation">Pause Navigation</string>
 	<string name="keep_navigation_service">Keep</string>
 	<string name="stop_navigation_service">Stop</string>
 	<string name="enable_sleep_mode">Enable sleep mode</string>

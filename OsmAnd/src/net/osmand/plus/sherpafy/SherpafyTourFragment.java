@@ -26,6 +26,7 @@ import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 public class SherpafyTourFragment extends SherlockListFragment {
 	private static final int SHARE_ID = 6;
@@ -105,13 +106,19 @@ public class SherpafyTourFragment extends SherlockListFragment {
 		// MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		if (tour != null) {
 			boolean current = customization.getSelectedTour() == tour;
+			OnMenuItemClickListener oic = new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					return onOptionsItemSelected(item);
+				}
+			};
 			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, START, 
 					current ? R.string.continue_tour : R.string.start_tour , 
 					0, 0,
-					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT, oic);
 			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, SHARE_ID, R.string.share_fav,
 					R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
-					MenuItem.SHOW_AS_ACTION_IF_ROOM);
+					MenuItem.SHOW_AS_ACTION_IF_ROOM, oic);
 		}
 	}
 

@@ -9,7 +9,9 @@ public class FavouritePoint implements Serializable {
 	private double latitude;
 	private double longitude;
 	private int color;
+	private int extraParam = -1;
 	private boolean visible = true;
+	private boolean removeable = true;
 
 	public FavouritePoint(){
 	}
@@ -19,6 +21,22 @@ public class FavouritePoint implements Serializable {
 		this.longitude = longitude;
 		this.category = category;
 		this.name = name;
+	}
+	
+	public int getExtraParam() {
+		return extraParam;
+	}
+	
+	public void setExtraParam(int extraParam) {
+		this.extraParam = extraParam;
+	}
+	
+	public boolean isRemoveable() {
+		return removeable;
+	}
+	
+	public void setRemoveable(boolean removeable) {
+		this.removeable = removeable;
 	}
 	
 	public int getColor() {

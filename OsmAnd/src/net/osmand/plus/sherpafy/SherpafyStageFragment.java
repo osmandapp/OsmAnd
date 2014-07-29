@@ -25,6 +25,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 public class SherpafyStageFragment extends SherlockFragment {
 	public static final String STAGE_PARAM = "STAGE";
@@ -73,10 +74,14 @@ public class SherpafyStageFragment extends SherlockFragment {
 		// MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		if (tour != null) {
 			boolean current = customization.getSelectedStage() == stage;
-			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, START, 
-					current ? R.string.continue_stage : R.string.start_stage ,
-					0, 0,
-					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, START, current ? R.string.continue_stage
+					: R.string.start_stage, 0, 0, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT,
+					new OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							return onOptionsItemSelected(item);
+						}
+					});
 		}
 	}
 	

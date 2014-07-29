@@ -3,6 +3,7 @@ package net.osmand.plus.sherpafy;
 import java.util.List;
 import java.util.WeakHashMap;
 
+import net.osmand.IProgress;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -199,19 +200,15 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		super.onResume();
 	}
 
-	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType) {
+	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType,
+			final OnMenuItemClickListener listener) {
 		// int r = getMyApplication().getSettings().isLightActionBar() ? iconLight : iconDark;
 		int r = iconLight;
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
 		if (r != 0) {
 			menuItem.setIcon(r);
 		}
-		menuItem.setShowAsActionFlags(menuItemType).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-				return onOptionsItemSelected(item);
-			}
-		});
+		menuItem.setShowAsActionFlags(menuItemType).setOnMenuItemClickListener(listener);
 		return menuItem;
 	}
 
@@ -349,7 +346,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	
 	public void goToMap(LatLon location) {
 		if(location != null) {
-			getMyApplication().getSettings().setMapLocationToShow(location.getLatitude(), location.getLatitude(), 16, null);
+			getMyApplication().getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), 16, null);
 		}
 		Intent newIntent = new Intent(this, customization.getMapActivity());
 		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -366,7 +363,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 					runStage(stage.getTour(), stage, customization.getSelectedStage() != stage);
 				}
 			});
-			bld.setNegativeButton(R.string.default_buttons_yes, null);			
+			bld.setNegativeButton(R.string.default_buttons_no, null);		
+			bld.show();
 		} else {
 			runStage(stage.getTour(), stage, customization.getSelectedStage() != stage);
 		}
@@ -383,7 +381,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 					startTourImpl(tour);					
 				}
 			});
-			bld.setNegativeButton(R.string.default_buttons_yes, null);			
+			bld.setNegativeButton(R.string.default_buttons_no, null);			
+			bld.show();
 		} else {
 			startTourImpl(tour);
 		}
@@ -405,8 +404,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private void runStage(TourInformation tour, StageInformation stage, boolean startOver) {
 		WptPt point = null;
 		GPXFile gpx = null;
-		customization.selectTour(tour, null);
-		customization.selectStage(stage, null);
+		customization.selectTour(tour, IProgress.EMPTY_PROGRESS);
+		customization.selectStage(stage, IProgress.EMPTY_PROGRESS);
 		if (customization.getSelectedStage() != null) {
 			gpx = customization.getSelectedStage().getGpx();
 			List<SelectedGpxFile> sgpx = getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();

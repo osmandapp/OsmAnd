@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.TreeSet;
 
 import net.osmand.IProgress;
+import net.osmand.data.FavouritePoint;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -19,10 +20,15 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.api.FileSettingsAPIImpl;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.os.Bundle;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -39,6 +45,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private TourInformation selectedTour = null;
 	private File toursFolder;
 	private CommonPreference<String> accessCodePref;
+	private List<FavouritePoint> cachedFavorites = new ArrayList<FavouritePoint>();
 
 	@Override
 	public void setup(OsmandApplication app) {
@@ -149,7 +156,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 							e.printStackTrace();
 						}
 						if (selected) {
-							reloadSelectedTour(progress, tr, tourInformation, warns);
+							reloadSelectedTour(progress, tourInformation);
 						}
 					}
 				}
@@ -170,11 +177,11 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		return selectedTour;
 	}
 
-	private void reloadSelectedTour(IProgress progress, File tr, final TourInformation tourInformation, List<String> warns) {
+	private void reloadSelectedTour(IProgress progress, final TourInformation tourInformation) {
 		if(progress != null) {
-			progress.startTask(app.getString(R.string.indexing_tour, tr.getName()), -1);
+			progress.startTask(app.getString(R.string.indexing_tour, tourInformation.getName()), -1);
 		}
-		File settingsFile = new File(tr, "settings.props");
+		File settingsFile = new File(tourInformation.getFolder(), "settings.props");
 		FileSettingsAPIImpl fapi;
 		try {
 			fapi = new FileSettingsAPIImpl(app, settingsFile);
@@ -183,25 +190,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			}
 			app.getSettings().setSettingsAPI(fapi);
 		} catch (IOException e) {
-			warns.add(app.getString(R.string.settings_file_create_error));
 			app.showToastMessage(R.string.settings_file_create_error);
 		}
 		selectedStagePref = app.getSettings().registerStringPreference(SELECTED_STAGE, null).makeGlobal();
-		try {
-			tourInformation.loadFullInformation();
-		} catch (Exception e) {
-			warns.add("Selected tour : " + e.getMessage());
-		}
 		selectedTour = tourInformation;
-		if(selectedStagePref.get() != null) {
-			for(StageInformation s : selectedTour.getStageInformation()) {
-				if(s.getName().equals(selectedStagePref.get())) {
-					selectedStage = s;
-					loadSelectedStage();
-					break;
-				}
-			}
-		}
 	}
 	
 	public StageInformation getSelectedStage() {
@@ -221,6 +213,20 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	private void loadSelectedStage() {
 		final StageInformation st = selectedStage;
+		cachedFavorites = new ArrayList<FavouritePoint>();
+		for(Object o : st.favorites ) {
+			if(o instanceof StageFavorite) {
+				StageFavorite sf = (StageFavorite) o;
+				FavouritePoint fp = new FavouritePoint(sf.getLatLon().getLatitude(), sf.getLatLon().getLongitude(), 
+						sf.getName(), sf.getGroup() == null ? "" : sf.getGroup().name);
+				if(sf.getGroup() != null && sf.getGroup().getColor() != 0 ){
+					fp.setColor(sf.getGroup().getColor());
+				}
+				fp.setRemoveable(false);
+				fp.setExtraParam(sf.getOrder());
+				cachedFavorites.add(fp);
+			}
+		}
 		if(st != null && st.gpxFile != null) {
 			if(st.gpx == null) {
 				st.gpx = GPXUtilities.loadGPXFile(app, st.gpxFile);
@@ -235,13 +241,8 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		} else {
 			selectedTourPref.set(tour.getName());
 		}
-		selectedTour = null;
-		selectedStage = null;
-		// to avoid null reference ecxeption if there's no selected tour yet.
-		if (selectedStagePref != null) {
-			selectedStagePref.set(null);
-		}
-		app.getResourceManager().reloadIndexes(progress);
+		selectedTour = tour;
+		reloadSelectedTour(progress, tour);
 	}
 
 	@Override
@@ -254,8 +255,31 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		filter(adapter, R.string.context_menu_item_directions_to,
 				R.string.context_menu_item_destination_point, R.string.context_menu_item_search,
 				R.string.context_menu_item_share_location, R.string.context_menu_item_add_favorite);
+		MapActivityLayers layers = mapActivity.getMapLayers();
+		if(layers.getContextMenuLayer().getFirstSelectedObject() instanceof FavouritePoint) {
+			FavouritePoint fp = ((FavouritePoint)layers.getContextMenuLayer().getFirstSelectedObject());
+			if(fp.getExtraParam() >= 0 && selectedStage != null) {
+				StageFavorite sf = (StageFavorite) selectedStage.getFavorites().get(fp.getExtraParam());
+				showFavoriteDialog(mapActivity, selectedStage, sf);
+			}
+		}
 	}
 	
+	private void showFavoriteDialog(MapActivity mapActivity, StageInformation stage, StageFavorite sf) {
+		SherpafyFavoriteFragment fragment = new SherpafyFavoriteFragment();
+		Bundle bl = new Bundle();
+		bl.putInt(SherpafyFavoriteFragment.STAGE_PARAM, stage.getOrder());
+		bl.putString(SherpafyFavoriteFragment.TOUR_PARAM, stage.getTour().getId());
+		bl.putInt(SherpafyFavoriteFragment.FAV_PARAM, sf.getOrder());
+		fragment.setArguments(bl);
+		Builder bld = new AlertDialog.Builder(mapActivity);
+		bld.setTitle(sf.getName() + " TODO ");
+		bld.setPositiveButton(R.string.default_buttons_ok, null);
+		// TODO
+//		Builder bld = new AlertDialog.Builder(mapActivity);
+//		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+	}
+
 	@Override
 	public void prepareOptionsMenu(MapActivity mapActivity, ContextMenuAdapter adapter) {
 		
@@ -279,5 +303,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				a.removeItem(i);
 			}
 		}
+	}
+	
+	@Override
+	public List<FavouritePoint> getFavorites() {
+		return cachedFavorites;
 	}
 }
