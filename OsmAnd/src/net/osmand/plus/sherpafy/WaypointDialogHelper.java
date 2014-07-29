@@ -1,24 +1,18 @@
 package net.osmand.plus.sherpafy;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.SystemClock;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.*;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.api.render.Paint;
 import net.osmand.plus.views.MapControlsLayer;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controls.*;
 
 /**
  * Created by Denis on 25.07.2014.
@@ -38,7 +32,7 @@ public class WaypointDialogHelper {
 		}
 	}
 
-	public void addDialogWithShift() {
+	public void addDialogWithShift(GPXUtilities.WptPt point) {
 		//if map activity is null - try to get it from app again
 		if (mapActivity == null){
 			mapActivity = app.mapActivity;
@@ -55,39 +49,47 @@ public class WaypointDialogHelper {
 		final LayoutInflater vi = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View reachedView = vi.inflate(R.layout.waypoint_reached, null);
 
-		Button btnY = (Button) reachedView.findViewById(R.id.info_yes);
-		btnY.setOnClickListener(new View.OnClickListener() {
+		TextView text = (TextView) reachedView.findViewById(R.id.waypoint_text);
+		text.setText(point != null ? point.name : "Point");
+		text.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				//call your activity here
+				final Intent favorites = new Intent(mapActivity, app.getAppCustomization().getFavoritesActivity());
+				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				mapActivity.startActivity(favorites);
+				removeDialog(view);
 			}
 		});
 
-		Button btnN = (Button) reachedView.findViewById(R.id.info_no);
+		Button btnN = (Button) reachedView.findViewById(R.id.info_close);
 		btnN.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View child) {
-				if (child == null || child.getParent() == null) {
-					return;
-				}
-
-				View parent = (View) child.getParent().getParent().getParent();
-				if (parent == null) {
-					return;
-				}
-
-				if (mainLayout != null) {
-					mainLayout.removeView(parent);
-					if (checkIfDialogExists() && OVERLAP_LAYOUT) {
-						shiftButtons();
-					}
-				}
+			public void onClick(View view) {
+				removeDialog(view);
 			}
 		});
 
 		if (reachedView != null && mainLayout != null) {
 			mainLayout.addView(reachedView, params);
 			waitBeforeLayoutIsResized(reachedView);
+		}
+	}
+
+	public void removeDialog(View child){
+		if (child == null || child.getParent() == null) {
+			return;
+		}
+
+		View parent = (View) child.getParent();
+		if (parent == null) {
+			return;
+		}
+
+		if (mainLayout != null) {
+			mainLayout.removeView(parent);
+			if (checkIfDialogExists() && OVERLAP_LAYOUT) {
+				shiftButtons();
+			}
 		}
 	}
 

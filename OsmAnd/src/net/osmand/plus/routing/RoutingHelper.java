@@ -78,6 +78,8 @@ public class RoutingHelper {
 
 	private RouteCalculationProgressCallback progressRoute;
 
+	WaypointDialogHelper dialogHelper;
+
 //	private ProgressBar progress;
 //	private Handler progressHandler;
 
@@ -89,6 +91,7 @@ public class RoutingHelper {
 		this.app = context;
 		settings = context.getSettings();
 		voiceRouter = new VoiceRouter(this, settings, player);
+		dialogHelper = new WaypointDialogHelper(context);
 	}
 
 	public boolean isFollowingMode() {
@@ -329,8 +332,7 @@ public class RoutingHelper {
 				}
 				if(!Algorithms.isEmpty(s)) {
 					voiceRouter.announceWaypoint(s);
-					WaypointDialogHelper dialogHelper = new WaypointDialogHelper(app);
-					dialogHelper.addDialogWithShift();
+					dialogHelper.addDialogWithShift(wpt.get(0));
 				}
 			}
 		}
