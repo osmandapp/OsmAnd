@@ -1888,4 +1888,6 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="lang_zh_TW">Tradicionalna kitajščina</string>
 	<string name="lang_sc">Sardinščina</string>
 	<string name="rendering_attr_subwayMode_name">Način podzemne železnice</string>
- 	</resources>
+ 	<string name="continue_navigation">Nadaljuj navigacijo</string>
+    <string name="rendering_attr_alpineHiking_name">Planinski zamljevid</string>
+    </resources>
