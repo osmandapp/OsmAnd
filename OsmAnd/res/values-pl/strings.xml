@@ -683,7 +683,8 @@
   <string name="offline_navigation_not_available">Nawigacja offline w OsmAnd jest tymczasowo niedostępna.</string>
   <string name="left_side_navigation">Ruch lewostronny</string>
   <string name="left_side_navigation_descr">Wybierz dla krajów z ruchem lewostronnym</string>
-  <string name="download_link_and_local_description">Kliknij tutaj, aby pobrać lub zaktualizować pliki map w trybu offline. \nKliknij istniejący element, aby zobaczyć więcej szczegółów. Naciśnij i przytrzymaj, aby go wyłączyć lub usunąć. Obecne dane na urządzeniu (%1$s dostępne):</string>
+  <string name="download_link_and_local_description">Kliknij tutaj, aby pobrać lub zaktualizować pliki map trybu offline.
+\nKliknij istniejący element, aby zobaczyć więcej szczegółów. Naciśnij i przytrzymaj, aby go wyłączyć lub usunąć. Obecne dane na urządzeniu (%1$s dostępne):</string>
   <string name="unknown_from_location">Punkt początkowy nie jest jeszcze wyznaczony</string>
   <string name="confirm_interrupt_download">Czy chcesz przerwać pobieranie pliku?</string>
   <string name="basemap_was_selected_to_download">Mapa bazowa jest wymagana do prawidłowego funkcjonowania aplikacji i została wybrana do pobrania.</string>
@@ -1839,8 +1840,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="select_destination_and_intermediate_points">Wybierz punkty</string>
     <string name="layer_amenity_label">Etykiety punktów</string>
     <string name="visible_element">Pokaż na mapie</string>
-    <string name="show_zoom_buttons_navigation_descr">Pokazuj przyciski zbliżania podczas nawigacji</string>
-    <string name="show_zoom_buttons_navigation">Pokazuj przyciski zbliżania</string>
+    <string name="show_zoom_buttons_navigation_descr">Pokazuj przyciski skalowania podczas nawigacji</string>
+    <string name="show_zoom_buttons_navigation">Pokazuj przyciski skalowania</string>
     <string name="sort_by_distance">Sortuj według odległości</string>
     <string name="sort_by_name">Sortuj według nazwy</string>
     <string name="none_selected_gpx">Nie wybrano żadnych plików GPX. W celu wyboru naciśnij i przytrzymaj dostępną ścieżkę.</string>
@@ -1868,7 +1869,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="local_map_names">Nazwy lokalne</string>
     <string name="lang_sw">Suahili</string>
     <string name="lang_he">Hebrajski</string>
-    <string name="forward">Do przodu</string>
+    <string name="forward">Dalej</string>
     <string name="home">Dom</string>
     <string name="live_monitoring_m_descr">Wysyłaj aktualną pozycję do określonej usługi internetowej, jeśli nagrywanie GPX jest włączone.</string>
 	<string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>

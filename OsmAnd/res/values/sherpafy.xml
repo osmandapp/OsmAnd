@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="start_new_stage">Do you want to interrupt current stage and start new ?</string>
+    <string name="enter_access_code">Enter access code to see if you are entitled for a specific tour (optional)</string>
     <string name="sherpafy_stage_tab_fav">Fav</string>
     <string name="sherpafy_stage_tab_target">Target</string>
     <string name="sherpafy_stage_tab_route">Route</string>
@@ -18,7 +20,6 @@
     <string name="sherpafy_download_tours">Download Tours</string>
     <string name="sherpafy_tours">Sherpafy Tours</string>
     <string name="access_code_is_not_valid">Access code is not valid</string>
-    <string name="enter_access_code">Enter access code</string>
     <string name="overview">Overview</string>
     <string name="selecting_tour_progress">Selecting tour...</string>
     <string name="no_stages_provided">No stages provided</string>

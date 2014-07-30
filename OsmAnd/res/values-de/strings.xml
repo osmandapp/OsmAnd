@@ -1924,4 +1924,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="gpx_monitoring_stop">Stoppe GPX-Aufzeichnung</string>
     <string name="gpx_start_new_segment">Starte neues Segment</string>
     <string name="lang_sc">Sardinisch</string>
+	<string name="rendering_attr_subwayMode_name">U-Bahn-Modus</string>
+ 	<string name="gps_wake_up_timer">GPS Aufwach Intervall</string>
+	<string name="sleep_mode_stop_dialog">GPS aktiv lassen?</string>
 	</resources>

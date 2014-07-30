@@ -11,6 +11,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
@@ -33,6 +34,8 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	private List<FavouritePoint> cache = new ArrayList<FavouritePoint>();
 	private MapTextLayer textLayer;
 //	private Bitmap d;
+
+	private OsmAndAppCustomization customization;
 	
 	
 	
@@ -46,7 +49,7 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		
 		favorites = view.getApplication().getFavorites();
 		textLayer = view.getLayerByClass(MapTextLayer.class);
-		
+		customization = view.getApplication().getAppCustomization();
 //		favoriteIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_favourite);
 		
 	}
@@ -80,20 +83,30 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 			// request to load
 			final QuadRect latLonBounds = tileBox.getLatLonBounds();
 			for (FavouritePoint o : favorites.getFavouritePoints()) {
-				if (o.isVisible() && o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left
-						&& o.getLongitude() <= latLonBounds.right ) {
-					cache.add(o);
-					int x = (int) tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-					int y = (int) tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor());
-					fid.drawBitmapInCenter(canvas, x, y, tileBox.getDensity());
-//					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
-//							y - favoriteIcon.getHeight(), paint);
+				drawPoint(canvas, tileBox, latLonBounds, o);
+			}
+			List<FavouritePoint> customFavorites = customization.getFavorites();
+			if (customFavorites != null) {
+				for (FavouritePoint o : customFavorites) {
+					drawPoint(canvas, tileBox, latLonBounds, o);
 				}
 			}
 		}
 		if(textLayer.isVisible()) {
 			textLayer.putData(this, cache);
+		}
+	}
+
+	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, final QuadRect latLonBounds, FavouritePoint o) {
+		if (o.isVisible() && o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left
+				&& o.getLongitude() <= latLonBounds.right ) {
+			cache.add(o);
+			int x = (int) tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+			int y = (int) tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+			FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor());
+			fid.drawBitmapInCenter(canvas, x, y, tileBox.getDensity());
+//					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
+//							y - favoriteIcon.getHeight(), paint);
 		}
 	}
 	
@@ -108,12 +121,23 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		for (FavouritePoint n : favorites.getFavouritePoints()) {
-			if (n.isVisible()) { 
-				int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
-				int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
-				if (calculateBelongs(ex, ey, x, y, r)) {
-					res.add(n);
-				}
+			getFavFromPoint(tb, res, r, ex, ey, n);
+		}
+		List<FavouritePoint> customFavorites = customization.getFavorites();
+		if (customFavorites != null) {
+			for (FavouritePoint n : customFavorites) {
+				getFavFromPoint(tb, res, r, ex, ey, n);
+			}
+		}
+	}
+
+	private void getFavFromPoint(RotatedTileBox tb, List<? super FavouritePoint> res, int r, int ex, int ey,
+			FavouritePoint n) {
+		if (n.isVisible()) { 
+			int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
+			int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
+			if (calculateBelongs(ex, ey, x, y, r)) {
+				res.add(n);
 			}
 		}
 	}
@@ -190,9 +214,11 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 					}
 				}
 			};
-			
-			adapter.item(R.string.favourites_context_menu_delete).icons(R.drawable.ic_action_delete_dark, 
-					R.drawable.ic_action_delete_light).listen(listener).reg();
+			if (a.isRemoveable()) {
+				adapter.item(R.string.favourites_context_menu_delete)
+						.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light).listen(listener)
+						.reg();
+			}
 		}
 	}
 

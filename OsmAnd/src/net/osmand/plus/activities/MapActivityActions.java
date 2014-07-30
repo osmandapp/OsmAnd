@@ -805,6 +805,25 @@ public class MapActivityActions implements DialogProvider {
 							enterRoutePlanningMode(null, null);
 						}
 				}).reg();
+		} else if(routingHelper.isRouteCalculated()) {
+			optionsMenuHelper.item(
+					routingHelper.isRoutePlanningMode() ? R.string.continue_navigation :
+					R.string.pause_navigation)
+			.icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light)
+			.listen(new OnContextMenuClick() {
+				@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						if(routingHelper.isRoutePlanningMode()) {
+							routingHelper.setRoutePlanningMode(false);
+							routingHelper.setFollowingMode(true);
+						} else {
+							routingHelper.setRoutePlanningMode(true);
+							routingHelper.setFollowingMode(false);
+						}
+						mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+						mapActivity.refreshMap();
+					}
+			}).reg();
 		}
 		if (getTargets().getPointToNavigate() != null) {
 			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_light)

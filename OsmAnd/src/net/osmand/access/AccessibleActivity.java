@@ -3,6 +3,8 @@ package net.osmand.access;
 import android.app.Activity;
 import android.view.MotionEvent;
 
+import com.actionbarsherlock.app.SherlockActivity;
+
 // Provide some additional accessibility means for activity view elements.
 //
 // To make use of these capabilities simply derive your activity from this class

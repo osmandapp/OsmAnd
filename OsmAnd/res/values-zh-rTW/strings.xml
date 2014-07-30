@@ -220,7 +220,7 @@
 	<string name="offline_navigation_not_available">OsmAnd 離線導航，暫時不能使用。</string>
 	<string name="left_side_navigation">左駕</string>
 	<string name="left_side_navigation_descr">選擇左駕的國家</string>
-	<string name="download_link_and_local_description">點選此處下載或更新離線地圖檔案。\n按任何一項查看細節，按住即可解除或刪除。目前裝置上的資料空間剩(%1$s 可用)：</string>
+	<string name="download_link_and_local_description">點選此處可下載或更新離線地圖檔案。\n點選現存的任何項目可查看細節，按住即可停用或刪除。目前裝置上資料的可用空間尚有 (%1$s)：</string>
 	<string name="unknown_from_location">起始標點尚未決定</string>
 	<string name="unknown_location">未知地理位置</string>
 	<string name="modify_transparency">調整透明度(0 - 透明, 255 - 不透明)</string>
@@ -298,21 +298,21 @@
 	<string name="north_north_west">北北西</string>
 	<string name="front">前方</string>
 	<string name="front_right">右前方</string>
-	<string name="right">右邊</string>
+	<string name="right">右方</string>
 	<string name="back_right">右後方</string>
 	<string name="back">往後</string>
 	<string name="back_left">左後方</string>
-	<string name="left">左邊</string>
+	<string name="left">左方</string>
 	<string name="front_left">左前方</string>
-	<string name="oclock">點</string>
-	<string name="towards">接近</string>
+	<string name="oclock">點鐘</string>
+	<string name="towards">將近</string>
 	<string name="accuracy">精確性</string>
 	<string name="altitude">高度</string>
-	<string name="no_info">無資訊</string>
-	<string name="direction_style_sidewise">方向方位 (8個方位)</string>
-	<string name="direction_style_clockwise">時鐘方位(12個方位)</string>
+	<string name="no_info">沒有數據</string>
+	<string name="direction_style_sidewise">橫向 (8 個扇區)</string>
+	<string name="direction_style_clockwise">順時鐘 (12 個扇區)</string>
 	<string name="settings_direction_style">方向樣式</string>
-	<string name="settings_direction_style_descr">選擇在行進中相對方向的表示樣式</string>
+	<string name="settings_direction_style_descr">在行進當中，以選擇的樣式來表示相對的方向</string>
 	<string name="auto_announce_on">啟動自動告知</string>
 	<string name="auto_announce_off">關閉自動告知</string>
 	<string name="scroll_map_by_gestures_descr">在觸控螢幕上用手勢移動地圖</string>
@@ -324,7 +324,7 @@
 	<string name="use_short_object_names">使用物件名稱</string>
 	<string name="accessibility_preferences_descr">協助工具的相關偏好設定</string>
 	<string name="accessibility_preferences">協助工具</string>
-	<string name="rendering_out_of_memory">沒有足夠的處理記憶體去顯示已選取的區域</string>
+	<string name="rendering_out_of_memory">處理記憶體不足，無法顯示已選取的區域</string>
 	<string name="use_fluorescent_overlays">螢光覆疊層</string>
 	<string name="use_fluorescent_overlays_descr">使用螢光色彩來顯示軌跡與導航路線</string>
 	<string name="offline_edition">離線編輯</string>
@@ -1721,7 +1721,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="always_center_position_on_map">位置顯示始終處於中心</string>
     <string name="voice_pref_title">聲音</string>
     <string name="localization_pref_title">定位</string>
-    <string name="interrupt_music_descr">當制作通告時中斷音樂</string>
+    <string name="interrupt_music_descr">當制作預告時中斷音樂</string>
 	<string name="interrupt_music">中斷音樂</string>
 	<string name="misc_pref_title">雜項</string>
     <string name="share_route_as_gpx">以 GPX 檔案分享路線</string>
@@ -1735,8 +1735,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="keep_informing_never">永不</string>
     <string name="keep_informing_descr">按照定期間隔重新通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
-	<string name="arrival_distance">抵達通告</string>
-    <string name="arrival_distance_descr">您希望抵達通告要有多快？</string>
+	<string name="arrival_distance">到達預告</string>
+    <string name="arrival_distance_descr">您希望到達預告要有多快告知？</string>
     <string name="osmo_io_error">OsMo 連線問題： </string>
     <string name="osmo_mode_on">停止 OsMo 連線階段</string>    
     <string name="osmo_mode_off">啟動 OsMo 連線階段</string>
@@ -1748,8 +1748,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_auto_send_locations_descr">自動開始追蹤連線階段和發送位置之後啟動應用程式</string>
     <string name="osmo_auto_send_locations">自動開始追蹤連線階段</string>
     <string name="osmo_tracker_id">個人追蹤 ID</string>
-    <string name="osmo_tracker_id_descr">點擊查看或分享追蹤 ID。
-         使用追蹤 ID 連線的裝置將能夠監視該裝置的所有動作！ 要斷開選擇恢復選項。</string>
+    <string name="osmo_tracker_id_descr">點擊查看或分享追蹤 ID。          使用追蹤 ID 連線的裝置將能夠監控該裝置的所有動作！ 要斷開選擇恢復選項。</string>
     <string name="osmo_session_token">連線階段標記：%1$s</string>
     <string name="osmo_auth_pending">等候授權...</string>
     <string name="osmo_locations_sent">發送位置 %1$d（在緩衝區 %2$d） </string>
@@ -1788,7 +1787,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_connect">連接到</string>
     <string name="osmo_create_group">建立群組</string>
     <string name="osmo_server_operation_failed">OsMo 伺服器操作失敗</string>
-    <string name="osmo_activity">OpenStreetMap-監視</string>
+    <string name="osmo_activity">OpenStreetMap-監控中</string>
     <string name="osmo_enable_tracker">傳送我的位置</string>
     <string name="osmo_control">OsMo 快速進入</string>
     <string name="local_index_mi_export">匯出</string>

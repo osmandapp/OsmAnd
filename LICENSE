@@ -1,16 +1,16 @@
-    
-    OsmAnd - OSM Automated Navigation Directions - navigation software based on OSM maps.
-    Copyright (C) 2010-2014  OsmAnd ( Amstelveen, Netherlands - KvK 55730183).
-  
-    The code in that repository is mainly covered by *GPLv3*, except some 3rd party libs and resources.
-    ATTENTION : please be aware that some art work has proprietary license.
 
-    Main AUTHORS (more detailed list in AUTHORS): 
-        Victor Shcherb - all parts of the project, originator
-        Alexey Pelykh - rendering and core parts
-        Hardy Mueller - main parts of the project, mostly rendering, UI interaction design
-        Pavol Zibrita - first contributor and developer of some utilities
-        
+    OsmAnd – OSM Automated Navigation Directions – navigation software based on OpenStreetMap.
+    Copyright © 2010–2014 OsmAnd (Amstelveen, Netherlands - KvK 55730183).
+
+    The code in that repository is mainly covered by *GPLv3*, except some 3rd party libs and resources.
+    ATTENTION: please be aware that some artwork has proprietary license.
+
+    Main AUTHORS (more detailed list in AUTHORS):
+        Victor Shcherb – all parts of the project, originator
+        Alexey Pelykh – rendering and core parts
+        Hardy Mueller – main parts of the project, mostly rendering, UI interaction design
+        Pavol Zibrita – first contributor and developer of some utilities
+
     -------------------------- GPLv3 ----------------------------------
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
@@ -27,7 +27,7 @@
     -------------------------------------------------------------------
 
 
-    * Source code in main repositories is covered by GPLv3 (license exceptions below) :
+    * Source code in main repositories is covered by GPLv3 (license exceptions below):
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java
         - https://github.com/osmandapp/Osmand-core/tree/legacy_core
@@ -38,22 +38,22 @@
     * UI Design and UX work, such as layout, icons is covered by CC-BY-ND
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd/res and others
 
-    * Map icons and their derived primities are covered by proprietary license :
-        - (C) icons8.com (https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg/icons8)
+    * Map icons and their derived primities are covered by proprietary license:
+        - © icons8.com (https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg/icons8)
 
-    * Generated voice files from TTS files are covered by proprietary license :
+    * Generated voice files from TTS files are covered by proprietary license:
         - Voice files (https://github.com/osmandapp/OsmAnd-resources/tree/master/voice)
-        
+
     * Fonts (https://github.com/osmandapp/OsmAnd-resources/tree/master/rendering_styles/fonts)
         - Google Fonts (Apache License 2)
-    
-    * Map icons (Mapnik) :
-        - Open-SVG-Map-Icons - Public Domain 
 
-    * Non patched source libraries : 
+    * Map icons (Mapnik):
+        - Open-SVG-Map-Icons - Public Domain
+
+    * Non patched source libraries:
         - SherlockBar - Apache Lisense - https://github.com/osmandapp/Osmand/tree/master/SherlockBar (https://github.com/JakeWharton/ActionBarSherlock/blob/master/LICENSE.txt)
 
-    * Patched libraries : 
+    * Patched libraries:
         - Protobuf - New BSD License (patches - https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java/protobuf-src, https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/protobuf)
         - Expat - (https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/expat)
         - Freetype - (https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/freetype)
@@ -63,31 +63,30 @@
         - Skia - (https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/skia)
         - ZLib - (https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/zlib)
 
-    * 3rd party libraries present in the libs folder (https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java/libs):                
-        - bzip2-20090327.jar  Bzip2 - Apache License 
+    * 3rd party libraries present in the libs folder (https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java/libs):
+        - bzip2-20090327.jar Bzip2 - Apache License
         - bsh-core-2.0b4.jar Bean Shell - SPL and LGPL (http://www.beanshell.org/license.html)
-        - commons-logging-1.1.1.jar - Apache License 
-        - gnu-trove-osmand.jar GNU trove -  LGPL 
-        - icu4j-49_1.jar - ICU license ( http://source.icu-project.org/repos/icu/icu/trunk/license.html)
+        - commons-logging-1.1.1.jar - Apache License
+        - gnu-trove-osmand.jar GNU trove - LGPL
+        - icu4j-49_1.jar - ICU license (http://source.icu-project.org/repos/icu/icu/trunk/license.html)
         - json-20090211.jar - BSD alike (http://www.json.org/license.html)
-        - junidecode-0.1.jar -  BSD-4-Clause-UC  (http://sourceforge.net/projects/junidecode/)
-        - kxml2-2.3.0.jar - BSD license ( http://www.kxml.org/)
+        - junidecode-0.1.jar - BSD-4-Clause-UC (http://sourceforge.net/projects/junidecode/)
+        - kxml2-2.3.0.jar - BSD license (http://www.kxml.org/)
         - tuprolog.jar - LGPL (http://apice.unibo.it/xwiki/bin/view/Tuprolog/)
-    
-        
-    * Pull-requests and translations :
-        - All pull requests are accepted under MIT License (most honorable contributors are mentioned in AUTHORS list )
+
+    * Pull-requests and translations:
+        - All pull requests are accepted under MIT License (most honorable contributors are mentioned in AUTHORS list)
 
     * Libraries not used in final product (https://github.com/osmandapp/OsmAnd-tools/tree/master/OsmAndMapCreator/libi)
         - Ant libraries - (tools) https://github.com/osmandapp/Osmand/tree/master/OsmAnd/ant-lib
-        - jleveldb-v01.jar 
+        - jleveldb-v01.jar
         - jsch-20120101.jar
         - junit-4.10.jar
         - mysql-connector-java-5.1.18-bin.jar
         - sqlite-jdbc-3.7.6.3-20110609.081603-3.jar
         - h2-latest.jar
 
-    * Special tools for new rendering (GPLv3) - (C) Alexey Pelykh 
+    * Special tools for new rendering (GPLv3) - © Alexey Pelykh
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/obf-inspector
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/obf-verifier
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/route-tester
@@ -96,7 +95,7 @@
         - Extracts - https://github.com/osmandapp/OsmAnd-misc/blob/master/osm-planet/osm-data/
 
     * Data files
-        - Country boundaries - https://github.com/osmandapp/OsmAnd-misc/tree/master/osm-planet/geo-polygons (C) by Geofabrik - data free to use
-        - Country boundaries https://github.com/osmandapp/OsmAnd-misc/tree/master/osm-planet/gislab-polygons (C) by http://be.gis-lab.info - data free to use
+        - Country boundaries - https://github.com/osmandapp/OsmAnd-misc/tree/master/osm-planet/geo-polygons © by Geofabrik - data free to use
+        - Country boundaries https://github.com/osmandapp/OsmAnd-misc/tree/master/osm-planet/gislab-polygons © by http://be.gis-lab.info - data free to use
 
- 
+
