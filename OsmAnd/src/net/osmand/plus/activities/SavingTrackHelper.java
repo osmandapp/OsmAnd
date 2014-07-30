@@ -319,7 +319,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				OsmAndLocationProvider.isNotSimulatedLocation(location) &&
 				OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 			if (settings.SAVE_TRACK_TO_GPX.get() && 
-					locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
+					locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() &&
+					ctx.getRoutingHelper().isFollowingMode()) {
 				record = true;
 			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() && 
 					locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
