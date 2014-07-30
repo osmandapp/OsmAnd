@@ -1942,4 +1942,11 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="lang_sr">Srbsky</string>
 	<string name="lang_zh_CN">Zjednodušená čínština</string>
 	<string name="lang_zh_TW">Tradičná čínština</string>
+	<string name="continue_navigation">Pokračovať v navigácii</string>
+    <string name="pause_navigation">Pozastaviť navigáciu</string>
+	<string name="rendering_attr_alpineHiking_name">Alpinistické zobrazenie</string>
+    <string name="rendering_attr_alpineHiking_description">Kresliť chodníky podľa stupnice SAC</string>
+    <string name="rendering_attr_osmcTraces_name">Zobraziť turistické značky</string>
+    <string name="rendering_attr_osmcTraces_description">Kresliť chodníky podľa značenia OSMC</string>
+    
 	</resources>
