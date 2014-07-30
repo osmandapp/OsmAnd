@@ -610,6 +610,10 @@
     <string name="download_srtm_maps">Contour lines</string>
     <string name="download_regular_maps">Regular maps</string>
     <string name="download_roads_only_maps">Roads-only maps</string>
+    <string name="rendering_attr_alpineHiking_name">Alpine hiking view</string>
+    <string name="rendering_attr_alpineHiking_description">Render paths according to SAC scale</string>
+    <string name="rendering_attr_osmcTraces_name">Hiking symbol overlay</string>
+    <string name="rendering_attr_osmcTraces_description">Render paths according to OSMC traces</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Hide boundaries</string>
 	<string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5-9)</string>
