@@ -1920,4 +1920,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="lang_zh_CN">簡體中文</string>
 	<string name="lang_zh_TW">正體中文</string>
 	<string name="rendering_attr_subwayMode_name">地鐵模式</string>
- 	</resources>
+ 	<string name="continue_navigation">繼續導航</string>
+    <string name="pause_navigation">暫停導航</string>
+	</resources>
