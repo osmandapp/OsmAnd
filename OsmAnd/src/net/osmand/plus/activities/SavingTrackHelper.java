@@ -129,7 +129,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		return res;
 	}
 		
-	public boolean hasDataToSave() {
+	public synchronized boolean hasDataToSave() {
 		try {
 			SQLiteDatabase db = getWritableDatabase();
 			if (db != null) {
@@ -160,7 +160,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	/**
 	 * @return warnings
 	 */
-	public List<String> saveDataToGpx() {
+	public synchronized List<String> saveDataToGpx() {
 		List<String> warnings = new ArrayList<String>();
 		File dir = ctx.getAppPath(IndexConstants.GPX_RECORDED_INDEX_DIR);
 		dir.mkdirs();
@@ -376,7 +376,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		execWithClose(updatePointsScript, new Object[] { lat, lon, time, description });
 	}
 	
-	private void execWithClose(String script, Object[] objects) {
+	private synchronized void execWithClose(String script, Object[] objects) {
 		SQLiteDatabase db = getWritableDatabase();
 		try {
 			if (db != null) {
