@@ -18,7 +18,7 @@
 
 
 	<target name="copy_resources">
-		<copy todir="assets">
+	<copy todir="assets">
 			<fileset dir="../../resources/" >
 				<include name="specialphrases/**"/>
 				<include name="voice/**/*.p"/>
@@ -34,10 +34,15 @@
 				<include name="*.xml"/>
 			</fileset>
 		</copy>
-		<copy todir="assets/help/">
+		<sync todir="assets/help/">
 			<fileset dir="../../help/" >
 				<include name="*.html"/>
 				<include name="images/**/*.png"/>
+			</fileset>
+		</sync>
+		<copy todir="assets/help">
+		    <fileset dir="assets/" >
+				<include name="style.css"/>
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/render/">
