@@ -394,7 +394,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			updateAllSettings();
 		} else if (id.equals(settings.PREFERRED_LOCALE.getId())) {
 			// restart application to update locale
-			getMyApplication().checkPrefferedLocale();
+			getMyApplication().checkPreferredLocale();
 			Intent intent = getIntent();
 			finish();
 			startActivity(intent);
