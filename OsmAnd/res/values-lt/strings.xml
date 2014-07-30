@@ -1792,4 +1792,6 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="lang_sc">Sardinų</string>
 	<string name="lang_zh_CN">Supaprastinta kinų</string>
 	<string name="rendering_attr_subwayMode_name">Metro režimas</string>
- 	</resources>
+ 	<string name="continue_navigation">Tęsti navigaciją</string>
+    <string name="pause_navigation">Pristabdyti navigaciją</string>
+	</resources>
