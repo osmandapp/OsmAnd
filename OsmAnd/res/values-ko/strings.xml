@@ -2063,4 +2063,11 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="lang_zh_CN">중국어 간체</string>
 	<string name="lang_zh_TW">중국어 번체</string>
 	<string name="rendering_attr_subwayMode_name">지하철 모드</string>
- 	</resources>
+ 	<string name="continue_navigation">길안내 계속</string>
+    <string name="pause_navigation">길안내 일시중지</string>
+	<string name="rendering_attr_alpineHiking_name">알파인 하이킹 보기</string>
+    <string name="rendering_attr_alpineHiking_description">SAC scale에 따라 경로 렌더링</string>
+    <string name="rendering_attr_osmcTraces_name">하이킹 심볼 오버레이</string>
+    <string name="rendering_attr_osmcTraces_description">OSMC 흔적에 따라 경로 렌더링</string>
+    
+	</resources>
