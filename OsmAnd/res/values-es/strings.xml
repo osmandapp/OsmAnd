@@ -1831,4 +1831,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="rendering_attr_subwayMode_name">Modo subterráneo</string>
  	<string name="continue_navigation">Continuar Navegación</string>
     <string name="pause_navigation">Pausar Navegación</string>
+	<string name="rendering_attr_alpineHiking_name">Vista senderismo Alpino</string>
+    <string name="rendering_attr_alpineHiking_description">Interpretar caminos de acuerdo a la escala SAC</string>
+    <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
+    <string name="rendering_attr_osmcTraces_description">Interpretar caminos de acuerdo a las trazas de OSMC</string>
+    
 	</resources>
