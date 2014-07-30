@@ -1967,4 +1967,26 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="keep_informing_descr">定期的にナビゲーション指示を繰り返す</string>
     <string name="arrival_distance">目的地周辺のお知らせ</string>
     <string name="arrival_distance_descr">どの程度の距離で目的地周辺のアナウンスを希望するか？</string>
-    </resources>
+    <string name="osmo_plugin_description">"OpenStreetMapは、http://osmo.mobiを参照し高度なリアルタイム監視をします。他のデバイスを相互に追跡します。匿名のグループを作成し、互いの場所を共有しコミュニケーションもできます。セッション追跡または恒久的な追跡用設定ができます。匿名のグループは数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全に機能するグループはウェブサイト上で作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
+    <string name="osmo_plugin_name">OsMo(高度なリアルタイム監視)</string>
+   	<string name="always_center_position_on_map">位置を常に中央表示</string>
+    <string name="voice_pref_title">音声</string>
+    <string name="misc_pref_title">その他備考</string>
+    <string name="localization_pref_title">ローカライズ</string>
+    <string name="index_item_nation_addresses">全国の住所</string>
+	<string name="index_item_world_altitude_correction">世界基準による標高補正</string>
+	<string name="index_item_world_seamarks">全世界の満潮水位線</string>
+	<string name="index_item_world_bitcoin_payments">全世界ビットコインでの支払い</string>
+	<string name="index_item_world_basemap">世界の概観マップ</string>
+    <string name="index_item_world_ski">世界スキーマップ</string>
+    <string name="lang_zh">中国語</string>
+    <string name="lang_pt_br">ポルトガル語(ブラジル)</string>
+    <string name="lang_en">英語</string>
+	<string name="lang_af">アフリカーンス語</string>
+	<string name="lang_al">アルバニア語</string>
+	<string name="lang_ar">アラビア語</string>
+	<string name="lang_hy">アルメニア語</string>
+	<string name="lang_eu">バスク語</string>
+	<string name="lang_be">ベラルーシ語</string>
+	<string name="lang_bs">ボスニア語</string>
+	</resources>
