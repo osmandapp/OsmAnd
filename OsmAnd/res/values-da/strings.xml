@@ -1940,4 +1940,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="lang_zh_TW">Kinesisk, traditionelt</string>
 	<string name="lang_sc">Sardisk</string>
 	<string name="rendering_attr_subwayMode_name">Metrotilstand</string>
- 	</resources>
+ 	<string name="continue_navigation">Fortsæt navigationen</string>
+    <string name="pause_navigation">Pause navigationen</string>
+	</resources>
