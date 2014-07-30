@@ -1943,7 +1943,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
  	<string name="continue_navigation">Fortsæt navigationen</string>
     <string name="pause_navigation">Pause navigationen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpin vandringsvisning</string>
-    <string name="rendering_attr_alpineHiking_description">Gener stier efter SAC skala</string>
+    <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC skala</string>
     <string name="rendering_attr_osmcTraces_name">Vandretur symbol overlejring</string>
     <string name="rendering_attr_osmcTraces_description">Generer stier efter OSMC spor</string>
     
