@@ -1151,6 +1151,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				icon.setVisibility(View.INVISIBLE);
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 				label.setText(model.getVisibleName());
+				labelTime.setText("");
 			} else if (location == null || mapLocation == null) {
 				label.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				icon.setVisibility(View.VISIBLE);
@@ -1163,6 +1164,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				draw.setColor(model.isEnabled() ? activeColor : color);
 				icon.setImageDrawable(draw);
 				label.setText(model.getVisibleName());
+				labelTime.setText("");
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				icon.setVisibility(View.VISIBLE);
