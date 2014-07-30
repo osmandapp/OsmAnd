@@ -1764,7 +1764,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="rendering_attr_showAccess_name">Rodyti prieigos tipą</string>
     <string name="rendering_attr_showSurfaceGrade_name">Rodyti kelių kokybę</string>
     <string name="rendering_attr_showSurfaces_name">Rodyti kelių paviršiaus tipą</string>
-    <string name="rendering_attr_showCycleRoutes_name">Rodyti dviračiu maršrutus</string>
+    <string name="rendering_attr_showCycleRoutes_name">Rodyti dviračių maršrutus</string>
     <string name="keep_navigation_service">Išlaikyti</string>
 	<string name="stop_navigation_service">Stabdyti</string>
 	<string name="enable_sleep_mode">Įjungti miego režimą</string>
@@ -1777,7 +1777,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="lang_he">Hebrajų</string>
     <string name="forward">Pirmyn</string>
     <string name="home">Namo</string>
-    <string name="live_monitoring_m_descr">Siųsti stebėjomo duomenis į pasirinktą tarnybą kai įjungtas GPX išsaugojimas.</string>
+    <string name="live_monitoring_m_descr">Siųsti stebėjimo duomenis į pasirinktą tarnybą, kai įjungtas GPX išsaugojimas.</string>
 	<string name="live_monitoring_m">Sekimas internete (reikalingas GPX)</string>
     <string name="live_monitoring_start">Pradėti sekimą internete</string>
 	<string name="live_monitoring_stop">Stabdyti sekimą internete</string>
