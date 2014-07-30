@@ -1677,4 +1677,5 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_showAccess_name">Zobrazit typ přístupu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cest</string>
     <string name="osmo_group_by_invite">Vstoupit na pozvánku</string>
-    </resources>
+    <string name="rendering_attr_subwayMode_name">Metro režim</string>
+ 	</resources>
