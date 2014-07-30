@@ -22,8 +22,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -65,20 +63,14 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		
 		com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, ACTION_DOWNLOAD, 0, R.string.sherpafy_download_tours).setShowAsActionFlags(
 				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-//		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 //		boolean light = true; //app.getSettings().isLightActionBar();
 		//menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-				if (custom.getAccessCode().length() == 0) {
-					openAccessCode(true);
-				} else {
-					startDownloadActivity();
-				}
+				openAccessCode();
 				return true;
 			}
 		});
@@ -95,7 +87,7 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 //		});
 	}
 	
-	protected void openAccessCode(final boolean startDownload) {
+	protected void openAccessCode() {
 		Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.enter_access_code);
 		final EditText editText = new EditText(getActivity());
@@ -113,53 +105,10 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 					Toast.makeText(getActivity(), R.string.access_code_is_not_valid, Toast.LENGTH_LONG).show();
 					return;
 				}
-				if (startDownload) {
-					startDownloadActivity();
-				}
+				((TourViewActivity) getActivity()).startDownloadActivity();
 			}
 		});
 		builder.create().show();
-	}
-	
-	private void startDownloadActivity() {
-		final Intent download = new Intent(getActivity(), DownloadIndexActivity.class);
-		download.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		startActivity(download);
-	}
-	
-	private void selectTourAsync(final TourInformation tour) {
-		new AsyncTask<TourInformation, Void, Void>() {
-			private ProgressDialog dlg;
-
-			protected void onPreExecute() {
-				dlg = new ProgressDialog(getActivity());
-				dlg.setTitle(R.string.selecting_tour_progress);
-				dlg.setMessage(getString(R.string.indexing_tour, tour == null ? "" : tour.getName()));
-				dlg.show();
-			};
-
-			@Override
-			protected Void doInBackground(TourInformation... params) {
-				// if tour is already selected - do nothing
-				if (custom.getSelectedTour() != null) {
-					if (custom.getSelectedTour().equals(params[0])) {
-						return null;
-					}
-				}
-				custom.selectTour(params[0], IProgress.EMPTY_PROGRESS);
-				return null;
-			}
-
-			protected void onPostExecute(Void result) {
-				// to avoid illegal argument exception when rotating phone during loading
-				try {
-					dlg.dismiss();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-				//startTourView();
-			};
-		}.execute(tour);
 	}
 	
 	class TourAdapter extends ArrayAdapter<TourInformation> {

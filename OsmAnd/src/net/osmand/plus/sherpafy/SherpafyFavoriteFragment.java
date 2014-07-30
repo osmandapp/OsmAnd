@@ -3,6 +3,7 @@ package net.osmand.plus.sherpafy;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 import net.osmand.plus.R;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
@@ -47,13 +48,19 @@ public class SherpafyFavoriteFragment extends SherpafyStageInfoFragment {
 		((TourViewActivity) getSherlockActivity()).createMenuItem(menu, SHOW_ON_MAP, 
 				R.string.show_poi_on_map , 
 				R.drawable.ic_action_map_marker_light, R.drawable.ic_action_map_marker_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT, new OnMenuItemClickListener() {
+					
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						return onOptionsItemSelected(item);
+					}
+				});
 	}
 	
 	
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		if (item.getItemId() == SHOW_ON_MAP) {
-			// TODO actions
+			((TourViewActivity) getSherlockActivity()).goToMap(fav.location);
 			return true;
 		} else  if (item.getItemId() == android.R.id.home) {
 			((TourViewActivity) getSherlockActivity()).showSelectedItem();
