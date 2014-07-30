@@ -1916,4 +1916,11 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="lang_zh_CN">Xinès simplificat</string>
 	<string name="lang_zh_TW">Xinès tradicional</string>
 	<string name="rendering_attr_subwayMode_name">Mode subsol</string>
- 	</resources>
+ 	<string name="continue_navigation">Continuar Navegació</string>
+    <string name="pause_navigation">Interrompre Navegació</string>
+	<string name="rendering_attr_alpineHiking_name">Perspectiva senderista</string>
+    <string name="rendering_attr_alpineHiking_description">Representar els camins segons l\'escala SAC</string>
+    <string name="rendering_attr_osmcTraces_name">Sobreposar simbologia senderista</string>
+    <string name="rendering_attr_osmcTraces_description">Representar els camins segons les traces OSMC</string>
+    
+	</resources>
