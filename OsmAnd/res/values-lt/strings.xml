@@ -1583,7 +1583,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="index_item_nation_addresses">adresai šalies mastu</string>
 	<string name="index_item_world_altitude_correction">Pasaulinė aukščio korekcija</string>
 	<string name="index_item_world_seamarks">Pasaulio jūriniai ženklai</string>
-	<string name="index_item_world_bitcoin_payments">Pasalinio Bitcoin atsiskaitymai</string>
+	<string name="index_item_world_bitcoin_payments">Pasauliniai Bitcoin atsiskaitymai</string>
 	<string name="index_item_world_basemap">Pasaulio apžvalginis žemėlapis</string>
     <string name="index_item_world_ski">Pasaulio slidinėjimo žemėlapis</string>
     <string name="lang_hr">Kroatų</string>
@@ -1601,7 +1601,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="navigation_intent_invalid">Netinkamas formatas: %s</string>
 <string name="osmo_settings_uuid">Unikalus įrenginio ID</string>
     <string name="osmo_settings_descr">Konfigūruoti stebėjimo nustatymus ir nustatyti asmeninį stebėjimo kanalą</string>
-    <string name="osmo_plugin_description">"OpenStreetMap-Monitoring - pažangus tiesioginis stebėjimas. Suteikia daug galimybių būti stebimam ir stebėti kitus įrenginius. Susikurkite anonimines grupes, bendrinkite vienas kito vietą ir komunikuokite. Ši paslauga turi įvairių nustatymų vienkartiniam ir pastoviam sekimui. Anoniminių grupių gyvavimas yra tik kelios dienos su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. Pilno funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti. "</string>
+    <string name="osmo_plugin_description">"OpenStreetMap-Monitoring - pažangus tiesioginis stebėjimas http://osmo.mobi. Suteikia daug galimybių būti stebimam ir stebėti kitus įrenginius. Susikurkite anonimines grupes, bendrinkite vienas kito vietą ir bendraukite. Ši paslauga turi įvairių nustatymų vienkartiniam ir pastoviam sekimui. Anoniminės grupės gyvuoja tik kelias dienas su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. Viso funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti. "</string>
     <string name="osmo_plugin_name">OsMo (Pažangus tiesioginis stebėjimas)</string>
     <string name="osmo_settings">OsMo OpenStreetMap stebėjimas (beta)</string>
    	<string name="keep_informing_never">Niekada</string>
@@ -1622,7 +1622,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     
     
     <string name="osmo_connected_devices">Prijungti įrenginiai</string>
-    <string name="osmo_groups">OsMo gruopės/įrenginiai</string>
+    <string name="osmo_groups">OsMo grupės/įrenginiai</string>
     <string name="osmo_auto_send_locations_descr">Automatiškai pradėti sekimo sesiją ir siųsti buvimo vietą tik paleidus programą</string>
     <string name="osmo_auto_send_locations">Automatiškai pradėti sekimo sesiją</string>
     <string name="osmo_tracker_id">Asmeninis sekiklio ID</string>
@@ -1640,7 +1640,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="osmo_group_share">Norėdami prisijungti prie %2$s grupės, nurodykite grupės id (%1$s) arba paspauskite %3$s .</string>
     <string name="osmo_share_connect_device">Leiskite šį įrenginį sekti pastoviai</string>
     <string name="osmo_share_current_session">Dalinkitės dabartine sesija naršyklėje</string>
-    <string name="osmo_session_not_available">Sesija neprieinama. Įsitikinkite kad įjungtas \'Siųsti vietą\' nustatymas.</string>
+    <string name="osmo_session_not_available">Sesija neprieinama. Įsitikinkite kad įjungtas \"Siųsti vietą\" nustatymas.</string>
     <string name="osmo_share_session">Bendrinti sesiją</string>
     <string name="osmo_session_id_share">Sesijos url įrenginio (%1$s) sekimui</string>
     <string name="osmo_tracker_id_share">Norėdami prisijungti prie %2$s įrenginio paspauskite nuorodą %3$s arba nurodykite sekiklio id (%1$s)</string>
@@ -1705,7 +1705,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="loading_smth">Įkeliama %1$s …</string>
     <string name="map_widget_plain_time">Dabartinis laikas</string>
     <string name="gpx_wpt">Kelionės taškas</string>
-    <string name="selected_gpx_info_show">\n\nPaspauskite ir laikykite kad pamatytumėte ant žemėlapio</string>
+    <string name="selected_gpx_info_show">\n\nPaspauskite ir laikykite kad pamatytumėte žemėlapyje</string>
     <string name="delay_navigation_start">Pradėti navigaciją automatiškai</string>
     <string name="selected">pasirinkti</string>
     <string name="gpx_split_interval">Padalinimo intervalas</string>
@@ -1748,9 +1748,9 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="osmo_start_service">OsMo paslauga</string>
     <string name="osmo_gpx_track_downloaded">OsMo įrašas %1$s parsiųstas.</string>
     <string name="osmo_group_by_invite">Prisijungti su pakvietimais</string>
-    <string name="osmo_group_information_desc">" - Visos sukurtos grupės yra viešos! Jei jungtis anonimiškai, tai darykite naudodami sekiklio ID.\n- Grupėje gali būti iki 16 asmenų.\n- Jei grupėje nebus jokios veiklos arba tik vienas asmuo dvi savaites, ji bus panaikinta.\n- Narystę grupėje galima apriboti pakvietimais, tačiau valdyti grupę bus galima tik iš administravimo konsolės.\n- Jei jums reikia sukuti grupę su kitokiais reikalavimais, susisiekite su http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Visos sukurtos grupės yra viešos! Jei norėsite jungtis anonimiškai, tai darykite naudodami sekiklio ID.\n- Grupėje gali būti iki 16 asmenų.\n- Jei grupėje nebus jokios veiklos arba veikloje dalyvaus tik vienas asmuo dvi savaites, ji bus panaikinta.\n- Narystę grupėje galima apriboti pakvietimais, tačiau valdyti grupę bus galima tik iš administravimo konsolės.\n- Jei jums reikia sukuti grupę su kitokiais reikalavimais, susisiekite su http://osmo.mobi"</string>
     <string name="osmo_group_information">Perskaitykite prieš kurdami grupę!</string>
-    <string name="osmo_not_signed_in">Prisijungimas prie OsMo nepavyko</string>
+    <string name="osmo_not_signed_in">Prisijungti prie OsMo nepavyko</string>
     <string name="osmo_auth_error_short">Autorizavimas nepavyko</string>
     <string name="osmo_auth_error">OsMo autorizavimo metu įvyko klaida : %1$s.\n Gali būti, kad paslauga laikinai neveikia arba baigėsi jūsų prisijungimo laikas.\n Ar norite registruotis iš naujo?</string>
     <string name="rendering_attr_hideBuildings_name">Paslėpti pastatus</string>
@@ -1794,4 +1794,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="rendering_attr_subwayMode_name">Metro režimas</string>
  	<string name="continue_navigation">Tęsti navigaciją</string>
     <string name="pause_navigation">Pristabdyti navigaciją</string>
+	<string name="rendering_attr_alpineHiking_description">Užkrauti kelius pagal SAC skalę</string>
+    <string name="rendering_attr_osmcTraces_description">Užkrauti kelius pagal OSMC pėdsakus</string>
+    
 	</resources>
