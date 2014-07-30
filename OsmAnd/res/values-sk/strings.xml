@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -1745,11 +1745,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="lang_cy">Welšsky (Cymraeg)</string>
 	<string name="osmo_settings_uuid">Jedinečné ID zariadenia</string>
     <string name="osmo_settings_descr">Zmeniť nastavenia monitorovania a nastaviť osobný monitorovací kanál</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitorovanie - Pokročilé sledovanie naživo. Ponúka možnosti sledovania iných zariadení a byť sledovaný.
-        Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania.
-        Anonymné skupiny sú obmedzené na počet dní a pre niektoré funkcie nie je diaľkové ovládanie ani administrátor skupiny.
-        Plne funkčné skupiny sa vytvárajú na webstránke a sú prístupné len registrovaným používateľom.
-        Prečítajte si viac na http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">"OpenStreetMap pokročilé sledovanie naživo, pozrite http://osmo.mobi. Ponúka možnosti sledovania iných zariadení a byť sledovaný. Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania. Anonymné skupiny sú obmedzené na počet dní a pre niektoré funkcie nie je diaľkové ovládanie ani administrátor skupiny. Plne funkčné skupiny sa vytvárajú na webstránke a sú prístupné len registrovaným používateľom. "</string>
     <string name="osmo_plugin_name">OsMo (Pokročilé sledovanie naživo)</string>
     <string name="osmo_settings">OsMo sledovanie OpenStreetMap (beta)</string>
    	<string name="keep_informing_never">Nikdy</string>
@@ -1939,4 +1935,11 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_showCycleRoutes_name">Zobraziť cyklocesty</string>
     <string name="lang_fa">Perzsky</string>
 	<string name="keep_navigation_service">Ponechať</string>
+	<string name="rendering_attr_subwayMode_name">Režim metra</string>
+ 	<string name="lang_al">Albánsky</string>
+	<string name="lang_ar">Arabsky</string>
+	<string name="lang_sc">Sardínsky</string>
+	<string name="lang_sr">Srbsky</string>
+	<string name="lang_zh_CN">Zjednodušená čínština</string>
+	<string name="lang_zh_TW">Tradičná čínština</string>
 	</resources>

@@ -1494,7 +1494,7 @@
     <string name="osmo_session_id_share">Sessions-URL för att spåra enhet (%1$s)</string>
     <string name="osmo_tracker_id_share">För att ansluta till målenheten %2$s, klicka på länken %3$s eller ange tracker-id (%1$s)</string>
     <string name="osmo_track_interval">Loggningsintervall</string>
-	<string name="osmo_track_interval_descr">Välj tidsintervall för skickande av platsen</string>
+	<string name="osmo_track_interval_descr">Välj tidsintervall för inskickande av din position</string>
     <string name="int_days">dagar</string>
     <string name="osmo_connect_menu">Anslut</string>
     <string name="osmo_expire_group">Förfaller om</string>
@@ -1645,4 +1645,5 @@
 	<string name="lang_sr">Serbiska</string>
 	<string name="lang_zh_CN">Förenklad kinesiska</string>
 	<string name="lang_zh_TW">Traditionell kinesiska</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Tunnelbaneläge</string>
+ 	</resources>

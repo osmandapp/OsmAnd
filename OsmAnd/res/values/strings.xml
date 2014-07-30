@@ -12,6 +12,8 @@
     <string name="continue_navigation">Continue Navigation</string>
     <string name="pause_navigation">Pause Navigation</string>
 	<string name="keep_navigation_service">Keep</string>
+   <string name="rendering_attr_subwayMode_name">Subway mode</string>
+ 	<string name="keep_navigation_service">Keep</string>
 	<string name="stop_navigation_service">Stop</string>
 	<string name="enable_sleep_mode">Enable sleep mode</string>
 	<string name="gps_wake_up_timer">GPS wake up interval</string>

@@ -683,7 +683,8 @@
   <string name="offline_navigation_not_available">Nawigacja offline w OsmAnd jest tymczasowo niedostępna.</string>
   <string name="left_side_navigation">Ruch lewostronny</string>
   <string name="left_side_navigation_descr">Wybierz dla krajów z ruchem lewostronnym</string>
-  <string name="download_link_and_local_description">Kliknij tutaj, aby pobrać lub zaktualizować pliki map w trybu offline. \nKliknij istniejący element, aby zobaczyć więcej szczegółów. Naciśnij i przytrzymaj, aby go wyłączyć lub usunąć. Obecne dane na urządzeniu (%1$s dostępne):</string>
+  <string name="download_link_and_local_description">Kliknij tutaj, aby pobrać lub zaktualizować pliki map trybu offline.
+\nKliknij istniejący element, aby zobaczyć więcej szczegółów. Naciśnij i przytrzymaj, aby go wyłączyć lub usunąć. Obecne dane na urządzeniu (%1$s dostępne):</string>
   <string name="unknown_from_location">Punkt początkowy nie jest jeszcze wyznaczony</string>
   <string name="confirm_interrupt_download">Czy chcesz przerwać pobieranie pliku?</string>
   <string name="basemap_was_selected_to_download">Mapa bazowa jest wymagana do prawidłowego funkcjonowania aplikacji i została wybrana do pobrania.</string>
@@ -731,7 +732,7 @@
   
   <string name="show_ruler_level">Wyświetl linijkę</string>
   <string name="info_button">Informacja</string>
-  <string name="back_to_location">Powróć do lokacji</string>
+  <string name="back_to_location">Powróć do pozycji</string>
   <string name="help">Pomoc</string>
   <string name="show_details">Pokaż szczegóły</string>
   <string name="accessibility_extensions_descr">Rozszerzenia ułatwienia dostępu dla starych wersji Androida</string>
@@ -765,7 +766,7 @@
   <string name="front_right">Prawy przód</string>
   <string name="right">Prawy</string>
   <string name="back_right">Tylny przód</string>
-  <string name="back">Tył</string>
+  <string name="back">Wstecz</string>
   <string name="back_left">Lewy tył</string>
   <string name="left">Lewy</string>
   <string name="front_left">Lewy przód</string>
@@ -1839,8 +1840,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="select_destination_and_intermediate_points">Wybierz punkty</string>
     <string name="layer_amenity_label">Etykiety punktów</string>
     <string name="visible_element">Pokaż na mapie</string>
-    <string name="show_zoom_buttons_navigation_descr">Pokazuj przyciski zbliżania podczas nawigacji</string>
-    <string name="show_zoom_buttons_navigation">Pokazuj przyciski zbliżania</string>
+    <string name="show_zoom_buttons_navigation_descr">Pokazuj przyciski skalowania podczas nawigacji</string>
+    <string name="show_zoom_buttons_navigation">Pokazuj przyciski skalowania</string>
     <string name="sort_by_distance">Sortuj według odległości</string>
     <string name="sort_by_name">Sortuj według nazwy</string>
     <string name="none_selected_gpx">Nie wybrano żadnych plików GPX. W celu wyboru naciśnij i przytrzymaj dostępną ścieżkę.</string>
@@ -1848,9 +1849,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="local_index_select_gpx_file">Wybierz aby wyświetlić</string>
     <string name="osmo_group_by_invite">Wpisz przez zaproszenie</string>
     <string name="osmo_group_information_desc">" - Wszystkie grupy są publiczne! Jeśli chcesz być anonimowy, podłącz urządzeń bezpośrednio poprzez identyfikator Tracker ids.↵\n - Grupa może posiadać do 16 zarejestrowanych osób.↵\n - W przypadku bezczynności lub aktywności tylko 1 osoby przez okres 2 tygodnie, grupa zostanie usunięta.↵\n - Można ograniczyć dostęp grupy, i zapraszać tylko wybrane osoby. Do kontroli potrzebujesz konsoli administracyjnej.↵\n - Jeśli trzeba utworzyć grupę, ale z innymi warunkami, prosimy o kontakt http://osmo.mobi"</string>
-    <string name="osmo_group_information">Proszę przeczytać przed założeniem grupy!</string>
+    <string name="osmo_group_information">Przeczytaj przed założeniem grupy!</string>
     <string name="osmo_not_signed_in">Nie powiodło się logowanie do OsMo</string>
-    <string name="osmo_gpx_points_downloaded">OsMo pobrano %1$s punktów.</string>
+    <string name="osmo_gpx_points_downloaded">Pobrano %1$s punktów OsMo.</string>
     <string name="osmo_auto_connect_descr">Automatycznie połącz to serwisu po uruchomieniu aplikacji</string>
     <string name="osmo_auto_connect">Auto-podłączenie</string>
     <string name="osmo_start_service">Serwis OsMo</string>
@@ -1861,17 +1862,17 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="keep_navigation_service">Utrzymuj</string>
 	<string name="stop_navigation_service">Stop</string>
 	<string name="enable_sleep_mode">Włącz tryb uśpienia</string>
-	<string name="gps_wake_up_timer">Interwał wybudzania GPS</string>
+	<string name="gps_wake_up_timer">Odstęp czasu wybudzania GPS</string>
 	<string name="sleep_mode_stop_dialog">Czy trzymać włączony GPS?</string>
-	<string name="map_preferred_locale_descr">Preferowany język dla etykiet na mapie (jeśli nie jest dostępny, a zostanie wybrany język angielski lub z lokalnymi nazwami)</string>
+	<string name="map_preferred_locale_descr">Preferowany język dla etykiet na mapie (jeśli niedostępny, zostanie wybrany język angielski lub lokalna nazwa)</string>
     <string name="map_preferred_locale">Preferowany język map</string>
     <string name="local_map_names">Nazwy lokalne</string>
     <string name="lang_sw">Suahili</string>
     <string name="lang_he">Hebrajski</string>
-    <string name="forward">Do przodu</string>
+    <string name="forward">Dalej</string>
     <string name="home">Dom</string>
     <string name="live_monitoring_m_descr">Wysyłaj aktualną pozycję do określonej usługi internetowej, jeśli nagrywanie GPX jest włączone.</string>
-	<string name="live_monitoring_m">Śledzenia online (wymagane GPX)</string>
+	<string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>
     <string name="live_monitoring_start">Uruchom śledzenie online</string>
 	<string name="live_monitoring_stop">Zatrzymaj śledzenie online</string>
 	<string name="gpx_monitoring_start">Uruchom nagrywanie GPX</string>
@@ -1881,7 +1882,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_attr_hideNonVehicleHighways_name">Ukryj trasy niedostępne dla aut</string>
     <string name="rendering_attr_hideText_name">Ukryj opisy</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ukryj drewna i zarośla</string>
-    <string name="rendering_attr_buildings15zoom_name">Budynki na przypliżeniu 15</string>
+    <string name="rendering_attr_buildings15zoom_name">Budynki na przybliżeniu 15</string>
     <string name="rendering_attr_moreDetailed_name">Więcej szczegółów</string>
     <string name="rendering_attr_lessDetailed_name">Mniej szczegółów</string>
     <string name="rendering_attr_hideAccess_name">Ukryj typ dostępu</string>
@@ -1896,4 +1897,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="lang_sr">Serbski</string>
 	<string name="lang_zh_CN">Chiński uproszczony</string>
 	<string name="lang_zh_TW">Chiński tradycyjny</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Tryb metra</string>
+ 	</resources>

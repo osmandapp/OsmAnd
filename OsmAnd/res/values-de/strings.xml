@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -1905,4 +1906,25 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="hours_ago">Stunden her</string>
     <string name="minutes_ago">Minuten her</string>
     <string name="seconds_ago">Sekunden her</string>
-    </resources>
+    <string name="lang_zh_CN">Chinesisch (vereinfacht)</string>
+	<string name="lang_zh_TW">Chinesisch (traditionell)</string>
+	<string name="lang_sr">Serbisch</string>
+	<string name="lang_fa">Persisch</string>
+	<string name="lang_ar">Arabisch</string>
+	<string name="lang_al">Albanisch</string>
+	<string name="lang_sw">Suaheli</string>
+    <string name="map_preferred_locale_descr">Bevorzugte Sprache für Beschriftungen auf der Karte (ist diese nicht verfügbar, wird auf Englisch oder lokale Namen gewechselt)</string>
+    <string name="map_preferred_locale">Bevorzugte Sprache für Karten-Beschriftung</string>
+    <string name="local_map_names">Lokale Namen</string>
+    <string name="lang_he">Hebräisch</string>
+    <string name="live_monitoring_m_descr">Sende Verfolgungsdaten zu einem festgelegten Internet Dienst, wenn GPX-Aufzeichnung aktiviert ist.</string>
+	<string name="live_monitoring_m">Online Verfolgung (benötigt GPX)</string>
+    <string name="live_monitoring_start">Starte online Verfolgung</string>
+	<string name="gpx_monitoring_start">Starte GPX-Aufzeichnung</string>
+	<string name="gpx_monitoring_stop">Stoppe GPX-Aufzeichnung</string>
+    <string name="gpx_start_new_segment">Starte neues Segment</string>
+    <string name="lang_sc">Sardinisch</string>
+	<string name="rendering_attr_subwayMode_name">U-Bahn-Modus</string>
+ 	<string name="gps_wake_up_timer">GPS Aufwach Intervall</string>
+	<string name="sleep_mode_stop_dialog">GPS aktiv lassen?</string>
+	</resources>
