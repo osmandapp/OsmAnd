@@ -504,7 +504,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	
 	
 
-	protected void showGroupInfo(OsMoGroup group) {
+	protected void showGroupInfo(final OsMoGroup group) {
 		Builder bld = new AlertDialog.Builder(this);
 		bld.setTitle(R.string.osmo_group);
 		StringBuilder sb = new StringBuilder();
@@ -530,6 +530,13 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		tv.setText(sb.toString());
 		bld.setView(sv);
 		bld.setPositiveButton(R.string.default_buttons_ok, null);
+		bld.setNegativeButton(R.string.osmo_invite, new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				shareOsMoGroup(group.getVisibleName(app), group.getGroupId());
+			}
+		});
 		bld.show();
 		
 	}
@@ -785,6 +792,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				if(!checkOperationIsNotRunning()) {
 					return ;
 				}
+				joinGroup = true;
 				String op = osMoPlugin.getGroups().createGroup(name.getText().toString(), onlyByInvite.isChecked(),
 						description.getText().toString(), policy.getText().toString());
 				startLongRunningOperation(op);

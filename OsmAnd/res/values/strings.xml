@@ -11,6 +11,7 @@
     -->
     <string name="map_preferred_locale_descr">Preferred lanaguage for labels on the map (if it is not available will switch to English or to local names)</string>
     <string name="map_preferred_locale">Map prefferred language</string>
+    <string name="osmo_invite">Invite...</string>
     <string name="osmo_leave_confirmation_msg">Do you want to leave group %1$s?</string>
     <string name="osmo_specify_tracker_id">Please specify id</string>
     <string name="continue_navigation">Continue Navigation</string>
