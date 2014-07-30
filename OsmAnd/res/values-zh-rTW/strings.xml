@@ -1721,7 +1721,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="always_center_position_on_map">位置顯示始終處於中心</string>
     <string name="voice_pref_title">聲音</string>
     <string name="localization_pref_title">定位</string>
-    <string name="interrupt_music_descr">當制作預告時中斷音樂</string>
+    <string name="interrupt_music_descr">當語音預告時中斷音樂</string>
 	<string name="interrupt_music">中斷音樂</string>
 	<string name="misc_pref_title">雜項</string>
     <string name="share_route_as_gpx">以 GPX 檔案分享路線</string>
