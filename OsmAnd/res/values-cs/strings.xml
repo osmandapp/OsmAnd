@@ -1678,4 +1678,6 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cest</string>
     <string name="osmo_group_by_invite">Vstoupit na pozvánku</string>
     <string name="rendering_attr_subwayMode_name">Metro režim</string>
- 	</resources>
+ 	<string name="pause_navigation">Pozastavit navigaci</string>
+	<string name="continue_navigation">Pokračování navigace</string>
+    </resources>
