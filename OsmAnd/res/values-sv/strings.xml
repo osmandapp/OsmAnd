@@ -1646,4 +1646,11 @@
 	<string name="lang_zh_CN">Förenklad kinesiska</string>
 	<string name="lang_zh_TW">Traditionell kinesiska</string>
 	<string name="rendering_attr_subwayMode_name">Tunnelbaneläge</string>
- 	</resources>
+ 	<string name="continue_navigation">Fortsätt navigera</string>
+    <string name="pause_navigation">Pausa navigeringen</string>
+	<string name="rendering_attr_alpineHiking_name">Alpvandringsvy</string>
+    <string name="rendering_attr_alpineHiking_description">Återge stigar enligt SAC-skala</string>
+    <string name="rendering_attr_osmcTraces_name">Vandringssymbolöverlägg</string>
+    <string name="rendering_attr_osmcTraces_description">Återge stigar enligt OSMC-spår</string>
+    
+	</resources>
