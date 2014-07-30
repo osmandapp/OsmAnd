@@ -2,7 +2,6 @@ package net.osmand.plus;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
