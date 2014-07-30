@@ -27,11 +27,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
@@ -300,8 +304,18 @@ public class OsMoService implements OsMoReactor {
 		}
 	}
 
-	private void runNotification(String error) {
-		if (notification == null) {
+	private void runNotification(final String error) {
+		final OsMoGroupsActivity ga = plugin.getGroupsActivity();
+		if(ga != null) {
+			app.runInUIThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					showRegisterAgain(ga, app.getString(R.string.osmo_auth_error, error));
+					
+				}
+			});
+		} else if (notification == null) {
 			Intent notificationIntent = new Intent(OSMO_REGISTER_AGAIN);
 			PendingIntent intent = PendingIntent.getBroadcast(app, 0, notificationIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
@@ -318,6 +332,20 @@ public class OsMoService implements OsMoReactor {
 		}
 	}
 	
+
+	protected void showRegisterAgain(OsMoGroupsActivity ga, String msg) {
+		Builder bld = new AlertDialog.Builder(ga);
+		bld.setMessage(msg);
+		bld.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				registerAsync();
+			}
+		});
+		bld.setNegativeButton(R.string.default_buttons_cancel, null);
+		
+	}
 
 	private void showDialogAskToReregister(String error) {
 //		Builder bld = new AlertDialog.Builder(this);
