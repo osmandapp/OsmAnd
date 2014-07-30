@@ -275,6 +275,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 						sz.attribute("", "lat", p.getLatitude() + "");
 						sz.attribute("", "lon", p.getLongitude() + "");
 						sz.attribute("", "id", p.getId() + "");
+						sz.attribute("", "version", "1");
 						for (String tag : p.getEntity().getTagKeySet()) {
 							String val = p.getEntity().getTag(tag);
 							sz.startTag("", "tag");
