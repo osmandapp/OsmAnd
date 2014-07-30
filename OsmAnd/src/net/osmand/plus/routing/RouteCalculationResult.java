@@ -541,7 +541,7 @@ public class RouteCalculationResult {
 				if (added.contains(w)) {
 					double ds = MapUtils.getOrthogonalDistance(w.lat, w.lon, ploc.getLatitude(), ploc.getLongitude(), loc.getLatitude(),
 							loc.getLongitude());
-					if (ds < 80) {
+					if (ds < 160) {
 						ls.add(j);
 						waypoints.add(w);
 						added.add(w);
