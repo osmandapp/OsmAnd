@@ -247,7 +247,7 @@
 	<string name="osmand_extra_settings_description">顯示進階的地圖組態(比如增加地圖細節)和一些裝置的詳情。</string>
 	<string name="osmand_development_plugin_description">顯示開發與除錯功能的設定，如導航模擬或繪製顯示效能。</string>
 	<string name="plugins_screen">外掛元件管理</string>
-	<string name="select_plugin_to_activate">輕觸外掛元件以啟用或關閉它。(可能需要重新啟動 OsmAnd。)</string>
+	<string name="select_plugin_to_activate">輕觸外掛元件以啟用或停用它。(可能需要重新啟動 OsmAnd。)</string>
 	<string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能</string>
 	<string name="prefs_plugins">外掛元件管理</string>
 	<string name="osm_editing_plugin_description">顯示 OSM 回報所需的設定，如收集/修改 OSM POI 物件、開啟/評論 OSM 錯誤、提供 GPX 檔案(需有OSM帳號)。</string>
@@ -486,13 +486,13 @@
 	
 	
 	<string name="local_index_installed">版本</string>
-	<string name="local_index_items_backuped">%2$d 項中的 %1$d 項已解除成功。</string>
-	<string name="local_index_items_deleted">%2$d 項中的 %1$d 項已刪除成功。</string>
-	<string name="local_index_items_restored">%2$d 項中的 %1$d 項已啟動成功。</string>
+	<string name="local_index_items_backuped">%2$d 項中的 %1$d 項已順利停用。</string>
+	<string name="local_index_items_deleted">%2$d 項中的 %1$d 項已順利刪除。</string>
+	<string name="local_index_items_restored">%2$d 項中的 %1$d 項已順利啟動。</string>
 	<string name="local_index_action_do">您即將 %1$s %2$s 項，要繼續嗎？</string>
 	<string name="local_index_descr_title">管理地圖檔案</string>
 	<string name="local_index_mi_restore">啟用</string>
-	<string name="local_index_mi_backup">解除</string>
+	<string name="local_index_mi_backup">停用</string>
 	<string name="local_index_mi_delete">刪除</string>
 	<string name="local_index_mi_reload">由 SD 卡重新載入</string>
 	<string name="local_index_download">下載</string>
@@ -501,7 +501,7 @@
 	<string name="local_index_address_data">地址資料</string>
 	<string name="local_index_transport_data">交通設施資料</string>
 	<string name="local_index_map_data">地圖資料</string>
-	<string name="local_indexes_cat_backup">已解除</string>
+	<string name="local_indexes_cat_backup">已停用</string>
 	<string name="local_indexes_cat_tts">語音資料(TTS)</string>
 	<string name="local_indexes_cat_voice">語音資料(真人)</string>
 	<string name="local_indexes_cat_gpx">GPX 資料</string>
