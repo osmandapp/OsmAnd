@@ -329,6 +329,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		if(osMoPlugin.getService().isConnected()) {
 			adapter.synchronizeGroups();
 		}
+		osMoPlugin.setGroupsActivity(this);
 	}
 
 	@Override
@@ -340,6 +341,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}
 		app.getLocationProvider().removeLocationListener(this);
 		osMoPlugin.getGroups().setUiListener(null);
+		osMoPlugin.setGroupsActivity(null);
 	}
 	
 	private void enterSelectionMode(final Object o) {

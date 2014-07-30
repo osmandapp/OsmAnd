@@ -61,8 +61,10 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	private BaseMapWidget osmoControl;
 	private OsMoPositionLayer olayer;
 	protected MapActivity mapActivity;
+	protected OsMoGroupsActivity groupsActivity;
 	
 	private final static Log log = PlatformUtil.getLog(OsMoPlugin.class);
+	
 
 	public OsMoPlugin(final OsmandApplication app) {
 		service = new OsMoService(app, this);
@@ -81,6 +83,14 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 			service.connect(true);
 		}
 		return true;
+	}
+	
+	public OsMoGroupsActivity getGroupsActivity() {
+		return groupsActivity;
+	}
+	
+	public void setGroupsActivity(OsMoGroupsActivity groupsActivity) {
+		this.groupsActivity = groupsActivity;
 	}
 
 	@Override
