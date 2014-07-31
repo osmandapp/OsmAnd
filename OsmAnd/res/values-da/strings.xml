@@ -1947,4 +1947,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="rendering_attr_osmcTraces_name">Vandretur symbol overlejring</string>
     <string name="rendering_attr_osmcTraces_description">Generer stier efter OSMC spor</string>
     
-	</resources>
+	<string name="osmo_invite">Inviter…</string>
+    <string name="osmo_leave_confirmation_msg">Vil du forlade gruppen %$s?</string>
+    <string name="osmo_specify_tracker_id">Angiv id</string>
+    <string name="arrival_distance_factor_early">Tidligt</string>
+    <string name="arrival_distance_factor_normally">Normalt</string>
+    <string name="arrival_distance_factor_late">Sent</string>
+    <string name="arrival_distance_factor_at_last">Sidste meter</string>
+    </resources>
