@@ -1774,4 +1774,19 @@ OsmAnd - открытый источник и активно развается.
 	<string name="lang_zh_CN">Упрощенный китайский</string>
 	<string name="lang_zh_TW">Традиционный китайский</string>
     <string name="rendering_attr_subwayMode_name">Режим метро</string>
-	</resources>
+	<string name="osmo_invite">Пригласить...</string>
+    <string name="osmo_leave_confirmation_msg">Вы хотите выйти из группы %1$s?</string>
+    <string name="osmo_specify_tracker_id">Пожалуйста, укажите ID</string>
+    <string name="continue_navigation">Продолжить навигацию</string>
+    <string name="pause_navigation">Приостановить навигацию</string>
+	<string name="rendering_attr_alpineHiking_description">Визуализация пути по шкале SAC</string>
+    <string name="rendering_attr_osmcTraces_description">Визуализация пути согласно трассам OSMC</string>
+    
+	<string name="arrival_distance_factor_early">Пораньше</string>
+    <string name="arrival_distance_factor_normally">Обычно</string>
+    <string name="arrival_distance_factor_late">Попозже</string>
+    <string name="arrival_distance_factor_at_last">На последних метрах</string>
+    <string name="osmo_group_information_desc">" - Все созданные группы являются открытыми! Если вы хотите сохранить анонимность, подключите устройства непосредственно через ID трекера.\n - В группе могут быть зарегистрированы до 16 человек.\n - За бездействие или деятельность только 1 человека за 2 недели группа будет удалена.\n - Вы можете ограничить вход в группу, сделать только по приглашениям, но для управления группой  вы должны войти в консоль администратора.\n - Если вам нужно создать группу, но с другими условиями, пожалуйста, свяжитесь с http://osmo.mobi"</string>
+    <string name="rendering_attr_alpineHiking_name">Пеший горный туризм</string>
+    <string name="rendering_attr_osmcTraces_name">Наложение символов пешего туризма</string>
+    </resources>
