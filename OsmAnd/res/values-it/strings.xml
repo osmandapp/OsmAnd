@@ -1939,4 +1939,14 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="lang_zh_CN">Cinese semplificato</string>
 	<string name="lang_zh_TW">Cinese tradizionale</string>
 	<string name="rendering_attr_subwayMode_name">Modalità metro</string>
- 	</resources>
+ 	<string name="osmo_invite">Invita ...</string>
+    <string name="osmo_leave_confirmation_msg">Vuoi abbandonare il gruppo %1$s?</string>
+    <string name="osmo_specify_tracker_id">Per favore specifica l\'id</string>
+    <string name="continue_navigation">Prosegui la navigazione</string>
+    <string name="pause_navigation">Metti in pausa la navigazione</string>
+	<string name="rendering_attr_alpineHiking_name">Vista escursionismo alpino</string>
+    <string name="rendering_attr_alpineHiking_description">Disegna i sentieri in base alla scala SAC</string>
+    <string name="rendering_attr_osmcTraces_name">Strato simboli escursionistici</string>
+    <string name="rendering_attr_osmcTraces_description">Disegna i sentieri in base alle tracce OSMC</string>
+    
+	</resources>
