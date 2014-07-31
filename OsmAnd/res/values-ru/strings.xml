@@ -1539,9 +1539,9 @@
 	<string name="share_route_as_gpx">Поделиться маршрутом используя файл GPX</string>
 	<string name="osmo_settings_uuid">Ключ доступа</string>
     <string name="osmo_settings_descr">Настройка параметров мониторинга и установка персонального канала мониторинга</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - продвинутый живой мониторинг с множеством средств удалённого контроля http://osmo.mobi</string>
+    <string name="osmo_plugin_description">OpenStreetMap Monitoring - продвинутый живой мониторинг с множеством средств удалённого контроля http://osmo.mobi</string>
     <string name="osmo_plugin_name">OsMo (Продвинутый онлайн-мониторинг)</string>
-    <string name="osmo_settings">OpenStreetMap-Мониторинг</string>
+    <string name="osmo_settings">OpenStreetMap Мониторинг</string>
    	<string name="navigation_intent_invalid">Неправильный формат: %s</string>
 <string name="share_route_subject">Маршрут предоставленный через OsmAnd</string>
 	<string name="osmand_extended_description_4000_chars">
@@ -1786,7 +1786,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="arrival_distance_factor_normally">Обычно</string>
     <string name="arrival_distance_factor_late">Попозже</string>
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
-    <string name="osmo_group_information_desc">" - Все созданные группы являются открытыми! Если вы хотите сохранить анонимность, подключите устройства непосредственно через ID трекера.\n - В группе могут быть зарегистрированы до 16 человек.\n - За бездействие или деятельность только 1 человека за 2 недели группа будет удалена.\n - Вы можете ограничить вход в группу, сделать только по приглашениям, но для управления группой  вы должны войти в консоль администратора.\n - Если вам нужно создать группу, но с другими условиями, пожалуйста, свяжитесь с http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Все созданные группы являются открытыми! Если вы хотите сохранить анонимность, подключите устройства непосредственно через ID трекера.\n - В группе могут состоять до 16 человек.\n - Если в группе не будет активным хотя бы 1 человек в течении 2-х недель группа будет удалена.\n - Вы можете ограничить вход в группу, только по приглашениям, но для управления группой вы должны войти в консоль администратора.\n - Если вам нужно создать группу, но с другими условиями, пожалуйста, свяжитесь со службой поддержки http://osmo.mobi</string>
     <string name="rendering_attr_alpineHiking_name">Пеший горный туризм</string>
     <string name="rendering_attr_osmcTraces_name">Наложение символов пешего туризма</string>
     </resources>
