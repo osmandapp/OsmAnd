@@ -1804,4 +1804,5 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="arrival_distance_factor_normally">Normaliai</string>
     <string name="arrival_distance_factor_late">Vėlai</string>
     <string name="arrival_distance_factor_at_last">Pastaruosius metrus</string>
+    <string name="rendering_attr_coloredBuildings_name">Spalvoti pastatai</string>
     </resources>
