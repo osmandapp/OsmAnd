@@ -1797,4 +1797,11 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="rendering_attr_alpineHiking_description">Užkrauti kelius pagal SAC skalę</string>
     <string name="rendering_attr_osmcTraces_description">Užkrauti kelius pagal OSMC pėdsakus</string>
     
-	</resources>
+	<string name="osmo_invite">Pakvietimas...</string>
+    <string name="osmo_leave_confirmation_msg">Ar norite atsijungti nuo grupės %1$s?</string>
+    <string name="osmo_specify_tracker_id">Prašome nurodyti id</string>
+    <string name="arrival_distance_factor_early">Anksti</string>
+    <string name="arrival_distance_factor_normally">Normaliai</string>
+    <string name="arrival_distance_factor_late">Vėlai</string>
+    <string name="arrival_distance_factor_at_last">Pastaruosius metrus</string>
+    </resources>
