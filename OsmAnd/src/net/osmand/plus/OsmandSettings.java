@@ -3,7 +3,6 @@ package net.osmand.plus;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -316,6 +315,7 @@ public class OsmandSettings {
 		
 		protected abstract T getValue(Object prefs, T defaultValue);
 		
+		
 		protected abstract boolean setValue(Object prefs, T val);
 		
 		@Override
@@ -360,6 +360,10 @@ public class OsmandSettings {
 				return true;
 			}
 			return false;
+		}
+
+		public boolean isSet() {
+			return settingsAPI.contains(getPreferences(), getId());
 		}
 		
 	}
@@ -947,10 +951,7 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> MAP_ONLINE_DATA = new BooleanPreference("map_online_data", false).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
-//	public final CommonPreference<Boolean> SHOW_DESTINATION_ARROW = new BooleanPreference("show_destination_arrow", true).makeProfile();
-//	{
-//		SHOW_DESTINATION_ARROW.setModeDefaultValue(ApplicationMode.CAR, false);	
-//	}
+	public final CommonPreference<Boolean> SHOW_DESTINATION_ARROW = new BooleanPreference("show_destination_arrow", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_OVERLAY = new StringPreference("map_overlay", null).makeGlobal();

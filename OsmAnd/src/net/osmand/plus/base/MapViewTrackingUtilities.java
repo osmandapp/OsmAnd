@@ -85,14 +85,16 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void updateLocation(Location location) {
 		showViewAngle = false;
 		if (mapView != null) {
+			RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
 			if (isMapLinkedToLocation() && location != null) {
 				if (settings.AUTO_ZOOM_MAP.get() != AutoZoomMap.NONE) {
 					autozoom(location);
 				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
-				boolean smallSpeed = !location.hasSpeed() || location.getSpeed() < 0.5;
+				boolean smallSpeed = isSmallSpeedForCompass(location);
 				// boolean virtualBearing = fMode && settings.SNAP_TO_ROAD.get();
-				showViewAngle = (!location.hasBearing() || smallSpeed);
+				showViewAngle = (!location.hasBearing() || smallSpeed) && (tb != null && 
+						tb.containsLatLon(location.getLatitude(), location.getLongitude()));
 				if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
 					if (location.hasBearing() && !smallSpeed) {
 						// special case when bearing equals to zero (we don't change anything)
@@ -105,6 +107,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				}
 				registerUnregisterSensor(location);
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
+			} else if(location != null) {
+				showViewAngle = (!location.hasBearing() || isSmallSpeedForCompass(location)) && (tb != null && 
+						tb.containsLatLon(location.getLatitude(), location.getLongitude()));
+				registerUnregisterSensor(location);
 			}
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			followingMode = routingHelper.isFollowingMode();
@@ -114,6 +120,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			// When location is changed we need to refresh map in order to show movement!
 			mapView.refreshMap();
 		}
+	}
+
+	private boolean isSmallSpeedForCompass(Location location) {
+		return !location.hasSpeed() || location.getSpeed() < 0.5;
 	}
 	
 	
