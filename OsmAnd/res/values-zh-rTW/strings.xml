@@ -1607,7 +1607,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="local_osm_changes_delete_all">全部刪除</string>
     <string name="tip_faq_t">請造訪 https://code.google.com/p/osmand/wiki/FAQ，以查看經常被問到的問題。</string>
     <string name="tip_faq">常見問題</string>
-    <string name="app_mode_hiking">步行</string>
+    <string name="app_mode_hiking">徒步</string>
     <string name="app_mode_motorcycle">機車</string>
     <string name="app_mode_boat">船</string>
     <string name="app_mode_aircraft">飛航</string>
@@ -1922,4 +1922,16 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="rendering_attr_subwayMode_name">地鐵模式</string>
  	<string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
-	</resources>
+	<string name="osmo_invite">邀請...</string>
+    <string name="osmo_leave_confirmation_msg">您想要離開 %1$s 群組嗎？</string>
+    <string name="osmo_specify_tracker_id">請指定 ID</string>
+    <string name="rendering_attr_alpineHiking_name">高山徒步檢視</string>
+    <string name="rendering_attr_osmcTraces_name">徒步符號覆疊層</string>
+    <string name="rendering_attr_alpineHiking_description">按照 SAC 比例繪製路徑</string>
+    <string name="rendering_attr_osmcTraces_description">按照 OSMC 軌跡繪製路徑</string>
+    
+	<string name="arrival_distance_factor_early">提早</string>
+    <string name="arrival_distance_factor_normally">正常</string>
+    <string name="arrival_distance_factor_late">稍遲</string>
+    <string name="arrival_distance_factor_at_last">在最後一公尺</string>
+    </resources>
