@@ -1940,8 +1940,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="lang_zh_TW">Kinesisk, traditionelt</string>
 	<string name="lang_sc">Sardisk</string>
 	<string name="rendering_attr_subwayMode_name">Metrotilstand</string>
- 	<string name="continue_navigation">Fortsæt navigationen</string>
-    <string name="pause_navigation">Pause navigationen</string>
+ 	<string name="continue_navigation">Fortsæt navigation</string>
+    <string name="pause_navigation">Pause navigation</string>
 	<string name="rendering_attr_alpineHiking_name">Alpin vandringsvisning</string>
     <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC skala</string>
     <string name="rendering_attr_osmcTraces_name">Vandretur symbol overlejring</string>
