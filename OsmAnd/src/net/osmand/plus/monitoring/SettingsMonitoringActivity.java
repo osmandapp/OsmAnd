@@ -39,6 +39,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		requestWindowFeature(Window.FEATURE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		setSupportProgressBarIndeterminateVisibility(false);
 		getSupportActionBar().setTitle(R.string.monitoring_settings);
