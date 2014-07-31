@@ -11,7 +11,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -21,8 +20,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 public class PointNavigationLayer extends OsmandMapLayer implements IContextMenuProvider {
 	protected final static int DIST_TO_SHOW = 80;
@@ -110,15 +107,21 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 			int locationY = tb.getPixYFromLatNoRot(pointToNavigate.getLatitude());
 			canvas.rotate(-tb.getRotate(), locationX, locationY);
 			canvas.drawBitmap(targetPoint, locationX - marginX, locationY - marginY, bitmapPaint);
-		} else if (pointToNavigate != null && !view.getApplication().getRoutingHelper().isRouteCalculated()) {
-			net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(),
-					pointToNavigate.getLongitude(), calculations);
-			float bearing = calculations[1] - 90;
-			float radiusBearing = DIST_TO_SHOW * tb.getDensity();
-			final QuadPoint cp = tb.getCenterPixelPoint();
-			canvas.rotate(bearing, cp.x, cp.y);
-			canvas.translate(-24 * tb.getDensity() + radiusBearing, -22 * tb.getDensity());
-			canvas.drawBitmap(arrowToDestination, cp.x, cp.y, bitmapPaint);
+		} else if (pointToNavigate != null) {
+			boolean show = !view.getApplication().getRoutingHelper().isRouteCalculated();
+			if(view.getSettings().SHOW_DESTINATION_ARROW.isSet()) {
+				show = view.getSettings().SHOW_DESTINATION_ARROW.get();
+			}
+			if (show) {
+				net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(),
+						pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), calculations);
+				float bearing = calculations[1] - 90;
+				float radiusBearing = DIST_TO_SHOW * tb.getDensity();
+				final QuadPoint cp = tb.getCenterPixelPoint();
+				canvas.rotate(bearing, cp.x, cp.y);
+				canvas.translate(-24 * tb.getDensity() + radiusBearing, -22 * tb.getDensity());
+				canvas.drawBitmap(arrowToDestination, cp.x, cp.y, bitmapPaint);
+			}
 		}
 		
 	}

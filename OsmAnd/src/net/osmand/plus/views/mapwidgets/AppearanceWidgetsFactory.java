@@ -54,15 +54,15 @@ public class AppearanceWidgetsFactory {
                 }
             });
 
-//            final MapWidgetRegistry.MapWidgetRegInfo showDestinationArrow = mapInfoControls.registerAppearanceWidget(R.drawable.widget_show_destination_arrow, R.string.map_widget_show_destination_arrow,
-//                    "show_destination_arrow", view.getSettings().SHOW_DESTINATION_ARROW);
-//            showDestinationArrow.setStateChangeListener(new Runnable() {
-//                @Override
-//                public void run() {
-//                    view.getSettings().SHOW_DESTINATION_ARROW.set(!view.getSettings().SHOW_DESTINATION_ARROW.get());
-//                    mapInfoLayer.recreateControls();
-//                }
-//            });
+            final MapWidgetRegistry.MapWidgetRegInfo showDestinationArrow = mapInfoControls.registerAppearanceWidget(R.drawable.widget_show_destination_arrow, R.string.map_widget_show_destination_arrow,
+                    "show_destination_arrow", view.getSettings().SHOW_DESTINATION_ARROW);
+            showDestinationArrow.setStateChangeListener(new Runnable() {
+                @Override
+                public void run() {
+                    view.getSettings().SHOW_DESTINATION_ARROW.set(!view.getSettings().SHOW_DESTINATION_ARROW.get());
+                    mapInfoLayer.recreateControls();
+                }
+            });
 
             final MapWidgetRegistry.MapWidgetRegInfo transparent = mapInfoControls.registerAppearanceWidget(R.drawable.widget_transparent_skin, R.string.map_widget_transparent,
                     "transparent", view.getSettings().TRANSPARENT_MAP_THEME);
