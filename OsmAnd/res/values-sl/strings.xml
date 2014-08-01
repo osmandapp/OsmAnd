@@ -1890,4 +1890,6 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="rendering_attr_subwayMode_name">Način podzemne železnice</string>
  	<string name="continue_navigation">Nadaljuj navigacijo</string>
     <string name="rendering_attr_alpineHiking_name">Planinski zamljevid</string>
+    <string name="osmo_invite">Povabite...</string>
+    <string name="osmo_specify_tracker_id">Prosim, določite ID</string>
     </resources>
