@@ -1653,4 +1653,12 @@
     <string name="rendering_attr_osmcTraces_name">Vandringssymbolöverlägg</string>
     <string name="rendering_attr_osmcTraces_description">Återge stigar enligt OSMC-spår</string>
     
-	</resources>
+	<string name="osmo_invite">Bjud in…</string>
+    <string name="osmo_leave_confirmation_msg">Vill du lämna gruppen %1$s?</string>
+    <string name="osmo_specify_tracker_id">Ange id</string>
+    <string name="rendering_attr_coloredBuildings_name">Färgade byggnader</string>
+    <string name="arrival_distance_factor_early">Tidigt</string>
+    <string name="arrival_distance_factor_normally">Normalt</string>
+    <string name="arrival_distance_factor_late">Sent</string>
+    <string name="arrival_distance_factor_at_last">De sista metrarna</string>
+    </resources>

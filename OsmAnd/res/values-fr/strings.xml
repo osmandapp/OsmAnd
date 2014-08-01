@@ -1783,4 +1783,15 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="lang_sr">serbe</string>
 	<string name="lang_zh_CN">chinois simplifié</string>
 	<string name="lang_zh_TW">chinois traditionnel</string>
+	<string name="osmo_invite">Inviter…</string>
+    <string name="osmo_leave_confirmation_msg">Voulez-vous quitter le groupe %1$s ?</string>
+    <string name="osmo_specify_tracker_id">Veuillez spécifier l\'identifiant</string>
+    <string name="continue_navigation">Poursuivre la navigation</string>
+    <string name="pause_navigation">Interrompre la navigation</string>
+	<string name="rendering_attr_subwayMode_name">Mode sous-terrain</string>
+ 	<string name="rendering_attr_alpineHiking_name">Vue rando alpine</string>
+    <string name="rendering_attr_alpineHiking_description">Afficher les chemins selon l\'échelle SAC</string>
+    <string name="rendering_attr_osmcTraces_name">Surcouche de symboles de rando</string>
+    <string name="rendering_attr_osmcTraces_description">Afficher les chemins selon les traces OSMC</string>
+    
 	</resources>

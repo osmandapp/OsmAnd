@@ -7,9 +7,8 @@
 
 	<!-- quick check on sdk.dir -->
 	<fail
-            message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through an env var"
-            unless="sdk.dir"
-    />
+		message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through an env var"
+		unless="sdk.dir" />
 
 	<property name="use.dir" value="../OsmAnd-java/src" />
 	<property name="use.absolute.dir" location="${use.dir}" />
@@ -19,45 +18,45 @@
 
 	<target name="copy_resources">
 		<copy todir="assets">
-			<fileset dir="../../resources/" >
-				<include name="specialphrases/**"/>
-				<include name="voice/**/*.p"/>
+			<fileset dir="../../resources/">
+				<include name="specialphrases/**" />
+				<include name="voice/**/*.p" />
 			</fileset>
 		</copy>
 		<copy todir="res/">
 			<fileset dir="../../resources/rendering_styles/style-icons/"  >
-				<include name="**/*"/>
+				<include name="**/*" />
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/router/">
-			<fileset dir="../../resources/routing/" >
-				<include name="*.xml"/>
+			<fileset dir="../../resources/routing/">
+				<include name="*.xml" />
 			</fileset>
 		</copy>
 		<sync todir="assets/help/">
-			<fileset dir="../../help/" >
-				<include name="*.html"/>
-				<include name="images/**/*.png"/>
+			<fileset dir="../../help/">
+				<include name="*.html" />
+				<include name="images/**/*.png" />
 			</fileset>
 		</sync>
 		<copy todir="assets/help">
-		    <fileset dir="assets/" >
-				<include name="style.css"/>
+			<fileset dir="assets/">
+				<include name="style.css" />
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/render/">
-			<fileset dir="../../resources/rendering_styles/" >
-				<include name="*.xml"/>
+			<fileset dir="../../resources/rendering_styles/">
+				<include name="*.xml" />
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/osm/">
-			<fileset dir="../../resources/obf_creation/" >
-				<include name="rendering_types.xml"/>
+			<fileset dir="../../resources/obf_creation/">
+				<include name="rendering_types.xml" />
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/map/">
-			<fileset dir="../../resources/countries-info/" >
-                <include name="regions.ocbf"/>
+			<fileset dir="../../resources/countries-info/">
+				<include name="regions.ocbf" />
 			</fileset>
 		</copy>
 	</target>
@@ -76,7 +75,6 @@
 				<replaceregexp file="res/values/no_translate.xml" match='versionFeatures"&gt;(.*)&lt;' replace='versionFeatures"&gt;${versionFeatures}&lt;' byline="true" />
 			</then>
 		</if>
-		
 		<if>
 			<condition>
 				<isset property="net.osmand.sherpafy" />
@@ -89,24 +87,24 @@
 		</if>
 		<if>
 			<condition>
-  				<isset property="net.osmand" />
-  			</condition>
-  			<then>
-  			    <property name="package.name" value="net.osmand" />
+				<isset property="net.osmand" />
+			</condition>
+			<then>
+				<property name="package.name" value="net.osmand" />
 				<property name="app.name" value="OsmAnd" />
 				<replaceregexp file="AndroidManifest.xml" match='"@drawable/([^\s]*)"' replace='"@drawable/icon_free"' byline="true" />
-  		    </then>
-  		</if>
+			</then>
+		</if>
 		<if>
 			<condition>
-  				<isset property="net.osmand.plus" />
-  			</condition>
-  				<then>
-  				    <property name="package.name" value="net.osmand.plus" />
-			    	<property name="app.name" value="OsmAnd+" />
-			    	<replaceregexp file="AndroidManifest.xml" match='"@drawable/([^\s]*)"' replace='"@drawable/icon"' byline="true" />
-  			    </then>
-  		</if>
+				<isset property="net.osmand.plus" />
+			</condition>
+			<then>
+				<property name="package.name" value="net.osmand.plus" />
+				<property name="app.name" value="OsmAnd+" />
+				<replaceregexp file="AndroidManifest.xml" match='"@drawable/([^\s]*)"' replace='"@drawable/icon"' byline="true" />
+			</then>
+		</if>
 		<if>
 			<condition>
 				<isset property="package.name" />
@@ -116,9 +114,9 @@
 				<replaceregexp file="AndroidManifest.xml" match='android:process="(.*)"' replace='android:process="${package.name}"' byline="true" />
 				<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;${app.name}&lt;' byline="true" />
 				<replaceregexp file="res/layout/search_address.xml" match='xmlns:custom="http://schemas.android.com/apk/res/(.*)"' 
-			    	replace='xmlns:custom="http://schemas.android.com/apk/res/${package.name}"' byline="true" />
+					replace='xmlns:custom="http://schemas.android.com/apk/res/${package.name}"' byline="true" />
 				<replaceregexp file="res/layout/navigate_point.xml" match='xmlns:custom="http://schemas.android.com/apk/res/(.*)"' 
-			    	replace='xmlns:custom="http://schemas.android.com/apk/res/${package.name}"' byline="true" />
+					replace='xmlns:custom="http://schemas.android.com/apk/res/${package.name}"' byline="true" />
 			</then>
 			</if>
 		<if>
@@ -128,7 +126,6 @@
 			<then>
 				<replaceregexp file="AndroidManifest.xml" match='android:versionCode="(.*)"' replace='android:versionCode="${build.version.code}"' byline="true" />
 				<replaceregexp file="AndroidManifest.xml" match='android:debuggable="true"' replace='android:debuggable="false"' byline="true" />
-				
 			</then>
 		</if>
 		<if>
@@ -142,10 +139,10 @@
 
 	</target>
 	<target name="copy_sherpafy">
-	    <copy todir="gen/net/osmand/plus">
-					<fileset dir="gen/net/osmand/sherpafy">
-						<include name="R.java" />
-					</fileset>
+		<copy todir="gen/net/osmand/plus">
+			<fileset dir="gen/net/osmand/sherpafy">
+				<include name="R.java" />
+			</fileset>
 		</copy>
 		<replaceregexp file="gen/net/osmand/plus/R.java" match='package (.*);' replace='package net.osmand.plus;' byline="true" />
 	</target>
@@ -153,13 +150,13 @@
 	<!-- Compiles this project's .java files into .class files. -->
 	<target name="-compile" depends="-build-setup, -pre-build, -code-gen, -pre-compile">
 		<!-- osmchange : Osmand plus support -->
-		<mkdir dir="${gen.absolute.dir}/net/osmand/plus"/>
+		<mkdir dir="${gen.absolute.dir}/net/osmand/plus" />
 		<if>
 			<condition>
 				<isset property="net.osmand.sherpafy" />
 			</condition>
 			<then>
-			    <copy todir="${gen.absolute.dir}/net/osmand/plus">
+				<copy todir="${gen.absolute.dir}/net/osmand/plus">
 					<fileset dir="${gen.absolute.dir}/net/osmand/sherpafy">
 						<include name="R.java" />
 					</fileset>
@@ -171,7 +168,7 @@
 				<isset property="net.osmand" />
 			</condition>
 			<then>
-			    <copy todir="${gen.absolute.dir}/net/osmand/plus">
+				<copy todir="${gen.absolute.dir}/net/osmand/plus">
 					<fileset dir="${gen.absolute.dir}/net/osmand">
 						<include name="R.java" />
 					</fileset>
@@ -206,7 +203,7 @@
 					<getemmafilter appPackage="${project.app.package}" libraryPackagesRefId="project.library.packages" filterOut="emma.default.filter" />
 
 					<!-- define where the .em file is going. This may have been
-    	                         setup already if this is a library -->
+						setup already if this is a library -->
 					<property name="emma.coverage.absolute.file" location="${out.absolute.dir}/coverage.em" />
 
 					<!-- It only instruments class files, not any external libs -->
@@ -251,45 +248,45 @@
 
 	<!-- Import the actual build file.
 
-         To customize existing targets, there are two options:
-         - Customize only one target:
-             - copy/paste the target into this file, *before* the
-               <import> task.
-             - customize it to your needs.
-         - Customize the whole content of build.xml
-             - copy/paste the content of the rules files (minus the top node)
-               into this file, replacing the <import> task.
-             - customize to your needs.
+		 To customize existing targets, there are two options:
+		 - Customize only one target:
+			 - copy/paste the target into this file, *before* the
+			   <import> task.
+			 - customize it to your needs.
+		 - Customize the whole content of build.xml
+			 - copy/paste the content of the rules files (minus the top node)
+			   into this file, replacing the <import> task.
+			 - customize to your needs.
 
-         ***********************
-         ****** IMPORTANT ******
-         ***********************
-         In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
-         in order to avoid having your file be overridden by tools such as "android update project"
-    -->
+		 ***********************
+		 ****** IMPORTANT ******
+		 ***********************
+		 In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
+		 in order to avoid having your file be overridden by tools such as "android update project"
+	-->
 	<!-- version-tag: custom -->
 	<import file="${sdk.dir}/tools/ant/build.xml" />
 
 	<taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" classpathref="lib.path" />
 
 	<target name="cpd" description="Search for cut-and-pasted code">
-		<property name="cpd.report.xml" location="cpd.xml"/>
+		<property name="cpd.report.xml" location="cpd.xml" />
 		<cpd minimumTokenCount="100" format="xml" outputFile="${cpd.report.xml}"
-            ignoreLiterals="true" ignoreIdentifiers="true">
-			<fileset dir="${source.absolute.dir}" includes="**/*.java"/>
+			ignoreLiterals="true" ignoreIdentifiers="true">
+			<fileset dir="${source.absolute.dir}" includes="**/*.java" />
 		</cpd>
 	</target>
 
 	<target name="fix_apostrophe_issues">
 		<replace token="version='1.0'" value="version=&quot;1.0&quot;">
-			<fileset dir="res" includes="**/strings.xml"/>
+			<fileset dir="res" includes="**/strings.xml" />
 		</replace>
 		<replace token="encoding='utf-8'" value="encoding=&quot;utf-8&quot;">
-			<fileset dir="res" includes="**/strings.xml"/>
+			<fileset dir="res" includes="**/strings.xml" />
 		</replace>
 
 		<replaceregexp  match="([^\\])'" replace="\1\\\\'" flags="-g" byline="off">
-			<fileset dir="res" includes="**/strings.xml"/>
+			<fileset dir="res" includes="**/strings.xml" />
 		</replaceregexp>
 	</target>
 

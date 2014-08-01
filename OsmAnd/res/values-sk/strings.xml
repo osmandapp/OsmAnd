@@ -1949,4 +1949,12 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_osmcTraces_name">Zobraziť turistické značky</string>
     <string name="rendering_attr_osmcTraces_description">Kresliť chodníky podľa značenia OSMC</string>
     
-	</resources>
+	<string name="rendering_attr_coloredBuildings_name">Farebné budovy</string>
+    <string name="osmo_invite">Pozvať...</string>
+    <string name="osmo_leave_confirmation_msg">Chcete opustiť skupinu %1$s?</string>
+    <string name="osmo_specify_tracker_id">Prosím zadajte ID</string>
+    <string name="arrival_distance_factor_early">Skoro</string>
+    <string name="arrival_distance_factor_normally">Normálne</string>
+    <string name="arrival_distance_factor_late">Neskoro</string>
+    <string name="arrival_distance_factor_at_last">V posledných metroch</string>
+    </resources>

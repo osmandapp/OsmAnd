@@ -1418,19 +1418,17 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="about_settings">Apie</string>
     <string name="about_settings_descr">Versijos informacija, licencijos, projekto nariai</string>
     <string name="tips_and_tricks">Patarimai</string>
-    <string name="tip_recent_changes_1_6_t">Pakeitimai 1.6 versijoje:
-	\n\t* Visiškai permatomo fono palaikymas
-	\n\t* Aukštos raiškos (Full HD) įrenginių palaikymas
-	\n\t* Regionus peržiūrėti ir parsisiųsti galima tiesiai iš žemėlapio
-	\n\t* SRTM failus galima parsisiųsti specifinei šaliai  
-	\n\t* Visiškai naujas pasaulio žemėlapis su pagrindiniais keliais, miškais ir geležinkeliais 
-	\n\t* Žemėlapio padidinamasis stiklas žemėlapiui (ilgas didinimo mygtuko paspaudimas) - ypač naudingas rastriniams žemėlapiams  
-	\n\t* Galimybė nustatyti/redaguoti internetinius žemėlapių lakštų šaltinius (galima nurodyti galiojmio laiką)
-	\n\t* Palaikomi greičio apribojimai pagal dienos laiką (Nyderlandai)
-
-	\n\t* Greitesnis adreso įvedimas
-	\n\t* Ištaisytos maršruto apskaičiavimo ir vaizdavimo klaidos
-    </string>
+    <string name="tip_recent_changes_1_6_t">"Pakeitimai 1.6 versijoje:
+\n\t* Visiškai permatomo fono palaikymas
+\n\t* Aukštos raiškos (Full HD) įrenginių palaikymas
+\n\t* Regionus peržiūrėti ir parsisiųsti galima tiesiai iš žemėlapio
+\n\t* SRTM failus galima parsisiųsti specifinei šaliai
+\n\t* Visiškai naujas pasaulio žemėlapis su pagrindiniais keliais, miškais ir geležinkeliais
+\n\t* Žemėlapio padidinamasis stiklas žemėlapiui (ilgas didinimo mygtuko paspaudimas) - ypač naudingas rastriniams žemėlapiams
+\n\t* Galimybė nustatyti/redaguoti internetinius žemėlapių lakštų šaltinius (galima nurodyti galiojimo laiką)
+\n\t* Palaikomi greičio apribojimai pagal dienos laiką (Nyderlandai)
+\n\t* Greitesnis adreso įvedimas
+\n\t* Ištaisytos maršruto apskaičiavimo ir vaizdavimo klaidos "</string>
     <string name="local_index_tile_data_zooms">Parsiųsti mąsteliai: %1$s</string>
     <string name="local_index_tile_data_expire">Nustos galioti (minutės): %1$s</string>
     <string name="local_index_tile_data_downloadable">Prieinami parsiuntimui: %1$s</string>
@@ -1445,7 +1443,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="edit_tilesource_url_to_load">Nuoroda</string>
     <string name="edit_tilesource_choose_existing">Pasirinkti iš turimų…</string>
     <string name="edit_tilesource_name">Pavadinimas</string>
-    <string name="maps_define_edit">Nuatatyti/redaguoti…</string>
+    <string name="maps_define_edit">Nustatyti/redaguoti…</string>
 	<string name="tip_map_styles">Žemėlapio stiliai</string>
 	<string name="tip_map_styles_t">OsmAnd gali rodyti parsiųstus žemėlapius įvairiais stiliais, kuriuos galima pasirinkti pagal jūsų poreikius:
 		\n\nSkirtingai nuo subalansuoto \'nustatyto\' žemėlapio stiliaus, \'Meniu\' → \'Nustatyti ekrano išvaizdą\' → \'Žemėlapio stilius\' galėsite pasirinkti pavyzdžiui 
@@ -1467,7 +1465,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="animate_routing_route_not_calculated">Pirmiausia apskaičiuokite maršrutą</string>
     <string name="animate_routing_route">Simuliuoti naudojant apskaičiuotą maršrutą </string>
     <string name="animate_routing_gpx">Simuliuoti naudojant GPX maršrutą</string>
-    <string name="route_is_too_long">OsmAnd maršruto skaičiavimas be interneto pagalbos gali labai ilgai trukti (kartais gali net neveikti) jei atstumas tarp taškų yra daugiau nei 200km. Jums gali tekti įtraukti tarpinius kelionės maršrutus, kad skaičiavimas būtų lengvesnis.</string>
+    <string name="route_is_too_long">OsmAnd maršruto skaičiavimas be interneto pagalbos gali labai ilgai trukti (kartais gali net neveikti), jei atstumas tarp taškų yra didesnis nei 200km. Jums gali tekti įtraukti tarpinius kelionės maršrutus, kad skaičiavimas būtų lengvesnis.</string>
 	<string name="auto_zoom_none">Be automatinio didinimo</string>
 	<string name="auto_zoom_close">Maksimaliai priartinti</string>
 	<string name="auto_zoom_far">Vidutiniškai priartinti</string>
@@ -1487,7 +1485,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="app_modes_choose">Programos profiliai</string>
 	<string name="osmodroid_seek">Ieškoti objekto</string>
     <string name="osmodroid_unseek">Nebeieškoti objekto</string>
-    <string name="speech_rate_descr">Nurodyti TTS kalbėjomo greitį</string>
+    <string name="speech_rate_descr">Nurodyti TTS kalbėjimo greitį</string>
     <string name="speech_rate">Kalbėjimo greitis</string>
     
     <string name="complex_route_calculation_failed">Greitas maršruto apskaičiavimas nepavyko (%s), vykdomas lėtasis skaičiavimas.</string>
@@ -1797,4 +1795,14 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="rendering_attr_alpineHiking_description">Užkrauti kelius pagal SAC skalę</string>
     <string name="rendering_attr_osmcTraces_description">Užkrauti kelius pagal OSMC pėdsakus</string>
     
-	</resources>
+	<string name="osmo_invite">Pakvietimas...</string>
+    <string name="osmo_leave_confirmation_msg">Ar norite atsijungti nuo grupės %1$s?</string>
+    <string name="osmo_specify_tracker_id">Prašome nurodyti id</string>
+    <string name="arrival_distance_factor_early">Anksti</string>
+    <string name="arrival_distance_factor_normally">Normaliai</string>
+    <string name="arrival_distance_factor_late">Vėlai</string>
+    <string name="arrival_distance_factor_at_last">Pastaruosius metrus</string>
+    <string name="rendering_attr_coloredBuildings_name">Spalvoti pastatai</string>
+    <string name="rendering_attr_alpineHiking_name">Kalnų žygiai</string>
+    <string name="rendering_attr_osmcTraces_name">Padengimas žygių simboliais</string>
+    </resources>

@@ -1679,5 +1679,9 @@ s často kladenými otázkami.</string>
     <string name="osmo_group_by_invite">Vstoupit na pozvánku</string>
     <string name="rendering_attr_subwayMode_name">Metro režim</string>
  	<string name="pause_navigation">Pozastavit navigaci</string>
-	<string name="continue_navigation">Pokračování navigace</string>
+	<string name="continue_navigation">Pokračování v navigaci</string>
+    <string name="osmo_invite">Pozvat...</string>
+    <string name="osmo_leave_confirmation_msg">Chcete opustit skupinu %1$s?</string>
+    <string name="osmo_specify_tracker_id">Prosím určete id</string>
+    <string name="rendering_attr_coloredBuildings_name">Barevné budovy</string>
     </resources>

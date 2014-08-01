@@ -2070,4 +2070,12 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="rendering_attr_osmcTraces_name">하이킹 심볼 오버레이</string>
     <string name="rendering_attr_osmcTraces_description">OSMC 흔적에 따라 경로 렌더링</string>
     
-	</resources>
+	<string name="rendering_attr_coloredBuildings_name">채색된 건물</string>
+    <string name="osmo_invite">초대...</string>
+    <string name="osmo_leave_confirmation_msg">그룹 %1$s를 떠나시겠습니까?</string>
+    <string name="osmo_specify_tracker_id">Id를 지정 하십시오</string>
+    <string name="arrival_distance_factor_early">일찍</string>
+    <string name="arrival_distance_factor_normally">일반적으로</string>
+    <string name="arrival_distance_factor_late">늦게</string>
+    <string name="arrival_distance_factor_at_last">마지막 미터</string>
+    </resources>

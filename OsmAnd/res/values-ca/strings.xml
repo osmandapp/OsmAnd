@@ -1923,4 +1923,12 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_attr_osmcTraces_name">Sobreposar simbologia senderista</string>
     <string name="rendering_attr_osmcTraces_description">Representar els camins segons les traces OSMC</string>
     
-	</resources>
+	<string name="osmo_invite">Convida…</string>
+    <string name="osmo_leave_confirmation_msg">Realment vols deixar el grup %1$s?</string>
+    <string name="osmo_specify_tracker_id">Especifiqui id</string>
+    <string name="arrival_distance_factor_early">Aviat</string>
+    <string name="arrival_distance_factor_normally">Normal</string>
+    <string name="arrival_distance_factor_late">Tard</string>
+    <string name="arrival_distance_factor_at_last">Als darrers metres</string>
+    <string name="rendering_attr_coloredBuildings_name">Edificis amb colors</string>
+    </resources>

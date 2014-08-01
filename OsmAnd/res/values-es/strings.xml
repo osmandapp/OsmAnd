@@ -1836,4 +1836,12 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
     <string name="rendering_attr_osmcTraces_description">Interpretar caminos de acuerdo a las trazas de OSMC</string>
     
-	</resources>
+	<string name="osmo_invite">Invitar...</string>
+    <string name="osmo_leave_confirmation_msg">¿Quieres abandonar el grupo %1$s?</string>
+    <string name="osmo_specify_tracker_id">Por favor especifica el id</string>
+    <string name="arrival_distance_factor_early">Pronto</string>
+    <string name="arrival_distance_factor_normally">Normalmente</string>
+    <string name="arrival_distance_factor_late">Tarde</string>
+    <string name="arrival_distance_factor_at_last">En los últimos metros</string>
+    <string name="rendering_attr_coloredBuildings_name">Edificios de colores</string>
+    </resources>
