@@ -1196,8 +1196,8 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="srtm_paid_version_msg">등고선 추가 개발을 지원하기 위해 구글시장에서 플러그인을 구입하시기 바랍니다 .</string>
     <string name="srtm_paid_version_title">등고선 플러그인</string>
     <string name="av_def_action_choose">요청에 대한 선택</string>
-    <string name="av_def_action_video">비디오 기록</string>
-    <string name="av_def_action_audio">오디오 기록</string>
+    <string name="av_def_action_video">비디오 녹화</string>
+    <string name="av_def_action_audio">오디오 녹음</string>
     <string name="av_widget_action_descr">기본 위젯의 동작을 선택합니다</string>
     <string name="av_widget_action">기본 위젯 작업</string>
     <string name="av_video_format_descr">비디오 출력 형식 선택</string>
