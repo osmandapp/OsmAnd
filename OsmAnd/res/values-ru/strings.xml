@@ -1654,8 +1654,6 @@ OsmAnd - открытый источник и активно развается.
 	<string name="color_yellow">жёлтый</string>
 	<string name="color_lightblue">голубой</string>
 	<string name="color_blue">синий</string>
-	
-	<string name="color_green">зелёный</string>
     <string name="osmo_create_groups_confirm">Чтобы создавать группы Вы должны быть зарегистрированным пользователем OsMo.</string>
     <string name="osmo_sign_in">Войти</string>
     <string name="osmo_regenerate_login_ids_confirm">Вы уверены в необходимости регенерации персональных ID? Все устройства, соединённые с Вами, больше не смогут отследить Вас.</string>

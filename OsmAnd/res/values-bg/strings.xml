@@ -12,8 +12,6 @@
     <string name="context_menu_item_directions_to">Упътвания към</string>
     <string name="context_menu_item_directions_from">Упътвания от</string>
     <string name="route_descr_map_location">Карта: </string>
-    <string name="route_descr_lat_lon">Ширина %1$.3f, Дължина %2$.3f</string>
-    <string name="route_descr_current_location">Текуща позиция</string>
     <string name="route_to">За:</string>
     <string name="route_via">През:</string>
     <string name="route_from">От:</string>

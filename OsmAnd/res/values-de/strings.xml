@@ -1460,8 +1460,6 @@
     <string name="edit_tilesource_choose_existing">Wähle vorhandene…</string>
     <string name="edit_tilesource_name">Name</string>
     <string name="maps_define_edit">Definieren/Bearbeiten…</string>
-	<string name="base_world_map">Basis-Weltkarte</string>
-	<string name="map_magnifier">Karten-Lupe</string>
     <string name="default_and">und</string>
     <string name="default_or">oder</string>
 	<string name="gps_status_eclipsim">GPS Status</string>
