@@ -1661,4 +1661,5 @@
     <string name="arrival_distance_factor_normally">Normalt</string>
     <string name="arrival_distance_factor_late">Sent</string>
     <string name="arrival_distance_factor_at_last">De sista metrarna</string>
-    </resources>
+    <string name="hide_all_waypoints">Ta bort alla</string>
+</resources>
