@@ -1930,4 +1930,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Tard</string>
     <string name="arrival_distance_factor_at_last">Als darrers metres</string>
+    <string name="rendering_attr_coloredBuildings_name">Edificis amb colors</string>
     </resources>
