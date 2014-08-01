@@ -1794,4 +1794,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_attr_osmcTraces_name">Surcouche de symboles de rando</string>
     <string name="rendering_attr_osmcTraces_description">Afficher les chemins selon les traces OSMC</string>
     
-	</resources>
+	<string name="rendering_attr_coloredBuildings_name">Bâtiments en couleur</string>
+    <string name="arrival_distance_factor_early">Tôt</string>
+    <string name="arrival_distance_factor_normally">Normal</string>
+    <string name="arrival_distance_factor_late">Tard</string>
+    <string name="arrival_distance_factor_at_last">Dans les derniers mètres</string>
+    </resources>
