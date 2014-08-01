@@ -19,6 +19,7 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.SQLiteAPI;
@@ -77,7 +78,7 @@ public class OsmandApplication extends Application {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
-	
+
 	ResourceManager resourceManager = null;
 	PoiFiltersHelper poiFilters = null;
 	RoutingHelper routingHelper = null;
@@ -104,10 +105,11 @@ public class OsmandApplication extends Application {
 
 	private boolean applicationInitializing = false;
 	private Locale preferredLocale = null;
-	
+
 	SQLiteAPI sqliteAPI;
 	BRouterServiceConnection bRouterServiceConnection;
 
+	MapActivity mapActivity;
 	@Override
 	public void onCreate() {
 		long timeToStart = System.currentTimeMillis();
@@ -837,5 +839,13 @@ public class OsmandApplication extends Application {
 		} else {
 			getNavigationService().addUsageIntent(intent);
 		}		
+	}
+
+	public MapActivity getMapActivity() {
+		return mapActivity;
+	}
+
+	public void setMapActivity(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
 	}
 }
