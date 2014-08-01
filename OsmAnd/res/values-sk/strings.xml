@@ -1957,4 +1957,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="arrival_distance_factor_normally">Normálne</string>
     <string name="arrival_distance_factor_late">Neskoro</string>
     <string name="arrival_distance_factor_at_last">V posledných metroch</string>
-    </resources>
+    <string name="hide_all_waypoints">Odstrániť všetky</string>
+</resources>
