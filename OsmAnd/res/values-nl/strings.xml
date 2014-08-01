@@ -1928,4 +1928,13 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_attr_osmcTraces_name">Wandelsymbolen laag</string>
     <string name="rendering_attr_osmcTraces_description">Render paden volgens OSMC sporen</string>
     
-	</resources>
+	<string name="rendering_attr_coloredBuildings_name">Gekleurde gebouwen</string>
+    <string name="osmo_invite">Uitnodiging voor…</string>
+    <string name="osmo_leave_confirmation_msg">Wil je de groep %1$s verlaten?</string>
+    <string name="osmo_specify_tracker_id">Specificeer je tracker-id alsjeblieft</string>
+    <string name="arrival_distance_factor_early">Vroegtijdig</string>
+    <string name="arrival_distance_factor_normally">Normaal</string>
+    <string name="arrival_distance_factor_late">Laat</string>
+    <string name="arrival_distance_factor_at_last">Als bijna bereikt</string>
+    <string name="hide_all_waypoints">Verwijder alle</string>
+</resources>
