@@ -78,7 +78,6 @@ public class OsmandApplication extends Application {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
-	public MapActivity mapActivity;
 
 	ResourceManager resourceManager = null;
 	PoiFiltersHelper poiFilters = null;
@@ -106,10 +105,11 @@ public class OsmandApplication extends Application {
 
 	private boolean applicationInitializing = false;
 	private Locale prefferedLocale = null;
-	
+
 	SQLiteAPI sqliteAPI;
 	BRouterServiceConnection bRouterServiceConnection;
 
+	MapActivity mapActivity;
 	@Override
 	public void onCreate() {
 		long timeToStart = System.currentTimeMillis();
@@ -839,5 +839,13 @@ public class OsmandApplication extends Application {
 		} else {
 			getNavigationService().addUsageIntent(intent);
 		}		
+	}
+
+	public MapActivity getMapActivity() {
+		return mapActivity;
+	}
+
+	public void setMapActivity(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
 	}
 }

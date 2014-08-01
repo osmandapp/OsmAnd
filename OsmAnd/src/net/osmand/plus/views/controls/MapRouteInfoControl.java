@@ -248,6 +248,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	@Override
 	public void hideControls(FrameLayout layout) {
 		removeButton(layout, infoButton);
+		hideDialog();
 		controlVisible = false;
 	}
 

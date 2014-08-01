@@ -22,10 +22,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
 
+import com.actionbarsherlock.internal.nineoldandroids.animation.ObjectAnimator;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.DataTileManager;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
@@ -775,8 +777,13 @@ public class RouteProvider {
 				// something really strange better to see that message on the scren
 				return emptyResult();
 			} else {
+				DataTileManager mngr = new DataTileManager<Object>(17);
+				List<FavouritePoint> points = params.ctx.getFavorites().getFavouritePoints();
+				for(FavouritePoint point : points){
+					mngr.registerObject(point.getLatitude(), point.getLongitude(), point);
+				}
 				RouteCalculationResult res = new RouteCalculationResult(result, params.start, params.end, 
-						params.intermediates, params.ctx, params.leftSide, ctx.routingTime);
+						params.intermediates, params.ctx, params.leftSide, ctx.routingTime, mngr);
 				return res;
 			}
 		} catch (RuntimeException e) {

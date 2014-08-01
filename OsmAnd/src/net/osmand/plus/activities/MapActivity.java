@@ -301,7 +301,7 @@ public class MapActivity extends AccessibleActivity  {
 		}
 
 		settings.MAP_ACTIVITY_ENABLED.set(true);
-		app.mapActivity = this;
+		app.setMapActivity(this);
 		checkExternalStorage();
 		showAndHideMapPosition();
 
@@ -560,7 +560,7 @@ public class MapActivity extends AccessibleActivity  {
 		
 		settings.setLastKnownMapZoom(mapView.getZoom());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
-		app.mapActivity = null;
+		app.setMapActivity(null);
 		app.getResourceManager().interruptRendering();
 		app.getResourceManager().setBusyIndicator(null);
 		OsmandPlugin.onMapActivityPause(this);

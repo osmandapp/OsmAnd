@@ -10,6 +10,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -78,8 +79,6 @@ public class RoutingHelper {
 
 	private RouteCalculationProgressCallback progressRoute;
 
-	WaypointDialogHelper dialogHelper;
-
 //	private ProgressBar progress;
 //	private Handler progressHandler;
 
@@ -91,7 +90,6 @@ public class RoutingHelper {
 		this.app = context;
 		settings = context.getSettings();
 		voiceRouter = new VoiceRouter(this, settings, player);
-		dialogHelper = new WaypointDialogHelper(context);
 	}
 
 	public boolean isFollowingMode() {
@@ -322,17 +320,17 @@ public class RoutingHelper {
 
 	private void announceGpxWaypoints(Location currentLocation) {
 		if (currentLocation != null) {
-			List<WptPt> wpt = route.getWaypointsToAnnounce(currentLocation);
+			List<LocationPoint> wpt = route.getWaypointsToAnnounce(currentLocation);
 			if (wpt.size() > 0) {
 				String s = "";
-				for (WptPt w : wpt) {
-					if(!Algorithms.isEmpty(w.name)) {
-						s = w.name +",";
+				for (LocationPoint w : wpt) {
+					if(!Algorithms.isEmpty(w.getName())) {
+						s = w.getName() +",";
 					}
 				}
 				if(!Algorithms.isEmpty(s)) {
 					voiceRouter.announceWaypoint(s);
-					dialogHelper.addDialogWithShift(wpt.get(0));
+//					dialogHelper.addWptDialog(wpt.get(0));
 				}
 			}
 		}

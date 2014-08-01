@@ -1,5 +1,6 @@
 package net.osmand.plus.routing;
 
+import com.actionbarsherlock.internal.nineoldandroids.animation.ObjectAnimator;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
+import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.R;
@@ -30,7 +32,7 @@ public class RouteCalculationResult {
 	private final List<RouteDirectionInfo> directions;
 	private final List<RouteSegmentResult> segments;
 	private final List<AlarmInfo> alarmInfo;
-	private final List<WptPt> waypoints;
+	private final List<LocationPoint> waypoints;
 	private final String errorMessage;
 	private final int[] listDistance;
 	private final int[] intermediatePoints;
@@ -59,11 +61,11 @@ public class RouteCalculationResult {
 		this.directions = new ArrayList<RouteDirectionInfo>();
 		this.alarmInfo = new ArrayList<AlarmInfo>();
 		this.waypointIndexes = new int[0];
-		this.waypoints = new ArrayList<WptPt>();
+		this.waypoints = new ArrayList<LocationPoint>();
 	}
 	
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, 
-			DataTileManager<WptPt> waypointsTm) {
+			DataTileManager<? extends LocationPoint> waypointsTm) {
 		this.routingTime = 0;
 		this.errorMessage = null;
 		this.intermediatePoints = new int[params.intermediates == null ? 0 : params.intermediates.size()];
@@ -89,12 +91,12 @@ public class RouteCalculationResult {
 		calculateIntermediateIndexes(params.ctx, this.locations, params.intermediates, localDirections, this.intermediatePoints);
 		this.directions = Collections.unmodifiableList(localDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
-		this.waypoints = new ArrayList<WptPt>();
+		this.waypoints = new ArrayList<LocationPoint>();
 		this.waypointIndexes = calculateWaypointIndexes(list, waypointsTm, waypoints);
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,  
-			Context ctx, boolean leftSide, float routingTime) {
+			Context ctx, boolean leftSide, float routingTime,DataTileManager<LocationPoint> waypointsTm) {
 		this.routingTime = routingTime;
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
 		this.errorMessage = null;
@@ -113,17 +115,18 @@ public class RouteCalculationResult {
 		this.directions = Collections.unmodifiableList(computeDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
 		this.alarmInfo = Collections.unmodifiableList(alarms);
-		this.waypointIndexes = new int[0];
-		this.waypoints = new ArrayList<WptPt>();
+		this.waypoints = new ArrayList<LocationPoint>();
+
+		this.waypointIndexes = calculateWaypointIndexes(this.locations, waypointsTm, waypoints);
 	}
 	
-	public List<WptPt> getWaypointsToAnnounce(Location loc) {
+	public List<LocationPoint> getWaypointsToAnnounce(Location loc) {
 		if (currentWaypointGPX != lastWaypointGPX && loc != null) {
-			ArrayList<WptPt> points = new ArrayList<WptPt>();
+			ArrayList<LocationPoint> points = new ArrayList<LocationPoint>();
 			Location next = locations.get(currentRoute);
 			float dist = loc.distanceTo(next);
 			while (currentWaypointGPX < lastWaypointGPX) {
-				WptPt w = waypoints.get(currentWaypointGPX);
+				WptPt w = (WptPt) waypoints.get(currentWaypointGPX);
 				if(MapUtils.getDistance(w.lat, w.lon, next.getLatitude(), next.getLongitude()) > dist + 50) {
 					currentWaypointGPX++;					
 				} else {
@@ -131,7 +134,7 @@ public class RouteCalculationResult {
 				}
 			}
 			while (currentWaypointGPX < lastWaypointGPX) {
-				WptPt w = waypoints.get(currentWaypointGPX);
+				WptPt w = (WptPt) waypoints.get(currentWaypointGPX);
 				if(MapUtils.getDistance(w.lat, w.lon, loc.getLatitude(), next.getLongitude()) < 60) {
 					currentWaypointGPX++;
 					points.add(w);
@@ -519,27 +522,27 @@ public class RouteCalculationResult {
 	 * PREPARATION
 	 * 
 	 */
-	private int[] calculateWaypointIndexes(List<Location> list, DataTileManager<WptPt> waypointsTm, List<WptPt> waypoints) {
+	private int[] calculateWaypointIndexes(List<Location> list, DataTileManager<? extends LocationPoint> waypointsTm, List<LocationPoint> waypoints) {
 		if(waypointsTm == null || waypointsTm.isEmpty() || list.size() == 0) {
 			return new int[0];
 		}
 		TIntArrayList ls = new TIntArrayList();
 		Location loc = list.get(0);
 		Location ploc = list.get(0);
-		Set<WptPt> added = new HashSet<WptPt>();
+		Set<LocationPoint> added = new HashSet<LocationPoint>();
 		int prev31x = MapUtils.get31TileNumberX(loc.getLatitude());
 		int prev31y = MapUtils.get31TileNumberY(loc.getLongitude());
 		for(int j = 1; j < list.size(); j++) {
 			loc = list.get(j);
 			int t31x = MapUtils.get31TileNumberX(loc.getLatitude());
 			int t31y = MapUtils.get31TileNumberY(loc.getLongitude());
-			List<WptPt> ws = waypointsTm.getObjects(Math.min(prev31x, t31x) - Math.abs(t31x - prev31x) / 4,
+			List<? extends LocationPoint> ws = waypointsTm.getObjects(Math.min(prev31x, t31x) - Math.abs(t31x - prev31x) / 4,
 					Math.min(prev31y, t31y) - Math.abs(t31y - prev31y) / 4,
 					Math.max(prev31x, t31x) + Math.abs(t31x - prev31x) / 4,
 					Math.max(prev31y, t31y) + Math.abs(t31y - prev31y) / 4);
-			for(WptPt w : ws) {
+			for(LocationPoint w : ws) {
 				if (added.contains(w)) {
-					double ds = MapUtils.getOrthogonalDistance(w.lat, w.lon, ploc.getLatitude(), ploc.getLongitude(), loc.getLatitude(),
+					double ds = MapUtils.getOrthogonalDistance(w.getLatitude(), w.getLongitude(), ploc.getLatitude(), ploc.getLongitude(), loc.getLatitude(),
 							loc.getLongitude());
 					if (ds < 80) {
 						ls.add(j);

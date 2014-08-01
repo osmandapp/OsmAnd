@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.sherpafy.WaypointDialogHelper;
 import net.osmand.plus.views.controls.MapRoutePlanControl;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl;
 import net.osmand.plus.views.controls.MapCancelControl;
@@ -60,10 +61,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private LinearLayout transparencyBarLayout;
 	private static CommonPreference<Integer> settingsToTransparency;
 	private OsmandSettings settings;
+	private WaypointDialogHelper waypointDialogHelper;
 
 	public MapControlsLayer(MapActivity activity){
 		this.mapActivity = activity;
 		settings = activity.getMyApplication().getSettings();
+		waypointDialogHelper = new WaypointDialogHelper(activity);
 	}
 	
 	@Override
@@ -177,9 +180,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 		checkVisibilityAndDraw(showRouteCalculationControls, zoomSideControls, canvas, tileBox, nightMode);
 		
 		// the last one to check other controls visibility
-		int vmargin = mapNavigationControl.isVisible() || zoomControls.isVisible() ? zoomControls.getHeight() : 0;
+		int vmargin = mapNavigationControl.isVisible() || zoomControls.isVisible() ?
+				(zoomControls.getHeight() + zoomControls.getTotalVerticalMargin()): 0;
 		rulerControl.setVerticalMargin(vmargin);
 		checkVisibilityAndDraw(true, rulerControl, canvas, tileBox, nightMode);
+		waypointDialogHelper.updateDialog();
 	}
 	
 	private void updatextColor(int textColor, int shadowColor, MapControls... mc) {
@@ -190,7 +195,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void checkVisibilityAndDraw(boolean visibility, MapControls controls, Canvas canvas,
 			RotatedTileBox tileBox, DrawSettings nightMode) {
-		if(visibility != controls.isVisible()){
+		if(visibility != controls.isVisible() ){
 			if(visibility) {
 				controls.show((FrameLayout) mapActivity.getMapView().getParent());
 			} else {
@@ -301,41 +306,21 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void shiftControl() {
-		boolean routePlanningMode = false;
-		RoutingHelper rh = mapActivity.getRoutingHelper();
-		if(rh.isRoutePlanningMode() ) {
-			routePlanningMode = true;
-		} else if((rh.isRouteCalculated() || rh.isRouteBeingCalculated()) &&
-				!rh.isFollowingMode()){
-			routePlanningMode = true;
-		}
+	public void shiftLayout(int height) {
 		FrameLayout parent = (FrameLayout) mapActivity.getMapView().getParent();
-
-		if (routePlanningMode){
-			//hiding controls
-			mapSmallMenuControls.forceHide(parent);
-			mapCancelNavigationControl.forceHide(parent);
-			mapInfoNavigationControl.forceHide(parent);
-			mapAppModeControl.forceHide(parent);
-			mapNavigationControl.forceHide(parent);
-			zoomSideControls.forceHide(parent);
-
-			//showing controls again
-			mapSmallMenuControls.show(parent);
-			mapCancelNavigationControl.show(parent);
-			mapInfoNavigationControl.show(parent);
-			mapAppModeControl.show(parent);
-			mapNavigationControl.show(parent);
-			zoomSideControls.show(parent);
-		} else {
-			//hiding controls
-			zoomControls.forceHide(parent);
-			mapMenuControls.forceHide(parent);
-
-			//showing controls again
-			zoomControls.show(parent);
-			mapMenuControls.show(parent);
+		parent.requestLayout();
+		for(MapControls mc : allControls) {
+			if(mc.isBottom()){
+				mc.setExtraVerticalMargin(height);
+				if( mc.isVisible()) {
+					mc.forceHide(parent);
+					mc.show(parent);
+				}
+			}
 		}
+	}
+
+	public WaypointDialogHelper getWaypointDialogHelper() {
+		return waypointDialogHelper;
 	}
 }
