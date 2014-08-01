@@ -42,4 +42,5 @@
     <string name="start_tour">Start tour</string>
     <string name="download_tour">Download tour</string>
     <string name="sherpafy_app_name">Sherpafy</string>
+	<string name="waypoint_reached_msg">See waypoint information</string>
  </resources>

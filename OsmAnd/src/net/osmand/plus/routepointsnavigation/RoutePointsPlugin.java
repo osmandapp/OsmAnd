@@ -4,29 +4,24 @@ import java.io.File;
 import java.util.*;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.*;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.sherpafy.WaypointDialogHelper;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.MapUtils;
-import android.content.Intent;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.text.format.DateFormat;
@@ -242,6 +237,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		routeStepsControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+//				FavouritesDbHelper fp = map.getMyApplication().getFavorites();
+//				app.getTargetPointsHelper().addVisibleLocationPoint(fp.getFavouritePoints().get(new Random().nextInt(fp.getFavouritePoints().size())));
 				Intent intent = new Intent(app, RoutePointsActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				app.startActivity(intent);
@@ -251,6 +248,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		routeStepsControl.setImageDrawable(map.getResources().getDrawable(R.drawable.widget_signpost));
 		return routeStepsControl;
 	}
+
 
 	public class RoutePoint {
 		boolean isNextNavigate;

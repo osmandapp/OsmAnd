@@ -10,6 +10,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -25,6 +26,7 @@ import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.sherpafy.WaypointDialogHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
@@ -318,16 +320,17 @@ public class RoutingHelper {
 
 	private void announceGpxWaypoints(Location currentLocation) {
 		if (currentLocation != null) {
-			List<WptPt> wpt = route.getWaypointsToAnnounce(currentLocation);
+			List<LocationPoint> wpt = route.getWaypointsToAnnounce(currentLocation);
 			if (wpt.size() > 0) {
 				String s = "";
-				for (WptPt w : wpt) {
-					if(!Algorithms.isEmpty(w.name)) {
-						s = w.name +",";
+				for (LocationPoint w : wpt) {
+					if(!Algorithms.isEmpty(w.getName())) {
+						s = w.getName() +",";
 					}
 				}
 				if(!Algorithms.isEmpty(s)) {
 					voiceRouter.announceWaypoint(s);
+//					dialogHelper.addWptDialog(wpt.get(0));
 				}
 			}
 		}

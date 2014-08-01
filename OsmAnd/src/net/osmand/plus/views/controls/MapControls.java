@@ -1,7 +1,9 @@
 package net.osmand.plus.views.controls;
 
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.sherpafy.WaypointDialogHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -31,7 +33,8 @@ public abstract class MapControls {
 	protected int width;
 	protected int height;
 	protected Runnable notifyClick;
-	
+	private int extraVerticalMargin;
+
 	public MapControls(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 		this.mapActivity = mapActivity;
 		this.showUIHandler = showUIHandler;
@@ -56,12 +59,15 @@ public abstract class MapControls {
 		applyAttributes(ctx, parent, button, stringId, resourceId, 0);
 		return button;
 	}
-	
+
+	public int getTotalVerticalMargin() {
+		return extraVerticalMargin + vmargin;
+	}
+
 	protected Button addButton(FrameLayout parent, int stringId, int resourceId) {
 		return addButton(parent, stringId, resourceId, 0);
 	}
-	
-	protected Button addButton(FrameLayout parent, int stringId, int resourceId, int extraMargin) {
+		protected Button addButton(FrameLayout parent, int stringId, int resourceId, int extraMargin) {
 		Context ctx = mapActivity;
 		Button button = new Button(ctx);
 		applyAttributes(ctx, parent, button, stringId, resourceId, extraMargin);
@@ -92,15 +98,20 @@ public abstract class MapControls {
 			params.rightMargin = margin + extraMargin;
 		}
 		if((gravity & Gravity.BOTTOM) == Gravity.BOTTOM) {
-			params.bottomMargin = vmargin;
+			params.bottomMargin = vmargin + extraVerticalMargin;
 		} else {
-			params.topMargin = vmargin;
+			params.topMargin = vmargin + extraVerticalMargin;
 		}
-		parent.addView(button, params);
+		button.setLayoutParams(params);
+		parent.addView(button);
 		button.setEnabled(true);
 		mapActivity.accessibleContent.add(button);
 	}
-	
+
+	public int getGravity() {
+		return gravity;
+	}
+
 	protected void removeButton(FrameLayout layout, View b) {
 		layout.removeView(b);
 		mapActivity.accessibleContent.remove(b);
@@ -170,7 +181,7 @@ public abstract class MapControls {
 		return (Gravity.LEFT & gravity) == Gravity.LEFT;
 	}
 
-	protected boolean isBottom() {
+	public boolean isBottom() {
 		return (Gravity.BOTTOM & gravity) == Gravity.BOTTOM;
 	}
 	
@@ -192,5 +203,9 @@ public abstract class MapControls {
 	
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		return false;
+	}
+
+	public void setExtraVerticalMargin(int extraVerticalMargin) {
+		this.extraVerticalMargin = extraVerticalMargin;
 	}
 }
