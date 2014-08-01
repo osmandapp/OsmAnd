@@ -2074,5 +2074,5 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="arrival_distance_factor_normally">일반적으로</string>
     <string name="arrival_distance_factor_late">늦게</string>
     <string name="arrival_distance_factor_at_last">마지막 미터</string>
-    <string name="hide_all_waypoints">모두 제거</string>
+    <string name="hide_all_waypoints">모든 포인트 숨기기</string>
 </resources>
