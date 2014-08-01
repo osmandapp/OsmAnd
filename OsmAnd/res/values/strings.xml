@@ -15,8 +15,7 @@
     <string name="osmo_specify_tracker_id">Please specify id</string>
     <string name="continue_navigation">Continue Navigation</string>
     <string name="pause_navigation">Pause Navigation</string>
-	<string name="keep_navigation_service">Keep</string>
-   <string name="rendering_attr_subwayMode_name">Subway mode</string>
+    <string name="rendering_attr_subwayMode_name">Subway mode</string>
  	<string name="keep_navigation_service">Keep</string>
 	<string name="stop_navigation_service">Stop</string>
 	<string name="enable_sleep_mode">Enable sleep mode</string>
@@ -215,7 +214,6 @@
 	<string name="index_item_world_bitcoin_payments">World bitcoin payments</string>
 	<string name="index_item_world_basemap">World overview map</string>
     <string name="index_item_world_ski">World ski map</string>
-    <string name="lang_hr">Croatian</string>
     <string name="lang_zh">Chinese</string>
     <string name="lang_pt_br">Portuguese (Brazil)</string>
     <string name="lang_en">English</string>
