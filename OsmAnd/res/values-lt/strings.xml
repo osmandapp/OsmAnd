@@ -1805,4 +1805,5 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="rendering_attr_coloredBuildings_name">Spalvoti pastatai</string>
     <string name="rendering_attr_alpineHiking_name">Kalnų žygiai</string>
     <string name="rendering_attr_osmcTraces_name">Padengimas žygių simboliais</string>
-    </resources>
+    <string name="hide_all_waypoints">Pašalinti visus</string>
+</resources>
