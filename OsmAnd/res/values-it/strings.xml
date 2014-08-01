@@ -1949,4 +1949,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_attr_osmcTraces_name">Strato simboli escursionistici</string>
     <string name="rendering_attr_osmcTraces_description">Disegna i sentieri in base alle tracce OSMC</string>
     
-	</resources>
+	<string name="rendering_attr_coloredBuildings_name">Edifici colorati</string>
+    <string name="arrival_distance_factor_early">Presto</string>
+    <string name="arrival_distance_factor_normally">Normale</string>
+    <string name="arrival_distance_factor_late">Tardi</string>
+    <string name="arrival_distance_factor_at_last">Agli ultimi metri</string>
+    </resources>
