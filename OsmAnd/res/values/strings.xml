@@ -15,7 +15,6 @@
     <string name="osmo_specify_tracker_id">Please specify id</string>
     <string name="continue_navigation">Continue Navigation</string>
     <string name="pause_navigation">Pause Navigation</string>
-	<string name="keep_navigation_service">Keep</string>
    <string name="rendering_attr_subwayMode_name">Subway mode</string>
  	<string name="keep_navigation_service">Keep</string>
 	<string name="stop_navigation_service">Stop</string>
@@ -492,7 +491,7 @@
         \n\t* Top left button on the map screen replaces Menu button
     </string>
     <string name="monitoring_settings">Logging services</string>
-    <string name="monitoring_settings_descr">Configure how to record trips and enable sleep mode</string>
+    <string name="monitoring_settings_descr">Configure how to record trips</string>
     <string name="osmand_monitoring_plugin_description">Enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.
         Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
     <string name="osmand_monitoring_plugin_name">Logging services</string>
