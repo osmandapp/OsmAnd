@@ -113,6 +113,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public static final int AV_DEFAULT_ACTION_TAKEPICTURE = 2;
 	public static final int AV_DEFAULT_ACTION_CHOOSE = -1;
 
+	// camera picture size:
+	public static final int AV_PHOTO_SIZE_DEFAULT = -1;
+	public static int cameraPictureSizeDefault = 0;
+
 	// camera focus type
 	public static final int AV_CAMERA_FOCUS_AUTO = 0;
 	public static final int AV_CAMERA_FOCUS_HIPERFOCAL = 1;
@@ -124,10 +128,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private static int shotId = 0;
 	private SoundPool sp = null;
 
+	public final CommonPreference<Integer> AV_CAMERA_PICTURE_SIZE;
 	public final CommonPreference<Integer> AV_CAMERA_FOCUS_TYPE;
-
 	public final CommonPreference<Integer> AV_DEFAULT_ACTION;
-
 	public final OsmandPreference<Boolean> SHOW_RECORDINGS;
 
 	private DataTileManager<Recording> recordings = new DataTileManager<AudioVideoNotesPlugin.Recording>(14);
@@ -341,6 +344,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		AV_EXTERNAL_PHOTO_CAM = settings.registerBooleanPreference("av_external_cam", true).makeGlobal();
 		AV_VIDEO_FORMAT = settings.registerIntPreference("av_video_format", VIDEO_OUTPUT_MP4).makeGlobal();
 		AV_DEFAULT_ACTION = settings.registerIntPreference("av_default_action", AV_DEFAULT_ACTION_CHOOSE).makeGlobal();
+		// camera picture size:
+		AV_CAMERA_PICTURE_SIZE = settings.registerIntPreference("av_camera_picture_size", AV_PHOTO_SIZE_DEFAULT).makeGlobal();
 		// camera focus type:
 		AV_CAMERA_FOCUS_TYPE = settings.registerIntPreference("av_camera_focus_type", AV_CAMERA_FOCUS_AUTO).makeGlobal();
 		// camera sound:
@@ -758,8 +763,34 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				@Override
 				public void surfaceCreated(SurfaceHolder holder) {
 					try {
+						// load sound befor shot:
+						if (AV_PHOTO_PLAY_SOUND.get()) {
+							if (sp == null)
+								sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+							log.info("Play sound on photo");
+							if (shotId == 0) {
+								shotId = sp.load(app.getAssets().openFd("sounds/camera_click.ogg"), 1);
+								log.debug("loaded file sound ID: " + shotId);
+							}
+						}
+
 						Parameters parameters = cam.getParameters();
 
+						// camera picture size:
+						List<Camera.Size> psps = parameters.getSupportedPictureSizes();
+						int index = AV_CAMERA_PICTURE_SIZE.get();
+						log.debug("takePhotoWithCamera() index=" + index );
+						if(index == AV_PHOTO_SIZE_DEFAULT)
+						{
+							index = cameraPictureSizeDefault;
+							log.debug("takePhotoWithCamera() Default value of picture size. Set index to cameraPictureSizeDefault. Now index="
+								+ index );
+						}
+						Camera.Size selectedCamPicSize = psps.get(index);
+						parameters.setPictureSize(selectedCamPicSize.width, selectedCamPicSize.height);
+						log.debug("takePhotoWithCamera() set Picture size: width=" + selectedCamPicSize.width
+							+ " height=" + selectedCamPicSize.height );
+						
 						// camera focus type:
 						boolean autofocus = true;
 						// boolean autofocus = !Boolean.parseBoolean(parameters.get("auto-exposure-lock-supported"));
@@ -797,16 +828,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						// parameters.setFocusMode(Parameters.FOCUS_MODE_FIXED);
 						// parameters.set("auto-exposure-lock", "true");
 						// }
-						// load sound befor shot:
-						if (AV_PHOTO_PLAY_SOUND.get()) {
-							if (sp == null)
-								sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-							log.info("Play sound on photo");
-							if (shotId == 0) {
-								shotId = sp.load(app.getAssets().openFd("sounds/camera_click.ogg"), 1);
-								log.debug("loaded file sound ID: " + shotId);
-							}
-						}
 
 						parameters.setWhiteBalance(Parameters.WHITE_BALANCE_AUTO);
 						parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);

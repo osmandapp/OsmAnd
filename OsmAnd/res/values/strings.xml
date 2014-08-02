@@ -1938,6 +1938,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_camera_focus_continuous">The camera continuously tries to focus</string>
 	<string name="av_photo_play_sound">Play sound on photo shot</string>
 	<string name="av_photo_play_sound_descr">Choose whether to play a sound when shooting photos</string>
+	<string name="av_camera_pic_size">Camera Picture Size</string>
+	<string name="av_camera_pic_size_descr">Select internal camera Picture Size</string>
     <string name="navigation_intent_invalid">Invalid format: %s</string>
     <string name="hide_all_waypoints">Remove all</string>
     <string name="announce_nearby_favorites">Announce nearby favorites</string>
