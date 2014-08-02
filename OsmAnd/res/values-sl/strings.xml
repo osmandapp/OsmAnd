@@ -1892,4 +1892,9 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_attr_alpineHiking_name">Planinski zamljevid</string>
     <string name="osmo_invite">Povabite...</string>
     <string name="osmo_specify_tracker_id">Prosim, določite ID</string>
-    </resources>
+    <string name="arrival_distance_factor_early">Zgodaj</string>
+    <string name="arrival_distance_factor_normally">Običajno</string>
+    <string name="arrival_distance_factor_late">Pozno</string>
+    <string name="arrival_distance_factor_at_last">V zadnjih metrih</string>
+    <string name="hide_all_waypoints">Odstrani vse</string>
+</resources>
