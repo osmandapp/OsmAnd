@@ -729,7 +729,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="index_name_wiki">PDI Wikipedia mondiale</string>
 	<string name="update_poi_is_not_available_for_zoom">S\'agiornamentu de sos PDI non est disponìbile pro livellos de zoom bassos</string>
 	<string name="tip_update_index_t">"Mapas agiorndas sunt fundamentales pro sa visione sena lìnia, pro sa chirca tramite PDI/indiritzu, e pro su nàvigu sena lìnia. OsmAnd frunidi unu gestore de sas mapas pro las isgarrigare e pro chircare pro agiornamentos.
-\n\nPro isgarrigare mapas bae in \'Impostaduras\' → \'Manage map files\' → \'Isgàrriga\'.
+\n\nPro isgarrigare mapas bae in \'Impostaduras\' → \'Gesti documentos mapas\' → \'Isgàrriga\'.
 \n\nA pustis chi sa lista globale de sas regiones at a èssere istada isgarrigada, carca in supra de unu ogetu pro isgarrigare o carrigare unu documentu. Pro piaghere nota s\'isseberadore de tiou de documentu in sa parte arta de s\'ischermu pro ischertare su tipu de isgarrigamentu chi boles (mapas regulares, umbraduras de sos rilievos, etc.).
 \n\nPodes filtrare sa lista de sas regiones iscrivende carchi lètera, o  ischertande s\'optzione \'Impostaduras\' → \'Filtra isgarrigadas \' pro bìere agiornamentos pro petzi sos datos chi tenes giai in su dispositivu.
 \n\n\t* Boghes in \'birde\' indicana documentos de datos identicos in su dispositivu e in su server
@@ -951,4 +951,69 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="file_with_name_already_exist">Esistit giai unu documentu cun su matessi numene.</string>
 	<string name="default_buttons_save">Sarba</string>
 	<string name="menu_save_directions">Sarba diretziones</string>
+	<string name="rendering_attr_coloredBuildings_name">Edifìtzios coloraos</string>
+    <string name="osmo_invite">Invita...</string>
+    <string name="osmo_leave_confirmation_msg">Boles essire dae su grupu %1$s?</string>
+    <string name="osmo_specify_tracker_id">Pro piaghere dislinda s\'id</string>
+    <string name="continue_navigation">Sighi cun su nàvigu</string>
+    <string name="pause_navigation">Pone in pasu su nàvigu</string>
+    <string name="rendering_attr_alpineHiking_name">Bisura pro alpinismu</string>
+    <string name="rendering_attr_alpineHiking_description">Disinna sas camineras basandeti in supra de s\'iscala SAC</string>
+    <string name="rendering_attr_osmcTraces_name">Istratu sìmbulos escursionisticos</string>
+    <string name="rendering_attr_osmcTraces_description">Disinna sas camineras sighinde sas rastas OSMC</string>
+    
+	<string name="osmand_parking_delete_confirm">Boles remòvere sa positzione de sa màchina parchegiada?</string>
+	<string name="osmand_parking_delete">Burra su marcadore de parchègiu</string>
+	<string name="osmand_parking_position_description_add">Recùpera sa màchina pro sas:</string>
+	<string name="context_menu_item_delete_parking_point">Burra unu marcadore de parchègiu</string>
+	<string name="route_roundabout">Rutunda: piga sa %1$d essida e sighi</string>
+	<string name="rendering_attr_appMode_description">Otimizza sas mapas pro</string>
+	<string name="rendering_attr_contourLines_description">Ammustra dae su livellu de zoom (serbint sos datos de sas lìnias de livellu):</string>
+	<string name="rendering_attr_hmRendered_name">Ammustra prus minujas in sa mapa</string>
+	<string name="history_search_desc">Cronologia chircas</string>
+	<string name="download_link_and_local_description">Carcare inoghe pro iscarrigare o carrigare documentos de mapas sena lìnia.
+\nCarca un\'elementu esistente pro bìdere prus minujos, carca e mantène carcau pro deativare o cantzellare. Datos currentes in su dispositivu (%1$s lìberos):</string>
+	<string name="index_settings_descr">Iscàrriga e gesti sas mapas sena lìnia sarbadas in su dispositivu</string>
+	<string name="map_online_plugin_is_not_installed">Abìlita su plugin pro sas mapas sena lìnia pro ammustrare àteras mitzas</string>
+	<string name="osmand_monitoring_description">Ammustra sas impostaduras pro fatzilitare sa registratzione in unu documentu GPX o in lìnia impreande uu servìtziu web.</string>
+	<string name="hide_all_waypoints">Burralos totus</string>
+<string name="default_buttons_selectall">Ischerta totu</string>
+	<string name="edit_filter_delete_menu_item">Burra</string>
+	<string name="filter_current_poiButton">Filtru</string>
+	<string name="poi_dialog_comment_default">Mudadura PDI</string>
+	<string name="poi_dialog_other_tags_message">Totu sas etichetas sunt sarbadas</string>
+	<string name="poi_dialog_comment">Cummentu</string>
+	<string name="poi_dialog_name">Nùmene</string>
+	<string name="poi_error_info_not_loaded">Informatziones relatas a su nodu non carrigadas</string>
+	<string name="poi_error_io_error_template">Errore de I/O durante s\'esecutzione de s\'atzione {0}.</string>
+	<string name="poi_action_succeded_template">Atzione {0} reseddida cumpridamente.</string>
+	<string name="first_time_msg">Gratzias pro s\'impreu de OsmAnd. Pro meda de sas caraterìsticas de s\'àplicu tènes bisongiu de datos locales sena lìnia, chi podent èssere icarrigadas dae \'Impostaduras\'→\'Gesti sos documentos mapas\'. A pustis at a èssere possìbile ammustrare mapas, chircare indirìtzos, PDI, e agatare trasportos pùblicos.</string>    
+	<string name="basemap_was_selected_to_download">Sa mapa de base est pedida pro su funtzionamentu curretu de s\'àplicu e est idada ischertada pro s\'iscarrigamentu.</string>
+	<string name="osmand_extra_settings_description">Ammustra sas impostaduras pro sa cunfiguratzione avantzada de sa mapa (comente aumentare sos minujos) e calicunas de dispositivos dislindados.</string>
+	<string name="osmand_development_plugin_description">Ammustra impostaduras pro funtzionalidades in isvilupu e debug comente su nàvigu animadu o ammustrare sa prestatzione de su rendering.</string>
+	<string name="vector_maps_may_display_faster_on_some_devices">Sas mapas vetoriales diat dèpere apàrrere in manera prus lestra. In carchi dispositivu diat podere funtzionare male.</string>
+	<string name="osmand_parking_warning_text">Pretzdentemente est istada annangada a su tzeravallu/calendàriu tuo sa notìfica pro recuperare sa màchina. At a abarrare finas a cando non l\'as a burrare manualmente.</string>    
+	<string name="rendering_attr_noPolygons_description">Faghe divènnere transparentes totu sas caraterìsticas de sas àreas de su terrinu</string>
+	<string name="rendering_attr_hmRendered_description">Aumenta sa cantidade ammustrada de minujos de sa mapa</string>
+	<string name="osmand_rastermaps_plugin_description">Ammustra sas impostaduras pro cunfigurare una variedade de mapas in lìnia o a tasseddos in cache comente mapa de base pro sas mapas subrapostas/de sutafondu. Custas mapas podent èssere fintzas ammaniadas sena lìnia e copiadas in sa cartella de OsmAnd.</string>
+	
+	<string name="tip_recent_changes_0_8_0_t">"Mudas in sa 0.8.0:
+\n\t- *Funtzionalidade a plugin*
+\n\t - Medas de sas funtzionalidades sunt afiotadas pro carateristicas e podent èssere abilitadas/disabilitadas in sas impostaduras de su plugin. Podes abilitare mitzas pro mapas a tasseddos (in lìnia o in cache), impostaduras pro s\'arrastamentu, e meda àteras funtziones noas e giai esistentes.
+\n\t- *Suportu nou pro sas mapas sena lìnia*
+\n\t - Su rendering de sas mapas diventada prus lestru e prus pretzisu (sos problemas pro sas lìnias de costa e sas areas allagadas sunt istados acontzados).
+\n\t - Depes icarrigare totu datos sena lìnia noos (sos betzos no ant a èssere prus suportados)
+\n\t- *Càlculu de s\'àndala sena lìnia*
+\n\t - Su càlculu de sas àndala divènnidi prus sòlidu\n\t *Megioramentos impreabilidade e UI*
+\n\t - Megioramentos in medas àreas "</string>
+	<string name="osm_editing_plugin_description">Ammustra sasimpostaduras netzessàrias pro cuntribuire ad OSM comente sa regorta/mudadura de sos PDI de OSM, apèrrere/cummentare errores de OSM e inviare documentos GPX registrados (rechedet sas credentziales de OSM).</string>
+	<string name="play_commands_of_currently_selected_voice">Riprodui sos cumandos de sa boghe como seletzionada</string>
+	<string name="test_voice_prompts">Proa sos cumandos vocales</string>    
+	<string name="switch_to_raster_map_to_see">Peruna mapa vetoriale est disponìbile pro custa positzione. Ne podes iscarrigare una in Impostaduras (Gesti sos datos mapas), o colare a sas mapas in lìnia (abìlita sas mapas in lìnia pro lu fàghere).</string>
+	<string name="tip_recent_changes_0_7_2_t">"Mudas in sa 0.7.2:
+\n\t- Disinnu nativu pro totu sos dispositivos
+\n\t- Creatzione sena lìnia de sos PDI
+\n\t- Atzessibilidade
+\n\t- Medas curretziones de errores "</string>
+	<string name="support_new_features_descr">Faghe una donatzione pro tènnere funtzionalidades noas inmplementadas in s\'àplicu</string>
 	</resources>
