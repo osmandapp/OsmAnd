@@ -1844,4 +1844,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="arrival_distance_factor_late">Tarde</string>
     <string name="arrival_distance_factor_at_last">En los últimos metros</string>
     <string name="rendering_attr_coloredBuildings_name">Edificios de colores</string>
-    </resources>
+    <string name="hide_all_waypoints">Quitar todos</string>
+</resources>
