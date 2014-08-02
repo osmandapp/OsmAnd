@@ -13,7 +13,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -26,7 +25,6 @@ import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.plus.sherpafy.WaypointDialogHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
@@ -537,6 +535,11 @@ public class RoutingHelper {
 	}
 
 	private synchronized void setNewRoute(RouteCalculationResult res, Location start){
+		if (app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get()){
+			app.getLocationProvider().setVisibleLocationPoints(new ArrayList<LocationPoint>(app.getFavorites().getFavouritePoints()));
+		} else {
+			app.getLocationProvider().clearAllVisiblePoints();
+		}
 		final boolean newRoute = !this.route.isCalculated();
 		route = res;
 		if (isFollowingMode) {
