@@ -1,5 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
+<resources>
+	<string name="rendering_attr_coloredBuildings_name">Gefärbte Gebäude</string>
+	<string name="continue_navigation">Navigation fortsetzen</string>
+	<string name="pause_navigation">Navigation pausieren</string>
+	<string name="keep_navigation_service">Aktiv lassen</string>
+	<string name="stop_navigation_service">Anhalten</string>
+	<string name="enable_sleep_mode">Schlafmodus aktivieren</string>
+	<string name="rendering_attr_alpineHiking_name">Alpinwanderung Ansicht</string>
+	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
+	<string name="rendering_attr_osmcTraces_name">Wandersymbole anzeigen</string>
+	<string name="rendering_attr_osmcTraces_description">Wandersymbole anzeigen (OSMC)</string>
+	<string name="arrival_distance_factor_early">Früh</string>
+	<string name="arrival_distance_factor_normally">Normal</string>
+	<string name="arrival_distance_factor_late">Spät</string>
+	<string name="arrival_distance_factor_at_last">Auf den letzen Metern</string>
+	<string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -587,7 +602,7 @@
 	</string>
 	<string name="tip_app_mode">Profil verwenden</string>
 	<string name="tip_app_mode_t_v2">OsmAnd unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke.
-		\n\nDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad, oder Fußgänger) auf dem Kartenbildschirm gewählt werden, oder auch beim Berechnen einer Route (Transportmittel).
+		\n\nDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad oder Fußgänger) auf dem Kartenbildschirm gewählt werden, oder auch beim Berechnen einer Route (Transportmittel).
 	</string>
 	<string name="tip_search">Suchen</string>
 	<string name="tip_search_t">Um bestimmte Orte zu finden, können Sie entweder auf der Landkarte über das \'Verwende Position\'-Kontextmenü \'In der Nähe suchen\' aufrufen, oder den Suchbildschirm über \'Menü\' → \'Suche\' erreichen.
@@ -1321,10 +1336,10 @@
 	<string name="tip_recent_changes_1_3_t">Änderungen in 1.3:
 		\n\t * Holo-Theme (Anpassung des Theme)
     </string>
-	<string name="monitoring_settings">Tracking &amp; Schlaf-Modus</string>
-	<string name="monitoring_settings_descr">Tracking-Einstellungen und Konfiguration des Hintergrundmodus</string>
+	<string name="monitoring_settings">Aufzeichnungs-Dienste</string>
+	<string name="monitoring_settings_descr">Konfiguration der Aufzeichnungs-Dienste</string>
 	<string name="osmand_monitoring_plugin_description">Aktivieren Sie Tracking und die Navigation im Schlaf-Modus (Bildschirm aus). Das GPS-Gerät wird regelmäßig aktiviert. Zeigt Ihre Einstellungen zum Aufzeichnen Ihrer Wege als lokale GPX-Datei oder online bei einem Web-Service.</string>
-	<string name="osmand_monitoring_plugin_name">Tracking &amp; Schlaf-Modus</string>
+	<string name="osmand_monitoring_plugin_name">Aufzeichnungs-Dienste</string>
 	<string name="choose_osmand_theme_descr">Theme der Anwendung auswählen</string>
 	<string name="accessibility_options">Eingabehilfen-Einstellungen</string>
 	<string name="select_address_activity">Adresse auswählen</string>
@@ -1865,7 +1880,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="selected">ausgewählte</string>
     <string name="save_as_favorites_points">als Favoriten-Gruppe speichern</string>
     <string name="select_destination_and_intermediate_points">Wegpunkte auswählen</string>
-    <string name="gpx_split_interval">Trennungs-Intervall wählen</string>
+    <string name="gpx_split_interval">Trennungs-Intervall</string>
     <string name="gpx_info_subtracks">"Spurteile: %1$s "</string>
 	<string name="osmo_edit_color">Darstellungsfarbe</string>
     <string name="sort_by_distance">Sortieren nach Entfernung</string>
@@ -1891,7 +1906,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_attr_showSurfaces_name">Straßenoberfläche anzeigen</string>
     <string name="rendering_attr_showCycleRoutes_name">Fahrrad-Routen anzeigen</string>
     <string name="osmo_auth_error_short">Anmeldung fehlgeschlagen</string>
-    <string name="osmo_auth_error">Fehler bei der OsMo-Anmeldung: %1$s.\n Möglicherweise ist der Dienst nicht verfügbar, oder deine Anmeldung ist abgelaufen.\n Fortsetzen mit einer neuen Registrierung?</string>
+    <string name="osmo_auth_error">Fehler bei der OsMo-Anmeldung: %1$s.\n Möglicherweise ist der Dienst nicht verfügbar oder deine Anmeldung ist abgelaufen.\n Fortsetzen mit einer neuen Registrierung?</string>
     <string name="osmo_group_by_invite">Auf Einladung beitreten</string>
     <string name="osmo_group_information_desc">" - Alle angelegten Gruppen sind öffentlich! Für eine anonyme Verbindung bitte direkt mittels Tracker-ID verbinden.\n - In einer Gruppe können sich bis zu 16 Mitglieder anmelden.\n - Bei Inaktivität oder nur einem einzigen Mitglied über 2 Wochen wird die Gruppe gelöscht.\n - Der Zugang zu einer Gruppe kann beschränkt werden: \"nur auf Einladung\". Zur Steuerung der Gruppe benötigt man Zugang zur Admin-Konsole.\n - Zum Erstellen einer Gruppe mit abweichenden Bedingungen bitte Kontakt aufnehmen unter http://osmo.mobi"</string>
     <string name="osmo_group_information">Bitte vor dem Erstellen von Gruppen beachten!</string>
@@ -1917,12 +1932,13 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="lang_he">Hebräisch</string>
     <string name="live_monitoring_m_descr">Sende Verfolgungsdaten zu einem festgelegten Internet Dienst, wenn GPX-Aufzeichnung aktiviert ist.</string>
 	<string name="live_monitoring_m">Online Verfolgung (benötigt GPX)</string>
-    <string name="live_monitoring_start">Starte online Verfolgung</string>
+    <string name="live_monitoring_start">Starte Online-Verfolgung</string>
+    <string name="live_monitoring_stop">Stoppe Online-Verfolgung</string>
 	<string name="gpx_monitoring_start">Starte GPX-Aufzeichnung</string>
 	<string name="gpx_monitoring_stop">Stoppe GPX-Aufzeichnung</string>
     <string name="gpx_start_new_segment">Starte neues Segment</string>
     <string name="lang_sc">Sardinisch</string>
 	<string name="rendering_attr_subwayMode_name">U-Bahn-Modus</string>
- 	<string name="gps_wake_up_timer">GPS Aufwach Intervall</string>
+ 	<string name="gps_wake_up_timer">GPS Aufwach-Intervall</string>
 	<string name="sleep_mode_stop_dialog">GPS aktiv lassen?</string>
 	</resources>
