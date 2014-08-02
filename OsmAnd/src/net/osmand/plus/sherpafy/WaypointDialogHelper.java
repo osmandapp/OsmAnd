@@ -205,6 +205,13 @@ public class WaypointDialogHelper {
 					v.findViewById(R.id.waypoint_icon).setLayoutParams(ll);
 				}
 				createView(v, getItem(position));
+				TextView text = (TextView) v.findViewById(R.id.waypoint_text);
+				text.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						showOnMap(visibleLocationPoints.get(position));
+					}
+				});
 
 				View remove = v.findViewById(R.id.info_close);
 				((ImageButton) remove).setImageDrawable(mapActivity.getResources().getDrawable(
@@ -229,7 +236,7 @@ public class WaypointDialogHelper {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-				itemClick(visibleLocationPoints.get(i));
+				showOnMap(visibleLocationPoints.get(i));
 			}
 		});
 
@@ -247,5 +254,13 @@ public class WaypointDialogHelper {
 			}
 		});
 		builder.show();
+	}
+
+	private void showOnMap(LocationPoint locationPoint) {
+		// AnimateDraggingMapThread thread = mapActivity.getMapView().getAnimatedDraggingThread();
+		int fZoom = mapActivity.getMapView().getZoom() < 15 ? 15 : mapActivity.getMapView().getZoom();
+		// thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
+		mapActivity.getMapView().setIntZoom(fZoom);
+		mapActivity.getMapView().setLatLon(locationPoint.getLatitude(), locationPoint.getLongitude());
 	}
 }
