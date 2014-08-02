@@ -202,7 +202,7 @@ public class MapRoutePreferencesControl extends MapControls {
 				settings.GPX_ROUTE_CALC.set(selected);
 				rp.setCalculateOsmAndRoute(selected);
 				updateParameters();
-			} 
+			}
 		}
 		if (gpxParam.id == R.string.calculate_osmand_route_without_internet) {
 			settings.GPX_ROUTE_CALC_OSMAND_PARTS.set(selected);
@@ -210,11 +210,16 @@ public class MapRoutePreferencesControl extends MapControls {
 		if (gpxParam.id == R.string.fast_route_mode) {
 			settings.FAST_ROUTE_MODE.set(selected);
 		}
+		if (gpxParam.id	== R.string.announce_nearby_favorites){
+			settings.ANNOUNCE_NEARBY_FAVORITES.set(selected);
+		}
 	}
 
 	
 	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode am) {
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
+		list.add(new OtherLocalRoutingParameter(R.string.announce_nearby_favorites,
+				mapActivity.getString(R.string.announce_nearby_favorites), settings.ANNOUNCE_NEARBY_FAVORITES.get()));
 		GPXRouteParamsBuilder rparams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		boolean osmandRouter = settings.ROUTER_SERVICE.get() == RouteService.OSMAND ;
 		if(!osmandRouter) {
@@ -255,6 +260,7 @@ public class MapRoutePreferencesControl extends MapControls {
 				list.add(rp);
 			}
 		}
+
 		return list;
 	}
 	private String getString(int id) {
