@@ -1959,6 +1959,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="arrival_distance_factor_at_last">V posledných metroch</string>
     <string name="hide_all_waypoints">Odstrániť všetky</string>
 <string name="av_camera_pic_size">Veľkosť fotografie</string>
-	<string name="av_camera_pic_size_descr">Zvoľte veľkost obrázka interného fotoaparátu</string>
+	<string name="av_camera_pic_size_descr">Zvoľte veľkosť obrázka interného fotoaparátu</string>
     <string name="announce_nearby_favorites">Oznamovať obľúbené miesta v blízkosti</string>
 </resources>
