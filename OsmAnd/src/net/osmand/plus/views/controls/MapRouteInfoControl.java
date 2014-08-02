@@ -55,9 +55,10 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	private AlertDialog favoritesDialog;
 	private boolean selectFromMapTouch; 
 	private boolean selectFromMapForTarget;
-	
-	
-	public MapRouteInfoControl(ContextMenuLayer contextMenu, 
+
+	private boolean showDialog = false;
+
+	public MapRouteInfoControl(ContextMenuLayer contextMenu,
 			MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 		super(mapActivity, showUIHandler, scaleCoefficient);
 		this.contextMenu = contextMenu;
@@ -85,6 +86,10 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	@Override
 	public void showControls(FrameLayout parent) {
 		infoButton = addButton(parent, R.string.route_info, R.drawable.map_btn_signpost);
+		if (showDialog){
+			showDialog();
+			showDialog = false;
+		}
 		controlVisible = true;
 		infoButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -451,5 +456,9 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 			dialog = null;
 			infoButton.setBackgroundResource(R.drawable.map_btn_signpost);
 		}
+	}
+
+	public void setShowDialog() {
+		showDialog = true;
 	}
 }
