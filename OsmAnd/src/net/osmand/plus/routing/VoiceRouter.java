@@ -154,7 +154,7 @@ public class VoiceRouter {
 		}
 	}
 	
-	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon){
+	public boolean isDistanceLess(float currentSpeed, double dist, double etalon){
 		if(currentSpeed <= 0) {
 			currentSpeed = DEFAULT_SPEED;
 		}

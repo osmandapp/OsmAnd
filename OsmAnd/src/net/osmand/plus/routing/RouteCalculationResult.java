@@ -32,15 +32,14 @@ public class RouteCalculationResult {
 	private final List<RouteDirectionInfo> directions;
 	private final List<RouteSegmentResult> segments;
 	private final List<AlarmInfo> alarmInfo;
-	private final List<LocationPoint> waypoints;
 	private final String errorMessage;
 	private final int[] listDistance;
 	private final int[] intermediatePoints;
-	private final int[] waypointIndexes;
 	private final float routingTime;
 	
 	protected int cacheCurrentTextDirectionInfo = -1;
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
+	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
 
 	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
 	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
@@ -60,12 +59,9 @@ public class RouteCalculationResult {
 		this.listDistance = new int[0];
 		this.directions = new ArrayList<RouteDirectionInfo>();
 		this.alarmInfo = new ArrayList<AlarmInfo>();
-		this.waypointIndexes = new int[0];
-		this.waypoints = new ArrayList<LocationPoint>();
 	}
 	
-	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, 
-			DataTileManager<? extends LocationPoint> waypointsTm) {
+	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params) {
 		this.routingTime = 0;
 		this.errorMessage = null;
 		this.intermediatePoints = new int[params.intermediates == null ? 0 : params.intermediates.size()];
@@ -91,13 +87,14 @@ public class RouteCalculationResult {
 		calculateIntermediateIndexes(params.ctx, this.locations, params.intermediates, localDirections, this.intermediatePoints);
 		this.directions = Collections.unmodifiableList(localDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
-		this.waypoints = new ArrayList<LocationPoint>();
-		this.waypointIndexes = calculateWaypointIndexes(list, waypointsTm, waypoints);
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,  
-			Context ctx, boolean leftSide, float routingTime,DataTileManager<LocationPoint> waypointsTm) {
+			Context ctx, boolean leftSide, float routingTime, List<LocationPoint> waypoints) {
 		this.routingTime = routingTime;
+		if(waypoints != null) {
+			this.locationPoints.addAll(waypoints);
+		}
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
 		this.errorMessage = null;
 		this.intermediatePoints = new int[intermediates == null ? 0 : intermediates.size()];
@@ -115,36 +112,12 @@ public class RouteCalculationResult {
 		this.directions = Collections.unmodifiableList(computeDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
 		this.alarmInfo = Collections.unmodifiableList(alarms);
-		this.waypoints = new ArrayList<LocationPoint>();
+	}
 
-		this.waypointIndexes = calculateWaypointIndexes(this.locations, waypointsTm, waypoints);
+	public List<LocationPoint> getLocationPoints() {
+		return locationPoints;
 	}
-	
-	public List<LocationPoint> getWaypointsToAnnounce(Location loc) {
-		if (currentWaypointGPX != lastWaypointGPX && loc != null) {
-			ArrayList<LocationPoint> points = new ArrayList<LocationPoint>();
-			Location next = locations.get(currentRoute);
-			float dist = loc.distanceTo(next);
-			while (currentWaypointGPX < lastWaypointGPX) {
-				WptPt w = (WptPt) waypoints.get(currentWaypointGPX);
-				if(MapUtils.getDistance(w.lat, w.lon, next.getLatitude(), next.getLongitude()) > dist + 50) {
-					currentWaypointGPX++;					
-				} else {
-					break;
-				}
-			}
-			while (currentWaypointGPX < lastWaypointGPX) {
-				WptPt w = (WptPt) waypoints.get(currentWaypointGPX);
-				if(MapUtils.getDistance(w.lat, w.lon, loc.getLatitude(), next.getLongitude()) < 60) {
-					currentWaypointGPX++;
-					points.add(w);
-				}
-			}
-			return points;
-		}
-		return Collections.emptyList();
-	}
-	
+
 	private static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
 			List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
 		if(intermediates != null && localDirections != null) {
@@ -757,9 +730,6 @@ public class RouteCalculationResult {
 		}
 		while (nextAlarmInfo < alarmInfo.size() && alarmInfo.get(nextAlarmInfo).locationIndex < currentRoute) {
 			nextAlarmInfo++;
-		}
-		while(lastWaypointGPX < waypointIndexes.length && waypointIndexes[lastWaypointGPX] <= currentRoute) {
-			lastWaypointGPX++;
 		}
 		while(nextIntermediate < intermediatePoints.length) {
 			RouteDirectionInfo dir = directions.get(intermediatePoints[nextIntermediate]);

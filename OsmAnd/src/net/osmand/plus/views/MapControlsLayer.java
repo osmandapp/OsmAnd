@@ -320,6 +320,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
+	public void showDialog(){
+		mapInfoNavigationControl.setShowDialog();
+	}
+
 	public WaypointDialogHelper getWaypointDialogHelper() {
 		return waypointDialogHelper;
 	}

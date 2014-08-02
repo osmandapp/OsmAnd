@@ -642,6 +642,7 @@ public class MapActivityActions implements DialogProvider {
 		
 		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 		mapActivity.getMapView().refreshMap(true);
+		mapActivity.getMapLayers().getMapControlsLayer().showDialog();
 		if(targets.hasTooLongDistanceToNavigate()) {
 			app.showToastMessage(R.string.route_is_too_long);
 		}
