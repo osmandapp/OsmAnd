@@ -1274,7 +1274,7 @@
 	<string name="street_name">Ulica</string>
 	<string name="hno">Číslo domu</string>
     <string name="monitoring_settings">Logovacie služby</string>
-    <string name="monitoring_settings_descr">Konfiguruje ako sa majú zaznamenať trasy a povoliť režim spánku</string>
+    <string name="monitoring_settings_descr">Konfigurovať ako sa majú zaznamenať trasy</string>
     <string name="osmand_monitoring_plugin_name">Logovacie služby</string>
     <string name="choose_osmand_theme_descr">Výber témy pre aplikáciu</string>
     <string name="choose_osmand_theme">Téma aplikácie</string>
@@ -1958,4 +1958,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="arrival_distance_factor_late">Neskoro</string>
     <string name="arrival_distance_factor_at_last">V posledných metroch</string>
     <string name="hide_all_waypoints">Odstrániť všetky</string>
+<string name="av_camera_pic_size">Veľkosť fotografie</string>
+	<string name="av_camera_pic_size_descr">Zvoľte veľkost obrázka interného fotoaparátu</string>
+    <string name="announce_nearby_favorites">Oznamovať obľúbené miesta v blízkosti</string>
 </resources>
