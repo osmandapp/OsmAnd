@@ -3,6 +3,9 @@ package net.osmand.plus.views.controls;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.Point;
+import android.os.SystemClock;
+import android.view.*;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -31,10 +34,6 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.view.Gravity;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -98,9 +97,6 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 				}
 			}
 		});
-		if(getTargets().getPointToNavigate() == null) {
-			showDialog();
-		}
 	}
 	
 	private Dialog createDialog() {
@@ -131,7 +127,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
         lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.gravity = Gravity.BOTTOM;
-        lp.y = (int) (infoButton.getBottom() - infoButton.getTop() + scaleCoefficient * 5); 
+		lp.y = (int) (infoButton.getBottom() - infoButton.getTop() + scaleCoefficient * 5 + getExtraVerticalMargin());
         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setAttributes(lp);
