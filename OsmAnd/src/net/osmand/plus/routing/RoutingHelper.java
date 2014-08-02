@@ -268,7 +268,6 @@ public class RoutingHelper {
 				// 5. Update Voice router
 				if (isFollowingMode) {
 					// don't update in route planing mode
-					announceGpxWaypoints(currentLocation);
 					boolean inRecalc = calculateRoute || isRouteBeingCalculated();
 					if (!inRecalc && !wrongMovementDirection) {
 						voiceRouter.updateStatus(currentLocation, false);
@@ -312,25 +311,6 @@ public class RoutingHelper {
 			return locationProjection;
 		} else {
 			return currentLocation;
-		}
-	}
-
-
-	private void announceGpxWaypoints(Location currentLocation) {
-		if (currentLocation != null) {
-			List<LocationPoint> wpt = route.getWaypointsToAnnounce(currentLocation);
-			if (wpt.size() > 0) {
-				String s = "";
-				for (LocationPoint w : wpt) {
-					if(!Algorithms.isEmpty(w.getName())) {
-						s = w.getName() +",";
-					}
-				}
-				if(!Algorithms.isEmpty(s)) {
-					voiceRouter.announceWaypoint(s);
-//					dialogHelper.addWptDialog(wpt.get(0));
-				}
-			}
 		}
 	}
 
@@ -535,11 +515,12 @@ public class RoutingHelper {
 	}
 
 	private synchronized void setNewRoute(RouteCalculationResult res, Location start){
+		ArrayList<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
 		if (app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get()){
-			app.getLocationProvider().setVisibleLocationPoints(new ArrayList<LocationPoint>(app.getFavorites().getFavouritePoints()));
-		} else {
-			app.getLocationProvider().clearAllVisiblePoints();
+			locationPoints.addAll(app.getFavorites().getFavouritePoints());
 		}
+		locationPoints.addAll(res.getLocationPoints());
+		app.getLocationProvider().setVisibleLocationPoints(locationPoints);
 		final boolean newRoute = !this.route.isCalculated();
 		route = res;
 		if (isFollowingMode) {
