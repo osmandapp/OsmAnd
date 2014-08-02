@@ -105,7 +105,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private static final int NOT_ANNOUNCED = 0;
 	private static final int ANNOUNCED_ONCE = 1;
-	private static final int ANNOUNCED_TWICE = 2;
 
 	private ConcurrentHashMap<LocationPoint , Integer> locationPointsStates = new ConcurrentHashMap<LocationPoint, Integer>();
 	private List<LocationPoint> visibleLocationPoints = new CopyOnWriteArrayList<LocationPoint>();
@@ -184,12 +183,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				double d1 = MapUtils.getDistance(lastLocation.getLatitude(), lastLocation.getLongitude(),
 						point.getLatitude(), point.getLongitude());
 				int state = locationPointsStates.get(point);
-				if (state == NOT_ANNOUNCED && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastLocation.getSpeed(), d1, 500)){
+				if(state <= ANNOUNCED_ONCE && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastLocation.getSpeed(), d1, 150)) {
+					nameToAnnounce = (nameToAnnounce == null ? "" : ", ") + point.getName();
+					locationPointsStates.remove(point);
+				} else if (state == NOT_ANNOUNCED && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastLocation.getSpeed(), d1, 500)){
 					nameToAnnounce = (nameToAnnounce == null? "":", ")+point.getName();
 					locationPointsStates.put(point, state + 1);
-				} else if(state == ANNOUNCED_ONCE && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastLocation.getSpeed(), d1, 150)){
-					nameToAnnounce = (nameToAnnounce == null? "":", ")+point.getName();
-					locationPointsStates.remove(point);
 				}
 			}
 			if(nameToAnnounce!= null) {
