@@ -1931,4 +1931,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="arrival_distance_factor_late">Tard</string>
     <string name="arrival_distance_factor_at_last">Als darrers metres</string>
     <string name="rendering_attr_coloredBuildings_name">Edificis amb colors</string>
-    </resources>
+    <string name="av_camera_pic_size">Mida d\'imatge de la càmera</string>
+	<string name="av_camera_pic_size_descr">Triar la mida d\'imatge de la càmera interna</string>
+    <string name="hide_all_waypoints">Esborra tot</string>
+    <string name="announce_nearby_favorites">Indica preferits propers</string>
+</resources>
