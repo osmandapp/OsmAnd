@@ -1808,5 +1808,5 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="hide_all_waypoints">Pašalinti visus</string>
 <string name="av_camera_pic_size">Nuotraukos dydis</string>
 	<string name="av_camera_pic_size_descr">Pasirinkti vidinės kameros nuotraukos dydį</string>
-    <string name="announce_nearby_favorites">Pranešti apie artimiausias įsimintinas vietas</string>
+    <string name="announce_nearby_favorites">Pranešti apie artimiausias įsimintas vietas</string>
 </resources>
