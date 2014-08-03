@@ -1941,4 +1941,13 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="rendering_attr_subwayMode_name">U-Bahn-Modus</string>
  	<string name="gps_wake_up_timer">GPS Aufwach-Intervall</string>
 	<string name="sleep_mode_stop_dialog">GPS aktiv lassen?</string>
-	</resources>
+	<string name="osmo_invite">Einladen ...</string>
+    <string name="osmo_leave_confirmation_msg">Die Gruppe %1$s verlassen?</string>
+    <string name="forward">Weiter</string>
+    <string name="osmo_cancel_moving_target">Bewegliches Ziel abbrechen</string>
+    <string name="osmo_set_moving_target">Als bewegliches Ziel auswählen</string>
+    <string name="av_camera_pic_size">Bildgröße der Kamera</string>
+	<string name="av_camera_pic_size_descr">interne Größe der Kamerabilder bestimmen</string>
+    <string name="hide_all_waypoints">alle löschen</string>
+    <string name="announce_nearby_favorites">Ansage von Favoriten in den Nähe</string>
+</resources>
