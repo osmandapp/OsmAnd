@@ -1799,4 +1799,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Tard</string>
     <string name="arrival_distance_factor_at_last">Dans les derniers mètres</string>
-    </resources>
+    <string name="av_camera_pic_size">Dimensions de la photo</string>
+	<string name="av_camera_pic_size_descr">Sélectionner les dimensions de la photo</string>
+    <string name="hide_all_waypoints">Supprimer tout</string>
+    <string name="announce_nearby_favorites">Annoncer les favoris à proximité</string>
+</resources>
