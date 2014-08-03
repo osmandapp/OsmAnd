@@ -1954,4 +1954,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="arrival_distance_factor_normally">Normale</string>
     <string name="arrival_distance_factor_late">Tardi</string>
     <string name="arrival_distance_factor_at_last">Agli ultimi metri</string>
-    </resources>
+    <string name="hide_all_waypoints">Cancellali tutti</string>
+</resources>

@@ -1074,7 +1074,7 @@
     <string name="street_name">街道</string>
 	<string name="hno">門牌號碼</string>
     <string name="monitoring_settings">日誌記錄服務</string>
-    <string name="monitoring_settings_descr">組態如何記錄行程和啟用休眠模式</string>
+    <string name="monitoring_settings_descr">組態如何記錄行程</string>
     <string name="osmand_monitoring_plugin_description">透過週期性地喚醒 GPS 裝置，在休眠模式下(螢幕關閉)啟用追蹤和導航。
         顯示設定便於去記錄您在當地的行程到裝置端 GPX 檔案或在線上使用網路服務。</string>
     <string name="osmand_monitoring_plugin_name">日誌記錄服務</string>
@@ -1935,4 +1935,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="arrival_distance_factor_late">稍遲</string>
     <string name="arrival_distance_factor_at_last">最後一米</string>
     <string name="rendering_attr_coloredBuildings_name">有色彩的建築物</string>
-    </resources>
+    <string name="hide_all_waypoints">全部移除</string>
+<string name="av_camera_pic_size">相機照片的大小</string>
+	<string name="av_camera_pic_size_descr">選擇內部相機照片的大小</string>
+    <string name="announce_nearby_favorites">通報在附近的我的最愛</string>
+</resources>

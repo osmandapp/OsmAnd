@@ -26,7 +26,7 @@ public abstract class MapControls {
 	protected int shadowColor;
 	private boolean visible;
 	private long delayTime;
-	
+
 	protected int gravity = Gravity.BOTTOM | Gravity.RIGHT;
 	protected int margin;
 	protected int vmargin;
@@ -40,19 +40,19 @@ public abstract class MapControls {
 		this.showUIHandler = showUIHandler;
 		this.scaleCoefficient = scaleCoefficient;
 	}
-	
-	
+
+
 	public void setGravity(int gravity) {
 		this.gravity = gravity;
 	}
-	
+
 	public void setMargin(int margin) {
 		this.margin = margin;
 	}
 	public void setVerticalMargin(int vmargin) {
 		this.vmargin = vmargin;
 	}
-	
+
 	protected ImageButton addImageButton(FrameLayout parent, int stringId, int resourceId) {
 		Context ctx = mapActivity;
 		ImageButton  button = new ImageButton(ctx);
@@ -73,17 +73,17 @@ public abstract class MapControls {
 		applyAttributes(ctx, parent, button, stringId, resourceId, extraMargin);
 		return button;
 	}
-	
+
 	public void setNotifyClick(Runnable notifyClick) {
 		this.notifyClick = notifyClick;
 	}
-	
+
 	protected void notifyClicked() {
 		if(notifyClick != null) {
 			notifyClick.run();
 		}
 	}
-	
+
 
 	private void applyAttributes(Context ctx, FrameLayout parent, View button, int stringId, int resourceId,
 			int extraMargin) {
@@ -124,12 +124,12 @@ public abstract class MapControls {
 	public final void init(FrameLayout layout) {
 		initControls(layout);
 	}
-	
+
 	public final void show(FrameLayout layout) {
 		visible = true;
 		showControls(layout);
 	}
-	
+
 	public final void showWithDelay(final FrameLayout layout, final long delay) {
 		this.delayTime = System.currentTimeMillis() + delay;
 		if(!visible) {
@@ -158,25 +158,25 @@ public abstract class MapControls {
 			}
 		}, delay);
 	}
-	
+
 	public final void hide(FrameLayout layout) {
 		if(this.delayTime == 0) {
 			visible = false;
 			hideControls(layout);
 		}
 	}
-	
+
 	public final void forceHide(FrameLayout layout) {
 		delayTime = 0;
 		visible = false;
 		hideControls(layout);
 		mapActivity.getMapView().refreshMap();
 	}
-	
+
 	public boolean isVisible() {
 		return visible;
 	}
-	
+
 	protected boolean isLeft() {
 		return (Gravity.LEFT & gravity) == Gravity.LEFT;
 	}
@@ -184,28 +184,32 @@ public abstract class MapControls {
 	public boolean isBottom() {
 		return (Gravity.BOTTOM & gravity) == Gravity.BOTTOM;
 	}
-	
-	
+
+
 	protected void initControls(FrameLayout layout) {
 	}
 
 	protected abstract void hideControls(FrameLayout layout);
-	
+
 	protected abstract void showControls(FrameLayout layout);
-	
+
 
 	public abstract void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode);
-	
-	
+
+
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
 		return false;
 	}
-	
+
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 
 	public void setExtraVerticalMargin(int extraVerticalMargin) {
 		this.extraVerticalMargin = extraVerticalMargin;
+	}
+
+	public int getExtraVerticalMargin() {
+		return this.extraVerticalMargin;
 	}
 }

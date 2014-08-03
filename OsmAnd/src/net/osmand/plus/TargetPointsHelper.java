@@ -25,8 +25,6 @@ public class TargetPointsHelper {
 	private RoutingHelper routingHelper;
 	private List<StateChangedListener<Void>> listeners = new ArrayList<StateChangedListener<Void>>();
 	private OsmandApplication ctx;
-	private List<LocationPoint> visibleLocationPoints = new CopyOnWriteArrayList<LocationPoint>();
-	private long locationPointsModified;
 
 	public TargetPointsHelper(OsmandApplication ctx){
 		this.ctx = ctx;
@@ -69,47 +67,7 @@ public class TargetPointsHelper {
 		return intermediatePoints;
 	}
 
-	public List<LocationPoint> getVisibleLocationPoints() {
-		return visibleLocationPoints;
-	}
 
-	public void addVisibleLocationPoint(LocationPoint lp) {
-		this.visibleLocationPoints.add(lp);
-		this.locationPointsModified = System.currentTimeMillis();
-		sortVisibleLocationPoints();
-	}
-
-	public void removeAllVisiblePoints() {
-		this.locationPointsModified = System.currentTimeMillis();
-		visibleLocationPoints.clear();
-	}
-
-
-	public void sortVisibleLocationPoints() {
-		final Location lastLocation = ctx.getLocationProvider().getLastKnownLocation();
-		if(lastLocation != null) {
-			Collections.sort(this.visibleLocationPoints, new Comparator<LocationPoint>() {
-				@Override
-				public int compare(LocationPoint locationPoint, LocationPoint locationPoint2) {
-					double d1 = MapUtils.getDistance(lastLocation.getLatitude(), lastLocation.getLongitude(),
-							locationPoint.getLatitude(), locationPoint.getLongitude());
-					double d2 = MapUtils.getDistance(lastLocation.getLatitude(), lastLocation.getLongitude(),
-							locationPoint2.getLatitude(), locationPoint2.getLongitude());
-					return Double.compare(d1, d2);
-				}
-			});
-			this.locationPointsModified = System.currentTimeMillis();
-		}
-	}
-
-	public long getLocationPointsModified() {
-		return locationPointsModified;
-	}
-
-	public void removeVisibleLocationPoint(LocationPoint lp) {
-		this.visibleLocationPoints.remove(lp);
-		this.locationPointsModified = System.currentTimeMillis();
-	}
 
 
 	public List<LatLon> getIntermediatePointsWithTarget() {

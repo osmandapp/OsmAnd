@@ -92,7 +92,7 @@
 	<string name="live_monitoring_interval">온라인 트래킹 시간 간격</string>
 	<string name="live_monitoring_url_descr">온라인 트래킹할 웹 주소를 지정합니다. 매개변수 형식 : 위도={0}, 경도={1}, 시간={2}, hdop={3}, 고도={4}, 속도={5}, bearing={6}</string>
 	<string name="live_monitoring_url">온라인 트래킹 웹 주소</string>
-	<string name="gpx_monitoring_disabled_warn">\'Log track to GPX 파일\' 설정을 활성화하세요.</string>
+	<string name="gpx_monitoring_disabled_warn">\'트랙을 GPX 파일에 기록\' 설정을 활성화 하세요.</string>
 	<string name="show_current_gpx_title">현재의 GPX트랙을 보여줍니다</string>
 	<string name="tip_recent_changes_0_7_0_t">0.7.0 버전에 대한 변경 사항들 :
 		\n\t- 오프라인 위키피디아 기사 포함 데이터
@@ -1019,7 +1019,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="tip_map_styles">지도 스타일</string>
 	<string name="about_version">버전:</string>
     <string name="about_settings_descr">버전 정보, 라이센스, 프로젝트 멤버</string>
-    <string name="tips_and_tricks">Tips (도움말)</string>
+    <string name="tips_and_tricks">도움말</string>
     <string name="about_settings">소개</string>
     <string name="local_index_tile_data_zooms">다운로드된 줌 : %1$s</string>
     <string name="local_index_tile_data_expire">만료(분) : %1$s</string>
@@ -1154,7 +1154,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
          \n\t* 지도 화면에서 좌상단 버튼는  메뉴버튼을 대체
     </string>
     <string name="monitoring_settings">로깅 서비스</string>
-    <string name="monitoring_settings_descr">트랙을 기록하는 방법을 구성하고 절전 모드를 활성화합니다</string>
+    <string name="monitoring_settings_descr">트랙을 기록하는 방법을 구성합니다</string>
     <string name="osmand_monitoring_plugin_description">절전모드(스크린 끄기)에서 트래킹 및 경로탐색 활성화, 주기적으로 GPS 장치가 작동중일 때 . 표시 설정은 로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 트랙을 기록하는 설비 가능.</string>
     <string name="osmand_monitoring_plugin_name">로깅 서비스</string>
     <string name="osmand_background_plugin_description">주기적으로 GPS 장치를 깨어 절전모드(스크린 끄기)에서 트래킹 및 경로탐색을 가능하게 하는 설정 표시.</string>
@@ -1196,8 +1196,8 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="srtm_paid_version_msg">등고선 추가 개발을 지원하기 위해 구글시장에서 플러그인을 구입하시기 바랍니다 .</string>
     <string name="srtm_paid_version_title">등고선 플러그인</string>
     <string name="av_def_action_choose">요청에 대한 선택</string>
-    <string name="av_def_action_video">비디오 기록</string>
-    <string name="av_def_action_audio">오디오 기록</string>
+    <string name="av_def_action_video">비디오 녹화</string>
+    <string name="av_def_action_audio">오디오 녹음</string>
     <string name="av_widget_action_descr">기본 위젯의 동작을 선택합니다</string>
     <string name="av_widget_action">기본 위젯 작업</string>
     <string name="av_video_format_descr">비디오 출력 형식 선택</string>
@@ -2000,7 +2000,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="layer_amenity_label">포인트 레이블</string>
     <string name="show_zoom_buttons_navigation_descr">길안내중에 줌 버튼 보기</string>
     <string name="show_zoom_buttons_navigation">줌 버튼 보이기</string>
-    <string name="none_selected_gpx">"선택한 GPX 파일 없음. 이용 가능한 경로를 선택 하려면  누르고 있어요."</string>
+    <string name="none_selected_gpx">"선택한 GPX 파일 없음. 이용 가능한 GPX트랙을 선택 하려면  누르고 있어요."</string>
     <string name="local_index_unselect_gpx_file">선택을 취소합니다.</string>
     <string name="local_index_select_gpx_file">보이기위해 선택</string>
     <string name="sort_by_distance">거리로 정렬</string>
@@ -2074,4 +2074,8 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="arrival_distance_factor_normally">일반적으로</string>
     <string name="arrival_distance_factor_late">늦게</string>
     <string name="arrival_distance_factor_at_last">마지막 미터</string>
-    </resources>
+    <string name="hide_all_waypoints">모든 포인트 숨기기</string>
+<string name="av_camera_pic_size">카메라 사진 크기</string>
+	<string name="av_camera_pic_size_descr">내부 카메라 사진 크기 선택</string>
+    <string name="announce_nearby_favorites">가까운 즐겨찾기 알리기</string>
+</resources>

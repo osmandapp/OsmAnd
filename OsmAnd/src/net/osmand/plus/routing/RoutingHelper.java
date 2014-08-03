@@ -13,7 +13,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -27,7 +26,6 @@ import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.plus.sherpafy.WaypointDialogHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
@@ -277,7 +275,6 @@ public class RoutingHelper {
 				// 5. Update Voice router
 				if (isFollowingMode) {
 					// don't update in route planing mode
-					announceGpxWaypoints(currentLocation);
 					boolean inRecalc = calculateRoute || isRouteBeingCalculated();
 					if (!inRecalc && !wrongMovementDirection) {
 						voiceRouter.updateStatus(currentLocation, false);
@@ -321,25 +318,6 @@ public class RoutingHelper {
 			return locationProjection;
 		} else {
 			return currentLocation;
-		}
-	}
-
-
-	private void announceGpxWaypoints(Location currentLocation) {
-		if (currentLocation != null) {
-			List<LocationPoint> wpt = route.getWaypointsToAnnounce(currentLocation);
-			if (wpt.size() > 0) {
-				String s = "";
-				for (LocationPoint w : wpt) {
-					if(!Algorithms.isEmpty(w.getName())) {
-						s = w.getName() +",";
-					}
-				}
-				if(!Algorithms.isEmpty(s)) {
-					voiceRouter.announceWaypoint(s);
-//					dialogHelper.addWptDialog(wpt.get(0));
-				}
-			}
 		}
 	}
 
@@ -544,6 +522,12 @@ public class RoutingHelper {
 	}
 
 	private synchronized void setNewRoute(RouteCalculationResult res, Location start){
+		ArrayList<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
+		if (app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get()){
+			locationPoints.addAll(app.getFavorites().getFavouritePoints());
+		}
+		locationPoints.addAll(res.getLocationPoints());
+		app.getLocationProvider().setVisibleLocationPoints(locationPoints);
 		final boolean newRoute = !this.route.isCalculated();
 		route = res;
 		if (isFollowingMode) {

@@ -1,7 +1,6 @@
 package net.osmand.plus.sherpafy;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import net.osmand.Location;
-import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.FavouritesActivity;
@@ -35,7 +33,7 @@ public class WaypointDialogHelper {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
 	private FrameLayout mainLayout;
-	private TargetPointsHelper targetPointsHelper;
+	private OsmAndLocationProvider locationProvider;
 
 	public static boolean OVERLAP_LAYOUT = true;
 	private long uiModified;
@@ -43,14 +41,14 @@ public class WaypointDialogHelper {
 
 	public WaypointDialogHelper(MapActivity mapActivity) {
 		this.app = mapActivity.getMyApplication();
-		targetPointsHelper = this.app.getTargetPointsHelper();
+		locationProvider = this.app.getLocationProvider();
 		this.mapActivity = mapActivity;
 		this.mainLayout = (FrameLayout) ((FrameLayout) mapActivity.getLayout()).getChildAt(0);
 	}
 
 	public void updateDialog() {
-		List<LocationPoint> vlp = targetPointsHelper.getVisibleLocationPoints();
-		long locationPointsModified = targetPointsHelper.getLocationPointsModified();
+		List<LocationPoint> vlp = locationProvider.getVisibleLocationPoints();
+		long locationPointsModified = locationProvider.getLocationPointsModified();
 		if (locationPointsModified != uiModified) {
 			uiModified = locationPointsModified;
 			if (vlp.isEmpty()) {
@@ -80,7 +78,7 @@ public class WaypointDialogHelper {
 				btnN.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						targetPointsHelper.removeVisibleLocationPoint(point);
+						locationProvider.removeVisibleLocationPoint(point);
 						updateDialog();
 					}
 				});
@@ -189,7 +187,7 @@ public class WaypointDialogHelper {
 	}
 
 	public void showAllDialog(){
-		final List<LocationPoint> visibleLocationPoints = targetPointsHelper.getVisibleLocationPoints();
+		final List<LocationPoint> visibleLocationPoints = locationProvider.getVisibleLocationPoints();
 		final ArrayAdapter<LocationPoint> listAdapter = new ArrayAdapter<LocationPoint>(mapActivity, R.layout.waypoint_reached, R.id.title,
 				visibleLocationPoints) {
 			@Override
@@ -205,6 +203,13 @@ public class WaypointDialogHelper {
 					v.findViewById(R.id.waypoint_icon).setLayoutParams(ll);
 				}
 				createView(v, getItem(position));
+				TextView text = (TextView) v.findViewById(R.id.waypoint_text);
+				text.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						showOnMap(visibleLocationPoints.get(position));
+					}
+				});
 
 				View remove = v.findViewById(R.id.info_close);
 				((ImageButton) remove).setImageDrawable(mapActivity.getResources().getDrawable(
@@ -213,9 +218,9 @@ public class WaypointDialogHelper {
 				remove.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						LocationPoint point = targetPointsHelper.getVisibleLocationPoints().get(position);
+						LocationPoint point = locationProvider.getVisibleLocationPoints().get(position);
 						remove(point);
-						targetPointsHelper.removeVisibleLocationPoint(point);
+						locationProvider.removeVisibleLocationPoint(point);
 						notifyDataSetChanged();
 					}
 				});
@@ -229,7 +234,7 @@ public class WaypointDialogHelper {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-				itemClick(visibleLocationPoints.get(i));
+				showOnMap(visibleLocationPoints.get(i));
 			}
 		});
 
@@ -242,10 +247,18 @@ public class WaypointDialogHelper {
 		builder.setNegativeButton(mapActivity.getString(R.string.hide_all_waypoints), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialogInterface, int i) {
-				targetPointsHelper.removeAllVisiblePoints();
+				locationProvider.clearAllVisiblePoints();
 				updateDialog();
 			}
 		});
 		builder.show();
+	}
+
+	private void showOnMap(LocationPoint locationPoint) {
+		// AnimateDraggingMapThread thread = mapActivity.getMapView().getAnimatedDraggingThread();
+		int fZoom = mapActivity.getMapView().getZoom() < 15 ? 15 : mapActivity.getMapView().getZoom();
+		// thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
+		mapActivity.getMapView().setIntZoom(fZoom);
+		mapActivity.getMapView().setLatLon(locationPoint.getLatitude(), locationPoint.getLongitude());
 	}
 }
