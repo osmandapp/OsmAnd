@@ -1,6 +1,8 @@
 package net.osmand.plus.resources;
 
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,6 +38,7 @@ import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.NameFinderPoiFilter;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.PoiFilter;
@@ -45,7 +48,6 @@ import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.Version;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.resources.AsyncLoadingThread.AmenityLoadRequest;
 import net.osmand.plus.resources.AsyncLoadingThread.MapLoadRequest;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.resources.AsyncLoadingThread.TransportLoadRequest;
@@ -702,17 +704,57 @@ public class ResourceManager {
 	}
 	
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
+	public boolean checkNameFilter(Amenity object, String filterByName) {
+		boolean publish = false;
+		if (filterByName == null || filterByName.length() == 0) {
+			publish = true;
+		} else {
+			String lower = OsmAndFormatter.getPoiStringWithoutType(object, context.getSettings().usingEnglishNames())
+					.toLowerCase();
+			publish = lower.indexOf(filterByName) != -1;
+		}
+		return publish;
+	}
+	
 	public List<Amenity> searchAmenities(PoiFilter filter,
-			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, 
-			double lat, double lon, ResultMatcher<Amenity> matcher) {
-		List<Amenity> amenities = new ArrayList<Amenity>();
-		for (AmenityIndexRepository index : amenityRepositories) {
-			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
-				index.searchAmenities(MapUtils.get31TileNumberY(topLatitude), MapUtils.get31TileNumberX(leftLongitude), 
-						MapUtils.get31TileNumberY(bottomLatitude), MapUtils.get31TileNumberX(rightLongitude), -1, filter, amenities, matcher);
+			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
+		final List<Amenity> amenities = new ArrayList<Amenity>();
+		if(filter instanceof NameFinderPoiFilter || filter instanceof SearchByNameFilter){
+			List<Amenity> tempResults = filter instanceof NameFinderPoiFilter  ? 
+					((NameFinderPoiFilter) filter).getSearchedAmenities() :((SearchByNameFilter) filter).getSearchedAmenities() ;
+			for(Amenity a : tempResults){
+				LatLon l = a.getLocation();
+				if(l != null && l.getLatitude() <= topLatitude && l.getLatitude() >= bottomLatitude && l.getLongitude() >= leftLongitude && l.getLongitude() <= rightLongitude){
+					if(matcher.publish(a) ){
+						amenities.add(a);
+					}
+				}
+			}
+		} else {
+			final String filterByName = filter.getFilterByName();
+			for (AmenityIndexRepository index : amenityRepositories) {
+				if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
+					index.searchAmenities(MapUtils.get31TileNumberY(topLatitude),
+							MapUtils.get31TileNumberX(leftLongitude), MapUtils.get31TileNumberY(bottomLatitude),
+							MapUtils.get31TileNumberX(rightLongitude), -1, filter, amenities,
+							new ResultMatcher<Amenity>() {
+
+								@Override
+								public boolean publish(Amenity object) {
+									if (checkNameFilter(object, filterByName)) {
+										return matcher.publish(object);
+									}
+									return false;
+								}
+
+								@Override
+								public boolean isCancelled() {
+									return matcher.isCancelled();
+								}
+							});
+				}
 			}
 		}
-
 		return amenities;
 	}
 	
@@ -772,31 +814,31 @@ public class ResourceManager {
 		return map;
 	}
 	
-	public void searchAmenitiesAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, PoiFilter filter, List<Amenity> toFill){
-		if(filter instanceof NameFinderPoiFilter || filter instanceof SearchByNameFilter){
-			List<Amenity> amenities = filter instanceof NameFinderPoiFilter  ? 
-					((NameFinderPoiFilter) filter).getSearchedAmenities() :((SearchByNameFilter) filter).getSearchedAmenities() ;
-			for(Amenity a : amenities){
-				LatLon l = a.getLocation();
-				if(l != null && l.getLatitude() <= topLatitude && l.getLatitude() >= bottomLatitude && l.getLongitude() >= leftLongitude && l.getLongitude() <= rightLongitude){
-					toFill.add(a);
-				}
-			}
-		} else {
-			String filterId = filter == null ? null : filter.getFilterId();
+	public void searchAmenitiesOnTheArea(TIntArrayList tiles16z, PoiFilter filter, ResultMatcher<Amenity> results) {
+		if (tiles16z.size() > 0) {
+			int z = 16;
+			int x = tiles16z.get(0) >> z;
+			int y = tiles16z.get(0) & ((1 << z) - 1);
 			List<AmenityIndexRepository> repos = new ArrayList<AmenityIndexRepository>();
+			double topLatitude = MapUtils.getLatitudeFromTile(z, y);
+			double bottomLatitude = MapUtils.getLatitudeFromTile(z, y + 1);
+			double leftLongitude = MapUtils.getLongitudeFromTile(z, x);
+			double rightLongitude = MapUtils.getLongitudeFromTile(z, x + 1);
+			for (int k = 1; k < tiles16z.size(); k++) {
+				topLatitude = Math.max(topLatitude, MapUtils.getLatitudeFromTile(z, y));
+				bottomLatitude = Math.min(bottomLatitude, MapUtils.getLatitudeFromTile(z, y + 1));
+				leftLongitude = Math.min(leftLongitude, MapUtils.getLongitudeFromTile(z, x));
+				rightLongitude = Math.max(rightLongitude, MapUtils.getLongitudeFromTile(z, x + 1));
+			}
 			for (AmenityIndexRepository index : amenityRepositories) {
 				if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
-					if (!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filterId, toFill,
-							true)) {
-						repos.add(index);
-					}
+					repos.add(index);
 				}
 			}
-			if(!repos.isEmpty()){
-				AmenityLoadRequest req = asyncLoadingThread.new AmenityLoadRequest(repos, zoom, filter, filter.getFilterByName());
-				req.setBoundaries(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
-				asyncLoadingThread.requestToLoadAmenities(req);
+			if (!repos.isEmpty()) {
+				for(AmenityIndexRepository r : repos) {
+//					r.searchAmenities(stop, sleft, sbottom, sright, zoom, filter, amenities, matcher)
+				}
 			}
 		}
 	}
@@ -810,6 +852,7 @@ public class ResourceManager {
 	public Collection<RegionAddressRepository> getAddressRepositories(){
 		return addressMap.values();
 	}
+	
 	
 	////////////////////////////////////////////// Working with transport ////////////////////////////////////////////////
 	public List<TransportIndexRepository> searchTransportRepositories(double latitude, double longitude) {
@@ -950,9 +993,6 @@ public class ResourceManager {
 	public void onLowMemory() {
 		log.info("On low memory : cleaning tiles - size = " + cacheOfImages.size()); //$NON-NLS-1$
 		clearTiles();
-		for(AmenityIndexRepository r : amenityRepositories){
-			r.clearCache();
-		}
 		for(RegionAddressRepository r : addressMap.values()){
 			r.clearCache();
 		}
