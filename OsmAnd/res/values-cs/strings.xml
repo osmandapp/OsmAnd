@@ -1204,14 +1204,14 @@
         \n\t* Další nastavení pro stabilizaci kompasu
         \n\t* Tlačítko vlevo nahoře na mapové obrazovce nahrazuje tlačítko Menu
     </string>
-    <string name="monitoring_settings">Záznamy tras a služby na pozadí</string>
-    <string name="osmand_monitoring_plugin_name">Záznamy tras a služby na pozadí</string>
+    <string name="monitoring_settings">Záznamové služby</string>
+    <string name="osmand_monitoring_plugin_name">Záznamové služby</string>
     <string name="accessibility_options">Volby usnadnění</string>
     <string name="select_address_activity">Vybrat adresu</string>
     <string name="favourites_list_activity">Vybrat oblíbené</string>
     <string name="local_openstreetmap_act_title">Editace OSM</string>
     <string name="default_buttons_other_actions">Další akce</string>
-    <string name="monitoring_settings_descr">Konfigurace záznamů cest a spouštění služeb na pozadí</string>
+    <string name="monitoring_settings_descr">Konfigurace záznamů cest</string>
     <string name="install_paid">Instalovat plnou verzi</string>
     <string name="cancel_navigation">Zastavit navigaci</string>
     <string name="use_kalman_filter_compass_descr">Použít Kalmanův filtr k zabránění odchylek kompasu</string>
@@ -1496,11 +1496,7 @@ s často kladenými otázkami.</string>
 	* Můžete rozdělit GPX trasu podle vzdálenosti a kontrolovat výškový rozdíl/rychlost
 	* Automatický start navigace po uplynutí času
     </string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitorování - Pokročilé monitorování. Poskytuje možnost sledování jiných zařízení nebo být sledován. 
-        Vytvořte anonymní skupiny, sdílejte vzájemně polohu a komunikujte. Různé možnosti nastavení krátkodobého nebo trvalého sledování.
-        Anonymní skupiny jsou omezeny na počet dní a některými vlastnostmi, například nemají dálkové ovládání a skupinového správce. 
-        Plně funkční skupiny se vytvářejí na webstránce a jsou přístupné pouze pro registrované uživatele.
-        Prosím čtěte více na http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">"OpenStreetMap pokročilé online monitorování, podívejte se na http://osmo.mobi. Poskytuje možnost sledování jiných zařízení nebo být sledován. Vytvořte anonymní skupiny, sdílejte vzájemně polohu a komunikujte. Různé možnosti nastavení krátkodobého nebo trvalého sledování. Anonymní skupiny jsou omezeny na počet dní a některými vlastnostmi, například nemají dálkové ovládání a skupinového správce. Plně funkční skupiny se vytvářejí na webstránce a jsou přístupné pouze pro registrované uživatele. "</string>
     <string name="color_red">červená</string>
 	<string name="color_pink">růžová</string>
 	<string name="color_orange">oranžová</string>
@@ -1684,4 +1680,26 @@ s často kladenými otázkami.</string>
     <string name="osmo_leave_confirmation_msg">Chcete opustit skupinu %1$s?</string>
     <string name="osmo_specify_tracker_id">Prosím určete id</string>
     <string name="rendering_attr_coloredBuildings_name">Barevné budovy</string>
-    </resources>
+    <string name="lang_sw">Svahilština (Kiswahili)</string>
+    <string name="lang_he">Hebrejština</string>
+    <string name="lang_al">Albánština</string>
+	<string name="lang_ar">Arabština</string>
+	<string name="lang_fa">Perština</string>
+	<string name="lang_sc">Sardština</string>
+	<string name="lang_sr">Srbština</string>
+	<string name="lang_zh_CN">Zjednodušená čínština</string>
+	<string name="lang_zh_TW">Tradiční čínština</string>
+	<string name="rendering_attr_alpineHiking_name">Vysokohorská turistika</string>
+    <string name="rendering_attr_alpineHiking_description">Vykreslovat cesty podle stupnice SAC</string>
+    <string name="rendering_attr_osmcTraces_name">Zobrazovat turistické značky</string>
+    <string name="rendering_attr_osmcTraces_description">Vykreslovat cesty podle OSMC značení</string>
+    
+	<string name="arrival_distance_factor_early">Brzy</string>
+    <string name="arrival_distance_factor_normally">Normálně</string>
+    <string name="arrival_distance_factor_late">Později</string>
+    <string name="arrival_distance_factor_at_last">V posledních metrech</string>
+    <string name="av_camera_pic_size">Velikost fotografie</string>
+	<string name="av_camera_pic_size_descr">Vyberte velikost obrázku interního fotoaparátu</string>
+    <string name="hide_all_waypoints">Odstranit všechny</string>
+    <string name="announce_nearby_favorites">Oznamovat oblíbená místa v blízkosti</string>
+</resources>
