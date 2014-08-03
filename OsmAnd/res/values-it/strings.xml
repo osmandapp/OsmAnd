@@ -1957,5 +1957,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="hide_all_waypoints">Cancellali tutti</string>
 <string name="av_camera_pic_size">Dimensione foto</string>
 	<string name="av_camera_pic_size_descr">Seleziona la dimensione delle foto scattate</string>
-    <string name="announce_nearby_favorites">Annuncia e preferiti nelle vicinanze</string>
+    <string name="announce_nearby_favorites">Annuncia i preferiti nelle vicinanze</string>
 </resources>
