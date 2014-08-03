@@ -50,7 +50,7 @@
     <string name="osmo_auth_error_short">Authorization failed</string>
     <string name="osmo_auth_error">OsMo authorization error encountered : %1$s.\n
         It could be a temporary service down or your registration expired.\n
-        Do you want to proceed with new registration.</string>
+        Do you want to proceed with new registration?</string>
     <string name="osmo_group_by_invite">Enter by invite</string>
     <string name="osmo_group_information_desc">
         - All created groups are public! If you want to be anonymous, connect devices directly via Tracker ids.\n
