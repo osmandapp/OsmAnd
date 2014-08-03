@@ -1,5 +1,8 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="av_camera_pic_size">Kamera-Bildgröße</string>
+	<string name="av_camera_pic_size_descr">Interne Kamera-Bildgröße auswählen</string>
+	<string name="announce_nearby_favorites">Nahe gelegene Favoriten ansagen</string>
 	<string name="rendering_attr_coloredBuildings_name">Gefärbte Gebäude</string>
 	<string name="continue_navigation">Navigation fortsetzen</string>
 	<string name="pause_navigation">Navigation pausieren</string>
