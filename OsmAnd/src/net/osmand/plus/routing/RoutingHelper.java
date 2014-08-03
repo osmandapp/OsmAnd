@@ -18,6 +18,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.SearchOnTheRouteHelper;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -76,6 +77,7 @@ public class RoutingHelper {
 	//private long wrongMovementDetected = 0;
 
 	private RouteCalculationProgressCallback progressRoute;
+	private SearchOnTheRouteHelper searchOnTheRouteHelper;
 
 //	private ProgressBar progress;
 //	private Handler progressHandler;
@@ -87,7 +89,12 @@ public class RoutingHelper {
 	public RoutingHelper(OsmandApplication context, CommandPlayer player){
 		this.app = context;
 		settings = context.getSettings();
+		searchOnTheRouteHelper = new SearchOnTheRouteHelper(context);
 		voiceRouter = new VoiceRouter(this, settings, player);
+	}
+	
+	public SearchOnTheRouteHelper getSearchOnTheRouteHelper() {
+		return searchOnTheRouteHelper;
 	}
 
 	public boolean isFollowingMode() {
@@ -552,6 +559,8 @@ public class RoutingHelper {
 				voiceRouter.newRouteIsCalculated(newRoute);
 			}
 		} 
+		
+		searchOnTheRouteHelper.searchOnTheRoute(route);
 
 		app.runInUIThread(new Runnable() {
 			@Override

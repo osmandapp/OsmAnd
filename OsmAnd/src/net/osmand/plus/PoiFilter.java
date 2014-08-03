@@ -14,9 +14,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.util.MapUtils;
-
-import org.apache.http.client.protocol.ClientContext;
-
 import android.content.Context;
 
 public class PoiFilter {
@@ -173,9 +170,8 @@ public class PoiFilter {
 
 	protected List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
-		
 		return app.getResourceManager().searchAmenities(this, 
-				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, matcher);
+				topLatitude, leftLongitude, bottomLatitude, rightLongitude, matcher);
 	}
 
 	public List<Amenity> searchAgain(double lat, double lon) {

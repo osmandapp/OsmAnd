@@ -48,7 +48,6 @@
         android:layout_marginRight="2dip"
         android:button="@drawable/ic_btn_wocheckbox"
         android:focusable="false"
-        android:clickable="false"
          />
     </LinearLayout>
 

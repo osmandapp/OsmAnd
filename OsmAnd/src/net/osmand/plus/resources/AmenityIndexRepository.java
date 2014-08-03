@@ -20,17 +20,5 @@ public interface AmenityIndexRepository {
 	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, PoiFilter filter, List<Amenity> amenities,
 			ResultMatcher<Amenity> matcher);
 
-
-	public void clearCache();
-
-	public boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,
-			String filterId, List<Amenity> toFill, boolean fillFound);
-
-	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,
-			PoiFilter filter, ResultMatcher<Amenity> matcher);
-
-	public boolean hasChange();
-
-	public void clearChange();
 	
 }
