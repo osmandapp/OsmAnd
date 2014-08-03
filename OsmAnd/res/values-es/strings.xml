@@ -1845,4 +1845,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="arrival_distance_factor_at_last">En los últimos metros</string>
     <string name="rendering_attr_coloredBuildings_name">Edificios de colores</string>
     <string name="hide_all_waypoints">Quitar todos</string>
+<string name="av_camera_pic_size">Tamaño de foto</string>
+	<string name="av_camera_pic_size_descr">Selecciona el tamaño interno de la foto</string>
+    <string name="announce_nearby_favorites">Anunciar favoritos cercanos</string>
 </resources>
