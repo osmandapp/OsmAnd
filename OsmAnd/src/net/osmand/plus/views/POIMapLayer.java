@@ -71,7 +71,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			protected List<Amenity> calculateResult(RotatedTileBox tileBox) {
 				QuadRect latLonBounds = tileBox.getLatLonBounds();
 				return resourceManager.searchAmenities(filter, latLonBounds.top, latLonBounds.left,
-						latLonBounds.bottom, latLonBounds.right, new ResultMatcher<Amenity>() {
+						latLonBounds.bottom, latLonBounds.right, tileBox.getZoom(), new ResultMatcher<Amenity>() {
 
 							@Override
 							public boolean publish(Amenity object) {
