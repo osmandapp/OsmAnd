@@ -171,7 +171,7 @@ public class PoiFilter {
 	protected List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
 		return app.getResourceManager().searchAmenities(this, 
-				topLatitude, leftLongitude, bottomLatitude, rightLongitude, matcher);
+				topLatitude, leftLongitude, bottomLatitude, rightLongitude, -1, matcher);
 	}
 
 	public List<Amenity> searchAgain(double lat, double lon) {

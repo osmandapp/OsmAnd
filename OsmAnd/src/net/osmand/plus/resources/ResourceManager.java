@@ -717,7 +717,7 @@ public class ResourceManager {
 	}
 	
 	public List<Amenity> searchAmenities(PoiFilter filter,
-			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
+			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, final ResultMatcher<Amenity> matcher) {
 		final List<Amenity> amenities = new ArrayList<Amenity>();
 		if(filter instanceof NameFinderPoiFilter || filter instanceof SearchByNameFilter){
 			List<Amenity> tempResults = filter instanceof NameFinderPoiFilter  ? 
