@@ -1431,7 +1431,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	\n\t* Menuknop vervangen door knop linksboven in het kaartvenster
     </string>
     <string name="monitoring_settings">Logboek registratie</string>
-    <string name="monitoring_settings_descr">Stel in hoe lokaal of via online tracking reizen op te nemen</string>
+    <string name="monitoring_settings_descr">Bepaal hoe trips op te nemen</string>
     <string name="osmand_monitoring_plugin_description">Activeren van tracking en navigatie in slaapmodus (scherm uit). De GPS gaat dan regelmatig aan. Toon de instellingen om uw reis vast te leggen als GPX-bestand of online via een webdienst.</string>
     <string name="street_name">Straat</string>
 	<string name="osmand_monitoring_plugin_name">Logboek registratie</string>
