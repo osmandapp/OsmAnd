@@ -1938,5 +1938,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="hide_all_waypoints">全部移除</string>
 <string name="av_camera_pic_size">相機照片的大小</string>
 	<string name="av_camera_pic_size_descr">選擇內部相機照片的大小</string>
-    <string name="announce_nearby_favorites">通報在附近的我的最愛</string>
+    <string name="announce_nearby_favorites">通報鄰近我的最愛</string>
 </resources>
