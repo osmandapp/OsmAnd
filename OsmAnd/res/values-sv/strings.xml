@@ -1573,7 +1573,7 @@
     <string name="gpx_available_current_track">Aktuellt inspelningsspår</string>
     <string name="save_as_favorites_points">Spara som grupp med favoriter</string>
     <string name="select_destination_and_intermediate_points">Välj waypoints</string>
-    <string name="layer_amenity_label">Punktetiketter</string>
+    <string name="layer_amenity_label">Namn på punkter</string>
     <string name="show_zoom_buttons_navigation_descr">Visa zoom-knappar under navigering</string>
     <string name="show_zoom_buttons_navigation">Visa zoom-knappar</string>
     <string name="color_green">grön</string>
