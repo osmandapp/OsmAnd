@@ -1937,4 +1937,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="arrival_distance_factor_late">Laat</string>
     <string name="arrival_distance_factor_at_last">Als bijna bereikt</string>
     <string name="hide_all_waypoints">Verwijder alle</string>
+<string name="av_camera_pic_size">Camera Beeldformaat</string>
+	<string name="av_camera_pic_size_descr">Selecteer interne camera beeldformaat</string>
+    <string name="announce_nearby_favorites">Meld favorieten in de buurt</string>
 </resources>
