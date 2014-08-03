@@ -1019,7 +1019,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="tip_map_styles">지도 스타일</string>
 	<string name="about_version">버전:</string>
     <string name="about_settings_descr">버전 정보, 라이센스, 프로젝트 멤버</string>
-    <string name="tips_and_tricks">Tips (도움말)</string>
+    <string name="tips_and_tricks">도움말</string>
     <string name="about_settings">소개</string>
     <string name="local_index_tile_data_zooms">다운로드된 줌 : %1$s</string>
     <string name="local_index_tile_data_expire">만료(분) : %1$s</string>
@@ -2075,4 +2075,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="arrival_distance_factor_late">늦게</string>
     <string name="arrival_distance_factor_at_last">마지막 미터</string>
     <string name="hide_all_waypoints">모든 포인트 숨기기</string>
+<string name="av_camera_pic_size">카메라 사진 크기</string>
+	<string name="av_camera_pic_size_descr">내부 카메라 사진 크기 선택</string>
+    <string name="announce_nearby_favorites">가까운 즐겨찾기 알리기</string>
 </resources>
