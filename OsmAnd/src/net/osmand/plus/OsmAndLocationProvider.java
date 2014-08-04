@@ -149,8 +149,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			for (Object aLoc : loc) {
 				visibleLocationPoints.add((LocationPoint) aLoc);
 			}
+			locationPointsModified = System.currentTimeMillis();
 		}
 	}
+
 	private Comparator<Object> getComparator(final net.osmand.Location lastLocation){
 		return new Comparator<Object>() {
 			@Override
@@ -179,21 +181,32 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		final net.osmand.Location lastLocation = getLastKnownLocation();
 		if (lastLocation != null && app.getRoutingHelper().isFollowingMode()) {
 			String nameToAnnounce = null;
+			List<LocationPoint> approachPoints = new ArrayList<LocationPoint>();
+			List<LocationPoint> announcePoints = new ArrayList<LocationPoint>();
 			for (LocationPoint point : locationPointsStates.keySet()) {
 				double d1 = MapUtils.getDistance(lastLocation.getLatitude(), lastLocation.getLongitude(),
 						point.getLatitude(), point.getLongitude());
 				int state = locationPointsStates.get(point);
-				if(state <= ANNOUNCED_ONCE && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastLocation.getSpeed(), d1, 150)) {
+				if (state <= ANNOUNCED_ONCE && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastLocation.getSpeed(), d1, 150)) {
 					nameToAnnounce = (nameToAnnounce == null ? "" : ", ") + point.getName();
 					locationPointsStates.remove(point);
-				} else if (state == NOT_ANNOUNCED && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastLocation.getSpeed(), d1, 500)){
-					nameToAnnounce = (nameToAnnounce == null? "":", ")+point.getName();
+					this.locationPointsModified = System.currentTimeMillis();
+					app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper().updateDialog();
+					announcePoints.add(point);
+				} else if (state == NOT_ANNOUNCED && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastLocation.getSpeed(), d1, 500)) {
 					locationPointsStates.put(point, state + 1);
+					this.locationPointsModified = System.currentTimeMillis();
+					app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper().updateDialog();
+					approachPoints.add(point);
 				}
 			}
-			if(nameToAnnounce!= null) {
-				app.getRoutingHelper().getVoiceRouter().announceWaypoint(nameToAnnounce);
+			if (!announcePoints.isEmpty()) {
+				app.getRoutingHelper().getVoiceRouter().announceWaypoint(announcePoints);
 			}
+			if (!approachPoints.isEmpty()) {
+				app.getRoutingHelper().getVoiceRouter().approachWaypoint(lastLocation, approachPoints);
+			}
+
 		}
 	}
 
@@ -621,8 +634,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	
 	private void updateLocation(net.osmand.Location loc ) {
-		if (app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get()){
+		if (app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get() && app.getRoutingHelper().isFollowingMode()){
 			sortVisibleLocationPoints();
+			app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper().updateDialog();
 			announceVisibleLocations();
 		}
 		for(OsmAndLocationListener l : locationListeners){

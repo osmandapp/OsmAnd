@@ -87,7 +87,9 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	public void showControls(FrameLayout parent) {
 		infoButton = addButton(parent, R.string.route_info, R.drawable.map_btn_signpost);
 		if (showDialog){
-			showDialog();
+			if (getTargets().getPointToNavigate() == null){
+				showDialog();
+			}
 			showDialog = false;
 		}
 		controlVisible = true;
