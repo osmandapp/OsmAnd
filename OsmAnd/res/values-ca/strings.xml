@@ -1908,7 +1908,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="stop_navigation_service">Aturar</string>
 	<string name="enable_sleep_mode">Activar mode baixa activitat</string>
 	<string name="gps_wake_up_timer">Interval d\'activació del GPS</string>
-	<string name="sleep_mode_stop_dialog">Mantenir GPS activat?</string>
+	<string name="sleep_mode_stop_dialog">Mantenir GPS actiu?</string>
 	<string name="lang_al">Albanés</string>
 	<string name="lang_ar">Àrab</string>
 	<string name="lang_sc">Sard</string>
