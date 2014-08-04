@@ -1864,12 +1864,12 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="local_index_unselect_gpx_file">No seleccionat</string>
     <string name="local_index_select_gpx_file">Selecciona per veure</string>
     <string name="no_index_file_to_download">Res per descarregar, verifiqui la connexió a internet.</string>
-    <string name="osmo_gpx_points_downloaded">Punts OsMo %1$s descarregats.</string>
+    <string name="osmo_gpx_points_downloaded">S\'han baixat %1$s punts OsMo.</string>
     <string name="osmo_auto_connect_descr">Connectar automàticament amb el servei desprès d\'iniciar l\'aplicació</string>
     <string name="osmo_auto_connect">Auto-connexió</string>
     <string name="osmo_start_service">Servei OsMo</string>
     <string name="osmo_gpx_track_downloaded">Traça OsMo %1$s descarregada.</string>
-    <string name="osmo_not_signed_in">Inici sessió OsMo erroni</string>
+    <string name="osmo_not_signed_in">Ha fallat l\'inici de sessió OsMo</string>
     <string name="osmo_group_by_invite">Entreu per convidar</string>
     <string name="osmo_group_information_desc">" - Tots els grups creats són públics! Si es vol ser anònim, afegiu directament els aparells via identificació de Tracker.\n - Dins el grup es poden registrar fins un màxim de 16 persones.\n - Cas d\'inactivitat o d\'activitat d\'una sola persona durant 2 setmanes, el grup serà esborrat.\n - Es pot restringir l\'entrada al grup, a només per invitació, però per controlar el grup es necessitarà accedir a la consola d\'administració.\n - Si us cal crear un grup, però amb altres condicions, contacteu  http://osmo.mobi"</string>
     <string name="osmo_group_information">Cal que ho llegiu abans de crear un grup!</string>
