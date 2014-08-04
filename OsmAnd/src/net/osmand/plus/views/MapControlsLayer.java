@@ -184,7 +184,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 				(zoomControls.getHeight() + zoomControls.getTotalVerticalMargin()): 0;
 		rulerControl.setVerticalMargin(vmargin);
 		checkVisibilityAndDraw(true, rulerControl, canvas, tileBox, nightMode);
-		waypointDialogHelper.updateDialog();
 	}
 	
 	private void updatextColor(int textColor, int shadowColor, MapControls... mc) {
