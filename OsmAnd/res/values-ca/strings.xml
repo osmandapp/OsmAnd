@@ -1865,7 +1865,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="local_index_select_gpx_file">Selecciona per veure</string>
     <string name="no_index_file_to_download">Res per descarregar, verifiqui la connexió a internet.</string>
     <string name="osmo_gpx_points_downloaded">S\'han baixat %1$s punts OsMo.</string>
-    <string name="osmo_auto_connect_descr">Connectar automàticament amb el servei desprès d\'iniciar l\'aplicació</string>
+    <string name="osmo_auto_connect_descr">Connecta automàticament amb el servei desprès d\'iniciar l\'aplicació</string>
     <string name="osmo_auto_connect">Auto-connexió</string>
     <string name="osmo_start_service">Servei OsMo</string>
     <string name="osmo_gpx_track_downloaded">Traça OsMo %1$s descarregada.</string>
