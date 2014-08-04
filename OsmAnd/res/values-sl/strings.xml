@@ -1897,4 +1897,6 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="arrival_distance_factor_late">Pozno</string>
     <string name="arrival_distance_factor_at_last">V zadnjih metrih</string>
     <string name="hide_all_waypoints">Odstrani vse</string>
-</resources>
+<string name="rendering_attr_coloredBuildings_name">Pobarvane stavbe</string>
+    <string name="osmo_leave_confirmation_msg">Ali želite zapustiti skupino %1$s?</string>
+    </resources>
