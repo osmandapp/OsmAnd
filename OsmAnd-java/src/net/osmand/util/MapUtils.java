@@ -220,6 +220,12 @@ public class MapUtils {
 	}
 	
 	
+	public static double getTileDistanceWidth(float zoom) {
+		LatLon ll = new LatLon(30, MapUtils.getLongitudeFromTile(zoom, 0));
+		LatLon ll2 = new LatLon(30, MapUtils.getLongitudeFromTile(zoom, 1));
+		return getDistance(ll, ll2) ;
+	}
+	
 	public static double getLongitudeFromTile(float zoom, double x) {
 		return x / getPowZoom(zoom) * 360.0 - 180.0;
 	}

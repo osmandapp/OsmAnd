@@ -15,11 +15,13 @@ import java.util.List;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
+import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.sf.junidecode.Junidecode;
@@ -588,6 +590,17 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 	
+	private float dist(LatLon l, List<Location> locations) {
+		float dist = Float.POSITIVE_INFINITY;
+		// Special iterations because points stored by pairs!
+		for (int i = 1; i < locations.size(); i += 2) {
+			dist = Math.min(dist, (float) MapUtils.getOrthogonalDistance(
+					l.getLatitude(), l.getLongitude(), 
+					locations.get(i - 1).getLatitude(), locations.get(i - 1).getLongitude(), 
+					locations.get(i).getLatitude(), locations.get(i).getLongitude()));
+		}
+		return dist;
+	}
 	private Amenity readPoiPoint(int left31, int right31, int top31, int bottom31, 
 			int px, int py, int zoom, SearchRequest<Amenity> req, PoiRegion region, boolean checkBounds) throws IOException {
 		Amenity am = null;
@@ -609,6 +622,19 @@ public class BinaryMapPoiReaderAdapter {
 					am.setEnName(Junidecode.unidecode(am.getName()));
 				}
 				req.numberOfAcceptedObjects++;
+				if (req.radius > 0) {
+					LatLon loc = am.getLocation();
+					List<Location> locs = req.tiles.get(req.getTileHashOnPath(loc.getLatitude(), loc.getLongitude()));
+					if (locs == null) {
+						return null;
+					}
+					float d = dist(am.getLocation(), locs);
+					if (d > req.radius) {
+						return null;
+					} else {
+						am.setDeviateDistance(d);
+					}
+				}
 				return am;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DX_FIELD_NUMBER :
 				x = (codedIS.readSInt32() + (px << (24 - zoom))) << 7;
@@ -793,16 +819,16 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiBox.SUBBOXES_FIELD_NUMBER: {
 				int x = dx + (px << (zoom - pzoom));
 				int y = dy + (py << (zoom - pzoom));
-				if(checkBox){
+				if (checkBox) {
 					int xL = x << (31 - zoom);
 					int xR = ((x + 1) << (31 - zoom)) - 1;
 					int yT = y << (31 - zoom);
 					int yB = ((y + 1) << (31 - zoom)) - 1;
 					// check intersection
-					if(left31 > xR || xL > right31 || bottom31 < yT || yB < top31){
+					if (left31 > xR || xL > right31 || bottom31 < yT || yB < top31) {
 						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 						return false;
-					}
+					} 
 					req.numberOfAcceptedSubtrees++;
 					checkBox = false;
 				}
@@ -824,10 +850,20 @@ public class BinaryMapPoiReaderAdapter {
 				int x = dx + (px << (zoom - pzoom));
 				int y = dy + (py << (zoom - pzoom));
 				long l = ((((x << zoom) | y) << 5) | zoom);
-				offsetsMap.put(readInt(), l);
-				if(skipTiles != null && zoom >= zoomToSkip){
-					long val = ((((long) x) >> (zoom - zoomToSkip)) << zoomToSkip) | (((long) y) >> (zoom - zoomToSkip));
-					skipTiles.add(val);
+				boolean read = true;
+				if(req.tiles != null) {
+					int zx = x << (SearchRequest.ZOOM_TO_SEARCH_POI - zoom);
+					int zy = y << (SearchRequest.ZOOM_TO_SEARCH_POI - zoom);
+					read = req.tiles.contains((zx << SearchRequest.ZOOM_TO_SEARCH_POI) + zy);
+				}
+				int offset = readInt();
+				if (read) {
+					offsetsMap.put(offset, l);
+					if (skipTiles != null && zoom >= zoomToSkip) {
+						long val = ((((long) x) >> (zoom - zoomToSkip)) << zoomToSkip)
+								| (((long) y) >> (zoom - zoomToSkip));
+						skipTiles.add(val);
+					}
 				}
 			}	break;
 			default:

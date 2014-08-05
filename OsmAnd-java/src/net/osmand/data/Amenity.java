@@ -18,6 +18,7 @@ public class Amenity extends MapObject {
 	// duplicate for fast access
 	private String openingHours;
 	private Map<String, String> additionalInfo;
+	private double deviateDistance; // for search on path
 
 	public Amenity(){
 	}
@@ -62,6 +63,13 @@ public class Amenity extends MapObject {
 		openingHours = additionalInfo.get(OPENING_HOURS);
 	}
 	
+	public double getDeviateDistance() {
+		return deviateDistance;
+	}
+	
+	public void setDeviateDistance(double deviateDistance) {
+		this.deviateDistance = deviateDistance;
+	}
 
 	public void setAdditionalInfo(String tag, String value) {
 		if(this.additionalInfo == null){
