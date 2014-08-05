@@ -1246,10 +1246,10 @@
 	\n\t* Дополнительные настройки для стабилизации компаса
 	\n\t* Верхняя левая кнопка на карте заменяет кнопку меню
     </string>
-    <string name="monitoring_settings">Служба логгирования и спящий режим</string>
-    <string name="monitoring_settings_descr">Настроить запись поездок и включение спящего режима</string>
+    <string name="monitoring_settings">Службы мониторинга</string>
+    <string name="monitoring_settings_descr">Настройка записи поездок</string>
     <string name="osmand_monitoring_plugin_description">Включение трекинга и навигации во спящем режиме (экран выключен) с помощью периодического пробуждения устройства GPS. Настройка записи поездок в локальные файлы GPX или в Интернете с помощью веб-службы.</string>
-    <string name="osmand_monitoring_plugin_name">Служба логгирования и спящий режим</string>
+    <string name="osmand_monitoring_plugin_name">Службы мониторинга</string>
     <string name="choose_osmand_theme_descr">Выбор темы приложения</string>
     <string name="choose_osmand_theme">Тема приложения</string>
     <string name="accessibility_options">Настройка специальных возможностей</string>
@@ -1758,7 +1758,7 @@ OsmAnd - открытый источник и активно развается.
 	<string name="live_monitoring_m">Онлайн слежение (требуется GPX)</string>
     <string name="live_monitoring_start">Начать онлайн слежение</string>
 	<string name="live_monitoring_stop">Остановить онлайн слежение</string>
-	<string name="osmo_auth_error">Ошибка авторизации OsMo : %1$s.↵\n Это может быть временно недоступный сервис или срок вашей регистрации истек.↵\n Желаете продолжить с новой регистрацией.</string>
+	<string name="osmo_auth_error">Ошибка авторизации OsMo : %1$s.↵\n Это может быть временно недоступный сервис или срок вашей регистрации истек.↵\n Желаете продолжить с новой регистрацией?</string>
     <string name="osmo_not_signed_in">Не удалось войти в OsMo</string>
     <string name="osmo_gpx_track_downloaded">OsMo трек %1$s загружен.</string>
     <string name="no_index_file_to_download">Ничего не загружено, пожалуйста, проверьте подключение к Интернету.</string>
