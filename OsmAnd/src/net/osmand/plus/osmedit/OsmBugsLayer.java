@@ -109,10 +109,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			@Override
 			protected List<OpenStreetNote> calculateResult(RotatedTileBox tileBox) {
 				QuadRect bounds = tileBox.getLatLonBounds();
-				if (bounds != null){
-					return loadingBugs(bounds.top, bounds.left, bounds.bottom, bounds.right);
-				}
-				return  new ArrayList<OpenStreetNote>();
+				return loadingBugs(bounds.top, bounds.left, bounds.bottom, bounds.right);
+
 			}
 		};
 	}
