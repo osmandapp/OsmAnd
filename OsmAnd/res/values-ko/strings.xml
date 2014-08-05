@@ -2071,9 +2071,9 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_leave_confirmation_msg">그룹 %1$s를 떠나시겠습니까?</string>
     <string name="osmo_specify_tracker_id">Id를 지정 하십시오</string>
     <string name="arrival_distance_factor_early">일찍</string>
-    <string name="arrival_distance_factor_normally">일반적으로</string>
+    <string name="arrival_distance_factor_normally">일반</string>
     <string name="arrival_distance_factor_late">늦게</string>
-    <string name="arrival_distance_factor_at_last">마지막 미터</string>
+    <string name="arrival_distance_factor_at_last">마지막 미터에서</string>
     <string name="hide_all_waypoints">모든 포인트 숨기기</string>
 <string name="av_camera_pic_size">카메라 사진 크기</string>
 	<string name="av_camera_pic_size_descr">내부 카메라 사진 크기 선택</string>
