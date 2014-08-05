@@ -21,6 +21,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
+import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -36,7 +40,7 @@ import android.net.Uri;
 import android.widget.Toast;
 
 public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
-		MapTextProvider<Amenity> {
+		MapTextProvider<Amenity>, IRouteInformationListener {
 	private static final int startZoom = 10;
 
 	public static final org.apache.commons.logging.Log log = PlatformUtil.getLog(POIMapLayer.class);
@@ -48,15 +52,20 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private final static int MAXIMUM_SHOW_AMENITIES = 5;
 
 	private ResourceManager resourceManager;
+	private RoutingHelper routingHelper;
 	private PoiFilter filter;
 	private MapTextLayer mapTextLayer;
 	
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
 	private MapLayerData<List<Amenity>> data;
+	private boolean path = false;
+	private double radius = 100;
 
 
 	public POIMapLayer(MapActivity activity) {
+		routingHelper = activity.getRoutingHelper();
+		routingHelper.addListener(this);
 		data = new OsmandMapLayer.MapLayerData<List<Amenity>>() {
 			{
 				ZOOM_THRESHOLD = 0;
@@ -70,19 +79,24 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			@Override
 			protected List<Amenity> calculateResult(RotatedTileBox tileBox) {
 				QuadRect latLonBounds = tileBox.getLatLonBounds();
-				return resourceManager.searchAmenities(filter, latLonBounds.top, latLonBounds.left,
-						latLonBounds.bottom, latLonBounds.right, tileBox.getZoom(), new ResultMatcher<Amenity>() {
+				if(path) {
+					RouteCalculationResult result = routingHelper.getRoute();
+					return resourceManager.searchAmenitiesOnThePath(result.getImmutableAllLocations(), radius, filter, null);
+				} else {
+					return resourceManager.searchAmenities(filter, latLonBounds.top, latLonBounds.left,
+							latLonBounds.bottom, latLonBounds.right, tileBox.getZoom(), new ResultMatcher<Amenity>() {
 
-							@Override
-							public boolean publish(Amenity object) {
-								return true;
-							}
+								@Override
+								public boolean publish(Amenity object) {
+									return true;
+								}
 
-							@Override
-							public boolean isCancelled() {
-								return isInterrupted();
-							}
-						});
+								@Override
+								public boolean isCancelled() {
+									return isInterrupted();
+								}
+							});
+				}
 			}
 		};
 	}
@@ -92,9 +106,21 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	public void setFilter(PoiFilter filter) {
+		 // TODO parameter
 		this.filter = filter;
+//		this.radius = 100;
+//		this.path = true;
+		this.path = false;
 		data.clearCache();
 	}
+	
+	public void setFilter(PoiFilter filter, double radius) {
+		this.filter = filter;
+		this.radius = radius;
+		this.path = true;
+		data.clearCache();
+	}
+	
 
 	public void getAmenityFromPoint(RotatedTileBox tb, PointF point, List<? super Amenity> am) {
 		List<Amenity> objects = data.getResults();
@@ -224,6 +250,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public void destroyLayer() {
+		routingHelper.removeListener(this);
 	}
 
 	@Override
@@ -317,7 +344,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		}
 		return null;
 	}
-
+	
 	@Override
 	public LatLon getTextLocation(Amenity o) {
 		return o.getLocation();
@@ -332,5 +359,17 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public String getText(Amenity o) {
 		return o.getName(view.getSettings().usingEnglishNames());
 	}
+
+	@Override
+	public void newRouteIsCalculated(boolean newRoute) {
+		if(path) {
+			data.clearCache();
+		}
+	}
+
+	@Override
+	public void routeWasCancelled() {
+	}
+
 
 }

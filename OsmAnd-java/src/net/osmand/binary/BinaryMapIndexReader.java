@@ -1410,6 +1410,7 @@ public class BinaryMapIndexReader {
 		}
 		request.radius = radius;
 		request.left = sleft;
+		request.zoom = -1;
 		request.right = sright;
 		request.top = stop;
 		request.bottom = sbottom;
