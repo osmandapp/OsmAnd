@@ -108,8 +108,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			}
 		});
 
-		displaySize = new Point();
-		getWindowManager().getDefaultDisplay().getSize(displaySize);
+		displaySize = new Point(getWindowManager().getDefaultDisplay().getWidth(), getWindowManager().getDefaultDisplay().getHeight());
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
 				R.string.default_buttons_other_actions, R.string.close);
 		if (getMyApplication().isApplicationInitializing()) {
