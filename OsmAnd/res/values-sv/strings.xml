@@ -1202,7 +1202,7 @@
 \n\t* Stöd för OSM-anteckningar 
     </string>
     <string name="search_street_in_neighborhood_cities">Sök gator i grannstäder</string>
-    <string name="intermediate_items_sort_return">Platser ordnade för att bilda en optimal rutt från positionen på kartan till destinationen.</string>
+    <string name="intermediate_items_sort_return">Mellanliggande waypoints ordnade för att bilda en optimal rutt från positionen på kartan till destinationen.</string>
     <string name="intermediate_items_sort_by_distance">Sortera (dörr-till-dörr)</string>
     <string name="local_osm_changes_backup_failed">Säkerhetskopieringen av OSM-ändringar misslyckades</string>
     <string name="local_osm_changes_backup">Säkerhetskopiera som OSM-förändring</string>
@@ -1465,14 +1465,14 @@
     <string name="osmo_mode_off">Starta OsMo-session</string>
     <string name="use_points_as_intermediates">Beräkna rutt mellan punkter</string>
     <string name="tip_recent_changes_1_8_alpha">"Förändringar i 1.8: * Beräkna rutt mellan ruttpunkter i GPX-spår * Ändrat utseende vid nedladdning av länder (stöd för sökning med lokala namn) * Stöder GPX-/KML-import (konvertera fråm KML till GPX) * GPX-spår har flyttat till \'Mina data\' * Du kan dela upp GPX-spår efter sträcka och kolla höjdskillnad/hastighet * Autostarta navigering efter fördröjning "</string>
-    <string name="osmo_auto_send_locations_descr">Starta trackersessionen automatiskt och sänd platser sedan appen startats</string>
+    <string name="osmo_auto_send_locations_descr">Starta trackersessionen automatiskt och skicka positioner när appen startats</string>
     <string name="osmo_auto_send_locations">Starta trackersessionen automatiskt</string>
     <string name="osmo_tracker_id">Personligt tracker-id</string>
     <string name="osmo_tracker_id_descr">Klicka för att visa eller dela ut tracker-id.
     Med tracker-id kommer anslutna enheter att kunna följa denna enhets alla rörelser! För att koppla ifrån, välj alternativet Återskapa...</string>
     <string name="osmo_session_token">Sessionstoken: %1$s</string>
     <string name="osmo_auth_pending">Väntar på autentisering...</string>
-    <string name="osmo_locations_sent">Platser skickade %1$d (i buffer %2$d) </string>
+    <string name="osmo_locations_sent">"Positioner skickade %1$d (i buffert %2$d) "</string>
     <string name="osmo_conn_successfull">Anslutning upprättad: %1$s </string>
     <string name="hours_ago">timmar sedan</string>
     <string name="minutes_ago">minuter sedan</string>
@@ -1489,7 +1489,7 @@
     <string name="osmo_group_share">För att ansluta till gruppen %2$s, ange grupp-id (%1$s) eller klicka på %3$s.</string>
     <string name="osmo_share_connect_device">Följ denna enhet permanent</string>
     <string name="osmo_share_current_session">Dela aktuell session i webbläsaren</string>
-    <string name="osmo_session_not_available">Sessionen inte tillgänglig. Kolla att \'Skicka platser\' är på.</string>
+    <string name="osmo_session_not_available">Sessionen inte tillgänglig. Kolla att \'Skicka positioner\' är på.</string>
     <string name="osmo_share_session">Dela session</string>
     <string name="osmo_session_id_share">Sessions-URL för att spåra enhet (%1$s)</string>
     <string name="osmo_tracker_id_share">För att ansluta till målenheten %2$s, klicka på länken %3$s eller ange tracker-id (%1$s)</string>
@@ -1507,7 +1507,7 @@
     <string name="osmo_create_group">Skapa grupp</string>
     <string name="osmo_server_operation_failed">OsMo-server operation misslyckades</string>
     <string name="osmo_activity">OpenStreetMap-bevakning</string>
-    <string name="osmo_enable_tracker">Skicka mina platser</string>
+    <string name="osmo_enable_tracker">Skicka mina positioner</string>
     <string name="osmo_control">OsMo snabbåtkomst</string>
     <string name="osmo_mode_restart">Starta om OsMo-session</string>
     <string name="osmo_settings_debug">Avbuggningsinformation</string>

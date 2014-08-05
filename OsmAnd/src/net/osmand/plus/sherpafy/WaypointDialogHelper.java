@@ -62,7 +62,7 @@ public class WaypointDialogHelper {
 					closePointDialog = vi.inflate(R.layout.waypoint_reached, null);
 				}
 
-				createView(closePointDialog, point);
+				updatePointInfoView(closePointDialog, point);
 				closePointDialog.setBackgroundColor(mapActivity.getResources().getColor(R.color.color_black));
 				((TextView)closePointDialog.findViewById(R.id.waypoint_text)).setTextColor(Color.WHITE);
 				View all = closePointDialog.findViewById(R.id.all_points);
@@ -91,7 +91,7 @@ public class WaypointDialogHelper {
 		}
 	}
 
-	private void createView(View localView, final LocationPoint point) {
+	private void updatePointInfoView(View localView, final LocationPoint point) {
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		text.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -102,7 +102,6 @@ public class WaypointDialogHelper {
 
 		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(FavoriteImageDrawable.getOrCreate(mapActivity, point.getColor()));
 		Location lastKnownMapLocation = app.getLocationProvider().getLastKnownLocation();
-//		LatLon lastKnownMapLocation = app.getSettings().getLastKnownMapLocation();
 		String distance;
 		if (lastKnownMapLocation != null) {
 			int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
@@ -202,7 +201,7 @@ public class WaypointDialogHelper {
 					ll.setMargins(vl / 4, vl / 4, vl / 4, vl / 4);
 					v.findViewById(R.id.waypoint_icon).setLayoutParams(ll);
 				}
-				createView(v, getItem(position));
+				updatePointInfoView(v, getItem(position));
 				TextView text = (TextView) v.findViewById(R.id.waypoint_text);
 				text.setOnClickListener(new View.OnClickListener() {
 					@Override

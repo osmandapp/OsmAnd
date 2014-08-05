@@ -1879,9 +1879,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_group_information">請在建立群組之前，仔細閱讀！</string>
     <string name="osmo_not_signed_in">OsMo 登入失敗</string>
     <string name="osmo_auth_error_short">授權失敗</string>
-    <string name="osmo_auth_error">OsMo 授權時遇到錯誤：%1$s。\n這可能是服務臨時當機或是您的註冊已過期。\n您想要繼續跟新的註冊。</string>
+    <string name="osmo_auth_error">OsMo 授權時遇到錯誤：%1$s。\n這可能是服務臨時當機或是您的註冊已過期。\n您想要繼續進行和新的註冊嗎？</string>
     <string name="rendering_attr_hideBuildings_name">隱藏建築物</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">隱藏非車輛的高速公路</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">隱藏非車輛的公路</string>
     <string name="rendering_attr_hideText_name">隱藏文字</string>
     <string name="rendering_attr_hideWoodScrubs_name">隱藏樹木和灌樹叢</string>
     <string name="rendering_attr_buildings15zoom_name">在 15 級下縮放建築物</string>
@@ -1933,7 +1933,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="arrival_distance_factor_early">提早</string>
     <string name="arrival_distance_factor_normally">正常</string>
     <string name="arrival_distance_factor_late">稍遲</string>
-    <string name="arrival_distance_factor_at_last">最後一米</string>
+    <string name="arrival_distance_factor_at_last">在最後一米</string>
     <string name="rendering_attr_coloredBuildings_name">有色彩的建築物</string>
     <string name="hide_all_waypoints">全部移除</string>
 <string name="av_camera_pic_size">相機照片的大小</string>

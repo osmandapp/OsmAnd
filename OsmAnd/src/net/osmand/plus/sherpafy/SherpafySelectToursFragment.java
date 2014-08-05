@@ -124,11 +124,18 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.sherpafy_list_tour_item, parent, false);
 			}
+
 			final TourInformation ti = getItem(position);
 			TextView description = (TextView) row.findViewById(R.id.TourDescription);
 			TextView name = (TextView) row.findViewById(R.id.TourName);
 			TextView moreInformation = (TextView) row.findViewById(R.id.MoreInformation);
 			SpannableString content = new SpannableString(getString(R.string.sherpafy_more_information));
+			row.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					((TourViewActivity) getActivity()).selectMenu( ti);
+				}
+			});
 			content.setSpan(new ClickableSpan() {
 				@Override
 				public void onClick(View widget) {
