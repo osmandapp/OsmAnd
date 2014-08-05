@@ -1658,7 +1658,7 @@
     <string name="osmo_specify_tracker_id">Ange id</string>
     <string name="rendering_attr_coloredBuildings_name">Färgade byggnader</string>
     <string name="arrival_distance_factor_early">Tidigt</string>
-    <string name="arrival_distance_factor_normally">Normalt</string>
+    <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Sent</string>
     <string name="arrival_distance_factor_at_last">De sista metrarna</string>
     <string name="hide_all_waypoints">Ta bort alla</string>
