@@ -180,7 +180,7 @@
   <string name="oclock">hodín</string>
   <string name="towards">k</string>
   <string name="accuracy">Presnosť</string>
-  <string name="altitude">Nadm. výška</string>
+  <string name="altitude">Nadmorská výška</string>
   <string name="no_info">Žiadne info</string>
   <string name="direction_style_sidewise">Bokom (8 sektorov)</string>
   <string name="direction_style_clockwise">V smere hod. ručičiek (12 sektorov)</string>
@@ -249,8 +249,8 @@
   <string name="index_name_africa">Afrika</string>
   <string name="index_name_asia">Ázia</string>
   <string name="index_name_oceania">Oceánia</string>
-  <string name="index_name_other">Celosvetové a ostatné mapy</string>
-  <string name="index_name_wiki">Celosvetová Wikipedia</string>
+  <string name="index_name_other">Celosvetové a tematické mapy</string>
+  <string name="index_name_wiki">Celosvetové body z Wikipedie</string>
   <string name="index_name_voice">Hlasové balíky (nahrávky, obmedzená funkcionalita)</string>
   <string name="index_name_tts_voice">Hlasové balíky (TTS-generované, odporúčané)</string>
   <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
@@ -274,13 +274,13 @@
   <string name="use_transparent_map_theme">Priehľadná téma</string>
   <string name="native_library_not_supported">Natívna knižnica nie je podporovaná na tomto zariadení.</string>
   <string name="init_native_library">Inicializácia natívnej knižnice…</string>
-  <string name="choose_auto_follow_route">Automatické nasledovanie</string>
+  <string name="choose_auto_follow_route">Automatické centrovanie</string>
   <string name="choose_auto_follow_route_descr">Čas pokiaľ sa mapové zobrazenie zosynchronizuje s pozíciou</string>
   <string name="auto_follow_route_never">Nikdy</string>
   <string name="auto_follow_route_navigation">Autom. nasledovanie iba pri navigácii</string>
   <string name="auto_follow_route_navigation_descr">Povoliť autom. nasledovanie pozície iba v režime navigácie.</string>
   <string name="auto_follow_location_enabled">Automatické nasledovanie je povolené.</string>
-  <string name="pref_vector_rendering">Vektorové vykresľovanie</string>
+  <string name="pref_vector_rendering">Voľby pre vektorové vykresľovanie</string>
   <string name="pref_overlay">Prekrývacia/podkladová</string>
   <string name="pref_raster_map">Nastavenia zdrojovej mapy</string>
   <string name="pref_vector_map">Nastavenia vektorovej mapy</string>
@@ -462,7 +462,7 @@
 		\n\nPo uložení potom môžete k nemu jednoducho pristupovať cez "Hlavné Menu" → "Moje miesta". Dlhým kliknutím na obľúbený bod v zozname "Obľúbené" môžete k tomuto bodu navigovať, upraviť ho alebo vymazať.
 		\n\nNa zobrazenie všetkých Obľúbených bodov priamo na mape môžete zapnúť vrstvu "Obľúbené miesta" cez "Kontextové menu mapy" → "Zobrazenie".
 	</string>
-  <string name="tip_osm_improve">Vylepšovanie Openstreetmap-u</string>
+  <string name="tip_osm_improve">Vylepšovanie dát v Openstreetmap</string>
   <string name="tip_osm_improve_t">OsmAnd používa mapy založené na dátach Openstreetmap.org (OSM) a nie je navrhnutý len pre cestovanie a navigovanie, ale aj pre vylepšovanie a pomoc projektu Openstreetmap. Iba pár kliknutiami môžete jednoducho vytvoriť a nahrať nový bod záujmu (POI) alebo OSM chybu.
 		\n\nNajprv musíte povoliť modul "OSM upravovanie" v "Nastavenia" → "Správca zásuvných modulov". Potom zadať Vaše prihlasovacie údaje v "Nastavenia" → "OSM upravovanie".
 		\n\nNa pridanie nového POI použite možnosť "Vytvoriť POI" v kontextovom menu mapy. Potom môžete postupovať so zadávaním informácií o novom POI v dialógu vytvárania POI a nakoniec ho nahrať.
@@ -587,8 +587,8 @@
   <string name="general_settings_descr">Konfigurácia zobrazenia a iných globálnych nastavení</string>
   <string name="general_settings">Všeobecné nastavenia</string>
   <string name="index_settings_descr">Stiahnutie, zobrazenie podrobností a správa offline máp</string>
-  <string name="index_settings">Správca mapových súborov</string>
-  <string name="osmand_service">Funkcia v režime spánku</string>
+  <string name="index_settings">Spravovať mapové súbory</string>
+  <string name="osmand_service">Funkcie v režime spánku</string>
   <string name="osmand_service_descr">Použite pre beh OsmAndu počas vypnutej obrazovky</string>
   <string name="fast_route_mode">Najrýchlejšia trasa</string>
   <string name="fast_route_mode_descr">Zapnite na výpočet najrýchlejšej trasy alebo vypnite pre najkratšiu trasu </string>
@@ -815,8 +815,8 @@
   <string name="download_indexes">Stiahnuť offline údaje</string>
   <string name="use_online_routing_descr">Použiť Internet na výpočet trasy</string>
   <string name="use_online_routing">Použiť online navigáciu</string>
-  <string name="user_password_descr">Vaše OSM heslo</string>
-  <string name="user_password">Užívateľské heslo</string>
+  <string name="user_password_descr">Heslo potrebné pre prispievanie do openstreetmap.org</string>
+  <string name="user_password">OSM heslo</string>
   <string name="osm_settings_descr">Určenie nastavení Openstreetmap.org (OSM) pre OSM nahrávanie</string>
   
   <string name="data_settings_descr">Výber jazyka, stiahnutie/znovu načítanie údajov</string>
@@ -838,8 +838,8 @@
   <string name="save_track_to_gpx">Logovať stopu do GPX súboru</string>
   <string name="update_tile">Aktualizovať mapu</string>
   <string name="reload_tile">Znovu načítať dlaždicu</string>
-  <string name="user_name_descr">Potrebné pre odovzdávanie do openstreetmap.org</string>
-  <string name="user_name">Vaše OSM užív. meno</string>
+  <string name="user_name_descr">Meno potrebné pre prispievanie do openstreetmap.org</string>
+  <string name="user_name">OSM používateľské meno</string>
   <string name="mark_point">Cieľ</string>
   <string name="show_osm_bugs_descr">Zobrazenie OpenStreetBugs na mape</string>
   <string name="show_osm_bugs">Zobraziť OpenStreetBugs</string>
@@ -1932,7 +1932,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_showAccess_name">Zobraziť typ prístupu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobraziť kvalitu ciest</string>
     <string name="rendering_attr_showSurfaces_name">Zobraziť povrch ciest</string>
-    <string name="rendering_attr_showCycleRoutes_name">Zobraziť cyklocesty</string>
+    <string name="rendering_attr_showCycleRoutes_name">Zobraziť cyklotrasy</string>
     <string name="lang_fa">Perzsky</string>
 	<string name="keep_navigation_service">Ponechať</string>
 	<string name="rendering_attr_subwayMode_name">Režim metra</string>
