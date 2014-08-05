@@ -820,6 +820,7 @@ public class MapActivityActions implements DialogProvider {
 						} else {
 							routingHelper.setRoutePlanningMode(true);
 							routingHelper.setFollowingMode(false);
+							routingHelper.setPauseNaviation(true);
 						}
 						mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 						mapActivity.refreshMap();

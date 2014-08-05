@@ -1,8 +1,6 @@
 package net.osmand.plus.resources;
 
 
-import gnu.trove.list.array.TIntArrayList;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,6 +21,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -271,6 +270,7 @@ public class ResourceManager {
 	protected StringBuilder builder = new StringBuilder(40);
 	protected char[] tileId = new char[120];
 	private GeoidAltitudeCorrection geoidAltitudeCorrection;
+	private boolean searchAmenitiesInProgress;
 
 	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom) {
 		builder.setLength(0);
@@ -719,41 +719,47 @@ public class ResourceManager {
 	public List<Amenity> searchAmenities(PoiFilter filter,
 			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, final ResultMatcher<Amenity> matcher) {
 		final List<Amenity> amenities = new ArrayList<Amenity>();
-		if(filter instanceof NameFinderPoiFilter || filter instanceof SearchByNameFilter){
-			List<Amenity> tempResults = filter instanceof NameFinderPoiFilter  ? 
-					((NameFinderPoiFilter) filter).getSearchedAmenities() :((SearchByNameFilter) filter).getSearchedAmenities() ;
-			for(Amenity a : tempResults){
-				LatLon l = a.getLocation();
-				if(l != null && l.getLatitude() <= topLatitude && l.getLatitude() >= bottomLatitude && l.getLongitude() >= leftLongitude && l.getLongitude() <= rightLongitude){
-					if(matcher.publish(a) ){
-						amenities.add(a);
+		searchAmenitiesInProgress = true;
+		try {
+			if (filter instanceof NameFinderPoiFilter || filter instanceof SearchByNameFilter) {
+				List<Amenity> tempResults = filter instanceof NameFinderPoiFilter ? ((NameFinderPoiFilter) filter)
+						.getSearchedAmenities() : ((SearchByNameFilter) filter).getSearchedAmenities();
+				for (Amenity a : tempResults) {
+					LatLon l = a.getLocation();
+					if (l != null && l.getLatitude() <= topLatitude && l.getLatitude() >= bottomLatitude
+							&& l.getLongitude() >= leftLongitude && l.getLongitude() <= rightLongitude) {
+						if (matcher.publish(a)) {
+							amenities.add(a);
+						}
+					}
+				}
+			} else {
+				final String filterByName = filter.getFilterByName();
+				for (AmenityIndexRepository index : amenityRepositories) {
+					if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
+						index.searchAmenities(MapUtils.get31TileNumberY(topLatitude),
+								MapUtils.get31TileNumberX(leftLongitude), MapUtils.get31TileNumberY(bottomLatitude),
+								MapUtils.get31TileNumberX(rightLongitude), zoom, filter, amenities,
+								new ResultMatcher<Amenity>() {
+
+									@Override
+									public boolean publish(Amenity object) {
+										if (checkNameFilter(object, filterByName)) {
+											return matcher.publish(object);
+										}
+										return false;
+									}
+
+									@Override
+									public boolean isCancelled() {
+										return matcher.isCancelled();
+									}
+								});
 					}
 				}
 			}
-		} else {
-			final String filterByName = filter.getFilterByName();
-			for (AmenityIndexRepository index : amenityRepositories) {
-				if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
-					index.searchAmenities(MapUtils.get31TileNumberY(topLatitude),
-							MapUtils.get31TileNumberX(leftLongitude), MapUtils.get31TileNumberY(bottomLatitude),
-							MapUtils.get31TileNumberX(rightLongitude), -1, filter, amenities,
-							new ResultMatcher<Amenity>() {
-
-								@Override
-								public boolean publish(Amenity object) {
-									if (checkNameFilter(object, filterByName)) {
-										return matcher.publish(object);
-									}
-									return false;
-								}
-
-								@Override
-								public boolean isCancelled() {
-									return matcher.isCancelled();
-								}
-							});
-				}
-			}
+		} finally {
+			searchAmenitiesInProgress = false;
 		}
 		return amenities;
 	}
@@ -814,33 +820,40 @@ public class ResourceManager {
 		return map;
 	}
 	
-	public void searchAmenitiesOnTheArea(TIntArrayList tiles16z, PoiFilter filter, ResultMatcher<Amenity> results) {
-		if (tiles16z.size() > 0) {
-			int z = 16;
-			int x = tiles16z.get(0) >> z;
-			int y = tiles16z.get(0) & ((1 << z) - 1);
-			List<AmenityIndexRepository> repos = new ArrayList<AmenityIndexRepository>();
-			double topLatitude = MapUtils.getLatitudeFromTile(z, y);
-			double bottomLatitude = MapUtils.getLatitudeFromTile(z, y + 1);
-			double leftLongitude = MapUtils.getLongitudeFromTile(z, x);
-			double rightLongitude = MapUtils.getLongitudeFromTile(z, x + 1);
-			for (int k = 1; k < tiles16z.size(); k++) {
-				topLatitude = Math.max(topLatitude, MapUtils.getLatitudeFromTile(z, y));
-				bottomLatitude = Math.min(bottomLatitude, MapUtils.getLatitudeFromTile(z, y + 1));
-				leftLongitude = Math.min(leftLongitude, MapUtils.getLongitudeFromTile(z, x));
-				rightLongitude = Math.max(rightLongitude, MapUtils.getLongitudeFromTile(z, x + 1));
-			}
-			for (AmenityIndexRepository index : amenityRepositories) {
-				if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
-					repos.add(index);
+	public List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, PoiFilter filter, ResultMatcher<Amenity> matcher) {
+		searchAmenitiesInProgress = true;
+		final List<Amenity> amenities = new ArrayList<Amenity>();
+		try {
+			if (locations != null && locations.size() > 0) {
+				List<AmenityIndexRepository> repos = new ArrayList<AmenityIndexRepository>();
+				double topLatitude = locations.get(0).getLatitude();
+				double bottomLatitude = locations.get(0).getLatitude();
+				double leftLongitude = locations.get(0).getLongitude();
+				double rightLongitude = locations.get(0).getLongitude();
+				for (Location l : locations) {
+					topLatitude = Math.max(topLatitude, l.getLatitude());
+					bottomLatitude = Math.min(bottomLatitude, l.getLatitude());
+					leftLongitude = Math.min(leftLongitude, l.getLongitude());
+					rightLongitude = Math.max(rightLongitude, l.getLongitude());
+				}
+				for (AmenityIndexRepository index : amenityRepositories) {
+					if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
+						repos.add(index);
+					}
+				}
+				if (!repos.isEmpty()) {
+					for (AmenityIndexRepository r : repos) {
+						List<Amenity> res = r.searchAmenitiesOnThePath(locations, radius, filter, matcher);
+						if (res != null) {
+							amenities.addAll(res);
+						}
+					}
 				}
 			}
-			if (!repos.isEmpty()) {
-				for(AmenityIndexRepository r : repos) {
-//					r.searchAmenities(stop, sleft, sbottom, sright, zoom, filter, amenities, matcher)
-				}
-			}
+		}finally {
+			searchAmenitiesInProgress = false;
 		}
+		return amenities;
 	}
 	
 	////////////////////////////////////////////// Working with address ///////////////////////////////////////////
@@ -894,6 +907,10 @@ public class ResourceManager {
 	
 	public void interruptRendering(){
 		renderer.interruptLoadingMap();
+	}
+	
+	public boolean isSearchAmenitiesInProgress() {
+		return searchAmenitiesInProgress;
 	}
 	
 	public MapRenderRepositories getRenderer() {

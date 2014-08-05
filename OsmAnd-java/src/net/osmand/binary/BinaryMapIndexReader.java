@@ -1,31 +1,48 @@
 package net.osmand.binary;
 
 
+import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.Location;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
@@ -43,10 +60,16 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
+import net.osmand.osm.edit.Way;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
@@ -1317,6 +1340,8 @@ public class BinaryMapIndexReader {
 		return buildSearchRequest(sleft, sright, stop, sbottom, zoom, searchFilter, null);
 	}
 	
+	
+	
 	public static SearchRequest<BinaryMapDataObject> buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom, SearchFilter searchFilter, 
 			ResultMatcher<BinaryMapDataObject> resultMatcher){
 		SearchRequest<BinaryMapDataObject> request = new SearchRequest<BinaryMapDataObject>();
@@ -1345,6 +1370,55 @@ public class BinaryMapIndexReader {
 		return request;
 	}
 	
+	public static SearchRequest<Amenity> buildSearchPoiRequest(List<Location> route, double radius,
+			SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> resultMatcher) {
+		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
+		float coeff = (float) (radius / MapUtils.getTileDistanceWidth(SearchRequest.ZOOM_TO_SEARCH_POI)); 
+		TIntObjectHashMap<List<Location>> zooms = new TIntObjectHashMap<List<Location>>();
+		for(int i = 1; i < route.size(); i++) {
+			Location cr = route.get(i);
+			Location pr = route.get(i - 1);
+			double tx = MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, cr.getLongitude());
+			double ty = MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, cr.getLatitude());
+			double px = MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, pr.getLongitude());
+			double py = MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, pr.getLatitude());
+			double topLeftX = Math.min(tx, px) - coeff;
+			double topLeftY = Math.min(ty, py) - coeff;
+			double bottomRightX = Math.max(tx, px) + coeff;
+			double bottomRightY = Math.max(ty, py) + coeff;
+			for(int x = (int) topLeftX; x <= bottomRightX; x++) {
+				for(int y = (int) topLeftY; y <= bottomRightY; y++) {
+					int hash = (x << SearchRequest.ZOOM_TO_SEARCH_POI) + y;
+					if(!zooms.containsKey(hash)) {
+						zooms.put(hash, new LinkedList<Location>());
+					}
+					List<Location> ll = zooms.get(hash);
+					ll.add(pr);
+					ll.add(cr);
+				}
+			}
+			
+		}
+		int sleft = 0, sright = Integer.MAX_VALUE, stop = 0, sbottom = Integer.MAX_VALUE;
+		for(int vl : zooms.keys()) {
+			int x = (vl >> SearchRequest.ZOOM_TO_SEARCH_POI) << (31 - SearchRequest.ZOOM_TO_SEARCH_POI);
+			int y = (vl & ((1 << SearchRequest.ZOOM_TO_SEARCH_POI) -1)) << (31 - SearchRequest.ZOOM_TO_SEARCH_POI);
+			sleft = Math.min(x, sleft);
+			stop = Math.min(y, stop);
+			sbottom = Math.max(y, sbottom);
+			sright = Math.max(x, sright);
+		}
+		request.radius = radius;
+		request.left = sleft;
+		request.zoom = -1;
+		request.right = sright;
+		request.top = stop;
+		request.bottom = sbottom;
+		request.tiles = zooms;
+		request.poiTypeFilter = poiTypeFilter;
+		request.resultMatcher = resultMatcher;
+		return request;
+	}
 	
 	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom, 
 			SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> matcher){
@@ -1426,6 +1500,7 @@ public class BinaryMapIndexReader {
 	}
 	
 	public static class SearchRequest<T> {
+		public final static int ZOOM_TO_SEARCH_POI = 16; 
 		private List<T> searchResults = new ArrayList<T>();
 		private boolean land = false;
 		private boolean ocean = false;
@@ -1443,6 +1518,11 @@ public class BinaryMapIndexReader {
 		
 		int zoom = 15;
 		int limit = -1;
+
+		// search on the path
+		// stores tile of 16 index and pairs (even length always) of points intersecting tile
+		TIntObjectHashMap<List<Location>> tiles = null;
+		double radius = -1;
 		
 		
 		String nameQuery = null;
@@ -1467,6 +1547,12 @@ public class BinaryMapIndexReader {
 		boolean interrupted = false;
 		
 		protected SearchRequest(){
+		}
+		
+		public int getTileHashOnPath(double lat, double lon) {
+			int x = (int) MapUtils.getTileNumberX(SearchRequest.ZOOM_TO_SEARCH_POI, lon);
+			int y = (int) MapUtils.getTileNumberY(SearchRequest.ZOOM_TO_SEARCH_POI, lat);
+			return (x << SearchRequest.ZOOM_TO_SEARCH_POI) | y;
 		}
 		
 		
@@ -1769,7 +1855,7 @@ public class BinaryMapIndexReader {
 	}
 
 	
-	private static boolean testMapSearch = true;
+	private static boolean testMapSearch = false;
 	private static boolean testAddressSearch = false;
 	private static boolean testPoiSearch = false;
 	private static boolean testTransportSearch = false;
@@ -1805,17 +1891,120 @@ public class BinaryMapIndexReader {
 			PoiRegion poiRegion = reader.getPoiIndexes().get(0);
 			testPoiSearch(reader, poiRegion);
 			testPoiSearchByName(reader);
+			testSearchOnthePath(reader);
 		}
 
 		println("MEMORY " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())); //$NON-NLS-1$
 		println("Time " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 	}
 
+	private static void testSearchOnthePath(BinaryMapIndexReader reader) throws IOException {
+		float radius = 1000;
+		long now = System.currentTimeMillis();
+		println("Searching poi on the path...");
+		final List<Location> locations = readGPX(new File(
+				""));
+		SearchRequest<Amenity> req = buildSearchPoiRequest(locations, radius, new SearchPoiTypeFilter() {
+			@Override
+			public boolean accept(AmenityType type, String subcategory) {
+				if (type == AmenityType.SHOP && subcategory.contains("super")) {
+					return true;
+				}
+				return false;
+			}
+
+		}, null);
+		req.zoom = -1;
+		List<Amenity> results = reader.searchPoi(req);
+		int k = 0;
+		println("Search done in " + (System.currentTimeMillis() - now) + " ms ");
+		now = System.currentTimeMillis();
+
+		for (Amenity a : results) {
+			final float dds = dist(a.getLocation(), locations);
+			if (dds <= radius) {
+				println("+ " + a.getType() + " " + a.getSubType() + " Dist " + dds + " (=" + (float)a.getDeviateDistance() + ") " + a.getName() + " " + a.getLocation());
+				k++;
+			} else {
+				println(a.getType() + " " + a.getSubType() + " Dist " + dds + " " + a.getName() + " " + a.getLocation());
+			}
+		}
+		println("Filtered in " + (System.currentTimeMillis() - now) + "ms " + k + " of " + results.size());
+	}
+	
+	private static float dist(LatLon l, List<Location> locations) {
+		float dist = Float.POSITIVE_INFINITY;
+		for(int i = 1; i < locations.size(); i++){
+			dist = Math.min(dist,(float) MapUtils.getOrthogonalDistance(l.getLatitude(), l.getLongitude(), 
+					locations.get(i-1).getLatitude(), locations.get(i-1).getLongitude(),
+					locations.get(i).getLatitude(), locations.get(i).getLongitude()));
+		}
+		return dist;
+	}
+
+	private static Reader getUTF8Reader(InputStream f) throws IOException {
+		BufferedInputStream bis = new BufferedInputStream(f);
+		assert bis.markSupported();
+		bis.mark(3);
+		boolean reset = true;
+		byte[] t = new byte[3];
+		bis.read(t);
+		if (t[0] == ((byte) 0xef) && t[1] == ((byte) 0xbb) && t[2] == ((byte) 0xbf)) {
+			reset = false;
+		}
+		if (reset) {
+			bis.reset();
+		}
+		return new InputStreamReader(bis, "UTF-8");
+	}
+	
+	private static List<Location> readGPX(File f) {
+			List<Location> res = new ArrayList<Location>();
+			try {
+				StringBuilder content = new StringBuilder();
+				BufferedReader reader = new BufferedReader(getUTF8Reader(new FileInputStream(f)));
+				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder dom = factory.newDocumentBuilder();
+//				{
+//					String s = null;
+//					boolean fist = true;
+//					while ((s = reader.readLine()) != null) {
+//						if (fist) {
+//							fist = false;
+//						}
+//						content.append(s).append("\n");
+//					}
+//				}
+//				Document doc = dom.parse(new InputSource(new StringReader(content.toString())));
+				Document doc = dom.parse(new InputSource(reader));
+				NodeList list = doc.getElementsByTagName("trkpt");
+				Way w = new Way(-1);
+				for (int i = 0; i < list.getLength(); i++) {
+					Element item = (Element) list.item(i);
+					try {
+						double lon = Double.parseDouble(item.getAttribute("lon"));
+						double lat = Double.parseDouble(item.getAttribute("lat"));
+						final Location o = new Location("");
+						o.setLatitude(lat);
+						o.setLongitude(lon);
+						res.add(o);
+					} catch (NumberFormatException e) {
+					}
+				}
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			} catch (ParserConfigurationException e) {
+				throw new RuntimeException(e);
+			} catch (SAXException e) {
+				throw new RuntimeException(e);
+			}
+			return res;
+		}
+
 	private static void testPoiSearchByName(BinaryMapIndexReader reader) throws IOException {
 		println("Searching by name...");
-		int tileZ = 31 - 14;
-		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft/2+sright/2, stop/2+sbottom/2, "kol",  
-				sleft - 1<<tileZ, sleft + 1<<tileZ, stop - 1<<tileZ,  stop + 1<<tileZ, null);
+		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "roch",  
+				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null);
 		reader.searchPoiByName(req);
 		for (Amenity a : req.getSearchResults()) {
 			println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
@@ -2107,5 +2296,7 @@ public class BinaryMapIndexReader {
 			routeAdapter.initRouteRegion(routeReg);
 		}
 	}
+
+	
 	
 }

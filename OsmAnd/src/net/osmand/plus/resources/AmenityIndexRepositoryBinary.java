@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -104,6 +105,31 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 					MapUtils.get31LatitudeY(stop) + " " + MapUtils.get31LongitudeX(sleft), System.currentTimeMillis() - now, amenities.size())); //$NON-NLS-1$
 		}
 		return amenities;
+	}
+
+	@Override
+	public synchronized List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, final PoiFilter filter, ResultMatcher<Amenity> matcher) {
+		long now = System.currentTimeMillis();
+		SearchPoiTypeFilter poiTypeFilter = new SearchPoiTypeFilter(){
+			@Override
+			public boolean accept(AmenityType type, String subcategory) {
+				return filter.acceptTypeSubtype(type, subcategory);
+			}
+		};
+		List<Amenity> result = null;
+		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(locations, radius,
+				poiTypeFilter, filter == null ? matcher : filter.getResultMatcher(matcher));
+		try {
+			result = index.searchPoi(req);
+		} catch (IOException e) {
+			log.error("Error searching amenities", e); //$NON-NLS-1$
+			return result;
+		}
+		if (log.isDebugEnabled() && result != null) {
+			log.debug(String.format("Search done in %s ms found %s.",  (System.currentTimeMillis() - now), result.size())); //$NON-NLS-1$
+		}
+		return result;
+		
 	}
 	
 }

@@ -111,7 +111,7 @@ public class MapNavigateControl extends MapControls {
 				startNavigation();
 			}
 		});
-		if(!mapActivity.getRoutingHelper().isFollowingMode()) {
+		if(!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isPauseNavigation()) {
 			startCounter();
 		}
 	}

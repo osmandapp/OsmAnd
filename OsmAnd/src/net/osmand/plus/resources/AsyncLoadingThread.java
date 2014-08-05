@@ -29,7 +29,6 @@ public class AsyncLoadingThread extends Thread {
 	
 	private static final Log log = PlatformUtil.getLog(AsyncLoadingThread.class); 
 	
-	private Handler asyncLoadingPoi; 
 	private Handler asyncLoadingTransport;
 	
 	Stack<Object> requests = new Stack<Object>();
@@ -43,11 +42,7 @@ public class AsyncLoadingThread extends Thread {
 		this.resourceManger = resourceManger;
 	}
 	
-	private void startPoiLoadingThread() {
-		HandlerThread h = new HandlerThread("Loading poi");
-		h.start();
-		asyncLoadingPoi = new Handler(h.getLooper());
-	}
+	
 	
 	private void startTransportLoadingThread() {
 		HandlerThread h = new HandlerThread("Loading transport");
@@ -61,6 +56,8 @@ public class AsyncLoadingThread extends Thread {
 			progress = BusyIndicator.STATUS_GREEN;
 		} else if (resourceManger.getContext().getRoutingHelper().isRouteBeingCalculated()) {
 			progress = BusyIndicator.STATUS_ORANGE;
+		} else if (resourceManger.isSearchAmenitiesInProgress()) {
+			progress = BusyIndicator.STATUS_BLACK;
 		} else if (!requests.isEmpty()) {
 			progress = BusyIndicator.STATUS_BLACK;
 		} else if (transportLoadRequest != null && transportLoadRequest.isRunning()) {

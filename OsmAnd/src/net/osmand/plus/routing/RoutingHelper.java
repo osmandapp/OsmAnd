@@ -50,8 +50,8 @@ public class RoutingHelper {
 	private OsmandApplication app;
 	
 	private boolean isFollowingMode = false;
-	
 	private boolean isRoutePlanningMode = false;
+	private boolean isPauseNavigation = false;
 	
 	private GPXRouteParamsBuilder currentGPXRoute = null;
 
@@ -79,6 +79,7 @@ public class RoutingHelper {
 	private RouteCalculationProgressCallback progressRoute;
 	private SearchOnTheRouteHelper searchOnTheRouteHelper;
 
+
 //	private ProgressBar progress;
 //	private Handler progressHandler;
 
@@ -101,8 +102,17 @@ public class RoutingHelper {
 		return isFollowingMode;
 	}
 	
+	public void setPauseNaviation(boolean b) {
+		this.isPauseNavigation = b;
+	}
+	
+	public boolean isPauseNavigation() {
+		return isPauseNavigation;
+	}
+	
 	public void setFollowingMode(boolean follow) {
 		isFollowingMode = follow;
+		isPauseNavigation = false;
 		if (!follow) {
 			if (app.getNavigationService() != null) {
 				app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_NAVIGATION);
@@ -931,5 +941,6 @@ public class RoutingHelper {
 			voiceRouter.newRouteIsCalculated(true)	;
 		}
 	}
+
 
 }
