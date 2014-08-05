@@ -1929,7 +1929,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="arrival_distance_factor_late">Пазьней</string>
     <string name="arrival_distance_factor_at_last">На апошніх метрах</string>
     <string name="av_camera_pic_size">Памер фота</string>
-	<string name="av_camera_pic_size_descr">Памер выявы для убудаванага фатаграфаваньня</string>
+	<string name="av_camera_pic_size_descr">Памер фатаздымка з убудаванай камеры</string>
     <string name="hide_all_waypoints">Выдаліць усе</string>
     <string name="announce_nearby_favorites">Абвяшчаць бліжэйшыя выбраныя кропкі</string>
 </resources>
