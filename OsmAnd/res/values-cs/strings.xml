@@ -1645,7 +1645,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_group_information_desc">" - Všechny vytvořené skupiny jsou veřejné! Pokud chcete být anonymní, připojte zařízení přímo přes ID.\n - Do skupiny se může registrovat až 16 lidí.
 \n - V případě neaktivity nebo aktivity pouze jedné osoby v průběhu dvou týdnů, bude skupina zrušena.\n - Můžete omezit vstup do skupiny pozvánkami, ale pro ovládání skupiny musíte použít administrátorskou konzoli.\n - Pokud potřebujete vytvořit skupinu s jinými podmínkami prosím kontaktujte http://osmo.mobi"</string>
     <string name="osmo_auth_error">Chyba při autorizaci OsMo: %1$s.\n Služba může být dočasně nedostupná nebo vám vypršela registrace.
-\n Chcete pokračovat v nové registraci.</string>
+\n Chcete pokračovat v nové registraci?</string>
     <string name="osmo_auth_error_short">Autorizace selhala</string>
     <string name="rendering_attr_showCycleRoutes_name">Zobrazit cyklostezky</string>
     <string name="forward">Vpřed</string>
@@ -1695,7 +1695,7 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_osmcTraces_description">Vykreslovat cesty podle OSMC značení</string>
     
 	<string name="arrival_distance_factor_early">Brzy</string>
-    <string name="arrival_distance_factor_normally">Normálně</string>
+    <string name="arrival_distance_factor_normally">Normální</string>
     <string name="arrival_distance_factor_late">Později</string>
     <string name="arrival_distance_factor_at_last">V posledních metrech</string>
     <string name="av_camera_pic_size">Velikost fotografie</string>
