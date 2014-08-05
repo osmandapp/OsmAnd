@@ -118,7 +118,17 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			showSelectedItem();
 		}
 	}
-	
+
+	@Override
+	public void onBackPressed() {
+		if (state == STATE_SELECT_TOUR){
+			super.onBackPressed();
+		} else if (state == STATE_TOUR_VIEW){
+			selectMenu(R.string.sherpafy_tours);
+		} else if (state == STATE_STAGE_OVERVIEW){
+			selectMenu(customization.getSelectedTour());
+		}
+	}
 
 	private ArrayAdapter<Object> setupAdapter() {
 		return new ArrayAdapter<Object>(this, R.layout.sherpafy_drawer_list_item){
