@@ -1328,7 +1328,7 @@ Pomembnejše lastnosti:
     <string name="access_mark_final_location_first">Način dostopnosti: prosim, najprej izberite cilj</string> 
     <string name="use_magnetic_sensor_descr">Namesto senzorja usmerjenosti, za določanje vrednosti kompasa uporabljaj magnetni senzor</string>
     <string name="cancel_route">Opusti pot</string>
-    <string name="monitoring_settings_descr">Določite, kako lahko snemate potovanja in omogočite način v pripravljenosti</string>
+    <string name="monitoring_settings_descr">Določite, kako naj se snemajo potovanja</string>
     <string name="osmand_monitoring_plugin_description">Omogoči sledenje in navigacijo v načinu pripravljenosti (izklopljen zaslon) preko rednega zbujanja GPS naprave. Pokaže nastavitve, ki omogočajo snemanje potovanj v lokalne GPX datoteke ali na splet z uporabo spletnih storitev.</string>
     <string name="choose_osmand_theme_descr">Izbira teme programa</string>
     <string name="choose_osmand_theme">Tema aplikacije</string>
@@ -1890,4 +1890,13 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="rendering_attr_subwayMode_name">Način podzemne železnice</string>
  	<string name="continue_navigation">Nadaljuj navigacijo</string>
     <string name="rendering_attr_alpineHiking_name">Planinski zamljevid</string>
+    <string name="osmo_invite">Povabite...</string>
+    <string name="osmo_specify_tracker_id">Prosim, določite ID</string>
+    <string name="arrival_distance_factor_early">Zgodaj</string>
+    <string name="arrival_distance_factor_normally">Običajno</string>
+    <string name="arrival_distance_factor_late">Pozno</string>
+    <string name="arrival_distance_factor_at_last">V zadnjih metrih</string>
+    <string name="hide_all_waypoints">Odstrani vse</string>
+<string name="rendering_attr_coloredBuildings_name">Pobarvane stavbe</string>
+    <string name="osmo_leave_confirmation_msg">Ali želite zapustiti skupino %1$s?</string>
     </resources>

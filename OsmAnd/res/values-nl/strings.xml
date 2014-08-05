@@ -1431,7 +1431,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	\n\t* Menuknop vervangen door knop linksboven in het kaartvenster
     </string>
     <string name="monitoring_settings">Logboek registratie</string>
-    <string name="monitoring_settings_descr">Stel in hoe lokaal of via online tracking reizen op te nemen</string>
+    <string name="monitoring_settings_descr">Bepaal hoe trips op te nemen</string>
     <string name="osmand_monitoring_plugin_description">Activeren van tracking en navigatie in slaapmodus (scherm uit). De GPS gaat dan regelmatig aan. Toon de instellingen om uw reis vast te leggen als GPX-bestand of online via een webdienst.</string>
     <string name="street_name">Straat</string>
 	<string name="osmand_monitoring_plugin_name">Logboek registratie</string>
@@ -1881,7 +1881,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_not_signed_in">Kon niet inloggen op OsMo</string>
     <string name="osmo_group_by_invite">Alleen toegang met uitnodiging</string>
     <string name="osmo_auth_error_short">Aanmelding mislukt</string>
-    <string name="osmo_auth_error">OsMo aanmeldings fout: %1$s.\nMogelijk is de service tijdelijk niet beschikbaar of is uw registratie verlopen.\nWilt u verder gaan met een nieuwe registratie.</string>
+    <string name="osmo_auth_error">OsMo aanmeldings fout: %1$s.\nMogelijk is de service tijdelijk niet beschikbaar of is uw registratie verlopen.\nWilt u verder gaan met een nieuwe registratie?</string>
     <string name="rendering_attr_hideBuildings_name">Verberg gebouwen</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Verberg voetpaden</string>
     <string name="rendering_attr_hideText_name">Verberg tekst</string>
@@ -1928,4 +1928,16 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_attr_osmcTraces_name">Wandelsymbolen laag</string>
     <string name="rendering_attr_osmcTraces_description">Render paden volgens OSMC sporen</string>
     
-	</resources>
+	<string name="rendering_attr_coloredBuildings_name">Gekleurde gebouwen</string>
+    <string name="osmo_invite">Uitnodiging voor…</string>
+    <string name="osmo_leave_confirmation_msg">Wil je de groep %1$s verlaten?</string>
+    <string name="osmo_specify_tracker_id">Specificeer je tracker-id alsjeblieft</string>
+    <string name="arrival_distance_factor_early">Vroegtijdig</string>
+    <string name="arrival_distance_factor_normally">Normaal</string>
+    <string name="arrival_distance_factor_late">Laat</string>
+    <string name="arrival_distance_factor_at_last">Als bijna bereikt</string>
+    <string name="hide_all_waypoints">Verwijder alle</string>
+<string name="av_camera_pic_size">Camera Beeldformaat</string>
+	<string name="av_camera_pic_size_descr">Selecteer interne camera beeldformaat</string>
+    <string name="announce_nearby_favorites">Meld favorieten in de buurt</string>
+</resources>

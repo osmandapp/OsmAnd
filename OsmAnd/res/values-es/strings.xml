@@ -1285,7 +1285,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="tip_recent_changes_1_3_t">"Cambio en 1.5:\n\t* Tema Holo (personalización de tema) "
     </string>
     <string name="monitoring_settings">Servicios de registro</string>
-    <string name="monitoring_settings_descr">Configura la forma de registrar los recorridos y activar el modo reposo</string>
+    <string name="monitoring_settings_descr">Configura la forma de registrar los recorridos</string>
     <string name="osmand_monitoring_plugin_description">Activa el seguimiento y la navegación en modo suspensión (pantalla apagada) despertando periódicamente el dispositivo GPS. Muestra opciones que permiten registrar tus recorridos en archivos GPX locales o en línea mediante un servicio web.</string>
     <string name="osmand_monitoring_plugin_name">Servicios de registro</string>
     <string name="choose_osmand_theme_descr">Elije el tema, el aspecto, de la aplicación</string>
@@ -1805,16 +1805,16 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="keep_navigation_service">Mantener</string>
 	<string name="stop_navigation_service">Parar</string>
 	<string name="enable_sleep_mode">Habilita modo reposo</string>
-	<string name="gps_wake_up_timer">Intervalo despertar GPS</string>
+	<string name="gps_wake_up_timer">Intervalo para despertar GPS</string>
 	<string name="sleep_mode_stop_dialog">¿Mantener el GPS encendido?</string>
-	<string name="map_preferred_locale_descr">Lenguaje preferido para las etiquetas en el mapa (si no está disponible se cambiará a Ingles o a los nombres locales)</string>
-    <string name="map_preferred_locale">Lenguaje preferido del mapa</string>
+	<string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no se indica se cambiará a inglés o a nombres locales)</string>
+    <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="local_map_names">Nombres locales</string>
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebreo</string>
     <string name="forward">Siguiente</string>
     <string name="home">Casa</string>
-    <string name="live_monitoring_m_descr">Enviar seguimiento a un servicio web específico si la grabación GPS está habilitada.</string>
+    <string name="live_monitoring_m_descr">Enviar seguimiento a un servicio web específico si la grabación GPX está habilitada.</string>
 	<string name="live_monitoring_m">Seguimiento online (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento online</string>
 	<string name="live_monitoring_stop">Parar seguimiento online</string>
@@ -1828,7 +1828,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="lang_sr">Serbio</string>
 	<string name="lang_zh_CN">Chino Simplificado</string>
 	<string name="lang_zh_TW">Chino Tradicional</string>
-	<string name="rendering_attr_subwayMode_name">Modo subterráneo</string>
+	<string name="rendering_attr_subwayMode_name">Modo Metro</string>
  	<string name="continue_navigation">Continuar Navegación</string>
     <string name="pause_navigation">Pausar Navegación</string>
 	<string name="rendering_attr_alpineHiking_name">Vista senderismo Alpino</string>
@@ -1844,4 +1844,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="arrival_distance_factor_late">Tarde</string>
     <string name="arrival_distance_factor_at_last">En los últimos metros</string>
     <string name="rendering_attr_coloredBuildings_name">Edificios de colores</string>
-    </resources>
+    <string name="hide_all_waypoints">Quitar todos</string>
+<string name="av_camera_pic_size">Tamaño de foto</string>
+	<string name="av_camera_pic_size_descr">Selecciona el tamaño interno de la foto</string>
+    <string name="announce_nearby_favorites">Anunciar favoritos cercanos</string>
+</resources>

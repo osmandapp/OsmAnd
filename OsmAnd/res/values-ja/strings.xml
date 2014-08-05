@@ -1189,13 +1189,13 @@ POIの更新は利用できません</string>
     <string name="default_or">または</string>
 	<string name="route_is_too_long">ルートがOsmAndオフラインルート検索によって検索されるには長すぎる可能性があります。 
         	平均的なオフラインルート検索では、200km程度まで検索可能です。ルートを検索する場合はひとつ以上の経由点を追加して下さい。</string>
-	<string name="auto_zoom_none">オートズームオフ</string>
-	<string name="auto_zoom_close">近距離</string>
-	<string name="auto_zoom_far">中距離</string>
-	<string name="auto_zoom_farthest">遠距離</string>
+	<string name="auto_zoom_none">自動ズームしない</string>
+	<string name="auto_zoom_close">ズーム 大</string>
+	<string name="auto_zoom_far">ズーム 中</string>
+	<string name="auto_zoom_farthest">ズーム 小</string>
 	<string name="av_photo_play_sound">写真撮影時に撮影音を鳴らします</string>
 	<string name="av_camera_focus_infinity">フォーカスは無限遠にセットされます</string>
-	<string name="av_camera_focus_macro">マクロ（近距離）フォーカスモード</string>
+	<string name="av_camera_focus_macro">マクロ(近距離)フォーカスモード</string>
 	<string name="osmand_srtm_long_description_1000_chars">このプラグインはOsmAndオフラインマップ上に等高線を表示する機能を提供します。このグローバルデータ（北緯70°から南緯70°の間）はSRTM（スペースシャトル立体地形データ）とASTER（資源探査用将来型センサ）、NASAの地球観測システムである、テラ上のオンボードイメージング機器をベースにしたものです。
 ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム開発利用推進機構（J-spacesystems）の共同作業によるものです。</string>
     <string name="audionotes_location_not_defined">ノートに関連付ける場所が未定義です。 指定された場所にメモをとるためには\"場所を利用 …\"を利用します</string>

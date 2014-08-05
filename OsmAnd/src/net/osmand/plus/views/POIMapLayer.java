@@ -1,9 +1,11 @@
 package net.osmand.plus.views;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -43,14 +45,46 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private Paint paintIcon;
 	private Paint point;
 	private OsmandMapTileView view;
-	private List<Amenity> objects = new ArrayList<Amenity>();
 	private final static int MAXIMUM_SHOW_AMENITIES = 5;
 
 	private ResourceManager resourceManager;
 	private PoiFilter filter;
 	private MapTextLayer mapTextLayer;
+	
+	/// cache for displayed POI
+	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
+	private MapLayerData<List<Amenity>> data;
+
 
 	public POIMapLayer(MapActivity activity) {
+		data = new OsmandMapLayer.MapLayerData<List<Amenity>>() {
+			{
+				ZOOM_THRESHOLD = 0;
+			}
+			
+			@Override
+			public boolean isInterrupted() {
+				return super.isInterrupted();
+			}
+			
+			@Override
+			protected List<Amenity> calculateResult(RotatedTileBox tileBox) {
+				QuadRect latLonBounds = tileBox.getLatLonBounds();
+				return resourceManager.searchAmenities(filter, latLonBounds.top, latLonBounds.left,
+						latLonBounds.bottom, latLonBounds.right, tileBox.getZoom(), new ResultMatcher<Amenity>() {
+
+							@Override
+							public boolean publish(Amenity object) {
+								return true;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return isInterrupted();
+							}
+						});
+			}
+		};
 	}
 
 	public PoiFilter getFilter() {
@@ -59,9 +93,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	public void setFilter(PoiFilter filter) {
 		this.filter = filter;
+		data.clearCache();
 	}
 
 	public void getAmenityFromPoint(RotatedTileBox tb, PointF point, List<? super Amenity> am) {
+		List<Amenity> objects = data.getResults();
 		if (objects != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
@@ -126,6 +162,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		resourceManager = view.getApplication().getResourceManager();
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
+	
 
 	public int getRadiusPoi(RotatedTileBox tb) {
 		int r = 0;
@@ -146,30 +183,33 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		objects.clear();
+		List<Amenity> objects = Collections.emptyList();
 		if (tileBox.getZoom() >= startZoom) {
-			final QuadRect latLonBounds = tileBox.getLatLonBounds();
-			resourceManager.searchAmenitiesAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom,
-					latLonBounds.right, tileBox.getZoom(), filter, objects);
-			int r = getRadiusPoi(tileBox);
-			for (Amenity o : objects) {
-				int x = (int) tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				canvas.drawCircle(x, y, r, pointAltUI);
-				canvas.drawCircle(x, y, r, point);
-				String id = null;
-				StringBuilder tag = new StringBuilder();
-				StringBuilder value = new StringBuilder();
-				MapRenderingTypes.getDefault().getAmenityTagValue(o.getType(), o.getSubType(), tag, value);
-				if (RenderingIcons.containsIcon(tag + "_" + value)) {
-					id = tag + "_" + value;
-				} else if (RenderingIcons.containsIcon(tag.toString())) {
-					id = tag.toString();
-				}
-				if (id != null) {
-					Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id);
-					if (bmp != null) {
-						canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
+			data.queryNewData(tileBox);
+			objects = data.getResults();
+			if (objects != null) {
+				int r = getRadiusPoi(tileBox);
+				for (Amenity o : objects) {
+					int x = (int) tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
+							.getLongitude());
+					int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
+							.getLongitude());
+					canvas.drawCircle(x, y, r, pointAltUI);
+					canvas.drawCircle(x, y, r, point);
+					String id = null;
+					StringBuilder tag = new StringBuilder();
+					StringBuilder value = new StringBuilder();
+					MapRenderingTypes.getDefault().getAmenityTagValue(o.getType(), o.getSubType(), tag, value);
+					if (RenderingIcons.containsIcon(tag + "_" + value)) {
+						id = tag + "_" + value;
+					} else if (RenderingIcons.containsIcon(tag.toString())) {
+						id = tag.toString();
+					}
+					if (id != null) {
+						Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id);
+						if (bmp != null) {
+							canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
+						}
 					}
 				}
 			}

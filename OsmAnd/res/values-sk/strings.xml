@@ -1274,7 +1274,7 @@
 	<string name="street_name">Ulica</string>
 	<string name="hno">Číslo domu</string>
     <string name="monitoring_settings">Logovacie služby</string>
-    <string name="monitoring_settings_descr">Konfiguruje ako sa majú zaznamenať trasy a povoliť režim spánku</string>
+    <string name="monitoring_settings_descr">Konfigurovať ako sa majú zaznamenať trasy</string>
     <string name="osmand_monitoring_plugin_name">Logovacie služby</string>
     <string name="choose_osmand_theme_descr">Výber témy pre aplikáciu</string>
     <string name="choose_osmand_theme">Téma aplikácie</string>
@@ -1899,7 +1899,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_gpx_track_downloaded">OsMo stopa %1$s stiahnutá.</string>
     <string name="osmo_not_signed_in">Prihlásenie k OsMo zlyhalo</string>
     <string name="osmo_auth_error_short">Autorizácia zlyhala</string>
-    <string name="osmo_auth_error">Chyba pri autorizácii OsMo : %1$s.\n Možno je služba dočasne nedostupná alebo vám skončila registrácia.\n Chcete pokračovať v novej registrácii.</string>
+    <string name="osmo_auth_error">Chyba pri autorizácii OsMo : %1$s.\n Možno je služba dočasne nedostupná alebo vám skončila registrácia.\n Chcete pokračovať v novej registrácii?</string>
     <string name="osmo_group_by_invite">Vstúpiť pozvaním</string>
     <string name="osmo_group_information_desc">" - Všetky vytvorené skupiny sú verejné! Ak chcete byť anonymný, pripojte zariadenia priamo cez Tracker id.\n - Skupina môže zaregistrovať až do 16 ľudí.\n - Skupina bude zrušená v prípade nečinnosti alebo aktivity len jednej osoby počas 2 týždňov.\n - Môžete obmedziť vstup do skupiny len na pozvánky, ale pre ovládanie skupiny musíte použiť administračnú konzolu.\n - Ak potrebujete vytvoriť skupinu s inými podmienkami, kontaktujte http://osmo.mobi"</string>
     <string name="osmo_group_information">Prosím prečítajte si pred vytváraním skupiny!</string>
@@ -1949,4 +1949,16 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_osmcTraces_name">Zobraziť turistické značky</string>
     <string name="rendering_attr_osmcTraces_description">Kresliť chodníky podľa značenia OSMC</string>
     
-	</resources>
+	<string name="rendering_attr_coloredBuildings_name">Farebné budovy</string>
+    <string name="osmo_invite">Pozvať...</string>
+    <string name="osmo_leave_confirmation_msg">Chcete opustiť skupinu %1$s?</string>
+    <string name="osmo_specify_tracker_id">Prosím zadajte ID</string>
+    <string name="arrival_distance_factor_early">Skoro</string>
+    <string name="arrival_distance_factor_normally">Normálne</string>
+    <string name="arrival_distance_factor_late">Neskoro</string>
+    <string name="arrival_distance_factor_at_last">V posledných metroch</string>
+    <string name="hide_all_waypoints">Odstrániť všetky</string>
+<string name="av_camera_pic_size">Veľkosť fotografie</string>
+	<string name="av_camera_pic_size_descr">Zvoľte veľkosť obrázka interného fotoaparátu</string>
+    <string name="announce_nearby_favorites">Oznamovať obľúbené miesta v blízkosti</string>
+</resources>

@@ -1,7 +1,9 @@
 package net.osmand.plus.views.controls;
 
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.sherpafy.WaypointDialogHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -24,60 +26,64 @@ public abstract class MapControls {
 	protected int shadowColor;
 	private boolean visible;
 	private long delayTime;
-	
+
 	protected int gravity = Gravity.BOTTOM | Gravity.RIGHT;
 	protected int margin;
 	protected int vmargin;
 	protected int width;
 	protected int height;
 	protected Runnable notifyClick;
-	
+	private int extraVerticalMargin;
+
 	public MapControls(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 		this.mapActivity = mapActivity;
 		this.showUIHandler = showUIHandler;
 		this.scaleCoefficient = scaleCoefficient;
 	}
-	
-	
+
+
 	public void setGravity(int gravity) {
 		this.gravity = gravity;
 	}
-	
+
 	public void setMargin(int margin) {
 		this.margin = margin;
 	}
 	public void setVerticalMargin(int vmargin) {
 		this.vmargin = vmargin;
 	}
-	
+
 	protected ImageButton addImageButton(FrameLayout parent, int stringId, int resourceId) {
 		Context ctx = mapActivity;
 		ImageButton  button = new ImageButton(ctx);
 		applyAttributes(ctx, parent, button, stringId, resourceId, 0);
 		return button;
 	}
-	
+
+	public int getTotalVerticalMargin() {
+		return extraVerticalMargin + vmargin;
+	}
+
 	protected Button addButton(FrameLayout parent, int stringId, int resourceId) {
 		return addButton(parent, stringId, resourceId, 0);
 	}
-	
-	protected Button addButton(FrameLayout parent, int stringId, int resourceId, int extraMargin) {
+		protected Button addButton(FrameLayout parent, int stringId, int resourceId, int extraMargin) {
 		Context ctx = mapActivity;
 		Button button = new Button(ctx);
 		applyAttributes(ctx, parent, button, stringId, resourceId, extraMargin);
 		return button;
 	}
-	
+
 	public void setNotifyClick(Runnable notifyClick) {
 		this.notifyClick = notifyClick;
 	}
-	
+
 	protected void notifyClicked() {
 		if(notifyClick != null) {
 			notifyClick.run();
 		}
 	}
-	
+
 
 	private void applyAttributes(Context ctx, FrameLayout parent, View button, int stringId, int resourceId,
 			int extraMargin) {
@@ -92,15 +98,20 @@ public abstract class MapControls {
 			params.rightMargin = margin + extraMargin;
 		}
 		if((gravity & Gravity.BOTTOM) == Gravity.BOTTOM) {
-			params.bottomMargin = vmargin;
+			params.bottomMargin = vmargin + extraVerticalMargin;
 		} else {
-			params.topMargin = vmargin;
+			params.topMargin = vmargin + extraVerticalMargin;
 		}
-		parent.addView(button, params);
+		button.setLayoutParams(params);
+		parent.addView(button);
 		button.setEnabled(true);
 		mapActivity.accessibleContent.add(button);
 	}
-	
+
+	public int getGravity() {
+		return gravity;
+	}
+
 	protected void removeButton(FrameLayout layout, View b) {
 		layout.removeView(b);
 		mapActivity.accessibleContent.remove(b);
@@ -113,12 +124,12 @@ public abstract class MapControls {
 	public final void init(FrameLayout layout) {
 		initControls(layout);
 	}
-	
+
 	public final void show(FrameLayout layout) {
 		visible = true;
 		showControls(layout);
 	}
-	
+
 	public final void showWithDelay(final FrameLayout layout, final long delay) {
 		this.delayTime = System.currentTimeMillis() + delay;
 		if(!visible) {
@@ -147,50 +158,58 @@ public abstract class MapControls {
 			}
 		}, delay);
 	}
-	
+
 	public final void hide(FrameLayout layout) {
 		if(this.delayTime == 0) {
 			visible = false;
 			hideControls(layout);
 		}
 	}
-	
+
 	public final void forceHide(FrameLayout layout) {
 		delayTime = 0;
 		visible = false;
 		hideControls(layout);
 		mapActivity.getMapView().refreshMap();
 	}
-	
+
 	public boolean isVisible() {
 		return visible;
 	}
-	
+
 	protected boolean isLeft() {
 		return (Gravity.LEFT & gravity) == Gravity.LEFT;
 	}
 
-	protected boolean isBottom() {
+	public boolean isBottom() {
 		return (Gravity.BOTTOM & gravity) == Gravity.BOTTOM;
 	}
-	
-	
+
+
 	protected void initControls(FrameLayout layout) {
 	}
 
 	protected abstract void hideControls(FrameLayout layout);
-	
+
 	protected abstract void showControls(FrameLayout layout);
-	
+
 
 	public abstract void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode);
-	
-	
+
+
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
 		return false;
 	}
-	
+
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		return false;
+	}
+
+	public void setExtraVerticalMargin(int extraVerticalMargin) {
+		this.extraVerticalMargin = extraVerticalMargin;
+	}
+
+	public int getExtraVerticalMargin() {
+		return this.extraVerticalMargin;
 	}
 }

@@ -3,7 +3,10 @@ package net.osmand.plus.routing;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -16,6 +19,9 @@ import net.osmand.util.Algorithms;
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
 import android.content.Context;
+import net.osmand.util.MapUtils;
+
+import java.util.List;
 
 
 public class VoiceRouter {
@@ -154,7 +160,7 @@ public class VoiceRouter {
 		}
 	}
 	
-	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon){
+	public boolean isDistanceLess(float currentSpeed, double dist, double etalon){
 		if(currentSpeed <= 0) {
 			currentSpeed = DEFAULT_SPEED;
 		}
@@ -216,11 +222,76 @@ public class VoiceRouter {
 			lastAnnouncedOffRoute = ms;
 		}
 	}
-	
-	public void announceWaypoint(String w) {
+
+	public void announceWaypoint(List<LocationPoint> points) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
-		if(p != null) {
-			p.arrivedAtWayPoint(getSpeakablePointName(w)).play();
+		if (p == null){
+			return;
+		}
+		String favoritesWaypoints = null;
+		String gpxWaypoints = null;
+		String poiWaypoints = null;
+		for (LocationPoint point : points) {
+			if (point instanceof GPXUtilities.WptPt) {
+				gpxWaypoints = (favoritesWaypoints == null ? "" : ", ") + point.getName();
+			} else if (point instanceof FavouritePoint) {
+				favoritesWaypoints = (favoritesWaypoints == null ? "" : ", ") + point.getName();
+			} else {
+				poiWaypoints = (favoritesWaypoints == null ? "" : ", ") + point.getName();
+			}
+		}
+		if (gpxWaypoints != null){
+			p.arrivedAtWayPoint(gpxWaypoints).play();
+		}
+		if (favoritesWaypoints != null){
+			p.arrivedAtFavorite(favoritesWaypoints).play();
+		}
+		if (poiWaypoints != null){
+			p.arrivedAtPoi(poiWaypoints).play();
+		}
+	}
+
+	public void approachWaypoint(Location location, List<LocationPoint> points){
+		CommandBuilder p = getNewCommandPlayerToPlay();
+		if (p == null){
+			return;
+		}
+		String favoritesWaypoints = null;
+		String gpxWaypoints = null;
+		String poiWaypoints = null;
+		double favDistance = -1;
+		double gpxDistance = -1;
+		double poiDistance = -1;
+		for (LocationPoint point : points) {
+			if (point instanceof GPXUtilities.WptPt) {
+				gpxWaypoints = (favoritesWaypoints == null ? "" : ", ") + point.getName();
+				//need to calculate distance to nearest point
+				if (favDistance == -1){
+					favDistance = MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
+							point.getLatitude(), point.getLongitude());
+				}
+			} else if (point instanceof FavouritePoint) {
+				favoritesWaypoints = (favoritesWaypoints == null ? "" : ", ") + point.getName();
+				if (gpxDistance == -1){
+					gpxDistance = MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
+							point.getLatitude(), point.getLongitude());
+				}
+			} else {
+				poiWaypoints = (favoritesWaypoints == null ? "" : ", ") + point.getName();
+				if (poiDistance == -1){
+					poiDistance = MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
+							point.getLatitude(), point.getLongitude());
+				}
+			}
+		}
+		if (gpxWaypoints != null){
+			p.goAhead(gpxDistance, null).andArriveAtWayPoint(gpxWaypoints).play();
+		}
+		if (favoritesWaypoints != null) {
+			p.goAhead(favDistance, null).andArriveAtFavorite(favoritesWaypoints).play();
+		}
+		if (poiWaypoints != null){
+			p.goAhead(poiDistance, null).andArriveAtPoiWaypoint(poiWaypoints).play();
 		}
 	}
 

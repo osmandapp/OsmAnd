@@ -28,7 +28,11 @@ public class CommandBuilder {
 	protected static final String C_AND_ARRIVE_INTERMEDIATE = "and_arrive_intermediate";  //$NON-NLS-1$
 	protected static final String C_REACHED_INTERMEDIATE = "reached_intermediate";  //$NON-NLS-1$
 	protected static final String C_AND_ARRIVE_WAYPOINT = "and_arrive_waypoint";  //$NON-NLS-1$
+	protected static final String C_AND_ARRIVE_FAVORITE = "and_arrive_favorite";  //$NON-NLS-1$
+	protected static final String C_AND_ARRIVE_POI_WAYPOINT = "and_arrive_poi";  //$NON-NLS-1$
 	protected static final String C_REACHED_WAYPOINT = "reached_waypoint";  //$NON-NLS-1$
+	protected static final String C_REACHED_FAVORITE = "reached_favorite";  //$NON-NLS-1$
+	protected static final String C_REACHED_POI = "reached_poi";  //$NON-NLS-1$
 	protected static final String C_THEN = "then";  //$NON-NLS-1$
 	protected static final String C_SPEAD_ALARM = "speed_alarm";  //$NON-NLS-1$
 	protected static final String C_ATTENTION = "attention";  //$NON-NLS-1$
@@ -190,9 +194,13 @@ public class CommandBuilder {
 	public CommandBuilder arrivedAtWayPoint(String name) {
 		return addCommand(C_REACHED_WAYPOINT, name);
 	}
-	
-	public CommandBuilder andArriveAtWayPoint(String name){
-		return addCommand(C_AND_ARRIVE_WAYPOINT, name);
+
+	public CommandBuilder arrivedAtFavorite(String name) {
+		return addCommand(C_REACHED_FAVORITE, name);
+	}
+
+	public CommandBuilder arrivedAtPoi(String name) {
+		return addCommand(C_REACHED_POI, name);
 	}
 	
 	public CommandBuilder bearLeft(Term streetName){
@@ -223,8 +231,6 @@ public class CommandBuilder {
 		return alt(prepareStruct(C_ROUTE_RECALC, dist, time), prepareStruct(C_ROUTE_RECALC, dist));
 	}
 
-	
-	
 	public void play(){
 		this.commandPlayer.playCommands(this);
 	}
@@ -234,8 +240,15 @@ public class CommandBuilder {
 		return this.commandPlayer.execute(listStruct);
 	}
 
-	
+	public CommandBuilder andArriveAtWayPoint(String name){
+		return addCommand(C_AND_ARRIVE_WAYPOINT, name);
+	}
 
+	public CommandBuilder andArriveAtPoiWaypoint(String name) {
+		return addCommand(C_AND_ARRIVE_POI_WAYPOINT, name);
+	}
 
-	
+	public CommandBuilder andArriveAtFavorite(String name) {
+		return addCommand(C_AND_ARRIVE_FAVORITE, name);
+	}
 }

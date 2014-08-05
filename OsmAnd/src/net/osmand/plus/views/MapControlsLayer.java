@@ -3,12 +3,14 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.view.ViewParent;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.sherpafy.WaypointDialogHelper;
 import net.osmand.plus.views.controls.MapRoutePlanControl;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl;
 import net.osmand.plus.views.controls.MapCancelControl;
@@ -59,10 +61,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private LinearLayout transparencyBarLayout;
 	private static CommonPreference<Integer> settingsToTransparency;
 	private OsmandSettings settings;
+	private WaypointDialogHelper waypointDialogHelper;
 
 	public MapControlsLayer(MapActivity activity){
 		this.mapActivity = activity;
 		settings = activity.getMyApplication().getSettings();
+		waypointDialogHelper = new WaypointDialogHelper(activity);
 	}
 	
 	@Override
@@ -176,7 +180,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		checkVisibilityAndDraw(showRouteCalculationControls, zoomSideControls, canvas, tileBox, nightMode);
 		
 		// the last one to check other controls visibility
-		int vmargin = mapNavigationControl.isVisible() || zoomControls.isVisible() ? zoomControls.getHeight() : 0;
+		int vmargin = mapNavigationControl.isVisible() || zoomControls.isVisible() ?
+				(zoomControls.getHeight() + zoomControls.getTotalVerticalMargin()): 0;
 		rulerControl.setVerticalMargin(vmargin);
 		checkVisibilityAndDraw(true, rulerControl, canvas, tileBox, nightMode);
 	}
@@ -189,7 +194,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void checkVisibilityAndDraw(boolean visibility, MapControls controls, Canvas canvas,
 			RotatedTileBox tileBox, DrawSettings nightMode) {
-		if(visibility != controls.isVisible()){
+		if(visibility != controls.isVisible() ){
 			if(visibility) {
 				controls.show((FrameLayout) mapActivity.getMapView().getParent());
 			} else {
@@ -298,6 +303,27 @@ public class MapControlsLayer extends OsmandMapLayer {
 			transparencyBarLayout.setVisibility(View.GONE);
 			settingsToTransparency = null;
 		}
-	}	
+	}
 
+	public void shiftLayout(int height) {
+		FrameLayout parent = (FrameLayout) mapActivity.getMapView().getParent();
+		parent.requestLayout();
+		for(MapControls mc : allControls) {
+			if(mc.isBottom()){
+				mc.setExtraVerticalMargin(height);
+				if( mc.isVisible()) {
+					mc.forceHide(parent);
+					mc.show(parent);
+				}
+			}
+		}
+	}
+
+	public void showDialog(){
+		mapInfoNavigationControl.setShowDialog();
+	}
+
+	public WaypointDialogHelper getWaypointDialogHelper() {
+		return waypointDialogHelper;
+	}
 }

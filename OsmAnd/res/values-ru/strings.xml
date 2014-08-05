@@ -1322,6 +1322,8 @@
 	<string name="av_camera_focus_continuous">Постоянная фокусировка</string>
 	<string name="av_photo_play_sound">Звук затвора</string>
 	<string name="av_photo_play_sound_descr">Проигрывать звук при фотографировании</string>
+	<string name="av_camera_pic_size">Размер фото</string>
+	<string name="av_camera_pic_size_descr">Размер изображения для встроенного приложения фотографирования</string>
     
 	<string name="speak_speed_limit">Сообщать о превышении скорости</string>
     <string name="speak_cameras">Сообщать о камерах</string>
@@ -1539,9 +1541,9 @@
 	<string name="share_route_as_gpx">Поделиться маршрутом используя файл GPX</string>
 	<string name="osmo_settings_uuid">Ключ доступа</string>
     <string name="osmo_settings_descr">Настройка параметров мониторинга и установка персонального канала мониторинга</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - продвинутый живой мониторинг с множеством средств удалённого контроля http://osmo.mobi</string>
+    <string name="osmo_plugin_description">OpenStreetMap Monitoring - продвинутый живой мониторинг с множеством средств удалённого контроля http://osmo.mobi</string>
     <string name="osmo_plugin_name">OsMo (Продвинутый онлайн-мониторинг)</string>
-    <string name="osmo_settings">OpenStreetMap-Мониторинг</string>
+    <string name="osmo_settings">OpenStreetMap Мониторинг</string>
    	<string name="navigation_intent_invalid">Неправильный формат: %s</string>
 <string name="share_route_subject">Маршрут предоставленный через OsmAnd</string>
 	<string name="osmand_extended_description_4000_chars">
@@ -1654,8 +1656,6 @@ OsmAnd - открытый источник и активно развается.
 	<string name="color_yellow">жёлтый</string>
 	<string name="color_lightblue">голубой</string>
 	<string name="color_blue">синий</string>
-	
-	<string name="color_green">зелёный</string>
     <string name="osmo_create_groups_confirm">Чтобы создавать группы Вы должны быть зарегистрированным пользователем OsMo.</string>
     <string name="osmo_sign_in">Войти</string>
     <string name="osmo_regenerate_login_ids_confirm">Вы уверены в необходимости регенерации персональных ID? Все устройства, соединённые с Вами, больше не смогут отследить Вас.</string>
@@ -1786,7 +1786,10 @@ OsmAnd - открытый источник и активно развается.
     <string name="arrival_distance_factor_normally">Обычно</string>
     <string name="arrival_distance_factor_late">Попозже</string>
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
-    <string name="osmo_group_information_desc">" - Все созданные группы являются открытыми! Если вы хотите сохранить анонимность, подключите устройства непосредственно через ID трекера.\n - В группе могут быть зарегистрированы до 16 человек.\n - За бездействие или деятельность только 1 человека за 2 недели группа будет удалена.\n - Вы можете ограничить вход в группу, сделать только по приглашениям, но для управления группой  вы должны войти в консоль администратора.\n - Если вам нужно создать группу, но с другими условиями, пожалуйста, свяжитесь с http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Все созданные группы являются открытыми! Если вы хотите сохранить анонимность, подключите устройства непосредственно через ID трекера.\n - В группе могут состоять до 16 человек.\n - Если в группе не будет активным хотя бы 1 человек в течении 2-х недель группа будет удалена.\n - Вы можете ограничить вход в группу, только по приглашениям, но для управления группой вы должны войти в консоль администратора.\n - Если вам нужно создать группу, но с другими условиями, пожалуйста, свяжитесь со службой поддержки http://osmo.mobi</string>
     <string name="rendering_attr_alpineHiking_name">Пеший горный туризм</string>
     <string name="rendering_attr_osmcTraces_name">Наложение символов пешего туризма</string>
-    </resources>
+    <string name="rendering_attr_coloredBuildings_name">Цветные здания</string>
+    <string name="hide_all_waypoints">Удалить все</string>
+    <string name="announce_nearby_favorites">Объявлять ближайшие избранные</string>
+</resources>

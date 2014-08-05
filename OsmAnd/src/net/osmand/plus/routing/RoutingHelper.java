@@ -10,14 +10,15 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.SearchOnTheRouteHelper;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -76,6 +77,7 @@ public class RoutingHelper {
 	//private long wrongMovementDetected = 0;
 
 	private RouteCalculationProgressCallback progressRoute;
+	private SearchOnTheRouteHelper searchOnTheRouteHelper;
 
 //	private ProgressBar progress;
 //	private Handler progressHandler;
@@ -87,7 +89,12 @@ public class RoutingHelper {
 	public RoutingHelper(OsmandApplication context, CommandPlayer player){
 		this.app = context;
 		settings = context.getSettings();
+		searchOnTheRouteHelper = new SearchOnTheRouteHelper(context);
 		voiceRouter = new VoiceRouter(this, settings, player);
+	}
+	
+	public SearchOnTheRouteHelper getSearchOnTheRouteHelper() {
+		return searchOnTheRouteHelper;
 	}
 
 	public boolean isFollowingMode() {
@@ -268,7 +275,6 @@ public class RoutingHelper {
 				// 5. Update Voice router
 				if (isFollowingMode) {
 					// don't update in route planing mode
-					announceGpxWaypoints(currentLocation);
 					boolean inRecalc = calculateRoute || isRouteBeingCalculated();
 					if (!inRecalc && !wrongMovementDirection) {
 						voiceRouter.updateStatus(currentLocation, false);
@@ -312,24 +318,6 @@ public class RoutingHelper {
 			return locationProjection;
 		} else {
 			return currentLocation;
-		}
-	}
-
-
-	private void announceGpxWaypoints(Location currentLocation) {
-		if (currentLocation != null) {
-			List<WptPt> wpt = route.getWaypointsToAnnounce(currentLocation);
-			if (wpt.size() > 0) {
-				String s = "";
-				for (WptPt w : wpt) {
-					if(!Algorithms.isEmpty(w.name)) {
-						s = w.name +",";
-					}
-				}
-				if(!Algorithms.isEmpty(s)) {
-					voiceRouter.announceWaypoint(s);
-				}
-			}
 		}
 	}
 
@@ -534,6 +522,12 @@ public class RoutingHelper {
 	}
 
 	private synchronized void setNewRoute(RouteCalculationResult res, Location start){
+		ArrayList<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
+		if (app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get()){
+			locationPoints.addAll(app.getFavorites().getFavouritePoints());
+		}
+		locationPoints.addAll(res.getLocationPoints());
+		app.getLocationProvider().setVisibleLocationPoints(locationPoints);
 		final boolean newRoute = !this.route.isCalculated();
 		route = res;
 		if (isFollowingMode) {
@@ -565,6 +559,8 @@ public class RoutingHelper {
 				voiceRouter.newRouteIsCalculated(newRoute);
 			}
 		} 
+		
+		searchOnTheRouteHelper.searchOnTheRoute(route);
 
 		app.runInUIThread(new Runnable() {
 			@Override

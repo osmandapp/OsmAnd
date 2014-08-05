@@ -62,7 +62,7 @@
   <string name="routing_settings">Navigation</string>
   <string name="routing_settings_descr">Configurer les options de navigation</string>
   <string name="global_settings">Paramètres globaux</string>
-  <string name="index_settings">Données hors-ligne</string>
+  <string name="index_settings">Gérer les données hors-ligne</string>
   <string name="index_settings_descr">Obtenir ou mettre à jour les données pour l\'utilisation hors-ligne</string>
   <string name="general_settings">Général</string>
   <string name="general_settings_descr">Configurer divers paramètres d\'ordre général</string>
@@ -75,7 +75,7 @@
   <string name="osmand_service_descr">Permet d\'utiliser OsmAnd pendant que l\'écran est désactivé</string>
   <string name="tip_rotation_switching">Orientation de la carte</string>
   
-  <string name="switch_to_raster_map_to_see">Vous n\'avez pas actuellement de carte vectorielle pour cet emplacement.\n\t\n\tVous pouvez en télécharger dans \'Paramètres\' → \'Données hors-ligne\', ou basculer sur les cartes en ligne via \'Paramètres\' → \'Sources de carte\'.</string>
+  <string name="switch_to_raster_map_to_see">Vous n\'avez pas actuellement de carte vectorielle pour cet emplacement.\n\t\n\tVous pouvez en télécharger dans \'Paramètres\' → \'Données hors-ligne\', ou basculer sur les cartes en ligne via \'Paramètres\' → \'Sources de carte\' en activant le greffon des cartes en ligne.</string>
   <string name="binary_map_download_success">Téléchargement réussi.\n\t\n\tPour l\'utiliser, allez dans \'Menu\' → \'Couches\' → \'Source de la carte…\' → \'Cartes vectorielles OSM\'.</string>
   <string name="tip_day_night_mode">Mode jour/nuit</string>
   
@@ -192,7 +192,7 @@
   <string name="local_index_items_restored">%1$d sur %2$d éléments restaurés.</string>
   <string name="local_index_no_items_to_do">Pas d\'éléments à %1$s</string>
   <string name="local_index_action_do">Vous allez %1$s %2$s éléments. Continuer ?</string>
-  <string name="local_index_descr_title">Gestionnaire de données hors-ligne</string>
+  <string name="local_index_descr_title">Gérer les données hors-ligne</string>
   <string name="local_index_mi_restore">Restaurer</string>
   <string name="local_index_mi_backup">Sauvegarder</string>
   <string name="local_index_mi_delete">Supprimer</string>
@@ -277,8 +277,8 @@
 \nSélectionnez alors le mode de partage parmi : courriel, SMS, ou copie vers le presse-papier.
 	</string>
   <string name="tip_favorites">Lieux favoris</string>
-  <string name="tip_favorites_t">"\tLes points utilisés fréquemment peuvent être enregistrés en tant que favoris.
-\n\tPour créer un favori, allez dans le menu contextuel de la carte, sélectionnez l\'option \'Ajouter aux favoris\' et saisissez un nom adapté. Après enregistrement, ce lieu est facilement accessible dans \'Menu\' → \'Favoris\'.
+  <string name="tip_favorites_t">"Les points utilisés fréquemment peuvent être enregistrés en tant que favoris.
+\n\tPour créer un favori, allez dans le menu contextuel de la carte, sélectionnez l\'option \'Ajouter aux favoris\' et saisissez un nom adapté. Après enregistrement, ce lieu est facilement accessible dans \'Menu\' → \'Mes lieux\'.
 \n\tUn appui court sur un favori dans le menu \'Favoris\' permet de créer un itinéraire pour s\'y rendre.
 \n\tPour afficher tous les favoris sur la carte, activez la couche \'Favoris\' dans \'Menu\' → \'Couches\'. "</string>
   <string name="create_poi_link_to_osm_doc"> <u>OSM en ligne</u> classification des cartes en images</string>
@@ -1108,7 +1108,7 @@
     <string name="osmodroid_plugin_description">Le greffon OsMoDroid est une extension OsmAnd pour l\'application OsMoDroid qui permet la création de traces. Pour plus d\'information à propos du service, consulter le site http://esya.ru.</string>
     <string name="osmodroid_plugin_name">Greffon OsMoDroid</string>
 	<string name="index_srtm_ele">Courbes de niveau</string>
-    <string name="srtm_plugin_description">Ce greffon permet de télécharger les courbes de niveaux pour une région spécifique (\'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des données hors-ligne\', puis sélectionner \'Courbes de niveau\' dans le menu), et de les utiliser avec les cartes hors-ligne.</string>
+    <string name="srtm_plugin_description">Ce greffon permet de télécharger les courbes de niveaux et les reliefs de montagne pour une région spécifique (\'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des données hors-ligne\', puis sélectionner le type de carte désiré), et de les utiliser avec les cartes hors-ligne.</string>
     <string name="srtm_plugin_name">Courbes de niveau</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
@@ -1217,10 +1217,10 @@
 	<string name="hno">Numéro de bâtiment</string>
     <string name="tip_recent_changes_1_3_t">"Changements en 1.5:\n\t* Thème Holo (personnalisation de thème) "
     </string>
-    <string name="monitoring_settings">Services de suivi et service d\'arrière-plan</string>
-    <string name="monitoring_settings_descr">Configurer l\'enregistrement des traces et le service d\'arrière-plan</string>
+    <string name="monitoring_settings">Services de suivi</string>
+    <string name="monitoring_settings_descr">Configurer l\'enregistrement des traces</string>
     <string name="osmand_monitoring_plugin_description">Ce greffon permet d\'activer le suivi et la navigation en arrière-plan (écran éteint) en réveillant périodiquement le dispositif GPS. Affiche les paramètres facilitant l\'enregistrement de vos traces vers des fichiers GPX locaux, ou en ligne via un service Web.</string>
-    <string name="osmand_monitoring_plugin_name">Services de suivi et service d\'arrière-plan</string>
+    <string name="osmand_monitoring_plugin_name">Services de suivi</string>
     <string name="choose_osmand_theme_descr">Choisir le thème de l\'application</string>
     <string name="choose_osmand_theme">Thème de l\'application</string>
     <string name="accessibility_options">Options d\'accessibilité</string>
@@ -1474,9 +1474,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="disable_complex_routing">Désactiver le routage complexe</string>
     <string name="guidance_preferences_descr">Paramètres de navigation</string>
     <string name="routing_preferences_descr">Paramètres d\'itinéraire</string>
-    <string name="android_19_location_disabled">Depuis Android KitKat (4.4), vous ne pouvez plus télécharger et mettre à jour la carte dans l\'ancien emplacement de sauvegarde. Voulez-vous changer pour en autoriser un nouveau et y copier l\'ensemble des fichiers ?
-        \n Note : Les anciens fichiers ne seront pas touchés
-        \n Note : Il ne sera pas possible de partager des fichiers entre OsmAnd et OsmAnd+. </string>
+    <string name="android_19_location_disabled">"Depuis Android KitKat (4.4), vous ne pouvez plus télécharger et mettre à jour la carte dans l\'ancien emplacement de sauvegarde (%s). Voulez-vous changer pour en autoriser un nouveau et y copier l\'ensemble des fichiers ?
+\n Note : Les anciens fichiers ne seront pas touchés
+\n Note : Il ne sera pas possible de partager des fichiers entre OsmAnd et OsmAnd+. "</string>
     <string name="application_dir_change_warning2">OsmAnd peut essayer de déplacer les données vers la nouvelle destinaion. Voulez-vous essayer ?</string>
     <string name="copying_osmand_one_file_descr">Copie des fichiers (%s) vers la nouvelle destination...</string>
     <string name="copying_osmand_files_descr">Copie des fichiers OsmAnd vers la nouvelle destination (%s)</string>
@@ -1486,7 +1486,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="routing_attr_prefer_motorway_name">Privilégier les autoroutes</string>
 	<string name="routing_attr_prefer_motorway_description">Privilégier les autoroutes</string>
 	<string name="routing_attr_short_way_name">Itinéraire le plus court</string>
-	<string name="routing_attr_short_way_description">Utiliser l\'itinéraire le plus court</string>
+	<string name="routing_attr_short_way_description">Emprunter l\'itinéraire le plus court</string>
 	<string name="routing_attr_avoid_toll_name">Éviter les péages</string>
 	<string name="routing_attr_avoid_toll_description">Éviter les péages</string>
 	<string name="routing_attr_avoid_unpaved_name">Éviter les voies non revêtues</string>
@@ -1579,11 +1579,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="share_route_subject">Itinéraire partagé via OsmAnd</string>
 	<string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
 	<string name="osmo_settings_descr">Configurer les paramètres de suivi et définir son canal de suivi personnel</string>
-	<string name="osmo_plugin_description">OpenStreetMap-Monitoring - Suivi en temps réel. Ce système offre la possibilité de suivre d\'autres appareils ou d\'être suivi.
-	Créer des groupes anonymes, partager sa position et communiquer avec d\'autres. Il y a différents paramètres pour le suivi de la session courante ou pour un suivi permanent.
-	Les groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe.
-	Des groupes totalement fonctionnels peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès.
-	Pour en savoir plus: http://osmo.mobi</string>
+	<string name="osmo_plugin_description">"Suivi avancé OpenStreetMap en temps réel, voir http://osmo.mobi. Ce système offre la possibilité de suivre d\'autres appareils ou d\'être suivi. Créer des groupes anonymes, partager sa position et communiquer avec d\'autres. Il y a différents paramètres pour le suivi de la session courante ou pour un suivi permanent. Les groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe. Des groupes totalement fonctionnels peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès. "</string>
 	<string name="osmo_plugin_name">OsMo (Suivi en temps réel)</string>
 	<string name="osmo_settings">OSMo OpenStreetMap Monitoring (beta)</string>
 	
@@ -1606,7 +1602,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="keep_informing">Répéter les instructions de navigation</string>
 <string name="navigation_intent_invalid">Format invalide : %s</string>
 <string name="arrival_distance">Annonce de l\'arrivée</string>
-<string name="arrival_distance_descr">Choisir à quel moment est annoncée l\'arrivée à destination</string>
+<string name="arrival_distance_descr">À quel moment voulez-vous annoncer l\'arrivée à destination ?</string>
 <string name="share_fav">Partager</string>
 <string name="share_fav_subject">Favoris partagés via OsmAnd</string>
 <string name="use_points_as_intermediates">Calculer un intinéraire entre des points</string>
@@ -1621,7 +1617,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="hours_ago">heures avant</string>
     <string name="minutes_ago">minutes avant</string>
     <string name="seconds_ago">secondes avant</string>
-    <string name="osmo_connect_to_device_name">Nom de l\'appareil</string>
+    <string name="osmo_connect_to_device_name">Nom de l\'utilisateur</string>
     <string name="osmo_connect_to_device">Lier à l\'appareil</string>
     
     
@@ -1727,7 +1723,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="route_descr_destination">Destination</string>
     <string name="show_zoom_buttons_navigation_descr">Afficher les boutons de zoom pendant la navigation</string>
     <string name="show_zoom_buttons_navigation">Afficher les boutons de zoom</string>
-    <string name="visible_element">Visible</string>
+    <string name="visible_element">Voir sur la carte</string>
     <string name="sort_by_distance">Trier par distance</string>
     <string name="sort_by_name">Trier par nom</string>
     <string name="no_index_file_to_download">Rien à télécharger, veuillez vérifier votre connexion Internet.</string>
@@ -1744,7 +1740,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_gpx_track_downloaded">Trace OsMo %1$s téléchargée.</string>
     <string name="osmo_group_by_invite">Admission sur invitation</string>
     <string name="osmo_auth_error_short">Échec de l\'autorisation</string>
-    <string name="osmo_auth_error">Erreur d\\\'autorisation OsMo : %1$s.\n Le service est temporairement hors-service ou votre inscription a expiré.\n Voulez-vous procéder à nouvelle inscription?</string>
+    <string name="osmo_auth_error">Erreur d\\\'autorisation OsMo : %1$s.\n Le service est momentanément inutilisable ou votre inscription a expiré.\n Voulez-vous procéder à une nouvelle inscription ?</string>
     <string name="keep_navigation_service">Garder</string>
 	<string name="stop_navigation_service">Stop</string>
 	<string name="enable_sleep_mode">Activer le mode veille</string>
@@ -1794,4 +1790,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_attr_osmcTraces_name">Surcouche de symboles de rando</string>
     <string name="rendering_attr_osmcTraces_description">Afficher les chemins selon les traces OSMC</string>
     
-	</resources>
+	<string name="rendering_attr_coloredBuildings_name">Bâtiments en couleur</string>
+    <string name="arrival_distance_factor_early">Tôt</string>
+    <string name="arrival_distance_factor_normally">Normal</string>
+    <string name="arrival_distance_factor_late">Tard</string>
+    <string name="arrival_distance_factor_at_last">Dans les derniers mètres</string>
+    <string name="av_camera_pic_size">Dimensions de la photo</string>
+	<string name="av_camera_pic_size_descr">Sélectionner les dimensions de la photo</string>
+    <string name="hide_all_waypoints">Supprimer tout</string>
+    <string name="announce_nearby_favorites">Annoncer les favoris à proximité</string>
+</resources>

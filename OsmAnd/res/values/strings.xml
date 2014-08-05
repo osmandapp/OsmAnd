@@ -15,8 +15,7 @@
     <string name="osmo_specify_tracker_id">Please specify id</string>
     <string name="continue_navigation">Continue Navigation</string>
     <string name="pause_navigation">Pause Navigation</string>
-	<string name="keep_navigation_service">Keep</string>
-   <string name="rendering_attr_subwayMode_name">Subway mode</string>
+    <string name="rendering_attr_subwayMode_name">Subway mode</string>
  	<string name="keep_navigation_service">Keep</string>
 	<string name="stop_navigation_service">Stop</string>
 	<string name="enable_sleep_mode">Enable sleep mode</string>
@@ -51,7 +50,7 @@
     <string name="osmo_auth_error_short">Authorization failed</string>
     <string name="osmo_auth_error">OsMo authorization error encountered : %1$s.\n
         It could be a temporary service down or your registration expired.\n
-        Do you want to proceed with new registration.</string>
+        Do you want to proceed with new registration?</string>
     <string name="osmo_group_by_invite">Enter by invite</string>
     <string name="osmo_group_information_desc">
         - All created groups are public! If you want to be anonymous, connect devices directly via Tracker ids.\n
@@ -215,7 +214,6 @@
 	<string name="index_item_world_bitcoin_payments">World bitcoin payments</string>
 	<string name="index_item_world_basemap">World overview map</string>
     <string name="index_item_world_ski">World ski map</string>
-    <string name="lang_hr">Croatian</string>
     <string name="lang_zh">Chinese</string>
     <string name="lang_pt_br">Portuguese (Brazil)</string>
     <string name="lang_en">English</string>
@@ -492,7 +490,7 @@
         \n\t* Top left button on the map screen replaces Menu button
     </string>
     <string name="monitoring_settings">Logging services</string>
-    <string name="monitoring_settings_descr">Configure how to record trips and enable sleep mode</string>
+    <string name="monitoring_settings_descr">Configure how to record trips</string>
     <string name="osmand_monitoring_plugin_description">Enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.
         Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
     <string name="osmand_monitoring_plugin_name">Logging services</string>
@@ -1163,9 +1161,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="accessibility_preferences_descr">Accessibility related preferences</string>
 	<string name="accessibility_preferences">Accessibility</string>
     <string name="arrival_distance_factor_early">Early</string>
-    <string name="arrival_distance_factor_normally">Normally</string>
+    <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Late</string>
-    <string name="arrival_distance_factor_at_last">At last metres</string>
+    <string name="arrival_distance_factor_at_last">In the last meters</string>
     <string name="arrival_distance">Arrival announcement</string>
     <string name="arrival_distance_descr">How soon do you want the arrival announcement?</string>
     <string name="rendering_out_of_memory">Not enough process memory to display selected area</string>
@@ -1940,5 +1938,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_camera_focus_continuous">The camera continuously tries to focus</string>
 	<string name="av_photo_play_sound">Play sound on photo shot</string>
 	<string name="av_photo_play_sound_descr">Choose whether to play a sound when shooting photos</string>
+	<string name="av_camera_pic_size">Camera Picture Size</string>
+	<string name="av_camera_pic_size_descr">Select internal camera Picture Size</string>
     <string name="navigation_intent_invalid">Invalid format: %s</string>
+    <string name="hide_all_waypoints">Remove all</string>
+    <string name="announce_nearby_favorites">Announce nearby favorites</string>
 </resources>

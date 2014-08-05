@@ -6,6 +6,7 @@ package net.osmand.plus.activities;
 import java.io.File;
 import java.util.ArrayList;
 
+import android.content.Intent;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -36,6 +37,10 @@ public class FavouritesActivity extends SherlockFragmentActivity {
 	private static final String FAVOURITES_INFO = "FAVOURITES_INFO";
 	private static final String TRACKS = "TRACKS";
 	private static final String SELECTED_TRACK = "SELECTED_TRACK";
+	public static int FAVORITES_TAB = 0;
+	public static int GPX_TAB = 1;
+	public static int SELECTED_GPX_TAB = 2;
+	public static String TAB_PARAM = "TAB_PARAM";
 	private TabsAdapter mTabsAdapter;
 	private TabSpec selectedTrack;
 	private TabHost tabHost;
@@ -85,7 +90,15 @@ public class FavouritesActivity extends SherlockFragmentActivity {
 					AvailableGPXFragment.class, null);
 			selectedTrack = mTabsAdapter.addTab(tabHost.newTabSpec(SELECTED_TRACK).setIndicator(getString(R.string.selected_track)),
 					SelectedGPXFragment.class, null);
-			tabHost.setCurrentTab(tab);
+			Intent intent = getIntent();
+			if(intent != null) {
+				int tt = intent.getIntExtra(TAB_PARAM, -1);
+				if(tt >= 0) {
+					tabHost.setCurrentTab(tt);
+				}
+			} else {
+				tabHost.setCurrentTab(tab);
+			}
 			updateSelectedTracks();
 		}
 	}
