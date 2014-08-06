@@ -1879,7 +1879,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_attr_hideNonVehicleHighways_name">Oculta les vies sense circulació de vehicles</string>
     <string name="rendering_attr_hideText_name">Oculta el text</string>
     <string name="rendering_attr_hideWoodScrubs_name">Amaga tipus de vegetació</string>
-    <string name="rendering_attr_buildings15zoom_name">Representació d\'edificis al detall 15 de zoom</string>
+    <string name="rendering_attr_buildings15zoom_name">Edificis al detall 15 de zoom</string>
     <string name="rendering_attr_moreDetailed_name">Més detallat</string>
     <string name="rendering_attr_lessDetailed_name">Menys detallat</string>
     <string name="rendering_attr_hideAccess_name">Oculta el tipus d\'accés</string>
@@ -1906,7 +1906,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="lang_fa">Persa</string>
 	<string name="keep_navigation_service">Mantén</string>
 	<string name="stop_navigation_service">Atura</string>
-	<string name="enable_sleep_mode">Activar mode baixa activitat</string>
+	<string name="enable_sleep_mode">Activa mode segon pla</string>
 	<string name="gps_wake_up_timer">Interval d\'activació del GPS</string>
 	<string name="sleep_mode_stop_dialog">Mantenir GPS actiu?</string>
 	<string name="lang_al">Albanés</string>
