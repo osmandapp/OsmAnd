@@ -42,10 +42,6 @@ public class SherpafyStageFragment extends SherlockFragment {
 	public SherpafyStageFragment() {
 	}
 
-	public TourInformation getTour(){
-		return tour;
-	}
-	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
