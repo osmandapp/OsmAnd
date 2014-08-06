@@ -41,8 +41,7 @@ public class SherpafyStageFragment extends SherlockFragment {
 
 	public SherpafyStageFragment() {
 	}
-	
-	
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -84,7 +83,7 @@ public class SherpafyStageFragment extends SherlockFragment {
 					});
 		}
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
@@ -148,8 +147,12 @@ public class SherpafyStageFragment extends SherlockFragment {
 	    }
 	}
 
-	
-	   /**
+	public void onBackPressed() {
+		((TourViewActivity) getSherlockActivity()).selectMenu(tour);
+	}
+
+
+	/**
      * This is a helper class that implements the management of tabs and all
      * details of connecting a ViewPager with associated TabHost.  It relies on a
      * trick.  Normally a tab host has a simple API for supplying a View or
