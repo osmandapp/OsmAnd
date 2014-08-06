@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	android:installLocation="auto" android:versionName="@string/app_version" android:versionCode="191"
+	android:installLocation="auto" 
+	android:versionName="@string/app_version" 
+	android:versionCode="191"
 	package="net.osmand.plus">
 
 	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="19" />
@@ -187,7 +189,9 @@
 		<activity android:name="net.osmand.plus.osmedit.LocalOpenstreetmapActivity" android:label="@string/local_openstreetmap_act_title" />
 
 		<!-- keep android:process on a separate line !! -->
-		<service android:process="net.osmand.plus" android:label="@string/process_navigation_service"
+		<service
+		    android:process="net.osmand.plus" 
+		    android:label="@string/process_navigation_service"
 			android:name="net.osmand.plus.NavigationService">
 			<intent-filter>
 				<action android:name="net.osmand.plus.NavigationService" />

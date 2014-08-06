@@ -24,7 +24,6 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
-import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -63,7 +62,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private double radius = 100;
 
 
-	public POIMapLayer(MapActivity activity) {
+	public POIMapLayer(final MapActivity activity) {
 		routingHelper = activity.getRoutingHelper();
 		routingHelper.addListener(this);
 		data = new OsmandMapLayer.MapLayerData<List<Amenity>>() {
@@ -74,6 +73,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			@Override
 			public boolean isInterrupted() {
 				return super.isInterrupted();
+			}
+			
+			@Override
+			public void layerOnPostExecute() {
+				activity.getMapView().refreshMap();
 			}
 			
 			@Override
