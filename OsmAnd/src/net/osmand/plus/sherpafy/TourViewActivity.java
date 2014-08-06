@@ -119,18 +119,18 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	@Override
 	public void onBackPressed() {
-		if(state == STATE_SELECT_TOUR) {
+		if (state == STATE_SELECT_TOUR) {
 			super.onBackPressed();
 		} else if (state == STATE_TOUR_VIEW) {
 			SherpafyHtmlFragment fragment = (SherpafyHtmlFragment) getSupportFragmentManager().findFragmentByTag(String.valueOf(STATE_DETAILED_OVERVIEW));
-			if (fragment != null && fragment.isVisible()){
+			if (fragment != null && fragment.isVisible()) {
 				showSelectedItem();
 			} else {
 				selectMenu(R.string.sherpafy_tours);
 			}
-		} else if (state == STATE_STAGE_OVERVIEW){
+		} else if (state == STATE_STAGE_OVERVIEW) {
 			SherpafyStageFragment fragment = (SherpafyStageFragment) getSupportFragmentManager().findFragmentByTag(String.valueOf(state));
-			if (fragment != null){
+			if (fragment != null) {
 				fragment.onBackPressed();
 			}
 		}
