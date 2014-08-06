@@ -302,16 +302,15 @@
 <string name="use_fluorescent_overlays_descr">Använd fluorescerande färger för att visa spår och rutter</string>
 <string name="offline_edition">Offline-redigering</string>
 <string name="offline_edition_descr">Använd alltid offline-redigering</string>
-<string name="tip_recent_changes_0_7_1_t">Förändringar i 0.7.1:
+<string name="tip_recent_changes_0_7_1_t">"Förändringar i 0.7.1:
 \n\t- Offline POI-redigering
-\n\t- Live Tracking alternativ - skicka koordinater till webbtjänst regelbundet (läs om hur du konfigurerar din egen webbtjänst HowTo-artiklar)
-\n\t- Visa för närvarande in spår på kartan
-\n\t- Riktning upptäckt: \'Gör U-sväng\' anges och meddelas när rubrik i motsatt riktning eller efter saknade en sväng
-\n\t- New röstmeddelande \'Route räknas\'
-\n\t- Optisk indikering av en förestående sväng inom 100m från diretion pil ändrar färg
-\n\t- Aktualitet även om deaktiverade indexfiler nu visas på Download skärm i mörkgrönt och mörkblått
-\n\t- Övriga förändringar
-	</string>
+\n\t- Alternativ för direktspårning - skicka regelbundet koordinater till en webbtjänst (läs om hur du konfigurerar din egen webbtjänst i HowTo-artiklar)
+\n\t- Visa aktuellt inspelat spår på kartan
+\n\t- Riktningsdetektering: \'Gör en U-sväng\' anges och meddelas vid färd i motsatt riktning eller efter att ha missat en sväng
+\n\t- Nytt röstmeddelande \'Rutten räknas om\'
+\n\t- Optisk indikering av en förestående sväng inom 100 m; riktningspilen ändrar färg
+\n\t- Aktualitet även om inaktiverade indexfiler visas nu på hämtningsskärmen i mörkgrönt och mörkblått
+\n\t- Andra ändringar "</string>
 <string name="update_poi_does_not_change_indexes">POI-förändringar inom programmet påverkar inte nedladdade kartfiler; förändringar sparas till en lokal fil istället.</string>
 <string name="local_openstreetmap_uploading">Laddar upp …</string>
 <string name="local_openstreetmap_were_uploaded">{0} POI/buggar laddades upp</string>
@@ -324,10 +323,10 @@
 <string name="local_openstreetmap_settings_descr">Visa och hantera OSM-POIs/-buggar noterade i lokal databas</string>
 
 
-<string name="live_monitoring_interval_descr">Ange intervall för Live tracking</string>
-<string name="live_monitoring_interval">Intervall för Live tracking</string>
+<string name="live_monitoring_interval_descr">Ange intervall för direktspårning</string>
+<string name="live_monitoring_interval">Intervall för direktspårning</string>
 <string name="live_monitoring_url_descr">Ange webbadressen med parametersyntax: lat={0}, lon={1}, tidsstämpel={2}, hdop={3}, höjd={4}, hastighet={5}, bearing={6}</string>
-<string name="live_monitoring_url">Webbadress för Live tracking</string>
+<string name="live_monitoring_url">Webbadress för direktspårning</string>
 <string name="gpx_monitoring_disabled_warn">Aktivera \'Logga spår till GPX-fil\'-inställningar.</string>
 <string name="show_current_gpx_title">Visa aktuellt spår</string>
 <string name="tip_recent_changes_0_7_0_t">"Förändringar i 0.7.0:
@@ -1451,7 +1450,7 @@
     <string name="osmo_settings_descr">Konfigurera inställningar för övervakning och ställ in personlig övervakningskanal</string>
     <string name="osmo_plugin_name">OSMo (Avancerad live-spårning)</string>
     <string name="osmo_settings">OSMo OpenStreetMap-övervakning (beta)</string>
-   	<string name="osmo_plugin_description">"OpenStreetMap- avancerad live-spårning, se http://osmo.mobi. Spåra andra enheter och bli spårad själv. Skapa anonyma grupper, dela ut varandras platser och kommunicera. Det finns olika inställningar för sessionsspårning eller permanent spårning. Anonyma grupper är begränsade till ett antal dagar och för vissa funktioner finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
+   	<string name="osmo_plugin_description">"OpenStreetMap- avancerad direktspårning, se http://osmo.mobi. Spåra andra enheter och bli spårad själv. Skapa anonyma grupper, dela ut varandras platser och kommunicera. Det finns olika inställningar för sessionsspårning eller permanent spårning. Anonyma grupper är begränsade till ett antal dagar och för vissa funktioner finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
     <string name="interrupt_music_descr">Avbryt musik vid meddelanden</string>
 	<string name="interrupt_music">Avbryt musik</string>
 	<string name="share_route_as_gpx">Dela rutt som GPX-fil</string>
@@ -1658,7 +1657,7 @@
     <string name="osmo_specify_tracker_id">Ange id</string>
     <string name="rendering_attr_coloredBuildings_name">Färgade byggnader</string>
     <string name="arrival_distance_factor_early">Tidigt</string>
-    <string name="arrival_distance_factor_normally">Normalt</string>
+    <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Sent</string>
     <string name="arrival_distance_factor_at_last">De sista metrarna</string>
     <string name="hide_all_waypoints">Ta bort alla</string>
