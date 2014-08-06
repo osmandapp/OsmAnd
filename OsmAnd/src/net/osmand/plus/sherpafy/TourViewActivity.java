@@ -3,6 +3,8 @@ package net.osmand.plus.sherpafy;
 import java.util.List;
 import java.util.WeakHashMap;
 
+import android.view.KeyEvent;
+import android.widget.*;
 import net.osmand.IProgress;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -30,12 +32,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -50,6 +47,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private static final int STATE_SELECT_TOUR = 1;
 	private static final int STATE_TOUR_VIEW = 2;
 	private static final int STATE_STAGE_OVERVIEW = 3;
+	private static final int STATE_DETAILED_OVERVIEW = 4;
 	private static int state = STATE_LOADING;
 	
 	public static final int APP_EXIT_CODE = 4;
@@ -121,12 +119,20 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	@Override
 	public void onBackPressed() {
-		if (state == STATE_SELECT_TOUR){
+		if (state == STATE_SELECT_TOUR) {
 			super.onBackPressed();
-		} else if (state == STATE_TOUR_VIEW){
-			selectMenu(R.string.sherpafy_tours);
-		} else if (state == STATE_STAGE_OVERVIEW){
-			selectMenu(customization.getSelectedTour());
+		} else if (state == STATE_TOUR_VIEW) {
+			SherpafyHtmlFragment fragment = (SherpafyHtmlFragment) getSupportFragmentManager().findFragmentByTag(String.valueOf(STATE_DETAILED_OVERVIEW));
+			if (fragment != null && fragment.isVisible()) {
+				showSelectedItem();
+			} else {
+				selectMenu(R.string.sherpafy_tours);
+			}
+		} else if (state == STATE_STAGE_OVERVIEW) {
+			SherpafyStageFragment fragment = (SherpafyStageFragment) getSupportFragmentManager().findFragmentByTag(String.valueOf(state));
+			if (fragment != null) {
+				fragment.onBackPressed();
+			}
 		}
 	}
 
@@ -271,7 +277,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			setDrawerIndicatorVisible(false);
 		}
 		if(fragment != null) {
-			fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+			fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, String.valueOf(state)).commit();
 		}
 		selectedItem = item;
 		if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
@@ -343,7 +349,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		bl.putString(SherpafyHtmlFragment.HTML, cont);
 		bl.putString(SherpafyHtmlFragment.TITLE, title);
 		fragment.setArguments(bl);
-		fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+		fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, String.valueOf(STATE_DETAILED_OVERVIEW)).commit();
 	}
 
 
