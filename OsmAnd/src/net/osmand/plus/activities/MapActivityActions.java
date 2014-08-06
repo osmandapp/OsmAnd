@@ -725,8 +725,8 @@ public class MapActivityActions implements DialogProvider {
 	
 	public void openOptionsMenuAsDrawer(){
 		final ContextMenuAdapter cm = createOptionsMenu();
-		DrawerLayout mDrawerLayout = (DrawerLayout) mapActivity.findViewById(R.id.drawer_layout);
-		ListView mDrawerList = (ListView) mapActivity.findViewById(R.id.left_drawer);
+		final DrawerLayout mDrawerLayout = (DrawerLayout) mapActivity.findViewById(R.id.drawer_layout);
+		final ListView mDrawerList = (ListView) mapActivity.findViewById(R.id.left_drawer);
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 		ListAdapter listAdapter ;
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
@@ -751,6 +751,7 @@ public class MapActivityActions implements DialogProvider {
 				if (click != null) {
 					click.onContextMenuClick(cm.getItemId(which), which, false, null);
 				}
+				mDrawerLayout.closeDrawer(mDrawerList);
 			}
 		});
 

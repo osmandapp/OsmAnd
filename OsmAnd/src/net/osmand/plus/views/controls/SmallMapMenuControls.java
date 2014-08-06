@@ -26,7 +26,8 @@ public class SmallMapMenuControls extends MapControls {
 			@Override
 			public void onClick(View v) {
 				notifyClicked();
-				mapActivity.getMapActions().openOptionsMenuAsList();
+				mapActivity.getMapActions().openOptionsMenuAsDrawer();
+				//mapActivity.getMapActions().openOptionsMenuAsList();
 			}
 		});
 	}
