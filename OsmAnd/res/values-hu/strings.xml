@@ -1510,8 +1510,8 @@
     <string name="calculate_osmand_route_without_internet">OsmAnd útvonalszakasz számítása internet nélkül</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal számítása az első és utolsó útszakaszra</string>
     <string name="osmo_settings_uuid">Egyedi eszközazonosító</string>
-    <string name="osmo_settings_descr">Egyedi eszközregisztrációs kulcs megtekintése és egyéb monitoring beállítások </string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring – Fejlett Live Monitoring sok funkcióval http://osmo.mobi távirányításhoz</string>
+    <string name="osmo_settings_descr">Monitorozási beállítások és személyes monitorozási csatorna</string>
+    <string name="osmo_plugin_description">"OpenStreetMap – fejlett live monitoring sok funkcióval (lásd: http://osmo.mobi). Kövess más eszközöket, vagy követtesd magad. Készíts névtelen csoportokat, osszátok meg egymás helyzetét és kommunikáljatok. Különféle beállítások munkamenet és állandó követéshez. A névtelen csoportokba csak taglétszámban és időben korlátozottak. Teljes funkcionalitású csoportokat a weboldalon lehet létrehozni, regisztráció után. "</string>
     <string name="osmo_plugin_name">OsMo (Fejlett Live Monitoring)</string>
     <string name="osmo_settings">OsMo OpenStreetMap Megfigyelés (béta)</string>
    	<string name="always_center_position_on_map">Pozíció megjelenítése mindig középen</string>
@@ -1712,4 +1712,29 @@
 	<string name="av_camera_pic_size_descr">A beépített kamera képmérete</string>
     <string name="hide_all_waypoints">Összes eltávolítása</string>
     <string name="announce_nearby_favorites">Közeli kedvencek bemondása</string>
-</resources>
+<string name="osmo_leave_confirmation_msg">Szeretnéd elhagyni a(z) %1$s csoportot?</string>
+    <string name="osmo_specify_tracker_id">Kérlek adj meg azonosítót</string>
+    <string name="osmo_auth_error">Az OsMo engedélyezési hiba történt: %1$s.\n Ez lehet egy átmeneti szolgáltatás kimaradás, vagy a regisztrációd járt le.\n Szeretnéd új regisztrációval folytatni?</string>
+    <string name="osmo_group_by_invite">Belépés meghívásra</string>
+    <string name="osmo_group_information_desc">" - Az összes létrehozott csoport publikus! Ha névtelen szeretnél lenni, kapcsold össze az eszközöket Tracker id-vel.\n- A csoportba legfeljebb 16 tag regisztrálhat.\n- Inaktivitás esetén, vagy ha 2 héten keresztül csak 1 tag aktív, a csoport törlődik.\n- Korlátozhatod a csoportba belépést meghívásosra, de a csoport kezeléséhez az admin konzolt kell használnod.\n- Ha más feltételekkel kéne csoportot létrehoznod, lépj kapcsolatba velünk: http://osmo.mobi"</string>
+    <string name="osmo_group_information">Csoport létrehozása előtt kérlek olvasd el!</string>
+    <string name="osmo_not_signed_in">OsMo bejelentkezés sikertelen</string>
+    <string name="osmo_gpx_points_downloaded">OsMo pont %1$s letöltve.</string>
+    <string name="osmo_auto_connect_descr">Automatikus csatlakozás az alkalmazás elindításakor</string>
+    <string name="osmo_auto_connect">Auto-connect</string>
+    <string name="osmo_start_service">OsMo szolgáltatás</string>
+    <string name="osmo_gpx_track_downloaded">OsMo nyomvonal %1$s letöltve.</string>
+    <string name="osmo_tracker_id_share">A(z) %2$s cél eszközhöz csatlakozáshoz kattints a %3$s linkre vagy add meg a tracker id-t (%1$s)</string>
+    <string name="osmo_tracker_id_descr">Kattints a tracker id megtekintéséhez vagy megosztásához. A tracker id-vel összekapcsolt eszközök minden mozgása követhető! A leválasztáshoz válaszd az Újragenerálás opciót.</string>
+    <string name="osmo_session_token">Munkamenet token: %1$s</string>
+    <string name="osmo_auth_pending">Várakozás engedélyeztetésre…</string>
+    <string name="osmo_locations_sent">"Pozíció elküldve %1$s (pufferben %2$s) "</string>
+    <string name="osmo_conn_successfull">"Kapcsolat létrejött: %1$s "</string>
+    <string name="osmo_io_error">"OsMo kapcsolódási probléma: "</string>
+    <string name="osmo_mode_restart">OsMo munkamenet újraindítása</string>
+    <string name="osmo_mode_on">OsMo munkamenet leállítása</string>    
+    <string name="osmo_mode_off">OsMo munkamenet elindítása</string>
+    <string name="osmo_settings_debug">Hibakeresési információk</string>
+    <string name="rendering_attr_osmcTraces_description">OSMC stílusú túrajelzések megjelenítése</string>
+    
+	</resources>
