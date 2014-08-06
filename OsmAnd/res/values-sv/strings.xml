@@ -112,7 +112,7 @@
 <string name="select_animate_speedup">Välj animerad ruttacceleration</string>
 <string name="global_app_allocated_memory_descr">Allokerat minne %1$s MB (Android-gräns %2$s MB, Dalvik %3$s MB).</string>
 <string name="global_app_allocated_memory">Allokerat minne</string>
-<string name="native_app_allocated_memory_descr">Totalt inbyggt minne tilldelas av app %1$s MB (Dalvik %2$s MB, annat %3$s MB).↵ Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
+<string name="native_app_allocated_memory_descr">Totalt inbyggt minne tilldelat av appen %1$s MB (Dalvik %2$s MB, annat %3$s MB). Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="native_app_allocated_memory">Totalt inbyggt minne</string>
 <string name="update_downlod_list">Ladda om listan</string>
 <string name="starting_point_too_far">Startpunkten ligger för långt från närmaste väg.</string>
@@ -1433,7 +1433,7 @@
     <string name="lang_zh">Kinesiska</string>
     <string name="lang_pt_br">Portugisiska (Brasilien)</string>
     <string name="index_name_canada">Nordamerika - Kanada</string>
-    <string name="app_modes_choose_descr">Välj tillgängliga användarprofilerna</string>
+    <string name="app_modes_choose_descr">Välj vilka användarprofiler som ska visas i appen</string>
     <string name="index_item_nation_addresses">adresser (hela landet)</string>
 	<string name="index_item_world_altitude_correction">Rättning av höjd (världen)</string>
 	<string name="index_item_world_seamarks">Sjömärken (världen)</string>
