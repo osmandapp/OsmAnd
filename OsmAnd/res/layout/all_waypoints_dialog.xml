@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent">
+	<!-- Favorites-->
+	<LinearLayout android:visibility="gone"
+				  android:id="@+id/favorites_layout"
+				  android:orientation="vertical"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content">
+		<LinearLayout android:orientation="horizontal"
+					  android:layout_width="fill_parent"
+					  android:layout_height="wrap_content">
+			<TextView android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:text="Favorites"/>
+			<ImageButton android:id="@+id/all_favorites"
+						 android:layout_width="wrap_content"
+						 android:layout_height="wrap_content"
+						 android:layout_gravity="right"
+						 style="@style/Widget.Sherlock.ActionButton"
+						 android:src="@drawable/ic_action_core_overflow_dark"/>
+		</LinearLayout>
+		<ListView android:id="@+id/favorites_list"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"/>
+	</LinearLayout>
+
+	<LinearLayout android:visibility="gone"
+				  android:id="@+id/gpx_layout"
+				  android:orientation="vertical"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content">
+		<LinearLayout android:orientation="horizontal"
+					  android:layout_width="fill_parent"
+					  android:layout_height="wrap_content">
+			<TextView android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:text="Favorites"/>
+			<ImageButton android:id="@+id/all_gpx"
+						 android:layout_width="wrap_content"
+						 android:layout_height="wrap_content"
+						 android:layout_gravity="right"
+						 style="@style/Widget.Sherlock.ActionButton"
+						 android:src="@drawable/ic_action_core_overflow_dark"/>
+		</LinearLayout>
+		<ListView android:id="@+id/gpx_list"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"/>
+	</LinearLayout>
+
+	<LinearLayout android:visibility="gone"
+				  android:id="@+id/poi_layout"
+				  android:orientation="vertical"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content">
+		<LinearLayout android:orientation="horizontal"
+					  android:layout_width="fill_parent"
+					  android:layout_height="wrap_content">
+			<TextView android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:text="Favorites"/>
+			<ImageButton android:id="@+id/all_poi"
+						 android:layout_width="wrap_content"
+						 android:layout_height="wrap_content"
+						 android:layout_gravity="right"
+						 style="@style/Widget.Sherlock.ActionButton"
+						 android:src="@drawable/ic_action_core_overflow_dark"/>
+		</LinearLayout>
+		<ListView android:id="@+id/poi_list"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"/>
+	</LinearLayout>
+
+	<LinearLayout android:visibility="gone"
+				  android:id="@+id/poi_target"
+				  android:orientation="vertical"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content">
+		<LinearLayout android:orientation="horizontal"
+					  android:layout_width="fill_parent"
+					  android:layout_height="wrap_content">
+			<TextView android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:text="Favorites"/>
+			<ImageButton android:id="@+id/all_targets"
+						 android:layout_width="wrap_content"
+						 android:layout_height="wrap_content"
+						 android:layout_gravity="right"
+						 style="@style/Widget.Sherlock.ActionButton"
+						 android:src="@drawable/ic_action_core_overflow_dark"/>
+		</LinearLayout>
+		<ListView android:id="@+id/targets_list"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"/>
+	</LinearLayout>
+</LinearLayout>

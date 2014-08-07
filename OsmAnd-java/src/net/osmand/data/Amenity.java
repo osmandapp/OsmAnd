@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 
-public class Amenity extends MapObject {
+public class Amenity extends MapObject implements LocationPoint {
 
 	public static final String WEBSITE = "website";
 	public static final String PHONE = "phone";
@@ -120,6 +120,25 @@ public class Amenity extends MapObject {
 	public void setOpeningHours(String openingHours) {
 		setAdditionalInfo(OPENING_HOURS, openingHours);
 	}
-	
-	
+
+
+	@Override
+	public double getLatitude() {
+		return getLocation().getLatitude();
+	}
+
+	@Override
+	public double getLongitude() {
+		return getLocation().getLongitude();
+	}
+
+	@Override
+	public int getColor() {
+		return 0;
+	}
+
+	@Override
+	public String getName() {
+		return super.getName();
+	}
 }
