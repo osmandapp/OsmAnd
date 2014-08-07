@@ -16,14 +16,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import net.osmand.Location;
+import net.osmand.data.Amenity;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.views.MapControlsLayer;
+import net.osmand.plus.views.PointNavigationLayer;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,9 +39,24 @@ public class WaypointDialogHelper {
 	private FrameLayout mainLayout;
 	private OsmAndLocationProvider locationProvider;
 
+	private final static int CONTENT_TYPE_FAVORITES = 0;
+	private final static int CONTENT_TYPE_GPX = 1;
+	private final static int CONTENT_TYPE_POI = 2;
+	private final static int CONTENT_TYPE_TARGETS = 3;
+
 	public static boolean OVERLAP_LAYOUT = true;
 	private long uiModified;
 	private View closePointDialog;
+
+	List<LocationPoint> favoritesList = new ArrayList<LocationPoint>();
+	List<LocationPoint> gpxWaypointList = new ArrayList<LocationPoint>();
+	List<LocationPoint> poiList = new ArrayList<LocationPoint>();
+	List<LocationPoint> targetList = new ArrayList<LocationPoint>();
+
+	ArrayAdapter<LocationPoint> favoritesAdapter;
+	ArrayAdapter<LocationPoint> gpxAdapter;
+	ArrayAdapter<LocationPoint> poiAdapter;
+	ArrayAdapter<LocationPoint> targetsAdapter;
 
 	public WaypointDialogHelper(MapActivity mapActivity) {
 		this.app = mapActivity.getMyApplication();
@@ -64,7 +83,7 @@ public class WaypointDialogHelper {
 
 				updatePointInfoView(closePointDialog, point);
 				closePointDialog.setBackgroundColor(mapActivity.getResources().getColor(R.color.color_black));
-				((TextView)closePointDialog.findViewById(R.id.waypoint_text)).setTextColor(Color.WHITE);
+				((TextView) closePointDialog.findViewById(R.id.waypoint_text)).setTextColor(Color.WHITE);
 				View all = closePointDialog.findViewById(R.id.all_points);
 				all.setVisibility(vlp.size() <= 1 ? View.GONE : View.VISIBLE);
 				all.setOnClickListener(new View.OnClickListener() {
@@ -185,7 +204,7 @@ public class WaypointDialogHelper {
 		}.execute(reachedView);
 	}
 
-	public void showAllDialog(){
+	public void showAllDialog() {
 		final List<LocationPoint> visibleLocationPoints = locationProvider.getVisibleLocationPoints();
 		final ArrayAdapter<LocationPoint> listAdapter = new ArrayAdapter<LocationPoint>(mapActivity, R.layout.waypoint_reached, R.id.title,
 				visibleLocationPoints) {
@@ -212,7 +231,7 @@ public class WaypointDialogHelper {
 
 				View remove = v.findViewById(R.id.info_close);
 				((ImageButton) remove).setImageDrawable(mapActivity.getResources().getDrawable(
-						app.getSettings().isLightContent()? R.drawable.ic_action_gremove_light:
+						app.getSettings().isLightContent() ? R.drawable.ic_action_gremove_light :
 								R.drawable.ic_action_gremove_dark));
 				remove.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -259,5 +278,136 @@ public class WaypointDialogHelper {
 		// thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
 		mapActivity.getMapView().setIntZoom(fZoom);
 		mapActivity.getMapView().setLatLon(locationPoint.getLatitude(), locationPoint.getLongitude());
+	}
+
+	public void showWaypointSettingsDialog() {
+		final List<LocationPoint> allPoints = locationProvider.getVisibleLocationPoints();
+		if (Version.isSherpafy(mapActivity.getMyApplication())) {
+
+		} else {
+
+			for (LocationPoint point : allPoints) {
+				if (point instanceof FavouritePoint) {
+					favoritesList.add(point);
+				} else if (point instanceof GPXUtilities.WptPt) {
+					gpxWaypointList.add(point);
+				} else if (point instanceof Amenity) {
+					poiList.add(point);
+				} else if (point instanceof PointNavigationLayer.TargetPoint) {
+					targetList.add(point);
+				}
+			}
+
+			View layout = mapActivity.getLayoutInflater().inflate(R.layout.all_waypoints_dialog, null);
+			if (favoritesList.size() > 0) {
+				layout.findViewById(R.id.favorites_layout).setVisibility(View.VISIBLE);
+				setShowAllButton(layout, (ListView) layout.findViewById(R.id.favorites_list), CONTENT_TYPE_FAVORITES);
+			}
+		}
+	}
+
+	private void setShowAllButton(View layout, final ListView listView, final int contentType) {
+
+		ImageButton allBtn = null;
+		switch (contentType) {
+			case CONTENT_TYPE_FAVORITES:
+				allBtn = (ImageButton) layout.findViewById(R.id.all_favorites);
+				if (favoritesList.size() < 5) {
+					allBtn.setVisibility(View.GONE);
+				}
+				break;
+			case CONTENT_TYPE_POI:
+				allBtn = (ImageButton) layout.findViewById(R.id.all_poi);
+				if (poiList.size() < 5) {
+					allBtn.setVisibility(View.GONE);
+				}
+				break;
+			case CONTENT_TYPE_GPX:
+				allBtn = (ImageButton) layout.findViewById(R.id.all_gpx);
+				if (gpxWaypointList.size() < 5) {
+					allBtn.setVisibility(View.GONE);
+				}
+				break;
+			case CONTENT_TYPE_TARGETS:
+				allBtn = (ImageButton) layout.findViewById(R.id.all_targets);
+				if (targetList.size() < 5) {
+					allBtn.setVisibility(View.GONE);
+				}
+				break;
+		}
+
+		if (allBtn != null){
+			allBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					showAllItems(listView, favoritesAdapter, favoritesList, contentType);
+				}
+			});
+		}
+	}
+
+	private void showAllItems(ListView listView, ArrayAdapter<LocationPoint> adapter, List<LocationPoint> points, int contentType) {
+		createAdapter(adapter, points, contentType);
+		listView.setAdapter(favoritesAdapter);
+	}
+
+	private void createAdapter(ArrayAdapter<LocationPoint> adapter, final List<LocationPoint> points, final int contentType) {
+		adapter = new ArrayAdapter<LocationPoint>(mapActivity, R.layout.waypoint_reached, points) {
+			@Override
+			public View getView(final int position, View convertView, ViewGroup parent) {
+				// User super class to create the View
+				View v = convertView;
+				if (v == null) {
+					v = mapActivity.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
+					int vl = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, mapActivity.getResources()
+							.getDisplayMetrics());
+					final LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(vl, vl);
+					ll.setMargins(vl / 4, vl / 4, vl / 4, vl / 4);
+					v.findViewById(R.id.waypoint_icon).setLayoutParams(ll);
+				}
+				updatePointInfoView(v, getItem(position));
+				TextView text = (TextView) v.findViewById(R.id.waypoint_text);
+				text.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						showOnMap(points.get(position));
+					}
+				});
+
+				View remove = v.findViewById(R.id.info_close);
+				((ImageButton) remove).setImageDrawable(mapActivity.getResources().getDrawable(
+						app.getSettings().isLightContent() ? R.drawable.ic_action_gremove_light :
+								R.drawable.ic_action_gremove_dark));
+				remove.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						LocationPoint point = favoritesList.get(position);
+						removePointFromList(point, contentType);
+						remove(point);
+						locationProvider.removeVisibleLocationPoint(point);
+						notifyDataSetChanged();
+					}
+				});
+
+				return v;
+			}
+		};
+	}
+
+	private void removePointFromList(LocationPoint point, int contentType) {
+		switch (contentType) {
+			case CONTENT_TYPE_FAVORITES:
+				favoritesList.remove(point);
+				break;
+			case CONTENT_TYPE_GPX:
+				gpxWaypointList.remove(point);
+				break;
+			case CONTENT_TYPE_POI:
+				poiList.remove(point);
+				break;
+			case CONTENT_TYPE_TARGETS:
+				targetList.remove(point);
+				break;
+		}
 	}
 }

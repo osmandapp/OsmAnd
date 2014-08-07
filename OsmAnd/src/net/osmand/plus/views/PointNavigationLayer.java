@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import java.util.List;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
@@ -42,11 +43,31 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		this.map = map;
 	}
 	
-	public static class TargetPoint {
+	public static class TargetPoint implements LocationPoint {
 		public LatLon location;
 		public String name;
 		public boolean intermediate;
 		public int index;
+
+		@Override
+		public double getLatitude() {
+			return location.getLatitude();
+		}
+
+		@Override
+		public double getLongitude() {
+			return location.getLongitude();
+		}
+
+		@Override
+		public String getName() {
+			return name;
+		}
+
+		@Override
+		public int getColor() {
+			return -1;
+		}
 	}
 	
 
