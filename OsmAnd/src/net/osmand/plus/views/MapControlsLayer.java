@@ -3,14 +3,13 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.view.ViewParent;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.sherpafy.WaypointDialogHelper;
+import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.views.controls.MapRoutePlanControl;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl;
 import net.osmand.plus.views.controls.MapCancelControl;

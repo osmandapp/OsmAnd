@@ -1,9 +1,7 @@
 package net.osmand.plus.views.controls;
 
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.sherpafy.WaypointDialogHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.content.Context;
 import android.graphics.Canvas;

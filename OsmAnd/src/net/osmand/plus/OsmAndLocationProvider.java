@@ -103,124 +103,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS;
 	private OsmandPreference<Boolean> USE_FILTER_FOR_COMPASS;
 
-	private static final int NOT_ANNOUNCED = 0;
-	private static final int ANNOUNCED_ONCE = 1;
 
-	private ConcurrentHashMap<LocationPoint , Integer> locationPointsStates = new ConcurrentHashMap<LocationPoint, Integer>();
-	private List<LocationPoint> visibleLocationPoints = new CopyOnWriteArrayList<LocationPoint>();
-	private long locationPointsModified;
 
-	public List<LocationPoint> getVisibleLocationPoints() {
-		return visibleLocationPoints;
-	}
-
-	public void setVisibleLocationPoints(List<LocationPoint> points) {
-		locationPointsStates.clear();
-		visibleLocationPoints.clear();
-		if (points == null) {
-			return;
-		}
-		for (LocationPoint p : points) {
-			locationPointsStates.put(p, NOT_ANNOUNCED);
-			visibleLocationPoints.add(p);
-		}
-		sortVisibleLocationPoints();
-
-	}
-
-	public void addVisibleLocationPoint(LocationPoint lp) {
-		this.locationPointsStates.put(lp, NOT_ANNOUNCED);
-		this.locationPointsModified = System.currentTimeMillis();
-		sortVisibleLocationPoints();
-	}
-
-	public void clearAllVisiblePoints() {
-		this.locationPointsStates.clear();
-		this.visibleLocationPoints.clear();
-		this.locationPointsModified = System.currentTimeMillis();
-	}
-
-	public void sortVisibleLocationPoints() {
-		net.osmand.Location lastLocation = getLastKnownLocation();
-		if (lastLocation != null) {
-			Object[] loc = visibleLocationPoints.toArray();
-			Arrays.sort(loc, getComparator(lastLocation));
-			visibleLocationPoints.clear();
-			for (Object aLoc : loc) {
-				visibleLocationPoints.add((LocationPoint) aLoc);
-			}
-			locationPointsModified = System.currentTimeMillis();
-		}
-	}
-
-	private Comparator<Object> getComparator(final net.osmand.Location lastLocation){
-		return new Comparator<Object>() {
-			@Override
-			public int compare(Object locationPoint, Object locationPoint2) {
-				double d1 = MapUtils.getDistance(lastLocation.getLatitude(), lastLocation.getLongitude(),
-						((LocationPoint)locationPoint).getLatitude(), ((LocationPoint)locationPoint).getLongitude());
-				double d2 = MapUtils.getDistance(lastLocation.getLatitude(), lastLocation.getLongitude(),
-						((LocationPoint)locationPoint2).getLatitude(), ((LocationPoint)locationPoint2).getLongitude());
-				return Double.compare(d1, d2);
-			}
-
-		};
-	}
-
-	public long getLocationPointsModified() {
-		return locationPointsModified;
-	}
-
-	public void removeVisibleLocationPoint(LocationPoint lp) {
-		this.visibleLocationPoints = removeFromList(visibleLocationPoints, lp);
-		this.locationPointsStates.remove(lp);
-		this.locationPointsModified = System.currentTimeMillis();
-	}
-
-	private void announceVisibleLocations() {
-		final net.osmand.Location lastLocation = getLastKnownLocation();
-		if (lastLocation != null && app.getRoutingHelper().isFollowingMode()) {
-			String nameToAnnounce = null;
-			List<LocationPoint> approachPoints = new ArrayList<LocationPoint>();
-			List<LocationPoint> announcePoints = new ArrayList<LocationPoint>();
-			for (LocationPoint point : locationPointsStates.keySet()) {
-				double d1 = MapUtils.getDistance(lastLocation.getLatitude(), lastLocation.getLongitude(),
-						point.getLatitude(), point.getLongitude());
-				int state = locationPointsStates.get(point);
-				if (state <= ANNOUNCED_ONCE && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastLocation.getSpeed(), d1, 150)) {
-					nameToAnnounce = (nameToAnnounce == null ? "" : ", ") + point.getName();
-					locationPointsStates.remove(point);
-					this.locationPointsModified = System.currentTimeMillis();
-					app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper().updateDialog();
-					announcePoints.add(point);
-				} else if (state == NOT_ANNOUNCED && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastLocation.getSpeed(), d1, 500)) {
-					locationPointsStates.put(point, state + 1);
-					this.locationPointsModified = System.currentTimeMillis();
-					app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper().updateDialog();
-					approachPoints.add(point);
-				}
-			}
-			if (!announcePoints.isEmpty()) {
-				app.getRoutingHelper().getVoiceRouter().announceWaypoint(announcePoints);
-			}
-			if (!approachPoints.isEmpty()) {
-				app.getRoutingHelper().getVoiceRouter().approachWaypoint(lastLocation, approachPoints);
-			}
-
-		}
-	}
-
-	public List<LocationPoint> removeFromList(List<LocationPoint> items, Object item){
-		List<LocationPoint> newArray = new ArrayList<LocationPoint>();
-		Object[] oldArray = items.toArray();
-		for (int i=0; i<oldArray.length; i++){
-			if (!item.equals(oldArray[i])){
-				newArray.add((LocationPoint)oldArray[i]);
-			}
-		}
-		items.clear();
-		return new CopyOnWriteArrayList<LocationPoint>(newArray);
-	}
 
 	public class SimulationProvider {
 		private int currentRoad;
@@ -635,9 +519,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	private void updateLocation(net.osmand.Location loc ) {
 		if (app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get() && app.getRoutingHelper().isFollowingMode()){
-			sortVisibleLocationPoints();
 			app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper().updateDialog();
-			announceVisibleLocations();
+			app.getWaypointHelper().locationChanged(getLastKnownLocation());
 		}
 		for(OsmAndLocationListener l : locationListeners){
 			l.updateLocation(loc);

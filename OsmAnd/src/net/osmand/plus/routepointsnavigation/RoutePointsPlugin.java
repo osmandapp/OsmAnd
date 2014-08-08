@@ -16,7 +16,6 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.sherpafy.WaypointDialogHelper;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
