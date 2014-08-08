@@ -92,9 +92,9 @@ public class SherpafyTourFragment extends SherlockListFragment {
 				if (si.type == StageItemType.GALLERY) {
 					// ((TourViewActivity) getSherlockActivity()).showGallery(tour);
 				} else if (si.type == StageItemType.OVERVIEW) {
-					((TourViewActivity) getSherlockActivity()).showHtmlFragment(si.header, tour.getFulldescription());
+					((TourViewActivity) getSherlockActivity()).showDetailedOverview(si.header, tour.getFulldescription());
 				} else if (si.type == StageItemType.INSTRUCTIONS) {
-					((TourViewActivity) getSherlockActivity()).showHtmlFragment(si.header, tour.getInstructions());
+					((TourViewActivity) getSherlockActivity()).showDetailedInstructions(si.header, tour.getInstructions());
 				}
 			}
 		}
