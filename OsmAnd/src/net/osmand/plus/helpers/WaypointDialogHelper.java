@@ -33,7 +33,7 @@ public class WaypointDialogHelper {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
 	private FrameLayout mainLayout;
-	private OsmAndLocationProvider locationProvider;
+	private WaypointHelper waypointHelper;
 
 	public static boolean OVERLAP_LAYOUT = true;
 	private long uiModified;
@@ -41,14 +41,14 @@ public class WaypointDialogHelper {
 
 	public WaypointDialogHelper(MapActivity mapActivity) {
 		this.app = mapActivity.getMyApplication();
-		locationProvider = this.app.getLocationProvider();
+		waypointHelper = this.app.getWaypointHelper();
 		this.mapActivity = mapActivity;
 		this.mainLayout = (FrameLayout) ((FrameLayout) mapActivity.getLayout()).getChildAt(0);
 	}
 
 	public void updateDialog() {
-		List<LocationPoint> vlp = locationProvider.getVisibleLocationPoints();
-		long locationPointsModified = locationProvider.getLocationPointsModified();
+		List<LocationPoint> vlp = waypointHelper.getVisibleLocationPoints();
+		long locationPointsModified = waypointHelper.getLocationPointsModified();
 		if (locationPointsModified != uiModified) {
 			uiModified = locationPointsModified;
 			if (vlp.isEmpty()) {
@@ -78,7 +78,7 @@ public class WaypointDialogHelper {
 				btnN.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						locationProvider.removeVisibleLocationPoint(point);
+						waypointHelper.removeVisibleLocationPoint(point);
 						updateDialog();
 					}
 				});
@@ -186,7 +186,7 @@ public class WaypointDialogHelper {
 	}
 
 	public void showAllDialog(){
-		final List<LocationPoint> visibleLocationPoints = locationProvider.getVisibleLocationPoints();
+		final List<LocationPoint> visibleLocationPoints = waypointHelper.getVisibleLocationPoints();
 		final ArrayAdapter<LocationPoint> listAdapter = new ArrayAdapter<LocationPoint>(mapActivity, R.layout.waypoint_reached, R.id.title,
 				visibleLocationPoints) {
 			@Override
@@ -217,9 +217,9 @@ public class WaypointDialogHelper {
 				remove.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						LocationPoint point = locationProvider.getVisibleLocationPoints().get(position);
+						LocationPoint point = waypointHelper.getVisibleLocationPoints().get(position);
 						remove(point);
-						locationProvider.removeVisibleLocationPoint(point);
+						waypointHelper.removeVisibleLocationPoint(point);
 						notifyDataSetChanged();
 					}
 				});
@@ -246,7 +246,7 @@ public class WaypointDialogHelper {
 		builder.setNegativeButton(mapActivity.getString(R.string.hide_all_waypoints), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialogInterface, int i) {
-				locationProvider.clearAllVisiblePoints();
+				waypointHelper.clearAllVisiblePoints();
 				updateDialog();
 			}
 		});
