@@ -420,7 +420,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	private void startTourImpl(TourInformation tour) {
 		StageInformation stage;
-		if (tour.getStageInformation().isEmpty()) {
+		if (!tour.getStageInformation().isEmpty()) {
 			if (tour != customization.getSelectedTour() || customization.getSelectedStage() == null) {
 				stage = tour.getStageInformation().get(0);
 			} else {
