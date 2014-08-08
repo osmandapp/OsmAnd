@@ -27,6 +27,11 @@ public class WaypointHelper {
 	private static final int NOT_ANNOUNCED = 0;
 	private static final int ANNOUNCED_ONCE = 1;
 
+	private static final int LONG_ANNOUNCE_RADIUS = 500;
+	private static final int SHORT_ANNOUNCE_RADIUS = 150;
+
+	public static final int SEARCH_WAYPOINTS_RADIUS = 400;
+
 	public WaypointHelper(OsmandApplication application) {
 		app = application;
 	}
@@ -41,6 +46,7 @@ public class WaypointHelper {
 	}
 
 	public void locationChanged(Location location) {
+		app.getAppCustomization();
 		lastKnownLocation = location;
 		sortVisibleWaypoints();
 		announceVisibleLocations();
@@ -77,13 +83,13 @@ public class WaypointHelper {
 				double d1 = MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
 						point.getLatitude(), point.getLongitude());
 				int state = locationPointsStates.get(point);
-				if (state <= ANNOUNCED_ONCE && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, 150)) {
+				if (state <= ANNOUNCED_ONCE && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS)) {
 					nameToAnnounce = (nameToAnnounce == null ? "" : ", ") + point.getName();
 					locationPointsStates.remove(point);
 					this.locationPointsModified = System.currentTimeMillis();
 					app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper().updateDialog();
 					announcePoints.add(point);
-				} else if (state == NOT_ANNOUNCED && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, 500)) {
+				} else if (state == NOT_ANNOUNCED && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS)) {
 					locationPointsStates.put(point, state + 1);
 					this.locationPointsModified = System.currentTimeMillis();
 					app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper().updateDialog();

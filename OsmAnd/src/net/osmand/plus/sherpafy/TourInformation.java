@@ -13,6 +13,7 @@ import java.util.WeakHashMap;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.data.LocationPoint;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.util.Algorithms;
 
@@ -256,7 +257,7 @@ public class TourInformation {
 		}
 	}
 	
-	public static class StageFavorite {
+	public static class StageFavorite implements LocationPoint {
 		int order;
 		LatLon location;
 		String name = "";
@@ -276,11 +277,26 @@ public class TourInformation {
 		public LatLon getLatLon() {
 			return location;
 		}
-		
+
+		@Override
+		public double getLatitude() {
+			return location.getLatitude();
+		}
+
+		@Override
+		public double getLongitude() {
+			return location.getLongitude();
+		}
+
 		public String getName() {
 			return name;
 		}
-		
+
+		@Override
+		public int getColor() {
+			return 0;
+		}
+
 		public String getShortDescription() {
 			return shortDescription;
 		}

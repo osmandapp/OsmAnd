@@ -11,6 +11,7 @@ import java.util.TreeSet;
 
 import net.osmand.IProgress;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LocationPoint;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -64,7 +65,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		}
 		return false;
 	}
-	
+
 	private boolean validate(String acCode) {
 		if (acCode.length() < 3) {
 			return false;
