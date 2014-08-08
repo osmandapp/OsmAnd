@@ -24,6 +24,7 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
@@ -102,6 +103,7 @@ public class OsmandApplication extends Application {
 	private LiveMonitoringHelper liveMonitoringHelper;
 	private TargetPointsHelper targetPointsHelper;
 	private RoutingConfiguration.Builder defaultRoutingConfig;
+	private WaypointHelper waypointHelper;
 
 	private boolean applicationInitializing = false;
 	private Locale preferredLocale = null;
@@ -152,6 +154,7 @@ public class OsmandApplication extends Application {
 		liveMonitoringHelper = new LiveMonitoringHelper(this);
 		selectedGpxHelper = new GpxSelectionHelper(this);
 		favorites = new FavouritesDbHelper(this);
+		waypointHelper = new WaypointHelper(this);
 		uiHandler = new Handler();
 		rendererRegistry = new RendererRegistry();
 		targetPointsHelper = new TargetPointsHelper(this);
@@ -222,6 +225,10 @@ public class OsmandApplication extends Application {
 
 	public LiveMonitoringHelper getLiveMonitoringHelper() {
 		return liveMonitoringHelper;
+	}
+
+	public WaypointHelper getWaypointHelper() {
+		return waypointHelper;
 	}
 
 	public PoiFiltersHelper getPoiFilters() {

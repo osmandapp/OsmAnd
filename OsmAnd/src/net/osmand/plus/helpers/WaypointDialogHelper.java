@@ -1,4 +1,4 @@
-package net.osmand.plus.sherpafy;
+package net.osmand.plus.helpers;
 
 import android.app.AlertDialog;
 import android.content.Context;
