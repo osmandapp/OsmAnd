@@ -528,6 +528,7 @@ public class RoutingHelper {
 		ArrayList<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
 		if (app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get()){
 			locationPoints.addAll(app.getFavorites().getFavouritePoints());
+			locationPoints.addAll(app.getAppCustomization().getFavorites());
 		}
 		locationPoints.addAll(res.getLocationPoints());
 		app.getWaypointHelper().setVisibleLocationPoints(locationPoints);

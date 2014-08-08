@@ -6,6 +6,7 @@ import java.util.Map;
 
 import net.osmand.IProgress;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.activities.LocalIndexesActivity;
@@ -106,5 +107,4 @@ public class OsmAndAppCustomization {
 	public List<FavouritePoint> getFavorites() {
 		return null;
 	}
-
 }
