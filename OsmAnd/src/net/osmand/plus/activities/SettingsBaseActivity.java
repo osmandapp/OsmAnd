@@ -152,6 +152,20 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		}
 		return defValue;
 	}
+	
+	public static String getStringPropertyValue(Context ctx, String propertyValue) {		
+		try {
+			propertyValue = propertyValue.replaceAll("\\s+","_");
+			Field f = R.string.class.getField("rendering_value_" + propertyValue + "_name");
+			if (f != null) {
+				Integer in = (Integer) f.get(null);
+				return ctx.getString(in);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return propertyValue;
+	}
 
 	public SeekBarPreference createSeekBarPreference(OsmandPreference<Integer> b, int title, int summary, int dialogTextId, int defValue,
 			int maxValue) {

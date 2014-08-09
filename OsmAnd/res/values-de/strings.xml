@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="rendering_value_browse_map_name">Karte ansehen</string>  
+	<string name="rendering_value_car_name">Auto</string>
+	<string name="rendering_value_bicycle_name">Fahrrad</string>
+	<string name="rendering_value_pedestrian_name">Fußgänger</string>
 	<string name="announce_nearby_favorites">Ansage von Favoriten in den Nähe</string>
 	<string name="rendering_attr_coloredBuildings_name">Gefärbte Gebäude</string>
 	<string name="continue_navigation">Navigation fortsetzen</string>
