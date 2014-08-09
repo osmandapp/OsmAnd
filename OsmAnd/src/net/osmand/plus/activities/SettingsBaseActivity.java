@@ -155,8 +155,8 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 	
 	public static String getStringPropertyValue(Context ctx, String propertyValue) {		
 		try {
-			propertyValue = propertyValue.replaceAll("\\s+","_");
-			Field f = R.string.class.getField("rendering_value_" + propertyValue + "_name");
+			final String propertyValueReplaced = propertyValue.replaceAll("\\s+","_");
+			Field f = R.string.class.getField("rendering_value_" + propertyValueReplaced + "_name");
 			if (f != null) {
 				Integer in = (Integer) f.get(null);
 				return ctx.getString(in);

@@ -207,15 +207,15 @@ public class AppearanceWidgetsFactory {
                     public void run() {
                         AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
                         //test old descr as title
-						b.setTitle(propertyDescr);
+                        b.setTitle(propertyDescr);
 
-						int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
+                        int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
 
-						String[] possibleValuesString = new String[p.getPossibleValues().length];
-						
-						for (int j = 0; j < p.getPossibleValues().length; j++) {
-							possibleValuesString[j] = SettingsActivity.getStringPropertyValue(view.getContext(), p.getPossibleValues()[j]);
-						}
+                        String[] possibleValuesString = new String[p.getPossibleValues().length];
+                        
+                        for (int j = 0; j < p.getPossibleValues().length; j++) {
+                            possibleValuesString[j] = SettingsActivity.getStringPropertyValue(view.getContext(), p.getPossibleValues()[j]);
+                        }
                         
                         b.setSingleChoiceItems(possibleValuesString, i, new DialogInterface.OnClickListener() {
                             @Override
