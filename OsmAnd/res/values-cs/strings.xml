@@ -1480,8 +1480,8 @@ s často kladenými otázkami.</string>
     <string name="misc_pref_title">Různé</string>
     <string name="voice_pref_title">Hlas</string>
     <string name="always_center_position_on_map">Zobrazit pozici vždy uprostřed</string>
-    <string name="osmo_plugin_name">OsMo (Pokročilé monitorování)</string>
-   	<string name="osmo_settings">OsMo OpenStreetMap monitorování (beta)</string>
+    <string name="osmo_plugin_name">OsMo</string>
+   	<string name="osmo_settings">OpenStreetMap Monitorování</string>
     <string name="osmo_settings_descr">Konfigurovat sledování a nastavit osobní monitorovací kanál</string>
     <string name="osmo_settings_debug">Informace ladění</string>
     <string name="osmo_mode_restart">Restartovat OsMo relaci</string>
