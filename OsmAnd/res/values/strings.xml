@@ -164,7 +164,7 @@
     <string name="osmo_connect">Connect to</string>
     <string name="osmo_create_group">Create group</string>
     <string name="osmo_server_operation_failed">OsMo Server operation failed</string>
-    <string name="osmo_activity">OpenStreetMap-Monitoring</string>
+    <string name="osmo_activity">OpenStreetMap Monitoring</string>
     <string name="osmo_enable_tracker">Send my locations</string>
     <string name="osmo_control">OsMo quick access</string>
     <string name="hours_ago">hours ago</string>
