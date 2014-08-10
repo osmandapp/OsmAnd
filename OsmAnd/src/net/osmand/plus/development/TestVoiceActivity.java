@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 
  */
 package net.osmand.plus.development;
@@ -196,7 +196,7 @@ public class TestVoiceActivity extends SherlockActivity {
 		addButton(ll, "Arrive at your intermediate point 'Friend'", builder(p).arrivedAtIntermediatePoint("Friend"));
 		addButton(ll, "Arrive at your GPX waypoint 'Trailhead'", builder(p).arrivedAtWayPoint("Trailhead"));
 
-		addButton(ll, "Attention, 'bump'", builder(p).attention("bump"));
+		addButton(ll, "Attention, traffic calming", builder(p).attention("TRAFFIC_CALMING"));
 		addButton(ll, "GPS signal lost", builder(p).gpsLocationLost());
 		addButton(ll, "GPS signal recovered", builder(p).gpsLocationRecover());
 		addButton(ll, "You have been off the route for 1050m", builder(p).offRoute(1050));
