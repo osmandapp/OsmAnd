@@ -241,13 +241,13 @@
 	<string name="map_settings_descr">組態地圖顯示</string>
 	<string name="osmand_rastermaps_plugin_description">顯示設定以組態多種線上或快取地圖圖磚，以作為基本地圖或者覆蓋/襯底的地圖，這些地圖還可以在離線時準備，並複製到 OsmAnd 資料夾中。</string>
 	<string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在休眠模式下(螢幕關閉)顯示設定以啟用追蹤與導航。</string>
-	<string name="osmand_accessibility_description">顯示特別的無障礙功能設定。</string>
+	<string name="osmand_accessibility_description">顯示專用的無障礙功能設定。</string>
 	<string name="extra_settings">進階設定</string>
 	<string name="osmand_monitoring_description">顯示便利設定來記錄您的行程到裝置端 GPX 檔或在線上使用網站的服務...</string>
 	<string name="osmand_extra_settings_description">顯示進階的地圖組態(比如增加地圖細節)和一些裝置的詳情。</string>
 	<string name="osmand_development_plugin_description">顯示開發與除錯功能的設定，如導航模擬或繪製顯示效能。</string>
 	<string name="plugins_screen">外掛元件管理</string>
-	<string name="select_plugin_to_activate">輕按外掛元件來啟用或停用它。(可能需要重新啟動 OsmAnd。)</string>
+	<string name="select_plugin_to_activate">點觸外掛元件來啟用或停用。(可能需要重新啟動 OsmAnd。)</string>
 	<string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能</string>
 	<string name="prefs_plugins">外掛元件管理</string>
 	<string name="osm_editing_plugin_description">顯示 OSM 回報所需的設定，如收集/修改 OSM POI 物件、開啟/評論 OSM 錯誤、提供 GPX 檔案(需有OSM帳號)。</string>
@@ -269,7 +269,7 @@
 	<string name="back_to_location">回到目前位置</string>
 	<string name="help">小幫手</string>
 	<string name="show_details">顯示細節</string>
-	<string name="accessibility_extensions_descr">給舊 Android 版本擴展的無障礙工具</string>
+	<string name="accessibility_extensions_descr">給舊 Android 版本的無障礙擴展</string>
 	<string name="accessibility_extensions">無障礙擴展</string>
 	<string name="accessibility_mode">無障礙模式</string>
 	<string name="accessibility_mode_descr">開啟無障礙功能</string>
@@ -479,9 +479,9 @@
 	<string name="favourites_edit_dialog_name">名稱</string>
 	<string name="favourites_edit_dialog_category">類別</string>
 	<string name="vector_map_not_needed">不需要，謝謝</string>
-	<string name="basemap_missing">缺少全球底圖(在小比列尺顯示，含蓋全球範圍)。請下載 World_basemap_x.obf 將軟體環境完整化。</string>
+	<string name="basemap_missing">缺少全球底圖(在縮小時顯示，含蓋全球範圍)。請下載 World_basemap_x.obf 將軟體環境完整化。</string>
 	<string name="vector_data_missing">裝置端(\'離線\')的 SD 卡上找不到資料。欲使用離線地圖請去下載。</string>
-	<string name="local_index_gpx_info_show">\n\n按壓不放會出現選項</string>
+	<string name="local_index_gpx_info_show">\n\n長按會出現選項</string>
 	
 	
 	
@@ -489,7 +489,7 @@
 	<string name="local_index_items_backuped">%2$d 項中的 %1$d 項已順利停用。</string>
 	<string name="local_index_items_deleted">%2$d 項中的 %1$d 項已順利刪除。</string>
 	<string name="local_index_items_restored">%2$d 項中的 %1$d 項已順利啟動。</string>
-	<string name="local_index_action_do">您即將 %1$s %2$s 項，要繼續嗎？</string>
+	<string name="local_index_action_do">您即將 %1$s %2$s 項目，要繼續嗎？</string>
 	<string name="local_index_descr_title">管理地圖檔案</string>
 	<string name="local_index_mi_restore">啟用</string>
 	<string name="local_index_mi_backup">停用</string>
@@ -1204,7 +1204,7 @@
     <string name="close_changeset">關閉異動清單</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing 條碼掃描器應用程式未安裝。要在商場中的搜尋嗎？</string>
 	<string name="support_new_features_descr">捐贈後可在應用程式裡看到新的功能實現</string>
-	<string name="local_index_no_items_to_do">在 %1$s 沒有項目</string>
+	<string name="local_index_no_items_to_do">沒有項目在 %1$s</string>
 	<string name="incomplete_locale">未完成</string>
 	<string name="osmand_extended_description_4000_chars">
 OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式且免費，有世界各地和高品質的OpenStreetMap（簡稱 OSM 開放街道地圖）資料。所有地圖資料都可以存儲在您裝置的儲存卡上離線使用。透過您裝置的 GPS，OsmAnd 為汽車、自行車和行人，提供了路線、視覺和語音導航。所有的主要功能，工作於線上和離線這兩方面（無需網路連線）。
