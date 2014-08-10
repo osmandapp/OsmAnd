@@ -1,6 +1,3 @@
-﻿/**
- * 
- */
 package net.osmand.plus.development;
 
 import java.io.File;
