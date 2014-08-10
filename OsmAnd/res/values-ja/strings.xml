@@ -16,10 +16,7 @@
      <string name="tip_rotation_switching">マップ回転</string>
      
 
-     <string name="switch_to_raster_map_to_see">現在の位置は
-あなたのオフラインベクターマップではカバーされていません、
-追加でベクターマップをダウンロードする場合、メニュー(ビュー定義 -&gt; マップソース…)
-でマップソースを切り替えられます。</string>
+     <string name="switch_to_raster_map_to_see">現在の位置は あなたのオフラインベクターマップではカバーされていません、 追加でベクターマップをダウンロードする場合は設定内の地図データ等管理にて、またはオンラインマップにも切り替えることが出来ます(オンラインマッププラグインを使用した場合)。</string>
      <string name="switch_to_vector_map_to_see">マップを見るには
 メニュー(ビュー定義 -&gt; マップソース… -&gt; オフラインベクターマップ)
 でオフラインベクターマップに切り替えられます。</string>
@@ -55,17 +52,11 @@
      <string name="install_more">インストールを続ける…</string>
 
      <string name="tip_update_index">オフラインマップの更新</string>
-     <string name="tip_update_index_t">\t最新のマップデータを持っていることは
-とても重要です。OsmAnd は利用できるオフラインデータの更新をチェックできる
-ダウンロードマネージャを提供しています。
-     \n\t更新をチェックするにはこちらへ。\'メインメニュー\' -&gt; \'設定\'
--&gt; \'オフラインデータ\' -&gt; \'オフラインデータのダウンロード\'。
-地域リストが参照されると、オプション(\'メニュー\' -&gt;
-\'ダウンロード済フィルター\')からあなたの装置上にすでにある
-データだけの更新を通知するように選択できます。
-     \n\t更新の利用可否は次の色で表わされます:
-     \n\t\'緑\' - データファイルが端末装置とサーバで同一であることを表わします
-     \n\t\'青\' - サーバに利用可能な更新があることを表わします</string>
+     <string name="tip_update_index_t">"最新のマップデータを持っていることは とても重要です。OsmAnd は利用できるオフラインデータの更新をチェックできる ダウンロードマネージャを提供しています。
+\n\t更新をチェックするにはこちらへ。\'メインメニュー\' -&gt; \'設定\' -&gt; \'地図データ等管理\' -&gt; \'オフラインデータのダウンロード\'。 地域リストが参照されると、オプション(\'メニュー\' -&gt; \'ダウンロード済フィルター\')からあなたの装置上にすでにある データだけの更新を通知するように選択できます。
+\n\t更新の利用可否は次の色で表わされます:
+\n\t\'緑\' - データファイルが端末装置とサーバで同一であることを表わします
+\n\t\'青\' - サーバに利用可能な更新があることを表わします "</string>
 
      <string name="level_to_switch_vector_raster_descr">マップタイルの
 代わりにベクターレンダリングを利用するための最小ズームレベル</string>
@@ -81,14 +72,10 @@
 Eメール, SMS(テキスト), あるいはクリップボードに位置座標をコピー。</string>
 
      <string name="tip_favorites">お気に入り地点</string>
-     <string name="tip_favorites_t">\tよく使われる地点はお気に入りに保存できます。
-     \n\t地点をお気に入りに保存するにはマップコンテキストメニューに移動して、
-\'Add to favorites\'オプションを選択してその名前を付けてください。
-お気に入り保存後は、\'メインメニュー\' -&gt; \'お気に入り\'経由で使うことができます。
-     \n\t\'お気に入り\'メニュー内でお気に入りを長押しすると
-ナビゲート先のオプションが現れ、編集や削除を行えます。
-     \n\tマップ上に直接全てのお気に入り地点を表示するには、
-\'マップコンテキストメニュー\' -&gt;\'ビュー定義\'内の\'お気に入り\'レイヤーを有効化してください。</string>
+     <string name="tip_favorites_t">"よく使われる地点はお気に入りに保存できます。
+\n\t地点をお気に入りに保存するにはマップコンテキストメニューに移動して、 \'お気に入りに追加\'オプションを選択してその名前を付けてください。 お気に入り保存後は、\'メインメニュー\' -&gt; \'お気に入り\'経由で使うことができます。
+\n\t\'お気に入り\'メニュー内でお気に入りを長押しすると ナビゲート先のオプションが現れ、編集や削除を行えます。
+\n\tマップ上に直接全てのお気に入り地点を表示するには、 \'マップコンテキストメニュー\' -&gt;\'ビュー定義\'内の\'お気に入り\'レイヤーを有効化してください。 "</string>
 
      <string name="tip_osm_improve">OSMデータ改善</string>
      <string name="tip_osm_improve_t">\tOsmAndはOpenstreetmap.org (OSM)のマップを利用しています。
@@ -264,8 +251,8 @@ MB)をダウンロードしますか?</string>
      <string name="general_settings_descr">インターネット利用、表示オプション、その他の構成</string>
  <string name="general_settings">全般設定</string>
      
- <string name="index_settings_descr">オフライン用のデータを取得/更新</string>
- <string name="index_settings">オフラインデータ</string>
+ <string name="index_settings_descr">地図などのデータを取得/更新</string>
+ <string name="index_settings">地図データ等管理</string>
      <string name="osmand_service">スリープモード時も機能させる</string>
      <string name="osmand_service_descr">画面オフの間OsmAndを使うためのバックグラウンドサービスを実行</string>
      <string name="fast_route_mode">最速ルート</string>
@@ -399,7 +386,7 @@ MB)をダウンロードしますか?</string>
      <string name="route_head">前方</string>
      <string name="first_time_continue">続ける</string>
      <string name="first_time_download">地域をダウンロード</string>
-     <string name="first_time_msg">OsmAndを使ってくれてありがとうございます。アプリケーションの全機能を使うには、地域のオフラインデータダウンロード (設定 → データ) が必要です。その後で、地図表示、住所検索、POI 検索、公共交通機関検索ができます。</string>
+     <string name="first_time_msg">OsmAndを使ってくれてありがとうございます。アプリケーションの全機能を使うには、地域のオフラインデータダウンロード (設定 → 地図データ等管理) が必要です。その後で、地図表示、住所検索、POI 検索、公共交通機関検索ができます。</string>
      <string name="search_poi_location">シグナルを探査中…</string>
      <string name="search_near_map">前回のマップ位置近くを検索</string>
      <string name="search_nearby">近くを検索</string>
@@ -736,7 +723,7 @@ POIの更新は利用できません</string>
     <string name="edit_tilesource_expiration_time">有効期限（分）</string>
     <string name="edit_tilesource_minzoom">最小ズーム</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">選択して下さい...</string>
+    <string name="edit_tilesource_choose_existing">既存のデータから選択…</string>
     <string name="edit_tilesource_name">名前</string>
     <string name="maps_define_edit">定義/編集…</string>
 	<string name="map_widget_fps_info">FPS デバッグ情報</string>
@@ -803,7 +790,7 @@ POIの更新は利用できません</string>
     <string name="wait_current_task_finished">現在のタスクが終了するまでお待ちください</string>
     <string name="use_kalman_filter_compass_descr">電子コンパスの誤差を改善するためにカルマンフィルタを使用</string>
     <string name="use_kalman_filter_compass">カルマンフィルタを使用</string>
-    <string name="access_mark_final_location_first">アクセシビリティモード：最初に目的地を選択して下さい</string> 
+    <string name="access_mark_final_location_first">アクセシビリティモード:最初に目的地を選択して下さい</string> 
     <string name="use_magnetic_sensor_descr">回転センサーの代わりに磁力センサーの値をコンパスの値として利用する</string>
     <string name="use_magnetic_sensor">磁力センサーを利用</string>
     <string name="other_location">その他</string>
@@ -816,11 +803,11 @@ POIの更新は利用できません</string>
     <string name="download_using_mobile_internet">現在Wi-Fiに接続されていません。現在のインターネット接続のままでダウンロードを続行しますか？</string>
     <string name="street_name">通り</string>
 	<string name="hno">家屋番号</string>
-    <string name="monitoring_settings">ロギングサービス &amp; スリープモード</string>
-    <string name="monitoring_settings_descr">旅行の記録とスリープモードの有効化の行い方を設定します</string>
+    <string name="monitoring_settings">ロギングサービス</string>
+    <string name="monitoring_settings_descr">旅行の記録に関する設定します</string>
     <string name="osmand_monitoring_plugin_description">スリープ（画面消灯）モード時のトラッキングとナビをGPSデバイスを定期的にウェイクアップすることで有効化します。
 あなたの旅行のローカルのGPXファイルかオンラインのウェブサービスで記録するかを容易に設定する画面を表示します。</string>
-    <string name="osmand_monitoring_plugin_name">ロギングサービス &amp; スリープモード</string>
+    <string name="osmand_monitoring_plugin_name">ロギングサービス</string>
     <string name="osmand_background_plugin_description">スリープ（画面消灯）モード時のトラッキングとナビをGPSデバイスを定期的にウェイクアップすることで有効化するための設定を表示します。</string>
     <string name="choose_osmand_theme_descr">アプリケーションテーマの選択</string>
     <string name="choose_osmand_theme">アプリケーションテーマ</string>
@@ -848,7 +835,7 @@ POIの更新は利用できません</string>
     <string name="local_indexes_cat_av">音声/ビデオデータ</string>
     <string name="stop_routing_confirm">本当にナビを終了しますか？</string>
     <string name="clear_dest_confirm">本当に目的地（とその経由点）を削除しますか？</string>
-    <string name="precise_routing_mode_descr">グリッチ無しで正確な経路を検索するために、正確なルーティングを有効化します。これは距離によっては非常に利用が制限され、またネイティブライブラリを使用しません。</string>
+    <string name="precise_routing_mode_descr">グリッチ無しの正確なルート計算を有効化します。現段階では距離が限定されて尚且つ遅いです。</string>
     <string name="precise_routing_mode">正確なルーティング（アルファ）</string>
     <string name="recording_context_menu_show">表示</string>
     <string name="recording_photo_description">写真 %2$s of %1$s</string>
@@ -906,7 +893,7 @@ POIの更新は利用できません</string>
     <string name="context_menu_item_first_intermediate_point">最初の経由点として追加</string>
     <string name="add_as_last_destination_point">最後の経由点として追加</string>
     <string name="add_as_first_destination_point">最初の経由点として追加</string>
-    <string name="intermediate_point_too_far">経由点 %1$s が最寄りの道路から遠すぎます</string>
+    <string name="intermediate_point_too_far">経由点 %1$s が最寄りの道路から遠すぎます。</string>
     <string name="arrived_at_intermediate_point">経由点周辺に到着しました</string>
     <string name="context_menu_item_intermediate_point">経由点を追加</string>
     <string name="map_widget_intermediate_distance">経由点</string>
@@ -952,7 +939,7 @@ POIの更新は利用できません</string>
     <string name="poi_filter_accomodation">収容施設(Accommodation)</string>
     <string name="show_warnings_title">アラームを表示…</string>
 	<string name="show_warnings_descr">トラフィック警告(制限速度、強制停止、スピードバンプ)、スピードカメラ警告、車線情報を設定</string>
-	<string name="use_compass_navigation_descr">方向が全く検出できない場合コンパスを使用する。</string>
+	<string name="use_compass_navigation_descr">方向が全く検出できない場合コンパスを使用する</string>
 	<string name="use_compass_navigation">コンパスを使用する</string>
 	<string name="avoid_motorway">高速道路を使用しない</string>
 	<string name="snap_to_road_descr">ナビゲーション中は道路から外れない</string>
@@ -1026,11 +1013,11 @@ POIの更新は利用できません</string>
 		関連メモリ %4$s MB (Android 制限値 %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">総ネイティブメモリ</string>
 	<string name="update_downlod_list">リストの再読み込み</string>
-	<string name="starting_point_too_far">出発地点が最寄りの道路から離れすぎています</string>
+	<string name="starting_point_too_far">出発地点が最寄りの道路から離れすぎています。</string>
 	<string name="shared_location">ロケーションの共有</string>
 	<string name="osmand_parking_event">駐車場から車を探す</string>
 	<string name="osmand_parking_warning">警告</string>
-	<string name="osmand_parking_warning_text">あなたの車の場所があなたのカレンダーに追加されました。手動で削除されるまで残ります</string>    
+	<string name="osmand_parking_warning_text">あなたの車の場所があなたのカレンダーに追加されました。手動で削除されるまで残ります。</string>    
 	<string name="osmand_parking_time_limit_title">駐車場の制限時間を設定する</string>
 	<string name="osmand_parking_delete_confirm">停車中の車の場所を削除しますか？</string>
 	<string name="osmand_parking_delete">駐車マーカーを削除</string>
@@ -1045,7 +1032,7 @@ POIの更新は利用できません</string>
 	<string name="osmand_parking_pm">午後</string>
 	<string name="osmand_parking_am">午前</string>
 	<string name="osmand_parking_position_name">駐車位置</string>
-	<string name="osmand_parking_plugin_description">このプラグインは、あなたの停車中の車の位置を保存することができます</string>
+	<string name="osmand_parking_plugin_description">このプラグインは、あなたの停車中の車の位置を保存することができます。</string>
 	<string name="osmand_parking_plugin_name">駐車位置プラグイン</string>
 	<string name="context_menu_item_add_parking_point">駐車位置としてマーク</string>
 	<string name="context_menu_item_delete_parking_point">駐車マーカーを削除</string>
@@ -1187,8 +1174,7 @@ POIの更新は利用できません</string>
     <string name="gps_status_eclipsim">GPSステータス</string>
     <string name="default_and">と</string>
     <string name="default_or">または</string>
-	<string name="route_is_too_long">ルートがOsmAndオフラインルート検索によって検索されるには長すぎる可能性があります。 
-        	平均的なオフラインルート検索では、200km程度まで検索可能です。ルートを検索する場合はひとつ以上の経由点を追加して下さい。</string>
+	<string name="route_is_too_long">OsmAndオフラインルート計算は、指定地点間の距離が200km以上有ると非常に時間がかかります(場合によっては動作しません)。 中間経由点を作成することでルート計算に掛かる時間を短くすることが出来ます。</string>
 	<string name="auto_zoom_none">自動ズームしない</string>
 	<string name="auto_zoom_close">ズーム 大</string>
 	<string name="auto_zoom_far">ズーム 中</string>
@@ -1204,7 +1190,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
     <string name="audionotes_plugin_name">音声/ビデオノート</string>
     <string name="index_srtm_parts">パート</string>
     <string name="index_srtm_ele">等高線</string>
-    <string name="srtm_plugin_description">オフライン等高線や陰影起伏のダウンロードは簡単です。（\'設定\' → \'データ管理\' → \'ダウンロード\' → 希望のマップタイプを選択）。</string>
+    <string name="srtm_plugin_description">オフライン等高線や陰影起伏のダウンロードは簡単です。(\'設定\' → \'地図データ等管理\' → \'ダウンロード\' → 希望のマップタイプを選択)。</string>
     <string name="srtm_plugin_name">等高線プラグイン</string>
     <string name="download_select_map_types">他のマップ</string>
     <string name="download_srtm_maps">等高線</string>
@@ -1219,7 +1205,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="live_monitoring_interval">オンライン追跡間隔</string>
 	<string name="live_monitoring_url_descr">パラメータの構文を使用してWebアドレスを指定します:緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}</string>
 	<string name="live_monitoring_url">オンライン追跡ウェブアドレス</string>
-	<string name="gpx_monitoring_disabled_warn">\'追跡ログをGPXに記録\'を有効にして下さい</string>
+	<string name="gpx_monitoring_disabled_warn">\'追跡ログをGPXに記録\'を有効にして下さい。</string>
 	<string name="show_current_gpx_title">現在のトラックを表示</string>
 	<string name="free_version_message">このOsmAnd 無料バージョンはダウンロード数が%1$s個に制限されており、オフラインでのWikipediaの記事利用をサポートしていません。</string>
 	<string name="free_version_title">無料バージョン</string>
@@ -1322,7 +1308,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="local_index_items_restored">%2$d個の項目のうち、%1$d個のアイテムを有効化しました。</string>
 	<string name="local_index_no_items_to_do">%1$sにアイテムはありません</string>
 	<string name="local_index_action_do">%2$s個のアイテムを%1$sしようとしています、続行しますか？</string>
-	<string name="local_index_descr_title">オフラインデータ</string>
+	<string name="local_index_descr_title">地図データ等管理</string>
 	<string name="local_index_mi_restore">有効化</string>
 	<string name="local_index_mi_backup">無効化</string>
 	<string name="local_index_mi_delete">削除</string>
@@ -1638,11 +1624,9 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 サポートする国のリスト(基本的には全世界対応):↵
 アフガニスタン、アルバニア、アルジェリア、アンドラ、アンゴラ、アンギラ、アンティグア·バーブーダ、アルゼンチン、アルメニア、アルバ、オーストラリア、オーストリア、アゼルバイジャン、バハマ、バーレーン、バングラデシュ、バルバドス、ベラルーシ、ベルギー、ベリーズ、ベナン、バミューダ、ブータン、ボリビア、ボネール、ボスニア·ヘルツェゴビナ、ボツワナ、ブラジル、英領バージン諸島、ブルネイ、ブルガリア、ブルキナファソ、ブルンジ、カンボジア、カメルーン、カナダ、カーボベルデ、中央アフリカ共和国、チャド、チリ、中国、コロンビア、コモロ、コンゴ、コスタリカ、コートジボワール、クロアチア、キューバ、キュラソー、キプロス、チェコ共和国、デンマーク、ジブチ、ドミニカ、ドミニカ共和国、エクアドル、エジプト、エルサルバドル、赤道ギニア、エリトリア、エストニア、エチオピア、フィジー、フィンランド、フランス、フランス領ギアナ、フランス領ポリネシア、ガボン、ガンビア、ジョージア、ドイツ、ガーナ、ジブラルタル、ギリシャ、グリーンランド、グレナダ、グアドループ、グアム、グアテマラ、ガーンジー島、ギニア、ギニアビサウ、ガイアナ、ハイチ、バチカン、ホンジュラス、香港、ハンガリー、アイスランド、インド、インドネシア、イラン、イラク、アイルランド、マン島、イスラエル、イタリア、ジャマイカ、日本、ジャージ、ヨルダン、カザフスタン、ケニア、キリバス、北朝鮮と韓国、クウェート、キルギスタン、ラオス、ラトビア、レバノン、レソト、リベリア、リビア、リヒテンシュタイン、リトアニア、ルクセンブルグ、マカオ、マケドニア、マダガスカル、マラウイ、マレーシア、モルディブ、マリ、マルタ、マルティニク、モーリタニア、モーリシャス、マヨット、メキシコ、ミクロネシア、モルドバ、モナコ、モンゴル、モンテネグロ、モントセラト、モロッコ、モザンビーク、ミャンマー、ナミビア、ナウル、ネパール、オランダ、オランダ領アンティル、ニューカレドニア、ニュージーランド、ニカラグア、ニジェール、ナイジェリア、ノルウェー、オマーン、パキスタン、パラオ、パレスチナ、パナマ、パプアニューギニア、パラグアイ、ペルー、フィリピン、ポーランド、ポルトガル、プエルトリコ、カタール、ルーマニア、ロシア、ルワンダ、サン·バルテルミー島、セントヘレナ島、セントクリストファー·ネイビス、セントルシア、サンマルタン、サンピエール島·ミクロン島、セントビンセント·グレナディーン、サモア、サンマリノ、サウジアラビア、セネガル、セルビア、セイシェル、シエラレオネ、シンガポール、スロバキア、スロベニア、ソマリア、南アフリカ共和国、サウスジョージア、南スーダン、スペイン、スリランカ、スーダン、スリナム、スワジランド、スウェーデン、スイス、シリア、台湾、タジキスタン、タンザニア、タイ、東ティモール、トーゴ、トケラウ、トンガ、トリニダード·トバゴ、チュニジア、トルコ、トルクメニスタン、ツバル、ウガンダ、ウクライナ、アラブ首長国連邦、イギリス(UK) 、アメリカ合衆国(USA) 、ウルグアイ、ウズベキスタン、バヌアツ、ベネズエラ、ベトナム、ウォリス·フツナ、西サハラ、イエメン、ザンビア、ジンバブエ
 	</string>
-	<string name="tip_altitude_offset_t">ほとんどのGPSデバイスは、ローカルで使用されているシステムへの変換は位置依存の補正を必要とするため、楕円体ベースのWGS84の参照系で高度の測定値を報告しています。
-		\n\nこれらのローカルシステムの近似がEGM96(geoid)基準です。
-		\n\nOsmAndでEGM96システムにて現在位置の高度を表示するには「World Altitide Correction(WW15MGH.DAC)」をダウンロード後「設定」→「オフラインデータ」にて設定をして下さい。
-(オリジナルデータは、http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC にあります)
-	</string>
+	<string name="tip_altitude_offset_t">"ほとんどのGPSデバイスは、ローカルで使用されているシステムへの変換は位置依存の補正を必要とするため、楕円体ベースのWGS84の参照系で高度の測定値を報告しています。
+\n\nこれらのローカルシステムの近似がEGM96(geoid)基準です。
+\n\nOsmAndでEGM96システムにて現在位置の高度を表示するには「World Altitide Correction(WW15MGH.DAC)」をダウンロード後「設定」→「地図データ等管理」にて設定をして下さい。 (オリジナルデータは、http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC にあります) "</string>
     <string name="tip_recent_changes_0_8_1_t">0.8.1での変更点:
 		\n\t* より正確なルート(少し遅い)
 		\n\t* スマートで高速な経路の再計算
@@ -1767,9 +1751,9 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="routing_attr_avoid_motorway_description">高速道路を使用しない</string>
 	<string name="routing_attr_weight_name">最大重量</string>
 	<string name="routing_attr_weight_description">車両重量制限を使用する</string>
-    <string name="android_19_location_disabled">KitKat以降のAndroidバージョンでは以前のストレージの場所にダウンロードやアップデートが出来ません。(%s)新しい場所にファイルをコピーしますか？
-	\n注1:古いファイルはそのままそこに残ります。
-	\n注2:その場合OsmAndとOsmAnd+とでファイルの共有は出来ません。 </string>
+    <string name="android_19_location_disabled">"KitKat以降のAndroidバージョンでは以前のストレージの場所にダウンロードやアップデートが出来ません。(%s) 新しい場所にファイルをコピーしますか？
+\n備考:古いファイルはそのままそこに残ります。
+\n備考:その場合OsmAndとOsmAnd+とでファイルの共有は出来ません。 "</string>
     <string name="application_dir_change_warning2">新しい保存先にデータを移動します、よろしいですか？</string>
     <string name="copying_osmand_one_file_descr">新しい保存先にコピーしています(%s)…</string>
     <string name="copying_osmand_files_descr">新しい保存先(%s)にコピーしています</string>
@@ -1827,7 +1811,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="rendering_attr_showSurfaces_name">路面を表示</string>
     <string name="rendering_attr_showCycleRoutes_name">自転車道を表示</string>
     <string name="osmo_auth_error_short">認証の失敗</string>
-    <string name="osmo_auth_error">OsMoの認証エラーが発生しました:%1$s\nサーバーが一時的にダウンしているか、あなたの登録情報が失効している可能性があります\n新しく登録しますか</string>
+    <string name="osmo_auth_error">OsMoの認証エラーが発生しました:%1$s\nサーバーが一時的にダウンしているか、あなたの登録情報が失効している可能性があります。\n新しく登録しますか？</string>
     <string name="osmo_group_by_invite">招待枠での認証</string>
     <string name="stop_navigation_service">停止</string>
 	<string name="osmo_group_information_desc">" - 作成した全てのグループは公開されます、匿名を希望する場合はトラッカーIDを経由して直接デバイスを接続します。\n - 一つのグループは16人まで登録できます。\n - 非アクティブであるか2週間に1人しかアクティブされなかった場合グループは削除されます。\n - あなたが招待した人のみ入れるようグループの入り口を制限することができますが、グループを制御するために管理コンソールに移動する必要があります。\n - グループを作成する際、他の条件を必要としたいので http://osmo.mobi までご連絡ください。"</string>
