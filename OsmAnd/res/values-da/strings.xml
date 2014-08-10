@@ -1959,4 +1959,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 <string name="av_camera_pic_size">Kamera billedstørrelse</string>
 	<string name="av_camera_pic_size_descr">Vælg billedstørrelse for intern kamera</string>
     <string name="announce_nearby_favorites">Meddel om favoritter i nærheden</string>
-</resources>
+<string name="rendering_value_car_name">Bil</string>
+    <string name="rendering_value_bicycle_name">Cykel</string>
+    <string name="rendering_value_pedestrian_name">Fodgænger</string>
+    <string name="rendering_value_browse_map_name">Gennemse kort</string>  
+    </resources>
