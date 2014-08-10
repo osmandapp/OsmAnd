@@ -1935,4 +1935,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="av_camera_pic_size_descr">Triar la mida d\'imatge de la càmera interna</string>
     <string name="hide_all_waypoints">Esborra tot</string>
     <string name="announce_nearby_favorites">Indica preferits propers</string>
-</resources>
+<string name="rendering_value_browse_map_name">Mapa esquemàtic</string>  
+    <string name="rendering_value_car_name">Cotxe</string>
+    <string name="rendering_value_bicycle_name">Bicicleta</string>
+    <string name="rendering_value_pedestrian_name">Peatonal</string>
+    </resources>
