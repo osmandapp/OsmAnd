@@ -1809,7 +1809,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_connect">Opret forbindelse til</string>
     <string name="osmo_create_group">Opret gruppe</string>
     <string name="osmo_server_operation_failed">Osmo Server operation mislykkedes</string>
-    <string name="osmo_activity">OpenStreetMap-Overvågning</string>
+    <string name="osmo_activity">OpenStreetMap Overvågning</string>
     <string name="osmo_enable_tracker">Send placeringer</string>
     <string name="osmo_control">OsMo hurtig adgang</string>
     <string name="local_index_mi_export">Eksport</string>
