@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rendering_value_browse_map_name">Browse map</string>  
+    <string name="rendering_value_car_name">Car</string>
+    <string name="rendering_value_bicycle_name">Bicycle</string>
+    <string name="rendering_value_pedestrian_name">Pedestrian</string>
     <string name="rendering_attr_coloredBuildings_name">Colored buildings</string>
     <string name="osmo_invite">Invite...</string>
     <string name="osmo_leave_confirmation_msg">Do you want to leave group %1$s?</string>
