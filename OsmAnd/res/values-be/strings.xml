@@ -1932,4 +1932,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="av_camera_pic_size_descr">Памер фотаздымка з убудаванай камеры</string>
     <string name="hide_all_waypoints">Выдаліць усе</string>
     <string name="announce_nearby_favorites">Абвяшчаць бліжэйшыя выбраныя кропкі</string>
-</resources>
+<string name="rendering_value_browse_map_name">Прагляд мапы</string>  
+    <string name="rendering_value_car_name">Аўтамабіль</string>
+    <string name="rendering_value_bicycle_name">Ровар</string>
+    <string name="rendering_value_pedestrian_name">Пешаход</string>
+    </resources>
