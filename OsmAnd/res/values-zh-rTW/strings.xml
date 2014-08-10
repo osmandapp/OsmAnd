@@ -1787,7 +1787,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_connect">連接到</string>
     <string name="osmo_create_group">建立群組</string>
     <string name="osmo_server_operation_failed">OsMo 伺服器操作失敗</string>
-    <string name="osmo_activity">OpenStreetMap-監控中</string>
+    <string name="osmo_activity">OpenStreetMap 監控</string>
     <string name="osmo_enable_tracker">傳送我的位置</string>
     <string name="osmo_control">OsMo 快速進入</string>
     <string name="local_index_mi_export">匯出</string>
@@ -1939,4 +1939,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 <string name="av_camera_pic_size">相機照片的大小</string>
 	<string name="av_camera_pic_size_descr">選擇內部相機照片的大小</string>
     <string name="announce_nearby_favorites">通報鄰近我的最愛</string>
-</resources>
+<string name="rendering_value_browse_map_name">瀏覽地圖</string>  
+    <string name="rendering_value_car_name">汽車</string>
+    <string name="rendering_value_bicycle_name">自行車</string>
+    <string name="rendering_value_pedestrian_name">步行</string>
+    </resources>
