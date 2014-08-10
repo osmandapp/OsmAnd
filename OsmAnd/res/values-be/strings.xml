@@ -1775,7 +1775,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_connect">Падлучыцца да</string>
     <string name="osmo_create_group">Стварыць групу</string>
     <string name="osmo_server_operation_failed">Памылка аперацыі на сэрвэры OsMo</string>
-    <string name="osmo_activity">OpenStreetMap-Маніторынг</string>
+    <string name="osmo_activity">Маніторынг OpenStreetMap</string>
     <string name="osmo_enable_tracker">Адсылаць маё месцазнаходжаньне</string>
     <string name="local_index_mi_export">Экспарт</string>
 	<string name="import_file_favourites">Захаваць як файл GPX або імпартаваць у абранае?</string>
