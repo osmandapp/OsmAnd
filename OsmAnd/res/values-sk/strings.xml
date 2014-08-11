@@ -1806,7 +1806,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_group_info">Informácie</string>
     <string name="osmo_group">Skupina v OsMo</string>
     <string name="osmo_sign_in">Prihlásiť sa</string>
-    <string name="osmo_activity">OpenStreetMap-Sledovanie</string>
+    <string name="osmo_activity">OpenStreetMap sledovanie</string>
     <string name="osmo_connect_to_group">Spojiť so skupinou</string>
     <string name="osmo_group_name">Názov skupiny</string>
     <string name="osmo_connect">Pripojiť k</string>
@@ -1961,4 +1961,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 <string name="av_camera_pic_size">Veľkosť fotografie</string>
 	<string name="av_camera_pic_size_descr">Zvoľte veľkosť obrázka interného fotoaparátu</string>
     <string name="announce_nearby_favorites">Oznamovať obľúbené miesta v blízkosti</string>
-</resources>
+<string name="rendering_value_browse_map_name">Štandardná</string>  
+    <string name="rendering_value_car_name">Automobil</string>
+    <string name="rendering_value_bicycle_name">Bicykel</string>
+    <string name="rendering_value_pedestrian_name">Chodec</string>
+    </resources>
