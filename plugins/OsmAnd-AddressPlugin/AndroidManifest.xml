@@ -4,7 +4,7 @@
     android:versionCode="5"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="10" />
+    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19" />
 	<uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
     <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
 	<supports-screens  android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" 
