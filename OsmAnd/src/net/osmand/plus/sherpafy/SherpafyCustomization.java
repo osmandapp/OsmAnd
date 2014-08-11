@@ -11,18 +11,17 @@ import java.util.TreeSet;
 
 import net.osmand.IProgress;
 import net.osmand.data.FavouritePoint;
-import net.osmand.data.LocationPoint;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.api.FileSettingsAPIImpl;
+import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
@@ -38,7 +37,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private static final String SELECTED_TOUR = "selected_tour";
 	private static final String ACCESS_CODE = "access_code";
 	private static final String SELECTED_STAGE = "selected_stage";
-	private OsmandSettings originalSettings;
+
 	private CommonPreference<String> selectedTourPref;
 	private CommonPreference<String> selectedStagePref;
 	private List<TourInformation> tourPresent = new ArrayList<TourInformation>();
@@ -47,16 +46,17 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private File toursFolder;
 	private CommonPreference<String> accessCodePref;
 	private List<FavouritePoint> cachedFavorites = new ArrayList<FavouritePoint>();
+	private SettingsAPI originalApi;
 
 	@Override
 	public void setup(OsmandApplication app) {
 		super.setup(app);
-		originalSettings = createSettings(app.getSettings().getSettingsAPI());
-		selectedTourPref = originalSettings.registerStringPreference(SELECTED_TOUR, null).makeGlobal();
-		accessCodePref = originalSettings.registerStringPreference(ACCESS_CODE, "").makeGlobal();
-		toursFolder = new File(originalSettings.getExternalStorageDirectory(), "osmand/tours");
+		originalApi = osmandSettings.getSettingsAPI();
+		selectedTourPref = osmandSettings.registerStringPreference(SELECTED_TOUR, null).makeGlobal();
+		accessCodePref = osmandSettings.registerStringPreference(ACCESS_CODE, "").makeGlobal();
+		toursFolder = new File(osmandSettings.getExternalStorageDirectory(), "osmand/tours");
 	}
-	
+
 	public boolean setAccessCode(String acCode) {
 		acCode = acCode.toUpperCase();
 		if(validate(acCode)) {
@@ -162,7 +162,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 					}
 				}
 				if (selectedName == null) {
-					app.getSettings().setSettingsAPI(originalSettings.getSettingsAPI());
+					app.getSettings().setSettingsAPI(originalApi);
 				}
 			}
 		}

@@ -24,12 +24,14 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.sherpafy.SherpafyCustomization;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;
@@ -126,9 +128,6 @@ public class OsmandApplication extends Application {
 		}
 		super.onCreate();
 		new Toast(this); // activate in UI thread to avoid further exceptions
-		appCustomization = new OsmAndAppCustomization();
-		appCustomization.setup(this);
-		 
 		sqliteAPI = new SQLiteAPIImpl(this);
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
@@ -136,13 +135,21 @@ public class OsmandApplication extends Application {
 			e.printStackTrace();
 		}
 
-		// settings used everywhere so they need to be created first
-		osmandSettings = appCustomization.createSettings(new net.osmand.plus.api.SettingsAPIImpl(this));
+		if(Version.isSherpafy(this)) {
+			appCustomization = new SherpafyCustomization();
+		} else {
+			appCustomization = new OsmAndAppCustomization();
+		}
+
+		appCustomization.setup(this);
+
+		osmandSettings = appCustomization.getOsmandSettings();
 		// always update application mode to default
 		if(!osmandSettings.FOLLOW_THE_ROUTE.get()){
 			osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
 		}
-		
+
+
 		applyTheme(this);
 		
 		routingHelper = new RoutingHelper(this, player);
@@ -173,8 +180,8 @@ public class OsmandApplication extends Application {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		}
-		
-		
+
+
 	}
 	
 	@Override
