@@ -16,6 +16,7 @@ import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
@@ -24,15 +25,14 @@ import android.view.Window;
 public class OsmAndAppCustomization {
 	
 	protected OsmandApplication app;
+	protected OsmandSettings osmandSettings;
 
 	public void setup(OsmandApplication app) {
 		this.app = app;
-	}
-	
-	public OsmandSettings createSettings(SettingsAPI api) {
-		return new OsmandSettings(app, api);
+		this.osmandSettings = new OsmandSettings(app, new net.osmand.plus.api.SettingsAPIImpl(app));
 	}
 
+	public OsmandSettings getOsmandSettings(){ return osmandSettings;}
 	// Main menu
 	public boolean checkExceptionsOnStart() {
 		return true;

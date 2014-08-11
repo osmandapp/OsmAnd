@@ -67,9 +67,9 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		if (!(getMyApplication().getAppCustomization() instanceof SherpafyCustomization)) {
-			getMyApplication().setAppCustomization(new SherpafyCustomization());
-		}
+//		if (!(getMyApplication().getAppCustomization() instanceof SherpafyCustomization)) {
+//			getMyApplication().setAppCustomization(new SherpafyCustomization());
+//		}
 		customization = (SherpafyCustomization) getMyApplication().getAppCustomization();
 		setTheme(R.style.OsmandLightTheme);
 		((OsmandApplication) getApplication()).setLanguage(this);
