@@ -1505,7 +1505,7 @@
 	<string name="lang_hy">Armeni</string>
 	<string name="lang_eu">Basc</string>
 	<string name="lang_be">belarús</string>
-	<string name="lang_bs">Bosni</string>
+	<string name="lang_bs">Bosnià</string>
 	<string name="lang_bg">Búlgar</string>
 	<string name="lang_ca">Català</string>
 	<string name="lang_cs">Txec</string>
@@ -1746,8 +1746,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_auto_send_locations_descr">Inici automàtic del registre de la traça i del enviament de les posicions tot just iniciar l\'aplicació</string>
     <string name="osmo_auto_send_locations">Inici automàtic del registre de la traça</string>
     <string name="osmo_tracker_id">Identificació personal del traçador</string>
-    <string name="osmo_tracker_id_descr">Prem per veure o compartir la identificació del traçador
-	Utilitzant la identificació del traçador altres dispositius connectats podran monitoritzar tots els moviments d\'aquest aparell. Per desconnectar seleccioni l\'opció Regenerar.</string>
+    <string name="osmo_tracker_id_descr">Prem per veure o compartir la identificació del traçador Utilitzant la identificació del traçador altres dispositius connectats podran monitoritzar tots els moviments d\'aquest aparell. Per desconnectar seleccioni l\'opció Regenerar.</string>
     <string name="osmo_session_token">Símbol de sessió: %1$s</string>
     <string name="osmo_auth_pending">Esperant autorització...</string>
     <string name="osmo_locations_sent">Posicions enviades %1$d (en cua %2$d) </string>
@@ -1909,7 +1908,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="enable_sleep_mode">Activa el mode en segon pla</string>
 	<string name="gps_wake_up_timer">Interval d\'activació del GPS</string>
 	<string name="sleep_mode_stop_dialog">Voleu mantenir el GPS actiu?</string>
-	<string name="lang_al">Albanés</string>
+	<string name="lang_al">Albanès</string>
 	<string name="lang_ar">Àrab</string>
 	<string name="lang_sc">Sard</string>
 	<string name="lang_sr">Serbi</string>
