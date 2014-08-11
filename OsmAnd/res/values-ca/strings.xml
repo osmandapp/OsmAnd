@@ -1797,9 +1797,9 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_create_groups_confirm">Per poder crear grups cal ser un usuari registrat d\'OsMo.</string>
     <string name="osmo_credentials_not_valid">Les vostres credencials OsMo no són vàlides.</string>
     <string name="osmo_regenerate_login_ids_confirm">Esteu segur de voler regenerar els identificadors personals? Tots els dispositius que teniu connectats ja no us podran seguir.</string>
-    <string name="osmo_regenerate_login_ids">Regenerar la identificació de l\'usuari</string>
+    <string name="osmo_regenerate_login_ids">Regenera l\'identificador de l\'usuari</string>
     <string name="osmo_cancel_moving_target">Anul·lar el destí en moviment</string>
-    <string name="osmo_center_location">Centrar a la pantalla</string>
+    <string name="osmo_center_location">Centra a la pantalla</string>
     <string name="osmo_set_moving_target">Establir com destí en moviment</string>
     <string name="osmo_use_server_name">Nom registrat</string>
     <string name="osmo_connect_to_my_nickname">El teu nick</string>
