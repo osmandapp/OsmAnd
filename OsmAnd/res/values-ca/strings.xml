@@ -1938,5 +1938,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 <string name="rendering_value_browse_map_name">Mapa esquemàtic</string>  
     <string name="rendering_value_car_name">Cotxe</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
-    <string name="rendering_value_pedestrian_name">Peatonal</string>
+    <string name="rendering_value_pedestrian_name">Vianant</string>
     </resources>
