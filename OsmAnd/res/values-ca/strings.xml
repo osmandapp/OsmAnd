@@ -1523,7 +1523,7 @@
 	<string name="lang_it">Italià</string>
 	<string name="lang_ja">Japonès</string>
 	<string name="lang_ko">Coreà</string>
-	<string name="lang_lv">Letò</string>
+	<string name="lang_lv">Letó</string>
 	<string name="lang_lt">Lituà</string>
 	<string name="lang_ru">Rus</string>
 	<string name="lang_sk">Eslovac</string>
@@ -1531,9 +1531,9 @@
 	<string name="lang_es">Castellà</string>
 	<string name="lang_sv">Suec</string>
 	<string name="lang_tr">Turc</string>
-	<string name="lang_uk">Ucrainès</string>
+	<string name="lang_uk">Ucraïnès</string>
 	<string name="lang_vi">Vietnamita</string>
-	<string name="lang_cy">Gal·les</string>
+	<string name="lang_cy">Gal·lès</string>
 	<string name="index_name_canada">Amèrica del Nord - Canadà</string>
     <string name="index_name_italy">Europa - Itàlia</string>
     <string name="index_name_gb">Europa -Gran Bretanya</string>
@@ -1541,7 +1541,7 @@
 	<string name="lang_mr">Marathi</string>
 	<string name="lang_no">Noruec</string>
 	<string name="lang_pl">Polonès</string>
-	<string name="lang_pt">Portugès</string>
+	<string name="lang_pt">Portuguès</string>
 	<string name="lang_ro">Romanès</string>
 	<string name="tip_recent_changes_0_6_6_t">Darrers canvis a 0.6.6: 
 		\n\t- Motor de síntesi de veu en la navegació
