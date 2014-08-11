@@ -1958,4 +1958,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="av_camera_pic_size">Dimensione foto</string>
 	<string name="av_camera_pic_size_descr">Seleziona la dimensione delle foto scattate</string>
     <string name="announce_nearby_favorites">Annuncia i preferiti nelle vicinanze</string>
-</resources>
+<string name="rendering_value_browse_map_name">Esplorazione mappa</string>  
+    <string name="rendering_value_car_name">Automobile</string>
+    <string name="rendering_value_bicycle_name">Bicicletta</string>
+    <string name="rendering_value_pedestrian_name">Pedone</string>
+    </resources>
