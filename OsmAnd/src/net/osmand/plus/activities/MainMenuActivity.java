@@ -197,7 +197,6 @@ public class MainMenuActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		if(Version.isSherpafy(getMyApplication())) {
 			final Intent mapIntent = new Intent(this, TourViewActivity.class);
-			getMyApplication().setAppCustomization(new SherpafyCustomization());
 			startActivity(mapIntent);
 			finish();
 			return;
