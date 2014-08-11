@@ -2078,4 +2078,8 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 <string name="av_camera_pic_size">카메라 사진 크기</string>
 	<string name="av_camera_pic_size_descr">내부 카메라 사진 크기 선택</string>
     <string name="announce_nearby_favorites">가까운 즐겨찾기 알리기</string>
-</resources>
+<string name="rendering_value_browse_map_name">지도 찾기</string>  
+    <string name="rendering_value_car_name">자동차</string>
+    <string name="rendering_value_bicycle_name">자전거</string>
+    <string name="rendering_value_pedestrian_name">보행자</string>
+    </resources>
