@@ -343,7 +343,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="clear_dest_confirm">Ses seguru de bòlere burrare sa destinatzione (e sos puntos mesanos)?</string>
     <string name="precise_routing_mode_descr">Abìlita pro calculare àndalas pretzisas sena attoppos. Est lentu e limitadu in sa distantzia.</string>
     <string name="precise_routing_mode">Calculu pretzisu de s\'àndala (alfa)</string>
-    <string name="recording_context_menu_show">Bisualizza</string>
+    <string name="recording_context_menu_show">Ammustra</string>
     <string name="recording_photo_description">Foto %1$s a %2$s</string>
     <string name="av_def_action_picture">Iscata una foto</string>
     <string name="recording_context_menu_precord">Iscata una foto</string>
@@ -447,7 +447,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="zxing_barcode_scanner_not_found">S\'aplicu ZXing Barcode Scanner non est installada. La boles chircare in su Market?</string>
 	<string name="rendering_attr_roadColors_description">Issèbera una cumbinatzione de colores pro sas istradas:</string>
 	<string name="rendering_attr_roadColors_name">Ischema de colores de sas istradas</string>
-    <string name="map_widget_show_destination_arrow">Bisualizza sa filada de sa destinatzione</string>
+    <string name="map_widget_show_destination_arrow">Ammustra sa diretzione de sa destinatzione</string>
     <string name="enable_plugin_monitoring_services">Abìlita su plugin de compidada pro impreare sos servitzios de registratzione de sa positzione (registratzione GPX, compidada in lìnia)</string>
     <string name="non_optimal_route_calculation">Càlcula, s\'in casu mai, un\'àndala non primorosa pro sas distantzias longas</string>
 	<string name="gps_not_available">Ativa su GPS in sas impostaduras</string>
@@ -489,7 +489,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="poi_filter_food_shop">Alimentares</string>
 	<string name="poi_filter_for_tourists">Pro sos turistas</string>
 	<string name="poi_filter_fuel">Carburante</string>
-	<string name="show_warnings_title">Bisualizza avertimentos…</string>
+	<string name="show_warnings_title">Ammustra avertimentos…</string>
 	<string name="show_warnings_descr">Cunfigura sos avisos pro su traficu (lìmites de lestresa, stop fortzados, dossos e rallentadores), avisos autovelox e indicatziones de corsia</string>
 	<string name="use_compass_navigation_descr">Imprea sa bùssola cando sa filada/diretzione non est istada individuada</string>
 	<string name="use_compass_navigation">Imprea sa bùssola</string>
@@ -827,7 +827,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="modify_transparency">Muda sa trasparèntzia (0 - trasparente, 255 - annapau)</string>
 	<string name="confirm_interrupt_download">Boles firmare s\'isgarrigamentu de sos documentos?</string>
 	<string name="local_indexes_cat_tile">Mapas in lìnia a tasseddos</string>
-	<string name="local_indexes_cat_map">Mapas sena lìnia (vetoriales)</string>
+	<string name="local_indexes_cat_map">Mapas non in lìnia (vetoriales)</string>
 	<string name="map_online_data">Mapas in lìnia e a tasseddos</string>
 	<string name="map_online_data_descr">Imprea sas mapas in lìnia (iscàrriga e archìvia sos tasseddos in s\'ischeda SD)</string>
 	<string name="online_map_settings">Mapas in lìnia</string>
@@ -906,7 +906,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="index_name_asia">Àsia</string>
 	<string name="index_name_oceania">Oceània</string>
 	<string name="index_name_other">Mapas mundiales e de base</string>
-	<string name="amenity_type_osmwiki">Wikipedia (sena lìnia)</string>
+	<string name="amenity_type_osmwiki">Wikipedia (non in lìnia)</string>
 	<string name="profile_settings">Impostaduras dislindadas de su profilu</string>
 	<string name="routing_settings">Nàvigu</string>
 	<string name="routing_settings_descr">Dislinda sas optziones de nàvigu</string>
@@ -972,7 +972,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="history_search_desc">Cronologia chircas</string>
 	<string name="download_link_and_local_description">Carcare inoghe pro iscarrigare o carrigare documentos de mapas sena lìnia.
 \nCarca un\'elementu esistente pro bìdere prus minujos, carca e mantène carcau pro deativare o cantzellare. Datos currentes in su dispositivu (%1$s lìberos):</string>
-	<string name="index_settings_descr">Iscàrriga e gesti sas mapas sena lìnia sarbadas in su dispositivu</string>
+	<string name="index_settings_descr">Iscàrriga e gesti sas mapas non in lìnia sarbadas in su dispositivu</string>
 	<string name="map_online_plugin_is_not_installed">Abìlita su plugin pro sas mapas sena lìnia pro ammustrare àteras mitzas</string>
 	<string name="osmand_monitoring_description">Ammustra sas impostaduras pro fatzilitare sa registratzione in unu documentu GPX o in lìnia impreande uu servìtziu web.</string>
 	<string name="hide_all_waypoints">Burralos totus</string>
@@ -1099,4 +1099,21 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="use_transparent_map_theme">Tema transparente</string>
 	<string name="native_library_not_supported">Sa libreria nativa no est suportada dae custu dispositivu.</string>
 	<string name="init_native_library">Inizalizatzione libreria nativa…</string>
+	<string name="rendering_value_browse_map_name">Esploratzione mapa</string>  
+    <string name="rendering_value_car_name">Màchina</string>
+    <string name="rendering_value_bicycle_name">Bitzicleta</string>
+    <string name="rendering_value_pedestrian_name">A pedes</string>
+    <string name="tip_osm_improve_t">"OsmAnd imprea mapas basadas in supra de datos Openstreetmap.org (OSM) e podet èssere impreau pro megiorare sa calidade de datos OSM. Podes creare e carrigare PDI noos o sinnalatziones de errores in OSM in una manera simple meda.
+\n\nPro lu fàghere depes ativare in antis su plugin \'Mudas OSM\' dae \'Impostaduras\' → \'Gestore plugins\', e a pustis pònnere sas credentziales tuas de atzessu in \'Impostaduras\' → \'Mudas OSM\'.
+\n\nPro annànghere unu PDI nou imprea s\'optzione \'Crea PDI\' in su menù contestuale. Sighi iscriende sas informatziones chi petocant su PDI in sa setzione \'Create POI\' e imbia.
+\n\nFintzas sos errores in sas mapas podent èssere sinnalados, gasi sa comunidade OSM los podet currègere. Imprea s\'optzione \'Sinnala errore OSM\' in su menù contestuale. Pustis pone una descritzione a sa minuda de su problema e imbia carcande \'Annanghe\'.
+\n\nOsmAnd suportada sa possibilidade de sarbare sas cuntributziones tuas in su telèfono, ma sa connessione ìnternet est netzessària pro carrigare sos PDI e sas sinnalatziones in OSM. "</string>
+	<string name="gpx_option_reverse_route"/>
+	<string name="rotate_map_bearing_opt">In sa diretzione de sa mòvida</string>
+	<string name="show_view_angle">Ammustra diretzione de osservatzione de abbaidadura</string>
+	<string name="tip_navigation_t">"Pro otènnere indicatziones, mantène carcau in supra de su logu de destinatzione (pustis carca sa descritzione sua e ischerta \'Indicatziones pro\'), o ischerta \'Diretziones\' a pustis de àere carcau unu resurtau o unu prefèrridu.
+\n\nSa destinatzione est sinnada in sa mapa cun una bandera in colore arantzu e OsmAnd at a ammustrare sa distàntzia de lòmpida e sa diretzione pro la segudare in lìnia d\'àera (cun unu triàngulu arantzu).
+\n\nPodes ischertare \'Avia nàvigu\' pro pedire ad OsmAnd de ti ghiare finas a sa destinatzione impreande avisos vocales (si sunt abilitados), etc. Si nono ischerta \'Ammustra àndala\' pro otènnere una ghia fissa sena agiornamentos.
+\n\nPro ammustrare un\'àndala pro sa destinatzione ischertada dae unu puntu diferente dae su in su cale ses, ischerta su puntu in sa mapa e carca \'Diretziones dae\'.
+\n\nSi as a impreare \'Diretziones dae\' paris cun \'Avia nàvigu\', OsmAnd at a colare a sa positzione tua in pessu de l\'àere agatada (custu permìtidi de aviare su nàvigu fintzas prima de connòschere sa positzione in ue ses), mentres \'Diretziones dae\' paris cun \'Ammustra àndala\' at a ammustrare petzi s\'àndala dae unu puntu calechisiat sena agiornamentos imbenientes. "</string>
 	</resources>
