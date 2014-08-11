@@ -1836,7 +1836,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="loading_smth">S\'està carregant %1$s…</string>
     <string name="map_widget_plain_time">Hora actual</string>
     <string name="gpx_wpt">Fita</string>
-    <string name="selected_gpx_info_show">\n\n\nPremeu i manteniu per veure al mapa</string>
+    <string name="selected_gpx_info_show">\n\nPremeu i manteniu per veure al mapa</string>
     <string name="delay_navigation_start">Iniciar automàticament la navegació turn-by-turn</string>
     <string name="selected">seleccionat</string>
     <string name="gpx_split_interval">Divideix l\'interval</string>
