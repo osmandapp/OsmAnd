@@ -1927,7 +1927,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_connect">~에 연결</string>
     <string name="osmo_create_group">그룹 만들기</string>
     <string name="osmo_server_operation_failed">OsMo 서버 작업 실패</string>
-    <string name="osmo_activity">OpenStreetMap의 모니터링</string>
+    <string name="osmo_activity">OpenStreetMap 모니터링</string>
     <string name="osmo_enable_tracker">내 위치 전송하기</string>
     <string name="osmo_control">OsMo 빠른 접근</string>
     <string name="local_index_mi_export">내보내기</string>
