@@ -1478,9 +1478,9 @@
 	</string>
     <string name="osmand_srtm_long_description_1000_chars">Aquest connector proporciona corbes de nivell que es poden veure als mapes locals de OsmAnd. Les dades globals (entre 70 graus nort i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració  entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
     <string name="keep_and_add_destination_point">Afegir com punt de destinació</string>
-    <string name="calculate_osmand_route_without_internet">Calcular segment de ruta OsmAnd sense internet</string>
-    <string name="gpx_option_calculate_first_last_segment">Calcular ruta OsmAnd pel primer i pel darrer segment de la ruta</string>
-    <string name="use_displayed_track_for_navigation">Vols seguir el camí visualitzat per la navegació?</string>
+    <string name="calculate_osmand_route_without_internet">Calcula un segment de ruta a l\'OsmAnd sense Internet</string>
+    <string name="gpx_option_calculate_first_last_segment">Calcula una ruta a l\'OsmAnd pels seus segments primer i darrer</string>
+    <string name="use_displayed_track_for_navigation">Voleu utilitzar la visualització de la traça per la navegació?</string>
     <string name="tip_recent_changes_1_7_1_t">Canvis a la 1.7:
     \n\t* IMPORTANT els mapes han de ser més recents de Febrer 2014.
 	\n\t* Navegació millorada completament (rapidesa i  precisió) - 
@@ -1495,8 +1495,8 @@
     <string name="index_item_nation_addresses">adreces del mateix país</string>
 	<string name="index_item_world_altitude_correction">Correcció d\'altitud mundial</string>
 	<string name="index_item_world_bitcoin_payments">Llocs amb pagament bitcoin al món</string>
-	<string name="index_item_world_basemap">Mapa genèric del món</string>
-    <string name="index_item_world_ski">Mapa d\'esquí mundial</string>
+	<string name="index_item_world_basemap">Mapa general del món</string>
+    <string name="index_item_world_ski">Mapa mundial d\'esquí</string>
     <string name="lang_hr">Croat</string>
     <string name="lang_zh">Xinès</string>
     <string name="lang_pt_br">Portuguès (Brasil)</string>
@@ -1504,7 +1504,7 @@
 	<string name="lang_af">Afrikaans</string>
 	<string name="lang_hy">Armeni</string>
 	<string name="lang_eu">Basc</string>
-	<string name="lang_be">belarús</string>
+	<string name="lang_be">Bielorús</string>
 	<string name="lang_bs">Bosnià</string>
 	<string name="lang_bg">Búlgar</string>
 	<string name="lang_ca">Català</string>
@@ -1536,8 +1536,8 @@
 	<string name="lang_cy">Gal·lès</string>
 	<string name="index_name_canada">Amèrica del Nord - Canadà</string>
     <string name="index_name_italy">Europa - Itàlia</string>
-    <string name="index_name_gb">Europa -Gran Bretanya</string>
-    <string name="index_item_world_seamarks">Balises marítimes</string>
+    <string name="index_name_gb">Europa - Gran Bretanya</string>
+    <string name="index_item_world_seamarks">Balises marítimes al món</string>
 	<string name="lang_mr">Marathi</string>
 	<string name="lang_no">Noruec</string>
 	<string name="lang_pl">Polonès</string>
@@ -1561,15 +1561,15 @@
 		\n\nLa referència EGM96 (geoide) es una aproximació millor a aquests sistemes locals.
 		\n\nOsmAnd indicarà l\'altitud de les teves ubicacions en el sistema EGM96 quan descarreguis el arxiu \'Correcció Mundial d\'Altituds\' (WW15MGH.DAC) mitjançant \'Opcions\' → \'Gestió d\'arxius de mapes\'. (L\'original és a http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
-    <string name="osmo_settings_uuid">Identificació única de dispositiu</string>
-    <string name="osmo_settings_descr">Configurar paràmetres de monitorització i fixar el canal de seguiment personal</string>
-    <string name="osmo_plugin_description">"Monitorització avançada en temps real OpenStreetMap, veieu http://osmo.mobi. Seguiment d\'altres dispositius així com de ser seguit. Crea grups anònims, comparteix posicions amb els altres membres i permet comunicar-se. Hi ha diferents paràmetres de seguiment puntual així com de seguiment permanent. Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup. Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés. Si us plau, llegiu-ne més a http://osmo.mobi. "</string>
+    <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
+    <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
+    <string name="osmo_plugin_description">"Monitorització avançada en temps real OpenStreetMap, veieu http://osmo.mobi. Seguiment d\'altres dispositius així com de ser seguit. Creeu grups anònims, compartiu ubicacions amb els altres membres i us permet comunicar-vos. Hi ha diferents paràmetres de seguiment puntual així com de seguiment permanent. Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup. Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés. Si us plau, llegiu-ne més a http://osmo.mobi. "</string>
     <string name="osmo_plugin_name">OsMo (Monitorització avançada en temps real)</string>
-    <string name="osmo_settings">OsMo Monitorització OpenStreetMap (beta)</string>
+    <string name="osmo_settings">Monitorització OpenStreetMap d\'OsMo (beta)</string>
    	
     <string name="osmo_io_error">Problema de connexió amb OSMo: </string>
-    <string name="osmo_mode_on">Aturar sessió OsMo</string>    
-    <string name="osmo_mode_off">Iniciar sessió OsMo</string>
+    <string name="osmo_mode_on">Atura la sessió a OsMo</string>    
+    <string name="osmo_mode_off">Inicia la sessió a OsMo</string>
     <string name="osmand_extended_description_4000_chars">
 OsmAnd (OSM Automated Navigation Directions, Guia de Navegació Automatitzada) és un mapa i una aplicació de navegació amb accés a dades de OpenStreetMap (OSM) lliure, de tot el món i d\'una gran qualitat. Totes les dades dels mapes es poden emmagatzemar a la memòria local del dispositiu (o en una targeta) pel seu ús sense connexió. A través del GPS del seu dispositiu, OsmAnd ofereix navegació, amb indicacions òptiques i de veu, per anar en cotxe, moto o caminant. Totes les funciones principals són disponibles tant amb connexió com sense a Internet.
 
@@ -1749,10 +1749,10 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_tracker_id_descr">Prem per veure o compartir la identificació del traçador Utilitzant la identificació del traçador altres dispositius connectats podran monitoritzar tots els moviments d\'aquest aparell. Per desconnectar seleccioni l\'opció Regenerar.</string>
     <string name="osmo_session_token">Testimoni de la sessió: %1$s</string>
     <string name="osmo_auth_pending">S\'està esperant l\'autorització…</string>
-    <string name="osmo_locations_sent">Posicions enviades %1$d (en cua %2$d) </string>
-    <string name="osmo_conn_successfull">Connexió establerta: %1$s </string>
-    <string name="osmo_mode_restart">Reinicia sessió OsMo</string>
-    <string name="osmo_settings_debug">Depura informació</string>
+    <string name="osmo_locations_sent">"%1$d ubicacions enviades (%2$d a la memòria intermèdia) "</string>
+    <string name="osmo_conn_successfull">"S\'ha establert la connexió: %1$s "</string>
+    <string name="osmo_mode_restart">Reinicia la sessió a OsMo</string>
+    <string name="osmo_settings_debug">Informació de depuració</string>
     <string name="hours_ago">hores fa</string>
     <string name="minutes_ago">minuts fa</string>
     <string name="seconds_ago">segons fa</string>
