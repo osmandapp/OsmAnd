@@ -1451,7 +1451,7 @@
 	\n\t* Entrada ràpida en la recerca d\'adreça
 	\n\t* Errors corregits de càlcul de rutes i visualització
     </string>
-    <string name="select_gpx">Selecciona una traça GPX…</string>
+    <string name="select_gpx">Selecciona una traça GPX …</string>
     <string name="route_descr_select_destination">Selecciona Destí</string>
     <string name="route_descr_select_on_map">Selecciona al mapa …</string>
     <string name="route_descr_favorite">Favorita …</string>
