@@ -1748,7 +1748,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_tracker_id">Identificació personal del traçador</string>
     <string name="osmo_tracker_id_descr">Prem per veure o compartir la identificació del traçador Utilitzant la identificació del traçador altres dispositius connectats podran monitoritzar tots els moviments d\'aquest aparell. Per desconnectar seleccioni l\'opció Regenerar.</string>
     <string name="osmo_session_token">Testimoni de la sessió: %1$s</string>
-    <string name="osmo_auth_pending">S\'està esperant l\'autorització...</string>
+    <string name="osmo_auth_pending">S\'està esperant l\'autorització…</string>
     <string name="osmo_locations_sent">Posicions enviades %1$d (en cua %2$d) </string>
     <string name="osmo_conn_successfull">Connexió establerta: %1$s </string>
     <string name="osmo_mode_restart">Reinicia sessió OsMo</string>
