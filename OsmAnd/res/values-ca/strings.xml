@@ -1480,7 +1480,7 @@
     <string name="keep_and_add_destination_point">Afegir com punt de destinació</string>
     <string name="calculate_osmand_route_without_internet">Calcula un segment de ruta a l\'OsmAnd sense Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcula una ruta a l\'OsmAnd pels seus segments primer i darrer</string>
-    <string name="use_displayed_track_for_navigation">Voleu utilitzar la visualització de la traça per la navegació?</string>
+    <string name="use_displayed_track_for_navigation">Voleu utilitzar la traça visualitzada per la navegació?</string>
     <string name="tip_recent_changes_1_7_1_t">Canvis a la 1.7:
     \n\t* IMPORTANT els mapes han de ser més recents de Febrer 2014.
 	\n\t* Navegació millorada completament (rapidesa i  precisió) - 
