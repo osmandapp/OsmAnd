@@ -1451,7 +1451,7 @@
 	\n\t* Entrada ràpida en la recerca d\'adreça
 	\n\t* Errors corregits de càlcul de rutes i visualització
     </string>
-    <string name="select_gpx">Selecciona traça GPX …</string>
+    <string name="select_gpx">Selecciona una traça GPX…</string>
     <string name="route_descr_select_destination">Selecciona Destí</string>
     <string name="route_descr_select_on_map">Selecciona al mapa …</string>
     <string name="route_descr_favorite">Favorita …</string>
@@ -1477,7 +1477,7 @@
 		\n\t* Suport rellotges Pebble
 	</string>
     <string name="osmand_srtm_long_description_1000_chars">Aquest connector proporciona corbes de nivell que es poden veure als mapes locals de OsmAnd. Les dades globals (entre 70 graus nort i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració  entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
-    <string name="keep_and_add_destination_point">Afegir com punt de destinació</string>
+    <string name="keep_and_add_destination_point">Afegeix com a punt de destinació</string>
     <string name="calculate_osmand_route_without_internet">Calcula un segment de ruta a l\'OsmAnd sense Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcula una ruta a l\'OsmAnd pels seus segments primer i darrer</string>
     <string name="use_displayed_track_for_navigation">Voleu utilitzar la traça visualitzada per la navegació?</string>
