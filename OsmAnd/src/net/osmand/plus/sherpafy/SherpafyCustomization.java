@@ -284,7 +284,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	@Override
 	public void prepareOptionsMenu(MapActivity mapActivity, ContextMenuAdapter adapter) {
 		
-		filter(adapter, R.string.exit_Button, R.string.favorites_Button, R.string.menu_layers,
+		filter(adapter, R.string.exit_Button, R.string.menu_layers,
 				R.string.cancel_navigation, R.string.cancel_route, R.string.clear_destination,
 				R.string.get_directions, 
 				R.string.menu_mute_on, R.string.menu_mute_off,
