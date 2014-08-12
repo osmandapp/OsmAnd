@@ -59,7 +59,7 @@
 	
 	<string name="rendering_out_of_memory">선택 영역을 표시할 충분한 프로세스 메모리가 없습니다</string>
 	<string name="use_fluorescent_overlays">형광색상 중첩(오버레이)</string>
-	<string name="use_fluorescent_overlays_descr">트랙과 루트를 표시하기 위해 형광색상을 사용합니다</string>
+	<string name="use_fluorescent_overlays_descr">트랙과 경로를 표시하기 위해 형광색상을 사용합니다</string>
 	<string name="offline_edition">오프라인 편집</string>
 	<string name="offline_edition_descr">오프라인 편집을 항상 사용합니다</string>
 
@@ -607,7 +607,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	
 	<string name="context_menu_item_search_poi">POI 검색</string>
 	
-	<string name="use_trackball_descr">맵을 이동하는 데 트랙볼을 사용합니다</string>
+	<string name="use_trackball_descr">지도를 이동하는데 트랙볼을 사용합니다</string>
 	<string name="use_trackball">트랙볼 사용</string>
 	<string name="background_service_wait_int_descr">위치를 찾는 최대 대기시간을 설정합니다</string>
 	<string name="background_service_wait_int">최대 대기시간</string>
@@ -773,7 +773,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="additional_settings">추가 설정</string>
     <string name="settings">설정</string>
     <string name="save_current_track_descr">현재의 GPX트랙을 SD 카드에 저장합니다</string>
-    <string name="save_current_track">현재의 GPX트랙을 저장합니다</string>
+    <string name="save_current_track">현재의 GPX트랙을 저장</string>
     <string name="save_track_interval_descr">GPX트랙을 저장하는 시간 주기를 선택합니다</string>
     <string name="save_track_interval">트랙로깅 간격</string>
     <string name="save_track_to_gpx_descrp">경로는 날짜 단위로 구분된 폴더에 저장됩니다</string>
@@ -1062,7 +1062,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="lang_pt">포르투갈어</string>
 	<string name="lang_sl">슬로베니아어</string>
 	<string name="lang_cy">웨일스어</string>
-	<string name="route_preferences">경로 선호도</string>
+	<string name="route_preferences">경로 기본 설정</string>
     <string name="guidance_preferences_descr">경로탐색 선호도</string>
     <string name="disable_complex_routing_descr">자동차 경로탐색에 대한 2길 라우팅 사용불능</string>
     <string name="app_modes_choose_descr">앱에서 볼 수있는 사용자 프로필를 선택합니다</string>
@@ -1154,7 +1154,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
          \n\t* 지도 화면에서 좌상단 버튼는  메뉴버튼을 대체
     </string>
     <string name="monitoring_settings">로깅 서비스</string>
-    <string name="monitoring_settings_descr">트랙을 기록하는 방법을 구성합니다</string>
+    <string name="monitoring_settings_descr">여행을 기록하는 방법을 구성합니다</string>
     <string name="osmand_monitoring_plugin_description">절전모드(스크린 끄기)에서 트래킹 및 경로탐색 활성화, 주기적으로 GPS 장치가 작동중일 때 . 표시 설정은 로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 트랙을 기록하는 설비 가능.</string>
     <string name="osmand_monitoring_plugin_name">로깅 서비스</string>
     <string name="osmand_background_plugin_description">주기적으로 GPS 장치를 깨어 절전모드(스크린 끄기)에서 트래킹 및 경로탐색을 가능하게 하는 설정 표시.</string>
@@ -1610,10 +1610,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 <string name="tip_recent_changes_1_7_1_t">"Changes in 1.7:
 \n\t* 중요한 지도는 2014년 2월 보다 새로운 지도 이어야 한다.
 \n\t* 완전히 업데이트된 길찾기(빠르고 정확하게).
-\n\t* 루트 플래닝에서 새로운 화면(더 직관적이고 더 강력하게).
-\n\t* 주의! GPS 루트파일은 루트 설정 버튼으로 이용할 수 있다.
+\n\t* 경로 플래닝에서 새로운 화면(더 직관적이고 더 강력하게).
+\n\t* 주의! GPS 경로파일은 경로설정 버튼으로 이용할 수 있다.
 \n\t* 길안내모드에서 자동 숨김 버튼.
-\n\t* GPX 루트파일의 첫 포인트에서 오프라인 루트를 계산.
+\n\t* GPX 경로파일의 첫 포인트에서 오프라인 경로를 계산.
 \n\t* 터널에서 시뮬레이션 활성화.
 \n\t* 많은 UX 개선 및 사용성 고정.
 \n\t* 음성 속도 접근성 설정. "</string>
@@ -1852,9 +1852,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 		[지도 소스] 아래에 미리 로드된 오프라인 벡터 지도를 사용하여 선택할 수 있다.
 		OsmAnd 는 또한 사용자 지도를 지원한다.
 	</string>
-	<string name="tip_app_mode_t_v2">OsmAnd 는  다른 사용 사례에 대해 서로 다른 (사용자 정의) 애플리케이션 프로파일을 지원합니다.
-		 당신은 지도 화면 (아이콘 자동차, 자전거 또는 보행자 )의 왼쪽 하단 모서리에 있는 프로필 버튼을 통해 프로필을 변경하거나 루트(\'전송 모드\')을 만들 때 할 수 있습니다.
-	</string>
+	<string name="tip_app_mode_t_v2">"OsmAnd 는 다른 사용 사례에 대해 서로 다른 (사용자 정의) 앱 프로필을 지원합니다. 지도 화면 (아이콘 자동차, 자전거 또는 보행자 )의 왼쪽 하단 모서리에 있는 프로필 버튼을 통해 프로필을 변경하거나 경로(\'전송 모드\')을 만들 때 할 수 있습니다. "</string>
 	<string name="tip_search_t">[위치사용-&gt;가까운 장소 검색] 메뉴를 통해서 지도에서 장소를 직접 검색할 수 있습니다. 또는 [메뉴-&gt;검색]을 통해서 화면에서 검색할 수 도 있습니다.
 		\n\n검색화면은 검색을 위한 템플릿을 제공합니다
 		\n\t* 주소로
@@ -1968,7 +1966,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="my_favorites">내 즐겨찾기</string>
     <string name="my_data_Button">내 장소</string>
     <string name="my_data_activity">내 장소</string>
-    <string name="gpx_info_subtracks">하위트랙 : %1$s </string>
+    <string name="gpx_info_subtracks">"서브트랙 : %1$s "</string>
 	<string name="gpx_info_distance">거리: %1$s (%2$s points) </string>
 	<string name="gpx_info_start_time">시작 시간: %1$tF,  %1$tR </string>
 	<string name="gpx_info_end_time">종료 시간: %1$tF,  %1$tR </string>
@@ -1982,7 +1980,8 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="gpx_selection_number_of_points"> %1$s 포인트</string>
     <string name="gpx_selection_point">포인트 %1$s</string>
     <string name="gpx_selection_current_track">기록</string>
-    <string name="gpx_selection_route_points">%1$s \n 루트 포인트 %2$s</string>
+    <string name="gpx_selection_route_points">%1$s
+\n 경로 포인트 %2$s</string>
     <string name="gpx_selection_points">%1$s\n 포인트</string>
     <string name="gpx_selection_track">%1$s\n GPX트랙 %2$s</string>
     <string name="gpx_available_current_track">현재 기록중인 GPX트랙</string>
@@ -2011,7 +2010,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_auth_error_short">인증 실패</string>
     <string name="osmo_auth_error">OsMo 인증 오류가 발생 했습니다: %1$s.\n임시로 서비스가 다운되었거나 또는 등록 만료가 되었습니다.\n신규 등록을 진행 하시겠습니까?</string>
     <string name="osmo_group_by_invite">메시지를 입력하세요</string>
-    <string name="osmo_group_information_desc">" -모든 그룹은 공용입니다! 익명으로 하려면 트랙커 id 통해 직접 장치를 연결 합니다.\n -그룹는 16 명까지 등록 할 수 있습니다.\n -비활동적인 그룹이나 또는 2 주 동안 단 1 사람만  활동한 경우, 그룹는 삭제 됩니다.\n -컨트롤 그룹으로 그룹 입구를 제한할 수 있습니다. 관리 콘솔에 가는 것이 필요합니다.
+    <string name="osmo_group_information_desc">" -모든 그룹은 공용입니다! 익명으로 하려면 트랙커 id 통해 직접 장치를 연결 합니다.\n -그룹는 16 명까지 등록 할 수 있습니다.\n -비활동적인 그룹이나 또는 2 주 동안 단 1 사람만  활동한 경우, 그룹는 삭제 됩니다.\n -컨트롤 그룹으로 그룹 입장을 제한할 수 있습니다. 관리 콘솔에 가는 것이 필요합니다.
 \n -그룹을 만들고 싶으면 http://osmo.mobi 에 접속하세요"</string>
     <string name="osmo_group_information">그룹을 만들기 전에 읽어 보시기 바랍니다!</string>
     <string name="osmo_not_signed_in">OsMo 로그인 실패</string>
