@@ -1790,7 +1790,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_connect">Verbind met</string>
     <string name="osmo_create_group">Maak een nieuwe groep</string>
     <string name="osmo_server_operation_failed">OsMo server probleem</string>
-    <string name="osmo_activity">OsMo-monitor</string>
+    <string name="osmo_activity">OpenStreetMap monitoring (OsMo)</string>
     <string name="osmo_enable_tracker">Verzend mijn posities</string>
     <string name="osmo_control">OsMo snelle toegang</string>
     <string name="local_index_mi_export">Exporteer</string>
@@ -1940,4 +1940,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 <string name="av_camera_pic_size">Camera Beeldformaat</string>
 	<string name="av_camera_pic_size_descr">Selecteer interne camera beeldformaat</string>
     <string name="announce_nearby_favorites">Meld favorieten in de buurt</string>
-</resources>
+<string name="rendering_value_browse_map_name">Bekijk kaart</string>  
+    <string name="rendering_value_car_name">Auto</string>
+    <string name="rendering_value_bicycle_name">Fiets</string>
+    <string name="rendering_value_pedestrian_name">Voetganger</string>
+    </resources>

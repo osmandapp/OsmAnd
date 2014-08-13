@@ -7,6 +7,7 @@ import java.util.Map;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.activities.LocalIndexesActivity;
@@ -16,6 +17,7 @@ import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.download.DownloadActivityType;
 import android.app.Activity;
 import android.view.Window;
@@ -23,15 +25,14 @@ import android.view.Window;
 public class OsmAndAppCustomization {
 	
 	protected OsmandApplication app;
+	protected OsmandSettings osmandSettings;
 
 	public void setup(OsmandApplication app) {
 		this.app = app;
-	}
-	
-	public OsmandSettings createSettings(SettingsAPI api) {
-		return new OsmandSettings(app, api);
+		this.osmandSettings = new OsmandSettings(app, new net.osmand.plus.api.SettingsAPIImpl(app));
 	}
 
+	public OsmandSettings getOsmandSettings(){ return osmandSettings;}
 	// Main menu
 	public boolean checkExceptionsOnStart() {
 		return true;
@@ -110,5 +111,4 @@ public class OsmAndAppCustomization {
 	public String getIndexesUrl() {
 		return "http://"+IndexConstants.INDEX_DOWNLOAD_DOMAIN+"/get_indexes?gzip&" + Version.getVersionAsURLParam(app); //$NON-NLS-1$;
 	}
-
 }

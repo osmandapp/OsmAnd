@@ -1541,7 +1541,7 @@
 	<string name="share_route_as_gpx">Поделиться маршрутом используя файл GPX</string>
 	<string name="osmo_settings_uuid">Ключ доступа</string>
     <string name="osmo_settings_descr">Настройка параметров мониторинга и установка персонального канала мониторинга</string>
-    <string name="osmo_plugin_description">OpenStreetMap Monitoring - продвинутый живой мониторинг с множеством средств удалённого контроля http://osmo.mobi</string>
+    <string name="osmo_plugin_description">OpenStreetMap Мониторинг - продвинутый живой мониторинг с множеством средств удалённого контроля http://osmo.mobi</string>
     <string name="osmo_plugin_name">OsMo (Продвинутый онлайн-мониторинг)</string>
     <string name="osmo_settings">OpenStreetMap Мониторинг</string>
    	<string name="navigation_intent_invalid">Неправильный формат: %s</string>
@@ -1636,7 +1636,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_track_interval">Интервал отправки</string>
 	<string name="osmo_group">Группа OsMo</string>
     <string name="osmo_track_interval_descr">Выберите временной интервал для отправки местоположения</string>
-    <string name="osmo_activity">OpenStreetMap-Мониторинг</string>
+    <string name="osmo_activity">OpenStreetMap Мониторинг</string>
     <string name="osmo_share_current_session">Поделиться текущей сессией в браузере</string>
     <string name="osmo_share_session">Поделиться сессией</string>
     <string name="osmo_session_id_share">URL сессии для отслеживания устройства (%1$s)</string>
@@ -1792,4 +1792,8 @@ OsmAnd - открытый источник и активно развается.
     <string name="rendering_attr_coloredBuildings_name">Цветные здания</string>
     <string name="hide_all_waypoints">Удалить все</string>
     <string name="announce_nearby_favorites">Объявлять ближайшие избранные</string>
-</resources>
+<string name="rendering_value_browse_map_name">Обзор карты</string>  
+    <string name="rendering_value_car_name">Автомобиль</string>
+    <string name="rendering_value_bicycle_name">Велосипед</string>
+    <string name="rendering_value_pedestrian_name">Пешеход</string>
+    </resources>

@@ -1799,7 +1799,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="osmo_leave_confirmation_msg">Ar norite atsijungti nuo grupės %1$s?</string>
     <string name="osmo_specify_tracker_id">Prašome nurodyti id</string>
     <string name="arrival_distance_factor_early">Anksti</string>
-    <string name="arrival_distance_factor_normally">Normaliai</string>
+    <string name="arrival_distance_factor_normally">Įprastai</string>
     <string name="arrival_distance_factor_late">Vėlai</string>
     <string name="arrival_distance_factor_at_last">Paskutiniuose metruose</string>
     <string name="rendering_attr_coloredBuildings_name">Spalvoti pastatai</string>
@@ -1809,4 +1809,8 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 <string name="av_camera_pic_size">Nuotraukos dydis</string>
 	<string name="av_camera_pic_size_descr">Pasirinkti vidinės kameros nuotraukos dydį</string>
     <string name="announce_nearby_favorites">Pranešti apie artimiausias įsimintas vietas</string>
-</resources>
+<string name="rendering_value_browse_map_name">Naršyti žemėlapį</string>  
+    <string name="rendering_value_car_name">Automobilis</string>
+    <string name="rendering_value_bicycle_name">Dviratis</string>
+    <string name="rendering_value_pedestrian_name">Pėstysis</string>
+    </resources>

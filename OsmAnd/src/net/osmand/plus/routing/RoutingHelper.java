@@ -11,21 +11,14 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.*;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.SearchOnTheRouteHelper;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.sherpafy.SherpafyCustomization;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
@@ -535,9 +528,10 @@ public class RoutingHelper {
 		ArrayList<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
 		if (app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get()){
 			locationPoints.addAll(app.getFavorites().getFavouritePoints());
+			locationPoints.addAll(app.getAppCustomization().getFavorites());
 		}
 		locationPoints.addAll(res.getLocationPoints());
-		app.getLocationProvider().setVisibleLocationPoints(locationPoints);
+		app.getWaypointHelper().setVisibleLocationPoints(locationPoints);
 		final boolean newRoute = !this.route.isCalculated();
 		route = res;
 		if (isFollowingMode) {

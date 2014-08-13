@@ -1451,10 +1451,10 @@
 	\n\t* Entrada ràpida en la recerca d\'adreça
 	\n\t* Errors corregits de càlcul de rutes i visualització
     </string>
-    <string name="select_gpx">Selecciona traça GPX …</string>
-    <string name="route_descr_select_destination">Selecciona Destí</string>
+    <string name="select_gpx">Selecciona una traça GPX …</string>
+    <string name="route_descr_select_destination">Selecciona un destí</string>
     <string name="route_descr_select_on_map">Selecciona al mapa …</string>
-    <string name="route_descr_favorite">Favorita …</string>
+    <string name="route_descr_favorite">Preferida …</string>
     <string name="route_preferences">Preferències de ruta</string>
     <string name="route_info">Informació de ruta</string>
     <string name="tip_recent_changes_1_3_t">Canvis a la 1.3:
@@ -1477,10 +1477,10 @@
 		\n\t* Suport rellotges Pebble
 	</string>
     <string name="osmand_srtm_long_description_1000_chars">Aquest connector proporciona corbes de nivell que es poden veure als mapes locals de OsmAnd. Les dades globals (entre 70 graus nort i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració  entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
-    <string name="keep_and_add_destination_point">Afegir com punt de destinació</string>
-    <string name="calculate_osmand_route_without_internet">Calcular segment de ruta OsmAnd sense internet</string>
-    <string name="gpx_option_calculate_first_last_segment">Calcular ruta OsmAnd pel primer i pel darrer segment de la ruta</string>
-    <string name="use_displayed_track_for_navigation">Vols seguir el camí visualitzat per la navegació?</string>
+    <string name="keep_and_add_destination_point">Afegeix com a punt de destinació</string>
+    <string name="calculate_osmand_route_without_internet">Calcula un segment de ruta a l\'OsmAnd sense Internet</string>
+    <string name="gpx_option_calculate_first_last_segment">Calcula una ruta a l\'OsmAnd pels seus segments primer i darrer</string>
+    <string name="use_displayed_track_for_navigation">Voleu utilitzar la traça visualitzada per la navegació?</string>
     <string name="tip_recent_changes_1_7_1_t">Canvis a la 1.7:
     \n\t* IMPORTANT els mapes han de ser més recents de Febrer 2014.
 	\n\t* Navegació millorada completament (rapidesa i  precisió) - 
@@ -1492,11 +1492,11 @@
 	\n\t* Moltes millores a la Interfície d\'Usuari i correccions d\'usabilitat
 	\n\t* Configuració de accessibilitat en la velocitat de pronuncia
     </string>
-    <string name="index_item_nation_addresses">adreces del mateix país</string>
+    <string name="index_item_nation_addresses">adreces per tot el país</string>
 	<string name="index_item_world_altitude_correction">Correcció d\'altitud mundial</string>
 	<string name="index_item_world_bitcoin_payments">Llocs amb pagament bitcoin al món</string>
-	<string name="index_item_world_basemap">Mapa genèric del món</string>
-    <string name="index_item_world_ski">Mapa d\'esquí mundial</string>
+	<string name="index_item_world_basemap">Mapa general del món</string>
+    <string name="index_item_world_ski">Mapa mundial d\'esquí</string>
     <string name="lang_hr">Croat</string>
     <string name="lang_zh">Xinès</string>
     <string name="lang_pt_br">Portuguès (Brasil)</string>
@@ -1504,13 +1504,13 @@
 	<string name="lang_af">Afrikaans</string>
 	<string name="lang_hy">Armeni</string>
 	<string name="lang_eu">Basc</string>
-	<string name="lang_be">belarús</string>
-	<string name="lang_bs">Bosni</string>
+	<string name="lang_be">Bielorús</string>
+	<string name="lang_bs">Bosnià</string>
 	<string name="lang_bg">Búlgar</string>
 	<string name="lang_ca">Català</string>
 	<string name="lang_cs">Txec</string>
 	<string name="lang_da">Danès</string>
-	<string name="lang_nl">Neerlandès</string>
+	<string name="lang_nl">Holandès</string>
 	<string name="lang_fi">Finès</string>
 	<string name="lang_fr">Francès</string>
 	<string name="lang_ka">Georgià</string>
@@ -1523,7 +1523,7 @@
 	<string name="lang_it">Italià</string>
 	<string name="lang_ja">Japonès</string>
 	<string name="lang_ko">Coreà</string>
-	<string name="lang_lv">Letò</string>
+	<string name="lang_lv">Letó</string>
 	<string name="lang_lt">Lituà</string>
 	<string name="lang_ru">Rus</string>
 	<string name="lang_sk">Eslovac</string>
@@ -1531,17 +1531,17 @@
 	<string name="lang_es">Castellà</string>
 	<string name="lang_sv">Suec</string>
 	<string name="lang_tr">Turc</string>
-	<string name="lang_uk">Ucrainès</string>
+	<string name="lang_uk">Ucraïnès</string>
 	<string name="lang_vi">Vietnamita</string>
-	<string name="lang_cy">Gal·les</string>
+	<string name="lang_cy">Gal·lès</string>
 	<string name="index_name_canada">Amèrica del Nord - Canadà</string>
     <string name="index_name_italy">Europa - Itàlia</string>
-    <string name="index_name_gb">Europa -Gran Bretanya</string>
-    <string name="index_item_world_seamarks">Balises marítimes</string>
+    <string name="index_name_gb">Europa - Gran Bretanya</string>
+    <string name="index_item_world_seamarks">Balises marítimes al món</string>
 	<string name="lang_mr">Marathi</string>
 	<string name="lang_no">Noruec</string>
 	<string name="lang_pl">Polonès</string>
-	<string name="lang_pt">Portugès</string>
+	<string name="lang_pt">Portuguès</string>
 	<string name="lang_ro">Romanès</string>
 	<string name="tip_recent_changes_0_6_6_t">Darrers canvis a 0.6.6: 
 		\n\t- Motor de síntesi de veu en la navegació
@@ -1561,15 +1561,15 @@
 		\n\nLa referència EGM96 (geoide) es una aproximació millor a aquests sistemes locals.
 		\n\nOsmAnd indicarà l\'altitud de les teves ubicacions en el sistema EGM96 quan descarreguis el arxiu \'Correcció Mundial d\'Altituds\' (WW15MGH.DAC) mitjançant \'Opcions\' → \'Gestió d\'arxius de mapes\'. (L\'original és a http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
-    <string name="osmo_settings_uuid">Identificació única de dispositiu</string>
-    <string name="osmo_settings_descr">Configurar paràmetres de monitorització i fixar el canal de seguiment personal</string>
-    <string name="osmo_plugin_description">"Monitorització avançada en temps real OpenStreetMap, veieu http://osmo.mobi. Seguiment d\'altres dispositius així com de ser seguit. Crea grups anònims, comparteix posicions amb els altres membres i permet comunicar-se. Hi ha diferents paràmetres de seguiment puntual així com de seguiment permanent. Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup. Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés. Si us plau, llegiu-ne més a http://osmo.mobi. "</string>
+    <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
+    <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
+    <string name="osmo_plugin_description">"Monitorització avançada en temps real OpenStreetMap, veieu http://osmo.mobi. Seguiment d\'altres dispositius així com de ser seguit. Creeu grups anònims, compartiu ubicacions amb els altres membres i us permet comunicar-vos. Hi ha diferents paràmetres de seguiment puntual així com de seguiment permanent. Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup. Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés. Si us plau, llegiu-ne més a http://osmo.mobi. "</string>
     <string name="osmo_plugin_name">OsMo (Monitorització avançada en temps real)</string>
-    <string name="osmo_settings">OsMo Monitorització OpenStreetMap (beta)</string>
+    <string name="osmo_settings">Monitorització OpenStreetMap d\'OsMo (beta)</string>
    	
     <string name="osmo_io_error">Problema de connexió amb OSMo: </string>
-    <string name="osmo_mode_on">Aturar sessió OsMo</string>    
-    <string name="osmo_mode_off">Iniciar sessió OsMo</string>
+    <string name="osmo_mode_on">Atura la sessió a OsMo</string>    
+    <string name="osmo_mode_off">Inicia la sessió a OsMo</string>
     <string name="osmand_extended_description_4000_chars">
 OsmAnd (OSM Automated Navigation Directions, Guia de Navegació Automatitzada) és un mapa i una aplicació de navegació amb accés a dades de OpenStreetMap (OSM) lliure, de tot el món i d\'una gran qualitat. Totes les dades dels mapes es poden emmagatzemar a la memòria local del dispositiu (o en una targeta) pel seu ús sense connexió. A través del GPS del seu dispositiu, OsmAnd ofereix navegació, amb indicacions òptiques i de veu, per anar en cotxe, moto o caminant. Totes les funciones principals són disponibles tant amb connexió com sense a Internet.
 
@@ -1746,63 +1746,62 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_auto_send_locations_descr">Inici automàtic del registre de la traça i del enviament de les posicions tot just iniciar l\'aplicació</string>
     <string name="osmo_auto_send_locations">Inici automàtic del registre de la traça</string>
     <string name="osmo_tracker_id">Identificació personal del traçador</string>
-    <string name="osmo_tracker_id_descr">Prem per veure o compartir la identificació del traçador
-	Utilitzant la identificació del traçador altres dispositius connectats podran monitoritzar tots els moviments d\'aquest aparell. Per desconnectar seleccioni l\'opció Regenerar.</string>
-    <string name="osmo_session_token">Símbol de sessió: %1$s</string>
-    <string name="osmo_auth_pending">Esperant autorització...</string>
-    <string name="osmo_locations_sent">Posicions enviades %1$d (en cua %2$d) </string>
-    <string name="osmo_conn_successfull">Connexió establerta: %1$s </string>
-    <string name="osmo_mode_restart">Reinicia sessió OsMo</string>
-    <string name="osmo_settings_debug">Depura informació</string>
-    <string name="hours_ago">hores fa</string>
-    <string name="minutes_ago">minuts fa</string>
-    <string name="seconds_ago">segons fa</string>
+    <string name="osmo_tracker_id_descr">Prem per veure o compartir la identificació del traçador. Utilitzant la identificació del traçador altres dispositius connectats podran monitoritzar tots els moviments d\'aquest aparell. Per desconnectar seleccioni l\'opció Regenerar.</string>
+    <string name="osmo_session_token">Testimoni de la sessió: %1$s</string>
+    <string name="osmo_auth_pending">S\'està esperant l\'autorització…</string>
+    <string name="osmo_locations_sent">"%1$d ubicacions enviades (%2$d a la memòria intermèdia) "</string>
+    <string name="osmo_conn_successfull">"S\'ha establert la connexió: %1$s "</string>
+    <string name="osmo_mode_restart">Reinicia la sessió a OsMo</string>
+    <string name="osmo_settings_debug">Informació de depuració</string>
+    <string name="hours_ago">hores abans</string>
+    <string name="minutes_ago">minuts abans</string>
+    <string name="seconds_ago">segons abans</string>
     <string name="osmo_connect_to_device_name">Nom d\'usuari</string>
-    <string name="osmo_connect_to_device_tracker_id">Identificador de traça</string>
-    <string name="osmo_connect_to_device">Enllaç amb dispositiu</string>
+    <string name="osmo_connect_to_device_tracker_id">Identificador de la traça</string>
+    <string name="osmo_connect_to_device">Enllaça amb el dispositiu</string>
     
     
     <string name="osmo_connected_devices">Dispositius connectats</string>
-    <string name="osmo_groups">OsMo Grups/Dispositius</string>
+    <string name="osmo_groups">Grups/dispositius d\'OsMo</string>
     <string name="osmo_group_info">Informació</string>
     <string name="osmo_group">Grup OsMo</string>
-    <string name="osmo_group_share">Per connectar amb el grup %2$s, indica l\'identificador de grup (%1$s) o prem %3$s.</string>
-    <string name="osmo_share_connect_device">Permetre el seguiment d\'aquest dispositiu permanentment</string>
-    <string name="osmo_share_current_session">Compartir la posició actual al navegador</string>
-    <string name="osmo_session_not_available">Sessió no disponible, si us plau verifiqui que \'Enviar posicions\' està activat.</string>
-    <string name="osmo_share_session">Compartir la sessió</string>
-    <string name="osmo_session_id_share">URL de la sessió per seguir el dispositiu (%1$s)</string>
-    <string name="osmo_tracker_id_share">Per connectar al dispositiu destí %2$s, especifiqui l\'identificador de seguiment (%1$s)</string>
+    <string name="osmo_group_share">Per connectar amb el grup %2$s, indiqueu l\'identificador de grup (%1$s) o feu clic a %3$s.</string>
+    <string name="osmo_share_connect_device">Permet el seguiment d\'aquest dispositiu permanentment</string>
+    <string name="osmo_share_current_session">Comparteix la sessió actual al navegador</string>
+    <string name="osmo_session_not_available">La sessió no és disponible. Verifiqueu que «Envia les ubicacions» està activat.</string>
+    <string name="osmo_share_session">Comparteix la sessió</string>
+    <string name="osmo_session_id_share">L\'URL de la sessió per seguir el dispositiu (%1$s)</string>
+    <string name="osmo_tracker_id_share">Per connectar al dispositiu objectiu %2$s, feu clic a l\'enllaç %3$s o especifiqueu l\'identificador de seguiment (%1$s)</string>
     <string name="osmo_track_interval">Freqüència de registre</string>
-	<string name="osmo_track_interval_descr">Seleccioneu la freqüència d\'enviament de la posició</string>
+	<string name="osmo_track_interval_descr">Seleccioneu la freqüència d\'enviament de la ubicació</string>
     <string name="int_days">dies</string>
-    <string name="osmo_connect_menu">Connecti</string>
+    <string name="osmo_connect_menu">Connecta</string>
     <string name="osmo_expire_group">Expira en</string>
     <string name="osmo_group_description">Descripció</string>
     <string name="osmo_group_policy">Política</string>
     <string name="osmo_connect_to_group_id">Identificador de grup</string>
     <string name="osmo_group_name">Nom del grup</string>
-    <string name="osmo_connect_to_group">Enllaç al grup</string>
-    <string name="osmo_connect">Connexió a</string>
-    <string name="osmo_create_group">Crear un grup</string>
-    <string name="osmo_server_operation_failed">Fallida del servidor OsMo</string>
-    <string name="osmo_activity">Monitorització OpenStreetMap</string>
-    <string name="osmo_enable_tracker">Enviar les meves ubicacions</string>
-    <string name="osmo_control">Accés ràpid OsMo</string>
+    <string name="osmo_connect_to_group">Enllaça amb el grup</string>
+    <string name="osmo_connect">Connecta a</string>
+    <string name="osmo_create_group">Crea un grup</string>
+    <string name="osmo_server_operation_failed">Ha fallat l\'operació del servidor OsMo</string>
+    <string name="osmo_activity">Monitorització d\'OpenStreetMap</string>
+    <string name="osmo_enable_tracker">Envia les meves ubicacions</string>
+    <string name="osmo_control">Accés ràpid a OsMo</string>
     <string name="local_index_mi_export">Exportar</string>
 	<string name="import_file_favourites">Guardar com arxiu GPX o posar-lo als favorits?</string>
 	<string name="import_save">Guardar</string>
-	<string name="osmo_follow">Seguir</string>
-    <string name="osmo_sign_in">Connectar-se</string>
-    <string name="osmo_create_groups_confirm">Per poder crear grups cal ser un usuari registrat de OsMo.</string>
+	<string name="osmo_follow">Segueix</string>
+    <string name="osmo_sign_in">Inicia una sessió</string>
+    <string name="osmo_create_groups_confirm">Per poder crear grups cal ser un usuari registrat d\'OsMo.</string>
     <string name="osmo_credentials_not_valid">Les vostres credencials OsMo no són vàlides.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Estàs segur de regenerar els identificadors personals? Tots els dispositius que tens connectats ja no et seguiran més.</string>
-    <string name="osmo_regenerate_login_ids">Regenerar la identificació de l\'usuari</string>
-    <string name="osmo_cancel_moving_target">Anul·lar el destí en moviment</string>
-    <string name="osmo_center_location">Centrar a la pantalla</string>
-    <string name="osmo_set_moving_target">Establir com destí en moviment</string>
+    <string name="osmo_regenerate_login_ids_confirm">Esteu segur de voler regenerar els identificadors personals? Tots els dispositius que teniu connectats ja no us podran seguir.</string>
+    <string name="osmo_regenerate_login_ids">Regenera l\'identificador de l\'usuari</string>
+    <string name="osmo_cancel_moving_target">Cancela el seguiment de l\'objectiu en moviment</string>
+    <string name="osmo_center_location">Centra a la pantalla</string>
+    <string name="osmo_set_moving_target">Estableix com a objectiu en moviment</string>
     <string name="osmo_use_server_name">Nom registrat</string>
-    <string name="osmo_connect_to_my_nickname">El teu nick</string>
+    <string name="osmo_connect_to_my_nickname">El vostre àlies</string>
     <string name="osmo_user_name">Usuari</string>
 	<string name="color_red">vermell</string>
 	<string name="color_pink">rosa</string>
@@ -1813,33 +1812,33 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="color_blue">blau</string>
 	<string name="color_green">verd</string>
 	
-    <string name="osmo_edit_device">Canviar propietats d\'usuari</string>
-    <string name="osmo_edit_color">Mostra color</string>
-    <string name="gpx_file_is_empty">La traça GPX està buida</string>
+    <string name="osmo_edit_device">Canvia les propietats de l\'usuari</string>
+    <string name="osmo_edit_color">Mostra el color</string>
+    <string name="gpx_file_is_empty">La traça GPX és buida</string>
     <string name="selected_track">Traces seleccionades</string>
-    <string name="my_tracks">Totes les pistes</string>
-    <string name="my_favorites">El meus favorits</string>
-    <string name="my_data_Button">Els meus llocs</string>
-    <string name="my_data_activity">Els meus llocs</string>
+    <string name="my_tracks">Totes les traces</string>
+    <string name="my_favorites">Preferits</string>
+    <string name="my_data_Button">Llocs personals</string>
+    <string name="my_data_activity">Llocs personals</string>
     <string name="osmo_user_joined">L\'usuari %1$s s\'ha unit al grup %2$s</string>
     <string name="osmo_user_left">L\'usuari %1$s ha deixat el grup %2$s</string>
-    <string name="osmo_show_group_notifications">Veure les notificacions de grup</string>
-    <string name="osmo_show_group_notifications_descr">Veure missatges quan un usuari s\'uneix o deixa el grup</string>
+    <string name="osmo_show_group_notifications">Mostra les notificacions de grup</string>
+    <string name="osmo_show_group_notifications_descr">Mostra missatges quan un usuari s\'uneix o deixa el grup</string>
     <string name="gpx_info_subtracks">Segments: %1$s </string>
-	<string name="gpx_info_waypoints">Punts de pas: %1$s </string>
+	<string name="gpx_info_waypoints">"Fites: %1$s "</string>
 	<string name="gpx_info_distance">Distància: %1$s (%2$s punts) </string>
 	<string name="gpx_info_start_time">Hora d\'inici: %1$tF, %1$tT </string>
-	<string name="gpx_info_end_time">Hora d\'arribada : %1$tF, %1$tT </string>
+	<string name="gpx_info_end_time">"Hora d\'arribada: %1$tF, %1$tT "</string>
 	<string name="gpx_info_average_speed">Velocitat mitjana: %1$s </string>
 	<string name="gpx_info_maximum_speed">Velocitat màxima: %1$s </string>
 	<string name="gpx_info_avg_altitude">Alçada mitjana: %1$s</string>
-	<string name="loading_smth">Carregant %1$s …</string>
+	<string name="loading_smth">S\'està carregant %1$s…</string>
     <string name="map_widget_plain_time">Hora actual</string>
-    <string name="gpx_wpt">Punt de pas</string>
-    <string name="selected_gpx_info_show">\n\nPrémer i mantenir per veure al mapa</string>
-    <string name="delay_navigation_start">Iniciar automàticament la navegació turn-by-turn</string>
+    <string name="gpx_wpt">Fita</string>
+    <string name="selected_gpx_info_show">\n\nPremeu i manteniu per veure al mapa</string>
+    <string name="delay_navigation_start">Inicia automàticament el guiatge turn-by-turn</string>
     <string name="selected">seleccionat</string>
-    <string name="gpx_split_interval">Interval de registre</string>
+    <string name="gpx_split_interval">Divideix l\'interval</string>
     <string name="gpx_info_diff_altitude">Interval d\'altitud: %1$s</string>
 	<string name="gpx_info_asc_altitude">Baixat/pujat: %1$s</string>
     <string name="gpx_timespan">Lapse de temps: %1$s</string>
@@ -1847,23 +1846,23 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="gpx_selection_segment_title">Segment</string>
     <string name="gpx_selection_number_of_points"> %1$s punts</string>
     <string name="gpx_selection_point">Punt %1$s</string>
-    <string name="gpx_selection_current_track">gravant</string>
+    <string name="gpx_selection_current_track">s\'està gravant</string>
     <string name="gpx_selection_route_points">%1$s \nPunts de ruta %2$s</string>
     <string name="gpx_selection_points">%1$s \nPunts</string>
     <string name="gpx_selection_track">%1$s \nTraça %2$s</string>
     <string name="gpx_available_current_track">Traça actual en gravació</string>
-    <string name="save_as_favorites_points">Guarda com grup de preferits</string>
-    <string name="select_destination_and_intermediate_points">Selecciona punts de pas</string>
+    <string name="save_as_favorites_points">Guarda com un grup de preferits</string>
+    <string name="select_destination_and_intermediate_points">Selecciona les fites</string>
     <string name="layer_amenity_label">Etiquetes puntuals</string>
-    <string name="show_zoom_buttons_navigation_descr">Mostra els botons de zoom mentre la navegació</string>
+    <string name="show_zoom_buttons_navigation_descr">Mostra els botons de zoom durant la navegació</string>
     <string name="show_zoom_buttons_navigation">Mostra els botons de zoom</string>
     <string name="visible_element">Mostra al mapa</string>
-    <string name="sort_by_distance">Ordenar per distància</string>
-    <string name="sort_by_name">Ordenar per nom</string>
-    <string name="none_selected_gpx">Cap arxiu GPX seleccionat. Per seleccionar-ne premi i mantingui sobre una traça disponible.</string>
-    <string name="local_index_unselect_gpx_file">No seleccionat</string>
-    <string name="local_index_select_gpx_file">Selecciona per veure</string>
-    <string name="no_index_file_to_download">Res per descarregar, verifiqui la connexió a internet.</string>
+    <string name="sort_by_distance">Ordena per distància</string>
+    <string name="sort_by_name">Ordena per nom</string>
+    <string name="none_selected_gpx">Cap arxiu GPX seleccionat. Per seleccionar-ne un premeu i mantingueu sobre una traça disponible.</string>
+    <string name="local_index_unselect_gpx_file">Desselecciona</string>
+    <string name="local_index_select_gpx_file">Selecciona per mostrar</string>
+    <string name="no_index_file_to_download">No s\'ha trobat res per baixar, verifiqueu la connexió a internet.</string>
     <string name="osmo_gpx_points_downloaded">S\'han baixat %1$s punts OsMo.</string>
     <string name="osmo_auto_connect_descr">Connecta automàticament amb el servei desprès d\'iniciar l\'aplicació</string>
     <string name="osmo_auto_connect">Connexió automàtica</string>
@@ -1872,13 +1871,13 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_not_signed_in">Ha fallat l\'inici de sessió OsMo</string>
     <string name="osmo_group_by_invite">Entreu per convidar</string>
     <string name="osmo_group_information_desc">" - Tots els grups creats són públics! Si es vol ser anònim, afegiu directament els aparells via identificació de Tracker.\n - Dins el grup es poden registrar fins un màxim de 16 persones.\n - Cas d\'inactivitat o d\'activitat d\'una sola persona durant 2 setmanes, el grup serà esborrat.\n - Es pot restringir l\'entrada al grup, a només per invitació, però per controlar el grup es necessitarà accedir a la consola d\'administració.\n - Si us cal crear un grup, però amb altres condicions, contacteu  http://osmo.mobi"</string>
-    <string name="osmo_group_information">Cal que ho llegiu abans de crear un grup!</string>
+    <string name="osmo_group_information">Cal que ho llegiu abans de crear un grup.</string>
     <string name="osmo_auth_error_short">Ha fallat l\'autorització</string>
     <string name="osmo_auth_error">S\'ha trobat un error d\'autorització OsMo: %1$s.\n Pot ser per una caiguda temporal del servei o bé pel venciment del vostre usuari.\n Voleu crear un nou usuari nou?</string>
     <string name="rendering_attr_hideBuildings_name">Oculta els edificis</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Oculta les vies sense circulació de vehicles</string>
     <string name="rendering_attr_hideText_name">Oculta el text</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Amaga tipus de vegetació</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Oculta els boscos i erms</string>
     <string name="rendering_attr_buildings15zoom_name">Edificis al detall 15 de zoom</string>
     <string name="rendering_attr_moreDetailed_name">Més detallat</string>
     <string name="rendering_attr_lessDetailed_name">Menys detallat</string>
@@ -1887,7 +1886,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_attr_showSurfaceGrade_name">Mostra la qualitat de les vies</string>
     <string name="rendering_attr_showSurfaces_name">Mostra el tipus de superfície de les vies</string>
     <string name="rendering_attr_cycleRoutes_name">Mostra vies de ciclista</string>
-    <string name="rendering_attr_showCycleRoutes_name">Mostra vies ciclistes</string>
+    <string name="rendering_attr_showCycleRoutes_name">Mostra les vies ciclistes</string>
     
     <string name="map_preferred_locale_descr">Idioma preferit a les etiquetes del mapa (si no està disponible es canviarà la preferència actual entre l\'anglès i les denominacions locals)</string>
     <string name="map_preferred_locale">Idioma preferit al mapa</string>
@@ -1896,28 +1895,28 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="lang_he">Hebreu</string>
     <string name="forward">Endavant</string>
     <string name="home">Punt inicial</string>
-    <string name="live_monitoring_m_descr">Envia registre de traces a un servei web específic si s\'ha activat la gravació GPX.</string>
+    <string name="live_monitoring_m_descr">Envia el registre de traces a un servei web específic si s\'ha activat la gravació en un GPX.</string>
 	<string name="live_monitoring_m">Registre de traça en línia (cal GPX)</string>
     <string name="live_monitoring_start">Inicia un registre de traça en línia</string>
 	<string name="live_monitoring_stop">Atura el registre de traça en línia</string>
-	<string name="gpx_monitoring_start">Inicia gravació GPX</string>
-	<string name="gpx_monitoring_stop">Atura gravació GPX</string>
+	<string name="gpx_monitoring_start">Inicia la gravació en un GPX</string>
+	<string name="gpx_monitoring_stop">Atura la gravació en el GPX</string>
     <string name="gpx_start_new_segment">Inicia un segment nou</string>
     <string name="lang_fa">Persa</string>
 	<string name="keep_navigation_service">Mantén</string>
 	<string name="stop_navigation_service">Atura</string>
-	<string name="enable_sleep_mode">Activa mode segon pla</string>
+	<string name="enable_sleep_mode">Activa el mode en segon pla</string>
 	<string name="gps_wake_up_timer">Interval d\'activació del GPS</string>
-	<string name="sleep_mode_stop_dialog">Mantenir GPS actiu?</string>
-	<string name="lang_al">Albanés</string>
+	<string name="sleep_mode_stop_dialog">Voleu mantenir el GPS actiu?</string>
+	<string name="lang_al">Albanès</string>
 	<string name="lang_ar">Àrab</string>
 	<string name="lang_sc">Sard</string>
 	<string name="lang_sr">Serbi</string>
 	<string name="lang_zh_CN">Xinès simplificat</string>
 	<string name="lang_zh_TW">Xinès tradicional</string>
-	<string name="rendering_attr_subwayMode_name">Mode soterrat</string>
+	<string name="rendering_attr_subwayMode_name">Mode subterrani</string>
  	<string name="continue_navigation">Continua la navegació</string>
-    <string name="pause_navigation">Suspen la navegació</string>
+    <string name="pause_navigation">Suspèn la navegació</string>
 	<string name="rendering_attr_alpineHiking_name">Perspectiva senderista</string>
     <string name="rendering_attr_alpineHiking_description">Representar els camins segons l\'escala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Sobreposar simbologia senderista</string>
@@ -1935,4 +1934,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="av_camera_pic_size_descr">Triar la mida d\'imatge de la càmera interna</string>
     <string name="hide_all_waypoints">Esborra tot</string>
     <string name="announce_nearby_favorites">Indica preferits propers</string>
-</resources>
+<string name="rendering_value_browse_map_name">Mapa esquemàtic</string>  
+    <string name="rendering_value_car_name">Cotxe</string>
+    <string name="rendering_value_bicycle_name">Bicicleta</string>
+    <string name="rendering_value_pedestrian_name">Vianant</string>
+    </resources>

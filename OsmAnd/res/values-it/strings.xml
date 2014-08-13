@@ -1854,7 +1854,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="gpx_info_maximum_speed">Velocità massima: %1$s </string>
 	<string name="gpx_info_avg_altitude">Altitudine media: %1$s</string>
 	<string name="gpx_info_subtracks">Sottotracce: %1$s </string>
-	<string name="gpx_info_waypoints">Tappe del percorso: $1%s </string>
+	<string name="gpx_info_waypoints">"Tappe del percorso: %1$s "</string>
 	<string name="gpx_info_distance">Distanza: %1$s (%2$s punti) </string>
 	<string name="gpx_info_end_time">Orario di arrivo: %1$tF, %1$tT </string>
 	<string name="gpx_info_diff_altitude">Gamma altitudini: %1$s</string>
@@ -1958,4 +1958,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="av_camera_pic_size">Dimensione foto</string>
 	<string name="av_camera_pic_size_descr">Seleziona la dimensione delle foto scattate</string>
     <string name="announce_nearby_favorites">Annuncia i preferiti nelle vicinanze</string>
-</resources>
+<string name="rendering_value_browse_map_name">Esplorazione mappa</string>  
+    <string name="rendering_value_car_name">Automobile</string>
+    <string name="rendering_value_bicycle_name">Bicicletta</string>
+    <string name="rendering_value_pedestrian_name">Pedone</string>
+    </resources>

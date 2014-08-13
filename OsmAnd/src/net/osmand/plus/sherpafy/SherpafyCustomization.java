@@ -16,7 +16,6 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -24,6 +23,7 @@ import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.api.FileSettingsAPIImpl;
+import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
@@ -40,8 +40,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private static final String SELECTED_TOUR = "selected_tour";
 	private static final String ACCESS_CODE = "access_code";
 	private static final String SELECTED_STAGE = "selected_stage";
-	private static final String VISITED_STAGES = "visited_STAGES";
-	private OsmandSettings originalSettings;
+	private static final String VISITED_STAGES = "visited_stages";
 	private CommonPreference<String> selectedTourPref;
 	private CommonPreference<String> selectedStagePref;
 	private CommonPreference<String> visitedStagesPref;
@@ -51,16 +50,17 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private File toursFolder;
 	private CommonPreference<String> accessCodePref;
 	private List<FavouritePoint> cachedFavorites = new ArrayList<FavouritePoint>();
+	private SettingsAPI originalApi;
 
 	@Override
 	public void setup(OsmandApplication app) {
 		super.setup(app);
-		originalSettings = createSettings(app.getSettings().getSettingsAPI());
-		selectedTourPref = originalSettings.registerStringPreference(SELECTED_TOUR, null).makeGlobal();
-		accessCodePref = originalSettings.registerStringPreference(ACCESS_CODE, "").makeGlobal();
-		toursFolder = new File(originalSettings.getExternalStorageDirectory(), "osmand/tours");
+		originalApi = osmandSettings.getSettingsAPI();
+		selectedTourPref = osmandSettings.registerStringPreference(SELECTED_TOUR, null).makeGlobal();
+		accessCodePref = osmandSettings.registerStringPreference(ACCESS_CODE, "").makeGlobal();
+		toursFolder = new File(osmandSettings.getExternalStorageDirectory(), "osmand/tours");
 	}
-	
+
 	public boolean setAccessCode(String acCode) {
 		acCode = acCode.toUpperCase();
 		if(validate(acCode) || Algorithms.isEmpty(acCode)) {
@@ -69,7 +69,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		}
 		return false;
 	}
-	
+
 	private boolean validate(String acCode) {
 		if (acCode.length() < 3) {
 			return false;
@@ -166,7 +166,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 					}
 				}
 				if (selectedName == null) {
-					app.getSettings().setSettingsAPI(originalSettings.getSettingsAPI());
+					app.getSettings().setSettingsAPI(originalApi);
 				}
 			}
 		}
@@ -289,7 +289,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	@Override
 	public void prepareOptionsMenu(MapActivity mapActivity, ContextMenuAdapter adapter) {
 		
-		filter(adapter, R.string.exit_Button, R.string.favorites_Button, R.string.menu_layers,
+		filter(adapter, R.string.exit_Button, R.string.menu_layers,
 				R.string.cancel_navigation, R.string.cancel_route, R.string.clear_destination,
 				R.string.get_directions, 
 				R.string.menu_mute_on, R.string.menu_mute_off,

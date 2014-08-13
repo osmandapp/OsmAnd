@@ -1809,7 +1809,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_connect">Opret forbindelse til</string>
     <string name="osmo_create_group">Opret gruppe</string>
     <string name="osmo_server_operation_failed">Osmo Server operation mislykkedes</string>
-    <string name="osmo_activity">OpenStreetMap-Overvågning</string>
+    <string name="osmo_activity">OpenStreetMap Overvågning</string>
     <string name="osmo_enable_tracker">Send placeringer</string>
     <string name="osmo_control">OsMo hurtig adgang</string>
     <string name="local_index_mi_export">Eksport</string>
@@ -1942,7 +1942,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="rendering_attr_subwayMode_name">Metrotilstand</string>
  	<string name="continue_navigation">Fortsæt navigation</string>
     <string name="pause_navigation">Pause navigation</string>
-	<string name="rendering_attr_alpineHiking_name">Alpin vandringsvisning</string>
+	<string name="rendering_attr_alpineHiking_name">Alpinvandrings visning</string>
     <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC skala</string>
     <string name="rendering_attr_osmcTraces_name">Vandresymbol overlejring</string>
     <string name="rendering_attr_osmcTraces_description">Generer stier efter OSMC spor</string>
@@ -1959,4 +1959,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 <string name="av_camera_pic_size">Kamera billedstørrelse</string>
 	<string name="av_camera_pic_size_descr">Vælg billedstørrelse for intern kamera</string>
     <string name="announce_nearby_favorites">Meddel om favoritter i nærheden</string>
-</resources>
+<string name="rendering_value_car_name">Bil</string>
+    <string name="rendering_value_bicycle_name">Cykel</string>
+    <string name="rendering_value_pedestrian_name">Fodgænger</string>
+    <string name="rendering_value_browse_map_name">Gennemse kort</string>  
+    </resources>

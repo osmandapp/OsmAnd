@@ -1746,8 +1746,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="osmo_settings_uuid">Jedinečné ID zariadenia</string>
     <string name="osmo_settings_descr">Zmeniť nastavenia monitorovania a nastaviť osobný monitorovací kanál</string>
     <string name="osmo_plugin_description">"OpenStreetMap pokročilé sledovanie naživo, pozrite http://osmo.mobi. Ponúka možnosti sledovania iných zariadení a byť sledovaný. Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania. Anonymné skupiny sú obmedzené na počet dní a pre niektoré funkcie nie je diaľkové ovládanie ani administrátor skupiny. Plne funkčné skupiny sa vytvárajú na webstránke a sú prístupné len registrovaným používateľom. "</string>
-    <string name="osmo_plugin_name">OsMo (Pokročilé sledovanie naživo)</string>
-    <string name="osmo_settings">OsMo sledovanie OpenStreetMap (beta)</string>
+    <string name="osmo_plugin_name">OsMo</string>
+    <string name="osmo_settings">sledovanie OpenStreetMap</string>
    	<string name="keep_informing_never">Nikdy</string>
     <string name="keep_informing_descr">Opakuj navigačné pokyny v pravidelných intervaloch</string>
     <string name="keep_informing">Opakuj navigačné pokyny</string>
@@ -1806,7 +1806,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_group_info">Informácie</string>
     <string name="osmo_group">Skupina v OsMo</string>
     <string name="osmo_sign_in">Prihlásiť sa</string>
-    <string name="osmo_activity">OpenStreetMap-Sledovanie</string>
+    <string name="osmo_activity">OpenStreetMap sledovanie</string>
     <string name="osmo_connect_to_group">Spojiť so skupinou</string>
     <string name="osmo_group_name">Názov skupiny</string>
     <string name="osmo_connect">Pripojiť k</string>
@@ -1961,4 +1961,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 <string name="av_camera_pic_size">Veľkosť fotografie</string>
 	<string name="av_camera_pic_size_descr">Zvoľte veľkosť obrázka interného fotoaparátu</string>
     <string name="announce_nearby_favorites">Oznamovať obľúbené miesta v blízkosti</string>
-</resources>
+<string name="rendering_value_browse_map_name">Štandardná</string>  
+    <string name="rendering_value_car_name">Automobil</string>
+    <string name="rendering_value_bicycle_name">Bicykel</string>
+    <string name="rendering_value_pedestrian_name">Chodec</string>
+    </resources>
