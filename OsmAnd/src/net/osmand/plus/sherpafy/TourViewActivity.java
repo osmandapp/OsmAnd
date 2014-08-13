@@ -8,12 +8,14 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -443,7 +445,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		WptPt point = null;
 		GPXFile gpx = null;
 		customization.selectTour(tour, IProgress.EMPTY_PROGRESS);
-		
+
 		customization.selectStage(stage, IProgress.EMPTY_PROGRESS);
 		if (customization.getSelectedStage() != null) {
 			gpx = customization.getSelectedStage().getGpx();
@@ -462,7 +464,15 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		if (lp != null) {
 			TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
 			targetPointsHelper.navigateToPoint(new LatLon(lp.lat, lp.lon), true, -1, lp.name);
-			getMyApplication().getSettings().navigateDialog();
+			getMyApplication().getSettings().navigateDialog(true);
+		}
+		String mode = stage != null ? stage.getMode() : tour.getMode();
+		if (!Algorithms.isEmpty(mode)) {
+			final ApplicationMode def = getMyApplication().getSettings().getApplicationMode();
+			ApplicationMode am = ApplicationMode.valueOfStringKey(mode, def);
+			if (am != def) {
+				getMyApplication().getSettings().APPLICATION_MODE.set(am);
+			}
 		}
 		if (startOver && point != null) {
 			goToMap(new LatLon(point.lat, point.lon));

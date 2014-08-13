@@ -36,6 +36,7 @@ public class TourInformation {
 	private File imgFile;
 	private List<StageInformation> stageInformation = new ArrayList<TourInformation.StageInformation>();
 	private List<String> maps =new ArrayList<String>();
+	private String mode;
 
 	public TourInformation(File f) {
 		this.folder = f;
@@ -98,11 +99,12 @@ public class TourInformation {
 				String tag = parser.getName();
 				if(tag.equals("tour")) {
 					name = getDefAttribute(parser, "name", name);
+					mode = getDefAttribute(parser, "mode", "");
 					homeUrl = getDefAttribute(parser, "url", "");
 				} else if (tag.equals("stage")) {
-					String name = getDefAttribute(parser, "name", "");
 					stage = new StageInformation(this, stageInformation.size());
-					stage.name = name;
+					stage.name = getDefAttribute(parser, "name", "");
+					stage.mode = getDefAttribute(parser, "mode", "");
 				} else if (tag.equals("prerequisite")) {
 					String map = getDefAttribute(parser, "map", "");
 					if(!Algorithms.isEmpty(map)) {
@@ -333,6 +335,7 @@ public class TourInformation {
 		File itineraryFile;
 		double distance;
 		LatLon startPoint = null;
+		String mode;
 		List<Object> favorites = new ArrayList<Object>();
 		
 		TourInformation tour;
@@ -351,6 +354,13 @@ public class TourInformation {
 				}
 			}
 			return null;
+		}
+		
+		public String getMode() {
+			if(Algorithms.isEmpty(mode)) {
+				return tour.mode;
+			}
+			return mode;
 		}
 		
 		public LatLon getStartPoint() {
@@ -453,6 +463,10 @@ public class TourInformation {
 	
 	public String getHomeUrl() {
 		return homeUrl;
+	}
+
+	public String getMode() {
+		return mode;
 	}
 
 }
