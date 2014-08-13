@@ -46,9 +46,12 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 		super.onAttach(activity);
 		app = (OsmandApplication) getSherlockActivity().getApplication();
 		custom = (SherpafyCustomization) app.getAppCustomization();
-		TourAdapter tourAdapter = new TourAdapter(custom.getTourInformations());
-		setListAdapter(tourAdapter);
 		setHasOptionsMenu(true);
+		refreshAdapter();
+	}
+	
+	public void refreshAdapter() {
+		setListAdapter(new TourAdapter(custom.getTourInformations()));
 	}
 	
 

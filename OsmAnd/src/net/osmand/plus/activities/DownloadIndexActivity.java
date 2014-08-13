@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -251,7 +252,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		getMyApplication().setDownloadActivity(null);
 	}
 	
-	public void showDialogToDownloadMaps(List<String> maps) {
+	public void showDialogToDownloadMaps(Collection<String> maps) {
 		int count = 0;
 		int sz = 0;
 		String s = "";
