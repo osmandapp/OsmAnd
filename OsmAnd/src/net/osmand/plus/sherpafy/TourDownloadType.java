@@ -45,7 +45,7 @@ public class TourDownloadType extends DownloadActivityType {
 	}
 	
 	public String getBaseUrl(OsmandApplication ctx, String fileName) {
-		return "http://" + SherpafyCustomization.TOUR_SERVER + "/download?event=2&"
+		return "http://" + SherpafyCustomization.TOUR_SERVER + "/download_tour.php?event=2&"
 				+ Version.getVersionAsURLParam(ctx) + "&file=" + fileName;
 	}
 	
