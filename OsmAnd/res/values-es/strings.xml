@@ -1847,8 +1847,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 <string name="av_camera_pic_size">Tamaño de foto</string>
 	<string name="av_camera_pic_size_descr">Selecciona el tamaño interno de la foto</string>
     <string name="announce_nearby_favorites">Anunciar favoritos cercanos</string>
-<string name="rendering_value_browse_map_name">Navegar en mapa</string>  
+<string name="rendering_value_browse_map_name">Ver mapa</string>  
     <string name="rendering_value_car_name">Coche</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">Peatón</string>
+    <string name="more">Más...</string>
     </resources>
