@@ -1814,4 +1814,5 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="rendering_value_bicycle_name">Dviratis</string>
     <string name="rendering_value_pedestrian_name">Pėstysis</string>
     <string name="more">Dar…</string>
+    <string name="download_additional_maps">Atsiųsti trūkstamus žemėlapius %1$s (%2$d MB)?</string>
     </resources>
