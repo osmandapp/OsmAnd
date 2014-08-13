@@ -2,18 +2,13 @@ package net.osmand.plus.sherpafy;
 
 import java.util.List;
 
-import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.DownloadIndexActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
@@ -103,7 +98,7 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 				((TourViewActivity) getActivity()).startDownloadActivity();
 			}
 		});
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String acCode = editText.getText().toString();
