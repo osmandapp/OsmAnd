@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +14,6 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.Version;
-import net.osmand.plus.sherpafy.TourDownloadType;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -29,7 +25,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
-import android.text.format.DateFormat;
 
 public class DownloadOsmandIndexesHelper {
 	private final static Log log = PlatformUtil.getLog(DownloadOsmandIndexesHelper.class);
@@ -38,8 +33,7 @@ public class DownloadOsmandIndexesHelper {
 	public static IndexFileList getIndexesList(Context ctx) {
 		PackageManager pm =ctx.getPackageManager();
 		AssetManager amanager = ctx.getAssets();
-		String versionUrlParam = Version.getVersionAsURLParam(((OsmandApplication) ctx.getApplicationContext()));
-		IndexFileList result = downloadIndexesListFromInternet(ctx, versionUrlParam);
+		IndexFileList result = downloadIndexesListFromInternet((OsmandApplication) ctx.getApplicationContext());
 		if (result == null) {
 			result = new IndexFileList();
 		} else {
@@ -115,12 +109,13 @@ public class DownloadOsmandIndexesHelper {
 	}
 	
 
-	private static IndexFileList downloadIndexesListFromInternet(Context ctx, String versionAsUrl){
+	private static IndexFileList downloadIndexesListFromInternet(OsmandApplication ctx){
 		try {
 			IndexFileList result = new IndexFileList();
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
 			try {
-				String strUrl = "http://"+IndexConstants.INDEX_DOWNLOAD_DOMAIN+"/get_indexes?gzip&" + versionAsUrl; //$NON-NLS-1$
+				String strUrl = ctx.getAppCustomization().getIndexesUrl();
+				
 				log.info(strUrl);
 				URL url = new URL(strUrl ); 
 				XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
