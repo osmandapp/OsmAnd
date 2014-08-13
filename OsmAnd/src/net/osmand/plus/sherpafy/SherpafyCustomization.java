@@ -47,11 +47,11 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	private static final String SELECTED_TOUR = "selected_tour";
 	private static final String ACCESS_CODE = "access_code";
-	private static final String SELECTED_STAGE = "selected_stage";
-	private static final String VISITED_STAGES = "visited_stages";
+	private static final String SELECTED_STAGE = "selected_stage_int";
+	private static final String VISITED_STAGES = "visited_stages_int";
 	private CommonPreference<String> selectedTourPref;
-	private CommonPreference<String> selectedStagePref;
-	private CommonPreference<String> visitedStagesPref;
+	private CommonPreference<Integer> selectedStagePref;
+	private CommonPreference<Integer> visitedStagesPref;
 	private boolean toursIndexed;
 	private List<TourInformation> tourPresent = new ArrayList<TourInformation>();
 	private StageInformation selectedStage = null;
@@ -163,7 +163,6 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				String selectedName = selectedTourPref.get();
 				for(File tr : availableTours) {
 					if (tr.isDirectory()) {
-						boolean selected = selectedName != null && selectedName.equals(tr.getName());
 						String date = app.getResourceManager().getDateFormat()
 								.format(new Date(DownloadIndexActivity.findFileInDir(tr).lastModified()));
 						indexFileNames.put(tr.getName(), date);
@@ -182,6 +181,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 								}
 							}
 						}
+						boolean selected = selectedName != null && selectedName.equals(tourInformation.getName());
 						if (selected) {
 							reloadSelectedTour(progress, tourInformation);
 						}
@@ -233,9 +233,21 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		} catch (IOException e) {
 			app.showToastMessage(R.string.settings_file_create_error);
 		}
-		selectedStagePref = app.getSettings().registerStringPreference(SELECTED_STAGE, null).makeGlobal();
-		visitedStagesPref = app.getSettings().registerStringPreference(VISITED_STAGES, null).makeGlobal();
+		selectedStagePref = app.getSettings().registerIntPreference(SELECTED_STAGE, -1).makeGlobal();
+		visitedStagesPref = app.getSettings().registerIntPreference(VISITED_STAGES, 0).makeGlobal();
 		selectedTour = tourInformation;
+		Integer it = selectedStagePref.get();
+		while(it >= 0 && isStageVisited(it) ){
+			it++;
+		}
+		if(it >= 0 && it < tourInformation.getStageInformation().size()) {
+			selectedStage = tourInformation.getStageInformation().get(it);
+		}
+	}
+	
+	public boolean isStageVisited(int stageOrder) {
+		Integer gi = visitedStagesPref.get();
+		return (gi & (1 << stageOrder)) > 0;
 	}
 	
 	public StageInformation getSelectedStage() {
@@ -244,10 +256,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	public void selectStage(StageInformation stage, IProgress progress) {
 		if(stage == null) {
-			selectedStagePref.set(null);
+			selectedStagePref.set(-1);
 			selectedStage = null;
 		} else {
-			selectedStagePref.set(stage.getName());
+			selectedStagePref.set(stage.getOrder());
 			selectedStage = stage;
 		}
 		loadSelectedStage();
@@ -301,7 +313,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		if(layers.getContextMenuLayer().getFirstSelectedObject() instanceof FavouritePoint) {
 			final FavouritePoint fp = ((FavouritePoint)layers.getContextMenuLayer().getFirstSelectedObject());
 			if(fp.getExtraParam() >= 0 && selectedStage != null) {
-				adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light ).position(0)
+				adapter.item(R.string.show_waypoint_information).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light ).position(0)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -331,6 +343,12 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
         public FavoriteDialogFragment(SherpafyFavoriteFragment fragment) {
 			this.fragment = fragment;
 		}
+        
+        @Override
+        public void onAttach(Activity activity) {
+        	super.onAttach(activity);
+        	getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+        }
 
 		@Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -345,7 +363,6 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
                         }
                     )
                     .create();
-            getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
             return dlg;
         }
     }
@@ -359,7 +376,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				R.string.get_directions, 
 				R.string.menu_mute_on, R.string.menu_mute_off,
 				R.string.where_am_i);
-		adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light ).position(4)
+		adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light ).position(adapter.length() - 1)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {

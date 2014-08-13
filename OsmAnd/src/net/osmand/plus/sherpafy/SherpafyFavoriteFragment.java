@@ -24,7 +24,9 @@ public class SherpafyFavoriteFragment extends SherpafyStageInfoFragment {
 		int k = getArguments().getInt(FAV_PARAM);
 		if(stage != null) {
 			fav = (StageFavorite) stage.getFavorites().get(k);
-			getSherlockActivity().getSupportActionBar().setTitle(fav.getName());
+			if(getSherlockActivity().getSupportActionBar() != null) {
+				getSherlockActivity().getSupportActionBar().setTitle(fav.getName());
+			}
 		}
 	}
 	

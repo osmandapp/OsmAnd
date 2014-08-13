@@ -171,8 +171,10 @@ public class TourViewActivity extends SherlockFragmentActivity {
 					} else if (selectedItem == it) {
 						imView.setImageResource(R.drawable.ic_action_ok_light);
 					} else {
+						boolean visited = customization.isStageVisited(((StageInformation) it).getOrder());
 						imView.setImageDrawable(
-								new StageImageDrawable(TourViewActivity.this, StageImageDrawable.MENU_COLOR,
+								new StageImageDrawable(TourViewActivity.this, 
+										visited ? StageImageDrawable.INFO_COLOR : StageImageDrawable.MENU_COLOR,
 										(((StageInformation) it).getOrder() + 1) + "", 0));
 					}
 					tv.setText(((StageInformation) it).getName());
@@ -474,6 +476,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				getMyApplication().getSettings().APPLICATION_MODE.set(am);
 			}
 		}
+		getMyApplication().getSettings().SHOW_FAVORITES.set(true);
 		if (startOver && point != null) {
 			goToMap(new LatLon(point.lat, point.lon));
 		} else {
