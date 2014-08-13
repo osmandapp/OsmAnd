@@ -49,7 +49,7 @@
 更新する(タイル)マップを選んでください</string>
      <string name="internet_not_available">操作に必要なインターネット接続が
 利用できません</string>
-     <string name="install_more">インストールを続ける…</string>
+     <string name="install_more">別のマップをインストールする…</string>
 
      <string name="tip_update_index">オフラインマップの更新</string>
      <string name="tip_update_index_t">"最新のマップデータを持っていることは とても重要です。OsmAnd は利用できるオフラインデータの更新をチェックできる ダウンロードマネージャを提供しています。
@@ -725,7 +725,7 @@ POIの更新は利用できません</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">既存のデータから選択…</string>
     <string name="edit_tilesource_name">名前</string>
-    <string name="maps_define_edit">定義/編集…</string>
+    <string name="maps_define_edit">マップの定義と編集…</string>
 	<string name="map_widget_fps_info">FPS デバッグ情報</string>
 	<string name="driving_region_descr">運転する地域の選択:米国、ヨーロッパ, イギリス, アジア, その他</string>
 	<string name="driving_region">運転地域</string>
@@ -1064,10 +1064,10 @@ POIの更新は利用できません</string>
 	<string name="download_link_and_local_description">オフラインマップをダウンロードしたり、更新するにはここをタップしてください。\n既存データの詳細を参照する場合はタップ、無効または削除するためにはロングタップ(長押し)して下さい。\nデバイスの空き容量(%1$s):</string>
 	<string name="unknown_from_location">出発点は、まだ決定されていません</string>
 	<string name="basemap_was_selected_to_download">ベースマップはアプリケーションを機能させるに必須なデータです、よってダウンロードすることが選択されます。</string>
-	<string name="local_indexes_cat_tile">オンラインやタイルマップ</string>
+	<string name="local_indexes_cat_tile">オンラインタイルマップを使用</string>
 	<string name="local_indexes_cat_map">オフラインマップ(ベクター形式)</string>
 	<string name="map_online_plugin_is_not_installed">別のマップソースを選択するためにオンライン地図プラグインを有効にする</string>
-	<string name="map_online_data">オンラインやタイルマップ</string>
+	<string name="map_online_data">オンラインタイルマップを使用</string>
 	<string name="online_map_settings">オンラインマップ</string>
 	<string name="online_map_settings_descr">オンラインまたはキャッシュされたタイルマップソースを設定</string>
 	<string name="map_settings">マップ設定</string>
