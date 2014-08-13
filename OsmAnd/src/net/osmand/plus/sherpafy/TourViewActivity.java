@@ -65,6 +65,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private ListView mDrawerList;
 	private ArrayAdapter<Object> drawerAdapter;
 	private WeakHashMap<Object, Fragment> fragments = new WeakHashMap<Object, Fragment>();
+	private boolean restartAfterDownload;
 	private static Object selectedItem;
 
 	@Override
@@ -219,6 +220,10 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if(restartAfterDownload){
+			restartAfterDownload = false;
+			selectMenu(selectedItem == null ? R.string.sherpafy_tours : selectedItem);
+		}
 	}
 
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType,
@@ -373,6 +378,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		final Intent download = new Intent(this, DownloadIndexActivity.class);
 		download.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		startActivity(download);
+		restartAfterDownload = true;
 	}
 
 	public void goToMap(LatLon location) {

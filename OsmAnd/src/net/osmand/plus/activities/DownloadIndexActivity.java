@@ -273,7 +273,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		}
 		if(count > 0){
 			Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(MessageFormat.format(getString(R.string.download_additional_maps), s, sz));
+			builder.setMessage(getString(R.string.download_additional_maps, s, sz));
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
