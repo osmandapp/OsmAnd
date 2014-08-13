@@ -35,6 +35,7 @@ public class TourInformation {
 	private String instructions = "";
 	private File imgFile;
 	private List<StageInformation> stageInformation = new ArrayList<TourInformation.StageInformation>();
+	private List<String> maps =new ArrayList<String>();
 
 	public TourInformation(File f) {
 		this.folder = f;
@@ -47,6 +48,10 @@ public class TourInformation {
 	
 	public String getInstructions() {
 		return instructions;
+	}
+	
+	public List<String> getMaps() {
+		return maps;
 	}
 	
 	private static WeakHashMap<File, Bitmap> androidBitmaps = new WeakHashMap<File, Bitmap>();
@@ -98,6 +103,11 @@ public class TourInformation {
 					String name = getDefAttribute(parser, "name", "");
 					stage = new StageInformation(this, stageInformation.size());
 					stage.name = name;
+				} else if (tag.equals("prerequisite")) {
+					String map = getDefAttribute(parser, "map", "");
+					if(!Algorithms.isEmpty(map)) {
+						maps .add(map);
+					}
 				} else if (tag.equals("itinerary") && stage != null){
 					String img = getDefAttribute(parser, "image", "");
 					stage.distance = Double.parseDouble(getDefAttribute(parser, "distance", "0"));

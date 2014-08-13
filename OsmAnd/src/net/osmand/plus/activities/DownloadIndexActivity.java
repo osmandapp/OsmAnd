@@ -249,6 +249,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		getMyApplication().setDownloadActivity(this);
 		BasicProgressAsyncTask<?, ?, ?> t = downloadListIndexThread.getCurrentRunningTask();
 		updateProgress(false);
 		if(t instanceof DownloadIndexesThread.DownloadIndexesAsyncTask) {
@@ -256,6 +257,28 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			if (mainView != null) {
 				mainView.setKeepScreenOn(true);
 			}
+		}
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		getMyApplication().setDownloadActivity(null);
+	}
+	
+	public void showDialogToDownloadMaps(List<String> maps) {
+		DownloadIndexAdapter a = (DownloadIndexAdapter) getListAdapter();
+		boolean e = true;
+		for (IndexItem i : a.getIndexFiles()) {
+			for (String map : maps) {
+				if (i.getFileName().equals(map + ".obf.zip")) {
+					e = false;
+					getEntriesToDownload().put(i, i.createDownloadEntry(getMyApplication(), type, new ArrayList<DownloadEntry>(1)));
+				}
+			}
+		}
+		if(!e){
+			downloadFilesCheckInternet();
 		}
 	}
 

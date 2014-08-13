@@ -6,6 +6,7 @@ import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.util.Algorithms;
@@ -41,6 +42,11 @@ public class TourDownloadType extends DownloadActivityType {
 	
 	public String getUnzipExtension(OsmandApplication ctx, IndexItem indexItem) {
 		return "";
+	}
+	
+	public String getBaseUrl(OsmandApplication ctx, String fileName) {
+		return "http://" + SherpafyCustomization.TOUR_SERVER + "/download?event=2&"
+				+ Version.getVersionAsURLParam(ctx) + "&file=" + fileName;
 	}
 	
 	public String getUrlSuffix(OsmandApplication ctx) {

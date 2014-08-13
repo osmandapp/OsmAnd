@@ -19,6 +19,7 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
+import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
@@ -114,6 +115,8 @@ public class OsmandApplication extends Application {
 	BRouterServiceConnection bRouterServiceConnection;
 
 	MapActivity mapActivity;
+	DownloadIndexActivity downloadActivity;
+	
 	@Override
 	public void onCreate() {
 		long timeToStart = System.currentTimeMillis();
@@ -861,5 +864,13 @@ public class OsmandApplication extends Application {
 
 	public void setMapActivity(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+	}
+	
+	public void setDownloadActivity(DownloadIndexActivity downloadActivity) {
+		this.downloadActivity = downloadActivity;
+	}
+	
+	public DownloadIndexActivity getDownloadActivity() {
+		return downloadActivity;
 	}
 }
