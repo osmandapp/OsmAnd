@@ -1962,4 +1962,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_car_name">Automobile</string>
     <string name="rendering_value_bicycle_name">Bicicletta</string>
     <string name="rendering_value_pedestrian_name">Pedone</string>
+    <string name="more">Altro...</string>
     </resources>
