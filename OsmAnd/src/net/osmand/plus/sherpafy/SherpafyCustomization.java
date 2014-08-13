@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+import com.actionbarsherlock.app.ActionBar;
+
 import net.osmand.IProgress;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.ContextMenuAdapter;
@@ -64,6 +66,9 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	public boolean setAccessCode(String acCode) {
 		acCode = acCode.toUpperCase();
+		if(DownloadIndexActivity.downloadListIndexThread != null) {
+			DownloadIndexActivity.downloadListIndexThread.clear();
+		}
 		if(validate(acCode) || Algorithms.isEmpty(acCode)) {
 			accessCodePref.set(acCode);
 			return true;
@@ -347,5 +352,14 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			s += "&code="+accessCodePref.get();
 		}
 		return s;
+	}
+	
+	public void preDownloadActivity(final DownloadIndexActivity da, final List<DownloadActivityType> downloadTypes, ActionBar actionBar) {
+		actionBar.setTitle(TourDownloadType.TOUR.getString(da));
+	}
+	
+	@Override
+	public boolean showDownloadExtraActions() {
+		return super.showDownloadExtraActions();
 	}
 }

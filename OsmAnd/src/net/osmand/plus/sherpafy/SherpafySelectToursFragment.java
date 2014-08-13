@@ -2,6 +2,7 @@ package net.osmand.plus.sherpafy;
 
 import java.util.List;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.app.Activity;
@@ -90,6 +91,7 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 		LinearLayout ll = new LinearLayout(getActivity());
 		ll.setPadding(5, 3, 5, 0);
 		ll.addView(editText, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		AndroidUtils.softKeyboardDelayed(editText);
 		builder.setView(ll);
 		builder.setNegativeButton(R.string.sherpafy_public_access, new DialogInterface.OnClickListener() {
 			@Override
@@ -98,6 +100,7 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 				((TourViewActivity) getActivity()).startDownloadActivity();
 			}
 		});
+		
 		builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

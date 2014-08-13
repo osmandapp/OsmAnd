@@ -68,6 +68,10 @@ public class DownloadIndexesThread {
 		dateFormat = app.getResourceManager().getDateFormat();
 	}
 	
+	public void clear() {
+		indexFiles = null;
+	}
+	
 	public void setUiActivity(DownloadIndexActivity uiActivity) {
 		this.uiActivity = uiActivity;
 	}
