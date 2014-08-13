@@ -1638,7 +1638,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_settings_descr">Configurar opciones de monitorización y configurar canal de monitoreo</string>
     <string name="osmo_plugin_description">"OpenStreetMap-Monitoring - Monitorización avanzada en directo. Proporciona la posibilidad de seguir otros dispositivos y ser seguido. Crea grupos anónimos, comparte las localizaciones de cada uno y comuníquense. Tiene varias opciones para seguimiento por sesión o permanente. Los grupos anónimos están limitados a varios días y a algunas funcionalidades, p.e. no hay control remoto ni administrador de grupo. Los grupos completamente funcionales deben ser creados en la web y solo los usuarios registrados tienen acceso a ellos. Por favor, lee más en http://osmo.mobi. "</string>
     <string name="osmo_plugin_name">OsMo (Monitoreo avanzado en directo)</string>
-    <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
+    <string name="osmo_settings">OpenStreetMap Monitoring</string>
    	<string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
 	<string name="share_route_subject">Ruta compartida vía OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato inválido: %s</string>

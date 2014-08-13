@@ -1579,7 +1579,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osmo_settings_descr">Configurer les paramètres de suivi et définir son canal de suivi personnel</string>
 	<string name="osmo_plugin_description">"Suivi avancé OpenStreetMap en temps réel, voir http://osmo.mobi. Ce système offre la possibilité de suivre d\'autres appareils ou d\'être suivi. Créer des groupes anonymes, partager sa position et communiquer avec d\'autres. Il y a différents paramètres pour le suivi de la session courante ou pour un suivi permanent. Les groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe. Des groupes totalement fonctionnels peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès. "</string>
 	<string name="osmo_plugin_name">OsMo (Suivi en temps réel)</string>
-	<string name="osmo_settings">OSMo OpenStreetMap Monitoring (beta)</string>
+	<string name="osmo_settings">Suivi OpenStreetMap</string>
 	
 	<string name="osmo_io_error">Problème de connexion OSMo : </string>
 	<string name="osmo_mode_on">Arrêter session OsMo</string>
@@ -1648,7 +1648,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_connect">Connexion à</string>
     <string name="osmo_create_group">Créer un groupe</string>
     <string name="osmo_server_operation_failed">Échec du serveur OsMo</string>
-    <string name="osmo_activity">Monitoring OpenStreetMap</string>
+    <string name="osmo_activity">Suivi OpenStreetMap</string>
     <string name="osmo_control">Accès rapide OsMo</string>
     <string name="local_index_mi_export">Exporter</string>
 	<string name="import_file_favourites">Sauvegarder comme fichier GPX ou importer dans les favoris ?</string>
