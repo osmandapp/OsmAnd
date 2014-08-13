@@ -1944,4 +1944,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="rendering_value_bicycle_name">自行車</string>
     <string name="rendering_value_pedestrian_name">步行</string>
     <string name="more">更多...</string>
+    <string name="download_additional_maps">要下載缺少的地圖 %1$ s (%2$ d MB) 嗎？</string>
     </resources>
