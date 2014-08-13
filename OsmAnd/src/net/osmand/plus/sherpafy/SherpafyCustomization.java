@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.TreeSet;
 
 import net.osmand.IProgress;
+import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
@@ -17,6 +18,7 @@ import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
@@ -25,6 +27,7 @@ import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -37,9 +40,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private static final String SELECTED_TOUR = "selected_tour";
 	private static final String ACCESS_CODE = "access_code";
 	private static final String SELECTED_STAGE = "selected_stage";
-
+	private static final String VISITED_STAGES = "visited_stages";
 	private CommonPreference<String> selectedTourPref;
 	private CommonPreference<String> selectedStagePref;
+	private CommonPreference<String> visitedStagesPref;
 	private List<TourInformation> tourPresent = new ArrayList<TourInformation>();
 	private StageInformation selectedStage = null;
 	private TourInformation selectedTour = null;
@@ -59,7 +63,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	public boolean setAccessCode(String acCode) {
 		acCode = acCode.toUpperCase();
-		if(validate(acCode)) {
+		if(validate(acCode) || Algorithms.isEmpty(acCode)) {
 			accessCodePref.set(acCode);
 			return true;
 		}
@@ -194,6 +198,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			app.showToastMessage(R.string.settings_file_create_error);
 		}
 		selectedStagePref = app.getSettings().registerStringPreference(SELECTED_STAGE, null).makeGlobal();
+		visitedStagesPref = app.getSettings().registerStringPreference(VISITED_STAGES, null).makeGlobal();
 		selectedTour = tourInformation;
 	}
 	
@@ -309,5 +314,14 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	@Override
 	public List<FavouritePoint> getFavorites() {
 		return cachedFavorites;
+	}
+	
+	@Override
+	public String getIndexesUrl() {
+		String s = "http://"+IndexConstants.INDEX_DOWNLOAD_DOMAIN+"/tours.php?gzip&" + Version.getVersionAsURLParam(app);
+		if(!Algorithms.isEmpty(accessCodePref.get())) {
+			s += "&code="+accessCodePref.get();
+		}
+		return s;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.IProgress;
+import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.DownloadIndexActivity;
@@ -18,7 +19,6 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.view.Window;
 
@@ -106,5 +106,9 @@ public class OsmAndAppCustomization {
 
 	public List<FavouritePoint> getFavorites() {
 		return null;
+	}
+
+	public String getIndexesUrl() {
+		return "http://"+IndexConstants.INDEX_DOWNLOAD_DOMAIN+"/get_indexes?gzip&" + Version.getVersionAsURLParam(app); //$NON-NLS-1$;
 	}
 }

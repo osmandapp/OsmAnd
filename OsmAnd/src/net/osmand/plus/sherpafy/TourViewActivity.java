@@ -3,8 +3,6 @@ package net.osmand.plus.sherpafy;
 import java.util.List;
 import java.util.WeakHashMap;
 
-import android.view.KeyEvent;
-import android.widget.*;
 import net.osmand.IProgress;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -32,7 +30,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -57,7 +60,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 
 	private SherpafyCustomization customization;
-	private Point displaySize;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
@@ -108,7 +110,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			}
 		});
 
-		displaySize = new Point(getWindowManager().getDefaultDisplay().getWidth(), getWindowManager().getDefaultDisplay().getHeight());
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
 				R.string.default_buttons_other_actions, R.string.close);
 		if (getMyApplication().isApplicationInitializing()) {
@@ -435,6 +436,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		WptPt point = null;
 		GPXFile gpx = null;
 		customization.selectTour(tour, IProgress.EMPTY_PROGRESS);
+		
 		customization.selectStage(stage, IProgress.EMPTY_PROGRESS);
 		if (customization.getSelectedStage() != null) {
 			gpx = customization.getSelectedStage().getGpx();
