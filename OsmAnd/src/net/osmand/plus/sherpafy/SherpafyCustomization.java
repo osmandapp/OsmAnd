@@ -197,7 +197,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						da.showDialogToDownloadMaps(suggestToDownloadMap);
 
 					}
-				});
+				}, 2000);
 			}
 		}
 		return warns;

@@ -277,14 +277,13 @@ public class DownloadIndexesThread {
 
 		private String reindexFiles(List<File> filesToReindex) {
 			boolean vectorMapsToReindex = false;
+			// reindex vector maps all at one time
+			ResourceManager manager = app.getResourceManager();
 			for (File f : filesToReindex) {
 				if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 					vectorMapsToReindex = true;
-					break;
 				}
 			}
-			// reindex vector maps all at one time
-			ResourceManager manager = app.getResourceManager();
 			List<String> warnings = new ArrayList<String>();
 			manager.indexVoiceFiles(this);
 			if (vectorMapsToReindex) {

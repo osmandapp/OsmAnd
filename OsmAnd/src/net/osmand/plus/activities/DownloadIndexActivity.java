@@ -40,7 +40,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -51,8 +50,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.SubMenu;
@@ -111,7 +108,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				makeSureUserCancelDownload();
 			}
 		});
-		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		getSupportActionBar().setTitle(R.string.local_index_download);
 		// recreation upon rotation is pgetaprevented in manifest file
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
@@ -256,18 +252,37 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 	
 	public void showDialogToDownloadMaps(List<String> maps) {
-		DownloadIndexAdapter a = (DownloadIndexAdapter) getListAdapter();
-		boolean e = true;
-		for (IndexItem i : a.getIndexFiles()) {
+		int count = 0;
+		int sz = 0;
+		String s = "";
+		for (IndexItem i : downloadListIndexThread.getCachedIndexFiles()) {
 			for (String map : maps) {
-				if (i.getFileName().equals(map + ".obf.zip")) {
-					e = false;
-					getEntriesToDownload().put(i, i.createDownloadEntry(getMyApplication(), type, new ArrayList<DownloadEntry>(1)));
+				if (i.getFileName().equals(map + ".obf.zip") && i.getType() == DownloadActivityType.NORMAL_FILE) {
+					final List<DownloadEntry> de = i.createDownloadEntry(getMyApplication(), i.getType(), new ArrayList<DownloadEntry>(1));
+					for(DownloadEntry d : de ) {
+						count++;
+						sz += d.sizeMB;
+					}
+					if(s.length() > 0) {
+						s +=", ";
+					}
+					s += i.getVisibleName(getMyApplication(), getMyApplication().getResourceManager().getOsmandRegions());
+					getEntriesToDownload().put(i, de);
 				}
 			}
 		}
-		if(!e){
-			downloadFilesCheckInternet();
+		if(count > 0){
+			Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(MessageFormat.format(getString(R.string.download_additional_maps), s, sz));
+			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					downloadFilesCheckInternet();
+				}
+			});
+			builder.setNegativeButton(R.string.default_buttons_no, null);
+			builder.show();
+			
 		}
 	}
 
