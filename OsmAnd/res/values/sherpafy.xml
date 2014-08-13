@@ -2,7 +2,7 @@
 <resources>
     <string name="sherpafy_public_access">Public access</string>
     <string name="start_new_stage">Do you want to interrupt current stage and start new ?</string>
-    <string name="enter_access_code">Enter access code to see if you are entitled for a specific tour (optional)</string>
+    <string name="enter_access_code">Enter access code for a specific tour (optional)</string>
     <string name="sherpafy_stage_tab_fav">Fav</string>
     <string name="sherpafy_stage_tab_target">Target</string>
     <string name="sherpafy_stage_tab_route">Route</string>

@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.TreeSet;
 
 import net.osmand.IProgress;
-import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
@@ -318,7 +317,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	@Override
 	public String getIndexesUrl() {
-		String s = "http://"+IndexConstants.INDEX_DOWNLOAD_DOMAIN+"/tours.php?gzip&" + Version.getVersionAsURLParam(app);
+		String s = "http://"+"builder.osmand.net"+"/tours.php?gzip&" + Version.getVersionAsURLParam(app);
 		if(!Algorithms.isEmpty(accessCodePref.get())) {
 			s += "&code="+accessCodePref.get();
 		}
