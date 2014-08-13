@@ -21,7 +21,6 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -65,6 +64,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private ListView mDrawerList;
 	private ArrayAdapter<Object> drawerAdapter;
 	private WeakHashMap<Object, Fragment> fragments = new WeakHashMap<Object, Fragment>();
+	private boolean refreshListAfterDownload;
 	private static Object selectedItem;
 
 	@Override
@@ -219,6 +219,10 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if(refreshListAfterDownload){
+			refreshListAfterDownload = false;
+			selectMenu(selectedItem == null ? R.string.sherpafy_tours : selectedItem);
+		}
 	}
 
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType,
@@ -257,6 +261,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			if (fragment == null) {
 				fragment = new SherpafySelectToursFragment();
 				fragments.put(item, fragment);
+			} else {
+				((SherpafySelectToursFragment) fragment).refreshAdapter();
 			}
 			state = STATE_SELECT_TOUR;
 			setDrawerIndicatorVisible(true);
@@ -372,6 +378,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	public void startDownloadActivity() {
 		final Intent download = new Intent(this, DownloadIndexActivity.class);
 		download.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		refreshListAfterDownload = true;
 		startActivity(download);
 	}
 

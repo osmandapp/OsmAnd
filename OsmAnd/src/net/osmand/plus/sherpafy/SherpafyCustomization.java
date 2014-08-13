@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
@@ -149,7 +150,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		ArrayList<TourInformation> tourPresent = new ArrayList<TourInformation>();
 		List<String> warns = new ArrayList<String>();
 		selectedTour = null;
-		final List<String> suggestToDownloadMap = new ArrayList<String>();
+		final HashSet<String> suggestToDownloadMap = new HashSet<String>();
 		if(toursFolder.exists()) {
 			File[] availableTours = toursFolder.listFiles();
 			if(availableTours != null) {
@@ -197,7 +198,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						da.showDialogToDownloadMaps(suggestToDownloadMap);
 
 					}
-				}, 2000);
+				});
 			}
 		}
 		return warns;
@@ -360,6 +361,6 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	@Override
 	public boolean showDownloadExtraActions() {
-		return super.showDownloadExtraActions();
+		return false;
 	}
 }

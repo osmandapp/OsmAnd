@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -251,7 +252,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		getMyApplication().setDownloadActivity(null);
 	}
 	
-	public void showDialogToDownloadMaps(List<String> maps) {
+	public void showDialogToDownloadMaps(Collection<String> maps) {
 		int count = 0;
 		int sz = 0;
 		String s = "";
@@ -273,7 +274,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		}
 		if(count > 0){
 			Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(MessageFormat.format(getString(R.string.download_additional_maps), s, sz));
+			builder.setMessage(getString(R.string.download_additional_maps, s, sz));
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
