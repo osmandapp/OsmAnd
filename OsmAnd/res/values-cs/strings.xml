@@ -1481,7 +1481,7 @@ s často kladenými otázkami.</string>
     <string name="voice_pref_title">Hlas</string>
     <string name="always_center_position_on_map">Zobrazit pozici vždy uprostřed</string>
     <string name="osmo_plugin_name">OsMo</string>
-   	<string name="osmo_settings">OpenStreetMap Monitorování</string>
+   	<string name="osmo_settings">OpenStreetMap sledování</string>
     <string name="osmo_settings_descr">Konfigurovat sledování a nastavit osobní monitorovací kanál</string>
     <string name="osmo_settings_debug">Informace ladění</string>
     <string name="osmo_mode_restart">Restartovat OsMo relaci</string>
@@ -1533,7 +1533,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_connect">Připojit k</string>
     <string name="osmo_create_group">Vytvořit skupinu</string>
     <string name="osmo_server_operation_failed">Chyba operace na serveru OsMo</string>
-    <string name="osmo_activity">OpenStreetMap-Monitorování</string>
+    <string name="osmo_activity">OpenStreetMap sledování</string>
     <string name="osmo_enable_tracker">Odesílat mé pozice</string>
     <string name="osmo_control">OsMo rychlý přístup</string>
     <string name="hours_ago">hodin dozadu</string>
@@ -1706,4 +1706,6 @@ s často kladenými otázkami.</string>
     <string name="rendering_value_browse_map_name">Standardní</string>  
     <string name="rendering_value_car_name">Automobil</string>
     <string name="rendering_value_bicycle_name">Jízdní kolo</string>
+    <string name="rendering_value_pedestrian_name">Chodec</string>
+    <string name="download_additional_maps">Stáhnout chybějící mapy %1$s (%2$d MB)?</string>
     </resources>
