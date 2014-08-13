@@ -1964,4 +1964,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="rendering_value_pedestrian_name">Fodgænger</string>
     <string name="rendering_value_browse_map_name">Gennemse kort</string>  
     <string name="more">Mere…</string>
+    <string name="download_additional_maps">Hent manglende kort %1$s (%2$d MB)?</string>
     </resources>
