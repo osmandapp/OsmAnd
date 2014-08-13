@@ -1449,7 +1449,7 @@
 <string name="osmo_settings_uuid">Unikt enhets-id</string>
     <string name="osmo_settings_descr">Konfigurera inställningar för övervakning och ställ in personlig övervakningskanal</string>
     <string name="osmo_plugin_name">OSMo (Avancerad live-spårning)</string>
-    <string name="osmo_settings">OSMo OpenStreetMap-övervakning (beta)</string>
+    <string name="osmo_settings">OpenStreetMap-övervakning</string>
    	<string name="osmo_plugin_description">"OpenStreetMap- avancerad direktspårning, se http://osmo.mobi. Spåra andra enheter och bli spårad själv. Skapa anonyma grupper, dela ut varandras platser och kommunicera. Det finns olika inställningar för sessionsspårning eller permanent spårning. Anonyma grupper är begränsade till ett antal dagar och för vissa funktioner finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
     <string name="interrupt_music_descr">Avbryt musik vid meddelanden</string>
 	<string name="interrupt_music">Avbryt musik</string>
@@ -1667,4 +1667,5 @@
     <string name="rendering_value_bicycle_name">Cykel</string>
     <string name="rendering_value_pedestrian_name">Fotgängare</string>
     <string name="rendering_value_browse_map_name">Titta på karta</string>  
+    <string name="more">Mer …</string>
     </resources>
