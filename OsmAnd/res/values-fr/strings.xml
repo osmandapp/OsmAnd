@@ -1802,4 +1802,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_value_car_name">Voiture</string>
     <string name="rendering_value_bicycle_name">Vélo</string>
     <string name="rendering_value_pedestrian_name">Piéton</string>
+    <string name="more">Plus...</string>
     </resources>
