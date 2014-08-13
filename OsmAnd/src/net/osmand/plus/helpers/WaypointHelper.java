@@ -1,7 +1,9 @@
 package net.osmand.plus.helpers;
 
 import net.osmand.Location;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LocationPoint;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.MapUtils;
@@ -41,8 +43,36 @@ public class WaypointHelper {
 	}
 
 
-	public List<LocationPoint> getVisibleLocationPoints() {
+	public List<LocationPoint> getAllVisibleLocationPoints() {
 		return visibleLocationPoints;
+	}
+
+	public List<LocationPoint> getVisibleFavorites() {
+		List<LocationPoint> points = new ArrayList<LocationPoint>();
+		for (LocationPoint point : visibleLocationPoints){
+			if (point instanceof FavouritePoint){
+				points.add(point);
+			}
+		}
+		return points;
+	}
+
+	public List<LocationPoint> getVisibleGpxPoints() {
+		List<LocationPoint> points = new ArrayList<LocationPoint>();
+		for (LocationPoint point : visibleLocationPoints){
+			if (point instanceof GPXUtilities.WptPt){
+				points.add(point);
+			}
+		}
+		return points;
+	}
+
+	public List<LocationPoint> getVisiblePOI() {
+		return null;
+	}
+
+	public List<LocationPoint> getVisibleTargets() {
+		return null;
 	}
 
 	public void locationChanged(Location location) {

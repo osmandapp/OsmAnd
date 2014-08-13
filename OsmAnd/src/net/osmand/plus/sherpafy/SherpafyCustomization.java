@@ -253,7 +253,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	@Override
 	public void prepareLocationMenu(MapActivity mapActivity, ContextMenuAdapter adapter) {
-		filter(adapter, R.string.context_menu_item_directions_to,
+		filter(adapter, R.string.pause_navigation, R.string.continue_navigation, R.string.context_menu_item_directions_to,
 				R.string.context_menu_item_destination_point, R.string.context_menu_item_search,
 				R.string.context_menu_item_share_location, R.string.context_menu_item_add_favorite);
 		MapActivityLayers layers = mapActivity.getMapLayers();
