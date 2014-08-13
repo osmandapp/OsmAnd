@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+import com.actionbarsherlock.app.ActionBar;
+
 import net.osmand.IProgress;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.ContextMenuAdapter;
@@ -43,6 +45,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private CommonPreference<String> selectedTourPref;
 	private CommonPreference<String> selectedStagePref;
 	private CommonPreference<String> visitedStagesPref;
+	private boolean toursIndexed;
 	private List<TourInformation> tourPresent = new ArrayList<TourInformation>();
 	private StageInformation selectedStage = null;
 	private TourInformation selectedTour = null;
@@ -50,6 +53,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private CommonPreference<String> accessCodePref;
 	private List<FavouritePoint> cachedFavorites = new ArrayList<FavouritePoint>();
 	private SettingsAPI originalApi;
+	public static final String TOUR_SERVER = "builder.osmand.net:81";	
 
 	@Override
 	public void setup(OsmandApplication app) {
@@ -62,6 +66,9 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	public boolean setAccessCode(String acCode) {
 		acCode = acCode.toUpperCase();
+		if(DownloadIndexActivity.downloadListIndexThread != null) {
+			DownloadIndexActivity.downloadListIndexThread.clear();
+		}
 		if(validate(acCode) || Algorithms.isEmpty(acCode)) {
 			accessCodePref.set(acCode);
 			return true;
@@ -142,6 +149,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		ArrayList<TourInformation> tourPresent = new ArrayList<TourInformation>();
 		List<String> warns = new ArrayList<String>();
 		selectedTour = null;
+		final List<String> suggestToDownloadMap = new ArrayList<String>();
 		if(toursFolder.exists()) {
 			File[] availableTours = toursFolder.listFiles();
 			if(availableTours != null) {
@@ -159,6 +167,14 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
+						// check that tour was downloaded
+						if(toursIndexed) {
+							for (String map : tourInformation.getMaps()) {
+								if (!new File(toursFolder.getParentFile(), map + ".obf").exists()) {
+									suggestToDownloadMap.add(map);
+								}
+							}
+						}
 						if (selected) {
 							reloadSelectedTour(progress, tourInformation);
 						}
@@ -168,8 +184,22 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 					app.getSettings().setSettingsAPI(originalApi);
 				}
 			}
+			toursIndexed = true;
 		}
 		this.tourPresent = tourPresent;
+		if(!suggestToDownloadMap.isEmpty()) {
+			final DownloadIndexActivity da = app.getDownloadActivity();
+			if (da != null) {
+				app.runInUIThread(new Runnable() {
+
+					@Override
+					public void run() {
+						da.showDialogToDownloadMaps(suggestToDownloadMap);
+
+					}
+				});
+			}
+		}
 		return warns;
 	}
 
@@ -317,10 +347,19 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	@Override
 	public String getIndexesUrl() {
-		String s = "http://"+"builder.osmand.net"+"/tours.php?gzip&" + Version.getVersionAsURLParam(app);
+		String s = "http://"+TOUR_SERVER+"/tours.php?gzip&" + Version.getVersionAsURLParam(app);
 		if(!Algorithms.isEmpty(accessCodePref.get())) {
 			s += "&code="+accessCodePref.get();
 		}
 		return s;
+	}
+	
+	public void preDownloadActivity(final DownloadIndexActivity da, final List<DownloadActivityType> downloadTypes, ActionBar actionBar) {
+		actionBar.setTitle(TourDownloadType.TOUR.getString(da));
+	}
+	
+	@Override
+	public boolean showDownloadExtraActions() {
+		return super.showDownloadExtraActions();
 	}
 }

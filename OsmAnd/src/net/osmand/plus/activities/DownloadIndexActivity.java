@@ -69,7 +69,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
     public static final String FILTER_KEY = "filter";
     public static final String FILTER_CAT = "filter_cat";
 	
-	private static DownloadIndexesThread downloadListIndexThread;
+	public static DownloadIndexesThread downloadListIndexThread;
 	private DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
 	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
 	 
@@ -113,7 +113,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		});
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		getSupportActionBar().setTitle(R.string.local_index_download);
-		// recreation upon rotation is prevented in manifest file
+		// recreation upon rotation is pgetaprevented in manifest file
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -181,18 +181,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			showDialogOfFreeDownloadsIfNeeded();
 		}
 		
-		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), R.layout.sherlock_spinner_item, 
-				toString(downloadTypes)	
-				);
-		spinnerAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
-        getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, new OnNavigationListener() {
-			
-			@Override
-			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-				changeType(downloadTypes.get(itemPosition));
-				return true;
-			}
-		});
+		getMyApplication().getAppCustomization().preDownloadActivity(this, downloadTypes, getSupportActionBar());
 		if (Build.VERSION.SDK_INT >= OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
 			final String currentStorage = settings.getExternalStorageDirectory().getAbsolutePath();
 			String primaryStorage = settings.getDefaultExternalStorageLocation();
@@ -249,6 +238,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		getMyApplication().setDownloadActivity(this);
 		BasicProgressAsyncTask<?, ?, ?> t = downloadListIndexThread.getCurrentRunningTask();
 		updateProgress(false);
 		if(t instanceof DownloadIndexesThread.DownloadIndexesAsyncTask) {
@@ -256,6 +246,28 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			if (mainView != null) {
 				mainView.setKeepScreenOn(true);
 			}
+		}
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		getMyApplication().setDownloadActivity(null);
+	}
+	
+	public void showDialogToDownloadMaps(List<String> maps) {
+		DownloadIndexAdapter a = (DownloadIndexAdapter) getListAdapter();
+		boolean e = true;
+		for (IndexItem i : a.getIndexFiles()) {
+			for (String map : maps) {
+				if (i.getFileName().equals(map + ".obf.zip")) {
+					e = false;
+					getEntriesToDownload().put(i, i.createDownloadEntry(getMyApplication(), type, new ArrayList<DownloadEntry>(1)));
+				}
+			}
+		}
+		if(!e){
+			downloadFilesCheckInternet();
 		}
 	}
 
@@ -306,14 +318,17 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		SubMenu s = menu.addSubMenu(0, MORE_ID, 0, R.string.default_buttons_other_actions);
-		s.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
-		s.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
-		s.add(0, SELECT_ALL_ID, 0, R.string.select_all);
-		s.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
-		
-		s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light : R.drawable.abs__ic_menu_moreoverflow_holo_dark);
-        s.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		if (getMyApplication().getAppCustomization().showDownloadExtraActions()) {
+			SubMenu s = menu.addSubMenu(0, MORE_ID, 0, R.string.default_buttons_other_actions);
+			s.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
+			s.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
+			s.add(0, SELECT_ALL_ID, 0, R.string.select_all);
+			s.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
+
+			s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
+					: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
+			s.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		}
 		return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -412,13 +427,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 
 
-	private List<String> toString(List<DownloadActivityType> t) {
-		ArrayList<String> items = new ArrayList<String>();
-		for(DownloadActivityType ts : t) {
-			items.add(ts.getString(getMyApplication()));
-		}
-		return items;
-	}
 
 	private List<DownloadActivityType> getDownloadTypes() {
 		List<DownloadActivityType> items = new ArrayList<DownloadActivityType>();
