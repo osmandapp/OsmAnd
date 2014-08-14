@@ -2081,6 +2081,6 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="rendering_value_car_name">자동차</string>
     <string name="rendering_value_bicycle_name">자전거</string>
     <string name="rendering_value_pedestrian_name">보행자</string>
-    <string name="more">더...</string>
+    <string name="more">기타...</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
     </resources>
