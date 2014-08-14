@@ -19,7 +19,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content">
 			
-			<net.osmand.plus.views.CustomImageView
+			<ImageView
 					android:layout_marginLeft="1dp"
 					android:layout_marginRight="1dp"
 					android:layout_marginTop="1dp"
@@ -27,7 +27,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
 					android:scaleType="centerCrop">
-			</net.osmand.plus.views.CustomImageView>
+			</ImageView>
 
 			<TextView
 					android:id="@+id/TourName"

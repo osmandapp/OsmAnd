@@ -1325,7 +1325,7 @@
 	<string name="av_camera_focus_auto">Enfocament automàtic</string>
 	<string name="osb_comment_dialog_error">Error: no s\'ha afegit el comentari</string>
 	<string name="osb_author_dialog_password">Contrasenya de l\'OSM (opcional)</string>
-	<string name="amenity_type_seamark">Boia marina</string>
+	<string name="amenity_type_seamark">Balisa marina</string>
     <string name="app_modes_choose_descr">Seleccioneu els perfils d\'ús visibles a l\'aplicació</string>
     <string name="app_modes_choose">Perfils de l\'aplicació</string>
 	<string name="map_widget_map_rendering">Renderitzat del mapa:</string>
@@ -1383,7 +1383,7 @@
     <string name="speech_rate_descr">Especifiqueu la velocitat de síntesi de veu</string>
     <string name="speech_rate">Velocitat de lectura</string>
     
-    <string name="complex_route_calculation_failed">Fracàs del càlcul ràpid de ruta (%s), retorn al mètode lent.</string>
+    <string name="complex_route_calculation_failed">El càlcul ràpid de ruta ha fallat (%s), retorn al mètode lent.</string>
     <string name="disable_complex_routing_descr">Desactiva el càlcul de ruta en 2 fases per cotxe</string>
     <string name="disable_complex_routing">Desactiva el càlcul complex de la ruta</string>
     <string name="route_is_too_long">Ruta massa llarga. El càlcul fora de línia entre punts separats per més de 200 Km pot ser molt lent o aturar-se del tot. Per resoldre-ho, heu d\'afegir fites intermèdies.</string>
@@ -1392,14 +1392,14 @@
     <string name="map_widget_fps_info">Info depuració FPS</string>
 	<string name="intermediate_items_sort_return">Les fites intermèdies han estat re-ordenades per optimitzar la ruta.</string>
     <string name="osmand_distance_planning_plugin_description">Creant itineraris i usant o modificant fitxers GPX existents podreu mesurar la distància entre punts. Si després els deseu, podreu usar-los per preparar més itineraris GPX.</string>
-    <string name="android_19_location_disabled">Des de la versió KitKat no es pot descarregar un mapa actualitzat i guardar-lo on hi ha l\'anterior (%s). Voleu canviar la destinació a un lloc nou i copiar-hi totes les dades?
-        \n Nota: les dades antigues quedaran intactes. 
-        \n Nota: no serà possible compartir dades entre l\' OsmAnd i l\' OsmAnd+. </string>
+    <string name="android_19_location_disabled">"Des de la versió KitKat no es pot baixar un mapa actualitzat i guardar-lo on hi ha l\'anterior (%s). Voleu canviar la destinació a un lloc nou i copiar-hi totes les dades?
+\n Nota: les dades antigues quedaran intactes.
+\n Nota: no serà possible compartir dades entre l\'OsmAnd i l\'OsmAnd+. "</string>
     <string name="application_dir_change_warning2">OsmAnd pot provar de traslladar les dades a la nova destinació. Voleu fer-ho?</string>
-    <string name="copying_osmand_one_file_descr">S\'estan copiant el fitxer (%s) a la nova destinació...</string>
-    <string name="copying_osmand_files_descr">S\'estan copiant els fitxers de l\' OsmAnd a la nova destinació (%s)</string>
+    <string name="copying_osmand_one_file_descr">S\'està copiant el fitxer (%s) a la nova destinació...</string>
+    <string name="copying_osmand_files_descr">S\'estan copiant els fitxers de l\'OsmAnd a la nova destinació (%s)</string>
     <string name="copying_osmand_files">S\'estan copiant fitxers de l\' OsmAnd</string>
-    <string name="calculate_osmand_route_gpx">Calcula la ruta OsmAnd sense connexió</string>
+    <string name="calculate_osmand_route_gpx">Calcula una ruta fora de línia amb l\'OsmAnd</string>
     <string name="app_mode_truck">Camió</string>
     <string name="tip_map_styles_t">OsmAnd pot representar els mapes vectorials en diferents estils per tal d\'adaptar-se millor al que necessiteu:
 		\n\nA més de l\'estil normal d\'ús general, podeu configurar a \'Menu\' → \'Configura l\'aparença\' → \'Estil de renderització\' i seleccionar p.ex.
@@ -1408,11 +1408,11 @@
 		\n\t* \'Hivern i esquí\' crea una visió d\'hivern nevat, i mostra les pistes i remuntadors globals (precisa baixar-se el mapa \'World ski\')
 	</string>
     <string name="routing_attr_prefer_motorway_name">Preferència per autopistes</string>
-	<string name="routing_attr_prefer_motorway_description">Preferència per autopista</string>
+	<string name="routing_attr_prefer_motorway_description">Es prioritza l\'ús d\'autopistes</string>
 	<string name="routing_attr_short_way_name">Camí més curt</string>
 	<string name="routing_attr_short_way_description">Usa el camí més curt</string>
 	<string name="routing_attr_avoid_toll_name">Evita peatges</string>
-	<string name="routing_attr_avoid_toll_description">Evita els peatges</string>
+	<string name="routing_attr_avoid_toll_description">Prioritza carreteres sense peatge</string>
 	<string name="routing_attr_avoid_unpaved_name">Evita els camins sense pavimentar</string>
 	<string name="routing_attr_avoid_unpaved_description">Evita camins sense pavimentar</string>
 	<string name="routing_attr_avoid_ferries_name">Evita transbordadors</string>
@@ -1939,4 +1939,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">Vianant</string>
     <string name="more">Més…</string>
+    <string name="download_additional_maps">Voleu baixar els mapes que us manquen %1$s (%2$d MB)?</string>
     </resources>

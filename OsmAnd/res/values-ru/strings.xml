@@ -1796,4 +1796,6 @@ OsmAnd - открытый источник и активно развается.
     <string name="rendering_value_car_name">Автомобиль</string>
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пешеход</string>
+    <string name="download_additional_maps">Скачать недостающие карты %1$s (%2$d MB)?</string>
+    <string name="more">Более...</string>
     </resources>
