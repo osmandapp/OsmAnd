@@ -266,7 +266,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		Fragment fragment = fragments.get(item);
 		if (new Integer(R.string.sherpafy_tours).equals(item)) {
-			if (fragment == null) {
+			if (fragment == null || fragment.getActivity() == null) {
 				fragment = new SherpafySelectToursFragment();
 				fragments.put(item, fragment);
 			} else {
