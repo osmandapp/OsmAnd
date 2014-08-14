@@ -489,7 +489,7 @@
 	<string name="local_index_items_backuped">%2$d 項中的 %1$d 項已順利停用。</string>
 	<string name="local_index_items_deleted">%2$d 項中的 %1$d 項已順利刪除。</string>
 	<string name="local_index_items_restored">%2$d 項中的 %1$d 項已順利啟動。</string>
-	<string name="local_index_action_do">您即將 %1$s %2$s 項目，要繼續嗎？</string>
+	<string name="local_index_action_do">您即將 %2$s 個項目 %1$s，要繼續嗎？</string>
 	<string name="local_index_descr_title">管理地圖檔案</string>
 	<string name="local_index_mi_restore">啟用</string>
 	<string name="local_index_mi_backup">停用</string>
@@ -1729,9 +1729,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="navigation_intent_invalid">無效的格式：%s</string>
 <string name="osmo_settings_uuid">專有的裝置 ID</string>
     <string name="osmo_plugin_name">OsMo (進階即時監視)</string>
-    <string name="osmo_settings">OsMo OpenStreetMap 監視（測試版）</string>
-   	<string name="osmo_settings_descr">組態監視設定值和設定個人監視頻道</string>
-    <string name="osmo_plugin_description">"OpenStreetMap 進階即時監視，跟蹤其它裝置並進行追蹤，請參閱 http://osmo.mobi。建立匿名群組，分享彼此的位置和交流。它具有各種設定用於連線階段追蹤或持續的追蹤。匿名群組是有限制天數和一些功能，也就是沒有遠端控制和群組管理員。完整的功能需在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
+    <string name="osmo_settings">OpenStreetMap 監控</string>
+   	<string name="osmo_settings_descr">組態監控設定值和安裝個人監控頻道</string>
+    <string name="osmo_plugin_description">"OpenStreetMap 進階即時監控，跟蹤其它裝置並進行追蹤，請參閱 http://osmo.mobi。建立匿名群組，分享彼此的位置和交流。它具有各種設定用於連線階段追蹤或持續的追蹤。匿名群組是有限制天數和一些功能，也就是沒有遠端控制和群組管理員。完整的功能需在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
     <string name="keep_informing_never">永不</string>
     <string name="keep_informing_descr">按照定期間隔重新通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
@@ -1943,4 +1943,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="rendering_value_car_name">汽車</string>
     <string name="rendering_value_bicycle_name">自行車</string>
     <string name="rendering_value_pedestrian_name">步行</string>
+    <string name="more">更多...</string>
+    <string name="download_additional_maps">要下載缺少的地圖 %1$ s (%2$ d MB) 嗎？</string>
     </resources>

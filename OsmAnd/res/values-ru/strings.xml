@@ -1636,7 +1636,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_track_interval">Интервал отправки</string>
 	<string name="osmo_group">Группа OsMo</string>
     <string name="osmo_track_interval_descr">Выберите временной интервал для отправки местоположения</string>
-    <string name="osmo_activity">OpenStreetMap-Мониторинг</string>
+    <string name="osmo_activity">OpenStreetMap Мониторинг</string>
     <string name="osmo_share_current_session">Поделиться текущей сессией в браузере</string>
     <string name="osmo_share_session">Поделиться сессией</string>
     <string name="osmo_session_id_share">URL сессии для отслеживания устройства (%1$s)</string>
@@ -1796,4 +1796,6 @@ OsmAnd - открытый источник и активно развается.
     <string name="rendering_value_car_name">Автомобиль</string>
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пешеход</string>
+    <string name="download_additional_maps">Скачать недостающие карты %1$s (%2$d MB)?</string>
+    <string name="more">Более...</string>
     </resources>

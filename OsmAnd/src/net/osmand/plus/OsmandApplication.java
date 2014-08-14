@@ -19,6 +19,7 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
+import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
@@ -59,6 +60,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.NavUtils;
 import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.accessibility.AccessibilityManager;
@@ -114,6 +116,8 @@ public class OsmandApplication extends Application {
 	BRouterServiceConnection bRouterServiceConnection;
 
 	MapActivity mapActivity;
+	DownloadIndexActivity downloadActivity;
+	
 	@Override
 	public void onCreate() {
 		long timeToStart = System.currentTimeMillis();
@@ -476,8 +480,7 @@ public class OsmandApplication extends Application {
 
 		if (getNavigationService() == null) {
 			fullExit();
-		}
-		else if (disableService) {
+		} else if (disableService) {
 			final Intent serviceIntent = new Intent(this, NavigationService.class);
 			stopService(serviceIntent);
 
@@ -861,5 +864,13 @@ public class OsmandApplication extends Application {
 
 	public void setMapActivity(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+	}
+	
+	public void setDownloadActivity(DownloadIndexActivity downloadActivity) {
+		this.downloadActivity = downloadActivity;
+	}
+	
+	public DownloadIndexActivity getDownloadActivity() {
+		return downloadActivity;
 	}
 }

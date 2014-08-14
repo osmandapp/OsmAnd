@@ -69,7 +69,7 @@ public class WaypointDialogHelper {
 
 				updatePointInfoView(closePointDialog, point);
 				closePointDialog.setBackgroundColor(mapActivity.getResources().getColor(R.color.color_black));
-				((TextView)closePointDialog.findViewById(R.id.waypoint_text)).setTextColor(Color.WHITE);
+				((TextView) closePointDialog.findViewById(R.id.waypoint_text)).setTextColor(Color.WHITE);
 				View all = closePointDialog.findViewById(R.id.all_points);
 				all.setVisibility(vlp.size() <= 1 ? View.GONE : View.VISIBLE);
 				all.setOnClickListener(new View.OnClickListener() {

@@ -1298,7 +1298,9 @@ public class OsmandSettings {
 
 	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route"; //$NON-NLS-1$
+	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route_int"; //$NON-NLS-1$
+	public final static int NAVIGATE_CURRENT_GPX = 2;
+	public final static int NAVIGATE = 1;
 	public final static String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description"; //$NON-NLS-1$
 	public final static String START_POINT_LAT = "start_point_lat"; //$NON-NLS-1$
 	public final static String START_POINT_LON = "start_point_lon"; //$NON-NLS-1$
@@ -1334,11 +1336,14 @@ public class OsmandSettings {
 	}
 	
 	
-	public boolean isRouteToPointNavigateAndClear(){
-		boolean t = settingsAPI.contains(globalPreferences,POINT_NAVIGATE_ROUTE);
-		settingsAPI.edit(globalPreferences).remove(POINT_NAVIGATE_ROUTE).commit();
-		return t;
+	public int isRouteToPointNavigateAndClear() {
+		int vl = settingsAPI.getInt(globalPreferences, POINT_NAVIGATE_ROUTE, 0);
+		if(vl != 0) {
+			settingsAPI.edit(globalPreferences).remove(POINT_NAVIGATE_ROUTE).commit();
+		}
+		return vl;
 	}
+	
 	
 	public boolean clearIntermediatePoints() {
 		return settingsAPI.edit(globalPreferences).remove(INTERMEDIATE_POINTS).remove(INTERMEDIATE_POINTS_DESCRIPTION).commit();
@@ -1451,7 +1456,11 @@ public class OsmandSettings {
 	public boolean navigateDialog() {
 		return settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_ROUTE, "true").commit();
 	}
-
+	
+	public boolean navigateDialog(boolean gpx) {
+		return settingsAPI.edit(globalPreferences).putInt(POINT_NAVIGATE_ROUTE, gpx ? NAVIGATE_CURRENT_GPX : NAVIGATE).commit();
+	}
+	
 
 	/**
 	 * the location of a parked car

@@ -2,18 +2,14 @@ package net.osmand.plus.sherpafy;
 
 import java.util.List;
 
-import net.osmand.IProgress;
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.DownloadIndexActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
@@ -50,9 +46,12 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 		super.onAttach(activity);
 		app = (OsmandApplication) getSherlockActivity().getApplication();
 		custom = (SherpafyCustomization) app.getAppCustomization();
-		TourAdapter tourAdapter = new TourAdapter(custom.getTourInformations());
-		setListAdapter(tourAdapter);
 		setHasOptionsMenu(true);
+		refreshAdapter();
+	}
+	
+	public void refreshAdapter() {
+		setListAdapter(new TourAdapter(custom.getTourInformations()));
 	}
 	
 
@@ -95,9 +94,17 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 		LinearLayout ll = new LinearLayout(getActivity());
 		ll.setPadding(5, 3, 5, 0);
 		ll.addView(editText, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		AndroidUtils.softKeyboardDelayed(editText);
 		builder.setView(ll);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.sherpafy_public_access, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				custom.setAccessCode("");
+				((TourViewActivity) getActivity()).startDownloadActivity();
+			}
+		});
+		
+		builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String acCode = editText.getText().toString();

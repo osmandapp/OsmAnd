@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
@@ -12,11 +13,13 @@ import java.util.TreeSet;
 import net.osmand.IProgress;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
@@ -25,21 +28,31 @@ import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+
+import com.actionbarsherlock.app.ActionBar;
 
 public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	private static final String SELECTED_TOUR = "selected_tour";
 	private static final String ACCESS_CODE = "access_code";
-	private static final String SELECTED_STAGE = "selected_stage";
-
+	private static final String SELECTED_STAGE = "selected_stage_int";
+	private static final String VISITED_STAGES = "visited_stages_int";
 	private CommonPreference<String> selectedTourPref;
-	private CommonPreference<String> selectedStagePref;
+	private CommonPreference<Integer> selectedStagePref;
+	private CommonPreference<Integer> visitedStagesPref;
+	private boolean toursIndexed;
 	private List<TourInformation> tourPresent = new ArrayList<TourInformation>();
 	private StageInformation selectedStage = null;
 	private TourInformation selectedTour = null;
@@ -47,6 +60,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private CommonPreference<String> accessCodePref;
 	private List<FavouritePoint> cachedFavorites = new ArrayList<FavouritePoint>();
 	private SettingsAPI originalApi;
+	public static final String TOUR_SERVER = "download.osmand.net";	
 
 	@Override
 	public void setup(OsmandApplication app) {
@@ -59,7 +73,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	public boolean setAccessCode(String acCode) {
 		acCode = acCode.toUpperCase();
-		if(validate(acCode)) {
+		if(DownloadIndexActivity.downloadListIndexThread != null) {
+			DownloadIndexActivity.downloadListIndexThread.clear();
+		}
+		if(validate(acCode) || Algorithms.isEmpty(acCode)) {
 			accessCodePref.set(acCode);
 			return true;
 		}
@@ -139,13 +156,13 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		ArrayList<TourInformation> tourPresent = new ArrayList<TourInformation>();
 		List<String> warns = new ArrayList<String>();
 		selectedTour = null;
+		final HashSet<String> suggestToDownloadMap = new HashSet<String>();
 		if(toursFolder.exists()) {
 			File[] availableTours = toursFolder.listFiles();
 			if(availableTours != null) {
 				String selectedName = selectedTourPref.get();
 				for(File tr : availableTours) {
 					if (tr.isDirectory()) {
-						boolean selected = selectedName != null && selectedName.equals(tr.getName());
 						String date = app.getResourceManager().getDateFormat()
 								.format(new Date(DownloadIndexActivity.findFileInDir(tr).lastModified()));
 						indexFileNames.put(tr.getName(), date);
@@ -156,6 +173,15 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
+						// check that tour was downloaded
+						if(toursIndexed) {
+							for (String map : tourInformation.getMaps()) {
+								if (!new File(toursFolder.getParentFile(), map + ".obf").exists()) {
+									suggestToDownloadMap.add(map);
+								}
+							}
+						}
+						boolean selected = selectedName != null && selectedName.equals(tourInformation.getName());
 						if (selected) {
 							reloadSelectedTour(progress, tourInformation);
 						}
@@ -165,8 +191,22 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 					app.getSettings().setSettingsAPI(originalApi);
 				}
 			}
+			toursIndexed = true;
 		}
 		this.tourPresent = tourPresent;
+		if(!suggestToDownloadMap.isEmpty()) {
+			final DownloadIndexActivity da = app.getDownloadActivity();
+			if (da != null) {
+				app.runInUIThread(new Runnable() {
+
+					@Override
+					public void run() {
+						da.showDialogToDownloadMaps(suggestToDownloadMap);
+
+					}
+				});
+			}
+		}
 		return warns;
 	}
 
@@ -193,8 +233,21 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		} catch (IOException e) {
 			app.showToastMessage(R.string.settings_file_create_error);
 		}
-		selectedStagePref = app.getSettings().registerStringPreference(SELECTED_STAGE, null).makeGlobal();
+		selectedStagePref = app.getSettings().registerIntPreference(SELECTED_STAGE, -1).makeGlobal();
+		visitedStagesPref = app.getSettings().registerIntPreference(VISITED_STAGES, 0).makeGlobal();
 		selectedTour = tourInformation;
+		Integer it = selectedStagePref.get();
+		while(it >= 0 && isStageVisited(it) ){
+			it++;
+		}
+		if(it >= 0 && it < tourInformation.getStageInformation().size()) {
+			selectedStage = tourInformation.getStageInformation().get(it);
+		}
+	}
+	
+	public boolean isStageVisited(int stageOrder) {
+		Integer gi = visitedStagesPref.get();
+		return (gi & (1 << stageOrder)) > 0;
 	}
 	
 	public StageInformation getSelectedStage() {
@@ -203,10 +256,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	public void selectStage(StageInformation stage, IProgress progress) {
 		if(stage == null) {
-			selectedStagePref.set(null);
+			selectedStagePref.set(-1);
 			selectedStage = null;
 		} else {
-			selectedStagePref.set(stage.getName());
+			selectedStagePref.set(stage.getOrder());
 			selectedStage = stage;
 		}
 		loadSelectedStage();
@@ -252,43 +305,86 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 	
 	@Override
-	public void prepareLocationMenu(MapActivity mapActivity, ContextMenuAdapter adapter) {
+	public void prepareLocationMenu(final MapActivity mapActivity, ContextMenuAdapter adapter) {
 		filter(adapter, R.string.pause_navigation, R.string.continue_navigation, R.string.context_menu_item_directions_to,
 				R.string.context_menu_item_destination_point, R.string.context_menu_item_search,
-				R.string.context_menu_item_share_location, R.string.context_menu_item_add_favorite);
+				R.string.context_menu_item_share_location/*, R.string.context_menu_item_add_favorite*/);
 		MapActivityLayers layers = mapActivity.getMapLayers();
 		if(layers.getContextMenuLayer().getFirstSelectedObject() instanceof FavouritePoint) {
-			FavouritePoint fp = ((FavouritePoint)layers.getContextMenuLayer().getFirstSelectedObject());
+			final FavouritePoint fp = ((FavouritePoint)layers.getContextMenuLayer().getFirstSelectedObject());
 			if(fp.getExtraParam() >= 0 && selectedStage != null) {
-				StageFavorite sf = (StageFavorite) selectedStage.getFavorites().get(fp.getExtraParam());
-				showFavoriteDialog(mapActivity, selectedStage, sf);
+				adapter.item(R.string.show_waypoint_information).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light ).position(0)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						StageFavorite sf = (StageFavorite) selectedStage.getFavorites().get(fp.getExtraParam());
+						showFavoriteDialog(mapActivity, selectedStage, sf);
+					}
+				}).reg();
+				
+				
 			}
 		}
 	}
 	
-	private void showFavoriteDialog(MapActivity mapActivity, StageInformation stage, StageFavorite sf) {
+	public void showFavoriteDialog(MapActivity mapActivity, StageInformation stage, StageFavorite sf) {
 		SherpafyFavoriteFragment fragment = new SherpafyFavoriteFragment();
 		Bundle bl = new Bundle();
 		bl.putInt(SherpafyFavoriteFragment.STAGE_PARAM, stage.getOrder());
 		bl.putString(SherpafyFavoriteFragment.TOUR_PARAM, stage.getTour().getId());
 		bl.putInt(SherpafyFavoriteFragment.FAV_PARAM, sf.getOrder());
 		fragment.setArguments(bl);
-		Builder bld = new AlertDialog.Builder(mapActivity);
-		bld.setTitle(sf.getName() + " TODO ");
-		bld.setPositiveButton(R.string.default_buttons_ok, null);
-		// TODO
-//		Builder bld = new AlertDialog.Builder(mapActivity);
-//		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		new FavoriteDialogFragment(fragment).show(fragmentManager.beginTransaction(), "DialogFragment");
 	}
+	
+	public static class FavoriteDialogFragment extends DialogFragment {
+		SherpafyFavoriteFragment fragment;
+        public FavoriteDialogFragment(SherpafyFavoriteFragment fragment) {
+			this.fragment = fragment;
+		}
+
+        @Override
+        public void onActivityCreated(Bundle arg0) {
+        	super.onActivityCreated(arg0);
+        	getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+        }
+
+		@Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            View view = new View(getActivity());
+            view.setId(R.id.content_frame);
+            AlertDialog dlg = new AlertDialog.Builder(getActivity())
+            		.setView(view)
+                    .setPositiveButton(R.string.default_buttons_ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        }
+                    )
+                    .create();
+            return dlg;
+        }
+    }
 
 	@Override
-	public void prepareOptionsMenu(MapActivity mapActivity, ContextMenuAdapter adapter) {
+	public void prepareOptionsMenu(final MapActivity mapActivity, ContextMenuAdapter adapter) {
 		
 		filter(adapter, R.string.exit_Button, R.string.menu_layers,
+				R.string.pause_navigation, R.string.continue_navigation,  
 				R.string.cancel_navigation, R.string.cancel_route, R.string.clear_destination,
 				R.string.get_directions, 
 				R.string.menu_mute_on, R.string.menu_mute_off,
 				R.string.where_am_i);
+		adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light ).position(adapter.length() - 1)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						Intent newIntent = new Intent(mapActivity, TourViewActivity.class);
+						// newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						mapActivity.startActivity(newIntent);
+					}
+				}).reg();
 	}
 	
 	public void filter(ContextMenuAdapter a, Integer... ids) {
@@ -309,5 +405,23 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	@Override
 	public List<FavouritePoint> getFavorites() {
 		return cachedFavorites;
+	}
+	
+	@Override
+	public String getIndexesUrl() {
+		String s = "http://"+TOUR_SERVER+"/tours.php?gzip&" + Version.getVersionAsURLParam(app);
+		if(!Algorithms.isEmpty(accessCodePref.get())) {
+			s += "&code="+accessCodePref.get();
+		}
+		return s;
+	}
+	
+	public void preDownloadActivity(final DownloadIndexActivity da, final List<DownloadActivityType> downloadTypes, ActionBar actionBar) {
+		actionBar.setTitle(TourDownloadType.TOUR.getString(da));
+	}
+	
+	@Override
+	public boolean showDownloadExtraActions() {
+		return false;
 	}
 }

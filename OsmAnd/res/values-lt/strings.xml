@@ -1601,7 +1601,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="osmo_settings_descr">Konfigūruoti stebėjimo nustatymus ir nustatyti asmeninį stebėjimo kanalą</string>
     <string name="osmo_plugin_description">"OpenStreetMap-Monitoring - pažangus tiesioginis stebėjimas http://osmo.mobi. Suteikia daug galimybių būti stebimam ir stebėti kitus įrenginius. Susikurkite anonimines grupes, bendrinkite vienas kito vietą ir bendraukite. Ši paslauga turi įvairių nustatymų vienkartiniam ir pastoviam sekimui. Anoniminės grupės gyvuoja tik kelias dienas su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. Viso funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti. "</string>
     <string name="osmo_plugin_name">OsMo (Pažangus tiesioginis stebėjimas)</string>
-    <string name="osmo_settings">OsMo OpenStreetMap stebėjimas (beta)</string>
+    <string name="osmo_settings">OpenStreetMap stebėjimas</string>
    	<string name="keep_informing_never">Niekada</string>
     <string name="keep_informing_descr">Maršruto instrukcijas pakartotinai pranešinėti reguliariais intervalais</string>
     <string name="keep_informing">Pakartoti maršruto instrukcijas</string>
@@ -1813,4 +1813,6 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="rendering_value_car_name">Automobilis</string>
     <string name="rendering_value_bicycle_name">Dviratis</string>
     <string name="rendering_value_pedestrian_name">Pėstysis</string>
+    <string name="more">Dar…</string>
+    <string name="download_additional_maps">Atsiųsti trūkstamus žemėlapius %1$s (%2$d MB)?</string>
     </resources>

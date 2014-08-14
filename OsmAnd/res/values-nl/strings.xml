@@ -1726,7 +1726,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
     <string name="osmo_plugin_description">"Geavanceerde live monitoring - zie http://osmo.mobi. Volg andere toestellen en laat jezelf volgen. Maak anonieme groepen, deel je positie en communiceer. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen. Anonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden: zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde gebruikers kunnen ze gebruiken. "</string>
     <string name="osmo_plugin_name">OsMo (geavanceerde live monitoring)</string>
-    <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
+    <string name="osmo_settings">OpenStreetMap Monitoring (OsMo)</string>
    	<string name="keep_informing_never">Niet herhalen</string>
     <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig</string>
     <string name="keep_informing">Herhaal de aanwijzingen</string>
@@ -1944,4 +1944,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_value_car_name">Auto</string>
     <string name="rendering_value_bicycle_name">Fiets</string>
     <string name="rendering_value_pedestrian_name">Voetganger</string>
+    <string name="more">Meer…</string>
     </resources>

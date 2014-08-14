@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>
+    <string name="more">More...</string>
     <string name="rendering_value_browse_map_name">Browse map</string>  
     <string name="rendering_value_car_name">Car</string>
     <string name="rendering_value_bicycle_name">Bicycle</string>
@@ -201,7 +203,7 @@
     <string name="osmo_mode_off">Start OsMo session</string>
     <string name="osmo_settings_debug">Debug information</string>
     <string name="osmo_settings_descr">Configure monitoring settings and setup personal monitoring channel</string>
-    <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
+    <string name="osmo_settings">OpenStreetMap Monitoring</string>
     <string name="osmo_plugin_description">OpenStreetMap advanced live monitoring, see http://osmo.mobi. Track other devices and be tracked. 
         Create anonymous groups, share each other\'s location, and communicate. Has various settings for session tracking or permanent tracking.
         Anonymous groups are limited for a number of days and for some feature, i.e. there is no remote control and group administrator. 

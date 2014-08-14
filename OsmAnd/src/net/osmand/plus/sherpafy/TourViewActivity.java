@@ -3,19 +3,19 @@ package net.osmand.plus.sherpafy;
 import java.util.List;
 import java.util.WeakHashMap;
 
-import android.view.KeyEvent;
-import android.widget.*;
 import net.osmand.IProgress;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -23,7 +23,6 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -32,7 +31,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -57,12 +61,12 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 
 	private SherpafyCustomization customization;
-	private Point displaySize;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ArrayAdapter<Object> drawerAdapter;
 	private WeakHashMap<Object, Fragment> fragments = new WeakHashMap<Object, Fragment>();
+	private boolean refreshListAfterDownload;
 	private static Object selectedItem;
 
 	@Override
@@ -108,7 +112,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			}
 		});
 
-		displaySize = new Point(getWindowManager().getDefaultDisplay().getWidth(), getWindowManager().getDefaultDisplay().getHeight());
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
 				R.string.default_buttons_other_actions, R.string.close);
 		if (getMyApplication().isApplicationInitializing()) {
@@ -168,8 +171,10 @@ public class TourViewActivity extends SherlockFragmentActivity {
 					} else if (selectedItem == it) {
 						imView.setImageResource(R.drawable.ic_action_ok_light);
 					} else {
+						boolean visited = customization.isStageVisited(((StageInformation) it).getOrder());
 						imView.setImageDrawable(
-								new StageImageDrawable(TourViewActivity.this, StageImageDrawable.MENU_COLOR,
+								new StageImageDrawable(TourViewActivity.this, 
+										visited ? StageImageDrawable.INFO_COLOR : StageImageDrawable.MENU_COLOR,
 										(((StageInformation) it).getOrder() + 1) + "", 0));
 					}
 					tv.setText(((StageInformation) it).getName());
@@ -218,6 +223,10 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if(refreshListAfterDownload){
+			refreshListAfterDownload = false;
+			selectMenu(selectedItem == null ? R.string.sherpafy_tours : selectedItem);
+		}
 	}
 
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType,
@@ -256,6 +265,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			if (fragment == null) {
 				fragment = new SherpafySelectToursFragment();
 				fragments.put(item, fragment);
+			} else {
+				((SherpafySelectToursFragment) fragment).refreshAdapter();
 			}
 			state = STATE_SELECT_TOUR;
 			setDrawerIndicatorVisible(true);
@@ -371,6 +382,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	public void startDownloadActivity() {
 		final Intent download = new Intent(this, DownloadIndexActivity.class);
 		download.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		refreshListAfterDownload = true;
 		startActivity(download);
 	}
 
@@ -435,6 +447,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		WptPt point = null;
 		GPXFile gpx = null;
 		customization.selectTour(tour, IProgress.EMPTY_PROGRESS);
+
 		customization.selectStage(stage, IProgress.EMPTY_PROGRESS);
 		if (customization.getSelectedStage() != null) {
 			gpx = customization.getSelectedStage().getGpx();
@@ -453,8 +466,17 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		if (lp != null) {
 			TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
 			targetPointsHelper.navigateToPoint(new LatLon(lp.lat, lp.lon), true, -1, lp.name);
-			getMyApplication().getSettings().navigateDialog();
+			getMyApplication().getSettings().navigateDialog(true);
 		}
+		String mode = stage != null ? stage.getMode() : tour.getMode();
+		if (!Algorithms.isEmpty(mode)) {
+			final ApplicationMode def = getMyApplication().getSettings().getApplicationMode();
+			ApplicationMode am = ApplicationMode.valueOfStringKey(mode, def);
+			if (am != def) {
+				getMyApplication().getSettings().APPLICATION_MODE.set(am);
+			}
+		}
+		getMyApplication().getSettings().SHOW_FAVORITES.set(true);
 		if (startOver && point != null) {
 			goToMap(new LatLon(point.lat, point.lon));
 		} else {
