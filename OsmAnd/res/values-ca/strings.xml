@@ -1325,7 +1325,7 @@
 	<string name="av_camera_focus_auto">Enfocament automàtic</string>
 	<string name="osb_comment_dialog_error">Error: no s\'ha afegit el comentari</string>
 	<string name="osb_author_dialog_password">Contrasenya de l\'OSM (opcional)</string>
-	<string name="amenity_type_seamark">Boia marina</string>
+	<string name="amenity_type_seamark">Balisa marina</string>
     <string name="app_modes_choose_descr">Seleccioneu els perfils d\'ús visibles a l\'aplicació</string>
     <string name="app_modes_choose">Perfils de l\'aplicació</string>
 	<string name="map_widget_map_rendering">Renderitzat del mapa:</string>
@@ -1383,7 +1383,7 @@
     <string name="speech_rate_descr">Especifiqueu la velocitat de síntesi de veu</string>
     <string name="speech_rate">Velocitat de lectura</string>
     
-    <string name="complex_route_calculation_failed">Fracàs del càlcul ràpid de ruta (%s), retorn al mètode lent.</string>
+    <string name="complex_route_calculation_failed">El càlcul ràpid de ruta ha fallat (%s), retorn al mètode lent.</string>
     <string name="disable_complex_routing_descr">Desactiva el càlcul de ruta en 2 fases per cotxe</string>
     <string name="disable_complex_routing">Desactiva el càlcul complex de la ruta</string>
     <string name="route_is_too_long">Ruta massa llarga. El càlcul fora de línia entre punts separats per més de 200 Km pot ser molt lent o aturar-se del tot. Per resoldre-ho, heu d\'afegir fites intermèdies.</string>
@@ -1939,5 +1939,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">Vianant</string>
     <string name="more">Més…</string>
-    <string name="download_additional_maps">Voleu baixar %1$s mapes que us manquen (%2$d MB)?</string>
+    <string name="download_additional_maps">Voleu baixar els mapes que us manquen %1$s (%2$d MB)?</string>
     </resources>
