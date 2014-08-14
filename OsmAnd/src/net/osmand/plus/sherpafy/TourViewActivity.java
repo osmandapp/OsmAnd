@@ -54,7 +54,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		STATE_STAGE_OVERVIEW,
 		STATE_DETAILED_OVERVIEW,
 		STATE_DETAILED_INSTRUCTIONS,
-		STAGE_GALLERY
+		STAGE_GALLERY,
+		STAGE_FAVORITES
 	}
 
 
@@ -143,7 +144,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			if (fragment != null) {
 				fragment.onBackPressed();
 			}
-		} else if (state == viewState.STATE_DETAILED_OVERVIEW || state == viewState.STATE_DETAILED_INSTRUCTIONS) {
+		} else if (state == viewState.STATE_DETAILED_OVERVIEW || state == viewState.STATE_DETAILED_INSTRUCTIONS || state == viewState.STAGE_FAVORITES) {
 			showSelectedItem();
 		}
 	}
@@ -350,6 +351,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 
 	public void showFavoriteFragment(StageInformation stage, StageFavorite sf) {
+		state = viewState.STAGE_FAVORITES;
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		setDrawerIndicatorVisible(false);
 		SherpafyFavoriteFragment fragment = new SherpafyFavoriteFragment();
