@@ -47,14 +47,18 @@ import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
  */
 public class TourViewActivity extends SherlockFragmentActivity {
 
-	private static final int STATE_LOADING = -1;
-	private static final int STATE_SELECT_TOUR = 1;
-	private static final int STATE_TOUR_VIEW = 2;
-	private static final int STATE_STAGE_OVERVIEW = 3;
-	private static final int STATE_DETAILED_OVERVIEW = 4;
-	private static final int STATE_DETAILED_INSTRUCTIONS = 5;
-	private static final int STAGE_GALLERY = 6;
-	private static int state = STATE_LOADING;
+	private enum viewState {
+		STATE_LOADING,
+		STATE_SELECT_TOUR,
+		STATE_TOUR_VIEW,
+		STATE_STAGE_OVERVIEW,
+		STATE_DETAILED_OVERVIEW,
+		STATE_DETAILED_INSTRUCTIONS,
+		STAGE_GALLERY
+	}
+
+
+	private static viewState state = viewState.STATE_LOADING;
 
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
@@ -117,10 +121,10 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		if (getMyApplication().isApplicationInitializing()) {
 			FragmentManager fragmentManager = getSupportFragmentManager();
 			fragmentManager.beginTransaction().replace(R.id.content_frame, new SherpafyLoadingFragment()).commit();
-		} else if (state == STATE_DETAILED_INSTRUCTIONS) {
+		} else if (state == viewState.STATE_DETAILED_INSTRUCTIONS) {
 			TourInformation tour = (TourInformation) selectedItem;
 			showDetailedInstructions(getString(R.string.sherpafy_instructions), tour.getInstructions());
-		} else if (state == STATE_DETAILED_OVERVIEW) {
+		} else if (state == viewState.STATE_DETAILED_OVERVIEW) {
 			TourInformation tour = (TourInformation) selectedItem;
 			showDetailedInstructions(getString(R.string.sherpafy_overview), tour.getFulldescription());
 		} else {
@@ -130,16 +134,16 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	@Override
 	public void onBackPressed() {
-		if (state == STATE_SELECT_TOUR) {
+		if (state == viewState.STATE_SELECT_TOUR) {
 			super.onBackPressed();
-		} else if (state == STATE_TOUR_VIEW) {
+		} else if (state == viewState.STATE_TOUR_VIEW) {
 			selectMenu(R.string.sherpafy_tours);
-		} else if (state == STATE_STAGE_OVERVIEW) {
+		} else if (state == viewState.STATE_STAGE_OVERVIEW) {
 			SherpafyStageFragment fragment = (SherpafyStageFragment) getSupportFragmentManager().findFragmentByTag(String.valueOf(state));
 			if (fragment != null) {
 				fragment.onBackPressed();
 			}
-		} else if (state == STATE_DETAILED_OVERVIEW || state == STATE_DETAILED_INSTRUCTIONS) {
+		} else if (state == viewState.STATE_DETAILED_OVERVIEW || state == viewState.STATE_DETAILED_INSTRUCTIONS) {
 			showSelectedItem();
 		}
 	}
@@ -173,7 +177,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 					} else {
 						boolean visited = customization.isStageVisited(((StageInformation) it).getOrder());
 						imView.setImageDrawable(
-								new StageImageDrawable(TourViewActivity.this, 
+								new StageImageDrawable(TourViewActivity.this,
 										visited ? StageImageDrawable.INFO_COLOR : StageImageDrawable.MENU_COLOR,
 										(((StageInformation) it).getOrder() + 1) + "", 0));
 					}
@@ -189,11 +193,11 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 
 	public void updateActionBarTitle() {
-		if (state == STATE_LOADING) {
+		if (state == viewState.STATE_LOADING) {
 			getSupportActionBar().setTitle(R.string.app_name);
-		} else if (state == STATE_SELECT_TOUR) {
+		} else if (state == viewState.STATE_SELECT_TOUR) {
 			getSupportActionBar().setTitle(R.string.sherpafy_tours);
-		} else if (state == STATE_TOUR_VIEW) {
+		} else if (state == viewState.STATE_TOUR_VIEW) {
 		}
 		invalidateOptionsMenu();
 	}
@@ -223,7 +227,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(refreshListAfterDownload){
+		if (refreshListAfterDownload) {
 			refreshListAfterDownload = false;
 			selectMenu(selectedItem == null ? R.string.sherpafy_tours : selectedItem);
 		}
@@ -268,10 +272,10 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			} else {
 				((SherpafySelectToursFragment) fragment).refreshAdapter();
 			}
-			state = STATE_SELECT_TOUR;
+			state = viewState.STATE_SELECT_TOUR;
 			setDrawerIndicatorVisible(true);
 		} else if (item instanceof TourInformation) {
-			state = STATE_TOUR_VIEW;
+			state = viewState.STATE_TOUR_VIEW;
 			if (fragment == null) {
 				fragment = new SherpafyTourFragment();
 				Bundle bl = new Bundle();
@@ -281,7 +285,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			}
 			setDrawerIndicatorVisible(true);
 		} else if (item instanceof StageInformation) {
-			state = STATE_STAGE_OVERVIEW;
+			state = viewState.STATE_STAGE_OVERVIEW;
 			if (fragment == null) {
 				fragment = new SherpafyStageFragment();
 				Bundle bl = new Bundle();
@@ -358,12 +362,12 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	}
 
 	public void showDetailedInstructions(String title, String cont) {
-		state = STATE_DETAILED_INSTRUCTIONS;
+		state = viewState.STATE_DETAILED_INSTRUCTIONS;
 		showHtmlFragment(title, cont);
 	}
 
 	public void showDetailedOverview(String title, String cont) {
-		state = STATE_DETAILED_OVERVIEW;
+		state = viewState.STATE_DETAILED_OVERVIEW;
 		showHtmlFragment(title, cont);
 	}
 
@@ -375,7 +379,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		bl.putString(SherpafyHtmlFragment.HTML, cont);
 		bl.putString(SherpafyHtmlFragment.TITLE, title);
 		fragment.setArguments(bl);
-		fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, String.valueOf(STATE_DETAILED_OVERVIEW)).commit();
+		fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, String.valueOf(viewState.STATE_DETAILED_OVERVIEW)).commit();
 	}
 
 
