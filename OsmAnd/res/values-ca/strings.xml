@@ -1939,4 +1939,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">Vianant</string>
     <string name="more">Més…</string>
+    <string name="download_additional_maps">Voleu baixar %1$s mapes que us manquen (%2$d MB)?</string>
     </resources>
