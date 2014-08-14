@@ -153,6 +153,7 @@ public class MapActivityLayers {
 		});
 		
 		OsmandPlugin.createLayers(mapView, activity);
+		app.getAppCustomization().createLayers(mapView, activity);
 	}
 	
 	

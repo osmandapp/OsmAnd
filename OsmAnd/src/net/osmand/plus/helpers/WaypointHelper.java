@@ -1,27 +1,26 @@
 package net.osmand.plus.helpers;
 
-import net.osmand.Location;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LocationPoint;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.OsmAndAppCustomization;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.util.MapUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+
+import net.osmand.Location;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LocationPoint;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.util.MapUtils;
 
 /**
- * Created by Denis on 08.08.2014.
  */
 public class WaypointHelper {
 	OsmandApplication app;
 
-	private List<LocationPoint> visibleLocationPoints = new CopyOnWriteArrayList<LocationPoint>();
+	// every time we modify this collection, we change the reference (copy on write list)
+	private List<LocationPoint> visibleLocationPoints = new ArrayList<LocationPoint>();
 	private ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<LocationPoint, Integer>();
 	private long locationPointsModified;
 	private Location lastKnownLocation;
@@ -37,11 +36,6 @@ public class WaypointHelper {
 	public WaypointHelper(OsmandApplication application) {
 		app = application;
 	}
-
-	public void updateWaypoints() {
-
-	}
-
 
 	public List<LocationPoint> getAllVisibleLocationPoints() {
 		return visibleLocationPoints;
@@ -67,13 +61,6 @@ public class WaypointHelper {
 		return points;
 	}
 
-	public List<LocationPoint> getVisiblePOI() {
-		return null;
-	}
-
-	public List<LocationPoint> getVisibleTargets() {
-		return null;
-	}
 
 	public void locationChanged(Location location) {
 		app.getAppCustomization();
@@ -83,6 +70,7 @@ public class WaypointHelper {
 	}
 
 	private void sortVisibleWaypoints() {
+		// TODO mark as passed
 		if (lastKnownLocation != null) {
 			Object[] loc = visibleLocationPoints.toArray();
 			Arrays.sort(loc, getComparator(lastKnownLocation));
@@ -90,7 +78,6 @@ public class WaypointHelper {
 			for (Object aLoc : loc) {
 				visibleLocationPoints.add((LocationPoint) aLoc);
 			}
-			locationPointsModified = System.currentTimeMillis();
 		}
 	}
 
@@ -144,7 +131,7 @@ public class WaypointHelper {
 
 	public void clearAllVisiblePoints() {
 		this.locationPointsStates.clear();
-		this.visibleLocationPoints.clear();
+		this.visibleLocationPoints = new ArrayList<LocationPoint>();
 		this.locationPointsModified = System.currentTimeMillis();
 	}
 
@@ -160,17 +147,22 @@ public class WaypointHelper {
 		}
 		sortVisibleWaypoints();
 	}
+	
+	public void setNewRoute(RouteCalculationResult res) {
+		// TODO compare reset all !!
+		ArrayList<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
+		if (app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get()){
+			locationPoints.addAll(app.getFavorites().getFavouritePoints());
+			locationPoints.addAll(app.getAppCustomization().getWaypoints());
+		}
+		locationPoints.addAll(res.getLocationPoints());
+		setVisibleLocationPoints(locationPoints);
+	}
 
 	public List<LocationPoint> removeFromList(List<LocationPoint> items, Object item) {
-		List<LocationPoint> newArray = new ArrayList<LocationPoint>();
-		Object[] oldArray = items.toArray();
-		for (int i = 0; i < oldArray.length; i++) {
-			if (!item.equals(oldArray[i])) {
-				newArray.add((LocationPoint) oldArray[i]);
-			}
-		}
-		items.clear();
-		return new CopyOnWriteArrayList<LocationPoint>(newArray);
+		List<LocationPoint> newArray = new ArrayList<LocationPoint>(items);
+		newArray.remove(item);
+		return newArray;
 	}
 
 	private Comparator<Object> getComparator(final net.osmand.Location lastLocation) {
@@ -186,4 +178,5 @@ public class WaypointHelper {
 
 		};
 	}
+
 }

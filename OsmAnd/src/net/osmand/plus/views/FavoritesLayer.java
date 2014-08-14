@@ -6,12 +6,12 @@ import java.util.List;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
@@ -24,20 +24,29 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.widget.Toast;
 
-public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, MapTextProvider<FavouritePoint> {
+public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, MapTextProvider<LocationPoint> {
 
-	private static final int startZoom = 6;
+	protected int startZoom = 6;
 	
-	private OsmandMapTileView view;
+	protected OsmandMapTileView view;
 	private Paint paint;
 	private FavouritesDbHelper favorites;
-	private List<FavouritePoint> cache = new ArrayList<FavouritePoint>();
+	protected List<LocationPoint> cache = new ArrayList<LocationPoint>();
 	private MapTextLayer textLayer;
 //	private Bitmap d;
 
-	private OsmAndAppCustomization customization;
 	
+	protected Class<? extends LocationPoint> getFavoriteClass() {
+		return (Class<? extends LocationPoint>) FavouritePoint.class;
+	}
 	
+	protected String getObjName() {
+		return view.getContext().getString(R.string.favorite);
+	}
+	
+	protected List<? extends LocationPoint> getPoints() {
+		return favorites.getFavouritePoints();
+	}
 	
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -49,7 +58,6 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		
 		favorites = view.getApplication().getFavorites();
 		textLayer = view.getLayerByClass(MapTextLayer.class);
-		customization = view.getApplication().getAppCustomization();
 //		favoriteIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_favourite);
 		
 	}
@@ -82,22 +90,18 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		if (tileBox.getZoom() >= startZoom) {
 			// request to load
 			final QuadRect latLonBounds = tileBox.getLatLonBounds();
-			for (FavouritePoint o : favorites.getFavouritePoints()) {
+			for (LocationPoint o : getPoints()) {
 				drawPoint(canvas, tileBox, latLonBounds, o);
 			}
-			List<FavouritePoint> customFavorites = customization.getFavorites();
-			if (customFavorites != null) {
-				for (FavouritePoint o : customFavorites) {
-					drawPoint(canvas, tileBox, latLonBounds, o);
-				}
-			}
+			
 		}
 		if(textLayer.isVisible()) {
 			textLayer.putData(this, cache);
 		}
 	}
 
-	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, final QuadRect latLonBounds, FavouritePoint o) {
+
+	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, final QuadRect latLonBounds, LocationPoint o) {
 		if (o.isVisible() && o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left
 				&& o.getLongitude() <= latLonBounds.right ) {
 			cache.add(o);
@@ -116,23 +120,17 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		return false;
 	}
 
-	public void getFavoriteFromPoint(RotatedTileBox tb, PointF point, List<? super FavouritePoint> res) {
+	public void getFavoriteFromPoint(RotatedTileBox tb, PointF point, List<? super LocationPoint> res) {
 		int r = (int) (15 * tb.getDensity());
 		int ex = (int) point.x;
 		int ey = (int) point.y;
-		for (FavouritePoint n : favorites.getFavouritePoints()) {
+		for (LocationPoint n : getPoints()) {
 			getFavFromPoint(tb, res, r, ex, ey, n);
-		}
-		List<FavouritePoint> customFavorites = customization.getFavorites();
-		if (customFavorites != null) {
-			for (FavouritePoint n : customFavorites) {
-				getFavFromPoint(tb, res, r, ex, ey, n);
-			}
 		}
 	}
 
-	private void getFavFromPoint(RotatedTileBox tb, List<? super FavouritePoint> res, int r, int ex, int ey,
-			FavouritePoint n) {
+	private void getFavFromPoint(RotatedTileBox tb, List<? super LocationPoint> res, int r, int ex, int ey,
+			LocationPoint n) {
 		if (n.isVisible()) { 
 			int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
 			int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
@@ -144,16 +142,16 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		List<FavouritePoint> favs = new ArrayList<FavouritePoint>();
+		List<LocationPoint> favs = new ArrayList<LocationPoint>();
 		getFavoriteFromPoint(tileBox, point, favs);
 		if(!favs.isEmpty() && (tileBox.getZoom() > 14 || favs.size() < 6)){
 			StringBuilder res = new StringBuilder();
 			int i = 0;
-			for(FavouritePoint fav : favs) {
+			for(LocationPoint fav : favs) {
 				if (i++ > 0) {
 					res.append("\n\n");
 				}
-				res.append(view.getContext().getString(R.string.favorite) + " : " + fav.getName());  //$NON-NLS-1$
+				res.append(getObjName() + " : " + fav.getName());  //$NON-NLS-1$
 			}
 			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
 			return true;
@@ -164,16 +162,19 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 
 	@Override
 	public String getObjectDescription(Object o) {
-		if(o instanceof FavouritePoint){
-			return view.getContext().getString(R.string.favorite) + " : " + ((FavouritePoint)o).getName(); //$NON-NLS-1$
+		Class<? extends LocationPoint> fcl = getFavoriteClass();
+		if(o!= null && fcl.isInstance(o)) {
+			return getObjName() + " : " + ((LocationPoint)o).getName(); //$NON-NLS-1$
 		}
 		return null;
 	}
+
+	
 	
 	@Override
 	public String getObjectName(Object o) {
-		if(o instanceof FavouritePoint){
-			return ((FavouritePoint)o).getName(); //$NON-NLS-1$
+		if(o instanceof LocationPoint){
+			return ((LocationPoint)o).getName(); //$NON-NLS-1$
 		}
 		return null;
 	}
@@ -185,8 +186,8 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if(o instanceof FavouritePoint){
-			return new LatLon(((FavouritePoint)o).getLatitude(), ((FavouritePoint)o).getLongitude());
+		if(o instanceof LocationPoint){
+			return new LatLon(((LocationPoint)o).getLatitude(), ((LocationPoint)o).getLongitude());
 		}
 		return null;
 	}
@@ -214,26 +215,24 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 					}
 				}
 			};
-			if (a.isRemoveable()) {
-				adapter.item(R.string.favourites_context_menu_delete)
+			adapter.item(R.string.favourites_context_menu_delete)
 						.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light).listen(listener)
 						.reg();
-			}
 		}
 	}
 
 	@Override
-	public LatLon getTextLocation(FavouritePoint o) {
+	public LatLon getTextLocation(LocationPoint o) {
 		return new LatLon(o.getLatitude(), o.getLongitude());
 	}
 
 	@Override
-	public int getTextShift(FavouritePoint o, RotatedTileBox rb) {
+	public int getTextShift(LocationPoint o, RotatedTileBox rb) {
 		return (int) (16 * rb.getDensity());
 	}
 
 	@Override
-	public String getText(FavouritePoint o) {
+	public String getText(LocationPoint o) {
 		return o.getName();
 	}
 	

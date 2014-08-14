@@ -126,6 +126,11 @@ public class GPXUtilities {
 			this.hdop = hdop;
 		}
 
+		@Override
+		public boolean isVisible() {
+			return true;
+		}
+
 	}
 
 	public static class TrkSegment extends GPXExtensions {

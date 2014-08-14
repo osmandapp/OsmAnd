@@ -306,6 +306,9 @@ public class TourInformation {
 
 		@Override
 		public int getColor() {
+			if(group != null) {
+				return group.color;
+			}
 			return 0;
 		}
 
@@ -319,6 +322,11 @@ public class TourInformation {
 		
 		public Bitmap getImage() {
 			return decodeImage(imgFile);
+		}
+
+		@Override
+		public boolean isVisible() {
+			return true;
 		}
 
 	}

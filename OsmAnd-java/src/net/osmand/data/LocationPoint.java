@@ -1,7 +1,6 @@
 package net.osmand.data;
 
 /**
- * Created by Натали on 01.08.2014.
  */
 public interface LocationPoint {
 
@@ -12,5 +11,7 @@ public interface LocationPoint {
 	public String getName();
 
 	public int getColor();
+	
+	public boolean isVisible();
 
 }

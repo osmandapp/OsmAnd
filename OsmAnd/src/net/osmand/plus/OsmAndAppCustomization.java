@@ -10,6 +10,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.activities.LocalIndexesActivity;
@@ -19,6 +20,8 @@ import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
+import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -108,10 +111,6 @@ public class OsmAndAppCustomization {
 	public void prepareLocationMenu(MapActivity mapActivity, ContextMenuAdapter adapter) {
 	}
 
-	public List<FavouritePoint> getFavorites() {
-		return null;
-	}
-
 	public String getIndexesUrl() {
 		return "http://"+IndexConstants.INDEX_DOWNLOAD_DOMAIN+"/get_indexes?gzip&" + Version.getVersionAsURLParam(app); //$NON-NLS-1$;
 	}
@@ -150,5 +149,13 @@ public class OsmAndAppCustomization {
 
 	public File getTracksDir() {
 		return app.getAppPath(IndexConstants.GPX_RECORDED_INDEX_DIR);
+	}
+
+	public void createLayers(OsmandMapTileView mapView, MapActivity activity) {
+		
+	}
+	
+	public List<? extends LocationPoint> getWaypoints() {
+		return Collections.emptyList();
 	}
 }

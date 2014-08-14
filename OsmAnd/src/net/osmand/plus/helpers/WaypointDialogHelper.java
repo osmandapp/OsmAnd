@@ -224,7 +224,6 @@ public class WaypointDialogHelper {
 							allpoints.setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View view) {
-									showAllDialog(waypointHelper.getVisibleTargets());
 								}
 							});
 						} else if (header.equals(GPX_WAYPOINTS)){
@@ -238,7 +237,6 @@ public class WaypointDialogHelper {
 							allpoints.setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View view) {
-									showAllDialog(waypointHelper.getVisiblePOI());
 								}
 							});
 						}

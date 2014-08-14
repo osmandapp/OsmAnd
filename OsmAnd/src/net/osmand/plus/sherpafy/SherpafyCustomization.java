@@ -12,7 +12,6 @@ import java.util.TreeSet;
 
 import net.osmand.IProgress;
 import net.osmand.Location;
-import net.osmand.data.FavouritePoint;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
@@ -29,6 +28,7 @@ import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -58,7 +58,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private TourInformation selectedTour = null;
 	private File toursFolder;
 	private CommonPreference<String> accessCodePref;
-	private List<FavouritePoint> cachedFavorites = new ArrayList<FavouritePoint>();
+	private List<StageFavorite> cachedFavorites = new ArrayList<StageFavorite>();
 	private SettingsAPI originalApi;
 	private CommonPreference<String> saveGPXFolder;
 	public static final String TOUR_SERVER = "download.osmand.net";
@@ -288,18 +288,11 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	private void loadSelectedStage() {
 		final StageInformation st = selectedStage;
-		cachedFavorites = new ArrayList<FavouritePoint>();
+		cachedFavorites = new ArrayList<StageFavorite>();
 		for(Object o : st.favorites ) {
 			if(o instanceof StageFavorite) {
 				StageFavorite sf = (StageFavorite) o;
-				FavouritePoint fp = new FavouritePoint(sf.getLatLon().getLatitude(), sf.getLatLon().getLongitude(), 
-						sf.getName(), sf.getGroup() == null ? "" : sf.getGroup().name);
-				if(sf.getGroup() != null && sf.getGroup().getColor() != 0 ){
-					fp.setColor(sf.getGroup().getColor());
-				}
-				fp.setRemoveable(false);
-				fp.setExtraParam(sf.getOrder());
-				cachedFavorites.add(fp);
+				cachedFavorites.add(sf);
 			}
 		}
 		if(st != null && st.gpxFile != null) {
@@ -322,7 +315,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	@Override
 	public void prepareLayerContextMenu(MapActivity activity, ContextMenuAdapter adapter) {
-		filter(adapter, R.string.layer_poi, R.string.layer_amenity_label, R.string.layer_favorites);
+		filter(adapter, R.string.layer_poi, R.string.layer_amenity_label/*, R.string.layer_favorites*/);
 	}
 	
 	@Override
@@ -331,14 +324,13 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				R.string.context_menu_item_destination_point, R.string.context_menu_item_search,
 				R.string.context_menu_item_share_location/*, R.string.context_menu_item_add_favorite*/);
 		MapActivityLayers layers = mapActivity.getMapLayers();
-		if(layers.getContextMenuLayer().getFirstSelectedObject() instanceof FavouritePoint) {
-			final FavouritePoint fp = ((FavouritePoint)layers.getContextMenuLayer().getFirstSelectedObject());
-			if(fp.getExtraParam() >= 0 && selectedStage != null) {
+		if(layers.getContextMenuLayer().getFirstSelectedObject() instanceof StageFavorite) {
+			final StageFavorite sf = ((StageFavorite)layers.getContextMenuLayer().getFirstSelectedObject());
+			if(selectedStage != null) {
 				adapter.item(R.string.show_waypoint_information).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light ).position(0)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-						StageFavorite sf = (StageFavorite) selectedStage.getFavorites().get(fp.getExtraParam());
 						showFavoriteDialog(mapActivity, selectedStage, sf);
 					}
 				}).reg();
@@ -389,6 +381,17 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				R.string.get_directions, 
 				R.string.menu_mute_on, R.string.menu_mute_off,
 				R.string.where_am_i);
+		final StageInformation stage = getSelectedStage();
+		if (stage != null) {
+			adapter.item(R.string.complete_stage)
+					.icons(R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_light)
+					.position(adapter.length() - 1).listen(new OnContextMenuClick() {
+						@Override
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+							markStageAsCompleted(stage);
+						}
+					}).reg();
+		}
 		adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light ).position(adapter.length() - 1)
 				.listen(new OnContextMenuClick() {
 					@Override
@@ -397,7 +400,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						// newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						mapActivity.startActivity(newIntent);
 					}
-				}).reg();
+			}).reg();
 	}
 	
 	public void filter(ContextMenuAdapter a, Integer... ids) {
@@ -416,7 +419,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 	
 	@Override
-	public List<FavouritePoint> getFavorites() {
+	public List<StageFavorite> getWaypoints() {
 		return cachedFavorites;
 	}
 	
@@ -440,5 +443,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	public boolean saveGPXPoint(Location location) {
 		return app.getRoutingHelper().isFollowingMode() && !Algorithms.isEmpty(saveGPXFolder.get());
+	}
+	
+	@Override
+	public void createLayers(OsmandMapTileView mapView, MapActivity activity) {
+		mapView.addLayer(new StageFavoritesLayer(this), 4.1f);
 	}
 }
