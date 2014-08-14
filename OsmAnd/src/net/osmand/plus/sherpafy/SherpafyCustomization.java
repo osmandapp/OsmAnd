@@ -355,6 +355,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		bl.putInt(SherpafyFavoriteFragment.FAV_PARAM, sf.getOrder());
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		final FavoriteDialogFragment ffd = new FavoriteDialogFragment();
+		ffd.setArguments(bl);
 		ffd.show(fragmentManager.beginTransaction(), "DialogFragment");
 	}
 	

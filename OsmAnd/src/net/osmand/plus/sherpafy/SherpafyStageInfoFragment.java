@@ -24,7 +24,6 @@ public class SherpafyStageInfoFragment extends SherlockFragment {
 	protected StageInformation stage;
 	protected TourInformation tour;
 	private View view;
-	private boolean attached;
 
 	public SherpafyStageInfoFragment() {
 	}
@@ -37,7 +36,6 @@ public class SherpafyStageInfoFragment extends SherlockFragment {
 		customization = (SherpafyCustomization) app.getAppCustomization();
 
 		setHasOptionsMenu(true);
-		attached = true;
 		extractArguments(getArguments());
 	}
 
