@@ -1396,10 +1396,10 @@
 \n Nota: les dades antigues quedaran intactes.
 \n Nota: no serà possible compartir dades entre l\'OsmAnd i l\'OsmAnd+. "</string>
     <string name="application_dir_change_warning2">OsmAnd pot provar de traslladar les dades a la nova destinació. Voleu fer-ho?</string>
-    <string name="copying_osmand_one_file_descr">S\'estan copiant el fitxer (%s) a la nova destinació...</string>
-    <string name="copying_osmand_files_descr">S\'estan copiant els fitxers de l\' OsmAnd a la nova destinació (%s)</string>
+    <string name="copying_osmand_one_file_descr">S\'està copiant el fitxer (%s) a la nova destinació...</string>
+    <string name="copying_osmand_files_descr">S\'estan copiant els fitxers de l\'OsmAnd a la nova destinació (%s)</string>
     <string name="copying_osmand_files">S\'estan copiant fitxers de l\' OsmAnd</string>
-    <string name="calculate_osmand_route_gpx">Calcula la ruta OsmAnd sense connexió</string>
+    <string name="calculate_osmand_route_gpx">Calcula una ruta fora de línia amb l\'OsmAnd</string>
     <string name="app_mode_truck">Camió</string>
     <string name="tip_map_styles_t">OsmAnd pot representar els mapes vectorials en diferents estils per tal d\'adaptar-se millor al que necessiteu:
 		\n\nA més de l\'estil normal d\'ús general, podeu configurar a \'Menu\' → \'Configura l\'aparença\' → \'Estil de renderització\' i seleccionar p.ex.
