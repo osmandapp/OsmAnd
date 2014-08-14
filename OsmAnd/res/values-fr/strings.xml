@@ -1803,4 +1803,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_value_bicycle_name">Vélo</string>
     <string name="rendering_value_pedestrian_name">Piéton</string>
     <string name="more">Plus...</string>
+    <string name="download_additional_maps">Télécharger les cartes manquantes %1$s (%2$d Mo) ?</string>
     </resources>

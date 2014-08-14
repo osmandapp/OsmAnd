@@ -1747,7 +1747,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_settings_descr">Zmeniť nastavenia monitorovania a nastaviť osobný monitorovací kanál</string>
     <string name="osmo_plugin_description">"OpenStreetMap pokročilé sledovanie naživo, pozrite http://osmo.mobi. Ponúka možnosti sledovania iných zariadení a byť sledovaný. Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania. Anonymné skupiny sú obmedzené na počet dní a pre niektoré funkcie nie je diaľkové ovládanie ani administrátor skupiny. Plne funkčné skupiny sa vytvárajú na webstránke a sú prístupné len registrovaným používateľom. "</string>
     <string name="osmo_plugin_name">OsMo</string>
-    <string name="osmo_settings">sledovanie OpenStreetMap</string>
+    <string name="osmo_settings">OpenStreetMap sledovanie</string>
    	<string name="keep_informing_never">Nikdy</string>
     <string name="keep_informing_descr">Opakuj navigačné pokyny v pravidelných intervaloch</string>
     <string name="keep_informing">Opakuj navigačné pokyny</string>
@@ -1965,4 +1965,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_car_name">Automobil</string>
     <string name="rendering_value_bicycle_name">Bicykel</string>
     <string name="rendering_value_pedestrian_name">Chodec</string>
+    <string name="download_additional_maps">Stiahnuť chýbajúce mapy %1$s (%2$d MB)?</string>
+    <string name="more">Viac...</string>
     </resources>
