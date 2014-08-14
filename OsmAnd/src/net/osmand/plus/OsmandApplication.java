@@ -60,6 +60,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.NavUtils;
 import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.accessibility.AccessibilityManager;
@@ -479,8 +480,7 @@ public class OsmandApplication extends Application {
 
 		if (getNavigationService() == null) {
 			fullExit();
-		}
-		else if (disableService) {
+		} else if (disableService) {
 			final Intent serviceIntent = new Intent(this, NavigationService.class);
 			stopService(serviceIntent);
 
