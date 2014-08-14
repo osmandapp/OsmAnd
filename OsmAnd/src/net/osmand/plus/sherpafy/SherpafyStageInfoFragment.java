@@ -24,6 +24,7 @@ public class SherpafyStageInfoFragment extends SherlockFragment {
 	protected StageInformation stage;
 	protected TourInformation tour;
 	private View view;
+	private boolean attached;
 
 	public SherpafyStageInfoFragment() {
 	}
@@ -36,14 +37,20 @@ public class SherpafyStageInfoFragment extends SherlockFragment {
 		customization = (SherpafyCustomization) app.getAppCustomization();
 
 		setHasOptionsMenu(true);
-		String id = getArguments().getString(TOUR_PARAM);
+		attached = true;
+		extractArguments(getArguments());
+	}
+
+
+	protected void extractArguments(Bundle args) {
+		String id = args.getString(TOUR_PARAM);
 		for(TourInformation ti : customization.getTourInformations()) {
 			if(ti.getId().equals(id)) {
 				tour = ti;
 				break;
 			}
 		}
-		int k = getArguments().getInt(STAGE_PARAM);
+		int k = args.getInt(STAGE_PARAM);
 		if(tour != null && tour.getStageInformation().size() > k) {
 			stage = tour.getStageInformation().get(k);
 		}

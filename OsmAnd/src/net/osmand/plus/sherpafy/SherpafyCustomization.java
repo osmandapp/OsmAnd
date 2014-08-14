@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.TreeSet;
 
 import net.osmand.IProgress;
+import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -37,7 +38,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -60,13 +60,16 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private CommonPreference<String> accessCodePref;
 	private List<FavouritePoint> cachedFavorites = new ArrayList<FavouritePoint>();
 	private SettingsAPI originalApi;
-	public static final String TOUR_SERVER = "download.osmand.net";	
+	private CommonPreference<String> saveGPXFolder;
+	public static final String TOUR_SERVER = "download.osmand.net";
+	private static final String SAVE_GPX_FOLDER = "save_gpx_folder";	
 
 	@Override
 	public void setup(OsmandApplication app) {
 		super.setup(app);
 		originalApi = osmandSettings.getSettingsAPI();
 		selectedTourPref = osmandSettings.registerStringPreference(SELECTED_TOUR, null).makeGlobal();
+		saveGPXFolder = osmandSettings.registerStringPreference(SAVE_GPX_FOLDER, null).makeGlobal();
 		accessCodePref = osmandSettings.registerStringPreference(ACCESS_CODE, "").makeGlobal();
 		toursFolder = new File(osmandSettings.getExternalStorageDirectory(), "osmand/tours");
 	}
@@ -236,6 +239,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		selectedStagePref = app.getSettings().registerIntPreference(SELECTED_STAGE, -1).makeGlobal();
 		visitedStagesPref = app.getSettings().registerIntPreference(VISITED_STAGES, 0).makeGlobal();
 		selectedTour = tourInformation;
+		selectNextAvailableStage(tourInformation);
+	}
+
+	private void selectNextAvailableStage(final TourInformation tourInformation) {
 		Integer it = selectedStagePref.get();
 		while(it >= 0 && isStageVisited(it) ){
 			it++;
@@ -250,6 +257,16 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		return (gi & (1 << stageOrder)) > 0;
 	}
 	
+	public void markStageAsCompleted(StageInformation si) {
+		Integer gi = visitedStagesPref.get();
+		gi |= (1 << si.getOrder());
+		visitedStagesPref.set(gi);
+		if(!Algorithms.isEmpty(saveGPXFolder.get())) {
+			app.getSavingTrackHelper().saveDataToGpx(new File(saveGPXFolder.get()));
+		}
+		selectNextAvailableStage(si.tour);
+	}
+	
 	public StageInformation getSelectedStage() {
 		return selectedStage;
 	}
@@ -257,10 +274,14 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	public void selectStage(StageInformation stage, IProgress progress) {
 		if(stage == null) {
 			selectedStagePref.set(-1);
+			saveGPXFolder.set(null);
 			selectedStage = null;
 		} else {
 			selectedStagePref.set(stage.getOrder());
 			selectedStage = stage;
+			File fl = new File(stage.tour.getFolder(), "record" + stage.getOrder());
+			fl.mkdirs();
+			saveGPXFolder.set(fl.getAbsolutePath());
 		}
 		loadSelectedStage();
 	}
@@ -328,34 +349,25 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 	
 	public void showFavoriteDialog(MapActivity mapActivity, StageInformation stage, StageFavorite sf) {
-		SherpafyFavoriteFragment fragment = new SherpafyFavoriteFragment();
 		Bundle bl = new Bundle();
 		bl.putInt(SherpafyFavoriteFragment.STAGE_PARAM, stage.getOrder());
 		bl.putString(SherpafyFavoriteFragment.TOUR_PARAM, stage.getTour().getId());
 		bl.putInt(SherpafyFavoriteFragment.FAV_PARAM, sf.getOrder());
-		fragment.setArguments(bl);
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		new FavoriteDialogFragment(fragment).show(fragmentManager.beginTransaction(), "DialogFragment");
+		final FavoriteDialogFragment ffd = new FavoriteDialogFragment();
+		ffd.show(fragmentManager.beginTransaction(), "DialogFragment");
 	}
 	
 	public static class FavoriteDialogFragment extends DialogFragment {
-		SherpafyFavoriteFragment fragment;
-        public FavoriteDialogFragment(SherpafyFavoriteFragment fragment) {
-			this.fragment = fragment;
-		}
-
-        @Override
-        public void onActivityCreated(Bundle arg0) {
-        	super.onActivityCreated(arg0);
-        	getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
-        }
 
 		@Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            View view = new View(getActivity());
-            view.setId(R.id.content_frame);
+			Bundle args = getArguments();
+			SherpafyFavoriteFragment ssf = new SherpafyFavoriteFragment();
+			ssf.setArguments(args);
+			ssf.onAttach(getActivity());
             AlertDialog dlg = new AlertDialog.Builder(getActivity())
-            		.setView(view)
+            		.setView(ssf.onCreateView(getActivity().getLayoutInflater(), null, savedInstanceState))
                     .setPositiveButton(R.string.default_buttons_ok,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
@@ -423,5 +435,9 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	@Override
 	public boolean showDownloadExtraActions() {
 		return false;
+	}
+	
+	public boolean saveGPXPoint(Location location) {
+		return app.getRoutingHelper().isFollowingMode() && !Algorithms.isEmpty(saveGPXFolder.get());
 	}
 }

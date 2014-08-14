@@ -242,7 +242,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 						@Override
 						protected Void doInBackground(Void... params) {
 							SavingTrackHelper helper = app.getSavingTrackHelper();
-							helper.saveDataToGpx();
+							helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
 							helper.close();
 							return null;
 						}

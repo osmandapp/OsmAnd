@@ -519,6 +519,7 @@ public class OsmandApplication extends Application {
 		Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
 
 	}
+	
 
 	private void startApplicationBackground() {
 		List<String> warnings = new ArrayList<String>();
@@ -555,7 +556,7 @@ public class OsmandApplication extends Application {
 				if (System.currentTimeMillis() - timeUpdated >= 45000) {
 					startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
 					try {
-						warnings.addAll(savingTrackHelper.saveDataToGpx());
+						warnings.addAll(savingTrackHelper.saveDataToGpx(appCustomization.getTracksDir()));
 					} catch (RuntimeException e) {
 						warnings.add(e.getMessage());
 					}

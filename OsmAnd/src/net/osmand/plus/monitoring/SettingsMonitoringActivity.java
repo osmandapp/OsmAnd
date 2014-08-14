@@ -113,7 +113,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 			@Override
 			protected Void doInBackground(Void... params) {
 				SavingTrackHelper helper = getMyApplication().getSavingTrackHelper();
-				helper.saveDataToGpx();
+				helper.saveDataToGpx(getMyApplication().getAppCustomization().getTracksDir());
 				helper.close();
 				return null;
 			}

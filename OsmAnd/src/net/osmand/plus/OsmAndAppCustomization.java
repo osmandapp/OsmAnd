@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.FavouritesActivity;
@@ -140,5 +142,13 @@ public class OsmAndAppCustomization {
 
 	public boolean showDownloadExtraActions() {
 		return true;
+	}
+
+	public boolean saveGPXPoint(Location location) {
+		return false;
+	}
+
+	public File getTracksDir() {
+		return app.getAppPath(IndexConstants.GPX_RECORDED_INDEX_DIR);
 	}
 }

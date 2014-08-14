@@ -160,9 +160,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	/**
 	 * @return warnings
 	 */
-	public synchronized List<String> saveDataToGpx() {
+	public synchronized List<String> saveDataToGpx(File dir ) {
 		List<String> warnings = new ArrayList<String>();
-		File dir = ctx.getAppPath(IndexConstants.GPX_RECORDED_INDEX_DIR);
 		dir.mkdirs();
 		if (dir.getParentFile().canWrite()) {
 			if (dir.exists()) {
@@ -316,14 +315,17 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		OsmandSettings settings = ctx.getSettings();
 		boolean record = false;
 		if(OsmAndLocationProvider.isPointAccurateForRouting(location) && 
-				OsmAndLocationProvider.isNotSimulatedLocation(location) &&
-				OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
-			if (settings.SAVE_TRACK_TO_GPX.get() && 
-					locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() &&
-					ctx.getRoutingHelper().isFollowingMode()) {
-				record = true;
-			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() && 
-					locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
+				OsmAndLocationProvider.isNotSimulatedLocation(location) ) {
+			if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+				if (settings.SAVE_TRACK_TO_GPX.get()
+						&& locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()
+						&& ctx.getRoutingHelper().isFollowingMode()) {
+					record = true;
+				} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
+						&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
+					record = true;
+				}
+			} else if(ctx.getAppCustomization().saveGPXPoint(location) && locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
 				record = true;
 			}
 		}
