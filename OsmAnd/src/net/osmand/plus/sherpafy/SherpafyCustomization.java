@@ -343,10 +343,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
         public FavoriteDialogFragment(SherpafyFavoriteFragment fragment) {
 			this.fragment = fragment;
 		}
-        
+
         @Override
-        public void onAttach(Activity activity) {
-        	super.onAttach(activity);
+        public void onActivityCreated(Bundle arg0) {
+        	super.onActivityCreated(arg0);
         	getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
         }
 
