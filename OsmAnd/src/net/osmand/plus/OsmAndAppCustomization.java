@@ -55,7 +55,10 @@ public class OsmAndAppCustomization {
 
 	public void customizeMainMenu(Window window, Activity activity) {
 	}
-	
+
+	public boolean onDestinationReached(MapActivity mapActivity){
+		return false;
+	}
 	
 	// Activities
 	public Class<? extends Activity> getSettingsActivity(){
