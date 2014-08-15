@@ -36,7 +36,6 @@ public class WaypointDialogHelper {
 	private WaypointHelper waypointHelper;
 
 	public static boolean OVERLAP_LAYOUT = true;
-	private long uiModified;
 	private View closePointDialog;
 
 	private static final String GPX_WAYPOINTS = "GPX waypoints";
@@ -53,25 +52,23 @@ public class WaypointDialogHelper {
 
 	public void updateDialog() {
 		List<LocationPoint> vlp = waypointHelper.getAllVisibleLocationPoints();
-		long locationPointsModified = waypointHelper.getLocationPointsModified();
-		if (locationPointsModified != uiModified) {
-			uiModified = locationPointsModified;
-			if (vlp.isEmpty()) {
-				removeDialog();
-			} else {
-				final LocationPoint point = vlp.get(0);
-				boolean created = false;
-				if (closePointDialog == null) {
-					created = true;
-					final LayoutInflater vi = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-					closePointDialog = vi.inflate(R.layout.waypoint_reached, null);
-				}
+		if (vlp.isEmpty()) {
+			removeDialog();
+		} else {
+			final LocationPoint point = vlp.get(0);
+			boolean created = false;
+			if (closePointDialog == null) {
+				created = true;
+				final LayoutInflater vi = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				closePointDialog = vi.inflate(R.layout.waypoint_reached, null);
+			}
 
-				updatePointInfoView(closePointDialog, point);
+			updatePointInfoView(closePointDialog, point);
+			View all = closePointDialog.findViewById(R.id.all_points);
+			all.setVisibility(vlp.size() <= 1 ? View.GONE : View.VISIBLE);
+			if (created) {
 				closePointDialog.setBackgroundColor(mapActivity.getResources().getColor(R.color.color_black));
 				((TextView) closePointDialog.findViewById(R.id.waypoint_text)).setTextColor(Color.WHITE);
-				View all = closePointDialog.findViewById(R.id.all_points);
-				all.setVisibility(vlp.size() <= 1 ? View.GONE : View.VISIBLE);
 				all.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
@@ -88,10 +85,8 @@ public class WaypointDialogHelper {
 					}
 				});
 
-				if (created) {
-					mainLayout.addView(closePointDialog, getDialogLayoutParams());
-					waitBeforeLayoutIsResized(closePointDialog);
-				}
+				mainLayout.addView(closePointDialog, getDialogLayoutParams());
+				waitBeforeLayoutIsResized(closePointDialog);
 			}
 		}
 	}

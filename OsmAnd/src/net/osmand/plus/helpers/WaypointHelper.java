@@ -22,7 +22,6 @@ public class WaypointHelper {
 	// every time we modify this collection, we change the reference (copy on write list)
 	private List<LocationPoint> visibleLocationPoints = new ArrayList<LocationPoint>();
 	private ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<LocationPoint, Integer>();
-	private long locationPointsModified;
 	private Location lastKnownLocation;
 
 	private static final int NOT_ANNOUNCED = 0;
@@ -81,14 +80,9 @@ public class WaypointHelper {
 		}
 	}
 
-	public long getLocationPointsModified() {
-		return locationPointsModified;
-	}
-
 	public void removeVisibleLocationPoint(LocationPoint lp) {
 		this.visibleLocationPoints = removeFromList(visibleLocationPoints, lp);
 		this.locationPointsStates.remove(lp);
-		this.locationPointsModified = System.currentTimeMillis();
 	}
 
 	public void announceVisibleLocations() {
@@ -103,12 +97,10 @@ public class WaypointHelper {
 				if (state <= ANNOUNCED_ONCE && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS)) {
 					nameToAnnounce = (nameToAnnounce == null ? "" : ", ") + point.getName();
 					locationPointsStates.remove(point);
-					this.locationPointsModified = System.currentTimeMillis();
 					app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper().updateDialog();
 					announcePoints.add(point);
 				} else if (state == NOT_ANNOUNCED && app.getRoutingHelper().getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS)) {
 					locationPointsStates.put(point, state + 1);
-					this.locationPointsModified = System.currentTimeMillis();
 					app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper().updateDialog();
 					approachPoints.add(point);
 				}
@@ -125,14 +117,12 @@ public class WaypointHelper {
 
 	public void addVisibleLocationPoint(LocationPoint lp) {
 		this.locationPointsStates.put(lp, NOT_ANNOUNCED);
-		this.locationPointsModified = System.currentTimeMillis();
 		sortVisibleWaypoints();
 	}
 
 	public void clearAllVisiblePoints() {
 		this.locationPointsStates.clear();
 		this.visibleLocationPoints = new ArrayList<LocationPoint>();
-		this.locationPointsModified = System.currentTimeMillis();
 	}
 
 	public void setVisibleLocationPoints(List<LocationPoint> points) {

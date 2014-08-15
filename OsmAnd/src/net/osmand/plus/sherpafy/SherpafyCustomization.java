@@ -37,6 +37,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.Window;
 import android.widget.TextView;
@@ -267,6 +268,33 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		selectNextAvailableStage(si.tour);
 	}
 	
+	public static class CompleteStageFragment extends DialogFragment {
+
+		@Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+//			Bundle args = getArguments();
+//			SherpafyFavoriteFragment ssf = new SherpafyFavoriteFragment();
+//			ssf.setArguments(args);
+//			ssf.onAttach(getActivity());
+            AlertDialog dlg = new AlertDialog.Builder(getActivity())
+//            		.setView(ssf.onCreateView(getActivity().getLayoutInflater(), null, savedInstanceState))
+            		.setMessage("Stage is completed TODO")
+                    .setPositiveButton(R.string.default_buttons_ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        }
+                    )
+                    .create();
+            return dlg;
+        }
+    }
+	
+	protected void showCompleteStageFragment(FragmentActivity activity, StageInformation stage) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	public StageInformation getSelectedStage() {
 		return selectedStage;
 	}
@@ -279,11 +307,15 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		} else {
 			selectedStagePref.set(stage.getOrder());
 			selectedStage = stage;
-			File fl = new File(stage.tour.getFolder(), "record" + stage.getOrder());
+			File fl = getStageGpxRec(stage);
 			fl.mkdirs();
 			saveGPXFolder.set(fl.getAbsolutePath());
 		}
 		loadSelectedStage();
+	}
+
+	protected File getStageGpxRec(StageInformation stage) {
+		return new File(stage.tour.getFolder(), "record" + stage.getOrder());
 	}
 
 	private void loadSelectedStage() {
@@ -389,6 +421,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						@Override
 						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 							markStageAsCompleted(stage);
+							showCompleteStageFragment(mapActivity, stage);
 						}
 					}).reg();
 		}
@@ -403,6 +436,8 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			}).reg();
 	}
 	
+	
+
 	public void filter(ContextMenuAdapter a, Integer... ids) {
 		if(isSettingsAvailable()) {
 			return;
