@@ -11,12 +11,14 @@ import java.util.Map;
 import java.util.TreeSet;
 
 import net.osmand.IProgress;
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -71,6 +73,9 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		originalApi = osmandSettings.getSettingsAPI();
 		selectedTourPref = osmandSettings.registerStringPreference(SELECTED_TOUR, null).makeGlobal();
 		saveGPXFolder = osmandSettings.registerStringPreference(SAVE_GPX_FOLDER, null).makeGlobal();
+		if(osmandSettings.OSMAND_THEME.get() != OsmandSettings.OSMAND_LIGHT_THEME) {
+			osmandSettings.OSMAND_THEME.set(OsmandSettings.OSMAND_LIGHT_THEME);
+		}
 		accessCodePref = osmandSettings.registerStringPreference(ACCESS_CODE, "").makeGlobal();
 		toursFolder = new File(osmandSettings.getExternalStorageDirectory(), "osmand/tours");
 	}
@@ -239,6 +244,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		}
 		selectedStagePref = app.getSettings().registerIntPreference(SELECTED_STAGE, -1).makeGlobal();
 		visitedStagesPref = app.getSettings().registerIntPreference(VISITED_STAGES, 0).makeGlobal();
+		app.getSettings().OSMAND_THEME.set(OsmandSettings.OSMAND_LIGHT_THEME);
 		selectedTour = tourInformation;
 		selectNextAvailableStage(tourInformation);
 	}
@@ -262,10 +268,21 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		Integer gi = visitedStagesPref.get();
 		gi |= (1 << si.getOrder());
 		visitedStagesPref.set(gi);
+		saveCurrentGPXTrack();
+		selectNextAvailableStage(si.tour);
+	}
+
+	protected void saveCurrentGPXTrack() {
 		if(!Algorithms.isEmpty(saveGPXFolder.get())) {
 			app.getSavingTrackHelper().saveDataToGpx(new File(saveGPXFolder.get()));
 		}
-		selectNextAvailableStage(si.tour);
+	}
+	
+	public File getTracksDir() {
+		if(!Algorithms.isEmpty(saveGPXFolder.get())) {
+			return new File(saveGPXFolder.get());
+		}
+		return app.getAppPath(IndexConstants.GPX_RECORDED_INDEX_DIR);
 	}
 	
 	public static class CompleteStageFragment extends DialogFragment {
@@ -300,6 +317,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 
 	public void selectStage(StageInformation stage, IProgress progress) {
+		saveCurrentGPXTrack();
 		if(stage == null) {
 			selectedStagePref.set(-1);
 			saveGPXFolder.set(null);
