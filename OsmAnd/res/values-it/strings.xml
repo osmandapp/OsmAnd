@@ -1963,4 +1963,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_bicycle_name">Bicicletta</string>
     <string name="rendering_value_pedestrian_name">Pedone</string>
     <string name="more">Altro...</string>
+    <string name="download_additional_maps">Download mappe mancanti %1$s (%2$d MB)?</string>
     </resources>
