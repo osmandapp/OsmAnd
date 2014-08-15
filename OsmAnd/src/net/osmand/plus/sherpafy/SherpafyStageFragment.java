@@ -73,8 +73,12 @@ public class SherpafyStageFragment extends SherlockFragment {
 		// MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		if (tour != null) {
 			boolean current = customization.getSelectedStage() == stage;
-			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, START, current ? R.string.continue_stage
-					: R.string.start_stage, 0, 0, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT,
+			int text = current ? R.string.continue_stage
+					: R.string.start_stage;
+			if(customization.isStageVisited(stage.getOrder())) {
+				text = R.string.stage_is_completed;
+			}
+			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, START, text, 0, 0, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT,
 					new OnMenuItemClickListener() {
 						@Override
 						public boolean onMenuItemClick(MenuItem item) {
