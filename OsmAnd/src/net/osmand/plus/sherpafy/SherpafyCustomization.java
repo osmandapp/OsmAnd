@@ -402,7 +402,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 	
 	public static class FavoriteDialogFragment extends DialogFragment {
-
+		
 		@Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
 			Bundle args = getArguments();
@@ -432,7 +432,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				R.string.menu_mute_on, R.string.menu_mute_off,
 				R.string.where_am_i);
 		final StageInformation stage = getSelectedStage();
-		if (stage != null) {
+		if (stage != null && !isStageVisited(stage.order)) {
 			adapter.item(R.string.complete_stage)
 					.icons(R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_light)
 					.position(adapter.length() - 1).listen(new OnContextMenuClick() {
