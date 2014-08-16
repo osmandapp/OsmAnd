@@ -1898,4 +1898,29 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="lang_zh_CN">Chiński uproszczony</string>
 	<string name="lang_zh_TW">Chiński tradycyjny</string>
 	<string name="rendering_attr_subwayMode_name">Tryb metra</string>
- 	</resources>
+ 	<string name="download_additional_maps">Pobrać brakujące mapy %1$s (%2$d MB)?</string>
+    <string name="more">Więcej...</string>
+    <string name="rendering_value_browse_map_name">Przeglądaj mapę</string>  
+    <string name="rendering_value_car_name">Samochód</string>
+    <string name="rendering_value_bicycle_name">Rower</string>
+    <string name="rendering_value_pedestrian_name">Pieszy</string>
+    <string name="rendering_attr_coloredBuildings_name">Kolorowane budynki</string>
+    <string name="osmo_invite">Zaproś...</string>
+    <string name="osmo_leave_confirmation_msg">Czy chcesz opuścić grupę %1$s?</string>
+    <string name="osmo_specify_tracker_id">Określ id</string>
+    <string name="continue_navigation">Kontynuuj nawigację</string>
+    <string name="pause_navigation">Wstrzymaj nawigację</string>
+    <string name="rendering_attr_alpineHiking_name">Widok wspinaczki alpinistycznej</string>
+    <string name="rendering_attr_alpineHiking_description">Renderuj ścieżki według skali SAC</string>
+    <string name="rendering_attr_osmcTraces_name">Nakładka symbolu wędrówki</string>
+    <string name="rendering_attr_osmcTraces_description">Renderuj ścieżki według śladów OSMC</string>
+    
+	<string name="arrival_distance_factor_early">Wcześnie</string>
+    <string name="arrival_distance_factor_normally">Normalnie</string>
+    <string name="arrival_distance_factor_late">Późno</string>
+    <string name="arrival_distance_factor_at_last">Tuż przed przybyciem</string>
+    <string name="av_camera_pic_size">Rozmiar obrazu aparatu</string>
+	<string name="av_camera_pic_size_descr">Wybierz rozmiar obrazu wewnętrznego aparatu</string>
+    <string name="hide_all_waypoints">Usuń wszystkie</string>
+    <string name="announce_nearby_favorites">Ogłaszaj pobliskie ulubione</string>
+</resources>
