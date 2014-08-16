@@ -485,7 +485,7 @@
   <string name="downloading">Pobieranie…</string>
   <string name="downloading_list_indexes">Pobieranie listy dostępnych regionów…</string>
   <string name="list_index_files_was_not_loaded">Lista regionów nie została pobrana z osmand.net.</string>
-  <string name="select_index_file_to_download">Jeśli nie możesz znaleźć danych dla swojego regionu, możesz je przygotować sam (zobacz http://osmand.net).</string>
+  <string name="select_index_file_to_download">Nic nie znaleziono. Jeśli nie możesz znaleźć danych dla swojego regionu, możesz je przygotować sam (zobacz http://osmand.net).</string>
   <string name="show_poi_on_map">Pokaż na mapie</string>
   <string name="fav_points_edited">Ulubiony punkt został zmieniony</string>
   <string name="fav_points_not_exist">Brak ulubionych</string>
@@ -1840,8 +1840,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="select_destination_and_intermediate_points">Wybierz punkty</string>
     <string name="layer_amenity_label">Etykiety punktów</string>
     <string name="visible_element">Pokaż na mapie</string>
-    <string name="show_zoom_buttons_navigation_descr">Pokazuj przyciski skalowania podczas nawigacji</string>
-    <string name="show_zoom_buttons_navigation">Pokazuj przyciski skalowania</string>
+    <string name="show_zoom_buttons_navigation_descr">Pokazuj przyciski zbliżania podczas nawigacji</string>
+    <string name="show_zoom_buttons_navigation">Pokazuj przyciski zbliżania</string>
     <string name="sort_by_distance">Sortuj według odległości</string>
     <string name="sort_by_name">Sortuj według nazwy</string>
     <string name="none_selected_gpx">Nie wybrano żadnych plików GPX. W celu wyboru naciśnij i przytrzymaj dostępną ścieżkę.</string>
