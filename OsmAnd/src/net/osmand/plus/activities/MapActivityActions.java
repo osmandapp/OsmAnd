@@ -45,6 +45,7 @@ import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
@@ -833,7 +834,9 @@ public class MapActivityActions implements DialogProvider {
 					.listen(new OnContextMenuClick() {
 						@Override
 						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-							openIntermediatePointsDialog();
+							WaypointDialogHelper.showAllDialog(getMyApplication(), mapActivity, 
+									getMyApplication().getWaypointHelper().getAllPoints());
+//							openIntermediatePointsDialog();
 						}
 					}).reg();
 		}

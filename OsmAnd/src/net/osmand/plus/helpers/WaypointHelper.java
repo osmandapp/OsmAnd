@@ -1,5 +1,7 @@
 package net.osmand.plus.helpers;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -39,6 +41,7 @@ public class WaypointHelper {
 	
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<List<LocationPointWrapper>>();
 	private ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<LocationPoint, Integer>();
+	private TIntArrayList pointsProgress = new TIntArrayList();
 	private Location lastKnownLocation;
 	private RouteCalculationResult route;
 	
@@ -63,6 +66,9 @@ public class WaypointHelper {
 		announceVisibleLocations();
 	}
 
+	public int getRouteDistance(LocationPointWrapper point) {
+		return route.getDistanceToPoint(point.routeIndex);
+	}
 
 	public void removeVisibleLocationPoint(LocationPointWrapper lp) {
 		// TODO FIXME
@@ -97,6 +103,20 @@ public class WaypointHelper {
 			}
 
 		}
+	}
+	
+	public List<LocationPointWrapper> getAllPoints() {
+		List<LocationPointWrapper> points = new ArrayList<WaypointHelper.LocationPointWrapper>();
+		List<List<LocationPointWrapper>> local = locationPoints;
+		TIntArrayList ps = pointsProgress;
+		for(int i = 0; i < local.size(); i++) {
+			List<LocationPointWrapper> loc = local.get(i);
+			if(ps.get(i) < loc.size()) {
+				points.addAll(loc.subList(ps.get(i), loc.size()));
+			}
+		}
+		sortList(points);
+		return points;
 	}
 
 	
@@ -149,41 +169,56 @@ public class WaypointHelper {
 			}
 		}
 		for (List<LocationPointWrapper> list : locationPoints) {
-			Collections.sort(list, new Comparator<LocationPointWrapper>() {
-				@Override
-				public int compare(LocationPointWrapper olhs, LocationPointWrapper orhs) {
-					int lhs = olhs.routeIndex;
-					int rhs = orhs.routeIndex;
-					return lhs < rhs ? -1 : (lhs == rhs ? 0 : 1);
-				}
-			});
+			sortList(list);
 		}
 		this.locationPoints = locationPoints;
+		this.locationPointsStates.clear();
+		TIntArrayList list = new TIntArrayList(locationPoints.size());
+		list.fill(0, locationPoints.size(), 0);
+		this.pointsProgress = list;
+		
+	}
+
+
+	protected void sortList(List<LocationPointWrapper> list) {
+		Collections.sort(list, new Comparator<LocationPointWrapper>() {
+			@Override
+			public int compare(LocationPointWrapper olhs, LocationPointWrapper orhs) {
+				int lhs = olhs.routeIndex;
+				int rhs = orhs.routeIndex;
+				return lhs < rhs ? -1 : (lhs == rhs ? 0 : 1);
+			}
+		});
 	}
 
 
 	protected void calculatePoi(ArrayList<List<LocationPointWrapper>> locationPoints) {
-		final List<Location> locs = route.getImmutableAllLocations();
-		List<Amenity> amenities = app.getResourceManager().searchAmenitiesOnThePath(locs, searchDeviationRadius, getPoiFilter(), new ResultMatcher<Amenity>() {
-			
-			@Override
-			public boolean publish(Amenity object) {
-				return true;
-			}
-			
-			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-		});
-		List<LocationPointWrapper> array = getArray(locationPoints, POI);
-		for (Amenity a : amenities) {
-			AmenityRoutePoint rp = a.getRoutePoint();
-			int i = locs.indexOf(rp.pointA);
-			if (i >= 0) {
-				LocationPointWrapper lwp = new LocationPointWrapper(route, POI, new AmenityLocationPoint(a), (float) rp.deviateDistance, i);
-				lwp.setAnnounce(announcePOI());
-				array.add(lwp);
+		PoiFilter pf = getPoiFilter();
+		if (pf != null) {
+			final List<Location> locs = route.getImmutableAllLocations();
+			List<Amenity> amenities = app.getResourceManager().searchAmenitiesOnThePath(locs, searchDeviationRadius,
+					pf, new ResultMatcher<Amenity>() {
+
+						@Override
+						public boolean publish(Amenity object) {
+							return true;
+						}
+
+						@Override
+						public boolean isCancelled() {
+							return false;
+						}
+					});
+			List<LocationPointWrapper> array = getArray(locationPoints, POI);
+			for (Amenity a : amenities) {
+				AmenityRoutePoint rp = a.getRoutePoint();
+				int i = locs.indexOf(rp.pointA);
+				if (i >= 0) {
+					LocationPointWrapper lwp = new LocationPointWrapper(route, POI, new AmenityLocationPoint(a),
+							(float) rp.deviateDistance, i);
+					lwp.setAnnounce(announcePOI());
+					array.add(lwp);
+				}
 			}
 		}
 	}
@@ -369,6 +404,7 @@ public class WaypointHelper {
 		}
 
 	}
+
 }
 
 

@@ -428,13 +428,14 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		filter(adapter, R.string.exit_Button, R.string.menu_layers,
 				R.string.pause_navigation, R.string.continue_navigation,  
 				R.string.cancel_navigation, R.string.cancel_route, R.string.clear_destination,
+				R.string.target_points,
 				R.string.get_directions, 
 				R.string.menu_mute_on, R.string.menu_mute_off,
 				R.string.where_am_i);
 		final StageInformation stage = getSelectedStage();
 		if (stage != null && !isStageVisited(stage.order)) {
 			adapter.item(R.string.complete_stage)
-					.icons(R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_light)
+					.icons(R.drawable.ic_action_finish_flag_dark, R.drawable.ic_action_finish_flag_light)
 					.position(adapter.length() - 1).listen(new OnContextMenuClick() {
 						@Override
 						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {

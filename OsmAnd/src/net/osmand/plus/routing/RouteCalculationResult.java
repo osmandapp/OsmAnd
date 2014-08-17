@@ -864,6 +864,14 @@ public class RouteCalculationResult {
 		return currentDirectionInfo < directions.size();
 	}
 	
+	public int getDistanceToPoint(int locationIndex) {
+		if(listDistance != null && currentRoute < listDistance.length && locationIndex < listDistance.length && 
+				locationIndex > currentRoute){
+			return listDistance[currentRoute] - listDistance[locationIndex];
+		}
+		return 0;
+	}
+	
 	public int getDistanceToFinish(Location fromLoc) {
 		if(listDistance != null && currentRoute < listDistance.length){
 			int dist = listDistance[currentRoute];

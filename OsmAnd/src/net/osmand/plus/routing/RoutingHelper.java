@@ -10,15 +10,20 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.data.LocationPoint;
-import net.osmand.plus.*;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
+import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.plus.sherpafy.SherpafyCustomization;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
@@ -70,7 +75,6 @@ public class RoutingHelper {
 	//private long wrongMovementDetected = 0;
 
 	private RouteCalculationProgressCallback progressRoute;
-	private SearchOnTheRouteHelper searchOnTheRouteHelper;
 
 
 //	private ProgressBar progress;
@@ -83,13 +87,9 @@ public class RoutingHelper {
 	public RoutingHelper(OsmandApplication context, CommandPlayer player){
 		this.app = context;
 		settings = context.getSettings();
-		searchOnTheRouteHelper = new SearchOnTheRouteHelper(context);
 		voiceRouter = new VoiceRouter(this, settings, player);
 	}
 	
-	public SearchOnTheRouteHelper getSearchOnTheRouteHelper() {
-		return searchOnTheRouteHelper;
-	}
 
 	public boolean isFollowingMode() {
 		return isFollowingMode;
@@ -524,10 +524,9 @@ public class RoutingHelper {
 		return false;
 	}
 
-	private synchronized void setNewRoute(RouteCalculationResult res, Location start){
-		app.getWaypointHelper().setNewRoute(res);
+	private void setNewRoute(RouteCalculationResult res, Location start){
 		final boolean newRoute = !this.route.isCalculated();
-		route = res;
+		app.getWaypointHelper().setNewRoute(res);
 		if (isFollowingMode) {
 			if(lastFixedLocation != null) {
 				start = lastFixedLocation;
@@ -558,8 +557,6 @@ public class RoutingHelper {
 			}
 		} 
 		
-		searchOnTheRouteHelper.searchOnTheRoute(route);
-
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
@@ -571,15 +568,15 @@ public class RoutingHelper {
 		
 	}
 	
-	public synchronized int getLeftDistance(){
+	public int getLeftDistance(){
 		return route.getDistanceToFinish(lastFixedLocation);
 	}
 	
-	public synchronized int getLeftDistanceNextIntermediate() {
+	public int getLeftDistanceNextIntermediate() {
 		return route.getDistanceToNextIntermediate(lastFixedLocation);
 	}
 	
-	public synchronized int getLeftTime() {
+	public int getLeftTime() {
 		return route.getLeftTime(lastFixedLocation);
 	}
 	
@@ -779,12 +776,15 @@ public class RoutingHelper {
 			
 			synchronized (RoutingHelper.this) {
 				if (res.isCalculated()) {
-					setNewRoute(res, params.start);
+					route = res;
 				} else {
 					evalWaitInterval = evalWaitInterval * 3 / 2;
 					evalWaitInterval = Math.min(evalWaitInterval, 120000);
 				}
 				currentRunningJob = null;
+			}
+			if(res.isCalculated()){
+				setNewRoute(res, params.start);
 			}
 
 			if (res.isCalculated()) {

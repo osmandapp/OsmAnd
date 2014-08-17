@@ -1,31 +1,35 @@
 package net.osmand.plus.helpers;
 
+import java.util.List;
+
+import net.osmand.Location;
+import net.osmand.data.LocationPoint;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.views.MapControlsLayer;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.SystemClock;
-import android.text.Spannable;
-import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
-import net.osmand.Location;
-import net.osmand.data.LocationPoint;
-import net.osmand.plus.*;
-import net.osmand.plus.activities.FavouritesActivity;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
-import net.osmand.plus.views.MapControlsLayer;
-import net.osmand.util.MapUtils;
-
-import java.util.List;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
 /**
  */
@@ -58,7 +62,7 @@ public class WaypointDialogHelper {
 				final LayoutInflater vi = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				closePointDialog = vi.inflate(R.layout.waypoint_reached, null);
 			}
-			updatePointInfoView(closePointDialog, point);
+			updatePointInfoView(app, mapActivity, closePointDialog, point);
 			View all = closePointDialog.findViewById(R.id.all_points);
 			all.setVisibility(vlp.size() <= 1 ? View.GONE : View.VISIBLE);
 			if (created) {
@@ -67,7 +71,7 @@ public class WaypointDialogHelper {
 				all.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						// showAllDialog(waypointHelper.getAllVisibleLocationPoints());
+						 showAllDialog(app, mapActivity, waypointHelper.getAllPoints());
 					}
 				});
 
@@ -86,7 +90,9 @@ public class WaypointDialogHelper {
 		}
 	}
 
-	private void updatePointInfoView(View localView, final LocationPointWrapper ps) {
+	private static void updatePointInfoView(OsmandApplication app, Context ctx,
+			View localView, final LocationPointWrapper ps) {
+		WaypointHelper wh = app.getWaypointHelper();
 		LocationPoint point = ps.getPoint();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		text.setOnClickListener(new View.OnClickListener() {
@@ -96,23 +102,22 @@ public class WaypointDialogHelper {
 				//itemClick(point);
 			}
 		});
-
-		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(FavoriteImageDrawable.getOrCreate(mapActivity, point.getColor()));
+		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_text);
+		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(FavoriteImageDrawable.getOrCreate(ctx, point.getColor()));
 		Location lastKnownMapLocation = app.getLocationProvider().getLastKnownLocation();
-		String distance;
+		String dd = "";
 		if (lastKnownMapLocation != null) {
-			int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
-					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
-			distance = OsmAndFormatter.getFormattedDistance(dist, app) + "  ";
-		} else {
-			distance = "";
+			int dist = wh.getRouteDistance(ps);
+			dd = OsmAndFormatter.getFormattedDistance(dist, app) ;
+			if(ps.deviationDistance > 0 ) {
+				dd += "\n "+OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app); 
+			}
 		}
-		text.setText(distance + point.getName(), TextView.BufferType.SPANNABLE);
-		if (distance.length() > 0) {
-			((Spannable) text.getText()).setSpan(
-					new ForegroundColorSpan(mapActivity.getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
-					0);
-		}
+		textDist.setText(dd);
+		text.setText(point.getName());
+//			((Spannable) text.getText()).setSpan(
+//					new ForegroundColorSpan(ctx.getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
+//					0);
 	}
 
 	public void removeDialog() {
@@ -164,32 +169,33 @@ public class WaypointDialogHelper {
 	}
 
 
-	public void showAllDialog(final List<LocationPointWrapper> visibleLocationPoints){
-		final ArrayAdapter<LocationPointWrapper> listAdapter = new ArrayAdapter<LocationPointWrapper>(mapActivity, R.layout.waypoint_reached, R.id.title,
+	public static void showAllDialog(final OsmandApplication app, final MapActivity ctx, final List<LocationPointWrapper> visibleLocationPoints){
+		final WaypointHelper waypointHelper = app.getWaypointHelper();
+		final ArrayAdapter<LocationPointWrapper> listAdapter = new ArrayAdapter<LocationPointWrapper>(ctx, R.layout.waypoint_reached, R.id.title,
 				visibleLocationPoints) {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
 				View v = convertView;
 				if (v == null) {
-					v = mapActivity.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
-					int vl = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, mapActivity.getResources()
+					v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
+					int vl = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, ctx.getResources()
 							.getDisplayMetrics());
 					final LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(vl, vl);
 					ll.setMargins(vl / 4, vl / 4, vl / 4, vl / 4);
 					v.findViewById(R.id.waypoint_icon).setLayoutParams(ll);
 				}
-				updatePointInfoView(v, getItem(position));
+				updatePointInfoView(app, ctx, v, getItem(position));
 				TextView text = (TextView) v.findViewById(R.id.waypoint_text);
 				text.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						showOnMap(visibleLocationPoints.get(position));
+						showOnMap(app, ctx, visibleLocationPoints.get(position));
 					}
 				});
 
 				View remove = v.findViewById(R.id.info_close);
-				((ImageButton) remove).setImageDrawable(mapActivity.getResources().getDrawable(
+				((ImageButton) remove).setImageDrawable(ctx.getResources().getDrawable(
 						app.getSettings().isLightContent()? R.drawable.ic_action_gremove_light:
 								R.drawable.ic_action_gremove_dark));
 				remove.setOnClickListener(new View.OnClickListener() {
@@ -206,33 +212,35 @@ public class WaypointDialogHelper {
 			}
 		};
 
-		ListView listView = new ListView(mapActivity);
+		ListView listView = new ListView(ctx);
 		listView.setAdapter(listAdapter);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-				showOnMap(visibleLocationPoints.get(i));
+				showOnMap(app, ctx, visibleLocationPoints.get(i));
 			}
 		});
-		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setView(listView);
 		builder.setPositiveButton(R.string.default_buttons_ok, null);
-		builder.setNegativeButton(mapActivity.getString(R.string.hide_all_waypoints), new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(ctx.getString(R.string.hide_all_waypoints), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialogInterface, int i) {
 				waypointHelper.clearAllVisiblePoints();
-				updateDialog();
+				// TODO
+				// updateDialog(app, ctx);
 			}
 		});
 		builder.show();
 	}
 
-	private void showOnMap(LocationPointWrapper locationPoint) {
+	private static void showOnMap(OsmandApplication app, MapActivity ctx, LocationPointWrapper locationPoint) {
+		// TODO
 		LocationPoint point = locationPoint.getPoint();
 		// AnimateDraggingMapThread thread = mapActivity.getMapView().getAnimatedDraggingThread();
-		int fZoom = mapActivity.getMapView().getZoom() < 15 ? 15 : mapActivity.getMapView().getZoom();
+		int fZoom = ctx.getMapView().getZoom() < 15 ? 15 : ctx.getMapView().getZoom();
 		// thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
-		mapActivity.getMapView().setIntZoom(fZoom);
-		mapActivity.getMapView().setLatLon(point.getLatitude(), point.getLongitude());
+		ctx.getMapView().setIntZoom(fZoom);
+		ctx.getMapView().setLatLon(point.getLatitude(), point.getLongitude());
 	}
 }
