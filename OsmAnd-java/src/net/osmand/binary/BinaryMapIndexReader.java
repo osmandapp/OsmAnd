@@ -1923,7 +1923,7 @@ public class BinaryMapIndexReader {
 		for (Amenity a : results) {
 			final float dds = dist(a.getLocation(), locations);
 			if (dds <= radius) {
-				println("+ " + a.getType() + " " + a.getSubType() + " Dist " + dds + " (=" + (float)a.getDeviateDistance() + ") " + a.getName() + " " + a.getLocation());
+				println("+ " + a.getType() + " " + a.getSubType() + " Dist " + dds + " (=" + (float)a.getRoutePoint().deviateDistance + ") " + a.getName() + " " + a.getLocation());
 				k++;
 			} else {
 				println(a.getType() + " " + a.getSubType() + " Dist " + dds + " " + a.getName() + " " + a.getLocation());

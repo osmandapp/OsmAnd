@@ -1,22 +1,15 @@
 package net.osmand.plus.routing;
 
-import com.actionbarsherlock.internal.nineoldandroids.animation.ObjectAnimator;
-import gnu.trove.list.array.TIntArrayList;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
-import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.router.RouteSegmentResult;
@@ -117,6 +110,10 @@ public class RouteCalculationResult {
 	public List<LocationPoint> getLocationPoints() {
 		return locationPoints;
 	}
+	
+	public List<AlarmInfo> getAlarmInfo() {
+		return alarmInfo;
+	}
 
 	private static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
 			List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
@@ -177,7 +174,12 @@ public class RouteCalculationResult {
 		if (pointTypes != null) {
 			for (int r = 0; r < pointTypes.length; r++) {
 				RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
-				AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, locInd);
+				int x31 = res.getObject().getPoint31XTile(intId);
+				int y31 = res.getObject().getPoint31YTile(intId);
+				Location loc = new Location("");
+				loc.setLatitude(MapUtils.get31LatitudeY(y31));
+				loc.setLongitude(MapUtils.get31LongitudeX(x31));
+				AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, locInd, loc);
 				if(info != null) {
 					alarms.add(info);
 				}
@@ -491,46 +493,6 @@ public class RouteCalculationResult {
 		}
 	}
 	
-	/**
-	 * PREPARATION
-	 * 
-	 */
-	private int[] calculateWaypointIndexes(List<Location> list, DataTileManager<? extends LocationPoint> waypointsTm, List<LocationPoint> waypoints) {
-		if(waypointsTm == null || waypointsTm.isEmpty() || list.size() == 0) {
-			return new int[0];
-		}
-		TIntArrayList ls = new TIntArrayList();
-		Location loc = list.get(0);
-		Location ploc = list.get(0);
-		Set<LocationPoint> added = new HashSet<LocationPoint>();
-		int prev31x = MapUtils.get31TileNumberX(loc.getLatitude());
-		int prev31y = MapUtils.get31TileNumberY(loc.getLongitude());
-		for(int j = 1; j < list.size(); j++) {
-			loc = list.get(j);
-			int t31x = MapUtils.get31TileNumberX(loc.getLatitude());
-			int t31y = MapUtils.get31TileNumberY(loc.getLongitude());
-			List<? extends LocationPoint> ws = waypointsTm.getObjects(Math.min(prev31x, t31x) - Math.abs(t31x - prev31x) / 4,
-					Math.min(prev31y, t31y) - Math.abs(t31y - prev31y) / 4,
-					Math.max(prev31x, t31x) + Math.abs(t31x - prev31x) / 4,
-					Math.max(prev31y, t31y) + Math.abs(t31y - prev31y) / 4);
-			for(LocationPoint w : ws) {
-				if (added.contains(w)) {
-					double ds = MapUtils.getOrthogonalDistance(w.getLatitude(), w.getLongitude(), ploc.getLatitude(), ploc.getLongitude(), loc.getLatitude(),
-							loc.getLongitude());
-					if (ds < 160) {
-						ls.add(j);
-						waypoints.add(w);
-						added.add(w);
-					}
-				}
-			}
-			
-			prev31x = t31x;
-			prev31y = t31y;
-			ploc = loc;
-		}
-		return ls.toArray();
-	}
 
 	/**
 	 * PREPARATION

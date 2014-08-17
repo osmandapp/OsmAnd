@@ -1,9 +1,10 @@
 package net.osmand.plus.routing;
 
+import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.data.LocationPoint;
 
-public class AlarmInfo {
-	
+public class AlarmInfo implements LocationPoint {
 	public enum AlarmInfoType {
 		SPEED_CAMERA(1),
 		SPEED_LIMIT(2),
@@ -25,12 +26,13 @@ public class AlarmInfo {
 		
 	}
 	
-	
 	private AlarmInfoType type;
 	private float distance;
 	private float time;
 	protected final int locationIndex;
 	private int intValue;
+	private double latitude;
+	private double longitude;
 	
 	public AlarmInfo(AlarmInfoType type, int locationIndex){
 		this.type = type;
@@ -58,37 +60,59 @@ public class AlarmInfo {
 		return type;
 	}
 	
+	@Override
+	public double getLatitude() {
+		return latitude;
+	}
+	
+	@Override
+	public double getLongitude() {
+		return longitude;
+	}
+	
 	public int getIntValue() {
 		return intValue;
+	}
+	
+	public int getLocationIndex() {
+		return locationIndex;
 	}
 	
 	public void setIntValue(int intValue) {
 		this.intValue = intValue;
 	}
 	
-	
-	
-	public static AlarmInfo createSpeedLimit(int speed){
+	public static AlarmInfo createSpeedLimit(int speed, Location loc){
 		AlarmInfo info = new AlarmInfo(AlarmInfoType.SPEED_LIMIT, 0);
+		info.setLatLon(loc.getLatitude(), loc.getLongitude());
 		info.setIntValue(speed);
 		return info;
 	}
 	
-	public static AlarmInfo createAlarmInfo(RouteTypeRule ruleType, int locInd) {
+	public void setLatLon(double latitude, double longitude) {
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
+	public static AlarmInfo createAlarmInfo(RouteTypeRule ruleType, int locInd, Location loc) {
+		AlarmInfo alarmInfo = null;
 		if("highway".equals(ruleType.getTag())) {
 			if("speed_camera".equals(ruleType.getValue())) {
-				return new AlarmInfo(AlarmInfoType.SPEED_CAMERA, locInd);
+				alarmInfo = new AlarmInfo(AlarmInfoType.SPEED_CAMERA, locInd);
 			} else if("stop".equals(ruleType.getValue())) {
-				return new AlarmInfo(AlarmInfoType.STOP, locInd);	
+				alarmInfo = new AlarmInfo(AlarmInfoType.STOP, locInd);	
 			}
 		} else if("barrier".equals(ruleType.getTag())) {
 			if("toll_booth".equals(ruleType.getValue())) {
-				return new AlarmInfo(AlarmInfoType.TOLL_BOOTH, locInd);
+				alarmInfo = new AlarmInfo(AlarmInfoType.TOLL_BOOTH, locInd);
 			} else if("border_control".equals(ruleType.getValue())) {
-				return new AlarmInfo(AlarmInfoType.BORDER_CONTROL, locInd);
+				alarmInfo = new AlarmInfo(AlarmInfoType.BORDER_CONTROL, locInd);
 			}
 		} else if("traffic_calming".equals(ruleType.getTag())) {
-			return new AlarmInfo(AlarmInfoType.TRAFFIC_CALMING, locInd);
+			alarmInfo = new AlarmInfo(AlarmInfoType.TRAFFIC_CALMING, locInd);
+		}
+		if(alarmInfo != null) {
+			alarmInfo.setLatLon(loc.getLatitude(), loc.getLongitude());
 		}
 		return null;
 	}
@@ -112,5 +136,21 @@ public class AlarmInfo {
 		}
 		return 0;
 	}
+
+	@Override
+	public String getName() {
+		return type.name();
+	}
+
+	@Override
+	public int getColor() {
+		return 0;
+	}
+
+	@Override
+	public boolean isVisible() {
+		return false;
+	}
+
 
 }

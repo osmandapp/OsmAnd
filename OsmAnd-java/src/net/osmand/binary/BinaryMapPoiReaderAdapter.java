@@ -20,6 +20,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
 import net.osmand.data.Amenity;
+import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
@@ -590,16 +591,23 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 	
-	private float dist(LatLon l, List<Location> locations) {
-		float dist = Float.POSITIVE_INFINITY;
+	private AmenityRoutePoint dist(LatLon l, List<Location> locations, double radius) {
+		float dist = (float) (radius + 0.1);
+		AmenityRoutePoint arp = null;
 		// Special iterations because points stored by pairs!
 		for (int i = 1; i < locations.size(); i += 2) {
-			dist = Math.min(dist, (float) MapUtils.getOrthogonalDistance(
-					l.getLatitude(), l.getLongitude(), 
-					locations.get(i - 1).getLatitude(), locations.get(i - 1).getLongitude(), 
-					locations.get(i).getLatitude(), locations.get(i).getLongitude()));
+			float d = (float) MapUtils.getOrthogonalDistance(l.getLatitude(), l.getLongitude(), locations.get(i - 1)
+					.getLatitude(), locations.get(i - 1).getLongitude(), locations.get(i).getLatitude(),
+					locations.get(i).getLongitude());
+			if (d < dist) {
+				arp = new Amenity.AmenityRoutePoint();
+				dist = d;
+				arp.deviateDistance = dist;
+				arp.pointA = locations.get(i - 1);
+				arp.pointB = locations.get(i);
+			}
 		}
-		return dist;
+		return arp;
 	}
 	private Amenity readPoiPoint(int left31, int right31, int top31, int bottom31, 
 			int px, int py, int zoom, SearchRequest<Amenity> req, PoiRegion region, boolean checkBounds) throws IOException {
@@ -628,11 +636,11 @@ public class BinaryMapPoiReaderAdapter {
 					if (locs == null) {
 						return null;
 					}
-					float d = dist(am.getLocation(), locs);
-					if (d > req.radius) {
+					AmenityRoutePoint arp = dist(am.getLocation(), locs, req.radius);
+					if (arp == null){
 						return null;
 					} else {
-						am.setDeviateDistance(d);
+						am.setRoutePoint(arp);
 					}
 				}
 				return am;

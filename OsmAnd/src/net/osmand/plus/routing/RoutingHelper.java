@@ -636,7 +636,7 @@ public class RoutingHelper {
 			if (pointTypes != null) {
 				for (int r = 0; r < pointTypes.length; r++) {
 					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
-					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0);
+					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
 					if (info != null) {
 						if (info.getType() != AlarmInfoType.SPEED_CAMERA || showCameras) {
 							voiceRouter.announceAlarm(info);
@@ -661,7 +661,7 @@ public class RoutingHelper {
 				} else {
 					speed = Math.round(mxspeed * 3.6f / 1.6f);
 				}
-				speedAlarm = AlarmInfo.createSpeedLimit(speed);
+				speedAlarm = AlarmInfo.createSpeedLimit(speed, loc);
 			}
 		}
 		return speedAlarm;

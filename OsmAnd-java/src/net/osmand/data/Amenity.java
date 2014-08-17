@@ -4,8 +4,10 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import net.osmand.Location;
 
-public class Amenity extends MapObject {
+
+public class Amenity extends MapObject  {
 
 	public static final String WEBSITE = "website";
 	public static final String PHONE = "phone";
@@ -18,9 +20,15 @@ public class Amenity extends MapObject {
 	// duplicate for fast access
 	private String openingHours;
 	private Map<String, String> additionalInfo;
-	private double deviateDistance; // for search on path
+	private AmenityRoutePoint routePoint; // for search on path
 
 	public Amenity(){
+	}
+	
+	public static class AmenityRoutePoint {
+		public double deviateDistance;
+		public Location pointA;
+		public Location pointB;
 	}
 	
 	public AmenityType getType(){
@@ -62,13 +70,13 @@ public class Amenity extends MapObject {
 		this.additionalInfo = additionalInfo;
 		openingHours = additionalInfo.get(OPENING_HOURS);
 	}
-	
-	public double getDeviateDistance() {
-		return deviateDistance;
+
+	public void setRoutePoint(AmenityRoutePoint routePoint) {
+		this.routePoint = routePoint;
 	}
 	
-	public void setDeviateDistance(double deviateDistance) {
-		this.deviateDistance = deviateDistance;
+	public AmenityRoutePoint getRoutePoint() {
+		return routePoint;
 	}
 
 	public void setAdditionalInfo(String tag, String value) {
