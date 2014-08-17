@@ -1499,7 +1499,7 @@
     <string name="osmo_connect_to_device_name">Όνομα χρήστη</string>
     <string name="osmo_group_name">Όνομα ομάδας</string>
     <string name="osmo_create_group">Δημιουργία ομάδας</string>
-    <string name="osmo_activity">Παρακολούθηση-OpenStreetMap</string>
+    <string name="osmo_activity">Παρακολούθηση OpenStreetMap</string>
     <string name="osmo_connected_devices">Συνδεδεμένες συσκευές</string>
     <string name="osmo_groups">Ομάδες/συσκευές OsMo</string>
     <string name="osmo_auth_pending">Αναμονή εξουσιοδότησης...</string>
@@ -1644,4 +1644,14 @@
     <string name="keep_informing_descr">Επανάληψη οδηγιών πλοήγησης σε τακτά χρονικά διαστήματα</string>
     <string name="hide_all_waypoints">Αφαίρεση όλων</string>
     <string name="announce_nearby_favorites">Ανακοίνωση κοντινών αγαπημένων</string>
-</resources>
+<string name="download_additional_maps">Λήψη απόντων χαρτών %1$s (%2$d MB);</string>
+    <string name="more">Περισσότερα…</string>
+    <string name="rendering_value_browse_map_name">Επισκόπηση χάρτη</string>  
+    <string name="rendering_value_car_name">Αυτοκίνητο</string>
+    <string name="rendering_value_bicycle_name">Ποδήλατο</string>
+    <string name="rendering_value_pedestrian_name">Πεζός</string>
+    <string name="gpx_monitoring_start">Έναρξη καταγραφής GPX</string>
+	<string name="gpx_monitoring_stop">Παύση καταγραφής GPX</string>
+    <string name="gpx_start_new_segment">Έναρξη νέου τμήματος</string>
+    <string name="osmo_settings">Παρακολούθηση OpenStreetMap</string>
+    </resources>
