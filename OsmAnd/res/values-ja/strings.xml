@@ -698,7 +698,7 @@ POIの更新は利用できません</string>
     <string name="about_version">バージョン：</string>
     <string name="about_settings">About</string>
     <string name="about_settings_descr">バージョン情報、ライセンス、プロジェクトメンバー</string>
-    <string name="tips_and_tricks">チップス</string>
+    <string name="tips_and_tricks">ヒント</string>
     <string name="tip_recent_changes_1_6_t">1.6での変更点:
 	\n\t* フルHDデバイスのサポート
 	\n\t* 完全に透明な背景のサポート
