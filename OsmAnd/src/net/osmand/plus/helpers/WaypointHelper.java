@@ -89,41 +89,37 @@ public class WaypointHelper {
 		}
 	}
 	
-	public LocationPointWrapper getMostImportantLocationPoint(LocationPoint p) {
+	public LocationPointWrapper getMostImportantLocationPoint(List<LocationPointWrapper> list ) {
 		//Location lastProjection = app.getRoutingHelper().getLastProjection();
+		if(list != null) {
+			list.clear();
+		}
+		LocationPointWrapper found = null;
 		for (int type = 0; type < locationPoints.size(); type++) {
 			if(type == ALARMS || type == TARGETS) {
 				continue;
 			}
 			int kIterator = pointsProgress.get(type);
+			List<LocationPointWrapper> lp = locationPoints.get(type);
+			while(kIterator < lp.size()) {
+				LocationPointWrapper lwp = lp.get(kIterator);
+				if(lp.get(kIterator).routeIndex < route.getCurrentRoute()) {
+					// skip
+				} else {
+					if(route.getDistanceToPoint(lwp.routeIndex) <= LONG_ANNOUNCE_RADIUS ) {
+						if(found == null || found.routeIndex < lwp.routeIndex) {
+							found = lwp;
+							if(list != null) {
+								list.add(lwp);
+							}
+						}
+					}
+					break;
+				}
+				kIterator++;
+			}
 		}
-		if(ALARMS < pointsProgress.size()) {
-			
-//			List<LocationPointWrapper> lp = locationPoints.get(ALARMS);
-//			while(kIterator < lp.size()) {
-//				LocationPointWrapper lwp = lp.get(kIterator);
-//				if(lp.get(kIterator).routeIndex < route.getCurrentRoute()) {
-//					// skip
-//				} else if(route.getDistanceToPoint(lwp.routeIndex) > LONG_ANNOUNCE_RADIUS ){
-//					break;
-//				} else {
-//					AlarmInfo inf = (AlarmInfo) lwp.point;
-//					int d = route.getDistanceToPoint(lwp.routeIndex);
-//					if(d > 250){
-//						break;
-//					}
-//					float speed = lastProjection != null && lastProjection.hasSpeed() ? lastProjection.getSpeed() : 0;
-//					float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
-//					int vl = inf.updateDistanceAndGetPriority(time, d);
-//					if(vl < value && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)){
-//						mostImportant = inf;
-//						value = vl;
-//					}
-//				}
-//				kIterator++;
-//			}
-		}
-		return null;
+		return found;
 	}
 	
 	public AlarmInfo getMostImportantAlarm(MetricsConstants mc, boolean showCameras) {

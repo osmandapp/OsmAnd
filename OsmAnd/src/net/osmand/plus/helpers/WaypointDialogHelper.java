@@ -9,7 +9,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -43,6 +42,7 @@ public class WaypointDialogHelper {
 
 	public final static boolean OVERLAP_LAYOUT = true; // only true is supported
 	private View closePointDialog;
+	private List<LocationPointWrapper> many = new ArrayList<WaypointHelper.LocationPointWrapper>();
 
 
 	public WaypointDialogHelper(MapActivity mapActivity) {
@@ -53,11 +53,10 @@ public class WaypointDialogHelper {
 	}
 
 	public void updateDialog() {
-		List<LocationPointWrapper> vlp = waypointHelper.getWaypoints(WaypointHelper.FAVORITES);
-		if (vlp.isEmpty()) {
+		final LocationPointWrapper point = waypointHelper.getMostImportantLocationPoint(many);
+		if (point == null) {
 			removeDialog();
 		} else {
-			final LocationPointWrapper point = vlp.get(0);
 			boolean created = false;
 			if (closePointDialog == null) {
 				created = true;
@@ -66,7 +65,7 @@ public class WaypointDialogHelper {
 			}
 			updatePointInfoView(app, mapActivity, closePointDialog, point);
 			View all = closePointDialog.findViewById(R.id.all_points);
-			all.setVisibility(vlp.size() <= 1 ? View.GONE : View.VISIBLE);
+			all.setVisibility(many.size() <= 1 ? View.GONE : View.VISIBLE);
 			if (created) {
 				closePointDialog.setBackgroundColor(mapActivity.getResources().getColor(R.color.color_black));
 				((TextView) closePointDialog.findViewById(R.id.waypoint_text)).setTextColor(Color.WHITE);
