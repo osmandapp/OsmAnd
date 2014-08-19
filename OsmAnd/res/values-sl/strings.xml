@@ -1706,7 +1706,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="keep_informing_never">Nikoli</string>
     <string name="keep_informing_descr">Napoveduj navigacijska navodila v rednih časovnih presledkih</string>
     <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
-	<string name="osmo_settings">OsMo OpenStreetMap sledenje (beta)</string>
+	<string name="osmo_settings">OpenStreetMap sledenje</string>
    	<string name="arrival_distance_descr">Kako hitro želite napoved prihoda?</string>
     <string name="arrival_distance">Napoved prihoda</string>
     
@@ -1753,7 +1753,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="osmo_connect_to_device">Povezava z napravo</string>
     <string name="osmo_connect_to_group">Povezava s skupino</string>
     <string name="osmo_create_group">Ustvari skupino</string>
-    <string name="osmo_activity">OpenStreetMap-Sledenje</string>
+    <string name="osmo_activity">OpenStreetMap Sledenje</string>
     <string name="osmo_enable_tracker">Pošiljanje mojih lokacij</string>
     <string name="osmo_control">OsMo hiter dostop</string>
     <string name="osmo_connected_devices">Povezane naprave</string>

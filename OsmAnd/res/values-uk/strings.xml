@@ -1618,7 +1618,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_tracker_id_descr">Натисніть щоб подивитись або подітись ID трекера
 	Використовуючи ID трекера можна відстежувати пересування цього пристрою! Для відключення скористайтесь опцією Перестворити.</string>
     <string name="osmo_server_operation_failed">OsMo Server збій виконання операції</string>
-    <string name="osmo_activity">OpenStreetMap-Моніторинг</string>
+    <string name="osmo_activity">OpenStreetMap Моніторинг</string>
     <string name="osmo_control">OsMo швидкий доступ</string>
     <string name="gpx_file_is_empty">Трек Gpx порожній</string>
     <string name="selected_track">Трек</string>
@@ -1767,7 +1767,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_mode_off">Старт сесії OsMo</string>
     <string name="osmo_settings_debug">Інформація для відлагодження</string>
     <string name="osmo_settings_descr">Налаштування параметрів моніторингу та встановлення персонального каналу моніторингу</string>
-    <string name="osmo_settings">OsMo OpenStreetMap Моніторинг (бета)</string>
+    <string name="osmo_settings">OpenStreetMap Моніторинг</string>
     <string name="osmo_plugin_description">"Прогресивний онлайн моніторинг на основі OpenStreetMap, дивіться http://osmo.mobi. Відстежуйте інші пристрої та діліться з іншими вашим місцезнаходженням. Створюйте анонімні групи, діліться один з одним своїм положенням та спілкуйтесь. Різноманітні налаштування сесій чи постійне відстеження. Анонімні групи мають обмеження у кілька днів та у функціях, ними неможливо керувати віддалено та вони не мають адміністраторів. Групи з повним набором функцій можуть бути створені на веб-сайті і тільки зареєстровані користувачі матимуть до них доступ. "</string>
     <string name="osmo_plugin_name">OsMo (Передовий онлайн моніторинг)</string>
    	<string name="always_center_position_on_map">Показувати положення завжди в центрі</string>
@@ -1946,4 +1946,10 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="av_camera_pic_size_descr">Оберіть розмір фото для вбудованого застосунка для фотографування</string>
     <string name="hide_all_waypoints">Вилучити все</string>
     <string name="announce_nearby_favorites">Оголошувати закладки, що знаходяться поруч</string>
-</resources>
+<string name="download_additional_maps">Завантажити відсутні мапи %1$s (%2$d МБ)?</string>
+    <string name="more">Ще…</string>
+    <string name="rendering_value_browse_map_name">Огляд мапи</string>  
+    <string name="rendering_value_car_name">Автівка</string>
+    <string name="rendering_value_bicycle_name">Велосипед</string>
+    <string name="rendering_value_pedestrian_name">Пішохід</string>
+    </resources>

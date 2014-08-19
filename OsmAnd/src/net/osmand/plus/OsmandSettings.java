@@ -1301,7 +1301,7 @@ public class OsmandSettings {
 
 	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route_int"; //$NON-NLS-1$
+	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route_integer"; //$NON-NLS-1$
 	public final static int NAVIGATE_CURRENT_GPX = 2;
 	public final static int NAVIGATE = 1;
 	public final static String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description"; //$NON-NLS-1$

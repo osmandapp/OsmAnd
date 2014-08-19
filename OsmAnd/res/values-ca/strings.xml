@@ -1528,7 +1528,7 @@
 	<string name="lang_ru">Rus</string>
 	<string name="lang_sk">Eslovac</string>
 	<string name="lang_sl">Eslovè</string>
-	<string name="lang_es">Castellà</string>
+	<string name="lang_es">Espanyol</string>
 	<string name="lang_sv">Suec</string>
 	<string name="lang_tr">Turc</string>
 	<string name="lang_uk">Ucraïnès</string>
@@ -1565,7 +1565,7 @@
     <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
     <string name="osmo_plugin_description">"Monitorització avançada en temps real OpenStreetMap, veieu http://osmo.mobi. Seguiment d\'altres dispositius així com de ser seguit. Creeu grups anònims, compartiu ubicacions amb els altres membres i us permet comunicar-vos. Hi ha diferents paràmetres de seguiment puntual així com de seguiment permanent. Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup. Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés. Si us plau, llegiu-ne més a http://osmo.mobi. "</string>
     <string name="osmo_plugin_name">OsMo (Monitorització avançada en temps real)</string>
-    <string name="osmo_settings">Monitorització OpenStreetMap d\'OsMo (beta)</string>
+    <string name="osmo_settings">Monitorització de l\'OpenStreetMap</string>
    	
     <string name="osmo_io_error">Problema de connexió amb OSMo: </string>
     <string name="osmo_mode_on">Atura la sessió a OsMo</string>    
@@ -1745,7 +1745,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     </string>
     <string name="osmo_auto_send_locations_descr">Inici automàtic del registre de la traça i del enviament de les posicions tot just iniciar l\'aplicació</string>
     <string name="osmo_auto_send_locations">Inici automàtic del registre de la traça</string>
-    <string name="osmo_tracker_id">Identificació personal del traçador</string>
+    <string name="osmo_tracker_id">Identificació personal de seguiment</string>
     <string name="osmo_tracker_id_descr">Prem per veure o compartir la identificació del traçador. Utilitzant la identificació del traçador altres dispositius connectats podran monitoritzar tots els moviments d\'aquest aparell. Per desconnectar seleccioni l\'opció Regenerar.</string>
     <string name="osmo_session_token">Testimoni de la sessió: %1$s</string>
     <string name="osmo_auth_pending">S\'està esperant l\'autorització…</string>
