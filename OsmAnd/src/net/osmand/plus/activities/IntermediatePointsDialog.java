@@ -266,7 +266,7 @@ public class IntermediatePointsDialog {
 		return listadapter;
 	}
 
-	private static void commitPointsRemoval(OsmandApplication app, final boolean[] checkedIntermediates) {
+	public static void commitPointsRemoval(OsmandApplication app, final boolean[] checkedIntermediates) {
 		int cnt = 0;
 		for (int i = checkedIntermediates.length - 1; i >= 0; i--) {
 			if (!checkedIntermediates[i]) {
@@ -274,23 +274,26 @@ public class IntermediatePointsDialog {
 			}
 		}
 		if (cnt > 0) {
-			boolean changeDestinationFlag =!checkedIntermediates [checkedIntermediates.length - 1];
-			if(cnt == checkedIntermediates.length){	//there is no alternative destination if all points are to be removed?
-				app.getTargetPointsHelper().removeAllWayPoints(true);	
-			}else{					
-				for (int i = checkedIntermediates.length - 2; i >= 0; i--) {	//skip the destination until a retained waypoint is found
-					if (checkedIntermediates[i] && changeDestinationFlag) {	//Find a valid replacement for the destination
-						app.getTargetPointsHelper().makeWayPointDestination(cnt == 0, i);				
+			boolean changeDestinationFlag = !checkedIntermediates[checkedIntermediates.length - 1];
+			if (cnt == checkedIntermediates.length) { // there is no alternative destination if all points are to be
+														// removed?
+				app.getTargetPointsHelper().removeAllWayPoints(true);
+			} else {
+				for (int i = checkedIntermediates.length - 2; i >= 0; i--) { // skip the destination until a retained
+																				// waypoint is found
+					if (checkedIntermediates[i] && changeDestinationFlag) { // Find a valid replacement for the
+																			// destination
+						app.getTargetPointsHelper().makeWayPointDestination(cnt == 0, i);
 						changeDestinationFlag = false;
-					}else if(!checkedIntermediates[i]){
+					} else if (!checkedIntermediates[i]) {
 						cnt--;
 						app.getTargetPointsHelper().removeWayPoint(cnt == 0, i);
 					}
 				}
 				// FIXME delete location when point is removed
-//				if(mapActivity instanceof MapActivity) {
-//					((MapActivity) mapActivity).getMapLayers().getContextMenuLayer().setLocation(null, "");
-//				}
+				// if(mapActivity instanceof MapActivity) {
+				// ((MapActivity) mapActivity).getMapLayers().getContextMenuLayer().setLocation(null, "");
+				// }
 			}
 		}
 	}

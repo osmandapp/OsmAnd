@@ -68,6 +68,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		waypointDialogHelper = new WaypointDialogHelper(activity);
 	}
 	
+	
 	@Override
 	public boolean drawInScreenPixels() {
 		return true;
@@ -111,6 +112,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapInfoNavigationControl.setMargin(mapSmallMenuControls.getWidth() + mapCancelNavigationControl.getWidth());
 		mapAppModeControl.setMargin(mapNavigationControl.getWidth());
 		
+		waypointDialogHelper.init();
 		initTransparencyBar(view, parent);
 	}
 
@@ -137,6 +139,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	@Override
 	public void destroyLayer() {
+		waypointDialogHelper.removeListener();
 	}
 
 	@Override

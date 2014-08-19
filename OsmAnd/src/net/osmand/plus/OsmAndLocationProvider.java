@@ -518,12 +518,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	
-	private void updateLocation(net.osmand.Location loc ) {
-		if (app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get() && app.getRoutingHelper().isFollowingMode()){
-			app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper().updateDialog();
-			app.getWaypointHelper().locationChanged(getLastKnownLocation());
-		}
-		for(OsmAndLocationListener l : locationListeners){
+	private void updateLocation(net.osmand.Location loc) {
+		for (OsmAndLocationListener l : locationListeners) {
 			l.updateLocation(loc);
 		}
 	}
@@ -716,8 +712,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		OsmandPlugin.updateLocationPlugins(location);
 		// 2. accessibility routing
 		navigationInfo.setLocation(location);
-		
 		app.getRoutingHelper().updateLocation(location);
+		app.getWaypointHelper().locationChanged(location);
 	}
 	
 	public void setLocationFromSimulation(net.osmand.Location location) {
@@ -761,6 +757,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		} else if(getLocationSimulation().isRouteAnimating()) {
 			routingHelper.setCurrentLocation(location, false);
 		}
+		app.getWaypointHelper().locationChanged(location);
 		this.location = updatedLocation;
 		
 		// Update information

@@ -868,6 +868,15 @@ public class RouteCalculationResult {
 		return 0;
 	}
 	
+	public int getIndexOfIntermediate(int countFromLast) {
+		final int j = intermediatePoints.length - countFromLast - 1;
+		if(j < intermediatePoints.length) {
+			int i = intermediatePoints[j];
+			return directions.get(i).routePointOffset;
+		}
+		return -1;
+	}
+	
 	public int getIntermediatePointsToPass(){
 		if(nextIntermediate >= intermediatePoints.length) {
 			return 0;

@@ -6,6 +6,7 @@ import java.util.List;
 import net.osmand.Location;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -34,7 +35,7 @@ import android.widget.TextView;
 
 /**
  */
-public class WaypointDialogHelper {
+public class WaypointDialogHelper implements OsmAndLocationListener {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
 	private FrameLayout mainLayout;
@@ -51,6 +52,23 @@ public class WaypointDialogHelper {
 		this.mapActivity = mapActivity;
 		this.mainLayout = (FrameLayout) ((FrameLayout) mapActivity.getLayout()).getChildAt(0);
 	}
+	
+	public void init() {
+		app.getLocationProvider().addLocationListener(this);
+	}
+	
+	@Override
+	public void updateLocation(Location location) {
+		if(mapActivity != null) {
+			updateDialog();
+		}
+	}
+	
+	public void removeListener() {
+		app.getLocationProvider().removeLocationListener(this);
+		mapActivity = null;
+	}
+	
 
 	public void updateDialog() {
 		final LocationPointWrapper point = waypointHelper.getMostImportantLocationPoint(many);
@@ -216,9 +234,7 @@ public class WaypointDialogHelper {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				for(LocationPointWrapper wr : deletedPoints) {
-					waypointHelper.removeVisibleLocationPoint(wr);
-				}
+				waypointHelper.removeVisibleLocationPoint(deletedPoints);
 			}
 		});
 		builder.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), null);
@@ -232,4 +248,8 @@ public class WaypointDialogHelper {
 //		ctx.getMapView().setIntZoom(fZoom);
 //		ctx.getMapView().setLatLon(point.getLatitude(), point.getLongitude());
 	}
+
+
+
+
 }

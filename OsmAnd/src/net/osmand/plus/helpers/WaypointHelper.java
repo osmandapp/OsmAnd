@@ -3,6 +3,7 @@ package net.osmand.plus.helpers;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
@@ -23,6 +24,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.activities.IntermediatePointsDialog;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.AlarmInfo;
@@ -54,8 +56,8 @@ public class WaypointHelper {
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<List<LocationPointWrapper>>();
 	private ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<LocationPoint, Integer>();
 	private TIntArrayList pointsProgress = new TIntArrayList();
-	private Location lastKnownLocation;
 	private RouteCalculationResult route;
+	
 	private long announcedAlarmTime;
 	
 	
@@ -75,7 +77,6 @@ public class WaypointHelper {
 
 	public void locationChanged(Location location) {
 		app.getAppCustomization();
-		lastKnownLocation = location;
 		announceVisibleLocations();
 	}
 
@@ -87,6 +88,30 @@ public class WaypointHelper {
 		if(lp.type < locationPoints.size()) {
 			locationPoints.get(lp.type).remove(lp);
 		}
+	}
+	
+	public void removeVisibleLocationPoint(List<LocationPointWrapper> points) {
+		List<TargetPoint> ps = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+		boolean[] checkedIntermediates = null;
+		for (LocationPointWrapper lp : points) {
+			if (lp.type == TARGETS) {
+				if(checkedIntermediates == null) {
+					checkedIntermediates = new boolean[ps.size()];
+					Arrays.fill(checkedIntermediates, true);
+				}
+				if(((TargetPoint) lp.point).intermediate) {
+					checkedIntermediates[((TargetPoint) lp.point).index] = false;
+				} else {
+					checkedIntermediates[ps.size() - 1] = false;
+				}
+			} else if (lp.type < locationPoints.size()) {
+				locationPoints.get(lp.type).remove(lp);
+			}
+		}
+		if(checkedIntermediates != null) {
+			IntermediatePointsDialog.commitPointsRemoval(app, checkedIntermediates);
+		}
+		
 	}
 	
 	public LocationPointWrapper getMostImportantLocationPoint(List<LocationPointWrapper> list ) {
@@ -212,6 +237,7 @@ public class WaypointHelper {
 
 
 	public void announceVisibleLocations() {
+		Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
 		if (lastKnownLocation != null && app.getRoutingHelper().isFollowingMode()) {
 			for (int type = 0; type < locationPoints.size(); type++) {
 				String nameToAnnounce = null;
@@ -239,15 +265,11 @@ public class WaypointHelper {
 										.isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS)) {
 							nameToAnnounce = (nameToAnnounce == null ? "" : ", ") + point.getName();
 							locationPointsStates.remove(point);
-							app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper()
-									.updateDialog();
 							announcePoints.add(point);
 						} else if ((state == null || state == NOT_ANNOUNCED)
 								&& getVoiceRouter()
 										.isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS)) {
 							locationPointsStates.put(point, ANNOUNCED_ONCE);
-							app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper()
-									.updateDialog();
 							approachPoints.add(point);
 						}
 						kIterator++;
@@ -300,6 +322,12 @@ public class WaypointHelper {
 				points.addAll(loc.subList(ps.get(i), loc.size()));
 			}
 		}
+		List<TargetPoint> wts = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+		for(int k = 0; k < wts.size() ; k++) {
+			TargetPoint tp = wts.get(wts.size() - k - 1);
+			int routeIndex = k == 0 ? Integer.MAX_VALUE : route.getIndexOfIntermediate(k);
+			points.add(new LocationPointWrapper(route, TARGETS, new TargetPointHelper(tp), 0, routeIndex));
+		}
 		sortList(points);
 		return points;
 	}
@@ -310,9 +338,28 @@ public class WaypointHelper {
 	}
 
 	
-	public void setNewRoute(RouteCalculationResult res) {
-		this.route = res;
-		recalculateAllPoints();
+	public void setNewRoute(RouteCalculationResult route) {
+		ArrayList<List<LocationPointWrapper>> locationPoints = new ArrayList<List<LocationPointWrapper>>();
+		if (route != null && !route.isEmpty()) {
+			if (showFavorites()) {
+				findLocationPoints(route, FAVORITES, getArray(locationPoints, FAVORITES), app.getFavorites()
+						.getFavouritePoints(), announceFavorites());
+			}
+			calculateAlarms(route, getArray(locationPoints, ALARMS));
+			if (showGPXWaypoints()) {
+				findLocationPoints(route, WAYPOINTS, getArray(locationPoints, WAYPOINTS), app.getAppCustomization()
+						.getWaypoints(), announceGPXWaypoints());
+				findLocationPoints(route, WAYPOINTS, getArray(locationPoints, WAYPOINTS), route.getLocationPoints(),
+						announceGPXWaypoints());
+			}
+			if(showPOI()) {
+				calculatePoi(route, locationPoints);
+			}
+		}
+		for (List<LocationPointWrapper> list : locationPoints) {
+			sortList(list);
+		}
+		setLocationPoints(locationPoints, route);
 	}
 	
 	private float dist(LocationPoint l, List<Location> locations, int[] ind) {
@@ -333,33 +380,13 @@ public class WaypointHelper {
 		return dist;
 	}
 
-	private void recalculateAllPoints() {
-		ArrayList<List<LocationPointWrapper>> locationPoints = new ArrayList<List<LocationPointWrapper>>();
-		if (route != null && !route.isEmpty()) {
-			if (showFavorites()) {
-				findLocationPoints(route, FAVORITES, getArray(locationPoints, FAVORITES), app.getFavorites()
-						.getFavouritePoints(), announceFavorites());
-			}
-			calculateAlarms(getArray(locationPoints, ALARMS));
-			if (showGPXWaypoints()) {
-				findLocationPoints(route, WAYPOINTS, getArray(locationPoints, WAYPOINTS), app.getAppCustomization()
-						.getWaypoints(), announceGPXWaypoints());
-				findLocationPoints(route, WAYPOINTS, getArray(locationPoints, WAYPOINTS), route.getLocationPoints(),
-						announceGPXWaypoints());
-			}
-			if(showPOI()) {
-				calculatePoi(locationPoints);
-			}
-		}
-		for (List<LocationPointWrapper> list : locationPoints) {
-			sortList(list);
-		}
+	protected synchronized void setLocationPoints(ArrayList<List<LocationPointWrapper>> locationPoints, RouteCalculationResult route) {
 		this.locationPoints = locationPoints;
 		this.locationPointsStates.clear();
 		TIntArrayList list = new TIntArrayList(locationPoints.size());
 		list.fill(0, locationPoints.size(), 0);
 		this.pointsProgress = list;
-		
+		this.route = route;
 	}
 
 
@@ -375,7 +402,7 @@ public class WaypointHelper {
 	}
 
 
-	protected void calculatePoi(ArrayList<List<LocationPointWrapper>> locationPoints) {
+	protected void calculatePoi(RouteCalculationResult route, ArrayList<List<LocationPointWrapper>> locationPoints) {
 		PoiFilter pf = getPoiFilter();
 		if (pf != null) {
 			final List<Location> locs = route.getImmutableAllLocations();
@@ -408,7 +435,7 @@ public class WaypointHelper {
 	
 	
 
-	private void calculateAlarms(List<LocationPointWrapper> array) {
+	private void calculateAlarms(RouteCalculationResult route, List<LocationPointWrapper> array) {
 		for(AlarmInfo i : route.getAlarmInfo()) {
 			if(i.getType() == AlarmInfoType.SPEED_CAMERA) {
 				if(app.getSettings().SHOW_CAMERAS.get()){
