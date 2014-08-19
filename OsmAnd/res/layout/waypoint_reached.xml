@@ -9,14 +9,23 @@
     <ImageView android:id="@+id/waypoint_icon"
                android:layout_marginLeft="8dp"
                android:src="@drawable/list_favorite"
+               android:layout_height="25dp"
                android:layout_width="25dp"
-               android:layout_gravity="center_vertical"
-               android:layout_height="wrap_content"/>
+               android:layout_gravity="center_vertical"/>
+    
+    <TextView android:id="@+id/waypoint_dist"
+              android:layout_width="60dp"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="4dp"
+              android:layout_gravity="center_vertical"
+              android:textColor="@color/distance_color"
+              android:maxLines="2"
+              android:textSize="15sp"></TextView>
 
     <TextView android:id="@+id/waypoint_text"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="8dp"
+              android:layout_marginLeft="4dp"
               android:singleLine="true"
               android:ellipsize="end"
               android:layout_gravity="center_vertical"

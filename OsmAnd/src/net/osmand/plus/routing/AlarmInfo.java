@@ -27,8 +27,6 @@ public class AlarmInfo implements LocationPoint {
 	}
 	
 	private AlarmInfoType type;
-	private float distance;
-	private float time;
 	protected final int locationIndex;
 	private int intValue;
 	private double latitude;
@@ -39,22 +37,6 @@ public class AlarmInfo implements LocationPoint {
 		this.locationIndex = locationIndex;
 	}
 	
-	public float getDistance() {
-		return distance;
-	}
-	
-	public float getTime() {
-		return time;
-	}
-	
-	
-	public void setTime(float time) {
-		this.time = time;
-	}
-	
-	public void setDistance(float distance) {
-		this.distance = distance;
-	}
 	
 	public AlarmInfoType getType() {
 		return type;
@@ -118,8 +100,6 @@ public class AlarmInfo implements LocationPoint {
 	}
 	
 	public int updateDistanceAndGetPriority(float time, float distance) {
-		this.distance = distance;
-		this.time = time;
 		if (distance > 1500) {
 			return 0;
 		}

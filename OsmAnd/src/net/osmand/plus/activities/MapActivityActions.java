@@ -834,7 +834,7 @@ public class MapActivityActions implements DialogProvider {
 					.listen(new OnContextMenuClick() {
 						@Override
 						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-							WaypointDialogHelper.showAllDialog(getMyApplication(), mapActivity, 
+							WaypointDialogHelper.showWaypointsDialog(getMyApplication(), mapActivity, 
 									getMyApplication().getWaypointHelper().getAllPoints());
 //							openIntermediatePointsDialog();
 						}

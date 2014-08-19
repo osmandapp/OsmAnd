@@ -816,11 +816,13 @@ public class OsmandSettings {
 	
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC_OSMAND_PARTS = new BooleanPreference("gpx_routing_calculate_osmand_route", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference("gpx_routing_calculate_rtept", true).makeGlobal().cache();
-	public final OsmandPreference<Boolean> GPX_SPEAK_WPT = new BooleanPreference("speak_gpx_wpt", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC = new BooleanPreference("calc_gpx_route", false).makeGlobal().cache();
+	public final OsmandPreference<Boolean> GPX_SPEAK_WPT = new BooleanPreference("speak_gpx_wpt", true).makeGlobal().cache();
 
 	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_FAVORITES = new BooleanPreference("announce_nearby_favorites", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference("announce_nearby_poi", true).makeGlobal().cache();
+	public final OsmandPreference<Boolean> SHOW_NEARBY_POI = new BooleanPreference("show_nearby_poi", true).makeGlobal().cache();
+	public final OsmandPreference<Boolean> SHOW_NEARBY_FAVORIES = new BooleanPreference("show_nearby_favorites", true).makeGlobal().cache();
 
 	public final OsmandPreference<Boolean> AVOID_TOLL_ROADS = new BooleanPreference("avoid_toll_roads", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> AVOID_MOTORWAY = new BooleanPreference("avoid_motorway", false).makeProfile().cache();
@@ -1455,7 +1457,7 @@ public class OsmandSettings {
 	}
 	
 	public boolean navigateDialog() {
-		return settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_ROUTE, "true").commit();
+		return navigateDialog(false);
 	}
 	
 	public boolean navigateDialog(boolean gpx) {

@@ -30,6 +30,7 @@ import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -537,7 +538,7 @@ public class MapActivity extends AccessibleActivity  {
 	}
 	
 	// Duplicate methods to OsmAndApplication
-	public LatLon getPointToNavigate(){
+	public TargetPoint getPointToNavigate(){
 		return app.getTargetPointsHelper().getPointToNavigate();
 	}
 	

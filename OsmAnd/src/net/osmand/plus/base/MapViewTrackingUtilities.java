@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
-import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.plus.OsmAndConstants;
@@ -15,6 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -294,8 +294,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			if(lt != null) {
 				double left = lt.getLongitude(), right = lt.getLongitude();
 				double top = lt.getLatitude(), bottom = lt.getLatitude();
-				List<LatLon> list = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-				for(LatLon l : list) {
+				List<TargetPoint> list = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+				for(TargetPoint l : list) {
 					left = Math.min(left, l.getLongitude());
 					right = Math.max(right, l.getLongitude());
 					top = Math.max(top, l.getLatitude());

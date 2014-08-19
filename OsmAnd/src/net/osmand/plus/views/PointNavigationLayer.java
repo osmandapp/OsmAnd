@@ -9,6 +9,7 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import android.content.DialogInterface;
@@ -40,13 +41,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	
 	public PointNavigationLayer(MapActivity map) {
 		this.map = map;
-	}
-	
-	public static class TargetPoint {
-		public LatLon location;
-		public String name;
-		public boolean intermediate;
-		public int index;
 	}
 	
 
@@ -86,7 +80,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		int index = 0;
 		
 		TargetPointsHelper targetPoints = map.getMyApplication().getTargetPointsHelper();
-		for (LatLon ip : targetPoints.getIntermediatePoints()) {
+		for (TargetPoint ip : targetPoints.getIntermediatePoints()) {
 			index ++;
 			if (isLocationVisible(tb, ip)) {
 				int marginX = intermediatePoint.getWidth() / 3;
@@ -99,7 +93,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 				canvas.rotate(tb.getRotate(), locationX, locationY);
 			}
 		}
-		LatLon pointToNavigate = targetPoints.getPointToNavigate();
+		TargetPoint pointToNavigate = targetPoints.getPointToNavigate();
 		if (isLocationVisible(tb, pointToNavigate)) {
 			int marginX = targetPoint.getWidth() / 3;
 			int marginY = targetPoint.getHeight();
@@ -126,7 +120,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		
 	}
 
-	public boolean isLocationVisible(RotatedTileBox tb, LatLon p){
+	public boolean isLocationVisible(RotatedTileBox tb, TargetPoint p){
 		if(p == null || tb == null){
 			return false;
 		}
@@ -158,27 +152,17 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		TargetPointsHelper tg = map.getMyApplication().getTargetPointsHelper();
-		List<LatLon> intermediatePoints = tg.getIntermediatePointsWithTarget();
-		List<String> names = tg.getIntermediatePointNamesWithTarget();
+		List<TargetPoint> intermediatePoints = tg.getIntermediatePointsWithTarget();
 		int r = getRadiusPoi(tileBox);
 		for (int i = 0; i < intermediatePoints.size(); i++) {
-			LatLon latLon = intermediatePoints.get(i);
-			boolean target = i == intermediatePoints.size() - 1;
+			TargetPoint tp = intermediatePoints.get(i);
+			LatLon latLon = tp.point;
 			if (latLon != null) {
 				int ex = (int) point.x;
 				int ey = (int) point.y;
 				int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 				int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 				if (calculateBelongs(ex, ey, x, y, r)) {
-					TargetPoint tp = new TargetPoint();
-					tp.location = latLon;
-					tp.intermediate = !target;
-					if (target) {
-						tp.name = view.getContext().getString(R.string.destination_point, "")  + " : " + names.get(i);
-					} else {
-						tp.name = (i + 1) + ". " + view.getContext().getString(R.string.intermediate_point, "")  + " : " + names.get(i);
-					}
-					tp.index = i;
 					o.add(tp);
 				}
 			}
@@ -209,7 +193,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public LatLon getObjectLocation(Object o) {
 		if (o instanceof TargetPoint) {
-			return ((TargetPoint) o).location;
+			return ((TargetPoint) o).point;
 		}
 		return null;
 	}
@@ -217,7 +201,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public String getObjectDescription(Object o) {
 		if (o instanceof TargetPoint) {
-			return ((TargetPoint) o).name;
+			return ((TargetPoint) o).getVisibleName(view.getContext());
 		}
 		return null;
 	}
@@ -225,7 +209,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public String getObjectName(Object o) {
 		if (o instanceof TargetPoint) {
-			return ((TargetPoint) o).name;
+			return ((TargetPoint) o).getVisibleName(view.getContext());
 		}
 		return null;
 	}

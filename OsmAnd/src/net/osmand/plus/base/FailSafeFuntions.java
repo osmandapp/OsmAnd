@@ -8,6 +8,7 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -37,7 +38,7 @@ public class FailSafeFuntions {
 		final Handler uiHandler = new Handler();
 		final String gpxPath = settings.FOLLOW_THE_GPX_ROUTE.get();
 		final TargetPointsHelper targetPoints = app.getTargetPointsHelper();
-		final LatLon pointToNavigate = targetPoints.getPointToNavigate();
+		final TargetPoint pointToNavigate = targetPoints.getPointToNavigate();
 		if (pointToNavigate == null && gpxPath == null) {
 			notRestoreRoutingMode(ma, app);
 		} else {
@@ -143,7 +144,7 @@ public class FailSafeFuntions {
 							} else {
 								gpxRoute = null;
 							}
-							LatLon endPoint = pointToNavigate;
+							TargetPoint endPoint = pointToNavigate;
 							if (endPoint == null) {
 								notRestoreRoutingMode(ma, app);
 							} else {

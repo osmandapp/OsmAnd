@@ -1,12 +1,12 @@
 package net.osmand.plus.routing;
 
 
+import java.util.List;
+
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -16,12 +16,10 @@ import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
 import android.content.Context;
-import net.osmand.util.MapUtils;
-
-import java.util.List;
 
 
 public class VoiceRouter {
@@ -45,8 +43,6 @@ public class VoiceRouter {
 	private long lastAnnouncedOffRoute = 0;
 	private long waitAnnouncedSpeedLimit = 0;
 	private long waitAnnouncedOffRoute = 0;
-	private long lastAnnouncedSpeedCamera = 0;
-	private long lastAnnouncedWarning = 0;
 
 	// private long lastTimeRouteRecalcAnnounced = 0;
 	
@@ -228,113 +224,112 @@ public class VoiceRouter {
 		if (p == null){
 			return;
 		}
-		String favoritesWaypoints = null;
-		String gpxWaypoints = null;
-		String poiWaypoints = null;
-		for (LocationPoint point : points) {
-			if (point instanceof GPXUtilities.WptPt) {
-				gpxWaypoints = (favoritesWaypoints == null ? "" : ", ") + point.getName();
-			} else if (point instanceof FavouritePoint) {
-				favoritesWaypoints = (favoritesWaypoints == null ? "" : ", ") + point.getName();
-			} else {
-				poiWaypoints = (favoritesWaypoints == null ? "" : ", ") + point.getName();
-			}
+		String text = getText(null, points,null);
+		p.arrivedAtWayPoint(text).play();
+	}
+	
+	public void announceFavorite(List<LocationPoint> points) {
+		CommandBuilder p = getNewCommandPlayerToPlay();
+		if (p == null){
+			return;
 		}
-		if (gpxWaypoints != null){
-			p.arrivedAtWayPoint(gpxWaypoints).play();
+		String text = getText(null, points,null);
+		p.arrivedAtFavorite(text).play();
+	}
+	
+	public void announcePoi(List<LocationPoint> points) {
+		CommandBuilder p = getNewCommandPlayerToPlay();
+		if (p == null){
+			return;
 		}
-		if (favoritesWaypoints != null){
-			p.arrivedAtFavorite(favoritesWaypoints).play();
-		}
-		if (poiWaypoints != null){
-			p.arrivedAtPoi(poiWaypoints).play();
-		}
+		String text = getText(null, points,null);
+		p.arrivedAtPoi(text).play();
 	}
 
+	public void approachFavorite(Location location, List<LocationPoint> points){
+		CommandBuilder p = getNewCommandPlayerToPlay();
+		if (p == null){
+			return;
+		}
+		double[] dist = new double[1];
+		String text = getText(location, points, dist);
+		p.goAhead(dist[0], null).andArriveAtFavorite(text).play();
+	}
+	
 	public void approachWaypoint(Location location, List<LocationPoint> points){
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p == null){
 			return;
 		}
-		String favoritesWaypoints = null;
-		String gpxWaypoints = null;
-		String poiWaypoints = null;
-		double favDistance = -1;
-		double gpxDistance = -1;
-		double poiDistance = -1;
-		for (LocationPoint point : points) {
-			if (point instanceof GPXUtilities.WptPt) {
-				gpxWaypoints = (favoritesWaypoints == null ? "" : ", ") + point.getName();
-				//need to calculate distance to nearest point
-				if (favDistance == -1){
-					favDistance = MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
-							point.getLatitude(), point.getLongitude());
-				}
-			} else if (point instanceof FavouritePoint) {
-				favoritesWaypoints = (favoritesWaypoints == null ? "" : ", ") + point.getName();
-				if (gpxDistance == -1){
-					gpxDistance = MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
-							point.getLatitude(), point.getLongitude());
-				}
-			} else {
-				poiWaypoints = (favoritesWaypoints == null ? "" : ", ") + point.getName();
-				if (poiDistance == -1){
-					poiDistance = MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
-							point.getLatitude(), point.getLongitude());
-				}
-			}
-		}
-		if (gpxWaypoints != null){
-			p.goAhead(gpxDistance, null).andArriveAtWayPoint(gpxWaypoints).play();
-		}
-		if (favoritesWaypoints != null) {
-			p.goAhead(favDistance, null).andArriveAtFavorite(favoritesWaypoints).play();
-		}
-		if (poiWaypoints != null){
-			p.goAhead(poiDistance, null).andArriveAtPoiWaypoint(poiWaypoints).play();
-		}
+		double[] dist = new double[1];
+		String text = getText(location, points, dist);
+		p.goAhead(dist[0], null).andArriveAtWayPoint(text).play();
 	}
-
-	public void announceAlarm(AlarmInfo alarm) {
-		if(alarm == null) {
+	
+	public void approachPoi(Location location, List<LocationPoint> points){
+		CommandBuilder p = getNewCommandPlayerToPlay();
+		if (p == null){
 			return;
 		}
-		long ms = System.currentTimeMillis();
-		if (alarm.getType() == AlarmInfoType.SPEED_LIMIT) {
+		double[] dist = new double[1];
+		String text = getText(location, points,  dist);
+		p.goAhead(dist[0], null).andArriveAtPoiWaypoint(text).play();
+	}
 
-			if (waitAnnouncedSpeedLimit == 0) {
-				// wait 10 seconds before announcement
-				if (ms - lastAnnouncedSpeedLimit > 120 * 1000) {
-					waitAnnouncedSpeedLimit = ms;
-				}	
-			} else {
-				// if we wait before more than 20 sec (reset counter)
-				if (ms - waitAnnouncedSpeedLimit > 20 * 1000) {
-					waitAnnouncedSpeedLimit = 0;
-				} else if (router.getSettings().SPEAK_SPEED_LIMIT.get()  && ms - waitAnnouncedSpeedLimit > 10 * 1000 ) {
-					CommandBuilder p = getNewCommandPlayerToPlay();
-					if (p != null) {
-						lastAnnouncedSpeedLimit = ms;
-						waitAnnouncedSpeedLimit = 0;
-						p.speedAlarm().play();
-					}
+	protected String getText(Location location, List<LocationPoint> points, double[] dist) {
+		String text = "";
+		for (LocationPoint point : points) {
+			// need to calculate distance to nearest point
+			if (text.length() == 0) {
+				if (location != null && dist != null) {
+					dist[0] = MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
+							point.getLatitude(), point.getLongitude());
 				}
+			} else {
+				text += ", ";
 			}
+			text += point.getName();
+		}
+		return text;
+	}
 
-		} else if (alarm.getType() == AlarmInfoType.SPEED_CAMERA) {
-			if (router.getSettings().SPEAK_SPEED_CAMERA.get() && ms - lastAnnouncedSpeedCamera > 100 * 1000) {
+	public void announceAlarm(AlarmInfoType type) {
+		if (type == AlarmInfoType.SPEED_LIMIT) {
+			announceSpeedAlarm();
+		} else if (type == AlarmInfoType.SPEED_CAMERA) {
+			if (router.getSettings().SPEAK_SPEED_CAMERA.get()) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
-					lastAnnouncedSpeedCamera = ms;
-					p.attention(alarm.getType()+"").play();
+					p.attention(type+"").play();
 				}
 			}
 		} else {
-			if (router.getSettings().SPEAK_TRAFFIC_WARNINGS.get() && ms - lastAnnouncedWarning > 100 * 1000) {
+			if (router.getSettings().SPEAK_TRAFFIC_WARNINGS.get()) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
-					lastAnnouncedWarning = ms;
-					p.attention(alarm.getType()+"").play();
+					p.attention(type+"").play();
+				}
+			}
+		}
+	}
+
+	public void announceSpeedAlarm() {
+		long ms = System.currentTimeMillis();
+		if (waitAnnouncedSpeedLimit == 0) {
+			// wait 10 seconds before announcement
+			if (ms - lastAnnouncedSpeedLimit > 120 * 1000) {
+				waitAnnouncedSpeedLimit = ms;
+			}	
+		} else {
+			// if we wait before more than 20 sec (reset counter)
+			if (ms - waitAnnouncedSpeedLimit > 20 * 1000) {
+				waitAnnouncedSpeedLimit = 0;
+			} else if (router.getSettings().SPEAK_SPEED_LIMIT.get()  && ms - waitAnnouncedSpeedLimit > 10 * 1000 ) {
+				CommandBuilder p = getNewCommandPlayerToPlay();
+				if (p != null) {
+					lastAnnouncedSpeedLimit = ms;
+					waitAnnouncedSpeedLimit = 0;
+					p.speedAlarm().play();
 				}
 			}
 		}

@@ -1,18 +1,19 @@
 package net.osmand.plus;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
-import android.widget.ListView;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
 import net.osmand.access.NavigationInfo;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadPoint;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.MapUtils;
@@ -784,6 +785,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return navigationInfo;
 	}
 
+	public String getNavigationHint(TargetPoint point) {
+		String hint = navigationInfo.getDirectionString(point == null ? null : point.point, getHeading());
+		if (hint == null)
+			hint = app.getString(R.string.no_info);
+		return hint;
+	}
+	
 	public String getNavigationHint(LatLon point) {
 		String hint = navigationInfo.getDirectionString(point, getHeading());
 		if (hint == null)
@@ -792,7 +800,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public boolean emitNavigationHint() {
-		final LatLon point = app.getTargetPointsHelper().getPointToNavigate();
+		final TargetPoint point = app.getTargetPointsHelper().getPointToNavigate();
 		if (point != null) {
 			if (app.getRoutingHelper().isRouteCalculated()) {
 				app.getRoutingHelper().getVoiceRouter().announceCurrentDirection(getLastKnownLocation());
@@ -815,7 +823,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 
-	public void showNavigationInfo(LatLon pointToNavigate, Context uiActivity) {
+	public void showNavigationInfo(TargetPoint pointToNavigate, Context uiActivity) {
 		getNavigationInfo().show(pointToNavigate, getHeading(), uiActivity);
 		
 	}

@@ -17,6 +17,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
@@ -171,15 +172,15 @@ public class MapRoutePreferencesControl extends MapControls {
 				if (ps.size() > 0) {
 					Location first = ps.get(0);
 					Location end = ps.get(ps.size() - 1);
-					LatLon pn = tg.getPointToNavigate();
+					TargetPoint pn = tg.getPointToNavigate();
 					boolean update = false;
 					if (pn == null || 
-							MapUtils.getDistance(tg.getPointToNavigate(), new LatLon(first.getLatitude(), first.getLongitude())) < 10) {
+							MapUtils.getDistance(pn.point, new LatLon(first.getLatitude(), first.getLongitude())) < 10) {
 						tg.navigateToPoint(new LatLon(end.getLatitude(), end.getLongitude()), false, -1);
 						update = true;
 					}
 					if (tg.getPointToStart() == null || 
-							MapUtils.getDistance(tg.getPointToStart(), new LatLon(end.getLatitude(), end.getLongitude())) < 10) {
+							MapUtils.getDistance(tg.getPointToStart().point, new LatLon(end.getLatitude(), end.getLongitude())) < 10) {
 						tg.setStartPoint(new LatLon(first.getLatitude(), first.getLongitude()), false, null);
 						update = true;
 					}

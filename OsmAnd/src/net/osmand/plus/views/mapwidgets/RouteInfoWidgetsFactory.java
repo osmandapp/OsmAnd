@@ -13,8 +13,10 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -472,7 +474,8 @@ public class RouteInfoWidgetsFactory {
 				.getDrawable(R.drawable.widget_target), view) {
 			@Override
 			public LatLon getPointToNavigate() {
-				return map.getPointToNavigate();
+				TargetPoint p = map.getPointToNavigate();
+				return p == null ? null : p.point;
 			}
 
 			@Override
@@ -503,7 +506,8 @@ public class RouteInfoWidgetsFactory {
 
 			@Override
 			public LatLon getPointToNavigate() {
-				return targets.getFirstIntermediatePoint();
+				TargetPoint p = targets.getFirstIntermediatePoint();
+				return p == null ? null : p.point;
 			}
 
 			@Override
@@ -618,6 +622,7 @@ public class RouteInfoWidgetsFactory {
 	
 	public BaseMapWidget createAlarmInfoControl(final OsmandApplication app, MapActivity ma) {
 		final RoutingHelper rh = app.getRoutingHelper();
+		final WaypointHelper wh = app.getWaypointHelper();
 		final OsmandSettings settings = app.getSettings();
 		final OsmAndLocationProvider locationProvider = app.getLocationProvider();
 		final MapViewTrackingUtilities trackingUtilities = ma.getMapViewTrackingUtilities();
@@ -651,12 +656,12 @@ public class RouteInfoWidgetsFactory {
 				if ((trafficWarnings || cams) && eval) {
 					AlarmInfo alarm ;
 					if(rh.isFollowingMode()) { 
-						alarm = rh.getMostImportantAlarm(settings.METRIC_SYSTEM.get(), cams);
+						alarm = wh.getMostImportantAlarm(settings.METRIC_SYSTEM.get(), cams);
 					} else {
 						RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
 						Location loc = locationProvider.getLastKnownLocation();
 						if(ro != null && loc != null) {
-							alarm = rh.calculateMostImportantAlarm(ro, loc, settings.METRIC_SYSTEM.get(), cams);
+							alarm = wh.calculateMostImportantAlarm(ro, loc, settings.METRIC_SYSTEM.get(), cams);
 						} else {
 							alarm = null;
 						}

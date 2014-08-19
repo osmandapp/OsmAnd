@@ -15,11 +15,13 @@ import net.osmand.plus.*;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import android.graphics.Paint;
 import android.os.AsyncTask;
@@ -441,7 +443,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			currentPoints.clear();
 			if (rt != null) {
 				TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-				String locName = targetPointsHelper.getPointNavigateDescription();
+				TargetPoint pointToNavigate = targetPointsHelper.getPointToNavigate();
+				String locName = pointToNavigate == null ? null : pointToNavigate.name; 
 				for (int i = 0; i < rt.points.size(); i++) {
 					WptPt wptPt = rt.points.get(i);
 					RoutePoint rtp = new RoutePoint(wptPt);
@@ -474,12 +477,12 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 		public void updateCurrentTargetPoint() {
 			TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-			String locName = targetPointsHelper.getPointNavigateDescription();
+			TargetPoint tp = targetPointsHelper.getPointToNavigate();
 			for (int i = 0; i < currentPoints.size(); i++) {
 				RoutePoint rtp = currentPoints.get(i);
-				rtp.isNextNavigate = rtp.visitedTime == 0 && locName != null && locName.equals(rtp.getName());
+				rtp.isNextNavigate = rtp.visitedTime == 0 && tp != null && !Algorithms.isEmpty(tp.name) && tp.name.equals(rtp.getName());
 				if (rtp.isNextNavigate) {
-					locName = null;
+					tp.name = "";
 				}
 
 			}

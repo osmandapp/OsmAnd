@@ -17,10 +17,9 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
@@ -417,10 +416,11 @@ public class RoutingHelper {
 			route.passIntermediatePoint();
 			
 			TargetPointsHelper targets = app.getTargetPointsHelper();
-			List<String> ns = targets.getIntermediatePointNames();
+			List<TargetPoint> ns = targets.getIntermediatePoints();
 			int toDel = targets.getIntermediatePoints().size() - route.getIntermediatePointsToPass();
 			int currentIndex = toDel - 1; 
-			String name = currentIndex  < 0 || currentIndex  >= ns.size() || ns.get(currentIndex ) == null ? "" : ns.get(currentIndex );
+			String name = currentIndex  < 0 || currentIndex  >= ns.size() || 
+					ns.get(currentIndex ) == null ? "" : ns.get(currentIndex ).name;
 			if(isFollowingMode) {
 				voiceRouter.arrivedIntermediatePoint(name);
 			}
@@ -439,7 +439,8 @@ public class RoutingHelper {
 		if (currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < (((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.get())) {
 			showMessage(app.getString(R.string.arrived_at_destination));
 			TargetPointsHelper targets = app.getTargetPointsHelper();
-			String description = targets.getPointNavigateDescription();
+			TargetPoint tp = targets.getPointToNavigate();
+			String description = tp == null ? "" : tp.name; 
 			if(isFollowingMode) {
 				voiceRouter.arrivedDestinationPoint(description);
 			}
@@ -608,62 +609,7 @@ public class RoutingHelper {
 		return route.getCurrentMaxSpeed();
 	}
 	
-	public synchronized AlarmInfo getMostImportantAlarm(MetricsConstants mc, boolean showCameras){
-		float mxspeed = route.getCurrentMaxSpeed();
-		AlarmInfo speedAlarm = createSpeedAlarm(mc, mxspeed, lastProjection);
-		AlarmInfo alarm = route.getMostImportantAlarm(lastProjection, speedAlarm, showCameras);
-		if(alarm != null) {
-			voiceRouter.announceAlarm(alarm);
-		}
-		return alarm;
 		
-	}
-	
-	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, 
-			MetricsConstants mc, boolean showCameras) {
-		float mxspeed = ro.getMaximumSpeed();
-		AlarmInfo speedAlarm = createSpeedAlarm(mc, mxspeed, loc);
-		if (speedAlarm != null) {
-			voiceRouter.announceAlarm(speedAlarm);
-			return speedAlarm;
-		}
-		for (int i = 0; i < ro.getPointsLength(); i++) {
-			int[] pointTypes = ro.getPointTypes(i);
-			RouteRegion reg = ro.region;
-			if (pointTypes != null) {
-				for (int r = 0; r < pointTypes.length; r++) {
-					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
-					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
-					if (info != null) {
-						if (info.getType() != AlarmInfoType.SPEED_CAMERA || showCameras) {
-							voiceRouter.announceAlarm(info);
-							return info;
-						}
-					}
-				}
-			}
-		}
-		return null;
-	}
-
-
-	private static AlarmInfo createSpeedAlarm(MetricsConstants mc, float mxspeed, Location loc) {
-		AlarmInfo speedAlarm = null;
-		if (mxspeed != 0 && loc != null && loc.hasSpeed() && mxspeed != RouteDataObject.NONE_MAX_SPEED) {
-			float delta = 5f / 3.6f;
-			if (loc.getSpeed() > mxspeed + delta) {
-				int speed;
-				if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
-					speed = Math.round(mxspeed * 3.6f);
-				} else {
-					speed = Math.round(mxspeed * 3.6f / 1.6f);
-				}
-				speedAlarm = AlarmInfo.createSpeedLimit(speed, loc);
-			}
-		}
-		return speedAlarm;
-	}
-	
 	public static String formatStreetName(String name, String ref, String destination) {
 		if(destination != null && destination.length() > 0){
 			if(ref != null && ref.length() > 0) {

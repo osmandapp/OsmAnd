@@ -13,6 +13,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
@@ -299,7 +300,8 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 				dist = 30;
 			}
 			LatLon lt = new LatLon(l.getLatitude(), l.getLongitude());
-			if(targets.getPointToNavigate() == null || MapUtils.getDistance(targets.getPointToNavigate(), lt) > dist) {
+			final TargetPoint pn = targets.getPointToNavigate();
+			if(pn == null || MapUtils.getDistance(pn.point, lt) > dist) {
 				targets.navigateToPoint(lt, true, -1);
 			}
 		}

@@ -1,5 +1,6 @@
 package net.osmand.plus.helpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.Location;
@@ -10,14 +11,16 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.SystemClock;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +30,6 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -71,7 +73,7 @@ public class WaypointDialogHelper {
 				all.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						 showAllDialog(app, mapActivity, waypointHelper.getAllPoints());
+						 showWaypointsDialog(app, mapActivity, waypointHelper.getAllPoints());
 					}
 				});
 
@@ -90,20 +92,21 @@ public class WaypointDialogHelper {
 		}
 	}
 
-	private static void updatePointInfoView(OsmandApplication app, Context ctx,
+	private static void updatePointInfoView(final OsmandApplication app, final Activity ctx,
 			View localView, final LocationPointWrapper ps) {
 		WaypointHelper wh = app.getWaypointHelper();
-		LocationPoint point = ps.getPoint();
+		final LocationPoint point = ps.getPoint();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		text.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				// TODO
-				//itemClick(point);
+				if(ctx instanceof MapActivity) {
+					showOnMap(app, (MapActivity) ctx, point);
+				}
 			}
 		});
-		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_text);
-		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(FavoriteImageDrawable.getOrCreate(ctx, point.getColor()));
+		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
+		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(ctx));
 		Location lastKnownMapLocation = app.getLocationProvider().getLastKnownLocation();
 		String dd = "";
 		if (lastKnownMapLocation != null) {
@@ -169,8 +172,9 @@ public class WaypointDialogHelper {
 	}
 
 
-	public static void showAllDialog(final OsmandApplication app, final MapActivity ctx, final List<LocationPointWrapper> visibleLocationPoints){
+	public static void showWaypointsDialog(final OsmandApplication app, final MapActivity ctx, final List<LocationPointWrapper> visibleLocationPoints){
 		final WaypointHelper waypointHelper = app.getWaypointHelper();
+		final List<LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
 		final ArrayAdapter<LocationPointWrapper> listAdapter = new ArrayAdapter<LocationPointWrapper>(ctx, R.layout.waypoint_reached, R.id.title,
 				visibleLocationPoints) {
 			@Override
@@ -179,21 +183,8 @@ public class WaypointDialogHelper {
 				View v = convertView;
 				if (v == null) {
 					v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
-					int vl = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, ctx.getResources()
-							.getDisplayMetrics());
-					final LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(vl, vl);
-					ll.setMargins(vl / 4, vl / 4, vl / 4, vl / 4);
-					v.findViewById(R.id.waypoint_icon).setLayoutParams(ll);
 				}
 				updatePointInfoView(app, ctx, v, getItem(position));
-				TextView text = (TextView) v.findViewById(R.id.waypoint_text);
-				text.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						showOnMap(app, ctx, visibleLocationPoints.get(position));
-					}
-				});
-
 				View remove = v.findViewById(R.id.info_close);
 				((ImageButton) remove).setImageDrawable(ctx.getResources().getDrawable(
 						app.getSettings().isLightContent()? R.drawable.ic_action_gremove_light:
@@ -203,7 +194,6 @@ public class WaypointDialogHelper {
 					public void onClick(View view) {
 						LocationPointWrapper point = visibleLocationPoints.get(position);
 						remove(point);
-						waypointHelper.removeVisibleLocationPoint(point);
 						notifyDataSetChanged();
 					}
 				});
@@ -217,30 +207,30 @@ public class WaypointDialogHelper {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-				showOnMap(app, ctx, visibleLocationPoints.get(i));
+				LocationPointWrapper ps = listAdapter.getItem(i);
+				showOnMap(app, ctx, ps.getPoint());
 			}
 		});
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setView(listView);
-		builder.setPositiveButton(R.string.default_buttons_ok, null);
-		builder.setNegativeButton(ctx.getString(R.string.hide_all_waypoints), new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
+			
 			@Override
-			public void onClick(DialogInterface dialogInterface, int i) {
-				waypointHelper.clearAllVisiblePoints();
-				// TODO
-				// updateDialog(app, ctx);
+			public void onClick(DialogInterface dialog, int which) {
+				for(LocationPointWrapper wr : deletedPoints) {
+					waypointHelper.removeVisibleLocationPoint(wr);
+				}
 			}
 		});
+		builder.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), null);
 		builder.show();
 	}
 
-	private static void showOnMap(OsmandApplication app, MapActivity ctx, LocationPointWrapper locationPoint) {
-		// TODO
-		LocationPoint point = locationPoint.getPoint();
-		// AnimateDraggingMapThread thread = mapActivity.getMapView().getAnimatedDraggingThread();
+	private static void showOnMap(OsmandApplication app, MapActivity ctx, LocationPoint locationPoint) {
+		AnimateDraggingMapThread thread = ctx.getMapView().getAnimatedDraggingThread();
 		int fZoom = ctx.getMapView().getZoom() < 15 ? 15 : ctx.getMapView().getZoom();
-		// thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
-		ctx.getMapView().setIntZoom(fZoom);
-		ctx.getMapView().setLatLon(point.getLatitude(), point.getLongitude());
+		thread.startMoving(locationPoint.getLatitude(), locationPoint.getLongitude(), fZoom, true);
+//		ctx.getMapView().setIntZoom(fZoom);
+//		ctx.getMapView().setLatLon(point.getLatitude(), point.getLongitude());
 	}
 }

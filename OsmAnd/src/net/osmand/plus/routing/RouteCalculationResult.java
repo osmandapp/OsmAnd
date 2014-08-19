@@ -11,7 +11,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
-import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -39,7 +38,6 @@ public class RouteCalculationResult {
 	protected int currentDirectionInfo = 0;
 	protected int currentRoute = 0;
 	protected int nextIntermediate = 0;
-	protected int nextAlarmInfo = 0;
 	protected int currentWaypointGPX = 0;
 	protected int lastWaypointGPX = 0;
 
@@ -690,9 +688,6 @@ public class RouteCalculationResult {
 		while (currentDirectionInfo < directions.size() - 1 && directions.get(currentDirectionInfo + 1).routePointOffset < currentRoute) {
 			currentDirectionInfo++;
 		}
-		while (nextAlarmInfo < alarmInfo.size() && alarmInfo.get(nextAlarmInfo).locationIndex < currentRoute) {
-			nextAlarmInfo++;
-		}
 		while(nextIntermediate < intermediatePoints.length) {
 			RouteDirectionInfo dir = directions.get(intermediatePoints[nextIntermediate]);
 			if(dir.routePointOffset < currentRoute) {
@@ -701,6 +696,10 @@ public class RouteCalculationResult {
 				break;
 			}
 		}
+	}
+	
+	public int getCurrentRoute() {
+		return currentRoute;
 	}
 	
 	public void passIntermediatePoint(){
@@ -820,38 +819,6 @@ public class RouteCalculationResult {
 		return null;
 	}
 	
-	public AlarmInfo getMostImportantAlarm(Location fromLoc, AlarmInfo speedAlarm, boolean showCameras) {
-		int cRoute = currentRoute;
-		AlarmInfo mostImportant = speedAlarm;
-		int value = speedAlarm != null? speedAlarm.updateDistanceAndGetPriority(0, 0) : Integer.MAX_VALUE;
-		int aInfo = nextAlarmInfo;
-		if (aInfo < alarmInfo.size()) {
-			int dist = 0;
-			float speed = 0;
-			if (fromLoc != null && fromLoc.hasSpeed()) {
-				speed = fromLoc.getSpeed();
-			}
-			if (fromLoc != null) {
-				dist += fromLoc.distanceTo(locations.get(cRoute));
-			}
-			dist += listDistance[cRoute];
-			while(aInfo < alarmInfo.size()) {
-				AlarmInfo inf = alarmInfo.get(aInfo);
-				int d = dist - listDistance[inf.locationIndex];
-				if(d > 250){
-					break;
-				}
-				float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
-				int vl = inf.updateDistanceAndGetPriority(time, d);
-				if(vl < value && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)){
-					mostImportant = inf;
-					value = vl;
-				}
-				aInfo++;
-			}
-		}
-		return mostImportant;
-	}
 	
 	public Location getNextRouteLocation(int after) {
 		if(currentRoute + after < locations.size()) {

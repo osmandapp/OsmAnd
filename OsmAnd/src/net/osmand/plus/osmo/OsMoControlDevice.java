@@ -8,6 +8,7 @@ import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,17 +91,16 @@ public class OsMoControlDevice implements OsMoReactor {
 					robj.put("version", Version.getAppVersion(app));
 					TargetPointsHelper tg = app.getTargetPointsHelper();
 					if(tg.getPointToNavigate() != null) {
-						addPoint(robj, "target_", tg.getPointToNavigate(), tg.getPointNavigateDescription());
+						addPoint(robj, "target_", tg.getPointToNavigate().point, tg.getPointToNavigate().name);
 					}
-					List<String> intermediatePointNames = tg.getIntermediatePointNames();
-					List<LatLon> intermediatePoints = tg.getIntermediatePoints();
-					if (intermediatePointNames.size() > 0) {
+					List<TargetPoint> intermediatePoints = tg.getIntermediatePoints();
+					if (intermediatePoints.size() > 0) {
 						JSONArray ar = new JSONArray();
 						robj.put("intermediates", ar);
-						for (int i = 0; i < intermediatePointNames.size(); i++) {
+						for (int i = 0; i < intermediatePoints.size(); i++) {
 							JSONObject js = new JSONObject();
 							ar.put(js);
-							addPoint(js, "", intermediatePoints.get(i), intermediatePointNames.get(i));
+							addPoint(js, "", intermediatePoints.get(i).point, intermediatePoints.get(i).name);
 						}
 					}
 					service.pushCommand("OSMAND_INFO|"+robj.toString());

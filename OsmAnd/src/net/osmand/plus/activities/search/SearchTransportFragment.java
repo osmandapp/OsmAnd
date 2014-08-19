@@ -14,6 +14,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.resources.TransportIndexRepository;
@@ -149,7 +150,8 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 			startPoint = settings.getLastKnownMapLocation();
 		}
 		OsmandApplication app = (OsmandApplication) getApplication();
-		LatLon pointToNavigate = app.getTargetPointsHelper().getPointToNavigate();
+		TargetPoint ps = app.getTargetPointsHelper().getPointToNavigate();
+		LatLon pointToNavigate = ps == null ? null : ps.point;
 		if(!Algorithms.objectEquals(pointToNavigate, this.destinationLocation) || 
 				!Algorithms.objectEquals(startPoint, this.lastKnownMapLocation)){
 			destinationLocation = pointToNavigate;

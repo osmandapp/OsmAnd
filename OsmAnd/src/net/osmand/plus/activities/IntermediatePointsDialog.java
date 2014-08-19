@@ -13,6 +13,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -46,15 +47,14 @@ public class IntermediatePointsDialog {
 	public static void openIntermediatePointsDialog(final Activity activity,
 			final OsmandApplication app, final boolean changeOrder){
 		TargetPointsHelper targets = app.getTargetPointsHelper();
-		final List<LatLon> intermediates = targets.getIntermediatePointsWithTarget();
+		final List<TargetPoint> intermediates = targets.getIntermediatePointsWithTarget();
 		final TIntArrayList originalPositions = new TIntArrayList(intermediates.size());
 		for(int j = 1; j <= intermediates.size(); j++) {
 			originalPositions.add(j);
 		}
-		final List<String> names = targets.getIntermediatePointNamesWithTarget();
 		final boolean[] checkedIntermediates = new boolean[intermediates.size()];
 		Arrays.fill(checkedIntermediates, true);
-		final ArrayAdapter<LatLon> listadapter = getListAdapter(app, activity, changeOrder, intermediates, originalPositions, names, checkedIntermediates);
+		final ArrayAdapter<TargetPoint> listadapter = getListAdapter(app, activity, changeOrder, intermediates, originalPositions, checkedIntermediates);
 		ListView lv = new ListView(activity);
 		View contentView = lv;
 		final ProgressBar pb = new ProgressBar(activity);
@@ -80,7 +80,7 @@ public class IntermediatePointsDialog {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if (activity instanceof MapActivity) {
 					// AnimateDraggingMapThread thread = mapActivity.getMapView().getAnimatedDraggingThread();
-					LatLon pointToNavigate = intermediates.get(position);
+					TargetPoint pointToNavigate = intermediates.get(position);
 					int fZoom = ((MapActivity) activity).getMapView().getZoom() < 15 ? 15 : ((MapActivity) activity).getMapView().getZoom();
 					// thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
 					((MapActivity) activity).getMapView().setIntZoom(fZoom);
@@ -98,7 +98,7 @@ public class IntermediatePointsDialog {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(changeOrder) {
-					commitChangePointsOrder(app, intermediates, names);
+					commitChangePointsOrder(app, intermediates);
 				} else {
 					commitPointsRemoval(app, checkedIntermediates);
 				}
@@ -122,14 +122,13 @@ public class IntermediatePointsDialog {
 		}
 		AlertDialog dlg = builder.create();
 		if (changeOrder) {
-			applySortTargets(dlg, activity, intermediates, originalPositions, names, listadapter, pb, textInfo);
+			applySortTargets(dlg, activity, intermediates, originalPositions, listadapter, pb, textInfo);
 		}
 		dlg.show();
 	}
 
-	private static void applySortTargets(AlertDialog dlg, final Activity activity, final List<LatLon> intermediates,
-			final TIntArrayList originalPositions, 
-			final List<String> names, final ArrayAdapter<LatLon> listadapter, final ProgressBar pb, final TextView textInfo) {
+	private static void applySortTargets(AlertDialog dlg, final Activity activity, final List<TargetPoint> intermediates,
+			final TIntArrayList originalPositions, final ArrayAdapter<TargetPoint> listadapter, final ProgressBar pb, final TextView textInfo) {
 		dlg.setOnShowListener(new OnShowListener() {
 			@Override
 			public void onShow(DialogInterface dialog) {
@@ -145,34 +144,35 @@ public class IntermediatePointsDialog {
 							};
 
 							protected int[] doInBackground(Void[] params) {
-								ArrayList<LatLon> lt = new ArrayList<LatLon>(intermediates);
-								LatLon start ;
+								ArrayList<TargetPoint> lt = new ArrayList<TargetPoint>(intermediates);
+								TargetPoint start ;
 								if(activity instanceof MapActivity) {
-									start = new LatLon(((MapActivity) activity).getMapView().getLatitude(), ((MapActivity) activity).getMapView().getLongitude());
+									LatLon ll = new LatLon(((MapActivity) activity).getMapView().getLatitude(), ((MapActivity) activity).getMapView().getLongitude());
+									start = TargetPoint.create(ll, "");
 								} else {
 									start = lt.get(0);
 								}
-								LatLon end = lt.remove(lt.size() - 1);
-								return new TspAnt().readGraph(lt, start, end).solve();
+								TargetPoint end = lt.remove(lt.size() - 1);
+								ArrayList<LatLon> al = new ArrayList<LatLon>();
+								for(TargetPoint p : lt){
+									al.add(p.point);
+								}
+								return new TspAnt().readGraph(al, start.point, end.point).solve();
 							};
 
 							protected void onPostExecute(int[] result) {
 								pb.setVisibility(View.GONE);
-								List<LatLon> alocs = new ArrayList<LatLon>();
-								List<String> anames = new ArrayList<String>();
+								List<TargetPoint> alocs = new ArrayList<TargetPoint>();
 								TIntArrayList newOriginalPositions = new TIntArrayList();
 								for (int i = 0; i < result.length; i++) {
 									if (result[i] > 0) {
-										LatLon loc = intermediates.get(result[i] - 1);
+										TargetPoint loc = intermediates.get(result[i] - 1);
 										alocs.add(loc);
 										newOriginalPositions.add(originalPositions.get(intermediates.indexOf(loc)));
-										anames.add(names.get(result[i] - 1));
 									}
 								}
 								intermediates.clear();
 								intermediates.addAll(alocs);
-								names.clear();
-								names.addAll(anames);
 								originalPositions.clear();
 								originalPositions.addAll(newOriginalPositions);
 								listadapter.notifyDataSetChanged();
@@ -188,10 +188,10 @@ public class IntermediatePointsDialog {
 	
 	
 
-	private static ArrayAdapter<LatLon> getListAdapter(final OsmandApplication app, final Activity activity, final boolean changeOrder,
-			final List<LatLon> intermediates, final TIntArrayList originalPositions, final List<String> names, final boolean[] checkedIntermediates) {
+	private static ArrayAdapter<TargetPoint> getListAdapter(final OsmandApplication app, final Activity activity, final boolean changeOrder,
+			final List<TargetPoint> intermediates, final TIntArrayList originalPositions,  final boolean[] checkedIntermediates) {
 		final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
-		final ArrayAdapter<LatLon> listadapter = new ArrayAdapter<LatLon>(app, 
+		final ArrayAdapter<TargetPoint> listadapter = new ArrayAdapter<TargetPoint>(app, 
 				changeOrder? R.layout.change_order_item : R.layout.list_menu_item, R.id.title,
 				intermediates) {
 			@Override
@@ -201,11 +201,12 @@ public class IntermediatePointsDialog {
 				View v = super.getView(position, convertView, parent);
 				TextView tv = (TextView) v.findViewById(R.id.title);
 				String nm = originalPositions.get(position) + ". ";
+				TargetPoint tp = intermediates.get(position);
 				String distString = "";
 				if(activity instanceof MapActivity) {
 					double lat = ((MapActivity) activity).getMapView().getLatitude();
 					double lon = ((MapActivity) activity).getMapView().getLongitude();
-					double meters = MapUtils.getDistance(intermediates.get(position), lat, lon);
+					double meters = MapUtils.getDistance(tp.point, lat, lon);
 					distString = OsmAndFormatter.getFormattedDistance((float) meters, app);
 				}
 				if(position < intermediates.size() - 1) {
@@ -213,7 +214,7 @@ public class IntermediatePointsDialog {
 				} else {
 					nm += app.getString(R.string.destination_point, distString);
 				}
-				String descr = names.get(position);
+				String descr = tp.name;
 				if(descr != null && descr.trim().length() > 0) {
 					nm += "\n" + descr;
 				}
@@ -223,10 +224,8 @@ public class IntermediatePointsDialog {
 						@Override
 						public void onClick(View v) {
 							if(position > 0) {
-								LatLon old = intermediates.remove(position - 1);
-								String oldN = names.remove(position - 1);
+								TargetPoint old = intermediates.remove(position - 1);
 								int oldI = originalPositions.removeAt(position -1 );
-								names.add(position, oldN);
 								intermediates.add(position, old);
 								originalPositions.insert(position, oldI);
 								notifyDataSetInvalidated();
@@ -237,10 +236,8 @@ public class IntermediatePointsDialog {
 						@Override
 						public void onClick(View v) {
 							if(position < intermediates.size() - 1) {
-								LatLon old = intermediates.remove(position + 1);
-								String oldN = names.remove(position + 1);
+								TargetPoint old = intermediates.remove(position + 1);
 								int oldI = originalPositions.removeAt(position + 1 );
-								names.add(position, oldN);
 								intermediates.add(position, old);
 								originalPositions.insert(position, oldI);
 								notifyDataSetInvalidated();
@@ -298,9 +295,9 @@ public class IntermediatePointsDialog {
 		}
 	}
 	
-	private static void commitChangePointsOrder(OsmandApplication app,  List<LatLon> target, List<String> names) {
+	private static void commitChangePointsOrder(OsmandApplication app,  List<TargetPoint> target) {
 		TargetPointsHelper targets = app.getTargetPointsHelper();
-		List<LatLon> cur = targets.getIntermediatePointsWithTarget();
+		List<TargetPoint> cur = targets.getIntermediatePointsWithTarget();
 		boolean eq = true;
 		for(int j = 0; j < cur.size() && j < target.size() ; j++) {
 			if(cur.get(j) != target.get(j)) {
@@ -309,7 +306,7 @@ public class IntermediatePointsDialog {
 			}
 		}
 		if(!eq) {
-			targets.reorderAllTargetPoints(target, names, true);
+			targets.reorderAllTargetPoints(target, true);
 		}
 	}
 }

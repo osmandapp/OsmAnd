@@ -42,6 +42,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -1012,7 +1013,7 @@ public class RouteProvider {
 
 		//saving start point to gpx file
 		WptPt startpoint = new WptPt();
-		LatLon sc = helper.getPointToStart();
+		TargetPoint sc = helper.getPointToStart();
 		if (sc != null){
 			startpoint.lon = sc.getLongitude();
 			startpoint.lat = sc.getLatitude();
@@ -1059,14 +1060,13 @@ public class RouteProvider {
 				route.points.add(pt);
 			}
 		}
-        List<LatLon> ps = helper.getIntermediatePointsWithTarget();
-        List<String> psNames = helper.getIntermediatePointNamesWithTarget();
+        List<TargetPoint> ps = helper.getIntermediatePointsWithTarget();
         for(int k = 0; k < ps.size(); k++) {
             WptPt pt = new WptPt();
             pt.lat = ps.get(k).getLatitude();
             pt.lon = ps.get(k).getLongitude();
-            if(k < psNames.size()) {
-                pt.name = psNames.get(k) +"";
+            if(k < ps.size()) {
+                pt.name = ps.get(k).name +"";
                 if(k == ps.size() - 1) {
                     String target = ctx.getString(R.string.destination_point, "" );
                     if(pt.name.startsWith(target)) {

@@ -2,29 +2,69 @@ package net.osmand.plus;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+
+import android.content.Context;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
-import net.osmand.data.LocationPoint;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.MapUtils;
 
 public class TargetPointsHelper {
 
-	private List<LatLon> intermediatePoints = new ArrayList<LatLon>(); 
-	private List<String> intermediatePointNames = new ArrayList<String>();
-	private LatLon pointToNavigate = null;
-	private LatLon pointToStart = null;
+	private List<TargetPoint> intermediatePoints = new ArrayList<TargetPoint>(); 
+	private TargetPoint pointToNavigate = null;
+	private TargetPoint pointToStart = null;
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
 	private List<StateChangedListener<Void>> listeners = new ArrayList<StateChangedListener<Void>>();
 	private OsmandApplication ctx;
+	
+	public static class TargetPoint {
+		public LatLon point;
+		public String name;
+		public int index;
+		public boolean intermediate;
+		
+		public TargetPoint(LatLon point, String name) {
+			this.point = point;
+			this.name = name;
+		}
+
+		public TargetPoint(LatLon point, String name, int index) {
+			this.point = point;
+			this.name = name;
+			this.index = index;
+			this.intermediate = true;
+		}
+
+		public static TargetPoint create(LatLon point, String name) {
+			if(point != null) {
+				return new TargetPoint(point, name);
+			}
+			return null;
+		}
+		
+		public  String getVisibleName(Context ctx) {
+			if (!intermediate) {
+				return ctx.getString(R.string.destination_point, "")  + " : " + name;
+			} else {
+				return (index + 1) + ". " + ctx.getString(R.string.intermediate_point, "")  + " : " + name;
+			}
+		}
+
+		public double getLatitude() {
+			return point.getLatitude();
+		}
+		
+		public double getLongitude() {
+			return point.getLongitude();
+		}
+		
+	}
 
 	public TargetPointsHelper(OsmandApplication ctx){
 		this.ctx = ctx;
@@ -34,19 +74,21 @@ public class TargetPointsHelper {
 	}
 
 	private void readFromSettings(OsmandSettings settings) {
-		pointToNavigate = settings.getPointToNavigate();
-		pointToStart = settings.getPointToStart();
+		pointToNavigate = TargetPoint.create(settings.getPointToNavigate(), settings.getPointNavigateDescription());
+		pointToStart = TargetPoint.create(settings.getPointToStart(), settings.getStartPointDescription());
 		intermediatePoints.clear();
-		intermediatePointNames.clear();
-		intermediatePoints.addAll(settings.getIntermediatePoints());
-		intermediatePointNames.addAll(settings.getIntermediatePointDescriptions(intermediatePoints.size()));
+		List<LatLon> ips = settings.getIntermediatePoints();
+		List<String> desc = settings.getIntermediatePointDescriptions(ips.size());
+		for(int i = 0; i < ips.size(); i++) {
+			intermediatePoints.add(new TargetPoint(ips.get(i), desc.get(i), i));
+		}
 	}
 	
-	public LatLon getPointToNavigate() {
+	public TargetPoint getPointToNavigate() {
 		return pointToNavigate;
 	}
 	
-	public LatLon getPointToStart() {
+	public TargetPoint getPointToStart() {
 		return pointToStart;
 	}
 	
@@ -55,23 +97,14 @@ public class TargetPointsHelper {
 	}
 	
 	
-	public String getPointNavigateDescription(){
-		return settings.getPointNavigateDescription();
-	}
-	
-	public List<String> getIntermediatePointNames() {
-		return intermediatePointNames;
-	}
-	
-	public List<LatLon> getIntermediatePoints() {
+	public List<TargetPoint> getIntermediatePoints() {
 		return intermediatePoints;
 	}
+	
 
 
-
-
-	public List<LatLon> getIntermediatePointsWithTarget() {
-		List<LatLon> res = new ArrayList<LatLon>();
+	public List<TargetPoint> getIntermediatePointsWithTarget() {
+		List<TargetPoint> res = new ArrayList<TargetPoint>();
 		res.addAll(intermediatePoints);
 		if(pointToNavigate != null) {
 			res.add(pointToNavigate);
@@ -79,16 +112,7 @@ public class TargetPointsHelper {
 		return res;
 	}
 
-	public List<String> getIntermediatePointNamesWithTarget() {
-		List<String> res = new ArrayList<String>();
-		res.addAll(intermediatePointNames);
-		if(pointToNavigate != null) {
-			res.add(getPointNavigateDescription());
-		}
-		return res;
-	}
-
-	public LatLon getFirstIntermediatePoint(){
+	public TargetPoint getFirstIntermediatePoint(){
 		if(intermediatePoints.size() > 0) {
 			return intermediatePoints.get(0);
 		}
@@ -105,7 +129,6 @@ public class TargetPointsHelper {
 		pointToNavigate = null;
 		pointToStart = null;
 		intermediatePoints.clear();
-		intermediatePointNames.clear();
 		readFromSettings(settings);
 		updateRouteAndReferesh(updateRoute);
 	}
@@ -116,7 +139,7 @@ public class TargetPointsHelper {
 	public void makeWayPointDestination(boolean updateRoute, int index){
 		pointToNavigate = intermediatePoints.remove(index);
 		settings.setPointToNavigate(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(),
-				intermediatePointNames.remove(index));
+				pointToNavigate.name);
 		settings.deleteIntermediatePoint(index);
 		updateRouteAndReferesh(updateRoute);
 	}
@@ -130,12 +153,11 @@ public class TargetPointsHelper {
 				settings.deleteIntermediatePoint(sz- 1);
 				pointToNavigate = intermediatePoints.remove(sz - 1);
 				settings.setPointToNavigate(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(),
-						intermediatePointNames.remove(sz - 1));
+						pointToNavigate.name);
 			}
 		} else {
 			settings.deleteIntermediatePoint(index);
 			intermediatePoints.remove(index);
-			intermediatePointNames.remove(index);
 		}
 		updateRouteAndReferesh(updateRoute);
 	}
@@ -171,6 +193,16 @@ public class TargetPointsHelper {
 		loc.setLongitude(l.getLongitude());
 		return loc;
 	}
+	
+	private Location wrap(TargetPoint l) {
+		if(l == null) {
+			return null;
+		}
+		Location loc = new Location("map");
+		loc.setLatitude(l.getLatitude());
+		loc.setLongitude(l.getLongitude());
+		return loc;
+	}
 
 	public void addListener(StateChangedListener<Void> l) {
 		listeners.add(l);
@@ -187,7 +219,6 @@ public class TargetPointsHelper {
 		settings.clearPointToNavigate();
 		settings.clearIntermediatePoints();
 		intermediatePoints.clear();
-		intermediatePointNames.clear();
 		readFromSettings(settings);
 		updateRouteAndReferesh(updateRoute);
 	}
@@ -199,14 +230,19 @@ public class TargetPointsHelper {
 	}
 
 
-	public void reorderAllTargetPoints(List<LatLon> point,
-			List<String> names, boolean updateRoute){
+	public void reorderAllTargetPoints(List<TargetPoint> point, boolean updateRoute){
 		settings.clearPointToNavigate();
 		if (point.size() > 0) {
-			settings.saveIntermediatePoints(point.subList(0, point.size() - 1), names.subList(0, point.size() - 1));
-			LatLon p = point.get(point.size() - 1);
-			String nm = names.get(point.size() - 1);
-			settings.setPointToNavigate(p.getLatitude(), p.getLongitude(), nm);
+			List<TargetPoint> subList = point.subList(0, point.size() - 1);
+			ArrayList<String> names = new ArrayList<String>(subList.size());
+			ArrayList<LatLon> ls = new ArrayList<LatLon>(subList.size());
+			for(int i = 0; i < subList.size(); i++) {
+				names.add(subList.get(i).name);
+				ls.add(subList.get(i).point);
+			}
+			settings.saveIntermediatePoints(ls, names);
+			TargetPoint p = point.get(point.size() - 1);
+			settings.setPointToNavigate(p.getLatitude(), p.getLongitude(), p.name);
 		} else {
 			settings.clearIntermediatePoints();
 		}
@@ -221,13 +257,13 @@ public class TargetPointsHelper {
 		}
 		Location current = routingHelper.getLastProjection();
 		double dist = 300000;
-		List<LatLon> list = getIntermediatePointsWithTarget();
+		List<TargetPoint> list = getIntermediatePointsWithTarget();
 		if(!list.isEmpty()) {
-			if(current != null && MapUtils.getDistance(list.get(0), current.getLatitude(), current.getLongitude()) > dist) {
+			if(current != null && MapUtils.getDistance(list.get(0).point, current.getLatitude(), current.getLongitude()) > dist) {
 				return true;
 			}
 			for(int i = 1; i < list.size(); i++) {
-				if(MapUtils.getDistance(list.get(i-1), list.get(i)) > dist) {
+				if(MapUtils.getDistance(list.get(i-1).point, list.get(i).point) > dist) {
 					return true;
 				}
 			}
@@ -243,9 +279,9 @@ public class TargetPointsHelper {
 		if(point != null){
 			if(intermediate < 0 || intermediate > intermediatePoints.size()) {
 				if(intermediate > intermediatePoints.size()) {
-					LatLon pn = getPointToNavigate();
+					TargetPoint pn = getPointToNavigate();
 					if(pn != null) {
-						settings.insertIntermediatePoint(pn.getLatitude(), pn.getLongitude(), getPointNavigateDescription(),
+						settings.insertIntermediatePoint(pn.getLatitude(), pn.getLongitude(), pn.name,
 								intermediatePoints.size());
 					}
 				}

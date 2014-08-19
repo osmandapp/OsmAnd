@@ -14,6 +14,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.FavouritesListFragment.FavouritesAdapter;
 import net.osmand.plus.activities.IntermediatePointsDialog;
 import net.osmand.plus.activities.MapActivity;
@@ -349,13 +350,12 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	public String generateViaDescription() {
 		TargetPointsHelper targets = getTargets();
 		String via = "";
-		List<String> names = targets.getIntermediatePointNames();
-		List<LatLon> points = targets.getIntermediatePoints();
-		if (names.size() == 0) {
+		List<TargetPoint> points = targets.getIntermediatePoints();
+		if (points.size() == 0) {
 			return via;
 		}
 		for (int i = 0; i < points.size() ; i++) {
-			via += "\n - " + getRoutePointDescription(points.get(i), i >= names.size() ? "" :names.get(i));
+			via += "\n - " + getRoutePointDescription(points.get(i).point, points.get(i).name);
 		}
 		return mapActivity.getString(R.string.route_via) + via;
 	}
@@ -380,10 +380,9 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		fromActions.add(mapActivity.getString(R.string.route_descr_favorite));
 		fromActions.add(mapActivity.getString(R.string.route_descr_select_on_map));
 		
-		LatLon start = getTargets().getPointToStart();
-		String name = getTargets().getStartPointDescription(); 
+		TargetPoint start = getTargets().getPointToStart();
 		if (start != null) {
-			String oname = name != null && name.length() > 0 ? name
+			String oname = start.name != null && start.name.length() > 0 ? start.name
 					: (mapActivity.getString(R.string.route_descr_map_location) + " " + getRoutePointDescription(start.getLatitude(), start.getLongitude()));
 			fromActions.add(oname);
 		}
@@ -411,7 +410,8 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		ArrayList<String> toActions = new ArrayList<String>();
 		if (targets.getPointToNavigate() != null) {
 			toActions.add(mapActivity.getString(R.string.route_descr_destination) + " "
-					+ getRoutePointDescription(targets.getPointToNavigate(), targets.getPointNavigateDescription()));
+					+ getRoutePointDescription(targets.getPointToNavigate().point, 
+							targets.getPointToNavigate().name));
 		} else {
 			toSpinner.setPromptId(R.string.route_descr_select_destination);
 			toActions.add(mapActivity.getString(R.string.route_descr_select_destination));			
