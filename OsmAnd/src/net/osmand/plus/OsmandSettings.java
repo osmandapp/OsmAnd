@@ -819,8 +819,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC = new BooleanPreference("calc_gpx_route", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> GPX_SPEAK_WPT = new BooleanPreference("speak_gpx_wpt", true).makeGlobal().cache();
 
-	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_FAVORITES = new BooleanPreference("announce_nearby_favorites", true).makeGlobal().cache();
-	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference("announce_nearby_poi", true).makeGlobal().cache();
+	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_FAVORITES = new BooleanPreference("announce_nearby_favorites", true).makeProfile().cache();
+	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference("announce_nearby_poi", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SHOW_NEARBY_POI = new BooleanPreference("show_nearby_poi", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> SHOW_NEARBY_FAVORIES = new BooleanPreference("show_nearby_favorites", true).makeGlobal().cache();
 

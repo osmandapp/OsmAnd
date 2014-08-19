@@ -1,5 +1,6 @@
 package net.osmand.data;
-import net.osmand.plus.voice.CommandBuilder;
+
+import android.content.Context;
 
 /**
  */
@@ -9,7 +10,7 @@ public interface LocationPoint {
 
 	public double getLongitude();
 
-	public String getName();
+	public String getName(Context ctx);
 
 	public int getColor();
 	

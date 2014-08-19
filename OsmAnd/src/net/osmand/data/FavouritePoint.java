@@ -2,6 +2,8 @@ package net.osmand.data;
 
 import java.io.Serializable;
 
+import android.content.Context;
+
 public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
 	private String name;
@@ -62,6 +64,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.category = category;
 	}
 
+	public String getName(Context ctx) {
+		return name;
+	}
+	
 	public String getName() {
 		return name;
 	}

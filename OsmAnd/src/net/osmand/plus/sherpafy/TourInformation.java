@@ -20,6 +20,7 @@ import net.osmand.util.Algorithms;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
@@ -300,6 +301,10 @@ public class TourInformation {
 			return location.getLongitude();
 		}
 
+		public String getName(Context ctx) {
+			return name;
+		}
+		
 		public String getName() {
 			return name;
 		}

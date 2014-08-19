@@ -113,7 +113,7 @@ public class GPXUtilities {
 		}
 
 		@Override
-		public String getName() {
+		public String getName(Context ctx) {
 			return name;
 		}
 

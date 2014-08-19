@@ -151,7 +151,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 				if (i++ > 0) {
 					res.append("\n\n");
 				}
-				res.append(getObjName() + " : " + fav.getName());  //$NON-NLS-1$
+				res.append(getObjName() + " : " + fav.getName(view.getContext()));  //$NON-NLS-1$
 			}
 			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
 			return true;
@@ -164,7 +164,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	public String getObjectDescription(Object o) {
 		Class<? extends LocationPoint> fcl = getFavoriteClass();
 		if(o!= null && fcl.isInstance(o)) {
-			return getObjName() + " : " + ((LocationPoint)o).getName(); //$NON-NLS-1$
+			return getObjName() + " : " + ((LocationPoint)o).getName(view.getContext()); //$NON-NLS-1$
 		}
 		return null;
 	}
@@ -174,7 +174,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	@Override
 	public String getObjectName(Object o) {
 		if(o instanceof LocationPoint){
-			return ((LocationPoint)o).getName(); //$NON-NLS-1$
+			return ((LocationPoint)o).getName(view.getContext()); //$NON-NLS-1$
 		}
 		return null;
 	}
@@ -233,7 +233,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 
 	@Override
 	public String getText(LocationPoint o) {
-		return o.getName();
+		return o.getName(view.getContext());
 	}
 	
 

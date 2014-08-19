@@ -9,6 +9,7 @@ import android.content.Context;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
+import net.osmand.data.LocationPoint;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.MapUtils;
@@ -23,7 +24,7 @@ public class TargetPointsHelper {
 	private List<StateChangedListener<Void>> listeners = new ArrayList<StateChangedListener<Void>>();
 	private OsmandApplication ctx;
 	
-	public static class TargetPoint {
+	public static class TargetPoint implements LocationPoint {
 		public LatLon point;
 		public String name;
 		public int index;
@@ -48,11 +49,18 @@ public class TargetPointsHelper {
 			return null;
 		}
 		
+		private String vName() {
+			if(name.trim().length()==0) {
+				return "";
+			}
+			return ": " + name;
+		}
+		
 		public  String getVisibleName(Context ctx) {
 			if (!intermediate) {
-				return ctx.getString(R.string.destination_point, "")  + " : " + name;
+				return ctx.getString(R.string.destination_point, "")  + vName();
 			} else {
-				return (index + 1) + ". " + ctx.getString(R.string.intermediate_point, "")  + " : " + name;
+				return (index + 1) + ". " + ctx.getString(R.string.intermediate_point, "")  + vName();
 			}
 		}
 
@@ -62,6 +70,21 @@ public class TargetPointsHelper {
 		
 		public double getLongitude() {
 			return point.getLongitude();
+		}
+
+		@Override
+		public String getName(Context ctx) {
+			return getVisibleName(ctx);
+		}
+
+		@Override
+		public int getColor() {
+			return 0;
+		}
+
+		@Override
+		public boolean isVisible() {
+			return false;
 		}
 		
 	}

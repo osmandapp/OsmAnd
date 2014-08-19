@@ -21,6 +21,7 @@ import net.osmand.data.LocationPoint;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -240,7 +241,6 @@ public class WaypointHelper {
 		Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
 		if (lastKnownLocation != null && app.getRoutingHelper().isFollowingMode()) {
 			for (int type = 0; type < locationPoints.size(); type++) {
-				String nameToAnnounce = null;
 				int currentRoute = route.getCurrentRoute();
 				List<LocationPoint> approachPoints = new ArrayList<LocationPoint>();
 				List<LocationPoint> announcePoints = new ArrayList<LocationPoint>();
@@ -260,10 +260,10 @@ public class WaypointHelper {
 						double d1 = MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
 								point.getLatitude(), point.getLongitude());
 						Integer state = locationPointsStates.get(point);
+						System.out.println("!!! " + d1 + " " + point.getName(app));
 						if (state != null && state.intValue() == ANNOUNCED_ONCE
 								&& getVoiceRouter()
 										.isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS)) {
-							nameToAnnounce = (nameToAnnounce == null ? "" : ", ") + point.getName();
 							locationPointsStates.remove(point);
 							announcePoints.add(point);
 						} else if ((state == null || state == NOT_ANNOUNCED)
@@ -312,6 +312,10 @@ public class WaypointHelper {
 		return app.getRoutingHelper().getVoiceRouter();
 	}
 	
+	public boolean isRouteCalculated() {
+		return route != null && !route.isEmpty();
+	}
+	
 	public List<LocationPointWrapper> getAllPoints() {
 		List<LocationPointWrapper> points = new ArrayList<WaypointHelper.LocationPointWrapper>();
 		List<List<LocationPointWrapper>> local = locationPoints;
@@ -323,10 +327,16 @@ public class WaypointHelper {
 			}
 		}
 		List<TargetPoint> wts = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-		for(int k = 0; k < wts.size() ; k++) {
-			TargetPoint tp = wts.get(wts.size() - k - 1);
-			int routeIndex = k == 0 ? Integer.MAX_VALUE : route.getIndexOfIntermediate(k);
-			points.add(new LocationPointWrapper(route, TARGETS, new TargetPointHelper(tp), 0, routeIndex));
+		for (int k = 0; k < wts.size(); k++) {
+			final int index = wts.size() - k - 1;
+			TargetPoint tp = wts.get(index);
+			int routeIndex ;
+			if(route == null) {
+				routeIndex = k == 0 ? Integer.MAX_VALUE : index;
+			} else {
+				routeIndex = k == 0 ? route.getImmutableAllLocations().size() - 1 : route.getIndexOfIntermediate(k - 1);
+			}
+			points.add(new LocationPointWrapper(route, TARGETS, tp, 0, routeIndex));
 		}
 		sortList(points);
 		return points;
@@ -396,7 +406,10 @@ public class WaypointHelper {
 			public int compare(LocationPointWrapper olhs, LocationPointWrapper orhs) {
 				int lhs = olhs.routeIndex;
 				int rhs = orhs.routeIndex;
-				return lhs < rhs ? -1 : (lhs == rhs ? 0 : 1);
+				if(lhs == rhs) {
+					return Float.compare(olhs.deviationDistance, orhs.deviationDistance);
+				}
+				return lhs < rhs ? -1 : 1;
 			}
 		});
 	}
@@ -555,7 +568,10 @@ public class WaypointHelper {
 					return uiCtx.getResources().getDrawable(RenderingIcons.getBigIconResourceId(value.toString()));
 				}
 				return null;
-//			} else if(type == TARGETS) {
+			} else if(type == TARGETS) {
+				return uiCtx.getResources().getDrawable(
+						!((TargetPoint)point).intermediate? R.drawable.list_destination:
+					R.drawable.list_intermediate);
 			} else {
 				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
 			}
@@ -603,8 +619,8 @@ public class WaypointHelper {
 		}
 
 		@Override
-		public String getName() {
-			return OsmAndFormatter.getPoiSimpleFormat(a, app, app.getSettings().usingEnglishNames());
+		public String getName(Context ctx) {
+			return OsmAndFormatter.getPoiSimpleFormat(a, ctx, app.getSettings().usingEnglishNames());
 		}
 
 		@Override
@@ -618,41 +634,9 @@ public class WaypointHelper {
 		}
 
 	}
+
 	
-	private class TargetPointHelper implements LocationPoint {
-
-		private TargetPoint a;
-
-		public TargetPointHelper(TargetPoint a) {
-			this.a = a;
-		}
-
-		@Override
-		public double getLatitude() {
-			return a.point.getLatitude();
-		}
-
-		@Override
-		public double getLongitude() {
-			return a.point.getLongitude();
-		}
-
-		@Override
-		public String getName() {
-			return a.getVisibleName(app);
-		}
-
-		@Override
-		public int getColor() {
-			return 0;
-		}
-
-		@Override
-		public boolean isVisible() {
-			return false;
-		}
-
-	}
+	
 
 }
 

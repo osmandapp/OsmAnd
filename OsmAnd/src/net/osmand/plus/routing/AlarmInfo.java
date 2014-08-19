@@ -1,5 +1,6 @@
 package net.osmand.plus.routing;
 
+import android.content.Context;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LocationPoint;
@@ -118,7 +119,7 @@ public class AlarmInfo implements LocationPoint {
 	}
 
 	@Override
-	public String getName() {
+	public String getName(Context ctx) {
 		return type.name();
 	}
 

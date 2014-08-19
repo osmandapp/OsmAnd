@@ -288,7 +288,7 @@ public class VoiceRouter {
 			} else {
 				text += ", ";
 			}
-			text += point.getName();
+			text += point.getName(router.getApplication());
 		}
 		return text;
 	}

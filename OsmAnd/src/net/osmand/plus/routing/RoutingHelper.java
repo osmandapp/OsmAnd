@@ -94,6 +94,10 @@ public class RoutingHelper {
 		return isFollowingMode;
 	}
 	
+	public OsmandApplication getApplication() {
+		return app;
+	}
+	
 	public void setPauseNaviation(boolean b) {
 		this.isPauseNavigation = b;
 	}
@@ -135,6 +139,7 @@ public class RoutingHelper {
 		route = new RouteCalculationResult("");
 		isDeviatedFromRoute = false;
 		evalWaitInterval = 3000;
+		app.getWaypointHelper().setNewRoute(route);
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {

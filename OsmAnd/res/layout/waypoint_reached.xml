@@ -26,8 +26,10 @@
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_marginLeft="4dp"
-              android:singleLine="true"
+              android:maxLines="2"
               android:ellipsize="end"
+              android:clickable="true"
+              android:focusable="true"
               android:layout_gravity="center_vertical"
               android:layout_weight="1"
               android:textSize="18sp"/>
