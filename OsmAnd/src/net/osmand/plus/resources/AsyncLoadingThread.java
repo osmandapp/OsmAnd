@@ -8,16 +8,12 @@ import java.util.Stack;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.data.Amenity;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.BusyIndicator;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.PoiFilter;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -33,11 +29,9 @@ public class AsyncLoadingThread extends Thread {
 	
 	private static final Log log = PlatformUtil.getLog(AsyncLoadingThread.class); 
 	
-	private Handler asyncLoadingPoi; 
 	private Handler asyncLoadingTransport;
 	
 	Stack<Object> requests = new Stack<Object>();
-	AmenityLoadRequest poiLoadRequest = null;
 	TransportLoadRequest transportLoadRequest = null;
 	
 	
@@ -48,11 +42,7 @@ public class AsyncLoadingThread extends Thread {
 		this.resourceManger = resourceManger;
 	}
 	
-	private void startPoiLoadingThread() {
-		HandlerThread h = new HandlerThread("Loading poi");
-		h.start();
-		asyncLoadingPoi = new Handler(h.getLooper());
-	}
+	
 	
 	private void startTransportLoadingThread() {
 		HandlerThread h = new HandlerThread("Loading transport");
@@ -66,9 +56,9 @@ public class AsyncLoadingThread extends Thread {
 			progress = BusyIndicator.STATUS_GREEN;
 		} else if (resourceManger.getContext().getRoutingHelper().isRouteBeingCalculated()) {
 			progress = BusyIndicator.STATUS_ORANGE;
-		} else if (!requests.isEmpty()) {
+		} else if (resourceManger.isSearchAmenitiesInProgress()) {
 			progress = BusyIndicator.STATUS_BLACK;
-		} else if (poiLoadRequest != null && poiLoadRequest.isRunning()) {
+		} else if (!requests.isEmpty()) {
 			progress = BusyIndicator.STATUS_BLACK;
 		} else if (transportLoadRequest != null && transportLoadRequest.isRunning()) {
 			progress = BusyIndicator.STATUS_BLACK;
@@ -96,18 +86,6 @@ public class AsyncLoadingThread extends Thread {
 					if (req instanceof TileLoadDownloadRequest) {
 						TileLoadDownloadRequest r = (TileLoadDownloadRequest) req;
 						tileLoaded |= resourceManger.getRequestedImageTile(r) != null;
-					} else if (req instanceof AmenityLoadRequest) {
-						if (!amenityLoaded) {
-							if (poiLoadRequest == null || asyncLoadingPoi == null) {
-								startPoiLoadingThread();
-								poiLoadRequest = (AmenityLoadRequest) req;
-								asyncLoadingPoi.post(poiLoadRequest.prepareToRun());
-							} else if (poiLoadRequest.recalculateRequest((AmenityLoadRequest) req)) {
-								poiLoadRequest = (AmenityLoadRequest) req;
-								asyncLoadingPoi.post(poiLoadRequest.prepareToRun());
-							}
-							amenityLoaded = true;
-						}
 					} else if (req instanceof TransportLoadRequest) {
 						if (!transportLoaded) {
 							if (transportLoadRequest == null || asyncLoadingTransport == null) {
@@ -152,10 +130,6 @@ public class AsyncLoadingThread extends Thread {
 	}
 
 	public void requestToLoadImage(TileLoadDownloadRequest req) {
-		requests.push(req);
-	}
-
-	public void requestToLoadAmenities(AmenityLoadRequest req) {
 		requests.push(req);
 	}
 
@@ -240,72 +214,7 @@ public class AsyncLoadingThread extends Thread {
 
 	}
 
-	protected class AmenityLoadRequest extends MapObjectLoadRequest<Amenity> {
-		private final List<AmenityIndexRepository> res;
-		private final PoiFilter filter;
-		private final int zoom;
-		private String filterByName;
-
-		public AmenityLoadRequest(List<AmenityIndexRepository> repos, int zoom, PoiFilter filter, String nameFilter) {
-			super();
-			this.res = repos;
-			this.zoom = zoom;
-			this.filter = filter;
-			this.filterByName = nameFilter;
-			if(this.filterByName != null) {
-				this.filterByName = this.filterByName.toLowerCase().trim();
-			}
-		}
-		
-		@Override
-		public boolean publish(Amenity object) {
-			if(filterByName == null || filterByName.length() == 0) {
-				return true;
-			} else {
-				String lower = OsmAndFormatter.getPoiStringWithoutType(object, resourceManger.getContext().getSettings().usingEnglishNames()).toLowerCase();
-				return lower.indexOf(filterByName) != -1;
-			}
-		}
-
-		public Runnable prepareToRun() {
-			final double ntopLatitude = topLatitude + (topLatitude - bottomLatitude) / 2;
-			final double nbottomLatitude = bottomLatitude - (topLatitude - bottomLatitude) / 2;
-			final double nleftLongitude = leftLongitude - (rightLongitude - leftLongitude) / 2;
-			final double nrightLongitude = rightLongitude + (rightLongitude - leftLongitude) / 2;
-			setBoundaries(ntopLatitude, nleftLongitude, nbottomLatitude, nrightLongitude);
-			return new Runnable() {
-				@Override
-				public void run() {
-					start();
-					try {
-						for (AmenityIndexRepository repository : res) {
-							repository.evaluateCachedAmenities(ntopLatitude, nleftLongitude, nbottomLatitude, nrightLongitude, zoom,
-									filter, AmenityLoadRequest.this);
-						}
-					} finally {
-						finish();
-					}
-				}
-			};
-		}
-
-		private boolean repoHasChange() {
-			for (AmenityIndexRepository r : res) {
-				if (r.hasChange()) {
-					r.clearChange();
-					return true;
-				}
-			}
-			return false;
-		}
-		public boolean recalculateRequest(AmenityLoadRequest req) {
-			if (this.zoom != req.zoom || !Algorithms.objectEquals(this.filter, req.filter) || req.repoHasChange()) {
-				return true;
-			}
-			return !isContains(req.topLatitude, req.leftLongitude, req.bottomLatitude, req.rightLongitude);
-		}
-
-	}
+	
 
 	protected class TransportLoadRequest extends MapObjectLoadRequest<TransportStop> {
 		private final List<TransportIndexRepository> repos;

@@ -239,8 +239,127 @@ public class GeoIntentActivity extends OsmandListActivity {
 	 */
     private MyService extract(final String scheme, final Uri data)
     {
-        if ("http".equals(scheme))
-        {
+    	if ("http".equals(scheme) || "https".equals(scheme)) {
+
+    		final String schemeSpecific = data.getSchemeSpecificPart();
+
+    		if (schemeSpecific == null) {
+    			return null;
+    		}
+
+    		final String[] osmandNetSite = {
+    				"//download.osmand.net/go?"
+    		};
+
+    		final String[] osmandNetPattern = {
+    				"lat=(-?\\d{1,3}.\\d+)&lon=(-?\\d{1,3}.\\d+)&z=(\\d{1,2})"
+    		};
+
+    		final String[] openstreetmapOrgSite = {
+    				"//openstreetmap.org/",
+    				"//www.openstreetmap.org/"
+    		};
+
+    		final String[] openstreetmapOrgPattern = {
+    				"(?:.*)(?:map=)(\\d{1,2})/(-?\\d{1,3}.\\d+)/(-?\\d{1,3}.\\d+)(?:.*)"
+    		};
+
+    		final String[] openstreetmapDeSite = {
+    				"//openstreetmap.de/",
+    				"//www.openstreetmap.de/"
+    		};
+
+    		final String[] openstreetmapDePattern = {
+    				"(?:.*)zoom=(\\d{1,2})&lat=(-?\\d{1,3}.\\d+)&lon=(-?\\d{1,3}.\\d+)(?:.*)",
+    				"(?:.*)lat=(-?\\d{1,3}.\\d+)&lon=(-?\\d{1,3}.\\d+)&z(?:oom)?=(\\d{1,2})(?:.*)"
+    		};
+
+    		final String[] googleComSite = {
+    				"//www.google.com/maps/",
+    				"//maps.google.com/maps"
+    		};
+
+    		final String[] googleComPattern = {
+    				"(?:.*)@(-?\\d{1,3}.\\d+),(-?\\d{1,3}.\\d+),(\\d{1,2})z(?:.*)",
+    				"(?:.*)ll=(-?\\d{1,3}.\\d+),(-?\\d{1,3}.\\d+)(?:.+)z=(\\d{1,2})(?:.*)",
+    				"(?:.*)q=([\\-+]?\\d{1,3}.\\d+),([\\-+]?\\d{1,3}.\\d+)(?:.*)&z=(\\d{1,2})",
+    				"(?:.*)q=loc:(-?\\d{1,3}.\\d+),(-?\\d{1,3}.\\d+)&z=(\\d{1,2})(?:.*)"
+    		};
+
+    		final String[] yandexRuSite = {
+    				"//maps.yandex.ru/"
+    		};
+
+    		final String[] yandexRuPattern = {
+    				"(?:.*)ll=(-?\\d{1,3}.\\d+),(-?\\d{1,3}.\\d+)(?:.+)z=(\\d{1,2})(?:.*)"
+    		};
+
+    		final String sites[][] = {
+    				osmandNetSite,
+    				openstreetmapOrgSite,
+    				openstreetmapDeSite,
+    				googleComSite,
+    				yandexRuSite
+    		};
+
+    		final String patterns[][] = {
+    				osmandNetPattern,
+    				openstreetmapOrgPattern,
+    				openstreetmapDePattern,
+    				googleComPattern,
+    				yandexRuPattern
+    		};
+
+    		for (int s = 0; s < sites.length; s++)
+    		{
+    			for (int si = 0; si < sites[s].length; si++)
+    			{
+    				if (schemeSpecific.startsWith(sites[s][si])) {
+    					for (int p = 0; p < patterns[s].length; p++)
+    					{
+    						String subString = schemeSpecific.substring(sites[s][si].length());
+    						
+    						if (subString.equals(""))
+    						{
+    							subString = data.getFragment();
+    						}
+    						
+    						final Matcher matcher = Pattern.compile(patterns[s][p]).matcher(subString);
+
+    						if (matcher.matches()) {
+    							try {
+
+    								final double lat;
+    								final double lon;
+    								final int zoom;
+
+    								//check sequence of values
+    								if (!matcher.group(3).contains("."))
+    								{
+    									lat = Double.valueOf(matcher.group(1));
+    									lon = Double.valueOf(matcher.group(2));
+    									zoom = Integer.valueOf(matcher.group(3));
+    								}
+    								else
+    								{
+    									zoom = Integer.valueOf(matcher.group(1));
+    									lat = Double.valueOf(matcher.group(2));
+    									lon = Double.valueOf(matcher.group(3));
+    								}
+
+    								return new GeoPointSearch(lat, lon, zoom);
+    							}
+    							catch (NumberFormatException e)
+    							{
+    								return null;
+    							}
+    						}
+    					}
+    					break;
+    				}
+    			}
+    		}
+    		
             String q = null;
             String parameter = data.getQueryParameter("q");
             if (parameter == null)

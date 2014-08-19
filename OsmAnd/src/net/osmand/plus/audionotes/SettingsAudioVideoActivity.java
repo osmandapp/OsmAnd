@@ -6,6 +6,9 @@ import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.VIDEO_OUTPUT_3GP;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.VIDEO_OUTPUT_MP4;
+// camera picture size:
+import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
+import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_PHOTO_SIZE_DEFAULT;
 // support camera focus select:
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_AUTO;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_HIPERFOCAL;
@@ -52,10 +55,80 @@ public class SettingsAudioVideoActivity extends SettingsBaseActivity {
 				// camera type settings:
 				grp.addPreference(createCheckBoxPreference(p.AV_EXTERNAL_PHOTO_CAM, R.string.av_use_external_camera,
 						R.string.av_use_external_camera_descr));
-				// focus mode settings:
-				// show in menu only suppoted modes:
 
 				Parameters parameters = cam.getParameters();
+
+				// Photo picture size
+				// get supported sizes:
+				List<Camera.Size> psps = parameters.getSupportedPictureSizes();
+				// list of megapixels of each resolution:
+				List<Integer> mpix = new ArrayList<Integer>();
+				// list of index each resolution in list, returned by getSupportedPictureSizes():
+				List<Integer> picSizesValues = new ArrayList<Integer>();
+				// fill lists for sort:
+				for (int index = 0; index < psps.size(); index++) {
+					mpix.add( (psps.get(index)).width*(psps.get(index)).height );
+					picSizesValues.add(index);
+				}
+				// sort list for max resolution in begining of list:
+				for (int i=0; i < mpix.size(); i++ )
+				{
+					for (int j=0; j < mpix.size() - i - 1; j++ )
+					{
+						if ( mpix.get(j) < mpix.get( j + 1 ) )
+						{
+							// change elements:
+							int tmp=mpix.get( j + 1 );
+							mpix.set( j + 1, mpix.get( j ) );
+							mpix.set( j, tmp );
+
+							tmp=picSizesValues.get( j + 1 );
+							picSizesValues.set( j + 1, picSizesValues.get( j ) );
+							picSizesValues.set( j, tmp );
+						}
+					}
+				}
+				// set default photo size to max resolution (set index of element with max resolution in List, returned by getSupportedPictureSizes() ):
+				cameraPictureSizeDefault = picSizesValues.get(0);
+				log.debug("onCreate() set cameraPictureSizeDefault=" + cameraPictureSizeDefault);
+
+				List<String> itemsPicSizes = new ArrayList<String>();
+				String prefix;
+				for (int index = 0; index < psps.size(); index++) {
+					float px=(float)((psps.get( picSizesValues.get(index) )).width*(psps.get( picSizesValues.get(index) )).height);
+					if(px>102400) // 100 K
+					{
+						px=px/1048576;
+						prefix="Mpx";
+					}
+					else
+						{
+							px=px/1024;
+							prefix="Kpx";
+						}
+
+					itemsPicSizes.add( (psps.get( picSizesValues.get(index) )).width + 
+						"x" + 
+						(psps.get( picSizesValues.get(index) )).height + 
+						" ( " +
+						String.format("%.2f", px ) +
+						" " +
+						prefix +
+						" )");
+				}
+				log.debug("onCreate() set default size: width=" + psps.get( cameraPictureSizeDefault ).width + " height=" 
+					+ psps.get( cameraPictureSizeDefault ).height + " index in ps=" + cameraPictureSizeDefault );
+
+				entries = itemsPicSizes.toArray(new String[itemsPicSizes.size()]);
+				intValues = picSizesValues.toArray(new Integer[picSizesValues.size()]);
+				if (entries.length > 0) {
+					ListPreference camSizes = createListPreference(p.AV_CAMERA_PICTURE_SIZE, entries, intValues, R.string.av_camera_pic_size,
+							R.string.av_camera_pic_size_descr);
+					grp.addPreference(camSizes);
+				}
+
+				// focus mode settings:
+				// show in menu only suppoted modes:
 				List<String> sfm = parameters.getSupportedFocusModes();
 				List<String> items = new ArrayList<String>();
 				List<Integer> itemsValues = new ArrayList<Integer>();
@@ -88,9 +161,11 @@ public class SettingsAudioVideoActivity extends SettingsBaseActivity {
 							R.string.av_camera_focus_descr);
 					grp.addPreference(camFocus);
 				}
+
 				// play sound on success photo:
 				grp.addPreference(createCheckBoxPreference(p.AV_PHOTO_PLAY_SOUND, R.string.av_photo_play_sound,
 						R.string.av_photo_play_sound_descr));
+
 				cam.release();
 			}
 			// video settings:

@@ -1204,14 +1204,14 @@
         \n\t* Další nastavení pro stabilizaci kompasu
         \n\t* Tlačítko vlevo nahoře na mapové obrazovce nahrazuje tlačítko Menu
     </string>
-    <string name="monitoring_settings">Záznamy tras a služby na pozadí</string>
-    <string name="osmand_monitoring_plugin_name">Záznamy tras a služby na pozadí</string>
+    <string name="monitoring_settings">Záznamové služby</string>
+    <string name="osmand_monitoring_plugin_name">Záznamové služby</string>
     <string name="accessibility_options">Volby usnadnění</string>
     <string name="select_address_activity">Vybrat adresu</string>
     <string name="favourites_list_activity">Vybrat oblíbené</string>
     <string name="local_openstreetmap_act_title">Editace OSM</string>
     <string name="default_buttons_other_actions">Další akce</string>
-    <string name="monitoring_settings_descr">Konfigurace záznamů cest a spouštění služeb na pozadí</string>
+    <string name="monitoring_settings_descr">Konfigurace záznamů cest</string>
     <string name="install_paid">Instalovat plnou verzi</string>
     <string name="cancel_navigation">Zastavit navigaci</string>
     <string name="use_kalman_filter_compass_descr">Použít Kalmanův filtr k zabránění odchylek kompasu</string>
@@ -1480,8 +1480,8 @@ s často kladenými otázkami.</string>
     <string name="misc_pref_title">Různé</string>
     <string name="voice_pref_title">Hlas</string>
     <string name="always_center_position_on_map">Zobrazit pozici vždy uprostřed</string>
-    <string name="osmo_plugin_name">OsMo (Pokročilé monitorování)</string>
-   	<string name="osmo_settings">OsMo OpenStreetMap monitorování (beta)</string>
+    <string name="osmo_plugin_name">OsMo</string>
+   	<string name="osmo_settings">OpenStreetMap sledování</string>
     <string name="osmo_settings_descr">Konfigurovat sledování a nastavit osobní monitorovací kanál</string>
     <string name="osmo_settings_debug">Informace ladění</string>
     <string name="osmo_mode_restart">Restartovat OsMo relaci</string>
@@ -1496,11 +1496,7 @@ s často kladenými otázkami.</string>
 	* Můžete rozdělit GPX trasu podle vzdálenosti a kontrolovat výškový rozdíl/rychlost
 	* Automatický start navigace po uplynutí času
     </string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitorování - Pokročilé monitorování. Poskytuje možnost sledování jiných zařízení nebo být sledován. 
-        Vytvořte anonymní skupiny, sdílejte vzájemně polohu a komunikujte. Různé možnosti nastavení krátkodobého nebo trvalého sledování.
-        Anonymní skupiny jsou omezeny na počet dní a některými vlastnostmi, například nemají dálkové ovládání a skupinového správce. 
-        Plně funkční skupiny se vytvářejí na webstránce a jsou přístupné pouze pro registrované uživatele.
-        Prosím čtěte více na http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">"OpenStreetMap pokročilé online monitorování, podívejte se na http://osmo.mobi. Poskytuje možnost sledování jiných zařízení nebo být sledován. Vytvořte anonymní skupiny, sdílejte vzájemně polohu a komunikujte. Různé možnosti nastavení krátkodobého nebo trvalého sledování. Anonymní skupiny jsou omezeny na počet dní a některými vlastnostmi, například nemají dálkové ovládání a skupinového správce. Plně funkční skupiny se vytvářejí na webstránce a jsou přístupné pouze pro registrované uživatele. "</string>
     <string name="color_red">červená</string>
 	<string name="color_pink">růžová</string>
 	<string name="color_orange">oranžová</string>
@@ -1537,7 +1533,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_connect">Připojit k</string>
     <string name="osmo_create_group">Vytvořit skupinu</string>
     <string name="osmo_server_operation_failed">Chyba operace na serveru OsMo</string>
-    <string name="osmo_activity">OpenStreetMap-Monitorování</string>
+    <string name="osmo_activity">OpenStreetMap sledování</string>
     <string name="osmo_enable_tracker">Odesílat mé pozice</string>
     <string name="osmo_control">OsMo rychlý přístup</string>
     <string name="hours_ago">hodin dozadu</string>
@@ -1649,7 +1645,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_group_information_desc">" - Všechny vytvořené skupiny jsou veřejné! Pokud chcete být anonymní, připojte zařízení přímo přes ID.\n - Do skupiny se může registrovat až 16 lidí.
 \n - V případě neaktivity nebo aktivity pouze jedné osoby v průběhu dvou týdnů, bude skupina zrušena.\n - Můžete omezit vstup do skupiny pozvánkami, ale pro ovládání skupiny musíte použít administrátorskou konzoli.\n - Pokud potřebujete vytvořit skupinu s jinými podmínkami prosím kontaktujte http://osmo.mobi"</string>
     <string name="osmo_auth_error">Chyba při autorizaci OsMo: %1$s.\n Služba může být dočasně nedostupná nebo vám vypršela registrace.
-\n Chcete pokračovat v nové registraci.</string>
+\n Chcete pokračovat v nové registraci?</string>
     <string name="osmo_auth_error_short">Autorizace selhala</string>
     <string name="rendering_attr_showCycleRoutes_name">Zobrazit cyklostezky</string>
     <string name="forward">Vpřed</string>
@@ -1677,4 +1673,39 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_showAccess_name">Zobrazit typ přístupu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cest</string>
     <string name="osmo_group_by_invite">Vstoupit na pozvánku</string>
+    <string name="rendering_attr_subwayMode_name">Metro režim</string>
+ 	<string name="pause_navigation">Pozastavit navigaci</string>
+	<string name="continue_navigation">Pokračování v navigaci</string>
+    <string name="osmo_invite">Pozvat...</string>
+    <string name="osmo_leave_confirmation_msg">Chcete opustit skupinu %1$s?</string>
+    <string name="osmo_specify_tracker_id">Prosím určete id</string>
+    <string name="rendering_attr_coloredBuildings_name">Barevné budovy</string>
+    <string name="lang_sw">Svahilština (Kiswahili)</string>
+    <string name="lang_he">Hebrejština</string>
+    <string name="lang_al">Albánština</string>
+	<string name="lang_ar">Arabština</string>
+	<string name="lang_fa">Perština</string>
+	<string name="lang_sc">Sardština</string>
+	<string name="lang_sr">Srbština</string>
+	<string name="lang_zh_CN">Zjednodušená čínština</string>
+	<string name="lang_zh_TW">Tradiční čínština</string>
+	<string name="rendering_attr_alpineHiking_name">Vysokohorská turistika</string>
+    <string name="rendering_attr_alpineHiking_description">Vykreslovat cesty podle stupnice SAC</string>
+    <string name="rendering_attr_osmcTraces_name">Zobrazovat turistické značky</string>
+    <string name="rendering_attr_osmcTraces_description">Vykreslovat cesty podle OSMC značení</string>
+    
+	<string name="arrival_distance_factor_early">Brzy</string>
+    <string name="arrival_distance_factor_normally">Normální</string>
+    <string name="arrival_distance_factor_late">Později</string>
+    <string name="arrival_distance_factor_at_last">V posledních metrech</string>
+    <string name="av_camera_pic_size">Velikost fotografie</string>
+	<string name="av_camera_pic_size_descr">Vyberte velikost obrázku interního fotoaparátu</string>
+    <string name="hide_all_waypoints">Odstranit všechny</string>
+    <string name="announce_nearby_favorites">Oznamovat oblíbená místa v blízkosti</string>
+<string name="more">Více...</string>
+    <string name="rendering_value_browse_map_name">Standardní</string>  
+    <string name="rendering_value_car_name">Automobil</string>
+    <string name="rendering_value_bicycle_name">Jízdní kolo</string>
+    <string name="rendering_value_pedestrian_name">Chodec</string>
+    <string name="download_additional_maps">Stáhnout chybějící mapy %1$s (%2$d MB)?</string>
     </resources>

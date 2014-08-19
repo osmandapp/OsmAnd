@@ -2,18 +2,14 @@ package net.osmand.plus.sherpafy;
 
 import java.util.List;
 
-import net.osmand.IProgress;
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.DownloadIndexActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
@@ -22,8 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -52,9 +46,12 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 		super.onAttach(activity);
 		app = (OsmandApplication) getSherlockActivity().getApplication();
 		custom = (SherpafyCustomization) app.getAppCustomization();
-		TourAdapter tourAdapter = new TourAdapter(custom.getTourInformations());
-		setListAdapter(tourAdapter);
 		setHasOptionsMenu(true);
+		refreshAdapter();
+	}
+	
+	public void refreshAdapter() {
+		setListAdapter(new TourAdapter(custom.getTourInformations()));
 	}
 	
 
@@ -65,20 +62,14 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		
 		com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, ACTION_DOWNLOAD, 0, R.string.sherpafy_download_tours).setShowAsActionFlags(
 				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-//		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 //		boolean light = true; //app.getSettings().isLightActionBar();
 		//menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-				if (custom.getAccessCode().length() == 0) {
-					openAccessCode(true);
-				} else {
-					startDownloadActivity();
-				}
+				openAccessCode();
 				return true;
 			}
 		});
@@ -95,7 +86,7 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 //		});
 	}
 	
-	protected void openAccessCode(final boolean startDownload) {
+	protected void openAccessCode() {
 		Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.enter_access_code);
 		final EditText editText = new EditText(getActivity());
@@ -103,9 +94,17 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 		LinearLayout ll = new LinearLayout(getActivity());
 		ll.setPadding(5, 3, 5, 0);
 		ll.addView(editText, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		AndroidUtils.softKeyboardDelayed(editText);
 		builder.setView(ll);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.sherpafy_public_access, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				custom.setAccessCode("");
+				((TourViewActivity) getActivity()).startDownloadActivity();
+			}
+		});
+		
+		builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String acCode = editText.getText().toString();
@@ -113,53 +112,10 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 					Toast.makeText(getActivity(), R.string.access_code_is_not_valid, Toast.LENGTH_LONG).show();
 					return;
 				}
-				if (startDownload) {
-					startDownloadActivity();
-				}
+				((TourViewActivity) getActivity()).startDownloadActivity();
 			}
 		});
 		builder.create().show();
-	}
-	
-	private void startDownloadActivity() {
-		final Intent download = new Intent(getActivity(), DownloadIndexActivity.class);
-		download.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		startActivity(download);
-	}
-	
-	private void selectTourAsync(final TourInformation tour) {
-		new AsyncTask<TourInformation, Void, Void>() {
-			private ProgressDialog dlg;
-
-			protected void onPreExecute() {
-				dlg = new ProgressDialog(getActivity());
-				dlg.setTitle(R.string.selecting_tour_progress);
-				dlg.setMessage(getString(R.string.indexing_tour, tour == null ? "" : tour.getName()));
-				dlg.show();
-			};
-
-			@Override
-			protected Void doInBackground(TourInformation... params) {
-				// if tour is already selected - do nothing
-				if (custom.getSelectedTour() != null) {
-					if (custom.getSelectedTour().equals(params[0])) {
-						return null;
-					}
-				}
-				custom.selectTour(params[0], IProgress.EMPTY_PROGRESS);
-				return null;
-			}
-
-			protected void onPostExecute(Void result) {
-				// to avoid illegal argument exception when rotating phone during loading
-				try {
-					dlg.dismiss();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-				//startTourView();
-			};
-		}.execute(tour);
 	}
 	
 	class TourAdapter extends ArrayAdapter<TourInformation> {
@@ -175,11 +131,18 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.sherpafy_list_tour_item, parent, false);
 			}
+
 			final TourInformation ti = getItem(position);
 			TextView description = (TextView) row.findViewById(R.id.TourDescription);
 			TextView name = (TextView) row.findViewById(R.id.TourName);
 			TextView moreInformation = (TextView) row.findViewById(R.id.MoreInformation);
 			SpannableString content = new SpannableString(getString(R.string.sherpafy_more_information));
+			row.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					((TourViewActivity) getActivity()).selectMenu( ti);
+				}
+			});
 			content.setSpan(new ClickableSpan() {
 				@Override
 				public void onClick(View widget) {

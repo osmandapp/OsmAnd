@@ -112,7 +112,7 @@
 <string name="select_animate_speedup">Välj animerad ruttacceleration</string>
 <string name="global_app_allocated_memory_descr">Allokerat minne %1$s MB (Android-gräns %2$s MB, Dalvik %3$s MB).</string>
 <string name="global_app_allocated_memory">Allokerat minne</string>
-<string name="native_app_allocated_memory_descr">Totalt inbyggt minne tilldelas av app %1$s MB (Dalvik %2$s MB, annat %3$s MB).↵ Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
+<string name="native_app_allocated_memory_descr">Totalt inbyggt minne tilldelat av appen %1$s MB (Dalvik %2$s MB, annat %3$s MB). Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="native_app_allocated_memory">Totalt inbyggt minne</string>
 <string name="update_downlod_list">Ladda om listan</string>
 <string name="starting_point_too_far">Startpunkten ligger för långt från närmaste väg.</string>
@@ -302,16 +302,15 @@
 <string name="use_fluorescent_overlays_descr">Använd fluorescerande färger för att visa spår och rutter</string>
 <string name="offline_edition">Offline-redigering</string>
 <string name="offline_edition_descr">Använd alltid offline-redigering</string>
-<string name="tip_recent_changes_0_7_1_t">Förändringar i 0.7.1:
+<string name="tip_recent_changes_0_7_1_t">"Förändringar i 0.7.1:
 \n\t- Offline POI-redigering
-\n\t- Live Tracking alternativ - skicka koordinater till webbtjänst regelbundet (läs om hur du konfigurerar din egen webbtjänst HowTo-artiklar)
-\n\t- Visa för närvarande in spår på kartan
-\n\t- Riktning upptäckt: \'Gör U-sväng\' anges och meddelas när rubrik i motsatt riktning eller efter saknade en sväng
-\n\t- New röstmeddelande \'Route räknas\'
-\n\t- Optisk indikering av en förestående sväng inom 100m från diretion pil ändrar färg
-\n\t- Aktualitet även om deaktiverade indexfiler nu visas på Download skärm i mörkgrönt och mörkblått
-\n\t- Övriga förändringar
-	</string>
+\n\t- Alternativ för direktspårning - skicka regelbundet koordinater till en webbtjänst (läs om hur du konfigurerar din egen webbtjänst i HowTo-artiklar)
+\n\t- Visa aktuellt inspelat spår på kartan
+\n\t- Riktningsdetektering: \'Gör en U-sväng\' anges och meddelas vid färd i motsatt riktning eller efter att ha missat en sväng
+\n\t- Nytt röstmeddelande \'Rutten räknas om\'
+\n\t- Optisk indikering av en förestående sväng inom 100 m; riktningspilen ändrar färg
+\n\t- Aktualitet även om inaktiverade indexfiler visas nu på hämtningsskärmen i mörkgrönt och mörkblått
+\n\t- Andra ändringar "</string>
 <string name="update_poi_does_not_change_indexes">POI-förändringar inom programmet påverkar inte nedladdade kartfiler; förändringar sparas till en lokal fil istället.</string>
 <string name="local_openstreetmap_uploading">Laddar upp …</string>
 <string name="local_openstreetmap_were_uploaded">{0} POI/buggar laddades upp</string>
@@ -324,10 +323,10 @@
 <string name="local_openstreetmap_settings_descr">Visa och hantera OSM-POIs/-buggar noterade i lokal databas</string>
 
 
-<string name="live_monitoring_interval_descr">Ange intervall för Live tracking</string>
-<string name="live_monitoring_interval">Intervall för Live tracking</string>
+<string name="live_monitoring_interval_descr">Ange intervall för direktspårning</string>
+<string name="live_monitoring_interval">Intervall för direktspårning</string>
 <string name="live_monitoring_url_descr">Ange webbadressen med parametersyntax: lat={0}, lon={1}, tidsstämpel={2}, hdop={3}, höjd={4}, hastighet={5}, bearing={6}</string>
-<string name="live_monitoring_url">Webbadress för Live tracking</string>
+<string name="live_monitoring_url">Webbadress för direktspårning</string>
 <string name="gpx_monitoring_disabled_warn">Aktivera \'Logga spår till GPX-fil\'-inställningar.</string>
 <string name="show_current_gpx_title">Visa aktuellt spår</string>
 <string name="tip_recent_changes_0_7_0_t">"Förändringar i 0.7.0:
@@ -1164,7 +1163,7 @@
     <string name="street_name">Gata</string>
 	<string name="hno">Husnummer</string>
     <string name="osmand_monitoring_plugin_name">Loggningstjänster</string>
-    <string name="monitoring_settings_descr">Konfigurera inspelning av resa och aktivera viloläge</string>
+    <string name="monitoring_settings_descr">Konfigurera inspelning av resa</string>
     <string name="monitoring_settings">Loggningstjänster</string>
     <string name="tip_recent_changes_1_3_t">Ändringar i 1.3:
      \n\t* Implementera stöd för plattor och stora skärmar
@@ -1202,7 +1201,7 @@
 \n\t* Stöd för OSM-anteckningar 
     </string>
     <string name="search_street_in_neighborhood_cities">Sök gator i grannstäder</string>
-    <string name="intermediate_items_sort_return">Platser ordnade för att bilda en optimal rutt från positionen på kartan till destinationen.</string>
+    <string name="intermediate_items_sort_return">Mellanliggande waypoints ordnade för att bilda en optimal rutt från positionen på kartan till destinationen.</string>
     <string name="intermediate_items_sort_by_distance">Sortera (dörr-till-dörr)</string>
     <string name="local_osm_changes_backup_failed">Säkerhetskopieringen av OSM-ändringar misslyckades</string>
     <string name="local_osm_changes_backup">Säkerhetskopiera som OSM-förändring</string>
@@ -1434,7 +1433,7 @@
     <string name="lang_zh">Kinesiska</string>
     <string name="lang_pt_br">Portugisiska (Brasilien)</string>
     <string name="index_name_canada">Nordamerika - Kanada</string>
-    <string name="app_modes_choose_descr">Välj tillgängliga användarprofilerna</string>
+    <string name="app_modes_choose_descr">Välj vilka användarprofiler som ska visas i appen</string>
     <string name="index_item_nation_addresses">adresser (hela landet)</string>
 	<string name="index_item_world_altitude_correction">Rättning av höjd (världen)</string>
 	<string name="index_item_world_seamarks">Sjömärken (världen)</string>
@@ -1450,8 +1449,8 @@
 <string name="osmo_settings_uuid">Unikt enhets-id</string>
     <string name="osmo_settings_descr">Konfigurera inställningar för övervakning och ställ in personlig övervakningskanal</string>
     <string name="osmo_plugin_name">OSMo (Avancerad live-spårning)</string>
-    <string name="osmo_settings">OSMo OpenStreetMap-övervakning (beta)</string>
-   	<string name="osmo_plugin_description">"OpenStreetMap- avancerad live-spårning, se http://osmo.mobi. Spåra andra enheter och bli spårad själv. Skapa anonyma grupper, dela ut varandras platser och kommunicera. Det finns olika inställningar för sessionsspårning eller permanent spårning. Anonyma grupper är begränsade till ett antal dagar och för vissa funktioner finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
+    <string name="osmo_settings">OpenStreetMap-övervakning</string>
+   	<string name="osmo_plugin_description">"OpenStreetMap- avancerad direktspårning, se http://osmo.mobi. Spåra andra enheter och bli spårad själv. Skapa anonyma grupper, dela ut varandras platser och kommunicera. Det finns olika inställningar för sessionsspårning eller permanent spårning. Anonyma grupper är begränsade till ett antal dagar och för vissa funktioner finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
     <string name="interrupt_music_descr">Avbryt musik vid meddelanden</string>
 	<string name="interrupt_music">Avbryt musik</string>
 	<string name="share_route_as_gpx">Dela rutt som GPX-fil</string>
@@ -1465,14 +1464,13 @@
     <string name="osmo_mode_off">Starta OsMo-session</string>
     <string name="use_points_as_intermediates">Beräkna rutt mellan punkter</string>
     <string name="tip_recent_changes_1_8_alpha">"Förändringar i 1.8: * Beräkna rutt mellan ruttpunkter i GPX-spår * Ändrat utseende vid nedladdning av länder (stöd för sökning med lokala namn) * Stöder GPX-/KML-import (konvertera fråm KML till GPX) * GPX-spår har flyttat till \'Mina data\' * Du kan dela upp GPX-spår efter sträcka och kolla höjdskillnad/hastighet * Autostarta navigering efter fördröjning "</string>
-    <string name="osmo_auto_send_locations_descr">Starta trackersessionen automatiskt och sänd platser sedan appen startats</string>
+    <string name="osmo_auto_send_locations_descr">Starta trackersessionen automatiskt och skicka positioner när appen startats</string>
     <string name="osmo_auto_send_locations">Starta trackersessionen automatiskt</string>
     <string name="osmo_tracker_id">Personligt tracker-id</string>
-    <string name="osmo_tracker_id_descr">Klicka för att visa eller dela ut tracker-id.
-    Med tracker-id kommer anslutna enheter att kunna följa denna enhets alla rörelser! För att koppla ifrån, välj alternativet Återskapa...</string>
-    <string name="osmo_session_token">Sessionstoken: %1$s</string>
-    <string name="osmo_auth_pending">Väntar på autentisering...</string>
-    <string name="osmo_locations_sent">Platser skickade %1$d (i buffer %2$d) </string>
+    <string name="osmo_tracker_id_descr">Klicka för att visa eller dela ut tracker-id. Med tracker-id kommer anslutna enheter att kunna följa denna enhets alla rörelser! För att koppla ifrån, välj alternativet Återskapa.</string>
+    <string name="osmo_session_token">Sessionsmärke: %1$s</string>
+    <string name="osmo_auth_pending">Väntar på godkännande…</string>
+    <string name="osmo_locations_sent">"Positioner skickade %1$d (i buffert %2$d) "</string>
     <string name="osmo_conn_successfull">Anslutning upprättad: %1$s </string>
     <string name="hours_ago">timmar sedan</string>
     <string name="minutes_ago">minuter sedan</string>
@@ -1489,12 +1487,12 @@
     <string name="osmo_group_share">För att ansluta till gruppen %2$s, ange grupp-id (%1$s) eller klicka på %3$s.</string>
     <string name="osmo_share_connect_device">Följ denna enhet permanent</string>
     <string name="osmo_share_current_session">Dela aktuell session i webbläsaren</string>
-    <string name="osmo_session_not_available">Sessionen inte tillgänglig. Kolla att \'Skicka platser\' är på.</string>
+    <string name="osmo_session_not_available">Sessionen inte tillgänglig. Kolla att \'Skicka positioner\' är på.</string>
     <string name="osmo_share_session">Dela session</string>
     <string name="osmo_session_id_share">Sessions-URL för att spåra enhet (%1$s)</string>
     <string name="osmo_tracker_id_share">För att ansluta till målenheten %2$s, klicka på länken %3$s eller ange tracker-id (%1$s)</string>
     <string name="osmo_track_interval">Loggningsintervall</string>
-	<string name="osmo_track_interval_descr">Välj tidsintervall för skickande av platsen</string>
+	<string name="osmo_track_interval_descr">Välj tidsintervall för inskickande av din position</string>
     <string name="int_days">dagar</string>
     <string name="osmo_connect_menu">Anslut</string>
     <string name="osmo_expire_group">Förfaller om</string>
@@ -1505,9 +1503,9 @@
     <string name="osmo_connect_to_group">Länka med grupp</string>
     <string name="osmo_connect">Anslut till</string>
     <string name="osmo_create_group">Skapa grupp</string>
-    <string name="osmo_server_operation_failed">OsMo-server operation misslyckades</string>
+    <string name="osmo_server_operation_failed">OsMo-serveroperation misslyckades</string>
     <string name="osmo_activity">OpenStreetMap-bevakning</string>
-    <string name="osmo_enable_tracker">Skicka mina platser</string>
+    <string name="osmo_enable_tracker">Skicka mina positioner</string>
     <string name="osmo_control">OsMo snabbåtkomst</string>
     <string name="osmo_mode_restart">Starta om OsMo-session</string>
     <string name="osmo_settings_debug">Avbuggningsinformation</string>
@@ -1548,7 +1546,7 @@
     <string name="map_widget_plain_time">Aktuell tid</string>
     <string name="gpx_wpt">Waypoint</string>
     <string name="selected_gpx_info_show">\n\nTryck och håll för att se på karta</string>
-    <string name="delay_navigation_start">Starta turn-by-turn-navigering automatiskt</string>
+    <string name="delay_navigation_start">Starta steg-för-steg-navigering automatiskt</string>
     <string name="selected">valda</string>
     <string name="gpx_split_interval">Split-intervall</string>
     <string name="gpx_info_subtracks">Underspår: %1$s </string>
@@ -1573,7 +1571,7 @@
     <string name="gpx_available_current_track">Aktuellt inspelningsspår</string>
     <string name="save_as_favorites_points">Spara som grupp med favoriter</string>
     <string name="select_destination_and_intermediate_points">Välj waypoints</string>
-    <string name="layer_amenity_label">Punktetiketter</string>
+    <string name="layer_amenity_label">Namn på punkter</string>
     <string name="show_zoom_buttons_navigation_descr">Visa zoom-knappar under navigering</string>
     <string name="show_zoom_buttons_navigation">Visa zoom-knappar</string>
     <string name="color_green">grön</string>
@@ -1603,7 +1601,7 @@
     <string name="tip_map_switch_t_v2">"Kartkälla och kartlager som ska visas ändras via \'Meny\' → \'Kartlager\'.\n\nUnder \'Kartkälla...\' kan du välja mellan de förladdade offline vektorkartorna (standard, krävs också för offline-navigering), eller fördefinierade (online eller cachade offline) kartbitskällor (aktivera insticksmodulen \'Online-kartor\' under \'Inställningar\'→ \'Plugin\' för detta), eller kartor skapade manuellt med t.ex. OsmaAndMapCreator på en PC.\n\nOsmAnd stöder också egna källor. "</string>
 	<string name="osmo_not_signed_in">Inloggningen till OsMo misslyckades</string>
     <string name="osmo_group_by_invite">Anslut via inbjudan</string>
-    <string name="osmo_group_information_desc">" - Alla skapade grupper är offentliga! Om du vill vara anonym, anslut enheter direkt via Tracker-id-\n- Upp till 16 personer kan vara registrerade i gruppen.\n- Grupper tas bort i fall av inaktivitet eller aktivitet av endast 1 person på 2 veckor.\n- Du kan begränsa inträde i grupp men för att kontrollera gruppen måste du gå till adminkonsollen.\n- Om du behöver skapa en grupp, men i övrigt kontakta http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Alla skapade grupper är offentliga! Om du vill vara anonym, anslut enheter direkt via Tracker-id-\n- Upp till 16 personer kan vara registrerade i gruppen.\n- Grupper tas bort i fall av inaktivitet eller aktivitet av endast 1 person under två veckor.\n- Du kan begränsa inträde i grupp (som t.ex. endast via inbjudan) men för att kontrollera gruppen måste du gå till adminkonsollen.\n- Om du behöver skapa en grupp med andra villkor kontakta http://osmo.mobi"</string>
     <string name="osmo_group_information">Läs detta innan du skapar en grupp!</string>
     <string name="keep_navigation_service">Behåll</string>
 	<string name="stop_navigation_service">Stoppa</string>
@@ -1645,4 +1643,30 @@
 	<string name="lang_sr">Serbiska</string>
 	<string name="lang_zh_CN">Förenklad kinesiska</string>
 	<string name="lang_zh_TW">Traditionell kinesiska</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Tunnelbaneläge</string>
+ 	<string name="continue_navigation">Fortsätt navigera</string>
+    <string name="pause_navigation">Pausa navigeringen</string>
+	<string name="rendering_attr_alpineHiking_name">Alpvandringsvy</string>
+    <string name="rendering_attr_alpineHiking_description">Återge stigar enligt SAC-skala</string>
+    <string name="rendering_attr_osmcTraces_name">Vandringssymbolöverlägg</string>
+    <string name="rendering_attr_osmcTraces_description">Återge stigar enligt OSMC-spår</string>
+    
+	<string name="osmo_invite">Bjud in…</string>
+    <string name="osmo_leave_confirmation_msg">Vill du lämna gruppen %1$s?</string>
+    <string name="osmo_specify_tracker_id">Ange id</string>
+    <string name="rendering_attr_coloredBuildings_name">Färgade byggnader</string>
+    <string name="arrival_distance_factor_early">Tidigt</string>
+    <string name="arrival_distance_factor_normally">Normal</string>
+    <string name="arrival_distance_factor_late">Sent</string>
+    <string name="arrival_distance_factor_at_last">De sista metrarna</string>
+    <string name="hide_all_waypoints">Ta bort alla</string>
+<string name="av_camera_pic_size">Fotostorlek</string>
+	<string name="av_camera_pic_size_descr">Välj fotostorlek för intern kamera</string>
+    <string name="announce_nearby_favorites">Meddela om favoriter i närheten</string>
+<string name="rendering_value_car_name">Bil</string>
+    <string name="rendering_value_bicycle_name">Cykel</string>
+    <string name="rendering_value_pedestrian_name">Fotgängare</string>
+    <string name="rendering_value_browse_map_name">Titta på karta</string>  
+    <string name="more">Mer …</string>
+    <string name="download_additional_maps">Ladda ner kartor som saknas %1$s (%2$d MB)?</string>
+    </resources>

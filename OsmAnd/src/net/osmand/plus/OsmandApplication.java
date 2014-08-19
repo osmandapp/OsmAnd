@@ -19,15 +19,19 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
+import net.osmand.plus.activities.DownloadIndexActivity;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.sherpafy.SherpafyCustomization;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;
@@ -77,7 +81,7 @@ public class OsmandApplication extends Application {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
-	
+
 	ResourceManager resourceManager = null;
 	PoiFiltersHelper poiFilters = null;
 	RoutingHelper routingHelper = null;
@@ -101,13 +105,17 @@ public class OsmandApplication extends Application {
 	private LiveMonitoringHelper liveMonitoringHelper;
 	private TargetPointsHelper targetPointsHelper;
 	private RoutingConfiguration.Builder defaultRoutingConfig;
+	private WaypointHelper waypointHelper;
 
 	private boolean applicationInitializing = false;
-	private Locale prefferedLocale = null;
-	
+	private Locale preferredLocale = null;
+
 	SQLiteAPI sqliteAPI;
 	BRouterServiceConnection bRouterServiceConnection;
 
+	MapActivity mapActivity;
+	DownloadIndexActivity downloadActivity;
+	
 	@Override
 	public void onCreate() {
 		long timeToStart = System.currentTimeMillis();
@@ -122,9 +130,6 @@ public class OsmandApplication extends Application {
 		}
 		super.onCreate();
 		new Toast(this); // activate in UI thread to avoid further exceptions
-		appCustomization = new OsmAndAppCustomization();
-		appCustomization.setup(this);
-		 
 		sqliteAPI = new SQLiteAPIImpl(this);
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
@@ -132,13 +137,21 @@ public class OsmandApplication extends Application {
 			e.printStackTrace();
 		}
 
-		// settings used everywhere so they need to be created first
-		osmandSettings = appCustomization.createSettings(new net.osmand.plus.api.SettingsAPIImpl(this));
+		if(Version.isSherpafy(this)) {
+			appCustomization = new SherpafyCustomization();
+		} else {
+			appCustomization = new OsmAndAppCustomization();
+		}
+
+		appCustomization.setup(this);
+
+		osmandSettings = appCustomization.getOsmandSettings();
 		// always update application mode to default
 		if(!osmandSettings.FOLLOW_THE_ROUTE.get()){
 			osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
 		}
-		
+
+
 		applyTheme(this);
 		
 		routingHelper = new RoutingHelper(this, player);
@@ -150,6 +163,7 @@ public class OsmandApplication extends Application {
 		liveMonitoringHelper = new LiveMonitoringHelper(this);
 		selectedGpxHelper = new GpxSelectionHelper(this);
 		favorites = new FavouritesDbHelper(this);
+		waypointHelper = new WaypointHelper(this);
 		uiHandler = new Handler();
 		rendererRegistry = new RendererRegistry();
 		targetPointsHelper = new TargetPointsHelper(this);
@@ -157,7 +171,7 @@ public class OsmandApplication extends Application {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
 		
-		checkPrefferedLocale();
+		checkPreferredLocale();
 		startApplication();
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
@@ -168,8 +182,8 @@ public class OsmandApplication extends Application {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		}
-		
-		
+
+
 	}
 	
 	@Override
@@ -222,6 +236,10 @@ public class OsmandApplication extends Application {
 		return liveMonitoringHelper;
 	}
 
+	public WaypointHelper getWaypointHelper() {
+		return waypointHelper;
+	}
+
 	public PoiFiltersHelper getPoiFilters() {
 		if (poiFilters == null) {
 			poiFilters = new PoiFiltersHelper(this);
@@ -254,26 +272,26 @@ public class OsmandApplication extends Application {
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-		if (prefferedLocale != null && !newConfig.locale.getLanguage().equals(prefferedLocale.getLanguage())) {
+		if (preferredLocale != null && !newConfig.locale.getLanguage().equals(preferredLocale.getLanguage())) {
 			super.onConfigurationChanged(newConfig);
 			// ugly fix ! On devices after 4.0 screen is blinking when you rotate device!
 			if (Build.VERSION.SDK_INT < 14) {
-				newConfig.locale = prefferedLocale;
+				newConfig.locale = preferredLocale;
 			}
 			getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
-			Locale.setDefault(prefferedLocale);
+			Locale.setDefault(preferredLocale);
 		} else {
 			super.onConfigurationChanged(newConfig);
 		}
 	}
 
-	public void checkPrefferedLocale() {
+	public void checkPreferredLocale() {
 		Configuration config = getBaseContext().getResources().getConfiguration();
 		String lang = osmandSettings.PREFERRED_LOCALE.get();
 		if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
-			prefferedLocale = new Locale(lang);
-			Locale.setDefault(prefferedLocale);
-			config.locale = prefferedLocale;
+			preferredLocale = new Locale(lang);
+			Locale.setDefault(preferredLocale);
+			config.locale = preferredLocale;
 			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 		}
 		String clang = "".equals(lang) ? config.locale.getLanguage() : lang;
@@ -460,8 +478,7 @@ public class OsmandApplication extends Application {
 
 		if (getNavigationService() == null) {
 			fullExit();
-		}
-		else if (disableService) {
+		} else if (disableService) {
 			final Intent serviceIntent = new Intent(this, NavigationService.class);
 			stopService(serviceIntent);
 
@@ -500,6 +517,7 @@ public class OsmandApplication extends Application {
 		Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
 
 	}
+	
 
 	private void startApplicationBackground() {
 		List<String> warnings = new ArrayList<String>();
@@ -536,7 +554,7 @@ public class OsmandApplication extends Application {
 				if (System.currentTimeMillis() - timeUpdated >= 45000) {
 					startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
 					try {
-						warnings.addAll(savingTrackHelper.saveDataToGpx());
+						warnings.addAll(savingTrackHelper.saveDataToGpx(appCustomization.getTracksDir()));
 					} catch (RuntimeException e) {
 						warnings.add(e.getMessage());
 					}
@@ -763,13 +781,13 @@ public class OsmandApplication extends Application {
 	}
 	
 	public void setLanguage(Context context) {
-		if (prefferedLocale != null) {
+		if (preferredLocale != null) {
 			Configuration config = context.getResources().getConfiguration();
-			String lang = prefferedLocale.getLanguage();
+			String lang = preferredLocale.getLanguage();
 			if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
-				prefferedLocale = new Locale(lang);
-				Locale.setDefault(prefferedLocale);
-				config.locale = prefferedLocale;
+				preferredLocale = new Locale(lang);
+				Locale.setDefault(preferredLocale);
+				config.locale = preferredLocale;
 				context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
 			}
 		}
@@ -837,5 +855,21 @@ public class OsmandApplication extends Application {
 		} else {
 			getNavigationService().addUsageIntent(intent);
 		}		
+	}
+
+	public MapActivity getMapActivity() {
+		return mapActivity;
+	}
+
+	public void setMapActivity(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+	}
+	
+	public void setDownloadActivity(DownloadIndexActivity downloadActivity) {
+		this.downloadActivity = downloadActivity;
+	}
+	
+	public DownloadIndexActivity getDownloadActivity() {
+		return downloadActivity;
 	}
 }

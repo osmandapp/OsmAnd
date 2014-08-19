@@ -525,10 +525,10 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_directions_to) {
 					String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
 					targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, name);
-					enterRoutePlanningMode(null, null);
+					enterRoutePlanningMode(null, null, false);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
 					String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
-					enterRoutePlanningMode(new LatLon(latitude, longitude), name);
+					enterRoutePlanningMode(new LatLon(latitude, longitude), name, false);
 				} else if (standardId == R.string.context_menu_item_intermediate_point || 
 						standardId == R.string.context_menu_item_destination_point) {
 					boolean dest = standardId == R.string.context_menu_item_destination_point;
@@ -580,20 +580,21 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 	
-	public void enterRoutePlanningMode(final LatLon from, final String fromName) {
-		List<SelectedGpxFile> selectedGPXFiles = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
+	public void enterRoutePlanningMode(final LatLon from, final String fromName, boolean useCurrentGPX) {
+		List<SelectedGpxFile> selectedGPXFiles = mapActivity.getMyApplication().getSelectedGpxHelper()
+				.getSelectedGPXFiles();
 		GPXFile gpxFile = null;
 		for (SelectedGpxFile gs : selectedGPXFiles) {
-			if (!gs.isShowCurrentTrack() && 
-					!gs.notShowNavigationDialog) {
-				if(gs.getGpxFile().hasRtePt() || gs.getGpxFile().hasTrkpt()) {
+			if (!gs.isShowCurrentTrack() && !gs.notShowNavigationDialog) {
+				if (gs.getGpxFile().hasRtePt() || gs.getGpxFile().hasTrkpt()) {
 					gpxFile = gs.getGpxFile();
 					break;
 				}
 			}
 		}
-		if(gpxFile != null) {
-			final GPXFile f = gpxFile;
+		final GPXFile f = gpxFile;
+		if (gpxFile != null && !useCurrentGPX) {
+
 			Builder bld = new AlertDialog.Builder(mapActivity);
 			bld.setMessage(R.string.use_displayed_track_for_navigation);
 			bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
@@ -610,7 +611,7 @@ public class MapActivityActions implements DialogProvider {
 			});
 			bld.show();
 		} else {
-			enterRoutePlanningModeImpl(null, from, fromName);
+			enterRoutePlanningModeImpl(useCurrentGPX ? f : null, from, fromName);
 		}
 	}
 	
@@ -642,6 +643,7 @@ public class MapActivityActions implements DialogProvider {
 		
 		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 		mapActivity.getMapView().refreshMap(true);
+		mapActivity.getMapLayers().getMapControlsLayer().showDialog();
 		if(targets.hasTooLongDistanceToNavigate()) {
 			app.showToastMessage(R.string.route_is_too_long);
 		}
@@ -802,9 +804,29 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-							enterRoutePlanningMode(null, null);
+							enterRoutePlanningMode(null, null, false);
 						}
 				}).reg();
+		} else if(routingHelper.isRouteCalculated()) {
+			optionsMenuHelper.item(
+					routingHelper.isRoutePlanningMode() ? R.string.continue_navigation :
+					R.string.pause_navigation)
+			.icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light)
+			.listen(new OnContextMenuClick() {
+				@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						if(routingHelper.isRoutePlanningMode()) {
+							routingHelper.setRoutePlanningMode(false);
+							routingHelper.setFollowingMode(true);
+						} else {
+							routingHelper.setRoutePlanningMode(true);
+							routingHelper.setFollowingMode(false);
+							routingHelper.setPauseNaviation(true);
+						}
+						mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+						mapActivity.refreshMap();
+					}
+			}).reg();
 		}
 		if (getTargets().getPointToNavigate() != null) {
 			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_light)

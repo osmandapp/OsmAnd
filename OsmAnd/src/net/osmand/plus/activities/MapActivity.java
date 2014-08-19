@@ -235,7 +235,7 @@ public class MapActivity extends AccessibleActivity  {
 	}
 	
 	@Override
-	public Object onRetainNonConfigurationInstance() {
+	public Object onRetainCustomNonConfigurationInstance() {
 		LinkedHashMap<String, Object> l = new LinkedHashMap<String, Object>();
 		for(OsmandMapLayer ml :  mapView.getLayers() ) {
 			ml.onRetainNonConfigurationInstance(l);
@@ -301,6 +301,7 @@ public class MapActivity extends AccessibleActivity  {
 		}
 
 		settings.MAP_ACTIVITY_ENABLED.set(true);
+		app.setMapActivity(this);
 		checkExternalStorage();
 		showAndHideMapPosition();
 
@@ -308,12 +309,13 @@ public class MapActivity extends AccessibleActivity  {
 		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
 		String mapLabelToShow = settings.getAndClearMapLabelToShow();
 		Object toShow = settings.getAndClearObjectToShow();
-		if(settings.isRouteToPointNavigateAndClear()){
+		int status = settings.isRouteToPointNavigateAndClear();
+		if(status != 0){
 			// always enable and follow and let calculate it (i.e.GPS is not accessible in a garage)
 			Location loc = new Location("map");
 			loc.setLatitude(mapView.getLatitude());
 			loc.setLongitude(mapView.getLongitude());
-			getMapActions().enterRoutePlanningMode(null, null);
+			getMapActions().enterRoutePlanningMode(null, null, status == OsmandSettings.NAVIGATE_CURRENT_GPX);
 		}
 		if(mapLabelToShow != null && latLonToShow != null){
 			mapLayers.getContextMenuLayer().setSelectedObject(toShow);
@@ -350,7 +352,7 @@ public class MapActivity extends AccessibleActivity  {
 								final double lon = Double.valueOf(matcher.group(2));
 
 								getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(lat, lon), false, -1);
-								getMapActions().enterRoutePlanningMode(null, null);
+								getMapActions().enterRoutePlanningMode(null, null, false);
 							} catch (NumberFormatException e) {
 								AccessibleToast.makeText(this, getString(R.string.navigation_intent_invalid, schemeSpecificPart), Toast.LENGTH_LONG).show(); //$NON-NLS-1$
 							}
@@ -559,6 +561,7 @@ public class MapActivity extends AccessibleActivity  {
 		
 		settings.setLastKnownMapZoom(mapView.getZoom());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
+		app.setMapActivity(null);
 		app.getResourceManager().interruptRendering();
 		app.getResourceManager().setBusyIndicator(null);
 		OsmandPlugin.onMapActivityPause(this);

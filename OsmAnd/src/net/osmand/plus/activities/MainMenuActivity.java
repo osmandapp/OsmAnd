@@ -195,20 +195,18 @@ public class MainMenuActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
-		if(Version.isSherpafy(getMyApplication())) {
-			final Intent mapIntent = new Intent(this, TourViewActivity.class);
-			getMyApplication().setAppCustomization(new SherpafyCustomization());
-			startActivity(mapIntent);
-			finish();
-			return;
-		}
-		
 		if(getIntent() != null){
 			Intent intent = getIntent();
 			if(intent.getExtras() != null && intent.getExtras().containsKey(APP_EXIT_KEY)){
 				getMyApplication().closeApplication(this);
 				return;
 			}
+		}
+		if(Version.isSherpafy(getMyApplication())) {
+			final Intent mapIntent = new Intent(this, TourViewActivity.class);
+			startActivity(mapIntent);
+			finish();
+			return;
 		}
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);

@@ -78,7 +78,7 @@
   <string name="routing_settings_descr">Especifica opciones de navegación</string>
   <string name="global_settings">Opciones Globales</string>
   <string name="index_settings">Gestionar mapas</string>
-  <string name="index_settings_descr">Descargue y gestione mapas sin conexión almacenados en su dispositivo</string>
+  <string name="index_settings_descr">Descarga y gestiona mapas sin conexión almacenados en tu dispositivo</string>
   <string name="general_settings">Opciones Generales</string>
   <string name="general_settings_descr">Configura la presentación y otras opciones globales</string>
   <string name="global_app_settings">Opciones Globales de la aplicación</string>
@@ -360,7 +360,7 @@
   <string name="poi_filter_for_tourists">Para turistas</string>
   <string name="poi_filter_fuel">Gasolinera</string>
   <string name="poi_filter_namefinder">Namefinder en línea</string>
-  <string name="reading_cached_tiles">Leyendo teselas en caché…</string>
+  <string name="reading_cached_tiles">Leyendo teselas guardadas…</string>
   <string name="version_index_is_big_for_memory">La versión \'\'{0}\'\' de índices no cabe en memoria</string>
   <string name="version_index_is_not_supported">No se soporta la versión \'\'{0}\'\' de índices</string>
   <string name="use_osmand_routing_service">Navegación OsmAnd &gt;20km</string>
@@ -448,7 +448,7 @@
   <string name="export_fav">Exportar</string>
   <string name="error_occurred_loading_gpx">Ocurrió un error al cargar el GPX</string>
   <string name="send_report">Enviar informe</string>
-  <string name="none_region_found">No hay datos descargados para las regiones en la tarjeta SD. Descargue las regiones de Internet.</string>
+  <string name="none_region_found">No hay datos descargados para las regiones en la tarjeta SD. Descarga las regiones de Internet.</string>
   <string name="poi_namefinder_query_empty">Escriba información para buscar el PDI</string>
   <string name="any_poi">Cualquiera</string>
   <string name="layer_transport_route">Ruta de transporte</string>
@@ -617,7 +617,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="download_indexes">Descargar datos</string>
   <string name="use_online_routing_descr">Usa Internet para calcular la ruta</string>
   <string name="use_online_routing">Usar ruteo en línea</string>
-  <string name="osm_settings_descr">Especifique las opciones de Openstreetmap.org (OSM) necesarias para envíos a OSM</string>
+  <string name="osm_settings_descr">Especifica las opciones de Openstreetmap.org (OSM) necesarias para envíos a OSM</string>
   <string name="data_settings_descr">Especifica idioma, descarga/recarga de datos</string>
   <string name="data_settings">Datos</string>
   <string name="map_preferences_descr">Especificar opciones del mapa: fuente de datos, rotación, marcador de posición, orientación de pantalla</string>
@@ -655,7 +655,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="map_view_3d">Visión 3D del mapa</string>
   <string name="show_poi_over_map_description">Muestra PDI sobre el mapa (usando el último filtro seleccionado)</string>
   <string name="show_poi_over_map">Mostrar PDI</string>
-  <string name="map_tile_source_descr">Elige la fuente del mapa de teselas online o de caché</string>
+  <string name="map_tile_source_descr">Elige la fuente de teselas del mapa, online o guardadas</string>
   <string name="map_tile_source">Fuente de teselas de mapa</string>
   <string name="map_source">Fuente de mapa</string>
   <string name="use_internet">Usar Internet</string>
@@ -771,12 +771,12 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="map_online_data">Mapas Online (teselas)</string>
   <string name="map_online_data_descr">Usa mapas online (descarga y guarda teselas en la tarjeta SD)</string>
   <string name="online_map_settings">Mapas Online</string>
-  <string name="online_map_settings_descr">Configurar fuentes de teselas de mapa online o guardadas</string>
+  <string name="online_map_settings_descr">Configura fuentes de teselas de mapa online o guardadas</string>
   <string name="map_settings">Configuraciones de Mapa</string>
   <string name="map_settings_descr">Configurar la pantalla del mapa</string>
   <string name="osmand_rastermaps_plugin_description">Muestra opciones para configurar diversos mapas teselados, online o guardados, como mapa base o como mapa superpuesto / subyacente. Estos mapas también se pueden preparar offline y copiarlos en la carpeta de OsmAnd.</string>
   <string name="osmand_background_plugin_description">Muestra configuraciones para habilitar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
-  <string name="osmand_accessibility_description">Mostrar configuraciones para características especiales de accesibilidad.</string>
+  <string name="osmand_accessibility_description">Muestra configuraciones para características especiales de accesibilidad.</string>
   <string name="extra_settings">Configuraciones avanzadas</string>
   <string name="osmand_monitoring_description">Este agregado facilita el registro de sus excursiones a un fichero GPX o en directo usando un servicio web.</string>
   <string name="osmand_extra_settings_description">Muestra opciones para configuraciones avanzadas de mapa (como aumentar detalles del mapa) y algunas especificas de dispositivos.</string>
@@ -802,7 +802,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="gpx_visibility_txt">Visibilidad</string>
   <string name="gpx_tags_txt">Etiquetas</string>
   <string name="gpx_description_txt">Descripción</string>
-  <string name="validate_gpx_upload_name_pwd">Por favor, especifique usuario y contraseña de OSM para subir ficheros GPX.</string>
+  <string name="validate_gpx_upload_name_pwd">Por favor, especifica usuario y contraseña de OSM para subir ficheros GPX.</string>
   <string name="default_buttons_support">Soporte</string>
   <string name="support_new_features">Soporte de nuevas características</string>
   
@@ -1285,7 +1285,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="tip_recent_changes_1_3_t">"Cambio en 1.5:\n\t* Tema Holo (personalización de tema) "
     </string>
     <string name="monitoring_settings">Servicios de registro</string>
-    <string name="monitoring_settings_descr">Configura la forma de registrar los recorridos y activar el modo reposo</string>
+    <string name="monitoring_settings_descr">Configura la forma de registrar los recorridos</string>
     <string name="osmand_monitoring_plugin_description">Activa el seguimiento y la navegación en modo suspensión (pantalla apagada) despertando periódicamente el dispositivo GPS. Muestra opciones que permiten registrar tus recorridos en archivos GPX locales o en línea mediante un servicio web.</string>
     <string name="osmand_monitoring_plugin_name">Servicios de registro</string>
     <string name="choose_osmand_theme_descr">Elije el tema, el aspecto, de la aplicación</string>
@@ -1410,18 +1410,17 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 \n\t* El estilo \'Vista de tour\', que contiene información detallada y adecuada para viajes y giras, incluyendo optimización para profesionales de la conducción (mayor contraste, carreteras distinguibles), opciones para ir de senderismo Alpino (escala SAC), rutas ciclistas, soporte para símbolos de senderismo, etc.
 \n\t* \'Carreteras de alto contraste\' muestra las carreteras en colores muy acentuados para situaciones con brillante iluminación ambiental
 \n\t* \'Invierno y esquí\' crea una vista del paisaje del invierno (nevado), y muestra pistas y remontes (en relación con la descarga del mapa \'Mundo de esquí\') "</string>
-    <string name="tip_recent_changes_1_6_t">Cambios en 1.6:
-	\n\t* Soporte de dispositivos Full HD
-	\n\t* Soporte de fondo transparente
-	\n\t* Descarga de mapas directamente mientras se visualiza
-	\n\t* Curvas de nivel agrupados por país/región
-	\n\t* Mapa mundial mejorado con vías principales, líneas de ferrocarril y bosques
-	\n\t* Lupa (pulsación larga en el botón de zoom)
-	\n\t* Permite definir y editar la fuente de teselas en línea (indicando fecha de caducidad)
-	\n\t* Soporte de diferentes límites de velocidad en diferentes periodos (Paises Bajos)
-	\n\t* Mejorada la búsqueda por dirección
-	\n\t* Solucionados problemas con el cálculo de rutas y la visualización
-    </string>
+    <string name="tip_recent_changes_1_6_t">"Cambios en 1.6:
+\n\t* Soporte de dispositivos Full HD
+\n\t* Soporte de fondo transparente
+\n\t* Descarga de mapas directamente mientras se visualiza
+\n\t* Curvas de nivel agrupados por país/región
+\n\t* Mapa mundial mejorado con vías principales, líneas de ferrocarril y bosques
+\n\t* Lupa (pulsación larga en el botón de zoom)
+\n\t* Permite definir y editar la fuente de teselas en línea (indicando fecha de caducidad)
+\n\t* Soporte de diferentes límites de velocidad en diferentes periodos (Países Bajos)
+\n\t* Mejorada la búsqueda por dirección
+\n\t* Solucionados problemas con el cálculo de rutas y la visualización "</string>
     <string name="local_index_tile_data_zooms">Zooms descargados: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
     <string name="map_widget_fps_info">Info depuración de FPS</string>
@@ -1639,7 +1638,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_settings_descr">Configurar opciones de monitorización y configurar canal de monitoreo</string>
     <string name="osmo_plugin_description">"OpenStreetMap-Monitoring - Monitorización avanzada en directo. Proporciona la posibilidad de seguir otros dispositivos y ser seguido. Crea grupos anónimos, comparte las localizaciones de cada uno y comuníquense. Tiene varias opciones para seguimiento por sesión o permanente. Los grupos anónimos están limitados a varios días y a algunas funcionalidades, p.e. no hay control remoto ni administrador de grupo. Los grupos completamente funcionales deben ser creados en la web y solo los usuarios registrados tienen acceso a ellos. Por favor, lee más en http://osmo.mobi. "</string>
     <string name="osmo_plugin_name">OsMo (Monitoreo avanzado en directo)</string>
-    <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
+    <string name="osmo_settings">OpenStreetMap Monitoring</string>
    	<string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
 	<string name="share_route_subject">Ruta compartida vía OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato inválido: %s</string>
@@ -1805,16 +1804,16 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="keep_navigation_service">Mantener</string>
 	<string name="stop_navigation_service">Parar</string>
 	<string name="enable_sleep_mode">Habilita modo reposo</string>
-	<string name="gps_wake_up_timer">Intervalo despertar GPS</string>
+	<string name="gps_wake_up_timer">Intervalo para despertar GPS</string>
 	<string name="sleep_mode_stop_dialog">¿Mantener el GPS encendido?</string>
-	<string name="map_preferred_locale_descr">Lenguaje preferido para las etiquetas en el mapa (si no está disponible se cambiará a Ingles o a los nombres locales)</string>
-    <string name="map_preferred_locale">Lenguaje preferido del mapa</string>
+	<string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no se indica se cambiará a inglés o a nombres locales)</string>
+    <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="local_map_names">Nombres locales</string>
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebreo</string>
     <string name="forward">Siguiente</string>
     <string name="home">Casa</string>
-    <string name="live_monitoring_m_descr">Enviar seguimiento a un servicio web específico si la grabación GPS está habilitada.</string>
+    <string name="live_monitoring_m_descr">Enviar seguimiento a un servicio web específico si la grabación GPX está habilitada.</string>
 	<string name="live_monitoring_m">Seguimiento online (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento online</string>
 	<string name="live_monitoring_stop">Parar seguimiento online</string>
@@ -1828,4 +1827,30 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="lang_sr">Serbio</string>
 	<string name="lang_zh_CN">Chino Simplificado</string>
 	<string name="lang_zh_TW">Chino Tradicional</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Modo Metro</string>
+ 	<string name="continue_navigation">Continuar Navegación</string>
+    <string name="pause_navigation">Pausar Navegación</string>
+	<string name="rendering_attr_alpineHiking_name">Vista senderismo Alpino</string>
+    <string name="rendering_attr_alpineHiking_description">Interpretar caminos de acuerdo a la escala SAC</string>
+    <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
+    <string name="rendering_attr_osmcTraces_description">Interpretar caminos de acuerdo a las trazas de OSMC</string>
+    
+	<string name="osmo_invite">Invitar...</string>
+    <string name="osmo_leave_confirmation_msg">¿Quieres abandonar el grupo %1$s?</string>
+    <string name="osmo_specify_tracker_id">Por favor especifica el id</string>
+    <string name="arrival_distance_factor_early">Pronto</string>
+    <string name="arrival_distance_factor_normally">Normal</string>
+    <string name="arrival_distance_factor_late">Tarde</string>
+    <string name="arrival_distance_factor_at_last">En los últimos metros</string>
+    <string name="rendering_attr_coloredBuildings_name">Edificios de colores</string>
+    <string name="hide_all_waypoints">Quitar todos</string>
+<string name="av_camera_pic_size">Tamaño de foto</string>
+	<string name="av_camera_pic_size_descr">Selecciona el tamaño interno de la foto</string>
+    <string name="announce_nearby_favorites">Anunciar favoritos cercanos</string>
+<string name="rendering_value_browse_map_name">Ver mapa</string>  
+    <string name="rendering_value_car_name">Coche</string>
+    <string name="rendering_value_bicycle_name">Bicicleta</string>
+    <string name="rendering_value_pedestrian_name">Peatón</string>
+    <string name="more">Más...</string>
+    <string name="download_additional_maps">¿Descargar los mapas que faltan %1$s (%2$d MB)?</string>
+    </resources>

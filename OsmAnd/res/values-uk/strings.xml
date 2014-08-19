@@ -1354,7 +1354,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="local_openstreetmap_act_title">Редагування OSM</string>
     <string name="wait_current_task_finished">Будь ласка, зачекайте завершення поточної задачі</string>
     <string name="use_magnetic_sensor">Використовувати магнітометр</string>
-    <string name="monitoring_settings_descr">Налаштування запису треків і вмикання сплячого режиму</string>
+    <string name="monitoring_settings_descr">Налаштування запису треків</string>
     <string name="osmand_monitoring_plugin_description">Активація запису трека і навігації в сплячому режимі (екран вимкнений) з допомогою періодичного \"пробудження\" GPS. Налаштування запису треку в локальні файли або в Інтернет з допомогою веб-служби.</string>
     <string name="downloading_file_new">Завантаження …</string>
 	<string name="delete_point">Вилучити точку</string>
@@ -1618,7 +1618,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_tracker_id_descr">Натисніть щоб подивитись або подітись ID трекера
 	Використовуючи ID трекера можна відстежувати пересування цього пристрою! Для відключення скористайтесь опцією Перестворити.</string>
     <string name="osmo_server_operation_failed">OsMo Server збій виконання операції</string>
-    <string name="osmo_activity">OpenStreetMap-Моніторинг</string>
+    <string name="osmo_activity">OpenStreetMap Моніторинг</string>
     <string name="osmo_control">OsMo швидкий доступ</string>
     <string name="gpx_file_is_empty">Трек Gpx порожній</string>
     <string name="selected_track">Трек</string>
@@ -1686,7 +1686,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_attr_showSurfaces_name">Показати тип покриття</string>
     <string name="rendering_attr_showCycleRoutes_name">Показати веломаршрути</string>
     <string name="osmo_auth_error_short">Збій авторизації</string>
-    <string name="osmo_auth_error">Збій авторизації OsMo: %1$s.\n Можливо служба тимчасово не працює або закінчилась реєстрація.\n Бажаєте продовжити з новими реєстраційними даними.</string>
+    <string name="osmo_auth_error">Збій авторизації OsMo: %1$s.\n Можливо служба тимчасово не працює або закінчилась реєстрація.\n Бажаєте продовжити з новими реєстраційними даними?</string>
     <string name="osmo_group_by_invite">Увійти за запрошенням</string>
     <string name="osmo_group_information_desc">" - Всі створені групи є публічними! Якщо бажаєте зберегти анонімність, під’єднайте пристрій за його ідентифікатором.\n - В групі може зареєструватись до 16 осіб.\n - У разі бездіяльності або активності тільки 1-ї особи впродовж двох тижнів, групу буде вилучено.\n - Ви можете обмежити вхід до групи, тільки за запрошенням, але щоб отримати контроль над групою потрібно увійти до адміністративної консолі.\n - Якщо вам потрібно створити групу, але з іншими умовами відвідайте http://osmo.mobi"</string>
     <string name="osmo_group_information">Будь ласка, прочитайте перед створенням групи!</string>
@@ -1767,7 +1767,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_mode_off">Старт сесії OsMo</string>
     <string name="osmo_settings_debug">Інформація для відлагодження</string>
     <string name="osmo_settings_descr">Налаштування параметрів моніторингу та встановлення персонального каналу моніторингу</string>
-    <string name="osmo_settings">OsMo OpenStreetMap Моніторинг (бета)</string>
+    <string name="osmo_settings">OpenStreetMap Моніторинг</string>
     <string name="osmo_plugin_description">"Прогресивний онлайн моніторинг на основі OpenStreetMap, дивіться http://osmo.mobi. Відстежуйте інші пристрої та діліться з іншими вашим місцезнаходженням. Створюйте анонімні групи, діліться один з одним своїм положенням та спілкуйтесь. Різноманітні налаштування сесій чи постійне відстеження. Анонімні групи мають обмеження у кілька днів та у функціях, ними неможливо керувати віддалено та вони не мають адміністраторів. Групи з повним набором функцій можуть бути створені на веб-сайті і тільки зареєстровані користувачі матимуть до них доступ. "</string>
     <string name="osmo_plugin_name">OsMo (Передовий онлайн моніторинг)</string>
    	<string name="always_center_position_on_map">Показувати положення завжди в центрі</string>
@@ -1926,4 +1926,30 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="share_fav">Поділитись</string>
 	<string name="share_fav_subject">Закладки, якими поділились через OsmAnd</string>
 	<string name="navigation_intent_invalid">Невірний формат: %s</string>
-</resources>
+<string name="rendering_attr_coloredBuildings_name">Кольорові будівлі</string>
+    <string name="osmo_invite">Запросити…</string>
+    <string name="osmo_leave_confirmation_msg">Ви бажаєте вийти з групи %1$s?</string>
+    <string name="osmo_specify_tracker_id">Будь ласка, вкажіть id</string>
+    <string name="continue_navigation">Продовжити навігацію</string>
+    <string name="pause_navigation">Призупинити навігацію</string>
+    <string name="rendering_attr_subwayMode_name">Режим метро</string>
+ 	<string name="rendering_attr_alpineHiking_name">Піший гірський туризм</string>
+    <string name="rendering_attr_alpineHiking_description">Візуалізація шляху за шкалою SAC</string>
+    <string name="rendering_attr_osmcTraces_name">Шар символів для пішого туризму</string>
+    <string name="rendering_attr_osmcTraces_description">Візуалізація шляху відповідно до треків OSMC</string>
+    
+	<string name="arrival_distance_factor_early">Завчасно</string>
+    <string name="arrival_distance_factor_normally">Звичайно</string>
+    <string name="arrival_distance_factor_late">Пізніше</string>
+    <string name="arrival_distance_factor_at_last">На останніх метрах</string>
+    <string name="av_camera_pic_size">Розмір фото</string>
+	<string name="av_camera_pic_size_descr">Оберіть розмір фото для вбудованого застосунка для фотографування</string>
+    <string name="hide_all_waypoints">Вилучити все</string>
+    <string name="announce_nearby_favorites">Оголошувати закладки, що знаходяться поруч</string>
+<string name="download_additional_maps">Завантажити відсутні мапи %1$s (%2$d МБ)?</string>
+    <string name="more">Ще…</string>
+    <string name="rendering_value_browse_map_name">Огляд мапи</string>  
+    <string name="rendering_value_car_name">Автівка</string>
+    <string name="rendering_value_bicycle_name">Велосипед</string>
+    <string name="rendering_value_pedestrian_name">Пішохід</string>
+    </resources>

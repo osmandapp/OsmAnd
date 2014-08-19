@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="map_widget_gps_info">GPS informacije</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="map_widget_gps_info">GPS informacije</string>
     <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
     <string name="item_unchecked">neprovjereno</string>
@@ -1172,4 +1173,24 @@
     <string name="select_gpx">Odaberite GPX …</string>
     <string name="route_descr_select_destination">Odaberite Odredište</string>
     <string name="route_descr_select_on_map">Odaberite na karti …</string>
+    <string name="more">Više…</string>
+    <string name="rendering_value_car_name">Auto</string>
+    <string name="rendering_value_bicycle_name">Bicikl</string>
+    <string name="rendering_value_pedestrian_name">Pješak</string>
+    <string name="rendering_attr_coloredBuildings_name">Obojane zgrade</string>
+    <string name="osmo_invite">Pozovi…</string>
+    <string name="osmo_leave_confirmation_msg">Želite li napustiti grupu %1$s?</string>
+    <string name="osmo_specify_tracker_id">Molimo vas da u postavkama navedete OSM korisničko ime i lozinku</string>
+    <string name="continue_navigation">Nastavi navigaciju</string>
+    <string name="pause_navigation">Pauziraj navigaciju</string>
+    <string name="enable_sleep_mode">Omogućite stanje mirovanja</string>
+	<string name="gps_wake_up_timer">Interval uključivanja GPS-a</string>
+	<string name="sleep_mode_stop_dialog">Ostaviti GPS uključen?</string>
+	<string name="map_preferred_locale_descr">Izaberite jezik za oznake na karti(ako jezik nije dostupan prebaciti će se na Engleski ili lokalni jezik)</string>
+    <string name="map_preferred_locale">Jezik karte</string>
+    <string name="local_map_names">Lokalni nazivi</string>
+    <string name="lang_sw">Svahili</string>
+    <string name="lang_he">Hebrejski</string>
+    <string name="forward">Naprijed</string>
+    <string name="home">Početna</string>
     </resources>

@@ -243,8 +243,17 @@ public class MapRenderingTypes {
 		return getRuleType(tag, val, true);
 	}
 	
+	private String lc(String a) {
+		if(a != null) {
+			return a.toLowerCase();
+		}
+		return a;
+	}
+	
 	protected MapRulType getRuleType(String tag, String val, boolean poi) {
 		Map<String, MapRulType> types = getEncodingRuleTypes();
+		tag = lc(tag);
+		val = lc(val);
 		MapRulType rType = types.get(constructRuleKey(tag, val));
 		if (rType == null || (!rType.isPOI() && poi) || (!rType.isMap() && !poi)) {
 			rType = types.get(constructRuleKey(tag, null));
@@ -417,8 +426,8 @@ public class MapRenderingTypes {
 	}
 
 	protected MapRulType parseBaseRuleType(XmlPullParser parser, String poiParentCategory, String poiParentPrefix, String parentOrder, boolean filterOnlyMap) {
-		String tag = parser.getAttributeValue("", "tag");
-		String value = parser.getAttributeValue("", "value");
+		String tag = lc(parser.getAttributeValue("", "tag"));
+		String value = lc(parser.getAttributeValue("", "value"));
 		String additional = parser.getAttributeValue("", "additional");
 		if (value != null && value.length() == 0) { //$NON-NLS-1$
 			value = null;
@@ -486,9 +495,9 @@ public class MapRenderingTypes {
 			rtype.poiPrefix = poiPrefix;
 		}
 		
-		if (!rtype.isAdditional() && !rtype.isText()) {
-			rtype.onlyPoint = Boolean.parseBoolean(parser.getAttributeValue("", "point")); //$NON-NLS-1$
-			rtype.relation = Boolean.parseBoolean(parser.getAttributeValue("", "relation")); //$NON-NLS-1$
+		rtype.onlyPoint = Boolean.parseBoolean(parser.getAttributeValue("", "point")); //$NON-NLS-1$
+		rtype.relation = Boolean.parseBoolean(parser.getAttributeValue("", "relation")); //$NON-NLS-1$
+		if (!rtype.isAdditional() && !rtype.isText()) {			
 			rtype.namePrefix = parser.getAttributeValue("", "namePrefix"); //$NON-NLS-1$
 			if (rtype.namePrefix == null) {
 				rtype.namePrefix = "";

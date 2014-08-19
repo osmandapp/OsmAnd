@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -1431,7 +1431,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	\n\t* Menuknop vervangen door knop linksboven in het kaartvenster
     </string>
     <string name="monitoring_settings">Logboek registratie</string>
-    <string name="monitoring_settings_descr">Stel in hoe lokaal of via online tracking reizen op te nemen</string>
+    <string name="monitoring_settings_descr">Bepaal hoe trips op te nemen</string>
     <string name="osmand_monitoring_plugin_description">Activeren van tracking en navigatie in slaapmodus (scherm uit). De GPS gaat dan regelmatig aan. Toon de instellingen om uw reis vast te leggen als GPX-bestand of online via een webdienst.</string>
     <string name="street_name">Straat</string>
 	<string name="osmand_monitoring_plugin_name">Logboek registratie</string>
@@ -1648,7 +1648,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="route_preferences">Route-voorkeuren</string>
     <string name="route_info">Route-informatie</string>
     <string name="keep_and_add_destination_point">Toevoegen als bestemming</string>
-    <string name="use_displayed_track_for_navigation">De getoonde route gebruiken voor navigatie?</string>
+    <string name="use_displayed_track_for_navigation">De getoonde GPX route gebruiken voor navigatie?</string>
     <string name="tip_recent_changes_1_7_1_t">Wijzigingen in 1.7:
     \n\t* BELANGRIJK: kaarten moeten nieuwer zijn dan februari 2014.
 	\n\t* Volledig nieuwe routeberekening (snel en nauwkeurig) - 
@@ -1726,7 +1726,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
     <string name="osmo_plugin_description">"Geavanceerde live monitoring - zie http://osmo.mobi. Volg andere toestellen en laat jezelf volgen. Maak anonieme groepen, deel je positie en communiceer. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen. Anonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden: zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde gebruikers kunnen ze gebruiken. "</string>
     <string name="osmo_plugin_name">OsMo (geavanceerde live monitoring)</string>
-    <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
+    <string name="osmo_settings">OpenStreetMap Monitoring (OsMo)</string>
    	<string name="keep_informing_never">Niet herhalen</string>
     <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig</string>
     <string name="keep_informing">Herhaal de aanwijzingen</string>
@@ -1790,7 +1790,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_connect">Verbind met</string>
     <string name="osmo_create_group">Maak een nieuwe groep</string>
     <string name="osmo_server_operation_failed">OsMo server probleem</string>
-    <string name="osmo_activity">OsMo-monitor</string>
+    <string name="osmo_activity">OpenStreetMap monitoring (OsMo)</string>
     <string name="osmo_enable_tracker">Verzend mijn posities</string>
     <string name="osmo_control">OsMo snelle toegang</string>
     <string name="local_index_mi_export">Exporteer</string>
@@ -1881,7 +1881,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_not_signed_in">Kon niet inloggen op OsMo</string>
     <string name="osmo_group_by_invite">Alleen toegang met uitnodiging</string>
     <string name="osmo_auth_error_short">Aanmelding mislukt</string>
-    <string name="osmo_auth_error">OsMo aanmeldings fout: %1$s.\nMogelijk is de service tijdelijk niet beschikbaar of is uw registratie verlopen.\nWilt u verder gaan met een nieuwe registratie.</string>
+    <string name="osmo_auth_error">OsMo aanmeldings fout: %1$s.\nMogelijk is de service tijdelijk niet beschikbaar of is uw registratie verlopen.\nWilt u verder gaan met een nieuwe registratie?</string>
     <string name="rendering_attr_hideBuildings_name">Verberg gebouwen</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Verberg voetpaden</string>
     <string name="rendering_attr_hideText_name">Verberg tekst</string>
@@ -1920,4 +1920,30 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="lang_sr">Servisch</string>
 	<string name="lang_zh_CN">Vereenvoudigd Chinees</string>
 	<string name="lang_zh_TW">Traditioneel Chinees</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Tunnel stand</string>
+ 	<string name="continue_navigation">Navigatie voortzetten</string>
+    <string name="pause_navigation">navigatie pauzeren</string>
+	<string name="rendering_attr_alpineHiking_name">Alpine wandel weergave</string>
+    <string name="rendering_attr_alpineHiking_description">Render paden volgens SAC schaal</string>
+    <string name="rendering_attr_osmcTraces_name">Wandelsymbolen laag</string>
+    <string name="rendering_attr_osmcTraces_description">Render paden volgens OSMC sporen</string>
+    
+	<string name="rendering_attr_coloredBuildings_name">Gekleurde gebouwen</string>
+    <string name="osmo_invite">Uitnodiging voor…</string>
+    <string name="osmo_leave_confirmation_msg">Wil je de groep %1$s verlaten?</string>
+    <string name="osmo_specify_tracker_id">Specificeer je tracker-id alsjeblieft</string>
+    <string name="arrival_distance_factor_early">Vroegtijdig</string>
+    <string name="arrival_distance_factor_normally">Op tijd</string>
+    <string name="arrival_distance_factor_late">Laat</string>
+    <string name="arrival_distance_factor_at_last">Als bestemming bijna is bereikt</string>
+    <string name="hide_all_waypoints">Verwijder alle</string>
+<string name="av_camera_pic_size">Camera Beeldformaat</string>
+	<string name="av_camera_pic_size_descr">Selecteer interne camera beeldformaat</string>
+    <string name="announce_nearby_favorites">Meld favorieten in de buurt</string>
+<string name="rendering_value_browse_map_name">Bekijk kaart</string>  
+    <string name="rendering_value_car_name">Auto</string>
+    <string name="rendering_value_bicycle_name">Fiets</string>
+    <string name="rendering_value_pedestrian_name">Voetganger</string>
+    <string name="more">Meer…</string>
+    <string name="download_additional_maps">Download ontbrekende kaarten %1$s (%2$d MB)?</string>
+    </resources>

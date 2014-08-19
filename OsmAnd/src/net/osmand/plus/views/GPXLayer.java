@@ -1,10 +1,13 @@
 package net.osmand.plus.views;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -14,6 +17,7 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -30,7 +34,7 @@ import android.graphics.PointF;
 import android.widget.Toast;
 
 public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, 
-			MapTextProvider<WptPt>{
+			MapTextProvider<WptPt> {
 	
 	private OsmandMapTileView view;
 	
@@ -94,6 +98,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintInnerCircle.setColor(0xddFFFFFF);
 		paintInnerCircle.setAntiAlias(true);
 	}
+	
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {

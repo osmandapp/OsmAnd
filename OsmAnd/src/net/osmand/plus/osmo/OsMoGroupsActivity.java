@@ -329,6 +329,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		if(osMoPlugin.getService().isConnected()) {
 			adapter.synchronizeGroups();
 		}
+		osMoPlugin.setGroupsActivity(this);
 	}
 
 	@Override
@@ -340,6 +341,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}
 		app.getLocationProvider().removeLocationListener(this);
 		osMoPlugin.getGroups().setUiListener(null);
+		osMoPlugin.setGroupsActivity(null);
 	}
 	
 	private void enterSelectionMode(final Object o) {
@@ -431,7 +433,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					Builder bld = new AlertDialog.Builder(OsMoGroupsActivity.this);
 					String name = (selectedObject instanceof OsMoDevice)? ((OsMoDevice) selectedObject).getVisibleName() :
 						((OsMoGroup) selectedObject).getVisibleName(OsMoGroupsActivity.this);
-					bld.setTitle(getString(R.string.delete_confirmation_msg, name));
+					bld.setTitle(getString(
+							selectedObject instanceof OsMoDevice? R.string.delete_confirmation_msg :
+								R.string.osmo_leave_confirmation_msg, name));
 					bld.setPositiveButton(R.string .default_buttons_yes, new DialogInterface.OnClickListener() {
 						
 						@Override
@@ -500,7 +504,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	
 	
 
-	protected void showGroupInfo(OsMoGroup group) {
+	protected void showGroupInfo(final OsMoGroup group) {
 		Builder bld = new AlertDialog.Builder(this);
 		bld.setTitle(R.string.osmo_group);
 		StringBuilder sb = new StringBuilder();
@@ -526,6 +530,13 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		tv.setText(sb.toString());
 		bld.setView(sv);
 		bld.setPositiveButton(R.string.default_buttons_ok, null);
+		bld.setNegativeButton(R.string.osmo_invite, new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				shareOsMoGroup(group.getVisibleName(app), group.getGroupId());
+			}
+		});
 		bld.show();
 		
 	}
@@ -781,6 +792,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				if(!checkOperationIsNotRunning()) {
 					return ;
 				}
+				joinGroup = true;
 				String op = osMoPlugin.getGroups().createGroup(name.getText().toString(), onlyByInvite.isChecked(),
 						description.getText().toString(), policy.getText().toString());
 				startLongRunningOperation(op);
@@ -814,11 +826,15 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				if(isChecked) {
 					labelTracker.setText(R.string.osmo_connect_to_device_tracker_id);
 					labelName.setText(R.string.osmo_connect_to_device_name);
+					name.setVisibility(View.VISIBLE);
+					labelName.setVisibility(View.VISIBLE);
 					mgv.setVisibility(View.GONE);
 				} else {
 					labelTracker.setText(R.string.osmo_connect_to_group_id);
 					labelName.setText(R.string.osmo_group_name);
 					name.setHint(R.string.osmo_use_server_name);
+					name.setVisibility(View.GONE);
+					labelName.setVisibility(View.GONE);
 					mgv.setVisibility(View.VISIBLE);
 				}
 			}
@@ -833,6 +849,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				final String nameUser = name.getText().toString();
 				final String id = tracker.getText().toString();
 				final String nick = nickname.getText().toString();
+				if(id.length() == 0) {
+					app.showToastMessage(R.string.osmo_specify_tracker_id);
+					connectToDevice();
+					return;
+				}
 				if(device.isChecked()) {
 					OsMoDevice dev = osMoPlugin.getGroups().addConnectedDevice(id, nameUser, 
 							ColorDialogs.getRandomColor());
@@ -1130,6 +1151,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				icon.setVisibility(View.INVISIBLE);
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 				label.setText(model.getVisibleName());
+				labelTime.setText("");
 			} else if (location == null || mapLocation == null) {
 				label.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				icon.setVisibility(View.VISIBLE);
@@ -1142,6 +1164,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				draw.setColor(model.isEnabled() ? activeColor : color);
 				icon.setImageDrawable(draw);
 				label.setText(model.getVisibleName());
+				labelTime.setText("");
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				icon.setVisibility(View.VISIBLE);

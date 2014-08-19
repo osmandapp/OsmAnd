@@ -6,8 +6,10 @@ import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.util.Algorithms;
 import android.content.Context;
 
 public class TourDownloadType extends DownloadActivityType {
@@ -42,8 +44,17 @@ public class TourDownloadType extends DownloadActivityType {
 		return "";
 	}
 	
+	public String getBaseUrl(OsmandApplication ctx, String fileName) {
+		return "http://" + SherpafyCustomization.TOUR_SERVER + "/download_tour.php?event=2&"
+				+ Version.getVersionAsURLParam(ctx) + "&file=" + fileName;
+	}
+	
 	public String getUrlSuffix(OsmandApplication ctx) {
-		return "&tour=yes";
+		String accessCode = "";
+		if (ctx.getAppCustomization() instanceof SherpafyCustomization) {
+			accessCode = ((SherpafyCustomization) ctx.getAppCustomization()).getAccessCode();
+		}
+		return "&tour=yes" + (Algorithms.isEmpty(accessCode) ? "" : "&code=" + accessCode);
 	}
 
 	public String getVisibleDescription(IndexItem indexItem, Context ctx) {

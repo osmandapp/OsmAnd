@@ -3,7 +3,6 @@ package net.osmand.plus;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -316,6 +315,7 @@ public class OsmandSettings {
 		
 		protected abstract T getValue(Object prefs, T defaultValue);
 		
+		
 		protected abstract boolean setValue(Object prefs, T val);
 		
 		@Override
@@ -360,6 +360,10 @@ public class OsmandSettings {
 				return true;
 			}
 			return false;
+		}
+
+		public boolean isSet() {
+			return settingsAPI.contains(getPreferences(), getId());
 		}
 		
 	}
@@ -814,8 +818,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference("gpx_routing_calculate_rtept", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> GPX_SPEAK_WPT = new BooleanPreference("speak_gpx_wpt", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC = new BooleanPreference("calc_gpx_route", false).makeGlobal().cache();
-	
-	
+
+	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_FAVORITES = new BooleanPreference("announce_nearby_favorites", false).makeGlobal().cache();
 
 	public final OsmandPreference<Boolean> AVOID_TOLL_ROADS = new BooleanPreference("avoid_toll_roads", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> AVOID_MOTORWAY = new BooleanPreference("avoid_motorway", false).makeProfile().cache();
@@ -947,10 +951,7 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> MAP_ONLINE_DATA = new BooleanPreference("map_online_data", false).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
-//	public final CommonPreference<Boolean> SHOW_DESTINATION_ARROW = new BooleanPreference("show_destination_arrow", true).makeProfile();
-//	{
-//		SHOW_DESTINATION_ARROW.setModeDefaultValue(ApplicationMode.CAR, false);	
-//	}
+	public final CommonPreference<Boolean> SHOW_DESTINATION_ARROW = new BooleanPreference("show_destination_arrow", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_OVERLAY = new StringPreference("map_overlay", null).makeGlobal();
@@ -1297,7 +1298,9 @@ public class OsmandSettings {
 
 	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route"; //$NON-NLS-1$
+	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route_integer"; //$NON-NLS-1$
+	public final static int NAVIGATE_CURRENT_GPX = 2;
+	public final static int NAVIGATE = 1;
 	public final static String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description"; //$NON-NLS-1$
 	public final static String START_POINT_LAT = "start_point_lat"; //$NON-NLS-1$
 	public final static String START_POINT_LON = "start_point_lon"; //$NON-NLS-1$
@@ -1333,11 +1336,14 @@ public class OsmandSettings {
 	}
 	
 	
-	public boolean isRouteToPointNavigateAndClear(){
-		boolean t = settingsAPI.contains(globalPreferences,POINT_NAVIGATE_ROUTE);
-		settingsAPI.edit(globalPreferences).remove(POINT_NAVIGATE_ROUTE).commit();
-		return t;
+	public int isRouteToPointNavigateAndClear() {
+		int vl = settingsAPI.getInt(globalPreferences, POINT_NAVIGATE_ROUTE, 0);
+		if(vl != 0) {
+			settingsAPI.edit(globalPreferences).remove(POINT_NAVIGATE_ROUTE).commit();
+		}
+		return vl;
 	}
+	
 	
 	public boolean clearIntermediatePoints() {
 		return settingsAPI.edit(globalPreferences).remove(INTERMEDIATE_POINTS).remove(INTERMEDIATE_POINTS_DESCRIPTION).commit();
@@ -1448,9 +1454,13 @@ public class OsmandSettings {
 	}
 	
 	public boolean navigateDialog() {
-		return settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_ROUTE, "true").commit();
+		return navigateDialog(false);
 	}
-
+	
+	public boolean navigateDialog(boolean gpx) {
+		return settingsAPI.edit(globalPreferences).putInt(POINT_NAVIGATE_ROUTE, gpx ? NAVIGATE_CURRENT_GPX : NAVIGATE).commit();
+	}
+	
 
 	/**
 	 * the location of a parked car

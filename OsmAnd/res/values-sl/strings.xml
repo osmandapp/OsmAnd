@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	<string name="settings_Button">Nastavitve</string>
@@ -1328,7 +1328,7 @@ Pomembnejše lastnosti:
     <string name="access_mark_final_location_first">Način dostopnosti: prosim, najprej izberite cilj</string> 
     <string name="use_magnetic_sensor_descr">Namesto senzorja usmerjenosti, za določanje vrednosti kompasa uporabljaj magnetni senzor</string>
     <string name="cancel_route">Opusti pot</string>
-    <string name="monitoring_settings_descr">Določite, kako lahko snemate potovanja in omogočite način v pripravljenosti</string>
+    <string name="monitoring_settings_descr">Določite, kako naj se snemajo potovanja</string>
     <string name="osmand_monitoring_plugin_description">Omogoči sledenje in navigacijo v načinu pripravljenosti (izklopljen zaslon) preko rednega zbujanja GPS naprave. Pokaže nastavitve, ki omogočajo snemanje potovanj v lokalne GPX datoteke ali na splet z uporabo spletnih storitev.</string>
     <string name="choose_osmand_theme_descr">Izbira teme programa</string>
     <string name="choose_osmand_theme">Tema aplikacije</string>
@@ -1706,7 +1706,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="keep_informing_never">Nikoli</string>
     <string name="keep_informing_descr">Napoveduj navigacijska navodila v rednih časovnih presledkih</string>
     <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
-	<string name="osmo_settings">OsMo OpenStreetMap sledenje (beta)</string>
+	<string name="osmo_settings">OpenStreetMap sledenje</string>
    	<string name="arrival_distance_descr">Kako hitro želite napoved prihoda?</string>
     <string name="arrival_distance">Napoved prihoda</string>
     
@@ -1753,7 +1753,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="osmo_connect_to_device">Povezava z napravo</string>
     <string name="osmo_connect_to_group">Povezava s skupino</string>
     <string name="osmo_create_group">Ustvari skupino</string>
-    <string name="osmo_activity">OpenStreetMap-Sledenje</string>
+    <string name="osmo_activity">OpenStreetMap Sledenje</string>
     <string name="osmo_enable_tracker">Pošiljanje mojih lokacij</string>
     <string name="osmo_control">OsMo hiter dostop</string>
     <string name="osmo_connected_devices">Povezane naprave</string>
@@ -1858,7 +1858,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="gpx_monitoring_stop">Končaj GPX snemanje</string>
     <string name="gpx_start_new_segment">Začni nov segment</string>
     <string name="rendering_attr_hideBuildings_name">Skrij stavbe</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Skrij ne-vozne ceste</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Skrij neprevozne ceste</string>
     <string name="rendering_attr_hideText_name">Skrij besedilo</string>
     <string name="rendering_attr_hideWoodScrubs_name">Skrij gozdove in grmičevje</string>
     <string name="rendering_attr_buildings15zoom_name">Zgradbe v povečavi 15</string>
@@ -1887,4 +1887,24 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="lang_zh_CN">Poenostavljena kitajščina</string>
 	<string name="lang_zh_TW">Tradicionalna kitajščina</string>
 	<string name="lang_sc">Sardinščina</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Način podzemne železnice</string>
+ 	<string name="continue_navigation">Nadaljuj navigacijo</string>
+    <string name="rendering_attr_alpineHiking_name">Planinski zamljevid</string>
+    <string name="osmo_invite">Povabite...</string>
+    <string name="osmo_specify_tracker_id">Prosim, določite ID</string>
+    <string name="arrival_distance_factor_early">Zgodaj</string>
+    <string name="arrival_distance_factor_normally">Običajno</string>
+    <string name="arrival_distance_factor_late">Pozno</string>
+    <string name="arrival_distance_factor_at_last">V zadnjih metrih</string>
+    <string name="hide_all_waypoints">Odstrani vse</string>
+<string name="rendering_attr_coloredBuildings_name">Pobarvane stavbe</string>
+    <string name="osmo_leave_confirmation_msg">Ali želite zapustiti skupino %1$s?</string>
+    <string name="av_camera_pic_size">Velikost fotografije</string>
+	<string name="av_camera_pic_size_descr">Izberite velikost posnetkov vgrajenega fotoaparata</string>
+    <string name="announce_nearby_favorites">Najavi bližino priljubljenih krajev</string>
+<string name="download_additional_maps">Prenos manjkajočih zemljevidov %1$s (%2$d MB)?</string>
+    <string name="more">Več...</string>
+    <string name="rendering_value_car_name">Avtomobil</string>
+    <string name="rendering_value_bicycle_name">Kolo</string>
+    <string name="rendering_value_pedestrian_name">Pešec</string>
+    </resources>

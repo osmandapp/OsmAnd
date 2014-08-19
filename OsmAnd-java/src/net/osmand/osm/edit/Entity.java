@@ -242,4 +242,11 @@ public abstract class Entity {
 	public boolean isDataLoaded() {
 		return dataLoaded;
 	}
+
+	public Map<String, String> getModifiableTags() {
+		if(tags == null){
+			return Collections.emptyMap();
+		}
+		return tags;
+	}
 }

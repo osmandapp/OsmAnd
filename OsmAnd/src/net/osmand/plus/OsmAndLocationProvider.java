@@ -1,16 +1,16 @@
 package net.osmand.plus;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
+import android.widget.ListView;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
 import net.osmand.access.NavigationInfo;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadPoint;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.routing.RoutingHelper;
@@ -66,9 +66,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private float[] mGravs = new float[3];
 	private float[] mGeoMags = new float[3];
 	private float previousCorrectionValue = 360;
-	
-	
-	
+
 	private static final boolean USE_KALMAN_FILTER = true;
 	private static final float KALMAN_COEFFICIENT = 0.04f;
 	
@@ -104,8 +102,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private float[] mRotationM =  new float[9];
 	private OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS;
 	private OsmandPreference<Boolean> USE_FILTER_FOR_COMPASS;
-	
-	
+
+
+
+
 	public class SimulationProvider {
 		private int currentRoad;
 		private int currentSegment;
@@ -518,6 +518,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	
 	private void updateLocation(net.osmand.Location loc ) {
+		if (app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get() && app.getRoutingHelper().isFollowingMode()){
+			app.getMapActivity().getMapLayers().getMapControlsLayer().getWaypointDialogHelper().updateDialog();
+			app.getWaypointHelper().locationChanged(getLastKnownLocation());
+		}
 		for(OsmAndLocationListener l : locationListeners){
 			l.updateLocation(loc);
 		}

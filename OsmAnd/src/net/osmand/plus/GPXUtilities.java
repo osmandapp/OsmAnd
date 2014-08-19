@@ -29,6 +29,7 @@ import java.util.TimeZone;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.data.LocationPoint;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -81,7 +82,7 @@ public class GPXUtilities {
 
 	}
 
-	public static class WptPt extends GPXExtensions {
+	public static class WptPt extends GPXExtensions implements LocationPoint {
 		public double lat;
 		public double lon;
 		public String name = null;
@@ -95,7 +96,26 @@ public class GPXUtilities {
 
 		public WptPt() {
 		}
-		
+
+		@Override
+		public int getColor() {
+			return getColor(0);
+		}
+
+		@Override
+		public double getLatitude() {
+			return lat;
+		}
+
+		@Override
+		public double getLongitude() {
+			return lon;
+		}
+
+		@Override
+		public String getName() {
+			return name;
+		}
 
 		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop) {
 			this.lat = lat;
@@ -104,6 +124,11 @@ public class GPXUtilities {
 			this.ele = ele;
 			this.speed = speed;
 			this.hdop = hdop;
+		}
+
+		@Override
+		public boolean isVisible() {
+			return true;
 		}
 
 	}
@@ -553,6 +578,19 @@ public class GPXUtilities {
 				}
 			}
 			return tpoints;
+		}
+		
+		public WptPt getLastPoint() {
+			if (tracks.size() > 0) {
+				Track tk = tracks.get(tracks.size() - 1);
+				if (tk.segments.size() > 0) {
+					TrkSegment ts = tk.segments.get(tk.segments.size() - 1);
+					if (ts.points.size() > 0) {
+						return ts.points.get(ts.points.size() - 1);
+					}
+				}
+			}
+			return null;
 		}
 
 		public WptPt findPointToShow() {

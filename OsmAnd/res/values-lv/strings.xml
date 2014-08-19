@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
-  <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams OsmAnd vajadzēs restartēt.)</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
+  <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu (varētu būt nepieciešams OsmAnd restarts)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus funkcijas un uzstādījumus kā piemēram sekošana, enerģijas taupīšana, pieejamība un daudzas citas</string>
   <string name="prefs_plugins">Spraudņi</string>
   <string name="tip_recent_changes_0_8_0_t">Izmaiņas 0.8.0:
@@ -91,7 +92,7 @@
   <string name="use_short_object_names">Lietot objektu vārdus</string>
   <string name="accessibility_preferences_descr">Ar pieejamību saistītās izvēles</string>
   <string name="accessibility_preferences">Pieejamība</string>
-  <string name="rendering_out_of_memory">Nepietiek procesa atmiņas, lai attēlotu izvēlēto apgabalu</string>
+  <string name="rendering_out_of_memory">Nepietiek atmiņas, lai attēlotu izvēlēto apgabalu</string>
   <string name="use_fluorescent_overlays">Fluorescenti slāņi</string>
   <string name="use_fluorescent_overlays_descr">Lietot flurescentās krāsas, lai attēlotu maršruta ceļus</string>
   <string name="offline_edition">Bezsaistes rediģēšana</string>
@@ -184,9 +185,9 @@
   <string name="choose_auto_follow_route">Automātiski centrēt karti</string>
   <string name="choose_auto_follow_route_descr">Laiks līdz karte sinhronizējas ar tekošo pozīciju</string>
   <string name="auto_follow_route_never">Nekad</string>
-  <string name="auto_follow_route_navigation">Autocentrēt pārvietojoties maršrutā</string>
-  <string name="auto_follow_route_navigation_descr">Autocentrēt karti tikai navigācijas laikā.</string>
-  <string name="auto_follow_location_enabled">Autocentrēt karti uz atrašanās vietu.</string>
+  <string name="auto_follow_route_navigation">Autocentrēt maršruta laikā</string>
+  <string name="auto_follow_route_navigation_descr">Navigācijas laikā atrodoties kustībā, automātiski centrēt karti.</string>
+  <string name="auto_follow_location_enabled">Autocentrēt karti atrašanās vietā.</string>
   <string name="pref_vector_rendering">Vektoru renderētāja opcijas</string>
   <string name="pref_overlay">Pārklājs / paklājs</string>
   <string name="pref_raster_map">Kartes avota uzstādījumi</string>
@@ -1484,7 +1485,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="routing_attr_avoid_motorway_name">Izvairīties no automaģistrālēm</string>
 	<string name="routing_attr_avoid_motorway_description">Izvairīties no automaģistrālēm jeb ātrgaitas šosejām</string>
 	<string name="routing_attr_weight_name">Maksimālais svars</string>
-	<string name="routing_attr_weight_description">Norādīt transporta kravas maksimālā svara robežas</string>
+	<string name="routing_attr_weight_description">Norādīt transportlīdzekļa maksimālā svara ierobežojumus</string>
     <string name="select_gpx">Atzīmēt GPX…</string>
     <string name="route_descr_select_destination">Atlasīt galamērķi</string>
     <string name="route_descr_select_on_map">Atzīmēt no kartes…</string>
@@ -1591,12 +1592,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     </string>
     <string name="osmo_settings_uuid">Ierīces identifikators</string>
     <string name="osmo_settings_descr">Konfigurēt monitoringa uzstādījumus un personīgo monitoringa kanālu</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - iespējām bagāts reālā laika monitorings ar attālinātu sekošanu savienotām ierīcēm.
-………Izveidojiet anonīmas grupas, kopīgojiet atrašanās vietas un komunicējiet savā starpā, ar dažādiem uzstādījumiem sesijas vai patstāvīgai sekošanai.
-……Anonīmās grupas ir ierobežotas līdz dienu skaitam un dažām iespējām, kā piemēram, nav attālinātās kontroles un grupas administratora.
-……Pilnībā funkcionējošas grupas var tikt izveidotas tīmekļa lapā un tām var piekļūt tikai reģistrētie lietotāji.
-……Vairāk lasiet http://osmo.mobi.</string>
-    <string name="osmo_plugin_name">OsMo (reālā laika monitorings)</string>
+    <string name="osmo_plugin_description">"Sekojiet viens otram reālajā laikā, veidojot anonīmas grupas, komunicējiet savā starpā, kopīgojiet vietas, iespējojiet patstāvīgu vai sesiju sekošanu utt., vairāk lasiet http://osmo.mobi lapā, t.sk. lai reģistrētos grupu pilnvērtīgākai darbībai (attālināta vadība un kontrole utt.). "</string>
+    <string name="osmo_plugin_name">OsMo (tiešsaistes monitorings)</string>
     <string name="osmo_settings">OSMo OpenStreetMap Monitorings (beta)</string>
    	<string name="tip_recent_changes_1_6_t">Izmaiņas uz 1.6:
 …	…\n\t* Full HD ierīču atbalsts
@@ -1623,15 +1620,15 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     </string>
     <string name="interrupt_music">Pārtraukt mūziku</string>
 	<string name="share_route_subject">Maršruts kopīgots caur OsmAnd</string>
-	<string name="arrival_distance">Atbraukšanas paziņojums</string>
-    <string name="arrival_distance_descr">Kad paziņot par ierašanos galapunktā?</string>
+	<string name="arrival_distance">Ierašanās paziņojums</string>
+    <string name="arrival_distance_descr">Kad ziņot par ierašanos galamērķī?</string>
     <string name="keep_informing_never">Nekad</string>
-    <string name="keep_informing_descr">Atkārtot navigācijas norādījumus caur regulāriem intervāliem</string>
+    <string name="keep_informing_descr">Noteikt intervālu navigācijas norādījumu atkārtošanai</string>
     <string name="keep_informing">Atkārtot navigācijas norādījumus</string>
 	<string name="navigation_intent_invalid">Nepareizs formāts: %s</string>
 <string name="interrupt_music_descr">Paziņojumu laikā pārtraukt mūzikas atskaņošanu</string>
 	<string name="share_route_as_gpx">Koplietot maršrutu kā GPX failu</string>
-	<string name="osmo_io_error">Problēma ar OSMo savienojumu: </string>
+	<string name="osmo_io_error">"OsMo savienojuma problēma: "</string>
     <string name="osmo_mode_on">Apturēt OSMo sesiju</string>    
     <string name="osmo_mode_off">Sākt OSMo sesiju</string>
     
@@ -1671,7 +1668,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_server_operation_failed">OsMO servera darbības kļūda</string>
     <string name="osmo_activity">Osm Monitorings</string>
     <string name="osmo_enable_tracker">Sūtīt manas atrašanās vietas</string>
-    <string name="osmo_control">OsMo ātrā pieejamība</string>
+    <string name="osmo_control">OsMo ātrā piekļuve</string>
     <string name="hours_ago">stundas atpakaļ</string>
     <string name="minutes_ago">minūtes atpakaļ</string>
     <string name="osmo_connected_devices">Savienotās ierīces</string>
@@ -1770,4 +1767,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="save_as_favorites_points">Saglabāt kā izlases grupu</string>
     <string name="select_destination_and_intermediate_points">Atlasīt ceļapunktus</string>
     <string name="layer_amenity_label">Punktu nosaukumi</string>
+    <string name="arrival_distance_factor_normally">Normāli</string>
+    <string name="arrival_distance_factor_late">Vēlāk</string>
+    <string name="arrival_distance_factor_at_last">Pēdējos metros</string>
+    <string name="arrival_distance_factor_early">Agrāk</string>
+    <string name="show_zoom_buttons_navigation">Rādīt tālummaiņas pogas</string>
+    <string name="show_zoom_buttons_navigation_descr">Rādīt navigācijas laikā uz kartes</string>
     </resources>

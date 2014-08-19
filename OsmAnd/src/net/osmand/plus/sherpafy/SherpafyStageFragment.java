@@ -1,42 +1,31 @@
 package net.osmand.plus.sherpafy;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 
-import net.osmand.access.AccessibleAlertBuilder;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.sherpafy.TourInformation.StageFavoriteGroup;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.Html;
-import android.text.Html.ImageGetter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 public class SherpafyStageFragment extends SherlockFragment {
 	public static final String STAGE_PARAM = "STAGE";
@@ -52,8 +41,7 @@ public class SherpafyStageFragment extends SherlockFragment {
 
 	public SherpafyStageFragment() {
 	}
-	
-	
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -72,8 +60,8 @@ public class SherpafyStageFragment extends SherlockFragment {
 		int k = getArguments().getInt(STAGE_PARAM);
 		if(tour != null && tour.getStageInformation().size() > k) {
 			stage = tour.getStageInformation().get(k);
-			getSherlockActivity().getSupportActionBar().setTitle(getString(R.string.tab_stage) + " " + (k+1));
 		}
+		getSherlockActivity().getSupportActionBar().setTitle(getString(R.string.tab_stage) + " " + (k+1));
 	}
 	
 
@@ -85,19 +73,28 @@ public class SherpafyStageFragment extends SherlockFragment {
 		// MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		if (tour != null) {
 			boolean current = customization.getSelectedStage() == stage;
-			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, START, 
-					current ? R.string.continue_stage : R.string.start_stage ,
-					0, 0,
-					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			int text = current ? R.string.continue_stage
+					: R.string.start_stage;
+			if(customization.isStageVisited(stage.getOrder())) {
+				text = R.string.stage_is_completed;
+			}
+			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, START, text, 0, 0, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT,
+					new OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							return onOptionsItemSelected(item);
+						}
+					});
 		}
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
 			((TourViewActivity) getSherlockActivity()).selectMenu(tour);
 			return true;
 		} else if(item.getItemId() == START) {
+			((TourViewActivity) getSherlockActivity()).startStage(stage);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -111,101 +108,55 @@ public class SherpafyStageFragment extends SherlockFragment {
 		tabHost.setup();
 
 		ViewPager mViewPager = (ViewPager) view.findViewById(R.id.pager);
-		mTabsAdapter = new TabsAdapter(getSherlockActivity(), tabHost, mViewPager);
-		mTabsAdapter.addTab(tabHost.newTabSpec("INFO").setIndicator(getString(R.string.sherpafy_stage_tab_info)),
-				SherpafyStageInfoFragment.class, null);
-		mTabsAdapter.addTab(tabHost.newTabSpec("ROUTE").setIndicator(getString(R.string.sherpafy_stage_tab_route)),
-				SherpafyStageItineraryFragment.class, null);
-		mTabsAdapter.addTab(tabHost.newTabSpec("FAV").setIndicator(getString(R.string.sherpafy_stage_tab_fav)),
-				SherpafyStageInfoFragment.class, null);
-		mTabsAdapter.addTab(tabHost.newTabSpec("TARGET").setIndicator(getString(R.string.sherpafy_stage_tab_target)),
-				SherpafyStageItineraryFragment.class, null);
+		
+		mTabsAdapter = new TabsAdapter(getChildFragmentManager(), getSherlockActivity(), tabHost, mViewPager, stage);
+		if (stage != null) {
+			mTabsAdapter.addTab(tabHost.newTabSpec("INFO").setIndicator(getString(R.string.sherpafy_stage_tab_info)),
+					SherpafyStageInfoFragment.class);
+			if (!stage.getItinerary().equals("")) {
+				mTabsAdapter.addTab(
+						tabHost.newTabSpec("ROUTE").setIndicator(getString(R.string.sherpafy_stage_tab_route)),
+						SherpafyStageItineraryFragment.class);
+			}
+			if (stage.getFavorites().size() > 0) {
+				mTabsAdapter.addTab(tabHost.newTabSpec("FAV").setIndicator(getString(R.string.sherpafy_stage_tab_fav)),
+						SherpafyFavoritesListFragment.class);
+			}
+			StageFavoriteGroup group = stage.getGroupById("destination");
+			if (group != null && group.getFavorites().size() > 0) {
+				int o = group.getFavorites().get(0).getOrder();
+				Bundle bl = new Bundle();
+				bl.putInt(SherpafyFavoriteFragment.FAV_PARAM, o);
+				mTabsAdapter.addTab(
+						tabHost.newTabSpec("TARGET").setIndicator(getString(R.string.sherpafy_stage_tab_target)),
+						SherpafyFavoriteFragment.class, bl);
+			}
+		}
 		return view;
 	}
 	
-/////////
-	private ImageGetter getImageGetter(final View v) {
-		return new Html.ImageGetter() {
-			@Override
-			public Drawable getDrawable(String s) {
-				Bitmap file = customization.getSelectedTour().getImageBitmapFromPath(s);
-				v.setTag(file);
-				Drawable bmp = new BitmapDrawable(getResources(), file);
-				// if image is thicker than screen - it may cause some problems, so we need to scale it
-				int imagewidth = bmp.getIntrinsicWidth();
-				// TODO
-//				if (displaySize.x - 1 > imagewidth) {
-//					bmp.setBounds(0, 0, bmp.getIntrinsicWidth(), bmp.getIntrinsicHeight());
-//				} else {
-//					double scale = (double) (displaySize.x - 1) / imagewidth;
-//					bmp.setBounds(0, 0, (int) (scale * bmp.getIntrinsicWidth()),
-//							(int) (scale * bmp.getIntrinsicHeight()));
-//				}
-				return bmp;
-			}
+	@Override
+	public void onDetach() {
+	    super.onDetach();
 
-		};
-	}
-	
+	    try {
+	        Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+	        childFragmentManager.setAccessible(true);
+	        childFragmentManager.set(this, null);
 
-
-	private void addOnClickListener(final TextView tv) {
-		tv.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				if (v.getTag() instanceof Bitmap) {
-					final AccessibleAlertBuilder dlg = new AccessibleAlertBuilder(getActivity());
-					dlg.setPositiveButton(R.string.default_buttons_ok, null);
-					ScrollView sv = new ScrollView(getActivity());
-					ImageView img = new ImageView(getActivity());
-					img.setImageBitmap((Bitmap) tv.getTag());
-					sv.addView(img);
-					dlg.setView(sv);
-					dlg.show();
-				}
-			}
-		});
+	    } catch (NoSuchFieldException e) {
+	    	e.printStackTrace();
+	    } catch (IllegalAccessException e) {
+	    	e.printStackTrace();
+	    }
 	}
 
-	private void prepareBitmap(Bitmap imageBitmap) {
-		ImageView img = null;
-		if (imageBitmap != null) {
-			img.setImageBitmap(imageBitmap);
-			img.setAdjustViewBounds(true);
-			img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-			img.setCropToPadding(true);
-			img.setVisibility(View.VISIBLE);
-		} else {
-			img.setVisibility(View.GONE);
-		}
+	public void onBackPressed() {
+		((TourViewActivity) getSherlockActivity()).selectMenu(tour);
 	}
 
-	private void goToMap() {
-		if (customization.getSelectedStage() != null) {
-			GPXFile gpx = customization.getSelectedStage().getGpx();
-			List<SelectedGpxFile> sgpx = getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
-			if (gpx == null && sgpx.size() > 0) {
-				getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
-			} else if (sgpx.size() != 1 || sgpx.get(0).getGpxFile() != gpx) {
-				getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
-				if (gpx != null && gpx.findPointToShow() != null) {
-					WptPt p = gpx.findPointToShow();
-					getMyApplication().getSettings().setMapLocationToShow(p.lat, p.lon, 16, null);
-					getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(gpx);
-				}
-			}
-		}
-		Intent newIntent = new Intent(getActivity(), customization.getMapActivity());
-		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		this.startActivityForResult(newIntent, 0);
-	}
-	
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
-	}
-	
-	   /**
+
+	/**
      * This is a helper class that implements the management of tabs and all
      * details of connecting a ViewPager with associated TabHost.  It relies on a
      * trick.  Normally a tab host has a simple API for supplying a View or
@@ -222,6 +173,7 @@ public class SherpafyStageFragment extends SherlockFragment {
         private final TabHost mTabHost;
         private final ViewPager mViewPager;
         private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
+		private StageInformation stage;
 
         static final class TabInfo {
             private final String tag;
@@ -251,19 +203,27 @@ public class SherpafyStageFragment extends SherlockFragment {
             }
         }
 
-        public TabsAdapter(FragmentActivity activity, TabHost tabHost,ViewPager pager) {
-            super(activity.getSupportFragmentManager());
-            mContext = activity;
+        public TabsAdapter(FragmentManager fm, Context ui,  TabHost tabHost, ViewPager pager,
+        		StageInformation stage) {
+            super(fm);
+            mContext = ui;
             mTabHost = tabHost;
             mViewPager = pager;
+			this.stage = stage;
             mTabHost.setOnTabChangedListener(this);
             mViewPager.setAdapter(this);
             mViewPager.setOnPageChangeListener(this);
         }
 
+        public TabSpec addTab(TabHost.TabSpec tabSpec, Class<?> clss) {
+        	return addTab(tabSpec, clss, new Bundle());
+        }
+        
         public TabSpec addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args) {
             tabSpec.setContent(new DummyTabFactory(mContext));
             String tag = tabSpec.getTag();
+            args.putInt(STAGE_PARAM, stage.getOrder());
+            args.putString(TOUR_PARAM, stage.getTour().getId());
 
             TabInfo info = new TabInfo(tag, clss, args);
             mTabs.add(info);
@@ -293,6 +253,7 @@ public class SherpafyStageFragment extends SherlockFragment {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         }
+        
 
         @Override
         public void onPageSelected(int position) {

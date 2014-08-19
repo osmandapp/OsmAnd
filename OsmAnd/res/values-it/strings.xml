@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -1854,7 +1854,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="gpx_info_maximum_speed">Velocità massima: %1$s </string>
 	<string name="gpx_info_avg_altitude">Altitudine media: %1$s</string>
 	<string name="gpx_info_subtracks">Sottotracce: %1$s </string>
-	<string name="gpx_info_waypoints">Tappe del percorso: $1%s </string>
+	<string name="gpx_info_waypoints">"Tappe del percorso: %1$s "</string>
 	<string name="gpx_info_distance">Distanza: %1$s (%2$s punti) </string>
 	<string name="gpx_info_end_time">Orario di arrivo: %1$tF, %1$tT </string>
 	<string name="gpx_info_diff_altitude">Gamma altitudini: %1$s</string>
@@ -1938,4 +1938,30 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="lang_sr">Serbo</string>
 	<string name="lang_zh_CN">Cinese semplificato</string>
 	<string name="lang_zh_TW">Cinese tradizionale</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Modalità metro</string>
+ 	<string name="osmo_invite">Invita ...</string>
+    <string name="osmo_leave_confirmation_msg">Vuoi abbandonare il gruppo %1$s?</string>
+    <string name="osmo_specify_tracker_id">Per favore specifica l\'id</string>
+    <string name="continue_navigation">Prosegui la navigazione</string>
+    <string name="pause_navigation">Metti in pausa la navigazione</string>
+	<string name="rendering_attr_alpineHiking_name">Vista escursionismo alpino</string>
+    <string name="rendering_attr_alpineHiking_description">Disegna i sentieri in base alla scala SAC</string>
+    <string name="rendering_attr_osmcTraces_name">Strato simboli escursionistici</string>
+    <string name="rendering_attr_osmcTraces_description">Disegna i sentieri in base alle tracce OSMC</string>
+    
+	<string name="rendering_attr_coloredBuildings_name">Edifici colorati</string>
+    <string name="arrival_distance_factor_early">Presto</string>
+    <string name="arrival_distance_factor_normally">Normale</string>
+    <string name="arrival_distance_factor_late">Tardi</string>
+    <string name="arrival_distance_factor_at_last">Agli ultimi metri</string>
+    <string name="hide_all_waypoints">Cancellali tutti</string>
+<string name="av_camera_pic_size">Dimensione foto</string>
+	<string name="av_camera_pic_size_descr">Seleziona la dimensione delle foto scattate</string>
+    <string name="announce_nearby_favorites">Annuncia i preferiti nelle vicinanze</string>
+<string name="rendering_value_browse_map_name">Esplorazione mappa</string>  
+    <string name="rendering_value_car_name">Automobile</string>
+    <string name="rendering_value_bicycle_name">Bicicletta</string>
+    <string name="rendering_value_pedestrian_name">Pedone</string>
+    <string name="more">Altro...</string>
+    <string name="download_additional_maps">Download mappe mancanti %1$s (%2$d MB)?</string>
+    </resources>

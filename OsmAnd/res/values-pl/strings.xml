@@ -485,7 +485,7 @@
   <string name="downloading">Pobieranie…</string>
   <string name="downloading_list_indexes">Pobieranie listy dostępnych regionów…</string>
   <string name="list_index_files_was_not_loaded">Lista regionów nie została pobrana z osmand.net.</string>
-  <string name="select_index_file_to_download">Jeśli nie możesz znaleźć danych dla swojego regionu, możesz je przygotować sam (zobacz http://osmand.net).</string>
+  <string name="select_index_file_to_download">Nic nie znaleziono. Jeśli nie możesz znaleźć danych dla swojego regionu, możesz je przygotować sam (zobacz http://osmand.net).</string>
   <string name="show_poi_on_map">Pokaż na mapie</string>
   <string name="fav_points_edited">Ulubiony punkt został zmieniony</string>
   <string name="fav_points_not_exist">Brak ulubionych</string>
@@ -683,7 +683,8 @@
   <string name="offline_navigation_not_available">Nawigacja offline w OsmAnd jest tymczasowo niedostępna.</string>
   <string name="left_side_navigation">Ruch lewostronny</string>
   <string name="left_side_navigation_descr">Wybierz dla krajów z ruchem lewostronnym</string>
-  <string name="download_link_and_local_description">Kliknij tutaj, aby pobrać lub zaktualizować pliki map w trybu offline. \nKliknij istniejący element, aby zobaczyć więcej szczegółów. Naciśnij i przytrzymaj, aby go wyłączyć lub usunąć. Obecne dane na urządzeniu (%1$s dostępne):</string>
+  <string name="download_link_and_local_description">Kliknij tutaj, aby pobrać lub zaktualizować pliki map trybu offline.
+\nKliknij istniejący element, aby zobaczyć więcej szczegółów. Naciśnij i przytrzymaj, aby go wyłączyć lub usunąć. Obecne dane na urządzeniu (%1$s dostępne):</string>
   <string name="unknown_from_location">Punkt początkowy nie jest jeszcze wyznaczony</string>
   <string name="confirm_interrupt_download">Czy chcesz przerwać pobieranie pliku?</string>
   <string name="basemap_was_selected_to_download">Mapa bazowa jest wymagana do prawidłowego funkcjonowania aplikacji i została wybrana do pobrania.</string>
@@ -731,7 +732,7 @@
   
   <string name="show_ruler_level">Wyświetl linijkę</string>
   <string name="info_button">Informacja</string>
-  <string name="back_to_location">Powróć do lokacji</string>
+  <string name="back_to_location">Powróć do pozycji</string>
   <string name="help">Pomoc</string>
   <string name="show_details">Pokaż szczegóły</string>
   <string name="accessibility_extensions_descr">Rozszerzenia ułatwienia dostępu dla starych wersji Androida</string>
@@ -765,7 +766,7 @@
   <string name="front_right">Prawy przód</string>
   <string name="right">Prawy</string>
   <string name="back_right">Tylny przód</string>
-  <string name="back">Tył</string>
+  <string name="back">Wstecz</string>
   <string name="back_left">Lewy tył</string>
   <string name="left">Lewy</string>
   <string name="front_left">Lewy przód</string>
@@ -1254,7 +1255,7 @@
     <string name="accessibility_options">Opcje ułatwień dostępu</string>
     <string name="choose_osmand_theme_descr">Wybierz motyw aplikacji</string>
     <string name="osmand_monitoring_plugin_name">Usługi śledzenia</string>
-    <string name="monitoring_settings_descr">Skonfiguruj opcje zapisywania wycieczek oraz włącz tryb uśpienia</string>
+    <string name="monitoring_settings_descr">Skonfiguruj opcje zapisywania wycieczek</string>
     <string name="osmand_monitoring_plugin_description">Włącz śledzenie i nawigację w trybie uśpienia (zablokowany ekran) poprzez okresowe wybudzanie urządzenia GPS. Wyświetl ustawienia dotyczące nagrywania wycieczek do plików GPX lub usługi sieciowej.</string>
     <string name="monitoring_settings">Usługi śledzenia</string>
     <string name="tip_recent_changes_1_3_t">Zmiany w 1.3:
@@ -1703,7 +1704,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
     <string name="osmo_plugin_description">"OpenStreetMap zaawansowany monitoring na żywo - zobacz http://osmo.mobi. Daje możliwość śledzenia innych urządzeń i vice versa. Twórz anonimowe grupy, dziel się lokalizacją i prowadź komunikację. System ma wiele ustawień dla śledzenia w sesji lub stałego śledzenia. Grupy anonimowe mają ograniczenia czasowe i funkcjonalne, np. nie ma zdalnej kontroli i administratora grupy. W pełni funkcjonalne grupy powinny być tworzone przez witrynę, a dostęp zarezerwowany tylko dla zarejestrowanych użytkowników. "</string>
     <string name="osmo_plugin_name">OsMo (Zaawansowany Monitoring na Żywo)</string>
-    <string name="osmo_settings">OsMo Monitoring OpenStreetMap (beta)</string>
+    <string name="osmo_settings">Monitoring OpenStreetMap</string>
    	<string name="keep_informing_never">Nigdy</string>
     <string name="keep_informing_descr">Podawaj instrukcje nawigacji w regularnych odstępach czasu</string>
     <string name="keep_informing">Powtarzaj instrukcje nawigacji</string>
@@ -1846,32 +1847,32 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="none_selected_gpx">Nie wybrano żadnych plików GPX. W celu wyboru naciśnij i przytrzymaj dostępną ścieżkę.</string>
     <string name="local_index_unselect_gpx_file">Odznacz</string>
     <string name="local_index_select_gpx_file">Wybierz aby wyświetlić</string>
-    <string name="osmo_group_by_invite">Wpisz przez zaproszenie</string>
-    <string name="osmo_group_information_desc">" - Wszystkie grupy są publiczne! Jeśli chcesz być anonimowy, podłącz urządzeń bezpośrednio poprzez identyfikator Tracker ids.↵\n - Grupa może posiadać do 16 zarejestrowanych osób.↵\n - W przypadku bezczynności lub aktywności tylko 1 osoby przez okres 2 tygodnie, grupa zostanie usunięta.↵\n - Można ograniczyć dostęp grupy, i zapraszać tylko wybrane osoby. Do kontroli potrzebujesz konsoli administracyjnej.↵\n - Jeśli trzeba utworzyć grupę, ale z innymi warunkami, prosimy o kontakt http://osmo.mobi"</string>
-    <string name="osmo_group_information">Proszę przeczytać przed założeniem grupy!</string>
+    <string name="osmo_group_by_invite">Wejdź do grupy przez zaproszenie</string>
+    <string name="osmo_group_information_desc">" - Wszystkie utworzone grupy są publiczne! Jeśli chcesz być anonimowy, podłącz urządzenia bezpośrednio poprzez identyfikator Tracker id.↵\n - Grupa może posiadać do 16 zarejestrowanych osób.↵\n - W przypadku bezczynności lub aktywności tylko 1 osoby przez okres 2 tygodni, grupa zostanie usunięta.↵\n - Można ograniczyć dostęp do grupy przez zapraszanie tylko wybranych osób, ale do zarządzania grupą potrzebujesz użyć konsoli administracyjnej.↵\n - Jeśli trzeba utworzyć grupę, ale z innymi warunkami, prosimy o kontakt http://osmo.mobi"</string>
+    <string name="osmo_group_information">Przeczytaj przed założeniem grupy!</string>
     <string name="osmo_not_signed_in">Nie powiodło się logowanie do OsMo</string>
-    <string name="osmo_gpx_points_downloaded">OsMo pobrano %1$s punktów.</string>
+    <string name="osmo_gpx_points_downloaded">Pobrano %1$s punktów OsMo.</string>
     <string name="osmo_auto_connect_descr">Automatycznie połącz to serwisu po uruchomieniu aplikacji</string>
     <string name="osmo_auto_connect">Auto-podłączenie</string>
     <string name="osmo_start_service">Serwis OsMo</string>
     <string name="osmo_gpx_track_downloaded">Pobrano %1$s ścieżek OsMo.</string>
     <string name="no_index_file_to_download">Brak danych do pobrania, proszę sprawdź połączenie internetowe.</string>
     <string name="osmo_auth_error_short">Błąd autoryzacji</string>
-    <string name="osmo_auth_error">Wystąpił błąd autoryzacji : %1$s.\n Być może tymczasowy serwis jest zatrzymany lub straciła ważność twoja rejestracja.\n Chcesz kontynuować z nową rejestracją.</string>
+    <string name="osmo_auth_error">Wystąpił błąd autoryzacji OsMo: %1$s.\n To może być przerwa w działaniu usługi lub twoja rejestracja straciła ważność.\n Chcesz kontynuować z nową rejestracją?</string>
     <string name="keep_navigation_service">Utrzymuj</string>
 	<string name="stop_navigation_service">Stop</string>
 	<string name="enable_sleep_mode">Włącz tryb uśpienia</string>
-	<string name="gps_wake_up_timer">Interwał wybudzania GPS</string>
+	<string name="gps_wake_up_timer">Odstęp czasu wybudzania GPS</string>
 	<string name="sleep_mode_stop_dialog">Czy trzymać włączony GPS?</string>
-	<string name="map_preferred_locale_descr">Preferowany język dla etykiet na mapie (jeśli nie jest dostępny, a zostanie wybrany język angielski lub z lokalnymi nazwami)</string>
+	<string name="map_preferred_locale_descr">Preferowany język dla etykiet na mapie (jeśli niedostępny, zostanie wybrany język angielski lub lokalna nazwa)</string>
     <string name="map_preferred_locale">Preferowany język map</string>
     <string name="local_map_names">Nazwy lokalne</string>
     <string name="lang_sw">Suahili</string>
     <string name="lang_he">Hebrajski</string>
-    <string name="forward">Do przodu</string>
+    <string name="forward">Dalej</string>
     <string name="home">Dom</string>
     <string name="live_monitoring_m_descr">Wysyłaj aktualną pozycję do określonej usługi internetowej, jeśli nagrywanie GPX jest włączone.</string>
-	<string name="live_monitoring_m">Śledzenia online (wymagane GPX)</string>
+	<string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>
     <string name="live_monitoring_start">Uruchom śledzenie online</string>
 	<string name="live_monitoring_stop">Zatrzymaj śledzenie online</string>
 	<string name="gpx_monitoring_start">Uruchom nagrywanie GPX</string>
@@ -1881,7 +1882,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_attr_hideNonVehicleHighways_name">Ukryj trasy niedostępne dla aut</string>
     <string name="rendering_attr_hideText_name">Ukryj opisy</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ukryj drewna i zarośla</string>
-    <string name="rendering_attr_buildings15zoom_name">Budynki na przypliżeniu 15</string>
+    <string name="rendering_attr_buildings15zoom_name">Budynki na przybliżeniu 15</string>
     <string name="rendering_attr_moreDetailed_name">Więcej szczegółów</string>
     <string name="rendering_attr_lessDetailed_name">Mniej szczegółów</string>
     <string name="rendering_attr_hideAccess_name">Ukryj typ dostępu</string>
@@ -1896,4 +1897,30 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="lang_sr">Serbski</string>
 	<string name="lang_zh_CN">Chiński uproszczony</string>
 	<string name="lang_zh_TW">Chiński tradycyjny</string>
-	</resources>
+	<string name="rendering_attr_subwayMode_name">Tryb metra</string>
+ 	<string name="download_additional_maps">Pobrać brakujące mapy %1$s (%2$d MB)?</string>
+    <string name="more">Więcej...</string>
+    <string name="rendering_value_browse_map_name">Przeglądaj mapę</string>  
+    <string name="rendering_value_car_name">Samochód</string>
+    <string name="rendering_value_bicycle_name">Rower</string>
+    <string name="rendering_value_pedestrian_name">Pieszy</string>
+    <string name="rendering_attr_coloredBuildings_name">Kolorowane budynki</string>
+    <string name="osmo_invite">Zaproś...</string>
+    <string name="osmo_leave_confirmation_msg">Czy chcesz opuścić grupę %1$s?</string>
+    <string name="osmo_specify_tracker_id">Określ id</string>
+    <string name="continue_navigation">Kontynuuj nawigację</string>
+    <string name="pause_navigation">Wstrzymaj nawigację</string>
+    <string name="rendering_attr_alpineHiking_name">Widok wspinaczki alpinistycznej</string>
+    <string name="rendering_attr_alpineHiking_description">Renderuj ścieżki według skali SAC</string>
+    <string name="rendering_attr_osmcTraces_name">Nakładka symbolu wędrówki</string>
+    <string name="rendering_attr_osmcTraces_description">Renderuj ścieżki według śladów OSMC</string>
+    
+	<string name="arrival_distance_factor_early">Wcześnie</string>
+    <string name="arrival_distance_factor_normally">Normalnie</string>
+    <string name="arrival_distance_factor_late">Późno</string>
+    <string name="arrival_distance_factor_at_last">Tuż przed przybyciem</string>
+    <string name="av_camera_pic_size">Rozmiar obrazu aparatu</string>
+	<string name="av_camera_pic_size_descr">Wybierz rozmiar obrazu wewnętrznego aparatu</string>
+    <string name="hide_all_waypoints">Usuń wszystkie</string>
+    <string name="announce_nearby_favorites">Ogłaszaj pobliskie ulubione</string>
+</resources>

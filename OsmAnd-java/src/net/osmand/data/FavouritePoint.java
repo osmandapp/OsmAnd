@@ -2,7 +2,7 @@ package net.osmand.data;
 
 import java.io.Serializable;
 
-public class FavouritePoint implements Serializable {
+public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
 	private String name;
 	private String category = "";

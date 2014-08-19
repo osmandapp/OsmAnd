@@ -111,7 +111,7 @@ public class MapNavigateControl extends MapControls {
 				startNavigation();
 			}
 		});
-		if(!mapActivity.getRoutingHelper().isFollowingMode()) {
+		if(!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isPauseNavigation()) {
 			startCounter();
 		}
 	}
@@ -193,7 +193,8 @@ public class MapNavigateControl extends MapControls {
 
 
 	private void drawCount(Canvas canvas, RotatedTileBox tb) {
-		if (navigateShadow.getBounds().width() == 0 && navigateButton.getWidth() > 0) {
+		if ((navigateShadow.getBounds().width() == 0 && navigateButton.getWidth() > 0 )||
+				navigateShadow.getBounds().bottom != navigateButton.getBottom()) {
 			navigateShadow.setBounds(navigateButton.getLeft() - 2, navigateButton.getTop()
 					- (int) (18 * scaleCoefficient), navigateButton.getRight(), navigateButton.getBottom());
 		}

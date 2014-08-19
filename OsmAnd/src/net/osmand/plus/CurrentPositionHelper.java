@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
@@ -36,7 +37,8 @@ public class CurrentPositionHelper {
 		} else {
 			return;
 		}
-		RoutingConfiguration cfg = app.getDefaultRoutingConfig().build(p.name().toLowerCase(), 10);
+		RoutingConfiguration cfg = app.getDefaultRoutingConfig().build(p.name().toLowerCase(), 10, 
+				new HashMap<String, String>());
 		ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, app.getResourceManager().getRoutingMapFiles());
 	}
 	

@@ -10,21 +10,15 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.data.LocationPoint;
+import net.osmand.plus.*;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.sherpafy.SherpafyCustomization;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
@@ -49,8 +43,8 @@ public class RoutingHelper {
 	private OsmandApplication app;
 	
 	private boolean isFollowingMode = false;
-	
 	private boolean isRoutePlanningMode = false;
+	private boolean isPauseNavigation = false;
 	
 	private GPXRouteParamsBuilder currentGPXRoute = null;
 
@@ -76,6 +70,8 @@ public class RoutingHelper {
 	//private long wrongMovementDetected = 0;
 
 	private RouteCalculationProgressCallback progressRoute;
+	private SearchOnTheRouteHelper searchOnTheRouteHelper;
+
 
 //	private ProgressBar progress;
 //	private Handler progressHandler;
@@ -87,15 +83,29 @@ public class RoutingHelper {
 	public RoutingHelper(OsmandApplication context, CommandPlayer player){
 		this.app = context;
 		settings = context.getSettings();
+		searchOnTheRouteHelper = new SearchOnTheRouteHelper(context);
 		voiceRouter = new VoiceRouter(this, settings, player);
+	}
+	
+	public SearchOnTheRouteHelper getSearchOnTheRouteHelper() {
+		return searchOnTheRouteHelper;
 	}
 
 	public boolean isFollowingMode() {
 		return isFollowingMode;
 	}
 	
+	public void setPauseNaviation(boolean b) {
+		this.isPauseNavigation = b;
+	}
+	
+	public boolean isPauseNavigation() {
+		return isPauseNavigation;
+	}
+	
 	public void setFollowingMode(boolean follow) {
 		isFollowingMode = follow;
+		isPauseNavigation = false;
 		if (!follow) {
 			if (app.getNavigationService() != null) {
 				app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_NAVIGATION);
@@ -268,7 +278,6 @@ public class RoutingHelper {
 				// 5. Update Voice router
 				if (isFollowingMode) {
 					// don't update in route planing mode
-					announceGpxWaypoints(currentLocation);
 					boolean inRecalc = calculateRoute || isRouteBeingCalculated();
 					if (!inRecalc && !wrongMovementDirection) {
 						voiceRouter.updateStatus(currentLocation, false);
@@ -312,24 +321,6 @@ public class RoutingHelper {
 			return locationProjection;
 		} else {
 			return currentLocation;
-		}
-	}
-
-
-	private void announceGpxWaypoints(Location currentLocation) {
-		if (currentLocation != null) {
-			List<WptPt> wpt = route.getWaypointsToAnnounce(currentLocation);
-			if (wpt.size() > 0) {
-				String s = "";
-				for (WptPt w : wpt) {
-					if(!Algorithms.isEmpty(w.name)) {
-						s = w.name +",";
-					}
-				}
-				if(!Algorithms.isEmpty(s)) {
-					voiceRouter.announceWaypoint(s);
-				}
-			}
 		}
 	}
 
@@ -534,6 +525,7 @@ public class RoutingHelper {
 	}
 
 	private synchronized void setNewRoute(RouteCalculationResult res, Location start){
+		app.getWaypointHelper().setNewRoute(res);
 		final boolean newRoute = !this.route.isCalculated();
 		route = res;
 		if (isFollowingMode) {
@@ -565,6 +557,8 @@ public class RoutingHelper {
 				voiceRouter.newRouteIsCalculated(newRoute);
 			}
 		} 
+		
+		searchOnTheRouteHelper.searchOnTheRoute(route);
 
 		app.runInUIThread(new Runnable() {
 			@Override
@@ -935,5 +929,6 @@ public class RoutingHelper {
 			voiceRouter.newRouteIsCalculated(true)	;
 		}
 	}
+
 
 }

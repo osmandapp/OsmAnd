@@ -1,74 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/sherpafy_tour_row" >
+			 android:layout_width="fill_parent"
+			 android:layout_height="wrap_content"
+			 android:background="@drawable/sherpafy_tour_row">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginTop="15dp"
-        android:id="@+id/AreaPreview"
-        android:background="@color/color_white"
-        android:orientation="vertical" >
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="15dp"
+			android:layout_marginLeft="14dp"
+			android:layout_marginRight="14dp"
+			android:layout_marginTop="15dp"
+			android:id="@+id/AreaPreview"
+			android:background="@drawable/tour_bg"
+			android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/shadow_color" >
+		<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+			
+			<ImageView
+					android:layout_marginLeft="1dp"
+					android:layout_marginRight="1dp"
+					android:layout_marginTop="1dp"
+					android:id="@+id/TourImage"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:scaleType="centerCrop">
+			</ImageView>
 
-            <ImageView
-                android:id="@+id/TourImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop" >
-            </ImageView>
+			<TextView
+					android:id="@+id/TourName"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom"
+					android:layout_marginLeft="10dp"
+					android:layout_marginRight="6dp"
+					android:background="@color/shadow_color"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textColor="@color/color_white"
+					android:textSize="23sp"/>
+		</FrameLayout>
 
-            <TextView
-                android:id="@+id/TourName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginLeft="10dp"
-                android:background="@color/shadow_color"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textColor="@color/color_white"
-                android:textSize="23sp" />
-        </FrameLayout>
+		<TextView
+				android:id="@+id/TourDescription"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="5dp"
+				android:layout_marginTop="5dp"
+				android:layout_weight="1"
+				android:ellipsize="end"
+				android:maxLines="3"
+				android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/TourDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:textSize="16sp" />
+		<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="14dp"
+				android:layout_marginRight="14dp"
+				android:layout_marginTop="5dp"
+				android:layout_marginBottom="3dp"
+				android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="3dp"
-            android:orientation="vertical" >
+			<TextView
+					android:id="@+id/MoreInformation"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:textSize="14sp"
+					android:focusable="false"
+					/>
+		</LinearLayout>
 
-            <TextView
-                android:id="@+id/MoreInformation"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:focusable="false"
-                />
-        </LinearLayout>
-    </LinearLayout>
+
+	</LinearLayout>
 
 </FrameLayout>
