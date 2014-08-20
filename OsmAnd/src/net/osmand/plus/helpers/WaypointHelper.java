@@ -41,6 +41,7 @@ import android.graphics.drawable.Drawable;
 public class WaypointHelper {
 	private static final int NOT_ANNOUNCED = 0;
 	private static final int ANNOUNCED_ONCE = 1;
+	private static final int ANNOUNCED_DONE = 2;
 
 	private int searchDeviationRadius = 500;
 	private static final int LONG_ANNOUNCE_RADIUS = 500;
@@ -49,10 +50,11 @@ public class WaypointHelper {
 	OsmandApplication app;
 	// every time we modify this collection, we change the reference (copy on write list)
 	public static final int TARGETS = 0;
-	public static final int ALARMS = 1;
-	public static final int WAYPOINTS = 2;
-	public static final int POI = 3;
-	public static final int FAVORITES = 4;
+	public static final int WAYPOINTS = 1;
+	public static final int POI = 2;
+	public static final int FAVORITES = 3;
+	public static final int ALARMS = 4;
+	public static final int MAX = 4;
 	
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<List<LocationPointWrapper>>();
 	private ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<LocationPoint, Integer>();
@@ -69,6 +71,9 @@ public class WaypointHelper {
 	
 
 	public List<LocationPointWrapper> getWaypoints(int type) {
+		if(type == TARGETS) {
+			return getTargets(new ArrayList<WaypointHelper.LocationPointWrapper>());
+		}
 		if(type >= locationPoints.size()) {
 			return Collections.emptyList();
 		}
@@ -260,11 +265,10 @@ public class WaypointHelper {
 						double d1 = MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
 								point.getLatitude(), point.getLongitude());
 						Integer state = locationPointsStates.get(point);
-						System.out.println("!!! " + d1 + " " + point.getName(app));
 						if (state != null && state.intValue() == ANNOUNCED_ONCE
 								&& getVoiceRouter()
 										.isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS)) {
-							locationPointsStates.remove(point);
+							locationPointsStates.put(point, ANNOUNCED_DONE);
 							announcePoints.add(point);
 						} else if ((state == null || state == NOT_ANNOUNCED)
 								&& getVoiceRouter()
@@ -326,6 +330,13 @@ public class WaypointHelper {
 				points.addAll(loc.subList(ps.get(i), loc.size()));
 			}
 		}
+		getTargets(points);
+		sortList(points);
+		return points;
+	}
+
+
+	protected List<LocationPointWrapper> getTargets(List<LocationPointWrapper> points) {
 		List<TargetPoint> wts = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
 		for (int k = 0; k < wts.size(); k++) {
 			final int index = wts.size() - k - 1;
@@ -338,7 +349,6 @@ public class WaypointHelper {
 			}
 			points.add(new LocationPointWrapper(route, TARGETS, tp, 0, routeIndex));
 		}
-		sortList(points);
 		return points;
 	}
 
