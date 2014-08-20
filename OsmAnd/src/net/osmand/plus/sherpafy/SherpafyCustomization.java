@@ -273,6 +273,14 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		selectNextAvailableStage(si.tour);
 	}
 
+	public void markStageAsNotCompleted(StageInformation si) {
+		Integer gi = visitedStagesPref.get();
+		gi = gi - (1 << si.getOrder());
+		visitedStagesPref.set(gi);
+		saveCurrentGPXTrack();
+		selectNextAvailableStage(si.tour);
+	}
+
 	protected void saveCurrentGPXTrack() {
 		if (!Algorithms.isEmpty(saveGPXFolder.get())) {
 			app.getSavingTrackHelper().saveDataToGpx(new File(saveGPXFolder.get()));
@@ -288,40 +296,65 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	@Override
 	public boolean onDestinationReached(MapActivity mapActivity) {
-		showCompleteStageFragment(mapActivity, selectedStage);
+		showCompleteStageFragment(mapActivity, selectedStage, false);
 		selectNextAvailableStage(selectedTour);
 		return false;
 	}
 
-	public static class CompleteStageFragment extends DialogFragment {
+	public class CompleteStageFragment extends DialogFragment {
+
+		private StageInformation stageInformation;
+		private boolean showRestart;
+
+		public CompleteStageFragment(StageInformation stageInformation, boolean showRestart) {
+			this.stageInformation = stageInformation;
+			this.showRestart = showRestart;
+		}
 
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			Bundle args = getArguments();
 			SelectedGPXFragment sgf = new SelectedGPXFragment();
-			sgf.setArguments(args);
 			sgf.onAttach(getActivity());
-			AlertDialog dlg = new AlertDialog.Builder(getActivity())
-            		.setView(sgf.onCreateView(getActivity().getLayoutInflater(), null, savedInstanceState))
-					.setMessage("Stage is completed TODO")
-					.setPositiveButton(R.string.default_buttons_ok,
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int whichButton) {
+			AlertDialog dlg;
+			if (showRestart){
+				dlg = new AlertDialog.Builder(getActivity())
+						.setView(sgf.onCreateView(getActivity().getLayoutInflater(), null, null))
+						.setMessage("Stage is completed TODO")
+						.setPositiveButton(R.string.default_buttons_ok,
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int whichButton) {
+									}
 								}
+						)
+						.setNegativeButton("Restart stage", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
+								markStageAsNotCompleted(stageInformation);
 							}
-					)
-					.create();
+						}).create();
+			} else {
+				dlg = new AlertDialog.Builder(getActivity())
+						.setView(sgf.onCreateView(getActivity().getLayoutInflater(), null, null))
+						.setMessage("Stage is completed TODO")
+						.setPositiveButton(R.string.default_buttons_ok,
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int whichButton) {
+									}
+								}
+						)
+						.create();
+			}
 			return dlg;
 		}
 	}
 
-	protected void showCompleteStageFragment(MapActivity mapActivity, StageInformation stage) {
+	protected void showCompleteStageFragment(FragmentActivity mapActivity, StageInformation stage, boolean showRestart) {
 		File file = getStageGpxRec(stage);
 		GPXUtilities.GPXFile gpx = GPXUtilities.loadGPXFile(app, file);
 		if (gpx == null) {
 			return;
 		}
-		CompleteStageFragment csf = new CompleteStageFragment();
+		CompleteStageFragment csf = new CompleteStageFragment(stage, showRestart);
 		app.getSelectedGpxHelper().clearAllGpxFileToShow();
 		app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
 		csf.show(mapActivity.getSupportFragmentManager().beginTransaction(), "DialogFragment");
@@ -456,7 +489,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					markStageAsCompleted(stage);
-					showCompleteStageFragment(mapActivity, stage);
+					showCompleteStageFragment(mapActivity, stage, false);
 				}
 			}).reg();
 		}

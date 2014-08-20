@@ -403,7 +403,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	public void startStage(final StageInformation stage) {
 		if(customization.isStageVisited(stage.getOrder()) /*&& stage.getTour() == customization.getSelectedTour()*/) {
-			customization.showCompleteStageFragment(getMyApplication().getMapActivity(), stage);
+			customization.showCompleteStageFragment(this, stage, true);
 		} else if (stage != customization.getSelectedStage() && customization.getSelectedStage() != null) {
 			Builder bld = new AlertDialog.Builder(this);
 			bld.setMessage(R.string.start_new_stage);
