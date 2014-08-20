@@ -191,6 +191,51 @@ public class WaypointHelper {
 		return mostImportant;
 	}
 	
+	public void enableWaypointType(int type, boolean enable) {
+		if(type == ALARMS) {
+			app.getSettings().SPEAK_TRAFFIC_WARNINGS.set(enable);
+		} else if(type == POI) {
+			app.getSettings().SHOW_NEARBY_POI.set(enable);
+		} else if(type == FAVORITES) {
+			app.getSettings().SHOW_NEARBY_FAVORIES.set(enable);
+		} else if(type == WAYPOINTS) {
+			app.getSettings().SHOW_WPT.set(enable);
+		}
+		recalculatePoints(route, type, locationPoints);
+	}
+	
+	
+
+
+	public boolean isTypeConfigurable(int waypointType) {
+		return waypointType != TARGETS;
+	}
+	
+	public boolean isTypeVisible(int waypointType) {
+		boolean vis = app.getAppCustomization().isWaypointGroupVisible(waypointType);
+		if(!vis) {
+			return false;
+		}
+		if(waypointType == ALARMS) {
+			return route != null && !route.getAlarmInfo().isEmpty();
+		} else if(waypointType == WAYPOINTS) {
+			return route != null && !route.getLocationPoints().isEmpty();
+		}
+		return vis;
+	}
+
+	public boolean isTypeEnabled(int type) {
+		if(type == ALARMS) {
+			return showAlarms();
+		} else if(type == POI) {
+			return showPOI();
+		} else if(type == FAVORITES) {
+			return showFavorites();
+		} else if(type == WAYPOINTS) {
+			return showGPXWaypoints();
+		}
+		return true;
+	}
 	
 	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, 
 			MetricsConstants mc, boolean showCameras) {
@@ -359,27 +404,45 @@ public class WaypointHelper {
 
 	
 	public void setNewRoute(RouteCalculationResult route) {
-		ArrayList<List<LocationPointWrapper>> locationPoints = new ArrayList<List<LocationPointWrapper>>();
-		if (route != null && !route.isEmpty()) {
-			if (showFavorites()) {
-				findLocationPoints(route, FAVORITES, getArray(locationPoints, FAVORITES), app.getFavorites()
-						.getFavouritePoints(), announceFavorites());
-			}
-			calculateAlarms(route, getArray(locationPoints, ALARMS));
-			if (showGPXWaypoints()) {
-				findLocationPoints(route, WAYPOINTS, getArray(locationPoints, WAYPOINTS), app.getAppCustomization()
-						.getWaypoints(), announceGPXWaypoints());
-				findLocationPoints(route, WAYPOINTS, getArray(locationPoints, WAYPOINTS), route.getLocationPoints(),
-						announceGPXWaypoints());
-			}
-			if(showPOI()) {
-				calculatePoi(route, locationPoints);
-			}
-		}
-		for (List<LocationPointWrapper> list : locationPoints) {
-			sortList(list);
-		}
+		List<List<LocationPointWrapper>> locationPoints = new ArrayList<List<LocationPointWrapper>>();
+		recalculatePoints(route, -1, locationPoints);
 		setLocationPoints(locationPoints, route);
+	}
+
+
+	protected void recalculatePoints(RouteCalculationResult route, int type, List<List<LocationPointWrapper>> locationPoints) {
+		boolean all = type == -1;
+		if (route != null && !route.isEmpty()) {
+			if ((type == FAVORITES || all)) {
+				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);
+				if (showFavorites()) {
+					findLocationPoints(route, FAVORITES, array, app.getFavorites().getFavouritePoints(),
+							announceFavorites());
+					sortList(array);
+				}
+			}
+			if((type == ALARMS || all)) {
+				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, ALARMS);
+				calculateAlarms(route, array);
+				sortList(array);
+			}
+			if ((type == WAYPOINTS || all)) {
+				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, WAYPOINTS);
+				if (showGPXWaypoints()) {
+					findLocationPoints(route, WAYPOINTS, array, app.getAppCustomization().getWaypoints(),
+							announceGPXWaypoints());
+					findLocationPoints(route, WAYPOINTS, array, route.getLocationPoints(), announceGPXWaypoints());
+					sortList(array);
+				}
+			}
+			if((type == POI || all)) {
+				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, POI);
+				if(showPOI()) {
+					calculatePoi(route, array);
+					sortList(array);
+				}
+			}
+		}
 	}
 	
 	private float dist(LocationPoint l, List<Location> locations, int[] ind) {
@@ -400,7 +463,7 @@ public class WaypointHelper {
 		return dist;
 	}
 
-	protected synchronized void setLocationPoints(ArrayList<List<LocationPointWrapper>> locationPoints, RouteCalculationResult route) {
+	protected synchronized void setLocationPoints(List<List<LocationPointWrapper>> locationPoints, RouteCalculationResult route) {
 		this.locationPoints = locationPoints;
 		this.locationPointsStates.clear();
 		TIntArrayList list = new TIntArrayList(locationPoints.size());
@@ -425,7 +488,7 @@ public class WaypointHelper {
 	}
 
 
-	protected void calculatePoi(RouteCalculationResult route, ArrayList<List<LocationPointWrapper>> locationPoints) {
+	protected void calculatePoi(RouteCalculationResult route, List<LocationPointWrapper> locationPoints) {
 		PoiFilter pf = getPoiFilter();
 		if (pf != null) {
 			final List<Location> locs = route.getImmutableAllLocations();
@@ -442,7 +505,6 @@ public class WaypointHelper {
 							return false;
 						}
 					});
-			List<LocationPointWrapper> array = getArray(locationPoints, POI);
 			for (Amenity a : amenities) {
 				AmenityRoutePoint rp = a.getRoutePoint();
 				int i = locs.indexOf(rp.pointA);
@@ -450,7 +512,7 @@ public class WaypointHelper {
 					LocationPointWrapper lwp = new LocationPointWrapper(route, POI, new AmenityLocationPoint(a),
 							(float) rp.deviateDistance, i);
 					lwp.setAnnounce(announcePOI());
-					array.add(lwp);
+					locationPoints.add(lwp);
 				}
 			}
 		}
@@ -479,11 +541,12 @@ public class WaypointHelper {
 	}
 
 
-	private List<LocationPointWrapper> getArray(ArrayList<List<LocationPointWrapper>> array,
+	private List<LocationPointWrapper> clearAndGetArray(List<List<LocationPointWrapper>> array,
 			int ind) {
 		while(array.size() <= ind) {
 			array.add(new ArrayList<WaypointHelper.LocationPointWrapper>());
 		}
+		array.get(ind).clear();
 		return array.get(ind);
 	}
 
@@ -516,11 +579,11 @@ public class WaypointHelper {
 	}
 
 	public boolean showGPXWaypoints() {
-		return app.getSettings().GPX_SPEAK_WPT.get();
+		return app.getSettings().SHOW_WPT.get();
 	}
 	
 	public boolean announceGPXWaypoints() {
-		return app.getSettings().GPX_SPEAK_WPT.get();
+		return app.getSettings().ANNOUNCE_WPT.get();
 	}
 	
 	public boolean showFavorites() {
@@ -644,9 +707,6 @@ public class WaypointHelper {
 		}
 
 	}
-
-	
-	
 
 }
 

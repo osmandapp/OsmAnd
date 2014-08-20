@@ -22,12 +22,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
 
-import com.actionbarsherlock.internal.nineoldandroids.animation.ObjectAnimator;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.DataTileManager;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
@@ -119,7 +116,6 @@ public class RouteProvider {
 		boolean calculateOsmAndRoute = false;
 		// parameters
 		private final GPXFile file;
-		private boolean announceWaypoints;
 		private boolean reverse;
 		private boolean leftSide;
 		private boolean passWholeRoute;
@@ -131,10 +127,6 @@ public class RouteProvider {
 			this.file = file;
 		}
 
-		public boolean isAnnounceWaypoints() {
-			return announceWaypoints;
-		}
-		
 		public boolean isReverse() {
 			return reverse;
 		}
@@ -181,11 +173,6 @@ public class RouteProvider {
 		}
 		
 
-		public void setAnnounceWaypoints(boolean announceWaypoints) {
-			this.announceWaypoints = announceWaypoints;
-			
-		}
-		
 		public void setReverse(boolean reverse) {
 			this.reverse = reverse;
 		}
@@ -244,9 +231,8 @@ public class RouteProvider {
 			passWholeRoute = builder.passWholeRoute;
 			calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
 			useIntermediatePointsRTE = builder.useIntermediatePointsRTE;
-			boolean announceWaypoints = builder.announceWaypoints;
 			builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
-			if(announceWaypoints && !file.points.isEmpty()) {
+			if(!file.points.isEmpty()) {
 				wpt = new ArrayList<LocationPoint>(file.points );
 			}
 			if(file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)){

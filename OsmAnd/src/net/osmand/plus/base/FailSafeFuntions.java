@@ -129,9 +129,6 @@ public class FailSafeFuntions {
 							final GPXRouteParamsBuilder gpxRoute;
 							if (result != null) {
 								gpxRoute = new GPXRouteParamsBuilder(result, settings);
-								if (settings.GPX_SPEAK_WPT.get()) {
-									gpxRoute.setAnnounceWaypoints(true);
-								}
 								if (settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {
 									gpxRoute.setCalculateOsmAndRouteParts(true);
 								}

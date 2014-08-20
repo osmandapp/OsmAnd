@@ -4,6 +4,7 @@
               android:orientation="horizontal"
               android:layout_width="fill_parent"
               android:layout_height="match_parent"
+              android:background="@android:drawable/list_selector_background"
               android:id="@+id/package_delivered_layout">
 
     <ImageView android:id="@+id/waypoint_icon"
@@ -28,8 +29,6 @@
               android:layout_marginLeft="4dp"
               android:maxLines="2"
               android:ellipsize="end"
-              android:clickable="true"
-              android:focusable="true"
               android:layout_gravity="center_vertical"
               android:layout_weight="1"
               android:textSize="18sp"/>

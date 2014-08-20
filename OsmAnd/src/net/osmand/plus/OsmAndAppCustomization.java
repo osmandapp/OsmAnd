@@ -158,4 +158,8 @@ public class OsmAndAppCustomization {
 	public List<? extends LocationPoint> getWaypoints() {
 		return Collections.emptyList();
 	}
+
+	public boolean isWaypointGroupVisible(int waypointType) {
+		return true;
+	}
 }

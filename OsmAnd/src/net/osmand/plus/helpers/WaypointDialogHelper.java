@@ -23,7 +23,6 @@ import android.content.DialogInterface.OnClickListener;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.SystemClock;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +33,10 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
@@ -119,7 +121,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		WaypointHelper wh = app.getWaypointHelper();
 		final LocationPoint point = ps.getPoint();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
-		text.setOnClickListener(new View.OnClickListener() {
+		localView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				if(ctx instanceof MapActivity) {
@@ -190,28 +192,43 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		}.execute(reachedView);
 	}
 
-	private static void enableType(OsmandApplication app, MapActivity ctx, int type) {
-		// TODO Auto-generated method stub
+	private static void enableType(final OsmandApplication app, final MapActivity ctx, 
+			final int[] running, final ArrayAdapter<Object> listAdapter, final int type,
+			final boolean enable) {
+		new AsyncTask<Void, Void, Void>() {
+
+			protected void onPreExecute() {
+			};
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				app.getWaypointHelper().enableWaypointType(type, enable);
+				return null;
+			}
+			
+			protected void onPostExecute(Void result) {
+				running[0] = -1;
+				listAdapter.clear();
+				listAdapter.addAll(getPoints(app.getWaypointHelper()));
+				listAdapter.notifyDataSetChanged();
+			};
+		}.execute((Void) null);
 	}
 
 	public static void showWaypointsDialog(final OsmandApplication app, 
 			final MapActivity ctx) {
 		final WaypointHelper waypointHelper = app.getWaypointHelper();
-		final List<Object> points = new ArrayList<Object>();
-		for (int i = 0; i < WaypointHelper.MAX; i++) {
-			List<LocationPointWrapper> tp = waypointHelper.getWaypoints(i);
-			points.add(new Integer(i));
-			if (tp != null && tp.size() > 0) {
-				points.addAll(tp);
-			}
-		}
+		final List<Object> points = getPoints(waypointHelper);
 		final List<LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
+		final ListView listView = new ListView(ctx);
+		final int[] running = new int[]{-1};
 		final ArrayAdapter<Object> listAdapter = new ArrayAdapter<Object>(ctx,
 				R.layout.waypoint_reached, R.id.title, points) {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
 				View v = convertView;
+				final ArrayAdapter<Object> thisAdapter = this;
 				boolean labelView = (getItem(position) instanceof Integer);
 				boolean viewText = v != null && v.findViewById(R.id.info_close) == null;
 				if (v == null || viewText != labelView) {
@@ -219,15 +236,20 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				}
 				if (labelView) {
 					final int type = (Integer) getItem(position);
-					CompoundButton btn = (CompoundButton) v.findViewById(R.id.check_item);
-					btn.setVisibility(type == WaypointHelper.TARGETS ? View.GONE : View.VISIBLE);
-					btn.setOnClickListener(new View.OnClickListener() {
+					final CompoundButton btn = (CompoundButton) v.findViewById(R.id.check_item);
+					btn.setVisibility(waypointHelper.isTypeConfigurable(type) ? View.VISIBLE : View.GONE);
+					btn.setOnCheckedChangeListener(null);
+					btn.setChecked(waypointHelper.isTypeEnabled(type));
+					btn.setEnabled(running[0] != -1);
+					v.findViewById(R.id.ProgressBar).setVisibility(position == running[0] ? View.VISIBLE : View.GONE);
+					btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 						
 						@Override
-						public void onClick(View v) {
-							enableType(app, ctx, type);
+						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							running[0] = position;
+							thisAdapter.notifyDataSetInvalidated();
+							enableType(app, ctx, running, thisAdapter,  type, isChecked);							
 						}
-
 					});
 					TextView tv = (TextView) v.findViewById(R.id.header_text);
 					tv.setText(getHeader(ctx, waypointHelper, type));
@@ -250,13 +272,13 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				return v;
 			}
 		};
-		ListView listView = new ListView(ctx);
+		
 		listView.setAdapter(listAdapter);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-				if(listAdapter.getItem(i) instanceof LocationPointWrapper) {
-					LocationPointWrapper ps = (LocationPointWrapper) listAdapter.getItem(i);
+			public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
+				if(listAdapter.getItem(item) instanceof LocationPointWrapper) {
+					LocationPointWrapper ps = (LocationPointWrapper) listAdapter.getItem(item);
 					showOnMap(app, ctx, ps.getPoint());
 				}
 			}
@@ -280,6 +302,20 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		});
 		builder.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), null);
 		dialog = builder.show();
+	}
+
+	protected static List<Object> getPoints(final WaypointHelper waypointHelper) {
+		final List<Object> points = new ArrayList<Object>();
+		for (int i = 0; i < WaypointHelper.MAX; i++) {
+			List<LocationPointWrapper> tp = waypointHelper.getWaypoints(i);
+			if(waypointHelper.isTypeConfigurable(i)) {
+			points.add(new Integer(i));
+			if (tp != null && tp.size() > 0) {
+				points.addAll(tp);
+			}
+			}
+		}
+		return points;
 	}
 
 	protected static String getHeader(final MapActivity ctx, final WaypointHelper waypointHelper, int i) {
