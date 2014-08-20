@@ -9,7 +9,6 @@ import java.util.Map;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.FavouritesActivity;
@@ -20,7 +19,6 @@ import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.view.Window;
@@ -161,5 +159,8 @@ public class OsmAndAppCustomization {
 
 	public boolean isWaypointGroupVisible(int waypointType) {
 		return true;
+	}
+
+	public void showLocationPoint(MapActivity ctx, LocationPoint locationPoint) {
 	}
 }

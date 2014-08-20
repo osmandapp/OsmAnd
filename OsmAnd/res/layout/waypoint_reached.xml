@@ -4,7 +4,7 @@
               android:orientation="horizontal"
               android:layout_width="fill_parent"
               android:layout_height="match_parent"
-              android:background="@android:drawable/list_selector_background"
+              android:background="@drawable/view_transparent_selection"
               android:id="@+id/package_delivered_layout">
 
     <ImageView android:id="@+id/waypoint_icon"
