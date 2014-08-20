@@ -1610,12 +1610,11 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 		\n\t* Kalmanov filter pre kompas
 		\n\t* Podpora pre hodinky Pebble
 	</string>
-    <string name="tip_navigation_t">Pre získanie pokynov k cieľovému bodu buď podržte miesto na mape (potom kliknite na jeho popis a vyberte "Pokyny sem") alebo vyberte "Pokyny" po kliknutí na výsledok hľadania alebo obľúbeného bodu. 
-		\n\nCieľ je vyznačený ako cieľový vlajka na mape a OsmAnd zobrazí vzdialenosť k nemu a smer k nemu (oranžový trojuholník).
-		\n\nMôžete zvoliť "Pokyny" a OsmAnd bude navigovať, podávať hlasové inštrukcie (ak sú povolené), atď. Alebo môžete zvoliť "Zobraziť trasu", čo spôsobí zobrazenie statickej trasy bez navigácie a prispôsobenia vášmu pohybu.
-		\n\nPre zobrazenie trasy k cieľu z iného bodu ako vašej súčasnej polohy, zvoľte východzí bod na mape a kliknite "Pokyny odtiaľto".
-		\n\nAk použijete "Pokyny odtiaľto" spolu s "Navigovať" OsmAnd sa prepne na vašu aktuálnu polohu hneď ako bude zistená (takže táto funkcia môže byť použitá pre rýchle spustenie navigácie než je známa poloha). Na druhú stranu, "Pokyny odtiaľto" v kombinácii so "Zobraziť trasu" len zobrazí trasu z ľubovoľného zvoleného bodu bez následných zmien.
-	</string>
+    <string name="tip_navigation_t">"Pre získanie pokynov k cieľovému bodu buď podržte miesto na mape (potom kliknite na jeho popis a vyberte Pokyny sem) alebo vyberte Pokyny po kliknutí na výsledok hľadania alebo obľúbeného bodu.
+\n\nCieľ je vyznačený ako cieľová vlajka na mape a OsmAnd zobrazí vzdialenosť k nemu a smer k nemu (oranžový trojuholník).
+\n\nMôžete zvoliť Pokyny a OsmAnd bude navigovať, podávať hlasové inštrukcie (ak sú povolené), atď. Alebo môžete zvoliť Zobraziť trasu, čo spôsobí zobrazenie statickej trasy bez navigácie a prispôsobenia vášmu pohybu.
+\n\nPre zobrazenie trasy k cieľu z iného bodu ako vašej súčasnej polohy, zvoľte východzí bod na mape a kliknite Pokyny odtiaľto.
+\n\nAk použijete Pokyny odtiaľto spolu s Navigovať OsmAnd sa prepne na vašu aktuálnu polohu hneď ako bude zistená (takže táto funkcia môže byť použitá pre rýchle spustenie navigácie než je známa poloha). Na druhú stranu, Pokyny odtiaľto v kombinácii so Zobraziť trasu len zobrazí trasu z ľubovoľného zvoleného bodu bez následných zmien. "</string>
 	<string name="local_osm_changes_delete_all_confirm">Chystáte sa odstrániť %1$d osm zmien. Ste si istý?</string>
     <string name="local_osm_changes_delete_all">Odstrániť všetky</string>
     <string name="osmodroid_refresh">Obnoviť kanály</string>
@@ -1967,4 +1966,10 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_pedestrian_name">Chodec</string>
     <string name="download_additional_maps">Stiahnuť chýbajúce mapy %1$s (%2$d MB)?</string>
     <string name="more">Viac...</string>
+    <string name="flat_list_waypoitns">Všetky</string>
+    <string name="waypoints">Prechodné body</string>
+    <string name="targets">Ciele</string>
+    <string name="way_alarms">Prekážky</string>
+    <string name="speak_favorites">Oznamovať obľúbené</string>
+    <string name="speak_poi">Oznamovať body záujmu</string>
     </resources>
