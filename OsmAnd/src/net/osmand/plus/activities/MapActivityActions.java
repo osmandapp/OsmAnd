@@ -829,19 +829,6 @@ public class MapActivityActions implements DialogProvider {
 					}
 			}).reg();
 		}
-		if (getTargets().getPointToNavigate() != null) {
-			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_light)
-					.listen(new OnContextMenuClick() {
-						@Override
-						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-							if (getMyApplication().getWaypointHelper().isRouteCalculated()) {
-								WaypointDialogHelper.showWaypointsDialog(getMyApplication(), mapActivity);
-							} else {
-								openIntermediatePointsDialog();
-							}
-						}
-					}).reg();
-		}
 		if (mapActivity.getPointToNavigate() != null) {
 			int nav;
 			if(routingHelper.isFollowingMode()) {
@@ -858,6 +845,19 @@ public class MapActivityActions implements DialogProvider {
 					stopNavigationActionConfirm(mapView);
 				}
 			}).reg();
+		}
+		if (getTargets().getPointToNavigate() != null) {
+			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_light)
+					.listen(new OnContextMenuClick() {
+						@Override
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+							if (getMyApplication().getWaypointHelper().isRouteCalculated()) {
+								WaypointDialogHelper.showWaypointsDialog(getMyApplication(), mapActivity);
+							} else {
+								openIntermediatePointsDialog();
+							}
+						}
+					}).reg();
 		}
 		
 		// 5-9. Default actions (Layers, Configure Map screen, Settings, Search, Favorites) 
