@@ -31,6 +31,7 @@ public class SherpafyStageFragment extends SherlockFragment {
 	public static final String STAGE_PARAM = "STAGE";
 	public static final String TOUR_PARAM = "TOUR";
 	private static final int START = 8;
+	private static final int NEXT_STAGE = 9;
 	OsmandApplication app;
 	private SherpafyCustomization customization;
 	private StageInformation stage;
@@ -85,6 +86,16 @@ public class SherpafyStageFragment extends SherlockFragment {
 							return onOptionsItemSelected(item);
 						}
 					});
+			if (customization.isStageVisited(stage.getOrder()) && customization.getNextAvailableStage(tour) != null) {
+				((TourViewActivity) getSherlockActivity()).createMenuItem(menu, NEXT_STAGE, R.string.next_stage, 0, 0,
+						MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT,
+						new OnMenuItemClickListener() {
+							@Override
+							public boolean onMenuItemClick(MenuItem item) {
+								return onOptionsItemSelected(item);
+							}
+						});
+			}
 		}
 	}
 
@@ -95,6 +106,9 @@ public class SherpafyStageFragment extends SherlockFragment {
 			return true;
 		} else if(item.getItemId() == START) {
 			((TourViewActivity) getSherlockActivity()).startStage(stage);
+			return true;
+		} else if(item.getItemId() == NEXT_STAGE) {
+			((TourViewActivity) getSherlockActivity()).selectMenu(customization.getNextAvailableStage(tour));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

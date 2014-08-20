@@ -449,7 +449,9 @@ public class RoutingHelper {
 			if(isFollowingMode) {
 				voiceRouter.arrivedDestinationPoint(description);
 			}
-			if (OsmandPlugin.onDestinationReached()) {
+			boolean onDestinationReached = OsmandPlugin.onDestinationReached();
+			onDestinationReached &= app.getAppCustomization().onDestinationReached();
+			if (onDestinationReached) {
 				clearCurrentRoute(null, null);
 				setRoutePlanningMode(false);
 				app.runInUIThread(new Runnable() {

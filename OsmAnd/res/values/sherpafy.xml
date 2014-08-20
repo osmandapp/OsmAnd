@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="next_stage">Next Stage</string>
+    <string name="restart_stage">Start over</string>
+    <string name="stage_is_completed_short">Completed</string>
     <string name="stage_is_completed">Stage is completed</string>
     <string name="complete_stage">Complete Stage</string>
     <string name="show_waypoint_information">About waypoint</string>

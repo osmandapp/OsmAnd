@@ -403,20 +403,20 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	public void startStage(final StageInformation stage) {
 		if(customization.isStageVisited(stage.getOrder()) /*&& stage.getTour() == customization.getSelectedTour()*/) {
-			customization.showCompleteStageFragment(this, stage);
+			customization.showCompleteStageFragment(this, stage, true);
 		} else if (stage != customization.getSelectedStage() && customization.getSelectedStage() != null) {
 			Builder bld = new AlertDialog.Builder(this);
 			bld.setMessage(R.string.start_new_stage);
 			bld.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					runStage(stage.getTour(), stage, customization.getSelectedStage() != stage);
+					customization.runStage(TourViewActivity.this, stage.getTour(), stage, customization.getSelectedStage() != stage);
 				}
 			});
 			bld.setNegativeButton(R.string.default_buttons_no, null);
 			bld.show();
 		} else {
-			runStage(stage.getTour(), stage, customization.getSelectedStage() != stage);
+			customization.runStage(TourViewActivity.this, stage.getTour(), stage, customization.getSelectedStage() != stage);
 		}
 	}
 
@@ -446,49 +446,11 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			} else {
 				stage = customization.getSelectedStage();
 			}
-			runStage(tour, stage, customization.getSelectedTour() != tour);
+			customization.runStage(TourViewActivity.this, tour, stage, customization.getSelectedTour() != tour);
 		}
 	}
 
 
-	private void runStage(TourInformation tour, StageInformation stage, boolean startOver) {
-		WptPt point = null;
-		GPXFile gpx = null;
-		customization.selectTour(tour, IProgress.EMPTY_PROGRESS);
-
-		customization.selectStage(stage, IProgress.EMPTY_PROGRESS);
-		if (customization.getSelectedStage() != null) {
-			gpx = customization.getSelectedStage().getGpx();
-			List<SelectedGpxFile> sgpx = getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
-			if (gpx == null && sgpx.size() > 0) {
-				getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
-			} else if (sgpx.size() != 1 || sgpx.get(0).getGpxFile() != gpx) {
-				getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
-				if (gpx != null && gpx.findPointToShow() != null) {
-					point = gpx.findPointToShow();
-					getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(gpx);
-				}
-			}
-		}
-		WptPt lp = gpx.getLastPoint();
-		if (lp != null) {
-			TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
-			targetPointsHelper.navigateToPoint(new LatLon(lp.lat, lp.lon), true, -1, lp.name);
-			getMyApplication().getSettings().navigateDialog(true);
-		}
-		String mode = stage != null ? stage.getMode() : tour.getMode();
-		if (!Algorithms.isEmpty(mode)) {
-			final ApplicationMode def = getMyApplication().getSettings().getApplicationMode();
-			ApplicationMode am = ApplicationMode.valueOfStringKey(mode, def);
-			if (am != def) {
-				getMyApplication().getSettings().APPLICATION_MODE.set(am);
-			}
-		}
-		if (startOver && point != null) {
-			goToMap(new LatLon(point.lat, point.lon));
-		} else {
-			goToMap(null);
-		}
-	}
+	
 
 }

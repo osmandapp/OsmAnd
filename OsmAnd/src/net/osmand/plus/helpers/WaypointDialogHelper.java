@@ -91,7 +91,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				final LayoutInflater vi = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				closePointDialog = vi.inflate(R.layout.waypoint_reached, null);
 			}
-			updatePointInfoView(app, mapActivity, closePointDialog, point);
+			updatePointInfoView(app, mapActivity, closePointDialog, point, null);
 			View all = closePointDialog.findViewById(R.id.all_points);
 			all.setVisibility(/*many.size() <= 1 ? View.GONE : */View.VISIBLE);
 			if (created) {
@@ -120,14 +120,14 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 	}
 
 	private static void updatePointInfoView(final OsmandApplication app, final Activity ctx,
-			View localView, final LocationPointWrapper ps) {
+			View localView, final LocationPointWrapper ps, final DialogFragment dialog) {
 		WaypointHelper wh = app.getWaypointHelper();
 		final LocationPoint point = ps.getPoint();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		localView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				showOnMap(app, ctx, point, null);
+				showOnMap(app, ctx, point, dialog);
 			}
 		});
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
@@ -308,7 +308,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 					if (v == null) {
 						v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
 					}
-					updatePointInfoView(app, ctx, v, getItem(position));
+					updatePointInfoView(app, ctx, v, getItem(position), WaypointDialogFragment.this);
 					View remove = v.findViewById(R.id.info_close);
 					((ImageButton) remove).setImageDrawable(ctx.getResources().getDrawable(
 							app.getSettings().isLightContent()? R.drawable.ic_action_gremove_light:
@@ -393,7 +393,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 						TextView tv = (TextView) v.findViewById(R.id.header_text);
 						tv.setText(getHeader(type, checked));
 					} else {
-						updatePointInfoView(app, ctx, v, (LocationPointWrapper) getItem(position));
+						updatePointInfoView(app, ctx, v, (LocationPointWrapper) getItem(position), WaypointDialogFragment.this);
 						View remove = v.findViewById(R.id.info_close);
 						((ImageButton) remove).setImageDrawable(ctx.getResources().getDrawable(
 								app.getSettings().isLightContent() ? R.drawable.ic_action_gremove_light
@@ -467,7 +467,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		AnimateDraggingMapThread thread = ctx.getMapView().getAnimatedDraggingThread();
 		int fZoom = ctx.getMapView().getZoom() < 15 ? 15 : ctx.getMapView().getZoom();
 		boolean di = dialog != null;
-		if (thread.isAnimating() && !di) {
+		if (thread.isAnimating()) {
 			ctx.getMapView().setIntZoom(fZoom);
 			ctx.getMapView().setLatLon(locationPoint.getLatitude(), locationPoint.getLongitude());
 			app.getAppCustomization().showLocationPoint(ctx, locationPoint);
@@ -475,18 +475,17 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			final double dist = MapUtils.getDistance(ctx.getMapView().getLatitude(), ctx.getMapView().getLongitude(),
 					locationPoint.getLatitude(), locationPoint.getLongitude());
 			double t = 10;
-			if (dist < t || di) {
+			if(dist < t) {
+				app.getAppCustomization().showLocationPoint(ctx, locationPoint);
+			} else {
+				thread.startMoving(locationPoint.getLatitude(), locationPoint.getLongitude(), fZoom, true);
+			}
+			if(di) {
 				ctx.getMapLayers().getContextMenuLayer().setSelectedObject(locationPoint);
 				ctx.getMapLayers()
 						.getContextMenuLayer()
 						.setLocation(new LatLon(locationPoint.getLatitude(), locationPoint.getLongitude()),
 								locationPoint.getName(ctx));
-				app.getAppCustomization().showLocationPoint(ctx, locationPoint);
-			}
-			if (di || dist >= t) {
-				thread.startMoving(locationPoint.getLatitude(), locationPoint.getLongitude(), fZoom, true);
-			}
-			if(di) {
 				dialog.dismiss();
 			}
 		}

@@ -163,4 +163,8 @@ public class OsmAndAppCustomization {
 
 	public void showLocationPoint(MapActivity ctx, LocationPoint locationPoint) {
 	}
+	
+	public boolean onDestinationReached() {
+		return true;
+	}
 }

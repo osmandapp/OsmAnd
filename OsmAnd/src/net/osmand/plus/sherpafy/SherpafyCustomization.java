@@ -13,19 +13,26 @@ import java.util.TreeSet;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
+import net.osmand.plus.activities.SelectedGPXFragment;
 import net.osmand.plus.api.FileSettingsAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.download.DownloadActivityType;
@@ -36,9 +43,11 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -251,7 +260,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		selectNextAvailableStage(tourInformation);
 	}
 
-	private void selectNextAvailableStage(final TourInformation tourInformation) {
+	public StageInformation selectNextAvailableStage(final TourInformation tourInformation) {
 		Integer it = selectedStagePref.get();
 		while(it >= 0 && isStageVisited(it) ){
 			it++;
@@ -259,6 +268,18 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		if(it >= 0 && it < tourInformation.getStageInformation().size()) {
 			selectedStage = tourInformation.getStageInformation().get(it);
 		}
+		return selectedStage;
+	}
+	
+	public StageInformation getNextAvailableStage(final TourInformation tourInformation) {
+		int it = selectedStagePref.get();
+		while(it >= 0 && isStageVisited(it) ){
+			it++;
+		}
+		if(it >= 0 && it < tourInformation.getStageInformation().size()) {
+			return tourInformation.getStageInformation().get(it);
+		}
+		return null;
 	}
 	
 	public boolean isStageVisited(int stageOrder) {
@@ -271,7 +292,12 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		gi |= (1 << si.getOrder());
 		visitedStagesPref.set(gi);
 		saveCurrentGPXTrack();
-		selectNextAvailableStage(si.tour);
+	}
+	
+	public void markStageAsNotCompleted(StageInformation si) {
+		Integer gi = visitedStagesPref.get();
+		gi = gi - (1 << si.getOrder());
+		visitedStagesPref.set(gi);
 	}
 
 	protected void saveCurrentGPXTrack() {
@@ -287,31 +313,100 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		return app.getAppPath(IndexConstants.GPX_RECORDED_INDEX_DIR);
 	}
 	
+	
 	public static class CompleteStageFragment extends DialogFragment {
 
+		public static final String STAGE_PARAM = "STAGE";
+		public static final String TOUR_PARAM = "TOUR";
+		public static final String START_OVER = "START_OVER";
+
+		public CompleteStageFragment() {
+		}
+
+		protected void extractArguments(Bundle args) {
+			
+		}
 		@Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-//			Bundle args = getArguments();
-//			SherpafyFavoriteFragment ssf = new SherpafyFavoriteFragment();
-//			ssf.setArguments(args);
-//			ssf.onAttach(getActivity());
-            AlertDialog dlg = new AlertDialog.Builder(getActivity())
-//            		.setView(ssf.onCreateView(getActivity().getLayoutInflater(), null, savedInstanceState))
-            		.setMessage("Stage is completed TODO")
-                    .setPositiveButton(R.string.default_buttons_ok,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                            }
-                        }
-                    )
-                    .create();
-            return dlg;
-        }
-    }
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			
+			Bundle args = getArguments();
+			OsmandApplication app = (OsmandApplication) getActivity().getApplication();
+			
+			Builder bld = new AlertDialog.Builder(getActivity());
+			if(app.getSelectedGpxHelper().isShowingAnyGpxFiles()) {
+				SelectedGPXFragment sgf = new SelectedGPXFragment();
+				sgf.onAttach(getActivity());
+				bld.setView(sgf.onCreateView(getActivity().getLayoutInflater(), null, null));
+			} else {
+				bld.setMessage(R.string.stage_is_completed);
+			}
+			bld.setTitle(getString(R.string.stage_is_completed_short))
+					.setPositiveButton(R.string.default_buttons_ok, null);
+			if (args != null && args.getBoolean(START_OVER)) {
+				String id = args.getString(TOUR_PARAM);
+				TourInformation tours = null;
+				final SherpafyCustomization sherpafy = (SherpafyCustomization) app.getAppCustomization();
+				for (TourInformation ti : sherpafy.getTourInformations()) {
+					if (ti.getId().equals(id)) {
+						tours = ti;
+						break;
+					}
+				}
+				int k = args.getInt(STAGE_PARAM);
+				StageInformation stage = null;
+				if (tours != null && tours.getStageInformation().size() > k) {
+					stage = tours.getStageInformation().get(k);
+				}
+				final StageInformation stageInformation = stage;
+				final TourInformation tour = tours;
+				if (stage != null) {
+					bld.setNegativeButton(R.string.restart_stage, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialogInterface, int i) {
+							sherpafy.markStageAsNotCompleted(stageInformation);
+							sherpafy.runStage(getActivity(), tour, stageInformation, true);
+						}
+					});
+				}
+			}
+			return bld.create();
+		}
+	}
 	
-	protected void showCompleteStageFragment(FragmentActivity activity, StageInformation stage) {
-		// TODO Auto-generated method stub
-		
+	protected void showCompleteStageFragment(final FragmentActivity activity, final StageInformation stage, final boolean showRestart) {
+		File dir = getStageGpxRec(stage);
+		final File[] fs = dir.listFiles();
+		new AsyncTask<Void, Void, List<GPXUtilities.GPXFile>>() {
+
+			@Override
+			protected List<GPXFile> doInBackground(Void... params) {
+				List<GPXUtilities.GPXFile> gpxs = new ArrayList<GPXUtilities.GPXFile>();
+				if(fs != null) {
+					for(File f : fs) {
+						if(f.getName().endsWith(".gpx")) {
+							gpxs.add(GPXUtilities.loadGPXFile(app, f));		
+						}
+					}
+				}
+				return gpxs;
+			}
+			
+			protected void onPostExecute(java.util.List<GPXFile> result) {
+				CompleteStageFragment csf = new CompleteStageFragment();
+				Bundle bl = new Bundle();
+				bl.putBoolean(CompleteStageFragment.START_OVER, showRestart);
+				if (stage != null) {
+					bl.putInt(CompleteStageFragment.STAGE_PARAM, stage.order);
+					bl.putString(CompleteStageFragment.TOUR_PARAM, stage.tour.getId());
+				}
+				csf.setArguments(bl);
+				app.getSelectedGpxHelper().clearAllGpxFileToShow();
+				for(GPXFile g : result) {
+					app.getSelectedGpxHelper().selectGpxFile(g, true, false);
+				}
+				activity.getSupportFragmentManager().beginTransaction().add(csf, "DialogFragment").commit();
+			};
+		}.execute((Void)null);
 	}
 	
 	public StageInformation getSelectedStage() {
@@ -413,12 +508,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			ssf.onAttach(getActivity());
             AlertDialog dlg = new AlertDialog.Builder(getActivity())
             		.setView(ssf.onCreateView(getActivity().getLayoutInflater(), null, savedInstanceState))
-                    .setPositiveButton(R.string.default_buttons_ok,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                            }
-                        }
-                    )
+                    .setPositiveButton(R.string.default_buttons_ok, null)
                     .create();
             return dlg;
         }
@@ -426,7 +516,6 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	@Override
 	public void prepareOptionsMenu(final MapActivity mapActivity, ContextMenuAdapter adapter) {
-		
 		filter(adapter, R.string.exit_Button, R.string.menu_layers,
 				R.string.pause_navigation, R.string.continue_navigation,  
 				R.string.cancel_navigation, R.string.cancel_route, R.string.clear_destination,
@@ -442,7 +531,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						@Override
 						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 							markStageAsCompleted(stage);
-							showCompleteStageFragment(mapActivity, stage);
+							showCompleteStageFragment(mapActivity, stage, false);
 						}
 					}).reg();
 		}
@@ -517,5 +606,69 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		if(locationPoint instanceof StageFavorite && getSelectedStage() != null) {
 			showFavoriteDialog(ctx, getSelectedStage(), (StageFavorite) locationPoint);
 		}
+	}
+	
+	public boolean onDestinationReached() {
+		final MapActivity map = app.getMapActivity();
+		if(map != null && getSelectedStage() != null) {
+			app.runInUIThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					showCompleteStageFragment(map, getSelectedStage(), false);
+				}
+			});
+		}
+		return true;
+	}
+	
+	public void runStage(Activity a, TourInformation tour, StageInformation stage, boolean startOver) {
+		WptPt point = null;
+		GPXFile gpx = null;
+		SherpafyCustomization customization = this;
+		customization.selectTour(tour, IProgress.EMPTY_PROGRESS);
+
+		customization.selectStage(stage, IProgress.EMPTY_PROGRESS);
+		if (customization.getSelectedStage() != null) {
+			gpx = customization.getSelectedStage().getGpx();
+			List<SelectedGpxFile> sgpx = app.getSelectedGpxHelper().getSelectedGPXFiles();
+			if (gpx == null && sgpx.size() > 0) {
+				app.getSelectedGpxHelper().clearAllGpxFileToShow();
+			} else if (sgpx.size() != 1 || sgpx.get(0).getGpxFile() != gpx) {
+				app.getSelectedGpxHelper().clearAllGpxFileToShow();
+				if (gpx != null && gpx.findPointToShow() != null) {
+					point = gpx.findPointToShow();
+					app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);
+				}
+			}
+		}
+		WptPt lp = gpx.getLastPoint();
+		if (lp != null) {
+			TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+			targetPointsHelper.navigateToPoint(new LatLon(lp.lat, lp.lon), true, -1, lp.name);
+			app.getSettings().navigateDialog(true);
+		}
+		String mode = stage != null ? stage.getMode() : tour.getMode();
+		if (!Algorithms.isEmpty(mode)) {
+			final ApplicationMode def = app.getSettings().getApplicationMode();
+			ApplicationMode am = ApplicationMode.valueOfStringKey(mode, def);
+			if (am != def) {
+				app.getSettings().APPLICATION_MODE.set(am);
+			}
+		}
+		if (startOver && point != null) {
+			goToMap(a, new LatLon(point.lat, point.lon));
+		} else {
+			goToMap(a, null);
+		}
+	}
+	
+	public void goToMap(Activity a, LatLon location) {
+		if (location != null) {
+			app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), 16, null);
+		}
+		Intent newIntent = new Intent(a, getMapActivity());
+		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		a.startActivityForResult(newIntent, 0);
 	}
 }
