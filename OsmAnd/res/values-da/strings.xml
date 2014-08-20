@@ -1965,4 +1965,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="rendering_value_browse_map_name">Gennemse kort</string>  
     <string name="more">Mere…</string>
     <string name="download_additional_maps">Hent manglende kort %1$s (%2$d MB)?</string>
+    <string name="flat_list_waypoitns">Alle</string>
+    <string name="waypoints">Rutepunkter</string>
+    <string name="targets">Mål</string>
+    <string name="way_alarms">Forhindringer</string>
+    <string name="speak_favorites">Meddel favoritter</string>
+    <string name="speak_poi">Meddel IP</string>
     </resources>
