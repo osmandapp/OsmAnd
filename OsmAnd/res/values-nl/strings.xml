@@ -263,7 +263,7 @@
   <string name="show_more_map_detail">Toon meer kaartdetails</string>
   <string name="show_more_map_detail_descr">Toon sommige vectorkaartdetails (wegen enz.) al op lager zoomniveau</string>
   <string name="favourites_delete_multiple_succesful">Favoriet(en) succesvol verwijderd.</string>
-  <string name="favorite_delete_multiple">Wil je %1$d favorieten en %2$d groepen verwijderen?</string>
+  <string name="favorite_delete_multiple">%1$d favorieten en %2$d groepen verwijderen?</string>
   <string name="favorite_home_category">Basis</string>
   <string name="favorite_friends_category">Vrienden</string>
   <string name="favorite_places_category">Plaatsen</string>
@@ -866,7 +866,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="left_side_navigation_descr">Activeer in een land waar men links rijdt</string>
   <string name="download_link_and_local_description">Download of actualiseer offline kaarten.\nKlik op een item om meer details te zien, druk lang om te deactiveren, te hernoemen of te verwijderen. Huidige data op apparaat (%1$s vrij):</string>
   <string name="unknown_from_location">Startlocatie is nog niet bepaald</string>
-  <string name="confirm_interrupt_download">Wil je het downloaden afbreken?</string>
+  <string name="confirm_interrupt_download">Downloaden afbreken?</string>
   <string name="basemap_was_selected_to_download">De basiskaart is nodig voor OsmAnd en is al geselecteerd om te downloaden.</string>
   
   <string name="map_online_plugin_is_not_installed">Activeer de online kaarten-plugin om andere kaartbronnen te kunnen selecteren</string>
@@ -944,7 +944,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="osmand_parking_warning">Waarschuwing</string>
   <string name="osmand_parking_warning_text">Er staat nog een notitie voor het ophalen van de auto in de kalender. Deze blijft staan tot je hem zelf verwijdert.</string>
   <string name="osmand_parking_time_limit_title">Stel de parkeertijd-limiet in</string>
-  <string name="osmand_parking_delete_confirm">Wil je de locatie van de geparkeerde auto verwijderen?</string>
+  <string name="osmand_parking_delete_confirm">De locatie van de geparkeerde auto verwijderen?</string>
   <string name="osmand_parking_delete">Verwijder de parkeer-markering</string>
   <string name="osmand_parking_choose_type">Kies het type parkeerplaats</string>
   <string name="osmand_parking_lim_text">Met tijdslimiet</string>
@@ -1237,8 +1237,8 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
     <string name="recording_photo_description">Foto %1$s van %2$s</string>
     <string name="av_def_action_picture">Neem een foto</string>
     <string name="recording_context_menu_precord">Neem een foto</string>
-    <string name="stop_routing_confirm">Weet je zeker dat je de navigatie wilt stoppen?</string>
-    <string name="clear_dest_confirm">Weet je zeker dat je de bestemming (en tussenpunten) wilt wissen?</string>
+    <string name="stop_routing_confirm">Navigatie stoppen?</string>
+    <string name="clear_dest_confirm">Bestemming (en tussenpunten) wissen?</string>
     <string name="precise_routing_mode_descr">Schakel nauwkeurige routeberekening in om precieze routes te berekenen zonder fouten. Nog beperkt in afstand en langzaam.</string>
     <string name="precise_routing_mode">Nauwkeurige routeberekening (alpha)</string>
     <string name="local_indexes_cat_av">Audio/video-gegevens</string>
