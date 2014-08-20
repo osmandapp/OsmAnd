@@ -263,7 +263,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		});
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setView(listView);
-		builder.setNeutralButton(R.string.flat_list_waypoitns, new OnClickListener() {
+		builder.setNeutralButton(R.string.flat_list_waypoints, new OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
