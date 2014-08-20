@@ -1712,4 +1712,10 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="tip_map_context_menu_t">"Su menù \'Imprea positzione\' càbit totu sas atziones possìbiles pro cada puntu (positzione).
 \n\nBenit ammustrau carcande unu puntu in sa mapa, su pursante trackball, o ischertande \'Menù\' → \'Imprea positzione\' (sas ùrtimas duas maneras pigant su tzentru de sa mapa comente referèntzia).
 \n\nSu ricuadru de su marcadore (marker) podet èssere cuadu carcandelu a longu. "</string>
-	</resources>
+	<string name="flat_list_waypoitns">Totus</string>
+    <string name="waypoints">Puntos mesanos</string>
+    <string name="targets">Obietivos</string>
+    <string name="way_alarms">Impèigos</string>
+    <string name="speak_favorites">Annùntzia Prefèrridos</string>
+    <string name="speak_poi">Annùntzia PDI</string>
+    </resources>
