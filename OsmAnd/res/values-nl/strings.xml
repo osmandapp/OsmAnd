@@ -1535,7 +1535,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="speak_street_names">Straatnamen aankondigen (TTS)</string>
     <string name="osmodroid_mode_on">OsMoDroid stoppen</string>    
     <string name="osmodroid_mode_off">OsMoDroid starten</string>
-    <string name="driving_region_descr">Selecteer land of regio: VS, Europa, GB, Azië en andere</string>
+    <string name="driving_region_descr">Regio voor autorijden: VS, Europa, GB, Azië en andere</string>
 	<string name="driving_region">Land</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">Verenigde Staten</string>
