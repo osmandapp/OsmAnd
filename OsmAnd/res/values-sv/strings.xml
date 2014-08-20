@@ -1669,4 +1669,10 @@
     <string name="rendering_value_browse_map_name">Titta på karta</string>  
     <string name="more">Mer …</string>
     <string name="download_additional_maps">Ladda ner kartor som saknas %1$s (%2$d MB)?</string>
+    <string name="flat_list_waypoitns">Alla</string>
+    <string name="waypoints">Waypoints</string>
+    <string name="targets">Mål</string>
+    <string name="way_alarms">Hinder</string>
+    <string name="speak_favorites">Meddela favoriter</string>
+    <string name="speak_poi">Meddela POI</string>
     </resources>
