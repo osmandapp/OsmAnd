@@ -537,10 +537,9 @@
 <string name="tip_app_mode">Användarprofil</string>
 <string name="tip_app_mode_t_v2">"OsmAnd stöder olika (anpassningsbara) profiler för olika användningar.\n\nDu kan byta profil via profilknappen i det nedre vänstra hörnet på kartbilden (bil, cykel eller fotgängare), eller när du skapar en rutt (\'transportläge\'). "</string>
 <string name="tip_navigation">Navigering</string>
-<string name="tip_navigation_t">För att få vägvisning till en plats, antingen peta länge på den direkt på kartan (peta sedan på beskrivningsmarkören och välj \'Vägvisning till\') eller \'Vägvisning\' efter att du petat på valfri post i en sökresultatslista eller i favoritlistan.
-		\n\nDestinationen markeras med en orange flagga på kartan och OsmAnd visar avståndet och riktningen till den (en orange triangel).
-		\n\nFör att visa vägen till destinationen från varje annan punkt än din aktuella position, markera den på kartan och peta på \'Vägvisning från\'.
-	</string>
+<string name="tip_navigation_t">"För att få vägvisning till en plats, antingen peta länge på den direkt på kartan (peta sedan på beskrivningsmarkören och välj \'Vägvisning till\') eller \'Vägvisning\' efter att du petat på valfri post i en sökresultatslista eller i favoritlistan.
+\n\nDestinationen markeras med en målflagga på kartan och OsmAnd visar avståndet och riktningen till den (en orange triangel).
+\n\nFör att visa vägen till destinationen från varje annan punkt än din aktuella position, markera den på kartan och peta på \'Vägvisning från\'. "</string>
 <string name="tip_search">Söker</string>
 <string name="tip_search_t">Du kan söka efter platser direkt på kartan via \'Använd platsen\' → \'Sök i närheten\', eller genom att använda sökskärmen via \'Meny\' → \'Sök\'.
 		\n\nSökskärmen har mallar för sökning
@@ -696,8 +695,8 @@
 	<string name="use_high_res_maps_descr">Sträck inte ut (och gör oskarpa) kartbitar på högupplösta skärmar</string>
 	<string name="download_files">Ladda ner</string>
 	<string name="context_menu_item_search_transport">Sök transport</string>
-	<string name="transport_searching_transport">Transportresultat (inget mål):</string>
-	<string name="transport_searching_route">Transportresultat ({0} till målet):</string>
+	<string name="transport_searching_transport">Transportresultat (ingen destionation):</string>
+	<string name="transport_searching_route">Transportresultat ({0} till destinationen):</string>
 	<string name="transport_search_none">ingen</string>
 	<string name="transport_search_again">Återställ transportsökning</string>
 	<string name="map_index">Karta</string>
