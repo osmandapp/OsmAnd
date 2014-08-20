@@ -532,7 +532,6 @@ public class RoutingHelper {
 
 	private void setNewRoute(RouteCalculationResult res, Location start){
 		final boolean newRoute = !this.route.isCalculated();
-		app.getWaypointHelper().setNewRoute(res);
 		if (isFollowingMode) {
 			if(lastFixedLocation != null) {
 				start = lastFixedLocation;
@@ -562,7 +561,7 @@ public class RoutingHelper {
 				voiceRouter.newRouteIsCalculated(newRoute);
 			}
 		} 
-		
+		app.getWaypointHelper().setNewRoute(res);
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {

@@ -9,6 +9,7 @@ import net.osmand.data.LocationPoint;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
@@ -21,6 +22,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnDismissListener;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -77,6 +79,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 	}
 	
 
+	@SuppressWarnings("deprecation")
 	public void updateDialog() {
 		final LocationPointWrapper point = waypointHelper.getMostImportantLocationPoint(many);
 		if (point == null) {
@@ -92,7 +95,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			View all = closePointDialog.findViewById(R.id.all_points);
 			all.setVisibility(/*many.size() <= 1 ? View.GONE : */View.VISIBLE);
 			if (created) {
-				closePointDialog.setBackgroundColor(mapActivity.getResources().getColor(R.color.color_black));
+				closePointDialog.setBackgroundDrawable(mapActivity.getResources().getDrawable(R.drawable.view_black_selection));
 				((TextView) closePointDialog.findViewById(R.id.waypoint_text)).setTextColor(Color.WHITE);
 				all.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -195,14 +198,14 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		args.putBoolean(WaypointDialogFragment.FLAT_ARG, true);
 		WaypointDialogFragment wdf = new WaypointDialogFragment();
 		wdf.setArguments(args);
-		wdf.show(fragmentActivity.getSupportFragmentManager(), "tag");
+		fragmentActivity.getSupportFragmentManager().beginTransaction().add(wdf, "tag").commit();
 	}
 	
 	public static void showWaypointsDialog(FragmentActivity fragmentActivity) {
 		Bundle args = new Bundle();
 		WaypointDialogFragment wdf = new WaypointDialogFragment();
 		wdf.setArguments(args);
-		wdf.show(fragmentActivity.getSupportFragmentManager(), "tag");
+		fragmentActivity.getSupportFragmentManager().beginTransaction().add(wdf, "tag").commit();
 	}
 	
 	public static class WaypointDialogFragment extends DialogFragment {
@@ -227,6 +230,26 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			return createWaypointsDialog();
 		}
 		
+		private void selectPoi(final int[] running, final ArrayAdapter<Object> listAdapter, final int type,
+				final boolean enable) {
+			if(getActivity() instanceof MapActivity && !PoiFilter.CUSTOM_FILTER_ID.equals(app.getSettings().getPoiFilterForMap())) {
+				MapActivity map = (MapActivity) getActivity();
+				final PoiFilter[] selected = new PoiFilter[1];
+				AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView(), selected);
+				dlg.setOnDismissListener(new OnDismissListener() {
+					
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						if(selected != null) {
+							enableType(running, listAdapter, type, enable);
+						}
+					}
+				});
+			} else {
+				enableType(running, listAdapter, type, enable);
+			}
+		}
+		
 		private void enableType(final int[] running, final ArrayAdapter<Object> listAdapter, final int type,
 				final boolean enable) {
 			new AsyncTask<Void, Void, Void>() {
@@ -249,7 +272,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			}.execute((Void) null);
 		}
 		
-		protected String getHeader(int type) {
+		protected String getHeader(int type, boolean checked) {
 			FragmentActivity ctx = getActivity();
 			String str = ctx.getString(R.string.waypoints);
 			switch (type) {
@@ -266,7 +289,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				str = ctx.getString(R.string.waypoints);
 				break;
 			case WaypointHelper.POI:
-				str = waypointHelper.getPoiFilter() == null ? ctx.getString(R.string.poi) : waypointHelper
+				str = waypointHelper.getPoiFilter() == null && !checked ? ctx.getString(R.string.poi) : waypointHelper
 						.getPoiFilter().getName();
 				break;
 			}
@@ -310,7 +333,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				@Override
 				public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 					LocationPointWrapper ps = listAdapter.getItem(i);
-					showOnMap(app, ctx, ps.getPoint(), getDialog());
+					showOnMap(app, ctx, ps.getPoint(), WaypointDialogFragment.this);
 				}
 			});
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
@@ -349,7 +372,8 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 						final CompoundButton btn = (CompoundButton) v.findViewById(R.id.check_item);
 						btn.setVisibility(waypointHelper.isTypeConfigurable(type) ? View.VISIBLE : View.GONE);
 						btn.setOnCheckedChangeListener(null);
-						btn.setChecked(waypointHelper.isTypeEnabled(type));
+						final boolean checked = waypointHelper.isTypeEnabled(type);
+						btn.setChecked(checked);
 						btn.setEnabled(running[0] == -1);
 						v.findViewById(R.id.ProgressBar).setVisibility(position == running[0] ? View.VISIBLE : View.GONE);
 						btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -358,11 +382,16 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 								running[0] = position;
 								thisAdapter.notifyDataSetInvalidated();
-								enableType(running, thisAdapter,  type, isChecked);							
+								if(type == WaypointHelper.POI && isChecked) {
+									selectPoi(running, thisAdapter,  type, isChecked);
+								} else {							
+									enableType(running, thisAdapter,  type, isChecked);
+								}
 							}
+
 						});
 						TextView tv = (TextView) v.findViewById(R.id.header_text);
-						tv.setText(getHeader(type));
+						tv.setText(getHeader(type, checked));
 					} else {
 						updatePointInfoView(app, ctx, v, (LocationPointWrapper) getItem(position));
 						View remove = v.findViewById(R.id.info_close);
@@ -389,7 +418,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
 					if(listAdapter.getItem(item) instanceof LocationPointWrapper) {
 						LocationPointWrapper ps = (LocationPointWrapper) listAdapter.getItem(item);
-						showOnMap(app, ctx, ps.getPoint(), getDialog());
+						showOnMap(app, ctx, ps.getPoint(), WaypointDialogFragment.this);
 					}
 				}
 			});
@@ -430,17 +459,18 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 	}
 
 	
-	private static void showOnMap(OsmandApplication app, Activity a, LocationPoint locationPoint, Dialog dialog) {
+	private static void showOnMap(OsmandApplication app, Activity a, LocationPoint locationPoint, DialogFragment dialog) {
 		if(!(a instanceof MapActivity)) {
 			return;
 		}
 		MapActivity ctx = (MapActivity) a;
 		AnimateDraggingMapThread thread = ctx.getMapView().getAnimatedDraggingThread();
 		int fZoom = ctx.getMapView().getZoom() < 15 ? 15 : ctx.getMapView().getZoom();
-		boolean di = dialog != null && dialog.isShowing();
+		boolean di = dialog != null;
 		if (thread.isAnimating() && !di) {
 			ctx.getMapView().setIntZoom(fZoom);
 			ctx.getMapView().setLatLon(locationPoint.getLatitude(), locationPoint.getLongitude());
+			app.getAppCustomization().showLocationPoint(ctx, locationPoint);
 		} else {
 			final double dist = MapUtils.getDistance(ctx.getMapView().getLatitude(), ctx.getMapView().getLongitude(),
 					locationPoint.getLatitude(), locationPoint.getLongitude());
@@ -451,13 +481,13 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 						.getContextMenuLayer()
 						.setLocation(new LatLon(locationPoint.getLatitude(), locationPoint.getLongitude()),
 								locationPoint.getName(ctx));
+				app.getAppCustomization().showLocationPoint(ctx, locationPoint);
 			}
 			if (di || dist >= t) {
 				thread.startMoving(locationPoint.getLatitude(), locationPoint.getLongitude(), fZoom, true);
 			}
 			if(di) {
 				dialog.dismiss();
-				dialog = null;
 			}
 		}
 	}

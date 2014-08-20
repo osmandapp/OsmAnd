@@ -13,6 +13,7 @@ import java.util.TreeSet;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.data.LocationPoint;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
@@ -509,5 +510,12 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		return waypointType == WaypointHelper.WAYPOINTS || 
 				waypointType == WaypointHelper.TARGETS || 
 				waypointType == WaypointHelper.POI;
+	}
+
+	
+	public void showLocationPoint(MapActivity ctx, LocationPoint locationPoint) {
+		if(locationPoint instanceof StageFavorite && getSelectedStage() != null) {
+			showFavoriteDialog(ctx, getSelectedStage(), (StageFavorite) locationPoint);
+		}
 	}
 }

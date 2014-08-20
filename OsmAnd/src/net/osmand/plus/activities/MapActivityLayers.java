@@ -238,7 +238,7 @@ public class MapActivityLayers {
 				clck.onContextMenuClick(itemId, item, isChecked, dialog);
 			} else if(itemId == R.string.layer_poi){
 				if(isChecked){
-					selectPOIFilterLayer(mapView);
+					selectPOIFilterLayer(mapView, null);
 				}
 				settings.SHOW_POI_OVER_MAP.set(isChecked);
 			} else if(itemId == R.string.layer_amenity_label){
@@ -329,7 +329,7 @@ public class MapActivityLayers {
 								settingsImage.setOnClickListener(new View.OnClickListener() {
 									@Override
 									public void onClick(View view) {
-										selectPOIFilterLayer(mapView);
+										selectPOIFilterLayer(mapView, null);
 									}
 								});
 							} else if (specialItemId == R.string.layer_gpx_layer) {
@@ -452,7 +452,7 @@ public class MapActivityLayers {
 	}
 	
 	
-	private void selectPOIFilterLayer(final OsmandMapTileView mapView){
+	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiFilter[] selected){
 		final List<PoiFilter> userDefined = new ArrayList<PoiFilter>();
 		OsmandApplication app = (OsmandApplication)getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
@@ -521,11 +521,14 @@ public class MapActivityLayers {
 					}
 					poiMapLayer.setFilter(f);
 					mapView.refreshMap();
+					if(selected != null && selected.length > 0) {
+						selected[0] = f;
+					}
 				}
 			}
 			
 		});
-		builder.show();
+		return builder.show();
 	}
 	
 	public void selectMapLayer(final OsmandMapTileView mapView){
