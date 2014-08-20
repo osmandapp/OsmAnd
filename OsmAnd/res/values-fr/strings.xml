@@ -1810,4 +1810,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="way_alarms">Obstacles</string>
     <string name="speak_favorites">Annoncer les favoris</string>
     <string name="speak_poi">Annoncer les points d\'intérêt</string>
+    <string name="flat_list_waypoints">Tous</string>
     </resources>
