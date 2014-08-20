@@ -1938,4 +1938,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_value_pedestrian_name">Пешаход</string>
     <string name="download_additional_maps">Спампаваць мапы, што адсутнічаюць, %1$s (%2$d МБ)?</string>
     <string name="more">Больш...</string>
+    <string name="flat_list_waypoitns">Усе</string>
+    <string name="waypoints">Кропкі шляху</string>
+    <string name="way_alarms">Перашкоды</string>
+    <string name="speak_favorites">Абвяшчаць выбраныя</string>
+    <string name="speak_poi">Абвяшчаць POI</string>
+    <string name="targets">Цэлі</string>
     </resources>

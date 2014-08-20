@@ -1279,7 +1279,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
 	<string name="tip_navigation">Navigation</string>
 	<string name="tip_navigation_t">To get directions to a place, either directly long-click on it on the map, (then tap its description marker and select \'Directions to\'), or select \'Directions\' after tapping any entry in a search results list or favorite list. 
-		\n\nThe destination is marked as an orange target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+		\n\nThe destination is marked as a target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
 		\n\nYou may chose either \'Start navigation\', which means that OsmAnd would live-guide you, give you voice instructions (if enabled), etc. Or you can select \'Display route\', resulting in static route without any live-guideance or adjustments as you move.
 		\n\nTo display a route to the selected destination from any point other than your current position, select the start point on the map and tap \'Directions from\'.
 		\n\nIf you use \'Directions from\' together with \'Start navigation\', OsmAnd will switch to your actual position as soon as it is found (so this can be used to jump-start routing before the position is found), while \'Directions from\' in combination with \'Display route\' just shows you the route from any arbitrary point you had selected without subsequent updates.
@@ -1606,8 +1606,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays</string>
 	<string name="download_files">Download</string>
 	<string name="context_menu_item_search_transport">Search transportation</string>
-	<string name="transport_searching_transport">Transportation results (no target):</string>
-	<string name="transport_searching_route">Transportation results ({0} to target):</string>
+	<string name="transport_searching_transport">Transportation results (no destination):</string>
+	<string name="transport_searching_route">Transportation results ({0} to destination):</string>
 	<string name="transport_search_none">none</string>
 	<string name="transport_search_again">Reset Transportation search</string>
 	<string name="map_index">Map</string>
