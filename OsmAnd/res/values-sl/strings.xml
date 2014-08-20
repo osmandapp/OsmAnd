@@ -1907,4 +1907,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_value_car_name">Avtomobil</string>
     <string name="rendering_value_bicycle_name">Kolo</string>
     <string name="rendering_value_pedestrian_name">Pešec</string>
+    <string name="flat_list_waypoitns">Vse</string>
+    <string name="way_alarms">Ovire</string>
+    <string name="speak_favorites">Najavi priljubljene</string>
     </resources>
