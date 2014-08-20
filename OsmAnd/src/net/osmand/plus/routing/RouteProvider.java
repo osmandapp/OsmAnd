@@ -341,7 +341,7 @@ public class RouteProvider {
 			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
 			List<RouteDirectionInfo> directions = calcDirections(startI, endI, rcr.getRouteDirections());
 			insertInitialSegment(params, locs, directions, true);
-			res = new RouteCalculationResult(locs, directions, params);
+			res = new RouteCalculationResult(locs, directions, params, null);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
@@ -375,7 +375,8 @@ public class RouteProvider {
 			info.distance = 0;
 			info.afterLeftTime = 0;			
 		}
-		RouteCalculationResult res = new RouteCalculationResult(gpxRoute, gpxDirections, routeParams);
+		RouteCalculationResult res = new RouteCalculationResult(gpxRoute, gpxDirections, routeParams, 
+				gpxParams  == null? null: gpxParams.wpt);
 		return res;
 	}
 
@@ -609,7 +610,7 @@ public class RouteProvider {
 			}
 		}
 		params.intermediates = null;
-		return new RouteCalculationResult(res, null, params);
+		return new RouteCalculationResult(res, null, params, null);
 	}
 	
 	protected RouteCalculationResult findVectorMapsRoute(final RouteCalculationParams params, boolean calcGPXRoute) throws IOException {
@@ -978,7 +979,7 @@ public class RouteProvider {
 			}
 		}
 		params.intermediates = null;
-		return new RouteCalculationResult(res, null, params);
+		return new RouteCalculationResult(res, null, params, null);
 	}
 	
 	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute, OsmandApplication ctx){
@@ -1122,7 +1123,7 @@ public class RouteProvider {
 			res.add(createLocation(pt));
 		}
 		params.intermediates = null;
-		return new RouteCalculationResult(res, null, params);
+		return new RouteCalculationResult(res, null, params, null);
 	}
 
 
@@ -1198,7 +1199,7 @@ public class RouteProvider {
 		} catch (Exception e) {
 			return new RouteCalculationResult("Exception calling BRouter: " + e); //$NON-NLS-1$
 		}
-		return new RouteCalculationResult(res, null, params);
+		return new RouteCalculationResult(res, null, params, null);
 	}
 
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
@@ -1224,7 +1225,7 @@ public class RouteProvider {
 		location.setLatitude(lats[1]);
 		location.setLongitude(lons[1]);
 		dots.add(location);
-		return new RouteCalculationResult(dots,null,params);
+		return new RouteCalculationResult(dots, null, params, null);
 	}
 
 }
