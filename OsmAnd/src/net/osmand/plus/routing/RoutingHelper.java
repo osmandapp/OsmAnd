@@ -462,6 +462,10 @@ public class RoutingHelper {
 				return true;
 			}
 
+			if(app.getAppCustomization().onDestinationReached(app.getMapActivity())){
+				//TODO do something
+			}
+
 		}
 		return false;
 	}
