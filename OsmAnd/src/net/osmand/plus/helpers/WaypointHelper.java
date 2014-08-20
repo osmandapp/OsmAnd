@@ -54,7 +54,7 @@ public class WaypointHelper {
 	public static final int POI = 2;
 	public static final int FAVORITES = 3;
 	public static final int ALARMS = 4;
-	public static final int MAX = 4;
+	public static final int MAX = 5;
 	
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<List<LocationPointWrapper>>();
 	private ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<LocationPoint, Integer>();
