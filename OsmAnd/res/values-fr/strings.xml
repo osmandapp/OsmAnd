@@ -1804,4 +1804,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_value_pedestrian_name">Piéton</string>
     <string name="more">Plus...</string>
     <string name="download_additional_maps">Télécharger les cartes manquantes %1$s (%2$d Mo) ?</string>
+    <string name="flat_list_waypoitns">Tous</string>
+    <string name="waypoints">Points de cheminement</string>
+    <string name="targets">Cibles</string>
+    <string name="way_alarms">Obstacles</string>
+    <string name="speak_favorites">Annoncer les favoris</string>
+    <string name="speak_poi">Annoncer les points d\'intérêt</string>
     </resources>
