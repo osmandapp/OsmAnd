@@ -1946,4 +1946,10 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_value_pedestrian_name">Voetganger</string>
     <string name="more">Meer…</string>
     <string name="download_additional_maps">Download ontbrekende kaarten %1$s (%2$d MB)?</string>
+    <string name="flat_list_waypoitns">alle</string>
+    <string name="waypoints">Referentiepunt(en)</string>
+    <string name="targets">Doel(en)</string>
+    <string name="way_alarms">Obstakels</string>
+    <string name="speak_favorites">Meld favorieten</string>
+    <string name="speak_poi">Meld POI</string>
     </resources>
