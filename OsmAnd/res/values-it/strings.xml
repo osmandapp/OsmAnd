@@ -1450,7 +1450,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
         \n\t* Il pulsante in alto a sinistra nella schermata della vista mappa sostituisce il pulsante Menu
     </string>
     <string name="monitoring_settings">Servizi di registrazione</string>
-    <string name="monitoring_settings_descr">Configura come registrare viaggi e attivare la modalità quiescente</string>
+    <string name="monitoring_settings_descr">Configura come registrare i viaggi</string>
     <string name="osmand_monitoring_plugin_description">Attivare il monitoraggio e la navigazione nella modalità quiescente (schermo spento) attraverso periodici risvegli del dispositivo GPS. Mostra le impostazioni che facilitano la registrazione dei vostri viaggi in file GPX locali o online usando un servizio web.</string>
     <string name="osmand_monitoring_plugin_name">Servizi di registrazione</string>
     <string name="choose_osmand_theme_descr">Scegli il tema dell\'applicazione</string>
@@ -1751,7 +1751,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
     <string name="osmo_plugin_description">"OpenStreetMap monitoraggio avanzato in diretta, vedi http://osmo.mobi. Fornisce la possibilità di tracciare altri dispositivi e di essere tracciati. Crea gruppo anonimi, condivide reciprocamente la posizione e comunica. Sono disponibili varie impostazioni di monitoraggio, per la sessione in corso o permanenti. I gruppi anonimi sono limitate per il numero di giorni e alcune funzioni es. non c\'è il controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. "</string>
     <string name="osmo_plugin_name">OsMo (Monitoraggio avanzato in tempo reale)</string>
-    <string name="osmo_settings">OsMo OpenStreetMap Monitoraggio (beta)</string>
+    <string name="osmo_settings">Monitoraggio OpenStreetMap</string>
    	<string name="keep_informing_never">Mai</string>
     <string name="keep_informing_descr">Annuncia nuovamente a intervalli regolari le indicazioni di navigazione</string>
     <string name="keep_informing">Ripeti le istruzioni di navigazione</string>
@@ -1918,7 +1918,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_sw">Swahili</string>
     <string name="forward">Avanti</string>
     <string name="home">Home</string>
-    <string name="live_monitoring_m_descr">Invia il tracciamento a un specifico servizio web se la registrazione GPX e abilitata.</string>
+    <string name="live_monitoring_m_descr">Invia il tracciamento a un specifico servizio web se la registrazione GPX è abilitata.</string>
 	<string name="live_monitoring_m">Tracciamento online (GPX richiesto)</string>
     <string name="live_monitoring_start">Avvia il tracciamento online</string>
 	<string name="live_monitoring_stop">Ferma il tracciamento online</string>
@@ -1953,7 +1953,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="arrival_distance_factor_early">Presto</string>
     <string name="arrival_distance_factor_normally">Normale</string>
     <string name="arrival_distance_factor_late">Tardi</string>
-    <string name="arrival_distance_factor_at_last">Agli ultimi metri</string>
+    <string name="arrival_distance_factor_at_last">Negli ultimi metri</string>
     <string name="hide_all_waypoints">Cancellali tutti</string>
 <string name="av_camera_pic_size">Dimensione foto</string>
 	<string name="av_camera_pic_size_descr">Seleziona la dimensione delle foto scattate</string>
