@@ -1951,4 +1951,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="way_alarms">障礙</string>
     <string name="speak_favorites">通報我的最愛</string>
     <string name="speak_poi">通報 POI</string>
+    <string name="flat_list_waypoints">全部</string>
     </resources>
