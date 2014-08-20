@@ -563,7 +563,6 @@ public class MapActivityActions implements DialogProvider {
 				settings.GPX_CALCULATE_RTEPT.set(false);
 			}
 			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
-			params.setAnnounceWaypoints(settings.GPX_SPEAK_WPT.get());
 			params.setUseIntermediatePointsRTE(settings.GPX_CALCULATE_RTEPT.get());
 			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
 			List<Location> ps = params.getPoints();
@@ -852,7 +851,7 @@ public class MapActivityActions implements DialogProvider {
 						@Override
 						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 							if (getMyApplication().getWaypointHelper().isRouteCalculated()) {
-								WaypointDialogHelper.showWaypointsDialog(getMyApplication(), mapActivity);
+								WaypointDialogHelper.showWaypointsDialog(mapActivity);
 							} else {
 								openIntermediatePointsDialog();
 							}

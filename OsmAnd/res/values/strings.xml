@@ -9,12 +9,13 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="flat_list_waypoitns">All</string>
+    <string name="flat_list_waypoints">All</string>
     <string name="waypoints">Waypoints</string>
     <string name="targets">Targets</string>
     <string name="way_alarms">Obstacles</string>
     <string name="speak_favorites">Announce Favorites</string>
     <string name="speak_poi">Announce POI</string>
+    <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>
     <string name="more">More...</string>
     <string name="rendering_value_browse_map_name">Browse map</string>  
@@ -407,7 +408,6 @@
     <string name="osmodroid_refresh">Refresh channels</string>
     <string name="osmodroid_seek">Seek object</string>
     <string name="osmodroid_unseek">Unseek object</string>
-    <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
     <string name="speak_title">Announce&#8230;</string>
 	<string name="speak_descr">Configure to announce street names, traffic warnings (forced stops, speed bumps), speed camera warnings, speed limits</string>
 	<string name="speak_street_names">Announce street names (TTS)</string>
@@ -1954,5 +1954,4 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_camera_pic_size_descr">Select internal camera Picture Size</string>
     <string name="navigation_intent_invalid">Invalid format: %s</string>
     <string name="hide_all_waypoints">Remove all</string>
-    <string name="announce_nearby_favorites">Announce nearby favorites</string>
 </resources>

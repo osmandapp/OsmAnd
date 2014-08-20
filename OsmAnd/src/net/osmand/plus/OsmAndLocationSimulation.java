@@ -15,7 +15,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
@@ -72,7 +71,6 @@ public class OsmAndLocationSimulation {
 			((TextView)view.findViewById(R.id.MinSpeedup)).setText("1"); //$NON-NLS-1$
 			((TextView)view.findViewById(R.id.MaxSpeedup)).setText("4"); //$NON-NLS-1$
 			final SeekBar speedup = (SeekBar) view.findViewById(R.id.Speedup);
-			final CheckBox ch = (CheckBox ) view.findViewById(R.id.AnnounceGPXWpt);
 			speedup.setMax(3);
 			builder.setView(view);
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
@@ -86,9 +84,6 @@ public class OsmAndLocationSimulation {
 									@Override
 									public boolean processResult(GPXUtilities.GPXFile[] result) {
 										GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(result[0], app.getSettings());
-										if(ch.isChecked()){
-											builder.setAnnounceWaypoints(true);
-										}
 										startAnimationThread(app.getRoutingHelper(), ma, builder.getPoints(), true,
 												speedup.getProgress() + 1);
 										return true;

@@ -37,9 +37,5 @@
   	<TextView android:text="15" android:gravity="right" android:layout_weight="0.5" android:id="@+id/MaxSpeedup"
   			android:layout_width="wrap_content" android:layout_height="wrap_content"/>
   </LinearLayout>
-  <CheckBox android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/AnnounceGPXWpt"
-      android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
-      android:text="@string/announce_gpx_waypoints"/>
-  
   </LinearLayout>
 </LinearLayout>

@@ -28,6 +28,7 @@ import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.api.FileSettingsAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -502,5 +503,11 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	@Override
 	public void createLayers(OsmandMapTileView mapView, MapActivity activity) {
 		mapView.addLayer(new StageFavoritesLayer(this), 4.1f);
+	}
+	
+	public boolean isWaypointGroupVisible(int waypointType) {
+		return waypointType == WaypointHelper.WAYPOINTS || 
+				waypointType == WaypointHelper.TARGETS || 
+				waypointType == WaypointHelper.POI;
 	}
 }

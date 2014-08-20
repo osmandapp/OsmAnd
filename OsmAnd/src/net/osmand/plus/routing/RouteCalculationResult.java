@@ -52,7 +52,8 @@ public class RouteCalculationResult {
 		this.alarmInfo = new ArrayList<AlarmInfo>();
 	}
 	
-	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params) {
+	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints
+			) {
 		this.routingTime = 0;
 		this.errorMessage = null;
 		this.intermediatePoints = new int[params.intermediates == null ? 0 : params.intermediates.size()];
@@ -60,6 +61,9 @@ public class RouteCalculationResult {
 		List<RouteDirectionInfo> localDirections = directions == null? new ArrayList<RouteDirectionInfo>() : new ArrayList<RouteDirectionInfo>(directions);
 		if (!locations.isEmpty()) {
 			checkForDuplicatePoints(locations, localDirections);
+		}
+		if(waypoints != null) {
+			this.locationPoints.addAll(waypoints);
 		}
 		boolean addMissingTurns = true;
 		if(addMissingTurns) {

@@ -193,9 +193,6 @@ public class MapRoutePreferencesControl extends MapControls {
 				settings.GPX_ROUTE_CALC_OSMAND_PARTS.set(selected);
 			} else if (gpxParam.id == R.string.gpx_option_from_start_point) {
 				rp.setPassWholeRoute(selected);
-			} else if (gpxParam.id == R.string.announce_gpx_waypoints) {
-				settings.GPX_SPEAK_WPT.set(selected);
-				rp.setAnnounceWaypoints(selected);
 			} else if (gpxParam.id == R.string.use_points_as_intermediates) {
 				settings.GPX_CALCULATE_RTEPT.set(selected);
 				rp.setUseIntermediatePointsRTE(selected);
@@ -219,8 +216,6 @@ public class MapRoutePreferencesControl extends MapControls {
 	
 	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode am) {
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
-		list.add(new OtherLocalRoutingParameter(R.string.announce_nearby_favorites,
-				mapActivity.getString(R.string.announce_nearby_favorites), settings.ANNOUNCE_NEARBY_FAVORITES.get()));
 		GPXRouteParamsBuilder rparams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		boolean osmandRouter = settings.ROUTER_SERVICE.get() == RouteService.OSMAND ;
 		if(!osmandRouter) {
@@ -244,8 +239,8 @@ public class MapRoutePreferencesControl extends MapControls {
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_calculate_first_last_segment,
 						getString(R.string.gpx_option_calculate_first_last_segment), rparams.isCalculateOsmAndRouteParts()));
 			}
-			list.add(new OtherLocalRoutingParameter(R.string.announce_gpx_waypoints, 
-					getString(R.string.announce_gpx_waypoints), rparams.isAnnounceWaypoints()));
+//			list.add(new OtherLocalRoutingParameter(R.string.announce_gpx_waypoints, 
+//					getString(R.string.announce_gpx_waypoints), rparams.isAnnounceWaypoints()));
 			// Temporary disabled
 			// list.add(new GPXLocalRoutingParameter(R.string.calculate_osmand_route_gpx, 
 			//		getString(R.string.calculate_osmand_route_gpx), rparams.isCalculateOsmAndRoute()));
