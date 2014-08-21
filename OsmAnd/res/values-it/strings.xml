@@ -1970,4 +1970,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="way_alarms">Ostacoli</string>
     <string name="speak_favorites">Annuncia Preferiti</string>
     <string name="speak_poi">Annuncia PDI</string>
+    <string name="index_tours">Itinerari</string>
+    <string name="flat_list_waypoints">Tutto</string>
     </resources>
