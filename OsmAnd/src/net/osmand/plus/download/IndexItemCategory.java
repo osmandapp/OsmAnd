@@ -97,6 +97,8 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 			} else if (lc.contains("oceania") || lc.contains("australia")) {
 				nameId = R.string.index_name_oceania;
 				order = 70;
+			} else if (lc.contains("tour")) {
+				nameId = R.string.index_tours;
 			}
 
 			String name = ctx.getString(nameId);

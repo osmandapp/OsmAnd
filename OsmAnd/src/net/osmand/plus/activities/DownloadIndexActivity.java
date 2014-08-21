@@ -281,7 +281,20 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					downloadFilesCheckInternet();
 				}
 			});
-			builder.setNegativeButton(R.string.default_buttons_no, null);
+			builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					getEntriesToDownload().clear();
+				}
+			});
+			builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					getEntriesToDownload().clear();					
+				}
+			});
 			builder.show();
 			
 		}
