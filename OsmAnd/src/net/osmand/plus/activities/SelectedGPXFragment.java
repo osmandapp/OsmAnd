@@ -28,6 +28,7 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -57,10 +58,12 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	private GpxSelectionHelper selectedGpxHelper;
 	private SelectedGPXAdapter adapter;
 	private boolean lightContent;
+	private Activity activity;
 	
 	
 	@Override
 	public void onAttach(Activity activity) {
+		this.activity = activity;
 		super.onAttach(activity);
 
 		final Collator collator = Collator.getInstance();
@@ -69,18 +72,16 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		selectedGpxHelper = app.getSelectedGpxHelper();
 	}
 	
+	public Activity getMyActivity() {
+		return activity;
+	}
+	
 	
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		getListView().setFastScrollEnabled(true);
-		lightContent = app.getSettings().isLightContent();
-		if (adapter == null) {
-			adapter = new SelectedGPXAdapter(getListView());
-			setAdapter(adapter);
-		}
-		adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
+		setContent();
 		selectedGpxHelper.setUiListener(SelectedGPXFragment.class, 
 					new Runnable() {
 			
@@ -89,6 +90,18 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());				
 			}
 		});
+	}
+
+
+
+	public void setContent() {
+		getListView().setFastScrollEnabled(true);
+		lightContent = app.getSettings().isLightContent();
+		if (adapter == null) {
+			adapter = new SelectedGPXAdapter(getListView());
+			setAdapter(adapter);
+		}
+		adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
 	}
 
 	@Override
@@ -116,12 +129,13 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		tv.setTextSize(24);
 		//((ViewGroup)getExpandableListView().getParent()).addView(tv); 
 		getExpandableListView().setEmptyView(tv);
+		setContent();
 		return vs;
 	}
 	
 	private void showContextMenu(final GpxDisplayItem gpxDisplayItem) {
-		Builder builder = new AlertDialog.Builder(getActivity());
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(getActivity());
+		Builder builder = new AlertDialog.Builder(getMyActivity());
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(getMyActivity());
 		basicFileOperation(gpxDisplayItem, adapter);
 
 		String[] values = adapter.getItemNames();
@@ -146,7 +160,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 					OsmandSettings settings = getMyApplication().getSettings();
 					settings.setMapLocationToShow(gpxDisplayItem.locationStart.lat, gpxDisplayItem.locationStart.lon,
 							settings.getLastKnownMapZoom(), Html.fromHtml(gpxDisplayItem.name).toString());
-					MapActivity.launchMapActivityMoveToTop(getActivity());
+					MapActivity.launchMapActivityMoveToTop(getMyActivity());
 				}
 			}
 		};
@@ -163,8 +177,8 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	}
 	
 	protected void saveAsFavorites(final GpxDisplayGroup model) {
-		Builder b = new AlertDialog.Builder(getActivity());
-		final EditText editText = new EditText(getActivity());
+		Builder b = new AlertDialog.Builder(getMyActivity());
+		final EditText editText = new EditText(getMyActivity());
 		String name = model.getName();
 		if(name.indexOf('\n') > 0) {
 			name = name.substring(0, name.indexOf('\n'));
@@ -201,7 +215,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 //		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_light,
 //				R.drawable.ic_action_search_dark, MenuItem.SHOW_AS_ACTION_ALWAYS
 //						| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-//		searchView = new com.actionbarsherlock.widget.SearchView(getActivity());
+//		searchView = new com.actionbarsherlock.widget.SearchView(getMyActivity());
 //		mi.setActionView(searchView);
 //		searchView.setOnQueryTextListener(new OnQueryTextListener() {
 //
@@ -228,12 +242,12 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	private void selectSplitDistance(final GpxDisplayGroup model) {
-		Builder bld = new AlertDialog.Builder(getActivity());
+		Builder bld = new AlertDialog.Builder(getMyActivity());
 		int[] checkedItem = new int[] {!model.isSplitDistance() && !model.isSplitTime()? 0 : -1};
 		List<String> options = new ArrayList<String>();
 		final List<Double> distanceSplit = new ArrayList<Double>();
 		final TIntArrayList timeSplit = new TIntArrayList();
-		View view = getActivity().getLayoutInflater().inflate(R.layout.selected_track_edit, null);
+		View view = getMyActivity().getLayoutInflater().inflate(R.layout.selected_track_edit, null);
 		
 		options.add(app.getString(R.string.none));
 		distanceSplit.add(-1d);
@@ -258,7 +272,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		final CheckBox vis = (CheckBox) view.findViewById(R.id.Visibility);
 		vis.setChecked(true);
 		final Spinner sp = (Spinner) view.findViewById(R.id.Spinner);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, options);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyActivity(), android.R.layout.simple_spinner_item, options);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		sp.setAdapter(adapter);
 		if(checkedItem[0] > 0) {
@@ -468,7 +482,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
-				LayoutInflater inflater = getActivity().getLayoutInflater();
+				LayoutInflater inflater = getMyActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.expandable_list_item_category_btn, parent, false);
 				fixBackgroundRepeat(row);
 			}
@@ -480,7 +494,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			
 			if(model.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
 				ch.setVisibility(View.VISIBLE);
-				ch.setImageDrawable(getActivity().getResources().getDrawable(
+				ch.setImageDrawable(getMyActivity().getResources().getDrawable(
 						app.getSettings().isLightContent() ? R.drawable.ic_action_settings_light
 								: R.drawable.ic_action_settings_dark));
 				ch.setOnClickListener(new View.OnClickListener() {
@@ -493,7 +507,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			} else if(model.getType() == GpxDisplayItemType.TRACK_POINTS || 
 					model.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
 				ch.setVisibility(View.VISIBLE);
-				ch.setImageDrawable(getActivity().getResources().getDrawable(
+				ch.setImageDrawable(getMyActivity().getResources().getDrawable(
 						app.getSettings().isLightContent() ? R.drawable.ic_action_fav_light
 								: R.drawable.ic_action_fav_dark));
 				ch.setOnClickListener(new View.OnClickListener() {
@@ -516,7 +530,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
-				LayoutInflater inflater = getActivity().getLayoutInflater();
+				LayoutInflater inflater = getMyActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.gpx_item_list_item, parent, false);
 			}
 			GpxDisplayItem child = getChild(groupPosition, childPosition);
@@ -543,9 +557,9 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 						groupColor = child.locationStart.getColor(groupColor);
 					}
 					if(groupColor == 0) {
-						groupColor = getResources().getColor(R.color.gpx_track);
+						groupColor = getMyActivity().getResources().getColor(R.color.gpx_track);
 					}
-					icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),  groupColor));
+					icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getMyActivity(),  groupColor));
 				}
 			}
 			row.setTag(child);
@@ -554,7 +568,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			if (child.expanded && !Algorithms.isEmpty(child.description)) {
 				String d = child.description;
 				if (child.group.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
-					d += "<br/>" + getString(R.string.local_index_gpx_info_show);
+					d += "<br/>" + app.getString(R.string.local_index_gpx_info_show);
 				}
 				description.setText(Html.fromHtml(d));
 				description.setVisibility(View.VISIBLE);
@@ -575,12 +589,12 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
 			ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
 			qa.setAnchor(v);
-			String name = getString(R.string.favorite) + ": " + child.name;
+			String name = app.getString(R.string.favorite) + ": " + child.name;
 			LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
 			OsmandSettings settings = getMyApplication().getSettings();
-			MapActivityActions.createDirectionsActions(qa, location, child.locationStart, name, settings.getLastKnownMapZoom(), getActivity(),
+			MapActivityActions.createDirectionsActions(qa, location, child.locationStart, name, settings.getLastKnownMapZoom(), getMyActivity(),
 					true, false);
-			MapActivityActions.showObjectContextMenu(qa, getActivity(), null);
+			MapActivityActions.showObjectContextMenu(qa, getMyActivity(), null);
 		} else {
 			child.expanded = !child.expanded;
 			adapter.notifyDataSetInvalidated();
