@@ -1038,13 +1038,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	\n* Redesign af brugerflade
 	\n* Fejlrettelser
     </string>
-    <string name="tip_navigation_t">For at få kørselsvejledning til et sted, enten langt tryk på direkte på kortet, (tryk derefter på beskrivelsemarkøren, og vælg \'Kørselsvejledning til\'), eller vælg \'Kørselsvejledning\' efter at have trykket på et resultat på liste med søgeresultater eller favoritliste.
-\n\nDestinationen er markeret som et orange flag på kortet og OsmAnd viser afstand og retning til det (orange trekant).
+    <string name="tip_navigation_t">"For at få kørselsvejledning til et sted, enten langt tryk på direkte på kortet, (tryk derefter på beskrivelsemarkøren, og vælg \'Kørselsvejledning til\'), eller vælg \'Kørselsvejledning\' efter at have trykket på et resultat på liste med søgeresultater eller favoritliste.
+\n\nDestinationen er markeret som et målflag på kortet og OsmAnd viser afstand og retning til det (orange trekant).
 \n\nFor at få kørselsvejledning til destinationen fra et andet punkt end den aktuelle position, vælges det på kortet, og tryk \'Kørselsvejledning fra\'.
 \n\nVælg enten \'Begynd navigation\', hvilket betyder, at OsmAnd giver vejledning og talte instruktioner (hvis aktiveret) mv. Eller vælg \'Vis rute\', hvilket resulterer i statisk rute uden vejledning eller justeringer, mens du flytter.
-\n\nBruges \'Kørselsvejledning fra\' sammen med \'Begynd navigation\', vil OsmAnd skifte til den faktiske position, så snart den er fundet (dette kan bruges til at  komme hurtigt i gang med rutevejledning  før positionen findes), mens \'Kørselsvejledning fra\' i kombination med \'Vis rute\' kun viser ruten fra ethvert vilkårligt valgt punkt uden efterfølgende opdateringer. ↵
-→
-	</string>
+\n\nBruges \'Kørselsvejledning fra\' sammen med \'Begynd navigation\', vil OsmAnd skifte til den faktiske position, så snart den er fundet (dette kan bruges til at komme hurtigt i gang med rutevejledning før positionen findes), mens \'Kørselsvejledning fra\' i kombination med \'Vis rute\' kun viser ruten fra ethvert vilkårligt valgt punkt uden efterfølgende opdateringer.\nHvis du bruger \"Kørselsvejledning fra \'sammen med\' Start navigation\", vil Osmand så hurtigt skifte til din aktuelle position som det findes (så dette kan bruges til at kickstarte routing før positionen er fundet), mens \"Kørselsvejledning fra \'i kombination med \'Vis rute\' bare viser dig ruten fra enhver vilkårlig punkt, du havde valgt uden efterfølgende opdateringer. "</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
 	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
@@ -1076,8 +1074,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="use_high_res_maps_descr">Stræk (og slør) ikke delkort på skærme med stor opløsning</string>
 	<string name="download_files">Hent</string>
 	<string name="context_menu_item_search_transport">Søg transport</string>
-	<string name="transport_searching_transport">Transportresultater (ingen mål):</string>
-	<string name="transport_searching_route">Transportresultater ({0} til mål):</string>
+	<string name="transport_searching_transport">Transportresultater (ingen destination):</string>
+	<string name="transport_searching_route">Transportresultater ({0} til destination):</string>
 	<string name="transport_search_none">ingen</string>
 	<string name="transport_search_again">Nulstil transportsøgning</string>
 	<string name="map_index">Kort</string>
@@ -1970,7 +1968,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="targets">Mål</string>
     <string name="way_alarms">Forhindringer</string>
     <string name="speak_favorites">Meddel favoritter</string>
-    <string name="speak_poi">Meddel IP</string>
+    <string name="speak_poi">Meddel interessepunkt (IP)</string>
     <string name="flat_list_waypoints">Alle</string>
     <string name="index_tours">Ture</string>
     </resources>
