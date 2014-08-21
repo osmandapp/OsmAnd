@@ -1355,13 +1355,12 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
     <string name="local_osm_changes_delete_all_confirm">%1$d個のOSMの変更を削除しようとしています。よろしいですか？</string>
     <string name="local_osm_changes_delete_all">すべて削除</string>
     <string name="osmodroid_refresh">チャンネルを更新</string>
-    <string name="tip_recent_changes_1_5_t">1.5での変更点:
-	\n\t* Voice warnings about speed limits and cameras
-	\n\t* More voice prompt capabilities (street names announced)
-	\n\t* High density map icons
-	\n\t* Lots of UI changes
-	\n\t* Bugfixes in distance display, GPX analyzer, waypoint handling, planning widget, OSM uploading, https handling
-    </string>
+    <string name="tip_recent_changes_1_5_t">"1.5での変更点:
+\n\t* 制限速度とスピードカメラを音声で警告
+\n\t* 音声案内機能の追加 (通りの名前をアナウンス)
+\n\t* 高密度アイコン
+\n\t* ユーザーインターフェイスの変更
+\n\t* 距離表示、GPXアナライザ、経由点処理、ウィジェット、OSMのアップロード、httpsの取り扱い等のバグ修正 "</string>
     <string name="tip_recent_changes_1_4_t">1.4での変更点:
 	\n\t* 経由点順にすべての訪問する場合の最適化(トラベリングセールスマンやドア·ツー·ドア手法)
 	\n\t* 通りの名前で検索(近郊)

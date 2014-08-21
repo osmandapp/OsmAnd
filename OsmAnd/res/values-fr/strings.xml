@@ -291,9 +291,8 @@
   <string name="tip_app_mode">Mode de fonctionnement</string>
   
   <string name="tip_navigation">Navigation</string>
-  <string name="tip_navigation_t">\tLa navigation vers un point peut être lancée soit directement par un appui long à son emplacement sur la carte (une bulle apparaît alors, sur laquelle un appui court ouvre le menu contextuel avec le choix \'Aller vers le point\'), soit par un appui court sur un favori ou un résultat de recherche (en choisissant alors \'Navigation\').
-  	\n\tLa destination est alors indiquée par un point orange et un drapeau à damier. OsmAnd affiche la distance qui vous en sépare, et sa direction (par une flèche orange).
-  </string>
+  <string name="tip_navigation_t">"La navigation vers un point peut être lancée soit directement par un appui long à son emplacement sur la carte (une bulle apparaît alors, sur laquelle un appui court ouvre le menu contextuel avec le choix \'Aller vers le point\'), soit par un appui court sur un favori ou un résultat de recherche (en choisissant alors \'Navigation\').
+\n\tLa destination est alors indiquée par un point et un drapeau à damier. OsmAnd affiche la distance qui vous en sépare, et sa direction (par une flèche orange). "</string>
   <string name="tip_search">Recherche</string>
   <string name="tip_search_t">\tVous pouvez rechercher un lieu via l\'option \'Rechercher autour du point\' dans le menu contextuel de la carte, ou via \'Menu\' → \'Rechercher\'.
   	\n\nVous pouvez alors rechercher :
@@ -426,8 +425,8 @@
   <string name="unknown_location">Position inconnue actuellement</string>
   <string name="download_files">Télécharger</string>
   <string name="context_menu_item_search_transport">Chercher transport</string>
-  <string name="transport_searching_transport">Lignes à proximité (pas de destination définie) :</string>
-  <string name="transport_searching_route">Lignes à proximité (destination située à {0}) :</string>
+  <string name="transport_searching_transport">Arrêts à proximité (pas de destination définie) :</string>
+  <string name="transport_searching_route">Arrêts à proximité ({0} de la destination) :</string>
   <string name="transport_search_none">aucun</string>
   <string name="transport_search_again">Réinitialiser la recherche</string>
   <string name="map_index">Carte</string>
@@ -1690,7 +1689,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="selected_gpx_info_show">\n\nAppui long pour visualiser sur la carte</string>
     <string name="delay_navigation_start">Démarrer la navigation automatiquement</string>
     <string name="selected">sélectionner</string>
-    <string name="gpx_split_interval">Diviser en sections de…</string>
+    <string name="gpx_split_interval">Intervalle de division</string>
     <string name="local_index_gpx_info_show">\n\nAppui long pour afficher les options</string>
 <string name="gpx_info_subtracks">Sections : %1$s </string>
 <string name="gpx_info_waypoints">Points de cheminement : %1$s </string>
@@ -1811,4 +1810,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="speak_favorites">Annoncer les favoris</string>
     <string name="speak_poi">Annoncer les points d\'intérêt</string>
     <string name="flat_list_waypoints">Tous</string>
+    <string name="index_tours">Tours</string>
     </resources>

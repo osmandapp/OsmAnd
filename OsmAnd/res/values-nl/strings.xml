@@ -1952,4 +1952,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="way_alarms">Obstakel(s)</string>
     <string name="speak_favorites">Meld favorieten</string>
     <string name="speak_poi">Meld interessepunt (POI)</string>
+    <string name="flat_list_waypoints">Alle</string>
+    <string name="index_tours">Rondreizen</string>
     </resources>
