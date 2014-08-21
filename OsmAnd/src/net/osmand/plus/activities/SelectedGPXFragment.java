@@ -28,7 +28,6 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -157,7 +156,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (resId == R.string.show_gpx_route) {
-					OsmandSettings settings = getMyApplication().getSettings();
+					OsmandSettings settings = app.getSettings();
 					settings.setMapLocationToShow(gpxDisplayItem.locationStart.lat, gpxDisplayItem.locationStart.lon,
 							settings.getLastKnownMapZoom(), Html.fromHtml(gpxDisplayItem.name).toString());
 					MapActivity.launchMapActivityMoveToTop(getMyActivity());
@@ -200,7 +199,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	protected void saveFavoritesImpl(List<GpxDisplayItem> modifiableList, String category) {
-		FavouritesDbHelper fdb = getMyApplication().getFavorites();
+		FavouritesDbHelper fdb = app.getFavorites();
 		for(GpxDisplayItem i : modifiableList) {
 			if (i.locationStart != null) {
 				FavouritePoint fp = new FavouritePoint(i.locationStart.lat, i.locationStart.lon, i.locationStart.name,
@@ -286,9 +285,9 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(!vis.isChecked()) {
-					getMyApplication().getSelectedGpxHelper().selectGpxFile(model.getGpx(), false, false);
+					app.getSelectedGpxHelper().selectGpxFile(model.getGpx(), false, false);
 					SelectedGPXFragment.this.adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
-					getMyApplication().getSelectedGpxHelper().runUiListeners();
+					app.getSelectedGpxHelper().runUiListeners();
 				} else {
 					updateSplit(model, distanceSplit, timeSplit, sp.getSelectedItemPosition() );
 				}
@@ -591,7 +590,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			qa.setAnchor(v);
 			String name = app.getString(R.string.favorite) + ": " + child.name;
 			LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
-			OsmandSettings settings = getMyApplication().getSettings();
+			OsmandSettings settings = app.getSettings();
 			MapActivityActions.createDirectionsActions(qa, location, child.locationStart, name, settings.getLastKnownMapZoom(), getMyActivity(),
 					true, false);
 			MapActivityActions.showObjectContextMenu(qa, getMyActivity(), null);
