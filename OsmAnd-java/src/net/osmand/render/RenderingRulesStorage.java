@@ -2,6 +2,7 @@ package net.osmand.render;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -440,6 +441,10 @@ public class RenderingRulesStorage {
 	
 	
 	public static void main(String[] args) throws XmlPullParserException, IOException {
+		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
+		if(args != null && args.length > 0) {
+			is = new FileInputStream(args[0]);
+		}
 		RenderingRulesStorage storage = new RenderingRulesStorage("test", null);
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
@@ -449,25 +454,43 @@ public class RenderingRulesStorage {
 				return depends;
 			}
 		};
-		storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("default.render.xml"), resolver);
+		storage.parseRulesFromXmlInputStream(is, resolver);
+		
+		printAllRules(storage);
+//		testSearch(storage);
+	}
+
+	protected static void testSearch(RenderingRulesStorage storage) {
+		//		long tm = System.nanoTime();
+		//		int count = 100000;
+		//		for (int i = 0; i < count; i++) {
+					RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
+					searchRequest.setStringFilter(storage.PROPS.R_TAG, "landuse");
+					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "wood");
+					 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
+					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 15);
+					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 15);
+					//	searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
+					// searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
+					
+					boolean res = searchRequest.search(POLYGON_RULES);
+					System.out.println("Result " + res);
+					printResult(searchRequest,  System.out);
+		//		}
+		//		System.out.println((System.nanoTime()- tm)/ (1e6f * count) );
+	}
+
+	protected static void printAllRules(RenderingRulesStorage storage) {
+		System.out.println("\n\n--------- POINTS ----- ");
+		storage.printDebug(POINT_RULES, System.out);
+		System.out.println("\n\n--------- POLYGON ----- ");
+		storage.printDebug(POLYGON_RULES, System.out);
+		System.out.println("\n\n--------- LINES ----- ");
+		storage.printDebug(LINE_RULES, System.out);
+		System.out.println("\n\n--------- ORDER ----- ");
+		storage.printDebug(ORDER_RULES, System.out);
+		System.out.println("\n\n--------- TEXT ----- ");
 		storage.printDebug(TEXT_RULES, System.out);
-//		long tm = System.nanoTime();
-//		int count = 100000;
-//		for (int i = 0; i < count; i++) {
-			RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
-			searchRequest.setStringFilter(storage.PROPS.R_TAG, "landuse");
-			searchRequest.setStringFilter(storage.PROPS.R_VALUE, "wood");
-			 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
-			searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 15);
-			searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 15);
-			//	searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
-			// searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
-			
-			boolean res = searchRequest.search(POLYGON_RULES);
-			System.out.println("Result " + res);
-			printResult(searchRequest,  System.out);
-//		}
-//		System.out.println((System.nanoTime()- tm)/ (1e6f * count) );
 	}
 	
 	private static void printResult(RenderingRuleSearchRequest searchRequest, PrintStream out) {
