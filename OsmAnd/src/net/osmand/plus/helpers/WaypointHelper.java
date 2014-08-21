@@ -212,14 +212,9 @@ public class WaypointHelper {
 	}
 	
 	public boolean isTypeVisible(int waypointType) {
-		boolean vis = app.getAppCustomization().isWaypointGroupVisible(waypointType);
+		boolean vis = app.getAppCustomization().isWaypointGroupVisible(waypointType, route);
 		if(!vis) {
 			return false;
-		}
-		if(waypointType == ALARMS) {
-			return route != null && !route.getAlarmInfo().isEmpty();
-		} else if(waypointType == WAYPOINTS) {
-			return route != null && !route.getLocationPoints().isEmpty();
 		}
 		return vis;
 	}

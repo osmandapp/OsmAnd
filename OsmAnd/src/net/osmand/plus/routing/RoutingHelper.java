@@ -100,6 +100,13 @@ public class RoutingHelper {
 	
 	public void setPauseNaviation(boolean b) {
 		this.isPauseNavigation = b;
+		if (b) {
+			if (app.getNavigationService() != null) {
+				app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_NAVIGATION);
+			}
+		} else {
+			app.startNavigationService(NavigationService.USED_BY_NAVIGATION);
+		}
 	}
 	
 	public boolean isPauseNavigation() {

@@ -19,6 +19,8 @@ import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.view.Window;
@@ -157,7 +159,12 @@ public class OsmAndAppCustomization {
 		return Collections.emptyList();
 	}
 
-	public boolean isWaypointGroupVisible(int waypointType) {
+	public boolean isWaypointGroupVisible(int waypointType, RouteCalculationResult route) {
+		if(waypointType == WaypointHelper.ALARMS) {
+			return route != null && !route.getAlarmInfo().isEmpty();
+		} else if(waypointType == WaypointHelper.WAYPOINTS) {
+			return route != null && !route.getLocationPoints().isEmpty();
+		}
 		return true;
 	}
 

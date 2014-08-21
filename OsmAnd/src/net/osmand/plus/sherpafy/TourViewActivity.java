@@ -176,7 +176,9 @@ public class TourViewActivity extends SherlockFragmentActivity {
 					} else if (selectedItem == it) {
 						imView.setImageResource(R.drawable.ic_action_ok_light);
 					} else {
-						boolean visited = customization.isStageVisited(((StageInformation) it).getOrder());
+						final StageInformation stageInformation = (StageInformation) it;
+						boolean visited = stageInformation.getTour() == customization.getSelectedTour() &&
+								customization.isStageVisited(stageInformation.getOrder());
 						imView.setImageDrawable(
 								new StageImageDrawable(TourViewActivity.this,
 										visited ? StageImageDrawable.INFO_COLOR : StageImageDrawable.MENU_COLOR,
