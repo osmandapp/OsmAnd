@@ -140,8 +140,35 @@ public class RenderingRule {
 	}
 	
 	public StringBuilder toString(String indent, StringBuilder bls ) {
-		bls.append("RenderingRule [");
+		bls.append("test [");
+		printAttrs(bls, true);
+		bls.append("]");
+		
+		bls.append(" set [");
+		printAttrs(bls, false);
+		bls.append("]");
+		
+		int k = 0;
+		for(RenderingRule rc : getIfElseChildren()){
+			String cindent = indent + (k++ == 0 ?  "* if   " : "* elif ");
+			bls.append("\n").append(cindent);
+			rc.toString(indent + "*    ", bls);
+		}
+		
+		for(RenderingRule rc : getIfChildren()){
+			String cindent = indent + "* if   " ;
+			bls.append("\n").append(cindent);
+			rc.toString(indent + "*    ", bls);
+		}
+		
+		return bls;
+	}
+
+	protected void printAttrs(StringBuilder bls, boolean in) {
 		for(RenderingRuleProperty p : getProperties()){
+			if(p.isInputProperty() != in) {
+				continue;
+			}
 			bls.append(" ").append(p.getAttrName()).append("= ");
 			if(p.isString()){
 				bls.append("\"").append(getStringPropertyValue(p.getAttrName())).append("\"");
@@ -153,21 +180,6 @@ public class RenderingRule {
 				bls.append(getIntPropertyValue(p.getAttrName()));
 			} 
 		}
-		bls.append("]");
-		
-		for(RenderingRule rc : getIfChildren()){
-			String cindent = indent + "  [] ";
-			bls.append("\n").append(cindent);
-			rc.toString(indent + "    ", bls);
-		}
-		
-		for(RenderingRule rc : getIfElseChildren()){
-			String cindent = indent + "  +  ";
-			bls.append("\n").append(cindent);
-			rc.toString(indent + "    ", bls);
-		}
-		
-		return bls;
 	}
 
 }

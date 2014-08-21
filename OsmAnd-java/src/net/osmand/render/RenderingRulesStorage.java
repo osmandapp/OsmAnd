@@ -430,7 +430,7 @@ public class RenderingRulesStorage {
 	public void printDebug(int state, PrintStream out){
 		for(int key : tagValueGlobalRules[state].keys()) {
 			RenderingRule rr = tagValueGlobalRules[state].get(key);
-			out.print("\n\n"+getTagString(key) + " : " + getValueString(key) + "\n  ");
+			out.print("\n\n"+getTagString(key) + " : " + getValueString(key) + "\n ");
 			printRenderingRule(" ", rr, out);
 		}
 	}
