@@ -983,7 +983,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
             boolean newFileIndexed = indexSingleFile(f);
             if (newFileIndexed && registerInGPX) {
                 Recording rec = recordingByFileName.get(f.getName());
-                if (rec != null && app.getSettings().SAVE_TRACK_TO_GPX.get()
+                if (rec != null && 
+                		(app.getSettings().SAVE_TRACK_TO_GPX.get()
+                				|| app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get())
                         && OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
                     String name = f.getName();
                     SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
