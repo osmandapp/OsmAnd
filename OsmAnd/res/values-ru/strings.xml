@@ -1804,4 +1804,6 @@ OsmAnd - открытый источник и активно развается.
     <string name="way_alarms">Препятствия</string>
     <string name="speak_favorites">Объявлять избранные</string>
     <string name="speak_poi">Объявлять POI</string>
+    <string name="index_tours">Туры</string>
+    <string name="flat_list_waypoints">Все</string>
     </resources>
