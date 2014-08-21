@@ -1971,4 +1971,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="way_alarms">Forhindringer</string>
     <string name="speak_favorites">Meddel favoritter</string>
     <string name="speak_poi">Meddel IP</string>
+    <string name="flat_list_waypoints">Alle</string>
+    <string name="index_tours">Ture</string>
     </resources>
