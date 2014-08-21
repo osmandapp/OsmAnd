@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -148,7 +149,7 @@ public class DownloadActivityType {
 
 	public String getBaseUrl(OsmandApplication ctx, String fileName) {
 		return "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&"
-				+ Version.getVersionAsURLParam(ctx) + "&file=" + fileName;
+				+ Version.getVersionAsURLParam(ctx) + "&file=" + URLEncoder.encode(fileName, "UTF-8"));
 	}
 
 
