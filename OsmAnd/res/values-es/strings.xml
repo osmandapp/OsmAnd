@@ -279,12 +279,11 @@
   <string name="tip_app_mode">Perfil de uso</string>
   
   <string name="tip_navigation">Navegación</string>
-  <string name="tip_navigation_t">Para recibir indicaciones hasta un lugar, o bien mantén pulsado sobre el mismo en el mapa, luego pulsa sobre su descripción y selecciona \'Indicaciones a\', o bien selecciona \'Indicaciones\' después de pulsar sobre una entrada en una lista de resultados de búsqueda o de favoritos.
-		\n\nEl destino se marca en el mapa como una bandera naranja y OsmAnd muestra la distancia y la dirección al mismo (triángulo naranja).
-		\n\nPuedes elegir \'Seguir\', lo que implica que OsmAnd te guiará, te dará indicaciones vocales (si están activas), etc. O puedes elegir \'Sólo mostrar\', lo que solamente te mostrará la ruta, sin indicaciones ni reajustes según te muevas.
-		\n\nPara mostrar una ruta al destino desde cualquier punto diferente de la posición actual, selecciónalo posteriormente en el mapa y pulsa \'Indicaciones desde\'.
-		\n\nSi usas \'Indicaciones desde\' y luego \'Seguir\', OsmAnd cambiará a tu posición actual tan pronto como la conozca (por lo que se puede usar para iniciar la ruta antes de conocer la posición real). Por otro lado, \'Indicaciones desde\' y \'Sólo mostrar\' no realizará actualizaciones de la ruta mostrada.
-	</string>
+  <string name="tip_navigation_t">"Para recibir indicaciones hasta un lugar, o bien mantén pulsado sobre el mismo en el mapa, luego pulsa sobre su descripción y selecciona \'Indicaciones a\', o bien selecciona \'Indicaciones\' después de pulsar sobre una entrada en una lista de resultados de búsqueda o de favoritos.
+\n\nEl destino se marca en el mapa como una bandera y OsmAnd muestra la distancia y la dirección al mismo (triángulo naranja).
+\n\nPuedes elegir \'Seguir\', lo que implica que OsmAnd te guiará, te dará indicaciones vocales (si están activas), etc. O puedes elegir \'Sólo mostrar\', lo que solamente te mostrará la ruta, sin indicaciones ni reajustes según te muevas.
+\n\nPara mostrar una ruta al destino desde cualquier punto diferente de la posición actual, selecciónalo posteriormente en el mapa y pulsa \'Indicaciones desde\'.
+\n\nSi usas \'Indicaciones desde\' y luego \'Seguir\', OsmAnd cambiará a tu posición actual tan pronto como la conozca (por lo que se puede usar para iniciar la ruta antes de conocer la posición real). Por otro lado, \'Indicaciones desde\' y \'Sólo mostrar\' no realizará actualizaciones de la ruta mostrada. "</string>
   <string name="tip_search">Buscando</string>
   <string name="tip_search_t">Puedes buscar lugares directamente en el mapa vía \'Usar localización…\'→\'Buscar cerca de aquí\', o mediante la pantalla de búsqueda vía \'Menú\'→\'Buscar\'.
 		\n\nLa pantalla de búsqueda proporciona plantillas para buscar:
@@ -1860,4 +1859,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="speak_favorites">Anunciar Favoritos</string>
     <string name="speak_poi">Anunciar PDI</string>
     <string name="flat_list_waypoints">Todos</string>
+    <string name="index_tours">Viajes</string>
     </resources>

@@ -484,12 +484,11 @@
   <string name="tip_app_mode">Naudoti profilį</string>
   
   <string name="tip_navigation">Navigacija</string>
-  <string name="tip_navigation_t">Norėdami gauti nuorodas į pageidaujamą vietą galite ilgai paspaudę žemėlapyje ant pageidaujamos vietos ir ant jos atsiradusiame žymeklyje pasirinkti \'Maršrutas į\', arba pasirinkti \'Nuorodos\' paspaudę ant reikiamo įrašu paieškos rezultatų sąraše. 
-		\n\nKelionės tikslas žymimas oranžine tikslo vėliavėle ant žemėlapio ir OsmAnd rodo atstumą ir kryptį iki jo (oranžinis trikampis).
-		\n\nGalite pasirinkti \'Pradėti navigaciją\' - OsmAnd jums duos nuorodas, taip pat ir balsu (jei įdiegta) arba galite pasirinkti \'Rodyti maršrutą\' ir matysite savo pasirinktą maršrutą, tačiau be nurodymų ar pataisymų jums judant
-		\n\nNorėdami gauti nuorodas iš bet kurios vietos (išskyrus jūsų dabartinę) turite ją pažymėti žemėlapyje ir pasirinkti \'Nuorodos iš\'.
-		\n\nJei pasirinksite \'Nuorodos iš\' kartu su \'Pradėti navigaciją\', OsmAnd persijungs į jūsų esamą poziciją kai tik ją apsakičiuos (taip galima pradėti navigaciją dar prieš įranginiui apskaičiavus jūsų dabartinę poziciją), o \'Nuorodos iš\' kartu su \'Rodyti maršrutą\' tik parodys jūsų maršrutą nuo jūsų pasirinkto taško be tolesnių atnaujinimų.
-	</string>
+  <string name="tip_navigation_t">"Norėdami gauti nuorodas į pageidaujamą vietą galite ilgai paspaudę žemėlapyje ant pageidaujamos vietos ir ant jos atsiradusiame žymeklyje pasirinkti \'Maršrutas į\', arba pasirinkti \'Nuorodos\' paspaudę ant reikiamo įrašu paieškos rezultatų sąraše.
+\n\nKelionės tikslas žymimas tikslo vėliavėle žemėlapyje ir OsmAnd rodo atstumą ir kryptį iki jo (oranžinis trikampis).
+\n\nGalite pasirinkti \'Pradėti navigaciją\' - OsmAnd jums duos nuorodas, taip pat ir balsu (jei įdiegta) arba galite pasirinkti \'Rodyti maršrutą\' ir matysite savo pasirinktą maršrutą, tačiau be nurodymų ar pataisymų jums judant
+\n\nNorėdami gauti nuorodas iš bet kurios vietos (išskyrus jūsų dabartinę) turite ją pažymėti žemėlapyje ir pasirinkti \'Nuorodos iš\'.
+\n\nJei pasirinksite \'Nuorodos iš\' kartu su \'Pradėti navigaciją\', OsmAnd persijungs į jūsų esamą poziciją kai tik ją apsakičiuos (taip galima pradėti navigaciją dar prieš įranginiui apskaičiavus jūsų dabartinę poziciją), o \'Nuorodos iš\' kartu su \'Rodyti maršrutą\' tik parodys jūsų maršrutą nuo jūsų pasirinkto taško be tolesnių atnaujinimų. "</string>
   <string name="tip_search">Paieška</string>
   <string name="tip_search_t">Vietų ieškoti galitie tiesiog žemėlapyje per \'Naudoti vietą\' → \'Ieškoti netoliese\', arba atverdami paiesškos langą per \'Meniu\' → \'Ieškoti\'.
 		\n\nPasieškos langas pateikia paieškos įvedimo formas
@@ -1815,4 +1814,11 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="rendering_value_pedestrian_name">Pėstysis</string>
     <string name="more">Dar…</string>
     <string name="download_additional_maps">Atsiųsti trūkstamus žemėlapius %1$s (%2$d MB)?</string>
+    <string name="index_tours">Turai</string>
+    <string name="flat_list_waypoints">Visi</string>
+    <string name="targets">Tikslai</string>
+    <string name="waypoints">Tarpiniai taškai</string>
+    <string name="way_alarms">Kliūtys</string>
+    <string name="speak_favorites">Paskelbti įsimintas vietas</string>
+    <string name="speak_poi">Paskelbti lankytinas vietas</string>
     </resources>
