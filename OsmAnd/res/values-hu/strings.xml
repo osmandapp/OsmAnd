@@ -1307,9 +1307,9 @@
     <string name="route_from">Innen:</string>
     
 	
-    <string name="speak_speed_limit">Sebességhatár bemondása</string>
-    <string name="speak_cameras">Traffipax bemondása</string>
-	<string name="speak_traffic_warnings">Közlekedési figyelmeztetések bemondása</string>
+    <string name="speak_speed_limit">Sebességhatár</string>
+    <string name="speak_cameras">Traffipax</string>
+	<string name="speak_traffic_warnings">Közlekedési figyelmeztetések</string>
 	
 	
 	<string name="destination_point">Célpont %1$s</string>
@@ -1335,10 +1335,10 @@
 	<string name="driving_region_uk">UK, India, Ausztrália &amp; továbbiak</string>
 	<string name="osmodroid_mode_on">OsMoDroid leállítása</string>    
     <string name="osmodroid_mode_off">OsMoDroid indítása</string>
-    <string name="announce_gpx_waypoints">GPX útpontok bemondása</string>
+    <string name="announce_gpx_waypoints">GPX útpontok</string>
     <string name="speak_title">Bemondás…</string>
 	<string name="speak_descr">Utcanevek, közlekedési figyelmeztetések (megállás, fekvőrendőr), traffipax, sebességhatár bemondásának beállításai</string>
-	<string name="speak_street_names">Utcanevek bemondása (TTS)</string>
+	<string name="speak_street_names">Utcanevek (TTS)</string>
     <string name="osb_author_dialog_password">OSM jelszó (opcionális)</string>
 	<string name="map_widget_fps_info">FPS debug infó</string>
 	<string name="tip_map_styles">Térképstílusok</string>
@@ -1737,4 +1737,16 @@
     <string name="osmo_settings_debug">Hibakeresési információk</string>
     <string name="rendering_attr_osmcTraces_description">OSMC stílusú túrajelzések megjelenítése</string>
     
-	</resources>
+	<string name="index_tours">Túrák</string>
+    <string name="flat_list_waypoints">Összes</string>
+    <string name="waypoints">Útpontok</string>
+    <string name="targets">Célpontok</string>
+    <string name="way_alarms">Akadályok</string>
+    <string name="speak_favorites">Kedvenc helyek</string>
+    <string name="speak_poi">Érdekes helyek (POI)</string>
+    <string name="download_additional_maps">Letöltöd a hiányzó térképeket %1$s (%2$d MB)?</string>
+    <string name="rendering_value_browse_map_name">Térképböngészés</string>  
+    <string name="rendering_value_car_name">Autó</string>
+    <string name="rendering_value_bicycle_name">Kerékpár</string>
+    <string name="rendering_value_pedestrian_name">Gyalogos</string>
+    </resources>
