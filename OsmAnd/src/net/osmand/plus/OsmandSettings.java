@@ -795,9 +795,9 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false).makeProfile().cache();
 	{
-		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, true);
-		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, true);
-		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, false);
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, false);
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -1100,6 +1100,10 @@ public class OsmandSettings {
 		String defaultLocation = Environment.getExternalStorageDirectory().getAbsolutePath();
 		return new File(settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR, 
 				defaultLocation));
+	}
+	
+	public Object getGlobalPreferences() {
+		return globalPreferences;
 	}
 	
 	public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;

@@ -2,7 +2,6 @@ package net.osmand.plus.sherpafy;
 
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;

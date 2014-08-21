@@ -64,7 +64,6 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private static final String ACCESS_CODE = "access_code";
 	private static final String SELECTED_STAGE = "selected_stage_int";
 	private static final String VISITED_STAGES = "visited_stages_int";
-	private CommonPreference<String> selectedTourPref;
 	private CommonPreference<Integer> selectedStagePref;
 	private CommonPreference<Integer> visitedStagesPref;
 	private boolean toursIndexed;
@@ -77,13 +76,14 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private SettingsAPI originalApi;
 	private CommonPreference<String> saveGPXFolder;
 	public static final String TOUR_SERVER = "download.osmand.net";
-	private static final String SAVE_GPX_FOLDER = "save_gpx_folder";	
+	private static final String SAVE_GPX_FOLDER = "save_gpx_folder";
+	private Object originalGlobal;	
 
 	@Override
 	public void setup(OsmandApplication app) {
 		super.setup(app);
 		originalApi = osmandSettings.getSettingsAPI();
-		selectedTourPref = osmandSettings.registerStringPreference(SELECTED_TOUR, null).makeGlobal();
+		originalGlobal = osmandSettings.getGlobalPreferences();
 		saveGPXFolder = osmandSettings.registerStringPreference(SAVE_GPX_FOLDER, null).makeGlobal();
 		if(osmandSettings.OSMAND_THEME.get() != OsmandSettings.OSMAND_LIGHT_THEME) {
 			osmandSettings.OSMAND_THEME.set(OsmandSettings.OSMAND_LIGHT_THEME);
@@ -124,7 +124,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 
 	public boolean isTourSelected() {
-		return selectedTourPref.get() != null;
+		return originalApi.getString(originalGlobal, SELECTED_TOUR, null)!= null;
 	}
 	
 	public boolean checkExceptionsOnStart() {
@@ -181,7 +181,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		if(toursFolder.exists()) {
 			File[] availableTours = toursFolder.listFiles();
 			if(availableTours != null) {
-				String selectedName = selectedTourPref.get();
+				String selectedName = originalApi.getString(originalGlobal, SELECTED_TOUR, null);
 				for(File tr : availableTours) {
 					if (tr.isDirectory()) {
 						String date = app.getResourceManager().getDateFormat()
@@ -453,9 +453,9 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	public void selectTour(TourInformation tour, IProgress progress) {
 		if (tour == null) {
-			selectedTourPref.set(null);
+			originalApi.edit(originalGlobal).putString(SELECTED_TOUR, null).commit();
 		} else {
-			selectedTourPref.set(tour.getName());
+			originalApi.edit(originalGlobal).putString(SELECTED_TOUR, tour.getName()).commit();
 		}
 		selectedTour = tour;
 		reloadSelectedTour(progress, tour);
