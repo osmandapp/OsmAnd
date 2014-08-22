@@ -1676,4 +1676,9 @@
     <string name="speak_poi">Meddela POI</string>
     <string name="index_tours">Rundturer</string>
     <string name="flat_list_waypoints">Alla</string>
+    <string name="record_plugin_description">Spara dina spår med ett tryck på en knapp på kartskärmen. Visa inställningar som underlättar inspelningen av dina resor till lokala GPX-filer eller online via en webbtjänst.</string>
+    <string name="record_plugin_name">Spela in dina resor</string>
+    <string name="int_hour">h</string>
+    <string name="duration">Längd</string>
+    <string name="distance">Sträcka</string>
     </resources>
