@@ -1971,4 +1971,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="speak_poi">Meddel interessepunkt (IP)</string>
     <string name="flat_list_waypoints">Alle</string>
     <string name="index_tours">Ture</string>
+    <string name="distance">Afstand</string>
+    <string name="duration">Varighed</string>
+    <string name="int_hour">t</string>
+    <string name="record_plugin_name">Optag dine ture</string>
+    <string name="record_plugin_description">Gem dine spor med et tryk på en knap på skærmen. Vis indstillinger som muliggør optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
     </resources>
