@@ -1974,4 +1974,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="speak_poi">Oznamovať body záujmu</string>
     <string name="flat_list_waypoints">Všetky</string>
     <string name="index_tours">Výlety</string>
+    <string name="record_plugin_description">Uložte vaše stopy jedným stlačením tlačidla na mape. Zobrazte nastavenia pre zaznamenanie výletov do lokálneho GPX súboru alebo na webovú službu.</string>
+    <string name="record_plugin_name">Zaznamenajte vaše výlety</string>
+    <string name="int_hour">hod</string>
+    <string name="duration">Trvanie</string>
+    <string name="distance">Vzdialenosť</string>
     </resources>
