@@ -1111,7 +1111,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="rotate_map_bearing_opt">In sa diretzione de sa mòvida</string>
 	<string name="show_view_angle">Ammustra diretzione de osservatzione de abbaidadura</string>
 	<string name="tip_navigation_t">"Pro otènnere indicatziones, mantène carcau in supra de su logu de destinatzione (pustis carca sa descritzione sua e ischerta \'Indicatziones pro\'), o ischerta \'Diretziones\' a pustis de àere carcau unu resurtau o unu prefèrridu.
-\n\nSa destinatzione est sinnada in sa mapa cun una bandera in colore arantzu e OsmAnd at a ammustrare sa distàntzia de lòmpida e sa diretzione pro la segudare in lìnia d\'àera (cun unu triàngulu arantzu).
+\n\nSa destinatzione est sinnada in sa mapa cun una bandera e OsmAnd at a ammustrare sa distàntzia de lòmpida e sa diretzione pro la segudare in lìnia d\'àera (cun unu triàngulu arantzu).
 \n\nPodes ischertare \'Avia nàvigu\' pro pedire ad OsmAnd de ti ghiare finas a sa destinatzione impreande avisos vocales (si sunt abilitados), etc. Si nono ischerta \'Ammustra àndala\' pro otènnere una ghia fissa sena agiornamentos.
 \n\nPro ammustrare un\'àndala pro sa destinatzione ischertada dae unu puntu diferente dae su in su cale ses, ischerta su puntu in sa mapa e carca \'Diretziones dae\'.
 \n\nSi as a impreare \'Diretziones dae\' paris cun \'Avia nàvigu\', OsmAnd at a colare a sa positzione tua in pessu de l\'àere agatada (custu permìtidi de aviare su nàvigu fintzas prima de connòschere sa positzione in ue ses), mentres \'Diretziones dae\' paris cun \'Ammustra àndala\' at a ammustrare petzi s\'àndala dae unu puntu calechisiat sena agiornamentos imbenientes. "</string>
@@ -1402,8 +1402,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="continuous_rendering">Disinnu sighidu</string>
 	<string name="continuous_rendering_descr">Ammustra unu disinnu (rendering) sighidu imbetzes de una immàgine istantànea</string>
 	<string name="rendering_exception">Errore in su disinnu de s\'àrea ischertada</string>
-	<string name="transport_searching_transport">Resurtadu trasportos pùblicos (obietivu perunu):</string>
-	<string name="transport_searching_route">Resurtadu trasportos pùblicos ({0} a obietivu):</string>
+	<string name="transport_searching_transport">Resurtadu trasportos pùblicos (destinatzione peruna):</string>
+	<string name="transport_searching_route">Resurtadu trasportos pùblicos ({0} a destinatzione):</string>
 	<string name="transport_search_again">Reimposta sa chirca de sos trasportos pùblicos</string>
 	<string name="none_region_found">No est istadu agatadu datu perunu pro sas regione in s\'ischeda SD. Iscàrriga sas regiones dae ìnternet.</string>
 	<string name="poi_namefinder_query_empty">Inserta sos paràmetros de chirca pro agatare unu PDI</string>
@@ -1714,7 +1714,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 \n\nSu ricuadru de su marcadore (marker) podet èssere cuadu carcandelu a longu. "</string>
 	<string name="flat_list_waypoitns">Totus</string>
     <string name="waypoints">Puntos mesanos</string>
-    <string name="targets">Obietivos</string>
+    <string name="targets">Destinatziones</string>
     <string name="way_alarms">Impèigos</string>
     <string name="speak_favorites">Annùntzia Prefèrridos</string>
     <string name="speak_poi">Annùntzia PDI</string>
