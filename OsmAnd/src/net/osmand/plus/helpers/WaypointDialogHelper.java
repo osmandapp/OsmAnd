@@ -289,7 +289,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				str = ctx.getString(R.string.waypoints);
 				break;
 			case WaypointHelper.POI:
-				str = waypointHelper.getPoiFilter() == null && !checked ? ctx.getString(R.string.poi) : waypointHelper
+				str = waypointHelper.getPoiFilter() == null || !checked ? ctx.getString(R.string.poi) : waypointHelper
 						.getPoiFilter().getName();
 				break;
 			}

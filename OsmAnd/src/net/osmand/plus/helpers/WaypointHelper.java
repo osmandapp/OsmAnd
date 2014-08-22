@@ -487,7 +487,7 @@ public class WaypointHelper {
 		PoiFilter pf = getPoiFilter();
 		if (pf != null) {
 			final List<Location> locs = route.getImmutableAllLocations();
-			List<Amenity> amenities = app.getResourceManager().searchAmenitiesOnThePath(locs, searchDeviationRadius,
+			List<Amenity> amenities = app.getResourceManager().searchAmenitiesOnThePath(locs, getSearchRadius(POI),
 					pf, new ResultMatcher<Amenity>() {
 
 						@Override
@@ -511,6 +511,11 @@ public class WaypointHelper {
 				}
 			}
 		}
+	}
+
+
+	protected int getSearchRadius(int type) {
+		return app.getAppCustomization().getWaypointSearchRadius(searchDeviationRadius, type);
 	}
 	
 	
@@ -552,7 +557,7 @@ public class WaypointHelper {
 		int[] ind = new int[1];
 		for(LocationPoint p : points) {
 			float dist = dist(p, immutableAllLocations, ind);
-			if(dist <= searchDeviationRadius) {
+			if(dist <= getSearchRadius(type)) {
 				LocationPointWrapper lpw = new LocationPointWrapper(rt, type, p, dist, ind[0]);
 				lpw.setAnnounce(announce);
 				locationPoints.add(lpw);

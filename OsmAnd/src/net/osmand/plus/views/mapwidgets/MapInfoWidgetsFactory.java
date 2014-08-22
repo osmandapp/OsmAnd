@@ -119,7 +119,7 @@ public class MapInfoWidgetsFactory {
 							app.getString(R.string.enable_sleep_mode),
 							OsmandMonitoringPlugin.SECONDS,
 							OsmandMonitoringPlugin.MINUTES,
-							vs, new DialogInterface.OnClickListener() {
+							null, vs, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									app.getSettings().SERVICE_OFF_INTERVAL.set(vs.value);

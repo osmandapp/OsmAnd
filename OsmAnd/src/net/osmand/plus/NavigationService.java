@@ -123,7 +123,9 @@ public class NavigationService extends Service implements LocationListener {
 	}
 	
 	public void stopIfNeeded(Context ctx, int usageIntent) {
-		usedBy -= usageIntent;
+		if((usedBy & usageIntent) > 0) {
+			usedBy -= usageIntent;
+		}
 		if (usedBy == 0) {
 			final Intent serviceIntent = new Intent(ctx, NavigationService.class);
 			ctx.stopService(serviceIntent);
