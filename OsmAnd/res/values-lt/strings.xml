@@ -1821,4 +1821,8 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="way_alarms">Kliūtys</string>
     <string name="speak_favorites">Paskelbti įsimintas vietas</string>
     <string name="speak_poi">Paskelbti lankytinas vietas</string>
+    <string name="record_plugin_name">Įrašyti savo keliones</string>
+    <string name="int_hour">val</string>
+    <string name="duration">Trukmė</string>
+    <string name="distance">Atstumas</string>
     </resources>
