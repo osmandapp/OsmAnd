@@ -1945,4 +1945,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="targets">Цэлі</string>
     <string name="flat_list_waypoints">Усе</string>
     <string name="index_tours">Паездкі</string>
+    <string name="record_plugin_description">Зьберажы сваі сьляды націсканьнем адной кнопкі на мапе. Пакажы наладкі, палягчаючыя запіс тваіх падарожжаў у лакальныя файлы GPX, ці вэбсэрвісам анлайн.</string>
+    <string name="record_plugin_name">Запішы свае падарожжы</string>
+    <string name="int_hour">h</string>
+    <string name="duration">Працягласьць</string>
+    <string name="distance">Адлегласьць</string>
     </resources>
