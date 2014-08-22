@@ -1811,4 +1811,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="speak_poi">Annoncer les points d\'intérêt</string>
     <string name="flat_list_waypoints">Tous</string>
     <string name="index_tours">Tours</string>
+    <string name="record_plugin_description">Enregistrer vos itinéraires. Monter les paramètres permettant l\'enregistrement des itinéraires dans des fichiers GPX locaux ou en ligne avec un service Web.</string>
+    <string name="record_plugin_name">Enregistrer vos itinéraires</string>
+    <string name="int_hour">h</string>
+    <string name="duration">Durée</string>
+    <string name="distance">Distance</string>
     </resources>
