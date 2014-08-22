@@ -243,7 +243,7 @@
 	<string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在休眠模式下(螢幕關閉)顯示設定以啟用追蹤與導航。</string>
 	<string name="osmand_accessibility_description">顯示專用的無障礙功能設定。</string>
 	<string name="extra_settings">進階設定</string>
-	<string name="osmand_monitoring_description">顯示便利設定來記錄您的行程到裝置端 GPX 檔或在線上使用網站的服務...</string>
+	<string name="osmand_monitoring_description">顯示設定，便於記錄您到當地行程的 GPX 檔案或在線上使用網站的服務...</string>
 	<string name="osmand_extra_settings_description">顯示進階的地圖組態(比如增加地圖細節)和一些裝置的詳情。</string>
 	<string name="osmand_development_plugin_description">顯示開發與除錯功能的設定，如導航模擬或繪製顯示效能。</string>
 	<string name="plugins_screen">外掛元件管理</string>
@@ -1814,4 +1814,9 @@
     <string name="speak_poi">通報 POI</string>
     <string name="flat_list_waypoints">全部</string>
     <string name="index_tours">旅遊</string>
+    <string name="record_plugin_description">在地圖螢幕上點觸按鈕儲存您的軌跡。顯示設定，便於記錄您到當地行程的 GPX 檔案或在線上使用網站的服務。</string>
+    <string name="record_plugin_name">記錄您的行程</string>
+    <string name="int_hour">小時</string>
+    <string name="duration">持續時間</string>
+    <string name="distance">距離</string>
     </resources>
