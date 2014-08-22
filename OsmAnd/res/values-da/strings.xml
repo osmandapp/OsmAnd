@@ -365,7 +365,7 @@
 	<string name="osmand_background_plugin_description">Vis indstillinger til at aktivere sporing og navigation i dvale (slukket skærm) tilstand via periodisk at vække GPS-enheden.</string>
 	<string name="osmand_accessibility_description">Vis indstillinger for specielle tilgængelighedsfunktioner.</string>
 	<string name="extra_settings">Avancerede indstillinger</string>
-	<string name="osmand_monitoring_description">Vis indstillinger til at muliggøre optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
+	<string name="osmand_monitoring_description">Vis indstillinger som muliggør optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
 	<string name="osmand_rastermaps_plugin_description">Vis indstillinger til at konfigurere en række online eller cachelagrede delkort som basiskort eller som over-/ underlejringskort. Disse kort kan også fremstilles offline og kopieres til OsmAnd mappen.</string>
 	<string name="osmand_extra_settings_description">Vis indstillinger for avanceret kortkonfiguration (som at øge kortdetaljer) og nogle enhedsspecifikke indstillinger.</string>
 	<string name="osmand_development_plugin_description">Vis indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller optegningsydeevne.</string>
@@ -1916,7 +1916,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="lang_he">Hebræisk</string>
     <string name="forward">Frem</string>
     <string name="home">Hjem</string>
-    <string name="live_monitoring_m_descr">Send sporing til en beestemt webtjeneste, hvis GPX optagelse er aktiveret.</string>
+    <string name="live_monitoring_m_descr">Send sporing til en bestemt webtjeneste, hvis GPX optagelse er aktiveret.</string>
 	<string name="live_monitoring_m">Online sporing (GPX nødvendig)</string>
     <string name="live_monitoring_start">Start online sporing</string>
 	<string name="live_monitoring_stop">Stop online sporing</string>
