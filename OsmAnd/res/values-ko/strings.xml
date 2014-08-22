@@ -422,7 +422,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	
 
 	<string name="tip_navigation">경로탐색</string>
-	<string name="tip_navigation_t">"To get directions to a place, either directly long-click on it on the map, (then tap its description marker and select \'Directions to\'), or select \'Directions\' after tapping any entry in a search results list or favorite list. 길안내를 시작하기 전에 목적지를 선택하여야 합니다. 그런 다음 맵 상에서 \'메뉴\' -&gt; \'방향\' 을 누르고 네비게이션 종류를 선택합니다.
+	<string name="tip_navigation_t">"길안내를 시작하기 전에 목적지를 선택하여야 합니다. 그런 다음 맵 상에서 \'메뉴\' -&gt; \'방향\' 을 누르고 네비게이션 종류를 선택합니다.
 \n\nThe destination is marked as an orange target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
 \n\nYou may chose either \'Start navigation\', which means that OsmAnd would live-guide you, give you voice instructions (if enabled), etc. Or you can select \'Display route\', resulting in static route without any live-guideance or adjustments as you move.
 \n\nTo display a route to the selected destination from any point other than your current position, select the start point on the map and tap \'Directions from\'.
@@ -2077,7 +2077,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 <string name="av_camera_pic_size">카메라 사진 크기</string>
 	<string name="av_camera_pic_size_descr">내부 카메라 사진 크기 선택</string>
     <string name="announce_nearby_favorites">가까운 즐겨찾기 알리기</string>
-<string name="rendering_value_browse_map_name">지도 찾기</string>  
+<string name="rendering_value_browse_map_name">지도 보기</string>  
     <string name="rendering_value_car_name">자동차</string>
     <string name="rendering_value_bicycle_name">자전거</string>
     <string name="rendering_value_pedestrian_name">보행자</string>
@@ -2094,5 +2094,5 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="targets">목적지</string>
     <string name="way_alarms">도로장애</string>
     <string name="speak_favorites">즐겨찾기를 알리다</string>
-    <string name="speak_poi">POI 알리디</string>
+    <string name="speak_poi">POI 알리기</string>
     </resources>
