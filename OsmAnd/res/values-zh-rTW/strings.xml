@@ -1808,7 +1808,7 @@
     <string name="download_additional_maps">要下載缺少的地圖 %1$ s (%2$ d MB) 嗎？</string>
     <string name="flat_list_waypoitns">全部</string>
     <string name="waypoints">中途點</string>
-    <string name="targets">目標</string>
+    <string name="targets">目的地</string>
     <string name="way_alarms">障礙</string>
     <string name="speak_favorites">通報我的最愛</string>
     <string name="speak_poi">通報 POI</string>
