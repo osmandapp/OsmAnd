@@ -1720,4 +1720,9 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="speak_poi">Annùntzia PDI</string>
     <string name="flat_list_waypoints">Totus</string>
     <string name="index_tours">Itineràrios</string>
+    <string name="record_plugin_description">Resistra sas rastas tuas carcande su pursante in s\'ischermu de sa mapa. Ammustra sas impostaduras chi fatzìlitant sa registratzione de sos biàgios tuos in documentos GPX localmente o in lìnia impreande unu servìtziu web.</string>
+    <string name="record_plugin_name">Registra sos biàgios tuos</string>
+    <string name="int_hour">h</string>
+    <string name="duration">Durada</string>
+    <string name="distance">Distantzia</string>
     </resources>
