@@ -1860,4 +1860,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="speak_poi">Anunciar PDI</string>
     <string name="flat_list_waypoints">Todos</string>
     <string name="index_tours">Viajes</string>
+    <string name="int_hour">h</string>
+    <string name="duration">Duración</string>
+    <string name="distance">Distancia</string>
+    <string name="record_plugin_name">Grabar tus viajes</string>
+    <string name="record_plugin_description">Guardar tus trayectos con una pulsación en la pantalla del mapa. Mostrar las opciones facilitando grabar tus trayectos a un fichero GPX local o usando un servicio web online.</string>
     </resources>
