@@ -53,6 +53,9 @@ public class TextInfoWidget extends BaseMapWidget {
 		} else {
 			setContentDescription(subtext);
 		}
+		if(this.text != null && this.text.length() > 7) {
+			this.text = this.text.substring(0, 6) +"..";
+		}
 		updateVisibility(text != null);
 		requestLayout();
 		invalidate();

@@ -174,4 +174,8 @@ public class OsmAndAppCustomization {
 	public boolean onDestinationReached() {
 		return true;
 	}
+
+	public int getWaypointSearchRadius(int searchDeviationRadius, int type) {
+		return searchDeviationRadius;
+	}
 }

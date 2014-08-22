@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="record_plugin_description">Save your tracks with one button touch on the map screen.
+        Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
+    <string name="record_plugin_name">Record your trips</string>
     <string name="int_hour">h</string>
     <string name="duration">Duration</string>
     <string name="distance">Distance</string>
@@ -507,9 +510,6 @@
     </string>
     <string name="monitoring_settings">Logging services</string>
     <string name="monitoring_settings_descr">Configure how to record trips</string>
-    <string name="osmand_monitoring_plugin_description">Enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.
-        Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
-    <string name="osmand_monitoring_plugin_name">Logging services</string>
     <string name="osmand_background_plugin_description">Show settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
     <string name="contribution_activity">Install version</string>
     <string name="choose_osmand_theme_descr">Choose application theme</string>

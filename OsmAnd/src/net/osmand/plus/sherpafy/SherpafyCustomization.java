@@ -297,7 +297,9 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	public void markStageAsNotCompleted(StageInformation si) {
 		Integer gi = visitedStagesPref.get();
-		gi = gi - (1 << si.getOrder());
+		if((gi & (1 << si.getOrder())) > 0) {
+			gi = gi - (1 << si.getOrder());
+		}
 		visitedStagesPref.set(gi);
 	}
 
@@ -671,5 +673,12 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		Intent newIntent = new Intent(a, getMapActivity());
 		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		a.startActivityForResult(newIntent, 0);
+	}
+	
+	public int getWaypointSearchRadius(int searchDeviationRadius, int type) {
+		if(type == WaypointHelper.WAYPOINTS) {
+			return searchDeviationRadius;
+		}
+		return searchDeviationRadius;
 	}
 }
