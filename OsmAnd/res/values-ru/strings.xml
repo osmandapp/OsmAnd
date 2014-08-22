@@ -1800,10 +1800,13 @@ OsmAnd - открытый источник и активно развается.
     <string name="more">Более...</string>
     <string name="flat_list_waypoitns">Все</string>
     <string name="waypoints">Путевые точки</string>
-    <string name="targets">Цели</string>
+    <string name="targets">Пункты назначения</string>
     <string name="way_alarms">Препятствия</string>
     <string name="speak_favorites">Объявлять избранные</string>
     <string name="speak_poi">Объявлять POI</string>
     <string name="index_tours">Туры</string>
     <string name="flat_list_waypoints">Все</string>
+    <string name="distance">Расстояние</string>
+    <string name="gpx_info_subtracks">"Подтрек: %1$s "</string>
+	<string name="route_descr_destination"/>
     </resources>
