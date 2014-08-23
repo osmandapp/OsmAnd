@@ -1022,10 +1022,10 @@ POIの更新は利用できません</string>
 	<string name="osmand_parking_delete_confirm">停車中の車の場所を削除しますか？</string>
 	<string name="osmand_parking_delete">駐車マーカーを削除</string>
 	<string name="osmand_parking_choose_type">駐車場のタイプを選択</string>
-	<string name="osmand_parking_lim_text">制限時間</string>
-	<string name="osmand_parking_no_lim_text">時間無制限</string>
+	<string name="osmand_parking_lim_text">時間制限あり</string>
+	<string name="osmand_parking_no_lim_text">時間制限なし</string>
 	<string name="osmand_parking_add_event">通知をカレンダーアプリに追加</string>
-	<string name="osmand_parking_time_limit">時間制限有りの駐車場</string>
+	<string name="osmand_parking_time_limit">時間制限ありの駐車場</string>
 	<string name="osmand_parking_time_no_limit">時間制限なしの駐車場</string>
 	<string name="osmand_parking_position_description">あなたの車の駐車位置:%1$s</string>
 	<string name="osmand_parking_position_description_add">車の場所を検索:</string>
