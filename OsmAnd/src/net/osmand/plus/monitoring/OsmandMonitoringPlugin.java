@@ -333,9 +333,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				app.startNavigationService(NavigationService.USED_BY_GPX);		
 			}
 		};
-		if(choice.value) {
-			runnable.run();
-		} else {
+		//Comment this out for now as we have no way to reverse the REMEMBER flag?!
+		//if(choice.value) {
+		//	runnable.run();
+		//} else {
 			showIntervalChooseDialog(map, app.getString(R.string.save_track_interval) + " : %s",
 					app.getString(R.string.save_track_to_gpx), SECONDS, MINUTES, choice, vs,
 					new OnClickListener() {
@@ -344,7 +345,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 							runnable.run();
 						}
 					});
-		}
+		//}
 		
 	}
 	
