@@ -1430,8 +1430,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	\n\t* Extra instellingen voor kompasstabilisatie
 	\n\t* Menuknop vervangen door knop linksboven in het kaartvenster
     </string>
-    <string name="monitoring_settings">Logboek registratie</string>
-    <string name="monitoring_settings_descr">Bepaal hoe trips op te nemen</string>
+    <string name="monitoring_settings">Trip registratie</string>
+    <string name="monitoring_settings_descr">Configureer: hoe uw trips op te nemen</string>
     <string name="osmand_monitoring_plugin_description">Activeren van tracking en navigatie in slaapmodus (scherm uit). De GPS gaat dan regelmatig aan. Toon de instellingen om uw reis vast te leggen als GPX-bestand of online via een webdienst.</string>
     <string name="street_name">Straat</string>
 	<string name="osmand_monitoring_plugin_name">Logboek registratie</string>
@@ -1958,5 +1958,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="int_hour">u.</string>
     <string name="duration">Duur</string>
     <string name="distance">Afstand</string>
-    <string name="record_plugin_description">Bewaar uw tracks met één tik op de kaart. Bekijk de instellingen die het opnemen van uw trips naar lokale GPX bestanden of online dmv een web service faciliteren.</string>
+    <string name="record_plugin_description">Bewaar uw tracks met één tik op de kaart. Bekijk de instellingen voor het opnemen van uw trip naar een lokaal GPX bestand of online door middel van een web service.</string>
     </resources>
