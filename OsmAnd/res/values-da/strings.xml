@@ -1454,8 +1454,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	\n* Yderligere indstillinger for stabilisering af kompas
 	\n* Nederste venstre knap på kortskærmen erstatter menuknappen
     </string>
-    <string name="monitoring_settings">Logningstjenester</string>
-    <string name="monitoring_settings_descr">Indstil, hvordan ture optages</string>
+    <string name="monitoring_settings">Optag ture</string>
+    <string name="monitoring_settings_descr">Indstil hvordan dine ture optages</string>
     <string name="osmand_monitoring_plugin_name">Logningstjenester</string>
     <string name="local_openstreetmap_act_title">OSM modifikationer</string>
     <string name="default_buttons_other_actions">Flere handlinger</string>
@@ -1975,5 +1975,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="duration">Varighed</string>
     <string name="int_hour">t</string>
     <string name="record_plugin_name">Optag dine ture</string>
-    <string name="record_plugin_description">Gem dine spor med et tryk på en knap på skærmen. Vis indstillinger som muliggør optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
+    <string name="record_plugin_description">Gem dine spor via et tryk på en knap på skærmen. Vis indstillinger til optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
     </resources>
