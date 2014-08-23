@@ -473,6 +473,8 @@ public class MapActivityActions implements DialogProvider {
 		if(!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
 			adapter.item(R.string.context_menu_item_directions_to).icons(
 					R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
+			adapter.item(R.string.context_menu_item_directions_from).icons(
+					R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
 		}
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		if(targets.getPointToNavigate() != null) {
@@ -484,9 +486,6 @@ public class MapActivityActions implements DialogProvider {
 		} else {
 			adapter.item(R.string.context_menu_item_destination_point).icons(R.drawable.ic_action_flag_dark,
 					R.drawable.ic_action_flag_light).reg();
-		}
-		if(!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
-			adapter.item(R.string.context_menu_item_directions_from).icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
 		}
 		adapter.item(R.string.context_menu_item_search).icons(R.drawable.ic_action_search_dark, 
 				R.drawable.ic_action_search_light).reg();
