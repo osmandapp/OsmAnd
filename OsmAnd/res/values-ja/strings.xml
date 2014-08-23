@@ -2061,4 +2061,9 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="rendering_value_car_name">車</string>
     <string name="rendering_value_bicycle_name">自転車</string>
     <string name="rendering_value_pedestrian_name">歩行者</string>
+    <string name="record_plugin_description">マップ画面上のボタンをタップすることであなたの経路を保存します。ローカルのGPXファイルへの旅行の記録やオンラインWebサービスの利用が表示設定により簡単に出来ます。</string>
+    <string name="record_plugin_name">旅行の記録</string>
+    <string name="int_hour">時間</string>
+    <string name="duration">期限</string>
+    <string name="distance">距離</string>
     </resources>
