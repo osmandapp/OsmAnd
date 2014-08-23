@@ -182,7 +182,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 						subtxt = ds.substring(ls + 1);
 					}
 					if(globalRecord) {
+						//indicates global recording (+background recording)
 						d = monitoringBig;
+					} else if (settings.SAVE_TRACK_TO_GPX.get()) {
+						//indicates (profile-based, configured in settings) screen-on recording
+						d = monitoringSmall;
 					}
 				}
 				setText(txt, subtxt);
