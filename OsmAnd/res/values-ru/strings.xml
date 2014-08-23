@@ -1809,4 +1809,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="distance">Расстояние</string>
     <string name="gpx_info_subtracks">"Подтрек: %1$s "</string>
 	<string name="route_descr_destination"/>
+    <string name="record_plugin_name">Запись ваших поездок</string>
+    <string name="int_hour">час</string>
+    <string name="duration">Продолжительность</string>
     </resources>
