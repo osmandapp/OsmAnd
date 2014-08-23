@@ -170,8 +170,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				Drawable d = monitoringInactive;
 				long last = lastUpdateTime;
 				final boolean globalRecord = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-				if (globalRecord || settings.SAVE_TRACK_TO_GPX.get()) {
+				//if (globalRecord || settings.SAVE_TRACK_TO_GPX.get()) {
 					float dist = app.getSavingTrackHelper().getDistance();
+				//make sure widget always shows recorded track distance if unsaved track exists
+				if (dist > 0) {
 					last = app.getSavingTrackHelper().getLastTimeUpdated();
 					String ds = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
 					int ls = ds.lastIndexOf(' ');
@@ -181,14 +183,17 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 						txt = ds.substring(0, ls);
 						subtxt = ds.substring(ls + 1);
 					}
+				}
 					if(globalRecord) {
 						//indicates global recording (+background recording)
 						d = monitoringBig;
 					} else if (settings.SAVE_TRACK_TO_GPX.get()) {
 						//indicates (profile-based, configured in settings) screen-on recording
 						d = monitoringSmall;
+					} else {
+						d = monitoringInactive;
 					}
-				}
+				//}
 				setText(txt, subtxt);
 				setImageDrawable(d);
 				if (last != lastUpdateTime && globalRecord) {
