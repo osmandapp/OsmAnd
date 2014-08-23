@@ -1228,7 +1228,7 @@
     <string name="download_using_mobile_internet">No teniu habilitada la connexió Wi-Fi. Voleu continuar baixant amb la connexió a Internet actual?</string>
     <string name="street_name">Carrer</string>
 	<string name="hno">Número</string>
-    <string name="monitoring_settings">Serveis d\'enregistrament</string>
+    <string name="monitoring_settings">Registre del trajecte</string>
     <string name="choose_osmand_theme_descr">Seleccioneu el tema de l\'aplicació</string>
     <string name="choose_osmand_theme">Aspecte gràfic</string>
     <string name="accessibility_options">Opcions d\'accessibilitat</string>
@@ -1248,7 +1248,7 @@
 	<string name="prefer_in_routing_descr">Millor autopistes</string>
     <string name="max_speed_none">cap</string>
     <string name="local_indexes_cat_srtm">Dades de les corbes de nivell</string>
-    <string name="monitoring_settings_descr">Configurar com enregistrar els recorreguts</string>
+    <string name="monitoring_settings_descr">Configureu com enregistrar els vostres recorreguts</string>
     <string name="osmand_monitoring_plugin_name">Serveis d\'enregistrament</string>
     <string name="av_use_external_camera_descr">Usa l\\\'aplicació del sistema per a les fotografies</string>
     <string name="av_use_external_camera">Usa l\\\'aplicació de la càmera</string>
@@ -1878,4 +1878,9 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="speak_poi">Indica els PDI</string>
     <string name="index_tours">Itineraris</string>
     <string name="flat_list_waypoints">Totes</string>
+    <string name="record_plugin_description">Registreu el vostre trajecte prement un botó sobre la pantalla del mapa. Reviseu la configuració de gravació dels vostres recorreguts a arxius locals GPX o a la xarxa utilitzant un servei web.</string>
+    <string name="record_plugin_name">Enregistrar els trajectes</string>
+    <string name="int_hour">h</string>
+    <string name="duration">Durada</string>
+    <string name="distance">Distància</string>
     </resources>
