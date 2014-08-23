@@ -1412,7 +1412,7 @@
 	<string name="routing_attr_short_way_description">Usa el camí més curt</string>
 	<string name="routing_attr_avoid_toll_name">Evita peatges</string>
 	<string name="routing_attr_avoid_toll_description">Prioritza carreteres sense peatge</string>
-	<string name="routing_attr_avoid_unpaved_name">Evita els camins sense pavimentar</string>
+	<string name="routing_attr_avoid_unpaved_name">Evita les vies sense pavimentar</string>
 	<string name="routing_attr_avoid_unpaved_description">Evita camins sense pavimentar</string>
 	<string name="routing_attr_avoid_ferries_name">Evita transbordadors</string>
 	<string name="routing_attr_avoid_ferries_description">Evita transbordadors</string>
