@@ -9,6 +9,11 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="tips_and_tricks">Help</string>
+	<string name="tip_initial">Help</string>
+	<string name="tip_initial_t">OsmAnd is a navigation application with many features. 
+		\n\nAs a basic introduction, some usage tips and tricks are linked via \'Menu\' → \'Help\' from the map screen.
+	</string>
     <string name="monitoring_settings">Trip recording</string>
     <string name="monitoring_settings_descr">Configure how to record your trips</string>
     <string name="record_plugin_description">Save your tracks via one button touch on the map screen.
@@ -376,6 +381,7 @@
     <string name="about_version">Version :</string>
     <string name="about_settings">About</string>
     <string name="about_settings_descr">Version info, licenses, project members</string>
+
     <string name="tips_and_tricks">Tips</string>
     <string name="tip_recent_changes_1_6_t">Changes in 1.6:
 	\n\t* Support of Full HD devices
@@ -1502,7 +1508,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\nIt is available by long-pressing any point on the map (then tapping its marker), or by pressing the trackball button, or by selecting \'Menu\' → \'Use location\' (the last two ways take the map center as reference).
 		\n\nA marker box can be hidden again by long-clicking on it.
 	</string>
-	<string name="tip_initial">Tips and Tricks</string>
+	<string name="tip_initial">Help</string>
 	<string name="tip_initial_t">OsmAnd is a navigation application with many features. 
 		\n\nAs a basic introduction, some usage tips and tricks are linked via \'Menu\' → \'Tips\' from the map screen.
 	</string>
