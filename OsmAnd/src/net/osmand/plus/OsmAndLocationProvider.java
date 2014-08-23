@@ -357,10 +357,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private void updateSpeedEmulator(net.osmand.Location location) {
 		// For network/gps it's bad way (not accurate). It's widely used for testing purposes
 		// possibly keep using only for emulator case
-		if (location != null) {
-			if (location.distanceTo(location) > 3) {
-				float d = location.distanceTo(location);
-				long time = location.getTime() - location.getTime();
+		if (this.location != null) {
+			float d = this.location.distanceTo(location);
+			if (d > 3) {
+				long time = location.getTime() - this.location.getTime();
 				float speed;
 				if (time == 0) {
 					speed = 0;
