@@ -1228,7 +1228,7 @@
     <string name="download_using_mobile_internet">No teniu habilitada la connexió Wi-Fi. Voleu continuar baixant amb la connexió a Internet actual?</string>
     <string name="street_name">Carrer</string>
 	<string name="hno">Número</string>
-    <string name="monitoring_settings">Registre del trajecte</string>
+    <string name="monitoring_settings">Enregistrament del trajecte</string>
     <string name="choose_osmand_theme_descr">Seleccioneu el tema de l\'aplicació</string>
     <string name="choose_osmand_theme">Aspecte gràfic</string>
     <string name="accessibility_options">Opcions d\'accessibilitat</string>
@@ -1878,8 +1878,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="speak_poi">Indica els PDI</string>
     <string name="index_tours">Itineraris</string>
     <string name="flat_list_waypoints">Totes</string>
-    <string name="record_plugin_description">Registreu el vostre trajecte prement un botó sobre la pantalla del mapa. Reviseu la configuració de gravació dels vostres recorreguts a arxius locals GPX o a la xarxa utilitzant un servei web.</string>
-    <string name="record_plugin_name">Enregistrar els trajectes</string>
+    <string name="record_plugin_description">Enregistreu el vostre trajecte prement un botó sobre la pantalla del mapa. Reviseu la configuració de gravació dels vostres recorreguts a arxius locals GPX o a la xarxa utilitzant un servei web.</string>
+    <string name="record_plugin_name">Enregistrament de trajectes</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
     <string name="distance">Distància</string>
