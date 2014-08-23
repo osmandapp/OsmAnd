@@ -168,7 +168,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 							svlss[i++] = o.toString();
 						}
 						basePref = createListPreference(settings.getCustomRoutingProperty(p.getId()), 
-								p.getPossibleValueDescriptions(), svlss);
+								p.getPossibleValueDescriptions(), svlss, SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getName()), SettingsBaseActivity.getRoutingStringPropertyDescription(this, p.getId(), p.getDescription()));
 					}
 					basePref.setTitle(SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getName()));
 					basePref.setSummary(SettingsBaseActivity.getRoutingStringPropertyDescription(this, p.getId(), p.getDescription()));
@@ -229,12 +229,12 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				vals[i] = SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getName());
 				bls[i] = settings.getCustomRoutingBooleanProperty(p.getId());
 			}
-			showBooleanSettings(vals, bls);
+			showBooleanSettings(vals, bls, preference.getTitle());
 			return true;
 		} else if (preference == showAlarms) {
 			showBooleanSettings(new String[] { getString(R.string.show_traffic_warnings), getString(R.string.show_cameras), 
 					getString(R.string.show_lanes) }, new OsmandPreference[] { settings.SHOW_TRAFFIC_WARNINGS, 
-					settings.SHOW_CAMERAS, settings.SHOW_LANES });
+					settings.SHOW_CAMERAS, settings.SHOW_LANES }, preference.getTitle());
 			return true;
 		} else if (preference == speakAlarms) {
 			showBooleanSettings(new String[] { getString(R.string.speak_street_names),  getString(R.string.speak_traffic_warnings), getString(R.string.speak_cameras), 
@@ -244,25 +244,44 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					getString(R.string.announce_gpx_waypoints)}, 
 					new OsmandPreference[] { settings.SPEAK_STREET_NAMES, settings.SPEAK_TRAFFIC_WARNINGS, 
 					settings.SPEAK_SPEED_CAMERA , settings.SPEAK_SPEED_LIMIT,
-					settings.ANNOUNCE_NEARBY_FAVORITES, settings.ANNOUNCE_NEARBY_POI, settings.ANNOUNCE_WPT});
+					settings.ANNOUNCE_NEARBY_FAVORITES, settings.ANNOUNCE_NEARBY_POI, settings.ANNOUNCE_WPT}, preference.getTitle());
 			return true;
 		}
 		return false;
 	}
 
-	public void showBooleanSettings(String[] vals, final OsmandPreference<Boolean>[] prefs) {
+	public void showBooleanSettings(String[] vals, final OsmandPreference<Boolean>[] prefs, final CharSequence title) {
 		Builder bld = new AlertDialog.Builder(this);
 		boolean[] checkedItems = new boolean[prefs.length];
 		for (int i = 0; i < prefs.length; i++) {
 			checkedItems[i] = prefs[i].get();
 		}
+		
+		final boolean[] tempPrefs = new boolean[prefs.length];
+		for (int i = 0; i < prefs.length; i++) {
+			tempPrefs[i] = prefs[i].get();
+		}
+		
 		bld.setMultiChoiceItems(vals, checkedItems, new OnMultiChoiceClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-				prefs[which].set(isChecked);
+				tempPrefs[which] = isChecked;
 			}
 		});
+		
+		bld.setTitle(title);
+		
+		bld.setNegativeButton(R.string.default_buttons_cancel, null);
+		
+		bld.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface dialog, int whichButton) {
+				for (int i = 0; i < prefs.length; i++) {
+					prefs[i].set(tempPrefs[i]);
+				}
+		    }
+		});
+		
 		bld.show();
 	}
 
