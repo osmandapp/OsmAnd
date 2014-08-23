@@ -357,10 +357,9 @@
 		\n\nEz a térképen hosszan kattintva, majd a felugró buborékra nyomva érhető el, de megtalálható a menüben is \'Hely használata\' néven (ekkor a térkép középpontját fogják használni).
 		\n\nA buborékablak hosszú kattintással eltüntethető.
 	</string>
-  <string name="tip_initial">Tippek és trükkök</string>
-  <string name="tip_initial_t">Az OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik.
-\n\nEgy gyors bemutatót és hasznos tippeket találsz a térkép képernyő \'menü\' → \'Tippek\' gombjára kattintva.
-	</string>
+  <string name="tip_initial">Súgó</string>
+  <string name="tip_initial_t">"Az OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik.
+\n\nEgy gyors bemutatót és hasznos tippeket találsz a térkép képernyő \'menü\' → \'Tippek\' gombjára kattintva. "</string>
   <string name="next_button">Következő</string>
   <string name="previous_button">Előző</string>
   <string name="unit_of_length_descr">Hosszúság és sebesség mértékegységének megváltoztatása</string>
@@ -473,8 +472,8 @@
   <string name="unknown_location">A jelenlegi helyzet nem ismert</string>
   <string name="download_files">Letöltés</string>
   <string name="context_menu_item_search_transport">Közlekedés keresése</string>
-  <string name="transport_searching_transport">Közlekedés keresése (nincs kijelölt cél):</string>
-  <string name="transport_searching_route">Közlekedés keresése ({0} a célig):</string>
+  <string name="transport_searching_transport">Közlekedés keresése (nincs kijelölt úti cél):</string>
+  <string name="transport_searching_route">Közlekedés keresése ({0} az úti célig):</string>
   <string name="transport_search_none">nincs</string>
   <string name="transport_search_again">Közlekedéskeresés újrakezdése</string>
   <string name="map_index">Térkép</string>
@@ -1229,8 +1228,8 @@
     
 	<string name="street_name">Utca</string>
 	<string name="hno">Házszám</string>
-    <string name="monitoring_settings">Rögzítési szolgáltatások</string>
-    <string name="monitoring_settings_descr">Útvonalak felvételének beállításai</string>
+    <string name="monitoring_settings">Útvonalrögzítés</string>
+    <string name="monitoring_settings_descr">Az útvonalaid felvételének beállításai</string>
     <string name="osmand_monitoring_plugin_description">Útvonalrögzítés és navigáció alvó (kikapcsolt képernyős) módban az eszköz GPS vevőjének periodikus felébresztésével. Megjeleníti azokat a beállításokat, amik megkönnyítik az útvonal rögzítését GPX fájlba, vagy online webszolgáltatásra.</string>
     <string name="osmand_monitoring_plugin_name">Rögzítési szolgáltatások</string>
     <string name="choose_osmand_theme_descr">Alkalmazástéma kiválasztása</string>
@@ -1513,7 +1512,7 @@
     <string name="osmo_settings_descr">Monitorozási beállítások és személyes monitorozási csatorna</string>
     <string name="osmo_plugin_description">"OpenStreetMap – fejlett live monitoring sok funkcióval (lásd: http://osmo.mobi). Kövess más eszközöket, vagy követtesd magad. Készíts névtelen csoportokat, osszátok meg egymás helyzetét és kommunikáljatok. Különféle beállítások munkamenet és állandó követéshez. A névtelen csoportokba csak taglétszámban és időben korlátozottak. Teljes funkcionalitású csoportokat a weboldalon lehet létrehozni, regisztráció után. "</string>
     <string name="osmo_plugin_name">OsMo (Fejlett Live Monitoring)</string>
-    <string name="osmo_settings">OsMo OpenStreetMap Megfigyelés (béta)</string>
+    <string name="osmo_settings">OpenStreetMap Monitoring</string>
    	<string name="always_center_position_on_map">Pozíció megjelenítése mindig középen</string>
     <string name="voice_pref_title">Hang</string>
     <string name="misc_pref_title">Egyebek</string>
@@ -1624,7 +1623,7 @@
     <string name="osmo_connect">Kapcsolódás ide</string>
     <string name="osmo_create_group">Csoport létrehozása</string>
     <string name="osmo_server_operation_failed">OsMo kiszolgáló művelet sikertelen</string>
-    <string name="osmo_activity">OpenStreetMap-Megfigyelés</string>
+    <string name="osmo_activity">OpenStreetMap Monitoring</string>
     <string name="osmo_enable_tracker">Pozícióm küldése</string>
     <string name="osmo_control">OsMo gyors elérés</string>
     <string name="hours_ago">órával ezelőtt</string>
@@ -1740,7 +1739,7 @@
 	<string name="index_tours">Túrák</string>
     <string name="flat_list_waypoints">Összes</string>
     <string name="waypoints">Útpontok</string>
-    <string name="targets">Célpontok</string>
+    <string name="targets">Úti célok</string>
     <string name="way_alarms">Akadályok</string>
     <string name="speak_favorites">Kedvenc helyek</string>
     <string name="speak_poi">Érdekes helyek (POI)</string>
@@ -1749,4 +1748,9 @@
     <string name="rendering_value_car_name">Autó</string>
     <string name="rendering_value_bicycle_name">Kerékpár</string>
     <string name="rendering_value_pedestrian_name">Gyalogos</string>
+    <string name="record_plugin_description">Rögzíti az útvonalaidat egy kattintással a térkép képernyőn. Megjeleníti az útvonal GPX-fájlba mentésének és online webszolgáltatásra küldésének a beállításait.</string>
+    <string name="record_plugin_name">Útvonalaid rögzítése</string>
+    <string name="int_hour">ó</string>
+    <string name="duration">Időtartam</string>
+    <string name="distance">Távolság</string>
     </resources>
