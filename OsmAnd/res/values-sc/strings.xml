@@ -278,8 +278,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
         \n\t* Prus impostaduras pro s\'istabilizatzione de sa bùssola
         \n\t* Su butone a manca in s\'ischermada de sa mapa remplesa su butone "Menu"
     </string>
-    <string name="monitoring_settings">Servitzios de registratzione</string>
-    <string name="monitoring_settings_descr">Cunfigura comente registrare sos biàgios</string>
+    <string name="monitoring_settings">Registratzione biàgios</string>
+    <string name="monitoring_settings_descr">Cunfigura comente registrare sos biàgios tuos</string>
     <string name="osmo_settings_uuid">ID ùnicu de su dispositivu</string>
     <string name="osmo_settings_descr">Cunfigura sas impostaduras de compidada de su dispositivu e imposta su canale de compidada pessonale</string>
     <string name="osmo_plugin_description">"OpenStreetMap Compidada - Compidada avantzada in dereta, bie http://osmo.mobi. Sighi àteros dispositivos  e fàghedi sighire. Crea grupos anònimos, cumpartzi sa positzione a manera retzìproca e comunica. Sunt disponìbiles meda impostaduras pro sa compidada, pro sa sessione in corso o permanentes. Sos grupos anònimos sunt limidados pro su nùmeru de dies e calicuna de sas funtziones, ad es. non b\'est su controllu remotu e nemmancu s\'amministradore de su grupu.Grupos cun totu sas funtzionalidades podent èssere creados in su giassu e petzi sos impitadores registrados podent atzèdere. Pro àteras informatziones: http://osmo.mobi. "</string>
@@ -1720,7 +1720,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="speak_poi">Annùntzia PDI</string>
     <string name="flat_list_waypoints">Totus</string>
     <string name="index_tours">Itineràrios</string>
-    <string name="record_plugin_description">Resistra sas rastas tuas carcande su pursante in s\'ischermu de sa mapa. Ammustra sas impostaduras chi fatzìlitant sa registratzione de sos biàgios tuos in documentos GPX localmente o in lìnia impreande unu servìtziu web.</string>
+    <string name="record_plugin_description">Registra sas rastas tuas carcande su pursante in s\'ischermu de sa mapa. Ammustra sas impostaduras pro sa registratzione de sos biàgios tuos in documentos GPX localmente o in lìnia impreande unu servìtziu web.</string>
     <string name="record_plugin_name">Registra sos biàgios tuos</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
