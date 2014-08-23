@@ -1016,8 +1016,8 @@ POIの更新は利用できません</string>
 	<string name="starting_point_too_far">出発地点が最寄りの道路から離れすぎています。</string>
 	<string name="shared_location">ロケーションの共有</string>
 	<string name="osmand_parking_event">駐車場から車を探す</string>
-	<string name="osmand_parking_warning">警告</string>
-	<string name="osmand_parking_warning_text">あなたの車の場所があなたのカレンダーに追加されました。手動で削除されるまで残ります。</string>    
+	<string name="osmand_parking_warning">注意</string>
+	<string name="osmand_parking_warning_text">あなたが車の場所を探す予定をカレンダーアプリに追加した場合、カレンダーアプリの予定は手動で削除されるまで残ります。</string>    
 	<string name="osmand_parking_time_limit_title">駐車場の制限時間を設定する</string>
 	<string name="osmand_parking_delete_confirm">停車中の車の場所を削除しますか？</string>
 	<string name="osmand_parking_delete">駐車マーカーを削除</string>
