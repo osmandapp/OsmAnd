@@ -1214,8 +1214,8 @@
 	<string name="hno">Numéro de bâtiment</string>
     <string name="tip_recent_changes_1_3_t">"Changements en 1.5:\n\t* Thème Holo (personnalisation de thème) "
     </string>
-    <string name="monitoring_settings">Services de suivi</string>
-    <string name="monitoring_settings_descr">Configurer l\'enregistrement des traces</string>
+    <string name="monitoring_settings">Enregistrement de traces</string>
+    <string name="monitoring_settings_descr">Configurer l\'enregistrement de vos traces</string>
     <string name="osmand_monitoring_plugin_description">Ce greffon permet d\'activer le suivi et la navigation en arrière-plan (écran éteint) en réveillant périodiquement le dispositif GPS. Affiche les paramètres facilitant l\'enregistrement de vos traces vers des fichiers GPX locaux, ou en ligne via un service Web.</string>
     <string name="osmand_monitoring_plugin_name">Services de suivi</string>
     <string name="choose_osmand_theme_descr">Choisir le thème de l\'application</string>
@@ -1353,7 +1353,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="tip_map_styles">Styles de cartes</string>
 	<string name="about_settings">À propos</string>
     <string name="about_settings_descr">Note de version, licences, membres du projet</string>
-    <string name="tips_and_tricks">Aide</string>
+    <string name="tips_and_tricks">Astuces</string>
     <string name="local_index_tile_data_zooms">Zooms téléchargés : %1$s</string>
     <string name="local_index_tile_data_expire">Expire (minutes) : %1$s</string>
     <string name="local_index_tile_data_downloadable">Téléchargeable : %1$s</string>
@@ -1805,13 +1805,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="download_additional_maps">Télécharger les cartes manquantes %1$s (%2$d Mo) ?</string>
     <string name="flat_list_waypoitns">Tous</string>
     <string name="waypoints">Points de cheminement</string>
-    <string name="targets">Cibles</string>
+    <string name="targets">Destinations</string>
     <string name="way_alarms">Obstacles</string>
     <string name="speak_favorites">Annoncer les favoris</string>
     <string name="speak_poi">Annoncer les points d\'intérêt</string>
     <string name="flat_list_waypoints">Tous</string>
     <string name="index_tours">Tours</string>
-    <string name="record_plugin_description">Enregistrer vos itinéraires. Monter les paramètres permettant l\'enregistrement des itinéraires dans des fichiers GPX locaux ou en ligne avec un service Web.</string>
+    <string name="record_plugin_description">Enregistrer vos itinéraires. Monter les paramètres pour l\'enregistrement des itinéraires dans des fichiers GPX locaux ou en ligne avec un service Web.</string>
     <string name="record_plugin_name">Enregistrer vos itinéraires</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
