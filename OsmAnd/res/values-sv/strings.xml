@@ -1681,4 +1681,5 @@
     <string name="int_hour">h</string>
     <string name="duration">Längd</string>
     <string name="distance">Sträcka</string>
-    </resources>
+    <string name="rendering_attr_publicTransportMode_name">Kollektivtrafiksläge</string>
+	</resources>
