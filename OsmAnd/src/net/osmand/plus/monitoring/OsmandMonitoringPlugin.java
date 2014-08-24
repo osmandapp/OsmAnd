@@ -199,7 +199,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				setText(txt, subtxt);
 				setImageDrawable(d);
 				//if ((last != lastUpdateTime) && globalRecord) {
-				if ((last != lastUpdateTime) && (globalRecord || isRecording) {
+				if ((last != lastUpdateTime) && (globalRecord || isRecording)) {
 					lastUpdateTime = last;
 					//blink();
 					//test blink wuith 2 indicator states
