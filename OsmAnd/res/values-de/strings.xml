@@ -1472,7 +1472,7 @@
 	<string name="about_version">Version :</string>
 	<string name="about_settings">Über</string>
 	<string name="about_settings_descr">Versionsinfo, Lizenz, Projekt Mitglieder</string>
-	<string name="tips_and_tricks">Tipps</string>
+	<string name="tips_and_tricks">Hilfe</string>
 	<string name="local_index_tile_data_zooms">Zooms heruntergeladen: %1$s</string>
 	<string name="local_index_tile_data_expire">Gültigkeit endet in (Minuten): %1$s</string>
 	<string name="local_index_tile_data_downloadable">Herunterladbar: %1$s</string>
