@@ -198,7 +198,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 
 				setText(txt, subtxt);
 				setImageDrawable(d);
-				if (last != lastUpdateTime && globalRecord) {
+				if (last != lastUpdateTime && (globalRecord || isRecording) {
 					lastUpdateTime = last;
 					blink();
 				}
@@ -207,12 +207,16 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			}
 			
 			private void blink() {
-				setImageDrawable(monitoringSmall);
+				setImageDrawable(monitoringInactive);
 				invalidate();
 				postDelayed(new Runnable() {
 					@Override
 					public void run() {
-						setImageDrawable(monitoringBig);
+						if (globalRecord) {
+							setImageDrawable(monitoringBig);
+						} else {
+							setImageDrawable(monitoringSmall);
+						}
 						invalidate();
 					}
 				}, 500);
