@@ -434,8 +434,8 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 \n\nIt is available by long-pressing any point on the map (then tapping its marker), or by pressing the trackball button, or by selecting \'Menu\' → \'Use location\' (the last two ways take the map center as reference).
 \n\nA marker box can be hidden again by long-clicking on it. "</string>
 
-	<string name="tip_initial">팁과 트릭</string>
-	<string name="tip_initial_t">"OsmAnd는 많은 기능을 가진 네비게이션 앱입니다. 기본적인 소개로서, 몇 가지 유용한 팁과 트릭을 메인 메뉴 화면에 링크합니다. "</string>
+	<string name="tip_initial">도움말</string>
+	<string name="tip_initial_t">"OsmAnd는 많은 기능을 가진 네비게이션 앱입니다. 기본적인 소개로서, 몇 가지 유용한 도움말과 팁, 트릭을 지도화면에서 [메뉴-도움말]에 링크합니다. "</string>
 	<string name="next_button">다음</string>
 	<string name="previous_button">이전</string>
 
@@ -1153,7 +1153,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
          \n\t* 나침반을 안정화하기 위해 추가 설정
          \n\t* 지도 화면에서 좌상단 버튼는  메뉴버튼을 대체
     </string>
-    <string name="monitoring_settings">로깅 서비스</string>
+    <string name="monitoring_settings">여행 레코딩</string>
     <string name="monitoring_settings_descr">여행을 기록하는 방법을 구성합니다</string>
     <string name="osmand_monitoring_plugin_description">절전모드(스크린 끄기)에서 트래킹 및 경로탐색 활성화, 주기적으로 GPS 장치가 작동중일 때 . 표시 설정은 로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 트랙을 기록하는 설비 가능.</string>
     <string name="osmand_monitoring_plugin_name">로깅 서비스</string>
@@ -2083,7 +2083,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="rendering_value_pedestrian_name">보행자</string>
     <string name="more">기타...</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
-    <string name="record_plugin_description">지도 화면에 하나의 버튼 터치로 당신의 트랙을 저장 합니다. 로컬 GPX 파일에 여러분의 여행을 기록하는데 사용할 설정을 표시하가나 웹 서비스를 사용하여 온라인으로 표시합니다.</string>
+    <string name="record_plugin_description">지도 화면에 하나의 버튼 터치로 당신의 트랙을 저장 합니다. 로컬 GPX 파일 또는 웹 서비스를 사용하여 온라인에 여행을 기록하기 위해 설정을 보여집니다.</string>
     <string name="record_plugin_name">여행 기록</string>
     <string name="int_hour">h</string>
     <string name="duration">경과시간</string>
