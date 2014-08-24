@@ -1950,4 +1950,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="int_hour">г</string>
     <string name="duration">Працягласьць</string>
     <string name="distance">Адлегласьць</string>
-    </resources>
+    <string name="rendering_attr_publicTransportMode_name">Рэжым грамадзкага транспарту</string>
+	</resources>
