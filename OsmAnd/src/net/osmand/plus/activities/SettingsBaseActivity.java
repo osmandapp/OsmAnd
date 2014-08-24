@@ -194,6 +194,16 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		return p;
 	}
 	
+	public <T> ListPreference createListPreference(OsmandPreference<T> b, String[] names, T[] values, String title, String summary) {
+		ListPreference p = new ListPreference(this);
+		p.setTitle(title);
+		p.setKey(b.getId());
+		p.setDialogTitle(title);
+		p.setSummary(summary);
+		prepareListPreference(b, names, values, p);
+		return p;
+	}
+	
 	public <T> ListPreference createListPreference(OsmandPreference<T> b, String[] names, T[] values) {
 		ListPreference p = new ListPreference(this);
 		p.setKey(b.getId());
