@@ -198,15 +198,15 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 
 				setText(txt, subtxt);
 				setImageDrawable(d);
-				if (last != lastUpdateTime && (globalRecord || isRecording)) {
+				if ((last != lastUpdateTime) && (globalRecord || isRecording)) {
 					lastUpdateTime = last;
-					blink();
+					blink(globalRecord, isRecording);
 				}
 				updateVisibility(visible);
 				return true;
 			}
 			
-			private void blink() {
+			private void blink(boolean globalRecord, boolean isRecording) {
 				setImageDrawable(monitoringInactive);
 				invalidate();
 				postDelayed(new Runnable() {
