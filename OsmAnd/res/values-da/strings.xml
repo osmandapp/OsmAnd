@@ -194,7 +194,7 @@
 	
 	
 	<string name="layer_map_appearance">Konfigurer skærm</string>
-	<string name="show_lanes">Vis vognbaner</string>
+	<string name="show_lanes">Vognbaner</string>
 	<string name="avoid_unpaved">Undgå grusveje</string>
 	<string name="avoid_ferries">Undgå færger</string>
 	<string name="avoid_in_routing_title">Undgå…</string>
@@ -264,9 +264,9 @@
 	<string name="bg_service_screen_unlock">Lås skærmen op</string>
 	<string name="bg_service_screen_lock_toast">Skærmen er låst</string>
 	<string name="bg_service_interval">Indstil opvågningsinterval:</string>
-	<string name="show_cameras">Vis fartkameraer</string>
+	<string name="show_cameras">Fartkameraer</string>
 	
-	<string name="avoid_toll_roads">Undgå betalingsveje</string>
+	<string name="avoid_toll_roads">Betalingsveje</string>
 	<string name="continue_follow_previous_route_auto">Forrige navigation var ufærdig. Fortsæt den? (%1$s sekunder)</string>
 	<string name="route_updated_loc_found">Ruten beregnes, når position er fundet</string>
 	<string name="osmand_parking_hours">Timer</string>
@@ -323,7 +323,7 @@
     <string name="map_widget_intermediate_distance">Rutepunkt</string>
     <string name="osmand_play_title_30_chars">OsmAnd kort &amp; navigation</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ kort &amp; navigation</string>
-	<string name="show_traffic_warnings">Vis trafikadvarsler</string>
+	<string name="show_traffic_warnings">Trafikadvarsler</string>
 	<string name="rendering_attr_noPolygons_description">Gør alle overflader på kortet transparent</string>
 	<string name="rendering_attr_noPolygons_name">Skjul polygoner</string>
 	<string name="rendering_attr_appMode_name">Optegningsmåde</string>
@@ -1524,9 +1524,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="av_camera_focus_continuous">Kameraet forsøger løbende at fokusere</string>
 	<string name="av_photo_play_sound_descr">Spil lyd når foto tages</string>
 <string name="av_photo_play_sound">Kameralyd</string>
-	<string name="speak_traffic_warnings">Meddel trafikadvarsler</string>
-	<string name="speak_cameras">Meddel fotofælder</string>
-	<string name="speak_speed_limit">Meddel hastighedsgrænse</string>
+	<string name="speak_traffic_warnings">Trafikadvarsler</string>
+	<string name="speak_cameras">Fotofælder</string>
+	<string name="speak_speed_limit">Hastighedsgrænse</string>
     
 	
     <string name="route_descr_map_location">Kort: </string>
@@ -1549,8 +1549,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="context_menu_item_directions_from">Kørselsvejledning fra</string>
     <string name="speak_title">Meddel…</string>
 	<string name="speak_descr">Konfigurer til at meddele gadenavne, trafikadvarsler (tvungne stop, vejbump), fotofældeadvarsler, hastighedsbegrænsninger</string>
-	<string name="speak_street_names">Meddel gadenavne (TTS)</string>
-    <string name="announce_gpx_waypoints">Meddel GPX-rutepunkter</string>
+	<string name="speak_street_names">Gadenavne (TTS)</string>
+    <string name="announce_gpx_waypoints">GPX-rutepunkter</string>
     <string name="osmodroid_mode_off">Start OsMoDroid</string>
     <string name="osmodroid_mode_on">Stop OsMoDroid</string>    
     <string name="driving_region_japan">Japan</string>
@@ -1654,13 +1654,13 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
          \n Bemærk: det vil ikke være muligt at dele filer mellem OsmAnd og OsmAnd+. </string>
     <string name="routing_attr_prefer_motorway_name">Foretræk motorveje</string>
 	<string name="routing_attr_prefer_motorway_description">Foretræk motorveje</string>
-	<string name="routing_attr_avoid_toll_name">Undgå betalingsveje</string>
-	<string name="routing_attr_avoid_toll_description">Undgå betalingsveje</string>
-	<string name="routing_attr_avoid_unpaved_name">Undgå grusveje</string>
+	<string name="routing_attr_avoid_toll_name">Betalingsveje</string>
+	<string name="routing_attr_avoid_toll_description">Betalingsveje</string>
+	<string name="routing_attr_avoid_unpaved_name">Grusveje</string>
 	<string name="routing_attr_avoid_unpaved_description">Undgå grusveje</string>
-	<string name="routing_attr_avoid_ferries_name">Undgå færger</string>
+	<string name="routing_attr_avoid_ferries_name">Færger</string>
 	<string name="routing_attr_avoid_ferries_description">Undgå færger</string>
-	<string name="routing_attr_avoid_motorway_name">Undgå motorveje</string>
+	<string name="routing_attr_avoid_motorway_name">Motorveje</string>
 	<string name="routing_attr_avoid_motorway_description">Undgå motorveje</string>
 	<string name="routing_attr_weight_name">Maksimal vægt</string>
 	<string name="routing_attr_weight_description">Angiv køretøjets vægt begrænsning</string>
@@ -1967,8 +1967,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="waypoints">Rutepunkter</string>
     <string name="targets">Destinationer</string>
     <string name="way_alarms">Forhindringer</string>
-    <string name="speak_favorites">Meddel favoritter</string>
-    <string name="speak_poi">Meddel interessepunkt (IP)</string>
+    <string name="speak_favorites">Favoritter</string>
+    <string name="speak_poi">Interessepunkt (IP)</string>
     <string name="flat_list_waypoints">Alle</string>
     <string name="index_tours">Ture</string>
     <string name="distance">Afstand</string>
