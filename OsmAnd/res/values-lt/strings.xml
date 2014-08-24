@@ -504,10 +504,9 @@
 		\n\nJį galima pasiekti paspaudus ir laikant ant žemėlapio arba paspaudus valdymo rutulį arba pasirinkus \'Meniu\' → \'Naudoti vietą\' (paskutiniai du būdai naudoja žemėlapio centrą kaip pasirinktą vietą).
 		\n\nVietos žymeklį galima paslėpti palaikius jį pasapaustą.
 	</string>
-  <string name="tip_initial">Patarimai ir gudrybės</string>
-  <string name="tip_initial_t">OsmAnd yra daug funkcijų turinti navigacijos programa.
-		\n\nPradiniam supažindinimui keletas pagrindinių patarimų gali būti peržiūrėti žemėlapio rodinyje pasirinkus \'Meniu\' → \'Patarimai\'.
-	</string>
+  <string name="tip_initial">Pagalba</string>
+  <string name="tip_initial_t">"OsmAnd yra daug funkcijų turinti navigacijos programa.
+\n\nPradiniam supažindinimui keletas pagrindinių patarimų gali būti peržiūrėti žemėlapio rodinyje pasirinkus \'Meniu\' → \'Patarimai\'. "</string>
   <string name="next_button">Kitas</string>
   <string name="previous_button">Ankstesnis</string>
   <string name="unit_of_length_descr">Pakeisti ilgio ir greičio matavimo vienetus</string>
@@ -1304,7 +1303,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
         \n\t* Papildomi kompaso stabilizavimo nustatymai
         \n\t* Žemėlapio viršutiniame kairiame kampe esantis mygtukas pakeičia Meniu mygtuką
     </string>
-    <string name="monitoring_settings">Sekimo paslaugos</string>
+    <string name="monitoring_settings">Kelionės įrašymas</string>
     <string name="monitoring_settings_descr">Nustatykite kaip įrašinėti maršrutus</string>
     <string name="osmand_monitoring_plugin_description">Įjunkite sekimą ir navigaciją miego režime (išjungus ekraną) periodiškai pažadinant GPC įrenginį. Koreguokite nustatymus, kurie reikalingi įrašant jūsų maršrutus į GPX failą ar sekant interneto pagalba.</string>
     <string name="osmand_monitoring_plugin_name">Stebėjimo paslaugos</string>
