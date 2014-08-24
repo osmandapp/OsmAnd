@@ -1473,7 +1473,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="use_magnetic_sensor_descr">Brug magnetisksensor i stedet for retningssensor til at bestemme kompasværdi</string>
     <string name="use_kalman_filter_compass_descr">Brug Kalman-filter for at undgå kompasmisvisning</string>
     <string name="use_kalman_filter_compass">Kalman filter</string>
-    <string name="access_mark_final_location_first">Tilgængelighedmodus: Vælg destination først</string> 
+    <string name="access_mark_final_location_first">Tilgængelighedstilstand: Vælg destination først</string> 
     <string name="wait_current_task_finished">Vent - mens aktuel opgave bliver færdig</string>
     <string name="downloading_file_new">Henter …</string>
 	<string name="plugin_distance_point_hdop">nøjagtighed</string>
