@@ -198,31 +198,41 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 
 				setText(txt, subtxt);
 				setImageDrawable(d);
-				if ((last != lastUpdateTime) && globalRecord) {
+				//if ((last != lastUpdateTime) && globalRecord) {
+				if ((last != lastUpdateTime) && (globalRecord || isRecording) {
 					lastUpdateTime = last;
-					blink();
+					//blink();
+					//test blink wuith 2 indicator states
+					setImageDrawable(monitoringInactive);
+					invalidate();
+					postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							if (globalRecord) {
+								setImageDrawable(monitoringBig);
+							} else {
+								setImageDrawable(monitoringSmall);
+							}
+							invalidate();
+						}
+					}, 500);
+					//end test
 				}
 				updateVisibility(visible);
 				return true;
 			}
 			
-			private void blink() {
-				setImageDrawable(monitoringSmall);
-				invalidate();
-				postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						setImageDrawable(monitoringBig);
-						// TODO: Needs fixing if dual-type indicator for dual-type logging remains
-						//if (globalRecord) {
-						//	setImageDrawable(monitoringBig);
-						//} else {
-						//	setImageDrawable(monitoringSmall);
-						//}
-						invalidate();
-					}
-				}, 500);
-			}
+//			private void blink() {
+//				setImageDrawable(monitoringSmall);
+//				invalidate();
+//				postDelayed(new Runnable() {
+//					@Override
+//					public void run() {
+//						setImageDrawable(monitoringBig);
+//						invalidate();
+//					}
+//				}, 500);
+//			}
 		};
 		monitoringControl.updateInfo(null);
 
