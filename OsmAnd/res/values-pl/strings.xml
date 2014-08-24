@@ -1923,4 +1923,16 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="av_camera_pic_size_descr">Wybierz rozmiar obrazu wewnętrznego aparatu</string>
     <string name="hide_all_waypoints">Usuń wszystkie</string>
     <string name="announce_nearby_favorites">Ogłaszaj pobliskie ulubione</string>
-</resources>
+<string name="rendering_attr_publicTransportMode_name">Tryb transportu publicznego</string>
+	<string name="record_plugin_name">Nagrywaj swoje wycieczki</string>
+    <string name="int_hour">godz.</string>
+    <string name="duration">Czas trwania</string>
+    <string name="distance">Dystans</string>
+    <string name="index_tours">Wycieczki</string>
+    <string name="flat_list_waypoints">Wszystkie</string>
+    <string name="waypoints">Punkty trasy</string>
+    <string name="targets">Kierunki</string>
+    <string name="way_alarms">Przeszkody</string>
+    <string name="speak_favorites">Pokazuj ulubione</string>
+    <string name="speak_poi">Pokazuj punkty POI</string>
+    </resources>
