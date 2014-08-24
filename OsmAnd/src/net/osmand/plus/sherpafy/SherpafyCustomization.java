@@ -677,7 +677,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	public int getWaypointSearchRadius(int searchDeviationRadius, int type) {
 		if(type == WaypointHelper.WAYPOINTS) {
-			return searchDeviationRadius;
+			return Math.min(2000, searchDeviationRadius);
 		}
 		return searchDeviationRadius;
 	}
