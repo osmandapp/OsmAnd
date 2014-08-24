@@ -593,10 +593,9 @@
 		\n\n它可長按地圖上的任何一點（然後輕點其標記），或按軌跡球的按鈕，或者選擇由\'選單\' → \'使用位置\'（最後兩種方式以地圖中心作為參考）。
 		\n\n若長按則可以再次隱藏標記對話框。
 	</string>
-	<string name="tip_initial">提示和技巧</string>
-	<string name="tip_initial_t">OsmAnd 是一個導航應用程式含有很多功能。
-		\n\n基本功能介紹與某些使用提示和技巧，可透過主畫面\'選單\' → \'提示\'連結。
-	</string>
+	<string name="tip_initial">幫助</string>
+	<string name="tip_initial_t">"OsmAnd 是一個導航應用程式，含有很多的功能。
+\n\n基本功能介紹與某些使用提示和技巧，可透過地圖主畫面\'選單\' → \'提示\'連結。 "</string>
 	<string name="next_button">下一頁</string>
 	<string name="previous_button">上一頁</string>
 	<string name="unit_of_length_descr">更改長度與速度單位</string>
