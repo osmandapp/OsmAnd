@@ -170,7 +170,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				Drawable d = monitoringInactive;
 				long last = lastUpdateTime;
 				final boolean globalRecord = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-				final boolean record = app.getSavingTrackHelper().getRecord();
+				final boolean isRecording = app.getSavingTrackHelper().getIsRecording();
 				float dist = app.getSavingTrackHelper().getDistance();
 
 				//make sure widget always shows recorded track distance if unsaved track exists
@@ -189,7 +189,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				if(globalRecord) {
 					//indicates global recording (+background recording)
 					d = monitoringBig;
-				} else if (record) {
+				} else if (isRecording) {
 					//indicates (profile-based, configured in settings) recording (looks like is only active during nav in follow mode)
 					d = monitoringSmall;
 				} else {
