@@ -170,8 +170,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				Drawable d = monitoringInactive;
 				long last = lastUpdateTime;
 				final boolean globalRecord = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-				//if (globalRecord || settings.SAVE_TRACK_TO_GPX.get()) {
-					float dist = app.getSavingTrackHelper().getDistance();
+				final boolean record = app.getSavingTrackHelper().getRecord();
+				float dist = app.getSavingTrackHelper().getDistance();
+
 				//make sure widget always shows recorded track distance if unsaved track exists
 				if (dist > 0) {
 					last = app.getSavingTrackHelper().getLastTimeUpdated();
@@ -184,16 +185,17 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 						subtxt = ds.substring(ls + 1);
 					}
 				}
-					if(globalRecord) {
-						//indicates global recording (+background recording)
-						d = monitoringBig;
-					} else if (settings.SAVE_TRACK_TO_GPX.get()) {
-						//indicates (profile-based, configured in settings) screen-on recording
-						d = monitoringSmall;
-					} else {
-						d = monitoringInactive;
-					}
-				//}
+
+				if(globalRecord) {
+					//indicates global recording (+background recording)
+					d = monitoringBig;
+				} else if (record) {
+					//indicates (profile-based, configured in settings) recording (looks like is only active during nav in follow mode)
+					d = monitoringSmall;
+				} else {
+					d = monitoringInactive;
+				}
+
 				setText(txt, subtxt);
 				setImageDrawable(d);
 				if (last != lastUpdateTime && globalRecord) {

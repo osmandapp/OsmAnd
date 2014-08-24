@@ -58,6 +58,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private LatLon lastPoint;
 	private float distance = 0;
+	private boolean record = false;
 	private SelectedGpxFile currentTrack;
 	
 	public SavingTrackHelper(OsmandApplication ctx){
@@ -312,7 +313,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		// use because there is a bug on some devices with location.getTime()
 		long locationTime = System.currentTimeMillis();
 		OsmandSettings settings = ctx.getSettings();
-		boolean record = false;
+		//boolean record = false;
 		if(OsmAndLocationProvider.isPointAccurateForRouting(location) && 
 				OsmAndLocationProvider.isNotSimulatedLocation(location) ) {
 			if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
@@ -391,6 +392,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 	}
 	
+	public boolean getRecord() {
+		return record;
+	}
+
 	public float getDistance() {
 		return distance;
 	}
