@@ -102,8 +102,8 @@
 \n\t* 登錄為\'藍色\'，表示伺服器有更新的版本
 \n\t* 登錄為斜體字，表示未在裝置上使用 "</string>
 	<string name="filterpoi_activity">建立興趣點篩選</string>
-	<string name="recalculate_route_to_your_location">交通模式：</string>
-	<string name="select_navigation_mode">選擇交通模式</string>
+	<string name="recalculate_route_to_your_location">運輸模式：</string>
+	<string name="select_navigation_mode">選擇運輸模式</string>
 	
 	<string name="day_night_info_description">日出：%1$s \n日落：%2$s</string>
 	<string name="day_night_info">日/夜資訊</string>
@@ -1818,4 +1818,5 @@
     <string name="int_hour">小時</string>
     <string name="duration">持續時間</string>
     <string name="distance">距離</string>
-    </resources>
+    <string name="rendering_attr_publicTransportMode_name">大眾運輸模式</string>
+	</resources>
