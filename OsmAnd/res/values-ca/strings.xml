@@ -857,9 +857,8 @@
 	\n\nEstà disponible prement i aguantant a qualsevol punt en el mapa (i llavors seleccionant el seu marcador) o prement el boto de la bola de desplaçament o seleccionant \'Menú\'→ \Usa posició\' (en les dues darreres opcions s\'agafa el centre del mapa com referència).
 	\n\nLa caixa de diàleg s\'amaga altre cop prement i aguantant dins seu.
 	</string>
-<string name="tip_initial_t">OsmAnd és una aplicació de navegació amb moltes funcionalitats.
-		\n\nCom a introducció bàsica, s\'enllacen alguns consells i dreceres via \'Menú\'→ \'Concells\' de la pantalla del mapa.
-	</string>
+<string name="tip_initial_t">"OsmAnd és una aplicació de navegació amb moltes funcionalitats.
+\n\nEs disposa d\'una introducció bàsica, consells d\'ús i ajuda avançada via «Menú» → «Ajuda» des la pantalla del mapa. "</string>
 <string name="send_location_way_choose_title">Comparteix l\'ubicació usant</string>
 <string name="old_map_index_is_not_supported">Format de mapa discontinuat «{0}» no esta suportat</string>
 <string name="select_max_zoom_preload_area">Selecciona el màxim zoom per precarregar</string>
