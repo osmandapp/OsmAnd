@@ -313,7 +313,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		// use because there is a bug on some devices with location.getTime()
 		long locationTime = System.currentTimeMillis();
 		OsmandSettings settings = ctx.getSettings();
-		//boolean record = false;
+		record = false;
 		if(OsmAndLocationProvider.isPointAccurateForRouting(location) && 
 				OsmAndLocationProvider.isNotSimulatedLocation(location) ) {
 			if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
