@@ -1824,4 +1824,5 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="int_hour">val</string>
     <string name="duration">Trukmė</string>
     <string name="distance">Atstumas</string>
-    </resources>
+    <string name="rendering_attr_publicTransportMode_name">Visuomeninio transporto režimas</string>
+	</resources>
