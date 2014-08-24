@@ -1790,6 +1790,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="rendering_attr_alpineHiking_name">Пеший горный туризм</string>
     <string name="rendering_attr_osmcTraces_name">Наложение символов пешего туризма</string>
     <string name="rendering_attr_coloredBuildings_name">Цветные здания</string>
+    <string name="rendering_attr_publicTransportMode_name">Режим общественного транспорта</string>
     <string name="hide_all_waypoints">Удалить все</string>
     <string name="announce_nearby_favorites">Объявлять ближайшие избранные</string>
 <string name="rendering_value_browse_map_name">Обзор карты</string>  

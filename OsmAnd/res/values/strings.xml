@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="rendering_attr_publicTransportMode_name">Public transport mode</string>
 	<string name="tips_and_tricks">Help</string>
 	<string name="tip_initial">Help</string>
 	<string name="tip_initial_t">OsmAnd is a navigation application with many features. 
