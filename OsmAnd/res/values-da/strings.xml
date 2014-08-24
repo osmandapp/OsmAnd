@@ -1976,4 +1976,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="int_hour">t</string>
     <string name="record_plugin_name">Optag dine ture</string>
     <string name="record_plugin_description">Gem dine spor via et tryk på en knap på skærmen. Vis indstillinger til optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
-    </resources>
+    <string name="rendering_attr_publicTransportMode_name">Kollektivtrafik tilstand</string>
+	</resources>
