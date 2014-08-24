@@ -1353,7 +1353,7 @@
 	<string name="about_version">Versió:</string>
     <string name="about_settings">Quant a</string>
     <string name="about_settings_descr">Informació de la versió, llicències, membres del projecte</string>
-    <string name="tips_and_tricks">Consells</string>
+    <string name="tips_and_tricks">Ajuda</string>
     <string name="local_index_tile_data_zooms">Escalats baixats: %1$s</string>
     <string name="local_index_tile_data_expire">Expira (minuts): %1$s</string>
     <string name="local_index_tile_data_downloadable">Baixable: %1$s</string>
