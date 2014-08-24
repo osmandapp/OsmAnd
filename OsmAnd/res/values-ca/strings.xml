@@ -1883,4 +1883,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
     <string name="distance">Distància</string>
-    </resources>
+    <string name="rendering_attr_publicTransportMode_name">Mode transport públic</string>
+	</resources>
