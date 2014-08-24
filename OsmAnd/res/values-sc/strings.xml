@@ -1725,4 +1725,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
     <string name="distance">Distantzia</string>
-    </resources>
+    <string name="rendering_attr_publicTransportMode_name">Modalidade trasportu pùblicu</string>
+	</resources>
