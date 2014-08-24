@@ -332,7 +332,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 			//check if recording is active for widget status light
 			if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
-				if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || (settings.SAVE_TRACK_TO_GPX.get() && ctx.getRoutingHelper().isFollowingMode()) {
+				if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || (settings.SAVE_TRACK_TO_GPX.get() && ctx.getRoutingHelper().isFollowingMode())) {
 					isRecording = true;
 				}
 			} else if (ctx.getAppCustomization().saveGPXPoint(location)) {
