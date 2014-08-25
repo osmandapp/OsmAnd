@@ -61,8 +61,8 @@
 <string name="osmand_parking_pm">PM</string>
 <string name="osmand_parking_am">AM</string>
 <string name="osmand_parking_position_name">Punt d\'aparcament</string>
-<string name="osmand_parking_plugin_description">Aquest connector permet desar la localització del vostre cotxe aparcat.</string>
-<string name="osmand_parking_plugin_name">Connector Posició d\'aparcament</string>
+<string name="osmand_parking_plugin_description">Aquest connector us permet desar la localització del vostre cotxe aparcat.</string>
+<string name="osmand_parking_plugin_name">Connector de posició d\'aparcament</string>
 <string name="context_menu_item_add_parking_point">Marca com a posició d\'aparcament</string>
 <string name="context_menu_item_delete_parking_point">Suprimeix un marcador d\'aparcament</string>
 <string name="gpxup_identifiable">Identificable</string>
