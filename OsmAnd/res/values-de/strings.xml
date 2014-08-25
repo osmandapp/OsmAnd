@@ -1,12 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="save_track_to_gpx_globally">Aufzeichnung in GPX-Datei</string>
-	<string name="save_track_to_gpx_globally_descr">Generelle Positionsaufzeichnung kann man mit der Schaltfläche \'GPX Aufnhame\' direkt auf dem Kartenbildschirm aktivieren oder deaktivieren</string>
+	<string name="save_track_to_gpx_globally_descr">Generelle Positionsaufzeichnung kann man mit der Schaltfläche \'GPX-Aufnahme\' direkt auf dem Kartenbildschirm aktivieren oder deaktivieren</string>
 	<string name="save_current_track">Track jetzt speichern</string>
 	<string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
 	<string name="save_track_to_gpx">Aufzeichnung in GPX-Datei während Navigation</string>
 	<string name="save_track_to_gpx_descrp">Zurückgelegte Strecken während der Navigation werden als GPX auf der SD-Karte gespeichert</string>
-	<string name="save_track_interval_globally">ufzeichnungs-Intervall</string>
+	<string name="save_track_interval_globally">Aufzeichnungs-Intervall</string>
 	<string name="save_track_interval">Aufzeichnungs-Intervall während Navigation</string>
 	<string name="save_track_interval_descr">Intervall zwischen zwei Aufzeichnungspunkten während Navigation</string>
 	<string name="tips_and_tricks">Hilfe</string>
