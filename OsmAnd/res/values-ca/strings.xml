@@ -506,7 +506,7 @@
 <string name="data_settings">Dades</string>
 <string name="close">Tanca</string>
 <string name="update_existing">Reemplaçar</string>
-<string name="follow">Inicieu navegació</string>
+<string name="follow">Inicia la navegació</string>
 <string name="address">Adreça</string>
 <string name="search_online_address">Internet</string>
 <string name="searching">Cercant…</string>
@@ -541,7 +541,7 @@
 <string name="tip_search">Cerca</string>
 <string name="km_h">km/h</string>
 <string name="downloading">S\'està baixant…</string>
-<string name="closing_changeset">Tancant les modificacions…</string>
+<string name="closing_changeset">S\'estan tancant les modificacions…</string>
 <string name="loading_cities">S\'estan carregant les ciutats…</string>
 
 <string name="daynight_mode_day">Dia</string>
@@ -593,7 +593,7 @@
 <string name="download_index_success">Baixada amb èxit</string>
 
 <string name="show_poi_on_map">Mostrar al mapa</string>
-<string name="show_gps_status">Mostrar estat del GPS</string>
+<string name="show_gps_status">Mostra l\'estat del GPS</string>
 <string name="opening_hours">Horari d\'obertura</string>
 <string name="poi">PDI</string>
 <string name="new_route_calculated_dist">Nova ruta calculada,distancia</string>
@@ -705,10 +705,10 @@
 <string name="router_service">Servei de navegació</string>
 <string name="downloading_list_indexes">Baixant llista de les regions disponibles…</string>
 <string name="get_directions">Direccions</string>
-<string name="loading_poi_obj">Carregant PDI…</string>
-<string name="loading_streets">Carregant carrers…</string>
-<string name="error_calculating_route">Error calculant ruta</string>
-<string name="loading_postcodes">Carregant codis postals…</string>
+<string name="loading_poi_obj">S\'està carregant el PDI…</string>
+<string name="loading_streets">S\'estan carregant els carrers…</string>
+<string name="error_calculating_route">S\'ha produït un error en calcular ruta</string>
+<string name="loading_postcodes">S\'estan carregant els codis postals…</string>
 <string name="arrived_at_destination">Has arribat a la teva destinació</string>
 <string name="invalid_locations">Les coordenades no son valides!</string>
 <string name="saving_gpx_tracks">Guardant seguiments GPX a la SD…</string>
@@ -759,7 +759,7 @@
 <string name="search_nothing_found">No s\'ha trobat res</string>
 <string name="list_index_files_was_not_loaded">No s\'ha recuperat la llista de les regions des d\'osmand.net.</string>
 <string name="failed_op">fallada</string>
-<string name="error_occurred_saving_gpx">Error desant el GPX</string>
+<string name="error_occurred_saving_gpx">S\'ha produït un error en desar el GPX</string>
 <string name="osm_settings_descr">Especifiqueu els paràmetres d\'Openstreetmap.org (OSM) que calen per les trameses a OSM</string>
 <string name="search_address_building">Edifici</string>
 <string name="search_address_building_option">Edifici</string>
@@ -951,7 +951,7 @@
 	<string name="only_show">Només mostra</string>
 	<string name="mark_final_location_first">Primer de tot cal que seleccioneu una destinació</string>
 	<string name="auth_failed">Ha fallat l\'autorització</string>
-	<string name="loading_streets_buildings">Carregant carrers/edificis…</string>
+	<string name="loading_streets_buildings">S\'estan carregant els carrers/edificis…</string>
 	<string name="error_calculating_route_occured">Ha succeït un error en calcular la ruta</string>
 	<string name="empty_route_calculated">Error: La ruta calculada és buida</string>					
 	<string name="go_back_to_osmand">Torna enrere al mapa de l\'OsmAnd</string>
@@ -1108,7 +1108,7 @@
 	<string name="sd_mounted_ro">La targeta SD és només de lectura.\nNomés podeu visualitzar el mapa precarregat i no podeu baixar-ne des d\'Internet.</string>
 	<string name="map_orientation_portrait">Vertical</string>
 	<string name="map_screen_orientation_descr">Vertical, apaïsat, o dispositiu</string>
-	<string name="opening_changeset">Obrint les modificacions…</string>
+	<string name="opening_changeset">S\'estan obrint les modificacions…</string>
 	<string name="reload_indexes_descr">Torna a llegir els mapes de vectors fora de línia i les dades de la targeta SD</string>
 	<string name="reload_indexes">Torna a llegir les dades fora de línia</string>
 	<string name="map_preferences_descr">Especifiqueu els paràmetres del mapa: font del mapa, rotació, posició del marcador i orientació de la pantalla</string>
@@ -1255,7 +1255,7 @@
 	<string name="osmand_plus_play_title_30_chars">Mapes i navegació OsmAnd+</string>
 	<string name="transport_stops_to_pass">parades que heu de passar</string>
 	<string name="downloading_file_new">Baixant …</string>
-	<string name="commiting_node">Enviant el node…</string>
+	<string name="commiting_node">S\'està enviant el node…</string>
 	<string name="choose_intersected_street">Seleccioneu la intersecció</string>
 	<string name="poi_remove_confirm_template">Voleu suprimir {0} (escriviu un comentari)?</string>
 	<string name="poi_dialog_comment_default">Canvis en el PDI</string>
@@ -1277,7 +1277,7 @@
     </string>
     <string name="av_def_action_choose">Selecciona sota demanda</string>
     <string name="background_service_provider">Proveïdor de la ubicació</string>
-	<string name="converting_names">Convertint els noms nadius a l\'anglès…</string>
+	<string name="converting_names">S\'estan convertint els noms nadius / en anglès…</string>
 	<string name="save_track_interval_descr">Indiqueu l\\\'interval d\\\'enregistrament de traces</string>
 	<string name="incremental_search_street">Cerca de carrers progressiva</string>
 	<string name="incremental_search_building">Cerca d\\\'edificis progressiva</string>
