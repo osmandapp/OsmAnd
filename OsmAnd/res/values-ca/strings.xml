@@ -84,7 +84,7 @@
 <string name="unknown_location">La posició encara no es coneix</string>
 <string name="modify_transparency">Modifica l\'opacitat (0 - transparent, 255 - opac)</string>
 
-<string name="bg_service_sleep_mode_off">Activa\'n\n el mode adormit</string>
+<string name="bg_service_sleep_mode_off">Activa\n el mode en segon pla</string>
 <string name="bg_service_sleep_mode_on">Atura\'n\n el mode adormit</string>
 <string name="offline_navigation_not_available">La navegació fora de línia de l\'OsmAnd no està disponible temporalment.</string>
 <string name="confirm_interrupt_download">Voleu interrompre la baixada del fitxer?</string>
@@ -1099,7 +1099,7 @@
     <string name="monitoring_control_start">Inicia</string>
     <string name="route_descr_current_location">Posició actual</string>
     <string name="incremental_search_city">Cerca progressiva de municipis</string>
-    <string name="safe_mode_description">Executa l\'aplicació en mode segur (usant codi d\'Android, més lent que el codi nadiu).</string>
+    <string name="safe_mode_description">Executeu l\'aplicació en mode segur (usant codi d\'Android, més lent que el codi nadiu).</string>
     <string name="delete_target_point">Elimina el punt de ruta</string>
     <string name="download_srtm_maps">Dades de corbes de nivell</string>
     <string name="osmodroid_plugin_old_ver_not_supported">El connector OsMoDroid és d\'una versió antiga i cal actualitzar-lo.</string>
@@ -1847,9 +1847,9 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
  	<string name="continue_navigation">Continua la navegació</string>
     <string name="pause_navigation">Suspèn la navegació</string>
 	<string name="rendering_attr_alpineHiking_name">Perspectiva senderista</string>
-    <string name="rendering_attr_alpineHiking_description">Representar els camins segons l\'escala SAC</string>
+    <string name="rendering_attr_alpineHiking_description">Es dibuixen els camins segons l\'escala SAC (Club Alpí Suís)</string>
     <string name="rendering_attr_osmcTraces_name">Sobreposar simbologia senderista</string>
-    <string name="rendering_attr_osmcTraces_description">Representar els camins segons les traces OSMC</string>
+    <string name="rendering_attr_osmcTraces_description">Es dibuixen els camins segons les traces OSMC (símbols de colors)</string>
     
 	<string name="osmo_invite">Convida…</string>
     <string name="osmo_leave_confirmation_msg">Voleu deixar el grup %1$s?</string>
