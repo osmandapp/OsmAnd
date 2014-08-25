@@ -707,7 +707,7 @@
 <string name="get_directions">Direccions</string>
 <string name="loading_poi_obj">S\'està carregant el PDI…</string>
 <string name="loading_streets">S\'estan carregant els carrers…</string>
-<string name="error_calculating_route">S\'ha produït un error en calcular ruta</string>
+<string name="error_calculating_route">S\'ha produït un error en calcular la ruta</string>
 <string name="loading_postcodes">S\'estan carregant els codis postals…</string>
 <string name="arrived_at_destination">Has arribat a la teva destinació</string>
 <string name="invalid_locations">Les coordenades no son valides!</string>
