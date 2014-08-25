@@ -1130,7 +1130,7 @@
 	<string name="error_io_error">S\'ha produït un error E/S</string>
 	<string name="save_track_to_gpx">Desa la traça en un fitxer GPX</string>
 	<string name="use_english_names_descr">Escolliu entre noms nadius i noms anglesos</string>
-	<string name="srtm_plugin_description">Us facilita baixar corbes de nivell i de relleu als mapes sense connexió (\'Paràmetres\' →  \'Gestionar arxius de mapes\' →  \'Descàrregues\' →  \'Seleccionar tipus de mapa desitjat\').</string>
+	<string name="srtm_plugin_description">Us facilita baixar relleu i corbes de nivell als mapes fora de línia («Paràmetres» → «Gestió d\'arxius de mapes» → «Baixa» → Selecció del tipus de mapa desitjat).</string>
     <string name="rendering_attr_showRoadMaps_description">Indiqueu quan mostrar mapes de només carreteres:</string>
 	<string name="tip_recent_changes_1_0_0_t">Canvis a la 1.0.0 :
 	\n\t* Encaminament millorat: més ràpid, més precís, fins a 250 km
