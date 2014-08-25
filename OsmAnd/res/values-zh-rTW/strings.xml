@@ -772,7 +772,7 @@
 	<string name="search_poi_filter">篩選</string>
 	<string name="menu_mute_off">語音已開啟</string>
 	<string name="menu_mute_on">語音已關閉</string>
-	<string name="voice_provider_descr">選擇導航語音引導 (語言代碼，請參閱 ISO 639-1)</string>
+	<string name="voice_provider_descr">選擇導航語音導引</string>
 	<string name="voice_provider">語音導航</string>
 	<string name="voice_data_initializing">初始化語音資料…</string>
 	<string name="voice_data_not_supported">不支援的語音資料版本</string>
@@ -908,10 +908,10 @@
 	<string name="settings">設定</string>
 	<string name="save_current_track_descr">現在就將目前的軌跡存到 SD 卡</string>
 	<string name="save_current_track">儲存目前的 GPX 軌跡</string>
-	<string name="save_track_interval">記錄間隔</string>
-	<string name="save_track_interval_descr">為軌跡記錄選取定位間隔</string>
-	<string name="save_track_to_gpx_descrp">軌跡將以每日為分類存放在 track 目錄</string>
-	<string name="save_track_to_gpx">記錄軌跡成 GPX 檔案</string>
+	<string name="save_track_interval">在導航期間的記錄間隔</string>
+	<string name="save_track_interval_descr">在導航整個期間，為軌跡記錄選取記錄間隔</string>
+	<string name="save_track_to_gpx_descrp">在導航的整個期間，軌跡將會儲存在 track 目錄</string>
+	<string name="save_track_to_gpx">在導航的整個期間，記錄軌跡成 GPX 檔案</string>
 	<string name="update_tile">更新地圖</string>
 	<string name="reload_tile">重新載入圖磚</string>
 	<string name="mark_point">目的地</string>
@@ -1819,4 +1819,6 @@
     <string name="duration">持續時間</string>
     <string name="distance">距離</string>
     <string name="rendering_attr_publicTransportMode_name">大眾運輸模式</string>
+	<string name="save_track_to_gpx_globally">記錄軌跡成 GPX 檔案</string>
+	<string name="save_track_interval_globally">記錄間隔</string>
 	</resources>
