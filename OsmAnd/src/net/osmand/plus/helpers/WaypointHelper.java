@@ -44,7 +44,7 @@ public class WaypointHelper {
 	private static final int ANNOUNCED_DONE = 2;
 
 	private int searchDeviationRadius = 500;
-	private static final int LONG_ANNOUNCE_RADIUS = 500;
+	private static final int LONG_ANNOUNCE_RADIUS = 700;
 	private static final int SHORT_ANNOUNCE_RADIUS = 150;
 
 	OsmandApplication app;
@@ -169,12 +169,12 @@ public class WaypointHelper {
 				LocationPointWrapper lwp = lp.get(kIterator);
 				if (lp.get(kIterator).routeIndex < route.getCurrentRoute()) {
 					// skip
-				} else if (route.getDistanceToPoint(lwp.routeIndex) > LONG_ANNOUNCE_RADIUS) {
+				} else if (route.getDistanceToPoint(lwp.routeIndex) > LONG_ANNOUNCE_RADIUS / 2) {
 					break;
 				} else {
 					AlarmInfo inf = (AlarmInfo) lwp.point;
 					int d = route.getDistanceToPoint(lwp.routeIndex);
-					if (d > 250) {
+					if (d > LONG_ANNOUNCE_RADIUS) {
 						break;
 					}
 					float speed = lastProjection != null && lastProjection.hasSpeed() ? lastProjection.getSpeed() : 0;
@@ -287,8 +287,8 @@ public class WaypointHelper {
 		if (lastKnownLocation != null && app.getRoutingHelper().isFollowingMode()) {
 			for (int type = 0; type < locationPoints.size(); type++) {
 				int currentRoute = route.getCurrentRoute();
-				List<LocationPoint> approachPoints = new ArrayList<LocationPoint>();
-				List<LocationPoint> announcePoints = new ArrayList<LocationPoint>();
+				List<LocationPointWrapper> approachPoints = new ArrayList<LocationPointWrapper>();
+				List<LocationPointWrapper> announcePoints = new ArrayList<LocationPointWrapper>();
 				List<LocationPointWrapper> lp = locationPoints.get(type);
 				if(lp != null) {
 					int kIterator = pointsProgress.get(type);
@@ -303,18 +303,18 @@ public class WaypointHelper {
 						}
 						LocationPoint point = lwp.point;
 						double d1 = MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-								point.getLatitude(), point.getLongitude());
+								point.getLatitude(), point.getLongitude()) + lwp.getDeviationDistance();
 						Integer state = locationPointsStates.get(point);
 						if (state != null && state.intValue() == ANNOUNCED_ONCE
 								&& getVoiceRouter()
 										.isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS)) {
 							locationPointsStates.put(point, ANNOUNCED_DONE);
-							announcePoints.add(point);
+							announcePoints.add(lwp);
 						} else if ((state == null || state == NOT_ANNOUNCED)
 								&& getVoiceRouter()
 										.isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS)) {
 							locationPointsStates.put(point, ANNOUNCED_ONCE);
-							approachPoints.add(point);
+							approachPoints.add(lwp);
 						}
 						kIterator++;
 					}
@@ -336,8 +336,8 @@ public class WaypointHelper {
 							getVoiceRouter().approachPoi(lastKnownLocation, announcePoints);
 						} else if (type == ALARMS) {
 							EnumSet<AlarmInfoType> ait = EnumSet.noneOf(AlarmInfoType.class);
-							for(LocationPoint pw : announcePoints) {
-								ait.add(((AlarmInfo) pw).getType());
+							for(LocationPointWrapper pw : announcePoints) {
+								ait.add(((AlarmInfo) pw.point).getType());
 							}
 							for(AlarmInfoType t : ait) {
 								app.getRoutingHelper().getVoiceRouter().announceAlarm(t);

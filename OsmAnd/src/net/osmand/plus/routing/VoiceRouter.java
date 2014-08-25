@@ -8,6 +8,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
@@ -219,7 +220,7 @@ public class VoiceRouter {
 		}
 	}
 
-	public void announceWaypoint(List<LocationPoint> points) {
+	public void announceWaypoint(List<LocationPointWrapper> points) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p == null){
 			return;
@@ -228,7 +229,7 @@ public class VoiceRouter {
 		p.arrivedAtWayPoint(text).play();
 	}
 	
-	public void announceFavorite(List<LocationPoint> points) {
+	public void announceFavorite(List<LocationPointWrapper> points) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p == null){
 			return;
@@ -237,7 +238,7 @@ public class VoiceRouter {
 		p.arrivedAtFavorite(text).play();
 	}
 	
-	public void announcePoi(List<LocationPoint> points) {
+	public void announcePoi(List<LocationPointWrapper> points) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p == null){
 			return;
@@ -246,7 +247,7 @@ public class VoiceRouter {
 		p.arrivedAtPoi(text).play();
 	}
 
-	public void approachFavorite(Location location, List<LocationPoint> points){
+	public void approachFavorite(Location location, List<LocationPointWrapper> points){
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p == null){
 			return;
@@ -256,7 +257,7 @@ public class VoiceRouter {
 		p.goAhead(dist[0], null).andArriveAtFavorite(text).play();
 	}
 	
-	public void approachWaypoint(Location location, List<LocationPoint> points){
+	public void approachWaypoint(Location location, List<LocationPointWrapper> points){
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p == null){
 			return;
@@ -266,7 +267,7 @@ public class VoiceRouter {
 		p.goAhead(dist[0], null).andArriveAtWayPoint(text).play();
 	}
 	
-	public void approachPoi(Location location, List<LocationPoint> points){
+	public void approachPoi(Location location, List<LocationPointWrapper> points){
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p == null){
 			return;
@@ -276,19 +277,20 @@ public class VoiceRouter {
 		p.goAhead(dist[0], null).andArriveAtPoiWaypoint(text).play();
 	}
 
-	protected String getText(Location location, List<LocationPoint> points, double[] dist) {
+	protected String getText(Location location, List<LocationPointWrapper> points, double[] dist) {
 		String text = "";
-		for (LocationPoint point : points) {
+		for (LocationPointWrapper point : points) {
 			// need to calculate distance to nearest point
 			if (text.length() == 0) {
 				if (location != null && dist != null) {
-					dist[0] = MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
-							point.getLatitude(), point.getLongitude());
+					dist[0] = point.getDeviationDistance() + 
+							MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
+									point.getPoint().getLatitude(), point.getPoint().getLongitude());
 				}
 			} else {
 				text += ", ";
 			}
-			text += point.getName(router.getApplication());
+			text += point.getPoint().getName(router.getApplication());
 		}
 		return text;
 	}

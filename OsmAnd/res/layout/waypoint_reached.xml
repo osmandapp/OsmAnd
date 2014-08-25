@@ -21,6 +21,7 @@
               android:layout_gravity="center_vertical"
               android:textColor="@color/distance_color"
               android:maxLines="2"
+              android:textStyle="bold"
               android:textSize="15sp"></TextView>
 
     <TextView android:id="@+id/waypoint_text"
