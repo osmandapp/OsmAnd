@@ -1825,4 +1825,6 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="duration">Trukmė</string>
     <string name="distance">Atstumas</string>
     <string name="rendering_attr_publicTransportMode_name">Visuomeninio transporto režimas</string>
+	<string name="save_track_to_gpx_globally">Įrašyti maršrutą į GPX failą</string>
+	<string name="save_track_interval_globally">Įrašymo intervalas</string>
 	</resources>
