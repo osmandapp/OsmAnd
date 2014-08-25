@@ -3,8 +3,8 @@
     <string name="app_name">OsmAnd~</string>
 
     <!--
-    When changing the following  app_version string please remember to keep the version prefix for our apk in sync at 
-    http://builder.osmand.net:8080/view/OsmAnd%20Builds/job/OsmAnd-main-default/configure
+    When changing the following app_version string please remember to keep the version prefix for our apk in sync at
+    http://builder.osmand.net:8080/view/OsmAnd%20Builds/job/OsmAnd-main-default/configure  ( Ant, Properties, build.version=${GIT_BRANCH} 1.9.#${BUILD_NUMBER}D )
     -->
     <string name="app_version">1.9 alpha</string>
 
