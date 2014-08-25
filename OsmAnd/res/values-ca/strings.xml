@@ -84,7 +84,7 @@
 <string name="unknown_location">La posició encara no es coneix</string>
 <string name="modify_transparency">Modifica l\'opacitat (0 - transparent, 255 - opac)</string>
 
-<string name="bg_service_sleep_mode_off">Activa\n el mode en segon pla</string>
+<string name="bg_service_sleep_mode_off">Activa\n…el mode en segon pla</string>
 <string name="bg_service_sleep_mode_on">Atura\'n\n el mode adormit</string>
 <string name="offline_navigation_not_available">La navegació fora de línia de l\'OsmAnd no està disponible temporalment.</string>
 <string name="confirm_interrupt_download">Voleu interrompre la baixada del fitxer?</string>
