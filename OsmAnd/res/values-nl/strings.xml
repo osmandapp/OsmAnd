@@ -427,7 +427,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="add_waypoint_dialog_title">Voeg routepunt toe aan de opgenomen GPX-track</string>
   <string name="context_menu_item_add_waypoint">Voeg GPX-routepunt toe</string>
   <string name="amenity_type_administrative">Overheid</string>
-  <string name="amenity_type_barrier">Blokkades</string>
+  <string name="amenity_type_barrier">Blokkade</string>
   <string name="amenity_type_education">Onderwijs</string>
   <string name="amenity_type_emergency">Noodgevallen</string>
   <string name="amenity_type_entertainment">Amusement</string>
