@@ -901,7 +901,7 @@
 	<string name="menu_mute_off">Sprache ist an</string>
 	<string name="menu_mute_on">Sprache ist aus</string>
 	<string name="voice_not_use">Nicht verwenden</string>
-	<string name="voice_provider_descr">Sprachpaket für Navigation auswählen (Sprachcodes siehe ISO 639–1)</string>
+	<string name="voice_provider_descr">Sprachpaket für Navigation auswählen</string>
 	<string name="voice_provider">Sprachansagen</string>
 	<string name="voice_data_initializing">Sprachansagen werden initialisiert…</string>
 	<string name="voice_data_not_supported">Sprachpaket-Version wird nicht unterstützt</string>
