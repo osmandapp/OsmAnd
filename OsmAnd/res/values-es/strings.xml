@@ -299,10 +299,8 @@
 		\n\nAparece bien con una pulsación larga en un punto del mapa y luego pulsando sobre su marcador, bien pulsando el botón del trackball, o bien seleccionando \'Menú\'→\'Usar localización…\' (los dos últimos modos toman el cenro del mapa como referencia).
 		\n\nUna caja marcador puede ser ocultada con una pulsación larga sobre ella.
 	</string>
-  <string name="tip_initial">Pistas y trucos</string>
-  <string name="tip_initial_t">OsmAnd es una aplicación de navegación con muchas características.
-		\n\nComo introducción básica, hay algunas pistas y trucos de uso accesibles vía \'Menú\'→\'Consejos\' desde la pantalla principal.
-	</string>
+  <string name="tip_initial">Ayuda</string>
+  <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nAlguna información básica, consejos de uso y ayuda avanzada están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
   <string name="next_button">Siguiente</string>
   <string name="previous_button">Anterior</string>
   <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
@@ -1283,8 +1281,8 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 	<string name="hno">Número</string>
     <string name="tip_recent_changes_1_3_t">"Cambio en 1.5:\n\t* Tema Holo (personalización de tema) "
     </string>
-    <string name="monitoring_settings">Servicios de registro</string>
-    <string name="monitoring_settings_descr">Configura la forma de registrar los recorridos</string>
+    <string name="monitoring_settings">Grabando viaje</string>
+    <string name="monitoring_settings_descr">Configura la forma de grabar sus viajes</string>
     <string name="osmand_monitoring_plugin_description">Activa el seguimiento y la navegación en modo suspensión (pantalla apagada) despertando periódicamente el dispositivo GPS. Muestra opciones que permiten registrar tus recorridos en archivos GPX locales o en línea mediante un servicio web.</string>
     <string name="osmand_monitoring_plugin_name">Servicios de registro</string>
     <string name="choose_osmand_theme_descr">Elije el tema, el aspecto, de la aplicación</string>
@@ -1380,7 +1378,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="route_descr_map_location">Mapa: </string>
     <string name="route_to">Hacia:</string>
     <string name="about_version">Versión:</string>
-    <string name="tips_and_tricks">Consejos</string>
+    <string name="tips_and_tricks">Ayuda</string>
     <string name="local_index_tile_data_downloadable">Descargable: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom máximo: %1$s</string>
     <string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
@@ -1864,5 +1862,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
     <string name="record_plugin_name">Grabar tus viajes</string>
-    <string name="record_plugin_description">Guardar tus trayectos con una pulsación en la pantalla del mapa. Mostrar las opciones facilitando grabar tus trayectos a un fichero GPX local o usando un servicio web online.</string>
-    </resources>
+    <string name="record_plugin_description">Guardar tus trazas tocando un botón en la pantalla del mapa. Mostrar las opciones para grabar tus viajes a archivos GPX ocales o usando un servicio web en línea.</string>
+    <string name="rendering_attr_publicTransportMode_name">Modo de transporte público</string>
+	</resources>
