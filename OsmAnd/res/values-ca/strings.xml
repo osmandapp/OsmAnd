@@ -729,7 +729,7 @@
 <string name="choose_available_region">Escull una regió de la llista</string>
 <string name="search_POI_level_btn">Cerca\'n més</string>
 <string name="map_source">Font de mapes</string>
-<string name="show_poi_over_map_description">Es mostren els PDI sobre el mapa (utilitzeu el darrer filtre escollit)</string>
+<string name="show_poi_over_map_description">Es mostren els PDI sobre el mapa (utilitza el darrer filtre escollit)</string>
 <string name="use_internet">Usa Internet</string>
 <string name="favorites_Button">Els meus llocs</string>
 <string name="search_address_top_text">Escull l\'adreça</string>
