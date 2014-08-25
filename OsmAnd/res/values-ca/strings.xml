@@ -728,10 +728,10 @@
 <string name="searchpoi_activity">Escull un PDI</string>
 <string name="choose_available_region">Escull una regió de la llista</string>
 <string name="search_POI_level_btn">Cerca\'n més</string>
-<string name="map_source">Font de mapes</string>
+<string name="map_source">Font del mapa</string>
 <string name="show_poi_over_map_description">Es mostren els PDI sobre el mapa (utilitza el darrer filtre escollit)</string>
 <string name="use_internet">Usa Internet</string>
-<string name="favorites_Button">Els meus llocs</string>
+<string name="favorites_Button">Preferits</string>
 <string name="search_address_top_text">Escull l\'adreça</string>
 <string name="context_menu_item_add_favorite">Afegeix a preferits</string>
 <string name="favourites_context_menu_edit">Edita el preferit</string>
@@ -1280,7 +1280,7 @@
 	<string name="converting_names">S\'estan convertint els noms nadius / en anglès…</string>
 	<string name="save_track_interval_descr">Indiqueu l\'interval d\'enregistrament de traces</string>
 	<string name="incremental_search_street">Cerca de carrers progressiva</string>
-	<string name="incremental_search_building">Cerca d\\\'edificis progressiva</string>
+	<string name="incremental_search_building">Cerca d\'edificis progressiva</string>
 	<string name="Closest_Amenities">Instal·lacions més properes</string>
 	<string name="position_on_map_bottom">Part inferior</string>
 	<string name="osb_add_dialog_error">S\'ha produït una excepció: no s\'ha creat l\'error</string>
