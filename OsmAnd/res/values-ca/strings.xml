@@ -723,8 +723,8 @@
 <string name="ChooseCountry">Escull pais</string>
 <string name="choose_street">Escull carrer</string>
 <string name="choose_city">Escull ciutat</string>
-<string name="show_poi_over_map">Mostrar PDI</string>
-<string name="show_location">Mostrar ubicació</string>
+<string name="show_poi_over_map">Mostra el PDI</string>
+<string name="show_location">Mostra la ubicació</string>
 <string name="searchpoi_activity">Escull un PDI</string>
 <string name="choose_available_region">Escull una regió de la llista</string>
 <string name="search_POI_level_btn">Cerca\'n més</string>
@@ -760,7 +760,7 @@
 <string name="list_index_files_was_not_loaded">No s\'ha recuperat la llista de les regions des d\'osmand.net.</string>
 <string name="failed_op">fallada</string>
 <string name="error_occurred_saving_gpx">Error desant el GPX</string>
-<string name="osm_settings_descr">Preferències específiques d\'Openstreetmap.org (OSM) necessàries per les trameses a OSM</string>
+<string name="osm_settings_descr">Especifiqueu els paràmetres d\'Openstreetmap.org (OSM) que calen per les trameses a OSM</string>
 <string name="search_address_building">Edifici</string>
 <string name="search_address_building_option">Edifici</string>
 <string name="avoid_motorway">Evita les autopistes</string>
