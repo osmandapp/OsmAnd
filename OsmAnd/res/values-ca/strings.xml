@@ -732,8 +732,8 @@
 <string name="show_poi_over_map_description">Es mostren els PDI sobre el mapa (utilitza el darrer filtre escollit)</string>
 <string name="use_internet">Usa Internet</string>
 <string name="favorites_Button">Preferits</string>
-<string name="search_address_top_text">Escull l\'adreça</string>
-<string name="context_menu_item_add_favorite">Afegeix a preferits</string>
+<string name="search_address_top_text">Selecció de l\'adreça</string>
+<string name="context_menu_item_add_favorite">Afegeix als preferits</string>
 <string name="favourites_context_menu_edit">Edita el preferit</string>
 <string name="favourites_context_menu_delete">Elimina el preferit</string>
 <string name="osb_add_dialog_title">Entra un text d\'error</string>
@@ -980,7 +980,7 @@
 	<string name="search_shown_on_map">Mostra al mapa</string>
 	<string name="search_address_street_option">Intersecció de carrers</string>
 	<string name="search_tabs_location">Localització</string>
-	<string name="add_favorite_dialog_top_text">Entra el nom del preferit</string>
+	<string name="add_favorite_dialog_top_text">Introducció del nom del preferit</string>
 	<string name="add_favorite_dialog_default_favourite_name">Preferit</string>
 	<string name="add_favorite_dialog_favourite_added_template">El punt preferit «{0}» s\'ha afegit correctament.</string>
 	<string name="osb_comment_menu_item">Afegeix un comentari</string>
