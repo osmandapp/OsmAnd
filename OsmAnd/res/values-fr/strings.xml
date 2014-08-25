@@ -1817,4 +1817,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="duration">Durée</string>
     <string name="distance">Distance</string>
     <string name="rendering_attr_publicTransportMode_name">Mode transports publics</string>
+	<string name="save_track_to_gpx_globally">Enregistrer les traces dans un fichier GPX</string>
+	<string name="save_track_to_gpx_globally_descr">L\'enregistrement de la position dans un fichier GPX peut être allumer ou éteint depuis son gadget sur la vue carte.</string>
+	<string name="save_track_interval_globally">Intervalle d\'enregistrement</string>
 	</resources>
