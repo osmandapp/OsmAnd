@@ -638,7 +638,7 @@
     <string name="poi_filter_accomodation">Boende</string>
     <string name="poi_filter_restaurants">Restauranger</string>
     <string name="tip_map_context_menu_t">"Kontextmenyn \'Använd plats\' innehåller alla åtgärder med anknytning till en punkt (plats).\n\nMan kommer åt den genom att trycka och hålla på valfri plats på kartan (och sedan klickar på markören), genom att trycka på knappen på styrkulan eller genom att välja \'Meny\' → \'Använd plats\' (de två sista tar kartcentrum som referens).\n\nEn markörbox kan gömmas igen genom att långklicka på den. "</string>
-	<string name="tip_initial_t">"OsmAnd är en navigeringsapp med många funktioner.\n\tSom en introduktion finns ett antal tips och tricks länkade via \'Meny\' → \'Tips\' från kartskärmen. "</string>
+	<string name="tip_initial_t">"OsmAnd är en navigeringsapp med många funktioner.\n\tGrundläggande introduktion, tips och avancerad hjälp finns via \'Meny\' → \'Hjälp\' från kartskärmen. "</string>
 	<string name="application_dir">Lagringskatalog</string>
 	
 	<string name="osmand_net_previously_installed">En tidigare OsmAnd-version är installerad. Alla offline-data kommer att stödjas av den nya appen. Men favoritpunkter bör exporteras från den gamla appen och senare importeras i den nya.</string>
@@ -1267,7 +1267,7 @@
     <string name="about_version">Version:</string>
     <string name="about_settings">Om</string>
     <string name="about_settings_descr">Versionsinformation, licenser, projektmedlemmar</string>
-    <string name="tips_and_tricks">Tips</string>
+    <string name="tips_and_tricks">Hjälp</string>
     <string name="tip_recent_changes_1_6_t">Förändringar i 1.6:
 	\n\t* Definiera/Redigera online-kartbitskälla (ange förfallotid)
     </string>
