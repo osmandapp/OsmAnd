@@ -98,7 +98,7 @@
 <string name="online_map_settings_descr">Configureu les fonts de mapes de tessel·les en línia o desades a la memòria cau</string>
 <string name="map_settings">Configuració del mapa</string>
 <string name="map_settings_descr">Configureu la visualització del mapa</string>
-<string name="osmand_accessibility_description">Mostra la configuració per les característiques especials d\'accessibilitat.</string>
+<string name="osmand_accessibility_description">Us mostra la configuració per les característiques especials d\'accessibilitat.</string>
 <string name="extra_settings">Configuració avançada</string>
 <string name="plugins_screen">Gestor de connectors</string>
 <string name="select_plugin_to_activate">Per activar o desactivar un connector heu de tocar-lo i després re-iniciar l\'OsmAnd</string>
@@ -169,7 +169,7 @@
 <string name="vector_maps_may_display_faster_on_some_devices">És probable que es mostrin els mapes de vectors més de pressa. Això pot no funcionar en alguns dispositius.</string>
 <string name="debugging_and_development">Desenvolupament de l\'OsmAnd</string>
 <string name="local_openstreetmap_show">Mostra al mapa</string>
-<string name="local_openstreetmap_upload">Penja la modificació a OSM</string>
+<string name="local_openstreetmap_upload">Puja la modificació a OSM</string>
 <string name="local_openstreetmap_delete">Esborra els canvis</string>
 <string name="local_openstreetmap_uploadall">Penja-ho tot</string>
 <string name="show_current_gpx_title">Mostra la traça actual</string>
@@ -282,7 +282,7 @@
 <string name="global_app_allocated_memory_descr">Memòria assignada %1$s MB (límit de l\'Android %2$s MB, Dalvik %3$s MB).</string>
 <string name="global_app_allocated_memory">Memòria assignada</string>
 <string name="native_app_allocated_memory_descr">Memòria nativa total assignada a l\'aplicació %1$s MB (Dalvik %2$s MB, altres %3$s MB). Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</string>
-<string name="switch_to_raster_map_to_see">No s\'ha trobat cap mapa de vectors en desconnexió per aquesta localització. Podeu baixar-ne un a Configuració (Gestió de fitxers de mapes) o canviar per utilitzar mapes en connexió (activar el connector de mapes en línia per fer-ho).</string>
+<string name="switch_to_raster_map_to_see">No s\'ha trobat cap mapa de vectors fora de línia per aquesta localització. Podeu baixar-ne un a Configuració (Gestió de fitxers de mapes) o canviar per utilitzar mapes en línia (cal activar el connector de mapes en línia per fer-ho).</string>
 <string name="tip_recent_changes_0_7_2_t">"Canvis a la versió 0.7.2:
 \n\t- Renderitzaió nativa per tots els dispositius
 \n\t- Edició fora de línia dels PDI
@@ -461,7 +461,7 @@
 \n\t* Giny Habilita/deshabilita el registre "</string>
 <string name="rendering_attr_contourLines_description">Seleccioneu el nivell mínim de zoom per mostrar el mapa si està disponible. Caldrà el fitxer SRTM separat:</string>
 
-<string name="osmand_monitoring_description">Mostra la configuració que us facilitarà l\'enregistrament de les vostres excursions en fitxers GPX o bé el seguiment d\'una traça per mitjà d\'un servei web.</string>
+<string name="osmand_monitoring_description">Us mostra la configuració que us facilitarà l\'enregistrament de les vostres excursions en fitxers GPX o bé el seguiment d\'una traça per mitjà d\'un servei web.</string>
 <string name="osmand_development_plugin_description">Mostra la configuració de característiques en desenvolupament o que s\'estan depurant com ara la navegació animada o la visualització del rendiment de la renderització.</string>
 <string name="accessibility_default">En consonància amb la configuració global del sistema</string>
 <string name="zoomIs">El zoom és</string>
