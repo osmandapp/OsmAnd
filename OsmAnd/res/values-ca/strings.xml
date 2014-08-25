@@ -596,7 +596,7 @@
 <string name="show_gps_status">Mostra l\'estat del GPS</string>
 <string name="opening_hours">Horari d\'obertura</string>
 <string name="poi">PDI</string>
-<string name="new_route_calculated_dist">Nova ruta calculada,distancia</string>
+<string name="new_route_calculated_dist">S\'ha calculat una ruta nova, distància</string>
 <string name="loading_data">Carregant dades…</string>
 <string name="finished_task">Finalitzat</string>
 <string name="update_tile">Actualitza el mapa</string>
@@ -709,8 +709,8 @@
 <string name="loading_streets">S\'estan carregant els carrers…</string>
 <string name="error_calculating_route">S\'ha produït un error en calcular la ruta</string>
 <string name="loading_postcodes">S\'estan carregant els codis postals…</string>
-<string name="arrived_at_destination">Has arribat a la teva destinació</string>
-<string name="invalid_locations">Les coordenades no son valides!</string>
+<string name="arrived_at_destination">Heu arribat a la vostra destinació</string>
+<string name="invalid_locations">Les coordenades no son vàlides.</string>
 <string name="saving_gpx_tracks">Guardant seguiments GPX a la SD…</string>
 <string name="download_indexes">Baixar informació fora de linía</string>
 <string name="osm_settings">Edició d\'OSM</string>
@@ -952,7 +952,7 @@
 	<string name="mark_final_location_first">Primer de tot cal que seleccioneu una destinació</string>
 	<string name="auth_failed">Ha fallat l\'autorització</string>
 	<string name="loading_streets_buildings">S\'estan carregant els carrers/edificis…</string>
-	<string name="error_calculating_route_occured">Ha succeït un error en calcular la ruta</string>
+	<string name="error_calculating_route_occured">S\'ha produït un error en calcular la ruta</string>
 	<string name="empty_route_calculated">Error: La ruta calculada és buida</string>					
 	<string name="go_back_to_osmand">Torna enrere al mapa de l\'OsmAnd</string>
 	<string name="reading_indexes">Llegint dades locals…</string>
