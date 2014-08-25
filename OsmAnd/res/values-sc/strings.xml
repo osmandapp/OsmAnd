@@ -1542,7 +1542,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="save_current_track_descr">Sarba como sa rasta currente in s\'ischeda SD</string>
 	<string name="save_current_track">Sarba sa rasta currente</string>
 	<string name="save_track_interval">Intervallu de sarbamentu durante su nàvigu</string>
-	<string name="save_track_interval_descr">Issèbera s\'intervallu de positzionamentu pro sas rastas</string>
+	<string name="save_track_interval_descr">Issèbera s\'intervallu de positzionamentu pro sa registratzione de sas rastas durante su nàvigu</string>
 	<string name="save_track_to_gpx_descrp">Sas rastas ant a èssere sarbadas in sa cartella durante su nàvigu</string>
 	<string name="save_track_to_gpx">Sarba rasta in GPX durante su nàvigu</string>
 	<string name="update_tile">Agiorna mapa</string>
@@ -1726,4 +1726,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="duration">Durada</string>
     <string name="distance">Distantzia</string>
     <string name="rendering_attr_publicTransportMode_name">Modalidade trasportu pùblicu</string>
+	<string name="save_track_to_gpx_globally">Carriga sa rasta in unu documentu GPX</string>
 	</resources>
