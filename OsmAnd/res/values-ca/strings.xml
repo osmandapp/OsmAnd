@@ -187,7 +187,7 @@
 <string name="routing_settings">Navegació</string>
 <string name="routing_settings_descr">Especifiqueu les opcions de navegació</string>
 <string name="global_settings">Paràmetres globals</string>
-<string name="index_settings">Gestionar arxius de mapes</string>
+<string name="index_settings">Gestió d\'arxius de mapes</string>
 <string name="general_settings">Paràmetres generals</string>
 <string name="general_settings_descr">Configureu els paràmetres globals</string>
 <string name="user_name">El vostre nom d\'usuari a OSM</string>
