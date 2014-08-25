@@ -191,7 +191,7 @@
 <string name="general_settings">Paràmetres generals</string>
 <string name="general_settings_descr">Configureu els paràmetres globals</string>
 <string name="user_name">El vostre nom d\'usuari a OSM</string>
-<string name="user_password">La vostra contasenya a OSM</string>
+<string name="user_password">La vostra contrasenya a OSM</string>
 <string name="tip_rotation_switching">Orientació del mapa</string>
 <string name="tip_day_night_mode">Mode dia/nit</string>
 <string name="download_files_not_enough_space">No hi ha prou espai lliure per baixar %1$s MB (lliure: %2$s).</string>
@@ -377,7 +377,7 @@
 <string name="local_index_routing_data">Dades de la ruta</string>
 <string name="settings_preset">Perfil d\'usuari</string>
 <string name="settings_preset_descr">Seleccioneu un perfil d\'usuari amb paràmetres personalitzats dels mapes i la navegació.</string>
-<string name="osmand_service">Funcionalitat del mode adormit</string>
+<string name="osmand_service">Funcionalitat del mode en segon pla</string>
 <string name="osmand_service_descr">Utilitzeu per executar l\'OsmAnd mentres la pantalla està apagada</string>
 <string name="pref_raster_map">Configuració de la font del mapa</string>
 <string name="pref_vector_map">Configuració del mapa de vectors</string>
