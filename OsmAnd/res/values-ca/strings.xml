@@ -1023,7 +1023,7 @@
 	<string name="av_def_action_video">Enregistra un vídeo</string>
     <string name="av_def_action_audio">Enregistra un so</string>
     <string name="av_video_format_descr">Seleccioneu el format de sortida de vídeo</string>
-    <string name="av_settings_descr">Configura les preferències de so i vídeo</string>
+    <string name="av_settings_descr">Configureu les preferències de so i vídeo</string>
     <string name="av_settings">Configuració d\'àudio/vídeo </string>
     <string name="recording_error">S\'ha produït un error durant l\'enregistrament </string>
     <string name="recording_camera_not_available">La càmera no és disponible</string>
@@ -1031,7 +1031,7 @@
     <string name="recording_context_menu_play">Reprodueix</string>
     <string name="map_widget_av_notes">Notes d\'àudio</string>
     <string name="dropbox_plugin_name">Connector del Dropbox</string>
-    <string name="dropbox_plugin_description">El connector de Dropbox et permet sincronitzar traçes i notes d\'audio i video amb el teu compte de dropbox.</string>
+    <string name="dropbox_plugin_description">El connector de Dropbox us permet sincronitzar traces i notes d\'àudio i vídeo amb el vostre compte de Dropbox.</string>
     
     <string name="av_widget_action_descr">Seleccioneu l\'acció per defecte del giny</string>
     <string name="av_widget_action">Acció per defecte del giny</string>
@@ -1085,7 +1085,7 @@
     <string name="map_widget_distancemeasurement">Mesura de distàncies</string>
     <string name="audionotes_location_not_defined">Encara no teniu definida la localització de la nota. «Usa localització...» per assignar una nota a la localitzacio especificada</string>
     <string name="monitoring_control_stop">Aturar</string>
-    <string name="audionotes_plugin_description">Pren notes d\'àudio durant el viatge</string>
+    <string name="audionotes_plugin_description">Preneu notes d\'àudio durant el viatge</string>
     <string name="audionotes_plugin_name">Connector de notes d\'àudio</string>
     <string name="index_srtm_parts">peces</string>
     <string name="index_srtm_ele">Línies de nivell</string>
@@ -1185,7 +1185,7 @@
 		\n\t* Paquets de relleu per al connector de corbes de nivell
 		\n\t* Correcció d\'errors (encaminador sub-òptim)
     </string>
-    <string name="precise_routing_mode_descr">Activa per calcular itineraris precisos sense errades. Encara és lent i de distància limitada.</string>
+    <string name="precise_routing_mode_descr">Activeu per calcular itineraris precisos sense errades. Encara és lent i de distància limitada.</string>
     <string name="precise_routing_mode">Encaminament precís (alfa)</string>
     <string name="intermediate_point">Fita %1$s</string>
     <string name="support_new_features_descr">Feu un donatiu per veure noves funcionalitats implementades a l\'aplicació</string>
@@ -1212,7 +1212,7 @@
     <string name="distance_measurement_save_gpx">Desa com a GPX</string>
     <string name="distance_measurement_load_gpx">Obre un fitxer GPX existent</string>
     <string name="wait_current_task_finished">Espereu fins que finalitzi la tasca actual</string>
-    <string name="use_kalman_filter_compass_descr">Usa el filtre Kalman per evitar interferències a la brúixola</string>
+    <string name="use_kalman_filter_compass_descr">Utilitzeu el filtre Kalman per evitar interferències a la brúixola</string>
     <string name="use_kalman_filter_compass">Usa el filtre Kalman</string>
     <string name="access_mark_final_location_first">Mode d\'accessibilitat: seleccioneu primer la destinació</string> 
     <string name="use_magnetic_sensor_descr">Podeu usar el sensor magnètic per determinar el valor la brúixola en comptes del sensor d\'orientació</string>
@@ -1817,7 +1817,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_attr_cycleRoutes_name">Mostra vies de ciclista</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostra les vies ciclistes</string>
     
-    <string name="map_preferred_locale_descr">Idioma preferit a les etiquetes del mapa (si no està disponible es canviarà la preferència actual entre l\'anglès i les denominacions locals)</string>
+    <string name="map_preferred_locale_descr">Idioma que preferiu a les etiquetes del mapa (si no està disponible es canviarà la preferència actual entre l\'anglès i les denominacions locals)</string>
     <string name="map_preferred_locale">Idioma preferit al mapa</string>
     <string name="local_map_names">Denominacions locals</string>
     <string name="lang_sw">Suahili</string>
