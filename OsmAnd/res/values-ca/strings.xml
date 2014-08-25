@@ -1280,7 +1280,7 @@
 	<string name="converting_names">S\'estan convertint els noms nadius / en anglès…</string>
 	<string name="save_track_interval_descr">Indiqueu l\'interval d\'enregistrament de traces</string>
 	<string name="incremental_search_street">Cerca de carrers progressiva</string>
-	<string name="incremental_search_building">Cerca d\'edificis progressiva</string>
+	<string name="incremental_search_building">Cerca progressiva d\'edificis</string>
 	<string name="Closest_Amenities">Instal·lacions més properes</string>
 	<string name="position_on_map_bottom">Part inferior</string>
 	<string name="osb_add_dialog_error">S\'ha produït una excepció: no s\'ha creat l\'error</string>
