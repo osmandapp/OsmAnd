@@ -170,8 +170,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				Drawable d = monitoringInactive;
 				long last = lastUpdateTime;
 				final boolean globalRecord = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-				if (globalRecord || settings.SAVE_TRACK_TO_GPX.get()) {
-					float dist = app.getSavingTrackHelper().getDistance();
+				final boolean isRecording = app.getSavingTrackHelper().getIsRecording();
+				float dist = app.getSavingTrackHelper().getDistance();
+
+				//make sure widget always shows recorded track distance if unsaved track exists
+				if (dist > 0) {
 					last = app.getSavingTrackHelper().getLastTimeUpdated();
 					String ds = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
 					int ls = ds.lastIndexOf(' ');
@@ -181,31 +184,55 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 						txt = ds.substring(0, ls);
 						subtxt = ds.substring(ls + 1);
 					}
-					if(globalRecord) {
-						d = monitoringBig;
-					}
 				}
+
+				if(globalRecord) {
+					//indicates global recording (+background recording)
+					d = monitoringBig;
+				} else if (isRecording) {
+					//indicates (profile-based, configured in settings) recording (looks like is only active during nav in follow mode)
+					d = monitoringSmall;
+				} else {
+					d = monitoringInactive;
+				}
+
 				setText(txt, subtxt);
 				setImageDrawable(d);
-				if (last != lastUpdateTime && globalRecord) {
+				//if ((last != lastUpdateTime) && globalRecord) {
+				if ((last != lastUpdateTime) && (globalRecord || isRecording)) {
 					lastUpdateTime = last;
-					blink();
+					//blink();
+					//test blink wuith 2 indicator states
+					setImageDrawable(monitoringInactive);
+					invalidate();
+					postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							if (globalRecord) {
+								setImageDrawable(monitoringBig);
+							} else {
+								setImageDrawable(monitoringSmall);
+							}
+							invalidate();
+						}
+					}, 500);
+					//end test
 				}
 				updateVisibility(visible);
 				return true;
 			}
 			
-			private void blink() {
-				setImageDrawable(monitoringSmall);
-				invalidate();
-				postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						setImageDrawable(monitoringBig);
-						invalidate();
-					}
-				}, 500);
-			}
+//			private void blink() {
+//				setImageDrawable(monitoringSmall);
+//				invalidate();
+//				postDelayed(new Runnable() {
+//					@Override
+//					public void run() {
+//						setImageDrawable(monitoringBig);
+//						invalidate();
+//					}
+//				}, 500);
+//			}
 		};
 		monitoringControl.updateInfo(null);
 
@@ -281,7 +308,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 					vs.value = settings.LIVE_MONITORING_INTERVAL.get();
 					showIntervalChooseDialog(map, app.getString(R.string.live_monitoring_interval) + " : %s", 
-							app.getString(R.string.save_track_to_gpx), SECONDS, MINUTES,
+							app.getString(R.string.save_track_to_gpx_globally), SECONDS, MINUTES,
 							null, vs, new OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -324,18 +351,19 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				app.startNavigationService(NavigationService.USED_BY_GPX);		
 			}
 		};
-		if(choice.value) {
-			runnable.run();
-		} else {
-			showIntervalChooseDialog(map, app.getString(R.string.save_track_interval) + " : %s",
-					app.getString(R.string.save_track_to_gpx), SECONDS, MINUTES, choice, vs,
+		//Comment this out for now as we have no way to reverse the REMEMBER flag?!
+		//if(choice.value) {
+		//	runnable.run();
+		//} else {
+			showIntervalChooseDialog(map, app.getString(R.string.save_track_interval_globally) + " : %s",
+					app.getString(R.string.save_track_to_gpx_globally), SECONDS, MINUTES, choice, vs,
 					new OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							runnable.run();
 						}
 					});
-		}
+		//}
 		
 	}
 	

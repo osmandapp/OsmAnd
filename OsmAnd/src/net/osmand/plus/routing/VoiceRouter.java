@@ -444,8 +444,8 @@ public class VoiceRouter {
 					// do not play prepare for keep left/right
 				} else {
 					playPrepareTurn(currentSegment, next, dist);
+					playAndArriveAtDestination(repeat, nextInfo, currentSegment);
 				}
-				playAndArriveAtDestination(repeat, nextInfo, currentSegment);
 			}
 			nextStatusAfter(STATUS_PREPARE);
 			// } else if (statusNotPassed(STATUS_LONG_PREPARE) && isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE)){

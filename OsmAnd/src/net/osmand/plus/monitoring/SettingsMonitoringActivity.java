@@ -56,13 +56,13 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 
 	private void createLoggingSection(PreferenceScreen grp) {
 		PreferenceCategory cat = new PreferenceCategory(this);
-		cat.setTitle(R.string.save_track_to_gpx);
+		cat.setTitle(R.string.save_track_to_gpx_globally);
 		grp.addPreference(cat);
+
+		Preference globalrecord = new Preference(this);
+		globalrecord.setSummary(R.string.save_track_to_gpx_globally_descr);
+		cat.addPreference(globalrecord);
 		
-		cat.addPreference(createCheckBoxPreference(settings.SAVE_TRACK_TO_GPX, R.string.save_track_to_gpx,
-				R.string.save_track_to_gpx_descrp));
-		cat.addPreference(createTimeListPreference(settings.SAVE_TRACK_INTERVAL, SECONDS,
-				MINUTES, 1000, R.string.save_track_interval, R.string.save_track_interval_descr));
 		Preference pref = new Preference(this);
 		pref.setTitle(R.string.save_current_track);
 		pref.setSummary(R.string.save_current_track_descr);
@@ -79,6 +79,11 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 			}
 		});
 		cat.addPreference(pref);
+
+		cat.addPreference(createCheckBoxPreference(settings.SAVE_TRACK_TO_GPX, R.string.save_track_to_gpx,
+				R.string.save_track_to_gpx_descrp));
+		cat.addPreference(createTimeListPreference(settings.SAVE_TRACK_INTERVAL, SECONDS,
+				MINUTES, 1000, R.string.save_track_interval, R.string.save_track_interval_descr));
 	}
 
 

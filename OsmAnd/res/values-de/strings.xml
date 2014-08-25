@@ -1,5 +1,19 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="save_track_to_gpx_globally">Aufzeichnung in GPX-Datei</string>
+	<string name="save_track_to_gpx_globally_descr">Generelle Positionsaufzeichnung kann man mit der Schaltfläche \'GPX-Aufnahme\' direkt auf dem Kartenbildschirm aktivieren oder deaktivieren</string>
+	<string name="save_current_track">Track jetzt speichern</string>
+	<string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
+	<string name="save_track_to_gpx">Aufzeichnung in GPX-Datei während Navigation</string>
+	<string name="save_track_to_gpx_descrp">Zurückgelegte Strecken während der Navigation werden als GPX auf der SD-Karte gespeichert</string>
+	<string name="save_track_interval_globally">Aufzeichnungs-Intervall</string>
+	<string name="save_track_interval">Aufzeichnungs-Intervall während Navigation</string>
+	<string name="save_track_interval_descr">Intervall zwischen zwei Aufzeichnungspunkten während Navigation</string>
+	<string name="tips_and_tricks">Hilfe</string>
+	<string name="tip_initial">Hilfe</string>
+	<string name="tip_initial_t">OsmAnd ist eine Navigationsanwendung mit vielen Fähigkeiten.
+		\n\nHilfe und Tipps sind über das \'Menü\' → \'Hilfe\' zugänglich.
+	</string>
 	<string name="rendering_value_browse_map_name">Karte ansehen</string>  
 	<string name="rendering_value_car_name">Auto</string>
 	<string name="rendering_value_bicycle_name">Fahrrad</string>
@@ -714,10 +728,6 @@
 		\n\nEs wird über ein langes Drücken auf einen Punkt in der Karte (dann Anklicken des Positionsmarkers), durch das Drücken des Trackball-Knopfes in der Kartenansicht, oder via \'Menü\' → \'Verwende Position\' aufgerufen (die letzten beiden Methoden beziehen sich auf den Kartenmittelpunkt).
 		\n\nLanges Drücken auf einen Positionsmarker entfernt diesen wieder.
 	</string>
-	<string name="tip_initial">Tipps und Tricks</string>
-	<string name="tip_initial_t">OsmAnd ist eine Navigationsanwendung mit vielen Fähigkeiten.
-		\n\nEine Einführung gibt Tipps, die über das Menü zugänglich sind.
-	</string>
 	<string name="next_button">Weiter</string>
 	<string name="previous_button">Zurück</string>
 	<string name="unit_of_length_descr">Längen- und Geschwindigkeitseinheiten auswählen</string>
@@ -900,7 +910,7 @@
 	<string name="menu_mute_off">Sprache ist an</string>
 	<string name="menu_mute_on">Sprache ist aus</string>
 	<string name="voice_not_use">Nicht verwenden</string>
-	<string name="voice_provider_descr">Sprachpaket für Navigation auswählen (Sprachcodes siehe ISO 639–1)</string>
+	<string name="voice_provider_descr">Sprachpaket für Navigation auswählen</string>
 	<string name="voice_provider">Sprachansagen</string>
 	<string name="voice_data_initializing">Sprachansagen werden initialisiert…</string>
 	<string name="voice_data_not_supported">Sprachpaket-Version wird nicht unterstützt</string>
@@ -1037,12 +1047,6 @@
 	<string name="osm_settings">OSM-Bearbeitung</string>
 	<string name="additional_settings">Weitere Einstellungen</string>
 	<string name="settings">Einstellungen</string>
-	<string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
-	<string name="save_current_track">Track jetzt speichern</string>
-	<string name="save_track_interval_descr">Intervall zwischen zwei Standortbestimmungen</string>
-	<string name="save_track_interval">Aufzeichnungs-Intervall</string>
-	<string name="save_track_to_gpx_descrp">Zurückgelegte Strecken werden nach Tagen gruppiert als GPX auf der SD-Karte gespeichert</string>
-	<string name="save_track_to_gpx">Aufzeichnung in GPX-Datei aktivieren</string>
 	<string name="update_tile">Karte (Kacheln) aktualisieren</string>
 	<string name="reload_tile">Kartenteile (Kacheln) aktualisieren</string>
 	<string name="mark_point">Ziel</string>
@@ -1471,7 +1475,7 @@
 	<string name="about_version">Version :</string>
 	<string name="about_settings">Über</string>
 	<string name="about_settings_descr">Versionsinfo, Lizenz, Projekt Mitglieder</string>
-	<string name="tips_and_tricks">Tipps</string>
+	<string name="tips_and_tricks">Hilfe</string>
 	<string name="local_index_tile_data_zooms">Zooms heruntergeladen: %1$s</string>
 	<string name="local_index_tile_data_expire">Gültigkeit endet in (Minuten): %1$s</string>
 	<string name="local_index_tile_data_downloadable">Herunterladbar: %1$s</string>

@@ -194,7 +194,7 @@
 	
 	
 	<string name="layer_map_appearance">Konfigurer skærm</string>
-	<string name="show_lanes">Vis vognbaner</string>
+	<string name="show_lanes">Vognbaner</string>
 	<string name="avoid_unpaved">Undgå grusveje</string>
 	<string name="avoid_ferries">Undgå færger</string>
 	<string name="avoid_in_routing_title">Undgå…</string>
@@ -264,9 +264,9 @@
 	<string name="bg_service_screen_unlock">Lås skærmen op</string>
 	<string name="bg_service_screen_lock_toast">Skærmen er låst</string>
 	<string name="bg_service_interval">Indstil opvågningsinterval:</string>
-	<string name="show_cameras">Vis fartkameraer</string>
+	<string name="show_cameras">Fartkameraer</string>
 	
-	<string name="avoid_toll_roads">Undgå betalingsveje</string>
+	<string name="avoid_toll_roads">Betalingsveje</string>
 	<string name="continue_follow_previous_route_auto">Forrige navigation var ufærdig. Fortsæt den? (%1$s sekunder)</string>
 	<string name="route_updated_loc_found">Ruten beregnes, når position er fundet</string>
 	<string name="osmand_parking_hours">Timer</string>
@@ -323,7 +323,7 @@
     <string name="map_widget_intermediate_distance">Rutepunkt</string>
     <string name="osmand_play_title_30_chars">OsmAnd kort &amp; navigation</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ kort &amp; navigation</string>
-	<string name="show_traffic_warnings">Vis trafikadvarsler</string>
+	<string name="show_traffic_warnings">Trafikadvarsler</string>
 	<string name="rendering_attr_noPolygons_description">Gør alle overflader på kortet transparent</string>
 	<string name="rendering_attr_noPolygons_name">Skjul polygoner</string>
 	<string name="rendering_attr_appMode_name">Optegningsmåde</string>
@@ -365,7 +365,7 @@
 	<string name="osmand_background_plugin_description">Vis indstillinger til at aktivere sporing og navigation i dvale (slukket skærm) tilstand via periodisk at vække GPS-enheden.</string>
 	<string name="osmand_accessibility_description">Vis indstillinger for specielle tilgængelighedsfunktioner.</string>
 	<string name="extra_settings">Avancerede indstillinger</string>
-	<string name="osmand_monitoring_description">Vis indstillinger til at muliggøre optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
+	<string name="osmand_monitoring_description">Vis indstillinger som muliggør optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
 	<string name="osmand_rastermaps_plugin_description">Vis indstillinger til at konfigurere en række online eller cachelagrede delkort som basiskort eller som over-/ underlejringskort. Disse kort kan også fremstilles offline og kopieres til OsmAnd mappen.</string>
 	<string name="osmand_extra_settings_description">Vis indstillinger for avanceret kortkonfiguration (som at øge kortdetaljer) og nogle enhedsspecifikke indstillinger.</string>
 	<string name="osmand_development_plugin_description">Vis indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller optegningsydeevne.</string>
@@ -956,7 +956,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="tip_navigation">Navigering</string>
 	<string name="tip_search">Søgning</string>
 	<string name="tip_map_context_menu">\'Brug placering\' menu</string>
-	<string name="tip_initial">Tips og tricks</string>
+	<string name="tip_initial">Hjælp</string>
 	<string name="next_button">Næste</string>
 	<string name="previous_button">Forrige</string>
 	<string name="unit_of_length_descr">Ændre enheder for afstand og hastighed</string>
@@ -1230,12 +1230,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="search_address_street">Gade</string>
 	<string name="search_address_city">By</string>
 	<string name="search_address_top_text">Vælg adresse</string>
-	<string name="voice_provider_descr">Vælg talevejledning til navigation (sprogkode se ISO 639-1)</string>
+	<string name="voice_provider_descr">Vælg talevejledning til navigation</string>
 	<string name="transport_Stop">Stoppested</string>
 	<string name="transport_stops">Stoppesteder</string>
-	<string name="tip_initial_t">OsmAnd er et navigationsprogram med mange funktioner.
-\n\n Som en grundlæggende introduktion, er nogle tip og tricks tilgængelig via \'Menu\' → \'Tips\' på hovedskærmen.
-	</string>
+	<string name="tip_initial_t">"OsmAnd er et navigationsprogram med mange funktioner.
+\n\nEn grundlæggende introduktion, tips om anvendelse og avanceret hjælp findes via \'Menu\' → \'Hjælp\' på hovedskærmen. "</string>
 	
 	<string name="osmand_net_previously_installed">En tidligere OsmAnd version er installeret. Alle offline data er understøttet af det nye program, men favoritter bør eksporteres i den gamle version og senere importeres i den nye.</string>
 	<string name="voice_provider">Talevejledning</string>
@@ -1361,10 +1360,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="settings">Indstillinger</string>
 	<string name="save_current_track_descr">Gem aktuelle spor til SD-kort nu</string>
 	<string name="save_current_track">Gem aktuelle GPX-spor</string>
-	<string name="save_track_interval">Logningsinterval</string>
-	<string name="save_track_interval_descr">Vælg positioneringsinterval for sporing</string>
-	<string name="save_track_to_gpx_descrp">Spor bliver gemt i \'/track\' mappen grupperet efter dage</string>
-	<string name="save_track_to_gpx">Log spor til GPX-fil</string>
+	<string name="save_track_interval">Logningsinterval under navigation</string>
+	<string name="save_track_interval_descr">Vælg logningsinterval for spor optaget under navigation</string>
+	<string name="save_track_to_gpx_descrp">Spor bliver gemt i \'/track\' mappen under navigation</string>
+	<string name="save_track_to_gpx">Log spor til GPX-fil under navigation</string>
 	<string name="update_tile">Opdater kort</string>
 	<string name="reload_tile">Genindlæs delkort</string>
 	<string name="mark_point">Mål</string>
@@ -1454,8 +1453,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	\n* Yderligere indstillinger for stabilisering af kompas
 	\n* Nederste venstre knap på kortskærmen erstatter menuknappen
     </string>
-    <string name="monitoring_settings">Logningstjenester</string>
-    <string name="monitoring_settings_descr">Indstil, hvordan ture optages</string>
+    <string name="monitoring_settings">Optag ture</string>
+    <string name="monitoring_settings_descr">Indstil hvordan dine ture optages</string>
     <string name="osmand_monitoring_plugin_name">Logningstjenester</string>
     <string name="local_openstreetmap_act_title">OSM modifikationer</string>
     <string name="default_buttons_other_actions">Flere handlinger</string>
@@ -1473,7 +1472,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="use_magnetic_sensor_descr">Brug magnetisksensor i stedet for retningssensor til at bestemme kompasværdi</string>
     <string name="use_kalman_filter_compass_descr">Brug Kalman-filter for at undgå kompasmisvisning</string>
     <string name="use_kalman_filter_compass">Kalman filter</string>
-    <string name="access_mark_final_location_first">Tilgængelighedmodus: Vælg destination først</string> 
+    <string name="access_mark_final_location_first">Tilgængelighedstilstand: Vælg destination først</string> 
     <string name="wait_current_task_finished">Vent - mens aktuel opgave bliver færdig</string>
     <string name="downloading_file_new">Henter …</string>
 	<string name="plugin_distance_point_hdop">nøjagtighed</string>
@@ -1524,9 +1523,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="av_camera_focus_continuous">Kameraet forsøger løbende at fokusere</string>
 	<string name="av_photo_play_sound_descr">Spil lyd når foto tages</string>
 <string name="av_photo_play_sound">Kameralyd</string>
-	<string name="speak_traffic_warnings">Meddel trafikadvarsler</string>
-	<string name="speak_cameras">Meddel fotofælder</string>
-	<string name="speak_speed_limit">Meddel hastighedsgrænse</string>
+	<string name="speak_traffic_warnings">Trafikadvarsler</string>
+	<string name="speak_cameras">Fotofælder</string>
+	<string name="speak_speed_limit">Hastighedsgrænse</string>
     
 	
     <string name="route_descr_map_location">Kort: </string>
@@ -1549,8 +1548,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="context_menu_item_directions_from">Kørselsvejledning fra</string>
     <string name="speak_title">Meddel…</string>
 	<string name="speak_descr">Konfigurer til at meddele gadenavne, trafikadvarsler (tvungne stop, vejbump), fotofældeadvarsler, hastighedsbegrænsninger</string>
-	<string name="speak_street_names">Meddel gadenavne (TTS)</string>
-    <string name="announce_gpx_waypoints">Meddel GPX-rutepunkter</string>
+	<string name="speak_street_names">Gadenavne (TTS)</string>
+    <string name="announce_gpx_waypoints">GPX-rutepunkter</string>
     <string name="osmodroid_mode_off">Start OsMoDroid</string>
     <string name="osmodroid_mode_on">Stop OsMoDroid</string>    
     <string name="driving_region_japan">Japan</string>
@@ -1591,7 +1590,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="about_version">Version:</string>
     <string name="about_settings">Om</string>
     <string name="about_settings_descr">Versioninformation, licenser, projektmedlemmer</string>
-    <string name="tips_and_tricks">Tips</string>
+    <string name="tips_and_tricks">Hjælp</string>
     <string name="tip_map_styles">Kortformater</string>
 	<string name="tip_map_styles_t">OsmAnd understøtter visning af offline vektorkort i forskellige kortformater tilpasset forskellige behov:
 \n\n Udover standardformatet kan andet end \'standard\' kortformat, vælges i \'Menu\' → \'Konfigurer skærm\' → \'Kortformat\'
@@ -1654,13 +1653,13 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
          \n Bemærk: det vil ikke være muligt at dele filer mellem OsmAnd og OsmAnd+. </string>
     <string name="routing_attr_prefer_motorway_name">Foretræk motorveje</string>
 	<string name="routing_attr_prefer_motorway_description">Foretræk motorveje</string>
-	<string name="routing_attr_avoid_toll_name">Undgå betalingsveje</string>
-	<string name="routing_attr_avoid_toll_description">Undgå betalingsveje</string>
-	<string name="routing_attr_avoid_unpaved_name">Undgå grusveje</string>
+	<string name="routing_attr_avoid_toll_name">Betalingsveje</string>
+	<string name="routing_attr_avoid_toll_description">Betalingsveje</string>
+	<string name="routing_attr_avoid_unpaved_name">Grusveje</string>
 	<string name="routing_attr_avoid_unpaved_description">Undgå grusveje</string>
-	<string name="routing_attr_avoid_ferries_name">Undgå færger</string>
+	<string name="routing_attr_avoid_ferries_name">Færger</string>
 	<string name="routing_attr_avoid_ferries_description">Undgå færger</string>
-	<string name="routing_attr_avoid_motorway_name">Undgå motorveje</string>
+	<string name="routing_attr_avoid_motorway_name">Motorveje</string>
 	<string name="routing_attr_avoid_motorway_description">Undgå motorveje</string>
 	<string name="routing_attr_weight_name">Maksimal vægt</string>
 	<string name="routing_attr_weight_description">Angiv køretøjets vægt begrænsning</string>
@@ -1916,7 +1915,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="lang_he">Hebræisk</string>
     <string name="forward">Frem</string>
     <string name="home">Hjem</string>
-    <string name="live_monitoring_m_descr">Send sporing til en beestemt webtjeneste, hvis GPX optagelse er aktiveret.</string>
+    <string name="live_monitoring_m_descr">Send sporing til en bestemt webtjeneste, hvis GPX optagelse er aktiveret.</string>
 	<string name="live_monitoring_m">Online sporing (GPX nødvendig)</string>
     <string name="live_monitoring_start">Start online sporing</string>
 	<string name="live_monitoring_stop">Stop online sporing</string>
@@ -1965,10 +1964,19 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="download_additional_maps">Hent manglende kort %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">Alle</string>
     <string name="waypoints">Rutepunkter</string>
-    <string name="targets">Mål</string>
+    <string name="targets">Destinationer</string>
     <string name="way_alarms">Forhindringer</string>
-    <string name="speak_favorites">Meddel favoritter</string>
-    <string name="speak_poi">Meddel interessepunkt (IP)</string>
+    <string name="speak_favorites">Favoritter</string>
+    <string name="speak_poi">Interessepunkt (IP)</string>
     <string name="flat_list_waypoints">Alle</string>
     <string name="index_tours">Ture</string>
-    </resources>
+    <string name="distance">Afstand</string>
+    <string name="duration">Varighed</string>
+    <string name="int_hour">t</string>
+    <string name="record_plugin_name">Optag dine ture</string>
+    <string name="record_plugin_description">Gem dine spor via et tryk på en knap på skærmen. Vis indstillinger til optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
+    <string name="rendering_attr_publicTransportMode_name">Kollektivtrafik tilstand</string>
+	<string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
+	<string name="save_track_interval_globally">Logningsinterval</string>
+	<string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til eller fra med GPX optagelse widget på kortskærmen</string>
+	</resources>

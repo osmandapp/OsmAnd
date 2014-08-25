@@ -403,7 +403,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
 		\n\tDe laatste twee manieren gebruiken het midden van de kaart als locatie.
 		\n\tEen markering kan worden gesloten door er lang op te drukken.
 	</string>
-  <string name="tip_initial">Tips and Trucs</string>
+  <string name="tip_initial">Help</string>
   <string name="tip_initial_t">OsmAnd is een navigatieprogramma met vele mogelijkheden.
 		\n\nIn het kaartscherm zijn diverse tips te vinden onder \'Menu\' → \'Tips\'.
 	</string>
@@ -427,7 +427,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="add_waypoint_dialog_title">Voeg routepunt toe aan de opgenomen GPX-track</string>
   <string name="context_menu_item_add_waypoint">Voeg GPX-routepunt toe</string>
   <string name="amenity_type_administrative">Overheid</string>
-  <string name="amenity_type_barrier">Blokkades</string>
+  <string name="amenity_type_barrier">Blokkade</string>
   <string name="amenity_type_education">Onderwijs</string>
   <string name="amenity_type_emergency">Noodgevallen</string>
   <string name="amenity_type_entertainment">Amusement</string>
@@ -588,7 +588,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="search_poi_filter">Filter</string>
   <string name="menu_mute_off">Geluid is aan</string>
   <string name="menu_mute_on">Geluid is uit</string>
-  <string name="voice_provider_descr">Kies stembegeleiding voor navigatie (zie ISO 639-1 voor taalcodes)</string>
+  <string name="voice_provider_descr">Kies stembegeleiding voor navigatie</string>
   <string name="voice_provider">Stembegeleiding</string>
   <string name="voice_data_initializing">Initialisatie stemgegevens…</string>
   <string name="voice_data_not_supported">Niet-ondersteunde versie van stemgegevens</string>
@@ -729,10 +729,10 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="settings">Instellingen</string>
   <string name="save_current_track_descr">Huidige track nu op SD-kaart opslaan</string>
   <string name="save_current_track">Huidige GPX-track opslaan</string>
-  <string name="save_track_interval">Registratie-interval</string>
-  <string name="save_track_interval_descr">Kies positioneringsinterval voor tracks</string>
-  <string name="save_track_to_gpx_descrp">Tracks worden gegroepeerd per dag in de track-map opgeslagen</string>
-  <string name="save_track_to_gpx">Registreer track in GPX-bestand</string>
+  <string name="save_track_interval">Registratie-interval tijdens de navigatie</string>
+  <string name="save_track_interval_descr">Kies Registratie-interval voor track opname tijdens navigatie</string>
+  <string name="save_track_to_gpx_descrp">Tracks worden in de track-map opgeslagen tijdens de navigatie</string>
+  <string name="save_track_to_gpx">Registreer track in GPX-bestand tijdens de navigatie</string>
   <string name="update_tile">Kaart bijwerken</string>
   <string name="reload_tile">Herlaad kaartsegment</string>
   <string name="mark_point">Doel</string>
@@ -1430,8 +1430,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	\n\t* Extra instellingen voor kompasstabilisatie
 	\n\t* Menuknop vervangen door knop linksboven in het kaartvenster
     </string>
-    <string name="monitoring_settings">Logboek registratie</string>
-    <string name="monitoring_settings_descr">Bepaal hoe trips op te nemen</string>
+    <string name="monitoring_settings">Trip registratie</string>
+    <string name="monitoring_settings_descr">Configureer: hoe uw trips op te nemen</string>
     <string name="osmand_monitoring_plugin_description">Activeren van tracking en navigatie in slaapmodus (scherm uit). De GPS gaat dan regelmatig aan. Toon de instellingen om uw reis vast te leggen als GPX-bestand of online via een webdienst.</string>
     <string name="street_name">Straat</string>
 	<string name="osmand_monitoring_plugin_name">Logboek registratie</string>
@@ -1573,7 +1573,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="about_version">Versie:</string>
     <string name="about_settings">Over</string>
     <string name="about_settings_descr">Versieinformatie, licenties, projectdeelnemers</string>
-    <string name="tips_and_tricks">Tips</string>
+    <string name="tips_and_tricks">Help</string>
     <string name="tip_map_styles">Kaartstijlen</string>
 	<string name="tip_map_styles_t">OsmAnd kan de offline vectorkaarten in verschillende stijlen weergeven:
 		\n\nNaast de uitgebalanceerde standaardkaartstijl, is er in \'Menu\' -&gt; \'Configureer scherm\' -&gt; \'Kaartstijl\' bijvoorbeeld de keuze uit:
@@ -1948,10 +1948,15 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="download_additional_maps">Download ontbrekende kaarten %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">alle</string>
     <string name="waypoints">Routepunt(en)</string>
-    <string name="targets">Doel(en)</string>
+    <string name="targets">Bestemming(en)</string>
     <string name="way_alarms">Obstakel(s)</string>
     <string name="speak_favorites">Meld favorieten</string>
     <string name="speak_poi">Meld interessepunt (POI)</string>
     <string name="flat_list_waypoints">Alle</string>
     <string name="index_tours">Rondreizen</string>
+    <string name="record_plugin_name">Reizen opnemen</string>
+    <string name="int_hour">u.</string>
+    <string name="duration">Duur</string>
+    <string name="distance">Afstand</string>
+    <string name="record_plugin_description">Bewaar uw tracks met één tik op de kaart. Bekijk de instellingen voor het opnemen van uw trip naar een lokaal GPX bestand of online door middel van een web service.</string>
     </resources>

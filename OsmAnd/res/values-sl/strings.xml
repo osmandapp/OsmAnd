@@ -595,12 +595,11 @@
 	
 	<string name="downloading">Prenašanje …</string>
 	<string name="installing_new_resources">Odpakiranje novih podatkov …</string>
-	<string name="tip_navigation_t">Da bi dobili navodila za kraj, bodisi neposredno dolgo kliknite nanj na zemljevidu (potem kliknite opis in izberite \'Navodila za\'), ali pa izberite \'Navigacija\' za vsak vnos v seznamu rezultatov iskanja ali seznama priljubljenih.
-		\n\nCilj je na zemljevidu označen z oranžno ciljno zastavico in OsmAnd prikazuje razdaljo in smer do njega (oranžni trikotnik).
-		\n\nLahko izberete \'Začni navigacijo\', kar pomeni, da vas OsmAnd vodi, vam da glasovne ukaze (če so ti vklopljeni), itd. Ali pa lahko izberete \'Prikaži pot\', ki vam samo prikaže pot brez vodenja in popravljanja medtem ko se premikate.
-		\n\nČe želite pokazati pot do cilja iz katerekoli druge točke, ki ni vaš trenutni položaj, izberite jo na zemljevidu in pritisnite \'Navodila od\'.
-		\n\nČe uporabljate \'Navodila od\', skupaj z \'Začni navigacijo\', bo OsmAnd preklopil na vaš sedanji položaj takoj, ko bo ugotovljen (tako da se ta lahko uporablja za skok-začetek poti, preden je ugotovljen položaj), medtem ko \'Navodila od\' v kombinaciji z \'Prikaži pot\' vam samo pokaže pot iz katere koli poljubne točke, ki ste jo izbrali, brez poznejše posodobitve.
-	</string>
+	<string name="tip_navigation_t">"Da bi dobili navodila za kraj, bodisi neposredno dolgo kliknite nanj na zemljevidu (potem kliknite opis in izberite \'Navodila za\'), ali pa izberite \'Navigacija\' za vsak vnos v seznamu rezultatov iskanja ali seznama priljubljenih.
+\n\nCilj je na zemljevidu označen s ciljno zastavico in OsmAnd prikazuje razdaljo in smer do njega (oranžni trikotnik).
+\n\nLahko izberete \'Začni navigacijo\', kar pomeni, da vas OsmAnd vodi, vam da glasovne ukaze (če so ti vklopljeni), itd. Ali pa lahko izberete \'Prikaži pot\', ki vam samo prikaže pot brez vodenja in popravljanja medtem ko se premikate.
+\n\nČe želite pokazati pot do cilja iz katerekoli druge točke, ki ni vaš trenutni položaj, izberite jo na zemljevidu in pritisnite \'Navodila od\'.
+\n\nČe uporabljate \'Navodila od\', skupaj z \'Začni navigacijo\', bo OsmAnd preklopil na vaš sedanji položaj takoj, ko bo ugotovljen (tako da se ta lahko uporablja za skok-začetek poti, preden je ugotovljen položaj), medtem ko \'Navodila od\' v kombinaciji z \'Prikaži pot\' vam samo pokaže pot iz katere koli poljubne točke, ki ste jo izbrali, brez poznejše posodobitve. "</string>
 	<string name="rotate_map_compass_opt">Rotacija po kompasu</string>
 	<string name="rotate_map_bearing_opt">Rotacija po smeri gibanja</string>
 	<string name="rotate_map_none_opt">Brez rotacije (sever je gor)</string>
@@ -1910,4 +1909,9 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="flat_list_waypoitns">Vse</string>
     <string name="way_alarms">Ovire</string>
     <string name="speak_favorites">Najavi priljubljene</string>
+    <string name="int_hour">ur</string>
+    <string name="duration">Trajanje</string>
+    <string name="distance">Razdalja</string>
+    <string name="flat_list_waypoints">Vse</string>
+    <string name="targets">Cilji</string>
     </resources>
