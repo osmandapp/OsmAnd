@@ -595,7 +595,7 @@
 	</string>
 	<string name="tip_initial">幫助</string>
 	<string name="tip_initial_t">"OsmAnd 是一個導航應用程式，含有很多的功能。
-\n\n基本功能介紹與某些使用提示和技巧，可透過地圖主畫面\'選單\' → \'提示\'連結。 "</string>
+\n\n一些基本功能介紹與使用提示和進階的幫助，可透過地圖主畫面\'選單\' → \'幫助\'連結。 "</string>
 	<string name="next_button">下一頁</string>
 	<string name="previous_button">上一頁</string>
 	<string name="unit_of_length_descr">更改長度與速度單位</string>
@@ -1435,7 +1435,7 @@
 	<string name="about_version">版本：</string>
     <string name="about_settings">關於</string>
     <string name="about_settings_descr">版本訊息、授權、專案成員</string>
-    <string name="tips_and_tricks">提示</string>
+    <string name="tips_and_tricks">幫助</string>
     <string name="tip_map_styles">地圖樣式</string>
 	<string name="tip_map_styles_t">"OsmAnd 支援顯示離線的向量地圖，以不同的地圖樣式來適應您的需要：
 \n\n除了均衡的\'預設\'地圖樣式，您可以根據\'選單\' -&gt; \'組態螢幕顯示\' -&gt; \'地圖樣式\'選擇例如
