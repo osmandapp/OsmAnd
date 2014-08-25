@@ -2066,4 +2066,5 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="int_hour">時間</string>
     <string name="duration">期限</string>
     <string name="distance">距離</string>
-    </resources>
+    <string name="rendering_attr_publicTransportMode_name">公共交通機関モード</string>
+	</resources>
