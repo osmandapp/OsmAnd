@@ -1,5 +1,14 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="save_track_to_gpx_globally">Aufzeichnung in GPX-Datei</string>
+	<string name="save_track_to_gpx_globally_descr">Generelle Positionsaufzeichnung kann man mit der Schaltfläche \'GPX Aufnhame\' direkt auf dem Kartenbildschirm aktivieren oder deaktivieren</string>
+	<string name="save_current_track">Track jetzt speichern</string>
+	<string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
+	<string name="save_track_to_gpx">Aufzeichnung in GPX-Datei während Navigation</string>
+	<string name="save_track_to_gpx_descrp">Zurückgelegte Strecken während der Navigation werden als GPX auf der SD-Karte gespeichert</string>
+	<string name="save_track_interval_globally">ufzeichnungs-Intervall</string>
+	<string name="save_track_interval">Aufzeichnungs-Intervall während Navigation</string>
+	<string name="save_track_interval_descr">Intervall zwischen zwei Aufzeichnungspunkten während Navigation</string>
 	<string name="tips_and_tricks">Hilfe</string>
 	<string name="tip_initial">Hilfe</string>
 	<string name="tip_initial_t">OsmAnd ist eine Navigationsanwendung mit vielen Fähigkeiten.
@@ -1038,12 +1047,6 @@
 	<string name="osm_settings">OSM-Bearbeitung</string>
 	<string name="additional_settings">Weitere Einstellungen</string>
 	<string name="settings">Einstellungen</string>
-	<string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
-	<string name="save_current_track">Track jetzt speichern</string>
-	<string name="save_track_interval_descr">Intervall zwischen zwei Standortbestimmungen</string>
-	<string name="save_track_interval">Aufzeichnungs-Intervall</string>
-	<string name="save_track_to_gpx_descrp">Zurückgelegte Strecken werden nach Tagen gruppiert als GPX auf der SD-Karte gespeichert</string>
-	<string name="save_track_to_gpx">Aufzeichnung in GPX-Datei aktivieren</string>
 	<string name="update_tile">Karte (Kacheln) aktualisieren</string>
 	<string name="reload_tile">Kartenteile (Kacheln) aktualisieren</string>
 	<string name="mark_point">Ziel</string>
