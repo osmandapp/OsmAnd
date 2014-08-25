@@ -829,7 +829,7 @@
   <string name="save_track_interval">Informacijos išsaugojimo intervalas</string>
   <string name="save_track_interval_descr">Pasirinkti judėjimo istorijos pozicijos intervalą</string>
   <string name="save_track_to_gpx_descrp">Judėjimo istorija bus išsaugota į tracks segtuvą sugrupavus pagal dienas</string>
-  <string name="save_track_to_gpx">Išsaugoti judėjimo istoriją į GPX failą</string>
+  <string name="save_track_to_gpx">Naviguojant išsaugoti judėjimo istoriją į GPX failą</string>
   <string name="update_tile">Atnaujinti žemėlapį</string>
   <string name="reload_tile">Iš naujo įkelti lakštą</string>
   <string name="mark_point">Tikslas</string>
