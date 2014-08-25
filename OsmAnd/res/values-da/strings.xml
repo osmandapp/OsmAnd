@@ -1233,9 +1233,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="voice_provider_descr">Vælg talevejledning til navigation (sprogkode se ISO 639-1)</string>
 	<string name="transport_Stop">Stoppested</string>
 	<string name="transport_stops">Stoppesteder</string>
-	<string name="tip_initial_t">OsmAnd er et navigationsprogram med mange funktioner.
-\n\n Som en grundlæggende introduktion, er nogle tip og tricks tilgængelig via \'Menu\' → \'Tips\' på hovedskærmen.
-	</string>
+	<string name="tip_initial_t">"OsmAnd er et navigationsprogram med mange funktioner.
+\n\nEn grundlæggende introduktion, tips om anvendelse og avanceret hjælp er tilgængelig via \'Menu\' → \'Hjælp\' på hovedskærmen. "</string>
 	
 	<string name="osmand_net_previously_installed">En tidligere OsmAnd version er installeret. Alle offline data er understøttet af det nye program, men favoritter bør eksporteres i den gamle version og senere importeres i den nye.</string>
 	<string name="voice_provider">Talevejledning</string>
@@ -1591,7 +1590,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="about_version">Version:</string>
     <string name="about_settings">Om</string>
     <string name="about_settings_descr">Versioninformation, licenser, projektmedlemmer</string>
-    <string name="tips_and_tricks">Tips</string>
+    <string name="tips_and_tricks">Hjælp</string>
     <string name="tip_map_styles">Kortformater</string>
 	<string name="tip_map_styles_t">OsmAnd understøtter visning af offline vektorkort i forskellige kortformater tilpasset forskellige behov:
 \n\n Udover standardformatet kan andet end \'standard\' kortformat, vælges i \'Menu\' → \'Konfigurer skærm\' → \'Kortformat\'
