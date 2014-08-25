@@ -494,7 +494,7 @@
   <string name="search_poi_filter">Filtre</string>
   <string name="menu_mute_off">Son activé</string>
   <string name="menu_mute_on">Son désactivé</string>
-  <string name="voice_provider_descr">Sélectionner la langue à employer pour le guidage vocal (codes des langues : cf. norme ISO 639-1)</string>
+  <string name="voice_provider_descr">Sélectionner la langue à employer pour le guidage vocal</string>
   <string name="voice_provider">Guidage vocal</string>
   <string name="voice_data_initializing">Initialisation des données vocales…</string>
   <string name="voice_data_not_supported">Les données vocales utilisent une version non supportée</string>
@@ -639,8 +639,8 @@
   <string name="save_current_track">Enregistrer la trace GPX</string>
   <string name="save_track_interval_descr">Choisir l\'intervalle d\'enregistrement de la trace pendant la navigation</string>
   <string name="save_track_interval">Intervalle d\'enregistrement pendant la navigation</string>
-  <string name="save_track_to_gpx_descrp">Les traces seront enregistrées et groupées par jour dans le répertoire des traces</string>
-  <string name="save_track_to_gpx">Enregistrer la trace dans un fichier GPX</string>
+  <string name="save_track_to_gpx_descrp">Les traces seront enregistrées dans le répertoire des traces pendant la navigation</string>
+  <string name="save_track_to_gpx">Enregistrer la trace dans un fichier GPX pendant la navigation</string>
   <string name="update_tile">Mettre à jour la carte</string>
   <string name="reload_tile">Recharger carreau</string>
   <string name="mark_point">Destination</string>
@@ -1353,7 +1353,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="tip_map_styles">Styles de cartes</string>
 	<string name="about_settings">À propos</string>
     <string name="about_settings_descr">Note de version, licences, membres du projet</string>
-    <string name="tips_and_tricks">Astuces</string>
+    <string name="tips_and_tricks">Aide</string>
     <string name="local_index_tile_data_zooms">Zooms téléchargés : %1$s</string>
     <string name="local_index_tile_data_expire">Expire (minutes) : %1$s</string>
     <string name="local_index_tile_data_downloadable">Téléchargeable : %1$s</string>
