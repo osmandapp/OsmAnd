@@ -1659,7 +1659,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_create_groups_confirm">Чтобы создавать группы Вы должны быть зарегистрированным пользователем OsMo.</string>
     <string name="osmo_sign_in">Войти</string>
     <string name="osmo_regenerate_login_ids_confirm">Вы уверены в необходимости регенерации персональных ID? Все устройства, соединённые с Вами, больше не смогут отследить Вас.</string>
-    <string name="osmo_regenerate_login_ids">Регенерировать ID трекера</string>
+    <string name="osmo_regenerate_login_ids">пересоздать ID пользователя</string>
     <string name="osmo_use_server_name">Зарегистрированное имя</string>
     <string name="osmo_connect_to_my_nickname">Мой ник</string>
     <string name="osmo_user_name">Пользователь</string>
@@ -1667,7 +1667,7 @@ OsmAnd - открытый источник и активно развается.
 	
     <string name="osmo_credentials_not_valid">Ваши учётные данные OsMo не верны.</string>
     <string name="osmo_follow">Следить</string>
-    <string name="osmo_edit_device">Изменить пользовательские свойства</string>
+    <string name="osmo_edit_device">Изменить настройки пользователя</string>
     <string name="gpx_file_is_empty">Трек GPX пуст</string>
     <string name="selected_track">Выбранные треки</string>
     <string name="my_tracks">Все треки</string>
@@ -1682,7 +1682,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_control">Быстрый доступ к OsMo</string>
     <string name="osmo_cancel_moving_target">Отменить движущуюся цель</string>
     <string name="osmo_set_moving_target">Движущаяся цель</string>
-    <string name="osmo_center_location">Центр на экране</string>
+    <string name="osmo_center_location">По центру экрана</string>
     <string name="gpx_selection_segment_title">Сегмент</string>
     <string name="gpx_info_distance">Расстояние: %1$s (%2$s точек) </string>
 	<string name="gpx_info_start_time">Время старта: %1$tF, %1$tT </string>
