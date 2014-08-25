@@ -355,7 +355,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		//if(choice.value) {
 		//	runnable.run();
 		//} else {
-			showIntervalChooseDialog(map, app.getString(R.string.save_track_interval) + " : %s",
+			showIntervalChooseDialog(map, app.getString(R.string.save_track_interval_globally) + " : %s",
 					app.getString(R.string.save_track_to_gpx_globally), SECONDS, MINUTES, choice, vs,
 					new OnClickListener() {
 						@Override

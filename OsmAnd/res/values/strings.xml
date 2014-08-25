@@ -14,10 +14,11 @@
 	<string name="save_track_to_gpx_globally_descr">General position logging to a GPX file can be turned on or off using the GPX recording widget on the map screen</string>
 	<string name="save_current_track_descr">Save current track to SD now</string>
 	<string name="save_current_track">Save current GPX track</string>
+	<string name="save_track_to_gpx">Log track to GPX file during navigation</string>
+	<string name="save_track_to_gpx_descrp">Tracks will be saved to track directory during navigation</string>
+	<string name="save_track_interval_globally">Logging interval</string>
 	<string name="save_track_interval">Logging interval during navigation</string>
 	<string name="save_track_interval_descr">Choose logging interval for track recording during navigation</string>
-	<string name="save_track_to_gpx_descrp">Tracks will be saved to track directory during navigation</string>
-	<string name="save_track_to_gpx">Log track to GPX file during navigation</string>
 	<string name="voice_provider_descr">Select voice guidance for navigation</string>
 	<string name="voice_provider">Voice guidance</string>
 	<string name="rendering_attr_publicTransportMode_name">Public transport mode</string>
