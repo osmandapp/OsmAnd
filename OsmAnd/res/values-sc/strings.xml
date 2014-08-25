@@ -1413,7 +1413,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="background_service_int_descr">Ischerta s\'intervallu de tempus pro s\'ischidada de su servìtziu a reposu</string>
 	<string name="background_service_provider_descr">Issèbera su frunidore de positzione finas a cando si est impreande sa modalidade \"a reposu\"</string>
 	<string name="background_service_provider">Frunidore de positzionamentu</string>
-	<string name="voice_provider_descr">Ischerta sa boghe da impreare pro su nàvigu (pro sos còdighes de sas limbas bie ISO 639-1)</string>
+	<string name="voice_provider_descr">Ischerta sa boghe da impreare pro su nàvigu</string>
 	<string name="voice_provider">Ghia vocale</string>
 	<string name="voice_data_initializing">Documentu boghe in ammaniamentu…</string>
 	<string name="voice_data_not_supported">Versione de datos vocales non suportada</string>
@@ -1541,10 +1541,10 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="settings">Impostaduras</string>
 	<string name="save_current_track_descr">Sarba como sa rasta currente in s\'ischeda SD</string>
 	<string name="save_current_track">Sarba sa rasta currente</string>
-	<string name="save_track_interval">Intervallu de sarbamentu</string>
+	<string name="save_track_interval">Intervallu de sarbamentu durante su nàvigu</string>
 	<string name="save_track_interval_descr">Issèbera s\'intervallu de positzionamentu pro sas rastas</string>
-	<string name="save_track_to_gpx_descrp">Sas rastas ant a èssere sarbadas in sa cartella rastas agrupadas pro die</string>
-	<string name="save_track_to_gpx">Sarba rasta in GPX</string>
+	<string name="save_track_to_gpx_descrp">Sas rastas ant a èssere sarbadas in sa cartella durante su nàvigu</string>
+	<string name="save_track_to_gpx">Sarba rasta in GPX durante su nàvigu</string>
 	<string name="update_tile">Agiorna mapa</string>
 	<string name="reload_tile">Torra a carrigare tasseddos</string>
 	<string name="mark_point">Obietivu</string>
@@ -1671,7 +1671,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="show_more_map_detail_descr">Ammustra carchi minuja de sas mapas vetoriales (istradas etc.) fintzas a sos zoom prus bassos</string>
 	<string name="show_route">Minujas àndala</string>
 	<string name="tip_initial_t">"OsmAnd est un aplicu de nàvigu cun meda funtziones.
-\n\nUn\'introduida base e carchi cussigiu de impreu sunt cullegados tramite \'Menù\' → \'Impòsitos\' dae s\'ischermu mapa. "</string>
+\n\nUn\'introduida base, cussigios de impreu e agiudu avantzadu sunt cullegados tramite \'Menù\' → \'Impòsitos\' dae s\'ischermu mapa. "</string>
 	<string name="use_high_res_maps_descr">Non allonghiare (ne inghelare) sos tasseddos de sa mapa in sos dispositivos a carchesa arta</string>
 	<string name="background_router_service_descr">Allughe su servìtziu a reposu de OsmAnd pro s\'arrastamentu de sa positzione cando s\'ischermu est istudau</string>
 	<string name="off_router_service_no_gps_available">Su servìtziu de nàvigu a reposu de OsmAnd netzèssitat de su sistema de positzionamentu ativadu.</string>
