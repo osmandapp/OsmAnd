@@ -1230,7 +1230,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="search_address_street">Gade</string>
 	<string name="search_address_city">By</string>
 	<string name="search_address_top_text">Vælg adresse</string>
-	<string name="voice_provider_descr">Vælg talevejledning til navigation (sprogkode se ISO 639-1)</string>
+	<string name="voice_provider_descr">Vælg talevejledning til navigation</string>
 	<string name="transport_Stop">Stoppested</string>
 	<string name="transport_stops">Stoppesteder</string>
 	<string name="tip_initial_t">"OsmAnd er et navigationsprogram med mange funktioner.
@@ -1360,10 +1360,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="settings">Indstillinger</string>
 	<string name="save_current_track_descr">Gem aktuelle spor til SD-kort nu</string>
 	<string name="save_current_track">Gem aktuelle GPX-spor</string>
-	<string name="save_track_interval">Logningsinterval</string>
-	<string name="save_track_interval_descr">Vælg positioneringsinterval for sporing</string>
-	<string name="save_track_to_gpx_descrp">Spor bliver gemt i \'/track\' mappen grupperet efter dage</string>
-	<string name="save_track_to_gpx">Log spor til GPX-fil</string>
+	<string name="save_track_interval">Logintervallet under navigation</string>
+	<string name="save_track_interval_descr">Vælg logintervallet for spor optager under navigation</string>
+	<string name="save_track_to_gpx_descrp">Spor bliver gemt i \'/track\' under navigation</string>
+	<string name="save_track_to_gpx">Log spor til GPX-fil under navigation</string>
 	<string name="update_tile">Opdater kort</string>
 	<string name="reload_tile">Genindlæs delkort</string>
 	<string name="mark_point">Mål</string>
@@ -1976,4 +1976,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="record_plugin_name">Optag dine ture</string>
     <string name="record_plugin_description">Gem dine spor via et tryk på en knap på skærmen. Vis indstillinger til optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
     <string name="rendering_attr_publicTransportMode_name">Kollektivtrafik tilstand</string>
+	<string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
 	</resources>
