@@ -71,11 +71,11 @@
   <string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quiere sustituirlo?</string>
   <string name="profile_settings">Opciones específicas por perfil</string>
   <string name="settings_preset">Perfil por defecto</string>
-  <string name="settings_preset_descr">Los ajustes de mapa y navegación se personalizan por cada perfil de uso, Fija tu perfil por defecto aquí.</string>
+  <string name="settings_preset_descr">Los ajustes de ver el mapa y la navegación son recordados por perfil usado. Establece tu perfil por defecto aquí.</string>
   
   
   <string name="routing_settings">Navegación</string>
-  <string name="routing_settings_descr">Especifica opciones de navegación</string>
+  <string name="routing_settings_descr">Opciones específicas para la navegación</string>
   <string name="global_settings">Opciones Globales</string>
   <string name="index_settings">Gestionar mapas</string>
   <string name="index_settings_descr">Descarga y gestiona mapas sin conexión almacenados en tu dispositivo</string>
@@ -216,7 +216,7 @@
   <string name="voice_not_use">No usar</string>
   <string name="voice_not_specified">Ninguno</string>
   <string name="installing_new_resources">Desempaquetando nuevos datos…</string>
-  <string name="internet_connection_required_for_online_route">Se ha seleccionado un servicio de navegación en línea, pero no hay conexión a Internet.</string>
+  <string name="internet_connection_required_for_online_route">Se seleccionó un servicio de navegación en línea, pero no hay conexión a Internet.</string>
   <string name="tts_language_not_supported_title">Idioma no soportado</string>
   <string name="tts_language_not_supported">El idioma seleccionado no está soportado por el sintetizador de voz (TTS) de Android. ¿Quiere ir a G. Play a buscar otro motor TTS? Si no, se utilizará el idioma TTS preseleccionado.</string>
   <string name="tts_missing_language_data_title">Faltan datos</string>
@@ -356,7 +356,7 @@
   <string name="poi_filter_food_shop">Tienda de comida</string>
   <string name="poi_filter_for_tourists">Para turistas</string>
   <string name="poi_filter_fuel">Gasolinera</string>
-  <string name="poi_filter_namefinder">Namefinder en línea</string>
+  <string name="poi_filter_namefinder">NameFinder en línea</string>
   <string name="reading_cached_tiles">Leyendo teselas guardadas…</string>
   <string name="version_index_is_big_for_memory">La versión \'\'{0}\'\' de índices no cabe en memoria</string>
   <string name="version_index_is_not_supported">No se soporta la versión \'\'{0}\'\' de índices</string>
@@ -553,7 +553,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="search_osm_nominatim">Buscar dirección usando OSM Nominatim</string>
   <string name="hint_search_online">Número de casa, calle, ciudad</string>
   <string name="search_offline_address">Sin conexión</string>
-  <string name="search_online_address">Internet</string>
+  <string name="search_online_address">Búsqueda en línea</string>
   <string name="max_level_download_tile">Máx. zoom con conexión</string>
   <string name="max_level_download_tile_descr">Elige nivel de zoom máximo para descargar teselas de mapas de Internet</string>
   <string name="route_general_information">Distancia total %1$s, tiempo de viaje %2$d h %3$d m.</string>
@@ -652,7 +652,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="map_view_3d">Visión 3D del mapa</string>
   <string name="show_poi_over_map_description">Muestra PDI sobre el mapa (usando el último filtro seleccionado)</string>
   <string name="show_poi_over_map">Mostrar PDI</string>
-  <string name="map_tile_source_descr">Elige la fuente de teselas del mapa, online o guardadas</string>
+  <string name="map_tile_source_descr">Elige la fuente de mapas en línea o teselas guardadas</string>
   <string name="map_tile_source">Fuente de teselas de mapa</string>
   <string name="map_source">Fuente de mapa</string>
   <string name="use_internet">Usar Internet</string>
@@ -756,7 +756,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="edit_filter_delete_message">Se borró el filtro {0}</string>
   <string name="edit_filter_create_message">Se creó el filtro {0}</string>
   <string name="default_buttons_selectall">Seleccionar todo</string>
-  <string name="offline_navigation_not_available">La navegación offline no está disponible temporalmente.</string>
+  <string name="offline_navigation_not_available">La navegación sin conexión OSMAnd no está disponible temporalmente.</string>
   <string name="left_side_navigation">Conducción por la izquierda</string>
   <string name="left_side_navigation_descr">Seleccionalo en países con tráfico por la izquierda</string>
   <string name="download_link_and_local_description">Pulsa aquí para descargar o actualizar mapas para su uso posterior sin conexión.\nPulsa cualquier ítem para ver más detalles, mantén pulsado para desactivar o borrar. Datos actuales en el dispositivo (libre %1$s):</string>
@@ -764,11 +764,11 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="confirm_interrupt_download">¿Quieres interrumpir la descarga de archivo?</string>
   <string name="basemap_was_selected_to_download">El Mapa Base (World Basemap) se necesita para el correcto funcionamiento de la aplicación y se seleccionó para su descarga.</string>
   
-  <string name="map_online_plugin_is_not_installed">Activa el extra de mapas online para seleccionar diferentes fuentes de mapas</string>
-  <string name="map_online_data">Mapas Online (teselas)</string>
-  <string name="map_online_data_descr">Usa mapas online (descarga y guarda teselas en la tarjeta SD)</string>
-  <string name="online_map_settings">Mapas Online</string>
-  <string name="online_map_settings_descr">Configura fuentes de teselas de mapa online o guardadas</string>
+  <string name="map_online_plugin_is_not_installed">Habilitar el agregado de mapas en línea para seleccionar diferentes fuentes de mapas</string>
+  <string name="map_online_data">Mapas en línea y teselas</string>
+  <string name="map_online_data_descr">Usar mapas en línea (descarga y guarda teselas en la tarjeta SD)</string>
+  <string name="online_map_settings">Mapas en línea</string>
+  <string name="online_map_settings_descr">Configurar fuentes de mapas en línea o teselas guardadas</string>
   <string name="map_settings">Configuraciones de Mapa</string>
   <string name="map_settings_descr">Configurar la pantalla del mapa</string>
   <string name="osmand_rastermaps_plugin_description">Muestra opciones para configurar diversos mapas teselados, online o guardados, como mapa base o como mapa superpuesto / subyacente. Estos mapas también se pueden preparar offline y copiarlos en la carpeta de OsmAnd.</string>
@@ -997,7 +997,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
 \n\t* \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado) "</string>
 <string name="tip_app_mode_t_v2">"OsmAnd admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.
 \n\nPuedes cambiar de perfil mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono coche, bicicleta o peatón), o al crear una ruta (\'modo de transporte\'). "</string>
-<string name="osmand_short_description_80_chars">OsmAnd es una aplicación de navegación de código abierto para mapas con y sin conexión</string>
+<string name="osmand_short_description_80_chars">Visor y navegador de mapas móvil global para mapas OSM con y sin conexión</string>
 <string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada)
 
@@ -1273,7 +1273,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 	<string name="layer_hillshade">Capa de sombreado</string>
     <string name="map_widget_gps_info">Información GPS</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
-	<string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
+	<string name="osmand_plus_play_title_30_chars">Navegación y mapas OsmAnd+</string>
 	<string name="tip_recent_changes_1_1_4_t">"Cambios en 1.1.4:\n\t* Rediseño de interfaz de usuario\n\t* Corrección de errores "
     </string>
     
@@ -1765,7 +1765,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="select_destination_and_intermediate_points">Seleccionar puntos de ruta</string>
     <string name="layer_amenity_label">Etiquetas de punto</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
-    <string name="show_zoom_buttons_navigation_descr">Mostrar botones de zoom durante navegación</string>
+    <string name="show_zoom_buttons_navigation_descr">Mostrar botones de zoom durante la navegación</string>
     <string name="show_zoom_buttons_navigation">Mostrar botones de zoom</string>
     <string name="route_descr_destination">\t</string>
     <string name="sort_by_distance">Ordenar por distancia</string>
@@ -1811,9 +1811,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="forward">Siguiente</string>
     <string name="home">Casa</string>
     <string name="live_monitoring_m_descr">Enviar seguimiento a un servicio web específico si la grabación GPX está habilitada.</string>
-	<string name="live_monitoring_m">Seguimiento online (requiere GPX)</string>
-    <string name="live_monitoring_start">Iniciar seguimiento online</string>
-	<string name="live_monitoring_stop">Parar seguimiento online</string>
+	<string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
+    <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
+	<string name="live_monitoring_stop">Parar seguimiento en línea</string>
 	<string name="gpx_monitoring_start">Iniciar grabación GPX</string>
 	<string name="gpx_monitoring_stop">Parar grabación GPX</string>
     <string name="gpx_start_new_segment">Iniciar nuevo segmento</string>
@@ -1825,8 +1825,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="lang_zh_CN">Chino Simplificado</string>
 	<string name="lang_zh_TW">Chino Tradicional</string>
 	<string name="rendering_attr_subwayMode_name">Modo Metro</string>
- 	<string name="continue_navigation">Continuar Navegación</string>
-    <string name="pause_navigation">Pausar Navegación</string>
+ 	<string name="continue_navigation">Continuar navegación</string>
+    <string name="pause_navigation">Detener navegación</string>
 	<string name="rendering_attr_alpineHiking_name">Vista senderismo Alpino</string>
     <string name="rendering_attr_alpineHiking_description">Interpretar caminos de acuerdo a la escala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
