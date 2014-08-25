@@ -435,7 +435,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 \n\nA marker box can be hidden again by long-clicking on it. "</string>
 
 	<string name="tip_initial">도움말</string>
-	<string name="tip_initial_t">"OsmAnd는 많은 기능을 가진 네비게이션 앱입니다. 기본적인 소개로서, 몇 가지 유용한 도움말과 팁, 트릭을 지도화면에서 [메뉴-도움말]에 링크합니다. "</string>
+	<string name="tip_initial_t">"OsmAnd는 많은 기능을 가진 네비게이션 앱입니다. 기본적인 소개로서, 몇 가지 유용한 도움말을 [메뉴-도움말]에서 찾을 수 있습니다. "</string>
 	<string name="next_button">다음</string>
 	<string name="previous_button">이전</string>
 
