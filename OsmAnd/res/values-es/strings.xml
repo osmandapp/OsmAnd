@@ -71,7 +71,7 @@
   <string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quiere sustituirlo?</string>
   <string name="profile_settings">Opciones específicas por perfil</string>
   <string name="settings_preset">Perfil por defecto</string>
-  <string name="settings_preset_descr">Los ajustes de ver el mapa y la navegación son recordados por perfil usado. Establece tu perfil por defecto aquí.</string>
+  <string name="settings_preset_descr">Los ajustes de visualización del mapa y de navegación son recordados por perfil usado. Establece tu perfil por defecto aquí.</string>
   
   
   <string name="routing_settings">Navegación</string>
@@ -300,7 +300,7 @@
 		\n\nUna caja marcador puede ser ocultada con una pulsación larga sobre ella.
 	</string>
   <string name="tip_initial">Ayuda</string>
-  <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nAlguna información básica, consejos de uso y ayuda avanzada están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
+  <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nUna introducción básica, consejos de uso y ayuda avanzada están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
   <string name="next_button">Siguiente</string>
   <string name="previous_button">Anterior</string>
   <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
@@ -1273,7 +1273,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 	<string name="layer_hillshade">Capa de sombreado</string>
     <string name="map_widget_gps_info">Información GPS</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
-	<string name="osmand_plus_play_title_30_chars">Navegación y mapas OsmAnd+</string>
+	<string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
 	<string name="tip_recent_changes_1_1_4_t">"Cambios en 1.1.4:\n\t* Rediseño de interfaz de usuario\n\t* Corrección de errores "
     </string>
     
@@ -1281,8 +1281,8 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 	<string name="hno">Número</string>
     <string name="tip_recent_changes_1_3_t">"Cambio en 1.5:\n\t* Tema Holo (personalización de tema) "
     </string>
-    <string name="monitoring_settings">Grabando viaje</string>
-    <string name="monitoring_settings_descr">Configura la forma de grabar sus viajes</string>
+    <string name="monitoring_settings">Grabación de viaje</string>
+    <string name="monitoring_settings_descr">Configura la forma de grabar tus viajes</string>
     <string name="osmand_monitoring_plugin_description">Activa el seguimiento y la navegación en modo suspensión (pantalla apagada) despertando periódicamente el dispositivo GPS. Muestra opciones que permiten registrar tus recorridos en archivos GPX locales o en línea mediante un servicio web.</string>
     <string name="osmand_monitoring_plugin_name">Servicios de registro</string>
     <string name="choose_osmand_theme_descr">Elije el tema, el aspecto, de la aplicación</string>
@@ -1824,9 +1824,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="lang_sr">Serbio</string>
 	<string name="lang_zh_CN">Chino Simplificado</string>
 	<string name="lang_zh_TW">Chino Tradicional</string>
-	<string name="rendering_attr_subwayMode_name">Modo Metro</string>
- 	<string name="continue_navigation">Continuar navegación</string>
-    <string name="pause_navigation">Detener navegación</string>
+	<string name="rendering_attr_subwayMode_name">Modo metro</string>
+ 	<string name="continue_navigation">Continuar Navegación</string>
+    <string name="pause_navigation">Pausar Navegación</string>
 	<string name="rendering_attr_alpineHiking_name">Vista senderismo Alpino</string>
     <string name="rendering_attr_alpineHiking_description">Interpretar caminos de acuerdo a la escala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
@@ -1862,6 +1862,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
     <string name="record_plugin_name">Grabar tus viajes</string>
-    <string name="record_plugin_description">Guardar tus trazas tocando un botón en la pantalla del mapa. Mostrar las opciones para grabar tus viajes a archivos GPX ocales o usando un servicio web en línea.</string>
+    <string name="record_plugin_description">Guardar tus trazas tocando un botón en la pantalla del mapa. Mostrar las opciones para grabar tus viajes a archivos GPX locales o usando un servicio web en línea.</string>
     <string name="rendering_attr_publicTransportMode_name">Modo de transporte público</string>
 	</resources>
