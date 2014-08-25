@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="voice_provider_descr">Select voice guidance for navigation</string>
+	<string name="voice_provider">Voice guidance</string>
 	<string name="rendering_attr_publicTransportMode_name">Public transport mode</string>
 	<string name="tips_and_tricks">Help</string>
 	<string name="tip_initial">Help</string>
@@ -1689,8 +1691,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_poi_filter">Filter</string>
 	<string name="menu_mute_off">Sound is on</string>
 	<string name="menu_mute_on">Sound is off</string>
-	<string name="voice_provider_descr">Select voice guidance for navigation (language codes see ISO 639-1)</string>
-	<string name="voice_provider">Voice guidance</string>
 	<string name="voice_data_initializing">Initializing voice data&#8230;</string>
 	<string name="voice_data_not_supported">Unsupported version of voice data</string>
 	<string name="voice_data_corrupted">Specified voice data is corrupted</string>
