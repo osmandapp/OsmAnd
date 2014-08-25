@@ -93,7 +93,7 @@
 <string name="local_indexes_cat_map">Mapes fora de línia (vectors)</string>
 <string name="map_online_plugin_is_not_installed">Activeu el connector Mapes en línia per poder seleccionar diferents fonts de mapes</string>
 <string name="map_online_data">Mapes en línia (tessel·les)</string>
-<string name="map_online_data_descr">Utilitza mapes en línia (baixa i desa les tessel·les a la memòria cau de la targeta SD)</string>
+<string name="map_online_data_descr">Utilitzeu mapes en línia (les tessel·les es baixen i es desen a la memòria cau de la targeta SD)</string>
 <string name="online_map_settings">Mapes en línia</string>
 <string name="online_map_settings_descr">Configureu les fonts de mapes de tessel·les en línia o desades a la memòria cau</string>
 <string name="map_settings">Configuració del mapa</string>
@@ -873,7 +873,7 @@
 <string name="opening_hours_not_supported">Format d\'horaris d\'obertura no suportat per a l\'edició</string>
 <string name="transport_to_go_after">prioritza distancia</string>
 <string name="hello">Aplicació de navegació OsmAnd</string>
-<string name="osmand_rastermaps_plugin_description">Mostra les preferències per configurar diversos mapes en línia o mapes emmagatzemats com a mapa base o com a mapa sobreposat/de fons. Aquests mapes poden ser preparats i copiats a la carpeta OsmAnd.</string>
+<string name="osmand_rastermaps_plugin_description">Us mostra les preferències per configurar diversos mapes en línia o emmagatzemats, com a mapa base o com a mapa sobreposat / de fons. Podeu preparar i copiar aquests mapes a la carpeta OsmAnd.</string>
 	<string name="choose_audio_stream_descr">Escolliu el canal per reproduir el guiat per veu (depenent del sistema)</string>
 	<string name="renderers">Renderització dels vectors</string>
 	<string name="context_menu_item_open_bug">Obre un error d\'OSM</string>
