@@ -912,7 +912,7 @@
 	
 	
 	<string name="create_poi_link_to_osm_doc">LLegenda del mapa <u>OSM en línia</u> amb imatges</string><string name="osmand_routing_experimental">La navegació fora de línia de l\'OsmAnd és una característica experimental i no funciona per distàncies superiors als 20Km.\n\nEl servei de navegació s\'ha desviat temporalment cap a CloudMade en línia.</string>
-	<string name="renderer_load_exception">Ha succeït una excepció: El renderitzador no s\'ha carregat</string>
+	<string name="renderer_load_exception">S\'ha produït una excepció: el renderitzador no s\'ha carregat</string>
 	<string name="context_menu_item_search_transport">Cerca de transport</string>
 	<string name="transport_search_again">Reinicia la cerca de transport</string>
 	<string name="no_vector_map_loaded">Els mapes de vectors no s\'han carregat</string>
@@ -1283,7 +1283,7 @@
 	<string name="incremental_search_building">Cerca d\\\'edificis progressiva</string>
 	<string name="Closest_Amenities">Instal·lacions més properes</string>
 	<string name="position_on_map_bottom">Part inferior</string>
-	<string name="osb_add_dialog_error">S\'ha produït un error: no s\'ha creat l\'error</string>
+	<string name="osb_add_dialog_error">S\'ha produït una excepció: no s\'ha creat l\'error</string>
 	<string name="poi_error_poi_not_found">No s\'ha trobat el node o la instal·lació no és un node únic</string>
 	<string name="poi_error_io_error_template">S\'ha produït un error d\'E/S durant l\'acció {0}.</string>
 	<string name="osmodroid_mode_on">Atura l\'OsMoDroid</string>    
@@ -1321,7 +1321,7 @@
     <string name="av_photo_play_sound">Reprodueix un so en fer una foto</string>
 	<string name="av_camera_focus_hiperfocal">Enfocament de nitidesa màxima</string>
 	<string name="av_camera_focus_auto">Enfocament automàtic</string>
-	<string name="osb_comment_dialog_error">Error: no s\'ha afegit el comentari</string>
+	<string name="osb_comment_dialog_error">S\'ha produït una excepció: no s\'ha afegit el comentari</string>
 	<string name="osb_author_dialog_password">Contrasenya de l\'OSM (opcional)</string>
 	<string name="amenity_type_seamark">Balisa marina</string>
     <string name="app_modes_choose_descr">Seleccioneu els perfils d\'ús visibles a l\'aplicació</string>
@@ -1428,7 +1428,7 @@
 	<string name="av_camera_focus_descr">Trieu el tipus d\'enfocament de la càmera</string>
 	<string name="av_camera_focus">Tipus d\'enfocament</string>
 	<string name="poi_error_unexpected_template">S\'ha produït un error inesperat en fer l\'acció {0}.</string>
-	<string name="osb_close_dialog_error">Excepció: no s\'ha tancat l\'error</string>
+	<string name="osb_close_dialog_error">S\'ha produït una excepció: no s\'ha tancat l\'error</string>
 	<string name="map_tile_source_descr">Trieu l\'origen de les tessel·les, en línia o de la memòria cau</string>
 	<string name="previous_run_crashed">La darrera execució d\'OsmAnd s\'ha estavellat. El fitxer log és a {0}. Si us plau informeu del problema i adjunteu el fitxer log.</string>
 	<string name="transport_stop_to_go_out">Trieu aturada per sortir</string>
