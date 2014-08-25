@@ -372,8 +372,8 @@
 <string name="poi_filter_custom_filter">Filtre personalitzat</string>
 <string name="poi_filter_for_tourists">Per a turistes</string>
 <string name="poi_filter_fuel">Carburants</string>
-<string name="osmand_short_description_80_chars">L\'OsmAnd és una aplicació de codi font obert de navegació per mapes en línia i fora de línia</string>
-<string name="osmand_plus_short_description_80_chars">L\'OsmAnd és una aplicació de codi font obert de navegació per mapes fora de línia i en línia</string>
+<string name="osmand_short_description_80_chars">Visualització de mapes global mòbil i navegació amb mapes OSM en línia i fora de línia</string>
+<string name="osmand_plus_short_description_80_chars">Visualització de mapes mòbil global i navegació amb mapes OSM en línia i fora de línia</string>
 <string name="local_index_routing_data">Dades de la ruta</string>
 <string name="settings_preset">Perfil d\'usuari</string>
 <string name="settings_preset_descr">Seleccioneu un perfil d\'usuari amb paràmetres personalitzats dels mapes i la navegació.</string>
