@@ -1682,4 +1682,5 @@
     <string name="duration">Längd</string>
     <string name="distance">Sträcka</string>
     <string name="rendering_attr_publicTransportMode_name">Kollektivtrafiksläge</string>
+	<string name="save_track_to_gpx_globally">Logga spår till GPX-fil</string>
 	</resources>
