@@ -308,7 +308,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 					vs.value = settings.LIVE_MONITORING_INTERVAL.get();
 					showIntervalChooseDialog(map, app.getString(R.string.live_monitoring_interval) + " : %s", 
-							app.getString(R.string.save_track_to_gpx), SECONDS, MINUTES,
+							app.getString(R.string.save_track_to_gpx_globally), SECONDS, MINUTES,
 							null, vs, new OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -356,7 +356,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		//	runnable.run();
 		//} else {
 			showIntervalChooseDialog(map, app.getString(R.string.save_track_interval) + " : %s",
-					app.getString(R.string.save_track_to_gpx), SECONDS, MINUTES, choice, vs,
+					app.getString(R.string.save_track_to_gpx_globally), SECONDS, MINUTES, choice, vs,
 					new OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {

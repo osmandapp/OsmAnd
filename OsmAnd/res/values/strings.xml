@@ -9,6 +9,15 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+
+	<string name="save_track_to_gpx_globally">Log track to GPX file</string>
+	<string name="save_track_to_gpx_globally_descr">General position logging to a GPX file can be turned on or off using the GPX recording widget on the map screen</string>
+	<string name="save_current_track_descr">Save current track to SD now</string>
+	<string name="save_current_track">Save current GPX track</string>
+	<string name="save_track_interval">Logging interval during navigation</string>
+	<string name="save_track_interval_descr">Choose logging interval for track recording during navigation</string>
+	<string name="save_track_to_gpx_descrp">Tracks will be saved to track directory during navigation</string>
+	<string name="save_track_to_gpx">Log track to GPX file during navigation</string>
 	<string name="voice_provider_descr">Select voice guidance for navigation</string>
 	<string name="voice_provider">Voice guidance</string>
 	<string name="rendering_attr_publicTransportMode_name">Public transport mode</string>
@@ -1821,12 +1830,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osm_settings">OSM editing</string>
 	<string name="additional_settings">Additional settings</string>
 	<string name="settings">Settings</string>
-	<string name="save_current_track_descr">Save current track to SD now</string>
-	<string name="save_current_track">Save current GPX track</string>
-	<string name="save_track_interval">Logging interval</string>
-	<string name="save_track_interval_descr">Choose positioning interval for tracks</string>
-	<string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
-	<string name="save_track_to_gpx">Log track to GPX file</string>
 	<string name="update_tile">Update map</string>
 	<string name="reload_tile">Reload tile</string>
 	<string name="mark_point">Target</string>
