@@ -56,8 +56,12 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 
 	private void createLoggingSection(PreferenceScreen grp) {
 		PreferenceCategory cat = new PreferenceCategory(this);
-		cat.setTitle(R.string.save_track_to_gpx);
+		cat.setTitle(R.string.save_track_to_gpx_globally);
 		grp.addPreference(cat);
+
+		Preference globalrecord = new Preference(this);
+		globalrecord.setSummary(R.string.save_track_to_gpx_globally_descr);
+		cat.addPreference(globalrecord);
 		
 		Preference pref = new Preference(this);
 		pref.setTitle(R.string.save_current_track);
