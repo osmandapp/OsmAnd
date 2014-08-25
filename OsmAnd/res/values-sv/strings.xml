@@ -638,7 +638,7 @@
     <string name="poi_filter_accomodation">Boende</string>
     <string name="poi_filter_restaurants">Restauranger</string>
     <string name="tip_map_context_menu_t">"Kontextmenyn \'Använd plats\' innehåller alla åtgärder med anknytning till en punkt (plats).\n\nMan kommer åt den genom att trycka och hålla på valfri plats på kartan (och sedan klickar på markören), genom att trycka på knappen på styrkulan eller genom att välja \'Meny\' → \'Använd plats\' (de två sista tar kartcentrum som referens).\n\nEn markörbox kan gömmas igen genom att långklicka på den. "</string>
-	<string name="tip_initial_t">"OsmAnd är en navigeringsapp med många funktioner.\n\tGrundläggande introduktion, tips och avancerad hjälp finns via \'Meny\' → \'Hjälp\' från kartskärmen. "</string>
+	<string name="tip_initial_t">"OsmAnd är en navigeringsapp med många funktioner.\n\nGrundläggande introduktion, tips och avancerad hjälp finns via \'Meny\' → \'Hjälp\' från kartskärmen. "</string>
 	<string name="application_dir">Lagringskatalog</string>
 	
 	<string name="osmand_net_previously_installed">En tidigare OsmAnd-version är installerad. Alla offline-data kommer att stödjas av den nya appen. Men favoritpunkter bör exporteras från den gamla appen och senare importeras i den nya.</string>
@@ -762,7 +762,7 @@
 	<string name="search_poi_filter">Filter</string>
 	<string name="menu_mute_off">Ljudet är på</string>
 	<string name="menu_mute_on">Ljudet är av</string>
-	<string name="voice_provider_descr">Välj röst för navigering (se ISO 639-1 för språkkoder)</string>
+	<string name="voice_provider_descr">Välj röstguidning för navigering</string>
 	<string name="tip_location_sharing_t">Du kan dela med dig av intressanta platser på din resa till familj eller vänner via menyn \'Använd platsen …\' -&gt; \'Dela ut platsen\'.
 		\n\nVälj sedan ett sätt att dela med dig av platsen: e-post, SMS, eller helt enkelt kopiera koordinaterna till Urklipp.
 	</string>
@@ -1047,10 +1047,10 @@
 	<string name="settings">Inställningar</string>
 	<string name="save_current_track_descr">Spara aktuellt spår till SD-kortet nu</string>
 	<string name="save_current_track">Spara aktuellt GPX-spår</string>
-	<string name="save_track_interval">Loggningsintervall</string>
-	<string name="save_track_interval_descr">Välj positionsintervall för spår</string>
-	<string name="save_track_to_gpx_descrp">Spår kommer att sparas i spårkatalogen grupperade efter dagar</string>
-	<string name="save_track_to_gpx">Logga spår till GPX-fil</string>
+	<string name="save_track_interval">Loggningsintervall under navigering</string>
+	<string name="save_track_interval_descr">Välj loggningsintervall för inspelning av spår under navigering</string>
+	<string name="save_track_to_gpx_descrp">Spår kommer att sparas i spårkatalogen under navigering</string>
+	<string name="save_track_to_gpx">Logga spår till GPX-fil under navigering</string>
 	<string name="update_tile">Uppdatera kartan</string>
 	<string name="reload_tile">Läs om kartbit</string>
 	<string name="mark_point">Mål</string>
@@ -1683,4 +1683,6 @@
     <string name="distance">Sträcka</string>
     <string name="rendering_attr_publicTransportMode_name">Kollektivtrafiksläge</string>
 	<string name="save_track_to_gpx_globally">Logga spår till GPX-fil</string>
+	<string name="save_track_to_gpx_globally_descr">Allmän loggning av position till en GPX-fil kan slås på/av via GPX-inspelningswidgeten på kartskärmen</string>
+	<string name="save_track_interval_globally">Loggningsintervall</string>
 	</resources>
