@@ -416,7 +416,7 @@
 		\n\tПосле этого появится окно с координатами, при нажатии на него откроется меню, при долгом нажатии - окно пропадёт. Также контекстное меню доступно по кнопке Меню на карте.
 		\n\tДействия в этом меню зависят от текущей выбранной точки (центр карты).
 	</string>
-  <string name="tip_initial">Советы по использованию</string>
+  <string name="tip_initial">Справка</string>
   <string name="tip_initial_t">OsmAnd - навигационное приложение с большим количеством функций.
 		\n\nЧтобы использовать его как можно лучше, следуйте советам по ссылке вверху меню.
 	</string>
@@ -606,7 +606,7 @@
   <string name="search_poi_filter">Фильтр</string>
   <string name="menu_mute_off">Звук</string>
   <string name="menu_mute_on">Без звука</string>
-  <string name="voice_provider_descr">Выберите голос для маршрутизации (код языка согласно ISO 639-1)</string>
+  <string name="voice_provider_descr">Выберите голосовые инструкции для навигации</string>
   <string name="voice_provider">Голосовые данные</string>
   <string name="voice_data_initializing">Инициализируются голосовые данные…</string>
   <string name="voice_data_not_supported">Голосовые данные не поддерживаются текущей версией приложения</string>
@@ -752,11 +752,11 @@
   <string name="settings">Настройки</string>
   <string name="save_current_track_descr">Сохранить текущий трек на SD</string>
   <string name="save_current_track">Сохранить текущий трек GPX</string>
-  <string name="save_track_interval_descr">Указать интервал сохранения точек трека</string>
-  <string name="save_track_interval">Интервал сохранения</string>
+  <string name="save_track_interval_descr">Выберите интервал журналирования для записи трека во время навигации</string>
+  <string name="save_track_interval">Интервал журналирования во время навигации</string>
   
   <string name="save_track_to_gpx_descrp">Сохранять трек в формате GPX в папку track</string>
-  <string name="save_track_to_gpx">Записывать трек в файл GPX</string>
+  <string name="save_track_to_gpx">Журналирование трека в файл GPX во время навигации</string>
   <string name="update_tile">Обновить карту</string>
   <string name="reload_tile">Обновить часть карты</string>
   <string name="user_name_descr">Указать имя пользователя для работы с OSM</string>
@@ -1247,7 +1247,7 @@
 	\n\t* Верхняя левая кнопка на карте заменяет кнопку меню
     </string>
     <string name="monitoring_settings">Запись поездок</string>
-    <string name="monitoring_settings_descr">Настройка записи поездок</string>
+    <string name="monitoring_settings_descr">Настройка записи ваших поездок</string>
     <string name="osmand_monitoring_plugin_description">Включение трекинга и навигации во спящем режиме (экран выключен) с помощью периодического пробуждения устройства GPS. Настройка записи поездок в локальные файлы GPX или в Интернете с помощью веб-службы.</string>
     <string name="osmand_monitoring_plugin_name">Службы мониторинга</string>
     <string name="choose_osmand_theme_descr">Выбор темы приложения</string>
@@ -1378,7 +1378,7 @@
     <string name="map_widget_fps_info">Отладочная информация FPS</string>
 	<string name="about_settings">О программе</string>
     <string name="about_settings_descr">Информация о версии, участниках проекта</string>
-    <string name="tips_and_tricks">Советы</string>
+    <string name="tips_and_tricks">Справка</string>
     <string name="local_index_tile_data_zooms">Загружено данных по масштабам: %1$s</string>
     <string name="local_index_tile_data_minzoom">Минимальное увеличение: %1$s</string>
     <string name="local_index_tile_data_name">Данные о тайлах: %1$s</string>
@@ -1659,7 +1659,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_create_groups_confirm">Чтобы создавать группы Вы должны быть зарегистрированным пользователем OsMo.</string>
     <string name="osmo_sign_in">Войти</string>
     <string name="osmo_regenerate_login_ids_confirm">Вы уверены в необходимости регенерации персональных ID? Все устройства, соединённые с Вами, больше не смогут отследить Вас.</string>
-    <string name="osmo_regenerate_login_ids">пересоздать ID пользователя</string>
+    <string name="osmo_regenerate_login_ids">Регенерировать ID пользователя</string>
     <string name="osmo_use_server_name">Зарегистрированное имя</string>
     <string name="osmo_connect_to_my_nickname">Мой ник</string>
     <string name="osmo_user_name">Пользователь</string>
@@ -1667,7 +1667,7 @@ OsmAnd - открытый источник и активно развается.
 	
     <string name="osmo_credentials_not_valid">Ваши учётные данные OsMo не верны.</string>
     <string name="osmo_follow">Следить</string>
-    <string name="osmo_edit_device">Изменить настройки пользователя</string>
+    <string name="osmo_edit_device">Изменить пользовательские настройки</string>
     <string name="gpx_file_is_empty">Трек GPX пуст</string>
     <string name="selected_track">Выбранные треки</string>
     <string name="my_tracks">Все треки</string>
@@ -1813,4 +1813,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="record_plugin_name">Запись ваших поездок</string>
     <string name="int_hour">час</string>
     <string name="duration">Продолжительность</string>
-    </resources>
+    <string name="save_track_to_gpx_globally">Журналирование трека в файл GPX</string>
+	<string name="save_track_interval_globally">Интервал журналирования</string>
+	<string name="save_track_to_gpx_globally_descr">Общие положения журналирования в файл GPX могут быть включены или выключены с помощью виджета записи GPX на экране карты</string>
+	</resources>
