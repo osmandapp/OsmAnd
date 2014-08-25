@@ -637,7 +637,7 @@
   <string name="settings">Paramètres</string>
   <string name="save_current_track_descr">Enregistrer la trace actuelle sur la carte SD</string>
   <string name="save_current_track">Enregistrer la trace GPX</string>
-  <string name="save_track_interval_descr">Choisir l\'intervalle d\'enregistrement pour la trace</string>
+  <string name="save_track_interval_descr">Choisir l\'intervalle d\'enregistrement de la trace pendant la navigation</string>
   <string name="save_track_interval">Intervalle d\'enregistrement pendant la navigation</string>
   <string name="save_track_to_gpx_descrp">Les traces seront enregistrées et groupées par jour dans le répertoire des traces</string>
   <string name="save_track_to_gpx">Enregistrer la trace dans un fichier GPX</string>
