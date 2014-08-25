@@ -2095,4 +2095,5 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="way_alarms">도로장애</string>
     <string name="speak_favorites">즐겨찾기를 알리다</string>
     <string name="speak_poi">POI 알리기</string>
-    </resources>
+    <string name="rendering_attr_publicTransportMode_name">대중 교통 모드</string>
+	</resources>
