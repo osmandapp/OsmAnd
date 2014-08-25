@@ -300,7 +300,7 @@
 		\n\nUna caja marcador puede ser ocultada con una pulsación larga sobre ella.
 	</string>
   <string name="tip_initial">Ayuda</string>
-  <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nUna introducción básica, consejos de uso y ayuda avanzada están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
+  <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nUna introducción básica, consejos de uso y la ayuda avanzada están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
   <string name="next_button">Siguiente</string>
   <string name="previous_button">Anterior</string>
   <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
@@ -625,9 +625,9 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="settings">Opciones</string>
   <string name="save_current_track_descr">Guarda la traza actual en la SD ahora</string>
   <string name="save_current_track">Guardar traza actual</string>
-  <string name="save_track_interval">Intervalo de guardado</string>
+  <string name="save_track_interval">Intervalo de guardado durante navegación</string>
   <string name="save_track_interval_descr">Elige el intervalo de posicionamiento para trazas</string>
-  <string name="save_track_to_gpx_descrp">Las trazas se almacenarán en el directorio de trazas agrupadas por días</string>
+  <string name="save_track_to_gpx_descrp">Las trazas se almacenarán en el directorio de trazas durante la navegación</string>
   <string name="save_track_to_gpx">Guardar traza en fichero GPX</string>
   <string name="update_tile">Actualizar mapa</string>
   <string name="reload_tile">Recargar tesela</string>
@@ -1864,4 +1864,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="record_plugin_name">Grabar tus viajes</string>
     <string name="record_plugin_description">Guardar tus trazas tocando un botón en la pantalla del mapa. Mostrar las opciones para grabar tus viajes a archivos GPX locales o usando un servicio web en línea.</string>
     <string name="rendering_attr_publicTransportMode_name">Modo de transporte público</string>
+	<string name="save_track_to_gpx_globally">Guardar traza en fichero GPX</string>
+	<string name="save_track_interval_globally">Intervalo de guardado</string>
 	</resources>
