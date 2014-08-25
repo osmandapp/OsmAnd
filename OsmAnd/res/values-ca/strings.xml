@@ -164,7 +164,7 @@
 <string name="edit_filter_create_message">S\'ha creat el filtre {0}</string>
 <string name="default_buttons_selectall">Selecciona-ho tot</string>
 <string name="email">correu electrònic</string>
-<string name="index_settings_descr">Baixeu i gestioneu mapes en desconnexió emmagatzemats al vostre dispositiu</string>
+<string name="index_settings_descr">Baixeu i gestioneu mapes fora de línia emmagatzemats al vostre dispositiu</string>
 <string name="osmand_extra_settings_description">Mostra els paràmetres per a una configuració avançada del mapa (per exemple augmentant-ne els detalls) i alguns d\'específics del dispositiu.</string>
 <string name="vector_maps_may_display_faster_on_some_devices">És probable que es mostrin els mapes de vectors més de pressa. Això pot no funcionar en alguns dispositius.</string>
 <string name="debugging_and_development">Desenvolupament de l\'OsmAnd</string>
