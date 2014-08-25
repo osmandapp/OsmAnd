@@ -199,7 +199,6 @@ public class MainMenuActivity extends Activity {
 			Intent intent = getIntent();
 			if(intent.getExtras() != null && intent.getExtras().containsKey(APP_EXIT_KEY)){
 				getMyApplication().closeApplication(this);
-				finish();
 				return;
 			}
 		}
