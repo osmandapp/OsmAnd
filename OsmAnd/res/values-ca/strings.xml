@@ -340,7 +340,7 @@
 <string name="tip_initial">Suport</string>
 <string name="next_button">Endavant</string>
 <string name="previous_button">Enrere</string>
-<string name="unit_of_length_descr">Canvia les unitats de longitud i velocitat</string>
+<string name="unit_of_length_descr">Canvieu les unitats de longitud i velocitat</string>
 <string name="unit_of_length">Unitat de mesura</string>
 <string name="si_mi_foots">Milles/peus</string>
 <string name="si_mi_yard">Milles/iardes</string>
@@ -506,7 +506,7 @@
 <string name="data_settings">Dades</string>
 <string name="close">Tanca</string>
 <string name="update_existing">Reemplaçar</string>
-<string name="follow">Seguir</string>
+<string name="follow">Segueix</string>
 <string name="address">Adreça</string>
 <string name="search_online_address">Internet</string>
 <string name="searching">Cercant…</string>
@@ -573,9 +573,9 @@
 <string name="rotate_map_to_bearing">Orientació del mapa</string>
 <string name="import_fav">Importa</string>
 <string name="any_poi">Algun</string>
-<string name="layer_osm_bugs">Errors d\'OSM</string>
+<string name="layer_osm_bugs">Errors d\'OSM (en línia)</string>
 <string name="layer_map">Origen del mapa…</string>
-<string name="layer_poi">Punts D\'Interès…</string>
+<string name="layer_poi">Punts d\'interès…</string>
 <string name="context_menu_item_search_poi">Cerca PDI</string>
 <string name="int_min">min.</string>
 <string name="background_router_service">Executa en segon pla</string>
@@ -848,7 +848,7 @@
 		\n\t\'En la direcció del moviment\' - El mapa s\'alinearà contínuament en la direcció que avanceu.
 		\n\t\'Amb la brúixola\' - El mapa s\'alinearà contínuament amb la brúixola del dispositiu.
 	</string>
-<string name="tts_language_not_supported">La llengua seleccionada no està suportada per el motor de TAV (text a veu) d\'Android instal·lat. Voleu anar al Market per veure altres motors TAV? Altrament s\'usarà la llengua del TAV per defecte.</string>
+<string name="tts_language_not_supported">La llengua seleccionada no està suportada per el motor de TTS (text a veu) d\'Android instal·lat. Voleu anar al Market per veure altres motors TTS? Altrament s\'usarà la llengua del TTS per defecte.</string>
 <string name="tip_map_switch_t_v2">La font del mapa i les capes mostrades es poden canviar via «Menú» -&gt; «Capes del mapa».
 \n\nSota «Font del mapa…» podeu triar entre usar els mapes vectorials (per defecte, també necessaris a la navegació sense connexió) o les fonts de tessel·la predeterminades (en connexió o prèviament descarregades) (per això cal activar el connector «Mapes en línia» a «Opcions» → «Connectors»), o mapes creats manualment usant per exemple OsmAndCreator en el vostre PC.
 \n\n\'OsmAnd també suporta fonts personalitzades.
@@ -1719,7 +1719,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_control">Accés ràpid a OsMo</string>
     <string name="local_index_mi_export">Exportar</string>
 	<string name="import_file_favourites">Guardar com arxiu GPX o posar-lo als favorits?</string>
-	<string name="import_save">Guardar</string>
+	<string name="import_save">Desa</string>
 	<string name="osmo_follow">Segueix</string>
     <string name="osmo_sign_in">Inicia una sessió</string>
     <string name="osmo_create_groups_confirm">Per poder crear grups cal ser un usuari registrat d\'OsMo.</string>
