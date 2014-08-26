@@ -850,7 +850,12 @@ public class OsmandApplication extends Application {
 		final Intent serviceIntent = new Intent(this, NavigationService.class);
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
 		if (getNavigationService() == null) {
-			getSettings().SERVICE_OFF_INTERVAL.set(0);
+			if (intent == NavigationService.USED_BY_GPX) {
+				//Use pre-selected SERVICE_OFF_INTERVAL for global GPX recording
+				getSettings().SERVICE_OFF_INTERVAL.set();
+			} else {
+				getSettings().SERVICE_OFF_INTERVAL.set(0);
+			}
 			startService(serviceIntent);
 		} else {
 			getNavigationService().addUsageIntent(intent);
