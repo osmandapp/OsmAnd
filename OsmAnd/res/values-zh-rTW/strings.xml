@@ -267,7 +267,7 @@
 	<string name="show_ruler_level">顯示比例尺</string>	
 	<string name="info_button">資訊</string>
 	<string name="back_to_location">回到目前位置</string>
-	<string name="help">小幫手</string>
+	<string name="help">幫助</string>
 	<string name="show_details">顯示細節</string>
 	<string name="accessibility_extensions_descr">給舊 Android 版本的無障礙擴展</string>
 	<string name="accessibility_extensions">無障礙擴展</string>
@@ -595,7 +595,7 @@
 	</string>
 	<string name="tip_initial">幫助</string>
 	<string name="tip_initial_t">"OsmAnd 是一個導航應用程式，含有很多的功能。
-\n\n一些基本功能介紹與使用提示和進階的幫助，可透過地圖主畫面\'選單\' → \'幫助\'連結。 "</string>
+\n\n一些基本功能介紹與使用提示和進階的幫助，從地圖畫面可透過\'選單\' → \'幫助\'連結。 "</string>
 	<string name="next_button">下一頁</string>
 	<string name="previous_button">上一頁</string>
 	<string name="unit_of_length_descr">更改長度與速度單位</string>
