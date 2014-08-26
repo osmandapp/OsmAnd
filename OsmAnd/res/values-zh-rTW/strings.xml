@@ -1821,4 +1821,5 @@
     <string name="rendering_attr_publicTransportMode_name">大眾運輸模式</string>
 	<string name="save_track_to_gpx_globally">記錄軌跡成 GPX 檔案</string>
 	<string name="save_track_interval_globally">記錄間隔</string>
+	<string name="save_track_to_gpx_globally_descr">通常位置記錄到 GPX 檔案，在地圖畫面上使用 GPX 記錄小工具，可以開啟或關閉</string>
 	</resources>
