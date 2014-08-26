@@ -396,37 +396,37 @@ public class GeoIntentActivity extends OsmandListActivity {
                 return null;
             }
         }
-        if ("geo".equals(scheme) || "osmand.geo".equals(scheme))
-        {
-            //geo:
+        if ("geo".equals(scheme) || "osmand.geo".equals(scheme)) {
             final String schemeSpecific = data.getSchemeSpecificPart();
-            if (schemeSpecific == null)
-            {
-                return null;
+            if (schemeSpecific == null) {
+            	return null;
             }
-            if (schemeSpecific.startsWith("0,0?q="))
-            {
+            if (schemeSpecific.startsWith("0,0?")) {
+            	//the data strings handled in that if-branch:
                 //geo:0,0?q=34.99,-106.61(Treasure)
+            	//geo:0,0?z=11&q=34.99,-106.61(Treasure)
                 //geo:0,0?q=1600+Amphitheatre+Parkway%2C+CA
-                final String query = schemeSpecific.substring("0,0?q=".length());
-
-                final Matcher matcher = Pattern.compile("([\\-0-9.]+),([\\-0-9.]+)(?:,[\\-0-9.]+)?\\((.+?)\\)").matcher(query);
+            	//geo:0,0?z=11&q=1600+Amphitheatre+Parkway%2C+CA
+                final String query = schemeSpecific.substring("0,0?".length());
+                final Matcher matcher = Pattern.compile("(z=[0-9]{1,2})?&?q=([\\-0-9\\.]+)?,([\\-0-9\\.]+)?\\s*\\((.+?)\\)").matcher(query);
                 if (matcher.matches())
                 {
-                    final double lat = Double.valueOf(matcher.group(1));
-                    final double lon = Double.valueOf(matcher.group(2));
-                    final String name = matcher.group(3);
-
-                    return new GeoPointSearch(lat, lon, name);
-                }
-                else
-                {
+                	String zg = matcher.group(1);
+                	String zn = matcher.group(4);
+                	final int zoom = zg != null ? Integer.parseInt(zg.substring("z=".length())) : -1;
+                	final String name = zn != null? Uri.decode(zn) : null;
+                    final double lat = Double.parseDouble(matcher.group(2));
+                    final double lon = Double.parseDouble(matcher.group(3));
+                    if (zoom != -1) {
+                    	return new GeoPointSearch(lat, lon, name, zoom);
+                    } else {
+                    	return new GeoPointSearch(lat, lon, name);	
+                    }                    
+                } else {
                     //we suppose it's a search
                     return new GeoAddressSearch(query);
                 }
-            }
-            else
-            {
+            } else {
                 //geo:47.6,-122.3
                 //geo:47.6,-122.3?z=11
                 //allow for http://tools.ietf.org/html/rfc5870 (geo uri) , just ignore everything after ';'
@@ -481,6 +481,9 @@ public class GeoIntentActivity extends OsmandListActivity {
 			
 			elements = new ArrayList<String>();
 			for (int i = 0;  i<s.length; i++) {
+				if (s[i].isEmpty()) {
+					continue;
+				}
 				elements.add(s[i].replace('+', ' ').trim());
 			}
 		}
