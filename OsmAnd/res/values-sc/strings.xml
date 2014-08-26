@@ -525,9 +525,9 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="map_widget_day_night">Mapa die/note</string>
 	<string name="keep_navigation_service">Mantènne</string>
 	<string name="stop_navigation_service">Firma</string>
-	<string name="enable_sleep_mode">Abìlita sa modalidade \"a reposu\"</string>
+	<string name="enable_sleep_mode">Abìlita sa modalidade GPS \"a reposu\"</string>
 	<string name="gps_wake_up_timer">Intervallu ischidada GPS</string>
-	<string name="sleep_mode_stop_dialog">Mantènnere su GPS allutu?</string>
+	<string name="sleep_mode_stop_dialog">Firmare sa modalidade GPS \"a reposu\"?</string>
 	<string name="map_preferred_locale_descr">Limba preferida pro sas etichettas de sa mapa (si no est disponìbile at a colare a s\'inglesu o sos nùmenes locales)</string>
     <string name="map_preferred_locale">Limba prefèrrida de sa mapa</string>
     <string name="local_map_names">Nùmenes locales</string>
