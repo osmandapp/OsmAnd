@@ -1363,9 +1363,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="settings">Налады</string>
 	<string name="save_current_track_descr">Захаваць бягучы сьлед на SD зараз</string>
 	<string name="save_current_track">Захаваць бягучы GPX сьлед</string>
-	<string name="save_track_interval">Інтэрвал захоўванья</string>
-	<string name="save_track_interval_descr">Пазначыць інтэрвал захавання кропак сьледу</string>
-	<string name="save_track_to_gpx_descrp">Сьляды будуць захаваныя ў каталог track згрупаванымі па днях</string>
+	<string name="save_track_interval">Інтэрвал захоўванья падчас навігацыі</string>
+	<string name="save_track_interval_descr">Пазначыць інтэрвал захоўваньня кропак сьледу падчас навігацыі</string>
+	<string name="save_track_to_gpx_descrp">Сьляды будуць захаваныя ў каталог track падчас навігацыі</string>
 	<string name="save_track_to_gpx">Запісваць сьлед у GPX файл</string>
 	<string name="update_tile">Абнавіць мапу</string>
 	<string name="reload_tile">Абнавіць частку мапы</string>
@@ -1950,4 +1950,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="duration">Працягласьць</string>
     <string name="distance">Адлегласьць</string>
     <string name="rendering_attr_publicTransportMode_name">Рэжым грамадзкага транспарту</string>
+	<string name="save_track_to_gpx_globally">Пісаць сьлед у GPX-файл</string>
+	<string name="save_track_interval_globally">Інтэрвал запісу</string>
+	<string name="save_track_to_gpx_globally_descr">Агульны запіс месцазнаходжаньня ў GPX файл можа быць уключаны або выключаны з дапамогай кнопкі запісу GPX на экране з мапай</string>
 	</resources>
