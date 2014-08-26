@@ -1885,14 +1885,14 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_attr_showSurfaces_name">Адлюстроўваць тып пакрыцьця</string>
     <string name="rendering_attr_showCycleRoutes_name">Паказаць веламаршруты</string>
     <string name="stop_navigation_service">Спыніць</string>
-	<string name="enable_sleep_mode">Уключыць спячы рэжым</string>
+	<string name="enable_sleep_mode">Уключыць рэжым сну GPS</string>
 	<string name="gps_wake_up_timer">Iнтэрвал абуджэньня GPS</string>
 	<string name="lang_sw">суахілі</string>
     <string name="lang_he">іўрыт</string>
     <string name="gpx_monitoring_start">Пачаць запіс GPX</string>
 	<string name="gpx_start_new_segment">Пачаць новы адрэзак</string>
     <string name="lang_fa">пэрсійдзкая</string>
-	<string name="sleep_mode_stop_dialog">Пакінуць GPS уключаным?</string>
+	<string name="sleep_mode_stop_dialog">Спыніць рэжым сну GPS?</string>
 	<string name="map_preferred_locale_descr">Пажаданая мова надпісаў на мапе (калі не даступна, то будуць выкарыстны ангельскія ці мясцовыя назвы)</string>
     <string name="map_preferred_locale">Пажаданая мова мапы</string>
     <string name="local_map_names">Мясцовыя назвы</string>
