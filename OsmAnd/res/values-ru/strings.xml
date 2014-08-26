@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
+<resources><string name="srtm_plugin_description">Плагин позволяет загружать контурные линии и затемнение высот для использования оффлайн (Настройки -&gt; Управление файлами карт-&gt; Загрузить).</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -111,7 +111,7 @@
   <string name="unknown_location">Местоположение ещё не определено</string>
   <string name="modify_transparency">Изменить прозрачность (0 - прозрачный, 255 - непрозрачный)</string>
   <string name="confirm_interrupt_download">Вы хотите прервать загрузку файла?</string>
-  <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из Интернета с помощью пункта меню Настройки → Данные. После загрузки этих карт Вы сможете осуществлять поиск адреса, POI и остановок общественного транспорта.</string>
+  <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из Интернета с помощью пункта меню \"Настройки\" → \"Управление файлами карт\". После загрузки Вы сможете просматривать карты, осуществлять поиск адресов, POI и остановок общественного транспорта.</string>
   <string name="basemap_was_selected_to_download">Базовая карта необходима для корректной работы приложения и автоматически была выбрана для загрузки.</string>
   <string name="select_index_file_to_download">Ничего не было найдено. Вы можете создать карту самостоятельно (смотрите на osmand.net).</string>
   <string name="local_indexes_cat_tile">Онлайн карты (растровые)</string>
@@ -156,7 +156,7 @@
   <string name="native_rendering">Быстрый рендеринг</string>
   
   <string name="test_voice_prompts">Протестировать голосовые подсказки</string>
-  <string name="switch_to_raster_map_to_see">Для текущей позиции карта отсутствует. Вы можете загрузить карту с помощью меню Настройки-&gt;Данные или переключиться на использование онлайн карт.</string>
+  <string name="switch_to_raster_map_to_see">Для текущей позиции карта отсутствует. Вы можете загрузить карту с помощью меню \"Настройки\" -&gt; \"Управление файлами карт\" или переключиться на использование онлайн карт (для этого необходимо включить плагин онлайн карты).</string>
   <string name="tip_recent_changes_0_7_2_t">Изменения в 0.7.2:
 		\n\t- Быстрый рендеринг для всех устройств
 		\n\t- Offline POI редактирование
@@ -755,7 +755,7 @@
   <string name="save_track_interval_descr">Выберите интервал журналирования для записи трека во время навигации</string>
   <string name="save_track_interval">Интервал журналирования во время навигации</string>
   
-  <string name="save_track_to_gpx_descrp">Сохранять трек в формате GPX в папку track</string>
+  <string name="save_track_to_gpx_descrp">Сохранять треки в папку track во время навигации</string>
   <string name="save_track_to_gpx">Журналирование трека в файл GPX во время навигации</string>
   <string name="update_tile">Обновить карту</string>
   <string name="reload_tile">Обновить часть карты</string>
@@ -1783,7 +1783,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="rendering_attr_osmcTraces_description">Визуализация пути согласно трассам OSMC</string>
     
 	<string name="arrival_distance_factor_early">Пораньше</string>
-    <string name="arrival_distance_factor_normally">Обычно</string>
+    <string name="arrival_distance_factor_normally">Как обычно</string>
     <string name="arrival_distance_factor_late">Попозже</string>
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
     <string name="osmo_group_information_desc">" - Все созданные группы являются открытыми! Если вы хотите сохранить анонимность, подключите устройства непосредственно через ID трекера.\n - В группе могут состоять до 16 человек.\n - Если в группе не будет активным хотя бы 1 человек в течении 2-х недель группа будет удалена.\n - Вы можете ограничить вход в группу, только по приглашениям, но для управления группой вы должны войти в консоль администратора.\n - Если вам нужно создать группу, но с другими условиями, пожалуйста, свяжитесь со службой поддержки http://osmo.mobi</string>
@@ -1809,7 +1809,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="flat_list_waypoints">Все</string>
     <string name="distance">Расстояние</string>
     <string name="gpx_info_subtracks">"Подтрек: %1$s "</string>
-	<string name="route_descr_destination"/>
+	<string name="route_descr_destination">" "</string>
     <string name="record_plugin_name">Запись ваших поездок</string>
     <string name="int_hour">час</string>
     <string name="duration">Продолжительность</string>
@@ -1817,4 +1817,5 @@ OsmAnd - открытый источник и активно развается.
 	<string name="save_track_interval_globally">Интервал журналирования</string>
 	<string name="save_track_to_gpx_globally_descr">Общие положения журналирования в файл GPX могут быть включены или выключены с помощью виджета записи GPX на экране карты</string>
 	<string name="record_plugin_description">Сохранение ваших треков с помощью кнопки на экране с картой. Отображение настроек записи треков в локальные GPX-файлы или онлайн, в web-сервис.</string>
-    </resources>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> карты с изображениями</string>
+	</resources>
