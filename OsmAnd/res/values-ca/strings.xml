@@ -1883,4 +1883,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="duration">Durada</string>
     <string name="distance">Distància</string>
     <string name="rendering_attr_publicTransportMode_name">Mode transport públic</string>
+	<string name="save_track_to_gpx_globally">Desa la traça a un arxiu GPX</string>
+	<string name="save_track_to_gpx_globally_descr">L\'enregistrament de la posició en un arxiu GPX es pot activar o desactivar utilitzant el giny associat, a la pantalla del mapa</string>
+	<string name="save_track_interval_globally">Interval d\'enregistrament</string>
 	</resources>
