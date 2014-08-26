@@ -714,7 +714,7 @@
 <string name="saving_gpx_tracks">S\'estan desant els seguiments GPX a la SD…</string>
 <string name="download_indexes">Baixar dades fora de linía</string>
 <string name="osm_settings">Edició d\'OSM</string>
-<string name="save_track_interval">Interval de mostreig</string>
+<string name="save_track_interval">Interval d\'enregistrament durant la navegació</string>
 <string name="additional_settings">Preferències addicionals</string>
 <string name="data_settings_descr">Especifiqueu la llengua, baixeu/recarregueu dades</string>
 <string name="use_online_routing">Usa navegació en linía</string>
@@ -919,7 +919,7 @@
 	<string name="gpx_files_not_found">No s\'han trobat fitxers GPX a la carpeta /tracks</string>
 	<string name="rotate_map_to_bearing_descr">Seleccioneu l\'alineació de la pantalla del mapa</string>
 	<string name="background_service_int">Interval de despertament</string>
-	<string name="voice_provider_descr">Seleccioneu el guiatge per veu per la navegació</string>
+	<string name="voice_provider_descr">Trieu la llengua en el guiatge per la navegació</string>
 	<string name="voice_provider">Guiatge per veu</string>
 	
 	<string name="route_tr">Gireu a la dreta i continueu</string>
@@ -959,7 +959,7 @@
 	<string name="download_indexes_descr">Baixeu o actualitzeu dades des d\'Internet pel seu ús fora de línia</string>
 	<string name="use_online_routing_descr">Utilitzeu Internet per calcular la ruta</string>
 	<string name="save_current_track">Desa la traça GPX actual</string>
-	<string name="save_track_to_gpx_descrp">Les traces es desaran al directori de traces agrupades per dies</string>
+	<string name="save_track_to_gpx_descrp">Les traces es desaran al directori de traces durant la navegació</string>
 	<string name="reload_tile">Torna a carregar la tessel·la</string>
 	<string name="mark_point">Objectiu</string>
 	<string name="show_osm_bugs_descr">Us mostra OpenStreetBugs al mapa</string>
@@ -1128,7 +1128,7 @@
 	<string name="poi_namefinder_query_empty">Introduïu una consulta de cerca per trobar el PDI</string>
 	<string name="show_transport_over_map">Mostra les parades del transport</string>
 	<string name="error_io_error">S\'ha produït un error E/S</string>
-	<string name="save_track_to_gpx">Desa la traça en un fitxer GPX</string>
+	<string name="save_track_to_gpx">Desa la traça en un fitxer GPX durant la navegació</string>
 	<string name="use_english_names_descr">Escolliu entre noms nadius i noms anglesos</string>
 	<string name="srtm_plugin_description">Us facilita baixar relleu i corbes de nivell als mapes fora de línia («Paràmetres» → «Gestió d\'arxius de mapes» → «Baixa» → Selecció del tipus de mapa desitjat).</string>
     <string name="rendering_attr_showRoadMaps_description">Indiqueu quan mostrar mapes de només carreteres:</string>
@@ -1278,7 +1278,7 @@
     <string name="av_def_action_choose">Selecciona sota demanda</string>
     <string name="background_service_provider">Proveïdor de la ubicació</string>
 	<string name="converting_names">S\'estan convertint els noms nadius / en anglès…</string>
-	<string name="save_track_interval_descr">Indiqueu l\'interval d\'enregistrament de traces</string>
+	<string name="save_track_interval_descr">Trieu l\'interval d\'enregistrament de traces a desar durant la navegació</string>
 	<string name="incremental_search_street">Cerca de carrers progressiva</string>
 	<string name="incremental_search_building">Cerca progressiva d\'edificis</string>
 	<string name="Closest_Amenities">Instal·lacions més properes</string>
@@ -1834,9 +1834,9 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="lang_fa">Persa</string>
 	<string name="keep_navigation_service">Mantén</string>
 	<string name="stop_navigation_service">Atura</string>
-	<string name="enable_sleep_mode">Activa el mode en segon pla</string>
+	<string name="enable_sleep_mode">Activa el mode en segon pla del GPS</string>
 	<string name="gps_wake_up_timer">Interval d\'activació del GPS</string>
-	<string name="sleep_mode_stop_dialog">Voleu mantenir el GPS actiu?</string>
+	<string name="sleep_mode_stop_dialog">Voleu aturar el mode en segon pla del GPS?</string>
 	<string name="lang_al">Albanès</string>
 	<string name="lang_ar">Àrab</string>
 	<string name="lang_sc">Sard</string>
