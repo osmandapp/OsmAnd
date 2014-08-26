@@ -10,6 +10,8 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+	<string name="enable_sleep_mode">Enable GPS sleep mode</string>
+	<string name="sleep_mode_stop_dialog">Stop GPS sleep mode?</string>
 	<string name="save_track_to_gpx_globally">Log track to GPX file</string>
 	<string name="save_track_to_gpx_globally_descr">General position logging to a GPX file can be turned on or off using the GPX recording widget on the map screen</string>
 	<string name="save_current_track_descr">Save current track to SD now</string>
@@ -58,9 +60,7 @@
     <string name="rendering_attr_subwayMode_name">Subway mode</string>
  	<string name="keep_navigation_service">Keep</string>
 	<string name="stop_navigation_service">Stop</string>
-	<string name="enable_sleep_mode">Enable sleep mode</string>
 	<string name="gps_wake_up_timer">GPS wake up interval</string>
-	<string name="sleep_mode_stop_dialog">Keep GPS on?</string>
 	<string name="map_preferred_locale_descr">Preferred language for labels on the map (if it is not available will switch to English or to local names)</string>
     <string name="map_preferred_locale">Map preferred language</string>
     <string name="local_map_names">Local names</string>

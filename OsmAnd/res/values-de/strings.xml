@@ -24,7 +24,7 @@
 	<string name="pause_navigation">Navigation pausieren</string>
 	<string name="keep_navigation_service">Aktiv lassen</string>
 	<string name="stop_navigation_service">Anhalten</string>
-	<string name="enable_sleep_mode">Schlafmodus aktivieren</string>
+	<string name="enable_sleep_mode">GPS Schlafmodus aktivieren</string>
 	<string name="rendering_attr_alpineHiking_name">Alpinwanderung Ansicht</string>
 	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
 	<string name="rendering_attr_osmcTraces_name">Wandersymbole anzeigen</string>
@@ -1610,7 +1610,7 @@
 	<string name="local_map_names">Lokale Namen</string>
 	<string name="rendering_attr_subwayMode_name">U-Bahn-Modus</string>
 	<string name="gps_wake_up_timer">GPS Aufwach-Intervall</string>
-	<string name="sleep_mode_stop_dialog">GPS aktiv lassen?</string>
+	<string name="sleep_mode_stop_dialog">GPS Schlafmodus stoppen?</string>
 	<string name="forward">Weiter</string>
 	<string name="hide_all_waypoints">alle löschen</string>
 
