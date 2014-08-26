@@ -1631,7 +1631,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_session_not_available">Session non disponible, veuillez vérifier que \'Envoyer mes positions\' est activé.</string>
     <string name="osmo_enable_tracker">Envoyer mes positions</string>
     <string name="osmo_share_session">Partager la session</string>
-    <string name="osmo_session_id_share">URL de la session pour suivre l\'appareil (%1$s)</string>
+    <string name="osmo_session_id_share">L\'URL de la session pour suivre l\'appareil (%1$s)</string>
     <string name="osmo_tracker_id_share">Pour vous connecter à l\'appareil cible %2$s, veuillez spécifier l\'identifiant de suivi (%1$s)</string>
     <string name="osmo_track_interval">Fréquence d\'enregistrement</string>
 	<string name="osmo_track_interval_descr">Choisir la fréquence d\'envoi de la position</string>
@@ -1750,7 +1750,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="lang_he">hébreux</string>
     <string name="forward">Avancer</string>
     <string name="home">Home</string>
-    <string name="live_monitoring_m_descr">Envoyer le suivi à un service Web si l\'enregistrement GPX est activé.</string>
+    <string name="live_monitoring_m_descr">Envoyer la position courante à un service Web si l\'enregistrement GPX est activé.</string>
 	<string name="live_monitoring_m">Suivi en ligne (GPX requis)</string>
     <string name="live_monitoring_start">Démarrer le suivi en ligne</string>
 	<string name="live_monitoring_stop">Arrêter le suivi en ligne</string>
@@ -1811,13 +1811,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="speak_poi">Annoncer les points d\'intérêt</string>
     <string name="flat_list_waypoints">Tous</string>
     <string name="index_tours">Tours</string>
-    <string name="record_plugin_description">Enregistrer vos itinéraires. Monter les paramètres pour l\'enregistrement des itinéraires dans des fichiers GPX locaux ou en ligne avec un service Web.</string>
+    <string name="record_plugin_description">Enregistrer vos traces. Monter les paramètres pour l\'enregistrement des traces dans des fichiers GPX locaux ou en ligne avec un service Web.</string>
     <string name="record_plugin_name">Enregistrer vos itinéraires</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
     <string name="distance">Distance</string>
     <string name="rendering_attr_publicTransportMode_name">Mode transports publics</string>
 	<string name="save_track_to_gpx_globally">Enregistrer les traces dans un fichier GPX</string>
-	<string name="save_track_to_gpx_globally_descr">L\'enregistrement de la position dans un fichier GPX peut être allumer ou éteint depuis son gadget sur la vue carte.</string>
+	<string name="save_track_to_gpx_globally_descr">L\'enregistrement de la position dans un fichier GPX peut être activer ou désactiver depuis le gadget associé sur la vue carte.</string>
 	<string name="save_track_interval_globally">Intervalle d\'enregistrement</string>
 	</resources>
