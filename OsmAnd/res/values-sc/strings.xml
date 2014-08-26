@@ -1727,4 +1727,6 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="distance">Distantzia</string>
     <string name="rendering_attr_publicTransportMode_name">Modalidade trasportu pùblicu</string>
 	<string name="save_track_to_gpx_globally">Carriga sa rasta in unu documentu GPX</string>
+	<string name="save_track_interval_globally">Intervallu de registratzione</string>
+	<string name="save_track_to_gpx_globally_descr">Sa registratzione de sa positzione in unu documentu GPX podet èssere alluta o morta impreande su widged de registratzione GPX in s\'ischermu mapa</string>
 	</resources>
