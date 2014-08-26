@@ -308,10 +308,9 @@
 \n\tIl est disponible par un appui long au niveau du point sur la carte, suivi d\'un appui court sur la bulle apparue avec les coordonnées du point (un appui long sur la bulle la fait disparaître).
 \n\tIl est également disponible via \'Menu\' → \'Options du point…\', ou par un appui sur le bouton trackball (dans ces deux derniers cas, le point défini est le centre de la carte).
 </string>
-  <string name="tip_initial">Conseils et astuces</string>
-  <string name="tip_initial_t">OsmAnd est une application de navigation avec beaucoup de fonctionnalités.
-		\n\nPour une introduction générale, il y a quelques trucs et astuces disponibles via \'Menu\'→\'Conseils\' depuis l\'écran principal.
-	</string>
+  <string name="tip_initial">Aide</string>
+  <string name="tip_initial_t">"OsmAnd est une application de navigation avec beaucoup de fonctionnalités.
+\n\nPour une introduction générale, les astuces et l\'aide avancée sont disponibles via \'Menu\'→\'Aide\' depuis l\'écran principal. "</string>
   <string name="next_button">Suivant</string>
   <string name="previous_button">Précédent</string>
   <string name="unit_of_length_descr">Sélectionner les unités de longueur et de vitesse</string>
@@ -944,12 +943,11 @@
   <string name="show_cameras">Afficher les radars</string>
   <string name="show_traffic_warnings">Afficher les limitations de vitesse</string>
   <string name="avoid_toll_roads">Éviter les péages</string>
-  <string name="tip_recent_changes_0_8_2_t">Changements en 0.8.2 :
+  <string name="tip_recent_changes_0_8_2_t">"Changements en 0.8.2 :
 \n\t* Navigation améliorée
 \n\t* Gadgets de carte dynamiques
-\n\t* Configuration de la carte déplacée sur l\'écran
-\n\t* Bouton de verrouillage écran avec services d\'enregistrement de traces
-\n\t* Correction pour langues écrites de droite à gauche (Arabe, Hébreux, etc.)</string>
+\n\t* Configuration de la carte déplacée sur l\'écran principal\n\t* Bouton de verrouillage écran avec services d\'enregistrement de traces
+\n\t* Correction pour langues écrites de droite à gauche (Arabe, Hébreux, etc.) "</string>
   <string name="screen_is_locked">Déverrouiller l\'écran en appuyant sur le cadenas</string>
   <string name="map_widget_top_text">Nom de rue</string>
   <string name="map_widget_config">Configuration</string>
@@ -1740,9 +1738,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_auth_error">Erreur d\\\'autorisation OsMo : %1$s.\n Le service est momentanément inutilisable ou votre inscription a expiré.\n Voulez-vous procéder à une nouvelle inscription ?</string>
     <string name="keep_navigation_service">Garder</string>
 	<string name="stop_navigation_service">Stop</string>
-	<string name="enable_sleep_mode">Activer le mode veille</string>
+	<string name="enable_sleep_mode">Activer le mode veille du GPS</string>
 	<string name="gps_wake_up_timer">Intervalle de réveil du GPS</string>
-	<string name="sleep_mode_stop_dialog">Garder le GPS actif ?</string>
+	<string name="sleep_mode_stop_dialog">Arrêter le mode veille du GPS ?</string>
 	<string name="map_preferred_locale_descr">Langue préférée pour les étiquettes sur la carte (noms anglais ou locaux en cas d\\\'indisponibilité)</string>
     <string name="map_preferred_locale">Langue préférée pour la carte</string>
     <string name="local_map_names">Noms locaux</string>
@@ -1811,7 +1809,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="speak_poi">Annoncer les points d\'intérêt</string>
     <string name="flat_list_waypoints">Tous</string>
     <string name="index_tours">Tours</string>
-    <string name="record_plugin_description">Enregistrer vos traces. Monter les paramètres pour l\'enregistrement des traces dans des fichiers GPX locaux ou en ligne avec un service Web.</string>
+    <string name="record_plugin_description">Enregistrer vos traces en touchant le bouton de l\'écran principal. Monter les paramètres pour l\'enregistrement des traces dans des fichiers GPX locaux ou en ligne avec un service Web.</string>
     <string name="record_plugin_name">Enregistrer vos itinéraires</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
