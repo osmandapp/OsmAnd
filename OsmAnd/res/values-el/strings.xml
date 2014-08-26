@@ -654,9 +654,7 @@
 		\n\nΤο πλαίσιο μπορεί να κρυφτεί ξανά πατώντας παρατεταμένα πάνω του.
 	</string>
 	<string name="tip_initial">Βοήθεια</string>
-	<string name="tip_initial_t">Ο OsmAnd είναι μια εφαρμογή πλοήγησης με αρκετά χαρακτηριστικά.
-		\n\nΩς μια μικρή εισαγωγή, μερικές συμβουλές και κόλπα είναι συνδεδεμένα μέσω του \'Μενού\'→\'Συμβουλές\' στην οθόνη χάρτη
-	</string>
+	<string name="tip_initial_t">"Ο OsmAnd είναι μια εφαρμογή πλοήγησης με αρκετά χαρακτηριστικά.\n\nΜια βασική εισαγωγή, συμβουλές χρήσης, και προηγμένη βοήθεια είναι συνδεδεμένα μέσω του \'Μενού\'→\'Βοήθεια\' στην οθόνη χάρτη. "</string>
 	<string name="next_button">Επόμενο</string>
 	<string name="previous_button">Προηγούμενο</string>
 	<string name="unit_of_length_descr">Αλλαγή μονάδων μήκους και ταχύτητας</string>
@@ -833,7 +831,7 @@
 	<string name="search_poi_filter">Φιλτράρισμα</string>
 	<string name="menu_mute_off">Ήχος ανοικτός</string>
 	<string name="menu_mute_on">Ήχος κλειστός</string>
-	<string name="voice_provider_descr">Επιλέξτε φωνητική καθοδήγηση για την πλοήγηση (κωδικοί γλώσσας, δείτε το ISO 639-1)</string>
+	<string name="voice_provider_descr">Επιλέξτε φωνητική καθοδήγηση για την πλοήγηση</string>
 	<string name="voice_provider">Φωνητική καθοδήγηση</string>
 	<string name="voice_data_initializing">Αρχικοποίηση δεδομένων φωνής…</string>
 	<string name="voice_data_not_supported">Μη υποστηριζόμενη έκδοση των δεδομένων φωνής</string>
@@ -969,10 +967,10 @@
 	<string name="settings">Ρυθμίσεις</string>
 	<string name="save_current_track_descr">Αποθήκευση τρέχοντος ίχνους στην SD τώρα</string>
 	<string name="save_current_track">Αποθήκευση τρέχοντος ίχνους GPX</string>
-	<string name="save_track_interval">Διάστημα καταγραφής</string>
-	<string name="save_track_interval_descr">Επιλέξτε διάστημα τοποθέτησης για τα ίχνη</string>
-	<string name="save_track_to_gpx_descrp">Τα ίχνη θα αποθηκεύονται στον κατάλογο ιχνών ομαδοποιημένα κατά ημέρες</string>
-	<string name="save_track_to_gpx">Εγγραφή ίχνους σε αρχείο GPX</string>
+	<string name="save_track_interval">Διάστημα καταγραφής κατά την πλοήγηση</string>
+	<string name="save_track_interval_descr">Επιλέξτε διάστημα καταγραφής για την εγγραφή ιχνών κατά την πλοήγηση</string>
+	<string name="save_track_to_gpx_descrp">Τα ίχνη θα αποθηκεύονται στον κατάλογο ιχνών κατά την πλοήγηση</string>
+	<string name="save_track_to_gpx">Εγγραφή ίχνους σε αρχείο GPX κατά την πλοήγηση</string>
 	<string name="update_tile">Ενημέρωση χάρτη</string>
 	<string name="reload_tile">Ανανέωση πλακιδίου</string>
 	<string name="mark_point">Στόχος</string>
@@ -1359,7 +1357,7 @@
 	<string name="about_version">Εκδοχή :</string>
     <string name="about_settings">Περί</string>
     <string name="about_settings_descr">Πληροφορίες έκδοσης, άδειες, μέλη έργου</string>
-    <string name="tips_and_tricks">Συμβουλές</string>
+    <string name="tips_and_tricks">Βοήθεια</string>
     <string name="local_index_tile_data_expire">Λήξη (λεπτά): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Μέγιστη εστίαση: %1$s</string>
     <string name="local_index_tile_data_minzoom">Ελάχιστη εστίαση: %1$s</string>
@@ -1664,4 +1662,8 @@
     <string name="distance">Απόσταση</string>
     <string name="index_tours">Περιηγήσεις</string>
     <string name="waypoints">Σημεία διαδρομής</string>
-    </resources>
+    <string name="save_track_to_gpx_globally">Καταγραφή ίχνους σε αρχείο GPX</string>
+	<string name="save_track_to_gpx_globally_descr">Η γενική καταγραφή θέσης σε αρχείο GPX μπορεί να ενεργοποιηθεί και να απενεργοποιηθεί χρησιμοποιώντας το γραφικό στοιχείο GPX στην οθόνη χάρτη</string>
+	<string name="save_track_interval_globally">Διάστημα καταγραφής</string>
+	<string name="rendering_attr_publicTransportMode_name">Λειτουργία δημόσιων μεταφορών</string>
+	</resources>
