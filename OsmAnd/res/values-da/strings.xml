@@ -1978,5 +1978,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="rendering_attr_publicTransportMode_name">Kollektivtrafik tilstand</string>
 	<string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
 	<string name="save_track_interval_globally">Logningsinterval</string>
-	<string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til eller fra med GPX optagelse widget på kortskærmen</string>
+	<string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til/fra med \'GPX optagelse\' på hovedskærmen</string>
 	</resources>
