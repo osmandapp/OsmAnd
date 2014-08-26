@@ -24,7 +24,7 @@
 	<string name="pause_navigation">Navigation pausieren</string>
 	<string name="keep_navigation_service">Aktiv lassen</string>
 	<string name="stop_navigation_service">Anhalten</string>
-	<string name="enable_sleep_mode">GPS Schlafmodus aktivieren</string>
+	<string name="enable_sleep_mode">GPS-Schlafmodus aktivieren</string>
 	<string name="rendering_attr_alpineHiking_name">Alpinwanderung Ansicht</string>
 	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
 	<string name="rendering_attr_osmcTraces_name">Wandersymbole anzeigen</string>
@@ -1360,8 +1360,8 @@
 	<string name="map_widget_av_notes">Audio/Video-Notiz</string>
 	<string name="osmand_srtm_short_description_80_chars">OsmAnd-Plugin für Offline-Höhenlinien</string>
 	<string name="map_widget_distancemeasurement">Entfernungsmessung</string>
-	<string name="monitoring_settings">Aufzeichnungs-Dienste</string>
-	<string name="monitoring_settings_descr">Konfiguration der Aufzeichnungs-Dienste</string>
+	<string name="monitoring_settings">Strecken-Aufzeichnung</string>
+	<string name="monitoring_settings_descr">Konfiguration der Strecken-Aufzeichnung</string>
 	<string name="monitoring_control_start">GPX</string>
 	<string name="monitoring_control_stop">Stopp</string>
 	<string name="map_widget_audionotes">Audio-Notiz</string>
@@ -1610,7 +1610,7 @@
 	<string name="local_map_names">Lokale Namen</string>
 	<string name="rendering_attr_subwayMode_name">U-Bahn-Modus</string>
 	<string name="gps_wake_up_timer">GPS Aufwach-Intervall</string>
-	<string name="sleep_mode_stop_dialog">GPS Schlafmodus stoppen?</string>
+	<string name="sleep_mode_stop_dialog">GPS-Schlafmodus stoppen?</string>
 	<string name="forward">Weiter</string>
 	<string name="hide_all_waypoints">alle löschen</string>
 
@@ -1893,7 +1893,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_show_group_notifications_descr">Zeige Pop-up-Meldung, wenn eine Nutzer der Gruppe beitritt oder sie verlässt</string>
 	<string name="osmo_tracker_id_share">Um eine Verbindung zum Gerät %2$s herzustellen, bitte den Link %3$s anklicken oder die Tracker-ID (%1$s) angeben</string>
 	<string name="osmo_auth_error_short">Anmeldung fehlgeschlagen</string>
-	<string name="osmo_auth_error">Fehler bei der OsMo-Anmeldung: %1$s.\n Möglicherweise ist der Dienst nicht verfügbar oder deine Anmeldung ist abgelaufen.\n Fortsetzen mit einer neuen Registrierung?</string>
+	<string name="osmo_auth_error">Fehler bei der OsMo-Anmeldung: %1$s.\n Möglicherweise ist der Dienst nicht verfügbar oder Ihre Anmeldung ist abgelaufen.\n Fortsetzen mit einer neuen Registrierung?</string>
 	<string name="osmo_group_by_invite">Auf Einladung beitreten</string>
 	<string name="osmo_group_information_desc">" - Alle angelegten Gruppen sind öffentlich! Für eine anonyme Verbindung bitte direkt mittels Tracker-ID verbinden.\n - In einer Gruppe können sich bis zu 16 Mitglieder anmelden.\n - Bei Inaktivität oder nur einem einzigen Mitglied über 2 Wochen wird die Gruppe gelöscht.\n - Der Zugang zu einer Gruppe kann beschränkt werden: \"nur auf Einladung\". Zur Steuerung der Gruppe benötigt man Zugang zur Admin-Konsole.\n - Zum Erstellen einer Gruppe mit abweichenden Bedingungen bitte Kontakt aufnehmen unter http://osmo.mobi"</string>
 	<string name="osmo_group_information">Bitte vor dem Erstellen von Gruppen beachten!</string>
@@ -1953,7 +1953,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_specify_tracker_id">bitte ID eingeben</string>
     <string name="home">Ausgangsposition</string>
     <string name="rendering_attr_publicTransportMode_name">ÖPNV-Modus</string>
-	<string name="record_plugin_name">Zeichnen Sie Ihre Reise auf</string>
+	<string name="record_plugin_name">Zeichnen Sie Ihre Strecken auf</string>
     <string name="int_hour">h</string>
     <string name="duration">Dauer</string>
     <string name="distance">Distanz</string>
@@ -1964,4 +1964,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="way_alarms">Hindernisse</string>
     <string name="speak_favorites">Favoriten ansagen</string>
     <string name="speak_poi">POI ansagen</string>
+    <string name="record_plugin_description">Speichern Sie Ihre Tracks mit einem Klick. Zeigt die Einstellung, wie Strecken aufgezeichnet werden – in lokale GPX-Dateien oder online via Web-Service.</string>
+    <string name="route_descr_destination"/>
     </resources>
