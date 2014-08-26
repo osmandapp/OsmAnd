@@ -295,7 +295,7 @@ MB)をダウンロードしますか?</string>
 
      <string name="map_route_by_gpx">GPXを使ったルート</string>
      <string name="gpx_files_not_found">GPXファイルがtracksフォルダにありません</string>
-     <string name="layer_gpx_layer">GPXトラック…</string>
+     <string name="layer_gpx_layer">GPX経路…</string>
      <string name="error_reading_gpx">GPXデータ読み込みエラー</string>
 
      <string name="vector_data">オフラインベクターマップ</string>
@@ -500,7 +500,7 @@ POIの更新は利用できません</string>
      <string name="reading_indexes">索引を読み込み中…</string>
      <string name="previous_run_crashed">前回のアプリケーション実行はクラッシュしました。
 ログファイルは{0}にあります。ログファイルを添付して問題を報告してください。</string>
-     <string name="saving_gpx_tracks">GPXトラックをSDに保存中…</string>
+     <string name="saving_gpx_tracks">GPX経路をSDに保存中…</string>
      <string name="finished_task">終了</string>
  <string name="reload_indexes_descr">オフラインベクターマップと索引をSDカードからリロード</string>
  <string name="reload_indexes">オフラインデータをリロード</string>
@@ -525,11 +525,10 @@ POIの更新は利用できません</string>
  <string name="settings">設定</string>
  <string name="save_current_track_descr">今すぐ現在のトラックをSDに保存</string>
  <string name="save_current_track">現在のトラックを保存</string>
- <string name="save_track_interval_descr">トラックの位置取得間隔を選択</string>
- <string name="save_track_interval">トラック間隔</string>
+ <string name="save_track_interval_descr">ナビゲーション中の経路の記録間隔を選択</string>
+ <string name="save_track_interval">ナビゲーション中の経路記録間隔</string>
  
- <string name="save_track_to_gpx_descrp">トラックは日ごとにグループ化されたトラック用ディレクトリに
- 保存されます</string>
+ <string name="save_track_to_gpx_descrp">ナビゲーション中の経路はtracksディレクトリに保存されます</string>
  <string name="save_track_to_gpx">追跡ログをGPXに記録</string>
  <string name="update_tile">マップを更新</string>
  <string name="reload_tile">タイルをリロード</string>
@@ -841,7 +840,7 @@ POIの更新は利用できません</string>
     <string name="recording_photo_description">写真 %2$s of %1$s</string>
     <string name="av_def_action_picture">写真を撮影</string>
     <string name="recording_context_menu_precord">写真を撮影</string>
-    <string name="dropbox_plugin_description">Dropboxプラグインはあなたのトラックと音声/ビデオノートをあなたのDropboxアカウントと同期することを可能にします。</string>
+    <string name="dropbox_plugin_description">Dropboxプラグインはあなたの経路と音声/ビデオメモをあなたのDropboxアカウントと同期することを可能にします。</string>
     <string name="dropbox_plugin_name">Dropboxプラグイン</string>
     
     <string name="intermediate_points_change_order">順序を変更</string>
@@ -867,8 +866,8 @@ POIの更新は利用できません</string>
     <string name="recording_open_external_player">外部プレイヤーで開く</string>
     <string name="recording_delete_confirm">この記録を削除しますか？</string>
     <string name="recording_unavailable">利用できません</string>
-    <string name="recording_context_menu_arecord">音声ノートをとる</string>
-    <string name="recording_context_menu_vrecord">ビデオノートをとる</string>
+    <string name="recording_context_menu_arecord">音声メモをとる</string>
+    <string name="recording_context_menu_vrecord">ビデオメモをとる</string>
     <string name="layer_recordings">記録レイヤー</string>
     <string name="recording_can_not_be_played">記録されたファイルは再生できませんでした</string>
     <string name="recording_context_menu_delete">記録を削除</string>
@@ -877,7 +876,7 @@ POIの更新は利用できません</string>
     <string name="recording_default_name">記録中</string>
     <string name="av_control_stop">停止</string>
     <string name="av_control_start">開始</string>
-    <string name="map_widget_av_notes">音声/ビデオノート</string>
+    <string name="map_widget_av_notes">音声/ビデオメモ</string>
     <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>
     <string name="map_widget_distancemeasurement">距離の測定</string>
     <string name="map_online_data_descr">オンラインマップを使用(SDカードにダウンロードしたタイルのキャッシュを使用)</string>
@@ -1155,7 +1154,7 @@ POIの更新は利用できません</string>
 	<string name="accessibility_preferences_descr">アクセシビリティ関連の設定</string>
 	<string name="accessibility_preferences">アクセシビリティ</string>
 	<string name="use_fluorescent_overlays">蛍光色の重ね表示</string>
-	<string name="use_fluorescent_overlays_descr">トラックとルートを表示する際に、蛍光色を使用</string>
+	<string name="use_fluorescent_overlays_descr">経路とルートを表示する際に、蛍光色を使用</string>
 	<string name="offline_edition">オフライン編集</string>
 	<string name="offline_edition_descr">常にオフライン編集を使用する</string>
 	<string name="update_poi_does_not_change_indexes">アプリケーション内部POIの変更はローカルファイルに保存され、ダウンロードしたマップファイルには影響しません。</string>
@@ -1184,10 +1183,10 @@ POIの更新は利用できません</string>
 	<string name="av_camera_focus_macro">マクロ(近距離)フォーカスモード</string>
 	<string name="osmand_srtm_long_description_1000_chars">このプラグインはOsmAndオフラインマップ上に等高線を表示する機能を提供します。このグローバルデータ（北緯70°から南緯70°の間）はSRTM（スペースシャトル立体地形データ）とASTER（資源探査用将来型センサ）、NASAの地球観測システムである、テラ上のオンボードイメージング機器をベースにしたものです。
 ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム開発利用推進機構（J-spacesystems）の共同作業によるものです。</string>
-    <string name="audionotes_location_not_defined">ノートに関連付ける場所が未定義です。 指定された場所にメモをとるためには\"場所を利用 …\"を利用します</string>
-    <string name="map_widget_audionotes">音声ノート</string>
-    <string name="audionotes_plugin_description">旅行中に音声/ビデオノートをとる</string>
-    <string name="audionotes_plugin_name">音声/ビデオノート</string>
+    <string name="audionotes_location_not_defined">メモに関連付ける場所が未定義です。 指定された場所にメモをとるためには\"場所を利用…\"を利用します</string>
+    <string name="map_widget_audionotes">音声メモ</string>
+    <string name="audionotes_plugin_description">旅行中に音声/ビデオメモをとる</string>
+    <string name="audionotes_plugin_name">音声/ビデオメモ</string>
     <string name="index_srtm_parts">パート</string>
     <string name="index_srtm_ele">等高線</string>
     <string name="srtm_plugin_description">オフライン等高線や陰影起伏のダウンロードは簡単です。(\'設定\' → \'地図データ等管理\' → \'ダウンロード\' → 希望のマップタイプを選択)。</string>
@@ -1400,14 +1399,13 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 		\n\t* 陰影起伏パッケージを等高線プラグインために用意
 		\n\t* バグフィックス(次善ルート設定の最適化)
     </string>
-    <string name="tip_recent_changes_1_1_0_t">1.1.0での変更点:
-		\n\t* 距離計算プラグイン
-		\n\t* オーディオ/ビデオ ノートプラグイン
-		\n\t* 等高線プラグイン
-		\n\t* バグ修正
-		\n\t* 「ツーリングビュー」のマップスタイルオプションからの複数マップの詳細、新しい道路のスタイル、コントラスト表示、アルパインハイキング用オプション(SACスケール)
-		\n\t* GPS高度の測定値利用時のEGM96 geoidのオフセット補正
-    </string>
+    <string name="tip_recent_changes_1_1_0_t">"1.1.0での変更点:
+\n\t* 距離計算プラグイン
+\n\t* オーディオ/ビデオ メモプラグイン
+\n\t* 等高線プラグイン
+\n\t* バグ修正
+\n\t* 「ツーリングビュー」のマップスタイルオプションからの複数マップの詳細、新しい道路のスタイル、コントラスト表示、アルパインハイキング用オプション(SACスケール)
+\n\t* GPS高度の測定値利用時のEGM96 geoidのオフセット補正 "</string>
     <string name="tip_recent_changes_1_0_0_t">1.0.0での変更点:
 	\n\t* ルート設定の改善:最大250キロをより速く、より正確に
 	\n\t* 道路専用のマップを用意
@@ -1859,11 +1857,11 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="gpx_selection_current_track">記録中</string>
     <string name="gpx_selection_route_points">%1$s ↵\nルート地点 %2$s</string>
     <string name="gpx_selection_points">%1$s ↵\n地点</string>
-    <string name="gpx_selection_track">%1$s ↵\nトラック %2$s</string>
+    <string name="gpx_selection_track">%1$s ↵\n経路 %2$s</string>
     <string name="gpx_available_current_track">現在記録中トラック</string>
     <string name="gpx_file_is_empty">GPSトラックは空です</string>
-    <string name="selected_track">選択されたトラック</string>
-    <string name="my_tracks">全てのトラック</string>
+    <string name="selected_track">選択された経路</string>
+    <string name="my_tracks">全ての経路</string>
     <string name="my_favorites">お気に入り</string>
     <string name="my_data_Button">お気に入り</string>
     <string name="my_data_activity">お気に入り</string>
