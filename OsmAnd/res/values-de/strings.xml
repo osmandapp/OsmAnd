@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="save_track_to_gpx_globally">Aufzeichnung in GPX-Datei</string>
 	<string name="save_track_to_gpx_globally_descr">Generelle Positionsaufzeichnung kann man mit der Schaltfläche \'GPX-Aufnahme\' direkt auf dem Kartenbildschirm aktivieren oder deaktivieren</string>
@@ -591,7 +591,7 @@
 	<string name="context_menu_item_search">In der Nähe suchen</string>
 	<string name="save_route_dialog_title">Route als GPX-Track speichern</string>
 	<string name="route_successfully_saved_at">Route erfolgreich gespeichert als \'%1$s\'.</string>
-	<string name="filename_input">Dateiname:</string>
+	<string name="filename_input">"Dateiname: "</string>
 	<string name="file_with_name_already_exist">Datei mit gleichem Namen besteht bereits.</string>
 	<string name="default_buttons_save">Speichern</string>
 	<string name="menu_save_directions">Route speichern</string>
@@ -1451,7 +1451,7 @@
 	<string name="keep_intermediate_points">Zwischenziele behalten</string>
 	<string name="new_directions_point_dialog">Es sind bereits Zwischenziele gesetzt.</string>
 	<string name="context_menu_item_directions_to">Navigiere zu</string>
-	<string name="route_descr_map_location">Karte:</string>
+	<string name="route_descr_map_location">"Karte: "</string>
 	<string name="route_to">nach:</string>
 	<string name="route_via">über:</string>
 	<string name="route_from">von:</string>
@@ -1952,4 +1952,16 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="more">Mehr...</string>
     <string name="osmo_specify_tracker_id">bitte ID eingeben</string>
     <string name="home">Ausgangsposition</string>
+    <string name="rendering_attr_publicTransportMode_name">ÖPNV-Modus</string>
+	<string name="record_plugin_name">Zeichnen Sie Ihre Reise auf</string>
+    <string name="int_hour">h</string>
+    <string name="duration">Dauer</string>
+    <string name="distance">Distanz</string>
+    <string name="index_tours">Touren</string>
+    <string name="flat_list_waypoints">Alle</string>
+    <string name="waypoints">GPX-Wegpunkte</string>
+    <string name="targets">Ziele</string>
+    <string name="way_alarms">Hindernisse</string>
+    <string name="speak_favorites">Favoriten ansagen</string>
+    <string name="speak_poi">POI ansagen</string>
     </resources>
