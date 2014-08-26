@@ -11,7 +11,9 @@ public class City extends MapObject {
 	public enum CityType {
 		// that's tricky way to play with that numbers (to avoid including suburbs in city & vice verse)
 		// district special type and it is not registered as a city
-		CITY(10000), TOWN(5000), VILLAGE(1300), HAMLET(1000), SUBURB(400), DISTRICT(400), NEIGHBOURHOOD(300);
+		CITY(10000), TOWN(5000), VILLAGE(1300),
+		HAMLET(1000), SUBURB(400), DISTRICT(400), NEIGHBOURHOOD(300),
+		ISOLATED_DWELLING(150), LOCALITY(100);
 
 		private double radius;
 
