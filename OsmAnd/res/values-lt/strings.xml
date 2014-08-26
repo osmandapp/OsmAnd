@@ -506,7 +506,7 @@
 	</string>
   <string name="tip_initial">Pagalba</string>
   <string name="tip_initial_t">"OsmAnd yra daug funkcijų turinti navigacijos programa.
-\n\nInformacija pradiniam supažindinimui, patarimai ir pagalba gali būti peržiūrėti žemėlapio rodinyje pasirinkus \'Meniu\' → \'Patarimai\'. "</string>
+\n\nInformacija pradiniam supažindinimui, patarimai ir pagalba pasiekiami žemėlapio rodinyje pasirinkus \'Meniu\' → \'Patarimai\'. "</string>
   <string name="next_button">Kitas</string>
   <string name="previous_button">Ankstesnis</string>
   <string name="unit_of_length_descr">Pakeisti ilgio ir greičio matavimo vienetus</string>
@@ -1763,9 +1763,9 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="rendering_attr_showCycleRoutes_name">Rodyti dviračių maršrutus</string>
     <string name="keep_navigation_service">Išlaikyti</string>
 	<string name="stop_navigation_service">Stabdyti</string>
-	<string name="enable_sleep_mode">Įjungti miego režimą</string>
+	<string name="enable_sleep_mode">Įjungti GPS miego režimą</string>
 	<string name="gps_wake_up_timer">GPS prabudimo intervalas</string>
-	<string name="sleep_mode_stop_dialog">Palikti GPS įjungtą?</string>
+	<string name="sleep_mode_stop_dialog">Išjungti GPS miego režimą?</string>
 	<string name="map_preferred_locale_descr">Pageidaujama kalba užrašams ant žemėlapio (jei jos nėra, užrašai bus rodomi anglų arba vietine kalba)</string>
     <string name="map_preferred_locale">Pageidaujama žemėlapio kalba</string>
     <string name="local_map_names">Vietiniai pavadinimai</string>
