@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_1_5_t">Промени в 1.5:
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_1_5_t">Промени в 1.5:
 	\n\t* Гласови предупреждения за пътни ограничения и камери
 	\n\t* Гласово обявяване имената на улиците
 	\n\t* HD икони
@@ -87,8 +88,8 @@
         \n\t* Допълнителни настройки за стабилизиране на компаса
         \n\t* Горният ляв бутон на картата замества бутона \'Меню\'
     </string>
-    <string name="monitoring_settings">Услуги за запис и спящ режим</string>
-    <string name="monitoring_settings_descr">Настройване как да се записва изминатия път и разрешаване на спящ режим</string>
+    <string name="monitoring_settings">Записване на изминатия път</string>
+    <string name="monitoring_settings_descr">Настройване записването на изминатия път</string>
     <string name="osmand_monitoring_plugin_description">Позволява записването на следа и навигация в спящ режим (изключен екран) чрез периодично събуждане на GPS устройството.
         Настройки за запис на вашия изминат маршрут (следа) в местен GPX файл или качването му в Интернет.</string>
     <string name="osmand_monitoring_plugin_name">Записване на следи и спящ режим</string>
@@ -1267,7 +1268,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="search_poi_filter">Филтър</string>
 	<string name="menu_mute_off">Звукът е включен</string>
 	<string name="menu_mute_on">Звукът е изключен</string>
-	<string name="voice_provider_descr">Изберете гласова навигация (код на езика съгласно ISO 639-1)</string>
+	<string name="voice_provider_descr">Изберете гласова навигация</string>
 	<string name="voice_provider">Гласова навигация</string>
 	<string name="voice_data_initializing">Стартиране на гласовата навигация…</string>
 	<string name="voice_data_not_supported">Не се поддържа тази гласова навигация</string>
@@ -1402,9 +1403,9 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="settings">Настройки</string>
 	<string name="save_current_track_descr">Запиши текущата следа в SD картата</string>
 	<string name="save_current_track">Запиши текущата GPX следа</string>
-	<string name="save_track_interval">Интервал за запис</string>
-	<string name="save_track_interval_descr">Избор на интервал, през който да се прави запис на следата</string>
-	<string name="save_track_to_gpx_descrp">Следите ще бъдат записани в папката tracks групирани по дни</string>
+	<string name="save_track_interval">Интервал за запис по време на навигация</string>
+	<string name="save_track_interval_descr">Избор на интервал, през който да се прави запис на следата по време на навигация</string>
+	<string name="save_track_to_gpx_descrp">Следите ще бъдат записвани в папката tracks по време на самата навигация</string>
 	<string name="save_track_to_gpx">Запиши следата в GPX файл</string>
 	<string name="update_tile">Обнови картата</string>
 	<string name="reload_tile">Презареждане на картната плочка</string>
@@ -1539,7 +1540,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="av_camera_focus_continuous">Камерата се опитва да фокусира</string>
 	<string name="av_photo_play_sound">Мелодия при снимане</string>
 	<string name="av_photo_play_sound_descr">Възпроизвеждане на звук или мелодия при снимане</string>
-<string name="announce_gpx_waypoints">Обявяване на точките от GPX</string>
+<string name="announce_gpx_waypoints">Обявяване на точките от GPX файла</string>
     <string name="speak_title">Обявяване…</string>
 	<string name="speak_street_names">Обявяване на имена на улици (синтезиран глас)</string>
     <string name="osmodroid_mode_on">Спиране на OsMoDroid</string>    
@@ -1657,4 +1658,46 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="routing_attr_weight_description">Изберете малксимална маса (тегло) на МПС</string>
     <string name="copying_osmand_files">Копиране файловете на OsmAnd</string>
     <string name="app_mode_truck">Камион</string>
+    <string name="rendering_attr_publicTransportMode_name">Обществен транспорт</string>
+	<string name="record_plugin_name">Запис на Вашето пътуване</string>
+    <string name="int_hour">ч.</string>
+    <string name="duration">Продължителност</string>
+    <string name="distance">Разстояние</string>
+    <string name="index_tours">Пътувания</string>
+    <string name="flat_list_waypoints">Всички</string>
+    <string name="waypoints">Точки</string>
+    <string name="targets">Дестинации</string>
+    <string name="way_alarms">Препятствия</string>
+    <string name="speak_favorites">Обявяване на запазените места</string>
+    <string name="speak_poi">Обявяване на забележителностите (POI)</string>
+    <string name="download_additional_maps">Сваляне на липсващите карти %1$s (%2$d MB)?</string>
+    <string name="more">Още...</string>
+    <string name="rendering_value_browse_map_name">Разглеждане на картата</string>  
+    <string name="rendering_value_car_name">Автомобил</string>
+    <string name="rendering_value_bicycle_name">Велосипед</string>
+    <string name="rendering_value_pedestrian_name">Пешеходец</string>
+    <string name="rendering_attr_coloredBuildings_name">Оцветяване на сградите</string>
+    <string name="osmo_invite">Покани...</string>
+    <string name="osmo_leave_confirmation_msg">Ще напуснете ли групата %1$s?</string>
+    <string name="osmo_specify_tracker_id">Уточнете id</string>
+    <string name="continue_navigation">Продължи навигацията</string>
+    <string name="pause_navigation">Пауза на навигацията</string>
+    <string name="rendering_attr_subwayMode_name">Режим тунел</string>
+ 	<string name="keep_navigation_service">Запази</string>
+	<string name="stop_navigation_service">Стоп</string>
+	<string name="local_map_names">Местни имена</string>
+    <string name="lang_sw">Суахили</string>
+    <string name="lang_he">Иврит</string>
+    <string name="forward">Напред</string>
+    <string name="home">У дома</string>
+    <string name="gpx_monitoring_start">Старт на записа в GPX</string>
+	<string name="gpx_monitoring_stop">Край на записа GPX</string>
+    <string name="gpx_start_new_segment">Започни нов сегмент</string>
+    <string name="rendering_attr_hideBuildings_name">Скрий сградите</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Скрий пътищата, които не са за автомобили</string>
+    <string name="rendering_attr_hideText_name">Скрий текста</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Скрий гори и храсти</string>
+    <string name="rendering_attr_buildings15zoom_name">Сгради при мащаб 15</string>
+    <string name="rendering_attr_moreDetailed_name">С повече детайли</string>
+    <string name="rendering_attr_lessDetailed_name">С по-малко детайли</string>
     </resources>
