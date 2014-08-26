@@ -774,10 +774,10 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="settings">설정</string>
     <string name="save_current_track_descr">현재의 GPX트랙을 SD 카드에 저장합니다</string>
     <string name="save_current_track">현재의 GPX트랙을 저장</string>
-    <string name="save_track_interval_descr">GPX트랙을 저장하는 시간 주기를 선택합니다</string>
-    <string name="save_track_interval">트랙로깅 간격</string>
-    <string name="save_track_to_gpx_descrp">경로는 날짜 단위로 구분된 폴더에 저장됩니다</string>
-    <string name="save_track_to_gpx">트랙을 GPX파일로 저장</string>
+    <string name="save_track_interval_descr">길안내하는 동안 트랙 기록을 저장하는 로깅 간격을 선택합니다</string>
+    <string name="save_track_interval">길안내하는 동안 로깅 간격</string>
+    <string name="save_track_to_gpx_descrp">트랙은 길안내하는 동안 트랙 디렉토리에 저장됩니다</string>
+    <string name="save_track_to_gpx">길안내하는 동안 트랙을 GPX파일로 저장</string>
     <string name="update_tile">맵 업데이트</string>
     <string name="reload_tile">타일 재로드</string>
     <string name="mark_point">목적지</string>
@@ -960,7 +960,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="index_name_gb">유럽 - 영국</string>
     <string name="calculate_osmand_route_without_internet">인터넷 연결없이 OsmAnd 경로 구간 계산</string>
     <string name="gpx_option_calculate_first_last_segment">첫번째와 마지막 경로 구간 계산</string>
-    <string name="use_displayed_track_for_navigation">경로탐색을 위해 맵뷰어에 표시된 경로를 사용하시겠습니까?</string>
+    <string name="use_displayed_track_for_navigation">길안내를 위해 맵뷰어에 표시된 경로를 사용하시겠습니까?</string>
     <string name="keep_and_add_destination_point">목적지로 추가</string>
     <string name="select_gpx">GPX파일 선택…</string>
     <string name="route_descr_select_destination">목적지 선택</string>
@@ -2030,7 +2030,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="rendering_attr_showAccess_name">액세스 유형 보이기</string>
     <string name="rendering_attr_showSurfaceGrade_name">도로의 품질 표시</string>
     <string name="rendering_attr_showSurfaces_name">도로 표면 표시</string>
-    <string name="rendering_attr_showCycleRoutes_name">자전거 경로 표시</string>
+    <string name="rendering_attr_showCycleRoutes_name">자전거 경로 보이기</string>
     <string name="keep_navigation_service">계속</string>
 	<string name="stop_navigation_service">중지</string>
 	<string name="enable_sleep_mode">절전 모드 활성화</string>
@@ -2059,7 +2059,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="lang_zh_TW">중국어 번체</string>
 	<string name="rendering_attr_subwayMode_name">지하철 모드</string>
  	<string name="continue_navigation">길안내 계속</string>
-    <string name="pause_navigation">경로탐색 일시중지</string>
+    <string name="pause_navigation">길안내 일시중지</string>
 	<string name="rendering_attr_alpineHiking_name">알파인 하이킹 보기</string>
     <string name="rendering_attr_alpineHiking_description">SAC scale에 따라 경로 렌더링</string>
     <string name="rendering_attr_osmcTraces_name">하이킹 심볼 오버레이</string>
