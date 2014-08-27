@@ -1866,4 +1866,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_attr_publicTransportMode_name">Modo de transporte público</string>
 	<string name="save_track_to_gpx_globally">Guardar traza en fichero GPX</string>
 	<string name="save_track_interval_globally">Intervalo de guardado</string>
+	<string name="save_track_to_gpx_globally_descr">El registro de la posición en un archivo GPX puede activarse o desactivarse usando el control de grabación GPX en la pantalla del mapa</string>
 	</resources>
