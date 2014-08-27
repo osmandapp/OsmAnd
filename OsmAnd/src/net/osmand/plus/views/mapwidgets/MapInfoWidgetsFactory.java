@@ -106,11 +106,10 @@ public class MapInfoWidgetsFactory {
 					//Show currently active wake-up interval
 					int soi = app.getSettings().SERVICE_OFF_INTERVAL.get();
 					if (soi <= 90000) {
-						String sois = ": " + Integer.toString(soi/1000) + "int_seconds";
+						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + Integer.toString(soi/1000) + "int_seconds");
 					} else {
-						String sois = ": " + Integer.toString(soi/1000/60) + "int_minutes";
+						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + Integer.toString(soi/1000/60) + "int_minutes");
 					}
-					dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + sois);
 
 					dlg.setPositiveButton(app.getString(R.string.keep_navigation_service), null);
 					dlg.setNegativeButton(app.getString(R.string.stop_navigation_service), new DialogInterface.OnClickListener() {
