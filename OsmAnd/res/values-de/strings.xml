@@ -1,5 +1,13 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="enable_sleep_mode">GPS-Hintergrunddienst aktivieren</string>
+	<string name="sleep_mode_stop_dialog">GPS-Hintergrunddienst stoppen?</string>
+	<string name="bg_service_sleep_mode_off">Hintergrunddienst\n einschalten</string>
+	<string name="bg_service_sleep_mode_on">Hintergrunddienst\n ausschalten</string>
+	<string name="background_router_service_descr">Aktiviere OsmAnd Hintergrunddienst für Funktionalitäten bei ausgeschalteter Anzeige</string>
+	<string name="background_router_service">Hintergrunddienst</string>
+	<string name="background_service_int_descr">GPS Aufwach-Intervall für Hintergrunddienst</string>
+	<string name="background_service_int">GPS Aufwach-Intervall</string>
 	<string name="save_track_to_gpx_globally">Aufzeichnung in GPX-Datei</string>
 	<string name="save_track_to_gpx_globally_descr">Generelle Positionsaufzeichnung kann man mit der Schaltfläche \'GPX-Aufnahme\' direkt auf dem Kartenbildschirm aktivieren oder deaktivieren</string>
 	<string name="save_current_track">Track jetzt speichern</string>
@@ -24,7 +32,6 @@
 	<string name="pause_navigation">Navigation pausieren</string>
 	<string name="keep_navigation_service">Aktiv lassen</string>
 	<string name="stop_navigation_service">Anhalten</string>
-	<string name="enable_sleep_mode">GPS-Schlafmodus aktivieren</string>
 	<string name="rendering_attr_alpineHiking_name">Alpinwanderung Ansicht</string>
 	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
 	<string name="rendering_attr_osmcTraces_name">Wandersymbole anzeigen</string>
@@ -897,12 +904,8 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">Sekunden</string>
 	<string name="int_min">Min.</string>
-	<string name="background_service_int_descr">Intervall zwischen zwei Hintergrund-Standortbestimmungen</string>
-	<string name="background_service_int">Positionierungsintervall</string>
 	<string name="background_service_provider_descr">Art der Hintergrund-Standortbestimmung</string>
 	<string name="background_service_provider">Standortbestimmung</string>
-	<string name="background_router_service_descr">Aktiviere OsmAnd-Hintergrunddienst während Anzeige ausgeschaltet ist</string>
-	<string name="background_router_service">Hintergrunddienst</string>
 	<string name="off_router_service_no_gps_available">Die Hintergrundnavigation erfordert aktiviertes GPS.</string>
 	<string name="hide_poi_filter">Filter verstecken</string>
 	<string name="show_poi_filter">Filter zeigen</string>
@@ -1270,8 +1273,6 @@
 	<string name="map_widget_map_rendering">Kartenanzeige:</string>
 	<string name="map_widget_transparent">Transparentes Layout</string>
 
-	<string name="bg_service_sleep_mode_off">Schlafmodus\n einschalten</string>
-	<string name="bg_service_sleep_mode_on">Schlafmodus\n ausschalten</string>
 	<string name="gps_wakeup_interval">GPS-Aufwachintervall: %s</string>
 	<string name="int_continuosly">Kontinuierlich</string>
 	<string name="screen_is_locked">Zum Bildschirm Entsperren Schloss anklicken</string>
@@ -1610,7 +1611,6 @@
 	<string name="local_map_names">Lokale Namen</string>
 	<string name="rendering_attr_subwayMode_name">U-Bahn-Modus</string>
 	<string name="gps_wake_up_timer">GPS Aufwach-Intervall</string>
-	<string name="sleep_mode_stop_dialog">GPS-Schlafmodus stoppen?</string>
 	<string name="forward">Weiter</string>
 	<string name="hide_all_waypoints">alle löschen</string>
 

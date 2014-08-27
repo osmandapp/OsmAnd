@@ -10,6 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+	<string name="background_service_int">GPS Wake-up interval</string>
 	<string name="enable_sleep_mode">Enable GPS sleep mode</string>
 	<string name="sleep_mode_stop_dialog">Stop GPS sleep mode?</string>
 	<string name="save_track_to_gpx_globally">Log track to GPX file</string>
@@ -1690,7 +1691,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="int_seconds">seconds</string>
 	<string name="int_min">min.</string>
 	<string name="background_service_int_descr">Set wake-up interval used by sleep mode service</string>
-	<string name="background_service_int">Wake-up interval</string>
 	<string name="background_service_provider_descr">Choose location provider used by sleep mode service</string>
 	<string name="background_service_provider">Location provider</string>
 	<string name="background_router_service_descr">Runs OsmAnd in the background to track your position while screen is off</string>
