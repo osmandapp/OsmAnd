@@ -198,11 +198,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 
 				setText(txt, subtxt);
 				setImageDrawable(d);
-				//if ((last != lastUpdateTime) && globalRecord) {
 				if ((last != lastUpdateTime) && (globalRecord || isRecording)) {
 					lastUpdateTime = last;
-					//blink();
-					//test blink wuith 2 indicator states
+					//blink implementation with 2 indicator states (global logging + profile/navigation logging)
 					setImageDrawable(monitoringInactive);
 					invalidate();
 					postDelayed(new Runnable() {
@@ -216,23 +214,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 							invalidate();
 						}
 					}, 500);
-					//end test
 				}
 				updateVisibility(visible);
 				return true;
 			}
-			
-//			private void blink() {
-//				setImageDrawable(monitoringSmall);
-//				invalidate();
-//				postDelayed(new Runnable() {
-//					@Override
-//					public void run() {
-//						setImageDrawable(monitoringBig);
-//						invalidate();
-//					}
-//				}, 500);
-//			}
 		};
 		monitoringControl.updateInfo(null);
 
@@ -345,10 +330,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				settings.SAVE_GLOBAL_TRACK_INTERVAL.set(vs.value);
 				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 				settings.SAVE_GLOBAL_TRACK_REMEMBER.set(choice.value);
-				//interval setting not needed here, handled centrally in app.startNavigationService
-				//if (app.getNavigationService() == null) {
-				//	settings.SERVICE_OFF_INTERVAL.set(0);
-				//}
+
+				if (settings.SAVE_GLOBAL_TRACK_INTERVAL.get() < 30000) {
+					settings.SERVICE_OFF_INTERVAL.set(0);
+				} else {
+					//Use SERVICE_OFF_INTERVAL > 0 to conserve power for longer GPX recording intervals
+					settings.SERVICE_OFF_INTERVAL.set(settings.SAVE_GLOBAL_TRACK_INTERVAL.get());
+				}
+
 				app.startNavigationService(NavigationService.USED_BY_GPX);		
 			}
 		};

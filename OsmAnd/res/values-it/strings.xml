@@ -1977,4 +1977,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="int_hour">h</string>
     <string name="duration">Durata</string>
     <string name="distance">Distanza</string>
-    </resources>
+    <string name="save_track_to_gpx_globally">Registra la traccia in un file GPX</string>
+	<string name="save_track_to_gpx_globally_descr">La registrazione della posizione in un file GPX può essere accesa o spenta dal widget registrazione GPX sulla schermata della mappa</string>
+	<string name="save_track_interval_globally">Intervallo registrazione</string>
+	<string name="rendering_attr_publicTransportMode_name">Modo trasporto pubblico</string>
+	</resources>

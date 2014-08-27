@@ -560,8 +560,9 @@ public class OsmandApplication extends Application {
 					}
 				}
 			}
-			if(getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()){
-				startNavigationService(NavigationService.USED_BY_GPX);
+			//I guess we should not start the sleep mode service automatically upon app start
+			//if(getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()){
+			//	startNavigationService(NavigationService.USED_BY_GPX);
 			}
 			// restore backuped favorites to normal file
 			final File appDir = getAppPath(null);
@@ -850,18 +851,15 @@ public class OsmandApplication extends Application {
 		final Intent serviceIntent = new Intent(this, NavigationService.class);
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
 		if (getNavigationService() == null) {
-			if (intent == NavigationService.USED_BY_GPX) {
-				if (getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get() < 30000) {
-					getSettings().SERVICE_OFF_INTERVAL.set(0);
-				} else {
-					//Use SERVICE_OFF_INTERVAL > 0 to conserve power for longer GPX recording intervals
-					getSettings().SERVICE_OFF_INTERVAL.set(getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get());
-				}
-			} else {
+			if (intent != NavigationService.USED_BY_GPX) {
+				//for only-USED_BY_GPX case use pre-configured SERVICE_OFF_INTERVAL
+				//other cases always use "continuous":
 				getSettings().SERVICE_OFF_INTERVAL.set(0);
 			}
 			startService(serviceIntent);
 		} else {
+			//additional cases always use "continuous"
+			//TODO: fallback to custom USED_BY_GPX interval in case all other sleep mode purposes have been stopped
 			getSettings().SERVICE_OFF_INTERVAL.set(0);
 			getNavigationService().addUsageIntent(intent);
 		}		
