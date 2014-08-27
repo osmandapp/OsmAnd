@@ -185,12 +185,11 @@
   <string name="tip_app_mode">Wybierz Profil</string>
   
   <string name="tip_navigation">Nawigacja</string>
-  <string name="tip_navigation_t">W celu wyznaczenia trasy do miejsca, kliknij na nie na mapie, (a następnie wybierz \'Trasa do tego miejsca\'), lub wybierz \'Nawigacja\' po wybraniu dowolnego wpisu w liście wyników wyszukiwania lub liści Ulubionych.↵
-		\n\nCel oznaczony jest na mapie jako pomarańczowy znacznik flagi i OsmAnd wyświetla odległość do niego oraz kierunek do niego (pomarańczowy trójkąt).
-		\n\nMożesz wybrać opcję \'Uruchom nawigację\', co oznacza, że OsmAnd będzie poprowadzić Cię, dając instrukcje głosowe (jeśli są włączone), itp. Można też wybrać \'Tylko pokaż\'\ w celu wyświetlenia trasy bez możliwości nawigowania.
-		\n\nAby wyświetlić trasę do wybranego celu z każdego innego miejsca niż aktualna pozycja, wybierz punkt początkowy na mapie i Wybierz \'Dojazd z \'.
-		\n\nJeśli wybierzesz \'Dojazd z \' oraz \'Nawiguj\' OsmAnd przełączy się do Twojej aktualnej pozycji, jak tylko zostanie znaleziona, natomiast \'Dojazd z \' w połączeniu z trasy \'Tylko pokaż\' tylko pokazuje trasę bez aktualizacji położenia na trasie.
-	</string>
+  <string name="tip_navigation_t">"W celu wyznaczenia trasy do miejsca, kliknij na nie na mapie, (a następnie wybierz \'Trasa do tego miejsca\'), lub wybierz \'Nawigacja\' po wybraniu dowolnego wpisu w liście wyników wyszukiwania lub liści Ulubionych.↵
+\n\nCel oznaczony jest na mapie jako znacznik flagi i OsmAnd wyświetla odległość do niego oraz kierunek do niego (pomarańczowy trójkąt).
+\n\nMożesz wybrać opcję \'Uruchom nawigację\', co oznacza, że OsmAnd będzie poprowadzić Cię, dając instrukcje głosowe (jeśli są włączone), itp. Można też wybrać \'Tylko pokaż\' w celu wyświetlenia trasy bez możliwości nawigowania.
+\n\nAby wyświetlić trasę do wybranego celu z każdego innego miejsca niż aktualna pozycja, wybierz punkt początkowy na mapie i Wybierz \'Dojazd z \'.
+\n\nJeśli wybierzesz \'Dojazd z \' oraz \'Nawiguj\' OsmAnd przełączy się do Twojej aktualnej pozycji, jak tylko zostanie znaleziona, natomiast \'Dojazd z \' w połączeniu z trasy \'Tylko pokaż\' tylko pokazuje trasę bez aktualizacji położenia na trasie. "</string>
   <string name="tip_search">Wyszukiwanie</string>
   <string name="tip_search_t">Możesz wyszukać miejsca bezpośrednio na mapie poprzez \'Użyj lokalizacji...\' → \'Szukaj w pobliżu tutaj\', lub wywołując ekran wyszukiwania poprzez \'Menu\' → \'Szukaj\'.↵
 		\n\nEkran wyszukiwania zapewnia szablony wyszukiwania
@@ -206,12 +205,11 @@
 		\n\nSą one dostępny przez długie naciśnięcie dowolnego punktu na mapie (następnie dotykając jego znacznik), lub przez naciśnięcie przycisku trackball lub wybierając \'Menu\' → \'Użyj lokalizacji...\' (dwa ostatnie sposoby pobierają centrum mapy jako odniesienie).↵
 		\n\nOkno znacznika może być ukryte przez kliknięcie na nim.↵
 	</string>
-  <string name="tip_initial">Porady i sztuczki</string>
-  <string name="tip_initial_t">OsmAnd jest rozbudowanym programem do nawigacji posiadającym wiele funkcji.
-		\n\nPodstawowe porady i kruczki są wyświetlane po wybraniu \'Menu\' → \'Porady i wskazówki\'
-	</string>
+  <string name="tip_initial">Pomoc</string>
+  <string name="tip_initial_t">"OsmAnd jest programem do nawigacji posiadającym wiele funkcji.
+\n\nPodstawowe porady i kruczki oraz zaawansowana pomoc są dostępne po wybraniu \'Menu\' → \'Pomoc\' z ekranu mapy. "</string>
   <string name="next_button">Następny</string>
-  <string name="previous_button">Poprzedni</string>
+  <string name="previous_button">Wstecz</string>
   <string name="unit_of_length_descr">Zmień jednostki długości i prędkości</string>
   <string name="unit_of_length">Jednostki długości</string>
   <string name="si_mi_foots">Mile/stopy</string>
@@ -387,7 +385,7 @@
   <string name="int_seconds">sekund</string>
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">Ustaw czas pomiędzy wybudzeniami używany przez usługę trybu uśpienia</string>
-  <string name="background_service_int">Czas pomiędzy wybydzeniami</string>
+  <string name="background_service_int">Czas pomiędzy wybudzeniami</string>
   <string name="background_service_provider_descr">Wybierz dostawcę lokalizacji dla trybu w tle</string>
   <string name="background_service_provider">Sposób lokalizacji</string>
   <string name="background_router_service_descr">Uruchom usługę śledzącą Twoją pozycję w tle podczas kiedy ekran jest wyłączony</string>
@@ -549,7 +547,7 @@
   <string name="save_track_interval_descr">Wybierz czas pomiędzy sprawdzaniem pozycji przy nagrywaniu ścieżek podczas nawigacji</string>
   <string name="save_track_interval">Czas pomiędzy sprawdzaniem pozycji podczas nawigacji</string>
   
-  <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu grupami wg dni</string>
+  <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu ścieżek podczas nawigacji</string>
   <string name="save_track_to_gpx">Zapisuj ślad do pliku GPX podczas nawigacji</string>
   <string name="update_tile">Uaktualnij mapę</string>
   <string name="reload_tile">Przeładuj kafelki</string>
@@ -1381,7 +1379,7 @@
     <string name="about_version">Wersja:</string>
     <string name="about_settings">Informacje</string>
     <string name="about_settings_descr">Informacje o wersji, licencje, współtwórcy</string>
-    <string name="tips_and_tricks">Porady i wskazówki</string>
+    <string name="tips_and_tricks">Pomoc</string>
     <string name="tip_map_styles">Style map</string>
 	<string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_maxzoom">Maksymalne powiększenie</string>
@@ -1912,7 +1910,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="pause_navigation">Wstrzymaj nawigację</string>
     <string name="rendering_attr_alpineHiking_name">Widok wspinaczki alpinistycznej</string>
     <string name="rendering_attr_alpineHiking_description">Renderuj ścieżki według skali SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Nakładka symbolu wędrówki</string>
+    <string name="rendering_attr_osmcTraces_name">Symbol nakładki wędrówek</string>
     <string name="rendering_attr_osmcTraces_description">Renderuj ścieżki według śladów OSMC</string>
     
 	<string name="arrival_distance_factor_early">Wcześnie</string>
