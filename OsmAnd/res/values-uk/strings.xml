@@ -752,9 +752,9 @@
   <string name="save_current_track_descr">Зберегти активний трек на SD</string>
   <string name="save_current_track">Зберегти активний GPX трек</string>
   <string name="save_track_interval">Інтервал збереження</string>
-  <string name="save_track_interval_descr">Вказати інтервал збереження точок треку</string>
-  <string name="save_track_to_gpx_descrp">Зберігати трек у форматі GPX в папку track</string>
-  <string name="save_track_to_gpx">Записувати трек в GPX файл</string>
+  <string name="save_track_interval_descr">Вказати інтервал збереження точок треку під час навіґації</string>
+  <string name="save_track_to_gpx_descrp">Треки буде збережено в трекову директорію під час навіґації</string>
+  <string name="save_track_to_gpx">Записувати трек у файл GPX під час навіґації</string>
   <string name="update_tile">Оновити мапу</string>
   <string name="reload_tile">Оновити частину мапи</string>
   <string name="mark_point">Точка</string>
@@ -1909,7 +1909,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="osmodroid_refresh">Оновити канали</string>
     <string name="osmodroid_seek">Стежити за</string>
     <string name="osmodroid_unseek">Не стежити</string>
-    <string name="route_descr_destination"/>
+    <string name="route_descr_destination">\t</string>
     <string name="interrupt_music_descr">Переривати музику під час оголошення</string>
 	<string name="interrupt_music">Переривання музики</string>
 	<string name="share_route_as_gpx">Поділитись маршрутом за допомоги файлу GPX</string>
@@ -1952,4 +1952,20 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_value_car_name">Автівка</string>
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пішохід</string>
+    <string name="record_plugin_description">Зберігати свої треки натисканням одної кнопки на мапі. Показати налаштування запису своїх подорожей у локальні файли GPX, чи вебсервісом онлайн.</string>
+    <string name="save_track_to_gpx_globally">Писати трек у файл GPX</string>
+	<string name="save_track_to_gpx_globally_descr">Загальний запис місцезнаходження в файл GPX можна ввімкнути або вимкнути кнопкою запису GPX на екрані з мапою</string>
+	<string name="save_track_interval_globally">Інтервал записування</string>
+	<string name="rendering_attr_publicTransportMode_name">Режим громадського транспорту</string>
+	<string name="record_plugin_name">Запис власних подорожей</string>
+    <string name="int_hour">г</string>
+    <string name="duration">Тривалісьть</string>
+    <string name="distance">Віддаль</string>
+    <string name="index_tours">Подорожі</string>
+    <string name="flat_list_waypoints">Усі</string>
+    <string name="waypoints">Путьові точки</string>
+    <string name="targets">Цілі</string>
+    <string name="way_alarms">Перешкоди</string>
+    <string name="speak_favorites">Оголошувати улюблені</string>
+    <string name="speak_poi">Оголошувати POI</string>
     </resources>
