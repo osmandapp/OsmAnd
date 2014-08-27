@@ -417,9 +417,8 @@
 		\n\tДействия в этом меню зависят от текущей выбранной точки (центр карты).
 	</string>
   <string name="tip_initial">Справка</string>
-  <string name="tip_initial_t">OsmAnd - навигационное приложение с большим количеством функций.
-		\n\nЧтобы использовать его как можно лучше, следуйте советам по ссылке вверху меню.
-	</string>
+  <string name="tip_initial_t">"OsmAnd - навигационное приложение с большим количеством функций.
+\n\nНекоторые базовые сведения, советы по использованию и дополнительную справку можно посмотреть вызвав меню \"Справка\" на экране карты. "</string>
   <string name="next_button">След.</string>
   <string name="previous_button">Пред.</string>
   <string name="unit_of_length_descr">Изменить единицы измерения длины и скорости</string>
@@ -1749,9 +1748,9 @@ OsmAnd - открытый источник и активно развается.
     <string name="gpx_monitoring_start">Начать запись GPX</string>
 	<string name="gpx_monitoring_stop">Остановить запись GPX</string>
     <string name="gpx_start_new_segment">Начать новый сегмент</string>
-    <string name="enable_sleep_mode">Включить режим сна</string>
+    <string name="enable_sleep_mode">Включить режим сна GPS</string>
 	<string name="gps_wake_up_timer">Интервал пробуждения GPS</string>
-	<string name="sleep_mode_stop_dialog">Оставить GPS включенным?</string>
+	<string name="sleep_mode_stop_dialog">Выключить режим сна GPS?</string>
 	<string name="stop_navigation_service">Выключить</string>
 	<string name="keep_navigation_service">Оставить</string>
 	<string name="live_monitoring_m_descr">Отправлять отслеживание на указанный веб-сервис, если включена запись GPX.</string>
