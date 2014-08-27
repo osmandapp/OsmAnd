@@ -207,7 +207,7 @@
 	</string>
   <string name="tip_initial">Pomoc</string>
   <string name="tip_initial_t">"OsmAnd jest programem do nawigacji posiadającym wiele funkcji.
-\n\nPodstawowe porady i kruczki oraz zaawansowana pomoc są dostępne po wybraniu \'Menu\' → \'Pomoc\' z ekranu mapy. "</string>
+\n\nPodstawowe porady, wskazówki i zaawansowana pomoc są dostępne po wybraniu \'Menu\' → \'Pomoc\' z ekranu mapy. "</string>
   <string name="next_button">Następny</string>
   <string name="previous_button">Wstecz</string>
   <string name="unit_of_length_descr">Zmień jednostki długości i prędkości</string>
@@ -1129,7 +1129,7 @@
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
     <string name="osmodroid_plugin_name">OsMoDroid</string>
 	<string name="tip_altitude_offset">Korekta wysokości</string>
-	<string name="monitoring_control_start">start</string>
+	<string name="monitoring_control_start">Start</string>
     <string name="tip_altitude_offset_t">Większość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.
 		\n\nLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96.
 		\n\nOsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96. W celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez \'Ustawienia\'  → \'Zarządzanie plikami map\'. (Oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC .)
@@ -1179,8 +1179,8 @@
     <string name="recording_context_menu_play">Odtwórz</string>
     <string name="recording_description">Nagranie %1$s %2$s w %3$s</string>
     <string name="recording_default_name">nagranie</string>
-    <string name="av_control_stop">Kończ</string>
-    <string name="av_control_start">Nagraj</string>
+    <string name="av_control_stop">Stop</string>
+    <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Notatki audio/video</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do rysowania poziomic offline</string>
     
@@ -1700,7 +1700,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="navigation_intent_invalid">Nieprawidłowy format: %s</string>
 <string name="osmo_settings_uuid">Unikatowy identyfikator urządzenia</string>
     <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
-    <string name="osmo_plugin_description">"OpenStreetMap zaawansowany monitoring na żywo - zobacz http://osmo.mobi. Daje możliwość śledzenia innych urządzeń i vice versa. Twórz anonimowe grupy, dziel się lokalizacją i prowadź komunikację. System ma wiele ustawień dla śledzenia w sesji lub stałego śledzenia. Grupy anonimowe mają ograniczenia czasowe i funkcjonalne, np. nie ma zdalnej kontroli i administratora grupy. W pełni funkcjonalne grupy powinny być tworzone przez witrynę, a dostęp zarezerwowany tylko dla zarejestrowanych użytkowników. "</string>
+    <string name="osmo_plugin_description">"OpenStreetMap zaawansowany monitoring na żywo, zobacz http://osmo.mobi. Daje możliwość śledzenia innych urządzeń i vice versa. Twórz anonimowe grupy, dziel się lokalizacją i prowadź komunikację. System ma wiele ustawień dla śledzenia w sesji lub stałego śledzenia. Grupy anonimowe mają ograniczenia czasowe i funkcjonalne, np. nie ma zdalnej kontroli i administratora grupy. W pełni funkcjonalne grupy powinny być tworzone przez witrynę, a dostęp zarezerwowany tylko dla zarejestrowanych użytkowników. "</string>
     <string name="osmo_plugin_name">OsMo (Zaawansowany Monitoring na Żywo)</string>
     <string name="osmo_settings">Monitoring OpenStreetMap</string>
    	<string name="keep_informing_never">Nigdy</string>
