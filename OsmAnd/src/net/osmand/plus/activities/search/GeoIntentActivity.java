@@ -476,8 +476,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 					.replaceAll(" ", ",");
 			System.out.println(query);
 			//String is split on each comma
-			String[] s = query.substring(query
-					.indexOf("q=") + 2).split(",");
+			String[] s = query.split(",");
 			
 			elements = new ArrayList<String>();
 			for (int i = 0;  i<s.length; i++) {
