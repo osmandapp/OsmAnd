@@ -129,11 +129,11 @@ public class NavigationService extends Service implements LocationListener {
 
 		if (usedBy == 2) {
 			//reset SERVICE_OFF_INTERVAL to automatic settings for USED_BY_GPX
-			if (app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get() < 30000) {
-				app.getSettings().SERVICE_OFF_INTERVAL.set(0);
+			if (settings.SAVE_GLOBAL_TRACK_INTERVAL.get() < 30000) {
+				settings.SERVICE_OFF_INTERVAL.set(0);
 			} else {
 				//Use SERVICE_OFF_INTERVAL > 0 to conserve power for longer GPX recording intervals
-				app.getSettings().SERVICE_OFF_INTERVAL.set(app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get());
+				settings.SERVICE_OFF_INTERVAL.set(settings.SAVE_GLOBAL_TRACK_INTERVAL.get());
 			}
 		}
 
