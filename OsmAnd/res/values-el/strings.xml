@@ -1596,7 +1596,7 @@
 	<string name="share_fav">Διαμοιρασμός</string>
 	<string name="navigation_intent_invalid">Μη έγκυρη μορφή: %s</string>
 <string name="stop_navigation_service">Διακοπή</string>
-	<string name="sleep_mode_stop_dialog">Διατήρηση του GPS ανοικτό;</string>
+	<string name="sleep_mode_stop_dialog">Διακοπή κατάστασης νάρκης του GPS;</string>
 	<string name="map_preferred_locale_descr">Προτιμώμενη γλώσσα για τις ετικέτες στον χάρτη (αν δεν είναι διαθέσιμη θα μεταβεί στα Αγγλικά ή στα τοπικά ονόματα)</string>
     <string name="map_preferred_locale">Προτιμώμενη γλώσσα χάρτη</string>
     <string name="local_map_names">Τοπικά ονόματα</string>
@@ -1618,7 +1618,7 @@
     <string name="continue_navigation">Συνέχιση της Πλοήγησης</string>
     <string name="pause_navigation">Παύση Πλοήγησης</string>
     <string name="keep_navigation_service">Διατήρηση</string>
-	<string name="enable_sleep_mode">Ενεργοποίηση κατάστασης νάρκης</string>
+	<string name="enable_sleep_mode">Ενεργοποίηση κατάστασης νάρκης GPS</string>
 	<string name="gps_wake_up_timer">Διάστημα αφύπνισης GPS</string>
 	<string name="rendering_attr_hideNonVehicleHighways_name">Απόκρυψη μη αμαξιτών δρόμων</string>
     <string name="rendering_attr_showSurfaces_name">Εμφάνιση οδοστρωμάτων</string>
