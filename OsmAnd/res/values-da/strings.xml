@@ -506,7 +506,7 @@
 	<string name="user_name_descr">Nødvendige for ændringer i openstreetmap.org</string>
 	<string name="user_password">OSM-kodeord</string>
 	<string name="user_password_descr">Nødvendig for ændringer i openstreetmap.org</string>
-	<string name="osmand_service">Dvaletilstand funktionalitet</string>
+	<string name="osmand_service">Dvaletilstand</string>
 	<string name="osmand_service_descr">Bruges for at køre OsmAnd mens skærmen er slukket</string>
 	<string name="tip_rotation_switching">Kortretning</string>
 	<string name="binary_map_download_success">Hentning lykkedes.
