@@ -198,7 +198,9 @@ public class NavigationService extends Service implements LocationListener {
 		//Show currently active wake-up interval
 		int soi = settings.SERVICE_OFF_INTERVAL.get();
 		String nt = getString(R.string.service_stop_background_service) + ". " +  getString(R.string.gps_wake_up_timer) + ": ";
-		if (soi <= 90000) {
+		if (soi == 0) {
+			nt = nt + getString(R.string.int_continuosly));
+		} else if (soi <= 90000) {
 			nt = nt + Integer.toString(soi/1000) + " " + getString(R.string.int_seconds);
 		} else {
 			nt = nt + Integer.toString(soi/1000/60) + " " + getString(R.string.int_min);
