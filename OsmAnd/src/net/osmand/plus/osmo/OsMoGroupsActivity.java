@@ -179,7 +179,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						osMoPlugin.getTracker().enableTracker();
 					}
 					app.startNavigationService(NavigationService.USED_BY_LIVE);
-					app.getSettings().SERVICE_OFF_INTERVAL.set(0);
+					//interval setting not needed here, handled centrally in app.startNavigationService
+					//app.getSettings().SERVICE_OFF_INTERVAL.set(0);
 				} else {
 					if (osMoPlugin != null && osMoPlugin.getTracker() != null){
 						osMoPlugin.getTracker().disableTracker();
