@@ -539,7 +539,7 @@
   <string name="auto_zoom_map_descr">Automatyczne przybliżanie mapy w zależności od prędkości (gdy mapa zsynchronizowana jest z aktualną pozycją)</string>
   <string name="auto_zoom_map">Automatyczne przybliżanie</string>
   <string name="additional_settings">Dodatkowe ustawienia</string>
-  <string name="settings_preset_descr">Widok mapy i ustawienia nawigacji zapamiętywane są dla każdego profilu użytkownika. Ustaw swój domyślny profil tutaj.</string>
+  <string name="settings_preset_descr">Widok mapy i ustawienia nawigacji zapamiętywane są dla każdego profilu użytkownika. Ustaw swój domyślny profil.</string>
   <string name="settings_preset">Domyślny profil</string>
   <string name="settings">Ustawienia</string>
   <string name="save_current_track_descr">Zapisz bieżący ślad na karcie SD</string>
@@ -1691,7 +1691,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
     <string name="interrupt_music_descr">Przerwij muzykę podczas komunikatów</string>
 	<string name="interrupt_music">Przerwij muzykę</string>
-	<string name="always_center_position_on_map">Zawsze wyświetlaj pozycję na środku</string>
+	<string name="always_center_position_on_map">Pozycja w centrum wyświetlacza</string>
     <string name="voice_pref_title">Głos</string>
     <string name="misc_pref_title">Różne</string>
     <string name="localization_pref_title">Lokalizacja</string>
@@ -1937,4 +1937,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="save_track_to_gpx_globally_descr">Logowanie pozycji do pliku GPX można włączyć lub wyłączyć używając widgetu nagrywania GPX na głównym ekranie</string>
 	<string name="save_track_interval_globally">Częstotliwość zapisywania</string>
 	<string name="record_plugin_description">Zapisz swoje ścieżki jednym guzikiem na ekranie mapy. Pokazuj ustawienia nagrywania twoich wycieczek do pliku GPX lub używając serwisu internetowego.</string>
-    </resources>
+    <string name="confirm_every_run">Pytaj przy każdym uruchomieniu</string>
+	<string name="save_global_track_interval_descr">Wybierz interwał rejestrowania dla włączonego nagrywania ścieżki poprzez wybieranie widżetu na mapie.</string>
+	<string name="save_global_track_interval">"Domyślny globalny interwał rejestrowania "</string>
+	</resources>
