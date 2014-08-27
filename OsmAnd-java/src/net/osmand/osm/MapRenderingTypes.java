@@ -473,7 +473,7 @@ public class MapRenderingTypes {
 		}
 		
 
-		if (poiParentCategory != null) {
+		if (poiParentCategory != null && poiParentCategory.length() > 0) {
 			rtype.poiCategory = AmenityType.getAndRegisterType(poiParentCategory);
 			rtype.poiSpecified = true;
 		}
@@ -482,7 +482,7 @@ public class MapRenderingTypes {
 		}
 
 		String poiCategory = parser.getAttributeValue("", "poi_category");
-		if (poiCategory != null) {
+		if (poiCategory != null && poiCategory.length() > 0) {
 			rtype.poiSpecified = true;
 			if (poiCategory.length() == 0) {
 				rtype.poiCategory = null;
@@ -568,7 +568,7 @@ public class MapRenderingTypes {
 
 	protected void parseCategoryFromXml(XmlPullParser parser, String poiParentCategory, String poiParentPrefix) {
 		String poi_tag = parser.getAttributeValue("","poi_tag");
-		if (poi_tag != null) {
+		if (poi_tag != null && poiParentCategory.length() > 0) {
 			MapRulType rtype = new MapRulType();
 			rtype.poiCategory = AmenityType.getAndRegisterType(poiParentCategory);
 			rtype.poiSpecified = true;
