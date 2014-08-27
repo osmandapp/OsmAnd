@@ -260,7 +260,7 @@
   <string name="user_name_descr">Reikalingas norint teikti duomenis į openstreetmap.org</string>
   <string name="user_password">Jūsų OSM slaptažodis</string>
   <string name="user_password_descr">Reikalingas norint teikti duomenis į openstreetmap.org</string>
-  <string name="osmand_service">Miego režimo funkcionalumas</string>
+  <string name="osmand_service">Miego režimas</string>
   <string name="osmand_service_descr">Reikalinga jei norite naudoti OsmAnd kai ekranas yra išjungtas</string>
   <string name="tip_rotation_switching">Žemėlapio orientacija</string>
   
