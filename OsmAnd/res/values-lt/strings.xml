@@ -506,7 +506,7 @@
 	</string>
   <string name="tip_initial">Pagalba</string>
   <string name="tip_initial_t">"OsmAnd yra daug funkcijų turinti navigacijos programa.
-\n\nInformacija pradiniam supažindinimui, patarimai ir pagalba pasiekiami žemėlapio rodinyje pasirinkus \'Meniu\' → \'Patarimai\'. "</string>
+\n\nInformacija pradiniam supažindinimui, patarimai ir detalesnė pagalba pasiekiami žemėlapio rodinyje pasirinkus \'Meniu\' → \'Patarimai\'. "</string>
   <string name="next_button">Kitas</string>
   <string name="previous_button">Ankstesnis</string>
   <string name="unit_of_length_descr">Pakeisti ilgio ir greičio matavimo vienetus</string>
@@ -676,7 +676,7 @@
   <string name="int_seconds">sekundės</string>
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">Nustatyti pabudimo intervalą fone</string>
-  <string name="background_service_int">Pabudimo intervalas</string>
+  <string name="background_service_int">GPS pabudimo intervalas</string>
   <string name="background_service_provider_descr">Pasirinkite vietos nustatymo būdą naudojant foninį režimą</string>
   <string name="background_service_provider">Vietos nustatymo būdas</string>
   <string name="background_router_service_descr">OsmAnd veikia fone ir seka jūsų buvimo vietą kai ekranas išjungtas</string>
