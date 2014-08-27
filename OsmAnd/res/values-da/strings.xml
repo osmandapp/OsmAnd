@@ -1130,7 +1130,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="network_provider">Netværk</string>
 	<string name="int_seconds">sekunder</string>
 	<string name="background_service_int_descr">Indstil vågn-op interval som anvendes af dvaletilstand</string>
-	<string name="background_service_int">Vågn-op interval</string>
+	<string name="background_service_int">GPS vågn-op interval</string>
 	<string name="background_service_provider_descr">Vælg placeringsudbyder der bruges af dvaletilstand</string>
 	<string name="background_service_provider">Placeringsudbyder</string>
 	<string name="background_router_service_descr">Kør OsmAnd i baggrunden for at spore positionen, mens skærmen er slukket</string>
