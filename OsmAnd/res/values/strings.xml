@@ -61,7 +61,7 @@
     <string name="rendering_attr_subwayMode_name">Subway mode</string>
  	<string name="keep_navigation_service">Keep</string>
 	<string name="stop_navigation_service">Stop</string>
-	<string name="gps_wake_up_timer">GPS wake up interval</string>
+	<string name="gps_wake_up_timer">GPS wake-up interval</string>
 	<string name="map_preferred_locale_descr">Preferred language for labels on the map (if it is not available will switch to English or to local names)</string>
     <string name="map_preferred_locale">Map preferred language</string>
     <string name="local_map_names">Local names</string>
