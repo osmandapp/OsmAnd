@@ -126,6 +126,17 @@ public class NavigationService extends Service implements LocationListener {
 		if((usedBy & usageIntent) > 0) {
 			usedBy -= usageIntent;
 		}
+
+		if (usedBy == 2) {
+			//reset SERVICE_OFF_INTERVAL to automatic settings for USED_BY_GPX
+			if (app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get() < 30000) {
+				app.getSettings().SERVICE_OFF_INTERVAL.set(0);
+			} else {
+				//Use SERVICE_OFF_INTERVAL > 0 to conserve power for longer GPX recording intervals
+				app.getSettings().SERVICE_OFF_INTERVAL.set(app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get());
+			}
+		}
+
 		if (usedBy == 0) {
 			final Intent serviceIntent = new Intent(ctx, NavigationService.class);
 			ctx.stopService(serviceIntent);
