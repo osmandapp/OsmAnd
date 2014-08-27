@@ -1376,7 +1376,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">segundos</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int">Intervallu de ischidada</string>
+	<string name="background_service_int">Intervallu de ischidada GPS</string>
 	<string name="background_router_service">Funtzionamentu a reposu</string>
 	<string name="hide_poi_filter">Cua filtru</string>
 	<string name="show_poi_filter">Ammustra filtru</string>
