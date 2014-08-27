@@ -201,7 +201,7 @@ public class NavigationService extends Service implements LocationListener {
 		if (soi <= 90000) {
 			nt = getString(R.string.service_stop_background_service)+ ": " + Integer.toString(soi/1000) + " " + getString(R.string.int_seconds);
 		} else {
-			nt = getString(R.string.service_stop_background_service)+ ": " + Integer.toString(soi/1000/60) + " " + getString(R.string.int_minutes);
+			nt = getString(R.string.service_stop_background_service)+ ": " + Integer.toString(soi/1000/60) + " " + getString(R.string.int_min);
 		}
 
 		notification.setLatestEventInfo(this, Version.getAppName(cl), nt,

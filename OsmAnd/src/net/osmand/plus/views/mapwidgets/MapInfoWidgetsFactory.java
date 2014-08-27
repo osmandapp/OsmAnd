@@ -108,7 +108,7 @@ public class MapInfoWidgetsFactory {
 					if (soi <= 90000) {
 						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + Integer.toString(soi/1000) + " " + app.getString(R.string.int_seconds));
 					} else {
-						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + Integer.toString(soi/1000/60) + " " + app.getString(R.string.int_minutes));
+						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + Integer.toString(soi/1000/60) + " " + app.getString(R.string.int_min));
 					}
 
 					dlg.setPositiveButton(app.getString(R.string.keep_navigation_service), null);
