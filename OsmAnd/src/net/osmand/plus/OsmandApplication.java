@@ -851,7 +851,12 @@ public class OsmandApplication extends Application {
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
 		if (getNavigationService() == null) {
 			if (intent == NavigationService.USED_BY_GPX) {
-				//Use pre-selected SERVICE_OFF_INTERVAL for global GPX recording, else
+				if (settings.SAVE_GLOBAL_TRACK_INTERVAL.set() < 30000) {
+					settings.SERVICE_OFF_INTERVAL.set(0);
+				} else {
+					//Use SERVICE_OFF_INTERVAL > 0 to conserve power for longer GPX recording intervals
+					settings.SERVICE_OFF_INTERVAL.set(settings.SAVE_GLOBAL_TRACK_INTERVAL.set());
+				}
 				getSettings().SERVICE_OFF_INTERVAL.set();
 			} else {
 				getSettings().SERVICE_OFF_INTERVAL.set(0);

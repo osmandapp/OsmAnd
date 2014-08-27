@@ -333,7 +333,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			bld.show();
 		}
 	}
-	
+
 	private void startGPXMonitoring(MapActivity map) {
 		app.getSavingTrackHelper().startNewSegment();
 		final ValueHolder<Integer> vs = new ValueHolder<Integer>();
@@ -345,9 +345,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				settings.SAVE_GLOBAL_TRACK_INTERVAL.set(vs.value);
 				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 				settings.SAVE_GLOBAL_TRACK_REMEMBER.set(choice.value);
-				if (app.getNavigationService() == null) {
-					settings.SERVICE_OFF_INTERVAL.set(0);
-				}
+				//interval setting not needed here, handled centrally in app.startNavigationService
+				//if (app.getNavigationService() == null) {
+				//	settings.SERVICE_OFF_INTERVAL.set(0);
+				//}
 				app.startNavigationService(NavigationService.USED_BY_GPX);		
 			}
 		};
