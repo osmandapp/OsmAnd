@@ -84,6 +84,10 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 				R.string.save_track_to_gpx_descrp));
 		cat.addPreference(createTimeListPreference(settings.SAVE_TRACK_INTERVAL, SECONDS,
 				MINUTES, 1000, R.string.save_track_interval, R.string.save_track_interval_descr));
+		if(settings.SAVE_GLOBAL_TRACK_REMEMBER.get()) {
+			cat.addPreference(createTimeListPreference(settings.SAVE_GLOBAL_TRACK_INTERVAL, SECONDS,
+					MINUTES, 1000, settings.SAVE_GLOBAL_TRACK_REMEMBER,  R.string.save_global_track_interval, R.string.save_global_track_interval_descr));
+		}
 	}
 
 

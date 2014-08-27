@@ -9,7 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-
+	<string name="confirm_every_run">Confirm every run</string>
+	<string name="save_global_track_interval_descr">Choose logging interval for track recording enabled by selecting widget on the map.</string>
+	<string name="save_global_track_interval">Default Global Logging interval </string>
 	<string name="background_service_int">GPS Wake-up interval</string>
 	<string name="enable_sleep_mode">Enable GPS sleep mode</string>
 	<string name="sleep_mode_stop_dialog">Stop GPS sleep mode?</string>

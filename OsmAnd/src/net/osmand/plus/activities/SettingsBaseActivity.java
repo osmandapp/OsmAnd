@@ -13,6 +13,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.actions.AppModeDialog;
@@ -222,6 +223,12 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 			vals.put(names[i], values[i]);
 		}
 	}
+	
+	@SuppressWarnings("unused")
+	private void registerDisablePreference(OsmandPreference p, String value, OsmandPreference<Boolean> disable) {
+		LinkedHashMap<String, Object> vals = (LinkedHashMap<String, Object>) listPrefValues.get(p.getId());
+		vals.put(value, disable);
+	}
 
 	public void registerEditTextPreference(OsmandPreference<String> b, PreferenceScreen screen) {
 		EditTextPreference p = (EditTextPreference) screen.findPreference(b.getId());
@@ -258,21 +265,29 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		registerListPreference(b, screen, intDescriptions, ints);
 	}
 
-	public ListPreference createTimeListPreference(OsmandPreference<Integer> b, int[] seconds, int[] minutes, int coeff, int title,
+	public ListPreference createTimeListPreference(OsmandPreference<Integer> b, int[] seconds, int[] minutes, int coeff, int title, int summary) {
+		return createTimeListPreference(b, seconds, minutes, coeff, null, title, summary);
+	}
+	public ListPreference createTimeListPreference(OsmandPreference<Integer> b, int[] seconds, int[] minutes, int coeff, CommonPreference<Boolean> disable, int title,
 			int summary) {
 		int minutesLength = minutes == null ? 0 : minutes.length;
 		int secondsLength = seconds == null ? 0 : seconds.length;
-		Integer[] ints = new Integer[secondsLength + minutesLength];
+		Integer[] ints = new Integer[secondsLength + minutesLength + (disable == null ? 0 : 1)];
 		String[] intDescriptions = new String[ints.length];
+		int k = 0;
 		for (int i = 0; i < secondsLength; i++) {
-			ints[i] = seconds[i] * coeff;
-			intDescriptions[i] = seconds[i] + " " + getString(R.string.int_seconds); //$NON-NLS-1$
+			k++;
+			ints[k] = seconds[i] * coeff;
+			intDescriptions[k] = seconds[i] + " " + getString(R.string.int_seconds); //$NON-NLS-1$
 		}
 		for (int i = 0; i < minutesLength; i++) {
-			ints[secondsLength + i] = (minutes[i] * 60) * coeff;
-			intDescriptions[secondsLength + i] = minutes[i] + " " + getString(R.string.int_min); //$NON-NLS-1$
+			k++;
+			ints[k] = (minutes[i] * 60) * coeff;
+			intDescriptions[k] = minutes[i] + " " + getString(R.string.int_min); //$NON-NLS-1$
 		}
-		return createListPreference(b, intDescriptions, ints, title, summary);
+		ListPreference lp = createListPreference(b, intDescriptions, ints, title, summary);
+		registerDisablePreference(b, getString(R.string.confirm_every_run), disable);
+		return lp;
 	}
 
 
@@ -443,7 +458,14 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 			CharSequence entry = ((ListPreference) preference).getEntries()[ind];
 			Map<String, ?> map = listPrefValues.get(preference.getKey());
 			Object obj = map.get(entry);
-			boolean changed = listPref.set(obj);
+			boolean changed ;
+			if(obj instanceof OsmandPreference) {
+				changed = true;
+				((OsmandPreference<Boolean>) obj).set(false);
+			} else {
+				changed = listPref.set(obj);
+			}
+			
 			return changed;
 		}
 		return true;
