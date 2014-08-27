@@ -473,7 +473,7 @@ public class MapRenderingTypes {
 		}
 		
 
-		if (poiParentCategory != null) {
+		if (poiParentCategory != null && poiParentCategory.length() > 0) {
 			rtype.poiCategory = AmenityType.getAndRegisterType(poiParentCategory);
 			rtype.poiSpecified = true;
 		}
@@ -482,7 +482,7 @@ public class MapRenderingTypes {
 		}
 
 		String poiCategory = parser.getAttributeValue("", "poi_category");
-		if (poiCategory != null) {
+		if (poiCategory != null && poiCategory.length() > 0) {
 			rtype.poiSpecified = true;
 			if (poiCategory.length() == 0) {
 				rtype.poiCategory = null;
