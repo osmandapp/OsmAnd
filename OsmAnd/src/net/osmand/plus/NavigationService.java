@@ -194,7 +194,17 @@ public class NavigationService extends Service implements LocationListener {
 		Notification notification = new Notification(R.drawable.bgs_icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
 		notification.flags = Notification.FLAG_NO_CLEAR;
-		notification.setLatestEventInfo(this, Version.getAppName(cl), getString(R.string.service_stop_background_service),
+
+		//Show currently active wake-up interval
+		int soi = settings.SERVICE_OFF_INTERVAL.get();
+		String nt;
+		if (soi <= 90000) {
+			nt = getString(R.string.service_stop_background_service)+ ": " + Integer.toString(soi/1000) + " " + getString(R.string.int_seconds);
+		} else {
+			nt = getString(R.string.service_stop_background_service)+ ": " + Integer.toString(soi/1000/60) + " " + app.getString(R.string.int_seconds);
+		}
+
+		notification.setLatestEventInfo(this, Version.getAppName(cl), nt,
 				PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		if (mStartForeground != null) {
