@@ -310,7 +310,7 @@
 </string>
   <string name="tip_initial">Aide</string>
   <string name="tip_initial_t">"OsmAnd est une application de navigation avec beaucoup de fonctionnalités.
-\n\nPour une introduction générale, les astuces et l\'aide avancée sont disponibles via \'Menu\'→\'Aide\' depuis l\'écran principal. "</string>
+\n\nUne introduction générale, les astuces et l\'aide avancée sont disponibles via \'Menu\'→\'Aide\' depuis l\'écran principal. "</string>
   <string name="next_button">Suivant</string>
   <string name="previous_button">Précédent</string>
   <string name="unit_of_length_descr">Sélectionner les unités de longueur et de vitesse</string>
@@ -482,7 +482,7 @@
   <string name="int_seconds">secondes</string>
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">Choisir un intervalle d\'actualisation de votre position dans le service en arrière-plan</string>
-  <string name="background_service_int">Intervalle de positionnement</string>
+  <string name="background_service_int">Intervalle de positionnement GPS</string>
   <string name="background_service_provider_descr">Choisir un fournisseur de géolocalisation pour le service arrière-plan</string>
   <string name="background_service_provider">Fournisseur de géolocalisation</string>
   <string name="background_router_service_descr">Activer le service en arrière-plan pour suivre votre position en continu</string>
