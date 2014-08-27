@@ -71,7 +71,7 @@
   <string name="user_name_descr">Nécessaire pour les contributions openstreetmap.org</string>
   <string name="user_password">Votre mot de passe OSM</string>
   <string name="user_password_descr">Nécessaire pour les contributions openstreetmap.org</string>
-  <string name="osmand_service">Service de veille</string>
+  <string name="osmand_service">Mode veille</string>
   <string name="osmand_service_descr">Permet d\'utiliser OsmAnd pendant que l\'écran est désactivé</string>
   <string name="tip_rotation_switching">Orientation de la carte</string>
   
