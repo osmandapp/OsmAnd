@@ -595,7 +595,7 @@
 	</string>
 	<string name="tip_initial">幫助</string>
 	<string name="tip_initial_t">"OsmAnd 是一個導航應用程式，含有很多的功能。
-\n\n一些基本功能介紹與使用提示以及進階的幫助，從地圖畫面可透過\'選單\' → \'幫助\'連結。 "</string>
+\n\n一些基本功能介紹、使用提示以及進階的幫助，從地圖畫面可透過\'選單\' → \'幫助\'連結。 "</string>
 	<string name="next_button">下一頁</string>
 	<string name="previous_button">上一頁</string>
 	<string name="unit_of_length_descr">更改長度與速度單位</string>
@@ -761,7 +761,7 @@
 	<string name="int_seconds">秒</string>
 	<string name="int_min">分。</string>
 	<string name="background_service_int_descr">設定休眠模式背景喚醒間隔</string>
-	<string name="background_service_int">喚醒間隔</string>
+	<string name="background_service_int">GPS 喚醒間隔</string>
 	<string name="background_service_provider_descr">選擇位置提供使用於休眠模式服務</string>
 	<string name="background_service_provider">位置提供</string>
 	<string name="background_router_service_descr">當螢幕關閉時，在背景執行 OsmAnd 追蹤您的位置</string>
