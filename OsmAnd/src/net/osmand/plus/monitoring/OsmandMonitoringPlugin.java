@@ -198,11 +198,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 
 				setText(txt, subtxt);
 				setImageDrawable(d);
-				//if ((last != lastUpdateTime) && globalRecord) {
 				if ((last != lastUpdateTime) && (globalRecord || isRecording)) {
 					lastUpdateTime = last;
-					//blink();
-					//test blink wuith 2 indicator states
+					//blink implementation with 2 indicator states (global logging + profile/navigation logging)
 					setImageDrawable(monitoringInactive);
 					invalidate();
 					postDelayed(new Runnable() {
@@ -216,23 +214,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 							invalidate();
 						}
 					}, 500);
-					//end test
 				}
 				updateVisibility(visible);
 				return true;
 			}
-			
-//			private void blink() {
-//				setImageDrawable(monitoringSmall);
-//				invalidate();
-//				postDelayed(new Runnable() {
-//					@Override
-//					public void run() {
-//						setImageDrawable(monitoringBig);
-//						invalidate();
-//					}
-//				}, 500);
-//			}
 		};
 		monitoringControl.updateInfo(null);
 
