@@ -345,10 +345,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				settings.SAVE_GLOBAL_TRACK_INTERVAL.set(vs.value);
 				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 				settings.SAVE_GLOBAL_TRACK_REMEMBER.set(choice.value);
-				//interval setting not needed here, handled centrally in app.startNavigationService
-				//if (app.getNavigationService() == null) {
-				//	settings.SERVICE_OFF_INTERVAL.set(0);
-				//}
+
+				if (settings.SAVE_GLOBAL_TRACK_INTERVAL.get() < 30000) {
+					settings.SERVICE_OFF_INTERVAL.set(0);
+				} else {
+					//Use SERVICE_OFF_INTERVAL > 0 to conserve power for longer GPX recording intervals
+					settings.SERVICE_OFF_INTERVAL.set(settings.SAVE_GLOBAL_TRACK_INTERVAL.get());
+				}
+
 				app.startNavigationService(NavigationService.USED_BY_GPX);		
 			}
 		};
