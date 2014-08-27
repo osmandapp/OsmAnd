@@ -382,7 +382,7 @@
 	<string name="user_name_descr">需要在 openstreetmap.org 註冊</string>
 	<string name="user_password">您 OSM 的密碼</string>
 	<string name="user_password_descr">需要在 openstreetmap.org 註冊</string>
-	<string name="osmand_service">休眠模式功能</string>
+	<string name="osmand_service">休眠模式</string>
 	<string name="osmand_service_descr">螢幕關閉時執行 OsmAnd</string>
 	<string name="tip_rotation_switching">地圖方向</string>
 	<string name="tip_rotation_switching_t_v2">在地圖畫面上您可點選羅盤的圖示，可循環切換地圖旋轉顯示方式。
