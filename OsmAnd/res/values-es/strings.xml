@@ -1802,7 +1802,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="stop_navigation_service">Parar</string>
 	<string name="enable_sleep_mode">Habilita modo reposo del GPS</string>
 	<string name="gps_wake_up_timer">Intervalo para despertar GPS</string>
-	<string name="sleep_mode_stop_dialog">¿Apagar el mode reposo del GPS?</string>
+	<string name="sleep_mode_stop_dialog">¿Apagar el modo reposo del GPS?</string>
 	<string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no se indica se cambiará a inglés o a nombres locales)</string>
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="local_map_names">Nombres locales</string>
