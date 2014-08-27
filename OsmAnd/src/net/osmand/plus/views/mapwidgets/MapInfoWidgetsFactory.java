@@ -104,12 +104,13 @@ public class MapInfoWidgetsFactory {
 					dlg.setTitle(app.getString(R.string.sleep_mode_stop_dialog));
 
 					//Show currently active wake-up interval
-					if (vs.value <= 90000) {
-						String vss = ": " + Integer.toString(vs.value/1000) + "int_seconds";
+					int soi = app.getSettings().SERVICE_OFF_INTERVAL.get();
+					if (soi <= 90000) {
+						String sois = ": " + Integer.toString(soi/1000) + "int_seconds";
 					} else {
-						String vss = ": " + Integer.toString(vs.value/1000/60) + "int_minutes";
+						String sois = ": " + Integer.toString(soi/1000/60) + "int_minutes";
 					}
-					dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + vss);
+					dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + sois);
 
 					dlg.setPositiveButton(app.getString(R.string.keep_navigation_service), null);
 					dlg.setNegativeButton(app.getString(R.string.stop_navigation_service), new DialogInterface.OnClickListener() {
