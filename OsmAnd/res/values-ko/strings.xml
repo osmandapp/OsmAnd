@@ -139,7 +139,7 @@
 	<string name="user_name_descr">http://openstreetmap.org 에 데이터 제출을 위해 필요합니다</string>
 	<string name="user_password">OSM 패스워드</string>
 	<string name="user_password_descr">http://openstreetmap.org 에 데이터를 제출하기 위해 필요합니다</string>
-	<string name="osmand_service">절전 모드 기능</string>
+	<string name="osmand_service">절전 모드</string>
 	<string name="osmand_service_descr">화면이 꺼져 있는 동안에도 OsmAnd 를 실행하기 위해 사용합니다</string>
 	
 	<string name="tip_rotation_switching">지도 방향</string>
@@ -619,7 +619,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="int_seconds">초</string>
 	<string name="int_min">분.</string>
 	<string name="background_service_int_descr">절전모드 서비스를 위해 위치를 찾는 주기를 선택합니다</string>
-	<string name="background_service_int">위치탐색 주기</string>
+	<string name="background_service_int">GPS 위치탐색 주기</string>
 	<string name="background_service_provider_descr">백그라운드 서비스를 위한 위치 제공자를 선택합니다</string>
 	<string name="background_service_provider">위치 제공자</string>
 	<string name="background_router_service_descr">오랫동안 위치를 추적하기 위해 백그라운드 서비스를 활성화합니다</string>
@@ -2033,9 +2033,9 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="rendering_attr_showCycleRoutes_name">자전거 경로 보이기</string>
     <string name="keep_navigation_service">계속</string>
 	<string name="stop_navigation_service">중지</string>
-	<string name="enable_sleep_mode">절전 모드 활성화</string>
+	<string name="enable_sleep_mode">GPS 절전 모드 활성화</string>
 	<string name="gps_wake_up_timer">GPS 위치탐색 주기</string>
-	<string name="sleep_mode_stop_dialog">GPS를 계속 On 할까요?</string>
+	<string name="sleep_mode_stop_dialog">GPS 절전 모드를 중지할까요?</string>
 	<string name="map_preferred_locale_descr">지도에 레이블에 대한 선호하는 언어 (사용할 수 없는 경우 영어 또는 지역 이름으로 전환 됩니다 )</string>
     <string name="map_preferred_locale">지도, 선호하는 언어</string>
     <string name="local_map_names">로컬 이름</string>
