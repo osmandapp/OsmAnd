@@ -1926,9 +1926,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis sprog ikke findes skiftes til engelsk eller lokale navne)</string>
     <string name="map_preferred_locale">Foretrukket sprog på kort</string>
     <string name="stop_navigation_service">Stop</string>
-	<string name="enable_sleep_mode">Aktiver dvaletilstand</string>
+	<string name="enable_sleep_mode">Aktiver GPS dvaletilstand</string>
 	<string name="gps_wake_up_timer">GPS vågn-op interval</string>
-	<string name="sleep_mode_stop_dialog">Hold GPS aktiv?</string>
+	<string name="sleep_mode_stop_dialog">Stop GPS dvaletilstand?</string>
 	<string name="keep_navigation_service">Hold</string>
 	<string name="lang_al">Albansk</string>
 	<string name="lang_ar">Arabisk</string>
