@@ -851,11 +851,11 @@ public class OsmandApplication extends Application {
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
 		if (getNavigationService() == null) {
 			if (intent == NavigationService.USED_BY_GPX) {
-				if (getSettings.SAVE_GLOBAL_TRACK_INTERVAL.set() < 30000) {
-					getSettings.SERVICE_OFF_INTERVAL.set(0);
+				if (getSettings().SAVE_GLOBAL_TRACK_INTERVAL.set() < 30000) {
+					getSettings().SERVICE_OFF_INTERVAL.set(0);
 				} else {
 					//Use SERVICE_OFF_INTERVAL > 0 to conserve power for longer GPX recording intervals
-					getSettings.SERVICE_OFF_INTERVAL.set(getSettings.SAVE_GLOBAL_TRACK_INTERVAL.set());
+					getSettings().SERVICE_OFF_INTERVAL.set(getSettings().SAVE_GLOBAL_TRACK_INTERVAL.set());
 				}
 			} else {
 				getSettings().SERVICE_OFF_INTERVAL.set(0);
