@@ -550,7 +550,7 @@
   <string name="save_track_interval">Czas pomiędzy sprawdzaniem pozycji podczas nawigacji</string>
   
   <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu grupami wg dni</string>
-  <string name="save_track_to_gpx">Zapisuj ślad do GPX</string>
+  <string name="save_track_to_gpx">Zapisuj ślad do pliku GPX podczas nawigacji</string>
   <string name="update_tile">Uaktualnij mapę</string>
   <string name="reload_tile">Przeładuj kafelki</string>
   <string name="user_name_descr">Wymagane do wysyłania danych na openstreetmap.org</string>
@@ -1936,7 +1936,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="speak_favorites">Pokazuj ulubione</string>
     <string name="speak_poi">Pokazuj punkty POI</string>
     <string name="save_track_to_gpx_globally">Zapisz ścieżkę do pliku GPX</string>
-	<string name="save_track_to_gpx_globally_descr">Logowanie pozycji do pliku GPX można włączyć lub wyłączyć używając widgetu nagrywania GPX na głównym ekranie.</string>
+	<string name="save_track_to_gpx_globally_descr">Logowanie pozycji do pliku GPX można włączyć lub wyłączyć używając widgetu nagrywania GPX na głównym ekranie</string>
 	<string name="save_track_interval_globally">Częstotliwość zapisywania</string>
 	<string name="record_plugin_description">Zapisz swoje ścieżki jednym guzikiem na ekranie mapy. Pokazuj ustawienia nagrywania twoich wycieczek do pliku GPX lub używając serwisu internetowego.</string>
     </resources>
