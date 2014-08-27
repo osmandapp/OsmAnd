@@ -850,11 +850,9 @@ public class OsmandApplication extends Application {
 		final Intent serviceIntent = new Intent(this, NavigationService.class);
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
 		if (getNavigationService() == null) {
-			if (intent == NavigationService.USED_BY_GPX) {
+			if (intent != NavigationService.USED_BY_GPX) {
 				//for only-USED_BY_GPX case use pre-configured SERVICE_OFF_INTERVAL
-				getSettings().SERVICE_OFF_INTERVAL.set();
-			} else {
-				//other cases always use "continuous"
+				//other cases always use "continuous":
 				getSettings().SERVICE_OFF_INTERVAL.set(0);
 			}
 			startService(serviceIntent);
