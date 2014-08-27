@@ -592,7 +592,7 @@
   <string name="int_seconds">секунд</string>
   <string name="int_min">мин.</string>
   <string name="background_service_int_descr">Выберите интервал позиционирования для сервиса</string>
-  <string name="background_service_int">Интервал позиционирования</string>
+  <string name="background_service_int">Интервал пробуждения GPS</string>
   <string name="background_service_provider_descr">Выберите источник позиционирования для сервиса</string>
   <string name="background_service_provider">Источник позиционирования</string>
   <string name="background_router_service_descr">Запускает OsmAnd в фоновом режиме для отслеживания местоположения при выключенном экране</string>
