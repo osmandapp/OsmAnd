@@ -197,14 +197,14 @@ public class NavigationService extends Service implements LocationListener {
 
 		//Show currently active wake-up interval
 		int soi = settings.SERVICE_OFF_INTERVAL.get();
-		String nt = getString(R.string.service_stop_background_service) + ". " +  getString(R.string.gps_wake_up_timer) + ": ";
+		String nt = getString(R.string.service_stop_background_service) + ".\n" +  getString(R.string.gps_wake_up_timer) + ": ";
 		if (soi <= 90000) {
 			nt = nt + Integer.toString(soi/1000) + " " + getString(R.string.int_seconds);
 		} else {
 			nt = nt + Integer.toString(soi/1000/60) + " " + getString(R.string.int_min);
 		}
 
-		notification.setLatestEventInfo(this, Version.getAppName(cl), nt,
+		notification.setLatestEventInfo(this, Version.getAppName(cl) + " " + getString(R.string.osmand_service), nt,
 				PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		if (mStartForeground != null) {
