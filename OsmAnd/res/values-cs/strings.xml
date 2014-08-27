@@ -415,7 +415,7 @@
   <string name="tip_map_context_menu_t">" \t Kontextové menu mapy obsahuje funkce závisející na aktuální poloze a je dostupné dlouhým stisknutím prstem na mapě, nebo stisknutím trackballu.
 \n\t Po stisknutí se objeví obdélník se souřadnicemi. Klepnutím na něj se otevře kontextové menu, po dlouhém stisknutí obdélník naopak zmizí. Kontextové menu je dostupné také tlačítkem \'Menu\'. "</string>
   <string name="tip_initial">Pomoc</string>
-  <string name="tip_initial_t">"OsmAnd je navigační aplikace s řadou funkcí.\n\nNěkteré z užitečných tipů a rozšířenou pomoc můžete vyvolat klepnutím na \'Menu\' → \'Pomoc\' z mapové obrazovky. "</string>
+  <string name="tip_initial_t">"OsmAnd je navigační aplikace s řadou funkcí.\n\nNěkteré základní pokyny, užitečné tipy a rozšířenou pomoc můžete vyvolat klepnutím na \'Menu\' → \'Pomoc\' z mapové obrazovky. "</string>
   <string name="next_button">Další</string>
   <string name="previous_button">Předchozí</string>
   <string name="unit_of_length_descr">Zvolte jednotku vzdálenosti a rychlosti</string>
@@ -541,7 +541,7 @@
   <string name="int_seconds">sekund</string>
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">Vyberte interval pro zaměřování polohy pro službu na pozadí</string>
-  <string name="background_service_int">Interval zaměřování</string>
+  <string name="background_service_int">Interval zaměřování GPS</string>
   <string name="background_service_provider_descr">Vybrat poskytovatele polohy pro službu na pozadí</string>
   <string name="background_service_provider">Poskytovatel polohy</string>
   <string name="background_router_service_descr">Spustí OsmAnd na pozadí, aby bylo možno zaznamenávat pozici i při vypnuté obrazovce</string>
