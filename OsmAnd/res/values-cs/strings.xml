@@ -406,7 +406,7 @@
   <string name="tip_app_mode">Režim aplikace</string>
   
   <string name="tip_navigation">Navigace</string>
-  <string name="tip_navigation_t">"Chcete-li získat pokyny k cílovému bodu, buď dlouze tapněte na mapu (pak krátce na popis a vyberte \'Navigovat sem\'), nebo vyberte \'Navigace\' po tapnutí na výsledek hledání nebo oblíbeného místa.\n\nCíl je vyznačený jako cílová vlajka - šachovnice a OsmAnd zobrazí směr (oranžový trojúhelník) a vzdálenost k cíli.\n\nPro zobrazení trasy k cíli z jiného bodu než současného místa, zvolte bod startu na mapě a vyberte volbu \'Navigovat odsud\'\n\nJestliže použijete volbu \'Navigovat odsud\' spolu s volbou \'Navigace\', OsmAnd se přepne na vaší aktuální polohu ihned jakmile bude zjištěna (proto tato kombinace může být použita pro rychlý start navigace) "</string>
+  <string name="tip_navigation_t">"Chcete-li získat pokyny k cílovému bodu, buď dlouze tapněte na mapu (pak krátce na popis a vyberte \'Navigovat sem\'), nebo vyberte \'Navigace\' po tapnutí na výsledek hledání nebo oblíbeného místa.\n\nCíl je vyznačený jako cílová vlajka - šachovnice na mapě a OsmAnd zobrazí směr (oranžový trojúhelník) a vzdálenost k cíli.\n\nPro zobrazení trasy k cíli z jiného bodu než současného místa, zvolte bod startu na mapě a vyberte volbu \'Navigovat odsud\'\n\nJestliže použijete volbu \'Navigovat odsud\' spolu s volbou \'Navigace\', OsmAnd se přepne na vaší aktuální polohu ihned jakmile bude zjištěna (proto tato kombinace může být použita pro rychlý start navigace) "</string>
   <string name="tip_search">Vyhledávání</string>
   <string name="tip_search_t">\tMůžete vyhledat místo přímo na mapě, podle adresy, umístění, jako bod zájmu (POI), nebo v seznamu oblíbených.
 \n\t Vyhledávání se otevře stisknutím \'Hledat\'. Nalezené místo pak můžete nechat zobrazit na mapě, nebo ho použít jako cílový bod.
@@ -414,10 +414,8 @@
   <string name="tip_map_context_menu">Kontextové menu mapy</string>
   <string name="tip_map_context_menu_t">" \t Kontextové menu mapy obsahuje funkce závisející na aktuální poloze a je dostupné dlouhým stisknutím prstem na mapě, nebo stisknutím trackballu.
 \n\t Po stisknutí se objeví obdélník se souřadnicemi. Klepnutím na něj se otevře kontextové menu, po dlouhém stisknutí obdélník naopak zmizí. Kontextové menu je dostupné také tlačítkem \'Menu\'. "</string>
-  <string name="tip_initial">Tipy a triky</string>
-  <string name="tip_initial_t">\t OsmAnd je navigační aplikace s řadou funkcí.
-\n\t Základní úvod a popis užitečných tipů a triků můžete vyvolat klepnutím na ikonu otazníku nahoře v hlavním menu.
-</string>
+  <string name="tip_initial">Pomoc</string>
+  <string name="tip_initial_t">"OsmAnd je navigační aplikace s řadou funkcí.\n\nNěkteré z užitečných tipů a rozšířenou pomoc můžete vyvolat klepnutím na \'Menu\' → \'Pomoc\' z mapové obrazovky. "</string>
   <string name="next_button">Další</string>
   <string name="previous_button">Předchozí</string>
   <string name="unit_of_length_descr">Zvolte jednotku vzdálenosti a rychlosti</string>
@@ -694,11 +692,11 @@
   <string name="additional_settings">Další volby</string>
   <string name="settings">Nastavení</string>
   <string name="save_current_track_descr">Uloží aktuální trasu na SD kartu</string>
-  <string name="save_current_track">Uložit aktuální trasu</string>
-  <string name="save_track_interval_descr">Vyberte časový interval pro ukládání trasy</string>
-  <string name="save_track_interval">Interval ukládání trasy</string>
-  <string name="save_track_to_gpx_descrp">Trasy budou ukládány do adresáře s trasami, seskupené podle dní</string>
-  <string name="save_track_to_gpx">Záznam trasy do GPX</string>
+  <string name="save_current_track">Uložit aktuální trasu GPX</string>
+  <string name="save_track_interval_descr">Vyberte interval pro ukládání trasy během navigace</string>
+  <string name="save_track_interval">Interval ukládání trasy během navigace</string>
+  <string name="save_track_to_gpx_descrp">Během navigace budou trasy ukládány do adresáře s trasami</string>
+  <string name="save_track_to_gpx">Záznam trasy do GPX během navigace</string>
   <string name="update_tile">Aktualizovat mapu</string>
   <string name="reload_tile">Načíst znovu dlaždici</string>
   <string name="mark_point">Cíl</string>
@@ -1204,14 +1202,14 @@
         \n\t* Další nastavení pro stabilizaci kompasu
         \n\t* Tlačítko vlevo nahoře na mapové obrazovce nahrazuje tlačítko Menu
     </string>
-    <string name="monitoring_settings">Záznamové služby</string>
+    <string name="monitoring_settings">Záznam cesty</string>
     <string name="osmand_monitoring_plugin_name">Záznamové služby</string>
     <string name="accessibility_options">Volby usnadnění</string>
     <string name="select_address_activity">Vybrat adresu</string>
     <string name="favourites_list_activity">Vybrat oblíbené</string>
     <string name="local_openstreetmap_act_title">Editace OSM</string>
     <string name="default_buttons_other_actions">Další akce</string>
-    <string name="monitoring_settings_descr">Konfigurace záznamů cest</string>
+    <string name="monitoring_settings_descr">Konfigurace záznamů vašich cest</string>
     <string name="install_paid">Instalovat plnou verzi</string>
     <string name="cancel_navigation">Zastavit navigaci</string>
     <string name="use_kalman_filter_compass_descr">Použít Kalmanův filtr k zabránění odchylek kompasu</string>
@@ -1293,7 +1291,7 @@
     
 	<string name="osmodroid_mode_on">Zastavit OsMoDroid</string>    
     <string name="osmodroid_mode_off">Spustit OsMoDroid</string>
-    <string name="announce_gpx_waypoints">Hlásit GPX body</string>
+    <string name="announce_gpx_waypoints">Oznamovat GPX body</string>
     <string name="speak_title">Hlásit…</string>
 	<string name="speak_descr">Konfigurace hlášení názvů ulic, dopravních upozornění, radarů, rychlostních omezení</string>
 	<string name="speak_street_names">Hlásit názvy ulic (TTS)</string>
@@ -1312,7 +1310,7 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Vybrat existující…</string>
     <string name="edit_tilesource_name">Název</string>
-    <string name="tips_and_tricks">Tipy</string>
+    <string name="tips_and_tricks">Pomoc</string>
     <string name="tip_map_styles">Styly mapy</string>
 	<string name="local_index_tile_data_downloadable">Ke stažení: %1$s</string>
     <string name="maps_define_edit">Vytvořit/Upravit…</string>
@@ -1652,9 +1650,9 @@ s často kladenými otázkami.</string>
     <string name="home">Domů</string>
     <string name="keep_navigation_service">Ponechat</string>
 	<string name="stop_navigation_service">Zastavit</string>
-	<string name="enable_sleep_mode">Zapnout režim spánku</string>
+	<string name="enable_sleep_mode">Zapnout režim spánku GPS</string>
 	<string name="gps_wake_up_timer">Interval probouzení GPS</string>
-	<string name="sleep_mode_stop_dialog">Udržovat GPS zapnutou?</string>
+	<string name="sleep_mode_stop_dialog">Ukončit režim spánku GPS?</string>
 	<string name="map_preferred_locale_descr">Preferovaný jazyk pro nápisy na mapě (pokud není dostupný budou použité anglické nebo lokální názvy)</string>
     <string name="map_preferred_locale">Preferovaný jazyk mapy</string>
     <string name="local_map_names">Lokální názvy</string>
@@ -1708,4 +1706,20 @@ s často kladenými otázkami.</string>
     <string name="rendering_value_bicycle_name">Jízdní kolo</string>
     <string name="rendering_value_pedestrian_name">Chodec</string>
     <string name="download_additional_maps">Stáhnout chybějící mapy %1$s (%2$d MB)?</string>
-    </resources>
+    <string name="save_track_interval_globally">Interval ukládání trasy</string>
+	<string name="rendering_attr_publicTransportMode_name">Veřejná doprava</string>
+	<string name="record_plugin_description">Uložte vaše trasy stlačením jediného tlačítka na mapě. Zobrazte nastavení pro zaznamenávání cest do lokálního GPX souboru nebo online pomocí webových služeb.</string>
+    <string name="record_plugin_name">Zaznamenávat vaše cesty</string>
+    <string name="int_hour">h</string>
+    <string name="duration">Trvání</string>
+    <string name="distance">Vzdálenost</string>
+    <string name="index_tours">Cesty</string>
+    <string name="flat_list_waypoints">Všechny</string>
+    <string name="save_track_to_gpx_globally">"Ukládat trasu do GPX  souboru"</string>
+	<string name="waypoints">Body na trase</string>
+    <string name="targets">Cíle</string>
+    <string name="way_alarms">Překážky</string>
+    <string name="speak_favorites">Oznamovat oblíbené</string>
+    <string name="speak_poi">Oznamovat body zájmu POI</string>
+    <string name="save_track_to_gpx_globally_descr">Záznam do GPX souboru může být zapnut nebo vypnut pomocí widgetu Záznam trasy na mapové obrazovce</string>
+	</resources>
