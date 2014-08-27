@@ -472,7 +472,7 @@
   <string name="int_seconds">segundos</string>
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">Fija el intervalo de activación del servicio de fondo</string>
-  <string name="background_service_int">Intervalo de activación</string>
+  <string name="background_service_int">Intervalo de activación GPS</string>
   <string name="background_service_provider_descr">Elige el proveedor de localización para el modo reposo</string>
   <string name="background_service_provider">Proveedor de localización</string>
   <string name="background_router_service_descr">Ejecuta OsmAnd de fondo para trazar su posición con la pantalla apagada</string>
@@ -626,9 +626,9 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="save_current_track_descr">Guarda la traza actual en la SD ahora</string>
   <string name="save_current_track">Guardar traza actual</string>
   <string name="save_track_interval">Intervalo de guardado durante navegación</string>
-  <string name="save_track_interval_descr">Elige el intervalo de posicionamiento para trazas</string>
+  <string name="save_track_interval_descr">Elige el intervalo de registro de trazas durante la navegación</string>
   <string name="save_track_to_gpx_descrp">Las trazas se almacenarán en el directorio de trazas durante la navegación</string>
-  <string name="save_track_to_gpx">Guardar traza en fichero GPX</string>
+  <string name="save_track_to_gpx">Guardar traza en archivo GPX durante la navegación</string>
   <string name="update_tile">Actualizar mapa</string>
   <string name="reload_tile">Recargar tesela</string>
   <string name="mark_point">Objetivo</string>
@@ -1800,9 +1800,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_gpx_track_downloaded">Pista OsMo %1$s descargada.</string>
     <string name="keep_navigation_service">Mantener</string>
 	<string name="stop_navigation_service">Parar</string>
-	<string name="enable_sleep_mode">Habilita modo reposo</string>
+	<string name="enable_sleep_mode">Habilita modo reposo del GPS</string>
 	<string name="gps_wake_up_timer">Intervalo para despertar GPS</string>
-	<string name="sleep_mode_stop_dialog">¿Mantener el GPS encendido?</string>
+	<string name="sleep_mode_stop_dialog">¿Apagar el mode reposo del GPS?</string>
 	<string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no se indica se cambiará a inglés o a nombres locales)</string>
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="local_map_names">Nombres locales</string>
