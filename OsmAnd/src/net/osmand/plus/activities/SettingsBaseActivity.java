@@ -272,18 +272,18 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 			int summary) {
 		int minutesLength = minutes == null ? 0 : minutes.length;
 		int secondsLength = seconds == null ? 0 : seconds.length;
-		Integer[] ints = new Integer[secondsLength + minutesLength + (disable == null ? 0 : 1)];
+		Integer[] ints = new Integer[secondsLength + minutesLength];
 		String[] intDescriptions = new String[ints.length];
 		int k = 0;
 		for (int i = 0; i < secondsLength; i++) {
-			k++;
 			ints[k] = seconds[i] * coeff;
 			intDescriptions[k] = seconds[i] + " " + getString(R.string.int_seconds); //$NON-NLS-1$
+			k++;
 		}
 		for (int i = 0; i < minutesLength; i++) {
-			k++;
 			ints[k] = (minutes[i] * 60) * coeff;
 			intDescriptions[k] = minutes[i] + " " + getString(R.string.int_min); //$NON-NLS-1$
+			k++;
 		}
 		ListPreference lp = createListPreference(b, intDescriptions, ints, title, summary);
 		registerDisablePreference(b, getString(R.string.confirm_every_run), disable);
