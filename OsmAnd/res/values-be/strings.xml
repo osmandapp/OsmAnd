@@ -1217,7 +1217,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="int_seconds">сэкундаў</string>
 	<string name="int_min">хв.</string>
 	<string name="background_service_int_descr">Абярыце інтэрвал абуджэння для спячага рэжыму</string>
-	<string name="background_service_int">Інтэрвал абуджэньня</string>
+	<string name="background_service_int">Інтэрвал абуджэньня GPS</string>
 	<string name="background_service_provider_descr">Абярыце крыніцу каардынат для выкарыстаньня падчас спячага рэжыму</string>
 	<string name="background_service_provider">Крыніца каардынат</string>
 	<string name="background_router_service_descr">Запускае OsmAnd ў фонавым рэжыме для адсочвання месцазнаходжання пры выключаным экране</string>
