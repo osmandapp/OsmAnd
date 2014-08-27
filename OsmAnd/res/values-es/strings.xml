@@ -86,7 +86,7 @@
   <string name="user_name_descr">Necesario para envíos a openstreetmap.org</string>
   <string name="user_password">Su clave OSM</string>
   <string name="user_password_descr">Necesario para envíos a openstreetmap.org</string>
-  <string name="osmand_service">Funcionalidad de modo reposo</string>
+  <string name="osmand_service">Modo reposo</string>
   <string name="osmand_service_descr">Para ejecutar OsmAnd mientras la pantalla está apagada</string>
   <string name="tip_rotation_switching">Rotación del mapa</string>
   
