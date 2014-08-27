@@ -1827,6 +1827,6 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="rendering_attr_publicTransportMode_name">Visuomeninio transporto režimas</string>
 	<string name="save_track_to_gpx_globally">Įrašyti maršrutą į GPX failą</string>
 	<string name="save_track_interval_globally">Įrašymo intervalas</string>
-	<string name="save_track_to_gpx_globally_descr">Bendras vietas išsaugojimas į GPX failą gali būti įjungtas ar išjungtas panaudojant GPX įrankį žemėlapio ekrane</string>
+	<string name="save_track_to_gpx_globally_descr">Bendras vietos išsaugojimas į GPX failą gali būti įjungtas ar išjungtas panaudojant GPX įrankį žemėlapio ekrane</string>
 	<string name="record_plugin_description">Kelionės istorijos išsaugojimas vieno mygtuko ekrane paspaudimu. Nustatymai kelionės istorijos išsaugojimui GPX faile ar naudojantis internetine paslauga.</string>
     </resources>
