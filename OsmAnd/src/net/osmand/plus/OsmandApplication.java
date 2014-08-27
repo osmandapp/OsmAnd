@@ -563,7 +563,7 @@ public class OsmandApplication extends Application {
 			//I guess we should not start the sleep mode service automatically upon app start
 			//if(getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()){
 			//	startNavigationService(NavigationService.USED_BY_GPX);
-			}
+			//}
 			// restore backuped favorites to normal file
 			final File appDir = getAppPath(null);
 			File save = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
