@@ -138,7 +138,7 @@
   <string name="user_name_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
   <string name="user_password">OSM jelszavad</string>
   <string name="user_password_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
-  <string name="osmand_service">Alvó állaptú használat</string>
+  <string name="osmand_service">Alvó mód</string>
   <string name="osmand_service_descr">OsmAnd kikapcsolt képernyővel való használatához</string>
   <string name="tip_rotation_switching">Térkép elforgatása</string>
   
@@ -359,7 +359,7 @@
 	</string>
   <string name="tip_initial">Súgó</string>
   <string name="tip_initial_t">"Az OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik.
-\n\nEgy gyors bemutatót és hasznos tippeket találsz a térkép képernyő \'menü\' → \'Tippek\' gombjára kattintva. "</string>
+\n\nEgy gyors bemutatót és hasznos tippeket találsz a térkép képernyő \'menü\' → \'Súgó\' gombjára kattintva. "</string>
   <string name="next_button">Következő</string>
   <string name="previous_button">Előző</string>
   <string name="unit_of_length_descr">Hosszúság és sebesség mértékegységének megváltoztatása</string>
@@ -530,7 +530,7 @@
   <string name="int_seconds">másodperc</string>
   <string name="int_min">perc</string>
   <string name="background_service_int_descr">Alvó mód szolgáltatás felébredési intervallumának megadása</string>
-  <string name="background_service_int">Felébredési intervallum</string>
+  <string name="background_service_int">GPS felébredési intervallum</string>
   <string name="background_service_provider_descr">Helymeghatározási szolgáltatás kiválasztása az alvó mód szolgáltatáshoz</string>
   <string name="background_service_provider">Helymeghatározási szolgáltatás</string>
   <string name="background_router_service_descr">OsmAnd futtatása a háttérben, hogy kikapcsolt képernyővel is kövesse a pozíciódat</string>
@@ -541,7 +541,7 @@
   <string name="search_poi_filter">Szűrő</string>
   <string name="menu_mute_off">Hang bekapcsolva</string>
   <string name="menu_mute_on">Némítva</string>
-  <string name="voice_provider_descr">Hangutasítás kiválasztása navigációhoz (nyelvkódokhoz lásd ISO 639-1)</string>
+  <string name="voice_provider_descr">Hangutasítás kiválasztása navigációhoz</string>
   <string name="voice_provider">Hangutasítás</string>
   <string name="voice_data_initializing">Beszédadat előkészítése…</string>
   <string name="voice_data_not_supported">Nem támogatott beszédadat</string>
@@ -682,10 +682,10 @@
   <string name="settings">Beállítások</string>
   <string name="save_current_track_descr">Jelenlegi útvonal SD kártyára mentése</string>
   <string name="save_current_track">Jelenlegi útvonal mentése</string>
-  <string name="save_track_interval_descr">Milyen sűrűn rögzítsen pontokat a mentett útvonalba</string>
-  <string name="save_track_interval">Rögzítési sűrűség</string>
-  <string name="save_track_to_gpx_descrp">Az útvonalak napi csoportosításban kerülnek mentésre a track könyvtárba</string>
-  <string name="save_track_to_gpx">Útvonal mentése GPX fájlba</string>
+  <string name="save_track_interval_descr">Válassz naplózási időközt a navigáció alatti útvonalrögzítéshez</string>
+  <string name="save_track_interval">Rögzítési sűrűség navigáció közben</string>
+  <string name="save_track_to_gpx_descrp">Az útvonalak navigáció közben kerülnek mentésre a track könyvtárba</string>
+  <string name="save_track_to_gpx">Útvonal naplózása GPX fájlba navigáció közben</string>
   <string name="update_tile">Térkép frissítés</string>
   <string name="reload_tile">Térképcsempe újraolvasása</string>
   <string name="mark_point">Célpont</string>
@@ -1344,7 +1344,7 @@
 	<string name="about_version">Verzió:</string>
     <string name="about_settings">Névjegy</string>
     <string name="about_settings_descr">Verzióinfó, licencek, csapattagok</string>
-    <string name="tips_and_tricks">Tippek</string>
+    <string name="tips_and_tricks">Súgó</string>
     <string name="tip_recent_changes_1_6_t">Az 1.6 kiadás újdonságai:
     \n\t* Teljesen átlátszó térképháttér támogatása
     \n\t* FullHD eszköztámogatás
@@ -1658,9 +1658,9 @@
     <string name="loading_smth">Betöltés %1$s …</string>
     <string name="keep_navigation_service">Megtart</string>
 	<string name="stop_navigation_service">Stop</string>
-	<string name="enable_sleep_mode">Alvó mód engedélyezése</string>
+	<string name="enable_sleep_mode">GPS alvó mód engedélyezése</string>
 	<string name="gps_wake_up_timer">GPS felébresztési intervallum</string>
-	<string name="sleep_mode_stop_dialog">GPS bekapcsolva maradjon?</string>
+	<string name="sleep_mode_stop_dialog">Kikapcsolod a GPS alvó módot?</string>
 	<string name="map_preferred_locale_descr">A térképfeliratok preferált nyelve (ha nem elérhető, angolra vált, vagy a helyi nyelvre)</string>
     <string name="map_preferred_locale">Térképfeliratok nyelve</string>
     <string name="local_map_names">Helyi név</string>
@@ -1753,4 +1753,11 @@
     <string name="int_hour">ó</string>
     <string name="duration">Időtartam</string>
     <string name="distance">Távolság</string>
-    </resources>
+    <string name="confirm_every_run">Mindig kérdezz rá</string>
+	<string name="save_global_track_interval_descr">Válassz rögzítési intervallumot az általános nyomvonalrögzítéshez (a térkép GPX felvétel gombjával indítva)</string>
+	<string name="save_global_track_interval">Általános rögzítési időköz</string>
+	<string name="save_track_to_gpx_globally">Nyomvonal naplózása GPX fájlba</string>
+	<string name="save_track_to_gpx_globally_descr">A pozíció GPX fájlba naplózása ki- és bekapcsolható a térkép GPX rögzítés gombjával</string>
+	<string name="save_track_interval_globally">Rögzítési időköz</string>
+	<string name="rendering_attr_publicTransportMode_name">Tömegközlekedési mód</string>
+	</resources>
