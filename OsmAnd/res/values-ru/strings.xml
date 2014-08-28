@@ -53,10 +53,9 @@
     <string name="osmodroid_plugin_description">OsMoDroid плагин - это расширение для OsmAnd используещее OsModroid приложение для слежения. Информация о сервисе доступна на сайте http://esya.ru.</string>
     <string name="osmodroid_plugin_name">OsMoDroid</string>
 	<string name="tip_altitude_offset">Отображение высоты - коррекция смещения</string>
-	<string name="tip_altitude_offset_t">Большинство GPS устройств отображает высоту относительно эллипсоида WGS84, для определения высоты над уровнем моря необходимо провести коррекцию, которая зависит от местоположения.
-		\n\nДля более точного вычисления высоты используется картографическая проекция EGM96.
-		\n\nOsmAnd будет отображать высоту над уровнем моря в системе координат EGM96 после загрузки файла \'World Altitide Correction\' (WW15MGH.DAC) через менеджер загрузок. (Оригинал - http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
-	</string>
+	<string name="tip_altitude_offset_t">"Большинство GPS устройств отображает высоту относительно эллипсоида WGS84, для определения высоты над уровнем моря необходимо провести коррекцию, которая зависит от местоположения.
+\n\nДля более точного вычисления высоты используется картографическая проекция EGM96.
+\n\nOsmAnd будет отображать высоту над уровнем моря в системе координат EGM96 после загрузки файла \"World Altitide Correction\" (WW15MGH.DAC) через меню \"Настройки\" → \"Управление файлами карт\". (Оригинал - http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     
     <string name="no_buildings_found">Здания не найдены.</string>
     <string name="incremental_search_city">Выберите город</string>
