@@ -1822,4 +1822,7 @@
 	<string name="save_track_to_gpx_globally">記錄軌跡成 GPX 檔案</string>
 	<string name="save_track_interval_globally">記錄間隔</string>
 	<string name="save_track_to_gpx_globally_descr">通常位置記錄到 GPX 檔案，在地圖畫面上使用 GPX 記錄小工具，可以開啟或關閉</string>
+	<string name="confirm_every_run">始終詢問</string>
+	<string name="save_global_track_interval_descr">為通常的軌跡記錄選擇記錄間隔（透過在地圖上的 GPX 記錄小工具啟用）</string>
+	<string name="save_global_track_interval">通常的記錄間隔</string>
 	</resources>
