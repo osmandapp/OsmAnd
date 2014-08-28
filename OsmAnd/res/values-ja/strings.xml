@@ -1341,7 +1341,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="av_camera_focus_hiperfocal">過焦点フォーカス</string>
 	<string name="av_camera_focus_edof">拡張被写界深度(EDOF)</string>
 	<string name="av_camera_focus_continuous">カメラは、継続的にフォーカスします</string>
-	<string name="amenity_type_seamark">満潮線</string>
+	<string name="amenity_type_seamark">満潮線(Seamark)</string>
     <string name="app_modes_choose_descr">アプリケーション表示用のプロファイルを選択してください</string>
     <string name="app_modes_choose">アプリケーションプロファイル</string>
 	<string name="map_widget_map_rendering">マップ描画:</string>
@@ -2068,4 +2068,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="save_track_to_gpx_globally">GPXファイルに経路を記録</string>
 	<string name="save_track_to_gpx_globally_descr">GPXファイルへの一般の位置(General position)記録は、マップ画面上のGPX記録ウィジェットを使用してオンとオフを切り替えることができます</string>
 	<string name="save_track_interval_globally">記録間隔</string>
+	<string name="confirm_every_run">常に尋ねる</string>
+	<string name="save_global_track_interval_descr">標準的な経路の記録間隔を選択(地図上のGPX記録ウィジェットで有効化)</string>
+	<string name="save_global_track_interval">標準記録間隔</string>
 	</resources>
