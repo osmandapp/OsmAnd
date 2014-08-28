@@ -1979,4 +1979,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
 	<string name="save_track_interval_globally">Logningsinterval</string>
 	<string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til/fra med \'GPX optagelse\' på hovedskærmen</string>
+	<string name="confirm_every_run">Spørg altid</string>
+	<string name="save_global_track_interval_descr">Vælg logintervallet for almindelige track recording (aktiveret via GPX optagelse widget på kortet)</string>
+	<string name="save_global_track_interval">Generelt logningsinterval</string>
 	</resources>
