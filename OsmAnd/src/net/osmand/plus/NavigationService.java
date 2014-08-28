@@ -196,6 +196,9 @@ public class NavigationService extends Service implements LocationListener {
 		broadcastReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
+				if(settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+					settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
+				}
 				NavigationService.this.stopSelf();
 			}
 
