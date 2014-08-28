@@ -300,7 +300,7 @@
 		\n\nUna caja marcador puede ser ocultada con una pulsación larga sobre ella.
 	</string>
   <string name="tip_initial">Ayuda</string>
-  <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nUna introducción básica, consejos de uso y la ayuda avanzada están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
+  <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nAlguna introducción básica, consejos de uso, y la ayuda avanzada están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
   <string name="next_button">Siguiente</string>
   <string name="previous_button">Anterior</string>
   <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
