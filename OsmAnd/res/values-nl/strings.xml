@@ -588,7 +588,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="search_poi_filter">Filter</string>
   <string name="menu_mute_off">Geluid is aan</string>
   <string name="menu_mute_on">Geluid is uit</string>
-  <string name="voice_provider_descr">Kies stembegeleiding voor navigatie</string>
+  <string name="voice_provider_descr">Kies de taal van de stembegeleiding voor navigatie</string>
   <string name="voice_provider">Stembegeleiding</string>
   <string name="voice_data_initializing">Initialisatie stemgegevens…</string>
   <string name="voice_data_not_supported">Niet-ondersteunde versie van stemgegevens</string>
@@ -730,7 +730,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="save_current_track_descr">Huidige track nu op SD-kaart opslaan</string>
   <string name="save_current_track">Huidige GPX-track opslaan</string>
   <string name="save_track_interval">Registratie-interval tijdens de navigatie</string>
-  <string name="save_track_interval_descr">Kies Registratie-interval voor track opname tijdens navigatie</string>
+  <string name="save_track_interval_descr">Kies logging-interval voor track opname tijdens navigatie</string>
   <string name="save_track_to_gpx_descrp">Tracks worden in de track-map opgeslagen tijdens de navigatie</string>
   <string name="save_track_to_gpx">Registreer track in GPX-bestand tijdens de navigatie</string>
   <string name="update_tile">Kaart bijwerken</string>
@@ -1910,9 +1910,9 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="gpx_start_new_segment">Start nieuw segment</string>
     <string name="keep_navigation_service">Houden</string>
 	<string name="stop_navigation_service">Stop</string>
-	<string name="enable_sleep_mode">Slaapstand inschakelen</string>
+	<string name="enable_sleep_mode">GPS Slaapstand inschakelen</string>
 	<string name="gps_wake_up_timer">GPS ontwaak interval</string>
-	<string name="sleep_mode_stop_dialog">GPS aanlaten?</string>
+	<string name="sleep_mode_stop_dialog">Stop GPS slaapstand?</string>
 	<string name="lang_fa">Perzisch</string>
 	<string name="lang_al">Albanees</string>
 	<string name="lang_ar">Arabisch</string>
@@ -1953,7 +1953,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="speak_favorites">Meld favorieten</string>
     <string name="speak_poi">Meld interessepunt (POI)</string>
     <string name="flat_list_waypoints">Alle</string>
-    <string name="index_tours">Rondreizen</string>
+    <string name="index_tours">Reizen</string>
     <string name="record_plugin_name">Reizen opnemen</string>
     <string name="int_hour">u.</string>
     <string name="duration">Duur</string>
