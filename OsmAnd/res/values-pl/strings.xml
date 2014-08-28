@@ -207,7 +207,7 @@
 	</string>
   <string name="tip_initial">Pomoc</string>
   <string name="tip_initial_t">"OsmAnd jest programem do nawigacji posiadającym wiele funkcji.
-\n\nPodstawowe porady, wskazówki i zaawansowana pomoc są dostępne po wybraniu \'Menu\' → \'Pomoc\' z ekranu mapy. "</string>
+\n\nPodstawowe porady, wskazówki dotyczące użytkowania i zaawansowana pomoc są dostępne po wybraniu \'Menu\' → \'Pomoc\' z ekranu mapy. "</string>
   <string name="next_button">Następny</string>
   <string name="previous_button">Wstecz</string>
   <string name="unit_of_length_descr">Zmień jednostki długości i prędkości</string>
@@ -385,7 +385,7 @@
   <string name="int_seconds">sekund</string>
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">Ustaw czas pomiędzy wybudzeniami używany przez usługę trybu uśpienia</string>
-  <string name="background_service_int">Czas pomiędzy wybudzeniami</string>
+  <string name="background_service_int">Czas pomiędzy wybudzeniami GPS</string>
   <string name="background_service_provider_descr">Wybierz dostawcę lokalizacji dla trybu w tle</string>
   <string name="background_service_provider">Sposób lokalizacji</string>
   <string name="background_router_service_descr">Uruchom usługę śledzącą Twoją pozycję w tle podczas kiedy ekran jest wyłączony</string>
@@ -1937,7 +1937,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="save_track_to_gpx_globally_descr">Logowanie pozycji do pliku GPX można włączyć lub wyłączyć używając widgetu nagrywania GPX na głównym ekranie</string>
 	<string name="save_track_interval_globally">Częstotliwość zapisywania</string>
 	<string name="record_plugin_description">Zapisz swoje ścieżki jednym guzikiem na ekranie mapy. Pokazuj ustawienia nagrywania twoich wycieczek do pliku GPX lub używając serwisu internetowego.</string>
-    <string name="confirm_every_run">Pytaj przy każdym uruchomieniu</string>
-	<string name="save_global_track_interval_descr">Wybierz interwał rejestrowania dla włączonego nagrywania ścieżki poprzez wybieranie widżetu na mapie.</string>
-	<string name="save_global_track_interval">"Domyślny globalny interwał rejestrowania "</string>
+    <string name="confirm_every_run">Zawsze pytaj</string>
+	<string name="save_global_track_interval_descr">Wybierz interwał rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet nagrywania GPX na mapie)</string>
+	<string name="save_global_track_interval">Ogólny interwał rejestrowania</string>
 	</resources>
