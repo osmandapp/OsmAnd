@@ -1729,4 +1729,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="save_track_to_gpx_globally">Carriga sa rasta in unu documentu GPX</string>
 	<string name="save_track_interval_globally">Intervallu de registratzione</string>
 	<string name="save_track_to_gpx_globally_descr">Sa registratzione de sa positzione in unu documentu GPX podet èssere alluta o morta impreande su widged de registratzione GPX in s\'ischermu mapa</string>
+	<string name="confirm_every_run">Pregunta semper</string>
+	<string name="save_global_track_interval">Intervallu de registratzione generale</string>
+	<string name="save_global_track_interval_descr">Issèbera s\'intervallu pro sa registratzione generale de sas rastas (abilitadu tramite su widget registratzione GPX in sa mapa)</string>
 	</resources>
