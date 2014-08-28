@@ -1,5 +1,8 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="confirm_every_run">Jedesmal nachfragen</string>
+	<string name="save_global_track_interval_descr">Aufzeichnungs-Intervall für die generelle Positionsaufzeichnung (via Schaltfläche \'GPX-Aufnahme\' auf dem Kartenbildschirm)</string>
+	<string name="save_global_track_interval">Generelles Aufzeichnungs-Intervall</string>
 	<string name="enable_sleep_mode">GPS-Hintergrunddienst aktivieren</string>
 	<string name="sleep_mode_stop_dialog">GPS-Hintergrunddienst stoppen?</string>
 	<string name="bg_service_sleep_mode_off">Hintergrunddienst\n einschalten</string>
