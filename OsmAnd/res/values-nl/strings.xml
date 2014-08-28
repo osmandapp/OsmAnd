@@ -172,7 +172,7 @@
   <string name="user_name_descr">Nodig voor openstreetmap.org aanmelding</string>
   <string name="user_password">OSM wachtwoord</string>
   <string name="user_password_descr">Nodig voor openstreetmap.org aanmelding</string>
-  <string name="osmand_service">Achtergrondservice</string>
+  <string name="osmand_service">Slaap stand</string>
   <string name="osmand_service_descr">Dit is om OsmAnd te gebruiken als het scherm uit is</string>
   <string name="tip_rotation_switching">kaartrotatie</string>
   
@@ -404,9 +404,8 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
 		\n\tEen markering kan worden gesloten door er lang op te drukken.
 	</string>
   <string name="tip_initial">Help</string>
-  <string name="tip_initial_t">OsmAnd is een navigatieprogramma met vele mogelijkheden.
-		\n\nIn het kaartscherm zijn diverse tips te vinden onder \'Menu\' → \'Tips\'.
-	</string>
+  <string name="tip_initial_t">"OsmAnd is een navigatieprogramma met vele mogelijkheden.
+\n\nEen basis introductie, gebruikstips en een uitgebreide help is te vinden onder \'Menu\' → \'Help\' vanuit het kaartscherm. "</string>
   <string name="next_button">Volgende</string>
   <string name="previous_button">Vorige</string>
   <string name="unit_of_length_descr">Wijzig eenheden van lengte en snelheid</string>
@@ -1963,4 +1962,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="save_track_to_gpx_globally_descr">Het registreren van de afgelegde weg in een GPX-bestand kan worden aan- en uitgeschakeld met een knop op het kaartscherm</string>
 	<string name="save_track_interval_globally">Interval tussen geregistreerde punten</string>
 	<string name="rendering_attr_publicTransportMode_name">Openbaar vervoer-modus</string>
+	<string name="confirm_every_run">Altijd vragen</string>
+	<string name="save_global_track_interval_descr">Selecteer de loggings-interval voor de standaard track opname (te starten via de GPX opname widget in het scherm)</string>
+	<string name="save_global_track_interval">Standaard loggings-interval</string>
 	</resources>
