@@ -408,8 +408,8 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
 \n\nEen basis introductie, gebruikstips en een uitgebreide help is te vinden onder \'Menu\' → \'Help\' vanuit het kaartscherm. "</string>
   <string name="next_button">Volgende</string>
   <string name="previous_button">Vorige</string>
-  <string name="unit_of_length_descr">Wijzig eenheden van lengte en snelheid</string>
-  <string name="unit_of_length">Eenheid van lengte</string>
+  <string name="unit_of_length_descr">Wijzig eenheden van afstand en snelheid</string>
+  <string name="unit_of_length">Eenheid van afstand</string>
   <string name="si_mi_foots">Mijlen/voeten</string>
   <string name="si_mi_yard">Mijlen/yards</string>
   <string name="si_km_m">Kilometers/meters</string>
@@ -420,7 +420,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="send_location_way_choose_title">Locatie doorgeven met</string>
   <string name="send_location_sms_pattern">Locatie: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Om de locatie te zien: volg de weblink %1$s of android intent link %2$s</string>
-  <string name="send_location">Zend locatie</string>
+  <string name="send_location">Stuur locatie</string>
   <string name="context_menu_item_share_location">Deel locatie</string>
   <string name="add_waypoint_dialog_added">GPX-routepunt \'\'{0}\'\' succesvol toegevoegd</string>
   <string name="add_waypoint_dialog_title">Voeg routepunt toe aan de opgenomen GPX-track</string>
@@ -436,16 +436,16 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="amenity_type_historic">Historisch</string>
   <string name="amenity_type_landuse">Landgebruik</string>
   <string name="amenity_type_leisure">Vrije tijd</string>
-  <string name="amenity_type_man_made">Artificieel</string>
+  <string name="amenity_type_man_made">Constructie</string>
   <string name="amenity_type_military">Militair</string>
   <string name="amenity_type_natural">Natuur</string>
   <string name="amenity_type_office">Kantoren</string>
   <string name="amenity_type_other">Overig</string>
   <string name="amenity_type_shop">Winkels</string>
   <string name="amenity_type_sport">Sport</string>
-  <string name="amenity_type_sustenance">Eten en drinken</string>
+  <string name="amenity_type_sustenance">Restaurant/cafe</string>
   <string name="amenity_type_tourism">Toerisme</string>
-  <string name="amenity_type_transportation">Vervoer</string>
+  <string name="amenity_type_transportation">Openbaar vervoer</string>
   <string name="indexing_address">Adres wordt geïndexeerd…</string>
   <string name="indexing_map">Kaart wordt geïndexeerd…</string>
   <string name="indexing_poi">Interessepunten worden geïndexeerd…</string>
