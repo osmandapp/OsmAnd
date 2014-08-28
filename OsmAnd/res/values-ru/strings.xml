@@ -1815,4 +1815,7 @@ OsmAnd - открытый источник и активно развается.
 	<string name="save_track_to_gpx_globally_descr">Общие положения журналирования в файл GPX могут быть включены или выключены с помощью виджета записи GPX на экране карты</string>
 	<string name="record_plugin_description">Сохранение ваших треков с помощью кнопки на экране с картой. Отображение настроек записи треков в локальные GPX-файлы или онлайн, в web-сервис.</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> карты с изображениями</string>
+	<string name="confirm_every_run">Всегда спрашивать</string>
+	<string name="save_global_track_interval_descr">Выберите интервал журналирования для записи общего трека (включается через виджет записи GPX на карте)</string>
+	<string name="save_global_track_interval">Общий интервал журналирования</string>
 	</resources>
