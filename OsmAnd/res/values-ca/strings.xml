@@ -1887,6 +1887,6 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="save_track_to_gpx_globally_descr">L\'enregistrament de la posició en un arxiu GPX es pot activar o desactivar utilitzant el giny associat, a la pantalla del mapa</string>
 	<string name="save_track_interval_globally">Interval d\'enregistrament</string>
 	<string name="confirm_every_run">Es demana confirmació</string>
-	<string name="save_global_track_interval_descr">Trieu l\'interval d\'enregistrement general de les traces (si s\'activa mitjançant el giny de gravació de GPX situat en el mapa)</string>
+	<string name="save_global_track_interval_descr">Trieu l\'interval d\'enregistrament general de les traces (s\'activa mitjançant el giny de gravació de GPX del mapa)</string>
 	<string name="save_global_track_interval">Interval d\'enregistrament general</string>
 	</resources>
