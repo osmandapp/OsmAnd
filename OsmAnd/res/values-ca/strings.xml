@@ -918,7 +918,7 @@
 	<string name="no_vector_map_loaded">Els mapes de vectors no s\'han carregat</string>
 	<string name="gpx_files_not_found">No s\'han trobat fitxers GPX a la carpeta /tracks</string>
 	<string name="rotate_map_to_bearing_descr">Seleccioneu l\'alineació de la pantalla del mapa</string>
-	<string name="background_service_int">Interval d\'activació GPS</string>
+	<string name="background_service_int">Interval d\'activació del GPS</string>
 	<string name="voice_provider_descr">Trieu la llengua en el guiatge per la navegació</string>
 	<string name="voice_provider">Guiatge per veu</string>
 	
