@@ -547,10 +547,10 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="rendering_attr_hideText_name">Cua su testu</string>
     <string name="rendering_attr_hideWoodScrubs_name">Cua padentes e buschedos</string>
     <string name="rendering_attr_buildings15zoom_name">Edifìtzios dae su zoom 15</string>
-    <string name="rendering_attr_moreDetailed_name">Prus detalliau</string>
+    <string name="rendering_attr_moreDetailed_name">Prus detàlliau</string>
     <string name="rendering_attr_lessDetailed_name">Detalliau de mancu</string>
-    <string name="rendering_attr_hideAccess_name">Cua su tipu de atzessu</string>
-    <string name="rendering_attr_showAccess_name">Ammustra su tipu de atzessu</string>
+    <string name="rendering_attr_hideAccess_name">Cua sas restritziones de atzessu</string>
+    <string name="rendering_attr_showAccess_name">Ammustra sas restritziones de atzessu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Ammustra sa calidade de sas istradas</string>
     <string name="rendering_attr_showSurfaces_name">Ammustra su tipu de superfìtzie de sas istradas</string>
     <string name="rendering_attr_showCycleRoutes_name">Ammustra sas àndalas pro bitzicleta</string>
@@ -955,7 +955,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="osmo_specify_tracker_id">Pro piaghere dislinda s\'id</string>
     <string name="continue_navigation">Sighi cun su nàvigu</string>
     <string name="pause_navigation">Pone in pasu su nàvigu</string>
-    <string name="rendering_attr_alpineHiking_name">Bisura pro alpinismu</string>
+    <string name="rendering_attr_alpineHiking_name">Iscala pro s\'alpinismu (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Disinna sas camineras basandeti in supra de s\'iscala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Istratu sìmbulos escursionisticos</string>
     <string name="rendering_attr_osmcTraces_description">Disinna sas camineras sighinde sas rastas OSMC</string>
