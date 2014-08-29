@@ -682,12 +682,21 @@ public class OsmandApplication extends Application {
 	public TargetPointsHelper getTargetPointsHelper() {
 		return targetPointsHelper;
 	}
-	
+
 	public void showShortToastMessage(final int msgId, final Object... args) {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
 				AccessibleToast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+
+	public void showShortToastMessage(final String msg) {
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				AccessibleToast.makeText(OsmandApplication.this, msg, Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -709,7 +718,7 @@ public class OsmandApplication extends Application {
 			}
 		});
 	}
-	
+
 	public SQLiteAPI getSQLiteAPI() {
 		return sqliteAPI;
 	}

@@ -283,7 +283,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 		//app.showShortToastMessage(resId);
 		rotMode = app.getString(R.string.rotate_map_to_bearing) + ":\n" + rotMode;
-		app.showToastMessage(rotMode);
+		app.showShortToastMessage(rotMode);
 		updateSettings();
 		if(mapView != null) {
 			mapView.refreshMap();
