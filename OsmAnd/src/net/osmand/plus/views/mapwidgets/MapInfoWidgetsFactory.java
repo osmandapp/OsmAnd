@@ -8,6 +8,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.*;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -283,6 +284,11 @@ public class MapInfoWidgetsFactory {
 	
 	public ImageViewWidget createCompassView(final MapActivity map){
 		final OsmandMapTileView view = map.getMapView();
+		final OsmandApplication app = map.getMyApplication();
+		final Drawable compassNiu = map.getResources().getDrawable(R.drawable.map_compass_niu);
+		final Drawable compassNiuWhite = map.getResources().getDrawable(R.drawable.map_compass_niu_white);
+		final Drawable compassBearing = map.getResources().getDrawable(R.drawable.map_compass_bearing);
+		final Drawable compassBearingWhite = map.getResources().getDrawable(R.drawable.map_compass_bearing_white);
 		final Drawable compass = map.getResources().getDrawable(R.drawable.map_compass);
 		final Drawable compassWhite = map.getResources().getDrawable(R.drawable.map_compass_white);
 		final int mw = (int) compass.getMinimumWidth() ;
@@ -303,7 +309,13 @@ public class MapInfoWidgetsFactory {
 				boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 				if(nightMode != this.nm) {
 					this.nm = nightMode;
-					setImageDrawable(nightMode ? compassWhite : compass);
+					if (app.getSetings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
+						setImageDrawable(nightMode ? compassNiuWhite : compassNiu);
+					} else if (app.getSetings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
+						setImageDrawable(nightMode ? compassBearingWhite : compassBearing);
+					} else {
+						setImageDrawable(nightMode ? compassWhite : compass);
+					}
 					return true;
 				}
 				if(view.getRotate() != cachedRotate) {
