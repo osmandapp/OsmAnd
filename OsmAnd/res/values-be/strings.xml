@@ -1879,8 +1879,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_attr_buildings15zoom_name">Будынкі на маштабе 15</string>
     <string name="rendering_attr_moreDetailed_name">Больш падрабязна</string>
     <string name="rendering_attr_lessDetailed_name">Менш падрабязна</string>
-    <string name="rendering_attr_hideAccess_name">Схаваць тып доступу</string>
-    <string name="rendering_attr_showAccess_name">Паказаць тып доступу</string>
+    <string name="rendering_attr_hideAccess_name">Схаваць абмежаваньні доступу</string>
+    <string name="rendering_attr_showAccess_name">Паказаць абмежаваньні доступу</string>
     <string name="rendering_attr_showSurfaceGrade_name">Адлюстроўваць якасць дарог</string>
     <string name="rendering_attr_showSurfaces_name">Адлюстроўваць тып пакрыцьця</string>
     <string name="rendering_attr_showCycleRoutes_name">Паказаць веламаршруты</string>
