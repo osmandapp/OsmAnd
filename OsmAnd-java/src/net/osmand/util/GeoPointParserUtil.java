@@ -1,107 +1,90 @@
-package net.osmand.activity;
+package net.osmand.util;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
-import net.osmand.data.MapObject;
-
-public class GeoIntentActivityTest {
+public class GeoPointParserUtil {
 
 	public static void main(String[] args) {
-		GeoIntentActivityTest t = new GeoIntentActivityTest();
-
-		final String lat = "34.99", lon = "-106.61", name = "Treasure";
-		int z = ExecutionResult.NO_ZOOM;
+		final double lat = 34.99, lon = -106.61;
+		final String name = "Treasure";
+		int z = GeoParsedPoint.NO_ZOOM;
 		String url;
 
 		// 0,0?q=34.99,-106.61(Treasure)
 		url = "geo:0,0?q=" + lat + "," + lon + "(" + name + ")";
 		System.out.println("url: " + url);
-		MyService actual = t.extract("geo", URI.create(url));
-		assertGPS(actual, lat, lon, z, name);
+		GeoParsedPoint actual = GeoPointParserUtil.parse("geo", url);
+		assertGeoPoint(actual, new GeoParsedPoint(lat, lon, z, name));
 
 		// geo:0,0?z=11&q=34.99,-106.61(Treasure)
 		z = 11;
-		url = "geo:0,0?z=" + z + "q=" + lat + "," + lon + "(" + name + ")";
+		url = "geo:0,0?z=" + z + "&q=" + lat + "," + lon + "(" + name + ")";
 		System.out.println("url: " + url);
-		actual = t.extract("geo", URI.create(url));
-		assertGPS(actual, lat, lon, z, name);
+		actual = GeoPointParserUtil.parse("geo", url);
+		assertGeoPoint(actual, new GeoParsedPoint(lat, lon, z, name));
+
+		// geo:0,0?z=11&q=34.99,-106.61
+		z = 11;
+		url = "geo:0,0?z=" + z + "&q=" + lat + "," + lon;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse("geo", url);
+		assertGeoPoint(actual, new GeoParsedPoint(lat, lon, z));
 
 		// geo:34.99,-106.61
 		z = -1;
 		url = "geo:" + lat + "," + lon;
 		System.out.println("url: " + url);
-		actual = t.extract("geo", URI.create(url));
-		assertGPS(actual, lat, lon, z, null);
+		actual = GeoPointParserUtil.parse("geo", url);
+		assertGeoPoint(actual, new GeoParsedPoint(lat, lon, z));
 
 		// geo:34.99,-106.61?z=11
 		z = 11;
 		url = "geo:" + lat + "," + lon + "?" + "z=" + z;
 		System.out.println("url: " + url);
-		actual = t.extract("geo", URI.create(url));
-		assertGPS(actual, lat, lon, z, null);
+		actual = GeoPointParserUtil.parse("geo", url);
+		assertGeoPoint(actual, new GeoParsedPoint(lat, lon, z));
 
-		// geo:0,0?q=1600+Amphitheatre+Parkway%2C+CA
-		String qstr = "1600+Amphitheatre+Parkway%2C+CA";
-		String[] arr = new String[] { "1600 Amphitheatre Parkway", "CA" };
-		url = "geo:0,0?q=" + qstr;
+		// geo:0,0?q=1600+Amphitheatre+Parkway,+CA
+		String qstr = "q=1600+Amphitheatre+Parkway,+CA";
+		url = "geo:0,0?" + qstr;
 		System.out.println("url: " + url);
-		actual = t.extract("geo", URI.create(url));
-		assertGAS(actual, arr);
+		actual = GeoPointParserUtil.parse("geo", url);
+		assertGeoPoint(actual, new GeoParsedPoint(qstr));
 
-		// geo:0,0?z=11&q=1600+Amphitheatre+Parkway%2C+CA
-		// TODO: zoom parameter is not used in GeoAddressSearch
-		qstr = "q=1600+Amphitheatre+Parkway%2C+CA";
-		arr = new String[] { "1600 Amphitheatre Parkway", "CA" };
+		// geo:0,0?z=11&q=1600+Amphitheatre+Parkway,+CA
+		qstr = "q=1600+Amphitheatre+Parkway,+CA";
 		url = "geo:0,0?z=11&" + qstr;
 		System.out.println("url: " + url);
-		actual = t.extract("geo", URI.create(url));
-		assertGAS(actual, arr);
+		actual = GeoPointParserUtil.parse("geo", url);
+		assertGeoPoint(actual, new GeoParsedPoint(qstr));
 	}
 
-	private static void assertGPS(MyService actual, final String lat, final String lon, final int zoom,
-			final String name) {
-		if (!(actual instanceof GeoPointSearch)) {
-			throw new RuntimeException("Actual is not of type: " + GeoPointSearch.class);
-		}
-		GeoPointSearch point = (GeoPointSearch) actual;
-		double aLat = point.getPoint().getLocation().getLatitude();
-		double aLon = point.getPoint().getLocation().getLongitude();
-		int aZoom = point.getZoom();
-		if (name != null) {
-			String aName = point.getPoint().getName();
-			if (!aName.equals(name)) {
-				throw new RuntimeException("Capture is not equal; actual=" + aName + ", expected=" + name);
+	private static void assertGeoPoint(GeoParsedPoint actual, GeoParsedPoint expected) {
+		if (expected.getQuery() != null) {
+			if (!expected.getQuery().equals(actual.getQuery()))
+				throw new RuntimeException("Query param not equal");
+		} else {
+			double aLat = actual.getLat(), eLat = expected.getLat(), aLon = actual.getLon(), eLon = expected.getLon();
+			int aZoom = actual.getZoom(), eZoom = expected.getZoom();
+			String aName = actual.getName(), eName = expected.getName();
+			if (eName != null) {
+				if (!aName.equals(eName)) {
+					throw new RuntimeException("Point name\\capture is not equal; actual=" + aName + ", expected="
+							+ eName);
+				}
+			}
+			if (eLat != aLat) {
+				throw new RuntimeException("Latitude is not equal; actual=" + aLat + ", expected=" + eLat);
+			}
+			if (eLon != aLon) {
+				throw new RuntimeException("Longitude is not equal; actual=" + aLon + ", expected=" + eLon);
+			}
+			if (eZoom != aZoom) {
+				throw new RuntimeException("Zoom is not equal; actual=" + aZoom + ", expected=" + aZoom);
 			}
 		}
-
-		if (Double.parseDouble(lat) != aLat) {
-			throw new RuntimeException("Latitude is not equal; actual=" + aLat + ", expected=" + lat);
-		}
-		if (Double.parseDouble(lon) != aLon) {
-			throw new RuntimeException("Longitude is not equal; actual=" + aLon + ", expected=" + lon);
-		}
-		if (aZoom != zoom) {
-			throw new RuntimeException("Zoom is not equal; actual=" + aZoom + ", expected=" + zoom);
-		}
-
-		System.out.println("Passed!");
-	}
-
-	private static void assertGAS(MyService actual, String[] q) {
-		if (!(actual instanceof GeoAddressSearch)) {
-			throw new RuntimeException("Actual is not of type: " + GeoAddressSearch.class);
-		}
-		GeoAddressSearch address = (GeoAddressSearch) actual;
-		if (!Arrays.equals(q, address.getElements().toArray()))
-			throw new RuntimeException("Query param arrays not equal");
-
 		System.out.println("Passed!");
 	}
 
@@ -121,15 +104,16 @@ public class GeoIntentActivityTest {
 	}
 
 	/**
-	 * Extracts information from geo and map intents:
+	 * Parses geo and map intents:
 	 * 
 	 * @param scheme
 	 *            The intent scheme
 	 * @param data
-	 *            The intent uri
-	 * @return
+	 *            The URI object
+	 * @return {@link GeoParsedPoint}
 	 */
-	private MyService extract(final String scheme, final URI data) {
+	public static GeoParsedPoint parse(final String scheme, final String uri) {
+		final URI data = URI.create(uri.replaceAll("\\s+", ""));
 		if ("http".equals(scheme) || "https".equals(scheme)) {
 
 			final String schemeSpecific = data.getSchemeSpecificPart();
@@ -199,7 +183,7 @@ public class GeoIntentActivityTest {
 										lon = Double.valueOf(matcher.group(3));
 									}
 
-									return new GeoPointSearch(lat, lon, zoom);
+									return new GeoParsedPoint(lat, lon, zoom);
 								} catch (NumberFormatException e) {
 									return null;
 								}
@@ -229,7 +213,7 @@ public class GeoIntentActivityTest {
 				try {
 					double llat = Double.parseDouble(lat.trim());
 					double llon = Double.parseDouble(lon.trim());
-					return new GeoPointSearch(llat, llon);
+					return new GeoParsedPoint(llat, llon);
 				} catch (NumberFormatException e) {
 					return null;
 				}
@@ -245,32 +229,29 @@ public class GeoIntentActivityTest {
 			if (schemeSpecific.startsWith("0,0?")) {
 				// geo:0,0?q=34.99,-106.61(Treasure)
 				// geo:0,0?z=11&q=34.99,-106.61(Treasure)
-				// geo:0,0?q=1600+Amphitheatre+Parkway%2C+CA
-				// geo:0,0?z=11&q=1600+Amphitheatre+Parkway%2C+CA
-				final String pattern = "(z=[0-9]{1,2})?&?q=([\\-0-9\\.]+)?,([\\-0-9\\.]+)?\\s*\\((.+?)\\)";
-				final String query = schemeSpecific.substring("0,0?".length());
-
+				String query = schemeSpecific.substring("0,0?".length());
+				final String pattern = "(?:z=([0-9]{1,2})?)?&?q=([\\-0-9\\.]+)?,([\\-0-9\\.]+)?\\s*(?:\\((.+?)\\))?";
 				final Matcher matcher = Pattern.compile(pattern).matcher(query);
 				if (matcher.matches()) {
-					String zg = matcher.group(1);
-					String zn = matcher.group(4);
-					final int zoom = zg != null ? Integer.parseInt(zg.substring("z=".length())) : -1;
-					final String name = zn;
+					final String z = matcher.group(1);
+					final String name = matcher.group(4);
+					final int zoom = z != null ? Integer.parseInt(z) : GeoParsedPoint.NO_ZOOM;
 					final double lat = Double.parseDouble(matcher.group(2));
 					final double lon = Double.parseDouble(matcher.group(3));
-					if (zoom != -1) {
-						return new GeoPointSearch(lat, lon, name, zoom);
-					} else {
-						return new GeoPointSearch(lat, lon, name);
-					}
+					return new GeoParsedPoint(lat, lon, zoom, name);
 				} else {
-					// we suppose it's a search
-					return new GeoAddressSearch(query);
+					// geo:0,0?q=1600+Amphitheatre+Parkway%2C+CA
+					// geo:0,0?z=11&q=1600+Amphitheatre+Parkway%2C+CA
+					// zoom parameter is not used in GeoAddressSearch
+					if (query.contains("z="))
+						query = query.substring(query.indexOf("&") + 1);
+					return new GeoParsedPoint(query);
 				}
 			} else {
 				// geo:47.6,-122.3
 				// geo:47.6,-122.3?z=11
-				// allow for http://tools.ietf.org/html/rfc5870 (geo uri) , just
+				// allow for http://tools.ietf.org/html/rfc5870 (geo uri) ,
+				// just
 				// ignore everything after ';'
 				final String pattern = "([\\-0-9.]+),([\\-0-9.]+)(?:,([\\-0-9.]+))?(?:\\?z=([0-9]+))?(?:;.*)?";
 				int indexQ = schemeSpecific.indexOf("&q");
@@ -289,14 +270,14 @@ public class GeoIntentActivityTest {
 					final double lat = Double.valueOf(matcher.group(1));
 					final double lon = Double.valueOf(matcher.group(2));
 					if (matcher.group(4) == null) {
-						return new GeoPointSearch(lat, lon);
+						return new GeoParsedPoint(lat, lon);
 					} else {
-						return new GeoPointSearch(lat, lon, Integer.valueOf(matcher.group(4)));
+						return new GeoParsedPoint(lat, lon, Integer.valueOf(matcher.group(4)));
 					}
 				} else if (matcher2.matches()) {
 					final double lat = Double.valueOf(matcher2.group(1));
 					final double lon = Double.valueOf(matcher2.group(2));
-					return new GeoPointSearch(lat, lon);
+					return new GeoParsedPoint(lat, lon);
 				} else {
 					return null;
 				}
@@ -305,85 +286,71 @@ public class GeoIntentActivityTest {
 		return null;
 	}
 
-	private final class GeoAddressSearch implements MyService {
-		private List<String> elements;
+	public static class GeoParsedPoint {
+		private static final int NO_ZOOM = -1;
 
-		public GeoAddressSearch(String query) {
-			query = query.replaceAll("%20", ",").replaceAll("%0A", ",").replaceAll("\n", ",").replaceAll("\t", ",")
-					.replaceAll(" ", ",");
-			// String is split on each comma
-			String[] s = query.substring(query.indexOf("q=") + 2).split(",");
+		private double lat;
+		private double lon;
+		private int zoom = NO_ZOOM;
+		private String name;
+		private String query;
+		private boolean geoPoint;
+		private boolean geoAddress;
 
-			elements = new ArrayList<String>();
-			for (int i = 0; i < s.length; i++) {
-				if (s[i].isEmpty()) {
-					continue;
-				}
-				elements.add(s[i].replace('+', ' ').trim());
-			}
+		public GeoParsedPoint(double lat, double lon) {
+			super();
+			this.lat = lat;
+			this.lon = lon;
+			this.geoPoint = true;
 		}
 
-		public MapObject checkGeoPoint() {
-			return null;
+		public GeoParsedPoint(double lat, double lon, String name) {
+			this(lat, lon);
+			this.name = name;
 		}
 
-		@Override
-		public ExecutionResult execute() {
-			return null;
-		}
-
-		public List<String> getElements() {
-			return elements;
-		}
-	}
-
-	private static class GeoPointSearch implements MyService {
-		private final MapObject point;
-		private final int zoom;
-
-		public GeoPointSearch(double lat, double lon) {
-			this(lat, lon, ExecutionResult.NO_ZOOM);
-		}
-
-		public GeoPointSearch(double lat, double lon, int zoom) {
-			this(lat, lon, "Lat: " + lat + ",Lon: " + lon, zoom);
-		}
-
-		public GeoPointSearch(double lat, double lon, String name) {
-			this(lat, lon, name, ExecutionResult.NO_ZOOM);
-		}
-
-		public GeoPointSearch(double lat, double lon, String name, int zoom) {
-			final Amenity amenity = new Amenity();
-			amenity.setLocation(lat, lon);
-			amenity.setName(name);
-			amenity.setType(AmenityType.USER_DEFINED);
-			amenity.setSubType("");
-
-			this.point = amenity;
+		public GeoParsedPoint(double lat, double lon, int zoom) {
+			this(lat, lon);
 			this.zoom = zoom;
 		}
 
-		@Override
-		public ExecutionResult execute() {
-			return null;
+		public GeoParsedPoint(double lat, double lon, int zoom, String name) {
+			this(lat, lon, zoom);
+			this.name = name;
 		}
 
-		public MapObject getPoint() {
-			return point;
+		public GeoParsedPoint(String query) {
+			super();
+			this.query = query;
+			this.geoAddress = true;
+		}
+
+		public double getLat() {
+			return lat;
+		}
+
+		public double getLon() {
+			return lon;
 		}
 
 		public int getZoom() {
 			return zoom;
 		}
-	}
 
-	private static class ExecutionResult {
-		public static final int NO_ZOOM = -1;
-	}
+		public String getName() {
+			return name;
+		}
 
-	private static interface MyService {
-		public ExecutionResult execute();
-	}
+		public String getQuery() {
+			return query;
+		}
 
+		public boolean isGeoPoint() {
+			return geoPoint;
+		}
+
+		public boolean isGeoAddress() {
+			return geoAddress;
+		}
+	}
 }
