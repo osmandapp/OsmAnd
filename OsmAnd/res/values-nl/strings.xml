@@ -405,7 +405,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
 	</string>
   <string name="tip_initial">Help</string>
   <string name="tip_initial_t">"OsmAnd is een navigatieprogramma met vele mogelijkheden.
-\n\nEen basis introductie, gebruikstips en een uitgebreide help is te vinden onder \'Menu\' → \'Help\' vanuit het kaartscherm. "</string>
+\n\nInleiding, gebruikstips en uitgebreide hulp is te vinden onder \'Menu\' → \'Help\' vanuit het kaartscherm. "</string>
   <string name="next_button">Volgende</string>
   <string name="previous_button">Vorige</string>
   <string name="unit_of_length_descr">Wijzig eenheden van afstand en snelheid</string>
@@ -1885,13 +1885,13 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_attr_hideNonVehicleHighways_name">Verberg voetpaden</string>
     <string name="rendering_attr_hideText_name">Verberg tekst</string>
     <string name="rendering_attr_hideWoodScrubs_name">Verberg bossen en beplanting</string>
-    <string name="rendering_attr_buildings15zoom_name">Gebouwen op zoomniveau 15</string>
+    <string name="rendering_attr_buildings15zoom_name">Gebouwen tonen vanaf zoomstap 15</string>
     <string name="rendering_attr_moreDetailed_name">Meer details</string>
     <string name="rendering_attr_lessDetailed_name">Minder details</string>
-    <string name="rendering_attr_hideAccess_name">Het type toegang verbergen</string>
-    <string name="rendering_attr_showAccess_name">Het type toegang tonen</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Toon kwaliteit van wegen</string>
-    <string name="rendering_attr_showSurfaces_name">Toon wegoppervlak</string>
+    <string name="rendering_attr_hideAccess_name">Toegankelijkheid niet tonen</string>
+    <string name="rendering_attr_showAccess_name">Toegangsbeperkingen tonen</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Kwaliteit van wegen tonen</string>
+    <string name="rendering_attr_showSurfaces_name">Wegoppervlak tonen</string>
     <string name="rendering_attr_showCycleRoutes_name">Toon fietsroutes</string>
     <string name="map_preferred_locale_descr">Gewenste taal voor aanduidingen op de kaart (indien niet beschikbaar worden Engelse of plaatselijke namen gebruikt)</string>
     <string name="map_preferred_locale">Kaart voorkeurstaal</string>
@@ -1922,7 +1922,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="rendering_attr_subwayMode_name">Tunnel modus</string>
  	<string name="continue_navigation">Navigatie voortzetten</string>
     <string name="pause_navigation">navigatie pauzeren</string>
-	<string name="rendering_attr_alpineHiking_name">Alpine wandel weergave</string>
+	<string name="rendering_attr_alpineHiking_name">Alpine wandelschaal (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Render paden volgens SAC schaal</string>
     <string name="rendering_attr_osmcTraces_name">Wandelsymbolen laag</string>
     <string name="rendering_attr_osmcTraces_description">Render paden volgens OSMC sporen</string>
