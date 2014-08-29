@@ -265,7 +265,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 	
 	public void switchRotateMapMode(){
-		int resId = R.string.rotate_map_to_bearing + ":\n" + R.string.rotate_map_none_opt;
+		String resId = R.string.rotate_map_to_bearing + ":\n" + R.string.rotate_map_none_opt;
 		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE && mapView.getRotate() != 0) {
 			// reset manual rotation
 		} else {
