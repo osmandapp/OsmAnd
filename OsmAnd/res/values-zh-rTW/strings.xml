@@ -1744,12 +1744,12 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">隱藏非車輛的公路</string>
     <string name="rendering_attr_hideText_name">隱藏文字</string>
     <string name="rendering_attr_hideWoodScrubs_name">隱藏樹木和灌樹叢</string>
-    <string name="rendering_attr_buildings15zoom_name">在 15 級下縮放建築物</string>
-    <string name="rendering_attr_moreDetailed_name">更多細節</string>
+    <string name="rendering_attr_buildings15zoom_name">建築物在 15 級縮放</string>
+    <string name="rendering_attr_moreDetailed_name">較多細節</string>
     <string name="rendering_attr_lessDetailed_name">較少細節</string>
-    <string name="rendering_attr_hideAccess_name">隱藏存取類型</string>
-    <string name="rendering_attr_showAccess_name">顯示存取類型</string>
-    <string name="rendering_attr_showSurfaceGrade_name">顯示道路的品質</string>
+    <string name="rendering_attr_hideAccess_name">隱藏存取限制</string>
+    <string name="rendering_attr_showAccess_name">顯示存取限制</string>
+    <string name="rendering_attr_showSurfaceGrade_name">顯示道路品質</string>
     <string name="rendering_attr_showSurfaces_name">顯示道路表面</string>
     
     <string name="rendering_attr_showCycleRoutes_name">顯示自行車道</string>
@@ -1785,7 +1785,7 @@
 	<string name="osmo_invite">邀請...</string>
     <string name="osmo_leave_confirmation_msg">您想要離開 %1$s 群組嗎？</string>
     <string name="osmo_specify_tracker_id">請指定 ID</string>
-    <string name="rendering_attr_alpineHiking_name">高山徒步檢視</string>
+    <string name="rendering_attr_alpineHiking_name">高山徒步比例尺 (SAC)</string>
     <string name="rendering_attr_osmcTraces_name">徒步符號覆疊層</string>
     <string name="rendering_attr_alpineHiking_description">按照 SAC 比例繪製路徑</string>
     <string name="rendering_attr_osmcTraces_description">按照 OSMC 軌跡繪製路徑</string>
