@@ -1780,7 +1780,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="continue_navigation">Poursuivre la navigation</string>
     <string name="pause_navigation">Interrompre la navigation</string>
 	<string name="rendering_attr_subwayMode_name">Mode sous-terrain</string>
- 	<string name="rendering_attr_alpineHiking_name">Vue rando alpine</string>
+ 	<string name="rendering_attr_alpineHiking_name">Difficulté des randonnées alpines</string>
     <string name="rendering_attr_alpineHiking_description">Afficher les chemins selon l\'échelle SAC</string>
     <string name="rendering_attr_osmcTraces_name">Surcouche de symboles de rando</string>
     <string name="rendering_attr_osmcTraces_description">Afficher les chemins selon les traces OSMC</string>
