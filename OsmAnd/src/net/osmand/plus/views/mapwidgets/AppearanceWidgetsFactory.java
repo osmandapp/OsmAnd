@@ -185,7 +185,7 @@ public class AppearanceWidgetsFactory {
                     try {
                         Field f = R.drawable.class.getField("widget_no_icon");
                         icon = f.getInt(null);
-                    } catch(Exception e){
+                    } catch(Exception e0){
                     }
                 }
                 MapWidgetRegistry.MapWidgetRegInfo w = mapInfoControls.registerAppearanceWidget(icon, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
@@ -208,7 +208,7 @@ public class AppearanceWidgetsFactory {
                     try {
                         Field f = R.drawable.class.getField("widget_no_icon");
                         icon = f.getInt(null);
-                    } catch(Exception e){
+                    } catch(Exception e0){
                     }
                 }
                 MapWidgetRegistry.MapWidgetRegInfo w = mapInfoControls.registerAppearanceWidget(icon, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
