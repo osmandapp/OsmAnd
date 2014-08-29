@@ -332,7 +332,13 @@ public class MapInfoWidgetsFactory {
 				map.getMapViewTrackingUtilities().switchRotateMapMode();
 			}
 		});
-		compassView.setImageDrawable(compass);
+		if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
+			compassView.setImageDrawable(compassNiu);
+		} else if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
+			compassView.setImageDrawable(compassBearing);
+		} else {
+			compassView.setImageDrawable(compass);
+		}
 		return compassView;
 	}
 	
