@@ -309,9 +309,9 @@ public class MapInfoWidgetsFactory {
 				boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 				if(nightMode != this.nm) {
 					this.nm = nightMode;
-					if (app.getSetings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
+					if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
 						setImageDrawable(nightMode ? compassNiuWhite : compassNiu);
-					} else if (app.getSetings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
+					} else if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 						setImageDrawable(nightMode ? compassBearingWhite : compassBearing);
 					} else {
 						setImageDrawable(nightMode ? compassWhite : compass);
