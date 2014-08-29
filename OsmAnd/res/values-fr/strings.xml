@@ -1762,8 +1762,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_attr_buildings15zoom_name">Bâtiments en zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Plus détaillé</string>
     <string name="rendering_attr_lessDetailed_name">Moins détaillé</string>
-    <string name="rendering_attr_hideAccess_name">Cacher le type d\\\'accès</string>
-    <string name="rendering_attr_showAccess_name">Montrer le type d\\\'accès</string>
+    <string name="rendering_attr_hideAccess_name">Cacher les restrictions d\\\'accès</string>
+    <string name="rendering_attr_showAccess_name">Montrer les restrictions d\\\'accès</string>
     <string name="rendering_attr_showSurfaceGrade_name">Montrer la qualité des routes</string>
     <string name="rendering_attr_showSurfaces_name">Montrer la surface des routes</string>
     <string name="rendering_attr_showCycleRoutes_name">Montrer les pistes cyclables</string>
