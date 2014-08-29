@@ -295,6 +295,7 @@ public class MapInfoWidgetsFactory {
 		final int mh = (int) compass.getMinimumHeight() ;
 		ImageViewWidget compassView = new ImageViewWidget(map) {
 			private float cachedRotate = 0;
+			private int cachedRotateMap = 0;
 			private boolean nm;
 			@Override
 			protected void onDraw(Canvas canvas) {
@@ -321,6 +322,17 @@ public class MapInfoWidgetsFactory {
 				if(view.getRotate() != cachedRotate) {
 					cachedRotate = view.getRotate();
 					invalidate();
+					return true;
+				}
+				if(app.getSettings().ROTATE_MAP.get() != cachedRotateMap) {
+					cachedRotateMap = app.getSettings().ROTATE_MAP.get();
+					if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
+						setImageDrawable(drawSettings.isNightMode() ? compassNiuWhite : compassNiu);
+					} else if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
+						setImageDrawable(drawSettings.isNightMode() ? compassBearingWhite : compassBearing);
+					} else {
+						setImageDrawable(drawSettings.isNightMode() ? compassWhite : compass);
+					}
 					return true;
 				}
 				return false;
