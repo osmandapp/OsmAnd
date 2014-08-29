@@ -273,9 +273,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			settings.ROTATE_MAP.set(vl);
 
 			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
-				rotMode = app.getString(R.string.rotate_map_bearing_opt;
+				rotMode = app.getString(R.string.rotate_map_bearing_opt);
 			} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS) {
-				rotMode = app.getString(R.string.rotate_map_compass_opt));
+				rotMode = app.getString(R.string.rotate_map_compass_opt);
 			}
 		}
 		rotMode = app.getString(R.string.rotate_map_to_bearing) + ":\n" + rotMode;
