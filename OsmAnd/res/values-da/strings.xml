@@ -1361,7 +1361,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="save_current_track_descr">Gem aktuelle spor til SD-kort nu</string>
 	<string name="save_current_track">Gem aktuelle GPX-spor</string>
 	<string name="save_track_interval">Logningsinterval under navigation</string>
-	<string name="save_track_interval_descr">Vælg logningsinterval for spor optaget under navigation</string>
+	<string name="save_track_interval_descr">Vælg logningsinterval for sporregistrering under navigation</string>
 	<string name="save_track_to_gpx_descrp">Spor bliver gemt i \'/track\' mappen under navigation</string>
 	<string name="save_track_to_gpx">Log spor til GPX-fil under navigation</string>
 	<string name="update_tile">Opdater kort</string>
@@ -1980,6 +1980,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="save_track_interval_globally">Logningsinterval</string>
 	<string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til/fra med \'GPX optagelse\' på hovedskærmen</string>
 	<string name="confirm_every_run">Spørg altid</string>
-	<string name="save_global_track_interval_descr">Vælg logningsinterval for den generelle spor-optagelse (aktiveres via \'GPX optagelse\' på hovedskærmen)</string>
+	<string name="save_global_track_interval_descr">Vælg logningsinterval for den almindelige sporregistrering (aktiveres via \'GPX optagelse\' på hovedskærmen)</string>
 	<string name="save_global_track_interval">Generelt logningsinterval</string>
 	</resources>
