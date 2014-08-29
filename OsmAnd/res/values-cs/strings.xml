@@ -1638,7 +1638,7 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_hideBuildings_name">Skrýt budovy</string>
     <string name="rendering_attr_hideText_name">Skrýt text</string>
     <string name="rendering_attr_hideWoodScrubs_name">Skrýt lesy a křoviny</string>
-    <string name="rendering_attr_showSurfaces_name">Ukázat povrchy cest</string>
+    <string name="rendering_attr_showSurfaces_name">Ukázat povrch cesty</string>
     <string name="osmo_group_information">Prosím čtěte před vytvářením skupiny!</string>
     <string name="osmo_group_information_desc">" - Všechny vytvořené skupiny jsou veřejné! Pokud chcete být anonymní, připojte zařízení přímo přes ID.\n - Do skupiny se může registrovat až 16 lidí.
 \n - V případě neaktivity nebo aktivity pouze jedné osoby v průběhu dvou týdnů, bude skupina zrušena.\n - Můžete omezit vstup do skupiny pozvánkami, ale pro ovládání skupiny musíte použít administrátorskou konzoli.\n - Pokud potřebujete vytvořit skupinu s jinými podmínkami prosím kontaktujte http://osmo.mobi"</string>
@@ -1667,9 +1667,9 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_buildings15zoom_name">Budovy při přiblížení 15</string>
     <string name="rendering_attr_moreDetailed_name">Více detailů</string>
     <string name="rendering_attr_lessDetailed_name">Méně detailů</string>
-    <string name="rendering_attr_hideAccess_name">Skrýt typ přístupu</string>
-    <string name="rendering_attr_showAccess_name">Zobrazit typ přístupu</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cest</string>
+    <string name="rendering_attr_hideAccess_name">Skrýt omezení přístupu</string>
+    <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cesty</string>
     <string name="osmo_group_by_invite">Vstoupit na pozvánku</string>
     <string name="rendering_attr_subwayMode_name">Metro režim</string>
  	<string name="pause_navigation">Pozastavit navigaci</string>
@@ -1722,4 +1722,7 @@ s často kladenými otázkami.</string>
     <string name="speak_favorites">Oznamovat oblíbené</string>
     <string name="speak_poi">Oznamovat body zájmu POI</string>
     <string name="save_track_to_gpx_globally_descr">Záznam do GPX souboru může být zapnut nebo vypnut pomocí widgetu Záznam trasy na mapové obrazovce</string>
+	<string name="confirm_every_run">Vždy se zeptat</string>
+	<string name="save_global_track_interval_descr">Vybrat interval ukládání pro globální záznam trasy (aktivovaný přes widget Záznam trasy na mapové obrazovce)</string>
+	<string name="save_global_track_interval">Globální interval záznamu</string>
 	</resources>
