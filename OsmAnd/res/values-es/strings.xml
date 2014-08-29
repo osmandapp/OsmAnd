@@ -1780,12 +1780,12 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_attr_hideText_name">Ocultar textos</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ocultar bosques y matorrales</string>
     <string name="rendering_attr_buildings15zoom_name">Edificios en zoom 15</string>
-    <string name="rendering_attr_moreDetailed_name">Más detallado</string>
-    <string name="rendering_attr_lessDetailed_name">Menos detallado</string>
-    <string name="rendering_attr_hideAccess_name">Ocultar el tipo de acceso</string>
-    <string name="rendering_attr_showAccess_name">Mostrar el tipo de acceso</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Mostrar la calidad de las carreteras</string>
-    <string name="rendering_attr_showSurfaces_name">Mostrar superficie de carreteras</string>
+    <string name="rendering_attr_moreDetailed_name">Más detalles</string>
+    <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
+    <string name="rendering_attr_hideAccess_name">Ocultar restricciones de acceso</string>
+    <string name="rendering_attr_showAccess_name">Mostrar restricciones de acceso</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Mostrar calidad de carretera</string>
+    <string name="rendering_attr_showSurfaces_name">Mostrar superficie de carretera</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostrar rutas ciclistas</string>
     <string name="osmo_auth_error_short">Falló la autorización</string>
     <string name="osmo_auth_error">Error de autorización OsMo: %1$s.\n Puede deberse a que el servicio esté temporalmente caído o que tu registro ha expirado.\n ¿Quieres realizar un nuevo registro?</string>
@@ -1827,7 +1827,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="rendering_attr_subwayMode_name">Modo metro</string>
  	<string name="continue_navigation">Continuar Navegación</string>
     <string name="pause_navigation">Pausar Navegación</string>
-	<string name="rendering_attr_alpineHiking_name">Vista senderismo Alpino</string>
+	<string name="rendering_attr_alpineHiking_name">Escala senderismo Alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Interpretar caminos de acuerdo a la escala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
     <string name="rendering_attr_osmcTraces_description">Interpretar caminos de acuerdo a las trazas de OSMC</string>
