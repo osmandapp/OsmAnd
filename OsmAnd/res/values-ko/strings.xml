@@ -435,7 +435,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 \n\nA marker box can be hidden again by long-clicking on it. "</string>
 
 	<string name="tip_initial">도움말</string>
-	<string name="tip_initial_t">"OsmAnd는 많은 기능을 가진 네비게이션 앱입니다. 기본적인 소개로서, 몇 가지 유용한 도움말을 [메뉴-도움말]에서 찾을 수 있습니다. "</string>
+	<string name="tip_initial_t">"OsmAnd는 많은 기능을 가진 네비게이션 앱입니다.\n기본적인 소개로서, 몇 가지 유용한 도움말을 [메뉴-도움말]에서 찾을 수 있습니다. "</string>
 	<string name="next_button">다음</string>
 	<string name="previous_button">이전</string>
 
@@ -2023,13 +2023,13 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="rendering_attr_hideNonVehicleHighways_name">비 차량 고속도로 숨기기</string>
     <string name="rendering_attr_hideText_name">텍스트 숨기기</string>
     <string name="rendering_attr_hideWoodScrubs_name">나무와 스크럽 숨기기</string>
-    <string name="rendering_attr_buildings15zoom_name">15 줌에 있는 건물</string>
-    <string name="rendering_attr_moreDetailed_name">더 상세히</string>
-    <string name="rendering_attr_lessDetailed_name">덜 상세히</string>
-    <string name="rendering_attr_hideAccess_name">액세스 유형 숨기기</string>
-    <string name="rendering_attr_showAccess_name">액세스 유형 보이기</string>
-    <string name="rendering_attr_showSurfaceGrade_name">도로의 품질 표시</string>
-    <string name="rendering_attr_showSurfaces_name">도로 표면 표시</string>
+    <string name="rendering_attr_buildings15zoom_name">줌 레벨 15에 있는 건물 표시</string>
+    <string name="rendering_attr_moreDetailed_name">상세 접보</string>
+    <string name="rendering_attr_lessDetailed_name">덜 상세</string>
+    <string name="rendering_attr_hideAccess_name">액세스 제한 숨기기</string>
+    <string name="rendering_attr_showAccess_name">액세스 제한 보이기</string>
+    <string name="rendering_attr_showSurfaceGrade_name">도로 등급 표시</string>
+    <string name="rendering_attr_showSurfaces_name">노면 표시</string>
     <string name="rendering_attr_showCycleRoutes_name">자전거 경로 보이기</string>
     <string name="keep_navigation_service">계속</string>
 	<string name="stop_navigation_service">중지</string>
@@ -2060,7 +2060,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="rendering_attr_subwayMode_name">지하철 모드</string>
  	<string name="continue_navigation">길안내 계속</string>
     <string name="pause_navigation">길안내 일시중지</string>
-	<string name="rendering_attr_alpineHiking_name">알파인 하이킹 보기</string>
+	<string name="rendering_attr_alpineHiking_name">고산 하이킹 규모 (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">SAC scale에 따라 경로 렌더링</string>
     <string name="rendering_attr_osmcTraces_name">하이킹 심볼 오버레이</string>
     <string name="rendering_attr_osmcTraces_description">OSMC 흔적에 따라 경로 렌더링</string>
@@ -2099,4 +2099,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="save_track_to_gpx_globally">트랙을 GPX파일로 저장</string>
 	<string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 기록 위젯을 사용하여 켜거나 끌 수 있습니다</string>
 	<string name="save_track_interval_globally">로깅 간격</string>
+	<string name="confirm_every_run">항상 요청</string>
+	<string name="save_global_track_interval_descr">(지도에 GPX 레코딩 위젯을 통해 사용 가능) 일반 트랙 레코딩에 대한 로깅 간격을 선택합니다</string>
+	<string name="save_global_track_interval">일반 로깅 간격</string>
 	</resources>

@@ -1762,8 +1762,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_attr_buildings15zoom_name">Bâtiments en zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Plus détaillé</string>
     <string name="rendering_attr_lessDetailed_name">Moins détaillé</string>
-    <string name="rendering_attr_hideAccess_name">Cacher le type d\\\'accès</string>
-    <string name="rendering_attr_showAccess_name">Montrer le type d\\\'accès</string>
+    <string name="rendering_attr_hideAccess_name">Cacher les restrictions d\\\'accès</string>
+    <string name="rendering_attr_showAccess_name">Montrer les restrictions d\\\'accès</string>
     <string name="rendering_attr_showSurfaceGrade_name">Montrer la qualité des routes</string>
     <string name="rendering_attr_showSurfaces_name">Montrer la surface des routes</string>
     <string name="rendering_attr_showCycleRoutes_name">Montrer les pistes cyclables</string>
@@ -1780,7 +1780,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="continue_navigation">Poursuivre la navigation</string>
     <string name="pause_navigation">Interrompre la navigation</string>
 	<string name="rendering_attr_subwayMode_name">Mode sous-terrain</string>
- 	<string name="rendering_attr_alpineHiking_name">Vue rando alpine</string>
+ 	<string name="rendering_attr_alpineHiking_name">Difficulté des randonnées alpines</string>
     <string name="rendering_attr_alpineHiking_description">Afficher les chemins selon l\'échelle SAC</string>
     <string name="rendering_attr_osmcTraces_name">Surcouche de symboles de rando</string>
     <string name="rendering_attr_osmcTraces_description">Afficher les chemins selon les traces OSMC</string>
@@ -1818,4 +1818,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="save_track_to_gpx_globally">Enregistrer les traces dans un fichier GPX</string>
 	<string name="save_track_to_gpx_globally_descr">L\'enregistrement de la position dans un fichier GPX peut être activer ou désactiver depuis le gadget associé sur la vue carte.</string>
 	<string name="save_track_interval_globally">Intervalle d\'enregistrement</string>
+	<string name="confirm_every_run">Toujours demander</string>
+	<string name="save_global_track_interval_descr">Choisir l\'intervalle d\'enregistrement pour l\'enregistrement des traces (activer via le gadget d\'enregistrement GPX sur l\'écran principal)</string>
+	<string name="save_global_track_interval">Intervalle d\'enregistrement par défaut</string>
 	</resources>

@@ -172,7 +172,7 @@
   <string name="user_name_descr">Nodig voor openstreetmap.org aanmelding</string>
   <string name="user_password">OSM wachtwoord</string>
   <string name="user_password_descr">Nodig voor openstreetmap.org aanmelding</string>
-  <string name="osmand_service">Achtergrondservice</string>
+  <string name="osmand_service">Slaap stand</string>
   <string name="osmand_service_descr">Dit is om OsmAnd te gebruiken als het scherm uit is</string>
   <string name="tip_rotation_switching">kaartrotatie</string>
   
@@ -404,13 +404,12 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
 		\n\tEen markering kan worden gesloten door er lang op te drukken.
 	</string>
   <string name="tip_initial">Help</string>
-  <string name="tip_initial_t">OsmAnd is een navigatieprogramma met vele mogelijkheden.
-		\n\nIn het kaartscherm zijn diverse tips te vinden onder \'Menu\' → \'Tips\'.
-	</string>
+  <string name="tip_initial_t">"OsmAnd is een navigatieprogramma met vele mogelijkheden.
+\n\nInleiding, gebruikstips en uitgebreide hulp is te vinden onder \'Menu\' → \'Help\' vanuit het kaartscherm. "</string>
   <string name="next_button">Volgende</string>
   <string name="previous_button">Vorige</string>
-  <string name="unit_of_length_descr">Wijzig eenheden van lengte en snelheid</string>
-  <string name="unit_of_length">Eenheid van lengte</string>
+  <string name="unit_of_length_descr">Wijzig eenheden van afstand en snelheid</string>
+  <string name="unit_of_length">Eenheid van afstand</string>
   <string name="si_mi_foots">Mijlen/voeten</string>
   <string name="si_mi_yard">Mijlen/yards</string>
   <string name="si_km_m">Kilometers/meters</string>
@@ -421,7 +420,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="send_location_way_choose_title">Locatie doorgeven met</string>
   <string name="send_location_sms_pattern">Locatie: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Om de locatie te zien: volg de weblink %1$s of android intent link %2$s</string>
-  <string name="send_location">Zend locatie</string>
+  <string name="send_location">Stuur locatie</string>
   <string name="context_menu_item_share_location">Deel locatie</string>
   <string name="add_waypoint_dialog_added">GPX-routepunt \'\'{0}\'\' succesvol toegevoegd</string>
   <string name="add_waypoint_dialog_title">Voeg routepunt toe aan de opgenomen GPX-track</string>
@@ -437,16 +436,16 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="amenity_type_historic">Historisch</string>
   <string name="amenity_type_landuse">Landgebruik</string>
   <string name="amenity_type_leisure">Vrije tijd</string>
-  <string name="amenity_type_man_made">Artificieel</string>
+  <string name="amenity_type_man_made">Constructie</string>
   <string name="amenity_type_military">Militair</string>
   <string name="amenity_type_natural">Natuur</string>
   <string name="amenity_type_office">Kantoren</string>
   <string name="amenity_type_other">Overig</string>
   <string name="amenity_type_shop">Winkels</string>
   <string name="amenity_type_sport">Sport</string>
-  <string name="amenity_type_sustenance">Eten en drinken</string>
+  <string name="amenity_type_sustenance">Restaurant/cafe</string>
   <string name="amenity_type_tourism">Toerisme</string>
-  <string name="amenity_type_transportation">Vervoer</string>
+  <string name="amenity_type_transportation">Openbaar vervoer</string>
   <string name="indexing_address">Adres wordt geïndexeerd…</string>
   <string name="indexing_map">Kaart wordt geïndexeerd…</string>
   <string name="indexing_poi">Interessepunten worden geïndexeerd…</string>
@@ -588,7 +587,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="search_poi_filter">Filter</string>
   <string name="menu_mute_off">Geluid is aan</string>
   <string name="menu_mute_on">Geluid is uit</string>
-  <string name="voice_provider_descr">Kies stembegeleiding voor navigatie</string>
+  <string name="voice_provider_descr">Kies de taal van de stembegeleiding voor navigatie</string>
   <string name="voice_provider">Stembegeleiding</string>
   <string name="voice_data_initializing">Initialisatie stemgegevens…</string>
   <string name="voice_data_not_supported">Niet-ondersteunde versie van stemgegevens</string>
@@ -730,7 +729,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="save_current_track_descr">Huidige track nu op SD-kaart opslaan</string>
   <string name="save_current_track">Huidige GPX-track opslaan</string>
   <string name="save_track_interval">Registratie-interval tijdens de navigatie</string>
-  <string name="save_track_interval_descr">Kies Registratie-interval voor track opname tijdens navigatie</string>
+  <string name="save_track_interval_descr">Kies logging-interval voor track opname tijdens navigatie</string>
   <string name="save_track_to_gpx_descrp">Tracks worden in de track-map opgeslagen tijdens de navigatie</string>
   <string name="save_track_to_gpx">Registreer track in GPX-bestand tijdens de navigatie</string>
   <string name="update_tile">Kaart bijwerken</string>
@@ -744,9 +743,9 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="use_english_names">Gebruik Engelse namen</string>
   <string name="app_settings">Programma-instellingen</string>
   <string name="search_address">Zoek adres</string>
-  <string name="choose_building">Kies gebouw</string>
-  <string name="choose_street">Kies straat</string>
-  <string name="choose_city">Kies stad</string>
+  <string name="choose_building">Selecteer gebouw</string>
+  <string name="choose_street">Selecteer straat</string>
+  <string name="choose_city">Selecteer stad</string>
   <string name="ChooseCountry">Kies land</string>
   
   
@@ -772,13 +771,13 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="favorites_Button">Mijn plaatsen</string>
   <string name="search_button">Zoeken</string>
   <string name="search_activity">Zoeken</string>
-  <string name="searchpoi_activity">Kies interessepunt</string>
+  <string name="searchpoi_activity">Selecteer interessepunt</string>
   <string name="search_POI_level_btn">Zoek meer</string>
   <string name="incremental_search_city">Zoek stad incrementeel</string>
   <string name="incremental_search_street">Zoek naar straatnaam</string>
   <string name="incremental_search_building">Zoek naar gebouw</string>
   <string name="choose_available_region">Kies een regio</string>
-  <string name="choose_intersected_street">Kies zijstraat</string>
+  <string name="choose_intersected_street">Selecteer zijstraat</string>
   <string name="Closest_Amenities">Dichtstbijzijnde voorzieningen</string>
   <string name="app_mode_default">Kaart bekijken</string>
   <string name="app_mode_car">Auto</string>
@@ -794,7 +793,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="navigate_point_format_DMS">GGG MM SS.SS</string>
   <string name="search_shown_on_map">Toon op kaart</string>
   <string name="navigate_point_cancel">Annuleer</string>
-  <string name="search_address_top_text">Kies adres</string>
+  <string name="search_address_top_text">Selecteer adres</string>
   <string name="search_address_region">Regio</string>
   <string name="search_address_city">Stad</string>
   <string name="search_address_street">Straat</string>
@@ -1555,7 +1554,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="edit_tilesource_expiration_time">Verlopen (minuten)</string>
     <string name="edit_tilesource_minzoom">Min zoomniveau</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">Kies bestaand…</string>
+    <string name="edit_tilesource_choose_existing">Selecteer bestaand…</string>
     <string name="edit_tilesource_name">Naam</string>
     <string name="maps_define_edit">Definieer/bewerk…</string>
 	<string name="tip_recent_changes_1_6_t">Veranderingen in 1.6:
@@ -1641,8 +1640,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="routing_attr_avoid_motorway_description">Vermijd autowegen</string>
 	<string name="routing_attr_weight_description">Geef het maximum gewicht van een voertuig</string>
     <string name="routing_attr_weight_name">Maximum gewicht</string>
-	<string name="select_gpx">Kies GPX…</string>
-    <string name="route_descr_select_destination">Kies bestemming</string>
+	<string name="select_gpx">Selecteer GPX…</string>
+    <string name="route_descr_select_destination">Selecteer bestemming</string>
     <string name="route_descr_select_on_map">Kies op de kaart…</string>
     <string name="route_descr_favorite">Favoriet…</string>
     <string name="route_preferences">Route-voorkeuren</string>
@@ -1853,7 +1852,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="save_as_favorites_points">Bewaar als groep van favorieten</string>
     <string name="loading_smth">Laad %1$s …</string>
     <string name="map_widget_plain_time">Huidige tijd</string>
-    <string name="select_destination_and_intermediate_points">Kies routepunten</string>
+    <string name="select_destination_and_intermediate_points">Selecteer routepunten</string>
     <string name="layer_amenity_label">Namen van interessepunten</string>
     <string name="gpx_wpt">Routepunt</string>
     <string name="selected_gpx_info_show">\n\nLang drukken om op de kaart te bekijken</string>
@@ -1886,13 +1885,13 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_attr_hideNonVehicleHighways_name">Verberg voetpaden</string>
     <string name="rendering_attr_hideText_name">Verberg tekst</string>
     <string name="rendering_attr_hideWoodScrubs_name">Verberg bossen en beplanting</string>
-    <string name="rendering_attr_buildings15zoom_name">Gebouwen op zoomniveau 15</string>
+    <string name="rendering_attr_buildings15zoom_name">Gebouwen tonen vanaf zoomstap 15</string>
     <string name="rendering_attr_moreDetailed_name">Meer details</string>
     <string name="rendering_attr_lessDetailed_name">Minder details</string>
-    <string name="rendering_attr_hideAccess_name">Het type toegang verbergen</string>
-    <string name="rendering_attr_showAccess_name">Het type toegang tonen</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Toon kwaliteit van wegen</string>
-    <string name="rendering_attr_showSurfaces_name">Toon wegoppervlak</string>
+    <string name="rendering_attr_hideAccess_name">Toegankelijkheid niet tonen</string>
+    <string name="rendering_attr_showAccess_name">Toegangsbeperkingen tonen</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Kwaliteit van wegen tonen</string>
+    <string name="rendering_attr_showSurfaces_name">Wegoppervlak tonen</string>
     <string name="rendering_attr_showCycleRoutes_name">Toon fietsroutes</string>
     <string name="map_preferred_locale_descr">Gewenste taal voor aanduidingen op de kaart (indien niet beschikbaar worden Engelse of plaatselijke namen gebruikt)</string>
     <string name="map_preferred_locale">Kaart voorkeurstaal</string>
@@ -1910,9 +1909,9 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="gpx_start_new_segment">Start nieuw segment</string>
     <string name="keep_navigation_service">Houden</string>
 	<string name="stop_navigation_service">Stop</string>
-	<string name="enable_sleep_mode">Slaapstand inschakelen</string>
+	<string name="enable_sleep_mode">GPS Slaapstand inschakelen</string>
 	<string name="gps_wake_up_timer">GPS ontwaak interval</string>
-	<string name="sleep_mode_stop_dialog">GPS aanlaten?</string>
+	<string name="sleep_mode_stop_dialog">Stop GPS slaapstand?</string>
 	<string name="lang_fa">Perzisch</string>
 	<string name="lang_al">Albanees</string>
 	<string name="lang_ar">Arabisch</string>
@@ -1923,7 +1922,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="rendering_attr_subwayMode_name">Tunnel modus</string>
  	<string name="continue_navigation">Navigatie voortzetten</string>
     <string name="pause_navigation">navigatie pauzeren</string>
-	<string name="rendering_attr_alpineHiking_name">Alpine wandel weergave</string>
+	<string name="rendering_attr_alpineHiking_name">Alpine wandelschaal (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Render paden volgens SAC schaal</string>
     <string name="rendering_attr_osmcTraces_name">Wandelsymbolen laag</string>
     <string name="rendering_attr_osmcTraces_description">Render paden volgens OSMC sporen</string>
@@ -1953,7 +1952,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="speak_favorites">Meld favorieten</string>
     <string name="speak_poi">Meld interessepunt (POI)</string>
     <string name="flat_list_waypoints">Alle</string>
-    <string name="index_tours">Rondreizen</string>
+    <string name="index_tours">Reizen</string>
     <string name="record_plugin_name">Reizen opnemen</string>
     <string name="int_hour">u.</string>
     <string name="duration">Duur</string>
@@ -1963,4 +1962,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="save_track_to_gpx_globally_descr">Het registreren van de afgelegde weg in een GPX-bestand kan worden aan- en uitgeschakeld met een knop op het kaartscherm</string>
 	<string name="save_track_interval_globally">Interval tussen geregistreerde punten</string>
 	<string name="rendering_attr_publicTransportMode_name">Openbaar vervoer-modus</string>
+	<string name="confirm_every_run">Altijd vragen</string>
+	<string name="save_global_track_interval_descr">Selecteer de loggings-interval voor de standaard track opname (te starten via de GPX opname widget in het scherm)</string>
+	<string name="save_global_track_interval">Standaard loggings-interval</string>
 	</resources>

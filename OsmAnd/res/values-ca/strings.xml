@@ -858,7 +858,7 @@
 	\n\nLa caixa de diàleg s\'amaga altre cop prement i aguantant dins seu.
 	</string>
 <string name="tip_initial_t">"OsmAnd és una aplicació de navegació amb moltes funcionalitats.
-\n\nEs disposa d\'una introducció bàsica, consells d\'ús i ajuda avançada via «Menú» → «Ajuda» des la pantalla del mapa. "</string>
+\n\nEs disposa d\'una introducció bàsica, de consells d\'ús i d\'una ajuda avançada via «Menú» → «Ajuda» des la pantalla del mapa. "</string>
 <string name="send_location_way_choose_title">Comparteix l\'ubicació usant</string>
 <string name="old_map_index_is_not_supported">Format de mapa discontinuat «{0}» no esta suportat</string>
 <string name="select_max_zoom_preload_area">Selecciona el màxim zoom per precarregar</string>
@@ -918,7 +918,7 @@
 	<string name="no_vector_map_loaded">Els mapes de vectors no s\'han carregat</string>
 	<string name="gpx_files_not_found">No s\'han trobat fitxers GPX a la carpeta /tracks</string>
 	<string name="rotate_map_to_bearing_descr">Seleccioneu l\'alineació de la pantalla del mapa</string>
-	<string name="background_service_int">Interval d\'activació GPS</string>
+	<string name="background_service_int">Interval d\'activació del GPS</string>
 	<string name="voice_provider_descr">Trieu la llengua en el guiatge per la navegació</string>
 	<string name="voice_provider">Guiatge per veu</string>
 	
@@ -1808,12 +1808,12 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_attr_hideText_name">Oculta el text</string>
     <string name="rendering_attr_hideWoodScrubs_name">Oculta els boscos i erms</string>
     <string name="rendering_attr_buildings15zoom_name">Edificis al detall 15 de zoom</string>
-    <string name="rendering_attr_moreDetailed_name">Més detallat</string>
-    <string name="rendering_attr_lessDetailed_name">Menys detallat</string>
-    <string name="rendering_attr_hideAccess_name">Oculta el tipus d\'accés</string>
-    <string name="rendering_attr_showAccess_name">Mostra el tipus d\'accés</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Mostra la qualitat de les vies</string>
-    <string name="rendering_attr_showSurfaces_name">Mostra el tipus de superfície de les vies</string>
+    <string name="rendering_attr_moreDetailed_name">Més detalls</string>
+    <string name="rendering_attr_lessDetailed_name">Menys detalls</string>
+    <string name="rendering_attr_hideAccess_name">Oculta les restriccions d\'accés</string>
+    <string name="rendering_attr_showAccess_name">Mostra les restriccions d\'accés</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Mostra la qualitat de la via</string>
+    <string name="rendering_attr_showSurfaces_name">Mostra el tipus de superfície de la via</string>
     <string name="rendering_attr_cycleRoutes_name">Mostra vies de ciclista</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostra les vies ciclistes</string>
     
@@ -1846,7 +1846,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="rendering_attr_subwayMode_name">Mode subterrani</string>
  	<string name="continue_navigation">Continua la navegació</string>
     <string name="pause_navigation">Suspèn la navegació</string>
-	<string name="rendering_attr_alpineHiking_name">Perspectiva senderista</string>
+	<string name="rendering_attr_alpineHiking_name">Escala senderista SAC (Club Alpí Suís)</string>
     <string name="rendering_attr_alpineHiking_description">Es dibuixen els camins segons l\'escala SAC (Club Alpí Suís)</string>
     <string name="rendering_attr_osmcTraces_name">Sobreposar simbologia senderista</string>
     <string name="rendering_attr_osmcTraces_description">Es dibuixen els camins segons les traces OSMC (símbols de colors)</string>
@@ -1886,4 +1886,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="save_track_to_gpx_globally">Desa la traça a un arxiu GPX</string>
 	<string name="save_track_to_gpx_globally_descr">L\'enregistrament de la posició en un arxiu GPX es pot activar o desactivar utilitzant el giny associat, a la pantalla del mapa</string>
 	<string name="save_track_interval_globally">Interval d\'enregistrament</string>
+	<string name="confirm_every_run">Es demana confirmació</string>
+	<string name="save_global_track_interval_descr">Trieu l\'interval d\'enregistrament general de les traces (s\'activa mitjançant el giny de gravació de GPX del mapa)</string>
+	<string name="save_global_track_interval">Interval d\'enregistrament general</string>
 	</resources>

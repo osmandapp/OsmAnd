@@ -185,12 +185,11 @@
   <string name="tip_app_mode">Wybierz Profil</string>
   
   <string name="tip_navigation">Nawigacja</string>
-  <string name="tip_navigation_t">W celu wyznaczenia trasy do miejsca, kliknij na nie na mapie, (a następnie wybierz \'Trasa do tego miejsca\'), lub wybierz \'Nawigacja\' po wybraniu dowolnego wpisu w liście wyników wyszukiwania lub liści Ulubionych.↵
-		\n\nCel oznaczony jest na mapie jako pomarańczowy znacznik flagi i OsmAnd wyświetla odległość do niego oraz kierunek do niego (pomarańczowy trójkąt).
-		\n\nMożesz wybrać opcję \'Uruchom nawigację\', co oznacza, że OsmAnd będzie poprowadzić Cię, dając instrukcje głosowe (jeśli są włączone), itp. Można też wybrać \'Tylko pokaż\'\ w celu wyświetlenia trasy bez możliwości nawigowania.
-		\n\nAby wyświetlić trasę do wybranego celu z każdego innego miejsca niż aktualna pozycja, wybierz punkt początkowy na mapie i Wybierz \'Dojazd z \'.
-		\n\nJeśli wybierzesz \'Dojazd z \' oraz \'Nawiguj\' OsmAnd przełączy się do Twojej aktualnej pozycji, jak tylko zostanie znaleziona, natomiast \'Dojazd z \' w połączeniu z trasy \'Tylko pokaż\' tylko pokazuje trasę bez aktualizacji położenia na trasie.
-	</string>
+  <string name="tip_navigation_t">"W celu wyznaczenia trasy do miejsca, kliknij na nie na mapie, (a następnie wybierz \'Trasa do tego miejsca\'), lub wybierz \'Nawigacja\' po wybraniu dowolnego wpisu w liście wyników wyszukiwania lub liści Ulubionych.↵
+\n\nCel oznaczony jest na mapie jako znacznik flagi i OsmAnd wyświetla odległość do niego oraz kierunek do niego (pomarańczowy trójkąt).
+\n\nMożesz wybrać opcję \'Uruchom nawigację\', co oznacza, że OsmAnd będzie poprowadzić Cię, dając instrukcje głosowe (jeśli są włączone), itp. Można też wybrać \'Tylko pokaż\' w celu wyświetlenia trasy bez możliwości nawigowania.
+\n\nAby wyświetlić trasę do wybranego celu z każdego innego miejsca niż aktualna pozycja, wybierz punkt początkowy na mapie i Wybierz \'Dojazd z \'.
+\n\nJeśli wybierzesz \'Dojazd z \' oraz \'Nawiguj\' OsmAnd przełączy się do Twojej aktualnej pozycji, jak tylko zostanie znaleziona, natomiast \'Dojazd z \' w połączeniu z trasy \'Tylko pokaż\' tylko pokazuje trasę bez aktualizacji położenia na trasie. "</string>
   <string name="tip_search">Wyszukiwanie</string>
   <string name="tip_search_t">Możesz wyszukać miejsca bezpośrednio na mapie poprzez \'Użyj lokalizacji...\' → \'Szukaj w pobliżu tutaj\', lub wywołując ekran wyszukiwania poprzez \'Menu\' → \'Szukaj\'.↵
 		\n\nEkran wyszukiwania zapewnia szablony wyszukiwania
@@ -206,12 +205,11 @@
 		\n\nSą one dostępny przez długie naciśnięcie dowolnego punktu na mapie (następnie dotykając jego znacznik), lub przez naciśnięcie przycisku trackball lub wybierając \'Menu\' → \'Użyj lokalizacji...\' (dwa ostatnie sposoby pobierają centrum mapy jako odniesienie).↵
 		\n\nOkno znacznika może być ukryte przez kliknięcie na nim.↵
 	</string>
-  <string name="tip_initial">Porady i sztuczki</string>
-  <string name="tip_initial_t">OsmAnd jest rozbudowanym programem do nawigacji posiadającym wiele funkcji.
-		\n\nPodstawowe porady i kruczki są wyświetlane po wybraniu \'Menu\' → \'Porady i wskazówki\'
-	</string>
+  <string name="tip_initial">Pomoc</string>
+  <string name="tip_initial_t">"OsmAnd jest programem do nawigacji posiadającym wiele funkcji.
+\n\nPodstawowe porady, wskazówki dotyczące użytkowania i zaawansowana pomoc są dostępne po wybraniu \'Menu\' → \'Pomoc\' z ekranu mapy. "</string>
   <string name="next_button">Następny</string>
-  <string name="previous_button">Poprzedni</string>
+  <string name="previous_button">Wstecz</string>
   <string name="unit_of_length_descr">Zmień jednostki długości i prędkości</string>
   <string name="unit_of_length">Jednostki długości</string>
   <string name="si_mi_foots">Mile/stopy</string>
@@ -387,7 +385,7 @@
   <string name="int_seconds">sekund</string>
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">Ustaw czas pomiędzy wybudzeniami używany przez usługę trybu uśpienia</string>
-  <string name="background_service_int">Czas pomiędzy wybydzeniami</string>
+  <string name="background_service_int">Czas pomiędzy wybudzeniami GPS</string>
   <string name="background_service_provider_descr">Wybierz dostawcę lokalizacji dla trybu w tle</string>
   <string name="background_service_provider">Sposób lokalizacji</string>
   <string name="background_router_service_descr">Uruchom usługę śledzącą Twoją pozycję w tle podczas kiedy ekran jest wyłączony</string>
@@ -541,7 +539,7 @@
   <string name="auto_zoom_map_descr">Automatyczne przybliżanie mapy w zależności od prędkości (gdy mapa zsynchronizowana jest z aktualną pozycją)</string>
   <string name="auto_zoom_map">Automatyczne przybliżanie</string>
   <string name="additional_settings">Dodatkowe ustawienia</string>
-  <string name="settings_preset_descr">Widok mapy i ustawienia nawigacji zapamiętywane są dla każdego profilu użytkownika. Ustaw swój domyślny profil tutaj.</string>
+  <string name="settings_preset_descr">Widok mapy i ustawienia nawigacji zapamiętywane są dla każdego profilu użytkownika. Ustaw swój domyślny profil.</string>
   <string name="settings_preset">Domyślny profil</string>
   <string name="settings">Ustawienia</string>
   <string name="save_current_track_descr">Zapisz bieżący ślad na karcie SD</string>
@@ -549,7 +547,7 @@
   <string name="save_track_interval_descr">Wybierz czas pomiędzy sprawdzaniem pozycji przy nagrywaniu ścieżek podczas nawigacji</string>
   <string name="save_track_interval">Czas pomiędzy sprawdzaniem pozycji podczas nawigacji</string>
   
-  <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu grupami wg dni</string>
+  <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu ścieżek podczas nawigacji</string>
   <string name="save_track_to_gpx">Zapisuj ślad do pliku GPX podczas nawigacji</string>
   <string name="update_tile">Uaktualnij mapę</string>
   <string name="reload_tile">Przeładuj kafelki</string>
@@ -1131,7 +1129,7 @@
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
     <string name="osmodroid_plugin_name">OsMoDroid</string>
 	<string name="tip_altitude_offset">Korekta wysokości</string>
-	<string name="monitoring_control_start">start</string>
+	<string name="monitoring_control_start">Start</string>
     <string name="tip_altitude_offset_t">Większość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.
 		\n\nLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96.
 		\n\nOsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96. W celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez \'Ustawienia\'  → \'Zarządzanie plikami map\'. (Oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC .)
@@ -1181,8 +1179,8 @@
     <string name="recording_context_menu_play">Odtwórz</string>
     <string name="recording_description">Nagranie %1$s %2$s w %3$s</string>
     <string name="recording_default_name">nagranie</string>
-    <string name="av_control_stop">Kończ</string>
-    <string name="av_control_start">Nagraj</string>
+    <string name="av_control_stop">Stop</string>
+    <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Notatki audio/video</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do rysowania poziomic offline</string>
     
@@ -1381,7 +1379,7 @@
     <string name="about_version">Wersja:</string>
     <string name="about_settings">Informacje</string>
     <string name="about_settings_descr">Informacje o wersji, licencje, współtwórcy</string>
-    <string name="tips_and_tricks">Porady i wskazówki</string>
+    <string name="tips_and_tricks">Pomoc</string>
     <string name="tip_map_styles">Style map</string>
 	<string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_maxzoom">Maksymalne powiększenie</string>
@@ -1693,7 +1691,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
     <string name="interrupt_music_descr">Przerwij muzykę podczas komunikatów</string>
 	<string name="interrupt_music">Przerwij muzykę</string>
-	<string name="always_center_position_on_map">Zawsze wyświetlaj pozycję na środku</string>
+	<string name="always_center_position_on_map">Pozycja w centrum wyświetlacza</string>
     <string name="voice_pref_title">Głos</string>
     <string name="misc_pref_title">Różne</string>
     <string name="localization_pref_title">Lokalizacja</string>
@@ -1702,7 +1700,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="navigation_intent_invalid">Nieprawidłowy format: %s</string>
 <string name="osmo_settings_uuid">Unikatowy identyfikator urządzenia</string>
     <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
-    <string name="osmo_plugin_description">"OpenStreetMap zaawansowany monitoring na żywo - zobacz http://osmo.mobi. Daje możliwość śledzenia innych urządzeń i vice versa. Twórz anonimowe grupy, dziel się lokalizacją i prowadź komunikację. System ma wiele ustawień dla śledzenia w sesji lub stałego śledzenia. Grupy anonimowe mają ograniczenia czasowe i funkcjonalne, np. nie ma zdalnej kontroli i administratora grupy. W pełni funkcjonalne grupy powinny być tworzone przez witrynę, a dostęp zarezerwowany tylko dla zarejestrowanych użytkowników. "</string>
+    <string name="osmo_plugin_description">"OpenStreetMap zaawansowany monitoring na żywo, zobacz http://osmo.mobi. Daje możliwość śledzenia innych urządzeń i vice versa. Twórz anonimowe grupy, dziel się lokalizacją i prowadź komunikację. System ma wiele ustawień dla śledzenia w sesji lub stałego śledzenia. Grupy anonimowe mają ograniczenia czasowe i funkcjonalne, np. nie ma zdalnej kontroli i administratora grupy. W pełni funkcjonalne grupy powinny być tworzone przez witrynę, a dostęp zarezerwowany tylko dla zarejestrowanych użytkowników. "</string>
     <string name="osmo_plugin_name">OsMo (Zaawansowany Monitoring na Żywo)</string>
     <string name="osmo_settings">Monitoring OpenStreetMap</string>
    	<string name="keep_informing_never">Nigdy</string>
@@ -1912,7 +1910,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="pause_navigation">Wstrzymaj nawigację</string>
     <string name="rendering_attr_alpineHiking_name">Widok wspinaczki alpinistycznej</string>
     <string name="rendering_attr_alpineHiking_description">Renderuj ścieżki według skali SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Nakładka symbolu wędrówki</string>
+    <string name="rendering_attr_osmcTraces_name">Symbol nakładki wędrówek</string>
     <string name="rendering_attr_osmcTraces_description">Renderuj ścieżki według śladów OSMC</string>
     
 	<string name="arrival_distance_factor_early">Wcześnie</string>
@@ -1939,4 +1937,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="save_track_to_gpx_globally_descr">Logowanie pozycji do pliku GPX można włączyć lub wyłączyć używając widgetu nagrywania GPX na głównym ekranie</string>
 	<string name="save_track_interval_globally">Częstotliwość zapisywania</string>
 	<string name="record_plugin_description">Zapisz swoje ścieżki jednym guzikiem na ekranie mapy. Pokazuj ustawienia nagrywania twoich wycieczek do pliku GPX lub używając serwisu internetowego.</string>
-    </resources>
+    <string name="confirm_every_run">Zawsze pytaj</string>
+	<string name="save_global_track_interval_descr">Wybierz interwał rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet nagrywania GPX na mapie)</string>
+	<string name="save_global_track_interval">Ogólny interwał rejestrowania</string>
+	</resources>

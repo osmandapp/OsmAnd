@@ -1361,7 +1361,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="save_current_track_descr">Gem aktuelle spor til SD-kort nu</string>
 	<string name="save_current_track">Gem aktuelle GPX-spor</string>
 	<string name="save_track_interval">Logningsinterval under navigation</string>
-	<string name="save_track_interval_descr">Vælg logningsinterval for spor optaget under navigation</string>
+	<string name="save_track_interval_descr">Vælg logningsinterval for sporregistrering under navigation</string>
 	<string name="save_track_to_gpx_descrp">Spor bliver gemt i \'/track\' mappen under navigation</string>
 	<string name="save_track_to_gpx">Log spor til GPX-fil under navigation</string>
 	<string name="update_tile">Opdater kort</string>
@@ -1903,12 +1903,12 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="rendering_attr_hideText_name">Skjul tekst</string>
     <string name="rendering_attr_hideWoodScrubs_name">Skjul skov og beplantning</string>
     <string name="rendering_attr_buildings15zoom_name">Bygninger på zoomniveau 15</string>
-    <string name="rendering_attr_moreDetailed_name">Mere detaljeret</string>
-    <string name="rendering_attr_lessDetailed_name">Mindre detaljeret</string>
-    <string name="rendering_attr_hideAccess_name">Skjul adgangstypen</string>
-    <string name="rendering_attr_showAccess_name">Vis adgangstypen</string>
+    <string name="rendering_attr_moreDetailed_name">Flere detaljer</string>
+    <string name="rendering_attr_lessDetailed_name">Færre detaljer</string>
+    <string name="rendering_attr_hideAccess_name">Skjul adgangsbegrænsninger</string>
+    <string name="rendering_attr_showAccess_name">Vis adgangsbegrænsninger</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis vejkvaliteten</string>
-    <string name="rendering_attr_showSurfaces_name">Vis vejbelægninger</string>
+    <string name="rendering_attr_showSurfaces_name">Vis vejbelægning</string>
     <string name="rendering_attr_showCycleRoutes_name">Vis cykelruter</string>
     <string name="local_map_names">Lokale navne</string>
     <string name="lang_sw">Swahili</string>
@@ -1939,7 +1939,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="rendering_attr_subwayMode_name">Metrotilstand</string>
  	<string name="continue_navigation">Fortsæt navigation</string>
     <string name="pause_navigation">Pause navigation</string>
-	<string name="rendering_attr_alpineHiking_name">Alpinvandrings visning</string>
+	<string name="rendering_attr_alpineHiking_name">Alpin vandreskala (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC skala</string>
     <string name="rendering_attr_osmcTraces_name">Vandresymbol overlejring</string>
     <string name="rendering_attr_osmcTraces_description">Generer stier efter OSMC spor</string>
@@ -1979,4 +1979,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
 	<string name="save_track_interval_globally">Logningsinterval</string>
 	<string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til/fra med \'GPX optagelse\' på hovedskærmen</string>
+	<string name="confirm_every_run">Spørg altid</string>
+	<string name="save_global_track_interval_descr">Vælg logningsinterval for den almindelige sporregistrering (aktiveres via \'GPX optagelse\' på hovedskærmen)</string>
+	<string name="save_global_track_interval">Generelt logningsinterval</string>
 	</resources>

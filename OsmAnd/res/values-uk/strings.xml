@@ -430,7 +430,7 @@
 	</string>
   <string name="tip_initial">Допомога</string>
   <string name="tip_initial_t">"OsmAnd - навігаційна програма з великими можливостями.
-\n\nПочаткові відомості, як і деякі поради та детальна інструкція щодо використання знаходяться в \'Меню\'→\'Допомога\'. "</string>
+\n\nПочаткові відомості, як і деякі поради та детальна інструкція щодо використання знаходяться в \'Меню\'→\'Допомога\' на екрані з мапою. "</string>
   <string name="next_button">Наступний</string>
   <string name="previous_button">Попередній</string>
   <string name="unit_of_length_descr">Змінити одиниці вимірювання довжини і швидкості</string>
@@ -599,7 +599,7 @@
   <string name="int_seconds">секунд</string>
   <string name="int_min">хв.</string>
   <string name="background_service_int_descr">Виберіть інтервал позиціонування для сервісу</string>
-  <string name="background_service_int">Інтервал позиціонування</string>
+  <string name="background_service_int">Інтервал вмикання GPS</string>
   <string name="background_service_provider_descr">Виберіть джерело позиціонування для сервісу</string>
   <string name="background_service_provider">Джерело позиціонування</string>
   <string name="background_router_service_descr">Запускає OsmAnd у фоновому режимі для відслідковування місцерозташування при вимкненому екрані</string>
@@ -1675,8 +1675,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_attr_buildings15zoom_name">Будинки на масштабі 15</string>
     <string name="rendering_attr_moreDetailed_name">Докладно</string>
     <string name="rendering_attr_lessDetailed_name">Спрощено</string>
-    <string name="rendering_attr_hideAccess_name">Приховати типи доступу</string>
-    <string name="rendering_attr_showAccess_name">Показати типи доступу</string>
+    <string name="rendering_attr_hideAccess_name">Приховати обмеження доступу</string>
+    <string name="rendering_attr_showAccess_name">Показати обмеження доступу</string>
     <string name="rendering_attr_showSurfaceGrade_name">Показувати якість доріг</string>
     <string name="rendering_attr_showSurfaces_name">Показати тип покриття</string>
     <string name="rendering_attr_showCycleRoutes_name">Показати веломаршрути</string>
@@ -1928,7 +1928,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="continue_navigation">Продовжити навігацію</string>
     <string name="pause_navigation">Призупинити навігацію</string>
     <string name="rendering_attr_subwayMode_name">Режим метро</string>
- 	<string name="rendering_attr_alpineHiking_name">Піший гірський туризм</string>
+ 	<string name="rendering_attr_alpineHiking_name">Піший гірський туризм (шкала SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Візуалізація шляху за шкалою SAC</string>
     <string name="rendering_attr_osmcTraces_name">Шар символів для пішого туризму</string>
     <string name="rendering_attr_osmcTraces_description">Візуалізація шляху відповідно до треків OSMC</string>
@@ -1963,4 +1963,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="way_alarms">Перешкоди</string>
     <string name="speak_favorites">Оголошувати улюблені</string>
     <string name="speak_poi">Оголошувати POI</string>
-    </resources>
+    <string name="confirm_every_run">Завжди питати</string>
+	<string name="save_global_track_interval_descr">Оберіть інтервал періодичності запису треку (вмикається через віджет запису GPX)</string>
+	<string name="save_global_track_interval">Загальний інтервал запису</string>
+	</resources>

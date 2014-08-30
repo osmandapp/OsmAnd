@@ -1801,7 +1801,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="arrival_distance_factor_late">Vėlai</string>
     <string name="arrival_distance_factor_at_last">Paskutiniuose metruose</string>
     <string name="rendering_attr_coloredBuildings_name">Spalvoti pastatai</string>
-    <string name="rendering_attr_alpineHiking_name">Kalnų žygiai</string>
+    <string name="rendering_attr_alpineHiking_name">Kalnų žygiai (SAC)</string>
     <string name="rendering_attr_osmcTraces_name">Padengimas žygių simboliais</string>
     <string name="hide_all_waypoints">Pašalinti visus</string>
 <string name="av_camera_pic_size">Nuotraukos dydis</string>
@@ -1829,4 +1829,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="save_track_interval_globally">Įrašymo intervalas</string>
 	<string name="save_track_to_gpx_globally_descr">Bendras vietos išsaugojimas į GPX failą gali būti įjungtas ar išjungtas panaudojant GPX įrankį žemėlapio ekrane</string>
 	<string name="record_plugin_description">Kelionės istorijos išsaugojimas vieno mygtuko ekrane paspaudimu. Nustatymai kelionės istorijos išsaugojimui GPX faile ar naudojantis internetine paslauga.</string>
-    </resources>
+    <string name="confirm_every_run">Visada klausti</string>
+	<string name="save_global_track_interval_descr">Pasirinkite bendrojo maršruto įrašymo intervalą (įjungiama per GPX valdiklį žemėlapio rodinyje)</string>
+	<string name="save_global_track_interval">Bendras įrašymo intervalas</string>
+	</resources>

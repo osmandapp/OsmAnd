@@ -1,5 +1,8 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="confirm_every_run">Jedesmal nachfragen</string>
+	<string name="save_global_track_interval_descr">Aufzeichnungs-Intervall für die generelle Positionsaufzeichnung (via Schaltfläche \'GPX-Aufnahme\' auf dem Kartenbildschirm)</string>
+	<string name="save_global_track_interval">Generelles Aufzeichnungs-Intervall</string>
 	<string name="enable_sleep_mode">GPS-Hintergrunddienst aktivieren</string>
 	<string name="sleep_mode_stop_dialog">GPS-Hintergrunddienst stoppen?</string>
 	<string name="bg_service_sleep_mode_off">Hintergrunddienst\n einschalten</string>
@@ -32,7 +35,7 @@
 	<string name="pause_navigation">Navigation pausieren</string>
 	<string name="keep_navigation_service">Aktiv lassen</string>
 	<string name="stop_navigation_service">Anhalten</string>
-	<string name="rendering_attr_alpineHiking_name">Alpinwanderung Ansicht</string>
+	<string name="rendering_attr_alpineHiking_name">Alpine Tourenskala (SAC)</string>
 	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
 	<string name="rendering_attr_osmcTraces_name">Wandersymbole anzeigen</string>
 	<string name="rendering_attr_osmcTraces_description">Wandersymbole anzeigen (OSMC)</string>
@@ -1596,10 +1599,10 @@
 	<string name="rendering_attr_hideText_name">Text ausblenden</string>
 	<string name="rendering_attr_hideWoodScrubs_name">Wälder und Gebüsch ausblenden</string>
 	<string name="rendering_attr_buildings15zoom_name">Gebäude ab Zoomstufe 15 anzeigen</string>
-	<string name="rendering_attr_moreDetailed_name">Mehr Dezails anzeigen</string>
-	<string name="rendering_attr_lessDetailed_name">Weniger Details anzeigen</string>
-	<string name="rendering_attr_hideAccess_name">Zugangsarten verbergen</string>
-	<string name="rendering_attr_showAccess_name">Zugangsarten anzeigen</string>
+	<string name="rendering_attr_moreDetailed_name">Mehr Details in Karte</string>
+	<string name="rendering_attr_lessDetailed_name">Weniger Details in Karte</string>
+	<string name="rendering_attr_hideAccess_name">Zugangsbeschrünkungen verbergen</string>
+	<string name="rendering_attr_showAccess_name">Zugangsbeschränkungen anzeigen</string>
 	<string name="rendering_attr_showSurfaceGrade_name">Straßenqualität anzeigen</string>
 	<string name="rendering_attr_showSurfaces_name">Straßenoberfläche anzeigen</string>
 	<string name="rendering_attr_showCycleRoutes_name">Fahrrad-Routen anzeigen</string>

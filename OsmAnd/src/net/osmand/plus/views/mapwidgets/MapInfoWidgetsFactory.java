@@ -8,6 +8,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.*;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -283,12 +284,18 @@ public class MapInfoWidgetsFactory {
 	
 	public ImageViewWidget createCompassView(final MapActivity map){
 		final OsmandMapTileView view = map.getMapView();
+		final OsmandApplication app = map.getMyApplication();
+		final Drawable compassNiu = map.getResources().getDrawable(R.drawable.map_compass_niu);
+		final Drawable compassNiuWhite = map.getResources().getDrawable(R.drawable.map_compass_niu_white);
+		final Drawable compassBearing = map.getResources().getDrawable(R.drawable.map_compass_bearing);
+		final Drawable compassBearingWhite = map.getResources().getDrawable(R.drawable.map_compass_bearing_white);
 		final Drawable compass = map.getResources().getDrawable(R.drawable.map_compass);
 		final Drawable compassWhite = map.getResources().getDrawable(R.drawable.map_compass_white);
 		final int mw = (int) compass.getMinimumWidth() ;
 		final int mh = (int) compass.getMinimumHeight() ;
 		ImageViewWidget compassView = new ImageViewWidget(map) {
 			private float cachedRotate = 0;
+			private int cachedRotateMap = 0;
 			private boolean nm;
 			@Override
 			protected void onDraw(Canvas canvas) {
@@ -303,12 +310,29 @@ public class MapInfoWidgetsFactory {
 				boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 				if(nightMode != this.nm) {
 					this.nm = nightMode;
-					setImageDrawable(nightMode ? compassWhite : compass);
+					if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
+						setImageDrawable(nightMode ? compassNiuWhite : compassNiu);
+					} else if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
+						setImageDrawable(nightMode ? compassBearingWhite : compassBearing);
+					} else {
+						setImageDrawable(nightMode ? compassWhite : compass);
+					}
 					return true;
 				}
 				if(view.getRotate() != cachedRotate) {
 					cachedRotate = view.getRotate();
 					invalidate();
+					return true;
+				}
+				if(app.getSettings().ROTATE_MAP.get() != cachedRotateMap) {
+					cachedRotateMap = app.getSettings().ROTATE_MAP.get();
+					if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
+						setImageDrawable(drawSettings.isNightMode() ? compassNiuWhite : compassNiu);
+					} else if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
+						setImageDrawable(drawSettings.isNightMode() ? compassBearingWhite : compassBearing);
+					} else {
+						setImageDrawable(drawSettings.isNightMode() ? compassWhite : compass);
+					}
 					return true;
 				}
 				return false;
@@ -320,7 +344,13 @@ public class MapInfoWidgetsFactory {
 				map.getMapViewTrackingUtilities().switchRotateMapMode();
 			}
 		});
-		compassView.setImageDrawable(compass);
+		if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
+			compassView.setImageDrawable(compassNiu);
+		} else if (app.getSettings().ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
+			compassView.setImageDrawable(compassBearing);
+		} else {
+			compassView.setImageDrawable(compass);
+		}
 		return compassView;
 	}
 	

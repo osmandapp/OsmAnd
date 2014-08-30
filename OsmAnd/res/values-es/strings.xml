@@ -300,7 +300,7 @@
 		\n\nUna caja marcador puede ser ocultada con una pulsación larga sobre ella.
 	</string>
   <string name="tip_initial">Ayuda</string>
-  <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nUna introducción básica, consejos de uso y la ayuda avanzada están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
+  <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nAlguna introducción básica, consejos de uso, y la ayuda avanzada están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
   <string name="next_button">Siguiente</string>
   <string name="previous_button">Anterior</string>
   <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
@@ -1780,12 +1780,12 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_attr_hideText_name">Ocultar textos</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ocultar bosques y matorrales</string>
     <string name="rendering_attr_buildings15zoom_name">Edificios en zoom 15</string>
-    <string name="rendering_attr_moreDetailed_name">Más detallado</string>
-    <string name="rendering_attr_lessDetailed_name">Menos detallado</string>
-    <string name="rendering_attr_hideAccess_name">Ocultar el tipo de acceso</string>
-    <string name="rendering_attr_showAccess_name">Mostrar el tipo de acceso</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Mostrar la calidad de las carreteras</string>
-    <string name="rendering_attr_showSurfaces_name">Mostrar superficie de carreteras</string>
+    <string name="rendering_attr_moreDetailed_name">Más detalles</string>
+    <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
+    <string name="rendering_attr_hideAccess_name">Ocultar restricciones de acceso</string>
+    <string name="rendering_attr_showAccess_name">Mostrar restricciones de acceso</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Mostrar calidad de carretera</string>
+    <string name="rendering_attr_showSurfaces_name">Mostrar superficie de carretera</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostrar rutas ciclistas</string>
     <string name="osmo_auth_error_short">Falló la autorización</string>
     <string name="osmo_auth_error">Error de autorización OsMo: %1$s.\n Puede deberse a que el servicio esté temporalmente caído o que tu registro ha expirado.\n ¿Quieres realizar un nuevo registro?</string>
@@ -1827,7 +1827,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="rendering_attr_subwayMode_name">Modo metro</string>
  	<string name="continue_navigation">Continuar Navegación</string>
     <string name="pause_navigation">Pausar Navegación</string>
-	<string name="rendering_attr_alpineHiking_name">Vista senderismo Alpino</string>
+	<string name="rendering_attr_alpineHiking_name">Escala senderismo Alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Interpretar caminos de acuerdo a la escala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
     <string name="rendering_attr_osmcTraces_description">Interpretar caminos de acuerdo a las trazas de OSMC</string>
@@ -1867,4 +1867,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="save_track_to_gpx_globally">Guardar traza en fichero GPX</string>
 	<string name="save_track_interval_globally">Intervalo de guardado</string>
 	<string name="save_track_to_gpx_globally_descr">El registro de la posición en un archivo GPX puede activarse o desactivarse usando el control de grabación GPX en la pantalla del mapa</string>
+	<string name="confirm_every_run">Preguntar siempre</string>
+	<string name="save_global_track_interval_descr">Elegir intervalo de guardado para la grabación de trazas general (habilitar mediante el widget de guardado GPX en el mapa)</string>
+	<string name="save_global_track_interval">Intervalo de guardado general</string>
 	</resources>

@@ -53,10 +53,9 @@
     <string name="osmodroid_plugin_description">OsMoDroid плагин - это расширение для OsmAnd используещее OsModroid приложение для слежения. Информация о сервисе доступна на сайте http://esya.ru.</string>
     <string name="osmodroid_plugin_name">OsMoDroid</string>
 	<string name="tip_altitude_offset">Отображение высоты - коррекция смещения</string>
-	<string name="tip_altitude_offset_t">Большинство GPS устройств отображает высоту относительно эллипсоида WGS84, для определения высоты над уровнем моря необходимо провести коррекцию, которая зависит от местоположения.
-		\n\nДля более точного вычисления высоты используется картографическая проекция EGM96.
-		\n\nOsmAnd будет отображать высоту над уровнем моря в системе координат EGM96 после загрузки файла \'World Altitide Correction\' (WW15MGH.DAC) через менеджер загрузок. (Оригинал - http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
-	</string>
+	<string name="tip_altitude_offset_t">"Большинство GPS устройств отображает высоту относительно эллипсоида WGS84, для определения высоты над уровнем моря необходимо провести коррекцию, которая зависит от местоположения.
+\n\nДля более точного вычисления высоты используется картографическая проекция EGM96.
+\n\nOsmAnd будет отображать высоту над уровнем моря в системе координат EGM96 после загрузки файла \"World Altitide Correction\" (WW15MGH.DAC) через меню \"Настройки\" → \"Управление файлами карт\". (Оригинал - http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     
     <string name="no_buildings_found">Здания не найдены.</string>
     <string name="incremental_search_city">Выберите город</string>
@@ -1728,8 +1727,8 @@ OsmAnd - открытый источник и активно развается.
     <string name="rendering_attr_showSurfaces_name">Отображать тип покрытия</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Скрыть непроезжие дороги</string>
     <string name="rendering_attr_buildings15zoom_name">Здания на масштабе 15</string>
-    <string name="rendering_attr_hideAccess_name">Скрыть тип доступа</string>
-    <string name="rendering_attr_showAccess_name">Показать тип доступа</string>
+    <string name="rendering_attr_hideAccess_name">Скрыть ограничения доступа</string>
+    <string name="rendering_attr_showAccess_name">Отображать ограничения доступа</string>
     <string name="rendering_attr_showCycleRoutes_name">Показать веломаршруты</string>
     <string name="osmo_auth_error_short">Сбой авторизации</string>
     <string name="map_preferred_locale_descr">Предпочтительный язык для меток на карте (если он не доступен, то английский язык или местные названия)</string>
@@ -1784,7 +1783,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="arrival_distance_factor_late">Попозже</string>
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
     <string name="osmo_group_information_desc">" - Все созданные группы являются открытыми! Если вы хотите сохранить анонимность, подключите устройства непосредственно через ID трекера.\n - В группе могут состоять до 16 человек.\n - Если в группе не будет активным хотя бы 1 человек в течении 2-х недель группа будет удалена.\n - Вы можете ограничить вход в группу, только по приглашениям, но для управления группой вы должны войти в консоль администратора.\n - Если вам нужно создать группу, но с другими условиями, пожалуйста, свяжитесь со службой поддержки http://osmo.mobi</string>
-    <string name="rendering_attr_alpineHiking_name">Пеший горный туризм</string>
+    <string name="rendering_attr_alpineHiking_name">Пеший горный туризм по шкале (SAC)</string>
     <string name="rendering_attr_osmcTraces_name">Наложение символов пешего туризма</string>
     <string name="rendering_attr_coloredBuildings_name">Цветные здания</string>
     <string name="rendering_attr_publicTransportMode_name">Режим общественного транспорта</string>
@@ -1815,4 +1814,7 @@ OsmAnd - открытый источник и активно развается.
 	<string name="save_track_to_gpx_globally_descr">Общие положения журналирования в файл GPX могут быть включены или выключены с помощью виджета записи GPX на экране карты</string>
 	<string name="record_plugin_description">Сохранение ваших треков с помощью кнопки на экране с картой. Отображение настроек записи треков в локальные GPX-файлы или онлайн, в web-сервис.</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> карты с изображениями</string>
+	<string name="confirm_every_run">Всегда спрашивать</string>
+	<string name="save_global_track_interval_descr">Выберите интервал журналирования для записи общего трека (включается через виджет записи GPX на карте)</string>
+	<string name="save_global_track_interval">Общий интервал журналирования</string>
 	</resources>

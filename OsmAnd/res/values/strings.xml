@@ -9,9 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="confirm_every_run">Ask every run</string>
-	<string name="save_global_track_interval_descr">Choose logging interval for track recording enabled by selecting widget on the map.</string>
-	<string name="save_global_track_interval">Default Global Logging interval </string>
+	<string name="confirm_every_run">Always ask</string>
+	<string name="save_global_track_interval_descr">Choose logging interval for the general track recording (enabled via the GPX recording widget on the map)</string>
+	<string name="save_global_track_interval">General logging interval</string>
 	<string name="background_service_int">GPS Wake-up interval</string>
 	<string name="enable_sleep_mode">Enable GPS sleep mode</string>
 	<string name="sleep_mode_stop_dialog">Stop GPS sleep mode?</string>
@@ -82,13 +82,13 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">Hide non-vehicle highways</string>
     <string name="rendering_attr_hideText_name">Hide text</string>
     <string name="rendering_attr_hideWoodScrubs_name">Hide wood and scrubs</string>
-    <string name="rendering_attr_buildings15zoom_name">Buildings on 15 zoom</string>
-    <string name="rendering_attr_moreDetailed_name">More detailed</string>
-    <string name="rendering_attr_lessDetailed_name">Less detailed</string>
-    <string name="rendering_attr_hideAccess_name">Hide the type of access</string>
-    <string name="rendering_attr_showAccess_name">Show the type of access</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Show the quality of roads</string>
-    <string name="rendering_attr_showSurfaces_name">Show road surfaces</string>
+    <string name="rendering_attr_buildings15zoom_name">Buildings on zoom 15</string>
+    <string name="rendering_attr_moreDetailed_name">More details</string>
+    <string name="rendering_attr_lessDetailed_name">Fewer details</string>
+    <string name="rendering_attr_hideAccess_name">Hide access restrictions</string>
+    <string name="rendering_attr_showAccess_name">Show access restrictions</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Show road quality</string>
+    <string name="rendering_attr_showSurfaces_name">Show road surface</string>
     <string name="rendering_attr_showCycleRoutes_name">Show cycle routes</string>
     <string name="osmo_auth_error_short">Authorization failed</string>
     <string name="osmo_auth_error">OsMo authorization error encountered : %1$s.\n
@@ -650,7 +650,7 @@
     <string name="download_srtm_maps">Contour lines</string>
     <string name="download_regular_maps">Regular maps</string>
     <string name="download_roads_only_maps">Roads-only maps</string>
-    <string name="rendering_attr_alpineHiking_name">Alpine hiking view</string>
+    <string name="rendering_attr_alpineHiking_name">Alpine hiking scale (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Render paths according to SAC scale</string>
     <string name="rendering_attr_osmcTraces_name">Hiking symbol overlay</string>
     <string name="rendering_attr_osmcTraces_description">Render paths according to OSMC traces</string>
