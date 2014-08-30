@@ -1785,11 +1785,11 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="rendering_attr_hideNonVehicleHighways_name">自動車以外の専用道路を隠す</string>
     <string name="rendering_attr_hideText_name">文字列を隠す</string>
     <string name="rendering_attr_hideWoodScrubs_name">森林、低木等を隠す</string>
-    <string name="rendering_attr_buildings15zoom_name">ズーム15での建物表示</string>
+    <string name="rendering_attr_buildings15zoom_name">ズーム15で建物表示</string>
     <string name="rendering_attr_moreDetailed_name">より詳細に</string>
     <string name="rendering_attr_lessDetailed_name">詳細を省く</string>
-    <string name="rendering_attr_hideAccess_name">アクセスタイプを隠す</string>
-    <string name="rendering_attr_showAccess_name">アクセスタイプを表示</string>
+    <string name="rendering_attr_hideAccess_name">アクセス制限を非表示</string>
+    <string name="rendering_attr_showAccess_name">アクセス制限を表示</string>
     <string name="rendering_attr_showSurfaceGrade_name">道路の質(等級)を表示</string>
     <string name="rendering_attr_showSurfaces_name">路面を表示</string>
     <string name="rendering_attr_showCycleRoutes_name">自転車道を表示</string>
