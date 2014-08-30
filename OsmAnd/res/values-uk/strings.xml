@@ -1963,4 +1963,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="way_alarms">Перешкоди</string>
     <string name="speak_favorites">Оголошувати улюблені</string>
     <string name="speak_poi">Оголошувати POI</string>
-    </resources>
+    <string name="confirm_every_run">Завжди питати</string>
+	<string name="save_global_track_interval_descr">Оберіть інтервал періодичності запису треку (вмикається через віджет запису GPX)</string>
+	<string name="save_global_track_interval">Загальний інтервал запису</string>
+	</resources>
