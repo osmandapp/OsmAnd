@@ -9,12 +9,14 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="background_service_is_enabled_question">OsmAnd sleep mode service is still running. Do you want to interrupt it, too?</string>
+	<string name="sleep_mode_stop_dialog">Interrupt GPS sleep mode?</string>
+	<string name="stop_navigation_service">Interrupt</string>
 	<string name="confirm_every_run">Always ask</string>
 	<string name="save_global_track_interval_descr">Choose logging interval for the general track recording (enabled via the GPX recording widget on the map)</string>
 	<string name="save_global_track_interval">General logging interval</string>
 	<string name="background_service_int">GPS Wake-up interval</string>
 	<string name="enable_sleep_mode">Enable GPS sleep mode</string>
-	<string name="sleep_mode_stop_dialog">Stop GPS sleep mode?</string>
 	<string name="save_track_to_gpx_globally">Log track to GPX file</string>
 	<string name="save_track_to_gpx_globally_descr">General position logging to a GPX file can be turned on or off using the GPX recording widget on the map screen</string>
 	<string name="save_current_track_descr">Save current track to SD now</string>
@@ -62,7 +64,6 @@
     <string name="pause_navigation">Pause Navigation</string>
     <string name="rendering_attr_subwayMode_name">Subway mode</string>
  	<string name="keep_navigation_service">Keep</string>
-	<string name="stop_navigation_service">Stop</string>
 	<string name="gps_wake_up_timer">GPS wake-up interval</string>
 	<string name="map_preferred_locale_descr">Preferred language for labels on the map (if it is not available will switch to English or to local names)</string>
     <string name="map_preferred_locale">Map preferred language</string>
@@ -675,7 +676,6 @@
     <string name="safe_mode_description">Run the application in safe mode (using slower Android instead of native code).</string>
     <string name="safe_mode">Safe mode</string>
     <string name="native_library_not_running">The application is running in safe mode (disable it in the Settings).</string>
-    <string name="background_service_is_enabled_question">OsmAnd sleep mode service is still running. Do you want to turn it off?</string>
     <string name="tip_recent_changes_1_0_0_t">Changes in 1.0.0:
 	\n\t* Improved routing: faster, more precise, up to 250 km
 	\n\t* Introduce roads-only maps

@@ -4,7 +4,7 @@
 	<string name="save_global_track_interval_descr">Aufzeichnungs-Intervall für die generelle Positionsaufzeichnung (via Schaltfläche \'GPX-Aufnahme\' auf dem Kartenbildschirm)</string>
 	<string name="save_global_track_interval">Generelles Aufzeichnungs-Intervall</string>
 	<string name="enable_sleep_mode">GPS-Hintergrunddienst aktivieren</string>
-	<string name="sleep_mode_stop_dialog">GPS-Hintergrunddienst stoppen?</string>
+	<string name="sleep_mode_stop_dialog">GPS-Hintergrunddienst unterbrechen?</string>
 	<string name="bg_service_sleep_mode_off">Hintergrunddienst\n einschalten</string>
 	<string name="bg_service_sleep_mode_on">Hintergrunddienst\n ausschalten</string>
 	<string name="background_router_service_descr">Aktiviere OsmAnd Hintergrunddienst für Funktionalitäten bei ausgeschalteter Anzeige</string>
@@ -34,7 +34,7 @@
 	<string name="continue_navigation">Navigation fortsetzen</string>
 	<string name="pause_navigation">Navigation pausieren</string>
 	<string name="keep_navigation_service">Aktiv lassen</string>
-	<string name="stop_navigation_service">Anhalten</string>
+	<string name="stop_navigation_service">Unterbrechen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpine Tourenskala (SAC)</string>
 	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
 	<string name="rendering_attr_osmcTraces_name">Wandersymbole anzeigen</string>
@@ -85,7 +85,7 @@
 	<string name="safe_mode_description">Anwendung läuft im abgesicherten Modus (Verwendung für langsamere Android-Versionen).</string>
 	<string name="safe_mode">Abgesicherter Modus</string>
 	<string name="native_library_not_running">Die Anwendung läuft im abgesicherten Modus (kann in den Einstellungen deaktiviert werden).</string>
-	<string name="background_service_is_enabled_question">Der Hintergrunddienst läuft noch, soll er beendet werden?</string>
+	<string name="background_service_is_enabled_question">Der Hintergrunddienst läuft noch, soll er auch unterbrochen werden?</string>
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
 	<string name="show_warnings_title">Warnungen anzeigen…</string>
