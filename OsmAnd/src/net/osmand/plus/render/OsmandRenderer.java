@@ -906,6 +906,9 @@ public class OsmandRenderer {
 				if (updatePaint(render, paint, 2, false, rc)) {
 					canvas.drawPath(path, paint);
 				}
+				if (updatePaint(render, paint, 3, false, rc)) {
+					canvas.drawPath(path, paint);
+				}
 			}
 			
 			if(oneway != 0 && !drawOnlyShadow){
