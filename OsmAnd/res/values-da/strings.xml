@@ -85,7 +85,7 @@
     <string name="safe_mode_description">Kør program i fejlsikret tilstand (for langsommere Android i stedet for oprindelige kode).</string>
     <string name="safe_mode">Fejlsikret tilstand</string>
     <string name="native_library_not_running">Programmet kører i fejlsikret tilstand (deaktiver i indstillinger).</string>
-    <string name="background_service_is_enabled_question">Baggrundstjenesten kører stadig. Skal den afbrydes?</string>
+    <string name="background_service_is_enabled_question">OsmAnd dvaletilstand tjeneste kører stadig. Skal den også afbrydes?</string>
     <string name="tip_recent_changes_1_0_0_t">Ændringer i 1.0.0:
 	\n* Forbedret ruteplanlægning: hurtigere, mere præcis, op til 250 km
 	\n* Introducere kort kun med veje
@@ -1925,10 +1925,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="lang_fa">Persisk</string>
 	<string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis sprog ikke findes skiftes til engelsk eller lokale navne)</string>
     <string name="map_preferred_locale">Foretrukket sprog på kort</string>
-    <string name="stop_navigation_service">Stop</string>
+    <string name="stop_navigation_service">Afbryd</string>
 	<string name="enable_sleep_mode">Aktiver GPS dvaletilstand</string>
 	<string name="gps_wake_up_timer">GPS vågn-op interval</string>
-	<string name="sleep_mode_stop_dialog">Stop GPS dvaletilstand?</string>
+	<string name="sleep_mode_stop_dialog">Afbryd GPS dvaletilstand?</string>
 	<string name="keep_navigation_service">Hold</string>
 	<string name="lang_al">Albansk</string>
 	<string name="lang_ar">Arabisk</string>
