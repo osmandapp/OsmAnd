@@ -1640,7 +1640,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="routing_attr_avoid_motorway_description">Vermijd autowegen</string>
 	<string name="routing_attr_weight_description">Geef het maximum gewicht van een voertuig</string>
     <string name="routing_attr_weight_name">Maximum gewicht</string>
-	<string name="select_gpx">GPX-bestand kiezen</string>
+	<string name="select_gpx">GPX-bestand kiezen …</string>
     <string name="route_descr_select_destination">Selecteer bestemming</string>
     <string name="route_descr_select_on_map">Kies op de kaart…</string>
     <string name="route_descr_favorite">Favoriet…</string>
