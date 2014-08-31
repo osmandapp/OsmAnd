@@ -119,6 +119,10 @@ public class MapRenderRepositories {
 	public Context getContext() {
 		return context;
 	}
+	
+	public OsmandRenderer getRenderer() {
+		return renderer;
+	}
 
 	public void initializeNewResource(final IProgress progress, File file, BinaryMapIndexReader reader) {
 		if (files.containsKey(file.getAbsolutePath())) {

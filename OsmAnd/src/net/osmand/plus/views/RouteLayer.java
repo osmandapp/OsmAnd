@@ -1,12 +1,15 @@
 package net.osmand.plus.views;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.osmand.Location;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
+import net.osmand.plus.render.OsmandRenderer;
+import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -14,8 +17,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
+import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
@@ -24,6 +26,8 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.graphics.PointF;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffColorFilter;
 
 public class RouteLayer extends OsmandMapLayer {
 	
@@ -32,17 +36,22 @@ public class RouteLayer extends OsmandMapLayer {
 	private final RoutingHelper helper;
 	private List<Location> points = new ArrayList<Location>();
 	private Paint paint;
+	private Paint paint2;
+	private boolean isPaint2;
+	private Paint shadowPaint;
+	private boolean isShadowPaint;
+	private Paint paint_1;
+	private boolean isPaint_1;
+	private int cachedHash;
 
 	private Path path;
 
 	// cache
-	private RenderingRulesStorage cachedRrs;
-	private boolean cachedNightMode;
-	private int cachedColor;
-
 	private Bitmap coloredArrowUp;
 
 	private Paint paintIcon;
+
+	private OsmandRenderer osmandRenderer;
 
 	public RouteLayer(RoutingHelper helper){
 		this.helper = helper;
@@ -53,7 +62,6 @@ public class RouteLayer extends OsmandMapLayer {
 		paint = new Paint();
 		
 		paint.setStyle(Style.STROKE);
-		paint.setStrokeWidth(14);
 		paint.setAntiAlias(true);
 		paint.setStrokeCap(Cap.ROUND);
 		paint.setStrokeJoin(Join.ROUND);
@@ -70,53 +78,55 @@ public class RouteLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
+		osmandRenderer = view.getApplication().getResourceManager().getRenderer().getRenderer();
 		initUI();
 	}
 
 	
-	private int updateColor(DrawSettings nightMode){
+	private void updatePaints(DrawSettings nightMode, RotatedTileBox tileBox){
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
-		boolean n = nightMode != null && nightMode.isNightMode();
-		if(coloredArrowUp == null) {
-			Bitmap originalArrowUp = BitmapFactory.decodeResource(view.getResources(), R.drawable.h_arrow, null);
-			coloredArrowUp = originalArrowUp;
-//			coloredArrowUp = Bitmap.createScaledBitmap(originalArrowUp, originalArrowUp.getWidth() * 3 / 4,	
-//					originalArrowUp.getHeight() * 3 / 4, true);
-		}
-		if (rrs != cachedRrs || cachedNightMode != n) {
-			cachedRrs = rrs;
-			cachedNightMode = n;
-			cachedColor = view.getResources().getColor(cachedNightMode?R.color.nav_track_fluorescent :  R.color.nav_track);
-			if (cachedRrs != null) {
+		final boolean isNight = nightMode != null && nightMode.isNightMode();
+		int hsh = calculateHash(rrs, isNight, tileBox.getZoomScale());
+		if (hsh != cachedHash) {
+			cachedHash = hsh;
+			// cachedColor = view.getResources().getColor(R.color.nav_track);
+			if (rrs != null) {
 				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, cachedNightMode);
-				if (req.searchRenderingAttribute("routeColor")) {
-					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
+				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, isNight);
+				if (req.searchRenderingAttribute("route")) {
+					RenderingContext rc = new OsmandRenderer.RenderingContext(view.getContext());
+					rc.setDensityValue((float) Math.pow(2, tileBox.getZoomScale()));
+//					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
+					osmandRenderer.updatePaint(req, paint, 0, false, rc);
+					isPaint2 = osmandRenderer.updatePaint(req, paint2, 1, false, rc);
+					isPaint_1 = osmandRenderer.updatePaint(req, paint_1, -1, false, rc);
+					isShadowPaint = req.isSpecified(rrs.PROPS.R_SHADOW_RADIUS);
+					if(isShadowPaint) {
+						ColorFilter cf = new PorterDuffColorFilter(req.getIntPropertyValue(rrs.PROPS.R_SHADOW_COLOR), Mode.SRC_IN);
+						shadowPaint.setColorFilter(cf);
+						shadowPaint.setStrokeWidth(paint.getStrokeWidth() + 2 * rc.getComplexValue(req, rrs.PROPS.R_SHADOW_RADIUS));
+					}
 				}
 			}
-			paint.setColor(cachedColor);
-			int r = Color.red(cachedColor);
-			int g = Color.green(cachedColor);
-			int b = Color.blue(cachedColor);
-			ColorMatrix f = new ColorMatrix(new float[]{
-				0, 0, 0, 0, r,
-				0, 0, 0, 0, g,
-				0, 0, 0, 0, b,
-				0, 0, 0, 1, 0
-			});
-			ColorMatrix sat = new ColorMatrix();
-			sat.setSaturation(0.3f);
-			f.postConcat(sat);
-			paintIcon.setColorFilter(new ColorMatrixColorFilter(f));
 		}
-		return cachedColor;
+	}
+	
+	
+	private int calculateHash(Object... o) {
+		return Arrays.hashCode(o);
 	}
 	
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		path.reset();
 		if (helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
-			updateColor(settings);
+			updatePaints(settings, tileBox);
+			if(coloredArrowUp == null) {
+				Bitmap originalArrowUp = BitmapFactory.decodeResource(view.getResources(), R.drawable.h_arrow, null);
+				coloredArrowUp = originalArrowUp;
+//				coloredArrowUp = Bitmap.createScaledBitmap(originalArrowUp, originalArrowUp.getWidth() * 3 / 4,	
+//						originalArrowUp.getHeight() * 3 / 4, true);
+			}
 			int w = tileBox.getPixWidth();
 			int h = tileBox.getPixHeight();
 			Location lastProjection = helper.getLastProjection();
@@ -158,7 +168,16 @@ public class RouteLayer extends OsmandMapLayer {
 				int y = tb.getPixYFromLatNoRot(o.getLatitude());
 				path.lineTo(x, y);
 			}
+			if(isPaint_1) {
+				canvas.drawPath(path, paint_1);
+			}
+			if(isShadowPaint) {
+				canvas.drawPath(path, shadowPaint);
+			}
 			canvas.drawPath(path, paint);
+			if(isPaint2) {
+				canvas.drawPath(path, paint2);
+			}
 			if(tb.getZoomAnimation() == 0) {
 				drawArrowsOverPath(canvas, path, coloredArrowUp);
 			}
