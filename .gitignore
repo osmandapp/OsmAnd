@@ -12,7 +12,5 @@ mx_*.png
 *.iml
 .settings
 .idea
-.classpath
 out/
-.gitignore
 
