@@ -283,12 +283,11 @@
   <string name="tip_app_mode">Profilo Utente</string>
   
   <string name="tip_navigation">Navigazione</string>
-  <string name="tip_navigation_t">Per ottenere indicazioni, tieni premuto sul luogo di destinazione (poi premi la sua descrizione e seleziona \'Indicazioni verso\'), oppure seleziona \'Indicazioni\' dopo aver premuto sul risultato di una ricerca o un preferito.
-		\n\nLa destinazione è segnata sulla mappa con una bandiera arancione e OsmAnd mostrerà la distanza di arrivo e la direzione per raggiungerla in linea d\'aria (con un triangolo arancione).
-		\n\nPuoi selezionare \'Avvia navigazione\', per chiedere a OsmAnd di guidarti fino a destinazione fornendoti avvisi vocali (se abilitati), etc. Oppure seleziona \'Mostra percorso\' per ottenere una guida statica senza aggiornamenti mentre ti muovi.
-		\n\nPer ricevere indicazioni partendo da un punto diverso alla tua posizione attuale, seleziona il punto voluto sulla mappa e scegli \'Indicazioni da\'.
-		\n\nSe usi \'Indicazioni da\' insieme ad \'Avvia navigazione\', OsmAnd passerà alla tua posizione attuale on appena essa sarà disponibile (questo modo è stato studiato proprio per permettere di avviare immediatamente la navigazione ancor prima che la posizione sia stata individuata), mentre \'Indicazioni da\' insieme a \'Mostra percorso\' calcola il percorso da un punto arbitrario senza effettuare alcun aggiornamento.
-	</string>
+  <string name="tip_navigation_t">"Per ottenere indicazioni, tieni premuto sul luogo di destinazione (poi premi la sua descrizione e seleziona \'Indicazioni verso\'), oppure seleziona \'Indicazioni\' dopo aver premuto sul risultato di una ricerca o un preferito.
+\n\nLa destinazione è segnata sulla mappa con una bandiera a scacchi e OsmAnd mostrerà la distanza di arrivo e la direzione per raggiungerla in linea d\'aria (con un triangolo arancione).
+\n\nPuoi selezionare \'Avvia navigazione\', per chiedere a OsmAnd di guidarti fino a destinazione fornendoti avvisi vocali (se abilitati), etc. Oppure seleziona \'Mostra percorso\' per ottenere una guida statica senza aggiornamenti mentre ti muovi.
+\n\nPer ricevere indicazioni partendo da un punto diverso alla tua posizione attuale, seleziona il punto voluto sulla mappa e scegli \'Indicazioni da\'.
+\n\nSe usi \'Indicazioni da\' insieme ad \'Avvia navigazione\', OsmAnd passerà alla tua posizione attuale on appena essa sarà disponibile (questo modo è stato studiato proprio per permettere di avviare immediatamente la navigazione ancor prima che la posizione sia stata individuata), mentre \'Indicazioni da\' insieme a \'Mostra percorso\' calcola il percorso da un punto arbitrario senza effettuare alcun aggiornamento. "</string>
   <string name="tip_search">Ricerca</string>
   <string name="tip_search_t">Puoi cercare i luoghi direttamente sulla mappa attraverso \'Utilizza la posizione\' → \'Cerca nelle vicinanze\', oppure andando in \'Menu\' → \'Ricerca\'.
 		\n\nLa schermata di ricerca fornisce varie schede per effettuare ricerche
@@ -304,7 +303,7 @@
 		\n\nViene visualizzato selezionando a lungo sulla mappa, premendo il pulsante trackball o selezionando \'Menù\' → \'Utilizza la posizione…\' (gli ultimi due modi prendono il centro della mappa come riferimento).
 		\n\nIl riquadro del marker può essere nescosto nuovamente cliccandolo a lungo.
 	</string>
-  <string name="tip_initial">Consigli e trucchi</string>
+  <string name="tip_initial">Aiuto</string>
   <string name="tip_initial_t">OsmAnd è una applicazione di navigazione con molte funzioni.
 		\n\nUn\'introduzione base e alcuni consigli d\'uso sono collegati nel \'Menù\' → \'Suggerimenti\' dallo schermo mappa.
 	</string>
@@ -1590,7 +1589,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="about_version">Versione:</string>
     <string name="about_settings">Informazioni</string>
     <string name="about_settings_descr">Informazioni versione, licenze, membri del progetto</string>
-    <string name="tips_and_tricks">Suggerimenti</string>
+    <string name="tips_and_tricks">Aiuto</string>
     <string name="tip_map_styles">Stili mappa</string>
 	<string name="tip_map_styles_t">OsmAnd supporta la visualizzazione delle mappe vettoriali in differenti stili per adattarsi alle tue esigenze:
 		\n\nDiversi dai  preimpostati bilanciati stili della mappa, li trovi sotto \'Menu\' -&gt; \'Configura schermo\' -&gt; \'Stile Mappa\' scegli per esempio
@@ -1881,7 +1880,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="layer_amenity_label">Etichette dei punti</string>
     <string name="show_zoom_buttons_navigation">Mostra i pulsanti dello zoom</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra i pulsanti dello zoom durante la navigazione</string>
-    <string name="visible_element">Mostra nella mapppa</string>
+    <string name="visible_element">Mostra nella mappa</string>
     <string name="sort_by_distance">Ordina per distanza</string>
     <string name="sort_by_name">Ordina per nome</string>
     <string name="none_selected_gpx">Nessun file GPX selezionato. Per selezionarlo tieni premuto su una delle tracce disponibili.</string>
