@@ -805,7 +805,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="context_menu_item_add_favorite">Voeg toe aan favorieten</string>
   <string name="context_menu_item_update_map">Kaart bijwerken</string>
   <string name="context_menu_item_open_bug">Meld fout in OpenStreetMap</string>
-  <string name="context_menu_item_create_poi">Maak interessepunt</string>
+  <string name="context_menu_item_create_poi">Maak interessepunt in OSM</string>
   <string name="default_buttons_yes">Ja</string>
   <string name="default_buttons_cancel">Annuleer</string>
   <string name="default_buttons_apply">Toepassen</string>
