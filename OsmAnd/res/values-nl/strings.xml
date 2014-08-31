@@ -1640,7 +1640,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="routing_attr_avoid_motorway_description">Vermijd autowegen</string>
 	<string name="routing_attr_weight_description">Geef het maximum gewicht van een voertuig</string>
     <string name="routing_attr_weight_name">Maximum gewicht</string>
-	<string name="select_gpx">Selecteer GPX…</string>
+	<string name="select_gpx">GPX-bestand kiezen</string>
     <string name="route_descr_select_destination">Selecteer bestemming</string>
     <string name="route_descr_select_on_map">Kies op de kaart…</string>
     <string name="route_descr_favorite">Favoriet…</string>
@@ -1852,7 +1852,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="save_as_favorites_points">Bewaar als groep van favorieten</string>
     <string name="loading_smth">Laad %1$s …</string>
     <string name="map_widget_plain_time">Huidige tijd</string>
-    <string name="select_destination_and_intermediate_points">Selecteer routepunten</string>
+    <string name="select_destination_and_intermediate_points">Routepunten kiezen</string>
     <string name="layer_amenity_label">Namen van interessepunten</string>
     <string name="gpx_wpt">Routepunt</string>
     <string name="selected_gpx_info_show">\n\nLang drukken om op de kaart te bekijken</string>
