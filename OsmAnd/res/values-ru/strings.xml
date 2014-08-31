@@ -68,7 +68,7 @@
     <string name="safe_mode_description">Запустить приложение в безопасном режиме (замедляет работу приложения, используя только Android функции).</string>
     <string name="safe_mode">Безопасный режим</string>
     <string name="native_library_not_running">Приложение запущено в безопасном режиме (отключите в Настройках).</string>
-    <string name="background_service_is_enabled_question">Фоновый режим все еще запущен. Вы хотите отменить его?</string>
+    <string name="background_service_is_enabled_question">Фоновый режим все еще запущен. Вы хотите прервать его тоже?</string>
     <string name="tip_recent_changes_1_0_0_t">Изменения в 1.0.0:
 	\n\t* Улучшенная навигация: быстрее и расчёт до 250 км
 	\n\t* Новые компактные карты (исключительно дороги)
@@ -1745,9 +1745,9 @@ OsmAnd - открытый источник и активно развается.
     <string name="gpx_monitoring_start">Начать запись GPX</string>
 	<string name="gpx_monitoring_stop">Остановить запись GPX</string>
     <string name="gpx_start_new_segment">Начать новый сегмент</string>
-    <string name="enable_sleep_mode">Включить режим сна GPS</string>
+    <string name="enable_sleep_mode">Включить фоновый режим GPS</string>
 	<string name="gps_wake_up_timer">Интервал пробуждения GPS</string>
-	<string name="sleep_mode_stop_dialog">Выключить режим сна GPS?</string>
+	<string name="sleep_mode_stop_dialog">Выключить фоновый режим GPS?</string>
 	<string name="stop_navigation_service">Выключить</string>
 	<string name="keep_navigation_service">Оставить</string>
 	<string name="live_monitoring_m_descr">Отправлять отслеживание на указанный веб-сервис, если включена запись GPX.</string>
