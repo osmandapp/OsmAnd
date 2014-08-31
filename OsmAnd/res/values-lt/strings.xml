@@ -1149,7 +1149,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="safe_mode_description">Vykdyti programą saugiu režimu (naudoti Android kodą vietoje aparatinio).</string>
     <string name="safe_mode">Saugus režimas</string>
     <string name="native_library_not_running">Programa veikia saugiu eržimu (išjunkite jį Nustatymuose).</string>
-    <string name="background_service_is_enabled_question">Foninis režimas vis dar veikia. Ar norite jį nutraukti?</string>
+    <string name="background_service_is_enabled_question">OsmAnd miego režimas vis dar veikia. Ar norite ir jį nutraukti?</string>
     <string name="tip_recent_changes_1_0_0_t">Pakeitimai 1.0 versijoje :
 	\n\t* Patobulintas maršruto skaičiavimas dabar greitesnis ir tikslesnis (iki 250 km)
 	\n\t* Sukurti vien kelių žemėlapiai
@@ -1762,10 +1762,10 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="rendering_attr_showSurfaces_name">Rodyti kelių paviršiaus tipą</string>
     <string name="rendering_attr_showCycleRoutes_name">Rodyti dviračių maršrutus</string>
     <string name="keep_navigation_service">Išlaikyti</string>
-	<string name="stop_navigation_service">Stabdyti</string>
+	<string name="stop_navigation_service">Nutraukti</string>
 	<string name="enable_sleep_mode">Įjungti GPS miego režimą</string>
 	<string name="gps_wake_up_timer">GPS prabudimo intervalas</string>
-	<string name="sleep_mode_stop_dialog">Išjungti GPS miego režimą?</string>
+	<string name="sleep_mode_stop_dialog">Nutraukti GPS miego režimą?</string>
 	<string name="map_preferred_locale_descr">Pageidaujama kalba užrašams ant žemėlapio (jei jos nėra, užrašai bus rodomi anglų arba vietine kalba)</string>
     <string name="map_preferred_locale">Pageidaujama žemėlapio kalba</string>
     <string name="local_map_names">Vietiniai pavadinimai</string>
