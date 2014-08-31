@@ -652,11 +652,22 @@ public class OsmandRenderer {
 			rStrokeW = req.ALL.R_STROKE_WIDTH__1;
 			rCap = req.ALL.R_CAP__1;
 			rPathEff = req.ALL.R_PATH_EFFECT__1;
-		} else {
+			
+		} else if(ind == 2){
 			rColor = req.ALL.R_COLOR_3;
 			rStrokeW = req.ALL.R_STROKE_WIDTH_3;
 			rCap = req.ALL.R_CAP_3;
 			rPathEff = req.ALL.R_PATH_EFFECT_3;
+		} else if(ind == 3){
+			rColor = req.ALL.R_COLOR_4;
+			rStrokeW = req.ALL.R_STROKE_WIDTH_4;
+			rCap = req.ALL.R_CAP_4;
+			rPathEff = req.ALL.R_PATH_EFFECT_4;
+		} else {
+			rColor = req.ALL.R_COLOR_4;
+			rStrokeW = req.ALL.R_STROKE_WIDTH_4;
+			rCap = req.ALL.R_CAP_4;
+			rPathEff = req.ALL.R_PATH_EFFECT_4;
 		}
 		if(area){
 			if(!req.isSpecified(rColor) && !req.isSpecified(req.ALL.R_SHADER)){
