@@ -798,7 +798,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="search_address_city">Stad</string>
   <string name="search_address_street">Straat</string>
   <string name="search_address_building">Huisnummer</string>
-  <string name="search_address_building_option">Gebouwen</string>
+  <string name="search_address_building_option">Gebouw</string>
   <string name="search_address_street_option">Zijstraat</string>
   <string name="search_tabs_location">Locatie</string>
   
