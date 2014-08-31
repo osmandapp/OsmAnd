@@ -92,7 +92,8 @@ public class OsmandRenderer {
 	
 	
 
-	/* package */static class RenderingContext extends net.osmand.RenderingContext {
+	/* package */
+	public static class RenderingContext extends net.osmand.RenderingContext {
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
 		List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
 		Paint[] oneWay ;
@@ -626,7 +627,7 @@ public class OsmandRenderer {
 		}
 	}
 	
-	private boolean updatePaint(RenderingRuleSearchRequest req, Paint p, int ind, boolean area, RenderingContext rc){
+	public boolean updatePaint(RenderingRuleSearchRequest req, Paint p, int ind, boolean area, RenderingContext rc){
 		RenderingRuleProperty rColor;
 		RenderingRuleProperty rStrokeW;
 		RenderingRuleProperty rCap;

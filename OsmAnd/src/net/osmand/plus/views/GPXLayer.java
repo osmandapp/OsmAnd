@@ -1,13 +1,11 @@
 package net.osmand.plus.views;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -17,20 +15,21 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
+import net.osmand.plus.render.OsmandRenderer;
+import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.DashPathEffect;
+import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import android.graphics.Paint.Cap;
-import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffColorFilter;
 import android.widget.Toast;
 
 public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, 
@@ -39,21 +38,24 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private OsmandMapTileView view;
 	
 	private Paint paint;
+	private Paint paint2;
+	private boolean isPaint2;
+	private Paint shadowPaint;
+	private boolean isShadowPaint;
+	private Paint paint_1;
+	private boolean isPaint_1;
+	private int cachedHash;
+	private int cachedColor;
 
 	private Path path;
 	private static final int startZoom = 7;
+
 	
-	private RenderingRulesStorage cachedRrs;
-	private boolean cachedNightMode;
-	private int cachedColor;
-
 	private GpxSelectionHelper selectedGpxHelper;
-
 	private Paint paintBmp;
 	private List<WptPt> cache = new ArrayList<WptPt>();
 	private MapTextLayer textLayer;
 
-	private DashPathEffect pathEffect;
 
 	private Paint paintOuter;
 
@@ -61,16 +63,25 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private Paint paintTextIcon;
 
+	private OsmandRenderer osmandRenderer;
+
 //	private Drawable favoriteIcon;
 	
 	
 	private void initUI() {
 		paint = new Paint();
 		paint.setStyle(Style.STROKE);
-		paint.setStrokeWidth(14);
 		paint.setAntiAlias(true);
-		paint.setStrokeCap(Cap.ROUND);
-		paint.setStrokeJoin(Join.ROUND);
+		paint2 = new Paint();
+		paint2.setStyle(Style.STROKE);
+		paint2.setAntiAlias(true);
+		shadowPaint = new Paint();
+		shadowPaint.setStyle(Style.STROKE);
+		shadowPaint.setAntiAlias(true);
+		paint_1 = new Paint();
+		paint_1.setStyle(Style.STROKE);
+		paint_1.setAntiAlias(true);
+		
 
 		path = new Path();
 		
@@ -104,30 +115,49 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		selectedGpxHelper = view.getApplication().getSelectedGpxHelper();
-		pathEffect = new DashPathEffect(new float[] { 5 * view.getDensity(),
-				3 * view.getDensity()}, 3);
+		osmandRenderer = view.getApplication().getResourceManager().getRenderer().getRenderer();
 		initUI();
 	}
 
 	
-	private int getColor(DrawSettings nightMode){
+	private int updatePaints(int color, boolean routePoints, DrawSettings nightMode, RotatedTileBox tileBox){
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
-		boolean n = nightMode != null && nightMode.isNightMode();
-		if (rrs != cachedRrs || cachedNightMode != n) {
-			cachedRrs = rrs;
-			cachedNightMode = n;
+		final boolean isNight = nightMode != null && nightMode.isNightMode();
+		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getZoomScale());
+		if (hsh != cachedHash) {
+			cachedHash = hsh;
 			cachedColor = view.getResources().getColor(R.color.gpx_track);
-			if (cachedRrs != null) {
+			if (rrs != null) {
 				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, cachedNightMode);
-				if (req.searchRenderingAttribute("gpxColor")) {
-					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
+				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, isNight);
+				if(routePoints) {
+					req.setStringFilter(rrs.PROPS.R_ADDITIONAL, "routePoints=true");
+				}
+				if (req.searchRenderingAttribute("gpx")) {
+					RenderingContext rc = new OsmandRenderer.RenderingContext(view.getContext());
+					rc.setDensityValue((float) Math.pow(2, tileBox.getZoomScale()));
+					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
+					osmandRenderer.updatePaint(req, paint, 0, false, rc);
+					isPaint2 = osmandRenderer.updatePaint(req, paint2, 1, false, rc);
+					isPaint_1 = osmandRenderer.updatePaint(req, paint_1, -1, false, rc);
+					isShadowPaint = req.isSpecified(rrs.PROPS.R_SHADOW_RADIUS);
+					if(isShadowPaint) {
+						ColorFilter cf = new PorterDuffColorFilter(req.getIntPropertyValue(rrs.PROPS.R_SHADOW_COLOR), Mode.SRC_IN);
+						shadowPaint.setColorFilter(cf);
+						shadowPaint.setStrokeWidth(paint.getStrokeWidth() + 2 * rc.getComplexValue(req, rrs.PROPS.R_SHADOW_RADIUS));
+					}
 				}
 			}
 		}
+		paint.setColor(color == 0 ? cachedColor : color);
 		return cachedColor;
 	}
 	
+	private int calculateHash(Object... o) {
+		return Arrays.hashCode(o);
+	}
+
+
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
@@ -224,15 +254,14 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
 			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
-		int clr = getColor(settings);
 		for (SelectedGpxFile g : selectedGPXFiles) {
 			List<List<WptPt>> points = g.getPointsToDisplay();
 			boolean routePoints = g.isRoutePoints();
-			int fcolor = g.getColor() == 0 ? clr : g.getColor();
-			paint.setColor(fcolor);
-			drawSegments(canvas, tileBox, points, routePoints);
+			updatePaints(g.getColor(), routePoints, settings, tileBox);
+			drawSegments(canvas, tileBox, points);
 		}
 	}
+
 
 	private boolean isPointVisited(WptPt o) {
 		boolean visit = false;
@@ -251,16 +280,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		return pts;
 	}
 
-	private void drawSegments(Canvas canvas, RotatedTileBox tileBox, List<List<WptPt>> points, boolean routePoints) {
+	private void drawSegments(Canvas canvas, RotatedTileBox tileBox, List<List<WptPt>> points) {
 		final QuadRect latLonBounds = tileBox.getLatLonBounds();
 		for (List<WptPt> l : points) {
 			path.rewind();
-			paint.setPathEffect(routePoints ? pathEffect : null);
-			if (routePoints){
-				paint.setStrokeCap(Cap.BUTT);
-			} else {
-				paint.setStrokeCap(Cap.ROUND);
-			}
 			int startIndex = -1;
 
 			for (int i = 0; i < l.size(); i++) {
@@ -301,7 +324,17 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			int y = tb.getPixYFromLatNoRot(p.lat);
 			path.lineTo(x, y);
 		}
+		if(isPaint_1) {
+			canvas.drawPath(path, paint_1);
+		}
+		if(isShadowPaint) {
+			canvas.drawPath(path, shadowPaint);
+		}
 		canvas.drawPath(path, paint);
+		if(isPaint2) {
+			canvas.drawPath(path, paint2);
+		}
+		
 	}
 	
 	

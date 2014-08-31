@@ -48,7 +48,7 @@ public class RenderingContext {
 
 	// be aware field is using in C++
 	public float screenDensityRatio = 1;
-	public int shadowRenderingMode = ShadowRenderingMode.BLUR_SHADOW.value;
+	public int shadowRenderingMode = ShadowRenderingMode.SOLID_SHADOW.value;
 	public int shadowRenderingColor = 0xff969696;
 	public String renderingDebugInfo;
 	public double polygonMinSizeToDisplay;
