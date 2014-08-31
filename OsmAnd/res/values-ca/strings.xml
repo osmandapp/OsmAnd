@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -1046,7 +1046,7 @@
 	<string name="download_roads_only_maps">Mapes de només carreteres</string>
     
 	<string name="safe_mode">Mode segur</string>
-    <string name="background_service_is_enabled_question">El mode en segon pla encara està executant-se. Voleu cancel·lar-lo?</string>
+    <string name="background_service_is_enabled_question">El mode en segon pla encara s\'està executant. També el voleu interrompre?</string>
     <string name="close_changeset">Tanca el conjunt de canvis</string>
 	<string name="native_library_not_running">L\'aplicació encara s\'està executant en mode segur(desactiveu-lo a «Preferències»).</string>
     <string name="rendering_attr_showRoadMaps_name">Mapes amb només carreteres</string>
@@ -1833,10 +1833,10 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="gpx_start_new_segment">Inicia un segment nou</string>
     <string name="lang_fa">Persa</string>
 	<string name="keep_navigation_service">Mantén</string>
-	<string name="stop_navigation_service">Atura</string>
+	<string name="stop_navigation_service">Interromp</string>
 	<string name="enable_sleep_mode">Activa el mode en segon pla del GPS</string>
 	<string name="gps_wake_up_timer">Interval d\'activació del GPS</string>
-	<string name="sleep_mode_stop_dialog">Voleu aturar el mode en segon pla del GPS?</string>
+	<string name="sleep_mode_stop_dialog">Voleu interrompre el mode en segon pla del GPS?</string>
 	<string name="lang_al">Albanès</string>
 	<string name="lang_ar">Àrab</string>
 	<string name="lang_sc">Sard</string>

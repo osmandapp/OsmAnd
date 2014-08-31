@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
@@ -619,7 +619,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="int_seconds">초</string>
 	<string name="int_min">분.</string>
 	<string name="background_service_int_descr">절전모드 서비스를 위해 위치를 찾는 주기를 선택합니다</string>
-	<string name="background_service_int">GPS 위치탐색 주기</string>
+	<string name="background_service_int">GPS 위치탐색 간격</string>
 	<string name="background_service_provider_descr">백그라운드 서비스를 위한 위치 제공자를 선택합니다</string>
 	<string name="background_service_provider">위치 제공자</string>
 	<string name="background_router_service_descr">오랫동안 위치를 추적하기 위해 백그라운드 서비스를 활성화합니다</string>
@@ -2100,6 +2100,6 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 기록 위젯을 사용하여 켜거나 끌 수 있습니다</string>
 	<string name="save_track_interval_globally">로깅 간격</string>
 	<string name="confirm_every_run">항상 요청</string>
-	<string name="save_global_track_interval_descr">(지도에 GPX 레코딩 위젯을 통해 사용 가능) 일반 트랙 레코딩에 대한 로깅 간격을 선택합니다</string>
+	<string name="save_global_track_interval_descr">일반 트랙 레코딩에 대한 로깅 간격을 선택합니다 (지도에 GPX 레코딩 위젯을 통해 사용 가능)</string>
 	<string name="save_global_track_interval">일반 로깅 간격</string>
 	</resources>

@@ -408,7 +408,7 @@
 	<string name="user_name_descr">Απαιτείται για υποβολές στο openstreetmap.org</string>
 	<string name="user_password">Κωδικός OSM</string>
 	<string name="user_password_descr">Απαιτείται για υποβολές στο openstreetmap.org</string>
-	<string name="osmand_service">Λειτουργία νάρκης</string>
+	<string name="osmand_service">Κατάσταση νάρκης</string>
 	<string name="osmand_service_descr">Χρησιμοποιήστε το για να εκτελείται ο OsmAnd ενώ η οθόνη είναι απενεργοποιημένη</string>
 	<string name="tip_rotation_switching">Προσανατολισμός Χάρτη</string>
 	<string name="tip_rotation_switching_t_v2">Μπορείτε να αλλάξετε το πότε και το πως ο χάρτης θα περιστρέφεται με επαναλαμβανόμενα κλικ στο εικονίδιο της πυξίδας στην οθόνη χάρτη.
@@ -1129,7 +1129,7 @@
 	<string name="safe_mode_description">Εκτέλεση της εφαρμογής σε ασφαλή λειτουργία (χρησιμοποιώντας πιο αργό Android αντί του εγγενούς κώδικα).</string>
     <string name="safe_mode">Ασφαλής λειτουργία</string>
     <string name="native_library_not_running">Η εφαρμογή εκτελείται σε ασφαλή λειτουργία (απενεργοποίηση από τις Ρυθμίσεις).</string>
-    <string name="background_service_is_enabled_question">Η υπηρεσία κατάστασης νάρκης του OsmAnd εκτελείται ακόμη. Θέλετε να την κλείσετε;</string>
+    <string name="background_service_is_enabled_question">Η υπηρεσία κατάστασης νάρκης του OsmAnd εκτελείται ακόμη. Θέλετε να την διακόψετε;</string>
     <string name="tip_recent_changes_1_0_0_t">Αλλαγές στην 1.0.0:
 \n\t* Βελτιωμένη δρομολόγηση: γρηγορότερη, με καλύτερη ακρίβεια, μέχρι 250 χλμ
 \n\t* Εισαγωγή οδικών-μόνο χαρτών\n\t* Ο χάρτης δεν χάνει το κλείδωμα θέσης μετά από διακοπές
@@ -1606,11 +1606,11 @@
     <string name="rendering_attr_hideBuildings_name">Απόκρυψη κτιρίων</string>
     <string name="rendering_attr_hideText_name">Απόκρυψη κειμένου</string>
     <string name="rendering_attr_hideWoodScrubs_name">Απόκρυψη δασών και θάμνων</string>
-    <string name="rendering_attr_moreDetailed_name">Πιο αναλυτικά</string>
-    <string name="rendering_attr_lessDetailed_name">Λιγότερο αναλυτικά</string>
-    <string name="rendering_attr_hideAccess_name">Απόκρυψη του είδους πρόσβασης</string>
-    <string name="rendering_attr_showAccess_name">Εμφάνιση του είδους πρόσβασης</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Εμφάνιση της ποιότητας των δρόμων</string>
+    <string name="rendering_attr_moreDetailed_name">Περισσότερες λεπτομέρειες</string>
+    <string name="rendering_attr_lessDetailed_name">Λιγότερες λεπτομέρειες</string>
+    <string name="rendering_attr_hideAccess_name">Απόκρυψη περιορισμών πρόσβασης</string>
+    <string name="rendering_attr_showAccess_name">Εμφάνιση περιορισμών πρόσβασης</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Εμφάνιση ποιότητας των δρόμων</string>
     <string name="osmo_auth_error_short">Αποτυχία εξουσιοδότησης</string>
     <string name="rendering_attr_coloredBuildings_name">Έγχρωμα κτίρια</string>
     <string name="osmo_invite">Προσκαλέστε…</string>
@@ -1666,4 +1666,5 @@
 	<string name="save_track_to_gpx_globally_descr">Η γενική καταγραφή θέσης σε αρχείο GPX μπορεί να ενεργοποιηθεί και να απενεργοποιηθεί χρησιμοποιώντας το γραφικό στοιχείο GPX στην οθόνη χάρτη</string>
 	<string name="save_track_interval_globally">Διάστημα καταγραφής</string>
 	<string name="rendering_attr_publicTransportMode_name">Λειτουργία δημόσιων μεταφορών</string>
+	<string name="confirm_every_run">Πάντα ερώτηση</string>
 	</resources>

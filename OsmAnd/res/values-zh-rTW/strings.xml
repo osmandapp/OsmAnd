@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -1193,7 +1193,7 @@
     <string name="safe_mode_description">應用程式執行在安全模式下(使用較慢的 Android 而非原生碼)。</string>
     <string name="safe_mode">安全模式</string>
     <string name="native_library_not_running">應用程式在安全模式中執行(在設定裡停用它)。</string>
-    <string name="background_service_is_enabled_question">OsmAnd 休眠模式服務仍在執行。您想要關閉它嗎？</string>
+    <string name="background_service_is_enabled_question">OsmAnd 休眠模式服務仍在執行，您想要中斷嗎？</string>
     <string name="osmand_play_title_30_chars">OsmAnd 地圖和導航</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ 地圖和導航</string>
 	<string name="native_app_allocated_memory_descr">原生記憶體總計由應用程式 %1$s MB (Dalvik %2$s MB，其它 %3$s MB) 。Proportional memory %4$s MB (Android 限制 %5$s MB，Dalvik %6$s MB)分配佔用。</string>
@@ -1769,10 +1769,10 @@
 	<string name="map_preferred_locale_descr">在地圖標簽上優先的語言(如果優先的語言無法使用，將會切換成英文或本地名稱)</string>
     <string name="live_monitoring_m_descr">如果已啟用了 GPX 記錄，發送軌跡到指定的 web 服務。</string>
 	<string name="keep_navigation_service">保持</string>
-	<string name="stop_navigation_service">停止</string>
+	<string name="stop_navigation_service">中斷</string>
 	<string name="enable_sleep_mode">啟用 GPS 休眠模式</string>
 	<string name="gps_wake_up_timer">GPS 喚醒間隔</string>
-	<string name="sleep_mode_stop_dialog">停止 GPS 休眠模式嗎？</string>
+	<string name="sleep_mode_stop_dialog">要中斷 GPS 休眠模式嗎？</string>
 	<string name="lang_al">阿爾巴尼亞</string>
 	<string name="lang_ar">阿拉伯</string>
 	<string name="lang_sc">薩丁尼亞島</string>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -1073,7 +1073,7 @@
 	<string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
     <string name="zxing_barcode_scanner_not_found">L\'appplication ZXing Barcode Scanner n\'est pas installée. La chercher dans Market ?</string>
 	<string name="close_changeset">Clôturer les modifications</string>
-	<string name="background_service_is_enabled_question">Le service OsmAnd tourne toujours en tâche de fond. Voulez-vous l\'arrêter ?</string>
+	<string name="background_service_is_enabled_question">Le service de veille OsmAnd tourne toujours en tâche de fond. Voulez-vous l\'arrêter également ?</string>
     <string name="tip_recent_changes_1_0_0_t">"Changements en 1.0 :\n\t* Amélioration de la navigation, plus rapide et plus précise (jusqu\'à 250 km)\n\t* Cartographie des routes\n\t* La carte ne perd plus la position courante après les interruptions\n\t* Active le service d\'arrière-plan pendant la navigation"
     </string>
     <string name="safe_mode_description">Exécuter l\'application dans le mode sûr (ne pas utiliser de code natif).</string>
@@ -1737,10 +1737,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_auth_error_short">Échec de l\'autorisation</string>
     <string name="osmo_auth_error">Erreur d\\\'autorisation OsMo : %1$s.\n Le service est momentanément inutilisable ou votre inscription a expiré.\n Voulez-vous procéder à une nouvelle inscription ?</string>
     <string name="keep_navigation_service">Garder</string>
-	<string name="stop_navigation_service">Stop</string>
+	<string name="stop_navigation_service">Interrompre</string>
 	<string name="enable_sleep_mode">Activer le mode veille du GPS</string>
 	<string name="gps_wake_up_timer">Intervalle de réveil du GPS</string>
-	<string name="sleep_mode_stop_dialog">Arrêter le mode veille du GPS ?</string>
+	<string name="sleep_mode_stop_dialog">Interrompre le mode veille du GPS ?</string>
 	<string name="map_preferred_locale_descr">Langue préférée pour les étiquettes sur la carte (noms anglais ou locaux en cas d\\\'indisponibilité)</string>
     <string name="map_preferred_locale">Langue préférée pour la carte</string>
     <string name="local_map_names">Noms locaux</string>
