@@ -793,11 +793,11 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="navigate_point_format_DMS">GGG MM SS.SS</string>
   <string name="search_shown_on_map">Toon op kaart</string>
   <string name="navigate_point_cancel">Annuleer</string>
-  <string name="search_address_top_text">Selecteer adres</string>
+  <string name="search_address_top_text">Adres kiezen</string>
   <string name="search_address_region">Regio</string>
   <string name="search_address_city">Stad</string>
   <string name="search_address_street">Straat</string>
-  <string name="search_address_building">Gebouw</string>
+  <string name="search_address_building">Huisnummer</string>
   <string name="search_address_building_option">Gebouwen</string>
   <string name="search_address_street_option">Zijstraat</string>
   <string name="search_tabs_location">Locatie</string>
@@ -1554,7 +1554,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="edit_tilesource_expiration_time">Verlopen (minuten)</string>
     <string name="edit_tilesource_minzoom">Min zoomniveau</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">Selecteer bestaand…</string>
+    <string name="edit_tilesource_choose_existing">Kies een bestaande…</string>
     <string name="edit_tilesource_name">Naam</string>
     <string name="maps_define_edit">Definieer/bewerk…</string>
 	<string name="tip_recent_changes_1_6_t">Veranderingen in 1.6:
@@ -1641,7 +1641,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="routing_attr_weight_description">Geef het maximum gewicht van een voertuig</string>
     <string name="routing_attr_weight_name">Maximum gewicht</string>
 	<string name="select_gpx">GPX-bestand kiezen …</string>
-    <string name="route_descr_select_destination">Selecteer bestemming</string>
+    <string name="route_descr_select_destination">Bestemming kiezen</string>
     <string name="route_descr_select_on_map">Kies op de kaart…</string>
     <string name="route_descr_favorite">Favoriet…</string>
     <string name="route_preferences">Route-voorkeuren</string>
