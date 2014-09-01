@@ -496,10 +496,9 @@
 		\n\nJe dostupné dlhším podržaním na mape (a potom stlačením zobrazeného obdĺžnika). Alebo stlačením track ball tlačidla alebo zvolením "Menu" → "Použiť umiestnenie…" (posledné 2 spôsoby použijú stred obrazovky ako zvolený bod).
 		\n\nPre skrytie obdĺžnika ho dlhšie podržte.
 	</string>
-  <string name="tip_initial">Tipy a triky</string>
-  <string name="tip_initial_t">OsmAnd je navigačná aplikácia s rozmanitými funkciami.
-		\n\nNa jej lepšie využitie môžete využiť tipy a triky dostupné z mapy cez "Menu" → "Tipy".
-	</string>
+  <string name="tip_initial">Pomoc</string>
+  <string name="tip_initial_t">"OsmAnd je navigačná aplikácia s rozmanitými funkciami.
+\n\nNa jej lepšie využitie môžete využiť základný úvod, tipy a triky aj pokročilú pomoc, ktoré sú dostupné z mapy cez Menu → Pomoc. "</string>
   <string name="next_button">Ďalší</string>
   <string name="previous_button">Predošlý</string>
   <string name="unit_of_length_descr">Zmena jednotiek dĺžky a rýchlosti</string>
@@ -588,7 +587,7 @@
   <string name="general_settings">Všeobecné nastavenia</string>
   <string name="index_settings_descr">Stiahnutie, zobrazenie podrobností a správa offline máp</string>
   <string name="index_settings">Spravovať mapové súbory</string>
-  <string name="osmand_service">Funkcie v režime spánku</string>
+  <string name="osmand_service">Režim spánku</string>
   <string name="osmand_service_descr">Použite pre beh OsmAndu počas vypnutej obrazovky</string>
   <string name="fast_route_mode">Najrýchlejšia trasa</string>
   <string name="fast_route_mode_descr">Zapnite na výpočet najrýchlejšej trasy alebo vypnite pre najkratšiu trasu </string>
@@ -685,7 +684,7 @@
   <string name="search_poi_filter">Filter</string>
   <string name="menu_mute_off">Zvuk zapnutý</string>
   <string name="menu_mute_on">Zvuk vypnutý</string>
-  <string name="voice_provider_descr">Výber hlasových údajov pre navigáciu (pre kódy jazykov pozri ISO 639-1)</string>
+  <string name="voice_provider_descr">Výber hlasových údajov pre navigáciu</string>
   <string name="voice_provider">Hlasové údaje</string>
   <string name="voice_data_initializing">Inicializácia hlasových údajov…</string>
   <string name="voice_data_not_supported">Nepodporovaná verzia hlasových údajov</string>
@@ -831,11 +830,11 @@
   <string name="settings">Nastavenia</string>
   <string name="save_current_track_descr">Uloženie aktuálnej stopy na SD kartu</string>
   <string name="save_current_track">Uložiť aktuálnu stopu</string>
-  <string name="save_track_interval_descr">Výber umiestňovacieho intervalu pre stopy</string>
-  <string name="save_track_interval">Logovací interval</string>
+  <string name="save_track_interval_descr">Zvoť interval zaznamenávania stopy počas navigácie</string>
+  <string name="save_track_interval">Interval zaznamenávania pri navigácii</string>
   
-  <string name="save_track_to_gpx_descrp">Stopy budú ukladané do adresára stôp, zoskupené podľa dní</string>
-  <string name="save_track_to_gpx">Logovať stopu do GPX súboru</string>
+  <string name="save_track_to_gpx_descrp">Stopy budú ukladané do adresára stôp počas navigácie</string>
+  <string name="save_track_to_gpx">Logovať stopu do GPX súboru počas navigácie</string>
   <string name="update_tile">Aktualizovať mapu</string>
   <string name="reload_tile">Znovu načítať dlaždicu</string>
   <string name="user_name_descr">Meno potrebné pre prispievanie do openstreetmap.org</string>
@@ -1148,7 +1147,7 @@
 	<string name="rendering_attr_showRoadMaps_description">Vyberte, kedy zobraziť mapy ciest:</string>
 	<string name="safe_mode">Bezpečný režim</string>
     <string name="safe_mode_description">Spustenie aplikácie v bezpečnom režime (namiesto natívneho kódu sa použije pomalší kód pre Android).</string>
-    <string name="background_service_is_enabled_question">Služba na pozadí je stále spustená. Chcete ju zrušiť?</string>
+    <string name="background_service_is_enabled_question">Služba na pozadí je stále spustená. Chcete ju prerušiť?</string>
     <string name="tip_recent_changes_1_0_0_t">Zmeny vo verzii 1.0.0 :\n\t* Vylepšená navigácia: rýchlejšia a precíznejšia, až do vzdialenosti 250 km\n\t* Zavedené mapy obsahujúce iba cestnú sieť\n\t* Umiestnenie na mape nie je po prerušeniach stratené\n\t* Zapnutie služby na pozadí počas navigácie
     </string>
     <string name="native_library_not_running">Aplikácia je spustená v bezpečnom režime (vypnete ho v nastaveniach).</string>
@@ -1273,8 +1272,8 @@
     
 	<string name="street_name">Ulica</string>
 	<string name="hno">Číslo domu</string>
-    <string name="monitoring_settings">Logovacie služby</string>
-    <string name="monitoring_settings_descr">Konfigurovať ako sa majú zaznamenať trasy</string>
+    <string name="monitoring_settings">Zaznamenávanie výletu</string>
+    <string name="monitoring_settings_descr">Konfigurovať ako sa majú zaznamenať vaše výlety</string>
     <string name="osmand_monitoring_plugin_name">Logovacie služby</string>
     <string name="choose_osmand_theme_descr">Výber témy pre aplikáciu</string>
     <string name="choose_osmand_theme">Téma aplikácie</string>
@@ -1365,7 +1364,7 @@
 	<string name="about_version">Verzia:</string>
     <string name="about_settings">O programe</string>
     <string name="about_settings_descr">Informácie o verzii, licencie, členovia projektu</string>
-    <string name="tips_and_tricks">Tipy</string>
+    <string name="tips_and_tricks">Pomoc</string>
     <string name="tip_recent_changes_1_6_t">Zmeny vo verzii 1.6:
 	\n\t* Podpora zariadení s rozlíšením Full HD
 	\n\t* Podpora priehľadného pozadia mapy
@@ -1902,10 +1901,10 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_group_by_invite">Vstúpiť pozvaním</string>
     <string name="osmo_group_information_desc">" - Všetky vytvorené skupiny sú verejné! Ak chcete byť anonymný, pripojte zariadenia priamo cez Tracker id.\n - Skupina môže zaregistrovať až do 16 ľudí.\n - Skupina bude zrušená v prípade nečinnosti alebo aktivity len jednej osoby počas 2 týždňov.\n - Môžete obmedziť vstup do skupiny len na pozvánky, ale pre ovládanie skupiny musíte použiť administračnú konzolu.\n - Ak potrebujete vytvoriť skupinu s inými podmienkami, kontaktujte http://osmo.mobi"</string>
     <string name="osmo_group_information">Prosím prečítajte si pred vytváraním skupiny!</string>
-    <string name="stop_navigation_service">Zastaviť</string>
+    <string name="stop_navigation_service">Prerušiť</string>
 	<string name="enable_sleep_mode">Zapnúť režim spánku GPS</string>
-	<string name="gps_wake_up_timer">interval prebúdzania GPS</string>
-	<string name="sleep_mode_stop_dialog">Udržovať GPS zapnuté?</string>
+	<string name="gps_wake_up_timer">Interval prebúdzania GPS</string>
+	<string name="sleep_mode_stop_dialog">Prerušiť spánok GPS?</string>
 	<string name="map_preferred_locale_descr">Preferovaný jazyk pre nápisy na mape (ak nie je dostupný budú použité anglické alebo lokálne názvy)</string>
     <string name="map_preferred_locale">Preferovaný jazyk mapy</string>
     <string name="local_map_names">Lokálne názvy</string>
@@ -1927,8 +1926,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_buildings15zoom_name">Budovy pri priblížení 15</string>
     <string name="rendering_attr_moreDetailed_name">Viac detailov</string>
     <string name="rendering_attr_lessDetailed_name">Menej detailov</string>
-    <string name="rendering_attr_hideAccess_name">Skryť typ prístupu</string>
-    <string name="rendering_attr_showAccess_name">Zobraziť typ prístupu</string>
+    <string name="rendering_attr_hideAccess_name">Skryť obmedzenia prístupu</string>
+    <string name="rendering_attr_showAccess_name">Zobraziť obmedzenia prístupu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobraziť kvalitu ciest</string>
     <string name="rendering_attr_showSurfaces_name">Zobraziť povrch ciest</string>
     <string name="rendering_attr_showCycleRoutes_name">Zobraziť cyklotrasy</string>
@@ -1943,7 +1942,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="lang_zh_TW">Tradičná čínština</string>
 	<string name="continue_navigation">Pokračovať v navigácii</string>
     <string name="pause_navigation">Pozastaviť navigáciu</string>
-	<string name="rendering_attr_alpineHiking_name">Alpinistické zobrazenie</string>
+	<string name="rendering_attr_alpineHiking_name">Alpinistická stupnica (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Kresliť chodníky podľa stupnice SAC</string>
     <string name="rendering_attr_osmcTraces_name">Zobraziť turistické značky</string>
     <string name="rendering_attr_osmcTraces_description">Kresliť chodníky podľa značenia OSMC</string>
@@ -1981,7 +1980,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="distance">Vzdialenosť</string>
     <string name="confirm_every_run">Vždy sa pýtať</string>
 	<string name="save_global_track_interval_descr">Zvoľ interval pre všeobecné zaznamenávanie trasy (prístupné cez GPX tlačidlo na mape)</string>
-	<string name="save_global_track_interval">Interval zaznamenávania</string>
+	<string name="save_global_track_interval">Interval všeobecného zaznamenávania</string>
 	<string name="save_track_to_gpx_globally">Zaznamenať stopu do GPX súboru</string>
 	<string name="save_track_to_gpx_globally_descr">Zaznamenávanie polohy do GPX súboru môže byť zapnuté a vypnuté cez tlačidlo záznamu GPX na obrazovke mapy</string>
 	<string name="save_track_interval_globally">Interval zaznamenávania</string>
