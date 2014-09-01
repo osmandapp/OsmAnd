@@ -672,7 +672,7 @@
   <string name="int_seconds">sekúnd</string>
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">Nastaví interval rozpoznávania pozície službou na pozadí</string>
-  <string name="background_service_int">Umiestňovací interval</string>
+  <string name="background_service_int">Interval zisťovania pozície z GPS</string>
   <string name="background_service_provider_descr">Výber poskytovateľa umiestnenia pre službu na pozadí</string>
   <string name="background_service_provider">Poskytovateľ umiestnenia</string>
   <string name="background_router_service_descr">Zapnutie služby na pozadí na sledovanie pozície v dlhých časových periódach</string>
@@ -1903,7 +1903,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_group_information_desc">" - Všetky vytvorené skupiny sú verejné! Ak chcete byť anonymný, pripojte zariadenia priamo cez Tracker id.\n - Skupina môže zaregistrovať až do 16 ľudí.\n - Skupina bude zrušená v prípade nečinnosti alebo aktivity len jednej osoby počas 2 týždňov.\n - Môžete obmedziť vstup do skupiny len na pozvánky, ale pre ovládanie skupiny musíte použiť administračnú konzolu.\n - Ak potrebujete vytvoriť skupinu s inými podmienkami, kontaktujte http://osmo.mobi"</string>
     <string name="osmo_group_information">Prosím prečítajte si pred vytváraním skupiny!</string>
     <string name="stop_navigation_service">Zastaviť</string>
-	<string name="enable_sleep_mode">Zapnúť režim spánku</string>
+	<string name="enable_sleep_mode">Zapnúť režim spánku GPS</string>
 	<string name="gps_wake_up_timer">interval prebúdzania GPS</string>
 	<string name="sleep_mode_stop_dialog">Udržovať GPS zapnuté?</string>
 	<string name="map_preferred_locale_descr">Preferovaný jazyk pre nápisy na mape (ak nie je dostupný budú použité anglické alebo lokálne názvy)</string>
@@ -1979,4 +1979,11 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="int_hour">hod</string>
     <string name="duration">Trvanie</string>
     <string name="distance">Vzdialenosť</string>
-    </resources>
+    <string name="confirm_every_run">Vždy sa pýtať</string>
+	<string name="save_global_track_interval_descr">Zvoľ interval pre všeobecné zaznamenávanie trasy (prístupné cez GPX tlačidlo na mape)</string>
+	<string name="save_global_track_interval">Interval zaznamenávania</string>
+	<string name="save_track_to_gpx_globally">Zaznamenať stopu do GPX súboru</string>
+	<string name="save_track_to_gpx_globally_descr">Zaznamenávanie polohy do GPX súboru môže byť zapnuté a vypnuté cez tlačidlo záznamu GPX na obrazovke mapy</string>
+	<string name="save_track_interval_globally">Interval zaznamenávania</string>
+	<string name="rendering_attr_publicTransportMode_name">Režim hromadnej dopravy</string>
+	</resources>
