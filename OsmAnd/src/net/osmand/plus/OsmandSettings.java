@@ -725,7 +725,7 @@ public class OsmandSettings {
 	public final OsmandPreference<String> MAP_PREFERRED_LOCALE =  new StringPreference("map_preferred_locale", "").makeGlobal();
 	
 	public boolean usingEnglishNames() {
-		return MAP_PREFERRED_LOCALE.get().length() > 0;
+		return MAP_PREFERRED_LOCALE.get().equals("en");
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
