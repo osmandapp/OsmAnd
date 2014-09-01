@@ -607,7 +607,7 @@
 	<string name="rendering_attr_showRoadMaps_description">Izberite kdaj naj bodo prikazani zemljevidi le s cestami:</string>
 	<string name="rendering_attr_showRoadMaps_name">Zemljevidi le s cestami</string>
     <string name="download_roads_only_maps">Zemljevidi le s cestami</string>
-    <string name="background_service_is_enabled_question">Storitev v ozadju se še vedno izvaja. Ali jo želite preklicati?</string>
+    <string name="background_service_is_enabled_question">Storitev v ozadju se še vedno izvaja. Ali želite prekiniti tudi njo?</string>
     <string name="select_index_file_to_download">Ničesar ni bilo mogoče najti. Če svojega področja ne morete najti, ga lahko ustvarite sami (oglejte si http://osmand.net).</string>
 	<string name="local_indexes_cat_map">Krajevni zemljevidi (vektorski)</string>
 	<string name="index_settings_descr">Prenos in upravljanje datotek zemljevidov shranjenih na vaši napravi</string>
@@ -838,7 +838,7 @@
 	<string name="save_current_track_descr">Shrani trenutno GPX pot na SD kartico</string>
 	<string name="save_track_interval">Interval beleženja</string>
 	<string name="save_track_interval_descr">Izberite interval beleženja položaja za sledi</string>
-	<string name="save_track_to_gpx">Shrani sled v datoteko GPX</string>
+	<string name="save_track_to_gpx">Beleži sled v datoteko GPX med navigacijo</string>
 	<string name="save_track_to_gpx_descrp">Sledi se shranjujejo v podmape mape \'tracks\' po dnevih</string>
 	<string name="mark_point">Cilj</string>
 	<string name="show_osm_bugs_descr">Pokaži OpenStreetBugs na zemljevidu</string>
@@ -971,7 +971,7 @@ Pomembnejše lastnosti:
 	<string name="background_service_wait_int">Največje čakanje za fix</string>
 	<string name="network_provider">Omrežje</string>
 	<string name="background_service_int_descr">Nastavitev intervala prebujanja v ozadju</string>
-	<string name="background_service_int">Interval prebujanja</string>
+	<string name="background_service_int">Interval prebujanja sprejemnika GPS</string>
 	<string name="background_service_provider_descr">Izberite ponudnika mesta med izvajanjem v ozadju</string>
 	<string name="background_service_provider">Ponudnik mesta</string>
 	<string name="background_router_service_descr">Izvaja OsmAnd v ozadju, da omogoča spremljanje položaja, ko je zaslon izklopljen</string>
@@ -1838,10 +1838,10 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="tip_recent_changes_1_8_alpha">"Spremembe v 1.8:\n\t* Računanje poti med točkami poti v sledi GPX\n\t* Spremenjena razporeditev držav za prenose (podpira iskanje krajevnih imen)\n\t* Podpira GPX/KML uvoz (pretvorba iz KML v GPX)\n\t* Sledi GPX premeščene v \'Moji podatki\'\n\t* Sedaj lahko razdelite sled GPX po razdalji in preverite višinsko razliko/hitrost\n\t* Samodejni začetek navigacije po zakasnitvi "</string>
     <string name="no_index_file_to_download">Nič za prenesti, prosim preverite internetno povezavo.</string>
     <string name="keep_navigation_service">Obdrži</string>
-	<string name="stop_navigation_service">Ustavi</string>
-	<string name="enable_sleep_mode">Omogočiti način spanja</string>
+	<string name="stop_navigation_service">Prekini</string>
+	<string name="enable_sleep_mode">Omogoči način spanja sprejemnika GPS</string>
 	<string name="gps_wake_up_timer">Interval prebujanja GPS-a</string>
-	<string name="sleep_mode_stop_dialog">Obdržati vključen GPS?</string>
+	<string name="sleep_mode_stop_dialog">Prekinem spanje sprejemnika GPS?</string>
 	<string name="map_preferred_locale_descr">Jezik za oznake na zemljevidu (če ni na voljo bodo uporabljena angleška ali lokalna imena)</string>
     <string name="map_preferred_locale">Jezik za zemljevid</string>
     <string name="local_map_names">Lokalna imena</string>
@@ -1914,4 +1914,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="distance">Razdalja</string>
     <string name="flat_list_waypoints">Vse</string>
     <string name="targets">Cilji</string>
-    </resources>
+    <string name="confirm_every_run">Vsakič vprašaj</string>
+	<string name="save_global_track_interval">Splošni interval beleženja</string>
+	<string name="save_track_to_gpx_globally">Beleži sled v datoteko GPX</string>
+	<string name="save_track_interval_globally">Interval beleženja</string>
+	</resources>
