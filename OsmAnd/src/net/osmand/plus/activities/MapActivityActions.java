@@ -770,7 +770,7 @@ public class MapActivityActions implements DialogProvider {
 					if (getMyApplication().getLocationProvider().getLastKnownLocation() != null) {
 						new ShareLocation(mapActivity).run();
 					} else {
-						Toast.makeText(getMyApplication(), "Location unknown", Toast.LENGTH_LONG).show();
+						Toast.makeText(getMyApplication(),  R.string.unknown_location, Toast.LENGTH_LONG).show();
 					}
 				}
 			}).reg();
