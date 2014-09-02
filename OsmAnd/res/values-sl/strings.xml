@@ -1924,4 +1924,5 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="speak_poi">Napovej POI</string>
     <string name="rendering_value_browse_map_name">Brskaj zemljevid</string>  
     <string name="rendering_attr_alpineHiking_description">Prikaz stez po SAC lestvici</string>
+    <string name="pause_navigation">Zaustavi navigacijo</string>
     </resources>
