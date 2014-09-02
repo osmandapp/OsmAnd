@@ -519,13 +519,13 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	@Override
 	public void prepareOptionsMenu(final MapActivity mapActivity, ContextMenuAdapter adapter) {
-		filter(adapter, R.string.exit_Button, R.string.menu_layers,
+		filter(adapter, R.string.menu_layers,
 				R.string.pause_navigation, R.string.continue_navigation,  
 				R.string.cancel_navigation, R.string.cancel_route, R.string.clear_destination,
 				R.string.target_points,
 				R.string.get_directions, 
 				R.string.menu_mute_on, R.string.menu_mute_off,
-				R.string.where_am_i);
+				R.string.where_am_i, R.string.context_menu_item_share_location);
 		final StageInformation stage = getSelectedStage();
 		if (stage != null && !isStageVisited(stage.order)) {
 			adapter.item(R.string.complete_stage)
@@ -595,7 +595,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	@Override
 	public void createLayers(OsmandMapTileView mapView, MapActivity activity) {
-		mapView.addLayer(new StageFavoritesLayer(this), 4.1f);
+		mapView.addLayer(new StageFavoritesLayer(app), 4.1f);
 	}
 	
 	public boolean isWaypointGroupVisible(int waypointType, RouteCalculationResult route) {
