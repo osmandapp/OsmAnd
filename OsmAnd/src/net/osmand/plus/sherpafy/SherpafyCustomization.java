@@ -525,7 +525,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				R.string.target_points,
 				R.string.get_directions, 
 				R.string.menu_mute_on, R.string.menu_mute_off,
-				R.string.where_am_i);
+				R.string.where_am_i, R.string.context_menu_item_share_location);
 		final StageInformation stage = getSelectedStage();
 		if (stage != null && !isStageVisited(stage.order)) {
 			adapter.item(R.string.complete_stage)
