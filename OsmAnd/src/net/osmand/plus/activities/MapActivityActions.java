@@ -761,18 +761,21 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
 
-		//share my location
-		optionsMenuHelper.item(R.string.context_menu_item_share_location).icons(
-				R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_light).listen(new OnContextMenuClick() {
-			@Override
-			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-				if (getMyApplication().getLocationProvider().getLastKnownLocation() != null) {
-					new ShareLocation(mapActivity).run();
-				} else {
-					Toast.makeText(getMyApplication(), "Location unknown", Toast.LENGTH_LONG).show();
+		if (Version.isSherpafy(app)) {
+			//share my location
+			optionsMenuHelper.item(R.string.context_menu_item_share_location).icons(
+					R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_light).listen(new OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					if (getMyApplication().getLocationProvider().getLastKnownLocation() != null) {
+						new ShareLocation(mapActivity).run();
+					} else {
+						Toast.makeText(getMyApplication(), "Location unknown", Toast.LENGTH_LONG).show();
+					}
 				}
-			}
-		}).reg();
+			}).reg();
+		}
+
 
 		// 1. Where am I
 		optionsMenuHelper.item(R.string.where_am_i).
