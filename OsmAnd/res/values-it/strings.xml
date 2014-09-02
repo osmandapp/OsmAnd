@@ -418,8 +418,8 @@
   <string name="unknown_location">Posizione non ancora conosciuta</string>
   <string name="download_files">Download</string>
   <string name="context_menu_item_search_transport">Ricerca trasporti pubblici</string>
-  <string name="transport_searching_transport">Risultati trasporti pubblici (nessun obiettivo):</string>
-  <string name="transport_searching_route">Risultati trasporti pubblici ({0} a obiettivo):</string>
+  <string name="transport_searching_transport">Risultati trasporti pubblici (nessuna destinazione):</string>
+  <string name="transport_searching_route">Risultati trasporti pubblici ({0} a destinazione):</string>
   <string name="transport_search_none">nessuno</string>
   <string name="transport_search_again">Reimposta la ricerca dei trasporti pubblici</string>
   <string name="map_index">Mappa</string>
@@ -1953,7 +1953,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="arrival_distance_factor_at_last">Negli ultimi metri</string>
     <string name="hide_all_waypoints">Cancellali tutti</string>
 <string name="av_camera_pic_size">Dimensione foto</string>
-	<string name="av_camera_pic_size_descr">Seleziona la dimensione delle foto scattate</string>
+	<string name="av_camera_pic_size_descr">Seleziona la dimensione delle foto scattate con la fotocamera interna</string>
     <string name="announce_nearby_favorites">Annuncia i preferiti nelle vicinanze</string>
 <string name="rendering_value_browse_map_name">Esplorazione mappa</string>  
     <string name="rendering_value_car_name">Automobile</string>
