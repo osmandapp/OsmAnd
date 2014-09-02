@@ -304,7 +304,7 @@
 		\n\nIl riquadro del marker può essere nescosto nuovamente cliccandolo a lungo.
 	</string>
   <string name="tip_initial">Aiuto</string>
-  <string name="tip_initial_t">OsmAnd è una applicazione di navigazione con molte funzioni.\n\nÈ possibile trovare un\'introduzione basilare, consigli per l\'uso e aiuto avanzato in \'Menù\' → \'Suggerimenti\' a partire dalla schermata della mappa.</string>
+  <string name="tip_initial_t">"OsmAnd è una applicazione di navigazione con molte funzioni.\n\nÈ possibile trovare un\'introduzione basilare, consigli per l\'uso e aiuto avanzato in \'Menù\' → \'Suggerimenti\' a partire dalla schermata della mappa. "</string>
   <string name="next_button">Avanti</string>
   <string name="previous_button">Indietro</string>
   <string name="unit_of_length_descr">Cambia le unità di misura per lunghezza e velocità</string>
