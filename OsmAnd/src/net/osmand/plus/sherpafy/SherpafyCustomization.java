@@ -595,7 +595,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	@Override
 	public void createLayers(OsmandMapTileView mapView, MapActivity activity) {
-		mapView.addLayer(new StageFavoritesLayer(this), 4.1f);
+		mapView.addLayer(new StageFavoritesLayer(app), 4.1f);
 	}
 	
 	public boolean isWaypointGroupVisible(int waypointType, RouteCalculationResult route) {
