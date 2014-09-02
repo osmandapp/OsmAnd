@@ -414,7 +414,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	public void startTour(final TourInformation tour) {
 		startTourImpl(tour);
-
 	}
 
 	private void startTourImpl(TourInformation tour) {
