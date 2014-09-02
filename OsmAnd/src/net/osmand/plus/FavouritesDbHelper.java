@@ -220,7 +220,7 @@ public class FavouritesDbHelper {
 
 
 	private String getKey(FavouritePoint p) {
-		return p.getName() + DELIMETER + p.getCategory();
+		return p.getName() + DELIMETER + p.getCategory() + DELIMETER + p.getLatitude() + DELIMETER + p.getLongitude();
 	}
 
 
