@@ -40,20 +40,32 @@ public class RenderingRulesTransformer {
 
 
 	public static void transform(Document document) {
-		NodeList nl = document.getElementsByTagName("ifelse");
+		replaceTag(document, "ifelse", "filter");
+		replaceTag(document, "check", "filter");
+		replaceTag(document, "apply", "filter");
+		replaceTag(document, "check_and_apply", "filter");
+	}
+
+
+	protected static void replaceTag(Document document, final String tag, final String targetTag) {
+		NodeList nl = document.getElementsByTagName(tag);
 		while(nl.getLength() > 0) {
+			Element newElement = document.createElement(targetTag);
 			Element old = (Element) nl.item(0);
-			Element newElement = document.createElement("filter");
-			while(old.getChildNodes().getLength() > 0) {
-				newElement.appendChild(old.getChildNodes().item(0));
-			}
-			NamedNodeMap attrs = old.getAttributes();
-			for(int i = 0; i < attrs.getLength(); i++) {
-				Node ns = attrs.item(i);
-				newElement.setAttribute(ns.getNodeName(), ns.getNodeValue());
-			}
-			((Element)old.getParentNode()).replaceChild(newElement, old);
+			copyAndReplaceElement(old, newElement);
 		}
-		
+	}
+
+
+	protected static void copyAndReplaceElement(Element oldElement, Element newElement) {
+		while(oldElement.getChildNodes().getLength() > 0) {
+			newElement.appendChild(oldElement.getChildNodes().item(0));
+		}
+		NamedNodeMap attrs = oldElement.getAttributes();
+		for(int i = 0; i < attrs.getLength(); i++) {
+			Node ns = attrs.item(i);
+			newElement.setAttribute(ns.getNodeName(), ns.getNodeValue());
+		}
+		((Element)oldElement.getParentNode()).replaceChild(newElement, oldElement);
 	}
 }
