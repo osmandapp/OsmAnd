@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+import android.widget.Toast;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -33,6 +34,7 @@ import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.SelectedGPXFragment;
+import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.api.FileSettingsAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.download.DownloadActivityType;
@@ -519,13 +521,13 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	@Override
 	public void prepareOptionsMenu(final MapActivity mapActivity, ContextMenuAdapter adapter) {
-		filter(adapter, R.string.exit_Button, R.string.menu_layers,
+		filter(adapter, R.string.menu_layers,
 				R.string.pause_navigation, R.string.continue_navigation,  
 				R.string.cancel_navigation, R.string.cancel_route, R.string.clear_destination,
 				R.string.target_points,
 				R.string.get_directions, 
 				R.string.menu_mute_on, R.string.menu_mute_off,
-				R.string.where_am_i);
+				R.string.where_am_i, R.string.context_menu_item_share_location);
 		final StageInformation stage = getSelectedStage();
 		if (stage != null && !isStageVisited(stage.order)) {
 			adapter.item(R.string.complete_stage)
@@ -538,7 +540,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						}
 					}).reg();
 		}
-		adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light ).position(adapter.length() - 1)
+		adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).position(adapter.length() - 1)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -546,7 +548,21 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						// newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						mapActivity.startActivity(newIntent);
 					}
-			}).reg();
+				}).reg();
+
+		//share my location
+		adapter.item(R.string.context_menu_item_share_location).icons(
+				R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_light).listen(new OnContextMenuClick() {
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				if (app.getLocationProvider().getLastKnownLocation() != null) {
+					new ShareLocation(mapActivity).run();
+				} else {
+					Toast.makeText(app, R.string.unknown_location, Toast.LENGTH_LONG).show();
+				}
+			}
+		}).reg();
+
 	}
 	
 	
@@ -595,7 +611,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	@Override
 	public void createLayers(OsmandMapTileView mapView, MapActivity activity) {
-		mapView.addLayer(new StageFavoritesLayer(this), 4.1f);
+		mapView.addLayer(new StageFavoritesLayer(app), 4.1f);
 	}
 	
 	public boolean isWaypointGroupVisible(int waypointType, RouteCalculationResult route) {
