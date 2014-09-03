@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
@@ -899,7 +899,7 @@ POIの更新は利用できません</string>
     <string name="safe_mode_description">セーフモード(遅いAndroidの代わりにネイティブコード)でアプリケーションを実行します。</string>
     <string name="safe_mode">セーフモード</string>
     <string name="native_library_not_running">アプリケーションは、セーフモードで実行されています(設定で無効にできます)</string>
-    <string name="background_service_is_enabled_question">OsmAndのスリープモードサービス(スリープ状態での実行)がオンになっています。オフにしますか？</string>
+    <string name="background_service_is_enabled_question">OsmAndのスリープモードになっています。停止しますか？</string>
     <string name="zxing_barcode_scanner_not_found">ZXingバーコードスキャナアプリケーションがインストールされていません。マーケットで検索しますか？</string>
 	<string name="rendering_attr_roadColors_description">道路の配色を選択します:</string>
 	<string name="rendering_attr_roadColors_name">道路の配色</string>
@@ -1768,7 +1768,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="keep_navigation_service">続行</string>
 	<string name="enable_sleep_mode">GPSスリープモードを有効</string>
 	<string name="gps_wake_up_timer">GPS呼び出し間隔</string>
-	<string name="sleep_mode_stop_dialog">GPSのスリープモード移行を無効化しますか？</string>
+	<string name="sleep_mode_stop_dialog">GPSのスリープモードを停止しますか？</string>
 	<string name="map_preferred_locale_descr">地図上の名称の優先言語(利用できない場合は、英語またはローカル名に切り替わります)</string>
     <string name="map_preferred_locale">地名等の優先言語</string>
     <string name="local_map_names">その国での名称</string>

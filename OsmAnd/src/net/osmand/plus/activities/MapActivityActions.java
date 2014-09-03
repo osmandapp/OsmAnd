@@ -760,7 +760,7 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
-		
+
 		// 1. Where am I
 		optionsMenuHelper.item(R.string.where_am_i).
 				icons(R.drawable.ic_action_gloc_dark, R.drawable.ic_action_gloc_light)
@@ -958,6 +958,7 @@ public class MapActivityActions implements DialogProvider {
 						}).reg();
 			}
 		}
+
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
 		optionsMenuHelper.item(R.string.exit_Button).icons(R.drawable.ic_action_quit_dark, R.drawable.ic_action_quit_light )
 					.listen(new OnContextMenuClick() {
@@ -972,6 +973,7 @@ public class MapActivityActions implements DialogProvider {
 				// app.closeApplication(mapActivity);
 			}
 		}).reg();
+
 		getMyApplication().getAppCustomization().prepareOptionsMenu(mapActivity, optionsMenuHelper);
 		return optionsMenuHelper;
 	}

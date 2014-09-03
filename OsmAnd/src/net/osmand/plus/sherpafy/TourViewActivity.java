@@ -406,17 +406,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	public void startStage(final StageInformation stage) {
 		if(customization.isStageVisited(stage.getOrder()) /*&& stage.getTour() == customization.getSelectedTour()*/) {
 			customization.showCompleteStageFragment(this, stage, true);
-		} else if (stage != customization.getSelectedStage() && customization.getSelectedStage() != null) {
-			Builder bld = new AlertDialog.Builder(this);
-			bld.setMessage(R.string.start_new_stage);
-			bld.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					customization.runStage(TourViewActivity.this, stage.getTour(), stage, customization.getSelectedStage() != stage);
-				}
-			});
-			bld.setNegativeButton(R.string.default_buttons_no, null);
-			bld.show();
 		} else {
 			customization.runStage(TourViewActivity.this, stage.getTour(), stage, customization.getSelectedStage() != stage);
 		}
@@ -424,20 +413,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 
 	public void startTour(final TourInformation tour) {
-		if (tour != customization.getSelectedTour() && customization.getSelectedTour() != null) {
-			Builder bld = new AlertDialog.Builder(this);
-			bld.setMessage(R.string.start_new_stage);
-			bld.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					startTourImpl(tour);
-				}
-			});
-			bld.setNegativeButton(R.string.default_buttons_no, null);
-			bld.show();
-		} else {
-			startTourImpl(tour);
-		}
+		startTourImpl(tour);
 	}
 
 	private void startTourImpl(TourInformation tour) {
