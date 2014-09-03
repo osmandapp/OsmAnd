@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -30,11 +31,13 @@ public class RenderingRulesTransformer {
 		}
 		String srcFile = args[0];
 		String targetFile = args[1];
-		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder db = factory.newDocumentBuilder();
 		Document document = db.parse(new File(srcFile));
 		transform(document);
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		DOMSource source = new DOMSource(document.getDocumentElement());
 		StreamResult streamResult = new StreamResult(new File(targetFile));
 		transformer.transform(source, streamResult);
