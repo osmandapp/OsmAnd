@@ -471,7 +471,7 @@
 	<string name="voice_is_not_available_msg">Glasovno vodenje ni na voljo. V nastavitvah izberite in prenesite ustrezen glasovni paket.</string>
 	<string name="voice_is_not_available_title">Izbrano ni nobeno glasovno vodenje</string>
 	<string name="voice">Glas</string>
-	<string name="voice_provider_descr">Izberite glasovno vodenje za navigacijo (koda jezika po ISO 639-1)</string>
+	<string name="voice_provider_descr">Izberite glasovno vodenje za navigacijo</string>
 	<string name="voice_data_initializing">Začenjanje podatkov govora …</string>
 	<string name="voice_data_not_supported">Nepodprta različica podatkov govora</string>
 	<string name="voice_data_corrupted">Izbrani podatki govora so pokvarjeni</string>
@@ -568,12 +568,11 @@
     <string name="amenity_type_sustenance">Prehrana</string>
 	<string name="amenity_type_man_made">Zgradbe</string>
 	<string name="send_location_sms_pattern">Mesto: %1$s\n%2$s</string>
-	<string name="tip_initial_t">OsmAnd je navigacijska aplikacija s številnimi funkcijami.
-		\n\nZa osnovno predstavitev so nekateri nasveti in triki v povezavi \'Meni\' → \'Nasveti\' na zaslonu zemljevida.
-	</string>
+	<string name="tip_initial_t">"OsmAnd je navigacijska aplikacija s številnimi funkcijami.
+\n\nNekaj osnovnih uvodov, uporabne nasvete in napredno pomoč dobite v povezavi z \'Meni\' → \'Pomoč\' na zaslonu zemljevida. "</string>
 	<string name="next_button">Naprej</string>
 	<string name="previous_button">Nazaj</string>
-	<string name="tip_initial">Nasveti in triki</string>
+	<string name="tip_initial">Pomoč</string>
 	<string name="tip_search">Iskanje</string>
 	<string name="tip_rotation_switching">Usmerjenost zemljevida</string>
 	<string name="rotate_map_to_bearing">Usmerjenost zemljevida</string>
@@ -607,7 +606,7 @@
 	<string name="rendering_attr_showRoadMaps_description">Izberite kdaj naj bodo prikazani zemljevidi le s cestami:</string>
 	<string name="rendering_attr_showRoadMaps_name">Zemljevidi le s cestami</string>
     <string name="download_roads_only_maps">Zemljevidi le s cestami</string>
-    <string name="background_service_is_enabled_question">Storitev v ozadju se še vedno izvaja. Ali jo želite preklicati?</string>
+    <string name="background_service_is_enabled_question">Storitev v ozadju se še vedno izvaja. Ali želite prekiniti tudi njo?</string>
     <string name="select_index_file_to_download">Ničesar ni bilo mogoče najti. Če svojega področja ne morete najti, ga lahko ustvarite sami (oglejte si http://osmand.net).</string>
 	<string name="local_indexes_cat_map">Krajevni zemljevidi (vektorski)</string>
 	<string name="index_settings_descr">Prenos in upravljanje datotek zemljevidov shranjenih na vaši napravi</string>
@@ -719,7 +718,7 @@
 	<string name="settings_preset">Uporabniški profil</string>
 	<string name="global_settings">Splošne nastavitve</string>
 	<string name="index_settings">Upravljanje datotek zemljevidov</string>
-	<string name="osmand_service">Zmožnost načina spanja</string>
+	<string name="osmand_service">Način spanja</string>
 	<string name="osmand_service_descr">Uporabi za izvajanje OsmAnd, ko je zaslon izklopljen</string>
 	<string name="binary_map_download_success">Prejem je uspešen.
 		\n\t\n\tZa uporabo omogočite \'Meni\' → \'Sloji zemljevida\' → \'Vir zemljevidov …\' → Nepovezani vektorski zemljevidi\'.
@@ -836,10 +835,10 @@
 	<string name="settings">Nastavitve</string>
 	<string name="save_current_track">Shrani trenutno sled GPX</string>
 	<string name="save_current_track_descr">Shrani trenutno GPX pot na SD kartico</string>
-	<string name="save_track_interval">Interval beleženja</string>
-	<string name="save_track_interval_descr">Izberite interval beleženja položaja za sledi</string>
-	<string name="save_track_to_gpx">Shrani sled v datoteko GPX</string>
-	<string name="save_track_to_gpx_descrp">Sledi se shranjujejo v podmape mape \'tracks\' po dnevih</string>
+	<string name="save_track_interval">Interval beleženja med navigacijo</string>
+	<string name="save_track_interval_descr">Izberite interval beleženja za shranjevanje sledi med navigacijo</string>
+	<string name="save_track_to_gpx">Beleži sled v datoteko GPX med navigacijo</string>
+	<string name="save_track_to_gpx_descrp">Sledi se med navigacijo shranjujejo v mapo \'tracks\'</string>
 	<string name="mark_point">Cilj</string>
 	<string name="show_osm_bugs_descr">Pokaži OpenStreetBugs na zemljevidu</string>
 	<string name="show_osm_bugs">Prikaži OpenStreetBugs</string>
@@ -971,7 +970,7 @@ Pomembnejše lastnosti:
 	<string name="background_service_wait_int">Največje čakanje za fix</string>
 	<string name="network_provider">Omrežje</string>
 	<string name="background_service_int_descr">Nastavitev intervala prebujanja v ozadju</string>
-	<string name="background_service_int">Interval prebujanja</string>
+	<string name="background_service_int">Interval prebujanja sprejemnika GPS</string>
 	<string name="background_service_provider_descr">Izberite ponudnika mesta med izvajanjem v ozadju</string>
 	<string name="background_service_provider">Ponudnik mesta</string>
 	<string name="background_router_service_descr">Izvaja OsmAnd v ozadju, da omogoča spremljanje položaja, ko je zaslon izklopljen</string>
@@ -1276,7 +1275,7 @@ Pomembnejše lastnosti:
 	\n\t* Dodatne nastavitve za stabiliziranje kompasa
 	\n\t* Zgornji levi gumb na zaslonu zemljevida nadomesti gumb Meni
     </string>
-    <string name="monitoring_settings">Storitve beleženja</string>
+    <string name="monitoring_settings">Registracija potovanja</string>
     <string name="osmand_monitoring_plugin_name">Storitve beleženja</string>
     <string name="select_address_activity">Izberite naslov</string>
     <string name="favourites_list_activity">Izberite priljubljeno</string>
@@ -1327,7 +1326,7 @@ Pomembnejše lastnosti:
     <string name="access_mark_final_location_first">Način dostopnosti: prosim, najprej izberite cilj</string> 
     <string name="use_magnetic_sensor_descr">Namesto senzorja usmerjenosti, za določanje vrednosti kompasa uporabljaj magnetni senzor</string>
     <string name="cancel_route">Opusti pot</string>
-    <string name="monitoring_settings_descr">Določite, kako naj se snemajo potovanja</string>
+    <string name="monitoring_settings_descr">Določite, kako naj se registrirajo vaša potovanja</string>
     <string name="osmand_monitoring_plugin_description">Omogoči sledenje in navigacijo v načinu pripravljenosti (izklopljen zaslon) preko rednega zbujanja GPS naprave. Pokaže nastavitve, ki omogočajo snemanje potovanj v lokalne GPX datoteke ali na splet z uporabo spletnih storitev.</string>
     <string name="choose_osmand_theme_descr">Izbira teme programa</string>
     <string name="choose_osmand_theme">Tema aplikacije</string>
@@ -1522,7 +1521,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="about_version">Različica:</string>
     <string name="about_settings">Vizitka</string>
     <string name="about_settings_descr">Informacije o različici, licenci, članih projekta</string>
-    <string name="tips_and_tricks">Nasveti</string>
+    <string name="tips_and_tricks">Pomoč</string>
     <string name="tip_recent_changes_1_6_t">Spremembe v 1.6:
 	\n\t* Podpora naprav Full HD
 	\n\t* Podpora za prozorno ozadje zemljevida
@@ -1838,10 +1837,10 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="tip_recent_changes_1_8_alpha">"Spremembe v 1.8:\n\t* Računanje poti med točkami poti v sledi GPX\n\t* Spremenjena razporeditev držav za prenose (podpira iskanje krajevnih imen)\n\t* Podpira GPX/KML uvoz (pretvorba iz KML v GPX)\n\t* Sledi GPX premeščene v \'Moji podatki\'\n\t* Sedaj lahko razdelite sled GPX po razdalji in preverite višinsko razliko/hitrost\n\t* Samodejni začetek navigacije po zakasnitvi "</string>
     <string name="no_index_file_to_download">Nič za prenesti, prosim preverite internetno povezavo.</string>
     <string name="keep_navigation_service">Obdrži</string>
-	<string name="stop_navigation_service">Ustavi</string>
-	<string name="enable_sleep_mode">Omogočiti način spanja</string>
+	<string name="stop_navigation_service">Prekini</string>
+	<string name="enable_sleep_mode">Omogoči način spanja sprejemnika GPS</string>
 	<string name="gps_wake_up_timer">Interval prebujanja GPS-a</string>
-	<string name="sleep_mode_stop_dialog">Obdržati vključen GPS?</string>
+	<string name="sleep_mode_stop_dialog">Prekinem spanje sprejemnika GPS?</string>
 	<string name="map_preferred_locale_descr">Jezik za oznake na zemljevidu (če ni na voljo bodo uporabljena angleška ali lokalna imena)</string>
     <string name="map_preferred_locale">Jezik za zemljevid</string>
     <string name="local_map_names">Lokalna imena</string>
@@ -1861,12 +1860,12 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_attr_hideText_name">Skrij besedilo</string>
     <string name="rendering_attr_hideWoodScrubs_name">Skrij gozdove in grmičevje</string>
     <string name="rendering_attr_buildings15zoom_name">Zgradbe v povečavi 15</string>
-    <string name="rendering_attr_moreDetailed_name">Bolj podrobno</string>
-    <string name="rendering_attr_lessDetailed_name">Manj podrobno</string>
-    <string name="rendering_attr_hideAccess_name">Skrij vrsto dostopa</string>
-    <string name="rendering_attr_showAccess_name">Prikaži vrsto dostopa</string>
+    <string name="rendering_attr_moreDetailed_name">Več podrobnosti</string>
+    <string name="rendering_attr_lessDetailed_name">Manj podrobnosti</string>
+    <string name="rendering_attr_hideAccess_name">Skrij omejitve dostopa</string>
+    <string name="rendering_attr_showAccess_name">Prikaži omejitve dostopa</string>
     <string name="rendering_attr_showSurfaceGrade_name">Pokaži kakovost cest</string>
-    <string name="rendering_attr_showSurfaces_name">Pokaži površine cest</string>
+    <string name="rendering_attr_showSurfaces_name">Pokaži površino cest</string>
     <string name="rendering_attr_showCycleRoutes_name">Pokaži kolesarske poti</string>
     <string name="osmo_auth_error_short">Dovoljenje neuspešno</string>
     <string name="osmo_group_by_invite">Vstop s povabilom</string>
@@ -1888,7 +1887,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="lang_sc">Sardinščina</string>
 	<string name="rendering_attr_subwayMode_name">Način podzemne železnice</string>
  	<string name="continue_navigation">Nadaljuj navigacijo</string>
-    <string name="rendering_attr_alpineHiking_name">Planinski zamljevid</string>
+    <string name="rendering_attr_alpineHiking_name">Skala alpskega pohodništva (SAC)</string>
     <string name="osmo_invite">Povabite...</string>
     <string name="osmo_specify_tracker_id">Prosim, določite ID</string>
     <string name="arrival_distance_factor_early">Zgodaj</string>
@@ -1914,4 +1913,15 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="distance">Razdalja</string>
     <string name="flat_list_waypoints">Vse</string>
     <string name="targets">Cilji</string>
+    <string name="confirm_every_run">Vsakič vprašaj</string>
+	<string name="save_global_track_interval">Splošni interval beleženja</string>
+	<string name="save_track_to_gpx_globally">Beleži sled v datoteko GPX</string>
+	<string name="save_track_interval_globally">Interval beleženja</string>
+	<string name="rendering_attr_publicTransportMode_name">Način javni prevoz</string>
+	<string name="record_plugin_name">Registracija vaših potovanj</string>
+    <string name="index_tours">Izleti</string>
+    <string name="waypoints">Točke</string>
+    <string name="speak_poi">Napovej POI</string>
+    <string name="rendering_value_browse_map_name">Brskaj zemljevid</string>  
+    <string name="rendering_attr_alpineHiking_description">Prikaz stez po SAC lestvici</string>
     </resources>

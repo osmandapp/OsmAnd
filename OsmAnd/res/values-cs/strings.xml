@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
@@ -1065,7 +1065,7 @@
 	<string name="rendering_attr_roadColors_name">Barevné schéma</string>
     <string name="zxing_barcode_scanner_not_found">Aplikace pro čtení čárových kódů ZXing není nainstalována. Chcete ji vyhledat v Market?</string>
 	<string name="close_changeset">Zavřít změny</string>
-	<string name="background_service_is_enabled_question">Služba na pozadí stále běží. Chcete ji zastavit?</string>
+	<string name="background_service_is_enabled_question">Služba na pozadí stále běží. Chcete ji také zastavit?</string>
     <string name="tip_recent_changes_1_0_0_t">"Změny ve verzi 1.0 :
 \n\t* Rychlejší a přesnější výpočet trasy (až 250 km)
 \n\t* Zavedení silničních map\n\t* Pozice na mapě se po přerušení neztratí\n\t* Služba na pozadí během navigace "</string>
@@ -1649,10 +1649,10 @@ s často kladenými otázkami.</string>
     <string name="forward">Vpřed</string>
     <string name="home">Domů</string>
     <string name="keep_navigation_service">Ponechat</string>
-	<string name="stop_navigation_service">Zastavit</string>
+	<string name="stop_navigation_service">Přerušit</string>
 	<string name="enable_sleep_mode">Zapnout režim spánku GPS</string>
 	<string name="gps_wake_up_timer">Interval probouzení GPS</string>
-	<string name="sleep_mode_stop_dialog">Ukončit režim spánku GPS?</string>
+	<string name="sleep_mode_stop_dialog">Přerušit režim spánku GPS?</string>
 	<string name="map_preferred_locale_descr">Preferovaný jazyk pro nápisy na mapě (pokud není dostupný budou použité anglické nebo lokální názvy)</string>
     <string name="map_preferred_locale">Preferovaný jazyk mapy</string>
     <string name="local_map_names">Lokální názvy</string>

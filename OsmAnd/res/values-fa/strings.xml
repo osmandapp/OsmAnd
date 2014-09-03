@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
@@ -597,7 +597,7 @@
 	<string name="osmand_distance_planning_plugin_name">مسافت سنج و ابزار طرح ریزی سفر</string>
     <string name="distance_measurement_finish_subtrack">شروع مسیر جدید</string>
     <string name="use_kalman_filter_compass_descr">از فیلتر کالمن استفاده کنید تا از اغتشاشات قطب نما پرهیز شود</string>
-    <string name="monitoring_settings">سرویسهای ثبت و حالت خواب</string>
+    <string name="monitoring_settings">ضبط مسیر</string>
     <string name="monitoring_settings_descr">تنظیم چگونگی ضبط سفر و فعالسازی حالت خواب</string>
     <string name="osmand_monitoring_plugin_name">سرویسهای ثبت و حالت خواب</string>
     <string name="default_buttons_other_actions">کارهای دیگر</string>
@@ -1882,16 +1882,16 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 \n  - در صورت عدم فعالیت و یا تنها فعالیت 1 نفر به مدت 2 هفته، گروه حذف خواهد شد ↵.
 \n  - شما می توانید عضویت در گروه را تنها توسط دعوت محدود نمایید ، اما برای این کار نیاز به تغییر تنظیمات کنترل دارد ↵.
 \n  - اگر شما نیاز به ایجاد یک گروه دارید، با شرایط ما آشنا شوید http://osmo.mobi"</string>
-    <string name="osmo_group_information">لطفا قبل از ایجاد گروه مطالع نمایید!</string>
-    <string name="osmo_not_signed_in">OsMo ورود شکست خورد</string>
-    <string name="osmo_gpx_points_downloaded">OsMo نقاط %1$s دانلود شده.</string>
-    <string name="osmo_auto_connect_descr">اتصال به صورت خودکار پس از راه اندازی نرم افزار</string>
+    <string name="osmo_group_information">لطفا قبل از ایجاد گروه مطالعه نمایید!</string>
+    <string name="osmo_not_signed_in">ورود OsMo شکست خورد</string>
+    <string name="osmo_gpx_points_downloaded">نقاط OsMo %1$s دانلود شد.</string>
+    <string name="osmo_auto_connect_descr">اتصال خودکار به سرویس پس از راه اندازی نرم افزار</string>
     <string name="osmo_auto_connect">اتصال خودکار</string>
     <string name="osmo_start_service">سرویس OsMo</string>
-    <string name="osmo_gpx_track_downloaded">OsMo مسیر %1$s دانلود نمایید.</string>
+    <string name="osmo_gpx_track_downloaded">OsMo مسیر %1$s دانلود شد.</string>
     <string name="no_index_file_to_download">هیچ چیز برای دانلود وجود ندارد، لطفا اتصال به اینترنت را بررسی نمایید.</string>
     <string name="osmo_auth_error_short">مجوز های شکست خورده</string>
-    <string name="osmo_auth_error">مجوز OSMO با خطا مواجه شد : %1$s.↵\n این سرویس یا به طور موقت پایین است و یا ثبت نام به اتمام رسیده است.↵\n آیا شما میخواهید ثبت نام جدید انجام دهید.</string>
+    <string name="osmo_auth_error">مجوز OSMO با خطا مواجه شد : %1$s.↵\n این سرویس یا به طور موقت پایین است و یا ثبت نام به اتمام رسیده است.↵\n آیا شما میخواهید ثبت نام جدید انجام دهید؟</string>
     <string name="keep_navigation_service">حفظ</string>
 	<string name="stop_navigation_service">ایست</string>
 	<string name="enable_sleep_mode">فعال کردن حالت خواب</string>
@@ -1902,4 +1902,76 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="lang_he">عبری</string>
     <string name="forward">جلو</string>
     <string name="home">خانه</string>
-    </resources>
+    <string name="confirm_every_run">همیشه سوال کن</string>
+	<string name="save_track_to_gpx_globally">وارد کردن مسیر به فایل gpx</string>
+	<string name="rendering_attr_publicTransportMode_name">حالت حمل و نقل عمومی</string>
+	<string name="record_plugin_name">ضبط سفرهای خود</string>
+    <string name="int_hour">ساعت</string>
+    <string name="duration">مدت زمان</string>
+    <string name="distance">فاصله</string>
+    <string name="index_tours">سفرها</string>
+    <string name="flat_list_waypoints">همه</string>
+    <string name="waypoints">نقاط بین راهی</string>
+    <string name="targets">مقاصد</string>
+    <string name="way_alarms">موانع</string>
+    <string name="speak_favorites">اعلام علاقمندی ها</string>
+    <string name="speak_poi">اعلام POI</string>
+    <string name="download_additional_maps">دانلود نقشه های از دست رفته %1$s (%2$d MB)؟</string>
+    <string name="more">بیشتر...</string>
+    <string name="rendering_value_browse_map_name">مرور نقشه</string>  
+    <string name="rendering_value_car_name">خودرو</string>
+    <string name="rendering_value_bicycle_name">دوچرخه</string>
+    <string name="rendering_value_pedestrian_name">عابر پیاده</string>
+    <string name="rendering_attr_coloredBuildings_name">ساختمان های رنگی</string>
+    <string name="osmo_invite">دعوت کردن...</string>
+    <string name="osmo_leave_confirmation_msg">"آیا شما می خواهید گروه را ترک کنید  %1$s ؟"</string>
+    <string name="osmo_specify_tracker_id">لطفا ID را وارد کنید</string>
+    <string name="continue_navigation">ادامه ناوبری</string>
+    <string name="pause_navigation">توقف ناوبری</string>
+    <string name="rendering_attr_subwayMode_name">حالت مترو</string>
+ 	<string name="map_preferred_locale_descr">زبان ارجح برای علایم روی نقشه(اگر غیر فعال باشد به انگلیسی یا نام محلی تغییر می یابد)</string>
+    <string name="local_map_names">نامهای محلی</string>
+    <string name="live_monitoring_m_descr">مسیر را اگر ضبط GPX فعال است به یک سرویس اینترنتی مشخص ارسال کنید.</string>
+	<string name="live_monitoring_m">ردیابی آنلاین (GPX لازم است)</string>
+    <string name="live_monitoring_start">شروع ردیابی آنلاین</string>
+	<string name="live_monitoring_stop">توقف ردیابی آنلاین</string>
+	<string name="gpx_monitoring_start">شروع ضبط GPX</string>
+	<string name="gpx_monitoring_stop">توقف ضبط GPX</string>
+    <string name="rendering_attr_hideBuildings_name">پنهان کردن ساختمان ها</string>
+    <string name="gpx_start_new_segment">شروع بخش جدید</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">پنهان کردن بزرگراه های بدون خودرو</string>
+    <string name="rendering_attr_hideText_name">پنهان کردن متن</string>
+    <string name="rendering_attr_hideWoodScrubs_name">پنهان کردن جنگل و بوته ها</string>
+    <string name="rendering_attr_buildings15zoom_name">ساختمان ها در زوم 15</string>
+    <string name="rendering_attr_moreDetailed_name">جزئیات بیشتر</string>
+    <string name="rendering_attr_lessDetailed_name">جزئیات کمتر</string>
+    <string name="rendering_attr_hideAccess_name">پنهان کردن محدودیت های دسترسی</string>
+    <string name="rendering_attr_showAccess_name">نشان دادن محدودیت های دسترسی</string>
+    <string name="rendering_attr_showSurfaceGrade_name">نمایش کیفیت جاده</string>
+    <string name="rendering_attr_showSurfaces_name">نمایش سطح جاده</string>
+    <string name="rendering_attr_showCycleRoutes_name">نمایش مسیرهای دوچرخه</string>
+    <string name="save_global_track_interval_descr">انتخاب فاصله زمانی ورود برای ضبط مسیر عمومی (فعال از طریق ویجت ضبط GPX روی نقشه)</string>
+	<string name="save_global_track_interval">فاصله زمانی ورود عمومی</string>
+	<string name="save_track_to_gpx_globally_descr">ورود موقعیت عمومی به یک فایل GPX میتواند با استفاده از ویجت ضبط GPX روی نقشه خاموش یا روشن شود</string>
+	<string name="save_track_interval_globally">فاصله زمانی ورود</string>
+	<string name="record_plugin_description">مسیرت را با لمس دکمه روی نقشه ذخیره کن. نمایش بده تنظیمات را برای ضبط مسیرت به GPX محلی یا استفاده آنلاین یک سرویس اینترنتی.</string>
+    <string name="lang_al">آلبانی</string>
+	<string name="lang_ar">عربی</string>
+	<string name="lang_fa">فارسی</string>
+	<string name="lang_sc">ساردینیایی</string>
+	<string name="lang_sr">صربی</string>
+	<string name="lang_zh_CN">چینی ساده</string>
+	<string name="lang_zh_TW">چینی سنتی</string>
+	<string name="rendering_attr_alpineHiking_name"/>
+    <string name="rendering_attr_alpineHiking_description"/>
+    <string name="rendering_attr_osmcTraces_name"/>
+    <string name="rendering_attr_osmcTraces_description"/>
+    
+	<string name="arrival_distance_factor_early">زود</string>
+    <string name="arrival_distance_factor_normally">معمولی</string>
+    <string name="arrival_distance_factor_late">دیر</string>
+    <string name="arrival_distance_factor_at_last">در آخرین مترها</string>
+    <string name="av_camera_pic_size">اندازه عکس دوربین</string>
+	<string name="av_camera_pic_size_descr">انتخاب اندازه عکس دوربین داخلی</string>
+    <string name="hide_all_waypoints">حذف همه</string>
+</resources>

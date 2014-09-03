@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.actionbarsherlock.app.ActionBar;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.access.AccessibilityPlugin;
@@ -123,7 +124,7 @@ public class MapActivity extends AccessibleActivity  {
 			
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
-		requestWindowFeature(Window.FEATURE_NO_TITLE); 
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// Full screen is not used here
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
@@ -254,6 +255,10 @@ public class MapActivity extends AccessibleActivity  {
 	protected void onResume() {
 		super.onResume();
 		cancelNotification();
+		//fixing bug with action bar appearing on android 2.3.3
+		if (getSupportActionBar() != null){
+			getSupportActionBar().hide();
+		}
 		if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
 			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
 			// can't return from this method we are not sure if activity will be recreated or not
