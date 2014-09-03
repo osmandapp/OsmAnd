@@ -1925,4 +1925,5 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_value_browse_map_name">Brskaj zemljevid</string>  
     <string name="rendering_attr_alpineHiking_description">Prikaz stez po SAC lestvici</string>
     <string name="pause_navigation">Zaustavi navigacijo</string>
-    </resources>
+    <string name="save_global_track_interval_descr">Izerite interval beleženja za splošno snemanje sledi (omogočeno z gumbom za snemanje GPX na zemljevidu)</string>
+	</resources>
