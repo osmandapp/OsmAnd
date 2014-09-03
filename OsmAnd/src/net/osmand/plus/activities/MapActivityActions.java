@@ -761,22 +761,6 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
 
-		if (Version.isSherpafy(app)) {
-			//share my location
-			optionsMenuHelper.item(R.string.context_menu_item_share_location).icons(
-					R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_light).listen(new OnContextMenuClick() {
-				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-					if (getMyApplication().getLocationProvider().getLastKnownLocation() != null) {
-						new ShareLocation(mapActivity).run();
-					} else {
-						Toast.makeText(getMyApplication(),  R.string.unknown_location, Toast.LENGTH_LONG).show();
-					}
-				}
-			}).reg();
-		}
-
-
 		// 1. Where am I
 		optionsMenuHelper.item(R.string.where_am_i).
 				icons(R.drawable.ic_action_gloc_dark, R.drawable.ic_action_gloc_light)
@@ -974,6 +958,7 @@ public class MapActivityActions implements DialogProvider {
 						}).reg();
 			}
 		}
+
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
 		optionsMenuHelper.item(R.string.exit_Button).icons(R.drawable.ic_action_quit_dark, R.drawable.ic_action_quit_light )
 					.listen(new OnContextMenuClick() {
@@ -988,6 +973,7 @@ public class MapActivityActions implements DialogProvider {
 				// app.closeApplication(mapActivity);
 			}
 		}).reg();
+
 		getMyApplication().getAppCustomization().prepareOptionsMenu(mapActivity, optionsMenuHelper);
 		return optionsMenuHelper;
 	}

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+import android.widget.Toast;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -33,6 +34,7 @@ import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.SelectedGPXFragment;
+import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.api.FileSettingsAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.download.DownloadActivityType;
@@ -538,7 +540,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						}
 					}).reg();
 		}
-		adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light ).position(adapter.length() - 1)
+		adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).position(adapter.length() - 1)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -546,7 +548,21 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						// newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						mapActivity.startActivity(newIntent);
 					}
-			}).reg();
+				}).reg();
+
+		//share my location
+		adapter.item(R.string.context_menu_item_share_location).icons(
+				R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_light).listen(new OnContextMenuClick() {
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				if (app.getLocationProvider().getLastKnownLocation() != null) {
+					new ShareLocation(mapActivity).run();
+				} else {
+					Toast.makeText(app, R.string.unknown_location, Toast.LENGTH_LONG).show();
+				}
+			}
+		}).reg();
+
 	}
 	
 	
