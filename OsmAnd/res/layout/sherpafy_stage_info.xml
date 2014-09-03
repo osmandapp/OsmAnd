@@ -9,7 +9,15 @@
         android:orientation="vertical" 
         android:background="@color/color_white">
 
-        <ImageView
+		<net.osmand.plus.views.OsmandMapTileView
+				android:id="@+id/MapView"
+				android:layout_width="fill_parent"
+				android:layout_height="200dp"
+				android:contentDescription="@string/map_view"
+				android:visibility="gone"/>
+
+
+		<ImageView
             android:id="@+id/Icon"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" 

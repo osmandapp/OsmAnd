@@ -10,11 +10,11 @@ import android.widget.TextView;
 public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment {
 	
 	protected void updateView(WebView description, ImageView icon, TextView additional, TextView text, TextView header) {
-		if (stage.getItineraryBitmap() != null) {
-			icon.setImageBitmap(stage.getItineraryBitmap());
-		} else {
+//		if (stage.getItineraryBitmap() != null) {
+//			icon.setImageBitmap(stage.getItineraryBitmap());
+//		} else {
 			icon.setVisibility(View.GONE);
-		}
+//		}
 		additional.setVisibility(View.GONE);
 		header.setVisibility(View.GONE);
 		String ins = "";
@@ -30,5 +30,8 @@ public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment {
 		}
 		description.loadData("<html><body>" + ins + stage.getItinerary() + "</body></html", "text/html; charset=utf-8",
 				"utf-8");
+		if (osmandMapTileView != null){
+			osmandMapTileView.setVisibility(View.VISIBLE);
+		}
 	}
 }
