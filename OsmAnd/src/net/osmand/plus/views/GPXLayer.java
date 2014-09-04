@@ -168,7 +168,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			drawSelectedFilesSplits(canvas, tileBox, selectedGPXFiles, settings);
 			drawSelectedFilesPoints(canvas, tileBox, selectedGPXFiles);
 		}
-		if(textLayer.isVisible()) {
+		if(textLayer != null &&  textLayer.isVisible()) {
 			textLayer.putData(this, cache);
 		}
 	}

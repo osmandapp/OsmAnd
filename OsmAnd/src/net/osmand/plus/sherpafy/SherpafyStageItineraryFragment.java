@@ -1,16 +1,38 @@
 package net.osmand.plus.sherpafy;
 
+import net.osmand.map.MapTileDownloader.DownloadRequest;
+import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
+import net.osmand.plus.render.MapVectorLayer;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.views.GPXLayer;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment {
+public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment implements IMapDownloaderCallback {
+	
+	private static final boolean HIDE_ITINERARY_IMG = true;
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(this);
+	}
 	
 	protected void updateView(WebView description, ImageView icon, TextView additional, TextView text, TextView header) {
-		if (stage.getItineraryBitmap() != null) {
+		app.getResourceManager().getMapTileDownloader().addDownloaderCallback(this);
+		osmandMapTileView.setVisibility(View.VISIBLE);
+		MapVectorLayer mapVectorLayer = new MapVectorLayer(null);
+		osmandMapTileView.addLayer(mapVectorLayer, 0.5f);
+		osmandMapTileView.addLayer(new GPXLayer(), 0.9f);
+		osmandMapTileView.setMainLayer(mapVectorLayer);
+		mapVectorLayer.setVisible(true);
+		osmandMapTileView.setLatLon(stage.getStartPoint().getLatitude(), stage.getStartPoint().getLongitude());
+		osmandMapTileView.setIntZoom(14);
+		if (stage.getItineraryBitmap() != null && !HIDE_ITINERARY_IMG) {
 			icon.setImageBitmap(stage.getItineraryBitmap());
 		} else {
 			icon.setVisibility(View.GONE);
@@ -28,7 +50,19 @@ public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment {
 					( h == 0 ? "" : h + " " + app.getString(R.string.int_hour) + " ") + 
 					( min == 0 ? "" : min + " " + app.getString(R.string.int_min))+ "<h4/>";
 		}
-		description.loadData("<html><body>" + ins + stage.getItinerary() + "</body></html", "text/html; charset=utf-8",
+		String content = HIDE_ITINERARY_IMG ? "" : stage.getItinerary();
+		description.loadData("<html><body>" + ins + content + "</body></html", "text/html; charset=utf-8",
 				"utf-8");
+	}
+	
+	@Override
+	public void tileDownloaded(DownloadRequest request) {
+		if(request != null && !request.error && request.fileToSave != null){
+			ResourceManager mgr = app.getResourceManager();
+			mgr.tileDownloaded(request);
+		}
+		if(request == null || !request.error){
+			osmandMapTileView.tileDownloaded(request);
+		}		
 	}
 }

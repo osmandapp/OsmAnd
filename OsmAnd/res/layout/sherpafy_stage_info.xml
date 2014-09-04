@@ -8,6 +8,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" 
         android:background="@color/color_white">
+        
+		<net.osmand.plus.views.OsmandMapTileView
+				android:id="@+id/MapView"
+				android:layout_width="fill_parent"
+				android:layout_height="300dp"
+				android:contentDescription="@string/map_view"
+				android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/Icon"
