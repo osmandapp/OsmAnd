@@ -3,6 +3,7 @@ package net.osmand.plus.sherpafy;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,6 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import net.osmand.plus.views.GPXLayer;
+import net.osmand.plus.views.MapTextLayer;
+import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.OsmandMapTileView;
 
 public class SherpafyStageInfoFragment extends SherlockFragment {
 	public static final String STAGE_PARAM = "STAGE";
@@ -24,6 +29,7 @@ public class SherpafyStageInfoFragment extends SherlockFragment {
 	protected StageInformation stage;
 	protected TourInformation tour;
 	private View view;
+	OsmandMapTileView osmandMapTileView;
 
 	public SherpafyStageInfoFragment() {
 	}
@@ -64,6 +70,18 @@ public class SherpafyStageInfoFragment extends SherlockFragment {
 		TextView additional = (TextView) view.findViewById(R.id.AdditionalText);
 		TextView text = (TextView) view.findViewById(R.id.Text);
 		TextView header = (TextView) view.findViewById(R.id.HeaderText);
+		osmandMapTileView = (OsmandMapTileView) view.findViewById(R.id.MapView);
+		MapTileLayer mapTileLayer = new MapTileLayer(true);
+		MapVectorLayer mapVectorLayer = new MapVectorLayer(mapTileLayer);
+
+		osmandMapTileView.addLayer(mapTileLayer,0.0f);
+		osmandMapTileView.addLayer(mapVectorLayer, 0.5f);
+		//osmandMapTileView.addLayer(new GPXLayer(), 0.9f);
+		osmandMapTileView.setMainLayer(mapVectorLayer);
+		mapVectorLayer.setVisible(true);
+		osmandMapTileView.setLatLon(stage.getStartPoint().getLatitude(), stage.getStartPoint().getLongitude());
+		osmandMapTileView.setIntZoom(14);
+
 		updateView(description, icon, additional, text, header);
 		return view;
 	}
