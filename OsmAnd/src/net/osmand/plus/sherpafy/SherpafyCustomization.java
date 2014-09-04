@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+import android.os.Environment;
 import android.widget.Toast;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -79,7 +80,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	private CommonPreference<String> saveGPXFolder;
 	public static final String TOUR_SERVER = "download.osmand.net";
 	private static final String SAVE_GPX_FOLDER = "save_gpx_folder";
-	private Object originalGlobal;	
+	private Object originalGlobal;
 
 	@Override
 	public void setup(OsmandApplication app) {
@@ -92,6 +93,14 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		}
 		accessCodePref = osmandSettings.registerStringPreference(ACCESS_CODE, "").makeGlobal();
 		toursFolder = new File(osmandSettings.getExternalStorageDirectory(), "osmand/tours");
+
+	}
+
+	@Override
+	public File getExternalStorageDir() {
+		final String defaultLocation = Environment.getExternalStorageDirectory().getAbsolutePath();
+		return new File(originalApi.getString(originalGlobal, OsmandSettings.EXTERNAL_STORAGE_DIR,
+				defaultLocation));
 	}
 
 	public boolean setAccessCode(String acCode) {
