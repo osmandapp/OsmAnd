@@ -32,6 +32,7 @@ public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment {
 				"utf-8");
 		if (osmandMapTileView != null){
 			osmandMapTileView.setVisibility(View.VISIBLE);
+			osmandMapTileView.refreshMap();
 		}
 	}
 }
