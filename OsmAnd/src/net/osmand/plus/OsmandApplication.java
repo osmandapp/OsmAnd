@@ -750,7 +750,8 @@ public class OsmandApplication extends Application {
 		if(path == null) {
 			path = "";
 		}
-		return new File(getSettings().getExternalStorageDirectory(), IndexConstants.APP_DIR + path);
+
+		return new File(getAppCustomization().getExternalStorageDir(), IndexConstants.APP_DIR + path);
 	}
 
 	public void applyTheme(Context c) {
