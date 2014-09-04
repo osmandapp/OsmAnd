@@ -178,4 +178,8 @@ public class OsmAndAppCustomization {
 	public int getWaypointSearchRadius(int searchDeviationRadius, int type) {
 		return searchDeviationRadius;
 	}
+
+	public File getExternalStorageDir() {
+		return osmandSettings.getExternalStorageDirectory();
+	}
 }
