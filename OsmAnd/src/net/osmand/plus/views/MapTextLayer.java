@@ -24,6 +24,8 @@ public class MapTextLayer extends OsmandMapLayer {
 	public static final int TEXT_LINES = 3;
 	private Paint paintTextIcon;
 	private OsmandMapTileView view;
+	private boolean alwaysVisible;
+	
 	
 	
 	public interface MapTextProvider<T> {
@@ -47,14 +49,22 @@ public class MapTextLayer extends OsmandMapLayer {
 		}
 	}
 	
+	public boolean isAlwaysVisible() {
+		return alwaysVisible;
+	}
+	
+	public void setAlwaysVisible(boolean alwaysVisible) {
+		this.alwaysVisible = alwaysVisible;
+	}
+	
 	public boolean isVisible() {
-		return view.getSettings().SHOW_POI_LABEL.get();
+		return view.getSettings().SHOW_POI_LABEL.get() || isAlwaysVisible();
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (!view.getSettings().SHOW_POI_LABEL.get()) {
+		if (!isVisible()) {
 			return;
 		}
 		TIntHashSet set = new TIntHashSet();

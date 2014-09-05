@@ -36,6 +36,7 @@ public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment im
 		osmandMapTileView.removeAllLayers();
 		MapVectorLayer mapVectorLayer = new MapVectorLayer(null);
 		MapTextLayer mapTextLayer = new MapTextLayer();
+		mapTextLayer.setAlwaysVisible(true);
 		// 5.95 all labels
 		osmandMapTileView.addLayer(mapTextLayer, 5.95f);
 		osmandMapTileView.addLayer(mapVectorLayer, 0.5f);
@@ -78,6 +79,7 @@ public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment im
 			}
 			protected void onPostExecute(Void result) {
 				gpxLayer.setGivenGpx(gpx);
+				calculateLatLon();
 				osmandMapTileView.refreshMap();
 			};
 		}.execute((Void)null);
