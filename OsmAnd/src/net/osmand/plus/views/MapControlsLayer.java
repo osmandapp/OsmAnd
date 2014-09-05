@@ -177,7 +177,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showNavigationControls = mapActivity.getMyApplication().getAppCustomization().showNavigationControls();
 		checkVisibilityAndDraw(showRouteCalculationControls, mapSmallMenuControls, canvas, tileBox, nightMode);
 		checkVisibilityAndDraw(showNavigationControls && showRouteCalculationControls, mapCancelNavigationControl, canvas, tileBox, nightMode);
-		checkVisibilityAndDraw(showRouteCalculationControls, mapInfoNavigationControl, canvas, tileBox, nightMode);
+		checkVisibilityAndDraw(showNavigationControls && showRouteCalculationControls, mapInfoNavigationControl, canvas, tileBox, nightMode);
 		checkVisibilityAndDraw(showNavigationControls && showRouteCalculationControls, mapAppModeControl, canvas, tileBox, nightMode);
 		checkVisibilityAndDraw(showRouteCalculationControls, mapNavigationControl, canvas, tileBox, nightMode);
 		checkVisibilityAndDraw(showRouteCalculationControls, zoomSideControls, canvas, tileBox, nightMode);
