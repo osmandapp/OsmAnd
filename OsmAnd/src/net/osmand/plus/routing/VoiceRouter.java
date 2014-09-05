@@ -1,13 +1,17 @@
 package net.osmand.plus.routing;
 
 
+import java.io.IOException;
 import java.util.List;
 
+import android.media.AudioManager;
+import android.media.SoundPool;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -225,6 +229,7 @@ public class VoiceRouter {
 		if (p == null){
 			return;
 		}
+		makeSound();
 		String text = getText(null, points,null);
 		p.arrivedAtWayPoint(text).play();
 	}
@@ -234,6 +239,7 @@ public class VoiceRouter {
 		if (p == null){
 			return;
 		}
+		makeSound();
 		String text = getText(null, points,null);
 		p.arrivedAtFavorite(text).play();
 	}
@@ -253,6 +259,7 @@ public class VoiceRouter {
 			return;
 		}
 		double[] dist = new double[1];
+		makeSound();
 		String text = getText(location, points, dist);
 		p.goAhead(dist[0], null).andArriveAtFavorite(text).play();
 	}
@@ -263,6 +270,7 @@ public class VoiceRouter {
 			return;
 		}
 		double[] dist = new double[1];
+		makeSound();
 		String text = getText(location, points, dist);
 		p.goAhead(dist[0], null).andArriveAtWayPoint(text).play();
 	}
@@ -773,7 +781,20 @@ public class VoiceRouter {
 		}
 	}
 
-	
+	private void makeSound(){
+		SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+		int soundClick = -1;
+		boolean success = true;
+		try {
+			soundClick = sp.load(settings.getContext().getAssets().openFd("sounds/airhorn.ogg"), 1);
+		} catch (IOException e){
+			e.printStackTrace();
+			success = false;
+		}
+		if (success){
+			sp.play(soundClick, 1 ,1, 0, 0, 1);
+		}
+	}
 
 
 }
