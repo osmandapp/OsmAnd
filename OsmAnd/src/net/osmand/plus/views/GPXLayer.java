@@ -8,6 +8,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
@@ -64,6 +65,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private Paint paintTextIcon;
 
 	private OsmandRenderer osmandRenderer;
+
+	private List<List<WptPt>> points;
+	private GPXFile gpx;
+
 
 //	private Drawable favoriteIcon;
 	
@@ -160,16 +165,21 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
-		cache.clear();
-		if (!selectedGPXFiles.isEmpty()) {
-			drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
-			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-			drawSelectedFilesSplits(canvas, tileBox, selectedGPXFiles, settings);
-			drawSelectedFilesPoints(canvas, tileBox, selectedGPXFiles);
-		}
-		if(textLayer.isVisible()) {
-			textLayer.putData(this, cache);
+		if(points != null) {
+			updatePaints(0, false, settings, tileBox);
+			drawSegments(canvas, tileBox, points);
+		} else {
+			List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
+			cache.clear();
+			if (!selectedGPXFiles.isEmpty()) {
+				drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
+				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+				drawSelectedFilesSplits(canvas, tileBox, selectedGPXFiles, settings);
+				drawSelectedFilesPoints(canvas, tileBox, selectedGPXFiles);
+			}
+			if (textLayer != null && textLayer.isVisible()) {
+				textLayer.putData(this, cache);
+			}
 		}
 	}
 	
@@ -437,6 +447,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	@Override
 	public String getText(WptPt o) {
 		return o.name;
+	}
+
+
+	public void setGivenGpx(GPXFile gpx) {
+		this.gpx = gpx;
+		this.points = (gpx == null ? null :	gpx.proccessPoints());
 	}
 
 

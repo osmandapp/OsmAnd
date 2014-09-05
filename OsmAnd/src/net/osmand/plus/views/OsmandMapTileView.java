@@ -272,6 +272,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		zOrders.remove(layer);
 		layer.destroyLayer();
 	}
+	
+	public synchronized void removeAllLayers() {
+		while(layers.size() > 0) {
+			removeLayer(layers.get(0));
+		}
+	}
 
 	public List<OsmandMapLayer> getLayers() {
 		return layers;
@@ -356,7 +362,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	public float getSettingsZoomScale() {
-		return settings.getSettingsZoomScale(getDensity());
+		return getSettings().getSettingsZoomScale(getDensity());
 	}
 
 	public float getZoomScale() {

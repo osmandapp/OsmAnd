@@ -60,6 +60,8 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 public class SherpafyCustomization extends OsmAndAppCustomization {
 	
@@ -501,7 +503,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		}
 	}
 	
-	public void showFavoriteDialog(MapActivity mapActivity, StageInformation stage, StageFavorite sf) {
+	public void showFavoriteDialog(SherlockFragmentActivity mapActivity, StageInformation stage, StageFavorite sf) {
 		Bundle bl = new Bundle();
 		bl.putInt(SherpafyFavoriteFragment.STAGE_PARAM, stage.getOrder());
 		bl.putString(SherpafyFavoriteFragment.TOUR_PARAM, stage.getTour().getId());
@@ -620,7 +622,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	@Override
 	public void createLayers(OsmandMapTileView mapView, MapActivity activity) {
-		mapView.addLayer(new StageFavoritesLayer(app), 4.1f);
+		mapView.addLayer(new StageFavoritesLayer(app, null), 4.1f);
 	}
 	
 	public boolean isWaypointGroupVisible(int waypointType, RouteCalculationResult route) {
