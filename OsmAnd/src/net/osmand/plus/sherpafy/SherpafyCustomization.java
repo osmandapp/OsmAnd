@@ -662,7 +662,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		if (customization.getSelectedStage() != null) {
 			gpx = customization.getSelectedStage().getGpx();
 			List<SelectedGpxFile> sgpx = app.getSelectedGpxHelper().getSelectedGPXFiles();
-			if (gpx == null && sgpx.size() > 0) {
+			if (gpx == null){
 				app.getSelectedGpxHelper().clearAllGpxFileToShow();
 			} else if (sgpx.size() != 1 || sgpx.get(0).getGpxFile() != gpx) {
 				app.getSelectedGpxHelper().clearAllGpxFileToShow();
@@ -672,11 +672,13 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				}
 			}
 		}
-		WptPt lp = gpx.getLastPoint();
-		if (lp != null) {
-			TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-			targetPointsHelper.navigateToPoint(new LatLon(lp.lat, lp.lon), true, -1, lp.name);
-			app.getSettings().navigateDialog(true);
+		if (gpx != null) {
+			WptPt lp = gpx.getLastPoint();
+			if (lp != null) {
+				TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+				targetPointsHelper.navigateToPoint(new LatLon(lp.lat, lp.lon), true, -1, lp.name);
+				app.getSettings().navigateDialog(true);
+			}
 		}
 		String mode = stage != null ? stage.getMode() : tour.getMode();
 		if (!Algorithms.isEmpty(mode)) {
@@ -689,7 +691,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		if (startOver && point != null) {
 			goToMap(a, new LatLon(point.lat, point.lon));
 		} else {
-			goToMap(a, null);
+			goToMap(a, stage.getStartPoint());
 		}
 	}
 	
