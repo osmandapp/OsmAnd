@@ -74,7 +74,9 @@ public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment im
 			private GPXFile gpx;
 			@Override
 			protected Void doInBackground(Void... params) {
-				gpx = GPXUtilities.loadGPXFile(app, stage.gpxFile);
+				if (stage.gpxFile != null){
+					gpx = GPXUtilities.loadGPXFile(app, stage.gpxFile);
+				}
 				return null;
 			}
 			protected void onPostExecute(Void result) {
