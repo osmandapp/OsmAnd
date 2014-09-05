@@ -151,6 +151,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 						shadowPaint.setColorFilter(cf);
 						shadowPaint.setStrokeWidth(paint.getStrokeWidth() + 2 * rc.getComplexValue(req, rrs.PROPS.R_SHADOW_RADIUS));
 					}
+				} else {
+					System.err.println("Rendering attribute gpx is not found !");
+					paint.setStrokeWidth(7 * view.getDensity());
 				}
 			}
 		}
