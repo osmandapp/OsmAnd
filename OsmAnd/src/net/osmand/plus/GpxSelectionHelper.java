@@ -196,6 +196,7 @@ public class GpxSelectionHelper {
 				}
 				
 				item.description = GpxUiHelper.getDescription(app, analysis, true);
+				item.analysis = analysis;
 				String name = "";
 //				if(group.track.segments.size() > 1) {
 //					name += t++ + ". ";
@@ -570,6 +571,7 @@ public class GpxSelectionHelper {
 	
 	public static class GpxDisplayItem {
 		
+		public GPXTrackAnalysis analysis;
 		public GpxDisplayGroup group;
 		public WptPt locationStart;
 		public WptPt locationEnd;

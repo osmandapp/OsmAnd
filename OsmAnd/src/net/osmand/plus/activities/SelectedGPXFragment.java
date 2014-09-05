@@ -4,6 +4,7 @@ import gnu.trove.list.array.TIntArrayList;
 
 import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.data.FavouritePoint;
@@ -52,6 +53,10 @@ import com.actionbarsherlock.view.MenuInflater;
 public class SelectedGPXFragment extends OsmandExpandableListFragment {
 
 	public static final int SEARCH_ID = -1;
+	
+	public static final String ARG_TO_EXPAND_TRACK_INFO = "ARG_TO_EXPAND_TRACK_INFO";
+	public static final String ARG_TO_FILTER_SHORT_TRACKS = "ARG_TO_FILTER_SHORT_TRACKS";
+	public static final String ARG_TO_HIDE_CONFIG_BTN = "ARG_TO_HIDE_CONFIG_BTN";
 //	private SearchView searchView;
 	private OsmandApplication app;
 	private GpxSelectionHelper selectedGpxHelper;
@@ -75,6 +80,11 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		return activity;
 	}
 	
+	
+	public boolean isArgumentTrue(String arg) {
+		Bundle args = getArguments();
+		return args != null && args.getBoolean(arg);
+	}
 	
 
 	@Override
@@ -100,7 +110,30 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			adapter = new SelectedGPXAdapter(getListView());
 			setAdapter(adapter);
 		}
-		adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
+		List<GpxDisplayGroup> groups = selectedGpxHelper.getDisplayGroups();
+		if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
+			groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>(groups);
+			Iterator<GpxDisplayGroup> it = groups.iterator();
+			while (it.hasNext()) {
+				GpxDisplayGroup group = it.next();
+				Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
+				while (item.hasNext()) {
+					GpxDisplayItem it2 = item.next();
+					if (it2.analysis != null && it2.analysis.totalDistance < 100) {
+						item.remove();
+					}
+				}
+				if (group.getModifiableList().isEmpty()) {
+					it.remove();
+				}
+			}
+		}
+		adapter.setDisplayGroups(groups);
+		if(isArgumentTrue(ARG_TO_EXPAND_TRACK_INFO)){
+			for(int i = 0; i < groups.size(); i++) {
+				getListView().expandGroup(i);
+			}
+		}
 	}
 
 	@Override
@@ -129,6 +162,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		//((ViewGroup)getExpandableListView().getParent()).addView(tv); 
 		getExpandableListView().setEmptyView(tv);
 		setContent();
+		
 		return vs;
 	}
 	
@@ -485,13 +519,18 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				row = inflater.inflate(R.layout.expandable_list_item_category_btn, parent, false);
 				fixBackgroundRepeat(row);
 			}
-			adjustIndicator(groupPosition, isExpanded, row);
+			if(isArgumentTrue(ARG_TO_EXPAND_TRACK_INFO)) {
+				row.findViewById(R.id.explist_indicator).setVisibility(View.GONE);
+			} else {
+				adjustIndicator(groupPosition, isExpanded, row);
+			}
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final GpxDisplayGroup model = getGroup(groupPosition);
 			label.setText(model.getGroupName());
 			final ImageView ch = (ImageView) row.findViewById(R.id.check_item);
-			
-			if(model.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
+			if(isArgumentTrue(ARG_TO_HIDE_CONFIG_BTN)) {
+				ch.setVisibility(View.GONE);
+			} else if(model.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
 				ch.setVisibility(View.VISIBLE);
 				ch.setImageDrawable(getMyActivity().getResources().getDrawable(
 						app.getSettings().isLightContent() ? R.drawable.ic_action_settings_light
@@ -564,7 +603,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			row.setTag(child);
 				
 			label.setText(Html.fromHtml(child.name.replace("\n", "<br/>")));
-			if (child.expanded && !Algorithms.isEmpty(child.description)) {
+			if ((child.expanded || isArgumentTrue(ARG_TO_EXPAND_TRACK_INFO)) && !Algorithms.isEmpty(child.description)) {
 				String d = child.description;
 				if (child.group.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
 					d += "<br/>" + app.getString(R.string.local_index_gpx_info_show);

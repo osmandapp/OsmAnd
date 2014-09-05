@@ -351,6 +351,11 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			Builder bld = new AlertDialog.Builder(getActivity());
 			if(app.getSelectedGpxHelper().isShowingAnyGpxFiles()) {
 				SelectedGPXFragment sgf = new SelectedGPXFragment();
+				Bundle iargs = new Bundle();
+				iargs.putBoolean(SelectedGPXFragment.ARG_TO_EXPAND_TRACK_INFO, true);
+				iargs.putBoolean(SelectedGPXFragment.ARG_TO_FILTER_SHORT_TRACKS, true);
+				iargs.putBoolean(SelectedGPXFragment.ARG_TO_HIDE_CONFIG_BTN, true);
+				sgf.setArguments(iargs);
 				sgf.onAttach(getActivity());
 				bld.setView(sgf.onCreateView(getActivity().getLayoutInflater(), null, null));
 			} else {
