@@ -1927,4 +1927,5 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="pause_navigation">Zaustavi navigacijo</string>
     <string name="save_global_track_interval_descr">Izerite interval beleženja za splošno snemanje sledi (omogočeno z gumbom za snemanje GPX na zemljevidu)</string>
 	<string name="save_track_to_gpx_globally_descr">Splošno beleženje položaja v datoteko GPX lahko vklopite ali izklopite z gumbom za snemanje na ekranu z zemljevidom</string>
-	</resources>
+	<string name="record_plugin_description">Shranite vaše sledi s pritiskom na gumb na oknu z zemljevidom. Pokaži nastavitve za snemanje vaših potovanj v krajevne datoteke GPX ali v oblak z uporabo spletnih storitev.</string>
+    </resources>
