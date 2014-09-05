@@ -710,4 +710,9 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		}
 		return searchDeviationRadius;
 	}
+
+	@Override
+	public boolean showNavigationControls() {
+		return false;
+	}
 }
