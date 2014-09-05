@@ -106,11 +106,7 @@ public class SherpafyStageFragment extends SherlockFragment {
 			((TourViewActivity) getSherlockActivity()).selectMenu(tour);
 			return true;
 		} else if(item.getItemId() == START) {
-			if (stage.gpxFile != null){
-				((TourViewActivity) getSherlockActivity()).startStage(stage);
-			} else{
-				Toast.makeText(app, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
-			}
+			((TourViewActivity) getSherlockActivity()).startStage(stage);
 			return true;
 		} else if(item.getItemId() == NEXT_STAGE) {
 			((TourViewActivity) getSherlockActivity()).selectMenu(customization.getNextAvailableStage(tour));
