@@ -331,7 +331,7 @@ public class WaypointHelper {
 					}
 					if (!approachPoints.isEmpty()) {
 						if (type == WAYPOINTS) {
-							getVoiceRouter().approachWaypoint(lastKnownLocation, announcePoints);
+							getVoiceRouter().approachWaypoint(lastKnownLocation, approachPoints);
 						} else if (type == POI) {
 							getVoiceRouter().approachPoi(lastKnownLocation, announcePoints);
 						} else if (type == ALARMS) {
