@@ -127,7 +127,8 @@ public class SherpafyStageFragment extends SherlockFragment {
 		if (stage != null) {
 			mTabsAdapter.addTab(tabHost.newTabSpec("INFO").setIndicator(getString(R.string.sherpafy_stage_tab_info)),
 					SherpafyStageInfoFragment.class);
-			if (!stage.getItinerary().equals("")) {
+			if (!stage.getItinerary().equals("") && 
+					(stage.getGpx() != null || stage.getStartPoint() != null)) {
 				mTabsAdapter.addTab(
 						tabHost.newTabSpec("ROUTE").setIndicator(getString(R.string.sherpafy_stage_tab_route)),
 						SherpafyStageItineraryFragment.class);

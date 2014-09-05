@@ -1,12 +1,20 @@
 package net.osmand.plus.sherpafy;
 
+import java.util.List;
+
+import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.GPXLayer;
+import net.osmand.plus.views.MapTextLayer;
+import android.os.AsyncTask;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -25,13 +33,19 @@ public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment im
 	protected void updateView(WebView description, ImageView icon, TextView additional, TextView text, TextView header) {
 		app.getResourceManager().getMapTileDownloader().addDownloaderCallback(this);
 		osmandMapTileView.setVisibility(View.VISIBLE);
+		osmandMapTileView.removeAllLayers();
 		MapVectorLayer mapVectorLayer = new MapVectorLayer(null);
+		MapTextLayer mapTextLayer = new MapTextLayer();
+		// 5.95 all labels
+		osmandMapTileView.addLayer(mapTextLayer, 5.95f);
 		osmandMapTileView.addLayer(mapVectorLayer, 0.5f);
-		osmandMapTileView.addLayer(new GPXLayer(), 0.9f);
+		final GPXLayer gpxLayer = new GPXLayer();
+		gpxLayer.setGivenGpx(stage.getGpx());
+		osmandMapTileView.addLayer(gpxLayer, 0.9f);
+		osmandMapTileView.addLayer(new StageFavoritesLayer(app, stage), 4.1f);
 		osmandMapTileView.setMainLayer(mapVectorLayer);
 		mapVectorLayer.setVisible(true);
-		osmandMapTileView.setLatLon(stage.getStartPoint().getLatitude(), stage.getStartPoint().getLongitude());
-		osmandMapTileView.setIntZoom(14);
+		calculateLatLon();
 		if (stage.getItineraryBitmap() != null && !HIDE_ITINERARY_IMG) {
 			icon.setImageBitmap(stage.getItineraryBitmap());
 		} else {
@@ -53,6 +67,57 @@ public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment im
 		String content = HIDE_ITINERARY_IMG ? "" : stage.getItinerary();
 		description.loadData("<html><body>" + ins + content + "</body></html", "text/html; charset=utf-8",
 				"utf-8");
+		
+		new AsyncTask<Void, Void, Void>() {
+
+			private GPXFile gpx;
+			@Override
+			protected Void doInBackground(Void... params) {
+				gpx = GPXUtilities.loadGPXFile(app, stage.gpxFile);
+				return null;
+			}
+			protected void onPostExecute(Void result) {
+				gpxLayer.setGivenGpx(gpx);
+				osmandMapTileView.refreshMap();
+			};
+		}.execute((Void)null);
+	}
+
+	protected void calculateLatLon() {
+
+		WptPt st = stage.getGpx() == null ? null : stage.getGpx().findPointToShow();
+		double llat = st == null ? stage.getStartPoint().getLatitude() : st.lat;
+		double llon = st == null ? stage.getStartPoint().getLongitude() : st.lon;
+		double left = llon, right = llon;
+		double top = llat, bottom = llat;
+		if (stage.getGpx() != null) {
+			for (List<WptPt> list : stage.getGpx().proccessPoints()) {
+				for (WptPt l : list) {
+					left = Math.min(left, l.getLongitude());
+					right = Math.max(right, l.getLongitude());
+					top = Math.max(top, l.getLatitude());
+					bottom = Math.min(bottom, l.getLatitude());
+				}
+			}
+		}
+		osmandMapTileView.setIntZoom(15);
+		RotatedTileBox tb = new RotatedTileBox(osmandMapTileView.getCurrentRotatedTileBox());
+		tb.setPixelDimensions(3 * tb.getPixWidth() / 4, 3 * tb.getPixHeight() / 4);
+		double clat = bottom / 2 + top / 2;
+		double clon = left / 2 + right / 2;
+		tb.setLatLonCenter(clat, clon);
+		while (tb.getZoom() >= 7 && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
+			tb.setZoom(tb.getZoom() - 1);
+		}
+		osmandMapTileView.setLatLon(tb.getCenterLatLon().getLatitude(), tb.getCenterLatLon().getLongitude());
+		osmandMapTileView.setComplexZoom(tb.getZoom(), osmandMapTileView.getSettingsZoomScale());
+
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		osmandMapTileView.refreshMap(true);
 	}
 	
 	@Override

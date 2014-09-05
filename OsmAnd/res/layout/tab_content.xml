@@ -22,7 +22,7 @@
             android:layout_height="0dp"
             />
 
-        <android.support.v4.view.ViewPager
+        <net.osmand.plus.CustomPager
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"

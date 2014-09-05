@@ -72,11 +72,6 @@ public class SherpafyStageInfoFragment extends SherlockFragment {
 	}
 	
 	
-	@Override
-	public void onResume() {
-		super.onResume();
-		osmandMapTileView.refreshMap();
-	}
 
 
 	protected void updateView(WebView description, ImageView icon, TextView additional, TextView text, TextView header) {
