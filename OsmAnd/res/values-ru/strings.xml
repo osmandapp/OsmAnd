@@ -1234,7 +1234,7 @@
 	\n\t* Верхняя левая кнопка на карте заменяет кнопку меню
     </string>
     <string name="monitoring_settings">Запись поездок</string>
-    <string name="monitoring_settings_descr">Настройка записи ваших поездок</string>
+    <string name="monitoring_settings_descr">Настройки записи поездок</string>
     <string name="osmand_monitoring_plugin_description">Включение трекинга и навигации во спящем режиме (экран выключен) с помощью периодического пробуждения устройства GPS. Настройка записи поездок в локальные файлы GPX или в Интернете с помощью веб-службы.</string>
     <string name="osmand_monitoring_plugin_name">Службы мониторинга</string>
     <string name="choose_osmand_theme_descr">Выбор темы приложения</string>
@@ -1752,7 +1752,7 @@
     <string name="distance">Расстояние</string>
     <string name="gpx_info_subtracks">"Подтрек: %1$s "</string>
 	<string name="route_descr_destination">" "</string>
-    <string name="record_plugin_name">Запись ваших поездок</string>
+    <string name="record_plugin_name">Запись поездок</string>
     <string name="int_hour">час</string>
     <string name="duration">Продолжительность</string>
     <string name="save_track_to_gpx_globally">Журналирование трека в файл GPX</string>
