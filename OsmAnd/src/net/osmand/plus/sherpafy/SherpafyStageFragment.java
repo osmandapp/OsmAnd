@@ -3,6 +3,7 @@ package net.osmand.plus.sherpafy;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import android.widget.Toast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.sherpafy.TourInformation.StageFavoriteGroup;
@@ -105,7 +106,11 @@ public class SherpafyStageFragment extends SherlockFragment {
 			((TourViewActivity) getSherlockActivity()).selectMenu(tour);
 			return true;
 		} else if(item.getItemId() == START) {
-			((TourViewActivity) getSherlockActivity()).startStage(stage);
+			if (stage.gpxFile != null){
+				((TourViewActivity) getSherlockActivity()).startStage(stage);
+			} else{
+				Toast.makeText(app, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
+			}
 			return true;
 		} else if(item.getItemId() == NEXT_STAGE) {
 			((TourViewActivity) getSherlockActivity()).selectMenu(customization.getNextAvailableStage(tour));
