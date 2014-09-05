@@ -182,4 +182,6 @@ public class OsmAndAppCustomization {
 	public File getExternalStorageDir() {
 		return osmandSettings.getExternalStorageDirectory();
 	}
+
+	public boolean showNavigationControls() { return true;}
 }
