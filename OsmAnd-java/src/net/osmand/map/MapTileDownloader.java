@@ -12,12 +12,12 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;
+import net.osmand.util.LIFOBlockingDeque;
 
 import org.apache.commons.logging.Log;
 
@@ -106,7 +106,7 @@ public class MapTileDownloader {
 	
 	public MapTileDownloader(int numberOfThreads){
 		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads, TILE_DOWNLOAD_SECONDS_TO_WORK, 
-				TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+				TimeUnit.SECONDS, new LIFOBlockingDeque<Runnable>());
 		// 1.6 method but very useful to kill non-running threads
 //		threadPoolExecutor.allowCoreThreadTimeOut(true);
 		currentlyDownloaded = Collections.synchronizedSet(new HashSet<File>());
