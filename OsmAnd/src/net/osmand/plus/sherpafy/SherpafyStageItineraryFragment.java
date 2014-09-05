@@ -46,7 +46,7 @@ public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment im
 		osmandMapTileView.addLayer(new StageFavoritesLayer(app, stage), 4.1f);
 		osmandMapTileView.setMainLayer(mapVectorLayer);
 		mapVectorLayer.setVisible(true);
-		calculateLatLon();
+		calculateLatLon(stage.getGpx());
 		if (stage.getItineraryBitmap() != null && !HIDE_ITINERARY_IMG) {
 			icon.setImageBitmap(stage.getItineraryBitmap());
 		} else {
@@ -79,21 +79,21 @@ public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment im
 			}
 			protected void onPostExecute(Void result) {
 				gpxLayer.setGivenGpx(gpx);
-				calculateLatLon();
+				calculateLatLon(gpx);
 				osmandMapTileView.refreshMap();
 			};
 		}.execute((Void)null);
 	}
 
-	protected void calculateLatLon() {
+	protected void calculateLatLon(GPXFile gpx) {
 
-		WptPt st = stage.getGpx() == null ? null : stage.getGpx().findPointToShow();
+		WptPt st = gpx == null ? null : gpx.findPointToShow();
 		double llat = st == null ? stage.getStartPoint().getLatitude() : st.lat;
 		double llon = st == null ? stage.getStartPoint().getLongitude() : st.lon;
 		double left = llon, right = llon;
 		double top = llat, bottom = llat;
-		if (stage.getGpx() != null) {
-			for (List<WptPt> list : stage.getGpx().proccessPoints()) {
+		if (gpx != null) {
+			for (List<WptPt> list : gpx.proccessPoints()) {
 				for (WptPt l : list) {
 					left = Math.min(left, l.getLongitude());
 					right = Math.max(right, l.getLongitude());
