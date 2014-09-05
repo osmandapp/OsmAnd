@@ -264,10 +264,16 @@ public class RenderingRuleProperty {
 			@Override
 			public boolean accept(int ruleValue, int renderingProperty, RenderingRuleSearchRequest req) {
 				BinaryMapDataObject obj = req.getObject();
-				if (obj == null) {
-					return true;
-				}
 				String val = req.getStorage().getStringValue(ruleValue);
+				if (obj == null) {
+					int vl = req.getIntPropertyValue(this);
+					if(vl == -1) {
+						return false;
+					}
+					String val2 = req.getStorage().getStringValue(vl);
+					return val != null && val.equals(val2);
+				}
+				
 				int i = val.indexOf('=');
 				if (i != -1) {
 					String ts = val.substring(0, i);
