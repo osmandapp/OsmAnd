@@ -106,6 +106,9 @@ public class RouteLayer extends OsmandMapLayer {
 						shadowPaint.setColorFilter(cf);
 						shadowPaint.setStrokeWidth(paint.getStrokeWidth() + 2 * rc.getComplexValue(req, rrs.PROPS.R_SHADOW_RADIUS));
 					}
+				} else {
+					System.err.println("Rendering attribute route is not found !");
+					paint.setStrokeWidth(7 * view.getDensity());
 				}
 			}
 		}

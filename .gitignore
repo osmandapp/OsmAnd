@@ -1,5 +1,5 @@
 *.render.xml
-*.template_render.xml
+*.render_template.xml
 *.map_styles_presets.xml
 routing*.xml
 rendering_types.xml
