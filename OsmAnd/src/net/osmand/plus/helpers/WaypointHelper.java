@@ -333,7 +333,7 @@ public class WaypointHelper {
 						if (type == WAYPOINTS) {
 							getVoiceRouter().approachWaypoint(lastKnownLocation, approachPoints);
 						} else if (type == POI) {
-							getVoiceRouter().approachPoi(lastKnownLocation, announcePoints);
+							getVoiceRouter().approachPoi(lastKnownLocation, approachPoints);
 						} else if (type == ALARMS) {
 							EnumSet<AlarmInfoType> ait = EnumSet.noneOf(AlarmInfoType.class);
 							for(LocationPointWrapper pw : announcePoints) {
@@ -343,7 +343,7 @@ public class WaypointHelper {
 								app.getRoutingHelper().getVoiceRouter().announceAlarm(t);
 							}
 						} else if (type == FAVORITES) {
-							getVoiceRouter().approachFavorite(lastKnownLocation, announcePoints);
+							getVoiceRouter().approachFavorite(lastKnownLocation, approachPoints);
 						}
 					}
 				}
