@@ -520,7 +520,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	public boolean onCreateOptionsMenu(Menu menu) {
 		if (sequentialSearch) {
 			boolean light = ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
-			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.get_directions)
+			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to)
 					.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light
 					: R.drawable.ic_action_gdirections_dark);

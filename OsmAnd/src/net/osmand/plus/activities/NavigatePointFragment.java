@@ -99,7 +99,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 		boolean light = app.getSettings().isLightActionBar();
-		com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.get_directions).setShowAsActionFlags(
+		com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to).setShowAsActionFlags(
 				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
