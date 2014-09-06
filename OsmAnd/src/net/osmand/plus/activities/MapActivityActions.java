@@ -1067,7 +1067,7 @@ public class MapActivityActions implements DialogProvider {
 		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		
 		
-		Item dir = qa.item(R.string.get_directions).icons(
+		Item dir = qa.item(R.string.context_menu_item_directions_to).icons(
 				R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light);
 		dir.listen(
 				new OnContextMenuClick() {
