@@ -1,5 +1,22 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="tip_navigation">Navigation starten</string>
+	<string name="tip_navigation_t">Die Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte, (dann Kurzklick auf den Positionsmarker und das Auswählen des Menüpunktes \'Navigiere zu\'), oder über die Funktion \'Navigiere zu\' bei Klick auf ein Ergebnis einer Such-Liste oder einen Favoriten.
+		\n\nDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.
+		\n\nDie Option \'Navigation starten\' beginnt eine Live-Navigation mit Sprachansagen (falls konfiguriert), \'Route nur anzeigen\' zeigt eine statische Route ohne Anpassungen bei Positionsveränderung.
+		\n\nDie Route zu einem gewählten Ziel von einem anderen Punkt als dem gegenwärtigen Standort aus kann angezeigt werden durch Klick auf den gewünschten Ausgangspunkt und dann Auswahl der \'Verwende Position\'-Kontextmenüoption \'Navigiere von\'.
+		\n\nVerwenden Sie \'Navigiere von\' zusammen mit der Option \'Navigation starten\', wird OsmAnd auf die aktuelle Position umschalten, sobald sie gefunden ist. Dies kann also verwendet werden, um eine Route bereits anzeigen zu lassen bevor GPS die eigene Position gefunden hat. Mit der Option \'Route nur anzeigen\' hingegen kann man sich eine (statische) Route von jedem beliebigen Standort aus zeigen lassen.
+	</string>
+	<string name="tip_search">Suchen</string>
+	<string name="tip_search_t">Um bestimmte Orte zu finden, können Sie entweder auf der Landkarte über das \'Verwende Position\'-Kontextmenü \'In der Nähe suchen\' aufrufen, oder den Suchbildschirm über \'Menü\' → \'Suche\' erreichen.
+		\n\nEs gibt folgende Suchmechanismen:
+		\n\t* Eingabe einer Adresse
+		\n\t* Angabe von Koordinaten
+		\n\t* als POI (via Typ oder nach Name)
+		\n\t* über die Such-Historie
+		\n\t* mittels Ihrer Favoriten
+		\n\nEin Kontextmenü für jeden Treffer einer Ergebnisliste bietet Optionen wie \'Navigiere zu\' oder \'Auf Karte anzeigen\'.
+	</string>
 	<string name="confirm_every_run">Jedesmal nachfragen</string>
 	<string name="save_global_track_interval_descr">Aufzeichnungs-Intervall für die generelle Positionsaufzeichnung (via Schaltfläche \'GPX-Aufnahme\' auf dem Kartenbildschirm)</string>
 	<string name="save_global_track_interval">Generelles Aufzeichnungs-Intervall</string>
@@ -362,14 +379,6 @@
 	</string>
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
 	<string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
-	<string name="tip_navigation">Navigation starten</string>
-	<string name="tip_navigation_t">Die Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte, (dann Kurzklick auf den Positionsmarker und das Auswählen des Menüpunktes \'Navigiere zu\'), oder über die Funktion \'Navigation\' bei Klick auf ein Ergebnis einer Such-Liste oder einen Favoriten.
-		\n\nDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.
-		\n\nDie Option \'Navigation starten\' beginnt eine Live-Navigation mit Sprachansagen (falls konfiguriert), \'Route nur anzeigen\' zeigt eine statische Route ohne Anpassungen bei Positionsveränderung.
-		\n\nDie Route zu einem gewählten Ziel von einem anderen Punkt als dem gegenwärtigen Standort aus kann angezeigt werden durch Klick auf den gewünschten Ausgangspunkt und dann Auswahl der \'Verwende Position\'-Kontextmenüoption \'Navigiere von\'.
-		\n\nVerwenden Sie \'Navigiere von\' zusammen mit der Option \'Navigation starten\', wird OsmAnd auf die aktuelle Position umschalten, sobald sie gefunden ist. Dies kann also verwendet werden, um eine Route bereits anzeigen zu lassen bevor GPS die eigene Position gefunden hat. Mit der Option \'Route nur anzeigen\' hingegen kann man sich eine (statische) Route von jedem beliebigen Standort aus zeigen lassen.
-	</string>
-	
 	<string name="use_transparent_map_theme">Transparentes Layout</string>
 	<string name="native_library_not_supported">Native Bibliothek wird auf diesem Gerät nicht unterstützt.</string>
 	<string name="init_native_library">Native Bibliothek wird initialisiert…</string>
@@ -722,16 +731,6 @@
 	<string name="tip_app_mode">Profil verwenden</string>
 	<string name="tip_app_mode_t_v2">OsmAnd unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke.
 		\n\nDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad oder Fußgänger) auf dem Kartenbildschirm gewählt werden, oder auch beim Berechnen einer Route (Transportmittel).
-	</string>
-	<string name="tip_search">Suchen</string>
-	<string name="tip_search_t">Um bestimmte Orte zu finden, können Sie entweder auf der Landkarte über das \'Verwende Position\'-Kontextmenü \'In der Nähe suchen\' aufrufen, oder den Suchbildschirm über \'Menü\' → \'Suche\' erreichen.
-		\n\nEs gibt folgende Suchmechanismen:
-		\n\t* Eingabe einer Adresse
-		\n\t* Angabe von Koordinaten
-		\n\t* als POI (via Typ oder nach Name)
-		\n\t* über die Such-Historie
-		\n\t* mittels Ihrer Favoriten
-		\n\nEin Kontextmenü für jeden Treffer einer Ergebnisliste bietet Optionen wie \'Navigation\' oder \'Auf Karte anzeigen\'.
 	</string>
 	<string name="tip_map_context_menu">\'Verwende Position\' Menü</string>
 	<string name="tip_map_context_menu_t">Das \'Verwende Position\'-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.

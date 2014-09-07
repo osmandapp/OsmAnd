@@ -9,6 +9,23 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="tip_navigation">Navigation</string>
+	<string name="tip_navigation_t">To get directions to a place, either directly long-click on it on the map, (then tap its description marker and select \'Directions to\'), or select \'Directions to\' after tapping any entry in a search results list or favorite list. 
+		\n\nThe destination is marked as a target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+		\n\nYou may chose either \'Start navigation\', which means that OsmAnd would live-guide you, give you voice instructions (if enabled), etc. Or you can select \'Display route\', resulting in static route without any live-guideance or adjustments as you move.
+		\n\nTo display a route to the selected destination from any point other than your current position, select the start point on the map and tap \'Directions from\'.
+		\n\nIf you use \'Directions from\' together with \'Start navigation\', OsmAnd will switch to your actual position as soon as it is found (so this can be used to jump-start routing before the position is found), while \'Directions from\' in combination with \'Display route\' just shows you the route from any arbitrary point you had selected without subsequent updates.
+	</string>
+	<string name="tip_search">Searching</string>
+	<string name="tip_search_t">You can search for places directly on the map via \'Use location\' → \'Search near here\', or by calling the search screen via \'Menu\' → \'Search\'.
+		\n\nThe search screen provides templates for searching
+		\n\t* by address
+		\n\t* via coordinates
+		\n\t* as POI (by type or by name)
+		\n\t* via your search history
+		\n\t* or via your predefined favorites.
+		\n\nFor all hits a context menu or action bar offers options like \'Directions to\' or \'Show on map\', etc.
+	</string>
 	<string name="background_service_is_enabled_question">OsmAnd sleep mode service is still running. Do you want to interrupt it, too?</string>
 	<string name="sleep_mode_stop_dialog">Interrupt GPS sleep mode?</string>
 	<string name="stop_navigation_service">Interrupt</string>
@@ -1303,13 +1320,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
 	<string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
-	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">To get directions to a place, either directly long-click on it on the map, (then tap its description marker and select \'Directions to\'), or select \'Directions\' after tapping any entry in a search results list or favorite list. 
-		\n\nThe destination is marked as a target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
-		\n\nYou may chose either \'Start navigation\', which means that OsmAnd would live-guide you, give you voice instructions (if enabled), etc. Or you can select \'Display route\', resulting in static route without any live-guideance or adjustments as you move.
-		\n\nTo display a route to the selected destination from any point other than your current position, select the start point on the map and tap \'Directions from\'.
-		\n\nIf you use \'Directions from\' together with \'Start navigation\', OsmAnd will switch to your actual position as soon as it is found (so this can be used to jump-start routing before the position is found), while \'Directions from\' in combination with \'Display route\' just shows you the route from any arbitrary point you had selected without subsequent updates.
-	</string>
 	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
 		\n\t- Improved offline map rendering
 		\n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
@@ -1508,16 +1518,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_app_mode">Use Profile</string>
 	<string name="tip_app_mode_t_v2">OsmAnd supports different (customizable) application profiles for different use cases.
 		\n\nYou can change profiles via the profile button in the lower left corner of the map screen (icon car, bicycle, or pedestrian), or when creating a route (\'transport mode\').
-	</string>
-	<string name="tip_search">Searching</string>
-	<string name="tip_search_t">You can search for places directly on the map via \'Use location\' → \'Search near here\', or by calling the search screen via \'Menu\' → \'Search\'.
-		\n\nThe search screen provides templates for searching
-		\n\t* by address
-		\n\t* via coordinates
-		\n\t* as POI (by type or by name)
-		\n\t* via your search history
-		\n\t* or via your predefined favorites.
-		\n\nFor all hits a context menu or action bar offers options like \'Directions\' or \'Show on map\', etc.
 	</string>
 	<string name="tip_map_context_menu">\'Use location\' Menu</string>
 	<string name="tip_map_context_menu_t">The \'Use location\' context menu contains all actions referring to a point (location).
