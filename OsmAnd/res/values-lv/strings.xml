@@ -1773,4 +1773,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="arrival_distance_factor_early">Agrāk</string>
     <string name="show_zoom_buttons_navigation">Rādīt tālummaiņas pogas</string>
     <string name="show_zoom_buttons_navigation_descr">Rādīt navigācijas laikā uz kartes</string>
-    </resources>
+    <string name="confirm_every_run">Vienmēr jautāt</string>
+	<string name="download_additional_maps">Lejupielādēt trūkstošās kartes %1$s (%2$d MB)?</string>
+    <string name="more">Vēl...</string>
+    <string name="lang_he">Ēbreju</string>
+    <string name="osmo_auth_error_short">Autorizācija neizdevās</string>
+    <string name="sort_by_distance">Kārtot pēc attāluma</string>
+    <string name="sort_by_name">Kārtot pēc nosaukuma</string>
+    <string name="lang_al">Albāņu</string>
+	<string name="lang_fa">Persiešu</string>
+	</resources>
