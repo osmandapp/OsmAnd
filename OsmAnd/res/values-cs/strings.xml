@@ -696,7 +696,7 @@
   <string name="save_track_interval_descr">Vyberte interval pro ukládání trasy během navigace</string>
   <string name="save_track_interval">Interval ukládání trasy během navigace</string>
   <string name="save_track_to_gpx_descrp">Během navigace budou trasy ukládány do adresáře s trasami</string>
-  <string name="save_track_to_gpx">Záznam trasy do GPX během navigace</string>
+  <string name="save_track_to_gpx">Zaznamenat trasu do GPX během navigace</string>
   <string name="update_tile">Aktualizovat mapu</string>
   <string name="reload_tile">Načíst znovu dlaždici</string>
   <string name="mark_point">Cíl</string>
