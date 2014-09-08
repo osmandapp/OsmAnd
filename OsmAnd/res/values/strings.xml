@@ -416,7 +416,6 @@
     <string name="about_settings">About</string>
     <string name="about_settings_descr">Version info, licenses, project members</string>
 
-    <string name="tips_and_tricks">Help</string>
     <string name="tip_recent_changes_1_6_t">Changes in 1.6:
 	\n\t* Support of Full HD devices
 	\n\t* Support transparent map background
@@ -1523,10 +1522,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_map_context_menu_t">The \'Use location\' context menu contains all actions referring to a point (location).
 		\n\nIt is available by long-pressing any point on the map (then tapping its marker), or by pressing the trackball button, or by selecting \'Menu\' → \'Use location\' (the last two ways take the map center as reference).
 		\n\nA marker box can be hidden again by long-clicking on it.
-	</string>
-	<string name="tip_initial">Help</string>
-	<string name="tip_initial_t">OsmAnd is a navigation application with many features. 
-		\n\nSome basic introduction, usage tips, and advanced help is linked via \'Menu\' → \'Help\' from the map screen.
 	</string>
 	<string name="next_button">Next</string>
 	<string name="previous_button">Previous</string>
