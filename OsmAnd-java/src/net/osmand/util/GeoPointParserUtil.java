@@ -8,19 +8,46 @@ public class GeoPointParserUtil {
 
 	public static void main(String[] args) {
 		final double lat = 34.99, lon = -106.61;
-		final String name = "Treasure";
+		final String name = "Treasure Island";
 		int z = GeoParsedPoint.NO_ZOOM;
 		String url;
 
-		// 0,0?q=34.99,-106.61(Treasure)
-		url = "geo:0,0?q=" + lat + "," + lon + "(" + name + ")";
+		// geo:34.99,-106.61
+		url = "geo:" + lat + "," + lon;
 		System.out.println("url: " + url);
 		GeoParsedPoint actual = GeoPointParserUtil.parse("geo", url);
+		assertGeoPoint(actual, new GeoParsedPoint(lat, lon));
+
+		// geo:34.99,-106.61?z=11
+		z = 11;
+		url = "geo:" + lat + "," + lon + "?z=" + z;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse("geo", url);
+		assertGeoPoint(actual, new GeoParsedPoint(lat, lon, z));
+
+		// geo:34.99,-106.61 (Treasure Island)
+		url = "geo:" + lat + "," + lon + " (" + name + ")";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse("geo", url);
+		assertGeoPoint(actual, new GeoParsedPoint(lat, lon, name));
+
+		// geo:34.99,-106.61?z=11 (Treasure Island)
+		z = 11;
+		url = "geo:" + lat + "," + lon + "?z=" + z + " (" + name + ")";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse("geo", url);
 		assertGeoPoint(actual, new GeoParsedPoint(lat, lon, z, name));
 
-		// geo:0,0?z=11&q=34.99,-106.61(Treasure)
+		// 0,0?q=34.99,-106.61(Treasure Island)
+		z = GeoParsedPoint.NO_ZOOM;
+		url = "geo:0,0?q=" + lat + "," + lon + " (" + name + ")";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse("geo", url);
+		assertGeoPoint(actual, new GeoParsedPoint(lat, lon, z, name));
+
+		// geo:0,0?z=11&q=34.99,-106.61(Treasure Island)
 		z = 11;
-		url = "geo:0,0?z=" + z + "&q=" + lat + "," + lon + "(" + name + ")";
+		url = "geo:0,0?z=" + z + "&q=" + lat + "," + lon + " (" + name + ")";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse("geo", url);
 		assertGeoPoint(actual, new GeoParsedPoint(lat, lon, z, name));
@@ -227,7 +254,7 @@ public class GeoPointParserUtil {
 	 * @return {@link GeoParsedPoint}
 	 */
 	public static GeoParsedPoint parse(final String scheme, final String uri) {
-		final URI data = URI.create(uri.replaceAll("\\s+", "+"));
+		final URI data = URI.create(uri.replaceAll("\\s+", "+").replaceAll("%20", "+"));
 		if ("http".equals(scheme) || "https".equals(scheme)) {
 
 			final String schemeSpecific = data.getSchemeSpecificPart();
@@ -334,10 +361,10 @@ public class GeoPointParserUtil {
 				return null;
 			}
 			if (schemeSpecific.startsWith("0,0?")) {
-				// geo:0,0?q=34.99,-106.61(Treasure)
-				// geo:0,0?z=11&q=34.99,-106.61(Treasure)
+				// geo:0,0?q=34.99,-106.61(Treasure Island)
+				// geo:0,0?z=11&q=34.99,-106.61(Treasure Island)
 				String query = schemeSpecific.substring("0,0?".length());
-				final String pattern = "(?:z=([0-9]{1,2})?)?&?q=([\\-0-9\\.]+)?,([\\-0-9\\.]+)?\\s*(?:\\((.+?)\\))?";
+				final String pattern = "(?:z=([0-9]{1,2}))?&?q=([\\-0-9\\.]+)?,([\\-0-9\\.]+)?[\\+]*(?:\\((.+?)\\))?";
 				final Matcher matcher = Pattern.compile(pattern).matcher(query);
 				if (matcher.matches()) {
 					final String z = matcher.group(1);
@@ -354,32 +381,19 @@ public class GeoPointParserUtil {
 				}
 			} else {
 				// geo:47.6,-122.3
-				// geo:47.6,-122.3?z=11
-				final String pattern = "([\\-0-9.]+),([\\-0-9.]+)(?:,([\\-0-9.]+))?(?:\\?z=([0-9]+))?(?:;.*)?";
-				int indexQ = schemeSpecific.indexOf("&q");
-				final Matcher matcher;
-				if (indexQ != -1) {
-					final String schemeQ = schemeSpecific.substring(0, indexQ);
-					matcher = Pattern.compile(pattern).matcher(schemeQ);
-				} else {
-					matcher = Pattern.compile(pattern).matcher(schemeSpecific);
-				}
-
-				final String pattern2 = "([\\-0-9.]+),([\\-0-9.]+)(?:.*)"; // c:geo
-				final Matcher matcher2 = Pattern.compile(pattern2).matcher(schemeSpecific);
-
+				// geo:47.6,-122.3?z=11 (Treasure Island)
+				final String pattern = "([\\-\\d{1,2}\\.\\d]+),([\\-\\d{1,3}\\.\\d]+)(?:\\?z=(\\d{1,2}))?[\\+]?(?:\\((.*?)\\))?";
+				final Matcher matcher = Pattern.compile(pattern).matcher(schemeSpecific);
 				if (matcher.matches()) {
 					final double lat = Double.valueOf(matcher.group(1));
 					final double lon = Double.valueOf(matcher.group(2));
-					if (matcher.group(4) == null) {
-						return new GeoParsedPoint(lat, lon);
+					final String name = matcher.group(4);
+					int zoom = matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : GeoParsedPoint.NO_ZOOM;
+					if (zoom != GeoParsedPoint.NO_ZOOM) {
+						return new GeoParsedPoint(lat, lon, zoom, name);
 					} else {
-						return new GeoParsedPoint(lat, lon, Integer.valueOf(matcher.group(4)));
+						return new GeoParsedPoint(lat, lon, name);
 					}
-				} else if (matcher2.matches()) {
-					final double lat = Double.valueOf(matcher2.group(1));
-					final double lon = Double.valueOf(matcher2.group(2));
-					return new GeoParsedPoint(lat, lon);
 				} else {
 					return null;
 				}
@@ -408,7 +422,8 @@ public class GeoPointParserUtil {
 
 		public GeoParsedPoint(double lat, double lon, String name) {
 			this(lat, lon);
-			this.name = name;
+			if (name != null)
+				this.name = name.replaceAll("\\+", " ");
 		}
 
 		public GeoParsedPoint(double lat, double lon, int zoom) {
@@ -417,8 +432,8 @@ public class GeoPointParserUtil {
 		}
 
 		public GeoParsedPoint(double lat, double lon, int zoom, String name) {
-			this(lat, lon, zoom);
-			this.name = name;
+			this(lat, lon, name);
+			this.zoom = zoom;
 		}
 
 		public GeoParsedPoint(String query) {
