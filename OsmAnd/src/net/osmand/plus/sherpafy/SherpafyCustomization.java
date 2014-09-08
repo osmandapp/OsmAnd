@@ -10,26 +10,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
-import android.os.Environment;
-import android.widget.Toast;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.MapActivity;
@@ -53,14 +51,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 public class SherpafyCustomization extends OsmAndAppCustomization {
@@ -275,6 +274,9 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 
 	public StageInformation selectNextAvailableStage(final TourInformation tourInformation) {
+		if(selectedStagePref == null) {
+			return selectedStage;
+		}
 		Integer it = selectedStagePref.get();
 		while(it >= 0 && isStageVisited(it) ){
 			it++;
@@ -286,6 +288,9 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 	
 	public StageInformation getNextAvailableStage(final TourInformation tourInformation) {
+		if(selectedStagePref == null){
+			return null;
+		}
 		int it = selectedStagePref.get();
 		while(it >= 0 && isStageVisited(it) ){
 			it++;
@@ -297,11 +302,17 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 	
 	public boolean isStageVisited(int stageOrder) {
+		if(visitedStagesPref == null) {
+			return false;
+		}
 		Integer gi = visitedStagesPref.get();
 		return (gi & (1 << stageOrder)) > 0;
 	}
 	
 	public void markStageAsCompleted(StageInformation si) {
+		if(visitedStagesPref == null) {
+			return;
+		}
 		Integer gi = visitedStagesPref.get();
 		gi |= (1 << si.getOrder());
 		visitedStagesPref.set(gi);
@@ -309,6 +320,9 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 	
 	public void markStageAsNotCompleted(StageInformation si) {
+		if(visitedStagesPref == null) {
+			return;
+		}
 		Integer gi = visitedStagesPref.get();
 		if((gi & (1 << si.getOrder())) > 0) {
 			gi = gi - (1 << si.getOrder());
