@@ -3,7 +3,6 @@ package net.osmand.plus.sherpafy;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import android.widget.Toast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.sherpafy.TourInformation.StageFavoriteGroup;
