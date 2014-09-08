@@ -31,7 +31,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
+import net.osmand.plus.download.LocalIndexesFragment.LoadLocalIndexTask;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.util.MapUtils;

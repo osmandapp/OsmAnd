@@ -12,12 +12,12 @@ import net.osmand.Location;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.FavouritesActivity;
-import net.osmand.plus.activities.LocalIndexesActivity;
 import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -87,7 +87,7 @@ public class OsmAndAppCustomization {
 	}
 	
 	public Class<? extends Activity> getLocalIndexActivity() {
-		return LocalIndexesActivity.class;
+		return DownloadActivity.class;
 	}
 
 	// Download screen

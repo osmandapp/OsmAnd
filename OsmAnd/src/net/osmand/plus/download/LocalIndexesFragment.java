@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.download;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -10,13 +10,16 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import com.actionbarsherlock.view.*;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.*;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.activities.*;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
@@ -48,14 +51,9 @@ import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.ActionMode.Callback;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.SubMenu;
-import com.actionbarsherlock.view.Window;
 
-public class LocalIndexesActivity extends OsmandExpandableListActivity {
+public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 	private LoadLocalIndexTask asyncLoader;
 	private LocalIndexesAdapter listAdapter;
@@ -77,19 +75,40 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+	public void onCreate(Bundle savedInstanceState) {
+		//requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.local_index);
-		getSupportActionBar().setTitle(R.string.local_index_descr_title);
-		setSupportProgressBarIndeterminateVisibility(false);
+		//setContentView(R.layout.local_index);
+		//getSupportActionBar().setTitle(R.string.local_index_descr_title);
+		//setSupportProgressBarIndeterminateVisibility(false);
 		// getSupportActionBar().setLogo(R.drawable.tab_download_screen_icon);
 
 
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
-		listAdapter = new LocalIndexesAdapter(this);
+		listAdapter = new LocalIndexesAdapter(getActivity());
 
 
+
+		setAdapter(listAdapter);
+		updateDescriptionTextWithSize();
+		if (asyncLoader == null || asyncLoader.getResult() == null) {
+			// getLastNonConfigurationInstance method should be in onCreate() method
+			// (onResume() doesn't work)
+			Object indexes = getActivity().getLastNonConfigurationInstance();
+			asyncLoader = new LoadLocalIndexTask();
+			if (indexes instanceof List<?>) {
+				asyncLoader.setResult((List<LocalIndexInfo>) indexes);
+			}
+		}
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (asyncLoader == null || asyncLoader.getResult() == null) {
+			asyncLoader = new LoadLocalIndexTask();
+			asyncLoader.execute(getActivity());
+		}
 
 		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
 			@Override
@@ -103,35 +122,14 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				}
 			}
 		});
-
-		setListAdapter(listAdapter);
-		updateDescriptionTextWithSize();
-		if (asyncLoader == null || asyncLoader.getResult() == null) {
-			// getLastNonConfigurationInstance method should be in onCreate() method
-			// (onResume() doesn't work)
-			Object indexes = getLastNonConfigurationInstance();
-			asyncLoader = new LoadLocalIndexTask();
-			if (indexes instanceof List<?>) {
-				asyncLoader.setResult((List<LocalIndexInfo>) indexes);
-			}
-		}
-	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if (asyncLoader == null || asyncLoader.getResult() == null) {
-			asyncLoader = new LoadLocalIndexTask();
-			asyncLoader.execute(this);
-		}
 	}
 	
 	
 	private void showContextMenu(final LocalIndexInfo info) {
-		Builder builder = new AlertDialog.Builder(this);
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(this);
+		Builder builder = new AlertDialog.Builder(getActivity());
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(getActivity());
 		basicFileOperation(info, adapter);
-		OsmandPlugin.onContextMenuActivity(this, null, info, adapter);
+		OsmandPlugin.onContextMenuActivity(getActivity(), null, info, adapter);
 
 		String[] values = adapter.getItemNames();
 		builder.setItems(values, new DialogInterface.OnClickListener() {
@@ -157,7 +155,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				} else if (resId == R.string.local_index_mi_restore) {
 					new LocalIndexOperationTask(RESTORE_OPERATION).execute(info);
 				} else if (resId == R.string.local_index_mi_delete) {
-					Builder confirm = new AlertDialog.Builder(LocalIndexesActivity.this);
+					Builder confirm = new AlertDialog.Builder(getActivity());
 					confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -186,9 +184,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	
 	private void renameFile(LocalIndexInfo info) {
 		final File f = new File(info.getPathToData());
-		Builder b = new AlertDialog.Builder(this);
+		Builder b = new AlertDialog.Builder(getActivity());
 		if(f.exists()){
-			final EditText editText = new EditText(this);
+			final EditText editText = new EditText(getActivity());
 			editText.setText(f.getName());
 			b.setView(editText);
 			b.setPositiveButton(R.string.default_buttons_save, new DialogInterface.OnClickListener() {
@@ -198,7 +196,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 					String newName = editText.getText().toString();
 					File dest = new File(f.getParentFile(), newName);
 					if (dest.exists()) {
-						AccessibleToast.makeText(LocalIndexesActivity.this, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(getMyActivity(), R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
 					} else {
 						if(!f.getParentFile().exists()) {
 							f.getParentFile().mkdirs();
@@ -206,7 +204,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 						if(f.renameTo(dest)){
 							reloadIndexes();
 						} else {
-							AccessibleToast.makeText(LocalIndexesActivity.this, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+							AccessibleToast.makeText(getMyActivity(), R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
 						}
 					}
 					
@@ -233,9 +231,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 		@Override
 		protected void onPreExecute() {
-			setSupportProgressBarIndeterminateVisibility(true);
+			getMyActivity().setSupportProgressBarIndeterminateVisibility(true);
 		}
-		
+
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {
 			for (LocalIndexInfo v : values) {
@@ -243,7 +241,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			}
 			listAdapter.notifyDataSetChanged();
 		}
-		
+
 		public void setResult(List<LocalIndexInfo> result) {
 			this.result = result;
 			if(result == null){
@@ -260,15 +258,15 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		@Override
 		protected void onPostExecute(List<LocalIndexInfo> result) {
 			this.result = result;
-			setSupportProgressBarIndeterminateVisibility(false);
+			getMyActivity().setSupportProgressBarIndeterminateVisibility(false);
 		}
-		
+
 		public List<LocalIndexInfo> getResult() {
 			return result;
 		}
 
 	}
-	
+
 	private File getFileToRestore(LocalIndexInfo i){
 		if(i.isBackupedData()){
 			File parent = new File(i.getPathToData()).getParentFile();
@@ -365,13 +363,13 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		
 		@Override
 		protected void onPreExecute() {
-			setProgressBarIndeterminateVisibility(true);
+		 getMyActivity().setProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			setProgressBarIndeterminateVisibility(false);
-			AccessibleToast.makeText(LocalIndexesActivity.this, result, Toast.LENGTH_LONG).show();
+			getMyActivity().setProgressBarIndeterminateVisibility(false);
+			AccessibleToast.makeText(getMyActivity(), result, Toast.LENGTH_LONG).show();
 			listAdapter.clear();
 			reloadIndexes();
 			
@@ -430,7 +428,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 
 	@Override
-	protected void onPause() {
+	public void onPause() {
 		super.onPause();
 		if(operationTask != null){
 			operationTask.cancel(true);
@@ -438,23 +436,23 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	}
 
 	@Override
-	protected void onDestroy() {
+	public void onDestroy() {
 		super.onDestroy();
 		asyncLoader.cancel(true);
 		descriptionLoader.cancel(true);
 	}
 	
-	@Override
-	public Object onRetainNonConfigurationInstance() {
-		if(asyncLoader != null){
-			return asyncLoader.getResult();
-		}
-		return super.onRetainNonConfigurationInstance();
-	}
+//	@Override
+//	public Object onRetainNonConfigurationInstance() {
+//		if(asyncLoader != null){
+//			return asyncLoader.getResult();
+//		}
+//		return super.onRetainNonConfigurationInstance();
+//	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		optionsMenuAdapter = new ContextMenuAdapter(this);
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		optionsMenuAdapter = new ContextMenuAdapter(getMyActivity());
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -476,7 +474,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		optionsMenuAdapter.item(R.string.local_index_mi_delete)
 						.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light)
 						.listen(listener).position(4).reg();
-		OsmandPlugin.onOptionsMenuActivity(this, null, optionsMenuAdapter);
+		OsmandPlugin.onOptionsMenuActivity(getMyActivity(), null, optionsMenuAdapter);
 		// doesn't work correctly
 		int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
 		SubMenu split = null;
@@ -501,18 +499,16 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			}
 			
 		}
-		return true;
 	}
 	
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		if(operationTask == null || operationTask.getStatus() == Status.FINISHED){
-			menu.setGroupVisible(0, true);
-		} else {
-			menu.setGroupVisible(0, false);
-		}
-		return true;
-	}
+//	@Override
+//	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//		if(operationTask == null || operationTask.getStatus() == Status.FINISHED){
+//			menu.setGroupVisible(0, true);
+//		} else {
+//			menu.setGroupVisible(0, false);
+//		}
+//	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -561,14 +557,14 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		final String actionButton = value;
 		if(listAdapter.getGroupCount() == 0){
 			listAdapter.cancelFilter();
-			AccessibleToast.makeText(LocalIndexesActivity.this, getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(getMyActivity(), getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 			return;
 		}
 		collapseAllGroups();
 		
 		selectionMode = true;
 		selectedItems.clear();
-		actionMode = startActionMode(new Callback() {
+		actionMode = getMyActivity().startActionMode(new Callback() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -590,12 +586,12 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (selectedItems.isEmpty()) {
-					AccessibleToast.makeText(LocalIndexesActivity.this,
+					AccessibleToast.makeText(getMyActivity(),
 							getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 					return true;
 				}
 
-				Builder builder = new AlertDialog.Builder(LocalIndexesActivity.this);
+				Builder builder = new AlertDialog.Builder(getMyActivity());
 				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(), selectedItems.size()));
 				builder.setPositiveButton(actionButton, listener);
 				builder.setNegativeButton(R.string.default_buttons_cancel, null);
@@ -606,15 +602,15 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
 				selectionMode = false;
-				findViewById(R.id.DescriptionText).setVisibility(View.VISIBLE);
-				updateDescriptionTextWithSize();
+				//findViewById(R.id.DescriptionText).setVisibility(View.VISIBLE);
+				//updateDescriptionTextWithSize();
 				listAdapter.cancelFilter();
 				collapseAllGroups();
 				listAdapter.notifyDataSetChanged();
 			}
 			
 		});
-		findViewById(R.id.DescriptionText).setVisibility(View.GONE);
+		//findViewById(R.id.DescriptionText).setVisibility(View.GONE);
 		listAdapter.notifyDataSetChanged();
 	}
 	
@@ -625,7 +621,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
 			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) }); 
 		}
-		TextView ds = (TextView) findViewById(R.id.DescriptionText);
+		//TextView ds = (TextView) findViewById(R.id.DescriptionText);
 		String text = getString(R.string.download_link_and_local_description, size);
 		int l = text.indexOf('.');
 		if(l == -1) {
@@ -636,7 +632,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			@Override
 			public void onClick(View widget) {
 				asyncLoader.setResult(null);
-				startActivity(new Intent(LocalIndexesActivity.this, DownloadIndexActivity.class));					
+				startActivity(new Intent(getMyActivity(), DownloadIndexActivity.class));
 			}
 			
 			@Override
@@ -645,8 +641,8 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 //				ds.setColor(Color.GREEN);
 			}
 		}, 0, l, 0);
-		ds.setText(content);
-		ds.setMovementMethod(LinkMovementMethod.getInstance());
+		//ds.setText(content);
+		//ds.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 	
 	
@@ -654,7 +650,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	public void localOptionsMenu(final int itemId) {
 		if (itemId == R.string.local_index_download) {
 			asyncLoader.setResult(null);
-			startActivity(new Intent(LocalIndexesActivity.this, DownloadIndexActivity.class));
+			startActivity(new Intent(getMyActivity(), DownloadIndexActivity.class));
 		} else if (itemId == R.string.local_index_mi_reload) {
 			reloadIndexes();
 		} else if (itemId == R.string.local_index_mi_delete) {
@@ -707,7 +703,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 			@Override
 			protected void onPostExecute(List<String> warnings) {
-				setProgressBarIndeterminateVisibility(false);
+				getMyActivity().setProgressBarIndeterminateVisibility(false);
 				if (!warnings.isEmpty()) {
 					final StringBuilder b = new StringBuilder();
 					boolean f = true;
@@ -719,17 +715,17 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 						}
 						b.append(w);
 					}
-					AccessibleToast.makeText(LocalIndexesActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(getMyActivity(), b.toString(), Toast.LENGTH_LONG).show();
 				}
 				if(asyncLoader.getStatus() == Status.PENDING) {
-					asyncLoader.execute(LocalIndexesActivity.this);
+					asyncLoader.execute(getMyActivity());
 				}
 			}
 			
 			@Override
 			protected void onPreExecute() {
 				super.onPreExecute();
-				setProgressBarIndeterminateVisibility(true);
+				getMyActivity().setProgressBarIndeterminateVisibility(true);
 			}
 			@Override
 			protected List<String> doInBackground(Void... params) {
@@ -877,12 +873,12 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			View v = convertView;
 			final LocalIndexInfo child = (LocalIndexInfo) getChild(groupPosition, childPosition);
 			if (v == null ) {
-				LayoutInflater inflater = getLayoutInflater();
+				LayoutInflater inflater = (LayoutInflater) getMyActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 				v = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
 			}
 			TextView viewName = ((TextView) v.findViewById(R.id.local_index_name));
 			String mapDescr = getMapDescription(child.getFileName());
-			String mapName = FileNameTranslationHelper.getFileName(ctx, ((OsmandApplication) getApplication()).getResourceManager().getOsmandRegions(), child.getFileName());
+			String mapName = FileNameTranslationHelper.getFileName(ctx, ((OsmandApplication) getMyActivity().getApplication()).getResourceManager().getOsmandRegions(), child.getFileName());
 
 			if (mapDescr.length() > 0){
 				viewName.setText(mapDescr + " - " + mapName);
@@ -951,10 +947,10 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			View v = convertView;
 			LocalIndexInfo group = getGroup(groupPosition);
 			if (v == null) {
-				LayoutInflater inflater = getLayoutInflater();
+				LayoutInflater inflater = (LayoutInflater) getMyActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 				v = inflater.inflate(net.osmand.plus.R.layout.expandable_list_item_category, parent, false);
 			}
-			StringBuilder t = new StringBuilder(group.getType().getHumanString(LocalIndexesActivity.this));
+			StringBuilder t = new StringBuilder(group.getType().getHumanString(getMyActivity()));
 			if(group.getSubfolder() != null) {
 				t.append(" ").append(group.getSubfolder());
 			}
@@ -1035,4 +1031,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			return "";
 		}
 	}
+
+	private DownloadActivity getMyActivity(){ return (DownloadActivity)getActivity();}
 }
