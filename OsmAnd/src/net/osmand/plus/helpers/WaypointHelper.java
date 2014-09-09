@@ -246,7 +246,7 @@ public class WaypointHelper {
 			if (pointTypes != null) {
 				for (int r = 0; r < pointTypes.length; r++) {
 					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
-					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
+					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, i, loc);
 					if (info != null) {
 						if (info.getType() != AlarmInfoType.SPEED_CAMERA || showCameras) {
 							long ms = System.currentTimeMillis() ;
