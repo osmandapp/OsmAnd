@@ -31,7 +31,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.DownloadIndexFragment;
+import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.SelectedGPXFragment;
@@ -107,8 +107,8 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	public boolean setAccessCode(String acCode) {
 		acCode = acCode.toUpperCase();
-		if(DownloadIndexFragment.downloadListIndexThread != null) {
-			DownloadIndexFragment.downloadListIndexThread.clear();
+		if(DownloadActivity.downloadListIndexThread != null) {
+			DownloadActivity.downloadListIndexThread.clear();
 		}
 		if(validate(acCode) || Algorithms.isEmpty(acCode)) {
 			accessCodePref.set(acCode);

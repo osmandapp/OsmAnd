@@ -23,7 +23,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.DownloadIndexFragment;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.resources.ResourceManager;
@@ -323,7 +322,7 @@ public class DownloadIndexesThread {
 			if (de.isAsset) {
 				try {
 					if (uiActivity != null) {
-						ResourceManager.copyAssets(uiActivity.getMyActivity().getAssets(), de.assetName, de.targetFile);
+						ResourceManager.copyAssets(uiActivity.getDownloadActivity().getAssets(), de.assetName, de.targetFile);
 						boolean changedDate = de.targetFile.setLastModified(de.dateModified);
 						if(!changedDate) {
 							log.error("Set last timestamp is not supported");
@@ -385,8 +384,8 @@ public class DownloadIndexesThread {
 							List<DownloadEntry> downloadEntry = basemap
 									.createDownloadEntry(uiActivity.getMyApplication(), DownloadActivityType.NORMAL_FILE,
 											new ArrayList<DownloadEntry>());
-							uiActivity.getEntriesToDownload().put(basemap, downloadEntry);
-							AccessibleToast.makeText(uiActivity.getMyActivity(), R.string.basemap_was_selected_to_download,
+							uiActivity.getDownloadActivity().getEntriesToDownload().put(basemap, downloadEntry);
+							AccessibleToast.makeText(uiActivity.getDownloadActivity(), R.string.basemap_was_selected_to_download,
 									Toast.LENGTH_LONG).show();
 							uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 						}
@@ -400,7 +399,7 @@ public class DownloadIndexesThread {
 				currentRunningTask.remove(this);
 				if (uiActivity != null) {
 					uiActivity.updateProgress(false);
-					runCategorization(uiActivity.getType());
+					runCategorization(uiActivity.getDownloadActivity().getType());
 				}
 			}
 
@@ -507,7 +506,7 @@ public class DownloadIndexesThread {
 					if ((type == DownloadActivityType.SRTM_COUNTRY_FILE || type == DownloadActivityType.HILLSHADE_FILE)
 							&& OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) instanceof SRTMPlugin
 							&& !OsmandPlugin.getEnabledPlugin(SRTMPlugin.class).isPaid()) {
-						Builder msg = new AlertDialog.Builder(uiActivity.getMyActivity());
+						Builder msg = new AlertDialog.Builder(uiActivity.getDownloadActivity());
 						msg.setTitle(R.string.srtm_paid_version_title);
 						msg.setMessage(R.string.srtm_paid_version_msg);
 						msg.setNegativeButton(R.string.button_upgrade_osmandplus, new DialogInterface.OnClickListener() {

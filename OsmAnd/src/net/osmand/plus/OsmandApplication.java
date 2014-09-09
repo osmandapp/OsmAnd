@@ -19,7 +19,7 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.*;
-import net.osmand.plus.activities.DownloadIndexFragment;
+import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.helpers.WaypointHelper;

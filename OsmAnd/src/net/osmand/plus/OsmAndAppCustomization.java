@@ -11,7 +11,6 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.*;
-import net.osmand.plus.activities.DownloadIndexFragment;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -111,7 +110,7 @@ public class OsmAndAppCustomization {
 		return "http://"+IndexConstants.INDEX_DOWNLOAD_DOMAIN+"/get_indexes?gzip&" + Version.getVersionAsURLParam(app); //$NON-NLS-1$;
 	}
 
-	public void preDownloadActivity(final DownloadIndexFragment da, final List<DownloadActivityType> downloadTypes, ActionBar actionBar ) {
+	public void preDownloadActivity(final DownloadActivity da, final List<DownloadActivityType> downloadTypes, ActionBar actionBar ) {
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(actionBar.getThemedContext(), R.layout.sherlock_spinner_item, 
 				toString(downloadTypes)	

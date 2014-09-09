@@ -8,7 +8,6 @@ import java.util.Map;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.DownloadIndexFragment;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -48,7 +47,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		}
 		format = downloadActivity.getMyApplication().getResourceManager().getDateFormat();
 		okColor = downloadActivity.getResources().getColor(R.color.color_ok);
-		TypedArray ta = downloadActivity.getMyActivity().getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
+		TypedArray ta = downloadActivity.getDownloadActivity().getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 		defaultColor = ta.getColor(0, downloadActivity.getResources().getColor(R.color.color_unknown));
 		ta.recycle();
 		updateColor = downloadActivity.getResources().getColor(R.color.color_update);
@@ -62,7 +61,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	}
 
 	public void collapseTrees(final CharSequence constraint) {
-		downloadActivity.getMyActivity().runOnUiThread(new Runnable() {
+		downloadActivity.getDownloadActivity().runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				synchronized (DownloadIndexAdapter.this) {
@@ -125,7 +124,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					}
 				}
 				List<IndexItem> filter = new ArrayList<IndexItem>();
-				Context c = downloadActivity.getMyActivity();
+				Context c = downloadActivity.getDownloadActivity();
 				for (IndexItem item : indexFiles) {
 					boolean add = true;
 					String indexLC = osmandRegions.getDownloadNameIndexLowercase(item.getBasename());
@@ -218,7 +217,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		View v = convertView;
 		IndexItemCategory group = getGroup(groupPosition);
 		if (v == null) {
-			LayoutInflater inflater = (LayoutInflater) downloadActivity.getMyActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+			LayoutInflater inflater = (LayoutInflater) downloadActivity.getDownloadActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 			v = inflater.inflate(net.osmand.plus.R.layout.expandable_list_item_category, parent, false);
 		}
 		final View row = v;
@@ -233,7 +232,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 		View v = convertView;
 		if (v == null) {
-			LayoutInflater inflater = (LayoutInflater) downloadActivity.getMyActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+			LayoutInflater inflater = (LayoutInflater) downloadActivity.getDownloadActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 			v = inflater.inflate(net.osmand.plus.R.layout.download_index_list_item, parent, false);
 		}
 		final View row = v;
@@ -247,7 +246,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		description.setText(d.trim());
 
 		CheckBox ch = (CheckBox) row.findViewById(R.id.check_download_item);
-		ch.setChecked(downloadActivity.getEntriesToDownload().containsKey(e));
+		ch.setChecked(downloadActivity.getDownloadActivity().getEntriesToDownload().containsKey(e));
 		ch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

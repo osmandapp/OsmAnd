@@ -12,7 +12,7 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.DownloadIndexFragment;
+import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;

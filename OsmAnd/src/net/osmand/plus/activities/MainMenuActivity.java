@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.sherpafy.TourViewActivity;
 import android.app.Activity;

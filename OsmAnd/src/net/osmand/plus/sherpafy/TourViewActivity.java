@@ -5,7 +5,7 @@ import java.util.WeakHashMap;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.DownloadIndexFragment;
+import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.content.Intent;

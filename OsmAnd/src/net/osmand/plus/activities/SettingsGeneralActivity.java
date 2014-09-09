@@ -23,6 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.voice.CommandPlayer;

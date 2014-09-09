@@ -67,24 +67,29 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	private ContextMenuAdapter optionsMenuAdapter;
 	private ActionMode actionMode;
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.local_index, container, false);
+
+		getDownloadActivity().getSupportActionBar().setTitle(R.string.local_index_descr_title);
+		getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
+
+		ExpandableListView listView = (ExpandableListView)view.findViewById(android.R.id.list);
+		listAdapter = new LocalIndexesAdapter(getActivity());
+		listView.setAdapter(listAdapter);
+		setListView(listView);
+		//getDownloadActivity().getSupportActionBar().setLogo(R.drawable.tab_download_screen_icon);
+
+		return view;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		//requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.local_index);
-		//getSupportActionBar().setTitle(R.string.local_index_descr_title);
-		//setSupportProgressBarIndeterminateVisibility(false);
-		// getSupportActionBar().setLogo(R.drawable.tab_download_screen_icon);
-
 
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
-		listAdapter = new LocalIndexesAdapter(getActivity());
 
-
-
-		setAdapter(listAdapter);
 		updateDescriptionTextWithSize();
 		if (asyncLoader == null || asyncLoader.getResult() == null) {
 			// getLastNonConfigurationInstance method should be in onCreate() method
@@ -191,7 +196,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 					String newName = editText.getText().toString();
 					File dest = new File(f.getParentFile(), newName);
 					if (dest.exists()) {
-						AccessibleToast.makeText(getMyActivity(), R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(getDownloadActivity(), R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
 					} else {
 						if(!f.getParentFile().exists()) {
 							f.getParentFile().mkdirs();
@@ -199,7 +204,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 						if(f.renameTo(dest)){
 							reloadIndexes();
 						} else {
-							AccessibleToast.makeText(getMyActivity(), R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+							AccessibleToast.makeText(getDownloadActivity(), R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
 						}
 					}
 					
@@ -226,7 +231,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPreExecute() {
-			getMyActivity().setSupportProgressBarIndeterminateVisibility(true);
+			getDownloadActivity().setSupportProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override
@@ -253,7 +258,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPostExecute(List<LocalIndexInfo> result) {
 			this.result = result;
-			getMyActivity().setSupportProgressBarIndeterminateVisibility(false);
+			getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
 		}
 
 		public List<LocalIndexInfo> getResult() {
@@ -358,13 +363,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		
 		@Override
 		protected void onPreExecute() {
-		 getMyActivity().setProgressBarIndeterminateVisibility(true);
+		 getDownloadActivity().setProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			getMyActivity().setProgressBarIndeterminateVisibility(false);
-			AccessibleToast.makeText(getMyActivity(), result, Toast.LENGTH_LONG).show();
+			getDownloadActivity().setProgressBarIndeterminateVisibility(false);
+			AccessibleToast.makeText(getDownloadActivity(), result, Toast.LENGTH_LONG).show();
 			listAdapter.clear();
 			reloadIndexes();
 			
@@ -447,7 +452,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		optionsMenuAdapter = new ContextMenuAdapter(getMyActivity());
+		optionsMenuAdapter = new ContextMenuAdapter(getDownloadActivity());
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -466,7 +471,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		optionsMenuAdapter.item(R.string.local_index_mi_delete)
 						.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light)
 						.listen(listener).position(4).reg();
-		OsmandPlugin.onOptionsMenuActivity(getMyActivity(), null, optionsMenuAdapter);
+		OsmandPlugin.onOptionsMenuActivity(getDownloadActivity(), null, optionsMenuAdapter);
 		// doesn't work correctly
 		int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
 		SubMenu split = null;
@@ -549,23 +554,23 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		final String actionButton = value;
 		if(listAdapter.getGroupCount() == 0){
 			listAdapter.cancelFilter();
-			AccessibleToast.makeText(getMyActivity(), getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(getDownloadActivity(), getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 			return;
 		}
 		collapseAllGroups();
 		
 		selectionMode = true;
 		selectedItems.clear();
-		actionMode = getMyActivity().startActionMode(new Callback() {
+		actionMode = getDownloadActivity().startActionMode(new Callback() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				selectionMode = true;
 				MenuItem it = menu.add(actionResId);
-				if(actionIconId != 0) {
+				if (actionIconId != 0) {
 					it.setIcon(actionIconId);
 				}
-				it.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | 
+				it.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM |
 						MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 				return true;
 			}
@@ -578,12 +583,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (selectedItems.isEmpty()) {
-					AccessibleToast.makeText(getMyActivity(),
+					AccessibleToast.makeText(getDownloadActivity(),
 							getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 					return true;
 				}
 
-				Builder builder = new AlertDialog.Builder(getMyActivity());
+				Builder builder = new AlertDialog.Builder(getDownloadActivity());
 				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(), selectedItems.size()));
 				builder.setPositiveButton(actionButton, listener);
 				builder.setNegativeButton(R.string.default_buttons_cancel, null);
@@ -600,7 +605,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				collapseAllGroups();
 				listAdapter.notifyDataSetChanged();
 			}
-			
+
 		});
 		//findViewById(R.id.DescriptionText).setVisibility(View.GONE);
 		listAdapter.notifyDataSetChanged();
@@ -624,7 +629,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onClick(View widget) {
 				asyncLoader.setResult(null);
-				startActivity(new Intent(getMyActivity(), DownloadIndexFragment.class));
+				startActivity(new Intent(getDownloadActivity(), DownloadIndexFragment.class));
 			}
 			
 			@Override
@@ -642,7 +647,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	public void localOptionsMenu(final int itemId) {
 		if (itemId == R.string.local_index_download) {
 			asyncLoader.setResult(null);
-			startActivity(new Intent(getMyActivity(), DownloadIndexFragment.class));
+			startActivity(new Intent(getDownloadActivity(), DownloadIndexFragment.class));
 		} else if (itemId == R.string.local_index_mi_reload) {
 			reloadIndexes();
 		} else if (itemId == R.string.local_index_mi_delete) {
@@ -695,7 +700,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 			@Override
 			protected void onPostExecute(List<String> warnings) {
-				getMyActivity().setProgressBarIndeterminateVisibility(false);
+				getDownloadActivity().setProgressBarIndeterminateVisibility(false);
 				if (!warnings.isEmpty()) {
 					final StringBuilder b = new StringBuilder();
 					boolean f = true;
@@ -707,17 +712,17 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 						}
 						b.append(w);
 					}
-					AccessibleToast.makeText(getMyActivity(), b.toString(), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(getDownloadActivity(), b.toString(), Toast.LENGTH_LONG).show();
 				}
 				if(asyncLoader.getStatus() == Status.PENDING) {
-					asyncLoader.execute(getMyActivity());
+					asyncLoader.execute(getDownloadActivity());
 				}
 			}
 			
 			@Override
 			protected void onPreExecute() {
 				super.onPreExecute();
-				getMyActivity().setProgressBarIndeterminateVisibility(true);
+				getDownloadActivity().setProgressBarIndeterminateVisibility(true);
 			}
 			@Override
 			protected List<String> doInBackground(Void... params) {
@@ -865,12 +870,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			View v = convertView;
 			final LocalIndexInfo child = (LocalIndexInfo) getChild(groupPosition, childPosition);
 			if (v == null ) {
-				LayoutInflater inflater = (LayoutInflater) getMyActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
 			}
 			TextView viewName = ((TextView) v.findViewById(R.id.local_index_name));
 			String mapDescr = getMapDescription(child.getFileName());
-			String mapName = FileNameTranslationHelper.getFileName(ctx, ((OsmandApplication) getMyActivity().getApplication()).getResourceManager().getOsmandRegions(), child.getFileName());
+			String mapName = FileNameTranslationHelper.getFileName(ctx, ((OsmandApplication) getDownloadActivity().getApplication()).getResourceManager().getOsmandRegions(), child.getFileName());
 
 			if (mapDescr.length() > 0){
 				viewName.setText(mapDescr + " - " + mapName);
@@ -939,10 +944,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			View v = convertView;
 			LocalIndexInfo group = getGroup(groupPosition);
 			if (v == null) {
-				LayoutInflater inflater = (LayoutInflater) getMyActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = inflater.inflate(net.osmand.plus.R.layout.expandable_list_item_category, parent, false);
 			}
-			StringBuilder t = new StringBuilder(group.getType().getHumanString(getMyActivity()));
+			StringBuilder t = new StringBuilder(group.getType().getHumanString(getDownloadActivity()));
 			if(group.getSubfolder() != null) {
 				t.append(" ").append(group.getSubfolder());
 			}
@@ -1024,5 +1029,5 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private DownloadActivity getMyActivity(){ return (DownloadActivity)getActivity();}
+	private DownloadActivity getDownloadActivity(){ return (DownloadActivity)getActivity();}
 }

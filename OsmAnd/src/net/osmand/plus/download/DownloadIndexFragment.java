@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.download;
 
 
 import java.io.File;
@@ -17,11 +17,11 @@ import com.actionbarsherlock.view.MenuInflater;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.SettingsGeneralActivity.MoveFilesToDifferentDirectory;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
@@ -57,8 +57,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
     public static final String FILTER_KEY = "filter";
     public static final String FILTER_CAT = "filter_cat";
 	
-	public static DownloadIndexesThread downloadListIndexThread;
-	private DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
 	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
 	 
 	
@@ -78,7 +76,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final List<DownloadActivityType> downloadTypes = getDownloadTypes();
-		type = downloadTypes.get(0);
+		getDownloadActivity().setType(downloadTypes.get(0));
 		View view = inflater.inflate(R.layout.download_index, container, false);
 		ExpandableListView listView = (ExpandableListView)view.findViewById(android.R.id.list);
 		List<IndexItem> list = new ArrayList<IndexItem>();
@@ -142,13 +140,13 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 			if (filterCat != null) {
 				DownloadActivityType type = DownloadActivityType.getIndexType(filterCat.toLowerCase());
 				if (type != null) {
-					this.type = type;
+					getDownloadActivity().setType(type);
 					downloadTypes.remove(type);
 					downloadTypes.add(0, type);
 				}
 			}
 		}
-		getMyApplication().getAppCustomization().preDownloadActivity(this, downloadTypes, getMyActivity().getSupportActionBar());
+		getMyApplication().getAppCustomization().preDownloadActivity(getDownloadActivity(), downloadTypes, getDownloadActivity().getSupportActionBar());
 
 		return view;
 	}
@@ -156,16 +154,11 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		settings = ((OsmandApplication) getMyApplication()).getSettings();
-		if(downloadListIndexThread == null) {
-			downloadListIndexThread = new DownloadIndexesThread(getActivity());
-		}
-		downloadListIndexThread.setUiActivity(this);
-		if (downloadListIndexThread.getCachedIndexFiles() != null && downloadListIndexThread.isDownloadedFromInternet()) {
-			downloadListIndexThread.runCategorization(type);
-		} else {
-			downloadListIndexThread.runReloadIndexFiles();
-		}
+
+		DownloadActivity.downloadListIndexThread.setUiActivity(this);
+
+		settings = getMyApplication().getSettings();
+
 
 		if(getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
 			boolean showedDialog = false;
@@ -198,7 +191,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 				if (currentDirectoryNotWritable) {
 					final String newLoc = settings.getMatchingExternalFilesDir(currentStorage);
 					if (newLoc != null && newLoc.length() != 0) {
-						AccessibleAlertBuilder ab = new AccessibleAlertBuilder(getMyActivity());
+						AccessibleAlertBuilder ab = new AccessibleAlertBuilder(getDownloadActivity());
 						ab.setMessage(getString(R.string.android_19_location_disabled,
 								settings.getExternalStorageDirectory()));
 						ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
@@ -217,7 +210,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	
 	private void copyFilesForAndroid19(final String newLoc) {
 		MoveFilesToDifferentDirectory task = 
-				new MoveFilesToDifferentDirectory(getMyActivity(),
+				new MoveFilesToDifferentDirectory(getDownloadActivity(),
 						new File(settings.getExternalStorageDirectory(), IndexConstants.APP_DIR), 
 						new File(newLoc, IndexConstants.APP_DIR)) {
 			protected Boolean doInBackground(Void[] params) {
@@ -237,8 +230,8 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	public void onResume() {
 		super.onResume();
 		getMyApplication().setDownloadActivity(this);
-		BasicProgressAsyncTask<?, ?, ?> t = downloadListIndexThread.getCurrentRunningTask();
 		updateProgress(false);
+		BasicProgressAsyncTask<?, ?, ?> t = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
 		if(t instanceof DownloadIndexesThread.DownloadIndexesAsyncTask) {
 			View mainView = getView().findViewById(R.id.MainLayout);
 			if (mainView != null) {
@@ -257,7 +250,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		int count = 0;
 		int sz = 0;
 		String s = "";
-		for (IndexItem i : downloadListIndexThread.getCachedIndexFiles()) {
+		for (IndexItem i : DownloadActivity.downloadListIndexThread.getCachedIndexFiles()) {
 			for (String map : maps) {
 				if (i.getFileName().equals(map + ".obf.zip") && i.getType() == DownloadActivityType.NORMAL_FILE) {
 					final List<DownloadEntry> de = i.createDownloadEntry(getMyApplication(), i.getType(), new ArrayList<DownloadEntry>(1));
@@ -269,12 +262,12 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 						s +=", ";
 					}
 					s += i.getVisibleName(getMyApplication(), getMyApplication().getResourceManager().getOsmandRegions());
-					getEntriesToDownload().put(i, de);
+					getDownloadActivity().getEntriesToDownload().put(i, de);
 				}
 			}
 		}
 		if(count > 0){
-			Builder builder = new AlertDialog.Builder(getMyActivity());
+			Builder builder = new AlertDialog.Builder(getDownloadActivity());
 			builder.setMessage(getString(R.string.download_additional_maps, s, sz));
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
@@ -286,14 +279,14 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					getEntriesToDownload().clear();
+					getDownloadActivity().getEntriesToDownload().clear();
 				}
 			});
 			builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
 				
 				@Override
 				public void onCancel(DialogInterface dialog) {
-					getEntriesToDownload().clear();					
+					getDownloadActivity().getEntriesToDownload().clear();
 				}
 			});
 			builder.show();
@@ -304,7 +297,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 	private void showDialogOfFreeDownloadsIfNeeded() {
 		if (Version.isFreeVersion(getMyApplication())) {
-			Builder msg = new AlertDialog.Builder(getMyActivity());
+			Builder msg = new AlertDialog.Builder(getDownloadActivity());
 			msg.setTitle(R.string.free_version_title);
 			String m = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "") + "\n";
 			m += getString(R.string.available_downloads_left, MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get());
@@ -332,7 +325,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == RELOAD_ID) {
 			// re-create the thread
-			downloadListIndexThread.runReloadIndexFiles();
+			DownloadActivity.downloadListIndexThread.runReloadIndexFiles();
 			return true;
 		} else if (item.getItemId() == SELECT_ALL_ID) {
 			selectAll();
@@ -361,24 +354,13 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		}
 	}
 	
-	public DownloadActivityType getType() {
-		return type;
-	}
-	
-	public Map<IndexItem, List<DownloadEntry>> getEntriesToDownload() {
-		if(downloadListIndexThread == null) {
-			return new LinkedHashMap<IndexItem, List<DownloadEntry>>();
-		}
-		return downloadListIndexThread.getEntriesToDownload();
-	}
-
 	public String getFilterText() {
 		return filterText.getText().toString();
 	}
 
 
 	public void deselectAll() {
-		downloadListIndexThread.getEntriesToDownload().clear();
+		DownloadActivity.downloadListIndexThread.getEntriesToDownload().clear();
 		listAdapter.notifyDataSetInvalidated();
 		
 		getView().findViewById(R.id.DownloadButton).setVisibility(View.GONE);
@@ -386,7 +368,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 
 	private void filterExisting() {
-		final Map<String, String> listAlreadyDownloaded =  downloadListIndexThread.getDownloadedIndexFileNames();
+		final Map<String, String> listAlreadyDownloaded =  DownloadActivity.downloadListIndexThread.getDownloadedIndexFileNames();
 		
 		final List<IndexItem> filtered = new ArrayList<IndexItem>();
 		for (IndexItem fileItem : listAdapter.getIndexFiles()) {
@@ -404,13 +386,14 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		for (int j = 0; j < listAdapter.getGroupCount(); j++) {
 			for (int i = 0; i < listAdapter.getChildrenCount(j); i++) {
 				IndexItem es = listAdapter.getChild(j, i);
-				if (!getEntriesToDownload().containsKey(es)) {
+				if (!getDownloadActivity().getEntriesToDownload().containsKey(es)) {
 					selected++;
-					getEntriesToDownload().put(es, es.createDownloadEntry(getMyApplication(), type, new ArrayList<DownloadEntry>(1)));
+					getDownloadActivity().getEntriesToDownload().put(es, es.createDownloadEntry(getMyApplication(),
+							getDownloadActivity().getType(), new ArrayList<DownloadEntry>(1)));
 				}
 			}
 		}
-		AccessibleToast.makeText(getMyActivity(), MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
+		AccessibleToast.makeText(getDownloadActivity(), MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
 		listAdapter.notifyDataSetInvalidated();
 		if(selected > 0){
 			updateDownloadButton(true);
@@ -422,14 +405,14 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		View view = getView();
 		int x = getExpandableListView().getScrollX();
 		int y = getExpandableListView().getScrollY();
-		if (getEntriesToDownload().isEmpty()) {
+		if (getDownloadActivity().getEntriesToDownload().isEmpty()) {
 			view.findViewById(R.id.DownloadButton).setVisibility(View.GONE);
 		} else {
-			BasicProgressAsyncTask<?, ?, ?> task = downloadListIndexThread.getCurrentRunningTask();
+			BasicProgressAsyncTask<?, ?, ?> task = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
 			boolean running = task instanceof DownloadIndexesThread.DownloadIndexesAsyncTask; 
 			((Button) view.findViewById(R.id.DownloadButton)).setEnabled(!running);
 			String text;
-			int downloads = downloadListIndexThread.getDownloads();
+			int downloads = DownloadActivity.downloadListIndexThread.getDownloads();
 			if (!running) {
 				text = getString(R.string.download_files) + "  (" + downloads + ")"; //$NON-NLS-1$
 			} else {
@@ -437,12 +420,12 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 			}
 			view.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 			if (Version.isFreeVersion(getMyApplication())) {
-				int countedDownloads = downloadListIndexThread.getDownloads();
+				int countedDownloads = DownloadActivity.downloadListIndexThread.getDownloads();
 				int left = MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get() - downloads;
 				boolean excessLimit = left < 0;
 				if (left < 0)
 					left = 0;
-				if (DownloadActivityType.isCountedInDownloads(getType())) {
+				if (DownloadActivityType.isCountedInDownloads(getDownloadActivity().getType())) {
 					text += " (" + (excessLimit ? "! " : "") + getString(R.string.files_limit, left).toLowerCase() + ")";
 				}
 			}
@@ -468,24 +451,15 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		return items;
 	}
 
-	public void changeType(final DownloadActivityType tp) {
-		getMyActivity().invalidateOptionsMenu();
-		if (downloadListIndexThread != null && type != tp) {
-			type = tp;
-			downloadListIndexThread.runCategorization(tp);
-		}
-	}
-
-
 	private void makeSureUserCancelDownload() {
-		Builder bld = new AlertDialog.Builder(getMyActivity());
+		Builder bld = new AlertDialog.Builder(getDownloadActivity());
 		bld.setTitle(getString(R.string.default_buttons_cancel));
 		bld.setMessage(R.string.confirm_interrupt_download);
 		bld.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				BasicProgressAsyncTask<?, ?, ?> t = downloadListIndexThread.getCurrentRunningTask();
+				BasicProgressAsyncTask<?, ?, ?> t = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
 				if(t != null) {
 					t.setInterrupted(true);
 				}
@@ -503,16 +477,16 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		
 		if(ch.isChecked()){
 			ch.setChecked(!ch.isChecked());
-			getEntriesToDownload().remove(e);
+			getDownloadActivity().getEntriesToDownload().remove(e);
 			updateDownloadButton(true);
 			return true;
 		}
 		
-		List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), type, new ArrayList<DownloadEntry>());
+		List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), getDownloadActivity().getType(), new ArrayList<DownloadEntry>());
 		if (download.size() > 0) {
 			// if(!fileToUnzip.exists()){
 			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
-			getEntriesToDownload().put(e, download);
+			getDownloadActivity().getEntriesToDownload().put(e, download);
 			updateDownloadButton(true);
 			ch.setChecked(!ch.isChecked());
 		}
@@ -558,7 +532,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		if (Version.isFreeVersion(getMyApplication()) ) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			boolean wiki = false;
-			for (IndexItem es : downloadListIndexThread.getEntriesToDownload().keySet()) {
+			for (IndexItem es : DownloadActivity.downloadListIndexThread.getEntriesToDownload().keySet()) {
 				if (es.getBasename() != null && es.getBasename().contains("_wiki")) {
 					wiki = true;
 					break;
@@ -568,7 +542,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 			}
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS || wiki) {
 				String msgTx = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
-				Builder msg = new AlertDialog.Builder(getMyActivity());
+				Builder msg = new AlertDialog.Builder(getDownloadActivity());
 				msg.setTitle(R.string.free_version_title);
 				msg.setMessage(msgTx);
 				msg.setPositiveButton(R.string.default_buttons_ok, null);
@@ -584,46 +558,21 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	
 	protected void downloadFilesCheckInternet() {
 		if(!getMyApplication().getSettings().isWifiConnected()) {
-			Builder builder = new AlertDialog.Builder(getMyActivity());
+			Builder builder = new AlertDialog.Builder(getDownloadActivity());
 			builder.setMessage(getString(R.string.download_using_mobile_internet));
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					downloadFilesPreCheckSpace();
+					getDownloadActivity().downloadFilesPreCheckSpace();
 				}
 			});
 			builder.setNegativeButton(R.string.default_buttons_no, null);
 			builder.show();
 		} else {
-			downloadFilesPreCheckSpace();
+			getDownloadActivity().downloadFilesPreCheckSpace();
 		}
 	}
 	
-	protected void downloadFilesPreCheckSpace() {
-		double sz = 0;
-		List<DownloadEntry> list = downloadListIndexThread.flattenDownloadEntries();
-		for (DownloadEntry es :  list) {
-			sz += es.sizeMB;
-		}
-		// get availabile space
-		double asz = downloadListIndexThread.getAvailableSpace();
-		if (asz != -1 && asz > 0 && sz / asz > 0.4) {
-			Builder builder = new AlertDialog.Builder(getMyActivity());
-			builder.setMessage(MessageFormat.format(getString(R.string.download_files_question_space), list.size(), sz, asz));
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					downloadListIndexThread.runDownloadFiles();
-				}
-			});
-			builder.setNegativeButton(R.string.default_buttons_no, null);
-			builder.show();
-		} else {
-			downloadListIndexThread.runDownloadFiles();
-		}
-
-	}
-
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -631,12 +580,12 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	    	EditText filterText = (EditText) getView().findViewById(R.id.search_box);
 	    	filterText.removeTextChangedListener(textWatcher);
 	    }
-		downloadListIndexThread.setUiActivity(null);
+		DownloadActivity.downloadListIndexThread.setUiActivity(null);
 	}
 	
 
 	public void updateProgress(boolean updateOnlyProgress) {
-		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask = downloadListIndexThread.getCurrentRunningTask();
+		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
 		if(updateOnlyProgress) {
 			if(!basicProgressAsyncTask.isIndeterminate()) {
 				progressPercent.setText(basicProgressAsyncTask.getProgressPercentage() +"%");
@@ -662,7 +611,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	public DownloadActivity getMyActivity(){ return (DownloadActivity)getActivity();}
+	public DownloadActivity getDownloadActivity(){ return (DownloadActivity)getActivity();}
 
 	public ExpandableListAdapter getExpandableListAdapter(){ return listAdapter;}
 
