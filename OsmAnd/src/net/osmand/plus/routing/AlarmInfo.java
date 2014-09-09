@@ -97,7 +97,7 @@ public class AlarmInfo implements LocationPoint {
 		if(alarmInfo != null) {
 			alarmInfo.setLatLon(loc.getLatitude(), loc.getLongitude());
 		}
-		return null;
+		return alarmInfo;
 	}
 	
 	public int updateDistanceAndGetPriority(float time, float distance) {
