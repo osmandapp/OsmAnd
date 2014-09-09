@@ -155,6 +155,8 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		setHasOptionsMenu(true);
+
 		DownloadActivity.downloadListIndexThread.setUiActivity(this);
 
 		settings = getMyApplication().getSettings();
@@ -239,13 +241,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 			}
 		}
 	}
-	
-	@Override
-	public void onPause() {
-		super.onPause();
-		getMyApplication().setDownloadActivity(null);
-	}
-	
+
 	public void showDialogToDownloadMaps(Collection<String> maps) {
 		int count = 0;
 		int sz = 0;

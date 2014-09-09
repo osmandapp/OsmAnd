@@ -79,7 +79,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		listView.setAdapter(listAdapter);
 		setListView(listView);
 		//getDownloadActivity().getSupportActionBar().setLogo(R.drawable.tab_download_screen_icon);
-
 		return view;
 	}
 
@@ -100,6 +99,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				asyncLoader.setResult((List<LocalIndexInfo>) indexes);
 			}
 		}
+		setHasOptionsMenu(true);
 	}
 	
 	@Override

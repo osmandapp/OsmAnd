@@ -111,4 +111,10 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		return downloadListIndexThread.getEntriesToDownload();
 	}
 
+	@Override
+	public void onPause() {
+		super.onPause();
+		((OsmandApplication)getApplication()).setDownloadActivity(null);
+	}
+
 }
