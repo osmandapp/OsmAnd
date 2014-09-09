@@ -132,7 +132,6 @@
 		<activity android:name="net.osmand.access.SettingsAccessibilityActivity" android:configChanges="keyboardHidden|orientation" />
 
 		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" />
-		<activity android:name="net.osmand.plus.activities.DownloadIndexActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/local_index_download" />
 		<activity android:name="net.osmand.plus.activities.ShowRouteInfoActivity" android:label="@string/show_route" />
 		<activity android:name="net.osmand.plus.activities.FavouritesListActivity" android:label="@string/favourites_list_activity" />
 		<activity android:name="net.osmand.plus.activities.FavouritesActivity" android:windowSoftInputMode="adjustPan" />

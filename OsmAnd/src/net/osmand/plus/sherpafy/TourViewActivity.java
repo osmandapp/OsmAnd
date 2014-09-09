@@ -5,7 +5,7 @@ import java.util.WeakHashMap;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.DownloadIndexActivity;
+import net.osmand.plus.activities.DownloadIndexFragment;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.content.Intent;
@@ -376,7 +376,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 
 	public void startDownloadActivity() {
-		final Intent download = new Intent(this, DownloadIndexActivity.class);
+		final Intent download = new Intent(this, DownloadIndexFragment.class);
 		download.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		refreshListAfterDownload = true;
 		startActivity(download);

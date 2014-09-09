@@ -104,10 +104,10 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 
 
 	public void setContent() {
-		getListView().setFastScrollEnabled(true);
+		getExpandableListView().setFastScrollEnabled(true);
 		lightContent = app.getSettings().isLightContent();
 		if (adapter == null) {
-			adapter = new SelectedGPXAdapter(getListView());
+			adapter = new SelectedGPXAdapter(getExpandableListView());
 			setAdapter(adapter);
 		}
 		List<GpxDisplayGroup> groups = selectedGpxHelper.getDisplayGroups();
@@ -131,7 +131,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		adapter.setDisplayGroups(groups);
 		if(isArgumentTrue(ARG_TO_EXPAND_TRACK_INFO)){
 			for(int i = 0; i < groups.size(); i++) {
-				getListView().expandGroup(i);
+				getExpandableListView().expandGroup(i);
 			}
 		}
 	}

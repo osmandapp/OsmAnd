@@ -372,8 +372,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		if (id.equals(settings.VOICE_PROVIDER.getId())) {
 			if (MORE_VALUE.equals(newValue)) {
 				// listPref.set(oldValue); // revert the change..
-				final Intent intent = new Intent(this, DownloadIndexActivity.class);
-				intent.putExtra(DownloadIndexActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
+				final Intent intent = new Intent(this, DownloadIndexFragment.class);
+				intent.putExtra(DownloadIndexFragment.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
 				startActivity(intent);
 			} else {
 				super.onPreferenceChange(preference, newValue);

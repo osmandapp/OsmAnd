@@ -7,6 +7,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.DownloadIndexFragment;
 import net.osmand.plus.activities.FavouritesActivity;
 
 /**
@@ -16,6 +17,9 @@ public class DownloadActivity extends SherlockFragmentActivity {
 
 	private TabHost tabHost;
 	private FavouritesActivity.TabsAdapter mTabsAdapter;
+	public static DownloadIndexesThread downloadListIndexThread;
+	private DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,20 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		mTabsAdapter = new FavouritesActivity.TabsAdapter(this, tabHost, viewPager, settings);
 		mTabsAdapter.addTab(tabHost.newTabSpec("LOCAL_INDEX").setIndicator("Local maps"),
 				LocalIndexesFragment.class, null);
+		mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS").setIndicator("Downloads"),
+				DownloadIndexFragment.class, null);
 		tabHost.setCurrentTab(0);
 	}
 
+	public DownloadActivityType getType() { return type;}
+
+	public void setType(DownloadActivityType type) { this.type = type;}
+
+	public void changeType(final DownloadActivityType tp) {
+		invalidateOptionsMenu();
+		if (downloadListIndexThread != null && type != tp) {
+			type = tp;
+			downloadListIndexThread.runCategorization(tp);
+		}
+	}
 }

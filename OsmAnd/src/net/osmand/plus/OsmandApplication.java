@@ -18,11 +18,8 @@ import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.access.AccessibilityMode;
-import net.osmand.plus.activities.DayNightHelper;
-import net.osmand.plus.activities.DownloadIndexActivity;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.activities.*;
+import net.osmand.plus.activities.DownloadIndexFragment;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.helpers.WaypointHelper;
@@ -114,7 +111,7 @@ public class OsmandApplication extends Application {
 	BRouterServiceConnection bRouterServiceConnection;
 
 	MapActivity mapActivity;
-	DownloadIndexActivity downloadActivity;
+	DownloadIndexFragment downloadActivity;
 	
 	@Override
 	public void onCreate() {
@@ -882,11 +879,11 @@ public class OsmandApplication extends Application {
 		this.mapActivity = mapActivity;
 	}
 	
-	public void setDownloadActivity(DownloadIndexActivity downloadActivity) {
+	public void setDownloadActivity(DownloadIndexFragment downloadActivity) {
 		this.downloadActivity = downloadActivity;
 	}
 	
-	public DownloadIndexActivity getDownloadActivity() {
+	public DownloadIndexFragment getDownloadActivity() {
 		return downloadActivity;
 	}
 }

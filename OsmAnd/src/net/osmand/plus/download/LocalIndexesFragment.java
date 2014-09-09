@@ -14,13 +14,10 @@ import com.actionbarsherlock.view.*;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
-import net.osmand.map.OsmandRegions;
 import net.osmand.plus.*;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.activities.*;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -32,12 +29,10 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
-import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.StatFs;
 import android.text.SpannableString;
 import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -459,9 +454,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				localOptionsMenu(itemId);
 			}
 		};
-		optionsMenuAdapter.item(R.string.local_index_download)
-						.icons(R.drawable.ic_action_gdown_dark, R.drawable.ic_action_gdown_light)
-						.listen(listener).position(0).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
 						.icons(R.drawable.ic_action_refresh_dark, R.drawable.ic_action_refresh_light)
 						.listen(listener).position(1).reg();
@@ -632,7 +624,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onClick(View widget) {
 				asyncLoader.setResult(null);
-				startActivity(new Intent(getMyActivity(), DownloadIndexActivity.class));
+				startActivity(new Intent(getMyActivity(), DownloadIndexFragment.class));
 			}
 			
 			@Override
@@ -650,7 +642,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	public void localOptionsMenu(final int itemId) {
 		if (itemId == R.string.local_index_download) {
 			asyncLoader.setResult(null);
-			startActivity(new Intent(getMyActivity(), DownloadIndexActivity.class));
+			startActivity(new Intent(getMyActivity(), DownloadIndexFragment.class));
 		} else if (itemId == R.string.local_index_mi_reload) {
 			reloadIndexes();
 		} else if (itemId == R.string.local_index_mi_delete) {

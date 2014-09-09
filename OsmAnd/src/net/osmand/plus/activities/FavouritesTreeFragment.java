@@ -130,7 +130,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 		if(favouritesAdapter.getGroupCount() > 0 && 
 				"".equals(favouritesAdapter.getGroup(0).name)) {
-			getListView().expandGroup(0);
+			getExpandableListView().expandGroup(0);
 		}
 
 	}

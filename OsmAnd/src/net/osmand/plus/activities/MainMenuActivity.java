@@ -12,7 +12,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.sherpafy.SherpafyCustomization;
 import net.osmand.plus.sherpafy.TourViewActivity;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
@@ -376,7 +375,7 @@ public class MainMenuActivity extends Activity {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					startActivity(new Intent(MainMenuActivity.this, DownloadIndexActivity.class));
+					startActivity(new Intent(MainMenuActivity.this, DownloadIndexFragment.class));
 				}
 
 			});

@@ -101,7 +101,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 			if (empty) {
 				startActivity(new Intent(this, getMyApplication().getAppCustomization().getDownloadIndexActivity()));
 			} else {
-				startActivity(new Intent(this, getMyApplication().getAppCustomization().getLocalIndexActivity()));
+				startActivity(new Intent(this, getMyApplication().getAppCustomization().getDownloadActivity()));
 			}
 			return true;
 		} else if (preference == bidforfix) {

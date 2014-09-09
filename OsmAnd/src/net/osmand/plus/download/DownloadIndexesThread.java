@@ -23,7 +23,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.DownloadIndexActivity;
+import net.osmand.plus.activities.DownloadIndexFragment;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.resources.ResourceManager;
@@ -47,7 +47,7 @@ import android.view.View;
 import android.widget.Toast;
 
 public class DownloadIndexesThread {
-	private DownloadIndexActivity uiActivity = null;
+	private DownloadIndexFragment uiActivity = null;
 	private IndexFileList indexFiles = null;
 	private Map<IndexItem, List<DownloadEntry>> entriesToDownload = new ConcurrentHashMap<IndexItem, List<DownloadEntry>>();
 	private Set<DownloadEntry> currentDownloads = new HashSet<DownloadEntry>();
@@ -72,7 +72,7 @@ public class DownloadIndexesThread {
 		indexFiles = null;
 	}
 	
-	public void setUiActivity(DownloadIndexActivity uiActivity) {
+	public void setUiActivity(DownloadIndexFragment uiActivity) {
 		this.uiActivity = uiActivity;
 	}
 	
@@ -92,13 +92,13 @@ public class DownloadIndexesThread {
 	
 	public void updateLoadedFiles() {
 		Map<String, String> indexActivatedFileNames = app.getResourceManager().getIndexFileNames();
-		DownloadIndexActivity.listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT,
+		DownloadIndexFragment.listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT,
 				indexActivatedFileNames);
 		Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
-		DownloadIndexActivity.listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT,
+		DownloadIndexFragment.listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT,
 				indexFileNames);
 		app.getAppCustomization().updatedLoadedFiles(indexFileNames, indexActivatedFileNames);
-		DownloadIndexActivity.listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.TILES_INDEX_DIR),
+		DownloadIndexFragment.listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.TILES_INDEX_DIR),
 				IndexConstants.SQLITE_EXT, indexFileNames);
 		app.getResourceManager().getBackupIndexes(indexFileNames);
 		this.indexFileNames = indexFileNames;
@@ -230,7 +230,7 @@ public class DownloadIndexesThread {
 								break downloadCycle;
 							} 
 							if (exceedsFreelimit(entry)) {
-								breakDownloadMessage = app.getString(R.string.free_version_message, DownloadIndexActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS
+								breakDownloadMessage = app.getString(R.string.free_version_message, DownloadIndexFragment.MAXIMUM_AVAILABLE_FREE_DOWNLOADS
 										+ "");
 								break downloadCycle;
 							}
@@ -272,7 +272,7 @@ public class DownloadIndexesThread {
 
 		private boolean exceedsFreelimit(DownloadEntry entry) {
 			return Version.isFreeVersion(app) &&
-					DownloadActivityType.isCountedInDownloads(entry.item.getType()) && downloads.get() >= DownloadIndexActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+					DownloadActivityType.isCountedInDownloads(entry.item.getType()) && downloads.get() >= DownloadIndexFragment.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 		}
 
 		private String reindexFiles(List<File> filesToReindex) {
@@ -323,7 +323,7 @@ public class DownloadIndexesThread {
 			if (de.isAsset) {
 				try {
 					if (uiActivity != null) {
-						ResourceManager.copyAssets(uiActivity.getAssets(), de.assetName, de.targetFile);
+						ResourceManager.copyAssets(uiActivity.getMyActivity().getAssets(), de.assetName, de.targetFile);
 						boolean changedDate = de.targetFile.setLastModified(de.dateModified);
 						if(!changedDate) {
 							log.error("Set last timestamp is not supported");
@@ -386,7 +386,7 @@ public class DownloadIndexesThread {
 									.createDownloadEntry(uiActivity.getMyApplication(), DownloadActivityType.NORMAL_FILE,
 											new ArrayList<DownloadEntry>());
 							uiActivity.getEntriesToDownload().put(basemap, downloadEntry);
-							AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download,
+							AccessibleToast.makeText(uiActivity.getMyActivity(), R.string.basemap_was_selected_to_download,
 									Toast.LENGTH_LONG).show();
 							uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 						}
@@ -507,7 +507,7 @@ public class DownloadIndexesThread {
 					if ((type == DownloadActivityType.SRTM_COUNTRY_FILE || type == DownloadActivityType.HILLSHADE_FILE)
 							&& OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) instanceof SRTMPlugin
 							&& !OsmandPlugin.getEnabledPlugin(SRTMPlugin.class).isPaid()) {
-						Builder msg = new AlertDialog.Builder(uiActivity);
+						Builder msg = new AlertDialog.Builder(uiActivity.getMyActivity());
 						msg.setTitle(R.string.srtm_paid_version_title);
 						msg.setMessage(R.string.srtm_paid_version_msg);
 						msg.setNegativeButton(R.string.button_upgrade_osmandplus, new DialogInterface.OnClickListener() {

@@ -31,13 +31,14 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.DownloadIndexActivity;
+import net.osmand.plus.activities.DownloadIndexFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.SelectedGPXFragment;
 import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.api.FileSettingsAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -60,7 +61,6 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 public class SherpafyCustomization extends OsmAndAppCustomization {
@@ -107,8 +107,8 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	public boolean setAccessCode(String acCode) {
 		acCode = acCode.toUpperCase();
-		if(DownloadIndexActivity.downloadListIndexThread != null) {
-			DownloadIndexActivity.downloadListIndexThread.clear();
+		if(DownloadIndexFragment.downloadListIndexThread != null) {
+			DownloadIndexFragment.downloadListIndexThread.clear();
 		}
 		if(validate(acCode) || Algorithms.isEmpty(acCode)) {
 			accessCodePref.set(acCode);
@@ -182,7 +182,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 	
 	public void updatedLoadedFiles(java.util.Map<String,String> indexFileNames, java.util.Map<String,String> indexActivatedFileNames) {
-		DownloadIndexActivity.listWithAlternatives(app.getResourceManager().getDateFormat(),
+		DownloadIndexFragment.listWithAlternatives(app.getResourceManager().getDateFormat(),
 				toursFolder, "", indexFileNames);
 	}
 	
@@ -198,7 +198,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				for(File tr : availableTours) {
 					if (tr.isDirectory()) {
 						String date = app.getResourceManager().getDateFormat()
-								.format(new Date(DownloadIndexActivity.findFileInDir(tr).lastModified()));
+								.format(new Date(DownloadIndexFragment.findFileInDir(tr).lastModified()));
 						indexFileNames.put(tr.getName(), date);
 						final TourInformation tourInformation = new TourInformation(tr);
 						tourPresent.add(tourInformation);
@@ -229,7 +229,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		}
 		this.tourPresent = tourPresent;
 		if(!suggestToDownloadMap.isEmpty()) {
-			final DownloadIndexActivity da = app.getDownloadActivity();
+			final DownloadIndexFragment da = app.getDownloadActivity();
 			if (da != null) {
 				app.runInUIThread(new Runnable() {
 
@@ -612,7 +612,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		return s;
 	}
 	
-	public void preDownloadActivity(final DownloadIndexActivity da, final List<DownloadActivityType> downloadTypes, ActionBar actionBar) {
+	public void preDownloadActivity(final DownloadActivity da, final List<DownloadActivityType> downloadTypes, ActionBar actionBar) {
 		actionBar.setTitle(TourDownloadType.TOUR.getString(da));
 	}
 	
