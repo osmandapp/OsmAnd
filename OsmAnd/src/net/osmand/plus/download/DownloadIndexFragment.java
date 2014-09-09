@@ -576,7 +576,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-	    if (textWatcher != null) {
+	    if (textWatcher != null && getView() != null) {
 	    	EditText filterText = (EditText) getView().findViewById(R.id.search_box);
 	    	filterText.removeTextChangedListener(textWatcher);
 	    }
