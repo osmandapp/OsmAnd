@@ -1803,9 +1803,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="flat_list_waypoitns">Tous</string>
     <string name="waypoints">Points de cheminement</string>
     <string name="targets">Destinations</string>
-    <string name="way_alarms">Obstacles</string>
-    <string name="speak_favorites">Annoncer les favoris</string>
-    <string name="speak_poi">Annoncer les points d\'intérêt</string>
+    <string name="way_alarms">Alertes de circulation</string>
+    <string name="speak_favorites">Annoncer les favoris proches</string>
+    <string name="speak_poi">Annoncer les points d\'intérêt proches</string>
     <string name="flat_list_waypoints">Tous</string>
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">Enregistrer vos traces en touchant le bouton de l\'écran principal. Monter les paramètres pour l\'enregistrement des traces dans des fichiers GPX locaux ou en ligne avec un service Web.</string>

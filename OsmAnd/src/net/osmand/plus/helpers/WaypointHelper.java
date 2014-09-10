@@ -46,6 +46,7 @@ public class WaypointHelper {
 	private int searchDeviationRadius = 500;
 	private static final int LONG_ANNOUNCE_RADIUS = 700;
 	private static final int SHORT_ANNOUNCE_RADIUS = 150;
+	private static final int ALARMS_ANNOUNCE_RADIUS = 150;
 
 	OsmandApplication app;
 	// every time we modify this collection, we change the reference (copy on write list)
@@ -193,13 +194,17 @@ public class WaypointHelper {
 	
 	public void enableWaypointType(int type, boolean enable) {
 		if(type == ALARMS) {
+			app.getSettings().SHOW_TRAFFIC_WARNINGS.set(enable);
 			app.getSettings().SPEAK_TRAFFIC_WARNINGS.set(enable);
 		} else if(type == POI) {
 			app.getSettings().SHOW_NEARBY_POI.set(enable);
+			app.getSettings().ANNOUNCE_NEARBY_POI.set(enable);
 		} else if(type == FAVORITES) {
-			app.getSettings().SHOW_NEARBY_FAVORIES.set(enable);
+			app.getSettings().SHOW_NEARBY_FAVORITES.set(enable);
+			app.getSettings().ANNOUNCE_NEARBY_FAVORITES.set(enable);
 		} else if(type == WAYPOINTS) {
 			app.getSettings().SHOW_WPT.set(enable);
+			app.getSettings().ANNOUNCE_WPT.set(enable);
 		}
 		recalculatePoints(route, type, locationPoints);
 	}
@@ -221,13 +226,37 @@ public class WaypointHelper {
 
 	public boolean isTypeEnabled(int type) {
 		if(type == ALARMS) {
-			return showAlarms();
-		} else if(type == POI) {
-			return showPOI();
-		} else if(type == FAVORITES) {
-			return showFavorites();
-		} else if(type == WAYPOINTS) {
-			return showGPXWaypoints();
+			return showAlarms() || announceAlarms();
+		} else if (type == POI) {
+			//sync SHOW (which has no item in nav settings) to automatically load points in the dialogue
+			if (announcePOI()) {
+				app.getSettings().SHOW_NEARBY_POI.set(true);
+			} else {
+				app.getSettings().SHOW_NEARBY_POI.set(false);
+			}
+			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
+			//return showPOI() || announcePOI();
+			return announcePOI();
+		} else if (type == FAVORITES) {
+			//sync SHOW (which has no item in nav settings) to automatically load points in the dialogue
+			if (announceFavorites()) {
+				app.getSettings().SHOW_NEARBY_FAVORITES.set(true);
+			} else {
+				app.getSettings().SHOW_NEARBY_FAVORITES.set(false);
+			}
+			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
+			//return showFavorites() || announceFavorites();
+			return announceFavorites();
+		} else if (type == WAYPOINTS) {
+			//sync SHOW (which has no item in nav settings) to automatically load points in the dialogue
+			if (announceGPXWaypoints()) {
+				app.getSettings().SHOW_WPT.set(true);
+			} else {
+				app.getSettings().SHOW_WPT.set(false);
+			}
+			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
+			//return showGPXWaypoints() || announceGPXWaypoints();
+			return announceGPXWaypoints();
 		}
 		return true;
 	}
@@ -302,17 +331,19 @@ public class WaypointHelper {
 							break;
 						}
 						LocationPoint point = lwp.point;
-						double d1 = MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-								point.getLatitude(), point.getLongitude()) + lwp.getDeviationDistance();
+						double d1 = Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+								point.getLatitude(), point.getLongitude()) - lwp.getDeviationDistance());
 						Integer state = locationPointsStates.get(point);
 						if (state != null && state.intValue() == ANNOUNCED_ONCE
-								&& getVoiceRouter()
-										.isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS)) {
+								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS)) {
 							locationPointsStates.put(point, ANNOUNCED_DONE);
 							announcePoints.add(lwp);
-						} else if ((state == null || state == NOT_ANNOUNCED)
-								&& getVoiceRouter()
-										.isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS)) {
+						} else if (type != ALARMS && (state == null || state == NOT_ANNOUNCED)
+								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS)) {
+							locationPointsStates.put(point, ANNOUNCED_ONCE);
+							approachPoints.add(lwp);
+						} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)
+								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, ALARMS_ANNOUNCE_RADIUS)) {
 							locationPointsStates.put(point, ANNOUNCED_ONCE);
 							approachPoints.add(lwp);
 						}
@@ -336,7 +367,7 @@ public class WaypointHelper {
 							getVoiceRouter().approachPoi(lastKnownLocation, approachPoints);
 						} else if (type == ALARMS) {
 							EnumSet<AlarmInfoType> ait = EnumSet.noneOf(AlarmInfoType.class);
-							for(LocationPointWrapper pw : announcePoints) {
+							for(LocationPointWrapper pw : approachPoints) {
 								ait.add(((AlarmInfo) pw.point).getType());
 							}
 							for(AlarmInfoType t : ait) {
@@ -587,19 +618,26 @@ public class WaypointHelper {
 	}
 	
 	public boolean showFavorites() {
-		return app.getSettings().SHOW_NEARBY_FAVORIES.get();
-	}
-	
-	public boolean showAlarms() {
-		// I think this line was a bug:
-		//return app.getSettings().SPEAK_SPEED_CAMERA.get() || app.getSettings().SPEAK_TRAFFIC_WARNINGS.get();
-		return app.getSettings().SHOW_CAMERAS.get() || app.getSettings().SHOW_TRAFFIC_WARNINGS.get();
+		return app.getSettings().SHOW_NEARBY_FAVORITES.get();
 	}
 	
 	public boolean announceFavorites() {
 		return app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get();
 	}
-	
+
+	public boolean showAlarms() {
+		//I think here only traffic warnings other than the speed cam are needed. speed cam setting is a separate setting for explicit allow/disallow by user.
+		//return app.getSettings().SHOW_CAMERAS.get() || app.getSettings().SHOW_TRAFFIC_WARNINGS.get();
+		return app.getSettings().SHOW_TRAFFIC_WARNINGS.get();
+	}
+
+	public boolean announceAlarms() {
+		//I think here only traffic warnings other than the speed cam are needed. speed cam setting is a separate setting for explicit allow/disallow by user.
+		//return app.getSettings().SPEAK_SPEED_CAMERA.get() || app.getSettings().SPEAK_TRAFFIC_WARNINGS.get();
+		return app.getSettings().SPEAK_TRAFFIC_WARNINGS.get();
+	}
+
+
 	public class LocationPointWrapper {
 		LocationPoint point;
 		float deviationDistance;
@@ -646,8 +684,12 @@ public class WaypointHelper {
 				return uiCtx.getResources().getDrawable(
 						!((TargetPoint)point).intermediate? R.drawable.list_destination:
 					R.drawable.list_intermediate);
-			} else {
+			} else if(type == FAVORITES || type == WAYPOINTS) {
 				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
+			} else if(type == ALARMS) {
+				return null;
+			} else {
+				return null;
 			}
 		}
 		

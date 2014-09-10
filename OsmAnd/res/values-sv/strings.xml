@@ -623,7 +623,7 @@
     <string name="replace_destination_point">Byt destination</string>
     <string name="new_destination_point_dialog">Du har redan en angiven destination.</string>
     <string name="target_point">Waypoint %1$s</string>
-    <string name="target_points">Vägpunkter</string>
+    <string name="target_points">Waypoints</string>
     <string name="intermediate_point_too_far">Waypointen %1$s för långt från närmaste väg.</string>
     <string name="arrived_at_intermediate_point">Du har anlänt till din waypoint</string>
     <string name="context_menu_item_intermediate_point">Lägg till som waypoint</string>
@@ -1671,7 +1671,7 @@
     <string name="flat_list_waypoitns">Alla</string>
     <string name="waypoints">Waypoints</string>
     <string name="targets">Mål</string>
-    <string name="way_alarms">Hinder</string>
+    <string name="way_alarms">Trafikskyltar</string>
     <string name="speak_favorites">Meddela favoriter</string>
     <string name="speak_poi">Meddela POI</string>
     <string name="index_tours">Rundturer</string>

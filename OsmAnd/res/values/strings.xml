@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="speak_favorites">Announce nearby Favorites</string>
+	<string name="speak_poi">Announce nearby POI</string>
+	<string name="way_alarms">Traffic warnings</string>
 	<string name="tip_navigation">Navigation</string>
 	<string name="tip_navigation_t">To get directions to a place, either directly long-click on it on the map, (then tap its description marker and select \'Directions to\'), or select \'Directions to\' after tapping any entry in a search results list or favorite list. 
 		\n\nThe destination is marked as a target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
@@ -63,9 +66,6 @@
     <string name="flat_list_waypoints">All</string>
     <string name="waypoints">Waypoints</string>
     <string name="targets">Destinations</string>
-    <string name="way_alarms">Obstacles</string>
-    <string name="speak_favorites">Announce Favorites</string>
-    <string name="speak_poi">Announce POI</string>
     <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>
     <string name="more">More...</string>

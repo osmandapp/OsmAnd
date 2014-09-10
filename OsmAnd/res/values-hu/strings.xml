@@ -1740,9 +1740,9 @@
     <string name="flat_list_waypoints">Összes</string>
     <string name="waypoints">Útpontok</string>
     <string name="targets">Úti célok</string>
-    <string name="way_alarms">Akadályok</string>
-    <string name="speak_favorites">Kedvenc helyek</string>
-    <string name="speak_poi">Érdekes helyek (POI)</string>
+    <string name="way_alarms">Forgalmi figyelmeztetések</string>
+    <string name="speak_favorites">Közeli kedvenc helyek</string>
+    <string name="speak_poi">Közeli érdekes helyek (POI)</string>
     <string name="download_additional_maps">Letöltöd a hiányzó térképeket %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Térképböngészés</string>  
     <string name="rendering_value_car_name">Autó</string>
