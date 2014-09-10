@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,4 +34,5 @@ public class UpdatesIndexFragment extends OsmandExpandableListFragment {
 	}
 
 	public DownloadActivity getDownloadActivity() { return (DownloadActivity)getActivity(); }
+
 }

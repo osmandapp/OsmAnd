@@ -37,21 +37,21 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	private OsmandRegions osmandRegions;
 	private java.text.DateFormat format;
 
-	public DownloadIndexAdapter(DownloadIndexFragment downloadActivity, List<IndexItem> indexFiles) {
-		this.downloadActivity = downloadActivity;
+	public DownloadIndexAdapter(DownloadIndexFragment downloadFragment, List<IndexItem> indexFiles) {
+		this.downloadActivity = downloadFragment;
 		this.indexFiles = new ArrayList<IndexItem>(indexFiles);
-		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(downloadActivity.getMyApplication(), indexFiles);
+		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(downloadFragment.getMyApplication(), indexFiles);
 		synchronized (this) {
 			list.clear();
 			list.addAll(cats);
 		}
-		format = downloadActivity.getMyApplication().getResourceManager().getDateFormat();
-		okColor = downloadActivity.getResources().getColor(R.color.color_ok);
-		TypedArray ta = downloadActivity.getDownloadActivity().getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
-		defaultColor = ta.getColor(0, downloadActivity.getResources().getColor(R.color.color_unknown));
+		format = downloadFragment.getMyApplication().getResourceManager().getDateFormat();
+		okColor = downloadFragment.getResources().getColor(R.color.color_ok);
+		TypedArray ta = downloadFragment.getDownloadActivity().getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
+		defaultColor = ta.getColor(0, downloadFragment.getResources().getColor(R.color.color_unknown));
 		ta.recycle();
-		updateColor = downloadActivity.getResources().getColor(R.color.color_update);
-		osmandRegions = downloadActivity.getMyApplication().getResourceManager().getOsmandRegions();
+		updateColor = downloadFragment.getResources().getColor(R.color.color_update);
+		osmandRegions = downloadFragment.getMyApplication().getResourceManager().getOsmandRegions();
 	}
 
 	public void setLoadedFiles(Map<String, String> indexActivatedFileNames, Map<String, String> indexFileNames) {
