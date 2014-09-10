@@ -228,15 +228,15 @@ public class WaypointHelper {
 		if(type == ALARMS) {
 			return showAlarms() || announceAlarms();
 		} else if(type == POI) {
-			//no SHOW item in settings, hence only query ANNOUNE here
+			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
 			//return showPOI() || announcePOI();
 			return announcePOI();
 		} else if(type == FAVORITES) {
-			//no SHOW item in settings, hence only query ANNOUNE here
+			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
 			//return showFavorites() || announceFavorites();
 			return announceFavorites();
 		} else if(type == WAYPOINTS) {
-			//no SHOW item in settings, hence only query ANNOUNE here
+			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
 			//return showGPXWaypoints() || announceGPXWaypoints();
 			return announceGPXWaypoints();
 		}
