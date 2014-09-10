@@ -306,8 +306,8 @@ public class WaypointHelper {
 							break;
 						}
 						LocationPoint point = lwp.point;
-						double d1 = MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-								point.getLatitude(), point.getLongitude()) + lwp.getDeviationDistance();
+						double d1 = Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+								point.getLatitude(), point.getLongitude()) - lwp.getDeviationDistance());
 						Integer state = locationPointsStates.get(point);
 						if (state != null && state.intValue() == ANNOUNCED_ONCE
 								&& getVoiceRouter()
