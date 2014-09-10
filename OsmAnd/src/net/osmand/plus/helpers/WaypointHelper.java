@@ -46,6 +46,7 @@ public class WaypointHelper {
 	private int searchDeviationRadius = 500;
 	private static final int LONG_ANNOUNCE_RADIUS = 700;
 	private static final int SHORT_ANNOUNCE_RADIUS = 150;
+	private static final int ALARMS_ANNOUNCE_RADIUS = 150;
 
 	OsmandApplication app;
 	// every time we modify this collection, we change the reference (copy on write list)
@@ -314,9 +315,14 @@ public class WaypointHelper {
 										.isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS)) {
 							locationPointsStates.put(point, ANNOUNCED_DONE);
 							announcePoints.add(lwp);
-						} else if ((state == null || state == NOT_ANNOUNCED)
+						} else if (type != ALARMS && (state == null || state == NOT_ANNOUNCED)
 								&& getVoiceRouter()
 										.isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS)) {
+							locationPointsStates.put(point, ANNOUNCED_ONCE);
+							approachPoints.add(lwp);
+						} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)
+								&& getVoiceRouter()
+										.isDistanceLess(lastKnownLocation.getSpeed(), d1, ALARMS_ANNOUNCE_RADIUS)) {
 							locationPointsStates.put(point, ANNOUNCED_ONCE);
 							approachPoints.add(lwp);
 						}
