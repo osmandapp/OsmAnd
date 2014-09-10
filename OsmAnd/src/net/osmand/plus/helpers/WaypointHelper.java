@@ -193,13 +193,17 @@ public class WaypointHelper {
 	
 	public void enableWaypointType(int type, boolean enable) {
 		if(type == ALARMS) {
+			app.getSettings().SHOW_TRAFFIC_WARNINGS.set(enable);
 			app.getSettings().SPEAK_TRAFFIC_WARNINGS.set(enable);
 		} else if(type == POI) {
 			app.getSettings().SHOW_NEARBY_POI.set(enable);
+			app.getSettings().ANNOUNCE_NEARBY_POI.set(enable);
 		} else if(type == FAVORITES) {
 			app.getSettings().SHOW_NEARBY_FAVORIES.set(enable);
+			app.getSettings().ANNOUNCE_NEARBY_FAVORIES.set(enable);
 		} else if(type == WAYPOINTS) {
 			app.getSettings().SHOW_WPT.set(enable);
+			app.getSettings().ANNOUNCE_WPT.set(enable);
 		}
 		recalculatePoints(route, type, locationPoints);
 	}
@@ -590,16 +594,19 @@ public class WaypointHelper {
 		return app.getSettings().SHOW_NEARBY_FAVORIES.get();
 	}
 	
-	public boolean showAlarms() {
-		// I think this line was a bug:
-		//return app.getSettings().SPEAK_SPEED_CAMERA.get() || app.getSettings().SPEAK_TRAFFIC_WARNINGS.get();
-		return app.getSettings().SHOW_CAMERAS.get() || app.getSettings().SHOW_TRAFFIC_WARNINGS.get();
-	}
-	
 	public boolean announceFavorites() {
 		return app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get();
 	}
-	
+
+	public boolean showAlarms() {
+		return app.getSettings().SHOW_CAMERAS.get() || app.getSettings().SHOW_TRAFFIC_WARNINGS.get();
+	}
+
+	public boolean announceAlarms() {
+		return app.getSettings().SPEAK_SPEED_CAMERA.get() || app.getSettings().SPEAK_TRAFFIC_WARNINGS.get();
+	}
+
+
 	public class LocationPointWrapper {
 		LocationPoint point;
 		float deviationDistance;
