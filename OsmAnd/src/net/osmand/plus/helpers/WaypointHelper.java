@@ -335,7 +335,7 @@ public class WaypointHelper {
 						} else if (type == POI) {
 							getVoiceRouter().approachPoi(lastKnownLocation, approachPoints);
 						} else if (type == ALARMS) {
-							EnumSet<AlarmInfoType> ait = EnumSet.allOf(AlarmInfoType.class);
+							EnumSet<AlarmInfoType> ait = EnumSet.noneOf(AlarmInfoType.class);
 							for(LocationPointWrapper pw : announcePoints) {
 								ait.add(((AlarmInfo) pw.point).getType());
 							}
