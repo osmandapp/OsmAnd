@@ -591,7 +591,7 @@ public class WaypointHelper {
 	}
 	
 	public boolean showFavorites() {
-		return app.getSettings().SHOW_NEARBY_FAVORIES.get();
+		return app.getSettings().SHOW_NEARBY_FAVORITES.get();
 	}
 	
 	public boolean announceFavorites() {
