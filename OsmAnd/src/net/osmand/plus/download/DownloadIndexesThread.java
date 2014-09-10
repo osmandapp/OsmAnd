@@ -58,7 +58,8 @@ public class DownloadIndexesThread {
 	private Map<String, String> indexFileNames = new LinkedHashMap<String, String>();
 	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<String, String>();
 	private java.text.DateFormat dateFormat;
-	
+	private List<IndexItem> itemsToUpdate = new ArrayList<IndexItem>();
+
 
 	public DownloadIndexesThread(Context ctx) {
 		this.ctx = ctx;
@@ -111,6 +112,8 @@ public class DownloadIndexesThread {
 	public boolean isDownloadedFromInternet() {
 		return indexFiles != null && indexFiles.isDownloadedFromInternet();
 	}
+
+	public List<IndexItem> getItemsToUpdate() { return itemsToUpdate;}
 	
 	public class DownloadIndexesAsyncTask extends BasicProgressAsyncTask<IndexItem, Object, String> implements DownloadFileShowWarning {
 
@@ -501,6 +504,7 @@ public class DownloadIndexesThread {
 					DownloadIndexAdapter a = ((DownloadIndexAdapter) uiFragment.getExpandableListAdapter());
 					a.setLoadedFiles(indexActivatedFileNames, indexFileNames);
 					a.setIndexFiles(filtered, cats);
+					prepareFilesToDownload(filtered);
 					a.notifyDataSetChanged();
 					a.getFilter().filter(uiFragment.getFilterText());
 					if ((type == DownloadActivityType.SRTM_COUNTRY_FILE || type == DownloadActivityType.HILLSHADE_FILE)
@@ -541,7 +545,25 @@ public class DownloadIndexesThread {
 		execute(inst, new Void[0]);
 	}
 
-	
+	private void prepareFilesToDownload(List<IndexItem> filtered) {
+		itemsToUpdate.clear();
+		for (IndexItem item : filtered) {
+			String sfName = item.getTargetFileName();
+			java.text.DateFormat format = uiFragment.getDownloadActivity().getMyApplication().getResourceManager().getDateFormat();
+			String date = item.getDate(format);
+			String indexactivateddate = indexActivatedFileNames.get(sfName);
+			String indexfilesdate = indexFileNames.get(sfName);
+			if (date != null &&
+					!date.equals(indexactivateddate) &&
+					!date.equals(indexfilesdate) &&
+					indexActivatedFileNames.containsKey(sfName)) {
+				itemsToUpdate.add(item);
+			}
+		}
+		itemsToUpdate.size();
+	}
+
+
 	public boolean isDownloadRunning() {
 		for (int i = 0; i < currentRunningTask.size(); i++) {
 			if (currentRunningTask.get(i) instanceof DownloadIndexesAsyncTask) {

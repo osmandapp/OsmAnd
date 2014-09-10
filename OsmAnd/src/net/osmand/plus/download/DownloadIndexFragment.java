@@ -347,6 +347,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 	public void updateDownloadButton(boolean scroll) {
 		View view = getView();
+		//TODO find out why view and getexpandablelistview can be null
 		if (view == null || getExpandableListView() == null){
 			return;
 		}

@@ -199,7 +199,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		}
 	}
 
-	private OsmandApplication getMyApplication(){ return (OsmandApplication)getApplication();}
+	public OsmandApplication getMyApplication(){ return (OsmandApplication)getApplication();}
 
 	public void showDialogOfFreeDownloadsIfNeeded() {
 		if (Version.isFreeVersion(getMyApplication())) {
