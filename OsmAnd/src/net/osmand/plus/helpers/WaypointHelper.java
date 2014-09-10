@@ -419,6 +419,11 @@ public class WaypointHelper {
 
 
 	protected void recalculatePoints(RouteCalculationResult route, int type, List<List<LocationPointWrapper>> locationPoints) {
+		//sync SHOW settings not otherwise accessible in settings menu
+		app.getSettings().SHOW_NEARBY_POI.set(app.getSettings().ANNOUNCE_NEARBY_POI.get());
+		app.getSettings().SHOW_NEARBY_FAVORITES.set(app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get());
+		app.getSettings().SHOW_WPT.set(app.getSettings().ANNOUNCE_WPT.get());
+
 		boolean all = type == -1;
 		if (route != null && !route.isEmpty()) {
 			if ((type == FAVORITES || all)) {
