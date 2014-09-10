@@ -227,26 +227,32 @@ public class WaypointHelper {
 	public boolean isTypeEnabled(int type) {
 		if(type == ALARMS) {
 			return showAlarms() || announceAlarms();
-		} else if(type == POI) {
-			//this is required to load points from the start
+		} else if (type == POI) {
+			//sync SHOW (which has no item in nav settings) to automatically load points in the dialogue
 			if (announcePOI()) {
 				app.getSettings().SHOW_NEARBY_POI.set(true);
+			} else {
+				app.getSettings().SHOW_NEARBY_POI.set(false);
 			}
 			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
 			//return showPOI() || announcePOI();
 			return announcePOI();
-		} else if(type == FAVORITES) {
-			//this is required to load points from the start
+		} else if (type == FAVORITES) {
+			//sync SHOW (which has no item in nav settings) to automatically load points in the dialogue
 			if (announceFavorites()) {
 				app.getSettings().SHOW_NEARBY_FAVORITES.set(true);
+			} else {
+				app.getSettings().SHOW_NEARBY_FAVORITES.set(false);
 			}
 			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
 			//return showFavorites() || announceFavorites();
 			return announceFavorites();
-		} else if(type == WAYPOINTS) {
-			//this is required to load points from the start
+		} else if (type == WAYPOINTS) {
+			//sync SHOW (which has no item in nav settings) to automatically load points in the dialogue
 			if (announceGPXWaypoints()) {
 				app.getSettings().SHOW_WPT.set(true);
+			} else {
+				app.getSettings().SHOW_WPT.set(false);
 			}
 			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
 			//return showGPXWaypoints() || announceGPXWaypoints();
