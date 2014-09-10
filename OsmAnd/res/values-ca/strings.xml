@@ -1871,8 +1871,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="waypoints">Fites</string>
     <string name="targets">Destinacions</string>
     <string name="way_alarms">Notificacions de tràfic</string>
-    <string name="speak_favorites">Indica els preferits</string>
-    <string name="speak_poi">Indica els PDI</string>
+    <string name="speak_favorites">Indica els preferits propers</string>
+    <string name="speak_poi">Indica els PDI propers</string>
     <string name="index_tours">Itineraris</string>
     <string name="flat_list_waypoints">Totes</string>
     <string name="record_plugin_description">Enregistreu el vostre trajecte prement un botó sobre la pantalla del mapa. Reviseu la configuració de gravació dels vostres recorreguts a arxius locals GPX o a la xarxa utilitzant un servei web.</string>
