@@ -1,5 +1,7 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="speak_favorites">Nahegelegene Favoriten ankündigen</string>
+	<string name="speak_poi">Nahegelegene POI ankündigen</string>
 	<string name="tip_navigation">Navigation starten</string>
 	<string name="tip_navigation_t">Die Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte, (dann Kurzklick auf den Positionsmarker und das Auswählen des Menüpunktes \'Navigiere zu\'), oder über die Funktion \'Navigiere zu\' bei Klick auf ein Ergebnis einer Such-Liste oder einen Favoriten.
 		\n\nDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.
@@ -1964,8 +1966,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="waypoints">Wegpunkte</string>
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
-    <string name="speak_favorites">Favoriten ankündigen</string>
-    <string name="speak_poi">POI ankündigen</string>
     <string name="record_plugin_description">Speichern Sie Ihre Tracks mit einem Klick. Zeigt die Einstellung, wie Strecken aufgezeichnet werden – in lokale GPX-Dateien oder online via Web-Service.</string>
     <string name="route_descr_destination"/>
     </resources>
