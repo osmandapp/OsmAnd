@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага масштабіраваньня</string>
     <string name="auto_zoom_close">Зачыніць</string>
     <string name="auto_zoom_far">Для сярэдняга масштаба</string>
@@ -1937,7 +1937,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="more">Больш...</string>
     <string name="flat_list_waypoitns">Усе</string>
     <string name="waypoints">Кропкі шляху</string>
-    <string name="way_alarms">Перашкоды</string>
+    <string name="way_alarms">Дарожныя папярэджаньні</string>
     <string name="speak_favorites">Абвяшчаць выбраныя</string>
     <string name="speak_poi">Абвяшчаць POI</string>
     <string name="targets">Цэлі</string>
