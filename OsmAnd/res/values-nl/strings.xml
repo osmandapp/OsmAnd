@@ -388,15 +388,13 @@
 		\n\nJe kan een ander startpunt kiezen door het punt te selecteren op de kaart en \'Aanwijzingen vanaf\' te kiezen. Met navigatie wordt de route dan automatisch opnieuw berekend zodra je echte positie bekend is. Zo kan je snel starten op een plaats zonder GPS-ontvangst. Als je \'Toon route\' kiest wordt de route niet herberekend.
 	</string>
   <string name="tip_search">Zoeken</string>
-  <string name="tip_search_t">\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een locatie (\'Kaartcontextmenu\' → \'Zoek hier dichtbij\'), of met het zoekscherm met \'Menu\' → \'Zoeken\'.
-		\n\nOp het zoekscherm kan je zoeken:
-		\n\t* op adres
-		\n\t* op coördinaten
-		\n\t* interessepunten (op categorie of op naam)
-		\n\t* uit de zoekgeschiedenis
-		\n\t* in de favorieten
-Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de favorieten toe te voegen.
-	</string>
+  <string name="tip_search_t">"Je kan direct op de kaart naar plaatsen zoeken of zoeken naar een locatie (\'Kaartcontextmenu\' → \'Zoek hier dichtbij\'), of met het zoekscherm met \'Menu\' → \'Zoeken\'.
+\n\nOp het zoekscherm kan je zoeken:
+\n\t* op adres
+\n\t* op coördinaten
+\n\t* interessepunten (op categorie of op naam)
+\n\t* uit de zoekgeschiedenis
+\n\t* in de favorieten\n\nKies daarna om er heen te navigeren, op de kaart te tonen, of aan een route of de favorieten toe te voegen. "</string>
   <string name="tip_map_context_menu">Menu \'Gebruik locatie\'</string>
   <string name="tip_map_context_menu_t">\tHet contextmenu op de kaart biedt alle acties die te maken hebben met een punt op de kaart.
 		\n\nHet wordt getoond als je (lang) op een punt op de kaart drukt en dan op de markering tikt, of door op de trackball-knop te drukken, of via \'Menu\' → \'Gebruik locatie\'.
@@ -404,7 +402,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
 		\n\tEen markering kan worden gesloten door er lang op te drukken.
 	</string>
   <string name="tip_initial">Help</string>
-  <string name="tip_initial_t">"OsmAnd is een navigatieprogramma met vele mogelijkheden.\n\nEen inleiding, tips en uitgebreide hulp zijn te vinden onder \'Menu\' → \'Help\', in het kaartscherm. "</string>
+  <string name="tip_initial_t">"OsmAnd is een navigatieprogramma met vele mogelijkheden.\n\nEen inleiding, tips en hulp zijn te vinden onder \'Menu\' → \'Help\', in het kaartscherm. "</string>
   <string name="next_button">Volgende</string>
   <string name="previous_button">Vorige</string>
   <string name="unit_of_length_descr">Wijzig eenheden van afstand en snelheid</string>
@@ -1947,7 +1945,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="flat_list_waypoitns">alle</string>
     <string name="waypoints">Routepunt(en)</string>
     <string name="targets">Bestemming(en)</string>
-    <string name="way_alarms">Obstakel(s)</string>
+    <string name="way_alarms">Filemeldingen</string>
     <string name="speak_favorites">Meld favorieten</string>
     <string name="speak_poi">Meld interessepunt (POI)</string>
     <string name="flat_list_waypoints">Alle</string>
