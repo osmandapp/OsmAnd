@@ -199,8 +199,8 @@ public class WaypointHelper {
 			app.getSettings().SHOW_NEARBY_POI.set(enable);
 			app.getSettings().ANNOUNCE_NEARBY_POI.set(enable);
 		} else if(type == FAVORITES) {
-			app.getSettings().SHOW_NEARBY_FAVORIES.set(enable);
-			app.getSettings().ANNOUNCE_NEARBY_FAVORIES.set(enable);
+			app.getSettings().SHOW_NEARBY_FAVORITES.set(enable);
+			app.getSettings().ANNOUNCE_NEARBY_FAVORITES.set(enable);
 		} else if(type == WAYPOINTS) {
 			app.getSettings().SHOW_WPT.set(enable);
 			app.getSettings().ANNOUNCE_WPT.set(enable);
