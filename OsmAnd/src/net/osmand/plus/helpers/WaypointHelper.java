@@ -225,13 +225,13 @@ public class WaypointHelper {
 
 	public boolean isTypeEnabled(int type) {
 		if(type == ALARMS) {
-			return showAlarms();
+			return showAlarms() || announceAlarms();
 		} else if(type == POI) {
-			return showPOI();
+			return showPOI() || announcePOI();
 		} else if(type == FAVORITES) {
-			return showFavorites();
+			return showFavorites() || announceFavorites();
 		} else if(type == WAYPOINTS) {
-			return showGPXWaypoints();
+			return showGPXWaypoints() || announceGPXWaypoints();
 		}
 		return true;
 	}
