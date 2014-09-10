@@ -623,7 +623,7 @@
     <string name="replace_destination_point">Byt destination</string>
     <string name="new_destination_point_dialog">Du har redan en angiven destination.</string>
     <string name="target_point">Waypoint %1$s</string>
-    <string name="target_points">Vägpunkter</string>
+    <string name="target_points">Waypoints</string>
     <string name="intermediate_point_too_far">Waypointen %1$s för långt från närmaste väg.</string>
     <string name="arrived_at_intermediate_point">Du har anlänt till din waypoint</string>
     <string name="context_menu_item_intermediate_point">Lägg till som waypoint</string>
