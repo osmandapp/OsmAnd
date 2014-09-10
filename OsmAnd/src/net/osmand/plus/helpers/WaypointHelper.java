@@ -657,8 +657,12 @@ public class WaypointHelper {
 				return uiCtx.getResources().getDrawable(
 						!((TargetPoint)point).intermediate? R.drawable.list_destination:
 					R.drawable.list_intermediate);
-			} else {
+			} else if(type == FAVORITES || type == WAYPOINTS) {
 				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
+			} else if(type == ALARMS) {
+				return null;
+			} else {
+				return null;
 			}
 		}
 		
