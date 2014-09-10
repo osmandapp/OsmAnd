@@ -244,7 +244,7 @@ public class RenderingRulesStorage {
 		
 		public void startElement(String name) throws XmlPullParserException, IOException {
 			boolean stateChanged = false;
-			if("filter".equals(name)){ //$NON-NLS-1$
+			if(isCase(name)){ //$NON-NLS-1$
 				attrsMap.clear();
 				if (stack.size() > 0 && stack.peek() instanceof GroupRules) {
 					GroupRules  parent = ((GroupRules) stack.peek());
@@ -263,7 +263,7 @@ public class RenderingRulesStorage {
 					registerGlobalRule(renderingRule, state, attrsMap);
 				}
 				stack.push(renderingRule);
-			} else if("groupFilter".equals(name)){ //$NON-NLS-1$
+			} else if(isApply(name)){ //$NON-NLS-1$
 				attrsMap.clear();
 				parseAttributes(attrsMap);
 				RenderingRule renderingRule = new RenderingRule(attrsMap, RenderingRulesStorage.this);
@@ -273,10 +273,10 @@ public class RenderingRulesStorage {
 				} else if (stack.size() > 0 && stack.peek() instanceof RenderingRule) {
 					((RenderingRule) stack.peek()).addIfChildren(renderingRule);
 				} else {
-					throw new XmlPullParserException("Group filter without parent");
+					throw new XmlPullParserException("Apply (groupFilter) without parent");
 				}
 				stack.push(renderingRule);
-			} else if("group".equals(name)){ //$NON-NLS-1$
+			} else if(isSwitch(name)){ //$NON-NLS-1$
 				GroupRules groupRules = new GroupRules();
 				if (stack.size() > 0 && stack.peek() instanceof GroupRules) {
 					GroupRules parent = ((GroupRules) stack.peek());
@@ -351,6 +351,18 @@ public class RenderingRulesStorage {
 			}
 			
 		}
+
+		protected boolean isCase(String name) {
+			return "filter".equals(name) || "case".equals(name);
+		}
+
+		protected boolean isApply(String name) {
+			return "groupFilter".equals(name) || "apply".equals(name) || "apply_if".equals(name);
+		}
+
+		protected boolean isSwitch(String name) {
+			return "group".equals(name) || "switch".equals(name);
+		}
 		
 		private Map<String, String> parseAttributes(Map<String, String> m) {
 			for(int i=0; i< parser.getAttributeCount(); i++) {
@@ -370,14 +382,14 @@ public class RenderingRulesStorage {
 
 
 		public void endElement(String name) throws XmlPullParserException  {
-			if ("filter".equals(name)) { //$NON-NLS-1$
+			if (isCase(name)) { //$NON-NLS-1$
 				stack.pop();
-			} else if("group".equals(name)){ //$NON-NLS-1$
+			} else if(isSwitch(name)){ //$NON-NLS-1$
 				GroupRules group = (GroupRules) stack.pop();
 				if (stack.size() == 0) {
 					group.registerGlobalRules(state);
 				}
-			} else if("groupFilter".equals(name)){ //$NON-NLS-1$
+			} else if(isApply(name)){ //$NON-NLS-1$
 				stack.pop();
 			} else if("renderingAttribute".equals(name)){ //$NON-NLS-1$
 				stack.pop();
@@ -456,7 +468,7 @@ public class RenderingRulesStorage {
 		storage.parseRulesFromXmlInputStream(is, resolver);
 		
 		printAllRules(storage);
-//		testSearch(storage);
+		testSearch(storage);
 	}
 
 	protected static void testSearch(RenderingRulesStorage storage) {
@@ -464,8 +476,8 @@ public class RenderingRulesStorage {
 		//		int count = 100000;
 		//		for (int i = 0; i < count; i++) {
 					RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
-					searchRequest.setStringFilter(storage.PROPS.R_TAG, "landuse");
-					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "wood");
+					searchRequest.setStringFilter(storage.PROPS.R_TAG, "building");
+					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "yes");
 					 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
 					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 15);
 					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 15);
