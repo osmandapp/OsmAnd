@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="tip_navigation">Navigation starten</string>
 	<string name="tip_navigation_t">Die Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte, (dann Kurzklick auf den Positionsmarker und das Auswählen des Menüpunktes \'Navigiere zu\'), oder über die Funktion \'Navigiere zu\' bei Klick auf ein Ergebnis einer Such-Liste oder einen Favoriten.
@@ -1448,7 +1448,7 @@
 	
 	<string name="speak_speed_limit">Höchstgeschwindigkeit ansagen</string>
 	<string name="speak_cameras">Blitzer ansagen</string>
-	<string name="speak_traffic_warnings">Verkehrsmeldungen ansagen</string>
+	<string name="speak_traffic_warnings">Verkehrswarnungen ansagen</string>
 	<string name="osb_author_or_password_not_specified">Bitte OSM-Nutzername und Passwort in den Einstellungen eingeben</string>
 	<string name="clear_intermediate_points">Zwischenziele löschen</string>
 	<string name="keep_intermediate_points">Zwischenziele behalten</string>
@@ -1963,7 +1963,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="flat_list_waypoints">Alle</string>
     <string name="waypoints">Wegpunkte</string>
     <string name="targets">Ziele</string>
-    <string name="way_alarms">Hindernisse</string>
+    <string name="way_alarms">Verkehrswarnungen</string>
     <string name="speak_favorites">Favoriten ankündigen</string>
     <string name="speak_poi">POI ankündigen</string>
     <string name="record_plugin_description">Speichern Sie Ihre Tracks mit einem Klick. Zeigt die Einstellung, wie Strecken aufgezeichnet werden – in lokale GPX-Dateien oder online via Web-Service.</string>
