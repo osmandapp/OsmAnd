@@ -230,7 +230,7 @@ public class WaypointHelper {
 		} else if(type == POI) {
 			//this is required to load points from the start
 			if (announcePOI()) {
-				app.getSettings().SHOW_NEARBY_POI.set(enable);
+				app.getSettings().SHOW_NEARBY_POI.set(true);
 			}
 			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
 			//return showPOI() || announcePOI();
@@ -238,7 +238,7 @@ public class WaypointHelper {
 		} else if(type == FAVORITES) {
 			//this is required to load points from the start
 			if (announceFavorites()) {
-				app.getSettings().SHOW_NEARBY_FAVORITES.set(enable);
+				app.getSettings().SHOW_NEARBY_FAVORITES.set(true);
 			}
 			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
 			//return showFavorites() || announceFavorites();
@@ -246,7 +246,7 @@ public class WaypointHelper {
 		} else if(type == WAYPOINTS) {
 			//this is required to load points from the start
 			if (announceGPXWaypoints()) {
-				app.getSettings().SHOW_WPT.set(enable);
+				app.getSettings().SHOW_WPT.set(true);
 			}
 			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
 			//return showGPXWaypoints() || announceGPXWaypoints();
