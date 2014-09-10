@@ -856,7 +856,7 @@
 	\n\nLa caixa de diàleg s\'amaga altre cop prement i aguantant dins seu.
 	</string>
 <string name="tip_initial_t">"OsmAnd és una aplicació de navegació amb moltes funcionalitats.
-\n\nEs disposa d\'una introducció bàsica, de consells d\'ús i d\'una ajuda avançada via «Menú» → «Ajuda» des la pantalla del mapa. "</string>
+\n\nEs disposa d\'una introducció bàsica, de consells d\'ús i de trucs via «Menú» → «Ajuda» des la pantalla del mapa. "</string>
 <string name="send_location_way_choose_title">Comparteix l\'ubicació usant</string>
 <string name="old_map_index_is_not_supported">Format de mapa discontinuat «{0}» no esta suportat</string>
 <string name="select_max_zoom_preload_area">Selecciona el màxim zoom per precarregar</string>
@@ -1870,7 +1870,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="flat_list_waypoitns">Totes</string>
     <string name="waypoints">Fites</string>
     <string name="targets">Destinacions</string>
-    <string name="way_alarms">Obstacles</string>
+    <string name="way_alarms">Notificacions de tràfic</string>
     <string name="speak_favorites">Indica els preferits</string>
     <string name="speak_poi">Indica els PDI</string>
     <string name="index_tours">Itineraris</string>
