@@ -228,11 +228,17 @@ public class WaypointHelper {
 		if(type == ALARMS) {
 			return showAlarms() || announceAlarms();
 		} else if(type == POI) {
-			return showPOI() || announcePOI();
+			//no SHOW item in settings, hence only query ANNOUNE here
+			//return showPOI() || announcePOI();
+			return announcePOI();
 		} else if(type == FAVORITES) {
-			return showFavorites() || announceFavorites();
+			//no SHOW item in settings, hence only query ANNOUNE here
+			//return showFavorites() || announceFavorites();
+			return announceFavorites();
 		} else if(type == WAYPOINTS) {
-			return showGPXWaypoints() || announceGPXWaypoints();
+			//no SHOW item in settings, hence only query ANNOUNE here
+			//return showGPXWaypoints() || announceGPXWaypoints();
+			return announceGPXWaypoints();
 		}
 		return true;
 	}
