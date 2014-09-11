@@ -1939,7 +1939,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="waypoints">Кропкі шляху</string>
     <string name="way_alarms">Дарожныя папярэджаньні</string>
     <string name="speak_favorites">Абвяшчаць выбраныя паблізу</string>
-    <string name="speak_poi">Абвяшчаць POI паблізу</string>
+    <string name="speak_poi">Абвяшчаць навакольныя POI</string>
     <string name="targets">Цэлі</string>
     <string name="flat_list_waypoints">Усе</string>
     <string name="index_tours">Паездкі</string>
