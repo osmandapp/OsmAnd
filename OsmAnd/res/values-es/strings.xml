@@ -299,7 +299,7 @@
 		\n\nUna caja marcador puede ser ocultada con una pulsación larga sobre ella.
 	</string>
   <string name="tip_initial">Ayuda</string>
-  <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nAlguna introducción básica, consejos de uso, y la ayuda avanzada están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
+  <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nComo una introducción básica, algunos consejos de uso y trucos están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
   <string name="next_button">Siguiente</string>
   <string name="previous_button">Anterior</string>
   <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
@@ -1852,9 +1852,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="flat_list_waypoitns">Todos</string>
     <string name="waypoints">Puntos de ruta</string>
     <string name="targets">Destinos</string>
-    <string name="way_alarms">Obstáculos</string>
-    <string name="speak_favorites">Anunciar Favoritos</string>
-    <string name="speak_poi">Anunciar PDI</string>
+    <string name="way_alarms">Advertencias de tráfico</string>
+    <string name="speak_favorites">Anunciar favoritos cercanos</string>
+    <string name="speak_poi">Anunciar PDI cercano</string>
     <string name="flat_list_waypoints">Todos</string>
     <string name="index_tours">Excursiones</string>
     <string name="int_hour">h</string>
