@@ -681,6 +681,7 @@ public class RouteInfoWidgetsFactory {
 							text = "";
 						} else if(alarm.getType() == AlarmInfoType.BORDER_CONTROL) {
 							locimgId = R.drawable.warnings_border_control;
+							text = "";
 							//text = "CLO";
 						} else if(alarm.getType() == AlarmInfoType.TOLL_BOOTH) {
 							text = "$";
@@ -689,8 +690,8 @@ public class RouteInfoWidgetsFactory {
 							text = "";
 						} else if(alarm.getType() == AlarmInfoType.STOP) {
 							locimgId = R.drawable.warnings_stop_sign;
+							text = "";
 							//text = "STOP";
-							//text = "";
 						}
 						visible = (text != null &&  text.length() > 0) || locimgId != 0;
 						if (visible) {
