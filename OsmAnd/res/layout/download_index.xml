@@ -28,15 +28,4 @@
         android:layout_weight="1"
         android:groupIndicator="@android:color/transparent" />
 
-    <Button
-        android:id="@+id/DownloadButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginTop="3dp"
-        android:gravity="center"
-        android:text="@string/download_files"
-        android:visibility="gone" />
-
 </LinearLayout>

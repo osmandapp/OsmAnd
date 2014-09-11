@@ -67,7 +67,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
 			View v = convertView;
 
 			if(v == null){
@@ -83,8 +83,29 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 			String d = e.getDate(format) + "\n" + e.getSizeDescription(getMyApplication());
 			description.setText(d);
 
-			CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
+			final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
 			ch.setChecked(getDownloadActivity().getEntriesToDownload().containsKey(e));
+			ch.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					ch.setChecked(!ch.isChecked());
+					final IndexItem e = (IndexItem) getListAdapter().getItem(position);
+					if(ch.isChecked()){
+						ch.setChecked(!ch.isChecked());
+						getDownloadActivity().getEntriesToDownload().remove(e);
+						getDownloadActivity().updateDownloadButton(true);
+						return;
+					}
+
+					List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), getDownloadActivity().getType(), new ArrayList<DownloadEntry>());
+					if (download.size() > 0) {
+						getDownloadActivity().getEntriesToDownload().put(e, download);
+						getDownloadActivity().updateDownloadButton(true);
+						ch.setChecked(!ch.isChecked());
+					}
+
+				}
+			});
 
 			return v;
 		}

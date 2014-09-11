@@ -138,13 +138,13 @@ public class DownloadIndexesThread {
 				if (o instanceof DownloadEntry) {
 					if (uiFragment != null) {
 						((DownloadIndexAdapter) uiFragment.getExpandableListAdapter()).notifyDataSetInvalidated();
-						uiFragment.updateDownloadButton(false);
+						uiFragment.getDownloadActivity().updateDownloadButton(false);
 					}
 				} else if (o instanceof IndexItem) {
 					entriesToDownload.remove(o);
 					if (uiFragment != null) {
 						((DownloadIndexAdapter) uiFragment.getExpandableListAdapter()).notifyDataSetInvalidated();
-						uiFragment.updateDownloadButton(false);
+						uiFragment.getDownloadActivity().updateDownloadButton(false);
 					}
 				} else if (o instanceof String) {
 					AccessibleToast.makeText(ctx, (String) o, Toast.LENGTH_LONG).show();

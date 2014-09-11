@@ -74,14 +74,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 		//getSupportActionBar().setTitle(R.string.local_index_download);
 		// recreation upon rotation is pgetaprevented in manifest file
-		view.findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				getDownloadActivity().downloadFilesCheckFreeVersion();
-			}
-
-		});
 
 		filterText = (EditText) view.findViewById(R.id.search_box);
 		textWatcher = new TextWatcher() {
@@ -340,46 +332,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		AccessibleToast.makeText(getDownloadActivity(), MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
 		listAdapter.notifyDataSetInvalidated();
 		if(selected > 0){
-			updateDownloadButton(true);
-		}
-	}
-
-
-	public void updateDownloadButton(boolean scroll) {
-		View view = getView();
-		if (view == null || getExpandableListView() == null){
-			return;
-		}
-		int x = getExpandableListView().getScrollX();
-		int y = getExpandableListView().getScrollY();
-		if (getDownloadActivity().getEntriesToDownload().isEmpty()) {
-			view.findViewById(R.id.DownloadButton).setVisibility(View.GONE);
-		} else {
-			BasicProgressAsyncTask<?, ?, ?> task = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
-			boolean running = task instanceof DownloadIndexesThread.DownloadIndexesAsyncTask;
-			((Button) view.findViewById(R.id.DownloadButton)).setEnabled(!running);
-			String text;
-			int downloads = DownloadActivity.downloadListIndexThread.getDownloads();
-			if (!running) {
-				text = getString(R.string.download_files) + "  (" + downloads + ")"; //$NON-NLS-1$
-			} else {
-				text = getString(R.string.downloading_file_new) + "  (" + downloads + ")"; //$NON-NLS-1$
-			}
-			view.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
-			if (Version.isFreeVersion(getMyApplication())) {
-				int countedDownloads = DownloadActivity.downloadListIndexThread.getDownloads();
-				int left = DownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get() - downloads;
-				boolean excessLimit = left < 0;
-				if (left < 0)
-					left = 0;
-				if (DownloadActivityType.isCountedInDownloads(getDownloadActivity().getType())) {
-					text += " (" + (excessLimit ? "! " : "") + getString(R.string.files_limit, left).toLowerCase() + ")";
-				}
-			}
-			((Button) view.findViewById(R.id.DownloadButton)).setText(text);
-		}
-		if (scroll) {
-			getExpandableListView().scrollTo(x, y);
+			getDownloadActivity().updateDownloadButton(true);
 		}
 	}
 
@@ -407,7 +360,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		if(ch.isChecked()){
 			ch.setChecked(!ch.isChecked());
 			getDownloadActivity().getEntriesToDownload().remove(e);
-			updateDownloadButton(true);
+			getDownloadActivity().updateDownloadButton(true);
 			return true;
 		}
 		
@@ -416,7 +369,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 			// if(!fileToUnzip.exists()){
 			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
 			getDownloadActivity().getEntriesToDownload().put(e, download);
-			updateDownloadButton(true);
+			getDownloadActivity().updateDownloadButton(true);
 			ch.setChecked(!ch.isChecked());
 		}
 		return true;

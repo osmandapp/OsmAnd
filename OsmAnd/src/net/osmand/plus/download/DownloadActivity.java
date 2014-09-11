@@ -10,10 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TabHost;
-import android.widget.TextView;
+import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -93,6 +90,15 @@ public class DownloadActivity extends SherlockFragmentActivity {
 			public void onClick(View v) {
 				makeSureUserCancelDownload();
 			}
+		});
+
+		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				downloadFilesCheckFreeVersion();
+			}
+
 		});
 	}
 
@@ -248,10 +254,8 @@ public class DownloadActivity extends SherlockFragmentActivity {
 					determinateProgressBar.setProgress(basicProgressAsyncTask.getProgressPercentage());
 				}
 			}
-			Fragment fragment = mTabsAdapter.getItem(tabHost.getCurrentTab());
-			if (fragment instanceof DownloadIndexFragment){
-				((DownloadIndexFragment) fragment).updateDownloadButton(false);
-			}
+			updateDownloadButton(false);
+
 		}
 	}
 
@@ -275,6 +279,46 @@ public class DownloadActivity extends SherlockFragmentActivity {
 
 	public void updateDownloadList(List<IndexItem> list){
 		Fragment fragment = mTabsAdapter.getItem(2);
+		//will fall if change tab order
 		((UpdatesIndexFragment) fragment).updateItemsList(list);
 	}
+
+	public void updateDownloadButton(boolean scroll) {
+//		View view = getView();
+//		if (view == null || getExpandableListView() == null){
+//			return;
+//		}
+//		int x = getExpandableListView().getScrollX();
+//		int y = getExpandableListView().getScrollY();
+		if (getEntriesToDownload().isEmpty()) {
+			findViewById(R.id.DownloadButton).setVisibility(View.GONE);
+		} else {
+			BasicProgressAsyncTask<?, ?, ?> task = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
+			boolean running = task instanceof DownloadIndexesThread.DownloadIndexesAsyncTask;
+			((Button) findViewById(R.id.DownloadButton)).setEnabled(!running);
+			String text;
+			int downloads = DownloadActivity.downloadListIndexThread.getDownloads();
+			if (!running) {
+				text = getString(R.string.download_files) + "  (" + downloads + ")"; //$NON-NLS-1$
+			} else {
+				text = getString(R.string.downloading_file_new) + "  (" + downloads + ")"; //$NON-NLS-1$
+			}
+			findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+			if (Version.isFreeVersion(getMyApplication())) {
+				int countedDownloads = DownloadActivity.downloadListIndexThread.getDownloads();
+				int left = DownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get() - downloads;
+				boolean excessLimit = left < 0;
+				if (left < 0)
+					left = 0;
+				if (DownloadActivityType.isCountedInDownloads(getType())) {
+					text += " (" + (excessLimit ? "! " : "") + getString(R.string.files_limit, left).toLowerCase() + ")";
+				}
+			}
+			((Button) findViewById(R.id.DownloadButton)).setText(text);
+		}
+//		if (scroll) {
+//			getExpandableListView().scrollTo(x, y);
+//		}
+	}
+
 }
