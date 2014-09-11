@@ -1744,9 +1744,9 @@
     <string name="flat_list_waypoitns">Все</string>
     <string name="waypoints">Путевые точки</string>
     <string name="targets">Пункты назначения</string>
-    <string name="way_alarms">Препятствия</string>
-    <string name="speak_favorites">Объявлять избранные</string>
-    <string name="speak_poi">Объявлять POI</string>
+    <string name="way_alarms">Дорожные предупреждения</string>
+    <string name="speak_favorites">Объявлять близлежащие избранные</string>
+    <string name="speak_poi">Объявлять близлежащие POI</string>
     <string name="index_tours">Туры</string>
     <string name="flat_list_waypoints">Все</string>
     <string name="distance">Расстояние</string>
