@@ -1652,9 +1652,9 @@
     <string name="osmo_settings">Παρακολούθηση OpenStreetMap</string>
     <string name="flat_list_waypoints">Όλα</string>
     <string name="targets">Προορισμοί</string>
-    <string name="way_alarms">Εμπόδια</string>
-    <string name="speak_favorites">Ανακοίνωση Αγαπημένων</string>
-    <string name="speak_poi">Ανακοίνωση ΣΕ</string>
+    <string name="way_alarms">Προειδοποιήσεις κυκλοφορίας</string>
+    <string name="speak_favorites">Ανακοίνωση κοντινών Αγαπημένων</string>
+    <string name="speak_poi">Ανακοίνωση κοντινών ΣΕ</string>
     <string name="record_plugin_name">Καταγράψτε τα ταξίδια σας</string>
     <string name="int_hour">ω</string>
     <string name="duration">Διάρκεια</string>
