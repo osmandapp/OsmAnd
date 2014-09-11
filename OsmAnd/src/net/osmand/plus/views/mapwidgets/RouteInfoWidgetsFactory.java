@@ -685,10 +685,10 @@ public class RouteInfoWidgetsFactory {
 						} else if(alarm.getType() == AlarmInfoType.TOLL_BOOTH) {
 							text = "$";
 						} else if(alarm.getType() == AlarmInfoType.TRAFFIC_CALMING) {
-							locimgId = R.drawable.warnings_speed_bump;
+							locimgId = R.drawable.warning_speed_bump;
 							text = "";
 						} else if(alarm.getType() == AlarmInfoType.STOP) {
-							locimgId = R.drawable.warnings_stop_sign;
+							locimgId = R.drawable.warning_stop_sign;
 							//text = "STOP";
 							//text = "";
 						}
