@@ -1960,11 +1960,11 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_bicycle_name">Bicicletta</string>
     <string name="rendering_value_pedestrian_name">Pedone</string>
     <string name="more">Altro...</string>
-    <string name="download_additional_maps">Download mappe mancanti %1$s (%2$d MB)?</string>
+    <string name="download_additional_maps">Scaricare le mappe mancanti %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">Tutti</string>
     <string name="waypoints">Punti intermedi</string>
     <string name="targets">Destinazioni</string>
-    <string name="way_alarms">Avvisi stradali</string>
+    <string name="way_alarms">Avvisi del traffico</string>
     <string name="speak_favorites">Annuncia i preferiti nelle vicinanze</string>
     <string name="speak_poi">Annuncia PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
