@@ -419,7 +419,7 @@ public class WaypointHelper {
 
 
 	protected void recalculatePoints(RouteCalculationResult route, int type, List<List<LocationPointWrapper>> locationPoints) {
-		//sync SHOW settings not otherwise accessible in settings menu
+		//sync SHOW settings not otherwise accessible in settings menu (needed so that waypoint dialogue correctly inflates selected categories upon startup)
 		app.getSettings().SHOW_NEARBY_POI.set(app.getSettings().ANNOUNCE_NEARBY_POI.get());
 		app.getSettings().SHOW_NEARBY_FAVORITES.set(app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get());
 		app.getSettings().SHOW_WPT.set(app.getSettings().ANNOUNCE_WPT.get());
