@@ -687,8 +687,8 @@ public class RouteInfoWidgetsFactory {
 							locimgId = R.drawable.warnings_speed_bump;
 							text = "";
 						} else if(alarm.getType() == AlarmInfoType.STOP) {
-							// text = "STOP";
-							text = "";
+							text = "STOP";
+							//text = "";
 						}
 						visible = (text != null &&  text.length() > 0) || locimgId != 0;
 						if (visible) {
