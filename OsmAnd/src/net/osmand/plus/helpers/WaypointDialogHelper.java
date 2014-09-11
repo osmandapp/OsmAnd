@@ -383,9 +383,9 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 								running[0] = position;
 								thisAdapter.notifyDataSetInvalidated();
 								if(type == WaypointHelper.POI && isChecked) {
-									selectPoi(running, thisAdapter,  type, isChecked);
+									selectPoi(running, thisAdapter, type, isChecked);
 								} else {							
-									enableType(running, thisAdapter,  type, isChecked);
+									enableType(running, thisAdapter, type, isChecked);
 								}
 							}
 

@@ -680,14 +680,16 @@ public class RouteInfoWidgetsFactory {
 							locimgId = R.drawable.warnings_speed_camera;
 							text = "";
 						} else if(alarm.getType() == AlarmInfoType.BORDER_CONTROL) {
-							text = "CLO";
+							locimgId = R.drawable.warnings_border_control;
+							//text = "CLO";
 						} else if(alarm.getType() == AlarmInfoType.TOLL_BOOTH) {
 							text = "$";
 						} else if(alarm.getType() == AlarmInfoType.TRAFFIC_CALMING) {
 							locimgId = R.drawable.warnings_speed_bump;
 							text = "";
 						} else if(alarm.getType() == AlarmInfoType.STOP) {
-							text = "STOP";
+							locimgId = R.drawable.warnings_stop_sign;
+							//text = "STOP";
 							//text = "";
 						}
 						visible = (text != null &&  text.length() > 0) || locimgId != 0;
