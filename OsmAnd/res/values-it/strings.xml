@@ -1901,8 +1901,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_attr_hideText_name">Nascondi il testo</string>
     <string name="rendering_attr_hideWoodScrubs_name">Nascondi foreste e boscaglie</string>
     <string name="rendering_attr_buildings15zoom_name">Edifici dal zoom 15</string>
-    <string name="rendering_attr_moreDetailed_name">Più dettagliato</string>
-    <string name="rendering_attr_lessDetailed_name">Meno dettagliato</string>
+    <string name="rendering_attr_moreDetailed_name">Più dettagli</string>
+    <string name="rendering_attr_lessDetailed_name">Meno dettagli</string>
     <string name="rendering_attr_hideAccess_name">Nascondi le limitazioni di accesso</string>
     <string name="rendering_attr_showAccess_name">Mostra le limitazioni di accesso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostra la qualità delle strade</string>
