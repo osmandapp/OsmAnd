@@ -1964,9 +1964,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="flat_list_waypoitns">Tutti</string>
     <string name="waypoints">Punti intermedi</string>
     <string name="targets">Destinazioni</string>
-    <string name="way_alarms">Ostacoli</string>
-    <string name="speak_favorites">Annuncia Preferiti</string>
-    <string name="speak_poi">Annuncia PDI</string>
+    <string name="way_alarms">Avvisi stradali</string>
+    <string name="speak_favorites">Annuncia i preferiti nelle vicinanze</string>
+    <string name="speak_poi">Annuncia PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
     <string name="flat_list_waypoints">Tutto</string>
     <string name="record_plugin_description">Registrate le vostre tracce con il pulsante dedicato nello schermo della mappa. Mostra le impostazioni per la registrazione dei vostri viaggi in file GPX localmente o online utilizzando un servizio web.</string>
