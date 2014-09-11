@@ -60,7 +60,7 @@
   <string name="user_name_descr">Necessario per inviare contributi a openstreetmap.org</string>
   <string name="user_password">Password in OSM</string>
   <string name="user_password_descr">Necessaria per inviare contributi a openstreetmap.org</string>
-  <string name="osmand_service">Servizio in background</string>
+  <string name="osmand_service">Modalità sleep</string>
   <string name="osmand_service_descr">Usato per eseguire OsmAnd con lo schermo spento</string>
   <string name="tip_rotation_switching">Orientamento della mappa</string>
   
@@ -1927,7 +1927,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="keep_navigation_service">Mantieni</string>
 	<string name="stop_navigation_service">Interrompi</string>
 	<string name="enable_sleep_mode">Abilita la modalità GPS quiescente</string>
-	<string name="gps_wake_up_timer">Intervallo risveglio GPS</string>
+	<string name="gps_wake_up_timer">Intervallo di risveglio del GPS</string>
 	<string name="sleep_mode_stop_dialog">Interrompere la modalità GPS quiescente?</string>
 	<string name="lang_al">Albanese</string>
 	<string name="lang_ar">Arabo</string>
@@ -1944,7 +1944,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="rendering_attr_alpineHiking_name">Vista escursionismo alpino</string>
     <string name="rendering_attr_alpineHiking_description">Disegna i sentieri in base alla scala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Strato simboli escursionistici</string>
-    <string name="rendering_attr_osmcTraces_description">Disegna i sentieri in base alle tracce OSMC</string>
+    <string name="rendering_attr_osmcTraces_description">Disegna i percorsi in base alle tracce OSMC</string>
     
 	<string name="rendering_attr_coloredBuildings_name">Edifici colorati</string>
     <string name="arrival_distance_factor_early">Presto</string>
