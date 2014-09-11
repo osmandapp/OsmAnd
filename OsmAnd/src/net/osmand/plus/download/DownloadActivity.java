@@ -60,7 +60,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		tabHost.setup();
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 		mTabsAdapter = new FavouritesActivity.TabsAdapter(this, tabHost, viewPager, settings);
-		mTabsAdapter.addTab(tabHost.newTabSpec("LOCAL_INDEX").setIndicator("Local maps"),
+		mTabsAdapter.addTab(tabHost.newTabSpec("LOCAL_INDEX").setIndicator("Local"),
 				LocalIndexesFragment.class, null);
 		mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS").setIndicator("Downloads"),
 				DownloadIndexFragment.class, null);
@@ -271,5 +271,10 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		});
 		bld.setNegativeButton(R.string.default_buttons_no, null);
 		bld.show();
+	}
+
+	public void updateDownloadList(List<IndexItem> list){
+		Fragment fragment = mTabsAdapter.getItem(2);
+		((UpdatesIndexFragment) fragment).updateItemsList(list);
 	}
 }

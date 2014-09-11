@@ -561,6 +561,7 @@ public class DownloadIndexesThread {
 			}
 		}
 		itemsToUpdate.size();
+		uiFragment.getDownloadActivity().updateDownloadList(itemsToUpdate);
 	}
 
 
