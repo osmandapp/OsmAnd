@@ -7,9 +7,9 @@
 			android:gravity="center_vertical" android:focusable="false" />
 	</LinearLayout>
 	<TextView android:id="@+id/download_item" android:gravity="center_vertical" android:layout_width="0dp" android:layout_height="wrap_content"
-		android:maxLines="7" android:layout_weight="1" style="@style/ListText.Small"></TextView>
+		android:maxLines="7" android:layout_weight="1" style="@style/ListText.Small"/>
 
 	<TextView android:id="@+id/download_descr" android:layout_marginLeft="3dp" android:gravity="right" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" style="@style/ListText.Small"></TextView>
+		android:layout_height="wrap_content" style="@style/ListText.Small"/>
 
 </LinearLayout>

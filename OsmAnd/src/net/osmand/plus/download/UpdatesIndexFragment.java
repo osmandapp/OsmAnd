@@ -82,7 +82,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 			TextView name = (TextView) v.findViewById(R.id.download_item);
 			TextView description = (TextView) v.findViewById(R.id.download_descr);
 			IndexItem e = items.get(position);
-			String eName = e.getVisibleDescription(getMyApplication()) + "\n" + e.getVisibleName(getMyApplication(), osmandRegions);
+			String eName = e.getVisibleName(getMyApplication(), osmandRegions);
 			name.setText(eName.trim()); //$NON-NLS-1$
 			String d = e.getDate(format) + "\n" + e.getSizeDescription(getMyApplication());
 			description.setText(d);
