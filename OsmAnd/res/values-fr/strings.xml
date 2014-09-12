@@ -1820,4 +1820,11 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="confirm_every_run">Toujours demander</string>
 	<string name="save_global_track_interval_descr">Choisir l\'intervalle d\'enregistrement pour l\'enregistrement des traces (activer via le gadget d\'enregistrement GPX sur l\'écran principal)</string>
 	<string name="save_global_track_interval">Intervalle d\'enregistrement par défaut</string>
+	<string name="traffic_warning_speed_limit">Limite de vitesse</string>
+    <string name="traffic_warning_border_control">Contrôle aux frontières</string>
+    <string name="traffic_warning_payment">Barrière de péage</string>
+    <string name="traffic_warning_stop">Stop</string>
+    <string name="traffic_warning_calming">Ralentisseur</string>
+    <string name="traffic_warning_speed_camera">Radar de vitesse</string>
+    <string name="traffic_warning">Alerte de circulation</string>
 	</resources>
