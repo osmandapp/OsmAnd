@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockListFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -30,6 +33,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 		format = getMyApplication().getResourceManager().getDateFormat();
 		osmandRegions = getMyApplication().getResourceManager().getOsmandRegions();
 		setListAdapter(new UpdateIndexAdapter(getDownloadActivity(), R.layout.download_index_list_item, DownloadActivity.downloadListIndexThread.getItemsToUpdate()));
+		setHasOptionsMenu(true);
 	}
 
 	@Override
@@ -109,6 +113,12 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 
 			return v;
 		}
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 	}
 
 	public OsmandApplication getMyApplication() { return getDownloadActivity().getMyApplication(); }

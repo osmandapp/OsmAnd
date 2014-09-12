@@ -268,6 +268,10 @@ public class DownloadActivity extends SherlockFragmentActivity {
 
 	public void updateProgress(boolean updateOnlyProgress) {
 		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
+		//needed when rotation is performed and progress can be null
+		if (progressView == null){
+			return;
+		}
 		if(updateOnlyProgress) {
 			if(!basicProgressAsyncTask.isIndeterminate()) {
 				progressPercent.setText(basicProgressAsyncTask.getProgressPercentage() +"%");

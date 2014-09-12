@@ -454,7 +454,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
-		//actionBar.removeAllTabs();
+		//hide action bar from downloadindexfragment
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		optionsMenuAdapter = new ContextMenuAdapter(getDownloadActivity());
 		OnContextMenuClick listener = new OnContextMenuClick() {
