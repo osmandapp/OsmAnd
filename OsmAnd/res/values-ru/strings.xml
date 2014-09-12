@@ -1768,5 +1768,6 @@
     <string name="traffic_warning_payment">Платный проезд</string>
     <string name="traffic_warning_stop">Знак остановки</string>
     <string name="traffic_warning_calming">Снизьте скорость</string>
-    <string name="traffic_warning_speed_camera">Скоросной радар</string>
-    </resources>
+    <string name="traffic_warning_speed_camera">Скоростной радар</string>
+    <string name="traffic_warning">Ограничение скорости</string>
+	</resources>
