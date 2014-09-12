@@ -103,6 +103,7 @@ public class DownloadIndexesThread {
 		app.getResourceManager().getBackupIndexes(indexFileNames);
 		this.indexFileNames = indexFileNames;
 		this.indexActivatedFileNames = indexActivatedFileNames;
+		//updateFilesToDownload();
 	}
 	
 	public Map<String, String> getDownloadedIndexFileNames() {
@@ -504,7 +505,7 @@ public class DownloadIndexesThread {
 					DownloadIndexAdapter a = ((DownloadIndexAdapter) uiFragment.getExpandableListAdapter());
 					a.setLoadedFiles(indexActivatedFileNames, indexFileNames);
 					a.setIndexFiles(filtered, cats);
-					prepareFilesToDownload(filtered);
+					prepareFilesToUpdate(filtered);
 					a.notifyDataSetChanged();
 					a.getFilter().filter(uiFragment.getFilterText());
 					if ((type == DownloadActivityType.SRTM_COUNTRY_FILE || type == DownloadActivityType.HILLSHADE_FILE)
@@ -545,7 +546,17 @@ public class DownloadIndexesThread {
 		execute(inst, new Void[0]);
 	}
 
-	private void prepareFilesToDownload(List<IndexItem> filtered) {
+	private void updateFilesToDownload(){
+		for (IndexItem item : itemsToUpdate){
+			for (String key : indexFileNames.keySet()){
+				if (item.getFileName().equals(indexFileNames.get(key))){
+					itemsToUpdate.remove(item);
+				}
+			}
+		}
+	}
+
+	private void prepareFilesToUpdate(List<IndexItem> filtered) {
 		itemsToUpdate.clear();
 		for (IndexItem item : filtered) {
 			String sfName = item.getTargetFileName();

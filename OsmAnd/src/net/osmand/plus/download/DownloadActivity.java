@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.*;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Window;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
@@ -52,7 +53,8 @@ public class DownloadActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
-
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		setProgressBarIndeterminateVisibility(false);
 
 		setContentView(R.layout.tab_content);
 		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
@@ -124,6 +126,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		}
 
 		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override

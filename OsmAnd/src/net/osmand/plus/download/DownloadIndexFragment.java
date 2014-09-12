@@ -67,7 +67,8 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		listView.setAdapter(listAdapter);
 		setListView(listView);
 
-		//getSupportActionBar().setTitle(R.string.local_index_download);
+
+		getDownloadActivity().getSupportActionBar().setTitle(R.string.local_index_download);
 		// recreation upon rotation is pgetaprevented in manifest file
 
 		filterText = (EditText) view.findViewById(R.id.search_box);
@@ -331,7 +332,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		final IndexItem e = (IndexItem) listAdapter.getChild(groupPosition, childPosition);
+		final IndexItem e = listAdapter.getChild(groupPosition, childPosition);
 		final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
 		
 		if(ch.isChecked()){
