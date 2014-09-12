@@ -1955,4 +1955,11 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="confirm_every_run">Пытацца заўсёды</string>
 	<string name="save_global_track_interval_descr">Выберыце інтэрвал рэгістравання для запісвання агульнага шляху (ўмыкаецца віджэтам запісу GPX на мапе)</string>
 	<string name="save_global_track_interval">Агульны інтарвал запісвання</string>
+	<string name="traffic_warning_speed_limit">Абмежаваньне хуткасьці</string>
+    <string name="traffic_warning_border_control">Памежны кантроль</string>
+    <string name="traffic_warning_payment">Платны праезд</string>
+    <string name="traffic_warning_stop">Знак STOP</string>
+    <string name="traffic_warning_calming">Зьнізьце хуткасьць</string>
+    <string name="traffic_warning_speed_camera">Фотарадар</string>
+    <string name="traffic_warning">Абмежаваньне хуткасьці</string>
 	</resources>
