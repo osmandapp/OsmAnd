@@ -674,7 +674,11 @@ public class WaypointHelper {
 			} else if(type == FAVORITES || type == WAYPOINTS) {
 				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
 			} else if(type == ALARMS) {
-				return null;
+				if(RenderingIcons.containsBigIcon(((AlarmInfo) point).getType().toString())) {
+					return uiCtx.getResources().getDrawable(RenderingIcons.getBigIconResourceId(((AlarmInfo) point).getType().toString()));
+				} else {
+					return null;
+				}
 			} else {
 				return null;
 			}
