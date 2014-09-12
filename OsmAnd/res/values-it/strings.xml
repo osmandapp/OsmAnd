@@ -1981,4 +1981,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="confirm_every_run">Chiedi sempre</string>
 	<string name="save_global_track_interval_descr">Scegli l\'intervallo di tempo generale per la registrazione del percorso (abilitata attraverso il widget registrazione GPX sulla mappa)</string>
 	<string name="save_global_track_interval">Intervallo generale di registrazione</string>
-	</resources>
+	<string name="traffic_warning_speed_limit">Limite di velocità</string>
+    <string name="traffic_warning_payment">Casello</string>
+    </resources>
