@@ -1825,4 +1825,11 @@
 	<string name="confirm_every_run">始終詢問</string>
 	<string name="save_global_track_interval_descr">為通常的軌跡記錄選擇記錄間隔（透過在地圖上的 GPX 記錄小工具啟用）</string>
 	<string name="save_global_track_interval">通常的記錄間隔</string>
+	<string name="traffic_warning_speed_limit">速限</string>
+    <string name="traffic_warning_border_control">邊境管制</string>
+    <string name="traffic_warning_payment">收費站</string>
+    <string name="traffic_warning_stop">停止</string>
+    <string name="traffic_warning_calming">交通寧靜區</string>
+    <string name="traffic_warning_speed_camera">測速照相</string>
+    <string name="traffic_warning">交通流量警示</string>
 	</resources>
