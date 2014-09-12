@@ -1732,4 +1732,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="confirm_every_run">Pregunta semper</string>
 	<string name="save_global_track_interval">Intervallu de registratzione generale</string>
 	<string name="save_global_track_interval_descr">Issèbera s\'intervallu pro sa registratzione generale de sas rastas (abilitadu tramite su widget registratzione GPX in sa mapa)</string>
-	</resources>
+	<string name="traffic_warning_speed_limit">Limite de lestresa</string>
+    <string name="traffic_warning_payment">Casellu</string>
+    <string name="traffic_warning_stop">Cartellu Stop</string>
+    </resources>
