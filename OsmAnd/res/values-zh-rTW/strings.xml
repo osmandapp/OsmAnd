@@ -42,7 +42,7 @@
 	<string name="poi_filter_for_tourists">旅遊點</string>
 	<string name="poi_filter_fuel">加油站</string>
 	<string name="show_warnings_title">顯示警示…</string>
-	<string name="show_warnings_descr">組態交通提醒(速限、強制停車、減速)、測速照相提醒、車道資訊</string>
+	<string name="show_warnings_descr">組態交通警示(速限、強制停車、減速)、測速照相警示、車道資訊</string>
 	<string name="use_compass_navigation_descr">使用電子羅盤的地圖，正北朝上</string>
 	<string name="use_compass_navigation">使用電子羅盤</string>
 	<string name="avoid_motorway">避開高速公路</string>
@@ -157,7 +157,7 @@
 	<string name="bg_service_screen_lock_toast">螢幕已鎖</string>
 	<string name="bg_service_interval">設定喚醒間隔：</string>
 	<string name="show_cameras">顯示測速照相</string>
-	<string name="show_traffic_warnings">顯示交通狀況提醒</string>
+	<string name="show_traffic_warnings">顯示交通狀況警示</string>
 	<string name="avoid_toll_roads">避開付費道路</string>
 	<string name="continue_follow_previous_route_auto">先前的導航未完成。要按照它繼續嗎？ (%1$s 秒)</string>
 	<string name="route_updated_loc_found">一旦找到定位時，導航路線將重新規劃</string>
