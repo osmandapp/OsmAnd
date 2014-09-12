@@ -1763,4 +1763,10 @@
 	<string name="confirm_every_run">Всегда спрашивать</string>
 	<string name="save_global_track_interval_descr">Выберите интервал журналирования для записи общего трека (включается через виджет записи GPX на карте)</string>
 	<string name="save_global_track_interval">Общий интервал журналирования</string>
-	</resources>
+	<string name="traffic_warning_speed_limit">Ограничение скорости</string>
+    <string name="traffic_warning_border_control">Пограничный контроль</string>
+    <string name="traffic_warning_payment">Платный проезд</string>
+    <string name="traffic_warning_stop">Знак остановки</string>
+    <string name="traffic_warning_calming">Снизьте скорость</string>
+    <string name="traffic_warning_speed_camera">Скоросной радар</string>
+    </resources>
