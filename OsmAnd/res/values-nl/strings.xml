@@ -1962,4 +1962,11 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="confirm_every_run">Altijd vragen</string>
 	<string name="save_global_track_interval_descr">Selecteer de loggings-interval voor de standaard track opname (te starten via de GPX opname widget in het scherm)</string>
 	<string name="save_global_track_interval">Standaard loggings-interval</string>
+	<string name="traffic_warning_speed_limit">Maximum snelheid</string>
+    <string name="traffic_warning_border_control">Grenscontrole</string>
+    <string name="traffic_warning_payment">Tolpoortje</string>
+    <string name="traffic_warning_stop">Stopbord</string>
+    <string name="traffic_warning_calming">Verkeersdrempel</string>
+    <string name="traffic_warning_speed_camera">Snelheidscontrole</string>
+    <string name="traffic_warning">Filemelding</string>
 	</resources>
