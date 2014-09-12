@@ -124,6 +124,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		}
 
 		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
