@@ -670,6 +670,7 @@ public class WaypointHelper {
 			} else if(type == FAVORITES || type == WAYPOINTS) {
 				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
 			} else if(type == ALARMS) {
+				//TODO: Looks like this does not work yet, not sure why:
 				if(RenderingIcons.containsBigIcon("list_" + ((AlarmInfo) point).getType().toString().toLowerCase())) {
 					return uiCtx.getResources().getDrawable(RenderingIcons.getBigIconResourceId("list_" + ((AlarmInfo) point).getType().toString().toLowerCase()));
 				} else {
