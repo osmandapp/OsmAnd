@@ -461,6 +461,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		//hide action bar from downloadindexfragment
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -508,16 +509,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			}
 			
 		}
+
+		if(operationTask == null || operationTask.getStatus() == AsyncTask.Status.FINISHED){
+			menu.setGroupVisible(0, true);
+		} else {
+			menu.setGroupVisible(0, false);
+		}
 	}
-	
-//	@Override
-//	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//		if(operationTask == null || operationTask.getStatus() == Status.FINISHED){
-//			menu.setGroupVisible(0, true);
-//		} else {
-//			menu.setGroupVisible(0, false);
-//		}
-//	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -639,9 +637,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		descriptionText.setText(text);
 		descriptionText.setMovementMethod(LinkMovementMethod.getInstance());
 	}
-	
-	
-	
+
 	public void localOptionsMenu(final int itemId) {
 		if (itemId == R.string.local_index_download) {
 			asyncLoader.setResult(null);

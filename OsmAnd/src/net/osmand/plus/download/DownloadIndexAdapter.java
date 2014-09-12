@@ -236,6 +236,12 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 			v = inflater.inflate(net.osmand.plus.R.layout.download_index_list_item, parent, false);
 		}
 		final View row = v;
+		row.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				downloadFragment.onChildClick(downloadFragment.getExpandableListView(), row, groupPosition, childPosition, getChildId(groupPosition, childPosition));
+			}
+		});
 		TextView item = (TextView) row.findViewById(R.id.download_item);
 		TextView description = (TextView) row.findViewById(R.id.download_descr);
 		IndexItem e = (IndexItem) getChild(groupPosition, childPosition);
