@@ -10,6 +10,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.*;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -452,6 +453,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
+		//actionBar.removeAllTabs();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		optionsMenuAdapter = new ContextMenuAdapter(getDownloadActivity());
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override

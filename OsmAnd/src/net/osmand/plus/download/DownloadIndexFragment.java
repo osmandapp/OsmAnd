@@ -12,6 +12,7 @@ import java.util.Map;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.MenuInflater;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleAlertBuilder;
@@ -50,11 +51,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	private static final int DESELECT_ALL_ID = 2;
 	private static final int FILTER_EXISTING_REGIONS = 3;
 	
-    public static final String FILTER_KEY = "filter";
-    public static final String FILTER_CAT = "filter_cat";
-	
-
-	
     private TextWatcher textWatcher ;
 	private EditText filterText;
 	private OsmandSettings settings;
@@ -63,8 +59,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final List<DownloadActivityType> downloadTypes = getDownloadTypes();
-		getDownloadActivity().setType(downloadTypes.get(0));
+
 		View view = inflater.inflate(R.layout.download_index, container, false);
 		ExpandableListView listView = (ExpandableListView)view.findViewById(android.R.id.list);
 		List<IndexItem> list = new ArrayList<IndexItem>();
@@ -95,24 +90,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 		};
 		filterText.addTextChangedListener(textWatcher);
-		//final Intent intent = getIntent();
-		final Intent intent = null;
-		if (intent != null && intent.getExtras() != null) {
-			final String filter = intent.getExtras().getString(FILTER_KEY);
-			if (filter != null) {
-				filterText.setText(filter);
-			}
-			final String filterCat = intent.getExtras().getString(FILTER_CAT);
-			if (filterCat != null) {
-				DownloadActivityType type = DownloadActivityType.getIndexType(filterCat.toLowerCase());
-				if (type != null) {
-					getDownloadActivity().setType(type);
-					downloadTypes.remove(type);
-					downloadTypes.add(0, type);
-				}
-			}
-		}
-		getMyApplication().getAppCustomization().preDownloadActivity(getDownloadActivity(), downloadTypes, getDownloadActivity().getSupportActionBar());
 
 		return view;
 	}
@@ -277,6 +254,21 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	}
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
+		final List<DownloadActivityType> downloadTypes = getDownloadActivity().getDownloadTypes();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(actionBar.getThemedContext(), R.layout.sherlock_spinner_item,
+				toString(downloadTypes));
+		spinnerAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
+		actionBar.setListNavigationCallbacks(spinnerAdapter, new ActionBar.OnNavigationListener() {
+
+			@Override
+			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+				getDownloadActivity().changeType(downloadTypes.get(itemPosition));
+				return true;
+			}
+		});
+
 		if (getMyApplication().getAppCustomization().showDownloadExtraActions()) {
 			SubMenu s = menu.addSubMenu(0, MORE_ID, 0, R.string.default_buttons_other_actions);
 			s.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
@@ -286,7 +278,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 			s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
 					: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
-			s.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
 	}
 	
@@ -336,20 +327,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-
-
-	private List<DownloadActivityType> getDownloadTypes() {
-		List<DownloadActivityType> items = new ArrayList<DownloadActivityType>();
-		items.add(DownloadActivityType.NORMAL_FILE);
-		items.add(DownloadActivityType.VOICE_FILE);
-		items.add(DownloadActivityType.ROADS_FILE);
-		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null){
-			items.add(DownloadActivityType.HILLSHADE_FILE);
-			items.add(DownloadActivityType.SRTM_COUNTRY_FILE);
-		}
-		getMyApplication().getAppCustomization().getDownloadTypes(items);
-		return items;
-	}
 
 
 	@Override
@@ -421,6 +398,14 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	    	filterText.removeTextChangedListener(textWatcher);
 	    }
 		DownloadActivity.downloadListIndexThread.setUiFragment(null);
+	}
+
+	public List<String> toString(List<DownloadActivityType> t) {
+		ArrayList<String> items = new ArrayList<String>();
+		for(DownloadActivityType ts : t) {
+			items.add(ts.getString(getMyApplication()));
+		}
+		return items;
 	}
 	
 

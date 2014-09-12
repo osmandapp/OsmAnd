@@ -110,30 +110,6 @@ public class OsmAndAppCustomization {
 		return "http://"+IndexConstants.INDEX_DOWNLOAD_DOMAIN+"/get_indexes?gzip&" + Version.getVersionAsURLParam(app); //$NON-NLS-1$;
 	}
 
-	public void preDownloadActivity(final DownloadActivity da, final List<DownloadActivityType> downloadTypes, ActionBar actionBar ) {
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(actionBar.getThemedContext(), R.layout.sherlock_spinner_item, 
-				toString(downloadTypes)	
-				);
-		spinnerAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
-        actionBar.setListNavigationCallbacks(spinnerAdapter, new OnNavigationListener() {
-			
-			@Override
-			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-				da.changeType(downloadTypes.get(itemPosition));
-				return true;
-			}
-		});		
-	}
-	
-	private List<String> toString(List<DownloadActivityType> t) {
-		ArrayList<String> items = new ArrayList<String>();
-		for(DownloadActivityType ts : t) {
-			items.add(ts.getString(app));
-		}
-		return items;
-	}
-
 	public boolean showDownloadExtraActions() {
 		return true;
 	}

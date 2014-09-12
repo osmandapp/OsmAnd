@@ -11,15 +11,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.*;
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
+import net.osmand.plus.*;
 import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +43,9 @@ public class DownloadActivity extends SherlockFragmentActivity {
 	private TextView progressMessage;
 	private TextView progressPercent;
 	private ImageView cancel;
+
+	public static final String FILTER_KEY = "filter";
+	public static final String FILTER_CAT = "filter_cat";
 
 
 	@Override
@@ -100,16 +103,48 @@ public class DownloadActivity extends SherlockFragmentActivity {
 			}
 
 		});
+
+		final List<DownloadActivityType> downloadTypes = getDownloadTypes();
+		final Intent intent = getIntent();
+		setType(downloadTypes.get(0));
+		if (intent != null && intent.getExtras() != null) {
+			final String filter = intent.getExtras().getString(FILTER_KEY);
+//			if (filter != null) {
+//				filterText.setText(filter);
+//			}
+			final String filterCat = intent.getExtras().getString(FILTER_CAT);
+			if (filterCat != null) {
+				DownloadActivityType type = DownloadActivityType.getIndexType(filterCat.toLowerCase());
+				if (type != null) {
+					setType(type);
+					downloadTypes.remove(type);
+					downloadTypes.add(0, type);
+				}
+			}
+		}
+
+		getSupportActionBar().setHomeButtonEnabled(true);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		BasicProgressAsyncTask<?, ?, ?> t = downloadListIndexThread.getCurrentRunningTask();
-		if(t instanceof DownloadIndexesThread.DownloadIndexesAsyncTask) {
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+		int itemId = item.getItemId();
+		switch (itemId) {
+			case android.R.id.home:
+				finish();
+				return true;
 
 		}
+		return false;
 	}
+
 
 	public DownloadActivityType getType() { return type;}
 
@@ -320,5 +355,19 @@ public class DownloadActivity extends SherlockFragmentActivity {
 //			getExpandableListView().scrollTo(x, y);
 //		}
 	}
+
+	public List<DownloadActivityType> getDownloadTypes() {
+		List<DownloadActivityType> items = new ArrayList<DownloadActivityType>();
+		items.add(DownloadActivityType.NORMAL_FILE);
+		items.add(DownloadActivityType.VOICE_FILE);
+		items.add(DownloadActivityType.ROADS_FILE);
+		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null){
+			items.add(DownloadActivityType.HILLSHADE_FILE);
+			items.add(DownloadActivityType.SRTM_COUNTRY_FILE);
+		}
+		getMyApplication().getAppCustomization().getDownloadTypes(items);
+		return items;
+	}
+
 
 }

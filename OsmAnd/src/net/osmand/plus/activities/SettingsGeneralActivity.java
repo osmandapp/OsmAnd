@@ -22,6 +22,7 @@ import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -374,7 +375,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			if (MORE_VALUE.equals(newValue)) {
 				// listPref.set(oldValue); // revert the change..
 				final Intent intent = new Intent(this, DownloadIndexFragment.class);
-				intent.putExtra(DownloadIndexFragment.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
+				intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
 				startActivity(intent);
 			} else {
 				super.onPreferenceChange(preference, newValue);
