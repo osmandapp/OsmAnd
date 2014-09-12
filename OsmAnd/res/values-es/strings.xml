@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   
   <string name="layer_map_appearance">Configura pantalla</string>
@@ -279,28 +279,27 @@
   <string name="tip_app_mode">Perfil de uso</string>
   
   <string name="tip_navigation">Navegación</string>
-  <string name="tip_navigation_t">"Para recibir indicaciones hasta un lugar, o bien mantén pulsado sobre el mismo en el mapa, luego pulsa sobre su descripción y selecciona \'Indicaciones a\', o bien selecciona \'Indicaciones\' después de pulsar sobre una entrada en una lista de resultados de búsqueda o de favoritos.
+  <string name="tip_navigation_t">"Para recibir indicaciones hasta un lugar, o bien mantén pulsado sobre el mismo en el mapa, (luego pulsa sobre su descripción y selecciona \'Indicaciones a\'), o selecciona \'Indicaciones a\' después de pulsar sobre una entrada en una lista de resultados de búsqueda o de favoritos.
 \n\nEl destino se marca en el mapa como una bandera y OsmAnd muestra la distancia y la dirección al mismo (triángulo naranja).
-\n\nPuedes elegir \'Seguir\', lo que implica que OsmAnd te guiará, te dará indicaciones vocales (si están activas), etc. O puedes elegir \'Sólo mostrar\', lo que solamente te mostrará la ruta, sin indicaciones ni reajustes según te muevas.
+\n\nPuedes elegir \'Iniciar Navegación\', lo que implica que OsmAnd te guiará, te dará indicaciones vocales (si están activas), etc. O puedes elegir \'Mostrar ruta\', lo que solamente te mostrará la ruta, sin indicaciones ni reajustes según te muevas.
 \n\nPara mostrar una ruta al destino desde cualquier punto diferente de la posición actual, selecciónalo posteriormente en el mapa y pulsa \'Indicaciones desde\'.
-\n\nSi usas \'Indicaciones desde\' y luego \'Seguir\', OsmAnd cambiará a tu posición actual tan pronto como la conozca (por lo que se puede usar para iniciar la ruta antes de conocer la posición real). Por otro lado, \'Indicaciones desde\' y \'Sólo mostrar\' no realizará actualizaciones de la ruta mostrada. "</string>
+\n\nSi usas \'Indicaciones desde\' y luego \'Iniciar Navegación\', OsmAnd cambiará a tu posición actual tan pronto como la conozca (por lo que se puede usar para iniciar la ruta antes de conocer la posición real). Por otro lado, \'Indicaciones desde\' y \'Mostrar ruta\' no realizará actualizaciones de la ruta mostrada. "</string>
   <string name="tip_search">Buscando</string>
-  <string name="tip_search_t">Puedes buscar lugares directamente en el mapa vía \'Usar localización…\'→\'Buscar cerca de aquí\', o mediante la pantalla de búsqueda vía \'Menú\'→\'Buscar\'.
-		\n\nLa pantalla de búsqueda proporciona plantillas para buscar:
-		\n\t* por dirección
-		\n\t* vía coordenadas
-		\n\t* como PDI (por tipo o por nombre)
-		\n\t* vía tu historial de búsquedas
-		\n\t* o en tus favoritos predefinidos.
-		\n\nPara los puntos encontrados, se ofrece un menú contextual o barra de acciones con opciones como \'Indicaciones\' o \'Mostrar en mapa\'.
-	</string>
+  <string name="tip_search_t">"Puedes buscar lugares directamente en el mapa vía \'Usar localización\'→\'Buscar cerca de aquí\', o mediante la pantalla de búsqueda vía \'Menú\'→\'Buscar\'.
+\n\nLa pantalla de búsqueda proporciona plantillas para buscar:
+\n\t* por dirección
+\n\t* vía coordenadas
+\n\t* como PDI (por tipo o por nombre)
+\n\t* vía tu historial de búsquedas
+\n\t* o en tus favoritos predefinidos.
+\n\nPara los puntos encontrados, se ofrece un menú contextual o barra de acciones con opciones como \'Indicaciones a\' o \'Mostrar en mapa\'. "</string>
   <string name="tip_map_context_menu">Menú \'Usar localización…\'</string>
   <string name="tip_map_context_menu_t">El menú contextual \'Usar localización…\' contiene todas las acciones relacionadas con el punto (localización).
 		\n\nAparece bien con una pulsación larga en un punto del mapa y luego pulsando sobre su marcador, bien pulsando el botón del trackball, o bien seleccionando \'Menú\'→\'Usar localización…\' (los dos últimos modos toman el cenro del mapa como referencia).
 		\n\nUna caja marcador puede ser ocultada con una pulsación larga sobre ella.
 	</string>
   <string name="tip_initial">Ayuda</string>
-  <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nAlguna introducción básica, consejos de uso, y la ayuda avanzada están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
+  <string name="tip_initial_t">"OsmAnd es una aplicación de navegación con muchas características.\n\nComo una introducción básica, algunos consejos de uso y trucos están enlazados en el \'Menú\' → \'Ayuda\' desde la pantalla del mapa. "</string>
   <string name="next_button">Siguiente</string>
   <string name="previous_button">Anterior</string>
   <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
@@ -1086,7 +1085,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
 	<string name="rendering_attr_roadColors_name">Esquema de color de carreteras</string>
     <string name="zxing_barcode_scanner_not_found">La aplicación ZXing Barcode Scanner no está instalada. ¿Buscarla en el Market?</string>
 	<string name="close_changeset">Cerrar conjunto de cambios</string>
-	<string name="background_service_is_enabled_question">El servicio de fondo aún está funcionando. ¿Quieres cancelarlo?</string>
+	<string name="background_service_is_enabled_question">El servicio de fondo aún está funcionando. ¿Quieres interrumpirlo también?</string>
     <string name="tip_recent_changes_1_0_0_t">"Cambios en 1.0:\n\t* Mejorado el enrutamiento: más rápido y más preciso (hasta 250 km)\n\t* Introduce mapas sólo de carreteras\n\t* El mapa no pierde el bloqueo de posición después de interrupciones\n\t* Activa el servicio de fondo durante la navegación "
     </string>
     <string name="safe_mode_description">Ejecutar la aplicación en modo seguro (Usando código de Android, más lento, en vez del nativo).</string>
@@ -1799,10 +1798,10 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_start_service">Servicio OsMo</string>
     <string name="osmo_gpx_track_downloaded">Pista OsMo %1$s descargada.</string>
     <string name="keep_navigation_service">Mantener</string>
-	<string name="stop_navigation_service">Parar</string>
+	<string name="stop_navigation_service">Interrumpir</string>
 	<string name="enable_sleep_mode">Habilita modo reposo del GPS</string>
 	<string name="gps_wake_up_timer">Intervalo para despertar GPS</string>
-	<string name="sleep_mode_stop_dialog">¿Apagar el modo reposo del GPS?</string>
+	<string name="sleep_mode_stop_dialog">¿Interrumpir el modo reposo del GPS?</string>
 	<string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no se indica se cambiará a inglés o a nombres locales)</string>
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="local_map_names">Nombres locales</string>
@@ -1853,9 +1852,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="flat_list_waypoitns">Todos</string>
     <string name="waypoints">Puntos de ruta</string>
     <string name="targets">Destinos</string>
-    <string name="way_alarms">Obstáculos</string>
-    <string name="speak_favorites">Anunciar Favoritos</string>
-    <string name="speak_poi">Anunciar PDI</string>
+    <string name="way_alarms">Advertencias de tráfico</string>
+    <string name="speak_favorites">Anunciar favoritos cercanos</string>
+    <string name="speak_poi">Anunciar PDI cercano</string>
     <string name="flat_list_waypoints">Todos</string>
     <string name="index_tours">Excursiones</string>
     <string name="int_hour">h</string>

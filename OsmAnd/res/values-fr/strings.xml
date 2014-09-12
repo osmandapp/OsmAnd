@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -294,15 +294,14 @@
   <string name="tip_navigation_t">"La navigation vers un point peut être lancée soit directement par un appui long à son emplacement sur la carte (une bulle apparaît alors, sur laquelle un appui court ouvre le menu contextuel avec le choix \'Aller vers le point\'), soit par un appui court sur un favori ou un résultat de recherche (en choisissant alors \'Navigation\').
 \n\tLa destination est alors indiquée par un point et un drapeau à damier. OsmAnd affiche la distance qui vous en sépare, et sa direction (par une flèche orange). "</string>
   <string name="tip_search">Recherche</string>
-  <string name="tip_search_t">\tVous pouvez rechercher un lieu via l\'option \'Rechercher autour du point\' dans le menu contextuel de la carte, ou via \'Menu\' → \'Rechercher\'.
-  	\n\nVous pouvez alors rechercher :
-  	\n\t* un point d\'intérêt (par type ou par nom)
-	\n\t* une adresse
-	\n\t* des coordonnées
-	\n\t* un favori prédéfini
-	\n\t* dans l\'historique des recherches
-	\n\tDans chacun des cas, il vous sera proposé un choix entre \'Navigation\' (vers le point) ou \'Voir sur la carte\', etc.
-</string>
+  <string name="tip_search_t">"Vous pouvez rechercher un lieu via l\'option \'Rechercher autour du point\' dans le menu contextuel de la carte, ou via \'Menu\' → \'Rechercher\'.
+\n\nVous pouvez alors rechercher :
+\n\t* un point d\'intérêt (par type ou par nom)
+\n\t* une adresse
+\n\t* des coordonnées
+\n\t* un favori prédéfini
+\n\t* dans l\'historique des recherches
+\n\tDans chacun des cas, il vous sera proposé un choix entre \'Aller vers le point\' ou \'Voir sur la carte\', etc. "</string>
   <string name="tip_map_context_menu">Menu \'Utiliser position\'</string>
   <string name="tip_map_context_menu_t">\tLe menu contextuel de la carte regroupe les actions possibles au niveau d\'un point (un lieu).
 \n\tIl est disponible par un appui long au niveau du point sur la carte, suivi d\'un appui court sur la bulle apparue avec les coordonnées du point (un appui long sur la bulle la fait disparaître).
@@ -1804,9 +1803,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="flat_list_waypoitns">Tous</string>
     <string name="waypoints">Points de cheminement</string>
     <string name="targets">Destinations</string>
-    <string name="way_alarms">Obstacles</string>
-    <string name="speak_favorites">Annoncer les favoris</string>
-    <string name="speak_poi">Annoncer les points d\'intérêt</string>
+    <string name="way_alarms">Alertes de circulation</string>
+    <string name="speak_favorites">Annoncer les favoris proches</string>
+    <string name="speak_poi">Annoncer les points d\'intérêt proches</string>
     <string name="flat_list_waypoints">Tous</string>
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">Enregistrer vos traces en touchant le bouton de l\'écran principal. Monter les paramètres pour l\'enregistrement des traces dans des fichiers GPX locaux ou en ligne avec un service Web.</string>

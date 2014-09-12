@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1110,7 +1110,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="gpx_option_reverse_route">Furria diretzione GPX</string>
 	<string name="rotate_map_bearing_opt">In sa diretzione de sa mòvida</string>
 	<string name="show_view_angle">Ammustra diretzione de osservatzione de abbaidadura</string>
-	<string name="tip_navigation_t">"Pro otènnere indicatziones, mantène carcau in supra de su logu de destinatzione (pustis carca sa descritzione sua e ischerta \'Indicatziones pro\'), o ischerta \'Diretziones\' a pustis de àere carcau unu resurtau o unu prefèrridu.
+	<string name="tip_navigation_t">"Pro otènnere indicatziones, mantène carcau in supra de su logu de destinatzione (pustis carca sa descritzione sua e ischerta \'Indicatziones pro\'), o ischerta \'Indicatziones\' a pustis de àere carcau unu resurtau o unu prefèrridu.
 \n\nSa destinatzione est sinnada in sa mapa cun una bandera e OsmAnd at a ammustrare sa distàntzia de lòmpida e sa diretzione pro la segudare in lìnia d\'àera (cun unu triàngulu arantzu).
 \n\nPodes ischertare \'Avia nàvigu\' pro pedire ad OsmAnd de ti ghiare finas a sa destinatzione impreande avisos vocales (si sunt abilitados), etc. Si nono ischerta \'Ammustra àndala\' pro otènnere una ghia fissa sena agiornamentos.
 \n\nPro ammustrare un\'àndala pro sa destinatzione ischertada dae unu puntu diferente dae su in su cale ses, ischerta su puntu in sa mapa e carca \'Diretziones dae\'.
@@ -1715,9 +1715,9 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="flat_list_waypoitns">Totus</string>
     <string name="waypoints">Puntos mesanos</string>
     <string name="targets">Destinatziones</string>
-    <string name="way_alarms">Impèigos</string>
-    <string name="speak_favorites">Annùntzia Prefèrridos</string>
-    <string name="speak_poi">Annùntzia PDI</string>
+    <string name="way_alarms">Avisos de tràficu</string>
+    <string name="speak_favorites">Annùntzia Prefèrridos a curtzu</string>
+    <string name="speak_poi">Annùntzia PDI a curtzu</string>
     <string name="flat_list_waypoints">Totus</string>
     <string name="index_tours">Itineràrios</string>
     <string name="record_plugin_description">Registra sas rastas tuas carcande su pursante in s\'ischermu de sa mapa. Ammustra sas impostaduras pro sa registratzione de sos biàgios tuos in documentos GPX localmente o in lìnia impreande unu servìtziu web.</string>

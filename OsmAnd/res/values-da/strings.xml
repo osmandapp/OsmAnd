@@ -1038,7 +1038,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	\n* Redesign af brugerflade
 	\n* Fejlrettelser
     </string>
-    <string name="tip_navigation_t">"For at få kørselsvejledning til et sted, enten langt tryk på direkte på kortet, (tryk derefter på beskrivelsemarkøren, og vælg \'Kørselsvejledning til\'), eller vælg \'Kørselsvejledning\' efter at have trykket på et resultat på liste med søgeresultater eller favoritliste.
+    <string name="tip_navigation_t">"For at få kørselsvejledning til et sted, enten langt tryk på direkte på kortet, (tryk derefter på beskrivelsemarkøren, og vælg \'Kørselsvejledning til\'), eller vælg \'Kørselsvejledning til\' efter at have trykket på et resultat på liste med søgeresultater eller favoritliste.
 \n\nDestinationen er markeret som et målflag på kortet og OsmAnd viser afstand og retning til det (orange trekant).
 \n\nFor at få kørselsvejledning til destinationen fra et andet punkt end den aktuelle position, vælges det på kortet, og tryk \'Kørselsvejledning fra\'.
 \n\nVælg enten \'Begynd navigation\', hvilket betyder, at OsmAnd giver vejledning og talte instruktioner (hvis aktiveret) mv. Eller vælg \'Vis rute\', hvilket resulterer i statisk rute uden vejledning eller justeringer, mens du flytter.
@@ -1279,15 +1279,14 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="tip_app_mode_t_v2">OsmAnd understøtter forskellige profiler (kan konfigureres) til forskellige brugstilfælde.
 \n\nSkift profil via profilknappen i nederste venstre hjørne af skærmen (bil, cykel eller fodgænger) eller når en rute oprettes (\'Transportform\').
 	</string>
-	<string name="tip_search_t">Søg efter steder direkte på kortet via \'Brug placeringer\' → \'Søg i nærheden\ , eller ved at bruge søgeskærmen via \'Menu\' → \'Søg\'. 
+	<string name="tip_search_t">"Søg efter steder direkte på kortet via \'Brug placeringer\' → \'Søg i nærheden , eller ved at bruge søgeskærmen via \'Menu\' → \'Søg\'.
 \n\nSøgeskærmen indeholder skabeloner for søgning
 \n * efter adresse
 \n * via koordinater
 \n * som IP (efter type eller navn)
 \n * via søgehistorik
 \n * eller via foruddefinerede favoritter
-\n\nFor alle fundne resultater tilbyder genvejsmenuen: \'Kørselsvejledning\' eller \'Vis på kort\' osv.
-	</string>
+\n\nFor alle fundne resultater tilbyder genvejsmenuen: \'Kørselsvejledning til\' eller \'Vis på kort\' osv. "</string>
 	<string name="tip_map_context_menu_t">\'Brug placering\' menuen indeholder alle handlinger, der henviser til et punkt (placering).
 \n\nDen er tilgængelig ved at trykke og holde på ethvert punkt på kortet (derefter trykkes på markøren), eller ved at trykke på trackball knappen, eller ved at vælge \'Menu\' → \'Brug placering\' (de to sidste metoder bruger kortcenter som reference).
 \n\nEn markør boks kan skjules igen med et langt tryk.
@@ -1965,9 +1964,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="flat_list_waypoitns">Alle</string>
     <string name="waypoints">Rutepunkter</string>
     <string name="targets">Destinationer</string>
-    <string name="way_alarms">Forhindringer</string>
-    <string name="speak_favorites">Favoritter</string>
-    <string name="speak_poi">Interessepunkt (IP)</string>
+    <string name="way_alarms">Trafikadvarsler</string>
+    <string name="speak_favorites">Nærliggende favoritter</string>
+    <string name="speak_poi">Nærliggende interessepunkt (IP)</string>
     <string name="flat_list_waypoints">Alle</string>
     <string name="index_tours">Ture</string>
     <string name="distance">Afstand</string>
@@ -1982,4 +1981,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="confirm_every_run">Spørg altid</string>
 	<string name="save_global_track_interval_descr">Vælg logningsinterval for den almindelige sporregistrering (aktiveres via \'GPX optagelse\' på hovedskærmen)</string>
 	<string name="save_global_track_interval">Generelt logningsinterval</string>
+	<string name="traffic_warning_speed_limit">Hastighedsgrænse</string>
+    <string name="traffic_warning_border_control">Grænsekontrol</string>
+    <string name="traffic_warning_payment">Betalingsveje</string>
+    <string name="traffic_warning_stop">Stop</string>
+    <string name="traffic_warning_calming">Hastighedsnedsættende</string>
+    <string name="traffic_warning_speed_camera">Fotofælde</string>
+    <string name="traffic_warning">Trafikadvarsel</string>
 	</resources>

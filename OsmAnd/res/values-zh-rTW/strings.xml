@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -42,7 +42,7 @@
 	<string name="poi_filter_for_tourists">旅遊點</string>
 	<string name="poi_filter_fuel">加油站</string>
 	<string name="show_warnings_title">顯示警示…</string>
-	<string name="show_warnings_descr">組態交通提醒(速限、強制停車、減速)、測速照相提醒、車道資訊</string>
+	<string name="show_warnings_descr">組態交通警示(速限、強制停車、減速)、測速照相警示、車道資訊</string>
 	<string name="use_compass_navigation_descr">使用電子羅盤的地圖，正北朝上</string>
 	<string name="use_compass_navigation">使用電子羅盤</string>
 	<string name="avoid_motorway">避開高速公路</string>
@@ -157,7 +157,7 @@
 	<string name="bg_service_screen_lock_toast">螢幕已鎖</string>
 	<string name="bg_service_interval">設定喚醒間隔：</string>
 	<string name="show_cameras">顯示測速照相</string>
-	<string name="show_traffic_warnings">顯示交通狀況提醒</string>
+	<string name="show_traffic_warnings">顯示交通狀況警示</string>
 	<string name="avoid_toll_roads">避開付費道路</string>
 	<string name="continue_follow_previous_route_auto">先前的導航未完成。要按照它繼續嗎？ (%1$s 秒)</string>
 	<string name="route_updated_loc_found">一旦找到定位時，導航路線將重新規劃</string>
@@ -1808,9 +1808,9 @@
     <string name="flat_list_waypoitns">全部</string>
     <string name="waypoints">中途點</string>
     <string name="targets">目的地</string>
-    <string name="way_alarms">障礙</string>
-    <string name="speak_favorites">通報我的最愛</string>
-    <string name="speak_poi">通報 POI</string>
+    <string name="way_alarms">交通狀況提醒</string>
+    <string name="speak_favorites">通報附近我的最愛</string>
+    <string name="speak_poi">通報附近 POI</string>
     <string name="flat_list_waypoints">全部</string>
     <string name="index_tours">旅遊</string>
     <string name="record_plugin_description">在地圖螢幕上透過點觸按鈕儲存您的軌跡。顯示設定，便於記錄您到當地旅程的 GPX 檔案或在線上使用網站的服務。</string>
@@ -1825,4 +1825,11 @@
 	<string name="confirm_every_run">始終詢問</string>
 	<string name="save_global_track_interval_descr">為通常的軌跡記錄選擇記錄間隔（透過在地圖上的 GPX 記錄小工具啟用）</string>
 	<string name="save_global_track_interval">通常的記錄間隔</string>
+	<string name="traffic_warning_speed_limit">速限</string>
+    <string name="traffic_warning_border_control">邊境管制</string>
+    <string name="traffic_warning_payment">收費站</string>
+    <string name="traffic_warning_stop">停止</string>
+    <string name="traffic_warning_calming">交通寧靜區</string>
+    <string name="traffic_warning_speed_camera">測速照相</string>
+    <string name="traffic_warning">交通流量警示</string>
 	</resources>

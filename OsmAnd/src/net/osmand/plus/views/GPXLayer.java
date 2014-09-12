@@ -287,9 +287,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private List<WptPt> getListStarPoints(SelectedGpxFile g) {
 		List<WptPt> pts = g.getGpxFile().points;
-		if(pts.isEmpty() & !g.getGpxFile().routes.isEmpty()) {
-			pts = g.getGpxFile().routes.get(0).points;
-		}
+		// don't display points here
+//		if(pts.isEmpty() & !g.getGpxFile().routes.isEmpty()) {
+//			pts = g.getGpxFile().routes.get(0).points;
+//		}
 		return pts;
 	}
 

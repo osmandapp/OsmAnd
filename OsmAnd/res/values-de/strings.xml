@@ -1,5 +1,14 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
+	<string name="traffic_warning_border_control">Grenzkontrolle</string>
+	<string name="traffic_warning_payment">Mautstelle</string>
+	<string name="traffic_warning_stop">Stoppzeichen</string>
+	<string name="traffic_warning_calming">Verkehrsberuhigung</string>
+	<string name="traffic_warning_speed_camera">Geschwindigkeitskontrolle</string>
+	<string name="traffic_warning">Verkehrswarnung</string>
+	<string name="speak_favorites">Nahegelegene Favoriten ankündigen</string>
+	<string name="speak_poi">Nahegelegene POI ankündigen</string>
 	<string name="tip_navigation">Navigation starten</string>
 	<string name="tip_navigation_t">Die Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte, (dann Kurzklick auf den Positionsmarker und das Auswählen des Menüpunktes \'Navigiere zu\'), oder über die Funktion \'Navigiere zu\' bei Klick auf ein Ergebnis einer Such-Liste oder einen Favoriten.
 		\n\nDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.
@@ -50,7 +59,7 @@
 	<string name="rendering_attr_coloredBuildings_name">Gefärbte Gebäude</string>
 	<string name="continue_navigation">Navigation fortsetzen</string>
 	<string name="pause_navigation">Navigation pausieren</string>
-	<string name="keep_navigation_service">Aktiv lassen</string>
+	<string name="keep_navigation_service">Aktiv erhalten</string>
 	<string name="stop_navigation_service">Unterbrechen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpine Tourenskala (SAC)</string>
 	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
@@ -1448,7 +1457,7 @@
 	
 	<string name="speak_speed_limit">Höchstgeschwindigkeit ansagen</string>
 	<string name="speak_cameras">Blitzer ansagen</string>
-	<string name="speak_traffic_warnings">Verkehrsmeldungen ansagen</string>
+	<string name="speak_traffic_warnings">Verkehrswarnungen ansagen</string>
 	<string name="osb_author_or_password_not_specified">Bitte OSM-Nutzername und Passwort in den Einstellungen eingeben</string>
 	<string name="clear_intermediate_points">Zwischenziele löschen</string>
 	<string name="keep_intermediate_points">Zwischenziele behalten</string>
@@ -1612,7 +1621,7 @@
 	<string name="map_preferred_locale">Bevorzugte Sprache für Karten-Beschriftung</string>
 	<string name="local_map_names">Lokale Namen</string>
 	<string name="rendering_attr_subwayMode_name">U-Bahn-Modus</string>
-	<string name="gps_wake_up_timer">GPS Aufwach-Intervall</string>
+	<string name="gps_wake_up_timer">GPS-Aufwach-Intervall</string>
 	<string name="forward">Weiter</string>
 	<string name="hide_all_waypoints">alle löschen</string>
 
@@ -1961,11 +1970,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="distance">Distanz</string>
     <string name="index_tours">Touren</string>
     <string name="flat_list_waypoints">Alle</string>
-    <string name="waypoints">GPX-Wegpunkte</string>
+    <string name="waypoints">Wegpunkte</string>
     <string name="targets">Ziele</string>
-    <string name="way_alarms">Hindernisse</string>
-    <string name="speak_favorites">Favoriten ansagen</string>
-    <string name="speak_poi">POI ansagen</string>
+    <string name="way_alarms">Verkehrswarnungen</string>
     <string name="record_plugin_description">Speichern Sie Ihre Tracks mit einem Klick. Zeigt die Einstellung, wie Strecken aufgezeichnet werden – in lokale GPX-Dateien oder online via Web-Service.</string>
     <string name="route_descr_destination"/>
     </resources>

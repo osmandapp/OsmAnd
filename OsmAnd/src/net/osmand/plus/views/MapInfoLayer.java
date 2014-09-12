@@ -289,8 +289,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		statusBar.setLayoutParams(flp);
 		
 		flp = new FrameLayout.LayoutParams((int)(78 * scaleCoefficient),
-				(int)(78 * scaleCoefficient), Gravity.RIGHT | Gravity.BOTTOM);
-		flp.rightMargin = (int) (10*scaleCoefficient);
+				(int)(78 * scaleCoefficient), Gravity.LEFT | Gravity.BOTTOM);
+		flp.leftMargin = (int) (10*scaleCoefficient);
 		flp.bottomMargin = (int) (85*scaleCoefficient);
 		alarmControl.setLayoutParams(flp);
 

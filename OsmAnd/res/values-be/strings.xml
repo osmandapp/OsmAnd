@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага масштабіраваньня</string>
     <string name="auto_zoom_close">Зачыніць</string>
     <string name="auto_zoom_far">Для сярэдняга масштаба</string>
@@ -1937,9 +1937,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="more">Больш...</string>
     <string name="flat_list_waypoitns">Усе</string>
     <string name="waypoints">Кропкі шляху</string>
-    <string name="way_alarms">Перашкоды</string>
-    <string name="speak_favorites">Абвяшчаць выбраныя</string>
-    <string name="speak_poi">Абвяшчаць POI</string>
+    <string name="way_alarms">Дарожныя папярэджаньні</string>
+    <string name="speak_favorites">Абвяшчаць выбраныя паблізу</string>
+    <string name="speak_poi">Абвяшчаць навакольныя POI</string>
     <string name="targets">Цэлі</string>
     <string name="flat_list_waypoints">Усе</string>
     <string name="index_tours">Паездкі</string>
@@ -1955,4 +1955,11 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="confirm_every_run">Пытацца заўсёды</string>
 	<string name="save_global_track_interval_descr">Выберыце інтэрвал рэгістравання для запісвання агульнага шляху (ўмыкаецца віджэтам запісу GPX на мапе)</string>
 	<string name="save_global_track_interval">Агульны інтарвал запісвання</string>
+	<string name="traffic_warning_speed_limit">Абмежаваньне хуткасьці</string>
+    <string name="traffic_warning_border_control">Памежны кантроль</string>
+    <string name="traffic_warning_payment">Платны праезд</string>
+    <string name="traffic_warning_stop">Знак STOP</string>
+    <string name="traffic_warning_calming">Зьнізьце хуткасьць</string>
+    <string name="traffic_warning_speed_camera">Фотарадар</string>
+    <string name="traffic_warning">Абмежаваньне хуткасьці</string>
 	</resources>

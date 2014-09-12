@@ -4,6 +4,7 @@ import android.content.Context;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LocationPoint;
+import net.osmand.plus.R;
 
 public class AlarmInfo implements LocationPoint {
 	public enum AlarmInfoType {
@@ -25,6 +26,24 @@ public class AlarmInfo implements LocationPoint {
 			return priority;
 		}
 		
+		
+		public String getVisualName(Context ctx) {
+			switch (priority) {
+			case 1:
+				return ctx.getString(R.string.traffic_warning_speed_camera);
+			case 2:
+				return ctx.getString(R.string.traffic_warning_speed_limit);
+			case 3:
+				return ctx.getString(R.string.traffic_warning_border_control);
+			case 4:
+				return ctx.getString(R.string.traffic_warning_calming);
+			case 5:
+				return ctx.getString(R.string.traffic_warning_payment);
+			case 6:
+				return ctx.getString(R.string.traffic_warning_stop);
+			}
+			return ctx.getString(R.string.traffic_warning);
+		}
 	}
 	
 	private AlarmInfoType type;
@@ -97,7 +116,7 @@ public class AlarmInfo implements LocationPoint {
 		if(alarmInfo != null) {
 			alarmInfo.setLatLon(loc.getLatitude(), loc.getLongitude());
 		}
-		return null;
+		return alarmInfo;
 	}
 	
 	public int updateDistanceAndGetPriority(float time, float distance) {
@@ -120,7 +139,7 @@ public class AlarmInfo implements LocationPoint {
 
 	@Override
 	public String getName(Context ctx) {
-		return type.name();
+		return type.getVisualName(ctx);
 	}
 
 	@Override

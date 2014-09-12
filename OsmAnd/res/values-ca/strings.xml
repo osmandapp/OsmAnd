@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -747,7 +747,7 @@
 <string name="osmand_background_plugin_description">Mostra els paràmetres per habilitar el seguiment i la navegació en segon pla (pantalla apagada) mitjançant l\'activació periòdica del dispositiu GPS.</string>
 <string name="accessibility_preferences_descr">Preferències d\'accessibilitat</string>
 <string name="trace_rendering_descr">Mostra el rendiment de la renderització</string>
-<string name="tip_navigation_t">"Per obtenir indicacions de com anar a un lloc, podeu mantenir recolzat un punt en el mapa, (llavors omplireu la seva descripció i la triareu amb \'Indicacions a\') o podeu seleccionar \'Indicacions\' després de triar un resultat d\'una llista de recerca o de la vostra llista de favorits.
+<string name="tip_navigation_t">"Per obtenir indicacions de com anar a un lloc, podeu mantenir recolzat un punt en el mapa, (llavors omplireu la seva descripció i la triareu amb \'Indicacions a\') o podeu seleccionar \'Indicacions a\' després de triar un resultat d\'una llista de recerca o de la vostra llista de favorits.
 \n\nEl destí es destaca amb un marcador amb forma de bandera sobre el mapa i OsmAnd mostra tant la distància com la direcció a ell (triangle taronja).
 \n\nPots triar \'Inicia navegació\', que vol dir que OsmAnd et guiarà, et donarà instruccions de veu (si es configura), etc. O també pots seleccionar \'Mostra la ruta\', indicant una ruta estàtica sense cap guia o correccions al teu moviment.
 \n\nPer mostrar una ruta fins la destinació seleccionada des qualsevol punt diferent al que tu et trobes, selecciona el punt d\'inici en el mapa i prem \'Indicacions des\'.
@@ -791,15 +791,13 @@
 <string name="overlay_transparency">Opacitat de la capa superposada</string>
 <string name="layer_underlay">Mapa de base…</string>
 <string name="preferred_locale">Llengua de visualització</string>
-<string name="tip_search_t">Podeu cercar llocs directament al mapa via \'Usar posició\' → \'Buscar prop d\'aquí\', o amb la pantalla dedicada a les  cerques via \'Menú\' → \'Cerca\'.
-	\n\nLa pantalla de cerca admet diferents formats de cerca:
-	\n\t* per adreça
-	\n\t* amb coordenades
-	\n\t* com PDI (per tipus o per nom)
-	\n\t* dins el teu històric de cerques
-	\n\t* o entre els teus preferits ja predefinits
-	\n\n Per qualsevol selecció un menú de context o una barra d\'accions ofereix opcions com \'Indicacions\' or \'Mostra al mapa\', etc.
-	</string>
+<string name="tip_search_t">"Podeu cercar llocs directament al mapa via \'Usar posició\' → \'Buscar prop d\'aquí\', o amb la pantalla dedicada a les cerques via \'Menú\' → \'Cerca\'.
+\n\nLa pantalla de cerca admet diferents formats de cerca:\n\t* per adreça
+\n\t* amb coordenades
+\n\t* com PDI (per tipus o per nom)
+\n\t* dins el teu històric de cerques
+\n\t* o entre els teus preferits ja predefinits
+\n\n Per qualsevol selecció un menú de context o una barra d\'accions ofereix opcions com \'Indicacions a\' or \'Mostra al mapa\', etc. "</string>
 <string name="add_waypoint_dialog_added">La fita «{0}» de la traça GPX s\'ha afegit correctament</string>
 <string name="add_waypoint_dialog_title">Afegeix una fita a la traça GPX enregistrada</string>
 <string name="version_index_is_big_for_memory">L\'índex «{0}» no cap a la memòria</string>
@@ -858,7 +856,7 @@
 	\n\nLa caixa de diàleg s\'amaga altre cop prement i aguantant dins seu.
 	</string>
 <string name="tip_initial_t">"OsmAnd és una aplicació de navegació amb moltes funcionalitats.
-\n\nEs disposa d\'una introducció bàsica, de consells d\'ús i d\'una ajuda avançada via «Menú» → «Ajuda» des la pantalla del mapa. "</string>
+\n\nEs disposa d\'una introducció bàsica, de consells d\'ús i de trucs via «Menú» → «Ajuda» des la pantalla del mapa. "</string>
 <string name="send_location_way_choose_title">Comparteix l\'ubicació usant</string>
 <string name="old_map_index_is_not_supported">Format de mapa discontinuat «{0}» no esta suportat</string>
 <string name="select_max_zoom_preload_area">Selecciona el màxim zoom per precarregar</string>
@@ -1872,9 +1870,9 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="flat_list_waypoitns">Totes</string>
     <string name="waypoints">Fites</string>
     <string name="targets">Destinacions</string>
-    <string name="way_alarms">Obstacles</string>
-    <string name="speak_favorites">Indica els preferits</string>
-    <string name="speak_poi">Indica els PDI</string>
+    <string name="way_alarms">Notificacions de tràfic</string>
+    <string name="speak_favorites">Indica els preferits propers</string>
+    <string name="speak_poi">Indica els PDI propers</string>
     <string name="index_tours">Itineraris</string>
     <string name="flat_list_waypoints">Totes</string>
     <string name="record_plugin_description">Enregistreu el vostre trajecte prement un botó sobre la pantalla del mapa. Reviseu la configuració de gravació dels vostres recorreguts a arxius locals GPX o a la xarxa utilitzant un servei web.</string>

@@ -1744,9 +1744,9 @@
     <string name="flat_list_waypoitns">Все</string>
     <string name="waypoints">Путевые точки</string>
     <string name="targets">Пункты назначения</string>
-    <string name="way_alarms">Препятствия</string>
-    <string name="speak_favorites">Объявлять избранные</string>
-    <string name="speak_poi">Объявлять POI</string>
+    <string name="way_alarms">Дорожные предупреждения</string>
+    <string name="speak_favorites">Объявлять близлежащие избранные</string>
+    <string name="speak_poi">Объявлять близлежащие POI</string>
     <string name="index_tours">Туры</string>
     <string name="flat_list_waypoints">Все</string>
     <string name="distance">Расстояние</string>
@@ -1763,4 +1763,11 @@
 	<string name="confirm_every_run">Всегда спрашивать</string>
 	<string name="save_global_track_interval_descr">Выберите интервал журналирования для записи общего трека (включается через виджет записи GPX на карте)</string>
 	<string name="save_global_track_interval">Общий интервал журналирования</string>
+	<string name="traffic_warning_speed_limit">Ограничение скорости</string>
+    <string name="traffic_warning_border_control">Пограничный контроль</string>
+    <string name="traffic_warning_payment">Платный проезд</string>
+    <string name="traffic_warning_stop">Знак остановки</string>
+    <string name="traffic_warning_calming">Снизьте скорость</string>
+    <string name="traffic_warning_speed_camera">Скоростной радар</string>
+    <string name="traffic_warning">Ограничение скорости</string>
 	</resources>

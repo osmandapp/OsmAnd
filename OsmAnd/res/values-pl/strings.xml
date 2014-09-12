@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
@@ -185,21 +185,20 @@
   <string name="tip_app_mode">Wybierz Profil</string>
   
   <string name="tip_navigation">Nawigacja</string>
-  <string name="tip_navigation_t">"W celu wyznaczenia trasy do miejsca, kliknij na nie na mapie, (a następnie wybierz \'Trasa do tego miejsca\'), lub wybierz \'Nawigacja\' po wybraniu dowolnego wpisu w liście wyników wyszukiwania lub liści Ulubionych.↵
+  <string name="tip_navigation_t">"W celu wyznaczenia trasy do miejsca, kliknij na nie na mapie, (a następnie wybierz \'Trasa do tego miejsca\'), lub wybierz \'Nawiguj do\' po wybraniu dowolnego wpisu w liście wyników wyszukiwania lub liści Ulubionych.↵
 \n\nCel oznaczony jest na mapie jako znacznik flagi i OsmAnd wyświetla odległość do niego oraz kierunek do niego (pomarańczowy trójkąt).
 \n\nMożesz wybrać opcję \'Uruchom nawigację\', co oznacza, że OsmAnd będzie poprowadzić Cię, dając instrukcje głosowe (jeśli są włączone), itp. Można też wybrać \'Tylko pokaż\' w celu wyświetlenia trasy bez możliwości nawigowania.
 \n\nAby wyświetlić trasę do wybranego celu z każdego innego miejsca niż aktualna pozycja, wybierz punkt początkowy na mapie i Wybierz \'Dojazd z \'.
 \n\nJeśli wybierzesz \'Dojazd z \' oraz \'Nawiguj\' OsmAnd przełączy się do Twojej aktualnej pozycji, jak tylko zostanie znaleziona, natomiast \'Dojazd z \' w połączeniu z trasy \'Tylko pokaż\' tylko pokazuje trasę bez aktualizacji położenia na trasie. "</string>
   <string name="tip_search">Wyszukiwanie</string>
-  <string name="tip_search_t">Możesz wyszukać miejsca bezpośrednio na mapie poprzez \'Użyj lokalizacji...\' → \'Szukaj w pobliżu tutaj\', lub wywołując ekran wyszukiwania poprzez \'Menu\' → \'Szukaj\'.↵
-		\n\nEkran wyszukiwania zapewnia szablony wyszukiwania
-		\n\t* przez podanie adresu
-		\n\t* przez podanie współrzędnych
-		\n\t* wyszukiwanie POI (po typie lub nazwie)
-		\n\t* przez historię wyszukiwania
-		\n\t* przez zdefiniowane Ulubione
-		\n\nDla wszystkich wyników możesz wybrać opcję \'Nawigacja\' lub \'Pokaż na mapie\'.
-	</string>
+  <string name="tip_search_t">"Możesz wyszukać miejsca bezpośrednio na mapie poprzez \'Użyj lokalizacji...\' → \'Szukaj w pobliżu tutaj\', lub wywołując ekran wyszukiwania poprzez \'Menu\' → \'Szukaj\'.↵
+\n\nEkran wyszukiwania zapewnia szablony wyszukiwania
+\n\t* przez podanie adresu
+\n\t* przez podanie współrzędnych
+\n\t* wyszukiwanie POI (po typie lub nazwie)
+\n\t* przez historię wyszukiwania
+\n\t* przez zdefiniowane Ulubione
+\n\nDla wszystkich wyników możesz wybrać opcję \'Nawiguj do\' lub \'Pokaż na mapie\'. "</string>
   <string name="tip_map_context_menu">Menu \'Użyj lokalizacji..\'</string>
   <string name="tip_map_context_menu_t">\'Użyj lokalizacji...\' zawiera wszystkie opcje odnoszące się do punktu (lokalizacji).
 		\n\nSą one dostępny przez długie naciśnięcie dowolnego punktu na mapie (następnie dotykając jego znacznik), lub przez naciśnięcie przycisku trackball lub wybierając \'Menu\' → \'Użyj lokalizacji...\' (dwa ostatnie sposoby pobierają centrum mapy jako odniesienie).↵
@@ -1111,7 +1110,7 @@
     <string name="safe_mode_description">Uruchom program w trybie bezpiecznym (używa wolniejszego kodu Androida zamiast natywnego).</string>
     <string name="safe_mode">Tryb bezpieczny</string>
     <string name="native_library_not_running">Program działa w trybie bezpiecznym (wyłącz go w ustawieniach).</string>
-    <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Czy chcesz ją zatrzymać?</string>
+    <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Czy chcesz ją także zatrzymać?</string>
     <string name="tip_recent_changes_1_0_0_t">Zmiany w 1.0.0:
 \n\t* Poprawiony routing: szybszy, dokładniejszy, do 250 km
 \n\t* Wprowadzenie map tylko samochodowych
@@ -1858,10 +1857,10 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_auth_error_short">Błąd autoryzacji</string>
     <string name="osmo_auth_error">Wystąpił błąd autoryzacji OsMo: %1$s.\n To może być przerwa w działaniu usługi lub twoja rejestracja straciła ważność.\n Chcesz kontynuować z nową rejestracją?</string>
     <string name="keep_navigation_service">Utrzymuj</string>
-	<string name="stop_navigation_service">Stop</string>
+	<string name="stop_navigation_service">Wyłącz</string>
 	<string name="enable_sleep_mode">Włącz tryb uśpienia GPS</string>
 	<string name="gps_wake_up_timer">Odstęp czasu wybudzania GPS</string>
-	<string name="sleep_mode_stop_dialog">Wyłączyć tryb uśpienia GPS?</string>
+	<string name="sleep_mode_stop_dialog">Czy wyłączyć tryb uśpienia GPS?</string>
 	<string name="map_preferred_locale_descr">Preferowany język dla etykiet na mapie (jeśli niedostępny, zostanie wybrany język angielski lub lokalna nazwa)</string>
     <string name="map_preferred_locale">Preferowany język map</string>
     <string name="local_map_names">Nazwy lokalne</string>
@@ -1883,8 +1882,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_attr_buildings15zoom_name">Budynki na przybliżeniu 15</string>
     <string name="rendering_attr_moreDetailed_name">Więcej szczegółów</string>
     <string name="rendering_attr_lessDetailed_name">Mniej szczegółów</string>
-    <string name="rendering_attr_hideAccess_name">Ukryj typ dostępu</string>
-    <string name="rendering_attr_showAccess_name">Pokaż typ dostępu</string>
+    <string name="rendering_attr_hideAccess_name">Ukryj ograniczenia dostępu</string>
+    <string name="rendering_attr_showAccess_name">Pokaż ograniczenia dostępu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Pokaż jakość dróg</string>
     <string name="rendering_attr_showSurfaces_name">Pokaż nawierzchnię dróg</string>
     <string name="rendering_attr_showCycleRoutes_name">Pokaż ścieżki rowerowe</string>
@@ -1908,7 +1907,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_specify_tracker_id">Określ id</string>
     <string name="continue_navigation">Kontynuuj nawigację</string>
     <string name="pause_navigation">Wstrzymaj nawigację</string>
-    <string name="rendering_attr_alpineHiking_name">Widok wspinaczki alpinistycznej</string>
+    <string name="rendering_attr_alpineHiking_name">Skala wspinaczki alpinistycznej (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Renderuj ścieżki według skali SAC</string>
     <string name="rendering_attr_osmcTraces_name">Symbol nakładki wędrówek</string>
     <string name="rendering_attr_osmcTraces_description">Renderuj ścieżki według śladów OSMC</string>
