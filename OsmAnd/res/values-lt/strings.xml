@@ -1816,9 +1816,9 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="flat_list_waypoints">Visi</string>
     <string name="targets">Tikslai</string>
     <string name="waypoints">Tarpiniai taškai</string>
-    <string name="way_alarms">Kliūtys</string>
-    <string name="speak_favorites">Paskelbti įsimintas vietas</string>
-    <string name="speak_poi">Paskelbti lankytinas vietas</string>
+    <string name="way_alarms">Eismo perspėjimai</string>
+    <string name="speak_favorites">Paskelbti artimiausias įsimintas vietas</string>
+    <string name="speak_poi">Paskelbti artimiausias lankytinas vietas</string>
     <string name="record_plugin_name">Įrašyti savo keliones</string>
     <string name="int_hour">val</string>
     <string name="duration">Trukmė</string>
@@ -1831,4 +1831,11 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="confirm_every_run">Visada klausti</string>
 	<string name="save_global_track_interval_descr">Pasirinkite bendrojo maršruto įrašymo intervalą (įjungiama per GPX valdiklį žemėlapio rodinyje)</string>
 	<string name="save_global_track_interval">Bendras įrašymo intervalas</string>
+	<string name="traffic_warning_speed_limit">Greičio ribojimas</string>
+    <string name="traffic_warning_border_control">Pasienio kontrolė</string>
+    <string name="traffic_warning_payment">Mokamas pravažiavimas</string>
+    <string name="traffic_warning_stop">\"Stop\" ženklas</string>
+    <string name="traffic_warning_calming">Eismo greičio ribojimas</string>
+    <string name="traffic_warning_speed_camera">Greičio matavimo kamera</string>
+    <string name="traffic_warning">Eismo perspėjimas</string>
 	</resources>
