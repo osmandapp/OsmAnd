@@ -61,14 +61,10 @@ public abstract class OsmandExpandableListFragment extends SherlockFragment impl
 			}
 		}
 	}
-	
-	public ExpandableListView getListView() {
-		return listView;
-	}
-	
-	public ExpandableListView getExpandableListView() {
-		return listView;
-	}
+
+	public ExpandableListView getExpandableListView() { return listView; }
+
+	public void setListView(ExpandableListView listView) { this.listView = listView;}
 
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType) {
 		int r = isLightActionBar() ? iconLight : iconDark;

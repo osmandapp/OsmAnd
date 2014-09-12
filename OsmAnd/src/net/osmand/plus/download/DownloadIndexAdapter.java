@@ -8,7 +8,6 @@ import java.util.Map;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -28,7 +27,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	private DownloadIndexFilter myFilter;
 	private final List<IndexItem> indexFiles;
 	private final List<IndexItemCategory> list = new ArrayList<IndexItemCategory>();
-	private DownloadIndexActivity downloadActivity;
+	private DownloadIndexFragment downloadFragment;
 
 	private Map<String, String> indexFileNames = null;
 	private Map<String, String> indexActivatedFileNames = null;
@@ -38,21 +37,21 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	private OsmandRegions osmandRegions;
 	private java.text.DateFormat format;
 
-	public DownloadIndexAdapter(DownloadIndexActivity downloadActivity, List<IndexItem> indexFiles) {
-		this.downloadActivity = downloadActivity;
+	public DownloadIndexAdapter(DownloadIndexFragment downloadFragment, List<IndexItem> indexFiles) {
+		this.downloadFragment = downloadFragment;
 		this.indexFiles = new ArrayList<IndexItem>(indexFiles);
-		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(downloadActivity.getMyApplication(), indexFiles);
+		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(downloadFragment.getMyApplication(), indexFiles);
 		synchronized (this) {
 			list.clear();
 			list.addAll(cats);
 		}
-		format = downloadActivity.getMyApplication().getResourceManager().getDateFormat();
-		okColor = downloadActivity.getResources().getColor(R.color.color_ok);
-		TypedArray ta = downloadActivity.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
-		defaultColor = ta.getColor(0, downloadActivity.getResources().getColor(R.color.color_unknown));
+		format = downloadFragment.getMyApplication().getResourceManager().getDateFormat();
+		okColor = downloadFragment.getResources().getColor(R.color.color_ok);
+		TypedArray ta = downloadFragment.getDownloadActivity().getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
+		defaultColor = ta.getColor(0, downloadFragment.getResources().getColor(R.color.color_unknown));
 		ta.recycle();
-		updateColor = downloadActivity.getResources().getColor(R.color.color_update);
-		osmandRegions = downloadActivity.getMyApplication().getResourceManager().getOsmandRegions();
+		updateColor = downloadFragment.getResources().getColor(R.color.color_update);
+		osmandRegions = downloadFragment.getMyApplication().getResourceManager().getOsmandRegions();
 	}
 
 	public void setLoadedFiles(Map<String, String> indexActivatedFileNames, Map<String, String> indexFileNames) {
@@ -62,11 +61,11 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	}
 
 	public void collapseTrees(final CharSequence constraint) {
-		downloadActivity.runOnUiThread(new Runnable() {
+		downloadFragment.getDownloadActivity().runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				synchronized (DownloadIndexAdapter.this) {
-					final ExpandableListView expandableListView = downloadActivity.getExpandableListView();
+					final ExpandableListView expandableListView = downloadFragment.getExpandableListView();
 					for (int i = 0; i < getGroupCount(); i++) {
 						int cp = getChildrenCount(i);
 						if (cp < 7) {
@@ -125,7 +124,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					}
 				}
 				List<IndexItem> filter = new ArrayList<IndexItem>();
-				Context c = downloadActivity;
+				Context c = downloadFragment.getDownloadActivity();
 				for (IndexItem item : indexFiles) {
 					boolean add = true;
 					String indexLC = osmandRegions.getDownloadNameIndexLowercase(item.getBasename());
@@ -166,11 +165,11 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				list.clear();
 				Collection<IndexItem> items = (Collection<IndexItem>) results.values;
 				if (items != null && !items.isEmpty()) {
-					list.addAll(IndexItemCategory.categorizeIndexItems(downloadActivity.getMyApplication(), items));
+					list.addAll(IndexItemCategory.categorizeIndexItems(downloadFragment.getMyApplication(), items));
 				} else if(DownloadIndexAdapter.this.indexFiles.isEmpty()){
-					list.add(new IndexItemCategory(downloadActivity.getResources().getString(R.string.no_index_file_to_download), 1));
+					list.add(new IndexItemCategory(downloadFragment.getResources().getString(R.string.no_index_file_to_download), 1));
 				} else {
-					list.add(new IndexItemCategory(downloadActivity.getResources().getString(R.string.select_index_file_to_download), 1));
+					list.add(new IndexItemCategory(downloadFragment.getResources().getString(R.string.select_index_file_to_download), 1));
 				}
 			}
 			notifyDataSetChanged();
@@ -218,7 +217,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		View v = convertView;
 		IndexItemCategory group = getGroup(groupPosition);
 		if (v == null) {
-			LayoutInflater inflater = downloadActivity.getLayoutInflater();
+			LayoutInflater inflater = (LayoutInflater) downloadFragment.getDownloadActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 			v = inflater.inflate(net.osmand.plus.R.layout.expandable_list_item_category, parent, false);
 		}
 		final View row = v;
@@ -233,27 +232,27 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 		View v = convertView;
 		if (v == null) {
-			LayoutInflater inflater = downloadActivity.getLayoutInflater();
+			LayoutInflater inflater = (LayoutInflater) downloadFragment.getDownloadActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 			v = inflater.inflate(net.osmand.plus.R.layout.download_index_list_item, parent, false);
 		}
 		final View row = v;
 		TextView item = (TextView) row.findViewById(R.id.download_item);
 		TextView description = (TextView) row.findViewById(R.id.download_descr);
 		IndexItem e = (IndexItem) getChild(groupPosition, childPosition);
-		OsmandApplication clctx = downloadActivity.getMyApplication();
+		OsmandApplication clctx = downloadFragment.getMyApplication();
 		String eName = e.getVisibleDescription(clctx) + "\n" + e.getVisibleName(clctx, osmandRegions);
 		item.setText(eName.trim()); //$NON-NLS-1$
 		String d = e.getDate(format) + "\n" + e.getSizeDescription(clctx);
 		description.setText(d.trim());
 
 		CheckBox ch = (CheckBox) row.findViewById(R.id.check_download_item);
-		ch.setChecked(downloadActivity.getEntriesToDownload().containsKey(e));
+		ch.setChecked(downloadFragment.getDownloadActivity().getEntriesToDownload().containsKey(e));
 		ch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
 				ch.setChecked(!ch.isChecked());
-				downloadActivity.onChildClick(downloadActivity.getListView(), row, groupPosition, childPosition, getChildId(groupPosition, childPosition));
+				downloadFragment.onChildClick(downloadFragment.getExpandableListView(), row, groupPosition, childPosition, getChildId(groupPosition, childPosition));
 			}
 		});
 
@@ -278,22 +277,22 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				} else if (e.getDate(format) != null) {
 					String sfName = e.getTargetFileName();
 					if (e.getDate(format).equals(indexActivatedFileNames.get(sfName))) {
-						item.setText(item.getText() + "\n" + downloadActivity.getResources().getString(R.string.local_index_installed) + " : "
+						item.setText(item.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
 						item.setTextColor(okColor); // GREEN
 						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					} else if (e.getDate(format).equals(indexFileNames.get(sfName))) {
-						item.setText(item.getText() + "\n" + downloadActivity.getResources().getString(R.string.local_index_installed) + " : "
+						item.setText(item.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexFileNames.get(sfName));
 						item.setTextColor(okColor);
 						item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 					} else if (indexActivatedFileNames.containsKey(sfName)) {
-						item.setText(item.getText() + "\n" + downloadActivity.getResources().getString(R.string.local_index_installed) + " : "
+						item.setText(item.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
 						item.setTextColor(updateColor); // LIGHT_BLUE
 						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					} else {
-						item.setText(item.getText() + "\n" + downloadActivity.getResources().getString(R.string.local_index_installed) + " : "
+						item.setText(item.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexFileNames.get(sfName));
 						item.setTextColor(updateColor);
 						item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
