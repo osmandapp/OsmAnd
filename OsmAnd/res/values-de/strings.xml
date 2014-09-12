@@ -1,5 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
+	<string name="traffic_warning_border_control">Grenzkontrolle</string>
+	<string name="traffic_warning_payment">Mautstelle</string>
+	<string name="traffic_warning_stop">Stoppzeichen</string>
+	<string name="traffic_warning_calming">Verkehrsberuhigung</string>
+	<string name="traffic_warning_speed_camera">Geschwindigkeitskontrolle</string>
+	<string name="traffic_warning">Verkehrswarnung</string>
 	<string name="speak_favorites">Nahegelegene Favoriten ankündigen</string>
 	<string name="speak_poi">Nahegelegene POI ankündigen</string>
 	<string name="tip_navigation">Navigation starten</string>
