@@ -613,14 +613,10 @@ public class WaypointHelper {
 	}
 
 	public boolean showAlarms() {
-		//I think here only traffic warnings other than the speed cam are needed. speed cam setting is a separate setting for explicit allow/disallow by user.
-		//return app.getSettings().SHOW_CAMERAS.get() || app.getSettings().SHOW_TRAFFIC_WARNINGS.get();
 		return app.getSettings().SHOW_TRAFFIC_WARNINGS.get();
 	}
 
 	public boolean announceAlarms() {
-		//I think here only traffic warnings other than the speed cam are needed. speed cam setting is a separate setting for explicit allow/disallow by user.
-		//return app.getSettings().SPEAK_SPEED_CAMERA.get() || app.getSettings().SPEAK_TRAFFIC_WARNINGS.get();
 		return app.getSettings().SPEAK_TRAFFIC_WARNINGS.get();
 	}
 
