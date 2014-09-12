@@ -10,6 +10,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import android.graphics.Color;
+import android.text.method.LinkMovementMethod;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.*;
 import net.osmand.IProgress;
@@ -71,6 +73,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	private ContextMenuAdapter optionsMenuAdapter;
 	private ActionMode actionMode;
 
+	private TextView descriptionText;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.local_index, container, false);
@@ -83,6 +87,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		listView.setAdapter(listAdapter);
 		setListView(listView);
 		//getDownloadActivity().getSupportActionBar().setLogo(R.drawable.tab_download_screen_icon);
+		descriptionText = (TextView) view.findViewById(R.id.DescriptionText);
+		updateDescriptionTextWithSize();
 		return view;
 	}
 
@@ -93,7 +99,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
 
-		updateDescriptionTextWithSize();
 		if (asyncLoader == null || asyncLoader.getResult() == null) {
 			// getLastNonConfigurationInstance method should be in onCreate() method
 			// (onResume() doesn't work)
@@ -606,8 +611,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
 				selectionMode = false;
-				//findViewById(R.id.DescriptionText).setVisibility(View.VISIBLE);
-				//updateDescriptionTextWithSize();
+				descriptionText.setVisibility(View.VISIBLE);
+				updateDescriptionTextWithSize();
 				listAdapter.cancelFilter();
 				collapseAllGroups();
 				listAdapter.notifyDataSetChanged();
@@ -625,28 +630,14 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
 			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) }); 
 		}
-		//TextView ds = (TextView) findViewById(R.id.DescriptionText);
-		String text = getString(R.string.download_link_and_local_description, size);
+
+		String text = getString(R.string.local_index_description, size);
 		int l = text.indexOf('.');
 		if(l == -1) {
 			l = text.length();
 		}
-		SpannableString content = new SpannableString(text);
-		content.setSpan(new ClickableSpan() {
-			@Override
-			public void onClick(View widget) {
-				asyncLoader.setResult(null);
-				startActivity(new Intent(getDownloadActivity(), DownloadIndexFragment.class));
-			}
-			
-			@Override
-			public void updateDrawState(TextPaint ds) {
-				super.updateDrawState(ds);
-//				ds.setColor(Color.GREEN);
-			}
-		}, 0, l, 0);
-		//ds.setText(content);
-		//ds.setMovementMethod(LinkMovementMethod.getInstance());
+		descriptionText.setText(text);
+		descriptionText.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 	
 	
