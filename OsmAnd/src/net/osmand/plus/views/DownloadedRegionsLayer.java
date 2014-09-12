@@ -12,7 +12,8 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.DownloadIndexActivity;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -87,7 +88,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				final Intent intent = new Intent(view.getContext(), view.getApplication().getAppCustomization().getDownloadIndexActivity());
-				intent.putExtra(DownloadIndexActivity.FILTER_KEY, filter.toString());
+				intent.putExtra(DownloadActivity.FILTER_KEY, filter.toString());
 				view.getContext().startActivity(intent);
 			}
 		});

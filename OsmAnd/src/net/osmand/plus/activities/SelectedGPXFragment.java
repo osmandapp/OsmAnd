@@ -104,10 +104,10 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 
 
 	public void setContent() {
-		getListView().setFastScrollEnabled(true);
+		getExpandableListView().setFastScrollEnabled(true);
 		lightContent = app.getSettings().isLightContent();
 		if (adapter == null) {
-			adapter = new SelectedGPXAdapter(getListView());
+			adapter = new SelectedGPXAdapter(getExpandableListView());
 			setAdapter(adapter);
 		}
 		List<GpxDisplayGroup> groups = selectedGpxHelper.getDisplayGroups();
@@ -131,7 +131,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		adapter.setDisplayGroups(groups);
 		if(isArgumentTrue(ARG_TO_EXPAND_TRACK_INFO)){
 			for(int i = 0; i < groups.size(); i++) {
-				getListView().expandGroup(i);
+				getExpandableListView().expandGroup(i);
 			}
 		}
 	}
@@ -248,7 +248,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 //		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_light,
 //				R.drawable.ic_action_search_dark, MenuItem.SHOW_AS_ACTION_ALWAYS
 //						| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-//		searchView = new com.actionbarsherlock.widget.SearchView(getMyActivity());
+//		searchView = new com.actionbarsherlock.widget.SearchView(getDownloadActivity());
 //		mi.setActionView(searchView);
 //		searchView.setOnQueryTextListener(new OnQueryTextListener() {
 //

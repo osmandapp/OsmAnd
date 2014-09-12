@@ -34,11 +34,11 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.LocalIndexesActivity;
-import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
+import net.osmand.plus.download.LocalIndexesFragment.LoadLocalIndexTask;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -1094,8 +1094,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public void contextMenuLocalIndexes(Activity activity, SherlockFragment fragment, Object obj,
 			ContextMenuAdapter adapter) {
-		if (activity instanceof LocalIndexesActivity) {
-			final LocalIndexesActivity la = (LocalIndexesActivity) activity;
+		if (activity instanceof DownloadActivity) {
+			final DownloadActivity la = (DownloadActivity) activity;
 			LocalIndexInfo info = (LocalIndexInfo) obj;
 			if (info.getType() == LocalIndexType.AV_DATA) {
 				final RecordingLocalIndexInfo ri = (RecordingLocalIndexInfo) info;
