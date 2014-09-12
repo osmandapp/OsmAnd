@@ -1961,5 +1961,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="traffic_warning_stop">Знак STOP</string>
     <string name="traffic_warning_calming">Зьнізьце хуткасьць</string>
     <string name="traffic_warning_speed_camera">Фотарадар</string>
-    <string name="traffic_warning">Абмежаваньне хуткасьці</string>
+    <string name="traffic_warning">Абмежаваньне руху</string>
 	</resources>
