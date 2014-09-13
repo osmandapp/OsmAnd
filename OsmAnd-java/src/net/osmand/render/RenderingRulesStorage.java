@@ -169,7 +169,7 @@ public class RenderingRulesStorage {
 	
 
 	private RenderingRule createTagValueRootWrapperRule(int tagValueKey, RenderingRule previous) {
-		if (previous.getProperties().length > 2) {
+		if (previous.getProperties().length > 0) {
 			Map<String, String> m = new HashMap<String, String>();
 			m.put("tag", getTagString(tagValueKey));
 			m.put("value", getValueString(tagValueKey));
