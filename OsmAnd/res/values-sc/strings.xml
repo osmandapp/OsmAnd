@@ -1735,4 +1735,9 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="traffic_warning_speed_limit">Limite de lestresa</string>
     <string name="traffic_warning_payment">Casellu</string>
     <string name="traffic_warning_stop">Cartellu Stop</string>
-    </resources>
+    <string name="traffic_warning_border_control">Controllu doganale</string>
+    <string name="traffic_warning_calming">Moderatzione de su tràficu</string>
+    <string name="traffic_warning_speed_camera">Autovelox</string>
+    <string name="traffic_warning">Avisu de tràficu</string>
+	<string name="local_index_description">Ischerta unu elementu esistente pro bìere prus detallios, carca e mantène carcau pro lu deativare o burrare. Datos como in su dispositivu (%1$s lìberos):</string>
+	</resources>
