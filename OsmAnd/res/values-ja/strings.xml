@@ -2057,4 +2057,12 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="confirm_every_run">常に尋ねる</string>
 	<string name="save_global_track_interval_descr">標準的な経路の記録間隔を選択(地図上のGPX記録ウィジェットで有効化)</string>
 	<string name="save_global_track_interval">標準記録間隔</string>
+	<string name="traffic_warning_speed_limit">制限速度</string>
+    <string name="traffic_warning_border_control">出入国管理</string>
+    <string name="traffic_warning_payment">料金所</string>
+    <string name="traffic_warning_stop">一時停止標識</string>
+    <string name="traffic_warning_calming">速度抑制</string>
+    <string name="traffic_warning_speed_camera">スピードカメラ</string>
+    <string name="traffic_warning">交通警告</string>
+	<string name="local_index_description">選択解除または削除するには長押し、詳細を見るにはタップして下さい。現在のデバイス上のデータ(空き容量 %1$s):</string>
 	</resources>
