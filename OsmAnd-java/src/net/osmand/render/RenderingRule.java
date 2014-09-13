@@ -2,6 +2,7 @@ package net.osmand.render;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -16,17 +17,30 @@ public class RenderingRule {
 	private float[] floatProperties;
 	private List<RenderingRule> ifElseChildren;
 	private List<RenderingRule> ifChildren;
+	private boolean isGroup;
 	
 	private final RenderingRulesStorage storage;
+	private Map<String, String> attributes;
 	
-	public RenderingRule(Map<String, String> attributes, RenderingRulesStorage storage){
+	public RenderingRule(Map<String, String> attributes, boolean isGroup, RenderingRulesStorage storage){
+
+		this.isGroup = isGroup;
 		this.storage = storage;
-		process(attributes);
+		init(attributes);
+	}
+	
+	public void storeAttributes(Map<String, String> attributes){
+		this.attributes = new HashMap<String, String>(attributes);
+	}
+	
+	public Map<String, String> getAttributes() {
+		return attributes == null ? Collections.EMPTY_MAP : attributes;
 	}
 
-	private void process(Map<String, String> attributes) {
+	public void init(Map<String, String> attributes) {
 		ArrayList<RenderingRuleProperty> props = new ArrayList<RenderingRuleProperty>(attributes.size());
 		intProperties = new int[attributes.size()];
+		floatProperties = null;
 		int i = 0;
 		Iterator<Entry<String, String>> it = attributes.entrySet().iterator();
 		while (it.hasNext()) {
@@ -132,6 +146,11 @@ public class RenderingRule {
 		ifElseChildren.add(rr);
 	}
 	
+	public boolean isGroup() {
+		return isGroup;
+	}
+	
+	
 	@Override
 	public String toString() {
 		StringBuilder bls = new StringBuilder();
@@ -140,7 +159,11 @@ public class RenderingRule {
 	}
 	
 	public StringBuilder toString(String indent, StringBuilder bls ) {
-		bls.append("test [");
+		if(isGroup){
+			bls.append("switch test [");
+		} else {
+			bls.append(" test [");
+		}
 		printAttrs(bls, true);
 		bls.append("]");
 		
@@ -148,21 +171,21 @@ public class RenderingRule {
 		printAttrs(bls, false);
 		bls.append("]");
 		
-		int k = 0;
 		for(RenderingRule rc : getIfElseChildren()){
-			String cindent = indent + (k++ == 0 ?  "* if   " : "* elif ");
+			String cindent = indent + "* case ";
 			bls.append("\n").append(cindent);
 			rc.toString(indent + "*    ", bls);
 		}
 		
 		for(RenderingRule rc : getIfChildren()){
-			String cindent = indent + "* if   " ;
+			String cindent = indent + "* apply " ;
 			bls.append("\n").append(cindent);
 			rc.toString(indent + "*    ", bls);
 		}
 		
 		return bls;
 	}
+	
 
 	protected void printAttrs(StringBuilder bls, boolean in) {
 		for(RenderingRuleProperty p : getProperties()){

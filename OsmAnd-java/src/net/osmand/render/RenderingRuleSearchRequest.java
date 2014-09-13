@@ -153,6 +153,55 @@ public class RenderingRuleSearchRequest {
 	}
 
 	private boolean visitRule(RenderingRule rule, boolean loadOutput) {
+		boolean input = checkInputProperties(rule);
+		if(!input) {
+			return false;
+		}
+		if (!loadOutput) {
+			return true;
+		}
+		// accept it
+		if(!rule.isGroup()) {
+			loadOutputProperties(rule);
+		}
+		boolean match  = false;
+		for (RenderingRule rr : rule.getIfElseChildren()) {
+			match = visitRule(rr, loadOutput);
+			if (match) {
+				break;
+			}
+		}
+		if (match || !rule.isGroup()) {
+			if (rule.isGroup()) {
+				loadOutputProperties(rule);
+			}
+
+			for (RenderingRule rr : rule.getIfChildren()) {
+				visitRule(rr, loadOutput);
+			}
+			return true;
+		}
+		return false;
+		
+	}
+
+	protected void loadOutputProperties(RenderingRule rule) {
+		RenderingRuleProperty[] properties = rule.getProperties();
+		for (int i = 0; i < properties.length; i++) {
+			RenderingRuleProperty rp = properties[i];
+			if (rp.isOutputProperty()) {
+				searchResult = true;
+				if (rp.isFloat()) {
+					fvalues[rp.getId()] = rule.getFloatProp(i);
+					values[rp.getId()] = rule.getIntProp(i);
+				} else {
+					values[rp.getId()] = rule.getIntProp(i);
+				}
+			}
+		}
+	}
+
+	protected boolean checkInputProperties(RenderingRule rule) {
 		RenderingRuleProperty[] properties = rule.getProperties();
 		for (int i = 0; i < properties.length; i++) {
 			RenderingRuleProperty rp = properties[i];
@@ -171,35 +220,7 @@ public class RenderingRuleSearchRequest {
 				values[rp.getId()] = rule.getIntProp(i);
 			}
 		}
-		if (!loadOutput) {
-			return true;
-		}
-		// accept it
-		for (int i = 0; i < properties.length; i++) {
-			RenderingRuleProperty rp = properties[i];
-			if (rp.isOutputProperty()) {
-				searchResult = true;
-				if (rp.isFloat()) {
-					fvalues[rp.getId()] = rule.getFloatProp(i);
-					values[rp.getId()] = rule.getIntProp(i);
-				} else {
-					values[rp.getId()] = rule.getIntProp(i);
-				}
-			}
-		}
-		
-		for (RenderingRule rr : rule.getIfElseChildren()) {
-			boolean match = visitRule(rr, loadOutput);
-			if (match) {
-				break;
-			}
-		}
-		
-		for(RenderingRule rr : rule.getIfChildren()){
-			visitRule(rr, loadOutput);
-		}
 		return true;
-		
 	}
 	
 	public boolean isSpecified(RenderingRuleProperty property){
