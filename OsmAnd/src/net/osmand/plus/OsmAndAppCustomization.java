@@ -1,7 +1,6 @@
 package net.osmand.plus;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +8,13 @@ import java.util.Map;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.core.android.GLActivity;
 import net.osmand.data.LocationPoint;
-import net.osmand.plus.activities.*;
+import net.osmand.plus.activities.FavouritesActivity;
+import net.osmand.plus.activities.MainMenuActivity;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.PluginsActivity;
+import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -19,10 +23,6 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.view.Window;
-import android.widget.ArrayAdapter;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 
 public class OsmAndAppCustomization {
 	
@@ -82,7 +82,8 @@ public class OsmAndAppCustomization {
 	}
 	
 	public Class<? extends Activity> getDownloadActivity() {
-		return DownloadActivity.class;
+		//return DownloadActivity.class;
+		return GLActivity.class;
 	}
 
 	// Download screen
