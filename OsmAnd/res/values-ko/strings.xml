@@ -723,7 +723,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="fav_points_edited">즐겨찾기 포인트가 수정되었습니다</string>
 	<string name="fav_points_not_exist">즐겨찾기 포인트가 하나도 존재하지 않습니다</string>
 	<string name="update_existing">대체</string>
-	<string name="only_show">경로 표시하기</string>
+	<string name="only_show">경로 표시</string>
 	<string name="follow">길안내 시작</string>
 	<string name="recalculate_route_to_your_location">전송 모드 :</string>
 	<string name="mark_final_location_first">먼저 목적지 포인트를 선택하세요</string>
@@ -772,11 +772,11 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="auto_zoom_map">자동 맵 줌</string>
     <string name="additional_settings">추가 설정</string>
     <string name="settings">설정</string>
-    <string name="save_current_track_descr">현재의 GPX트랙을 SD 카드에 저장합니다</string>
+    <string name="save_current_track_descr">현재의 트랙을 SD 카드에 저장합니다</string>
     <string name="save_current_track">현재의 GPX트랙을 저장</string>
     <string name="save_track_interval_descr">길안내하는 동안 트랙 기록을 저장하는 로깅 간격을 선택합니다</string>
     <string name="save_track_interval">길안내하는 동안 로깅 간격</string>
-    <string name="save_track_to_gpx_descrp">트랙은 길안내하는 동안 트랙 디렉토리에 저장됩니다</string>
+    <string name="save_track_to_gpx_descrp">길안내하는 동안 트랙 디렉토리에 경로를 저장합니다</string>
     <string name="save_track_to_gpx">길안내하는 동안 트랙을 GPX파일로 저장</string>
     <string name="update_tile">맵 업데이트</string>
     <string name="reload_tile">타일 재로드</string>
@@ -1062,9 +1062,9 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="lang_pt">포르투갈어</string>
 	<string name="lang_sl">슬로베니아어</string>
 	<string name="lang_cy">웨일스어</string>
-	<string name="route_preferences">경로 기본 설정</string>
-    <string name="guidance_preferences_descr">경로탐색 선호도</string>
-    <string name="disable_complex_routing_descr">자동차 경로탐색에 대한 2길 라우팅 사용불능</string>
+	<string name="route_preferences">경로 관련설정</string>
+    <string name="guidance_preferences_descr">경로탐색 관련설정</string>
+    <string name="disable_complex_routing_descr">자동차 경로탐색의 2단계 라우팅 사용불가</string>
     <string name="app_modes_choose_descr">앱에서 볼 수있는 사용자 프로필를 선택합니다</string>
     <string name="map_widget_appearance">나머지 요소 :</string>
 	<string name="local_osm_changes_delete_all_confirm">%1$d OSM 변경 사항을 삭제하려고 합니다.  확실합니까?</string>
@@ -1273,7 +1273,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="non_optimal_route_calculation">장거리를 가능하게 하는 비-최적 경로 계산</string>
 	<string name="gps_not_available">설정에서 GPS를 활성화하십시오</string>
     <string name="map_widget_monitoring_services">로깅 서비스</string>
-	<string name="no_route">어떠한 경로도 없음</string>
+	<string name="no_route">경로 없음</string>
 	<string name="delete_target_point">포인트 제거</string>
 	<string name="target_point">포인트 %1$s</string>
     <string name="intermediate_point">포인트 %1$s</string>
@@ -1463,13 +1463,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_parking_minutes">분</string>
 	<string name="osmand_parking_position_description_add_time">자동차를 ~에 주차했습니다 :</string>
 	<string name="tip_recent_changes_0_8_1_t">"Changes in 0.8.1:
-\n\t* 더욱 정밀한 경로 찾기(좀 더 느려짐) More precise routes (a bit slower)
-\n\t* 스마트 하고 빠른 경로 계산. Smart and fast Route recalculation
-\n\t* 좁은 길로 길안내. Direction by lanes
+\n\t* 더욱 정밀한 경로(좀 더 느려짐)
+\n\t* 스마트 하고 빠른 경로 계산.
+\n\t* 자동차 길로 길안내. 
 \n\t* 속도 제한 정보, 속도 카메라, 속도위반에 관한 정보.
-\n\t* 고속도로에서 향상된 음성안내. Improved voice guidance on highways
-\n\t* 주차 플러그인. Parking plugin (\'Where is my car parked at?\')
-\n\t* 트랙로깅 위젯 활성화/비활성화. Enable/disable logging widget "</string>
+\n\t* 고속도로에서 향상된 음성안내. 
+\n\t* 주차 플러그인. (\'Where is my car parked at?\')
+\n\t* 트랙로깅 위젯 활성화/비활성화. "</string>
 	<string name="select_animate_speedup">경로 시뮬레이션의 속도를 선택합니다</string>
     	<string name="global_app_allocated_memory_descr">할당된 메모리 %1$s MB (안드로이드 메모리 제한 %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">할당된 메모리</string>
@@ -1961,7 +1961,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_show_group_notifications">그룹 알림 보기</string>
     <string name="osmo_show_group_notifications_descr">사용자가 그룹에 참여 또는 해체 할때 토스트 메시지를 표시</string>
     <string name="gpx_file_is_empty">GPX트랙이 비어있습니다</string>
-    <string name="selected_track">선택한 GPX트랙</string>
+    <string name="selected_track">선택된 경로</string>
     <string name="my_tracks">모든 GPX트랙</string>
     <string name="my_favorites">내 즐겨찾기</string>
     <string name="my_data_Button">내 장소</string>
@@ -1981,10 +1981,10 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="gpx_selection_point">포인트 %1$s</string>
     <string name="gpx_selection_current_track">기록</string>
     <string name="gpx_selection_route_points">%1$s
-\n 경로 포인트 %2$s</string>
+\n 루트 포인트 %2$s</string>
     <string name="gpx_selection_points">%1$s\n 포인트</string>
     <string name="gpx_selection_track">%1$s\n GPX트랙 %2$s</string>
-    <string name="gpx_available_current_track">현재 기록중인 GPX트랙</string>
+    <string name="gpx_available_current_track">현재 기록중인 트랙</string>
     <string name="loading_smth">%1$s 불러오는 중…</string>
     <string name="map_widget_plain_time">현재 시간</string>
     <string name="gpx_wpt">포인트</string>
@@ -2010,7 +2010,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_auth_error_short">인증 실패</string>
     <string name="osmo_auth_error">OsMo 인증 오류가 발생 했습니다: %1$s.\n임시로 서비스가 다운되었거나 또는 등록 만료가 되었습니다.\n신규 등록을 진행 하시겠습니까?</string>
     <string name="osmo_group_by_invite">메시지를 입력하세요</string>
-    <string name="osmo_group_information_desc">" -모든 그룹은 공용입니다! 익명으로 하려면 트랙커 id 통해 직접 장치를 연결 합니다.\n -그룹는 16 명까지 등록 할 수 있습니다.\n -비활동적인 그룹이나 또는 2 주 동안 단 1 사람만  활동한 경우, 그룹는 삭제 됩니다.\n -컨트롤 그룹으로 그룹 입장을 제한할 수 있습니다. 관리 콘솔에 가는 것이 필요합니다.
+    <string name="osmo_group_information_desc">" -모든 그룹은 공용입니다! 익명으로 하려면 트래커 id 통해 직접 장치를 연결 합니다.\n -그룹는 16 명까지 등록 할 수 있습니다.\n -비활동적인 그룹이나 또는 2 주 동안 단 1 사람만  활동한 경우, 그룹는 삭제 됩니다.\n -컨트롤 그룹으로 그룹 입장을 제한할 수 있습니다. 관리 콘솔에 가는 것이 필요합니다.
 \n -그룹을 만들고 싶으면 http://osmo.mobi 에 접속하세요"</string>
     <string name="osmo_group_information">그룹을 만들기 전에 읽어 보시기 바랍니다!</string>
     <string name="osmo_not_signed_in">OsMo 로그인 실패</string>
@@ -2083,7 +2083,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="rendering_value_pedestrian_name">보행자</string>
     <string name="more">기타...</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
-    <string name="record_plugin_description">지도 화면에 하나의 버튼 터치로 당신의 트랙을 저장 합니다. 로컬 GPX 파일 또는 웹 서비스를 사용하여 온라인에 여행을 기록하기 위해 설정을 보여집니다.</string>
+    <string name="record_plugin_description">지도 화면에 하나의 버튼 터치로 트랙을 저장 합니다. 로컬 GPX 파일 또는 웹 서비스를 사용하여 온라인에 여행을 기록하기 위해 설정을 보여줍니다.</string>
     <string name="record_plugin_name">여행 기록</string>
     <string name="int_hour">h</string>
     <string name="duration">경과시간</string>
