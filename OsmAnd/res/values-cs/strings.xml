@@ -1718,11 +1718,20 @@ s často kladenými otázkami.</string>
     <string name="save_track_to_gpx_globally">"Ukládat trasu do GPX  souboru"</string>
 	<string name="waypoints">Body na trase</string>
     <string name="targets">Cíle</string>
-    <string name="way_alarms">Překážky</string>
-    <string name="speak_favorites">Oznamovat oblíbené</string>
-    <string name="speak_poi">Oznamovat body zájmu POI</string>
+    <string name="way_alarms">Dopravní varování</string>
+    <string name="speak_favorites">Oznamovat blízké oblíbené body</string>
+    <string name="speak_poi">Oznamovat blízké body zájmu POI</string>
     <string name="save_track_to_gpx_globally_descr">Záznam do GPX souboru může být zapnut nebo vypnut pomocí widgetu Záznam trasy na mapové obrazovce</string>
 	<string name="confirm_every_run">Vždy se zeptat</string>
 	<string name="save_global_track_interval_descr">Vybrat interval ukládání pro globální záznam trasy (aktivovaný přes widget Záznam trasy na mapové obrazovce)</string>
 	<string name="save_global_track_interval">Globální interval záznamu</string>
+	<string name="traffic_warning_speed_limit">Rychlostní limit</string>
+    <string name="traffic_warning_border_control">Hraniční kontrola</string>
+    <string name="traffic_warning_payment">Mýtná stanice</string>
+    <string name="traffic_warning_stop">Značka STOP</string>
+    <string name="traffic_warning_calming">Zpomalovací prvek</string>
+    <string name="traffic_warning_speed_camera">Rychlostní radar</string>
+    <string name="traffic_warning">Dopravní varování</string>
+	<string name="route_descr_destination"/>
+    <string name="local_index_description">Klikněte na existující položku k zobrazení více detailů, podržte pro vypnutí nebo smazání. V zařízení je %1$s volného místa:</string>
 	</resources>
