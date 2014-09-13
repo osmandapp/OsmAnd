@@ -157,22 +157,21 @@ public class RenderingRulesStorage {
 		int tag = getDictionaryValue(tagS);
 		int value = getDictionaryValue(valueS);
 		int key = (tag << SHIFT_TAG_VAL) + value;
-		RenderingRule toInsert = rr;
-		RenderingRule previous = tagValueGlobalRules[state].get(key);
-		if(previous != null){
+		RenderingRule insert = tagValueGlobalRules[state].get(key);
+		if (insert != null) {
 			// all root rules should have at least tag/value
-			toInsert = createTagValueRootWrapperRule(key, previous);
-			toInsert.addIfElseChildren(rr);
+			insert = createTagValueRootWrapperRule(key, insert);
+			insert.addIfElseChildren(rr);
+		} else {
+			insert = rr;
 		}
-		tagValueGlobalRules[state].put(key, toInsert);			
+		tagValueGlobalRules[state].put(key, insert);			
 	}
 	
 
 	private RenderingRule createTagValueRootWrapperRule(int tagValueKey, RenderingRule previous) {
 		if (previous.getProperties().length > 0) {
 			Map<String, String> m = new HashMap<String, String>();
-			m.put("tag", getTagString(tagValueKey));
-			m.put("value", getValueString(tagValueKey));
 			RenderingRule toInsert = new RenderingRule(m, true, RenderingRulesStorage.this);
 			toInsert.addIfElseChildren(previous);
 			return toInsert;
