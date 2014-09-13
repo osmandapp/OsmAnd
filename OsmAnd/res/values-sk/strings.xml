@@ -1967,9 +1967,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="flat_list_waypoitns">Všetky</string>
     <string name="waypoints">Prechodné body</string>
     <string name="targets">Ciele</string>
-    <string name="way_alarms">Prekážky</string>
-    <string name="speak_favorites">Oznamovať obľúbené</string>
-    <string name="speak_poi">Oznamovať body záujmu</string>
+    <string name="way_alarms">Dopravné varovania</string>
+    <string name="speak_favorites">Oznamovať blízke obľúbené body</string>
+    <string name="speak_poi">Oznamovať blízke body záujmu</string>
     <string name="flat_list_waypoints">Všetky</string>
     <string name="index_tours">Výlety</string>
     <string name="record_plugin_description">Uložte vaše stopy jedným stlačením tlačidla na mape. Zobrazte nastavenia pre zaznamenanie výletov do lokálneho GPX súboru alebo na webovú službu.</string>
@@ -1984,4 +1984,12 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="save_track_to_gpx_globally_descr">Zaznamenávanie polohy do GPX súboru môže byť zapnuté a vypnuté cez tlačidlo záznamu GPX na obrazovke mapy</string>
 	<string name="save_track_interval_globally">Interval zaznamenávania</string>
 	<string name="rendering_attr_publicTransportMode_name">Režim hromadnej dopravy</string>
+	<string name="traffic_warning_speed_limit">Obmedzenie rýchlosti</string>
+    <string name="traffic_warning_border_control">Hraničná kontrola</string>
+    <string name="traffic_warning_payment">Mýtna stanica</string>
+    <string name="traffic_warning_stop">Značka \"Stop\"</string>
+    <string name="traffic_warning_calming">Spomaľovač</string>
+    <string name="traffic_warning_speed_camera">Rýchlostný radar/kamera</string>
+    <string name="traffic_warning">Dopravné varovanie</string>
+	<string name="local_index_description">Kliknite na existujúcu položku pre zobrazenie detailov. Podržte pre vypnutie alebo odstránenie. Dát je v súčasnosti na zariadení (%1$s voľné):</string>
 	</resources>
