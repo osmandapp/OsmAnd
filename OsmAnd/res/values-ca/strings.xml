@@ -1887,4 +1887,12 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="confirm_every_run">Es demana confirmació</string>
 	<string name="save_global_track_interval_descr">Trieu l\'interval d\'enregistrament general de les traces (s\'activa mitjançant el giny de gravació de GPX del mapa)</string>
 	<string name="save_global_track_interval">Interval d\'enregistrament general</string>
+	<string name="traffic_warning_speed_limit">Velocitat màxima</string>
+    <string name="traffic_warning_border_control">Control de fronteres</string>
+    <string name="traffic_warning_payment">Estació de peatge</string>
+    <string name="traffic_warning_stop">Senyal de stop</string>
+    <string name="traffic_warning_calming">Ressalt</string>
+    <string name="traffic_warning_speed_camera">Càmera de control de velocitat</string>
+    <string name="traffic_warning">Avís de circulació</string>
+	<string name="local_index_description">Premeu qualsevol indicació existent per veure més detalls, mantingueu premuda per desactivar o esborrar. Dades actuals al dispositiu (%1$s lliure):</string>
 	</resources>

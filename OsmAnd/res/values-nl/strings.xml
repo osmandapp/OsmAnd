@@ -1969,4 +1969,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="traffic_warning_calming">Verkeersdrempel</string>
     <string name="traffic_warning_speed_camera">Snelheidscontrole</string>
     <string name="traffic_warning">Filemelding</string>
+	<string name="local_index_description">Tik om details te bekijken; houd ingedrukt om uit te schakelen of te verwijderen. Huidige gegevens op het toestel (%1$s beschikbaar):</string>
 	</resources>

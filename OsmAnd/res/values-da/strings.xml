@@ -1984,8 +1984,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="traffic_warning_speed_limit">Hastighedsgrænse</string>
     <string name="traffic_warning_border_control">Grænsekontrol</string>
     <string name="traffic_warning_payment">Betalingsveje</string>
-    <string name="traffic_warning_stop">Stop</string>
+    <string name="traffic_warning_stop">Stopskilt</string>
     <string name="traffic_warning_calming">Hastighedsnedsættende</string>
     <string name="traffic_warning_speed_camera">Fotofælde</string>
     <string name="traffic_warning">Trafikadvarsel</string>
+	<string name="local_index_description">Klik på et eksisterende element for at se flere detaljer, tryk på og hold nede for at deaktivere eller slette. Aktuelle data på enhed (%1$s fri):</string>
 	</resources>

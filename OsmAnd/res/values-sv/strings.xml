@@ -1691,7 +1691,7 @@
 	<string name="traffic_warning_speed_limit">Hastighetsbegränsning</string>
     <string name="traffic_warning_border_control">Gränskontroll</string>
     <string name="traffic_warning_payment">Vägavgiftshytt</string>
-    <string name="traffic_warning_stop">Stopp</string>
+    <string name="traffic_warning_stop">Stopptecken</string>
     <string name="traffic_warning">Trafikvarning</string>
 	<string name="traffic_warning_speed_camera">Fartkamera</string>
     <string name="traffic_warning_calming">Trafikdämpning</string>

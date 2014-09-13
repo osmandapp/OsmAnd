@@ -613,14 +613,10 @@ public class WaypointHelper {
 	}
 
 	public boolean showAlarms() {
-		//I think here only traffic warnings other than the speed cam are needed. speed cam setting is a separate setting for explicit allow/disallow by user.
-		//return app.getSettings().SHOW_CAMERAS.get() || app.getSettings().SHOW_TRAFFIC_WARNINGS.get();
 		return app.getSettings().SHOW_TRAFFIC_WARNINGS.get();
 	}
 
 	public boolean announceAlarms() {
-		//I think here only traffic warnings other than the speed cam are needed. speed cam setting is a separate setting for explicit allow/disallow by user.
-		//return app.getSettings().SPEAK_SPEED_CAMERA.get() || app.getSettings().SPEAK_TRAFFIC_WARNINGS.get();
 		return app.getSettings().SPEAK_TRAFFIC_WARNINGS.get();
 	}
 
@@ -674,7 +670,12 @@ public class WaypointHelper {
 			} else if(type == FAVORITES || type == WAYPOINTS) {
 				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
 			} else if(type == ALARMS) {
-				return null;
+				//TODO: Looks like this does not work yet, not sure why:
+				if(RenderingIcons.containsBigIcon("list_" + ((AlarmInfo) point).getType().toString().toLowerCase())) {
+					return uiCtx.getResources().getDrawable(RenderingIcons.getBigIconResourceId("list_" + ((AlarmInfo) point).getType().toString().toLowerCase()));
+				} else {
+					return null;
+				}
 			} else {
 				return null;
 			}

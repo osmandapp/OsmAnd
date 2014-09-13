@@ -2102,4 +2102,12 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="confirm_every_run">항상 요청</string>
 	<string name="save_global_track_interval_descr">일반 트랙 레코딩에 대한 로깅 간격을 선택합니다 (지도에 GPX 레코딩 위젯을 통해 사용 가능)</string>
 	<string name="save_global_track_interval">일반 로깅 간격</string>
+	<string name="traffic_warning_speed_limit">속도 제한</string>
+    <string name="traffic_warning_border_control">국경 통제</string>
+    <string name="traffic_warning_payment">톨게이트 부스</string>
+    <string name="traffic_warning_stop">정지 신호</string>
+    <string name="traffic_warning_calming">교통량 감소</string>
+    <string name="traffic_warning_speed_camera">속도 경고 카메라</string>
+    <string name="traffic_warning">트래픽 경고</string>
+	<string name="local_index_description">기존 항목을 클릭하여 더 많은 정보를 보세요. 비활성화 하려면 꾹 눌러주시거나 삭제하세요. 현재 데이터는 (%1$ s 무료):</string>
 	</resources>
