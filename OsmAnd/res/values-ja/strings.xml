@@ -117,9 +117,9 @@ Eメール, SMS(テキスト), あるいはクリップボードに位置座標�
 \n\tマップコンテキストメニューには地点(位置)に関する
 全ての操作があります。</string>
 
-     <string name="tip_initial">ヒントとテクニック</string>
+     <string name="tip_initial">ヘルプ</string>
      <string name="tip_initial_t">"OsmAndは多くの機能を持つナビゲーションアプリです。
-\n基礎的な使い方のヒントやテクニックをマップ画面の\'メニュー\'→\'ヒント\'から参照することが出来ます。 "</string>
+\n基礎的な使い方のヒントやテクニックをマップ画面の\'メニュー\'→\'ヘルプ\'から参照することが出来ます。 "</string>
      <string name="next_button">次へ</string>
      <string name="previous_button">前へ</string>
 
@@ -217,7 +217,7 @@ OsmAnd バージョンがインストールされています。全てのオフ�
      <string name="voice_is_not_available_msg">音声案内は利用できません。
 設定で適切な音声データパッケージを選んでダウンロードしてください。</string>
      <string name="voice_is_not_available_title">音声案内が選択されていません</string>
-     <string name="trace_rendering_descr">レンダリング能力を表示</string>
+     <string name="trace_rendering_descr">マップ操作時に速度やオブジェクト数等のレンダリング能力を表示します</string>
  <string name="trace_rendering">レンダリング速度を表示</string>
      <string name="daynight_mode_day">日中</string>
      <string name="daynight_mode_night">夜間</string>
@@ -683,7 +683,7 @@ POIの更新は利用できません</string>
     <string name="about_version">バージョン：</string>
     <string name="about_settings">About</string>
     <string name="about_settings_descr">バージョン情報、ライセンス、プロジェクトメンバー</string>
-    <string name="tips_and_tricks">ヒント</string>
+    <string name="tips_and_tricks">ヘルプ</string>
     <string name="tip_recent_changes_1_6_t">1.6での変更点:
 	\n\t* フルHDデバイスのサポート
 	\n\t* 完全に透明な背景のサポート
@@ -776,8 +776,8 @@ POIの更新は利用できません</string>
     <string name="use_kalman_filter_compass_descr">電子コンパスの誤差を改善するためにカルマンフィルタを使用</string>
     <string name="use_kalman_filter_compass">カルマンフィルタを使用</string>
     <string name="access_mark_final_location_first">アクセシビリティモード:最初に目的地を選択して下さい</string> 
-    <string name="use_magnetic_sensor_descr">回転センサーの代わりに磁力センサーの値をコンパスの値として利用する</string>
-    <string name="use_magnetic_sensor">磁力センサーを利用</string>
+    <string name="use_magnetic_sensor_descr">回転センサーの代わりに磁気センサーの値をコンパスの値として使用する</string>
+    <string name="use_magnetic_sensor">磁気センサーを使用</string>
     <string name="other_location">その他</string>
     <string name="files_limit">%1$d ファイルが残っています</string>
     <string name="available_downloads_left">%1$d のファイルがダウンロード可能です</string>
@@ -994,8 +994,7 @@ POIの更新は利用できません</string>
 	<string name="select_animate_speedup">ルートシミュレーションの速度を選択</string>
     	<string name="global_app_allocated_memory_descr">メモリを確保しました %1$s MB (Androidの制限値 %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">割り当てられたメモリ</string>
-	<string name="native_app_allocated_memory_descr">アプリに割り当てられたネイティブメモリ %1$s MB (Dalvik %2$s MB, 他 %3$s MB).↵
-		関連メモリ %4$s MB (Android 制限値 %5$s MB, Dalvik %6$s MB).</string>
+	<string name="native_app_allocated_memory_descr">アプリに割り当てられたネイティブメモリ %1$s MB (Dalvik %2$s MB, 他 %3$s MB). 関連メモリ %4$s MB (Android 制限値 %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">総ネイティブメモリ</string>
 	<string name="update_downlod_list">リストの再読み込み</string>
 	<string name="starting_point_too_far">出発地点が最寄りの道路から離れすぎています。</string>
@@ -1068,9 +1067,9 @@ POIの更新は利用できません</string>
 	<string name="prefs_plugins">プラグイン</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">ベクター形式の地図はすばやく表示されます。一部のデバイスではうまく動作しない場合があります。</string>
 	<string name="play_commands_of_currently_selected_voice">現在選択されている音声のコマンドを再生する</string>
-	<string name="debugging_and_development">OsmAnd開発</string>
+	<string name="debugging_and_development">OsmAnd開発者向けオプション</string>
 	<string name="native_rendering">ネイティブレンダリング</string>
-	<string name="test_voice_prompts">テスト音声プロンプト</string>    
+	<string name="test_voice_prompts">音声案内テスト用文字列</string>    
 	<string name="send_files_to_osm">OSMにGPXファイルを送りますか？</string>
 	<string name="gpx_visibility_txt">確認可能</string>
 	<string name="gpx_tags_txt">タグ</string>
@@ -1213,7 +1212,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	
 	<string name="amenity_type_user_defined">ユーザー定義</string>
 	<string name="fav_export_confirmation">以前にエクスポートしたお気に入りのファイルが存在します。置き換えますか？</string>
-	<string name="profile_settings">プロファイル固有の設定</string>
+	<string name="profile_settings">使用するプロファイルの選択</string>
 	<string name="global_settings">グローバル設定</string>
 	<string name="global_app_settings">グローバル アプリケーション設定</string>
 	<string name="download_files_not_enough_space">ダウンロードするのに十分な空き領域がありません。(必要容量:%1$sMB／空き容量%2$s)</string>
@@ -1328,7 +1327,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="av_camera_focus_edof">拡張被写界深度(EDOF)</string>
 	<string name="av_camera_focus_continuous">カメラは、継続的にフォーカスします</string>
 	<string name="amenity_type_seamark">満潮線(Seamark)</string>
-    <string name="app_modes_choose_descr">アプリケーション表示用のプロファイルを選択してください</string>
+    <string name="app_modes_choose_descr">アプリケーション内で表示する移動手段別プロファイルを選択(自動車、自転車、徒歩、その他…)</string>
     <string name="app_modes_choose">アプリケーションプロファイル</string>
 	<string name="map_widget_map_rendering">マップ描画:</string>
     <string name="app_mode_hiking">ハイキング</string>
@@ -2036,9 +2035,9 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="flat_list_waypoints">全て</string>
     <string name="waypoints">経由点</string>
     <string name="targets">目的地</string>
-    <string name="way_alarms">道路障害</string>
-    <string name="speak_favorites">お気に入りをアナウンスする</string>
-    <string name="speak_poi">POIをアナウンスする</string>
+    <string name="way_alarms">交通警告</string>
+    <string name="speak_favorites">周辺のお気に入りをアナウンスする</string>
+    <string name="speak_poi">周辺のPOIをアナウンスする</string>
     <string name="download_additional_maps">不足分のマップ %1$s (%2$d MB)をダウンロードしますか?</string>
     <string name="more">追加…</string>
     <string name="rendering_value_browse_map_name">マップの閲覧</string>  
@@ -2046,7 +2045,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="rendering_value_bicycle_name">自転車</string>
     <string name="rendering_value_pedestrian_name">歩行者</string>
     <string name="record_plugin_description">マップ画面上のボタンをタップすることであなたの経路を保存します。ローカルのGPXファイルへの旅行の記録やオンラインWebサービスの利用の設定が出来ます。</string>
-    <string name="record_plugin_name">旅行の記録</string>
+    <string name="record_plugin_name">OsmAnd開発</string>
     <string name="int_hour">時間</string>
     <string name="duration">期限</string>
     <string name="distance">距離</string>
