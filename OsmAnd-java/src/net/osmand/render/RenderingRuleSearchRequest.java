@@ -162,7 +162,7 @@ public class RenderingRuleSearchRequest {
 		}
 		// accept it
 		if(!rule.isGroup()) {
-			loadOutputProperties(rule);
+			loadOutputProperties(rule, true);
 		}
 		boolean match  = false;
 		for (RenderingRule rr : rule.getIfElseChildren()) {
@@ -173,7 +173,7 @@ public class RenderingRuleSearchRequest {
 		}
 		if (match || !rule.isGroup()) {
 			if (rule.isGroup()) {
-				loadOutputProperties(rule);
+				loadOutputProperties(rule, false);
 			}
 
 			for (RenderingRule rr : rule.getIfChildren()) {
@@ -185,17 +185,18 @@ public class RenderingRuleSearchRequest {
 		
 	}
 
-	protected void loadOutputProperties(RenderingRule rule) {
+	protected void loadOutputProperties(RenderingRule rule, boolean override) {
 		RenderingRuleProperty[] properties = rule.getProperties();
 		for (int i = 0; i < properties.length; i++) {
 			RenderingRuleProperty rp = properties[i];
 			if (rp.isOutputProperty()) {
-				searchResult = true;
-				if (rp.isFloat()) {
-					fvalues[rp.getId()] = rule.getFloatProp(i);
-					values[rp.getId()] = rule.getIntProp(i);
-				} else {
-					values[rp.getId()] = rule.getIntProp(i);
+				if (!isSpecified(rp) || override) {
+					if (rp.isFloat()) {
+						fvalues[rp.getId()] = rule.getFloatProp(i);
+						values[rp.getId()] = rule.getIntProp(i);
+					} else {
+						values[rp.getId()] = rule.getIntProp(i);
+					}
 				}
 			}
 		}
