@@ -376,5 +376,8 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		return items;
 	}
 
+	public boolean isLightActionBar() {
+		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
+	}
 
 }
