@@ -861,13 +861,20 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		}
 
 		@Override
-		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 			View v = convertView;
 			final LocalIndexInfo child = (LocalIndexInfo) getChild(groupPosition, childPosition);
 			if (v == null ) {
 				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
 			}
+			final View row = v;
+			row.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					onChildClick(getExpandableListView(), row, groupPosition, childPosition, getChildId(groupPosition, childPosition));
+				}
+			});
 			TextView viewName = ((TextView) v.findViewById(R.id.local_index_name));
 			String mapDescr = getMapDescription(child.getFileName());
 			String mapName = FileNameTranslationHelper.getFileName(ctx, ((OsmandApplication) getDownloadActivity().getApplication()).getResourceManager().getOsmandRegions(), child.getFileName());

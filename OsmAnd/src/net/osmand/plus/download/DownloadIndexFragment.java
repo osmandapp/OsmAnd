@@ -67,7 +67,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		listView.setAdapter(listAdapter);
 		setListView(listView);
 
-
 		getDownloadActivity().getSupportActionBar().setTitle(R.string.local_index_download);
 		// recreation upon rotation is pgetaprevented in manifest file
 
@@ -253,6 +252,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
