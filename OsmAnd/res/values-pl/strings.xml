@@ -1939,4 +1939,12 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="confirm_every_run">Zawsze pytaj</string>
 	<string name="save_global_track_interval_descr">Wybierz interwał rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet nagrywania GPX na mapie)</string>
 	<string name="save_global_track_interval">Ogólny interwał rejestrowania</string>
+	<string name="traffic_warning_speed_limit">Ograniczenie prędkości</string>
+    <string name="traffic_warning_border_control">Kontrola graniczna</string>
+    <string name="traffic_warning_payment">Punkt poboru opłat</string>
+    <string name="traffic_warning_stop">Znak Stop</string>
+    <string name="traffic_warning_calming">Uspokojenie ruchu</string>
+    <string name="traffic_warning_speed_camera">Fotoradar</string>
+    <string name="traffic_warning">Ostrzeżenia drogowe</string>
+	<string name="local_index_description">Kliknij istniejący element, aby zobaczyć szczegóły, naciśnij i przytrzymaj, aby wyłączyć lub usunąć. Aktualne dane na urządzeniu (%1$s wolne):</string>
 	</resources>
