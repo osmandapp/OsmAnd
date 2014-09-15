@@ -45,11 +45,11 @@ import com.actionbarsherlock.view.SubMenu;
 public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	
 	/** menus **/
-	private static final int MORE_ID = 10;
-	private static final int RELOAD_ID = 0;
-	private static final int SELECT_ALL_ID = 1;
-	private static final int DESELECT_ALL_ID = 2;
-	private static final int FILTER_EXISTING_REGIONS = 3;
+	public static final int MORE_ID = 10;
+	public static final int RELOAD_ID = 0;
+	public static final int SELECT_ALL_ID = 1;
+	public static final int DESELECT_ALL_ID = 2;
+	public static final int FILTER_EXISTING_REGIONS = 3;
 	
     private TextWatcher textWatcher ;
 	private EditText filterText;
@@ -273,7 +273,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		if (getMyApplication().getAppCustomization().showDownloadExtraActions()) {
 			SubMenu s = menu.addSubMenu(0, MORE_ID, 0, R.string.default_buttons_other_actions);
 			s.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
-			s.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
 			s.add(0, SELECT_ALL_ID, 0, R.string.select_all);
 			s.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
 
