@@ -1869,4 +1869,12 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="confirm_every_run">Preguntar siempre</string>
 	<string name="save_global_track_interval_descr">Elegir intervalo de guardado para la grabación de trazas general (habilitar mediante el widget de guardado GPX en el mapa)</string>
 	<string name="save_global_track_interval">Intervalo de guardado general</string>
+	<string name="traffic_warning_speed_limit">Límite de velocidad</string>
+    <string name="traffic_warning_border_control">Control fronterizo</string>
+    <string name="traffic_warning_payment">Cabina de peaje</string>
+    <string name="traffic_warning_stop">Señal de stop</string>
+    <string name="traffic_warning_speed_camera">Radar de velocidad</string>
+    <string name="local_index_description">Pulsa cualquier objeto para ver más detalles, mantén pulsado para desactivar o borrar. Datos en el dispositivo actualmente (%1$s libre):</string>
+	<string name="traffic_warning_calming">Reductores de velocidad</string>
+    <string name="traffic_warning">Alerta de tráfico</string>
 	</resources>
