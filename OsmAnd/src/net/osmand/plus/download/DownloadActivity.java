@@ -154,7 +154,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 	public void setType(DownloadActivityType type) { this.type = type;}
 
 	public void changeType(final DownloadActivityType tp) {
-		invalidateOptionsMenu();
+		//invalidateOptionsMenu();
 		if (downloadListIndexThread != null && type != tp) {
 			type = tp;
 			downloadListIndexThread.runCategorization(tp);
