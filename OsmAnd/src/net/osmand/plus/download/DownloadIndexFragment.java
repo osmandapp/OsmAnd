@@ -278,6 +278,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 			s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
 					: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
+			s.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
 	}
 	
@@ -290,7 +291,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		DownloadActivity.downloadListIndexThread.getEntriesToDownload().clear();
 		listAdapter.notifyDataSetInvalidated();
 		
-		getView().findViewById(R.id.DownloadButton).setVisibility(View.GONE);
+		getDownloadActivity().findViewById(R.id.DownloadButton).setVisibility(View.GONE);
 	}
 
 
