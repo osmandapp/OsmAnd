@@ -1983,7 +1983,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="traffic_warning_border_control">Grænsekontrol</string>
     <string name="traffic_warning_payment">Betalingsanlæg</string>
     <string name="traffic_warning_stop">Stopskilt</string>
-    <string name="traffic_warning_calming">Hastighedsnedsættende</string>
+    <string name="traffic_warning_calming">Trafikdæmpning</string>
     <string name="traffic_warning_speed_camera">Fartkamera</string>
     <string name="traffic_warning">Trafikadvarsel</string>
 	<string name="local_index_description">Klik på et eksisterende element for at se flere detaljer, langt tryk for at deaktivere eller slette. Aktuelle data på enhed (%1$s ledig):</string>
