@@ -640,10 +640,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	}
 
 	public void localOptionsMenu(final int itemId) {
-		if (itemId == R.string.local_index_download) {
-			asyncLoader.setResult(null);
-			startActivity(new Intent(getDownloadActivity(), DownloadIndexFragment.class));
-		} else if (itemId == R.string.local_index_mi_reload) {
+		if (itemId == R.string.local_index_mi_reload) {
 			reloadIndexes();
 		} else if (itemId == R.string.local_index_mi_delete) {
 			openSelectionMode(itemId, R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light,
