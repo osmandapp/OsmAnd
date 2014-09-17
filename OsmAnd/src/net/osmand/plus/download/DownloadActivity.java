@@ -44,6 +44,8 @@ public class DownloadActivity extends SherlockFragmentActivity {
 	private TextView progressMessage;
 	private TextView progressPercent;
 	private ImageView cancel;
+	private UpdatesIndexFragment updatesIndexFragment;
+
 
 	public static final String FILTER_KEY = "filter";
 	public static final String FILTER_CAT = "filter_cat";
@@ -127,6 +129,10 @@ public class DownloadActivity extends SherlockFragmentActivity {
 
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
+	public void setUpdatesIndexFragment(UpdatesIndexFragment fragment){
+		this.updatesIndexFragment = fragment;
 	}
 
 	@Override
@@ -320,9 +326,10 @@ public class DownloadActivity extends SherlockFragmentActivity {
 	}
 
 	public void updateDownloadList(List<IndexItem> list){
-		Fragment fragment = mTabsAdapter.getItem(2);
-		//will fall if change tab order
-		((UpdatesIndexFragment) fragment).updateItemsList(list);
+		if(updatesIndexFragment == null){
+			return;
+		}
+		updatesIndexFragment.updateItemsList(list);
 	}
 
 	public void updateDownloadButton(boolean scroll) {

@@ -32,6 +32,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 	private java.text.DateFormat format;
 	private UpdateIndexAdapter listAdapter;
 
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 		listAdapter = new UpdateIndexAdapter(getDownloadActivity(), R.layout.download_index_list_item, DownloadActivity.downloadListIndexThread.getItemsToUpdate());
 		setListAdapter(listAdapter);
 		setHasOptionsMenu(true);
+		getDownloadActivity().setUpdatesIndexFragment(this);
 	}
 
 	@Override
@@ -51,14 +53,10 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 	}
 
 	public void updateItemsList(List<IndexItem> items) {
-		UpdateIndexAdapter adapter = (UpdateIndexAdapter) getListAdapter();
-		if (adapter == null) {
+		if(listAdapter == null){
 			return;
 		}
-		adapter.clear();
-		for (IndexItem item : items) {
-			adapter.add(item);
-		}
+		listAdapter.setIndexFiles(items);
 	}
 
 	@Override
@@ -209,9 +207,10 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 		}
 
 		public void setIndexFiles(List<IndexItem> filtered) {
-			this.items.clear();
-			this.items.addAll(filtered);
-			notifyDataSetChanged();
+			clear();
+			for (IndexItem item : filtered){
+				add(item);
+			}
 		}
 	}
 
