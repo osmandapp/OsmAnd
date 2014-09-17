@@ -1449,7 +1449,7 @@
 	<string name="av_camera_focus_auto">Auto focalizare</string>
 	<string name="av_camera_focus_hiperfocal">Focalizare hiperfocală</string>
 	<string name="av_camera_focus_infinity">Focalizarea este setata la infinit</string>
-	<string name="av_camera_focus_macro">Macro(de aproape)mod de focalizare</string>
+	<string name="av_camera_focus_macro">Macro(de aproape) mod de focalizare</string>
 	<string name="av_camera_focus_continuous">Camera focalizează in mod continuu</string>
 	<string name="av_photo_play_sound">Sunet la fotografiere</string>
 	</resources>
