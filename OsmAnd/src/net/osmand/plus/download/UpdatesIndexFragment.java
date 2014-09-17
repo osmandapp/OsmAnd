@@ -20,6 +20,7 @@ import net.osmand.plus.activities.OsmandExpandableListFragment;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,12 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 		format = getMyApplication().getResourceManager().getDateFormat();
 		osmandRegions = getMyApplication().getResourceManager().getOsmandRegions();
 		listAdapter = new UpdateIndexAdapter(getDownloadActivity(), R.layout.download_index_list_item, DownloadActivity.downloadListIndexThread.getItemsToUpdate());
+		listAdapter.sort(new Comparator<IndexItem>() {
+			@Override
+			public int compare(IndexItem indexItem, IndexItem indexItem2) {
+				return indexItem.getVisibleName(getMyApplication(), osmandRegions).compareTo(indexItem2.getVisibleName(getMyApplication(), osmandRegions));
+			}
+		});
 		setListAdapter(listAdapter);
 		setHasOptionsMenu(true);
 		getDownloadActivity().setUpdatesIndexFragment(this);
@@ -47,9 +54,6 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		Map<IndexItem, List<DownloadEntry>> map = getDownloadActivity().getEntriesToDownload();
-
 	}
 
 	public void updateItemsList(List<IndexItem> items) {
@@ -211,6 +215,12 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 			for (IndexItem item : filtered){
 				add(item);
 			}
+			sort(new Comparator<IndexItem>() {
+				@Override
+				public int compare(IndexItem indexItem, IndexItem indexItem2) {
+					return indexItem.getVisibleName(getMyApplication(), osmandRegions).compareTo(indexItem2.getVisibleName(getMyApplication(), osmandRegions));
+				}
+			});
 		}
 	}
 
