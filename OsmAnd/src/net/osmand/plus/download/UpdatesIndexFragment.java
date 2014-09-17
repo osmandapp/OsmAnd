@@ -170,7 +170,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 
 			if (v == null) {
 				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				v = inflater.inflate(R.layout.download_index_list_item, null);
+				v = inflater.inflate(R.layout.update_index_list_item, null);
 			}
 
 			TextView name = (TextView) v.findViewById(R.id.download_item);
