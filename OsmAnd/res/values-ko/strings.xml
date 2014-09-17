@@ -1599,10 +1599,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_photo_play_sound">사진찍을 때 소리재생</string>
 	<string name="av_photo_play_sound_descr">사진 찍을 때 소리를 재생할 것인지 선택</string>
 <string name="tip_recent_changes_1_7_1_t">"Changes in 1.7:
-\n\t* 중요한 지도는 2014년 2월 보다 새로운 지도 이어야 한다.
+\n\t* 중요한 지도는 2014년 2월 보다 새로운 지도이어야 합니다.
 \n\t* 완전히 업데이트된 길찾기(빠르고 정확하게).
 \n\t* 경로 플래닝에서 새로운 화면(더 직관적이고 더 강력하게).
-\n\t* 주의! GPS 경로파일은 경로설정 버튼으로 이용할 수 있다.
+\n\t* 주의! GPS 경로파일은 경로설정 버튼으로 이용할 수 있습니다.
 \n\t* 길안내모드에서 자동 숨김 버튼.
 \n\t* GPX 경로파일의 첫 포인트에서 오프라인 경로를 계산.
 \n\t* 터널에서 시뮬레이션 활성화.
@@ -1989,7 +1989,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="layer_amenity_label">포인트 레이블</string>
     <string name="show_zoom_buttons_navigation_descr">길안내중에 줌 버튼 보기</string>
     <string name="show_zoom_buttons_navigation">줌 버튼 보이기</string>
-    <string name="none_selected_gpx">"선택한 GPX 파일 없음. 이용 가능한 GPX경로를 선택 하려면  누르고 있어요."</string>
+    <string name="none_selected_gpx">"선택한 GPX파일 없음. 이용 가능한 GPX경로를 선택 하려면  누르고 있어요."</string>
     <string name="local_index_unselect_gpx_file">선택을 취소합니다.</string>
     <string name="local_index_select_gpx_file">보이기위해 선택</string>
     <string name="sort_by_distance">거리로 정렬</string>
