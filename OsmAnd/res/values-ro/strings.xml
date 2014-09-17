@@ -646,8 +646,8 @@
 		\n\tMeniul context hartă conține toate acțiunile referitoare la un punct (poziție).
 	</string>
 	<string name="tip_initial">Trucuri și recomandări</string>
-	<string name="tip_initial_t">"\tOsmAnd este o aplicație pentru navigare cu multe funcții.
-\n\tPentru început, găsiți câteva recomandări și trucuri în pagina principala (vedeți icoana \'?\'). "</string>
+	<string name="tip_initial_t">"OsmAnd este o aplicație pentru navigare cu multe funcții.
+\n\nPentru început, găsiți câteva recomandări și instrucțiuni în pagina principala (vedeți icoana \'?\'). "</string>
 	<string name="next_button">Următorul</string>
 	<string name="previous_button">Precedentul</string>
 	<string name="unit_of_length_descr">Schimbă unitățile de măsură ale distanței și vitezei</string>
@@ -1090,7 +1090,7 @@
 	<string name="default_buttons_selectall">Selectează tot</string>
 	<string name="email">email</string>
 <string name="safe_mode_description">Safe mode (cod Android în loc de cod nativ).</string>
-    <string name="safe_mode">Safe mode</string>
+    <string name="safe_mode">Mod siguranță</string>
     <string name="native_library_not_running">Aplicația rulează în safe mode (se poate dezactiva de la Setări).</string>
     <string name="rendering_attr_showRoadMaps_description">Specificați când anume să fie afișate hărțile exclusiv cu drumuri:</string>
 	<string name="rendering_attr_showRoadMaps_name">Hărți doar pentru drumuri</string>
@@ -1443,4 +1443,13 @@
 	<string name="gpx_info_maximum_speed">"Viteza maximă: %1$s "</string>
 	<string name="gpx_info_avg_altitude">Altitudinea medie: %1$s</string>
 	<string name="gpx_selection_segment_title">Segment</string>
-    </resources>
+    <string name="record_plugin_description">Salvează înregistrările cu o singură atingere a ecranului. Arată setările pentru înregistrarea traseelor și stocarea locală în fișiere GPX folosind un serviciu web.</string>
+    <string name="av_camera_focus">Tip de focalizare al camerei</string>
+	<string name="av_camera_focus_descr">Selectați tipul de focalizare al camerei interne</string>
+	<string name="av_camera_focus_auto">Auto focalizare</string>
+	<string name="av_camera_focus_hiperfocal">Focalizare hiperfocală</string>
+	<string name="av_camera_focus_infinity">Focalizarea este setata la infinit</string>
+	<string name="av_camera_focus_macro">Macro(de aproape)mod de focalizare</string>
+	<string name="av_camera_focus_continuous">Camera focalizează in mod continuu</string>
+	<string name="av_photo_play_sound">Sunet la fotografiere</string>
+	</resources>
