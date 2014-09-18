@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -14,11 +15,16 @@ import android.widget.*;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Window;
+import net.osmand.IndexConstants;
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.FavouritesActivity;
+import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 
+import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -123,6 +129,53 @@ public class DownloadActivity extends SherlockFragmentActivity {
 					setType(type);
 					downloadTypes.remove(type);
 					downloadTypes.add(0, type);
+				}
+			}
+		}
+
+		if(getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
+			boolean showedDialog = false;
+			if(Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
+				SuggestExternalDirectoryDialog.showDialog(this, null, null);
+			}
+			if(!showedDialog) {
+				showDialogOfFreeDownloadsIfNeeded();
+			}
+		} else {
+			showDialogOfFreeDownloadsIfNeeded();
+		}
+
+
+		if (Build.VERSION.SDK_INT >= OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
+			final String currentStorage = settings.getExternalStorageDirectory().getAbsolutePath();
+			String primaryStorage = settings.getDefaultExternalStorageLocation();
+			if (!currentStorage.startsWith(primaryStorage)) {
+				// secondary storage
+				boolean currentDirectoryNotWritable = true;
+				for (String writeableDirectory : settings.getWritableSecondaryStorageDirectorys()) {
+					if (currentStorage.startsWith(writeableDirectory)) {
+						currentDirectoryNotWritable = false;
+						break;
+					}
+				}
+				if (currentDirectoryNotWritable) {
+					currentDirectoryNotWritable = !OsmandSettings.isWritable(settings.getExternalStorageDirectory());
+				}
+				if (currentDirectoryNotWritable) {
+					final String newLoc = settings.getMatchingExternalFilesDir(currentStorage);
+					if (newLoc != null && newLoc.length() != 0) {
+						AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
+						ab.setMessage(getString(R.string.android_19_location_disabled,
+								settings.getExternalStorageDirectory()));
+						ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								copyFilesForAndroid19(newLoc);
+							}
+						});
+						ab.setNegativeButton(R.string.default_buttons_cancel, null);
+						ab.show();
+					}
 				}
 			}
 		}
@@ -385,6 +438,24 @@ public class DownloadActivity extends SherlockFragmentActivity {
 
 	public boolean isLightActionBar() {
 		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
+	}
+
+	private void copyFilesForAndroid19(final String newLoc) {
+		SettingsGeneralActivity.MoveFilesToDifferentDirectory task =
+				new SettingsGeneralActivity.MoveFilesToDifferentDirectory(this,
+						new File(settings.getExternalStorageDirectory(), IndexConstants.APP_DIR),
+						new File(newLoc, IndexConstants.APP_DIR)) {
+					protected Boolean doInBackground(Void[] params) {
+						Boolean result = super.doInBackground(params);
+						if(result) {
+							settings.setExternalStorageDirectory(newLoc);
+							getMyApplication().getResourceManager().resetStoreDirectory();
+							getMyApplication().getResourceManager().reloadIndexes(progress)	;
+						}
+						return result;
+					};
+				};
+		task.execute();
 	}
 
 }
