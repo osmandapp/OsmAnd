@@ -83,7 +83,7 @@ public class FavouritesActivity extends SherlockFragmentActivity {
 			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 			Integer tab = settings.FAVORITES_TAB.get();
 			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
-			mTabsAdapter = new TabsAdapter(this, tabHost, mViewPager, settings);
+			mTabsAdapter = new TabsAdapter(this, tabHost, mViewPager, settings, true);
 			mTabsAdapter.addTab(tabHost.newTabSpec(FAVOURITES_INFO).setIndicator(getString(R.string.my_favorites)),
 					FavouritesTreeFragment.class, null);
 			mTabsAdapter.addTab(tabHost.newTabSpec(TRACKS).setIndicator(getString(R.string.my_tracks)),
@@ -170,6 +170,7 @@ public class FavouritesActivity extends SherlockFragmentActivity {
         private final ViewPager mViewPager;
         private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
 		private OsmandSettings osmSettings;
+		private boolean favorites;
 
         static final class TabInfo {
             private final String tag;
@@ -199,8 +200,9 @@ public class FavouritesActivity extends SherlockFragmentActivity {
             }
         }
 
-        public TabsAdapter(FragmentActivity activity, TabHost tabHost,ViewPager pager, OsmandSettings settings) {
+        public TabsAdapter(FragmentActivity activity, TabHost tabHost,ViewPager pager, OsmandSettings settings, boolean favorites) {
             super(activity.getSupportFragmentManager());
+			this.favorites = favorites;
             mContext = activity;
             mTabHost = tabHost;
             mViewPager = pager;
@@ -236,7 +238,9 @@ public class FavouritesActivity extends SherlockFragmentActivity {
         @Override
         public void onTabChanged(String tabId) {
             int position = mTabHost.getCurrentTab();
-            osmSettings.FAVORITES_TAB.set(position);
+			if (favorites){
+				osmSettings.FAVORITES_TAB.set(position);
+			}
             mViewPager.setCurrentItem(position);
         }
 

@@ -268,6 +268,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		protected void onPostExecute(List<LocalIndexInfo> result) {
 			this.result = result;
 			getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
+			getDownloadActivity().setLocalIndexInfos(result);
 		}
 
 		public List<LocalIndexInfo> getResult() {
@@ -462,7 +463,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		//fixes issue when local files not shown after switching tabs
-		reloadIndexes();
+		if (listAdapter.getGroupCount() == 0 && getDownloadActivity().getLocalIndexInfos().size() > 0){
+			for(LocalIndexInfo info : getDownloadActivity().getLocalIndexInfos()){
+				listAdapter.addLocalIndexInfo(info);
+			}
+			listAdapter.notifyDataSetChanged();
+		}
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		//hide action bar from downloadindexfragment
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
