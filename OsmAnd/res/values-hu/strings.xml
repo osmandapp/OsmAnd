@@ -1760,4 +1760,11 @@
 	<string name="save_track_to_gpx_globally_descr">A pozíció GPX fájlba naplózása ki- és bekapcsolható a térkép GPX rögzítés gombjával</string>
 	<string name="save_track_interval_globally">Rögzítési időköz</string>
 	<string name="rendering_attr_publicTransportMode_name">Tömegközlekedési mód</string>
+	<string name="traffic_warning_speed_limit">Sebességhatár</string>
+    <string name="traffic_warning_border_control">Határellenőrzés</string>
+    <string name="traffic_warning_payment">Fizetőkapu</string>
+    <string name="traffic_warning_stop">Stop tábla</string>
+    <string name="traffic_warning_calming">Forgalomcsillapító</string>
+    <string name="traffic_warning_speed_camera">Traffipax</string>
+    <string name="traffic_warning">Forgalmi figyelmeztetés</string>
 	</resources>

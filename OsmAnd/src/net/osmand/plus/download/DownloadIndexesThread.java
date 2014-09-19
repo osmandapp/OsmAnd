@@ -182,6 +182,7 @@ public class DownloadIndexesThread {
 				DownloadIndexAdapter adapter = ((DownloadIndexAdapter) uiFragment.getExpandableListAdapter());
 				if (adapter != null) {
 					adapter.setLoadedFiles(indexActivatedFileNames, indexFileNames);
+					updateFilesToUpdate();
 				}
 			}
 			currentRunningTask.remove(this);
@@ -391,9 +392,7 @@ public class DownloadIndexesThread {
 							uiFragment.getDownloadActivity().getEntriesToDownload().put(basemap, downloadEntry);
 							AccessibleToast.makeText(uiFragment.getDownloadActivity(), R.string.basemap_was_selected_to_download,
 									Toast.LENGTH_LONG).show();
-							if(uiFragment.findViewById(R.id.DownloadButton) != null) {
-								uiFragment.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
-							}
+							uiFragment.getDownloadActivity().findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 						}
 					}
 					if (indexFiles.isIncreasedMapVersion()) {
@@ -548,16 +547,6 @@ public class DownloadIndexesThread {
 		execute(inst, new Void[0]);
 	}
 
-	private void updateFilesToDownload(){
-		for (IndexItem item : itemsToUpdate){
-			for (String key : indexFileNames.keySet()){
-				if (item.getFileName().equals(indexFileNames.get(key))){
-					itemsToUpdate.remove(item);
-				}
-			}
-		}
-	}
-
 	private void prepareFilesToUpdate(List<IndexItem> filtered) {
 		itemsToUpdate.clear();
 		for (IndexItem item : filtered) {
@@ -573,7 +562,25 @@ public class DownloadIndexesThread {
 				itemsToUpdate.add(item);
 			}
 		}
-		itemsToUpdate.size();
+		uiFragment.getDownloadActivity().updateDownloadList(itemsToUpdate);
+	}
+
+	private void updateFilesToUpdate(){
+		List<IndexItem> stillUpdate = new ArrayList<IndexItem>();
+		for (IndexItem item : itemsToUpdate) {
+			String sfName = item.getTargetFileName();
+			java.text.DateFormat format = uiFragment.getDownloadActivity().getMyApplication().getResourceManager().getDateFormat();
+			String date = item.getDate(format);
+			String indexactivateddate = indexActivatedFileNames.get(sfName);
+			String indexfilesdate = indexFileNames.get(sfName);
+			if (date != null &&
+					!date.equals(indexactivateddate) &&
+					!date.equals(indexfilesdate) &&
+					indexActivatedFileNames.containsKey(sfName)) {
+				stillUpdate.add(item);
+			}
+		}
+		itemsToUpdate = stillUpdate;
 		uiFragment.getDownloadActivity().updateDownloadList(itemsToUpdate);
 	}
 

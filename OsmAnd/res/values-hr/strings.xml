@@ -1246,4 +1246,49 @@
     <string name="osmo_follow">Prati</string>
     <string name="osmo_sign_in">Prijavite se</string>
     <string name="osmo_create_groups_confirm">Kako bi stvorili grupu morate biti registrirani Osmo korisnik.</string>
+    <string name="traffic_warning_speed_limit">Ograničenje brzine</string>
+    <string name="traffic_warning_border_control">Granična kontrola</string>
+    <string name="traffic_warning_payment">Naplata cestarine</string>
+    <string name="traffic_warning_stop">Znak STOP</string>
+    <string name="traffic_warning_calming">Ležeći policajci</string>
+    <string name="traffic_warning_speed_camera">Mjerenje brzine</string>
+    <string name="traffic_warning">Upozorenja u prometu</string>
+	<string name="stop_navigation_service">Prekini</string>
+	<string name="rendering_attr_publicTransportMode_name">Javni prijevoz</string>
+	<string name="monitoring_settings_descr">Konfigurirajte kako zabilježiti vaše putovanje</string>
+    <string name="waypoints">Međutočke</string>
+    <string name="rendering_attr_subwayMode_name">Podzemna željeznica</string>
+ 	<string name="osmo_auth_error_short">Autorizacija nije uspjela</string>
+    <string name="osmo_auto_connect">Automatsko povezivanje</string>
+    <string name="gpx_wpt">Međutočke</string>
+    <string name="gpx_info_subtracks">"Pod tragovi: %1$s "</string>
+	<string name="gpx_info_waypoints">"Međutočke: %1$s "</string>
+	<string name="gpx_info_end_time">"Završetak puta: %1$tF, %1$tT "</string>
+	<string name="gpx_selection_route_points">%1$s
+\nTočke rute %2$s</string>
+    <string name="gpx_selection_points">%1$s
+\nTočke</string>
+    <string name="osmo_connect_to_my_nickname">Moj nadimak</string>
+    <string name="osmo_user_name">Korisnik</string>
+	<string name="color_red">crvena</string>
+	<string name="color_pink">roza</string>
+	<string name="color_orange">narančasta</string>
+	<string name="color_brown">smeđa</string>
+	<string name="color_yellow">žuta</string>
+	<string name="color_lightblue">svijetloplava</string>
+	<string name="color_blue">plava</string>
+	<string name="color_green">zelena</string>
+	
+    <string name="osmo_edit_color">Boja prikaza</string>
+    <string name="osmo_expire_group">Istječe u</string>
+    <string name="osmo_group_description">Opis</string>
+    <string name="osmo_group_policy">Politika</string>
+    <string name="osmo_connect_to_device_tracker_id">ID Tracker</string>
+    <string name="osmo_connect_to_device_name">Korisničko ime</string>
+    <string name="osmo_connect_to_group_id">ID grupe</string>
+    <string name="osmo_group_name">Naziv grupe</string>
+    <string name="osmo_create_group">Stvori grupu</string>
+    <string name="hours_ago">sati prije</string>
+    <string name="minutes_ago">minuta prije</string>
+    <string name="seconds_ago">sekunda prije</string>
     </resources>

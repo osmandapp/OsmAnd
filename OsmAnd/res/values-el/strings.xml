@@ -1666,4 +1666,9 @@
 	<string name="save_track_interval_globally">Διάστημα καταγραφής</string>
 	<string name="rendering_attr_publicTransportMode_name">Λειτουργία δημόσιων μεταφορών</string>
 	<string name="confirm_every_run">Πάντα ερώτηση</string>
-	</resources>
+	<string name="traffic_warning_speed_limit">Όριο ταχύτητας</string>
+    <string name="traffic_warning_border_control">Συνοριακός έλεγχος</string>
+    <string name="traffic_warning_payment">Διόδια</string>
+    <string name="traffic_warning_stop">Πινακίδα stop</string>
+    <string name="traffic_warning_speed_camera">Κάμερα ταχύτητας</string>
+    </resources>

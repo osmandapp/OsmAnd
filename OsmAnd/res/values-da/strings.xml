@@ -137,7 +137,7 @@
 	<string name="poi_filter_for_tourists">For turister</string>
 	<string name="poi_filter_fuel">Brændstof</string>
 	<string name="show_warnings_title">Vis alarmer…</string>
-	<string name="show_warnings_descr">Konfigurer trafikadvarsler (fartgrænser, tvungne stop, vejbump), fotofældeadvarsler og vognbane oplysninger</string>
+	<string name="show_warnings_descr">Konfigurer trafikadvarsler (fartgrænser, tvungne stop, vejbump), fartkameraadvarsler og vognbane oplysninger</string>
 	<string name="use_compass_navigation_descr">Brug kompasset, når ingen retning er registret</string>
 	<string name="use_compass_navigation">Kompas</string>
 	<string name="avoid_motorway">Undgå motorveje</string>
@@ -1523,7 +1523,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="av_photo_play_sound_descr">Spil lyd når foto tages</string>
 <string name="av_photo_play_sound">Kameralyd</string>
 	<string name="speak_traffic_warnings">Trafikadvarsler</string>
-	<string name="speak_cameras">Fotofælder</string>
+	<string name="speak_cameras">Fartkameraer</string>
 	<string name="speak_speed_limit">Hastighedsgrænse</string>
     
 	
@@ -1532,13 +1532,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="route_via">Via:</string>
     <string name="route_from">Fra:</string>
     <string name="osb_author_dialog_password">OSM kodeord (valgfrit)</string>
-	<string name="tip_recent_changes_1_5_t">Ændringer i 1.5:
-\n * Stemmeadvarsler om hastighedsbegrænsninger og fotofælder
-\n * Flere stemmeprompt muligheder(gadenavne meddelt)
+	<string name="tip_recent_changes_1_5_t">"Ændringer i 1.5:
+\n * Stemmeadvarsler om hastighedsbegrænsninger og Fartkameraer\n * Flere stemmeprompt muligheder(gadenavne meddelt)
 \n * Kortikoner i højopløsning
 \n * Masser af brugergrænseflade ændringer
-\n * Fejlrettelser i afstandsvisning, GPX analyse, rutepunkt håndtering, planlægnings modul, overførelse til OSM, https håndtering
-    </string>
+\n * Fejlrettelser i afstandsvisning, GPX analyse, rutepunkt håndtering, planlægnings modul, overførelse til OSM, https håndtering "</string>
     <string name="osb_author_or_password_not_specified">Angiv OSM bruger og adgangskode i \'Indstillinger\'</string>
     <string name="clear_intermediate_points">Slet mellemliggende punkter</string>
     <string name="keep_intermediate_points">Behold mellemliggende punkter</string>
@@ -1546,7 +1544,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="context_menu_item_directions_to">Kørselsvejledning til</string>
     <string name="context_menu_item_directions_from">Kørselsvejledning fra</string>
     <string name="speak_title">Meddel…</string>
-	<string name="speak_descr">Konfigurer til at meddele gadenavne, trafikadvarsler (tvungne stop, vejbump), fotofældeadvarsler, hastighedsbegrænsninger</string>
+	<string name="speak_descr">Konfigurer til at meddele gadenavne, trafikadvarsler (tvungne stop, vejbump), fartkameraadvarsler, hastighedsbegrænsninger</string>
 	<string name="speak_street_names">Gadenavne (TTS)</string>
     <string name="announce_gpx_waypoints">GPX-rutepunkter</string>
     <string name="osmodroid_mode_off">Start OsMoDroid</string>
@@ -1983,10 +1981,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="save_global_track_interval">Generelt logningsinterval</string>
 	<string name="traffic_warning_speed_limit">Hastighedsgrænse</string>
     <string name="traffic_warning_border_control">Grænsekontrol</string>
-    <string name="traffic_warning_payment">Betalingsveje</string>
+    <string name="traffic_warning_payment">Betalingsanlæg</string>
     <string name="traffic_warning_stop">Stopskilt</string>
-    <string name="traffic_warning_calming">Hastighedsnedsættende</string>
-    <string name="traffic_warning_speed_camera">Fotofælde</string>
+    <string name="traffic_warning_calming">Trafikdæmpning</string>
+    <string name="traffic_warning_speed_camera">Fartkamera</string>
     <string name="traffic_warning">Trafikadvarsel</string>
-	<string name="local_index_description">Klik på et eksisterende element for at se flere detaljer, tryk på og hold nede for at deaktivere eller slette. Aktuelle data på enhed (%1$s fri):</string>
+	<string name="local_index_description">Klik på et eksisterende element for at se flere detaljer, langt tryk for at deaktivere eller slette. Aktuelle data på enhed (%1$s ledig):</string>
 	</resources>

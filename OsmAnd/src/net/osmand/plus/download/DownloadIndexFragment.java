@@ -45,11 +45,11 @@ import com.actionbarsherlock.view.SubMenu;
 public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	
 	/** menus **/
-	private static final int MORE_ID = 10;
-	private static final int RELOAD_ID = 0;
-	private static final int SELECT_ALL_ID = 1;
-	private static final int DESELECT_ALL_ID = 2;
-	private static final int FILTER_EXISTING_REGIONS = 3;
+	public static final int MORE_ID = 10;
+	public static final int RELOAD_ID = 0;
+	public static final int SELECT_ALL_ID = 1;
+	public static final int DESELECT_ALL_ID = 2;
+	public static final int FILTER_EXISTING_REGIONS = 3;
 	
     private TextWatcher textWatcher ;
 	private EditText filterText;
@@ -66,7 +66,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		listAdapter = new DownloadIndexAdapter(this, list);
 		listView.setAdapter(listAdapter);
 		setListView(listView);
-
 
 		getDownloadActivity().getSupportActionBar().setTitle(R.string.local_index_download);
 		// recreation upon rotation is pgetaprevented in manifest file
@@ -106,70 +105,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		settings = getMyApplication().getSettings();
 
 
-		if(getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
-			boolean showedDialog = false;
-			if(Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
-				SuggestExternalDirectoryDialog.showDialog(getActivity(), null, null);
-			}
-			if(!showedDialog) {
-				getDownloadActivity().showDialogOfFreeDownloadsIfNeeded();
-			}
-		} else {
-			getDownloadActivity().showDialogOfFreeDownloadsIfNeeded();
-		}
-		
-
-		if (Build.VERSION.SDK_INT >= OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
-			final String currentStorage = settings.getExternalStorageDirectory().getAbsolutePath();
-			String primaryStorage = settings.getDefaultExternalStorageLocation();
-			if (!currentStorage.startsWith(primaryStorage)) {
-				// secondary storage
-				boolean currentDirectoryNotWritable = true;
-				for (String writeableDirectory : settings.getWritableSecondaryStorageDirectorys()) {
-					if (currentStorage.startsWith(writeableDirectory)) {
-						currentDirectoryNotWritable = false;
-						break;
-					}
-				}
-				if (currentDirectoryNotWritable) {
-					currentDirectoryNotWritable = !OsmandSettings.isWritable(settings.getExternalStorageDirectory());
-				}
-				if (currentDirectoryNotWritable) {
-					final String newLoc = settings.getMatchingExternalFilesDir(currentStorage);
-					if (newLoc != null && newLoc.length() != 0) {
-						AccessibleAlertBuilder ab = new AccessibleAlertBuilder(getDownloadActivity());
-						ab.setMessage(getString(R.string.android_19_location_disabled,
-								settings.getExternalStorageDirectory()));
-						ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								copyFilesForAndroid19(newLoc);
-							}
-						});
-						ab.setNegativeButton(R.string.default_buttons_cancel, null);
-						ab.show();
-					}
-				}
-			}
-		}
-	}
-	
-	private void copyFilesForAndroid19(final String newLoc) {
-		MoveFilesToDifferentDirectory task = 
-				new MoveFilesToDifferentDirectory(getDownloadActivity(),
-						new File(settings.getExternalStorageDirectory(), IndexConstants.APP_DIR), 
-						new File(newLoc, IndexConstants.APP_DIR)) {
-			protected Boolean doInBackground(Void[] params) {
-				Boolean result = super.doInBackground(params);
-				if(result) {
-					settings.setExternalStorageDirectory(newLoc);
-					getMyApplication().getResourceManager().resetStoreDirectory();
-					getMyApplication().getResourceManager().reloadIndexes(progress)	;
-				}
-				return result;
-			};
-		};
-		task.execute();
 	}
 	
 	@Override
@@ -253,6 +188,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
@@ -273,12 +209,12 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		if (getMyApplication().getAppCustomization().showDownloadExtraActions()) {
 			SubMenu s = menu.addSubMenu(0, MORE_ID, 0, R.string.default_buttons_other_actions);
 			s.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
-			s.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
 			s.add(0, SELECT_ALL_ID, 0, R.string.select_all);
 			s.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
 
 			s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
 					: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
+			s.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
 	}
 	
@@ -291,7 +227,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		DownloadActivity.downloadListIndexThread.getEntriesToDownload().clear();
 		listAdapter.notifyDataSetInvalidated();
 		
-		getView().findViewById(R.id.DownloadButton).setVisibility(View.GONE);
+		getDownloadActivity().findViewById(R.id.DownloadButton).setVisibility(View.GONE);
 	}
 
 

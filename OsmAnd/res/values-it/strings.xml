@@ -1983,4 +1983,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="save_global_track_interval">Intervallo generale di registrazione</string>
 	<string name="traffic_warning_speed_limit">Limite di velocità</string>
     <string name="traffic_warning_payment">Casello</string>
-    </resources>
+    <string name="traffic_warning_border_control">Controllo doganale</string>
+    <string name="traffic_warning_stop">Segnale di stop</string>
+    <string name="traffic_warning_calming">Moderazione del traffico</string>
+    <string name="traffic_warning_speed_camera">Autovelox</string>
+    <string name="traffic_warning">Avviso di traffico</string>
+	<string name="local_index_description">Clicca su un oggetto per visualizzare maggiori dettagli, tieni premuto per disattivarlo o cancellarlo. Dati attualmente nel dispositivo (%1$s free):</string>
+	</resources>
