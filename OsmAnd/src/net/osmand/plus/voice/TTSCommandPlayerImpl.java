@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -27,8 +31,10 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 
+
 public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	public final static String PEBBLE_ALERT = "PEBBLE_ALERT";
+	public final static String WEAR_ALERT = "WEAR_ALERT";
 	private static final class IntentStarter implements
 			DialogInterface.OnClickListener {
 		private final Context ctx;
@@ -130,6 +136,22 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	    i.putExtra("notificationData", notificationData);
 	    mTtsContext.sendBroadcast(i);
 	    log.info("Send message to pebble " + message);
+	}
+
+	public void sendAlertToAndroidWear(String message) {
+		int notificationId = 1;
+		NotificationCompat.Builder notificationBuilder =
+				new NotificationCompat.Builder(mTtsContext)
+						.setSmallIcon(R.drawable.icon)
+						.setContentTitle(mTtsContext.getString(R.string.app_name))
+						.setContentText(message)
+						.setGroup(WEAR_ALERT);
+
+		// Get an instance of the NotificationManager service
+		NotificationManagerCompat notificationManager =
+				NotificationManagerCompat.from(mTtsContext);
+		// Build the notification and issues it with notification manager.
+		notificationManager.notify(notificationId, notificationBuilder.build());
 	}
 
 	private void initializeEngine(final Context ctx, final Activity act)

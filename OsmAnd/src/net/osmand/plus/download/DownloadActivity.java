@@ -9,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.*;
@@ -24,6 +26,7 @@ import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.voice.TTSCommandPlayerImpl;
 
 import java.io.File;
 import java.text.MessageFormat;
