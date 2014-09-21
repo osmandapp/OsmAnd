@@ -727,7 +727,7 @@
 	<string name="send_report">Skicka rapport</string>
 	<string name="none_region_found">Hittar inga offline-data för regioner på SD-kortet. Ladda ner regioner från Internet.</string>
 	<string name="poi_namefinder_query_empty">Ange sökfråga för att hitta POI</string>
-	<string name="any_poi">Någon</string>
+	<string name="any_poi">Alla</string>
 	<string name="layer_transport_route">Transportled</string>
 	<string name="thanks_yandex_traffic">Tack till Yandex för trafikinformationen.</string>
 	<string name="layer_yandex_traffic">Yandex trafik</string>
