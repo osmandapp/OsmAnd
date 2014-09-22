@@ -9,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.*;
@@ -19,10 +21,12 @@ import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.FavouritesActivity;
+import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.voice.TTSCommandPlayerImpl;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -51,6 +55,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 	private TextView progressPercent;
 	private ImageView cancel;
 	private UpdatesIndexFragment updatesIndexFragment;
+	private List<LocalIndexInfo> localIndexInfos = new ArrayList<LocalIndexInfo>();
 
 
 	public static final String FILTER_KEY = "filter";
@@ -69,7 +74,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabHost.setup();
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-		mTabsAdapter = new FavouritesActivity.TabsAdapter(this, tabHost, viewPager, settings);
+		mTabsAdapter = new FavouritesActivity.TabsAdapter(this, tabHost, viewPager, settings, false);
 		mTabsAdapter.addTab(tabHost.newTabSpec("LOCAL_INDEX").setIndicator("Local"),
 				LocalIndexesFragment.class, null);
 		mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS").setIndicator("Downloads"),
@@ -207,6 +212,13 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		return false;
 	}
 
+	public void setLocalIndexInfos(List<LocalIndexInfo> list){
+		this.localIndexInfos = list;
+	}
+
+	public List<LocalIndexInfo> getLocalIndexInfos(){
+		return localIndexInfos;
+	}
 
 	public DownloadActivityType getType() { return type;}
 

@@ -1452,4 +1452,34 @@
 	<string name="av_camera_focus_macro">Macro(de aproape) mod de focalizare</string>
 	<string name="av_camera_focus_continuous">Camera focalizează in mod continuu</string>
 	<string name="av_photo_play_sound">Sunet la fotografiere</string>
-	</resources>
+	<string name="rendering_attr_hideWoodScrubs_name">Ascunde paduri si arbori</string>
+    <string name="gpx_info_diff_altitude">Limită altitudine: %1$s</string>
+	<string name="gpx_info_asc_altitude">Coboară/urcă: %1$s</string>
+    <string name="gpx_timespan">Interval de timp: %1$s</string>
+	<string name="gpx_selection_number_of_points">" %1$s puncte"</string>
+    <string name="gpx_selection_point">Punct %1$s</string>
+    <string name="gpx_selection_current_track">înregistrare</string>
+    <string name="gpx_selection_route_points">%1$s ↵\nPuncte rută %2$s</string>
+    <string name="gpx_selection_points">%1$s ↵\nPuncte</string>
+    <string name="gpx_selection_track">%1$s ↵\nTrack %2$s</string>
+    <string name="my_favorites">Favoritele mele</string>
+    <string name="my_data_Button">Locurile mele</string>
+    <string name="my_data_activity">Locurile mele</string>
+    <string name="osmo_center_location">Centrul ecranului</string>
+    <string name="osmo_set_moving_target">Setare ca țintă în mișcare</string>
+    <string name="osmo_use_server_name">Nume înregistrat</string>
+    <string name="osmo_connect_to_my_nickname">Porecla mea</string>
+    <string name="osmo_user_name">Utilizator</string>
+	<string name="color_red">roșu</string>
+	<string name="color_pink">roz</string>
+	<string name="color_orange">portocaliu</string>
+	<string name="color_brown">maro</string>
+	<string name="color_yellow">galben</string>
+	<string name="color_lightblue">albastru deschis</string>
+	<string name="color_blue">albastru</string>
+	<string name="color_green">verde</string>
+	
+    <string name="osmo_edit_device">Schimbă proprietăți utilizator</string>
+    <string name="osmo_edit_color">Culoare afișare</string>
+    <string name="osmo_group">Grup OsMo</string>
+    </resources>
