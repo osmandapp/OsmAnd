@@ -17,7 +17,7 @@ import org.apache.commons.logging.Log;
 
 public class BinaryRoutePlanner {
 	
-	private static final int TEST_ID = 235108903;
+	private static final int TEST_ID = 31370645;
 	private static final boolean TEST_SPECIFIC = false;
 	
 	private static final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
@@ -698,6 +698,14 @@ public class BinaryRoutePlanner {
 	public interface RouteSegmentVisitor {
 		
 		public void visitSegment(RouteSegment segment, int segmentEnd, boolean poll);
+	}
+	
+	public static class RouteSegmentPoint extends RouteSegment{
+		public RouteSegmentPoint(RouteDataObject road, int segmentStart) {
+			super(road, segmentStart);
+		}
+		public int preciseX;
+		public int preciseY;
 	}
 	
 	public static class RouteSegment {
