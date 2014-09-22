@@ -87,6 +87,7 @@ public class RoutingConfiguration {
 				i.memoryLimitation = memoryLimitMB * (1 << 20);
 			}
 			i.planRoadDirection = parseSilentInt(getAttribute(i.router, "planRoadDirection"), i.planRoadDirection);
+//			i.planRoadDirection = 1;
 			
 			return i;
 		}

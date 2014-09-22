@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -37,7 +36,7 @@ public class RenderingRulesTransformer {
 		transform(document);
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
-		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+//		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		DOMSource source = new DOMSource(document.getDocumentElement());
 		StreamResult streamResult = new StreamResult(new File(targetFile));
 		transformer.transform(source, streamResult);
@@ -47,18 +46,17 @@ public class RenderingRulesTransformer {
 	static Map<String, Element> patterns = new HashMap<String, Element>(); 
 
 	public static void transform(Document document) {
-		collectPatterns(document);
-		applyPatterns(document);
-
-		combineAllApplyTags(document);
-		
-		replaceTag(document, "ifelse", "filter");
-		replaceTag(document, "check", "filter");
-		replaceTag(document, "check_and_apply", "filter");
+//		collectPatterns(document);
+//		applyPatterns(document);
+//		combineAllApplyTags(document);
+//		
+//		replaceTag(document, "ifelse", "filter");
+//		replaceTag(document, "check", "filter");
+//		replaceTag(document, "check_and_apply", "filter");
 	}
 
 
-	private static void combineAllApplyTags(Document document) {
+	public static void combineAllApplyTags(Document document) {
 		NodeList nl = document.getElementsByTagName("apply");
 		while(nl.getLength() > 0) {
 			Element app = (Element) nl.item(0);
@@ -77,7 +75,7 @@ public class RenderingRulesTransformer {
 	}
 
 
-	private static void applyPatterns(Document document) {
+	public static void applyPatterns(Document document) {
 		NodeList nl = document.getElementsByTagName("apply");
 		for (int i = 0; i < nl.getLength();) {
 			Element app = (Element) nl.item(i);
@@ -100,7 +98,7 @@ public class RenderingRulesTransformer {
 	}
 
 
-	private static void collectPatterns(Document document) {
+	public static void collectPatterns(Document document) {
 		NodeList nl = document.getElementsByTagName("pattern");
 		while(nl.getLength() > 0) {
 			Element pt = (Element) nl.item(0);
@@ -112,7 +110,7 @@ public class RenderingRulesTransformer {
 	}
 
 
-	protected static void replaceTag(Document document, final String tag, final String targetTag) {
+	public static void replaceTag(Document document, final String tag, final String targetTag) {
 		NodeList nl = document.getElementsByTagName(tag);
 		while(nl.getLength() > 0) {
 			Element newElement = document.createElement(targetTag);
