@@ -225,8 +225,8 @@
 	<string name="unknown_location">未知地理位置</string>
 	<string name="modify_transparency">調整透明度(0 - 透明, 255 - 不透明)</string>
 	<string name="confirm_interrupt_download">您要中斷檔案下載嗎？</string>
-	<string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些區域性的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'下載。之後您可瀏覽地圖、位置地址、查尋興趣點以及尋找共公交通設施。</string>    
-	<string name="basemap_was_selected_to_download">基本地圖，為某些特別的應用功能必需使用的，並且預設為下載。</string>
+	<string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些地區的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'來下載。之後您可瀏覽地圖、位置地址、查尋興趣點以及尋找共公交通設施。</string>    
+	<string name="basemap_was_selected_to_download">底圖為某些特別的應用功能必需使用的，並且預設為下載。</string>
 	<string name="select_index_file_to_download">找不到任何資料。如果您不能在您的區域找到，您可以自行製作(參考http://osmand.net)。</string>
 	<string name="local_indexes_cat_tile">線上地圖圖磚</string>
 	<string name="local_indexes_cat_map">離線地圖(向量地圖)</string>
@@ -234,7 +234,7 @@
 	<string name="index_settings_descr">在您的裝置下載與管理離線地圖和檔案的存儲</string>
 	<string name="map_online_plugin_is_not_installed">啟用線上地圖外掛元件，來選擇不同的地圖來源</string>
 	<string name="map_online_data">線上地圖圖磚</string>
-	<string name="map_online_data_descr">使用線上地圖(下載暫存地圖圖磚到SD卡)</string>
+	<string name="map_online_data_descr">使用線上地圖(下載暫存地圖圖磚到 SD 卡)</string>
 	<string name="online_map_settings">線上地圖</string>
 	<string name="online_map_settings_descr">組態線上或暫存的地圖圖磚來源</string>
 	<string name="map_settings">地圖設定</string>
@@ -256,7 +256,7 @@
 	<string name="debugging_and_development">OsmAnd 開發</string>
 	<string name="native_rendering">原生繪製</string>
 	<string name="test_voice_prompts">測試語音提示</string>    
-	<string name="switch_to_raster_map_to_see">該地區目前沒有離線向量地圖，您可在設定功能下載(管理地圖檔案)或切換成線上地圖(為此啟用線上地圖外掛)。</string>
+	<string name="switch_to_raster_map_to_see">該地區目前沒有離線向量地圖，您可在設定功能下載(管理地圖檔案)或切換成線上地圖(啟用線上地圖外掛元件)。</string>
 	<string name="send_files_to_osm">傳送 GPX 檔案到 OSM？</string>
 	<string name="gpx_visibility_txt">能見度</string>
 	<string name="gpx_tags_txt">旗標</string>
@@ -347,7 +347,7 @@
 	<string name="live_monitoring_url">線上即時追蹤網路地址</string>
 	<string name="gpx_monitoring_disabled_warn">請啟用\'記錄軌跡成 GPX 檔案\'設定。</string>
 	<string name="show_current_gpx_title">顯示目前軌跡</string>
-	<string name="free_version_message">此 OsmAnd 免費版，只能下載 %1$s 個檔，且不支援離線維基百科的文章資料。</string>
+	<string name="free_version_message">此 OsmAnd 免費版，有下載 %1$s 次限制，且不支援離線維基百科的文章資料。</string>
 	<string name="free_version_title">免費版</string>
 	<string name="poi_context_menu_showdescription">顯示興趣點敘述</string>
 	<string name="index_name_north_america">北美洲</string>
@@ -659,14 +659,14 @@
 	
 	<string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的離線資料將被新版引用。但我的最愛內的標點須以舊版程式匯出後再用新版程式匯入。</string>
 	<string name="build_installed">編譯 {0} 成功安裝({1})。</string>
-	<string name="downloading_build">下載編譯…</string>
+	<string name="downloading_build">正在下載編譯…</string>
 	<string name="install_selected_build">您要安裝 OsmAnd - {0} 由{1} {2} MB ?</string>
 	<string name="loading_builds_failed">檢索 OsmAnd 編譯列表失敗</string>
 	<string name="loading_builds">載入 OsmAnd 編譯…</string>
 	<string name="select_build_to_install">選擇 OsmAnd 編譯安裝</string>
 	<string name="contribution_activity">安裝的版本</string>
 	<string name="gps_status_app_not_found">GPS 狀態工具未安裝，到 Play 商場找嗎？</string>
-	<string name="voice_is_not_available_msg">語音導航無法使用。請到設定功能，選取喜歡的語音資料並且下載它。</string>
+	<string name="voice_is_not_available_msg">語音導航無法使用。請到設定功能，選取喜歡的語音資料然後下載。</string>
 	<string name="voice_is_not_available_title">未選定語音導航</string>
 	<string name="daynight_mode_day">日間</string>
 	<string name="daynight_mode_night">夜間</string>
@@ -676,7 +676,7 @@
 	<string name="daynight">日/夜間模式</string>
 	<string name="download_files_question">下載{0}個檔({1} MB)？</string>
 	<string name="items_were_selected">已選{0}項</string>
-	<string name="filter_existing_indexes">篩選已下載的</string>
+	<string name="filter_existing_indexes">已下載的</string>
 	<string name="deselect_all">取消全選</string>
 	<string name="select_all">全部選取</string>
 	<string name="reload">重整</string>
@@ -734,7 +734,7 @@
 	<string name="export_fav">匯出</string>
 	<string name="error_occurred_loading_gpx">載入 GPX 時發生錯誤</string>
 	<string name="send_report">傳送報告</string>
-	<string name="none_region_found">SD卡上沒有離線資料。由網路下載資料。</string>
+	<string name="none_region_found">在 SD 卡上沒有該地區離線資料。由網路下載資料。</string>
 	<string name="poi_namefinder_query_empty">輸入查尋條件以查尋興趣點</string>
 	<string name="any_poi">任何</string>
 	<string name="layer_transport_route">交通路線</string>
@@ -780,7 +780,7 @@
 	<string name="voice_data_unavailable">選定的語音不能使用</string>
 	
 	<string name="sd_unmounted">SD卡無法存取。\n您將無法看到地圖或找地點。</string>
-	<string name="sd_mounted_ro">SD卡是唯讀。\n您只能看預載的地圖且無法由網路下載。</string>
+	<string name="sd_mounted_ro">SD 卡是唯讀模式。\n您只能看預載的地圖且無法由網路下載。</string>
 	<string name="unzipping_file">解壓縮檔案…</string>
 	<string name="route_tr">右轉之後直行</string>
 	<string name="route_tshr">右後轉之後直行</string>
@@ -847,7 +847,7 @@
 	<string name="router_service_descr">選擇線上或離線的導航服務</string>
 	<string name="router_service">導航服務</string>
 	<string name="sd_dir_not_accessible">SD卡上的儲存目錄不可存取</string>
-	<string name="download_question">下載 {0} - {1} ？</string>
+	<string name="download_question">下載 {0} - {1}？</string>
 	<string name="download_question_exist">離線資料 {0}已存在 ({1})。您要更新 ({2})嗎 ?</string>
 	<string name="address">地址</string>
 	<string name="download_index_success">下載成功</string>
@@ -1199,7 +1199,7 @@
 	<string name="native_app_allocated_memory_descr">原生記憶體總計由應用程式 %1$s MB (Dalvik %2$s MB，其它 %3$s MB) 。Proportional memory %4$s MB (Android 限制 %5$s MB，Dalvik %6$s MB)分配佔用。</string>
 	<string name="context_menu_item_destination_point">設定為目的地</string>
     <string name="please_select_address">首先選擇城市或街道</string>
-    <string name="available_downloads_left">還可下載 %1$d 個檔案</string>
+    <string name="available_downloads_left">還可下載檔案 %1$d 次</string>
     <string name="close_changeset">關閉異動清單</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing 條碼掃描器應用程式未安裝。要在商場中的搜尋嗎？</string>
 	<string name="support_new_features_descr">捐贈後可在應用程式裡看到新的功能實現</string>
@@ -1216,7 +1216,7 @@
 	<string name="intermediate_items_sort_return">在到達目的地之間路途上，沿路的中途點已採取了最佳化的排列。</string>
     <string name="osmand_srtm_long_description_1000_chars">這個外掛元件提供了等高線，可以在 OsmAnd 的離線地圖中顯示。全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。</string>
     <string name="audionotes_location_not_defined">以位置去關聯的注解尚未下定義。\"使用位置 …\"，把注解分配給指定的位置</string>
-    <string name="srtm_plugin_description">便於下載目前離線的等高線和地形陰影（\'設定\' -&gt; \'管理地圖檔案\' -&gt; \'下載\' -&gt; 選擇所需的地圖類型）。</string>
+    <string name="srtm_plugin_description">簡易下載離線的等高線和地形陰影（\'設定\' -&gt; \'管理地圖檔案\' -&gt; \'下載\' -&gt; 選擇所需的地圖類型）。</string>
     <string name="tip_recent_changes_0_7_2_t">在0.7.2的變更：
 		\n\t- Native rendering for all devices
 		\n\t- Offline POI editing
@@ -1804,7 +1804,7 @@
     <string name="rendering_value_bicycle_name">自行車</string>
     <string name="rendering_value_pedestrian_name">步行</string>
     <string name="more">更多...</string>
-    <string name="download_additional_maps">要下載缺少的地圖 %1$ s (%2$ d MB) 嗎？</string>
+    <string name="download_additional_maps">要下載缺少的地圖 %1$s (%2$d MB) 嗎？</string>
     <string name="flat_list_waypoitns">全部</string>
     <string name="waypoints">中途點</string>
     <string name="targets">目的地</string>
