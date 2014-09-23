@@ -254,7 +254,7 @@ public class TextRenderer {
 							Bitmap ico = RenderingIcons.getIcon(context, text.shieldRes);
 							if (ico != null) {
 								float left = text.centerX - ico.getWidth() / 2 * coef - 0.5f;
-								float top = text.centerY - ico.getHeight() / 2 * coef - rc.getDensityValue(4.5f);
+								float top = text.centerY - ico.getHeight() / 2 * coef -  paintText.descent() - 0.5f;
 								if(rc.screenDensityRatio != 1f){
 									RectF rf = new RectF(left, top, left + ico.getWidth() * coef, 
 											top + ico.getHeight() * coef);
