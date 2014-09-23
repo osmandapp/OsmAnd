@@ -705,6 +705,8 @@ public class OsmandSettings {
 		MAP_ZOOM_SCALE_BY_DENSITY.setModeDefaultValue(ApplicationMode.CAR, 0.5f);
 	}
 	
+	public final CommonPreference<Float> TEXT_SCALE = new FloatPreference("text_scale", 1f).makeGlobal().cache();
+	
 	public float getSettingsZoomScale(float density){
 		// by default scale between [0, 1[ density (because of lots map complains)
 		return MAP_ZOOM_SCALE_BY_DENSITY.get() + (float)Math.sqrt(Math.max(0, density - 1));

@@ -676,8 +676,12 @@ public class MapRenderRepositories {
 			currentRenderingContext.nightMode = nightMode;
 			currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
 			currentRenderingContext.setDensityValue(mapDensity);
-			currentRenderingContext.textScale = 1.0f; //Text/icon scales according to mapDensity
-//			currentRenderingContext.textScale = 1 / mapDensity; //Text/icon stays same for all sizes
+			//Text/icon scales according to mapDensity (so text is size of road)
+//			currentRenderingContext.textScale = (requestedBox.getDensity()*app.getSettings().TEXT_SCALE.get()); 
+			//Text/icon stays same for all sizes 
+			currentRenderingContext.textScale = (requestedBox.getDensity() * app.getSettings().TEXT_SCALE.get())
+					/ mapDensity;
+			
 			currentRenderingContext.screenDensityRatio = 1 / Math.max(1, requestedBox.getDensity()) ;
 			// init rendering context
 			currentRenderingContext.tileDivisor = tileDivisor;

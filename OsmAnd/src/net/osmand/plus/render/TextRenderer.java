@@ -250,15 +250,14 @@ public class TextRenderer {
 						cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
 					} else {
 						if (text.shieldRes != null) {
+							float coef = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
 							Bitmap ico = RenderingIcons.getIcon(context, text.shieldRes);
 							if (ico != null) {
-								float left = text.centerX - ico.getWidth() / 2 * rc.screenDensityRatio
-										- 0.5f;
-								float top = text.centerY - ico.getHeight() / 2 * rc.screenDensityRatio
-										- rc.getDensityValue(4.5f);
+								float left = text.centerX - ico.getWidth() / 2 * coef - 0.5f;
+								float top = text.centerY - ico.getHeight() / 2 * coef - rc.getDensityValue(4.5f);
 								if(rc.screenDensityRatio != 1f){
-									RectF rf = new RectF(left, top, left + ico.getWidth() * rc.screenDensityRatio , 
-											top + ico.getHeight() * rc.screenDensityRatio);
+									RectF rf = new RectF(left, top, left + ico.getWidth() * coef, 
+											top + ico.getHeight() * coef);
 									Rect src = new Rect(0, 0, ico.getWidth(), ico
 											.getHeight());
 									cv.drawBitmap(ico, src, rf, paintIcon);
