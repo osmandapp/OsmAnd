@@ -362,7 +362,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	public float getSettingsZoomScale() {
-		return getSettings().getSettingsZoomScale(getDensity());
+		return getSettings().getSettingsZoomScale() + (float)Math.sqrt(Math.max(0, getDensity() - 1));
 	}
 
 	public float getZoomScale() {
