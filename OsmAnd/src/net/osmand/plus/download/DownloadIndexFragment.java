@@ -191,6 +191,10 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		if (Version.isSherpafy(getMyApplication())){
+			return;
+		}
+
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		final List<DownloadActivityType> downloadTypes = getDownloadActivity().getDownloadTypes();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
