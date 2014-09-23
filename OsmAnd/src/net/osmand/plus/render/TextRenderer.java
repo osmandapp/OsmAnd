@@ -69,7 +69,7 @@ public class TextRenderer {
 			if (textColor == 0) {
 				textColor = Color.BLACK;
 			}
-			textSize = rc.getComplexValue(render, render.ALL.R_TEXT_SIZE);
+			textSize = rc.getComplexValue(render, render.ALL.R_TEXT_SIZE) ;
 			textShadow = (int) rc.getComplexValue(render, render.ALL.R_TEXT_HALO_RADIUS);
 			textShadowColor = render.getIntPropertyValue(render.ALL.R_TEXT_HALO_COLOR);
 			if(textShadowColor == 0) {
@@ -226,7 +226,7 @@ public class TextRenderer {
 				}
 
 				// sest text size before finding intersection (it is used there)
-				float textSize = text.textSize;
+				float textSize = text.textSize * rc.textScale ;
 				paintText.setTextSize(textSize);
 				paintText.setFakeBoldText(text.bold);
 				paintText.setColor(text.textColor);

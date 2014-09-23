@@ -48,6 +48,7 @@ public class RenderingContext {
 
 	// be aware field is using in C++
 	public float screenDensityRatio = 1;
+	public float textScale = 1;
 	public int shadowRenderingMode = ShadowRenderingMode.SOLID_SHADOW.value;
 	public int shadowRenderingColor = 0xff969696;
 	public String renderingDebugInfo;
