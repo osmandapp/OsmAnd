@@ -10,6 +10,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.opengl.GLSurfaceView;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import com.actionbarsherlock.app.ActionBar;
@@ -211,10 +213,32 @@ public class MapActivity extends AccessibleActivity  {
 
 		}
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
+
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
+				R.string.default_buttons_other_actions, R.string.close);
 	}
 	
 	public void addLockView(FrameLayout lockView) {
 		this.lockView = lockView;
+	}
+
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+		if (item.getItemId() == android.R.id.home && mDrawerToggle.isDrawerIndicatorEnabled()) {
+			if (mDrawerLayout.isDrawerOpen(findViewById(R.id.left_drawer))) {
+				mDrawerLayout.closeDrawer(findViewById(R.id.left_drawer));
+			} else {
+				mapActions.openOptionsMenuAsDrawer();
+			}
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		mDrawerToggle.syncState();
 	}
 
 	private void createProgressBarForRouting() {
@@ -246,7 +270,13 @@ public class MapActivity extends AccessibleActivity  {
 		});
 	}
 
-	
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+
 	@SuppressWarnings("rawtypes")
 	public Object getLastNonConfigurationInstanceByKey(String key) {
 		Object k = super.getLastNonConfigurationInstance();
@@ -283,10 +313,6 @@ public class MapActivity extends AccessibleActivity  {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setHomeButtonEnabled(true);
-
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
-				R.string.default_buttons_other_actions, R.string.close);
 
 		if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
 			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
