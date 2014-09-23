@@ -42,7 +42,7 @@
 	<string name="poi_filter_for_tourists">旅遊點</string>
 	<string name="poi_filter_fuel">加油站</string>
 	<string name="show_warnings_title">顯示警示…</string>
-	<string name="show_warnings_descr">組態交通警示(速限、強制停車、減速)、測速照相警示、車道資訊</string>
+	<string name="show_warnings_descr">組態交通警示(速限、強制停車、減速丘)、測速照相警示、車道資訊</string>
 	<string name="use_compass_navigation_descr">使用電子羅盤的地圖，正北朝上</string>
 	<string name="use_compass_navigation">使用電子羅盤</string>
 	<string name="avoid_motorway">避開高速公路</string>
