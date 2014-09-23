@@ -676,7 +676,9 @@ public class MapRenderRepositories {
 			currentRenderingContext.nightMode = nightMode;
 			currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
 			currentRenderingContext.setDensityValue(mapDensity);
-			currentRenderingContext.screenDensityRatio = mapDensity / Math.max(1, requestedBox.getDensity()) ;
+			currentRenderingContext.textScale = 1.0f; //Text/icon scales according to mapDensity
+//			currentRenderingContext.textScale = 1 / mapDensity; //Text/icon stays same for all sizes
+			currentRenderingContext.screenDensityRatio = 1 / Math.max(1, requestedBox.getDensity()) ;
 			// init rendering context
 			currentRenderingContext.tileDivisor = tileDivisor;
 			if (checkWhetherInterrupted()) {
