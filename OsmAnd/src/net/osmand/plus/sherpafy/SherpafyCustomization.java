@@ -552,8 +552,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 	@Override
 	public void prepareOptionsMenu(final MapActivity mapActivity, ContextMenuAdapter adapter) {
-		filter(adapter, R.string.menu_layers,
-				R.string.pause_navigation, R.string.continue_navigation,  
+		filter(adapter,R.string.pause_navigation, R.string.continue_navigation,
 				R.string.cancel_navigation, R.string.cancel_route, R.string.clear_destination,
 				R.string.target_points,
 				R.string.get_directions, 
@@ -593,6 +592,15 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				}
 			}
 		}).reg();
+		//poi
+		adapter.item(R.string.poi).icons(
+				R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).listen(new OnContextMenuClick() {
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				mapActivity.getMapLayers().selectPOIFilterLayer(mapActivity.getMapView(), null);
+			}
+		}).reg();
+
 
 	}
 	
@@ -734,5 +742,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	@Override
 	public boolean showNavigationControls() {
 		return false;
+	}
+
+	@Override
+	public boolean onlyTourDownload() {
+		return true;
 	}
 }

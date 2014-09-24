@@ -75,12 +75,18 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		tabHost.setup();
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 		mTabsAdapter = new FavouritesActivity.TabsAdapter(this, tabHost, viewPager, settings, false);
-		mTabsAdapter.addTab(tabHost.newTabSpec("LOCAL_INDEX").setIndicator("Local"),
-				LocalIndexesFragment.class, null);
-		mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS").setIndicator("Downloads"),
-				DownloadIndexFragment.class, null);
-		mTabsAdapter.addTab(tabHost.newTabSpec("UPDATES").setIndicator("Updates"),
-				UpdatesIndexFragment.class, null);
+		if (getMyApplication().getAppCustomization().onlyTourDownload()){
+			mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS").setIndicator("Downloads"),
+					DownloadIndexFragment.class, null);
+		} else {
+			mTabsAdapter.addTab(tabHost.newTabSpec("LOCAL_INDEX").setIndicator("Local"),
+					LocalIndexesFragment.class, null);
+			mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS").setIndicator("Downloads"),
+					DownloadIndexFragment.class, null);
+			mTabsAdapter.addTab(tabHost.newTabSpec("UPDATES").setIndicator("Updates"),
+					UpdatesIndexFragment.class, null);
+		}
+
 		tabHost.setCurrentTab(0);
 
 		if(downloadListIndexThread == null) {
