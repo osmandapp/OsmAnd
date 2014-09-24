@@ -549,10 +549,16 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				// skip it
 			}
 		}
-		if (showMapPosition) {
-			canvas.drawCircle(c.x, c.y, 3 * dm.density, paintCenter);
-			canvas.drawCircle(c.x, c.y, 7 * dm.density, paintCenter);
+		if (showMapPosition || animatedDraggingThread.isAnimatingZoom()) {
+			drawMapPosition(canvas, c.x, c.y);
+		} else if(multiTouchSupport.isInZoomMode()) {
+			drawMapPosition(canvas, multiTouchSupport.getCenterPoint().x, multiTouchSupport.getCenterPoint().y);
 		}
+	}
+
+	protected void drawMapPosition(Canvas canvas, float x, float y) {
+		canvas.drawCircle(x, y, 3 * dm.density, paintCenter);
+		canvas.drawCircle(x, y, 7 * dm.density, paintCenter);
 	}
 
 	private void refreshBufferImage(final DrawSettings drawSettings) {

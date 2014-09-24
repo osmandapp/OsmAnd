@@ -35,6 +35,8 @@ public class AnimateDraggingMapThread {
 	private double targetLongitude = 0;
 	private int targetIntZoom = 0;
 	private float targetZoomScale = 0;
+
+	private boolean isAnimatingZoom;
 	
 	
 	public AnimateDraggingMapThread(OsmandMapTileView tileView){
@@ -207,29 +209,38 @@ public class AnimateDraggingMapThread {
 	}
 	
 	private void animatingZoomInThread(float zoomStart, int zoom, float zoomScale, float animationTime, boolean notifyListener){
-		float curZoom = zoomStart;
-		float zoomEnd = zoom + zoomScale;
-		animationTime *= Math.abs(zoomEnd - zoomStart);
-		// AccelerateInterpolator interpolator = new AccelerateInterpolator(1);
-		LinearInterpolator interpolator = new LinearInterpolator();
-		
-		long timeMillis = SystemClock.uptimeMillis();
-		float normalizedTime = 0f;
-		while(!stopped){
-			normalizedTime = (SystemClock.uptimeMillis() - timeMillis) / animationTime; 
-			if(normalizedTime > 1f){
-				break;
+		try {
+			isAnimatingZoom = true;
+			float curZoom = zoomStart;
+			float zoomEnd = zoom + zoomScale;
+			animationTime *= Math.abs(zoomEnd - zoomStart);
+			// AccelerateInterpolator interpolator = new AccelerateInterpolator(1);
+			LinearInterpolator interpolator = new LinearInterpolator();
+
+			long timeMillis = SystemClock.uptimeMillis();
+			float normalizedTime = 0f;
+			while (!stopped) {
+				normalizedTime = (SystemClock.uptimeMillis() - timeMillis) / animationTime;
+				if (normalizedTime > 1f) {
+					break;
+				}
+				float interpolation = interpolator.getInterpolation(normalizedTime);
+				curZoom = interpolation * (zoomEnd - zoomStart) + zoomStart;
+				tileView.zoomToAnimate(curZoom, notifyListener);
+				try {
+					Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
+				} catch (InterruptedException e) {
+					stopped = true;
+				}
 			}
-			float interpolation = interpolator.getInterpolation(normalizedTime);
-			curZoom = interpolation * (zoomEnd - zoomStart) + zoomStart;
-			tileView.zoomToAnimate(curZoom, notifyListener);
-			try {
-				Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
-			} catch (InterruptedException e) {
-				stopped = true;
-			}
+			tileView.setZoomAnimate(zoom, zoomScale, notifyListener);
+		} finally {
+			isAnimatingZoom = false;
 		}
-		tileView.setZoomAnimate(zoom, zoomScale, notifyListener);
+	}
+	
+	public boolean isAnimatingZoom() {
+		return isAnimatingZoom;
 	}
 
 	public void startZooming(final int zoomEnd, final boolean notifyListener){

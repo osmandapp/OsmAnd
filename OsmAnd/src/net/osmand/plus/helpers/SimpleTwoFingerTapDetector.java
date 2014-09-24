@@ -1,7 +1,5 @@
 package net.osmand.plus.helpers;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
