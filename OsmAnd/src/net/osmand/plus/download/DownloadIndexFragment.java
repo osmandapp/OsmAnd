@@ -191,7 +191,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		if (Version.isSherpafy(getMyApplication())){
+		if (getMyApplication().getAppCustomization().onlyTourDownload()){
 			return;
 		}
 

@@ -72,7 +72,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		tabHost.setup();
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 		mTabsAdapter = new FavouritesActivity.TabsAdapter(this, tabHost, viewPager, settings, false);
-		if (Version.isSherpafy(getMyApplication())){
+		if (getMyApplication().getAppCustomization().onlyTourDownload()){
 			mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS").setIndicator("Downloads"),
 					DownloadIndexFragment.class, null);
 		} else {

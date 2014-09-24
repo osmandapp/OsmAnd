@@ -735,4 +735,9 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	public boolean showNavigationControls() {
 		return false;
 	}
+
+	@Override
+	public boolean onlyTourDownload() {
+		return true;
+	}
 }
