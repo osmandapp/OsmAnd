@@ -2100,4 +2100,6 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="traffic_warning_speed_camera">속도 경고 카메라</string>
     <string name="traffic_warning">트래픽 경고</string>
 	<string name="local_index_description">기존 항목을 클릭하여 더 많은 정보를 보세요. 비활성화 하려면 꾹 눌러주시거나 삭제하세요. 현재 데이터는 (%1$ s 무료):</string>
-	</resources>
+	<string name="text_size_descr">지도에 포인트의 글자 크기를 선택합니다.</string>
+    <string name="text_size">텍스트 크기</string>
+    </resources>
