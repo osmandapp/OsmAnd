@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
 import android.opengl.GLSurfaceView;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import com.actionbarsherlock.app.ActionBar;
@@ -135,7 +137,6 @@ public class MapActivity extends AccessibleActivity  {
 //		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// Full screen is not used here
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
 		app.checkApplicationIsBeingInitialized(this, startProgressDialog);
@@ -213,6 +214,12 @@ public class MapActivity extends AccessibleActivity  {
 
 		}
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
+
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setHomeButtonEnabled(true);
+		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#330000ff")));
+		actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#550000ff")));
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
@@ -310,9 +317,6 @@ public class MapActivity extends AccessibleActivity  {
 //		if (getSupportActionBar() != null){
 //			getSupportActionBar().hide();
 //		}
-		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setHomeButtonEnabled(true);
 
 		if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
 			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
