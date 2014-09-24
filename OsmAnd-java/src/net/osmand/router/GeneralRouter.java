@@ -324,7 +324,7 @@ public class GeneralRouter implements VehicleRouter {
 				RouteTypeRule r = reg.quickGetEncodingRule(pt[i]);
 				if ("highway".equals(r.getTag()) && "traffic_signals".equals(r.getValue())) {
 					// traffic signals don't add turn info
-					return 0;
+//					return 0;
 				}
 			}
 		}

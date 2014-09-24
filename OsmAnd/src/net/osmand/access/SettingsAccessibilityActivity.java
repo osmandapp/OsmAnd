@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceGroup;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
@@ -41,6 +42,8 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 				return true;
 			}
 		});
+		addTextScale(grp);
+		addSpeechRateSetting(grp);
 		
 		grp.addPreference(accessibilityModePreference);
 		PreferenceCategory cat = new PreferenceCategory(this);
@@ -69,15 +72,11 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 
 		cat.addPreference(createCheckBoxPreference(settings.ZOOM_BY_TRACKBALL, R.string.zoom_by_trackball,
 				R.string.zoom_by_trackball_descr));
+		
 		cat.addPreference(createCheckBoxPreference(settings.USE_SHORT_OBJECT_NAMES, R.string.use_short_object_names,
 				R.string.use_short_object_names_descr));
 		
-		Float[] sprValues = new Float[] {0.5f, 0.75f, 1f, 1.25f, 1.5f, 2f} ;
-		String[] sprNames = new String[sprValues.length];
-		for(int i = 0; i < sprNames.length; i++) {
-			sprNames[i] = (int)(sprValues[i] * 100) + " %";
-		}
-		cat.addPreference(createListPreference(settings.SPEECH_RATE, sprNames, sprValues, R.string.speech_rate, R.string.speech_rate_descr));
+
 		if (Build.VERSION.SDK_INT < 14) { // Build.VERSION_CODES.ICE_CREAM_SANDWICH
 			cat.addPreference(createCheckBoxPreference(settings.SCROLL_MAP_BY_GESTURES, R.string.scroll_map_by_gestures,
 					R.string.scroll_map_by_gestures_descr));
@@ -85,6 +84,28 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 					R.string.accessibility_extensions));
 		}
     }
+
+
+
+	protected void addTextScale(PreferenceGroup grp) {
+		Float[] txtValues = new Float[] {0.75f, 1f, 1.25f, 1.5f, 2f, 3f} ;
+		String[] txtNames = new String[txtValues.length];
+		for(int i = 0; i < txtNames.length; i++) {
+			txtNames[i] = (int)(txtValues[i] * 100) + " %";
+		}
+		grp.addPreference(createListPreference(settings.TEXT_SCALE, txtNames, txtValues, R.string.text_size, R.string.text_size_descr));
+	}
+
+
+
+	protected void addSpeechRateSetting(PreferenceGroup grp) {
+		Float[] sprValues = new Float[] {0.5f, 0.75f, 1f, 1.25f, 1.5f, 2f} ;
+		String[] sprNames = new String[sprValues.length];
+		for(int i = 0; i < sprNames.length; i++) {
+			sprNames[i] = (int)(sprValues[i] * 100) + " %";
+		}
+		grp.addPreference(createListPreference(settings.SPEECH_RATE, sprNames, sprValues, R.string.speech_rate, R.string.speech_rate_descr));
+	}
 
 
 
