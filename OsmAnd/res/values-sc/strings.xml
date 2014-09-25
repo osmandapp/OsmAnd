@@ -1740,4 +1740,6 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="traffic_warning_speed_camera">Autovelox</string>
     <string name="traffic_warning">Avisu de tràficu</string>
 	<string name="local_index_description">Ischerta unu elementu esistente pro bìere prus detallios, carca e mantène carcau pro lu deativare o burrare. Datos como in su dispositivu (%1$s lìberos):</string>
-	</resources>
+	<string name="text_size_descr">Issèbera sa mannària de su testu in sa mapa.</string>
+    <string name="text_size">Mannària de su testu</string>
+    </resources>
