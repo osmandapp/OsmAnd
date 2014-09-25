@@ -508,7 +508,7 @@
 	<string name="local_indexes_cat_poi">興趣點資料</string>
 	<string name="ttsvoice">TTS 語音</string>
 	<string name="search_offline_clear_search">新的查尋</string>
-	<string name="map_text_size_descr">選擇地圖上的文字大小</string>
+	<string name="map_text_size_descr">選擇地圖上名稱的文字大小</string>
 	<string name="map_text_size">地圖字型大小</string>
 	<string name="trace_rendering">繪製除錯資訊</string>
 	<string name="trace_rendering_descr">顯示繪製效能</string>
