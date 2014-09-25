@@ -1696,4 +1696,6 @@
 	<string name="traffic_warning_speed_camera">Fartkamera</string>
     <string name="traffic_warning_calming">Trafikdämpning</string>
     <string name="local_index_description">Peta på en post för att se fler detaljer, tryck och håll för att inaktivera eller ta bort. Data på enheten (%1$s ledigt):</string>
-	</resources>
+	<string name="text_size_descr">Ange textstorlek på kartan.</string>
+    <string name="text_size">Textstorlek</string>
+    </resources>
