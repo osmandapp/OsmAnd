@@ -1124,7 +1124,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="use_trackball_descr">Brug trackball for at flytte kortet</string>
 	<string name="use_trackball">Brug trackball</string>
 	<string name="background_service_wait_int_descr">Indstil maksimal ventetid mellem hver positionssøgning i baggrunden</string>
-	<string name="background_service_wait_int">Maksimal ventetid på låsning</string>
+	<string name="background_service_wait_int">Maks ventetid på låsning</string>
 	<string name="service_stop_background_service">Sluk for OsmAnd navigationstjeneste i dvaletilstand</string>
 	<string name="where_am_i">Hvor er jeg?</string>
 	<string name="network_provider">Netværk</string>
@@ -1270,7 +1270,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="search_osm_nominatim">Online søgning ved hjælp af OSM Nominatim</string>
 	<string name="hint_search_online">Husnummer, gade, by</string>
 	<string name="search_online_address">Online søgning</string>
-	<string name="max_level_download_tile">Maks. online zoom</string>
+	<string name="max_level_download_tile">Maks online zoom</string>
 	<string name="max_level_download_tile_descr">Vælg maksimum zoomniveau der hentes for online delkort</string>
 	<string name="tip_map_switch_t_v2">Kortkilden og lag der vises kan ændres via \'Menu\' → \'Kortlag\'.
 \n\nUnder \'Kortkilde...\' vælges de forhåndsindlæste vektorkort, forhåndsdefinerede (online) delkortkilder (aktiver \'Online og delkort\' udvidelsen) eller kort der er manuelt oprettet f.eks. ved hjælp af OsmAndMapCreator på en PC.
@@ -1557,8 +1557,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="driving_region">Område</string>
 	<string name="driving_region_descr">Vælg område: USA, Europa, England, Asien m.fl.</string>
 	<string name="map_widget_fps_info">FPS-fejlsøgningssinfo</string>
-	<string name="local_index_tile_data_expire">Udløber ( minutter): %1$s</string>
-    <string name="local_index_tile_data_maxzoom">Maksimal zoomniveau: %1$s</string>
+	<string name="local_index_tile_data_expire">Udløber (minutter): %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maks zoomniveau: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimum zoomniveau: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Elliptisk mercator</string>
     <string name="edit_tilesource_maxzoom">Maks. zoomniveau</string>
@@ -1658,7 +1658,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="routing_attr_avoid_ferries_description">Undgå færger</string>
 	<string name="routing_attr_avoid_motorway_name">Motorveje</string>
 	<string name="routing_attr_avoid_motorway_description">Undgå motorveje</string>
-	<string name="routing_attr_weight_name">Maksimal vægt</string>
+	<string name="routing_attr_weight_name">Maks vægt</string>
 	<string name="routing_attr_weight_description">Angiv køretøjets vægt begrænsning</string>
     <string name="routing_attr_short_way_name">Korteste rute</string>
 	<string name="routing_attr_short_way_description">Anvend korteste rute</string>
@@ -1846,7 +1846,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="gpx_file_is_empty">GPX-spor er tomt</string>
     <string name="gpx_info_waypoints">Rutepunkter: %1$s </string>
 	<string name="gpx_info_distance">Afstand: %1$s (%2$s punkter) </string>
-	<string name="gpx_info_start_time">Startid: %1$tF,  %1$tT </string>
+	<string name="gpx_info_start_time">"Starttid: %1$tF, %1$tT "</string>
 	<string name="gpx_info_end_time">Sluttid: %1$tF,  %1$tT </string>
 	<string name="gpx_info_average_speed">Gennemsnitshastighed: %1$s </string>
 	<string name="gpx_info_maximum_speed">Maks hastighed: %1$s </string>
