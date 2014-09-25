@@ -1833,4 +1833,6 @@
     <string name="traffic_warning_speed_camera">測速照相</string>
     <string name="traffic_warning">交通流量警示</string>
 	<string name="local_index_description">點觸任何現有的項目，查看更詳細的資訊，長按則停用或刪除。目前在裝置上的資料有 (%1$s 可用)：</string>
-	</resources>
+	<string name="text_size_descr">設定地圖上的文字大小。</string>
+    <string name="text_size">文字大小</string>
+    </resources>
