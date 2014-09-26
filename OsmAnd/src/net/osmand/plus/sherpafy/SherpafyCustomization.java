@@ -598,9 +598,19 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				mapActivity.getMapLayers().selectPOIFilterLayer(mapActivity.getMapView(), null);
+				osmandSettings.SHOW_POI_OVER_MAP.set(true);
 			}
 		}).reg();
-
+		if (osmandSettings.SHOW_POI_OVER_MAP.get()) {
+			adapter.item(R.string.sherpafy_disable_poi).icons(
+					R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).listen(new OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					osmandSettings.SHOW_POI_OVER_MAP.set(false);
+					mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+				}
+			}).reg();
+		}
 
 	}
 	

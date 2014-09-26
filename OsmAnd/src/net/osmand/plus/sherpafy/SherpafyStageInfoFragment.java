@@ -75,6 +75,9 @@ public class SherpafyStageInfoFragment extends SherlockFragment {
 
 
 	protected void updateView(WebView description, ImageView icon, TextView additional, TextView text, TextView header) {
+		if (stage == null){
+			return;
+		}
 		if (stage.getImageBitmap() != null) {
 			icon.setImageBitmap(stage.getImageBitmap());
 		} else {
