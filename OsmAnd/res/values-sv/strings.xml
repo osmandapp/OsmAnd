@@ -18,11 +18,11 @@
 <string name="map_widget_altitude">Höjd</string>
 <string name="map_widget_next_turn">Nästa sväng</string>
 <string name="show_warnings_title">Visa larm …</string>
-<string name="show_warnings_descr">Konfigurerar trafikvarningar (hastighetsgränser, stopp, vägbulor), varning för hastighetskameror samt körfältsinformation</string>
+<string name="show_warnings_descr">Konfigurera trafikvarningar (hastighetsbegränsningar, stopp, vägbulor), varning för fartkameror samt körfältsinformation</string>
 <string name="use_compass_navigation_descr">Använd kompassen när ingen riktning upptäcks på annat sätt</string>
 <string name="use_compass_navigation">Använd kompass</string>
 <string name="avoid_motorway">Undvik motorvägar</string>
-<string name="auto_zoom_map_descr">Auto-zooma på kartan beroende på din hastighet (när kartan är synkroniserad med aktuell position)</string>
+<string name="auto_zoom_map_descr">Zooma in/ut automatiskt på kartan beroende på din hastighet (när kartan är synkroniserad med aktuell position)</string>
 <string name="auto_zoom_map">Automatisk kartzoomning</string>
 <string name="tip_recent_changes_0_8_3_t">"Förändringar i 0.8.3:\n\t* Waypoints\n\t* Förbättrad vägvisning\n\t* Inställning för att undvika motorvägar när man bygger en rutt\n\t* Lagt till ytterligare en typ av väg för cyklar till kartan (Cycleway=track)\n\t* Buggfixar "</string>
 <string name="snap_to_road_descr">Fäst positionen på vägen under navigering</string>
