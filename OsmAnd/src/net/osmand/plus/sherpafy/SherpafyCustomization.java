@@ -558,6 +558,30 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				R.string.get_directions, 
 				R.string.menu_mute_on, R.string.menu_mute_off,
 				R.string.where_am_i, R.string.context_menu_item_share_location);
+		//poi
+		if (osmandSettings.SHOW_POI_OVER_MAP.get()) {
+			adapter.item(R.string.sherpafy_disable_poi).icons(
+					R.drawable.ic_action_gremove_dark, R.drawable.ic_action_gremove_light)
+					.position(adapter.length() - 1)
+					.listen(new OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					app.getSettings().SHOW_POI_OVER_MAP.set(false);
+					mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+				}
+			}).reg();
+		} else {
+			adapter.item(R.string.poi).icons(R.drawable.ic_action_layers_dark, R.drawable.ic_action_layers_light)
+					.position(adapter.length() - 1)
+					.listen(new OnContextMenuClick() {
+						@Override
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+							mapActivity.getMapLayers().selectPOIFilterLayer(mapActivity.getMapView(), null);
+							app.getSettings().SHOW_POI_OVER_MAP.set(true);
+							mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+						}
+					}).reg();
+		}
 		final StageInformation stage = getSelectedStage();
 		if (stage != null && !isStageVisited(stage.order)) {
 			adapter.item(R.string.complete_stage)
@@ -592,26 +616,6 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				}
 			}
 		}).reg();
-		//poi
-		adapter.item(R.string.poi).icons(
-				R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).listen(new OnContextMenuClick() {
-			@Override
-			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-				mapActivity.getMapLayers().selectPOIFilterLayer(mapActivity.getMapView(), null);
-				osmandSettings.SHOW_POI_OVER_MAP.set(true);
-			}
-		}).reg();
-		if (osmandSettings.SHOW_POI_OVER_MAP.get()) {
-			adapter.item(R.string.sherpafy_disable_poi).icons(
-					R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).listen(new OnContextMenuClick() {
-				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-					osmandSettings.SHOW_POI_OVER_MAP.set(false);
-					mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
-				}
-			}).reg();
-		}
-
 	}
 	
 	
