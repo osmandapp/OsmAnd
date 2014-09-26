@@ -19,6 +19,7 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.*;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
@@ -111,7 +112,7 @@ public class OsmandApplication extends Application {
 	BRouterServiceConnection bRouterServiceConnection;
 
 	MapActivity mapActivity;
-	DownloadIndexFragment downloadActivity;
+	DownloadActivity downloadActivity;
 	
 	@Override
 	public void onCreate() {
@@ -879,11 +880,11 @@ public class OsmandApplication extends Application {
 		this.mapActivity = mapActivity;
 	}
 	
-	public void setDownloadActivity(DownloadIndexFragment downloadActivity) {
+	public void setDownloadActivity(DownloadActivity downloadActivity) {
 		this.downloadActivity = downloadActivity;
 	}
 	
-	public DownloadIndexFragment getDownloadActivity() {
+	public DownloadActivity getDownloadActivity() {
 		return downloadActivity;
 	}
 }
