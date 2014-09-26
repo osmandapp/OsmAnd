@@ -562,7 +562,6 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		if (osmandSettings.SHOW_POI_OVER_MAP.get()) {
 			adapter.item(R.string.sherpafy_disable_poi).icons(
 					R.drawable.ic_action_gremove_dark, R.drawable.ic_action_gremove_light)
-					.position(adapter.length() - 1)
 					.listen(new OnContextMenuClick() {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -572,7 +571,6 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			}).reg();
 		} else {
 			adapter.item(R.string.poi).icons(R.drawable.ic_action_layers_dark, R.drawable.ic_action_layers_light)
-					.position(adapter.length() - 1)
 					.listen(new OnContextMenuClick() {
 						@Override
 						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -583,7 +581,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 					}).reg();
 		}
 		//important info
-		adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).position(adapter.length() - 1)
+		adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -597,7 +595,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		if (stage != null && !isStageVisited(stage.order)) {
 			adapter.item(R.string.complete_stage)
 					.icons(R.drawable.ic_action_finish_flag_dark, R.drawable.ic_action_finish_flag_light)
-					.position(adapter.length() - 1).listen(new OnContextMenuClick() {
+					.listen(new OnContextMenuClick() {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					markStageAsCompleted(stage);
