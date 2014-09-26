@@ -254,12 +254,12 @@ public class MapUtils {
 	}
 	
 	
-	public static int getPixelShiftX(int zoom, double long1, double long2, int tileSize){
+	public static int getPixelShiftX(float zoom, double long1, double long2, int tileSize){
 		return (int) ((getTileNumberX(zoom, long1) - getTileNumberX(zoom, long2)) * tileSize);
 	}
 	
 	
-	public static int getPixelShiftY(int zoom, double lat1, double lat2, int tileSize){
+	public static int getPixelShiftY(float zoom, double lat1, double lat2, int tileSize){
 		return (int) ((getTileNumberY(zoom, lat1) - getTileNumberY(zoom, lat2)) * tileSize);
 	}
 	
