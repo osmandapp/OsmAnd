@@ -229,7 +229,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		}
 		this.tourPresent = tourPresent;
 		if(!suggestToDownloadMap.isEmpty()) {
-			final DownloadIndexFragment da = app.getDownloadActivity();
+			final DownloadActivity da = app.getDownloadActivity();
 			if (da != null) {
 				app.runInUIThread(new Runnable() {
 

@@ -110,7 +110,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getMyApplication().setDownloadActivity(this);
 		getDownloadActivity().updateProgress(false);
 		BasicProgressAsyncTask<?, ?, ?> t = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
 		if(t instanceof DownloadIndexesThread.DownloadIndexesAsyncTask) {
@@ -120,55 +119,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 			}
 		}
 	}
-
-	public void showDialogToDownloadMaps(Collection<String> maps) {
-		int count = 0;
-		int sz = 0;
-		String s = "";
-		for (IndexItem i : DownloadActivity.downloadListIndexThread.getCachedIndexFiles()) {
-			for (String map : maps) {
-				if (i.getFileName().equals(map + ".obf.zip") && i.getType() == DownloadActivityType.NORMAL_FILE) {
-					final List<DownloadEntry> de = i.createDownloadEntry(getMyApplication(), i.getType(), new ArrayList<DownloadEntry>(1));
-					for(DownloadEntry d : de ) {
-						count++;
-						sz += d.sizeMB;
-					}
-					if(s.length() > 0) {
-						s +=", ";
-					}
-					s += i.getVisibleName(getMyApplication(), getMyApplication().getResourceManager().getOsmandRegions());
-					getDownloadActivity().getEntriesToDownload().put(i, de);
-				}
-			}
-		}
-		if(count > 0){
-			Builder builder = new AlertDialog.Builder(getDownloadActivity());
-			builder.setMessage(getString(R.string.download_additional_maps, s, sz));
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-				 	getDownloadActivity().downloadFilesCheckInternet();
-				}
-			});
-			builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					getDownloadActivity().getEntriesToDownload().clear();
-				}
-			});
-			builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-				
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					getDownloadActivity().getEntriesToDownload().clear();
-				}
-			});
-			builder.show();
-			
-		}
-	}
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
