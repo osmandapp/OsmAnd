@@ -60,7 +60,8 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 		if(listAdapter == null){
 			return;
 		}
-		listAdapter.setIndexFiles(items);
+		listAdapter = new UpdateIndexAdapter(getDownloadActivity(), R.layout.download_index_list_item, items);
+		setListAdapter(listAdapter);
 	}
 
 	@Override
