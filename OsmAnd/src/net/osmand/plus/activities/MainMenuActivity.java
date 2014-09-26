@@ -203,7 +203,7 @@ public class MainMenuActivity extends Activity {
 				return;
 			}
 		}
-		if(Version.isSherpafy(getMyApplication())) {
+		if(Version.isSherpafy(getMyApplication()) || true) {
 			final Intent mapIntent = new Intent(this, TourViewActivity.class);
 			startActivity(mapIntent);
 			finish();
