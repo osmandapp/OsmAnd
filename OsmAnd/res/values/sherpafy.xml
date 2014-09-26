@@ -14,6 +14,7 @@
     <string name="sherpafy_stage_tab_route">Map</string>
     <string name="sherpafy_stage_tab_info">Info</string>
     <string name="sherpafy_tour_info_txt">Important Info</string>
+	<string name="sherpafy_disable_poi">Hide POI on map</string>
     <string name="sherpafy_stages_txt">Stages</string>
     <string name="sherpafy_instructions">Tour Information</string>
     <string name="sherpafy_instructions_desr">Key facts and contact info</string>
