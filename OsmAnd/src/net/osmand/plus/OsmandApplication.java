@@ -134,7 +134,7 @@ public class OsmandApplication extends Application {
 			e.printStackTrace();
 		}
 
-		if(Version.isSherpafy(this) || true) {
+		if(Version.isSherpafy(this)) {
 			appCustomization = new SherpafyCustomization();
 		} else {
 			appCustomization = new OsmAndAppCustomization();
