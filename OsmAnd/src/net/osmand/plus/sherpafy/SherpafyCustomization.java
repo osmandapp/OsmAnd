@@ -582,18 +582,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						}
 					}).reg();
 		}
-		final StageInformation stage = getSelectedStage();
-		if (stage != null && !isStageVisited(stage.order)) {
-			adapter.item(R.string.complete_stage)
-					.icons(R.drawable.ic_action_finish_flag_dark, R.drawable.ic_action_finish_flag_light)
-					.position(adapter.length() - 1).listen(new OnContextMenuClick() {
-						@Override
-						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-							markStageAsCompleted(stage);
-							showCompleteStageFragment(mapActivity, stage, false);
-						}
-					}).reg();
-		}
+		//important info
 		adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).position(adapter.length() - 1)
 				.listen(new OnContextMenuClick() {
 					@Override
@@ -603,7 +592,19 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						mapActivity.startActivity(newIntent);
 					}
 				}).reg();
-
+		//complete stage
+		final StageInformation stage = getSelectedStage();
+		if (stage != null && !isStageVisited(stage.order)) {
+			adapter.item(R.string.complete_stage)
+					.icons(R.drawable.ic_action_finish_flag_dark, R.drawable.ic_action_finish_flag_light)
+					.position(adapter.length() - 1).listen(new OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					markStageAsCompleted(stage);
+					showCompleteStageFragment(mapActivity, stage, false);
+				}
+			}).reg();
+		}
 		//share my location
 		adapter.item(R.string.context_menu_item_share_location).icons(
 				R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_light).listen(new OnContextMenuClick() {
