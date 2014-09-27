@@ -479,11 +479,12 @@ public class RenderingRulesStorage {
 		//		int count = 100000;
 		//		for (int i = 0; i < count; i++) {
 					RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
-					searchRequest.setStringFilter(storage.PROPS.R_TAG, "building");
-					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "yes");
-					 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
-					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 16);
-					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 16);
+					searchRequest.setStringFilter(storage.PROPS.R_TAG, "natural");
+					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "tree");
+					searchRequest.setStringFilter(storage.PROPS.R_ADDITIONAL, "leaf_type=broadleaved");
+//					 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
+					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 18);
+					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 18);
 					//	searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
 					// searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
 					for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
@@ -493,7 +494,7 @@ public class RenderingRulesStorage {
 							searchRequest.setStringFilter(customProp, "");
 						}
 					}
-					boolean res = searchRequest.search(POLYGON_RULES);
+					boolean res = searchRequest.search(POINT_RULES);
 					System.out.println("Result " + res);
 					printResult(searchRequest,  System.out);
 		//		}

@@ -164,7 +164,7 @@
   <string name="routing_settings_descr">Opties voor navigatie</string>
   <string name="global_settings">Algemene instellingen</string>
   <string name="index_settings">Kaartbeheer</string>
-  <string name="index_settings_descr">Download en beheer kaarten, stemmen en GPX-tracks</string>
+  <string name="index_settings_descr">Download en beheer kaarten en stemmen</string>
   <string name="general_settings">Algemene instellingen</string>
   <string name="general_settings_descr">Kaartweergave en algemene instellingen</string>
   <string name="global_app_settings">Algemene app instellingen</string>
@@ -881,7 +881,7 @@
   <string name="osmand_development_plugin_description">Toon opties voor ontwikkeling en foutopsporing, zoals navigatie met simulatie of het meten van de kaartweergavesnelheid.</string>
   <string name="plugins_screen">Plugin-manager</string>
   <string name="select_plugin_to_activate">Klik op een plugin om deze te (de)activeren. (Het kan nodig zijn om OsmAnd te herstarten.)</string>
-  <string name="prefs_plugins_descr">Plugins geven geavanceerde instellingen en extra functies</string>
+  <string name="prefs_plugins_descr">Schakel plugins in voor speciale functies en extra instellingen</string>
   <string name="prefs_plugins">Plugin-manager</string>
   <string name="tip_recent_changes_0_8_0_t">Wijzigingen in 0.8.0:
 	\n\t- *Plugin-functionaliteit*
@@ -1970,4 +1970,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="traffic_warning_speed_camera">Snelheidscontrole</string>
     <string name="traffic_warning">Filemelding</string>
 	<string name="local_index_description">Tik om details te bekijken; houd ingedrukt om uit te schakelen of te verwijderen. Huidige gegevens op het toestel (%1$s beschikbaar):</string>
-	</resources>
+	<string name="text_size_descr">De grootte van tekst op de kaart instellen.</string>
+    <string name="text_size">Tekstgrootte</string>
+    </resources>

@@ -1734,4 +1734,5 @@ s často kladenými otázkami.</string>
     <string name="traffic_warning">Dopravní varování</string>
 	<string name="route_descr_destination"/>
     <string name="local_index_description">Klikněte na existující položku k zobrazení více detailů, podržte pro vypnutí nebo smazání. V zařízení je %1$s volného místa:</string>
-	</resources>
+	<string name="text_size">Velikost písma</string>
+    </resources>

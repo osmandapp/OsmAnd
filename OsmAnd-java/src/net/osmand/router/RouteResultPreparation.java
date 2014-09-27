@@ -8,6 +8,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
@@ -21,6 +24,7 @@ public class RouteResultPreparation {
 
 	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
 	private static final float TURN_DEGREE_MIN = 45;
+	private Log log = PlatformUtil.getLog(RouteResultPreparation.class);
 	/**
 	 * Helper method to prepare final result 
 	 */
@@ -258,12 +262,14 @@ public class RouteResultPreparation {
 		double startLon = start.getLongitude();
 		double endLat = end.getLatitude();
 		double endLon = end.getLongitude();
-        println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{4}\" \n"
+		String msg = MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{4}\" \n"
 				+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" {5} >", 
 				startLat + "", startLon + "", endLat + "", endLon + "", ctx.config.routerName, 
 				"loadedTiles = \"" + ctx.loadedTiles + "\" " + "visitedSegments = \"" + ctx.visitedSegments + "\" " +
 				"complete_distance = \"" + completeDistance + "\" " + "complete_time = \"" + completeTime + "\" " +
-				"routing_time = \"" + ctx.routingTime + "\" "));
+				"routing_time = \"" + ctx.routingTime + "\" ");
+		log.info(msg);
+        println(msg);
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
 			for (RouteSegmentResult res : result) {
 				String name = res.getObject().getName();

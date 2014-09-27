@@ -131,4 +131,8 @@ public class MultiTouchSupport {
     	return false;
     }
 
+    
+    public PointF getCenterPoint() {
+		return centerPoint;
+	}
 }

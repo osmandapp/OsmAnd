@@ -236,9 +236,9 @@ public class MapZoomControls extends MapControls {
 			public boolean onLongClick(View notUseCouldBeNull) {
 				final OsmandSettings.OsmandPreference<Float> zoomScale = view.getSettings().MAP_ZOOM_SCALE_BY_DENSITY;
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
-				float scale = view.getZoomScale();
+				float scale = zoomScale.get();// view.getZoomScale();
 				int p = (int) ((scale > 0 ? 1 : -1) * Math.round(scale * scale * 100)) + 100;
-				final TIntArrayList tlist = new TIntArrayList(new int[] { 75, 100, 150, 200, 300, 400, 500 });
+				final TIntArrayList tlist = new TIntArrayList(new int[] {50, 75, 100, 150, 200, 300, 400, 500 });
 				final List<String> values = new ArrayList<String>();
 				int i = -1;
 				for (int k = 0; k <= tlist.size(); k++) {
@@ -272,7 +272,7 @@ public class MapZoomControls extends MapControls {
 								} else {
 									newScale = -(float) Math.sqrt((100f - tlist.get(which)) / 100f);
 								}
-								zoomScale.set(newScale - (float) Math.sqrt(Math.max(view.getDensity() - 1, 0)));
+								zoomScale.set(newScale);
 								view.getAnimatedDraggingThread().startZooming(view.getZoom(),
 										view.getSettingsZoomScale(), false);
 								dialog.dismiss();

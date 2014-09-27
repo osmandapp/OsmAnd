@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -1796,4 +1797,31 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="visible_element">Visível</string>
     <string name="show_zoom_buttons_navigation_descr">Mostrar botões de zoom durante a navegação</string>
     <string name="show_zoom_buttons_navigation">Mostrar botões de zoom</string>
+    <string name="text_size_descr">Defina o tamanho do texto no mapa.</string>
+    <string name="text_size">Tamanho do texto</string>
+    <string name="traffic_warning_speed_limit">Limite de Velocidade</string>
+    <string name="traffic_warning_border_control">Controle de fronteira</string>
+    <string name="traffic_warning_payment">Portagem</string>
+    <string name="traffic_warning_stop">Sinal de stop</string>
+    <string name="traffic_warning_calming">Acalmia de tráfego</string>
+    <string name="traffic_warning_speed_camera">Câmara de velocidade</string>
+    <string name="traffic_warning">Aviso de tráfego</string>
+	<string name="speak_favorites">Anunciar nas proximidades favoritos</string>
+	<string name="speak_poi">Anunciar nas proximidades de POI</string>
+	<string name="way_alarms">Avisos de tráfego</string>
+	<string name="sleep_mode_stop_dialog">Interromper o modo de hibernação do GPS?</string>
+	<string name="stop_navigation_service">Interrupção</string>
+	<string name="confirm_every_run">Sempre perguntar</string>
+	<string name="save_global_track_interval_descr">Escolher o intervalo de log para a gravação de faixa geral (habilitado através do widget de gravação GPX no mapa)</string>
+	<string name="save_global_track_interval">Intervalo de log geral</string>
+	<string name="enable_sleep_mode">Ativar o modo de GPS em segundo plano</string>
+	<string name="save_track_to_gpx_globally">Salvar trilhas em GPX</string>
+	<string name="save_track_to_gpx_globally_descr">Posição geral de log para um arquivo GPX pode ser ativada ou desativado usando o GPX gravação widget na tela do mapa</string>
+	<string name="save_track_interval_globally">Intervalo de log</string>
+	<string name="rendering_attr_publicTransportMode_name">Modo de transporte público</string>
+	<string name="record_plugin_description">Salve suas trilhas através do toque de um botão na tela do mapa. Mostre as configurações para gravar suas viagens para arquivos GPX locais ou on-line usando um serviço da web.</string>
+    <string name="record_plugin_name">Gravar suas viagens</string>
+    <string name="int_hour">h</string>
+    <string name="duration">Duração</string>
+    <string name="distance">Distância</string>
     </resources>

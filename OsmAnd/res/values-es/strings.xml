@@ -1877,4 +1877,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="local_index_description">Pulsa cualquier objeto para ver más detalles, mantén pulsado para desactivar o borrar. Datos en el dispositivo actualmente (%1$s libre):</string>
 	<string name="traffic_warning_calming">Reductores de velocidad</string>
     <string name="traffic_warning">Alerta de tráfico</string>
-	</resources>
+	<string name="text_size_descr">Selecciona el tamaño del texto en el mapa.</string>
+    <string name="text_size">Tamaño de texto</string>
+    </resources>

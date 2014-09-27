@@ -168,9 +168,9 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		if (!pos.isEmpty()) {
 			StringBuilder res = new StringBuilder();
 			for (OsMoDevice d : pos) {
-				res.append(getObjectDescription(d));
+				res.append(getObjectDescription(d)).append("\n");
 			}
-			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(view.getContext(), res.toString().trim(), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;

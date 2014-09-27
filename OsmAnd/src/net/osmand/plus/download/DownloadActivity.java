@@ -9,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.*;
@@ -23,14 +25,12 @@ import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.voice.TTSCommandPlayerImpl;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Denis on 08.09.2014.
@@ -200,6 +200,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		getMyApplication().setDownloadActivity(this);
 		BasicProgressAsyncTask<?, ?, ?> t = downloadListIndexThread.getCurrentRunningTask();
 	}
 
@@ -521,8 +522,58 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		task.execute();
 	}
 
+
 	public Map<String,String> getIndexFileNames() {
 		return downloadListIndexThread != null ? downloadListIndexThread.getIndexFileNames() : null;
+	}
+
+	public void showDialogToDownloadMaps(Collection<String> maps) {
+		int count = 0;
+		int sz = 0;
+		String s = "";
+		for (IndexItem i : DownloadActivity.downloadListIndexThread.getCachedIndexFiles()) {
+			for (String map : maps) {
+				if ((i.getFileName().equals(map + ".obf.zip") || i.getFileName().equals(map + "_" + IndexConstants.BINARY_MAP_VERSION + ".obf.zip"))
+						&& i.getType() == DownloadActivityType.NORMAL_FILE) {
+					final List<DownloadEntry> de = i.createDownloadEntry(getMyApplication(), i.getType(), new ArrayList<DownloadEntry>(1));
+					for(DownloadEntry d : de ) {
+						count++;
+						sz += d.sizeMB;
+					}
+					if(s.length() > 0) {
+						s +=", ";
+					}
+					s += i.getVisibleName(getMyApplication(), getMyApplication().getResourceManager().getOsmandRegions());
+					getEntriesToDownload().put(i, de);
+				}
+			}
+		}
+		if(count > 0){
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(getString(R.string.download_additional_maps, s, sz));
+			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					downloadFilesCheckInternet();
+				}
+			});
+			builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					getEntriesToDownload().clear();
+				}
+			});
+			builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					getEntriesToDownload().clear();
+				}
+			});
+			builder.show();
+
+		}
 	}
 
 }

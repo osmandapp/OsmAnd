@@ -1,6 +1,7 @@
 package net.osmand.binary;
 
 
+import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
@@ -34,6 +35,8 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -58,11 +61,13 @@ public class BinaryInspector {
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
 				//"-vpoi",
-				"-vmap", "-vmapobjects", 
+//				"-vmap", "-vmapobjects", 
+//				"-vrouting",
 //				"-vaddress", "-vcities", "-vstreets", "-vstreetgroups","-vbuildings", 
 				//"-zoom=16",
 				//"-bbox=4,55,7,50", 
 				"/home/victor/projects/osmand/osm-gen/Map.obf"
+//					"/home/victor/projects/osmand/osm-gen/Netherlands_europe.obf"
 //				 "/home/victor/projects/osmand/osm-gen/World_basemap_2_b.obf___"
 //					"/home/victor/projects/osmand/osm-gen/World_basemap_2.obf__"
 					});
@@ -106,6 +111,7 @@ public class BinaryInspector {
 		boolean vtransport;
 		boolean vpoi;
 		boolean vmap;
+		boolean vrouting;
 		boolean vmapObjects;
 		boolean osm;
 		FileOutputStream osmOut = null;
@@ -126,6 +132,11 @@ public class BinaryInspector {
 		public boolean isVmap() {
 			return vmap;
 		}
+		
+		public boolean isVrouting() {
+			return vrouting;
+		}
+		
 		public boolean isVpoi() {
 			return vpoi;
 		}
@@ -150,6 +161,8 @@ public class BinaryInspector {
 					vintersections = true;
 				} else if(params[i].equals("-vmap")){
 					vmap = true;
+				} else if(params[i].equals("-vrouting")){
+					vrouting = true;
 				} else if(params[i].equals("-vmapobjects")){
 					vmapObjects = true;
 				} else if(params[i].equals("-vpoi")){
@@ -451,6 +464,9 @@ public class BinaryInspector {
 					RouteRegion ri = ((RouteRegion) p);
 					println("\tBounds " + formatLatBounds(ri.getLeftLongitude(), ri.getRightLongitude(), 
 							ri.getTopLatitude(), ri.getBottomLatitude()));
+					if((vInfo != null && vInfo.isVrouting())){
+						printRouteDetailInfo(index, (RouteRegion) p);
+					}
 				} else if(p instanceof MapIndex){
 					MapIndex m = ((MapIndex) p);
 					int j = 1;
@@ -484,6 +500,45 @@ public class BinaryInspector {
 			throw e;
 		}
 		
+	}
+
+	private void printRouteDetailInfo(BinaryMapIndexReader index, RouteRegion p) throws IOException {
+		final DamnCounter mapObjectsCounter = new DamnCounter();
+		final StringBuilder b = new StringBuilder();
+		List<RouteSubregion> regions = index.searchRouteIndexTree(
+				BinaryMapIndexReader.buildSearchRequest(MapUtils.get31TileNumberX(vInfo.lonleft),
+						MapUtils.get31TileNumberX(vInfo.lonright), MapUtils.get31TileNumberY(vInfo.lattop),
+						MapUtils.get31TileNumberY(vInfo.latbottom), vInfo.getZoom(), null),
+				p.getSubregions());
+		index.loadRouteIndexData(regions, new ResultMatcher<RouteDataObject>() {
+			@Override
+			public boolean publish(RouteDataObject obj) {
+				mapObjectsCounter.value++;
+				b.setLength(0);
+				b.append("Road ");
+				b.append(obj.id);
+				for(int i = 0; i < obj.getTypes().length; i++) {
+					RouteTypeRule rr = obj.region.quickGetEncodingRule(obj.getTypes()[i]);
+					b.append(" ").append(rr.getTag()).append("='").append(rr.getValue()).append("'");
+				}
+				if (obj.getNames() != null) {
+					TIntObjectIterator<String> it = obj.getNames().iterator();
+					while (it.hasNext()) {
+						it.advance();
+						RouteTypeRule rr = obj.region.quickGetEncodingRule(it.key());
+						b.append(" ").append(rr.getTag()).append("='").append(it.value()).append("'");
+					}
+				}
+				println(b.toString());
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		});
+		println("\tTotal map objects: " + mapObjectsCounter.value);
 	}
 
 	private  void printAddressDetailedInfo(VerboseInfo verbose, BinaryMapIndexReader index, AddressRegion region) throws IOException {
@@ -832,7 +887,7 @@ public class BinaryInspector {
 		}
 		println("Inspector is console utility for working with binary indexes of OsmAnd.");
 		println("It allows print info about file, extract parts and merge indexes.");
-		println("\nUsage for print info : inspector [-vaddress] [-vstreetgroups] [-vstreets] [-vbuildings] [-vintersections] [-vmap] [-vmapobjects] [-osm] [-vpoi] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLan] [file]");
+		println("\nUsage for print info : inspector [-vaddress] [-vstreetgroups] [-vstreets] [-vbuildings] [-vintersections] [-vmap] [-vmapobjects] [-osm] [-vpoi] [-vrouting] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLan] [file]");
 		println("  Prints information about [file] binary index of OsmAnd.");
 		println("  -v.. more verbouse output (like all cities and their streets or all map objects with tags/values and coordinates)");
 		println("\nUsage for combining indexes : inspector -c file_to_create (file_from_extract ((+|-)parts_to_extract)? )*");

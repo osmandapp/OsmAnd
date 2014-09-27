@@ -165,7 +165,7 @@ public class OsMoThread {
 			}
 		} catch (Exception e) {
 			log.info("Exception selecting socket", e);
-			cmd("ERROR HEARTBEAT", true);
+			cmd("ERROR HEARTBEAT" + e.getMessage(), true);
 			e.printStackTrace();
 			if (activeChannel != null && !activeChannel.isConnected()) {
 				activeChannel = null;

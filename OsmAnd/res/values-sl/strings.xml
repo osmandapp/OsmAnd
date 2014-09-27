@@ -569,7 +569,7 @@
 	<string name="amenity_type_man_made">Zgradbe</string>
 	<string name="send_location_sms_pattern">Mesto: %1$s\n%2$s</string>
 	<string name="tip_initial_t">"OsmAnd je navigacijska aplikacija s številnimi funkcijami.
-\n\nNekaj osnovnih uvodov, uporabne nasvete in napredno pomoč dobite v povezavi z \'Meni\' → \'Pomoč\' na zaslonu zemljevida. "</string>
+\n\nOsnovni uvod, nekaj uporabnih namigov in trikov je na voljo na povezavi z \'Meni\' → \'Pomoč\' na zaslonu zemljevida. "</string>
 	<string name="next_button">Naprej</string>
 	<string name="previous_button">Nazaj</string>
 	<string name="tip_initial">Pomoč</string>
@@ -594,7 +594,7 @@
 	
 	<string name="downloading">Prenašanje …</string>
 	<string name="installing_new_resources">Odpakiranje novih podatkov …</string>
-	<string name="tip_navigation_t">"Da bi dobili navodila za kraj, bodisi neposredno dolgo kliknite nanj na zemljevidu (potem kliknite opis in izberite \'Navodila za\'), ali pa izberite \'Navigacija\' za vsak vnos v seznamu rezultatov iskanja ali seznama priljubljenih.
+	<string name="tip_navigation_t">"Da bi dobili navodila za kraj, bodisi neposredno dolgo kliknite nanj na zemljevidu (potem kliknite opis in izberite \'Navodila za\'), ali pa izberite \'Navodila za\' za vsak vnos v seznamu rezultatov iskanja ali seznama priljubljenih.
 \n\nCilj je na zemljevidu označen s ciljno zastavico in OsmAnd prikazuje razdaljo in smer do njega (oranžni trikotnik).
 \n\nLahko izberete \'Začni navigacijo\', kar pomeni, da vas OsmAnd vodi, vam da glasovne ukaze (če so ti vklopljeni), itd. Ali pa lahko izberete \'Prikaži pot\', ki vam samo prikaže pot brez vodenja in popravljanja medtem ko se premikate.
 \n\nČe želite pokazati pot do cilja iz katerekoli druge točke, ki ni vaš trenutni položaj, izberite jo na zemljevidu in pritisnite \'Navodila od\'.
@@ -667,15 +667,14 @@
 		\n\nTa je na voljo z dolgim pritiskom na katerokoli točko na zemljevidu (nato pritisnite na oznako) ali s pritiskom na gumb kroglico, ali z izbiro \'Meni\' → \'Uporabi lokacijo\' (zadnja dva načina uporabijo center zemljevida kot referenčno točko).
 		\n\nOznako lahko spet skrijete če dolgo kliknete nanjo.
 	</string>
-	<string name="tip_search_t">Mesta lahko iščete neposredno na zemljevidu preko \'Uporabi lokacijo\' → \'Iskanje v bližini\', ali s priklicem okna za iskanje preko \'Meni\' → \'Iskanje\'.
-		\n\nOkno za iskanje ima predloge za iskanje
-		\n\t* po naslovu
-		\n\t* preko koordinat
-		\n\t* kot POI (po vrsti ali po imenu)
-		\n\t* preko zgodovine iskanja
-		\n\t* ali prek vaših prednastavljenih priljubljenih.
-		\n\nKontekstni meni ali akcijska vrstica na vseh zadetkih ponujata možnosti, kot so \'Navigacija\' ali \'Prikaži na zemljevidu\', itd.
-	</string>
+	<string name="tip_search_t">"Mesta lahko iščete neposredno na zemljevidu preko \'Uporabi lokacijo\' → \'Iskanje v bližini\', ali s priklicem okna za iskanje preko \'Meni\' → \'Iskanje\'.
+\n\nOkno za iskanje ima predloge za iskanje
+\n\t* po naslovu
+\n\t* preko koordinat
+\n\t* kot POI (po vrsti ali po imenu)
+\n\t* preko zgodovine iskanja
+\n\t* ali prek vaših prednastavljenih priljubljenih.
+\n\nKontekstni meni ali akcijska vrstica na vseh zadetkih ponujata možnosti, kot so \'Navodila za\' ali \'Prikaži na zemljevidu\', itd. "</string>
 	
     
     <string name="route_descr_lat_lon">Dol %1$.3f šir %2$.3f</string>
@@ -1906,8 +1905,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_value_bicycle_name">Kolo</string>
     <string name="rendering_value_pedestrian_name">Pešec</string>
     <string name="flat_list_waypoitns">Vse</string>
-    <string name="way_alarms">Ovire</string>
-    <string name="speak_favorites">Najavi priljubljene</string>
+    <string name="way_alarms">Prometna opozorila</string>
+    <string name="speak_favorites">Najavi bližnje priljubljene</string>
     <string name="int_hour">ur</string>
     <string name="duration">Trajanje</string>
     <string name="distance">Razdalja</string>
@@ -1921,7 +1920,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="record_plugin_name">Registracija vaših potovanj</string>
     <string name="index_tours">Izleti</string>
     <string name="waypoints">Točke</string>
-    <string name="speak_poi">Napovej POI</string>
+    <string name="speak_poi">Najavi bližnji POI</string>
     <string name="rendering_value_browse_map_name">Brskaj zemljevid</string>  
     <string name="rendering_attr_alpineHiking_description">Prikaz stez po SAC lestvici</string>
     <string name="pause_navigation">Zaustavi navigacijo</string>
@@ -1930,4 +1929,14 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="record_plugin_description">Shranite vaše sledi s pritiskom na gumb na oknu z zemljevidom. Pokaži nastavitve za snemanje vaših potovanj v krajevne datoteke GPX ali v oblak z uporabo spletnih storitev.</string>
     <string name="rendering_attr_osmcTraces_description">Prikaz stez po OSMC sledeh</string>
     
-	</resources>
+	<string name="traffic_warning_speed_limit">Omejitev hitrosti</string>
+    <string name="traffic_warning_border_control">Mejni prehod</string>
+    <string name="traffic_warning_payment">Cestninska postaja</string>
+    <string name="traffic_warning_stop">Znak STOP</string>
+    <string name="traffic_warning">Prometno opozorilo</string>
+	<string name="traffic_warning_speed_camera">Hitrostna kamera</string>
+    <string name="traffic_warning_calming">Ležeči policaj</string>
+    <string name="local_index_description">Kliknite katerikoli obstoječi element za ogled podrobnosti, pritisnite in držite za izklop ali izbris. Trenutni podatki na napravi (%1$s prosto):</string>
+	<string name="text_size_descr">Nastavite velikost napisov na zemljevidu.</string>
+    <string name="text_size">Velikost napisov</string>
+    </resources>

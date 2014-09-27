@@ -320,6 +320,7 @@ public class OsmandRenderer {
 						int visbleWidth = icon.iconSize >= 0 ? (int) icon.iconSize : ico.getWidth();
 						int visbleHeight = icon.iconSize >= 0 ? (int) icon.iconSize : ico.getHeight();
 						boolean intersects = false;
+						float coeff = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
 						RectF rf = calculateRect(rc, icon, ico.getWidth(), ico.getHeight());
 						RectF visibleRect = null;
 						if (visbleHeight > 0 && visbleWidth > 0) {
@@ -337,14 +338,14 @@ public class OsmandRenderer {
 							Bitmap shield = icon.shieldId == null ? null : RenderingIcons.getIcon(context, icon.shieldId);
 							if(shield != null) {
 								RectF shieldRf = calculateRect(rc, icon, shield.getWidth(), shield.getHeight());
-								if (rc.screenDensityRatio != 1f) {
+								if (coeff != 1f) {
 									Rect src = new Rect(0, 0, shield.getWidth(), shield.getHeight());
 									cv.drawBitmap(shield, src, shieldRf, paintIcon);
 								} else {
 									cv.drawBitmap(shield, shieldRf.left, shieldRf.top, paintIcon);
 								}	
 							}
-							if (rc.screenDensityRatio != 1f) {
+							if (coeff != 1f) {
 								Rect src = new Rect(0, 0, ico.getWidth(), ico.getHeight());
 								cv.drawBitmap(ico, src, rf, paintIcon);
 							} else {
@@ -367,10 +368,11 @@ public class OsmandRenderer {
 
 	private RectF calculateRect(RenderingContext rc, IconDrawInfo icon, int visbleWidth, int visbleHeight) {
 		RectF rf;
-		float left = icon.x - visbleWidth / 2 * rc.screenDensityRatio;
-		float top = icon.y - visbleHeight / 2 * rc.screenDensityRatio;
-		float right = left + visbleWidth * rc.screenDensityRatio;
-		float bottom = top + visbleHeight * rc.screenDensityRatio;
+		float coeff = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
+		float left = icon.x - visbleWidth / 2 * coeff;
+		float top = icon.y - visbleHeight / 2 * coeff;
+		float right = left + visbleWidth * coeff;
+		float bottom = top + visbleHeight * coeff;
 		rf = new RectF(left, top, right, bottom);
 		return rf;
 	}

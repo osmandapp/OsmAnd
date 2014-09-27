@@ -58,8 +58,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
 	private MapLayerData<List<Amenity>> data;
-	private boolean path = false;
-	private double radius = 100;
 
 
 	public POIMapLayer(final MapActivity activity) {
@@ -83,10 +81,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			@Override
 			protected List<Amenity> calculateResult(RotatedTileBox tileBox) {
 				QuadRect latLonBounds = tileBox.getLatLonBounds();
-				if(path) {
-					RouteCalculationResult result = routingHelper.getRoute();
-					return resourceManager.searchAmenitiesOnThePath(result.getImmutableAllLocations(), radius, filter, null);
-				} else {
+//				if(path) {
+//					RouteCalculationResult result = routingHelper.getRoute();
+//					return resourceManager.searchAmenitiesOnThePath(result.getImmutableAllLocations(), radius, filter, null);
+//				} else {
 					return resourceManager.searchAmenities(filter, latLonBounds.top, latLonBounds.left,
 							latLonBounds.bottom, latLonBounds.right, tileBox.getZoom(), new ResultMatcher<Amenity>() {
 
@@ -100,7 +98,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 									return isInterrupted();
 								}
 							});
-				}
+//				}
 			}
 		};
 	}
@@ -110,20 +108,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	public void setFilter(PoiFilter filter) {
-		 // TODO parameter
 		this.filter = filter;
-//		this.radius = 100;
-//		this.path = true;
-		this.path = false;
 		data.clearCache();
 	}
 	
-	public void setFilter(PoiFilter filter, double radius) {
-		this.filter = filter;
-		this.radius = radius;
-		this.path = true;
-		data.clearCache();
-	}
 	
 
 	public void getAmenityFromPoint(RotatedTileBox tb, PointF point, List<? super Amenity> am) {
@@ -366,9 +354,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute) {
-		if(path) {
-			data.clearCache();
-		}
 	}
 
 	@Override
