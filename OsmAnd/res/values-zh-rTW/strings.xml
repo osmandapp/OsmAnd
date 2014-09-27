@@ -76,23 +76,7 @@
 		OsmAnd 正在積極開發我們的專案，並且它的更進一步發展依賴於提供資金的捐助，用以資助發展和新功能的駕駛測試。請考慮購買 OsmAnd +，或資助特定的新功能或在 osmand.net 網站上一般捐贈。
 	</string>
 	<string name="osmand_plus_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖檢視和導航</string>
-	<string name="osmand_plus_long_description_1000_chars">
-		OsmAnd+ OsmAnd (OSM Automated Navigation Directions)
-		OsmAnd 是開放源碼導航應用程式，可以使用各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
-
-主要功能：
- - 完整離線功能 (存放下載的向量圖或地圖圖磚)
- - 全球離線向量圖資
- - 直接由手機下載各國或區域圖資
- - 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的最愛、等高線、公共運輸站
- - 離線查尋地址、場所(POI)
- - 離線尋找導航路線
- - 汽車、自行車、步行模式有下列選項：
- - 可選擇自動日/夜模式切換
- - 可選擇取決於速度的地圖縮放
- - 可選擇地圖正北朝上或或行進方向朝上
- - 可選擇車道引導、速限顯示、使用真人語音或 TTS 語音
-	</string>
+	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ OsmAnd (OSM Automated Navigation Directions) OsmAnd 是開放源碼導航應用程式，可以使用各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。 主要功能： - 完整離線功能 (存放下載的向量圖或地圖圖磚) - 全球離線向量圖資 - 直接由手機下載各國或區域圖資 - 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的最愛、等高線、大眾運輸停靠站 - 離線查尋地址、場所(POI) - 離線尋找導航路線 - 汽車、自行車、步行模式有下列選項： - 自動日/夜模式切換選項 - 取決於速度的地圖縮放選項 - 地圖正北朝上或行進方向朝上選項 - 車道引導、速限顯示、使用真人語音或 TTS 語音選項 "</string>
 	<string name="tip_update_index">更新離線地圖</string>
 	<string name="tip_update_index_t">"離線地圖的查看與 POI/位址查尋，以及離線導航，有最新的圖資是不可或缺的。OsmAnd 提供了地圖檔案的管理用以下載那些離線圖資，並且檢查能用的更新。
 \n\n下載圖資更新由\'設定\' -&gt; \'管理地圖檔案\' -&gt; \'下載\'。
@@ -166,7 +150,7 @@
 	<string name="osmand_parking_position_description_add_time">您的愛車停在：</string>
 	<string name="select_animate_speedup">選擇模擬路線速度</string>
     	<string name="global_app_allocated_memory_descr">已配置記憶體 %1$s MB (Android 限制%2$s MB, Dalvik %3$s MB)。</string>
-	<string name="global_app_allocated_memory">已配置記憶</string>
+	<string name="global_app_allocated_memory">已配置記憶體</string>
 	<string name="native_app_allocated_memory">原生記憶體總計</string>
 	<string name="update_downlod_list">重新載入列表</string>
 	<string name="starting_point_too_far">起始標點離最近的道路太遠。</string>
@@ -224,8 +208,8 @@
 	<string name="unknown_from_location">起始標點尚未決定</string>
 	<string name="unknown_location">未知地理位置</string>
 	<string name="modify_transparency">調整透明度(0 - 透明, 255 - 不透明)</string>
-	<string name="confirm_interrupt_download">您要中斷檔案下載嗎？</string>
-	<string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些地區的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'來下載。之後您可瀏覽地圖、位置地址、查尋興趣點以及尋找共公交通設施。</string>    
+	<string name="confirm_interrupt_download">您要中斷下載中的檔案嗎？</string>
+	<string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些地區的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'來下載。之後您可瀏覽地圖、位置的地址、查看興趣點以及找到大眾運輸設施。</string>    
 	<string name="basemap_was_selected_to_download">底圖為某些特別的應用功能必需使用的，並且預設為下載。</string>
 	<string name="select_index_file_to_download">找不到任何資料。如果您不能在您的區域找到，您可以自行製作(參考http://osmand.net)。</string>
 	<string name="local_indexes_cat_tile">線上地圖圖磚</string>
@@ -257,7 +241,7 @@
 	<string name="native_rendering">原生繪製</string>
 	<string name="test_voice_prompts">測試語音提示</string>    
 	<string name="switch_to_raster_map_to_see">該地區目前沒有離線向量地圖，您可在設定功能下載(管理地圖檔案)或切換成線上地圖(啟用線上地圖外掛元件)。</string>
-	<string name="send_files_to_osm">傳送 GPX 檔案到 OSM？</string>
+	<string name="send_files_to_osm">傳送 GPX 檔案到 OSM 嗎？</string>
 	<string name="gpx_visibility_txt">能見度</string>
 	<string name="gpx_tags_txt">旗標</string>
 	<string name="gpx_description_txt">敘述</string>
@@ -385,12 +369,11 @@
 	<string name="osmand_service">休眠模式</string>
 	<string name="osmand_service_descr">螢幕關閉時執行 OsmAnd</string>
 	<string name="tip_rotation_switching">地圖方向</string>
-	<string name="tip_rotation_switching_t_v2">在地圖畫面上您可點選羅盤的圖示，可循環切換地圖旋轉顯示方式。
-		\n\n選項有：
-		\n\t* \'不旋轉(正北朝上)\'：地圖不旋轉，正北方永遠向上
-		\n\t* \'行進方向\'：地圖會不斷對準您的車頭方向
-		\n\t* \'依羅盤\'：地圖會不斷對準裝置的電子羅盤指示
-	</string>
+	<string name="tip_rotation_switching_t_v2">"在地圖畫面上您可點選羅盤的圖示，可循環切換地圖旋轉顯示方式。
+\n\n選項有：
+\n\t* \'不旋轉(正北朝上)\'：地圖不旋轉，正北方永遠向上
+\n\t* \'行進方向朝上\'：地圖會不斷對準您的車頭方向
+\n\t* \'依羅盤\'：地圖會不斷對準裝置的電子羅盤指示 "</string>
 	<string name="binary_map_download_success">下載完成。
 		\n\t\n\t透過 \'選單\' -&gt; \'地圖圖層\' -&gt; \'地圖來源…\' -&gt; \'離線向量地圖\'啟動使用。
 	</string>
@@ -662,7 +645,7 @@
 	<string name="downloading_build">正在下載編譯…</string>
 	<string name="install_selected_build">您要安裝 OsmAnd - {0} 由{1} {2} MB ?</string>
 	<string name="loading_builds_failed">檢索 OsmAnd 編譯列表失敗</string>
-	<string name="loading_builds">載入 OsmAnd 編譯…</string>
+	<string name="loading_builds">正在載入 OsmAnd 編譯…</string>
 	<string name="select_build_to_install">選擇 OsmAnd 編譯安裝</string>
 	<string name="contribution_activity">安裝的版本</string>
 	<string name="gps_status_app_not_found">GPS 狀態工具未安裝，到 Play 商場找嗎？</string>
@@ -721,7 +704,7 @@
 	<string name="poi_context_menu_modify">修改興趣點</string>
 	<string name="poi_context_menu_delete">刪除興趣點</string>
 	<string name="rotate_map_compass_opt">依羅盤旋轉</string>
-	<string name="rotate_map_bearing_opt">行進方向</string>
+	<string name="rotate_map_bearing_opt">行進方向朝上</string>
 	<string name="rotate_map_none_opt">不旋轉(正北朝上)</string>
 	<string name="rotate_map_to_bearing_descr">選擇地圖畫面對準方式</string>
 	<string name="rotate_map_to_bearing">地圖方位</string>
@@ -732,14 +715,14 @@
 	<string name="no_fav_to_save">沒有我的最愛標點要儲存</string>
 	<string name="import_fav">匯入</string>
 	<string name="export_fav">匯出</string>
-	<string name="error_occurred_loading_gpx">載入 GPX 時發生錯誤</string>
+	<string name="error_occurred_loading_gpx">在載入 GPX 時發生錯誤</string>
 	<string name="send_report">傳送報告</string>
 	<string name="none_region_found">在 SD 卡上沒有該地區離線資料。由網路下載資料。</string>
 	<string name="poi_namefinder_query_empty">輸入查尋條件以查尋興趣點</string>
 	<string name="any_poi">任何</string>
 	<string name="layer_transport_route">交通路線</string>
-	<string name="thanks_yandex_traffic">感謝Yandex提供交通資訊。</string>
-	<string name="layer_yandex_traffic">Yandex交通資訊</string>
+	<string name="thanks_yandex_traffic">感謝 Yandex 提供的交通資訊。</string>
+	<string name="layer_yandex_traffic">Yandex 的交通資訊</string>
 	<string name="layer_route">導航路線</string>
 	<string name="layer_favorites">我的最愛</string>
 	<string name="layer_osm_bugs">OSM 錯誤(線上)</string>
@@ -854,7 +837,7 @@
 	<string name="error_io_error">存取發生錯誤</string>
 	
 	<string name="downloading">下載中…</string>
-	<string name="downloading_list_indexes">下載可以用的地區列表…</string>
+	<string name="downloading_list_indexes">正在下載可用的地區清單…</string>
 	<string name="list_index_files_was_not_loaded">無法由 osmand.net 取得地區列表。</string>
 	<string name="show_poi_on_map">在地圖上顯示</string>
 	<string name="fav_points_edited">我的最愛標點已被更改</string>
@@ -869,14 +852,14 @@
 	<string name="opening_changeset">正在開啟異動清單…</string>
 	<string name="closing_changeset">正在結束異動清單…</string>
 	<string name="commiting_node">送交節點…</string>
-	<string name="loading_poi_obj">載入興趣點中…</string>
+	<string name="loading_poi_obj">正在載入興趣點…</string>
 	<string name="auth_failed">授權失敗</string>
 	<string name="failed_op">失敗</string>
 	<string name="converting_names">本地/英文名稱轉換中…</string>
-	<string name="loading_streets_buildings">載入道路/建物中…</string>
-	<string name="loading_postcodes">載入郵遞區號中…</string>
-	<string name="loading_streets">載入街道中…</string>
-	<string name="loading_cities">載入縣市中…</string>
+	<string name="loading_streets_buildings">正在載入道路/建物…</string>
+	<string name="loading_postcodes">正在載入郵遞區號…</string>
+	<string name="loading_streets">正在載入街道…</string>
+	<string name="loading_cities">正在載入縣市…</string>
 	
 	<string name="poi">興趣點</string>
 	<string name="error_occurred_saving_gpx">儲存 GPX 時錯誤</string>
@@ -888,7 +871,7 @@
 	<string name="invalid_locations">座標無效！</string>
 	<string name="go_back_to_osmand">返回 OsmAnd 地圖</string>
 	<string name="close">關閉</string>
-	<string name="loading_data">載入資料中…</string>
+	<string name="loading_data">正在載入資料…</string>
 	<string name="reading_indexes">讀取裝置端資料中…</string>
 	<string name="previous_run_crashed">上次執行 OsmAnd 失敗！記錄檔為{0}。請回報這問題且附上該記錄檔。</string>
 	<string name="saving_gpx_tracks">儲存 GPX 軌跡到 SD 卡中…</string>
@@ -1069,7 +1052,7 @@
     <string name="cancel_route">排除路線</string>
     <string name="cancel_navigation">停止導航</string>
     <string name="clear_destination">清除目的地</string>
-    <string name="download_using_mobile_internet">現在 WiFi 並未連線。您想要使用目前的網際網路連線，繼續下載嗎？</string>
+    <string name="download_using_mobile_internet">現在 WiFi 並未連線。您想要使用目前的網路連線繼續下載嗎？</string>
     <string name="street_name">街道</string>
 	<string name="hno">門牌號碼</string>
     <string name="monitoring_settings">旅程記錄</string>
@@ -1205,8 +1188,8 @@
 	<string name="support_new_features_descr">捐贈後可在應用程式裡看到新的功能實現</string>
 	<string name="local_index_no_items_to_do">沒有項目在 %1$s</string>
 	<string name="incomplete_locale">未完成</string>
-	<string name="osmand_extended_description_4000_chars">" OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式且免費，有世界各地和高品質的OpenStreetMap（簡稱 OSM 開放街道地圖）資料。所有地圖資料都可以存儲在您裝置的儲存卡上離線使用。透過您裝置的 GPS，OsmAnd 為汽車、自行車和行人，提供了路線、視覺和語音導航。所有的主要功能，工作於線上和離線這兩方面（無需網路連線）。 一些主要功能： 導航 - 工作在線上(快速)或是離線（當您在國外無需國際漫遊費用） - 轉向建議(turn by turn)語音導航（真人語音和合成音） - 可選的車道導引、街道名稱顯示和預計抵達時間 - 支援您的行程安排上的中途點 - 每當您偏離了行駛路線，自動重新改道規劃 - 查尋地點按照地址，類型（例如：餐廳、飯店、加油站、博物館），或以地圖地理位置坐標查看 地圖顯示 - 在地圖上顯示您的位置和方向 - 可以選擇地圖正北朝上或您的或行進方向朝上 - 儲存您最重要的地方，作為我的最愛 - 顯示您周遭的POI（興趣點） - 能顯示專用的線上地圖圖磚 - 可以顯示衛星視圖（來自 Bing) - 可顯示使用自訂不同透明度疊加的多種地圖層如遊覽/導航 GPX 軌跡 - 可選擇顯示地名於英文、裝置端或拼音拼法 使用 OpenStreetMap 和維基百科的資料： - 世界性最好的合作專案所得的高品質資訊 - 全球性的地圖 OpenStreetMap，可用在每個國家或地區 - 維基百科觀光景點，非常適合觀光旅遊（免費版本不提供） - 直接從應用程式，無限制的免費下載（在免費版下載限制 16 個地圖檔） - 始終保持最新的地圖（每月至少更新一次） - 簡潔細致的離線向量地圖 - 可在完整地圖資料還是只有公路網之間選擇（例如：全日本有700 MB或200 MB的公路網） - 還支援線上或快取地圖圖磚 安全功能 - 可選擇自動日/夜檢視切換 - 可選擇速限顯示功能，如果您超速了它會提醒 - 可選擇取決於速度的地圖縮放 - 分享您所在的位置的功能，這樣您的朋友能找到您 自行車和步行 - 地圖包括步行，徒步旅行，自行車道，非常適合戶外活動 - 特殊的自行車和行人的路線和顯示模式 - 可選的大眾運輸工具 (公共汽車、 電車、火車）包括線路名稱 - 可選的旅程記錄裝置端 GPX 檔案或線上服務 - 可選的速度和高度顯示 - 顯示等高線和地形陰影（經由附加的外掛元件） 直接提供給 OpenStreetMap - 報告地圖錯誤 - 直接從該應用程式上傳 GPX 軌跡到 OSM - 增加興趣點並直接上傳給 OSM（如果離線或在之後上傳） - 可選旅途中記錄而且在背景模式（當裝置處於休眠模式下） OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告錯誤、改進翻譯或編寫新的功能，每個人都可以作出貢獻。透過所有的這些形成開發人員和使用者交互的作用下，讓該專案處於不斷改善的活絡狀態。專案的開發進度、編寫程式碼和測試新的功能，還是要依靠提供資金捐款資助。藉由您幫忙購買 OsmAnd +，或者在 osmand.net 上做一般捐贈，應用程式的道路會更平坦、更棒！但也有可能資助特定的新功能。 大概的地圖覆蓋區域和品質： -西歐： * * * -東歐： * * * -俄羅斯： * * * -北美： * * * -南美洲： * * -亞洲： * * -日本 &amp; 韓國： * * * -中東： * * -非洲： * * -南極洲： * 支援的國家的名單 (基本上世界範圍內!）： 阿富汗、阿爾巴尼亞、阿爾及利亞、安道爾、安哥拉、安圭拉、安地卡及巴布達、阿根廷、亞美尼亞、阿路巴、澳大利亞、奧地利、亞塞拜然、巴哈馬、巴林、孟加拉國、巴巴多斯、白俄羅斯、比利時、貝里斯、貝寧、百慕達、不丹、玻利維亞、博內爾、波士尼亞和黑塞哥維那、博茨瓦納、巴西、英屬維爾京群島、汶萊、保加利亞、布吉納法索、蒲隆地、柬埔寨、喀麥隆、加拿大、維德角、中非共和國、查德、智利、中國、哥倫比亞、科摩羅、剛果、哥斯大黎加、象牙海岸、克羅地亞、古巴、庫拉索、賽普勒斯、捷克共和國、丹麥、吉布地、多米尼克、多明尼加共和國、厄瓜多爾、埃及、薩爾瓦多、赤道幾內亞、厄立特里亞、愛沙尼亞、埃塞俄比亞、斐濟、芬蘭、法國、法屬圭亞那、法屬玻里尼西亞、加蓬、岡比亞、格魯吉亞、德國、加納、直布羅陀、希臘、格陵蘭島、格瑞那達、哥德洛普島、關島、瓜地馬拉、根西島、幾內亞、幾內亞比索、蓋亞納、海地、梵蒂岡、宏都拉斯、香港、匈牙利、冰島、印度、印尼、伊朗、伊拉克、愛爾蘭、曼城島、以色列、義大利、牙買加、日本、澤西島、約旦、哈薩克斯坦、肯雅、吉里巴斯、朝鮮和韓國、科威特、吉爾吉斯斯坦、老撾、拉脫維亞、黎巴嫩、賴索托、賴比瑞亞、利比亞、列支敦斯登、立陶宛、盧森堡、澳門、馬其頓、馬達加斯加、馬拉威、馬來西亞、馬爾地夫、馬里、馬爾他、馬丁尼克島、茅利塔尼亞、模里西斯、馬約特、墨西哥、密克羅尼西亞聯邦、摩爾多瓦、摩納哥、蒙古、黑山、蒙特塞拉特、摩洛哥、莫三比克、緬甸、納米比亞、瑙魯、尼泊爾、荷蘭、荷屬安地列斯群島、新赫里多尼亞、紐西蘭、尼加拉瓜、尼日爾、奈及利亞、挪威、阿曼、巴基斯坦、帕勞、巴勒斯坦領土、巴拿馬、巴布亞紐幾內亞、巴拉圭、秘魯、菲律賓、波蘭、葡萄牙、波多黎各、卡塔爾、羅馬尼亞、俄羅斯、盧安達、聖巴泰勒米、聖海倫娜、聖基茨和尼維斯、聖露西亞、聖馬丁島、聖匹島、聖文森及格瑞那丁、薩摩亞、聖馬利諾、沙烏地阿拉伯、塞內加爾、塞爾維亞、塞席爾、塞拉里昂、新加坡、斯洛伐克、斯洛維尼亞、索馬里、南非、格魯吉亞的南、南蘇丹、西班牙、斯里蘭卡、蘇丹、蘇利南、史瓦濟蘭、瑞典、瑞士、敘利亞、臺灣、塔吉克斯坦、坦尚尼亞、泰國、東帝汶、多哥、托克勞、湯加、特立尼達和多巴哥、突尼斯、土耳其、土庫曼斯坦、吐瓦魯、烏干達、烏克蘭、阿拉伯聯合大公國、英國、美國、烏拉圭、烏茲別克斯坦、瓦努阿圖、委內瑞拉、越南、瓦利斯群島和富圖納群島、西撒哈拉、葉門、尚比亞、辛巴威。 "</string>
-	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd + 是付費應用程式版本。經由您的購買來支援專案，資金用在開發新的功能和接收最新的更新。您可以在購買前，先安裝名稱為 OsmAnd 的免費版本去試用該應用程式。 一些主要功能： 導航 - 工作在線上(快速)或是離線（當您在國外無需國際漫遊費用） - 轉向建議(turn by turn)語音導航（真人語音和合成音） - 可選擇車道導引、街道名稱顯示和預計抵達時間 - 支援您的行程安排上的中途點 - 每當您偏離了行駛路線，自動重新改道規劃 - 查尋地點按照地址，類型（例如：餐廳、飯店、加油站、博物館），或以地圖地理位置坐標查看 地圖顯示 - 在地圖上顯示您的位置和方向 - 可以選擇地圖正北朝上或您的或行進方向朝上 - 儲存您最重要的地方，作為我的最愛 - 顯示您周遭的 POI（興趣點） - 能顯示專用的線上地圖圖磚 - 可以顯示衛星視圖（來自 Bing） - 可顯示使用自訂不同透明度疊加的多種地圖層如遊覽/導航 GPX 軌跡 - 可選擇顯示地名於英文、裝置端或拼音拼法 使用 OpenStreetMap 和維基百科的資料： - 世界性最好的合作專案所得的高品質資訊 - 全球性的地圖 OpenStreetMap，可用在每個國家或地區 - 維基百科觀光景點，非常適合觀光旅遊 - 直接從應用程式，無限制的免費下載 - 始終保持最新的地圖（每月至少更新一次） - 簡潔細致的離線向量地圖 - 可在完整地圖資料還是只有公路網之間選擇（例如：全日本有700 MB或200 MB的公路網） - 還支援線上或快取地圖圖磚 安全功能 - 可選的自動日/夜檢視切換 - 可選的速限顯示功能，如果您超速了它會提醒 - 可選的取決於速度的地圖縮放 - 分享您所在的位置的功能，這樣您的朋友能找到您 自行車和步行 - 地圖包括步行，徒步旅行，自行車道，非常適合戶外活動 - 特殊的自行車和行人的路線和顯示模式 - 可選的大眾運輸工具 (公共汽車、 電車、火車）包括線路名稱 - 可選擇旅程記錄到裝置端 GPX 檔案或線上服務 - 可選的速度和高度顯示 - 顯示等高線和地形陰影（經由附加的外掛元件） 直接提供給 OpenStreetMap - 報告地圖錯誤 - 直接從該應用程式上傳 GPX 軌跡到 OSM - 增加興趣點並直接上傳給 OSM （如果離線或在之後上傳） - 可選旅途中記錄而且在背景模式（當裝置處於休眠模式下） OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告錯誤、改進翻譯或編寫新的功能，每個人都可以作出貢獻。透過所有的這些形成開發人員和使用者交互的作用下，讓該專案處於不斷改善的活絡狀態。專案的開發進度、編寫程式碼和測試新的功能，還是要依靠提供資金捐款資助。藉由您幫忙購買 OsmAnd +，或者在 osmand.net 上做一般捐贈，應用程式的道路會更平坦、更棒！但也有可能資助特定的新功能。 大概的地圖覆蓋區域和品質： -西歐： * * * -東歐： * * * -俄羅斯： * * * -北美： * * * -南美洲： * * -亞洲： * * -日本 &amp; 韓國： * * * -中東： * * -非洲： * * -南極洲： * 支援的國家的名單 (基本上世界範圍內!）： 阿富汗、阿爾巴尼亞、阿爾及利亞、安道爾、安哥拉、安圭拉、安地卡及巴布達、阿根廷、亞美尼亞、阿路巴、澳大利亞、奧地利、亞塞拜然、巴哈馬、巴林、孟加拉國、巴巴多斯、白俄羅斯、比利時、貝里斯、貝寧、百慕達、不丹、玻利維亞、博內爾、波士尼亞和黑塞哥維那、博茨瓦納、巴西、英屬維爾京群島、汶萊、保加利亞、布吉納法索、蒲隆地、柬埔寨、喀麥隆、加拿大、維德角、中非共和國、查德、智利、中國、哥倫比亞、科摩羅、剛果、哥斯大黎加、象牙海岸、克羅地亞、古巴、庫拉索、賽普勒斯、捷克共和國、丹麥、吉布地、多米尼克、多明尼加共和國、厄瓜多爾、埃及、薩爾瓦多、赤道幾內亞、厄立特里亞、愛沙尼亞、埃塞俄比亞、斐濟、芬蘭、法國、法屬圭亞那、法屬玻里尼西亞、加蓬、岡比亞、格魯吉亞、德國、加納、直布羅陀、希臘、格陵蘭島、格瑞那達、哥德洛普島、關島、瓜地馬拉、根西島、幾內亞、幾內亞比索、蓋亞納、海地、梵蒂岡、宏都拉斯、香港、匈牙利、冰島、印度、印尼、伊朗、伊拉克、愛爾蘭、曼城島、以色列、義大利、牙買加、日本、澤西島、約旦、哈薩克斯坦、肯雅、吉里巴斯、朝鮮和韓國、科威特、吉爾吉斯斯坦、老撾、拉脫維亞、黎巴嫩、賴索托、賴比瑞亞、利比亞、列支敦斯登、立陶宛、盧森堡、澳門、馬其頓、馬達加斯加、馬拉威、馬來西亞、馬爾地夫、馬里、馬爾他、馬丁尼克島、茅利塔尼亞、模里西斯、馬約特、墨西哥、密克羅尼西亞聯邦、摩爾多瓦、摩納哥、蒙古、黑山、蒙特塞拉特、摩洛哥、莫三比克、緬甸、納米比亞、瑙魯、尼泊爾、荷蘭、荷屬安地列斯群島、新赫里多尼亞、紐西蘭、尼加拉瓜、尼日爾、奈及利亞、挪威、阿曼、巴基斯坦、帕勞、巴勒斯坦領土、巴拿馬、巴布亞紐幾內亞、巴拉圭、秘魯、菲律賓、波蘭、葡萄牙、波多黎各、卡塔爾、羅馬尼亞、俄羅斯、盧安達、聖巴泰勒米、聖海倫娜、聖基茨和尼維斯、聖露西亞、聖馬丁島、聖匹島、聖文森及格瑞那丁、薩摩亞、聖馬利諾、沙烏地阿拉伯、塞內加爾、塞爾維亞、塞席爾、塞拉里昂、新加坡、斯洛伐克、斯洛維尼亞、索馬里、南非、格魯吉亞的南、南蘇丹、西班牙、斯里蘭卡、蘇丹、蘇利南、史瓦濟蘭、瑞典、瑞士、敘利亞、臺灣、塔吉克斯坦、坦尚尼亞、泰國、東帝汶、多哥、托克勞、湯加、特立尼達和多巴哥、突尼斯、土耳其、土庫曼斯坦、吐瓦魯、烏干達、烏克蘭、阿拉伯聯合大公國、英國、美國、烏拉圭、烏茲別克斯坦、瓦努阿圖、委內瑞拉、越南、瓦利斯群島和富圖納群島、西撒哈拉、葉門、尚比亞、辛巴威。 "</string>
+	<string name="osmand_extended_description_4000_chars">" OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式且免費，有世界各地和高品質的OpenStreetMap（簡稱 OSM 開放街道地圖）資料。所有地圖資料都可以存儲在您裝置的儲存卡上離線使用。透過您裝置的 GPS，OsmAnd 為汽車、自行車和行人，提供了路線、視覺和語音導航。所有的主要功能，工作於線上和離線這兩方面（無需網路連線）。 一些主要功能： 導航 - 工作在線上(快速)或是離線（當您在國外無需國際漫遊費用） - 轉向建議(turn by turn)語音導航（真人語音和合成音） - 可選的車道導引、街道名稱顯示和預計抵達時間 - 支援您的行程安排上的中途點 - 每當您偏離了行駛路線，自動重新改道規劃 - 查尋地點按照地址，類型（例如：餐廳、飯店、加油站、博物館），或以地圖地理位置坐標查看 地圖顯示 - 在地圖上顯示您的位置和方向 - 可以選擇地圖正北朝上或您的或行進方向朝上 - 儲存您最重要的地方，作為我的最愛 - 顯示您周遭的POI（興趣點） - 能顯示專用的線上地圖圖磚 - 可以顯示衛星視圖（來自 Bing) - 可顯示使用自訂不同透明度疊加的多種地圖層如遊覽/導航 GPX 軌跡 - 可選擇顯示地名於英文、裝置端或拼音拼法 使用 OpenStreetMap 和維基百科的資料： - 世界性最好的合作專案所得的高品質資訊 - 全球性的地圖 OpenStreetMap，可用在每個國家或地區 - 維基百科觀光景點，非常適合觀光旅遊（免費版本不提供） - 直接從應用程式，無限制的免費下載（在免費版下載限制 16 個地圖檔） - 始終保持最新的地圖（每月至少更新一次） - 簡潔細致的離線向量地圖 - 可在完整地圖資料還是只有公路網之間選擇（例如：全日本有700 MB或200 MB的公路網） - 還支援線上或快取地圖圖磚 安全功能 - 自動日/夜檢視切換選項 - 速限顯示功能選項，如果您超速了它會提醒 - 可選擇取決於速度的地圖縮放 - 分享您所在的位置的功能，這樣您的朋友能找到您 自行車和步行 - 地圖包括步行，徒步旅行，自行車道，非常適合戶外活動 - 特殊的自行車和行人的路線和顯示模式 - 大眾運輸工具選項 (公共汽車、 電車、火車）包括線路名稱 - 可選的旅程記錄裝置端 GPX 檔案或線上服務 - 速度和高度顯示選項 - 顯示等高線和地形陰影（經由附加的外掛元件） 直接提供給 OpenStreetMap - 報告地圖錯誤 - 直接從該應用程式上傳 GPX 軌跡到 OSM - 增加興趣點並直接上傳給 OSM（如果離線或在之後上傳） - 可選旅途中記錄而且在背景模式（當裝置處於休眠模式下） OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告錯誤、改進翻譯或編寫新的功能，每個人都可以作出貢獻。透過所有的這些形成開發人員和使用者交互的作用下，讓該專案處於不斷改善的活絡狀態。專案的開發進度、編寫程式碼和測試新的功能，還是要依靠提供資金捐款資助。藉由您幫忙購買 OsmAnd +，或者在 osmand.net 上做一般捐贈，應用程式的道路會更平坦、更棒！但也有可能資助特定的新功能。 大概的地圖覆蓋區域和品質： -西歐： * * * -東歐： * * * -俄羅斯： * * * -北美： * * * -南美洲： * * -亞洲： * * -日本 &amp; 韓國： * * * -中東： * * -非洲： * * -南極洲： * 支援的國家的名單 (基本上世界範圍內!）： 阿富汗、阿爾巴尼亞、阿爾及利亞、安道爾、安哥拉、安圭拉、安地卡及巴布達、阿根廷、亞美尼亞、阿路巴、澳大利亞、奧地利、亞塞拜然、巴哈馬、巴林、孟加拉國、巴巴多斯、白俄羅斯、比利時、貝里斯、貝寧、百慕達、不丹、玻利維亞、博內爾、波士尼亞和黑塞哥維那、博茨瓦納、巴西、英屬維爾京群島、汶萊、保加利亞、布吉納法索、蒲隆地、柬埔寨、喀麥隆、加拿大、維德角、中非共和國、查德、智利、中國、哥倫比亞、科摩羅、剛果、哥斯大黎加、象牙海岸、克羅地亞、古巴、庫拉索、賽普勒斯、捷克共和國、丹麥、吉布地、多米尼克、多明尼加共和國、厄瓜多爾、埃及、薩爾瓦多、赤道幾內亞、厄立特里亞、愛沙尼亞、埃塞俄比亞、斐濟、芬蘭、法國、法屬圭亞那、法屬玻里尼西亞、加蓬、岡比亞、格魯吉亞、德國、加納、直布羅陀、希臘、格陵蘭島、格瑞那達、哥德洛普島、關島、瓜地馬拉、根西島、幾內亞、幾內亞比索、蓋亞納、海地、梵蒂岡、宏都拉斯、香港、匈牙利、冰島、印度、印尼、伊朗、伊拉克、愛爾蘭、曼城島、以色列、義大利、牙買加、日本、澤西島、約旦、哈薩克斯坦、肯雅、吉里巴斯、朝鮮和韓國、科威特、吉爾吉斯斯坦、老撾、拉脫維亞、黎巴嫩、賴索托、賴比瑞亞、利比亞、列支敦斯登、立陶宛、盧森堡、澳門、馬其頓、馬達加斯加、馬拉威、馬來西亞、馬爾地夫、馬里、馬爾他、馬丁尼克島、茅利塔尼亞、模里西斯、馬約特、墨西哥、密克羅尼西亞聯邦、摩爾多瓦、摩納哥、蒙古、黑山、蒙特塞拉特、摩洛哥、莫三比克、緬甸、納米比亞、瑙魯、尼泊爾、荷蘭、荷屬安地列斯群島、新赫里多尼亞、紐西蘭、尼加拉瓜、尼日爾、奈及利亞、挪威、阿曼、巴基斯坦、帕勞、巴勒斯坦領土、巴拿馬、巴布亞紐幾內亞、巴拉圭、秘魯、菲律賓、波蘭、葡萄牙、波多黎各、卡塔爾、羅馬尼亞、俄羅斯、盧安達、聖巴泰勒米、聖海倫娜、聖基茨和尼維斯、聖露西亞、聖馬丁島、聖匹島、聖文森及格瑞那丁、薩摩亞、聖馬利諾、沙烏地阿拉伯、塞內加爾、塞爾維亞、塞席爾、塞拉里昂、新加坡、斯洛伐克、斯洛維尼亞、索馬里、南非、格魯吉亞的南、南蘇丹、西班牙、斯里蘭卡、蘇丹、蘇利南、史瓦濟蘭、瑞典、瑞士、敘利亞、臺灣、塔吉克斯坦、坦尚尼亞、泰國、東帝汶、多哥、托克勞、湯加、特立尼達和多巴哥、突尼斯、土耳其、土庫曼斯坦、吐瓦魯、烏干達、烏克蘭、阿拉伯聯合大公國、英國、美國、烏拉圭、烏茲別克斯坦、瓦努阿圖、委內瑞拉、越南、瓦利斯群島和富圖納群島、西撒哈拉、葉門、尚比亞、辛巴威。 "</string>
+	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd + 是付費應用程式版本。經由您的購買來支援專案，資金用在開發新的功能和接收最新的更新。您可以在購買前，先安裝名稱為 OsmAnd 的免費版本去試用該應用程式。 一些主要功能： 導航 - 工作在線上(快速)或是離線（當您在國外無需國際漫遊費用） - 轉向建議(turn by turn)語音導航（真人語音和合成音） - 可選擇車道導引、街道名稱顯示和預計抵達時間 - 支援您的行程安排上的中途點 - 每當您偏離了行駛路線，自動重新改道規劃 - 查尋地點按照地址，類型（例如：餐廳、飯店、加油站、博物館），或以地圖地理位置坐標查看 地圖顯示 - 在地圖上顯示您的位置和方向 - 可以選擇地圖正北朝上或您的或行進方向朝上 - 儲存您最重要的地方，作為我的最愛 - 顯示您周遭的 POI（興趣點） - 能顯示專用的線上地圖圖磚 - 可以顯示衛星視圖（來自 Bing） - 可顯示使用自訂不同透明度疊加的多種地圖層如遊覽/導航 GPX 軌跡 - 可選擇顯示地名於英文、裝置端或拼音拼法 使用 OpenStreetMap 和維基百科的資料： - 世界性最好的合作專案所得的高品質資訊 - 全球性的地圖 OpenStreetMap，可用在每個國家或地區 - 維基百科觀光景點，非常適合觀光旅遊 - 直接從應用程式，無限制的免費下載 - 始終保持最新的地圖（每月至少更新一次） - 簡潔細致的離線向量地圖 - 可在完整地圖資料還是只有公路網之間選擇（例如：全日本有700 MB或200 MB的公路網） - 還支援線上或快取地圖圖磚 安全功能 - 自動日/夜檢視切換選項 - 速限顯示功能選項，如果您超速了它會提醒 - 取決於速度的地圖縮放選項 - 分享您所在的位置的功能，這樣您的朋友能找到您 自行車和步行 - 地圖包括步行，徒步旅行，自行車道，非常適合戶外活動 - 特殊的自行車和行人的路線和顯示模式 - 大眾運輸工具選項 (公共汽車、 電車、火車）包括線路名稱 - 可選擇旅程記錄到裝置端 GPX 檔案或線上服務 - 可選的速度和高度顯示 - 顯示等高線和地形陰影（經由附加的外掛元件） 直接提供給 OpenStreetMap - 報告地圖錯誤 - 直接從該應用程式上傳 GPX 軌跡到 OSM - 增加興趣點並直接上傳給 OSM （如果離線或在之後上傳） - 可選旅途中記錄而且在背景模式（當裝置處於休眠模式下） OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告錯誤、改進翻譯或編寫新的功能，每個人都可以作出貢獻。透過所有的這些形成開發人員和使用者交互的作用下，讓該專案處於不斷改善的活絡狀態。專案的開發進度、編寫程式碼和測試新的功能，還是要依靠提供資金捐款資助。藉由您幫忙購買 OsmAnd +，或者在 osmand.net 上做一般捐贈，應用程式的道路會更平坦、更棒！但也有可能資助特定的新功能。 大概的地圖覆蓋區域和品質： -西歐： * * * -東歐： * * * -俄羅斯： * * * -北美： * * * -南美洲： * * -亞洲： * * -日本 &amp; 韓國： * * * -中東： * * -非洲： * * -南極洲： * 支援的國家的名單 (基本上世界範圍內!）： 阿富汗、阿爾巴尼亞、阿爾及利亞、安道爾、安哥拉、安圭拉、安地卡及巴布達、阿根廷、亞美尼亞、阿路巴、澳大利亞、奧地利、亞塞拜然、巴哈馬、巴林、孟加拉國、巴巴多斯、白俄羅斯、比利時、貝里斯、貝寧、百慕達、不丹、玻利維亞、博內爾、波士尼亞和黑塞哥維那、博茨瓦納、巴西、英屬維爾京群島、汶萊、保加利亞、布吉納法索、蒲隆地、柬埔寨、喀麥隆、加拿大、維德角、中非共和國、查德、智利、中國、哥倫比亞、科摩羅、剛果、哥斯大黎加、象牙海岸、克羅地亞、古巴、庫拉索、賽普勒斯、捷克共和國、丹麥、吉布地、多米尼克、多明尼加共和國、厄瓜多爾、埃及、薩爾瓦多、赤道幾內亞、厄立特里亞、愛沙尼亞、埃塞俄比亞、斐濟、芬蘭、法國、法屬圭亞那、法屬玻里尼西亞、加蓬、岡比亞、格魯吉亞、德國、加納、直布羅陀、希臘、格陵蘭島、格瑞那達、哥德洛普島、關島、瓜地馬拉、根西島、幾內亞、幾內亞比索、蓋亞納、海地、梵蒂岡、宏都拉斯、香港、匈牙利、冰島、印度、印尼、伊朗、伊拉克、愛爾蘭、曼城島、以色列、義大利、牙買加、日本、澤西島、約旦、哈薩克斯坦、肯雅、吉里巴斯、朝鮮和韓國、科威特、吉爾吉斯斯坦、老撾、拉脫維亞、黎巴嫩、賴索托、賴比瑞亞、利比亞、列支敦斯登、立陶宛、盧森堡、澳門、馬其頓、馬達加斯加、馬拉威、馬來西亞、馬爾地夫、馬里、馬爾他、馬丁尼克島、茅利塔尼亞、模里西斯、馬約特、墨西哥、密克羅尼西亞聯邦、摩爾多瓦、摩納哥、蒙古、黑山、蒙特塞拉特、摩洛哥、莫三比克、緬甸、納米比亞、瑙魯、尼泊爾、荷蘭、荷屬安地列斯群島、新赫里多尼亞、紐西蘭、尼加拉瓜、尼日爾、奈及利亞、挪威、阿曼、巴基斯坦、帕勞、巴勒斯坦領土、巴拿馬、巴布亞紐幾內亞、巴拉圭、秘魯、菲律賓、波蘭、葡萄牙、波多黎各、卡塔爾、羅馬尼亞、俄羅斯、盧安達、聖巴泰勒米、聖海倫娜、聖基茨和尼維斯、聖露西亞、聖馬丁島、聖匹島、聖文森及格瑞那丁、薩摩亞、聖馬利諾、沙烏地阿拉伯、塞內加爾、塞爾維亞、塞席爾、塞拉里昂、新加坡、斯洛伐克、斯洛維尼亞、索馬里、南非、格魯吉亞的南、南蘇丹、西班牙、斯里蘭卡、蘇丹、蘇利南、史瓦濟蘭、瑞典、瑞士、敘利亞、臺灣、塔吉克斯坦、坦尚尼亞、泰國、東帝汶、多哥、托克勞、湯加、特立尼達和多巴哥、突尼斯、土耳其、土庫曼斯坦、吐瓦魯、烏干達、烏克蘭、阿拉伯聯合大公國、英國、美國、烏拉圭、烏茲別克斯坦、瓦努阿圖、委內瑞拉、越南、瓦利斯群島和富圖納群島、西撒哈拉、葉門、尚比亞、辛巴威。 "</string>
 	<string name="delete_point">刪除標點</string>
     <string name="plugin_distance_point">標點</string>
     <string name="distance_measurement_clear_route">清除所有的標點</string>
@@ -1703,7 +1686,7 @@
     <string name="gpx_selection_points">%1$s \n個標點</string>
     <string name="gpx_selection_track">%1$s \n軌跡 %2$s</string>
     <string name="gpx_available_current_track">正在錄制的軌跡</string>
-    <string name="loading_smth">載入 %1$s …</string>
+    <string name="loading_smth">正在載入 %1$s …</string>
     <string name="map_widget_plain_time">目前時間</string>
     <string name="selected_gpx_info_show">\n\n長按在地圖上查看</string>
     <string name="delay_navigation_start">自動啟動轉向建議指引</string>
@@ -1735,7 +1718,7 @@
     <string name="osmo_start_service">OsMo 服務</string>
     <string name="osmo_gpx_track_downloaded">OsMo 軌跡 %1$s 已下載。</string>
     <string name="osmo_group_by_invite">輸入邀請</string>
-    <string name="osmo_group_information_desc">" - 所有建立的群組都是公開的！如果您希望匿名，透過追蹤 IDS 直接連接裝置。\n - 群組可以註冊多達16人。\n - 假使閒置或僅一人於二個星期裡活動，那群組將會被刪除。\n - 因為只能靠邀請，您可以限制群組的進入，但要控管群組您需要去管理主控台。\n - 如果您需要建立一個群組，但是具有其它條件，請連絡 http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - 所有建立的群組都是公開的！如果您希望匿名，可透過追蹤的 IDS 直接連接裝置。\n - 群組可以註冊多達16人。\n - 假使閒置或僅一人於二個星期裡活動，那群組將會被刪除。\n - 因為只能靠邀請，您可以限制群組的進入，但要控管群組您需要去管理主控台。\n - 如果您需要建立一個群組，但是具有其它條件，請連絡 http://osmo.mobi"</string>
     <string name="osmo_group_information">請在建立群組之前，仔細閱讀！</string>
     <string name="osmo_not_signed_in">OsMo 登入失敗</string>
     <string name="osmo_auth_error_short">授權失敗</string>
