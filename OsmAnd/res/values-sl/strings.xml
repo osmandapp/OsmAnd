@@ -1937,4 +1937,6 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="traffic_warning_speed_camera">Hitrostna kamera</string>
     <string name="traffic_warning_calming">Ležeči policaj</string>
     <string name="local_index_description">Kliknite katerikoli obstoječi element za ogled podrobnosti, pritisnite in držite za izklop ali izbris. Trenutni podatki na napravi (%1$s prosto):</string>
-	</resources>
+	<string name="text_size_descr">Nastavite velikost napisov na zemljevidu.</string>
+    <string name="text_size">Velikost napisov</string>
+    </resources>
