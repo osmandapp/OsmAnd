@@ -9,30 +9,24 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import android.content.ActivityNotFoundException;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.MenuInflater;
-import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.activities.SettingsGeneralActivity.MoveFilesToDifferentDirectory;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.os.AsyncTask.Status;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -99,8 +93,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		super.onCreate(savedInstanceState);
 
 		setHasOptionsMenu(true);
-
-		DownloadActivity.downloadListIndexThread.setUiFragment(this);
 
 		settings = getMyApplication().getSettings();
 
@@ -257,7 +249,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 				if (!getDownloadActivity().getEntriesToDownload().containsKey(es)) {
 					selected++;
 					getDownloadActivity().getEntriesToDownload().put(es, es.createDownloadEntry(getMyApplication(),
-							getDownloadActivity().getType(), new ArrayList<DownloadEntry>(1)));
+							getDownloadActivity().getDownloadType(), new ArrayList<DownloadEntry>(1)));
 				}
 			}
 		}
@@ -282,7 +274,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 			return true;
 		}
 		
-		List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), getDownloadActivity().getType(), new ArrayList<DownloadEntry>());
+		List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), getDownloadActivity().getDownloadType(), new ArrayList<DownloadEntry>());
 		if (download.size() > 0) {
 			// if(!fileToUnzip.exists()){
 			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
@@ -338,7 +330,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	    	EditText filterText = (EditText) getView().findViewById(R.id.search_box);
 	    	filterText.removeTextChangedListener(textWatcher);
 	    }
-		DownloadActivity.downloadListIndexThread.setUiFragment(null);
+		DownloadActivity.downloadListIndexThread.setUiActivity(null);
 	}
 
 	public List<String> toString(List<DownloadActivityType> t) {
@@ -358,5 +350,40 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 	public void updateProgress(boolean b) {
 		getDownloadActivity().updateProgress(b);
+	}
+
+	public void categorizationFinished(List<IndexItem> filtered, List<IndexItemCategory> cats) {
+		Map<String, String> indexActivatedFileNames = getDownloadActivity().getIndexActivatedFileNames();
+		Map<String, String> indexFileNames = getDownloadActivity().getIndexFileNames();
+		DownloadActivityType type = getDownloadActivity().getDownloadType();
+		DownloadIndexAdapter a = ((DownloadIndexAdapter) getExpandableListAdapter());
+		if (a == null){
+			return;
+		}
+		a.setLoadedFiles(indexActivatedFileNames, indexFileNames);
+		a.setIndexFiles(filtered, cats);
+
+		a.notifyDataSetChanged();
+		a.getFilter().filter(getFilterText());
+		if ((type == DownloadActivityType.SRTM_COUNTRY_FILE || type == DownloadActivityType.HILLSHADE_FILE)
+				&& OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) instanceof SRTMPlugin
+				&& !OsmandPlugin.getEnabledPlugin(SRTMPlugin.class).isPaid()) {
+			AlertDialog.Builder msg = new AlertDialog.Builder(getDownloadActivity());
+			msg.setTitle(R.string.srtm_paid_version_title);
+			msg.setMessage(R.string.srtm_paid_version_msg);
+			msg.setNegativeButton(R.string.button_upgrade_osmandplus, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:net.osmand.srtmPlugin.paid"));
+					try {
+						getDownloadActivity().startActivity(intent);
+					} catch (ActivityNotFoundException e) {
+					}
+				}
+			});
+			msg.setPositiveButton(R.string.default_buttons_ok, null);
+			msg.show();
+		}
+
 	}
 }

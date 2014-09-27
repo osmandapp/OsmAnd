@@ -12,7 +12,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.*;
-import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Window;
 import net.osmand.IndexConstants;
@@ -26,6 +25,7 @@ import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -51,8 +51,8 @@ public class DownloadActivity extends SherlockFragmentActivity {
 	private TextView progressMessage;
 	private TextView progressPercent;
 	private ImageView cancel;
-	private UpdatesIndexFragment updatesIndexFragment;
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<LocalIndexInfo>();
+	List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 
 
 	public static final String FILTER_KEY = "filter";
@@ -94,6 +94,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		} else {
 			downloadListIndexThread.runReloadIndexFiles();
 		}
+		downloadListIndexThread.setUiActivity(this);
 
 		settings = ((OsmandApplication)getApplication()).getSettings();
 
@@ -192,8 +193,8 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
-	public void setUpdatesIndexFragment(UpdatesIndexFragment fragment){
-		this.updatesIndexFragment = fragment;
+	public Map<String, String> getIndexActivatedFileNames() {
+		return downloadListIndexThread != null ? downloadListIndexThread.getIndexActivatedFileNames() : null;
 	}
 
 	@Override
@@ -223,7 +224,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		return localIndexInfos;
 	}
 
-	public DownloadActivityType getType() { return type;}
+	public DownloadActivityType getDownloadType() { return type;}
 
 	public void setType(DownloadActivityType type) { this.type = type;}
 
@@ -394,10 +395,52 @@ public class DownloadActivity extends SherlockFragmentActivity {
 	}
 
 	public void updateDownloadList(List<IndexItem> list){
-		if(updatesIndexFragment == null){
-			return;
+		for(WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if(f instanceof UpdatesIndexFragment) {
+				if(!f.isDetached()) {
+					((UpdatesIndexFragment) f).updateItemsList(list);
+				}
+			}
 		}
-		updatesIndexFragment.updateItemsList(list);
+	}
+
+	public void categorizationFinished(List<IndexItem> filtered, List<IndexItemCategory> cats){
+		for(WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if(f instanceof DownloadIndexFragment) {
+				if(!f.isDetached()) {
+					((DownloadIndexFragment) f).categorizationFinished(filtered, cats);
+				}
+			}
+		}
+	}
+
+	public void downloadListUpdated(){
+		for(WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if(f instanceof DownloadIndexFragment) {
+				if(!f.isDetached()) {
+					((DownloadIndexAdapter)((DownloadIndexFragment) f).getExpandableListAdapter()).notifyDataSetInvalidated();
+				}
+			}
+		}
+	}
+
+	public void downloadedIndexes(){
+		for(WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if(f instanceof DownloadIndexFragment) {
+				if(!f.isDetached()) {
+					DownloadIndexAdapter adapter = ((DownloadIndexAdapter)((DownloadIndexFragment) f).getExpandableListAdapter());
+					if (adapter != null) {
+						adapter.setLoadedFiles(getIndexActivatedFileNames(), getIndexFileNames());
+
+					}
+				}
+			}
+		}
+
 	}
 
 	public void updateDownloadButton(boolean scroll) {
@@ -427,7 +470,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 				boolean excessLimit = left < 0;
 				if (left < 0)
 					left = 0;
-				if (DownloadActivityType.isCountedInDownloads(getType())) {
+				if (DownloadActivityType.isCountedInDownloads(getDownloadType())) {
 					text += " (" + (excessLimit ? "! " : "") + getString(R.string.files_limit, left).toLowerCase() + ")";
 				}
 			}
@@ -455,6 +498,11 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
 	}
 
+	@Override
+	public void onAttachFragment(Fragment fragment) {
+		fragList.add(new WeakReference<Fragment>(fragment));
+	}
+
 	private void copyFilesForAndroid19(final String newLoc) {
 		SettingsGeneralActivity.MoveFilesToDifferentDirectory task =
 				new SettingsGeneralActivity.MoveFilesToDifferentDirectory(this,
@@ -471,6 +519,10 @@ public class DownloadActivity extends SherlockFragmentActivity {
 					};
 				};
 		task.execute();
+	}
+
+	public Map<String,String> getIndexFileNames() {
+		return downloadListIndexThread != null ? downloadListIndexThread.getIndexFileNames() : null;
 	}
 
 }

@@ -1,6 +1,7 @@
 package net.osmand.plus.download;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,6 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -48,7 +48,6 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 		});
 		setListAdapter(listAdapter);
 		setHasOptionsMenu(true);
-		getDownloadActivity().setUpdatesIndexFragment(this);
 	}
 
 	@Override
@@ -66,7 +65,25 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
+		final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
+		onItemSelected(ch, position);
+	}
+
+	private void onItemSelected(CheckBox ch, int position){
+		final IndexItem e = (IndexItem) getListAdapter().getItem(position);
+		if (ch.isChecked()) {
+			ch.setChecked(!ch.isChecked());
+			getDownloadActivity().getEntriesToDownload().remove(e);
+			getDownloadActivity().updateDownloadButton(true);
+			return;
+		}
+
+		List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), getDownloadActivity().getDownloadType(), new ArrayList<DownloadEntry>());
+		if (download.size() > 0) {
+			getDownloadActivity().getEntriesToDownload().put(e, download);
+			getDownloadActivity().updateDownloadButton(true);
+			ch.setChecked(!ch.isChecked());
+		}
 	}
 
 	public DownloadActivity getDownloadActivity() {
@@ -124,7 +141,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 			if (!getDownloadActivity().getEntriesToDownload().containsKey(es)) {
 				selected++;
 				getDownloadActivity().getEntriesToDownload().put(es, es.createDownloadEntry(getMyApplication(),
-						getDownloadActivity().getType(), new ArrayList<DownloadEntry>(1)));
+						getDownloadActivity().getDownloadType(), new ArrayList<DownloadEntry>(1)));
 
 			}
 		}
@@ -179,7 +196,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 			TextView name = (TextView) v.findViewById(R.id.download_item);
 			TextView description = (TextView) v.findViewById(R.id.download_descr);
 			IndexItem e = items.get(position);
-			String eName = e.getVisibleName(getMyApplication(), osmandRegions);
+			String eName = e.getVisibleDescription(getMyApplication()) + "\n" + e.getVisibleName(getMyApplication(), osmandRegions);
 			name.setText(eName.trim()); //$NON-NLS-1$
 			String d = e.getDate(format) + "\n" + e.getSizeDescription(getMyApplication());
 			description.setText(d);
@@ -190,23 +207,36 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 				@Override
 				public void onClick(View v) {
 					ch.setChecked(!ch.isChecked());
-					final IndexItem e = (IndexItem) getListAdapter().getItem(position);
-					if (ch.isChecked()) {
-						ch.setChecked(!ch.isChecked());
-						getDownloadActivity().getEntriesToDownload().remove(e);
-						getDownloadActivity().updateDownloadButton(true);
-						return;
-					}
-
-					List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), getDownloadActivity().getType(), new ArrayList<DownloadEntry>());
-					if (download.size() > 0) {
-						getDownloadActivity().getEntriesToDownload().put(e, download);
-						getDownloadActivity().updateDownloadButton(true);
-						ch.setChecked(!ch.isChecked());
-					}
-
+					onItemSelected(ch, position);
 				}
 			});
+
+			if (e.getDate(format) != null) {
+				Map<String, String> indexActivatedFileNames = getDownloadActivity().getIndexActivatedFileNames();
+				Map<String, String> indexFileNames = getDownloadActivity().getIndexFileNames();
+
+				if (indexActivatedFileNames != null && indexFileNames != null){
+					String sfName = e.getTargetFileName();
+					if (e.getDate(format).equals(indexActivatedFileNames.get(sfName))) {
+						name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
+								+ indexActivatedFileNames.get(sfName));
+						name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+					} else if (e.getDate(format).equals(indexFileNames.get(sfName))) {
+						name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
+								+ indexFileNames.get(sfName));
+						name.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+					} else if (indexActivatedFileNames.containsKey(sfName)) {
+						name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
+								+ indexActivatedFileNames.get(sfName));
+						name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+					} else {
+						name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
+								+ indexFileNames.get(sfName));
+						name.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+					}
+				}
+			}
+
 
 			return v;
 		}
