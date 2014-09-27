@@ -62,7 +62,9 @@ public class SherpafyStageFragment extends SherlockFragment {
 		if(tour != null && tour.getStageInformation().size() > k) {
 			stage = tour.getStageInformation().get(k);
 		}
-		getSherlockActivity().getSupportActionBar().setTitle(getString(R.string.tab_stage) + " " + (k+1));
+		if (stage != null){
+			getSherlockActivity().getSupportActionBar().setTitle(stage.getName());
+		}
 	}
 	
 

@@ -59,9 +59,9 @@ public class SherpafyFavoritesListFragment extends SherlockListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if(tour != null) {
-			getSherlockActivity().getSupportActionBar().setTitle(tour.getName());
-		}
+//		if(tour != null) {
+//			getSherlockActivity().getSupportActionBar().setTitle(tour.getName());
+//		}
 	}
 
 	@Override
