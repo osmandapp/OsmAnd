@@ -248,18 +248,18 @@ public class MapUtils {
 		return (rotateSin * dTileX + rotateCos * dTileY) * tileSize ;
 	}
 	
-	public static double getLatitudeFromTile(float zoom, double y){
+	public static double getLatitudeFromTile(float zoom, double y) {
 		int sign = y < 0 ? -1 : 1;
-		return Math.atan(sign*Math.sinh(Math.PI * (1 - 2 * y / getPowZoom(zoom)))) * 180d / Math.PI;
+		return Math.atan(sign * Math.sinh(Math.PI * (1 - 2 * y / getPowZoom(zoom)))) * 180d / Math.PI;
 	}
 	
 	
-	public static int getPixelShiftX(float zoom, double long1, double long2, int tileSize){
+	public static int getPixelShiftX(float zoom, double long1, double long2, double tileSize){
 		return (int) ((getTileNumberX(zoom, long1) - getTileNumberX(zoom, long2)) * tileSize);
 	}
 	
 	
-	public static int getPixelShiftY(float zoom, double lat1, double lat2, int tileSize){
+	public static int getPixelShiftY(float zoom, double lat1, double lat2, double tileSize){
 		return (int) ((getTileNumberY(zoom, lat1) - getTileNumberY(zoom, lat2)) * tileSize);
 	}
 	
