@@ -134,9 +134,10 @@ public class MapActivity extends AccessibleActivity  {
 			
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
-//		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// Full screen is not used here
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		//getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
 		app.checkApplicationIsBeingInitialized(this, startProgressDialog);
@@ -215,11 +216,11 @@ public class MapActivity extends AccessibleActivity  {
 		}
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
 
-		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setHomeButtonEnabled(true);
-		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#330000ff")));
-		actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#550000ff")));
+//		ActionBar actionBar = getSupportActionBar();
+//		actionBar.setDisplayHomeAsUpEnabled(true);
+//		actionBar.setHomeButtonEnabled(true);
+//		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#330000ff")));
+//		actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#550000ff")));
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
