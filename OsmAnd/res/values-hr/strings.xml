@@ -1291,4 +1291,7 @@
     <string name="hours_ago">sati prije</string>
     <string name="minutes_ago">minuta prije</string>
     <string name="seconds_ago">sekunda prije</string>
-    </resources>
+    <string name="text_size_descr">Postavi veličinu teksta na karti.</string>
+    <string name="text_size">Veličina teksta</string>
+    <string name="save_track_interval_globally">Interval bilježenja</string>
+	</resources>
