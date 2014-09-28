@@ -702,7 +702,7 @@ public class OsmandSettings {
 	
 	public final CommonPreference<Float> TEXT_SCALE = new FloatPreference("text_scale", 1f).makeProfile().cache();
 	{
-		TEXT_SCALE.setModeDefaultValue(ApplicationMode.CAR, 1.5f);
+		TEXT_SCALE.setModeDefaultValue(ApplicationMode.CAR, 1.25f);
 	}
 	
 	public final CommonPreference<Float> MAP_ZOOM_SCALE_BY_DENSITY = new FloatPreference("map_zoom_scale_wo_density", 0f).makeProfile().cache();
