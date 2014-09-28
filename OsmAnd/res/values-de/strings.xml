@@ -1410,7 +1410,7 @@
 	<string name="download_using_mobile_internet">Derzeit besteht keine WLAN-Verbindung. Soll das Herunterladen mit der aktuellen Datenverbindung erfolgen?</string>
 	<string name="clear_destination">Ziel löschen</string>
 	<string name="other_location">Andere</string>
-	<string name="files_limit">%1$d Dateien fehlen noch</string>
+	<string name="files_limit">In dieser kostenlosen Version können noch %1$d Dateien heruntergeladen werden.</string>
 	<string name="available_downloads_left">Es stehen %1$d Dateien zum Herunterladen bereit</string>
 	<string name="install_paid">Vollversion</string>
 	<string name="cancel_navigation">Navigation stoppen</string>
