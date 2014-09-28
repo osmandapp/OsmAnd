@@ -739,9 +739,9 @@ public class MapActivityActions implements DialogProvider {
 		mDrawerList.setAdapter(listAdapter);
 
 		if (getMyApplication().getSettings().isLightContentMenu()){
-			mDrawerList.setBackgroundColor(mapActivity.getResources().getColor(R.color.color_white));
+			mDrawerList.setBackgroundColor(mapActivity.getResources().getColor(R.color.shadow_color));
 		} else {
-			mDrawerList.setBackgroundColor(mapActivity.getResources().getColor(R.color.color_black));
+			mDrawerList.setBackgroundColor(mapActivity.getResources().getColor(R.color.dark_drawer_bg_color));
 		}
 		mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
