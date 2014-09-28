@@ -27,7 +27,15 @@ public class NativeOsmandLibrary extends NativeLibrary {
 			return library;
 		}
 	}
-
+	public static void loadLibrary(String name) {
+		try {
+        	System.out.println("Loading " + name);
+            System.loadLibrary(name);
+        } catch( UnsatisfiedLinkError e ) {
+            System.err.println("Failed to load '"+name + "':" + e);
+            throw e;
+        }
+	}
 
     public static NativeOsmandLibrary getLibrary(RenderingRulesStorage storage, OsmandApplication ctx) {
 		if (!isLoaded()) {
@@ -56,6 +64,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 					}
 				}
 			}
+			
 		}
 		return library;
 	}
