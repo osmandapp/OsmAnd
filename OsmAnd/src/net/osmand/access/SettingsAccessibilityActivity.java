@@ -42,7 +42,6 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 				return true;
 			}
 		});
-		addTextScale(grp);
 		addSpeechRateSetting(grp);
 		
 		grp.addPreference(accessibilityModePreference);
@@ -84,18 +83,6 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 					R.string.accessibility_extensions));
 		}
     }
-
-
-
-	protected void addTextScale(PreferenceGroup grp) {
-		Float[] txtValues = new Float[] {0.75f, 1f, 1.25f, 1.5f, 2f, 3f} ;
-		String[] txtNames = new String[txtValues.length];
-		for(int i = 0; i < txtNames.length; i++) {
-			txtNames[i] = (int)(txtValues[i] * 100) + " %";
-		}
-		grp.addPreference(createListPreference(settings.TEXT_SCALE, txtNames, txtValues, R.string.text_size, R.string.text_size_descr));
-	}
-
 
 
 	protected void addSpeechRateSetting(PreferenceGroup grp) {
