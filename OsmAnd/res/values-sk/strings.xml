@@ -1994,4 +1994,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="local_index_description">Kliknite na existujúcu položku pre zobrazenie detailov. Podržte pre vypnutie alebo odstránenie. Dát je v súčasnosti na zariadení (%1$s voľné):</string>
 	<string name="text_size_descr">Nastaviť veľkosť textu na mape.</string>
     <string name="text_size">Veľkosť textu</string>
+    <string name="fav_point_dublicate">Duplicitný názov obľúbeného bodu</string>
+    <string name="fav_point_dublicate_message">Názov obľúbeného bodu bol zmenený na %1$s, aby nevznikla duplicita.</string>
     </resources>
