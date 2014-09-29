@@ -165,7 +165,7 @@ public class OsMoThread {
 			}
 		} catch (Exception e) {
 			log.info("Exception selecting socket", e);
-			cmd("ERROR HEARTBEAT" + e.getMessage(), true);
+			exc("ERROR HEARTBEAT : ", e);
 			e.printStackTrace();
 			if (activeChannel != null && !activeChannel.isConnected()) {
 				activeChannel = null;
@@ -183,6 +183,14 @@ public class OsMoThread {
 		} else {
 			scheduleHeartbeat(delay);
 		}
+	}
+
+	protected void exc(String header, Exception e) {
+		String eMsg = e.getMessage();
+		if(e.getStackTrace() != null && e.getStackTrace().length > 0) {
+			eMsg += " " + e.getStackTrace()[0].toString();
+		}
+		cmd(header + eMsg, true);
 	}
 
 	private void stopChannel() {
@@ -314,9 +322,13 @@ public class OsMoThread {
 			}
 			boolean processed = false;
 			for (OsMoReactor o : listReactors) {
-				if (o.acceptCommand(header, id, data, obj, this)) {
-					processed = true;
-					break;
+				try {
+					if (o.acceptCommand(header, id, data, obj, this)) {
+						processed = true;
+						break;
+					}
+				} catch (Exception e) {
+					exc("ERROR REACTOR:", e);
 				}
 			}
 			if (!processed) {
@@ -385,11 +397,17 @@ public class OsMoThread {
 			return null;
 		}
 		for (OsMoReactor s : listReactors) {
-			String l = s.nextSendCommand(this);
+			String l = null;
+			try {
+				l = s.nextSendCommand(this);
+			} catch (Exception e) {
+				exc("ERROR SENDER:", e);
+			}
 			if (l != null) {
 				cmd(l, true);
 				return ByteBuffer.wrap(prepareCommand(l).toString().getBytes("UTF-8"));
 			}
+			
 		}
 		final long interval = System.currentTimeMillis() - lastSendCommand;
 		if(interval > TIMEOUT_TO_PING) {
