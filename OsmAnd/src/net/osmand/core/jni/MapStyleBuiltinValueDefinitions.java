@@ -35,4 +35,48 @@ public class MapStyleBuiltinValueDefinitions {
     }
   }
 
+  static public class MapStyleBuiltinValueDefinition extends MapStyleValueDefinition {
+    private long swigCPtr;
+    private boolean swigCMemOwnDerived;
+  
+    protected MapStyleBuiltinValueDefinition(long cPtr, boolean cMemoryOwn) {
+      super(OsmAndCoreJNI.MapStyleBuiltinValueDefinitions_MapStyleBuiltinValueDefinition_SWIGSmartPtrUpcast(cPtr), true);
+      swigCMemOwnDerived = cMemoryOwn;
+      swigCPtr = cPtr;
+    }
+  
+    protected static long getCPtr(MapStyleBuiltinValueDefinition obj) {
+      return (obj == null) ? 0 : obj.swigCPtr;
+    }
+  
+    protected void finalize() {
+      delete();
+    }
+  
+    public synchronized void delete() {
+      if (swigCPtr != 0) {
+        if (swigCMemOwnDerived) {
+          swigCMemOwnDerived = false;
+          OsmAndCoreJNI.delete_MapStyleBuiltinValueDefinitions_MapStyleBuiltinValueDefinition(swigCPtr);
+        }
+        swigCPtr = 0;
+      }
+      super.delete();
+    }
+  
+    public int getId() {
+      return OsmAndCoreJNI.MapStyleBuiltinValueDefinitions_MapStyleBuiltinValueDefinition_id_get(swigCPtr, this);
+    }
+  
+  }
+
+  public static MapStyleBuiltinValueDefinitions get() {
+    long cPtr = OsmAndCoreJNI.MapStyleBuiltinValueDefinitions_get();
+    return (cPtr == 0) ? null : new MapStyleBuiltinValueDefinitions(cPtr, true);
+  }
+
+  public int getLastBuiltinValueDefinitionId() {
+    return OsmAndCoreJNI.MapStyleBuiltinValueDefinitions_lastBuiltinValueDefinitionId_get(swigCPtr, this);
+  }
+
 }

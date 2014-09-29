@@ -35,12 +35,12 @@ public class MapStyleValueDefinition {
     }
   }
 
-  public int getId() {
-    return OsmAndCoreJNI.MapStyleValueDefinition_id_get(swigCPtr, this);
+  public MapStyleValueDefinition(MapStyleValueDefinition.Class valueClass, MapStyleValueDataType dataType, String name, boolean isComplex) {
+    this(OsmAndCoreJNI.new_MapStyleValueDefinition(valueClass.swigValue(), dataType.swigValue(), name, isComplex), true);
   }
 
-  public MapStyleValueClass getValueClass() {
-    return MapStyleValueClass.swigToEnum(OsmAndCoreJNI.MapStyleValueDefinition_valueClass_get(swigCPtr, this));
+  public MapStyleValueDefinition.Class getValueClass() {
+    return MapStyleValueDefinition.Class.swigToEnum(OsmAndCoreJNI.MapStyleValueDefinition_valueClass_get(swigCPtr, this));
   }
 
   public MapStyleValueDataType getDataType() {
@@ -53,6 +53,48 @@ public class MapStyleValueDefinition {
 
   public boolean getIsComplex() {
     return OsmAndCoreJNI.MapStyleValueDefinition_isComplex_get(swigCPtr, this);
+  }
+
+  public enum Class {
+    Input,
+    Output;
+
+    public final int swigValue() {
+      return swigValue;
+    }
+
+    public static Class swigToEnum(int swigValue) {
+      Class[] swigValues = Class.class.getEnumConstants();
+      if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
+        return swigValues[swigValue];
+      for (Class swigEnum : swigValues)
+        if (swigEnum.swigValue == swigValue)
+          return swigEnum;
+      throw new IllegalArgumentException("No enum " + Class.class + " with value " + swigValue);
+    }
+
+    @SuppressWarnings("unused")
+    private Class() {
+      this.swigValue = SwigNext.next++;
+    }
+
+    @SuppressWarnings("unused")
+    private Class(int swigValue) {
+      this.swigValue = swigValue;
+      SwigNext.next = swigValue+1;
+    }
+
+    @SuppressWarnings("unused")
+    private Class(Class swigEnum) {
+      this.swigValue = swigEnum.swigValue;
+      SwigNext.next = this.swigValue+1;
+    }
+
+    private final int swigValue;
+
+    private static class SwigNext {
+      private static int next = 0;
+    }
   }
 
 }

@@ -162,12 +162,9 @@ public class CoreResourcesFromAndroidAssets extends ICoreResourcesProvider {
             resourceDataEntry = resourceEntry.variantsByDisplayDensityFactor.lastEntry();
         ResourceData resourceData = resourceDataEntry.getValue();
         Log.d(TAG, "Using ddf=" + resourceDataEntry.getKey() + " while looking for " + displayDensityFactor + " of '" + name + "'");
-
-        final SWIGTYPE_p_QByteArray data = SwigUtilities.readPartOfFile(
-//            _bundleFilename,
-        	resourceData.path.getAbsolutePath(),
-            resourceData.offset,
-            resourceData.size);
+		System.out.println(resourceData.path.getAbsolutePath());
+		final SWIGTYPE_p_QByteArray data = SwigUtilities.qDecompress(SwigUtilities.readEntireFile(
+				resourceData.path.getAbsolutePath()+".qz"));
         if (data == null) {
             Log.e(TAG, "Failed to load data of '" + name + "'");
             if (ok != null)
@@ -198,12 +195,10 @@ public class CoreResourcesFromAndroidAssets extends ICoreResourcesProvider {
                 ok.assign(false);
             return SwigUtilities.emptyQByteArray();
         }
-
-        final SWIGTYPE_p_QByteArray data = SwigUtilities.readPartOfFile(
-//            _bundleFilename,
-        	resourceEntry.defaultVariant.path.getAbsolutePath(),
-            resourceEntry.defaultVariant.offset,
-            resourceEntry.defaultVariant.size);
+		System.out.println(resourceEntry.defaultVariant.path.getAbsolutePath());
+		SWIGTYPE_p_QByteArray bt = SwigUtilities.readEntireFile(
+				resourceEntry.defaultVariant.path.getAbsolutePath() + ".qz");
+		final SWIGTYPE_p_QByteArray data = SwigUtilities.qDecompress(bt);
         if (data == null) {
             Log.e(TAG, "Failed to load data of '" + name + "'");
             if (ok != null)

@@ -10,11 +10,12 @@ package net.osmand.core.jni;
 
 public enum MapStyleRulesetType {
   Invalid(OsmAndCoreJNI.MapStyleRulesetType_Invalid_get()),
-  Point(OsmAndCoreJNI.MapStyleRulesetType_Point_get()),
-  Polyline(OsmAndCoreJNI.MapStyleRulesetType_Polyline_get()),
-  Polygon(OsmAndCoreJNI.MapStyleRulesetType_Polygon_get()),
-  Text(OsmAndCoreJNI.MapStyleRulesetType_Text_get()),
-  Order(OsmAndCoreJNI.MapStyleRulesetType_Order_get());
+  Point,
+  Polyline,
+  Polygon,
+  Text,
+  Order,
+  __LAST;
 
   public final int swigValue() {
     return swigValue;

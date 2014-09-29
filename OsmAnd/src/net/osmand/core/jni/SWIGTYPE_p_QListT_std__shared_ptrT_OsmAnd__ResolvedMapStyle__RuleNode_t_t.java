@@ -8,18 +8,18 @@
 
 package net.osmand.core.jni;
 
-public class SWIGTYPE_p_QHashT_std__shared_ptrT_OsmAnd__MapStyleValueDefinition_const_t_OsmAnd__MapStyleValue_t {
+public class SWIGTYPE_p_QListT_std__shared_ptrT_OsmAnd__ResolvedMapStyle__RuleNode_t_t {
   private long swigCPtr;
 
-  protected SWIGTYPE_p_QHashT_std__shared_ptrT_OsmAnd__MapStyleValueDefinition_const_t_OsmAnd__MapStyleValue_t(long cPtr, boolean futureUse) {
+  protected SWIGTYPE_p_QListT_std__shared_ptrT_OsmAnd__ResolvedMapStyle__RuleNode_t_t(long cPtr, boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_QHashT_std__shared_ptrT_OsmAnd__MapStyleValueDefinition_const_t_OsmAnd__MapStyleValue_t() {
+  protected SWIGTYPE_p_QListT_std__shared_ptrT_OsmAnd__ResolvedMapStyle__RuleNode_t_t() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_QHashT_std__shared_ptrT_OsmAnd__MapStyleValueDefinition_const_t_OsmAnd__MapStyleValue_t obj) {
+  protected static long getCPtr(SWIGTYPE_p_QListT_std__shared_ptrT_OsmAnd__ResolvedMapStyle__RuleNode_t_t obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

@@ -41,21 +41,21 @@ public class MapStylesCollection extends IMapStylesCollection {
     this(OsmAndCoreJNI.new_MapStylesCollection(), true);
   }
 
-  public boolean registerStyle(String filePath) {
-    return OsmAndCoreJNI.MapStylesCollection_registerStyle(swigCPtr, this, filePath);
+  public boolean addStyleFromFile(String filePath) {
+    return OsmAndCoreJNI.MapStylesCollection_addStyleFromFile(swigCPtr, this, filePath);
   }
 
-  public SWIGTYPE_p_QListT_std__shared_ptrT_OsmAnd__MapStyle_const_t_t getCollection() {
-    return new SWIGTYPE_p_QListT_std__shared_ptrT_OsmAnd__MapStyle_const_t_t(OsmAndCoreJNI.MapStylesCollection_getCollection(swigCPtr, this), true);
+  public SWIGTYPE_p_QListT_std__shared_ptrT_OsmAnd__UnresolvedMapStyle_const_t_t getCollection() {
+    return new SWIGTYPE_p_QListT_std__shared_ptrT_OsmAnd__UnresolvedMapStyle_const_t_t(OsmAndCoreJNI.MapStylesCollection_getCollection(swigCPtr, this), true);
   }
 
-  public MapStyle getAsIsStyle(String name) {
-    long cPtr = OsmAndCoreJNI.MapStylesCollection_getAsIsStyle(swigCPtr, this, name);
-    return (cPtr == 0) ? null : new MapStyle(cPtr, true);
+  public SWIGTYPE_p_std__shared_ptrT_OsmAnd__UnresolvedMapStyle_const_t getStyleByName(String name) {
+    return new SWIGTYPE_p_std__shared_ptrT_OsmAnd__UnresolvedMapStyle_const_t(OsmAndCoreJNI.MapStylesCollection_getStyleByName(swigCPtr, this, name), true);
   }
 
-  public boolean obtainBakedStyle(String name, MapStyle outStyle) {
-    return OsmAndCoreJNI.MapStylesCollection_obtainBakedStyle(swigCPtr, this, name, MapStyle.getCPtr(outStyle), outStyle);
+  public ResolvedMapStyle getResolvedStyleByName(String name) {
+    long cPtr = OsmAndCoreJNI.MapStylesCollection_getResolvedStyleByName(swigCPtr, this, name);
+    return (cPtr == 0) ? null : new ResolvedMapStyle(cPtr, true);
   }
 
 }

@@ -59,4 +59,8 @@ public class MapRendererStateChanges {
     return new SWIGTYPE_p_OsmAnd__BitmaskT_OsmAnd__MapRendererStateChange_unsigned_int_t__BitmaskT(OsmAndCoreJNI.MapRendererStateChanges_unset(swigCPtr, this, flag.swigValue()), false);
   }
 
+  public SWIGTYPE_p_OsmAnd__BitmaskT_OsmAnd__MapRendererStateChange_unsigned_int_t__BitmaskT unite(SWIGTYPE_p_OsmAnd__BitmaskT_OsmAnd__MapRendererStateChange_unsigned_int_t__BitmaskT otherMask) {
+    return new SWIGTYPE_p_OsmAnd__BitmaskT_OsmAnd__MapRendererStateChange_unsigned_int_t__BitmaskT(OsmAndCoreJNI.MapRendererStateChanges_unite(swigCPtr, this, SWIGTYPE_p_OsmAnd__BitmaskT_OsmAnd__MapRendererStateChange_unsigned_int_t__BitmaskT.getCPtr(otherMask)), false);
+  }
+
 }

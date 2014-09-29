@@ -21,7 +21,7 @@ import net.osmand.core.jni.Logger;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapRendererClass;
 import net.osmand.core.jni.MapRendererSetupOptions;
-import net.osmand.core.jni.MapStyle;
+import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.OsmAndCore;
@@ -70,7 +70,7 @@ public class GLActivity extends Activity {
     private int _referenceTileSize;
     private int _rasterTileSize;
     private IMapStylesCollection _mapStylesCollection;
-    private MapStyle _mapStyle;
+    private ResolvedMapStyle _mapStyle;
     private ObfsCollection _obfsCollection;
     private MapPresentationEnvironment _mapPresentationEnvironment;
     private Primitiviser _primitiviser;
@@ -192,7 +192,7 @@ public class GLActivity extends Activity {
 
         Log.i(TAG, "Going to resolve default embedded style...");
         _mapStylesCollection = new MapStylesCollection();
-        _mapStyle = _mapStylesCollection.getBakedStyle("default");
+        _mapStyle = _mapStylesCollection.getResolvedStyleByName("default");
         if (_mapStyle == null)
         {
             Log.e(TAG, "Failed to resolve style 'default'");

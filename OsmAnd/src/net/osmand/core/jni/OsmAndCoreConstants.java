@@ -14,6 +14,8 @@ public interface OsmAndCoreConstants {
 
   public final static int RoutingDataLevelsCount = OsmAndCoreJNI.RoutingDataLevelsCount_get();
 
+  public final static int MapStyleRulesetTypesCount = OsmAndCoreJNI.MapStyleRulesetTypesCount_get();
+
   public final static int RasterMapLayersCount = OsmAndCoreJNI.RasterMapLayersCount_get();
 
 }

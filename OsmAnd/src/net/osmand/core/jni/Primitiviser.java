@@ -145,12 +145,20 @@ public class Primitiviser {
       return new SWIGTYPE_p_MapStyleEvaluationResult(OsmAndCoreJNI.Primitiviser_Primitive_evaluationResult_get(swigCPtr, this), true);
     }
   
-    public void setZOrder(double value) {
+    public void setZOrder(int value) {
       OsmAndCoreJNI.Primitiviser_Primitive_zOrder_set(swigCPtr, this, value);
     }
   
-    public double getZOrder() {
+    public int getZOrder() {
       return OsmAndCoreJNI.Primitiviser_Primitive_zOrder_get(swigCPtr, this);
+    }
+  
+    public void setDoubledArea(long value) {
+      OsmAndCoreJNI.Primitiviser_Primitive_doubledArea_set(swigCPtr, this, value);
+    }
+  
+    public long getDoubledArea() {
+      return OsmAndCoreJNI.Primitiviser_Primitive_doubledArea_get(swigCPtr, this);
     }
   
   }
@@ -261,15 +269,6 @@ public class Primitiviser {
   
     public SWIGTYPE_p_QSetT_QString_t getIntersectsWith() {
       long cPtr = OsmAndCoreJNI.Primitiviser_Symbol_intersectsWith_get(swigCPtr, this);
-      return (cPtr == 0) ? null : new SWIGTYPE_p_QSetT_QString_t(cPtr, false);
-    }
-  
-    public void setIntersectedBy(SWIGTYPE_p_QSetT_QString_t value) {
-      OsmAndCoreJNI.Primitiviser_Symbol_intersectedBy_set(swigCPtr, this, SWIGTYPE_p_QSetT_QString_t.getCPtr(value));
-    }
-  
-    public SWIGTYPE_p_QSetT_QString_t getIntersectedBy() {
-      long cPtr = OsmAndCoreJNI.Primitiviser_Symbol_intersectedBy_get(swigCPtr, this);
       return (cPtr == 0) ? null : new SWIGTYPE_p_QSetT_QString_t(cPtr, false);
     }
   

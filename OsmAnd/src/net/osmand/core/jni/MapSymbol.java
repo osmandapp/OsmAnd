@@ -73,14 +73,6 @@ public class MapSymbol {
     return new SWIGTYPE_p_QSetT_int_t(OsmAndCoreJNI.MapSymbol_intersectsWithClasses_get(swigCPtr, this), true);
   }
 
-  public void setIntersectedByClasses(SWIGTYPE_p_QSetT_int_t value) {
-    OsmAndCoreJNI.MapSymbol_intersectedByClasses_set(swigCPtr, this, SWIGTYPE_p_QSetT_int_t.getCPtr(value));
-  }
-
-  public SWIGTYPE_p_QSetT_int_t getIntersectedByClasses() {
-    return new SWIGTYPE_p_QSetT_int_t(OsmAndCoreJNI.MapSymbol_intersectedByClasses_get(swigCPtr, this), true);
-  }
-
   public void setIsHidden(boolean value) {
     OsmAndCoreJNI.MapSymbol_isHidden_set(swigCPtr, this, value);
   }

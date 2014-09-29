@@ -370,13 +370,13 @@ public class ResourcesManager {
       super.delete();
     }
   
-    public MapStyleMetadata(MapStyle mapStyle) {
-      this(OsmAndCoreJNI.new_ResourcesManager_MapStyleMetadata(MapStyle.getCPtr(mapStyle), mapStyle), true);
+    public MapStyleMetadata(SWIGTYPE_p_std__shared_ptrT_OsmAnd__UnresolvedMapStyle_t mapStyle) {
+      this(OsmAndCoreJNI.new_ResourcesManager_MapStyleMetadata(SWIGTYPE_p_std__shared_ptrT_OsmAnd__UnresolvedMapStyle_t.getCPtr(mapStyle)), true);
     }
   
-    public MapStyle getMapStyle() {
+    public SWIGTYPE_p_std__shared_ptrT_OsmAnd__UnresolvedMapStyle_t getMapStyle() {
       long cPtr = OsmAndCoreJNI.ResourcesManager_MapStyleMetadata_mapStyle_get(swigCPtr, this);
-      return (cPtr == 0) ? null : new MapStyle(cPtr, true);
+      return (cPtr == 0) ? null : new SWIGTYPE_p_std__shared_ptrT_OsmAnd__UnresolvedMapStyle_t(cPtr, false);
     }
   
   }

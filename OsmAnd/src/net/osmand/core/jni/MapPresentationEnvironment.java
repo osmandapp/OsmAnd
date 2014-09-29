@@ -35,20 +35,24 @@ public class MapPresentationEnvironment {
     }
   }
 
-  public MapPresentationEnvironment(MapStyle style, float displayDensityFactor, String localeLanguageId, ICoreResourcesProvider externalResourcesProvider) {
-    this(OsmAndCoreJNI.new_MapPresentationEnvironment__SWIG_0(MapStyle.getCPtr(style), style, displayDensityFactor, localeLanguageId, ICoreResourcesProvider.getCPtr(externalResourcesProvider), externalResourcesProvider), true);
+  public MapPresentationEnvironment(ResolvedMapStyle resolvedStyle, float displayDensityFactor, String localeLanguageId, MapPresentationEnvironment.LanguagePreference languagePreference, ICoreResourcesProvider externalResourcesProvider) {
+    this(OsmAndCoreJNI.new_MapPresentationEnvironment__SWIG_0(ResolvedMapStyle.getCPtr(resolvedStyle), resolvedStyle, displayDensityFactor, localeLanguageId, languagePreference.swigValue(), ICoreResourcesProvider.getCPtr(externalResourcesProvider), externalResourcesProvider), true);
   }
 
-  public MapPresentationEnvironment(MapStyle style, float displayDensityFactor, String localeLanguageId) {
-    this(OsmAndCoreJNI.new_MapPresentationEnvironment__SWIG_1(MapStyle.getCPtr(style), style, displayDensityFactor, localeLanguageId), true);
+  public MapPresentationEnvironment(ResolvedMapStyle resolvedStyle, float displayDensityFactor, String localeLanguageId, MapPresentationEnvironment.LanguagePreference languagePreference) {
+    this(OsmAndCoreJNI.new_MapPresentationEnvironment__SWIG_1(ResolvedMapStyle.getCPtr(resolvedStyle), resolvedStyle, displayDensityFactor, localeLanguageId, languagePreference.swigValue()), true);
   }
 
-  public MapPresentationEnvironment(MapStyle style, float displayDensityFactor) {
-    this(OsmAndCoreJNI.new_MapPresentationEnvironment__SWIG_2(MapStyle.getCPtr(style), style, displayDensityFactor), true);
+  public MapPresentationEnvironment(ResolvedMapStyle resolvedStyle, float displayDensityFactor, String localeLanguageId) {
+    this(OsmAndCoreJNI.new_MapPresentationEnvironment__SWIG_2(ResolvedMapStyle.getCPtr(resolvedStyle), resolvedStyle, displayDensityFactor, localeLanguageId), true);
   }
 
-  public MapPresentationEnvironment(MapStyle style) {
-    this(OsmAndCoreJNI.new_MapPresentationEnvironment__SWIG_3(MapStyle.getCPtr(style), style), true);
+  public MapPresentationEnvironment(ResolvedMapStyle resolvedStyle, float displayDensityFactor) {
+    this(OsmAndCoreJNI.new_MapPresentationEnvironment__SWIG_3(ResolvedMapStyle.getCPtr(resolvedStyle), resolvedStyle, displayDensityFactor), true);
+  }
+
+  public MapPresentationEnvironment(ResolvedMapStyle resolvedStyle) {
+    this(OsmAndCoreJNI.new_MapPresentationEnvironment__SWIG_4(ResolvedMapStyle.getCPtr(resolvedStyle), resolvedStyle), true);
   }
 
   public MapStyleBuiltinValueDefinitions getStyleBuiltinValueDefs() {
@@ -56,9 +60,9 @@ public class MapPresentationEnvironment {
     return (cPtr == 0) ? null : new MapStyleBuiltinValueDefinitions(cPtr, true);
   }
 
-  public MapStyle getStyle() {
-    long cPtr = OsmAndCoreJNI.MapPresentationEnvironment_style_get(swigCPtr, this);
-    return (cPtr == 0) ? null : new MapStyle(cPtr, true);
+  public ResolvedMapStyle getResolvedStyle() {
+    long cPtr = OsmAndCoreJNI.MapPresentationEnvironment_resolvedStyle_get(swigCPtr, this);
+    return (cPtr == 0) ? null : new ResolvedMapStyle(cPtr, true);
   }
 
   public float getDisplayDensityFactor() {
@@ -67,6 +71,10 @@ public class MapPresentationEnvironment {
 
   public String getLocaleLanguageId() {
     return OsmAndCoreJNI.MapPresentationEnvironment_localeLanguageId_get(swigCPtr, this);
+  }
+
+  public MapPresentationEnvironment.LanguagePreference getLanguagePreference() {
+    return MapPresentationEnvironment.LanguagePreference.swigToEnum(OsmAndCoreJNI.MapPresentationEnvironment_languagePreference_get(swigCPtr, this));
   }
 
   public ICoreResourcesProvider getExternalResourcesProvider() {
@@ -78,12 +86,12 @@ public class MapPresentationEnvironment {
     return new SWIGTYPE_p_std__shared_ptrT_OsmAnd__ObfMapSectionInfo_const_t(OsmAndCoreJNI.MapPresentationEnvironment_dummyMapSection_get(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_QHashT_std__shared_ptrT_OsmAnd__MapStyleValueDefinition_const_t_OsmAnd__MapStyleValue_t getSettings() {
-    return new SWIGTYPE_p_QHashT_std__shared_ptrT_OsmAnd__MapStyleValueDefinition_const_t_OsmAnd__MapStyleValue_t(OsmAndCoreJNI.MapPresentationEnvironment_getSettings(swigCPtr, this), true);
+  public SWIGTYPE_p_QHashT_int_OsmAnd__MapStyleConstantValue_t getSettings() {
+    return new SWIGTYPE_p_QHashT_int_OsmAnd__MapStyleConstantValue_t(OsmAndCoreJNI.MapPresentationEnvironment_getSettings(swigCPtr, this), true);
   }
 
-  public void setSettings(SWIGTYPE_p_QHashT_std__shared_ptrT_OsmAnd__MapStyleValueDefinition_const_t_OsmAnd__MapStyleValue_t newSettings) {
-    OsmAndCoreJNI.MapPresentationEnvironment_setSettings__SWIG_0(swigCPtr, this, SWIGTYPE_p_QHashT_std__shared_ptrT_OsmAnd__MapStyleValueDefinition_const_t_OsmAnd__MapStyleValue_t.getCPtr(newSettings));
+  public void setSettings(SWIGTYPE_p_QHashT_int_OsmAnd__MapStyleConstantValue_t newSettings) {
+    OsmAndCoreJNI.MapPresentationEnvironment_setSettings__SWIG_0(swigCPtr, this, SWIGTYPE_p_QHashT_int_OsmAnd__MapStyleConstantValue_t.getCPtr(newSettings));
   }
 
   public void setSettings(SWIGTYPE_p_QHashT_QString_QString_t newSettings) {
@@ -128,6 +136,52 @@ public class MapPresentationEnvironment {
 
   public long getRoadsDensityLimitPerTile(ZoomLevel zoom) {
     return OsmAndCoreJNI.MapPresentationEnvironment_getRoadsDensityLimitPerTile(swigCPtr, this, zoom.swigValue());
+  }
+
+  public enum LanguagePreference {
+    NativeOnly,
+    LocalizedOrNative,
+    NativeAndLocalized,
+    NativeAndLocalizedOrTransliterated,
+    LocalizedAndNative,
+    LocalizedOrTransliteratedAndNative;
+
+    public final int swigValue() {
+      return swigValue;
+    }
+
+    public static LanguagePreference swigToEnum(int swigValue) {
+      LanguagePreference[] swigValues = LanguagePreference.class.getEnumConstants();
+      if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
+        return swigValues[swigValue];
+      for (LanguagePreference swigEnum : swigValues)
+        if (swigEnum.swigValue == swigValue)
+          return swigEnum;
+      throw new IllegalArgumentException("No enum " + LanguagePreference.class + " with value " + swigValue);
+    }
+
+    @SuppressWarnings("unused")
+    private LanguagePreference() {
+      this.swigValue = SwigNext.next++;
+    }
+
+    @SuppressWarnings("unused")
+    private LanguagePreference(int swigValue) {
+      this.swigValue = swigValue;
+      SwigNext.next = swigValue+1;
+    }
+
+    @SuppressWarnings("unused")
+    private LanguagePreference(LanguagePreference swigEnum) {
+      this.swigValue = swigEnum.swigValue;
+      SwigNext.next = this.swigValue+1;
+    }
+
+    private final int swigValue;
+
+    private static class SwigNext {
+      private static int next = 0;
+    }
   }
 
   public final static int DefaultShadowLevelMin = OsmAndCoreJNI.MapPresentationEnvironment_DefaultShadowLevelMin_get();

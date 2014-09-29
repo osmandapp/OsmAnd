@@ -84,6 +84,10 @@ public class IMapRenderer {
     return OsmAndCoreJNI.IMapRenderer_isIdle(swigCPtr, this);
   }
 
+  public String getNotIdleReason() {
+    return OsmAndCoreJNI.IMapRenderer_getNotIdleReason(swigCPtr, this);
+  }
+
   public boolean pauseGpuWorkerThread() {
     return OsmAndCoreJNI.IMapRenderer_pauseGpuWorkerThread(swigCPtr, this);
   }

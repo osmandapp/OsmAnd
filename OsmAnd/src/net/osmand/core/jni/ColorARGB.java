@@ -39,12 +39,16 @@ public class ColorARGB {
     this(OsmAndCoreJNI.new_ColorARGB__SWIG_0(), true);
   }
 
+  public ColorARGB(long argb_) {
+    this(OsmAndCoreJNI.new_ColorARGB__SWIG_1(argb_), true);
+  }
+
   public ColorARGB(short a_, short r_, short g_, short b_) {
-    this(OsmAndCoreJNI.new_ColorARGB__SWIG_1(a_, r_, g_, b_), true);
+    this(OsmAndCoreJNI.new_ColorARGB__SWIG_2(a_, r_, g_, b_), true);
   }
 
   public ColorARGB(FColorARGB other) {
-    this(OsmAndCoreJNI.new_ColorARGB__SWIG_2(FColorARGB.getCPtr(other), other), true);
+    this(OsmAndCoreJNI.new_ColorARGB__SWIG_3(FColorARGB.getCPtr(other), other), true);
   }
 
   public void setA(short value) {

@@ -195,10 +195,6 @@ public class Utilities {
     return new PointI(OsmAndCoreJNI.Utilities_normalizeCoordinates(PointI.getCPtr(input), input, zoom.swigValue()), true);
   }
 
-  public static short computeCohenSutherlandCode(PointI p, AreaI box) {
-    return OsmAndCoreJNI.Utilities_computeCohenSutherlandCode(PointI.getCPtr(p), p, AreaI.getCPtr(box), box);
-  }
-
   public static boolean extractFirstNumberPosition(String value, SWIGTYPE_p_int first, SWIGTYPE_p_int last, boolean allowSigned, boolean allowDot) {
     return OsmAndCoreJNI.Utilities_extractFirstNumberPosition(value, SWIGTYPE_p_int.getCPtr(first), SWIGTYPE_p_int.getCPtr(last), allowSigned, allowDot);
   }
@@ -316,11 +312,10 @@ public class Utilities {
   }
 
   public enum CHCode {
-    Inside(OsmAndCoreJNI.Utilities_CHCode_Inside_get()),
     Left(OsmAndCoreJNI.Utilities_CHCode_Left_get()),
-    Right(OsmAndCoreJNI.Utilities_CHCode_Right_get()),
-    Bottom(OsmAndCoreJNI.Utilities_CHCode_Bottom_get()),
-    Top(OsmAndCoreJNI.Utilities_CHCode_Top_get());
+    Right,
+    Bottom,
+    Top;
 
     public final int swigValue() {
       return swigValue;

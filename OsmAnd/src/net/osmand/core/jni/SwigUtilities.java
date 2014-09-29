@@ -43,4 +43,12 @@ public class SwigUtilities {
     return new SWIGTYPE_p_QByteArray(OsmAndCoreJNI.SwigUtilities_emptyQByteArray(), true);
   }
 
+  public static SWIGTYPE_p_QByteArray qDecompress(SWIGTYPE_p_QByteArray compressedData) {
+    return new SWIGTYPE_p_QByteArray(OsmAndCoreJNI.SwigUtilities_qDecompress(SWIGTYPE_p_QByteArray.getCPtr(compressedData)), true);
+  }
+
+  public static SWIGTYPE_p_std__shared_ptrT_SkBitmap_const_t createSkBitmapARGB888With(long width, long height, SWIGTYPE_p_unsigned_char pBuffer, long bufferSize) {
+    return new SWIGTYPE_p_std__shared_ptrT_SkBitmap_const_t(OsmAndCoreJNI.SwigUtilities_createSkBitmapARGB888With(width, height, SWIGTYPE_p_unsigned_char.getCPtr(pBuffer), bufferSize), true);
+  }
+
 }
