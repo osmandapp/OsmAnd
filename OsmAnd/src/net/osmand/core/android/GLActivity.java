@@ -8,27 +8,7 @@ import javax.microedition.khronos.egl.EGLSurface;
 import javax.microedition.khronos.opengles.GL10;
 
 import net.osmand.core.android.CoreResourcesFromAndroidAssets;
-import net.osmand.core.jni.AreaI;
-import net.osmand.core.jni.AtlasMapRendererConfiguration;
-import net.osmand.core.jni.BinaryMapDataProvider;
-import net.osmand.core.jni.BinaryMapPrimitivesProvider;
-import net.osmand.core.jni.BinaryMapRasterBitmapTileProvider;
-import net.osmand.core.jni.BinaryMapRasterBitmapTileProvider_Software;
-import net.osmand.core.jni.BinaryMapStaticSymbolsProvider;
-import net.osmand.core.jni.IMapRenderer;
-import net.osmand.core.jni.IMapStylesCollection;
-import net.osmand.core.jni.Logger;
-import net.osmand.core.jni.MapPresentationEnvironment;
-import net.osmand.core.jni.MapRendererClass;
-import net.osmand.core.jni.MapRendererSetupOptions;
-import net.osmand.core.jni.ResolvedMapStyle;
-import net.osmand.core.jni.MapStylesCollection;
-import net.osmand.core.jni.ObfsCollection;
-import net.osmand.core.jni.OsmAndCore;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.Primitiviser;
-import net.osmand.core.jni.QIODeviceLogSink;
-import net.osmand.core.jni.RasterMapLayerId;
+import net.osmand.core.jni.*;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
@@ -52,6 +32,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
+
+import java.io.File;
 
 public class GLActivity extends Activity {
 
@@ -78,6 +60,7 @@ public class GLActivity extends Activity {
     private BinaryMapPrimitivesProvider _binaryMapPrimitivesProvider;
     private BinaryMapStaticSymbolsProvider _binaryMapStaticSymbolsProvider;
     private BinaryMapRasterBitmapTileProvider _binaryMapRasterBitmapTileProvider;
+	private OnlineRasterMapTileProvider _onlineMapRasterBitmapTileProvider;
     private IMapRenderer _mapRenderer;
     private GpuWorkerThreadPrologue _gpuWorkerThreadPrologue;
     private GpuWorkerThreadEpilogue _gpuWorkerThreadEpilogue;
@@ -201,8 +184,11 @@ public class GLActivity extends Activity {
 
         Log.i(TAG, "Going to prepare OBFs collection");
         _obfsCollection = new ObfsCollection();
-        Log.i(TAG, "Will load OBFs from " + Environment.getExternalStorageDirectory() + "/osmand");
-        _obfsCollection.addDirectory(Environment.getExternalStorageDirectory() + "/osmand", false);
+
+		Log.i(TAG, "Will load OBFs from " + Environment.getExternalStorageDirectory() + "/osmand");
+		File directory =getApp().getAppPath("");
+		Log.i(TAG, "Will load OBFs from " + directory.getAbsolutePath());
+        _obfsCollection.addDirectory(directory.getAbsolutePath(), false);
 
         Log.i(TAG, "Going to prepare all resources for renderer");
         _mapPresentationEnvironment = new MapPresentationEnvironment(
@@ -224,6 +210,8 @@ public class GLActivity extends Activity {
         _binaryMapRasterBitmapTileProvider = new BinaryMapRasterBitmapTileProvider_Software(
                 _binaryMapPrimitivesProvider);
 
+		_onlineMapRasterBitmapTileProvider = OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)");
+
         Log.i(TAG, "Going to create renderer");
         _mapRenderer = OsmAndCore.createMapRenderer(MapRendererClass.AtlasMapRenderer_OpenGLES2);
         if (_mapRenderer == null)
@@ -243,7 +231,7 @@ public class GLActivity extends Activity {
         if (mapnik == null)
             Log.e(TAG, "Failed to create mapnik");
         */
-        _mapRenderer.setRasterLayerProvider(RasterMapLayerId.BaseLayer, _binaryMapRasterBitmapTileProvider);
+        _mapRenderer.setRasterLayerProvider(RasterMapLayerId.BaseLayer, _onlineMapRasterBitmapTileProvider);
 
         _glSurfaceView = (GLSurfaceView) findViewById(R.id.glSurfaceView);
         //TODO:_glSurfaceView.setPreserveEGLContextOnPause(true);

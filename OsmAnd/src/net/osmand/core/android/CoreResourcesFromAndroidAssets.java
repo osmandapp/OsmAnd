@@ -94,7 +94,7 @@ public class CoreResourcesFromAndroidAssets extends ICoreResourcesProvider {
 //            }
             final ResourceData resourceData = new ResourceData();
             resourceData.offset = 0;
-            resourceData.path = ((OsmandApplication) _context.getApplicationContext()).getAppPath("OsmAndCore_ResourcesBundle/" + resourceInBundle);
+            resourceData.path = ((OsmandApplication) _context.getApplicationContext()).getAppPath("OsmAndCore_ResourcesBundle/" + resourceInBundle + ".qz");
             resourceData.size = resourceData.path.length();
 
             // Get resource entry for this resource
@@ -164,7 +164,7 @@ public class CoreResourcesFromAndroidAssets extends ICoreResourcesProvider {
         Log.d(TAG, "Using ddf=" + resourceDataEntry.getKey() + " while looking for " + displayDensityFactor + " of '" + name + "'");
 		System.out.println(resourceData.path.getAbsolutePath());
 		final SWIGTYPE_p_QByteArray data = SwigUtilities.qDecompress(SwigUtilities.readEntireFile(
-				resourceData.path.getAbsolutePath()+".qz"));
+				resourceData.path.getAbsolutePath()));
         if (data == null) {
             Log.e(TAG, "Failed to load data of '" + name + "'");
             if (ok != null)
@@ -197,7 +197,7 @@ public class CoreResourcesFromAndroidAssets extends ICoreResourcesProvider {
         }
 		System.out.println(resourceEntry.defaultVariant.path.getAbsolutePath());
 		SWIGTYPE_p_QByteArray bt = SwigUtilities.readEntireFile(
-				resourceEntry.defaultVariant.path.getAbsolutePath() + ".qz");
+				resourceEntry.defaultVariant.path.getAbsolutePath());
 		final SWIGTYPE_p_QByteArray data = SwigUtilities.qDecompress(bt);
         if (data == null) {
             Log.e(TAG, "Failed to load data of '" + name + "'");
