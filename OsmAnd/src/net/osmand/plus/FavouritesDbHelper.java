@@ -10,6 +10,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.widget.Toast;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -140,6 +146,10 @@ public class FavouritesDbHelper {
 			return true;
 		}
 		FavoriteGroup group = getOrCreateGroup(p, 0);
+
+		//making sure that dublicated names will not occur in favorites
+		checkDublicates(p);
+
 		if (!p.getName().equals("")) {
 			p.setVisible(group.visible);
 			p.setColor(group.color);
@@ -149,10 +159,36 @@ public class FavouritesDbHelper {
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
 		}
+
 		return true;
 	}
 	
-	
+	private void checkDublicates(FavouritePoint p){
+		boolean fl = true;
+		String index = "";
+		int number = 0;
+		String name = p.getName();
+		while (fl){
+			fl = false;
+			for (FavouritePoint fp : cachedFavoritePoints){
+				if (fp.getName().equals(name)){
+					number++;
+					index = " (" + number + ")";
+					name = p.getName() + index;
+					fl=true;
+					break;
+				}
+			}
+		}
+		if (index.length() > 0){
+			p.setName(name);
+			AlertDialog.Builder builder = new AlertDialog.Builder(context.getMapActivity());
+			builder.setTitle(R.string.fav_point_dublicate);
+			builder.setMessage(context.getString(R.string.fav_point_dublicate_message, name));
+			builder.setPositiveButton(R.string.default_buttons_ok, null);
+			builder.show();
+		}
+	}
 
 	public boolean editFavouriteName(FavouritePoint p, String newName, String category) {
 		String oldCategory = p.getCategory();
