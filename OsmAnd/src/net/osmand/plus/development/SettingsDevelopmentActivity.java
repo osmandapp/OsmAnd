@@ -6,6 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import net.osmand.core.android.GLActivity;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
@@ -49,6 +50,19 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				startActivity(new Intent(SettingsDevelopmentActivity.this, TestVoiceActivity.class));
+				return true;
+			}
+		});
+		cat.addPreference(pref);
+
+		pref = new Preference(this);
+		pref.setTitle(R.string.test_native_render);
+		pref.setSummary(R.string.test_native_render_msg);
+		pref.setKey("test_native_render");
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				startActivity(new Intent(SettingsDevelopmentActivity.this, GLActivity.class));
 				return true;
 			}
 		});

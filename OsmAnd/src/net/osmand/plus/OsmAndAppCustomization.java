@@ -83,7 +83,7 @@ public class OsmAndAppCustomization {
 	
 	public Class<? extends Activity> getDownloadActivity() {
 		//return DownloadActivity.class;
-		return GLActivity.class;
+		return DownloadActivity.class;
 	}
 
 	// Download screen
