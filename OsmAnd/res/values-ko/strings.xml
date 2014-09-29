@@ -1494,7 +1494,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="transport_search_desc">교통 검색</string>
 	<string name="favourites_search_desc">즐겨 찾기 검색</string>
 	<string name="history_search_desc">검색한 기록</string>
-	<string name="offline_navigation_not_available">OsmAnd 오프라인 경로탐색은 일시적으로 사용할 수 없습니다.</string>
+	<string name="offline_navigation_not_available">OsmAnd 오프라인 라우팅은 일시적으로 사용할 수 없습니다.</string>
 	<string name="left_side_navigation">왼쪽좌석 운전</string>
 	<string name="left_side_navigation_descr">왼쪽좌석 운전 국가를 선택합니다</string>
 	<string name="download_link_and_local_description">오프라인 데이터를 다운로드 하거나 업데이트 하려면 여기를 클릭하십시오. 세부정보를 보려면 기존 아이템을 클릭하세요, 비활성화 하거나 삭제하려면 길게 누르세요. 기기에 남아있는 현재 데이터는 (%1$s free):</string>
