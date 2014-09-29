@@ -1879,4 +1879,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="traffic_warning">Alerta de tráfico</string>
 	<string name="text_size_descr">Selecciona el tamaño del texto en el mapa.</string>
     <string name="text_size">Tamaño de texto</string>
+    <string name="fav_point_dublicate">Nombre de punto Favorito duplicado</string>
+    <string name="fav_point_dublicate_message">Hemos cambiado el nombre de tu punto favorito a %1$s para evitar nombres duplicados.</string>
     </resources>
