@@ -67,7 +67,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		setProgressBarIndeterminateVisibility(false);
 
 		setContentView(R.layout.tab_content);
-		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
+		settings = ((OsmandApplication) getApplication()).getSettings();
 		tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabHost.setup();
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
