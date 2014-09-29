@@ -1990,4 +1990,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="text_size_descr">Vælg tekststørrelsen på kortet.</string>
     <string name="text_size">Tekststørrelse</string>
     <string name="fav_point_dublicate">Favoritnavn dublet</string>
+    <string name="fav_point_dublicate_message">Favoritnavn er ændret til %1$s for at undgå dublet navne.</string>
     </resources>
