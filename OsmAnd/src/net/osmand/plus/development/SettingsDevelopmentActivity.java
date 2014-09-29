@@ -41,6 +41,8 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.DISABLE_COMPLEX_ROUTING, R.string.disable_complex_routing, R.string.disable_complex_routing_descr));
 		
 		cat.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS, R.string.use_magnetic_sensor, R.string.use_magnetic_sensor_descr));
+
+		cat.addPreference(createCheckBoxPreference(settings.USE_NATIVE_RENDER, R.string.use_native_render,R.string.use_native_render_descr));
 		
 		Preference pref = new Preference(this);
 		pref.setTitle(R.string.test_voice_prompts);

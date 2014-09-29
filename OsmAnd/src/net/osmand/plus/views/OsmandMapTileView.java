@@ -26,6 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.SimpleTwoFingerTapDetector;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.controllers.MapViewController;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -81,9 +82,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	protected static final int emptyTileDivisor = 16;
 
 
-	public interface OnTrackBallListener {
-		public boolean onTrackBallEvent(MotionEvent e);
-	}
+
 
 	public interface OnLongClickListener {
 		public boolean onLongPressEvent(PointF point);
@@ -110,7 +109,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	private OnClickListener onClickListener;
 
-	private OnTrackBallListener trackBallDelegate;
+	private MapViewController.OnTrackBallListener trackBallDelegate;
 
 	private AccessibilityActionsProvider accessibilityActions;
 
@@ -746,7 +745,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return super.onTrackballEvent(event);
 	}
 
-	public void setTrackBallDelegate(OnTrackBallListener trackBallDelegate) {
+	public void setTrackBallDelegate(MapViewController.OnTrackBallListener trackBallDelegate) {
 		this.trackBallDelegate = trackBallDelegate;
 	}
 
