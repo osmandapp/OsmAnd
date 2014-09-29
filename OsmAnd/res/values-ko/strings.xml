@@ -2077,4 +2077,6 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="local_index_description">기존 항목을 클릭하여 더 많은 정보를 보세요. 비활성화 하려면 꾹 눌러주시거나 삭제하세요. 현재 데이터는 (%1$ s 무료):</string>
 	<string name="text_size_descr">지도에 텍스트 크기를 설정 합니다.</string>
     <string name="text_size">텍스트 크기</string>
+    <string name="fav_point_dublicate">즐겨찾기 포인트 이름 중복</string>
+    <string name="fav_point_dublicate_message">중복된 포인트 이름을 방지 하기 위해서 %1$s 에 즐겨찾기 포인트 이름을 변경합니다.</string>
     </resources>
