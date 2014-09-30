@@ -1735,4 +1735,7 @@ s často kladenými otázkami.</string>
 	<string name="route_descr_destination"/>
     <string name="local_index_description">Klikněte na existující položku k zobrazení více detailů, podržte pro vypnutí nebo smazání. V zařízení je %1$s volného místa:</string>
 	<string name="text_size">Velikost písma</string>
+    <string name="text_size_descr">Nastavit velikost písma na mapě.</string>
+    <string name="fav_point_dublicate">Název oblíbeného bodu je již použit</string>
+    <string name="fav_point_dublicate_message">Aby nevznikla duplicita, oblíbený bod byl uložen jako %1$s.</string>
     </resources>
