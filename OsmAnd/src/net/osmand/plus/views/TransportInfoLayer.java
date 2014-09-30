@@ -47,7 +47,7 @@ public class TransportInfoLayer extends OsmandMapLayer {
 	}
 	
 	public int getRadius(RotatedTileBox tb){
-		final float zoom = tb.getZoom() + tb.getZoomScale();
+		final double zoom = tb.getZoom() + tb.getZoomScale();
 		if(zoom <= 16) {
 			return (int) (tb.getDensity() * 8);
 		}

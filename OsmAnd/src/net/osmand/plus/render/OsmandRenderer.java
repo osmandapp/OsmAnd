@@ -547,10 +547,10 @@ public class OsmandRenderer {
 		rc.pointCount ++;
 		double tx = xt / rc.tileDivisor;
 		double ty = yt / rc.tileDivisor;
-		float dTileX = (float) (tx - rc.leftX);
-		float dTileY = (float) (ty - rc.topY);
-		float x = rc.cosRotateTileSize * dTileX - rc.sinRotateTileSize * dTileY;
-		float y = rc.sinRotateTileSize * dTileX + rc.cosRotateTileSize * dTileY;
+		double dTileX = (tx - rc.leftX);
+		double dTileY = (ty - rc.topY);
+		float x = (float) (rc.cosRotateTileSize * dTileX - rc.sinRotateTileSize * dTileY);
+		float y = (float) (rc.sinRotateTileSize * dTileX + rc.cosRotateTileSize * dTileY);
 		rc.tempPoint.set(x, y);
 		if(rc.tempPoint.x >= 0 && rc.tempPoint.x < rc.width && 
 				rc.tempPoint.y >= 0 && rc.tempPoint.y < rc.height){

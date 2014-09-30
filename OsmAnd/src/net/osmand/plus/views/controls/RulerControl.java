@@ -17,7 +17,7 @@ import android.widget.FrameLayout;
 public class RulerControl extends MapControls {
 
 		ShadowText cacheRulerText = null;
-		float cacheRulerZoom = 0;
+		double cacheRulerZoom = 0;
 		double cacheRulerTileX = 0;
 		double cacheRulerTileY = 0;
 		float cacheRulerTextLen = 0;

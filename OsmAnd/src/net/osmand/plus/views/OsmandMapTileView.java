@@ -307,7 +307,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 
-	public void setComplexZoom(int zoom, float scale) {
+	public void setComplexZoom(int zoom, double scale) {
 		if (mainLayer != null && zoom <= mainLayer.getMaximumShownMapZoom() && zoom >= mainLayer.getMinimumShownMapZoom()) {
 			animatedDraggingThread.stopAnimating();
 			currentViewport.setZoom(zoom, scale, 0);
@@ -361,11 +361,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return currentViewport.getZoom();
 	}
 
-	public float getSettingsZoomScale() {
-		return getSettings().getSettingsZoomScale() + (float)Math.sqrt(Math.max(0, getDensity() - 1));
+	public double getSettingsZoomScale() {
+		return getSettings().getSettingsZoomScale() + Math.sqrt(Math.max(0, getDensity() - 1));
 	}
 
-	public float getZoomScale() {
+	public double getZoomScale() {
 		return currentViewport.getZoomScale();
 	}
 
@@ -678,7 +678,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 
-	protected void setZoomAnimate(int zoom, float zoomScale, boolean notify) {
+	protected void setZoomAnimate(int zoom, double zoomScale, boolean notify) {
 		currentViewport.setZoom(zoom, zoomScale, 0);
 		refreshMap();
 		if (locationListener != null && notify) {
@@ -687,9 +687,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	// for internal usage
-	protected void zoomToAnimate(float tzoom, boolean notify) {
+	protected void zoomToAnimate(double tzoom, boolean notify) {
 		int zoom = getZoom();
-		float zoomToAnimate = tzoom - zoom - getZoomScale();
+		double zoomToAnimate = tzoom - zoom - getZoomScale();
 		if (zoomToAnimate >= 1) {
 			zoom += (int) zoomToAnimate;
 			zoomToAnimate -= (int) zoomToAnimate;
@@ -852,13 +852,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			final RotatedTileBox calc = initialViewport.copy();
 			calc.setLatLonCenter(initialCenterLatLon.getLatitude(), initialCenterLatLon.getLongitude());
 
-			float calcZoom = initialViewport.getZoom() + dz + initialViewport.getZoomScale();
+			double calcZoom = initialViewport.getZoom() + dz + initialViewport.getZoomScale();
 			float calcRotate = calc.getRotate() + angle;
 			calc.setRotate(calcRotate);
 			calc.setZoomAnimation(dz);
 			final LatLon r = calc.getLatLonFromPixel(cp.x + dx, cp.y + dy);
 			setLatLon(r.getLatitude(), r.getLongitude());
-			zoomToAnimate(calcZoom, true);
+			zoomToAnimate((float) calcZoom, true);
 			rotateToAnimate(calcRotate);
 		}
 
