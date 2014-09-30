@@ -73,7 +73,6 @@ import android.widget.Toast;
 
 public class MapActivity extends AccessibleActivity  {
 	
-	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
 	
@@ -135,11 +134,11 @@ public class MapActivity extends AccessibleActivity  {
 		parseLaunchIntentLocation();
 
 		if (settings.USE_NATIVE_RENDER.get()){
-			setContentView(R.layout.main);
-			mapViewController = new MapViewController((OsmandMapTileView) findViewById(R.id.MapView), this);
-		} else {
 			setContentView(R.layout.activity_gl);
 			mapViewController = new MapViewController((GLSurfaceView) findViewById(R.id.glSurfaceView), this);
+		} else {
+			setContentView(R.layout.main);
+			mapViewController = new MapViewController((OsmandMapTileView) findViewById(R.id.MapView), this);
 		}
 
 		mapViewController.setTrackBallDelegate(new MapViewController.OnTrackBallListener(){
@@ -533,7 +532,7 @@ public class MapActivity extends AccessibleActivity  {
 		OsmandPlugin.onMapActivityDestroy(this);
 		mapViewTrackingUtilities.setMapView(null);
 		cancelNotification();
-		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
+		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapViewController.getMapTileView());
 	}
 
 	private void cancelNotification() {
@@ -568,12 +567,8 @@ public class MapActivity extends AccessibleActivity  {
 		settings.APPLICATION_MODE.removeListener(applicationModeListener);
 		
 		settings.setLastKnownMapLocation((float) mapViewController.getLatitude(), (float) mapViewController.getLongitude());
-		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
-		if(animatedThread.isAnimating() && animatedThread.getTargetIntZoom() != 0){
-			settings.setMapLocationToShow(animatedThread.getTargetLatitude(), animatedThread.getTargetLongitude(), 
-					animatedThread.getTargetIntZoom());
-		}
-		
+		mapViewController.onPause();
+
 		settings.setLastKnownMapZoom(mapViewController.getZoom());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
 		app.setMapActivity(null);
@@ -599,8 +594,10 @@ public class MapActivity extends AccessibleActivity  {
 		if (mapLayers.getMapInfoLayer() != null) {
 			mapLayers.getMapInfoLayer().recreateControls();
 		}
-		mapLayers.updateLayers(mapView);
-		mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsZoomScale());
+
+		mapViewController.updateLayers(mapLayers);
+		mapViewController.setComplexZoom();
+
 		app.getDaynightHelper().startSensorIfNeeded(new StateChangedListener<Boolean>() {
 
 			@Override
@@ -616,10 +613,10 @@ public class MapActivity extends AccessibleActivity  {
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			if (!app.accessibilityEnabled()) {
-				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+				mapActions.contextMenuPoint(mapViewController.getLatitude(), mapViewController.getLongitude());
 			} else if (uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
 				uiHandler.removeMessages(LONG_KEYPRESS_MSG_ID);
-				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+				mapActions.contextMenuPoint(mapViewController.getLatitude(), mapViewController.getLongitude());
 			}
 			return true;
 		} else if (settings.ZOOM_BY_TRACKBALL.get()) {
@@ -636,7 +633,7 @@ public class MapActivity extends AccessibleActivity  {
 				keyCode == KeyEvent.KEYCODE_DPAD_UP) {
 			int dx = keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_LEFT ? - 15 : 0);
 			int dy = keyCode == KeyEvent.KEYCODE_DPAD_DOWN ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_UP ? -15 : 0);
-			final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
+			final RotatedTileBox tb = mapViewController.getCurrentRotatedTileBox();
 			final QuadPoint cp = tb.getCenterPixelPoint();
 			final LatLon l = tb.getLatLonFromPixel(cp.x + dx, cp.y + dy);
 			setMapLocation(l.getLatitude(), l.getLongitude());
@@ -660,21 +657,13 @@ public class MapActivity extends AccessibleActivity  {
 	
 	
 	public void showAndHideMapPosition() {
-		mapView.setShowMapPosition(true);
-		app.runMessageInUIThreadAndCancelPrevious(SHOW_POSITION_MSG_ID, new Runnable() {
-			@Override
-			public void run() {
-				if (mapView.isShowMapPosition()) {
-					mapView.setShowMapPosition(false);
-					mapView.refreshMap();
-				}
-			}
-		}, 2500);
+		mapViewController.showAndHideMapPosition();
+
 	}
 	
 	
 	public OsmandMapTileView getMapView() {
-		return mapView;
+		return mapViewController.getMapTileView();
 	}
 	
 	public static MapViewTrackingUtilities getMapViewTrackingUtilities() {

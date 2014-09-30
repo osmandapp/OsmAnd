@@ -8,11 +8,13 @@ import android.widget.FrameLayout;
 import net.osmand.access.MapAccessibilityActions;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -27,6 +29,9 @@ public class MapViewController {
 	private OsmandSettings settings;
 	private MapActivity mapActivity;
 	private boolean isNative = false;
+
+	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
+
 
 	public void setAccessibilityActions(MapAccessibilityActions accessibilityActions) {
 		if (isNative){
@@ -168,6 +173,56 @@ public class MapViewController {
 
 		} else {
 			return mapTileView.getCurrentRotatedTileBox();
+		}
+		return null;
+	}
+
+	public void onPause() {
+		if (isNative) {
+
+		} else {
+			AnimateDraggingMapThread animatedThread = mapTileView.getAnimatedDraggingThread();
+			if(animatedThread.isAnimating() && animatedThread.getTargetIntZoom() != 0){
+				settings.setMapLocationToShow(animatedThread.getTargetLatitude(), animatedThread.getTargetLongitude(),
+						animatedThread.getTargetIntZoom());
+			}
+		}
+	}
+
+	public void updateLayers(MapActivityLayers mapLayers) {
+		if (isNative) {
+
+		} else {
+			mapLayers.updateLayers(mapTileView);
+		}
+	}
+
+	public void setComplexZoom() {
+		if (isNative) {
+
+		} else {
+			mapTileView.setComplexZoom(mapTileView.getZoom(), mapTileView.getSettingsZoomScale());
+		}
+	}
+
+	public void showAndHideMapPosition() {
+		mapTileView.setShowMapPosition(true);
+		mapActivity.getMyApplication().runMessageInUIThreadAndCancelPrevious(SHOW_POSITION_MSG_ID, new Runnable() {
+			@Override
+			public void run() {
+				if (mapTileView.isShowMapPosition()) {
+					mapTileView.setShowMapPosition(false);
+					mapTileView.refreshMap();
+				}
+			}
+		}, 2500);
+	}
+
+	public OsmandMapTileView getMapTileView() {
+		if (isNative) {
+
+		} else {
+			return mapTileView;
 		}
 		return null;
 	}
