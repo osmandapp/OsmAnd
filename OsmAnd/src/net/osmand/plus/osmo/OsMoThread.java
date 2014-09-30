@@ -86,9 +86,10 @@ public class OsMoThread {
 	}
 
 	protected void initConnection() throws IOException {
-		if (sessionInfo == null) {
+		// always ask session token
+//		if (sessionInfo == null) {
 			sessionInfo = service.prepareSessionToken();
-		}
+//		}
 		if(sessionInfo == null) {
 			return;
 		}
