@@ -1818,4 +1818,6 @@
 	<string name="local_index_description">點觸任何現有的項目，查看更詳細的資訊，長按則停用或刪除。目前在裝置上的資料有 (%1$s 可用)：</string>
 	<string name="text_size_descr">設定地圖上的文字大小。</string>
     <string name="text_size">文字大小</string>
+    <string name="fav_point_dublicate">我的最愛標點，名稱重複</string>
+    <string name="fav_point_dublicate_message">我們把我的最愛標點名稱，改為 %1$s 以避免名稱重複。</string>
     </resources>

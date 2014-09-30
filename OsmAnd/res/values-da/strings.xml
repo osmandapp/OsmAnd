@@ -1989,4 +1989,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="local_index_description">Klik på et eksisterende element for at se flere detaljer, langt tryk for at deaktivere eller slette. Aktuelle data på enhed (%1$s ledig):</string>
 	<string name="text_size_descr">Vælg tekststørrelsen på kortet.</string>
     <string name="text_size">Tekststørrelse</string>
+    <string name="fav_point_dublicate">Favoritnavn dublet</string>
+    <string name="fav_point_dublicate_message">Favoritnavn er ændret til %1$s for at undgå dubletter.</string>
     </resources>

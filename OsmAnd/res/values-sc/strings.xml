@@ -1742,4 +1742,6 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="local_index_description">Ischerta unu elementu esistente pro bìere prus detallios, carca e mantène carcau pro lu deativare o burrare. Datos como in su dispositivu (%1$s lìberos):</string>
 	<string name="text_size_descr">Issèbera sa mannària de su testu in sa mapa.</string>
     <string name="text_size">Mannària de su testu</string>
+    <string name="fav_point_dublicate_message">Amus cambiau su nùmene de su prefèrridu tuo a %1$s pro evitare nùmenes dòpios.</string>
+    <string name="fav_point_dublicate">Nùmene dòpiu in sos prefèrridos</string>
     </resources>

@@ -71,7 +71,7 @@
     <string name="use_magnetic_sensor_descr">Използвай магнитния сензор за определяне на компасната посока вместо сензора за ориентиране</string>
     <string name="use_magnetic_sensor">Използвай магнитния сензор</string>
     <string name="other_location">Друго</string>
-    <string name="files_limit">%1$d файла остават</string>
+    <string name="files_limit">Остават Ви %1$d файла</string>
     <string name="available_downloads_left">Остават Ви %1$d файл(-а) за сваляне</string>
     <string name="install_paid">Пълна версия</string>
     <string name="cancel_route">Прекрати маршрута</string>
@@ -1737,4 +1737,14 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="map_widget_plain_time">Текущо време</string>
     <string name="gpx_wpt">Междинна точка</string>
     <string name="selected_gpx_info_show">\n\nНатиснете и задръжте за показване на картата</string>
-    </resources>
+    <string name="text_size_descr">Въведете размер на текста върху картата.</string>
+    <string name="text_size">Размер на текста</string>
+    <string name="traffic_warning_speed_limit">Ограничение на скоростта</string>
+    <string name="traffic_warning_border_control">Граничен пункт</string>
+    <string name="traffic_warning_payment">Плащане на такса</string>
+    <string name="traffic_warning_stop">Стоп</string>
+    <string name="traffic_warning_calming">Легнал полицай</string>
+    <string name="traffic_warning_speed_camera">Камера за скорост</string>
+    <string name="traffic_warning">Предупреждение за трафика</string>
+	<string name="hide_all_waypoints">Изтриване на всички</string>
+</resources>

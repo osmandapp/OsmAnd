@@ -1972,4 +1972,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="local_index_description">Tik om details te bekijken; houd ingedrukt om uit te schakelen of te verwijderen. Huidige gegevens op het toestel (%1$s beschikbaar):</string>
 	<string name="text_size_descr">De grootte van tekst op de kaart instellen.</string>
     <string name="text_size">Tekstgrootte</string>
+    <string name="fav_point_dublicate_message">Favoriet bestaat al: de naam is veranderd in %1$s</string>
+    <string name="fav_point_dublicate">Favoriet met deze naam bestaat al</string>
     </resources>
