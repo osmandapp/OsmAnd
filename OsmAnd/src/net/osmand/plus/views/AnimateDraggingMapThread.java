@@ -34,7 +34,7 @@ public class AnimateDraggingMapThread {
 	private double targetLatitude = 0;
 	private double targetLongitude = 0;
 	private int targetIntZoom = 0;
-	private float targetZoomScale = 0;
+	private double targetZoomScale = 0;
 
 	private boolean isAnimatingZoom;
 	
@@ -118,14 +118,14 @@ public class AnimateDraggingMapThread {
 		startMoving(finalLat, finalLon, endZoom, tileView.getZoomScale(), notifyListener);
 	}
 	
-	public void startMoving(final double finalLat, final double finalLon, final int endZoom, final float endZoomScale, final boolean notifyListener){
+	public void startMoving(final double finalLat, final double finalLon, final int endZoom, final double endZoomScale, final boolean notifyListener){
 		stopAnimatingSync();
 		double startLat = tileView.getLatitude();
 		double startLon = tileView.getLongitude();
 		float rotate = tileView.getRotate();
 		final int startZoom = tileView.getZoom();
 		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
-		final float zoomScale = rb.getZoomScale();
+		final double zoomScale = rb.getZoomScale();
 		boolean skipAnimation = false;
 		float mStX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
 		float mStY = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
@@ -208,11 +208,11 @@ public class AnimateDraggingMapThread {
 		
 	}
 	
-	private void animatingZoomInThread(float zoomStart, int zoom, float zoomScale, float animationTime, boolean notifyListener){
+	private void animatingZoomInThread(double zoomStart, int zoom, double zoomScale, float animationTime, boolean notifyListener){
 		try {
 			isAnimatingZoom = true;
-			float curZoom = zoomStart;
-			float zoomEnd = zoom + zoomScale;
+			double curZoom = zoomStart;
+			double zoomEnd =  (zoom + zoomScale);
 			animationTime *= Math.abs(zoomEnd - zoomStart);
 			// AccelerateInterpolator interpolator = new AccelerateInterpolator(1);
 			LinearInterpolator interpolator = new LinearInterpolator();
@@ -247,12 +247,12 @@ public class AnimateDraggingMapThread {
 		startZooming(zoomEnd, tileView.getZoomScale(), notifyListener);
 	}
 	
-	public void startZooming(final int zoomEnd, final float zoomScale, final boolean notifyListener){
+	public void startZooming(final int zoomEnd, final double zoomScale, final boolean notifyListener){
 		final float animationTime = ZOOM_ANIMATION_TIME;
 		startThreadAnimating(new Runnable(){
 			@Override
 			public void run() {
-				final float zoomStart = tileView.getZoom() + tileView.getZoomScale();
+				final double zoomStart = tileView.getZoom() + tileView.getZoomScale();
 				setTargetValues(zoomEnd, zoomScale, tileView.getLatitude(), tileView.getLongitude());
 				animatingZoomInThread(zoomStart, zoomEnd, zoomScale, animationTime, notifyListener);
 				pendingRotateAnimation();
@@ -305,7 +305,7 @@ public class AnimateDraggingMapThread {
 		targetZoomScale = 0;
 	}
 	
-	private void setTargetValues(int zoom, float zoomScale, double lat, double lon){
+	private void setTargetValues(int zoom, double zoomScale, double lat, double lon){
 		targetIntZoom = zoom;
 		targetZoomScale = zoomScale;
 		targetLatitude = lat;
@@ -335,7 +335,7 @@ public class AnimateDraggingMapThread {
 		return targetIntZoom;
 	}
 
-	public float getTargetZoomScale() {
+	public double getTargetZoomScale() {
 		return targetZoomScale;
 	}
 

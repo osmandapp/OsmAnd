@@ -226,11 +226,11 @@ public class MapUtils {
 		return getDistance(ll, ll2) ;
 	}
 	
-	public static double getLongitudeFromTile(float zoom, double x) {
+	public static double getLongitudeFromTile(double zoom, double x) {
 		return x / getPowZoom(zoom) * 360.0 - 180.0;
 	}
 	
-	public static double getPowZoom(float zoom){
+	public static double getPowZoom(double zoom){
 		if(zoom >= 0 && zoom - Math.floor(zoom) < 0.001f){
 			return 1 << ((int)zoom); 
 		} else {

@@ -22,19 +22,19 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.IProgress;
-import net.osmand.ResultMatcher;
 import net.osmand.NativeLibrary.NativeSearchResult;
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
-import net.osmand.binary.RouteDataObject;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -611,8 +611,6 @@ public class MapRenderRepositories {
 
 			// prevent editing
 			requestedBox = new RotatedTileBox(tileRect);
-			
-
 			// calculate data box
 			QuadRect dataBox = requestedBox.getLatLonBounds();
 			long now = System.currentTimeMillis();
@@ -660,21 +658,20 @@ public class MapRenderRepositories {
 			if(renderingReq.searchRenderingAttribute("polygonMinSizeToDisplay")) {
 				currentRenderingContext.polygonMinSizeToDisplay = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 			}
-			final QuadPointDouble lt = requestedBox.getLeftTopTile(requestedBox.getZoom());
+			final QuadPointDouble lt = requestedBox.getLeftTopTile(requestedBox.getZoom() + requestedBox.getZoomScale());
 //			LatLon ltn = requestedBox.getLeftTopLatLon();
-			final float mapDensity = (float) Math.pow(2, requestedBox.getZoomScale());
 			final double tileDivisor = MapUtils.getPowZoom(31 - requestedBox.getZoom() -
 						requestedBox.getZoomScale());
-			currentRenderingContext.leftX = lt.x * MapUtils.getPowZoom(requestedBox.getZoomScale());
-					// MapUtils.get31TileNumberX(ltn.getLongitude()) / tileDivisor;
-			currentRenderingContext.topY = lt.y * MapUtils.getPowZoom(requestedBox.getZoomScale());
-					//MapUtils.get31TileNumberY(ltn.getLatitude()) / tileDivisor;
+			
+			currentRenderingContext.leftX = lt.x;
+			currentRenderingContext.topY = lt.y;
 			currentRenderingContext.zoom = requestedBox.getZoom();
 			currentRenderingContext.rotate = requestedBox.getRotate();
 			currentRenderingContext.width = requestedBox.getPixWidth();
 			currentRenderingContext.height = requestedBox.getPixHeight();
 			currentRenderingContext.nightMode = nightMode;
 			currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
+			final float mapDensity = (float) Math.pow(2, requestedBox.getZoomScale());
 			currentRenderingContext.setDensityValue(mapDensity);
 			//Text/icon scales according to mapDensity (so text is size of road)
 //			currentRenderingContext.textScale = (requestedBox.getDensity()*app.getSettings().TEXT_SCALE.get()); 
