@@ -1974,4 +1974,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="local_index_description">Antippen eines Elements um mehr Details zu erfahren, Tippen und Halten zum Deaktivieren oder Löschen des Elements. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
     <string name="text_size">Schriftgröße</string>
+    <string name="fav_point_dublicate">Doppelung beim Favoriten-Namen</string>
+    <string name="fav_point_dublicate_message">Name des Favoriten bereits vergeben, er wurde auf %1$s geändert.</string>
     </resources>

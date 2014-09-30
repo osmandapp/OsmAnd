@@ -1962,4 +1962,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="traffic_warning_calming">Зьнізьце хуткасьць</string>
     <string name="traffic_warning_speed_camera">Фотарадар</string>
     <string name="traffic_warning">Абмежаваньне руху</string>
-	</resources>
+	<string name="text_size_descr">Абраць памер тэксту на мапе.</string>
+    <string name="text_size">Памер тэксту</string>
+    </resources>
