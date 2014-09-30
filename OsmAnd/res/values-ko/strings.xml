@@ -92,7 +92,7 @@
 	<string name="live_monitoring_interval">온라인 트래킹 시간 간격</string>
 	<string name="live_monitoring_url_descr">온라인 트래킹할 웹 주소를 지정합니다. 매개변수 형식 : 위도={0}, 경도={1}, 시간={2}, hdop={3}, 고도={4}, 속도={5}, bearing={6}</string>
 	<string name="live_monitoring_url">온라인 트래킹 웹 주소</string>
-	<string name="gpx_monitoring_disabled_warn">\'트랙을 GPX 파일에 기록\' 설정을 활성화 하세요.</string>
+	<string name="gpx_monitoring_disabled_warn">\'트랙을 GPX 파일로 기록\' 설정을 활성화 하세요.</string>
 	<string name="show_current_gpx_title">현재의 GPX경로를 표시합니다</string>
 	<string name="tip_recent_changes_0_7_0_t">0.7.0 버전에 대한 변경 사항들 :
 		\n\t- 오프라인 위키피디아 기사 포함 데이터
@@ -247,7 +247,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="search_position_map_view">마지막 지도 보기</string>
 	
 	<string name="select_search_position">주변 검색 :</string>
-	<string name="context_menu_item_search">이 근처 검색</string>
+	<string name="context_menu_item_search">주변 검색</string>
 	<string name="tip_recent_changes_0_6_7_t">"0.6.7 버전에 대한 변경사항들 :
 \n\t- 오프라인 데이터 관리 (OsmAnd 에서 직접 오프라인 데이터 다운로드, 삭제, 활성화 / 비활성화)
 \n\t- 등록지점 및 그룹 (등록지점 그룹화, 삭제, 관리)
@@ -259,7 +259,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 \n\t- 벡터 렌더링 개선
 \n\t- TTS 엔진 개선 (정확한 거리 안내, 마일 가능)
 \n\t- 버그 수정 "</string>
-	<string name="save_route_dialog_title">경로를 GPX파일로 저장</string>
+	<string name="save_route_dialog_title">루트를 변환하여 GPX파일로 저장</string>
 	<string name="route_successfully_saved_at">경로가 \'%1$s\'로 성공적으로 저장되었습니다.</string>
 	<string name="filename_input">파일 이름 : </string>
 	<string name="file_with_name_already_exist">같은 이름의 파일이 이미 존재합니다.</string>
@@ -420,10 +420,10 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 
 	<string name="tip_navigation">라우팅</string>
 	<string name="tip_navigation_t">"길안내를 시작하기 전에 목적지를 선택하여야 합니다. 그런 다음 맵 상에서 \'메뉴\' -&gt; \'방향\' 을 누르고 네비게이션 종류를 선택합니다.
-\n\nThe destination is marked as an orange target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
-\n\nYou may chose either \'Start navigation\', which means that OsmAnd would live-guide you, give you voice instructions (if enabled), etc. Or you can select \'Display route\', resulting in static route without any live-guideance or adjustments as you move.
-\n\nTo display a route to the selected destination from any point other than your current position, select the start point on the map and tap \'Directions from\'.
-\n\nIf you use \'Directions from\' together with \'Start navigation\', OsmAnd will switch to your actual position as soon as it is found (so this can be used to jump-start routing before the position is found), while \'Directions from\' in combination with \'Display route\' just shows you the route from any arbitrary point you had selected without subsequent updates. "</string>
+\n\n목적지는 지도에 대상 플래그 마커로 표시되고 OsmAnd는 (주황색 삼각형)으로 목적지까지의 거리와 목적지까지의 방향을 표시합니다.
+\n\n당신이 선택 할 수 있습니다 중 등 OsmAnd, 당신을 살 - 가이드 (활성화 된 경우) 음성 안내를 제공 할 것을 의미, \'탐색 시작\'아니면 모든 라이브 guideance 또는 조정없이 정적 경로의 결과로, \'디스플레이 노선\'을 선택할 수 있습니다 당신은 이동.
+\n\n현재 위치가 아닌 다른 위치에서 선택한 목적지로 경로를 표시하려면지도에 시작 지점을 선택하고 \'에서 오시는 길\'을 누릅니다.
+\n\n당신이 함께 \'탐색을 시작합니다\'와 \'에서 오시는 길\'을 사용하는 경우가 발견 한, OsmAnd 즉시 실제 위치로 전환됩니다 (그래서 이것은에 사용할 수있는 위치가 발견되기 전에 라우팅 바로 시작할 수) \'에서 오시는 길\'동안 \'디스플레이 경로\'와 함께 당신에게 당신이 이후의 업데이트없이 선택했다 임의의 지점에서 경로를 보여줍니다. "</string>
 
 	<string name="tip_search">검색 중</string>
 	<string name="tip_map_context_menu">\"위치 사용\" 메뉴</string>
@@ -580,7 +580,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="rotate_map_to_bearing">지도 방향</string>
 	<string name="show_route">경로 상세정보</string>
 	<string name="fav_imported_sucessfully">즐겨찾기를 성공적으로 임포트하였습니다</string>
-	<string name="fav_file_to_load_not_found">즐겨찾기를 포함한 GPX 파일을 {0} 에서 찾을 수 없습니다</string>
+	<string name="fav_file_to_load_not_found">즐겨찾기를 포함한 GPX 파일을 {0}에서 찾을 수 없습니다</string>
 	<string name="fav_saved_sucessfully">즐겨찾기가 성공적으로 {0} 에 저장되었습니다</string>
 	<string name="no_fav_to_save">저장할 즐겨찾기 포인트가 없습니다</string>
 	<string name="import_fav">가져오기(임포트)</string>
@@ -704,7 +704,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="max_level_download_tile_descr">다운로드할 최대 줌 레벨을 선택하세요</string>
 	<string name="route_general_information">전체거리 %1$s, 여행시간 %2$d h %3$d m.</string>
 	<string name="router_service_descr">온라인 또는 오프라인 라우팅 서비스를 선택합니다</string>
-	<string name="router_service">길안내 서비스</string>
+	<string name="router_service">라우터 서비스</string>
 	<string name="sd_dir_not_accessible">저장할 SD 카드 디렉토리에 접근할 수 없습니다</string>
 	<string name="download_question">{0} - {1} 을 다운로드할까요?</string>
 	<string name="download_question_exist">{0} 에 대한 오프라인 데이터가 이미 존재합니다({1}). 업데이트할까요({2}) ?</string>
@@ -770,7 +770,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="additional_settings">추가 설정</string>
     <string name="settings">설정</string>
     <string name="save_current_track_descr">현재의 트랙을 SD 카드에 저장합니다</string>
-    <string name="save_current_track">현재의 트랙을 GPX 파일로 저장</string>
+    <string name="save_current_track">현재 트랙을 GPX 파일로 저장</string>
     <string name="save_track_interval_descr">길안내하는 동안 트랙 기록을 저장하는 로깅 간격을 선택합니다</string>
     <string name="save_track_interval">길안내하는 동안 로깅 간격</string>
     <string name="save_track_to_gpx_descrp">길안내하는 동안 트랙을 GPX파일로 저장합니다</string>
@@ -988,7 +988,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="copying_osmand_files">OsmAnd 파일을 복사중</string>
     <string name="calculate_osmand_route_gpx">OsmAnd 오프라인 경로 계산하기</string>
     <string name="app_mode_truck">트럭</string>
-    <string name="routing_preferences_descr">길찾기 환경설정</string>
+    <string name="routing_preferences_descr">라우팅 환경설정</string>
     <string name="speech_rate_descr">TTS에 대한 음성속도를 지정합니다</string>
     <string name="speech_rate">음성 속도</string>
     <string name="complex_route_calculation_failed">빠른 경로 계산 실패(%s), 느린 계산으로 돌아감.</string>
@@ -1065,7 +1065,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="app_modes_choose_descr">앱에서 볼 수있는 사용자 프로필를 선택합니다</string>
     <string name="map_widget_appearance">나머지 요소 :</string>
 	<string name="local_osm_changes_delete_all_confirm">%1$d OSM 변경 사항을 삭제하려고 합니다.  확실합니까?</string>
-    <string name="route_is_too_long">OsmAnd 오프라인 라우팅(길찾기)는 200km 이상 떨어진 포인트를 계산할 때 매우 긴 시간이 걸리 수 있습니다. (가끔 작동 되지 않을 수 있습니다) 당신은 더 나은 성능을 위해 중간 중간 포인트를 추가할 수 있습니다.</string>
+    <string name="route_is_too_long">OsmAnd 오프라인 라우팅(길찾기)는 200km 이상 떨어진 포인트를 계산할 때 매우 긴 시간이 걸리 수 있습니다. (가끔 작동 되지 않을 수 있습니다) 당신은 더 나은 성능을 위해 경유지를 추가할 수 있습니다.</string>
 	<string name="auto_zoom_close">가까운 거리에</string>
 	<string name="auto_zoom_far">중간 거리에</string>
 	<string name="auto_zoom_farthest">긴 거리에</string>
@@ -1074,9 +1074,9 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">기존 선택 …</string>
     <string name="osb_author_or_password_not_specified">설정에서 OSM 사용자 및 암호를 지정하십시오</string>
-    <string name="clear_intermediate_points">중간 포인트 지우기</string>
-    <string name="keep_intermediate_points">중간 포인트 유지</string>
-    <string name="new_directions_point_dialog">이미 중간 포인트를 설정했습니다.</string>
+    <string name="clear_intermediate_points">경유지 지우기</string>
+    <string name="keep_intermediate_points">경유지 유지</string>
+    <string name="new_directions_point_dialog">이미 경유자를 설정했습니다.</string>
     <string name="context_menu_item_directions_to">~까지 길안내</string>
     <string name="context_menu_item_directions_from">~부터 길안내</string>
     <string name="route_descr_map_location">지도 : </string>
@@ -1099,7 +1099,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 \n\t* SRTM 파일 삭제
 \n\t* OSM 노트 지원 "</string>
     <string name="search_street_in_neighborhood_cities">인근 도시에서 거리 검색</string>
-    <string name="intermediate_items_sort_return">중간 포인트는 목적지까지 가는 길에 포인트의 순서를 최적화하기 위해 재 정렬.</string>
+    <string name="intermediate_items_sort_return">경유지는 목적지까지 가는 길에 경유지의 순서를 최적화하기 위해 재 정렬.</string>
     <string name="intermediate_items_sort_by_distance">정렬 (도어 투 도어)</string>
     <string name="local_osm_changes_backup_successful">OSM 변경 파일이 성공적으로 생성되었습니다 %1$s</string>
     <string name="local_osm_changes_backup_failed">백업 OSM 변경 실패</string>
@@ -1474,7 +1474,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="gpxup_trackable">추적 가능</string>
 	<string name="gpxup_private">개인</string>
 	<string name="asap">가능한 빨리</string>
-	<string name="save_route_as_gpx">경로를 GPX 파일로 저장</string>
+	<string name="save_route_as_gpx">루트를 변환하여 GPX 파일로 저장</string>
 	<string name="route_roundabout">변곡점: take %1$d exit and go</string>
 	<string name="route_kl">왼쪽을 유지하고 가기</string>
 	<string name="route_kr">오른족을 유지하고 가기</string>
@@ -1832,7 +1832,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_plugin_description">"OpenStreetMap 고급 실시간 모니터링. 이에 대해서는 http://osmo.mobi를 참조 하십시오. 다른 장치를 추적하고 추적받는 가능성을 제공 합니다. 익명 그룹을 만들고, 서로의 위치를 공유하고 소통한다. 세션 트래킹 또는 영구 트래킹에 대한 다양한 설정을 합니다. 익명그룹는 수많은 날에 제한되며  일부 기능 즉, 원격 제어 및 그룹 관리자는 제한된다. 완벽하게 기능적인 그룹은 웹사이트에 생성하고 그들에게 등록된 사용자만 액세스할 수 있습니다. "</string>
     <string name="osmo_plugin_name">OsMo (실시간 친구위치 공유)</string>
     <string name="osmo_settings">OsMo (실시간 친구찾기)</string>
-   	<string name="share_route_as_gpx">경로를 GPX 파일로 공유</string>
+   	<string name="share_route_as_gpx">루트를 GPX 파일로 공유</string>
 	<string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
 	<string name="arrival_distance">도착 알림</string>
     <string name="arrival_distance_descr">도착 알림을 원하세요 ?</string>
@@ -1961,10 +1961,10 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="gpx_info_asc_altitude">하강/상승: %1$s</string>
     <string name="save_as_favorites_points">즐겨찾기 그룹으로 저장</string>
     <string name="select_destination_and_intermediate_points">포인트 선택</string>
-    <string name="layer_amenity_label">포인트 레이블</string>
+    <string name="layer_amenity_label">포인트 이름</string>
     <string name="show_zoom_buttons_navigation_descr">길안내중에 줌 버튼 보기</string>
     <string name="show_zoom_buttons_navigation">줌 버튼 보이기</string>
-    <string name="none_selected_gpx">"선택한 GPX파일 없음. 이용 가능한 GPX경로를 선택 하려면  누르고 있어요."</string>
+    <string name="none_selected_gpx">선택한 GPX파일 없음. 이용 가능한 GPX파일을 선택 하려면 누르고 있어요.</string>
     <string name="local_index_unselect_gpx_file">선택을 취소합니다.</string>
     <string name="local_index_select_gpx_file">보이기위해 선택</string>
     <string name="sort_by_distance">거리로 정렬</string>
