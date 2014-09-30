@@ -504,7 +504,7 @@
   <string name="offline_edition_descr">Beti erabili lineaz kanpoko edizioa</string>
   <string name="tip_recent_changes_0_7_1_t">"0.7.1 bertsioko aldaketak:⏎\n⇥- Lineaz kanpoko POIen edizioa⏎\n⇥- Sareko Jarraipen aukera - bidali aldizka koordenadak web zerbitzura (irakurri nola konfiguratu web zerbitzu propioa HowTo artikuluetan)⏎\n⇥- Erakutsi momentuan grabatutako bidea mapan⏎\n⇥- Norabidea detektatu: \'U-buelta eman\' agertu eta iragartzen da norabide txarra hartuz gero edo bira bat galduz gero.⏎\n⇥- Ahots abisu berriak \'Ibilbidea birkalkulatua izan da\'⏎\n⇥- 100m-tara berehalako biraketaren seinale optikoa, kolorez aldatzen den norabide geziarekin⏎\n⇥- Desaktibatutako indize fitxategiak orain ere Deskargen pantailan agertzen dira, berde ilun eta urdin ilunetan.⏎\n⇥- Beste aldaketa batzuk "</string>
   <string name="update_poi_does_not_change_indexes">Aplikazioaren barneko POI aldaketek ez diete deskargatutako mapen fitxategiei eragiten, aldaketak modu lokalean gordetzen dira.</string>
-  <string name="local_openstreetmap_uploading">Igotzen ...</string>
+  <string name="local_openstreetmap_uploading">Igotzen …</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/Akats izan dira igoak</string>
   <string name="local_openstreetmap_uploadall">Guztia igo</string>
   <string name="local_openstreetmap_show">Mapan erakutsi</string>
@@ -638,7 +638,7 @@
   <string name="vector_map_not_needed">Ez, milesker</string>
   <string name="basemap_missing">Oinarrizko munduko mapa (mundu guztia estaliz zoom maila txikietan) falta da. Mesedez kontsideratu World_basemap_x.obf deskargatzea ikuspegi guztia eduki ahal izateko.</string>
   <string name="vector_data_missing">Datu lokalak (lineaz kanpokoak) ez daude SD txartelean. Lineaz kanpoko mapak erabili nahi badituzu, jaitsi beharko zenituzke.</string>
-  <string name="local_index_gpx_info_show">⏎\n⏎\nZanpatuta mantendu aukerentzat</string>
+  <string name="local_index_gpx_info_show">\n\nZanpatuta mantendu aukerentzat</string>
   
   
   
