@@ -23,6 +23,7 @@ public class RouteSegmentResult {
 	private String description = "";
 	// this make not possible to make turns in between segment result for now
 	private TurnType turnType;
+	private boolean forwardDirection;
 	
 	
 	public RouteSegmentResult(RouteDataObject object, int startPointIndex, int endPointIndex) {
@@ -176,6 +177,10 @@ public class RouteSegmentResult {
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isForwardDirection() {
+		return endPointIndex - startPointIndex > 0;
 	}
 
 	@Override

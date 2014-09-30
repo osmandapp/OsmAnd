@@ -530,13 +530,30 @@ public class RouteResultPreparation {
 	private void getLanesInfo(RouteSegmentResult prevSegm, TurnType t, boolean leftSide) {
 		int lanes = prevSegm.getObject().getLanes();
 		if(prevSegm.getObject().getOneway() == 0) {
-			lanes = (lanes + 1) / 2;
+			if (prevSegm.isForwardDirection()
+					&& prevSegm.getObject().getValue("lanes:forward") != null) {
+				lanes = Integer.parseInt(prevSegm.getObject().getValue("lanes:forward"));
+			} else if (!prevSegm.isForwardDirection()
+					&& prevSegm.getObject().getValue("lanes:backward") != null) {
+				lanes = Integer.parseInt(prevSegm.getObject().getValue("lanes:backward"));
+			} else {
+				lanes = (lanes + 1) / 2;
+			}
 		}
 		if (lanes <= 0) {
 			return;
 		}
 
-		String turnLanes = prevSegm.getObject().getValue("turn:lanes");
+		String turnLanes;
+		if (prevSegm.getObject().getOneway() == 0) {
+			if (prevSegm.isForwardDirection()) {
+				turnLanes = prevSegm.getObject().getValue("turn:lanes:forward");
+			} else {
+				turnLanes = prevSegm.getObject().getValue("turn:lanes:backward");
+			}
+		} else {
+			turnLanes = prevSegm.getObject().getValue("turn:lanes");
+		}
 
 		if (turnLanes == null) {
 			return;
@@ -675,7 +692,13 @@ public class RouteResultPreparation {
 						kl = true;
 						int lns = attached.getObject().getLanes();
 						if (attached.getObject().getOneway() == 0) {
-							lns = (lns + 1) / 2;
+							if (attached.isForwardDirection() && attached.getObject().getValue("lanes:forward") != null) {
+								lns = Integer.parseInt(attached.getObject().getValue("lanes:forward"));
+							} else if (!attached.isForwardDirection() && attached.getObject().getValue("lanes:backward") != null) {
+								lns = Integer.parseInt(attached.getObject().getValue("lanes:backward"));
+							} else {
+								lns = (lns + 1) / 2;
+							}
 						}
 						if (lns <= 0) {
 							lns = 1;
@@ -686,7 +709,13 @@ public class RouteResultPreparation {
 						kr = true;
 						int lns = attached.getObject().getLanes();
 						if (attached.getObject().getOneway() == 0) {
-							lns = (lns + 1) / 2;
+							if (attached.isForwardDirection() && attached.getObject().getValue("lanes:forward") != null) {
+								lns = Integer.parseInt(attached.getObject().getValue("lanes:forward"));
+							} else if (!attached.isForwardDirection() && attached.getObject().getValue("lanes:backward") != null) {
+								lns = Integer.parseInt(attached.getObject().getValue("lanes:backward"));
+							} else {
+								lns = (lns + 1) / 2;
+							}
 						}
 						if (lns <= 0) {
 							lns = 1;
@@ -711,7 +740,13 @@ public class RouteResultPreparation {
 		// attachedRoutes covers all allowed outbound routes at that point except currentSegm.
 		int current = currentSegm.getObject().getLanes();
 		if(currentSegm.getObject().getOneway() == 0) {
-			current = (current + 1) / 2;
+			if (currentSegm.isForwardDirection() && currentSegm.getObject().getValue("lanes:forward") != null) {
+				current = Integer.parseInt(currentSegm.getObject().getValue("lanes:forward"));
+			} else if (!currentSegm.isForwardDirection() && currentSegm.getObject().getValue("lanes:backward") != null) {
+				current = Integer.parseInt(currentSegm.getObject().getValue("lanes:backward"));
+			} else {
+				current = (current + 1) / 2;
+			}
 		}
 		if (current <= 0) {
 			current = 1;
@@ -766,14 +801,31 @@ public class RouteResultPreparation {
 
 			int prevLanes = prevSegm.getObject().getLanes();
 			if(prevSegm.getObject().getOneway() == 0) {
-				prevLanes = (prevLanes + 1) / 2;
+				if (prevSegm.isForwardDirection()
+						&& prevSegm.getObject().getValue("lanes:forward") != null) {
+					prevLanes = Integer.parseInt(prevSegm.getObject().getValue("lanes:forward"));
+				} else if (!prevSegm.isForwardDirection()
+						&& prevSegm.getObject().getValue("lanes:backward") != null) {
+					prevLanes = Integer.parseInt(prevSegm.getObject().getValue("lanes:backward"));
+				} else {
+					prevLanes = (prevLanes + 1) / 2;
+				}
 			}
 			if (prevLanes <= 0) {
 				return null;
 			}
 			lanes = new int[prevLanes];
-			
-			String turnLanes = prevSegm.getObject().getValue("turn:lanes");
+
+			String turnLanes;
+			if (prevSegm.getObject().getOneway() == 0) {
+				if (prevSegm.isForwardDirection()) {
+					turnLanes = prevSegm.getObject().getValue("turn:lanes:forward");
+				} else {
+					turnLanes = prevSegm.getObject().getValue("turn:lanes:backward");
+				}
+			} else {
+				turnLanes = prevSegm.getObject().getValue("turn:lanes");
+			}
 
 			if (turnLanes == null) {
 				return null;
@@ -862,7 +914,16 @@ public class RouteResultPreparation {
 
 	private TurnType attachTurnLanesData(boolean leftSide, RouteSegmentResult prevSegm, TurnType t) {
 		int lanes = prevSegm.getObject().getLanes();
-		String turnLanes = prevSegm.getObject().getValue("turn:lanes");
+		String turnLanes;
+		if (prevSegm.getObject().getOneway() == 0) {
+			if (prevSegm.isForwardDirection()) {
+				turnLanes = prevSegm.getObject().getValue("turn:lanes:forward");
+			} else {
+				turnLanes = prevSegm.getObject().getValue("turn:lanes:backward");
+			}
+		} else {
+			turnLanes = prevSegm.getObject().getValue("turn:lanes");
+		}
 
 		if (turnLanes == null) {
 			return t;
