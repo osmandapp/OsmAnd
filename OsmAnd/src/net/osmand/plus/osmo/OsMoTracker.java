@@ -161,23 +161,23 @@ public class OsMoTracker implements OsMoReactor {
 			}
 			return true;
 		} else if(command.equals("LT")) {
-			float lat = 0;
-			float lon = 0;
-			float speed = 0;
+			double lat = 0;
+			double lon = 0;
+			double speed = 0;
 			int k = 0;
 			for (int i = 1; i <= data.length(); i++) {
 				boolean separator = i == data.length() || 
 					!(Character.isDigit(data.charAt(i)) ||
-							data.charAt(i) == ':' || data.charAt(i) == '.');
+							data.charAt(i) == ':' || data.charAt(i) == '.' || data.charAt(i) == '-');
 				if (separator) {
 					char ch = data.charAt(k);
 					String vl = data.substring(k + 1, i);
 					if (ch == 'L') {
 						int l = vl.indexOf(":");
-						lat = Float.parseFloat(vl.substring(0, l));
-						lon = Float.parseFloat(vl.substring(l + 1));
+						lat = Double.parseDouble(vl.substring(0, l));
+						lon = Double.parseDouble(vl.substring(l + 1));
 					} else if (ch == 'S') {
-						speed = Float.parseFloat(vl);
+						speed = Double.parseDouble(vl);
 					}
 					k = i;
 				}
@@ -188,7 +188,7 @@ public class OsMoTracker implements OsMoReactor {
 				loc.setLatitude(lat);
 				loc.setLongitude(lon);
 				if(speed > 0) {
-					loc.setSpeed(speed);
+					loc.setSpeed((float) speed);
 				}
 				if(trackerListener != null) {
 					trackerListener.locationChange(tid, loc);
