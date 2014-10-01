@@ -1949,4 +1949,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="local_index_description">Kliknij istniejący element, aby zobaczyć szczegóły, naciśnij i przytrzymaj, aby wyłączyć lub usunąć. Aktualne dane na urządzeniu (%1$s wolne):</string>
 	<string name="text_size_descr">Ustaw rozmiar tekstu na mapie.</string>
     <string name="text_size">Rozmiar tekstu</string>
+    <string name="fav_point_dublicate">Zduplikowana nazwa ulubionego punktu</string>
+    <string name="fav_point_dublicate_message">Zmieniliśmy nazwa twojego ulubionego punktu na %1$s w celu uniknięcia duplikatów nazw.</string>
     </resources>
