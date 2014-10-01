@@ -9,8 +9,8 @@ public class RotatedTileBox {
 	private float rotate;
 	private float density;
 	private int zoom;
-	private float zoomScale;
-	private float zoomAnimation;
+	private double zoomScale;
+	private double zoomAnimation;
 	private int cx;
 	private int cy;
 	private int pixWidth;
@@ -67,7 +67,7 @@ public class RotatedTileBox {
 	}
 
 	public void calculateDerivedFields() {
-		zoomFactor = Math.pow(2, zoomScale + zoomAnimation) * 256;
+		zoomFactor = Math.pow(2, zoomScale + zoomAnimation ) * 256;
 		double rad = Math.toRadians(this.rotate);
 		rotateCos = Math.cos(rad);
 		rotateSin = Math.sin(rad);
@@ -338,16 +338,16 @@ public class RotatedTileBox {
 		return zoomAnimation != 0;
 	}
 
-	public float getZoomAnimation() {
+	public double getZoomAnimation() {
 		return zoomAnimation;
 	}
 
-	public void setZoomAnimation(float z) {
+	public void setZoomAnimation(double z) {
 		this.zoomAnimation = z;
 		calculateDerivedFields();
 	}
 
-	public void setZoomAndAnimation(int zoom, float zoomAnimation) {
+	public void setZoomAndAnimation(int zoom, double zoomAnimation) {
 		this.zoomAnimation = zoomAnimation;
 		this.zoom = zoom;
 		calculateDerivedFields();
@@ -366,11 +366,12 @@ public class RotatedTileBox {
 
 	}
 	
-	public QuadPointDouble getLeftTopTile(float zoom) {
+	public QuadPointDouble getLeftTopTile(double zoom) {
 		checkTileRectangleCalculated();
 		return new QuadPointDouble((tileLT.x *  MapUtils.getPowZoom(zoom - this.zoom)),
 				(tileLT.y *  MapUtils.getPowZoom(zoom - this.zoom)));
 	}
+
 	
 	public QuadPointDouble getRightBottomTile(float zoom) {
 		checkTileRectangleCalculated();
@@ -391,7 +392,7 @@ public class RotatedTileBox {
 				MapUtils.getLongitudeFromTile(zoom, alignTile(tileRB.x)));
 	}
 
-	public void setZoom(int zoom, float zoomScale) {
+	public void setZoom(int zoom, double zoomScale) {
 		this.zoom = zoom;
 		this.zoomScale = zoomScale;
 		calculateDerivedFields();
@@ -402,14 +403,14 @@ public class RotatedTileBox {
 		calculateDerivedFields();
 	}
 
-	public void setZoom(int zoom, float zoomScale, float zoomToAnimate) {
+	public void setZoom(int zoom, double zoomScale, double zoomToAnimate) {
 		this.zoom = zoom;
 		this.zoomScale = zoomScale;
 		this.zoomAnimation = zoomToAnimate;
 		calculateDerivedFields();
 	}
 
-	public float getZoomScale() {
+	public double getZoomScale() {
 		return zoomScale;
 	}
 	
@@ -498,7 +499,7 @@ public class RotatedTileBox {
 			return this;
 		}
 
-		public RotatedTileBoxBuilder setZoomAndScale(int zoom, float scale) {
+		public RotatedTileBoxBuilder setZoomAndScale(int zoom, double scale) {
 			tb.zoom = zoom;
 			tb.zoomScale = scale;
 			zoomSet = true;

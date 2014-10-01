@@ -1838,6 +1838,9 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="traffic_warning_calming">Eismo greičio ribojimas</string>
     <string name="traffic_warning_speed_camera">Greičio matavimo kamera</string>
     <string name="traffic_warning">Eismo perspėjimas</string>
-	<string name="text_size_descr">Nustatyti teksto žemėlapyje dydį</string>
+	<string name="text_size_descr">Nustatyti teksto žemėlapyje dydį.</string>
     <string name="text_size">Teksto dydis</string>
-    </resources>
+    <string name="fav_point_dublicate">Pasikartojantis įsimintinos vietos pavadinimas</string>
+    <string name="fav_point_dublicate_message">Mes pakeitėme įsimintinos vietos pavadinimą į %1$s kad išvengtume pasikartojimų.</string>
+    <string name="local_index_description">Spustelėkite bet kurį elementą, norėdami gauti daugiau informacijos, paspauskite ir laikykite, norėdami išjungti arba ištrinti. Dabartiniai duomenys įrenginyje (%1$ s laisva):</string>
+	</resources>

@@ -1410,7 +1410,7 @@
 	<string name="download_using_mobile_internet">Derzeit besteht keine WLAN-Verbindung. Soll das Herunterladen mit der aktuellen Datenverbindung erfolgen?</string>
 	<string name="clear_destination">Ziel löschen</string>
 	<string name="other_location">Andere</string>
-	<string name="files_limit">%1$d Dateien fehlen noch</string>
+	<string name="files_limit">In dieser kostenlosen Version können noch %1$d Dateien heruntergeladen werden.</string>
 	<string name="available_downloads_left">Es stehen %1$d Dateien zum Herunterladen bereit</string>
 	<string name="install_paid">Vollversion</string>
 	<string name="cancel_navigation">Navigation stoppen</string>
@@ -1839,11 +1839,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungs-Einstellungen und des persönlichen Überwachungs-Kanals</string>
-	<string name="osmo_plugin_description">OpenStreetMap erweiterte Live-Überwachung, siehe http://osmo.mobi. Ermöglicht die Verfolgung des eigenen oder anderer Geräten.
-	Erstellen anonymer Gruppen, teilen des Standortes sowie Kommunizieren untereinander. Es gibt verschiedene Einstellungen für Sitzungs- oder Permanenet-Aufzeichnung.
-	Anonyme Gruppen sind-zeit-oder funktionslimitiert, ohne Fernkonfiguration oder Gruppen-Adminisrator
-	Voll funktionsfähige Gruppen müssen auf der Internetseite erstellt werden, auf diese haben nur registrierte Nutzer Zugriff.
-	</string>
+	<string name="osmo_plugin_description">"Erweiterte OpenStreetMap-basierte Live-Überwachung, siehe http://osmo.mobi ... Ermöglicht die Positionsdarstellung in von einzelnen Geräten in Echtzeit. Bei anonym erstellten Gruppen sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff. "</string>
 	<string name="osmo_plugin_name">OsMo (Erweiterte Live-Überwachung)</string>
 	<string name="osmo_settings">OsMo OpenStreetMap-Überwachung</string>
 	<string name="osmo_io_error">OsMo Verbindungsproblem: </string>
@@ -1976,4 +1972,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="record_plugin_description">Speichern Sie Ihre Tracks mit einem Klick. Zeigt die Einstellung, wie Strecken aufgezeichnet werden – in lokale GPX-Dateien oder online via Web-Service.</string>
     <string name="route_descr_destination"/>
     <string name="local_index_description">Antippen eines Elements um mehr Details zu erfahren, Tippen und Halten zum Deaktivieren oder Löschen des Elements. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
-	</resources>
+	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
+    <string name="text_size">Schriftgröße</string>
+    <string name="fav_point_dublicate">Doppelung beim Favoriten-Namen</string>
+    <string name="fav_point_dublicate_message">Name des Favoriten bereits vergeben, er wurde auf %1$s geändert.</string>
+    </resources>

@@ -45,6 +45,13 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse("geo", url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z, name));
 
+		// geo:34.99,-106.61?q=34.99%2C-106.61 (Treasure Island)
+		z = GeoParsedPoint.NO_ZOOM;
+		url = "geo:" + dlat + "," + dlon + "?q=" + dlat + "%2C" + dlon + " (" + name + ")";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse("geo", url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z, name));
+
 		// 0,0?q=34,-106(Treasure Island)
 		z = GeoParsedPoint.NO_ZOOM;
 		url = "geo:0,0?q=" + ilat + "," + ilon + " (" + name + ")";
@@ -331,7 +338,7 @@ public class GeoPointParserUtil {
 	 * @return {@link GeoParsedPoint}
 	 */
 	public static GeoParsedPoint parse(final String scheme, final String uri) {
-		final URI data = URI.create(uri.replaceAll("\\s+", "+").replaceAll("%20", "+"));
+		final URI data = URI.create(uri.replaceAll("\\s+", "+").replaceAll("%20", "+").replaceAll("%2C", ","));
 		if ("http".equals(scheme) || "https".equals(scheme)) {
 
 			final String schemeSpecific = data.getSchemeSpecificPart();
@@ -469,7 +476,7 @@ public class GeoPointParserUtil {
 			} else {
 				// geo:47.6,-122.3
 				// geo:47.6,-122.3?z=11 (Treasure Island)
-				final String pattern = "([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:\\?z=(\\d{1,2}))?[\\+]?(?:\\((.*?)\\))?";
+				final String pattern = "([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:(?:\\?z=(\\d{1,2}))?|(?:\\?q=.*?)?)[\\+]?(?:\\((.*?)\\))?";
 				final Matcher matcher = Pattern.compile(pattern).matcher(schemeSpecific);
 				if (matcher.matches()) {
 					final double lat = Double.valueOf(matcher.group(1));

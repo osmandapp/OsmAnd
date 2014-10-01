@@ -124,6 +124,8 @@ public class DownloadActivityType {
 				return IndexConstants.EXTRA_EXT;
 			} else if (indexItem.fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 				return IndexConstants.SQLITE_EXT;
+			} else if (indexItem.fileName.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)){
+				return "";
 			}
 		} else if (ROADS_FILE == this) {
 			return "-roads" + BINARY_MAP_INDEX_EXT;

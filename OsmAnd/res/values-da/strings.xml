@@ -1222,7 +1222,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="default_buttons_cancel">Annuller</string>
 	<string name="context_menu_item_create_poi">Opret interessepunkt</string>
 	<string name="context_menu_item_update_map">Opdater kort</string>
-	<string name="context_menu_item_add_favorite">Tilføj til favoritter</string>
+	<string name="context_menu_item_add_favorite">Tilføj som favorit</string>
 	<string name="search_tabs_location">Placering</string>
 	<string name="search_address_street_option">Krydsende vej</string>
 	<string name="search_address_building_option">Bygning</string>
@@ -1369,7 +1369,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="show_osm_bugs_descr">Vis OSM-fejl på kort</string>
 	<string name="show_osm_bugs">Vis OSM-fejl</string>
 	<string name="favourites_activity">Favoritter</string>
-	<string name="add_to_favourite">Tilføj til favoritter</string>
+	<string name="add_to_favourite">Tilføj som favorit</string>
 	<string name="use_english_names_descr">Vælg mellem oprindelige eller engelske navne</string>
 	<string name="use_english_names">Engelske navne</string>
 	<string name="app_settings">Programindstillinger</string>
@@ -1989,4 +1989,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="local_index_description">Klik på et eksisterende element for at se flere detaljer, langt tryk for at deaktivere eller slette. Aktuelle data på enhed (%1$s ledig):</string>
 	<string name="text_size_descr">Vælg tekststørrelsen på kortet.</string>
     <string name="text_size">Tekststørrelse</string>
+    <string name="fav_point_dublicate">Favoritnavn dublet</string>
+    <string name="fav_point_dublicate_message">Favoritnavn er ændret til %1$s for at undgå dubletter.</string>
     </resources>

@@ -124,7 +124,7 @@ public class MapZoomControls extends MapControls {
 		zoomShadow.draw(canvas);
 		if (drawZoomLevel) {
 			String zoomText = tb.getZoom() + "";
-			float frac = tb.getZoomScale();
+			double frac = tb.getZoomScale();
 			if (frac != 0) {
 				int ifrac = (int) (frac * 10);
 				boolean pos = ifrac > 0;

@@ -104,7 +104,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	
 	public int getRadiusPoi(RotatedTileBox tb){
 		int r = 0;
-		final float zoom = tb.getZoom() + tb.getZoomScale();
+		final double zoom = tb.getZoom() + tb.getZoomScale();
 		if(zoom < startZoom){
 			r = 0;
 		} else if(zoom <= 11){

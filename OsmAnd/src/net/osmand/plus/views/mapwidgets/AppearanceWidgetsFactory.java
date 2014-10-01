@@ -18,6 +18,7 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.preference.PreferenceGroup;
 import android.widget.Toast;
 
 public class AppearanceWidgetsFactory {
@@ -51,6 +52,35 @@ public class AppearanceWidgetsFactory {
                 public void run() {
                     view.getSettings().SHOW_RULER.set(!view.getSettings().SHOW_RULER.get());
                     view.refreshMap();
+                }
+            });
+            MapWidgetRegistry.MapWidgetRegInfo w = mapInfoControls.registerAppearanceWidget(R.drawable.widget_no_icon, 
+            		R.string.text_size, "text_size", view.getSettings().TEXT_SCALE);
+            w.setStateChangeListener(new Runnable() {
+                @Override
+                public void run() {
+                    AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
+                    //test old descr as title
+                    b.setTitle(R.string.text_size);
+                    final Float[] txtValues = new Float[] {0.75f, 1f, 1.25f, 1.5f, 2f, 3f} ;
+                    int selected = -1;
+            		final String[] txtNames = new String[txtValues.length];
+					for (int i = 0; i < txtNames.length; i++) {
+						txtNames[i] = (int) (txtValues[i] * 100) + " %";
+						if (view.getSettings().TEXT_SCALE.get() == txtValues[i]) {
+							selected = i;
+						}
+					}
+                    b.setSingleChoiceItems(txtNames, selected, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        	view.getSettings().TEXT_SCALE.set(txtValues[which]);
+                            view.getApplication().getResourceManager().getRenderer().clearCache();
+                            view.refreshMap(true);
+                            dialog.dismiss();
+                        }
+                    });
+                    b.show();
                 }
             });
 

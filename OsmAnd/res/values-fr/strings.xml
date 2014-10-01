@@ -1828,4 +1828,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="traffic_warning_speed_camera">Radar de vitesse</string>
     <string name="traffic_warning">Alerte de circulation</string>
 	<string name="local_index_description">Cliquez sur n\'importe quel élément pour voir plus de détails, maintenez appuyé pour désactiver ou supprimer. Données actuellement sur l\'appareil (%1$s libre) :</string>
-	</resources>
+	<string name="text_size">Taille du texte</string>
+    <string name="fav_point_dublicate">Ce nom est déjà utilisé pour un point favori.</string>
+    <string name="fav_point_dublicate_message">Nous avons changé le nom de votre point favori en %1$s pour éviter les doublons.</string>
+    <string name="text_size_descr">Sélectionner la taille du texte sur la carte.</string>
+    </resources>
