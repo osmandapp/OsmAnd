@@ -263,6 +263,7 @@ public class MapActivity extends AccessibleActivity  {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		mapViewController.resume();
 		cancelNotification();
 		//fixing bug with action bar appearing on android 2.3.3
 		if (getSupportActionBar() != null){
@@ -529,6 +530,7 @@ public class MapActivity extends AccessibleActivity  {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		mapViewController.destroy();
 		FailSafeFuntions.quitRouteRestoreDialog();
 		OsmandPlugin.onMapActivityDestroy(this);
 		mapViewTrackingUtilities.setMapView(null);

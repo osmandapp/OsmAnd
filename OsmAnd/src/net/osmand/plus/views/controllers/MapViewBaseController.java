@@ -99,4 +99,15 @@ public abstract class MapViewBaseController {
 	public interface OnTrackBallListener {
 		public boolean onTrackBallEvent(MotionEvent e);
 	}
+
+	public boolean onTouchEvent(MotionEvent event) {
+		return false;
+	}
+
+	public void resume(){
+	}
+
+	public void destroy(){
+
+	}
 }

@@ -1,10 +1,11 @@
 package net.osmand.core.android;
 
 import android.content.Context;
-import android.content.res.AssetManager;
-import android.content.res.Resources;
 
-import jni.*;
+import net.osmand.core.jni.ICoreResourcesProvider;
+import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
+import net.osmand.core.jni.SWIGTYPE_p_bool;
+import net.osmand.core.jni.SwigUtilities;
 
 // This class provides reverse mapping from 'embed-resources.list' to scheme used by current (legacy in future) OsmAnd for Android
 public class CoreResourcesFromAndroid_LegacyOsmAndCompatible extends ICoreResourcesProvider {

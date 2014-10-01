@@ -13,11 +13,11 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import jni.BoolPtr;
-import jni.ICoreResourcesProvider;
-import jni.SWIGTYPE_p_QByteArray;
-import jni.SWIGTYPE_p_bool;
-import jni.SwigUtilities;
+import net.osmand.core.jni.BoolPtr;
+import net.osmand.core.jni.ICoreResourcesProvider;
+import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
+import net.osmand.core.jni.SWIGTYPE_p_bool;
+import net.osmand.core.jni.SwigUtilities;
 import net.osmand.plus.OsmandApplication;
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -85,11 +85,11 @@ public class CoreResourcesFromAndroidAssets extends ICoreResourcesProvider {
 //                offset = resourceFd.getStartOffset();
 //                resourceFd.close();
 //            } catch (IOException e) {
-//                Log.e(TAG, "Failed to locate '" + resourceInBundle + "'", e);
+//                Log.e(NATIVE_TAG, "Failed to locate '" + resourceInBundle + "'", e);
 //                continue;
 //            }
 //            if (declaredSize != size) {
-//                Log.e(TAG, "Declared size does not match size for '" + resourceInBundle + "'");
+//                Log.e(NATIVE_TAG, "Declared size does not match size for '" + resourceInBundle + "'");
 //                continue;
 //            }
             final ResourceData resourceData = new ResourceData();

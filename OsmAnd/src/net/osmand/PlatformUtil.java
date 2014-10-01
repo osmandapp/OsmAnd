@@ -91,7 +91,7 @@ public class PlatformUtil {
 		@Override
 		public boolean isDebugEnabled() {
 			// For debur purposes always true
-//			return android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
+//			return android.util.Log.isLoggable(NATIVE_TAG, android.util.Log.DEBUG);
 			return true;
 		}
 
