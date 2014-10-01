@@ -1852,7 +1852,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="flat_list_waypoitns">Todos</string>
     <string name="waypoints">Puntos de ruta</string>
     <string name="targets">Destinos</string>
-    <string name="way_alarms">Advertencias de tráfico</string>
+    <string name="way_alarms">Avisos de tráfico</string>
     <string name="speak_favorites">Anunciar favoritos cercanos</string>
     <string name="speak_poi">Anunciar PDI cercano</string>
     <string name="flat_list_waypoints">Todos</string>
@@ -1871,12 +1871,12 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="save_global_track_interval">Intervalo de guardado general</string>
 	<string name="traffic_warning_speed_limit">Límite de velocidad</string>
     <string name="traffic_warning_border_control">Control fronterizo</string>
-    <string name="traffic_warning_payment">Cabina de peaje</string>
+    <string name="traffic_warning_payment">Peaje</string>
     <string name="traffic_warning_stop">Señal de stop</string>
     <string name="traffic_warning_speed_camera">Radar de velocidad</string>
     <string name="local_index_description">Pulsa cualquier objeto para ver más detalles, mantén pulsado para desactivar o borrar. Datos en el dispositivo actualmente (%1$s libre):</string>
 	<string name="traffic_warning_calming">Reductores de velocidad</string>
-    <string name="traffic_warning">Alerta de tráfico</string>
+    <string name="traffic_warning">Aviso de tráfico</string>
 	<string name="text_size_descr">Selecciona el tamaño del texto en el mapa.</string>
     <string name="text_size">Tamaño de texto</string>
     <string name="fav_point_dublicate">Nombre de punto favorito duplicado</string>
