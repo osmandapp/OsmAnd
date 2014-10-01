@@ -2079,4 +2079,8 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="text_size">텍스트 크기</string>
     <string name="fav_point_dublicate">즐겨찾기 포인트 이름 중복</string>
     <string name="fav_point_dublicate_message">중복된 포인트 이름을 방지 하기 위해서 %1$s 에 즐겨찾기 포인트 이름을 변경합니다.</string>
+    <string name="test_native_render">기본 렌더링 테스트</string>
+    <string name="test_native_render_msg">기본 렌더링으로 활동(activity)을 시작합니다</string>
+    <string name="use_native_render">기본 렌더링 사용</string>
+    <string name="use_native_render_descr">Java 대신 C++ 렌더링을 사용합니다</string>
     </resources>
