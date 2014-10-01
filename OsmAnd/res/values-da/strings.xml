@@ -1991,4 +1991,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="text_size">Tekststørrelse</string>
     <string name="fav_point_dublicate">Favoritnavn dublet</string>
     <string name="fav_point_dublicate_message">Favoritnavn er ændret til %1$s for at undgå dubletter.</string>
+    <string name="test_native_render">Test native render</string>
+    <string name="test_native_render_msg">Start aktivitet med native render</string>
+    <string name="use_native_render">Brug native render</string>
+    <string name="use_native_render_descr">Brug C++ render i stedet for Java</string>
     </resources>
