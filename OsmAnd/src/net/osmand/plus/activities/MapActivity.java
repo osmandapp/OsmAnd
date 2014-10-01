@@ -134,9 +134,15 @@ public class MapActivity extends AccessibleActivity  {
 		app.checkApplicationIsBeingInitialized(this, startProgressDialog);
 		parseLaunchIntentLocation();
 
-		if (settings.USE_NATIVE_RENDER.get()){
+		//defending user from multiple failures of loading native renderer
+		//if app fails - user will need to manually set USE_NATIVE_RENDER again
+		if (settings.USE_NATIVE_RENDER.get() && !settings.CPP_RENDER_FAILED.get()){
+			settings.CPP_RENDER_FAILED.set(true);
+			settings.USE_NATIVE_RENDER.set(false);
 			setContentView(R.layout.activity_gl);
 			mapViewController = new NativeViewController((GLSurfaceView) findViewById(R.id.glSurfaceView), this);
+			settings.CPP_RENDER_FAILED.set(false);
+			settings.USE_NATIVE_RENDER.set(true);
 		} else {
 			setContentView(R.layout.main);
 			mapViewController = new JavaViewController((OsmandMapTileView) findViewById(R.id.MapView), this);
@@ -605,10 +611,10 @@ public class MapActivity extends AccessibleActivity  {
 
 			@Override
 			public void stateChanged(Boolean change) {
-				getMapView().refreshMap(true);
+				mapViewController.refreshMap(true);
 			}
 		});
-		getMapView().refreshMap(true);
+		mapViewController.refreshMap(true);
 	}
 	
 	
@@ -719,7 +725,7 @@ public class MapActivity extends AccessibleActivity  {
 	}
 
 	public void refreshMap() {
-		getMapView().refreshMap();
+		mapViewController.refreshMap(false);
 	}
 
 	public View getLayout() {

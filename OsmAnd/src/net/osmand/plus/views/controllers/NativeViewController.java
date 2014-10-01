@@ -23,6 +23,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.SimpleTwoFingerTapDetector;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -34,6 +35,15 @@ import java.util.List;
  * Created by Denis on 01.10.2014.
  */
 public class NativeViewController extends MapViewBaseController {
+
+	static {
+		NativeOsmandLibrary.loadLibrary("gnustl_shared");
+		NativeOsmandLibrary.loadLibrary("Qt5Core");
+		NativeOsmandLibrary.loadLibrary("Qt5Network");
+		NativeOsmandLibrary.loadLibrary("Qt5Sql");
+		NativeOsmandLibrary.loadLibrary("OsmAndCoreWithJNI");
+	}
+
 	private GLSurfaceView glSurfaceView;
 	private OsmandSettings settings;
 	private MapActivity mapActivity;
@@ -156,7 +166,7 @@ public class NativeViewController extends MapViewBaseController {
 		Log.i(NATIVE_TAG, "rasterTileSize = " + rasterTileSize);
 
 		Log.i(NATIVE_TAG, "Initializing core...");
-		coreResources = CoreResourcesFromAndroidAssets.loadFromCurrentApplication(mapActivity);
+		coreResources = CoreResourcesFromAndroidAssets.loadFromCurrentApplication(mapActivity.getMyApplication());
 		OsmAndCore.InitializeCore(coreResources);
 
 		File directory =mapActivity.getMyApplication().getAppPath("");
@@ -396,7 +406,7 @@ public class NativeViewController extends MapViewBaseController {
 
 	@Override
 	public void refreshMap(boolean b) {
-		super.refreshMap(b);
+		updateView();
 	}
 
 	@Override
@@ -431,7 +441,7 @@ public class NativeViewController extends MapViewBaseController {
 
 	@Override
 	public ViewParent getParentView() {
-		return super.getParentView();
+		return glSurfaceView.getParent();
 	}
 
 	@Override

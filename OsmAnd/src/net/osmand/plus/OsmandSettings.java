@@ -701,6 +701,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> USE_KALMAN_FILTER_FOR_COMPASS = new BooleanPreference("use_kalman_filter_compass", true).makeGlobal().cache();
 
 	public final OsmandPreference<Boolean> USE_NATIVE_RENDER = new BooleanPreference("use_native_render", false).makeGlobal().cache();
+
+	public final OsmandPreference<Boolean> CPP_RENDER_FAILED = new BooleanPreference("cpp_render_failed", false).makeGlobal().cache();
 	
 	public final CommonPreference<Float> TEXT_SCALE = new FloatPreference("text_scale", 1f).makeProfile().cache();
 	{

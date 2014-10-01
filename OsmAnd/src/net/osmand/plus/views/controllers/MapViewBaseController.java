@@ -108,6 +108,6 @@ public abstract class MapViewBaseController {
 	}
 
 	public void destroy(){
-
 	}
+
 }
