@@ -493,7 +493,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="version_index_is_big_for_memory">인덱스 \'\'{0}\'\' 가 메모리에 적합하지 않습니다</string>
 	<string name="version_index_is_not_supported">인덱스 \'\'{0}\'\' 버전은 지원되지 않습니다</string>
 
-	<string name="use_osmand_routing_service">OsmAnd 라우팅 &gt;20km</string>
+	<string name="use_osmand_routing_service">OsmAnd 라우팅 서비스 &gt;20km</string>
 	<string name="use_osmand_routing_service_descr">20km 이상 긴 거리를 위해 CloudMade 대신에 OsmAnd 오프라인 라우팅을 사용합니다</string>
 	<string name="osmand_routing_experimental">OsmAnd 오프라인 라우팅은 실험적인 기능이며 20 km 이상의 거리에서는 동작하지 않습니다.\n\n라우팅 서비스는 일시적으로 온라인서비스인 CloudMade로 변경합니다.</string>
 	<string name="specified_dir_doesnt_exist">지정한 폴더를 찾을 수 없습니다.</string>
@@ -1174,7 +1174,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="stop_routing_confirm">라우팅을 중지하시겠습니까 ?</string>
     <string name="clear_dest_confirm">목적지를 취소하시겠습니까?</string>
     <string name="precise_routing_mode_descr">고장 없이 정확한 경로를 계산(라우팅) 할 수 있습니다 (여전히 거리 제한하고 느린 속도로).</string>
-    <string name="precise_routing_mode">정확한 길찾기:라우팅 (알파)</string>
+    <string name="precise_routing_mode">정확한 라우팅 모드</string>
     <string name="recording_context_menu_show">표시</string>
     <string name="recording_photo_description">사진 %1$s of %2$s</string>
     <string name="av_def_action_picture">사진 찍기</string>
