@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 
-import net.osmand.core.jni.*;
+import jni.*;
 
 // This class provides reverse mapping from 'embed-resources.list' to scheme used by current (legacy in future) OsmAnd for Android
 public class CoreResourcesFromAndroid_LegacyOsmAndCompatible extends ICoreResourcesProvider {

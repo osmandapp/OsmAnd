@@ -13,11 +13,11 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.osmand.core.jni.BoolPtr;
-import net.osmand.core.jni.ICoreResourcesProvider;
-import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
-import net.osmand.core.jni.SWIGTYPE_p_bool;
-import net.osmand.core.jni.SwigUtilities;
+import jni.BoolPtr;
+import jni.ICoreResourcesProvider;
+import jni.SWIGTYPE_p_QByteArray;
+import jni.SWIGTYPE_p_bool;
+import jni.SwigUtilities;
 import net.osmand.plus.OsmandApplication;
 import android.content.Context;
 import android.content.pm.PackageInfo;

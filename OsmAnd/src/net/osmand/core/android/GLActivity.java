@@ -7,8 +7,7 @@ import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 import javax.microedition.khronos.opengles.GL10;
 
-import net.osmand.core.android.CoreResourcesFromAndroidAssets;
-import net.osmand.core.jni.*;
+import jni.*;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
@@ -246,7 +245,7 @@ public class GLActivity extends Activity {
 		_mapRenderer.setAzimuth(0.0f);
 		_mapRenderer.setElevationAngle(90);
 		_mapRenderer.setTarget(new PointI(currentViewport.getCenter31X(), currentViewport.getCenter31Y()));
-		_mapRenderer.setZoom(currentViewport.getZoom() + currentViewport.getZoomScale());
+		_mapRenderer.setZoom((float)currentViewport.getZoom() + (float)currentViewport.getZoomScale());
 	}
 
 	private GLSurfaceView _glSurfaceView;
