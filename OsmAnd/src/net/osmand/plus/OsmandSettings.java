@@ -699,6 +699,10 @@ public class OsmandSettings {
 	// magnetic field doesn'torkmost of the time on some phones
 	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> USE_KALMAN_FILTER_FOR_COMPASS = new BooleanPreference("use_kalman_filter_compass", true).makeGlobal().cache();
+
+	public final OsmandPreference<Boolean> USE_NATIVE_RENDER = new BooleanPreference("use_native_render", false).makeGlobal().cache();
+
+	public final OsmandPreference<Boolean> CPP_RENDER_FAILED = new BooleanPreference("cpp_render_failed", false).makeGlobal().cache();
 	
 	public final CommonPreference<Float> TEXT_SCALE = new FloatPreference("text_scale", 1f).makeProfile().cache();
 	{
@@ -747,7 +751,6 @@ public class OsmandSettings {
 	// this value boolean is synchronized with settings_pref.xml preference offline POI/Bugs edition
 	public final OsmandPreference<Boolean> OFFLINE_EDITION = new BooleanPreference("offline_edition", false).makeGlobal();
 
-	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<DayNightMode> DAYNIGHT_MODE = 
 		new EnumIntPreference<DayNightMode>("daynight_mode", DayNightMode.DAY, DayNightMode.values());
