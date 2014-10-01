@@ -384,9 +384,8 @@
   <string name="tip_app_mode">Gebruiksprofiel</string>
   
   <string name="tip_navigation">Navigatie</string>
-  <string name="tip_navigation_t">Je start navigatie door een bestemming te kiezen. Dat kan door lang op de kaart te drukken en op de omschrijving te tikken en \'Als bestemming instellen\' te kiezen. Je kan de navigatie ook starten door op het verkeerdsbord-icoontje te tikken bij een zoekopdracht of door te kiezen voor \'Aanwijzingen\' in de favorietenlijst. De bestemming wordt aangegeven met een oranje vlaggetje op de kaart en de afstand en richting er naar toe worden getoond (oranje driehoekje).
-		\n\nJe kan een ander startpunt kiezen door het punt te selecteren op de kaart en \'Aanwijzingen vanaf\' te kiezen. Met navigatie wordt de route dan automatisch opnieuw berekend zodra je echte positie bekend is. Zo kan je snel starten op een plaats zonder GPS-ontvangst. Als je \'Toon route\' kiest wordt de route niet herberekend.
-	</string>
+  <string name="tip_navigation_t">"Je start navigatie door een bestemming te kiezen. Dat kan door lang op de kaart te drukken en op de omschrijving te tikken en \'Als bestemming instellen\' te kiezen. Je kan de navigatie ook starten door op het verkeersbord-icoontje te tikken bij een zoekopdracht of door te kiezen voor \'Aanwijzingen\' in de favorietenlijst. De bestemming wordt aangegeven met een oranje vlaggetje op de kaart en de afstand en richting er naar toe worden getoond (oranje driehoekje).
+\n\nJe kan een ander startpunt kiezen door het punt te selecteren op de kaart en \'Aanwijzingen vanaf\' te kiezen. Met navigatie wordt de route dan automatisch opnieuw berekend zodra je echte positie bekend is. Zo kan je snel starten op een plaats zonder GPS-ontvangst. Als je \'Toon route\' kiest wordt de route niet herberekend. "</string>
   <string name="tip_search">Zoeken</string>
   <string name="tip_search_t">"Je kan direct op de kaart naar plaatsen zoeken of zoeken naar een locatie (\'Kaartcontextmenu\' → \'Zoek hier dichtbij\'), of met het zoekscherm met \'Menu\' → \'Zoeken\'.
 \n\nOp het zoekscherm kan je zoeken:
