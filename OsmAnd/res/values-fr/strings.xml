@@ -1832,4 +1832,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="fav_point_dublicate">Ce nom est déjà utilisé pour un point favori.</string>
     <string name="fav_point_dublicate_message">Nous avons changé le nom de votre point favori en %1$s pour éviter les doublons.</string>
     <string name="text_size_descr">Sélectionner la taille du texte sur la carte.</string>
+    <string name="test_native_render">Tester le rendu natif</string>
+    <string name="test_native_render_msg">Démarrer l\'activité avec le rendu natif</string>
+    <string name="use_native_render">Utiliser le rendu natif</string>
+    <string name="use_native_render_descr">Utiliser le moteur de rendu C++ au lieu de Java</string>
     </resources>
