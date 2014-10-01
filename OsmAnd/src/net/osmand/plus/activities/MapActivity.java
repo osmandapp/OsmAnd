@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.opengl.GLSurfaceView;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.access.AccessibilityPlugin;
@@ -39,9 +40,11 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
-import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controllers.JavaViewController;
+import net.osmand.plus.views.controllers.MapViewBaseController;
+import net.osmand.plus.views.controllers.NativeViewController;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import android.app.Dialog;
@@ -71,15 +74,13 @@ import android.widget.Toast;
 
 public class MapActivity extends AccessibleActivity  {
 	
-	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
 	
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 	
     /** Called when the activity is first created. */
-	private OsmandMapTileView mapView;
-	
+
 	private MapActivityActions mapActions;
 	private MapActivityLayers mapLayers;
 	
@@ -100,6 +101,7 @@ public class MapActivity extends AccessibleActivity  {
 	private StateChangedListener<ApplicationMode> applicationModeListener;
 	private FrameLayout lockView;
 	private GpxImportHelper gpxImportHelper;
+	private MapViewBaseController mapViewController;
 	
 	
 	private Notification getNotification() {
@@ -126,32 +128,45 @@ public class MapActivity extends AccessibleActivity  {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// Full screen is not used here
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.main);
+
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
 		app.checkApplicationIsBeingInitialized(this, startProgressDialog);
 		parseLaunchIntentLocation();
-		
-		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
-		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener(){
+
+		//defending user from multiple failures of loading native renderer
+		//if app fails - user will need to manually set USE_NATIVE_RENDER again
+		if (settings.USE_NATIVE_RENDER.get() && !settings.CPP_RENDER_FAILED.get()){
+			settings.CPP_RENDER_FAILED.set(true);
+			settings.USE_NATIVE_RENDER.set(false);
+			setContentView(R.layout.activity_gl);
+			mapViewController = new NativeViewController((GLSurfaceView) findViewById(R.id.glSurfaceView), this);
+			settings.CPP_RENDER_FAILED.set(false);
+			settings.USE_NATIVE_RENDER.set(true);
+		} else {
+			setContentView(R.layout.main);
+			mapViewController = new JavaViewController((OsmandMapTileView) findViewById(R.id.MapView), this);
+		}
+
+		mapViewController.setTrackBallDelegate(new JavaViewController.OnTrackBallListener(){
 			@Override
 			public boolean onTrackBallEvent(MotionEvent e) {
 				showAndHideMapPosition();
 				return MapActivity.this.onTrackballEvent(e);
 			}
 		});
-		mapView.setAccessibilityActions(new MapAccessibilityActions(this));
+		mapViewController.setAccessibilityActions(new MapAccessibilityActions(this));
 		if(mapViewTrackingUtilities == null) {
 			mapViewTrackingUtilities = new MapViewTrackingUtilities(app);
 		}
-		mapViewTrackingUtilities.setMapView(mapView);
+		mapViewController.setTrackingUtilities(mapViewTrackingUtilities);
 
 		// Do some action on close
 		startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface dialog) {
 				app.getResourceManager().getRenderer().clearCache();
-				mapView.refreshMap(true);
+				mapViewController.refreshMap(true);
 			}
 		});
 		
@@ -163,12 +178,12 @@ public class MapActivity extends AccessibleActivity  {
 					mgr.tileDownloaded(request);
 				}
 				if(request == null || !request.error){
-					mapView.tileDownloaded(request);
+					mapViewController.tileDownloaded(request);
 				}
 			}
 		});
 		createProgressBarForRouting();
-		mapLayers.createLayers(mapView);
+		mapViewController.createLayers(mapLayers);
 		// This situtation could be when navigation suddenly crashed and after restarting
 		// it tries to continue the last route
 		if (settings.FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()
@@ -180,14 +195,15 @@ public class MapActivity extends AccessibleActivity  {
 			// show first time when application ran
 			net.osmand.Location location = app.getLocationProvider().getFirstTimeRunDefaultLocation();
 			if(location != null){
-				mapView.setLatLon(location.getLatitude(), location.getLongitude());
-				mapView.setIntZoom(14);
+				mapViewController.setLatLon(location.getLatitude(), location.getLongitude());
+				mapViewController.setIntZoom(14);
 			}
 		}
 		addDialogProvider(mapActions);
 		OsmandPlugin.onMapActivityCreate(this);
 		if(lockView != null) {
-			((FrameLayout)mapView.getParent()).addView(lockView);
+			mapViewController.addView(lockView);
+
 		}
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
 	}
@@ -197,7 +213,7 @@ public class MapActivity extends AccessibleActivity  {
 	}
 
 	private void createProgressBarForRouting() {
-		FrameLayout parent = (FrameLayout) mapView.getParent();
+		FrameLayout parent = (FrameLayout) mapViewController.getParentView();
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 				Gravity.CENTER_HORIZONTAL | Gravity.TOP);
 		DisplayMetrics dm = getResources().getDisplayMetrics();
@@ -238,7 +254,7 @@ public class MapActivity extends AccessibleActivity  {
 	@Override
 	public Object onRetainCustomNonConfigurationInstance() {
 		LinkedHashMap<String, Object> l = new LinkedHashMap<String, Object>();
-		for(OsmandMapLayer ml :  mapView.getLayers() ) {
+		for(OsmandMapLayer ml :  mapViewController.getLayers() ) {
 			ml.onRetainNonConfigurationInstance(l);
 		}
 		return l;
@@ -253,6 +269,7 @@ public class MapActivity extends AccessibleActivity  {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		mapViewController.resume();
 		cancelNotification();
 		//fixing bug with action bar appearing on android 2.3.3
 		if (getSupportActionBar() != null){
@@ -286,7 +303,9 @@ public class MapActivity extends AccessibleActivity  {
 			poiFilter = new PoiFilter(null, app);
 		}
 
+
 		mapLayers.getPoiMapLayer().setFilter(poiFilter);
+
 
 		// if destination point was changed try to recalculate route
 		TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -301,8 +320,8 @@ public class MapActivity extends AccessibleActivity  {
 
 		if (settings != null && settings.isLastKnownMapLocation()) {
 			LatLon l = settings.getLastKnownMapLocation();
-			mapView.setLatLon(l.getLatitude(), l.getLongitude());
-			mapView.setIntZoom(settings.getLastKnownMapZoom());
+			mapViewController.setLatLon(l.getLatitude(), l.getLongitude());
+			mapViewController.setIntZoom(settings.getLastKnownMapZoom());
 		}
 
 		settings.MAP_ACTIVITY_ENABLED.set(true);
@@ -310,7 +329,7 @@ public class MapActivity extends AccessibleActivity  {
 		checkExternalStorage();
 		showAndHideMapPosition();
 
-		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
+		LatLon cur = new LatLon(mapViewController.getLatitude(), mapViewController.getLongitude());
 		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
 		String mapLabelToShow = settings.getAndClearMapLabelToShow();
 		Object toShow = settings.getAndClearObjectToShow();
@@ -318,8 +337,8 @@ public class MapActivity extends AccessibleActivity  {
 		if(status != 0){
 			// always enable and follow and let calculate it (i.e.GPS is not accessible in a garage)
 			Location loc = new Location("map");
-			loc.setLatitude(mapView.getLatitude());
-			loc.setLongitude(mapView.getLongitude());
+			loc.setLatitude(mapViewController.getLatitude());
+			loc.setLongitude(mapViewController.getLongitude());
 			getMapActions().enterRoutePlanningMode(null, null, status == OsmandSettings.NAVIGATE_CURRENT_GPX);
 		}
 		if(mapLabelToShow != null && latLonToShow != null){
@@ -327,7 +346,7 @@ public class MapActivity extends AccessibleActivity  {
 			mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow);
 		}
 		if (latLonToShow != null && !latLonToShow.equals(cur)) {
-			mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(), latLonToShow.getLongitude(), 
+			mapViewController.startMoving(latLonToShow.getLatitude(), latLonToShow.getLongitude(),
 					settings.getMapZoomToShow(), true);
 		}
 		if(latLonToShow != null) {
@@ -376,7 +395,7 @@ public class MapActivity extends AccessibleActivity  {
 		}
 
 		OsmandPlugin.onMapActivityResume(this);
-		mapView.refreshMap(true);
+		mapViewController.refreshMap(true);
 	}
 
 
@@ -417,8 +436,8 @@ public class MapActivity extends AccessibleActivity  {
 //		if (settings.AUTO_ZOOM_MAP.get() == AutoZoomMap.NONE) {
 //			changeLocation = false;
 //		}
-		final int newZoom = mapView.getZoom() + stp;
-		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
+		final int newZoom = mapViewController.getZoom() + stp;
+		mapViewController.startZooming(newZoom, changeLocation);
 		if (app.accessibilityEnabled())
 			AccessibleToast.makeText(this, getString(R.string.zoomIs) + " " + newZoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 		showAndHideMapPosition();
@@ -455,7 +474,7 @@ public class MapActivity extends AccessibleActivity  {
 				OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) != null) {
 			// Find more appropriate plugin for it?
 			if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && event.getRepeatCount() == 0) {
-				if (mapView.isZooming()) {
+				if (mapViewController.isZooming()) {
 					changeZoom(+ 2);
 				} else {
 					changeZoom(+ 1);
@@ -470,7 +489,7 @@ public class MapActivity extends AccessibleActivity  {
 	}
 
 	public void setMapLocation(double lat, double lon){
-		mapView.setLatLon(lat, lon);
+		mapViewController.setLatLon(lat, lon);
 		mapViewTrackingUtilities.locationChanged(lat, lon, this);
 	}
 
@@ -479,7 +498,7 @@ public class MapActivity extends AccessibleActivity  {
 		if(event.getAction() == MotionEvent.ACTION_MOVE && settings.USE_TRACKBALL_FOR_MOVEMENTS.get()){
 			float x = event.getX();
 			float y = event.getY();
-			final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
+			final RotatedTileBox tb = mapViewController.getCurrentRotatedTileBox();
 			final QuadPoint cp = tb.getCenterPixelPoint();
 			final LatLon l = tb.getLatLonFromPixel(cp.x + x * 15, cp.y + y * 15);
 			setMapLocation(l.getLatitude(), l.getLongitude());
@@ -519,11 +538,12 @@ public class MapActivity extends AccessibleActivity  {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		mapViewController.destroy();
 		FailSafeFuntions.quitRouteRestoreDialog();
 		OsmandPlugin.onMapActivityDestroy(this);
 		mapViewTrackingUtilities.setMapView(null);
 		cancelNotification();
-		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
+		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapViewController.getMapTileView());
 	}
 
 	private void cancelNotification() {
@@ -538,7 +558,7 @@ public class MapActivity extends AccessibleActivity  {
 	
 	
 	public LatLon getMapLocation(){
-		return new LatLon(mapView.getLatitude(), mapView.getLongitude());
+		return new LatLon(mapViewController.getLatitude(), mapViewController.getLongitude());
 	}
 	
 	// Duplicate methods to OsmAndApplication
@@ -557,14 +577,10 @@ public class MapActivity extends AccessibleActivity  {
 		app.getDaynightHelper().stopSensorIfNeeded();
 		settings.APPLICATION_MODE.removeListener(applicationModeListener);
 		
-		settings.setLastKnownMapLocation((float) mapView.getLatitude(), (float) mapView.getLongitude());
-		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
-		if(animatedThread.isAnimating() && animatedThread.getTargetIntZoom() != 0){
-			settings.setMapLocationToShow(animatedThread.getTargetLatitude(), animatedThread.getTargetLongitude(), 
-					animatedThread.getTargetIntZoom());
-		}
-		
-		settings.setLastKnownMapZoom(mapView.getZoom());
+		settings.setLastKnownMapLocation((float) mapViewController.getLatitude(), (float) mapViewController.getLongitude());
+		mapViewController.onPause();
+
+		settings.setLastKnownMapZoom(mapViewController.getZoom());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
 		app.setMapActivity(null);
 		app.getResourceManager().interruptRendering();
@@ -586,19 +602,21 @@ public class MapActivity extends AccessibleActivity  {
 		}
 		mapViewTrackingUtilities.updateSettings();
 		app.getRoutingHelper().setAppMode(settings.getApplicationMode());
-		if (mapLayers.getMapInfoLayer() != null) {
+		if (mapLayers.getMapInfoLayer() != null && !settings.USE_NATIVE_RENDER.get()) {
 			mapLayers.getMapInfoLayer().recreateControls();
 		}
-		mapLayers.updateLayers(mapView);
-		mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsZoomScale());
+
+		mapViewController.updateLayers(mapLayers);
+		mapViewController.setComplexZoom();
+
 		app.getDaynightHelper().startSensorIfNeeded(new StateChangedListener<Boolean>() {
 
 			@Override
 			public void stateChanged(Boolean change) {
-				getMapView().refreshMap(true);
+				mapViewController.refreshMap(true);
 			}
 		});
-		getMapView().refreshMap(true);
+		mapViewController.refreshMap(true);
 	}
 	
 	
@@ -606,10 +624,10 @@ public class MapActivity extends AccessibleActivity  {
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			if (!app.accessibilityEnabled()) {
-				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+				mapActions.contextMenuPoint(mapViewController.getLatitude(), mapViewController.getLongitude());
 			} else if (uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
 				uiHandler.removeMessages(LONG_KEYPRESS_MSG_ID);
-				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+				mapActions.contextMenuPoint(mapViewController.getLatitude(), mapViewController.getLongitude());
 			}
 			return true;
 		} else if (settings.ZOOM_BY_TRACKBALL.get()) {
@@ -626,7 +644,7 @@ public class MapActivity extends AccessibleActivity  {
 				keyCode == KeyEvent.KEYCODE_DPAD_UP) {
 			int dx = keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_LEFT ? - 15 : 0);
 			int dy = keyCode == KeyEvent.KEYCODE_DPAD_DOWN ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_UP ? -15 : 0);
-			final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
+			final RotatedTileBox tb = mapViewController.getCurrentRotatedTileBox();
 			final QuadPoint cp = tb.getCenterPixelPoint();
 			final LatLon l = tb.getLatLonFromPixel(cp.x + dx, cp.y + dy);
 			setMapLocation(l.getLatitude(), l.getLongitude());
@@ -650,21 +668,13 @@ public class MapActivity extends AccessibleActivity  {
 	
 	
 	public void showAndHideMapPosition() {
-		mapView.setShowMapPosition(true);
-		app.runMessageInUIThreadAndCancelPrevious(SHOW_POSITION_MSG_ID, new Runnable() {
-			@Override
-			public void run() {
-				if (mapView.isShowMapPosition()) {
-					mapView.setShowMapPosition(false);
-					mapView.refreshMap();
-				}
-			}
-		}, 2500);
+		mapViewController.showAndHideMapPosition();
+
 	}
 	
 	
 	public OsmandMapTileView getMapView() {
-		return mapView;
+		return mapViewController.getMapTileView();
 	}
 	
 	public static MapViewTrackingUtilities getMapViewTrackingUtilities() {
@@ -717,7 +727,7 @@ public class MapActivity extends AccessibleActivity  {
 	}
 
 	public void refreshMap() {
-		getMapView().refreshMap();
+		mapViewController.refreshMap(false);
 	}
 
 	public View getLayout() {

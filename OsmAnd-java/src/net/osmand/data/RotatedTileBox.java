@@ -119,6 +119,14 @@ public class RotatedTileBox {
 	public double getCenterTileX(){
 		return oxTile;
 	}
+	
+	public int getCenter31X(){
+		return MapUtils.get31TileNumberX(lon);
+	}
+	
+	public int getCenter31Y(){
+		return MapUtils.get31TileNumberY(lat);
+	}
 
 	public double getCenterTileY(){
 		return oyTile;
