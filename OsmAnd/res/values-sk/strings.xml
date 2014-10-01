@@ -1996,4 +1996,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="text_size">Veľkosť textu</string>
     <string name="fav_point_dublicate">Duplicitný názov obľúbeného bodu</string>
     <string name="fav_point_dublicate_message">Názov obľúbeného bodu bol zmenený na %1$s, aby nevznikla duplicita.</string>
+    <string name="test_native_render">Testovať natívne vykresľovanie</string>
+    <string name="test_native_render_msg">Spustí činnosť s natívnym vykresľovaním</string>
+    <string name="use_native_render">Použiť natívne vykresľovanie</string>
+    <string name="use_native_render_descr">Použiť vykresľovanie v C++ namiesto Javy</string>
     </resources>
