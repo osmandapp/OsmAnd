@@ -1482,4 +1482,8 @@
     <string name="osmo_edit_device">Schimbă proprietăți utilizator</string>
     <string name="osmo_edit_color">Culoare afișare</string>
     <string name="osmo_group">Grup OsMo</string>
+    <string name="fav_point_dublicate">Nume puncte favorite duplicate</string>
+    <string name="fav_point_dublicate_message">Am schimbat numele punctelor favorite în %1$s pentru a evita numele duplicate.</string>
+    <string name="text_size_descr">Setați mărimea textului pe hartă.</string>
+    <string name="text_size">Mărimea textului</string>
     </resources>
