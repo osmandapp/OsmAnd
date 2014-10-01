@@ -1902,5 +1902,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="test_native_render">Prova de renderització nativa</string>
     <string name="test_native_render_msg">Iniciar activitat amb renderització nativa</string>
     <string name="use_native_render">Utilitzar renderització nativa</string>
-    <string name="use_native_render_descr">Ús del renderitzador C++ en comptes del de Java</string>
+    <string name="use_native_render_descr">Ús de renderitzacio C++ en comptes de Java</string>
     </resources>
