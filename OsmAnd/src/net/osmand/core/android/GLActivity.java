@@ -170,7 +170,8 @@ public class GLActivity extends Activity {
         _coreResources = CoreResourcesFromAndroidAssets.loadFromCurrentApplication(this);
         OsmAndCore.InitializeCore(_coreResources);
 
-        _fileLogSink = QIODeviceLogSink.createFileLogSink(Environment.getExternalStorageDirectory() + "/osmand/osmandcore.log");
+		File directory =getApp().getAppPath("");
+        _fileLogSink = QIODeviceLogSink.createFileLogSink(directory.getAbsolutePath() + "osmandcore.log");
         Logger.get().addLogSink(_fileLogSink);
 
         Log.i(TAG, "Going to resolve default embedded style...");
@@ -186,7 +187,7 @@ public class GLActivity extends Activity {
         _obfsCollection = new ObfsCollection();
 
 		Log.i(TAG, "Will load OBFs from " + Environment.getExternalStorageDirectory() + "/osmand");
-		File directory =getApp().getAppPath("");
+
 		Log.i(TAG, "Will load OBFs from " + directory.getAbsolutePath());
         _obfsCollection.addDirectory(directory.getAbsolutePath(), false);
 
@@ -231,7 +232,7 @@ public class GLActivity extends Activity {
         if (mapnik == null)
             Log.e(TAG, "Failed to create mapnik");
         */
-        _mapRenderer.setRasterLayerProvider(RasterMapLayerId.BaseLayer, _onlineMapRasterBitmapTileProvider);
+        _mapRenderer.setRasterLayerProvider(RasterMapLayerId.BaseLayer, _binaryMapRasterBitmapTileProvider);
 
         _glSurfaceView = (GLSurfaceView) findViewById(R.id.glSurfaceView);
         //TODO:_glSurfaceView.setPreserveEGLContextOnPause(true);
