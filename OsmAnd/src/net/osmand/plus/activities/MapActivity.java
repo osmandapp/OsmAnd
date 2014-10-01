@@ -40,10 +40,11 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
-import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.controllers.MapViewController;
+import net.osmand.plus.views.controllers.JavaViewController;
+import net.osmand.plus.views.controllers.MapViewBaseController;
+import net.osmand.plus.views.controllers.NativeViewController;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import android.app.Dialog;
@@ -100,7 +101,7 @@ public class MapActivity extends AccessibleActivity  {
 	private StateChangedListener<ApplicationMode> applicationModeListener;
 	private FrameLayout lockView;
 	private GpxImportHelper gpxImportHelper;
-	private MapViewController mapViewController;
+	private MapViewBaseController mapViewController;
 	
 	
 	private Notification getNotification() {
@@ -135,13 +136,13 @@ public class MapActivity extends AccessibleActivity  {
 
 		if (settings.USE_NATIVE_RENDER.get()){
 			setContentView(R.layout.activity_gl);
-			mapViewController = new MapViewController((GLSurfaceView) findViewById(R.id.glSurfaceView), this);
+			mapViewController = new NativeViewController((GLSurfaceView) findViewById(R.id.glSurfaceView), this);
 		} else {
 			setContentView(R.layout.main);
-			mapViewController = new MapViewController((OsmandMapTileView) findViewById(R.id.MapView), this);
+			mapViewController = new JavaViewController((OsmandMapTileView) findViewById(R.id.MapView), this);
 		}
 
-		mapViewController.setTrackBallDelegate(new MapViewController.OnTrackBallListener(){
+		mapViewController.setTrackBallDelegate(new JavaViewController.OnTrackBallListener(){
 			@Override
 			public boolean onTrackBallEvent(MotionEvent e) {
 				showAndHideMapPosition();
