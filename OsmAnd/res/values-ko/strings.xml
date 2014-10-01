@@ -656,7 +656,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="map_orientation_default">장치와 같음</string>
 	<string name="map_orientation_portrait">세로</string>
 	<string name="map_orientation_landscape">가로</string>
-	<string name="map_screen_orientation">지도화면 방향</string>
+	<string name="map_screen_orientation">지도 화면 방향</string>
 	<string name="map_screen_orientation_descr">세로, 가로, 자동</string>
 	<string name="opening_hours_not_supported">오프닝 시간 형식은 편집을 지원하지 않습니다</string>
 	<string name="add_new_rule">새로운 규칙 추가</string>
