@@ -411,7 +411,7 @@ public class NativeViewController extends MapViewBaseController {
 
 	@Override
 	public void createLayers(MapActivityLayers mapLayers) {
-		super.createLayers(mapLayers);
+		mapLayers.createLayers(glSurfaceView);
 	}
 
 	@Override

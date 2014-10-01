@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import android.opengl.GLSurfaceView;
 import android.widget.*;
 import net.osmand.CallbackWithObject;
 import net.osmand.ResultMatcher;
@@ -155,7 +156,75 @@ public class MapActivityLayers {
 		OsmandPlugin.createLayers(mapView, activity);
 		app.getAppCustomization().createLayers(mapView, activity);
 	}
-	
+
+	public void createLayers(GLSurfaceView glSurfaceView){
+		//TODO implement adding layers
+		OsmandApplication app = (OsmandApplication) getApplication();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		// first create to make accessible
+		mapTextLayer = new MapTextLayer();
+		// 5.95 all labels
+//		mapView.addLayer(mapTextLayer, 5.95f);
+		// mapView.addLayer(underlayLayer, -0.5f);
+		mapTileLayer = new MapTileLayer(true);
+//		mapView.addLayer(mapTileLayer, 0.0f);
+//		mapView.setMainLayer(mapTileLayer);
+
+		// 0.5 layer
+		mapVectorLayer = new MapVectorLayer(mapTileLayer);
+//		mapView.addLayer(mapVectorLayer, 0.5f);
+
+		downloadedRegionsLayer = new DownloadedRegionsLayer();
+//		mapView.addLayer(downloadedRegionsLayer, 0.5f);
+
+		// 0.9 gpx layer
+		gpxLayer = new GPXLayer();
+//		mapView.addLayer(gpxLayer, 0.9f);
+
+		// 1. route layer
+		routeLayer = new RouteLayer(routingHelper);
+//		mapView.addLayer(routeLayer, 1);
+
+		// 2. osm bugs layer
+		// 3. poi layer
+		poiMapLayer = new POIMapLayer(activity);
+		// 4. favorites layer
+		favoritesLayer = new FavoritesLayer();
+		// 5. transport layer
+		transportStopsLayer = new TransportStopsLayer();
+		// 5.5 transport info layer
+		transportInfoLayer = new TransportInfoLayer(TransportRouteHelper.getInstance());
+//		mapView.addLayer(transportInfoLayer, 5.5f);
+		// 5.95 all text labels
+		// 6. point location layer
+		locationLayer = new PointLocationLayer(MapActivity.getMapViewTrackingUtilities());
+//		mapView.addLayer(locationLayer, 6);
+		// 7. point navigation layer
+		navigationLayer = new PointNavigationLayer(activity);
+//		mapView.addLayer(navigationLayer, 7);
+		// 8. context menu layer
+		contextMenuLayer = new ContextMenuLayer(activity);
+//		mapView.addLayer(contextMenuLayer, 8);
+		// 9. map info layer
+		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
+//		mapView.addLayer(mapInfoLayer, 9);
+		// 11. route info layer
+		mapControlsLayer = new MapControlsLayer(activity);
+//		mapView.addLayer(mapControlsLayer, 11);
+
+		app.getSettings().MAP_TRANSPARENCY.addListener(new StateChangedListener<Integer>() {
+			@Override
+			public void stateChanged(Integer change) {
+				mapTileLayer.setAlpha(change);
+				mapVectorLayer.setAlpha(change);
+//				mapView.refreshMap();
+			}
+		});
+
+//		OsmandPlugin.createLayers(mapView, activity);
+//		app.getAppCustomization().createLayers(mapView, activity);
+	}
+
 	
 	public void updateLayers(OsmandMapTileView mapView){
 		OsmandSettings settings = getApplication().getSettings();

@@ -303,7 +303,9 @@ public class MapActivity extends AccessibleActivity  {
 			poiFilter = new PoiFilter(null, app);
 		}
 
+
 		mapLayers.getPoiMapLayer().setFilter(poiFilter);
+
 
 		// if destination point was changed try to recalculate route
 		TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -600,7 +602,7 @@ public class MapActivity extends AccessibleActivity  {
 		}
 		mapViewTrackingUtilities.updateSettings();
 		app.getRoutingHelper().setAppMode(settings.getApplicationMode());
-		if (mapLayers.getMapInfoLayer() != null) {
+		if (mapLayers.getMapInfoLayer() != null && !settings.USE_NATIVE_RENDER.get()) {
 			mapLayers.getMapInfoLayer().recreateControls();
 		}
 
