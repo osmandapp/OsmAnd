@@ -3,6 +3,7 @@ package net.osmand.plus.helpers;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.support.v4.widget.DrawerLayout;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
@@ -47,7 +48,7 @@ import android.widget.TextView;
 public class WaypointDialogHelper implements OsmAndLocationListener {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
-	private FrameLayout mainLayout;
+	private DrawerLayout mainLayout;
 	private WaypointHelper waypointHelper;
 
 	public final static boolean OVERLAP_LAYOUT = true; // only true is supported
@@ -59,25 +60,26 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		this.app = mapActivity.getMyApplication();
 		waypointHelper = this.app.getWaypointHelper();
 		this.mapActivity = mapActivity;
-		this.mainLayout = (FrameLayout) ((FrameLayout) mapActivity.getLayout()).getChildAt(0);
+		this.mainLayout = (DrawerLayout) mapActivity.findViewById(R.id.drawer_layout);
+
 	}
-	
+
 	public void init() {
 		app.getLocationProvider().addLocationListener(this);
 	}
-	
+
 	@Override
 	public void updateLocation(Location location) {
-		if(mapActivity != null) {
+		if (mapActivity != null) {
 			updateDialog();
 		}
 	}
-	
+
 	public void removeListener() {
 		app.getLocationProvider().removeLocationListener(this);
 		mapActivity = null;
 	}
-	
+
 
 	@SuppressWarnings("deprecation")
 	public void updateDialog() {
@@ -100,7 +102,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				all.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						 showWaypointsDialog(mapActivity);
+						showWaypointsDialog(mapActivity);
 					}
 				});
 
@@ -120,7 +122,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 	}
 
 	private static void updatePointInfoView(final OsmandApplication app, final Activity ctx,
-			View localView, final LocationPointWrapper ps, final DialogFragment dialog) {
+											View localView, final LocationPointWrapper ps, final DialogFragment dialog) {
 		WaypointHelper wh = app.getWaypointHelper();
 		final LocationPoint point = ps.getPoint();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
@@ -200,47 +202,47 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		wdf.setArguments(args);
 		fragmentActivity.getSupportFragmentManager().beginTransaction().add(wdf, "tag").commit();
 	}
-	
+
 	public static void showWaypointsDialog(FragmentActivity fragmentActivity) {
 		Bundle args = new Bundle();
 		WaypointDialogFragment wdf = new WaypointDialogFragment();
 		wdf.setArguments(args);
 		fragmentActivity.getSupportFragmentManager().beginTransaction().add(wdf, "tag").commit();
 	}
-	
+
 	public static class WaypointDialogFragment extends DialogFragment {
-		
+
 		WaypointHelper waypointHelper;
 		private OsmandApplication app;
-		
-		public static final String FLAT_ARG = "FLAT_ARG"; 
-		
+
+		public static final String FLAT_ARG = "FLAT_ARG";
+
 		@Override
 		public void onAttach(Activity activity) {
 			super.onAttach(activity);
 			app = (OsmandApplication) activity.getApplication();
 			waypointHelper = app.getWaypointHelper();
 		}
-		
+
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			if(getArguments() != null && getArguments().getBoolean(FLAT_ARG)) {
+			if (getArguments() != null && getArguments().getBoolean(FLAT_ARG)) {
 				return createWaypointsDialogFlat(waypointHelper.getAllPoints());
 			}
 			return createWaypointsDialog();
 		}
-		
+
 		private void selectPoi(final int[] running, final ArrayAdapter<Object> listAdapter, final int type,
-				final boolean enable) {
-			if(getActivity() instanceof MapActivity && !PoiFilter.CUSTOM_FILTER_ID.equals(app.getSettings().getPoiFilterForMap())) {
+							   final boolean enable) {
+			if (getActivity() instanceof MapActivity && !PoiFilter.CUSTOM_FILTER_ID.equals(app.getSettings().getPoiFilterForMap())) {
 				MapActivity map = (MapActivity) getActivity();
 				final PoiFilter[] selected = new PoiFilter[1];
 				AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView(), selected);
 				dlg.setOnDismissListener(new OnDismissListener() {
-					
+
 					@Override
 					public void onDismiss(DialogInterface dialog) {
-						if(selected != null) {
+						if (selected != null) {
 							enableType(running, listAdapter, type, enable);
 						}
 					}
@@ -249,54 +251,58 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				enableType(running, listAdapter, type, enable);
 			}
 		}
-		
+
 		private void enableType(final int[] running, final ArrayAdapter<Object> listAdapter, final int type,
-				final boolean enable) {
+								final boolean enable) {
 			new AsyncTask<Void, Void, Void>() {
 
 				protected void onPreExecute() {
-				};
+				}
+
+				;
 
 				@Override
 				protected Void doInBackground(Void... params) {
 					app.getWaypointHelper().enableWaypointType(type, enable);
 					return null;
 				}
-				
+
 				protected void onPostExecute(Void result) {
 					running[0] = -1;
 					listAdapter.clear();
-					listAdapter.addAll(getPoints());
+					for (Object point : getPoints()) {
+						listAdapter.add(point);
+					}
 					listAdapter.notifyDataSetChanged();
-				};
+				}
 			}.execute((Void) null);
 		}
-		
+
 		protected String getHeader(int type, boolean checked) {
 			FragmentActivity ctx = getActivity();
 			String str = ctx.getString(R.string.waypoints);
 			switch (type) {
-			case WaypointHelper.TARGETS:
-				str = ctx.getString(R.string.targets);
-				break;
-			case WaypointHelper.ALARMS:
-				str = ctx.getString(R.string.way_alarms);
-				break;
-			case WaypointHelper.FAVORITES:
-				str = ctx.getString(R.string.my_favorites);
-				break;
-			case WaypointHelper.WAYPOINTS:
-				str = ctx.getString(R.string.waypoints);
-				break;
-			case WaypointHelper.POI:
-				str = waypointHelper.getPoiFilter() == null || !checked ? ctx.getString(R.string.poi) : waypointHelper
-						.getPoiFilter().getName();
-				break;
+				case WaypointHelper.TARGETS:
+					str = ctx.getString(R.string.targets);
+					break;
+				case WaypointHelper.ALARMS:
+					str = ctx.getString(R.string.way_alarms);
+					break;
+				case WaypointHelper.FAVORITES:
+					str = ctx.getString(R.string.my_favorites);
+					break;
+				case WaypointHelper.WAYPOINTS:
+					str = ctx.getString(R.string.waypoints);
+					break;
+				case WaypointHelper.POI:
+					str = waypointHelper.getPoiFilter() == null || !checked ? ctx.getString(R.string.poi) : waypointHelper
+							.getPoiFilter().getName();
+					break;
 			}
 			return str;
 		}
-		
-		public AlertDialog createWaypointsDialogFlat(final List<LocationPointWrapper> points){
+
+		public AlertDialog createWaypointsDialogFlat(final List<LocationPointWrapper> points) {
 			final List<LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
 			final FragmentActivity ctx = getActivity();
 			final ArrayAdapter<LocationPointWrapper> listAdapter = new ArrayAdapter<LocationPointWrapper>(ctx, R.layout.waypoint_reached, R.id.title,
@@ -311,7 +317,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 					updatePointInfoView(app, ctx, v, getItem(position), WaypointDialogFragment.this);
 					View remove = v.findViewById(R.id.info_close);
 					((ImageButton) remove).setImageDrawable(ctx.getResources().getDrawable(
-							app.getSettings().isLightContent()? R.drawable.ic_action_gremove_light:
+							app.getSettings().isLightContent() ? R.drawable.ic_action_gremove_light :
 									R.drawable.ic_action_gremove_dark));
 					remove.setOnClickListener(new View.OnClickListener() {
 						@Override
@@ -339,7 +345,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 			builder.setView(listView);
 			builder.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
-				
+
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					waypointHelper.removeVisibleLocationPoint(deletedPoints);
@@ -348,7 +354,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			builder.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), null);
 			return builder.create();
 		}
-		
+
 		public AlertDialog createWaypointsDialog() {
 			final List<Object> points = getPoints();
 			final List<LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
@@ -377,14 +383,14 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 						btn.setEnabled(running[0] == -1);
 						v.findViewById(R.id.ProgressBar).setVisibility(position == running[0] ? View.VISIBLE : View.GONE);
 						btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-							
+
 							@Override
 							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 								running[0] = position;
 								thisAdapter.notifyDataSetInvalidated();
-								if(type == WaypointHelper.POI && isChecked) {
+								if (type == WaypointHelper.POI && isChecked) {
 									selectPoi(running, thisAdapter, type, isChecked);
-								} else {							
+								} else {
 									enableType(running, thisAdapter, type, isChecked);
 								}
 							}
@@ -411,12 +417,12 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 					return v;
 				}
 			};
-			
+
 			listView.setAdapter(listAdapter);
 			listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
-					if(listAdapter.getItem(item) instanceof LocationPointWrapper) {
+					if (listAdapter.getItem(item) instanceof LocationPointWrapper) {
 						LocationPointWrapper ps = (LocationPointWrapper) listAdapter.getItem(item);
 						showOnMap(app, ctx, ps.getPoint(), WaypointDialogFragment.this);
 					}
@@ -425,7 +431,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 			builder.setView(listView);
 			builder.setNeutralButton(R.string.flat_list_waypoints, new OnClickListener() {
-				
+
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					showWaypointsDialogFlat(getActivity());
@@ -442,7 +448,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			builder.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), null);
 			return builder.create();
 		}
-		
+
 		protected List<Object> getPoints() {
 			final List<Object> points = new ArrayList<Object>();
 			for (int i = 0; i < WaypointHelper.MAX; i++) {
@@ -458,9 +464,9 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		}
 	}
 
-	
+
 	private static void showOnMap(OsmandApplication app, Activity a, LocationPoint locationPoint, DialogFragment dialog) {
-		if(!(a instanceof MapActivity)) {
+		if (!(a instanceof MapActivity)) {
 			return;
 		}
 		MapActivity ctx = (MapActivity) a;
@@ -475,12 +481,12 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			final double dist = MapUtils.getDistance(ctx.getMapView().getLatitude(), ctx.getMapView().getLongitude(),
 					locationPoint.getLatitude(), locationPoint.getLongitude());
 			double t = 10;
-			if(dist < t) {
+			if (dist < t) {
 				app.getAppCustomization().showLocationPoint(ctx, locationPoint);
 			} else {
 				thread.startMoving(locationPoint.getLatitude(), locationPoint.getLongitude(), fZoom, true);
 			}
-			if(di) {
+			if (di) {
 				ctx.getMapLayers().getContextMenuLayer().setSelectedObject(locationPoint);
 				ctx.getMapLayers()
 						.getContextMenuLayer()
@@ -490,8 +496,6 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			}
 		}
 	}
-
-
 
 
 }
