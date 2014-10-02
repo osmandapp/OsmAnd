@@ -186,10 +186,10 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			}
 
 			protected void onPostExecute(Void result) {
-				if (isCancelled()){
+				if (isCancelled() || mapActivity == null){
 					return;
 				}
-				
+
 				if (height > 0 && OVERLAP_LAYOUT) {
 					mapActivity.runOnUiThread(new Runnable() {
 						@Override
