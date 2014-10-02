@@ -1744,4 +1744,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="text_size">Mannària de su testu</string>
     <string name="fav_point_dublicate_message">Amus cambiau su nùmene de su prefèrridu tuo a %1$s pro evitare nùmenes dòpios.</string>
     <string name="fav_point_dublicate">Nùmene dòpiu in sos prefèrridos</string>
+    <string name="test_native_render">Collàuda renderizatzione nativa</string>
+    <string name="test_native_render_msg">Cumintza atividade cun sa renderizatzione nativa</string>
+    <string name="use_native_render">Imprea sa renderizatzione nativa</string>
+    <string name="use_native_render_descr">Imprea sa renderizatzione C++ imbetzes de Java</string>
     </resources>
