@@ -13,6 +13,40 @@ public class TurnType {
 	public static final String TU = "TU"; // U-turn //$NON-NLS-1$
 	public static final String TRU = "TRU"; // Right U-turn //$NON-NLS-1$
 	public static final String OFFR = "OFFR"; // Off route //$NON-NLS-1$
+
+	private boolean turnLanesRendering = false;
+
+	// If the lane is usable for the current turn
+	public static final int BIT_LANE_ALLOWED = 1;
+
+	public enum Turn {
+		UNKNOWN (0, ""),
+		STRAIGHT (1, C),
+		SLIGHT_RIGHT (1 << 1, TSLR),
+		SLIGHT_LEFT (1 | 1 << 1, TSLL),
+		RIGHT (1 << 2, TR),
+		LEFT (1 << 2 | 1, TL),
+		SHARP_RIGHT (1 << 2 | 1 << 1, TSHR),
+		SHARP_LEFT (1 << 2 | 1 << 1 | 1, TSHL),
+		UTURN (1 << 3, TU);
+
+		private final int modifier;
+		private final String value;
+
+		Turn(int modifier, String value) {
+			this.modifier = modifier;
+			this.value = value;
+		}
+
+		public int getModifier() {
+			return modifier;
+		}
+
+		public String getValue() {
+			return value;
+		}
+	}
+
 	public static String[] predefinedTypes = new String[] { C, KL, KR, TL, TSLL, TSHL, TR, TSLR, TSHR, TU, TRU, OFFR };
 	
 	public static TurnType sraight() {
@@ -84,8 +118,7 @@ public class TurnType {
 	}
 	
 	// lanes encoded as array of int 
-	// last bit is 1, 0 (should we take this lane)
-	// first bits 0 - left, 1 - straight, 2 - right
+	// Use the BIT_LANE_* constants to get the properties of each lane
 	public void setLanes(int[] lanes) {
 		this.lanes = lanes;
 	}
@@ -93,7 +126,47 @@ public class TurnType {
 	public int[] getLanes() {
 		return lanes;
 	}
-	
+
+	// Note that there is no "weight" or ordering between the primary and secondary turns.
+
+	public void setPrimaryTurn(int lane, Turn turn) {
+		lanes[lane] &= ~((1 << 3 | 1 << 2 | 1 << 1 | 1) << 3);
+		lanes[lane] |= turn.getModifier() << 3;
+	}
+
+	public Turn getPrimaryTurn(int lane) {
+		// Get the primary turn modifier for the lane
+		int turnModifier = (lanes[lane] >> 3) & (1 << 3 | 1 << 2 | 1 << 1 | 1);
+		Turn[] turns = Turn.values();
+		for (int i = 0; i < turns.length; i++) {
+			if (turns[i].getModifier() == turnModifier) {
+				return turns[i];
+			}
+		}
+		throw new IllegalStateException("Unknown primary turn value");
+	}
+
+	public void setSecondaryTurn(int lane, Turn turn) {
+		lanes[lane] &= ~((1 << 3 | 1 << 2 | 1 << 1 | 1) << 7);
+		lanes[lane] |= turn.getModifier() << 7;
+	}
+
+	public Turn getSecondaryTurn(int lane) {
+		// Get the secondary turn modifier for the lane
+		int turnModifier = (lanes[lane] >> 7) & (1 << 3 | 1 << 2 | 1 << 1 | 1);
+		Turn[] turns = Turn.values();
+		for (int i = 0; i < turns.length; i++) {
+			if (turns[i].getModifier() == turnModifier) {
+				return turns[i];
+			}
+		}
+		throw new IllegalStateException("Unknown secondary turn value");
+	}
+
+	public boolean isTurnAllowed(int lane, Turn turn) {
+		return getPrimaryTurn(lane) == turn || getSecondaryTurn(lane) == turn;
+	}
+
 	public boolean keepLeft() {
 		return value.equals(KL); 
 	}
@@ -104,6 +177,14 @@ public class TurnType {
 	
 	public boolean goAhead() {
 		return value.equals(C); 
+	}
+
+	public boolean isTurnLanesRendering() {
+		return turnLanesRendering;
+	}
+
+	public void setTurnLanesRendering(boolean turnLanesRendering) {
+		this.turnLanesRendering = turnLanesRendering;
 	}
 	
 	public boolean isSkipToSpeak() {

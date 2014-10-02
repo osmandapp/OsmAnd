@@ -523,10 +523,8 @@ public class RouteInfoWidgetsFactory {
 	
 	private static final float miniCoeff = 2f;
 	public BaseMapWidget createLanesControl(final RoutingHelper routingHelper, final OsmandMapTileView view) {
-		final Path laneStraight = new Path();
-		Matrix pathTransform = new Matrix();
+		final Matrix pathTransform = new Matrix();
 		pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
-		TurnPathHelper.calcTurnPath(laneStraight, TurnType.sraight(), pathTransform);
 		final Paint paintBlack = new Paint();
 		paintBlack.setStyle(Style.STROKE);
 		paintBlack.setColor(Color.BLACK);
@@ -541,31 +539,129 @@ public class RouteInfoWidgetsFactory {
 		
 		
 		final BaseMapWidget lanesControl = new BaseMapWidget(view.getContext()) {
-			int[] lanes = null; 
+			TurnType turn = null;
+			int[] prevLanes = null;
 			
 			boolean imminent = false;
 			
 			@Override
 			protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-				int ls = (int) (lanes == null ? 0 : lanes.length * w);
+				int ls = (int) (turn == null && turn.getLanes() == null ? 0 : turn.getLanes().length * w);
 				setWDimensions(ls, (int)( w + 3 * scaleCoefficient));
+			}
+
+			private boolean keepAndSlightTurnSubstitution(int lane) {
+				return ((turn.getValue().equals(TurnType.KR) && turn.getPrimaryTurn(lane).getValue().equals(TurnType.TSLR))
+						|| (turn.getValue().equals(TurnType.KL) && turn.getPrimaryTurn(lane).getValue().equals(TurnType.TSLL)));
+//					|| ((turn.getValue().equals(TurnType.KR) && turn.getSecondaryTurn(lane).getValue().equals(TurnType.TSLR))
+//						|| (turn.getValue().equals(TurnType.KL) && turn.getSecondaryTurn(lane).getValue().equals(TurnType.TSLL)));
 			}
 
 			@Override
 			protected void onDraw(Canvas canvas) {
 				super.onDraw(canvas);
 				//to change color immediately when needed
-				if (lanes != null && lanes.length > 0) {
+				if (turn != null && turn.getLanes() != null && turn.getLanes().length > 0) {
 					canvas.save();
 					// canvas.translate((int) (16 * scaleCoefficient), 0);
+					int[] lanes = turn.getLanes();
+					boolean leftSide = turn.isLeftSide();
+					int inactive = getResources().getColor(R.color.nav_arrow_distant);
+					int active = imminent
+						? getResources().getColor(R.color.nav_arrow_imminent)
+						: getResources().getColor(R.color.nav_arrow);
+					paintRouteDirection.setColor(inactive);
+
 					for (int i = 0; i < lanes.length; i++) {
-						if ((lanes[i] & 1) == 1) {
-							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
+						if (turn.isTurnLanesRendering()) {
+							boolean orderSwitched = false;
+							boolean doNotMakeActive = false;
+
+							Path path = new Path();
+							String turnSymbol;
+							if ((turn.getValue().equals(turn.getPrimaryTurn(i).getValue()) || keepAndSlightTurnSubstitution(i)) && turn.getSecondaryTurn(i) != TurnType.Turn.UNKNOWN) {
+								orderSwitched = true;
+								turnSymbol = turn.getSecondaryTurn(i).getValue();
+							} else {
+								turnSymbol = turn.getPrimaryTurn(i).getValue();
+								if (turn.getSecondaryTurn(i) != TurnType.Turn.UNKNOWN && turn.getValue().equals(turn.getSecondaryTurn(i).getValue())) {
+									doNotMakeActive = true;
+								}
+							}
+							TurnPathHelper.calcTurnPath(path, TurnType.valueOf(turnSymbol, leftSide), pathTransform);
+							if (turn.getValue().equals(turnSymbol) || (!orderSwitched && (turn.getLanes()[i] & 1) == 1) && !doNotMakeActive) {
+								paintRouteDirection.setColor(active);
+							}
+
+							if (turnSymbol.equals(TurnType.TSLR) || turnSymbol.equals(TurnType.TSHR)) {
+								canvas.translate((int) (0.2 * w), 0);
+							} else if (turnSymbol.equals(TurnType.TSLL) || turnSymbol.equals(TurnType.TSHL)) {
+								canvas.translate((int) (-0.2 * w), 0);
+							} else if (turnSymbol.equals(TurnType.C) && turn.isTurnAllowed(i, TurnType.Turn.RIGHT)) {
+								canvas.translate((int) (-0.4 * w), 0);
+							} else if (turnSymbol.equals(TurnType.C) && turn.isTurnAllowed(i, TurnType.Turn.LEFT)) {
+								canvas.translate((int) (0.4 * w), 0);
+							}
+							canvas.drawPath(path, paintBlack);
+							canvas.drawPath(path, paintRouteDirection);
+							if (turnSymbol.equals(TurnType.TSLR) || turnSymbol.equals(TurnType.TSHR)) {
+								canvas.translate((int) (-0.2 * w), 0);
+							} else if (turnSymbol.equals(TurnType.TSLL) || turnSymbol.equals(TurnType.TSHL)) {
+								canvas.translate((int) (0.2 * w), 0);
+							} else if (turnSymbol.equals(TurnType.C) && turn.isTurnAllowed(i, TurnType.Turn.RIGHT)) {
+								canvas.translate((int) (0.4 * w), 0);
+							} else if (turnSymbol.equals(TurnType.C) && turn.isTurnAllowed(i, TurnType.Turn.LEFT)) {
+								canvas.translate((int) (-0.4 * w), 0);
+							}
+
+							paintRouteDirection.setColor(inactive);
+
+							if (turn.getSecondaryTurn(i) != TurnType.Turn.UNKNOWN) {
+								Path path2 = new Path();
+								String turnSymbol2;
+								if (orderSwitched) {
+									turnSymbol2 = turn.getPrimaryTurn(i).getValue();
+								} else {
+									turnSymbol2 = turn.getSecondaryTurn(i).getValue();
+								}
+								TurnPathHelper.calcTurnPath(path2, TurnType.valueOf(turnSymbol2, leftSide), pathTransform);
+
+								if ((!turn.getValue().equals(turnSymbol) || orderSwitched) && (turn.getLanes()[i] & 1) == 1) {
+									paintRouteDirection.setColor(active);
+								}
+								if (turnSymbol2.equals(TurnType.TSLR) || turnSymbol2.equals(TurnType.TSHR)) {
+									canvas.translate((int) (0.2 * w), 0);
+								} else if (turnSymbol2.equals(TurnType.TSLL) || turnSymbol2.equals(TurnType.TSHL)) {
+									canvas.translate((int) (-0.2 * w), 0);
+								} else if (turnSymbol2.equals(TurnType.C) && turn.isTurnAllowed(i, TurnType.Turn.RIGHT)) {
+									canvas.translate((int) (-0.4 * w), 0);
+								} else if (turnSymbol2.equals(TurnType.C) && turn.isTurnAllowed(i, TurnType.Turn.LEFT)) {
+									canvas.translate((int) (0.4 * w), 0);
+								}
+								canvas.drawPath(path2, paintBlack);
+								canvas.drawPath(path2, paintRouteDirection);
+								if (turnSymbol2.equals(TurnType.TSLR) || turnSymbol2.equals(TurnType.TSHR)) {
+									canvas.translate((int) (-0.2 * w), 0);
+								} else if (turnSymbol2.equals(TurnType.TSLL) || turnSymbol2.equals(TurnType.TSHL)) {
+									canvas.translate((int) (0.2 * w), 0);
+								} else if (turnSymbol2.equals(TurnType.C) && turn.isTurnAllowed(i, TurnType.Turn.RIGHT)) {
+									canvas.translate((int) (0.4 * w), 0);
+								} else if (turnSymbol2.equals(TurnType.C) && turn.isTurnAllowed(i, TurnType.Turn.LEFT)) {
+									canvas.translate((int) (-0.4 * w), 0);
+								}
+								paintRouteDirection.setColor(inactive);
+							}
 						} else {
-							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+							Path path = new Path();
+							TurnPathHelper.calcTurnPath(path, TurnType.valueOf(turn.getPrimaryTurn(i).getValue(), leftSide), pathTransform);
+							if ((turn.getLanes()[i] & 1) == 1) {
+								paintRouteDirection.setColor(active);
+							}
+							canvas.drawPath(path, paintBlack);
+							canvas.drawPath(path, paintRouteDirection);
+							paintRouteDirection.setColor(inactive);
 						}
-						canvas.drawPath(laneStraight, paintBlack);
-						canvas.drawPath(laneStraight, paintRouteDirection);
+
 						canvas.translate(w, 0);
 					}
 					canvas.restore();
@@ -581,11 +677,11 @@ public class RouteInfoWidgetsFactory {
 					if (routingHelper.isFollowingMode()) {
 						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
 						if(r != null && r.directionInfo != null && r.directionInfo.getTurnType() != null) {
-							loclanes  = r.directionInfo.getTurnType().getLanes();
+							turn = r.directionInfo.getTurnType();
 							locimminent = r.imminent;
 							// Do not show too far 
 							if ((r.distanceTo > 700 && r.directionInfo.getTurnType().isSkipToSpeak()) || r.distanceTo > 1200) {
-								loclanes = null;
+								turn = null;
 							}
 						}
 					} else {
@@ -594,15 +690,15 @@ public class RouteInfoWidgetsFactory {
 								&& di < routingHelper.getRouteDirections().size()) {
 							RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
 							if (next != null) {
-								loclanes = next.getTurnType().getLanes();
+								turn = next.getTurnType();
 							}
 						}
 					}
 				}
-				visible = loclanes != null && loclanes.length > 0;
+				visible = turn != null && turn.getLanes() != null && turn.getLanes().length > 0;
 				if (visible) {
-					if (!Arrays.equals(lanes, loclanes)) {
-						lanes = loclanes;
+					if (!Arrays.equals(prevLanes, turn.getLanes())) {
+						prevLanes = turn.getLanes();
 						requestLayout();
 						invalidate();
 					}
