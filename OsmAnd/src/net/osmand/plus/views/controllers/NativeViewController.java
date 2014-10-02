@@ -22,7 +22,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.helpers.SimpleTwoFingerTapDetector;
+import net.osmand.plus.helpers.TwoFingerTapDetector;
+import net.osmand.plus.render.NativeCppLibrary;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -35,14 +36,6 @@ import java.util.List;
  * Created by Denis on 01.10.2014.
  */
 public class NativeViewController extends MapViewBaseController {
-
-	static {
-		NativeOsmandLibrary.loadLibrary("gnustl_shared");
-		NativeOsmandLibrary.loadLibrary("Qt5Core");
-		NativeOsmandLibrary.loadLibrary("Qt5Network");
-		NativeOsmandLibrary.loadLibrary("Qt5Sql");
-		NativeOsmandLibrary.loadLibrary("OsmAndCoreWithJNI");
-	}
 
 	private GLSurfaceView glSurfaceView;
 	private OsmandSettings settings;
@@ -74,7 +67,7 @@ public class NativeViewController extends MapViewBaseController {
 	public static final String NATIVE_TAG = "NativeRender";
 	private CoreResourcesFromAndroidAssets coreResources;
 
-	SimpleTwoFingerTapDetector twoFingerTapDetector = new SimpleTwoFingerTapDetector() {
+	TwoFingerTapDetector twoFingerTapDetector = new TwoFingerTapDetector() {
 		@Override
 		public void onTwoFingerTap() {
 			currentViewport.setZoom(currentViewport.getZoom() - 1);
@@ -87,7 +80,16 @@ public class NativeViewController extends MapViewBaseController {
 		this.glSurfaceView = surfaceView;
 		this.settings = activity.getMyApplication().getSettings();
 		this.mapActivity = activity;
+		loadLibraries();
 		setupView();
+	}
+
+	private void loadLibraries() {
+		NativeCppLibrary.loadLibrary("gnustl_shared");
+		NativeCppLibrary.loadLibrary("Qt5Core");
+		NativeCppLibrary.loadLibrary("Qt5Network");
+		NativeCppLibrary.loadLibrary("Qt5Sql");
+		NativeCppLibrary.loadLibrary("OsmAndCoreWithJNI");
 	}
 
 	private void setupView() {

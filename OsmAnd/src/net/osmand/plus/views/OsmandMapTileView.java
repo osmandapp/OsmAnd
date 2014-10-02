@@ -23,7 +23,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.SimpleTwoFingerTapDetector;
+import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.controllers.JavaViewController;
@@ -80,9 +80,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 
 	protected static final int emptyTileDivisor = 16;
-
-
-
 
 	public interface OnLongClickListener {
 		public boolean onLongPressEvent(PointF point);
@@ -148,7 +145,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private Paint paintImg;
 
 	private boolean afterTwoFingerTap = false;
-	SimpleTwoFingerTapDetector twoFingerTapDetector = new SimpleTwoFingerTapDetector() {
+	TwoFingerTapDetector twoFingerTapDetector = new TwoFingerTapDetector() {
 		@Override
 		public void onTwoFingerTap() {
 			afterTwoFingerTap = true;
