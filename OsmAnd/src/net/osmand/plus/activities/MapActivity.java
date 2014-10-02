@@ -10,6 +10,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.opengl.GLSurfaceView;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
+import com.actionbarsherlock.app.ActionBar;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.access.AccessibilityPlugin;
@@ -102,6 +109,8 @@ public class MapActivity extends AccessibleActivity  {
 	private FrameLayout lockView;
 	private GpxImportHelper gpxImportHelper;
 	private MapViewBaseController mapViewController;
+	private ActionBarDrawerToggle mDrawerToggle;
+	private DrawerLayout mDrawerLayout;
 	
 	
 	private Notification getNotification() {
@@ -128,7 +137,7 @@ public class MapActivity extends AccessibleActivity  {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// Full screen is not used here
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+		//getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
 		app.checkApplicationIsBeingInitialized(this, startProgressDialog);
@@ -206,10 +215,38 @@ public class MapActivity extends AccessibleActivity  {
 
 		}
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
+
+//		ActionBar actionBar = getSupportActionBar();
+//		actionBar.setDisplayHomeAsUpEnabled(true);
+//		actionBar.setHomeButtonEnabled(true);
+//		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#330000ff")));
+//		actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#550000ff")));
+
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
+				R.string.default_buttons_other_actions, R.string.close);
 	}
 	
 	public void addLockView(FrameLayout lockView) {
 		this.lockView = lockView;
+	}
+
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+		if (item.getItemId() == android.R.id.home && mDrawerToggle.isDrawerIndicatorEnabled()) {
+			if (mDrawerLayout.isDrawerOpen(findViewById(R.id.left_drawer))) {
+				mDrawerLayout.closeDrawer(findViewById(R.id.left_drawer));
+			} else {
+				mapActions.openOptionsMenuAsDrawer();
+			}
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		mDrawerToggle.syncState();
 	}
 
 	private void createProgressBarForRouting() {
@@ -241,7 +278,13 @@ public class MapActivity extends AccessibleActivity  {
 		});
 	}
 
-	
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+
 	@SuppressWarnings("rawtypes")
 	public Object getLastNonConfigurationInstanceByKey(String key) {
 		Object k = super.getLastNonConfigurationInstance();
@@ -272,9 +315,10 @@ public class MapActivity extends AccessibleActivity  {
 		mapViewController.resume();
 		cancelNotification();
 		//fixing bug with action bar appearing on android 2.3.3
-		if (getSupportActionBar() != null){
-			getSupportActionBar().hide();
-		}
+//		if (getSupportActionBar() != null){
+//			getSupportActionBar().hide();
+//		}
+
 		if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
 			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
 			// can't return from this method we are not sure if activity will be recreated or not
@@ -459,7 +503,7 @@ public class MapActivity extends AccessibleActivity  {
 			}
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
-			mapActions.openOptionsMenuAsList();
+			mapActions.openOptionsMenuAsDrawer();
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, getMyApplication().getAppCustomization().getSearchActivity());

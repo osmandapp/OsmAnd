@@ -10,6 +10,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.widget.*;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.AndroidUtils;
@@ -67,17 +70,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class MapActivityActions implements DialogProvider {
 	
@@ -731,7 +723,41 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 	
-	
+	public void openOptionsMenuAsDrawer(){
+		final ContextMenuAdapter cm = createOptionsMenu();
+		final DrawerLayout mDrawerLayout = (DrawerLayout) mapActivity.findViewById(R.id.drawer_layout);
+		final ListView mDrawerList = (ListView) mapActivity.findViewById(R.id.left_drawer);
+		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+		ListAdapter listAdapter ;
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+			listAdapter =
+					cm.createListAdapter(mapActivity, R.layout.list_menu_item, getMyApplication().getSettings().isLightContentMenu());
+		} else {
+			listAdapter =
+					cm.createListAdapter(mapActivity, R.layout.list_menu_item_native, getMyApplication().getSettings().isLightContentMenu());
+		}
+		mDrawerList.setAdapter(listAdapter);
+
+		if (getMyApplication().getSettings().isLightContentMenu()){
+			mDrawerList.setBackgroundColor(mapActivity.getResources().getColor(R.color.shadow_color));
+		} else {
+			mDrawerList.setBackgroundColor(mapActivity.getResources().getColor(R.color.dark_drawer_bg_color));
+		}
+		mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
+				OnContextMenuClick click = cm.getClickAdapter(which);
+				if (click != null) {
+					click.onContextMenuClick(cm.getItemId(which), which, false, null);
+				}
+				mDrawerLayout.closeDrawer(mDrawerList);
+			}
+		});
+
+		mDrawerLayout.openDrawer(mDrawerList);
+	}
+
 	public AlertDialog openOptionsMenuAsList() {
 		final ContextMenuAdapter cm = createOptionsMenu();
 		final Builder bld = new AlertDialog.Builder(mapActivity);
@@ -753,7 +779,6 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 		return bld.show();
-
 	}
 
 	private ContextMenuAdapter createOptionsMenu() {
