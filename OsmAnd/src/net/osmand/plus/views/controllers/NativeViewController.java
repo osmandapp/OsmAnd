@@ -67,7 +67,7 @@ public class NativeViewController extends MapViewBaseController {
 	private QIODeviceLogSink fileLogSink;
 	private RotatedTileBox currentViewport = null;
 
-	private boolean offlineMap = true;
+	private boolean offlineMap = false;
 
 	private GestureDetector gestureDetector;
 
@@ -252,8 +252,8 @@ public class NativeViewController extends MapViewBaseController {
 	}
 
 	private class EGLContextFactory implements GLSurfaceView.EGLContextFactory {
-		private EGLContext _gpuWorkerContext;
-		private EGLSurface _gpuWorkerFakeSurface;
+		private EGLContext gpuWorkerContext;
+		private EGLSurface gpuWorkerFakeSurface;
 
 		public EGLContext createContext(EGL10 egl, EGLDisplay display, EGLConfig eglConfig) {
 			final String eglExtensions = egl.eglQueryString(display, EGL10.EGL_EXTENSIONS);
@@ -280,7 +280,7 @@ public class NativeViewController extends MapViewBaseController {
 
 			Log.i(NATIVE_TAG, "Creating GPU worker context...");
 			try {
-				_gpuWorkerContext = egl.eglCreateContext(
+				gpuWorkerContext = egl.eglCreateContext(
 						display,
 						eglConfig,
 						mainContext,
@@ -288,13 +288,13 @@ public class NativeViewController extends MapViewBaseController {
 			} catch (Exception e) {
 				Log.e(NATIVE_TAG, "Failed to create GPU worker context", e);
 			}
-			if (_gpuWorkerContext == null || _gpuWorkerContext == EGL10.EGL_NO_CONTEXT)
+			if (gpuWorkerContext == null || gpuWorkerContext == EGL10.EGL_NO_CONTEXT)
 			{
 				Log.e(NATIVE_TAG, "Failed to create GPU worker context: " + egl.eglGetError());
-				_gpuWorkerContext = null;
+				gpuWorkerContext = null;
 			}
 
-			if (_gpuWorkerContext != null)
+			if (gpuWorkerContext != null)
 			{
 				Log.i(NATIVE_TAG, "Creating GPU worker fake surface...");
 				try {
@@ -302,21 +302,21 @@ public class NativeViewController extends MapViewBaseController {
 							EGL10.EGL_WIDTH, 1,
 							EGL10.EGL_HEIGHT, 1,
 							EGL10.EGL_NONE };
-					_gpuWorkerFakeSurface = egl.eglCreatePbufferSurface(display, eglConfig, surfaceAttribList);
+					gpuWorkerFakeSurface = egl.eglCreatePbufferSurface(display, eglConfig, surfaceAttribList);
 				} catch (Exception e) {
 					Log.e(NATIVE_TAG, "Failed to create GPU worker fake surface", e);
 				}
-				if (_gpuWorkerFakeSurface == null || _gpuWorkerFakeSurface == EGL10.EGL_NO_SURFACE)
+				if (gpuWorkerFakeSurface == null || gpuWorkerFakeSurface == EGL10.EGL_NO_SURFACE)
 				{
 					Log.e(NATIVE_TAG, "Failed to create GPU worker fake surface: " + egl.eglGetError());
-					_gpuWorkerFakeSurface = null;
+					gpuWorkerFakeSurface = null;
 				}
 			}
 
 			MapRendererSetupOptions rendererSetupOptions = new MapRendererSetupOptions();
-			if (_gpuWorkerContext != null && _gpuWorkerFakeSurface != null) {
+			if (gpuWorkerContext != null && gpuWorkerFakeSurface != null) {
 				rendererSetupOptions.setGpuWorkerThreadEnabled(true);
-				gpuWorkerThreadPrologue = new GpuWorkerThreadPrologue(egl, display, _gpuWorkerContext, _gpuWorkerFakeSurface);
+				gpuWorkerThreadPrologue = new GpuWorkerThreadPrologue(egl, display, gpuWorkerContext, gpuWorkerFakeSurface);
 				rendererSetupOptions.setGpuWorkerThreadPrologue(gpuWorkerThreadPrologue.getBinding());
 				gpuWorkerThreadEpilogue = new GpuWorkerThreadEpilogue(egl);
 				rendererSetupOptions.setGpuWorkerThreadEpilogue(gpuWorkerThreadEpilogue.getBinding());
@@ -333,14 +333,14 @@ public class NativeViewController extends MapViewBaseController {
 		public void destroyContext(EGL10 egl, EGLDisplay display, EGLContext context) {
 			egl.eglDestroyContext(display, context);
 
-			if (_gpuWorkerContext != null) {
-				egl.eglDestroyContext(display, _gpuWorkerContext);
-				_gpuWorkerContext = null;
+			if (gpuWorkerContext != null) {
+				egl.eglDestroyContext(display, gpuWorkerContext);
+				gpuWorkerContext = null;
 			}
 
-			if (_gpuWorkerFakeSurface != null) {
-				egl.eglDestroySurface(display, _gpuWorkerFakeSurface);
-				_gpuWorkerFakeSurface = null;
+			if (gpuWorkerFakeSurface != null) {
+				egl.eglDestroySurface(display, gpuWorkerFakeSurface);
+				gpuWorkerFakeSurface = null;
 			}
 		}
 	}
