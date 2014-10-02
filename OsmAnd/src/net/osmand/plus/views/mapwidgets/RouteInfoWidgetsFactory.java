@@ -55,7 +55,7 @@ public class RouteInfoWidgetsFactory {
 			final OsmandSettings settings, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
 		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(ctx, textPaint, subtextPaint, horisontalMini) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
-			TurnType straight = TurnType.sraight();
+			TurnType straight = TurnType.straight();
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
@@ -526,7 +526,7 @@ public class RouteInfoWidgetsFactory {
 		final Path laneStraight = new Path();
 		Matrix pathTransform = new Matrix();
 		pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
-		TurnPathHelper.calcTurnPath(laneStraight, TurnType.sraight(), pathTransform);
+		TurnPathHelper.calcTurnPath(laneStraight, TurnType.straight(), pathTransform);
 		final Paint paintBlack = new Paint();
 		paintBlack.setStyle(Style.STROKE);
 		paintBlack.setColor(Color.BLACK);

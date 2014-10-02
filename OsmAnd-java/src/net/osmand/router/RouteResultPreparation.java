@@ -338,8 +338,8 @@ public class RouteResultPreparation {
 				t = getTurnInfo(result, i, leftside);
 				// justify turn
 				if(t != null && i < result.size() - 1) {
-					boolean tl = TurnType.TL.equals(t.getValue());
-					boolean tr = TurnType.TR.equals(t.getValue());
+					boolean tl = TurnType.TL == t.getValue();
+					boolean tr = TurnType.TR == t.getValue();
 					if(tl || tr) {
 						TurnType tnext = getTurnInfo(result, i + 1, leftside);
 						if (tnext != null && result.get(i).getDistance() < 35) { //
@@ -357,10 +357,10 @@ public class RouteResultPreparation {
 								ut = false;
 							}
 							if (ut) {
-								if (tl && TurnType.TL.equals(tnext.getValue())) {
+								if (tl && TurnType.TL == tnext.getValue()) {
 									next = i + 2;
 									t = TurnType.valueOf(TurnType.TU, false);
-								} else if (tr && TurnType.TR.equals(tnext.getValue())) {
+								} else if (tr && TurnType.TR == tnext.getValue()) {
 									next = i + 2;
 									t = TurnType.valueOf(TurnType.TU, true);
 								}
@@ -486,7 +486,7 @@ public class RouteResultPreparation {
 			}
 		}
 		// combine all roundabouts
-		TurnType t = TurnType.valueOf("EXIT"+exit, leftSide);
+		TurnType t = TurnType.getExitTurn(exit, 0, leftSide);
 		t.setTurnAngle((float) MapUtils.degreesDiff(last.getBearingBegin(), prev.getBearingEnd())) ;
 		return t;
 	}

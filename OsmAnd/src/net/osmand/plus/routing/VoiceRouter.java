@@ -4,14 +4,10 @@ package net.osmand.plus.routing;
 import java.io.IOException;
 import java.util.List;
 
-import android.media.AudioManager;
-import android.media.SoundPool;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -25,6 +21,8 @@ import net.osmand.util.MapUtils;
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
 import android.content.Context;
+import android.media.AudioManager;
+import android.media.SoundPool;
 
 
 public class VoiceRouter {
@@ -567,7 +565,7 @@ public class VoiceRouter {
 				play.prepareTurn(tParam, dist, getSpeakableStreetName(currentSegment, next)).play();
 			} else if(next.getTurnType().isRoundAbout()){
 				play.prepareRoundAbout(dist, next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next)).play();
-			} else if(next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)){
+			} else if(next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU){
 				play.prepareMakeUT(dist, getSpeakableStreetName(currentSegment, next)).play();
 			} 
 		}
@@ -582,7 +580,7 @@ public class VoiceRouter {
 				play.turn(tParam, dist, getSpeakableStreetName(currentSegment, next));
 			} else if (next.getTurnType().isRoundAbout()) {
 				play.roundAbout(dist, next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next));
-			} else if (next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)) {
+			} else if (next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU) {
 				play.makeUT(dist, getSpeakableStreetName(currentSegment, next));
 			} else {
 				isPlay = false;
@@ -591,15 +589,15 @@ public class VoiceRouter {
 			if (pronounceNextNext != null) {
 				TurnType t = pronounceNextNext.getTurnType();
 				isPlay = true;
-				if (next.getTurnType().getValue().equals(TurnType.C) && 
-						!TurnType.C.equals(t.getValue())) {
+				if (next.getTurnType().getValue() == TurnType.C && 
+						TurnType.C != t.getValue()) {
 					play.goAhead(dist, getSpeakableStreetName(currentSegment, next));
 				}
-				if (TurnType.TL.equals(t.getValue()) || TurnType.TSHL.equals(t.getValue()) || TurnType.TSLL.equals(t.getValue())
-						|| TurnType.TU.equals(t.getValue()) || TurnType.KL.equals(t.getValue())) {
+				if (TurnType.TL == t.getValue() || TurnType.TSHL == t.getValue() || TurnType.TSLL == t.getValue()
+						|| TurnType.TU == t.getValue() || TurnType.KL == t.getValue()) {
 					play.then().bearLeft( getSpeakableStreetName(currentSegment, next));
-				} else if (TurnType.TR.equals(t.getValue()) || TurnType.TSHR.equals(t.getValue()) || TurnType.TSLR.equals(t.getValue())
-						|| TurnType.KR.equals(t.getValue())) {
+				} else if (TurnType.TR == t.getValue() || TurnType.TSHR == t.getValue() || TurnType.TSLR == t.getValue()
+						|| TurnType.KR == t.getValue()) {
 					play.then().bearRight( getSpeakableStreetName(currentSegment, next));
 				}
 			}
@@ -632,10 +630,10 @@ public class VoiceRouter {
 				play.turn(tParam, getSpeakableStreetName(currentSegment, next));
 			} else if(next.getTurnType().isRoundAbout()){
 				play.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(),  getSpeakableStreetName(currentSegment, next));
-			} else if(next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)){
+			} else if(next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU){
 				play.makeUT( getSpeakableStreetName(currentSegment, next));
 				// do not say it
-//				} else if(next.getTurnType().getValue().equals(TurnType.C)){
+//				} else if(next.getTurnType().getValue() == TurnType.C)){
 //					play.goAhead();
 			} else {
 				isplay = false;
@@ -649,7 +647,7 @@ public class VoiceRouter {
 				} else if (nextNext.getTurnType().isRoundAbout()) {
 					if(isplay) { play.then(); }
 					play.roundAbout(next.distance, nextNext.getTurnType().getTurnAngle(), nextNext.getTurnType().getExitOut(), empty);
-				} else if (nextNext.getTurnType().getValue().equals(TurnType.TU)) {
+				} else if (nextNext.getTurnType().getValue() == TurnType.TU) {
 					if(isplay) { play.then(); }
 					play.makeUT(next.distance, empty);
 				}
@@ -662,21 +660,21 @@ public class VoiceRouter {
 	}
 	
 	private String getTurnType(TurnType t){
-		if(TurnType.TL.equals(t.getValue())){
+		if(TurnType.TL == t.getValue()){
 			return AbstractPrologCommandPlayer.A_LEFT;
-		} else if(TurnType.TSHL.equals(t.getValue())){
+		} else if(TurnType.TSHL == t.getValue()){
 			return AbstractPrologCommandPlayer.A_LEFT_SH;
-		} else if(TurnType.TSLL.equals(t.getValue())){
+		} else if(TurnType.TSLL == t.getValue()){
 			return AbstractPrologCommandPlayer.A_LEFT_SL;
-		} else if(TurnType.TR.equals(t.getValue())){
+		} else if(TurnType.TR == t.getValue()){
 			return AbstractPrologCommandPlayer.A_RIGHT;
-		} else if(TurnType.TSHR.equals(t.getValue())){
+		} else if(TurnType.TSHR == t.getValue()){
 			return AbstractPrologCommandPlayer.A_RIGHT_SH;
-		} else if(TurnType.TSLR.equals(t.getValue())){
+		} else if(TurnType.TSLR == t.getValue()){
 			return AbstractPrologCommandPlayer.A_RIGHT_SL;
-		} else if(TurnType.KL.equals(t.getValue())){
+		} else if(TurnType.KL == t.getValue()){
 			return AbstractPrologCommandPlayer.A_LEFT_KEEP;
-		} else if(TurnType.KR.equals(t.getValue())){
+		} else if(TurnType.KR == t.getValue()){
 			return AbstractPrologCommandPlayer.A_RIGHT_KEEP;
 		}
 		return null;

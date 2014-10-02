@@ -149,7 +149,7 @@ public class RouteCalculationResult {
 					if (locationIndex > interLocations[currentIntermediate]
 							&& getDistanceToLocation(locations, intermediates.get(currentIntermediate), locationIndex) > 50) {
 						RouteDirectionInfo toSplit = localDirections.get(currentDirection);
-						RouteDirectionInfo info = new RouteDirectionInfo(localDirections.get(currentDirection).getAverageSpeed(), TurnType.sraight());
+						RouteDirectionInfo info = new RouteDirectionInfo(localDirections.get(currentDirection).getAverageSpeed(), TurnType.straight());
 						info.setRef(toSplit.getRef());
 						info.setStreetName(toSplit.getStreetName());
 						info.setDestinationName(toSplit.getDestinationName());
@@ -296,7 +296,7 @@ public class RouteCalculationResult {
 		
 		int previousLocation = 0;
 		int prevBearingLocation = 0;
-		RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.sraight());
+		RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.straight());
 		previousInfo.routePointOffset = 0;
 		previousInfo.setDescriptionRoute(ctx.getString( R.string.route_head));
 		computeDirections.add(previousInfo);
@@ -443,27 +443,27 @@ public class RouteCalculationResult {
 	public static String toString(TurnType type, Context ctx) {
 		if(type.isRoundAbout()){
 			return ctx.getString(R.string.route_roundabout, type.getExitOut());
-		} else if(type.getValue().equals(TurnType.C)) {
+		} else if(type.getValue() == TurnType.C) {
 			return ctx.getString(R.string.route_head);
-		} else if(type.getValue().equals(TurnType.TSLL)) {
+		} else if(type.getValue() == TurnType.TSLL) {
 			return ctx.getString(R.string.route_tsll);
-		} else if(type.getValue().equals(TurnType.TL)) {
+		} else if(type.getValue() == TurnType.TL) {
 			return ctx.getString(R.string.route_tl);
-		} else if(type.getValue().equals(TurnType.TSHL)) {
+		} else if(type.getValue() == TurnType.TSHL) {
 			return ctx.getString(R.string.route_tshl);
-		} else if(type.getValue().equals(TurnType.TSLR)) {
+		} else if(type.getValue() == TurnType.TSLR) {
 			return ctx.getString(R.string.route_tslr);
-		} else if(type.getValue().equals(TurnType.TR)) {
+		} else if(type.getValue() == TurnType.TR) {
 			return ctx.getString(R.string.route_tr);
-		} else if(type.getValue().equals(TurnType.TSHR)) {
+		} else if(type.getValue() == TurnType.TSHR) {
 			return ctx.getString(R.string.route_tshr);
-		} else if(type.getValue().equals(TurnType.TU)) {
+		} else if(type.getValue() == TurnType.TU) {
 			return ctx.getString(R.string.route_tu);
-		} else if(type.getValue().equals(TurnType.TRU)) {
+		} else if(type.getValue() == TurnType.TRU) {
 			return ctx.getString(R.string.route_tu);
-		} else if(type.getValue().equals(TurnType.KL)) {
+		} else if(type.getValue() == TurnType.KL) {
 			return ctx.getString(R.string.route_kl);
-		} else if(type.getValue().equals(TurnType.KR)) {
+		} else if(type.getValue() == TurnType.KR) {
 			return ctx.getString(R.string.route_kr);
 		}
 		return "";
@@ -483,7 +483,7 @@ public class RouteCalculationResult {
 		if (directions != null && directions.size() > 1) {
 			for (int i = 1; i < directions.size();) {
 				RouteDirectionInfo r = directions.get(i);
-				if (r.getTurnType().getValue().equals(TurnType.C)) {
+				if (r.getTurnType().getValue() == TurnType.C) {
 					RouteDirectionInfo prev = directions.get(i - 1);
 					prev.setAverageSpeed((prev.distance + r.distance)
 							/ (prev.distance / prev.getAverageSpeed() + r.distance / r.getAverageSpeed()));
@@ -536,7 +536,7 @@ public class RouteCalculationResult {
 					i.routePointOffset++;
 				}
 				RouteDirectionInfo info = new RouteDirectionInfo(directions.get(0).getAverageSpeed(),
-						TurnType.sraight());
+						TurnType.straight());
 				info.routePointOffset = 0;
 				// info.setDescriptionRoute(ctx.getString( R.string.route_head));//; //$NON-NLS-1$
 				directions.add(0, info);
@@ -544,7 +544,7 @@ public class RouteCalculationResult {
 		}
 		RouteDirectionInfo lastDirInf = directions.size() > 0 ? directions.get(directions.size() - 1) : null;
 		if((lastDirInf == null || lastDirInf.routePointOffset < locations.size() - 1) && locations.size() - 1 > 0) {
-			String type = TurnType.C;
+			int type = TurnType.C;
 			Location prevLast = locations.get(locations.size() - 2);
 			float lastBearing = prevLast.bearingTo(locations.get(locations.size() - 1));
 			float[] compute = new float[2];

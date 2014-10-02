@@ -1,58 +1,133 @@
 package net.osmand.router;
 
 public class TurnType {
-	public static final String C = "C"; // continue (go straight) //$NON-NLS-1$
-	public static final String TL = "TL"; // turn left //$NON-NLS-1$
-	public static final String TSLL = "TSLL"; // turn slightly left //$NON-NLS-1$
-	public static final String TSHL = "TSHL"; // turn sharply left //$NON-NLS-1$
-	public static final String TR = "TR"; // turn right //$NON-NLS-1$
-	public static final String TSLR = "TSLR"; // turn slightly right //$NON-NLS-1$
-	public static final String TSHR = "TSHR"; // turn sharply right //$NON-NLS-1$
-	public static final String KL = "KL"; // keep left //$NON-NLS-1$
-	public static final String KR = "KR"; // keep right//$NON-NLS-1$
-	public static final String TU = "TU"; // U-turn //$NON-NLS-1$
-	public static final String TRU = "TRU"; // Right U-turn //$NON-NLS-1$
-	public static final String OFFR = "OFFR"; // Off route //$NON-NLS-1$
-	public static String[] predefinedTypes = new String[] { C, KL, KR, TL, TSLL, TSHL, TR, TSLR, TSHR, TU, TRU, OFFR };
+	public static final int C = 1;//"C"; // continue (go straight) //$NON-NLS-1$
+	public static final int TL = 2; // turn left //$NON-NLS-1$
+	public static final int TSLL = 3; // turn slightly left //$NON-NLS-1$
+	public static final int TSHL = 4; // turn sharply left //$NON-NLS-1$
+	public static final int TR = 5; // turn right //$NON-NLS-1$
+	public static final int TSLR = 6; // turn slightly right //$NON-NLS-1$
+	public static final int TSHR = 7; // turn sharply right //$NON-NLS-1$
+	public static final int KL = 8; // keep left //$NON-NLS-1$
+	public static final int KR = 9; // keep right//$NON-NLS-1$
+	public static final int TU = 10; // U-turn //$NON-NLS-1$
+	public static final int TRU = 11; // Right U-turn //$NON-NLS-1$
+	public static final int OFFR = 12; // Off route //$NON-NLS-1$
+	public static final int RNDB = 13; // Roundabout
+	public static final int RNLB = 14; // Roundabout left
 	
-	public static TurnType sraight() {
+	public static TurnType straight() {
 		return valueOf(C, false);
 	}
-
-	public static TurnType valueOf(String s, boolean leftSide) {
-		for (String v : predefinedTypes) {
-			if (v.equals(s)) {
-				if (leftSide && TU.equals(v)) {
-					v = TRU;
-				}
-				return new TurnType(v);
+	
+	public String toXmlString() {
+		switch (value) {
+		case C:
+			return "C";
+		case TL:
+			return "TL";
+		case TSLL:
+			return "TSLL";
+		case TSHL:
+			return "TSHL";
+		case TR:
+			return "TR";
+		case TSLR:
+			return "TSLR";
+		case TSHR:
+			return "TSHR";
+		case KL:
+			return "KL";
+		case KR:
+			return "KR";
+		case TU:
+			return "TU";
+		case TRU:
+			return "TRU";
+		case OFFR:
+			return "OFFR";
+		case RNDB:
+			return "RNDB"+exitOut;
+		case RNLB:
+			return "RNLB"+exitOut;
+		}
+		return "C";
+	}
+	
+	public static TurnType fromString(String s, boolean leftSide) {
+		TurnType t = null;
+		if ("C".equals(s)) {
+			t = TurnType.valueOf(C, leftSide);
+		} else if ("TL".equals(s)) {
+			t = TurnType.valueOf(TL, leftSide);
+		} else if ("TSLL".equals(s)) {
+			t = TurnType.valueOf(TSLL, leftSide);
+		} else if ("TSHL".equals(s)) {
+			t = TurnType.valueOf(TSHL, leftSide);
+		} else if ("TR".equals(s)) {
+			t = TurnType.valueOf(TR, leftSide);
+		} else if ("TSLR".equals(s)) {
+			t = TurnType.valueOf(TSLR, leftSide);
+		} else if ("TSHR".equals(s)) {
+			t = TurnType.valueOf(TSHR, leftSide);
+		} else if ("KL".equals(s)) {
+			t = TurnType.valueOf(KL, leftSide);
+		} else if ("KR".equals(s)) {
+			t = TurnType.valueOf(KR, leftSide);
+		} else if ("TU".equals(s)) {
+			t = TurnType.valueOf(TU, leftSide);
+		} else if ("TRU".equals(s)) {
+			t = TurnType.valueOf(TRU, leftSide);
+		} else if ("OFFR".equals(s)) {
+			t = TurnType.valueOf(OFFR, leftSide);
+		} else if (s != null && (s.startsWith("EXIT") ||
+				s.startsWith("RNDB") || s.startsWith("RNLB"))) {
+			try {
+				t = TurnType.getExitTurn(Integer.parseInt(s.substring(4)), 0, leftSide);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
 			}
 		}
-		if (s != null && s.startsWith("EXIT")) { //$NON-NLS-1$
-			return getExitTurn(Integer.parseInt(s.substring(4)), 0, leftSide);
+		if(t == null) {
+			t = TurnType.straight();
 		}
-		return null;
+		return t;
+	}
+	
+
+	public static TurnType valueOf(int vs, boolean leftSide) {
+		if(vs == TU && leftSide) {
+			vs = TRU;
+		} else if(vs == RNDB && leftSide) {
+			vs = RNLB;
+		}
+	
+		return new TurnType(vs);
+//		if (s != null && s.startsWith("EXIT")) { //$NON-NLS-1$
+//			return getExitTurn(Integer.parseInt(s.substring(4)), 0, leftSide);
+//		}
+//		return null;
 	}
 
-	private final String value;
+	private final int value;
 	private int exitOut;
-	private boolean isLeftSide;
 	// calculated clockwise head rotation if previous direction to NORTH
 	private float turnAngle;
 	private boolean skipToSpeak;
 	private int[] lanes;
 
-	private static TurnType getExitTurn(int out, float angle, boolean leftSide) {
-		TurnType r = new TurnType("EXIT", out, leftSide); //$NON-NLS-1$
+	public static TurnType getExitTurn(int out, float angle, boolean leftSide) {
+		TurnType r = valueOf(RNDB, leftSide); //$NON-NLS-1$
+		r.exitOut = out;
 		r.setTurnAngle(angle);
 		return r;
 	}
-
-	private TurnType(String value, int exitOut, boolean leftSide) {
-		this.value = value;
-		this.exitOut = exitOut;
-		this.isLeftSide = leftSide;
+	
+	
+	private TurnType(int vl) {
+		this.value = vl;
 	}
+
 
 	// calculated Clockwise head rotation if previous direction to NORTH
 	public float getTurnAngle() {
@@ -60,18 +135,14 @@ public class TurnType {
 	}
 
 	public boolean isLeftSide() {
-		return isLeftSide;
+		return value == RNLB || value == TRU;
 	}
 
 	public void setTurnAngle(float turnAngle) {
 		this.turnAngle = turnAngle;
 	}
-	
-	private TurnType(String value) {
-		this.value = value;
-	}
 
-	public String getValue() {
+	public int getValue() {
 		return value;
 	}
 
@@ -80,66 +151,87 @@ public class TurnType {
 	}
 
 	public boolean isRoundAbout() {
-		return value.equals("EXIT"); //$NON-NLS-1$
+		return value == RNDB || value == RNLB; //$NON-NLS-1$
 	}
 	
-	// lanes encoded as array of int 
-	// last bit is 1, 0 (should we take this lane)
-	// first bits 0 - left, 1 - straight, 2 - right
+	// lanes encoded as array of int
+	// 0 byte - 0/1 - to use or not
+	// 1-5 byte - additional turn info 
+	// 6-10 byte - secondary turn
 	public void setLanes(int[] lanes) {
 		this.lanes = lanes;
 	}
+	
+	// Note that there is no "weight" or ordering between the primary and secondary turns.
+	public void setPrimaryTurn(int lane, int turnType) {
+		lanes[lane] |= (turnType << 1);
+	}
+	
+	public int getPrimaryTurn(int lane) {
+		// Get the primary turn modifier for the lane
+		return (lanes[lane] >> 1) & ((1 << 4) - 1);
+	}
+
+	public void setSecondaryTurn(int lane, int turnType) {
+		lanes[lane] |= (turnType << 5);
+	}
+
+	public int getSecondaryTurn(int lane) {
+		return (lanes[lane] >> 5);
+	}
+
 	
 	public int[] getLanes() {
 		return lanes;
 	}
 	
 	public boolean keepLeft() {
-		return value.equals(KL); 
+		return value == KL;
 	}
 	
 	public boolean keepRight() {
-		return value.equals(KR); 
+		return value == KR;
 	}
 	
 	public boolean goAhead() {
-		return value.equals(C); 
+		return value == C;
 	}
 	
 	public boolean isSkipToSpeak() {
 		return skipToSpeak;
 	}
+	
 	public void setSkipToSpeak(boolean skipToSpeak) {
 		this.skipToSpeak = skipToSpeak;
 	}
 	
 	@Override
 	public String toString() {
-		if(isRoundAbout()){
+		if (isRoundAbout()) {
 			return "Take " + getExitOut() + " exit";
-		} else if(value.equals(C)) {
+		} else if (value == C) {
 			return "Go ahead";
-		} else if(value.equals(TSLL)) {
+		} else if (value == TSLL) {
 			return "Turn slightly left";
-		} else if(value.equals(TL)) {
+		} else if (value == TL) {
 			return "Turn left";
-		} else if(value.equals(TSHL)) {
+		} else if (value == TSHL) {
 			return "Turn sharply left";
-		} else if(value.equals(TSLR)) {
+		} else if (value == TSLR) {
 			return "Turn slightly right";
-		} else if(value.equals(TR)) {
+		} else if (value == TR) {
 			return "Turn right";
-		} else if(value.equals(TSHR)) {
+		} else if (value == TSHR) {
 			return "Turn sharply right";
-		} else if(value.equals(TU)) {
+		} else if (value == TU) {
 			return "Make uturn";
-		} else if(value.equals(TRU)) {
+		} else if (value == TRU) {
 			return "Make uturn";
-		} else if(value.equals(KL)) {
+		} else if (value == KL) {
 			return "Keep left";
-		} else if(value.equals(KR)) {
+		} else if (value == KR) {
 			return "Keep right";
-		} else if(value.equals(OFFR)) {
+		} else if (value == OFFR) {
 			return "Off route";
 		}
 		return super.toString();

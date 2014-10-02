@@ -32,7 +32,7 @@ public class TurnPathHelper {
 		float spartArrowL = (float) ((sarrowL - th / Math.sqrt(2)) / 2);
 		float hpartArrowL = (float) (harrowL - th) / 2;
 
-		if (TurnType.C.equals(turnType.getValue())) {
+		if (TurnType.C == turnType.getValue()) {
 			int h = (int) (ha - hpartArrowL - 16);
 			pathForTurn.rMoveTo(th, 0);
 			pathForTurn.rLineTo(0, -h);
@@ -41,8 +41,8 @@ public class TurnPathHelper {
 			pathForTurn.rLineTo(-harrowL / 2, harrowL / 2);
 			pathForTurn.rLineTo(hpartArrowL, 0);
 			pathForTurn.rLineTo(0, h);
-		} else if (TurnType.TR.equals(turnType.getValue())|| TurnType.TL.equals(turnType.getValue())) {
-			int b = TurnType.TR.equals(turnType.getValue())? 1 : -1;
+		} else if (TurnType.TR == turnType.getValue()|| TurnType.TL == turnType.getValue()) {
+			int b = TurnType.TR == turnType.getValue()? 1 : -1;
 			float quadShiftX = 18;
 			float quadShiftY = 18;
 			int wl = 10; // width
@@ -62,8 +62,8 @@ public class TurnPathHelper {
 			pathForTurn.rLineTo(-b * wl, 0);
 			pathForTurn.rQuadTo(-b * (quadShiftX + th), 0, -b * (quadShiftX + th), quadShiftY + th);
 			pathForTurn.rLineTo(0, h);
-		} else if (TurnType.KL.equals(turnType.getValue()) || TurnType.KR.equals(turnType.getValue())) {
-			int b = TurnType.KR.equals(turnType.getValue())? 1 : -1;
+		} else if (TurnType.KL == turnType.getValue() || TurnType.KR == turnType.getValue()) {
+			int b = TurnType.KR == turnType.getValue()? 1 : -1;
 			float quadShiftX = 14;
 			float quadShiftY = 14;
 			th = 10;
@@ -92,8 +92,8 @@ public class TurnPathHelper {
 			pathForTurn.rQuadTo(-b * (quadShiftX + th), 0, -b * (quadShiftX + th ), quadShiftY + th);
 			pathForTurn.rLineTo(0, lh );
 
-		} else if (TurnType.TSLR.equals(turnType.getValue()) || TurnType.TSLL.equals(turnType.getValue())) {
-			int b = TurnType.TSLR.equals(turnType.getValue()) ? 1 : -1;
+		} else if (TurnType.TSLR == turnType.getValue() || TurnType.TSLL == turnType.getValue()) {
+			int b = TurnType.TSLR == turnType.getValue() ? 1 : -1;
 			int h = 24;
 			int quadShiftY = 22;
 			float quadShiftX = (float) (quadShiftY / (1 + Math.sqrt(2)));
@@ -109,8 +109,8 @@ public class TurnPathHelper {
 			pathForTurn.rLineTo(b * spartArrowL, spartArrowL);
 			pathForTurn.rQuadTo(b * nQuadShiftX, -nQuadShiftX, b * nQuadShiftX, nQuadShifty);
 			pathForTurn.rLineTo(0, h);
-		} else if (TurnType.TSHR.equals(turnType.getValue()) || TurnType.TSHL.equals(turnType.getValue())) {
-			int b = TurnType.TSHR.equals(turnType.getValue()) ? 1 : -1;
+		} else if (TurnType.TSHR == turnType.getValue() || TurnType.TSHL == turnType.getValue()) {
+			int b = TurnType.TSHR == turnType.getValue() ? 1 : -1;
 			int h = 28;
 			float quadShiftX = 22;
 			int sh = 10;
@@ -127,10 +127,10 @@ public class TurnPathHelper {
 			pathForTurn.rLineTo(-b * spartArrowL, spartArrowL);
 			pathForTurn.rCubicTo(b * nQuadShiftX / 2, nQuadShiftX / 2, b * nQuadShiftX, nQuadShiftX / 2, b * nQuadShiftX, nQuadShiftY);
 			pathForTurn.rLineTo(0, h);
-		} else if(TurnType.TU.equals(turnType.getValue()) || TurnType.TRU.equals(turnType.getValue())) {
+		} else if(TurnType.TU == turnType.getValue() || TurnType.TRU == turnType.getValue()) {
 			int h = 40;
 			// right left
-			int b = TurnType.TU.equals(turnType.getValue()) ? 1 : -1;
+			int b = TurnType.TU == turnType.getValue() ? 1 : -1;
 			float quadShiftX = 10; // 13
 			float quadShiftY = 10; // 13
 			int sm = 10;
@@ -150,7 +150,7 @@ public class TurnPathHelper {
 			pathForTurn.rQuadTo(0, -quadShiftX, b *quadShiftX, -quadShiftY);
 			pathForTurn.rQuadTo(b * quadShiftX, 0, b * quadShiftX, quadShiftY);
 			pathForTurn.rLineTo(0, h);
-		} else if (TurnType.OFFR.equals(turnType.getValue())){
+		} else if (TurnType.OFFR == turnType.getValue()){
 			int h = (int) (ha - hpartArrowL - 16);
 			pathForTurn.rMoveTo(th, 0); //12 0
 			//first square
@@ -260,7 +260,7 @@ public class TurnPathHelper {
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
 			paintRouteDirection.setColor(resources.getColor(R.color.nav_arrow_distant));
 			paintRouteDirection.setAntiAlias(true);
-			TurnPathHelper.calcTurnPath(dp, TurnType.sraight(), null);
+			TurnPathHelper.calcTurnPath(dp, TurnType.straight(), null);
 		}
 
 		@Override
