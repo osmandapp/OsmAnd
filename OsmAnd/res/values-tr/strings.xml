@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="close_changeset">Değişiklik listesini kapat</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
@@ -353,7 +354,7 @@
 	<string name="vector_map_not_needed">Hayır, teşekkürler</string>
 	<string name="local_index_mi_delete">Sil</string>
 	<string name="local_index_mi_reload">Sd card\'tan tekrar yükle</string>
-	<string name="local_index_download">İndiriliyor…</string>
+	<string name="local_index_download">İndir</string>
 	<string name="search_offline_clear_search">Yeni Arama</string>
 	<string name="map_text_size_descr">Haritadaki yer adları için yazı boyutunu seçin</string>
 	<string name="map_text_size">Harita yazı karakteri boyutu</string>
@@ -788,7 +789,7 @@
 	<string name="context_menu_item_search">Buraya yakın ara</string>
 	<string name="save_route_dialog_title">Rotayı GPX olarak kaydet</string>
 	<string name="route_successfully_saved_at">Rota \'%1$s\' olarak kaydedildi.</string>
-	<string name="filename_input">Dosya adı:…</string>
+	<string name="filename_input">"Dosya adı: "</string>
 	<string name="menu_save_directions">Tarifi Kaydet</string>
 	<string name="local_index_upload_gpx_description">OSM Comunity üzerine haritaları geliştirmek için kullanılacak GPX dosyaları yükleyin.</string>
 	<string name="local_index_items_uploaded">%2$d/%1$d nesne yüklendi.</string>
@@ -906,7 +907,7 @@
     <string name="edit_tilesource_elliptic_tile">Eliptik izdüşümü</string>
     <string name="edit_tilesource_expiration_time">Sona erecek (dakika)</string>
     <string name="edit_tilesource_url_to_load">Adres</string>
-    <string name="edit_tilesource_choose_existing">Mevcut olanı seç...</string>
+    <string name="edit_tilesource_choose_existing">Varolanı seçin…</string>
     <string name="edit_tilesource_name">İsim</string>
     <string name="maps_define_edit">Tanımla/Düzenle…</string>
 	<string name="clear_intermediate_points">Ara noktaları temizle</string>
