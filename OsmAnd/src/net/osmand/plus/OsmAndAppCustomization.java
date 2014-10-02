@@ -8,7 +8,6 @@ import java.util.Map;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.core.android.GLActivity;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.activities.MainMenuActivity;
@@ -147,9 +146,6 @@ public class OsmAndAppCustomization {
 		return true;
 	}
 
-	public int getWaypointSearchRadius(int searchDeviationRadius, int type) {
-		return searchDeviationRadius;
-	}
 
 	public File getExternalStorageDir() {
 		return osmandSettings.getExternalStorageDirectory();

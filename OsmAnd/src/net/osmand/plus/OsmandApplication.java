@@ -528,7 +528,7 @@ public class OsmandApplication extends Application {
 				warnings.add("Error while reading the special phrases. Restart OsmAnd if possible");
 			}
 			
-			if (!Version.isBlackberry(this) || !"qnx".equals(System.getProperty("os.name"))) {
+			if (!"qnx".equals(System.getProperty("os.name"))) {
 				if (osmandSettings.NATIVE_RENDERING_FAILED.get()) {
 					osmandSettings.SAFE_MODE.set(true);
 					osmandSettings.NATIVE_RENDERING_FAILED.set(false);

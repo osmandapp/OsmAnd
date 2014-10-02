@@ -700,9 +700,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> USE_KALMAN_FILTER_FOR_COMPASS = new BooleanPreference("use_kalman_filter_compass", true).makeGlobal().cache();
 
-	public final OsmandPreference<Boolean> USE_NATIVE_RENDER = new BooleanPreference("use_native_render", false).makeGlobal().cache();
-
-	public final OsmandPreference<Boolean> CPP_RENDER_FAILED = new BooleanPreference("cpp_render_failed", false).makeGlobal().cache();
 	
 	public final CommonPreference<Float> TEXT_SCALE = new FloatPreference("text_scale", 1f).makeProfile().cache();
 	{
@@ -1697,6 +1694,10 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SAFE_MODE = new BooleanPreference("safe_mode", false).makeGlobal();
 	
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference("native_rendering_failed_init", false).makeGlobal();
+	
+	public final OsmandPreference<Boolean> USE_NATIVE_RENDER = new BooleanPreference("use_native_render", false).makeGlobal().cache();
+
+	public final OsmandPreference<Boolean> CPP_RENDER_FAILED = new BooleanPreference("cpp_render_failed", false).makeGlobal().cache();
 	
 	
 	// this value string is synchronized with settings_pref.xml preference name

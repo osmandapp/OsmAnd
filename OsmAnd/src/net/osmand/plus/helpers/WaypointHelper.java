@@ -533,7 +533,8 @@ public class WaypointHelper {
 
 
 	protected int getSearchRadius(int type) {
-		return app.getAppCustomization().getWaypointSearchRadius(searchDeviationRadius, type);
+		// app.getAppCustomization().getWaypointSearchRadius(searchDeviationRadius, type);
+		return searchDeviationRadius;
 	}
 	
 	
