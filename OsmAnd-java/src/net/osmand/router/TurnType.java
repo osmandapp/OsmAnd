@@ -167,17 +167,18 @@ public class TurnType {
 		lanes[lane] |= (turnType << 1);
 	}
 	
-	public int getPrimaryTurn(int lane) {
+	public static int getPrimaryTurn(int laneValue) {
 		// Get the primary turn modifier for the lane
-		return (lanes[lane] >> 1) & ((1 << 4) - 1);
+		return (laneValue >> 1) & ((1 << 4) - 1);
 	}
 
 	public void setSecondaryTurn(int lane, int turnType) {
 		lanes[lane] |= (turnType << 5);
 	}
 
-	public int getSecondaryTurn(int lane) {
-		return (lanes[lane] >> 5);
+	public static int getSecondaryTurn(int laneValue) {
+		// Get the primary turn modifier for the lane
+		return (laneValue >> 5);
 	}
 
 	
