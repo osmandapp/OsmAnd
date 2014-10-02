@@ -1,7 +1,9 @@
 package net.osmand.plus.views.mapwidgets;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
@@ -55,7 +57,7 @@ public class RouteInfoWidgetsFactory {
 			final OsmandSettings settings, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
 		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(ctx, textPaint, subtextPaint, horisontalMini) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
-			TurnType straight = TurnType.sraight();
+			TurnType straight = TurnType.straight();
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
@@ -522,11 +524,31 @@ public class RouteInfoWidgetsFactory {
 	}
 	
 	private static final float miniCoeff = 2f;
-	public BaseMapWidget createLanesControl(final RoutingHelper routingHelper, final OsmandMapTileView view) {
-		final Path laneStraight = new Path();
+	
+	private Path getPathFromTurnType(List<Path> paths, int laneType, Path defaultType) {
+		if(laneType == 0) {
+			return defaultType;
+		}
+		while (paths.size() <= laneType) {
+			paths.add(null);
+		}
+		Path p = paths.get(laneType);
+		if (p != null) {
+			return p;
+		}
+		p = new Path();
 		Matrix pathTransform = new Matrix();
 		pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
-		TurnPathHelper.calcTurnPath(laneStraight, TurnType.sraight(), pathTransform);
+		TurnType tp = TurnType.valueOf(laneType, false);
+		TurnPathHelper.calcTurnPath(p, tp, pathTransform);
+		paths.set(laneType, p);
+		return p;
+	}
+	
+	public BaseMapWidget createLanesControl(final RoutingHelper routingHelper, final OsmandMapTileView view) {
+		final List<Path> paths = new ArrayList<Path>();
+		final Path laneStraight = getPathFromTurnType(paths, TurnType.C, null);
+		 
 		final Paint paintBlack = new Paint();
 		paintBlack.setStyle(Style.STROKE);
 		paintBlack.setColor(Color.BLACK);
@@ -542,8 +564,9 @@ public class RouteInfoWidgetsFactory {
 		
 		final BaseMapWidget lanesControl = new BaseMapWidget(view.getContext()) {
 			int[] lanes = null; 
-			
+			private TurnType turn;
 			boolean imminent = false;
+
 			
 			@Override
 			protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -559,13 +582,21 @@ public class RouteInfoWidgetsFactory {
 					canvas.save();
 					// canvas.translate((int) (16 * scaleCoefficient), 0);
 					for (int i = 0; i < lanes.length; i++) {
+						int turnType;
 						if ((lanes[i] & 1) == 1) {
 							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
+							if(turn != null) {
+								turnType = turn.getValue();
+							} else {
+								turnType = TurnType.getPrimaryTurn(lanes[i]);
+							}
 						} else {
 							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+							turnType = TurnType.getPrimaryTurn(lanes[i]); 
 						}
-						canvas.drawPath(laneStraight, paintBlack);
-						canvas.drawPath(laneStraight, paintRouteDirection);
+						Path p = getPathFromTurnType(paths, turnType, laneStraight);
+						canvas.drawPath(p, paintBlack);
+						canvas.drawPath(p, paintRouteDirection);
 						canvas.translate(w, 0);
 					}
 					canvas.restore();
@@ -577,11 +608,13 @@ public class RouteInfoWidgetsFactory {
 				boolean visible = false;
 				int locimminent = -1;
 				int[] loclanes = null;
+				TurnType primary = null;
 				if (routingHelper != null && routingHelper.isRouteCalculated() && view.getSettings().SHOW_LANES.get()) {
 					if (routingHelper.isFollowingMode()) {
 						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
 						if(r != null && r.directionInfo != null && r.directionInfo.getTurnType() != null) {
 							loclanes  = r.directionInfo.getTurnType().getLanes();
+							primary = r.directionInfo.getTurnType();
 							locimminent = r.imminent;
 							// Do not show too far 
 							if ((r.distanceTo > 700 && r.directionInfo.getTurnType().isSkipToSpeak()) || r.distanceTo > 1200) {
@@ -595,6 +628,7 @@ public class RouteInfoWidgetsFactory {
 							RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
 							if (next != null) {
 								loclanes = next.getTurnType().getLanes();
+								primary = next.getTurnType();
 							}
 						}
 					}
@@ -603,6 +637,7 @@ public class RouteInfoWidgetsFactory {
 				if (visible) {
 					if (!Arrays.equals(lanes, loclanes)) {
 						lanes = loclanes;
+						turn = primary;
 						requestLayout();
 						invalidate();
 					}
@@ -617,6 +652,14 @@ public class RouteInfoWidgetsFactory {
 		};
 		
 		return lanesControl;
+	}
+
+	protected Path straight() {
+		final Path laneStraight = new Path();
+		Matrix pathTransform = new Matrix();
+		pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
+		TurnPathHelper.calcTurnPath(laneStraight, TurnType.straight(), pathTransform);
+		return laneStraight;
 	}
 
 	

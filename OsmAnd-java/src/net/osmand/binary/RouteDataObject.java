@@ -267,6 +267,16 @@ public class RouteDataObject {
 	public String getHighway() {
 		return getHighway(types, region);
 	}
+
+	public String getValue(String tag) {
+		for (int i = 0; i < types.length; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if (r.getTag().equals(tag)) {
+				return r.getValue();
+			}
+		}
+		return null;
+	}
 	
 	public static String getHighway(int[] types, RouteRegion region) {
 		String highway = null;
@@ -350,6 +360,7 @@ public class RouteDataObject {
 	private double simplifyDistance(int x, int y, int px, int py) {
 		return Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
 	}
+	
 	
 	@Override
 	public String toString() {

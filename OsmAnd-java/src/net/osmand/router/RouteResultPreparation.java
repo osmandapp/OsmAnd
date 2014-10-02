@@ -338,8 +338,8 @@ public class RouteResultPreparation {
 				t = getTurnInfo(result, i, leftside);
 				// justify turn
 				if(t != null && i < result.size() - 1) {
-					boolean tl = TurnType.TL.equals(t.getValue());
-					boolean tr = TurnType.TR.equals(t.getValue());
+					boolean tl = TurnType.TL == t.getValue();
+					boolean tr = TurnType.TR == t.getValue();
 					if(tl || tr) {
 						TurnType tnext = getTurnInfo(result, i + 1, leftside);
 						if (tnext != null && result.get(i).getDistance() < 35) { //
@@ -357,10 +357,10 @@ public class RouteResultPreparation {
 								ut = false;
 							}
 							if (ut) {
-								if (tl && TurnType.TL.equals(tnext.getValue())) {
+								if (tl && TurnType.TL == tnext.getValue()) {
 									next = i + 2;
 									t = TurnType.valueOf(TurnType.TU, false);
-								} else if (tr && TurnType.TR.equals(tnext.getValue())) {
+								} else if (tr && TurnType.TR == tnext.getValue()) {
 									next = i + 2;
 									t = TurnType.valueOf(TurnType.TU, true);
 								}
@@ -486,7 +486,7 @@ public class RouteResultPreparation {
 			}
 		}
 		// combine all roundabouts
-		TurnType t = TurnType.valueOf("EXIT"+exit, leftSide);
+		TurnType t = TurnType.getExitTurn(exit, 0, leftSide);
 		t.setTurnAngle((float) MapUtils.degreesDiff(last.getBearingBegin(), prev.getBearingEnd())) ;
 		return t;
 	}
@@ -516,7 +516,7 @@ public class RouteResultPreparation {
 						kl = true;
 						int lns = attached.getObject().getLanes();
 						if(attached.getObject().getOneway() == 0) {
-							lns = (lns + 1) / 2;
+							lns = countLines(attached, lns);
 						}
 						if (lns > 0) {
 							right += lns;
@@ -526,7 +526,7 @@ public class RouteResultPreparation {
 						kr = true;
 						int lns = attached.getObject().getLanes();
 						if(attached.getObject().getOneway() == 0) {
-							lns = (lns + 1) / 2;
+							lns = countLines(attached, lns);
 						}
 						if (lns > 0) {
 							left += lns;
@@ -542,8 +542,9 @@ public class RouteResultPreparation {
 			right = 1;
 		}
 		int current = currentSegm.getObject().getLanes();
-		if(currentSegm.getObject().getOneway() == 0) {
-			current = (current + 1) / 2;
+		// attachedRoutes covers all allowed outbound routes at that point except currentSegm.
+		if (currentSegm.getObject().getOneway() == 0) {
+			current = countLines(currentSegm, current);
 		}
 		if (current <= 0) {
 			current = 1;
@@ -578,6 +579,19 @@ public class RouteResultPreparation {
 			t.setLanes(lanes);
 		}
 		return t;
+	}
+
+	protected int countLines(RouteSegmentResult attached, int lns) {
+		try {
+			if (attached.isForwardDirection() && attached.getObject().getValue("lanes:forward") != null) {
+				return Integer.parseInt(attached.getObject().getValue("lanes:forward"));
+			} else if (!attached.isForwardDirection() && attached.getObject().getValue("lanes:backward") != null) {
+				return Integer.parseInt(attached.getObject().getValue("lanes:backward"));
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		return (lns + 1) / 2;
 	}
 	
 	private boolean isMotorway(RouteSegmentResult s){
