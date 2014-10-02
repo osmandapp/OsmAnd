@@ -733,4 +733,9 @@ public class MapActivity extends AccessibleActivity  {
 	public View getLayout() {
 		return getWindow().getDecorView().findViewById(android.R.id.content);
 	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		return mapViewController.onTouchEvent(event);
+	}
 }

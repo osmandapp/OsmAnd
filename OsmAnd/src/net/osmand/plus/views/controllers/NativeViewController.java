@@ -67,7 +67,7 @@ public class NativeViewController extends MapViewBaseController {
 	private QIODeviceLogSink fileLogSink;
 	private RotatedTileBox currentViewport = null;
 
-	private boolean offlineMap = false;
+	private boolean offlineMap = true;
 
 	private GestureDetector gestureDetector;
 
