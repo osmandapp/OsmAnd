@@ -22,12 +22,14 @@ import net.osmand.plus.OsmandApplication;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.util.Log;
 
 // This class provides reverse mapping from 'embed-resources.list' to files&folders scheme used by OsmAndCore_android.aar package
 public class CoreResourcesFromAndroidAssetsCustom extends ICoreResourcesProvider {
     private static final String TAG = "CoreResourcesFromAndroidAssets";
+    private static final String NATIVE_TAG = "CoreResourcesFromAndroidAssets";
 
     private CoreResourcesFromAndroidAssetsCustom(final Context context) {
         _context = context;
@@ -74,28 +76,36 @@ public class CoreResourcesFromAndroidAssetsCustom extends ICoreResourcesProvider
             }
 
             // Get location of this resource
-            long declaredSize;
-            long size;
-            long offset;
-//            try {
-//            	
-//                final AssetFileDescriptor resourceFd = assetManager.openFd("OsmAndCore_ResourcesBundle/" + resourceInBundle);
-//                declaredSize = resourceFd.getDeclaredLength();
-//                size = resourceFd.getLength();
-//                offset = resourceFd.getStartOffset();
-//                resourceFd.close();
-//            } catch (IOException e) {
-//                Log.e(NATIVE_TAG, "Failed to locate '" + resourceInBundle + "'", e);
-//                continue;
-//            }
-//            if (declaredSize != size) {
-//                Log.e(NATIVE_TAG, "Declared size does not match size for '" + resourceInBundle + "'");
-//                continue;
-//            }
+            final File res = ((OsmandApplication) _context.getApplicationContext()).getAppPath("OsmAndCore_ResourcesBundle/" + resourceInBundle + ".qz");
             final ResourceData resourceData = new ResourceData();
-            resourceData.offset = 0;
-            resourceData.path = ((OsmandApplication) _context.getApplicationContext()).getAppPath("OsmAndCore_ResourcesBundle/" + resourceInBundle + ".qz");
-            resourceData.size = resourceData.path.length();
+			if (!res.exists()) {
+				try {
+
+					final AssetFileDescriptor resourceFd = assetManager.openFd("OsmAndCore_ResourcesBundle/"
+							+ resourceInBundle);
+					long declaredSize = resourceFd.getDeclaredLength();
+					resourceData.size = resourceFd.getLength();
+					resourceData.offset = resourceFd.getStartOffset();
+					if(resourceData.offset == 0) {
+						Log.e(NATIVE_TAG, "Offset 0 is not properly supported!");
+						continue;
+					}
+					resourceData.path = new File(_bundleFilename);
+					resourceFd.close();
+					if (declaredSize != resourceData.size) {
+						Log.e(NATIVE_TAG, "Declared size does not match size for '" + resourceInBundle + "'");
+						continue;
+					}
+				} catch (IOException e) {
+					Log.e(NATIVE_TAG, "Failed to locate '" + resourceInBundle + "'", e);
+					continue;
+				}
+				
+			} else {
+				resourceData.offset = 0;
+				resourceData.path = res;
+				resourceData.size = resourceData.path.length();
+			}
 
             // Get resource entry for this resource
             ResourceEntry resourceEntry = _resources.get(pureResourceName);
@@ -163,8 +173,14 @@ public class CoreResourcesFromAndroidAssetsCustom extends ICoreResourcesProvider
         ResourceData resourceData = resourceDataEntry.getValue();
         Log.d(TAG, "Using ddf=" + resourceDataEntry.getKey() + " while looking for " + displayDensityFactor + " of '" + name + "'");
 		System.out.println(resourceData.path.getAbsolutePath());
-		final SWIGTYPE_p_QByteArray data = SwigUtilities.qDecompress(SwigUtilities.readEntireFile(
+		final SWIGTYPE_p_QByteArray data ;
+		if(resourceData.offset == 0){
+			data = SwigUtilities.qDecompress(SwigUtilities.readEntireFile(
 				resourceData.path.getAbsolutePath()));
+		} else {
+			data = SwigUtilities.qDecompress(SwigUtilities.readPartOfFile(
+					resourceData.path.getAbsolutePath(), resourceData.offset, resourceData.size));
+		}
         if (data == null) {
             Log.e(TAG, "Failed to load data of '" + name + "'");
             if (ok != null)
@@ -196,8 +212,13 @@ public class CoreResourcesFromAndroidAssetsCustom extends ICoreResourcesProvider
             return SwigUtilities.emptyQByteArray();
         }
 		System.out.println(resourceEntry.defaultVariant.path.getAbsolutePath());
-		SWIGTYPE_p_QByteArray bt = SwigUtilities.readEntireFile(
-				resourceEntry.defaultVariant.path.getAbsolutePath());
+		final SWIGTYPE_p_QByteArray bt ;
+		if(resourceEntry.defaultVariant.offset == 0){
+			bt = SwigUtilities.readEntireFile(resourceEntry.defaultVariant.path.getAbsolutePath());
+		} else {
+			bt = SwigUtilities.readPartOfFile(resourceEntry.defaultVariant.path.getAbsolutePath(),
+					resourceEntry.defaultVariant.offset, resourceEntry.defaultVariant.size);
+		}
 		final SWIGTYPE_p_QByteArray data = SwigUtilities.qDecompress(bt);
         if (data == null) {
             Log.e(TAG, "Failed to load data of '" + name + "'");
