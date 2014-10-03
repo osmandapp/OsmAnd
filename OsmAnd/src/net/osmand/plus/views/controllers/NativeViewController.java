@@ -22,7 +22,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.helpers.SimpleTwoFingerTapDetector;
+import net.osmand.plus.helpers.TwoFingerTapDetector;
+import net.osmand.plus.render.NativeCppLibrary;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -35,14 +36,6 @@ import java.util.List;
  * Created by Denis on 01.10.2014.
  */
 public class NativeViewController extends MapViewBaseController {
-
-	static {
-		NativeOsmandLibrary.loadLibrary("gnustl_shared");
-		NativeOsmandLibrary.loadLibrary("Qt5Core");
-		NativeOsmandLibrary.loadLibrary("Qt5Network");
-		NativeOsmandLibrary.loadLibrary("Qt5Sql");
-		NativeOsmandLibrary.loadLibrary("OsmAndCoreWithJNI");
-	}
 
 	private GLSurfaceView glSurfaceView;
 	private OsmandSettings settings;
@@ -74,7 +67,7 @@ public class NativeViewController extends MapViewBaseController {
 	public static final String NATIVE_TAG = "NativeRender";
 	private CoreResourcesFromAndroidAssets coreResources;
 
-	SimpleTwoFingerTapDetector twoFingerTapDetector = new SimpleTwoFingerTapDetector() {
+	TwoFingerTapDetector twoFingerTapDetector = new TwoFingerTapDetector() {
 		@Override
 		public void onTwoFingerTap() {
 			currentViewport.setZoom(currentViewport.getZoom() - 1);
@@ -87,7 +80,16 @@ public class NativeViewController extends MapViewBaseController {
 		this.glSurfaceView = surfaceView;
 		this.settings = activity.getMyApplication().getSettings();
 		this.mapActivity = activity;
+		loadLibraries();
 		setupView();
+	}
+
+	private void loadLibraries() {
+		NativeCppLibrary.loadLibrary("gnustl_shared");
+		NativeCppLibrary.loadLibrary("Qt5Core");
+		NativeCppLibrary.loadLibrary("Qt5Network");
+		NativeCppLibrary.loadLibrary("Qt5Sql");
+		NativeCppLibrary.loadLibrary("OsmAndCoreWithJNI");
 	}
 
 	private void setupView() {
@@ -252,8 +254,8 @@ public class NativeViewController extends MapViewBaseController {
 	}
 
 	private class EGLContextFactory implements GLSurfaceView.EGLContextFactory {
-		private EGLContext _gpuWorkerContext;
-		private EGLSurface _gpuWorkerFakeSurface;
+		private EGLContext gpuWorkerContext;
+		private EGLSurface gpuWorkerFakeSurface;
 
 		public EGLContext createContext(EGL10 egl, EGLDisplay display, EGLConfig eglConfig) {
 			final String eglExtensions = egl.eglQueryString(display, EGL10.EGL_EXTENSIONS);
@@ -280,7 +282,7 @@ public class NativeViewController extends MapViewBaseController {
 
 			Log.i(NATIVE_TAG, "Creating GPU worker context...");
 			try {
-				_gpuWorkerContext = egl.eglCreateContext(
+				gpuWorkerContext = egl.eglCreateContext(
 						display,
 						eglConfig,
 						mainContext,
@@ -288,13 +290,13 @@ public class NativeViewController extends MapViewBaseController {
 			} catch (Exception e) {
 				Log.e(NATIVE_TAG, "Failed to create GPU worker context", e);
 			}
-			if (_gpuWorkerContext == null || _gpuWorkerContext == EGL10.EGL_NO_CONTEXT)
+			if (gpuWorkerContext == null || gpuWorkerContext == EGL10.EGL_NO_CONTEXT)
 			{
 				Log.e(NATIVE_TAG, "Failed to create GPU worker context: " + egl.eglGetError());
-				_gpuWorkerContext = null;
+				gpuWorkerContext = null;
 			}
 
-			if (_gpuWorkerContext != null)
+			if (gpuWorkerContext != null)
 			{
 				Log.i(NATIVE_TAG, "Creating GPU worker fake surface...");
 				try {
@@ -302,21 +304,21 @@ public class NativeViewController extends MapViewBaseController {
 							EGL10.EGL_WIDTH, 1,
 							EGL10.EGL_HEIGHT, 1,
 							EGL10.EGL_NONE };
-					_gpuWorkerFakeSurface = egl.eglCreatePbufferSurface(display, eglConfig, surfaceAttribList);
+					gpuWorkerFakeSurface = egl.eglCreatePbufferSurface(display, eglConfig, surfaceAttribList);
 				} catch (Exception e) {
 					Log.e(NATIVE_TAG, "Failed to create GPU worker fake surface", e);
 				}
-				if (_gpuWorkerFakeSurface == null || _gpuWorkerFakeSurface == EGL10.EGL_NO_SURFACE)
+				if (gpuWorkerFakeSurface == null || gpuWorkerFakeSurface == EGL10.EGL_NO_SURFACE)
 				{
 					Log.e(NATIVE_TAG, "Failed to create GPU worker fake surface: " + egl.eglGetError());
-					_gpuWorkerFakeSurface = null;
+					gpuWorkerFakeSurface = null;
 				}
 			}
 
 			MapRendererSetupOptions rendererSetupOptions = new MapRendererSetupOptions();
-			if (_gpuWorkerContext != null && _gpuWorkerFakeSurface != null) {
+			if (gpuWorkerContext != null && gpuWorkerFakeSurface != null) {
 				rendererSetupOptions.setGpuWorkerThreadEnabled(true);
-				gpuWorkerThreadPrologue = new GpuWorkerThreadPrologue(egl, display, _gpuWorkerContext, _gpuWorkerFakeSurface);
+				gpuWorkerThreadPrologue = new GpuWorkerThreadPrologue(egl, display, gpuWorkerContext, gpuWorkerFakeSurface);
 				rendererSetupOptions.setGpuWorkerThreadPrologue(gpuWorkerThreadPrologue.getBinding());
 				gpuWorkerThreadEpilogue = new GpuWorkerThreadEpilogue(egl);
 				rendererSetupOptions.setGpuWorkerThreadEpilogue(gpuWorkerThreadEpilogue.getBinding());
@@ -333,14 +335,14 @@ public class NativeViewController extends MapViewBaseController {
 		public void destroyContext(EGL10 egl, EGLDisplay display, EGLContext context) {
 			egl.eglDestroyContext(display, context);
 
-			if (_gpuWorkerContext != null) {
-				egl.eglDestroyContext(display, _gpuWorkerContext);
-				_gpuWorkerContext = null;
+			if (gpuWorkerContext != null) {
+				egl.eglDestroyContext(display, gpuWorkerContext);
+				gpuWorkerContext = null;
 			}
 
-			if (_gpuWorkerFakeSurface != null) {
-				egl.eglDestroySurface(display, _gpuWorkerFakeSurface);
-				_gpuWorkerFakeSurface = null;
+			if (gpuWorkerFakeSurface != null) {
+				egl.eglDestroySurface(display, gpuWorkerFakeSurface);
+				gpuWorkerFakeSurface = null;
 			}
 		}
 	}
