@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import android.os.*;
+import android.view.View;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
@@ -54,9 +56,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
 import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.accessibility.AccessibilityManager;
@@ -127,7 +126,7 @@ public class OsmandApplication extends Application {
 			}
 		}
 		super.onCreate();
-		new Toast(this); // activate in UI thread to avoid further exceptions
+		createInUiThread();
 		sqliteAPI = new SQLiteAPIImpl(this);
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
@@ -183,7 +182,20 @@ public class OsmandApplication extends Application {
 
 
 	}
-	
+
+	private void createInUiThread() {
+		new Toast(this); // activate in UI thread to avoid further exceptions
+		new AsyncTask<View, Void, Void>() {
+			@Override
+			protected Void doInBackground(View... params) {
+				return null;
+			}
+
+			protected void onPostExecute(Void result) {
+			}
+		}.execute();
+	}
+
 	@Override
 	public void onTerminate() {
 		super.onTerminate();
