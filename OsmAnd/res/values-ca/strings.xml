@@ -1890,17 +1890,17 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="traffic_warning_speed_limit">Velocitat màxima</string>
     <string name="traffic_warning_border_control">Control de fronteres</string>
     <string name="traffic_warning_payment">Estació de peatge</string>
-    <string name="traffic_warning_stop">Senyal de stop</string>
+    <string name="traffic_warning_stop">Senyal d\'stop</string>
     <string name="traffic_warning_calming">Ressalt</string>
     <string name="traffic_warning_speed_camera">Càmera de control de velocitat</string>
     <string name="traffic_warning">Avís de circulació</string>
 	<string name="local_index_description">Premeu qualsevol indicació existent per veure més detalls, mantingueu premuda per desactivar o esborrar. Dades actuals al dispositiu (%1$s lliure):</string>
 	<string name="text_size_descr">Definiu la mida del text en el mapa.</string>
     <string name="text_size">Mida del text</string>
-    <string name="fav_point_dublicate">Aquest nom de punt preferit ja s\'ha utilitzat</string>
+    <string name="fav_point_dublicate">Nom de punt preferit duplicat</string>
     <string name="fav_point_dublicate_message">S\'ha canviat el nom del vostre punt preferit a %1$s per evitar duplicitats.</string>
     <string name="test_native_render">Prova de renderització nativa</string>
-    <string name="test_native_render_msg">Iniciar activitat amb renderització nativa</string>
-    <string name="use_native_render">Utilitzar renderització nativa</string>
-    <string name="use_native_render_descr">Ús de renderitzacio C++ en comptes de Java</string>
+    <string name="test_native_render_msg">Inicia l\'activitat amb renderització nativa</string>
+    <string name="use_native_render">Utilitza la renderització nativa</string>
+    <string name="use_native_render_descr">Ús de renderització C++ en comptes de Java</string>
     </resources>
