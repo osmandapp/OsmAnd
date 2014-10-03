@@ -41,10 +41,10 @@
     * UI Design and UX work, such as layout, icons is covered by CC-BY-ND
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd/res and others
 
-    * Integration with QT library in (https://github.com/osmandapp/Osmand-core/) - dynammic linking
+    * Integration with QT library in (https://github.com/osmandapp/Osmand-core/) - dynamic linking
         - LGPL (https://qt-project.org/products/licensing)
         
-    * Map icons and their derived primities are covered by proprietary license:
+    * Map icons and their derived primitives are covered by proprietary license:
         - © icons8.com (https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg/icons8)
 
     * Generated voice files from TTS files are covered by proprietary license:
@@ -56,7 +56,7 @@
     * Map icons (Mapnik):
         - Open-SVG-Map-Icons - Public Domain
 
-    * Non patched source libraries:
+    * Non-patched source libraries:
         - SherlockBar - Apache Lisense - https://github.com/osmandapp/Osmand/tree/master/SherlockBar (https://github.com/JakeWharton/ActionBarSherlock/blob/master/LICENSE.txt)
 
     * Patched libraries:
@@ -102,6 +102,6 @@
 
     * Data files
         - Country boundaries - https://github.com/osmandapp/OsmAnd-misc/tree/master/osm-planet/geo-polygons © by Geofabrik - data free to use
-        - Country boundaries https://github.com/osmandapp/OsmAnd-misc/tree/master/osm-planet/gislab-polygons © by http://be.gis-lab.info - data free to use
+        - Country boundaries - https://github.com/osmandapp/OsmAnd-misc/tree/master/osm-planet/gislab-polygons © by http://be.gis-lab.info - data free to use
 
 
