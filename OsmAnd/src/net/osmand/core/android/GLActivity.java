@@ -45,7 +45,7 @@ public class GLActivity extends Activity {
 	}
     private static final String TAG = "OsmAndCoreSample";
 
-    private CoreResourcesFromAndroidAssets _coreResources;
+    private CoreResourcesFromAndroidAssetsCustom _coreResources;
 
     private float _displayDensityFactor;
     private int _referenceTileSize;
@@ -166,7 +166,7 @@ public class GLActivity extends Activity {
         Log.i(TAG, "rasterTileSize = " + _rasterTileSize);
 
         Log.i(TAG, "Initializing core...");
-        _coreResources = CoreResourcesFromAndroidAssets.loadFromCurrentApplication(this);
+        _coreResources = CoreResourcesFromAndroidAssetsCustom.loadFromCurrentApplication(this);
         OsmAndCore.InitializeCore(_coreResources);
 
 		File directory =getApp().getAppPath("");

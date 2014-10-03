@@ -26,10 +26,10 @@ import android.content.res.AssetManager;
 import android.util.Log;
 
 // This class provides reverse mapping from 'embed-resources.list' to files&folders scheme used by OsmAndCore_android.aar package
-public class CoreResourcesFromAndroidAssets extends ICoreResourcesProvider {
+public class CoreResourcesFromAndroidAssetsCustom extends ICoreResourcesProvider {
     private static final String TAG = "CoreResourcesFromAndroidAssets";
 
-    private CoreResourcesFromAndroidAssets(final Context context) {
+    private CoreResourcesFromAndroidAssetsCustom(final Context context) {
         _context = context;
     }
 
@@ -233,8 +233,8 @@ public class CoreResourcesFromAndroidAssets extends ICoreResourcesProvider {
         return true;
     }
 
-    public static CoreResourcesFromAndroidAssets loadFromCurrentApplication(final Context context) {
-        final CoreResourcesFromAndroidAssets bundle = new CoreResourcesFromAndroidAssets(context);
+    public static CoreResourcesFromAndroidAssetsCustom loadFromCurrentApplication(final Context context) {
+        final CoreResourcesFromAndroidAssetsCustom bundle = new CoreResourcesFromAndroidAssetsCustom(context);
 
         if (!bundle.load())
             return null;

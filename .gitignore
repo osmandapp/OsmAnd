@@ -9,6 +9,8 @@ h_*.png
 g_*.png
 mm_*.png
 mx_*.png
+OsmAndCore_wrapper.jar
+OsmAndCore_android.aar
 *.class
 *.iml
 .settings

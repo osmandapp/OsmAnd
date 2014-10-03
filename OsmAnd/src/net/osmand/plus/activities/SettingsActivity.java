@@ -37,7 +37,6 @@ public class SettingsActivity extends SettingsBaseActivity {
     private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
 	
 
-	private Preference bidforfix;
 	private Preference plugins;
 	private Preference localIndexes;
 	private Preference general;
@@ -104,8 +103,6 @@ public class SettingsActivity extends SettingsBaseActivity {
 				startActivity(new Intent(this, getMyApplication().getAppCustomization().getDownloadActivity()));
 			}
 			return true;
-		} else if (preference == bidforfix) {
-			startActivity(new Intent(this, OsmandBidForFixActivity.class));
 		} else if (preference == general) {
 			startActivity(new Intent(this, SettingsGeneralActivity.class));
 			return true;

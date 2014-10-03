@@ -16,6 +16,50 @@
 	<property name="base.dir" location="." />
 
 
+	<target name="download_resources">
+	    <get src="http://builder.osmand.net:81/binaries/android/OsmAndCore_wrapper.jar"
+	        dest="libs/OsmAndCore_wrapper.jar"  usetimestamp="true"/>
+	    <get src="http://builder.osmand.net:81/binaries/android/OsmAndCore_android.aar"
+	        dest="OsmAndCore_android.aar"  usetimestamp="true"/>
+	</target>
+	
+	<target name="use_qt_core" depends="download_resources">
+	    <unzip src="OsmAndCore_android.aar" dest="libs">
+	        <patternset>
+	            <include name="jni/armeabi-v7a/*"/>
+	        </patternset>
+	        <cutdirsmapper dirs="1"/>
+	    </unzip>
+	    <unzip src="OsmAndCore_android.aar" dest=".">
+	        <patternset>
+	            <include name="assets/**/*"/>
+	        </patternset>
+	    </unzip>
+	</target>
+	
+    <target name="fix_apostrophe_issues">
+               <replace token="version='1.0'" value="version=&quot;1.0&quot;">
+                       <fileset dir="res" includes="**/strings.xml" />
+               </replace>
+               <replace token="encoding='utf-8'" value="encoding=&quot;utf-8&quot;">
+                       <fileset dir="res" includes="**/strings.xml" />
+               </replace>
+
+               <replaceregexp  match="([^\\])'" replace="\1\\\\'" flags="-g" byline="off">
+                       <fileset dir="res" includes="**/strings.xml" />
+               </replaceregexp>
+       </target>
+	
+	
+	<target name="copy_sherpafy">
+		<copy todir="gen/net/osmand/plus">
+			<fileset dir="gen/net/osmand/sherpafy">
+				<include name="R.java" />
+			</fileset>
+		</copy>
+		<replaceregexp file="gen/net/osmand/plus/R.java" match='package (.*);' replace='package net.osmand.plus;' byline="true" />
+	</target>
+	
 	<target name="copy_resources">
 		<copy todir="assets">
 			<fileset dir="../../resources/">
@@ -60,13 +104,33 @@
 			</fileset>
 		</copy>
 	</target>
+	
+		<!-- Import the actual build file.
+
+		 To customize existing targets, there are two options:
+		 - Customize only one target:
+			 - copy/paste the target into this file, *before* the
+			   <import> task.
+			 - customize it to your needs.
+		 - Customize the whole content of build.xml
+			 - copy/paste the content of the rules files (minus the top node)
+			   into this file, replacing the <import> task.
+			 - customize to your needs.
+
+		 ***********************
+		 ****** IMPORTANT ******
+		 ***********************
+		 In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
+		 in order to avoid having your file be overridden by tools such as "android update project"
+	-->
+	<!-- version-tag: custom -->
+	<import file="${sdk.dir}/tools/ant/build.xml" />
 
 
-	<target name="generate-resources" depends="">
-	</target>
-
+	<!-- ******************** -->
+	<!-- OVERRIDE TARGET prepare resources -->
 	<!-- Extra target -->
-	<target name="-pre-build" depends="copy_resources,fix_apostrophe_issues">
+	<target name="-pre-build" depends="download_resources,copy_resources,fix_apostrophe_issues">
 		<if>
 			<condition>
 				<isset property="versionFeatures" />
@@ -138,15 +202,11 @@
 		</if>
 
 	</target>
-	<target name="copy_sherpafy">
-		<copy todir="gen/net/osmand/plus">
-			<fileset dir="gen/net/osmand/sherpafy">
-				<include name="R.java" />
-			</fileset>
-		</copy>
-		<replaceregexp file="gen/net/osmand/plus/R.java" match='package (.*);' replace='package net.osmand.plus;' byline="true" />
-	</target>
 
+
+	<!-- ******************** -->
+	<!-- OVERRIDE TARGET to replace strings for compilation -->
+	 <!-- Code Generation: compile resources (aapt -> R.java), aidl, renderscript -->
 	<!-- Compiles this project's .java files into .class files. -->
 	<target name="-compile" depends="-build-setup, -pre-build, -code-gen, -pre-compile">
 		<!-- osmchange : Osmand plus support -->
@@ -242,52 +302,61 @@
 		</do-only-if-manifest-hasCode>
 	</target>
 
-	<path id="lib.path">
-		<fileset dir="ant-lib" includes="*.jar" />
-	</path>
 
-	<!-- Import the actual build file.
+	
+	<!-- ******************** -->
+	<!-- OVERRIDE TARGET to not zip qz in aapt -->
+	  <!-- Code Generation: compile resources (aapt -> R.java), aidl, renderscript -->
+    <target name="-code-gen">
+        <!-- always merge manifest -->
+        <mergemanifest
+                appManifest="${manifest.abs.file}"
+                outManifest="${out.manifest.abs.file}"
+                enabled="${manifestmerger.enabled}">
+            <library refid="project.library.manifest.file.path" />
+        </mergemanifest>
 
-		 To customize existing targets, there are two options:
-		 - Customize only one target:
-			 - copy/paste the target into this file, *before* the
-			   <import> task.
-			 - customize it to your needs.
-		 - Customize the whole content of build.xml
-			 - copy/paste the content of the rules files (minus the top node)
-			   into this file, replacing the <import> task.
-			 - customize to your needs.
+        <do-only-if-manifest-hasCode
+                elseText="hasCode = false. Skipping aidl/renderscript/R.java">
+            <echo level="info">Handling aidl files...</echo>
+            <aidl executable="${aidl}"
+                    framework="${project.target.framework.aidl}"
+                    libraryBinAidlFolderPathRefid="project.library.bin.aidl.folder.path"
+                    genFolder="${gen.absolute.dir}"
+                    aidlOutFolder="${out.aidl.absolute.dir}">
+                <source path="${source.absolute.dir}"/>
+            </aidl>
 
-		 ***********************
-		 ****** IMPORTANT ******
-		 ***********************
-		 In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
-		 in order to avoid having your file be overridden by tools such as "android update project"
-	-->
-	<!-- version-tag: custom -->
-	<import file="${sdk.dir}/tools/ant/build.xml" />
+            <echo level="info">----------</echo>
+            <echo level="info">Handling Resources...</echo>
+            <aapt executable="${aapt}"
+                    command="package"
+                    verbose="${verbose}"
+                    manifest="${out.manifest.abs.file}"
+                    originalManifestPackage="${project.app.package}"
+                    androidjar="${project.target.android.jar}"
+                    rfolder="${gen.absolute.dir}"
+                    nonConstantId="${android.library}"
+                    libraryResFolderPathRefid="project.library.res.folder.path"
+                    libraryPackagesRefid="project.library.packages"
+                    libraryRFileRefid="project.library.bin.r.file.path"
+                    ignoreAssets="${aapt.ignore.assets}"
+                    binFolder="${out.absolute.dir}"
+                    proguardFile="${out.absolute.dir}/proguard.txt">
+                <res path="${out.res.absolute.dir}" />
+                <res path="${resource.absolute.dir}" />
+                <nocompress extension="qz"/>
+            </aapt>
 
-	<taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" classpathref="lib.path" />
+            <echo level="info">----------</echo>
+            <echo level="info">Handling BuildConfig class...</echo>
+            <buildconfig
+                    genFolder="${gen.absolute.dir}"
+                    package="${project.app.package}"
+                    buildType="${build.is.packaging.debug}"
+                    previousBuildType="${build.last.is.packaging.debug}"/>
 
-	<target name="cpd" description="Search for cut-and-pasted code">
-		<property name="cpd.report.xml" location="cpd.xml" />
-		<cpd minimumTokenCount="100" format="xml" outputFile="${cpd.report.xml}"
-			ignoreLiterals="true" ignoreIdentifiers="true">
-			<fileset dir="${source.absolute.dir}" includes="**/*.java" />
-		</cpd>
-	</target>
-
-	<target name="fix_apostrophe_issues">
-		<replace token="version='1.0'" value="version=&quot;1.0&quot;">
-			<fileset dir="res" includes="**/strings.xml" />
-		</replace>
-		<replace token="encoding='utf-8'" value="encoding=&quot;utf-8&quot;">
-			<fileset dir="res" includes="**/strings.xml" />
-		</replace>
-
-		<replaceregexp  match="([^\\])'" replace="\1\\\\'" flags="-g" byline="off">
-			<fileset dir="res" includes="**/strings.xml" />
-		</replaceregexp>
-	</target>
-
+        </do-only-if-manifest-hasCode>
+    </target>
+	
 </project>

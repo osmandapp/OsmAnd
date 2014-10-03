@@ -12,7 +12,7 @@ import android.view.ViewParent;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import net.osmand.access.MapAccessibilityActions;
-import net.osmand.core.android.CoreResourcesFromAndroidAssets;
+import net.osmand.core.android.CoreResourcesFromAndroidAssetsCustom;
 import net.osmand.core.jni.*;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -72,7 +72,7 @@ public class NativeViewController extends MapViewBaseController {
 	private GestureDetector gestureDetector;
 
 	public static final String NATIVE_TAG = "NativeRender";
-	private CoreResourcesFromAndroidAssets coreResources;
+	private CoreResourcesFromAndroidAssetsCustom coreResources;
 
 	SimpleTwoFingerTapDetector twoFingerTapDetector = new SimpleTwoFingerTapDetector() {
 		@Override
@@ -166,7 +166,7 @@ public class NativeViewController extends MapViewBaseController {
 		Log.i(NATIVE_TAG, "rasterTileSize = " + rasterTileSize);
 
 		Log.i(NATIVE_TAG, "Initializing core...");
-		coreResources = CoreResourcesFromAndroidAssets.loadFromCurrentApplication(mapActivity.getMyApplication());
+		coreResources = CoreResourcesFromAndroidAssetsCustom.loadFromCurrentApplication(mapActivity.getMyApplication());
 		OsmAndCore.InitializeCore(coreResources);
 
 		File directory =mapActivity.getMyApplication().getAppPath("");

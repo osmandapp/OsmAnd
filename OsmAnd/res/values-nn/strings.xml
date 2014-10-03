@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="rendering_attr_coloredBuildings_name">Farga bygningar</string>
     <string name="osmo_invite">Inviter …</string>
     <string name="osmo_leave_confirmation_msg">Ønskjer du å forlata gruppa %1$s?</string>
