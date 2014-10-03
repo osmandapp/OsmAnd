@@ -33,6 +33,7 @@
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java
         - https://github.com/osmandapp/Osmand-core/tree/legacy_core
+        - https://github.com/osmandapp/Osmand-core/
         - https://github.com/osmandapp/OsmAnd-misc
         - https://github.com/osmandapp/OsmAnd-tools
         - https://github.com/osmandapp/OsmAnd-resources
@@ -40,6 +41,9 @@
     * UI Design and UX work, such as layout, icons is covered by CC-BY-ND
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd/res and others
 
+    * Integration with QT library in (https://github.com/osmandapp/Osmand-core/) - dynammic linking
+        - LGPL (https://qt-project.org/products/licensing)
+        
     * Map icons and their derived primities are covered by proprietary license:
         - © icons8.com (https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg/icons8)
 
@@ -88,7 +92,7 @@
         - sqlite-jdbc-3.7.6.3-20110609.081603-3.jar
         - h2-latest.jar
 
-    * Special tools for new rendering (GPLv3) - © Alexey Pelykh
+    * Special tools for new rendering (GPLv3) 
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/obf-inspector
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/obf-verifier
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/route-tester
