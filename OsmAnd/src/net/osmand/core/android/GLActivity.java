@@ -170,7 +170,7 @@ public class GLActivity extends Activity {
         OsmAndCore.InitializeCore(_coreResources);
 
 		File directory =getApp().getAppPath("");
-        _fileLogSink = QIODeviceLogSink.createFileLogSink(directory.getAbsolutePath() + "osmandcore.log");
+        _fileLogSink = QIODeviceLogSink.createFileLogSink(directory.getAbsolutePath() + "/osmandcore.log");
         Logger.get().addLogSink(_fileLogSink);
 
         Log.i(TAG, "Going to resolve default embedded style...");
@@ -184,8 +184,6 @@ public class GLActivity extends Activity {
 
         Log.i(TAG, "Going to prepare OBFs collection");
         _obfsCollection = new ObfsCollection();
-
-		Log.i(TAG, "Will load OBFs from " + Environment.getExternalStorageDirectory() + "/osmand");
 
 		Log.i(TAG, "Will load OBFs from " + directory.getAbsolutePath());
         _obfsCollection.addDirectory(directory.getAbsolutePath(), false);
