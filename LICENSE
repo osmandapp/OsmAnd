@@ -92,7 +92,7 @@
         - sqlite-jdbc-3.7.6.3-20110609.081603-3.jar
         - h2-latest.jar
 
-    * Special tools for new rendering (GPLv3) - © Alexey Pelykh
+    * Special tools for new rendering (GPLv3) 
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/obf-inspector
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/obf-verifier
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/route-tester
