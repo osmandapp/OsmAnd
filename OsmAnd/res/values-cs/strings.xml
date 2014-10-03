@@ -1738,4 +1738,8 @@ s často kladenými otázkami.</string>
     <string name="text_size_descr">Nastavit velikost písma na mapě.</string>
     <string name="fav_point_dublicate">Název oblíbeného bodu je již použit</string>
     <string name="fav_point_dublicate_message">Aby nevznikla duplicita, oblíbený bod byl uložen jako %1$s.</string>
+    <string name="test_native_render">Test nativního vykreslování</string>
+    <string name="test_native_render_msg">Spustí činnost s nativním vykreslováním</string>
+    <string name="use_native_render">Použít nativní vykreslování</string>
+    <string name="use_native_render_descr">Použít C++ vykreslování místo Javy</string>
     </resources>

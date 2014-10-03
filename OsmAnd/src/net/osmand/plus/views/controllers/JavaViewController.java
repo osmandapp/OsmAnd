@@ -24,7 +24,6 @@ import java.util.List;
  * Created by Натали on 29.09.2014.
  */
 public class JavaViewController extends MapViewBaseController {
-	private GLSurfaceView glSurfaceView;
 	private OsmandMapTileView mapTileView;
 	private OsmandSettings settings;
 	private MapActivity mapActivity;

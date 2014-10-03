@@ -1976,4 +1976,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="text_size">Schriftgröße</string>
     <string name="fav_point_dublicate">Doppelung beim Favoriten-Namen</string>
     <string name="fav_point_dublicate_message">Name des Favoriten bereits vergeben, er wurde auf %1$s geändert.</string>
+    <string name="test_native_render">Nativen Renderer testen</string>
+    <string name="test_native_render_msg">Nutzt den nativen Renderer</string>
+    <string name="use_native_render">Nativen Renderer benutzen</string>
+    <string name="use_native_render_descr">C++ Renderer statt Java-Renderer nutzen</string>
     </resources>
