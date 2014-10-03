@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -1970,7 +1970,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
     <string name="record_plugin_description">Speichern Sie Ihre Tracks mit einem Klick. Zeigt die Einstellung, wie Strecken aufgezeichnet werden – in lokale GPX-Dateien oder online via Web-Service.</string>
-    <string name="route_descr_destination"/>
+    <string name="route_descr_destination"></string>
     <string name="local_index_description">Antippen eines Elements um mehr Details zu erfahren, Tippen und Halten zum Deaktivieren oder Löschen des Elements. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
     <string name="text_size">Schriftgröße</string>
