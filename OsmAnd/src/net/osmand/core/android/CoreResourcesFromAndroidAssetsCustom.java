@@ -76,13 +76,13 @@ public class CoreResourcesFromAndroidAssetsCustom extends ICoreResourcesProvider
             }
 
             // Get location of this resource
-            final File res = ((OsmandApplication) _context.getApplicationContext()).getAppPath("OsmAndCore_ResourcesBundle/" + resourceInBundle + ".qz");
+            final String path = "OsmAndCore_ResourcesBundle/" + resourceInBundle + ".qz";
+			final File res = ((OsmandApplication) _context.getApplicationContext()).getAppPath(path);
             final ResourceData resourceData = new ResourceData();
 			if (!res.exists()) {
 				try {
 
-					final AssetFileDescriptor resourceFd = assetManager.openFd("OsmAndCore_ResourcesBundle/"
-							+ resourceInBundle);
+					final AssetFileDescriptor resourceFd = assetManager.openFd(path);
 					long declaredSize = resourceFd.getDeclaredLength();
 					resourceData.size = resourceFd.getLength();
 					resourceData.offset = resourceFd.getStartOffset();
