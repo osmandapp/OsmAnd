@@ -516,7 +516,7 @@ public class RouteResultPreparation {
 						kl = true;
 						int lns = attached.getObject().getLanes();
 						if(attached.getObject().getOneway() == 0) {
-							lns = countLines(attached, lns);
+							lns = countLanes(attached, lns);
 						}
 						if (lns > 0) {
 							right += lns;
@@ -526,7 +526,7 @@ public class RouteResultPreparation {
 						kr = true;
 						int lns = attached.getObject().getLanes();
 						if(attached.getObject().getOneway() == 0) {
-							lns = countLines(attached, lns);
+							lns = countLanes(attached, lns);
 						}
 						if (lns > 0) {
 							left += lns;
@@ -544,7 +544,7 @@ public class RouteResultPreparation {
 		int current = currentSegm.getObject().getLanes();
 		// attachedRoutes covers all allowed outbound routes at that point except currentSegm.
 		if (currentSegm.getObject().getOneway() == 0) {
-			current = countLines(currentSegm, current);
+			current = countLanes(currentSegm, current);
 		}
 		if (current <= 0) {
 			current = 1;
@@ -581,7 +581,7 @@ public class RouteResultPreparation {
 		return t;
 	}
 
-	protected int countLines(RouteSegmentResult attached, int lns) {
+	protected int countLanes(RouteSegmentResult attached, int lns) {
 		try {
 			if (attached.isForwardDirection() && attached.getObject().getValue("lanes:forward") != null) {
 				return Integer.parseInt(attached.getObject().getValue("lanes:forward"));
