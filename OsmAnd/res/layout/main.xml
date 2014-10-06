@@ -20,4 +20,10 @@
 			  android:choiceMode="singleChoice"
 			  android:divider="@drawable/divider"
 			  android:dividerHeight="1px"/>
+	<LinearLayout android:gravity="bottom"
+				  android:orientation="horizontal"
+				  android:id="@+id/dialog_layout"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"/>
+
 </android.support.v4.widget.DrawerLayout>
