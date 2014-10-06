@@ -114,7 +114,7 @@
 	<string name="background_service_is_enabled_question">Der Hintergrunddienst läuft noch, soll er auch unterbrochen werden?</string>
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
-	<string name="show_warnings_title">Warnungen anzeigen…</string>
+	<string name="show_warnings_title">Warnungen anzeigen …</string>
 	<string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stopzeichen, Rüttelschwellen), stationäre Radarkontrollen und Fahrspuranzeige</string>
 	<string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich</string>
 	<string name="use_compass_navigation">Kompass verwenden</string>
@@ -1275,7 +1275,7 @@
 	<string name="show_lanes">Fahrspuren anzeigen</string>
 	<string name="avoid_unpaved">Vermeide ungeteerte Straßen</string>
 	<string name="avoid_ferries">Vermeide Fähren</string>
-	<string name="avoid_in_routing_title">Vermeide…</string>
+	<string name="avoid_in_routing_title">Vermeide …</string>
 	<string name="avoid_in_routing_descr">Bestimmte Straßentypen von der Routenberechnung ausschließen</string>
 	<string name="map_widget_fluorescent">Routen in Leuchtfarbe</string>
 	<string name="map_widget_show_ruler">Maßstab</string>
@@ -1387,7 +1387,7 @@
 	<string name="precise_routing_mode">Präzises Routing (experimentell)</string>
 	<string name="local_indexes_cat_av">Audio/Video-Daten</string>
 	<string name="prefer_motorways">Autobahnen bevorzugen</string>
-	<string name="prefer_in_routing_title">Bevorzugen von…</string>
+	<string name="prefer_in_routing_title">Bevorzugen von …</string>
 	<string name="prefer_in_routing_descr">Autobahnen bevorzugen</string>
 	<string name="max_speed_none">keine</string>
 	<string name="item_checked">ausgewählt</string>
