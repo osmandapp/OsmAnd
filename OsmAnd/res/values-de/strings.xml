@@ -1486,7 +1486,7 @@
 	<string name="driving_region">Fahr-Gebiet</string>
 	<string name="about_version">Version :</string>
 	<string name="about_settings">Über</string>
-	<string name="about_settings_descr">Versionsinfo, Lizenz, Projekt Mitglieder</string>
+	<string name="about_settings_descr">Versionsinfo, Lizenz, Projekt-Mitglieder</string>
 	<string name="tips_and_tricks">Hilfe</string>
 	<string name="local_index_tile_data_zooms">Zooms heruntergeladen: %1$s</string>
 	<string name="local_index_tile_data_expire">Gültigkeit endet in (Minuten): %1$s</string>
@@ -1970,7 +1970,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
     <string name="record_plugin_description">Speichern Sie Ihre Tracks mit einem Klick. Zeigt die Einstellung, wie Strecken aufgezeichnet werden – in lokale GPX-Dateien oder online via Web-Service.</string>
-    <string name="route_descr_destination"></string>
+    <string name="route_descr_destination"/>
     <string name="local_index_description">Antippen eines Elements um mehr Details zu erfahren, Tippen und Halten zum Deaktivieren oder Löschen des Elements. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
     <string name="text_size">Schriftgröße</string>
