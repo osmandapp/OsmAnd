@@ -578,7 +578,7 @@ public class RouteResultPreparation {
 		if (t != null && lanes != null) {
 			t.setLanes(lanes);
 
-			t = attachTurnLanesData(leftSide, prevSegm, t);
+			attachTurnLanesData(leftSide, prevSegm, t);
 		}
 		return t;
 	}
@@ -608,29 +608,27 @@ public class RouteResultPreparation {
 		}
 	}
 
-	private TurnType attachTurnLanesData(boolean leftSide, RouteSegmentResult prevSegm, TurnType t) {
+	private void attachTurnLanesData(boolean leftSide, RouteSegmentResult prevSegm, TurnType t) {
 		int lanes = prevSegm.getObject().getLanes();
 		String turnLanes = getTurnLanesString(prevSegm);
 
 		if (turnLanes == null) {
-			return t;
+			return;
 		}
 
 		String[] splitLaneOptions = turnLanes.split("\\|", -1);
 		if (splitLaneOptions.length != lanes) {
 			// Error in data or missing data
-			return t;
+			return;
 		}
 
 		if (t.getLanes().length != lanes) {
 			// The turn:lanes don't easily match up to the target road.
 			// TODO: Add support for lanes that can go in multiple directions
-			return t;
+			return;
 		}
 
 		assignTurns(splitLaneOptions, t);
-
-		return t;
 	}
 
 	private void assignTurns(String[] splitLaneOptions, TurnType t) {
