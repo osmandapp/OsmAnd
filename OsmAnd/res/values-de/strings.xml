@@ -1411,7 +1411,7 @@
 	<string name="clear_destination">Ziel löschen</string>
 	<string name="other_location">Andere</string>
 	<string name="files_limit">In dieser kostenlosen Version können noch %1$d Dateien heruntergeladen werden.</string>
-	<string name="available_downloads_left">Es stehen %1$d Dateien zum Herunterladen bereit</string>
+	<string name="available_downloads_left">Es können noch %1$d Dateien herunter geladen werden.</string>
 	<string name="install_paid">Vollversion</string>
 	<string name="cancel_navigation">Navigation stoppen</string>
 	<string name="cancel_route">Route verwerfen</string>
