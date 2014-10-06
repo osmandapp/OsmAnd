@@ -661,7 +661,13 @@ public class RouteResultPreparation {
 				if (TurnType.getPrimaryTurn(t.getLanes()[i]) == 0) {
 					t.setPrimaryTurn(i, turn);
 				} else {
-					t.setSecondaryTurn(i, turn);
+                    if (turn == t.getValue()) {
+                        t.setSecondaryTurn(i, TurnType.getPrimaryTurn(t.getLanes()[i]));
+                        t.setPrimaryTurn(i, turn);
+                    } else {
+                        t.setSecondaryTurn(i, turn);
+                    }
+
 					break; // Move on to the next lane
 				}
 			}
