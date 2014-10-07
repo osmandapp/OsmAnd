@@ -577,6 +577,8 @@ public class RouteResultPreparation {
 		}
 		if (t != null && lanes != null) {
 			t.setLanes(lanes);
+
+			attachTurnLanesData(leftSide, prevSegm, t);
 		}
 		return t;
 	}
@@ -593,7 +595,85 @@ public class RouteResultPreparation {
 		}
 		return (lns + 1) / 2;
 	}
-	
+
+	protected String getTurnLanesString(RouteSegmentResult segment) {
+		if (segment.getObject().getOneway() == 0) {
+			if (segment.isForwardDirection()) {
+				return segment.getObject().getValue("turn:lanes:forward");
+			} else {
+				return segment.getObject().getValue("turn:lanes:backward");
+			}
+		} else {
+			return segment.getObject().getValue("turn:lanes");
+		}
+	}
+
+	private void attachTurnLanesData(boolean leftSide, RouteSegmentResult prevSegm, TurnType t) {
+		int lanes = prevSegm.getObject().getLanes();
+		String turnLanes = getTurnLanesString(prevSegm);
+
+		if (turnLanes == null) {
+			return;
+		}
+
+		String[] splitLaneOptions = turnLanes.split("\\|", -1);
+		if (splitLaneOptions.length != lanes) {
+			// Error in data or missing data
+			return;
+		}
+
+		if (t.getLanes().length != lanes) {
+			// The turn:lanes don't easily match up to the target road.
+			// TODO: Add support for lanes that can go in multiple directions
+			return;
+		}
+
+		assignTurns(splitLaneOptions, t);
+	}
+
+	private void assignTurns(String[] splitLaneOptions, TurnType t) {
+		for (int i = 0; i < splitLaneOptions.length; i++) {
+			String[] laneOptions = splitLaneOptions[i].split(";");
+
+			for (int j = 0; j < laneOptions.length; j++) {
+				int turn;
+				if (laneOptions[j].equals("none") || laneOptions[j].equals("through")) {
+					turn = TurnType.C;
+				} else if (laneOptions[j].equals("slight_right")) {
+					turn = TurnType.TSLR;
+				} else if (laneOptions[j].equals("slight_left")) {
+					turn = TurnType.TSLL;
+				} else if (laneOptions[j].equals("right")) {
+					turn = TurnType.TR;
+				} else if (laneOptions[j].equals("left")) {
+					turn = TurnType.TL;
+				} else if (laneOptions[j].equals("sharp_right")) {
+					turn = TurnType.TSHR;
+				} else if (laneOptions[j].equals("sharp_left")) {
+					turn = TurnType.TSHL;
+				} else if (laneOptions[j].equals("reverse")) {
+					turn = TurnType.TU;
+				} else {
+					// Unknown string
+					continue;
+				}
+
+				if (TurnType.getPrimaryTurn(t.getLanes()[i]) == 0) {
+					t.setPrimaryTurn(i, turn);
+				} else {
+                    if (turn == t.getValue()) {
+                        t.setSecondaryTurn(i, TurnType.getPrimaryTurn(t.getLanes()[i]));
+                        t.setPrimaryTurn(i, turn);
+                    } else {
+                        t.setSecondaryTurn(i, turn);
+                    }
+
+					break; // Move on to the next lane
+				}
+			}
+		}
+	}
+
 	private boolean isMotorway(RouteSegmentResult s){
 		String h = s.getObject().getHighway();
 		return "motorway".equals(h) || "motorway_link".equals(h)  ||
