@@ -125,7 +125,7 @@ public class NativeQtLibrary {
 				" referenceTileSize = " + referenceTileSize + " rasterTileSize = " + rasterTileSize);
 		Log.i(NATIVE_TAG, "Initializing core...");
 		CoreResourcesFromAndroidAssetsCustom coreResources = notGc(CoreResourcesFromAndroidAssetsCustom.loadFromCurrentApplication(app));
-		OsmAndCore.InitializeCore(coreResources);
+		OsmAndCore.InitializeCore(coreResources.instantiateProxy());
 
 		// initialize log
 		File directory = app.getAppPath("");
