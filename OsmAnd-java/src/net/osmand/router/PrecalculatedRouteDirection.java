@@ -266,7 +266,7 @@ public class PrecalculatedRouteDirection {
 		routeDirection.startFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind1], pointsY[ind1], ctx.startX, ctx.startY) / maxSpeed;
 //		routeDirection.startX31 = ctx.startX;
 //		routeDirection.startY31 = ctx.startY;
-		routeDirection.endPoint = calc(ctx.targetX, ctx.targetX);
+		routeDirection.endPoint = calc(ctx.targetX, ctx.targetY);
 		routeDirection.endFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind2], pointsY[ind2], ctx.targetX, ctx.targetY) / maxSpeed;
 		routeDirection.followNext = followNext;
 		
