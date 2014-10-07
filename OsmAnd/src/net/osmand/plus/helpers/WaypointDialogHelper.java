@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v4.widget.DrawerLayout;
+import android.widget.*;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
@@ -34,21 +35,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 /**
  */
 public class WaypointDialogHelper implements OsmAndLocationListener {
 	private MapActivity mapActivity;
 	private OsmandApplication app;
-	private DrawerLayout mainLayout;
+	private LinearLayout mainLayout;
 	private WaypointHelper waypointHelper;
 
 	public final static boolean OVERLAP_LAYOUT = true; // only true is supported
@@ -60,7 +53,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		this.app = mapActivity.getMyApplication();
 		waypointHelper = this.app.getWaypointHelper();
 		this.mapActivity = mapActivity;
-		this.mainLayout = (DrawerLayout) mapActivity.findViewById(R.id.drawer_layout);
+		this.mainLayout = (LinearLayout) mapActivity.findViewById(R.id.dialog_layout);
 
 	}
 

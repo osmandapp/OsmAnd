@@ -10,7 +10,7 @@
 	<string name="speak_favorites">Nahegelegene Favoriten ankündigen</string>
 	<string name="speak_poi">Nahegelegene POI ankündigen</string>
 	<string name="tip_navigation">Navigation starten</string>
-	<string name="tip_navigation_t">Die Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte, (dann Kurzklick auf den Positionsmarker und das Auswählen des Menüpunktes \'Navigiere zu\'), oder über die Funktion \'Navigiere zu\' bei Klick auf ein Ergebnis einer Such-Liste oder einen Favoriten.
+	<string name="tip_navigation_t">Die Route zu einem Ziel erhält man entweder durch direktes lang-antippen eines Punktes in der Karte, (dann Kurzklick auf den Positionsmarker und das Auswählen des Menüpunktes \'Navigiere zu\'), oder über die Funktion \'Navigiere zu\' bei Klick auf ein Ergebnis einer Such-Liste oder einen Favoriten.
 		\n\nDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.
 		\n\nDie Option \'Navigation starten\' beginnt eine Live-Navigation mit Sprachansagen (falls konfiguriert), \'Route nur anzeigen\' zeigt eine statische Route ohne Anpassungen bei Positionsveränderung.
 		\n\nDie Route zu einem gewählten Ziel von einem anderen Punkt als dem gegenwärtigen Standort aus kann angezeigt werden durch Klick auf den gewünschten Ausgangspunkt und dann Auswahl der \'Verwende Position\'-Kontextmenüoption \'Navigiere von\'.
@@ -114,7 +114,7 @@
 	<string name="background_service_is_enabled_question">Der Hintergrunddienst läuft noch, soll er auch unterbrochen werden?</string>
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
-	<string name="show_warnings_title">Warnungen anzeigen…</string>
+	<string name="show_warnings_title">Warnungen anzeigen …</string>
 	<string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stopzeichen, Rüttelschwellen), stationäre Radarkontrollen und Fahrspuranzeige</string>
 	<string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich</string>
 	<string name="use_compass_navigation">Kompass verwenden</string>
@@ -206,7 +206,7 @@
 	<string name="osmand_extra_settings_description">Zeigt Einstellungen für erweiterte Kartenkonfiguration (z.B. mehr Details) und einige Gerätespezifika.</string>
 	<string name="osmand_development_plugin_description">Zeigt Einstellungen für Entwicklungs- und Fehlersuchhilfen wie simulierte Navigation oder die Messung der Render-Leistung.</string>
 	<string name="plugins_screen">Plugins</string>
-	<string name="select_plugin_to_activate">Module zum Aktivieren oder Deaktivieren anklicken. (Ein Neustart von OsmAnd könnte nötig sein.)</string>
+	<string name="select_plugin_to_activate">Module zum Aktivieren oder Deaktivieren antippen. (Ein Neustart von OsmAnd könnte nötig sein.)</string>
 	<string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Zusatzdienste</string>
 	<string name="prefs_plugins">Plugins</string>
 	<string name="osm_editing_plugin_description">Ermöglicht das Erstellen und Bearbeiten von OSM-POI-Objekten und -Fehlermeldungen, sowie das Hochladen von GPX-Dateien (benötigt ein OSM-Benutzerkonto).</string>
@@ -269,18 +269,18 @@
 	<string name="accuracy">Genauigkeit</string>
 	<string name="altitude">Höhe</string>
 	<string name="no_info">Keine Informationen</string>
-	<string name="direction_style_sidewise">Sidewise (8 Sektoren)</string>
-	<string name="direction_style_clockwise">Clockwise (12 Sektoren)</string>
+	<string name="direction_style_sidewise">Seitwärds (8 Sektoren)</string>
+	<string name="direction_style_clockwise">Im Uhrzeigersinn (12 Sektoren)</string>
 	<string name="settings_direction_style">Richtungsart</string>
 	<string name="settings_direction_style_descr">Wähle eine Art um relative Richtungen während der Bewegung auszudrücken</string>
-	<string name="auto_announce_on">Beginne mit Autoannouncing</string>
-	<string name="auto_announce_off">Stoppe Autoannouncing</string>
+	<string name="auto_announce_on">Auto. Ankündigungen ein</string>
+	<string name="auto_announce_off">Auto. Ankündigungen aus</string>
 	<string name="scroll_map_by_gestures_descr">Scrolle die Karte mit Gesten auf dem Touchscreen</string>
 	<string name="scroll_map_by_gestures">Natürliches Scrollen der Karte</string>
 	<string name="i_am_here">Ich bin hier</string>
 	<string name="zoom_by_trackball_descr">Horizontale Trackball-Bewegung zoomt Karte</string>
 	<string name="zoom_by_trackball">Benutze den Trackball zum Zoomen</string>
-	<string name="use_short_object_names_descr">Benutze kurze Objektnamen im Touch-exploration-mode</string>
+	<string name="use_short_object_names_descr">Benutze kurze Objektnamen im Touch-Entdeckungsmodus</string>
 	<string name="use_short_object_names">Benutze Objektnamen</string>
 	<string name="accessibility_preferences_descr">Einstellungen zur Barrierefreiheit</string>
 	<string name="accessibility_preferences">Bedienungshilfen</string>
@@ -362,7 +362,7 @@
 	<string name="osmand_service">Hintergrunddienst</string>
 	<string name="osmand_service_descr">Für Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
 	<string name="tip_rotation_switching">Kartenrotation</string>
-	<string name="tip_rotation_switching_t_v2">Die Ausrichtung der Karte kann durch klicken auf die Kompassnadel geändert werden.
+	<string name="tip_rotation_switching_t_v2">Die Ausrichtung der Karte kann durch antippen auf die Kompassnadel geändert werden.
 		\n\nZur Wahl stehen:
 		\n\t* \'Keine Rotation (Norden ist oben)\': Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
 		\n\t* \'Nach Bewegungsrichtung\': Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
@@ -623,7 +623,7 @@
 	<string name="file_with_name_already_exist">Datei mit gleichem Namen besteht bereits.</string>
 	<string name="default_buttons_save">Speichern</string>
 	<string name="menu_save_directions">Route speichern</string>
-	<string name="local_index_upload_gpx_description">GPX Dateien an OSM Community übermitteln. Die Dateien können dort zur Kartenverbesserung verwendet werden.</string>
+	<string name="local_index_upload_gpx_description">GPX Dateien an OSM-Gemeinschaft übermitteln. Die Dateien können dort zur Kartenverbesserung verwendet werden.</string>
 	<string name="local_index_items_uploaded">%1$d von %2$d Datei(en) erfolgreich hochgeladen.</string>
 	<string name="local_index_mi_upload_gpx">Senden an OSM</string>
 	<string name="show_more_map_detail">Mehr Kartendetails</string>
@@ -671,7 +671,7 @@
 	<string name="map_text_size_descr">Wähle Textgröße für Bezeichnungen in den Landkarten</string>
 	<string name="map_text_size">Karten-Textgröße</string>
 	<string name="voice_not_specified">Keine</string>
-	<string name="trace_rendering">Rendering Debug Info</string>
+	<string name="trace_rendering">Rendering Debug-Info</string>
 	<string name="trace_rendering_descr">Flag zur Prüfung der Rendering-Performance (Geschwindigkeit des Offline-Bildaufbaus)</string>
 	<string name="installing_new_resources">Entpacke neue Daten…</string>
 	<string name="internet_connection_required_for_online_route">Ein Online-Navigationsdienst ist ausgewählt, aber es besteht keine Internetverbindung.</string>
@@ -692,7 +692,7 @@
 	<string name="overlay_transparency">Overlay-Transparenz</string>
 	<string name="map_transparency_descr">Transparenz der Hauptkarte ändern</string>
 	<string name="map_transparency">Kartentransparenz</string>
-	<string name="modify_transparency">Transparenz ändern (0 - transparent, 255 - opaq)</string>
+	<string name="modify_transparency">Transparenz ändern (0 - durchsichtig, 255 - undurchsichtig)</string>
 	<string name="layer_underlay">Underlay-Karte…</string>
 	<string name="map_underlay">Underlay-Karte</string>
 	<string name="map_underlay_descr">Wähle Underlay-Karte</string>
@@ -743,7 +743,7 @@
 	</string>
 	<string name="tip_map_context_menu">\'Verwende Position\' Menü</string>
 	<string name="tip_map_context_menu_t">Das \'Verwende Position\'-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.
-		\n\nEs wird über ein langes Drücken auf einen Punkt in der Karte (dann Anklicken des Positionsmarkers), durch das Drücken des Trackball-Knopfes in der Kartenansicht, oder via \'Menü\' → \'Verwende Position\' aufgerufen (die letzten beiden Methoden beziehen sich auf den Kartenmittelpunkt).
+		\n\nEs wird über ein langes Drücken auf einen Punkt in der Karte (dann Antippen des Positionsmarkers), durch das Drücken des Trackball-Knopfes in der Kartenansicht, oder via \'Menü\' → \'Verwende Position\' aufgerufen (die letzten beiden Methoden beziehen sich auf den Kartenmittelpunkt).
 		\n\nLanges Drücken auf einen Positionsmarker entfernt diesen wieder.
 	</string>
 	<string name="next_button">Weiter</string>
@@ -1041,7 +1041,7 @@
 	<string name="new_route_calculated_dist">Route neu berechnet, Entfernung</string>
 	<string name="arrived_at_destination">Sie haben Ihr Ziel erreicht</string>
 	<string name="invalid_locations">Koordinaten sind ungültig!</string>
-	<string name="go_back_to_osmand">zurück zu OsmAnd</string>
+	<string name="go_back_to_osmand">Zurück zu OsmAnd</string>
 	<string name="close">Schließen</string>
 	<string name="loading_data">Daten werden geladen…</string>
 	<string name="reading_indexes">Lese lokale Daten…</string>
@@ -1188,7 +1188,7 @@
 	<string name="offline_navigation_not_available">OsmAnd offline Navigation steht zur Zeit nicht zur Verfügung.</string>
 	<string name="left_side_navigation">Linksverkehr</string>
 	<string name="left_side_navigation_descr">Auswählen für Länder mit Linksverkehr</string>
-	<string name="download_link_and_local_description">Hier klicken um Offline-Karten herunterzuladen oder zu aktualisieren. \nAnklicken bestehender Einträge liefert Details, drücken und halten ermöglicht deaktivieren, umbenennen oder löschen. Aktuelle Daten auf dem Gerät (%1$s frei):</string>
+	<string name="download_link_and_local_description">Hier tippen um Offline-Karten herunterzuladen oder zu aktualisieren. \nAntippen bestehender Einträge liefert Details, drücken und halten ermöglicht deaktivieren, umbenennen oder löschen. Aktuelle Daten auf dem Gerät (%1$s frei):</string>
 	<string name="unknown_from_location">Startpunkt ist noch nicht ermittelt</string>
 	<string name="confirm_interrupt_download">Möchten Sie den Datei-Download abbrechen?</string>
 	<string name="basemap_was_selected_to_download">Die Basis-Karte wird für die korrekte Benutzung der Anwendungen benötigt und ist für das Herunterladen vorausgewählt.</string>
@@ -1275,7 +1275,7 @@
 	<string name="show_lanes">Fahrspuren anzeigen</string>
 	<string name="avoid_unpaved">Vermeide ungeteerte Straßen</string>
 	<string name="avoid_ferries">Vermeide Fähren</string>
-	<string name="avoid_in_routing_title">Vermeide…</string>
+	<string name="avoid_in_routing_title">Vermeide …</string>
 	<string name="avoid_in_routing_descr">Bestimmte Straßentypen von der Routenberechnung ausschließen</string>
 	<string name="map_widget_fluorescent">Routen in Leuchtfarbe</string>
 	<string name="map_widget_show_ruler">Maßstab</string>
@@ -1286,7 +1286,7 @@
 
 	<string name="gps_wakeup_interval">GPS-Aufwachintervall: %s</string>
 	<string name="int_continuosly">Kontinuierlich</string>
-	<string name="screen_is_locked">Zum Bildschirm Entsperren Schloss anklicken</string>
+	<string name="screen_is_locked">Zum Bildschirm Entsperren Schloss antippen</string>
 	<string name="filterpoi_activity">POI-Filter erstellen</string>
 	<string name="email">E-Mail</string>
 	<string name="btn_add_tag">Eintrag hinzufügen</string>
@@ -1355,9 +1355,9 @@
 	<string name="recording_delete_confirm">Wollen Sie diese Aufnahme löschen?</string>
 	<string name="recording_unavailable">nicht verfügbar</string>
 	<string name="recording_context_menu_play">Wiedergabe</string>
-	<string name="recording_default_name">aufnehmen</string>
+	<string name="recording_default_name">Aufnehmen</string>
 	<string name="recording_error">Fehler bei der Aufnahme</string>
-	<string name="recording_is_recorded">Audio/Video wird aufgenommen. Zum Stoppen drücken Sie das AV Widget.</string>
+	<string name="recording_is_recorded">Audio/Video wird aufgenommen. Zum Stoppen drücken Sie das A/V-Widget.</string>
 	<string name="recording_playing">Aus der angegebenen Aufnahme wird abgespielt.\n%1$s</string>
 	<string name="recording_context_menu_arecord">Audio-Notiz aufnehmen</string>
 	<string name="recording_context_menu_vrecord">Video-Notiz aufnehmen</string>
@@ -1387,7 +1387,7 @@
 	<string name="precise_routing_mode">Präzises Routing (experimentell)</string>
 	<string name="local_indexes_cat_av">Audio/Video-Daten</string>
 	<string name="prefer_motorways">Autobahnen bevorzugen</string>
-	<string name="prefer_in_routing_title">Bevorzugen von…</string>
+	<string name="prefer_in_routing_title">Bevorzugen von …</string>
 	<string name="prefer_in_routing_descr">Autobahnen bevorzugen</string>
 	<string name="max_speed_none">keine</string>
 	<string name="item_checked">ausgewählt</string>
@@ -1411,7 +1411,7 @@
 	<string name="clear_destination">Ziel löschen</string>
 	<string name="other_location">Andere</string>
 	<string name="files_limit">In dieser kostenlosen Version können noch %1$d Dateien heruntergeladen werden.</string>
-	<string name="available_downloads_left">Es stehen %1$d Dateien zum Herunterladen bereit</string>
+	<string name="available_downloads_left">Es können noch %1$d Dateien herunter geladen werden.</string>
 	<string name="install_paid">Vollversion</string>
 	<string name="cancel_navigation">Navigation stoppen</string>
 	<string name="cancel_route">Route verwerfen</string>
@@ -1486,7 +1486,7 @@
 	<string name="driving_region">Fahr-Gebiet</string>
 	<string name="about_version">Version :</string>
 	<string name="about_settings">Über</string>
-	<string name="about_settings_descr">Versionsinfo, Lizenz, Projekt Mitglieder</string>
+	<string name="about_settings_descr">Versionsinfo, Lizenz, Projekt-Mitglieder</string>
 	<string name="tips_and_tricks">Hilfe</string>
 	<string name="local_index_tile_data_zooms">Zooms heruntergeladen: %1$s</string>
 	<string name="local_index_tile_data_expire">Gültigkeit endet in (Minuten): %1$s</string>
@@ -1623,7 +1623,7 @@
 	<string name="rendering_attr_subwayMode_name">U-Bahn-Modus</string>
 	<string name="gps_wake_up_timer">GPS-Aufwach-Intervall</string>
 	<string name="forward">Weiter</string>
-	<string name="hide_all_waypoints">alle löschen</string>
+	<string name="hide_all_waypoints">Alle löschen</string>
 
 
 	<string name="lang_af">Afrikaans</string>
@@ -1819,14 +1819,14 @@ Liste der Unterstützten Länder (annähernd Weltweit!):
 Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua and Barbuda, Äquatorialguinea, Arabische Republik Sahara, Argentinien, Armenien, Aruba, Aserbaidschan, Äthiopien, Australien, Bahamas, Bahrain, Bangladesch, Barbados, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivien, Bonaire, Bosnien und Herzegowina, Botswana, Brasilien, Brunei, Bulgarien, Burkina Faso, Burundi, Chile, China, Costa Rica, Curaçao, Dänemark, Deutschland, Dominica, Dominikanische Republik, Dschibuti, Ecuador, El Salvador, Elfenbeinküste, Eritrea, Estland, Fidschi, Finnland, Frankreich, Französisch-Guayana, Französisch-Polynesien, Gabun, Gambia, Georgien, Ghana, Gibraltar, Grenada, Griechenland, Grönland, Großbritannien, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Honduras, Hong Kong, Indien, Indonesien, Insel Man, Irak, Iran, Irland, Island, Israel, Italien, Jamaika, Japan, Jemen, Jersey, Jordanien, Jungferninseln, Kambodscha, Kamerun, Kanada, Kap Verde, Kasastan, Katar, Kenia, Kirgistan, Kiribati, Kolumbien, Komoren, Kongo, Kroatien, Kuba, Kuwait, Laos, Lesotho, Lettland, Libanon, Liberia, Libyen, Liechtenstein, Litauen, Luxemburg, Macao, Madagaskar, Malawi, Malaysia, Malediven, Mali, Malta, Marokko, Martinique, Mauretanien, Mauritius, Mayotte, Mazedonien, Mexiko, Mikronesien, Moldau, Monaco, Mongolei, Montenegro, Montserrat, Mosambik, Myanmar, Namibia, Nauru, Nepal, Neukaledonien, Neuseeland, Nicaragua, Niederlande, Niederländische Antillen, Niger, Nigeria, Nordkorea, Norwegen, Oman, Österreich, Osttimor, Pakistan, Palau, Palästinensische Autonomiegebiete, Panama, Papua-Neuguinea, Paraquay, Peru, Philippinen, Polen, Portugal, Puerto Rico, Ruanda, Rumänien, Russland, Saint-Barthélemy, Saint Helena, Saint Helena, Ascension und Tristan da Cunha, Saint Kitts und Nevis, Saint Lucia, Saint Martin, Saint-Pierre und Miquelon, Saint Vincent und die Grenadinen, Sambia, Samoa, San Marino, Saudi Arabien, Schweden, Schweiz, Senegal, Serbien, Seychellen, Sierra Leona Singapur, Simbabwe, Slovakei, Slowenien, Somalia, Spanien, Sri Lanka, Südafrika, Sudan, Südgeorgien, Südkorea, Südsudan, Suriname, Swasiland, Syrien, Taiwan, Tadschikistan, Tansania, Thailand, Togo, Trinidad und Tobago, Tschad, Tschechische Republik, Tunesien, Türkei, Turkmenistan, Tuvalu, Uganda, Ukraine, Ungarn, Uruguay, Usbekistan, Vanuatu, Vatikan, Venezuela, Vereinigte Arabische Emirate, Vereinigte Staaten von Amerika, Vietnam, Wallis und Futuna, Weißrussland, Zentralafrikanische Republik, Zypern.
 	</string>
 
-	<string name="color_blue">blau</string>
-	<string name="color_brown">braun</string>
-	<string name="color_green">grün</string>
-	<string name="color_lightblue">hellblau</string>
-	<string name="color_orange">orange</string>
-	<string name="color_pink">pink</string>
-	<string name="color_red">rot</string>
-	<string name="color_yellow">gelb</string>
+	<string name="color_blue">Blau</string>
+	<string name="color_brown">Braun</string>
+	<string name="color_green">Grün</string>
+	<string name="color_lightblue">Hellblau</string>
+	<string name="color_orange">Orange</string>
+	<string name="color_pink">Pink</string>
+	<string name="color_red">Rot</string>
+	<string name="color_yellow">Gelb</string>
 
 	<string name="osmodroid_unseek">Objektsuche beenden</string>
 	<string name="osmodroid_refresh">Kanäle aktualisieren</string>
@@ -1848,7 +1848,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_auto_send_locations_descr">Aufzeichnung automatisch starten und Standorte nach dem Starten der Anwendung senden</string>
 	<string name="osmo_auto_send_locations">Aufzeichnung automatisch starten</string>
 	<string name="osmo_tracker_id">Persönliche Aufzeichnungs-ID</string>
-	<string name="osmo_tracker_id_descr">Zum Anzeigen oder Teilen der Aufzeichnungs-ID klicken.
+	<string name="osmo_tracker_id_descr">Zum Anzeigen oder Teilen der Aufzeichnungs-ID tippen.
 	Mit der Aufzeichnungs-ID verbundene Geräte können alle Bewegungen dieses Geräts aufzeigen! Zum Trennen der Verbindung die Regenerieren-Option auswählen.</string>
 	<string name="osmo_session_token">Sitzungstoken: %1$s</string>
 	<string name="osmo_auth_pending">Auf Autorisierung warten…</string>
@@ -1863,7 +1863,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_edit_device">Ändern der Nutzereinstellungen</string>
 	<string name="osmo_group_info">Info</string>
 	<string name="osmo_group">OsMo-Gruppe</string>
-	<string name="osmo_group_share">Um eine Verbindung zur Gruppe %2$s herzustellen, bitte die Gruppen-ID (%1$s) angeben oder (%3$s) anklicken.</string>
+	<string name="osmo_group_share">Um eine Verbindung zur Gruppe %2$s herzustellen, bitte die Gruppen-ID (%1$s) angeben oder (%3$s) antippen.</string>
 	<string name="osmo_share_connect_device">Diesem Gerät permanent folgen</string>
 	<string name="osmo_share_current_session">Aktuelle Sitzung im Browser teilen</string>
 	<string name="osmo_session_not_available">Sitzung nicht verfügbar, bitte überprüfen, ob \'Standort senden\'\ aktiviert ist.</string>
@@ -1877,7 +1877,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_group_policy">Richtlinie</string>
 	<string name="osmo_connect_to_group_id">Gruppen-ID</string>
 	<string name="osmo_group_name">Gruppen-Name</string>
-	<string name="osmo_connect_to_group">mit Gruppe verbinden</string>
+	<string name="osmo_connect_to_group">Mit Gruppe verbinden</string>
 	<string name="osmo_connect">Verbinden mit</string>
 	<string name="osmo_create_group">Gruppe erstellen</string>
 	<string name="osmo_server_operation_failed">OsMo-Server-Vorgang fehlgeschlagen</string>
@@ -1898,7 +1898,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_user_left">Nutzer %1$s hat die Gruppe %2$s verlassen</string>
 	<string name="osmo_show_group_notifications">Gruppenbenachrichtigungen anzeigen</string>
 	<string name="osmo_show_group_notifications_descr">Zeige Pop-up-Meldung, wenn eine Nutzer der Gruppe beitritt oder sie verlässt</string>
-	<string name="osmo_tracker_id_share">Um eine Verbindung zum Gerät %2$s herzustellen, bitte den Link %3$s anklicken oder die Tracker-ID (%1$s) angeben</string>
+	<string name="osmo_tracker_id_share">Um eine Verbindung zum Gerät %2$s herzustellen, bitte den Link %3$s antippen oder die Tracker-ID (%1$s) angeben</string>
 	<string name="osmo_auth_error_short">Anmeldung fehlgeschlagen</string>
 	<string name="osmo_auth_error">Fehler bei der OsMo-Anmeldung: %1$s.\n Möglicherweise ist der Dienst nicht verfügbar oder Ihre Anmeldung ist abgelaufen.\n Fortsetzen mit einer neuen Registrierung?</string>
 	<string name="osmo_group_by_invite">Auf Einladung beitreten</string>
@@ -1957,7 +1957,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="gpx_option_calculate_first_last_segment">Berechnen des ersten und letzten Abschnitts der OsmAnd-Route</string>
 <string name="download_additional_maps">Fehlende Karten herunterladen: %1$s (%2$d MB)?</string>
     <string name="more">Mehr...</string>
-    <string name="osmo_specify_tracker_id">bitte ID eingeben</string>
+    <string name="osmo_specify_tracker_id">Bitte ID eingeben</string>
     <string name="home">Ausgangsposition</string>
     <string name="rendering_attr_publicTransportMode_name">ÖPNV-Modus</string>
 	<string name="record_plugin_name">Zeichnen Sie Ihre Strecken auf</string>
@@ -1970,7 +1970,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
     <string name="record_plugin_description">Speichern Sie Ihre Tracks mit einem Klick. Zeigt die Einstellung, wie Strecken aufgezeichnet werden – in lokale GPX-Dateien oder online via Web-Service.</string>
-    <string name="route_descr_destination"></string>
+    <string name="route_descr_destination"/>
     <string name="local_index_description">Antippen eines Elements um mehr Details zu erfahren, Tippen und Halten zum Deaktivieren oder Löschen des Elements. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
     <string name="text_size">Schriftgröße</string>

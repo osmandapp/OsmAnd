@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
@@ -1767,4 +1767,15 @@
     <string name="traffic_warning_calming">Forgalomcsillapító</string>
     <string name="traffic_warning_speed_camera">Traffipax</string>
     <string name="traffic_warning">Forgalmi figyelmeztetés</string>
+	<string name="test_native_render">Natív renderelő tesztelése</string>
+    <string name="test_native_render_msg">Indítás natív renderelővel</string>
+    <string name="fav_point_dublicate">Kedevenc hely név duplikáció</string>
+    <string name="fav_point_dublicate_message">A duplikáció elkerülése érdekében módosítottuk a kedvenc hely nevét erre: %1$s.</string>
+    <string name="use_native_render">Natív renderelő használata</string>
+    <string name="use_native_render_descr">C++ renderelő használata Java helyett</string>
+    <string name="text_size_descr">Térképfeliratok méretének beállítása.</string>
+    <string name="text_size">Felirat méret</string>
+    <string name="more">Bővebben…</string>
+    <string name="route_descr_destination"/>
+    <string name="local_index_description">Egy meglévő elem adatainak megtekintéséhez kattints rá, a deaktiváláshoz és törléshez nyomd meg hosszan. Jelenlegi adatok az eszközön (%1$s szabad):</string>
 	</resources>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="fav_point_dublicate_message">O nome do punto favorito foi cambiado a %1$s para evitar os duplicados.</string>
+    <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>
+    <string name="text_size">Tamaño da letra</string>
+    <string name="traffic_warning_speed_limit">Límite de velocidade</string>
+    <string name="traffic_warning_border_control">Control fronteirizo</string>
+    <string name="traffic_warning_payment">Portaxe</string>
+    <string name="traffic_warning_stop">Sinal de stop</string>
+    <string name="traffic_warning_speed_camera">Radar</string>
+    <string name="speak_favorites">Anunciar os favoritos que haxa preto</string>
+	<string name="speak_poi">Anunciar os puntos de interese que haxa preto</string>
+	<string name="tip_navigation">Navegación</string>
+	<string name="tip_navigation_t">"Para obter direccións para un sitio, mantéñao premido no mapa (e a seguir escolla o seu marcador de descrición e seleccione «Direccións a» ou escolla «Direccións a» despois de tocar calquera entrada nunha lista de resultados de busca ou nunha lista de favoritos.\n\nO destino aparece marcado no mapa cunha bandeira de meta e o OsmAnd mostra a distancia a el e a dirección que leva a el (un triángulo laranxa).\n\nPódese escoller «Iniciar a navegación», o que significa que o Osmand vai guiar en tempo real, dar instrucións de voz (de estaren activadas), etc. Tamén se pode seleccionar «Mostrar a ruta», co que se ve unha ruta estática sen guía en tempo real ou outros axustes que acompañen o movemento.\n\nPara mostrar unha ruta ao destino seleccionado desde calquera punto diferente á posición actual, seleccione o punto de inicio no mapa e toque en «Direccións desde».\n\nCando se emprega «Direccións desde» xunto con «Iniciar a navegación», o OsmAnd pasa á posición real logo de atopala (isto pódese empregar para que se inicie o cálculo da ruta antes de atopar a posición), mentres que «Direccións desde», en combinación con «Mostrar a ruta» só mostra a ruta desde calquera punto arbitrario que se seleccionase, omitindo actualizacións posteriores. "</string>
+	<string name="tip_search">A buscar</string>
+	<string name="tip_search_t">"Pódense buscar sitios directamente no mapa con «Empregar o lugar» → «Buscar preto de aquí» ou chamando pola pantalla de busca mediante «Menú» → «Buscar».\n\nA pantalla de busca fornece modelos para buscar\n\t* polo enderezo\n\t* mediante coordenadas\n\t* como punto de interese (PDI, por tipo ou polo nome)\n\t* mediante o historial de buscas\n\t* ou mediante os favoritos predefinidos.\n\nCon todas as coincidencias hai un menú de contexto ou barra de accións que ofrece opcións tipo «Direccións a» ou «Mostrar no mapa», etc. "</string>
+	</resources>

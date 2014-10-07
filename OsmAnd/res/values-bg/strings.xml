@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_1_5_t">Промени в 1.5:
 	\n\t* Гласови предупреждения за пътни ограничения и камери
 	\n\t* Гласово обявяване имената на улиците
@@ -1747,4 +1747,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="traffic_warning_speed_camera">Камера за скорост</string>
     <string name="traffic_warning">Предупреждение за трафика</string>
 	<string name="hide_all_waypoints">Изтриване на всички</string>
-</resources>
+<string name="fav_point_dublicate">Дублиране името на запазено място</string>
+    <string name="fav_point_dublicate_message">Мястото беше запазено под името %1$s за избягване на дублирането в имената.</string>
+    <string name="use_native_render_descr">Използване на програма C++ вместо Java</string>
+    </resources>
