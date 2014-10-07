@@ -11,6 +11,11 @@
 		<net.osmand.plus.views.OsmandMapTileView android:id="@+id/MapView" android:layout_width="fill_parent"
 												 android:layout_height="fill_parent"
 												 android:contentDescription="@string/map_view"/>
+		<LinearLayout android:layout_gravity="bottom"
+					  android:orientation="horizontal"
+					  android:id="@+id/dialog_layout"
+					  android:layout_width="fill_parent"
+					  android:layout_height="wrap_content"/>
 
 	</FrameLayout>
 	<ListView android:id="@+id/left_drawer"
@@ -20,10 +25,5 @@
 			  android:choiceMode="singleChoice"
 			  android:divider="@drawable/divider"
 			  android:dividerHeight="1px"/>
-	<LinearLayout android:gravity="bottom"
-				  android:orientation="horizontal"
-				  android:id="@+id/dialog_layout"
-				  android:layout_width="wrap_content"
-				  android:layout_height="wrap_content"/>
 
 </android.support.v4.widget.DrawerLayout>
