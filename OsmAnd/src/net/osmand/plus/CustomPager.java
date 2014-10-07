@@ -1,6 +1,6 @@
 package net.osmand.plus;
 
-import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.OsmAndMapSurfaceView;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -18,7 +18,7 @@ public class CustomPager extends ViewPager {
 
 	@Override
 	protected boolean canScroll(View v, boolean checkV, int dx, int x, int y) {
-		if (v instanceof OsmandMapTileView) {
+		if (v instanceof OsmAndMapSurfaceView) {
 			return true;
 		}
 		return super.canScroll(v, checkV, dx, x, y);

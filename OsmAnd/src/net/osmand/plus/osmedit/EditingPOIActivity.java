@@ -94,12 +94,12 @@ public class EditingPOIActivity implements DialogProvider {
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 			this.openstreetmapUtil = new OpenstreetmapLocalUtil(ctx);
 			if (settings.isInternetConnectionAvailable(true)) {
-				this.openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(ctx, ctx.getMapView());
+				this.openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(ctx, ctx.getMapView().getView());
 			} else {
 				this.openstreetmapUtilToLoad = openstreetmapUtil;
 			}
 		} else {
-			this.openstreetmapUtil = new OpenstreetmapRemoteUtil(ctx, ctx.getMapView());
+			this.openstreetmapUtil = new OpenstreetmapRemoteUtil(ctx, ctx.getMapView().getView());
 			this.openstreetmapUtilToLoad= openstreetmapUtil;
 		}
 	}

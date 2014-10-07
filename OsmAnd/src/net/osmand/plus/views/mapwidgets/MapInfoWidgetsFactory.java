@@ -249,7 +249,7 @@ public class MapInfoWidgetsFactory {
 
 			private void blinkIcon() {
 				lockView.setBackgroundDrawable(lockDisabled);
-				view.postDelayed(new Runnable() {
+				view.getView().postDelayed(new Runnable() {
 					@Override
 					public void run() {
 						lockView.setBackgroundDrawable(lockEnabled);

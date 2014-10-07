@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <net.osmand.plus.views.OsmandMapTileView
+    <net.osmand.plus.views.OsmAndMapSurfaceView
         android:id="@+id/MapView"
         android:layout_width="fill_parent"
         android:layout_height="300dp"

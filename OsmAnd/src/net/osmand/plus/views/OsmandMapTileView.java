@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.view.*;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityActionsProvider;
 import net.osmand.access.AccessibleToast;
@@ -32,6 +31,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -43,14 +43,21 @@ import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
-import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.view.GestureDetector;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
-import android.view.SurfaceHolder.Callback;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.view.View;
+import android.view.ViewParent;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
-public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
+public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
 	private static final int MAP_FORCE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 5;
@@ -59,6 +66,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private boolean MEASURE_FPS = false;
 	private FPSMeasurement main = new FPSMeasurement();
 	private FPSMeasurement additional = new FPSMeasurement();
+	private View view;
 
 	private class FPSMeasurement {
 		int fpsMeasureCount = 0;
@@ -141,7 +149,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	private IMapRenderer mapRenderer;
 
-	private final OsmandApplication application;
+	private OsmandApplication application;
 
 	protected OsmandSettings settings = null;
 
@@ -162,21 +170,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 
 
-	public OsmandMapTileView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		application = (OsmandApplication) context.getApplicationContext();
-		initView();
 
-	}
-
-	public OsmandMapTileView(Context context) {
-		super(context);
-		application = (OsmandApplication) context.getApplicationContext();
-		initView();
-	}
 
 	// ///////////////////////////// INITIALIZING UI PART ///////////////////////////////////
-	public void initView() {
+	public void initView(View view) {
+		application = (OsmandApplication) view.getContext().getApplicationContext();
+		this.view = view;
 		paintGrayFill = new Paint();
 		paintGrayFill.setColor(Color.GRAY);
 		paintGrayFill.setStyle(Style.FILL);
@@ -205,46 +204,31 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		paintImg.setFilterBitmap(true);
 //		paintImg.setDither(true);
 
-		setClickable(true);
-		setLongClickable(true);
-		setFocusable(true);
+		view.setClickable(true);
+		view.setLongClickable(true);
+		view.setFocusable(true);
 
 
 		handler = new Handler();
 
 		baseHandler = new Handler(application.getResourceManager().getRenderingBufferImageThread().getLooper());
-		getHolder().addCallback(this);
+		
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
-		gestureDetector = new GestureDetector(getContext(), new MapExplorer(this, new MapTileViewOnGestureListener()));
-		multiTouchSupport = new MultiTouchSupport(getContext(), new MapTileViewMultiTouchZoomListener());
+		gestureDetector = new GestureDetector(view.getContext(), new MapExplorer(this, new MapTileViewOnGestureListener()));
+		multiTouchSupport = new MultiTouchSupport(view.getContext(), new MapTileViewMultiTouchZoomListener());
 		gestureDetector.setOnDoubleTapListener(new MapTileViewOnDoubleTapListener());
 
-		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+		WindowManager mgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
 		mgr.getDefaultDisplay().getMetrics(dm);
 		currentViewport = new RotatedTileBox.RotatedTileBoxBuilder().
-				setLocation(0, 0).setZoomAndScale(3, 0).setPixelDimensions(getWidth(), getHeight()).build();
+				setLocation(0, 0).setZoomAndScale(3, 0).setPixelDimensions(view.getWidth(), view.getHeight()).build();
 		currentViewport.setDensity(dm.density);
 
 	}
 
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-		refreshMap();
-	}
-
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
-		refreshMap();
-	}
-
-	@Override
-	public void surfaceDestroyed(SurfaceHolder holder) {
-	}
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		return application.accessibilityEnabled() ? false : super.onKeyDown(keyCode, event);
+	public Boolean onKeyDown(int keyCode, KeyEvent event) {
+		return application.accessibilityEnabled() ? false : null;
 	}
 
 	public boolean isLayerVisible(OsmandMapLayer layer) {
@@ -476,32 +460,33 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	private void refreshMapInternal(DrawSettings drawSettings) {
-		SurfaceHolder holder = getHolder();
-		long ms = SystemClock.elapsedRealtime();
-		synchronized (holder) {
-			Canvas canvas = holder.lockCanvas();
-			if (canvas != null) {
-				try {
-					final float ratioy = mapPosition == OsmandSettings.BOTTOM_CONSTANT ? 0.85f : 0.5f;
-					final int cy = (int) (ratioy * getHeight());
-					if (currentViewport.getPixWidth() != getWidth() || currentViewport.getPixHeight() != getHeight() ||
-							currentViewport.getCenterPixelY() != cy) {
-						currentViewport.setPixelDimensions(getWidth(), getHeight(), 0.5f, ratioy);
-						refreshBufferImage(drawSettings);
+		final float ratioy = mapPosition == OsmandSettings.BOTTOM_CONSTANT ? 0.85f : 0.5f;
+		final int cy = (int) (ratioy * view.getHeight());
+		if (currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
+				currentViewport.getCenterPixelY() != cy) {
+			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), 0.5f, ratioy);
+			refreshBufferImage(drawSettings);
+		}
+		if (view instanceof SurfaceView) {
+			SurfaceHolder holder = ((SurfaceView) view).getHolder();
+			long ms = SystemClock.elapsedRealtime();
+			synchronized (holder) {
+				Canvas canvas = holder.lockCanvas();
+				if (canvas != null) {
+					try {
+						// make copy to avoid concurrency
+						RotatedTileBox viewportToDraw = currentViewport.copy();
+						drawOverMap(canvas, viewportToDraw, drawSettings);
+					} finally {
+						holder.unlockCanvasAndPost(canvas);
 					}
-					// make copy to avoid concurrency 
-					RotatedTileBox viewportToDraw = currentViewport.copy();
-					if(mapRenderer != null) {
-						fillCanvas(canvas, drawSettings);
-					}
-					drawOverMap(canvas, viewportToDraw, drawSettings);
-				} finally {
-					holder.unlockCanvasAndPost(canvas);
+				}
+				if (MEASURE_FPS) {
+					main.calculateFPS(ms, SystemClock.elapsedRealtime());
 				}
 			}
-			if (MEASURE_FPS) {
-				main.calculateFPS(ms, SystemClock.elapsedRealtime());
-			}
+		} else {
+			view.invalidate();
 		}
 	}
 
@@ -530,10 +515,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return additional.fps;
 	}
 
-	private void drawOverMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+	public void drawOverMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+		if(mapRenderer == null) {
+			fillCanvas(canvas, drawSettings);
+		}
 		final QuadPoint c = tileBox.getCenterPixelPoint();
 		synchronized (this) {
-			if (bufferBitmap != null && !bufferBitmap.isRecycled()) {
+			if (bufferBitmap != null && !bufferBitmap.isRecycled() && mapRenderer == null) {
 				canvas.save();
 				canvas.rotate(tileBox.getRotate(), c.x, c.y);
 				drawBasemap(canvas);
@@ -548,6 +536,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				// rotate if needed
 				if (!layer.drawInScreenPixels()) {
 					canvas.rotate(tileBox.getRotate(), c.x, c.y);
+				}
+				if(mapRenderer != null) {
+					layer.onPrepareBufferImage(canvas, tileBox, drawSettings);
 				}
 				layer.onDraw(canvas, tileBox, drawSettings);
 				canvas.restore();
@@ -568,6 +559,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	private void refreshBufferImage(final DrawSettings drawSettings) {
+		if(mapRenderer != null) {
+			return;
+		}
 		if (!baseHandler.hasMessages(BASE_REFRESH_MESSAGE) || drawSettings.isUpdateVectorRendering()) {
 			Message msg = Message.obtain(baseHandler, new Runnable() {
 				@Override
@@ -601,7 +595,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	// this method could be called in non UI thread
 	public void refreshMap(final boolean updateVectorRendering) {
-		if (isShown()) {
+		if (view.isShown()) {
 			boolean nightMode = application.getDaynightHelper().isNightMode();
 			DrawSettings drawSettings = new DrawSettings(nightMode, updateVectorRendering);
 			sendRefreshMapMsg(drawSettings, 20);
@@ -723,7 +717,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	}
 
-	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		if (twoFingerTapDetector.onTouchEvent(event)) {
 			return true;
@@ -752,12 +745,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return mapRenderer;
 	}
 
-	@Override
-	public boolean onTrackballEvent(MotionEvent event) {
+	public Boolean onTrackballEvent(MotionEvent event) {
 		if (trackBallDelegate != null) {
-			trackBallDelegate.onTrackBallEvent(event);
+			return trackBallDelegate.onTrackBallEvent(event);
 		}
-		return super.onTrackballEvent(event);
+		return null;
 	}
 
 	public void setTrackBallDelegate(OnTrackBallListener trackBallDelegate) {
@@ -785,7 +777,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		handler.post(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+				AccessibleToast.makeText(view.getContext(), msg, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			}
 		});
 	}
@@ -815,7 +807,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			final int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {
 				if (newZoom != initialViewport.getZoom()) {
-					showMessage(getContext().getString(R.string.zoomIs) + " " + newZoom); //$NON-NLS-1$
+					showMessage(view.getContext().getString(R.string.zoomIs) + " " + newZoom); //$NON-NLS-1$
 				} else {
 					final LatLon p1 = initialViewport.getLatLonFromPixel(x1, y1);
 					final LatLon p2 = initialViewport.getLatLonFromPixel(x2, y2);
@@ -967,5 +959,29 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 
+
+	public Context getContext() {
+		return view.getContext();
+	}
+
+	public Resources getResources() {
+		return view.getResources();
+	}
+
+	public ViewParent getParent() {
+		return view.getParent();
+	}
+
+	public View getView() {
+		return view;
+	}
+
+	public int getHeight() {
+		return view.getHeight();
+	}
+
+	public float getWidth() {
+		return view.getWidth();
+	}
 
 }

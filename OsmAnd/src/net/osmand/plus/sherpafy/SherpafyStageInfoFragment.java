@@ -4,6 +4,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
+import net.osmand.plus.views.OsmAndMapSurfaceView;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.os.Bundle;
@@ -66,7 +67,8 @@ public class SherpafyStageInfoFragment extends SherlockFragment {
 		TextView additional = (TextView) view.findViewById(R.id.AdditionalText);
 		TextView text = (TextView) view.findViewById(R.id.Text);
 		TextView header = (TextView) view.findViewById(R.id.HeaderText);
-		osmandMapTileView = (OsmandMapTileView) view.findViewById(R.id.MapView);
+		OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) view.findViewById(R.id.MapView);
+		osmandMapTileView = surf.getMapView();
 		updateView(description, icon, additional, text, header);
 		return view;
 	}

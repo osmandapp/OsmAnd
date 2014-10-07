@@ -40,6 +40,8 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.OsmAndMapLayersView;
+import net.osmand.plus.views.OsmAndMapSurfaceView;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeQtLibrary;
@@ -135,7 +137,23 @@ public class MapActivity extends AccessibleActivity  {
 		app.checkApplicationIsBeingInitialized(this, startProgressDialog);
 		parseLaunchIntentLocation();
 		
-		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
+		if(settings.USE_NATIVE_RENDER.get() && NativeQtLibrary.isInit()) {
+			findViewById(R.id.MapView).setVisibility(View.GONE);
+			glSurfaceView = (GLSurfaceView) findViewById(R.id.glSurfaceView);
+			glSurfaceView.setVisibility(View.VISIBLE);
+			OsmAndMapLayersView ml = (OsmAndMapLayersView) findViewById(R.id.MapLayersView);
+			ml.setVisibility(View.VISIBLE);
+			NativeQtLibrary.initView(glSurfaceView);
+			mapView = ml.getMapView();
+			mapView.setMapRender(NativeQtLibrary.getMapRenderer());
+		} else {
+			findViewById(R.id.MapLayersView).setVisibility(View.GONE);
+			findViewById(R.id.glSurfaceView).setVisibility(View.GONE);
+			OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
+			surf.setVisibility(View.VISIBLE);
+			mapView = surf.getMapView();
+		}
+		
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener(){
 			@Override
 			public boolean onTrackBallEvent(MotionEvent e) {
@@ -149,12 +167,7 @@ public class MapActivity extends AccessibleActivity  {
 		}
 		mapViewTrackingUtilities.setMapView(mapView);
 		
-		if(settings.USE_NATIVE_RENDER.get() && NativeQtLibrary.isInit()) {
-			glSurfaceView = (GLSurfaceView) findViewById(R.id.glSurfaceView);
-			glSurfaceView.setVisibility(View.VISIBLE);
-			NativeQtLibrary.initView(glSurfaceView);
-			mapView.setMapRender(NativeQtLibrary.getMapRenderer());
-		}
+		
 
 		// Do some action on close
 		startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
