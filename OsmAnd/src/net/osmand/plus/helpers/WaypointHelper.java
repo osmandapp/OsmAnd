@@ -417,7 +417,7 @@ public class WaypointHelper {
 	}
 
 	public void clearAllVisiblePoints() {
-		this.locationPointsStates.clear();
+		//this.locationPointsStates.clear();
 		this.locationPoints = new ArrayList<List<LocationPointWrapper>>();
 	}
 
@@ -489,7 +489,7 @@ public class WaypointHelper {
 
 	protected synchronized void setLocationPoints(List<List<LocationPointWrapper>> locationPoints, RouteCalculationResult route) {
 		this.locationPoints = locationPoints;
-		this.locationPointsStates.clear();
+		//this.locationPointsStates.clear();
 		TIntArrayList list = new TIntArrayList(locationPoints.size());
 		list.fill(0, locationPoints.size(), 0);
 		this.pointsProgress = list;
