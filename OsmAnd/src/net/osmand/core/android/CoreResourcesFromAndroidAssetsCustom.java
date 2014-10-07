@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.osmand.core.jni.BoolPtr;
-import net.osmand.core.jni.ICoreResourcesProvider;
+import net.osmand.core.jni.interface_ICoreResourcesProvider;
 import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
 import net.osmand.core.jni.SWIGTYPE_p_bool;
 import net.osmand.core.jni.SwigUtilities;
@@ -27,7 +27,7 @@ import android.content.res.AssetManager;
 import android.util.Log;
 
 // This class provides reverse mapping from 'embed-resources.list' to files&folders scheme used by OsmAndCore_android.aar package
-public class CoreResourcesFromAndroidAssetsCustom extends ICoreResourcesProvider {
+public class CoreResourcesFromAndroidAssetsCustom extends interface_ICoreResourcesProvider {
     private static final String TAG = "CoreResourcesFromAndroidAssets";
     private static final String NATIVE_TAG = "CoreResourcesFromAndroidAssets";
 
