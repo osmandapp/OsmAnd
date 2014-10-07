@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -236,7 +236,7 @@
 <string name="osmand_rastermaps_plugin_description">Visa inställningar för att konfigurera en rad olika online-kartor eller cachade kartbitar som baskarta eller som överläggs-/underläggskartor. Dessa kartor kan också förberedas offline och kopieras till OsmAnd-mappen.</string>
 <string name="osmand_background_plugin_description">Visa inställningar för att aktivera spårning och navigering i viloläge (skärm av) genom att periodvis väcka GPS-enheten.</string>
 <string name="osmand_extra_settings_description">Visa inställningar för avancerad kartkonfiguration (som att öka kartdetaljer) och vissa enhetsspecifika inställningar.</string>
-<string name="osmand_development_plugin_description">Visa inställningar för utveckling och felsökning funktioner som animerade navigering eller rendering prestanda display.</string>
+<string name="osmand_development_plugin_description">Visa inställningar för utvecklings- och felsökningsfunktioner som ruttsimulering eller visning av renderingsprestanda.</string>
 <string name="plugins_screen">Plugin-hanterare</string>
 <string name="tip_recent_changes_0_8_2_t">"Förändringar i 0.8.2 :\n\t* Förbättrad ruttuträkning\n\t* Widgets för dynamisk karta\n\t* Kartinställningar flyttade till kartskärmen\n\t* Lås skärm knapp med logga tjänster\n\t* Fixat arabiska, Kannada skript och RTL språk "</string>
 
@@ -695,7 +695,7 @@
 	<string name="use_high_res_maps_descr">Sträck inte ut (och gör oskarpa) kartbitar på högupplösta skärmar</string>
 	<string name="download_files">Ladda ner</string>
 	<string name="context_menu_item_search_transport">Sök transport</string>
-	<string name="transport_searching_transport">Transportresultat (ingen destionation):</string>
+	<string name="transport_searching_transport">Transportresultat (ingen destination):</string>
 	<string name="transport_searching_route">Transportresultat ({0} till destinationen):</string>
 	<string name="transport_search_none">ingen</string>
 	<string name="transport_search_again">Återställ transportsökning</string>
@@ -1226,9 +1226,9 @@
     <string name="context_menu_item_destination_point">Ange som destination</string>
     
 	
-    <string name="speak_speed_limit">Meddela vid hastighetsbegränsningar</string>
-    <string name="speak_cameras">Meddela vid fartkameror</string>
-	<string name="speak_traffic_warnings">Meddela vid trafikvarningar</string>
+    <string name="speak_speed_limit">Meddela om hastighetsbegränsningar</string>
+    <string name="speak_cameras">Meddela om fartkameror</string>
+	<string name="speak_traffic_warnings">Meddela om trafikvarningar</string>
 	
 	
 	<string name="plugin_distance_point_hdop">noggrannhet</string>
@@ -1252,7 +1252,7 @@
     <string name="speak_title">Läs upp …</string>
 	<string name="speak_descr">Konfigurera för att läsa upp gatunamn, trafikvarningar (t.ex. fartbulor), varningar för fartkameror, hastighetsbegränsningar</string>
 	<string name="speak_street_names">Läs upp gatunamn (TTS)</string>
-    <string name="announce_gpx_waypoints">Meddela vid GPX-waypoints</string>
+    <string name="announce_gpx_waypoints">Meddela om GPX-waypoints</string>
     <string name="osmodroid_mode_on">Stoppa OsMoDroid</string>    
     <string name="osmodroid_mode_off">Starta OsMoDroid</string>
     <string name="map_widget_fps_info">FPS-avbuggningsinfo</string>
@@ -1449,7 +1449,7 @@
     <string name="osmo_settings_descr">Konfigurera inställningar för övervakning och ställ in personlig övervakningskanal</string>
     <string name="osmo_plugin_name">OSMo (Avancerad live-spårning)</string>
     <string name="osmo_settings">OpenStreetMap-övervakning</string>
-   	<string name="osmo_plugin_description">"OpenStreetMap- avancerad direktspårning, se http://osmo.mobi. Spåra andra enheter och bli spårad själv. Skapa anonyma grupper, dela ut varandras platser och kommunicera. Det finns olika inställningar för sessionsspårning eller permanent spårning. Anonyma grupper är begränsade till ett antal dagar och för vissa funktioner finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
+   	<string name="osmo_plugin_description">"OpenStreetMap - avancerad direktspårning, se http://osmo.mobi. Spåra andra enheter och bli spårad själv. Skapa anonyma grupper, dela ut varandras platser och kommunicera. Det finns olika inställningar för sessions- eller permanent spårning. Anonyma grupper är begränsade till ett antal dagar och för vissa funktioner finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
     <string name="interrupt_music_descr">Avbryt musik vid meddelanden</string>
 	<string name="interrupt_music">Avbryt musik</string>
 	<string name="share_route_as_gpx">Dela rutt som GPX-fil</string>
@@ -1557,7 +1557,7 @@
 	<string name="gpx_info_maximum_speed">Maxhastighet: %1$s </string>
 	<string name="gpx_info_avg_altitude">Snitthöjd: %1$s</string>
 	<string name="gpx_info_diff_altitude">Höjdskillnad: %1$s</string>
-	<string name="gpx_info_asc_altitude">Upp/Ner: %1$s</string>
+	<string name="gpx_info_asc_altitude">Ner/Upp: %1$s</string>
     <string name="gpx_timespan">Tidsspann: %1$s</string>
 	<string name="gpx_timemoving">Tid i rörelse: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
@@ -1655,7 +1655,7 @@
     <string name="osmo_specify_tracker_id">Ange id</string>
     <string name="rendering_attr_coloredBuildings_name">Färgade byggnader</string>
     <string name="arrival_distance_factor_early">Tidigt</string>
-    <string name="arrival_distance_factor_normally">Normal</string>
+    <string name="arrival_distance_factor_normally">Normalt</string>
     <string name="arrival_distance_factor_late">Sent</string>
     <string name="arrival_distance_factor_at_last">De sista metrarna</string>
     <string name="hide_all_waypoints">Ta bort alla</string>
@@ -1698,4 +1698,10 @@
     <string name="local_index_description">Peta på en post för att se fler detaljer, tryck och håll för att inaktivera eller ta bort. Data på enheten (%1$s ledigt):</string>
 	<string name="text_size_descr">Ange textstorlek på kartan.</string>
     <string name="text_size">Textstorlek</string>
+    <string name="test_native_render">Testa inbyggd rendering</string>
+    <string name="test_native_render_msg">Startar aktivitet med inbyggd rendering</string>
+    <string name="fav_point_dublicate">Duplicerat namn på favoritpunkt</string>
+    <string name="fav_point_dublicate_message">Namnet på din favoritpunkt %1$s ändrades för att undvika duplicerade namn.</string>
+    <string name="use_native_render">Använd inbyggd rendering</string>
+    <string name="use_native_render_descr">Använd C++rendering i stället för Java</string>
     </resources>
