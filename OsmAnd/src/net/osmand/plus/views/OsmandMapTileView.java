@@ -11,6 +11,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityActionsProvider;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapExplorer;
+import net.osmand.core.jni.IMapRenderer;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
@@ -26,7 +27,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.controllers.JavaViewController;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -81,6 +81,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	protected static final int emptyTileDivisor = 16;
 
+
+	public interface OnTrackBallListener {
+		public boolean onTrackBallEvent(MotionEvent e);
+	}
+
 	public interface OnLongClickListener {
 		public boolean onLongPressEvent(PointF point);
 	}
@@ -106,7 +111,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	private OnClickListener onClickListener;
 
-	private JavaViewController.OnTrackBallListener trackBallDelegate;
+	private OnTrackBallListener trackBallDelegate;
 
 	private AccessibilityActionsProvider accessibilityActions;
 
@@ -133,6 +138,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	Paint paintCenter;
 
 	private DisplayMetrics dm;
+	
+	private IMapRenderer mapRenderer;
 
 	private final OsmandApplication application;
 
@@ -152,6 +159,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			getAnimatedDraggingThread().startZooming(getZoom()-1,true);
 		}
 	};
+	
 
 
 	public OsmandMapTileView(Context context, AttributeSet attrs) {
@@ -733,6 +741,14 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 		return true;
 	}
+	
+	public void setMapRender(IMapRenderer mapRenderer) {
+		this.mapRenderer = mapRenderer;
+	}
+	
+	public IMapRenderer getMapRenderer() {
+		return mapRenderer;
+	}
 
 	@Override
 	public boolean onTrackballEvent(MotionEvent event) {
@@ -742,7 +758,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return super.onTrackballEvent(event);
 	}
 
-	public void setTrackBallDelegate(JavaViewController.OnTrackBallListener trackBallDelegate) {
+	public void setTrackBallDelegate(OnTrackBallListener trackBallDelegate) {
 		this.trackBallDelegate = trackBallDelegate;
 	}
 

@@ -1,5 +1,7 @@
 package net.osmand.plus.render;
 
+import net.osmand.core.jni.IMapRenderer;
+import net.osmand.core.jni.PointI;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.resources.ResourceManager;
@@ -87,19 +89,27 @@ public class MapVectorLayer extends BaseMapLayer {
 			tileLayer.drawTileMap(canvas, tilesRect);
 			resourceManager.getRenderer().interruptLoadingMap();
 		} else {
-			if (!view.isZooming()) {
-				if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings)) {
-					// pixRect.set(-view.getWidth(), -view.getHeight() / 2, 2 * view.getWidth(), 3 * view.getHeight() / 2);
-					final RotatedTileBox copy = tilesRect.copy();
-					copy.increasePixelDimensions(copy.getPixWidth() / 3, copy.getPixHeight() / 4);
-					resourceManager.updateRendererMap(copy);
+			final IMapRenderer mapRenderer = view.getMapRenderer();
+			if (mapRenderer != null) {
+				// opengl renderer
+				mapRenderer.setTarget(new PointI(tilesRect.getCenter31X(), tilesRect.getCenter31Y()));
+				mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect.getZoomScale() + tilesRect.getZoomAnimation()));
+			} else {
+				if (!view.isZooming()) {
+					if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings)) {
+						// pixRect.set(-view.getWidth(), -view.getHeight() / 2, 2 * view.getWidth(), 3 *
+						// view.getHeight() / 2);
+						final RotatedTileBox copy = tilesRect.copy();
+						copy.increasePixelDimensions(copy.getPixWidth() / 3, copy.getPixHeight() / 4);
+						resourceManager.updateRendererMap(copy);
+					}
+
 				}
 
+				MapRenderRepositories renderer = resourceManager.getRenderer();
+				drawRenderedMap(canvas, renderer.getBitmap(), renderer.getBitmapLocation(), tilesRect);
+				drawRenderedMap(canvas, renderer.getPrevBitmap(), renderer.getPrevBmpLocation(), tilesRect);
 			}
-
-			MapRenderRepositories renderer = resourceManager.getRenderer();
-			drawRenderedMap(canvas, renderer.getBitmap(), renderer.getBitmapLocation(), tilesRect);
-			drawRenderedMap(canvas, renderer.getPrevBitmap(), renderer.getPrevBmpLocation(), tilesRect);
 		}
 	}
 

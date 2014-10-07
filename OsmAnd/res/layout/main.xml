@@ -8,6 +8,11 @@
 				 android:orientation="vertical"
 				 android:layout_width="fill_parent"
 				 android:layout_height="fill_parent" android:keepScreenOn="true" android:clipChildren="false">
+		<android.opengl.GLSurfaceView
+        		android:id="@+id/glSurfaceView"
+        		android:visibility="gone"
+        		android:layout_width="match_parent"
+        		android:layout_height="match_parent" />
 		<net.osmand.plus.views.OsmandMapTileView android:id="@+id/MapView" android:layout_width="fill_parent"
 												 android:layout_height="fill_parent"
 												 android:contentDescription="@string/map_view"/>

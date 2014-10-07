@@ -12,19 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import android.os.*;
-import android.view.View;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.access.AccessibilityMode;
-import net.osmand.plus.activities.*;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadIndexFragment;
+import net.osmand.plus.activities.DayNightHelper;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -32,6 +32,7 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.sherpafy.SherpafyCustomization;
+import net.osmand.plus.views.corenative.NativeQtLibrary;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;
@@ -56,8 +57,13 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.text.format.DateFormat;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -541,6 +547,19 @@ public class OsmandApplication extends Application {
 			}
 			
 			if (!"qnx".equals(System.getProperty("os.name"))) {
+				if (osmandSettings.USE_NATIVE_RENDER.get()) {
+					if (!osmandSettings.CPP_RENDER_FAILED.get()) {
+						osmandSettings.CPP_RENDER_FAILED.set(true);
+						boolean success = NativeQtLibrary.tryCatchInit(this);
+						if (success) {
+							osmandSettings.CPP_RENDER_FAILED.set(false);
+						}
+					} else {
+						// try next time once again ?
+						osmandSettings.CPP_RENDER_FAILED.set(false);
+						warnings.add("Native OpenGL library is not supported. Please try again after exit");
+					}
+				}
 				if (osmandSettings.NATIVE_RENDERING_FAILED.get()) {
 					osmandSettings.SAFE_MODE.set(true);
 					osmandSettings.NATIVE_RENDERING_FAILED.set(false);
