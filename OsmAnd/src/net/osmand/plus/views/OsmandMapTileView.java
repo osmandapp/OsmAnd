@@ -491,7 +491,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					}
 					// make copy to avoid concurrency 
 					RotatedTileBox viewportToDraw = currentViewport.copy();
-					fillCanvas(canvas, drawSettings);
+					if(mapRenderer != null) {
+						fillCanvas(canvas, drawSettings);
+					}
 					drawOverMap(canvas, viewportToDraw, drawSettings);
 				} finally {
 					holder.unlockCanvasAndPost(canvas);

@@ -93,6 +93,7 @@ public class MapVectorLayer extends BaseMapLayer {
 			if (mapRenderer != null) {
 				// opengl renderer
 				mapRenderer.setTarget(new PointI(tilesRect.getCenter31X(), tilesRect.getCenter31Y()));
+				mapRenderer.setAzimuth(tilesRect.getRotate());
 				mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect.getZoomScale() + tilesRect.getZoomAnimation()));
 			} else {
 				if (!view.isZooming()) {
