@@ -167,7 +167,7 @@ public class GLActivity extends Activity {
 
         Log.i(TAG, "Initializing core...");
         _coreResources = CoreResourcesFromAndroidAssetsCustom.loadFromCurrentApplication(this);
-        OsmAndCore.InitializeCore(_coreResources);
+        OsmAndCore.InitializeCore(_coreResources.instantiateProxy());
 
 		File directory =getApp().getAppPath("");
         _fileLogSink = QIODeviceLogSink.createFileLogSink(directory.getAbsolutePath() + "/osmandcore.log");
