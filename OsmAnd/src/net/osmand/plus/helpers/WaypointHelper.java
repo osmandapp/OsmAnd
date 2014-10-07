@@ -59,6 +59,8 @@ public class WaypointHelper {
 	
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<List<LocationPointWrapper>>();
 	private ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<LocationPoint, Integer>();
+	private List<LocationPointWrapper> alreadyAnnouncedPoints = new ArrayList<LocationPointWrapper>();
+	private List<LocationPointWrapper> alreadyApproachedPoints = new ArrayList<LocationPointWrapper>();
 	private TIntArrayList pointsProgress = new TIntArrayList();
 	private RouteCalculationResult route;
 	
@@ -319,15 +321,24 @@ public class WaypointHelper {
 						if (state != null && state.intValue() == ANNOUNCED_ONCE
 								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS)) {
 							locationPointsStates.put(point, ANNOUNCED_DONE);
-							announcePoints.add(lwp);
+							if (!alreadyAnnouncedPoints.contains(lwp)){
+								announcePoints.add(lwp);
+								alreadyAnnouncedPoints.add(lwp);
+							}
 						} else if (type != ALARMS && (state == null || state == NOT_ANNOUNCED)
 								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS)) {
 							locationPointsStates.put(point, ANNOUNCED_ONCE);
-							approachPoints.add(lwp);
+							if (!alreadyApproachedPoints.contains(lwp)){
+								approachPoints.add(lwp);
+								alreadyApproachedPoints.add(lwp);
+							}
 						} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)
 								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, ALARMS_ANNOUNCE_RADIUS)) {
 							locationPointsStates.put(point, ANNOUNCED_ONCE);
-							approachPoints.add(lwp);
+							if (!alreadyApproachedPoints.contains(lwp)){
+								approachPoints.add(lwp);
+								alreadyApproachedPoints.add(lwp);
+							}
 						}
 						kIterator++;
 					}
