@@ -1705,4 +1705,5 @@
     <string name="use_native_render">Använd inbyggd rendering</string>
     <string name="use_native_render_descr">Använd C++rendering i stället för Java</string>
     <string name="print_route">Skriv ut rutt</string>
+    <string name="fav_point_emoticons_message">Vi ändrade namnet på din favoritpunkt till %1$s eftersom man inte kan ha en smiley i filnamn.</string>
     </resources>
