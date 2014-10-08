@@ -1,14 +1,17 @@
 /**
- * 
+ *
  */
 
 package net.osmand.plus.activities;
 
 
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
-import android.content.Intent;
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -21,7 +24,11 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.util.Algorithms;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,13 +42,14 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
 /**
- * 
+ *
  */
 public class ShowRouteInfoActivity extends OsmandListActivity {
 
 
 	private static final int SAVE = 0;
 	private static final int SHARE = 1;
+	private static final int PRINT = 2;
 	private RoutingHelper helper;
 	private TextView header;
 	private DisplayMetrics dm;
@@ -57,9 +65,9 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 		setContentView(lv);
 		dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		
+
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == SAVE) {
@@ -67,7 +75,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			return true;
 		}
         if (item.getItemId() == SHARE) {
-              final GPXFile gpx = getMyApplication().getRoutingHelper().generateGPXFileWithRoute();
+              final GPXFile gpx = helper.generateGPXFileWithRoute();
 
               final Intent sendIntent = new Intent();
               sendIntent.setAction(Intent.ACTION_SEND);
@@ -77,11 +85,15 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
               startActivity(sendIntent);
             return true;
         }
+        if (item.getItemId() == PRINT) {
+        	print();
+          return true;
+      }
 
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
+
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -91,7 +103,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			// large screen
 			header.setTextSize(dm.scaledDensity * 23);
 		}
-		setListAdapter(new RouteInfoAdapter(((OsmandApplication)getApplication()).getRoutingHelper().getRouteDirections()));
+		setListAdapter(new RouteInfoAdapter(helper.getRouteDirections()));
 	}
 
 	@Override
@@ -106,14 +118,17 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			MapRouteInfoControl.directionInfo = position - 1;
 			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 			settings.setMapLocationToShow(loc.getLatitude(),loc.getLongitude(),
-					Math.max(13, settings.getLastKnownMapZoom()), null, item.getDescriptionRoute(((OsmandApplication) getApplication())) + " " + getTimeDescription(item), null);
+					Math.max(13, settings.getLastKnownMapZoom()), null, item.getDescriptionRoutePart() + " " + getTimeDescription(item), null);
 			MapActivity.launchMapActivityMoveToTop(this);
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		createMenuItem(menu, SAVE, R.string.save_route_as_gpx, 
+		createMenuItem(menu, PRINT, R.string.print_route,
+				R.drawable.ic_action_gprint_light, R.drawable.ic_action_gprint_dark,
+				MenuItem.SHOW_AS_ACTION_ALWAYS);
+		createMenuItem(menu, SAVE, R.string.save_route_as_gpx,
 				R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
 				MenuItem.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, SHARE, R.string.share_route_as_gpx,
@@ -123,6 +138,16 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 	}
 
 	class RouteInfoAdapter extends ArrayAdapter<RouteDirectionInfo> {
+		public class CumulativeInfo {
+			public int distance;
+			public int time;
+
+			public CumulativeInfo() {
+				distance = 0;
+				time = 0;
+			}
+		}
+
 		RouteInfoAdapter(List<RouteDirectionInfo> list) {
 			super(ShowRouteInfoActivity.this, R.layout.route_info_list_item, list);
 			this.setNotifyOnChange(false);
@@ -140,25 +165,155 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			TextView label = (TextView) row.findViewById(R.id.description);
 			TextView distanceLabel = (TextView) row.findViewById(R.id.distance);
 			TextView timeLabel = (TextView) row.findViewById(R.id.time);
+			TextView cumulativeDistanceLabel = (TextView) row.findViewById(R.id.cumulative_distance);
+			TextView cumulativeTimeLabel = (TextView) row.findViewById(R.id.cumulative_time);
 			ImageView icon = (ImageView) row.findViewById(R.id.direction);
-			
+
 			TurnPathHelper.RouteDrawable drawable = new TurnPathHelper.RouteDrawable(getResources());
 			drawable.setRouteType(model.getTurnType());
 			icon.setImageDrawable(drawable);
-			
-			
-			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, getMyApplication()));
-			label.setText(model.getDescriptionRoute(((OsmandApplication) getApplication())));
-			String timeText = getTimeDescription(model);
-			timeLabel.setText(timeText);
+
+			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(
+					model.distance, getMyApplication()));
+			timeLabel.setText(getTimeDescription(model));
+			label.setText(model.getDescriptionRoutePart());
+			CumulativeInfo cumulativeInfo = getRouteDirectionCumulativeInfo(position);
+			cumulativeDistanceLabel.setText(OsmAndFormatter.getFormattedDistance(
+					cumulativeInfo.distance, getMyApplication()));
+			cumulativeTimeLabel.setText(Algorithms.formatDuration(cumulativeInfo.time));
 			return row;
 		}
 
-
+		public CumulativeInfo getRouteDirectionCumulativeInfo(int position) {
+			CumulativeInfo cumulativeInfo = new CumulativeInfo();
+			for (int i = 0; i < position; i++) {
+				RouteDirectionInfo routeDirectionInfo = (RouteDirectionInfo) getItem(i);
+				cumulativeInfo.time += routeDirectionInfo.getExpectedTime();
+				cumulativeInfo.distance += routeDirectionInfo.distance;
+			}
+			return cumulativeInfo;
+		}
 	}
+
 	private String getTimeDescription(RouteDirectionInfo model) {
 		final int timeInSeconds = model.getExpectedTime();
 		return Algorithms.formatDuration(timeInSeconds);
 	}
+
+	void print() {
+		File file = generateRouteInfoHtml((RouteInfoAdapter)getListAdapter(),
+				helper.getGeneralRouteInformation());
+		if (file.exists()) {
+			Uri uri = Uri.fromFile(file);
+			Intent browserIntent;
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { // use Android Print Framework
+				browserIntent = new Intent(this, PrintDialogActivity.class)
+						.setDataAndType(uri, "text/html");
+			} else { // just open html document
+				browserIntent = new Intent(Intent.ACTION_VIEW).setDataAndType(
+						uri, "text/html");
+			}
+			startActivity(browserIntent);
+		}
+	}
+
+	private File generateRouteInfoHtml(RouteInfoAdapter routeInfo, String title) {
+		File file = null;
+		if (routeInfo == null) {
+			return file;
+		}
+
+		final String FILE_NAME = "route_info.html";
+		StringBuilder html = new StringBuilder();
+		html.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
+		html.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\">");
+		html.append("<head>");
+		html.append("<title>Route info</title>");
+		html.append("<meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\" />");
+		html.append("<style>");
+		html.append("table, th, td {");
+		html.append("border: 1px solid black;");
+		html.append("border-collapse: collapse;}");
+		html.append("th, td {");
+		html.append("padding: 5px;}");
+		html.append("</style>");
+		html.append("</head>");
+		html.append("<body>");
+
+		FileOutputStream fos = null;
+		try {
+			if (!TextUtils.isEmpty(title)) {
+				html.append("<h1>");
+				html.append(title);
+				html.append("</h1>");
+			}
+			html.append("<table style=\"width:100%\">");
+			final String NBSP = "&nbsp;";
+			final String BR = "<br>";
+			for (int i = 0; i < routeInfo.getCount(); i++) {
+				RouteDirectionInfo routeDirectionInfo = (RouteDirectionInfo) routeInfo
+						.getItem(i);
+				html.append("<tr>");
+				StringBuilder sb = new StringBuilder();
+				sb.append(OsmAndFormatter.getFormattedDistance(
+						routeDirectionInfo.distance, getMyApplication()));
+				sb.append(", ");
+				sb.append(getTimeDescription(routeDirectionInfo));
+				String distance = sb.toString().replaceAll("\\s", NBSP);
+				html.append("<td>");
+				html.append(distance);
+				html.append("</td>");
+				String description = routeDirectionInfo
+						.getDescriptionRoutePart();
+				html.append("<td>");
+				html.append(description);
+				html.append("</td>");
+				RouteInfoAdapter.CumulativeInfo cumulativeInfo = routeInfo
+						.getRouteDirectionCumulativeInfo(i);
+				html.append("<td>");
+				sb = new StringBuilder();
+				sb.append(OsmAndFormatter.getFormattedDistance(
+						cumulativeInfo.distance, getMyApplication()));
+				sb.append(" - ");
+				sb.append(OsmAndFormatter.getFormattedDistance(
+						cumulativeInfo.distance + routeDirectionInfo.distance,
+						getMyApplication()));
+				sb.append(BR);
+				sb.append(Algorithms.formatDuration(cumulativeInfo.time));
+				sb.append(" - ");
+				sb.append(Algorithms.formatDuration(cumulativeInfo.time
+						+ routeDirectionInfo.getExpectedTime()));
+				String cumulativeTimeAndDistance = sb.toString().replaceAll("\\s", NBSP);
+				html.append(cumulativeTimeAndDistance);
+				html.append("</td>");
+				html.append("</tr>");
+			}
+			html.append("</table>");
+			html.append("</body>");
+			html.append("</html>");
+
+			file = new File(((OsmandApplication) getApplication())
+					.getAppCustomization().getExternalStorageDir(),
+					IndexConstants.APP_DIR + FILE_NAME);
+			fos = new FileOutputStream(file);
+			fos.write(html.toString().getBytes("UTF-8"));
+			fos.flush();
+		} catch (IOException e) {
+			file = null;
+			e.printStackTrace();
+		} finally {
+			if (fos != null) {
+				try {
+					fos.close();
+				} catch (Exception e) {
+					file = null;
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return file;
+	}
+
 }
 

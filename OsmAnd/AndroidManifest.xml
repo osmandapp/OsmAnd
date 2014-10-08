@@ -234,5 +234,6 @@
 		</service>
 
 		<receiver android:name="net.osmand.plus.OnNavigationServiceAlarmReceiver" />
+		<activity android:name="net.osmand.plus.activities.PrintDialogActivity" />
 </application>
 </manifest> 
