@@ -3,6 +3,11 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.pm.ActivityInfo;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Surface;
+import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -82,13 +87,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 		int rightGravity = Gravity.RIGHT | Gravity.BOTTOM;
 		int leftGravity = Gravity.LEFT | Gravity.BOTTOM;
 		int rightCenterGravity = Gravity.RIGHT | Gravity.CENTER;
+		int leftCenterGravity = Gravity.LEFT | Gravity.CENTER;
 		
 		// default buttons
 		zoomControls = init(new MapZoomControls(mapActivity, showUIHandler, scaleCoefficient), parent,
 				rightGravity);
-		zoomSideControls = init(new MapZoomControls(mapActivity, showUIHandler, scaleCoefficient), parent,
-				rightCenterGravity);
-		mapMenuControls = init(new MapMenuControls(mapActivity, showUIHandler, scaleCoefficient), parent, 
+		if (getScreenOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT){
+			zoomSideControls = init(new MapZoomControls(mapActivity, showUIHandler, scaleCoefficient), parent,
+					rightCenterGravity);
+		} else {
+			zoomSideControls = init(new MapZoomControls(mapActivity, showUIHandler, scaleCoefficient), parent,
+					leftCenterGravity);
+		}
+		mapMenuControls = init(new MapMenuControls(mapActivity, showUIHandler, scaleCoefficient), parent,
 				leftGravity);
 		mapRoutePlanControl = init(new MapRoutePlanControl(mapActivity, showUIHandler, scaleCoefficient), parent,
 				leftGravity);
@@ -184,7 +195,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		
 		// the last one to check other controls visibility
 		int vmargin = mapNavigationControl.isVisible() || zoomControls.isVisible() ?
-				(zoomControls.getHeight() + zoomControls.getTotalVerticalMargin()): 0;
+				(zoomControls.getHeight() + zoomControls.getTotalVerticalMargin()) : 0;
 		rulerControl.setVerticalMargin(vmargin);
 		checkVisibilityAndDraw(true, rulerControl, canvas, tileBox, nightMode);
 	}
@@ -328,5 +339,68 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public WaypointDialogHelper getWaypointDialogHelper() {
 		return waypointDialogHelper;
+	}
+
+	private int getScreenOrientation() {
+		int rotation = mapActivity.getWindowManager().getDefaultDisplay().getRotation();
+		DisplayMetrics dm = new DisplayMetrics();
+		mapActivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		int width = dm.widthPixels;
+		int height = dm.heightPixels;
+		int orientation;
+		// if the device's natural orientation is portrait:
+		if ((rotation == Surface.ROTATION_0
+				|| rotation == Surface.ROTATION_180) && height > width ||
+				(rotation == Surface.ROTATION_90
+						|| rotation == Surface.ROTATION_270) && width > height) {
+			switch(rotation) {
+				case Surface.ROTATION_0:
+					orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+					break;
+				case Surface.ROTATION_90:
+					orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+					break;
+				case Surface.ROTATION_180:
+					orientation =
+							ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+					break;
+				case Surface.ROTATION_270:
+					orientation =
+							ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
+					break;
+				default:
+					Log.e(PlatformUtil.TAG, "Unknown screen orientation. Defaulting to " +
+							"portrait.");
+					orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+					break;
+			}
+		}
+		// if the device's natural orientation is landscape or if the device
+		// is square:
+		else {
+			switch(rotation) {
+				case Surface.ROTATION_0:
+					orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+					break;
+				case Surface.ROTATION_90:
+					orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+					break;
+				case Surface.ROTATION_180:
+					orientation =
+							ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
+					break;
+				case Surface.ROTATION_270:
+					orientation =
+							ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+					break;
+				default:
+					Log.e(PlatformUtil.TAG, "Unknown screen orientation. Defaulting to " +
+							"landscape.");
+					orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+					break;
+			}
+		}
+
+		return orientation;
 	}
 }

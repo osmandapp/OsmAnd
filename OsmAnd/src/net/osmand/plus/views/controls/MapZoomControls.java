@@ -1,5 +1,6 @@
 package net.osmand.plus.views.controls;
 
+import android.view.Gravity;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class MapZoomControls extends MapControls {
 		if(isBottom()) {
 			zoomOutButton = addButton(parent, R.string.zoomOut, R.drawable.map_zoom_out, minimumWidth);
 		} else {
-			vmargin = minimumHeight;
+			vmargin = minimumHeight - (minimumHeight / 6);
 			zoomOutButton = addButton(parent, R.string.zoomOut, R.drawable.map_zoom_out);
 		}
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
