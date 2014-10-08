@@ -728,7 +728,7 @@ public class ResourceManager {
 					LatLon l = a.getLocation();
 					if (l != null && l.getLatitude() <= topLatitude && l.getLatitude() >= bottomLatitude
 							&& l.getLongitude() >= leftLongitude && l.getLongitude() <= rightLongitude) {
-						if (matcher.publish(a)) {
+						if (matcher == null || matcher.publish(a)) {
 							amenities.add(a);
 						}
 					}
@@ -743,16 +743,18 @@ public class ResourceManager {
 								new ResultMatcher<Amenity>() {
 
 									@Override
-									public boolean publish(Amenity object) {
-										if (checkNameFilter(object, filterByName)) {
-											return matcher.publish(object);
+									public boolean publish(Amenity a) {
+										if (checkNameFilter(a, filterByName)) {
+											if (matcher == null || matcher.publish(a)) {
+												amenities.add(a);
+											}
 										}
 										return false;
 									}
 
 									@Override
 									public boolean isCancelled() {
-										return matcher.isCancelled();
+										return matcher != null && matcher.isCancelled();
 									}
 								});
 					}
