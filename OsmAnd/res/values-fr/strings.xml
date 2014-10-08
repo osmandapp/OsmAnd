@@ -1319,7 +1319,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="plugin_distance_point_speed">vitesse</string>
     <string name="plugin_distance_point_ele">altitude</string>
     <string name="gpx_file_name">nom du fichier GPX</string>
-    <string name="gpx_saved_sucessfully">Sauvegarde du fichier GPX à {0} réussie</string>
+    <string name="gpx_saved_sucessfully">La sauvegarde du fichier GPX {0} a réussie.</string>
     <string name="osmand_distance_planning_plugin_description">Ce greffon permet de créer un chemin (ou d\'ouvrir et modifier un fichier GPX existant) pour mesurer la distance entre des points, et de le sauvegarder au format GPX. Peut être utilisé pour préparer un itinéraire GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Mesure de distance et outil de planification</string>
     <string name="default_buttons_do_not_show_again">Ne plus montrer</string>
@@ -1384,7 +1384,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="context_menu_item_directions_from">Partir depuis le point</string>
     <string name="route_descr_map_location">Carte : </string>
     <string name="map_widget_fps_info">Informations de débogage du rendu</string>
-	<string name="route_to">A :</string>
+	<string name="route_to">À :</string>
     <string name="route_via">Via :</string>
     <string name="route_from">De :</string>
 	
