@@ -173,6 +173,8 @@ public class FavouritesDbHelper {
 		String index = "";
 		int number = 0;
 		String name = checkEmoticons(p.getName());
+		String category = checkEmoticons(p.getCategory());
+		p.setCategory(category);
 		if (name.length() != p.getName().length()){
 			emoticons = true;
 		}
@@ -202,7 +204,7 @@ public class FavouritesDbHelper {
 		}
 	}
 
-	private String checkEmoticons(String name){
+	public String checkEmoticons(String name){
 		char[] chars = name.toCharArray();
 		int index;
 		char ch1;
