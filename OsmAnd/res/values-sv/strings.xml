@@ -1704,4 +1704,5 @@
     <string name="fav_point_dublicate_message">Namnet på din favoritpunkt %1$s ändrades för att undvika duplicerade namn.</string>
     <string name="use_native_render">Använd inbyggd rendering</string>
     <string name="use_native_render_descr">Använd C++rendering i stället för Java</string>
+    <string name="print_route">Skriv ut rutt</string>
     </resources>
