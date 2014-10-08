@@ -1837,5 +1837,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_native_render">Utiliser le moteur de rendu natif</string>
     <string name="use_native_render_descr">Utiliser le moteur de rendu C++ au lieu de Java</string>
     <string name="print_route">Imprimer la route</string>
-    <string name="fav_point_emoticons_message">Le nom de votre favoris sera %1$s car il n\'est pas possible d\'utiliser les emoticons.</string>
+    <string name="fav_point_emoticons_message">Le nom de votre favoris sera %1$s car il n\'est pas possible d\'utiliser les émoticônes.</string>
     </resources>
