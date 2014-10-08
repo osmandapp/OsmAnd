@@ -1743,4 +1743,5 @@ s často kladenými otázkami.</string>
     <string name="use_native_render">Použít nativní vykreslování</string>
     <string name="use_native_render_descr">Použít C++ vykreslování místo Javy</string>
     <string name="print_route">Vytisknout trasu</string>
+    <string name="fav_point_emoticons_message">Změnili jsme jméno vašeho oblíbeného bodu na %1$s, protože není možné ukládat do souboru řetězce s emotikony.</string>
     </resources>
