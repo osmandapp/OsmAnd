@@ -1996,4 +1996,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="use_native_render">Brug indbygget optegning</string>
     <string name="use_native_render_descr">Brug C++ optegning i stedet for Java</string>
     <string name="print_route">Udskriv ruten</string>
+    <string name="fav_point_emoticons_message">Favoritnavn er ændret til %1$ s, fordi det ikke er muligt at gemme favoritnavne med humørikoner.</string>
     </resources>
