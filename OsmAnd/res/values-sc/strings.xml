@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1748,4 +1748,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="test_native_render_msg">Cumintza atividade cun sa renderizatzione nativa</string>
     <string name="use_native_render">Imprea sa renderizatzione nativa</string>
     <string name="use_native_render_descr">Imprea sa renderizatzione C++ imbetzes de Java</string>
+    <string name="print_route">Imprenta àndala</string>
     </resources>
