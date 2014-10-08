@@ -144,7 +144,7 @@
   <string name="search_position_current_location_search">Recherche de la position…</string>
   <string name="search_position_current_location_found">Emplacement[Trouvé]</string>
   <string name="search_position_address">Adresse…</string>
-  <string name="search_position_favorites">Favori…</string>
+  <string name="search_position_favorites">Favoris…</string>
   <string name="search_position_undefined">Non défini</string>
   <string name="search_position_fixed">Fixé</string>
   <string name="search_position_current_location">Position actuelle…</string>
@@ -714,7 +714,7 @@
   <string name="add_favorite_dialog_top_text">Nom du favori</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoris</string>
   <string name="add_favorite_dialog_favourite_added_template">Le point \'\'{0}\'\' à été ajouté aux favoris.</string>
-  <string name="favourites_context_menu_edit">Éditer le favori</string>
+  <string name="favourites_context_menu_edit">Modifier le favori</string>
   <string name="favourites_context_menu_delete">Supprimer le favori</string>
   <string name="favourites_remove_dialog_msg">Voulez-vous vraiment supprimer le favori \'%s\' ?</string>
   <string name="favourites_remove_dialog_success">Suppression du favori \'{0}\' réussi.</string>
@@ -1219,7 +1219,7 @@
     <string name="choose_osmand_theme">Thème de l\'application</string>
     <string name="accessibility_options">Options d\'accessibilité</string>
     <string name="select_address_activity">Sélectionner l\'adresse</string>
-    <string name="favourites_list_activity">Sélectionner un favori</string>
+    <string name="favourites_list_activity">Sélectionnez un favori</string>
     <string name="local_openstreetmap_act_title">Modifications OSM</string>
     <string name="default_buttons_other_actions">Autres actions</string>
     <string name="osmand_extended_description_4000_chars">
