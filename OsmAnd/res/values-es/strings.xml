@@ -1886,4 +1886,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="use_native_render">Usar renderización nativa</string>
     <string name="use_native_render_descr">Usar C++ para la renderización en vez de Java</string>
     <string name="print_route">Imprimir ruta</string>
+    <string name="fav_point_emoticons_message">Hemos cambiado el nombre de tu punto favorito a %1$s porque no es posible guardar nombres con emoticonos al fichero.</string>
     </resources>
