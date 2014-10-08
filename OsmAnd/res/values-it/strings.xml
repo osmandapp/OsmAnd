@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -1997,4 +1997,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="fav_point_dublicate_message">Per evitare duplicati il nome del vostro punto preferito è stato modificato in %1$s.</string>
     <string name="use_native_render">Utilizza la rappresentazione nativa</string>
     <string name="use_native_render_descr">Usa la rappresentazione C++ anziché Java</string>
+    <string name="print_route">Stampa percorso</string>
     </resources>
