@@ -1825,4 +1825,5 @@
     <string name="use_native_render">使用原生繪製</string>
     <string name="use_native_render_descr">使用 C++ 替代 JAVA 繪製</string>
     <string name="print_route">列印路線</string>
+    <string name="fav_point_emoticons_message">我們把我的最愛標點名稱，改為 %1$s 是因為它不可能把表情字符儲存成檔案。</string>
     </resources>
