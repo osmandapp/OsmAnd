@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -1836,4 +1836,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="test_native_render_msg">Démarrer l\'activité avec le moteur de rendu natif</string>
     <string name="use_native_render">Utiliser le moteur de rendu natif</string>
     <string name="use_native_render_descr">Utiliser le moteur de rendu C++ au lieu de Java</string>
+    <string name="print_route">Imprimer la route</string>
     </resources>
