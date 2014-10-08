@@ -1150,7 +1150,7 @@
     <string name="download_roads_only_maps">Wegenkaarten</string>
     <string name="incomplete_locale">incompleet</string>
 	<string name="no_buildings_found">Geen gebouwen gevonden.</string>
-    <string name="search_villages_and_postcodes">Zoek dorp/postcode</string>
+    <string name="search_villages_and_postcodes">Zoek verder (dorp of postcode vinden)</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f Lon %2$.3f</string>
     <string name="route_descr_current_location">Huidige positie</string>
     
