@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -1995,4 +1995,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="test_native_render_msg">Start aktivitet med indbygget optegning</string>
     <string name="use_native_render">Brug indbygget optegning</string>
     <string name="use_native_render_descr">Brug C++ optegning i stedet for Java</string>
+    <string name="print_route">Udskriv ruten</string>
     </resources>
