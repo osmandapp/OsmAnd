@@ -1,6 +1,8 @@
 package net.osmand.plus;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,6 +11,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -165,9 +169,13 @@ public class FavouritesDbHelper {
 	
 	private void checkDublicates(FavouritePoint p){
 		boolean fl = true;
+		boolean emoticons = false;
 		String index = "";
 		int number = 0;
-		String name = p.getName();
+		String name = checkEmoticons(p.getName());
+		if (name.length() != p.getName().length()){
+			emoticons = true;
+		}
 		while (fl){
 			fl = false;
 			for (FavouritePoint fp : cachedFavoritePoints){
@@ -180,14 +188,49 @@ public class FavouritesDbHelper {
 				}
 			}
 		}
-		if (index.length() > 0){
-			p.setName(name);
+		if (index.length() > 0 || emoticons){
 			AlertDialog.Builder builder = new AlertDialog.Builder(context.getMapActivity());
 			builder.setTitle(R.string.fav_point_dublicate);
-			builder.setMessage(context.getString(R.string.fav_point_dublicate_message, name));
+			if (emoticons){
+				builder.setMessage(context.getString(R.string.fav_point_emoticons_message, name));
+			} else {
+				builder.setMessage(context.getString(R.string.fav_point_dublicate_message, name));
+			}
 			builder.setPositiveButton(R.string.default_buttons_ok, null);
+			p.setName(name);
 			builder.show();
 		}
+	}
+
+	private String checkEmoticons(String name){
+		char[] chars = name.toCharArray();
+		int index;
+		char ch1;
+		char ch2;
+
+		index = 0;
+		StringBuilder builder = new StringBuilder();
+		while (index < chars.length) {
+			ch1 = chars[index];
+			if ((int)ch1 == 0xD83C) {
+				ch2 = chars[index+1];
+				if ((int)ch2 >= 0xDF00 && (int)ch2 <= 0xDFFF) {
+					index += 2;
+					continue;
+				}
+			}
+			else if ((int)ch1 == 0xD83D) {
+				ch2 = chars[index+1];
+				if ((int)ch2 >= 0xDC00 && (int)ch2 <= 0xDDFF) {
+					index += 2;
+					continue;
+				}
+			}
+			builder.append(ch1);
+			++index;
+		}
+
+		return builder.toString();
 	}
 
 	public boolean editFavouriteName(FavouritePoint p, String newName, String category) {
