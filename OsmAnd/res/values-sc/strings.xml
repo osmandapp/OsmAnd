@@ -1716,7 +1716,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="waypoints">Puntos mesanos</string>
     <string name="targets">Destinatziones</string>
     <string name="way_alarms">Avisos de tràficu</string>
-    <string name="speak_favorites">Annùntzia Prefèrridos a curtzu</string>
+    <string name="speak_favorites">Annùntzia sos Prefèrridos a curtzu</string>
     <string name="speak_poi">Annùntzia PDI a curtzu</string>
     <string name="flat_list_waypoints">Totus</string>
     <string name="index_tours">Itineràrios</string>
@@ -1734,7 +1734,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="save_global_track_interval_descr">Issèbera s\'intervallu pro sa registratzione generale de sas rastas (abilitadu tramite su widget registratzione GPX in sa mapa)</string>
 	<string name="traffic_warning_speed_limit">Limite de lestresa</string>
     <string name="traffic_warning_payment">Casellu</string>
-    <string name="traffic_warning_stop">Cartellu Stop</string>
+    <string name="traffic_warning_stop">Cartellu de Stop</string>
     <string name="traffic_warning_border_control">Controllu doganale</string>
     <string name="traffic_warning_calming">Moderatzione de su tràficu</string>
     <string name="traffic_warning_speed_camera">Autovelox</string>
@@ -1744,8 +1744,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="text_size">Mannària de su testu</string>
     <string name="fav_point_dublicate_message">Amus cambiau su nùmene de su prefèrridu tuo a %1$s pro evitare nùmenes dòpios.</string>
     <string name="fav_point_dublicate">Nùmene dòpiu in sos prefèrridos</string>
-    <string name="test_native_render">Collàuda renderizatzione nativa</string>
-    <string name="test_native_render_msg">Cumintza atividade cun sa renderizatzione nativa</string>
+    <string name="test_native_render">Collàuda sa renderizatzione nativa</string>
+    <string name="test_native_render_msg">Incumentza s\'atividade cun sa renderizatzione nativa</string>
     <string name="use_native_render">Imprea sa renderizatzione nativa</string>
     <string name="use_native_render_descr">Imprea sa renderizatzione C++ imbetzes de Java</string>
     <string name="print_route">Imprenta àndala</string>
