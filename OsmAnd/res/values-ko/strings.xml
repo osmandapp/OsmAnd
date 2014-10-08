@@ -2083,5 +2083,5 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="test_native_render_msg">기본 렌더링으로 활동(activity)을 시작합니다</string>
     <string name="use_native_render">기본 렌더링 사용</string>
     <string name="use_native_render_descr">Java 대신 C++ 렌더링을 사용합니다</string>
-    <string name="print_route">루트 프린트</string>
+    <string name="print_route">경로 인쇄</string>
     </resources>
