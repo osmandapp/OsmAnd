@@ -141,6 +141,10 @@ public class AsyncLoadingThread extends Thread {
 		requests.push(req);
 	}
 	
+	public boolean isFilePendingToDownload(File fileToSave) {
+		return resourceManger.getMapTileDownloader().isFilePendingToDownload(fileToSave);
+	}
+	
 	public boolean isFileCurrentlyDownloaded(File fileToSave) {
 		return resourceManger.getMapTileDownloader().isFileCurrentlyDownloaded(fileToSave);
 	}

@@ -351,7 +351,8 @@ public class ResourceManager {
 		if (cacheOfImages.size() > maxImgCacheSize) {
 			clearTiles();
 		}
-		if (req.dirWithTiles.canRead() && !asyncLoadingThread.isFileCurrentlyDownloaded(req.fileToSave)) {
+		if (req.dirWithTiles.canRead() && !asyncLoadingThread.isFileCurrentlyDownloaded(req.fileToSave)
+			&& !asyncLoadingThread.isFilePendingToDownload(req.fileToSave)) {
 			long time = System.currentTimeMillis();
 			if (log.isDebugEnabled()) {
 				log.debug("Start loaded file : " + req.tileId + " " + Thread.currentThread().getName()); //$NON-NLS-1$ //$NON-NLS-2$

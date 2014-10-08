@@ -40,6 +40,7 @@ public class MapTileDownloader {
 	private ThreadPoolExecutor threadPoolExecutor;
 	private List<IMapDownloaderCallback> callbacks = new ArrayList<IMapDownloaderCallback>();
 	
+	private Set<File> pendingToDownload;
 	private Set<File> currentlyDownloaded;
 	
 	private int currentErrors = 0;
@@ -109,6 +110,7 @@ public class MapTileDownloader {
 				TimeUnit.SECONDS, new LIFOBlockingDeque<Runnable>());
 		// 1.6 method but very useful to kill non-running threads
 //		threadPoolExecutor.allowCoreThreadTimeOut(true);
+		pendingToDownload = Collections.synchronizedSet(new HashSet<File>());
 		currentlyDownloaded = Collections.synchronizedSet(new HashSet<File>());
 		
 	}
@@ -123,6 +125,10 @@ public class MapTileDownloader {
 	
 	public List<IMapDownloaderCallback> getDownloaderCallbacks() {
 		return callbacks;
+	}
+	
+	public boolean isFilePendingToDownload(File f){
+		return pendingToDownload.contains(f);
 	}
 	
 	public boolean isFileCurrentlyDownloaded(File f){
@@ -157,7 +163,9 @@ public class MapTileDownloader {
 			return;
 		}
 		
-		if (!isFileCurrentlyDownloaded(request.fileToSave)) {
+		if (!isFileCurrentlyDownloaded(request.fileToSave)
+				&& !isFilePendingToDownload(request.fileToSave)) {
+			pendingToDownload.add(request.fileToSave);
 			threadPoolExecutor.execute(new DownloadMapWorker(request));
 		}
 	}
@@ -179,6 +187,7 @@ public class MapTileDownloader {
 				}
 				
 				currentlyDownloaded.add(request.fileToSave);
+				pendingToDownload.remove(request.fileToSave);
 				if(log.isDebugEnabled()){
 					log.debug("Start downloading tile : " + request.url); //$NON-NLS-1$
 				}
