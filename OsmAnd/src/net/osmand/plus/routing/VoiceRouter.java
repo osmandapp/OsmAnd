@@ -222,6 +222,13 @@ public class VoiceRouter {
 		}
 	}
 
+	public void announceBackOnRoute() {
+		CommandBuilder p = getNewCommandPlayerToPlay();
+		if (p != null) {
+			p.backOnRoute().play();
+		}
+	}
+
 	public void announceWaypoint(List<LocationPointWrapper> points) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p == null){

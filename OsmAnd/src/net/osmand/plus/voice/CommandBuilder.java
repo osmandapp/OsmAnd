@@ -37,6 +37,7 @@ public class CommandBuilder {
 	protected static final String C_SPEAD_ALARM = "speed_alarm";  //$NON-NLS-1$
 	protected static final String C_ATTENTION = "attention";  //$NON-NLS-1$
 	protected static final String C_OFF_ROUTE = "off_route";  //$NON-NLS-1$
+	protected static final String C_BACK_ON_ROUTE ="back_on_route"; //$NON-NLS-1$
 	
 	
 	protected static final String C_BEAR_LEFT = "bear_left";  //$NON-NLS-1$
@@ -133,8 +134,10 @@ public class CommandBuilder {
 	public CommandBuilder offRoute(double dist){
 		return addCommand(C_OFF_ROUTE, dist);
 	}
-	
-	
+
+	public CommandBuilder backOnRoute(){
+		return addCommand(C_BACK_ON_ROUTE);
+	}
 	
 	public CommandBuilder makeUT(double dist, Term streetName){
 		return alt(prepareStruct(C_MAKE_UT, dist, streetName), prepareStruct(C_MAKE_UT, dist));
