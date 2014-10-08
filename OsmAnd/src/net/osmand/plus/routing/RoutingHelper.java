@@ -72,6 +72,8 @@ public class RoutingHelper {
 
 	private RouteCalculationProgressCallback progressRoute;
 
+	private boolean announceBackOnRoute = false;
+
 
 //	private ProgressBar progress;
 //	private Handler progressHandler;
@@ -272,6 +274,7 @@ public class RoutingHelper {
 					}
 					if(dist > 350) {
 						voiceRouter.announceOffRoute(dist);
+						announceBackOnRoute = true;
 					}
 				}
 				// 3. Identify wrong movement direction
@@ -320,6 +323,10 @@ public class RoutingHelper {
 				RouteRecalculationThread thread = (RouteRecalculationThread) job;
 				if(!thread.isParamsChanged()) {
 					thread.stopCalculation();
+				}
+				if (announceBackOnRoute){
+					voiceRouter.announceBackOnRoute();
+					announceBackOnRoute = false;
 				}
 			}
 		}
