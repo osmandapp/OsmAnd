@@ -1844,4 +1844,9 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="fav_point_dublicate_message">Mes pakeitėme įsimintinos vietos pavadinimą į %1$s kad išvengtume pasikartojimų.</string>
     <string name="local_index_description">Spustelėkite bet kurį elementą, norėdami gauti daugiau informacijos, paspauskite ir laikykite, norėdami išjungti arba ištrinti. Dabartiniai duomenys įrenginyje (%1$ s laisva):</string>
 	<string name="print_route">Išspausdinti maršrutą</string>
+    <string name="fav_point_emoticons_message">Mes pakeitėme jūsų įsimintos vietos pavadinimą į %1$s nes teksto su veidukais išsaugoti faile neįmanoma.</string>
+    <string name="test_native_render">Testuoti aparatinį atvaizdavimą</string>
+    <string name="test_native_render_msg">Pradeda veiklą su aparatiniu atvaizdavimu</string>
+    <string name="use_native_render">Naudoti aparatinį atvaizdavimą</string>
+    <string name="use_native_render_descr">Naudoti C++ vietoje Java atvaizdavimo</string>
     </resources>
