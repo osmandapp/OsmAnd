@@ -123,11 +123,11 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimits);
 		} else {
 			String[] speedNames = new String[] {
-					(speedLimits[0] / 1.6) + " " + getString(R.string.mile_per_hour),
-					(speedLimits[1] / 1.6) + " " + getString(R.string.mile_per_hour),
-					(speedLimits[2] / 1.6) + " " + getString(R.string.mile_per_hour),
-					(speedLimits[3] / 1.6) + " " + getString(R.string.mile_per_hour),
-					(speedLimits[4] / 1.6) + " " + getString(R.string.mile_per_hour)};
+					speedLimits[0] + " " + getString(R.string.mile_per_hour),
+					speedLimits[1] + " " + getString(R.string.mile_per_hour),
+					speedLimits[2] + " " + getString(R.string.mile_per_hour),
+					speedLimits[3] + " " + getString(R.string.mile_per_hour),
+					speedLimits[4] + " " + getString(R.string.mile_per_hour)};
 			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimits);
 		}
 

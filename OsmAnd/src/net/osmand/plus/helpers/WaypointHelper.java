@@ -157,7 +157,12 @@ public class WaypointHelper {
 	public AlarmInfo getMostImportantAlarm(MetricsConstants mc, boolean showCameras) {
 		Location lastProjection = app.getRoutingHelper().getLastProjection();
 		float mxspeed = route.getCurrentMaxSpeed();
-		float delta = app.getSettings().SPEED_LIMIT_EXCEED.get() / 3.6f;
+		float delta;
+		if (app.getSettings().METRIC_SYSTEM.get() == MetricsConstants.KILOMETERS_AND_METERS){
+			delta = app.getSettings().SPEED_LIMIT_EXCEED.get();
+		} else {
+			delta = app.getSettings().SPEED_LIMIT_EXCEED.get() * 1.6f;
+		}
 		AlarmInfo speedAlarm = createSpeedAlarm(mc, mxspeed, lastProjection, delta);
 		if (speedAlarm != null) {
 			getVoiceRouter().announceSpeedAlarm();
@@ -247,7 +252,12 @@ public class WaypointHelper {
 	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, 
 			MetricsConstants mc, boolean showCameras) {
 		float mxspeed = ro.getMaximumSpeed();
-		float delta = app.getSettings().SPEED_LIMIT_EXCEED.get() / 3.6f;
+		float delta;
+		if (app.getSettings().METRIC_SYSTEM.get() == MetricsConstants.KILOMETERS_AND_METERS){
+			delta = app.getSettings().SPEED_LIMIT_EXCEED.get();
+		} else {
+			delta = app.getSettings().SPEED_LIMIT_EXCEED.get() * 1.6f;
+		}
 		AlarmInfo speedAlarm = createSpeedAlarm(mc, mxspeed, loc, delta);
 		if (speedAlarm != null) {
 			getVoiceRouter().announceSpeedAlarm();
