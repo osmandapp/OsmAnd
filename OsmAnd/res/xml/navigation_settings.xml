@@ -23,6 +23,10 @@
                     android:key="arrival_distance_factor"
                     android:title="@string/arrival_distance"
                     android:summary="@string/arrival_distance_descr" />
+			<ListPreference
+				android:key="speed_limit_exceed"
+				android:title="@string/speed_limit_exceed"
+				android:summary="@string/speed_limit_exceed_message"/>
             <CheckBoxPreference android:title="@string/show_zoom_buttons_navigation" android:summary="@string/show_zoom_buttons_navigation_descr" android:key="show_zoom_buttons_navigation" />
         </PreferenceCategory>
 </PreferenceScreen>
