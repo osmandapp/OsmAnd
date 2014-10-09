@@ -527,22 +527,24 @@ public class DownloadIndexesThread {
 
 	private void prepareFilesToUpdate() {
 		List<IndexItem> filtered = getCachedIndexFiles();
-		itemsToUpdate.clear();
-		for (IndexItem item : filtered) {
-			String sfName = item.getTargetFileName();
-			java.text.DateFormat format = uiActivity.getMyApplication().getResourceManager().getDateFormat();
-			String date = item.getDate(format);
-			String indexactivateddate = indexActivatedFileNames.get(sfName);
-			String indexfilesdate = indexFileNames.get(sfName);
-			if (date != null &&
-					!date.equals(indexactivateddate) &&
-					!date.equals(indexfilesdate) &&
-					indexActivatedFileNames.containsKey(sfName)) {
-				itemsToUpdate.add(item);
+		if (filtered != null) {
+			itemsToUpdate.clear();
+			for (IndexItem item : filtered) {
+				String sfName = item.getTargetFileName();
+				java.text.DateFormat format = uiActivity.getMyApplication().getResourceManager().getDateFormat();
+				String date = item.getDate(format);
+				String indexactivateddate = indexActivatedFileNames.get(sfName);
+				String indexfilesdate = indexFileNames.get(sfName);
+				if (date != null &&
+						!date.equals(indexactivateddate) &&
+						!date.equals(indexfilesdate) &&
+						indexActivatedFileNames.containsKey(sfName)) {
+					itemsToUpdate.add(item);
+				}
 			}
-		}
-		if (uiActivity != null){
-			uiActivity.updateDownloadList(itemsToUpdate);
+			if (uiActivity != null){
+				uiActivity.updateDownloadList(itemsToUpdate);
+			}
 		}
 	}
 
