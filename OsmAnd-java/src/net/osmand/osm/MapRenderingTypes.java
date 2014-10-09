@@ -45,6 +45,7 @@ public class MapRenderingTypes {
 	private String resourceName = null;
 	private Map<AmenityType, Map<String, String>> amenityTypeNameToTagVal = null;
 	private Map<String, AmenityType> amenityNameToType = null;
+	private Map<String, Map<String, String>> amenityAllTypeNameToTagVal = null;
 	
 	protected Map<String, MapRulType> types = null;
 	protected List<MapRulType> typeList = new ArrayList<MapRulType>();
@@ -133,7 +134,31 @@ public class MapRenderingTypes {
 		}
 		return amenityTypeNameToTagVal;
 	}
-	
+
+	private Map<String, Map<String, String>> getAmenityAllTypeNameToTagVal() {
+		if (amenityAllTypeNameToTagVal == null) {
+			Map<String, MapRulType> types = getEncodingRuleTypes();
+			amenityAllTypeNameToTagVal = new LinkedHashMap<String, Map<String, String>>();
+			for(MapRulType type : types.values()){
+				if(type.category != null && type.targetTagValue == null) {
+					if(!amenityAllTypeNameToTagVal.containsKey(type.category)) {
+						amenityAllTypeNameToTagVal.put(type.category, new TreeMap<String, String>());
+					}
+					String name = type.getValue();
+					if (name != null) {
+						if (type.poiPrefix != null) {
+							name = type.poiPrefix + name;
+							amenityAllTypeNameToTagVal.get(type.category).put(name, type.getTag() + " " + type.getValue());
+						} else {
+							amenityAllTypeNameToTagVal.get(type.category).put(name, type.getTag());
+						}
+					}
+				}
+			}
+		}
+		return amenityAllTypeNameToTagVal;
+	}
+
 	public Collection<Map<String, String>> splitTagsIntoDifferentObjects(final Map<String, String> tags) {
 		// check open sea maps tags
 		boolean split = splitIsNeeded(tags);
@@ -234,7 +259,15 @@ public class MapRenderingTypes {
 		}
 		return amenityTypeNameToTagVal.get(t).keySet();
 	}
-	
+
+	public Collection<String> getAmenityAllSubCategories(AmenityType t){
+		Map<String, Map<String, String>> amenityAllTypeNameToTagVal = getAmenityAllTypeNameToTagVal();
+		if(!amenityAllTypeNameToTagVal.containsKey(t.getCategoryName())){
+			return Collections.emptyList(); 
+		}
+		return amenityAllTypeNameToTagVal.get(t.getCategoryName()).keySet();
+	}
+
 	public MapRulType getTypeByInternalId(int id) {
 		return typeList.get(id);
 	}
@@ -383,6 +416,7 @@ public class MapRenderingTypes {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			int tok;
 			parser.setInput(is, "UTF-8");
+			String parentCategory = null;
 			String poiParentCategory = null;
 			String poiParentPrefix  = null;
 			String order = null;
@@ -390,12 +424,13 @@ public class MapRenderingTypes {
 				if (tok == XmlPullParser.START_TAG) {
 					String name = parser.getName();
 					if (name.equals("category")) { //$NON-NLS-1$
+						parentCategory = parser.getAttributeValue("","name");
 						poiParentCategory = parser.getAttributeValue("","poi_category");
 						poiParentPrefix = parser.getAttributeValue("","poi_prefix");
 						order = parser.getAttributeValue("","order");
 						parseCategoryFromXml(parser, poiParentCategory, poiParentPrefix);
 					} else if (name.equals("type")) {
-						parseTypeFromXML(parser, poiParentCategory, poiParentPrefix, order);
+						parseTypeFromXML(parser, parentCategory, poiParentCategory, poiParentPrefix, order);
 					} else if (name.equals("routing_type")) {
 						parseRouteTagFromXML(parser);
 					}
@@ -421,11 +456,11 @@ public class MapRenderingTypes {
 	protected void parseRouteTagFromXML(XmlPullParser parser) {
 	}
 
-	protected MapRulType parseTypeFromXML(XmlPullParser parser, String poiParentCategory, String poiParentPrefix, String parentOrder) {
-		return parseBaseRuleType(parser, poiParentCategory, poiParentPrefix, parentOrder, true);
+	protected MapRulType parseTypeFromXML(XmlPullParser parser, String parentCategory, String poiParentCategory, String poiParentPrefix, String parentOrder) {
+		return parseBaseRuleType(parser, parentCategory, poiParentCategory, poiParentPrefix, parentOrder, true);
 	}
 
-	protected MapRulType parseBaseRuleType(XmlPullParser parser, String poiParentCategory, String poiParentPrefix, String parentOrder, boolean filterOnlyMap) {
+	protected MapRulType parseBaseRuleType(XmlPullParser parser, String parentCategory, String poiParentCategory, String poiParentPrefix, String parentOrder, boolean filterOnlyMap) {
 		String tag = lc(parser.getAttributeValue("", "tag"));
 		String value = lc(parser.getAttributeValue("", "value"));
 		String additional = parser.getAttributeValue("", "additional");
@@ -473,6 +508,7 @@ public class MapRenderingTypes {
 		}
 		
 
+		rtype.category = parentCategory;
 		if (poiParentCategory != null && poiParentCategory.length() > 0) {
 			rtype.poiCategory = AmenityType.getAndRegisterType(poiParentCategory);
 			rtype.poiSpecified = true;
@@ -666,6 +702,7 @@ public class MapRenderingTypes {
 		protected int order = 50;
 		protected Set<TagValuePattern> applyToTagValue = null;
 		
+		protected String category = null;
 		protected String poiPrefix;
 		protected AmenityType poiCategory;
 		// poi_category was specially removed for one tag/value, to skip unnecessary objects
