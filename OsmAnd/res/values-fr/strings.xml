@@ -236,11 +236,11 @@
   <string name="gpx_option_destination_point">Utiliser la destination en cours</string>
   <string name="gpx_option_from_start_point">Suivre l\'ensemble de la trace</string>
   <string name="switch_to_vector_map_to_see">Cartes vectorielles disponibles pour cette position. \n\t\n\tPour activer: \'Menu\'→\'Couches\'→\'Source de la carte…\'→\'Cartes vectorielles hors ligne\'.</string>
-  <string name="choose_audio_stream">Canal de sortie</string>
-  <string name="choose_audio_stream_descr">Sélectionner le canal à utiliser pour le guidage vocal (dépend de la configuration système)</string>
-  <string name="voice_stream_voice_call">Canal d\'appels vocaux</string>
-  <string name="voice_stream_notification">Canal de notification</string>
-  <string name="voice_stream_music">Canal musique</string>
+  <string name="choose_audio_stream">Sortie audio pour le guidage</string>
+  <string name="choose_audio_stream_descr">Sélectionnez la sortie audio à utiliser pour le guidage vocal (selon les capacités de votre appareil)</string>
+  <string name="voice_stream_voice_call">Sortie téléphonie</string>
+  <string name="voice_stream_notification">Sortie notifications</string>
+  <string name="voice_stream_music">Sortie musique</string>
   <string name="warning_tile_layer_not_downloadable">L\'application ne peut télécharger la couche de carte %1$s, veuillez tenter de la réinstaller.</string>
   <string name="overlay_transparency_descr">Modifier la transparence de la sur-couche</string>
   <string name="overlay_transparency">Transparence de la sur-couche</string>
@@ -257,7 +257,7 @@
   <string name="tile_source_already_installed">Carte déjà installée, paramètres seront mis à jour</string>
   <string name="select_tile_source_to_install">Sélectioner les cartes à installer ou mettre à jour</string>
   <string name="internet_not_available">Connexion Internet nécessaire pour cette opération non disponible</string>
-  <string name="install_more">Installer plus…</string>
+  <string name="install_more">Installer d\'autres langues …</string>
   <string name="tip_update_index">Mise à jour des cartes hors-ligne</string>
   <string name="tip_update_index_t">"Il est très important d\'avoir des données cartographiques à jour pour la visualisation des cartes hors-ligne, la recherche de points d\'intérêt ou d\'adresses, et la navigation hors-ligne. OsmAnd fournit un gestionnaire de données qui permet de télécharger ces cartes hors-ligne (et d\'autres données), et de vérifier si des mises à jour sont disponibles.
 \n\tPour télécharger ou vérifier les mises à jour, allez dans \'Menu Principal\' → \'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des données hors-ligne\'.
@@ -284,8 +284,8 @@
   <string name="search_offline_geo_error">Ne peut interpréter le geo intent:\'%s\'</string>
   <string name="search_osm_offline">Recherche d\'adresses dans les cartes hors-ligne</string>
   <string name="system_locale">Système</string>
-  <string name="preferred_locale_descr">Sélectionner la langue employée à l\'écran</string>
-  <string name="preferred_locale">Langue de l\'interface</string>
+  <string name="preferred_locale_descr">Sélectionnez la langue pour l\'affichage</string>
+  <string name="preferred_locale">Langue de l\'application</string>
   <string name="tip_map_switch">Sélectionner une source de carte</string>
   
   <string name="tip_app_mode">Mode de fonctionnement</string>
@@ -518,7 +518,7 @@
   <string name="search_poi_location">Recherche d\'un signal…</string>
   <string name="search_near_map">Rechercher près du dernier emplacement</string>
   <string name="search_nearby">Rechercher à proximité</string>
-  <string name="map_orientation_default">Comme l\'appareil</string>
+  <string name="map_orientation_default">Automatique</string>
   <string name="map_orientation_portrait">Portrait</string>
   <string name="map_orientation_landscape">Paysage</string>
   <string name="map_screen_orientation">Orientation de l\'écran</string>
