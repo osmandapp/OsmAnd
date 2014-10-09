@@ -85,19 +85,6 @@ public class DownloadOsmandIndexesHelper {
 					File destFile = new File(voicePath, voice + File.separatorChar + "_ttsconfig.p");
 					result.add(new AssetIndexItem(voice +ext, "voice", date, dateModified, 
 							"0.1", 1024*100, key, destFile.getPath(), DownloadActivityType.VOICE_FILE));
-				} else if (target.endsWith("/_config.p") && target.startsWith("voice/")) {
-					String voice = target.substring("voice/".length(), target.length() - "/_config.p".length());
-					IndexItem item = result.getIndexFilesByName(key);
-					if (item != null) {
-						File destFile = new File(voicePath, voice + File.separatorChar + "_config.p");
-						// always use bundled config
-//						if (item.getTimestamp() > dateModified) {
-//							continue;
-//						}
-						item.timestamp = dateModified;
-						item.attachedItem = new AssetIndexItem(voice +extvoice, "voice", date, dateModified, "0.1", 1024*100, key, destFile.getPath(), 
-								DownloadActivityType.VOICE_FILE);
-					}
 				}
 			}
 			result.sort();
