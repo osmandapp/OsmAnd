@@ -27,7 +27,6 @@ public class IndexItem implements Comparable<IndexItem> {
 	long timestamp;
 	long contentSize;
 	long containerSize;
-	IndexItem attachedItem;
 	DownloadActivityType type;
 
 
@@ -98,13 +97,6 @@ public class IndexItem implements Comparable<IndexItem> {
 			File backup = new File(ctx.getAppPath(IndexConstants.BACKUP_INDEX_DIR), entry.targetFile.getName());
 			if (backup.exists()) {
 				entry.existingBackupFile = backup;
-			}
-			if (attachedItem != null) {
-				ArrayList<DownloadEntry> sz = new ArrayList<DownloadEntry>();
-				attachedItem.createDownloadEntry(ctx, type, sz);
-				if(sz.size() > 0) {
-					entry.attachedEntry = sz.get(0);
-				}
 			}
 			downloadEntries.add(entry);
 		}
