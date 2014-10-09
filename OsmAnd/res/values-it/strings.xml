@@ -1900,12 +1900,12 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_attr_hideNonVehicleHighways_name">Nascondi le strade non carrabili</string>
     <string name="rendering_attr_hideText_name">Nascondi il testo</string>
     <string name="rendering_attr_hideWoodScrubs_name">Nascondi foreste e boscaglie</string>
-    <string name="rendering_attr_buildings15zoom_name">Edifici dal zoom 15</string>
+    <string name="rendering_attr_buildings15zoom_name">Edifici da zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Più dettagli</string>
     <string name="rendering_attr_lessDetailed_name">Meno dettagli</string>
     <string name="rendering_attr_hideAccess_name">Nascondi le limitazioni di accesso</string>
     <string name="rendering_attr_showAccess_name">Mostra le limitazioni di accesso</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Mostra la qualità delle strade</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Mostra qualità strade</string>
     <string name="rendering_attr_showSurfaces_name">Mostra il tipo di superficie delle strade</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostra i percorsi per bicicletta</string>
     <string name="osmo_auth_error_short">Autorizzazione fallita</string>
