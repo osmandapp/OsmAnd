@@ -224,7 +224,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	</string>
 	<string name="file_can_not_be_renamed">파일 이름을 바꿀 수 없습니다.</string>
 	<string name="file_with_name_already_exists">같은 이름을 가진 파일이 이미 존재합니다.</string>
-	<string name="gpx_navigation">GPX 경로</string>
+	<string name="gpx_navigation">GPX 루트</string>
 	<string name="poi_query_by_name_matches_categories">이름으로 검색한 POI에 해당하는 몇몇 카테고리를 찾았습니다 :</string>
 	<string name="data_to_search_poi_not_available">검색한 POI에 대한 로컬 데이터가 존재하지 않습니다.</string>
 	<string name="poi_filter_by_name">이름으로 검색</string>
@@ -1119,7 +1119,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="distance_measurement_finish_editing">편집 끝내기</string>
     <string name="distance_measurement_finish_subtrack">새로운 subtrack(세그먼트) 시작</string>
     <string name="distance_measurement_clear_route">모든 포인트 지우기</string>
-    <string name="distance_measurement_save_gpx">GPX로 저장</string>
+    <string name="distance_measurement_save_gpx">GPX파일로 저장</string>
     <string name="distance_measurement_load_gpx">기존 GPX파일 불러오기</string>
     <string name="wait_current_task_finished">현재 작업이 완료 될 때까지 기다리십시오</string>
     <string name="use_kalman_filter_compass_descr">나침반 흔들림을 방지하기 위해 칼만 필터를 사용</string>
@@ -1410,7 +1410,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_right_stack">오른쪽 패널 :</string>
 	<string name="map_widget_left_stack">왼쪽 패널 :</string>
 	<string name="map_widget_parking">주차</string>
-	<string name="map_widget_monitoring">GPX 기록중</string>
+	<string name="map_widget_monitoring">GPX 레코딩</string>
 	<string name="map_widget_speed">속도</string>
 	<string name="map_widget_distance">목적지</string>
 	<string name="map_widget_altitude">고도</string>
@@ -2012,8 +2012,8 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="live_monitoring_m">온라인 트래킹 (GPX파일 필요)</string>
     <string name="live_monitoring_start">온라인 트래킹 시작</string>
 	<string name="live_monitoring_stop">온라인 트래킹 중지</string>
-	<string name="gpx_monitoring_start">GPX 기록 시작</string>
-	<string name="gpx_monitoring_stop">GPX 기록 중지</string>
+	<string name="gpx_monitoring_start">GPX 레코딩 시작</string>
+	<string name="gpx_monitoring_stop">GPX 레코딩 중지</string>
     <string name="gpx_start_new_segment">새로운 세그먼트 시작</string>
     <string name="lang_fa">페르시아어</string>
 	<string name="lang_al">알바니아어</string>
