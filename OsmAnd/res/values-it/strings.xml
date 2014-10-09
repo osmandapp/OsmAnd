@@ -284,7 +284,7 @@
   
   <string name="tip_navigation">Navigazione</string>
   <string name="tip_navigation_t">"Per ottenere indicazioni, tieni premuto sul luogo di destinazione (poi premi la sua descrizione e seleziona \'Indicazioni verso\'), oppure seleziona \'Indicazioni\' dopo aver premuto sul risultato di una ricerca o un preferito.
-\n\nLa destinazione è segnata sulla mappa con una bandiera a scacchi e OsmAnd mostrerà la distanza di arrivo e la direzione per raggiungerla in linea d\'aria (con un triangolo arancione).
+\n\nLa destinazione è segnata sulla mappa con una bandiera a scacchi e OsmAnd mostra la distanza di arrivo e la direzione per raggiungerla in linea d\'aria (con un triangolo arancione).
 \n\nPuoi selezionare \'Avvia navigazione\', per chiedere a OsmAnd di guidarti fino a destinazione fornendoti avvisi vocali (se abilitati), etc. Oppure seleziona \'Mostra percorso\' per ottenere una guida statica senza aggiornamenti mentre ti muovi.
 \n\nPer ricevere indicazioni partendo da un punto diverso alla tua posizione attuale, seleziona il punto voluto sulla mappa e scegli \'Indicazioni da\'.
 \n\nSe usi \'Indicazioni da\' insieme ad \'Avvia navigazione\', OsmAnd passerà alla tua posizione attuale on appena essa sarà disponibile (questo modo è stato studiato proprio per permettere di avviare immediatamente la navigazione ancor prima che la posizione sia stata individuata), mentre \'Indicazioni da\' insieme a \'Mostra percorso\' calcola il percorso da un punto arbitrario senza effettuare alcun aggiornamento. "</string>
@@ -1991,8 +1991,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="local_index_description">Clicca su un oggetto per visualizzare maggiori dettagli, tieni premuto per disattivarlo o cancellarlo. Dati attualmente nel dispositivo (%1$s liberi):</string>
 	<string name="text_size_descr">Imposta la dimensione del testo sulla mappa.</string>
     <string name="text_size">Dimensione del testo</string>
-    <string name="test_native_render">Prova la rappresentazione nativa</string>
-    <string name="test_native_render_msg">Inizia l\'attività con la rappresentazione nativa</string>
+    <string name="test_native_render">Prova il rendering nativo</string>
+    <string name="test_native_render_msg">Inizia l\'attività con il rendering nativo</string>
     <string name="fav_point_dublicate">Nome del punto preferito duplicato</string>
     <string name="fav_point_dublicate_message">Per evitare duplicati il nome del vostro punto preferito è stato modificato in %1$s.</string>
     <string name="use_native_render">Usa il rendering nativo</string>
