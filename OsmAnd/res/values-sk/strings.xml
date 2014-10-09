@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -2000,4 +2000,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="test_native_render_msg">Spustí činnosť s natívnym vykresľovaním</string>
     <string name="use_native_render">Použiť natívne vykresľovanie</string>
     <string name="use_native_render_descr">Použiť vykresľovanie v C++ namiesto Javy</string>
+    <string name="fav_point_emoticons_message">Názov obľúbeného bodu bol upravený na %1$s, pretože názov s emotikonom nemôže byť uložený do súboru.</string>
+    <string name="print_route">Vytlačiť trasu</string>
     </resources>
