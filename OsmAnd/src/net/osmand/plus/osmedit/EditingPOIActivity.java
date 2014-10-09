@@ -506,7 +506,7 @@ public class EditingPOIActivity implements DialogProvider {
 
 	private void updateSubTypesAdapter(AmenityType t){
 		
-		Set<String> subCategories = new LinkedHashSet<String>(MapRenderingTypes.getDefault().getAmenitySubCategories(t));
+		Set<String> subCategories = new LinkedHashSet<String>(MapRenderingTypes.getDefault().getAmenityAllSubCategories(t));
 		for(String s : MapRenderingTypes.getDefault().getAmenityNameToType().keySet()){
 			if(!subCategories.contains(s)){
 				subCategories.add(s);
@@ -606,7 +606,7 @@ public class EditingPOIActivity implements DialogProvider {
 			case DIALOG_SUB_CATEGORIES: {
 				Builder builder = new AlertDialog.Builder(ctx);
 				final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
-				final String[] subCats = MapRenderingTypes.getDefault().getAmenitySubCategories(a.getType()).
+				final String[] subCats = MapRenderingTypes.getDefault().getAmenityAllSubCategories(a.getType()).
 						toArray(new String[0]);
 				builder.setItems(subCats, new DialogInterface.OnClickListener() {
 					@Override
