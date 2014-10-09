@@ -54,9 +54,9 @@
   <string name="amenity_type_osmwiki">Wikipédia (hors-ligne)</string>
   <string name="amenity_type_user_defined">Défini par l\'utilisateur</string>
   <string name="fav_export_confirmation">Un fichier de favoris précédemment exporté existe déjà. Voulez vous le remplacer ?</string>
-  <string name="profile_settings">Paramètres de profil</string>
+  <string name="profile_settings">Paramètres pour le profil</string>
   <string name="settings_preset">Profil par défaut</string>
-  <string name="settings_preset_descr">Sélectionner le profil d\'utilisation par défaut. Les paramètres de rendu et de navigation de chaque profil sont mémorisés.</string>
+  <string name="settings_preset_descr">Sélectionnez le profil d\'utilisation par défaut. Les paramètres de rendu et de navigation de chaque profil sont mémorisés.</string>
   
   
   <string name="routing_settings">Navigation</string>
@@ -842,7 +842,7 @@
   <string name="front_right">devant droite</string>
   <string name="right">droite</string>
   <string name="back_right">arrière droite</string>
-  <string name="back">arrière</string>
+  <string name="back">Précédent</string>
   <string name="back_left">arrière gauche</string>
   <string name="left">gauche</string>
   <string name="front_left">devant gauche</string>
@@ -1738,7 +1738,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="local_map_names">Noms locaux</string>
     <string name="lang_sw">swahili</string>
     <string name="lang_he">hébreux</string>
-    <string name="forward">Avancer</string>
+    <string name="forward">Suivant</string>
     <string name="home">Home</string>
     <string name="live_monitoring_m_descr">Envoyer la position courante à un service Web si l\'enregistrement GPX est activé.</string>
 	<string name="live_monitoring_m">Suivi en ligne (GPX requis)</string>
