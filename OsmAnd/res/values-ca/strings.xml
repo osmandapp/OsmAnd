@@ -1903,6 +1903,6 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="test_native_render_msg">Inicia l\'activitat amb renderització nativa</string>
     <string name="use_native_render">Utilitza la renderització nativa</string>
     <string name="use_native_render_descr">Ús de renderització C++ en comptes de Java</string>
-    <string name="fav_point_emoticons_message">S\'ha canviat el nom del vostre punt preferit a %1$s donat que no es pot desar un text amb emoticons en un arxiu.</string>
+    <string name="fav_point_emoticons_message">S\'ha canviat el nom del vostre punt preferit a %1$s perquè no es pot desar un text amb emoticones en un fitxer.</string>
     <string name="print_route">Imprimeix la ruta</string>
     </resources>
