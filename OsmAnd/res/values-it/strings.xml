@@ -1996,7 +1996,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="fav_point_dublicate">Nome del punto preferito duplicato</string>
     <string name="fav_point_dublicate_message">Per evitare duplicati il nome del vostro punto preferito è stato modificato in %1$s.</string>
     <string name="use_native_render">Usa il rendering nativo</string>
-    <string name="use_native_render_descr">Usa la rappresentazione C++ anziché Java</string>
+    <string name="use_native_render_descr">Usa il rendering C++ anziché Java</string>
     <string name="print_route">Stampa percorso</string>
     <string name="fav_point_emoticons_message">Abbiamo cambiato il nome del tuo punto preferito in %1$s perché non è possibile salvare stringhe con emoticon nel file.</string>
     </resources>
