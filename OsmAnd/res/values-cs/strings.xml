@@ -1088,7 +1088,7 @@
     <string name="rendering_attr_noAdminboundaries_name">Skrýt hranice</string>
 	<string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic 5-9</string>
 	<string name="tip_altitude_offset">Korekce nadmořské výšky</string>
-	<string name="monitoring_control_start">měrit</string>
+	<string name="monitoring_control_start">GPX</string>
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="osmodroid_plugin_old_ver_not_supported">Máte nainstalovanou starou verzi modulu OsMoDroid, která potřebuje být aktualizována.</string>
@@ -1478,7 +1478,7 @@ s často kladenými otázkami.</string>
     <string name="misc_pref_title">Různé</string>
     <string name="voice_pref_title">Hlas</string>
     <string name="always_center_position_on_map">Zobrazit pozici vždy uprostřed</string>
-    <string name="osmo_plugin_name">OsMo</string>
+    <string name="osmo_plugin_name">OsMo (Pokročilé online monitorování)</string>
    	<string name="osmo_settings">OpenStreetMap sledování</string>
     <string name="osmo_settings_descr">Konfigurovat sledování a nastavit osobní monitorovací kanál</string>
     <string name="osmo_settings_debug">Informace ladění</string>
@@ -1638,7 +1638,7 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_hideBuildings_name">Skrýt budovy</string>
     <string name="rendering_attr_hideText_name">Skrýt text</string>
     <string name="rendering_attr_hideWoodScrubs_name">Skrýt lesy a křoviny</string>
-    <string name="rendering_attr_showSurfaces_name">Ukázat povrch cesty</string>
+    <string name="rendering_attr_showSurfaces_name">Zobrazit povrch cesty</string>
     <string name="osmo_group_information">Prosím čtěte před vytvářením skupiny!</string>
     <string name="osmo_group_information_desc">" - Všechny vytvořené skupiny jsou veřejné! Pokud chcete být anonymní, připojte zařízení přímo přes ID.\n - Do skupiny se může registrovat až 16 lidí.
 \n - V případě neaktivity nebo aktivity pouze jedné osoby v průběhu dvou týdnů, bude skupina zrušena.\n - Můžete omezit vstup do skupiny pozvánkami, ale pro ovládání skupiny musíte použít administrátorskou konzoli.\n - Pokud potřebujete vytvořit skupinu s jinými podmínkami prosím kontaktujte http://osmo.mobi"</string>
@@ -1689,7 +1689,7 @@ s často kladenými otázkami.</string>
 	<string name="lang_zh_TW">Tradiční čínština</string>
 	<string name="rendering_attr_alpineHiking_name">Vysokohorská turistika</string>
     <string name="rendering_attr_alpineHiking_description">Vykreslovat cesty podle stupnice SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Zobrazovat turistické značky</string>
+    <string name="rendering_attr_osmcTraces_name">Turistické trasy a značky</string>
     <string name="rendering_attr_osmcTraces_description">Vykreslovat cesty podle OSMC značení</string>
     
 	<string name="arrival_distance_factor_early">Brzy</string>
