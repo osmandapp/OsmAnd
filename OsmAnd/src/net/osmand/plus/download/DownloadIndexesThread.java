@@ -328,8 +328,8 @@ public class DownloadIndexesThread {
 			boolean res = false;
 			if (de.isAsset) {
 				try {
-					if (uiActivity != null) {
-						ResourceManager.copyAssets(uiActivity.getAssets(), de.assetName, de.targetFile);
+					if (ctx != null) {
+						ResourceManager.copyAssets(ctx.getAssets(), de.assetName, de.targetFile);
 						boolean changedDate = de.targetFile.setLastModified(de.dateModified);
 						if(!changedDate) {
 							log.error("Set last timestamp is not supported");
