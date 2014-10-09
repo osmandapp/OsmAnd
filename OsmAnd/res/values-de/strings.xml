@@ -1980,4 +1980,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="test_native_render_msg">Nutzt den nativen Renderer</string>
     <string name="use_native_render">Nativen Renderer benutzen</string>
     <string name="use_native_render_descr">C++ Renderer statt Java-Renderer nutzen</string>
+    <string name="fav_point_emoticons_message">Der Name des Favoriten wurde auf %1$s geändert, denn Zeichenketten mit Emoticons können nicht gespeichert werden.</string>
+    <string name="print_route">Route drucken</string>
     </resources>
