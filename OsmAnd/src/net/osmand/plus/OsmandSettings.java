@@ -675,11 +675,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Float> ARRIVAL_DISTANCE_FACTOR =
 		new FloatPreference("arrival_distance_factor", 1f).makeProfile();
 
-	public final OsmandPreference<Float> SPEED_LIMIT_EXCEED_KM =
+	public final OsmandPreference<Float> SPEED_LIMIT_EXCEED =
 			new FloatPreference("speed_limit_exceed", 5f).makeProfile();
-
-	public final OsmandPreference<Float> SPEED_LIMIT_EXCEED_MILE =
-			new FloatPreference("speed_limit_exceed", 3f).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_TRACKBALL_FOR_MOVEMENTS =
