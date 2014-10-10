@@ -2002,4 +2002,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="use_native_render_descr">Použiť vykresľovanie v C++ namiesto Javy</string>
     <string name="fav_point_emoticons_message">Názov obľúbeného bodu bol upravený na %1$s, pretože názov s emotikonom nemôže byť uložený do súboru.</string>
     <string name="print_route">Vytlačiť trasu</string>
-    </resources>
+    <string name="speed_limit_exceed">Hodnota prekročenia povolenej rýchlosti.</string>
+	<string name="speed_limit_exceed_message">Zvoľte prekročenie povolenej rýchlosti, pri ktorom dostanete hlasové oznámenie.</string>
+	</resources>
