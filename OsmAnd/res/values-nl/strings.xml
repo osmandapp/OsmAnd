@@ -1979,4 +1979,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="use_native_render_descr">Gebruik C++ renderer in plaats van Java</string>
     <string name="fav_point_emoticons_message">Favoriet bewaard als %1s omdat vreemde tekens niet opgeslagen kunnen worden.</string>
     <string name="print_route">Route afdrukken</string>
-    </resources>
+    <string name="speed_limit_exceed">Te hoge snelheid melden bij...</string>
+	<string name="speed_limit_exceed_message">Hoeveel de maximumsnelheid mag worden overschreden voordat een melding volgt.</string>
+	</resources>
