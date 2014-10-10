@@ -213,6 +213,8 @@ public class MapActivity extends AccessibleActivity  {
 			((FrameLayout)mapView.getParent()).addView(lockView);
 		}
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
+
+		mapActions.createOptionsMenuAsDrawer(false);
 	}
 	
 	public void addLockView(FrameLayout lockView) {
@@ -466,7 +468,7 @@ public class MapActivity extends AccessibleActivity  {
 			}
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
-			mapActions.openOptionsMenuAsDrawer();
+			mapActions.createOptionsMenuAsDrawer(true);
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, getMyApplication().getAppCustomization().getSearchActivity());
