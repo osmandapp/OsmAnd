@@ -105,7 +105,7 @@ public class MapInfoWidgetsFactory {
 					dlg.setTitle(app.getString(R.string.sleep_mode_stop_dialog));
 
 					//Show currently active wake-up interval
-					int soi = app.getSettings().SERVICE_OFF_INTERVAL.get();
+					int soi = app.getNavigationService().getServiceOffInterval();
 					if (soi == 0) {
 						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + app.getString(R.string.int_continuosly));
 					} else if (soi <= 90000) {
