@@ -1905,4 +1905,6 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="use_native_render_descr">Ús de renderització C++ en comptes de Java</string>
     <string name="fav_point_emoticons_message">S\'ha canviat el nom del vostre punt preferit a %1$s perquè no es pot desar un text amb emoticones en un fitxer.</string>
     <string name="print_route">Imprimeix la ruta</string>
-    </resources>
+    <string name="speed_limit_exceed">Valor límit d\'excés de velocitat.</string>
+	<string name="speed_limit_exceed_message">Trieu l\'excés sobre el límit de velocitat amb que se us notificarà per veu.</string>
+	</resources>
