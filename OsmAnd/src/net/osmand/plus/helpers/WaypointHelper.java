@@ -159,9 +159,9 @@ public class WaypointHelper {
 		float mxspeed = route.getCurrentMaxSpeed();
 		float delta;
 		if (app.getSettings().METRIC_SYSTEM.get() == MetricsConstants.KILOMETERS_AND_METERS){
-			delta = app.getSettings().SPEED_LIMIT_EXCEED.get();
+			delta = app.getSettings().SPEED_LIMIT_EXCEED_KM.get();
 		} else {
-			delta = app.getSettings().SPEED_LIMIT_EXCEED.get() * 1.6f;
+			delta = app.getSettings().SPEED_LIMIT_EXCEED_KM.get() * 1.6f;
 		}
 		AlarmInfo speedAlarm = createSpeedAlarm(mc, mxspeed, lastProjection, delta);
 		if (speedAlarm != null) {
@@ -254,9 +254,9 @@ public class WaypointHelper {
 		float mxspeed = ro.getMaximumSpeed();
 		float delta;
 		if (app.getSettings().METRIC_SYSTEM.get() == MetricsConstants.KILOMETERS_AND_METERS){
-			delta = app.getSettings().SPEED_LIMIT_EXCEED.get();
+			delta = app.getSettings().SPEED_LIMIT_EXCEED_KM.get();
 		} else {
-			delta = app.getSettings().SPEED_LIMIT_EXCEED.get() * 1.6f;
+			delta = app.getSettings().SPEED_LIMIT_EXCEED_MILE.get() * 1.6f;
 		}
 		AlarmInfo speedAlarm = createSpeedAlarm(mc, mxspeed, loc, delta);
 		if (speedAlarm != null) {

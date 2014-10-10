@@ -112,9 +112,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		registerListPreference(settings.ARRIVAL_DISTANCE_FACTOR, screen, arrivalNames, arrivalValues);
 
 		ApplicationMode mode = getMyApplication().getSettings().getApplicationMode();
-		if (mode == ApplicationMode.CAR || mode == ApplicationMode.TRUCK || mode == ApplicationMode.MOTORCYCLE){
-			Float[] speedLimits = new Float[] {5f, 7f, 10f, 15f, 20f};
+		if (mode.isDerivedRoutingFrom(ApplicationMode.CAR)){
 			if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS){
+				Float[] speedLimits = new Float[] {5f, 7f, 10f, 15f, 20f};
 
 				String[] speedNames = new String[] {
 						speedLimits[0] + " " + getString(R.string.km_h),
@@ -122,15 +122,16 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 						speedLimits[2] + " " + getString(R.string.km_h),
 						speedLimits[3] + " " + getString(R.string.km_h),
 						speedLimits[4] + " " + getString(R.string.km_h)};
-				registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimits);
+				registerListPreference(settings.SPEED_LIMIT_EXCEED_KM, screen, speedNames, speedLimits);
 			} else {
+				Float[] speedLimits = new Float[] {3f, 5f, 7f, 10f, 15f};
 				String[] speedNames = new String[] {
 						speedLimits[0] + " " + getString(R.string.mile_per_hour),
 						speedLimits[1] + " " + getString(R.string.mile_per_hour),
 						speedLimits[2] + " " + getString(R.string.mile_per_hour),
 						speedLimits[3] + " " + getString(R.string.mile_per_hour),
 						speedLimits[4] + " " + getString(R.string.mile_per_hour)};
-				registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimits);
+				registerListPreference(settings.SPEED_LIMIT_EXCEED_MILE, screen, speedNames, speedLimits);
 			}
 		}
 
