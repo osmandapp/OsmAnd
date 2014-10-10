@@ -112,23 +112,21 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		};
 		registerListPreference(settings.ARRIVAL_DISTANCE_FACTOR, screen, arrivalNames, arrivalValues);
 
-		Float[] speedLimits = new Float[]{5f, 7f, 10f, 15f, 20f};
+		//array size should be equal!
+		Float[] speedLimitsKm = new Float[]{5f, 7f, 10f, 15f, 20f};
+		Float[] speedLimitsMiles = new Float[]{3f, 5f, 7f, 10f, 15f};
 		if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
-			String[] speedNames = new String[]{
-					speedLimits[0] + " " + getString(R.string.km_h),
-					speedLimits[1] + " " + getString(R.string.km_h),
-					speedLimits[2] + " " + getString(R.string.km_h),
-					speedLimits[3] + " " + getString(R.string.km_h),
-					speedLimits[4] + " " + getString(R.string.km_h)};
-			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimits);
+			String[] speedNames = new String[speedLimitsKm.length];
+			for (int i =0; i<speedLimitsKm.length;i++){
+				speedNames[i] = speedLimitsKm[i] + " " + getString(R.string.km_h);
+			}
+			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsKm);
 		} else {
-			String[] speedNames = new String[]{
-					3f + " " + getString(R.string.mile_per_hour),
-					5f + " " + getString(R.string.mile_per_hour),
-					7f + " " + getString(R.string.mile_per_hour),
-					10f + " " + getString(R.string.mile_per_hour),
-					15f + " " + getString(R.string.mile_per_hour)};
-			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimits);
+			String[] speedNames = new String[speedLimitsKm.length];
+			for (int i =0; i<speedNames.length;i++){
+				speedNames[i] = speedLimitsMiles[i] + " " + getString(R.string.mile_per_hour);
+			}
+			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsKm);
 		}
 
 		PreferenceCategory category = (PreferenceCategory) screen.findPreference("guidance_preferences");
