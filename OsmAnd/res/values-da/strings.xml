@@ -1997,4 +1997,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="use_native_render_descr">Brug C++ optegning i stedet for Java</string>
     <string name="print_route">Udskriv rute</string>
     <string name="fav_point_emoticons_message">Favoritnavn er ændret til %1$s, fordi det ikke er muligt at have favoritnavne med humørikoner.</string>
-    </resources>
+    <string name="speed_limit_exceed">Hastighedsgrænse overstiger værdien.</string>
+	<string name="speed_limit_exceed_message">Vælg hastighedsgrænse overstige værdien som du vil få stemme meddelelse.</string>
+	</resources>
