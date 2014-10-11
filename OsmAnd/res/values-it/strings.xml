@@ -1999,4 +1999,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="use_native_render_descr">Usa il rendering C++ anziché Java</string>
     <string name="print_route">Stampa percorso</string>
     <string name="fav_point_emoticons_message">Abbiamo cambiato il nome del tuo punto preferito in %1$s perché non è possibile salvare stringhe con emoticon nel file.</string>
-    </resources>
+    <string name="speed_limit_exceed">Valore di sforamento del limite di velocità.</string>
+	</resources>
