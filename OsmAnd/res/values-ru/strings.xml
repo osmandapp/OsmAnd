@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_plugin_description">Плагин позволяет загружать контурные линии и затемнение высот для использования оффлайн (\"Настройки\" → \"Управление файлами карт\" → \"Загрузить\").</string>
     <string name="srtm_paid_version_msg">Рассмотрите, пожалуйста, покупку плагина \"Линии высот\" в Google Play, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
@@ -1770,4 +1770,7 @@
     <string name="traffic_warning_calming">Снизьте скорость</string>
     <string name="traffic_warning_speed_camera">Скоростной радар</string>
     <string name="traffic_warning">Ограничение скорости</string>
-	</resources>
+	<string name="speed_limit_exceed_message">Выберите значение превышения скорости, при котором вы получите голосовое предупреждение.</string>
+	<string name="speed_limit_exceed">Значение превышения скорости.</string>
+	<string name="test_native_render">Тест нативной визуализации</string>
+    </resources>
