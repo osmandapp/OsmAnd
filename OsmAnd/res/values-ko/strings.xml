@@ -2085,4 +2085,6 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="use_native_render_descr">Java 대신 C++ 렌더링을 사용합니다</string>
     <string name="print_route">경로 인쇄</string>
     <string name="fav_point_emoticons_message">%1$s 에 즐겨찾기 포인트 이름 변경. 파일에 이모티콘과 함께 문자열을 저장할 수 없습니다.</string>
-    </resources>
+    <string name="speed_limit_exceed">속도 제한 값을 초과 합니다.</string>
+	<string name="speed_limit_exceed_message">속도 제한 값을 초과하면, 음성 안내를 받아야 합니다.</string>
+	</resources>
