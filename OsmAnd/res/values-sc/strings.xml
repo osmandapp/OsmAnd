@@ -1750,4 +1750,6 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="use_native_render_descr">Imprea sa renderizatzione C++ imbetzes de Java</string>
     <string name="print_route">Imprenta àndala</string>
     <string name="fav_point_emoticons_message">Amos cambiadu su nùmene de su prefèrridu tuo, ponende•li %1$s, proite no est possìbile sarbare documentos impreande emòticons in intro de sas istringas.</string>
-    </resources>
+    <string name="speed_limit_exceed_message">Ischerta su balore de barigamentu de su lìmite de lestresa a pustis de su cale as a tènnere un\'avisu vocale.</string>
+	<string name="speed_limit_exceed">Balore de barigamentu de su lìmite de lestresa.</string>
+	</resources>
