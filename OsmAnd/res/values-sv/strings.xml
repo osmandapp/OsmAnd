@@ -1706,4 +1706,6 @@
     <string name="use_native_render_descr">Använd C++rendering i stället för Java</string>
     <string name="print_route">Skriv ut rutt</string>
     <string name="fav_point_emoticons_message">Vi ändrade namnet på din favoritpunkt till %1$s eftersom man inte kan ha en smiley i filnamn.</string>
-    </resources>
+    <string name="speed_limit_exceed_message">Välj hur mycket hastighetsgränsen måste överskridas för att du ska få ett röstmeddelande.</string>
+	<string name="speed_limit_exceed">Värde för överskridande av hastighetsgräns.</string>
+	</resources>
