@@ -149,6 +149,7 @@ public class MapTileDownloader {
 		while(!threadPoolExecutor.getQueue().isEmpty()){
 			threadPoolExecutor.getQueue().poll();
 		}
+		pendingToDownload.clear();
 	}
 	
 	public void requestToDownload(DownloadRequest request){
@@ -182,12 +183,12 @@ public class MapTileDownloader {
 		@Override
 		public void run() {
 			if (request != null && request.fileToSave != null && request.url != null) {
+				pendingToDownload.remove(request.fileToSave);
 				if(currentlyDownloaded.contains(request.fileToSave)){
 					return;
 				}
 				
 				currentlyDownloaded.add(request.fileToSave);
-				pendingToDownload.remove(request.fileToSave);
 				if(log.isDebugEnabled()){
 					log.debug("Start downloading tile : " + request.url); //$NON-NLS-1$
 				}
