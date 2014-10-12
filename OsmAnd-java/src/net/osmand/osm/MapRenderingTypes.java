@@ -482,7 +482,7 @@ public class MapRenderingTypes {
 		}
 
 		String poiCategory = parser.getAttributeValue("", "poi_category");
-		if (poiCategory != null && poiCategory.length() > 0) {
+		if (poiCategory != null) {
 			rtype.poiSpecified = true;
 			if (poiCategory.length() == 0) {
 				rtype.poiCategory = null;
