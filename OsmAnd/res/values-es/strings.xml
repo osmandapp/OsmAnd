@@ -1827,9 +1827,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
  	<string name="continue_navigation">Continuar Navegación</string>
     <string name="pause_navigation">Pausar Navegación</string>
 	<string name="rendering_attr_alpineHiking_name">Escala senderismo Alpino (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Interpretar caminos de acuerdo a la escala SAC</string>
+    <string name="rendering_attr_alpineHiking_description">Visualizar caminos de acuerdo a la escala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
-    <string name="rendering_attr_osmcTraces_description">Interpretar caminos de acuerdo a las trazas de OSMC</string>
+    <string name="rendering_attr_osmcTraces_description">Visualizar caminos de acuerdo a las trazas de OSMC</string>
     
 	<string name="osmo_invite">Invitar...</string>
     <string name="osmo_leave_confirmation_msg">¿Quieres abandonar el grupo %1$s?</string>
@@ -1838,7 +1838,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Tarde</string>
     <string name="arrival_distance_factor_at_last">En los últimos metros</string>
-    <string name="rendering_attr_coloredBuildings_name">Edificios de colores</string>
+    <string name="rendering_attr_coloredBuildings_name">Edificios coloreados según el tipo</string>
     <string name="hide_all_waypoints">Quitar todos</string>
 <string name="av_camera_pic_size">Tamaño de foto</string>
 	<string name="av_camera_pic_size_descr">Selecciona el tamaño interno de la foto</string>
@@ -1886,7 +1886,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="use_native_render">Usar renderización nativa</string>
     <string name="use_native_render_descr">Usar C++ para la renderización en vez de Java</string>
     <string name="print_route">Imprimir ruta</string>
-    <string name="fav_point_emoticons_message">Hemos cambiado el nombre de tu punto favorito a %1$s porque no es posible guardar nombres con emoticonos al fichero.</string>
-    <string name="speed_limit_exceed">Valor de exceso de velocidad.</string>
-	<string name="speed_limit_exceed_message">Selecciona el valor de exceso de velocidad sobre el limite de velocidad con el cual recibirás un aviso de voz.</string>
+    <string name="fav_point_emoticons_message">El nombre de punto favorito ha sido cambiado a %1$s para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
+    <string name="speed_limit_exceed">Tolerancia de límite de velocidad</string>
+	<string name="speed_limit_exceed_message">Selecciona el margen de tolerancia sobre el límite de velocidad con el cual recibirás un aviso de voz.</string>
 	</resources>
