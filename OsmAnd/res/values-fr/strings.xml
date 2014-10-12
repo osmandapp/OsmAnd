@@ -237,7 +237,7 @@
   <string name="gpx_option_from_start_point">Suivre l\'ensemble de la trace</string>
   <string name="switch_to_vector_map_to_see">Cartes vectorielles disponibles pour cette position. \n\t\n\tPour activer: \'Menu\'→\'Couches\'→\'Source de la carte…\'→\'Cartes vectorielles hors ligne\'.</string>
   <string name="choose_audio_stream">Sortie audio pour le guidage</string>
-  <string name="choose_audio_stream_descr">Sélectionnez la sortie audio à utiliser pour le guidage vocal (selon les capacités de votre appareil)</string>
+  <string name="choose_audio_stream_descr">Sélectionnez le canal audio de sortie à utiliser pour le guidage vocal (selon les capacités de votre appareil)</string>
   <string name="voice_stream_voice_call">Sortie téléphonie</string>
   <string name="voice_stream_notification">Sortie notifications</string>
   <string name="voice_stream_music">Sortie musique</string>
@@ -1489,8 +1489,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_avoid_ferries_description">Éviter les ferries</string>
 	<string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
 	<string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
-	<string name="routing_attr_weight_name">Poids maximum</string>
-	<string name="routing_attr_weight_description">Spécifier la limite de poids du véhicule</string>
+	<string name="routing_attr_weight_name">Limite de poids</string>
+	<string name="routing_attr_weight_description">Spécifier la limite de poids devant être autorisée sur les routes</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Définir la destination</string>
     <string name="route_descr_select_on_map">Définir sur la carte…</string>
@@ -1777,7 +1777,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_attr_osmcTraces_name">Surcouche de symboles de rando</string>
     <string name="rendering_attr_osmcTraces_description">Afficher les chemins selon les traces OSMC</string>
     
-	<string name="rendering_attr_coloredBuildings_name">Bâtiments en couleur</string>
+	<string name="rendering_attr_coloredBuildings_name">Bâtiments colorés par type</string>
     <string name="arrival_distance_factor_early">Tôt</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Tard</string>
@@ -1831,6 +1831,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_native_render_descr">Utiliser le moteur de rendu C++ au lieu de Java</string>
     <string name="print_route">Imprimer la route</string>
     <string name="fav_point_emoticons_message">Le nom de votre favoris sera %1$s car il n\'est pas possible d\'utiliser les émoticônes.</string>
-    <string name="speed_limit_exceed">Marge ajoutée aux limites de vitesse.</string>
-	<string name="speed_limit_exceed_message">Indiquez la marge à ajouter aux limitations de vitesse avant déclenchement des annonces vocales.</string>
+    <string name="speed_limit_exceed">Marge tolérée aux limites de vitesse</string>
+	<string name="speed_limit_exceed_message">Indiquez la marge à tolérer aux limitations de vitesse avant le déclenchement des annonces vocales.</string>
 	</resources>
