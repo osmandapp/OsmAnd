@@ -9,9 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="speed_limit_exceed">Speed limit exceed value.</string>
-	<string name ="speed_limit_exceed_message">Select speed limit exceed value on which you will get voice announcement.</string>
-	<string name="fav_point_emoticons_message">We changed your favorite point name to %1$s because it is not possible to save string with emoticons to file.</string>
+	<string name="speed_limit_exceed">Speed limit tolerance</string>
+	<string name ="speed_limit_exceed_message">Select speed limit tolerance margin, above which you will receive a voice warning.</string>
+	<string name="fav_point_emoticons_message">The favorite point name has been modified to %1$s to facilitate properly saving the string with emoticons to a file.</string>
     <string name="print_route">Print route</string>
     <string name="test_native_render">Test native render</string>
     <string name="test_native_render_msg">Starts activity with native render</string>
@@ -92,7 +92,7 @@
     <string name="rendering_value_car_name">Car</string>
     <string name="rendering_value_bicycle_name">Bicycle</string>
     <string name="rendering_value_pedestrian_name">Pedestrian</string>
-    <string name="rendering_attr_coloredBuildings_name">Colored buildings</string>
+    <string name="rendering_attr_coloredBuildings_name">Color-code buildings by type</string>
     <string name="osmo_invite">Invite...</string>
     <string name="osmo_leave_confirmation_msg">Do you want to leave group %1$s?</string>
     <string name="osmo_specify_tracker_id">Please specify id</string>
@@ -368,8 +368,8 @@
 	<string name="routing_attr_avoid_ferries_description">Avoid ferries</string>
 	<string name="routing_attr_avoid_motorway_name">Avoid motorways</string>
 	<string name="routing_attr_avoid_motorway_description">Avoid motorways</string>
-	<string name="routing_attr_weight_name">Maximum weight</string>
-	<string name="routing_attr_weight_description">Specify vehicle weight limitation</string>
+	<string name="routing_attr_weight_name">Weight limit</string>
+	<string name="routing_attr_weight_description">Specify vehicle weight to be permitted on routes</string>
     <string name="android_19_location_disabled">Since KitKat version you can\'t download and update map in previous storage location (%s). Do you want to change to allowed one and copy all files there?
         \n Note: old files will stay untouched.  
         \n Note: it will not be possible to share files between OsmAnd and OsmAnd+. </string>
