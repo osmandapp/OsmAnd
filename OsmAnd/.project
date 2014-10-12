@@ -3,6 +3,7 @@
 	<name>OsmAnd</name>
 	<comment></comment>
 	<projects>
+		<project>SherlockBar</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

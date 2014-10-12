@@ -1415,8 +1415,8 @@
 	<string name="routing_attr_avoid_ferries_description">Evita transbordadors</string>
 	<string name="routing_attr_avoid_motorway_name">Evita autopistes</string>
 	<string name="routing_attr_avoid_motorway_description">Evita autopistes</string>
-	<string name="routing_attr_weight_name">Pes màxim</string>
-	<string name="routing_attr_weight_description">Especifica limitació de pes del vehicle</string>
+	<string name="routing_attr_weight_name">Límit de pes</string>
+	<string name="routing_attr_weight_description">Especifiqueu el pes del vehicle que cal permetre a les rutes</string>
     <string name="background_service_int_descr">Trieu cada quan voleu que s\'actualitzi la posició en el mode en segon pla</string>
 	<string name="av_photo_play_sound_descr">Trieu si voleu reproduir un so en fer fotos</string>
 <string name="av_camera_focus_continuous">La càmera intenta enfocar de manera contínua</string>
@@ -1856,7 +1856,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Tard</string>
     <string name="arrival_distance_factor_at_last">Als darrers metres</string>
-    <string name="rendering_attr_coloredBuildings_name">Edificis amb colors</string>
+    <string name="rendering_attr_coloredBuildings_name">Edificis amb colors codificats per tipus</string>
     <string name="av_camera_pic_size">Mida d\'imatge de la càmera</string>
 	<string name="av_camera_pic_size_descr">Trieu la mida d\'imatge de la càmera interna</string>
     <string name="hide_all_waypoints">Esborra-ho tot</string>
@@ -1903,6 +1903,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="test_native_render_msg">Inicia l\'activitat amb renderització nativa</string>
     <string name="use_native_render">Utilitza la renderització nativa</string>
     <string name="use_native_render_descr">Ús de renderització C++ en comptes de Java</string>
-    <string name="fav_point_emoticons_message">S\'ha canviat el nom del vostre punt preferit a %1$s donat que no es pot desar un text amb emoticons en un arxiu.</string>
+    <string name="fav_point_emoticons_message">El nom del vostre punt preferit s\'ha canviat a %1$s per facilitar el desar bé la cadena amb emoticones en un fitxer.</string>
     <string name="print_route">Imprimeix la ruta</string>
-    </resources>
+    <string name="speed_limit_exceed">Tolerància sobre el límit de velocitat</string>
+	<string name="speed_limit_exceed_message">Trieu el marge de tolerància al límit de velocitat per sobre del que rebreu un avís de veu.</string>
+	</resources>

@@ -659,7 +659,7 @@
 	<string name="daynight_descr">Välj regel för byte mellan dag- och nattläge</string>
 	<string name="daynight">Dag-/nattläge</string>
 	<string name="download_files_question">Ladda ner {0} fil(er) ({1} MB)?</string>
-	<string name="items_were_selected">{0} post(er) vald(a)</string>
+	<string name="items_were_selected">{0} post(er) markerad(e)</string>
 	<string name="filter_existing_indexes">Visa nerladdat</string>
 	<string name="deselect_all">Avmarkera alla</string>
 	<string name="select_all">Markera alla</string>
@@ -1363,8 +1363,8 @@
 	<string name="routing_attr_avoid_ferries_description">Undvik färjor</string>
 	<string name="routing_attr_avoid_motorway_name">Undvik motorvägar</string>
 	<string name="routing_attr_avoid_motorway_description">Undvik motorvägar</string>
-	<string name="routing_attr_weight_name">Maxvikt</string>
-	<string name="routing_attr_weight_description">Ange viktbegränsning för fordon</string>
+	<string name="routing_attr_weight_name">Viktgräns</string>
+	<string name="routing_attr_weight_description">Ange fordonsvikt tillåten på rutter</string>
     <string name="routing_attr_short_way_name">Kortast väg</string>
 	<string name="routing_attr_short_way_description">Använd kortast väg</string>
 	<string name="select_gpx">Välj GPX …</string>
@@ -1653,7 +1653,7 @@
 	<string name="osmo_invite">Bjud in…</string>
     <string name="osmo_leave_confirmation_msg">Vill du lämna gruppen %1$s?</string>
     <string name="osmo_specify_tracker_id">Ange id</string>
-    <string name="rendering_attr_coloredBuildings_name">Färgade byggnader</string>
+    <string name="rendering_attr_coloredBuildings_name">Färgkodade byggnader efter typ</string>
     <string name="arrival_distance_factor_early">Tidigt</string>
     <string name="arrival_distance_factor_normally">Normalt</string>
     <string name="arrival_distance_factor_late">Sent</string>
@@ -1705,4 +1705,7 @@
     <string name="use_native_render">Använd inbyggd rendering</string>
     <string name="use_native_render_descr">Använd C++rendering i stället för Java</string>
     <string name="print_route">Skriv ut rutt</string>
-    </resources>
+    <string name="fav_point_emoticons_message">Vi ändrade namnet på din favoritpunkt till %1$s för att underlätta din smiley i filnamnet.</string>
+    <string name="speed_limit_exceed_message">Välj hur mycket hastighetsgränsen måste överskridas för att du ska få ett röstmeddelande.</string>
+	<string name="speed_limit_exceed">Tolerans för hastighetsgräns</string>
+	</resources>

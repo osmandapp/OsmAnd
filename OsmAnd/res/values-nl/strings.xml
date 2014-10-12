@@ -1634,7 +1634,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="routing_attr_avoid_ferries_description">Vermijd veerboten</string>
 	<string name="routing_attr_avoid_motorway_name">Geen autowegen</string>
 	<string name="routing_attr_avoid_motorway_description">Vermijd autowegen</string>
-	<string name="routing_attr_weight_description">Geef het maximum gewicht van een voertuig</string>
+	<string name="routing_attr_weight_description">Geef het gewicht van een voertuig voor de routeplanning</string>
     <string name="routing_attr_weight_name">Maximum gewicht</string>
 	<string name="select_gpx">GPX-bestand kiezen …</string>
     <string name="route_descr_select_destination">Bestemming kiezen</string>
@@ -1923,7 +1923,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_attr_osmcTraces_name">Wandelsymbolen laag</string>
     <string name="rendering_attr_osmcTraces_description">Render paden volgens OSMC sporen</string>
     
-	<string name="rendering_attr_coloredBuildings_name">Gekleurde gebouwen</string>
+	<string name="rendering_attr_coloredBuildings_name">Gebouwen kleuren per soort</string>
     <string name="osmo_invite">Uitnodiging voor…</string>
     <string name="osmo_leave_confirmation_msg">Wil je de groep %1$s verlaten?</string>
     <string name="osmo_specify_tracker_id">Specificeer je tracker-id alsjeblieft</string>
@@ -1974,9 +1974,11 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="fav_point_dublicate_message">Favoriet bestaat al: de naam is veranderd in %1$s</string>
     <string name="fav_point_dublicate">Favoriet met deze naam bestaat al</string>
     <string name="test_native_render">Test \"native rendering\"</string>
-    <string name="test_native_render_msg">Start activiteit met oorspronkelijke renderer</string>
-    <string name="use_native_render">Gebruik oorspronkelijke renderer</string>
+    <string name="test_native_render_msg">Gebruik deze keer de C++ renderer in plaats van Java</string>
+    <string name="use_native_render">Gebruik \"native renderer\"</string>
     <string name="use_native_render_descr">Gebruik C++ renderer in plaats van Java</string>
-    <string name="fav_point_emoticons_message">Favoriet bewaard als %1s omdat vreemde tekens niet opgeslagen kunnen worden.</string>
+    <string name="fav_point_emoticons_message">Favoriet bewaard als %1s omdat vreemde tekens niet opgeslagen kunnen worden in een bestand.</string>
     <string name="print_route">Route afdrukken</string>
-    </resources>
+    <string name="speed_limit_exceed">Te hoge snelheid melden bij...</string>
+	<string name="speed_limit_exceed_message">Hoeveel de maximumsnelheid mag worden overschreden voordat een melding volgt.</string>
+	</resources>

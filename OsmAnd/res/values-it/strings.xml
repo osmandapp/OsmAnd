@@ -284,7 +284,7 @@
   
   <string name="tip_navigation">Navigazione</string>
   <string name="tip_navigation_t">"Per ottenere indicazioni, tieni premuto sul luogo di destinazione (poi premi la sua descrizione e seleziona \'Indicazioni verso\'), oppure seleziona \'Indicazioni\' dopo aver premuto sul risultato di una ricerca o un preferito.
-\n\nLa destinazione è segnata sulla mappa con una bandiera a scacchi e OsmAnd mostrerà la distanza di arrivo e la direzione per raggiungerla in linea d\'aria (con un triangolo arancione).
+\n\nLa destinazione è segnata sulla mappa con una bandiera a scacchi e OsmAnd mostra la distanza di arrivo e la direzione per raggiungerla in linea d\'aria (con un triangolo arancione).
 \n\nPuoi selezionare \'Avvia navigazione\', per chiedere a OsmAnd di guidarti fino a destinazione fornendoti avvisi vocali (se abilitati), etc. Oppure seleziona \'Mostra percorso\' per ottenere una guida statica senza aggiornamenti mentre ti muovi.
 \n\nPer ricevere indicazioni partendo da un punto diverso alla tua posizione attuale, seleziona il punto voluto sulla mappa e scegli \'Indicazioni da\'.
 \n\nSe usi \'Indicazioni da\' insieme ad \'Avvia navigazione\', OsmAnd passerà alla tua posizione attuale on appena essa sarà disponibile (questo modo è stato studiato proprio per permettere di avviare immediatamente la navigazione ancor prima che la posizione sia stata individuata), mentre \'Indicazioni da\' insieme a \'Mostra percorso\' calcola il percorso da un punto arbitrario senza effettuare alcun aggiornamento. "</string>
@@ -1900,12 +1900,12 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_attr_hideNonVehicleHighways_name">Nascondi le strade non carrabili</string>
     <string name="rendering_attr_hideText_name">Nascondi il testo</string>
     <string name="rendering_attr_hideWoodScrubs_name">Nascondi foreste e boscaglie</string>
-    <string name="rendering_attr_buildings15zoom_name">Edifici dal zoom 15</string>
+    <string name="rendering_attr_buildings15zoom_name">Edifici da zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Più dettagli</string>
     <string name="rendering_attr_lessDetailed_name">Meno dettagli</string>
     <string name="rendering_attr_hideAccess_name">Nascondi le limitazioni di accesso</string>
     <string name="rendering_attr_showAccess_name">Mostra le limitazioni di accesso</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Mostra la qualità delle strade</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Mostra qualità strade</string>
     <string name="rendering_attr_showSurfaces_name">Mostra il tipo di superficie delle strade</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostra i percorsi per bicicletta</string>
     <string name="osmo_auth_error_short">Autorizzazione fallita</string>
@@ -1991,11 +1991,14 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="local_index_description">Clicca su un oggetto per visualizzare maggiori dettagli, tieni premuto per disattivarlo o cancellarlo. Dati attualmente nel dispositivo (%1$s liberi):</string>
 	<string name="text_size_descr">Imposta la dimensione del testo sulla mappa.</string>
     <string name="text_size">Dimensione del testo</string>
-    <string name="test_native_render">Prova la rappresentazione nativa</string>
-    <string name="test_native_render_msg">Inizia l\'attività con la rappresentazione nativa</string>
+    <string name="test_native_render">Prova il rendering nativo</string>
+    <string name="test_native_render_msg">Inizia l\'attività con il rendering nativo</string>
     <string name="fav_point_dublicate">Nome del punto preferito duplicato</string>
     <string name="fav_point_dublicate_message">Per evitare duplicati il nome del vostro punto preferito è stato modificato in %1$s.</string>
-    <string name="use_native_render">Utilizza la rappresentazione nativa</string>
-    <string name="use_native_render_descr">Usa la rappresentazione C++ anziché Java</string>
+    <string name="use_native_render">Usa il rendering nativo</string>
+    <string name="use_native_render_descr">Usa il rendering C++ anziché Java</string>
     <string name="print_route">Stampa percorso</string>
-    </resources>
+    <string name="fav_point_emoticons_message">Abbiamo cambiato il nome del tuo punto preferito in %1$s perché non è possibile salvare stringhe con emoticon nel file.</string>
+    <string name="speed_limit_exceed">Valore di superamento del limite di velocità.</string>
+	<string name="speed_limit_exceed_message">Seleziona il valore di superamento del limite di velocità sal quale si desidera avere l\'avviso vocale.</string>
+	</resources>

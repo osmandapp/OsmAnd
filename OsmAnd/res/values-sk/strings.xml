@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -1657,8 +1657,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="routing_attr_avoid_ferries_description">Vyhnúť sa trajektom</string>
 	<string name="routing_attr_avoid_motorway_name">Vyhnúť sa diaľniciam</string>
 	<string name="routing_attr_avoid_motorway_description">Vyhnúť sa diaľniciam</string>
-	<string name="routing_attr_weight_name">Maximálna hmotnosť</string>
-	<string name="routing_attr_weight_description">Zadajte obmedzenie hmotnosti vozidla</string>
+	<string name="routing_attr_weight_name">Hmotnostný limit</string>
+	<string name="routing_attr_weight_description">Zadajte hmotnosť vozidla, ktorá musí byť povolená na cestách</string>
     <string name="select_gpx">Vybrať GPX …</string>
     <string name="route_descr_select_destination">Vybrať cieľ</string>
     <string name="route_descr_select_on_map">Vybrať na mape …</string>
@@ -1946,7 +1946,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_osmcTraces_name">Zobraziť turistické značky</string>
     <string name="rendering_attr_osmcTraces_description">Kresliť chodníky podľa značenia OSMC</string>
     
-	<string name="rendering_attr_coloredBuildings_name">Farebné budovy</string>
+	<string name="rendering_attr_coloredBuildings_name">Vyfarbiť budovy podľa typu</string>
     <string name="osmo_invite">Pozvať...</string>
     <string name="osmo_leave_confirmation_msg">Chcete opustiť skupinu %1$s?</string>
     <string name="osmo_specify_tracker_id">Prosím zadajte ID</string>
@@ -2000,4 +2000,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="test_native_render_msg">Spustí činnosť s natívnym vykresľovaním</string>
     <string name="use_native_render">Použiť natívne vykresľovanie</string>
     <string name="use_native_render_descr">Použiť vykresľovanie v C++ namiesto Javy</string>
-    </resources>
+    <string name="fav_point_emoticons_message">Názov obľúbeného bodu bol upravený na %1$s, aby bolo možné správne uložiť názov s emotikonom do súboru.</string>
+    <string name="print_route">Vytlačiť trasu</string>
+    <string name="speed_limit_exceed">Tolerancia prekročenia povolenej rýchlosti</string>
+	<string name="speed_limit_exceed_message">Zvoľte toleranciu prekročenia povolenej rýchlosti, po ktorej dostanete hlasové oznámenie.</string>
+	</resources>

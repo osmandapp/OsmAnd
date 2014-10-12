@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага масштабіраваньня</string>
     <string name="auto_zoom_close">Зачыніць</string>
     <string name="auto_zoom_far">Для сярэдняга масштаба</string>
@@ -1964,4 +1964,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="traffic_warning">Абмежаваньне руху</string>
 	<string name="text_size_descr">Абраць памер тэксту на мапе.</string>
     <string name="text_size">Памер тэксту</string>
-    </resources>
+    <string name="speed_limit_exceed">Велічыня перавышэньня абмежаваньня хуткасьці.</string>
+	<string name="speed_limit_exceed_message">Задаць велічыню перавышэньня абмежаваньня хуткасьці, пры якім вы атрымаеце галасавое паведамленьне.</string>
+	</resources>

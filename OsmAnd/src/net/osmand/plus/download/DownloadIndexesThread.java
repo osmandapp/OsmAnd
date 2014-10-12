@@ -328,8 +328,8 @@ public class DownloadIndexesThread {
 			boolean res = false;
 			if (de.isAsset) {
 				try {
-					if (uiActivity != null) {
-						ResourceManager.copyAssets(uiActivity.getAssets(), de.assetName, de.targetFile);
+					if (ctx != null) {
+						ResourceManager.copyAssets(ctx.getAssets(), de.assetName, de.targetFile);
 						boolean changedDate = de.targetFile.setLastModified(de.dateModified);
 						if(!changedDate) {
 							log.error("Set last timestamp is not supported");
@@ -527,22 +527,24 @@ public class DownloadIndexesThread {
 
 	private void prepareFilesToUpdate() {
 		List<IndexItem> filtered = getCachedIndexFiles();
-		itemsToUpdate.clear();
-		for (IndexItem item : filtered) {
-			String sfName = item.getTargetFileName();
-			java.text.DateFormat format = uiActivity.getMyApplication().getResourceManager().getDateFormat();
-			String date = item.getDate(format);
-			String indexactivateddate = indexActivatedFileNames.get(sfName);
-			String indexfilesdate = indexFileNames.get(sfName);
-			if (date != null &&
-					!date.equals(indexactivateddate) &&
-					!date.equals(indexfilesdate) &&
-					indexActivatedFileNames.containsKey(sfName)) {
-				itemsToUpdate.add(item);
+		if (filtered != null) {
+			itemsToUpdate.clear();
+			for (IndexItem item : filtered) {
+				String sfName = item.getTargetFileName();
+				java.text.DateFormat format = uiActivity.getMyApplication().getResourceManager().getDateFormat();
+				String date = item.getDate(format);
+				String indexactivateddate = indexActivatedFileNames.get(sfName);
+				String indexfilesdate = indexFileNames.get(sfName);
+				if (date != null &&
+						!date.equals(indexactivateddate) &&
+						!date.equals(indexfilesdate) &&
+						indexActivatedFileNames.containsKey(sfName)) {
+					itemsToUpdate.add(item);
+				}
 			}
-		}
-		if (uiActivity != null){
-			uiActivity.updateDownloadList(itemsToUpdate);
+			if (uiActivity != null){
+				uiActivity.updateDownloadList(itemsToUpdate);
+			}
 		}
 	}
 
@@ -550,7 +552,7 @@ public class DownloadIndexesThread {
 		List<IndexItem> stillUpdate = new ArrayList<IndexItem>();
 		for (IndexItem item : itemsToUpdate) {
 			String sfName = item.getTargetFileName();
-			java.text.DateFormat format = uiActivity.getMyApplication().getResourceManager().getDateFormat();
+			java.text.DateFormat format = app.getResourceManager().getDateFormat();
 			String date = item.getDate(format);
 			String indexactivateddate = indexActivatedFileNames.get(sfName);
 			String indexfilesdate = indexFileNames.get(sfName);

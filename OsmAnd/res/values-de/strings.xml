@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -56,7 +56,7 @@
 	<string name="rendering_value_bicycle_name">Fahrrad</string>
 	<string name="rendering_value_pedestrian_name">Fußgänger</string>
 	<string name="announce_nearby_favorites">Ansage von Favoriten in den Nähe</string>
-	<string name="rendering_attr_coloredBuildings_name">Gefärbte Gebäude</string>
+	<string name="rendering_attr_coloredBuildings_name">Gebäudefärbung nach Typ</string>
 	<string name="continue_navigation">Navigation fortsetzen</string>
 	<string name="pause_navigation">Navigation pausieren</string>
 	<string name="keep_navigation_service">Aktiv erhalten</string>
@@ -1533,8 +1533,8 @@
 	<string name="routing_attr_avoid_ferries_description">Fähren vermeiden</string>
 	<string name="routing_attr_avoid_motorway_name">Autobahnen vermeiden</string>
 	<string name="routing_attr_avoid_motorway_description">Autobahnen vermeiden</string>
-	<string name="routing_attr_weight_name">Maximalgewicht</string>
-	<string name="routing_attr_weight_description">Angabe einer Massebeschränkung für die Fahrzeugart</string>
+	<string name="routing_attr_weight_name">Gewichtsbeschränkung</string>
+	<string name="routing_attr_weight_description">Angabe eines Fahrzeuggewichts für die Zulässigkeit Route</string>
 	<string name="android_19_location_disabled">"Seit Android 4.4 (KitKat) können neue Karten-Downloads nicht mehr am Speicherort früherer Android-Versionen gespeichert werden (%s). Jetzt einen zulässigen Speicherort wählen und alle notwendigen Dateien dorthin kopieren?
 \n Hinweis: Ursprüngliche Dateien bleiben hiervon unberührt.
 \n Hinweis: Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden. "</string>
@@ -1980,4 +1980,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="test_native_render_msg">Nutzt den nativen Renderer</string>
     <string name="use_native_render">Nativen Renderer benutzen</string>
     <string name="use_native_render_descr">C++ Renderer statt Java-Renderer nutzen</string>
-    </resources>
+    <string name="fav_point_emoticons_message">Der Name des Favoriten wurde auf %1$s geändert, denn Zeichenketten mit Emoticons können nicht gespeichert werden.</string>
+    <string name="print_route">Route drucken</string>
+    <string name="speed_limit_exceed">Schwellenwert für Geschwindigkeitswarnung.</string>
+	<string name="speed_limit_exceed_message">Schwellenwert für Warnung bei Überschreiten der Höchstgeschwindigkeit.</string>
+	</resources>

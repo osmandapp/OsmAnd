@@ -723,12 +723,12 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 	
-	public void openOptionsMenuAsDrawer(){
+	public void createOptionsMenuAsDrawer(boolean show){
 		final ContextMenuAdapter cm = createOptionsMenu();
 		final DrawerLayout mDrawerLayout = (DrawerLayout) mapActivity.findViewById(R.id.drawer_layout);
 		final ListView mDrawerList = (ListView) mapActivity.findViewById(R.id.left_drawer);
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-		ListAdapter listAdapter ;
+		ListAdapter listAdapter;
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
 			listAdapter =
 					cm.createListAdapter(mapActivity, R.layout.list_menu_item, getMyApplication().getSettings().isLightContentMenu());
@@ -755,7 +755,9 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 
-		mDrawerLayout.openDrawer(mDrawerList);
+		if (show){
+			mDrawerLayout.openDrawer(mDrawerList);
+		}
 	}
 
 	public AlertDialog openOptionsMenuAsList() {

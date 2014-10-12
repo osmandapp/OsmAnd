@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
@@ -32,6 +33,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private Preference speakAlarms;
 	private ListPreference routerServicePreference;
 	private ListPreference autoZoomMapPreference;
+	private ListPreference speedLimitExceed;
 	
 	
 	private List<RoutingParameter> avoidParameters = new ArrayList<RoutingParameter>();
@@ -109,7 +111,32 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				getString(R.string.arrival_distance_factor_at_last)
 		};
 		registerListPreference(settings.ARRIVAL_DISTANCE_FACTOR, screen, arrivalNames, arrivalValues);
-		
+
+		//array size should be equal!
+		Float[] speedLimitsKm = new Float[]{5f, 7f, 10f, 15f, 20f};
+		Float[] speedLimitsMiles = new Float[]{3f, 5f, 7f, 10f, 15f};
+		if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
+			String[] speedNames = new String[speedLimitsKm.length];
+			for (int i =0; i<speedLimitsKm.length;i++){
+				speedNames[i] = speedLimitsKm[i] + " " + getString(R.string.km_h);
+			}
+			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsKm);
+		} else {
+			String[] speedNames = new String[speedLimitsKm.length];
+			for (int i =0; i<speedNames.length;i++){
+				speedNames[i] = speedLimitsMiles[i] + " " + getString(R.string.mile_per_hour);
+			}
+			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsKm);
+		}
+
+		PreferenceCategory category = (PreferenceCategory) screen.findPreference("guidance_preferences");
+		speedLimitExceed = (ListPreference) category.findPreference("speed_limit_exceed");
+		ApplicationMode mode = getMyApplication().getSettings().getApplicationMode();
+		if (!mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+			category.removePreference(speedLimitExceed);
+		}
+
+
 		profileDialog();
 	}
 	
@@ -174,6 +201,14 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					basePref.setSummary(SettingsBaseActivity.getRoutingStringPropertyDescription(this, p.getId(), p.getDescription()));
 					cat.addPreference(basePref);
 				}
+			}
+			ApplicationMode mode = getMyApplication().getSettings().getApplicationMode();
+			if (mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+				PreferenceCategory category = (PreferenceCategory) screen.findPreference("guidance_preferences");
+				category.addPreference(speedLimitExceed);
+			} else {
+				PreferenceCategory category = (PreferenceCategory) screen.findPreference("guidance_preferences");
+				category.removePreference(speedLimitExceed);
 			}
 		}
 	}
