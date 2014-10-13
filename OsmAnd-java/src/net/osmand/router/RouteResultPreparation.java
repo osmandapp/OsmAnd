@@ -439,6 +439,7 @@ public class RouteResultPreparation {
 				} else {
 					t = TurnType.valueOf(TurnType.TU, leftSide);
 				}
+				getLanesInfo(prev, t);
 			} else if (mpi < -TURN_DEGREE_MIN) {
 				if (mpi > -60) {
 					t = TurnType.valueOf(TurnType.TSLR, leftSide);
@@ -449,6 +450,7 @@ public class RouteResultPreparation {
 				} else {
 					t = TurnType.valueOf(TurnType.TU, leftSide);
 				}
+				getLanesInfo(prev, t);
 			} else {
 				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, t);
 			}
@@ -459,6 +461,37 @@ public class RouteResultPreparation {
 		return t;
 	}
 
+	private void getLanesInfo(RouteSegmentResult prevSegm, TurnType t) {
+		int lanes = prevSegm.getObject().getLanes();
+		if (prevSegm.getObject().getOneway() == 0) {
+			lanes = countLanes(prevSegm, lanes);
+		}
+		if (lanes <= 0) {
+			return;
+		}
+
+		String turnLanes = getTurnLanesString(prevSegm);
+		if (turnLanes == null) {
+			return;
+		}
+
+		String[] splitLaneOptions = turnLanes.split("\\|", -1);
+		if (splitLaneOptions.length != lanes) {
+			// Error in data or missing data
+			return;
+		}
+
+		int[] lanesArray = new int[lanes];
+		t.setLanes(lanesArray);
+		assignTurns(splitLaneOptions, t);
+
+		// Manually set the allowed lanes.
+		for (int i = 0; i < lanesArray.length; i++) {
+			if (TurnType.getPrimaryTurn(lanesArray[i]) == t.getValue()) {
+				lanesArray[i] |= 1;
+			}
+		}
+	}
 
 	private TurnType processRoundaboutTurn(List<RouteSegmentResult> result, int i, boolean leftSide, RouteSegmentResult prev,
 			RouteSegmentResult rr) {
