@@ -1985,7 +1985,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="traffic_warning_payment">Casello</string>
     <string name="traffic_warning_border_control">Controllo doganale</string>
     <string name="traffic_warning_stop">Segnale di stop</string>
-    <string name="traffic_warning_calming">Moderazione del traffico</string>
+    <string name="traffic_warning_calming">Moderatore del traffico</string>
     <string name="traffic_warning_speed_camera">Autovelox</string>
     <string name="traffic_warning">Avviso di traffico</string>
 	<string name="local_index_description">Clicca su un oggetto per visualizzare maggiori dettagli, tieni premuto per disattivarlo o cancellarlo. Dati attualmente nel dispositivo (%1$s liberi):</string>
@@ -1999,6 +1999,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="use_native_render_descr">Usa il rendering C++ anziché Java</string>
     <string name="print_route">Stampa percorso</string>
     <string name="fav_point_emoticons_message">Abbiamo cambiato il nome del tuo punto preferito in %1$s perché non è possibile salvare stringhe con emoticon nel file.</string>
-    <string name="speed_limit_exceed">Valore di superamento del limite di velocità.</string>
-	<string name="speed_limit_exceed_message">Seleziona il valore di superamento del limite di velocità sal quale si desidera avere l\'avviso vocale.</string>
+    <string name="speed_limit_exceed">Tolleranza del limite di velocità</string>
+	<string name="speed_limit_exceed_message">Seleziona il valore di superamento del limite di velocità dal quale si desidera avere l\'avviso vocale.</string>
 	</resources>
