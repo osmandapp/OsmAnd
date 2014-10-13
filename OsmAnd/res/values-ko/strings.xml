@@ -976,8 +976,8 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="routing_attr_avoid_ferries_description">뱃길 회피하기</string>
 	<string name="routing_attr_avoid_motorway_name">전용도로 회피</string>
 	<string name="routing_attr_avoid_motorway_description">전용도로 회피하기</string>
-	<string name="routing_attr_weight_name">최대중량</string>
-	<string name="routing_attr_weight_description">차량중량제한 지정하기</string>
+	<string name="routing_attr_weight_name">중량 제한</string>
+	<string name="routing_attr_weight_description">도로에 허가된 차량중량 지정하기</string>
     <string name="android_19_location_disabled">"킷캣(KitKat) 버전 이후로 이전에 저장한 위치에 지도를 다운로드하고 업데이트 할 수 없습니다 (%s).
 \n모든 파일을 그곳에 복사하는 것을 허락하겠습니까?
 \n Note : 이전 파일은 그대로 유지됩니다.
@@ -2030,7 +2030,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="rendering_attr_osmcTraces_name">하이킹 심볼 오버레이</string>
     <string name="rendering_attr_osmcTraces_description">OSMC 흔적에 따라 경로 렌더링</string>
     
-	<string name="rendering_attr_coloredBuildings_name">채색된 건물</string>
+	<string name="rendering_attr_coloredBuildings_name">유형별 색상 코드 건물</string>
     <string name="osmo_invite">초대...</string>
     <string name="osmo_leave_confirmation_msg">그룹 %1$s를 떠나시겠습니까?</string>
     <string name="osmo_specify_tracker_id">Id를 지정 하십시오</string>
@@ -2085,6 +2085,6 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="use_native_render_descr">Java 대신 C++ 렌더링을 사용합니다</string>
     <string name="print_route">경로 인쇄</string>
     <string name="fav_point_emoticons_message">%1$s 에 즐겨찾기 포인트 이름 변경. 파일에 이모티콘과 함께 문자열을 저장할 수 없습니다.</string>
-    <string name="speed_limit_exceed">속도 제한 초과 값.</string>
-	<string name="speed_limit_exceed_message">음성 안내를 받아야 할 속도 제한 초과 값을 선택합니다.</string>
+    <string name="speed_limit_exceed">속도 제한 초과 값</string>
+	<string name="speed_limit_exceed_message">음성 안내 경고를 받아야 할 속도 제한 초과 값을 선택합니다.</string>
 	</resources>
