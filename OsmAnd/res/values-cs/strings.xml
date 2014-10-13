@@ -1743,5 +1743,7 @@ s často kladenými otázkami.</string>
     <string name="use_native_render">Použít nativní vykreslování</string>
     <string name="use_native_render_descr">Použít C++ vykreslování místo Javy</string>
     <string name="print_route">Vytisknout trasu</string>
-    <string name="fav_point_emoticons_message">Změnili jsme jméno vašeho oblíbeného bodu na %1$s, protože není možné ukládat do souboru řetězce s emotikony.</string>
-    </resources>
+    <string name="fav_point_emoticons_message">Jméno oblíbeného bodu bylo změněno na %1$s, aby bylo možné uložit název emotikonu do souboru.</string>
+    <string name="speed_limit_exceed">Tolerance překročení rychlosti</string>
+	<string name="speed_limit_exceed_message">Zvolte toleranci překročení povolené rychlosti, po které uslyšíte hlasové varování.</string>
+	</resources>
