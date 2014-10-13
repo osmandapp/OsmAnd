@@ -138,7 +138,6 @@ public class MapActivity extends AccessibleActivity  {
 		parseLaunchIntentLocation();
 		
 		if(settings.USE_NATIVE_RENDER.get() && NativeQtLibrary.isInit()) {
-			findViewById(R.id.MapView).setVisibility(View.GONE);
 			glSurfaceView = (GLSurfaceView) findViewById(R.id.glSurfaceView);
 			glSurfaceView.setVisibility(View.VISIBLE);
 			OsmAndMapLayersView ml = (OsmAndMapLayersView) findViewById(R.id.MapLayersView);
@@ -147,8 +146,6 @@ public class MapActivity extends AccessibleActivity  {
 			mapView = ml.getMapView();
 			mapView.setMapRender(NativeQtLibrary.getMapRenderer());
 		} else {
-			findViewById(R.id.MapLayersView).setVisibility(View.GONE);
-			findViewById(R.id.glSurfaceView).setVisibility(View.GONE);
 			OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
 			surf.setVisibility(View.VISIBLE);
 			mapView = surf.getMapView();
