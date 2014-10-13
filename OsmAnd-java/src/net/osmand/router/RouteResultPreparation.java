@@ -439,7 +439,7 @@ public class RouteResultPreparation {
 				} else {
 					t = TurnType.valueOf(TurnType.TU, leftSide);
 				}
-				getLanesInfo(prev, t);
+				getLanesInfo(prev, t, leftSide);
 			} else if (mpi < -TURN_DEGREE_MIN) {
 				if (mpi > -60) {
 					t = TurnType.valueOf(TurnType.TSLR, leftSide);
@@ -450,7 +450,7 @@ public class RouteResultPreparation {
 				} else {
 					t = TurnType.valueOf(TurnType.TU, leftSide);
 				}
-				getLanesInfo(prev, t);
+				getLanesInfo(prev, t, leftSide);
 			} else {
 				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, t);
 			}
@@ -461,7 +461,7 @@ public class RouteResultPreparation {
 		return t;
 	}
 
-	private void getLanesInfo(RouteSegmentResult prevSegm, TurnType t) {
+	private void getLanesInfo(RouteSegmentResult prevSegm, TurnType t, boolean leftSide) {
 		int lanes = prevSegm.getObject().getLanes();
 		if (prevSegm.getObject().getOneway() == 0) {
 			lanes = countLanes(prevSegm, lanes);
@@ -484,6 +484,32 @@ public class RouteResultPreparation {
 		int[] lanesArray = new int[lanes];
 		t.setLanes(lanesArray);
 		assignTurns(splitLaneOptions, t);
+
+		// In some cases (at least in the US), the rightmost lane might not have a right turn indicated as per turn:lanes, but is allowed and being used here. This section adds in that indicator.  The same applies for where leftSide is true.
+		if (leftSide) {
+			if (t.getValue() == TurnType.TL
+					&& TurnType.getPrimaryTurn(lanesArray[0]) != TurnType.TL
+					&& TurnType.getPrimaryTurn(lanesArray[0]) != TurnType.TSLL
+					&& TurnType.getPrimaryTurn(lanesArray[0]) != TurnType.TSHL) {
+				if (TurnType.getPrimaryTurn(lanesArray[0]) != 0) {
+					// This was just to make sure that there's no bad data.
+					t.setSecondaryTurn(0, TurnType.getPrimaryTurn(lanesArray[0]));
+					t.setPrimaryTurn(0, TurnType.TL);
+				}
+			}
+		} else {
+			int lastIndex = lanesArray.length - 1;
+			if (t.getValue() == TurnType.TR
+					&& TurnType.getPrimaryTurn(lanesArray[lastIndex]) != TurnType.TR
+					&& TurnType.getPrimaryTurn(lanesArray[lastIndex]) != TurnType.TSLR
+					&& TurnType.getPrimaryTurn(lanesArray[lastIndex]) != TurnType.TSHR) {
+				if (TurnType.getPrimaryTurn(lanesArray[lastIndex]) != 0) {
+					// This was just to make sure that there's no bad data.
+					t.setSecondaryTurn(lastIndex, TurnType.getPrimaryTurn(lanesArray[lastIndex]));
+					t.setPrimaryTurn(lastIndex, TurnType.TR);
+				}
+			}
+		}
 
 		// Manually set the allowed lanes.
 		for (int i = 0; i < lanesArray.length; i++) {
