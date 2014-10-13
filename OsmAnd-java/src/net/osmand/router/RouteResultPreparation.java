@@ -518,7 +518,9 @@ public class RouteResultPreparation {
 						if(attached.getObject().getOneway() == 0) {
 							lns = countLanes(attached, lns);
 						}
-						if (lns > 0) {
+						if (lns <= 0) {
+							right += 1;
+						} else {
 							right += lns;
 						}
 						speak = speak || rsSpeakPriority <= speakPriority;
@@ -528,7 +530,9 @@ public class RouteResultPreparation {
 						if(attached.getObject().getOneway() == 0) {
 							lns = countLanes(attached, lns);
 						}
-						if (lns > 0) {
+						if (lns <= 0) {
+							left += 1;
+						} else {
 							left += lns;
 						}
 						speak = speak || rsSpeakPriority <= speakPriority;
