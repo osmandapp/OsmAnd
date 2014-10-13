@@ -1489,8 +1489,8 @@
 	<string name="routing_attr_avoid_ferries_description">避開渡輪</string>
 	<string name="routing_attr_avoid_motorway_name">避開高速公路</string>
 	<string name="routing_attr_avoid_motorway_description">避開高速公路</string>
-	<string name="routing_attr_weight_name">最大重量</string>
-	<string name="routing_attr_weight_description">指定車輛重量限制</string>
+	<string name="routing_attr_weight_name">重量限制</string>
+	<string name="routing_attr_weight_description">指定許可在路線行駛的車輛重量</string>
     <string name="select_gpx">選擇 GPX …</string>
     <string name="route_descr_select_destination">選擇目的地</string>
     <string name="route_descr_select_on_map">在地圖上選取 …</string>
@@ -1777,7 +1777,7 @@
     <string name="arrival_distance_factor_normally">正常</string>
     <string name="arrival_distance_factor_late">稍遲</string>
     <string name="arrival_distance_factor_at_last">在最後一米</string>
-    <string name="rendering_attr_coloredBuildings_name">有色彩的建築物</string>
+    <string name="rendering_attr_coloredBuildings_name">以色彩編碼區分建築物類型</string>
     <string name="hide_all_waypoints">全部移除</string>
 <string name="av_camera_pic_size">相機照片的大小</string>
 	<string name="av_camera_pic_size_descr">選擇內部相機照片的大小</string>
@@ -1825,7 +1825,7 @@
     <string name="use_native_render">使用原生繪製</string>
     <string name="use_native_render_descr">使用 C++ 替代 JAVA 繪製</string>
     <string name="print_route">列印路線</string>
-    <string name="fav_point_emoticons_message">我們把我的最愛標點名稱，改為 %1$s 是因為它不可能把表情字符儲存成檔案。</string>
-    <string name="speed_limit_exceed">超過速限規定。</string>
-	<string name="speed_limit_exceed_message">選擇超過速限規定時，您將聽到的語音預告。</string>
+    <string name="fav_point_emoticons_message">我的最愛標點名稱，已被修改為 %1$s，便於正確的儲存字串表情符號到檔案中。</string>
+    <string name="speed_limit_exceed">速限容許餘裕</string>
+	<string name="speed_limit_exceed_message">選擇速限容許餘裕界限，上述，您將收到語音警告。</string>
 	</resources>
