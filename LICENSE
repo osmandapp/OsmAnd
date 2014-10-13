@@ -40,6 +40,9 @@
 
     * UI Design and UX work, such as layout, icons is covered by CC-BY-ND
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd/res and others
+        
+    * Map icons are taken from sjjb and some are drawn and distributed under Public Domain (except icons8)
+        - https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg
 
     * Integration with QT library in (https://github.com/osmandapp/Osmand-core/) - dynamic linking
         - LGPL (https://qt-project.org/products/licensing)
