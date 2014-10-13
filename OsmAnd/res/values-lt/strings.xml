@@ -1850,5 +1850,5 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="use_native_render">Naudoti aparatinį atvaizdavimą</string>
     <string name="use_native_render_descr">Naudoti C++ vietoje Java atvaizdavimo</string>
     <string name="speed_limit_exceed">Greičio ribojimo viršijimo reikšmė.</string>
-	<string name="speed_limit_exceed_message">Pasirinkite greičio ribojimo viršijimo reikšmę, kurią pasiekus bus pranešta balsu.</string>
+	<string name="speed_limit_exceed_message">Pasirinkite greičio ribojimo viršijimo ribą, kurią pasiekus bus pranešta balsu.</string>
 	</resources>
