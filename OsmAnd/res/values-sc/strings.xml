@@ -76,7 +76,7 @@
 	<string name="routing_attr_avoid_ferries_description">Istranse sos naviles</string>
 	<string name="routing_attr_avoid_motorway_name">Istranse sas autostradas</string>
 	<string name="routing_attr_avoid_motorway_description">Istranse sas autostradas</string>
-	<string name="routing_attr_weight_name">Pesu màssimu</string>
+	<string name="routing_attr_weight_name">Lìmite de pesu</string>
 	<string name="routing_attr_weight_description">Dislinda su pesu màssimu de su veìculu</string>
     <string name="android_19_location_disabled">Dae sa versione KitKat non est prus possìbile iscarrigare e pònnere a die sas mapas in s\'indiritzu de ammentu antepostu (%s). Lu bòles remplasare cun su chi est acusentidu e copiare in cue totus sos datos?
 	\n Nota: sos datos antepostos non at a èssere mudados. 
@@ -1749,7 +1749,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="use_native_render">Imprea sa renderizatzione nativa</string>
     <string name="use_native_render_descr">Imprea sa renderizatzione C++ imbetzes de Java</string>
     <string name="print_route">Imprenta àndala</string>
-    <string name="fav_point_emoticons_message">Amos cambiadu su nùmene de su prefèrridu tuo, ponende•li %1$s, proite no est possìbile sarbare documentos impreande emòticons in intro de sas istringas.</string>
-    <string name="speed_limit_exceed_message">Ischerta su balore de barigamentu de su lìmite de lestresa a pustis de su cale as a tènnere un\'avisu vocale.</string>
-	<string name="speed_limit_exceed">Balore de barigamentu de su lìmite de lestresa.</string>
+    <string name="fav_point_emoticons_message">Amos cambiadu su nùmene de su prefèrridu tuo, ponende•li %1$s, pro fatzilitare su sarbamentu de s\'istringa cun sas emòticons in unu documentu.</string>
+    <string name="speed_limit_exceed_message">Ischerta s\'arramponada de su lìmite de lestresa a pustis de su cale as a tènnere un\'avisu vocale.</string>
+	<string name="speed_limit_exceed">Arramponada de su lìmite de lestresa</string>
 	</resources>
