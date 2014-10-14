@@ -64,6 +64,11 @@ public class HillshadeLayer extends MapTileLayer {
 				return null;
 			}
 
+			@Override
+			protected void onPostExecute(Void result) {
+				app.getResourceManager().reloadTilesFromFS();
+			}
+
 			private void indexNonCachedResources(Map<String, Long> fileModified, Map<String, SQLiteTileSource> rs) {
 				for(String filename : fileModified.keySet()) {
 					try {
