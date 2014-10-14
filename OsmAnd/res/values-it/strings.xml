@@ -1660,7 +1660,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="routing_attr_avoid_ferries_description">Evita i traghetti</string>
 	<string name="routing_attr_avoid_motorway_name">Evita le autostrade</string>
 	<string name="routing_attr_avoid_motorway_description">Evita le autostrade</string>
-	<string name="routing_attr_weight_name">Peso massimo</string>
+	<string name="routing_attr_weight_name">Limite di peso</string>
 	<string name="routing_attr_weight_description">Specifica il limite di peso del veicolo</string>
     <string name="select_gpx">Scegli GPX…</string>
     <string name="route_descr_select_destination">Scegli la destinazione</string>
