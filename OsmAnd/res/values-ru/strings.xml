@@ -1773,4 +1773,14 @@
 	<string name="speed_limit_exceed_message">Выберите значение превышения скорости, при котором вы получите голосовое предупреждение.</string>
 	<string name="speed_limit_exceed">Значение превышения скорости.</string>
 	<string name="test_native_render">Тест нативной визуализации</string>
+    <string name="fav_point_emoticons_message">Название избранной точки было изменено на %1$s для возможности сохранения строки со смайликом в файл.</string>
+    <string name="print_route">Печать маршрута</string>
+    <string name="fav_point_dublicate">Дублирование названия избранной точки</string>
+    <string name="fav_point_dublicate_message">Название избранной точки %1$s было изменено для предотвращения дублирования имен.</string>
+    <string name="use_native_render">Использовать нативную визуализацию</string>
+    <string name="use_native_render_descr">Использовать С++ визуализацию вместо Java</string>
+    <string name="text_size_descr">Установите размер текста для карты.</string>
+    <string name="text_size">Размер текста</string>
+    <string name="local_index_description">Нажмите на любой элемент списка для просмотра более подробной информации, нажмите и удерживайте, чтобы поместить в архив или удалить. Текущие данные на устройстве (%1$s свободно):</string>
+	<string name="test_native_render_msg">Запустить activity с нативной визуализацией</string>
     </resources>
