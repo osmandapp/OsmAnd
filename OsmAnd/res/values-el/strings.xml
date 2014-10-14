@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -1572,8 +1572,8 @@
 	<string name="routing_attr_avoid_ferries_description">Αποφυγή πορθμείων</string>
 	<string name="routing_attr_avoid_motorway_name">Αποφυγή αυτοκινητόδρομων</string>
 	<string name="routing_attr_avoid_motorway_description">Αποφυγή αυτοκινητόδρομων</string>
-	<string name="routing_attr_weight_name">Μέγιστο βάρος</string>
-	<string name="routing_attr_weight_description">Καθορίσετε όριο βάρους οχήματος</string>
+	<string name="routing_attr_weight_name">Όριο βάρους</string>
+	<string name="routing_attr_weight_description">Καθορίσετε το βάρος του οχήματος που θα είναι επιτρεπτό στις διαδρομές</string>
     <string name="copying_osmand_one_file_descr">Αντιγραφή αρχείου (%s) στο νέο προορισμό...</string>
     <string name="copying_osmand_files_descr">Αντιγραφή αρχείων OsmAnd στο νέο προορισμό (%s)</string>
     <string name="copying_osmand_files">Αντιγραφή αρχείων OsmAnd</string>
