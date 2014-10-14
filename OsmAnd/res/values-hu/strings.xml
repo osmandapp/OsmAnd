@@ -1430,8 +1430,8 @@
 	<string name="routing_attr_avoid_ferries_description">Kompok elkerülése</string>
 	<string name="routing_attr_avoid_motorway_name">Autópályák elkerülése</string>
 	<string name="routing_attr_avoid_motorway_description">Autópályák elkerülése</string>
-	<string name="routing_attr_weight_name">Maximális súly</string>
-	<string name="routing_attr_weight_description">Jármű súlykorlátozásának megadása</string>
+	<string name="routing_attr_weight_name">Súlykorlátozás</string>
+	<string name="routing_attr_weight_description">Jármű súlyának megadása, ami az úton megengedett kell legyen</string>
     <string name="android_19_location_disabled">Az Android 4.4 KitKat verzió óta nem lehet térképet letölteni és frissíteni a korábbi helyre (%s). Szeretnéd az összes fájlt egy engedélyezett helyre másolni?
         \n Megjegyzés: a régi fájlok érintetlenül maradnak.
         \n Megjegyzés: nem lehetséges az OsmAnd és OsmAnd+ között fájlokat megosztani. </string>
@@ -1689,7 +1689,7 @@
     <string name="osmo_auth_error_short">Azonosítás sikertelen</string>
     <string name="home">Kezdőlap</string>
     <string name="lang_fa">perzsa</string>
-	<string name="rendering_attr_coloredBuildings_name">Színezett épületek</string>
+	<string name="rendering_attr_coloredBuildings_name">Épületek színezése típus szerint</string>
     <string name="osmo_invite">Meghívás…</string>
     <string name="continue_navigation">Navigáció folytatása</string>
     <string name="pause_navigation">Navigáció szüneteltetése</string>
@@ -1767,8 +1767,8 @@
     <string name="traffic_warning_calming">Forgalomcsillapító</string>
     <string name="traffic_warning_speed_camera">Traffipax</string>
     <string name="traffic_warning">Forgalmi figyelmeztetés</string>
-	<string name="test_native_render">Natív renderelő tesztelése</string>
-    <string name="test_native_render_msg">Indítás natív renderelővel</string>
+	<string name="test_native_render">Natív renderelés tesztelése</string>
+    <string name="test_native_render_msg">Natív renderelő elindítása</string>
     <string name="fav_point_dublicate">Kedevenc hely név duplikáció</string>
     <string name="fav_point_dublicate_message">A duplikáció elkerülése érdekében módosítottuk a kedvenc hely nevét erre: %1$s.</string>
     <string name="use_native_render">Natív renderelő használata</string>
@@ -1780,4 +1780,6 @@
     <string name="local_index_description">Egy meglévő elem adatainak megtekintéséhez kattints rá, a deaktiváláshoz és törléshez nyomd meg hosszan. Jelenlegi adatok az eszközön (%1$s szabad):</string>
 	<string name="speed_limit_exceed">Sebességhatár tolerancia</string>
 	<string name="speed_limit_exceed_message">Válaszd ki, mekkora sebességtúllépésnél szeretnél figyelmeztetést hallani.</string>
-	</resources>
+	<string name="fav_point_emoticons_message">A kedvenc hely neve módosítva lett erre: %1$s, lehetővé téve a hangulatjeleket tartalmazó szöveg fájlba mentését.</string>
+    <string name="print_route">Útvonal nyomtatása</string>
+    </resources>
