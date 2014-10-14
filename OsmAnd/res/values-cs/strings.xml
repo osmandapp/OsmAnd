@@ -1270,9 +1270,9 @@
     <string name="route_from">Z:</string>
     
 	
-    <string name="speak_speed_limit">Hlásit rychlostní omezení</string>
-    <string name="speak_cameras">Hlásit radary</string>
-	<string name="speak_traffic_warnings">Hlásit dopravní upozornění</string>
+    <string name="speak_speed_limit">Rychlostní omezení</string>
+    <string name="speak_cameras">Radary</string>
+	<string name="speak_traffic_warnings">Dopravní varování</string>
 	
 	<string name="osb_author_dialog_password">Heslo OSM (volitelné)</string>
 	<string name="av_camera_focus">Typ ostření fotoaparátu</string>
@@ -1291,10 +1291,10 @@
     
 	<string name="osmodroid_mode_on">Zastavit OsMoDroid</string>    
     <string name="osmodroid_mode_off">Spustit OsMoDroid</string>
-    <string name="announce_gpx_waypoints">Oznamovat GPX body</string>
+    <string name="announce_gpx_waypoints">GPX body</string>
     <string name="speak_title">Hlásit…</string>
 	<string name="speak_descr">Konfigurace hlášení názvů ulic, dopravních upozornění, radarů, rychlostních omezení</string>
-	<string name="speak_street_names">Hlásit názvy ulic (TTS)</string>
+	<string name="speak_street_names">Názvy ulic (TTS)</string>
     <string name="driving_region_japan">Japonsko</string>
 	<string name="driving_region_us">Spojené státy</string>
 	<string name="driving_region_canada">Kanada</string>
@@ -1719,8 +1719,8 @@ s často kladenými otázkami.</string>
 	<string name="waypoints">Body na trase</string>
     <string name="targets">Cíle</string>
     <string name="way_alarms">Dopravní varování</string>
-    <string name="speak_favorites">Oznamovat blízké oblíbené body</string>
-    <string name="speak_poi">Oznamovat blízké body zájmu POI</string>
+    <string name="speak_favorites">Blízké oblíbené body</string>
+    <string name="speak_poi">Blízké body zájmu POI</string>
     <string name="save_track_to_gpx_globally_descr">Záznam do GPX souboru může být zapnut nebo vypnut pomocí widgetu Záznam trasy na mapové obrazovce</string>
 	<string name="confirm_every_run">Vždy se zeptat</string>
 	<string name="save_global_track_interval_descr">Vybrat interval ukládání pro globální záznam trasy (aktivovaný přes widget Záznam trasy na mapové obrazovce)</string>
