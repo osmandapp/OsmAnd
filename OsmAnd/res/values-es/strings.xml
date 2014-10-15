@@ -1548,8 +1548,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="routing_attr_avoid_ferries_description">Evita usar transbordadores</string>
 	<string name="routing_attr_avoid_motorway_name">Evitar autopistas</string>
 	<string name="routing_attr_avoid_motorway_description">Evita las autopistas</string>
-	<string name="routing_attr_weight_name">Peso máximo</string>
-	<string name="routing_attr_weight_description">Indica limitación de peso del vehículo</string>
+	<string name="routing_attr_weight_name">Límite de peso</string>
+	<string name="routing_attr_weight_description">Indicar peso del vehículo permitido en rutas</string>
     <string name="android_19_location_disabled">Desde la versión Android KitKat (4.4), no puedes descargar ni actualizar el mapa en el anterior lugar de almacenamiento (%s). ¿Quieres cambiar a una nueva localización permitida y copiar todos los archivos allí?
         \n Nota: los archivos antiguos permanecerán intactos. 
         \n Nota: no será posible compartir archivos entre OsmAnd y OsmAnd+. </string>
