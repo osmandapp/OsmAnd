@@ -439,7 +439,7 @@ public class RouteResultPreparation {
 				} else {
 					t = TurnType.valueOf(TurnType.TU, leftSide);
 				}
-				getLanesInfo(prev, t, leftSide);
+				assignLanesInfo(prev, t, leftSide);
 			} else if (mpi < -TURN_DEGREE_MIN) {
 				if (mpi > -60) {
 					t = TurnType.valueOf(TurnType.TSLR, leftSide);
@@ -450,7 +450,7 @@ public class RouteResultPreparation {
 				} else {
 					t = TurnType.valueOf(TurnType.TU, leftSide);
 				}
-				getLanesInfo(prev, t, leftSide);
+				assignLanesInfo(prev, t, leftSide);
 			} else {
 				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, t);
 			}
@@ -461,7 +461,7 @@ public class RouteResultPreparation {
 		return t;
 	}
 
-	private void getLanesInfo(RouteSegmentResult prevSegm, TurnType t, boolean leftSide) {
+	private void assignLanesInfo(RouteSegmentResult prevSegm, TurnType t, boolean leftSide) {
 		int lanes = prevSegm.getObject().getLanes();
 		if (prevSegm.getObject().getOneway() == 0) {
 			lanes = countLanes(prevSegm, lanes);
