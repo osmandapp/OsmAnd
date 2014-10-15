@@ -44,7 +44,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 
 		cat.addPreference(createCheckBoxPreference(settings.USE_NATIVE_RENDER, R.string.use_native_render,R.string.use_native_render_descr));
 
-		pref = new Preference(this);
+		Preference pref = new Preference(this);
 		pref.setTitle(R.string.test_native_render);
 		pref.setSummary(R.string.test_native_render_msg);
 		pref.setKey("test_native_render");
@@ -57,7 +57,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		});
 		cat.addPreference(pref);
 
-		Preference pref = new Preference(this);
+		pref = new Preference(this);
 		pref.setTitle(R.string.test_voice_prompts);
 		pref.setSummary(R.string.play_commands_of_currently_selected_voice);
 		pref.setKey("test_voice_commands");

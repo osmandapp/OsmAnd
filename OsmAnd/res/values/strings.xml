@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="search_radius">Search radius</string>
 	<string name="speed_limit_exceed">Speed limit tolerance</string>
 	<string name ="speed_limit_exceed_message">Select speed limit tolerance margin, above which you will receive a voice warning.</string>
 	<string name="fav_point_emoticons_message">The favorite point name has been modified to %1$s to facilitate properly saving the string with emoticons to a file.</string>
