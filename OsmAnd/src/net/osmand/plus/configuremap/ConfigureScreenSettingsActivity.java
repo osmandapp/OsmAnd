@@ -12,19 +12,17 @@ import android.view.KeyEvent;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.Toast;
+import net.osmand.CallbackWithObject;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.*;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.views.MapInfoLayer;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.AppearanceWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,7 +33,6 @@ import java.util.List;
  */
 public class ConfigureScreenSettingsActivity extends SettingsBaseActivity {
 
-	private String ADDITIONAL_VECTOR_RENDERING_CATEGORY;
 	private ApplicationMode previousMode;
 
 	@Override
@@ -267,9 +264,21 @@ public class ConfigureScreenSettingsActivity extends SettingsBaseActivity {
 		p = createCheckBoxPreference(settings.SHOW_FAVORITES, R.string.layer_favorites,
 				R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light);
 		mapLayersCategory.addPreference(p);
-		p = createCheckBoxPreference(settings.SHOW_POI_LABEL, R.string.layer_gpx_layer,
-				R.drawable.ic_action_polygom_dark, R.drawable.ic_action_polygom_light);
-		mapLayersCategory.addPreference(p);
+		final CheckBoxPreference gpx = new CheckBoxPreference(this);
+		gpx.setTitle(R.string.layer_gpx_layer);
+		addIcon(gpx, R.drawable.ic_action_polygom_light, R.drawable.ic_action_polygom_dark);
+		gpx.setChecked(getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles());
+		gpx.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				if (gpx.isChecked()){
+					showGPXFileDialog(getAlreadySelectedGpx());
+				}
+				return true;
+			}
+		});
+
+		mapLayersCategory.addPreference(gpx);
 		p = createCheckBoxPreference(settings.SHOW_TRANSPORT_OVER_MAP, R.string.layer_transport,
 				R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light);
 		mapLayersCategory.addPreference(p);
@@ -385,6 +394,49 @@ public class ConfigureScreenSettingsActivity extends SettingsBaseActivity {
 
 	private Activity getActivity() {
 		return this;
+	}
+
+	public void showGPXFileDialog(List<String> files) {
+		CallbackWithObject<GPXUtilities.GPXFile[]> callbackWithObject = new CallbackWithObject<GPXUtilities.GPXFile[]>() {
+			@Override
+			public boolean processResult(GPXUtilities.GPXFile[] result) {
+				GPXUtilities.WptPt locToShow = null;
+				for (GPXUtilities.GPXFile g : result) {
+					if (g.showCurrentTrack) {
+						if (!settings.SAVE_TRACK_TO_GPX.get() && !
+								settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+							AccessibleToast.makeText(getActivity(), R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
+						}
+						break;
+					}
+					if (!g.showCurrentTrack || locToShow == null) {
+						locToShow = g.findPointToShow();
+					}
+				}
+				getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(result);
+				createAllCategories();
+				return true;
+			}
+		};
+
+		if (files == null) {
+			GpxUiHelper.selectGPXFile(getActivity(), true, true, callbackWithObject);
+		} else {
+			GpxUiHelper.selectGPXFile(files, getActivity(), true, true, callbackWithObject);
+		}
+	}
+
+	private List<String> getAlreadySelectedGpx(){
+		GpxSelectionHelper gpxSelectionHelper = getMyApplication().getSelectedGpxHelper();
+		if (gpxSelectionHelper == null){
+			return null;
+		}
+		List<GpxSelectionHelper.SelectedGpxFile> selectedGpxFiles = gpxSelectionHelper.getSelectedGPXFiles();
+		List<String> files = new ArrayList<String>();
+		for (GpxSelectionHelper.SelectedGpxFile file : selectedGpxFiles) {
+			files.add(file.getGpxFile().path);
+		}
+		return files;
 	}
 
 }
