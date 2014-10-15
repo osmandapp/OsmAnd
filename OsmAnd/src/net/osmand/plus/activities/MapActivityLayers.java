@@ -349,7 +349,7 @@ public class MapActivityLayers {
 		adapter.item(R.string.layer_transport).selected( settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0)
 				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).reg(); 
 		if(TransportRouteHelper.getInstance().routeIsCalculated()){
-			adapter.item(R.string.layer_transport_route).selected(1 )
+			adapter.item(R.string.layer_transport_route).selected(1)
 				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).reg();
 		}
 		

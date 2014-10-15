@@ -47,6 +47,7 @@ import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.configuremap.ConfigureScreenSettingsActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.osmo.OsMoPositionLayer;
@@ -900,7 +901,9 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-						mapActivity.getMapLayers().openLayerSelectionDialog(mapView);
+						mapActivity.startActivity(new Intent(mapActivity, ConfigureScreenSettingsActivity.class));
+
+						//mapActivity.getMapLayers().openLayerSelectionDialog(mapView);
 					}
 				}).reg();
 
