@@ -43,19 +43,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS, R.string.use_magnetic_sensor, R.string.use_magnetic_sensor_descr));
 
 		cat.addPreference(createCheckBoxPreference(settings.USE_NATIVE_RENDER, R.string.use_native_render,R.string.use_native_render_descr));
-		
-		Preference pref = new Preference(this);
-		pref.setTitle(R.string.test_voice_prompts);
-		pref.setSummary(R.string.play_commands_of_currently_selected_voice);
-		pref.setKey("test_voice_commands");
-		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				startActivity(new Intent(SettingsDevelopmentActivity.this, TestVoiceActivity.class));
-				return true;
-			}
-		});
-		cat.addPreference(pref);
 
 		pref = new Preference(this);
 		pref.setTitle(R.string.test_native_render);
@@ -69,7 +56,20 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			}
 		});
 		cat.addPreference(pref);
-		
+
+		Preference pref = new Preference(this);
+		pref.setTitle(R.string.test_voice_prompts);
+		pref.setSummary(R.string.play_commands_of_currently_selected_voice);
+		pref.setKey("test_voice_commands");
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				startActivity(new Intent(SettingsDevelopmentActivity.this, TestVoiceActivity.class));
+				return true;
+			}
+		});
+		cat.addPreference(pref);
+
 		pref = new Preference(this);
 		pref.setTitle(R.string.app_modes_choose);
 		pref.setSummary(R.string.app_modes_choose_descr);
