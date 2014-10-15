@@ -687,11 +687,56 @@ public class RouteResultPreparation {
 
 		if (t.getLanes().length != lanes) {
 			// The turn:lanes don't easily match up to the target road.
-			// TODO: Add support for lanes that can go in multiple directions
-			return;
+			List<Integer> sourceLanes = new ArrayList<Integer>();
+
+			int outgoingLanesIndex = 0;
+			int sourceLanesIndex = 0;
+
+			while (outgoingLanesIndex < t.getLanes().length && sourceLanesIndex < lanes) {
+				if (splitLaneOptions[sourceLanesIndex].contains(";")) {
+					// Two or more allowed turns for this lane
+					int options = countOccurrences(splitLaneOptions[sourceLanesIndex], ';');
+					if (options == 1) {
+						if (outgoingLanesIndex + 1 >= t.getLanes().length) {
+							// Likely an error in data
+							return;
+						}
+						int usability = t.getLanes()[outgoingLanesIndex] | t.getLanes()[outgoingLanesIndex + 1];
+						sourceLanes.add(usability);
+						outgoingLanesIndex += 2;
+						sourceLanesIndex++;
+					} else {
+						// Not supported
+						return;
+					}
+				} else {
+					// Only one allowed turn; behave normally
+					sourceLanes.add(t.getLanes()[outgoingLanesIndex]);
+					outgoingLanesIndex++;
+					sourceLanesIndex++;
+				}
+			}
+
+			int[] newLanes = new int[sourceLanes.size()];
+
+			for (int i = 0; i < sourceLanes.size(); i++) {
+				newLanes[i] = sourceLanes.get(i);
+			}
+
+			t.setLanes(newLanes);
 		}
 
 		assignTurns(splitLaneOptions, t);
+	}
+
+	private int countOccurrences(String haystack, char needle) {
+	    int count = 0;
+		for (int i = 0; i < haystack.length(); i++) {
+			if (haystack.charAt(i) == needle) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	private void assignTurns(String[] splitLaneOptions, TurnType t) {
