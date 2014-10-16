@@ -158,7 +158,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	private void basicFileOperation(final LocalIndexInfo info, ContextMenuAdapter adapter) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (resId == R.string.local_index_mi_rename) {
 					renameFile(info);
 				} else if (resId == R.string.local_index_mi_restore) {
@@ -177,6 +177,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				} else if (resId == R.string.local_index_mi_backup) {
 					new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);
 				}
+				return true;
 			}
 		};
 		if(info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.SRTM_DATA){
@@ -475,8 +476,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		optionsMenuAdapter = new ContextMenuAdapter(getDownloadActivity());
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				localOptionsMenu(itemId);
+				return true;
 			}
 		};
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
