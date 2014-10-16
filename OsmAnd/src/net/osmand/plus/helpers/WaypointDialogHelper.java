@@ -46,6 +46,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 	private WaypointHelper waypointHelper;
 
 	private final static String POI_RADIUS = "poi_radius";
+	private final static String SEARCH_RADIUS = "favorite_radius";
 
 	public final static boolean OVERLAP_LAYOUT = true; // only true is supported
 	private View closePointDialog;
@@ -389,6 +390,41 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 						v = ctx.getLayoutInflater().inflate(R.layout.radius_search_list_element, null);
 						v.findViewById(R.id.ProgressBar).setVisibility(position == running[0] ? View.VISIBLE : View.GONE);
 						final TextView radius = (TextView) v.findViewById(R.id.radius);
+						radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getPoiSearchDeviationRadius(), app));
+						radius.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								int length = WaypointHelper.SEARCH_RADIUS_VALUES.length;
+								String[] names = new String[length];
+								int selected = 0;
+								for (int i = 0; i < length; i++) {
+									names[i] = OsmAndFormatter.getFormattedDistance(WaypointHelper.SEARCH_RADIUS_VALUES[i], app);
+									if (WaypointHelper.SEARCH_RADIUS_VALUES[i] == waypointHelper.getPoiSearchDeviationRadius()){
+										selected = i;
+									}
+								}
+								new AlertDialog.Builder(getActivity())
+										.setSingleChoiceItems(names, selected, new OnClickListener() {
+											@Override
+											public void onClick(DialogInterface dialogInterface, int i) {
+												int value = WaypointHelper.SEARCH_RADIUS_VALUES[i];
+												if (waypointHelper.getPoiSearchDeviationRadius() != value){
+													running[0] = position;
+													waypointHelper.setPoiSearchDeviationRadius(value);
+													radius.setText(OsmAndFormatter.getFormattedDistance(value, app));
+													recalculatePoints(running, thisAdapter, WaypointHelper.POI);
+													dialogInterface.dismiss();
+												}
+											}
+										}).setTitle(app.getString(R.string.search_radius)+ " " + app.getString(R.string.poi))
+										.setNegativeButton(R.string.default_buttons_cancel, null)
+										.show();
+							}
+						});
+					} else if (getItem(position) instanceof String && getItem(position).equals(SEARCH_RADIUS)){
+						v = ctx.getLayoutInflater().inflate(R.layout.radius_search_list_element, null);
+						v.findViewById(R.id.ProgressBar).setVisibility(position == running[0] ? View.VISIBLE : View.GONE);
+						final TextView radius = (TextView) v.findViewById(R.id.radius);
 						radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getSearchDeviationRadius(), app));
 						radius.setOnClickListener(new View.OnClickListener() {
 							@Override
@@ -411,11 +447,11 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 													running[0] = position;
 													waypointHelper.setSearchDeviationRadius(value);
 													radius.setText(OsmAndFormatter.getFormattedDistance(value, app));
-													recalculatePoints(running, thisAdapter, WaypointHelper.POI);
+													recalculatePoints(running, thisAdapter, -1);
 													dialogInterface.dismiss();
 												}
 											}
-										}).setTitle(app.getString(R.string.search_radius)+ " " + app.getString(R.string.poi))
+										}).setTitle(app.getString(R.string.search_radius))
 										.setNegativeButton(R.string.default_buttons_cancel, null)
 										.show();
 							}
@@ -522,6 +558,8 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 					points.add(new Integer(i));
 					if (i == WaypointHelper.POI && waypointHelper.isTypeEnabled(WaypointHelper.POI)){
 						points.add(POI_RADIUS);
+					} else if (i == WaypointHelper.FAVORITES && waypointHelper.isTypeEnabled(WaypointHelper.FAVORITES)){
+						points.add(SEARCH_RADIUS);
 					}
 					if (tp != null && tp.size() > 0) {
 						points.addAll(tp);
