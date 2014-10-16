@@ -229,10 +229,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			if (getArguments() != null && getArguments().getBoolean(FLAT_ARG)) {
-				return createWaypointsDialogFlat(waypointHelper.getAllPoints());
-			}
-			return createWaypointsDialog();
+			return createWaypointsDialogFlat(waypointHelper.getAllPoints());
 		}
 
 		public AlertDialog createWaypointsDialogFlat(final List<LocationPointWrapper> points) {
@@ -277,43 +274,6 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			});
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 			builder.setView(listView);
-			builder.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					waypointHelper.removeVisibleLocationPoint(deletedPoints);
-				}
-			});
-			builder.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), null);
-			return builder.create();
-		}
-
-		public AlertDialog createWaypointsDialog() {
-			final FragmentActivity ctx = getActivity();
-			final ListView listView = new ListView(ctx);
-			final List<LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
-			final ArrayAdapter<Object> listAdapter = dialogHelper.getWaypointsAdapter(ctx, deletedPoints);
-
-			listView.setAdapter(listAdapter);
-			listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
-					if (listAdapter.getItem(item) instanceof LocationPointWrapper) {
-						LocationPointWrapper ps = (LocationPointWrapper) listAdapter.getItem(item);
-						showOnMap(app, ctx, ps.getPoint(), WaypointDialogFragment.this);
-					}
-				}
-			});
-			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-			builder.setView(listView);
-			builder.setNeutralButton(R.string.flat_list_waypoints, new OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					showWaypointsDialogFlat(getActivity());
-				}
-
-			});
 			builder.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
 
 				@Override

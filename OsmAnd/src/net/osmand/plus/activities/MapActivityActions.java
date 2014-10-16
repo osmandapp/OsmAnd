@@ -97,12 +97,15 @@ public class MapActivityActions implements DialogProvider {
 
 	DrawerLayout mDrawerLayout;
 	ListView mDrawerList;
+	private WaypointDialogHelper waypointDialogHelper;
 	
 
 	public MapActivityActions(MapActivity mapActivity){
 		this.mapActivity = mapActivity;
 		settings = mapActivity.getMyApplication().getSettings();
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
+		waypointDialogHelper.init();
 	}
 
 	protected void addFavouritePoint(final double latitude, final double longitude){
@@ -902,8 +905,7 @@ public class MapActivityActions implements DialogProvider {
 							if (getMyApplication().getWaypointHelper().isRouteCalculated()) {
 
 								final List<WaypointHelper.LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
-								ArrayAdapter<Object> adapter = app.getMapActivity().getMapLayers().
-										getMapControlsLayer().getWaypointDialogHelper().getWaypointsAdapter(app.getMapActivity(), deletedPoints);
+								ArrayAdapter<Object> adapter = waypointDialogHelper.getWaypointsAdapter(app.getMapActivity(), deletedPoints);
 								mDrawerList = (ListView) mapActivity.findViewById(R.id.left_drawer);
 								mDrawerList.setAdapter(adapter);
 								return false;
