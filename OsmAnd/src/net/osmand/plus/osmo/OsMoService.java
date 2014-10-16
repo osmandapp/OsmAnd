@@ -42,6 +42,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.Settings.Secure;
 import android.support.v4.app.NotificationCompat;
+import android.text.TextUtils;
 
 public class OsMoService implements OsMoReactor {
 	public static final String REGENERATE_CMD = "TRACKER_REGENERATE_ID";
@@ -62,9 +63,16 @@ public class OsMoService implements OsMoReactor {
 	private Notification notification;
 	public final static String OSMO_REGISTER_AGAIN  = "OSMO_REGISTER_AGAIN"; //$NON-NLS-1$
 	private final static int SIMPLE_NOTFICATION_ID = 5;
-	
-	
-	
+	private Boolean isConnectionError = false;
+
+	public interface ConnectionListener {
+		void onConnectionError();
+		void onConnectionEstablished();
+	}
+	private ConnectionListener connectionListener = null;
+
+
+
 	public OsMoService(final OsmandApplication app, OsMoPlugin plugin) {
 		this.app = app;
 		this.plugin = plugin;
@@ -99,7 +107,7 @@ public class OsMoService implements OsMoReactor {
 	}
 	
 	public boolean isConnected() {
-		return thread != null && thread.isConnected();
+		return thread != null && thread.isConnected() && !isConnectionError;
 	}
 	
 	
@@ -241,6 +249,14 @@ public class OsMoService implements OsMoReactor {
 		return myGroupTrackerId;
 	}
 	
+	public String getMyTrackerId() {
+		String myGroupTrackerId = "";
+		SessionInfo currentSessionInfo = getCurrentSessionInfo();
+		if (currentSessionInfo != null) {
+			myGroupTrackerId = currentSessionInfo.trackerId;
+		}
+		return myGroupTrackerId;
+	}
 	
 	public SessionInfo prepareSessionToken() throws IOException {
 		String deviceKey = app.getSettings().OSMO_DEVICE_KEY.get();
@@ -409,12 +425,49 @@ public class OsMoService implements OsMoReactor {
 	@Override
 	public void reconnect() {
 		pushCommand("TRACK_GET");
+		boolean changed = false;
+		synchronized (isConnectionError) {
+			if (isConnectionError) {
+				isConnectionError = false;
+				changed = true;
+			}
+		}
+		if ((connectionListener != null) && changed) {
+			connectionListener.onConnectionEstablished();
+		}
 	}
-	
+
+	@Override
+	public void connectionError() {
+		boolean changed = false;
+		synchronized (isConnectionError) {
+			if (!isConnectionError) {
+				isConnectionError = true;
+				changed = true;
+			}
+		}
+		if ((connectionListener != null) && changed) {
+			connectionListener.onConnectionError();
+		}
+	}
+
+	public boolean isConnectionError() {
+		return isConnectionError;
+	}
+
 	public void reconnectToServer() {
 		if(thread != null) {
 			thread.reconnect();
 		}
 	}
-	
+
+	public boolean isLoggedIn() {
+		String psswd = app.getSettings().OSMO_USER_PWD.get();
+		String userName = app.getSettings().OSMO_USER_NAME.get();
+		return ((!TextUtils.isEmpty(psswd) && !TextUtils.isEmpty(userName)));
+	}
+
+	public void setOnConnectionErrorListener(ConnectionListener onConnectionErrorListener) {
+		this.connectionListener = onConnectionErrorListener;
+	}
 }

@@ -10,4 +10,6 @@ public interface OsMoReactor {
 	
 	public void reconnect();
 	
+	public void connectionError();
+	
 }

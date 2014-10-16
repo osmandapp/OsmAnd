@@ -219,6 +219,9 @@ public class OsMoTracker implements OsMoReactor {
 		}
 	}
 
-	
+	@Override
+	public void connectionError() {
+	}
+
 
 }

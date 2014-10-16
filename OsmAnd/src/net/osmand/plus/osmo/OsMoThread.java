@@ -171,6 +171,9 @@ public class OsMoThread {
 			if (activeChannel != null && !activeChannel.isConnected()) {
 				activeChannel = null;
 			}
+			for(OsMoReactor sender : listReactors) {
+				sender.connectionError();
+			}
 			delay = HEARTBEAT_FAILED_DELAY;
 			if(lastSendCommand != 0 && System.currentTimeMillis() - lastSendCommand > TIMEOUT_TO_RECONNECT  ) {
 				reconnect = true;

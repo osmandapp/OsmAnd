@@ -41,6 +41,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -69,9 +70,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -92,7 +95,7 @@ import com.actionbarsherlock.view.Window;
  *
  */
 public class OsMoGroupsActivity extends OsmandExpandableListActivity implements OsmAndCompassListener,
-		OsmAndLocationListener, OsMoGroupsUIListener {
+		OsmAndLocationListener, OsMoGroupsUIListener, OsMoService.ConnectionListener {
 
 	public static final int CONNECT_TO = 1;
 	protected static final int DELETE_ACTION_ID = 2;
@@ -106,7 +109,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	protected static final int SETTINGS_DEV_ID = 10;
 	protected static final int TRACK_DEV_ID = 11;
 	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
-	private static final long RECENT_THRESHOLD = 60000;
+	public static final long RECENT_THRESHOLD = 60000;
 	private boolean joinGroup;
 
 	private OsMoPlugin osMoPlugin;
@@ -124,6 +127,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private String operation;
 	private Paint white;
 	private View header;
+	private View footer;
 	
 	
 	@Override
@@ -144,12 +148,13 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		getSupportActionBar().setTitle(R.string.osmo_activity);
 		setSupportProgressBarIndeterminateVisibility(false);
 		setupHeader();
+		setupFooter();
 		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
 
 		
 		adapter = new OsMoGroupsAdapter(osMoPlugin.getGroups(), osMoPlugin.getTracker(),
 				osMoPlugin.getService());
-		getExpandableListView().setAdapter(adapter);
+		setListAdapter(adapter);
 		
 		
 		uiHandler = new Handler();
@@ -207,6 +212,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					if (app.getNavigationService() != null) {
 						app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_LIVE);
 					}
+					if (getExpandableListView().getFooterViewsCount() > 0) {
+						getExpandableListView().removeFooterView(footer);	
+					}
 				}
 				setSupportProgressBarIndeterminateVisibility(true);
 				header.postDelayed(new Runnable() {
@@ -234,8 +242,27 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		if(visible) {
 			mtd.setText(si.motd);
 		}
+		
+		CompoundButton login = (CompoundButton) header.findViewById(R.id.osmo_login_logoff);
+		login.setChecked(osMoPlugin.getService().isLoggedIn());
+		login.setOnCheckedChangeListener(new LoginOnCheckedChangeListener());
+
+		Button hintBtn = (Button) header.findViewById(R.id.osmo_login_hint_button);
+		hintBtn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showHint();
+			}
+		});
 	}
 
+	private void setupFooter() {
+		footer = getLayoutInflater().inflate(R.layout.osmo_groups_list_footer, null);
+		TextView noConnectionTextView = (TextView) footer.findViewById(R.id.osmo_no_connection_msg);
+		noConnectionTextView.setMovementMethod(LinkMovementMethod.getInstance());
+	}
+	
 	long lastUpdateTime;
 	private Drawable blinkImg;
 	private void blink(final ImageView status, Drawable bigger, final Drawable smaller ) {
@@ -276,12 +303,37 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			lastUpdateTime = last;
 			blink(status, big, small);
 		}
+		View logOffLayout = header.findViewById(R.id.osmo_log_off_layout);
+		CompoundButton login = (CompoundButton) header.findViewById(R.id.osmo_login_logoff);
 		if(service.isConnected()) {
 			header.findViewById(R.id.motd).setVisibility(View.VISIBLE);
 			header.findViewById(R.id.enable_tracker).setVisibility(View.VISIBLE);
+
+			logOffLayout.setVisibility(View.VISIBLE);
+			TextView userNameTextView = (TextView) header.findViewById(R.id.osmo_user_name_text_view);
+			Button hintBtn = (Button) header.findViewById(R.id.osmo_login_hint_button);
+			if (service.isLoggedIn()) {
+				String text = getString(R.string.logged_as, app.getSettings().OSMO_USER_NAME.get());
+				userNameTextView.setText(text);
+				hintBtn.setVisibility(View.GONE);
+				if (!login.isChecked()) {
+					login.setOnCheckedChangeListener(null);
+					login.setChecked(true);
+					login.setOnCheckedChangeListener(new LoginOnCheckedChangeListener());
+				}
+			} else {
+				userNameTextView.setText(R.string.anonymous_user);
+				hintBtn.setVisibility(View.VISIBLE);
+				if (login.isChecked()) {
+					login.setOnCheckedChangeListener(null);
+					login.setChecked(false);
+					login.setOnCheckedChangeListener(new LoginOnCheckedChangeListener());
+				}
+			}
 		} else {
 			header.findViewById(R.id.motd).setVisibility(View.GONE);
 			header.findViewById(R.id.enable_tracker).setVisibility(View.GONE);
+			logOffLayout.setVisibility(View.GONE);
 		}
 	}
 
@@ -331,6 +383,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			adapter.synchronizeGroups();
 		}
 		osMoPlugin.setGroupsActivity(this);
+		checkToShowNoConnectionMsg();
 	}
 
 	@Override
@@ -656,6 +709,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	}
 	
 	private void signinPost() {
+		signinPost(true);
+	}
+	
+	private void signinPost(final boolean createGroup) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.osmo_sign_in);
 		LinearLayout ll = new LinearLayout(this);
@@ -689,6 +746,17 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		});
 		
+		builder.setCancelable(true);
+		builder.setOnCancelListener(new OnCancelListener() {
+			
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				if (!createGroup) {
+					updateStatus();
+					setSupportProgressBarIndeterminateVisibility(false);
+				}
+			}
+		});
 		final AlertDialog dlg = builder.show();
 		
 		wv.setWebViewClient(new WebViewClient() {
@@ -706,7 +774,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					app.getSettings().OSMO_USER_NAME.set(user);
 					app.getSettings().OSMO_USER_PWD.set(pwd);
 					osMoPlugin.getService().reconnectToServer();
-					createGroupWithDelay(3000);
+					if (createGroup) {
+						createGroupWithDelay(3000);
+					} else {
+						updateStatus();
+					}
 					dlg.dismiss();
 					return true;
 				}
@@ -930,8 +1002,13 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				}
 				if(group != null) {
 					adapter.update(group);
+					adapter.notifyDataSetChanged();
+				} else if (operation.startsWith("GROUP_GET_ALL")
+						|| operation.startsWith("DEVICE_GET_ALL")
+						|| operation.startsWith("SUBSCRIBE")
+						|| operation.startsWith("UNSUBSCRIBE")) {
+					adapter.synchronizeGroups();
 				}
-				adapter.notifyDataSetChanged();
 				updateStatus();
 			}
 		});
@@ -1373,7 +1450,72 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}
 	}
 
+	private void logoff() {
+		if (osMoPlugin.getService().isLoggedIn()) {
+			app.getSettings().OSMO_USER_NAME.set("");
+			app.getSettings().OSMO_USER_PWD.set("");
+			osMoPlugin.getService().reconnectToServer();
+			updateStatus();
+			osMoPlugin.getGroups().clearGroups();
+			adapter.synchronizeGroups();
+		}
+	}
+	
+	private void showHint() {
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.anonymous_user);
+		String message = getString(R.string.anonymous_user_hint);
+		builder.setMessage(message);
+		builder.setPositiveButton(android.R.string.ok, null);
+		builder.show();
+	}
 
+	private class LoginOnCheckedChangeListener implements OnCheckedChangeListener {
+		
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			if (isChecked) {
+				if (!osMoPlugin.getService().isLoggedIn()) {
+					setSupportProgressBarIndeterminateVisibility(true);
+					signinPost(false);
+				}
+			} else {
+				logoff();
+			}
+		}
+	}
 
+	@Override
+	public void onConnectionError() {
+		checkToShowNoConnectionMsg();
+	}
+	
+	@Override
+	public void onConnectionEstablished() {
+		checkToShowNoConnectionMsg();
+	}
+
+	private void checkToShowNoConnectionMsg() {
+		app.runInUIThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				if (osMoPlugin.getService().isConnectionError()) {
+					CompoundButton srvc = (CompoundButton) header.findViewById(R.id.enable_service);
+					if (srvc.isChecked()) {
+						if (getExpandableListView().getFooterViewsCount() == 0) {
+							getExpandableListView().addFooterView(footer);	
+						}
+						adapter.clear();
+					}
+				} else {
+					if (getExpandableListView().getFooterViewsCount() > 0) {
+						getExpandableListView().removeFooterView(footer);	
+					}
+				}
+				updateStatus();
+			}
+		});
+	}
 }
 

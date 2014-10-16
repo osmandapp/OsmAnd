@@ -135,4 +135,8 @@ public class OsMoControlDevice implements OsMoReactor {
 	public void reconnect() {
 	}
 
+	@Override
+	public void connectionError() {
+	}
+
 }

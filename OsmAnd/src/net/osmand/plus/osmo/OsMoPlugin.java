@@ -91,6 +91,11 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	
 	public void setGroupsActivity(OsMoGroupsActivity groupsActivity) {
 		this.groupsActivity = groupsActivity;
+		if (groupsActivity == null) {
+			service.setOnConnectionErrorListener(null);
+		} else {
+			service.setOnConnectionErrorListener(this.groupsActivity);
+		}
 	}
 
 	@Override

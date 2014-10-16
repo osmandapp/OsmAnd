@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/osmo_no_connection_msg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:padding="10dp"
+        android:text="@string/osmo_no_connection_msg"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
