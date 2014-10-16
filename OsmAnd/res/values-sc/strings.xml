@@ -77,7 +77,7 @@
 	<string name="routing_attr_avoid_motorway_name">Istranse sas autostradas</string>
 	<string name="routing_attr_avoid_motorway_description">Istranse sas autostradas</string>
 	<string name="routing_attr_weight_name">Lìmite de pesu</string>
-	<string name="routing_attr_weight_description">Dislinda su pesu màssimu de su veìculu</string>
+	<string name="routing_attr_weight_description">Dislinda su lìmite de pesu de sa vettura</string>
     <string name="android_19_location_disabled">Dae sa versione KitKat non est prus possìbile iscarrigare e pònnere a die sas mapas in s\'indiritzu de ammentu antepostu (%s). Lu bòles remplasare cun su chi est acusentidu e copiare in cue totus sos datos?
 	\n Nota: sos datos antepostos non at a èssere mudados. 
 	\n Nota: non at a èssere possìbile cumpartzire sos datos intra OsmAnd e OsmAnd+. </string>
@@ -949,7 +949,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="file_with_name_already_exist">Esistit giai unu documentu cun su matessi numene.</string>
 	<string name="default_buttons_save">Sarba</string>
 	<string name="menu_save_directions">Sarba diretziones</string>
-	<string name="rendering_attr_coloredBuildings_name">Edifìtzios coloraos</string>
+	<string name="rendering_attr_coloredBuildings_name">Edifìtzios colorados pro casta</string>
     <string name="osmo_invite">Invita...</string>
     <string name="osmo_leave_confirmation_msg">Boles essire dae su grupu %1$s?</string>
     <string name="osmo_specify_tracker_id">Pro piaghere dislinda s\'id</string>
