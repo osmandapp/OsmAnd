@@ -130,7 +130,7 @@
 		<activity android:name="net.osmand.plus.development.SettingsDevelopmentActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.audionotes.SettingsAudioVideoActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.access.SettingsAccessibilityActivity" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name=".configuremap.ConfigureScreenSettingsActivity" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name=".configuremap.ConfigureSettingsMenuHelper" android:configChanges="keyboardHidden|orientation" />
 
 		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" />
 		<activity android:name="net.osmand.plus.activities.ShowRouteInfoActivity" android:label="@string/show_route" />

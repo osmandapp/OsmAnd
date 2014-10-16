@@ -1,12 +1,10 @@
 package net.osmand.plus.configuremap;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.preference.*;
 import android.view.KeyEvent;
 import android.widget.ArrayAdapter;
@@ -31,66 +29,42 @@ import java.util.List;
 /**
  * Created by Denis on 14.10.2014.
  */
-public class ConfigureScreenSettingsActivity extends SettingsBaseActivity {
+public class ConfigureSettingsMenuHelper{
 
-	private ApplicationMode previousMode;
+	public static final	int HEADER = 0;
+	public static final int LAYER = 1;
+	public static final int MAP_REDNDER = 2;
+	public static final int RENDERING_ATTR = 3;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	private OsmandApplication app;
 
-		for (ApplicationMode a : ApplicationMode.values(settings)) {
-			modes.add(a);
+	public class ConfigureMapMenuItem{
+		int type;
+		int darkIcon = -1;
+		int whiteIcon = -1;
+		Object preference;
+
+		ConfigureMapMenuItem(int type, int darkIcon, int whiteIcon, Object preference){
+			this.type = type;
+			this.darkIcon = darkIcon;
+			this.whiteIcon = whiteIcon;
+			this.preference = preference;
 		}
-		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		List<String> s = new ArrayList<String>();
-		for (ApplicationMode a : modes) {
-			s.add(a.toHumanString(getMyApplication()));
-		}
-
-		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(),
-				R.layout.sherlock_spinner_item, s);
-		spinnerAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
-		getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, new com.actionbarsherlock.app.ActionBar.OnNavigationListener() {
-
-			@Override
-			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-				settings.APPLICATION_MODE.set(modes.get(itemPosition));
-				createAllCategories();
-				return true;
-			}
-		});
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		previousMode = settings.getApplicationMode();
-		boolean found = setSelectedAppMode(previousMode);
-		if (!found) {
-			getSupportActionBar().setSelectedNavigationItem(0);
-		}
-		createAllCategories();
+	public ConfigureSettingsMenuHelper(OsmandApplication app){
+		this.app = app;
 	}
 
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		settings.APPLICATION_MODE.set(previousMode);
-	}
-
-	private void createAllCategories() {
-		getPreferenceScreen().removeAll();
-		createLayersPreferences();
+	private ArrayAdapter<ConfigureMapMenuItem> createAllCategories() {
+		List<ConfigureMapMenuItem> items = new ArrayList<ConfigureMapMenuItem>();
+		createLayersItems(items);
 		createRenderingAttributePreferences();
-
 	}
 
 	private void createRenderingAttributePreferences() {
 		PreferenceCategory renderingCategory = new PreferenceCategory(this);
-		renderingCategory.setTitle(R.string.map_widget_map_rendering);
-		PreferenceScreen grp = getPreferenceScreen();
+
 		grp.addPreference(renderingCategory);
 		Preference p = new Preference(this);
 		p.setTitle(R.string.map_widget_renderer);
@@ -99,11 +73,11 @@ public class ConfigureScreenSettingsActivity extends SettingsBaseActivity {
 			public boolean onPreferenceClick(Preference preference) {
 				AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
 				bld.setTitle(R.string.renderers);
-				Collection<String> rendererNames = getMyApplication().getRendererRegistry().getRendererNames();
+				Collection<String> rendererNames = app.getRendererRegistry().getRendererNames();
 				final String[] items = rendererNames.toArray(new String[rendererNames.size()]);
 				final String[] visibleNames = new String[items.length];
 				int selected = -1;
-				final String selectedName = getMyApplication().getRendererRegistry().getCurrentSelectedRenderer().getName();
+				final String selectedName = app.getRendererRegistry().getCurrentSelectedRenderer().getName();
 				for (int j = 0; j < items.length; j++) {
 					if (items[j].equals(selectedName)) {
 						selected = j;
@@ -116,13 +90,13 @@ public class ConfigureScreenSettingsActivity extends SettingsBaseActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						String renderer = items[which];
-						RenderingRulesStorage loaded = getMyApplication().getRendererRegistry().getRenderer(renderer);
+						RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
 						if (loaded != null) {
-							getMyApplication().getSettings().RENDERER.set(renderer);
-							getMyApplication().getRendererRegistry().setCurrentSelectedRender(loaded);
-							getMyApplication().getResourceManager().getRenderer().clearCache();
+							app.getSettings().RENDERER.set(renderer);
+							app.getRendererRegistry().setCurrentSelectedRender(loaded);
+							app.getResourceManager().getRenderer().clearCache();
 						} else {
-							AccessibleToast.makeText(getMyApplication(), R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+							AccessibleToast.makeText(app, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 						}
 						dialog.dismiss();
 						createAllCategories();
@@ -132,7 +106,6 @@ public class ConfigureScreenSettingsActivity extends SettingsBaseActivity {
 				return true;
 			}
 		});
-		grp.addPreference(p);
 
 		p = new Preference(this);
 		p.setTitle(R.string.map_widget_day_night);
@@ -168,23 +141,17 @@ public class ConfigureScreenSettingsActivity extends SettingsBaseActivity {
 
 
 	private void createMapRenderingPreferences() {
-		PreferenceCategory renderingCategory = new PreferenceCategory(this);
-		renderingCategory.setTitle(R.string.map_widget_vector_attributes);
-		PreferenceScreen grp = getPreferenceScreen();
-		grp.addPreference(renderingCategory);
 
-		RenderingRulesStorage renderer = getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
-		final OsmandApplication app = getMyApplication();
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		List<RenderingRuleProperty> customRules = renderer.PROPS.getCustomRules();
 		for (final RenderingRuleProperty p : customRules) {
 			String propertyName = SettingsActivity.getStringPropertyName(getActivity(), p.getAttrName(), p.getName());
 			//test old descr as title
 			final String propertyDescr = SettingsActivity.getStringPropertyDescription(getActivity(), p.getAttrName(), p.getName());
 			if(p.isBoolean()) {
-				final OsmandSettings.CommonPreference<Boolean> pref = getMyApplication().getSettings().getCustomRenderBooleanProperty(p.getAttrName());
-				CheckBoxPreference preference = createCheckBoxPreference(pref);
+				final OsmandSettings.CommonPreference<Boolean> pref = app.getSettings().getCustomRenderBooleanProperty(p.getAttrName());
 				preference.setTitle(propertyName);
-				renderingCategory.addPreference(preference);
+
 				preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
@@ -232,10 +199,8 @@ public class ConfigureScreenSettingsActivity extends SettingsBaseActivity {
 	}
 
 
-	private void createLayersPreferences() {
-		PreferenceCategory mapLayersCategory = new PreferenceCategory(this);
-		mapLayersCategory.setTitle(R.string.menu_layers);
-		PreferenceScreen grp = getPreferenceScreen();
+	private void createLayersItems(List<ConfigureMapMenuItem> items) {
+		items.add(new ConfigureMapMenuItem(HEADER,-1,-1,R.string.show));
 		grp.addPreference(mapLayersCategory);
 		final CheckBoxPreference poi = new CheckBoxPreference(this);
 		poi.setTitle(R.string.layer_poi);
