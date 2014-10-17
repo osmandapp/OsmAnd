@@ -9,7 +9,9 @@
 	<ImageButton android:id="@+id/back"
 				 android:layout_width="wrap_content"
 				 android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"/>
+				 android:layout_gravity="center_vertical"
+				 android:background="@null"
+			android:layout_marginRight="10dp"/>
 	<ImageView android:id="@+id/icon"
 			   android:layout_width="wrap_content"
 			   android:layout_height="wrap_content"
@@ -28,7 +30,7 @@
 				  android:layout_width="wrap_content"
 				  android:layout_height="wrap_content"/>
 		<TextView android:id="@+id/descr"
-				  android:textSize="14sp"
+				  android:textSize="12sp"
 				  android:layout_width="wrap_content"
 				  android:layout_height="wrap_content"
 				  android:visibility="gone"/>

@@ -73,7 +73,7 @@ public class ConfigureSettingsMenuHelper {
 
 	private ArrayAdapter<ConfigureMapMenuItem> createSettingsAdapter() {
 		List<ConfigureMapMenuItem> items = new ArrayList<ConfigureMapMenuItem>();
-		items.add(new ConfigureMapMenuItem(BACK_HEADER, R.string.configure_map, R.drawable.ic_action_undo_dark, R.drawable.ic_action_undo_light, null));
+		items.add(new ConfigureMapMenuItem(BACK_HEADER, R.string.configure_map, R.drawable.ic_back_drawer_dark, R.drawable.ic_back_drawer_white, null));
 		createLayersItems(items);
 		createRenderingAttributeItems(items);
 		return new ArrayAdapter<ConfigureMapMenuItem>(app, R.layout.map_settings_item, items) {
@@ -96,6 +96,7 @@ public class ConfigureSettingsMenuHelper {
 				} else if (item.type == MAP_REDNDER) {
 					((TextView) convertView.findViewById(R.id.name)).setText(item.nameId);
 					if (item.nameId == R.string.map_widget_renderer) {
+						((TextView)convertView.findViewById(R.id.descr)).setText(app.getSettings().RENDERER.get());
 						convertView.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
@@ -134,6 +135,7 @@ public class ConfigureSettingsMenuHelper {
 							}
 						});
 					} else if (item.nameId == R.string.map_widget_day_night) {
+						((TextView)convertView.findViewById(R.id.descr)).setText(app.getSettings().DAYNIGHT_MODE.get().toHumanString(app));
 						convertView.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
@@ -174,7 +176,6 @@ public class ConfigureSettingsMenuHelper {
 							public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 								pref.set(!pref.get());
 								app.getResourceManager().getRenderer().clearCache();
-								//view.refreshMap(true);
 							}
 						});
 					} else {
@@ -214,6 +215,8 @@ public class ConfigureSettingsMenuHelper {
 			//Hiding and showing items based on current item
 			//setting proper visual property
 			private void prepareView(View convertView, ConfigureMapMenuItem item) {
+				((TextView)convertView.findViewById(R.id.descr)).setTypeface(null,Typeface.ITALIC);
+
 				int type = item.type;
 				//setting name textview
 				if (type == BACK_HEADER) {
@@ -225,7 +228,10 @@ public class ConfigureSettingsMenuHelper {
 					header.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 					header.setTypeface(Typeface.DEFAULT_BOLD);
 				} else {
-					((TextView) convertView.findViewById(R.id.name)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+					TextView header = ((TextView) convertView.findViewById(R.id.name));
+					header.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+					header.setTypeface(Typeface.DEFAULT);
+
 				}
 
 				//setting backbutton
@@ -250,6 +256,7 @@ public class ConfigureSettingsMenuHelper {
 				} else if (type == MAP_REDNDER) {
 					convertView.findViewById(R.id.icon).setVisibility(View.GONE);
 					convertView.findViewById(R.id.check).setVisibility(View.GONE);
+					convertView.findViewById(R.id.descr).setVisibility(View.VISIBLE);
 				} else if (type == RENDERING_PROPERTY) {
 					final RenderingRuleProperty p = (RenderingRuleProperty) item.preference;
 					if (p.isBoolean()) {
@@ -281,6 +288,7 @@ public class ConfigureSettingsMenuHelper {
 								selectPOIFilterLayer(null);
 							} else {
 								pref.set(b);
+								app.getMapActivity().getMapView().refreshMap(true);
 							}
 						}
 					});
@@ -303,6 +311,7 @@ public class ConfigureSettingsMenuHelper {
 						@Override
 						public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 							pref.set(b);
+							app.getMapActivity().getMapView().refreshMap(true);
 						}
 					});
 				}

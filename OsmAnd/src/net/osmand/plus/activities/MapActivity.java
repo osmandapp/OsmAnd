@@ -273,6 +273,13 @@ public class MapActivity extends AccessibleActivity  {
     }
 
 	@Override
+	public void onBackPressed() {
+		if (!mapActions.onBackPressed()) {
+			super.onBackPressed();
+		}
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
 		cancelNotification();

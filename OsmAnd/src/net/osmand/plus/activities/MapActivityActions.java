@@ -440,8 +440,17 @@ public class MapActivityActions implements DialogProvider {
 		
 		return dlg;
 	}
-	
-	
+
+	public boolean onBackPressed() {
+		if (mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+			mDrawerLayout.closeDrawer(mDrawerList);
+
+			return true;
+		}
+		return false;
+	}
+
+
 	private static class SaveDirectionsAsyncTask extends AsyncTask<File, Void, String> {
 		
 		private final OsmandApplication app;
