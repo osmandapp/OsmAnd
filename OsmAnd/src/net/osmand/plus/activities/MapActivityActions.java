@@ -756,7 +756,12 @@ public class MapActivityActions implements DialogProvider {
 		});
 
 		if (show){
-			mDrawerLayout.openDrawer(mDrawerList);
+			// toggle drawer
+			if (!mDrawerLayout.isDrawerOpen(mDrawerList)) {
+				mDrawerLayout.openDrawer(mDrawerList);
+			} else {
+				mDrawerLayout.closeDrawer(mDrawerList);
+			}
 		}
 	}
 
