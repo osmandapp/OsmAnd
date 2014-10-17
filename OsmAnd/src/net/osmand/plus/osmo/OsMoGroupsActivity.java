@@ -59,6 +59,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Spannable;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
@@ -70,7 +71,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -95,7 +95,7 @@ import com.actionbarsherlock.view.Window;
  *
  */
 public class OsMoGroupsActivity extends OsmandExpandableListActivity implements OsmAndCompassListener,
-		OsmAndLocationListener, OsMoGroupsUIListener, OsMoService.ConnectionListener {
+		OsmAndLocationListener, OsMoGroupsUIListener {
 
 	public static final int CONNECT_TO = 1;
 	protected static final int DELETE_ACTION_ID = 2;
@@ -383,7 +383,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			adapter.synchronizeGroups();
 		}
 		osMoPlugin.setGroupsActivity(this);
-		checkToShowNoConnectionMsg();
 	}
 
 	@Override
@@ -1485,22 +1484,25 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}
 	}
 
-	@Override
-	public void onConnectionError() {
-		checkToShowNoConnectionMsg();
-	}
-	
-	@Override
-	public void onConnectionEstablished() {
-		checkToShowNoConnectionMsg();
-	}
-
-	private void checkToShowNoConnectionMsg() {
+	public void handleConnect() {
 		app.runInUIThread(new Runnable() {
 			
 			@Override
 			public void run() {
-				if (osMoPlugin.getService().isConnectionError()) {
+				if (getExpandableListView().getFooterViewsCount() > 0) {
+					getExpandableListView().removeFooterView(footer);	
+				}
+				updateStatus();
+			}
+		});
+	}
+	
+	public void handleDisconnect(final String msg) {
+		app.runInUIThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				if (!TextUtils.isEmpty(msg)) {
 					CompoundButton srvc = (CompoundButton) header.findViewById(R.id.enable_service);
 					if (srvc.isChecked()) {
 						if (getExpandableListView().getFooterViewsCount() == 0) {
@@ -1508,14 +1510,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						}
 						adapter.clear();
 					}
-				} else {
-					if (getExpandableListView().getFooterViewsCount() > 0) {
-						getExpandableListView().removeFooterView(footer);	
-					}
+					updateStatus();
 				}
-				updateStatus();
 			}
 		});
 	}
+
 }
 

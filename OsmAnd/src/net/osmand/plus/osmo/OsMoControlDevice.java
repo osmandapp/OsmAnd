@@ -132,11 +132,11 @@ public class OsMoControlDevice implements OsMoReactor {
 	}
 
 	@Override
-	public void reconnect() {
+	public void onConnected() {
 	}
 
 	@Override
-	public void connectionError() {
+	public void onDisconnected(String msg) {
 	}
 
 }

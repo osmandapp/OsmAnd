@@ -8,8 +8,8 @@ public interface OsMoReactor {
 	
 	public String nextSendCommand(OsMoThread tracker);
 	
-	public void reconnect();
+	public void onConnected();
 	
-	public void connectionError();
+	public void onDisconnected(String msg);
 	
 }

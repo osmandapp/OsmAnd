@@ -63,13 +63,6 @@ public class OsMoService implements OsMoReactor {
 	private Notification notification;
 	public final static String OSMO_REGISTER_AGAIN  = "OSMO_REGISTER_AGAIN"; //$NON-NLS-1$
 	private final static int SIMPLE_NOTFICATION_ID = 5;
-	private Boolean isConnectionError = false;
-
-	public interface ConnectionListener {
-		void onConnectionError();
-		void onConnectionEstablished();
-	}
-	private ConnectionListener connectionListener = null;
 
 
 
@@ -77,6 +70,7 @@ public class OsMoService implements OsMoReactor {
 		this.app = app;
 		this.plugin = plugin;
 		listReactors.add(this);
+		listReactors.add(plugin);
 		broadcastReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -97,7 +91,7 @@ public class OsMoService implements OsMoReactor {
 			public Void doInBackground(Void... voids ) {
 				try {
 					registerOsmoDeviceKey();
-					reconnect();
+					onConnected();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -107,7 +101,7 @@ public class OsMoService implements OsMoReactor {
 	}
 	
 	public boolean isConnected() {
-		return thread != null && thread.isConnected() && !isConnectionError;
+		return thread != null && thread.isConnected();
 	}
 	
 	
@@ -423,38 +417,14 @@ public class OsMoService implements OsMoReactor {
 	
 
 	@Override
-	public void reconnect() {
+	public void onConnected() {
 		pushCommand("TRACK_GET");
-		boolean changed = false;
-		synchronized (isConnectionError) {
-			if (isConnectionError) {
-				isConnectionError = false;
-				changed = true;
-			}
-		}
-		if ((connectionListener != null) && changed) {
-			connectionListener.onConnectionEstablished();
-		}
 	}
 
 	@Override
-	public void connectionError() {
-		boolean changed = false;
-		synchronized (isConnectionError) {
-			if (!isConnectionError) {
-				isConnectionError = true;
-				changed = true;
-			}
-		}
-		if ((connectionListener != null) && changed) {
-			connectionListener.onConnectionError();
-		}
+	public void onDisconnected(String msg) {
 	}
-
-	public boolean isConnectionError() {
-		return isConnectionError;
-	}
-
+	
 	public void reconnectToServer() {
 		if(thread != null) {
 			thread.reconnect();
@@ -465,9 +435,5 @@ public class OsMoService implements OsMoReactor {
 		String psswd = app.getSettings().OSMO_USER_PWD.get();
 		String userName = app.getSettings().OSMO_USER_NAME.get();
 		return ((!TextUtils.isEmpty(psswd) && !TextUtils.isEmpty(userName)));
-	}
-
-	public void setOnConnectionErrorListener(ConnectionListener onConnectionErrorListener) {
-		this.connectionListener = onConnectionErrorListener;
 	}
 }

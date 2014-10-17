@@ -51,7 +51,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.view.View;
 
-public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlServices {
+public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlServices, OsMoReactor {
 
 	private OsmandApplication app;
 	public static final String ID = "osmand.osmo";
@@ -91,11 +91,6 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	
 	public void setGroupsActivity(OsMoGroupsActivity groupsActivity) {
 		this.groupsActivity = groupsActivity;
-		if (groupsActivity == null) {
-			service.setOnConnectionErrorListener(null);
-		} else {
-			service.setOnConnectionErrorListener(this.groupsActivity);
-		}
 	}
 
 	@Override
@@ -502,5 +497,28 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		
 	}
 
+	@Override
+	public boolean acceptCommand(String command, String id, String data, JSONObject obj, OsMoThread tread) {
+		return false;
+	}
+	
+	@Override
+	public String nextSendCommand(OsMoThread tracker) {
+		return null;
+	}
+	
+	@Override
+	public void onConnected() {
+		if (groupsActivity != null) {
+			groupsActivity.handleConnect();
+		}
+	}
+	
+	@Override
+	public void onDisconnected(String msg) {
+		if (groupsActivity != null) {
+			groupsActivity.handleDisconnect(msg);
+		}
+	}
 
 }

@@ -90,7 +90,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	}
 	
 	@Override
-	public void reconnect() {
+	public void onConnected() {
 		for(OsMoDevice d : storage.getMainGroup().getGroupUsers(null)) {
 			if(d.isEnabled()) {
 				connectDeviceImpl(d);
@@ -103,7 +103,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	}
 
 	@Override
-	public void connectionError() {
+	public void onDisconnected(String msg) {
 	}
 
 	private String connectGroupImpl(OsMoGroup g) {
