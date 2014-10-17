@@ -32,12 +32,14 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 	private OsmandRegions osmandRegions;
 	private java.text.DateFormat format;
 	private UpdateIndexAdapter listAdapter;
+	private int updateColor;
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		format = getMyApplication().getResourceManager().getDateFormat();
+		updateColor = getResources().getColor(R.color.color_update);
 		osmandRegions = getMyApplication().getResourceManager().getOsmandRegions();
 		listAdapter = new UpdateIndexAdapter(getDownloadActivity(), R.layout.download_index_list_item, DownloadActivity.downloadListIndexThread.getItemsToUpdate());
 		listAdapter.sort(new Comparator<IndexItem>() {
@@ -228,10 +230,12 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 					} else if (indexActivatedFileNames.containsKey(sfName)) {
 						name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
+						name.setTextColor(updateColor); // LIGHT_BLUE
 						name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					} else {
 						name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
 								+ indexFileNames.get(sfName));
+						name.setTextColor(updateColor); // LIGHT_BLUE
 						name.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 					}
 				}
