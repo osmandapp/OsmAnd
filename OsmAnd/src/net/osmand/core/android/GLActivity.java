@@ -229,7 +229,7 @@ public class GLActivity extends Activity {
         if (mapnik == null)
             Log.e(TAG, "Failed to create mapnik");
         */
-        _mapRenderer.setRasterLayerProvider(RasterMapLayerId.BaseLayer, _binaryMapRasterLayerProvider);
+        _mapRenderer.setMapLayerProvider(0, _binaryMapRasterLayerProvider);
 
         _glSurfaceView = (GLSurfaceView) findViewById(R.id.glSurfaceView);
         //TODO:_glSurfaceView.setPreserveEGLContextOnPause(true);

@@ -164,14 +164,14 @@ public class NativeQtLibrary {
 					notGc(new Primitiviser(presentation)), rasterTileSize));
 			BinaryMapRasterLayerProvider_Software binaryMapRasterLayerProvider = notGc(new BinaryMapRasterLayerProvider_Software(
 					binaryMapPrimitivesProvider));
-			mapRenderer.setRasterLayerProvider(RasterMapLayerId.BaseLayer, binaryMapRasterLayerProvider);
+			mapRenderer.setMapLayerProvider(0, binaryMapRasterLayerProvider);
 //			BinaryMapStaticSymbolsProvider binaryMapStaticSymbolsProvider = notGc(new BinaryMapStaticSymbolsProvider(
 //					binaryMapPrimitivesProvider, rasterTileSize));
 //			mapRenderer.addSymbolProvider(binaryMapStaticSymbolsProvider);
 		} else {
 			OnlineRasterMapLayerProvider onlineMapRasterLayerProvider = notGc(OnlineTileSources.getBuiltIn()
 					.createProviderFor("Mapnik (OsmAnd)"));
-			mapRenderer.setRasterLayerProvider(RasterMapLayerId.BaseLayer, onlineMapRasterLayerProvider);
+			mapRenderer.setMapLayerProvider(0, onlineMapRasterLayerProvider);
 		}
 
 	}
