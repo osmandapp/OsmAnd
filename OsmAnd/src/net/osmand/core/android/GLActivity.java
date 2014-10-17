@@ -222,7 +222,7 @@ public class GLActivity extends Activity {
         atlasRendererConfiguration.setReferenceTileSizeOnScreenInPixels(_referenceTileSize);
         _mapRenderer.setConfiguration(AtlasMapRendererConfiguration.Casts.downcastTo_MapRendererConfiguration(atlasRendererConfiguration));
 
-        _mapRenderer.addSymbolProvider(_binaryMapStaticSymbolsProvider);
+        _mapRenderer.addSymbolsProvider(_binaryMapStaticSymbolsProvider);
         updateView();
         /*
         IMapRasterLayerProvider mapnik = OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)");
