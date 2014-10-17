@@ -14,7 +14,7 @@ import net.osmand.core.android.CoreResourcesFromAndroidAssetsCustom;
 import net.osmand.core.jni.AtlasMapRendererConfiguration;
 import net.osmand.core.jni.BinaryMapDataProvider;
 import net.osmand.core.jni.BinaryMapPrimitivesProvider;
-import net.osmand.core.jni.BinaryMapRasterBitmapTileProvider_Software;
+import net.osmand.core.jni.BinaryMapRasterLayerProvider_Software;
 import net.osmand.core.jni.BinaryMapStaticSymbolsProvider;
 import net.osmand.core.jni.IMapRenderer;
 import net.osmand.core.jni.Logger;
@@ -23,7 +23,7 @@ import net.osmand.core.jni.MapRendererClass;
 import net.osmand.core.jni.MapRendererSetupOptions;
 import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfsCollection;
-import net.osmand.core.jni.OnlineRasterMapTileProvider;
+import net.osmand.core.jni.OnlineRasterMapLayerProvider;
 import net.osmand.core.jni.OnlineTileSources;
 import net.osmand.core.jni.OsmAndCore;
 import net.osmand.core.jni.Primitiviser;
@@ -162,16 +162,16 @@ public class NativeQtLibrary {
 			BinaryMapPrimitivesProvider binaryMapPrimitivesProvider = notGc(new BinaryMapPrimitivesProvider(
 					notGc(new BinaryMapDataProvider(obfsCollection)), 
 					notGc(new Primitiviser(presentation)), rasterTileSize));
-			BinaryMapRasterBitmapTileProvider_Software binaryMapRasterBitmapTileProvider = notGc(new BinaryMapRasterBitmapTileProvider_Software(
+			BinaryMapRasterLayerProvider_Software binaryMapRasterLayerProvider = notGc(new BinaryMapRasterLayerProvider_Software(
 					binaryMapPrimitivesProvider));
-			mapRenderer.setRasterLayerProvider(RasterMapLayerId.BaseLayer, binaryMapRasterBitmapTileProvider);
+			mapRenderer.setRasterLayerProvider(RasterMapLayerId.BaseLayer, binaryMapRasterLayerProvider);
 //			BinaryMapStaticSymbolsProvider binaryMapStaticSymbolsProvider = notGc(new BinaryMapStaticSymbolsProvider(
 //					binaryMapPrimitivesProvider, rasterTileSize));
 //			mapRenderer.addSymbolProvider(binaryMapStaticSymbolsProvider);
 		} else {
-			OnlineRasterMapTileProvider onlineMapRasterBitmapTileProvider = notGc(OnlineTileSources.getBuiltIn()
+			OnlineRasterMapLayerProvider onlineMapRasterLayerProvider = notGc(OnlineTileSources.getBuiltIn()
 					.createProviderFor("Mapnik (OsmAnd)"));
-			mapRenderer.setRasterLayerProvider(RasterMapLayerId.BaseLayer, onlineMapRasterBitmapTileProvider);
+			mapRenderer.setRasterLayerProvider(RasterMapLayerId.BaseLayer, onlineMapRasterLayerProvider);
 		}
 
 	}
