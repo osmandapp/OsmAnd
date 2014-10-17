@@ -112,7 +112,7 @@ public class OsMoThread {
 		this.activeChannel = activeChannel;
 		key.attach(new Integer(++activeConnectionId));
 		for(OsMoReactor sender : listReactors) {
-			sender.reconnect();
+			sender.onConnected();
 		}
 
 	}
@@ -171,6 +171,10 @@ public class OsMoThread {
 			if (activeChannel != null && !activeChannel.isConnected()) {
 				activeChannel = null;
 			}
+			String msg = e.getMessage();
+			for(OsMoReactor sender : listReactors) {
+				sender.onDisconnected(msg);
+			}
 			delay = HEARTBEAT_FAILED_DELAY;
 			if(lastSendCommand != 0 && System.currentTimeMillis() - lastSendCommand > TIMEOUT_TO_RECONNECT  ) {
 				reconnect = true;
@@ -180,6 +184,9 @@ public class OsMoThread {
 		}
 		if (stopThread) {
 			stopChannel();
+			for(OsMoReactor sender : listReactors) {
+				sender.onDisconnected(null);
+			}
 			serviceThread.getLooper().quit();
 		} else {
 			scheduleHeartbeat(delay);

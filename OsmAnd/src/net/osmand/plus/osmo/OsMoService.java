@@ -42,6 +42,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.Settings.Secure;
 import android.support.v4.app.NotificationCompat;
+import android.text.TextUtils;
 
 public class OsMoService implements OsMoReactor {
 	public static final String REGENERATE_CMD = "TRACKER_REGENERATE_ID";
@@ -62,13 +63,14 @@ public class OsMoService implements OsMoReactor {
 	private Notification notification;
 	public final static String OSMO_REGISTER_AGAIN  = "OSMO_REGISTER_AGAIN"; //$NON-NLS-1$
 	private final static int SIMPLE_NOTFICATION_ID = 5;
-	
-	
-	
+
+
+
 	public OsMoService(final OsmandApplication app, OsMoPlugin plugin) {
 		this.app = app;
 		this.plugin = plugin;
 		listReactors.add(this);
+		listReactors.add(plugin);
 		broadcastReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -89,7 +91,7 @@ public class OsMoService implements OsMoReactor {
 			public Void doInBackground(Void... voids ) {
 				try {
 					registerOsmoDeviceKey();
-					reconnect();
+					onConnected();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -241,6 +243,14 @@ public class OsMoService implements OsMoReactor {
 		return myGroupTrackerId;
 	}
 	
+	public String getMyTrackerId() {
+		String myGroupTrackerId = "";
+		SessionInfo currentSessionInfo = getCurrentSessionInfo();
+		if (currentSessionInfo != null) {
+			myGroupTrackerId = currentSessionInfo.trackerId;
+		}
+		return myGroupTrackerId;
+	}
 	
 	public SessionInfo prepareSessionToken() throws IOException {
 		String deviceKey = app.getSettings().OSMO_DEVICE_KEY.get();
@@ -407,8 +417,12 @@ public class OsMoService implements OsMoReactor {
 	
 
 	@Override
-	public void reconnect() {
+	public void onConnected() {
 		pushCommand("TRACK_GET");
+	}
+
+	@Override
+	public void onDisconnected(String msg) {
 	}
 	
 	public void reconnectToServer() {
@@ -416,5 +430,10 @@ public class OsMoService implements OsMoReactor {
 			thread.reconnect();
 		}
 	}
-	
+
+	public boolean isLoggedIn() {
+		String psswd = app.getSettings().OSMO_USER_PWD.get();
+		String userName = app.getSettings().OSMO_USER_NAME.get();
+		return ((!TextUtils.isEmpty(psswd) && !TextUtils.isEmpty(userName)));
+	}
 }

@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
+import net.osmand.core.jni.ColorARGB;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
@@ -46,6 +47,9 @@ import android.widget.Toast;
 public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, OsMoGroupsUIListener,
 		ContextMenuLayer.IContextMenuProviderSelection{
  
+	private static int POINT_OUTER_COLOR = 0x88555555;
+	private static int PAINT_TEXT_ICON_COLOR = Color.BLACK;
+	
 	private DisplayMetrics dm;
 	private final MapActivity map;
 	private OsmandMapTileView view;
@@ -87,13 +91,13 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		paintTextIcon.setTextSize(10 * view.getDensity());
 		paintTextIcon.setTextAlign(Align.CENTER);
 		paintTextIcon.setFakeBoldText(true);
-		paintTextIcon.setColor(Color.BLACK);
+		paintTextIcon.setColor(PAINT_TEXT_ICON_COLOR);
 		paintTextIcon.setAntiAlias(true);
 		
 		pth = new Path();
 
 		pointOuter = new Paint();
-		pointOuter.setColor(0x88555555);
+		pointOuter.setColor(POINT_OUTER_COLOR);
 		pointOuter.setAntiAlias(true);
 		pointOuter.setStyle(Style.FILL_AND_STROKE);
 	}
@@ -153,6 +157,32 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 				int x = (int) tileBox.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
 				int y = (int) tileBox.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
 				pointInnerCircle.setColor(t.getColor());
+				pointOuter.setColor(POINT_OUTER_COLOR);
+				paintTextIcon.setColor(PAINT_TEXT_ICON_COLOR);
+				Location lastLocation = t.getLastLocation();
+				if (lastLocation != null) {
+					long now = System.currentTimeMillis();
+					boolean recent = Math.abs( now - lastLocation.getTime() ) < OsMoGroupsActivity.RECENT_THRESHOLD;
+					if (!recent) {
+						int color = t.getNonActiveColor();
+						pointInnerCircle.setColor(color);
+						pointOuter.setColor(Color.argb(Color.alpha(color),
+								Color.red(POINT_OUTER_COLOR), Color.green(POINT_OUTER_COLOR),
+								Color.blue(POINT_OUTER_COLOR)));
+						paintTextIcon.setColor(Color.argb(Color.alpha(color),
+								Color.red(PAINT_TEXT_ICON_COLOR), Color.green(PAINT_TEXT_ICON_COLOR),
+								Color.blue(PAINT_TEXT_ICON_COLOR)));
+					}
+				} else {
+					int color = t.getNonActiveColor();
+					pointInnerCircle.setColor(color);
+					pointOuter.setColor(Color.argb(Color.alpha(color),
+							Color.red(POINT_OUTER_COLOR), Color.green(POINT_OUTER_COLOR),
+							Color.blue(POINT_OUTER_COLOR)));
+					paintTextIcon.setColor(Color.argb(Color.alpha(color),
+							Color.red(PAINT_TEXT_ICON_COLOR), Color.green(PAINT_TEXT_ICON_COLOR),
+							Color.blue(PAINT_TEXT_ICON_COLOR)));
+				}
 				canvas.drawCircle(x, y, r + (float)Math.ceil(tileBox.getDensity()), pointOuter);
 				canvas.drawCircle(x, y, r - (float)Math.ceil(tileBox.getDensity()), pointInnerCircle);
 				paintTextIcon.setTextSize(r * 3 / 2);

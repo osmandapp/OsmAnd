@@ -1,10 +1,14 @@
 package net.osmand.plus.osmo;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -18,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.graphics.Color;
 
 public class OsMoGroupsStorage {
 	private static final String GROUPS = "groups";
@@ -56,6 +61,17 @@ public class OsMoGroupsStorage {
 		return groups.values();
 	}
 	
+	public void loadOnlyMainGroup() {
+		String grp = pref.get();
+		try {
+			JSONObject obj = new JSONObject(grp);
+			parseGroupUsers(mainGroup, obj);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			service.showErrorMessage(e.getMessage());
+		}
+	}
+
 	public void load() {
 		String grp = pref.get();
 		try {
@@ -396,7 +412,16 @@ public class OsMoGroupsStorage {
 			}
 			return genColor;
 		}
-		
+
+		public int getNonActiveColor() {
+			int color = getColor();
+		    int alpha = Math.round(Color.alpha(color) * 0.3f);
+		    int red = Color.red(color);
+		    int green = Color.green(color);
+		    int blue = Color.blue(color);
+		    return Color.argb(alpha, red, green, blue);
+		}
+
 		public String getVisibleName(){
 			if(userName != null && userName.length() > 0) {
 				return userName;
@@ -423,5 +448,29 @@ public class OsMoGroupsStorage {
 		
 	}
 
-
+	public void mergeGroups(Map<String, OsMoGroup> groupsToMerge) {
+		Set<String> toDelete = new HashSet<String>(groups.keySet());
+		if (groupsToMerge != null) {
+			Set<String> toMerge = groupsToMerge.keySet();
+			for (String id: toMerge) {
+				if (toDelete.contains(id)) {
+					toDelete.remove(id);
+				} else {
+					addGroup(groupsToMerge.get(id));
+				}
+			}
+		}
+		for (String id: toDelete) {
+			OsMoGroup group = getGroup(id); 
+			if ((group != null) && (!group.equals(mainGroup))) {
+				deleteGroup(group);
+			}
+		}
+	}
+	
+	public void clearGroups() {
+		groups.clear();
+		groups.put("", mainGroup);
+	}
+	
 }

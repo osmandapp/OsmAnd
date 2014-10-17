@@ -49,6 +49,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.WaypointDialogHelper;
+import net.osmand.plus.osmo.OsMoPositionLayer;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
@@ -873,6 +874,10 @@ public class MapActivityActions implements DialogProvider {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					stopNavigationActionConfirm(mapView);
+					OsMoPositionLayer osMoPositionLayer = mapActivity.getMapView().getLayerByClass(OsMoPositionLayer.class);
+					if (osMoPositionLayer != null) {
+						OsMoPositionLayer.setFollowDestination(null);						
+					}
 				}
 			}).reg();
 		}
