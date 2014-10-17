@@ -28,7 +28,6 @@ import net.osmand.core.jni.OnlineTileSources;
 import net.osmand.core.jni.OsmAndCore;
 import net.osmand.core.jni.Primitiviser;
 import net.osmand.core.jni.QIODeviceLogSink;
-import net.osmand.core.jni.RasterMapLayerId;
 import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.NativeCppLibrary;
