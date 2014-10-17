@@ -13,6 +13,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.IntermediatePointsDialog;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -43,6 +44,8 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 	private OsmandApplication app;
 	private LinearLayout mainLayout;
 	private WaypointHelper waypointHelper;
+
+	private final static String POI_RADIUS = "poi_radius";
 
 	public final static boolean OVERLAP_LAYOUT = true; // only true is supported
 	private View closePointDialog;
@@ -245,14 +248,29 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			}
 		}
 
+		private void recalculatePoints(final int[] running, final ArrayAdapter<Object> listAdapter, final int type){
+			new AsyncTask<Void, Void, Void>() {
+
+				@Override
+				protected Void doInBackground(Void... params) {
+					app.getWaypointHelper().recalculatePoints(type);
+					return null;
+				}
+
+				protected void onPostExecute(Void result) {
+					running[0] = -1;
+					listAdapter.clear();
+					for (Object point : getPoints()) {
+						listAdapter.add(point);
+					}
+					listAdapter.notifyDataSetChanged();
+				}
+			}.execute((Void) null);
+		}
+
 		private void enableType(final int[] running, final ArrayAdapter<Object> listAdapter, final int type,
 								final boolean enable) {
 			new AsyncTask<Void, Void, Void>() {
-
-				protected void onPreExecute() {
-				}
-
-				;
 
 				@Override
 				protected Void doInBackground(Void... params) {
@@ -356,6 +374,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			final int[] running = new int[]{-1};
 			final ArrayAdapter<Object> listAdapter = new ArrayAdapter<Object>(ctx,
 					R.layout.waypoint_reached, R.id.title, points) {
+
 				@Override
 				public View getView(final int position, View convertView, ViewGroup parent) {
 					// User super class to create the View
@@ -366,8 +385,60 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 					if (v == null || viewText != labelView) {
 						v = ctx.getLayoutInflater().inflate(labelView ? R.layout.waypoint_header : R.layout.waypoint_reached, null);
 					}
-					if (labelView) {
+					if (getItem(position) instanceof String && getItem(position).equals(POI_RADIUS)){
+						v = ctx.getLayoutInflater().inflate(R.layout.radius_search_list_element, null);
+						v.findViewById(R.id.ProgressBar).setVisibility(position == running[0] ? View.VISIBLE : View.GONE);
+						final TextView radius = (TextView) v.findViewById(R.id.radius);
+						radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getSearchDeviationRadius(), app));
+						radius.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								int length = WaypointHelper.SEARCH_RADIUS_VALUES.length;
+								String[] names = new String[length];
+								int selected = 0;
+								for (int i = 0; i < length; i++) {
+									names[i] = OsmAndFormatter.getFormattedDistance(WaypointHelper.SEARCH_RADIUS_VALUES[i], app);
+									if (WaypointHelper.SEARCH_RADIUS_VALUES[i] == waypointHelper.getSearchDeviationRadius()){
+										selected = i;
+									}
+								}
+								new AlertDialog.Builder(getActivity())
+										.setSingleChoiceItems(names, selected, new OnClickListener() {
+											@Override
+											public void onClick(DialogInterface dialogInterface, int i) {
+												int value = WaypointHelper.SEARCH_RADIUS_VALUES[i];
+												if (waypointHelper.getSearchDeviationRadius() != value){
+													running[0] = position;
+													waypointHelper.setSearchDeviationRadius(value);
+													radius.setText(OsmAndFormatter.getFormattedDistance(value, app));
+													recalculatePoints(running, thisAdapter, WaypointHelper.POI);
+													dialogInterface.dismiss();
+												}
+											}
+										}).setTitle(app.getString(R.string.search_radius)+ " " + app.getString(R.string.poi))
+										.setNegativeButton(R.string.default_buttons_cancel, null)
+										.show();
+							}
+						});
+					} else if (labelView) {
+						v = ctx.getLayoutInflater().inflate(R.layout.waypoint_header, null);
 						final int type = (Integer) getItem(position);
+						ImageView sort = (ImageView) v.findViewById(R.id.sort);
+						//sort button in Destination header
+						if (type == 0 && sort != null){
+							sort.setVisibility(View.VISIBLE);
+							if (app.getSettings().isLightContent()){
+								sort.setImageResource(R.drawable.ic_sort_waypoint_white);
+							} else {
+								sort.setImageResource(R.drawable.ic_sort_waypoint_dark);
+							}
+							sort.setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View view) {
+									IntermediatePointsDialog.openIntermediatePointsDialog(ctx, app, true);
+								}
+							});
+						}
 						final CompoundButton btn = (CompoundButton) v.findViewById(R.id.check_item);
 						btn.setVisibility(waypointHelper.isTypeConfigurable(type) ? View.VISIBLE : View.GONE);
 						btn.setOnCheckedChangeListener(null);
@@ -392,6 +463,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 						TextView tv = (TextView) v.findViewById(R.id.header_text);
 						tv.setText(getHeader(type, checked));
 					} else {
+						v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
 						updatePointInfoView(app, ctx, v, (LocationPointWrapper) getItem(position), WaypointDialogFragment.this);
 						View remove = v.findViewById(R.id.info_close);
 						((ImageButton) remove).setImageDrawable(ctx.getResources().getDrawable(
@@ -448,6 +520,9 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				List<LocationPointWrapper> tp = waypointHelper.getWaypoints(i);
 				if (waypointHelper.isTypeVisible(i)) {
 					points.add(new Integer(i));
+					if (i == WaypointHelper.POI && waypointHelper.isTypeEnabled(WaypointHelper.POI)){
+						points.add(POI_RADIUS);
+					}
 					if (tp != null && tp.size() > 0) {
 						points.addAll(tp);
 					}
