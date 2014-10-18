@@ -1752,4 +1752,9 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="fav_point_emoticons_message">Amos cambiadu su nùmene de su prefèrridu tuo, ponende•li %1$s, pro fatzilitare su sarbamentu de s\'istringa cun sas emòticons in unu documentu.</string>
     <string name="speed_limit_exceed_message">Ischerta s\'arramponada de su lìmite de lestresa a pustis de su cale as a tènnere un\'avisu vocale.</string>
 	<string name="speed_limit_exceed">Arramponada de su lìmite de lestresa</string>
-	</resources>
+	<string name="osmo_device_not_found">Dispositivu no agatau</string>
+    <string name="anonymous_user">Impitadore anònimu</string>
+    <string name="logged_as">Identificadu comente %1$s</string>
+	<string name="osmo_no_connection_msg">Su servìtziu OsMo no est disponìbile:\n- compida sa connessione;\n- compida sas impostaduras;\n- abbàida su Twitter nostru: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Un\'impitadore anònimu non podet:\n- creare grupos;\n- sincronizare grupos e dispositivos cun su server;\n- gestire grupos e dispositivos in un\'ufìtziu privadu.</string>
+    </resources>
