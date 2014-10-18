@@ -1828,4 +1828,9 @@
     <string name="fav_point_emoticons_message">我的最愛標點名稱，已被修改為 %1$s，便於正確的儲存字串表情符號到檔案中。</string>
     <string name="speed_limit_exceed">速限容許餘裕</string>
 	<string name="speed_limit_exceed_message">選擇速限容許餘裕界限，上述，您將收到語音警告。</string>
+	<string name="osmo_device_not_found">未找到裝置</string>
+    <string name="osmo_no_connection_msg">OsMo 服務無法使用：\n- 檢查連線；\n- 檢查設定；\n- 查看我們的 Twitter：https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">匿名使用者不能：\n- 建立群組；\n- 以伺服器同步群組和裝置；\n- 在個人的辦事處所管理群組和裝置。</string>
+    <string name="anonymous_user">匿名使用者</string>
+    <string name="logged_as">已在 %1$s 登入</string>
 	</resources>
