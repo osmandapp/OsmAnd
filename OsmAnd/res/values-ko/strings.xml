@@ -2087,4 +2087,9 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="fav_point_emoticons_message">%1$s 에 즐겨찾기 포인트 이름 변경. 파일에 이모티콘과 함께 문자열을 저장할 수 없습니다.</string>
     <string name="speed_limit_exceed">속도 제한 초과 값</string>
 	<string name="speed_limit_exceed_message">음성 안내 경고를 받아야 할 속도 제한 초과 값을 선택합니다.</string>
+	<string name="osmo_device_not_found">장치를 찾을 수 없습니다</string>
+    <string name="osmo_no_connection_msg">OsMo 서비스는 사용할 수 없습니다:\n- 연결 확인;\n- 설정 확인;\n- 체크 아웃 트위터: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">익명의 사용자는 아래 사항을 할 수 없습니다:\n- 그룹 생성;\n- 그룹 및 장치를 서버와 동기화;\n- 그룹 및 장치를 관리 (개인 사무실에서).</string>
+    <string name="anonymous_user">익명의 사용자</string>
+    <string name="logged_as">%1$s 사용자로 로그인 됨</string>
 	</resources>
