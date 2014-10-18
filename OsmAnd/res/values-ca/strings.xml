@@ -1907,4 +1907,9 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="print_route">Imprimeix la ruta</string>
     <string name="speed_limit_exceed">Tolerància sobre el límit de velocitat</string>
 	<string name="speed_limit_exceed_message">Trieu el marge de tolerància al límit de velocitat per sobre del que rebreu un avís de veu.</string>
+	<string name="osmo_device_not_found">Dispositiu no trobat</string>
+    <string name="osmo_no_connection_msg">El servei OsMo no està disponible:\n- verifiqueu la connexió;\n- verifiqueu la configuració;\n- consulteu el nostre Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Un usuari anònim no pot:\n- crear grups;\n- sincronitzar grups i dispositius amb el servidor;\n- gestionar grups i dispositius en privat.</string>
+    <string name="anonymous_user">Usuari anònim</string>
+    <string name="logged_as">Iniciat com %1$s</string>
 	</resources>
