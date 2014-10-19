@@ -1785,4 +1785,7 @@
 	<string name="test_native_render_msg">Запустить activity с нативной визуализацией</string>
     <string name="osmo_device_not_found">Устройство не обнаружено</string>
     <string name="anonymous_user">Анонимный пользователь</string>
-    </resources>
+    <string name="osmo_no_connection_msg">Сервис OsMo не доступен:\n- проверьте соединение;\n- проверьте настройки;\n- проверьте наш Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Анонимному пользователю недоступно:\n- создание групп;\n- синхронизация групп и устройств с сервером;\n- управление группами и устройствами в личном кабинете.</string>
+    <string name="logged_as">Вы вошли как %1$s</string>
+	</resources>
