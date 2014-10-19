@@ -1959,4 +1959,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="speed_limit_exceed_message">Wybierz margines tolerancji ograniczenia prędkości, powyżej której otrzymasz ostrzeżenie głosowe.</string>
 	<string name="fav_point_emoticons_message">Nazwa ulubionego punktu została zmodyfikowany na %1$s, aby prawidłowo ułatwić zapisywanie do pliku ciągu z emotikonem.</string>
     <string name="print_route">Drukuj trasę</string>
-    </resources>
+    <string name="osmo_device_not_found">Nie znaleziono urządzenia</string>
+    <string name="osmo_no_connection_msg">Serwis OsMo jest niedostępny:\n- sprawdź połączenie internetowe;\n- sprawdź ustawienia;\n- sprawdź Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Anonimowy użytkownik nie może:\n- tworzyć grup;\n- synchronizować grup i urządzeń z serwerem;\n- zarządzać grupami i urządzeniami w gabinecie.</string>
+    <string name="anonymous_user">Użytkownik anonimowy</string>
+    <string name="logged_as">Zalogowany jako %1$s</string>
+	</resources>
