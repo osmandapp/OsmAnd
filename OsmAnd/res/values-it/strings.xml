@@ -2001,4 +2001,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="fav_point_emoticons_message">Abbiamo cambiato il nome del tuo punto preferito in %1$s perché non è possibile salvare stringhe con emoticon nel file.</string>
     <string name="speed_limit_exceed">Tolleranza del limite di velocità</string>
 	<string name="speed_limit_exceed_message">Seleziona il valore di superamento del limite di velocità dal quale si desidera avere l\'avviso vocale.</string>
+	<string name="osmo_device_not_found">Dispositivo non trovato</string>
+    <string name="osmo_no_connection_msg">Il servizio OsMo non è disponibile:\n- controlla la connessione;\n- controlla le impostazioni;\n- contattaci su Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Un utilizzatore anonimo non può:\n- creare gruppi;\n- sincronizzare con il server gruppi e dispositivi;\n- gestire gruppi e dispositivi in un ufficio privato.</string>
+    <string name="anonymous_user">Utilizzatore anonimo</string>
+    <string name="logged_as">Registrato come %1$s</string>
 	</resources>
