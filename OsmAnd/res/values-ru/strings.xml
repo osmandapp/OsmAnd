@@ -1789,7 +1789,7 @@
     <string name="anonymous_user_hint">Анонимному пользователю недоступно:\n- создание групп;\n- синхронизация групп и устройств с сервером;\n- управление группами и устройствами в личном кабинете.</string>
     <string name="logged_as">Вы вошли как %1$s</string>
     <string name="rendering_category_routes">Маршруты</string>
-    <string name="rendering_category_details">Детализация</string>
+    <string name="rendering_category_details">Подробности</string>
     <string name="rendering_category_transport">Транспорт</string>
     <string name="rendering_category_others">Другое</string>
     <string name="layers_category_show">Отображать</string>
