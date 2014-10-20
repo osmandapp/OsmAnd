@@ -360,13 +360,14 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 											int value = WaypointHelper.SEARCH_RADIUS_VALUES[i];
 											if (waypointHelper.getPoiSearchDeviationRadius() != value){
 												running[0] = position;
+												thisAdapter.notifyDataSetInvalidated();
 												waypointHelper.setPoiSearchDeviationRadius(value);
 												radius.setText(OsmAndFormatter.getFormattedDistance(value, app));
 												recalculatePoints(running, thisAdapter, WaypointHelper.POI);
 												dialogInterface.dismiss();
 											}
 										}
-									}).setTitle(app.getString(R.string.search_radius)+ " " + app.getString(R.string.poi))
+									}).setTitle(app.getString(R.string.search_radius_proximity)+ " " + app.getString(R.string.poi))
 									.setNegativeButton(R.string.default_buttons_cancel, null)
 									.show();
 						}
@@ -395,13 +396,14 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 											int value = WaypointHelper.SEARCH_RADIUS_VALUES[i];
 											if (waypointHelper.getSearchDeviationRadius() != value){
 												running[0] = position;
+												thisAdapter.notifyDataSetInvalidated();
 												waypointHelper.setSearchDeviationRadius(value);
 												radius.setText(OsmAndFormatter.getFormattedDistance(value, app));
 												recalculatePoints(running, thisAdapter, -1);
 												dialogInterface.dismiss();
 											}
 										}
-									}).setTitle(app.getString(R.string.search_radius))
+									}).setTitle(app.getString(R.string.search_radius_proximity))
 									.setNegativeButton(R.string.default_buttons_cancel, null)
 									.show();
 						}

@@ -73,14 +73,15 @@ public class ConfigureSettingsMenu {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
 				onMenuItemClick(items.get(pos), (CheckBox) view.findViewById(R.id.check));
-
 			}
 		});
 	}
 
 	//checkBox should be set only if u have checkBox preference
 	private void onMenuItemClick(ConfigureMapMenuItem item, CheckBox ch) {
-		if (item.type == LAYER) {
+		if (item.type == BACK_HEADER){
+			app.getMapActivity().getMapActions().createOptionsMenuAsDrawer(false);
+		} else if (item.type == LAYER) {
 			if (ch != null){
 				ch.setChecked(!ch.isChecked());
 			}
