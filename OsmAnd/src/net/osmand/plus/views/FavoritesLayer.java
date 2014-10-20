@@ -198,7 +198,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 			final FavouritePoint a = (FavouritePoint) o;
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (itemId == R.string.favourites_context_menu_delete) {
 						final Resources resources = view.getContext().getResources();
 						Builder builder = new AlertDialog.Builder(view.getContext());
@@ -213,7 +213,6 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 						});
 						builder.create().show();
 					}
-					return true;
 				}
 			};
 			adapter.item(R.string.favourites_context_menu_delete)

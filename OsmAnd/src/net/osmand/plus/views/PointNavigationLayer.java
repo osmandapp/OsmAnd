@@ -220,7 +220,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 			final TargetPoint a = (TargetPoint) o;
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (itemId == R.string.delete_target_point) {
 						TargetPointsHelper targetPointsHelper = map.getMyApplication().getTargetPointsHelper();
 						if(a.intermediate) {
@@ -230,7 +230,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 						}
 					}
 					map.getMapLayers().getContextMenuLayer().setLocation(null, "");
-					return true;
 				}
 			};
 			

@@ -75,7 +75,7 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 			final GPXUtilities.WptPt point = (GPXUtilities.WptPt) o;
 			ContextMenuAdapter.OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (itemId == R.string.mark_as_not_visited){
 						plugin.getCurrentRoute().markPoint(point,false);
 						plugin.saveCurrentRoute();
@@ -91,7 +91,6 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 						plugin.saveCurrentRoute();
 					}
 					map.refreshMap();
-					return true;
 				}
 			};
 
