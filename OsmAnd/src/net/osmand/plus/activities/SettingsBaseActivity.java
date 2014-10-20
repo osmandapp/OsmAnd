@@ -70,22 +70,6 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		return p;
 	}
 
-	public CheckBoxPreference createCheckBoxPreference(OsmandPreference<Boolean> b, int title, int darkIcon, int lightIcon){
-		CheckBoxPreference p = new CheckBoxPreference(this);
-		p.setTitle(title);
-		p.setKey(b.getId());
-		p.setOnPreferenceChangeListener(this);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			if (getMyApplication().getSettings().isLightContent()) {
-				p.setIcon(lightIcon);
-			} else {
-				p.setIcon(darkIcon);
-			}
-		}
-		screenPreferences.put(b.getId(), p);
-		booleanPreferences.put(b.getId(), b);
-		return p;
-	}
 
 	public CheckBoxPreference createCheckBoxPreference(OsmandPreference<Boolean> b, int title, int summary) {
 		CheckBoxPreference p = new CheckBoxPreference(this);

@@ -575,7 +575,8 @@ public class WaypointHelper {
 		int[] ind = new int[1];
 		for(LocationPoint p : points) {
 			float dist = dist(p, immutableAllLocations, ind);
-			if(dist <= getSearchDeviationRadius() && type != POI) {
+			int rad = type == POI ? getPoiSearchDeviationRadius() : getSearchDeviationRadius();
+			if(dist <= rad) {
 				LocationPointWrapper lpw = new LocationPointWrapper(rt, type, p, dist, ind[0]);
 				lpw.setAnnounce(announce);
 				locationPoints.add(lpw);

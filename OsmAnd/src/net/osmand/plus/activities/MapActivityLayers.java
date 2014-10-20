@@ -601,10 +601,6 @@ public class MapActivityLayers {
 		return builder.show();
 	}
 
-	public void setPoiFilter(PoiFilter f){
-		poiMapLayer.setFilter(f);
-	}
-	
 	public void selectMapLayer(final OsmandMapTileView mapView){
 		if(OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
 			AccessibleToast.makeText(activity, R.string.map_online_plugin_is_not_installed, Toast.LENGTH_LONG).show();

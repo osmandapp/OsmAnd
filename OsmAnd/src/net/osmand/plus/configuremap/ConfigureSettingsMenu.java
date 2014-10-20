@@ -41,8 +41,9 @@ public class ConfigureSettingsMenu {
 	public static final int RENDERING_PROPERTY = 4;
 
 
-	private ListView listView;
 	private OsmandApplication app;
+	private MapActivity mapActivity;
+	private ListView listView;
 	List<ConfigureMapMenuItem> items = new ArrayList<ConfigureMapMenuItem>();
 
 	public class ConfigureMapMenuItem {
@@ -62,8 +63,9 @@ public class ConfigureSettingsMenu {
 		}
 	}
 
-	public ConfigureSettingsMenu(OsmandApplication app) {
-		this.app = app;
+	public ConfigureSettingsMenu(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+		this.app = mapActivity.getMyApplication();
 	}
 
 	public void setListView(ListView list) {
@@ -90,14 +92,14 @@ public class ConfigureSettingsMenu {
 				final OsmandSettings.OsmandPreference<Boolean> pref = (OsmandSettings.OsmandPreference<Boolean>) item.preference;
 				boolean value = !pref.get();
 				if (value) {
-					selectPOIFilterLayer(null);
+					mapActivity.getMapLayers().selectPOIFilterLayer(mapActivity.getMapView(), null);
 				}
 				pref.set(!pref.get());
 			} else if (item.nameId == R.string.layer_gpx_layer) {
 				if(app.getSelectedGpxHelper().isShowingAnyGpxFiles()){
 					app.getSelectedGpxHelper().clearAllGpxFileToShow();
 				} else {
-					showGPXFileDialog(null);
+					mapActivity.getMapLayers().showGPXFileLayer(null, mapActivity.getMapView());
 				}
 			} else {
 				final OsmandSettings.OsmandPreference<Boolean> pref = (OsmandSettings.OsmandPreference<Boolean>) item.preference;
@@ -350,6 +352,9 @@ public class ConfigureSettingsMenu {
 			items.add(new ConfigureMapMenuItem(R.string.layer_transport, LAYER,
 					R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light, 1));
 		}
+		// FIXME !!!
+//		OsmandPlugin.registerLayerContextMenu(mapView, adapter, activity);
+//		getApplication().getAppCustomization().prepareLayerContextMenu(activity, adapter);
 	}
 
 	private void createRenderingAttributeItems(List<ConfigureMapMenuItem> items) {
@@ -372,156 +377,9 @@ public class ConfigureSettingsMenu {
 		}
 	}
 
-	public AlertDialog selectPOIFilterLayer(final PoiFilter[] selected) {
-		final List<PoiFilter> userDefined = new ArrayList<PoiFilter>();
-		final PoiFiltersHelper poiFilters = app.getPoiFilters();
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(app.getMapActivity());
 
-		ContextMenuAdapter.Item is = adapter.item(app.getString(R.string.any_poi));
-		if (RenderingIcons.containsBigIcon("null")) {
-			is.icon(RenderingIcons.getBigIconResourceId("null"));
-		}
-		is.reg();
-		// 2nd custom
-		adapter.item(app.getString(R.string.poi_filter_custom_filter)).icon(RenderingIcons.getBigIconResourceId("user_defined")).reg();
+	
 
-		for (PoiFilter f : poiFilters.getUserDefinedPoiFilters()) {
-			ContextMenuAdapter.Item it = adapter.item(f.getName());
-			if (RenderingIcons.containsBigIcon(f.getSimplifiedId())) {
-				it.icon(RenderingIcons.getBigIconResourceId(f.getSimplifiedId()));
-			} else {
-				it.icon(RenderingIcons.getBigIconResourceId("user_defined"));
-			}
-			it.reg();
-			userDefined.add(f);
-		}
-		final AmenityType[] categories = AmenityType.getCategories();
-		for (AmenityType t : categories) {
-			ContextMenuAdapter.Item it = adapter.item(OsmAndFormatter.toPublicString(t, app));
-			if (RenderingIcons.containsBigIcon(t.toString().toLowerCase())) {
-				it.icon(RenderingIcons.getBigIconResourceId(t.toString().toLowerCase()));
-			}
-			it.reg();
-		}
-		final AlertDialog.Builder builder = new AlertDialog.Builder(app.getMapActivity());
-		final ListAdapter listAdapter;
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-			listAdapter =
-					adapter.createListAdapter(app.getMapActivity(), R.layout.list_menu_item, app.getSettings().isLightContentMenu());
-		} else {
-			listAdapter =
-					adapter.createListAdapter(app.getMapActivity(), R.layout.list_menu_item_native, app.getSettings().isLightContentMenu());
-		}
-		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (which == 1) {
-					String filterId = PoiFilter.CUSTOM_FILTER_ID;
-					app.getSettings().setPoiFilterForMap(filterId);
-					Intent newIntent = new Intent(app, EditPOIFilterActivity.class);
-					newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, filterId);
-					newIntent.putExtra(EditPOIFilterActivity.SEARCH_LAT, app.getMapActivity().getMapView().getLatitude());
-					newIntent.putExtra(EditPOIFilterActivity.SEARCH_LON, app.getMapActivity().getMapView().getLongitude());
-					app.getMapActivity().startActivity(newIntent);
-				} else {
-					String filterId;
-					if (which == 0) {
-						filterId = PoiFiltersHelper.getOsmDefinedFilterId(null);
-					} else if (which <= userDefined.size() + 1) {
-						filterId = userDefined.get(which - 2).getFilterId();
-					} else {
-						filterId = PoiFiltersHelper.getOsmDefinedFilterId(categories[which - userDefined.size() - 2]);
-					}
-					app.getSettings().setPoiFilterForMap(filterId);
-					PoiFilter f = poiFilters.getFilterById(filterId);
-					if (f != null) {
-						f.clearNameFilter();
-					}
-					app.getMapActivity().getMapLayers().setPoiFilter(f);
-					app.getMapActivity().getMapView().refreshMap();
-					if (selected != null && selected.length > 0) {
-						selected[0] = f;
-					}
-					listView.setAdapter(createSettingsAdapter());
-				}
-			}
-
-		});
-		builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
-			@Override
-			public boolean onKey(DialogInterface dialogInterface, int i, KeyEvent event) {
-				if (i == KeyEvent.KEYCODE_BACK &&
-						event.getAction() == KeyEvent.ACTION_UP &&
-						!event.isCanceled()) {
-					dialogInterface.cancel();
-					app.getSettings().SHOW_POI_OVER_MAP.set(false);
-					listView.setAdapter(createSettingsAdapter());
-					return true;
-				}
-				return false;
-			}
-		});
-		return builder.show();
-	}
-
-	public void showGPXFileDialog(List<String> files) {
-		CallbackWithObject<GPXUtilities.GPXFile[]> callbackWithObject = new CallbackWithObject<GPXUtilities.GPXFile[]>() {
-			@Override
-			public boolean processResult(GPXUtilities.GPXFile[] result) {
-				GPXUtilities.WptPt locToShow = null;
-				for (GPXUtilities.GPXFile g : result) {
-					if (g.showCurrentTrack) {
-						if (!app.getSettings().SAVE_TRACK_TO_GPX.get() && !
-								app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-							AccessibleToast.makeText(app.getMapActivity(), R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
-						}
-						break;
-					}
-					if (!g.showCurrentTrack || locToShow == null) {
-						locToShow = g.findPointToShow();
-					}
-				}
-				app.getSelectedGpxHelper().setGpxFileToDisplay(result);
-				listView.setAdapter(createSettingsAdapter());
-				return true;
-			}
-		};
-
-		AlertDialog dialog;
-		if (files == null) {
-			dialog = GpxUiHelper.selectGPXFile(app.getMapActivity(), true, true, callbackWithObject);
-		} else {
-			dialog = GpxUiHelper.selectGPXFile(files, app.getMapActivity(), true, true, callbackWithObject);
-		}
-		if (dialog != null) {
-			dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-				@Override
-				public boolean onKey(DialogInterface dialogInterface, int i, KeyEvent event) {
-					if (i == KeyEvent.KEYCODE_BACK &&
-							event.getAction() == KeyEvent.ACTION_UP &&
-							!event.isCanceled()) {
-						dialogInterface.cancel();
-						listView.setAdapter(createSettingsAdapter());
-						return true;
-					}
-					return false;
-				}
-			});
-		}
-	}
-
-	private List<String> getAlreadySelectedGpx() {
-		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
-		if (gpxSelectionHelper == null) {
-			return null;
-		}
-		List<GpxSelectionHelper.SelectedGpxFile> selectedGpxFiles = gpxSelectionHelper.getSelectedGPXFiles();
-		List<String> files = new ArrayList<String>();
-		for (GpxSelectionHelper.SelectedGpxFile file : selectedGpxFiles) {
-			files.add(file.getGpxFile().path);
-		}
-		return files;
-	}
+	
 
 }

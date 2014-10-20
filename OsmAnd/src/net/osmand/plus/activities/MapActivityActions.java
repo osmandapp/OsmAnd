@@ -106,7 +106,7 @@ public class MapActivityActions implements DialogProvider {
 		settings = mapActivity.getMyApplication().getSettings();
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
-		configureSettingsMenu = new ConfigureSettingsMenu(mapActivity.getMyApplication());
+		configureSettingsMenu = new ConfigureSettingsMenu(mapActivity);
 		waypointDialogHelper.init();
 	}
 
