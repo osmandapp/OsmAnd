@@ -1782,4 +1782,9 @@
 	<string name="speed_limit_exceed_message">Válaszd ki, mekkora sebességtúllépésnél szeretnél figyelmeztetést hallani.</string>
 	<string name="fav_point_emoticons_message">A kedvenc hely neve módosítva lett erre: %1$s, lehetővé téve a hangulatjeleket tartalmazó szöveg fájlba mentését.</string>
     <string name="print_route">Útvonal nyomtatása</string>
-    </resources>
+    <string name="osmo_device_not_found">Eszköz nem található</string>
+    <string name="osmo_no_connection_msg">Az OsMo szolgáltatás nem elérhető:\n- ellenőrizd az internetkapcsolatot;\n- ellenőrizd a beállításokat;\n- nézz rá a Twitterünkre: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Egy anonim felhasználó nem tud:\n- csoportot létrehozni;\n- csoportokat és eszközöket szinkronizálni a szerverrel;\n- csoportokat és eszközöket kezelni privát módon.</string>
+    <string name="anonymous_user">Anonim felhasználó</string>
+    <string name="logged_as">Bejelentkezve mint %1$s</string>
+	</resources>
