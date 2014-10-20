@@ -273,6 +273,13 @@ public class MapActivity extends AccessibleActivity  {
     }
 
 	@Override
+	public void onBackPressed() {
+		if (!mapActions.onBackPressed()){
+			super.onBackPressed();
+		}
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
 		cancelNotification();
@@ -465,7 +472,7 @@ public class MapActivity extends AccessibleActivity  {
 			}
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
-			mapActions.createOptionsMenuAsDrawer(true);
+			mapActions.onMenuPressed();
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, getMyApplication().getAppCustomization().getSearchActivity());
