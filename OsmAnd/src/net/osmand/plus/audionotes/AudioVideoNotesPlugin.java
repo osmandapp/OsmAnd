@@ -414,12 +414,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (itemId == R.string.layer_recordings) {
 					dialog.dismiss();
 					SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
 					updateLayers(mapView, mapActivity);
 				}
+				return true;
 			}
 		};
 		adapter.item(R.string.layer_recordings).selected(SHOW_RECORDINGS.get() ? 1 : 0)
@@ -433,23 +434,26 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.listen(new OnContextMenuClick() {
 
 					@Override
-					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 						recordAudio(latitude, longitude, mapActivity);
+						return true;
 					}
 				}).position(6).reg();
 		adapter.item(R.string.recording_context_menu_vrecord).icons(R.drawable.ic_action_video_dark, R.drawable.ic_action_video_light)
 				.listen(new OnContextMenuClick() {
 
 					@Override
-					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 						recordVideo(latitude, longitude, mapActivity);
+						return true;
 					}
 				}).position(7).reg();
 		adapter.item(R.string.recording_context_menu_precord).icons(R.drawable.ic_action_photo_dark, R.drawable.ic_action_photo_light)
 				.listen(new OnContextMenuClick() {
 					@Override
-					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 						takePhoto(latitude, longitude, mapActivity);
+						return true;
 					}
 
 				}).position(8).reg();
@@ -1101,8 +1105,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				final RecordingLocalIndexInfo ri = (RecordingLocalIndexInfo) info;
 				OnContextMenuClick listener = new OnContextMenuClick() {
 					@Override
-					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 						playRecording(la, ri.rec);
+						return true;
 					}
 				};
 				if (ri.rec.isPhoto()) {
@@ -1118,13 +1123,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						.icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light)
 						.listen(new OnContextMenuClick() {
 							@Override
-							public void onContextMenuClick(int itemId, int pos, boolean isChecked,
+							public boolean onContextMenuClick(int itemId, int pos, boolean isChecked,
 									DialogInterface dialog) {
 								SHOW_RECORDINGS.set(true);
 								app.getSettings().setMapLocationToShow(ri.rec.lat, ri.rec.lon,
 										app.getSettings().getLastKnownMapZoom());
 								MapActivity.launchMapActivityMoveToTop(la);
-
+								return true;
 							}
 						}).reg();
 			}

@@ -176,8 +176,9 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 					new OnContextMenuClick() {
 						
 						@Override
-						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 							editPoint(point);
+							return true;
 						}
 					}).reg();
 			Item delete = qa.item(R.string.favourites_context_menu_delete).icons(
@@ -186,8 +187,9 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 					new OnContextMenuClick() {
 						
 						@Override
-						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 							deletePoint(point);
+							return true;
 						}
 					}).reg();
 			MapActivityActions.showObjectContextMenu(qa, getActivity(), onshow);

@@ -4,15 +4,15 @@
 			  android:orientation="horizontal"
 			  android:layout_width="fill_parent"
 			  android:layout_height="match_parent"
-			  android:layout_marginTop="3dp"
-			  android:layout_marginBottom="3dp"
+			  android:layout_marginTop="5dp"
+			  android:layout_marginBottom="5dp"
 			  android:layout_marginRight="3dp">
-	<ProgressBar 
-	    android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_vertical"
-		android:id="@+id/ProgressBar"
-		android:layout_marginLeft="4dp"/>
+	<ProgressBar
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:id="@+id/ProgressBar"
+			android:layout_marginLeft="4dp"/>
 
 	<TextView android:id="@+id/header_text"
 			  android:layout_width="0dp"
@@ -25,4 +25,12 @@
 			  android:textSize="20sp"/>
 
 	<include layout="@layout/check_item_rel"/>
+	<ImageView
+			android:id="@+id/sort"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:visibility="gone"
+			android:layout_marginTop="8dp"
+			android:layout_marginBottom="8dp"
+			android:layout_marginRight="8dp"/>
 </LinearLayout>

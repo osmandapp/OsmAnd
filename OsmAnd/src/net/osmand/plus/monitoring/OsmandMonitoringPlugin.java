@@ -115,10 +115,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			ContextMenuAdapter adapter, Object selectedObj) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (resId == R.string.context_menu_item_add_waypoint) {
 					mapActivity.getMapActions().addWaypoint(latitude, longitude);
 				}
+				return true;
 			}
 		};
 		adapter.item(R.string.context_menu_item_add_waypoint).icons(R.drawable.ic_action_gnew_label_dark, R.drawable.ic_action_gnew_label_light)
@@ -447,7 +448,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			int draw = !bgoff ? R.drawable.monitoring_rec_big : R.drawable.monitoring_rec_inactive;
 			qa.item(msgId).icon(draw).listen(new OnContextMenuClick() {
 				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (view.getApplication().getNavigationService() == null) {
 						final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 						final ValueHolder<Boolean> choice = new ValueHolder<Boolean>();
@@ -465,6 +466,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 					} else {
 						view.getContext().stopService(serviceIntent);
 					}
+					return true;
 				}
 			}).position(0).reg();
 		}

@@ -124,11 +124,12 @@ public class MapActivity extends AccessibleActivity  {
 		settings = app.getSettings();
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+
 		
-			
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// Full screen is not used here
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
@@ -274,7 +275,7 @@ public class MapActivity extends AccessibleActivity  {
 
 	@Override
 	public void onBackPressed() {
-		if (!mapActions.onBackPressed()){
+		if (!mapActions.onBackPressed()) {
 			super.onBackPressed();
 		}
 	}

@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import android.os.Build;
+import android.preference.*;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -25,14 +27,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
-import android.preference.ListPreference;
-import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -46,7 +42,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 	
 	protected OsmandSettings settings;
 	protected final boolean profileSettings ;
-	private List<ApplicationMode> modes = new ArrayList<ApplicationMode>();
+	protected List<ApplicationMode> modes = new ArrayList<ApplicationMode>();
 	private ApplicationMode previousAppMode; 
 
 	private Map<String, Preference> screenPreferences = new LinkedHashMap<String, Preference>();
@@ -69,6 +65,23 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 	public CheckBoxPreference registerBooleanPreference(OsmandPreference<Boolean> b, PreferenceGroup screen) {
 		CheckBoxPreference p = (CheckBoxPreference) screen.findPreference(b.getId());
 		p.setOnPreferenceChangeListener(this);
+		screenPreferences.put(b.getId(), p);
+		booleanPreferences.put(b.getId(), b);
+		return p;
+	}
+
+	public CheckBoxPreference createCheckBoxPreference(OsmandPreference<Boolean> b, int title, int darkIcon, int lightIcon){
+		CheckBoxPreference p = new CheckBoxPreference(this);
+		p.setTitle(title);
+		p.setKey(b.getId());
+		p.setOnPreferenceChangeListener(this);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			if (getMyApplication().getSettings().isLightContent()) {
+				p.setIcon(lightIcon);
+			} else {
+				p.setIcon(darkIcon);
+			}
+		}
 		screenPreferences.put(b.getId(), p);
 		booleanPreferences.put(b.getId(), b);
 		return p;
