@@ -1889,4 +1889,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="fav_point_emoticons_message">El nombre de punto favorito ha sido cambiado a %1$s para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
     <string name="speed_limit_exceed">Tolerancia de límite de velocidad</string>
 	<string name="speed_limit_exceed_message">Selecciona el margen de tolerancia sobre el límite de velocidad con el cual recibirás un aviso de voz.</string>
+	<string name="osmo_device_not_found">Dispositivo no encontrado</string>
+    <string name="osmo_no_connection_msg">Servicio OsMo no disponible:\n- comprueba la conexión;\n- comprueba la configuración;\n- comprueba nuestro Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Un usuario anónimo no puede:\n- crear grupos;\n- sincronizar grupos y dispositivos con el servidor;\n- gestionar grupos y dispositivos en una sala privada.</string>
+    <string name="anonymous_user">Usuario anónimo</string>
+    <string name="logged_as">Conectado como %1$s</string>
 	</resources>
