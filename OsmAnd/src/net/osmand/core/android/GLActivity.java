@@ -491,6 +491,8 @@ public class GLActivity extends Activity {
 
             if (_mapRenderer.prepareFrame())
                 _mapRenderer.renderFrame();
+
+            gl.glFlush();
         }
     }
 
