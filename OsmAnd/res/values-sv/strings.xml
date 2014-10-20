@@ -1713,4 +1713,6 @@
     <string name="anonymous_user_hint">En anonym användare kan inte:\n- skapa grupper;\n- synkronisera grupper och enheter med servern;\n- hantera grupper och enheter i ett privat kontor.</string>
     <string name="anonymous_user">Anonym användare</string>
     <string name="logged_as">Inloggad som %1$s</string>
-	</resources>
+	<string name="configure_map">Konfigurera karta</string>
+    <string name="search_radius_proximity">I närheten av</string>
+    </resources>
