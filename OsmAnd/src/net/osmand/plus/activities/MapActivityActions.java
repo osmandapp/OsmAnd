@@ -92,6 +92,9 @@ public class MapActivityActions implements DialogProvider {
 	private final MapActivity mapActivity;
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
+
+	DrawerLayout mDrawerLayout;
+	ListView mDrawerList;
 	
 
 	public MapActivityActions(MapActivity mapActivity){
@@ -723,11 +726,28 @@ public class MapActivityActions implements DialogProvider {
 			break;
 		}
 	}
-	
+
+	public boolean onBackPressed(){
+		if (mDrawerLayout.isDrawerOpen(mDrawerList)){
+			mDrawerLayout.closeDrawer(mDrawerList);
+			return true;
+		}
+		return false;
+	}
+
+	public void onMenuPressed(){
+		if (mDrawerLayout.isDrawerOpen(mDrawerList)){
+			mDrawerLayout.closeDrawer(mDrawerList);
+		} else {
+			createOptionsMenuAsDrawer(true);
+		}
+
+	}
+
 	public void createOptionsMenuAsDrawer(boolean show){
 		final ContextMenuAdapter cm = createOptionsMenu();
-		final DrawerLayout mDrawerLayout = (DrawerLayout) mapActivity.findViewById(R.id.drawer_layout);
-		final ListView mDrawerList = (ListView) mapActivity.findViewById(R.id.left_drawer);
+		mDrawerLayout = (DrawerLayout) mapActivity.findViewById(R.id.drawer_layout);
+		mDrawerList = (ListView) mapActivity.findViewById(R.id.left_drawer);
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 		ListAdapter listAdapter;
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
