@@ -414,9 +414,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.layer_recordings) {
-					dialog.dismiss();
 					SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
 					updateLayers(mapView, mapActivity);
 				}
@@ -434,7 +433,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.listen(new OnContextMenuClick() {
 
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						recordAudio(latitude, longitude, mapActivity);
 						return true;
 					}
@@ -443,7 +442,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.listen(new OnContextMenuClick() {
 
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						recordVideo(latitude, longitude, mapActivity);
 						return true;
 					}
@@ -451,7 +450,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		adapter.item(R.string.recording_context_menu_precord).icons(R.drawable.ic_action_photo_dark, R.drawable.ic_action_photo_light)
 				.listen(new OnContextMenuClick() {
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						takePhoto(latitude, longitude, mapActivity);
 						return true;
 					}
@@ -1105,7 +1104,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				final RecordingLocalIndexInfo ri = (RecordingLocalIndexInfo) info;
 				OnContextMenuClick listener = new OnContextMenuClick() {
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						playRecording(la, ri.rec);
 						return true;
 					}
@@ -1123,8 +1122,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						.icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light)
 						.listen(new OnContextMenuClick() {
 							@Override
-							public boolean onContextMenuClick(int itemId, int pos, boolean isChecked,
-									DialogInterface dialog) {
+							public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 								SHOW_RECORDINGS.set(true);
 								app.getSettings().setMapLocationToShow(ri.rec.lat, ri.rec.lon,
 										app.getSettings().getLastKnownMapZoom());

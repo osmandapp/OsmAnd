@@ -115,7 +115,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			ContextMenuAdapter adapter, Object selectedObj) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int resId, int pos, boolean isChecked) {
 				if (resId == R.string.context_menu_item_add_waypoint) {
 					mapActivity.getMapActions().addWaypoint(latitude, longitude);
 				}
@@ -448,7 +448,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			int draw = !bgoff ? R.drawable.monitoring_rec_big : R.drawable.monitoring_rec_inactive;
 			qa.item(msgId).icon(draw).listen(new OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 					if (view.getApplication().getNavigationService() == null) {
 						final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 						final ValueHolder<Boolean> choice = new ValueHolder<Boolean>();

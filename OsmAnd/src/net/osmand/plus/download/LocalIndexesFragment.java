@@ -146,7 +146,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				OnContextMenuClick clk = adapter.getClickAdapter(which);
 				if (clk != null) {
-					clk.onContextMenuClick(adapter.getItemId(which), which, false, dialog);
+					clk.onContextMenuClick(adapter.getItemId(which), which, false);
 				}
 			}
 
@@ -158,7 +158,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	private void basicFileOperation(final LocalIndexInfo info, ContextMenuAdapter adapter) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int resId, int pos, boolean isChecked) {
 				if (resId == R.string.local_index_mi_rename) {
 					renameFile(info);
 				} else if (resId == R.string.local_index_mi_restore) {
@@ -476,7 +476,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		optionsMenuAdapter = new ContextMenuAdapter(getDownloadActivity());
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 				localOptionsMenu(itemId);
 				return true;
 			}
@@ -531,7 +531,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		int itemId = item.getItemId();
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
 			if (itemId == optionsMenuAdapter.getItemId(i)) {
-				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(itemId, i, false, null);
+				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(itemId, i, false);
 				return true;
 			}
 		}

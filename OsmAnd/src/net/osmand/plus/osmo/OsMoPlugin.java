@@ -41,7 +41,6 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -136,7 +135,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					R.drawable.ic_action_gloc_light).listen(new OnContextMenuClick() {
 						
 						@Override
-						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 							OsMoDevice o = (OsMoDevice) selectedObj;
 							double lat = o.getLastLocation() == null ? latitude : o.getLastLocation().getLatitude();
 							double lon = o.getLastLocation() == null ? longitude : o.getLastLocation().getLongitude();
@@ -151,8 +150,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 						R.drawable.ic_action_close_light).listen(new OnContextMenuClick() {
 
 							@Override
-							public boolean onContextMenuClick(int itemId, int pos, boolean isChecked,
-									DialogInterface dialog) {
+							public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 								OsMoPositionLayer.setFollowDestination(null);
 								return true;
 							}
@@ -163,7 +161,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					R.drawable.ic_action_flag_light).listen(new OnContextMenuClick() {
 						
 						@Override
-						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 							OsMoDevice o = (OsMoDevice) selectedObj;
 							if(o.getLastLocation() != null) {
 								TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
@@ -294,7 +292,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				.listen(new OnContextMenuClick() {
 
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						final double lat = view.getLatitude();
 						final double lon = view.getLongitude();
 						tracker.sendCoordinate(lat, lon);
@@ -325,7 +323,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		helper.item(R.string.osmo_groups).icons(R.drawable.ic_action_eye_dark, R.drawable.ic_action_eye_light).position(6)
 				.listen(new OnContextMenuClick() {
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						Intent intent = new Intent(mapActivity, OsMoGroupsActivity.class);
 						mapActivity.startActivity(intent);
 						return true;

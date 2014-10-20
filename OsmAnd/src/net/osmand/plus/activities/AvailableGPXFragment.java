@@ -159,7 +159,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		optionsMenuAdapter = new ContextMenuAdapter(getActivity());
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(final int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(final int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.local_index_mi_reload) {
 					asyncLoader = new LoadGpxTask();
 					asyncLoader.execute(getActivity());
@@ -214,7 +214,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		int itemId = item.getItemId();
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
 			if (itemId == optionsMenuAdapter.getItemId(i)) {
-				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(itemId, i, false, null);
+				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(itemId, i, false);
 				return true;
 			}
 		}
@@ -396,7 +396,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private void basicFileOperation(final GpxInfo info, ContextMenuAdapter adapter) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int resId, int pos, boolean isChecked) {
 				if (resId == R.string.local_index_mi_rename) {
 					renameFile(info);
 				} else if (resId == R.string.local_index_unselect_gpx_file ||
@@ -479,7 +479,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				OnContextMenuClick clk = adapter.getClickAdapter(which);
 				if (clk != null) {
-					clk.onContextMenuClick(adapter.getItemId(which), which, false, dialog);
+					clk.onContextMenuClick(adapter.getItemId(which), which, false);
 				}
 			}
 

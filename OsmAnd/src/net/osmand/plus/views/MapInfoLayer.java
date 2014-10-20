@@ -640,8 +640,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		layers.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				map.getMapLayers().openLayerSelectionDialog(view);
-				//map.getMapLayers().selectMapLayer(view);
+				map.getMapActions().prepareConfigureMap();
+				map.getMapActions().toggleDrawer();
 			}
 		});
 		return layers;

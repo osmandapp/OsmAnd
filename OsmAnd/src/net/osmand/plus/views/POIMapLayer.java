@@ -27,7 +27,6 @@ import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -256,7 +255,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			final Amenity a = (Amenity) o;
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.poi_context_menu_call) {
 						try {
 							Intent intent = new Intent(Intent.ACTION_VIEW);

@@ -584,7 +584,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				OnContextMenuClick listener = new OnContextMenuClick() {
 					
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						if (itemId == R.string.delete_point) {
 							for (int i = 0; i < measurementPoints.size(); i++) {
 								Iterator<WptPt> it = measurementPoints.get(i).iterator();

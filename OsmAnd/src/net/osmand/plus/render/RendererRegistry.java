@@ -23,7 +23,7 @@ public class RendererRegistry {
 
 	private final static Log log = PlatformUtil.getLog(RendererRegistry.class);
 	
-	public final static String DEFAULT_RENDER = "default";  //$NON-NLS-1$
+	public final static String DEFAULT_RENDER = "OsmAnd";  //$NON-NLS-1$
 	
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;

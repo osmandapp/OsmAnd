@@ -10,7 +10,6 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapTileView;
-import android.content.DialogInterface;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -95,7 +94,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.layer_hillshade) {
 					HILLSHADE.set(!HILLSHADE.get());
 					updateLayers(mapView, mapActivity);

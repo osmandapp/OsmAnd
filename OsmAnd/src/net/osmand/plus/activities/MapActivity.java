@@ -212,7 +212,7 @@ public class MapActivity extends AccessibleActivity  {
 		}
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
 
-		mapActions.createOptionsMenuAsDrawer(false);
+		mapActions.prepareStartOptionsMenu();
 	}
 	
 	public void addLockView(FrameLayout lockView) {

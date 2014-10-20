@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -18,12 +18,13 @@ public class ContextMenuAdapter {
 	
 	public interface OnContextMenuClick {
 		//boolean return type needed to desribe if drawer needed to be close or not
-		public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog);
+		public boolean onContextMenuClick(int itemId, int pos, boolean isChecked);
 	}
 	
 	private final Context ctx;
 	private View anchor;
 	final TIntArrayList items = new TIntArrayList();
+	final TIntArrayList isCategory = new TIntArrayList();
 	final ArrayList<String> itemNames = new ArrayList<String>();
 	final ArrayList<OnContextMenuClick> listeners = new ArrayList<ContextMenuAdapter.OnContextMenuClick>();
 	final TIntArrayList selectedList = new TIntArrayList();
@@ -78,6 +79,10 @@ public class ContextMenuAdapter {
 	}
 	
 	
+	public boolean isCategory(int pos) {
+		return isCategory.get(pos) > 0;
+	}
+	
 	public Item item(String name){
 		Item i = new Item();
 		i.id = (name.hashCode() << 4) | items.size();
@@ -98,6 +103,7 @@ public class ContextMenuAdapter {
 		int id;
 		String name;
 		int selected = -1;
+		boolean cat;
 		int pos = -1;
 		private OnContextMenuClick listener;
 
@@ -141,7 +147,11 @@ public class ContextMenuAdapter {
 			iconList.insert(pos, icon);
 			iconListLight.insert(pos, lightIcon);
 			listeners.add(pos, listener);
+			isCategory.insert(pos, cat ? 1 : 0);
+		}
 
+		public void setCategory(boolean b) {
+			cat = b;
 		}
 
 	}
@@ -157,6 +167,7 @@ public class ContextMenuAdapter {
 		iconList.removeAt(pos);
 		iconListLight.removeAt(pos);
 		listeners.remove(pos);
+		isCategory.removeAt(pos);
 	}
 
 	
@@ -182,6 +193,12 @@ public class ContextMenuAdapter {
 					tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_transparent, 0, 0, 0);
 				}
 				tv.setCompoundDrawablePadding(padding);
+				
+				if(isCategory(position)) {
+					tv.setTypeface(Typeface.DEFAULT_BOLD);
+				} else {
+					tv.setTypeface(null);
+				}
 
 				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
 				ch.setVisibility(View.GONE);

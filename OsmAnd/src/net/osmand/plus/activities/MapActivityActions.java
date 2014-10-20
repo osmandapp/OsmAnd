@@ -47,7 +47,7 @@ import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.configuremap.ConfigureSettingsMenu;
+import net.osmand.plus.configuremap.ConfigureMapMenu;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.osmo.OsMoPositionLayer;
@@ -98,7 +98,6 @@ public class MapActivityActions implements DialogProvider {
 	DrawerLayout mDrawerLayout;
 	ListView mDrawerList;
 	private WaypointDialogHelper waypointDialogHelper;
-	private ConfigureSettingsMenu configureSettingsMenu;
 	
 
 	public MapActivityActions(MapActivity mapActivity){
@@ -106,7 +105,6 @@ public class MapActivityActions implements DialogProvider {
 		settings = mapActivity.getMyApplication().getSettings();
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
-		configureSettingsMenu = new ConfigureSettingsMenu(mapActivity);
 		waypointDialogHelper.init();
 	}
 
@@ -517,7 +515,7 @@ public class MapActivityActions implements DialogProvider {
 				int standardId = adapter.getItemId(which);
 				OnContextMenuClick click = adapter.getClickAdapter(which);
 				if (click != null) {
-					click.onContextMenuClick(standardId, which, false, dialog);
+					click.onContextMenuClick(standardId, which, false);
 				} else if (standardId == R.string.context_menu_item_search) {
 					Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getSearchActivity());
 					intent.putExtra(SearchActivity.SEARCH_LAT, latitude);
@@ -745,18 +743,22 @@ public class MapActivityActions implements DialogProvider {
 		if (mDrawerLayout.isDrawerOpen(mDrawerList)){
 			mDrawerLayout.closeDrawer(mDrawerList);
 		} else {
-			createOptionsMenuAsDrawer(true);
+			prepareStartOptionsMenu();
+			toggleDrawer();
 		}
-
 	}
 
-	public void createOptionsMenuAsDrawer(boolean show){
-		final ContextMenuAdapter cm = createOptionsMenu();
-		if (mDrawerLayout == null){
+	public void prepareStartOptionsMenu(){
+		if (mDrawerLayout == null) {
 			mDrawerLayout = (DrawerLayout) mapActivity.findViewById(R.id.drawer_layout);
-		mDrawerList = (ListView) mapActivity.findViewById(R.id.left_drawer);
+			mDrawerList = (ListView) mapActivity.findViewById(R.id.left_drawer);
 			mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 		}
+		final ContextMenuAdapter cm = createOptionsMenu();
+		prepareOptionsMenu(cm);
+	}
+
+	public void prepareOptionsMenu(final ContextMenuAdapter cm) {
 		ListAdapter listAdapter;
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
 			listAdapter =
@@ -778,7 +780,7 @@ public class MapActivityActions implements DialogProvider {
 			public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
 				OnContextMenuClick click = cm.getClickAdapter(which);
 				if (click != null) {
-					if (click.onContextMenuClick(cm.getItemId(which), which, false, null)){
+					if (click.onContextMenuClick(cm.getItemId(which), which, false)){
 						mDrawerLayout.closeDrawer(mDrawerList);
 					}
 				} else {
@@ -786,38 +788,19 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}
 		});
-
-		if (show){
-			// toggle drawer
-			if (!mDrawerLayout.isDrawerOpen(mDrawerList)) {
-				mDrawerLayout.openDrawer(mDrawerList);
-			} else {
-				mDrawerLayout.closeDrawer(mDrawerList);
-			}
-		}
 	}
 
-	public AlertDialog openOptionsMenuAsList() {
-		final ContextMenuAdapter cm = createOptionsMenu();
-		final Builder bld = new AlertDialog.Builder(mapActivity);
-		ListAdapter listAdapter ;
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
-			listAdapter =
-				cm.createListAdapter(mapActivity, R.layout.list_menu_item, getMyApplication().getSettings().isLightContentMenu());
+	public void toggleDrawer() {
+		// toggle drawer
+		if (!mDrawerLayout.isDrawerOpen(mDrawerList)) {
+			mDrawerLayout.openDrawer(mDrawerList);
 		} else {
-			listAdapter =
-				cm.createListAdapter(mapActivity, R.layout.list_menu_item_native, getMyApplication().getSettings().isLightContentMenu());
+			mDrawerLayout.closeDrawer(mDrawerList);
 		}
-		bld.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				OnContextMenuClick click = cm.getClickAdapter(which);
-				if (click != null) {
-					click.onContextMenuClick(cm.getItemId(which), which, false, dialog);
-				}
-			}
-		});
-		return bld.show();
+	}
+	
+	public void prepareConfigureMap() {
+		prepareOptionsMenu(new ConfigureMapMenu().createListAdapter(mapActivity));
 	}
 
 	private ContextMenuAdapter createOptionsMenu() {
@@ -830,7 +813,7 @@ public class MapActivityActions implements DialogProvider {
 				icons(R.drawable.ic_action_gloc_dark, R.drawable.ic_action_gloc_light)
 				.listen(new OnContextMenuClick() {
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						if (getMyApplication().accessibilityEnabled()) {
 							whereAmIDialog();
 						} else {
@@ -857,7 +840,7 @@ public class MapActivityActions implements DialogProvider {
 			optionsMenuHelper.item(t).icons(icon, iconLight)
 				.listen(new OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 					routingHelper.getVoiceRouter().setMute(!routingHelper.getVoiceRouter().isMute());
 					return true;
 				}
@@ -868,7 +851,7 @@ public class MapActivityActions implements DialogProvider {
 				.icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light)
 				.listen(new OnContextMenuClick() {
 					@Override
-						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 							enterRoutePlanningMode(null, null, false);
 						return true;
 						}
@@ -880,7 +863,7 @@ public class MapActivityActions implements DialogProvider {
 			.icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light)
 			.listen(new OnContextMenuClick() {
 				@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						if(routingHelper.isRoutePlanningMode()) {
 							routingHelper.setRoutePlanningMode(false);
 							routingHelper.setFollowingMode(true);
@@ -907,7 +890,7 @@ public class MapActivityActions implements DialogProvider {
 			optionsMenuHelper.item(nav).icons(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_light) 
 				.listen(new OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 					stopNavigationActionConfirm(mapView);
 					OsMoPositionLayer osMoPositionLayer = mapActivity.getMapView().getLayerByClass(OsMoPositionLayer.class);
 					if (osMoPositionLayer != null) {
@@ -921,7 +904,7 @@ public class MapActivityActions implements DialogProvider {
 			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_light)
 					.listen(new OnContextMenuClick() {
 						@Override
-						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 							if (getMyApplication().getWaypointHelper().isRouteCalculated()) {
 
 								final List<WaypointHelper.LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
@@ -940,18 +923,16 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.item(R.string.configure_map).icons(R.drawable.ic_action_layers_dark, R.drawable.ic_action_layers_light)
 				.listen(new OnContextMenuClick() {
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-						configureSettingsMenu.setListView(mDrawerList);
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+						prepareConfigureMap();
 						return false;
-						//mapActivity.getMapLayers().openLayerSelectionDialog(mapView);
-						//return true;
 					}
 				}).reg();
 
 		optionsMenuHelper.item(R.string.layer_map_appearance).icons(R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_light) 
 			.listen(new OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 					mapActivity.getMapLayers().getMapInfoLayer().openViewConfigureDialog();
 					return true;
 				}
@@ -960,7 +941,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.item(R.string.settings_Button).icons(R.drawable.ic_action_settings2_dark, R.drawable.ic_action_settings2_light)
 				.listen(new OnContextMenuClick() {
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						final Intent intentSettings = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getSettingsActivity());
 						mapActivity.startActivity(intentSettings);
 						return true;
@@ -970,7 +951,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.item(R.string.search_button).icons(R.drawable.ic_action_search_dark, R.drawable.ic_action_search_light)
 				.listen(new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getSearchActivity());
 				// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				LatLon loc = mapActivity.getMapLocation();
@@ -985,7 +966,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.item(R.string.favorites_Button).icons( R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light)
 				.listen(new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getFavoritesActivity());
 				// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(newIntent);
@@ -995,7 +976,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.item(R.string.show_point_options).icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light )
 				.listen(new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 				return true;
 			}
@@ -1006,7 +987,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 					new StartGPSStatus(mapActivity).run();
 					return true;
 				}
@@ -1017,7 +998,7 @@ public class MapActivityActions implements DialogProvider {
 				listen(new OnContextMenuClick() {
 					
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						if (MainMenuActivity.TIPS_AND_TRICKS) {
 							TipsAndTricksActivity tactivity = new TipsAndTricksActivity(mapActivity);
 							Dialog dlg = tactivity.getDialogToShowTips(false, true);
@@ -1038,8 +1019,7 @@ public class MapActivityActions implements DialogProvider {
 						.listen(new OnContextMenuClick() {
 
 							@Override
-							public boolean onContextMenuClick(int itemId, int pos, boolean isChecked,
-									DialogInterface dialog) {
+							public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 								// animate moving on route
 								loc.getLocationSimulation().startStopRouteAnimation(mapActivity);
 								return true;
@@ -1052,7 +1032,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.item(R.string.exit_Button).icons(R.drawable.ic_action_quit_dark, R.drawable.ic_action_quit_light )
 					.listen(new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 				// 1. Work for almost all cases when user open apps from main menu
 				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getMainMenuActivity());
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -1163,7 +1143,7 @@ public class MapActivityActions implements DialogProvider {
 				new OnContextMenuClick() {
 					
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						MapActivityActions.directionsToDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
 						return true;
 					}
@@ -1178,7 +1158,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 		intermediate.listen(new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 				addWaypointDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
 				return true;
 			}
@@ -1190,7 +1170,7 @@ public class MapActivityActions implements DialogProvider {
 				new OnContextMenuClick() {
 					
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), z, saveHistory ? name : null, name,
 								obj); //$NON-NLS-1$
 						MapActivity.launchMapActivityMoveToTop(activity);
@@ -1203,7 +1183,7 @@ public class MapActivityActions implements DialogProvider {
 			addToFavorite.listen(new OnContextMenuClick() {
 
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 					Bundle args = new Bundle();
 					Dialog dlg = createAddFavouriteDialog(activity, args);
 					dlg.show();
@@ -1226,7 +1206,7 @@ public class MapActivityActions implements DialogProvider {
 				public void onClick(DialogInterface dialog, int which) {
 					OnContextMenuClick clk = qa.getClickAdapter(which);
 					if (clk != null) {
-						clk.onContextMenuClick(qa.getItemId(which), which, false, dialog);
+						clk.onContextMenuClick(qa.getItemId(which), which, false);
 					}
 				}
 
@@ -1251,7 +1231,7 @@ public class MapActivityActions implements DialogProvider {
 							onShow.onClick(v);
 						}
 						view.dismiss();
-						qa.getClickAdapter(ki).onContextMenuClick(qa.getItemId(ki), ki, false, null);
+						qa.getClickAdapter(ki).onContextMenuClick(qa.getItemId(ki), ki, false);
 
 					}
 				});
