@@ -1708,4 +1708,9 @@
     <string name="fav_point_emoticons_message">Vi ändrade namnet på din favoritpunkt till %1$s för att underlätta din smiley i filnamnet.</string>
     <string name="speed_limit_exceed_message">Välj hur mycket hastighetsgränsen måste överskridas för att du ska få ett röstmeddelande.</string>
 	<string name="speed_limit_exceed">Tolerans för hastighetsgräns</string>
+	<string name="osmo_device_not_found">Hittar ingen enhet</string>
+    <string name="osmo_no_connection_msg">OsMo-tjänsten är inte tillgänglig:\n- kolla din uppkoppling;\n- kolla inställningarna;\n- besök vårt Twitter-konto: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">En anonym användare kan inte:\n- skapa grupper;\n- synkronisera grupper och enheter med servern;\n- hantera grupper och enheter i ett privat kontor.</string>
+    <string name="anonymous_user">Anonym användare</string>
+    <string name="logged_as">Inloggad som %1$s</string>
 	</resources>

@@ -85,18 +85,24 @@ public class ConfigureSettingsMenu {
 			if (ch != null){
 				ch.setChecked(!ch.isChecked());
 			}
+
 			if (item.nameId == R.string.layer_poi) {
 				final OsmandSettings.OsmandPreference<Boolean> pref = (OsmandSettings.OsmandPreference<Boolean>) item.preference;
 				boolean value = !pref.get();
 				if (value) {
 					selectPOIFilterLayer(null);
 				}
+				pref.set(!pref.get());
+			} else if (item.nameId == R.string.layer_gpx_layer) {
+				if(app.getSelectedGpxHelper().isShowingAnyGpxFiles()){
+					app.getSelectedGpxHelper().clearAllGpxFileToShow();
 				} else {
-					showGPXFileDialog(getAlreadySelectedGpx());
+					showGPXFileDialog(null);
 				}
 			} else {
 				final OsmandSettings.OsmandPreference<Boolean> pref = (OsmandSettings.OsmandPreference<Boolean>) item.preference;
 				pref.set(!pref.get());
+			}
 		} else if (item.type == MAP_REDNDER) {
 			if (item.nameId == R.string.map_widget_renderer) {
 				AlertDialog.Builder bld = new AlertDialog.Builder(app.getMapActivity());
