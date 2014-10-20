@@ -200,12 +200,11 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		if (selectedObj == parkingPosition && parkingPosition != null) {
 			OnContextMenuClick removeListener = new OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int resId, int pos,
+				public void onContextMenuClick(int resId, int pos,
 						boolean isChecked, DialogInterface dialog) {
 					if ((resId == R.string.context_menu_item_delete_parking_point)) {
 						showDeleteDialog(mapActivity);
 					}
-					return true;
 				}
 			};
 			adapter.item(R.string.context_menu_item_delete_parking_point)
@@ -214,12 +213,11 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		
 		OnContextMenuClick addListener = new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int resId, int pos,
+			public void onContextMenuClick(int resId, int pos,
 					boolean isChecked, DialogInterface dialog) {
 				if (resId == R.string.context_menu_item_add_parking_point) {
 					showAddParkingDialog(mapActivity, latitude, longitude);
 				}
-				return true;
 			}
 		};
 		adapter.item(R.string.context_menu_item_add_parking_point)
@@ -421,9 +419,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
             helper.item(R.string.osmand_parking_delete)
                     .icons(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_light).listen(new OnContextMenuClick() {
                 @Override
-                public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+                public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
                     showDeleteDialog(mapActivity);
-					return true;
                 }
 
             }).reg();

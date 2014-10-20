@@ -495,13 +495,12 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			OnContextMenuClick listener = new OnContextMenuClick() {
 				
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (itemId == R.string.osb_comment_menu_item) {
 						commentBug(bug);
 					} else if (itemId == R.string.osb_close_menu_item) {
 						closeBug(bug);
 					}
-					return true;
 				}
 			};
 			adapter.item(R.string.osb_comment_menu_item).icons(

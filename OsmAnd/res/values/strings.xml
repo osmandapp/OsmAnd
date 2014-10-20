@@ -9,8 +9,6 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="configure_map">Configure map</string>
-    <string name="search_radius_proximity">In proximity of</string>
     <string name="osmo_device_not_found">Device not found</string>
     <string name="osmo_no_connection_msg">OsMo service is not available:\n- check the connection;\n- check the settings;\n- check out our Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">An anonymous user can not:\n- create groups;\n- synchronize groups and devices with the server;\n- manage groups and devices in a private office.</string>

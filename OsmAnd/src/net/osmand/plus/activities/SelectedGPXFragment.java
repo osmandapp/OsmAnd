@@ -188,14 +188,13 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	private void basicFileOperation(final GpxDisplayItem gpxDisplayItem, ContextMenuAdapter adapter) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (resId == R.string.show_gpx_route) {
 					OsmandSettings settings = app.getSettings();
 					settings.setMapLocationToShow(gpxDisplayItem.locationStart.lat, gpxDisplayItem.locationStart.lon,
 							settings.getLastKnownMapZoom(), Html.fromHtml(gpxDisplayItem.name).toString());
 					MapActivity.launchMapActivityMoveToTop(getMyActivity());
 				}
-				return true;
 			}
 		};
 		if (gpxDisplayItem.locationStart != null) {

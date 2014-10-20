@@ -136,14 +136,13 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					R.drawable.ic_action_gloc_light).listen(new OnContextMenuClick() {
 						
 						@Override
-						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 							OsMoDevice o = (OsMoDevice) selectedObj;
 							double lat = o.getLastLocation() == null ? latitude : o.getLastLocation().getLatitude();
 							double lon = o.getLastLocation() == null ? longitude : o.getLastLocation().getLongitude();
 							mapActivity.getMapView().setLatLon(lat, lon);
 							MapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 							OsMoPositionLayer.setFollowTrackerId(o);
-							return true;
 						}
 					}).position(0).reg();
 			if(OsMoPositionLayer.getFollowDestinationId() != null) {
@@ -151,10 +150,9 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 						R.drawable.ic_action_close_light).listen(new OnContextMenuClick() {
 
 							@Override
-							public boolean onContextMenuClick(int itemId, int pos, boolean isChecked,
+							public void onContextMenuClick(int itemId, int pos, boolean isChecked,
 									DialogInterface dialog) {
 								OsMoPositionLayer.setFollowDestination(null);
-								return true;
 							}
 							
 						}).position(0).reg();
@@ -163,14 +161,13 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					R.drawable.ic_action_flag_light).listen(new OnContextMenuClick() {
 						
 						@Override
-						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 							OsMoDevice o = (OsMoDevice) selectedObj;
 							if(o.getLastLocation() != null) {
 								TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 								targets.navigateToPoint(new LatLon(o.getLastLocation().getLatitude(), o.getLastLocation().getLongitude()), true, -1);
 							}
 							OsMoPositionLayer.setFollowDestination(o);
-							return true;
 						}
 					}).position(1).reg();
 		}
@@ -294,11 +291,10 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				.listen(new OnContextMenuClick() {
 
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 						final double lat = view.getLatitude();
 						final double lon = view.getLongitude();
 						tracker.sendCoordinate(lat, lon);
-						return true;
 					}
 				}).reg();
 	}
@@ -325,10 +321,9 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		helper.item(R.string.osmo_groups).icons(R.drawable.ic_action_eye_dark, R.drawable.ic_action_eye_light).position(6)
 				.listen(new OnContextMenuClick() {
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 						Intent intent = new Intent(mapActivity, OsMoGroupsActivity.class);
 						mapActivity.startActivity(intent);
-						return true;
 					}
 				}).reg();
 	}

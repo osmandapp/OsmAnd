@@ -216,9 +216,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			final TransportStop a = (TransportStop) o;
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					showDescriptionDialog(a);
-					return true;
 				}
 			};
 			adapter.item(R.string.poi_context_menu_showdescription)

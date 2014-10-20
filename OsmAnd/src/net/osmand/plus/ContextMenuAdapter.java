@@ -17,8 +17,8 @@ import android.widget.TextView;
 public class ContextMenuAdapter {
 	
 	public interface OnContextMenuClick {
-		//boolean return type needed to desribe if drawer needed to be close or not
-		public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog);
+		
+		public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog);
 	}
 	
 	private final Context ctx;
