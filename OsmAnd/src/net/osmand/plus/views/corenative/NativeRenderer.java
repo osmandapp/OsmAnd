@@ -42,6 +42,7 @@ public class NativeRenderer implements GLSurfaceView.Renderer {
 		mapRenderer.update();
 		if (mapRenderer.prepareFrame())
 			mapRenderer.renderFrame();
+		gl.glFlush();
 	}
 }
 
