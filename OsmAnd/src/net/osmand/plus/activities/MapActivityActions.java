@@ -742,7 +742,24 @@ public class MapActivityActions implements DialogProvider {
 			break;
 		}
 	}
-	
+
+	public boolean onBackPressed(){
+		if (mDrawerLayout.isDrawerOpen(mDrawerList)){
+			mDrawerLayout.closeDrawer(mDrawerList);
+			return true;
+		}
+		return false;
+	}
+
+	public void onMenuPressed(){
+		if (mDrawerLayout.isDrawerOpen(mDrawerList)){
+			mDrawerLayout.closeDrawer(mDrawerList);
+		} else {
+			createOptionsMenuAsDrawer(true);
+		}
+
+	}
+
 	public void createOptionsMenuAsDrawer(boolean show){
 		final ContextMenuAdapter cm = createOptionsMenu();
 		mDrawerLayout = (DrawerLayout) mapActivity.findViewById(R.id.drawer_layout);
