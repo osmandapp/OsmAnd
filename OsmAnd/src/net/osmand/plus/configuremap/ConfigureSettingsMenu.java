@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * Created by Denis on 14.10.2014.
  */
-public class ConfigureSettingsMenuHelper {
+public class ConfigureSettingsMenu {
 
 	public static final int BACK_HEADER = 0;
 	public static final int HEADER = 1;
@@ -43,6 +43,7 @@ public class ConfigureSettingsMenuHelper {
 
 	private ListView listView;
 	private OsmandApplication app;
+	List<ConfigureMapMenuItem> items = new ArrayList<ConfigureMapMenuItem>();
 
 	public class ConfigureMapMenuItem {
 		int nameId;
@@ -61,102 +62,179 @@ public class ConfigureSettingsMenuHelper {
 		}
 	}
 
-	public ConfigureSettingsMenuHelper(OsmandApplication app) {
+	public ConfigureSettingsMenu(OsmandApplication app) {
 		this.app = app;
 	}
 
-	public void setListView(ListView listView){
-		this.listView = listView;
+	public void setListView(ListView list) {
+		this.listView = list;
 		listView.setAdapter(createSettingsAdapter());
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+				onMenuItemClick(items.get(pos), (CheckBox) view.findViewById(R.id.check));
+
+			}
+		});
 	}
 
+	//checkBox should be set only if u have checkBox preference
+	private void onMenuItemClick(ConfigureMapMenuItem item, CheckBox ch) {
+		if (item.type == LAYER) {
+			if (ch != null){
+				ch.setChecked(!ch.isChecked());
+			}
+			if (item.nameId == R.string.layer_poi) {
+				final OsmandSettings.OsmandPreference<Boolean> pref = (OsmandSettings.OsmandPreference<Boolean>) item.preference;
+				boolean value = !pref.get();
+				if (value) {
+					selectPOIFilterLayer(null);
+				}
+				} else {
+					showGPXFileDialog(getAlreadySelectedGpx());
+				}
+			} else {
+				final OsmandSettings.OsmandPreference<Boolean> pref = (OsmandSettings.OsmandPreference<Boolean>) item.preference;
+				pref.set(!pref.get());
+		} else if (item.type == MAP_REDNDER) {
+			if (item.nameId == R.string.map_widget_renderer) {
+				AlertDialog.Builder bld = new AlertDialog.Builder(app.getMapActivity());
+				bld.setTitle(R.string.renderers);
+				Collection<String> rendererNames = app.getRendererRegistry().getRendererNames();
+				final String[] items = rendererNames.toArray(new String[rendererNames.size()]);
+				final String[] visibleNames = new String[items.length];
+				int selected = -1;
+				final String selectedName = app.getRendererRegistry().getCurrentSelectedRenderer().getName();
+				for (int j = 0; j < items.length; j++) {
+					if (items[j].equals(selectedName)) {
+						selected = j;
+					}
+					visibleNames[j] = items[j].replace('_', ' ').replace(
+							'-', ' ');
+				}
+				bld.setSingleChoiceItems(visibleNames, selected, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						String renderer = items[which];
+						RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
+						if (loaded != null) {
+							app.getSettings().RENDERER.set(renderer);
+							app.getRendererRegistry().setCurrentSelectedRender(loaded);
+							app.getResourceManager().getRenderer().clearCache();
+							listView.setAdapter(createSettingsAdapter());
+						} else {
+							AccessibleToast.makeText(app, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+						}
+						dialog.dismiss();
+										createSettingsAdapter();
+					}
+				});
+				bld.show();
+			} else if (item.nameId == R.string.map_widget_day_night) {
+				AlertDialog.Builder bld = new AlertDialog.Builder(app.getMapActivity());
+				bld.setTitle(R.string.daynight);
+				final String[] items = new String[OsmandSettings.DayNightMode.values().length];
+				for (int i = 0; i < items.length; i++) {
+					items[i] = OsmandSettings.DayNightMode.values()[i].toHumanString(app);
+				}
+				int i = app.getSettings().DAYNIGHT_MODE.get().ordinal();
+				bld.setSingleChoiceItems(items, i, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						app.getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.values()[which]);
+						app.getResourceManager().getRenderer().clearCache();
+						dialog.dismiss();
+					}
+				});
+				bld.show();
+			}
+		} else if (item.type == RENDERING_PROPERTY) {
+			if (ch != null){
+				ch.setChecked(!ch.isChecked());
+			}
+			final RenderingRuleProperty p = (RenderingRuleProperty) item.preference;
+			final String propertyDescription = SettingsActivity.getStringPropertyDescription(app, p.getAttrName(), p.getName());
+			if (p.isBoolean()) {
+				final OsmandSettings.CommonPreference<Boolean> pref = app.getSettings().getCustomRenderBooleanProperty(p.getAttrName());
+				pref.set(!pref.get());
+				app.getResourceManager().getRenderer().clearCache();
+			} else {
+				final OsmandSettings.CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(p.getAttrName());
+				AlertDialog.Builder b = new AlertDialog.Builder(app.getMapActivity());
+				//test old descr as title
+				b.setTitle(propertyDescription);
+
+				int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
+
+				String[] possibleValuesString = new String[p.getPossibleValues().length];
+
+				for (int j = 0; j < p.getPossibleValues().length; j++) {
+					possibleValuesString[j] = SettingsActivity.getStringPropertyValue(app, p.getPossibleValues()[j]);
+				}
+
+				b.setSingleChoiceItems(possibleValuesString, i, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						pref.set(p.getPossibleValues()[which]);
+						app.getResourceManager().getRenderer().clearCache();
+						dialog.dismiss();
+					}
+				});
+				b.show();
+
+			}
+		}
+		app.getMapActivity().getMapLayers().updateLayers(app.getMapActivity().getMapView());
+		app.getMapActivity().getMapView().refreshMap();
+	}
 
 	private ArrayAdapter<ConfigureMapMenuItem> createSettingsAdapter() {
-		List<ConfigureMapMenuItem> items = new ArrayList<ConfigureMapMenuItem>();
+		items.clear();
 		items.add(new ConfigureMapMenuItem(BACK_HEADER, R.string.configure_map, R.drawable.ic_back_drawer_dark, R.drawable.ic_back_drawer_white, null));
 		createLayersItems(items);
 		createRenderingAttributeItems(items);
 		return new ArrayAdapter<ConfigureMapMenuItem>(app, R.layout.map_settings_item, items) {
 			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
+			public View getView(int position,View convertView, ViewGroup parent) {
 				if (convertView == null) {
 					convertView = app.getMapActivity().getLayoutInflater().inflate(R.layout.map_settings_item, null);
 				}
-				ConfigureMapMenuItem item = getItem(position);
+				final ConfigureMapMenuItem item = getItem(position);
 				prepareView(convertView, item);
-				if (item.type == BACK_HEADER){
+				if (item.type == BACK_HEADER) {
 					((TextView) convertView.findViewById(R.id.name)).setText(item.nameId);
 					ImageButton button = (ImageButton) convertView.findViewById(R.id.back);
 					button.setImageResource(getIcon(item));
+					button.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							app.getMapActivity().getMapActions().createOptionsMenuAsDrawer(false);
+						}
+					});
 				} else if (item.type == HEADER) {
 					((TextView) convertView.findViewById(R.id.name)).setText((String) item.preference);
 				} else if (item.type == LAYER) {
 					((TextView) convertView.findViewById(R.id.name)).setText(item.nameId);
-					setLayersCheckBox(item, (CheckBox) convertView.findViewById(R.id.check));
+					final CheckBox ch = (CheckBox) convertView.findViewById(R.id.check);
+					ch.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							onMenuItemClick(item, null);
+						}
+					});
+					if (item.nameId == R.string.layer_gpx_layer){
+						ch.setChecked(app.getSelectedGpxHelper().isShowingAnyGpxFiles());
+					} else {
+						OsmandSettings.OsmandPreference<Boolean> pref = (OsmandSettings.OsmandPreference<Boolean>) item.preference;
+						ch.setChecked(pref.get());
+					}
 				} else if (item.type == MAP_REDNDER) {
 					((TextView) convertView.findViewById(R.id.name)).setText(item.nameId);
 					if (item.nameId == R.string.map_widget_renderer) {
-						((TextView)convertView.findViewById(R.id.descr)).setText(app.getSettings().RENDERER.get());
-						convertView.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								AlertDialog.Builder bld = new AlertDialog.Builder(app.getMapActivity());
-								bld.setTitle(R.string.renderers);
-								Collection<String> rendererNames = app.getRendererRegistry().getRendererNames();
-								final String[] items = rendererNames.toArray(new String[rendererNames.size()]);
-								final String[] visibleNames = new String[items.length];
-								int selected = -1;
-								final String selectedName = app.getRendererRegistry().getCurrentSelectedRenderer().getName();
-								for (int j = 0; j < items.length; j++) {
-									if (items[j].equals(selectedName)) {
-										selected = j;
-									}
-									visibleNames[j] = items[j].replace('_', ' ').replace(
-											'-', ' ');
-								}
-								bld.setSingleChoiceItems(visibleNames, selected, new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										String renderer = items[which];
-										RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
-										if (loaded != null) {
-											app.getSettings().RENDERER.set(renderer);
-											app.getRendererRegistry().setCurrentSelectedRender(loaded);
-											app.getResourceManager().getRenderer().clearCache();
-										} else {
-											AccessibleToast.makeText(app, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
-										}
-										dialog.dismiss();
-										createSettingsAdapter();
-									}
-								});
-								bld.show();
-							}
-						});
+						((TextView) convertView.findViewById(R.id.descr)).setText(app.getSettings().RENDERER.get());
 					} else if (item.nameId == R.string.map_widget_day_night) {
-						((TextView)convertView.findViewById(R.id.descr)).setText(app.getSettings().DAYNIGHT_MODE.get().toHumanString(app));
-						convertView.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								AlertDialog.Builder bld = new AlertDialog.Builder(app.getMapActivity());
-								bld.setTitle(R.string.daynight);
-								final String[] items = new String[OsmandSettings.DayNightMode.values().length];
-								for (int i = 0; i < items.length; i++) {
-									items[i] = OsmandSettings.DayNightMode.values()[i].toHumanString(app);
-								}
-								int i = app.getSettings().DAYNIGHT_MODE.get().ordinal();
-								bld.setSingleChoiceItems(items, i, new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										app.getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.values()[which]);
-										app.getResourceManager().getRenderer().clearCache();
-										dialog.dismiss();
-									}
-								});
-								bld.show();
-							}
-						});
+						((TextView) convertView.findViewById(R.id.descr)).setText(app.getSettings().DAYNIGHT_MODE.get().toHumanString(app));
 					}
 				} else if (item.type == RENDERING_PROPERTY) {
 					convertView.findViewById(R.id.icon).setVisibility(View.GONE);
@@ -168,43 +246,13 @@ public class ConfigureSettingsMenuHelper {
 					convertView.findViewById(R.id.icon).setVisibility(View.GONE);
 					final String propertyDescription = SettingsActivity.getStringPropertyDescription(app, p.getAttrName(), p.getName());
 					if (p.isBoolean()) {
-						final OsmandSettings.CommonPreference<Boolean> pref = app.getSettings().getCustomRenderBooleanProperty(p.getAttrName());
-						CheckBox ch = (CheckBox) convertView.findViewById(R.id.check);
+						OsmandSettings.CommonPreference<Boolean> pref = app.getSettings().getCustomRenderBooleanProperty(p.getAttrName());
+						final CheckBox ch = (CheckBox) convertView.findViewById(R.id.check);
 						ch.setChecked(pref.get());
-						ch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-							@Override
-							public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-								pref.set(!pref.get());
-								app.getResourceManager().getRenderer().clearCache();
-							}
-						});
-					} else {
-						final OsmandSettings.CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(p.getAttrName());
-						convertView.setOnClickListener(new View.OnClickListener() {
+						ch.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
-								AlertDialog.Builder b = new AlertDialog.Builder(app.getMapActivity());
-								//test old descr as title
-								b.setTitle(propertyDescription);
-
-								int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
-
-								String[] possibleValuesString = new String[p.getPossibleValues().length];
-
-								for (int j = 0; j < p.getPossibleValues().length; j++) {
-									possibleValuesString[j] = SettingsActivity.getStringPropertyValue(app, p.getPossibleValues()[j]);
-								}
-
-								b.setSingleChoiceItems(possibleValuesString, i, new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										pref.set(p.getPossibleValues()[which]);
-										app.getResourceManager().getRenderer().clearCache();
-										//view.refreshMap(true);
-										dialog.dismiss();
-									}
-								});
-								b.show();
+								onMenuItemClick(item, null);
 							}
 						});
 					}
@@ -215,7 +263,7 @@ public class ConfigureSettingsMenuHelper {
 			//Hiding and showing items based on current item
 			//setting proper visual property
 			private void prepareView(View convertView, ConfigureMapMenuItem item) {
-				((TextView)convertView.findViewById(R.id.descr)).setTypeface(null,Typeface.ITALIC);
+				((TextView) convertView.findViewById(R.id.descr)).setTypeface(null, Typeface.ITALIC);
 
 				int type = item.type;
 				//setting name textview
@@ -240,7 +288,6 @@ public class ConfigureSettingsMenuHelper {
 				} else {
 					convertView.findViewById(R.id.back).setVisibility(View.GONE);
 				}
-
 				//other elements
 				if (type == BACK_HEADER) {
 					convertView.findViewById(R.id.check).setVisibility(View.GONE);
@@ -253,6 +300,7 @@ public class ConfigureSettingsMenuHelper {
 				} else if (type == LAYER) {
 					((ImageView) convertView.findViewById(R.id.icon)).setImageResource(getIcon(item));
 					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);
+					convertView.findViewById(R.id.check).setVisibility(View.VISIBLE);
 				} else if (type == MAP_REDNDER) {
 					convertView.findViewById(R.id.icon).setVisibility(View.GONE);
 					convertView.findViewById(R.id.check).setVisibility(View.GONE);
@@ -275,48 +323,6 @@ public class ConfigureSettingsMenuHelper {
 					return item.darkIcon;
 				}
 			}
-
-			private void setLayersCheckBox(ConfigureMapMenuItem item, CheckBox check) {
-				check.setVisibility(View.VISIBLE);
-				if (item.nameId == R.string.layer_poi) {
-					final OsmandSettings.OsmandPreference<Boolean> pref = (OsmandSettings.OsmandPreference<Boolean>) item.preference;
-					check.setChecked(pref.get());
-					check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-						@Override
-						public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-							if (b) {
-								selectPOIFilterLayer(null);
-							} else {
-								pref.set(b);
-								app.getMapActivity().getMapView().refreshMap(true);
-							}
-						}
-					});
-				} else if (item.nameId == R.string.layer_gpx_layer) {
-					check.setChecked(app.getSelectedGpxHelper().isShowingAnyGpxFiles());
-					check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-						@Override
-						public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-							if (b) {
-								showGPXFileDialog(null);
-							}
-						}
-					});
-				} else if (item.nameId == R.string.layer_transport && TransportRouteHelper.getInstance().routeIsCalculated()) {
-					check.setChecked(true);
-				} else {
-					final OsmandSettings.OsmandPreference<Boolean> pref = (OsmandSettings.OsmandPreference<Boolean>) item.preference;
-					check.setChecked(pref.get());
-					check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-						@Override
-						public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-							pref.set(b);
-							app.getMapActivity().getMapView().refreshMap(true);
-						}
-					});
-				}
-			}
-
 
 		};
 	}
@@ -391,7 +397,7 @@ public class ConfigureSettingsMenuHelper {
 			it.reg();
 		}
 		final AlertDialog.Builder builder = new AlertDialog.Builder(app.getMapActivity());
-		ListAdapter listAdapter;
+		final ListAdapter listAdapter;
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			listAdapter =
 					adapter.createListAdapter(app.getMapActivity(), R.layout.list_menu_item, app.getSettings().isLightContentMenu());
@@ -408,8 +414,8 @@ public class ConfigureSettingsMenuHelper {
 					app.getSettings().setPoiFilterForMap(filterId);
 					Intent newIntent = new Intent(app, EditPOIFilterActivity.class);
 					newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, filterId);
-					//newIntent.putExtra(EditPOIFilterActivity.SEARCH_LAT, getMyApplication().getMapActivity().getMapView().getLatitude());
-					//newIntent.putExtra(EditPOIFilterActivity.SEARCH_LON, getMyApplication().getMapActivity().getMapView().getLongitude());
+					newIntent.putExtra(EditPOIFilterActivity.SEARCH_LAT, app.getMapActivity().getMapView().getLatitude());
+					newIntent.putExtra(EditPOIFilterActivity.SEARCH_LON, app.getMapActivity().getMapView().getLongitude());
 					app.getMapActivity().startActivity(newIntent);
 				} else {
 					String filterId;
@@ -425,10 +431,12 @@ public class ConfigureSettingsMenuHelper {
 					if (f != null) {
 						f.clearNameFilter();
 					}
+					app.getMapActivity().getMapLayers().setPoiFilter(f);
+					app.getMapActivity().getMapView().refreshMap();
 					if (selected != null && selected.length > 0) {
 						selected[0] = f;
 					}
-					createSettingsAdapter();
+					listView.setAdapter(createSettingsAdapter());
 				}
 			}
 
@@ -441,7 +449,7 @@ public class ConfigureSettingsMenuHelper {
 						!event.isCanceled()) {
 					dialogInterface.cancel();
 					app.getSettings().SHOW_POI_OVER_MAP.set(false);
-					createSettingsAdapter();
+					listView.setAdapter(createSettingsAdapter());
 					return true;
 				}
 				return false;
@@ -468,15 +476,31 @@ public class ConfigureSettingsMenuHelper {
 					}
 				}
 				app.getSelectedGpxHelper().setGpxFileToDisplay(result);
-				createSettingsAdapter();
+				listView.setAdapter(createSettingsAdapter());
 				return true;
 			}
 		};
 
+		AlertDialog dialog;
 		if (files == null) {
-			GpxUiHelper.selectGPXFile(app.getMapActivity(), true, true, callbackWithObject);
+			dialog = GpxUiHelper.selectGPXFile(app.getMapActivity(), true, true, callbackWithObject);
 		} else {
-			GpxUiHelper.selectGPXFile(files, app.getMapActivity(), true, true, callbackWithObject);
+			dialog = GpxUiHelper.selectGPXFile(files, app.getMapActivity(), true, true, callbackWithObject);
+		}
+		if (dialog != null) {
+			dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+				@Override
+				public boolean onKey(DialogInterface dialogInterface, int i, KeyEvent event) {
+					if (i == KeyEvent.KEYCODE_BACK &&
+							event.getAction() == KeyEvent.ACTION_UP &&
+							!event.isCanceled()) {
+						dialogInterface.cancel();
+						listView.setAdapter(createSettingsAdapter());
+						return true;
+					}
+					return false;
+				}
+			});
 		}
 	}
 

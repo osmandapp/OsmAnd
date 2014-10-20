@@ -7,11 +7,12 @@
 			  android:paddingLeft="8dp"
 			  android:paddingRight="8dp">
 	<ImageButton android:id="@+id/back"
+				 android:focusable="false"
 				 android:layout_width="wrap_content"
 				 android:layout_height="wrap_content"
 				 android:layout_gravity="center_vertical"
 				 android:background="@null"
-			android:layout_marginRight="10dp"/>
+				 android:layout_marginRight="10dp"/>
 	<ImageView android:id="@+id/icon"
 			   android:layout_width="wrap_content"
 			   android:layout_height="wrap_content"
@@ -37,6 +38,7 @@
 	</LinearLayout>
 
 	<CheckBox android:id="@+id/check"
+			  android:focusable="false"
 			  android:layout_gravity="center_vertical"
 			  android:layout_width="wrap_content"
 			  android:layout_height="wrap_content"

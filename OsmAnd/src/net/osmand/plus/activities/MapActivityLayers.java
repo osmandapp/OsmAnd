@@ -600,6 +600,10 @@ public class MapActivityLayers {
 		});
 		return builder.show();
 	}
+
+	public void setPoiFilter(PoiFilter f){
+		poiMapLayer.setFilter(f);
+	}
 	
 	public void selectMapLayer(final OsmandMapTileView mapView){
 		if(OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
