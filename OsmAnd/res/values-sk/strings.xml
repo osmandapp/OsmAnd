@@ -2004,4 +2004,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="print_route">Vytlačiť trasu</string>
     <string name="speed_limit_exceed">Tolerancia prekročenia povolenej rýchlosti</string>
 	<string name="speed_limit_exceed_message">Zvoľte toleranciu prekročenia povolenej rýchlosti, po ktorej dostanete hlasové oznámenie.</string>
+	<string name="osmo_device_not_found">Zariadenie sa nenašlo</string>
+    <string name="anonymous_user">Anonymný používateľ</string>
+    <string name="logged_as">Prihlásený ako %1$s</string>
 	</resources>
