@@ -1851,4 +1851,9 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="use_native_render_descr">Naudoti C++ vietoje Java atvaizdavimo</string>
     <string name="speed_limit_exceed">Greičio ribojimo viršijimo reikšmė</string>
 	<string name="speed_limit_exceed_message">Pasirinkite greičio ribojimo viršijimo ribą, kurią pasiekus bus pranešta balsu.</string>
+	<string name="osmo_device_not_found">Įrenginys neaptiktas</string>
+    <string name="osmo_no_connection_msg">OsMo paslauga negalima:\n- patikrinkite internetinį ryšį;\n- patikrinkite nustatymus;\n- užeikite į Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Anonimas negali:\n- kurti grupių;\n- sinchronizuoti grupes bei įranginius su sreveriu;\n- valdyti grupes bei įrenginius privačiame biure.</string>
+    <string name="anonymous_user">Anonimas</string>
+    <string name="logged_as">Prisijungėte kaip %1$s</string>
 	</resources>
