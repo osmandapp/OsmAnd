@@ -580,7 +580,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			poiDescr.listen(new OnContextMenuClick() {
 				
 				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dlg) {
+				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dlg) {
 					// Build text(amenity)
 					
 					// Find and format links
@@ -597,7 +597,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					// Make links clickable
 					TextView textView = (TextView) dialog.findViewById(android.R.id.message);
 					textView.setMovementMethod(LinkMovementMethod.getInstance());
-					textView.setLinksClickable(true);					
+					textView.setLinksClickable(true);
+					return true;
 				}
 			}).reg();
 		}
@@ -606,8 +607,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			showDetails.listen(new OnContextMenuClick() {
 				
 				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dlg) {
+				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dlg) {
 					showPOIDetails(amenity, settings.usingEnglishNames());
+					return true;
 				}
 			}).reg();
 		}

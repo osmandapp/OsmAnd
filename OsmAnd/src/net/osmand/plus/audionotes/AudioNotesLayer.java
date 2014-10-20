@@ -118,13 +118,14 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 			final Recording r = (Recording) o;
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (itemId == R.string.recording_context_menu_play ||
 							itemId == R.string.recording_context_menu_show) {
 						plugin.playRecording(view.getContext(), r);
 					} else if (itemId == R.string.recording_context_menu_delete) {
 						deleteRecording(r);
 					}
+					return true;
 				}
 
 

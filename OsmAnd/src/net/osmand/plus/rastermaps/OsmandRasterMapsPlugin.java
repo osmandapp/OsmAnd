@@ -186,7 +186,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final MapActivityLayers layers = mapActivity.getMapLayers();
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (itemId == R.string.layer_map) {
 					dialog.dismiss();
 					layers.selectMapLayer(mapView);
@@ -210,6 +210,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 								mapActivity);
 					}
 				}
+				return true;
 			}
 		};
 		adapter.item(R.string.layer_map).icons(R.drawable.ic_action_globus_dark, R.drawable.ic_action_globus_light)
@@ -228,13 +229,14 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (mapView.getMainLayer() instanceof MapTileLayer) {
 			OnContextMenuClick listener = new OnContextMenuClick() {
 				@Override
-				public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (resId == R.string.context_menu_item_update_map) {
 						mapActivity.getMapActions().reloadTile(mapView.getZoom(), latitude, longitude);
 					} else if (resId == R.string.context_menu_item_download_map) {
 						DownloadTilesDialog dlg = new DownloadTilesDialog(mapActivity, (OsmandApplication) mapActivity.getApplication(), mapView);
 						dlg.openDialog();
 					}
+					return true;
 				}
 			};
 			adapter.item(R.string.context_menu_item_update_map).icons(R.drawable.ic_action_refresh_dark, R.drawable.ic_action_refresh_light)
