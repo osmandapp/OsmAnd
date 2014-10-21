@@ -1,5 +1,7 @@
 package net.osmand.router;
 
+import gnu.trove.set.hash.TLongHashSet;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -49,6 +51,8 @@ public class GeneralRouter implements VehicleRouter {
 	private float minDefaultSpeed = 10;
 	// speed in m/s
 	private float maxDefaultSpeed = 10;
+	
+	private TLongHashSet impassableRoads;
 	
 	
 	public enum RouteDataObjectAttribute {
@@ -180,7 +184,14 @@ public class GeneralRouter implements VehicleRouter {
 	@Override
 	public boolean acceptLine(RouteDataObject way) {
 		int res = getObjContext(RouteDataObjectAttribute.ACCESS).evaluateInt(way, 0);
+		if(impassableRoads != null && impassableRoads.contains(way.id)) {
+			return false;
+		}
 		return res >= 0;
+	}
+	
+	public long[] getImpassableRoadIds() {
+		return impassableRoads.toArray();
 	}
 	
 	private int registerTagValueAttribute(String tag, String value) {
@@ -859,6 +870,15 @@ public class GeneralRouter implements VehicleRouter {
 			objectAttributes[i].printRules(out);
 		}
 		
+	}
+
+	public void addImpassableRoads(TLongHashSet impassableRoads) {
+		if (impassableRoads != null && !impassableRoads.isEmpty()) {
+			if (this.impassableRoads == null) {
+				this.impassableRoads = new TLongHashSet();
+			}
+			this.impassableRoads.addAll(impassableRoads);
+		}		
 	}
 }
 
