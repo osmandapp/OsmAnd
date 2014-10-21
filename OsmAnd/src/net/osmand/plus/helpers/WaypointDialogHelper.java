@@ -3,8 +3,6 @@ package net.osmand.plus.helpers;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.support.v4.widget.DrawerLayout;
-import android.widget.*;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
@@ -35,6 +33,15 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
 /**
  */
@@ -81,29 +88,16 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			removeDialog();
 		} else {
 			boolean created = false;
-			if (closePointDialog == null) {
+			View dlg = closePointDialog;
+			if (dlg == null) {
 				created = true;
 				final LayoutInflater vi = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				closePointDialog = vi.inflate(R.layout.waypoint_reached, null);
+				dlg = vi.inflate(R.layout.waypoint_reached, null);
 			}
-			updatePointInfoView(app, mapActivity, closePointDialog, point, null);
-			View all = closePointDialog.findViewById(R.id.all_points);
+			updatePointInfoView(app, mapActivity, dlg, point, null);
+			View all = dlg.findViewById(R.id.all_points);
 			all.setVisibility(/*many.size() <= 1 ? View.GONE : */View.VISIBLE);
-			if (created) {
-				closePointDialog.setBackgroundDrawable(mapActivity.getResources().getDrawable(R.drawable.view_black_selection));
-				((TextView) closePointDialog.findViewById(R.id.waypoint_text)).setTextColor(Color.WHITE);
-				all.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						showWaypointsDialog(mapActivity);
-					}
-				});
-
-
-				mainLayout.addView(closePointDialog, getDialogLayoutParams());
-				waitBeforeLayoutIsResized(closePointDialog);
-			}
-			View btnN = closePointDialog.findViewById(R.id.info_close);
+			View btnN = dlg.findViewById(R.id.info_close);
 			btnN.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -111,6 +105,21 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 					updateDialog();
 				}
 			});
+			if (created) {
+				dlg.setBackgroundDrawable(mapActivity.getResources().getDrawable(R.drawable.view_black_selection));
+				((TextView) dlg.findViewById(R.id.waypoint_text)).setTextColor(Color.WHITE);
+				all.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						showWaypointsDialog(mapActivity);
+					}
+				});
+
+				closePointDialog = dlg;
+				mainLayout.addView(closePointDialog, getDialogLayoutParams());
+				waitBeforeLayoutIsResized(dlg);
+			}
+			
 		}
 	}
 

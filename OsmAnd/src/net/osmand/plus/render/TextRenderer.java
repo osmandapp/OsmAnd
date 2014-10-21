@@ -241,13 +241,15 @@ public class TextRenderer {
 							paintText.setColor(text.textShadowColor);
 							paintText.setStyle(Style.STROKE);
 							paintText.setStrokeWidth(2 + text.textShadow);
-							cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
+							cv.drawTextOnPath(text.text, text.drawOnPath, 0, 
+									text.vOffset - ( paintText.ascent()/2 + paintText.descent()), paintText);
 							// reset
 							paintText.setStyle(Style.FILL);
 							paintText.setStrokeWidth(2);
 							paintText.setColor(text.textColor);
 						}
-						cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
+						cv.drawTextOnPath(text.text, text.drawOnPath, 0, 
+								text.vOffset - ( paintText.ascent()/2 + paintText.descent()), paintText);
 					} else {
 						if (text.shieldRes != null) {
 							float coef = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
@@ -513,7 +515,6 @@ public class TextRenderer {
 
 		p.centerX = points[startInd].x + scale * px + ox;
 		p.centerY = points[startInd].y + scale * py + oy;
-		p.vOffset += p.textSize / 2 - 1;
 //		p.hOffset = 0;
 
 		if (inverse) {
