@@ -5,6 +5,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -671,18 +672,18 @@ public class RouteResultPreparation {
 		}
 	}
 
-	private void attachTurnLanesData(boolean leftSide, RouteSegmentResult prevSegm, TurnType t) {
+	private TurnType attachTurnLanesData(boolean leftSide, RouteSegmentResult prevSegm, TurnType t) {
 		int lanes = prevSegm.getObject().getLanes();
 		String turnLanes = getTurnLanesString(prevSegm);
 
 		if (turnLanes == null) {
-			return;
+			return t;
 		}
 
 		String[] splitLaneOptions = turnLanes.split("\\|", -1);
 		if (splitLaneOptions.length != lanes) {
 			// Error in data or missing data
-			return;
+			return t;
 		}
 
 		if (t.getLanes().length != lanes) {
@@ -699,7 +700,7 @@ public class RouteResultPreparation {
 					if (options == 1) {
 						if (outgoingLanesIndex + 1 >= t.getLanes().length) {
 							// Likely an error in data
-							return;
+							return t;
 						}
 						int usability = t.getLanes()[outgoingLanesIndex] | t.getLanes()[outgoingLanesIndex + 1];
 						sourceLanes.add(usability);
@@ -707,7 +708,7 @@ public class RouteResultPreparation {
 						sourceLanesIndex++;
 					} else {
 						// Not supported
-						return;
+						return t;
 					}
 				} else {
 					// Only one allowed turn; behave normally
@@ -727,6 +728,8 @@ public class RouteResultPreparation {
 		}
 
 		assignTurns(splitLaneOptions, t);
+		t = inferTurnFromLanes(t, leftSide);
+		return t;
 	}
 
 	private int countOccurrences(String haystack, char needle) {
@@ -780,6 +783,57 @@ public class RouteResultPreparation {
 				}
 			}
 		}
+	}
+
+	private TurnType inferTurnFromLanes(TurnType t, boolean leftSide) {
+		List<Integer> possibleTurns = new ArrayList<Integer>();
+		for (int i = 0; i < t.getLanes().length; i++) {
+			if ((t.getLanes()[i] & 1) == 0) {
+				continue;
+			}
+
+			if (possibleTurns.isEmpty()) {
+				// Nothing is in the list to compare to, so add the first elements
+				possibleTurns.add(TurnType.getPrimaryTurn(t.getLanes()[i]));
+				if (TurnType.getSecondaryTurn(t.getLanes()[i]) != 0) {
+					possibleTurns.add(TurnType.getSecondaryTurn(t.getLanes()[i]));
+				}
+			} else {
+				List<Integer> laneTurns = new ArrayList<Integer>();
+				laneTurns.add(TurnType.getPrimaryTurn(t.getLanes()[i]));
+				if (TurnType.getSecondaryTurn(t.getLanes()[i]) != 0) {
+					laneTurns.add(TurnType.getSecondaryTurn(t.getLanes()[i]));
+				}
+				possibleTurns.retainAll(laneTurns);
+
+				if (possibleTurns.isEmpty()) {
+					// No common turns, so can't determine anything.
+					return t;
+				}
+			}
+		}
+
+		// Remove all turns from lanes not selected...because those aren't it
+		for (int i = 0; i < t.getLanes().length; i++) {
+			if ((t.getLanes()[i] & 1) == 0 && !possibleTurns.isEmpty()) {
+				List<Integer> notLaneTurns = new ArrayList<Integer>();
+				notLaneTurns.add(TurnType.getPrimaryTurn(t.getLanes()[i]));
+				if (TurnType.getSecondaryTurn(t.getLanes()[i]) != 0) {
+					notLaneTurns.add(TurnType.getSecondaryTurn(t.getLanes()[i]));
+				}
+				possibleTurns.removeAll(notLaneTurns);
+			}
+		}
+
+		// Checking to see that there is only one unique turn
+		if (new HashSet<Integer>(possibleTurns).size() == 1) {
+			TurnType derivedTurnType = TurnType.valueOf(possibleTurns.get(0), leftSide);
+			derivedTurnType.setLanes(t.getLanes());
+			derivedTurnType.setSkipToSpeak(t.isSkipToSpeak());
+			t = derivedTurnType;
+		}
+
+		return t;
 	}
 
 	private boolean isMotorway(RouteSegmentResult s){
