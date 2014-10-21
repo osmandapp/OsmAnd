@@ -7,6 +7,7 @@ import java.util.List;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
@@ -154,7 +155,7 @@ public class RouteCalculationResult {
 						info.setStreetName(toSplit.getStreetName());
 						info.setDestinationName(toSplit.getDestinationName());
 						info.routePointOffset = interLocations[currentIntermediate];
-						info.setDescriptionRoute(ctx.getString(R.string.route_head));//; //$NON-NLS-1$
+						info.setDescriptionRoute(ctx.getString(R.string.route_head));
 						localDirections.add(currentDirection, info);
 					}
 					intermediatePoints[currentIntermediate] = currentDirection;
@@ -213,46 +214,44 @@ public class RouteCalculationResult {
 		List<RouteSegmentResult> segmentsToPopulate = new ArrayList<RouteSegmentResult>();
 		for (int routeInd = 0; routeInd < list.size(); routeInd++) {
 			RouteSegmentResult s = list.get(routeInd);
-			boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
+			int delta = (s.getStartPointIndex() < s.getEndPointIndex())?1:-1;
 			int i = s.getStartPointIndex();
 			int prevLocationSize = locations.size();
 			while (true) {
+				if (i == s.getEndPointIndex() && routeInd != list.size() - 1) {
+					break;
+				}
 				Location n = new Location(""); //$NON-NLS-1$
 				LatLon point = s.getPoint(i);
 				n.setLatitude(point.getLatitude());
 				n.setLongitude(point.getLongitude());
-				if (i == s.getEndPointIndex() && routeInd != list.size() - 1) {
-					break;
-				}
 				locations.add(n);
 				attachAlarmInfo(alarms, s, i, locations.size());
 				segmentsToPopulate.add(s);
 				if (i == s.getEndPointIndex() ) {
 					break;
 				}
-				if (plus) {
-					i++;
-				} else {
-					i--;
-				}
+				i += delta;
 			}
-			TurnType turn = s.getTurnType();
 
+			TurnType turn = s.getTurnType();
 			if(turn != null) {
 				RouteDirectionInfo info = new RouteDirectionInfo(s.getSegmentSpeed(), turn);
-                if (routeInd  < list.size()) {
-                    int lind = routeInd;
-                    if(turn.isRoundAbout()) {
-                    	// take next name for roundabout (not roundabout name)
-                    	while(lind < list.size() -1 && list.get(lind).getObject().roundabout()) {
-                    		lind++;
-                    	}
-                    }
-                    RouteSegmentResult next = list.get(lind);
-                    info.setRef(next.getObject().getRef());
-                    info.setStreetName(next.getObject().getName());
-                    info.setDestinationName(next.getObject().getDestinationName());
-                }
+				int lind = routeInd;
+				if(turn.isRoundAbout()) {
+					int roundAboutEnd = prevLocationSize - 1;
+					// take next name for roundabout (not roundabout name)
+					while(lind < list.size() -1 && list.get(lind).getObject().roundabout()) {
+						roundAboutEnd += Math.abs(list.get(lind).getEndPointIndex()-list.get(lind).getStartPointIndex());
+						lind++;
+					}
+					// Consider roundabout end.
+					info.routeEndPointOffset = roundAboutEnd;
+				}
+				RouteDataObject next = list.get(lind).getObject();
+				info.setRef(next.getRef());
+				info.setStreetName(next.getName());
+				info.setDestinationName(next.getDestinationName());
 
                 String description = toString(turn, ctx) + " " + RoutingHelper.formatStreetName(info.getStreetName(),
 						info.getRef(), info.getDestinationName());
@@ -288,11 +287,7 @@ public class RouteCalculationResult {
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
 		
 		int[] listDistance = new int[locations.size()];
-		listDistance[locations.size() - 1] = 0;
-		for (int i = locations.size() - 1; i > 0; i--) {
-			listDistance[i - 1] = (int) locations.get(i - 1).distanceTo(locations.get(i));
-			listDistance[i - 1] += listDistance[i];
-		}
+		updateListDistanceTime(listDistance, locations);
 		
 		int previousLocation = 0;
 		int prevBearingLocation = 0;
@@ -689,7 +684,9 @@ public class RouteCalculationResult {
 	
 	public void updateCurrentRoute(int currentRoute) {
 		this.currentRoute = currentRoute;
-		while (currentDirectionInfo < directions.size() - 1 && directions.get(currentDirectionInfo + 1).routePointOffset < currentRoute) {
+		while (currentDirectionInfo < directions.size() - 1
+				&& directions.get(currentDirectionInfo + 1).routePointOffset < currentRoute
+				&& directions.get(currentDirectionInfo + 1).routeEndPointOffset < currentRoute) {
 			currentDirectionInfo++;
 		}
 		while(nextIntermediate < intermediatePoints.length) {
@@ -716,34 +713,42 @@ public class RouteCalculationResult {
 		}
 		return null;
 	}
-	
-	
-	/*public */NextDirectionInfo getNextRouteDirectionInfo(NextDirectionInfo info, Location fromLoc, boolean toSpeak) {
-		int dirInfo = currentDirectionInfo;
-		if (dirInfo < directions.size()) {
-			int dist = listDistance[currentRoute];
-			int nextInd = dirInfo + 1;
-			if (toSpeak) {
-				while (nextInd < directions.size()) {
-					RouteDirectionInfo i = directions.get(nextInd);
-					if (i.getTurnType() != null && !i.getTurnType().isSkipToSpeak()) {
-						break;
-					}
-					nextInd++;
+
+	// Locate next direction of interest
+	private int nextDirectionIndex(int initial, boolean toSpeak)
+	{
+		int nextInd = initial + 1;
+		if (toSpeak) {
+			while (nextInd < directions.size()) {
+				TurnType t = directions.get(nextInd).getTurnType();
+				if (t != null && !t.isSkipToSpeak()) {
+					break;
 				}
+				nextInd++;
 			}
+		}
+		return nextInd;
+	}
+
+	/*public */NextDirectionInfo getNextRouteDirectionInfo(NextDirectionInfo info, Location fromLoc, boolean toSpeak) {
+		int nextInd = nextDirectionIndex(currentDirectionInfo, toSpeak);
+		if (nextInd < directions.size()) {
+			info.directionInfoInd = nextInd;
+			info.directionInfo = directions.get(nextInd);
+			int dist = listDistance[currentRoute];
 			if (fromLoc != null) {
 				dist += fromLoc.distanceTo(locations.get(currentRoute));
 			}
-			if (nextInd < directions.size()) {
-				info.directionInfo = directions.get(nextInd);
-				dist -= listDistance[directions.get(nextInd).routePointOffset];
-			}
+			if (info.directionInfo.routePointOffset <= currentRoute
+					&& currentRoute <= info.directionInfo.routeEndPointOffset)
+				// We are not into a puntual direction.
+				dist -= listDistance[info.directionInfo.routeEndPointOffset];
+			else
+				dist -= listDistance[info.directionInfo.routePointOffset];
+			info.distanceTo = dist;
 			if(intermediatePoints != null && nextIntermediate < intermediatePoints.length) {
 				info.intermediatePoint = intermediatePoints[nextIntermediate] == nextInd;
 			}
-			info.directionInfoInd = nextInd;
-			info.distanceTo = dist;
 			return info;
 		}
 		info.directionInfoInd = -1;
@@ -751,30 +756,18 @@ public class RouteCalculationResult {
 		info.directionInfo = null;
 		return null;
 	}
-	
+
 	/*public */NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo prev, NextDirectionInfo next, boolean toSpeak) {
-		int dirInfo = prev.directionInfoInd;
-		if (dirInfo < directions.size() && prev.directionInfo != null) {
+		int nextInd = nextDirectionIndex(prev.directionInfoInd, toSpeak);
+		if (nextInd < directions.size() && prev.directionInfo != null) {
+			next.directionInfoInd = nextInd;
+			next.directionInfo = directions.get(nextInd);
 			int dist = listDistance[prev.directionInfo.routePointOffset];
-			int nextInd = dirInfo + 1;
-			if (toSpeak) {
-				while (nextInd < directions.size()) {
-					RouteDirectionInfo i = directions.get(nextInd);
-					if (i.getTurnType() != null && !i.getTurnType().isSkipToSpeak()) {
-						break;
-					}
-					nextInd++;
-				}
-			}
-			if (nextInd < directions.size()) {
-				next.directionInfo = directions.get(nextInd);
-				dist -= listDistance[directions.get(nextInd).routePointOffset];
-			}
+			dist -= listDistance[next.directionInfo.routePointOffset];
+			next.distanceTo = dist;
 			if(intermediatePoints != null && nextIntermediate < intermediatePoints.length) {
 				next.intermediatePoint = intermediatePoints[nextIntermediate] == nextInd;
 			}
-			next.distanceTo = dist;
-			next.directionInfoInd = nextInd;
 			return next;
 		}
 		next.directionInfoInd = -1;
@@ -782,9 +775,7 @@ public class RouteCalculationResult {
 		next.directionInfo = null;
 		return null;
 	}
-	
-	
-	
+
 	public List<RouteDirectionInfo> getRouteDirections() {
 		if(currentDirectionInfo < directions.size() - 1){
 			if(cacheCurrentTextDirectionInfo != currentDirectionInfo) {
