@@ -359,14 +359,7 @@ public class MapActivityLayers {
 			it.reg();
 		}
 		Builder builder = new AlertDialog.Builder(activity);
-		ListAdapter listAdapter ;
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
-			listAdapter =
-				adapter.createListAdapter(activity, R.layout.list_menu_item, app.getSettings().isLightContentMenu());
-		} else {
-			listAdapter =
-				adapter.createListAdapter(activity, R.layout.list_menu_item_native, app.getSettings().isLightContentMenu());
-		}
+		ListAdapter listAdapter =adapter.createListAdapter(activity, app.getSettings().isLightContentMenu());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener(){
 
 			@Override

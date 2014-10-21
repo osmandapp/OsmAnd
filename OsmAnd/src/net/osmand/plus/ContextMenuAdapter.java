@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -25,11 +26,14 @@ public class ContextMenuAdapter {
 	
 	private final Context ctx;
 	private View anchor;
+	private int defaultLayoutId = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ?
+			R.layout.list_menu_item : R.layout.list_menu_item_native;
 	final TIntArrayList items = new TIntArrayList();
 	final TIntArrayList isCategory = new TIntArrayList();
 	final ArrayList<String> itemNames = new ArrayList<String>();
 	final ArrayList<OnContextMenuClick> listeners = new ArrayList<ContextMenuAdapter.OnContextMenuClick>();
 	final TIntArrayList selectedList = new TIntArrayList();
+	final TIntArrayList layoutIds = new TIntArrayList();
 	final TIntArrayList iconList = new TIntArrayList();
 	final TIntArrayList iconListLight = new TIntArrayList();
 
@@ -80,6 +84,14 @@ public class ContextMenuAdapter {
 		return iconListLight.get(pos);
 	}
 	
+	public int getBackgroundColor(Context ctx, boolean holoLight) {
+		if (holoLight) {
+			return ctx.getResources().getColor(R.color.color_white);
+		} else {
+			return ctx.getResources().getColor(R.color.dark_drawer_bg_color);
+		}
+	}
+	
 	
 	public boolean isCategory(int pos) {
 		return isCategory.get(pos) > 0;
@@ -105,6 +117,7 @@ public class ContextMenuAdapter {
 		int id;
 		String name;
 		int selected = -1;
+		int layout = -1;
 		boolean cat;
 		int pos = -1;
 		private OnContextMenuClick listener;
@@ -132,6 +145,11 @@ public class ContextMenuAdapter {
 			this.selected = selected;
 			return this;
 		}
+		
+		public Item layout(int l) {
+			this.layout = l;
+			return this;
+		}
 
 		public Item listen(OnContextMenuClick l) {
 			this.listener = l;
@@ -146,6 +164,7 @@ public class ContextMenuAdapter {
 			items.insert(pos, id);
 			itemNames.add(pos, name);
 			selectedList.insert(pos, selected);
+			layoutIds.insert(pos, layout);
 			iconList.insert(pos, icon);
 			iconListLight.insert(pos, lightIcon);
 			listeners.add(pos, listener);
@@ -171,20 +190,31 @@ public class ContextMenuAdapter {
 		iconListLight.removeAt(pos);
 		listeners.remove(pos);
 		isCategory.removeAt(pos);
+		layoutIds.removeAt(pos);
 	}
 
+	public int getLayoutId(int position) {
+		int l = layoutIds.get(position);
+		if(l != -1) {
+			return l;
+		}
+		return defaultLayoutId; 
+	}
 	
 
-	public ListAdapter createListAdapter(final Activity activity, final int layoutId, final boolean holoLight) {
+	public ListAdapter createListAdapter(final Activity activity, final boolean holoLight) {
 		final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
+		final int layoutId = defaultLayoutId;
 		ListAdapter listadapter = new ArrayAdapter<String>(activity, layoutId, R.id.title,
 				getItemNames()) {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
 				View v = convertView;
-				if (v == null) {
-					v = activity.getLayoutInflater().inflate(layoutId, null);
+				Integer lid = getLayoutId(position);
+				if (v == null || (v.getTag() != lid)) {
+					v = activity.getLayoutInflater().inflate(lid, null);
+					v.setTag(lid);
 				}
 				TextView tv = (TextView) v.findViewById(R.id.title);
 				tv.setText(getItemName(position));

@@ -27,7 +27,6 @@ public class ConfigureMapMenu {
 
 	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(ma);
-		adapter.item(R.string.layers_category_show).setCategory(true).reg();
 		adapter.item(R.string.configure_map).icons(R.drawable.ic_back_drawer_dark, R.drawable.ic_back_drawer_white)
 				.listen(new OnContextMenuClick() {
 

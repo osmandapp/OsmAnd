@@ -500,14 +500,8 @@ public class MapActivityActions implements DialogProvider {
 		getMyApplication().getAppCustomization().prepareLocationMenu(mapActivity, adapter);
 		
 		final Builder builder = new AlertDialog.Builder(mapActivity);
-		ListAdapter listAdapter ;
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
-			listAdapter =
-				adapter.createListAdapter(mapActivity, R.layout.list_menu_item, getMyApplication().getSettings().isLightContentMenu());
-		} else {
-			listAdapter =
-				adapter.createListAdapter(mapActivity, R.layout.list_menu_item_native, getMyApplication().getSettings().isLightContentMenu());
-		}
+		ListAdapter listAdapter =
+				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContentMenu());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 
 			@Override
@@ -759,21 +753,10 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void prepareOptionsMenu(final ContextMenuAdapter cm) {
-		ListAdapter listAdapter;
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
-			listAdapter =
-					cm.createListAdapter(mapActivity, R.layout.list_menu_item, getMyApplication().getSettings().isLightContentMenu());
-		} else {
-			listAdapter =
-					cm.createListAdapter(mapActivity, R.layout.list_menu_item_native, getMyApplication().getSettings().isLightContentMenu());
-		}
+		ListAdapter listAdapter =
+				cm.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContentMenu());
 		mDrawerList.setAdapter(listAdapter);
-
-		if (getMyApplication().getSettings().isLightContentMenu()){
-			mDrawerList.setBackgroundColor(mapActivity.getResources().getColor(R.color.color_white));
-		} else {
-			mDrawerList.setBackgroundColor(mapActivity.getResources().getColor(R.color.dark_drawer_bg_color));
-		}
+		mDrawerList.setBackgroundColor(cm.getBackgroundColor(mapActivity, getMyApplication().getSettings().isLightContentMenu()));
 		mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
