@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -150,8 +152,9 @@ public class ContextMenuAdapter {
 			isCategory.insert(pos, cat ? 1 : 0);
 		}
 
-		public void setCategory(boolean b) {
+		public Item setCategory(boolean b) {
 			cat = b;
+			return this;
 		}
 
 	}
@@ -177,7 +180,7 @@ public class ContextMenuAdapter {
 		ListAdapter listadapter = new ArrayAdapter<String>(activity, layoutId, R.id.title,
 				getItemNames()) {
 			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
+			public View getView(final int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
 				View v = convertView;
 				if (v == null) {
@@ -201,7 +204,24 @@ public class ContextMenuAdapter {
 				}
 
 				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-				ch.setVisibility(View.GONE);
+				if(selectedList.get(position) != -1) {
+					ch.setOnCheckedChangeListener(null);
+					ch.setVisibility(View.VISIBLE);
+					ch.setSelected(selectedList.get(position) > 0);
+					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+						
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							OnContextMenuClick ca = getClickAdapter(position);
+							if(ca != null) {
+								ca.onContextMenuClick(getItemId(position), position, isChecked);
+							}
+						}
+					});
+					ch.setVisibility(View.VISIBLE);
+				} else {
+					ch.setVisibility(View.GONE);
+				}
 				return v;
 			}
 		};
