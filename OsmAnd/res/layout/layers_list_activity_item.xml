@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginLeft="5dip"
-    android:layout_marginRight="5dip"
-    android:background="@color/color_white">
+    android:layout_marginRight="5dip">
 
     <TextView
         android:id="@+id/title"
@@ -17,7 +16,7 @@
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
         android:textSize="18sp"
-        android:textColor="@color/color_black" android:layout_weight="1"/>
+        android:layout_weight="1"/>
 
     <LinearLayout android:layout_width="wrap_content"
         android:layout_height="fill_parent">
@@ -27,7 +26,6 @@
         android:id="@+id/check_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:button="@drawable/ic_btn_wocheckbox"
         android:focusable="false"
         android:gravity="center_vertical" />
     </LinearLayout>

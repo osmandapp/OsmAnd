@@ -244,7 +244,7 @@ public class ContextMenuAdapter {
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 							OnContextMenuClick ca = getClickAdapter(position);
 							if(ca != null) {
-								ca.onContextMenuClick((int) getItemId(position), position, isChecked);
+								ca.onContextMenuClick(position, position, isChecked);
 							}
 						}
 					});

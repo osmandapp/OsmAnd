@@ -62,14 +62,15 @@ public class MapWidgetRegistry {
 		
 	}
 	
-	public MapWidgetRegInfo registerAppearanceWidget(int drawable, int messageId, String key, 
+	public MapWidgetRegInfo registerAppearanceWidget(int drawableDark,int drawableLight, int messageId, String key,
 			OsmandPreference<?> pref) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
 		ii.key = key;
 		ii.preference = pref;
 		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
 		ii.visibleCollapsible = null;
-		ii.drawable = drawable;
+		ii.drawableDark = drawableDark;
+		ii.drawableLight = drawableLight;
 		ii.messageId = messageId;
 		this.appearanceWidgets.add(ii);
 		return ii;
@@ -84,7 +85,7 @@ public class MapWidgetRegistry {
 		}
 	}
 	
-	public MapWidgetRegInfo registerAppearanceWidget(int drawable, String message, String key, 
+	public MapWidgetRegInfo registerAppearanceWidget(int drawableDark,int drawableLight, String message, String key,
 			CommonPreference<?> pref, String subcategory) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
 		ii.key = key;
@@ -92,14 +93,15 @@ public class MapWidgetRegistry {
 		ii.preference = pref;
 		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
 		ii.visibleCollapsible = null;
-		ii.drawable = drawable;
+		ii.drawableDark = drawableDark;
+		ii.drawableLight = drawableLight;
 		ii.messageId = message.hashCode();
 		ii.message = message;
 		this.appearanceWidgets.add(ii);
 		return ii;
 	}
 	
-	public MapWidgetRegInfo registerTopWidget(View m, int drawable, int messageId, String key, int left, int priorityOrder) {
+	public MapWidgetRegInfo registerTopWidget(View m, int drawableDark,int drawableLight, int messageId, String key, int left, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
 		ii.key = key;
 		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
@@ -120,7 +122,8 @@ public class MapWidgetRegistry {
 		}
 		if (m != null)
 			m.setContentDescription(m.getContext().getString(messageId));
-		ii.drawable = drawable;
+		ii.drawableDark = drawableDark;
+		ii.drawableLight = drawableLight;
 		ii.messageId = messageId;
 		ii.m = m;
 		ii.priorityOrder = priorityOrder;
@@ -131,7 +134,7 @@ public class MapWidgetRegistry {
 	
 	
 	
-	public void registerSideWidget(BaseMapWidget m, int drawable, int messageId, String key, boolean left, int priorityOrder) {
+	public void registerSideWidget(BaseMapWidget m, int drawableDark,int drawableLight, int messageId, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
 		ii.key = key;
 		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
@@ -160,7 +163,8 @@ public class MapWidgetRegistry {
 		}
 		if (m != null)
 			m.setContentTitle(m.getContext().getString(messageId));
-		ii.drawable = drawable;
+		ii.drawableDark = drawableDark;
+		ii.drawableLight = drawableLight;
 		ii.messageId = messageId;
 		ii.m = m;
 		ii.priorityOrder = priorityOrder;
@@ -311,7 +315,8 @@ public class MapWidgetRegistry {
 	
 	public static class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo>  {
 		public View m;
-		public int drawable;
+		public int drawableDark;
+		public int drawableLight;
 		public int messageId;
 		public String message;
 		private String key;

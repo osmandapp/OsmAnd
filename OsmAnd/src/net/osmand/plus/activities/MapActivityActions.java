@@ -314,6 +314,13 @@ public class MapActivityActions implements DialogProvider {
     	enhance(dialogBundle,latitude,longitude, name);
     	mapActivity.showDialog(DIALOG_ADD_WAYPOINT);
     }
+
+	public void openViewConfigureDrawer(){
+		if (!mDrawerLayout.isDrawerOpen(mDrawerList)){
+			mDrawerLayout.openDrawer(mDrawerList);
+		}
+		mapActivity.getMapLayers().getMapInfoLayer().openViewConfigureDrawer(mDrawerList);
+	}
     
     private Dialog createAddWaypointDialog(final Bundle args) {
     	Builder builder = new AlertDialog.Builder(mapActivity);
@@ -763,7 +770,7 @@ public class MapActivityActions implements DialogProvider {
 			public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
 				OnContextMenuClick click = cm.getClickAdapter(which);
 				if (click != null) {
-					if (click.onContextMenuClick(cm.getItemId(which), which, false)){
+					if (click.onContextMenuClick(cm.getItemId(which), which, false)) {
 						mDrawerLayout.closeDrawer(mDrawerList);
 					}
 				} else {
@@ -916,8 +923,8 @@ public class MapActivityActions implements DialogProvider {
 			.listen(new OnContextMenuClick() {
 				@Override
 				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
-					mapActivity.getMapLayers().getMapInfoLayer().openViewConfigureDialog();
-					return true;
+					mapActivity.getMapLayers().getMapInfoLayer().openViewConfigureDrawer(mDrawerList);
+					return false;
 				}
 			}).reg();
 

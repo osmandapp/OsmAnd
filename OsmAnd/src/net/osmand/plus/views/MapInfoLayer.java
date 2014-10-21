@@ -27,8 +27,6 @@ import net.osmand.plus.views.mapwidgets.StackWidgetView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.UpdateableWidget;
 import net.osmand.util.Algorithms;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -172,51 +170,51 @@ public class MapInfoLayer extends OsmandMapLayer {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(), paintText,
 				paintSubText, false);
-		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, 5);
+		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, 5);
 		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
-		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
+		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
 				10);
 		NextTurnInfoWidget nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, app, view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
-		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
+		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
 		//MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
 		//mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
 		// right stack
 		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
+		mapInfoControls.registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
 		TextInfoWidget dist = ric.createDistanceControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(dist, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, 5);
+		mapInfoControls.registerSideWidget(dist, R.drawable.widget_target, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, 5);
 		TextInfoWidget time = ric.createTimeControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.string.map_widget_time, "time", false, 10);
+		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.drawable.widget_time, R.string.map_widget_time, "time", false, 10);
 		TextInfoWidget speed = ric.createSpeedControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, 15);
+		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, 15);
 		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
+		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info,  R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
 		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
+		mapInfoControls.registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
 		TextInfoWidget alt = mic.createAltitudeControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, 20);
+		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, 20);
 		TextInfoWidget plainTime = ric.createPlainTimeControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(plainTime, R.drawable.widget_time_to_distance, R.string.map_widget_plain_time, "plain_time", false, 25);
+		mapInfoControls.registerSideWidget(plainTime, R.drawable.widget_time_to_distance, R.drawable.widget_time_to_distance, R.string.map_widget_plain_time, "plain_time", false, 25);
 
 		// Top widgets
 		ImageViewWidget compassView = mic.createCompassView(map);
-		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, 5);
+		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass, R.drawable.widget_compass, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, 5);
 		View config = createConfiguration();
-		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapWidgetRegistry.RIGHT_CONTROL, 10);
+		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.drawable.widget_config, R.string.map_widget_config, "config", MapWidgetRegistry.RIGHT_CONTROL, 10);
 		// disable monitoring widget
 //		mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.widget_monitoring, R.string.map_widget_monitoring_services,
 //				"monitoring_services", MapWidgetRegistry.LEFT_CONTROL, 12);
-		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.widget_lock_screen, R.string.bg_service_screen_lock, "bgService", 
+		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.widget_lock_screen, R.drawable.widget_lock_screen, R.string.bg_service_screen_lock, "bgService",
 				MapWidgetRegistry.LEFT_CONTROL,  15);
-		mapInfoControls.registerTopWidget(createBackToLocation(mic), R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, 5);
+		mapInfoControls.registerTopWidget(createBackToLocation(mic), R.drawable.widget_backtolocation, R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, 5);
 		
 		View globus = createLayer();
-		mapInfoControls.registerTopWidget(globus, R.drawable.widget_layer, R.string.menu_layers, "layers", MapWidgetRegistry.RIGHT_CONTROL, 15);
+		mapInfoControls.registerTopWidget(globus, R.drawable.widget_layer, R.drawable.widget_layer, R.string.menu_layers, "layers", MapWidgetRegistry.RIGHT_CONTROL, 15);
 		
 		topText = mic.createStreetView(app, map, paintText);
-		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text,
+		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.drawable.street_name, R.string.map_widget_top_text,
 				"street_name", MapWidgetRegistry.MAIN_CONTROL, 100);
 		
 		// Register appearance widgets
@@ -324,10 +322,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void openViewConfigureDialog() {
+	public void openViewConfigureDrawer(ListView listView) {
 		final OsmandSettings settings = view.getSettings();
 		
 		final ArrayList<Object> list = new ArrayList<Object>();
+		list.add(map.getString(R.string.layer_map_appearance));
 		list.add(map.getString(R.string.map_widget_reset));
 		list.add(map.getString(R.string.map_widget_top_stack));
 		list.addAll(mapInfoControls.getTop());
@@ -368,10 +367,17 @@ public class MapInfoLayer extends OsmandMapLayer {
 					} else {
 						tv.setText(s +map.getString(mi.messageId) +s);
 					}
+
+					int drawable = 0;
+					if (map.getMyApplication().getSettings().isLightContent()){
+						drawable = mi.drawableLight;
+					} else {
+						drawable = mi.drawableDark;
+					}
 					// Put the image on the TextView
-					if (mi.drawable != 0) {
+					if (drawable != 0) {
 						tv.setPadding((int) (12 *scaleCoefficient), 0, 0, 0);
-						tv.setCompoundDrawablesWithIntrinsicBounds(mi.drawable, 0, 0, 0);
+						tv.setCompoundDrawablesWithIntrinsicBounds(drawable, 0, 0, 0);
 					} else {
 						tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 						tv.setPadding((int) (30 *scaleCoefficient), 0, 0, 0);
@@ -406,6 +412,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 					tv.setPadding((int) (5 *scaleCoefficient), 0, 0, 0);
 					// reset 
 					if (position == 0) {
+						if (map.getMyApplication().getSettings().isLightContent()){
+							tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_back_drawer_white, 0, 0, 0);
+						} else {
+							tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_back_drawer_dark, 0, 0, 0);
+						}
+					} else if (position == 1) {
 						tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.widget_reset_to_default, 0, 0, 0);
 					} else {
 						tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
@@ -416,10 +428,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 				return v;
 			}
 		};
-		Builder b = new AlertDialog.Builder(map);
 		View confirmDialog = View.inflate(view.getContext(), R.layout.configuration_dialog, null);
-		final ListView lv = (ListView) confirmDialog.findViewById(android.R.id.list);
-		AppModeDialog.prepareAppModeView(map, selected, true, 
+		AppModeDialog.prepareAppModeView(map, selected, true,
 				(ViewGroup) confirmDialog.findViewById(R.id.TopBar), true, 
 				new View.OnClickListener() {
 			@Override
@@ -430,9 +440,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 				}
 			}
 		});
-		
-		
-		lv.setOnItemClickListener(new OnItemClickListener() {
+
+
+		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -448,18 +458,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 					recreateControls();
 					listAdapter.notifyDataSetInvalidated();
 				} else if(position == 0) {
+					map.getMapActions().prepareStartOptionsMenu();
+				} else if (position == 1) {
 					mapInfoControls.resetToDefault();
 					recreateControls();
 					listAdapter.notifyDataSetInvalidated();
-				}				
+				}
 			}
 		});
-		lv.setAdapter(listAdapter);
-		b.setView(confirmDialog);
-		final AlertDialog dlg = b.create();
-		// listener.setDialog(dlg);
-		dlg.setCanceledOnTouchOutside(true);
-		dlg.show();
+		listView.setAdapter(listAdapter);
 	}
 	
 	private int themeId = -1;
@@ -610,7 +617,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		configuration.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				openViewConfigureDialog();				
+				map.getMapActions().openViewConfigureDrawer();
 			}
 		});
 		configuration.setImageDrawable(config);

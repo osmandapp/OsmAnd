@@ -477,7 +477,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordControl = new TextInfoWidget(activity, 0, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
 			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
-			mapInfoLayer.getMapInfoControls().registerSideWidget(recordControl, R.drawable.widget_icon_av_inactive,
+			mapInfoLayer.getMapInfoControls().registerSideWidget(recordControl, R.drawable.widget_icon_av_inactive, R.drawable.widget_icon_av_inactive,
 					R.string.map_widget_av_notes, "audionotes", false, 22);
 			mapInfoLayer.recreateControls();
 		}

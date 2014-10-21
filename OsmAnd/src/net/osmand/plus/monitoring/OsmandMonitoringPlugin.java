@@ -95,7 +95,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		monitoringControl = createMonitoringControl(activity, layer.getPaintText(), layer.getPaintSubText());
 		
 		layer.getMapInfoControls().registerSideWidget(monitoringControl,
-				R.drawable.monitoring_rec_big, R.string.map_widget_monitoring, "monitoring", false, 18);
+				R.drawable.monitoring_rec_big, R.drawable.monitoring_rec_big, R.string.map_widget_monitoring, "monitoring", false, 18);
 		layer.recreateControls();
 	}
 

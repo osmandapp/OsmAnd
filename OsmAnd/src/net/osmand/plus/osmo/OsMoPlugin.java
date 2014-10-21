@@ -181,7 +181,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		osmoControl = createOsMoControl(activity, layer.getPaintText(), layer.getPaintSubText());
 		layer.getMapInfoControls().registerSideWidget(osmoControl,
-				R.drawable.mon_osmo_signal_inactive, R.string.osmo_control, "osmo_control", false, 18);
+				R.drawable.mon_osmo_signal_inactive, R.drawable.mon_osmo_signal_inactive, R.string.osmo_control, "osmo_control", false, 18);
 		layer.recreateControls();
 		
 		if(olayer != null) {
