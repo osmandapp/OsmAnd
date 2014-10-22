@@ -132,7 +132,9 @@ public class RendererRegistry {
 	@SuppressWarnings("resource")
 	private InputStream getInputStream(String name) throws FileNotFoundException {
 		InputStream is = null;
-		if(externalRenderers.containsKey(name)){
+		if("default".equalsIgnoreCase(name)) {
+			name = DEFAULT_RENDER;
+		} else if(externalRenderers.containsKey(name)){
 			is = new FileInputStream(externalRenderers.get(name));
 		} else if(internalRenderers.containsKey(name)){
 			is = RenderingRulesStorage.class.getResourceAsStream(internalRenderers.get(name));
