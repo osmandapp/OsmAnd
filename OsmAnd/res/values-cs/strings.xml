@@ -1746,4 +1746,9 @@ s často kladenými otázkami.</string>
     <string name="fav_point_emoticons_message">Jméno oblíbeného bodu bylo změněno na %1$s, aby bylo možné uložit název emotikonu do souboru.</string>
     <string name="speed_limit_exceed">Tolerance překročení rychlosti</string>
 	<string name="speed_limit_exceed_message">Zvolte toleranci překročení povolené rychlosti, po které uslyšíte hlasové varování.</string>
+	<string name="osmo_device_not_found">Zařízení nenalezeno</string>
+    <string name="osmo_no_connection_msg">Služba OsMo není k dispozici:\n- zkontrolujte připojení;\n- zkontrolujte nastavení;\n- podívejte se na náš Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Anonymní uživatel nemůže:\n- vytvářet skupiny;\n- synchronizovat skupiny a zařízení se serverem;\n- manage groups and devices in a private office.</string>
+    <string name="anonymous_user">Anonymní uživatel</string>
+    <string name="logged_as">Přihlášen jako %1$s</string>
 	</resources>
