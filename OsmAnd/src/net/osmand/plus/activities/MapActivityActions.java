@@ -190,7 +190,7 @@ public class MapActivityActions implements DialogProvider {
 							activity.getString(R.string.add_favorite_dialog_favourite_added_template), point.getName()), Toast.LENGTH_SHORT)
 							.show();
 				}
-				if(activity instanceof MapActivity) {
+				if (activity instanceof MapActivity) {
 					((MapActivity) activity).getMapView().refreshMap(true);
 				}
 			}
@@ -370,12 +370,12 @@ public class MapActivityActions implements DialogProvider {
     }
     
     protected void showToast(final String msg){
-    	mapActivity.runOnUiThread(new Runnable(){
+    	mapActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				AccessibleToast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
 			}
-    	});
+		});
     }
     
         
@@ -513,7 +513,7 @@ public class MapActivityActions implements DialogProvider {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				int standardId = adapter.getItemId(which);
+				int standardId = adapter.getElementId(which);
 				OnContextMenuClick click = adapter.getClickAdapter(which);
 				if (click != null) {
 					click.onContextMenuClick(standardId, which, false);
@@ -770,7 +770,7 @@ public class MapActivityActions implements DialogProvider {
 			public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
 				OnContextMenuClick click = cm.getClickAdapter(which);
 				if (click != null) {
-					if (click.onContextMenuClick(cm.getItemId(which), which, false)) {
+					if (click.onContextMenuClick(cm.getElementId(which), which, false)) {
 						mDrawerLayout.closeDrawer(mDrawerList);
 					}
 				} else {
@@ -1196,7 +1196,7 @@ public class MapActivityActions implements DialogProvider {
 				public void onClick(DialogInterface dialog, int which) {
 					OnContextMenuClick clk = qa.getClickAdapter(which);
 					if (clk != null) {
-						clk.onContextMenuClick(qa.getItemId(which), which, false);
+						clk.onContextMenuClick(qa.getElementId(which), which, false);
 					}
 				}
 
@@ -1221,7 +1221,7 @@ public class MapActivityActions implements DialogProvider {
 							onShow.onClick(v);
 						}
 						view.dismiss();
-						qa.getClickAdapter(ki).onContextMenuClick(qa.getItemId(ki), ki, false);
+						qa.getClickAdapter(ki).onContextMenuClick(qa.getElementId(ki), ki, false);
 
 					}
 				});

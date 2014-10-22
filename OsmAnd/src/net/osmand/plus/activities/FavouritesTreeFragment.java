@@ -256,7 +256,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
-//		if (item.getItemId() == EXPORT_ID) {
+//		if (item.getElementId() == EXPORT_ID) {
 //			export();
 //			return true;
 //		} else 

@@ -83,7 +83,7 @@ public class ConfigureMapMenu {
 			}
 			ma.getMapLayers().updateLayers(ma.getMapView());
 			ma.getMapView().refreshMap();
-			return true;
+			return false;
 		}
 	}
 

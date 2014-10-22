@@ -187,7 +187,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		OsmandPlugin.onOptionsMenuActivity(getSherlockActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
-			item = menu.add(0, optionsMenuAdapter.getItemId(j), j + 1, optionsMenuAdapter.getItemName(j));
+			item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
 			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
 			);
 			if (optionsMenuAdapter.getImageId(j, isLightActionBar()) != 0) {
@@ -213,7 +213,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
-			if (itemId == optionsMenuAdapter.getItemId(i)) {
+			if (itemId == optionsMenuAdapter.getElementId(i)) {
 				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(itemId, i, false);
 				return true;
 			}
@@ -479,7 +479,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				OnContextMenuClick clk = adapter.getClickAdapter(which);
 				if (clk != null) {
-					clk.onContextMenuClick(adapter.getItemId(which), which, false);
+					clk.onContextMenuClick(adapter.getElementId(which), which, false);
 				}
 			}
 

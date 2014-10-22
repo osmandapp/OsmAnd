@@ -631,7 +631,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		}
 		TreeSet<Integer> set = new TreeSet<Integer>(Arrays.asList(ids));
 		for(int i =0; i < a.length();) {
-			int itemId = a.getItemId(i);
+			int itemId = a.getElementId(i);
 			if(set.contains(itemId)) {
 				i++;
 			} else {

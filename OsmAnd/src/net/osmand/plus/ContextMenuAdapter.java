@@ -53,7 +53,7 @@ public class ContextMenuAdapter {
 		return items.size();
 	}
 	
-	public int getItemId(int pos){
+	public int getElementId(int pos){
 		return items.get(pos);
 	}
 	
@@ -237,14 +237,14 @@ public class ContextMenuAdapter {
 				if(selectedList.get(position) != -1) {
 					ch.setOnCheckedChangeListener(null);
 					ch.setVisibility(View.VISIBLE);
-					ch.setSelected(selectedList.get(position) > 0);
+					ch.setChecked(selectedList.get(position) > 0);
 					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 						
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 							OnContextMenuClick ca = getClickAdapter(position);
 							if(ca != null) {
-								ca.onContextMenuClick(position, position, isChecked);
+								ca.onContextMenuClick(getElementId(position), position, isChecked);
 							}
 						}
 					});

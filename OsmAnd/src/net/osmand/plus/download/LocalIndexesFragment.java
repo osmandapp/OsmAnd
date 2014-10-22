@@ -10,7 +10,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import android.graphics.Color;
 import android.text.method.LinkMovementMethod;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.*;
@@ -31,15 +30,11 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StatFs;
-import android.text.SpannableString;
-import android.text.TextPaint;
-import android.text.style.ClickableSpan;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -146,7 +141,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				OnContextMenuClick clk = adapter.getClickAdapter(which);
 				if (clk != null) {
-					clk.onContextMenuClick(adapter.getItemId(which), which, false);
+					clk.onContextMenuClick(adapter.getElementId(which), which, false);
 				}
 			}
 
@@ -506,10 +501,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 							: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
 					split.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				}
-				item = split.add(0, optionsMenuAdapter.getItemId(j), j + 1, optionsMenuAdapter.getItemName(j));
+				item = split.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
 				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM );
 			} else {
-				item = menu.add(0, optionsMenuAdapter.getItemId(j), j + 1, optionsMenuAdapter.getItemName(j));
+				item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
 				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM  
 						);
 			}
@@ -530,7 +525,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
-			if (itemId == optionsMenuAdapter.getItemId(i)) {
+			if (itemId == optionsMenuAdapter.getElementId(i)) {
 				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(itemId, i, false);
 				return true;
 			}

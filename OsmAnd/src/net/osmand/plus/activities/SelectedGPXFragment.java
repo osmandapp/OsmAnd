@@ -177,7 +177,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				OnContextMenuClick clk = adapter.getClickAdapter(which);
 				if (clk != null) {
-					clk.onContextMenuClick(adapter.getItemId(which), which, false);
+					clk.onContextMenuClick(adapter.getElementId(which), which, false);
 				}
 			}
 
