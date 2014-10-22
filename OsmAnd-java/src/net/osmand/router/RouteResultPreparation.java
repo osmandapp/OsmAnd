@@ -642,7 +642,7 @@ public class RouteResultPreparation {
 		if (t != null && lanes != null) {
 			t.setLanes(lanes);
 
-			attachTurnLanesData(leftSide, prevSegm, t);
+			t = attachTurnLanesData(leftSide, prevSegm, t);
 		}
 		return t;
 	}
