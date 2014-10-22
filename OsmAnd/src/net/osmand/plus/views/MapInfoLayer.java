@@ -202,7 +202,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		ImageViewWidget compassView = mic.createCompassView(map);
 		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass_dark, R.drawable.widget_compass_light, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, 5);
 		View config = createConfiguration();
-		mapInfoControls.registerTopWidget(config, R.drawable.widget_config_dark, R.drawable.widget_config_light, R.string.map_widget_config, "config", MapWidgetRegistry.RIGHT_CONTROL, 10);
 		// disable monitoring widget
 //		mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.widget_monitoring, R.string.map_widget_monitoring_services,
 //				"monitoring_services", MapWidgetRegistry.LEFT_CONTROL, 12);
@@ -211,8 +210,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerTopWidget(createBackToLocation(mic), R.drawable.widget_backtolocation_dark, R.drawable.widget_backtolocation_light, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, 5);
 		
 		View globus = createLayer();
-		mapInfoControls.registerTopWidget(globus, R.drawable.widget_layer_dark, R.drawable.widget_layer_light, R.string.menu_layers, "layers", MapWidgetRegistry.RIGHT_CONTROL, 15);
-		
+
+
 		topText = mic.createStreetView(app, map, paintText);
 		mapInfoControls.registerTopWidget(topText, R.drawable.street_name_dark, R.drawable.street_name_light, R.string.map_widget_top_text,
 				"street_name", MapWidgetRegistry.MAIN_CONTROL, 100);
