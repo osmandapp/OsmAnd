@@ -831,6 +831,15 @@ public class RouteResultPreparation {
 			derivedTurnType.setLanes(t.getLanes());
 			derivedTurnType.setSkipToSpeak(t.isSkipToSpeak());
 			t = derivedTurnType;
+
+			// Because only the primary turn is displayed, if the turn to be taken is currently set as the secondary turn, then that needs to be switched around.
+			for (int i = 0; i < t.getLanes().length; i++) {
+				if (TurnType.getSecondaryTurn(t.getLanes()[i]) == t.getValue()) {
+					int temp = TurnType.getSecondaryTurn(t.getLanes()[i]);
+					t.setSecondaryTurn(i, TurnType.getPrimaryTurn(t.getLanes()[i]));
+					t.setPrimaryTurn(i, temp);
+				}
+			}
 		}
 
 		return t;
