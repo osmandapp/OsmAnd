@@ -229,7 +229,7 @@ public class ContextMenuAdapter {
 					v.setTag(lid);
 				}
 				TextView tv = (TextView) v.findViewById(R.id.title);
-				tv.setText(getItemName(position));
+				tv.setText(isCategory(position) ? getItemName(position).toUpperCase() : getItemName(position));
 
 				int imageId = getImageId(position, holoLight);
 				if (imageId != 0) {
