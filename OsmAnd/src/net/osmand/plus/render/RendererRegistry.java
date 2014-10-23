@@ -23,7 +23,7 @@ public class RendererRegistry {
 
 	private final static Log log = PlatformUtil.getLog(RendererRegistry.class);
 	
-	public final static String DEFAULT_RENDER = "default";  //$NON-NLS-1$
+	public final static String DEFAULT_RENDER = "OsmAnd";  //$NON-NLS-1$
 	
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
@@ -134,7 +134,8 @@ public class RendererRegistry {
 		InputStream is = null;
 		if("default".equalsIgnoreCase(name)) {
 			name = DEFAULT_RENDER;
-		} else if(externalRenderers.containsKey(name)){
+		} 
+		if(externalRenderers.containsKey(name)){
 			is = new FileInputStream(externalRenderers.get(name));
 		} else if(internalRenderers.containsKey(name)){
 			is = RenderingRulesStorage.class.getResourceAsStream(internalRenderers.get(name));
