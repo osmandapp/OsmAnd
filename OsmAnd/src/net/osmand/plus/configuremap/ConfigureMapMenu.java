@@ -122,6 +122,7 @@ public class ConfigureMapMenu {
 	
 	private void createRenderingAttributeItems(final ContextMenuAdapter adapter, final MapActivity activity) {
 		adapter.item(R.string.map_widget_map_rendering).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		String descr = activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer().getName();
 		adapter.item(R.string.map_widget_renderer).listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
@@ -160,7 +161,7 @@ public class ConfigureMapMenu {
 				bld.show();
 				return false;
 			}
-		}).layout(R.layout.drawer_list_rendering).reg();
+		}).description(descr).layout(R.layout.drawer_list_rendering).reg();
 
 		adapter.item(R.string.map_widget_day_night).description(activity.getMyApplication().getSettings().DAYNIGHT_MODE.get().toHumanString(activity)).listen(new OnContextMenuClick() {
 			@Override
@@ -186,6 +187,7 @@ public class ConfigureMapMenu {
 			}
 		}).layout(R.layout.drawer_list_rendering).reg();
 
+		int scale = (int)(activity.getMyApplication().getSettings().TEXT_SCALE.get() * 100);
 		adapter.item(R.string.text_size).listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
@@ -212,7 +214,7 @@ public class ConfigureMapMenu {
 				b.show();
 				return false;
 			}
-		}).layout(R.layout.drawer_list_rendering).reg();
+		}).description(scale + " %").layout(R.layout.drawer_list_rendering).reg();
 
 		RenderingRulesStorage renderer = activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
@@ -247,6 +249,7 @@ public class ConfigureMapMenu {
 			} else {
 				final OsmandSettings.CommonPreference<String> pref = view.getApplication().getSettings()
 						.getCustomRenderProperty(p.getAttrName());
+				String descr = SettingsActivity.getStringPropertyValue(activity, pref.get());
 				adapter.item(propertyName).listen(new OnContextMenuClick() {
 
 					@Override
@@ -276,7 +279,7 @@ public class ConfigureMapMenu {
 						b.show();
 						return false;
 					}
-				}).layout(R.layout.drawer_list_rendering).reg();
+				}).description(descr).layout(R.layout.drawer_list_rendering).reg();
 			}
 		}
 	}
