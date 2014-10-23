@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import android.widget.*;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
@@ -10,12 +11,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ListAdapter;
-import android.widget.TextView;
 
 public class ContextMenuAdapter {
 	
@@ -36,6 +32,7 @@ public class ContextMenuAdapter {
 	final TIntArrayList layoutIds = new TIntArrayList();
 	final TIntArrayList iconList = new TIntArrayList();
 	final TIntArrayList iconListLight = new TIntArrayList();
+	final ArrayList<String> itemDescription = new ArrayList<String>();
 
 	public ContextMenuAdapter(Context ctx) {
 		this.ctx = ctx;
@@ -64,9 +61,17 @@ public class ContextMenuAdapter {
 	public String getItemName(int pos){
 		return itemNames.get(pos);
 	}
+
+	public String getItemDescr(int pos){
+		return itemDescription.get(pos);
+	}
 	
 	public void setItemName(int pos, String str) {
 		itemNames.set(pos, str);
+	}
+
+	public void setItemDescription(int pos, String str) {
+		itemDescription.set(pos, str);
 	}
 	
 	public int getSelection(int pos) {
@@ -120,6 +125,7 @@ public class ContextMenuAdapter {
 		int layout = -1;
 		boolean cat;
 		int pos = -1;
+		String description = "";
 		private OnContextMenuClick listener;
 
 		private Item() {
@@ -151,6 +157,11 @@ public class ContextMenuAdapter {
 			return this;
 		}
 
+		public Item description(String descr){
+			this.description = descr;
+			return this;
+		}
+
 		public Item listen(OnContextMenuClick l) {
 			this.listener = l;
 			return this;
@@ -163,6 +174,7 @@ public class ContextMenuAdapter {
 			}
 			items.insert(pos, id);
 			itemNames.add(pos, name);
+			itemDescription.add(pos, description);
 			selectedList.insert(pos, selected);
 			layoutIds.insert(pos, layout);
 			iconList.insert(pos, icon);
@@ -219,11 +231,12 @@ public class ContextMenuAdapter {
 				TextView tv = (TextView) v.findViewById(R.id.title);
 				tv.setText(getItemName(position));
 
-				// Put the image on the TextView
-				if (getImageId(position, holoLight) != 0) {
-					tv.setCompoundDrawablesWithIntrinsicBounds(getImageId(position, holoLight), 0, 0, 0);
-				} else {
-					tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_transparent, 0, 0, 0);
+				int imageId = getImageId(position, holoLight);
+				if (imageId != 0) {
+					((ImageView) v.findViewById(R.id.icon)).setImageResource(imageId);
+					v.findViewById(R.id.icon).setVisibility(View.VISIBLE);
+				} else if (v.findViewById(R.id.icon) != null){
+					v.findViewById(R.id.icon).setVisibility(View.GONE);
 				}
 				tv.setCompoundDrawablePadding(padding);
 				
@@ -249,8 +262,13 @@ public class ContextMenuAdapter {
 						}
 					});
 					ch.setVisibility(View.VISIBLE);
-				} else {
+				} else if (ch != null) {
 					ch.setVisibility(View.GONE);
+				}
+
+				String itemDescr = getItemDescr(position);
+				if (v.findViewById(R.id.descr) != null){
+					((TextView)v.findViewById(R.id.descr)).setText(itemDescr);
 				}
 				return v;
 			}

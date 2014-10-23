@@ -91,24 +91,24 @@ public class ConfigureMapMenu {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		LayerMenuListener l = new LayerMenuListener(activity);
-		adapter.item(R.string.layers_category_show).setCategory(true).reg();
+		adapter.item(R.string.layers_category_show).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
 		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).listen(l).reg();
+				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).listen(l).layout(R.layout.drawer_list_layer).reg();
 		adapter.item(R.string.layer_amenity_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0) 
-				.icons(R.drawable.ic_action_text_dark, R.drawable.ic_action_text_light).listen(l).reg();
+				.icons(R.drawable.ic_action_text_dark, R.drawable.ic_action_text_light).listen(l).layout(R.layout.drawer_list_layer).reg();
 		adapter.item(R.string.layer_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0) 
-				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).listen(l).reg();
+				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).listen(l).layout(R.layout.drawer_list_layer).reg();
 		adapter.item(R.string.layer_gpx_layer).selected(
-				app.getSelectedGpxHelper().isShowingAnyGpxFiles()? 1 : 0)
+				app.getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0)
 //				.icons(R.drawable.ic_action_foot_dark, R.drawable.ic_action_foot_light)
 				.icons(R.drawable.ic_action_polygom_dark, R.drawable.ic_action_polygom_light)
-				.listen(l).reg();
-		adapter.item(R.string.layer_transport).selected( settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).listen(l).reg(); 
+				.listen(l).layout(R.layout.drawer_list_layer).reg();
+		adapter.item(R.string.layer_transport).selected(settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0)
+				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).listen(l).layout(R.layout.drawer_list_layer).reg();
 		if(TransportRouteHelper.getInstance().routeIsCalculated()){
 			adapter.item(R.string.layer_transport_route).selected(1)
-				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).listen(l).reg();
+				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).listen(l).layout(R.layout.drawer_list_layer).reg();
 		}
 		
 		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);
@@ -120,8 +120,8 @@ public class ConfigureMapMenu {
 		activity.getMapView().refreshMap(true);
 	}
 	
-	private void createRenderingAttributeItems(ContextMenuAdapter adapter, final MapActivity activity) {
-		adapter.item(R.string.map_widget_map_rendering).setCategory(true).reg();
+	private void createRenderingAttributeItems(final ContextMenuAdapter adapter, final MapActivity activity) {
+		adapter.item(R.string.map_widget_map_rendering).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		adapter.item(R.string.map_widget_renderer).listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
@@ -160,9 +160,9 @@ public class ConfigureMapMenu {
 				bld.show();
 				return false;
 			}
-		}).reg();
+		}).layout(R.layout.drawer_list_rendering).reg();
 
-		adapter.item(R.string.map_widget_day_night).listen(new OnContextMenuClick() {
+		adapter.item(R.string.map_widget_day_night).description(activity.getMyApplication().getSettings().DAYNIGHT_MODE.get().toHumanString(activity)).listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 				final OsmandMapTileView view = activity.getMapView();
@@ -184,7 +184,7 @@ public class ConfigureMapMenu {
 				bld.show();
 				return false;
 			}
-		}).reg();
+		}).layout(R.layout.drawer_list_rendering).reg();
 
 		adapter.item(R.string.text_size).listen(new OnContextMenuClick() {
 			@Override
@@ -193,7 +193,7 @@ public class ConfigureMapMenu {
 				AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
 				// test old descr as title
 				b.setTitle(R.string.text_size);
-				final Float[] txtValues = new Float[] { 0.75f, 1f, 1.25f, 1.5f, 2f, 3f };
+				final Float[] txtValues = new Float[]{0.75f, 1f, 1.25f, 1.5f, 2f, 3f};
 				int selected = -1;
 				final String[] txtNames = new String[txtValues.length];
 				for (int i = 0; i < txtNames.length; i++) {
@@ -212,7 +212,7 @@ public class ConfigureMapMenu {
 				b.show();
 				return false;
 			}
-		}).reg();
+		}).layout(R.layout.drawer_list_rendering).reg();
 
 		RenderingRulesStorage renderer = activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
@@ -223,7 +223,7 @@ public class ConfigureMapMenu {
 	
 	private void createCustomRenderingProperties(RenderingRulesStorage renderer, ContextMenuAdapter adapter , final MapActivity activity){
 		final OsmandMapTileView view = activity.getMapView();
-		adapter.item(R.string.map_widget_vector_attributes).setCategory(true).reg();
+		adapter.item(R.string.map_widget_vector_attributes).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		final OsmandApplication app = view.getApplication();
 		List<RenderingRuleProperty> customRules = renderer.PROPS.getCustomRules();
 		for (final RenderingRuleProperty p : customRules) {
@@ -236,19 +236,19 @@ public class ConfigureMapMenu {
 				final OsmandSettings.CommonPreference<Boolean> pref = view.getApplication().getSettings()
 						.getCustomRenderBooleanProperty(p.getAttrName());
 				adapter.item(propertyName).listen(new OnContextMenuClick() {
-					
+
 					@Override
 					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						pref.set(!pref.get());
 						refreshMapComplete(activity);
 						return false;
 					}
-				}).selected(pref.get() ? 1 : 0).reg();
+				}).selected(pref.get() ? 1 : 0).layout(R.layout.drawer_list_rendering).reg();
 			} else {
 				final OsmandSettings.CommonPreference<String> pref = view.getApplication().getSettings()
 						.getCustomRenderProperty(p.getAttrName());
 				adapter.item(propertyName).listen(new OnContextMenuClick() {
-					
+
 					@Override
 					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
@@ -276,7 +276,7 @@ public class ConfigureMapMenu {
 						b.show();
 						return false;
 					}
-				}).reg();
+				}).layout(R.layout.drawer_list_rendering).reg();
 			}
 		}
 	}

@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:layout_marginLeft="16dp">
-    <TextView android:id="@+id/header"
+    <TextView android:id="@+id/title"
               android:layout_gravity="center_vertical"
               android:layout_weight="1"
               android:layout_width="0dp"
