@@ -1985,4 +1985,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="speed_limit_exceed">Toleranz für Tempolimit</string>
 	<string name="speed_limit_exceed_message">Schwellenwert für Warnung bei Überschreiten der Höchstgeschwindigkeit.</string>
 	<string name="osmo_device_not_found">Gerät wurde nicht gefunden</string>
+    <string name="osmo_no_connection_msg">OsMo-Dienst ist nicht verfügbar:\n- bitte Verbindung prüfen;\n- bitte Einstellungen prüfen;\n- ggf. Meldung auf Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user">Anonymer Benutzer</string>
+    <string name="logged_as">angemeldet als %1$s</string>
+	<string name="anonymous_user_hint">Anynyme Benutzer können nicht::\n- Gruppen bilden;\n- Synchronisieren von Gruppen und Geräten auf dem Server;\n- Verwalten von Gruppen und Geräten im Privatbereich.</string>
     </resources>
