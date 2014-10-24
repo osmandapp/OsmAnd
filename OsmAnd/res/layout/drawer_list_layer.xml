@@ -1,30 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="48dp"
-              android:layout_marginLeft="16dp"
-              android:layout_marginRight="16dp">
-    <ImageView android:id="@+id/icon"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"/>
-    <LinearLayout android:layout_marginLeft="8dp"
-                  android:layout_width="0dp"
-                  android:layout_weight="1"
-                  android:layout_height="wrap_content">
-        <TextView android:id="@+id/title"
-                  android:textSize="18sp"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"/>
-        <TextView android:id="@+id/descr"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"/>
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="48dp"
+    android:orientation="horizontal"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_vertical"
+        tools:src="@drawable/ic_action_info_dark" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            tools:text="Some title text" />
+
+        <TextView
+            android:id="@+id/descr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
-    <CheckBox android:id="@+id/check_item"
-              android:focusable="false"
-              android:layout_marginLeft="11dp"
-              android:layout_marginRight="8dp"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+
+    <CheckBox
+        android:id="@+id/check_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:focusable="false"
+        android:layout_gravity="center_vertical" />
+
 </LinearLayout>
