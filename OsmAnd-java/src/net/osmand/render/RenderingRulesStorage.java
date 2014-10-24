@@ -48,7 +48,7 @@ public class RenderingRulesStorage {
 	public TIntObjectHashMap<RenderingRule>[] tagValueGlobalRules = new TIntObjectHashMap[LENGTH_RULES];
 	
 	protected Map<String, RenderingRule> renderingAttributes = new LinkedHashMap<String, RenderingRule>();
-	protected Map<String, String> renderingConstants= new LinkedHashMap<String, String>();
+	protected Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
 	
 	private String renderingName;
 	private String internalRenderingName;
@@ -335,10 +335,13 @@ public class RenderingRulesStorage {
 				String vl = parser.getAttributeValue(i);
 				if (vl != null && vl.startsWith("$")) {
 					String cv = vl.substring(1);
-					if (!renderingConstants.containsKey(cv)) {
-						throw new IllegalStateException("Rendering constant '" + cv + "' was not specified.");
+					if (!renderingConstants.containsKey(cv) &&
+							!renderingAttributes.containsKey(cv)) {
+						throw new IllegalStateException("Rendering constant or attribute '" + cv + "' was not specified.");
 					}
-					vl = renderingConstants.get(cv);
+					if(renderingConstants.containsKey(cv)){
+						vl = renderingConstants.get(cv);
+					}
 				}
 				m.put(name, vl);
 			}
@@ -470,7 +473,7 @@ public class RenderingRulesStorage {
 		};
 		storage.parseRulesFromXmlInputStream(is, resolver);
 		
-		printAllRules(storage);
+//		printAllRules(storage);
 		testSearch(storage);
 	}
 
@@ -479,22 +482,22 @@ public class RenderingRulesStorage {
 		//		int count = 100000;
 		//		for (int i = 0; i < count; i++) {
 					RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
-					searchRequest.setStringFilter(storage.PROPS.R_TAG, "natural");
-					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "tree");
-					searchRequest.setStringFilter(storage.PROPS.R_ADDITIONAL, "leaf_type=broadleaved");
+					searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
+					searchRequest.setStringFilter(storage.PROPS.R_VALUE, "primary");
+//					searchRequest.setStringFilter(storage.PROPS.R_ADDITIONAL, "leaf_type=broadleaved");
 //					 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
-					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 18);
-					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 18);
-					//	searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
-					// searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
-					for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
-						if (customProp.isBoolean()) {
-							searchRequest.setBooleanFilter(customProp, false);
-						} else {
-							searchRequest.setStringFilter(customProp, "");
-						}
-					}
-					boolean res = searchRequest.search(POINT_RULES);
+					searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 9);
+					searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 9);
+//						searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
+//					for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
+//						if (customProp.isBoolean()) {
+//							searchRequest.setBooleanFilter(customProp, false);
+//						} else {
+//							searchRequest.setStringFilter(customProp, "");
+//						}
+//					}
+					searchRequest.setBooleanFilter(storage.PROPS.get("noPolygons"), true);
+					boolean res = searchRequest.search(LINE_RULES);
 					System.out.println("Result " + res);
 					printResult(searchRequest,  System.out);
 		//		}
