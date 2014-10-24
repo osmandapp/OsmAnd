@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="#fffc00"
-              android:layout_marginLeft="16dp">
+              android:paddingLeft="16dp">
     <TextView android:id="@+id/title"
               android:layout_weight="1"
               android:layout_width="0dp"
@@ -15,6 +15,7 @@
               android:capitalize="characters"
               android:inputType="textCapCharacters"
               android:textSize="14sp"
+              android:letterSpacing="1.0"
               android:ellipsize="end"
               android:background="#ff0202"
               android:gravity="left|bottom"

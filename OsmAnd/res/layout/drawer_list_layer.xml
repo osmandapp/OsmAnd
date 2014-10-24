@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="48dp"
               android:paddingLeft="16dp"
-              android:paddingRight="16dp">
+              android:paddingRight="8dp">
     <ImageView android:id="@+id/icon"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"/>
