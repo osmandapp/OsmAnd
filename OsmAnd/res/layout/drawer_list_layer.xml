@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="48dp"
               android:paddingLeft="16dp"
-              android:paddingRight="8dp">
+              android:paddingRight="16dp">
     <ImageView android:id="@+id/icon"
                android:layout_marginTop="8dp"
                android:layout_marginBottom="8dp"
@@ -26,7 +26,6 @@
     <CheckBox android:id="@+id/check_item"
               android:focusable="false"
               android:layout_marginLeft="11dp"
-              android:layout_marginRight="8dp"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"/>
 </LinearLayout>
