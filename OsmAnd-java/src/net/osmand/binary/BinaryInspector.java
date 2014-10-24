@@ -61,13 +61,13 @@ public class BinaryInspector {
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
 				//"-vpoi",
-				"-vmap", "-vmapobjects", 
+//				"-vmap", "-vmapobjects", 
 //				"-vrouting",
 //				"-vaddress", "-vcities", "-vstreets", "-vstreetgroups","-vbuildings", 
 				//"-zoom=16",
 				//"-bbox=4,55,7,50", 
-				"/home/victor/projects/osmand/osm-gen/Map.obf"
-//					"/home/victor/projects/osmand/osm-gen/Netherlands_europe.obf"
+//				"/home/victor/projects/osmand/osm-gen/Map.obf"
+					"/home/victor/projects/osmand/osm-gen/Ukraine_europe.obf"
 //				 "/home/victor/projects/osmand/osm-gen/World_basemap_2_b.obf___"
 //					"/home/victor/projects/osmand/osm-gen/World_basemap_2.obf__"
 					});
