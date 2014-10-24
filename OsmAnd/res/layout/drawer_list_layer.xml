@@ -7,9 +7,11 @@
               android:paddingLeft="16dp"
               android:paddingRight="8dp">
     <ImageView android:id="@+id/icon"
+               android:layout_marginTop="8dp"
+               android:layout_marginBottom="8dp"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"/>
-    <LinearLayout android:layout_marginLeft="8dp"
+    <LinearLayout android:layout_marginLeft="11dp"
                   android:layout_width="0dp"
                   android:layout_weight="1"
                   android:layout_height="wrap_content">
