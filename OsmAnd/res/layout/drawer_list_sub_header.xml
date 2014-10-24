@@ -4,7 +4,7 @@
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:layout_marginLeft="16dp">
+              android:layout_marginLeft="16dp"/>
     <TextView android:id="@+id/title"
               android:layout_gravity="center_vertical"
               android:layout_weight="1"
