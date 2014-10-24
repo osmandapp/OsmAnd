@@ -10,13 +10,13 @@
               android:layout_weight="1"
               android:layout_width="0dp"
               android:layout_marginLeft="8dp"
-              android:layout_marginTop="21dp"
+              android:layout_marginTop="16dp"
               android:layout_marginBottom="9dp"
-              android:maxLines="2"
               android:capitalize="characters"
               android:inputType="textCapCharacters"
               android:textSize="14sp"
               android:ellipsize="end"
               android:background="#ff0202"
               android:layout_height="40dp"/>
+              <!-- android:maxLines="2" -->
 </LinearLayout>
