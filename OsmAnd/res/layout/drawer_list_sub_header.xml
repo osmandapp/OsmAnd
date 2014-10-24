@@ -15,7 +15,6 @@
               android:capitalize="characters"
               android:inputType="textCapCharacters"
               android:textSize="14sp"
-              android:letterSpacing="1.0"
               android:ellipsize="end"
               android:background="#ff0202"
               android:gravity="left|bottom"
