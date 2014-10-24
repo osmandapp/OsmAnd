@@ -17,6 +17,7 @@
               android:textSize="14sp"
               android:ellipsize="end"
               android:background="#ff0202"
+              android:gravity="left|bottom"
               android:layout_height="40dp"/>
               <!-- android:maxLines="2" -->
 </LinearLayout>
