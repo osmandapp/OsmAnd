@@ -650,7 +650,39 @@ public class WaypointHelper {
 		public LocationPoint getPoint() {
 			return point;
 		}
-		
+
+
+		public int getDrawableId(Context uiCtx) {
+			if(type == POI) {
+				Amenity amenity = ((AmenityLocationPoint) point).a;
+				StringBuilder tag = new StringBuilder();
+				StringBuilder value = new StringBuilder();
+				MapRenderingTypes.getDefault().getAmenityTagValue(amenity.getType(), amenity.getSubType(),
+						tag, value);
+				if(RenderingIcons.containsBigIcon(tag + "_" + value)) {
+					return RenderingIcons.getBigIconResourceId(tag + "_" + value);
+				} else if(RenderingIcons.containsBigIcon(value.toString())) {
+					return RenderingIcons.getBigIconResourceId(value.toString());
+				}
+				return 0;
+			} else if(type == TARGETS) {
+				return !((TargetPoint)point).intermediate? R.drawable.list_destination:
+								R.drawable.list_intermediate;
+			} else if(type == FAVORITES || type == WAYPOINTS) {
+				//return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
+				return 0;
+			} else if(type == ALARMS) {
+				//TODO: Looks like this does not work yet, not sure why:
+				if(RenderingIcons.containsBigIcon("list_" + ((AlarmInfo) point).getType().toString().toLowerCase())) {
+					return RenderingIcons.getBigIconResourceId("list_" + ((AlarmInfo) point).getType().toString().toLowerCase());
+				} else {
+					return 0;
+				}
+			} else {
+				return 0;
+			}
+		}
+
 		public Drawable getDrawable(Context uiCtx) {
 			if(type == POI) {
 				Amenity amenity = ((AmenityLocationPoint) point).a;

@@ -14,7 +14,19 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class ContextMenuAdapter {
-	
+
+	public void clearAll() {
+		items.clear();
+		isCategory.clear();
+		itemNames.clear();
+		listeners.clear();
+		selectedList.clear();
+		layoutIds.clear();
+		iconList.clear();
+		iconListLight.clear();
+		itemDescription.clear();
+	}
+
 	public interface OnContextMenuClick {
 		//boolean return type needed to desribe if drawer needed to be close or not
 		public boolean onContextMenuClick(int itemId, int pos, boolean isChecked);
@@ -24,6 +36,7 @@ public class ContextMenuAdapter {
 	private View anchor;
 	private int defaultLayoutId = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ?
 			R.layout.list_menu_item : R.layout.list_menu_item_native;
+	private ArrayAdapter listAdapter;
 	final TIntArrayList items = new TIntArrayList();
 	final TIntArrayList isCategory = new TIntArrayList();
 	final ArrayList<String> itemNames = new ArrayList<String>();
@@ -68,6 +81,12 @@ public class ContextMenuAdapter {
 	
 	public void setItemName(int pos, String str) {
 		itemNames.set(pos, str);
+	}
+
+	public void notifyDataSetChanged(){
+		if (listAdapter != null){
+			listAdapter.notifyDataSetChanged();
+		}
 	}
 
 	public void setItemDescription(int pos, String str) {
@@ -127,6 +146,7 @@ public class ContextMenuAdapter {
 		int pos = -1;
 		String description = "";
 		private OnContextMenuClick listener;
+		boolean enabled = false;
 
 		private Item() {
 		}
@@ -188,6 +208,10 @@ public class ContextMenuAdapter {
 			return this;
 		}
 
+		public Item enabled(boolean checked) {
+			this.enabled = checked;
+			return this;
+		}
 	}
 	
 	public String[] getItemNames() {
@@ -217,7 +241,7 @@ public class ContextMenuAdapter {
 	public ListAdapter createListAdapter(final Activity activity, final boolean holoLight) {
 		final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
 		final int layoutId = defaultLayoutId;
-		ListAdapter listadapter = new ArrayAdapter<String>(activity, layoutId, R.id.title,
+		listAdapter = new ArrayAdapter<String>(activity, layoutId, R.id.title,
 				getItemNames()) {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
@@ -246,25 +270,50 @@ public class ContextMenuAdapter {
 					tv.setTypeface(null);
 				}
 
-				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-				if(selectedList.get(position) != -1) {
-					ch.setOnCheckedChangeListener(null);
-					ch.setVisibility(View.VISIBLE);
-					ch.setChecked(selectedList.get(position) > 0);
-					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-						
-						@Override
-						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							OnContextMenuClick ca = getClickAdapter(position);
-							if(ca != null) {
-								ca.onContextMenuClick(getElementId(position), position, isChecked);
+				if (v.findViewById(R.id.check_item) instanceof CheckBox){
+					final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
+
+					if(selectedList.get(position) != -1) {
+						ch.setOnCheckedChangeListener(null);
+						ch.setVisibility(View.VISIBLE);
+						ch.setChecked(selectedList.get(position) > 0);
+						ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+							@Override
+							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+								OnContextMenuClick ca = getClickAdapter(position);
+								if(ca != null) {
+									ca.onContextMenuClick(getElementId(position), position, isChecked);
+								}
 							}
-						}
-					});
-					ch.setVisibility(View.VISIBLE);
-				} else if (ch != null) {
-					ch.setVisibility(View.GONE);
+						});
+						ch.setVisibility(View.VISIBLE);
+					} else if (ch != null) {
+						ch.setVisibility(View.GONE);
+					}
+				} else if (v.findViewById(R.id.check_item) instanceof Switch) {
+					final Switch ch = (Switch) v.findViewById(R.id.check_item);
+
+					if(selectedList.get(position) != -1) {
+						ch.setOnCheckedChangeListener(null);
+						ch.setVisibility(View.VISIBLE);
+						ch.setChecked(selectedList.get(position) > 0);
+						ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+							@Override
+							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+								OnContextMenuClick ca = getClickAdapter(position);
+								if(ca != null) {
+									ca.onContextMenuClick(getElementId(position), position, isChecked);
+								}
+							}
+						});
+						ch.setVisibility(View.VISIBLE);
+					} else if (ch != null) {
+						ch.setVisibility(View.GONE);
+					}
 				}
+
 
 				String itemDescr = getItemDescr(position);
 				if (v.findViewById(R.id.descr) != null){
@@ -273,7 +322,7 @@ public class ContextMenuAdapter {
 				return v;
 			}
 		};
-		return listadapter;
+		return listAdapter;
 	}
 
 	

@@ -898,8 +898,8 @@ public class MapActivityActions implements DialogProvider {
 							if (getMyApplication().getWaypointHelper().isRouteCalculated()) {
 
 								final List<WaypointHelper.LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
-								ArrayAdapter<Object> adapter = waypointDialogHelper.getWaypointsAdapter(app.getMapActivity(), deletedPoints);
-								mDrawerList.setAdapter(adapter);
+								ContextMenuAdapter cm = waypointDialogHelper.setListAdapter(app.getMapActivity(), mDrawerList, deletedPoints);
+
 								return false;
 							} else {
 								openIntermediatePointsDialog();
