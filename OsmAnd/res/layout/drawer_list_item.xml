@@ -22,15 +22,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-<<<<<<< HEAD
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="11dp"
-=======
-            android:layout_marginBottom="13dp"
->>>>>>> 038d2369a927dadfc3ba9a7e9d812aee43f855d7
             tools:text="Some title text" />
 
     <CheckBox
