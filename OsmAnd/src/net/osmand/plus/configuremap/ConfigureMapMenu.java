@@ -27,8 +27,8 @@ public class ConfigureMapMenu {
 
 	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(ma);
+		adapter.setDefaultLayoutId(R.layout.drawer_list_item);
 		adapter.item(R.string.configure_map).icons(R.drawable.ic_back_drawer_dark, R.drawable.ic_back_drawer_white)
-				.layout(R.layout.drawer_list_header)
 				.listen(new OnContextMenuClick() {
 
 					@Override
@@ -37,7 +37,7 @@ public class ConfigureMapMenu {
 						return false;
 					}
 				}).reg();
-		adapter.setDefaultLayoutId(R.layout.drawer_list_item);
+		
 		createLayersItems(adapter, ma);
 		createRenderingAttributeItems(adapter, ma);
 		return adapter;

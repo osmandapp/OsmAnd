@@ -17,4 +17,5 @@
               android:textSize="14sp"
               android:ellipsize="end"
               android:gravity="left|bottom"/>
+x`              <!-- android:maxLines="2" -->
 </LinearLayout>
