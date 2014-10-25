@@ -191,6 +191,9 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	public long[] getImpassableRoadIds() {
+		if(impassableRoads == null) {
+			return new long[0];
+		}
 		return impassableRoads.toArray();
 	}
 	
