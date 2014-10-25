@@ -284,13 +284,14 @@ public class ContextMenuAdapter {
 						ch.setOnCheckedChangeListener(null);
 						ch.setVisibility(View.VISIBLE);
 						ch.setChecked(selectedList.get(position) > 0);
+						final ArrayAdapter<String> la = this;
 						ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 							@Override
 							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 								OnContextMenuClick ca = getClickAdapter(position);
 								if(ca != null) {
-									ca.onContextMenuClick(null, getElementId(position), position, isChecked);
+									ca.onContextMenuClick(la, getElementId(position), position, isChecked);
 								}
 							}
 						});

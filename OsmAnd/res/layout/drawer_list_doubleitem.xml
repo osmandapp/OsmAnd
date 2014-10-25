@@ -10,9 +10,7 @@
     <LinearLayout android:layout_width="0dp"
                   android:layout_weight="1"
                   android:orientation="horizontal"
-                  android:layout_height="32dp"
-                  android:layout_marginTop="8dp"
-                  android:layout_marginBottom="8dp">
+                  android:layout_height="48dp">
         <TextView android:id="@+id/title"
                   android:textSize="18sp"
                   android:layout_width="wrap_content"

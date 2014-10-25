@@ -768,7 +768,7 @@ public class MapActivityActions implements DialogProvider {
 		final ArrayAdapter<?> listAdapter =
 				cm.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContentMenu());
 		mDrawerList.setAdapter(listAdapter);
-		mDrawerList.setDivider(mapActivity.getResources().getDrawable(R.drawable.drawer_shadow));
+		mDrawerList.setDivider(mapActivity.getResources().getDrawable(R.drawable.drawer_divider));
 		mDrawerList.setBackgroundColor(cm.getBackgroundColor(mapActivity, getMyApplication().getSettings().isLightContentMenu()));
 		mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
