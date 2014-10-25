@@ -1673,4 +1673,7 @@
     <string name="traffic_warning_speed_camera">Κάμερα ταχύτητας</string>
     <string name="text_size_descr">Ορίστε το μέγεθος του κειμένου στο χάρτη.</string>
     <string name="text_size">Μέγεθος κειμένου</string>
-    </resources>
+    <string name="osmo_device_not_found">Η συσκευή δεν βρέθηκε</string>
+    <string name="anonymous_user">Ανώνυμος χρήστης</string>
+    <string name="logged_as">Συνδεδεμένος ως %1$s</string>
+	</resources>

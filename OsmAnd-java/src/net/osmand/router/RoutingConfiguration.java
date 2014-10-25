@@ -1,12 +1,17 @@
 package net.osmand.router;
 
+import gnu.trove.set.hash.TLongHashSet;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
 import net.osmand.PlatformUtil;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RouteAttributeContext;
 import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
@@ -45,12 +50,18 @@ public class RoutingConfiguration {
 	public float recalculateDistance = 10000f;
 	
 
-
 	public static class Builder {
 		// Design time storage
 		private String defaultRouter = "";
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<String, GeneralRouter>();
 		private Map<String, String> attributes = new LinkedHashMap<String, String>();
+		private TLongHashSet impassableRoadIds = new TLongHashSet();
+		private List<RouteDataObject> impassableRoads = new ArrayList<RouteDataObject>();  
+		
+		// Example
+//		{
+//			impassableRoadIds.add(23000069L);
+//		}
 
 		public RoutingConfiguration build(String router, int memoryLimitMB) {
 			return build(router, null, memoryLimitMB, null);
@@ -76,6 +87,7 @@ public class RoutingConfiguration {
 			i.initialDirection = direction;
 			i.recalculateDistance = parseSilentFloat(getAttribute(i.router, "recalculateDistanceHelp"), i.recalculateDistance) ;
 			i.heuristicCoefficient = parseSilentFloat(getAttribute(i.router, "heuristicCoefficient"), i.heuristicCoefficient);
+			i.router.addImpassableRoads(impassableRoadIds);
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
 			int desirable = parseSilentInt(getAttribute(i.router, "memoryLimitInMB"), 0);
 			if(desirable != 0) {
@@ -91,6 +103,21 @@ public class RoutingConfiguration {
 			
 			return i;
 		}
+		
+
+		public List<RouteDataObject> getImpassableRoads() {
+			return impassableRoads;
+		}
+		
+		public TLongHashSet getImpassableRoadIds() {
+			return impassableRoadIds;
+		}
+		
+		public void addImpassableRoad(RouteDataObject r) {
+			impassableRoadIds.add(r.id);
+			impassableRoads.add(r);
+		}
+		
 		
 		private String getAttribute(VehicleRouter router, String propertyName) {
 			if (router.containsAttribute(propertyName)) {

@@ -134,7 +134,7 @@ public class RendererRegistry {
 		InputStream is = null;
 		if("default".equalsIgnoreCase(name)) {
 			name = DEFAULT_RENDER;
-		}
+		} 
 		if(externalRenderers.containsKey(name)){
 			is = new FileInputStream(externalRenderers.get(name));
 		} else if(internalRenderers.containsKey(name)){

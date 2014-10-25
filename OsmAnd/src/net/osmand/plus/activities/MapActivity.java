@@ -68,6 +68,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewStub;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -139,8 +140,8 @@ public class MapActivity extends AccessibleActivity  {
 		parseLaunchIntentLocation();
 		
 		if(settings.USE_NATIVE_RENDER.get() && NativeQtLibrary.isInit()) {
-			glSurfaceView = (GLSurfaceView) findViewById(R.id.glSurfaceView);
-			glSurfaceView.setVisibility(View.VISIBLE);
+			ViewStub stub = (ViewStub) findViewById(R.id.glSurfaceStub);
+			glSurfaceView = (GLSurfaceView) stub.inflate();
 			OsmAndMapLayersView ml = (OsmAndMapLayersView) findViewById(R.id.MapLayersView);
 			ml.setVisibility(View.VISIBLE);
 			NativeQtLibrary.initView(glSurfaceView);

@@ -289,15 +289,14 @@
 \n\nPer ricevere indicazioni partendo da un punto diverso alla tua posizione attuale, seleziona il punto voluto sulla mappa e scegli \'Indicazioni da\'.
 \n\nSe usi \'Indicazioni da\' insieme ad \'Avvia navigazione\', OsmAnd passerà alla tua posizione attuale on appena essa sarà disponibile (questo modo è stato studiato proprio per permettere di avviare immediatamente la navigazione ancor prima che la posizione sia stata individuata), mentre \'Indicazioni da\' insieme a \'Mostra percorso\' calcola il percorso da un punto arbitrario senza effettuare alcun aggiornamento. "</string>
   <string name="tip_search">Ricerca</string>
-  <string name="tip_search_t">Puoi cercare i luoghi direttamente sulla mappa attraverso \'Utilizza la posizione\' → \'Cerca nelle vicinanze\', oppure andando in \'Menu\' → \'Ricerca\'.
-		\n\nLa schermata di ricerca fornisce varie schede per effettuare ricerche
-		\n\tper indirizzo
-		\n\tdalle coordinate
-		\n\tda un PDI (dal tipo o dal nome)
-		\n\tdalla tua cronologia ricerche
-		\n\toppure fra i tuoi preferiti.
-		\n\nPer ogni risultato un menù contestuale permetterà di scegliere tra \'Indicazioni\' o \'Visualizza nella mappa\', etc.
-	</string>
+  <string name="tip_search_t">"Puoi cercare i luoghi direttamente sulla mappa attraverso \'Utilizza la posizione\' → \'Cerca nelle vicinanze\', oppure andando in \'Menu\' → \'Ricerca\'.
+\n\nLa schermata di ricerca fornisce varie schede per effettuare ricerche
+\n\tper indirizzo
+\n\tdalle coordinate
+\n\tda un PDI (dal tipo o dal nome)
+\n\tdalla tua cronologia ricerche
+\n\toppure fra i tuoi preferiti.
+\n\nPer ogni risultato un menù contestuale permetterà di scegliere tra \'Indicazioni per\' o \'Visualizza nella mappa\', etc. "</string>
   <string name="tip_map_context_menu">Menu \'Utilizza la posizione\'</string>
   <string name="tip_map_context_menu_t">Il menu contestuale \'Utilizza la posizione…\' mostra tutte le azioni possibili per un punto (posizione).
 		\n\nViene visualizzato selezionando a lungo sulla mappa, premendo il pulsante trackball o selezionando \'Menù\' → \'Utilizza la posizione…\' (gli ultimi due modi prendono il centro della mappa come riferimento).
@@ -1661,7 +1660,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="routing_attr_avoid_motorway_name">Evita le autostrade</string>
 	<string name="routing_attr_avoid_motorway_description">Evita le autostrade</string>
 	<string name="routing_attr_weight_name">Limite di peso</string>
-	<string name="routing_attr_weight_description">Specifica il limite di peso del veicolo</string>
+	<string name="routing_attr_weight_description">Specifica il peso del veicolo permesso sul percorso</string>
     <string name="select_gpx">Scegli GPX…</string>
     <string name="route_descr_select_destination">Scegli la destinazione</string>
     <string name="route_descr_select_on_map">Scegli sulla mappa…</string>
@@ -1914,7 +1913,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="local_map_names">Nomi locali</string>
     <string name="lang_sw">Swahili</string>
     <string name="forward">Avanti</string>
-    <string name="home">Home</string>
+    <string name="home">Casa</string>
     <string name="live_monitoring_m_descr">Invia il tracciamento a un specifico servizio web se la registrazione GPX è abilitata.</string>
 	<string name="live_monitoring_m">Tracciamento online (GPX richiesto)</string>
     <string name="live_monitoring_start">Avvia il tracciamento online</string>
@@ -1941,12 +1940,12 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_specify_tracker_id">Per favore specifica l\'id</string>
     <string name="continue_navigation">Prosegui la navigazione</string>
     <string name="pause_navigation">Metti in pausa la navigazione</string>
-	<string name="rendering_attr_alpineHiking_name">Vista escursionismo alpino</string>
+	<string name="rendering_attr_alpineHiking_name">Scala escursionismo alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Disegna i sentieri in base alla scala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Strato simboli escursionistici</string>
     <string name="rendering_attr_osmcTraces_description">Disegna i percorsi in base alle tracce OSMC</string>
     
-	<string name="rendering_attr_coloredBuildings_name">Edifici colorati</string>
+	<string name="rendering_attr_coloredBuildings_name">Edifici colorati per tipologia</string>
     <string name="arrival_distance_factor_early">Presto</string>
     <string name="arrival_distance_factor_normally">Normale</string>
     <string name="arrival_distance_factor_late">Tardi</string>

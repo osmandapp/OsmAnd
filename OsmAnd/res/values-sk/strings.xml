@@ -2004,4 +2004,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="print_route">Vytlačiť trasu</string>
     <string name="speed_limit_exceed">Tolerancia prekročenia povolenej rýchlosti</string>
 	<string name="speed_limit_exceed_message">Zvoľte toleranciu prekročenia povolenej rýchlosti, po ktorej dostanete hlasové oznámenie.</string>
-	</resources>
+	<string name="osmo_device_not_found">Zariadenie sa nenašlo</string>
+    <string name="anonymous_user">Anonymný používateľ</string>
+    <string name="logged_as">Prihlásený ako %1$s</string>
+	<string name="osmo_no_connection_msg">Služba OsMo nie je dostupná:\n- skontrolujte pripojenie;\n- skontrolujte nastavenie;\n- pozrite na náš Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Anonymný používateľ nemôže:\n- vytvárať skupiny;\n- synchronizovať skupiny a zariadenia so serverom;\n- spravovať skupiny a zariadenia v súkromnej kancelárii.</string>
+    </resources>
