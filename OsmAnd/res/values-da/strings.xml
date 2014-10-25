@@ -1840,4 +1840,6 @@ Nogle af de centrale funktioner:
     <string name="anonymous_user_hint">En anonym bruger kan ikke:\n- oprette grupper;\n- synkronisere grupper og enheder med serveren;\n- administrere grupper og enheder i et privat kontor.</string>
     <string name="anonymous_user">Anonym bruger</string>
     <string name="logged_as">Logget ind som %1$s</string>
-	</resources>
+	<string name="configure_map">Konfigurer kort</string>
+    <string name="search_radius_proximity">I nærheden af</string>
+    </resources>
