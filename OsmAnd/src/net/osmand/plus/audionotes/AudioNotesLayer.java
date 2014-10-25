@@ -26,6 +26,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvider {
@@ -118,7 +119,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 			final Recording r = (Recording) o;
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.recording_context_menu_play ||
 							itemId == R.string.recording_context_menu_show) {
 						plugin.playRecording(view.getContext(), r);

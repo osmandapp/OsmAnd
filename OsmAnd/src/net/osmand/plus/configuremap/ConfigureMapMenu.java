@@ -21,6 +21,7 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 public class ConfigureMapMenu {
@@ -32,7 +33,7 @@ public class ConfigureMapMenu {
 				.listen(new OnContextMenuClick() {
 
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						ma.getMapActions().prepareStartOptionsMenu();
 						return false;
 					}
@@ -61,7 +62,7 @@ public class ConfigureMapMenu {
 		}
 
 		@Override
-		public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+		public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 			OsmandSettings settings = ma.getMyApplication().getSettings();
 			if (itemId == R.string.layer_poi) {
 				if (isChecked) {
@@ -127,7 +128,7 @@ public class ConfigureMapMenu {
 		String descr = activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer().getName();
 		adapter.item(R.string.map_widget_renderer).listen(new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 				bld.setTitle(R.string.renderers);
 				final OsmandApplication app = activity.getMyApplication();
@@ -167,7 +168,7 @@ public class ConfigureMapMenu {
 
 		adapter.item(R.string.map_widget_day_night).description(activity.getMyApplication().getSettings().DAYNIGHT_MODE.get().toHumanString(activity)).listen(new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				final OsmandMapTileView view = activity.getMapView();
 				AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 				bld.setTitle(R.string.daynight);
@@ -192,7 +193,7 @@ public class ConfigureMapMenu {
 		int scale = (int)(activity.getMyApplication().getSettings().TEXT_SCALE.get() * 100);
 		adapter.item(R.string.text_size).listen(new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				final OsmandMapTileView view = activity.getMapView();
 				AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
 				// test old descr as title
@@ -242,7 +243,7 @@ public class ConfigureMapMenu {
 				adapter.item(propertyName).listen(new OnContextMenuClick() {
 
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						pref.set(!pref.get());
 						refreshMapComplete(activity);
 						return false;
@@ -255,7 +256,7 @@ public class ConfigureMapMenu {
 				adapter.item(propertyName).listen(new OnContextMenuClick() {
 
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
 						// test old descr as title
 						b.setTitle(propertyDescr);

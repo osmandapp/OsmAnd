@@ -43,6 +43,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Xml;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -495,7 +496,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			OnContextMenuClick listener = new OnContextMenuClick() {
 				
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.osb_comment_menu_item) {
 						commentBug(bug);
 					} else if (itemId == R.string.osb_close_menu_item) {

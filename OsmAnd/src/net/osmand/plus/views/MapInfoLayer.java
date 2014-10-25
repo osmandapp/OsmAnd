@@ -8,9 +8,11 @@ import java.util.Set;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.routing.RoutingHelper;
@@ -293,175 +295,82 @@ public class MapInfoLayer extends OsmandMapLayer {
 		recreateControls();
 	}
 	
-	public Set<String> getSpecificVisibleCategories(Set<MapWidgetRegInfo> m) {
-		Set<String> s = new LinkedHashSet<String>();
-		for(MapWidgetRegInfo ms : m){
-			if(ms.getCategory() != null) {
-				s.add(ms.getCategory());
-			}
-		}
-		return s;
-	}
-	
-	public void fillAppearanceWidgets(Set<MapWidgetRegInfo> widgets, String category, ArrayList<Object> registry) {
-		for(MapWidgetRegInfo w : widgets ) {
-			if(Algorithms.objectEquals(w.getCategory(), category)) {
-				registry.add(w);
-			}
-		}
-	}
-
-	public void openViewConfigureDrawer(ListView listView) {
+	public ContextMenuAdapter openViewConfigureDrawer() {
 		final OsmandSettings settings = view.getSettings();
-		
-		final ArrayList<Object> list = new ArrayList<Object>();
-		list.add(map.getString(R.string.layer_map_appearance));
-		list.add(map.getString(R.string.map_widget_reset));
-		list.add(map.getString(R.string.map_widget_top));
-		list.addAll(mapInfoControls.getTop());
-		list.add(map.getString(R.string.map_widget_right));
-		list.addAll(mapInfoControls.getRight());
-		list.add(map.getString(R.string.map_widget_left));
-		list.addAll(mapInfoControls.getLeft());
+		ContextMenuAdapter cm = new ContextMenuAdapter(view.getContext());
+		cm.setDefaultLayoutId(R.layout.drawer_list_item);
+		cm.item(R.string.layer_map_appearance).icons(R.drawable.ic_back_drawer_dark, R.drawable.ic_back_drawer_white)
+				.listen(new OnContextMenuClick() {
 
-		Set<MapWidgetRegInfo> widgets = mapInfoControls.getAppearanceWidgets();
-		Set<String> cats = getSpecificVisibleCategories(widgets);
-		list.add(map.getString(R.string.map_widget_appearance_rem));
-		fillAppearanceWidgets(widgets, null, list);
-		for(String cat : cats) {
-			list.add(cat);
-			fillAppearanceWidgets(widgets, cat, list);
-		}
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						map.getMapActions().prepareStartOptionsMenu();
+						return false;
+					}
+				}).reg();
 		
-
-		// final LayerMenuListener listener = new LayerMenuListener(adapter, mapView, settings);
-		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-		final ArrayAdapter<Object> listAdapter = new ArrayAdapter<Object>(map, R.layout.layers_list_activity_item, R.id.title, list) {
-			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
-				final ApplicationMode mode = settings.getApplicationMode();
-				View v = convertView;
-				if (v == null) {
-					v = map.getLayoutInflater().inflate(R.layout.drawer_list_item, null);
-				}
-				final TextView tv = (TextView) v.findViewById(R.id.title);
-				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-				Object o = list.get(position);
-				if(o instanceof MapWidgetRegInfo) {
-					final MapWidgetRegInfo mi = (MapWidgetRegInfo) o;
+		cm.item(R.string.map_widget_reset) 
+				.icons(R.drawable.widget_reset_to_default_light, R.drawable.widget_reset_to_default_dark).listen(new OnContextMenuClick() {
 					
-					String s = mi.visibleCollapsed(mode)? " - " : "  ";
-					if(mi.message != null) {
-						tv.setText(s +mi.message +s);	
-					} else {
-						tv.setText(s +map.getString(mi.messageId) +s);
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						mapInfoControls.resetToDefault();
+						recreateControls();
+						adapter.notifyDataSetInvalidated();
+						return false;
 					}
+				}).reg();
+		final ApplicationMode mode = settings.getApplicationMode();
+		cm.item(R.string.map_widget_top).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		addControls(cm, mapInfoControls.getTop(), mode);
+		cm.item(R.string.map_widget_right).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		addControls(cm, mapInfoControls.getRight(), mode);
+		cm.item(R.string.map_widget_left).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		addControls(cm, mapInfoControls.getLeft(), mode);
 
-					int drawable = 0;
-					if (map.getMyApplication().getSettings().isLightContent()){
-						drawable = mi.drawableLight;
-					} else {
-						drawable = mi.drawableDark;
-					}
-					// Put the image on the TextView
-					if (drawable != 0) {
-						tv.setPadding((int) (12 *scaleCoefficient), 0, 0, 0);
-						tv.setCompoundDrawablesWithIntrinsicBounds(drawable, 0, 0, 0);
-					} else {
-						tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-						tv.setPadding((int) (30 *scaleCoefficient), 0, 0, 0);
-					}
-					final boolean selecteable = mi.selecteable();
-					ch.setOnCheckedChangeListener(null);
-					if(!mi.selecteable()) {
-						ch.setVisibility(View.GONE);
-					} else {
-						boolean check = mi.visibleCollapsed(mode) || mi.visible(mode);
-						ch.setChecked(check);
-						ch.setVisibility(View.VISIBLE);
-					}
-					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-						@Override
-						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							mapInfoControls.changeVisibility(mi);
-							if (selecteable) {
-								ch.setChecked(mi.visible(mode) || mi.visibleCollapsed(mode));
-							}
-							String s = mi.visibleCollapsed(mode) ? " - " : "  ";
-							if(mi.message != null) {
-								tv.setText(s +mi.message +s);	
-							} else {
-								tv.setText(s +map.getString(mi.messageId) +s);
-							}
-							recreateControls();
-						}
-					});
-				} else {
-					tv.setText(o.toString());
-					tv.setPadding((int) (5 *scaleCoefficient), 0, 0, 0);
-					// reset 
-					if (position == 0) {
-						if (map.getMyApplication().getSettings().isLightContent()){
-							tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_back_drawer_white, 0, 0, 0);
-						} else {
-							tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_back_drawer_dark, 0, 0, 0);
-						}
-					} else if (position == 1) {
-						if (map.getMyApplication().getSettings().isLightContent()) {
-							tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.widget_reset_to_default_light, 0, 0, 0);
-						} else {
-							tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.widget_reset_to_default_dark, 0, 0, 0);
-						}
-					} else {
-						tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-					}
-					ch.setVisibility(View.INVISIBLE);
-				}
-				
-				return v;
-			}
-		};
-		View confirmDialog = View.inflate(view.getContext(), R.layout.configuration_dialog, null);
-		AppModeDialog.prepareAppModeView(map, selected, true,
-				(ViewGroup) confirmDialog.findViewById(R.id.TopBar), true, 
-				new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if(selected.size() > 0) {
-					view.getSettings().APPLICATION_MODE.set(selected.iterator().next());
-					listAdapter.notifyDataSetChanged();
-				}
-			}
-		});
+		cm.item(R.string.map_widget_appearance_rem).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		addControls(cm, mapInfoControls.getAppearanceWidgets(), mode);
+		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
+		
+		// TODO add profiles
+//		View confirmDialog = View.inflate(view.getContext(), R.layout.configuration_dialog, null);
+//		AppModeDialog.prepareAppModeView(map, selected, true,
+//				(ViewGroup) confirmDialog.findViewById(R.id.TopBar), true, 
+//				new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				if(selected.size() > 0) {
+//					view.getSettings().APPLICATION_MODE.set(selected.iterator().next());
+//					listAdapter.notifyDataSetChanged();
+//				}
+//			}
+//		});
 
-
-		listView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				final ApplicationMode mode = settings.getApplicationMode();
-				Object o = list.get(position);
-				if (o instanceof MapWidgetRegInfo) {
-					final MapWidgetRegInfo mi = (MapWidgetRegInfo) o;
-					final boolean selecteable = mi.selecteable();
-					boolean check = mi.visibleCollapsed(mode) || mi.visible(mode);
-					if (check || selecteable) {
-						mapInfoControls.changeVisibility(mi);
-					}
-					recreateControls();
-					listAdapter.notifyDataSetInvalidated();
-				} else if(position == 0) {
-					map.getMapActions().prepareStartOptionsMenu();
-				} else if (position == 1) {
-					mapInfoControls.resetToDefault();
-					recreateControls();
-					listAdapter.notifyDataSetInvalidated();
-				}
-			}
-		});
-		listView.setAdapter(listAdapter);
+		return cm;
 	}
 	
+	private void addControls(ContextMenuAdapter adapter, Set<MapWidgetRegInfo> top, final ApplicationMode mode) {
+		for(final MapWidgetRegInfo r : top){
+			// String s = mi.visibleCollapsed(mode)? " - " : "  ";
+			// tv.setText(s +map.getString(mi.messageId) +s);
+			adapter.item(r.messageId) 
+				.icons(r.drawableLight, r.drawableDark).listen(new OnContextMenuClick() {
+				
+				@Override
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					final boolean selecteable = r.selecteable();
+					boolean check = r.visibleCollapsed(mode) || r.visible(mode);
+					if (check || selecteable) {
+						mapInfoControls.changeVisibility(r);
+					}
+					recreateControls();
+					adapter.notifyDataSetInvalidated();
+					return false;
+				}
+			}).reg();
+		}
+	}
+
 	private int themeId = -1;
 	public void updateColorShadowsOfText(DrawSettings drawSettings) {
 		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();

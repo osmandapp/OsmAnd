@@ -177,7 +177,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				OnContextMenuClick clk = adapter.getClickAdapter(which);
 				if (clk != null) {
-					clk.onContextMenuClick(adapter.getElementId(which), which, false);
+					clk.onContextMenuClick(null, adapter.getElementId(which), which, false);
 				}
 			}
 
@@ -188,7 +188,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	private void basicFileOperation(final GpxDisplayItem gpxDisplayItem, ContextMenuAdapter adapter) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int resId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 				if (resId == R.string.show_gpx_route) {
 					OsmandSettings settings = app.getSettings();
 					settings.setMapLocationToShow(gpxDisplayItem.locationStart.lat, gpxDisplayItem.locationStart.lon,

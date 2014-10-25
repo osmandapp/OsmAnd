@@ -49,6 +49,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlServices, OsMoReactor {
 
@@ -135,7 +136,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					R.drawable.ic_action_gloc_light).listen(new OnContextMenuClick() {
 						
 						@Override
-						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							OsMoDevice o = (OsMoDevice) selectedObj;
 							double lat = o.getLastLocation() == null ? latitude : o.getLastLocation().getLatitude();
 							double lon = o.getLastLocation() == null ? longitude : o.getLastLocation().getLongitude();
@@ -150,7 +151,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 						R.drawable.ic_action_close_light).listen(new OnContextMenuClick() {
 
 							@Override
-							public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+							public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 								OsMoPositionLayer.setFollowDestination(null);
 								return true;
 							}
@@ -161,7 +162,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					R.drawable.ic_action_flag_light).listen(new OnContextMenuClick() {
 						
 						@Override
-						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							OsMoDevice o = (OsMoDevice) selectedObj;
 							if(o.getLastLocation() != null) {
 								TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
@@ -292,7 +293,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				.listen(new OnContextMenuClick() {
 
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						final double lat = view.getLatitude();
 						final double lon = view.getLongitude();
 						tracker.sendCoordinate(lat, lon);
@@ -323,7 +324,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		helper.item(R.string.osmo_groups).icons(R.drawable.ic_action_eye_dark, R.drawable.ic_action_eye_light).position(6)
 				.listen(new OnContextMenuClick() {
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						Intent intent = new Intent(mapActivity, OsMoGroupsActivity.class);
 						mapActivity.startActivity(intent);
 						return true;

@@ -56,6 +56,7 @@ import android.os.AsyncTask;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -584,7 +585,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				OnContextMenuClick listener = new OnContextMenuClick() {
 					
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						if (itemId == R.string.delete_point) {
 							for (int i = 0; i < measurementPoints.size(); i++) {
 								Iterator<WptPt> it = measurementPoints.get(i).iterator();

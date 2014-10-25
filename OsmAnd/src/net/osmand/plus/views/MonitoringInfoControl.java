@@ -81,7 +81,7 @@ public class MonitoringInfoControl {
 			ai.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					ca.getClickAdapter(ij).onContextMenuClick(ca.getElementId(ij), ij, false);
+					ca.getClickAdapter(ij).onContextMenuClick(null, ca.getElementId(ij), ij, false);
 					qa.dismiss();
 				}
 			});

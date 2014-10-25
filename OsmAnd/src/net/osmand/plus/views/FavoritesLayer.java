@@ -22,6 +22,7 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, MapTextProvider<LocationPoint> {
@@ -198,7 +199,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 			final FavouritePoint a = (FavouritePoint) o;
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.favourites_context_menu_delete) {
 						final Resources resources = view.getContext().getResources();
 						Builder builder = new AlertDialog.Builder(view.getContext());

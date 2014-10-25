@@ -1,13 +1,18 @@
 package net.osmand.plus.views.mapwidgets;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.util.Algorithms;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -76,30 +81,6 @@ public class MapWidgetRegistry {
 		return ii;
 	}
 	
-	public void removeApperanceWidgets(String category) {
-		Iterator<MapWidgetRegInfo> it = appearanceWidgets.iterator();
-		while(it.hasNext()) {
-			if(Algorithms.objectEquals(it.next().category, category)) {
-				it.remove();
-			}
-		}
-	}
-	
-	public MapWidgetRegInfo registerAppearanceWidget(int drawableDark,int drawableLight, String message, String key,
-			CommonPreference<?> pref, String subcategory) {
-		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.key = key;
-		ii.category = subcategory;
-		ii.preference = pref;
-		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
-		ii.visibleCollapsible = null;
-		ii.drawableDark = drawableDark;
-		ii.drawableLight = drawableLight;
-		ii.messageId = message.hashCode();
-		ii.message = message;
-		this.appearanceWidgets.add(ii);
-		return ii;
-	}
 	
 	public MapWidgetRegInfo registerTopWidget(View m, int drawableDark,int drawableLight, int messageId, String key, int left, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
@@ -318,10 +299,8 @@ public class MapWidgetRegistry {
 		public int drawableDark;
 		public int drawableLight;
 		public int messageId;
-		public String message;
 		private String key;
 		private int position;
-		private String category;
 		private Set<ApplicationMode> visibleModes;
 		private Set<ApplicationMode> visibleCollapsible;
 		private OsmandPreference<?> preference = null;
@@ -336,10 +315,6 @@ public class MapWidgetRegistry {
 			return visibleCollapsible != null && preference == null;
 		}
 		
-		
-		public String getCategory() {
-			return category;
-		}
 		public boolean selecteable(){
 			return preference == null || (preference.get() instanceof Boolean);
 		}

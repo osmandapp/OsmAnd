@@ -176,7 +176,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 					new OnContextMenuClick() {
 						
 						@Override
-						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							editPoint(point);
 							return true;
 						}
@@ -187,7 +187,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 					new OnContextMenuClick() {
 						
 						@Override
-						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							deletePoint(point);
 							return true;
 						}

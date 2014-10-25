@@ -30,14 +30,13 @@ public class ContextMenuAdapter {
 
 	public interface OnContextMenuClick {
 		//boolean return type needed to desribe if drawer needed to be close or not
-		public boolean onContextMenuClick(int itemId, int pos, boolean isChecked);
+		public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
 	}
 	
 	private final Context ctx;
 	private View anchor;
 	private int defaultLayoutId = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ?
 			R.layout.list_menu_item : R.layout.list_menu_item_native;
-	private ArrayAdapter listAdapter;
 	final TIntArrayList items = new TIntArrayList();
 	final TIntArrayList isCategory = new TIntArrayList();
 	final ArrayList<String> itemNames = new ArrayList<String>();
@@ -88,12 +87,6 @@ public class ContextMenuAdapter {
 	
 	public void setItemName(int pos, String str) {
 		itemNames.set(pos, str);
-	}
-
-	public void notifyDataSetChanged(){
-		if (listAdapter != null){
-			listAdapter.notifyDataSetChanged();
-		}
 	}
 
 	public void setItemDescription(int pos, String str) {
@@ -158,8 +151,6 @@ public class ContextMenuAdapter {
 		int pos = -1;
 		String description = "";
 		private OnContextMenuClick checkBoxListener;
-		private OnContextMenuClick itemClickListener;
-		boolean enabled = false;
 
 		private Item() {
 		}
@@ -205,11 +196,6 @@ public class ContextMenuAdapter {
 			return this;
 		}
 
-		public Item itemClickListen(OnContextMenuClick l) {
-			this.itemClickListener = l;
-			return this;
-		}
-
 		public void reg() {
 			if (pos >= items.size() || pos < 0) {
 				pos = items.size();
@@ -231,10 +217,6 @@ public class ContextMenuAdapter {
 			return this;
 		}
 
-		public Item enabled(boolean checked) {
-			this.enabled = checked;
-			return this;
-		}
 	}
 	
 	public String[] getItemNames() {
@@ -245,13 +227,12 @@ public class ContextMenuAdapter {
 		items.removeAt(pos);
 		itemNames.remove(pos);
 		selectedList.removeAt(pos);
-		loadingList.clear();
 		iconList.removeAt(pos);
 		iconListLight.removeAt(pos);
 		checkListeners.remove(pos);
 		isCategory.removeAt(pos);
 		layoutIds.removeAt(pos);
-		loadingList.clear();
+		loadingList.removeAt(pos);
 	}
 
 	public int getLayoutId(int position) {
@@ -267,10 +248,9 @@ public class ContextMenuAdapter {
 		this.defaultLayoutId = defaultLayoutId;
 	}
 
-	public ListAdapter createListAdapter(final Activity activity, final boolean holoLight) {
-		final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
+	public ArrayAdapter<?> createListAdapter(final Activity activity, final boolean holoLight) {
 		final int layoutId = defaultLayoutId;
-		listAdapter = new ArrayAdapter<String>(activity, layoutId, R.id.title,
+		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layoutId, R.id.title,
 				getItemNames()) {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
@@ -291,7 +271,6 @@ public class ContextMenuAdapter {
 				} else if (v.findViewById(R.id.icon) != null){
 					v.findViewById(R.id.icon).setVisibility(View.GONE);
 				}
-				tv.setCompoundDrawablePadding(padding);
 				
 				if(isCategory(position)) {
 					tv.setTypeface(Typeface.DEFAULT_BOLD);
@@ -311,7 +290,7 @@ public class ContextMenuAdapter {
 							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 								OnContextMenuClick ca = getClickAdapter(position);
 								if(ca != null) {
-									ca.onContextMenuClick(getElementId(position), position, isChecked);
+									ca.onContextMenuClick(null, getElementId(position), position, isChecked);
 								}
 							}
 						});

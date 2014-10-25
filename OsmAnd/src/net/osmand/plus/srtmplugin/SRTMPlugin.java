@@ -1,5 +1,6 @@
 package net.osmand.plus.srtmplugin;
 
+import android.widget.ArrayAdapter;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -94,7 +95,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.layer_hillshade) {
 					HILLSHADE.set(!HILLSHADE.get());
 					updateLayers(mapView, mapActivity);

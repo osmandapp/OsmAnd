@@ -20,6 +20,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+import android.widget.ArrayAdapter;
 
 public class PointNavigationLayer extends OsmandMapLayer implements IContextMenuProvider {
 	protected final static int DIST_TO_SHOW = 80;
@@ -219,7 +220,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 			final TargetPoint a = (TargetPoint) o;
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.delete_target_point) {
 						TargetPointsHelper targetPointsHelper = map.getMyApplication().getTargetPointsHelper();
 						if(a.intermediate) {

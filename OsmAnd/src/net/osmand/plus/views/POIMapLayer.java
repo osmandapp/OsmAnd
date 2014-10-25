@@ -35,6 +35,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.net.Uri;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
@@ -255,7 +256,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			final Amenity a = (Amenity) o;
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.poi_context_menu_call) {
 						try {
 							Intent intent = new Intent(Intent.ACTION_VIEW);

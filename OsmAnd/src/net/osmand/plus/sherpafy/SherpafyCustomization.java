@@ -57,6 +57,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -513,7 +514,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 				adapter.item(R.string.show_waypoint_information).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light ).position(0)
 				.listen(new OnContextMenuClick() {
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						showFavoriteDialog(mapActivity, selectedStage, sf);
 						return true;
 					}
@@ -565,7 +566,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 					R.drawable.ic_action_gremove_dark, R.drawable.ic_action_gremove_light)
 					.listen(new OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					app.getSettings().SHOW_POI_OVER_MAP.set(false);
 					mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
 					return true;
@@ -575,7 +576,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			adapter.item(R.string.poi).icons(R.drawable.ic_action_layers_dark, R.drawable.ic_action_layers_light)
 					.listen(new OnContextMenuClick() {
 						@Override
-						public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							mapActivity.getMapLayers().selectPOIFilterLayer(mapActivity.getMapView(), null);
 							app.getSettings().SHOW_POI_OVER_MAP.set(true);
 							mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
@@ -587,7 +588,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		adapter.item(R.string.sherpafy_tour_info_txt).icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light)
 				.listen(new OnContextMenuClick() {
 					@Override
-					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						Intent newIntent = new Intent(mapActivity, TourViewActivity.class);
 						// newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						mapActivity.startActivity(newIntent);
@@ -601,7 +602,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 					.icons(R.drawable.ic_action_finish_flag_dark, R.drawable.ic_action_finish_flag_light)
 					.listen(new OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					markStageAsCompleted(stage);
 					showCompleteStageFragment(mapActivity, stage, false);
 					return true;
@@ -612,7 +613,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		adapter.item(R.string.context_menu_item_share_location).icons(
 				R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_light).listen(new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				if (app.getLocationProvider().getLastKnownLocation() != null) {
 					new ShareLocation(mapActivity).run();
 				} else {

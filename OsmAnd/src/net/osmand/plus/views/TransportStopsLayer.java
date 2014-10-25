@@ -20,6 +20,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
@@ -215,7 +216,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			final TransportStop a = (TransportStop) o;
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					showDescriptionDialog(a);
 					return true;
 				}

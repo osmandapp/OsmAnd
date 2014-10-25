@@ -510,7 +510,7 @@ public class WaypointHelper {
 		PoiFilter pf = getPoiFilter();
 		if (pf != null) {
 			final List<Location> locs = route.getImmutableAllLocations();
-			List<Amenity> amenities = app.getResourceManager().searchAmenitiesOnThePath(locs, getPoiSearchDeviationRadius(),
+			List<Amenity> amenities = app.getResourceManager().searchAmenitiesOnThePath(locs, poiSearchDeviationRadius,
 					pf, new ResultMatcher<Amenity>() {
 
 						@Override
@@ -575,7 +575,7 @@ public class WaypointHelper {
 		int[] ind = new int[1];
 		for(LocationPoint p : points) {
 			float dist = dist(p, immutableAllLocations, ind);
-			int rad = type == POI ? getPoiSearchDeviationRadius() : getSearchDeviationRadius();
+			int rad = getSearchDeviationRadius(type);
 			if(dist <= rad) {
 				LocationPointWrapper lpw = new LocationPointWrapper(rt, type, p, dist, ind[0]);
 				lpw.setAnnounce(announce);
@@ -737,22 +737,18 @@ public class WaypointHelper {
 		
 	}
 
-	public int getSearchDeviationRadius(){
-		return searchDeviationRadius;
+	public int getSearchDeviationRadius(int type){
+		return type == POI ? poiSearchDeviationRadius : searchDeviationRadius;
 	}
 
-	public void setSearchDeviationRadius(int radius){
-		this.searchDeviationRadius = radius;
+	public void setSearchDeviationRadius(int type, int radius){
+		if(type == POI) {
+			this.poiSearchDeviationRadius = radius;
+		} else {
+			this.searchDeviationRadius = radius;
+		}
 	}
 
-	public int getPoiSearchDeviationRadius() {
-		return poiSearchDeviationRadius;
-	}
-
-	public void setPoiSearchDeviationRadius(int radius) {
-		this.poiSearchDeviationRadius = radius;
-	}
-	
 	private class AmenityLocationPoint implements LocationPoint {
 
 		Amenity a;

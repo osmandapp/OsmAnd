@@ -580,7 +580,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			poiDescr.listen(new OnContextMenuClick() {
 				
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					// Build text(amenity)
 					
 					// Find and format links
@@ -607,7 +607,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			showDetails.listen(new OnContextMenuClick() {
 				
 				@Override
-				public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					showPOIDetails(amenity, settings.usingEnglishNames());
 					return true;
 				}
