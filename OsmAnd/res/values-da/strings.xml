@@ -840,7 +840,7 @@ Nogle af de centrale funktioner:
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">Forældet kortdataformat \'{0}\' er ikke understøttet</string>
 	<string name="poi_filter_closest_poi">Nærmeste interessepunkt</string>
-	<string name="poi_filter_custom_filter">Tilpasset filter</string>
+	<string name="poi_filter_custom_filter">Brugerdefineret filter</string>
 	<string name="poi_filter_namefinder">Online navne-søger</string>
 	<string name="reading_cached_tiles">Læser cachelagrede delkort…</string>
 	<string name="version_index_is_big_for_memory">Ikke nok hukommelse for indeks \'{0}\'</string>
@@ -879,7 +879,7 @@ Nogle af de centrale funktioner:
 \n\nFor at få kørselsvejledning til destinationen fra et andet punkt end den aktuelle position, vælges det på kortet, og tryk \'Kørselsvejledning fra\'.
 \n\nVælg enten \'Begynd navigation\', hvilket betyder, at OsmAnd giver vejledning og talte instruktioner (hvis aktiveret) mv. Eller vælg \'Vis rute\', hvilket resulterer i statisk rute uden vejledning eller justeringer, mens du flytter.
 \n\nBruges \'Kørselsvejledning fra\' sammen med \'Begynd navigation\', vil OsmAnd skifte til den faktiske position, så snart den er fundet (dette kan bruges til at komme hurtigt i gang med rutevejledning før positionen findes), mens \'Kørselsvejledning fra\' i kombination med \'Vis rute\' kun viser ruten fra ethvert vilkårligt valgt punkt uden efterfølgende opdateringer.\nHvis du bruger \"Kørselsvejledning fra \'sammen med\' Start navigation\", vil Osmand så hurtigt skifte til din aktuelle position som det findes (så dette kan bruges til at kickstarte routing før positionen er fundet), mens \"Kørselsvejledning fra \'i kombination med \'Vis rute\' bare viser dig ruten fra enhver vilkårlig punkt, du havde valgt uden efterfølgende opdateringer. "</string>
-	<string name="amenity_type_landuse">Brug af landområder</string>
+	<string name="amenity_type_landuse">Arealanvendelse</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
 	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
 	<string name="items_were_selected">{0} enheder valgt</string>
@@ -1832,12 +1832,14 @@ Nogle af de centrale funktioner:
     <string name="use_native_render">Brug indbygget optegning</string>
     <string name="use_native_render_descr">Brug C++ optegning i stedet for Java</string>
     <string name="print_route">Udskriv rute</string>
-    <string name="fav_point_emoticons_message">Favoritnavn er ændret til %1$s for korrekt at kan gemme strengen med humørikoner til en fil.</string>
+    <string name="fav_point_emoticons_message">Favoritnavn er ændret til %1$s for at kunne gemme navnet med humørikoner til en fil.</string>
     <string name="speed_limit_exceed">Tolerance for hastighedsgrænse</string>
-	<string name="speed_limit_exceed_message">Vælg hastighedsgrænse tolerancen, over hvilken du vil modtage en stemme advarsel.</string>
+	<string name="speed_limit_exceed_message">Vælg hvor meget hastighedsgrænsen skal overskrides, for at få en stemmeadvarsel.</string>
 	<string name="osmo_device_not_found">Enheden blev ikke fundet</string>
-    <string name="osmo_no_connection_msg">OsMo tjenesten er ikke tilgængelig:\n- check forbindelsen;\n- kontrollere indstillingerne;\n- Tjek vores Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">En anonym bruger kan ikke:\n- oprette grupper;\n- synkronisere grupper og enheder med serveren;\n- administrere grupper og enheder i et privat kontor.</string>
+    <string name="osmo_no_connection_msg">OsMo tjenesten er ikke tilgængelig:\n- kontrollere forbindelsen;\n- kontrollere indstillingerne;\n- se på Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">En anonym bruger kan ikke:\n- oprette grupper;\n- synkronisere grupper og enheder med serveren;\n- administrere grupper og enheder i et privat område.</string>
     <string name="anonymous_user">Anonym bruger</string>
     <string name="logged_as">Logget ind som %1$s</string>
-	</resources>
+	<string name="configure_map">Konfigurer kort</string>
+    <string name="search_radius_proximity">I nærheden af</string>
+    </resources>

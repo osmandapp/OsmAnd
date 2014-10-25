@@ -1833,4 +1833,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="fav_point_emoticons_message">Le nom de votre favoris sera %1$s car il n\'est pas possible d\'utiliser les émoticônes.</string>
     <string name="speed_limit_exceed">Marge tolérée aux limites de vitesse</string>
 	<string name="speed_limit_exceed_message">Indiquez la marge à tolérer aux limitations de vitesse avant le déclenchement des annonces vocales.</string>
+	<string name="osmo_device_not_found">Périphérique introuvable</string>
+    <string name="osmo_no_connection_msg">Le service OsMo n\'est pas disponible :\n- Vérifier la connexion;\n- Vérifier les paramètres;\n- Vérifier notre Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Un utilisateur anonyme ne peut pas :\n- Créer des groupes;\n- Synchroniser les groupes et les périphériques avec le serveur;\n- Gérer les groupes et les périphériques dans un espace privé.</string>
+    <string name="anonymous_user">Utilisateur anonyme</string>
+    <string name="logged_as">Connecté entant que %1$s</string>
 	</resources>

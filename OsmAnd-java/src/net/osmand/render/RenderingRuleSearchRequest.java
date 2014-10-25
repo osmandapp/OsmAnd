@@ -157,7 +157,7 @@ public class RenderingRuleSearchRequest {
 		if(!input) {
 			return false;
 		}
-		if (!loadOutput) {
+		if (!loadOutput && !rule.isGroup()) {
 			return true;
 		}
 		// accept it
@@ -171,7 +171,8 @@ public class RenderingRuleSearchRequest {
 				break;
 			}
 		}
-		if (match || !rule.isGroup()) {
+		boolean fit = (match || !rule.isGroup());
+		if (fit && loadOutput) {
 			if (rule.isGroup()) {
 				loadOutputProperties(rule, false);
 			}
@@ -179,9 +180,8 @@ public class RenderingRuleSearchRequest {
 			for (RenderingRule rr : rule.getIfChildren()) {
 				visitRule(rr, loadOutput);
 			}
-			return true;
 		}
-		return false;
+		return fit;
 		
 	}
 
@@ -191,7 +191,16 @@ public class RenderingRuleSearchRequest {
 			RenderingRuleProperty rp = properties[i];
 			if (rp.isOutputProperty()) {
 				if (!isSpecified(rp) || override) {
-					if (rp.isFloat()) {
+					RenderingRule rr = rule.getAttrProp(i);
+					if(rr != null) {
+						visitRule(rr, true);
+						if(isSpecified(storage.PROPS.R_ATTR_COLOR_VALUE)){
+							values[rp.getId()] = getIntPropertyValue(storage.PROPS.R_ATTR_COLOR_VALUE);
+						} else if(isSpecified(storage.PROPS.R_ATTR_INT_VALUE)){
+							values[rp.getId()] = getIntPropertyValue(storage.PROPS.R_ATTR_INT_VALUE);
+							fvalues[rp.getId()] = getFloatPropertyValue(storage.PROPS.R_ATTR_INT_VALUE);
+						}
+					} else if (rp.isFloat()) {
 						fvalues[rp.getId()] = rule.getFloatProp(i);
 						values[rp.getId()] = rule.getIntProp(i);
 					} else {

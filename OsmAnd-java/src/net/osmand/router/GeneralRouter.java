@@ -1,5 +1,7 @@
 package net.osmand.router;
 
+import gnu.trove.set.hash.TLongHashSet;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -49,6 +51,8 @@ public class GeneralRouter implements VehicleRouter {
 	private float minDefaultSpeed = 10;
 	// speed in m/s
 	private float maxDefaultSpeed = 10;
+	
+	private TLongHashSet impassableRoads;
 	
 	
 	public enum RouteDataObjectAttribute {
@@ -180,7 +184,17 @@ public class GeneralRouter implements VehicleRouter {
 	@Override
 	public boolean acceptLine(RouteDataObject way) {
 		int res = getObjContext(RouteDataObjectAttribute.ACCESS).evaluateInt(way, 0);
+		if(impassableRoads != null && impassableRoads.contains(way.id)) {
+			return false;
+		}
 		return res >= 0;
+	}
+	
+	public long[] getImpassableRoadIds() {
+		if(impassableRoads == null) {
+			return new long[0];
+		}
+		return impassableRoads.toArray();
 	}
 	
 	private int registerTagValueAttribute(String tag, String value) {
@@ -317,23 +331,23 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	@Override
 	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd) {
-		int[] pt = prev.getRoad().getPointTypes(prevSegmentEnd);
-		if(pt != null) {
-			RouteRegion reg = prev.getRoad().region;
-			for (int i = 0; i < pt.length; i++) {
-				RouteTypeRule r = reg.quickGetEncodingRule(pt[i]);
-				if ("highway".equals(r.getTag()) && "traffic_signals".equals(r.getValue())) {
-					// traffic signals don't add turn info
-//					return 0;
-				}
-			}
-		}
-		
 		float ts = getPenaltyTransition(segment.getRoad());
 		float prevTs = getPenaltyTransition(prev.getRoad());
 		if(prevTs != ts) {
 			if(ts > prevTs) return (ts - prevTs);
 		}
+//		int[] pt = prev.getRoad().getPointTypes(prevSegmentEnd);
+//		if(pt != null) {
+//			RouteRegion reg = prev.getRoad().region;
+//			for (int i = 0; i < pt.length; i++) {
+//				RouteTypeRule r = reg.quickGetEncodingRule(pt[i]);
+//				if ("highway".equals(r.getTag()) && "traffic_signals".equals(r.getValue())) {
+//					// traffic signals don't add turn info
+//					return 0;
+//				}
+//			}
+//		}
+		
 		
 		if(segment.getRoad().roundabout() && !prev.getRoad().roundabout()) {
 			double rt = getRoundaboutTurn();
@@ -859,6 +873,15 @@ public class GeneralRouter implements VehicleRouter {
 			objectAttributes[i].printRules(out);
 		}
 		
+	}
+
+	public void addImpassableRoads(TLongHashSet impassableRoads) {
+		if (impassableRoads != null && !impassableRoads.isEmpty()) {
+			if (this.impassableRoads == null) {
+				this.impassableRoads = new TLongHashSet();
+			}
+			this.impassableRoads.addAll(impassableRoads);
+		}		
 	}
 }
 
