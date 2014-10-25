@@ -22,7 +22,8 @@
         <TextView android:id="@+id/descr"
                      android:textSize="14sp"
                      android:textColor="#bebebe"
-                     android:layout_width="20dp"
+                     android:layout_width="48dp"
+                     android:maxLines="1"
                      android:ellipsize="end"
                      android:layout_gravity="center|right"
                      android:layout_height="wrap_content"/>
