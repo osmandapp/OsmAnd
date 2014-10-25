@@ -5,9 +5,9 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="#fffc00"
-              android:paddingLeft="16dp">
+              android:paddingLeft="16dp"
+              android:layout_marginBottom="4dp">
     <TextView android:id="@+id/title"
-              android:layout_marginLeft="8dp"
               android:layout_weight="1"
               android:layout_width="0dp"
               android:capitalize="characters"
@@ -16,8 +16,8 @@
               android:ellipsize="end"
               android:background="#ff0202"
               android:gravity="left|bottom"
-              android:layout_height="40dp"/>
-              <!-- android:layout_marginBottom="9dp"
+              android:layout_height="36dp"/>
+              <!--
               android:layout_marginTop="16dp" -->
               <!-- android:maxLines="2" -->
 </LinearLayout>
