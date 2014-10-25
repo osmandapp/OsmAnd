@@ -10,22 +10,27 @@
     <LinearLayout android:layout_width="0dp"
                   android:layout_weight="1"
                   android:orientation="horizontal"
-                  android:layout_height="64dp"
-                  android:paddingBottom="8dp"
-                  android:paddingTop="8dp">
+                  android:layout_height="32dp"
+                  android:layout_marginTop="8dp"
+                  android:layout_marginBottom="8dp">
         <TextView android:id="@+id/title"
                   android:textSize="18sp"
                   android:layout_width="wrap_content"
                   android:layout_weight="1"
+                  android:layout_gravity="center_vertical"
+                  android:gravity="center_vertical"
                   android:maxLines="2"
                   android:layout_height="wrap_content"/>
         <TextView android:id="@+id/descr"
                      android:textSize="14sp"
+                     android:layout_weight="1"
                      android:textColor="#bebebe"
-                     android:layout_width="48dp"
+                     android:layout_width="64dp"
+                     android:layout_marginLeft="4dp"
+                     android:gravity="right"
                      android:maxLines="1"
                      android:ellipsize="end"
-                     android:layout_gravity="center|right"
+                     android:layout_gravity="center_vertical|right"
                      android:layout_height="wrap_content"/>
     </LinearLayout>
   <CheckBox

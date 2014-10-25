@@ -126,14 +126,13 @@ public class MapActivity extends AccessibleActivity  {
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-
-		
-		mapActions = new MapActivityActions(this);
-		mapLayers = new MapActivityLayers(this);
 		// Full screen is not used here
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
+		
+		mapActions = new MapActivityActions(this);
+		mapLayers = new MapActivityLayers(this);
+
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
 		app.checkApplicationIsBeingInitialized(this, startProgressDialog);

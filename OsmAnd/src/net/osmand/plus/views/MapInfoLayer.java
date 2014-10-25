@@ -2,19 +2,17 @@ package net.osmand.plus.views;
 
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.mapwidgets.AppearanceWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
@@ -28,7 +26,6 @@ import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.StackWidgetView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.UpdateableWidget;
-import net.osmand.util.Algorithms;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -39,17 +36,10 @@ import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.MeasureSpec;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -232,6 +222,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void createControls() {
 		// 1. Create view groups and controls
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
+		
+		// form measurement
+		ImageView iv = new ImageView(map);
+		iv.setImageDrawable(map.getResources().getDrawable(R.drawable.la_backtoloc_disabled));
+		statusBar.addView(iv);
 		rightStack = new StackWidgetView(view.getContext());
 		leftStack = new StackWidgetView(view.getContext());
 		
@@ -239,7 +234,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		Rect topRectPadding = new Rect();
 		view.getResources().getDrawable(R.drawable.box_top).getPadding(topRectPadding);
 		// for measurement
-		//statusBar.addView(backToLocation);
 		STATUS_BAR_MARGIN_X = (int) (STATUS_BAR_MARGIN_X * scaleCoefficient);
 		statusBar.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 		Rect statusBarPadding = new Rect();
@@ -310,7 +304,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				}).reg();
 		
 		cm.item(R.string.map_widget_reset) 
-				.icons(R.drawable.widget_reset_to_default_light, R.drawable.widget_reset_to_default_dark).listen(new OnContextMenuClick() {
+				.icons(R.drawable.widget_reset_to_default_dark, R.drawable.widget_reset_to_default_light).listen(new OnContextMenuClick() {
 					
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -353,8 +347,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		for(final MapWidgetRegInfo r : top){
 			// String s = mi.visibleCollapsed(mode)? " - " : "  ";
 			// tv.setText(s +map.getString(mi.messageId) +s);
-			adapter.item(r.messageId) 
-				.icons(r.drawableLight, r.drawableDark).listen(new OnContextMenuClick() {
+			adapter.item(r.messageId).selected(r.visibleCollapsed(mode) || r.visible(mode) ? 1 : 0)
+				.icons(r.drawableDark, r.drawableLight).listen(new OnContextMenuClick() {
 				
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

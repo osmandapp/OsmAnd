@@ -26,7 +26,7 @@ public class AppearanceWidgetsFactory {
 //            }
 //        });
 
-            final MapWidgetRegistry.MapWidgetRegInfo showRuler = mapInfoControls.registerAppearanceWidget(R.drawable.widget_ruler, R.drawable.widget_ruler, R.string.map_widget_show_ruler,
+            final MapWidgetRegistry.MapWidgetRegInfo showRuler = mapInfoControls.registerAppearanceWidget(0, 0, /*R.drawable.widget_ruler, R.drawable.widget_ruler, */R.string.map_widget_show_ruler,
                     "showRuler", view.getSettings().SHOW_RULER);
             showRuler.setStateChangeListener(new Runnable() {
                 @Override
@@ -35,7 +35,7 @@ public class AppearanceWidgetsFactory {
                     view.refreshMap();
                 }
             });
-            final MapWidgetRegistry.MapWidgetRegInfo showDestinationArrow = mapInfoControls.registerAppearanceWidget(R.drawable.widget_show_destination_arrow, R.drawable.widget_show_destination_arrow, R.string.map_widget_show_destination_arrow,
+            final MapWidgetRegistry.MapWidgetRegInfo showDestinationArrow = mapInfoControls.registerAppearanceWidget(0, 0, /*R.drawable.widget_show_destination_arrow, R.drawable.widget_show_destination_arrow, */R.string.map_widget_show_destination_arrow,
                     "show_destination_arrow", view.getSettings().SHOW_DESTINATION_ARROW);
             showDestinationArrow.setStateChangeListener(new Runnable() {
                 @Override
@@ -45,7 +45,7 @@ public class AppearanceWidgetsFactory {
                 }
             });
 
-            final MapWidgetRegistry.MapWidgetRegInfo transparent = mapInfoControls.registerAppearanceWidget(R.drawable.widget_transparent_skin, R.drawable.widget_transparent_skin, R.string.map_widget_transparent,
+            final MapWidgetRegistry.MapWidgetRegInfo transparent = mapInfoControls.registerAppearanceWidget(0, 0, /*R.drawable.widget_transparent_skin, R.drawable.widget_transparent_skin, */R.string.map_widget_transparent,
                     "transparent", view.getSettings().TRANSPARENT_MAP_THEME);
             transparent.setStateChangeListener(new Runnable() {
                 @Override
@@ -54,7 +54,7 @@ public class AppearanceWidgetsFactory {
                     mapInfoLayer.recreateControls();
                 }
             });
-            final MapWidgetRegistry.MapWidgetRegInfo centerPosition = mapInfoControls.registerAppearanceWidget(R.drawable.widget_position_marker, R.drawable.widget_position_marker,
+            final MapWidgetRegistry.MapWidgetRegInfo centerPosition = mapInfoControls.registerAppearanceWidget(0, 0, /*R.drawable.widget_position_marker, R.drawable.widget_position_marker,*/
             		R.string.always_center_position_on_map,
                     "centerPosition", view.getSettings().CENTER_POSITION_ON_MAP);
             centerPosition.setStateChangeListener(new Runnable() {

@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:paddingLeft="24dp"  
-              android:layout_marginBottom="4dp">
+              android:paddingBottom="4dp">
     <TextView android:id="@+id/title"
               android:layout_weight="1"
               android:layout_width="0dp"
@@ -15,5 +15,5 @@
               android:textSize="14sp"
               android:ellipsize="end"
               android:gravity="left|bottom"/>
-x`              <!-- android:maxLines="2" -->
+              <!-- android:maxLines="2" -->
 </LinearLayout>

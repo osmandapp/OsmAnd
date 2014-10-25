@@ -82,12 +82,13 @@ public class MapWidgetRegistry {
 	}
 	
 	
-	public MapWidgetRegInfo registerTopWidget(View m, int drawableDark,int drawableLight, int messageId, String key, int left, int priorityOrder) {
+	public MapWidgetRegInfo registerTopWidget(View m, int drawableDark, int drawableLight, int messageId, String key,
+			int left, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
 		ii.key = key;
-		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
+		ii.visibleModes = new LinkedHashSet<ApplicationMode>();
 		ii.visibleCollapsible = null;
-		for(ApplicationMode ms : ApplicationMode.values(settings) ) {
+		for (ApplicationMode ms : ApplicationMode.values(settings)) {
 			boolean def = ms.isWidgetVisible(key);
 			Set<String> set = visibleElementsFromSettings.get(ms);
 			if (set != null) {
@@ -97,7 +98,7 @@ public class MapWidgetRegistry {
 					def = false;
 				}
 			}
-			if(def){
+			if (def) {
 				ii.visibleModes.add(ms);
 			}
 		}

@@ -62,7 +62,9 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		waypointHelper = this.app.getWaypointHelper();
 		this.mapActivity = mapActivity;
 		this.mainLayout = (LinearLayout) mapActivity.findViewById(R.id.dialog_layout);
-		
+		if(mainLayout == null) {
+			throw new IllegalStateException();
+		}
 	}
 
 	public void init() {

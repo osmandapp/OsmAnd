@@ -17,26 +17,17 @@
         android:layout_gravity="center_vertical"
         tools:src="@drawable/ic_action_info_dark" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="11dp"
-        android:layout_weight="1"
-        android:layout_gravity="bottom" >
-
-        <TextView
+    <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:layout_marginBottom="17dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="11dp"
             tools:text="Some title text" />
-
-        <TextView
-            android:id="@+id/descr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 
     <CheckBox
         android:id="@+id/check_item"
