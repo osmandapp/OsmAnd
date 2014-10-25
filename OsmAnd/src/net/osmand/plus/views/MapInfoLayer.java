@@ -45,7 +45,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -201,17 +200,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// Top widgets
 		ImageViewWidget compassView = mic.createCompassView(map);
 		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass_dark, R.drawable.widget_compass_light, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, 5);
-		View config = createConfiguration();
-		// disable monitoring widget
-//		mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.widget_monitoring, R.string.map_widget_monitoring_services,
-//				"monitoring_services", MapWidgetRegistry.LEFT_CONTROL, 12);
 		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.widget_lock_screen_dark, R.drawable.widget_lock_screen_light, R.string.bg_service_screen_lock, "bgService",
 				MapWidgetRegistry.LEFT_CONTROL,  15);
 		mapInfoControls.registerTopWidget(createBackToLocation(mic), R.drawable.widget_backtolocation_dark, R.drawable.widget_backtolocation_light, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, 5);
-		
-		View globus = createLayer();
-
-
 		topText = mic.createStreetView(app, map, paintText);
 		mapInfoControls.registerTopWidget(topText, R.drawable.street_name_dark, R.drawable.street_name_light, R.string.map_widget_top_text,
 				"street_name", MapWidgetRegistry.MAIN_CONTROL, 100);
@@ -239,7 +230,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void createControls() {
 		// 1. Create view groups and controls
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
-		statusBar.addView(createConfiguration());
 		rightStack = new StackWidgetView(view.getContext());
 		leftStack = new StackWidgetView(view.getContext());
 		
@@ -352,7 +342,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				final ApplicationMode mode = settings.getApplicationMode();
 				View v = convertView;
 				if (v == null) {
-					v = map.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
+					v = map.getLayoutInflater().inflate(R.layout.drawer_list_item, null);
 				}
 				final TextView tv = (TextView) v.findViewById(R.id.title);
 				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
@@ -598,66 +588,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 	}
 	
-	private View createConfiguration(){
-		final OsmandMapTileView view = map.getMapView();
-		
-		final Drawable config = view.getResources().getDrawable(R.drawable.map_config);
-		final Drawable configWhite = view.getResources().getDrawable(R.drawable.map_config_white);
-		ImageViewWidget configuration = new ImageViewWidget(map) {
-			private boolean nm;
-			
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean nightMode = drawSettings != null && drawSettings.isNightMode();
-				if(nightMode != this.nm) {
-					this.nm = nightMode;
-					setImageDrawable(nightMode ? configWhite : config);
-					return true;
-				}
-				return false;
-			}
-		};
-		configuration.setOnClickListener(new View.OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				map.getMapActions().openViewConfigureDrawer();
-			}
-		});
-		configuration.setImageDrawable(config);
-		return configuration;
-	}
-	private View createLayer(){
-//		final Drawable globusDrawable = view.getResources().getDrawable(R.drawable.map_globus);
-//		final Drawable globusDrawableWhite = view.getResources().getDrawable(R.drawable.map_globus_white);
-		final Drawable layerDrawable = view.getResources().getDrawable(R.drawable.map_layers_black);
-		final Drawable layerDrawableWhite = view.getResources().getDrawable(R.drawable.map_layers_white);
-		
-		ImageView layers = new ImageViewWidget(view.getContext()) {
-			private boolean nightMode;
-
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
-				if(nightMode != this.nightMode) {
-					this.nightMode = nightMode;
-					setImageDrawable(nightMode ? layerDrawableWhite : layerDrawable);
-					return true;
-				}
-				return false;
-			}
-		};;
-		layers.setImageDrawable(layerDrawable);
-		layers.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				map.getMapActions().prepareConfigureMap();
-				map.getMapActions().toggleDrawer();
-			}
-		});
-		return layers;
-	}
 	
-
 
 	public static String getStringPropertyName(Context ctx, String propertyName, String defValue) {
 		try {
