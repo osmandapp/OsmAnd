@@ -19,7 +19,8 @@ public class ContextMenuAdapter {
 		items.clear();
 		isCategory.clear();
 		itemNames.clear();
-		listeners.clear();
+		checkListeners.clear();
+		itemListeners.clear();
 		selectedList.clear();
 		layoutIds.clear();
 		iconList.clear();
@@ -40,8 +41,10 @@ public class ContextMenuAdapter {
 	final TIntArrayList items = new TIntArrayList();
 	final TIntArrayList isCategory = new TIntArrayList();
 	final ArrayList<String> itemNames = new ArrayList<String>();
-	final ArrayList<OnContextMenuClick> listeners = new ArrayList<ContextMenuAdapter.OnContextMenuClick>();
+	final ArrayList<OnContextMenuClick> checkListeners = new ArrayList<ContextMenuAdapter.OnContextMenuClick>();
+	final ArrayList<OnContextMenuClick> itemListeners = new ArrayList<ContextMenuAdapter.OnContextMenuClick>();
 	final TIntArrayList selectedList = new TIntArrayList();
+	final TIntArrayList loadingList = new TIntArrayList();
 	final TIntArrayList layoutIds = new TIntArrayList();
 	final TIntArrayList iconList = new TIntArrayList();
 	final TIntArrayList iconListLight = new TIntArrayList();
@@ -68,7 +71,11 @@ public class ContextMenuAdapter {
 	}
 	
 	public OnContextMenuClick getClickAdapter(int i) {
-		return listeners.get(i);
+		return checkListeners.get(i);
+	}
+
+	public OnContextMenuClick getItemClickAdapter(int i) {
+		return itemListeners.get(i);
 	}
 	
 	public String getItemName(int pos){
@@ -95,6 +102,10 @@ public class ContextMenuAdapter {
 	
 	public int getSelection(int pos) {
 		return selectedList.get(pos);
+	}
+
+	public int getLoading(int pos) {
+		return loadingList.get(pos);
 	}
 	
 	public void setSelection(int pos, int s) {
@@ -142,10 +153,12 @@ public class ContextMenuAdapter {
 		String name;
 		int selected = -1;
 		int layout = -1;
+		int loading = -1;
 		boolean cat;
 		int pos = -1;
 		String description = "";
-		private OnContextMenuClick listener;
+		private OnContextMenuClick checkBoxListener;
+		private OnContextMenuClick itemClickListener;
 		boolean enabled = false;
 
 		private Item() {
@@ -171,6 +184,11 @@ public class ContextMenuAdapter {
 			this.selected = selected;
 			return this;
 		}
+
+		public Item loading(int loading) {
+			this.loading = loading;
+			return this;
+		}
 		
 		public Item layout(int l) {
 			this.layout = l;
@@ -183,9 +201,13 @@ public class ContextMenuAdapter {
 		}
 
 		public Item listen(OnContextMenuClick l) {
-			this.listener = l;
+			this.checkBoxListener = l;
 			return this;
+		}
 
+		public Item itemClickListen(OnContextMenuClick l) {
+			this.itemClickListener = l;
+			return this;
 		}
 
 		public void reg() {
@@ -196,10 +218,11 @@ public class ContextMenuAdapter {
 			itemNames.add(pos, name);
 			itemDescription.add(pos, description);
 			selectedList.insert(pos, selected);
+			loadingList.insert(pos, loading);
 			layoutIds.insert(pos, layout);
 			iconList.insert(pos, icon);
 			iconListLight.insert(pos, lightIcon);
-			listeners.add(pos, listener);
+			checkListeners.add(pos, checkBoxListener);
 			isCategory.insert(pos, cat ? 1 : 0);
 		}
 
@@ -222,11 +245,13 @@ public class ContextMenuAdapter {
 		items.removeAt(pos);
 		itemNames.remove(pos);
 		selectedList.removeAt(pos);
+		loadingList.clear();
 		iconList.removeAt(pos);
 		iconListLight.removeAt(pos);
-		listeners.remove(pos);
+		checkListeners.remove(pos);
 		isCategory.removeAt(pos);
 		layoutIds.removeAt(pos);
+		loadingList.clear();
 	}
 
 	public int getLayoutId(int position) {
@@ -270,30 +295,8 @@ public class ContextMenuAdapter {
 					tv.setTypeface(null);
 				}
 
-				if (v.findViewById(R.id.check_item) instanceof CheckBox){
-					final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-
-					if(selectedList.get(position) != -1) {
-						ch.setOnCheckedChangeListener(null);
-						ch.setVisibility(View.VISIBLE);
-						ch.setChecked(selectedList.get(position) > 0);
-						ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-							@Override
-							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-								OnContextMenuClick ca = getClickAdapter(position);
-								if(ca != null) {
-									ca.onContextMenuClick(getElementId(position), position, isChecked);
-								}
-							}
-						});
-						ch.setVisibility(View.VISIBLE);
-					} else if (ch != null) {
-						ch.setVisibility(View.GONE);
-					}
-				} else if (v.findViewById(R.id.check_item) instanceof Switch) {
-					final Switch ch = (Switch) v.findViewById(R.id.check_item);
-
+				if (v.findViewById(R.id.check_item) != null) {
+					CompoundButton ch = (CompoundButton) v.findViewById(R.id.check_item);
 					if(selectedList.get(position) != -1) {
 						ch.setOnCheckedChangeListener(null);
 						ch.setVisibility(View.VISIBLE);
@@ -314,6 +317,14 @@ public class ContextMenuAdapter {
 					}
 				}
 
+				if (v.findViewById(R.id.ProgressBar) != null){
+					ProgressBar bar = (ProgressBar) v.findViewById(R.id.ProgressBar);
+					if(loadingList.get(position) == 1){
+						bar.setVisibility(View.VISIBLE);
+					} else {
+						bar.setVisibility(View.INVISIBLE);
+					}
+				}
 
 				String itemDescr = getItemDescr(position);
 				if (v.findViewById(R.id.descr) != null){

@@ -542,7 +542,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			if (waypointHelper.isTypeVisible(i)) {
 				final boolean checked = waypointHelper.isTypeEnabled(i);
 				final int type = i;
-				adapter.item(getHeader(ctx, i, checked)).enabled(checked).layout(R.layout.drawer_list_poi_header).listen(new ContextMenuAdapter.OnContextMenuClick() {
+				adapter.item(getHeader(ctx, i, checked)).enabled(checked).layout(R.layout.drawer_list_poi_header).itemClickListen(new ContextMenuAdapter.OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(int itemId, int pos, boolean isChecked) {
 						running[0] = pos;
@@ -554,10 +554,10 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 						}
 						return false;
 					}
-				}).reg();
+				}).loading(0).reg();
 
 				if (i == WaypointHelper.POI && waypointHelper.isTypeEnabled(WaypointHelper.POI)){
-					adapter.item(ctx.getString(R.string.search_radius_proximity)).listen(new ContextMenuAdapter.OnContextMenuClick() {
+					adapter.item(ctx.getString(R.string.search_radius_proximity)).itemClickListen(new ContextMenuAdapter.OnContextMenuClick() {
 						@Override
 						public boolean onContextMenuClick(int itemId, final int pos, boolean isChecked) {
 							int length = WaypointHelper.SEARCH_RADIUS_VALUES.length;
@@ -588,9 +588,9 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 									.show();
 							return false;
 						}
-					}).reg();
+					}).loading(0).selected(app.getSettings().SHOW_POI_OVER_MAP.get() ? 1 : 0).reg();
 				} else if (i == WaypointHelper.FAVORITES && waypointHelper.isTypeEnabled(WaypointHelper.FAVORITES)){
-					adapter.item(ctx.getString(R.string.search_radius_proximity)).listen(new ContextMenuAdapter.OnContextMenuClick() {
+					adapter.item(ctx.getString(R.string.search_radius_proximity)).itemClickListen(new ContextMenuAdapter.OnContextMenuClick() {
 						@Override
 						public boolean onContextMenuClick(int itemId, final int pos, boolean isChecked) {
 							int length = WaypointHelper.SEARCH_RADIUS_VALUES.length;
@@ -620,7 +620,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 									.show();
 							return false;
 						}
-					}).reg();
+					}).loading(0).selected(app.getSettings().SHOW_FAVORITES.get() ? 1 : 0).reg();
 				}
 				if (tp != null && tp.size() > 0) {
 					for (LocationPointWrapper p : tp){
