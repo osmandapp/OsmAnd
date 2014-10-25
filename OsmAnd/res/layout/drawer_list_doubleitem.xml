@@ -20,13 +20,13 @@
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"/>
     </LinearLayout>
-
-    <CheckBox android:id="@+id/check_item"
-              android:focusable="false"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginLeft="11dp"/>
-              <!-- android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp" -->
+  <CheckBox
+        android:id="@+id/check_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:focusable="false"
+        android:layout_gravity="center_vertical" />
+    
 
 </LinearLayout>

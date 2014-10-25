@@ -262,6 +262,10 @@ public class ContextMenuAdapter {
 		return defaultLayoutId; 
 	}
 	
+	
+	public void setDefaultLayoutId(int defaultLayoutId) {
+		this.defaultLayoutId = defaultLayoutId;
+	}
 
 	public ListAdapter createListAdapter(final Activity activity, final boolean holoLight) {
 		final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);

@@ -28,6 +28,7 @@ public class ConfigureMapMenu {
 	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(ma);
 		adapter.item(R.string.configure_map).icons(R.drawable.ic_back_drawer_dark, R.drawable.ic_back_drawer_white)
+				.layout(R.layout.drawer_list_header)
 				.listen(new OnContextMenuClick() {
 
 					@Override
@@ -36,6 +37,7 @@ public class ConfigureMapMenu {
 						return false;
 					}
 				}).reg();
+		adapter.setDefaultLayoutId(R.layout.drawer_list_item);
 		createLayersItems(adapter, ma);
 		createRenderingAttributeItems(adapter, ma);
 		return adapter;
@@ -94,21 +96,21 @@ public class ConfigureMapMenu {
 		adapter.item(R.string.layers_category_show).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
 		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).listen(l).layout(R.layout.drawer_list_layer).reg();
+				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).listen(l).reg();
 		adapter.item(R.string.layer_amenity_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0) 
-				.icons(R.drawable.ic_action_text_dark, R.drawable.ic_action_text_light).listen(l).layout(R.layout.drawer_list_layer).reg();
+				.icons(R.drawable.ic_action_text_dark, R.drawable.ic_action_text_light).listen(l).reg();
 		adapter.item(R.string.layer_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0) 
-				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).listen(l).layout(R.layout.drawer_list_layer).reg();
+				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).listen(l).reg();
 		adapter.item(R.string.layer_gpx_layer).selected(
 				app.getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0)
 //				.icons(R.drawable.ic_action_foot_dark, R.drawable.ic_action_foot_light)
 				.icons(R.drawable.ic_action_polygom_dark, R.drawable.ic_action_polygom_light)
-				.listen(l).layout(R.layout.drawer_list_layer).reg();
+				.listen(l).reg();
 		adapter.item(R.string.layer_transport).selected(settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).listen(l).layout(R.layout.drawer_list_layer).reg();
+				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).listen(l).reg();
 		if(TransportRouteHelper.getInstance().routeIsCalculated()){
 			adapter.item(R.string.layer_transport_route).selected(1)
-				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).listen(l).layout(R.layout.drawer_list_layer).reg();
+				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).listen(l).reg();
 		}
 		
 		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);
@@ -161,7 +163,7 @@ public class ConfigureMapMenu {
 				bld.show();
 				return false;
 			}
-		}).description(descr).layout(R.layout.drawer_list_rendering).reg();
+		}).description(descr).layout(R.layout.drawer_list_doubleitem).reg();
 
 		adapter.item(R.string.map_widget_day_night).description(activity.getMyApplication().getSettings().DAYNIGHT_MODE.get().toHumanString(activity)).listen(new OnContextMenuClick() {
 			@Override
@@ -185,7 +187,7 @@ public class ConfigureMapMenu {
 				bld.show();
 				return false;
 			}
-		}).layout(R.layout.drawer_list_rendering).reg();
+		}).layout(R.layout.drawer_list_doubleitem).reg();
 
 		int scale = (int)(activity.getMyApplication().getSettings().TEXT_SCALE.get() * 100);
 		adapter.item(R.string.text_size).listen(new OnContextMenuClick() {
@@ -214,7 +216,7 @@ public class ConfigureMapMenu {
 				b.show();
 				return false;
 			}
-		}).description(scale + " %").layout(R.layout.drawer_list_rendering).reg();
+		}).description(scale + " %").layout(R.layout.drawer_list_doubleitem).reg();
 
 		RenderingRulesStorage renderer = activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
@@ -245,7 +247,7 @@ public class ConfigureMapMenu {
 						refreshMapComplete(activity);
 						return false;
 					}
-				}).selected(pref.get() ? 1 : 0).layout(R.layout.drawer_list_rendering).reg();
+				}).selected(pref.get() ? 1 : 0).reg();
 			} else {
 				final OsmandSettings.CommonPreference<String> pref = view.getApplication().getSettings()
 						.getCustomRenderProperty(p.getAttrName());
@@ -279,7 +281,7 @@ public class ConfigureMapMenu {
 						b.show();
 						return false;
 					}
-				}).description(descr).layout(R.layout.drawer_list_rendering).reg();
+				}).description(descr).layout(R.layout.drawer_list_doubleitem).reg();
 			}
 		}
 	}
