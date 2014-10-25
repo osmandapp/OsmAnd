@@ -3,10 +3,12 @@
     android:insetLeft="15dp"
     android:insetRight="15dp" >
 
-    <shape
-        android:shape="line" 
-        android:height="1px"
-        android:color="#FF404040">
-    </shape>
+    <stroke
+        android:dashGap="1dp"
+        android:dashWidth="1.5dp"
+        android:width="1dp"
+        android:color="#404040" />
+
+    <size android:height="3dp" />
 
 </inset>

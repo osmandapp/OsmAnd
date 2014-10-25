@@ -343,26 +343,32 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return cm;
 	}
 	
-	private void addControls(ContextMenuAdapter adapter, Set<MapWidgetRegInfo> top, final ApplicationMode mode) {
+	private void addControls(final ContextMenuAdapter adapter, Set<MapWidgetRegInfo> top, final ApplicationMode mode) {
 		for(final MapWidgetRegInfo r : top){
-			// String s = mi.visibleCollapsed(mode)? " - " : "  ";
-			// tv.setText(s +map.getString(mi.messageId) +s);
 			adapter.item(r.messageId).selected(r.visibleCollapsed(mode) || r.visible(mode) ? 1 : 0)
 				.icons(r.drawableDark, r.drawableLight).listen(new OnContextMenuClick() {
 				
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+				public boolean onContextMenuClick(ArrayAdapter<?> a, int itemId, int pos, boolean isChecked) {
 					final boolean selecteable = r.selecteable();
 					boolean check = r.visibleCollapsed(mode) || r.visible(mode);
 					if (check || selecteable) {
 						mapInfoControls.changeVisibility(r);
 					}
 					recreateControls();
-					adapter.notifyDataSetInvalidated();
+					adapter.setItemName(pos, getText(mode, r));
+					adapter.setSelection(pos, r.visibleCollapsed(mode) || r.visible(mode) ? 1 : 0);
+					a.notifyDataSetInvalidated();
 					return false;
 				}
 			}).reg();
+			adapter.setItemName(adapter.length() - 1, getText(mode, r));
 		}
+	}
+
+
+	protected String getText(final ApplicationMode mode, final MapWidgetRegInfo r) {
+		return (r.visibleCollapsed(mode)? " - " : "  ") + map.getString(r.messageId);
 	}
 
 	private int themeId = -1;

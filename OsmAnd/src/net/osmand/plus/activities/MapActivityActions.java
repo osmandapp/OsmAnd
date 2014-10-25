@@ -77,6 +77,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -776,8 +777,13 @@ public class MapActivityActions implements DialogProvider {
 			public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
 				OnContextMenuClick click = cm.getClickAdapter(which);
 				if (click != null) {
-					if (click.onContextMenuClick(listAdapter, cm.getElementId(which), which, false)) {
-						mDrawerLayout.closeDrawer(mDrawerList);
+					CompoundButton btn = (CompoundButton) view.findViewById(R.id.check_item);
+					if (btn != null && btn.getVisibility() == View.VISIBLE) {
+						btn.setChecked(!btn.isChecked());
+					} else {
+						if (click.onContextMenuClick(listAdapter, cm.getElementId(which), which, false)) {
+							mDrawerLayout.closeDrawer(mDrawerList);
+						}
 					}
 				} else {
 					mDrawerLayout.closeDrawer(mDrawerList);
@@ -900,17 +906,13 @@ public class MapActivityActions implements DialogProvider {
 			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_light)
 					.listen(new OnContextMenuClick() {
 						@Override
-						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-							if (getMyApplication().getWaypointHelper().isRouteCalculated()) {
-
-								final List<WaypointHelper.LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
-								ContextMenuAdapter cm = waypointDialogHelper.setListAdapter(app.getMapActivity(), mDrawerList, deletedPoints);
-
-								return false;
-							} else {
-								openIntermediatePointsDialog();
-								return true;
-							}
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos,
+								boolean isChecked) {
+							final List<WaypointHelper.LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
+							ContextMenuAdapter cm = waypointDialogHelper.setListAdapter(app.getMapActivity(),
+									mDrawerList, deletedPoints);
+							prepareOptionsMenu(cm);
+							return false;
 						}
 					}).reg();
 		}

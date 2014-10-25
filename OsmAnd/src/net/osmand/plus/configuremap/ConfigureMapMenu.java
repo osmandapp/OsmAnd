@@ -125,10 +125,10 @@ public class ConfigureMapMenu {
 	
 	private void createRenderingAttributeItems(final ContextMenuAdapter adapter, final MapActivity activity) {
 		adapter.item(R.string.map_widget_map_rendering).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
-		String descr = activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer().getName();
+		String descr = getRenderDescr(activity);
 		adapter.item(R.string.map_widget_renderer).listen(new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
 				AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 				bld.setTitle(R.string.renderers);
 				final OsmandApplication app = activity.getMyApplication();
@@ -157,6 +157,8 @@ public class ConfigureMapMenu {
 						} else {
 							AccessibleToast.makeText(app, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 						}
+						adapter.setItemDescription(pos, getRenderDescr(activity));
+						ad.notifyDataSetInvalidated();
 						dialog.dismiss();
 					}
 
@@ -166,9 +168,9 @@ public class ConfigureMapMenu {
 			}
 		}).description(descr).layout(R.layout.drawer_list_doubleitem).reg();
 
-		adapter.item(R.string.map_widget_day_night).description(activity.getMyApplication().getSettings().DAYNIGHT_MODE.get().toHumanString(activity)).listen(new OnContextMenuClick() {
+		adapter.item(R.string.map_widget_day_night).description(getDayNightDescr(activity)).listen(new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
 				final OsmandMapTileView view = activity.getMapView();
 				AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 				bld.setTitle(R.string.daynight);
@@ -183,6 +185,8 @@ public class ConfigureMapMenu {
 						view.getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.values()[which]);
 						refreshMapComplete(activity);
 						dialog.dismiss();
+						adapter.setItemDescription(pos, getDayNightDescr(activity));
+						ad.notifyDataSetInvalidated();
 					}
 				});
 				bld.show();
@@ -190,10 +194,9 @@ public class ConfigureMapMenu {
 			}
 		}).layout(R.layout.drawer_list_doubleitem).reg();
 
-		int scale = (int)(activity.getMyApplication().getSettings().TEXT_SCALE.get() * 100);
 		adapter.item(R.string.text_size).listen(new OnContextMenuClick() {
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+			public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
 				final OsmandMapTileView view = activity.getMapView();
 				AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
 				// test old descr as title
@@ -212,21 +215,36 @@ public class ConfigureMapMenu {
 					public void onClick(DialogInterface dialog, int which) {
 						view.getSettings().TEXT_SCALE.set(txtValues[which]);
 						refreshMapComplete(activity);
+						adapter.setItemDescription(pos, getScale(activity));
+						ad.notifyDataSetInvalidated();
 					}
 				});
 				b.show();
 				return false;
 			}
-		}).description(scale + " %").layout(R.layout.drawer_list_doubleitem).reg();
+		}).description(getScale(activity)).layout(R.layout.drawer_list_doubleitem).reg();
 
 		RenderingRulesStorage renderer = activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
 			createCustomRenderingProperties(renderer, adapter, activity);
 		}
 	}
+
+	protected String getRenderDescr(final MapActivity activity) {
+		return activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer().getName();
+	}
+
+	protected String getDayNightDescr(final MapActivity activity) {
+		return activity.getMyApplication().getSettings().DAYNIGHT_MODE.get().toHumanString(activity);
+	}
+
+	protected String getScale(final MapActivity activity) {
+		int scale = (int)(activity.getMyApplication().getSettings().TEXT_SCALE.get() * 100);
+		return scale + " %";
+	}
 	
 	
-	private void createCustomRenderingProperties(RenderingRulesStorage renderer, ContextMenuAdapter adapter , final MapActivity activity){
+	private void createCustomRenderingProperties(RenderingRulesStorage renderer, final ContextMenuAdapter adapter , final MapActivity activity){
 		final OsmandMapTileView view = activity.getMapView();
 		adapter.item(R.string.map_widget_vector_attributes).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		final OsmandApplication app = view.getApplication();
@@ -256,7 +274,7 @@ public class ConfigureMapMenu {
 				adapter.item(propertyName).listen(new OnContextMenuClick() {
 
 					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
 						AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
 						// test old descr as title
 						b.setTitle(propertyDescr);
@@ -276,7 +294,9 @@ public class ConfigureMapMenu {
 								pref.set(p.getPossibleValues()[which]);
 								app.getResourceManager().getRenderer().clearCache();
 								view.refreshMap(true);
+								adapter.setItemDescription(pos, SettingsActivity.getStringPropertyValue(activity, pref.get()));
 								dialog.dismiss();
+								ad.notifyDataSetInvalidated();
 							}
 						});
 						b.show();
