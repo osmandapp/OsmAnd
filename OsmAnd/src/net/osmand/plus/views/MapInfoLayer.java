@@ -327,16 +327,16 @@ public class MapInfoLayer extends OsmandMapLayer {
 		final ArrayList<Object> list = new ArrayList<Object>();
 		list.add(map.getString(R.string.layer_map_appearance));
 		list.add(map.getString(R.string.map_widget_reset));
-		list.add(map.getString(R.string.map_widget_top_stack));
+		list.add(map.getString(R.string.map_widget_top));
 		list.addAll(mapInfoControls.getTop());
-		list.add(map.getString(R.string.map_widget_right_stack));
+		list.add(map.getString(R.string.map_widget_right));
 		list.addAll(mapInfoControls.getRight());
-		list.add(map.getString(R.string.map_widget_left_stack));
+		list.add(map.getString(R.string.map_widget_left));
 		list.addAll(mapInfoControls.getLeft());
 
 		Set<MapWidgetRegInfo> widgets = mapInfoControls.getAppearanceWidgets();
 		Set<String> cats = getSpecificVisibleCategories(widgets);
-		list.add(map.getString(R.string.map_widget_appearance));
+		list.add(map.getString(R.string.map_widget_appearance_rem));
 		fillAppearanceWidgets(widgets, null, list);
 		for(String cat : cats) {
 			list.add(cat);
