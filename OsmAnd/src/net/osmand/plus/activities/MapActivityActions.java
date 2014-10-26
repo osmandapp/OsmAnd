@@ -752,6 +752,43 @@ public class MapActivityActions implements DialogProvider {
 						return false;
 					}
 				}).reg();
+		optionsMenuHelper.item(R.string.search_button)
+				.icons(R.drawable.ic_action_search_dark, R.drawable.ic_action_search_light)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+								.getSearchActivity());
+						// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						LatLon loc = mapActivity.getMapLocation();
+						newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+						newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+						newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						mapActivity.startActivity(newIntent);
+						return true;
+					}
+				}).reg();
+
+		optionsMenuHelper.item(R.string.favorites_Button)
+				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+								.getFavoritesActivity());
+						// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						mapActivity.startActivity(newIntent);
+						return true;
+					}
+				}).reg();
+		optionsMenuHelper.item(R.string.show_point_options)
+				.icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+						return true;
+					}
+				}).reg();
 
 		optionsMenuHelper.item(R.string.layer_map_appearance).icons(R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_light) 
 			.listen(new OnContextMenuClick() {
@@ -773,39 +810,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 
-		optionsMenuHelper.item(R.string.search_button).icons(R.drawable.ic_action_search_dark, R.drawable.ic_action_search_light)
-				.listen(new OnContextMenuClick() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getSearchActivity());
-				// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				LatLon loc = mapActivity.getMapLocation();
-				newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
-				newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
-				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				mapActivity.startActivity(newIntent);
-				return true;
-			}
-		}).reg();
 		
-		optionsMenuHelper.item(R.string.favorites_Button).icons( R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light)
-				.listen(new OnContextMenuClick() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getFavoritesActivity());
-				// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				mapActivity.startActivity(newIntent);
-				return true;
-			}
-		}).reg();
-		optionsMenuHelper.item(R.string.show_point_options).icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light )
-				.listen(new OnContextMenuClick() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
-				return true;
-			}
-		}).reg();
 		//////////// Others
 		if (Version.isGpsStatusEnabled(app)) {
 			optionsMenuHelper.item(R.string.show_gps_status).icons(R.drawable.ic_action_gabout_dark, R.drawable.ic_action_gabout_light )

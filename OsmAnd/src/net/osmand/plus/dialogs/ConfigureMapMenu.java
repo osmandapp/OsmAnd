@@ -3,6 +3,7 @@ package net.osmand.plus.dialogs;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
@@ -243,7 +244,33 @@ public class ConfigureMapMenu {
 
 		RenderingRulesStorage renderer = activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
-			createCustomRenderingProperties(renderer, adapter, activity);
+			List<RenderingRuleProperty> customRules = new ArrayList<RenderingRuleProperty>(renderer.PROPS.getCustomRules());
+			createProperties(customRules, R.string.rendering_category_details, "details", 
+					adapter, activity);
+			createProperties(customRules, R.string.rendering_category_hiking, "hiking", 
+					adapter, activity);
+			createProperties(customRules, R.string.rendering_category_transport, "transport", 
+					adapter, activity);
+			if(customRules.size() > 0) {
+				adapter.item(R.string.rendering_category_others).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+				createCustomRenderingProperties(adapter, activity, customRules);
+			}
+		}
+	}
+
+	private void createProperties(List<RenderingRuleProperty> customRules, int strId, String cat, ContextMenuAdapter adapter, MapActivity activity) {
+		List<RenderingRuleProperty> ps = new ArrayList<RenderingRuleProperty>();
+		Iterator<RenderingRuleProperty> it = customRules.iterator();
+		while(it.hasNext()) {
+			RenderingRuleProperty p = it.next();
+			if(cat.equals(p.getCategory())) {
+				ps.add(p);
+				it.remove();
+			}
+		}
+		if(ps.size() > 0) {
+			adapter.item(strId).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+			createCustomRenderingProperties(adapter, activity, ps);
 		}
 	}
 
@@ -261,11 +288,10 @@ public class ConfigureMapMenu {
 	}
 	
 	
-	private void createCustomRenderingProperties(RenderingRulesStorage renderer, final ContextMenuAdapter adapter , final MapActivity activity){
+	private void createCustomRenderingProperties(final ContextMenuAdapter adapter , final MapActivity activity,
+			List<RenderingRuleProperty> customRules ){
 		final OsmandMapTileView view = activity.getMapView();
-		adapter.item(R.string.map_widget_vector_attributes).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		final OsmandApplication app = view.getApplication();
-		List<RenderingRuleProperty> customRules = renderer.PROPS.getCustomRules();
 		for (final RenderingRuleProperty p : customRules) {
 			String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(),
 					p.getName());

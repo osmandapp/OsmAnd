@@ -136,8 +136,14 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		});
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
 		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(ctx));
-//		Location lastKnownMapLocation = app.getLocationProvider().getLastKnownLocation();
-		int dist = wh.getRouteDistance(ps);
+		int dist;
+		if(!wh.isRouteCalculated()) {
+			Location lm = app.getLocationProvider().getLastKnownLocation();
+			dist = (int) MapUtils.getDistance(lm.getLatitude(), lm.getLongitude(), 
+					point.getLatitude(), point.getLongitude());
+		} else {
+			dist = wh.getRouteDistance(ps);
+		}
 		String dd = OsmAndFormatter.getFormattedDistance(dist, app);
 		if (ps.deviationDistance > 0) {
 			dd += "\n+" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
