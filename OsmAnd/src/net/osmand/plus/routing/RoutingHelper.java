@@ -138,7 +138,7 @@ public class RoutingHelper {
 		RouteCalculationResult previousRoute = route;
 		clearCurrentRoute(finalLocation, intermediatePoints);
 		// to update route
-		setCurrentLocation(currentLocation, false, previousRoute);
+		setCurrentLocation(currentLocation, false, previousRoute, true);
 	}
 	
 	public synchronized void clearCurrentRoute(LatLon newFinalLocation, List<LatLon> newIntermediatePoints) {
@@ -227,7 +227,7 @@ public class RoutingHelper {
 	}
 	
 	public Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation) {
-		return setCurrentLocation(currentLocation, returnUpdatedLocation, route);
+		return setCurrentLocation(currentLocation, returnUpdatedLocation, route, false);
 	}
 
 	public double getRouteDeviation(){
@@ -240,7 +240,8 @@ public class RoutingHelper {
 		return getOrthogonalDistance(lastFixedLocation, routeNodes.get(route.currentRoute -1), routeNodes.get(route.currentRoute));
 	}
 	
-	private Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation, RouteCalculationResult previousRoute) {
+	private Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation, 
+			RouteCalculationResult previousRoute, boolean targetPointsChanged) {
 		Location locationProjection = currentLocation;
 		if (finalLocation == null || currentLocation == null) {
 			isDeviatedFromRoute = false;
@@ -316,7 +317,7 @@ public class RoutingHelper {
 
 		if (calculateRoute) {
 			recalculateRouteInBackground(false, currentLocation, finalLocation, intermediatePoints, currentGPXRoute, 
-					previousRoute.isCalculated() ? previousRoute : null, false);
+					previousRoute.isCalculated() ? previousRoute : null, false, !targetPointsChanged);
 		} else {
 			Thread job = currentRunningJob;
 			if(job instanceof RouteRecalculationThread) {
@@ -772,29 +773,31 @@ public class RoutingHelper {
 	}
 	
 	public void recalculateRouteDueToSettingsChange() {
-		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, true);
+		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, 
+				true, false);
 	}
 	
 	private void recalculateRouteInBackground(boolean force, final Location start, final LatLon end, final List<LatLon> intermediates,
-			final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute, boolean paramsChanged){
+			final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute, boolean paramsChanged, boolean onlyStartPointChanged){
 		if (start == null || end == null) {
 			return;
 		}
-		if(currentRunningJob == null){
+		if (currentRunningJob == null) {
 			// do not evaluate very often
 			if (force || System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {
 				RouteCalculationParams params = new RouteCalculationParams();
 				params.start = start;
 				params.end = end;
 				params.intermediates = intermediates;
-				params.gpxRoute = gpxRoute == null? null : gpxRoute.build(start, settings);
+				params.gpxRoute = gpxRoute == null ? null : gpxRoute.build(start, settings);
+				params.onlyStartPointChanged = onlyStartPointChanged;
 				params.previousToRecalculate = previousRoute;
 				params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 				params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
 				params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 				params.mode = mode;
 				params.ctx = app;
-				if(previousRoute == null && params.type == RouteService.OSMAND) {
+				if (previousRoute == null && params.type == RouteService.OSMAND) {
 					params.calculationProgress = new RouteCalculationProgress();
 					updateProgress(params.calculationProgress);
 				}

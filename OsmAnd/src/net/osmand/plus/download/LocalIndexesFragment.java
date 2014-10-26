@@ -1,8 +1,11 @@
 package net.osmand.plus.download;
 
 import java.io.File;
+import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -264,6 +267,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPostExecute(List<LocalIndexInfo> result) {
 			this.result = result;
+			listAdapter.sortData();
+			
 			getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
 			getDownloadActivity().setLocalIndexInfos(result);
 		}
@@ -759,6 +764,19 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			filterCategory = null;
 			notifyDataSetChanged();
 		}
+		
+		public void sortData() {
+			final Collator cl = Collator.getInstance();
+			for(List<LocalIndexInfo> i : data.values()) {
+				Collections.sort(i, new Comparator<LocalIndexInfo>() {
+
+					@Override
+					public int compare(LocalIndexInfo lhs, LocalIndexInfo rhs) {
+						return cl.compare(lhs.getName(), rhs.getName());
+					}
+				});
+			}
+		}
 
 		public LocalIndexInfo findCategory(LocalIndexInfo val, boolean backuped){
 			for(LocalIndexInfo i : category){
@@ -1017,8 +1035,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				name = fileName.substring(0, ls);
 			}
 
-			if (name.endsWith("-roads")){
-					return ctx.getString(R.string.download_roads_only_item);
+			if (name.endsWith("-roads")) {
+				return ctx.getString(R.string.download_roads_only_item);
 			}
 
 			return "";

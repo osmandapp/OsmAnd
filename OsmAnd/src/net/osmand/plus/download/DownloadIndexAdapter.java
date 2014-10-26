@@ -36,11 +36,14 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	private int updateColor;
 	private OsmandRegions osmandRegions;
 	private java.text.DateFormat format;
+	private OsmandApplication app;
 
 	public DownloadIndexAdapter(DownloadIndexFragment downloadFragment, List<IndexItem> indexFiles) {
 		this.downloadFragment = downloadFragment;
+		
 		this.indexFiles = new ArrayList<IndexItem>(indexFiles);
-		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(downloadFragment.getMyApplication(), indexFiles);
+		app = downloadFragment.getMyApplication();
+		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(app, indexFiles);
 		synchronized (this) {
 			list.clear();
 			list.addAll(cats);
@@ -165,7 +168,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				list.clear();
 				Collection<IndexItem> items = (Collection<IndexItem>) results.values;
 				if (items != null && !items.isEmpty()) {
-					list.addAll(IndexItemCategory.categorizeIndexItems(downloadFragment.getMyApplication(), items));
+					list.addAll(IndexItemCategory.categorizeIndexItems(app, items));
 				} else if(DownloadIndexAdapter.this.indexFiles.isEmpty()){
 					list.add(new IndexItemCategory(downloadFragment.getResources().getString(R.string.no_index_file_to_download), 1));
 				} else {

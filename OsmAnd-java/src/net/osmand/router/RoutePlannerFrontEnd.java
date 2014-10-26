@@ -23,7 +23,7 @@ import org.apache.commons.logging.Log;
 public class RoutePlannerFrontEnd {
 	
 	private boolean useOldVersion;
-	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlannerOld.class);
+	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
 
 	public RoutePlannerFrontEnd(boolean useOldVersion) {
 		this.useOldVersion = useOldVersion;
@@ -336,19 +336,25 @@ public class RoutePlannerFrontEnd {
 			List<RouteSegmentResult> prev = ctx.previouslyCalculatedRoute;
 			long id = points.get(1).getRoad().id;
 			int ss = points.get(1).getSegmentStart();
+			int px = points.get(1).getRoad().getPoint31XTile(ss);
+			int py = points.get(1).getRoad().getPoint31YTile(ss);
 			for (int i = 0; i < prev.size(); i++) {
 				RouteSegmentResult rsr = prev.get(i);
-				if (id == rsr.getObject().getId() && ss == rsr.getEndPointIndex()) {
-					firstPartRecalculatedRoute = new ArrayList<RouteSegmentResult>(i + 1);
-					restPartRecalculatedRoute = new ArrayList<RouteSegmentResult>(prev.size() - i);
-					for (int k = 0; k < prev.size(); k++) {
-						if (k <= i) {
-							firstPartRecalculatedRoute.add(prev.get(k));
-						} else {
-							restPartRecalculatedRoute.add(prev.get(k));
+				if (id == rsr.getObject().getId()) {
+					if (MapUtils.getDistance(rsr.getPoint(rsr.getEndPointIndex()), MapUtils.get31LatitudeY(py),
+							MapUtils.get31LongitudeX(px)) < 50) {
+						firstPartRecalculatedRoute = new ArrayList<RouteSegmentResult>(i + 1);
+						restPartRecalculatedRoute = new ArrayList<RouteSegmentResult>(prev.size() - i);
+						for (int k = 0; k < prev.size(); k++) {
+							if (k <= i) {
+								firstPartRecalculatedRoute.add(prev.get(k));
+							} else {
+								restPartRecalculatedRoute.add(prev.get(k));
+							}
 						}
+						System.out.println("Recalculate only first part of the route");
+						break;
 					}
-					break;
 				}
 			}
 		}
