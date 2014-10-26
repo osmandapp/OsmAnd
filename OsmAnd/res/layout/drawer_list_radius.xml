@@ -9,9 +9,8 @@
 			  
 	 <ImageView android:id="@+id/waypoint_icon"
                android:layout_marginLeft="8dp"
-               android:src="@drawable/list_favorite"
-               android:layout_height="25dp"
-               android:layout_width="25dp"
+               android:layout_height="wrap_content"
+               android:layout_width="wrap_content"
                android:layout_gravity="center_vertical"/>
     
 			  

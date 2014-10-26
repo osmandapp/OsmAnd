@@ -737,7 +737,7 @@ public class MapActivityActions implements DialogProvider {
 //							ContextMenuAdapter cm = waypointDialogHelper.setListAdapter(app.getMapActivity(),
 //									mDrawerList, deletedPoints);
 //							prepareOptionsMenu(cm);
-							WaypointDialogHelper.showWaypointsDialog(mapActivity);
+							WaypointDialogHelper.showWaypointsDialog(mapActivity, false);
 							return false;
 						}
 					}).reg();
