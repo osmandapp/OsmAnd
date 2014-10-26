@@ -585,11 +585,7 @@ public class RouteInfoWidgetsFactory {
 						int turnType;
 						if ((lanes[i] & 1) == 1) {
 							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
-							if(TurnType.getPrimaryTurn(lanes[i]) == 0) {
-								turnType = turn.getValue();
-							} else {
-								turnType = TurnType.getPrimaryTurn(lanes[i]);
-							}
+							turnType = TurnType.getPrimaryTurn(lanes[i]);
 						} else {
 							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
 							turnType = TurnType.getPrimaryTurn(lanes[i]); 
