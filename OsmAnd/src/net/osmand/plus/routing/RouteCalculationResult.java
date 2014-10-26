@@ -243,10 +243,14 @@ public class RouteCalculationResult {
                 if (routeInd  < list.size()) {
                     int lind = routeInd;
                     if(turn.isRoundAbout()) {
+                        int roundAboutEnd = prevLocationSize - 1;
                     	// take next name for roundabout (not roundabout name)
                     	while(lind < list.size() -1 && list.get(lind).getObject().roundabout()) {
+                    		roundAboutEnd += Math.abs(list.get(lind).getEndPointIndex()-list.get(lind).getStartPointIndex());
                     		lind++;
                     	}
+                    	// Consider roundabout end.
+                    	info.routeEndPointOffset = roundAboutEnd;
                     }
                     RouteSegmentResult next = list.get(lind);
                     info.setRef(next.getObject().getRef());
@@ -689,7 +693,9 @@ public class RouteCalculationResult {
 	
 	public void updateCurrentRoute(int currentRoute) {
 		this.currentRoute = currentRoute;
-		while (currentDirectionInfo < directions.size() - 1 && directions.get(currentDirectionInfo + 1).routePointOffset < currentRoute) {
+		while (currentDirectionInfo < directions.size() - 1
+				&& directions.get(currentDirectionInfo + 1).routePointOffset < currentRoute
+				&& directions.get(currentDirectionInfo + 1).routeEndPointOffset < currentRoute) {
 			currentDirectionInfo++;
 		}
 		while(nextIntermediate < intermediatePoints.length) {
@@ -721,7 +727,7 @@ public class RouteCalculationResult {
 	/*public */NextDirectionInfo getNextRouteDirectionInfo(NextDirectionInfo info, Location fromLoc, boolean toSpeak) {
 		int dirInfo = currentDirectionInfo;
 		if (dirInfo < directions.size()) {
-			int dist = listDistance[currentRoute];
+			// Locate next direction of interest
 			int nextInd = dirInfo + 1;
 			if (toSpeak) {
 				while (nextInd < directions.size()) {
@@ -732,12 +738,18 @@ public class RouteCalculationResult {
 					nextInd++;
 				}
 			}
+			int dist = listDistance[currentRoute];
 			if (fromLoc != null) {
 				dist += fromLoc.distanceTo(locations.get(currentRoute));
 			}
 			if (nextInd < directions.size()) {
 				info.directionInfo = directions.get(nextInd);
-				dist -= listDistance[directions.get(nextInd).routePointOffset];
+				if (directions.get(nextInd).routePointOffset <= currentRoute
+						&& currentRoute <= directions.get(nextInd).routeEndPointOffset)
+					// We are not into a puntual direction.
+					dist -= listDistance[directions.get(nextInd).routeEndPointOffset];
+				else
+					dist -= listDistance[directions.get(nextInd).routePointOffset];
 			}
 			if(intermediatePoints != null && nextIntermediate < intermediatePoints.length) {
 				info.intermediatePoint = intermediatePoints[nextIntermediate] == nextInd;
