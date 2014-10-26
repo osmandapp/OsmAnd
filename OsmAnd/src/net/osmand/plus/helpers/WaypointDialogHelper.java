@@ -136,19 +136,25 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		});
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
 		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(ctx));
-		int dist;
+		int dist = -1;
 		if(!wh.isRouteCalculated()) {
 			Location lm = app.getLocationProvider().getLastKnownLocation();
-			dist = (int) MapUtils.getDistance(lm.getLatitude(), lm.getLongitude(), 
+			if(lm != null) {
+				dist = (int) MapUtils.getDistance(lm.getLatitude(), lm.getLongitude(), 
 					point.getLatitude(), point.getLongitude());
+			}
 		} else {
 			dist = wh.getRouteDistance(ps);
 		}
-		String dd = OsmAndFormatter.getFormattedDistance(dist, app);
-		if (ps.deviationDistance > 0) {
-			dd += "\n+" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
+		if (dist > 0) {
+			String dd = OsmAndFormatter.getFormattedDistance(dist, app);
+			if (ps.deviationDistance > 0) {
+				dd += "\n+" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
+			}
+			textDist.setText(dd);
+		} else {
+			textDist.setText("");
 		}
-		textDist.setText(dd);
 		text.setText(point.getName(app));
 //			((Spannable) text.getText()).setSpan(
 //					new ForegroundColorSpan(ctx.getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
