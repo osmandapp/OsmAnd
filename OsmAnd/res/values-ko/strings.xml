@@ -995,7 +995,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="disable_complex_routing">복잡한 라우팅 사용불가</string>
     <string name="amenity_type_seamark">Seamark</string>
     <string name="app_modes_choose">앱 프로필</string>
-	<string name="map_widget_map_rendering">지도 렌더링:</string>
+	<string name="map_widget_map_rendering">지도 렌더링</string>
     <string name="app_mode_hiking">하이킹</string>
     <string name="app_mode_motorcycle">모터사이클</string>
     <string name="app_mode_boat">배</string>
@@ -1391,7 +1391,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="day_night_info_description">일출: %1$s \n일몰: %2$s</string>
 	<string name="day_night_info">주간/야간 정보</string>
 	<string name="map_widget_day_night">주간/야간 지도</string>
-	<string name="map_widget_vector_attributes">렌더링 속성:</string>
+	<string name="map_widget_vector_attributes">렌더링 속성</string>
 	<string name="map_widget_renderer">지도 스타일</string>
 	
 	
