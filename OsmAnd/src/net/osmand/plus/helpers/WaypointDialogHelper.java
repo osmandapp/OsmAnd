@@ -523,8 +523,8 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		protected View createDialogHeader(final FragmentActivity ctx, final boolean editF, final boolean flat, final AlertDialog dlg) {
 			View v;
 			v = ctx.getLayoutInflater().inflate(R.layout.waypoint_title, null);
-			ImageView edit = (ImageView) v.findViewById(R.id.edit);
-			ImageView all = (ImageView) v.findViewById(R.id.all);
+			ImageButton edit = (ImageButton) v.findViewById(R.id.edit);
+			ImageButton all = (ImageButton) v.findViewById(R.id.all);
 			edit.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_edit_light
 					: R.drawable.ic_action_edit_dark);
 			edit.setVisibility(editF ? View.GONE : View.VISIBLE);
@@ -618,7 +618,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			v = ctx.getLayoutInflater().inflate(R.layout.waypoint_header, null);
 			ImageView sort = (ImageView) v.findViewById(R.id.sort);
 			//sort button in Destination header
-			if (type == 0 && sort != null){
+			if (type == 0 && sort != null && app.getTargetPointsHelper().getIntermediatePoints().size() > 0){
 				sort.setVisibility(View.VISIBLE);
 				if (app.getSettings().isLightContent()){
 					sort.setImageResource(R.drawable.ic_sort_waypoint_white);
@@ -631,6 +631,8 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 						IntermediatePointsDialog.openIntermediatePointsDialog(ctx, app, true);
 					}
 				});
+			} else {
+				sort.setVisibility(View.GONE);
 			}
 			final CompoundButton btn = (CompoundButton) v.findViewById(R.id.check_item);
 			btn.setVisibility(waypointHelper.isTypeConfigurable(type) ? View.VISIBLE : View.GONE);
@@ -658,9 +660,6 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			return v;
 		}
 	}
-	
-	
-
 
 	private static void showOnMap(OsmandApplication app, Activity a, LocationPoint locationPoint, DialogFragment dialog) {
 		if (!(a instanceof MapActivity)) {
