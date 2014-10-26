@@ -10,7 +10,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import android.graphics.Color;
 import android.text.method.LinkMovementMethod;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.*;
@@ -31,20 +30,17 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StatFs;
-import android.text.SpannableString;
-import android.text.TextPaint;
-import android.text.style.ClickableSpan;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -146,7 +142,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				OnContextMenuClick clk = adapter.getClickAdapter(which);
 				if (clk != null) {
-					clk.onContextMenuClick(adapter.getItemId(which), which, false, dialog);
+					clk.onContextMenuClick(null, adapter.getElementId(which), which, false);
 				}
 			}
 
@@ -158,7 +154,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	private void basicFileOperation(final LocalIndexInfo info, ContextMenuAdapter adapter) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 				if (resId == R.string.local_index_mi_rename) {
 					renameFile(info);
 				} else if (resId == R.string.local_index_mi_restore) {
@@ -177,6 +173,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				} else if (resId == R.string.local_index_mi_backup) {
 					new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);
 				}
+				return true;
 			}
 		};
 		if(info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.SRTM_DATA){
@@ -475,8 +472,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		optionsMenuAdapter = new ContextMenuAdapter(getDownloadActivity());
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				localOptionsMenu(itemId);
+				return true;
 			}
 		};
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
@@ -504,10 +502,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 							: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
 					split.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				}
-				item = split.add(0, optionsMenuAdapter.getItemId(j), j + 1, optionsMenuAdapter.getItemName(j));
+				item = split.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
 				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM );
 			} else {
-				item = menu.add(0, optionsMenuAdapter.getItemId(j), j + 1, optionsMenuAdapter.getItemName(j));
+				item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
 				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM  
 						);
 			}
@@ -528,8 +526,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
-			if (itemId == optionsMenuAdapter.getItemId(i)) {
-				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(itemId, i, false, null);
+			if (itemId == optionsMenuAdapter.getElementId(i)) {
+				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(null, itemId, i, false);
 				return true;
 			}
 		}

@@ -6,8 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import android.opengl.GLSurfaceView;
-import android.widget.*;
 import net.osmand.CallbackWithObject;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
@@ -15,12 +13,19 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.*;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.Item;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.PoiFilter;
+import net.osmand.plus.PoiFiltersHelper;
+import net.osmand.plus.R;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
@@ -32,25 +37,22 @@ import net.osmand.plus.views.FavoritesLayer;
 import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.MapTextLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.views.PointLocationLayer;
 import net.osmand.plus.views.PointNavigationLayer;
 import net.osmand.plus.views.RouteLayer;
-import net.osmand.plus.views.MapTextLayer;
 import net.osmand.plus.views.TransportInfoLayer;
 import net.osmand.plus.views.TransportStopsLayer;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.os.Build;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.opengl.GLSurfaceView;
+import android.widget.ListAdapter;
+import android.widget.Toast;
 
 /**
  * Object is responsible to maintain layers using by map activity 
@@ -77,11 +79,9 @@ public class MapActivityLayers {
 	private ContextMenuLayer contextMenuLayer;
 	private MapControlsLayer mapControlsLayer;
 	private DownloadedRegionsLayer downloadedRegionsLayer;
-	private GpxSelectionHelper gpxSelectionHelper;
 
 	public MapActivityLayers(MapActivity activity) {
 		this.activity = activity;
-		gpxSelectionHelper = getApplication().getSelectedGpxHelper();
 	}
 
 	public OsmandApplication getApplication(){
@@ -283,195 +283,9 @@ public class MapActivityLayers {
 		}
 	}
 
-	private final class LayerMenuListener  {
-		private final ContextMenuAdapter adapter;
-		private final OsmandMapTileView mapView;
-		private final OsmandSettings settings;
-		DialogInterface dialog;
-		
-		private LayerMenuListener(ContextMenuAdapter adapter,
-				OsmandMapTileView mapView, OsmandSettings settings) {
-			this.adapter = adapter;
-			this.mapView = mapView;
-			this.settings = settings;
-		}
-
-		public void setDialog(DialogInterface dialog) {
-			this.dialog = dialog;
-		}
-		
-		public void onClick(int item, boolean isChecked) {
-			int itemId = adapter.getItemId(item);
-			OnContextMenuClick clck = adapter.getClickAdapter(item);
-			if(clck != null) {
-				clck.onContextMenuClick(itemId, item, isChecked, dialog);
-			} else if(itemId == R.string.layer_poi){
-				if(isChecked){
-					selectPOIFilterLayer(mapView, null);
-				}
-				settings.SHOW_POI_OVER_MAP.set(isChecked);
-			} else if(itemId == R.string.layer_amenity_label){
-				settings.SHOW_POI_LABEL.set(isChecked);
-			} else if(itemId == R.string.layer_favorites){
-				settings.SHOW_FAVORITES.set(isChecked);
-			} else if(itemId == R.string.layer_gpx_layer){
-				if(getApplication().getSelectedGpxHelper().isShowingAnyGpxFiles()){
-					getApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
-				} else {
-					dialog.dismiss();
-					showGPXFileLayer(getAlreadySelectedGpx(), mapView);
-				}
-			} else if(itemId == R.string.layer_transport_route){
-				transportInfoLayer.setVisible(isChecked);
-			} else if(itemId == R.string.layer_transport){
-				settings.SHOW_TRANSPORT_OVER_MAP.set(isChecked);
-			}
-			updateLayers(mapView);
-			mapView.refreshMap();
-		}
-	}
 	
-	public void openLayerSelectionDialog(final OsmandMapTileView mapView){
-		final OsmandSettings settings = getApplication().getSettings();
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
-		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
-		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).reg();
-		adapter.item(R.string.layer_amenity_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0) 
-				.icons(R.drawable.ic_action_text_dark, R.drawable.ic_action_text_light).reg();
-		adapter.item(R.string.layer_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0) 
-				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).reg();
-		adapter.item(R.string.layer_gpx_layer).selected(
-				getApplication().getSelectedGpxHelper().isShowingAnyGpxFiles()? 1 : 0)
-//				.icons(R.drawable.ic_action_foot_dark, R.drawable.ic_action_foot_light)
-				.icons(R.drawable.ic_action_polygom_dark, R.drawable.ic_action_polygom_light)
-				.reg();
-		adapter.item(R.string.layer_transport).selected( settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).reg(); 
-		if(TransportRouteHelper.getInstance().routeIsCalculated()){
-			adapter.item(R.string.layer_transport_route).selected(1 )
-				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).reg();
-		}
-		
-		
-		OsmandPlugin.registerLayerContextMenu(mapView, adapter, activity);
-		getApplication().getAppCustomization().prepareLayerContextMenu(activity, adapter);
-		
-		
-		final LayerMenuListener listener = new LayerMenuListener(adapter, mapView, settings);
-		Builder b = new AlertDialog.Builder(activity);
-		
-		final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
-		final boolean light = getApplication().getSettings().isLightContentMenu();
-		final int layout;
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
-			layout = R.layout.list_menu_item;
-		} else {
-			layout = R.layout.list_menu_item_native;
-		}
-
-		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(
-			    activity, layout, R.id.title, adapter.getItemNames()){
-			        @Override
-					public View getView(final int position, View convertView, ViewGroup parent) {
-						// User super class to create the View
-						View v = activity.getLayoutInflater().inflate(layout, null);
- 			            TextView tv = (TextView)v.findViewById(R.id.title);
-			            tv.setText(adapter.getItemName(position));
-
-						//if it's gpx or poi layer - need to show settings icon
-						//need imageview and specialItemId o
-						final ImageView settingsImage = (ImageView) v.findViewById(R.id.icon_settings);
-						final int specialItemId = adapter.getItemId(position);
-						if ((specialItemId == R.string.layer_poi || specialItemId == R.string.layer_gpx_layer)
-								&& adapter.getSelection(position) > 0) {
-
-							settingsImage.setVisibility(View.VISIBLE);
-							//setting icon depending on theme
-							if(light){
-								settingsImage.setImageResource(R.drawable.ic_action_settings_light);
-							} else {
-								settingsImage.setImageResource(R.drawable.ic_action_settings_dark);
-							}
-
-							if (specialItemId == R.string.layer_poi){
-								settingsImage.setOnClickListener(new View.OnClickListener() {
-									@Override
-									public void onClick(View view) {
-										selectPOIFilterLayer(mapView, null);
-									}
-								});
-							} else if (specialItemId == R.string.layer_gpx_layer) {
-								settingsImage.setOnClickListener(new View.OnClickListener() {
-									@Override
-									public void onClick(View view) {
-										if (listener.dialog != null) {
-											listener.dialog.dismiss();
-										}
-										showGPXFileLayer(getAlreadySelectedGpx(), mapView);
-									}
-								});
-							}
-						}
-
-			            //Put the image on the TextView
-			            if(adapter.getImageId(position, light) != 0) {
-			            	tv.setCompoundDrawablesWithIntrinsicBounds(adapter.getImageId(position, light), 0, 0, 0);
-			            } else {
-			            	tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_transparent, 0, 0, 0);
-			            }
-			            tv.setCompoundDrawablePadding(padding);
-
-						final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-						if(adapter.getSelection(position) == -1){
-							ch.setVisibility(View.INVISIBLE);
-						} else {
-							ch.setOnCheckedChangeListener(null);
-							ch.setChecked(adapter.getSelection(position) > 0);
-							ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-								@Override
-								public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-									if (specialItemId == R.string.layer_poi){
-										if (isChecked){
-											settingsImage.setVisibility(View.VISIBLE);
-										} else {
-											settingsImage.setVisibility(View.GONE);
-										}
-									}
-									listener.onClick(position, isChecked);
-								}
-							});
-						}
-			            return v;
-			        }
-			    };
-
-	    OnClickListener onClickListener = new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int position) {
-			}
-		};
-		b.setAdapter(listAdapter, onClickListener);
-		b.setPositiveButton(R.string.default_buttons_ok, null);
-
-	    final AlertDialog dlg = b.create();
-	    listener.setDialog(dlg); 
-		dlg.setCanceledOnTouchOutside(true);
-		dlg.getListView().setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if(adapter.getSelection(position) >= 0) {
-					listener.onClick(position, !(adapter.getSelection(position) > 0));
-					adapter.setSelection(position, adapter.getSelection(position) > 0 ? 0 : 1);
-					listAdapter.notifyDataSetInvalidated();
-				} else {
-					listener.onClick(position, adapter.getSelection(position) > 0);
-				}				
-			}
-		});
-		dlg.show();
-	}
+	
+	
 
 	public void showGPXFileLayer(List<String> files, final OsmandMapTileView mapView) {
 		final OsmandSettings settings = getApplication().getSettings();
@@ -509,17 +323,7 @@ public class MapActivityLayers {
 	}
 	
 	
-	private List<String> getAlreadySelectedGpx(){
-		if (gpxSelectionHelper == null){
-			return null;
-		}
-		List<GpxSelectionHelper.SelectedGpxFile> selectedGpxFiles = gpxSelectionHelper.getSelectedGPXFiles();
-		List<String> files = new ArrayList<String>();
-		for (GpxSelectionHelper.SelectedGpxFile file : selectedGpxFiles) {
-			files.add(file.getGpxFile().path);
-		}
-		return files;
-	}
+	
 	
 	
 	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiFilter[] selected){
@@ -555,14 +359,7 @@ public class MapActivityLayers {
 			it.reg();
 		}
 		Builder builder = new AlertDialog.Builder(activity);
-		ListAdapter listAdapter ;
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
-			listAdapter =
-				adapter.createListAdapter(activity, R.layout.list_menu_item, app.getSettings().isLightContentMenu());
-		} else {
-			listAdapter =
-				adapter.createListAdapter(activity, R.layout.list_menu_item_native, app.getSettings().isLightContentMenu());
-		}
+		ListAdapter listAdapter =adapter.createListAdapter(activity, app.getSettings().isLightContentMenu());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener(){
 
 			@Override
@@ -600,7 +397,7 @@ public class MapActivityLayers {
 		});
 		return builder.show();
 	}
-	
+
 	public void selectMapLayer(final OsmandMapTileView mapView){
 		if(OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
 			AccessibleToast.makeText(activity, R.string.map_online_plugin_is_not_installed, Toast.LENGTH_LONG).show();
@@ -762,6 +559,10 @@ public class MapActivityLayers {
 	
 	public POIMapLayer getPoiMapLayer() {
 		return poiMapLayer;
+	}
+	
+	public TransportInfoLayer getTransportInfoLayer() {
+		return transportInfoLayer;
 	}
 	
 }

@@ -564,7 +564,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return false;
 	}
 
-	// Working with location listeners
+	// Working with location checkListeners
 	private class NetworkListener implements LocationListener {
 
 		@Override

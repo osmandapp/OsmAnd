@@ -30,6 +30,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -122,7 +123,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			final Object selectedObj) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 				if (resId == R.string.context_menu_item_create_poi) {
 					getPoiActions(mapActivity).showCreateDialog(latitude, longitude);
 				} else if (resId == R.string.context_menu_item_open_bug) {
@@ -135,6 +136,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				} else if (resId == R.string.poi_context_menu_modify) {
 					getPoiActions(mapActivity).showEditDialog((Amenity) selectedObj);
 				}
+				return true;
 			}
 		};
 		if(selectedObj instanceof Amenity) {
@@ -156,10 +158,11 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				.icons(R.drawable.ic_action_bug_dark, R.drawable.ic_action_bug_light).listen(new OnContextMenuClick() {
 
 					@Override
-					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						if (itemId == R.string.layer_osm_bugs) {
 							settings.SHOW_OSM_BUGS.set(isChecked);
 						}
+						return true;
 					}
 				}).position(7).reg();
 
@@ -178,8 +181,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.listen(new OnContextMenuClick() {
 
 						@Override
-						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							sendGPXFiles(la, (AvailableGPXFragment) fragment, (GpxInfo) info);
+							return true;
 						}
 					}).reg();
 		}
@@ -194,7 +198,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.listen(new OnContextMenuClick() {
 
 						@Override
-						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_gup_dark,
 									R.drawable.ic_action_gup_light, new OnClickListener() {
 										@Override
@@ -204,6 +208,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 													selectedItems.toArray(new GpxInfo[selectedItems.size()]));
 										}
 									});
+							return true;
 						}
 					}).position(5).reg();
 		}

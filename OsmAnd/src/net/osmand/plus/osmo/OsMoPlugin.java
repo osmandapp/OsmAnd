@@ -41,7 +41,6 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -50,6 +49,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlServices, OsMoReactor {
 
@@ -136,13 +136,14 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					R.drawable.ic_action_gloc_light).listen(new OnContextMenuClick() {
 						
 						@Override
-						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							OsMoDevice o = (OsMoDevice) selectedObj;
 							double lat = o.getLastLocation() == null ? latitude : o.getLastLocation().getLatitude();
 							double lon = o.getLastLocation() == null ? longitude : o.getLastLocation().getLongitude();
 							mapActivity.getMapView().setLatLon(lat, lon);
 							MapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 							OsMoPositionLayer.setFollowTrackerId(o);
+							return true;
 						}
 					}).position(0).reg();
 			if(OsMoPositionLayer.getFollowDestinationId() != null) {
@@ -150,9 +151,9 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 						R.drawable.ic_action_close_light).listen(new OnContextMenuClick() {
 
 							@Override
-							public void onContextMenuClick(int itemId, int pos, boolean isChecked,
-									DialogInterface dialog) {
+							public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 								OsMoPositionLayer.setFollowDestination(null);
+								return true;
 							}
 							
 						}).position(0).reg();
@@ -161,13 +162,14 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					R.drawable.ic_action_flag_light).listen(new OnContextMenuClick() {
 						
 						@Override
-						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							OsMoDevice o = (OsMoDevice) selectedObj;
 							if(o.getLastLocation() != null) {
 								TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 								targets.navigateToPoint(new LatLon(o.getLastLocation().getLatitude(), o.getLastLocation().getLongitude()), true, -1);
 							}
 							OsMoPositionLayer.setFollowDestination(o);
+							return true;
 						}
 					}).position(1).reg();
 		}
@@ -180,7 +182,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		osmoControl = createOsMoControl(activity, layer.getPaintText(), layer.getPaintSubText());
 		layer.getMapInfoControls().registerSideWidget(osmoControl,
-				R.drawable.mon_osmo_signal_inactive, R.string.osmo_control, "osmo_control", false, 18);
+				R.drawable.mon_osmo_signal_inactive, R.drawable.mon_osmo_signal_inactive, R.string.osmo_control, "osmo_control", false, 18);
 		layer.recreateControls();
 		
 		if(olayer != null) {
@@ -291,10 +293,11 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				.listen(new OnContextMenuClick() {
 
 					@Override
-					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						final double lat = view.getLatitude();
 						final double lon = view.getLongitude();
 						tracker.sendCoordinate(lat, lon);
+						return true;
 					}
 				}).reg();
 	}
@@ -321,9 +324,10 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		helper.item(R.string.osmo_groups).icons(R.drawable.ic_action_eye_dark, R.drawable.ic_action_eye_light).position(6)
 				.listen(new OnContextMenuClick() {
 					@Override
-					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						Intent intent = new Intent(mapActivity, OsMoGroupsActivity.class);
 						mapActivity.startActivity(intent);
+						return true;
 					}
 				}).reg();
 	}

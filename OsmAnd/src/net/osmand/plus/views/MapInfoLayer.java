@@ -2,17 +2,17 @@ package net.osmand.plus.views;
 
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.mapwidgets.AppearanceWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
@@ -26,9 +26,6 @@ import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.StackWidgetView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.plus.views.mapwidgets.UpdateableWidget;
-import net.osmand.util.Algorithms;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -39,18 +36,10 @@ import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.MeasureSpec;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -172,51 +161,42 @@ public class MapInfoLayer extends OsmandMapLayer {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(), paintText,
 				paintSubText, false);
-		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, 5);
+		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, 5);
 		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
-		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
+		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
 				10);
 		NextTurnInfoWidget nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, app, view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
-		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
+		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
 		//MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
 		//mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
 		// right stack
 		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
+		mapInfoControls.registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
 		TextInfoWidget dist = ric.createDistanceControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(dist, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, 5);
+		mapInfoControls.registerSideWidget(dist, R.drawable.widget_target, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, 5);
 		TextInfoWidget time = ric.createTimeControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.string.map_widget_time, "time", false, 10);
+		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.drawable.widget_time, R.string.map_widget_time, "time", false, 10);
 		TextInfoWidget speed = ric.createSpeedControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, 15);
+		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, 15);
 		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
+		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info,  R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
 		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
+		mapInfoControls.registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
 		TextInfoWidget alt = mic.createAltitudeControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, 20);
+		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, 20);
 		TextInfoWidget plainTime = ric.createPlainTimeControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(plainTime, R.drawable.widget_time_to_distance, R.string.map_widget_plain_time, "plain_time", false, 25);
+		mapInfoControls.registerSideWidget(plainTime, R.drawable.widget_time_to_distance, R.drawable.widget_time_to_distance, R.string.map_widget_plain_time, "plain_time", false, 25);
 
 		// Top widgets
 		ImageViewWidget compassView = mic.createCompassView(map);
-		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, 5);
-		View config = createConfiguration();
-		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapWidgetRegistry.RIGHT_CONTROL, 10);
-		// disable monitoring widget
-//		mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.widget_monitoring, R.string.map_widget_monitoring_services,
-//				"monitoring_services", MapWidgetRegistry.LEFT_CONTROL, 12);
-		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.widget_lock_screen, R.string.bg_service_screen_lock, "bgService", 
+		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass_dark, R.drawable.widget_compass_light, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, 5);
+		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.widget_lock_screen_dark, R.drawable.widget_lock_screen_light, R.string.bg_service_screen_lock, "bgService",
 				MapWidgetRegistry.LEFT_CONTROL,  15);
-		mapInfoControls.registerTopWidget(createBackToLocation(mic), R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, 5);
-		
-		View globus = createLayer();
-		mapInfoControls.registerTopWidget(globus, R.drawable.widget_layer, R.string.menu_layers, "layers", MapWidgetRegistry.RIGHT_CONTROL, 15);
-		
+		mapInfoControls.registerTopWidget(createBackToLocation(mic), R.drawable.widget_backtolocation_dark, R.drawable.widget_backtolocation_light, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, 5);
 		topText = mic.createStreetView(app, map, paintText);
-		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text,
+		mapInfoControls.registerTopWidget(topText, R.drawable.street_name_dark, R.drawable.street_name_light, R.string.map_widget_top_text,
 				"street_name", MapWidgetRegistry.MAIN_CONTROL, 100);
 		
 		// Register appearance widgets
@@ -242,7 +222,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void createControls() {
 		// 1. Create view groups and controls
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
-		statusBar.addView(createConfiguration());
+		
+		// form measurement
+		ImageView iv = new ImageView(map);
+		iv.setImageDrawable(map.getResources().getDrawable(R.drawable.la_backtoloc_disabled));
+		statusBar.addView(iv);
 		rightStack = new StackWidgetView(view.getContext());
 		leftStack = new StackWidgetView(view.getContext());
 		
@@ -250,7 +234,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		Rect topRectPadding = new Rect();
 		view.getResources().getDrawable(R.drawable.box_top).getPadding(topRectPadding);
 		// for measurement
-		//statusBar.addView(backToLocation);
 		STATUS_BAR_MARGIN_X = (int) (STATUS_BAR_MARGIN_X * scaleCoefficient);
 		statusBar.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 		Rect statusBarPadding = new Rect();
@@ -306,162 +289,88 @@ public class MapInfoLayer extends OsmandMapLayer {
 		recreateControls();
 	}
 	
-	public Set<String> getSpecificVisibleCategories(Set<MapWidgetRegInfo> m) {
-		Set<String> s = new LinkedHashSet<String>();
-		for(MapWidgetRegInfo ms : m){
-			if(ms.getCategory() != null) {
-				s.add(ms.getCategory());
-			}
-		}
-		return s;
-	}
-	
-	public void fillAppearanceWidgets(Set<MapWidgetRegInfo> widgets, String category, ArrayList<Object> registry) {
-		for(MapWidgetRegInfo w : widgets ) {
-			if(Algorithms.objectEquals(w.getCategory(), category)) {
-				registry.add(w);
-			}
-		}
-	}
-
-	public void openViewConfigureDialog() {
+	public ContextMenuAdapter openViewConfigureDrawer() {
 		final OsmandSettings settings = view.getSettings();
-		
-		final ArrayList<Object> list = new ArrayList<Object>();
-		list.add(map.getString(R.string.map_widget_reset));
-		list.add(map.getString(R.string.map_widget_top_stack));
-		list.addAll(mapInfoControls.getTop());
-		list.add(map.getString(R.string.map_widget_right_stack));
-		list.addAll(mapInfoControls.getRight());
-		list.add(map.getString(R.string.map_widget_left_stack));
-		list.addAll(mapInfoControls.getLeft());
+		ContextMenuAdapter cm = new ContextMenuAdapter(view.getContext());
+		cm.setDefaultLayoutId(R.layout.drawer_list_item);
+		cm.item(R.string.layer_map_appearance).icons(R.drawable.ic_back_drawer_dark, R.drawable.ic_back_drawer_white)
+				.listen(new OnContextMenuClick() {
 
-		Set<MapWidgetRegInfo> widgets = mapInfoControls.getAppearanceWidgets();
-		Set<String> cats = getSpecificVisibleCategories(widgets);
-		list.add(map.getString(R.string.map_widget_appearance));
-		fillAppearanceWidgets(widgets, null, list);
-		for(String cat : cats) {
-			list.add(cat);
-			fillAppearanceWidgets(widgets, cat, list);
-		}
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						map.getMapActions().prepareStartOptionsMenu();
+						return false;
+					}
+				}).reg();
 		
-
-		// final LayerMenuListener listener = new LayerMenuListener(adapter, mapView, settings);
-		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-		final ArrayAdapter<Object> listAdapter = new ArrayAdapter<Object>(map, R.layout.layers_list_activity_item, R.id.title, list) {
-			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
-				final ApplicationMode mode = settings.getApplicationMode();
-				View v = convertView;
-				if (v == null) {
-					v = map.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
-				}
-				final TextView tv = (TextView) v.findViewById(R.id.title);
-				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-				Object o = list.get(position);
-				if(o instanceof MapWidgetRegInfo) {
-					final MapWidgetRegInfo mi = (MapWidgetRegInfo) o;
+		cm.item(R.string.map_widget_reset) 
+				.icons(R.drawable.widget_reset_to_default_dark, R.drawable.widget_reset_to_default_light).listen(new OnContextMenuClick() {
 					
-					String s = mi.visibleCollapsed(mode)? " - " : "  ";
-					if(mi.message != null) {
-						tv.setText(s +mi.message +s);	
-					} else {
-						tv.setText(s +map.getString(mi.messageId) +s);
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						mapInfoControls.resetToDefault();
+						recreateControls();
+						adapter.notifyDataSetInvalidated();
+						return false;
 					}
-					// Put the image on the TextView
-					if (mi.drawable != 0) {
-						tv.setPadding((int) (12 *scaleCoefficient), 0, 0, 0);
-						tv.setCompoundDrawablesWithIntrinsicBounds(mi.drawable, 0, 0, 0);
-					} else {
-						tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-						tv.setPadding((int) (30 *scaleCoefficient), 0, 0, 0);
-					}
-					final boolean selecteable = mi.selecteable();
-					ch.setOnCheckedChangeListener(null);
-					if(!mi.selecteable()) {
-						ch.setVisibility(View.GONE);
-					} else {
-						boolean check = mi.visibleCollapsed(mode) || mi.visible(mode);
-						ch.setChecked(check);
-						ch.setVisibility(View.VISIBLE);
-					}
-					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-						@Override
-						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							mapInfoControls.changeVisibility(mi);
-							if (selecteable) {
-								ch.setChecked(mi.visible(mode) || mi.visibleCollapsed(mode));
-							}
-							String s = mi.visibleCollapsed(mode) ? " - " : "  ";
-							if(mi.message != null) {
-								tv.setText(s +mi.message +s);	
-							} else {
-								tv.setText(s +map.getString(mi.messageId) +s);
-							}
-							recreateControls();
-						}
-					});
-				} else {
-					tv.setText(o.toString());
-					tv.setPadding((int) (5 *scaleCoefficient), 0, 0, 0);
-					// reset 
-					if (position == 0) {
-						tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.widget_reset_to_default, 0, 0, 0);
-					} else {
-						tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-					}
-					ch.setVisibility(View.INVISIBLE);
-				}
-				
-				return v;
-			}
-		};
-		Builder b = new AlertDialog.Builder(map);
-		View confirmDialog = View.inflate(view.getContext(), R.layout.configuration_dialog, null);
-		final ListView lv = (ListView) confirmDialog.findViewById(android.R.id.list);
-		AppModeDialog.prepareAppModeView(map, selected, true, 
-				(ViewGroup) confirmDialog.findViewById(R.id.TopBar), true, 
-				new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if(selected.size() > 0) {
-					view.getSettings().APPLICATION_MODE.set(selected.iterator().next());
-					listAdapter.notifyDataSetChanged();
-				}
-			}
-		});
-		
-		
-		lv.setOnItemClickListener(new OnItemClickListener() {
+				}).reg();
+		final ApplicationMode mode = settings.getApplicationMode();
+		cm.item(R.string.map_widget_top).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		addControls(cm, mapInfoControls.getTop(), mode);
+		cm.item(R.string.map_widget_right).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		addControls(cm, mapInfoControls.getRight(), mode);
+		cm.item(R.string.map_widget_left).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		addControls(cm, mapInfoControls.getLeft(), mode);
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				final ApplicationMode mode = settings.getApplicationMode();
-				Object o = list.get(position);
-				if (o instanceof MapWidgetRegInfo) {
-					final MapWidgetRegInfo mi = (MapWidgetRegInfo) o;
-					final boolean selecteable = mi.selecteable();
-					boolean check = mi.visibleCollapsed(mode) || mi.visible(mode);
-					if (check || selecteable) {
-						mapInfoControls.changeVisibility(mi);
-					}
-					recreateControls();
-					listAdapter.notifyDataSetInvalidated();
-				} else if(position == 0) {
-					mapInfoControls.resetToDefault();
-					recreateControls();
-					listAdapter.notifyDataSetInvalidated();
-				}				
-			}
-		});
-		lv.setAdapter(listAdapter);
-		b.setView(confirmDialog);
-		final AlertDialog dlg = b.create();
-		// listener.setDialog(dlg);
-		dlg.setCanceledOnTouchOutside(true);
-		dlg.show();
+		cm.item(R.string.map_widget_appearance_rem).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
+		addControls(cm, mapInfoControls.getAppearanceWidgets(), mode);
+		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
+		
+		// TODO add profiles
+//		View confirmDialog = View.inflate(view.getContext(), R.layout.configuration_dialog, null);
+//		AppModeDialog.prepareAppModeView(map, selected, true,
+//				(ViewGroup) confirmDialog.findViewById(R.id.TopBar), true, 
+//				new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				if(selected.size() > 0) {
+//					view.getSettings().APPLICATION_MODE.set(selected.iterator().next());
+//					listAdapter.notifyDataSetChanged();
+//				}
+//			}
+//		});
+
+		return cm;
 	}
 	
+	private void addControls(final ContextMenuAdapter adapter, Set<MapWidgetRegInfo> top, final ApplicationMode mode) {
+		for(final MapWidgetRegInfo r : top){
+			adapter.item(r.messageId).selected(r.visibleCollapsed(mode) || r.visible(mode) ? 1 : 0)
+				.icons(r.drawableDark, r.drawableLight).listen(new OnContextMenuClick() {
+				
+				@Override
+				public boolean onContextMenuClick(ArrayAdapter<?> a, int itemId, int pos, boolean isChecked) {
+					final boolean selecteable = r.selecteable();
+					boolean check = r.visibleCollapsed(mode) || r.visible(mode);
+					if (check || selecteable) {
+						mapInfoControls.changeVisibility(r);
+					}
+					recreateControls();
+					adapter.setItemName(pos, getText(mode, r));
+					adapter.setSelection(pos, r.visibleCollapsed(mode) || r.visible(mode) ? 1 : 0);
+					a.notifyDataSetInvalidated();
+					return false;
+				}
+			}).reg();
+			adapter.setItemName(adapter.length() - 1, getText(mode, r));
+		}
+	}
+
+
+	protected String getText(final ApplicationMode mode, final MapWidgetRegInfo r) {
+		return (r.visibleCollapsed(mode)? " - " : "  ") + map.getString(r.messageId);
+	}
+
 	private int themeId = -1;
 	public void updateColorShadowsOfText(DrawSettings drawSettings) {
 		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
@@ -588,66 +497,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 	}
 	
-	private View createConfiguration(){
-		final OsmandMapTileView view = map.getMapView();
-		
-		final Drawable config = view.getResources().getDrawable(R.drawable.map_config);
-		final Drawable configWhite = view.getResources().getDrawable(R.drawable.map_config_white);
-		ImageViewWidget configuration = new ImageViewWidget(map) {
-			private boolean nm;
-			
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean nightMode = drawSettings != null && drawSettings.isNightMode();
-				if(nightMode != this.nm) {
-					this.nm = nightMode;
-					setImageDrawable(nightMode ? configWhite : config);
-					return true;
-				}
-				return false;
-			}
-		};
-		configuration.setOnClickListener(new View.OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				openViewConfigureDialog();				
-			}
-		});
-		configuration.setImageDrawable(config);
-		return configuration;
-	}
-	private View createLayer(){
-//		final Drawable globusDrawable = view.getResources().getDrawable(R.drawable.map_globus);
-//		final Drawable globusDrawableWhite = view.getResources().getDrawable(R.drawable.map_globus_white);
-		final Drawable layerDrawable = view.getResources().getDrawable(R.drawable.map_layers_black);
-		final Drawable layerDrawableWhite = view.getResources().getDrawable(R.drawable.map_layers_white);
-		
-		ImageView layers = new ImageViewWidget(view.getContext()) {
-			private boolean nightMode;
-
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
-				if(nightMode != this.nightMode) {
-					this.nightMode = nightMode;
-					setImageDrawable(nightMode ? layerDrawableWhite : layerDrawable);
-					return true;
-				}
-				return false;
-			}
-		};;
-		layers.setImageDrawable(layerDrawable);
-		layers.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				map.getMapLayers().openLayerSelectionDialog(view);
-				//map.getMapLayers().selectMapLayer(view);
-			}
-		});
-		return layers;
-	}
 	
-
 
 	public static String getStringPropertyName(Context ctx, String propertyName, String defValue) {
 		try {

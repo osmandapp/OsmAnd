@@ -44,6 +44,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -159,7 +160,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		optionsMenuAdapter = new ContextMenuAdapter(getActivity());
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public void onContextMenuClick(final int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, final int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.local_index_mi_reload) {
 					asyncLoader = new LoadGpxTask();
 					asyncLoader.execute(getActivity());
@@ -175,6 +176,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 								}
 							});
 				}
+				return true;
 			}
 		};
 		optionsMenuAdapter.item(R.string.show_gpx_route)
@@ -186,7 +188,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		OsmandPlugin.onOptionsMenuActivity(getSherlockActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
-			item = menu.add(0, optionsMenuAdapter.getItemId(j), j + 1, optionsMenuAdapter.getItemName(j));
+			item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
 			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
 			);
 			if (optionsMenuAdapter.getImageId(j, isLightActionBar()) != 0) {
@@ -212,8 +214,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
-			if (itemId == optionsMenuAdapter.getItemId(i)) {
-				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(itemId, i, false, null);
+			if (itemId == optionsMenuAdapter.getElementId(i)) {
+				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(null, itemId, i, false);
 				return true;
 			}
 		}
@@ -395,7 +397,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private void basicFileOperation(final GpxInfo info, ContextMenuAdapter adapter) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 				if (resId == R.string.local_index_mi_rename) {
 					renameFile(info);
 				} else if (resId == R.string.local_index_unselect_gpx_file ||
@@ -441,6 +443,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 						AccessibleToast.makeText(getActivity(), R.string.gpx_file_is_empty, Toast.LENGTH_LONG).show();
 					}
 				}
+				return true;
 			}
 		};
 		if (info.gpx != null && info.file == null) {
@@ -477,7 +480,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				OnContextMenuClick clk = adapter.getClickAdapter(which);
 				if (clk != null) {
-					clk.onContextMenuClick(adapter.getItemId(which), which, false, dialog);
+					clk.onContextMenuClick(null, adapter.getElementId(which), which, false);
 				}
 			}
 

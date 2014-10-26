@@ -10,17 +10,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.ImageViewWidget;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
-import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MonitoringInfoControl {
@@ -89,7 +81,7 @@ public class MonitoringInfoControl {
 			ai.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					ca.getClickAdapter(ij).onContextMenuClick(ca.getItemId(ij), ij, false, null);
+					ca.getClickAdapter(ij).onContextMenuClick(null, ca.getElementId(ij), ij, false);
 					qa.dismiss();
 				}
 			});

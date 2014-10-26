@@ -38,6 +38,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -95,7 +96,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		monitoringControl = createMonitoringControl(activity, layer.getPaintText(), layer.getPaintSubText());
 		
 		layer.getMapInfoControls().registerSideWidget(monitoringControl,
-				R.drawable.monitoring_rec_big, R.string.map_widget_monitoring, "monitoring", false, 18);
+				R.drawable.monitoring_rec_big, R.drawable.monitoring_rec_big, R.string.map_widget_monitoring, "monitoring", false, 18);
 		layer.recreateControls();
 	}
 
@@ -115,10 +116,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			ContextMenuAdapter adapter, Object selectedObj) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 				if (resId == R.string.context_menu_item_add_waypoint) {
 					mapActivity.getMapActions().addWaypoint(latitude, longitude);
 				}
+				return true;
 			}
 		};
 		adapter.item(R.string.context_menu_item_add_waypoint).icons(R.drawable.ic_action_gnew_label_dark, R.drawable.ic_action_gnew_label_light)
@@ -447,7 +449,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			int draw = !bgoff ? R.drawable.monitoring_rec_big : R.drawable.monitoring_rec_inactive;
 			qa.item(msgId).icon(draw).listen(new OnContextMenuClick() {
 				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					if (view.getApplication().getNavigationService() == null) {
 						final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 						final ValueHolder<Boolean> choice = new ValueHolder<Boolean>();
@@ -465,6 +467,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 					} else {
 						view.getContext().stopService(serviceIntent);
 					}
+					return true;
 				}
 			}).position(0).reg();
 		}

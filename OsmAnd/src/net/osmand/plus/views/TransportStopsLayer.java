@@ -15,12 +15,12 @@ import net.osmand.plus.resources.TransportIndexRepository;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
@@ -216,8 +216,9 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			final TransportStop a = (TransportStop) o;
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					showDescriptionDialog(a);
+					return true;
 				}
 			};
 			adapter.item(R.string.poi_context_menu_showdescription)

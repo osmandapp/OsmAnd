@@ -1,9 +1,9 @@
 package net.osmand.plus.routepointsnavigation;
 
-import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.os.AsyncTask;
+import android.widget.ArrayAdapter;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
@@ -75,7 +75,7 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 			final GPXUtilities.WptPt point = (GPXUtilities.WptPt) o;
 			ContextMenuAdapter.OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.mark_as_not_visited){
 						plugin.getCurrentRoute().markPoint(point,false);
 						plugin.saveCurrentRoute();
@@ -91,6 +91,7 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 						plugin.saveCurrentRoute();
 					}
 					map.refreshMap();
+					return true;
 				}
 			};
 

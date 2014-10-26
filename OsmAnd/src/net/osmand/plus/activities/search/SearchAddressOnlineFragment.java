@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -230,7 +231,7 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 		Place item = adapter.getItem(position);
 		ContextMenuAdapter qa = new ContextMenuAdapter(view.getContext());
 		qa.setAnchor(view);
-		MapActivityActions.createDirectionsActions(qa, new LatLon(item.lat, item.lon), item, 
+		DirectionsDialogs.createDirectionsActions(qa, new LatLon(item.lat, item.lon), item, 
 				getString(R.string.address)+ " : " + item.displayName, Math.max(15, settings.getLastKnownMapZoom()), 
 				getActivity(), true);
 		MapActivityActions.showObjectContextMenu(qa, getActivity(), null);

@@ -125,14 +125,14 @@ public class MapActivity extends AccessibleActivity  {
 		settings = app.getSettings();
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
-		
-			
-		mapActions = new MapActivityActions(this);
-		mapLayers = new MapActivityLayers(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// Full screen is not used here
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
+		
+		mapActions = new MapActivityActions(this);
+		mapLayers = new MapActivityLayers(this);
+
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
 		app.checkApplicationIsBeingInitialized(this, startProgressDialog);
@@ -212,7 +212,7 @@ public class MapActivity extends AccessibleActivity  {
 		}
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
 
-		mapActions.createOptionsMenuAsDrawer(false);
+		mapActions.prepareStartOptionsMenu();
 	}
 	
 	public void addLockView(FrameLayout lockView) {
@@ -275,7 +275,7 @@ public class MapActivity extends AccessibleActivity  {
 
 	@Override
 	public void onBackPressed() {
-		if (!mapActions.onBackPressed()){
+		if (!mapActions.onBackPressed()) {
 			super.onBackPressed();
 		}
 	}

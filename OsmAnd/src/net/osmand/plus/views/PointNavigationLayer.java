@@ -12,7 +12,6 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,6 +20,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+import android.widget.ArrayAdapter;
 
 public class PointNavigationLayer extends OsmandMapLayer implements IContextMenuProvider {
 	protected final static int DIST_TO_SHOW = 80;
@@ -220,7 +220,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 			final TargetPoint a = (TargetPoint) o;
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.delete_target_point) {
 						TargetPointsHelper targetPointsHelper = map.getMyApplication().getTargetPointsHelper();
 						if(a.intermediate) {
@@ -230,6 +230,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 						}
 					}
 					map.getMapLayers().getContextMenuLayer().setLocation(null, "");
+					return true;
 				}
 			};
 			

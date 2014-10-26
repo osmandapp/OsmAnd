@@ -36,7 +36,6 @@ import android.os.AsyncTask;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
-import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -186,9 +185,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final MapActivityLayers layers = mapActivity.getMapLayers();
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.layer_map) {
-					dialog.dismiss();
 					layers.selectMapLayer(mapView);
 				} else if(itemId == R.string.layer_overlay){
 					if(overlayLayer.getMap() != null){
@@ -196,7 +194,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 						updateMapLayers(mapView, null, layers);
 						layers.getMapControlsLayer().hideTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
 					} else {
-						dialog.dismiss();
 						selectMapOverlayLayer(mapView, settings.MAP_OVERLAY, settings.MAP_OVERLAY_TRANSPARENCY, mapActivity);
 					}
 				} else if(itemId == R.string.layer_underlay){
@@ -205,11 +202,11 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 						updateMapLayers(mapView, null, layers);
 						layers.getMapControlsLayer().hideTransparencyBar(settings.MAP_TRANSPARENCY);
 					} else {
-						dialog.dismiss();
 						selectMapOverlayLayer(mapView, settings.MAP_UNDERLAY,settings.MAP_TRANSPARENCY,
 								mapActivity);
 					}
 				}
+				return true;
 			}
 		};
 		adapter.item(R.string.layer_map).icons(R.drawable.ic_action_globus_dark, R.drawable.ic_action_globus_light)
@@ -228,13 +225,14 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (mapView.getMainLayer() instanceof MapTileLayer) {
 			OnContextMenuClick listener = new OnContextMenuClick() {
 				@Override
-				public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 					if (resId == R.string.context_menu_item_update_map) {
 						mapActivity.getMapActions().reloadTile(mapView.getZoom(), latitude, longitude);
 					} else if (resId == R.string.context_menu_item_download_map) {
 						DownloadTilesDialog dlg = new DownloadTilesDialog(mapActivity, (OsmandApplication) mapActivity.getApplication(), mapView);
 						dlg.openDialog();
 					}
+					return true;
 				}
 			};
 			adapter.item(R.string.context_menu_item_update_map).icons(R.drawable.ic_action_refresh_dark, R.drawable.ic_action_refresh_light)

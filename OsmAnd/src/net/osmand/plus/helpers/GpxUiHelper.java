@@ -128,7 +128,7 @@ public class GpxUiHelper {
 		return description.toString();
 	}
 
-	public static void selectGPXFile(List<String> selectedGpxList, final Activity activity,
+	public static AlertDialog selectGPXFile(List<String> selectedGpxList, final Activity activity,
 									 final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject){
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
@@ -142,11 +142,12 @@ public class GpxUiHelper {
 				allGpxList.add(0, activity.getString(R.string.show_current_gpx_title));
 			}
 			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity,allGpxList, selectedGpxList, multipleChoice);
-			createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, allGpxList, adapter);
+			return createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, allGpxList, adapter);
 		}
+		return null;
 	}
 	
-	public static void selectGPXFile(final Activity activity,
+	public static AlertDialog selectGPXFile(final Activity activity,
 			final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
@@ -160,8 +161,9 @@ public class GpxUiHelper {
 			}
 
 			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, list, null, multipleChoice);
-			createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, list, adapter);
+			return createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, list, adapter);
 		}
+		return null;
 	}
 
 	private static ContextMenuAdapter createGpxContextMenuAdapter(Activity activity, List<String> allGpxList, List<String> selectedGpxList, boolean multipleChoice) {
@@ -207,7 +209,7 @@ public class GpxUiHelper {
 		}, dir, null, filename);
 	}
 
-	private static void createDialog(final Activity activity, final boolean showCurrentGpx,
+	private static AlertDialog createDialog(final Activity activity, final boolean showCurrentGpx,
 			final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject,
 			final List<String> list, final ContextMenuAdapter adapter) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
@@ -336,6 +338,7 @@ public class GpxUiHelper {
 			// java.lang.ClassCastException: com.android.internal.widget.RoundCornerListAdapter
 			// Unknown reason but on some devices fail
 		}
+		return dlg;
 	}
 	
 	private static List<String> getSortedGPXFilenames(File dir,String sub) {

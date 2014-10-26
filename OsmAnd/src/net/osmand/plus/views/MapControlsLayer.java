@@ -65,12 +65,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private LinearLayout transparencyBarLayout;
 	private static CommonPreference<Integer> settingsToTransparency;
 	private OsmandSettings settings;
-	private WaypointDialogHelper waypointDialogHelper;
+
 
 	public MapControlsLayer(MapActivity activity){
 		this.mapActivity = activity;
 		settings = activity.getMyApplication().getSettings();
-		waypointDialogHelper = new WaypointDialogHelper(activity);
 	}
 	
 	
@@ -122,8 +121,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapCancelNavigationControl.setMargin(mapSmallMenuControls.getWidth());
 		mapInfoNavigationControl.setMargin(mapSmallMenuControls.getWidth() + mapCancelNavigationControl.getWidth());
 		mapAppModeControl.setMargin(mapNavigationControl.getWidth());
-		
-		waypointDialogHelper.init();
+
 		initTransparencyBar(view, parent);
 	}
 
@@ -150,7 +148,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	@Override
 	public void destroyLayer() {
-		waypointDialogHelper.removeListener();
+
 	}
 
 	@Override
@@ -335,10 +333,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void showDialog(){
 		mapInfoNavigationControl.setShowDialog();
-	}
-
-	public WaypointDialogHelper getWaypointDialogHelper() {
-		return waypointDialogHelper;
 	}
 
 	private int getScreenOrientation() {

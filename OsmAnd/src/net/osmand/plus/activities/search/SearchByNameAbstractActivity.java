@@ -22,9 +22,10 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.dialogs.FavoriteDialogs;
 
 import org.apache.commons.logging.Log;
 
@@ -588,15 +589,15 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		if (ai != null) {
 			if (mode == ADD_TO_FAVORITE) {
 				Bundle b = new Bundle();
-				Dialog dlg = MapActivityActions.createAddFavouriteDialog(getActivity(), b);
+				Dialog dlg = FavoriteDialogs.createAddFavouriteDialog(getActivity(), b);
 				dlg.show();
-				MapActivityActions.prepareAddFavouriteDialog(getActivity(), dlg, b, searchPoint.getLatitude(),
+				FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, b, searchPoint.getLatitude(),
 						searchPoint.getLongitude(), ai.objectName);
 			} else if (mode == NAVIGATE_TO) {
-				MapActivityActions.directionsToDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(),
+				DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(),
 						searchPoint.getLongitude(), ai.historyName);
 			} else if (mode == ADD_WAYPOINT) {
-				MapActivityActions.addWaypointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(),
+				DirectionsDialogs.addWaypointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(),
 						searchPoint.getLongitude(), ai.historyName);
 			} else if (mode == SHOW_ON_MAP) {
 				settings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), ai.zoom,

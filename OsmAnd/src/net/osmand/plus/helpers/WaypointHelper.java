@@ -44,6 +44,7 @@ public class WaypointHelper {
 	private static final int ANNOUNCED_DONE = 2;
 
 	private int searchDeviationRadius = 500;
+	private int poiSearchDeviationRadius = 150;
 	private static final int LONG_ANNOUNCE_RADIUS = 700;
 	private static final int SHORT_ANNOUNCE_RADIUS = 150;
 	private static final int ALARMS_ANNOUNCE_RADIUS = 150;
@@ -56,6 +57,7 @@ public class WaypointHelper {
 	public static final int FAVORITES = 3;
 	public static final int ALARMS = 4;
 	public static final int MAX = 5;
+	public static final int[] SEARCH_RADIUS_VALUES = {50, 100, 250, 500, 1000, 1500};
 	
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<List<LocationPointWrapper>>();
 	private ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<LocationPoint, Integer>();
@@ -210,7 +212,9 @@ public class WaypointHelper {
 		recalculatePoints(route, type, locationPoints);
 	}
 	
-	
+	public void recalculatePoints(int type){
+		recalculatePoints(route, type, locationPoints);
+	}
 
 
 	public boolean isTypeConfigurable(int waypointType) {
@@ -378,9 +382,9 @@ public class WaypointHelper {
 		List<LocationPointWrapper> points = new ArrayList<WaypointHelper.LocationPointWrapper>();
 		List<List<LocationPointWrapper>> local = locationPoints;
 		TIntArrayList ps = pointsProgress;
-		for(int i = 0; i < local.size(); i++) {
+		for (int i = 0; i < local.size(); i++) {
 			List<LocationPointWrapper> loc = local.get(i);
-			if(ps.get(i) < loc.size()) {
+			if (ps.get(i) < loc.size()) {
 				points.addAll(loc.subList(ps.get(i), loc.size()));
 			}
 		}
@@ -403,6 +407,7 @@ public class WaypointHelper {
 			}
 			points.add(new LocationPointWrapper(route, TARGETS, tp, 0, routeIndex));
 		}
+		Collections.reverse(points);
 		return points;
 	}
 
@@ -506,7 +511,7 @@ public class WaypointHelper {
 		PoiFilter pf = getPoiFilter();
 		if (pf != null) {
 			final List<Location> locs = route.getImmutableAllLocations();
-			List<Amenity> amenities = app.getResourceManager().searchAmenitiesOnThePath(locs, getSearchRadius(POI),
+			List<Amenity> amenities = app.getResourceManager().searchAmenitiesOnThePath(locs, poiSearchDeviationRadius,
 					pf, new ResultMatcher<Amenity>() {
 
 						@Override
@@ -533,12 +538,6 @@ public class WaypointHelper {
 	}
 
 
-	protected int getSearchRadius(int type) {
-		// app.getAppCustomization().getWaypointSearchRadius(searchDeviationRadius, type);
-		return searchDeviationRadius;
-	}
-	
-	
 
 	private void calculateAlarms(RouteCalculationResult route, List<LocationPointWrapper> array) {
 		for(AlarmInfo i : route.getAlarmInfo()) {
@@ -577,7 +576,8 @@ public class WaypointHelper {
 		int[] ind = new int[1];
 		for(LocationPoint p : points) {
 			float dist = dist(p, immutableAllLocations, ind);
-			if(dist <= getSearchRadius(type)) {
+			int rad = getSearchDeviationRadius(type);
+			if(dist <= rad) {
 				LocationPointWrapper lpw = new LocationPointWrapper(rt, type, p, dist, ind[0]);
 				lpw.setAnnounce(announce);
 				locationPoints.add(lpw);
@@ -623,7 +623,7 @@ public class WaypointHelper {
 	}
 
 
-	public class LocationPointWrapper {
+	public static class LocationPointWrapper {
 		LocationPoint point;
 		float deviationDistance;
 		int routeIndex;
@@ -631,6 +631,8 @@ public class WaypointHelper {
 		RouteCalculationResult route;
 		int type;
 		
+		public LocationPointWrapper() {
+		}
 		
 		public LocationPointWrapper(RouteCalculationResult rt, int type, LocationPoint point, float deviationDistance, int routeIndex) {
 			this.route = rt;
@@ -651,7 +653,39 @@ public class WaypointHelper {
 		public LocationPoint getPoint() {
 			return point;
 		}
-		
+
+
+		public int getDrawableId(Context uiCtx) {
+			if(type == POI) {
+				Amenity amenity = ((AmenityLocationPoint) point).a;
+				StringBuilder tag = new StringBuilder();
+				StringBuilder value = new StringBuilder();
+				MapRenderingTypes.getDefault().getAmenityTagValue(amenity.getType(), amenity.getSubType(),
+						tag, value);
+				if(RenderingIcons.containsBigIcon(tag + "_" + value)) {
+					return RenderingIcons.getBigIconResourceId(tag + "_" + value);
+				} else if(RenderingIcons.containsBigIcon(value.toString())) {
+					return RenderingIcons.getBigIconResourceId(value.toString());
+				}
+				return 0;
+			} else if(type == TARGETS) {
+				return !((TargetPoint)point).intermediate? R.drawable.list_destination:
+								R.drawable.list_intermediate;
+			} else if(type == FAVORITES || type == WAYPOINTS) {
+				//return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
+				return 0;
+			} else if(type == ALARMS) {
+				//TODO: Looks like this does not work yet, not sure why:
+				if(RenderingIcons.containsBigIcon("list_" + ((AlarmInfo) point).getType().toString().toLowerCase())) {
+					return RenderingIcons.getBigIconResourceId("list_" + ((AlarmInfo) point).getType().toString().toLowerCase());
+				} else {
+					return 0;
+				}
+			} else {
+				return 0;
+			}
+		}
+
 		public Drawable getDrawable(Context uiCtx) {
 			if(type == POI) {
 				Amenity amenity = ((AmenityLocationPoint) point).a;
@@ -705,7 +739,19 @@ public class WaypointHelper {
 		}
 		
 	}
-	
+
+	public int getSearchDeviationRadius(int type){
+		return type == POI ? poiSearchDeviationRadius : searchDeviationRadius;
+	}
+
+	public void setSearchDeviationRadius(int type, int radius){
+		if(type == POI) {
+			this.poiSearchDeviationRadius = radius;
+		} else {
+			this.searchDeviationRadius = radius;
+		}
+	}
+
 	private class AmenityLocationPoint implements LocationPoint {
 
 		Amenity a;

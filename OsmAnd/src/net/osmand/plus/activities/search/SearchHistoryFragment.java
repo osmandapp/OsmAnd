@@ -12,6 +12,7 @@ import net.osmand.plus.SearchHistoryHelper;
 import net.osmand.plus.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.util.MapUtils;
 import android.content.Intent;
 import android.os.Bundle;
@@ -119,7 +120,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 				helper.selectEntry(model);				
 			}
 		};
-		MapActivityActions.createDirectionsActions(qa, new LatLon(model.getLat(), model.getLon()),
+		DirectionsDialogs.createDirectionsActions(qa, new LatLon(model.getLat(), model.getLon()),
 				model, name, settings.getLastKnownMapZoom(), getActivity(), false);
 		MapActivityActions.showObjectContextMenu(qa, getActivity(), onShow);
 	}

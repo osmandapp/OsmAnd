@@ -56,6 +56,7 @@ import android.os.AsyncTask;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -115,7 +116,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null ) {
 			distanceControl = createDistanceControl(activity, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
 			mapInfoLayer.getMapInfoControls().registerSideWidget(distanceControl,
-					R.drawable.widget_distance, R.string.map_widget_distancemeasurement, "distance.measurement", false, 21);
+					R.drawable.widget_distance, R.drawable.widget_distance, R.string.map_widget_distancemeasurement, "distance.measurement", false, 21);
 			mapInfoLayer.recreateControls();
 			updateText();
 		}
@@ -584,7 +585,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				OnContextMenuClick listener = new OnContextMenuClick() {
 					
 					@Override
-					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						if (itemId == R.string.delete_point) {
 							for (int i = 0; i < measurementPoints.size(); i++) {
 								Iterator<WptPt> it = measurementPoints.get(i).iterator();
@@ -596,6 +597,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 							}
 							calculateDistance();
 						}
+						return true;
 					}
 				};
 				adapter.item(R.string.delete_point).icons(R.drawable.ic_action_delete_dark, 

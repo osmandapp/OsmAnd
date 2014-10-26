@@ -9,6 +9,17 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rendering_category_details">Details</string>
+    <string name="rendering_category_transport">Transport</string>
+    <string name="rendering_category_others">Others map attributes</string>
+    <string name="map_widget_appearance_rem">Remaining elements</string>
+    <string name="map_widget_vector_attributes">Rendering attributes</string>
+    <string name="map_widget_top">Status bar</string>
+	<string name="map_widget_right">Right panel</string>
+	<string name="map_widget_left">Left panel</string>
+    <string name="layers_category_show">Show</string>
+	<string name="configure_map">Configure map</string>
+    <string name="search_radius_proximity">In proximity of</string>
     <string name="osmo_device_not_found">Device not found</string>
     <string name="osmo_no_connection_msg">OsMo service is not available:\n- check the connection;\n- check the settings;\n- check out our Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">An anonymous user can not:\n- create groups;\n- synchronize groups and devices with the server;\n- manage groups and devices in a private office.</string>
@@ -405,8 +416,7 @@
     <string name="amenity_type_seamark">Seamark</string>
     <string name="app_modes_choose_descr">Choose use profiles visible in application</string>
     <string name="app_modes_choose">Application Profiles</string>
-	<string name="map_widget_appearance">Remaining elements:</string>
-	<string name="map_widget_map_rendering">Map rendering:</string>
+	<string name="map_widget_map_rendering">Map rendering</string>
     <string name="app_mode_hiking">Hiking</string>
     <string name="app_mode_motorcycle">Motorcycle</string>
     <string name="app_mode_boat">Boat</string>
@@ -999,7 +1009,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="day_night_info_description">Sunrise: %1$s \nSunset: %2$s</string>
 	<string name="day_night_info">Day/night info</string>
 	<string name="map_widget_day_night">Day/night map</string>
-	<string name="map_widget_vector_attributes">Rendering attributes:</string>
 	<string name="map_widget_renderer">Map style</string>
 	<string name="layer_map_appearance">Configure screen</string>
 	<string name="show_lanes">Show lanes</string>
@@ -1021,10 +1030,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_back_to_loc">Where am I</string>
 	<string name="map_widget_lock_screen">Lock screen</string>
 	<string name="map_widget_compass">Compass</string>
-	<string name="map_widget_top_stack">Status bar:</string>
 	<string name="map_widget_reset">Reset to default</string>
-	<string name="map_widget_right_stack">Right panel:</string>
-	<string name="map_widget_left_stack">Left panel:</string>
 	<string name="map_widget_parking">Parking</string>
 	<string name="map_widget_monitoring">GPX recording</string>
 	<string name="map_widget_speed">Speed</string>

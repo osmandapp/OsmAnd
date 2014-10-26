@@ -30,6 +30,7 @@ public class RenderingRuleProperty {
 	protected String name;
 	protected String description;
 	protected String[] possibleValues;
+	protected String category;
 	
 	private RenderingRuleProperty(String attrName, int type, boolean input){
 		this.attrName = attrName;
@@ -64,6 +65,10 @@ public class RenderingRuleProperty {
 		return name;
 	}
 	
+	public String getCategory() {
+		return category;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -74,6 +79,10 @@ public class RenderingRuleProperty {
 	
 	protected void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	protected void setPossibleValues(String[] possibleValues) {

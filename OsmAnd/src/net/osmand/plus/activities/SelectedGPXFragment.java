@@ -22,6 +22,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -177,7 +178,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				OnContextMenuClick clk = adapter.getClickAdapter(which);
 				if (clk != null) {
-					clk.onContextMenuClick(adapter.getItemId(which), which, false, dialog);
+					clk.onContextMenuClick(null, adapter.getElementId(which), which, false);
 				}
 			}
 
@@ -188,13 +189,14 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	private void basicFileOperation(final GpxDisplayItem gpxDisplayItem, ContextMenuAdapter adapter) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
-			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 				if (resId == R.string.show_gpx_route) {
 					OsmandSettings settings = app.getSettings();
 					settings.setMapLocationToShow(gpxDisplayItem.locationStart.lat, gpxDisplayItem.locationStart.lon,
 							settings.getLastKnownMapZoom(), Html.fromHtml(gpxDisplayItem.name).toString());
 					MapActivity.launchMapActivityMoveToTop(getMyActivity());
 				}
+				return true;
 			}
 		};
 		if (gpxDisplayItem.locationStart != null) {
@@ -630,7 +632,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			String name = app.getString(R.string.favorite) + ": " + child.name;
 			LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
 			OsmandSettings settings = app.getSettings();
-			MapActivityActions.createDirectionsActions(qa, location, child.locationStart, name, settings.getLastKnownMapZoom(), getMyActivity(),
+			DirectionsDialogs.createDirectionsActions(qa, location, child.locationStart, name, settings.getLastKnownMapZoom(), getMyActivity(),
 					true, false);
 			MapActivityActions.showObjectContextMenu(qa, getMyActivity(), null);
 		} else {
