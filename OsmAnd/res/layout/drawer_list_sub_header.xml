@@ -12,6 +12,7 @@
               android:layout_height="36dp"
               android:capitalize="characters"
               android:inputType="textCapCharacters"
+              android:textColor="#858585"
               android:textSize="14sp"
               android:ellipsize="end"
               android:gravity="left|bottom"/>
