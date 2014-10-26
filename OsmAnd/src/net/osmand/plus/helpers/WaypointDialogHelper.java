@@ -543,13 +543,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 					}
 				}
 			});
-			if(flat) {
-				all.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_gdown_light
-						: R.drawable.ic_action_gdown_dark);
-			} else {
-				all.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_gup_light
-						: R.drawable.ic_action_gup_dark);
-			}
+			
 			if(app.getTargetPointsHelper().getIntermediatePoints().size() > 0) {
 				sort.setVisibility(View.VISIBLE);
 				sort.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_sort_waypoint_white
@@ -567,20 +561,31 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			} else {
 				sort.setVisibility(View.GONE);
 			}
-			
-			all.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if(flat) {
-						showWaypointsDialog(ctx, editF);
-					} else {
-						showWaypointsDialogFlat(ctx, editF);
-					}
-					if(dlg != null) {
-						dlg.dismiss();
-					}
+			if(waypointHelper.isRouteCalculated()) {
+				all.setVisibility(View.GONE);
+			} else {
+				all.setVisibility(View.VISIBLE);
+				if(flat) {
+					all.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_gdown_light
+							: R.drawable.ic_action_gdown_dark);
+				} else {
+					all.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_gup_light
+							: R.drawable.ic_action_gup_dark);
 				}
-			});
+				all.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if(flat) {
+							showWaypointsDialog(ctx, editF);
+						} else {
+							showWaypointsDialogFlat(ctx, editF);
+						}
+						if(dlg != null) {
+							dlg.dismiss();
+						}
+					}
+				});
+			}
 			return v;
 		}
 		
