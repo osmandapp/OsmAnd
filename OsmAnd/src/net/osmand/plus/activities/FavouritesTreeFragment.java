@@ -27,6 +27,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
@@ -168,7 +169,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 					settings.SHOW_FAVORITES.set(true);
 				}
 			};
-			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(),
+			DirectionsDialogs.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(),
 					getActivity(), true, false);
 			Item edit = qa.item(R.string.favourites_context_menu_edit).icons(
 					R.drawable.ic_action_edit_dark, R.drawable.ic_action_edit_light);

@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.content.Intent;
@@ -115,7 +116,7 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 			};
 			ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
 			qa.setAnchor(v);
-			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), getActivity(),
+			DirectionsDialogs.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), getActivity(),
 					true, false);
 			MapActivityActions.showObjectContextMenu(qa, getActivity(), onshow);
 		} else {

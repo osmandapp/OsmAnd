@@ -39,6 +39,7 @@ import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -569,10 +570,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		String name = poiSimpleFormat;
 		int z = Math.max(16, settings.getLastKnownMapZoom());
 		
-		
-		
-		
-		MapActivityActions.createDirectionsActions(adapter, amenity.getLocation(), amenity, name, z, this, true );
+		DirectionsDialogs.createDirectionsActions(adapter, amenity.getLocation(), amenity, name, z, this, true );
 		final String d = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity, false);
 		if(d.toString().trim().length() > 0) { 
 			Item poiDescr = adapter.item(R.string.poi_context_menu_showdescription).icons(

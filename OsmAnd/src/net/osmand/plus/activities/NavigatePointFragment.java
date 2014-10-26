@@ -12,6 +12,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.util.MapUtils;
 import android.app.Dialog;
 import android.content.Intent;
@@ -306,13 +308,13 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 			double lon = convert(((TextView) view.findViewById(R.id.LongitudeEdit)).getText().toString());
 			if(mode == ADD_TO_FAVORITE) {
 				Bundle b = new Bundle();
-				Dialog dlg = MapActivityActions.createAddFavouriteDialog(getActivity(), b);
+				Dialog dlg = FavoriteDialogs.createAddFavouriteDialog(getActivity(), b);
 				dlg.show();
-				MapActivityActions.prepareAddFavouriteDialog(getActivity(), dlg, b, lat, lon, getString(R.string.point_on_map, lat, lon));
+				FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, b, lat, lon, getString(R.string.point_on_map, lat, lon));
 			} else if (mode == NAVIGATE_TO) {
-				MapActivityActions.directionsToDialogAndLaunchMap(getActivity(), lat, lon, getString(R.string.point_on_map, lat, lon));
+				DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), lat, lon, getString(R.string.point_on_map, lat, lon));
 			} else if (mode == ADD_WAYPOINT) {
-				MapActivityActions.addWaypointDialogAndLaunchMap(getActivity(), lat, lon, getString(R.string.point_on_map, lat, lon));
+				DirectionsDialogs.addWaypointDialogAndLaunchMap(getActivity(), lat, lon, getString(R.string.point_on_map, lat, lon));
 			} else if (mode == SHOW_ON_MAP){
 				OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 				app.getSettings().setMapLocationToShow(lat, lon, Math.max(12, app.getSettings().getLastKnownMapZoom()),

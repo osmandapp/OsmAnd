@@ -1,4 +1,4 @@
-package net.osmand.plus.configuremap;
+package net.osmand.plus.dialogs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +8,7 @@ import java.util.List;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -21,6 +22,7 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -44,11 +46,13 @@ public class ConfigureMapMenu {
 		return adapter;
 	}
 	
-	private final class LayerMenuListener implements OnContextMenuClick {
+	private final class LayerMenuListener extends OnRowItemClick {
 		private MapActivity ma;
+		private ContextMenuAdapter cm;
 
-		private LayerMenuListener(MapActivity ma) {
+		private LayerMenuListener(MapActivity ma, ContextMenuAdapter cm) {
 			this.ma = ma;
+			this.cm = cm;
 		}
 
 		private List<String> getAlreadySelectedGpx() {
@@ -59,6 +63,19 @@ public class ConfigureMapMenu {
 				files.add(file.getGpxFile().path);
 			}
 			return files;
+		}
+		
+		@Override
+		public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
+			if(itemId == R.string.layer_poi && cm.getSelection(pos) == 1) {
+				ma.getMapLayers().selectPOIFilterLayer(ma.getMapView(), null);
+				return false;
+			} else if(itemId == R.string.layer_gpx_layer && cm.getSelection(pos) == 1) {
+				ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
+				return false;
+			} else  {
+				return super.onRowItemClick(adapter, view, itemId, pos);
+			}
 		}
 
 		@Override
@@ -93,7 +110,7 @@ public class ConfigureMapMenu {
 	private void createLayersItems(ContextMenuAdapter adapter , MapActivity activity) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
-		LayerMenuListener l = new LayerMenuListener(activity);
+		LayerMenuListener l = new LayerMenuListener(activity, adapter);
 		adapter.item(R.string.layers_category_show).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
 		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0)
@@ -158,8 +175,8 @@ public class ConfigureMapMenu {
 							AccessibleToast.makeText(app, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 						}
 						adapter.setItemDescription(pos, getRenderDescr(activity));
-						ad.notifyDataSetInvalidated();
 						dialog.dismiss();
+						activity.getMapActions().prepareOptionsMenu(createListAdapter(activity));
 					}
 
 				});
@@ -306,9 +323,5 @@ public class ConfigureMapMenu {
 			}
 		}
 	}
-
-	
-
-	
 
 }

@@ -26,6 +26,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.Item;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
@@ -44,10 +45,10 @@ import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.configuremap.ConfigureMapMenu;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.helpers.WaypointDialogHelper;
-import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.osmo.OsMoPositionLayer;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
@@ -82,7 +83,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -92,7 +92,7 @@ public class MapActivityActions implements DialogProvider {
 	public static final String KEY_LONGITUDE = "longitude";
 	public static final String KEY_LATITUDE = "latitude";
 	public static final String KEY_NAME = "name";
-	public static final String KEY_FAVORITE = "favorite";
+	
 	public static final String KEY_ZOOM = "zoom";
 
 	private static final int DIALOG_ADD_FAVORITE = 100;
@@ -141,187 +141,7 @@ public class MapActivityActions implements DialogProvider {
 		return bundle;
 	}
 
-	public static void prepareAddFavouriteDialog(Activity activity, Dialog dialog, Bundle args, double lat, double lon, String name) {
-		final Resources resources = activity.getResources();
-		if(name == null) {
-			name = resources.getString(R.string.add_favorite_dialog_default_favourite_name);
-		}
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final FavouritePoint point = new FavouritePoint(lat, lon, name, app.getSettings().LAST_FAV_CATEGORY_ENTERED.get());
-		args.putSerializable(KEY_FAVORITE, point);
-		final EditText editText =  (EditText) dialog.findViewById(R.id.Name);
-		editText.setText(point.getName());
-		editText.selectAll();
-		editText.requestFocus();
-		final AutoCompleteTextView cat =  (AutoCompleteTextView) dialog.findViewById(R.id.Category);
-		cat.setText(point.getCategory());
-		AndroidUtils.softKeyboardDelayed(editText);
-	}
-	
-	public  static Dialog createAddFavouriteDialog(final Activity activity, final Bundle args) {
-    	Builder builder = new AlertDialog.Builder(activity);
-		builder.setTitle(R.string.favourites_context_menu_edit);
-		final View v = activity.getLayoutInflater().inflate(R.layout.favourite_edit_dialog, null, false);
-		final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
-		builder.setView(v);
-		final EditText editText =  (EditText) v.findViewById(R.id.Name);
-		final AutoCompleteTextView cat =  (AutoCompleteTextView) v.findViewById(R.id.Category);
-		List<FavoriteGroup> gs = helper.getFavoriteGroups();
-		String[] list = new String[gs.size()];
-		for (int i = 0; i < list.length; i++) {
-			list[i] = gs.get(i).name;
-		}
-		cat.setAdapter(new ArrayAdapter<String>(activity, R.layout.list_textview, list));
-		
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-		builder.setNeutralButton(R.string.update_existing, new DialogInterface.OnClickListener(){
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// Don't use showDialog because it is impossible to refresh favorite items list
-				Dialog dlg = createReplaceFavouriteDialog(activity, args);
-				if(dlg != null) {
-					dlg.show();
-				}
-				// mapActivity.showDialog(DIALOG_REPLACE_FAVORITE);
-			}
-			
-		});
-		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
-				OsmandApplication app = (OsmandApplication) activity.getApplication();
-				String categoryStr = cat.getText().toString().trim();
-				final FavouritesDbHelper helper = app.getFavorites();
-				app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(categoryStr);
-				point.setName(editText.getText().toString().trim());
-				point.setCategory(categoryStr);
-				boolean added = helper.addFavourite(point);
-				if (added) {
-					AccessibleToast.makeText(activity, MessageFormat.format(
-							activity.getString(R.string.add_favorite_dialog_favourite_added_template), point.getName()), Toast.LENGTH_SHORT)
-							.show();
-				}
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).getMapView().refreshMap(true);
-				}
-			}
-		});
-		return builder.create();
-    }
-
-	protected static Dialog createReplaceFavouriteDialog(final Activity activity, final Bundle args) {
-		final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
-		final List<FavouritePoint> points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
-		final Collator ci = java.text.Collator.getInstance();
-		final boolean distance = args.containsKey("DISTANCE");
-		Collections.sort(points, new Comparator<FavouritePoint>() {
-
-			@Override
-			public int compare(FavouritePoint o1, FavouritePoint o2) {
-				if (distance && activity instanceof MapActivity) {
-					float f1 = (float) MapUtils.getDistance(((MapActivity) activity).getMapLocation(), o1.getLatitude(),
-							o1.getLongitude());
-					float f2 = (float) MapUtils.getDistance(((MapActivity) activity).getMapLocation(), o2.getLatitude(),
-							o2.getLongitude());
-					return Float.compare(f1, f2);
-				}
-				return ci.compare(o1.getCategory() + " " + o1.getName(), o2.getCategory() + " " + o2.getName());
-			}
-		});
-		final String[] names = new String[points.size()];
-		if(points.size() == 0){
-			AccessibleToast.makeText(activity, activity.getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
-			return null;
-		}
-			
-		Builder b = new AlertDialog.Builder(activity);
-		final FavouritePoint[] favs = new FavouritePoint[points.size()];
-		Iterator<FavouritePoint> it = points.iterator();
-		int i=0;
-		while (it.hasNext()) {
-			FavouritePoint fp = it.next();
-			// filter gpx points
-			favs[i] = fp;
-			if(fp.getCategory().trim().length() ==0){
-				names[i] = fp.getName();
-			} else {
-				names[i] = fp.getCategory() + ": " + fp.getName();
-			}
-			if(activity instanceof MapActivity) {
-				names[i] += "  " + OsmAndFormatter.getFormattedDistance(
-						(float) MapUtils.getDistance(((MapActivity) activity).getMapLocation(), fp.getLatitude(), 
-								fp.getLongitude()), ((MapActivity) activity).getMyApplication());
-			}
-			i++;
-		}
-		final int layout;
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-			layout = R.layout.list_menu_item;
-		} else {
-			layout = R.layout.list_menu_item_native;
-		}
-		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layout, R.id.title,
-				names) {
-			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
-				// User super class to create the View
-				View v = convertView;
-				if (v == null) {
-					v = activity.getLayoutInflater().inflate(layout, null);
-					int vl = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, activity.getResources()
-							.getDisplayMetrics());
-					final LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(vl, vl);
-					ll.setMargins(vl / 4, vl / 4, vl / 4, vl / 4);
-					v.findViewById(R.id.icon).setLayoutParams(ll);
-				}
-				ImageView icon = (ImageView) v.findViewById(R.id.icon);
-				FavouritePoint fp = points.get(position);
-				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, fp.getColor()));
-				
-				icon.setVisibility(View.VISIBLE);
-				TextView tv = (TextView) v.findViewById(R.id.title);
-				tv.setText(names[position]);
-				tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-					ch.setVisibility(View.INVISIBLE);
-				return v;
-			}
-		};
-		b.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				FavouritePoint fv = favs[which];
-				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
-				if (helper.editFavourite(fv, point.getLatitude(), point.getLongitude())) {
-					AccessibleToast.makeText(activity, activity.getString(R.string.fav_points_edited),
-							Toast.LENGTH_SHORT).show();
-				}
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).getMapView().refreshMap();
-				}
-			}
-		});
-		if (activity instanceof MapActivity) {
-			b.setPositiveButton(distance ? R.string.sort_by_name : R.string.sort_by_distance,
-					new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if (distance) {
-								args.remove("DISTANCE");
-							} else {
-								args.putBoolean("DISTANCE", true);
-							}
-							createReplaceFavouriteDialog(activity, args).show();
-						}
-					});
-		}
-		AlertDialog al = b.create();
-		return al;
-	}
-	
     public void addWaypoint(final double latitude, final double longitude){
     	String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
     	enhance(dialogBundle,latitude,longitude, name);
@@ -705,9 +525,9 @@ public class MapActivityActions implements DialogProvider {
 		Bundle args = dialogBundle;
 		switch (id) {
 			case DIALOG_ADD_FAVORITE:
-				return createAddFavouriteDialog(mapActivity, args);
+				return FavoriteDialogs.createAddFavouriteDialog(mapActivity, args);
 			case DIALOG_REPLACE_FAVORITE:
-				return createReplaceFavouriteDialog(mapActivity, args);
+				return FavoriteDialogs.createReplaceFavouriteDialog(mapActivity, args);
 			case DIALOG_ADD_WAYPOINT:
 				return createAddWaypointDialog(args);
 			case DIALOG_RELOAD_TITLE:
@@ -723,7 +543,7 @@ public class MapActivityActions implements DialogProvider {
 		Bundle args = dialogBundle;
 		switch (id) {
 		case DIALOG_ADD_FAVORITE:
-			prepareAddFavouriteDialog(mapActivity, dialog, args,
+			FavoriteDialogs.prepareAddFavouriteDialog(mapActivity, dialog, args,
 					args.getDouble(KEY_LATITUDE), args.getDouble(KEY_LONGITUDE),args.getString(KEY_NAME));
 			break;
 		case DIALOG_ADD_WAYPOINT:
@@ -776,7 +596,12 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int which, long id) {
 				OnContextMenuClick click = cm.getClickAdapter(which);
-				if (click != null) {
+				if(click instanceof OnRowItemClick) {
+					boolean cl = ((OnRowItemClick) click).onRowItemClick(listAdapter, view, cm.getElementId(which), which);
+					if(cl) {
+						mDrawerLayout.closeDrawer(mDrawerList);
+					}
+				} else if (click != null) {
 					CompoundButton btn = (CompoundButton) view.findViewById(R.id.check_item);
 					if (btn != null && btn.getVisibility() == View.VISIBLE) {
 						btn.setChecked(!btn.isChecked());
@@ -908,10 +733,11 @@ public class MapActivityActions implements DialogProvider {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos,
 								boolean isChecked) {
-							final List<WaypointHelper.LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
-							ContextMenuAdapter cm = waypointDialogHelper.setListAdapter(app.getMapActivity(),
-									mDrawerList, deletedPoints);
-							prepareOptionsMenu(cm);
+//							final List<WaypointHelper.LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
+//							ContextMenuAdapter cm = waypointDialogHelper.setListAdapter(app.getMapActivity(),
+//									mDrawerList, deletedPoints);
+//							prepareOptionsMenu(cm);
+							WaypointDialogHelper.showWaypointsDialog(mapActivity);
 							return false;
 						}
 					}).reg();
@@ -1124,75 +950,9 @@ public class MapActivityActions implements DialogProvider {
 		menu.show();
 	}
 	
-	public static void createDirectionsActions(final ContextMenuAdapter qa , final LatLon location, final Object obj, final String name, 
-    		final int z, final Activity activity, final boolean saveHistory) {
-		createDirectionsActions(qa, location, obj, name, z, activity, saveHistory, true);
-	}
+	
     
-    public static void createDirectionsActions(final ContextMenuAdapter qa , final LatLon location, final Object obj, final String name, 
-    		final int z, final Activity activity, final boolean saveHistory, boolean favorite) {
-
-		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
-		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		
-		
-		Item dir = qa.item(R.string.context_menu_item_directions_to).icons(
-				R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light);
-		dir.listen(
-				new OnContextMenuClick() {
-					
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						MapActivityActions.directionsToDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
-						return true;
-					}
-				}).reg();
-		Item intermediate; 
-		if (targetPointsHelper.getPointToNavigate() != null) {
-			intermediate = qa.item(R.string.context_menu_item_intermediate_point).icons(
-					R.drawable.ic_action_flage_dark,R.drawable.ic_action_flage_light);
-		} else {
-			intermediate = qa.item(R.string.context_menu_item_destination_point).icons(
-					R.drawable.ic_action_flag_dark, R.drawable.ic_action_flag_light);
-		}
-		intermediate.listen(new OnContextMenuClick() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-				addWaypointDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
-				return true;
-			}
-		}).reg();
-
-		Item showOnMap = qa.item(R.string.show_poi_on_map).icons(
-				R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light );
-		showOnMap.listen(
-				new OnContextMenuClick() {
-					
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), z, saveHistory ? name : null, name,
-								obj); //$NON-NLS-1$
-						MapActivity.launchMapActivityMoveToTop(activity);
-						return true;
-					}
-				}).reg();
-		if (favorite) {
-			Item addToFavorite = qa.item(R.string.add_to_favourite).icons(
-					R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light);
-			addToFavorite.listen(new OnContextMenuClick() {
-
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					Bundle args = new Bundle();
-					Dialog dlg = createAddFavouriteDialog(activity, args);
-					dlg.show();
-					prepareAddFavouriteDialog(activity, dlg, args, location.getLatitude(), location.getLongitude(),
-							name);
-					return true;
-				}
-			}).reg();
-		}
-	}
+    
 
 	public static void showObjectContextMenu(final ContextMenuAdapter qa, final Activity activity,
 			final OnClickListener onShow) {
@@ -1239,67 +999,6 @@ public class MapActivityActions implements DialogProvider {
 			view.show();
 		}
 	}
-    
-    public static void directionsToDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name) {
-		final OsmandApplication ctx = (OsmandApplication) act.getApplication();
-		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
-		if (targetPointsHelper.getIntermediatePoints().size() > 0) {
-			Builder builder = new AlertDialog.Builder(act);
-			builder.setTitle(R.string.new_directions_point_dialog);
-			builder.setItems(
-					new String[] { act.getString(R.string.keep_intermediate_points),
-							act.getString(R.string.clear_intermediate_points)},
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if (which == 1) {
-								targetPointsHelper.clearPointToNavigate(false);
-							}
-							ctx.getSettings().navigateDialog();
-							targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
-							MapActivity.launchMapActivityMoveToTop(act);
-						}
-					});
-			builder.show();
-		} else {
-			ctx.getSettings().navigateDialog();
-			targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
-			MapActivity.launchMapActivityMoveToTop(act);
-		}
-	}
-    
-    
-	public static void addWaypointDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name) {
-		final OsmandApplication ctx = (OsmandApplication) act.getApplication();
-		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
-		if (targetPointsHelper.getPointToNavigate() != null) {
-			Builder builder = new AlertDialog.Builder(act);
-			builder.setTitle(R.string.new_destination_point_dialog);
-			builder.setItems(
-					new String[] { act.getString(R.string.replace_destination_point),
-							act.getString(R.string.keep_and_add_destination_point),
-							act.getString(R.string.add_as_first_destination_point), act.getString(R.string.add_as_last_destination_point) },
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if (which == 0) {
-								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
-							} else if (which == 1) {
-								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, 
-										targetPointsHelper.getIntermediatePoints().size() + 1, name);
-							} else if (which == 2) {
-								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, 0, name);
-							} else {
-								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, targetPointsHelper.getIntermediatePoints().size(), name);
-							}
-							MapActivity.launchMapActivityMoveToTop(act);
-						}
-					});
-			builder.show();
-		} else {
-			targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
-			MapActivity.launchMapActivityMoveToTop(act);
-		}
-	}
+	
     
 }

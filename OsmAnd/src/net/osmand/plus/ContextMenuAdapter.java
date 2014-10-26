@@ -20,7 +20,6 @@ public class ContextMenuAdapter {
 		isCategory.clear();
 		itemNames.clear();
 		checkListeners.clear();
-		itemListeners.clear();
 		selectedList.clear();
 		layoutIds.clear();
 		iconList.clear();
@@ -33,6 +32,22 @@ public class ContextMenuAdapter {
 		public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked);
 	}
 	
+	public static abstract class OnRowItemClick implements OnContextMenuClick {
+		
+		public OnRowItemClick() {
+		}
+		//boolean return type needed to desribe if drawer needed to be close or not
+		public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
+			CompoundButton btn = (CompoundButton) view.findViewById(R.id.check_item);
+			if (btn != null && btn.getVisibility() == View.VISIBLE) {
+				btn.setChecked(!btn.isChecked());
+				return false;
+			} else {
+				return onContextMenuClick(adapter, itemId, pos, false);
+			}
+		}
+	}
+	
 	private final Context ctx;
 	private View anchor;
 	private int defaultLayoutId = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB ?
@@ -41,7 +56,6 @@ public class ContextMenuAdapter {
 	final TIntArrayList isCategory = new TIntArrayList();
 	final ArrayList<String> itemNames = new ArrayList<String>();
 	final ArrayList<OnContextMenuClick> checkListeners = new ArrayList<ContextMenuAdapter.OnContextMenuClick>();
-	final ArrayList<OnContextMenuClick> itemListeners = new ArrayList<ContextMenuAdapter.OnContextMenuClick>();
 	final TIntArrayList selectedList = new TIntArrayList();
 	final TIntArrayList loadingList = new TIntArrayList();
 	final TIntArrayList layoutIds = new TIntArrayList();
@@ -73,10 +87,6 @@ public class ContextMenuAdapter {
 		return checkListeners.get(i);
 	}
 
-	public OnContextMenuClick getItemClickAdapter(int i) {
-		return itemListeners.get(i);
-	}
-	
 	public String getItemName(int pos){
 		return itemNames.get(pos);
 	}
@@ -290,9 +300,10 @@ public class ContextMenuAdapter {
 							@Override
 							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 								OnContextMenuClick ca = getClickAdapter(position);
-								if(ca != null) {
+								if (ca != null) {
 									ca.onContextMenuClick(la, getElementId(position), position, isChecked);
 								}
+								selectedList.set(position, isChecked ? 1 : 0);
 							}
 						});
 						ch.setVisibility(View.VISIBLE);
