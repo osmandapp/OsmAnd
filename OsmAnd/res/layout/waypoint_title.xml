@@ -15,10 +15,16 @@
 			  android:singleLine="true"
 			  android:text="@string/waypoints"
 			  android:ellipsize="end"
-			  android:layout_gravity="center_vertical"
-			  android:gravity="center"
 			  android:layout_weight="1"
+			  android:layout_marginRight="8dp"
 			  android:textSize="20sp"/>
+	<ImageButton
+			android:id="@+id/sort"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:layout_marginBottom="8dp"
+			android:layout_marginRight="8dp"/>
 
 	<ImageButton
 			android:id="@+id/edit"
@@ -26,7 +32,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="8dp"
 			android:layout_marginBottom="8dp"
-			android:layout_marginRight="16dp"/>
+			android:layout_marginRight="8dp"/>
 	
 	<ImageButton
 			android:id="@+id/all"
@@ -35,5 +41,5 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="8dp"
 			android:layout_marginBottom="8dp"
-			android:layout_marginRight="16dp"/>
+			android:layout_marginRight="8dp"/>
 </LinearLayout>

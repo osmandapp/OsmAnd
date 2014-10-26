@@ -382,9 +382,9 @@ public class WaypointHelper {
 		List<LocationPointWrapper> points = new ArrayList<WaypointHelper.LocationPointWrapper>();
 		List<List<LocationPointWrapper>> local = locationPoints;
 		TIntArrayList ps = pointsProgress;
-		for(int i = 0; i < local.size(); i++) {
+		for (int i = 0; i < local.size(); i++) {
 			List<LocationPointWrapper> loc = local.get(i);
-			if(ps.get(i) < loc.size()) {
+			if (ps.get(i) < loc.size()) {
 				points.addAll(loc.subList(ps.get(i), loc.size()));
 			}
 		}
@@ -407,6 +407,7 @@ public class WaypointHelper {
 			}
 			points.add(new LocationPointWrapper(route, TARGETS, tp, 0, routeIndex));
 		}
+		Collections.reverse(points);
 		return points;
 	}
 

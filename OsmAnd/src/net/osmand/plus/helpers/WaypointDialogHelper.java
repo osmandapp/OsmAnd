@@ -132,7 +132,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		}
 	}
 
-	private static void updatePointInfoView(final OsmandApplication app, final Activity ctx,
+	private static void updatePointInfoView(final OsmandApplication app, final MapActivity ctx,
 											View localView, final LocationPointWrapper ps, final DialogFragment dialog) {
 		WaypointHelper wh = app.getWaypointHelper();
 		final LocationPoint point = ps.getPoint();
@@ -146,12 +146,9 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
 		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(ctx));
 		int dist = -1;
-		if(!wh.isRouteCalculated()) {
-			Location lm = app.getLocationProvider().getLastKnownLocation();
-			if(lm != null) {
-				dist = (int) MapUtils.getDistance(lm.getLatitude(), lm.getLongitude(), 
+		if (!wh.isRouteCalculated()) {
+			dist = (int) MapUtils.getDistance(ctx.getMapView().getLatitude(), ctx.getMapView().getLongitude(),
 					point.getLatitude(), point.getLongitude());
-			}
 		} else {
 			dist = wh.getRouteDistance(ps);
 		}
@@ -356,10 +353,10 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 					if(position == 0) {
 						return createDialogHeader(ctx, edit, true, srcDialog[0]);
 					}
-					if (v == null) {
+					if (v == null || v.findViewById(R.id.waypoint_icon) == null) {
 						v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
 					}
-					updatePointInfoView(app, ctx, v, getItem(position), WaypointDialogFragment.this);
+					updatePointInfoView(app, (MapActivity) ctx, v, getItem(position), WaypointDialogFragment.this);
 					View remove = v.findViewById(R.id.info_close);
 					
 					if(!edit) {
@@ -437,7 +434,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 						if(v == null || v.findViewById(R.id.info_close) == null) {
 							v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
 						}
-						updatePointInfoView(app, ctx, v, (LocationPointWrapper) getItem(position), WaypointDialogFragment.this);
+						updatePointInfoView(app, (MapActivity) ctx, v, (LocationPointWrapper) getItem(position), WaypointDialogFragment.this);
 						View remove = v.findViewById(R.id.info_close);
 						if (!edit) {
 							remove.setVisibility(View.GONE);
@@ -506,7 +503,9 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				if(!rc && i != WaypointHelper.WAYPOINTS && i != WaypointHelper.TARGETS) {
 					// skip
 				} else if (waypointHelper.isTypeVisible(i)) {
-					points.add(new Integer(i));
+					if(i != WaypointHelper.TARGETS) {
+						points.add(new Integer(i));
+					}
 					if ((i == WaypointHelper.POI || i == WaypointHelper.FAVORITES || i == WaypointHelper.WAYPOINTS)
 							&& rc) {
 						if (waypointHelper.isTypeEnabled(i)) {
@@ -524,6 +523,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			View v;
 			v = ctx.getLayoutInflater().inflate(R.layout.waypoint_title, null);
 			ImageButton edit = (ImageButton) v.findViewById(R.id.edit);
+			ImageButton sort = (ImageButton) v.findViewById(R.id.sort);
 			ImageButton all = (ImageButton) v.findViewById(R.id.all);
 			edit.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_edit_light
 					: R.drawable.ic_action_edit_dark);
@@ -548,6 +548,24 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				all.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_gup_light
 						: R.drawable.ic_action_gup_dark);
 			}
+			if(app.getTargetPointsHelper().getIntermediatePoints().size() > 0) {
+				sort.setVisibility(View.VISIBLE);
+				sort.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_sort_waypoint_white
+						: R.drawable.ic_sort_waypoint_dark);
+				sort.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						IntermediatePointsDialog.openIntermediatePointsDialog(getActivity(), app, true);
+						if(dlg != null) {
+							dlg.dismiss();
+						}						
+					}
+				});
+			} else {
+				sort.setVisibility(View.GONE);
+			}
+			
 			all.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

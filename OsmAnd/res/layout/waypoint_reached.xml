@@ -6,7 +6,7 @@
               android:layout_height="match_parent"
               android:background="@drawable/view_transparent_selection"
               android:id="@+id/package_delivered_layout"
-              android:minHeight="32dp">
+              android:minHeight="48dp">
 
     <ImageView android:id="@+id/waypoint_icon"
                android:layout_marginLeft="8dp"
