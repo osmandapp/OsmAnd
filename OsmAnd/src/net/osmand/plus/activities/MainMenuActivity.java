@@ -303,7 +303,7 @@ public class MainMenuActivity extends Activity {
 						if(appVersionChanged) {
 							final Intent helpIntent = new Intent(activity, HelpActivity.class);
 							helpIntent.putExtra(HelpActivity.TITLE, Version.getAppVersion(getMyApplication()));
-							helpIntent.putExtra(HelpActivity.URL, "changes-1.8.html");
+							helpIntent.putExtra(HelpActivity.URL, "changes-1.9.html");
 							activity.startActivity(helpIntent);
 							dialogShown = true;
 						}
