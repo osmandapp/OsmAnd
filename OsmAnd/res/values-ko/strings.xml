@@ -2103,4 +2103,14 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="anonymous_user_hint">익명의 사용자는 아래 사항을 할 수 없습니다:\n- 그룹 생성;\n- 그룹 및 장치를 서버와 동기화;\n- 그룹 및 장치를 관리 (개인 사무실에서).</string>
     <string name="anonymous_user">익명의 사용자</string>
     <string name="logged_as">%1$s 사용자로 로그인 됨</string>
-	</resources>
+	<string name="rendering_category_details">세부 정보</string>
+    <string name="rendering_category_transport">운송</string>
+    <string name="rendering_category_others">다른 지도 속성</string>
+    <string name="map_widget_appearance_rem">나머지 요소</string>
+    <string name="map_widget_top">상태 표시줄</string>
+	<string name="map_widget_right">오른쪽 패널</string>
+	<string name="map_widget_left">왼쪽된 패널</string>
+    <string name="layers_category_show">표시</string>
+	<string name="configure_map">지도 구성</string>
+    <string name="search_radius_proximity">근접에서</string>
+    </resources>

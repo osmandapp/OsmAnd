@@ -92,7 +92,7 @@
 	<string name="day_night_info_description">日出：%1$s \n日落：%2$s</string>
 	<string name="day_night_info">日/夜資訊</string>
 	<string name="map_widget_day_night">日/夜地圖</string>
-	<string name="map_widget_vector_attributes">繪製屬性：</string>
+	<string name="map_widget_vector_attributes">繪製屬性</string>
 	<string name="map_widget_renderer">地圖樣式</string>
 	
 	
@@ -1454,7 +1454,7 @@
     <string name="app_mode_motorcycle">機車</string>
     <string name="app_mode_boat">船</string>
     <string name="app_mode_aircraft">飛航</string>
-    <string name="map_widget_map_rendering">地圖繪製：</string>
+    <string name="map_widget_map_rendering">地圖繪製</string>
     <string name="app_modes_choose_descr">在應用程式中選取現有的設定檔</string>
     <string name="app_modes_choose">應用設定檔</string>
 	<string name="amenity_type_seamark">航線標識</string>
@@ -1833,4 +1833,14 @@
     <string name="anonymous_user_hint">匿名使用者不能：\n- 建立群組；\n- 以伺服器同步群組和裝置；\n- 在個人的辦事處所管理群組和裝置。</string>
     <string name="anonymous_user">匿名使用者</string>
     <string name="logged_as">已登入於 %1$s</string>
-	</resources>
+	<string name="rendering_category_details">詳細資訊</string>
+    <string name="rendering_category_transport">運輸</string>
+    <string name="rendering_category_others">其它地圖屬性</string>
+    <string name="map_widget_appearance_rem">剩餘元件</string>
+    <string name="map_widget_top">狀態列</string>
+	<string name="map_widget_right">右面板</string>
+	<string name="map_widget_left">左面板</string>
+    <string name="layers_category_show">顯示</string>
+	<string name="configure_map">組態地圖</string>
+    <string name="search_radius_proximity">在接近度上</string>
+    </resources>

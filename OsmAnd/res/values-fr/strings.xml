@@ -1838,4 +1838,14 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="anonymous_user_hint">Un utilisateur anonyme ne peut pas :\n- Créer des groupes;\n- Synchroniser les groupes et les périphériques avec le serveur;\n- Gérer les groupes et les périphériques dans un espace privé.</string>
     <string name="anonymous_user">Utilisateur anonyme</string>
     <string name="logged_as">Connecté entant que %1$s</string>
-	</resources>
+	<string name="rendering_category_details">Détails</string>
+    <string name="rendering_category_transport">Transport</string>
+    <string name="rendering_category_others">Autres éléments de la carte</string>
+    <string name="map_widget_appearance_rem">Éléments restants</string>
+    <string name="map_widget_top">Barre d\'état</string>
+	<string name="map_widget_right">Panneau de droite</string>
+	<string name="map_widget_left">Panneau de gauche</string>
+    <string name="layers_category_show">Afficher</string>
+	<string name="configure_map">Configurer la carte</string>
+    <string name="search_radius_proximity">A proximité de</string>
+    </resources>

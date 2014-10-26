@@ -265,7 +265,7 @@
 <string name="filterpoi_activity">Crea un filtre pels PDI</string>
 <string name="day_night_info_description">Alba: %1$s
 \nCapvespre: %2$s</string>
-<string name="map_widget_vector_attributes">Atributs de renderització:</string>
+<string name="map_widget_vector_attributes">Atributs de renderització</string>
 <string name="map_widget_renderer">Estil de renderització</string>
 <string name="map_widget_mini_route">Minimapa de ruta</string>
 <string name="select_animate_speedup">Selecciona l\'acceleració de la ruta animada</string>
@@ -1324,7 +1324,7 @@
 	<string name="amenity_type_seamark">Balisa marina</string>
     <string name="app_modes_choose_descr">Seleccioneu els perfils d\'ús visibles a l\'aplicació</string>
     <string name="app_modes_choose">Perfils de l\'aplicació</string>
-	<string name="map_widget_map_rendering">Renderitzat del mapa:</string>
+	<string name="map_widget_map_rendering">Renderitzat del mapa</string>
     <string name="app_mode_hiking">Senderisme</string>
     <string name="app_mode_motorcycle">Moto</string>
     <string name="app_mode_boat">Vaixell</string>
@@ -1912,4 +1912,14 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="anonymous_user_hint">Un usuari anònim no pot:\n- crear grups;\n- sincronitzar grups i dispositius amb el servidor;\n- gestionar grups i dispositius en privat.</string>
     <string name="anonymous_user">Usuari anònim</string>
     <string name="logged_as">S\'ha iniciat sessió com a %1$s</string>
-	</resources>
+	<string name="rendering_category_details">Detalls</string>
+    <string name="rendering_category_transport">Transport</string>
+    <string name="rendering_category_others">Altres atributs del mapa</string>
+    <string name="map_widget_appearance_rem">Elements pendents</string>
+    <string name="map_widget_top">Barra d\'estat</string>
+	<string name="map_widget_right">Tauler dret</string>
+	<string name="map_widget_left">Tauler esquerre</string>
+    <string name="layers_category_show">Mostrar</string>
+	<string name="configure_map">Configureu mapa</string>
+    <string name="search_radius_proximity">A prop de</string>
+    </resources>
