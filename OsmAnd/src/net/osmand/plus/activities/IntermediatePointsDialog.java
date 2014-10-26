@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -41,7 +42,8 @@ public class IntermediatePointsDialog {
 
 	
 	public static void openIntermediatePointsDialog(MapActivity mapActivity){
-		openIntermediatePointsDialog(mapActivity, (OsmandApplication) mapActivity.getApplication(), false);
+//		openIntermediatePointsDialog(mapActivity, (OsmandApplication) mapActivity.getApplication(), false);
+		WaypointDialogHelper.showWaypointsDialog(mapActivity, false);
 	}
 	
 	public static void openIntermediatePointsDialog(final Activity activity,

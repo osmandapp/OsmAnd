@@ -132,7 +132,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		}
 	}
 
-	private static void updatePointInfoView(final OsmandApplication app, final MapActivity ctx,
+	private static void updatePointInfoView(final OsmandApplication app, final Activity ctx,
 											View localView, final LocationPointWrapper ps, final DialogFragment dialog) {
 		WaypointHelper wh = app.getWaypointHelper();
 		final LocationPoint point = ps.getPoint();
@@ -147,8 +147,10 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(ctx));
 		int dist = -1;
 		if (!wh.isRouteCalculated()) {
-			dist = (int) MapUtils.getDistance(ctx.getMapView().getLatitude(), ctx.getMapView().getLongitude(),
-					point.getLatitude(), point.getLongitude());
+			if (ctx instanceof MapActivity) {
+				dist = (int) MapUtils.getDistance(((MapActivity) ctx).getMapView().getLatitude(), ((MapActivity) ctx)
+						.getMapView().getLongitude(), point.getLatitude(), point.getLongitude());
+			}
 		} else {
 			dist = wh.getRouteDistance(ps);
 		}
@@ -357,7 +359,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 					if (v == null || v.findViewById(R.id.waypoint_icon) == null) {
 						v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
 					}
-					updatePointInfoView(app, (MapActivity) ctx, v, getItem(position), WaypointDialogFragment.this);
+					updatePointInfoView(app, ctx, v, getItem(position), WaypointDialogFragment.this);
 					View remove = v.findViewById(R.id.info_close);
 					if(!edit) {
 						remove.setVisibility(View.GONE);
@@ -434,7 +436,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 						if(v == null || v.findViewById(R.id.info_close) == null) {
 							v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
 						}
-						updatePointInfoView(app, (MapActivity) ctx, v, (LocationPointWrapper) getItem(position), WaypointDialogFragment.this);
+						updatePointInfoView(app, ctx, v, (LocationPointWrapper) getItem(position), WaypointDialogFragment.this);
 						View remove = v.findViewById(R.id.info_close);
 						if (!edit) {
 							remove.setVisibility(View.GONE);

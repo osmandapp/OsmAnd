@@ -29,6 +29,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
