@@ -1919,4 +1919,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="map_widget_top">Barra d\'estat</string>
 	<string name="map_widget_right">Tauler dret</string>
 	<string name="map_widget_left">Tauler esquerre</string>
+    <string name="layers_category_show">Mostrar</string>
+	<string name="configure_map">Configureu mapa</string>
+    <string name="search_radius_proximity">A prop de</string>
     </resources>
