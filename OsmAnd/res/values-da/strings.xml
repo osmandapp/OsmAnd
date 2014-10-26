@@ -187,7 +187,7 @@
 \nSolnedgang: %2$s</string>
 	<string name="day_night_info">Dag/nat information</string>
 	<string name="map_widget_day_night">Dag-/natkort</string>
-	<string name="map_widget_vector_attributes">Optegningsattributter:</string>
+	<string name="map_widget_vector_attributes">Optegningsattributter</string>
 	<string name="map_widget_renderer">Kortformat</string>
 	
 	
@@ -1461,7 +1461,7 @@ Nogle af de centrale funktioner:
     <string name="app_mode_motorcycle">Motorcykel</string>
     <string name="app_mode_boat">Båd</string>
     <string name="app_mode_aircraft">Fly</string>
-    <string name="map_widget_map_rendering">Kortoptegning:</string>
+    <string name="map_widget_map_rendering">Kortoptegning</string>
     <string name="app_modes_choose_descr">Vælg tilgængelige brugerprofiler</string>
     <string name="app_modes_choose">Programprofiler</string>
 	<string name="amenity_type_seamark">Sømærke</string>
