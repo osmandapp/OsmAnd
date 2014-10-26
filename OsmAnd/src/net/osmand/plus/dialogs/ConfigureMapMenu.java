@@ -224,7 +224,7 @@ public class ConfigureMapMenu {
 				final String[] txtNames = new String[txtValues.length];
 				for (int i = 0; i < txtNames.length; i++) {
 					txtNames[i] = (int) (txtValues[i] * 100) + " %";
-					if (view.getSettings().TEXT_SCALE.get() == txtValues[i]) {
+					if (Math.abs(view.getSettings().TEXT_SCALE.get() - txtValues[i]) < 0.1f) {
 						selected = i;
 					}
 				}
@@ -235,6 +235,7 @@ public class ConfigureMapMenu {
 						refreshMapComplete(activity);
 						adapter.setItemDescription(pos, getScale(activity));
 						ad.notifyDataSetInvalidated();
+						dialog.dismiss();
 					}
 				});
 				b.show();

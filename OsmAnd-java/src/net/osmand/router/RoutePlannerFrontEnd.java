@@ -23,7 +23,7 @@ import org.apache.commons.logging.Log;
 public class RoutePlannerFrontEnd {
 	
 	private boolean useOldVersion;
-	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlannerOld.class);
+	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
 
 	public RoutePlannerFrontEnd(boolean useOldVersion) {
 		this.useOldVersion = useOldVersion;
@@ -348,6 +348,7 @@ public class RoutePlannerFrontEnd {
 							restPartRecalculatedRoute.add(prev.get(k));
 						}
 					}
+					System.out.println("Recalculate only first part of the route");
 					break;
 				}
 			}

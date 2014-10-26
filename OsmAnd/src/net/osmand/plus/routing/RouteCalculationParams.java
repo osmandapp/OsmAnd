@@ -16,11 +16,13 @@ public class RouteCalculationParams {
 	public LatLon end;
 	public List<LatLon> intermediates;
 	
+	
 	public OsmandApplication ctx;
 	public ApplicationMode mode;
 	public RouteService type;
 	public GPXRouteParams gpxRoute;
 	public RouteCalculationResult previousToRecalculate;
+	public boolean onlyStartPointChanged;
 	public boolean fast;
 	public boolean leftSide;
 	public RouteCalculationProgress calculationProgress;

@@ -394,7 +394,8 @@ public class RouteProvider {
 		rp.leftSide = routeParams.leftSide;
 		rp.type = routeParams.type;
 		rp.fast = routeParams.fast;
-		rp.previousToRecalculate = routeParams.previousToRecalculate;
+		rp.onlyStartPointChanged = routeParams.onlyStartPointChanged;
+		rp.previousToRecalculate =  routeParams.previousToRecalculate;
 		rp.intermediates = new ArrayList<LatLon>();
 		for(Location w : intermediates) {
 			rp.intermediates.add(new LatLon(w.getLatitude(), w.getLongitude()));
@@ -656,8 +657,7 @@ public class RouteProvider {
 		}
 		ctx.leftSideNavigation = params.leftSide;
 		ctx.calculationProgress = params.calculationProgress;
-		if(params.previousToRecalculate != null) {
-			 // not used any more
+		if(params.previousToRecalculate != null && params.onlyStartPointChanged) {
 			ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
 		}
 		LatLon st = new LatLon(params.start.getLatitude(), params.start.getLongitude());
