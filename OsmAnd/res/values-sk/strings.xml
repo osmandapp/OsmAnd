@@ -1063,7 +1063,7 @@
 \nZápad slnka: %2$s</string>
 <string name="day_night_info">Info o dni/noci</string>
 <string name="map_widget_day_night">Denná/nočná mapa</string>
-<string name="map_widget_vector_attributes">Atribúty vykresľovania:</string>
+<string name="map_widget_vector_attributes">Atribúty vykresľovania</string>
 <string name="map_widget_renderer">Štýl vykresľovania</string>
 <string name="osmand_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
@@ -1623,7 +1623,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="app_mode_boat">Loď</string>
     <string name="app_mode_aircraft">Lietadlo</string>
     <string name="app_modes_choose">Profily aplikácie</string>
-	<string name="map_widget_map_rendering">Vykresľovanie mapy:</string>
+	<string name="map_widget_map_rendering">Vykresľovanie mapy</string>
     <string name="app_modes_choose_descr">Zvoľte profily použitia viditeľné v aplikácii</string>
     <string name="amenity_type_seamark">Morská značka</string>
     
@@ -2009,4 +2009,14 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="logged_as">Prihlásený ako %1$s</string>
 	<string name="osmo_no_connection_msg">Služba OsMo nie je dostupná:\n- skontrolujte pripojenie;\n- skontrolujte nastavenie;\n- pozrite na náš Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Anonymný používateľ nemôže:\n- vytvárať skupiny;\n- synchronizovať skupiny a zariadenia so serverom;\n- spravovať skupiny a zariadenia v súkromnej kancelárii.</string>
+    <string name="rendering_category_details">Podrobnosti</string>
+    <string name="rendering_category_transport">Doprava</string>
+    <string name="rendering_category_others">Iné vlastnosti mapy</string>
+    <string name="map_widget_appearance_rem">Zvyšné elementy</string>
+    <string name="map_widget_top">Stavový riadok</string>
+	<string name="map_widget_right">Pravý panel</string>
+	<string name="map_widget_left">Ľavý panel</string>
+    <string name="layers_category_show">Zobraziť</string>
+	<string name="configure_map">Nastaviť mapu</string>
+    <string name="search_radius_proximity">Blízko k</string>
     </resources>
