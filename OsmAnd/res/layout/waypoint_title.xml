@@ -13,6 +13,7 @@
 			  android:layout_height="wrap_content"
 			  android:layout_marginLeft="8dp"
 			  android:singleLine="true"
+			  android:layout_gravity="center_vertical"
 			  android:text="@string/waypoints"
 			  android:ellipsize="end"
 			  android:layout_weight="1"

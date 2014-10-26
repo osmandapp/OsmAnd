@@ -344,6 +344,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			final List<LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
 			final FragmentActivity ctx = getActivity();
 			final AlertDialog[] srcDialog = new AlertDialog[1];
+			points.add(0, new LocationPointWrapper());
 			final ArrayAdapter<LocationPointWrapper> listAdapter = new ArrayAdapter<LocationPointWrapper>(ctx, R.layout.waypoint_reached, R.id.title,
 					points) {
 				@Override
@@ -358,7 +359,6 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 					}
 					updatePointInfoView(app, (MapActivity) ctx, v, getItem(position), WaypointDialogFragment.this);
 					View remove = v.findViewById(R.id.info_close);
-					
 					if(!edit) {
 						remove.setVisibility(View.GONE);
 					} else {

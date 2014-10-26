@@ -623,7 +623,7 @@ public class WaypointHelper {
 	}
 
 
-	public class LocationPointWrapper {
+	public static class LocationPointWrapper {
 		LocationPoint point;
 		float deviationDistance;
 		int routeIndex;
@@ -631,6 +631,8 @@ public class WaypointHelper {
 		RouteCalculationResult route;
 		int type;
 		
+		public LocationPointWrapper() {
+		}
 		
 		public LocationPointWrapper(RouteCalculationResult rt, int type, LocationPoint point, float deviationDistance, int routeIndex) {
 			this.route = rt;
