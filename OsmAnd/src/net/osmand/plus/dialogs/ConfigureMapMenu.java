@@ -41,7 +41,8 @@ public class ConfigureMapMenu {
 						return false;
 					}
 				}).reg();
-		
+		adapter.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
+
 		createLayersItems(adapter, ma);
 		createRenderingAttributeItems(adapter, ma);
 		return adapter;
