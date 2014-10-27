@@ -342,7 +342,7 @@ public class MapActivityActions implements DialogProvider {
 					targets.navigateToPoint(new LatLon(latitude, longitude), true, 
 							dest ? -1 : targets.getIntermediatePoints().size(), selected);
 					if(targets.getIntermediatePoints().size() > 0) {
-						IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
+						openIntermediatePointsDialog();
 					}
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					enhance(dialogBundle,latitude,longitude,mapActivity.getMapView().getZoom());
@@ -716,7 +716,12 @@ public class MapActivityActions implements DialogProvider {
 //							ContextMenuAdapter cm = waypointDialogHelper.setListAdapter(app.getMapActivity(),
 //									mDrawerList, deletedPoints);
 //							prepareOptionsMenu(cm);
-							WaypointDialogHelper.showWaypointsDialog(mapActivity, false);
+							boolean drawer = true;
+							if (drawer) {
+								showWaypointsInDrawer(false);
+							} else {
+								waypointDialogHelper.showWaypointsDialog(mapActivity, false);
+							}
 							return false;
 						}
 					}).reg();
@@ -856,9 +861,21 @@ public class MapActivityActions implements DialogProvider {
 		getMyApplication().getAppCustomization().prepareOptionsMenu(mapActivity, optionsMenuHelper);
 		return optionsMenuHelper;
 	}
-	
+
+	public void showWaypointsInDrawer(boolean b) {
+		final int[] running = new int[]{-1};
+		ArrayAdapter<Object> listAdapter = waypointDialogHelper.getWaypointsDrawerAdapter(b, mapActivity,
+				running);
+		mDrawerList.setAdapter(listAdapter);
+		mDrawerList.setDivider(mapActivity.getResources().getDrawable(R.drawable.drawer_divider));
+		mDrawerList.setBackgroundColor( getMyApplication().getSettings().isLightContentMenu()?
+				mapActivity.getResources().getColor(R.color.color_white) :
+				mapActivity.getResources().getColor(R.color.dark_drawer_bg_color));
+		mDrawerList.setOnItemClickListener(waypointDialogHelper.getDrawerItemClickListener(mapActivity, running, listAdapter, null));
+	}
+
 	public void openIntermediatePointsDialog(){
-		IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
+		waypointDialogHelper.showWaypointsDialog(mapActivity, false);
 	}
 	
 	private TargetPointsHelper getTargets() {
