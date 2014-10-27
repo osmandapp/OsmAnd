@@ -148,8 +148,8 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 			@Override
 			public void onClick(View v) {
 				if(getTargets().checkPointToNavigateShort()) {
-					hideDialog();				
-					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
+					hideDialog();
+					mapActivity.getMapActions().openIntermediatePointsDialog();
 				}
 			}
 			
