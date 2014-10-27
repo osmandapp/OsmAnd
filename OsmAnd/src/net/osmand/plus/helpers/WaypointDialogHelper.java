@@ -608,7 +608,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 						if (waypointHelper.getSearchDeviationRadius(type) != value) {
 							running[0] = position;
 							waypointHelper.setSearchDeviationRadius(type, value);
-							recalculatePoints(running, thisAdapter, WaypointHelper.POI);
+							recalculatePoints(running, thisAdapter, type);
 							dialogInterface.dismiss();
 							thisAdapter.notifyDataSetInvalidated();
 						}
