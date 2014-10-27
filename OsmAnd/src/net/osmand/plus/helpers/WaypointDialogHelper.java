@@ -236,10 +236,14 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 	}
 
 
-	public ArrayAdapter<Object> getWaypointsDrawerAdapter(final boolean edit,
-														  final FragmentActivity ctx, final int[] running) {
-		final List<WaypointHelper.LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
-		final List<Object> points = getPoints();
+	public ArrayAdapter<Object> getWaypointsDrawerAdapter(final FragmentActivity ctx, final int[] running, final boolean flat) {
+		final List<Object> points;
+		if(flat) {
+			points = new ArrayList<Object>(waypointHelper.getAllPoints());
+			points.add(0, new LocationPointWrapper());
+		} else {
+			points = getPoints();
+		}
 		return new ArrayAdapter<Object>(ctx,
 				R.layout.waypoint_reached, R.id.title, points) {
 
@@ -250,7 +254,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				final ArrayAdapter<Object> thisAdapter = this;
 				boolean labelView = (getItem(position) instanceof Integer);
 				if (position == 0) {
-					v = createDrawerHeader(ctx, edit);
+					v = createDialogHeader(ctx, false, flat, null);
 				} else if (getItem(position) instanceof RadiusItem) {
 					final int type = ((RadiusItem) getItem(position)).type;
 					v = createItemForRadiusProximity(ctx, type, running, position, thisAdapter);
@@ -262,23 +266,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 					}
 					updatePointInfoView(app, ctx, v, (LocationPointWrapper) getItem(position), null);
 					View remove = v.findViewById(R.id.info_close);
-					if (!edit) {
-						remove.setVisibility(View.GONE);
-					} else {
-						remove.setVisibility(View.VISIBLE);
-						((ImageButton) remove).setImageDrawable(ctx.getResources().getDrawable(
-								app.getSettings().isLightContent() ? R.drawable.ic_action_gremove_light
-										: R.drawable.ic_action_gremove_dark));
-						remove.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								LocationPointWrapper point = (LocationPointWrapper) points.get(position);
-								remove(point);
-								deletedPoints.add(point);
-								notifyDataSetChanged();
-							}
-						});
-					}
+					remove.setVisibility(View.GONE);
 				}
 				return v;
 			}
@@ -339,79 +327,38 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 
 	}
 
-	protected View createDrawerHeader(final FragmentActivity ctx, final boolean editF) {
+
+	protected View createDialogHeader(final FragmentActivity a, final boolean editF, final boolean flat, final AlertDialog dlg) {
 		View v;
-		v = ctx.getLayoutInflater().inflate(R.layout.drawer_list_waypoint_header, null);
-
-		ImageView icon = (ImageView) v.findViewById(R.id.icon);
-		if (mapActivity.getMyApplication().getSettings().isLightContent()){
-			icon.setImageResource(R.drawable.ic_back_drawer_white);
+		v = a.getLayoutInflater().inflate(R.layout.waypoint_title, null);
+		ImageView iBack = (ImageView) v.findViewById(R.id.back);
+		if(dlg != null) {
+			iBack.setVisibility(View.GONE);
 		} else {
-			icon.setImageResource(R.drawable.ic_back_drawer_dark);
+			iBack.setVisibility(View.VISIBLE);
+			iBack.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_back_drawer_white
+					: R.drawable.ic_back_drawer_dark);
 		}
-
-		ImageView edit = (ImageView) v.findViewById(R.id.edit);
-		ImageView sort = (ImageView) v.findViewById(R.id.sort);
-		ImageView all = (ImageView) v.findViewById(R.id.all);
-		edit.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_edit_light
-				: R.drawable.ic_action_edit_dark);
-		edit.setVisibility(editF ? View.GONE : View.VISIBLE);
-		edit.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mapActivity.getMapActions().showWaypointsInDrawer(!editF);
-			}
-		});
-
-		if (app.getTargetPointsHelper().getIntermediatePoints().size() > 0) {
-			sort.setVisibility(View.VISIBLE);
-			sort.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_sort_waypoint_white
-					: R.drawable.ic_sort_waypoint_dark);
-			sort.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					IntermediatePointsDialog.openIntermediatePointsDialog(app.getMapActivity(), app, true);
-				}
-			});
-		} else {
-			sort.setVisibility(View.GONE);
-		}
-		if (waypointHelper.isRouteCalculated()) {
-			all.setVisibility(View.GONE);
-		} else {
-			all.setVisibility(View.VISIBLE);
-				all.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_gup_light
-						: R.drawable.ic_action_gup_dark);
-			all.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					mapActivity.getMapActions().showWaypointsInDrawer(editF);
-				}
-			});
-		}
-		return v;
-	}
-
-	protected View createDialogHeader(final FragmentActivity ctx, final boolean editF, final boolean flat, final AlertDialog dlg) {
-		View v;
-		v = ctx.getLayoutInflater().inflate(R.layout.waypoint_title, null);
+			
 		ImageButton edit = (ImageButton) v.findViewById(R.id.edit);
 		ImageButton sort = (ImageButton) v.findViewById(R.id.sort);
 		ImageButton all = (ImageButton) v.findViewById(R.id.all);
-		edit.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_edit_light
-				: R.drawable.ic_action_edit_dark);
+		edit.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_gedit_light
+				: R.drawable.ic_action_gedit_dark);
 		edit.setVisibility(editF ? View.GONE : View.VISIBLE);
 		edit.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (flat) {
-					showWaypointsDialogFlat(ctx, true);
+					showWaypointsDialogFlat(a, true);
 				} else {
-					showWaypointsDialog(ctx, true);
+					showWaypointsDialog(a, true);
 				}
 				if (dlg != null) {
 					dlg.dismiss();
+				} else if(a instanceof MapActivity){
+					((MapActivity) a).getMapActions().prepareStartOptionsMenu();
+					((MapActivity) a).getMapActions().toggleDrawer();
 				}
 			}
 		});
@@ -427,33 +374,38 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 					IntermediatePointsDialog.openIntermediatePointsDialog(app.getMapActivity(), app, true);
 					if (dlg != null) {
 						dlg.dismiss();
+					} else if(a instanceof MapActivity){
+						((MapActivity) a).getMapActions().prepareStartOptionsMenu();
+						((MapActivity) a).getMapActions().toggleDrawer();
 					}
 				}
 			});
 		} else {
 			sort.setVisibility(View.GONE);
 		}
-		if (waypointHelper.isRouteCalculated()) {
+		if (!waypointHelper.isRouteCalculated()) {
 			all.setVisibility(View.GONE);
 		} else {
 			all.setVisibility(View.VISIBLE);
-			if (flat) {
-				all.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_gdown_light
-						: R.drawable.ic_action_gdown_dark);
+			if(flat) {
+				all.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_tree_list_white
+						: R.drawable.ic_tree_list_dark);
 			} else {
-				all.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_action_gup_light
-						: R.drawable.ic_action_gup_dark);
+				all.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_flat_list_white
+						: R.drawable.ic_flat_list_dark);
 			}
 			all.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (flat) {
-						showWaypointsDialog(ctx, editF);
-					} else {
-						showWaypointsDialogFlat(ctx, editF);
-					}
 					if (dlg != null) {
+						if (flat) {
+							showWaypointsDialog(a, editF);
+						} else {
+							showWaypointsDialogFlat(a, editF);
+						}
 						dlg.dismiss();
+					} else if(a instanceof MapActivity){
+						((MapActivity) a).getMapActions().showWaypointsInDrawer(!flat);
 					}
 				}
 			});
@@ -569,13 +521,12 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		}.execute((Void) null);
 	}
 
-	public AdapterView.OnItemClickListener getDrawerItemClickListener(final FragmentActivity ctx,
-																	  final int[] running,
-																	  final ArrayAdapter<Object> listAdapter, final DialogFragment dialog) {
+	public AdapterView.OnItemClickListener getDrawerItemClickListener(final FragmentActivity ctx, final int[] running,
+			final ArrayAdapter<Object> listAdapter, final DialogFragment dialog) {
 		return new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
-				if (item == 0){
+				if (item == 0) {
 					mapActivity.getMapActions().prepareStartOptionsMenu();
 				} else if (listAdapter.getItem(item) instanceof LocationPointWrapper) {
 					LocationPointWrapper ps = (LocationPointWrapper) listAdapter.getItem(item);
@@ -583,7 +534,8 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				} else if (new Integer(WaypointHelper.TARGETS).equals(listAdapter.getItem(item))) {
 					IntermediatePointsDialog.openIntermediatePointsDialog(ctx, app, true);
 				} else if (listAdapter.getItem(item) instanceof RadiusItem) {
-					selectDifferentRadius(((RadiusItem) listAdapter.getItem(item)).type, running, item, listAdapter, ctx);
+					selectDifferentRadius(((RadiusItem) listAdapter.getItem(item)).type, running, item, listAdapter,
+							ctx);
 				}
 			}
 		};

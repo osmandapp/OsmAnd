@@ -712,16 +712,7 @@ public class MapActivityActions implements DialogProvider {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos,
 								boolean isChecked) {
-//							final List<WaypointHelper.LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
-//							ContextMenuAdapter cm = waypointDialogHelper.setListAdapter(app.getMapActivity(),
-//									mDrawerList, deletedPoints);
-//							prepareOptionsMenu(cm);
-							boolean drawer = true;
-							if (drawer) {
-								showWaypointsInDrawer(false);
-							} else {
-								waypointDialogHelper.showWaypointsDialog(mapActivity, false);
-							}
+							showWaypointsInDrawer(false);
 							return false;
 						}
 					}).reg();
@@ -862,16 +853,16 @@ public class MapActivityActions implements DialogProvider {
 		return optionsMenuHelper;
 	}
 
-	public void showWaypointsInDrawer(boolean b) {
-		final int[] running = new int[]{-1};
-		ArrayAdapter<Object> listAdapter = waypointDialogHelper.getWaypointsDrawerAdapter(b, mapActivity,
-				running);
+	public void showWaypointsInDrawer(boolean flat) {
+		final int[] running = new int[] { -1 };
+		ArrayAdapter<Object> listAdapter = waypointDialogHelper.getWaypointsDrawerAdapter(mapActivity, running, flat);
 		mDrawerList.setAdapter(listAdapter);
 		mDrawerList.setDivider(mapActivity.getResources().getDrawable(R.drawable.drawer_divider));
-		mDrawerList.setBackgroundColor( getMyApplication().getSettings().isLightContentMenu()?
-				mapActivity.getResources().getColor(R.color.color_white) :
-				mapActivity.getResources().getColor(R.color.dark_drawer_bg_color));
-		mDrawerList.setOnItemClickListener(waypointDialogHelper.getDrawerItemClickListener(mapActivity, running, listAdapter, null));
+		mDrawerList.setBackgroundColor(getMyApplication().getSettings().isLightContentMenu() ? mapActivity
+				.getResources().getColor(R.color.color_white) : mapActivity.getResources().getColor(
+				R.color.dark_drawer_bg_color));
+		mDrawerList.setOnItemClickListener(waypointDialogHelper.getDrawerItemClickListener(mapActivity, running,
+				listAdapter, null));
 	}
 
 	public void openIntermediatePointsDialog(){

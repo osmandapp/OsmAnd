@@ -6,7 +6,16 @@
 			  android:layout_height="match_parent"
 			  android:layout_marginTop="5dp"
 			  android:layout_marginBottom="5dp"
-			  android:layout_marginRight="3dp">
+			  android:layout_marginRight="3dp"
+			  android:descendantFocusability="blocksDescendants" >
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"/>
 
 	<TextView android:id="@+id/title"
 			  android:layout_width="0dp"

@@ -2,7 +2,6 @@ package net.osmand.plus.views;
 
 
 import java.lang.reflect.Field;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import net.osmand.data.RotatedTileBox;
@@ -36,6 +35,7 @@ import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.MeasureSpec;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -303,6 +303,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 					}
 				}).reg();
 		cm.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
+		cm.setChangeAppModeListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				map.getMapActions().prepareOptionsMenu(getViewConfigureMenuAdapter());				
+			}
+		});
 		cm.item(R.string.map_widget_reset) 
 				.icons(R.drawable.widget_reset_to_default_dark, R.drawable.widget_reset_to_default_light).listen(new OnContextMenuClick() {
 					

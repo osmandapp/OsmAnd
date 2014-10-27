@@ -65,6 +65,7 @@ public class ContextMenuAdapter {
 	final TIntArrayList iconList = new TIntArrayList();
 	final TIntArrayList iconListLight = new TIntArrayList();
 	final ArrayList<String> itemDescription = new ArrayList<String>();
+	private View.OnClickListener changeAppModeListener = null;
 
 	public ContextMenuAdapter(Context ctx) {
 		this.ctx = ctx;
@@ -260,7 +261,14 @@ public class ContextMenuAdapter {
 	public void setDefaultLayoutId(int defaultLayoutId) {
 		this.defaultLayoutId = defaultLayoutId;
 	}
+	
+	
 
+	public void setChangeAppModeListener(View.OnClickListener changeAppModeListener) {
+		this.changeAppModeListener = changeAppModeListener;
+	}
+	
+	
 	public ArrayAdapter<?> createListAdapter(final Activity activity, final boolean holoLight) {
 		final int layoutId = defaultLayoutId;
 		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layoutId, R.id.title,
@@ -278,6 +286,9 @@ public class ContextMenuAdapter {
 							if(selected.size() > 0) {
 								((OsmandApplication)activity.getApplication()).getSettings().APPLICATION_MODE.set(selected.iterator().next());
 								notifyDataSetChanged();
+							}
+							if(changeAppModeListener != null) {
+								changeAppModeListener.onClick(view);
 							}
 						}
 					});
