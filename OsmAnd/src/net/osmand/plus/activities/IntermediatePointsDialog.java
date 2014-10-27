@@ -40,12 +40,6 @@ import android.widget.TextView;
 
 public class IntermediatePointsDialog {
 
-	
-	public static void openIntermediatePointsDialog(MapActivity mapActivity){
-//		openIntermediatePointsDialog(mapActivity, (OsmandApplication) mapActivity.getApplication(), false);
-		WaypointDialogHelper.showWaypointsDialog(mapActivity, false);
-	}
-	
 	public static void openIntermediatePointsDialog(final Activity activity,
 			final OsmandApplication app, final boolean changeOrder){
 		TargetPointsHelper targets = app.getTargetPointsHelper();

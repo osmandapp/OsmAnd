@@ -4,6 +4,8 @@ import android.widget.*;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +14,7 @@ import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import net.osmand.plus.activities.actions.AppModeDialog;
 
 public class ContextMenuAdapter {
 
@@ -267,6 +270,18 @@ public class ContextMenuAdapter {
 				// User super class to create the View
 				View v = convertView;
 				Integer lid = getLayoutId(position);
+				if (lid == R.layout.mode_toggles){
+					final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
+					return AppModeDialog.prepareAppModeView(activity, selected, true, null, true, new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							if(selected.size() > 0) {
+								((OsmandApplication)activity.getApplication()).getSettings().APPLICATION_MODE.set(selected.iterator().next());
+								notifyDataSetChanged();
+							}
+						}
+					});
+				}
 				if (v == null || (v.getTag() != lid)) {
 					v = activity.getLayoutInflater().inflate(lid, null);
 					v.setTag(lid);
@@ -330,7 +345,5 @@ public class ContextMenuAdapter {
 		};
 		return listAdapter;
 	}
-
-	
 
 }
