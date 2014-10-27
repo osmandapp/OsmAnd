@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="horizontal"
+			  android:layout_width="fill_parent"
+			  android:layout_height="match_parent"
+			  android:layout_marginTop="5dp"
+			  android:layout_marginBottom="5dp"
+			  android:layout_marginRight="3dp">
+
+	<ImageView android:id="@+id/icon"
+			   android:layout_gravity="center_vertical"
+			   android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"/>
+
+	<TextView android:id="@+id/title"
+			  android:layout_width="0dp"
+			  android:layout_height="wrap_content"
+			  android:layout_marginLeft="8dp"
+			  android:singleLine="true"
+			  android:layout_gravity="center_vertical"
+			  android:text="@string/waypoints"
+			  android:ellipsize="end"
+			  android:layout_weight="1"
+			  android:layout_marginRight="8dp"
+			  android:textSize="20sp"/>
+	<ImageView
+			android:id="@+id/sort"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:layout_marginBottom="8dp"
+			android:focusable="false"
+			android:layout_marginRight="8dp"/>
+
+	<ImageView
+			android:id="@+id/edit"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:focusable="false"
+			android:layout_marginTop="8dp"
+			android:layout_marginBottom="8dp"
+			android:layout_marginRight="8dp"/>
+
+	<ImageView
+			android:id="@+id/all"
+			android:contentDescription="@string/flat_list_waypoints"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:focusable="false"
+			android:layout_marginTop="8dp"
+			android:layout_marginBottom="8dp"
+			android:layout_marginRight="8dp"/>
+</LinearLayout>
