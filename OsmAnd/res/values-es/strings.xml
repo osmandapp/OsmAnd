@@ -1519,7 +1519,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmodroid_refresh">Renueva los canales</string>
     <string name="amenity_type_seamark">Náutica</string>
     <string name="app_modes_choose">Perfiles de aplicación</string>
-	<string name="map_widget_map_rendering">Renderizado de mapa:</string>
+	<string name="map_widget_map_rendering">Renderizado de mapa</string>
     <string name="app_modes_choose_descr">Elige los perfiles de uso que son visibles en la aplicación</string>
     <string name="osmodroid_seek">Busca objeto</string>
     <string name="guidance_preferences_descr">Preferencias de navegación</string>
