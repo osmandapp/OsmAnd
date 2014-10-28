@@ -975,7 +975,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
 <string name="day_night_info_description">Alba: %1$s \nOcaso: %2$s</string>
 <string name="day_night_info">Información día/noche</string>
 <string name="map_widget_day_night">Mapa día/noche</string>
-<string name="map_widget_vector_attributes">Atributos de dibujado:</string>
+<string name="map_widget_vector_attributes">Atributos de dibujado</string>
 <string name="map_widget_renderer">Estilo de mapa</string>
 <string name="tip_rotation_switching_t_v2">Puedes cambiar si el mapa se gira y cómo pulsando repetidamente el icono de la brújula.
 		\n\nLas opciones son:
@@ -1894,4 +1894,16 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="anonymous_user_hint">Un usuario anónimo no puede:\n- crear grupos;\n- sincronizar grupos y dispositivos con el servidor;\n- gestionar grupos y dispositivos en una sala privada.</string>
     <string name="anonymous_user">Usuario anónimo</string>
     <string name="logged_as">Conectado como %1$s</string>
-	</resources>
+	<string name="rendering_category_details">Detalles</string>
+    <string name="rendering_category_transport">Transporte</string>
+    <string name="rendering_category_others">Otros atributos de mapa</string>
+    <string name="map_widget_appearance_rem">Elementos restantes</string>
+    <string name="map_widget_top">Barra de estado</string>
+	<string name="map_widget_right">Panel derecho</string>
+	<string name="map_widget_left">Panel izquierdo</string>
+    <string name="layers_category_show">Mostrar</string>
+	<string name="configure_map">Configurar mapa</string>
+    <string name="search_radius_proximity">En las proximidades de</string>
+    <string name="tip_recent_changes_1_9_t">"Cambios en 1.9: * Actualizados los estilos de los mapas con dibujado de la superficie de la carretera, capa de transporte y símbolos de senderismo * Buscar PDI a lo largo de la ruta * Marcar ruta como intransitable por sesión * Más facilidades para descargar y actualizar mapas * Recibir notificaciones visuales y sonoras al acercarse a un punto de la ruta * Imprimir itinerario e información de giros * Soporte de carriles de giro * Soporte de Android Wear * Muchos cambios en la IU * Zoom separado para el Tamaño del Texto en el mapa * Notificación de audio especial en caso de que estés fuera de la ruta * Funcionalidad de login en OsMo * Corregidas incompatibilidades de versión de OsMo "</string>
+    <string name="rendering_category_routes">Rutas</string>
+    </resources>
