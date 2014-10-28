@@ -2,7 +2,6 @@ package net.osmand.plus.views;
 
 
 import java.lang.reflect.Field;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import net.osmand.data.RotatedTileBox;
@@ -36,6 +35,7 @@ import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.MeasureSpec;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -289,7 +289,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		recreateControls();
 	}
 	
-	public ContextMenuAdapter openViewConfigureDrawer() {
+	public ContextMenuAdapter getViewConfigureMenuAdapter() {
 		final OsmandSettings settings = view.getSettings();
 		ContextMenuAdapter cm = new ContextMenuAdapter(view.getContext());
 		cm.setDefaultLayoutId(R.layout.drawer_list_item);
@@ -302,7 +302,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 						return false;
 					}
 				}).reg();
-		
+		cm.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
+		cm.setChangeAppModeListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				map.getMapActions().prepareOptionsMenu(getViewConfigureMenuAdapter());				
+			}
+		});
 		cm.item(R.string.map_widget_reset) 
 				.icons(R.drawable.widget_reset_to_default_dark, R.drawable.widget_reset_to_default_light).listen(new OnContextMenuClick() {
 					
@@ -324,8 +331,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		cm.item(R.string.map_widget_appearance_rem).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		addControls(cm, mapInfoControls.getAppearanceWidgets(), mode);
-		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-		
+
+
+
 		// TODO add profiles
 //		View confirmDialog = View.inflate(view.getContext(), R.layout.configuration_dialog, null);
 //		AppModeDialog.prepareAppModeView(map, selected, true,

@@ -24,6 +24,7 @@ import net.osmand.render.RenderingRulesStorage;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -41,7 +42,15 @@ public class ConfigureMapMenu {
 						return false;
 					}
 				}).reg();
-		
+		adapter.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
+		adapter.setChangeAppModeListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ma.getMapActions().prepareOptionsMenu(createListAdapter(ma));				
+			}
+		});
+
 		createLayersItems(adapter, ma);
 		createRenderingAttributeItems(adapter, ma);
 		return adapter;
