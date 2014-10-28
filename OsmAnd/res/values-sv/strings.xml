@@ -1720,4 +1720,5 @@
 	<string name="map_widget_right">Höger panel</string>
 	<string name="map_widget_left">Vänster panel</string>
     <string name="layers_category_show">Visa</string>
-	</resources>
+	<string name="rendering_category_routes">Rutter</string>
+    </resources>
