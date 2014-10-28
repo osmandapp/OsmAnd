@@ -58,35 +58,39 @@ public class AppModeDialog {
 		getVisibleModes(values, selected, visible);
 		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, null);
 		final ToggleButton[] buttons = createDrawerToggles(visible, values, a, ll, onDialogOk);
-		final boolean[] selectionChangeLoop = new boolean[] {false};
 		for (int i = 0; i < buttons.length - 1; i++) {
-			if (buttons[i] != null) {
-				final int ind = i;
-				ToggleButton b = buttons[i];
-				final ApplicationMode buttonAppMode = visible.get(i);
-				b.setChecked(selected.contains(buttonAppMode));
-				b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						if (selectionChangeLoop[0]) {
-							return;
-						}
-						selectionChangeLoop[0] = true;
-						try {
-							handleSelection(visible, selected, true, buttons, ind, buttonAppMode, isChecked);
-							if (onClickListener != null) {
-								onClickListener.onClick(null);
-							}
-						} finally {
-							selectionChangeLoop[0] = false;
-						}
-					}
-
-
-				});
-			}
+			setButtonListener(visible, selected, onClickListener, buttons, i, true);
 		}
 		return ll;
+	}
+
+	private static void setButtonListener(final List<ApplicationMode> visible, final Set<ApplicationMode> selected,
+										  final View.OnClickListener onClickListener, final ToggleButton[] buttons,
+										  int i,final boolean singleChoise) {
+		final boolean[] selectionChangeLoop = new boolean[] {false};
+		if (buttons[i] != null) {
+			final int ind = i;
+			ToggleButton b = buttons[i];
+			final ApplicationMode buttonAppMode = visible.get(i);
+			b.setChecked(selected.contains(buttonAppMode));
+			b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					if (selectionChangeLoop[0]) {
+						return;
+					}
+					selectionChangeLoop[0] = true;
+					try {
+						handleSelection(visible, selected, singleChoise, buttons, ind, buttonAppMode, isChecked);
+						if (onClickListener != null) {
+							onClickListener.onClick(null);
+						}
+					} finally {
+						selectionChangeLoop[0] = false;
+					}
+				}
+			});
+		}
 	}
 
 	private static ToggleButton[] createDrawerToggles(final List<ApplicationMode> visible, final List<ApplicationMode> modes,
@@ -207,37 +211,12 @@ public class AppModeDialog {
 			ViewGroup parent, final boolean singleSelection, final View.OnClickListener onClickListener) {
 		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
 		final ToggleButton[] buttons = createToggles(values, ll, a); 
-		final boolean[] selectionChangeLoop = new boolean[] {false};
 		for (int i = 0; i < buttons.length; i++) {
-			if (buttons[i] != null) {
-				final int ind = i;
-				ToggleButton b = buttons[i];
-				final ApplicationMode buttonAppMode = values.get(i);
-				b.setChecked(selected.contains(buttonAppMode));
-				b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						if (selectionChangeLoop[0]) {
-							return;
-						}
-						selectionChangeLoop[0] = true;
-						try {
-							handleSelection(values, selected, singleSelection, buttons, ind, buttonAppMode, isChecked);
-							if (onClickListener != null) {
-								onClickListener.onClick(null);
-							}
-						} finally {
-							selectionChangeLoop[0] = false;
-						}
-					}
-
-					
-				});
-			}
+			setButtonListener(values, selected, onClickListener, buttons, i, singleSelection);
 		}
 		return ll;
 	}
-	
+
 	private static void handleSelection(final List<ApplicationMode> values,
 			final Set<ApplicationMode> selected, final boolean singleSelection,
 			final ToggleButton[] buttons, final int ind, final ApplicationMode buttonAppMode,
