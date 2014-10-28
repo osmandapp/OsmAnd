@@ -2123,4 +2123,5 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 \n* 지도에 텍스트 크기에 대한 별도의 줌 지원\n* 경로 이탈한 경우에 특별한 오디오 알림 지원
 \n* OsMo 로그인 기능
 \n* OsMo 버전 비 호환성 수정 "</string>
+    <string name="rendering_category_routes">경로 (Routes)</string>
     </resources>
