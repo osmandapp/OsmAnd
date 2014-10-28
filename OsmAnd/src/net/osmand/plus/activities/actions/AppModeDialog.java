@@ -37,21 +37,20 @@ public class AppModeDialog {
 		return prepareAppModeView(a, values, selected, parent, singleSelection, onClickListener);
 	}
 
-	public static View prepareAppModeDrawerView(Activity a, final Set<ApplicationMode> selected,
+	public static View prepareAppModeDrawerView(Activity a, List<ApplicationMode> visible, final Set<ApplicationMode> selected,
 												final View.OnClickListener onClickListener) {
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));
 		selected.add(settings.getApplicationMode());
 		if (values.size() > 4) {
-			return prepareAppModeDrawerView(a, values, selected, onClickListener);
+			return prepareAppModeDrawerView(a, visible, values, selected, onClickListener);
 		} else {
 			return prepareAppModeView(a, values, selected, null, true, onClickListener);
 		}
 	}
 
-	private static View prepareAppModeDrawerView(Activity a, final List<ApplicationMode> values , final Set<ApplicationMode> selected,
+	private static View prepareAppModeDrawerView(Activity a, List<ApplicationMode> visible, final List<ApplicationMode> values, final Set<ApplicationMode> selected,
 												final View.OnClickListener onClickListener){
-		List<ApplicationMode> visible = new ArrayList<ApplicationMode>();
 		getVisibleModes(values, selected, visible);
 		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, null);
 		final ToggleButton[] buttons = createDrawerToggles(visible, values, a, ll);
@@ -132,6 +131,14 @@ public class AppModeDialog {
 	}
 
 	private static void getVisibleModes(List<ApplicationMode> values, Set<ApplicationMode> selected, List<ApplicationMode> visible) {
+		if (visible.size() == 3) {
+			for (ApplicationMode mode : selected){
+				if (visible.contains(mode)){
+					return;
+				}
+			}
+		}
+		visible.clear();
 		if (selected.size() > 0) {
 			List<Integer> positions = new ArrayList<Integer>();
 			for (ApplicationMode mode : selected){

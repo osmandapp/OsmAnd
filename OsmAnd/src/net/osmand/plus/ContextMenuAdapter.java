@@ -67,7 +67,7 @@ public class ContextMenuAdapter {
 	final TIntArrayList iconList = new TIntArrayList();
 	final TIntArrayList iconListLight = new TIntArrayList();
 	final ArrayList<String> itemDescription = new ArrayList<String>();
-	private List<ApplicationMode> selectedModes = new ArrayList<ApplicationMode>();
+	private List<ApplicationMode> visibleModes = new ArrayList<ApplicationMode>();
 
 	public ContextMenuAdapter(Context ctx) {
 		this.ctx = ctx;
@@ -275,7 +275,7 @@ public class ContextMenuAdapter {
 				Integer lid = getLayoutId(position);
 				if (lid == R.layout.mode_toggles){
 					final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-					return AppModeDialog.prepareAppModeView(activity, selected, true, null, true, new View.OnClickListener() {
+					return AppModeDialog.prepareAppModeDrawerView(activity, visibleModes, selected, new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
 							if (selected.size() > 0) {
