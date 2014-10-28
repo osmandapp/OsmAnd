@@ -1713,7 +1713,7 @@
 	<string name="configure_map">Konfigurera karta</string>
     <string name="search_radius_proximity">I närheten av</string>
     <string name="rendering_category_details">Detaljer</string>
-    <string name="rendering_category_transport">Transport</string>
+    <string name="rendering_category_transport">Transporter</string>
     <string name="rendering_category_others">Andra kartattribut</string>
     <string name="map_widget_appearance_rem">Kvarvarande element</string>
     <string name="map_widget_top">Statusfält</string>
