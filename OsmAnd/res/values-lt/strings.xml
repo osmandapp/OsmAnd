@@ -1858,9 +1858,12 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="logged_as">Prisijungėte kaip %1$s</string>
 	<string name="rendering_category_details">Detalės</string>
     <string name="rendering_category_transport">Transportas</string>
-    <string name="rendering_category_others">Kiti žemėlapio atributai</string>
+    <string name="rendering_category_others">Kiti atributai</string>
     <string name="map_widget_appearance_rem">Likę elementai</string>
     <string name="layers_category_show">Rodyti</string>
 	<string name="configure_map">Konfigūruoti žemėlapį</string>
     <string name="map_widget_top">Statuso juosta</string>
-	</resources>
+	<string name="rendering_category_routes">Maršrutai</string>
+    <string name="map_widget_right">Dešinys skydelis</string>
+	<string name="map_widget_left">Kairys skydelis</string>
+    </resources>
