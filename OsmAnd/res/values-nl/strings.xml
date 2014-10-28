@@ -1995,4 +1995,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="anonymous_user_hint">een anonieme gebruiker kan niet:\n- een groep aanmaken;\n- groepen en apparaten synchroniseren met de server;\n- groepen en apparaten beheren in een eigen omgeving.</string>
     <string name="anonymous_user">Anonieme gebruiker</string>
     <string name="logged_as">Ingelogd als %1$s</string>
-	</resources>
+	<string name="tip_recent_changes_1_9_t">"Aanpassingen in 1.9: * Bijgewerkte kaart stijlen met weg weergave, vervoerslaag en wandel symbolen * Zoek een POI langs de route * Markeer een web als onbegaanbaar per route * Eenvoudiger downloaden en updaten van kaarten * Krijg visuele- en geluidsmelding bij het naderen van een Routepunt * Print reisroute en routebeschrijving * Ondersteuning van voorsorteervakken * Ondersteuning van Android Wear * Veel gebruikersinterface aanpassingen * Aparte zoomfunctie voor de Tekstgrootte op de kaart * Speciale audio meldingen in het geval dat u afwijkt van de route * OsMo inlog functionaliteiten * Oplossing van OsMo versie incompatibiliteit "</string>
+    <string name="rendering_category_routes">Routes</string>
+    <string name="rendering_category_details">Details</string>
+    </resources>
