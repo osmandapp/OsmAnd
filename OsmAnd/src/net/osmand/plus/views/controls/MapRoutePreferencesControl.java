@@ -312,7 +312,7 @@ public class MapRoutePreferencesControl extends MapControls {
 		};
 		
 		AppModeDialog.prepareAppModeView(mapActivity, selected, false, 
-				(ViewGroup) settingsDlg.findViewById(R.id.TopBar), true, 
+				(ViewGroup) settingsDlg.findViewById(R.id.TopBar), true,
 				new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

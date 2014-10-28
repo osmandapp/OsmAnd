@@ -1,9 +1,12 @@
 package net.osmand.plus.activities.actions;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -32,9 +35,144 @@ public class AppModeDialog {
 			selected.add(settings.getApplicationMode());
 		}
 		return prepareAppModeView(a, values, selected, parent, singleSelection, onClickListener);
-		
 	}
-	
+
+	public static View prepareAppModeDrawerView(Activity a, final Set<ApplicationMode> selected,
+												final View.OnClickListener onClickListener) {
+		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
+		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));
+		selected.add(settings.getApplicationMode());
+		if (values.size() > 4) {
+			return prepareAppModeDrawerView(a, values, selected, onClickListener);
+		} else {
+			return prepareAppModeView(a, values, selected, null, true, onClickListener);
+		}
+	}
+
+	private static View prepareAppModeDrawerView(Activity a, final List<ApplicationMode> values , final Set<ApplicationMode> selected,
+												final View.OnClickListener onClickListener){
+		List<ApplicationMode> visible = new ArrayList<ApplicationMode>();
+		getVisibleModes(values, selected, visible);
+		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, null);
+		final ToggleButton[] buttons = createDrawerToggles(visible, values, a, ll);
+		final boolean[] selectionChangeLoop = new boolean[] {false};
+		for (int i = 0; i < buttons.length - 1; i++) {
+			if (buttons[i] != null) {
+				final int ind = i;
+				ToggleButton b = buttons[i];
+				final ApplicationMode buttonAppMode = values.get(i);
+				b.setChecked(selected.contains(buttonAppMode));
+				b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						if (selectionChangeLoop[0]) {
+							return;
+						}
+						selectionChangeLoop[0] = true;
+						try {
+							handleSelection(values, selected, true, buttons, ind, buttonAppMode, isChecked);
+							if (onClickListener != null) {
+								onClickListener.onClick(null);
+							}
+						} finally {
+							selectionChangeLoop[0] = false;
+						}
+					}
+
+
+				});
+			}
+		}
+		return ll;
+	}
+
+	private static ToggleButton[] createDrawerToggles(final List<ApplicationMode> visible, final List<ApplicationMode> modes, final Activity a, LinearLayout ll) {
+		ToggleButton[] buttons = createToggles(visible, ll, a);
+		ToggleButton[] newButtons = new ToggleButton[buttons.length + 1];
+		for (int i = 0; i< buttons.length; i++){
+			newButtons[i] = buttons[i];
+		}
+		ToggleButton tb = new ToggleButton(a);
+		newButtons[buttons.length] = tb;
+		tb.setTextOn("");
+		tb.setTextOff("");
+		int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, a.getResources().getDisplayMetrics());
+		int metrics = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 64, a.getResources().getDisplayMetrics());
+		tb.setButtonDrawable(R.drawable.ic_other_modes);
+		LayoutParams lp = new LayoutParams(metrics, metrics);
+		lp.setMargins(left, 0, 0, 0);
+		tb.setChecked(false);
+		tb.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				CompoundButton compoundButton = (CompoundButton) view;
+				compoundButton.setChecked(false);
+				AlertDialog.Builder builder = new AlertDialog.Builder(a);
+				final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>(visible);
+				View v = AppModeDialog.prepareAppModeView(a, modes, selected, null, false,
+						new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey()+",");
+								for(ApplicationMode mode :  modes) {
+									if(selected.contains(mode)) {
+										vls.append(mode.getStringKey()+",");
+									}
+								}
+							}
+						});
+				builder.setTitle(R.string.profile_settings);
+				builder.setPositiveButton(R.string.default_buttons_ok, null);
+				builder.setView(v);
+				builder.show();
+			}
+		});
+		ll.addView(tb, lp);
+		return newButtons;
+	}
+
+	private static void getVisibleModes(List<ApplicationMode> values, Set<ApplicationMode> selected, List<ApplicationMode> visible) {
+		if (selected.size() > 0) {
+			List<Integer> positions = new ArrayList<Integer>();
+			for (ApplicationMode mode : selected){
+				for (int i =0; i< values.size(); i++){
+					if (mode.equals(values.get(i))){
+						positions.add(i);
+						visible.add(values.get(i));
+					}
+				}
+			}
+
+			if (positions.size() == 1) {
+				int pos = positions.get(0);
+				if (pos < values.size() - 2 && pos > 0){
+					visible.add(values.get(pos - 1));
+					visible.add(values.get(pos + 1));
+				} else if (pos == 0) {
+					visible.add(values.get(1));
+					visible.add(values.get(2));
+				} else if (pos == values.size() -1) {
+					visible.add(values.get(pos - 1));
+					visible.add(values.get(pos - 2));
+				}
+			} else if (positions.size() == 2) {
+				int pos1 = positions.get(0);
+				int pos2 = positions.get(1);
+				if (pos1 + 1 != pos2){
+					visible.add(values.get(pos1 + 1));
+				} else if (pos1 > 0 && pos1 + 1 == pos2) {
+					visible.add(values.get(pos1 - 1));
+				} else if (pos1 == 0 && pos1 + 1 == pos2) {
+					visible.add(values.get(pos2 + 1));
+				}
+			}
+		} else {
+			for (int i =0; i<3; i++){
+				visible.add(values.get(i));
+			}
+		}
+	}
+
 	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values , final Set<ApplicationMode> selected, 
 			ViewGroup parent, final boolean singleSelection, final View.OnClickListener onClickListener) {
 		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
