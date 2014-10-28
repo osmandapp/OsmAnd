@@ -2005,4 +2005,11 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="anonymous_user_hint">Un utente anonimo non può:\n- creare gruppi;\n- sincronizzare con il server gruppi e dispositivi;\n- gestire gruppi e dispositivi in un ufficio privato.</string>
     <string name="anonymous_user">Utente anonimo</string>
     <string name="logged_as">Registrato come %1$s</string>
-	</resources>
+	<string name="rendering_category_routes">Percorsi</string>
+    <string name="rendering_category_details">Dettagli</string>
+    <string name="rendering_category_transport">Trasporto</string>
+    <string name="rendering_category_others">Altri attributi della mappa</string>
+    <string name="map_widget_right">Pannello di destra</string>
+	<string name="map_widget_left">Pannello di sinistra</string>
+    <string name="configure_map">Configura la mappa</string>
+    </resources>
