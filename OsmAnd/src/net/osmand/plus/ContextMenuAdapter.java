@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.widget.*;
 import gnu.trove.list.array.TIntArrayList;
 
@@ -19,18 +20,6 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import net.osmand.plus.activities.actions.AppModeDialog;
 
 public class ContextMenuAdapter {
-
-	public void clearAll() {
-		items.clear();
-		isCategory.clear();
-		itemNames.clear();
-		checkListeners.clear();
-		selectedList.clear();
-		layoutIds.clear();
-		iconList.clear();
-		iconListLight.clear();
-		itemDescription.clear();
-	}
 
 	public interface OnContextMenuClick {
 		//boolean return type needed to desribe if drawer needed to be close or not
@@ -283,6 +272,25 @@ public class ContextMenuAdapter {
 								notifyDataSetChanged();
 							}
 						}
+					}, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialogInterface, int i) {
+							//if user selects modes and none of them is set to current
+							// - need to set one of them as current
+							OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
+							ApplicationMode currentMode = settings.APPLICATION_MODE.get();
+							boolean selected = false;
+							for (ApplicationMode mode : visibleModes) {
+								if (mode.equals(currentMode)){
+									selected = true;
+									break;
+								}
+							}
+							if (!selected) {
+								settings.APPLICATION_MODE.set(visibleModes.get(0));
+							}
+							notifyDataSetChanged();
+						}
 					});
 				}
 				if (v == null || (v.getTag() != lid)) {
@@ -348,7 +356,5 @@ public class ContextMenuAdapter {
 		};
 		return listAdapter;
 	}
-
-	
 
 }

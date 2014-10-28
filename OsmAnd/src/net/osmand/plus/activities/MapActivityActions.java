@@ -778,7 +778,7 @@ public class MapActivityActions implements DialogProvider {
 			.listen(new OnContextMenuClick() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					ContextMenuAdapter cm = mapActivity.getMapLayers().getMapInfoLayer().openViewConfigureDrawer();
+					ContextMenuAdapter cm = mapActivity.getMapLayers().getMapInfoLayer().getViewConfigureMenuAdapter();
 					prepareOptionsMenu(cm);
 					return false;
 				}

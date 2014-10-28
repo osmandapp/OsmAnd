@@ -37,29 +37,33 @@ public class AppModeDialog {
 		return prepareAppModeView(a, values, selected, parent, singleSelection, onClickListener);
 	}
 
+	//special method for drawer menu
+	// needed because if there's more than 4 items  - the don't fit in drawer
 	public static View prepareAppModeDrawerView(Activity a, List<ApplicationMode> visible, final Set<ApplicationMode> selected,
-												final View.OnClickListener onClickListener) {
+												final View.OnClickListener onClickListener, DialogInterface.OnClickListener onDialogOk) {
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));
 		selected.add(settings.getApplicationMode());
 		if (values.size() > 4) {
-			return prepareAppModeDrawerView(a, visible, values, selected, onClickListener);
+			return prepareAppModeDrawerView(a, visible, values, selected, onClickListener, onDialogOk);
 		} else {
 			return prepareAppModeView(a, values, selected, null, true, onClickListener);
 		}
 	}
 
-	private static View prepareAppModeDrawerView(Activity a, List<ApplicationMode> visible, final List<ApplicationMode> values, final Set<ApplicationMode> selected,
-												final View.OnClickListener onClickListener){
+	private static View prepareAppModeDrawerView(Activity a,final List<ApplicationMode> visible, final List<ApplicationMode> values,
+												 final Set<ApplicationMode> selected,
+												final View.OnClickListener onClickListener,
+												DialogInterface.OnClickListener onDialogOk){
 		getVisibleModes(values, selected, visible);
 		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, null);
-		final ToggleButton[] buttons = createDrawerToggles(visible, values, a, ll);
+		final ToggleButton[] buttons = createDrawerToggles(visible, values, a, ll, onDialogOk);
 		final boolean[] selectionChangeLoop = new boolean[] {false};
 		for (int i = 0; i < buttons.length - 1; i++) {
 			if (buttons[i] != null) {
 				final int ind = i;
 				ToggleButton b = buttons[i];
-				final ApplicationMode buttonAppMode = values.get(i);
+				final ApplicationMode buttonAppMode = visible.get(i);
 				b.setChecked(selected.contains(buttonAppMode));
 				b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
@@ -69,7 +73,7 @@ public class AppModeDialog {
 						}
 						selectionChangeLoop[0] = true;
 						try {
-							handleSelection(values, selected, true, buttons, ind, buttonAppMode, isChecked);
+							handleSelection(visible, selected, true, buttons, ind, buttonAppMode, isChecked);
 							if (onClickListener != null) {
 								onClickListener.onClick(null);
 							}
@@ -85,7 +89,8 @@ public class AppModeDialog {
 		return ll;
 	}
 
-	private static ToggleButton[] createDrawerToggles(final List<ApplicationMode> visible, final List<ApplicationMode> modes, final Activity a, LinearLayout ll) {
+	private static ToggleButton[] createDrawerToggles(final List<ApplicationMode> visible, final List<ApplicationMode> modes,
+													  final Activity a, LinearLayout ll, final DialogInterface.OnClickListener onDialogOk) {
 		ToggleButton[] buttons = createToggles(visible, ll, a);
 		ToggleButton[] newButtons = new ToggleButton[buttons.length + 1];
 		for (int i = 0; i< buttons.length; i++){
@@ -106,24 +111,34 @@ public class AppModeDialog {
 			public void onClick(View view) {
 				CompoundButton compoundButton = (CompoundButton) view;
 				compoundButton.setChecked(false);
-				AlertDialog.Builder builder = new AlertDialog.Builder(a);
+				final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+
 				final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>(visible);
+				builder.setTitle(R.string.profile_settings);
+				builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						visible.clear();
+						visible.addAll(selected);
+						if(onDialogOk != null){
+							onDialogOk.onClick(dialogInterface, i);
+						}
+					}
+				});
+				final AlertDialog dialog = builder.create();
 				View v = AppModeDialog.prepareAppModeView(a, modes, selected, null, false,
 						new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey()+",");
-								for(ApplicationMode mode :  modes) {
-									if(selected.contains(mode)) {
-										vls.append(mode.getStringKey()+",");
-									}
+								if (selected.size() == 3){
+									dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(true);
+								} else {
+									dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false);
 								}
 							}
 						});
-				builder.setTitle(R.string.profile_settings);
-				builder.setPositiveButton(R.string.default_buttons_ok, null);
-				builder.setView(v);
-				builder.show();
+				dialog.setView(v);
+				dialog.show();
 			}
 		});
 		ll.addView(tb, lp);
@@ -145,7 +160,6 @@ public class AppModeDialog {
 				for (int i =0; i< values.size(); i++){
 					if (mode.equals(values.get(i))){
 						positions.add(i);
-						visible.add(values.get(i));
 					}
 				}
 			}
@@ -154,22 +168,31 @@ public class AppModeDialog {
 				int pos = positions.get(0);
 				if (pos < values.size() - 2 && pos > 0){
 					visible.add(values.get(pos - 1));
+					visible.add(values.get(pos));
 					visible.add(values.get(pos + 1));
 				} else if (pos == 0) {
+					visible.add(values.get(pos));
 					visible.add(values.get(1));
 					visible.add(values.get(2));
 				} else if (pos == values.size() -1) {
 					visible.add(values.get(pos - 1));
 					visible.add(values.get(pos - 2));
+					visible.add(values.get(pos));
 				}
 			} else if (positions.size() == 2) {
 				int pos1 = positions.get(0);
 				int pos2 = positions.get(1);
 				if (pos1 + 1 != pos2){
+					visible.add(values.get(pos1));
 					visible.add(values.get(pos1 + 1));
+					visible.add(values.get(pos2));
 				} else if (pos1 > 0 && pos1 + 1 == pos2) {
 					visible.add(values.get(pos1 - 1));
+					visible.add(values.get(pos1));
+					visible.add(values.get(pos2));
 				} else if (pos1 == 0 && pos1 + 1 == pos2) {
+					visible.add(values.get(pos1));
+					visible.add(values.get(pos2));
 					visible.add(values.get(pos2 + 1));
 				}
 			}
