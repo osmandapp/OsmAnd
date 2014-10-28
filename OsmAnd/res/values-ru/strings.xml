@@ -1788,4 +1788,13 @@
     <string name="osmo_no_connection_msg">Сервис OsMo не доступен:\n- проверьте соединение;\n- проверьте настройки;\n- проверьте наш Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Анонимному пользователю недоступно:\n- создание групп;\n- синхронизация групп и устройств с сервером;\n- управление группами и устройствами в личном кабинете.</string>
     <string name="logged_as">Вы вошли как %1$s</string>
-	</resources>
+    <string name="rendering_category_routes">Маршруты</string>
+    <string name="rendering_category_details">Детализация</string>
+    <string name="rendering_category_transport">Транспорт</string>
+    <string name="rendering_category_others">Другое</string>
+    <string name="layers_category_show">Отображать</string>
+    <string name="configure_map">Настройка карты</string>
+    <string name="map_widget_appearance_rem">Остальное</string>
+	<string name="map_widget_right">Правая панель</string>
+	<string name="map_widget_left">Левая панель</string>
+</resources>

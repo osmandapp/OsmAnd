@@ -257,7 +257,7 @@ public class ConfigureMapMenu {
 			List<RenderingRuleProperty> customRules = new ArrayList<RenderingRuleProperty>(renderer.PROPS.getCustomRules());
 			createProperties(customRules, R.string.rendering_category_details, "details",
 					adapter, activity);
-			createProperties(customRules, R.string.rendering_category_transport, "routes",
+			createProperties(customRules, R.string.rendering_category_routes, "routes",
 					adapter, activity);
 			if(customRules.size() > 0) {
 				adapter.item(R.string.rendering_category_others).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
