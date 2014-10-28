@@ -994,7 +994,7 @@
 <string name="gps_wakeup_interval">Intervalle d\'activation du GPS: %s</string>
 <string name="email">courriel</string>
 <string name="map_widget_day_night">Mode jour/nuit</string>
-<string name="map_widget_vector_attributes">Attributs de rendu :</string>
+<string name="map_widget_vector_attributes">Attributs de rendu</string>
 <string name="select_navigation_mode">Sélectionner le mode de transport</string>
 <string name="day_night_info_description">Lever : %1$s
 \nCoucher : %2$s</string>
@@ -1456,7 +1456,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="app_mode_aircraft">Avion</string>
     <string name="app_modes_choose_descr">Choisir les profils d\'utilisation à afficher dans l\'application</string>
     <string name="app_modes_choose">Profils d\'application</string>
-	<string name="map_widget_map_rendering">Rendu de carte :</string>
+	<string name="map_widget_map_rendering">Rendu de carte</string>
     <string name="amenity_type_seamark">Balise marine</string>
     <string name="osmodroid_seek">Chercher objet</string>
     <string name="osmodroid_unseek">Ne plus chercher objet</string>
@@ -1827,7 +1827,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="text_size_descr">Sélectionnez la taille du texte sur la carte.</string>
     <string name="test_native_render">Tester le moteur de rendu natif</string>
     <string name="test_native_render_msg">Démarrer l\'activité avec le moteur de rendu natif</string>
-    <string name="use_native_render">Utiliser le moteur de rendu natif</string>
+    <string name="use_native_render">Utiliser le moteur natif de rendu</string>
     <string name="use_native_render_descr">Utiliser le moteur de rendu C++ au lieu de Java</string>
     <string name="print_route">Imprimer la route</string>
     <string name="fav_point_emoticons_message">Le nom de votre favoris sera %1$s car il n\'est pas possible d\'utiliser les émoticônes.</string>
@@ -1848,4 +1848,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="layers_category_show">Afficher</string>
 	<string name="configure_map">Configurer la carte</string>
     <string name="search_radius_proximity">A proximité de</string>
+    <string name="rendering_category_routes">Routes</string>
+    <string name="tip_recent_changes_1_9_t">"Nouveautés de la version 1.9 : * Mise à jour des styles de cartes avec un rendu fonction du revêtement de la route, couche de transport et symbols de randonnées pédestres * Recherche de PI le long de l\'itinéraire * .... "</string>
     </resources>
