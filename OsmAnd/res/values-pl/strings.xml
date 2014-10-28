@@ -1013,7 +1013,7 @@
 \n\t* Usunięcie niektórych błędów "</string>
 <string name="day_night_info">Informacja o dniu/nocy</string>
 <string name="map_widget_day_night">Mapa dzień/noc</string>
-<string name="map_widget_vector_attributes">Atrybuty rysowania:</string>
+<string name="map_widget_vector_attributes">Atrybuty rysowania</string>
 <string name="show_lanes">Pasy ruchu</string>
 <string name="tip_recent_changes_0_8_4_t">Zmiany w 0.8.4:
 \n\t* Kilka drobnych poprawek
@@ -1579,7 +1579,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="app_mode_motorcycle">Motocykl</string>
     <string name="app_mode_boat">Łódź</string>
     <string name="app_mode_aircraft">Samolot</string>
-    <string name="map_widget_map_rendering">Rysowanie mapy:</string>
+    <string name="map_widget_map_rendering">Rysowanie mapy</string>
     <string name="app_modes_choose">Profile aplikacji</string>
 	<string name="app_modes_choose_descr">Wybierz używane profile widoczne w aplikacji</string>
     <string name="amenity_type_seamark">Żeglugowy znak orientacyjny</string>
@@ -1964,4 +1964,15 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="anonymous_user_hint">Anonimowy użytkownik nie może:\n- tworzyć grup;\n- synchronizować grup i urządzeń z serwerem;\n- zarządzać grupami i urządzeniami w gabinecie.</string>
     <string name="anonymous_user">Użytkownik anonimowy</string>
     <string name="logged_as">Zalogowany jako %1$s</string>
-	</resources>
+	<string name="rendering_category_routes">Trasy</string>
+    <string name="rendering_category_details">Szczegóły</string>
+    <string name="rendering_category_transport">Transport</string>
+    <string name="rendering_category_others">Inne atrybuty map</string>
+    <string name="map_widget_appearance_rem">Pozostałe elementy</string>
+    <string name="map_widget_top">Pasek statusu</string>
+	<string name="map_widget_right">Prawy panel</string>
+	<string name="map_widget_left">Lewy panel</string>
+    <string name="layers_category_show">Pokaż</string>
+	<string name="configure_map">Skonfiguruj mapę</string>
+    <string name="search_radius_proximity">W odległości</string>
+    </resources>
