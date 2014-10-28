@@ -1922,4 +1922,6 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="layers_category_show">Mostra</string>
 	<string name="configure_map">Configura el mapa</string>
     <string name="search_radius_proximity">A prop de</string>
+    <string name="tip_recent_changes_1_9_t">"Canvis a la 1.9: * Actualitzats els estils dels mapes amb la representació de la superfície de les vies, capa de transport i símbols de senderisme* Cerca de  PDI durant la ruta * Marcar la via com no disponible  per sessió * Més facilitat per descarregar i enviar mapes * Tenir notificacions visuals i sonores en aproximar-nos  a una fita * Imprimir itinerari i relació de girs * Suport de carrils de gir * Suport a Android Wear * Molts canvis a la IU * Zoom independent pel text en el mapa * Notificacions d\'àudio específiques quan sigueu fora de la ruta * Funcionalitat d\'ingrés OsMo  * Corregides les   incompatibilitats de versió OsMo "</string>
+    <string name="rendering_category_routes">Rutes</string>
     </resources>
