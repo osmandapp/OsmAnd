@@ -162,8 +162,8 @@
 \n\t- Améliorations du rendu vectoriel
 \n\t- Améliorations du moteur de synthèse vocale (distance exacte, support des miles)
 \n\t- Corrections de bogues</string>
-  <string name="save_route_dialog_title">Enregistrer l\'itinéraire au format GPX</string>
-  <string name="route_successfully_saved_at">Itinéraire enregistré avec succès dans \'%1$s\'.</string>
+  <string name="save_route_dialog_title">Enregistrer l\'itinéraire en GPX</string>
+  <string name="route_successfully_saved_at">Itinéraire enregistré avec succès sous \'%1$s\'.</string>
   <string name="filename_input">Nom du fichier : </string>
   <string name="file_with_name_already_exist">Le même nom existe déjà.</string>
   <string name="default_buttons_save">Enregistrer</string>
@@ -419,7 +419,7 @@
   <string name="download_type_to_filter">Filtre</string>
   <string name="use_high_res_maps">Carte haute résolution</string>
   <string name="use_high_res_maps_descr">Utilisez des cartes de haute résolution pour les appareils les mieux équipés</string>
-  <string name="unknown_location">Position inconnue actuellement</string>
+  <string name="unknown_location">Position inconnue</string>
   <string name="download_files">Télécharger</string>
   <string name="context_menu_item_search_transport">Chercher transport</string>
   <string name="transport_searching_transport">Arrêts à proximité (aucune destination définie) :</string>
@@ -479,12 +479,12 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">secondes</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Choisir un intervalle d\'actualisation de votre position dans le service en arrière-plan</string>
+  <string name="background_service_int_descr">Choisir un intervalle d\'actualisation de votre position pour le service en arrière-plan</string>
   <string name="background_service_int">Intervalle de positionnement GPS</string>
   <string name="background_service_provider_descr">Choisir un fournisseur de géolocalisation pour le service arrière-plan</string>
   <string name="background_service_provider">Fournisseur de géolocalisation</string>
   <string name="background_router_service_descr">Activer le service en arrière-plan pour suivre votre position en continu</string>
-  <string name="background_router_service">Service de positionnement</string>
+  <string name="background_router_service">Fonctionne en mode veille</string>
   <string name="off_router_service_no_gps_available">Le service d\'arrière-plan requiert l\'activation de la géolocalisation.</string>
   <string name="hide_poi_filter">Masquer le filtre</string>
   <string name="show_poi_filter">Afficher le filtre</string>
@@ -606,7 +606,7 @@
   <string name="error_occurred_saving_gpx">Erreur lors de l\'enregistrement du fichier GPX</string>
   <string name="error_calculating_route">Erreur de calcul de l\'itinéraire</string>
   <string name="error_calculating_route_occured">Erreur lors du calcul de l\'itinéraire</string>
-  <string name="empty_route_calculated">Erreur: l\'itinéraire calculé est vide</string>
+  <string name="empty_route_calculated">Erreur : l\'itinéraire calculé est vide</string>
   <string name="new_route_calculated_dist">Itinéraire recalculé, distance</string>
   <string name="arrived_at_destination">Vous êtes arrivés à destination</string>
   <string name="invalid_locations">Coordonnées invalides !</string>
@@ -891,7 +891,7 @@
   <string name="rendering_attr_contourLines_name">Afficher les courbes de niveau</string>
   <string name="rendering_attr_hmRendered_description">Augmenter le niveau de détail affiché</string>
   <string name="rendering_attr_hmRendered_name">Afficher plus de détail</string>
-  <string name="save_route_as_gpx">Enregistrer l\'itinéraire en GPX</string>
+  <string name="save_route_as_gpx">Enregistrer l\'itinéraire au format GPX</string>
   <string name="asap">Dès que possible</string>
   <string name="tip_recent_changes_0_8_1_t">Changements en 0.8.1 :
 \n\t* Routes plus précises (un peu plus lent)\n\t* Correction de parcours rapide et efficace\n\t* Direction par voies\n\t* Information à propos des limitations de vitesse, radars et des ralentisseurs\n\t* Guidage vocal sur autoroute amélioré\n\t* Greffon parking (\"Où ai-je garé ma voiture ?\")\n\t* Activation/désactivation du gadget d\'enregistrement</string>
@@ -994,7 +994,7 @@
 <string name="email">courriel</string>
 <string name="map_widget_day_night">Mode jour / nuit</string>
 <string name="map_widget_vector_attributes">Attributs de rendu</string>
-<string name="select_navigation_mode">Sélectionner le mode de transport</string>
+<string name="select_navigation_mode">Sélectionnez le mode de transport</string>
 <string name="day_night_info_description">Lever : %1$s
 \nCoucher : %2$s</string>
 <string name="day_night_info">Information jour/nuit</string>
@@ -1071,10 +1071,10 @@
 	<string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
     <string name="zxing_barcode_scanner_not_found">L’application ZXing Barcode Scanner n\'est pas installée. Souhaitez-vous l\'installer depuis la boutique ?</string>
 	<string name="close_changeset">Clôturer les modifications</string>
-	<string name="background_service_is_enabled_question">Le service de veille OsmAnd tourne toujours en tâche de fond. Voulez-vous l\'arrêter également ?</string>
+	<string name="background_service_is_enabled_question">Le service OsmAnd tourne toujours en tâche de fond. Voulez-vous également l\'arrêter ?</string>
     <string name="tip_recent_changes_1_0_0_t">"Changements en 1.0 :\n\t* Amélioration de la navigation, plus rapide et plus précise (jusqu\'à 250 km)\n\t* Cartographie des routes\n\t* La carte ne perd plus la position courante après les interruptions\n\t* Active le service d\'arrière-plan pendant la navigation"
     </string>
-    <string name="safe_mode_description">Exécuter l\'application dans le mode sûr (ne pas utiliser de code natif).</string>
+    <string name="safe_mode_description">Exécuter l\'application en mode sûr (utiliser le code Android plus lent plutôt que le code natif)</string>
     <string name="safe_mode">Mode sûr</string>
     <string name="native_library_not_running">L\'application s\'exécute en mode sûr (peut être désactivé dans Paramètres).</string>
     <string name="rendering_attr_showRoadMaps_description">Sélectionner à quel moment afficher les cartes uniquement routières :</string>
@@ -1294,7 +1294,7 @@ Liste des pays pris en charge (pratiquement le monde entier !) :
 Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et-Barbuda, Argentine, Arménie, Aruba, Australie, Autriche, Azerbaïdjan, Bahamas, Bahreïn, Bangladesh, Barbade, Bélarus, Belgique, Belize, Bénin, Bermudes, Bhoutan, Bolivie, Bonaire, Bosnie-Herzégovine, Botswana, Brésil, Îles Vierges britanniques, Brunei, Bulgarie, Burkina Faso, Burundi, Cambodge, Cameroun, Canada, Cap-Vert, République centrafricaine, Tchad, Chili, Chine, Colombie, Comores, Congo, Costa Rica , Côte d\'Ivoire, Croatie, Cuba, Curaçao, Chypre, République tchèque, Danemark, Djibouti, Dominique, République dominicaine, Équateur, Égypte, Érythrée, Espagne, Estonie, Éthiopie, Fidji, Finlande, France, Gabon, Gambie, Géorgie, Ghana, Gibraltar, Grèce, Groenland, Grenade, Guadeloupe, Guam, Guatemala, Guernsey, Guinée, Guinée-Bissau, Guinée équatoriale, Guyana, Guyane française, Haïti, Vatican, Honduras, Hong Kong, Hongrie, Islande, Inde , Indonésie, Iran, Irak, Irlande, Île de Man, Israël, Italie, Jamaïque, Japon, Jersey, Jordanie, Kazakhstan, Kenya, Kiribati, Corée du Nord et Corée du Sud, Koweït, Kirghizistan, Laos, Lettonie, Liban, Lesotho, Libéria , Libye, Liechtenstein, Lituanie, Luxembourg, Macao, Macédoine, Madagascar, Malaisie, Malawi, Maldives, Mali, Malte, Martinique, Maurice, Mauritanie, Mayotte, Mexique, Micronésie, Moldavie, Monaco, Mongolie, Monténégro, Montserrat, Maroc, Mozambique , Myanmar, Namibie, Nauru, Népal, Pays-Bas, les Antilles néerlandaises, Nicaragua, Niger, Nigéria, Norvège, Nouvelle-Calédonie, Nouvelle-Zélande, Oman, Pakistan, Palau, Territoire palestinien, Panama, Papouasie-Nouvelle-Guinée, Paraguay, Pérou, Philippines, Pologne , Portugal, Polynésie française, Puerto Rico, Qatar, Roumanie, Russie, Rwanda, Sahara occidental, Saint-Barthélemy, Sainte-Hélène, Saint-Kitts-et-Nevis, Sainte-Lucie, Saint-Marin, Saint-Martin, Saint-Pierre-et-Miquelon, Saint-Vincent-et-les Grenadines, Samoa, Salvador, Arabie saoudite, Sénégal, Serbie, Seychelles, Sierra Leone, Singapour, Slovaquie, Slovénie, Somalie, Afrique du Sud, Géorgie du Sud, Soudan du Sud, Sri Lanka, Soudan, Suriname, Swaziland, Suède, Suisse, Syrie, Taiwan, Tadjikistan, Tanzanie, Thaïlande , le Timor-Leste, Togo, Tokelau, Tonga, Trinité-et-Tobago, Tunisie, Turkménistan, Turquie, Tuvalu, Ouganda, Ukraine, Émirats arabes unis, Royaume-Uni (UK), États-Unis d\'Amérique (USA), Uruguay, Ouzbékistan, Vanuatu , Venezuela, Vietnam, Wallis et Futuna, Yémen, Zambie, Zimbabwe.
 	</string>
 	<string name="download_using_mobile_internet">Le WiFi n\\\'est pas activé en ce moment. Voulez-vous continuer le téléchargement avec la connexion actuelle ?</string>
-    <string name="cancel_route">Annuler l\'itinéraire</string>
+    <string name="cancel_route">Arrêter la navigation</string>
     <string name="cancel_navigation">Arrêter la navigation</string>
     <string name="clear_destination">Supprimer la destination</string>
     <string name="other_location">Autre</string>
@@ -1334,8 +1334,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 " 
     </string>
     <string name="search_street_in_neighborhood_cities">Recherche des rues dans les villes avoisinantes</string>
-    <string name="intermediate_items_sort_return">Ordonner les points de passage en optimisant le trajet jusqu\'à destination.</string>
-    <string name="intermediate_items_sort_by_distance">Tri (porte-à-porte)</string>
+    <string name="intermediate_items_sort_return">Ordonne automatiquement les étapes pour le trajet le plus court.</string>
+    <string name="intermediate_items_sort_by_distance">Trier</string>
     <string name="please_select_address">Sélectionnez d\'abord une ville ou une rue</string>
     <string name="context_menu_item_destination_point">Définir comme destination</string>
     <string name="speak_street_names">Annoncer les noms de rues (TTS)</string>
@@ -1362,7 +1362,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="driving_region">Région de conduite</string>
 	<string name="driving_region_europe_asia">Europe &amp; Asie</string>
 	<string name="driving_region_uk">Angleterre, Inde, Australie et autres</string>
-	<string name="osmodroid_mode_on">Arrêter\nOsMoDroid</string>    
+	<string name="osmodroid_mode_on">Arrêter OsMoDroid</string>    
     <string name="osmodroid_mode_off">Démarrer\nOsMoDroid</string>
     <string name="speak_title">Annonces vocales…</string>
 	<string name="speak_cameras">Annoncer les radars</string>
@@ -1564,7 +1564,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="always_center_position_on_map">Centrer l\'écran sur la position courante</string>
 <string name="voice_pref_title">Voix</string>
 <string name="misc_pref_title">Divers</string>
-<string name="localization_pref_title">Localisation</string>
+<string name="localization_pref_title">Paramètres régionaux</string>
 <string name="interrupt_music_descr">Interrompre la musique lors des annonces</string>
 <string name="interrupt_music">Interrompre la musique</string>
 <string name="share_route_as_gpx">Partager l\'itinéraire au format GPX</string>
@@ -1768,7 +1768,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osmo_invite">Inviter…</string>
     <string name="osmo_leave_confirmation_msg">Voulez-vous quitter le groupe %1$s ?</string>
     <string name="osmo_specify_tracker_id">Veuillez spécifier l\'identifiant</string>
-    <string name="continue_navigation">Poursuivre la navigation</string>
+    <string name="continue_navigation">Reprendre la navigation</string>
     <string name="pause_navigation">Interrompre la navigation</string>
 	<string name="rendering_attr_subwayMode_name">Mode sous-terrain</string>
  	<string name="rendering_attr_alpineHiking_name">Difficulté des randonnées alpines</string>
@@ -1828,7 +1828,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="test_native_render_msg">Démarrer l\'activité avec le moteur de rendu natif</string>
     <string name="use_native_render">Utiliser le moteur natif de rendu</string>
     <string name="use_native_render_descr">Utiliser le moteur de rendu C++ au lieu de Java</string>
-    <string name="print_route">Afficher l\'itinéraire</string>
+    <string name="print_route">Exporter l\'itinéraire</string>
     <string name="fav_point_emoticons_message">Le nom de votre favori sera %1$s car les émoticônes ne sont pas autorisés.</string>
     <string name="speed_limit_exceed">Marge tolérée aux limites de vitesse</string>
 	<string name="speed_limit_exceed_message">Indiquez la marge à tolérer aux limitations de vitesse avant le déclenchement des annonces vocales.</string>
