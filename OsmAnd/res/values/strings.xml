@@ -457,7 +457,7 @@
 	<string name="base_world_map">World basemap</string>
 	<string name="tip_map_styles">Map Styles</string>
 	<string name="tip_map_styles_t">OsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
-		\n\nOther than the balanced \'default\' map style, you may in \'Menu\' → \'Configure screen\' → \'Map Style\' select for example
+		\n\nOther than the balanced \'default\' map style, you may in \'Menu\' → \'Configure map\' → \'Map Style\' select for example
 		\n\t* The \'Touring view\' style, which contains the most detailed information feasable for traveling and touring, including optimization for professional drivers (higher contrast, distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
 		\n\t* \'High contrast roads\' shows roads in very accentuated colors for bright ambient lighting situations
 		\n\t* \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download)
@@ -1349,7 +1349,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="tip_day_night_mode">Day/Night Mode</string>
 	<string name="tip_day_night_mode_t_v2">The map appearance can for offline vector maps be changed between day (brighter) and night (darker). Night colors are safer and more comfortable for night driving.
-		\n\nYou can set a policy for day/night switching in \'Menu\' → \'Configure screen\' → \'Day/night map\'.
+		\n\nYou can set a policy for day/night switching in \'Menu\' → \'Configure map\' → \'Day/night map\'.
 		\n\nThe choices are:
 		\n\t* \'Sunrise/Sunset\': automatic mode, controlled by the position of the sun (default)
 		\n\t* \'Day\': always use day mode

@@ -78,7 +78,7 @@
 	<string name="base_world_map">Weltweite Basiskarte (basemap)</string>
 	<string name="tip_map_styles">Kartendarstellung</string>
 	<string name="tip_map_styles_t">OsmAnd kann die Offline-Vektor-Karten für verschiedene Verwendungszwecke optimiert darstellen:
-		\n\nNeben der neutralen \'Default\' Darstellung kann man unter \'Menü\' → \'Anzeige konfigurieren\' → \'Kartendarstellung\' zum Beispiel auswählen:
+		\n\nNeben der neutralen \'Default\' Darstellung kann man unter \'Menü\' → \'Karte konfigurieren\' → \'Kartendarstellung\' zum Beispiel auswählen:
 		\n\t* Den \'Touring view\' Stil, er enthält die maximal verfügbare Detailtiefe für Reisende und Tourengänger, inklusive einer Optimierung für Vielfahrer (höherer Kontrast, alle Straßenarten eindeutig unterscheidbar), Optionen für das Alpine Wandern (SAC Skala), Fahrradrouten, Wandersymbol-Untertützung, usw.
 		\n\t* \'High contrast roads\' zeigt alle Straßen in betont deutlichen Farben, nützlich in extrem hellen Umgebungen
 		\n\t* \'Winter and ski\' zeigt Landschaften in einer (schneebedeckten) Winteransicht, und zeigt global Skiabfahrten und Lifte (benötigt wird die \'World ski\' Offline-Karte)
@@ -372,7 +372,7 @@
 	</string>
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
 	<string name="tip_day_night_mode_t_v2">Die Anzeige der Offline-Vektor-Karten kann zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. Insbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
-		\n\nDer Umschaltmechanismus kann in der Kartenansicht unter Menü → \'Anzeige konfigurieren\' → \'Tag/Nacht-Modus\' geändert werden.
+		\n\nDer Umschaltmechanismus kann in der Kartenansicht unter Menü → \'Karte konfigurieren\' → \'Tag/Nacht-Modus\' geändert werden.
 		\n\nZur Auswahl stehen:
 		\n\t* \'Sonnenaufgang/-untergang\': automatischer Modus (Voreinstellung)
 		\n\t* \'Tag\': permanente Tagesansicht
