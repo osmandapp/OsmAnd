@@ -264,9 +264,8 @@
   <string name="osmand_service_descr">Reikalinga jei norite naudoti OsmAnd kai ekranas yra išjungtas</string>
   <string name="tip_rotation_switching">Žemėlapio orientacija</string>
   
-  <string name="binary_map_download_success">Parsiųsta sėkmingai.
-		\n\t\n\tTam kad galėtumėte naudoti, aktyvuokite \'Meniu\' → \'Žemėlapio sluoksniai\' → \'Žemėlapio šaltiniai...\' → \'Parsiųsti vektoriniai žemėlapiai\'.
-	</string>
+  <string name="binary_map_download_success">"Parsiųsta sėkmingai.
+\n\t\n\tTam kad galėtumėte naudoti, aktyvuokite \'Meniu\' → \'Konfigūruoti žemėlapį\' → \'Žemėlapio šaltiniai...\' → \'Parsiųsti vektoriniai žemėlapiai\'. "</string>
   <string name="tip_day_night_mode">Dienos/Nakties režimas</string>
   
   <string name="tip_osm_improve">OSM duomenų tobulinimas</string>
@@ -431,7 +430,8 @@
   <string name="gpx_option_reverse_route">GPX maršrutą apsukti priešinga kryptimi</string>
   <string name="gpx_option_destination_point">Naudoti dabartinį kelionės tikslą</string>
   <string name="gpx_option_from_start_point">Peržiūrėti visą įrašytą maršrutą</string>
-  <string name="switch_to_vector_map_to_see">Šiai vietovei yra parsiųstas žemėlapis. \n\t\n\tJo aktyvavimui nueikite į \'Meniu\' → \'Žemėlapio sluoksniai\' → \'Žemėlapių šaltiniai…\' → \'Parsiųsti vektoriniai žemėlapiai\'.</string>
+  <string name="switch_to_vector_map_to_see">Šiai vietovei yra parsiųstas žemėlapis.
+\n\t\n\tJo aktyvavimui nueikite į \'Meniu\' → \'Konfigūruoti žemėlapį\' → \'Žemėlapių šaltiniai…\' → \'Parsiųsti vektoriniai žemėlapiai\'.</string>
   <string name="choose_audio_stream">Balso nurodymų išvestis</string>
   <string name="choose_audio_stream_descr">Pasirinkite kanalą, kuriuo skambės balso nurodymai (priklauso nuo sistemos)</string>
   <string name="voice_stream_voice_call">Balso skambučio audio</string>
@@ -471,7 +471,7 @@
   <string name="tip_favorites_t">"Dažnai naudojamos vietos gali būti išsaugotos kaip Įsimintos vietos štai taip:
 \n\nPasirinkę norimą vietą kontekstiniame meniu \'Naudoti vietą\' pasirinkite \'Pridėti prie įsimintų\' bei įveskite pavadinimą.
 \n\nIšsaugota Įsiminta vieta bus prieinama per \'Meniu\' → \'Mano vietos\'. Ilgai paspaudę ant įsimintos vietos sąraše \'Įsimintos vietos\' galėsite tą vietą nustatyti kelionės tikslu, ją redaguoti ar ištrinti.
-\n\nNorėdami Įsimintas vietas matyti tiesiog ant žemėlapio turite įjungti \'Įsimintos vietos\' sluoksnį atsidarę \'Meniu\' → \'Žemėlapio sluoksniai\'. "</string>
+\n\nNorėdami Įsimintas vietas matyti tiesiog ant žemėlapio turite įjungti \'Įsimintos vietos\' sluoksnį atsidarę \'Meniu\' → \'Konfigūruoti žemėlapį\'. "</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
   <string name="error_doing_search">Įvyko klaida vykdant paiešką be interneto</string>
   <string name="search_offline_geo_error">Nepavyko suprasti geo poreikio \'%s\'</string>
@@ -1037,14 +1037,13 @@
 <string name="map_widget_day_night">Dieninis/naktinis žemėlapis</string>
 <string name="map_widget_vector_attributes">Atvaizduojami atributai</string>
 <string name="map_widget_renderer">Atvaizdavimo stilius</string>
-<string name="tip_day_night_mode_t_v2">Žemėlapio išvaizda tam tikriems vektoriniams žemėlapiams gali būti keičiama tarp dienos (šviesesnė) ir nakties (tamsesnė). Naktinės spalvos yra saugesnės vairuoti naktį.
-		\n\nDienos/nakties perjungimą galite nustatyti \'Meniu\' → \'Konfigūruoti ekraną\' → \'Dienos/nakties žemėlapis\'.
-		\n\nPasirinkimai:
-		\n\t* \'Saulėtekis/Saulėlydis\' - automatinis režimas, valdomas pagal saulės padėtį (numatytasis)
-		\n\t* \'Diena\' - visada naudoti dienos režimą
-		\n\t* \'Naktis\' - visada naudoti nakties režimą
-		\n\t* \'Šviesos jutiklis\' - žemėlapio išvaizdą valdo jūsų prietaiso šviesos jutiklis (tik jei įrengtas)
-	</string>
+<string name="tip_day_night_mode_t_v2">"Žemėlapio išvaizda tam tikriems vektoriniams žemėlapiams gali būti keičiama tarp dienos (šviesesnė) ir nakties (tamsesnė). Naktinės spalvos yra saugesnės vairuoti naktį.
+\n\nDienos/nakties perjungimą galite nustatyti \'Meniu\' → \'Konfigūruoti žemėlapį\' → \'Dienos/nakties žemėlapis\'.
+\n\nPasirinkimai:
+\n\t* \'Saulėtekis/Saulėlydis\' - automatinis režimas, valdomas pagal saulės padėtį (numatytasis)
+\n\t* \'Diena\' - visada naudoti dienos režimą
+\n\t* \'Naktis\' - visada naudoti nakties režimą
+\n\t* \'Šviesos jutiklis\' - žemėlapio išvaizdą valdo jūsų prietaiso šviesos jutiklis (tik jei įrengtas) "</string>
 <string name="tip_app_mode_t_v2">OsmAnd palaiko skirtingus (keičiamus) programos profilius skirtingiems naudojimo atvejams.
 		\n\nJūs galite pakeisti profilius nuspausdami profilio mygtuką apatiniame kairiajame žemėlapio kampe (automobilio, dviračio ar pėsčiojo piktogramos) arba, kai kuriate maršrutą (\'transporto tipas\')
 	</string>
@@ -1442,12 +1441,11 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="edit_tilesource_name">Pavadinimas</string>
     <string name="maps_define_edit">Nustatyti/redaguoti…</string>
 	<string name="tip_map_styles">Žemėlapio stiliai</string>
-	<string name="tip_map_styles_t">OsmAnd gali rodyti parsiųstus žemėlapius įvairiais stiliais, kuriuos galima pasirinkti pagal jūsų poreikius:
-		\n\nSkirtingai nuo subalansuoto \'nustatyto\' žemėlapio stiliaus, \'Meniu\' → \'Nustatyti ekrano išvaizdą\' → \'Žemėlapio stilius\' galėsite pasirinkti pavyzdžiui 
-		\n\t* \'Turistinis stilius\' kuris rodys didžiausią kiekį detalių reikalingų keliaujant, įskaitant ir profesionalių vairuotojų poreikius (didesnis kontrastas, lengvai ižiūrimi keliai), nustatymai vaikščiojimui kalnų takeliais (SAC mąstelis), dviračių maršrutai, vaikštinėjimo simbolių palaikymas ir kt.
-		\n\t* \'Didelio kontrasto keliai\' rodo kelius ryškiomis spalvomis, kad būtų lengviau matyti stipraus išorinio apšvietimo sąlygomis
-		\n\t* \'Žiemos ir slidinėjimo\' rodo (sniego padengtą) žiemos kraštovaizdį vertikaliu režimu, kartu ir pasaulines slidinėjimo trasa ir keltuvus (kartu su parsiųstu \'World ski\' žemėlapiu)
-	</string>
+	<string name="tip_map_styles_t">"OsmAnd gali rodyti parsiųstus žemėlapius įvairiais stiliais, kuriuos galima pasirinkti pagal jūsų poreikius:
+\n\nSkirtingai nuo subalansuoto \'nustatyto\' žemėlapio stiliaus, \'Meniu\' → \'Nustatyti žemėlapį\' → \'Žemėlapio stilius\' galėsite pasirinkti pavyzdžiui
+\n\t* \'Turistinis stilius\' kuris rodys didžiausią kiekį detalių reikalingų keliaujant, įskaitant ir profesionalių vairuotojų poreikius (didesnis kontrastas, lengvai ižiūrimi keliai), nustatymai vaikščiojimui kalnų takeliais (SAC mąstelis), dviračių maršrutai, vaikštinėjimo simbolių palaikymas ir kt.
+\n\t* \'Didelio kontrasto keliai\' rodo kelius ryškiomis spalvomis, kad būtų lengviau matyti stipraus išorinio apšvietimo sąlygomis
+\n\t* \'Žiemos ir slidinėjimo\' rodo (sniego padengtą) žiemos kraštovaizdį vertikaliu režimu, kartu ir pasaulines slidinėjimo trasa ir keltuvus (kartu su parsiųstu \'World ski\' žemėlapiu) "</string>
     <string name="base_world_map">Bazinis pasaulio žemėlapis</string>
 	
     
@@ -1506,7 +1504,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="routing_attr_avoid_motorway_description">Vengti greitkelių</string>
 	<string name="routing_attr_weight_name">Maksimalus svoris</string>
 	<string name="routing_attr_weight_description">Įvesti automobilio svorio apribojimą</string>
-    <string name="android_19_location_disabled">"Pradedant KitKat versija jūs nebegalėsite parsisųsti ir atnaujinti žemėlapių ankstesnėse saugojimo vietose (%s). Ar norite pakeisti saugyklos vietą ir į ją nukopijuoto visus failus?
+    <string name="android_19_location_disabled">"Pradedant KitKat versija jūs nebegalėsite parsisųsti ir atnaujinti žemėlapių ankstesnėse saugojimo vietose (%s). Ar norite pakeisti saugyklos vietą ir į ją nukopijuoti visus failus?
 \n Pastaba: Seni failai išliks kur buvę.
 \n Pastaba: dalintis tais pačiais failais tarp OsmAnd ir OsmAnd+ nebus galima. "</string>
     <string name="application_dir_change_warning2">OsmAnd gali pabandyti perkelti duomenis į naują saugyklą. Ar atlikti tai?</string>
@@ -1858,7 +1856,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="logged_as">Prisijungėte kaip %1$s</string>
 	<string name="rendering_category_details">Detalės</string>
     <string name="rendering_category_transport">Transportas</string>
-    <string name="rendering_category_others">Kiti atributai</string>
+    <string name="rendering_category_others">Kiti žemėlapio atributai</string>
     <string name="map_widget_appearance_rem">Likę elementai</string>
     <string name="layers_category_show">Rodyti</string>
 	<string name="configure_map">Konfigūruoti žemėlapį</string>
