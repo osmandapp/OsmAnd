@@ -176,9 +176,8 @@
   <string name="osmand_service_descr">Dit is om OsmAnd te gebruiken als het scherm uit is</string>
   <string name="tip_rotation_switching">kaartrotatie</string>
   
-  <string name="binary_map_download_success">Download succesvol.
-\n\t\n\tOm te gebruiken, activeer \'Menu\' → \'Kaartlagen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'.
-	</string>
+  <string name="binary_map_download_success">"Download succesvol.
+\n\t\n\tOm te gebruiken, activeer \'Menu\' → \'Kaartlagen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'. "</string>
   <string name="tip_day_night_mode">Dag/Nacht modus</string>
   
   <string name="tip_osm_improve">Verbeter openstreetmap gegevens</string>
@@ -328,7 +327,8 @@
   <string name="gpx_option_reverse_route">Keer richting van GPX-route om</string>
   <string name="gpx_option_destination_point">Gebruik huidige bestemming</string>
   <string name="gpx_option_from_start_point">Volg de gehele track</string>
-  <string name="switch_to_vector_map_to_see">Offline vectorkaart aanwezig voor deze locatie. \n\t\n\tOm deze te gebruiken, activeer \'Menu\' → \'Kaartlagen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'.</string>
+  <string name="switch_to_vector_map_to_see">Offline vectorkaart aanwezig voor deze locatie.
+\n\t\n\tOm deze te gebruiken, activeer \'Menu\' → \'Kaartlagen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'.</string>
   <string name="choose_audio_stream">Stembegeleiding audiokanaal</string>
   <string name="choose_audio_stream_descr">Kies kanaal voor de stembegeleiding (systeemafhankelijk)</string>
   <string name="voice_stream_voice_call">als telefoongesprek</string>
@@ -367,11 +367,10 @@
 		\n\nDe locatie kan gedeeld worden via e-mail, SMS, QR-code, naar het klembord of naar een ander (navigatie)programma.
 	</string>
   <string name="tip_favorites">Favorieten</string>
-  <string name="tip_favorites_t">Veelgebruikte punten kunnen als volgt worden bewaard als favorieten:
-		\n\nIn het kaartcontextmenu van een punt, kies de optie \'Voeg toe aan favorieten\' en geef het dan een naam.
-		\n\nNa opslaan zijn favorieten toegankelijk via \'Hoofdmenu\' → \'Favorieten\'. Druk op een favoriet in het menu \'Mijn plaatsen\' om deze als als bestemming te kiezen, te bewerken of te verwijderen.
-		\n\nJe kan alle favorieten tegelijk op de kaart weergeven door de laag \'Favorieten\' aan te zetten op het kaartscherm in \'Menu\' → \'Kaartlagen\'.
-	</string>
+  <string name="tip_favorites_t">"Veelgebruikte locaties kunnen worden bewaard als favorieten, dit gaat als volgt:
+\n\nIn het kaart snelmenu van een locatie, kies de optie \'Voeg toe aan favorieten\' en geef een naam op.
+\n\nNa het opslaan is de favoriet beschikbaar via \'Menu\' → \'Mijn Plaatsen\'. Tik op een favoriet in \'Mijn plaatsen\' geeft de opties: Aanwijzingen, Als bestemming instellen, bewerk favoriet of verwijder favoriet.
+\n\nOm alle Favorieten direct op de kaart weer te geven, kies in het kaartscherm \'Menu\' → \'Kaartlagen\' en vink Favorieten aan. "</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> kaart classificatie met foto\'s"</string>
   <string name="error_doing_search">Fout bij offline zoeken</string>
   <string name="search_offline_geo_error">Kan de geo intent \'%s\' niet verwerken</string>
@@ -1025,18 +1024,16 @@
 		\n\t* \'In beweegrichting\' - De kaart wordt gedraaid in de beweegrichting
 		\n\t* \'Volgens kompas\' - De kaartrotatie gedraaid volgens het kompas
 	</string>
-<string name="tip_day_night_mode_t_v2">De kaartpresentatie kan voor offline vectorkaarten gewisseld worden tussen dag (helderder) en nacht (donkerder). Nachtkleuren zijn veiliger voor nachtelijke ritten.
-		\n\nJe kan een voorkeursinstelling kiezen in \'Menu\' -&gt; \'Definieer beeld\' -&gt; \'Configureer scherm\' -&gt; \'Dag/nacht kaart\'.
-		\n\nDe keuzen zijn:
-		\n\t* \'Zonsopgang/-ondergang\' - automatische modus, bepaald door de positie van de zon (standaard)
-		\n\t* \'Dag\' - gebruik altijd de dag modus
-		\n\t* \'Nacht\' - gebruik altijd de nacht modus
-		\n\t* \'Lichtsensor\' - de kaartweergave wordt bepaald door de lichtsensor van het apparaat (indien aanwezig)
-	</string>
-<string name="tip_map_switch_t_v2">De kaartbron en de kaartlagen kunnen worden gewijzigd. Activeer hiervoor de plugin \'Online kaarten\' onder \'Instellingen\' → \'Plugins\'.
+<string name="tip_day_night_mode_t_v2">"De kaartpresentatie kan voor offline vectorkaarten gewisseld worden tussen dag (helderder) en nacht (donkerder). Nachtkleuren zijn veiliger voor nachtelijke ritten.
+\n\nJe kan de voorkeursinstelling wijzigen in \'Menu\' -&gt; \'Configureer scherm\' -&gt; \'Dag/nacht kaart\'.
+\n\nDe keuzen zijn:
+\n\t* \'Zonsopgang/-ondergang\' - automatische modus, bepaald door de positie van de zon (standaard)
+\n\t* \'Dag\' - gebruik altijd de dag modus
+\n\t* \'Nacht\' - gebruik altijd de nacht modus
+\n\t* \'Lichtsensor\' - de kaartweergave wordt bepaald door de lichtsensor van het apparaat (indien aanwezig) "</string>
+<string name="tip_map_switch_t_v2">"De kaartbron en de kaartlagen kunnen worden gewijzigd via \'Menu\' → \'Configureer scherm\'. Activeer hiervoor de plug-in \'Online kaarten\' onder \'Instellingen\' → \'Plugin-manager\'.
 \n\nVia \'Menu\' → \'Kaartlagen kan je kiezen uit kaarten op het toestel (standaard, ook voor navigatie), en uit gegenereerde (online of opgeslagen) kaartsegmentenbronnen, of kaarten die je gemaakt hebt met bv. OsmAndMapCreator op een PC.
-		\n\nOsmAnd ondersteunt ook zelfgemaakte kaartbronnen.
-	</string>
+\n\nOsmAnd ondersteunt ook zelfgemaakte kaartbronnen. "</string>
 <string name="tip_app_mode_t_v2">OsmAnd ondersteunt verschillende vervoersprofielen.
 		\n\nJe kan het actieve profiel wijzigen via het profiel-icoon links onderaan in het kaartscherm (icoon voor auto, fiets of voetganger), of bij het maken van een route (\'transportmodus\').
 	</string>
@@ -1570,12 +1567,11 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="about_settings_descr">Versieinformatie, licenties, projectdeelnemers</string>
     <string name="tips_and_tricks">Help</string>
     <string name="tip_map_styles">Kaartstijlen</string>
-	<string name="tip_map_styles_t">OsmAnd kan de offline vectorkaarten in verschillende stijlen weergeven:
-		\n\nNaast de uitgebalanceerde standaardkaartstijl, is er in \'Menu\' -&gt; \'Configureer scherm\' -&gt; \'Kaartstijl\' bijvoorbeeld de keuze uit:
-		\n\t* De \'Touring view\'-stijl: deze bevat de meest gedetailleerde informatie voor reizen en tours, waaronder optimalisatie voor professioneel gebruik (hoger contrast voor herkenbaarheid wegen), opties voor bergtochten (SAC-moeilijkheidsgraad), fietsroutes, wandelsymbolen, etc.
-		\n\t* \'High contrast roads\' toont wegen in uitgesproken kleuren voor situaties met veel omgevingslicht
-		\n\t* \'Winter and ski\' toont een (met sneeuw bedekt) winterlandschap en toont wereldwijd skihellingen en liften (wanneer gebruikt met de \'World ski\' kaartdownload)
-	</string>
+	<string name="tip_map_styles_t">"OsmAnd kan de offline vectorkaarten in verschillende stijlen weergeven:
+\n\nNaast de uitgebalanceerde standaardkaartstijl, is er in \'Menu\' -&gt; \'Configureer scherm\' -&gt; \'Kaartstijl\' bijvoorbeeld de keuze uit:
+\n\t* De \'Touring view\'-stijl, deze bevat de meest gedetailleerde informatie voor reizen en tochten, waaronder optimalisatie voor professioneel gebruik (hoger contrast voor herkenbaarheid wegen), opties voor bergtochten (SAC-moeilijkheidsgraad), fietsroutes, wandelsymbolen, enz.
+\n\t* \'High contrast roads\' toont wegen in uitgesproken kleuren voor situaties met veel omgevingslicht
+\n\t* \'Winter and ski\' toont een (met sneeuw bedekt) winterlandschap en toont wereldwijd skihellingen en liften (wanneer gebruikt samen met de \'World ski\' kaart download) "</string>
     <string name="base_world_map">Basis-wereldkaart</string>
     <string name="map_magnifier">Kaartvergrootglas</string>
     <string name="route_is_too_long">"De afstand tot de bestemming is meer dan 200 km. De routeberekening kan hierdoor erg lang duren (of zelfs  mislukken). Door tussenliggende routepunten toe te voegen, wordt de routeberekening sneller."</string>
