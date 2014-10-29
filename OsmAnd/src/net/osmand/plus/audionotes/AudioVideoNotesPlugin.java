@@ -424,7 +424,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		};
 		adapter.item(R.string.layer_recordings).selected(SHOW_RECORDINGS.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_audio_dark, R.drawable.ic_action_audio_light).listen(listener).position(6).reg();
+				.icons(R.drawable.ic_action_audio_dark, R.drawable.ic_action_audio_light).listen(listener).position(12).reg();
 	}
 
 	@Override

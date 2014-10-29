@@ -164,7 +164,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						}
 						return true;
 					}
-				}).position(7).reg();
+				}).position(16).reg();
 
 	}
 

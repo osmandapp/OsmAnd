@@ -104,7 +104,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		};
 		adapter.item(R.string.layer_hillshade).selected(HILLSHADE.get()? 1 : 0)
-			.icons( R.drawable.ic_action_hillshade_dark, R.drawable.ic_action_hillshade_light).listen(listener).position(9).layout(R.layout.drawer_list_item).reg();
+			.icons( R.drawable.ic_action_hillshade_dark, R.drawable.ic_action_hillshade_light).listen(listener).position(13).layout(R.layout.drawer_list_item).reg();
 	}
 	
 	@Override
