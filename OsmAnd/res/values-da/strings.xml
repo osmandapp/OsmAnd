@@ -200,7 +200,7 @@
 	<string name="avoid_in_routing_title">Undgå…</string>
 	<string name="avoid_in_routing_descr">Undgå betalingsveje, grusveje, færger</string>
 	<string name="map_widget_fluorescent">Fluorescerende ruter</string>
-	<string name="map_widget_show_ruler">Lineal</string>
+	<string name="map_widget_show_ruler">Målestok</string>
 	<string name="map_widget_appearance">Resterende elementer:</string>
 	<string name="map_widget_view_direction">Synsretning</string>
 	<string name="map_widget_transparent">Gennemsigtig layout</string>
@@ -385,7 +385,7 @@
 	<string name="validate_gpx_upload_name_pwd">Angiv OSM brugernavn og kodeord til at sende GPX-filer.</string>
     	<string name="support_new_features">Støt nye funktioner</string>
 	<string name="support_new_features_descr">Doner for at få nye funktioner i programmet</string>
-	<string name="show_ruler_level">Vis lineal</string>	
+	<string name="show_ruler_level">Vis målestok</string>	
 	<string name="back_to_location">Tilbage til placering</string>
 	<string name="help">Hjælp</string>
 	<string name="show_details">Vis detaljer</string>
@@ -508,9 +508,8 @@
 	<string name="osmand_service">Dvaletilstand</string>
 	<string name="osmand_service_descr">Bruges for at køre OsmAnd mens skærmen er slukket</string>
 	<string name="tip_rotation_switching">Kortretning</string>
-	<string name="binary_map_download_success">Hentning lykkedes.
-\n\nAktiver under \'Menu\' → \'Kortlag\' → \'Vælg kortkilde…\' → \'Offline vektorkort\'.
-	</string>
+	<string name="binary_map_download_success">"Hentning lykkedes.
+\n\nAktiver under \'Menu\' → \'Konfigurer kort\' → \'Vælg kortkilde…\' → \'Offline vektorkort\'. "</string>
 	<string name="tip_day_night_mode">Dag/nat tilstand</string>
 	<string name="navigate_point_format">Format:</string>
 	<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
@@ -645,14 +644,13 @@ Nogle af de centrale funktioner:
 \n * \'Efter bevægelsesretning\': Kortet vil hele tiden roteres så retningen er opad
 \n * \'Efter kompas\': Kortet vil hele tiden roteres så det passer med enhedens kompas
 	</string>
-	<string name="tip_day_night_mode_t_v2">Kortets udseende kan for offline vektorkort skiftes mellem dag (lysere) og nat (mørkere).Natfarver er mere sikre under natkørsel.
-\n\nIndstil regler for dag/nat skift i \'Menu\' → \'Konfigurer skærm …\' → \'Dag/nat kort\'.
+	<string name="tip_day_night_mode_t_v2">"Kortets udseende kan for offline vektorkort skiftes mellem dag (lysere) og nat (mørkere).Natfarver er mere sikre under natkørsel.
+\n\nIndstil regler for dag/nat skift i \'Menu\' → \'Konfigurer kort …\' → \'Dag/nat kort\'.
 \n\nValgmulighederne er:
 \n * \'Solopgang/solnedgang\': Automatisk tilstand, styret af solens position (standard)
 \n * \'Dag\': Brug altid dagtilstand
 \n * \'Nat\': Brug altid nattilstand
-\n * \'Lysføler\': Kortvisning styres af lysføleren i enheden (kun hvis der er en)
-	</string>	
+\n * \'Lysføler\': Kortvisning styres af lysføleren i enheden (kun hvis der er en) "</string>	
 	<string name="tip_osm_improve_t">"OsmAnd bruger kort baseret på OpenStreetMap.org (OSM) data og ud over kortvisning og navigation, kan den bruges til at forbedre OSM datakvaliteten. Man kan nemt oprettet og sende nye interessepunkter (IP) eller OSM fejlrapporter med blot et par tryk.
 \n\nFor dette skal man aktivere \'OSM redigering\' udvidelsen under \'Indstillinger\' → \'Udvidelser\', skal man indtaste sine log ind oplysninger til OSM i \'Indstillinger\' → \' OSM redigering\'.
 \n\nFor at oprette et nyt interessepunkt, brug valgmuligheden \'Opret interessepunkt\' i \'Brug placeringer\' i genvejsmenuen. Fortsæt med at indtaste informationer for det nye interessepunkt i dialogen \'Opret interessepunkt\' og til sidst sende det.
@@ -747,8 +745,7 @@ Nogle af de centrale funktioner:
 	<string name="gpx_option_destination_point">Brug aktuel destination</string>
 	<string name="gpx_option_from_start_point">Passere langs hele sporet</string>
 	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.
-
-\n\nFor at anvende aktiver \'Menu\' → \'Kortlag\' → \'Vælg kortkilde…\' → \'Offline vektor-kort\'.</string>
+\n\nFor at anvende aktiver \'Menu\' → \'Konfigurer kort\' → \'Vælg kortkilde…\' → \'Offline vektor-kort\'.</string>
 	<string name="choose_audio_stream">Stemmeindstillinger</string>
 	<string name="choose_audio_stream_descr">Vælg audiokanal til at afspille talevejledning (system afhængig)</string>
 	<string name="voice_stream_voice_call">Stemmeopkald lyd</string>
@@ -865,11 +862,10 @@ Nogle af de centrale funktioner:
 	<string name="daynight_descr">Vælg regel for dag/nat skift</string>
 	<string name="daynight">Dag-/nattilstand</string>
 	<string name="download_files_question">Hent {0} filer ({1} MB)?</string>
-	<string name="tip_favorites_t">Steder, som du ofte bruger, kan gemmes som favoritter:
+	<string name="tip_favorites_t">"Steder, som du ofte bruger, kan gemmes som favoritter:
 \n\nI genvejsmenuen \'Brug pladseringer\' vælg \'Tilføj til favoritter\', og indtast et navn.
 \n\nNår favoritten er gemt, er den tilgængelig via \'Menu\' → \'Mine steder\'. Tryk på en favorit i åbner mulighed for at bruge den som destination, redigere eller slette den.
-\n\nFor at vise alle favoritsteder direkte på kortet, aktiver kortlag \'Favoritter\' under \'Menu\' → \'Kortlag\'.
-	</string>
+\n\nFor at vise alle favoritsteder direkte på kortet, aktiver kortlag \'Favoritter\' under \'Menu\' → \'Konfigurer kort\'. "</string>
 	<string name="tip_recent_changes_1_1_4_t">Ændringer i 1.1.4:
 	\n* Redesign af brugerflade
 	\n* Fejlrettelser
@@ -1108,10 +1104,9 @@ Nogle af de centrale funktioner:
 	<string name="search_online_address">Online søgning</string>
 	<string name="max_level_download_tile">Maks online zoom</string>
 	<string name="max_level_download_tile_descr">Vælg maksimum zoomniveau der hentes for online delkort</string>
-	<string name="tip_map_switch_t_v2">Kortkilden og lag der vises kan ændres via \'Menu\' → \'Kortlag\'.
+	<string name="tip_map_switch_t_v2">"Kortkilden og lag der vises kan ændres via \'Menu\' → \'Konfigurer kort\'.
 \n\nUnder \'Kortkilde...\' vælges de forhåndsindlæste vektorkort, forhåndsdefinerede (online) delkortkilder (aktiver \'Online og delkort\' udvidelsen) eller kort der er manuelt oprettet f.eks. ved hjælp af OsmAndMapCreator på en PC.
-\n\nOsmAnd understøtter også brugerdefinerede kilder.
-	</string>
+\n\nOsmAnd understøtter også brugerdefinerede kilder. "</string>
 	<string name="tip_app_mode_t_v2">OsmAnd understøtter forskellige profiler (kan konfigureres) til forskellige brugstilfælde.
 \n\nSkift profil via profilknappen i nederste venstre hjørne af skærmen (bil, cykel eller fodgænger) eller når en rute oprettes (\'Transportform\').
 	</string>
@@ -1425,12 +1420,11 @@ Nogle af de centrale funktioner:
     <string name="about_settings_descr">Versioninformation, licenser, projektmedlemmer</string>
     <string name="tips_and_tricks">Hjælp</string>
     <string name="tip_map_styles">Kortformater</string>
-	<string name="tip_map_styles_t">OsmAnd understøtter visning af offline vektorkort i forskellige kortformater tilpasset forskellige behov:
-\n\n Udover standardformatet kan andet end \'standard\' kortformat, vælges i \'Menu\' → \'Konfigurer skærm\' → \'Kortformat\'
-\n * \'Turvisning \' kortformat, indeholder de mest detaljerede oplysninger for rejser og rejsebrug, herunder optimering for erhvervschauffører (veje der er lette at skelne og med højere kontrast), mulighed for Alpine vandring (SAC-skalaen), cykelruter, symbolsupport for vandreture  mv.
+	<string name="tip_map_styles_t">"OsmAnd understøtter visning af offline vektorkort i forskellige kortformater tilpasset forskellige behov:
+\n\n Udover standardformatet kan andet end \'standard\' kortformat, vælges i \'Menu\' → \'Konfigurer kort\' → \'Kortformat\'
+\n * \'Turvisning \' kortformat, indeholder de mest detaljerede oplysninger for rejser og rejsebrug, herunder optimering for erhvervschauffører (veje der er lette at skelne og med højere kontrast), mulighed for Alpine vandring (SAC-skalaen), cykelruter, symbolsupport for vandreture mv.
 \n * \'Veje med høj kontrast\' viser veje med meget forstærkede farver til lyse omgivelser
-\n * \'Vinter og ski\' giver en visning af et (snedækket) vinterlandskab og viser globale skiløjper og lifter (hent \'World ski\' kortet)
-	</string>
+\n * \'Vinter og ski\' giver en visning af et (snedækket) vinterlandskab og viser globale skiløjper og lifter (hent \'World ski\' kortet) "</string>
     <string name="route_descr_destination"> </string>
     <string name="base_world_map">Verdensgrundkort</string>
 	
