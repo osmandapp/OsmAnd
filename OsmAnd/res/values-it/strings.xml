@@ -303,7 +303,7 @@
 		\n\nIl riquadro del marker può essere nescosto nuovamente cliccandolo a lungo.
 	</string>
   <string name="tip_initial">Aiuto</string>
-  <string name="tip_initial_t">"OsmAnd è una applicazione di navigazione con molte funzioni.\n\nÈ possibile trovare un\'introduzione basilare, consigli per l\'uso e aiuto avanzato in \'Menù\' → \'Suggerimenti\' a partire dalla schermata della mappa. "</string>
+  <string name="tip_initial_t">"OsmAnd è un\'applicazione di navigazione con molte funzioni.\n\nUn\'introduzione basilare, alcuni suggerimenti per l\'uso sono raggiungibili attraverso \'Menù\' → \'Suggerimenti\' a partire dalla schermata della mappa. "</string>
   <string name="next_button">Avanti</string>
   <string name="previous_button">Indietro</string>
   <string name="unit_of_length_descr">Cambia le unità di misura per lunghezza e velocità</string>
@@ -1588,12 +1588,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="about_settings_descr">Informazioni versione, licenze, membri del progetto</string>
     <string name="tips_and_tricks">Aiuto</string>
     <string name="tip_map_styles">Stili mappa</string>
-	<string name="tip_map_styles_t">OsmAnd supporta la visualizzazione delle mappe vettoriali in differenti stili per adattarsi alle tue esigenze:
-		\n\nDiversi dai  preimpostati bilanciati stili della mappa, li trovi sotto \'Menu\' -&gt; \'Configura schermo\' -&gt; \'Stile Mappa\' scegli per esempio
-		\n\t* The \'Touring view\' stile: contiene le più dettagliate informazioni possibile per viaggiare e per visitare, incluse le ottimizzazioni per i guidatori professionali (strade contrasto maggiormente distinguibile), opzione per l\'escursionismo Alpino (scala SAC), itinerari ciclistici, simboli per escursionismo, etc.
-		\n\t* \'Alto contrasto strade \' mostra le strade con una luminosità dei colori molto accentuata per le situazioni di cattiva illuminazione
-		\n\t* \'Inverno e sci\' crea una vista del paesaggio invernale (coperto da neve), e visione globale delle piste da sci e degli impianti di risalita (in abbinata con \'World ski\' download mappa)
-	</string>
+	<string name="tip_map_styles_t">"OsmAnd supporta la visualizzazione delle mappe vettoriali in differenti stili mappa per adattarsi alle tue esigenze:
+\n\nDiversi stili mappa da quello bilanciato preimpostato, li trovi sotto \'Menu\' -&gt; \'Configura mappa\' -&gt; \'Stile Mappa\' scegli per esempio
+\n\t* Lo stile \'Touring view\': contiene le più dettagliate informazioni possibile per viaggiare e per visitare, incluse le ottimizzazioni per i guidatori professionali (strade contrasto maggiormente distinguibile), opzione per l\'escursionismo Alpino (scala SAC), itinerari ciclistici, simboli per escursionismo, etc.
+\n\t* \'Alto contrasto strade \' mostra le strade con una luminosità dei colori molto accentuata per le situazioni di cattiva illuminazione
+\n\t* \'Inverno e sci\' crea una vista del paesaggio invernale (coperto da neve), e visione globale delle piste da sci e degli impianti di risalita (in abbinata con \'World ski\' download mappa) "</string>
     <string name="base_world_map">Mappa mondiale di base</string>
 	
     
@@ -2016,5 +2015,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="map_widget_top">Barra di stato</string>
 	<string name="layers_category_show">Mostra</string>
 	<string name="search_radius_proximity">Nei pressi di</string>
-    <string name="tip_recent_changes_1_9_t">"Novità nella 1.9: * Aggiornato gli stili delle mappe con il disegno del tipo di superficie, lo strato trasporto pubblico e i simboli escursionistici * Ricerca dei PDI lungo il percorso * Indicazione della strada come impercorribile per la sessione * Download e aggiornamento delle mappe più facilmente * Notifiche visive e audio all\'approssimarsi a un punto intermedio * Stampa dell\'itinerario e delle indicazioni  * Supporto alle corsie di svolta * Supporta Android Wear * Molte modifiche della IU * Zoom mappa e Dimensione del Testo separati * Notifiche audio speciali nel caso si sia fuori rotta * Funzionalità login OsMo  * Correzione incompatibilità versione OsMo "</string>
+    <string name="tip_recent_changes_1_9_t">"Novità nella 1.9: * Aggiornato gli stili delle mappe con il disegno del tipo di superficie, dello strato trasporto pubblico e i simboli escursionistici * Ricerca dei PDI lungo il percorso * Indicazione della strada come impercorribile per la sessione * Download e aggiornamento delle mappe più facili * Notifiche visive e audio all\'approssimarsi a un punto intermedio * Stampa dell\'itinerario e delle indicazioni  * Supporto alle corsie di svolta * Supporto ad Android Wear * Molte modifiche della IU * Zoom mappa e Dimensione del Testo separati * Notifiche audio speciali nel caso si sia fuori rotta * Funzionalità login OsMo  * Correzione incompatibilità versione OsMo "</string>
     </resources>
