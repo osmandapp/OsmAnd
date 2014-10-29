@@ -1281,7 +1281,7 @@
 	<string name="map_widget_show_ruler">Maßstab</string>
 	<string name="map_widget_appearance">Weitere Elemente:</string>
 	<string name="map_widget_view_direction">Blickrichtung einblenden</string>
-	<string name="map_widget_map_rendering">Kartendarstellung:</string>
+	<string name="map_widget_map_rendering">Kartendarstellung</string>
 	<string name="map_widget_transparent">Transparentes Layout</string>
 
 	<string name="gps_wakeup_interval">GPS-Aufwachintervall: %s</string>
