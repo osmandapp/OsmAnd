@@ -1866,4 +1866,6 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="rendering_category_routes">Maršrutai</string>
     <string name="map_widget_right">Dešinys skydelis</string>
 	<string name="map_widget_left">Kairys skydelis</string>
+    <string name="tip_recent_changes_1_9_t">"Atnaujinimai v.1.9: * Atnaujinti kelių paviršiaus, visuomeninio transporto bei pėsčiųjų maršrutų simbolių žemėlapių stiliai * POI paieška šalia maršruto * Kelių žymėjimas, jei negalima juos praeiti per vieną sesiją * Lengviau atsisiųsti ir atnaujjnti žemėlapius * Vaizdinis ir garsinis pranešimas artėjant prie maršruto taško * Galimybė išspaudinti maršrutus ir posūkių informaciją * Posūkių juostų palaikymas * Android Wear palaikymas* Daugybė pakeitimų vartotojo sąsajoje * Atskiras padidinimas tekstui žemėlapyje * Specialiūs garsiniai pranešimai nukrypus nuo maršruto * OsMo prisijungimas * Pataisytas suderinamumas su OsMo versijomis "</string>
+    <string name="search_radius_proximity">Greta</string>
     </resources>
