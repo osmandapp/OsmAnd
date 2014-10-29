@@ -24,6 +24,7 @@ import net.osmand.render.RenderingRulesStorage;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -42,6 +43,13 @@ public class ConfigureMapMenu {
 					}
 				}).reg();
 		adapter.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
+		adapter.setChangeAppModeListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ma.getMapActions().prepareOptionsMenu(createListAdapter(ma));				
+			}
+		});
 
 		createLayersItems(adapter, ma);
 		createRenderingAttributeItems(adapter, ma);
@@ -249,7 +257,7 @@ public class ConfigureMapMenu {
 			List<RenderingRuleProperty> customRules = new ArrayList<RenderingRuleProperty>(renderer.PROPS.getCustomRules());
 			createProperties(customRules, R.string.rendering_category_details, "details",
 					adapter, activity);
-			createProperties(customRules, R.string.rendering_category_transport, "routes",
+			createProperties(customRules, R.string.rendering_category_routes, "routes",
 					adapter, activity);
 			if(customRules.size() > 0) {
 				adapter.item(R.string.rendering_category_others).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();

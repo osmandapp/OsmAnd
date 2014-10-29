@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import net.osmand.PlatformUtil;
@@ -64,7 +65,7 @@ public class BinaryRoutePlanner {
 	 * return list of segments
 	 */
 	@SuppressWarnings("unused")
-	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegment start, RouteSegment end) throws InterruptedException, IOException {
+	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end) throws InterruptedException, IOException {
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
@@ -128,12 +129,11 @@ public class BinaryRoutePlanner {
 						visitedDirectSegments, doNotAddIntersections);
 			}
 			updateCalculationProgress(ctx, graphDirectSegments, graphReverseSegments);
-			if(ctx.getPlanRoadDirection() <= 0 && graphReverseSegments.isEmpty()){
-				throw new IllegalArgumentException("Route is not found to selected target point.");
-			}
-			if(ctx.getPlanRoadDirection() >= 0 && graphDirectSegments.isEmpty()){
-				throw new IllegalArgumentException("Route is not found from selected start point.");
-			}
+			
+			checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() <= 0, graphReverseSegments, end, visitedOppositeSegments,
+					"Route is not found to selected target point.");
+			checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() >= 0, graphDirectSegments, start, visitedDirectSegments,
+					"Route is not found from selected start point.");
 			if (ctx.planRouteIn2Directions()) {
 				forwardSearch = (nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) < 0);
 //				if (graphDirectSegments.size() * 2 > graphReverseSegments.size()) {
@@ -164,6 +164,47 @@ public class BinaryRoutePlanner {
 		}
 		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
 		return finalSegment;
+	}
+
+
+	protected void checkIfGraphIsEmpty(final RoutingContext ctx, boolean allowDirection,
+			PriorityQueue<RouteSegment> graphSegments, RouteSegmentPoint pnt, TLongObjectHashMap<RouteSegment> visited,
+			String msg) {
+		if (allowDirection && graphSegments.isEmpty()) {
+			if (pnt.others != null) {
+				Iterator<RouteSegmentPoint> pntIterator = pnt.others.iterator();
+				while (pntIterator.hasNext()) {
+					RouteSegmentPoint next = pntIterator.next();
+					boolean visitedAlready = false;
+					if (next.getSegmentStart() > 0 && visited.containsKey(calculateRoutePointId(next, false))) {
+						visitedAlready = true;
+					} else if (next.getSegmentStart() < next.getRoad().getPointsLength() - 1
+							&& visited.containsKey(calculateRoutePointId(next, true))) {
+						visitedAlready = true;
+					}
+					pntIterator.remove();
+					if (!visitedAlready) {
+						float estimatedDistance = (float) estimatedDistance(ctx, ctx.targetX, ctx.targetY, ctx.startX,
+								ctx.startY);
+						RouteSegment pos = next.initRouteSegment(true);
+						RouteSegment neg = next.initRouteSegment(false);
+						if (pos != null) {
+							pos.distanceToEnd = estimatedDistance;
+							graphSegments.add(pos);
+						}
+						if (neg != null) {
+							neg.distanceToEnd = estimatedDistance;
+							graphSegments.add(neg);
+						}
+						println("Reiterate point with new start/destination " + next.getRoad());
+						break;
+					}
+				}
+				if (graphSegments.isEmpty()) {
+					throw new IllegalArgumentException(msg);
+				}
+			}
+		}
 	}
 
 
@@ -700,12 +741,16 @@ public class BinaryRoutePlanner {
 		public void visitSegment(RouteSegment segment, int segmentEnd, boolean poll);
 	}
 	
-	public static class RouteSegmentPoint extends RouteSegment{
-		public RouteSegmentPoint(RouteDataObject road, int segmentStart) {
+	public static class RouteSegmentPoint extends RouteSegment {
+		public RouteSegmentPoint(RouteDataObject road, int segmentStart, double dist) {
 			super(road, segmentStart);
+			this.dist = dist;
 		}
+
+		public double dist;
 		public int preciseX;
 		public int preciseY;
+		public List<RouteSegmentPoint> others;
 	}
 	
 	public static class RouteSegment {

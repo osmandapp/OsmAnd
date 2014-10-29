@@ -87,6 +87,7 @@ public class MapActivityActions implements DialogProvider {
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
 
+	private boolean refreshDrawer = false;
 	DrawerLayout mDrawerLayout;
 	ListView mDrawerList;
 	private WaypointDialogHelper waypointDialogHelper;
@@ -559,6 +560,31 @@ public class MapActivityActions implements DialogProvider {
 			mDrawerLayout = (DrawerLayout) mapActivity.findViewById(R.id.drawer_layout);
 			mDrawerList = (ListView) mapActivity.findViewById(R.id.left_drawer);
 			mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+			mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+				@Override
+				public void onDrawerSlide(View view, float v) {
+
+				}
+
+				@Override
+				public void onDrawerOpened(View view) {
+					//need to refresh drawer if it
+					//was opened with slide, not button
+					if (mDrawerList != null && refreshDrawer){
+						mDrawerList.invalidateViews();
+					}
+				}
+
+				@Override
+				public void onDrawerClosed(View view) {
+					refreshDrawer = true;
+				}
+
+				@Override
+				public void onDrawerStateChanged(int i) {
+
+				}
+			});
 		}
 		final ContextMenuAdapter cm = createOptionsMenu();
 		prepareOptionsMenu(cm);
@@ -568,6 +594,7 @@ public class MapActivityActions implements DialogProvider {
 		final ArrayAdapter<?> listAdapter =
 				cm.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContentMenu());
 		mDrawerList.setAdapter(listAdapter);
+		refreshDrawer = false;
 		mDrawerList.setDivider(mapActivity.getResources().getDrawable(R.drawable.drawer_divider));
 		mDrawerList.setBackgroundColor(cm.getBackgroundColor(mapActivity, getMyApplication().getSettings().isLightContentMenu()));
 		mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -712,16 +739,7 @@ public class MapActivityActions implements DialogProvider {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos,
 								boolean isChecked) {
-//							final List<WaypointHelper.LocationPointWrapper> deletedPoints = new ArrayList<WaypointHelper.LocationPointWrapper>();
-//							ContextMenuAdapter cm = waypointDialogHelper.setListAdapter(app.getMapActivity(),
-//									mDrawerList, deletedPoints);
-//							prepareOptionsMenu(cm);
-							boolean drawer = true;
-							if (drawer) {
-								showWaypointsInDrawer(false);
-							} else {
-								waypointDialogHelper.showWaypointsDialog(mapActivity, false);
-							}
+							showWaypointsInDrawer(false);
 							return false;
 						}
 					}).reg();
@@ -862,16 +880,17 @@ public class MapActivityActions implements DialogProvider {
 		return optionsMenuHelper;
 	}
 
-	public void showWaypointsInDrawer(boolean b) {
-		final int[] running = new int[]{-1};
-		ArrayAdapter<Object> listAdapter = waypointDialogHelper.getWaypointsDrawerAdapter(b, mapActivity,
-				running);
+	public void showWaypointsInDrawer(boolean flat) {
+		final int[] running = new int[] { -1 };
+		ArrayAdapter<Object> listAdapter = waypointDialogHelper.getWaypointsDrawerAdapter(mapActivity, running, flat);
 		mDrawerList.setAdapter(listAdapter);
+		refreshDrawer = false;
 		mDrawerList.setDivider(mapActivity.getResources().getDrawable(R.drawable.drawer_divider));
-		mDrawerList.setBackgroundColor( getMyApplication().getSettings().isLightContentMenu()?
-				mapActivity.getResources().getColor(R.color.color_white) :
-				mapActivity.getResources().getColor(R.color.dark_drawer_bg_color));
-		mDrawerList.setOnItemClickListener(waypointDialogHelper.getDrawerItemClickListener(mapActivity, running, listAdapter, null));
+		mDrawerList.setBackgroundColor(getMyApplication().getSettings().isLightContentMenu() ? mapActivity
+				.getResources().getColor(R.color.color_white) : mapActivity.getResources().getColor(
+				R.color.dark_drawer_bg_color));
+		mDrawerList.setOnItemClickListener(waypointDialogHelper.getDrawerItemClickListener(mapActivity, running,
+				listAdapter, null));
 	}
 
 	public void openIntermediatePointsDialog(){

@@ -1035,7 +1035,7 @@
 <string name="day_night_info_description">Saulėtekis : %1$s \nSaulėlydis : %2$s</string>
 <string name="day_night_info">Dienos/nakties info</string>
 <string name="map_widget_day_night">Dieninis/naktinis žemėlapis</string>
-<string name="map_widget_vector_attributes">Atvaizduojami atributai:</string>
+<string name="map_widget_vector_attributes">Atvaizduojami atributai</string>
 <string name="map_widget_renderer">Atvaizdavimo stilius</string>
 <string name="tip_day_night_mode_t_v2">Žemėlapio išvaizda tam tikriems vektoriniams žemėlapiams gali būti keičiama tarp dienos (šviesesnė) ir nakties (tamsesnė). Naktinės spalvos yra saugesnės vairuoti naktį.
 		\n\nDienos/nakties perjungimą galite nustatyti \'Meniu\' → \'Konfigūruoti ekraną\' → \'Dienos/nakties žemėlapis\'.
@@ -1468,7 +1468,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="auto_zoom_far">Vidutiniškai priartinti</string>
 	<string name="auto_zoom_farthest">Maksimaliai padidinti</string>
 	<string name="osmodroid_refresh">Atnaujinti kanalus</string>
-    <string name="map_widget_map_rendering">Žemėlapio atvaizdavimas:</string>
+    <string name="map_widget_map_rendering">Žemėlapio atvaizdavimas</string>
     <string name="app_mode_hiking">Žygiai</string>
     <string name="app_mode_motorcycle">Motociklas</string>
     <string name="app_mode_boat">Valtis</string>
@@ -1856,4 +1856,16 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="anonymous_user_hint">Anonimas negali:\n- kurti grupių;\n- sinchronizuoti grupes bei įranginius su sreveriu;\n- valdyti grupes bei įrenginius privačiame biure.</string>
     <string name="anonymous_user">Anonimas</string>
     <string name="logged_as">Prisijungėte kaip %1$s</string>
-	</resources>
+	<string name="rendering_category_details">Detalės</string>
+    <string name="rendering_category_transport">Transportas</string>
+    <string name="rendering_category_others">Kiti atributai</string>
+    <string name="map_widget_appearance_rem">Likę elementai</string>
+    <string name="layers_category_show">Rodyti</string>
+	<string name="configure_map">Konfigūruoti žemėlapį</string>
+    <string name="map_widget_top">Statuso juosta</string>
+	<string name="rendering_category_routes">Maršrutai</string>
+    <string name="map_widget_right">Dešinys skydelis</string>
+	<string name="map_widget_left">Kairys skydelis</string>
+    <string name="tip_recent_changes_1_9_t">"Atnaujinimai v.1.9: * Atnaujinti kelių paviršiaus, visuomeninio transporto bei pėsčiųjų maršrutų simbolių žemėlapių stiliai * POI paieška šalia maršruto * Kelių žymėjimas, jei negalima juos praeiti per vieną sesiją * Lengviau atsisiųsti ir atnaujjnti žemėlapius * Vaizdinis ir garsinis pranešimas artėjant prie maršruto taško * Galimybė išspaudinti maršrutus ir posūkių informaciją * Posūkių juostų palaikymas * Android Wear palaikymas* Daugybė pakeitimų vartotojo sąsajoje * Atskiras padidinimas tekstui žemėlapyje * Specialiūs garsiniai pranešimai nukrypus nuo maršruto * OsMo prisijungimas * Pataisytas suderinamumas su OsMo versijomis "</string>
+    <string name="search_radius_proximity">Greta</string>
+    </resources>

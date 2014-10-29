@@ -975,7 +975,7 @@
 <string name="day_night_info_description">Napkelte : %1$s \nNapnyugta : %2$s</string>
 <string name="day_night_info">Nappal/éjjel információ</string>
 <string name="map_widget_day_night">Nappali/éjjeli térképmód</string>
-<string name="map_widget_vector_attributes">Térképmegjelenítési beállítások:</string>
+<string name="map_widget_vector_attributes">Térképmegjelenítési tulajdonságok</string>
 <string name="map_widget_renderer">Térképmegjelenítési stílus</string>
 <string name="tip_app_mode_t_v2">OsmAnd több különböző (személyre szabható) üzemmódot támogat különböző felhasználásokhoz.
 \n\nA módot útvonaltervezésnél, vagy a térkép bal alsó sarkában lévő ikonnal (autó, bicikli vagy gyalogos) tudod megváltoztatni.
@@ -1394,7 +1394,7 @@
 	<string name="amenity_type_seamark">Hajózási jelzés</string>
     <string name="app_modes_choose_descr">Milyen felhasználási módok jelenjenek meg az alkalmazásban</string>
     <string name="app_modes_choose">Felhasználási módok</string>
-	<string name="map_widget_map_rendering">Térkép megjelenítés:</string>
+	<string name="map_widget_map_rendering">Térkép megjelenítés</string>
     <string name="app_mode_hiking">Gyalogtúra</string>
     <string name="app_mode_motorcycle">Motorkerékpár</string>
     <string name="app_mode_boat">Hajó</string>
@@ -1787,4 +1787,16 @@
     <string name="anonymous_user_hint">Egy anonim felhasználó nem tud:\n- csoportot létrehozni;\n- csoportokat és eszközöket szinkronizálni a szerverrel;\n- csoportokat és eszközöket kezelni privát módon.</string>
     <string name="anonymous_user">Anonim felhasználó</string>
     <string name="logged_as">Bejelentkezve mint %1$s</string>
-	</resources>
+	<string name="tip_recent_changes_1_9_t">"Az 1.9-es verzió újdonságai: * Frissített térképstílusok útburkolat megjelenítéssel, tömegközlekedési réteggel és turistajelzésekkel * POI-k keresése az útvonal mentén * Út járhatatlannak jelölése szezonálisan * Térképek egyszerűbb letöltése és frissítése * Hangjelzés és vizuális értesítés útpontok elérésekor * Itiner és kanyarodási információk nyomtatása * Kanyarodósávok megjelenítése * Android Wear támogatás * Sok felhasználói felület csiszolás * Külön zoom a szövegméretnek a térképen * Külön hangjelzés, ha letértél az útról * OsMo bejelentkezési lehetőség * OsMo  verzió inkompatibilitási javítás "</string>
+    <string name="rendering_category_routes">Útvonalak</string>
+    <string name="rendering_category_details">Részletek</string>
+    <string name="rendering_category_transport">Útvonalak</string>
+    <string name="rendering_category_others">Egyéb térképtulajdonságok</string>
+    <string name="map_widget_appearance_rem">Többi elem</string>
+    <string name="map_widget_top">Státuszsor</string>
+	<string name="map_widget_right">Jobb panel</string>
+	<string name="map_widget_left">Bal panel</string>
+    <string name="layers_category_show">Mutat</string>
+	<string name="configure_map">Térképi tartalom</string>
+    <string name="search_radius_proximity">ennek a közelében</string>
+    </resources>
