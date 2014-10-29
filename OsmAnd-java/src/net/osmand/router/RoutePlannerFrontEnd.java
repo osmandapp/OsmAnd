@@ -4,6 +4,8 @@ package net.osmand.router;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import net.osmand.NativeLibrary;
@@ -14,7 +16,6 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
-import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.util.MapUtils;
 
@@ -59,30 +60,39 @@ public class RoutePlannerFrontEnd {
 		if (dataObjects.isEmpty()) {
 			ctx.loadTileData(px, py, 15, dataObjects);
 		}
-		RouteSegmentPoint road = null;
-		
-		double sdist = 0;
+		List<RouteSegmentPoint> list = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
 		for (RouteDataObject r : dataObjects) {
 			if (r.getPointsLength() > 1) {
+				RouteSegmentPoint road = null;
 				for (int j = 1; j < r.getPointsLength(); j++) {
 					QuadPoint pr = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(j - 1), 
 							r.getPoint31YTile(j - 1), r.getPoint31XTile(j ), r.getPoint31YTile(j ));
 					double currentsDist = squareDist((int) pr.x, (int)pr.y, px, py);
-					if (road == null || currentsDist < sdist) {
+					if (road == null || currentsDist < road.dist) {
 						RouteDataObject ro = new RouteDataObject(r);
-						road = new RouteSegmentPoint(ro, j);
+						road = new RouteSegmentPoint(ro, j, currentsDist);
 						road.preciseX = (int) pr.x;
 						road.preciseY = (int) pr.y;
-						sdist = currentsDist;
 					}
+				}
+				if(road != null) {
+					list.add(road);
 				}
 			}
 		}
-//		if (road != null) {
-			// re-register the best road because one more point was inserted
-//			ctx.registerRouteDataObject(road.getRoad());
-//		}
-		return road;
+		Collections.sort(list, new Comparator<RouteSegmentPoint>() {
+
+			@Override
+			public int compare(RouteSegmentPoint o1, RouteSegmentPoint o2) {
+				return Double.compare(o1.dist, o2.dist);
+			}
+		});
+		if(list.size() > 0) {
+			RouteSegmentPoint ps = list.remove(0);
+			ps.others = list;
+			return ps;
+		}
+		return null;
 	}
 	
 	
@@ -271,7 +281,7 @@ public class RoutePlannerFrontEnd {
 		
 	}
 	
-	private List<RouteSegmentResult> searchRouteInternalPrepare(final RoutingContext ctx, RouteSegment start, RouteSegment end, 
+	private List<RouteSegmentResult> searchRouteInternalPrepare(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end, 
 			PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
 		ctx.initStartAndTargetPoints(start, end);
 		if(routeDirection != null) {
@@ -391,8 +401,8 @@ public class RoutePlannerFrontEnd {
 	}
 	
 	@SuppressWarnings("static-access")
-	private List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end, PrecalculatedRouteDirection routeDirection) 
-			throws IOException, InterruptedException {
+	private List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end, 
+			PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
 		if(ctx.SHOW_GC_SIZE){
 			long h1 = ctx.runGCUsedMemory();
 			float mb = (1 << 20);
