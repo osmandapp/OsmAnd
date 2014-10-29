@@ -1345,7 +1345,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t* \'To compass\': Map will continuously be aligned with the device\'s compass reading
 	</string>
 	<string name="binary_map_download_success">Download successful.
-		\n\t\n\tTo use activate \'Menu\' → \'Map layers\' → \'Map source&#8230;\' → \'Offline vector maps\'.
+		\n\t\n\tTo use activate \'Menu\' → \'Configure map\' → \'Map source&#8230;\' → \'Offline vector maps\'.
 	</string>
 	<string name="tip_day_night_mode">Day/Night Mode</string>
 	<string name="tip_day_night_mode_t_v2">The map appearance can for offline vector maps be changed between day (brighter) and night (darker). Night colors are safer and more comfortable for night driving.
@@ -1513,7 +1513,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="gpx_option_reverse_route">Reverse GPX direction</string>
 	<string name="gpx_option_destination_point">Use current destination</string>
 	<string name="gpx_option_from_start_point">Pass along entire track</string>
-	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' → \'Map layers\' → \'Map Source&#8230;\' → \'Offline vector maps\'.</string>
+	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' → \'Configure map\' → \'Map Source&#8230;\' → \'Offline vector maps\'.</string>
 	<string name="choose_audio_stream">Voice guidance output</string>
 	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
 	<string name="voice_stream_voice_call">Voice call audio</string>
@@ -1545,7 +1545,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_favorites_t">Frequently used points can be saved as Favorites, as follows:
 		\n\nIn the \'Use location\' context menu for any point, select option \'Add to favorites\' and then enter a name for it.
 		\n\nAfter saving a Favorite, it is accessible via \'Menu\' → \'My Places\'. Tapping on any entry in the \'Favorites\' list provides options like to navigate to it, edit or delete it.
-		\n\nTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' in \'Menu\' → \'Map layers\'.
+		\n\nTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' in \'Menu\' → \'Configure map\'.
 	</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
 	<string name="error_doing_search">Error occurred in offline search</string>
@@ -1556,7 +1556,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="preferred_locale">Display language</string>
 	<string name="incomplete_locale">incomplete</string>
 	<string name="tip_map_switch">Select a Map Source</string>
-	<string name="tip_map_switch_t_v2">The map source and map layers displayed are changed via \'Menu\' → \'Map layers\'.
+	<string name="tip_map_switch_t_v2">The map source and map layers displayed are changed via \'Menu\' → \'Configure map\'.
 		\n\nUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps (default, also needed for offline navigation), or predefined (online or cached offline) tile sources (activate the \'Online maps\' plugin under \'Settings\' → \'Plugins\' for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
 		\n\nOsmAnd also supports custom sources.
 	</string>

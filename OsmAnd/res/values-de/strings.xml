@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -368,7 +368,7 @@
 		\n\t* \'Nach Bewegungsrichtung\': Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
 		\n\t* \'Nach Kompass\': Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
 	</string>
-	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Menü\' → \'Kartenebenen\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.
+	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Menü\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.
 	</string>
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
 	<string name="tip_day_night_mode_t_v2">Die Anzeige der Offline-Vektor-Karten kann zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. Insbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
@@ -681,7 +681,7 @@
 	<string name="tts_missing_language_data">Es ist kein Sprachpaket für die gewählte Sprache installiert. Soll aus dem Market eines installiert werden?</string>
 	<string name="switch_to_vector_map_to_see">Eine Offline-Vektor-Karte ist für diesen Ort vorhanden.
 		\n\t
-		\n\tZur Verwendung aktivieren: \'Menu\' → \'Kartenebenen\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
+		\n\tZur Verwendung aktivieren: \'Menu\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
 	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (Systemabhängig)</string>
 	<string name="voice_stream_voice_call">wie Anrufe</string>
@@ -723,7 +723,7 @@
 	<string name="tip_favorites_t">Sie können jeden beliebigen Ort als Favoriten speichern.
 		\n\nEinen Favoriten erstellen Sie im \'Verwende Position\'-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar.
 		\n\nGespeicherte Favoriten sind leicht zugänglich via \'Menü\' →  \'Meine Orte\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
-		\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Kartenebenen\' einen Haken bei \'Favoriten\' setzen.
+		\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Karte konfigurieren\' einen Haken bei \'Favoriten\' setzen.
 	</string>
 	<string name="create_poi_link_to_osm_doc"> <u>Online OSM</u> Klassifizierung mit Bildern"</string>
 	<string name="error_doing_search">Fehler in der Offlinesuche aufgetreten</string>
@@ -733,7 +733,7 @@
 	<string name="preferred_locale_descr">Anzeigesprache wählen</string>
 	<string name="preferred_locale">Anzeigesprache</string>
 	<string name="tip_map_switch">Kartenquelle auswählen</string>
-	<string name="tip_map_switch_t_v2">Die Kartenquelle und die angezeigten Ebenen können in der Kartenansicht über \'Menü\' → \'Kartenebenen\' gewählt werden.
+	<string name="tip_map_switch_t_v2">Die Kartenquelle und die angezeigten Ebenen können in der Kartenansicht über \'Menü\' → \'Karte konfigurieren\' gewählt werden.
 		\n\nIm Menü \'Kartenquelle…\' können Sie die Karte wählen: Vorher heruntergeladene Offline-Vektor-Karten, vordefinierte Online-Kachel-Karten (aktivieren Sie das Plugin \'Online und Kachel-Karten\') oder manuell am Rechner (z.B. mit OsmAndMapCreator) erstellte Karten.
 		\n\nOsmAnd unterstützt auch benutzerdefinierte Quellen.
 	</string>
@@ -1997,7 +1997,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="map_widget_right">rechtes Panel</string>
 	<string name="map_widget_left">linkes Panel</string>
     <string name="layers_category_show">Anzeigen</string>
-	<string name="configure_map">Karten-Inhalt</string>
+	<string name="configure_map">Karte konfigurieren</string>
     <string name="search_radius_proximity">im Umkreis von</string>
     <string name="tip_recent_changes_1_9_t">"Änderungen in 1.9: * Verbesserte Karten-Stile mit Darstellung der Straßenoberflächen, ÖPNV-Layer und Wander-Symbolen * POI-Suche entlang einer berechneten Route * pro Sitzung eine Straße als nicht passierbar kennzeichnen * Vereinfachung des Karten-Downloads und der Karten-Updates * Audio-visuelle Benachrichtigung bei Annäherung an ein Zwischenziel  * Ausdruck der Reiseroute und der Fahr-Anweisungen * Auswertung von Abbiegespuren * Unterstützung von Android Wear Geräten * viele Änderungen an der Programm-Oberfläche * Separater Zoom nur für die Beschriftungen auf der Karte * Besondere Benachrichtigung bei Abweichen von der vorgegebenen Route * Anmeldung beim Dienst OsMo * Verbesserungen bei der Kompatibilität zu OsMo-Versionen "</string>
     <string name="rendering_category_others">Sonstiges</string>
