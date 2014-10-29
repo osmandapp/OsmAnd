@@ -2012,4 +2012,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="map_widget_right">Pannello di destra</string>
 	<string name="map_widget_left">Pannello di sinistra</string>
     <string name="configure_map">Configura la mappa</string>
+    <string name="map_widget_appearance_rem">Elementi rimanenti</string>
+    <string name="map_widget_top">Barra di stato</string>
+	<string name="layers_category_show">Mostra</string>
+	<string name="search_radius_proximity">Nei pressi di</string>
     </resources>
