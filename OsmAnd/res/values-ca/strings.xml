@@ -656,9 +656,8 @@
 <string name="live_monitoring_interval_descr">Interval de seguiment en viu especific</string>
 <string name="live_monitoring_url">Adreça web de seguiment en viu</string>
 <string name="gpx_monitoring_disabled_warn">Si us plau habiliteu l\'opció «Enregistra camí a fitxer GPX».</string>
-<string name="binary_map_download_success">Baixada amb èxit.
-		\n\t\n\tPer usar-lo activeu «Menú» -&gt; «Defineix vista» -&gt; «Font de mapa...» -&gt; «Mapes de vectors fora de línia».
-	</string>
+<string name="binary_map_download_success">"Baixada amb èxit.
+\n\t\n\tPer usar-lo activeu «Menú» -&gt; «Configuració del mapa» -&gt; «Font de mapa...» -&gt; «Mapes de vectors fora de línia». "</string>
 <string name="pref_overlay">Capa de fons/Cap superposada</string>
 <string name="map_version_changed_info">El servidor conté fitxers de mapes que no són compatibles amb la versió actual de l\'aplicació. Per descarregar-los i usar-los actualitzeu a l\'última versió.</string>
 <string name="local_index_action_do">Estas a punt de %1$s %2$s element(s). Continuar?</string>
@@ -786,7 +785,8 @@
 
 <string name="tts_missing_language_data">No hi ha dades instal·lades per la llengua seleccionada. Voleu anar al Market per instal·lar-ne?</string>
 <string name="gpx_option_from_start_point">Passa al llarg de la traça sencera</string>
-<string name="switch_to_vector_map_to_see">Hi ha un mapa de vectors fora de línia per aquesta localització. \n\t\n\tPer activar-lo aneu a «Menú»  →  «Defineix visualització»  →  «Font de mapes...»  →  «Mapes de vectors fora de línia».</string>
+<string name="switch_to_vector_map_to_see">Hi ha un mapa de vectors fora de línia per aquesta localització.
+\n\t\n\tPer activar-lo aneu a «Menú» → «Configuració del mapa» → «Font de mapes...» → «Mapes de vectors fora de línia».</string>
 <string name="overlay_transparency_descr">Modifiqueu l\'opacitat de la capa superposada</string>
 <string name="overlay_transparency">Opacitat de la capa superposada</string>
 <string name="layer_underlay">Mapa de base…</string>
@@ -847,10 +847,9 @@
 		\n\t\'Amb la brúixola\' - El mapa s\'alinearà contínuament amb la brúixola del dispositiu.
 	</string>
 <string name="tts_language_not_supported">La llengua seleccionada no està suportada per el motor de TTS (text a veu) d\'Android instal·lat. Voleu anar al Market per veure altres motors TTS? Altrament s\'usarà la llengua del TTS per defecte.</string>
-<string name="tip_map_switch_t_v2">La font del mapa i les capes mostrades es poden canviar via «Menú» -&gt; «Capes del mapa».
+<string name="tip_map_switch_t_v2">"La font del mapa i les capes mostrades es poden canviar via «Menú» -&gt; «Configuració del mapa».
 \n\nSota «Font del mapa…» podeu triar entre usar els mapes vectorials (per defecte, també necessaris a la navegació sense connexió) o les fonts de tessel·la predeterminades (en connexió o prèviament descarregades) (per això cal activar el connector «Mapes en línia» a «Opcions» → «Connectors»), o mapes creats manualment usant per exemple OsmAndCreator en el vostre PC.
-\n\n\'OsmAnd també suporta fonts personalitzades.
-	</string>
+\n\n\'OsmAnd també suporta fonts personalitzades. "</string>
 <string name="tip_map_context_menu_t">El menú contextual \'Usa posició\' inclou totes les opcions relatives al punt (posició).
 	\n\nEstà disponible prement i aguantant a qualsevol punt en el mapa (i llavors seleccionant el seu marcador) o prement el boto de la bola de desplaçament o seleccionant \'Menú\'→ \Usa posició\' (en les dues darreres opcions s\'agafa el centre del mapa com referència).
 	\n\nLa caixa de diàleg s\'amaga altre cop prement i aguantant dins seu.
@@ -986,14 +985,13 @@
 	<string name="poi_remove_success">El PDI s\'ha eliminat correctament</string>
 	<string name="default_buttons_reset">Reinicia</string>
 	<string name="edit_filter_delete_dialog_title">Voleu eliminar el filtre seleccionat?</string>
-	<string name="tip_day_night_mode_t_v2">L\'aspecte dels mapes vectorials pot canviar entre dia (clar) i nit (fosc). Els colors de nit són més segurs per la conducció nocturna.
-\n\nPodeu assignar un criteri pel canvi de dia/nit a «Menú» -&gt; «Configura la pantalla...» -&gt;«Mapa dia/nit».
+	<string name="tip_day_night_mode_t_v2">"L\'aspecte dels mapes vectorials pot canviar entre dia (clar) i nit (fosc). Els colors de nit són més segurs per la conducció nocturna.
+\n\nPodeu assignar un criteri pel canvi de dia/nit a «Menú» -&gt; «Configuració del mapa» -&gt;«Mapa dia/nit».
 \n\nLes opcions son:
 \n\t «Alba/Ocàs» - mode automàtic, controlat per la posició del sol (predeterminat)
 \n\t «Dia» - sempre usa mode de dia
 \n\t «Nit» - sempre usa mode de nit
-\n\t «Sensor de llum» - l\'aspecte del mapa es controlat pel sensor de llum del dispositiu (només si disposa d\'aquest sensor)
-	</string>
+\n\t «Sensor de llum» - l\'aspecte del mapa es controlat pel sensor de llum del dispositiu (només si disposa d\'aquest sensor) "</string>
 	<string name="tip_osm_improve_t">L\'OsmAnd usa mapes basats en dades de l\'Openstreetmap.org (OSM) i el podeu usar directament per millorar la qualitat de les dades OSM. Podeu crear i publicar nous PDI o reportar errors de l\'OSM amb només uns quants clics.
 \n\nPer a això heu de activar el connector «Edició d\'OSM» mitjançant «Preferències» → «Connectors» i llavors proporcionar la vostra informació de registre de l\'OSM a «Preferències» → «Edició d\'OSM».
 \n\nPer afegir un nou PDI useu l\'opció «Crea un PDI» en el menú contextual del mapa «Usa la ubicació». Introduïu la informació sobre el nou PDI al diàleg de «Crea PDI» i finalment publiqueu-lo.
@@ -1154,11 +1152,10 @@
 \n\t- Dades de PDI incloses en fitxer .obf (tots els índexs de baixada després de 01/10/11)
 \n\t- Correcions en els missatges de veu (posició GPS, omissió de la primer comanda)
 \n\t- Petites millores "</string>
-	<string name="tip_favorites_t">Els punts usats de forma freqüent els podeu desar com a Preferits, com s\'indica:
-\n\nEn el menú de context «Usa posició» per qualsevol punt, seleccioneu l\'opció «Afegeix als preferits» i introduïu un nom per identificar-lo. 
+	<string name="tip_favorites_t">"Els punts usats de forma freqüent els podeu desar com a Preferits, com s\'indica:
+\n\nEn el menú de context «Usa posició» per qualsevol punt, seleccioneu l\'opció «Afegeix als preferits» i introduïu un nom per identificar-lo.
 \n\nDesprés de desar un preferit, aquest és accessible mitjançant «Menú» -&gt; «Els meus llocs». Mantenint pressionat un determinat preferit en el menú «Preferits» es dona accés a opcions per establir-ho com a destinació, editar-lo o suprimir-lo.
-\n\nPer mostrar tots els punts preferits directament al mapa, a la pantalla mapa, activeu la capa «Preferits» que es troba a «Menú» → «Capes del mapa».
-	</string>
+\n\nPer mostrar tots els punts preferits directament al mapa, a la pantalla mapa, activeu la capa «Preferits» que es troba a «Menú» → «Configuració del mapa». "</string>
 	<string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
 	
 	<string name="loading_builds_failed">L\'obtenció del llistat de construccions disponibles de l\'OsmAnd ha fallat</string>
@@ -1397,12 +1394,11 @@
     <string name="copying_osmand_files">S\'estan copiant fitxers de l\' OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Calcula una ruta fora de línia amb l\'OsmAnd</string>
     <string name="app_mode_truck">Camió</string>
-    <string name="tip_map_styles_t">OsmAnd pot representar els mapes vectorials en diferents estils per tal d\'adaptar-se millor al que necessiteu:
-		\n\nA més de l\'estil normal d\'ús general, podeu configurar a \'Menu\' → \'Configura l\'aparença\' → \'Estil de renderització\' i seleccionar p.ex.
-		\n\t* L\'estil \'Turisme\', que visualitza els detalls més rellevants per viatjar i fer turisme, optimitzat per conductors professionals (carreteres més distingibles, amb contrast millorat), rutes ciclistes, suport al senderisme (escala SAC i marcat de camins).
-		\n\t* \'Carreteres molt contrastades\' mostra les carreteres en colors molt vius per quan hi ha molta llum ambiental.
-		\n\t* \'Hivern i esquí\' crea una visió d\'hivern nevat, i mostra les pistes i remuntadors globals (precisa baixar-se el mapa \'World ski\')
-	</string>
+    <string name="tip_map_styles_t">"OsmAnd pot representar els mapes vectorials en diferents estils per tal d\'adaptar-se millor al que necessiteu:
+\n\nA més de l\'estil normal d\'ús general, podeu configurar a \'Menu\' → \'Configuració del mapa\' → \'Estil de renderització\' i seleccionar p.ex.
+\n\t* L\'estil \'Turisme\', que visualitza els detalls més rellevants per viatjar i fer turisme, optimitzat per conductors professionals (carreteres més distingibles, amb contrast millorat), rutes ciclistes, suport al senderisme (escala SAC i marcat de camins).
+\n\t* \'Carreteres molt contrastades\' mostra les carreteres en colors molt vius per quan hi ha molta llum ambiental.
+\n\t* \'Hivern i esquí\' crea una visió d\'hivern nevat, i mostra les pistes i remuntadors globals (precisa baixar-se el mapa \'World ski\') "</string>
     <string name="routing_attr_prefer_motorway_name">Preferència per autopistes</string>
 	<string name="routing_attr_prefer_motorway_description">Es prioritza l\'ús d\'autopistes</string>
 	<string name="routing_attr_short_way_name">Camí més curt</string>
