@@ -719,14 +719,6 @@ public class MapActivityActions implements DialogProvider {
 		}
 		
 		// 5-9. Default actions (Layers, Configure Map screen, Settings, Search, Favorites) 
-		optionsMenuHelper.item(R.string.configure_map).icons(R.drawable.ic_action_layers_dark, R.drawable.ic_action_layers_light)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						prepareConfigureMap();
-						return false;
-					}
-				}).reg();
 		optionsMenuHelper.item(R.string.search_button)
 				.icons(R.drawable.ic_action_search_dark, R.drawable.ic_action_search_light)
 				.listen(new OnContextMenuClick() {
@@ -762,6 +754,15 @@ public class MapActivityActions implements DialogProvider {
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 						return true;
+					}
+				}).reg();
+
+		optionsMenuHelper.item(R.string.configure_map).icons(R.drawable.ic_action_layers_dark, R.drawable.ic_action_layers_light)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						prepareConfigureMap();
+						return false;
 					}
 				}).reg();
 
