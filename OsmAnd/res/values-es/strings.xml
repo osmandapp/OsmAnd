@@ -92,7 +92,7 @@
   
   <string name="switch_to_raster_map_to_see">No hay ningún mapa vectorial sin conexión presente para esta ubicación. Puede descargar uno en Opciones (Gestionar mapas), o cambiar a mapa con conexión (activar agregado de mapas con conexión para esto).</string>
   <string name="binary_map_download_success">"Descarga correcta.
-\n\t\n\tPara usarla, activa \'Menú\' → \'Capas de mapas\' → \'Fuente de mapas…\' → \'Mapas vectoriales descargados\'. "</string>
+\n\t\n\tPara usarla, activa \'Menú\' → \'Configurar mapa\' → \'Fuente de mapas…\' → \'Mapas vectoriales descargados\'. "</string>
   <string name="tip_day_night_mode">Modo Día/Noche</string>
   
   <string name="tip_osm_improve">Mejora de los datos OSM</string>
@@ -224,7 +224,8 @@
   <string name="gpx_option_reverse_route">Invertir la dirección GPX</string>
   <string name="gpx_option_destination_point">Usar destino actual</string>
   <string name="gpx_option_from_start_point">Pasar a lo largo de la traza completa</string>
-  <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta localización. \n\t\n\tPara usarlo activa \'Menú\'→\'Capas de mapa\'→\'Fuente del mapa…\'→\'Mapas vectoriales descargados\'.</string>
+  <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta localización.
+\n\t\n\tPara usarlo activa \'Menú\'→\'Configurar mapa\'→\'Fuente del mapa…\'→\'Mapas vectoriales descargados\'.</string>
   <string name="choose_audio_stream">Salida de indicaciones de voz</string>
   <string name="choose_audio_stream_descr">Elige el canal para reproducir indicaciones por voz (dependiente del sistema)</string>
   <string name="voice_stream_voice_call">Audio de llamada de voz</string>
@@ -262,11 +263,10 @@
 		\n\nLuego seleccione el modo de compartir la localización. Las opciones son: Correo electrónico, SMS(texto), o copiar las coordenadas de la localización al portapapeles.
 	</string>
   <string name="tip_favorites">Puntos favoritos</string>
-  <string name="tip_favorites_t">Los puntos usados frecuentemente se pueden guardar como favoritos. de la siguiente forma:
-		\n\nEn el menú contextual \'Usar localización…\', selecciona la opción \'Añadir a favoritos\' y escribe un nombre.
-		\n\nDespués de guardar un Favorito, es accessible vía \'Menú\'→\'Mis Sitios\'. Una pulsación sobre un favorito en el menú \'Favoritos\' proporciona opciones para navegar al mismo, editarlo o borrarlo.
-		\n\nPara mostrar todos los puntos favoritos directamente en el mapa, active la capa \'Favoritos\' en \'Menú\'→\'Capas de mapa\'.
-	</string>
+  <string name="tip_favorites_t">"Los puntos usados frecuentemente se pueden guardar como favoritos. de la siguiente forma:
+\n\nEn el menú contextual \'Usar localización…\', selecciona la opción \'Añadir a favoritos\' y escribe un nombre.
+\n\nDespués de guardar un Favorito, es accessible vía \'Menú\'→\'Mis Sitios\'. Una pulsación sobre un favorito en el menú \'Favoritos\' proporciona opciones para navegar al mismo, editarlo o borrarlo.
+\n\nPara mostrar todos los puntos favoritos directamente en el mapa, active la capa \'Favoritos\' en \'Menú\'→\'Configurar mapa\'. "</string>
   <string name="create_poi_link_to_osm_doc">" <u>OSM en línea</u> clasificación de mapa con imágenes"</string>
   <string name="error_doing_search">Ocurrió un error en la búsqueda</string>
   <string name="search_offline_geo_error">No se pudo analizar el filtro \'%s\'</string>
@@ -983,12 +983,11 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
 		\n\t* \'En la dirección de movimiento\': el mapa está continuamente alineado con tu dirección
 		\n\t* \'A la brújula\': el mapa se alinea con la lectura de la brújula del dispositivo
 	</string>
-<string name="tip_map_switch_t_v2">La fuente del mapa y las capas mostradas se cambian vía \'Menú\'→\'Capas de mapa\'.
-		\n\nEn \'Fuente del mapa…\' puedes elegir usar los mapas vectoriales descargados (por defecto, y también necesarios para navegación sin conexión), fuentes predefinidas de teselas (online o guardados localmente) (para ello activa el extra \'Mapas Online\' bajo \'Opciones\'→\'Gestor de Extras\'), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en un PC.
-		\n\nOsmAnd también soporta fuentes personalizadas.
-	</string>
+<string name="tip_map_switch_t_v2">"La fuente del mapa y las capas mostradas se cambian vía \'Menú\'→\'Configurar mapa\'.
+\n\nEn \'Fuente del mapa…\' puedes elegir usar los mapas vectoriales descargados (por defecto, y también necesarios para navegación sin conexión), fuentes predefinidas de teselas (online o guardados localmente) (para ello activa el extra \'Mapas Online\' bajo \'Opciones\'→\'Gestor de Extras\'), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en un PC.
+\n\nOsmAnd también soporta fuentes personalizadas. "</string>
 <string name="tip_day_night_mode_t_v2">"La apariencia del mapa puede cambiarse para los mapas vectoriales entre día (más brillante) y noche (más oscuro). Los colores del modo noche son más seguros y cómodos para la conducción nocturna.
-\n\nPuedes establecer una política para la conmutación día/noche en \'Menú\'→ \'Configura pantalla\'→ \'Mapa día/noche\'.
+\n\nPuedes establecer una política para la conmutación día/noche en \'Menú\'→ \'Configurar mapa\'→ \'Mapa día/noche\'.
 \n\nLas opciones son:
 \n\t* \'Alba/Ocaso\': modo automático, controlado por la posición del sol (por defecto)
 \n\t* \'Día\': utiliza siempre el modo día
@@ -1402,7 +1401,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="edit_tilesource_choose_existing">Elegir existente…</string>
     <string name="tip_map_styles">Estilos de Mapa</string>
 	<string name="tip_map_styles_t">"OsmAnd permite visualizar los mapas vectoriales sin conexión en diferentes estilos de mapas para adaptarlos a tus necesidades:
-\n\nAdemás del estilo de mapa equilibrado «predeterminado», en \'Menú\' → \'Configurar pantalla\' →  \'Estilo de mapa\' puedes seleccionar por ejemplo
+\n\nAdemás del estilo de mapa equilibrado «predeterminado», en \'Menú\' → \'Configurar mapa\' →  \'Estilo de mapa\' puedes seleccionar por ejemplo
 \n\t* El estilo \'Vista de tour\', que contiene información detallada y adecuada para viajes y giras, incluyendo optimización para profesionales de la conducción (mayor contraste, carreteras distinguibles), opciones para ir de senderismo Alpino (escala SAC), rutas ciclistas, soporte para símbolos de senderismo, etc.
 \n\t* \'Carreteras de alto contraste\' muestra las carreteras en colores muy acentuados para situaciones con brillante iluminación ambiental
 \n\t* \'Invierno y esquí\' crea una vista del paisaje del invierno (nevado), y muestra pistas y remontes (en relación con la descarga del mapa \'Mundo de esquí\') "</string>
