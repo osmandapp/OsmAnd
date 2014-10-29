@@ -1011,7 +1011,7 @@
 \nTramonto: %2$s</string>
 <string name="day_night_info">Informazioni giorno/notte</string>
 <string name="map_widget_day_night">Mappa giorno/notte</string>
-<string name="map_widget_vector_attributes">Attributi del disegno:</string>
+<string name="map_widget_vector_attributes">Attributi del disegno</string>
 <string name="map_widget_renderer">Stile della mappa</string>
 
 
@@ -1625,7 +1625,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="app_mode_motorcycle">Motocicletta</string>
     <string name="app_mode_boat">Barca</string>
     <string name="app_mode_aircraft">Aereo</string>
-    <string name="map_widget_map_rendering">Disegno della mappa:</string>
+    <string name="map_widget_map_rendering">Disegno della mappa</string>
     <string name="app_modes_choose_descr">Scegli fra le modalità d\'uso disponibili nell\'applicazione</string>
     <string name="app_modes_choose">Profili applicazione</string>
 	<string name="amenity_type_seamark">Mare</string>
@@ -2016,4 +2016,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="map_widget_top">Barra di stato</string>
 	<string name="layers_category_show">Mostra</string>
 	<string name="search_radius_proximity">Nei pressi di</string>
+    <string name="tip_recent_changes_1_9_t">"Novità nella 1.9: * Aggiornato gli stili delle mappe con il disegno del tipo di superficie, lo strato trasporto pubblico e i simboli escursionistici * Ricerca dei PDI lungo il percorso * Indicazione della strada come impercorribile per la sessione * Download e aggiornamento delle mappe più facilmente * Notifiche visive e audio all\'approssimarsi a un punto intermedio * Stampa dell\'itinerario e delle indicazioni  * Supporto alle corsie di svolta * Supporta Android Wear * Molte modifiche della IU * Zoom mappa e Dimensione del Testo separati * Notifiche audio speciali nel caso si sia fuori rotta * Funzionalità login OsMo  * Correzione incompatibilità versione OsMo "</string>
     </resources>
