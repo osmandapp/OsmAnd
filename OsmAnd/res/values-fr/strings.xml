@@ -186,14 +186,14 @@
   
   
   <string name="local_index_installed">Version du</string>
-  <string name="local_index_items_backuped">%1$d sur %2$d éléments sauvegardés.</string>
+  <string name="local_index_items_backuped">%1$d sur %2$d élément(s) désactivé(s).</string>
   <string name="local_index_items_deleted">%1$d sur %2$d éléments supprimés.</string>
   <string name="local_index_items_restored">%1$d sur %2$d éléments restaurés.</string>
   <string name="local_index_no_items_to_do">Pas d\'éléments à %1$s</string>
   <string name="local_index_action_do">Vous allez %1$s %2$s éléments. Continuer ?</string>
   <string name="local_index_descr_title">Gérer les données hors-ligne</string>
   <string name="local_index_mi_restore">Restaurer</string>
-  <string name="local_index_mi_backup">Sauvegarder</string>
+  <string name="local_index_mi_backup">Désactiver</string>
   <string name="local_index_mi_delete">Supprimer</string>
   <string name="local_index_mi_reload">Recharger depuis la carte SD</string>
   <string name="local_index_download">Télécharger</string>
@@ -203,7 +203,7 @@
   <string name="local_index_transport_data">Données des transports</string>
   <string name="local_index_map_data">Cartes</string>
   
-  <string name="local_indexes_cat_backup">Sauvegarde</string>
+  <string name="local_indexes_cat_backup">Désactivé</string>
   <string name="local_indexes_cat_tts">Voix de synthèse (TTS)</string>
   <string name="local_indexes_cat_voice">Voix enregistrées</string>
   <string name="local_indexes_cat_gpx">Traces GPX</string>
@@ -707,7 +707,7 @@
   <string name="default_buttons_yes">Oui</string>
   <string name="default_buttons_cancel">Annuler</string>
   <string name="default_buttons_apply">Appliquer</string>
-  <string name="default_buttons_add">Ajouter</string>
+  <string name="default_buttons_add">Enregistrer</string>
   <string name="default_buttons_no">Non</string>
   <string name="add_favorite_dialog_top_text">Nom du favori</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoris</string>
@@ -753,7 +753,7 @@
   <string name="default_buttons_reset">Effacer</string>
   <string name="filter_current_poiButton">Filtre</string>
   <string name="edit_filter_delete_menu_item">Supprimer</string>
-  <string name="edit_filter_save_as_menu_item">Enregistrer Sous</string>
+  <string name="edit_filter_save_as_menu_item">Enregistrer sous</string>
   <string name="edit_filter_delete_dialog_title">Voulez-vous vraiment supprimer le filtre sélectionné ?</string>
   <string name="edit_filter_delete_message">Le filtre {0} a été effacé</string>
   <string name="edit_filter_create_message">Le filtre {0} a été créé</string>
@@ -781,7 +781,7 @@
   <string name="osmand_extra_settings_description">Ce greffon permet de gérer des paramètres de configuration avancés et propres à certains appareils.</string>
   <string name="osmand_development_plugin_description">Ce greffon permet la gestion de paramètres de développement et de débogage tels que la navigation animée ou l\'affichage des temps de rendu.</string>
   <string name="plugins_screen">Gestionnaire des greffons</string>
-  <string name="select_plugin_to_activate">Toucher un greffon pour l\'activer ou le désactiver (le redémarrage d\'OsmAnd peut être nécessaire)</string>
+  <string name="select_plugin_to_activate">Touchez un greffon pour l\'activer ou le désactiver (le redémarrage d\'OsmAnd peut être nécessaire).</string>
   <string name="prefs_plugins_descr">Les greffons fournissent à l\'application des paramètres avancés et des fonctionnalités supplémentaires.</string>
   <string name="prefs_plugins">Gestionnaire de greffons</string>
   <string name="tip_recent_changes_0_8_0_t">Changements en 0.8.0 :
@@ -1169,7 +1169,7 @@
     <string name="precise_routing_mode">Routage précis (alpha)</string>
     <string name="precise_routing_mode_descr">Activer pour calculer des itinéraires précis et sans surprises. Actuellement fonctionne sur des distances limitées et reste lent.</string>
     <string name="local_indexes_cat_av">Données audio/vidéo</string>
-    <string name="dist_control_start">Début</string>
+    <string name="dist_control_start">Mesurer</string>
     <string name="support_new_features_descr">Effectuer un don pour voir de nouvelles fonctionnalités implémentées dans l\'application</string>
 	<string name="download_hillshade_item">Ombrage du relief</string>
     <string name="download_hillshade_maps">Cartes d\'ombrage du relief</string>
@@ -1306,28 +1306,28 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_kalman_filter_compass_descr">Utiliser un filtre de Kalman pour éviter les interférences de la boussole</string>
     <string name="use_kalman_filter_compass">Utiliser un filtre de Kalman</string>
     <string name="access_mark_final_location_first">Mode d\'accessibilité : veuillez d\'abord définir une destination</string> 
-    <string name="distance_measurement_start_editing">Commencer à modifier</string>
-    <string name="distance_measurement_finish_editing">Finir de modifier</string>
-    <string name="distance_measurement_save_gpx">Sauvegarder comme GPX</string>
-    <string name="distance_measurement_load_gpx">Ouvrir un fichier GPX existant</string>
+    <string name="distance_measurement_start_editing">Mesurer sur la carte</string>
+    <string name="distance_measurement_finish_editing">Terminer la mesure</string>
+    <string name="distance_measurement_save_gpx">Enregistrer comme GPX...</string>
+    <string name="distance_measurement_load_gpx">Ouvrir un fichier GPX existant...</string>
     <string name="wait_current_task_finished">Veuillez attendre jusqu\'à ce que la tâche actuelle soit terminée</string>
     <string name="plugin_distance_point_time">temps</string>
     <string name="plugin_distance_point_hdop">précision</string>
     <string name="plugin_distance_point_speed">vitesse</string>
     <string name="plugin_distance_point_ele">altitude</string>
-    <string name="gpx_file_name">nom du fichier GPX</string>
-    <string name="gpx_saved_sucessfully">La sauvegarde du fichier GPX {0} a réussie.</string>
-    <string name="osmand_distance_planning_plugin_description">Ce greffon permet de créer un chemin (ou d\'ouvrir et modifier un fichier GPX existant) pour mesurer la distance entre des points et de le sauvegarder au format GPX. Peut être utilisé pour préparer un itinéraire GPX.</string>
+    <string name="gpx_file_name">Nom du fichier GPX</string>
+    <string name="gpx_saved_sucessfully">L\'enregistrement du fichier GPX {0} a réussi.</string>
+    <string name="osmand_distance_planning_plugin_description">Ce greffon permet de créer un chemin (ou d\'ouvrir et modifier un fichier GPX existant) pour mesurer la distance entre des points et de l\'enregistrer au format GPX. Peut être utilisé pour préparer un itinéraire GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Mesure de distance et outil de planification</string>
-    <string name="default_buttons_do_not_show_again">Ne plus montrer</string>
+    <string name="default_buttons_do_not_show_again">Ne plus afficher</string>
     <string name="local_osm_changes_backup_successful">Fichier de modifications OSM %1$s généré avec succès</string>
     <string name="local_osm_changes_backup_failed">Échec de la sauvegarde des modifications OSM</string>
     <string name="local_osm_changes_backup">Sauvegarder comme une modification OSM</string>
-    <string name="delete_point">Supprimer le point</string>
+    <string name="delete_point">Supprimer le point de mesure</string>
     <string name="plugin_distance_point">Point</string>
-    <string name="use_distance_measurement_help">" * Appui bref pour ajouter un point.\n * Appui long sur la carte pour supprimer le point précédent.\n * Appui long sur un point pour voir et attacher une description.\n * Clic sur le gadget de mesure pour voir plus d\'actions."</string>
-    <string name="distance_measurement_finish_subtrack">Commencer une nouvelle sous-trace</string>
-    <string name="distance_measurement_clear_route">Supprimer tous les points</string>
+    <string name="use_distance_measurement_help">* Appui bref pour ajouter un point\n* Appui long sur un point pour afficher sa description puis nouvel appui dans la bulle d\'information pour le supprimer\n* Appui sur le gadget de mesure pour plus d\'actions.</string>
+    <string name="distance_measurement_finish_subtrack">Ajouter une nouvelle mesure</string>
+    <string name="distance_measurement_clear_route">Supprimer la mesure</string>
     <string name="downloading_file_new">Téléchargement en cours…</string>
 	<string name="tip_recent_changes_1_4_t">"e \tChangements dans la version 1.4 : ↵\n→* Placer les points de passage dans un ordre optimal afin de tous les visiter  (Démarcheurs, porte-à-porte) ↵\n→* Recherche des rues par nom (dans le voisinage) ↵\n→* Greffon de planification (charger/modifier/sauvegarder les traces GPX) ↵\n→* Nouvel écran de téléchargement(téléchargement en arrière-plan) ↵\n→* Support des sous-dossiers GPX (organiser vos traces GPX) ↵\n→* Suppression des fichiers SRTM ↵\n→* Support des Notes OSM  
 " 
@@ -1637,8 +1637,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_activity">Suivi OpenStreetMap</string>
     <string name="osmo_control">Accès rapide OsMo</string>
     <string name="local_index_mi_export">Exporter</string>
-	<string name="import_file_favourites">Sauvegarder comme fichier GPX ou importer dans les favoris ?</string>
-	<string name="import_save">Sauvegarder</string>
+	<string name="import_file_favourites">Enregistrer comme fichier GPX ou transformer en favoris ?</string>
+	<string name="import_save">Enregistrer</string>
 	<string name="color_red">Rouge</string>
 	<string name="color_pink">Rose</string>
 	<string name="color_orange">Orange</string>
