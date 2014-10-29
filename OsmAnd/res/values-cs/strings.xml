@@ -1761,4 +1761,5 @@ s často kladenými otázkami.</string>
     <string name="rendering_category_others">Ostatní vlastnosti mapy</string>
     <string name="map_widget_appearance_rem">Zbývající prvky</string>
     <string name="search_radius_proximity">V blízkosti</string>
+    <string name="rendering_category_routes">Trasy</string>
     </resources>
