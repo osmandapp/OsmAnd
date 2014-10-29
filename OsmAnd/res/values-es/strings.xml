@@ -1896,7 +1896,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="logged_as">Conectado como %1$s</string>
 	<string name="rendering_category_details">Detalles</string>
     <string name="rendering_category_transport">Transporte</string>
-    <string name="rendering_category_others">Otros atributos de mapa</string>
+    <string name="rendering_category_others">Otros atributos del mapa</string>
     <string name="map_widget_appearance_rem">Elementos restantes</string>
     <string name="map_widget_top">Barra de estado</string>
 	<string name="map_widget_right">Panel derecho</string>
