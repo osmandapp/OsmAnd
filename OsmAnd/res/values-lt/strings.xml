@@ -1100,10 +1100,9 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 		- pasirenkamas žemėlapio pasukimas pagal kompasą arba judėjimo kryptį
 		- pasirenkamas eismo juostų keitimo nurodymų įjungimas, greičių apribojimo rodymas, įrašyti arba sintetiniai (TTS) balsai
 	</string>
-<string name="tip_map_switch_t_v2">Žemėlapių šaltiniai ir rodomi sluoksniai keičiami per \'Meniu\' → \'Žemėlapio sluoksniai\'.
-		\n\nPunkte \'Žemėlapio šaltinis…\' galite pasirinkti parsiųstus vektorinius žemėlapius, nustatytus (interneto ar laikinai išsagotų) žemėlapių šaltinius (aktyvuokite \'Interneto žemėlapiai\' įskiepį per \'Nustatymai\' → \'Įskiepiai\'), arba savarankiškai sukurtus žemėlapius, pvz. naudojant OsmAndMapCreator programą kompiuteriui.
-		\n\nOsmAnd taip pat gali naudoti ir kitokius šaltinius.
-	</string>
+<string name="tip_map_switch_t_v2">"Žemėlapių šaltiniai ir rodomi sluoksniai keičiami per \'Meniu\' → \'Konfigūruoti žemėlapį\'.
+\n\nPunkte \'Žemėlapio šaltinis…\' galite pasirinkti parsiųstus vektorinius žemėlapius, nustatytus (interneto ar laikinai išsagotų) žemėlapių šaltinius (aktyvuokite \'Interneto žemėlapiai\' įskiepį per \'Nustatymai\' → \'Įskiepiai\'), arba savarankiškai sukurtus žemėlapius, pvz. naudojant OsmAndMapCreator programą kompiuteriui.
+\n\nOsmAnd taip pat gali naudoti ir kitokius šaltinius. "</string>
 <string name="osmand_parking_event">Pasiimti automobilį iš stovėjimo vietos</string>
   <string name="tip_recent_changes_0_8_4_t">Pakeitimai 0.8.4 versijoje:
 	\n\t* Keli klaudų ištaisymai
