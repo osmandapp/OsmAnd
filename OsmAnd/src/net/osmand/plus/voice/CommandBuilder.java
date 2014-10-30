@@ -185,21 +185,33 @@ public class CommandBuilder {
 	public CommandBuilder arrivedAtDestination(String name){
 		return alt(prepareStruct(C_REACHED_DESTINATION, name), prepareStruct(C_REACHED_DESTINATION));
 	}
-	
-	public CommandBuilder arrivedAtIntermediatePoint(String name) {
-		return alt(prepareStruct(C_REACHED_INTERMEDIATE, name), prepareStruct(C_REACHED_INTERMEDIATE));
-	}
-	
+
 	public CommandBuilder andArriveAtIntermediatePoint(String name){
 		return alt(prepareStruct(C_AND_ARRIVE_INTERMEDIATE, name), prepareStruct(C_AND_ARRIVE_INTERMEDIATE));
 	}
-	
+
+	public CommandBuilder arrivedAtIntermediatePoint(String name) {
+		return alt(prepareStruct(C_REACHED_INTERMEDIATE, name), prepareStruct(C_REACHED_INTERMEDIATE));
+	}
+
+	public CommandBuilder andArriveAtWayPoint(String name){
+		return addCommand(C_AND_ARRIVE_WAYPOINT, name);
+	}
+
 	public CommandBuilder arrivedAtWayPoint(String name) {
 		return addCommand(C_REACHED_WAYPOINT, name);
 	}
 
+	public CommandBuilder andArriveAtFavorite(String name) {
+		return addCommand(C_AND_ARRIVE_FAVORITE, name);
+	}
+
 	public CommandBuilder arrivedAtFavorite(String name) {
 		return addCommand(C_REACHED_FAVORITE, name);
+	}
+
+	public CommandBuilder andArriveAtPoiWaypoint(String name) {
+		return addCommand(C_AND_ARRIVE_POI_WAYPOINT, name);
 	}
 
 	public CommandBuilder arrivedAtPoi(String name) {
@@ -241,17 +253,5 @@ public class CommandBuilder {
 	protected List<String> execute(){
 		alreadyExecuted = true;
 		return this.commandPlayer.execute(listStruct);
-	}
-
-	public CommandBuilder andArriveAtWayPoint(String name){
-		return addCommand(C_AND_ARRIVE_WAYPOINT, name);
-	}
-
-	public CommandBuilder andArriveAtPoiWaypoint(String name) {
-		return addCommand(C_AND_ARRIVE_POI_WAYPOINT, name);
-	}
-
-	public CommandBuilder andArriveAtFavorite(String name) {
-		return addCommand(C_AND_ARRIVE_FAVORITE, name);
 	}
 }
