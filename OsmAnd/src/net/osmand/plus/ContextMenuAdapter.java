@@ -1,10 +1,13 @@
 package net.osmand.plus;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.widget.*;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import android.app.Activity;
@@ -15,20 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 
 public class ContextMenuAdapter {
-
-	public void clearAll() {
-		items.clear();
-		isCategory.clear();
-		itemNames.clear();
-		checkListeners.clear();
-		selectedList.clear();
-		layoutIds.clear();
-		iconList.clear();
-		iconListLight.clear();
-		itemDescription.clear();
-	}
 
 	public interface OnContextMenuClick {
 		//boolean return type needed to desribe if drawer needed to be close or not
@@ -50,6 +42,13 @@ public class ContextMenuAdapter {
 			}
 		}
 	}
+
+	public class BooleanResult {
+		private boolean result = false;
+
+		public void setResult(boolean value) { result = value; }
+		public boolean getResult() { return result; }
+	}
 	
 	private final Context ctx;
 	private View anchor;
@@ -65,7 +64,15 @@ public class ContextMenuAdapter {
 	final TIntArrayList iconList = new TIntArrayList();
 	final TIntArrayList iconListLight = new TIntArrayList();
 	final ArrayList<String> itemDescription = new ArrayList<String>();
-	private View.OnClickListener changeAppModeListener = null;
+	private List<ApplicationMode> visibleModes = new ArrayList<ApplicationMode>();
+	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
+	//neded to detect whether user opened all modes or not
+	private BooleanResult allModes = new BooleanResult();
+
+	public ContextMenuAdapter(Context ctx, boolean allModes) {
+		this.ctx = ctx;
+		this.allModes.setResult(allModes);
+	}
 
 	public ContextMenuAdapter(Context ctx) {
 		this.ctx = ctx;
@@ -264,7 +271,7 @@ public class ContextMenuAdapter {
 	
 	
 
-	public void setChangeAppModeListener(View.OnClickListener changeAppModeListener) {
+	public void setChangeAppModeListener(ConfigureMapMenu.OnClickListener changeAppModeListener) {
 		this.changeAppModeListener = changeAppModeListener;
 	}
 	
@@ -280,15 +287,15 @@ public class ContextMenuAdapter {
 				Integer lid = getLayoutId(position);
 				if (lid == R.layout.mode_toggles){
 					final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-					return AppModeDialog.prepareAppModeView(activity, selected, true, null, true, new View.OnClickListener() {
+					return AppModeDialog.prepareAppModeDrawerView(activity, visibleModes, selected, allModes, new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							if(selected.size() > 0) {
-								((OsmandApplication)activity.getApplication()).getSettings().APPLICATION_MODE.set(selected.iterator().next());
+							if (selected.size() > 0) {
+								((OsmandApplication) activity.getApplication()).getSettings().APPLICATION_MODE.set(selected.iterator().next());
 								notifyDataSetChanged();
 							}
-							if(changeAppModeListener != null) {
-								changeAppModeListener.onClick(view);
+							if (changeAppModeListener != null) {
+								changeAppModeListener.onClick(allModes.getResult());
 							}
 						}
 					});
