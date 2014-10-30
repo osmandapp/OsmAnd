@@ -596,7 +596,9 @@ public class MapActivityActions implements DialogProvider {
 		mDrawerList.setAdapter(listAdapter);
 		refreshDrawer = false;
 		mDrawerList.setDivider(mapActivity.getResources().getDrawable(R.drawable.drawer_divider));
-		mDrawerList.setBackgroundColor(cm.getBackgroundColor(mapActivity, getMyApplication().getSettings().isLightContentMenu()));
+		final int colorHint = cm.getBackgroundColor(mapActivity, getMyApplication().getSettings().isLightContentMenu());
+		mDrawerList.setBackgroundColor(colorHint);
+		mDrawerList.setCacheColorHint(colorHint);
 		mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -887,9 +889,11 @@ public class MapActivityActions implements DialogProvider {
 		mDrawerList.setAdapter(listAdapter);
 		refreshDrawer = false;
 		mDrawerList.setDivider(mapActivity.getResources().getDrawable(R.drawable.drawer_divider));
-		mDrawerList.setBackgroundColor(getMyApplication().getSettings().isLightContentMenu() ? mapActivity
+		final int color = getMyApplication().getSettings().isLightContentMenu() ? mapActivity
 				.getResources().getColor(R.color.color_white) : mapActivity.getResources().getColor(
-				R.color.dark_drawer_bg_color));
+				R.color.dark_drawer_bg_color);
+		mDrawerList.setBackgroundColor(color);
+		mDrawerList.setCacheColorHint(color);
 		mDrawerList.setOnItemClickListener(waypointDialogHelper.getDrawerItemClickListener(mapActivity, running,
 				listAdapter, null));
 	}

@@ -149,27 +149,20 @@ public class AppModeDialog {
 	}
 
 	private static void getVisibleModes(List<ApplicationMode> values, Set<ApplicationMode> selected, List<ApplicationMode> visible) {
-		if (visible.size() == 3) {
-			for (ApplicationMode mode : selected){
-				if (visible.contains(mode)){
-					return;
-				}
-			}
+		if (visible.size() <= 4 && (selected.isEmpty() || visible.contains(selected.iterator().next()))) {
+			return;
 		}
 		visible.clear();
-		visible.add(ApplicationMode.DEFAULT);
-		for (ApplicationMode mode : selected){
-			if (mode != ApplicationMode.DEFAULT) {
-				visible.add(mode);
-				break;
-			}
+		visible.addAll(selected);
+		if(!selected.contains(ApplicationMode.DEFAULT)) {
+			visible.add(0, ApplicationMode.DEFAULT);
 		}
 		for(ApplicationMode mode : values) {
+			if(visible.size() >= 3) {
+				break;
+			}
 			if (!visible.contains(mode)) {
 				visible.add(mode);
-				if (visible.size() == 3){
-					break;
-				}
 			}
 		}
 	}
