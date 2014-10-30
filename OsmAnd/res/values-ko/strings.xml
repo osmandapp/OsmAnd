@@ -342,7 +342,8 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="gpx_option_destination_point">현재 목적지 사용</string>
 	<string name="gpx_option_from_start_point">전체 경로를 따라 이동</string>
 
-	<string name="switch_to_vector_map_to_see">이 위치에 대해 존재하는 오프라인 벡터 맵. \n\t\n\t사용하려면 \'메뉴\'-&gt;\'지도레이어\'-&gt;\'맵 소스…\'-&gt;\'오프라인 벡터 맵\' 을 활성화합니다.</string>
+	<string name="switch_to_vector_map_to_see">이 위치에 대해 존재하는 오프라인 벡터 맵.
+\n\t\n\t사용하려면 [메뉴-&gt;계층 지도-&gt;맵 소스…-&gt;\'오프라인 벡터 맵] 을 활성화합니다.</string>
 	<string name="choose_audio_stream">음성 안내 출력</string>
 	<string name="choose_audio_stream_descr">음성 안내를 재생할 채널을 선택합니다 (시스템 의존)</string>
 	<string name="voice_stream_voice_call">음성 호출 오디오</string>
@@ -1606,8 +1607,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="favourites_remove_dialog_msg">즐겨찾기 포인트를 삭제 하시겠습니까 \'%s\'?</string>
 	<string name="av_camera_focus_hiperfocal">지나친 초점 포커스</string>
 	<string name="use_distance_measurement_help">* Tap to mark a point.\n * Press and hold on the map to delete previous point.\n 이전 포인트를 지우기 위해 지도에서 누르고 홀드하기 * Press and hold on point to view and attach description.\n 설명을 읽고 알리기 위해 포인트에서누르고 홀드하기 * Click on measurement widget to see more actions. 더 많은 액션을 보기 위해 측정위젯 클릭하기.</string>
-    <string name="tip_map_styles_t">
-	</string>
+    <string name="tip_map_styles_t">"OsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
+\n\nOther than the balanced \'default\' map style, you may in \'Menu\' → \'Configure map\' → \'Map Style\' select for example
+\n\t* The \'Touring view\' style, which contains the most detailed information feasable for traveling and touring, including optimization for professional drivers (higher contrast, distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
+\n\t* \'High contrast roads\' shows roads in very accentuated colors for bright ambient lighting situations
+\n\t* \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download) "</string>
     <string name="tip_recent_changes_1_2_t">"Fixes in 1.2.1:
 \n\t*Fix Geo Intent (Foursquare, c:geo)
 \n\t*Fix screen tremble during navigation
@@ -2100,7 +2104,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="speed_limit_exceed_message">음성 안내 경고를 받아야 할 속도 제한 초과 값을 선택합니다.</string>
 	<string name="osmo_device_not_found">장치를 찾을 수 없습니다</string>
     <string name="osmo_no_connection_msg">OsMo 서비스는 사용할 수 없습니다:\n- 연결 확인;\n- 설정 확인;\n- 체크 아웃 트위터: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">익명의 사용자는 아래 사항을 할 수 없습니다:\n- 그룹 생성;\n- 그룹 및 장치를 서버와 동기화;\n- 그룹 및 장치를 관리 (개인 사무실에서).</string>
+    <string name="anonymous_user_hint">익명의 사용자는 아래 사항을 수행할 수 없습니다:\n- 그룹 생성;\n- 그룹 및 장치를 서버와 동기화;\n- 그룹 및 장치를 관리 (개인 사무실에서).</string>
     <string name="anonymous_user">익명의 사용자</string>
     <string name="logged_as">%1$s 사용자로 로그인 됨</string>
 	<string name="rendering_category_details">세부 정보</string>
@@ -2109,7 +2113,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="map_widget_appearance_rem">나머지 요소</string>
     <string name="map_widget_top">상태 표시줄</string>
 	<string name="map_widget_right">오른쪽 패널</string>
-	<string name="map_widget_left">왼쪽된 패널</string>
+	<string name="map_widget_left">왼쪽 패널</string>
     <string name="layers_category_show">표시</string>
 	<string name="configure_map">지도 구성</string>
     <string name="search_radius_proximity">근접에서</string>
