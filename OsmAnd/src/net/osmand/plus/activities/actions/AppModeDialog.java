@@ -1,16 +1,10 @@
 package net.osmand.plus.activities.actions;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
+import net.osmand.plus.*;
 import android.app.Activity;
 import android.content.Context;
 import android.util.TypedValue;
@@ -38,28 +32,31 @@ public class AppModeDialog {
 	}
 
 	//special method for drawer menu
-	// needed because if there's more than 4 items  - the don't fit in drawer
-	public static View prepareAppModeDrawerView(Activity a, List<ApplicationMode> visible, final Set<ApplicationMode> selected,
-												final View.OnClickListener onClickListener, DialogInterface.OnClickListener onDialogOk) {
+	//needed because if there's more than 4 items  - the don't fit in drawer
+	public static View prepareAppModeDrawerView(Activity a, List<ApplicationMode> visible, final Set<ApplicationMode> selected, ContextMenuAdapter.BooleanResult allModes,
+												final View.OnClickListener onClickListener) {
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));
 		selected.add(settings.getApplicationMode());
 		if (values.size() > 4) {
-			return prepareAppModeDrawerView(a, visible, values, selected, onClickListener, onDialogOk);
+			return createDrawerView(a, visible, values, selected, allModes, onClickListener);
 		} else {
 			return prepareAppModeView(a, values, selected, null, true, onClickListener);
 		}
 	}
 
-	private static View prepareAppModeDrawerView(Activity a,final List<ApplicationMode> visible, final List<ApplicationMode> values,
-												 final Set<ApplicationMode> selected,
-												final View.OnClickListener onClickListener,
-												DialogInterface.OnClickListener onDialogOk){
-		getVisibleModes(values, selected, visible);
+	private static View createDrawerView(Activity a, final List<ApplicationMode> visible, final List<ApplicationMode> allModes,
+										 final Set<ApplicationMode> selected, ContextMenuAdapter.BooleanResult allModesVisible,
+										 final View.OnClickListener onClickListener) {
+		getVisibleModes(allModes, selected, visible);
 		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, null);
-		final ToggleButton[] buttons = createDrawerToggles(visible, values, a, ll, onDialogOk);
-		for (int i = 0; i < buttons.length - 1; i++) {
-			setButtonListener(visible, selected, onClickListener, buttons, i, true);
+		if (allModesVisible.getResult()) {
+			createAllToggleButtons(allModes, selected, onClickListener, a, ll);
+		} else {
+			final ToggleButton[] buttons = createDrawerToggles(visible, allModes, selected, a, ll, allModesVisible, onClickListener);
+			for (int i = 0; i < buttons.length - 1; i++) {
+				setButtonListener(visible, selected, onClickListener, buttons, i, true);
+			}
 		}
 		return ll;
 	}
@@ -93,11 +90,12 @@ public class AppModeDialog {
 		}
 	}
 
-	private static ToggleButton[] createDrawerToggles(final List<ApplicationMode> visible, final List<ApplicationMode> modes,
-													  final Activity a, LinearLayout ll, final DialogInterface.OnClickListener onDialogOk) {
+	private static ToggleButton[] createDrawerToggles(final List<ApplicationMode> visible,final List<ApplicationMode> modes,
+													  final Set<ApplicationMode> selected,
+													  final Activity a, final LinearLayout ll, final ContextMenuAdapter.BooleanResult allModes, final View.OnClickListener onClickListener) {
 		ToggleButton[] buttons = createToggles(visible, ll, a);
 		ToggleButton[] newButtons = new ToggleButton[buttons.length + 1];
-		for (int i = 0; i< buttons.length; i++){
+		for (int i = 0; i < buttons.length; i++) {
 			newButtons[i] = buttons[i];
 		}
 		ToggleButton tb = new ToggleButton(a);
@@ -113,40 +111,41 @@ public class AppModeDialog {
 		tb.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				CompoundButton compoundButton = (CompoundButton) view;
-				compoundButton.setChecked(false);
-				final AlertDialog.Builder builder = new AlertDialog.Builder(a);
-
-				final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>(visible);
-				builder.setTitle(R.string.profile_settings);
-				builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						visible.clear();
-						visible.addAll(selected);
-						if(onDialogOk != null){
-							onDialogOk.onClick(dialogInterface, i);
-						}
-					}
-				});
-				final AlertDialog dialog = builder.create();
-				View v = AppModeDialog.prepareAppModeView(a, modes, selected, null, false,
-						new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								if (selected.size() == 3){
-									dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(true);
-								} else {
-									dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false);
-								}
-							}
-						});
-				dialog.setView(v);
-				dialog.show();
+				allModes.setResult(true);
+				createAllToggleButtons(modes, selected, onClickListener, a, ll);
 			}
 		});
 		ll.addView(tb, lp);
 		return newButtons;
+	}
+
+	private static void createAllToggleButtons(List<ApplicationMode> allModes,
+											   Set<ApplicationMode> selected,
+											   View.OnClickListener onClickListener,
+											   Activity a, LinearLayout ll) {
+		if (ll.getChildCount() > 0) {
+			ll.removeAllViews();
+		}
+		ToggleButton[] buttons;
+		ll.setOrientation(LinearLayout.VERTICAL);
+		buttons = new ToggleButton[allModes.size()];
+		LinearLayout container = new LinearLayout(a);
+		container.setOrientation(LinearLayout.HORIZONTAL);
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		container.setLayoutParams(params);
+		ll.addView(container);
+		for (int i =0; i<allModes.size(); i++){
+			if (i != 0 && i % 4 == 0) {
+				container = new LinearLayout(a);
+				container.setOrientation(LinearLayout.HORIZONTAL);
+				container.setLayoutParams(params);
+				ll.addView(container);
+			}
+			buttons[i] = createToggle(a, container, allModes.get(i));
+		}
+		for (int i = 0; i < buttons.length; i++) {
+			setButtonListener(allModes, selected, onClickListener, buttons, i, true);
+		}
 	}
 
 	private static void getVisibleModes(List<ApplicationMode> values, Set<ApplicationMode> selected, List<ApplicationMode> visible) {
@@ -170,7 +169,7 @@ public class AppModeDialog {
 
 			if (positions.size() == 1) {
 				int pos = positions.get(0);
-				if (pos < values.size() - 2 && pos > 0){
+				if (pos < values.size() - 1 && pos > 0){
 					visible.add(values.get(pos - 1));
 					visible.add(values.get(pos));
 					visible.add(values.get(pos + 1));
@@ -269,19 +268,23 @@ public class AppModeDialog {
 		scroll.addView(ll);
 		
 		int k = 0;
-		int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, ctx.getResources().getDisplayMetrics());
-		int metrics = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 64, ctx.getResources().getDisplayMetrics());
 		for(ApplicationMode ma : values) {
-			ToggleButton tb = new ToggleButton(ctx);
-			buttons[k++] = tb;
-			tb.setTextOn("");
-			tb.setTextOff("");
-			tb.setContentDescription(ma.toHumanString(ctx));
-			tb.setButtonDrawable(ma.getIconId());
-			LayoutParams lp = new LinearLayout.LayoutParams(metrics, metrics);
-			lp.setMargins(left, 0, 0, 0);
-			ll.addView(tb, lp);
+			buttons[k++] = createToggle(ctx, ll, ma);
 		}
 		return buttons;
+	}
+
+	static private ToggleButton createToggle(Context ctx, LinearLayout layout, ApplicationMode mode){
+		int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, ctx.getResources().getDisplayMetrics());
+		int metrics = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 64, ctx.getResources().getDisplayMetrics());
+		ToggleButton tb = new ToggleButton(ctx);
+		tb.setTextOn("");
+		tb.setTextOff("");
+		tb.setContentDescription(mode.toHumanString(ctx));
+		tb.setButtonDrawable(mode.getIconId());
+		LayoutParams lp = new LinearLayout.LayoutParams(metrics, metrics);
+		lp.setMargins(left, 0, 0, 0);
+		layout.addView(tb, lp);
+		return tb;
 	}
 }

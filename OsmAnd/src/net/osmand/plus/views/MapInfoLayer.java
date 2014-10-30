@@ -12,6 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.mapwidgets.AppearanceWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
@@ -35,7 +36,6 @@ import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.MeasureSpec;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -303,10 +303,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 					}
 				}).reg();
 		cm.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
-		cm.setChangeAppModeListener(new OnClickListener() {
+		cm.setChangeAppModeListener(new ConfigureMapMenu.OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {
+			public void onClick(boolean allModes) {
 				map.getMapActions().prepareOptionsMenu(getViewConfigureMenuAdapter());				
 			}
 		});

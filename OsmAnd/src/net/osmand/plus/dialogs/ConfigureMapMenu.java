@@ -30,8 +30,14 @@ import android.widget.Toast;
 
 public class ConfigureMapMenu {
 
+	public interface OnClickListener{
+		public void onClick(boolean result);
+	};
+
+	private boolean allModes = false;
+
 	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
-		ContextMenuAdapter adapter = new ContextMenuAdapter(ma);
+		ContextMenuAdapter adapter = new ContextMenuAdapter(ma, allModes);
 		adapter.setDefaultLayoutId(R.layout.drawer_list_item);
 		adapter.item(R.string.configure_map).icons(R.drawable.ic_back_drawer_dark, R.drawable.ic_back_drawer_white)
 				.listen(new OnContextMenuClick() {
@@ -44,10 +50,10 @@ public class ConfigureMapMenu {
 				}).reg();
 		adapter.item(R.string.app_modes_choose).layout(R.layout.mode_toggles).reg();
 		adapter.setChangeAppModeListener(new OnClickListener() {
-			
 			@Override
-			public void onClick(View v) {
-				ma.getMapActions().prepareOptionsMenu(createListAdapter(ma));				
+			public void onClick(boolean result) {
+				allModes = true;
+				ma.getMapActions().prepareOptionsMenu(createListAdapter(ma));
 			}
 		});
 

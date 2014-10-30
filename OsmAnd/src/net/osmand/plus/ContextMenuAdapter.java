@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 
 public class ContextMenuAdapter {
 
@@ -41,6 +42,13 @@ public class ContextMenuAdapter {
 			}
 		}
 	}
+
+	public class BooleanResult {
+		private boolean result = false;
+
+		public void setResult(boolean value) { result = value; }
+		public boolean getResult() { return result; }
+	}
 	
 	private final Context ctx;
 	private View anchor;
@@ -57,7 +65,13 @@ public class ContextMenuAdapter {
 	final TIntArrayList iconListLight = new TIntArrayList();
 	final ArrayList<String> itemDescription = new ArrayList<String>();
 	private List<ApplicationMode> visibleModes = new ArrayList<ApplicationMode>();
-	private View.OnClickListener changeAppModeListener = null;
+	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
+	private BooleanResult allModes = new BooleanResult();
+
+	public ContextMenuAdapter(Context ctx, boolean allModes) {
+		this.ctx = ctx;
+		this.allModes.setResult(allModes);
+	}
 
 	public ContextMenuAdapter(Context ctx) {
 		this.ctx = ctx;
@@ -256,7 +270,7 @@ public class ContextMenuAdapter {
 	
 	
 
-	public void setChangeAppModeListener(View.OnClickListener changeAppModeListener) {
+	public void setChangeAppModeListener(ConfigureMapMenu.OnClickListener changeAppModeListener) {
 		this.changeAppModeListener = changeAppModeListener;
 	}
 	
@@ -272,35 +286,16 @@ public class ContextMenuAdapter {
 				Integer lid = getLayoutId(position);
 				if (lid == R.layout.mode_toggles){
 					final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-					return AppModeDialog.prepareAppModeDrawerView(activity, visibleModes, selected, new View.OnClickListener() {
+					return AppModeDialog.prepareAppModeDrawerView(activity, visibleModes, selected, allModes, new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
 							if (selected.size() > 0) {
 								((OsmandApplication) activity.getApplication()).getSettings().APPLICATION_MODE.set(selected.iterator().next());
 								notifyDataSetChanged();
 							}
-							if(changeAppModeListener != null) {
-								changeAppModeListener.onClick(view);
+							if (changeAppModeListener != null) {
+								changeAppModeListener.onClick(allModes.getResult());
 							}
-						}
-					}, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialogInterface, int i) {
-							//if user selects modes and none of them is set to current
-							// - need to set one of them as current
-							OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
-							ApplicationMode currentMode = settings.APPLICATION_MODE.get();
-							boolean selected = false;
-							for (ApplicationMode mode : visibleModes) {
-								if (mode.equals(currentMode)){
-									selected = true;
-									break;
-								}
-							}
-							if (!selected) {
-								settings.APPLICATION_MODE.set(visibleModes.get(0));
-							}
-							notifyDataSetChanged();
 						}
 					});
 				}
