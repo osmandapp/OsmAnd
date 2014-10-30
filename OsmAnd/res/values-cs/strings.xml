@@ -1762,4 +1762,9 @@ s často kladenými otázkami.</string>
     <string name="map_widget_appearance_rem">Zbývající prvky</string>
     <string name="search_radius_proximity">V blízkosti</string>
     <string name="rendering_category_routes">Trasy</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Vlakové a kolejové trasy</string>
+    <string name="rendering_attr_tramRoutes_name">Tramvajové trasy</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Trolejbusové trasy</string>
+    <string name="rendering_attr_busRoutes_name">Autobusové trasy</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Sdílené mikrobusové trasy</string>
     </resources>
