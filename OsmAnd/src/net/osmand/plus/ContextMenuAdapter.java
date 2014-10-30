@@ -66,6 +66,7 @@ public class ContextMenuAdapter {
 	final ArrayList<String> itemDescription = new ArrayList<String>();
 	private List<ApplicationMode> visibleModes = new ArrayList<ApplicationMode>();
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
+	//neded to detect whether user opened all modes or not
 	private BooleanResult allModes = new BooleanResult();
 
 	public ContextMenuAdapter(Context ctx, boolean allModes) {
