@@ -413,7 +413,7 @@
   <string name="gpx_option_from_start_point">Prejsť pozdĺž celej trasy</string>
   <string name="tip_rotation_switching">Otáčanie mapy</string>
   
-  <string name="switch_to_vector_map_to_see">Je dostupná offline vektorová mapa pre túto oblasť.\n\t\n\tNa jej použitie aktivujte "Menu" → "Zobrazenie" → "Zdroj mapy…" → "Vektorové OSM mapy".</string>
+  <string name="switch_to_vector_map_to_see">Pre túto oblasť je dostupná offline vektorová mapa.\n\t\n\tNa jej použitie aktivujte Menu → Zobrazenie → Zdroj mapy… → Vektorové OSM mapy.</string>
   <string name="binary_map_download_success">Sťahovanie úspešné.
 		\n\t\n\tPre použitie aktivujte cez "Menu" → "Zobrazenie" → "Zdroj mapy…" → "Vektorové OSM mapy".
 	</string>
@@ -457,11 +457,10 @@
 		\n\nPotom vyberte spôsob ako zdieľať Vaše umiestnenie. Na výber je: E-Mail, SMS alebo len skopírovanie súradníc umiestnenia do schránky.
 	</string>
   <string name="tip_favorites">Obľúbené miesta</string>
-  <string name="tip_favorites_t">Často používané body si môžete uložiť do Obľúbených miest nasledovne:
-		\n\nV "Kontextovom menu" akéhokoľvek bodu mapy vyberte možnosť "Pridať medzi Obľúbené miesta" a zadajte meno.
-		\n\nPo uložení potom môžete k nemu jednoducho pristupovať cez "Hlavné Menu" → "Moje miesta". Dlhým kliknutím na obľúbený bod v zozname "Obľúbené" môžete k tomuto bodu navigovať, upraviť ho alebo vymazať.
-		\n\nNa zobrazenie všetkých Obľúbených bodov priamo na mape môžete zapnúť vrstvu "Obľúbené miesta" cez "Kontextové menu mapy" → "Zobrazenie".
-	</string>
+  <string name="tip_favorites_t">"Často používané body si môžete uložiť do Obľúbených miest nasledovne:
+\n\nV Kontextovom menu akéhokoľvek bodu mapy vyberte možnosť Pridať medzi Obľúbené miesta a zadajte meno.
+\n\nPo uložení potom môžete k nemu jednoducho pristupovať cez Hlavné Menu → Moje miesta. Dlhým kliknutím na obľúbený bod v zozname Obľúbené môžete k tomuto bodu navigovať, upraviť ho alebo vymazať.
+\n\nNa zobrazenie všetkých Obľúbených bodov priamo na mape môžete zapnúť vrstvu Obľúbené miesta cez Kontextové menu mapy → Zobrazenie. "</string>
   <string name="tip_osm_improve">Vylepšovanie dát v Openstreetmap</string>
   <string name="tip_osm_improve_t">OsmAnd používa mapy založené na dátach Openstreetmap.org (OSM) a nie je navrhnutý len pre cestovanie a navigovanie, ale aj pre vylepšovanie a pomoc projektu Openstreetmap. Iba pár kliknutiami môžete jednoducho vytvoriť a nahrať nový bod záujmu (POI) alebo OSM chybu.
 		\n\nNajprv musíte povoliť modul "OSM upravovanie" v "Nastavenia" → "Správca zásuvných modulov". Potom zadať Vaše prihlasovacie údaje v "Nastavenia" → "OSM upravovanie".
