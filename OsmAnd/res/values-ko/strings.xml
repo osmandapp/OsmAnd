@@ -421,10 +421,10 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 
 	<string name="tip_navigation">운행</string>
 	<string name="tip_navigation_t">"길안내를 시작하기 전에 목적지를 선택하여야 합니다. 그런 다음 맵 상에서 \'메뉴\' -&gt; \'방향\' 을 누르고 네비게이션 종류를 선택합니다.
-\n\n목적지는 지도에 대상 플래그 마커로 표시되고 OsmAnd는 (주황색 삼각형)으로 목적지까지의 거리와 목적지까지의 방향을 표시합니다.
-\n\n당신이 선택 할 수 있습니다 중 등 OsmAnd, 당신을 살 - 가이드 (활성화 된 경우) 음성 안내를 제공 할 것을 의미, \'탐색 시작\'아니면 모든 라이브 guideance 또는 조정없이 정적 경로의 결과로, \'디스플레이 노선\'을 선택할 수 있습니다 당신은 이동.
-\n\n현재 위치가 아닌 다른 위치에서 선택한 목적지로 경로를 표시하려면지도에 시작 지점을 선택하고 \'에서 오시는 길\'을 누릅니다.
-\n\n당신이 함께 \'탐색을 시작합니다\'와 \'에서 오시는 길\'을 사용하는 경우가 발견 한, OsmAnd 즉시 실제 위치로 전환됩니다 (그래서 이것은에 사용할 수있는 위치가 발견되기 전에 라우팅 바로 시작할 수) \'에서 오시는 길\'동안 \'디스플레이 경로\'와 함께 당신에게 당신이 이후의 업데이트없이 선택했다 임의의 지점에서 경로를 보여줍니다. "</string>
+\n\n목적지는 지도에 대상 플래그 마커로 표시되고 OsmAnd는 주황색 삼각형으로 목적지까지의 거리와 목적지까지의 방향을 표시합니다.
+\n\n당신이 \"운행시작\"을 선택 할 수 있습니다. 이는 OsmAnd, 당신을 살 - 가이드 (활성화 된 경우) 음성 안내를 제공 할 것을 의미, \'탐색 시작\'아니면 모든 라이브 guideance 또는 조정없이 정적 경로의 결과로, \'디스플레이 노선\'을 선택할 수 있습니다 당신은 이동.
+\n\n현재 위치가 아닌 다른 위치에서 선택한 목적지로 경로를 표시하려면지도에 시작 지점을 선택하고 \'~부터 길안내\'을 누릅니다.
+\n\n당신이 함께 \'운행시작 \'에서 \"~로부터 길안내\'을 사용하는 경우, OsmAnd 는 즉시 실제 위치로 전환됩니다 (그래서 이것은 사용할 수 있는 위치가 발견되기 전에 라우팅 바로 시작할 수) \'에서 오시는 길\'동안 \'디스플레이 경로\'와 함께 당신에게 당신이 이후의 업데이트없이 선택했다 임의의 지점에서 경로를 보여줍니다. "</string>
 
 	<string name="tip_search">검색 중</string>
 	<string name="tip_map_context_menu">\"위치 사용\" 메뉴</string>
@@ -628,7 +628,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="search_poi_filter">필터</string>
 	<string name="menu_mute_off">음성 켜짐</string>
 	<string name="menu_mute_on">음성 꺼짐</string>
-	<string name="voice_provider_descr">길안내를 위하여 음성 안내를 선택합니다</string>
+	<string name="voice_provider_descr">운행을 위하여 음성 안내를 선택합니다</string>
 	<string name="voice_provider">음성 안내</string>
 	<string name="voice_data_initializing">음성 데이터 초기화 중…</string>
 	<string name="voice_data_not_supported">지원되지 않는 음성 데이터 버전</string>
@@ -773,7 +773,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="save_current_track_descr">현재 트랙을 SD 카드에 저장합니다</string>
     <string name="save_current_track">현재 트랙을 GPX 파일로 저장</string>
     <string name="save_track_interval_descr">운행하는 동안 트랙 레코딩을 저장하는 로깅 간격을 선택합니다</string>
-    <string name="save_track_interval">길안내하는 동안 로깅 간격</string>
+    <string name="save_track_interval">운행하는 로깅 간격</string>
     <string name="save_track_to_gpx_descrp">운행하는 동안 트랙을 GPX파일로 저장합니다</string>
     <string name="save_track_to_gpx">운행하는 동안 트랙을 GPX파일로 저장</string>
     <string name="update_tile">맵 업데이트</string>
@@ -1144,7 +1144,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
          \n\t* 지도 화면에서 좌상단 버튼는  메뉴버튼을 대체
     </string>
     <string name="monitoring_settings">트랙 레코딩</string>
-    <string name="monitoring_settings_descr">여행을 기록하는 방법을 구성합니다</string>
+    <string name="monitoring_settings_descr">트랙을 기록하는 방법을 구성합니다</string>
     <string name="osmand_monitoring_plugin_description">절전모드(스크린 끄기)에서 트래킹 및 경로탐색 활성화, 주기적으로 GPS 장치가 작동중일 때 . 표시 설정은 로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 트랙을 기록하는 설비 가능.</string>
     <string name="osmand_monitoring_plugin_name">로깅 서비스</string>
     <string name="osmand_background_plugin_description">주기적으로 GPS 장치를 On 시켜 절전모드(스크린 끄기)에서 트래킹 및 라우팅을 가능하게 합니다.</string>
@@ -2006,10 +2006,10 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="rendering_attr_buildings15zoom_name">줌 레벨 15에 있는 건물 표시</string>
     <string name="rendering_attr_moreDetailed_name">상세 접보</string>
     <string name="rendering_attr_lessDetailed_name">덜 상세</string>
-    <string name="rendering_attr_hideAccess_name">액세스 제한 숨기기</string>
-    <string name="rendering_attr_showAccess_name">액세스 제한 보이기</string>
+    <string name="rendering_attr_hideAccess_name">접근 제한 숨기기</string>
+    <string name="rendering_attr_showAccess_name">접근 제한 보이기</string>
     <string name="rendering_attr_showSurfaceGrade_name">도로 등급 표시</string>
-    <string name="rendering_attr_showSurfaces_name">노면 표시</string>
+    <string name="rendering_attr_showSurfaces_name">도로 표면 표시</string>
     <string name="rendering_attr_showCycleRoutes_name">자전거 경로 보이기</string>
     <string name="keep_navigation_service">계속</string>
 	<string name="stop_navigation_service">중지</string>
