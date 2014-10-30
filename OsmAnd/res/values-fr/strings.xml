@@ -1849,4 +1849,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="search_radius_proximity">A proximité de</string>
     <string name="rendering_category_routes">Routes</string>
     <string name="tip_recent_changes_1_9_t">"Nouveautés de la version 1.9 : * Mise à jour des styles de cartes avec un rendu fonction du revêtement de la route, couche de transport et symboles de randonnées pédestres * Recherche de PI le long de l\'itinéraire * Marquer temporairement une route comme non traversable * Téléchargement et mise à jour des cartes facilités * Notification audio visuelle à l\'approche des points de passage * Imprimer l\'itinéraire détaillé * Gestion des lignes de présélection * Support d\'Android Wear * Beaucoup de changement de l\'interface * Zoom séparé pour la taille du texte sur la carte * Notification spéciales dans le cas où le véhicule quitte l\'itinéraire * Connexion OsMo * Corrections des incompatibilités de versions pour OsMo "</string>
+    <string name="rendering_attr_busRoutes_name">Lignes de bus</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Lignes de tram</string>
     </resources>
