@@ -229,6 +229,38 @@ public class VoiceRouter {
 		}
 	}
 
+	public void approachWaypoint(Location location, List<LocationPointWrapper> points){
+		CommandBuilder p = getNewCommandPlayerToPlay();
+		if (p == null){
+			return;
+		}
+		double[] dist = new double[1];
+		makeSound();
+		String text = getText(location, points, dist);
+		p.goAhead(dist[0], null).andArriveAtWayPoint(text).play();
+	}
+
+	public void approachFavorite(Location location, List<LocationPointWrapper> points){
+		CommandBuilder p = getNewCommandPlayerToPlay();
+		if (p == null){
+			return;
+		}
+		double[] dist = new double[1];
+		makeSound();
+		String text = getText(location, points, dist);
+		p.goAhead(dist[0], null).andArriveAtFavorite(text).play();
+	}
+	
+	public void approachPoi(Location location, List<LocationPointWrapper> points){
+		CommandBuilder p = getNewCommandPlayerToPlay();
+		if (p == null){
+			return;
+		}
+		double[] dist = new double[1];
+		String text = getText(location, points,  dist);
+		p.goAhead(dist[0], null).andArriveAtPoiWaypoint(text).play();
+	}
+
 	public void announceWaypoint(List<LocationPointWrapper> points) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p == null){
@@ -256,38 +288,6 @@ public class VoiceRouter {
 		}
 		String text = getText(null, points,null);
 		p.arrivedAtPoi(text).play();
-	}
-
-	public void approachFavorite(Location location, List<LocationPointWrapper> points){
-		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p == null){
-			return;
-		}
-		double[] dist = new double[1];
-		makeSound();
-		String text = getText(location, points, dist);
-		p.goAhead(dist[0], null).andArriveAtFavorite(text).play();
-	}
-	
-	public void approachWaypoint(Location location, List<LocationPointWrapper> points){
-		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p == null){
-			return;
-		}
-		double[] dist = new double[1];
-		makeSound();
-		String text = getText(location, points, dist);
-		p.goAhead(dist[0], null).andArriveAtWayPoint(text).play();
-	}
-	
-	public void approachPoi(Location location, List<LocationPointWrapper> points){
-		CommandBuilder p = getNewCommandPlayerToPlay();
-		if (p == null){
-			return;
-		}
-		double[] dist = new double[1];
-		String text = getText(location, points,  dist);
-		p.goAhead(dist[0], null).andArriveAtPoiWaypoint(text).play();
 	}
 
 	protected String getText(Location location, List<LocationPointWrapper> points, double[] dist) {
@@ -739,13 +739,14 @@ public class VoiceRouter {
 			play.arrivedAtIntermediatePoint(getSpeakablePointName(name)).play();
 		}
 	}
-	
-	public void arrivedWayPoint(String name) {
-		CommandBuilder play = getNewCommandPlayerToPlay();
-		if(play != null){
-			play.arrivedAtWayPoint(getSpeakablePointName(name)).play();
-		}
-	}
+
+	// This is not needed, used are only arrivedIntermediatePoint (for points on the route) or announceWaypoint (for points near the route=)
+	//public void arrivedWayPoint(String name) {
+	//	CommandBuilder play = getNewCommandPlayerToPlay();
+	//	if(play != null){
+	//		play.arrivedAtWayPoint(getSpeakablePointName(name)).play();
+	//	}
+	//}
 
 	public void onApplicationTerminate(Context ctx) {
 		if (player != null) {
