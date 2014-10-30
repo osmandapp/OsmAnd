@@ -39,6 +39,7 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
+import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmAndMapLayersView;
 import net.osmand.plus.views.OsmAndMapSurfaceView;
@@ -48,6 +49,7 @@ import net.osmand.plus.views.corenative.NativeQtLibrary;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import android.app.Dialog;
+import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -62,7 +64,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -74,11 +78,13 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class MapActivity extends AccessibleActivity  {
+public class MapActivity extends AccessibleActivity implements
+		VoiceRouter.VoiceMessageListener {
 	
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
+	private static final int WAKE_ON_VOICE_INTERVAL = 10000;		// 10 seconds
 	
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 	
@@ -106,6 +112,9 @@ public class MapActivity extends AccessibleActivity  {
 	private StateChangedListener<ApplicationMode> applicationModeListener;
 	private FrameLayout lockView;
 	private GpxImportHelper gpxImportHelper;
+	private Long lastWakeOnTime = 0l;
+	private PowerManager.WakeLock wakeLock = null;
+	private KeyguardManager.KeyguardLock keyguardLock = null;
 	
 	
 	private Notification getNotification() {
@@ -283,6 +292,9 @@ public class MapActivity extends AccessibleActivity  {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if ((wakeLock != null) || (keyguardLock != null)) {
+			return;
+		}
 		cancelNotification();
 		//fixing bug with action bar appearing on android 2.3.3
 		if (getSupportActionBar() != null){
@@ -524,6 +536,10 @@ public class MapActivity extends AccessibleActivity  {
 	@Override
 	protected void onStart() {
 		super.onStart();
+		if ((wakeLock == null) || (keyguardLock == null)) {
+			VoiceRouter voiceRouter = app.getRoutingHelper().getVoiceRouter();
+			voiceRouter.removeVoiceMessageListener(this);
+		}
 	}
 
 	protected void setProgressDlg(Dialog progressDlg) {
@@ -545,6 +561,10 @@ public class MapActivity extends AccessibleActivity  {
 		if(progressDlg != null){
 			progressDlg.dismiss();
 			progressDlg = null;
+		}
+		if (!isFinishing()) {
+			VoiceRouter voiceRouter = app.getRoutingHelper().getVoiceRouter();
+			voiceRouter.addVoiceMessageListener(this);
 		}
 		super.onStop();
 	}
@@ -758,5 +778,46 @@ public class MapActivity extends AccessibleActivity  {
 
 	public View getLayout() {
 		return getWindow().getDecorView().findViewById(android.R.id.content);
+	}
+
+	@Override
+	public void onVoiceMessage() {
+		if (settings.WAKE_ON_VOICE.get()) {
+			lastWakeOnTime = System.currentTimeMillis();
+			if (wakeLock == null) {
+				PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
+				wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
+						| PowerManager.ACQUIRE_CAUSES_WAKEUP,
+						"OsmAndOnVoiceWakeupTag");
+				wakeLock.acquire();
+			}
+			if (keyguardLock == null) {
+				KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+				keyguardLock = km.newKeyguardLock("OsmAndKeyguardLock");
+				keyguardLock.disableKeyguard();
+			}
+
+			uiHandler.postDelayed(new Runnable() {
+
+				@Override
+				public void run() {
+					releaseWakeLocks();
+				}
+			}, WAKE_ON_VOICE_INTERVAL);
+		}
+	}
+	
+	private void releaseWakeLocks() {
+		long now = System.currentTimeMillis();
+		if (now >= lastWakeOnTime) {
+			if (keyguardLock != null) {
+				keyguardLock.reenableKeyguard();
+				keyguardLock = null;
+			}
+			if (wakeLock != null) {
+				wakeLock.release();
+				wakeLock = null;
+			}
+		}
 	}
 }
