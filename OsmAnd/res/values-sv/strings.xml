@@ -1718,4 +1718,5 @@
 	<string name="map_widget_left">Vänster panel</string>
     <string name="layers_category_show">Visa</string>
 	<string name="rendering_category_routes">Rutter</string>
+    <string name="tip_recent_changes_1_9_t">"Nyheter i 1.9: * Uppdaterade kartstilar med återgivning av vägbeläggning, transportlager och vandringssymboler * Sök efter POI längs rutten * Markera väg som avstängd per session * Lättare hämtning och uppdatering av kartor * Få visuell och ljudnotifiering när du närmar dig en waypoint * Skriv ut information om resväg * Stöd för vändningsfiler * Stöd för Android Wear * En mängd förändringar i gränssnittet * Separat zoom för textstorlek på kartan * Speciella ljudnotifieringar när du lämnat rutten * Logga in på OsMo * Fix av OsMo- inkompablitet "</string>
     </resources>
