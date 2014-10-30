@@ -1800,4 +1800,9 @@
 <string name="search_radius_proximity">Поблизости от</string>
     <string name="map_widget_top">Верхняя панель</string>
 	<string name="tip_recent_changes_1_9_t">"Изменения в 1.9: * Обновлены стили карт с указанием типов покрытия дорог, маршрутов общественного транспорта и символов пешего туризма * Поиск POI вдоль маршрута * Маркировка дорог как непроходимых за сеанс * Легкие загрузка и обновление карт * Визуальное и звуковое оповещение при приближении к точке маршрута * Печать маршрута и передача данных * Поддержка полос * Поддержка Android Wear * Множество изменений в интерфейсе * Отдельный зум для текста на карте * Специальные аудио уведомления в случае, если вы находитесь вне маршрута * Авторизация на OsMo * Исправление несовместимости с версией Osmo "</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Маршруты ж/д и легкорельсового транспорта</string>
+    <string name="rendering_attr_tramRoutes_name">Маршруты трамваев</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Маршрутное такси</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Маршруты троллейбусов</string>
+    <string name="rendering_attr_busRoutes_name">Маршруты автобусов</string>
     </resources>

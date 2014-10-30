@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="tip_recent_changes_1_9_t">Changes in 1.9:
-        * Updated maps styles with road surface rendering, transport layer and hiking symbols
+        * Updated maps styles with road surface rendering, transport layers and hiking symbols
         * Search POI along the route
         * Mark road as impassable per session
         * Easier to download and update maps
@@ -24,6 +24,11 @@
         * OsMo login functionality
         * Fix OsMo version incompatibilities  
     </string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Train and lightrail routes</string>
+    <string name="rendering_attr_tramRoutes_name">Tram routes</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Share taxi routes</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Trolleybus routes</string>
+    <string name="rendering_attr_busRoutes_name">Bus routes</string>
     <string name="rendering_category_routes">Routes</string>
     <string name="rendering_category_details">Details</string>
     <string name="rendering_category_transport">Transport</string>
