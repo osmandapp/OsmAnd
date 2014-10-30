@@ -988,6 +988,8 @@ public class OsmandSettings {
 	
 	public CommonPreference<String> PREVIOUS_INSTALLED_VERSION = new StringPreference("previous_installed_version", "").makeGlobal();
 
+	public CommonPreference<Boolean> WAKE_ON_VOICE = new BooleanPreference("wake_on_voice", true).makeGlobal();
+
 
 	public ITileSource getMapTileSource(boolean warnWhenSelected) {
 		String tileName = MAP_TILE_SOURCES.get();
