@@ -157,51 +157,19 @@ public class AppModeDialog {
 			}
 		}
 		visible.clear();
-		if (selected.size() > 0) {
-			List<Integer> positions = new ArrayList<Integer>();
-			for (ApplicationMode mode : selected){
-				for (int i =0; i< values.size(); i++){
-					if (mode.equals(values.get(i))){
-						positions.add(i);
-					}
-				}
+		visible.add(ApplicationMode.DEFAULT);
+		for (ApplicationMode mode : selected){
+			if (mode != ApplicationMode.DEFAULT) {
+				visible.add(mode);
+				break;
 			}
-
-			if (positions.size() == 1) {
-				int pos = positions.get(0);
-				if (pos < values.size() - 1 && pos > 0){
-					visible.add(values.get(pos - 1));
-					visible.add(values.get(pos));
-					visible.add(values.get(pos + 1));
-				} else if (pos == 0) {
-					visible.add(values.get(pos));
-					visible.add(values.get(1));
-					visible.add(values.get(2));
-				} else if (pos == values.size() -1) {
-					visible.add(values.get(pos - 1));
-					visible.add(values.get(pos - 2));
-					visible.add(values.get(pos));
+		}
+		for(ApplicationMode mode : values) {
+			if (!visible.contains(mode)) {
+				visible.add(mode);
+				if (visible.size() == 3){
+					break;
 				}
-			} else if (positions.size() == 2) {
-				int pos1 = positions.get(0);
-				int pos2 = positions.get(1);
-				if (pos1 + 1 != pos2){
-					visible.add(values.get(pos1));
-					visible.add(values.get(pos1 + 1));
-					visible.add(values.get(pos2));
-				} else if (pos1 > 0 && pos1 + 1 == pos2) {
-					visible.add(values.get(pos1 - 1));
-					visible.add(values.get(pos1));
-					visible.add(values.get(pos2));
-				} else if (pos1 == 0 && pos1 + 1 == pos2) {
-					visible.add(values.get(pos1));
-					visible.add(values.get(pos2));
-					visible.add(values.get(pos2 + 1));
-				}
-			}
-		} else {
-			for (int i =0; i<3; i++){
-				visible.add(values.get(i));
 			}
 		}
 	}
