@@ -81,7 +81,6 @@ public class OsmAndAppCustomization {
 	}
 	
 	public Class<? extends Activity> getDownloadActivity() {
-		//return DownloadActivity.class;
 		return DownloadActivity.class;
 	}
 

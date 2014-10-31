@@ -84,7 +84,8 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 
 		};
 		filterText.addTextChangedListener(textWatcher);
-
+		String filter = ((DownloadActivity)getActivity()).getInitialFilter();
+		filterText.setText(filter);
 		return view;
 	}
 

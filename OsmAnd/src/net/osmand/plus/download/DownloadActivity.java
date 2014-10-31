@@ -54,9 +54,13 @@ public class DownloadActivity extends SherlockFragmentActivity {
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<LocalIndexInfo>();
 	List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 
+	private String initialFilter = "";
 
 	public static final String FILTER_KEY = "filter";
 	public static final String FILTER_CAT = "filter_cat";
+
+	public static final String TAB_TO_OPEN = "Tab_to_open";
+	public static final String DOWNLOAD_TAB = "download";
 
 
 	@Override
@@ -128,9 +132,10 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		setType(downloadTypes.get(0));
 		if (intent != null && intent.getExtras() != null) {
 			final String filter = intent.getExtras().getString(FILTER_KEY);
-//			if (filter != null) {
-//				filterText.setText(filter);
-//			}
+			if (filter != null) {
+				initialFilter = filter;
+			}
+
 			final String filterCat = intent.getExtras().getString(FILTER_CAT);
 			if (filterCat != null) {
 				DownloadActivityType type = DownloadActivityType.getIndexType(filterCat.toLowerCase());
@@ -138,6 +143,13 @@ public class DownloadActivity extends SherlockFragmentActivity {
 					setType(type);
 					downloadTypes.remove(type);
 					downloadTypes.add(0, type);
+				}
+			}
+
+			String tab = intent.getExtras().get(TAB_TO_OPEN).toString();
+			if (tab != null) {
+				if (tab.equals(DOWNLOAD_TAB)){
+					tabHost.setCurrentTab(1);
 				}
 			}
 		}
@@ -195,6 +207,10 @@ public class DownloadActivity extends SherlockFragmentActivity {
 
 	public Map<String, String> getIndexActivatedFileNames() {
 		return downloadListIndexThread != null ? downloadListIndexThread.getIndexActivatedFileNames() : null;
+	}
+
+	public String getInitialFilter() {
+		return initialFilter;
 	}
 
 	@Override
