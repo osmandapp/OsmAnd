@@ -112,10 +112,9 @@ public class MapActivity extends AccessibleActivity implements
 	private StateChangedListener<ApplicationMode> applicationModeListener;
 	private FrameLayout lockView;
 	private GpxImportHelper gpxImportHelper;
-	private Long lastWakeOnTime = 0l;
 	private PowerManager.WakeLock wakeLock = null;
 	private KeyguardManager.KeyguardLock keyguardLock = null;
-	
+	private ReleaseWakeLocksRunnable releaseWakeLocksRunnable = new ReleaseWakeLocksRunnable();	
 	
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
@@ -783,7 +782,8 @@ public class MapActivity extends AccessibleActivity implements
 	@Override
 	public void onVoiceMessage() {
 		if (settings.WAKE_ON_VOICE.get()) {
-			lastWakeOnTime = System.currentTimeMillis();
+			uiHandler.removeCallbacks(releaseWakeLocksRunnable);
+
 			if (wakeLock == null) {
 				PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
 				wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
@@ -797,27 +797,26 @@ public class MapActivity extends AccessibleActivity implements
 				keyguardLock.disableKeyguard();
 			}
 
-			uiHandler.postDelayed(new Runnable() {
-
-				@Override
-				public void run() {
-					releaseWakeLocks();
-				}
-			}, WAKE_ON_VOICE_INTERVAL);
+			uiHandler.postDelayed(releaseWakeLocksRunnable, WAKE_ON_VOICE_INTERVAL);
 		}
 	}
 	
 	private void releaseWakeLocks() {
-		long now = System.currentTimeMillis();
-		if (now >= lastWakeOnTime) {
-			if (keyguardLock != null) {
-				keyguardLock.reenableKeyguard();
-				keyguardLock = null;
-			}
-			if (wakeLock != null) {
-				wakeLock.release();
-				wakeLock = null;
-			}
+		if (keyguardLock != null) {
+			keyguardLock.reenableKeyguard();
+			keyguardLock = null;
+		}
+		if (wakeLock != null) {
+			wakeLock.release();
+			wakeLock = null;
+		}
+	}
+	
+	private class ReleaseWakeLocksRunnable implements Runnable {
+		
+		@Override
+		public void run() {
+			releaseWakeLocks();
 		}
 	}
 }
