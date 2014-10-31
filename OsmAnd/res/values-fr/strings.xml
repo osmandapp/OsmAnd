@@ -1006,7 +1006,7 @@
 \n\t\'Ne pas tourner (nord vers le haut)\' - La carte ne change pas d\'orientation, le nord est toujours vers le haut.
 \n\t\'Direction du déplacement\' - La carte est continuellement alignée dans la direction du déplacement.
 \n\t\'Boussole\' - La carte est continuellement alignée sur les informations de la boussole. "</string>
-<string name="tip_day_night_mode_t_v2">"\tLe style de la carte peut, pour certaines cartes vectorielles, être modifié selon qu\'il fait jour (plus clair) ou nuit (plus sombre).
+<string name="tip_day_night_mode_t_v2">"Le style de la carte peut, pour certaines cartes vectorielles, être modifié selon qu\'il fait jour (plus clair) ou nuit (plus sombre).
 \n\tLes couleurs de nuit sont plus sûres pour la conduite nocturne.
 \n\tVous pouvez changer de règle pour la bascule jour/nuit dans \'Menu\' → \'Configurer l\'écran\' → \'Mode jour/nuit\'.
 \n\tLes choix sont :
@@ -1430,14 +1430,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="auto_zoom_close">Rapproché</string>
 	<string name="auto_zoom_far">Modéré</string>
 	<string name="auto_zoom_farthest">Éloigné</string>
-	<string name="tip_map_styles_t">\tOsmAnd propose différents styles de rendu pour l\'affichage des cartes vectorielles hors-ligne, en fonction de vos besoins.
-		\n\tDans \'Menu\' → \'Configurer l\'écran\' → \'Styles de rendu\', vous pouvez à la place du style de rendu \'default\' sélectionner par exemple :
-		\n\t* le style \'Touring view\', qui fournit les informations les plus détaillées possibles pour le voyage et le tourisme, avec des optimisations pour les conducteurs professionnels (contraste élevé, distinction claire des différentes routes), des options pour la randonnée alpine (Alpine hiking, classification du Club Alpin Suisse), l\'affichage des symboles de randonnée, des véloroutes 
-		\n\t* \'High contrast roads\' affiche les routes avec des couleurs très accentuées pour les situations de forte luminosité.
-		\n\t* \'Cycle-map\' est optimisé pour l\'affichage des voies pour cyclistes.
-		\n\t* \'Winter and ski\' crée une vue hivernale du paysage, et montre les domaines skiables (nécessite le téléchargement de la carte \'Monde - Ski\')
-		\n\t* \'Topo-map-assimilation\' est optimisé pour la randonnée, et affiche les chemins en fonction de la classification du Club Alpin Suisse (SAC scale), ainsi que les symboles de randonnée.
-	</string>
+	<string name="tip_map_styles_t">"OsmAnd propose différents styles de rendu pour l\'affichage des cartes vectorielles hors-ligne, en fonction de vos besoins.
+\n\tDans \'Menu\' → \'Configurer l\'écran\' → \'Styles de rendu\', vous pouvez à la place du style de rendu \'default\' sélectionner par exemple :
+\n\t* le style \'Touring view\', qui fournit les informations les plus détaillées possibles pour le voyage et le tourisme, avec des optimisations pour les conducteurs professionnels (contraste élevé, distinction claire des différentes routes), des options pour la randonnée alpine (Alpine hiking, classification du Club Alpin Suisse), l\'affichage des symboles de randonnée, des véloroutes
+\n\t* \'High contrast roads\' affiche les routes avec des couleurs très accentuées pour les situations de forte luminosité.
+\n\t* \'Cycle-map\' est optimisé pour l\'affichage des voies pour cyclistes.
+\n\t* \'Winter and ski\' crée une vue hivernale du paysage, et montre les domaines skiables (nécessite le téléchargement de la carte \'Monde - Ski\')
+\n\t* \'Topo-map-assimilation\' est optimisé pour la randonnée, et affiche les chemins en fonction de la classification du Club Alpin Suisse (SAC scale), ainsi que les symboles de randonnée. "</string>
     <string name="remember_choice">Mémoriser mon choix</string>
     <string name="gps_status_eclipsim">GPS Status</string>
     <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer un itinéraire</string>
