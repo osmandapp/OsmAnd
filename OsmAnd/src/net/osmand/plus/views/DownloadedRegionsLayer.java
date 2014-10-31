@@ -89,6 +89,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 			public void onClick(View v) {
 				final Intent intent = new Intent(view.getContext(), view.getApplication().getAppCustomization().getDownloadIndexActivity());
 				intent.putExtra(DownloadActivity.FILTER_KEY, filter.toString());
+				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
 				view.getContext().startActivity(intent);
 			}
 		});
