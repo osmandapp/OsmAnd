@@ -2128,4 +2128,9 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 \n* OsMo 로그인 기능
 \n* OsMo 버전 비 호환성 수정 "</string>
     <string name="rendering_category_routes">경로 (Routes)</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">기차 및 경전철 노선</string>
+    <string name="rendering_attr_tramRoutes_name">트램 노선</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">택시 노선 공유</string>
+    <string name="rendering_attr_trolleybusRoutes_name">무궤도 전차 노선</string>
+    <string name="rendering_attr_busRoutes_name">버스 노선</string>
     </resources>
