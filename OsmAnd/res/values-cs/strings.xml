@@ -151,7 +151,7 @@
   <string name="osmand_service_descr">Umožní běh aplikace při vypnutém displeji</string>
   <string name="tip_rotation_switching">Natočení mapy</string>
   
-  <string name="binary_map_download_success">"Stahování dokončeno.\n\t\n\tNa vektorové mapy můžete přepnout v menu (Mapová data -&gt; Zdroj map -&gt; Vektorové mapy OSM). "</string>
+  <string name="binary_map_download_success">"Stahování dokončeno.\n\t\n\tNa vektorové mapy můžete přepnout v menu (Menu -&gt; Nastavit mapu -&gt; Zdroj map -&gt; Vektorové mapy OSM). "</string>
   <string name="tip_day_night_mode">Denní/noční režim</string>
   
   <string name="tip_osm_improve">Vylepšování Openstreetmap</string>
@@ -347,7 +347,7 @@
   <string name="tip_favorites">Oblíbená místa</string>
   <string name="tip_favorites_t">"Často navštěvovaná místa mohou být uložena jako Oblíbená místa.\n\t Pro přidání oblíbeného místa otevřete kontextové menu mapy (dlouhý stisk), vyberte \'Přidat k oblíbeným\' a zadejte vhodné jméno. Po uložení se k oblíbeným dostanete skrze \'Hlavní Menu\'-&gt;\'Moje místa\'.
 \n\t Dlouhým stisknutím položky v oblíbených vyvoláte další možnosti - nastavení jako cíl, její úpravy nebo vymazání.
-\n\t Pro zobrazení všech oblíbených bodů na mapě zvolte \'Oblíbené\' v menu \'Kontextové menu\' -&gt; \'Mapová data\'. "</string>
+\n\t Pro zobrazení všech oblíbených bodů na mapě zvolte \'Oblíbené\' v menu \'Kontextové menu\' -&gt; \'Nastavit mapu\'. "</string>
   <string name="tip_recent_changes">Poslední změny</string>
   <string name="tip_recent_changes_0_6_6_t">" Změny ve verzi 0.6.6 :
 \n\t - Podpora Text To Speech enginu v hlasové navigaci
@@ -370,7 +370,7 @@
   <string name="gpx_option_reverse_route">Obrátit GPX trasu</string>
   <string name="gpx_option_destination_point">Použít současný cíl trasy</string>
   <string name="gpx_option_from_start_point">Projet celou trasu</string>
-  <string name="switch_to_vector_map_to_see">Pro tuto oblast je k dispozici offline vektorová mapa.\n\t\n\t Pro zobrazení zvolte \'Menu\' -&gt; \'Mapová data\' -&gt; \'Zdroj map…\' -&gt; \'Vektorové mapy OSM\'.</string>
+  <string name="switch_to_vector_map_to_see">Pro tuto oblast je k dispozici offline vektorová mapa.\n\t\n\t Pro zobrazení zvolte \'Menu\' -&gt; \'Nastavit mapu\' -&gt; \'Zdroj map…\' -&gt; \'Vektorové mapy OSM\'.</string>
   <string name="choose_audio_stream">Kanál pro navádění</string>
   <string name="choose_audio_stream_descr">Zvolte kanál poskytující hlasové navádění (závisí na systémové konfiguraci)</string>
   <string name="voice_stream_voice_call">Volání</string>
@@ -415,7 +415,7 @@
   <string name="tip_map_context_menu_t">" \t Kontextové menu mapy obsahuje funkce závisející na aktuální poloze a je dostupné dlouhým stisknutím prstem na mapě, nebo stisknutím trackballu.
 \n\t Po stisknutí se objeví obdélník se souřadnicemi. Klepnutím na něj se otevře kontextové menu, po dlouhém stisknutí obdélník naopak zmizí. Kontextové menu je dostupné také tlačítkem \'Menu\'. "</string>
   <string name="tip_initial">Pomoc</string>
-  <string name="tip_initial_t">"OsmAnd je navigační aplikace s řadou funkcí.\n\nNěkteré základní pokyny, užitečné tipy a rozšířenou pomoc můžete vyvolat klepnutím na \'Menu\' → \'Pomoc\' z mapové obrazovky. "</string>
+  <string name="tip_initial_t">"OsmAnd je navigační aplikace s řadou funkcí.\n\nZákladní pokyny, užitečné tipy a rozšířenou pomoc můžete vyvolat klepnutím na \'Menu\' → \'Pomoc\' z mapové obrazovky. "</string>
   <string name="next_button">Další</string>
   <string name="previous_button">Předchozí</string>
   <string name="unit_of_length_descr">Zvolte jednotku vzdálenosti a rychlosti</string>
@@ -1024,19 +1024,17 @@
 \t\nProfil můžete změnit tlačítkem v levém dolním rohu mapové obrazovky (ikona auta, kola nebo chodce) nebo při zadávání navigace.
 </string>
 <string name="poi_filter_emergency">Pohotovost</string>
-<string name="tip_map_switch_t_v2">\tZdroj map a informace, které se zobrazují, můžete změnit na mapové obrazovce v \'Menu\'-&gt;\'Mapová data\'.
+<string name="tip_map_switch_t_v2">"Zdroj map a informace, které se zobrazují, můžete změnit na mapové obrazovce v \'Menu\'-&gt;\'Nastavit mapu\'.
 \n\tPomocí \"Zdroj map...\' můžete zvolit lokálně uložené vektorové mapy nebo online rastrové mapy (pro tuto funkci aktivujte modul \'Online mapy\') nebo vlastní mapy vytvořené na PC pomocí programu OsmAndMapCreator.
-\n\tOsmAnd také podporuje vlastní zdroje map.
-</string>
-<string name="tip_day_night_mode_t_v2">"\tVzhled mapy může být u některých vektorových map změněn mezi denním (světlejším) a nočním (tmavším).
+\n\tOsmAnd také podporuje vlastní zdroje map. "</string>
+<string name="tip_day_night_mode_t_v2">"Vzhled mapy může být u některých vektorových map změněn mezi denním (světlejším) a nočním (tmavším).
 \n\tNoční vzhled je bezpečnější pro jízdu v noci (méně oslňují).
-\n\tZpůsob přepínání vzhledu můžete nastavit v \'Menu\'-&gt;\'Nastavení obrazovky\'-&gt;\'Denní/noční režim\'
+\n\tZpůsob přepínání vzhledu můžete nastavit v \'Menu\'-&gt;\'Nastavit mapu\'-&gt;\'Denní/noční režim\'
 \n\tMožnosti:
 \n\t\'Východ/západ slunce\' - automatické přepínání podle slunce (výchozí)
 \n\t\'Den\' - vždy používá denní režim
 \n\t\'Noc\' - vždy používá noční režim
-\n\t\'Senzor osvětlení\' - vzhled mapy je ovládán senzorem okolního světla na vašem zařízení (pouze pokud je přítomen) "
-	</string>
+\n\t\'Senzor osvětlení\' - vzhled mapy je ovládán senzorem okolního světla na vašem zařízení (pouze pokud je přítomen) "</string>
 <string name="tip_recent_changes_0_8_4_t">"Změny ve verzi 0.8.4 :\n *  Oprava některých chyb
 \n * zámek polohy mapy se neztratí při přerušení
 \n * zapnout službu na pozadí během navigace "</string>
@@ -1359,7 +1357,7 @@ s často kladenými otázkami.</string>
     <string name="app_mode_motorcycle">Motocykl</string>
     <string name="app_mode_boat">Loď</string>
     <string name="app_mode_aircraft">Letadlo</string>
-    <string name="map_widget_map_rendering">Vykreslování mapy:</string>
+    <string name="map_widget_map_rendering">Vykreslování mapy</string>
     <string name="app_modes_choose_descr">Vyberte v aplikaci dostupné profily</string>
     <string name="app_modes_choose">Profily aplikace</string>
 	<string name="amenity_type_seamark">Mořská značka</string>
@@ -1383,8 +1381,8 @@ s často kladenými otázkami.</string>
 	<string name="routing_attr_avoid_ferries_description">Vyhnout se trajektům</string>
 	<string name="routing_attr_avoid_motorway_name">Vyhnout se dálnicím</string>
 	<string name="routing_attr_avoid_motorway_description">Vyhnout se dálnicím</string>
-	<string name="routing_attr_weight_name">Nejvyšší hmotnost</string>
-	<string name="routing_attr_weight_description">Zadejte hmotnostní omezení pro vaše vozidlo</string>
+	<string name="routing_attr_weight_name">Hmotnostní limit</string>
+	<string name="routing_attr_weight_description">Zadejte hmotnost vozidla, která musí být povolená na cestách</string>
     <string name="android_19_location_disabled">Od verze KitKat není možné stahovat a aktualizovat mapy v předchozím úložišti (%s). Chcete ho změnit na vhodné nové a zkopírovat do něj všechny soubory.
         \n Poznámka: původní soubory zůstanou nedotčeny.  
         \n Poznámka: nebude možné sdílet soubory mezi OsmAnd a OsmAnd+. </string>
@@ -1417,12 +1415,11 @@ s často kladenými otázkami.</string>
     <string name="osmodroid_unseek">Nesledovat objekt</string>
     <string name="calculate_osmand_route_without_internet">Vypočítat OsmAnd trasu bez připojení na internet</string>
     <string name="gpx_option_calculate_first_last_segment">Vypočítat OsmAnd trasu pro první a poslední úsek</string>
-    <string name="tip_map_styles_t">OsmAnd umožňuje zobrazení vektorových map v různých stylech podle vašich potřeb:
-		\n\nMimo vyváženého stylu "default" můžete v "Menu" → "Nastavení obrazovky" → "Vektorový vykreslovač" vybrat například:
-		\n\t* Styl "Touring view", který zobrazuje nejpodrobněji informace  pro cestování , včetně vylepšení pro profesionální řidiče (vyšší kontrast, dobře rozlišitelné cesty), volby pro Alpskou turistiku (stupnice SAC), cyklotrasy, turistické značky, atd.
-		\n\t* "High contrast roads" zobrazuje cesty ve zvýrazněných barvách pro případ silného okolního osvětlení.
-		\n\t* "Winter and ski" vytvoří (zasněženou) zimní krajinu s lyžařskými svahy a vleky (ve spojení s mapou "World ski")
-	</string>
+    <string name="tip_map_styles_t">"OsmAnd umožňuje zobrazení vektorových map v různých stylech podle vašich potřeb:
+\n\nMimo vyváženého stylu default můžete v Menu → Nastavit mapu → Vektorový vykreslovač vybrat například:
+\n\t* Styl Touring view, který zobrazuje nejpodrobněji informace pro cestování , včetně vylepšení pro profesionální řidiče (vyšší kontrast, dobře rozlišitelné cesty), volby pro Alpskou turistiku (stupnice SAC), cyklotrasy, turistické značky, atd.
+\n\t* High contrast roads zobrazuje cesty ve zvýrazněných barvách pro případ silného okolního osvětlení.
+\n\t* Winter and ski vytvoří (zasněženou) zimní krajinu s lyžařskými svahy a vleky (ve spojení s mapou World ski) "</string>
     <string name="index_item_world_altitude_correction">Svět - korekce výšky</string>
 	<string name="index_item_world_seamarks">Svět - námořní</string>
 	<string name="index_item_world_bitcoin_payments">Svět - platby bitcoin</string>
@@ -1671,13 +1668,13 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cesty</string>
     <string name="osmo_group_by_invite">Vstoupit na pozvánku</string>
-    <string name="rendering_attr_subwayMode_name">Metro režim</string>
+    <string name="rendering_attr_subwayMode_name">Trasy metra</string>
  	<string name="pause_navigation">Pozastavit navigaci</string>
 	<string name="continue_navigation">Pokračování v navigaci</string>
     <string name="osmo_invite">Pozvat...</string>
     <string name="osmo_leave_confirmation_msg">Chcete opustit skupinu %1$s?</string>
     <string name="osmo_specify_tracker_id">Prosím určete id</string>
-    <string name="rendering_attr_coloredBuildings_name">Barevné budovy</string>
+    <string name="rendering_attr_coloredBuildings_name">Barvy budov podle typu</string>
     <string name="lang_sw">Svahilština (Kiswahili)</string>
     <string name="lang_he">Hebrejština</string>
     <string name="lang_al">Albánština</string>
@@ -1748,7 +1745,7 @@ s často kladenými otázkami.</string>
 	<string name="speed_limit_exceed_message">Zvolte toleranci překročení povolené rychlosti, po které uslyšíte hlasové varování.</string>
 	<string name="osmo_device_not_found">Zařízení nenalezeno</string>
     <string name="osmo_no_connection_msg">Služba OsMo není k dispozici:\n- zkontrolujte připojení;\n- zkontrolujte nastavení;\n- podívejte se na náš Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Anonymní uživatel nemůže:\n- vytvářet skupiny;\n- synchronizovat skupiny a zařízení se serverem;\n- manage groups and devices in a private office.</string>
+    <string name="anonymous_user_hint">Anonymní uživatel nemůže:\n- vytvářet skupiny;\n- synchronizovat skupiny a zařízení se serverem;\n- spravovat soukromé skupiny a zařízení.</string>
     <string name="anonymous_user">Anonymní uživatel</string>
     <string name="logged_as">Přihlášen jako %1$s</string>
 	<string name="rendering_category_details">Detaily</string>
@@ -1762,9 +1759,10 @@ s často kladenými otázkami.</string>
     <string name="map_widget_appearance_rem">Zbývající prvky</string>
     <string name="search_radius_proximity">V blízkosti</string>
     <string name="rendering_category_routes">Trasy</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Vlakové a kolejové trasy</string>
-    <string name="rendering_attr_tramRoutes_name">Tramvajové trasy</string>
-    <string name="rendering_attr_trolleybusRoutes_name">Trolejbusové trasy</string>
-    <string name="rendering_attr_busRoutes_name">Autobusové trasy</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">Sdílené mikrobusové trasy</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Vlakové a kolejové linky</string>
+    <string name="rendering_attr_tramRoutes_name">Tramvajové linky</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Trolejbusové linky</string>
+    <string name="rendering_attr_busRoutes_name">Autobusové linky</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Sdílené mikrobusové linky</string>
+    <string name="tip_recent_changes_1_9_t">"Změny v 1.9: * Aktualizované mapové styly s vykreslováním povrchu cest, dopravou a turistickými symboly * Hledání POI podél trasy * Značení neprůchodných cest v rámci relace * Jednodušší stahování a aktualizace map * Vizuální a zvukové upozornění na blížící se průjezdní bod * Tisk itineráře a odbočovacích pokynů * Podpora odbočovacích pruhů * Podpora Android Wear * Mnoho změn zobrazení * Oddělení mapového přiblížení a velikosti písma * Zvukové upozornění při odchýlení z trasy * Přihlášení do služby OsMo * Oprava nekompatibilit s verzí OsMo "</string>
     </resources>
