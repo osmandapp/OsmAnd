@@ -374,18 +374,16 @@
 \n\t* \'不旋轉(正北朝上)\'：地圖不旋轉，正北方永遠向上
 \n\t* \'行進方向朝上\'：地圖會不斷對準您的車頭方向
 \n\t* \'依羅盤\'：地圖會不斷對準裝置的電子羅盤指示 "</string>
-	<string name="binary_map_download_success">下載完成。
-		\n\t\n\t透過 \'選單\' -&gt; \'地圖圖層\' -&gt; \'地圖來源…\' -&gt; \'離線向量地圖\'啟動使用。
-	</string>
+	<string name="binary_map_download_success">"下載完成。
+\n\t\n\t透過 \'選單\' -&gt; \'組態地圖\' -&gt; \'地圖來源…\' -&gt; \'離線向量地圖\'啟動使用。 "</string>
 	<string name="tip_day_night_mode">日/夜模式</string>
-	<string name="tip_day_night_mode_t_v2">離線向量地圖的地圖外觀顯示，可在日間(較亮)與夜間(較暗)之間切換。夜間顏色是在夜晚行駛時比較安全。
-		\n\n您可在\'選項\' -&gt; \'組態螢幕顯示\' -&gt;\'日/夜地圖\'設定日/夜間切換原則。
-		\n\n選擇有：
-		\n\t* \'日出/日落\'：自動模式，依所處位置的日出/日落控制（預設）
-		\n\t* \'日間\'：永遠使用日間模式
-		\n\t* \'夜間\'：永遠使用夜間模式
-		\n\t* \'光線感應器\'：地圖顯示以裝置上的光線感應器來控制（如果有配備）
-	</string>	
+	<string name="tip_day_night_mode_t_v2">"離線向量地圖的地圖外觀顯示，可在日間(較亮)與夜間(較暗)之間切換。夜間顏色是在夜晚行駛時比較安全。
+\n\n您可在\'選項\' -&gt; \'組態地圖\' -&gt;\'日/夜地圖\'設定日/夜間切換原則。
+\n\n選擇有：
+\n\t* \'日出/日落\'：自動模式，依所處位置的日出/日落控制（預設）
+\n\t* \'日間\'：永遠使用日間模式
+\n\t* \'夜間\'：永遠使用夜間模式
+\n\t* \'光線感應器\'：地圖顯示以裝置上的光線感應器來控制（如果有配備） "</string>	
 	<string name="tip_osm_improve">改善 OSM 資料</string>
 	<string name="tip_osm_improve_t">OsmAnd 使用的地圖是基於 Openstreetmap.org (OSM) 的資料，除了查看地圖和導航外，可以直接用它來改善 OSM 的資料品質。只要點幾下您可以輕鬆的建立和上傳新的興趣點或回報 OSM 的錯誤。
 		\n\n為此，您需要啟動\'OSM 編輯\'，在外掛元件管理下的\'設定\' -&gt; \'外掛元件管理\'裡，然後在 \'設定\' -&gt; \'OSM 編輯\'提供您登入 OSM 的資料。
@@ -507,7 +505,7 @@
 	<string name="gpx_option_reverse_route">反轉 GPX 方向</string>
 	<string name="gpx_option_destination_point">使用目前的目的地</string>
 	<string name="gpx_option_from_start_point">沿著整條軌跡往前</string>
-	<string name="switch_to_vector_map_to_see">指定以離線向量地圖顯示\n\t\n\t啟用方式\'選單\' -&gt; \'地圖圖層\' -&gt; \'地圖來源…\' -&gt; \'離線向量圖\'。</string>
+	<string name="switch_to_vector_map_to_see">指定以離線向量地圖顯示\n\t\n\t啟用方式\'選單\' -&gt; \'組態地圖\' -&gt; \'地圖來源…\' -&gt; \'離線向量圖\'。</string>
 	<string name="choose_audio_stream">語音導航輸出</string>
 	<string name="choose_audio_stream_descr">選擇播放語音導航輸出(依靠系統)</string>
 	<string name="voice_stream_voice_call">通話音訊</string>
@@ -536,11 +534,10 @@
 		\n\n然後選擇分享位置的方式。選項有：電子郵件、SMS(文字)或複製座標到剪貼簿。
 	</string>
 	<string name="tip_favorites">我的最愛標點</string>
-	<string name="tip_favorites_t">常用標點可儲存成我的最愛，具體如下： 
-		\n\n叫出\'使用位置\'的快顯功能表，選\'加到我的最愛\'，然後輸入名字即可將某一標點位置設為我的最愛。事後可經由\'選單\' -&gt;\'我的最愛\'找到它。
-		\n\n在\'我的最愛\'清單中輕按提供的任何選項，例如導航去那裡、編輯或刪除它。
-		\n\n欲將我的最愛標點全部顯示在地圖上，要在地圖螢幕上啟用圖層\'我的最愛\'，由\'選單\' -&gt;\'地圖圖層\'即可。
-	</string>
+	<string name="tip_favorites_t">"常用標點可儲存成我的最愛，具體如下：
+\n\n叫出\'使用位置\'的快顯功能表，選\'加到我的最愛\'，然後輸入名字即可將某一標點位置設為我的最愛。事後可經由\'選單\' -&gt;\'我的最愛\'找到它。
+\n\n在\'我的最愛\'清單中輕按提供的任何選項，例如導航去那裡、編輯或刪除它。
+\n\n欲將我的最愛標點全部顯示在地圖上，要在地圖螢幕上啟用圖層\'我的最愛\'，由\'選單\' -&gt;\'組態地圖\'即可。 "</string>
 	<string name="error_doing_search">離線查尋發生錯誤</string>
 	<string name="search_offline_geo_error">無法解析地理含義 \'%s\'</string>
 	<string name="search_osm_offline">查尋地理位置</string>
@@ -548,10 +545,9 @@
 	<string name="preferred_locale_descr">選擇顯示語言</string>
 	<string name="preferred_locale">顯示語言</string>
 	<string name="tip_map_switch">選擇地圖來源</string>
-	<string name="tip_map_switch_t_v2">地圖來源與圖層顯示可以透過\'選單\'-&gt;\'地圖圖層\'來改變。
-		\n\n在\'地圖來源…\'之下，您可以選擇使用預先載入的離線向量圖（預設，離線導航所需），或預先定義（連線或離線快取）圖磚來源（在此啟動\'線上地圖\'外掛元件下的\'設定\' → \'外掛元件\'），或手動建立地圖，例如在 PC 上使用的 OsmAndMapCreator。
-		\n\nOsmAnd 也支援自訂來源。
-	</string>
+	<string name="tip_map_switch_t_v2">"地圖來源與圖層顯示可以透過\'選單\'-&gt;\'組態地圖\'來改變。
+\n\n在\'地圖來源…\'之下，您可以選擇使用預先載入的離線向量圖（預設，離線導航所需），或預先定義（連線或離線快取）圖磚來源（在此啟動\'線上地圖\'外掛元件下的\'設定\' → \'外掛元件\'），或手動建立地圖，例如在 PC 上使用的 OsmAndMapCreator。
+\n\nOsmAnd 也支援自訂來源。 "</string>
 	<string name="tip_app_mode">使用設定檔</string>
 	<string name="tip_app_mode_t_v2">OsmAnd 在不同的使用情況下，支援不同的使用者設定檔 (可自行訂製) 。
 		\n\n您可透過地圖畫面左下角的設定檔按鈕(汽車、自行車、步行三種圖示)更改使用設定檔 ，或是作路線規劃。
@@ -1421,7 +1417,7 @@
     <string name="tips_and_tricks">幫助</string>
     <string name="tip_map_styles">地圖樣式</string>
 	<string name="tip_map_styles_t">"OsmAnd 支援顯示離線的向量地圖，以不同的地圖樣式來適應您的需要：
-\n\n除了均衡的\'預設\'地圖樣式，您可以根據\'選單\' -&gt; \'組態螢幕顯示\' -&gt; \'地圖樣式\'選擇例如
+\n\n除了均衡的\'預設\'地圖樣式，您可以根據\'選單\' -&gt; \'組態地圖\' -&gt; \'地圖樣式\'選擇例如
 \n\t*\'遊覽檢視\'樣式：盡可能為旅行和遊覽提供包含了最詳細的資訊，包括專業的駕駛（高對比可區別的道路）、為徒步登山 (SAC 等級）作的選項、自行車道、支援徒步旅行符號等。
 \n\t*\'高對比道路\'在明亮的環境照明情況下，非常突出的高亮顏色顯示道路
 \n\t*\'冬季和滑雪\'建立一個（白雪覆蓋）冬季景觀視野，和顯示全球滑雪場和滑雪升降機 "</string>
@@ -1845,4 +1841,9 @@
     <string name="search_radius_proximity">在接近度上</string>
     <string name="tip_recent_changes_1_9_t">"在1.9的變更：* 更新了地圖的樣式與路面的繪製，輸運層和徒步旅行符號 * 沿著路線搜尋 POI * 為每個無法通行的道路階段標記 * 更容易的下載和更新地圖 * 接近中途點時給予視覺和音訊通知 * 列印行程並打開資訊 * 支援轉彎車道 * 支援 Android 穿戴 * 很多 UI 的更改 * 單獨縮放在地圖上文字的大小 * 您偏離路線的情況下特別的音訊通知 * OsMo 登入功能 * 修復 OsMo 版本的不相容 "</string>
     <string name="rendering_category_routes">導航路線</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">火車和輕軌電車路線</string>
+    <string name="rendering_attr_tramRoutes_name">有軌電車路線</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">分享計程車路線</string>
+    <string name="rendering_attr_trolleybusRoutes_name">無軌電車路線</string>
+    <string name="rendering_attr_busRoutes_name">公車路線</string>
     </resources>
