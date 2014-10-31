@@ -91,7 +91,14 @@ public class MapActivityActions implements DialogProvider {
 	DrawerLayout mDrawerLayout;
 	ListView mDrawerList;
 	private WaypointDialogHelper waypointDialogHelper;
-	
+
+	private enum DrawerType{
+		WAYPOINTS,
+		CONFIGURE_MAP,
+		MAIN_MENU
+	}
+
+	private DrawerType currentDrawer;
 
 	public MapActivityActions(MapActivity mapActivity){
 		this.mapActivity = mapActivity;
@@ -571,7 +578,11 @@ public class MapActivityActions implements DialogProvider {
 					//need to refresh drawer if it
 					//was opened with slide, not button
 					if (mDrawerList != null && refreshDrawer){
-						mDrawerList.invalidateViews();
+						if (currentDrawer == DrawerType.WAYPOINTS){
+							showWaypointsInDrawer(false);
+						} else {
+							mDrawerList.invalidateViews();
+						}
 					}
 				}
 
@@ -591,10 +602,10 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void prepareOptionsMenu(final ContextMenuAdapter cm) {
+		refreshDrawer = false;
 		final ArrayAdapter<?> listAdapter =
 				cm.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContentMenu());
 		mDrawerList.setAdapter(listAdapter);
-		refreshDrawer = false;
 		mDrawerList.setDivider(mapActivity.getResources().getDrawable(R.drawable.drawer_divider));
 		final int colorHint = cm.getBackgroundColor(mapActivity, getMyApplication().getSettings().isLightContentMenu());
 		mDrawerList.setBackgroundColor(colorHint);
@@ -642,6 +653,7 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
+		currentDrawer = DrawerType.MAIN_MENU;
 
 		// 1. Where am I
 		optionsMenuHelper.item(R.string.where_am_i).
@@ -799,6 +811,7 @@ public class MapActivityActions implements DialogProvider {
 			.listen(new OnContextMenuClick() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					currentDrawer = DrawerType.CONFIGURE_MAP;
 					ContextMenuAdapter cm = mapActivity.getMapLayers().getMapInfoLayer().getViewConfigureMenuAdapter();
 					prepareOptionsMenu(cm);
 					return false;
@@ -884,6 +897,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void showWaypointsInDrawer(boolean flat) {
+		currentDrawer = DrawerType.WAYPOINTS;
 		final int[] running = new int[] { -1 };
 		ArrayAdapter<Object> listAdapter = waypointDialogHelper.getWaypointsDrawerAdapter(mapActivity, running, flat);
 		mDrawerList.setAdapter(listAdapter);
