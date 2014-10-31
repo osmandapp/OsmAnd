@@ -1607,11 +1607,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="favourites_remove_dialog_msg">즐겨찾기 포인트를 삭제 하시겠습니까 \'%s\'?</string>
 	<string name="av_camera_focus_hiperfocal">지나친 초점 포커스</string>
 	<string name="use_distance_measurement_help">* Tap to mark a point.\n * Press and hold on the map to delete previous point.\n 이전 포인트를 지우기 위해 지도에서 누르고 홀드하기 * Press and hold on point to view and attach description.\n 설명을 읽고 알리기 위해 포인트에서누르고 홀드하기 * Click on measurement widget to see more actions. 더 많은 액션을 보기 위해 측정위젯 클릭하기.</string>
-    <string name="tip_map_styles_t">"OsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
-\n\nOther than the balanced \'default\' map style, you may in \'Menu\' → \'Configure map\' → \'Map Style\' select for example
-\n\t* The \'Touring view\' style, which contains the most detailed information feasable for traveling and touring, including optimization for professional drivers (higher contrast, distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
-\n\t* \'High contrast roads\' shows roads in very accentuated colors for bright ambient lighting situations
-\n\t* \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download) "</string>
+    <string name="tip_map_styles_t">"OsmAnd는 오프라인 벡터 지도를 당신의 취향에 따라 다른 지도 스타일로  표시 할 수 있습니다. : ↵
+\n↵
+\n기본적인  \'기본\'지도 스타일 외에 \'메뉴\'→ \'화면 설정\'→ \'지도 스타일\'에서 선택할 수 있습니다. 예를 들어, ↵
+\n→ * \'투어링 보기\' 스타일, 이것은 여행 및 관광( 전문 운전 기사를 위한 최적화된 높은 콘트라스트, 구별 가능한 도로), 그리고 알파인 하이킹을 위한 옵션 (SAC 스케일), 자전거 경로, 하이킹 심볼 마크 등의 표시를 할 수 있습니다. ↵
+\n→ * \'고 대비 도로\'는 주위의 밝기에 따라 도로를  강조하여 표시합니다. ↵
+\n→ * \'겨울 및 스키\'는 눈 덮인 겨울 풍경을 표시하고  \'세계 스키장\'맵 다운로드와 연계하여 세계의 스키장 슬로프 및 리프트를 표시합니다. "</string>
     <string name="tip_recent_changes_1_2_t">"Fixes in 1.2.1:
 \n\t*Fix Geo Intent (Foursquare, c:geo)
 \n\t*Fix screen tremble during navigation
