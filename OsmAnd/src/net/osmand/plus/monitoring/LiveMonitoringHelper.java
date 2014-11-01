@@ -24,6 +24,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -138,6 +140,9 @@ public class LiveMonitoringHelper  {
 			HttpParams params = new BasicHttpParams();
 			HttpConnectionParams.setConnectionTimeout(params, 15000);
 			DefaultHttpClient httpclient = new DefaultHttpClient(params);
+			//allow certificates where hostnames doesn't match CN
+			SSLSocketFactory sf = (SSLSocketFactory) httpclient.getConnectionManager().getSchemeRegistry().getScheme("https").getSocketFactory();
+			sf.setHostnameVerifier(new AllowAllHostnameVerifier());
 			// Parse the URL and let the URI constructor handle proper encoding of special characters such as spaces
 			URL u = new URL(url);
 			URI uri = new URI(u.getProtocol(), u.getUserInfo(), u.getHost(), u.getPort(), u.getPath(), u.getQuery(), u.getRef());
