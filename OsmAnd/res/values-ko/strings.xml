@@ -151,28 +151,19 @@
 		
 
 	<string name="tip_osm_improve">OSM 데이터 개선하기</string>
-	<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org (OSM) data and can directly be used to improve OSM data quality. You can create and upload new POI or OSM bug reports with just a few clicks.
-
-OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 보기 및 경로 외에- OSM 데이터 질을 개선하는 데 사용할 수 있습니다. 여러분은 몇번의 클릭만으로도 새로운 POI 또는 OSM 버그 리포트를 만들고 업로드할 수 있습니다!
-
-		\n\nFor this you need to activate the \'OSM Editing\' plugin under \'Settings\' → \'Plugins\', then provide your OSM login information in \'Settings\' → \'OSM editing\'.
-
-		\n\t이렇게 하려면 \'설정\' -&gt; \'일반 설정\' -&gt; \'OSM\' 메뉴에서 OSM 로그인 정보를 제공하여야 합니다.
-
-		\n\nTo add a new POI use option \'Create POI\' in the \'Use location\' context menu. Proceed with entering the information about the new POI in \'Create POI\' dialogue and finally commit it.
-
-		\n\t새로운 POI 를 추가하려면 맵 컨텍스트 메뉴에서 \'POI 생성\' 옵션을 사용합니다. \'POI 생성\' 대화상자에서는 새로운 POI 에 대한 정보를 입력하고 최종 확인합니다.
-
-		\n\nAlso errors in maps can immediately be reported via an OSM bug, so the OSM community can then fix this problem. Use the option \'Open OSM bug\' in the \'Use location\' context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
-
-		\n\t맵 오류는 OSM 버그를 통해 즉각 리포트될 수 있으며, 이렇게 하면 OSM 커뮤니티는 이 문제를 더 빠르게 고칠 수 있습니다.
-
-		\n\nOsmAnd supports caching your entries offline (see respective setting), but Internet connectivity is of course needed to upload your OSM POI and OSM bug contributions.
-
-		\n\tOSM 버그를 추가하려면 맵 컨텍스트 메뉴에서 \'OSM 버그 열기\' 옵션을 사용합니다. 그런 다음 그 문제에 대한 자세한 설명을 입력하고 \'추가\' 버튼을 사용하여 최종 포스팅합니다.
-
-		\n\tOSM POI 와 OSM 버그 기여를 위해서는 인터넷 연결이 반드시 필요하다는 사실을 주의하시기 바랍니다.
-	</string>
+	<string name="tip_osm_improve_t">"OsmAnd는 Openstreetmap.org (OSM)지도를 이용하고 있습니다. -지도 검색 및 경로 안내 외에도 - OSM 데이터 품질 향상에 사용할 수 있습니다.
+\n새로운 POI와 OSM 버그 리포트를 몇 번의 클릭만으로 쉽게 만들어 업로드 할 수 있습니다! ↵
+\n→이를 위해서는 먼저 OSM 로그인 정보를 \'메인 메뉴\'-&gt; \'설정\'-&gt; \'OSM\'으로 입력해야합니다. ↵
+\n→ 새로운 POI를 등록하려면 맵 컨텍스트 메뉴에서 \'POI를 생성\'옵션을 사용하십시오. \'POI를 만드는\'대화의 새로운 POI에 대한 정보를 입력하고 계속 마지막에 커밋합니다. ↵
+\n→ 맵의 오류는 OSM 버그를 통해 즉시보고 있기 때문에 OSM 커뮤니티는이 문제를 재빨리 해결 할 수 있습니다. ↵
+\n→ OSM 버그를 추가하려면 맵 컨텍스트 메뉴에서 \'OSM 버그 오픈\'옵션을 사용하십시오. 그리고 문제에 대해 자세히 설명하고 마지막에 \'추가\'버튼으로 게시합니다. ↵
+\n→ OSM의 POI와 OSM 버그 게시물은 인터넷 연결이 필요하므로주의하시기 바랍니다.\n\nOsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 보기 및 경로 외에- OSM 데이터 질을 개선하는 데 사용할 수 있습니다.
+\n몇번의 클릭만으로도 새로운 POI 또는 OSM 버그 리포트를 만들고 업로드할 수 있습니다!
+\n\t이렇게 하려면 \'설정\' -&gt; \'일반 설정\' -&gt; \'OSM\' 메뉴에서 OSM 로그인 정보를 제공하여야 합니다.
+\n\t새로운 POI 를 추가하려면 맵 컨텍스트 메뉴에서 \'POI 생성\' 옵션을 사용합니다. \'POI 생성\' 대화상자에서는 새로운 POI 에 대한 정보를 입력하고 최종 확인합니다.
+\n\t맵 오류는 OSM 버그를 통해 즉각 리포트될 수 있으며, 이렇게 하면 OSM 커뮤니티는 이 문제를 더 빠르게 고칠 수 있습니다.
+\n\tOSM 버그를 추가하려면 맵 컨텍스트 메뉴에서 \'OSM 버그 열기\' 옵션을 사용합니다. 그런 다음 그 문제에 대한 자세한 설명을 입력하고 \'추가\' 버튼을 사용하여 최종 포스팅합니다.
+\n\tOSM POI 와 OSM 버그 기여를 위해서는 인터넷 연결이 반드시 필요하다는 사실을 주의하시기 바랍니다. "</string>
 <string name="download_files_not_enough_space">%1$s MB 를 다운로드할 충분한 공간이 없습니다 (빈 공간: %2$s).</string>
 	<string name="download_files_question_space">빈 공간이 이제 {2} MB 입니다! {0} 개의 파일 ({1} MB) 을 다운로드하시겠습니까?</string>
 	
@@ -368,20 +359,13 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="install_more">추가 설치…</string>
 
 	<string name="tip_update_index">오프라인 지도 업데이트중</string>
-	<string name="tip_update_index_t">Up-to-date map data is essential for offline map viewing, for POI/address search, and for offline navigation. OsmAnd provides a data manager to download these offline maps (and some other data files), and to check for available updates.
-		\n\nTo download maps go to \'Settings\' → \'Data Management\' → \'Download offline data\'.
-		\n\nAfter the global region list is retrieved from the internet, click on any entry to download or update a file. Please note the file type selector near the top of the screen to select the type of download you want (regular maps, hillshade overlays, etc.).
-		\n\nYou can filter the region list by typing some letters, or you may select the option \'Settings\' → \'Filter downloaded\' to see updates only for the data already on your device.
-		\n\n\t* Entries in \'green\' indicate data files identical on device and server
-		\n\t* Entries in \'blue\' indicate available updates on server
-		\n\t* Entries in italic font indicate data de-activated on the device
-
-\t맵 데이터를 갱신할 때 필요합니다. OsmAnd 는 사용가능한 오프라인 갱신 데이터를 찾을 수 있는 다운로드 관리자를 제공합니다.
-	\n\t갱신 데이터를 찾기 위해 \'설정\' -&gt; \'오프라인 데이터\' -&gt; \'오프라인 데이터 다운로드\' 로 갑니다. 인터넷으로부터 지역 목록을 받은 후에, 장치에 이미 존재하는 데이터에 대해서만 갱신하도록 \'메뉴\' -&gt; \'다운로드된 것들로 필터링\' 옵션을 선택할 수 있습니다.
-	\n\t갱신 데이터에 대한 사용 가능성은 다음 색깔로 구분됩니다:
-	\n\t\'녹색\' - 장치와 서버의 데이터 파일이 같다는 것을 가리킵니다
-	\n\t\'파란색\' - 서버에 사용 가능한 갱신 데이터가 있음을 가리킵니다
-	</string>
+	<string name="tip_update_index_t">"최신의 지도 데이터를 가지고 있는 것은 매우 중요합니다.
+\nOsmAnd는 유효한 오프라인 데이터의 업데이트를 체크 할 수있는 다운로드 관리자를 제공합니다. ↵
+\n업데이트를 확인하려면,  \'메인 메뉴\'-&gt; \'설정\'-&gt; \'지도 데이터 관리\'-&gt; \'오프라인 데이터 다운로드\'에서 다운로드 합니다.
+\n지역리스트가 참조되면 옵션 ( \'메뉴\'-&gt; \'다운로드된 필터\')에서 당신의 장치에 이미 있는 데이터 만 업데이트를 알리도록 선택할 수 있습니다. ↵
+\n→ 업데이트의 사용 여부는 다음의 색으로 표시됩니다 : ↵
+\n→ \'녹색\'- 데이터 파일을 단말기와 서버에서 동일하다는 것을 나타냅니다 ↵
+\n→ \'파랑\'- 서버에 사용 가능한 업데이트가 있음을 나타냅니다\n→ \'이탤리 글자\'- 장치에 비활성화 된 데이터가 있음을 나타냅니다 "</string>
 
 	<string name="level_to_switch_vector_raster_descr">벡터 맵을 사용하기 위한 최소 줌 레벨</string>
 	<string name="level_to_switch_vector_raster">최소 벡터 줌 레벨</string>
@@ -1094,7 +1078,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="tip_recent_changes_1_4_t">"Changes in 1.4:
 \n\t* 모든 곳을 방문하기 위한 최적화된 방식으로 포인트 순서
 \n\t* 이름으로 거리 검색
-\n\t* 플래닝모드 플러그인
+\n\t* 계획 모드 플러그인
 \n\t* 새 다운로드 화면
 \n\t* GPX 서브폴더 지원
 \n\t* SRTM 파일 삭제
@@ -1298,7 +1282,27 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="snap_to_road">도로에 밀착</string>
 	<string name="osmand_play_title_30_chars">OsmAnd 지도 및 네비게이션</string>
 	<string name="osmand_short_description_80_chars">글로벌 모바일 맵 뷰어 및 오프라인 및 온라인 OSM 지도를 위한 라우팅</string>
-	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM 자동 라우팅 및 길안내 시스템) OsmAnd 글로벌 OpenStreetMap의 다양한 데이터에 접근할 수 있는 오픈 소스 라우팅 응용 프로그램입니다. 모든 지도 데이터(벡터 맵 또는 타일 맵 ) 는 오프라인 사용을 위하여 휴대 전화 메모리 카드에 저장할 수 있습니다. OsmAnd는 또한 턴-바이-턴 음성 안내 등의 오프라인 및 온라인 라우팅(길찾기) 기능을 제공합니다. 핵심 기능 중 일부 : - 전체 오프라인 기능 (선택한 폴더에 저장, 벡터지도 또는 타일지도 다운로드 가능) - 컴팩트한 오프라인 벡터는 전 세계에서 사용가능 - 국가 또는 지역의 다운로드는 앱에서 직접 매핑 - GPX 또는 탐색 트랙, 관광 명소 등 가능한 여러 지도 레이어의 중첩, 즐겨 찾기, 등고선, 대중 교통 정류장, 사용자 정의 투명성 추가 - 주소 및 장소에 대한 오프라인 검색 장소(POI) - 짧은 거리를 위한 오프라인 라우팅 - 자동차, 자전거, 보행자 모드 : - 옵션으로 자동 주간/야간 지도 전환 - 옵션으로 속도에 따라 지도 줌레벨 변경 - 옴션으로 나침반이나 방향에 따라 맵 정렬 - 옴션으로 차선 안내, 속도제한 표시, 녹음음성 및 TTS음성 OsmAnd 무료 버전 제한 사항 : - 지도 다운로드 수 10회로 제한 - 위키 백과 또는 오프라인 관심 장소에 액세스할 수 없음. OsmAnd 는 적극적으로 개발하고 우리의 프로젝트와 프로젝트의 추가 진행은 개발 자금을 재정 지원에 의존하고 새로운 기능을 testdriving 하고있다. OsmAnd+ 를 구입, 또는 특정 새로운 기능에 자금을 지원하거나 osmand.net 에 일반 후원을 부탁드립니다. "</string>
+	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM 자동 라우팅 및 길안내 시스템) OsmAnd 글로벌 OpenStreetMap의 다양한 데이터에 접근할 수 있는 오픈 소스 라우팅 응용 프로그램입니다.
+\n모든 지도 데이터(벡터 맵 또는 타일 맵 ) 는 오프라인 사용을 위하여 휴대 전화 메모리 카드에 저장할 수 있습니다.
+\nOsmAnd는 또한 턴-바이-턴 음성 안내 등의 오프라인 및 온라인 라우팅(길찾기) 기능을 제공합니다.
+\n\n핵심 기능 중 일부 :
+\n- 전체 오프라인 기능 (선택한 폴더에 저장, 벡터지도 또는 타일지도 다운로드 가능)
+\n- 컴팩트한 오프라인 벡터는 전 세계에서 사용가능
+\n- 국가 또는 지역의 다운로드는 앱에서 직접 매핑
+\n- GPX 또는 탐색 트랙, 관광 명소 등 가능한 여러 지도 레이어의 중첩, 즐겨 찾기, 등고선, 대중 교통 정류장, 사용자 정의 투명성 추가
+\n- 주소 및 장소에 대한 오프라인 검색 장소(POI)
+\n- 짧은 거리를 위한 오프라인 라우팅
+\n- 자동차, 자전거, 보행자
+\n\n모드 :
+\n- 옵션으로 자동 주간/야간 지도 전환
+\n- 옵션으로 속도에 따라 지도 줌레벨 변경
+\n- 옵션으로 나침반이나 방향에 따라 맵 정렬
+\n- 옴션으로 차선 안내, 속도제한 표시, 녹음음성 및 TTS음성
+\n\nOsmAnd 무료 버전 제한 사항 :
+\n- 지도 다운로드 수 10회로 제한
+\n- 위키 백과 또는 오프라인 관심 장소에 액세스할 수 없음.
+\n\nOsmAnd 는 적극적으로 개발하고 우리의 프로젝트와 프로젝트의 추가 진행은 개발 자금을 재정 지원에 의존하고 새로운 기능을 testdriving 하고있다.
+\nOsmAnd+ 를 구입, 또는 특정 새로운 기능에 자금을 지원하거나 osmand.net 에 일반 후원을 부탁드립니다. "</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ 지도 및 네비게이션</string>
 	<string name="osmand_plus_short_description_80_chars">글로벌 모바일 지도보기 및 오프라인 및 온라인 OSM 지도를 위한 라우팅</string>
 	<string name="osmand_plus_long_description_1000_chars">" OsmAnd + (OSM 자동 안내 및 안내 ) OsmAnd + 글로벌 OpenStreetMap의 다양한 (OSM) 데이터에 접근할 수 있는 오픈 소스 운행 응용 프로그램입니다. 모든 지도 데이터 (벡터 또는 타일 맵 ) 오프라인 사용에 대한 휴대 전화 메모리 카드에 저장할 수 있습니다. OsmAnd 또한 턴-바이-턴 안내 등의 오프라인 및 온라인 라우팅 기능을 제공합니다. OsmAnd+는 프로젝트를 지원하는 새로운 기능의 개발을 투자하고, 최신 업데이트를 받을 수 있도록 구입하여 사용할 수 있는 유료 응용 프로그램 버전입니다.
@@ -1314,79 +1318,67 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 \n- 선택적인 속도에 의존하는 지도 줌
 \n- 나침반이나 방향에 따라 맵 정렬
 \n- 선택적 차선 안내 , 제한 속도 표시, 기록 및 TTS 음색 "</string>
-	<string name="osmand_plus_extended_description_4000_chars">
-OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no internet needed).
-
-OsmAnd+ is the paid application version. By buying it you support the project, fund the development of new features, and receive the latest updates. You can test the application before buying by installing the free version called OsmAnd.
-
-Some of the main features:
-
-Navigation
- - Works online (fast) or offline (no roaming charges when you are abroad)
- - Turn-by-turn voice guidance (recorded and synthesized voices)
- - Optional lane guidance, street name display, and estimated time of arrival
- - Supports intermediate points on your itinerary
- - Automatic re-routing whenever you deviate from the route
- - Search for places by address, by type (e.g.: restaurant, hotel, gas station, museum), or by geographical coordinates
-
-Map Viewing
- - Display your position and orientation on the map
- - Optionally align the map according to compass or your direction of motion
- - Save your most important places as Favorites
- - Display POIs (point of interests) around you
- - Can display specialized online tile maps
- - Can display satellite view (from Bing)
- - Can display different overlays like touring/navigation GPX tracks and additional maps with customizable transparency
- - Optionally display place names in English, local, or phonetic spelling
-
-Use OpenStreetMap and Wikipedia Data:
- - High quality information from the best collaborative projects of the world
- - Global maps from OpenStreetMap, available per country or region
- - Wikipedia POIs, great for sightseeing
- - Unlimited free download, directly from the app
- - Always up-to-date maps (updated at least once a month)
- - Compact offline vector maps
- - Select between complete map data and just road network (Example: All of Japan is 700 MB, or 200 MB for the road network only)
- - Also supports online or cached tile maps
-
-Safety Features
- - Optional automated day/night view switching
- - Optional speed limit display, with reminder if you exceed it
- - Optional speed-dependent map zooming
- - Share your location so that your friends can find you
-
-Bicycle and Pedestrian Features
- - The maps include foot, hiking, and bike paths, great for outdoor activities
- - Special routing and display modes for bike and pedestrian
- - Optional public transport stops (bus, tram, train) including line names
- - Optional trip recording to local GPX file or online service
- - Optional speed and altitude display
- - Display of contour lines and hill-shading (via additional plugin)
-
-Directly Contribute to OpenStreetMap
- - Report map bugs
- - Upload GPX tracks to OSM directly from the app
- - Add POIs and directly upload them to OSM (or later if offline)
- - Optional trip recording also in background mode (while device is in sleep mode)
-
-OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, improving translations, or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionalities. By buying OsmAnd+ you help the application to be even more awesome! It is also possible to fund specific new features, or to make a general donation on osmand.net.
-
-
-Approximate map coverage and quality:
- - Western Europe: ****
- - Eastern Europe: ***
- - Russia: ***
- - North America: ***
- - South America: **
- - Asia: **
- - Japan &amp; Korea: ***
- - Middle East: **
- - Africa: **
- - Antarctica: *
-
-List of countries supported (basically world wide!):
-Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
-	</string>
+	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions)은 세계적으로 고품질 OpenStreetMap (OSM)에 액세스 할 수있는 지도 및 탐색 응용 프로그램입니다. 모든 지도 데이터는 오프라인으로 사용하기 위해 장치의 내장 메모리에 저장할 수 있습니다.
+\n장치의 GPS를 통해, OsmAnd는 자동차, 자전거, 보행자를 위해 화면 표시와 음성 안내로 경로를 보여줍니다. 모든 주요 기능은 온라인과 오프라인 (인터넷 연결없이) 으로 양쪽에서 작동합니다. ↵ ↵
+\nOsmAnd +는 유료 버전의 응용 프로그램입니다. 구입하여 최신 업데이트를 받을 수 있습니다. 또한 당신이 프로젝트를 지원하고 새로운 기능의 개발에 자금 지원을 해 줄 수 잇습니다.
+\nOsmAnd라는 무료 버전을 설치하는 것으로, 구입하기 전에 응용 프로그램을 테스트 할 수 있습니다.
+\n\n\n주요 기능 중 일부 : ↵ ↵
+\n\n탐색 ↵
+\n- 온라인 (이른)과 오프라인 (해외에서 로밍을 사용하지 않는) 모두에서 작동 ↵
+\n- 턴 바이 턴 음성 안내 (녹음 음성 또는 음성 합성) ↵
+\n- 옵션 레인 안내, 거리 이름 표시 및 도착 예정 시간 ↵
+\n- 여정에서 중간 경유 지점 (경로)를 지원 ↵
+\n- 루트에서 벗어난 경우 자동 경로 재 설정 ↵
+\n- 유형 (예 : 식당, 호텔, 주유소, 박물관 )에서 주소 또는 지리적 좌표로 위치를 검색 ↵ ↵\n\n지도보기 ↵
+\n-지도에 위치와 방향을 표시 - 선택적 나침반이나 움직임의 방향에 따라지도를 회전 ↵
+\n- 즐겨 찾기로 가장 중요한 위치를 저장 ↵
+\n- 당신의 주위 디스플레이의 POI (관심 지점) ↵
+\n- 전문 온라인 타일지도를 표시 ↵
+\n- 위성보기를 표시 할 수 있습니다 (Bing에서) ↵
+\n- 여행 / 네비게이션, GPX 트랙 및 사용자 정의 투명성을 가진 추가 맵 오버레이 표시가 가능 ↵
+\n- 옵션, 영어, 지역, 또는 발음 표기 지명을 표시 ↵ ↵
+\n\nOpenStreetMap 위키 백과의 데이터를 사용 ↵
+\n- 세계 최고의 공동 프로젝트에서의 품질 정보 ↵
+\n- 국가 또는 지역마다 사용 가능한 OpenStreetMap 글로벌 맵 ↵
+\n- 관광에 편리한 위키 백과 POI↵
+\n- 응용 프로그램에서 직접에서 무제한 무료 다운로드 ↵
+\n- 최신지도 (적어도 한달에 한번 정도 업데이트) ↵
+\n- 컴팩트 같은 오프라인 벡터 맵 ↵
+\n- 전체지도 데이터 또는 도로망 만 사이에서 선택 (예 : 일본 전체에서 700MB 또는 도로망 만의 경우 200MB) ↵
+\n- 온라인 또는 캐시 타일 맵을 지원 ↵ ↵
+\n\n안전 기능 ↵
+\n- 옵션에서 자동화 된 낮 / 야간 표시 전환 ↵
+\n- 옵션에서 설정 한 제한 속도를 초과하면 알람으로 안내 ↵
+\n- 옵션에서 속도에 따라지도의 확대 축소 ↵
+\n- 당신의 친구가 당신 을 찾을 수 있도록 위치를 공유 ↵ ↵
+\n\n자전거와 보행자의 기능 ↵
+\n-지도는 야외 전용 산책로, 하이킹 및 자전거 도로를 포함 ↵
+\n- 자전거 및 보행자를위한 특별한 경로 설정 및 표시 모드 ↵
+\n- 옵션에서 노선명을 포함한 대중 교통 정류장 (버스, 트램, 기차) ↵
+\n- 옵션에서 로컬 GPX 파일 또는 온라인을 이용한 기록 서비스 ↵
+\n- 옵션에서 속도 및 고도 표시 ↵
+\n- 등고선과 언덕 음영 표시 (추가 플러그인을 통해) ↵ ↵
+\n\n직접 OpenStreetMap에 기여 ↵
+\n- 보고서 맵 버그 ↵
+\n- OSM 폴더에 GPX 트랙 기록을 응용 프로그램에서 직접 업로드 ↵
+\n- POI를 추가하고 직접 OSM 에 (오프라인의 경우 나중에) 업로드 ↵
+\n- 옵션에서 백그라운드 모드에서 임의의 여행 기록 만들기 (장치가 절전 모드에있는 동안) ↵ ↵
+\n\nOsmAnd는 오픈 소스이며, 활발하게 개발이 진행되고 있습니다 . 누구나 버그의 보고, 번역의 개선, 새로운 기능의 코딩 등의 애플리케이션에 공헌 할 수 있습니다.
+\n프로젝트는 포럼에서 개발자와 사용자의 상호 작용에서 진행되고 있습니다. 프로젝트의 진행, 또한 새로운 기능의 개발, 코딩 및 테스트를 위해 여러분의 재정적 기여에 의존하고 있습니다.
+\nOsmAnd +를 구입함으로써 응용 프로그램이 더 좋아집니다! 또한 특정의 새로운 기능에 투자하거나 osmand.net에 기부를 할 수 있습니다. ↵ ↵ ↵
+\n\n\n대략적인지도 범위와 품질 : ↵
+\n- 서유럽 : **** ↵
+\n- 동유럽 : *** ↵
+\n- 러시아 : *** ↵
+\n- 북미 *** ↵
+\n- 남아메리카 : ** ↵
+\n- 아시아 : ** ↵
+\n- 한국 : *** ↵
+\n- 중동 : ** ↵
+\n- 아프리카 : ** ↵
+\n- 남극 : * ↵ ↵
+\n\n지원하는 국가의 목록 (기본적으로 전세계 대응) : ↵
+\n아프가니스탄, 알바니아 알제리 안도라, 앙골라, 앵 귈라, 안티구아 바부 다, 아르헨티나, 아르메니아, 아루바, 호주, 오스트리아, 아제르바이잔, 바하마, 바레인, 방글라데시, 바베이도스, 벨로루시, 벨기에, 벨리즈, 베냉, 버뮤다, 부탄, 볼리비아, 보네르 보스니아 헤르체고비나, 보츠와나, 브라질, 영국령 버진 아일랜드, 브루나이, 불가리아, 부르 키나 파소, 부룬디, 캄보디아, 카메룬, 캐나다, 카보 베르데, 중앙 아프리카 공화국, 차드, 칠레, 중국, 콜롬비아, 코모로, 콩고, 코스타리카, 코트 디부 아르, 크로아티아, 쿠바, 큐라 소, 키프로스, 체코, 덴마크, 지부티, 도미니카, 도미니카 공화국, 에콰도르, 이집트, 엘살바도르, 적도 기니, 에리트레아, 에스토니아, 에티오피아, 피지, 핀란드, 프랑스, 프랑스 령 기아나, 프랑스 령 폴리네시아, 가봉, 감비아, 조지아, 독일, 가나, 지브롤터, 그리스, 그린 랜드, 그레나다, 과들루프, 괌, 과테말라, 건지, 기니, 기니 비사우, 가이아나, 아이티, 바티칸, 온두라스, 홍콩, 헝가리, 아이슬란드, 인도, 인도네시아,이란, 이라크 아일랜드 맨섬 이스라엘 이탈리아 자메이카 일본 저지 요르단 카자흐스탄 케냐 키리바시 북한과 한국, 쿠웨이트, 키르기스스탄, 라오스, 라트비아, 레바논, 레소토, 라이베리아, 리비아, 리히텐슈타인, 리투아니아, 룩셈부르크, 마카오, 마케도니아, 마다가스카르, 말라위, 말레이시아, 몰디브, 말리, 몰타, 마르티니크, 모리타니, 모리셔스, 마 요트, 멕시코, 미크로네시아, 몰도바, 모나코, 몽골, 몬테네그로, 몬세 라트, 모로코, 모잠비크, 미얀마, 나미비아, 나우루, 네팔, 네덜란드, 네덜란드 령 안틸레스, 뉴 칼레도니아, 뉴질랜드, 니카라과, 니제르, 나이지리아, 노르웨이, 오만, 파키스탄, 팔라우, 팔레스타인, 파나마, 파푸아 뉴기니, 파라과이, 페루, 필리핀, 폴란드, 포르투갈, 푸에르토 리코, 카타르, 루마니아, 러시아, 르완다, 생 바르 텔레 미 세인트 헬레나 세인트 키츠 네비스, 세인트 루시아, 세인트 마틴, 생 피에르 미 클롱, 세인트 빈센트 그레나딘, 사모아, 산 마리노, 사우디 아라비아, 세네갈, 세르비아, 세이셸, 시에라 리온, 싱가포르 , 슬로바키아, 슬로베니아, 소말리아, 남아프리카 공화국, 사우스 조지아 남부 수단, 스페인, 스리랑카, 수단, 수리남, 스와질란드, 스웨덴, 스위스, 시리아, 대만, 타지키스탄, 탄자니아, 태국, 동 티모르, 토고, 토켈 라우, 통가, 트리니다드 토바고, 튀니지, 터키, 투르크 메니스탄, 투발루, 우간다, 우크라이나, 아랍 에미리트, 영국 (UK), 미국 (USA), 우루과이, 우즈베키스탄, 바누아투, 베네수엘라, 베트남, 월리스 푸 투나 서부 사하라 예멘 잠비아 짐바브웨 "</string>
 	<string name="filterpoi_activity">POI 필터 만들기</string>
 	<string name="select_navigation_mode">전송 모드 선택</string>
 	<string name="day_night_info_description">일출: %1$s \n일몰: %2$s</string>
@@ -1447,11 +1439,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_recent_changes_0_8_1_t">"Changes in 0.8.1:
 \n\t* 더욱 정밀한 경로(좀 더 느려짐)
 \n\t* 스마트 하고 빠른 경로 계산.
-\n\t* 자동차길로 길안내. 
+\n\t* 자동차길로 길안내.
 \n\t* 속도 제한 정보, 속도 카메라, 속도위반에 관한 정보.
-\n\t* 고속도로에서 향상된 음성안내. 
-\n\t* 주차 플러그인. (\'Where is my car parked at?\')
-\n\t* 트랙로깅 위젯 활성화/비활성화. "</string>
+\n\t* 고속도로에서 향상된 음성안내.
+\n\t* 주차 플러그인.\n\t* 트랙로깅 위젯 활성화/비활성화. "</string>
 	<string name="select_animate_speedup">경로 시뮬레이션의 속도를 선택합니다</string>
     	<string name="global_app_allocated_memory_descr">할당된 메모리 %1$s MB (안드로이드 메모리 제한 %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">할당된 메모리</string>
@@ -1569,13 +1560,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="city_type_town">도시</string>
 	<string name="city_type_city">도시</string>
 	<string name="maps_define_edit">정의/편집…</string>
-	<string name="tip_recent_changes_1_5_t">Changes in 1.5:
-	\n\t* 속도제한과 카메라에 대한 음성경고. Voice warnings about speed limits and cameras
-	\n\t* 거리 이름 알리기. More voice prompt capabilities (street names announced)
-	\n\t* 고화질 지도 아이콘. High density map icons
-	\n\t* 많은 UI 변경. Lots of UI changes
-	\n\t* 버그수정. Bugfixes in distance display, GPX analyzer, waypoint handling, planning widget, OSM uploading, https handling
-    </string>
+	<string name="tip_recent_changes_1_5_t">"Changes in 1.5:
+\n\t* 속도제한과 카메라에 대한 음성경고.\n\t* 거리 이름 알리기.\n\t* 고화질 지도 아이콘. Lots of UI changes
+\n\t* 버그수정. "</string>
     <string name="max_speed_none">무제한</string>
     <string name="index_name_openmaps">EU 지도 열기</string>
     <string name="monitoring_control_start">GPX</string>
@@ -1598,7 +1585,17 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 \n\t* GPX 경로파일의 첫 포인트에서 오프라인 경로를 계산.
 \n\t* 터널에서 시뮬레이션 활성화.
 \n\t* 많은 UX 개선 및 사용성 고정.
-\n\t* 음성 속도 접근성 설정. "</string>
+\n\t* 음성 속도 접근성 설정.
+\n\n1.7의 변경 사항 : ↵ ↵
+\n→ * 중요한지도는 2014 년 2 월 이후의 것을 사용하십시오. ↵ ↵
+\n→ * 라우팅 기능 업데이트 (빨리 더 정확하게) - ↵ ↵
+\n→ * 루트 설정을 위한 새로운 화면을 추가 (더 직관적이고 더 강력하게) ↵ ↵
+\n→ * 참고 GPX 라우팅 경로 설정 버튼에서 가능하게되었습니다 ↵ ↵
+\n→ * 운행 모드에서 자동으로 버튼을 숨기도록했습니다 ↵ ↵
+\n→ * GPX 루트의 첫 번째 포인트에 오프라인 루트를 계산 ( \"pass the whole track\"옵션) ↵ ↵
+\n→ * 터널의 동적 시뮬레이션 ↵ ↵
+\n→ * 섬세한 조작감 (사용자 경험) 등의 개선, 접근성의 수정 ↵
+\n→ * 음성 속도 설정 추가 (접근성 설정에서) ↵ "</string>
     <string name="av_camera_focus_edof">필드의 확장된 깊이(EDoF )</string>
 	<string name="local_index_installed">편집</string>
 	<string name="voice_not_specified">지정없음</string>
@@ -1613,31 +1610,27 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 \n→ * \'투어링 보기\' 스타일, 이것은 여행 및 관광( 전문 운전 기사를 위한 최적화된 높은 콘트라스트, 구별 가능한 도로), 그리고 알파인 하이킹을 위한 옵션 (SAC 스케일), 자전거 경로, 하이킹 심볼 마크 등의 표시를 할 수 있습니다. ↵
 \n→ * \'고 대비 도로\'는 주위의 밝기에 따라 도로를  강조하여 표시합니다. ↵
 \n→ * \'겨울 및 스키\'는 눈 덮인 겨울 풍경을 표시하고  \'세계 스키장\'맵 다운로드와 연계하여 세계의 스키장 슬로프 및 리프트를 표시합니다. "</string>
-    <string name="tip_recent_changes_1_2_t">"Fixes in 1.2.1:
-\n\t*Fix Geo Intent (Foursquare, c:geo)
-\n\t*Fix screen tremble during navigation
-\n\t*Other small fixes
-\n\nChanges in 1.2:
-\n\t* Bug fixes (tuned routing, search, AV recording, voice prompts, some display improvements)
-\n\t* Easier hillshade overlay configuration (requires Contour Lines plugin)
-\n\t* Now accepts maps.google.com location links
-\n\t* New widget (GPS info)
-\n\t* Added multi-window support for recent Samsung devices
-\n\t* Kalman filter for compass
-\n\t* Pebble watch support "</string>
+    <string name="tip_recent_changes_1_2_t">"1.2.1에서 수정 : ↵
+\n→ * 지오 인텐트를 수정 (Foursquare, c : geo) ↵
+\n→ * 운행중 화면 흔들림을 수정 ↵
+\n→ * 다른 사소한 수정 ↵
+\n↵
+\n* 1.2의 변경 사항 : ↵
+\n→ * 버그 수정 (라우팅 조정, 검색, AV 레코딩, 음성 지시, 일부 디스플레이 개선) ↵
+\n→ * 좀 더 쉽게 음영 기복도 오버레이 구성 (등고선 플러그인 필요) ↵
+\n→ * maps.google.com의 위치 링크 허용 ↵
+\n→ * 새로운 위젯 (GPS 정보) ↵
+\n→ * 최근 삼성 장치 등의 멀티 윈도우를 지원 ↵
+\n→ * 나침반 용 칼만 필터 지원↵
+\n→ * Pebble watch 지원 "</string>
     <string name="tip_recent_changes_1_1_4_t">"Changes in 1.1.4:
 \n\t* UI 재디자인
 \n\t* 버그 수정 "</string>
-    <string name="tip_recent_changes_1_1_2_t">Changes in 1.1.2:
-		\n\t* Audio/video plugin enhancement (photos with EXIF information)
-		오디오/비디오 플러그인 개선사항
-		\n\t* Usability fixed and restructured Contour lines plugin
-		사용성 고정 및 등고선 플러그인 재 구성
-		\n\t* Hillshade packages for Contour lines plugin
-		등고선 플러그인을 위한 음영 팩키지
-		\n\t* Bug fixes (suboptimal routing)
-		버그 수정
-    </string>
+    <string name="tip_recent_changes_1_1_2_t">"Changes in 1.1.2:
+\n\t* 오디오/비디오 플러그인 개선사항
+\n\t* 사용성 고정 및 등고선 플러그인 재 구성
+\n\t* 등고선 플러그인을 위한 음영 팩키지
+\n\t* 버그 수정 "</string>
     <string name="tip_recent_changes_1_1_0_t">"Changes in 1.1.0:
 \n\t* 거리 계산 플러그인
 \n\t* 오디오/비디오 메모 플러그인
@@ -1652,128 +1645,73 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 \n\t* 경로를 생성하는 동안 전용도로를 회피하는 것을 허락하는 설정을 추가
 \n\t* 지도에 자전거 도로의 유형을 추가
 \n\t* 버그 수정 "</string>
-	<string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2:
-		\n\t* Improved Routing
-		향상된 길찾기
-		\n\t* Dynamic map widgets
-		다이나믹 지도 위젯
-		\n\t* Map settings moved to map screen
-		지도화면으로 이동한 지도 설정
-		\n\t* Lock screen button with logging services
-		트랙로깅 서비스를 진행하면서 화면 버튼 잠그기
-		\n\t* Fixed Arabic, Kannada scripting and RTL languages 
-	</string>
-	<string name="osmand_extended_description_4000_chars">
-OsmAnd 은 전세계에 무료로, 고품질의 OpenStreetMap 데이터에 액세스가 가능한 지도 및 운행 앱입니다. 모든 지도 데이터를 오프라인으로 사용할수 있도록  메모리 카드에 저장할 수 있습니다. 장치의 GPS 를 통해, OsmAnd 는 자동차, 자전거 및 보행자을 위한 광센서 및 음성 안내와 함께 라우팅(길찾기)을 제공합니다. 모든 주요 기능은 온라인과 오프라인(인터넷연결 필요없음)에서 모두 작동합니다. OsmAnd+ 는 유료 버전 앱입니다. OsmAnd+ 를 구입하므로써 새로운 기능의 프로젝트와 개발을 지원하게 됩니다. 
-
-
-주요 기능 중 일부 :
-
-Navigation : 운행
-
- - 온라인 또는 오프라인 작업
- - 턴바이턴 음성안내
- - 선택적 길안내, 거리이름 표시, 도착예상시각 표시
- - 트래킹하는 동안 중간 포인트 지원
- - 루트를 이탈하였을 때 자동으로 길찾기 재실행
- - 주소 또는 좌표로 장소를 검색(또는 레스토랑, 호텔, 주유소, 박물관 등등)
-
-Map Viewing :지도 보기
-
- - 지도에 현재위치와 방향을 표시
- - 선택적으로 나침반 또는 GPS로 진행방향를 지도에 표시 가능
- - 즐겨찾기로 중요한 장소를 저장하기
- - 주의에 있는 POI를 표시하기
- - 특정 온라인 타일맵 표시하기
- - 위성지도(Bing) 보기
- - 다른 오버레이 지도 표시
- - 선택적으로 영어로 장소 이름을 표시
-
-Use OpenStreetMap and Wikipedia Data:
-
- - 세계 최고의 협력 프로젝트로 최고 품질의 정보를 사용
- - 각 나라 또는 지역별로 이용가능한 글로벌 지도 사용
- - 관광을 위한 위키피디아 POI 이용(무료버전은 이용할 수 없다)
- - 앱으로 부터 직접 무제한 무료 다운로드, (무료버전은 16개의 지도로 다운로드 제한) 
- - 항상 최신의 지도 업데이트(최소 한달에 한번 업데이트됨)
- - 콤팩트한 오프라인 벡터 맵
- - 전지역 지도와 도로전용 지도 선택가능 (예로 일본 전지역은 용량이 700MB, 도로전용 지도는 용량이 200MB)
- - 또한 온라인 지도와 캐시된 지도 지원
-
-
-Safety Features
-
- - 옵션으로 자동으로 주간/야간 보기 전환
- - 옵션으로 속도제한표시, 
- - 옵션으로 속도에 따라 지도크기 변화 
- - 당신의 친구가 당신을 찾을 수 있도록 친구와 위치를 공유
-
-Bicycle and Pedestrian Features
-
- - 지도는 걷기, 하이킹, 자전거 길, 아웃도어 활동을 포함한다,
- - 자전거와 보행자를 위한 특별한 길찾기와 표시모드 
- - 옵션으로 도로 이름을 포함한 대중교통 정거장 표시 (버스, 전차, 기차)
- - 옵션으로 로컬 GPX파일 또는 온라인으로 트랙 기록 저장
- - 옵션으로 속도와 고도 표시
- - 등고선과 음영 표시(부가적인 플러그인을 통해서)
-
-
-직접 OSM에 공헌하기
-
- - 지도 버그 보고
- - 앱에서 직접 OSM으로 GPX파일 업로드하기
- - 포인트 추가 및 포인트를 OSM에 업로드하기 
- - 옵션으로 백그라운드 모드로 트랙기록(기기가 절전 모드로 있는 동안) 
-
-
-OsmAnd 는 오픈 소스 이고 적극적으로 개발되었습니다. 모두가 버그를 보고 번역을 개선 하거나 새로운 기능을 코딩하여 앱에 기여할 수 있습니다. 이 프로젝트는 개발자와 사용자의 상호작용으로 모든 형태에 의해 지속적인 개선을 희망합니다. 프로젝트 진행상황은 새로운 기능의 개발, 코딩, 테스트를 투자하는 재정 지원에 의존하고 있습니다. OsmAnd+ 를 구입하여 앱이 한 단계 성장하는데 도움을! 그것은 특정한 새로운 기능을 투자하는, 또는 osmand.net 에 대한 일반적인 기부를 하는 것도 가능합니다.
-
-
-
-Approximate map coverage and quality:
- - Western Europe: ****
- - Eastern Europe: ***
- - Russia: ***
- - North America: ***
- - South America: **
- - Asia: **
- - Japan &amp; Korea: ***
- - Middle East: **
- - Africa: **
- - Antarctica: *
-
-
-List of countries supported (basically world wide!):
-
-Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, 
-
-Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, 
-
-Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, 
-
-Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, 
-
-Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, 
-Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, 
-
-Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, 
-
-Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, 
-
-Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, 
-Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, 
-
-Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, 
-Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, 
-
-Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, 
-
-Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, 
-
-Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, 
-
-Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
-	</string>
+	<string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2:
+\n\t* 향상된 길찾기
+\n\t* 다이나믹 지도 위젯
+\n\t* 지도화면으로 이동한 지도 설정
+\n\t* 트랙로깅 서비스를 진행하면서 화면 버튼 잠그기
+\n\t* 아랍어, 칸나다어 스크립트와 RTL (오른쪽에서 작성) 언어 수정 "</string>
+	<string name="osmand_extended_description_4000_chars">" OsmAnd 은 전세계에 무료로, 고품질의 OpenStreetMap 데이터에 액세스가 가능한 지도 및 운행 앱입니다.
+\n모든 지도 데이터를 오프라인으로 사용할수 있도록 메모리 카드에 저장할 수 있습니다. 장치의 GPS 를 통해,
+\nOsmAnd 는 자동차, 자전거 및 보행자을 위한 광센서 및 음성 안내와 함께 라우팅(길찾기)을 제공합니다. 모든 주요 기능은 온라인과 오프라인(인터넷연결 필요없음)에서 모두 작동합니다.
+\nOsmAnd+ 는 유료 버전 앱입니다.
+\nOsmAnd+ 를 구입하므로써 새로운 기능의 프로젝트와 개발을 지원하게 됩니다.
+\n\n주요 기능 중 일부 :
+\n\nNavigation : 운행
+\n- 온라인 또는 오프라인 작업
+\n- 턴바이턴 음성안내
+\n- 선택적 길안내, 거리이름 표시, 도착예상시각 표시
+\n- 트래킹하는 동안 중간 포인트 지원
+\n- 루트를 이탈하였을 때 자동으로 길찾기 재실행
+\n- 주소 또는 좌표로 장소를 검색(또는 레스토랑, 호텔, 주유소, 박물관 등등)
+\n\nMap Viewing :지도 보기
+\n- 지도에 현재위치와 방향을 표시
+\n- 선택적으로 나침반 또는 GPS로 진행방향를 지도에 표시 가능
+\n- 즐겨찾기로 중요한 장소를 저장하기
+\n- 주의에 있는 POI를 표시하기
+\n- 특정 온라인 타일맵 표시하기
+\n- 위성지도(Bing) 보기
+\n- 다른 오버레이 지도 표시
+\n- 선택적으로 영어로 장소 이름을 표시
+\n\nUse OpenStreetMap and Wikipedia Data:
+\n- 세계 최고의 협력 프로젝트로 최고 품질의 정보를 사용
+\n- 각 나라 또는 지역별로 이용가능한 글로벌 지도 사용
+\n- 관광을 위한 위키피디아 POI 이용(무료버전은 이용할 수 없다)
+\n- 앱으로 부터 직접 무제한 무료 다운로드, (무료버전은 16개의 지도로 다운로드 제한)
+\n- 항상 최신의 지도 업데이트(최소 한달에 한번 업데이트됨)
+\n- 콤팩트한 오프라인 벡터 맵
+\n- 전지역 지도와 도로전용 지도 선택가능 (예로 일본 전지역은 용량이 700MB, 도로전용 지도는 용량이 200MB)
+\n- 또한 온라인 지도와 캐시된 지도 지원 Safety Features
+\n- 옵션으로 자동으로 주간/야간 보기 전환
+\n- 옵션으로 속도제한표시,
+\n- 옵션으로 속도에 따라 지도크기 변화
+\n- 당신의 친구가 당신을 찾을 수 있도록 친구와 위치를 공유
+\n\nBicycle and Pedestrian Features
+\n- 지도는 걷기, 하이킹, 자전거 길, 아웃도어 활동을 포함한다,
+\n- 자전거와 보행자를 위한 특별한 길찾기와 표시모드
+\n- 옵션으로 도로 이름을 포함한 대중교통 정거장 표시 (버스, 전차, 기차)
+\n- 옵션으로 로컬 GPX파일 또는 온라인으로 트랙 기록 저장
+\n- 옵션으로 속도와 고도 표시
+\n- 등고선과 음영 표시(부가적인 플러그인을 통해서)
+\n\n직접 OSM에 공헌하기
+\n- 지도 버그 보고
+\n- 앱에서 직접 OSM으로 GPX파일 업로드하기
+\n- 포인트 추가 및 포인트를 OSM에 업로드하기
+\n- 옵션으로 백그라운드 모드로 트랙기록(기기가 절전 모드로 있는 동안)
+\n\nOsmAnd 는 오픈 소스 이고 적극적으로 개발되었습니다. 모두가 버그를 보고 번역을 개선 하거나 새로운 기능을 코딩하여 앱에 기여할 수 있습니다.
+\n이 프로젝트는 개발자와 사용자의 상호작용으로 모든 형태에 의해 지속적인 개선을 희망합니다. 프로젝트 진행상황은 새로운 기능의 개발, 코딩, 테스트를 투자하는 재정 지원에 의존하고 있습니다.
+\nOsmAnd+ 를 구입하여 앱이 한 단계 성장하는데 도움을 주세요! 그것은 특정한 새로운 기능을 투자하는, 또는 osmand.net 에 대한 일반적인 기부를 하는 것도 가능합니다.
+\n\nApproximate map coverage and quality:
+\n- Western Europe: ****
+\n- Eastern Europe: ***
+\n- Russia: *** - North America: ***
+\n- South America: **
+\n- Asia: ** - Japan &amp; Korea: ***
+\n- Middle East: **
+\n- Africa: **
+\n- Antarctica: *
+\n\nList of countries supported (basically world wide!):
+\nAfghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe. "</string>
 	<string name="osmand_rastermaps_plugin_description">기본 맵으로 또는 오버레이/언더레이 지도로 온라인 또는 캐시 타일맵의 다양한 구성을 위한 설정을 표시합니다. 
 이 지도는 오프라인으로  준비하거나 OsmAnd 폴더에 복사 할 수 있습니다.</string>
 	
@@ -1880,7 +1818,13 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_auth_pending">허가를 기다리는 중...</string>
     <string name="osmo_locations_sent">위치 전송 %1$d (in buffer %2$d) </string>
     <string name="osmo_conn_successfull">설정된 연결 : %1$s </string>
-    <string name="tip_recent_changes_1_8_alpha">"Changes in 1.8: * Calculate route between route points of GPX track * Changed layout of countries for downloads (support local names search) * Supports GPX/KML import (convert from KML to GPX) * GPX tracks has moved to \'My Data\' * You can split GPX track by distance and check altitude difference/ speed * Auto start navigation after delay "</string>
+    <string name="tip_recent_changes_1_8_alpha">"1.8의 변경 사항 :
+\n\n* GPX 트랙의 루트 지점 간의 경로를 계산
+\n* 국가 별 다운로드 레이아웃 변경 (로컬 이름 검색을 지원)
+\n* GPX / KML 가져 오기를 지원 (KML에서 GPX로 변환)
+\n* GPX 트랙 \"내 데이터\"로 이동
+\n* GPX 트랙을 분할하고 고도차 / 속도를 확인 할 수 있습니다
+\n* 지연이후  자동으로 운행 시작 "</string>
     <string name="use_points_as_intermediates">포인트 사이의 경로를 계산</string>
     <string name="osmo_mode_restart">OsMo 세션 재시작</string>
     <string name="osmo_settings_debug">디버그 정보</string>
