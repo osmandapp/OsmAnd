@@ -177,7 +177,7 @@
   <string name="tip_rotation_switching">kaartrotatie</string>
   
   <string name="binary_map_download_success">"Download succesvol.
-\n\t\n\tOm te gebruiken, activeer \'Menu\' → \'Kaartlagen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'. "</string>
+\n\t\n\tOm te gebruiken, kies \'Menu\' → \'Kaart instellen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'. "</string>
   <string name="tip_day_night_mode">Dag/Nacht modus</string>
   
   <string name="tip_osm_improve">Verbeter openstreetmap gegevens</string>
@@ -328,7 +328,7 @@
   <string name="gpx_option_destination_point">Gebruik huidige bestemming</string>
   <string name="gpx_option_from_start_point">Volg de gehele track</string>
   <string name="switch_to_vector_map_to_see">Offline vectorkaart aanwezig voor deze locatie.
-\n\t\n\tOm deze te gebruiken, activeer \'Menu\' → \'Kaartlagen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'.</string>
+\n\t\n\tOm deze te gebruiken, kies \'Menu\' → \'Kaart instellen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'.</string>
   <string name="choose_audio_stream">Stembegeleiding audiokanaal</string>
   <string name="choose_audio_stream_descr">Kies kanaal voor de stembegeleiding (systeemafhankelijk)</string>
   <string name="voice_stream_voice_call">als telefoongesprek</string>
@@ -1991,7 +1991,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="anonymous_user_hint">een anonieme gebruiker kan niet:\n- een groep aanmaken;\n- groepen en apparaten synchroniseren met de server;\n- groepen en apparaten beheren in een eigen omgeving.</string>
     <string name="anonymous_user">Anonieme gebruiker</string>
     <string name="logged_as">Ingelogd als %1$s</string>
-	<string name="tip_recent_changes_1_9_t">"Aanpassingen in 1.9: * Bijgewerkte kaart stijlen met weg-weergave, vervoerslaag en wandelsymbolen * Zoek een POI langs de route * Markeer een web als onbegaanbaar per route * Eenvoudiger downloaden en updaten van kaarten * Krijg visuele- en geluidsmelding bij het naderen van een Routepunt * Print reisroute en routebeschrijving * Ondersteuning van voorsorteervakken * Ondersteuning van Android Wear * Veel gebruikersinterface-aanpassingen * Aparte zoomfunctie voor de tekstgrootte op de kaart * Speciale audio meldingen in het geval dat u afwijkt van de route * OsMo inlog functionaliteit * Oplossing van OsMo versie incompatibiliteit "</string>
+	<string name="tip_recent_changes_1_9_t">"Aanpassingen in 1.9: * Verbeterde kaart stijlen met weg-weergave, vervoerslaag en wandelsymbolen * Zoek bezienswaardigheden langs de route * Markeer per route, een weg als onbegaanbaar * Eenvoudiger downloaden en updaten van kaarten * Krijg visuele- en geluidsmelding bij het naderen van een Routepunt * Print reisroute en routebeschrijving * Ondersteuning van voorsorteervakken * Ondersteuning van Android Wear * Veel gebruikersinterface-verbeteringen * Aparte zoomfunctie voor de tekstgrootte op de kaart * Speciale audio meldingen in het geval dat u afwijkt van de route * OsMo inlog functionaliteit * Oplossing van OsMo versie incompatibiliteit "</string>
     <string name="rendering_category_routes">Routes</string>
     <string name="rendering_category_details">Details</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Trein en lightrail lijnen</string>
