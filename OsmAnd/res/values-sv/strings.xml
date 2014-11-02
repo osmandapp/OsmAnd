@@ -1724,4 +1724,5 @@
     <string name="rendering_attr_shareTaxiRoutes_name">\"Delad taxi\"-rutter</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trådbussrutter</string>
     <string name="rendering_attr_busRoutes_name">Bussrutter</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Spårvagn och tåg</string>
     </resources>
