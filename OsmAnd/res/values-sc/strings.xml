@@ -1773,4 +1773,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="rendering_attr_shareTaxiRoutes_name">Cumpartzi àndalas in taxi</string>
     <string name="rendering_attr_trolleybusRoutes_name">Àndalas in filobus</string>
     <string name="rendering_attr_busRoutes_name">Àndalas in postale</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tram e trenu</string>
     </resources>
