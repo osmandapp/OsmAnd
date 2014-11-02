@@ -2020,4 +2020,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_attr_shareTaxiRoutes_name">Condividi percorsi in taxi</string>
     <string name="rendering_attr_trolleybusRoutes_name">Percorsi in filobus</string>
     <string name="rendering_attr_busRoutes_name">Percorsi in bus</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tram e treno</string>
     </resources>
