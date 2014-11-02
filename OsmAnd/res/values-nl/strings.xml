@@ -1999,4 +1999,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_attr_shareTaxiRoutes_name">Deeltaxi routes</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trolleybus lijnen</string>
     <string name="rendering_attr_busRoutes_name">Buslijnen</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tram en trein</string>
     </resources>
