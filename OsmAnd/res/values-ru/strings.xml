@@ -1805,4 +1805,5 @@
     <string name="rendering_attr_shareTaxiRoutes_name">Маршрутное такси</string>
     <string name="rendering_attr_trolleybusRoutes_name">Маршруты троллейбусов</string>
     <string name="rendering_attr_busRoutes_name">Маршруты автобусов</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Трамвай и поезд</string>
     </resources>
