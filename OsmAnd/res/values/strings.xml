@@ -30,6 +30,7 @@
     <string name="rendering_attr_shareTaxiRoutes_name">Share taxi routes</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trolleybus routes</string>
     <string name="rendering_attr_busRoutes_name">Bus routes</string>
+    <string name="rendering_category_hide">Hide</string>
     <string name="rendering_category_routes">Routes</string>
     <string name="rendering_category_details">Details</string>
     <string name="rendering_category_transport">Transport</string>
