@@ -145,7 +145,7 @@
 	<string name="tip_rotation_switching">지도 방향</string>
 	
 
-	<string name="binary_map_download_success">"성공적으로 다운로드하였습니다.\n\n 사용을 위해 [메뉴-&gt;계층 지도-&gt;맵 소스-&gt;오프라인 벡터 지도] 를 활성화하세요. "</string>
+	<string name="binary_map_download_success">"성공적으로 다운로드하였습니다.\n\n 사용을 위해 [메뉴-&gt;지도 구성-&gt;지도 소스-&gt;오프라인 벡터 지도] 를 활성화하세요. "</string>
 
 	<string name="tip_day_night_mode">주간/야간 모드</string>
 		
@@ -383,10 +383,10 @@
 	</string>
 
 	<string name="tip_favorites">즐겨찾기 포인트</string>
-	<string name="tip_favorites_t">"Frequently used points can be saved as Favorites, as follows:
-\n\nIn the \'Use location\' context menu for any point, select option \'Add to favorites\' and then enter a name for it.
-\n\nAfter saving a Favorite, it is accessible via \'Menu\' → \'My Places\'. Tapping on any entry in the \'Favorites\' list provides options like to navigate to it, edit or delete it.
-\n\nTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' in \'Menu\' → \'Map layers\'. "</string>
+	<string name="tip_favorites_t">"자주 사용되는 포인트는 아래처럼 즐겨 찾기에 저장할 수 있습니다. ↵
+\n\n포인트를 즐겨 찾기에 저장하려면 맵 컨텍스트 메뉴로 이동하여 \'즐겨 찾기에 추가\'옵션을 선택하고 이름을 붙여주세요.
+\n\n즐겨 찾기 저장 후 \'메인 메뉴\'-&gt; \'내 장소\'를 통해 사용할 수 있습니다.  \'즐겨 찾기\'메뉴에서 즐겨 찾기를 길게 누르면 탐색 할 옵션이 나타나고, 편집 및 삭제할 수 있습니다. ↵
+\n\n지도에 직접 모든 즐겨 찾기 지점을 표시하려면 \'맵 컨텍스트 메뉴\'-&gt; \'지도 구성\'의 \'즐겨 찾기\'레이어를 활성화하십시오. "</string>
 
 	<string name="create_poi_link_to_osm_doc">이미지와 함께 <u>온라인 OSM</u> 맵 분류</string>
     <string name="error_doing_search">오프라인 검색에서 오류가 발생하였습니다</string>
@@ -436,7 +436,7 @@
 	<string name="context_menu_item_share_location">위치 공유</string>
 	<string name="add_waypoint_dialog_added">GPX 포인트 \'\'{0}\'\' 가 성공적으로 추가되었습니다</string>
 	<string name="add_waypoint_dialog_title">기록된 GPX 경로에 포인트 추가</string>
-	<string name="context_menu_item_add_waypoint">GPX 포인트 추가</string>
+	<string name="context_menu_item_add_waypoint">GPX 경유지 추가</string>
 	<string name="amenity_type_administrative">관리</string>
 	<string name="amenity_type_barrier">배리어(Barrier)</string>
 	<string name="amenity_type_education">교육기관</string>
@@ -715,7 +715,7 @@
 	<string name="opening_changeset">변경사항 여는중…</string>
 	<string name="closing_changeset">변경사항 닫는중…</string>
 	<string name="commiting_node">노드 반영중…</string>
-	<string name="loading_poi_obj">POI 적재중…</string>
+	<string name="loading_poi_obj">POI 로딩…</string>
 	<string name="auth_failed">인증 실패</string>
 	<string name="failed_op">실패함</string>
 	<string name="converting_names">모국어/영어 이름 변환중…</string>
@@ -888,7 +888,7 @@
 <string name="poi_dialog_name">이름</string>
 <string name="poi_dialog_opening_hours">열기</string>
 <string name="poi_dialog_comment">설명</string>
-<string name="poi_dialog_comment_default">POI 바꾸기</string>
+<string name="poi_dialog_comment_default">POI 변경</string>
 <string name="poi_dialog_other_tags_message">모든 다른 태그는 보존된다</string>
 <string name="default_buttons_commit">반영</string>
 <string name="default_buttons_reset">재설정</string>
@@ -1026,7 +1026,7 @@
     <string name="osmodroid_refresh">채널 새로 고침</string>
     <string name="osmodroid_seek">개체 탐색</string>
     <string name="osmodroid_unseek">객체 탐색않음</string>
-    <string name="announce_gpx_waypoints">GPX 포인트 알리기</string>
+    <string name="announce_gpx_waypoints">GPX 경유지 알리기</string>
     <string name="speak_title">알리기…</string>
 	<string name="speak_descr">거리 이름, 교통 경고(강제 정지, 속도 범프), 속도 카메라 경고, 제한 속도를 알리기 위해  구성합니다</string>
 	<string name="speak_street_names">거리 이름을 말하기 (TTS )</string>
@@ -1127,7 +1127,7 @@
          \n\t* 나침반을 안정화하기 위해 추가 설정
          \n\t* 지도 화면에서 좌상단 버튼는  메뉴버튼을 대체
     </string>
-    <string name="monitoring_settings">트랙 레코딩</string>
+    <string name="monitoring_settings">여행 레코딩</string>
     <string name="monitoring_settings_descr">트랙을 기록하는 방법을 구성합니다</string>
     <string name="osmand_monitoring_plugin_description">절전모드(스크린 끄기)에서 트래킹 및 경로탐색 활성화, 주기적으로 GPS 장치가 작동중일 때 . 표시 설정은 로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 트랙을 기록하는 설비 가능.</string>
     <string name="osmand_monitoring_plugin_name">로깅 서비스</string>
@@ -1151,14 +1151,14 @@
 	<string name="prefer_in_routing_title">선호…</string>
 	<string name="prefer_in_routing_descr">전용도로 선호</string>
     <string name="download_hillshade_item">음영</string>
-    <string name="download_hillshade_maps">음영 오버레이(중첩)</string>
+    <string name="download_hillshade_maps">음영 오버레이</string>
     <string name="dist_control_start">시작</string>
     
     <string name="local_indexes_cat_srtm">등고선 데이터</string>
     <string name="local_indexes_cat_av">오디오/비디오 데이터</string>
-    <string name="stop_routing_confirm">라우팅을 중지하시겠습니까 ?</string>
-    <string name="clear_dest_confirm">목적지를 취소하시겠습니까?</string>
-    <string name="precise_routing_mode_descr">고장 없이 정확한 경로를 계산(라우팅) 할 수 있습니다 (여전히 거리 제한하고 느린 속도로).</string>
+    <string name="stop_routing_confirm">운행을 중지하시겠습니까 ?</string>
+    <string name="clear_dest_confirm">목적지( 및 경유지)를지우겠습니까?</string>
+    <string name="precise_routing_mode_descr">고장없이 정확한 경로를 계산(라우팅) 할 수 있습니다. 현 단계에서는 거리가 한정되어있어 게다가 느립니다.</string>
     <string name="precise_routing_mode">정확한 라우팅 모드</string>
     <string name="recording_context_menu_show">표시</string>
     <string name="recording_photo_description">사진 %1$s of %2$s</string>
@@ -1195,10 +1195,10 @@
     <string name="recording_can_not_be_played">레코딩을 재생할 수 없습니다</string>
     <string name="recording_context_menu_delete">레코딩 삭제</string>
     <string name="recording_context_menu_play">재생</string>
-    <string name="recording_description">트랙 레코딩 %1$s %2$s of %3$s</string>
-    <string name="recording_default_name">트랙 레코딩</string>
+    <string name="recording_description">레코딩 %1$s %2$s of %3$s</string>
+    <string name="recording_default_name">레코딩</string>
     <string name="av_control_stop">정지</string>
-    <string name="av_control_start">찍기</string>
+    <string name="av_control_start">시작(찍기)</string>
     <string name="map_widget_av_notes">오디오/비디오 노트</string>
     <string name="osmand_srtm_short_description_80_chars">오프라인 등고선에 대한 OsmAnd 플러그인</string>
     <string name="map_widget_distancemeasurement">거리 측정</string>
@@ -1248,11 +1248,11 @@
 	<string name="gps_not_available">설정에서 GPS를 활성화하십시오</string>
     <string name="map_widget_monitoring_services">로깅 서비스</string>
 	<string name="no_route">경로 없음</string>
-	<string name="delete_target_point">포인트 제거</string>
-	<string name="target_point">포인트 %1$s</string>
-    <string name="intermediate_point">포인트 %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">마지막 포인트로 추가</string>
-    <string name="context_menu_item_first_intermediate_point">첫번째 포인트로 추가</string>
+	<string name="delete_target_point">경유지 제거</string>
+	<string name="target_point">경유지 %1$s</string>
+    <string name="intermediate_point">경유지 %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">마지막 경유지로 추가</string>
+    <string name="context_menu_item_first_intermediate_point">첫번째 경유지로 추가</string>
     <string name="add_as_last_destination_point">마지막 경유지로 추가</string>
     <string name="add_as_first_destination_point">첫번째 경유지로 추가</string>
 
@@ -1260,9 +1260,9 @@
     <string name="new_destination_point_dialog">이미 목적지가 설정되었습니다.</string>
     <string name="target_points">경유지</string>
     <string name="intermediate_point_too_far">도로에서 너무 멀리 떨어진 포인트 %1$s .</string>
-    <string name="arrived_at_intermediate_point">포인트에 도착했습니다</string>
-    <string name="context_menu_item_intermediate_point">포인트로 추가</string>
-    <string name="map_widget_intermediate_distance">포인트</string>
+    <string name="arrived_at_intermediate_point">경유지에 도착했습니다</string>
+    <string name="context_menu_item_intermediate_point">경유지로 추가</string>
+    <string name="map_widget_intermediate_distance">경유지</string>
     <string name="ending_point_too_far">도로에서 너무 멀리 떨어진 마지막 포인트.</string>
     <string name="btn_add_tag">태그 추가</string>
     <string name="btn_advanced_mode">고급 모드…</string>
@@ -1603,7 +1603,9 @@
 	<string name="downloading_file_new">다운로드 중…</string>
 	<string name="favourites_remove_dialog_msg">즐겨찾기 포인트를 삭제 하시겠습니까 \'%s\'?</string>
 	<string name="av_camera_focus_hiperfocal">지나친 초점 포커스</string>
-	<string name="use_distance_measurement_help">* Tap to mark a point.\n * Press and hold on the map to delete previous point.\n 이전 포인트를 지우기 위해 지도에서 누르고 홀드하기 * Press and hold on point to view and attach description.\n 설명을 읽고 알리기 위해 포인트에서누르고 홀드하기 * Click on measurement widget to see more actions. 더 많은 액션을 보기 위해 측정위젯 클릭하기.</string>
+	<string name="use_distance_measurement_help">* 포인트를 탭하여 표시하기.\n* 이전 포인트를 지우기 위해 지도에서 누르고 홀드하기
+\n* 설명을 읽고 알리기 위해 포인트에서누르고 홀드하기
+\n* 더 많은 액션을 보기 위해 측정위젯 클릭하기.</string>
     <string name="tip_map_styles_t">"OsmAnd는 오프라인 벡터 지도를 당신의 취향에 따라 다른 지도 스타일로  표시 할 수 있습니다. : ↵
 \n↵
 \n기본적인  \'기본\'지도 스타일 외에 \'메뉴\'→ \'화면 설정\'→ \'지도 스타일\'에서 선택할 수 있습니다. 예를 들어, ↵
@@ -1648,7 +1650,7 @@
 	<string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2:
 \n\t* 향상된 길찾기
 \n\t* 다이나믹 지도 위젯
-\n\t* 지도화면으로 이동한 지도 설정
+\n\t* 지도 설정을 지도화면으로 이동
 \n\t* 트랙로깅 서비스를 진행하면서 화면 버튼 잠그기
 \n\t* 아랍어, 칸나다어 스크립트와 RTL (오른쪽에서 작성) 언어 수정 "</string>
 	<string name="osmand_extended_description_4000_chars">" OsmAnd 은 전세계에 무료로, 고품질의 OpenStreetMap 데이터에 액세스가 가능한 지도 및 운행 앱입니다.
@@ -1745,7 +1747,7 @@
     <string name="voice_pref_title">음성</string>
     <string name="misc_pref_title">기타</string>
     <string name="localization_pref_title">현지화</string>
-    <string name="osmand_srtm_long_description_1000_chars">이 플러그인은 OsmAnd 의 오프라인 지도에 표시할 수 있는 등고선을 제공합니다. (북쪽으로 70도 남쪽으로 70도 사이 ) 글로벌 데이터는 SRTM (셔틀 레이더 지형 미션 ) 과 ASTER (고급화 된 Spaceborne 열 방출 및 반사 복사계 테라 온보드영상 기기) NASA 의 주력 위성에 의한 측정을 기반으로 합니다. 지구 관측 시스템의 ASTER 는 NASA 사이의 협력 노력 , 일본의 경제 산업성(METI ), 일본 우주 시스템 (J- spacesystems )의 장관.</string>
+    <string name="osmand_srtm_long_description_1000_chars">이 플러그인은 OsmAnd 의 오프라인 지도에 표시할 수 있는 등고선을 제공합니다. (북쪽으로 70도 남쪽으로 70도 사이 ) 글로벌 데이터는 SRTM (셔틀 레이더 지형 미션 :Shuttle Radar Topography Mission) 과 ASTER (고급화된 Spaceborne 열 방출 및 반사 복사계 테라 온보드영상 기기 : Advanced Spaceborne Thermal Emission and Reflection Radiometer) NASA 의 주력 위성에 의한 측정을 기반으로 합니다. 지구 관측 시스템의 ASTER 는 NASA , 일본의 경제 산업성(METI ), 일본 우주 시스템 (J- spacesystems )의 장관 사이의 협력한 노력의 결실입니다.</string>
     <string name="tip_altitude_offset_t">대부분의 GPS 장치는 로컬로 사용되는 시스템에 대한 변환이 위치에 의존하는 보정을 필요로 하는 타원체 기반 WGS84 참조 시스템에서 고도 측정을 보고합니다.
 		이 지역 시스템에 더 나은 근사치의 EGM96 (지오이드) 기준 입니다.
 		[설정]를 통해 세계 Altitide 보정 파일를 다운로드 한 후 EGM96 시스템의 고도는 위치를 표시합니다.  
@@ -1754,15 +1756,15 @@
     <string name="interrupt_music_descr">음성안내를 할 때 음악을 중지</string>
 	<string name="interrupt_music">음악 중지</string>
 	<string name="tip_recent_changes_0_8_0_t">"Changes in 0.8.0:
-\n\t- *Plugin functionality*
-\n\t - Most functionality is grouped by features and can be enabled/disabled in the Settings/Plugins. You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.
-\n\t- *New offline map data support*
-\n\t - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed).
-\n\t - You need to download completely new offline data (old data will not be supported anymore)
-\n\t- *Offline Routing*
-\n\t - Offline routing becomes more robust
-\n\t *Usability and UI experience*
-\n\t - Improved in many areas "</string>
+\n\n * 플러그인 기능 * ↵
+\n→ - 대부분의 기능은 그룹화 된 설정 / 플러그인별로 활성화 / 비활성화 할 수 있습니다. (온라인 또는 캐시 된) 타일 맵 소스, 추적 설정 및 다른 많은 신규 및 기존 기능을 활성화 할 수 있습니다. ↵
+\n\n * 새로운 오프라인 지도 데이터 지원 * ↵
+\n→ - 지도 렌더링은 보다 빠르고 정확하게 됨(해안 침수 면적의 문제는 거의 해결 됨) ↵
+\n→ - 새로운 오프라인 데이터를 다운로드해야합니다 (오래된 데이터는 지원되지 않습니다) ↵
+\n\n* 오프라인 라우팅 *↵
+\n→ - 오프라인 라우팅은 더 견실하게 ↵
+\n\n* 사용성 및 사용자 인터페이스 * ↵
+\n→ - 많은 분야에서 개선 "</string>
 	<string name="tip_day_night_mode_t_v2">"The map appearance can for offline vector maps be changed between day (brighter) and night (darker). Night colors are safer and more comfortable for night driving.
 \n\nYou can set a policy for day/night switching in \'Menu\' → \'Configure screen\' → \'Day/night map\'.
 \n\nThe choices are:
@@ -1912,17 +1914,17 @@
     <string name="gpx_available_current_track">현재 기록중인 트랙</string>
     <string name="loading_smth">%1$s 불러오는 중…</string>
     <string name="map_widget_plain_time">현재 시간</string>
-    <string name="gpx_wpt">포인트</string>
+    <string name="gpx_wpt">경유지</string>
     <string name="selected_gpx_info_show">\n\n지도를 보려면 누르고 계십시요</string>
-    <string name="delay_navigation_start">순차적인 길안내를 시작합니다</string>
+    <string name="delay_navigation_start">순차적인 안내를 시작합니다</string>
     <string name="selected">선택됨</string>
     <string name="gpx_split_interval">분할 간격</string>
-    <string name="gpx_info_waypoints">포인트: %1$s </string>
+    <string name="gpx_info_waypoints">"경유지: %1$s "</string>
 	<string name="gpx_info_asc_altitude">하강/상승: %1$s</string>
     <string name="save_as_favorites_points">즐겨찾기 그룹으로 저장</string>
-    <string name="select_destination_and_intermediate_points">포인트 선택</string>
+    <string name="select_destination_and_intermediate_points">경유지 선택</string>
     <string name="layer_amenity_label">포인트 이름</string>
-    <string name="show_zoom_buttons_navigation_descr">길안내중에 줌 버튼 보기</string>
+    <string name="show_zoom_buttons_navigation_descr">운행중 줌 버튼 보기</string>
     <string name="show_zoom_buttons_navigation">줌 버튼 보이기</string>
     <string name="none_selected_gpx">선택한 GPX 파일 없음. 이용 가능한 GPX 파일을 선택하려면 누르고 있어요.</string>
     <string name="local_index_unselect_gpx_file">선택을 취소합니다.</string>
@@ -2015,7 +2017,7 @@
     <string name="distance">거리</string>
     <string name="index_tours">여행</string>
     <string name="flat_list_waypoints">모두</string>
-    <string name="waypoints">포인트</string>
+    <string name="waypoints">경유지</string>
     <string name="targets">목적지</string>
     <string name="way_alarms">교통 경고</string>
     <string name="speak_favorites">가까운 즐겨찾기 알리기</string>
