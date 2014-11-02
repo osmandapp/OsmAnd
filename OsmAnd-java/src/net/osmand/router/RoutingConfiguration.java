@@ -135,6 +135,12 @@ public class RoutingConfiguration {
 			return routers.get(applicationMode);
 			
 		}
+
+		public void removeImpassableRoad(RouteDataObject obj) {
+			impassableRoadIds.remove(obj.id);
+			impassableRoads.remove(obj);
+			
+		}
 	}
 
 	private static int parseSilentInt(String t, int v) {

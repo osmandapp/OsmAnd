@@ -758,6 +758,17 @@ public class MapActivityActions implements DialogProvider {
 						}
 					}).reg();
 		}
+		if(routingHelper.isRouteCalculated()) {
+			optionsMenuHelper.item(R.string.impassable_road)
+			.icons(R.drawable.ic_action_road_works_dark, R.drawable.ic_action_road_works_light)
+			.listen(new OnContextMenuClick() {
+				@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						app.getAvoidSpecificRoads().showDialog(mapActivity);
+						return true;
+					}
+			}).reg();
+		}
 		
 		// 5-9. Default actions (Layers, Configure Map screen, Settings, Search, Favorites) 
 		optionsMenuHelper.item(R.string.search_button)

@@ -25,6 +25,7 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -109,6 +110,7 @@ public class OsmandApplication extends Application {
 	private TargetPointsHelper targetPointsHelper;
 	private RoutingConfiguration.Builder defaultRoutingConfig;
 	private WaypointHelper waypointHelper;
+	private AvoidSpecificRoads avoidSpecificRoads;
 
 	private boolean applicationInitializing = false;
 	private Locale preferredLocale = null;
@@ -161,6 +163,7 @@ public class OsmandApplication extends Application {
 		taskManager = new OsmAndTaskManager(this);
 		resourceManager = new ResourceManager(this);
 		daynightHelper = new DayNightHelper(this);
+		avoidSpecificRoads = new AvoidSpecificRoads(this);
 		locationProvider = new OsmAndLocationProvider(this);
 		savingTrackHelper = new SavingTrackHelper(this);
 		liveMonitoringHelper = new LiveMonitoringHelper(this);
@@ -217,6 +220,10 @@ public class OsmandApplication extends Application {
 	public OsmAndTaskManager getTaskManager() {
 		return taskManager;
 	}
+	
+	public AvoidSpecificRoads getAvoidSpecificRoads() {
+		return avoidSpecificRoads;
+	}
 
 	
 	public OsmAndLocationProvider getLocationProvider() {
@@ -226,6 +233,7 @@ public class OsmandApplication extends Application {
 	public OsmAndAppCustomization getAppCustomization() {
 		return appCustomization;
 	}
+	
 	
 	public void setAppCustomization(OsmAndAppCustomization appCustomization) {
 		this.appCustomization = appCustomization;

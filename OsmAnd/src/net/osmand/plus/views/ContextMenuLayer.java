@@ -7,11 +7,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import alice.util.Sleep;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -70,6 +72,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private Drawable boxLeg;
 	private float scaleCoefficient = 1;
 	private Rect textPadding;
+	private CallbackWithObject<LatLon> selectOnMap = null;
 	
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
@@ -169,6 +172,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 	}
+	
+	
+	public void setSelectOnMap(CallbackWithObject<LatLon> selectOnMap) {
+		this.selectOnMap = selectOnMap;
+	}
+	
 	
 	private void layoutText() {
 		Rect padding = new Rect();
@@ -333,6 +342,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		boolean nativeMode = (Build.VERSION.SDK_INT >= 14) || view.getSettings().SCROLL_MAP_BY_GESTURES.get();
 		int val = pressedInTextView(tileBox, point.x, point.y);
+		if(selectOnMap != null) {
+			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
+			CallbackWithObject<LatLon> cb = selectOnMap;
+			selectOnMap = null;
+			cb.processResult(latlon);
+			setLocation(latlon, null);
+			return true;
+		}
 		if (val == 2) {
 			setLocation(null, ""); //$NON-NLS-1$
 			view.refreshMap();
