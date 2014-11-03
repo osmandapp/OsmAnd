@@ -1846,4 +1846,8 @@
     <string name="rendering_attr_shareTaxiRoutes_name">分享計程車路線</string>
     <string name="rendering_attr_trolleybusRoutes_name">無軌電車路線</string>
     <string name="rendering_attr_busRoutes_name">公車路線</string>
+    <string name="select_impassable_road">在地圖上選取</string>
+    <string name="impassable_road">避開的道路…</string>
+    <string name="rendering_attr_tramTrainRoutes_name">有軌電車和火車</string>
+    <string name="rendering_category_hide">隱藏</string>
     </resources>
