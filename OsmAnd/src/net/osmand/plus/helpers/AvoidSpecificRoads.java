@@ -58,8 +58,9 @@ public class AvoidSpecificRoads {
 				// User super class to create the View
 				View v = convertView;
 				if (position == 0) {
-					TextView tv = new TextView(ctx);
-					tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+					TextView tv = (TextView) ctx.getLayoutInflater().inflate(R.layout.list_textview, null);
+					tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+					tv.setText(app.getString(R.string.select_impassable_road));
 					v = tv;
 				} else {
 					if (v == null || v.findViewById(R.id.info_close) == null) {
@@ -83,6 +84,10 @@ public class AvoidSpecificRoads {
 							remove(obj);
 							getBuilder().removeImpassableRoad(obj);
 							notifyDataSetChanged();
+							RoutingHelper rh = app.getRoutingHelper();
+							if(rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
+								rh.recalculateRouteDueToSettingsChange();
+							}
 						}
 					});
 					
@@ -145,6 +150,10 @@ public class AvoidSpecificRoads {
 			protected void onPostExecute(RouteDataObject result) {
 				if(result != null) {
 					getBuilder().addImpassableRoad(result);
+					RoutingHelper rh = app.getRoutingHelper();
+					if(rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
+						rh.recalculateRouteDueToSettingsChange();
+					}
 					showDialog(activity);
 				}
 			};
