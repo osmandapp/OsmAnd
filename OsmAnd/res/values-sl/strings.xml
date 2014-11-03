@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	<string name="settings_Button">Nastavitve</string>
@@ -382,7 +382,7 @@
 	<string name="navigate_point_format">Oblika:</string>
 	<string name="day_night_info">Informacije dan/noč</string>
 	<string name="map_widget_day_night">Zemljevid dan/noč</string>
-	<string name="map_widget_vector_attributes">Lastnosti upodabljanja:</string>
+	<string name="map_widget_vector_attributes">Lastnosti upodabljanja</string>
 	<string name="map_widget_renderer">Slog upodabljanja</string>
 	<string name="native_app_allocated_memory_descr">Skupni izvirni pomnilnik uporabljen od aplikacije %1$s MB (Dalvik %2$s MB, drugo %3$s MB). Sorazmerni pomnilnik %4$s MB (omejitev Androida %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">Skupni izvirni pomnilnik</string>
@@ -1578,7 +1578,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="tip_faq">Pogosto zastavljena vprašanja</string>
     <string name="local_osm_changes_delete_all_confirm">Izbrisali boste %1$d osm sprememb. Ali ste prepričani?</string>
     <string name="local_osm_changes_delete_all">Izbriši vse</string>
-    <string name="map_widget_map_rendering">Upodabljanje zemljevida:</string>
+    <string name="map_widget_map_rendering">Upodabljanje zemljevida</string>
     <string name="amenity_type_seamark">Pomorski znak</string>
     <string name="app_modes_choose_descr">Izberite uporabne profile, ki so vidni v aplikaciji</string>
     <string name="app_modes_choose">Profili aplikacije</string>
@@ -1894,7 +1894,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="arrival_distance_factor_late">Pozno</string>
     <string name="arrival_distance_factor_at_last">V zadnjih metrih</string>
     <string name="hide_all_waypoints">Odstrani vse</string>
-<string name="rendering_attr_coloredBuildings_name">Pobarvane stavbe</string>
+<string name="rendering_attr_coloredBuildings_name">Pobarvaj stavbe glede na vrsto</string>
     <string name="osmo_leave_confirmation_msg">Ali želite zapustiti skupino %1$s?</string>
     <string name="av_camera_pic_size">Velikost fotografije</string>
 	<string name="av_camera_pic_size_descr">Izberite velikost posnetkov vgrajenega fotoaparata</string>
@@ -1940,4 +1940,14 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="text_size_descr">Nastavite velikost napisov na zemljevidu.</string>
     <string name="text_size">Velikost napisov</string>
     <string name="rendering_attr_osmcTraces_name">Prosojnica s simboli za pohodništvo</string>
+    <string name="select_impassable_road">Izberi na zemljevidu</string>
+    <string name="impassable_road">Izogibanje cestam…</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tramvaj in vlak</string>
+    <string name="rendering_attr_busRoutes_name">Avtobusne linije</string>
+    <string name="rendering_category_hide">Skrij</string>
+    <string name="rendering_category_routes">Proge</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Troljebusne linije</string>
+    <string name="rendering_attr_tramRoutes_name">Tramvajske proge</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Linije deljenih taksijev</string>
+    <string name="rendering_category_details">Podrobnosti</string>
     </resources>
