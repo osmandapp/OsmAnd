@@ -238,7 +238,7 @@
 	<string name="search_position_map_view">마지막 지도 보기</string>
 	
 	<string name="select_search_position">주변 검색 :</string>
-	<string name="context_menu_item_search">주변 검색</string>
+	<string name="context_menu_item_search">가까운 주변 검색</string>
 	<string name="tip_recent_changes_0_6_7_t">"0.6.7 버전에 대한 변경사항들 :
 \n\t- 오프라인 데이터 관리 (OsmAnd 에서 직접 오프라인 데이터 다운로드, 삭제, 활성화 / 비활성화)
 \n\t- 등록지점 및 그룹 (등록지점 그룹화, 삭제, 관리)
@@ -246,9 +246,9 @@
 \n\t- GPX 네비게이션 (다 많은 옵션, 종료 후 네비게이션 계속, 로타리 지원)
 \n\t- 오프라인 사용을 위해 GPX경로를 루트로 저장하는 기능
 \n\t- GPX 모니터링 개선 (부정확한 위치 필터링 및 정확도/고도/속도 저장)
-\n\t- OSM 커뮤니티로 GPX 업로드 (http://download.osmand.net/gpx/)
+\n\t- GPX파일을 OSM 커뮤니티로 업로드 (http://download.osmand.net/gpx/)
 \n\t- 벡터 렌더링 개선
-\n\t- TTS 엔진 개선 (정확한 거리 안내, 마일 가능)
+\n\t- TTS 엔진 개선 (정확한 거리 안내, 마일 활성화)
 \n\t- 버그 수정 "</string>
 	<string name="save_route_dialog_title">루트를 변환하여 GPX파일로 저장</string>
 	<string name="route_successfully_saved_at">경로가 \'%1$s\'로 성공적으로 저장되었습니다.</string>
@@ -1561,7 +1561,8 @@
 	<string name="city_type_city">도시</string>
 	<string name="maps_define_edit">정의/편집…</string>
 	<string name="tip_recent_changes_1_5_t">"Changes in 1.5:
-\n\t* 속도제한과 카메라에 대한 음성경고.\n\t* 거리 이름 알리기.\n\t* 고화질 지도 아이콘. Lots of UI changes
+\n\t* 속도제한과 카메라에 대한 음성경고.\n\t* 거리 이름 알리기.\n\t* 고화질 지도 아이콘.
+\n        * 많은 UI 변경
 \n\t* 버그수정. "</string>
     <string name="max_speed_none">무제한</string>
     <string name="index_name_openmaps">EU 지도 열기</string>
