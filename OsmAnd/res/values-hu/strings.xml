@@ -1790,7 +1790,7 @@
 	<string name="tip_recent_changes_1_9_t">"Az 1.9-es verzió újdonságai: * Frissített térképstílusok útburkolat megjelenítéssel, tömegközlekedési réteggel és turistajelzésekkel * POI-k keresése az útvonal mentén * Út járhatatlannak jelölése szezonálisan * Térképek egyszerűbb letöltése és frissítése * Hangjelzés és vizuális értesítés útpontok elérésekor * Itiner és kanyarodási információk nyomtatása * Kanyarodósávok megjelenítése * Android Wear támogatás * Sok felhasználói felület csiszolás * Külön zoom a szövegméretnek a térképen * Külön hangjelzés, ha letértél az útról * OsMo bejelentkezési lehetőség * OsMo  verzió inkompatibilitási javítás "</string>
     <string name="rendering_category_routes">Útvonalak</string>
     <string name="rendering_category_details">Részletek</string>
-    <string name="rendering_category_transport">Útvonalak</string>
+    <string name="rendering_category_transport">Tömegközlekedés</string>
     <string name="rendering_category_others">Egyéb térképtulajdonságok</string>
     <string name="map_widget_appearance_rem">Többi elem</string>
     <string name="map_widget_top">Státuszsor</string>
@@ -1799,4 +1799,13 @@
     <string name="layers_category_show">Mutat</string>
 	<string name="configure_map">Térképi tartalom</string>
     <string name="search_radius_proximity">ennek a közelében</string>
+    <string name="select_impassable_road">Kiválasztás a térképen</string>
+    <string name="impassable_road">Utak elkerülése…</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Villamos és vasút</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Vasút és HÉV</string>
+    <string name="rendering_attr_tramRoutes_name">Villamos</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Trolibusz</string>
+    <string name="rendering_attr_busRoutes_name">Busz</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Iránytaxi</string>
+    <string name="rendering_category_hide">Elrejtés</string>
     </resources>
