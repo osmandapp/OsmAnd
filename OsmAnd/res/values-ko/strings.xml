@@ -2080,4 +2080,8 @@
     <string name="rendering_attr_shareTaxiRoutes_name">택시 노선 공유</string>
     <string name="rendering_attr_trolleybusRoutes_name">무궤도 전차 노선</string>
     <string name="rendering_attr_busRoutes_name">버스 노선</string>
+    <string name="select_impassable_road">지도에서 선택</string>
+    <string name="impassable_road">도로 회피…</string>
+    <string name="rendering_attr_tramTrainRoutes_name">트램과 기차</string>
+    <string name="rendering_category_hide">숨기기</string>
     </resources>
