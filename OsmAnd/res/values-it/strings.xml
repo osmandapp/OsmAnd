@@ -2021,4 +2021,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_attr_trolleybusRoutes_name">Percorsi in filobus</string>
     <string name="rendering_attr_busRoutes_name">Percorsi in bus</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tram e treno</string>
+    <string name="select_impassable_road">Seleziona nella mappa</string>
+    <string name="impassable_road">Evita strade …</string>
+    <string name="rendering_category_hide">Nascondi</string>
     </resources>
