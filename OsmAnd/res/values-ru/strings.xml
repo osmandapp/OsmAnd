@@ -1806,4 +1806,7 @@
     <string name="rendering_attr_trolleybusRoutes_name">Маршруты троллейбусов</string>
     <string name="rendering_attr_busRoutes_name">Маршруты автобусов</string>
     <string name="rendering_attr_tramTrainRoutes_name">Трамвай и поезд</string>
+    <string name="rendering_category_hide">Скрыть</string>
+    <string name="select_impassable_road">Выбрать на карте</string>
+    <string name="impassable_road">Избегать дороги…</string>
     </resources>
