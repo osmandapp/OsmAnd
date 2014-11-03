@@ -1925,4 +1925,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_attr_shareTaxiRoutes_name">Comparteix rutes de taxi</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rutes de troleibús</string>
     <string name="rendering_attr_busRoutes_name">Rutes de bus</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tramvia i tren</string>
     </resources>
