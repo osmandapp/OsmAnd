@@ -214,6 +214,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		currentPositionHelper = new CurrentPositionHelper(app);
 		locationSimulation = new OsmAndLocationSimulation(app, this);
 	}
+	
+	public RouteDataObject findRoute(double lat , double lon) {
+		return currentPositionHelper.runUpdateInThread(lat, lon);
+	}
 
 	public void resumeAllUpdates() {
 		final LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);

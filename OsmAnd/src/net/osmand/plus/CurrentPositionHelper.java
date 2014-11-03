@@ -42,7 +42,7 @@ public class CurrentPositionHelper {
 		ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, app.getResourceManager().getRoutingMapFiles());
 	}
 	
-	private RouteDataObject runUpdateInThread(Location loc) {
+	public synchronized RouteDataObject runUpdateInThread(double lat , double lon) {
 		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd(false);
 		try {
 			if(ctx == null || am != app.getSettings().getApplicationMode()) {
@@ -51,7 +51,7 @@ public class CurrentPositionHelper {
 					return null;
 				}
 			}
-			RouteSegment sg = rp.findRouteSegment(loc.getLatitude(), loc.getLongitude(), ctx);
+			RouteSegment sg = rp.findRouteSegment(lat, lon, ctx);
 			if(sg == null) {
 				return null;
 			}
@@ -64,13 +64,13 @@ public class CurrentPositionHelper {
 	
 	private void scheduleRouteSegmentFind(final Location loc){
 		if(calculatingThread == Thread.currentThread()) {
-			lastFound = runUpdateInThread(loc);
+			lastFound = runUpdateInThread(loc.getLatitude(), loc.getLongitude());
 		} else if(calculatingThread == null && loc != null) {
 			Runnable run = new Runnable() {
 				@Override
 				public void run() {
 					try {
-						lastFound = runUpdateInThread(loc);
+						lastFound = runUpdateInThread(loc.getLatitude(), loc.getLongitude());
 						if (lastAskedLocation != loc) {
 							// refresh and run new task if needed
 							getLastKnownRouteSegment(lastAskedLocation);

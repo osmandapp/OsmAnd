@@ -24,7 +24,6 @@ import net.osmand.render.RenderingRulesStorage;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -261,12 +260,16 @@ public class ConfigureMapMenu {
 		RenderingRulesStorage renderer = activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
 			List<RenderingRuleProperty> customRules = new ArrayList<RenderingRuleProperty>(renderer.PROPS.getCustomRules());
-			createProperties(customRules, R.string.rendering_category_details, "details",
+			
+			createProperties(customRules, R.string.rendering_category_transport, "transport",
 					adapter, activity);
 			createProperties(customRules, R.string.rendering_category_routes, "routes",
 					adapter, activity);
-			createProperties(customRules, R.string.rendering_category_transport, "transport",
+			createProperties(customRules, R.string.rendering_category_details, "details",
 					adapter, activity);
+			createProperties(customRules, R.string.rendering_category_hide, "hide",
+					adapter, activity);
+			
 			if(customRules.size() > 0) {
 				adapter.item(R.string.rendering_category_others).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 				createCustomRenderingProperties(adapter, activity, customRules);
