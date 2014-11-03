@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dip"
-        android:layout_marginLeft="dip"
+        android:layout_marginLeft="20dip"
         android:layout_marginTop="12dip"
         android:gravity="center_vertical"
         android:textSize="20sp" >
