@@ -1725,4 +1725,7 @@
     <string name="rendering_attr_trolleybusRoutes_name">Trådbussrutter</string>
     <string name="rendering_attr_busRoutes_name">Bussrutter</string>
     <string name="rendering_attr_tramTrainRoutes_name">Spårvagn och tåg</string>
+    <string name="select_impassable_road">Välj på kartan</string>
+    <string name="impassable_road">Undvik vägar …</string>
+    <string name="rendering_category_hide">Dölj</string>
     </resources>
