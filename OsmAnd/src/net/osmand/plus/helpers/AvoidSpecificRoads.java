@@ -24,6 +24,7 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -73,8 +74,10 @@ public class AvoidSpecificRoads {
 					((TextView)v.findViewById(R.id.waypoint_dist)).setText(OsmAndFormatter.getFormattedDistance((float) dist, app));
 					
 					((TextView)v.findViewById(R.id.waypoint_text)).setText(getText(obj));
-					View remove = v.findViewById(R.id.info_close);
+					ImageButton remove = (ImageButton) v.findViewById(R.id.info_close);
 					remove.setVisibility(View.VISIBLE);
+					remove.setImageResource(app.getSettings().isLightContentMenu()?
+							R.drawable.ic_action_gremove_light : R.drawable.ic_action_gremove_dark);
 					remove.setOnClickListener(new View.OnClickListener() {
 						
 						@Override
