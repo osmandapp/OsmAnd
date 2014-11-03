@@ -1991,4 +1991,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_attr_busRoutes_name">Аўтобусныя маршруты</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Маршрутныя таксі</string>
     <string name="rendering_attr_tramTrainRoutes_name">Трамвай і цягнік</string>
+    <string name="select_impassable_road">Выбраць на мапе</string>
+    <string name="impassable_road">Пазьбягаць дарогі…</string>
+    <string name="rendering_category_hide">Схаваць</string>
     </resources>
