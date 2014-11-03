@@ -243,13 +243,13 @@ public class AppModeDialog {
 	}
 
 	static private ToggleButton createToggle(Context ctx, LinearLayout layout, ApplicationMode mode, boolean drawer){
-		int left = 0;
+		int margin = 0;
 		if (drawer) {
-			left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, ctx.getResources().getDisplayMetrics());
+			margin = 5;
 		} else {
-			left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, ctx.getResources().getDisplayMetrics());
+			margin = 10;
 		}
-
+		int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, margin, ctx.getResources().getDisplayMetrics());
 		int metrics = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 64, ctx.getResources().getDisplayMetrics());
 		ToggleButton tb = new ToggleButton(ctx);
 		tb.setTextOn("");
