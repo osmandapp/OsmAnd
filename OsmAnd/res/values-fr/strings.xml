@@ -1853,5 +1853,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_attr_trainLightrailRoutes_name">Voies de chemin de fer</string>
     <string name="rendering_attr_tramRoutes_name">Voies de tramway</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Voies partagées pour les taxi</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Tram et train</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tramway et train</string>
+    <string name="select_impassable_road">Sélectionnez sur la carte</string>
+    <string name="impassable_road">Évitez les routes…</string>
+    <string name="rendering_category_hide">Masquer</string>
     </resources>
