@@ -1729,7 +1729,7 @@ s často kladenými otázkami.</string>
     <string name="traffic_warning_calming">Zpomalovací prvek</string>
     <string name="traffic_warning_speed_camera">Rychlostní radar</string>
     <string name="traffic_warning">Dopravní varování</string>
-	<string name="route_descr_destination"/>
+	<string name="route_descr_destination">Cíl</string>
     <string name="local_index_description">Klikněte na existující položku k zobrazení více detailů, podržte pro vypnutí nebo smazání. V zařízení je %1$s volného místa:</string>
 	<string name="text_size">Velikost písma</string>
     <string name="text_size_descr">Nastavit velikost písma na mapě.</string>
@@ -1757,7 +1757,7 @@ s často kladenými otázkami.</string>
 	<string name="configure_map">Nastavení mapy</string>
     <string name="rendering_category_others">Ostatní vlastnosti mapy</string>
     <string name="map_widget_appearance_rem">Zbývající prvky</string>
-    <string name="search_radius_proximity">V blízkosti</string>
+    <string name="search_radius_proximity">Blíže než</string>
     <string name="rendering_category_routes">Trasy</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Vlakové a kolejové linky</string>
     <string name="rendering_attr_tramRoutes_name">Tramvajové linky</string>
@@ -1766,4 +1766,7 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Sdílené mikrobusové linky</string>
     <string name="tip_recent_changes_1_9_t">"Změny v 1.9: * Aktualizované mapové styly s vykreslováním povrchu cest, dopravou a turistickými symboly * Hledání POI podél trasy * Značení neprůchodných cest v rámci relace * Jednodušší stahování a aktualizace map * Vizuální a zvukové upozornění na blížící se průjezdní bod * Tisk itineráře a odbočovacích pokynů * Podpora odbočovacích pruhů * Podpora Android Wear * Mnoho změn zobrazení * Oddělení mapového přiblížení a velikosti písma * Zvukové upozornění při odchýlení z trasy * Přihlášení do služby OsMo * Oprava nekompatibilit s verzí OsMo "</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tramvaj a vlak</string>
+    <string name="select_impassable_road">Vybrat na mapě</string>
+    <string name="impassable_road">Vyhnout se cestám…</string>
+    <string name="rendering_category_hide">Skrýt</string>
     </resources>
