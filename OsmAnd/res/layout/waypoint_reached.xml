@@ -6,7 +6,8 @@
               android:layout_height="match_parent"
               android:background="@drawable/view_transparent_selection"
               android:id="@+id/package_delivered_layout"
-              android:minHeight="48dp">
+              android:minHeight="48dp"
+              android:descendantFocusability="blocksDescendants" >
 
     <ImageView android:id="@+id/waypoint_icon"
                android:layout_marginLeft="8dp"
@@ -41,6 +42,7 @@
                  android:contentDescription="@string/more"
                  android:layout_gravity="center_vertical"
                  android:visibility="gone"
+                 android:focusable="false"
                  style="@style/Widget.Sherlock.ActionButton"
                  android:src="@drawable/ic_action_core_overflow_dark"/>
 
