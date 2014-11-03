@@ -463,7 +463,7 @@ public class MapActivity extends AccessibleActivity implements
 //		}
 		final int newZoom = mapView.getZoom() + stp;
 		if (newZoom > 22) {
-			AccessibleToast.makeText(this, "Max zoom", Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+			AccessibleToast.makeText(this, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			return;
 		}
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
