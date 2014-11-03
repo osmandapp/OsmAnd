@@ -1869,4 +1869,9 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="rendering_attr_trolleybusRoutes_name">Troleibusų maršrutai</string>
     <string name="rendering_attr_tramRoutes_name">Tramvajų maršrutai</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Traukinių maršrutai</string>
+    <string name="select_impassable_road">Pasirinkite žemėlapį</string>
+    <string name="impassable_road">Vengti kelių…</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tramvajus ir traukinys</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Maršrutinis taksi</string>
+    <string name="rendering_category_hide">Slėpti</string>
     </resources>
