@@ -21,7 +21,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -58,9 +57,9 @@ public class AvoidSpecificRoads {
 				// User super class to create the View
 				View v = convertView;
 				if (position == 0) {
-					TextView tv = (TextView) ctx.getLayoutInflater().inflate(R.layout.list_bigtextview, null);
+					v= ctx.getLayoutInflater().inflate(R.layout.list_bigtextview, null);
+					TextView tv = (TextView) v.findViewById(R.id.Text);
 					tv.setText(app.getString(R.string.select_impassable_road));
-					v = tv;
 				} else {
 					if (v == null || v.findViewById(R.id.info_close) == null) {
 						v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, null);
