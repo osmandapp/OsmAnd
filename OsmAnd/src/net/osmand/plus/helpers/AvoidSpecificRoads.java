@@ -58,8 +58,7 @@ public class AvoidSpecificRoads {
 				// User super class to create the View
 				View v = convertView;
 				if (position == 0) {
-					TextView tv = (TextView) ctx.getLayoutInflater().inflate(R.layout.list_textview, null);
-					tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+					TextView tv = (TextView) ctx.getLayoutInflater().inflate(R.layout.list_menu_item_native, null);
 					tv.setText(app.getString(R.string.select_impassable_road));
 					v = tv;
 				} else {
