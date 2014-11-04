@@ -65,9 +65,8 @@
   <string name="tip_rotation_switching">Orientamento della mappa</string>
   
   <string name="switch_to_raster_map_to_see">Nessuna mappa vettoriale è presente per questa posizione. Ne puoi scaricare una in Impostazioni (Gestisci i file mappe), o passa alle mappe online (abilita il plugin delle mappe online).</string>
-  <string name="binary_map_download_success">Download completato.
-		\n\t\n\tPer usarle attivare \'Impostazioni\' → \'Configurazione delle mappe\' → \'Mappe vettoriali offline\'.
-	</string>
+  <string name="binary_map_download_success">"Download completato.
+\n\t\n\tPer usarle attivare \'Impostazioni\' → \'Configurazione delle mappe\' → \'Sorgenti mappe...\'\t\'Mappe vettoriali offline\'. "</string>
   <string name="tip_day_night_mode">Modo giorno/notte</string>
   
   <string name="tip_osm_improve">Migliora i dati OSM</string>
@@ -2025,5 +2024,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="impassable_road">Evita strade …</string>
     <string name="rendering_category_hide">Nascondi</string>
     <string name="wake_on_voice">Accendi lo schermo</string>
-    <string name="wake_on_voice_descr">Accendi lo schermo all\'approssimarsi di una curva</string>
+    <string name="wake_on_voice_descr">Accendi lo schermo all\'approssimarsi di una svolta</string>
     </resources>
