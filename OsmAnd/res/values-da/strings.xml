@@ -1856,5 +1856,5 @@ Nogle af de centrale funktioner:
     <string name="impassable_road">Undgå veje…</string>
     <string name="rendering_category_hide">Skjul</string>
     <string name="wake_on_voice">Tænd for skærmen</string>
-    <string name="wake_on_voice_descr">Tænder for skærmen når man nærmer sig et sving</string>
+    <string name="wake_on_voice_descr">Tænd for skærmen når et sving nærmer sig</string>
     </resources>
