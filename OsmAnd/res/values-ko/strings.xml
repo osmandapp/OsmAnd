@@ -2085,4 +2085,6 @@
     <string name="impassable_road">도로 회피…</string>
     <string name="rendering_attr_tramTrainRoutes_name">트램과 기차</string>
     <string name="rendering_category_hide">숨기기</string>
+    <string name="wake_on_voice">화면 켜기</string>
+    <string name="wake_on_voice_descr">교차로에 접근할 때 전화 화면 켜기</string>
     </resources>
