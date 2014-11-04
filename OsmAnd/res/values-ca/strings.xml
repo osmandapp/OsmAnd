@@ -1926,7 +1926,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_attr_trolleybusRoutes_name">Rutes de troleibús</string>
     <string name="rendering_attr_busRoutes_name">Rutes de bus</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tramvia i tren</string>
-    <string name="select_impassable_road">Seleccioneu en el mapa</string>
-    <string name="impassable_road">Evitar carreteres…</string>
+    <string name="select_impassable_road">Selecciona en el mapa</string>
+    <string name="impassable_road">Evita carreteres…</string>
     <string name="rendering_category_hide">Amaga</string>
     </resources>
