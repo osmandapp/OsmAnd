@@ -1622,7 +1622,7 @@
     <string name="rendering_attr_buildings15zoom_name">Byggnader vid zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Fler detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Färre detaljer</string>
-    <string name="rendering_attr_hideAccess_name">Dölj tillfartsinskränkningar</string>
+    <string name="rendering_attr_hideAccess_name">Dölj tillfarts- inskränkningar</string>
     <string name="rendering_attr_showAccess_name">Visa tillfartsinskränkningar</string>
     <string name="rendering_attr_showSurfaceGrade_name">Visa vägkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Visa vägbeläggning</string>
@@ -1641,13 +1641,13 @@
     <string name="pause_navigation">Pausa navigeringen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpvandringsskala (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Återge stigar enligt SAC-skala</string>
-    <string name="rendering_attr_osmcTraces_name">Vandringssymbolöverlägg</string>
+    <string name="rendering_attr_osmcTraces_name">Vandringssymbol- överlägg</string>
     <string name="rendering_attr_osmcTraces_description">Återge stigar enligt OSMC-spår</string>
     
 	<string name="osmo_invite">Bjud in…</string>
     <string name="osmo_leave_confirmation_msg">Vill du lämna gruppen %1$s?</string>
     <string name="osmo_specify_tracker_id">Ange id</string>
-    <string name="rendering_attr_coloredBuildings_name">Färgkodade byggnader efter typ</string>
+    <string name="rendering_attr_coloredBuildings_name">Färgkoda byggnader efter typ</string>
     <string name="arrival_distance_factor_early">Tidigt</string>
     <string name="arrival_distance_factor_normally">Normalt</string>
     <string name="arrival_distance_factor_late">Sent</string>
@@ -1710,7 +1710,7 @@
 	<string name="configure_map">Konfigurera karta</string>
     <string name="search_radius_proximity">I närheten av</string>
     <string name="rendering_category_details">Detaljer</string>
-    <string name="rendering_category_transport">Transporter</string>
+    <string name="rendering_category_transport">Transport</string>
     <string name="rendering_category_others">Andra kartattribut</string>
     <string name="map_widget_appearance_rem">Kvarvarande element</string>
     <string name="map_widget_top">Statusfält</string>
@@ -1728,4 +1728,6 @@
     <string name="select_impassable_road">Välj på kartan</string>
     <string name="impassable_road">Undvik vägar …</string>
     <string name="rendering_category_hide">Dölj</string>
+    <string name="wake_on_voice">Slå på skärmen</string>
+    <string name="wake_on_voice_descr">Slå på skärmen när jag närmar mig en sväng</string>
     </resources>
