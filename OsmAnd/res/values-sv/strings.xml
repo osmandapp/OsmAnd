@@ -887,7 +887,7 @@
 	<string name="rendering_attr_noAdminboundaries_description">Undertryck visning av regionala gränser (adminnivåer 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid-pluginen har en gammal version och behöver uppdateras.</string>
     <string name="tip_altitude_offset">Höjdvisning - Offset-korrigering</string>
-	<string name="map_widget_max_speed">Hastighetsbegränsning</string>
+	<string name="map_widget_max_speed">Hastighets- begränsning</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Inga byggnader hittades.</string>
     <string name="incremental_search_city">Sök stad stegvis</string>
@@ -1623,7 +1623,7 @@
     <string name="rendering_attr_moreDetailed_name">Fler detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Färre detaljer</string>
     <string name="rendering_attr_hideAccess_name">Dölj tillfarts- inskränkningar</string>
-    <string name="rendering_attr_showAccess_name">Visa tillfartsinskränkningar</string>
+    <string name="rendering_attr_showAccess_name">Visa tillfarts- inskränkningar</string>
     <string name="rendering_attr_showSurfaceGrade_name">Visa vägkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Visa vägbeläggning</string>
     <string name="rendering_attr_showCycleRoutes_name">Visa cykelrutter</string>
@@ -1641,7 +1641,7 @@
     <string name="pause_navigation">Pausa navigeringen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpvandringsskala (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Återge stigar enligt SAC-skala</string>
-    <string name="rendering_attr_osmcTraces_name">Vandringssymbol- överlägg</string>
+    <string name="rendering_attr_osmcTraces_name">Överlägg med vandringssymboler</string>
     <string name="rendering_attr_osmcTraces_description">Återge stigar enligt OSMC-spår</string>
     
 	<string name="osmo_invite">Bjud in…</string>
@@ -1682,7 +1682,7 @@
 	<string name="confirm_every_run">Fråga alltid</string>
 	<string name="save_global_track_interval_descr">Välj loggningsintervall för den allmänna spårinspelningen (aktiverad via widgeten GPX-inspelning på kartan)</string>
 	<string name="save_global_track_interval">Allmänt loggningsintervall</string>
-	<string name="traffic_warning_speed_limit">Hastighetsbegränsning</string>
+	<string name="traffic_warning_speed_limit">Hastighets- begränsning</string>
     <string name="traffic_warning_border_control">Gränskontroll</string>
     <string name="traffic_warning_payment">Vägavgiftshytt</string>
     <string name="traffic_warning_stop">Stopptecken</string>
