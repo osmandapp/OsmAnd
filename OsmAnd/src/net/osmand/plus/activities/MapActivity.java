@@ -114,7 +114,8 @@ public class MapActivity extends AccessibleActivity implements
 	private GpxImportHelper gpxImportHelper;
 	private PowerManager.WakeLock wakeLock = null;
 	private KeyguardManager.KeyguardLock keyguardLock = null;
-	private ReleaseWakeLocksRunnable releaseWakeLocksRunnable = new ReleaseWakeLocksRunnable();	
+	private ReleaseWakeLocksRunnable releaseWakeLocksRunnable = new ReleaseWakeLocksRunnable();
+	private boolean active = false;
 	
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
@@ -539,6 +540,7 @@ public class MapActivity extends AccessibleActivity implements
 	@Override
 	protected void onStart() {
 		super.onStart();
+		active = true;
 		if ((wakeLock == null) || (keyguardLock == null)) {
 			VoiceRouter voiceRouter = app.getRoutingHelper().getVoiceRouter();
 			voiceRouter.removeVoiceMessageListener(this);
@@ -565,10 +567,11 @@ public class MapActivity extends AccessibleActivity implements
 			progressDlg.dismiss();
 			progressDlg = null;
 		}
-		if (!isFinishing()) {
+		if (!isFinishing() && settings.WAKE_ON_VOICE.get()) {
 			VoiceRouter voiceRouter = app.getRoutingHelper().getVoiceRouter();
 			voiceRouter.addVoiceMessageListener(this);
 		}
+		active = false;
 		super.onStop();
 	}
 
@@ -788,17 +791,18 @@ public class MapActivity extends AccessibleActivity implements
 		if (settings.WAKE_ON_VOICE.get()) {
 			uiHandler.removeCallbacks(releaseWakeLocksRunnable);
 
-			if (wakeLock == null) {
+			if (!active && (wakeLock == null)) {
 				PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
 				wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
 						| PowerManager.ACQUIRE_CAUSES_WAKEUP,
 						"OsmAndOnVoiceWakeupTag");
 				wakeLock.acquire();
-			}
-			if (keyguardLock == null) {
-				KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-				keyguardLock = km.newKeyguardLock("OsmAndKeyguardLock");
-				keyguardLock.disableKeyguard();
+				
+				if (keyguardLock == null) {
+					KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+					keyguardLock = km.newKeyguardLock("OsmAndKeyguardLock");
+					keyguardLock.disableKeyguard();
+				}
 			}
 
 			uiHandler.postDelayed(releaseWakeLocksRunnable, WAKE_ON_VOICE_INTERVAL);
