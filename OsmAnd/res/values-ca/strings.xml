@@ -1929,6 +1929,6 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="select_impassable_road">Selecciona en el mapa</string>
     <string name="impassable_road">Evita carreteres…</string>
     <string name="rendering_category_hide">Amaga</string>
-    <string name="wake_on_voice">Engegar la pantalla</string>
-    <string name="wake_on_voice_descr">Activar la pantalla del mòbil en aproximar-se a un gir</string>
+    <string name="wake_on_voice">Activa la pantalla</string>
+    <string name="wake_on_voice_descr">Activa la pantalla del mòbil en aproximar-se a un gir</string>
     </resources>
