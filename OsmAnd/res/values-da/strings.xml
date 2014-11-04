@@ -1793,8 +1793,8 @@ Nogle af de centrale funktioner:
     <string name="waypoints">Rutepunkter</string>
     <string name="targets">Destinationer</string>
     <string name="way_alarms">Trafikadvarsler</string>
-    <string name="speak_favorites">Nærliggende favoritter</string>
-    <string name="speak_poi">Nærliggende interessepunkt (IP)</string>
+    <string name="speak_favorites">Favoritter i nærheden</string>
+    <string name="speak_poi">Interessepunkt (IP) i nærheden</string>
     <string name="flat_list_waypoints">Alle</string>
     <string name="index_tours">Ture</string>
     <string name="distance">Afstand</string>
