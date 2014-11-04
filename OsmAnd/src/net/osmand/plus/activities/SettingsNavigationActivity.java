@@ -92,6 +92,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
         registerListPreference(settings.KEEP_INFORMING, screen, keepInformingNames, keepInformingValues);
         
         registerBooleanPreference(settings.SHOW_ZOOM_BUTTONS_NAVIGATION, screen);
+        registerBooleanPreference(settings.WAKE_ON_VOICE, screen);
 
 		autoZoomMapPreference = (ListPreference) screen.findPreference(settings.AUTO_ZOOM_MAP.getId());
 		autoZoomMapPreference.setOnPreferenceChangeListener(this);
