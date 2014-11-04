@@ -1850,4 +1850,6 @@
     <string name="impassable_road">避開的道路…</string>
     <string name="rendering_attr_tramTrainRoutes_name">有軌電車和火車</string>
     <string name="rendering_category_hide">隱藏</string>
+    <string name="wake_on_voice">開啟螢幕</string>
+    <string name="wake_on_voice_descr">當接近轉彎時，開啟手機螢幕</string>
     </resources>
