@@ -1708,7 +1708,7 @@
     <string name="anonymous_user">Anonym användare</string>
     <string name="logged_as">Inloggad som %1$s</string>
 	<string name="configure_map">Konfigurera karta</string>
-    <string name="search_radius_proximity">I närheten av</string>
+    <string name="search_radius_proximity">Närmare än</string>
     <string name="rendering_category_details">Detaljer</string>
     <string name="rendering_category_transport">Transport</string>
     <string name="rendering_category_others">Andra kartattribut</string>
