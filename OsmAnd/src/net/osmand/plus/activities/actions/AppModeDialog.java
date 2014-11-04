@@ -93,7 +93,7 @@ public class AppModeDialog {
 	private static ToggleButton[] createDrawerToggles(final List<ApplicationMode> visible,final List<ApplicationMode> modes,
 													  final Set<ApplicationMode> selected,
 													  final Activity a, final LinearLayout ll, final ContextMenuAdapter.BooleanResult allModes, final View.OnClickListener onClickListener) {
-		ToggleButton[] buttons = createToggles(visible, ll, a);
+		ToggleButton[] buttons = createToggles(visible, ll, a, true);
 		ToggleButton[] newButtons = new ToggleButton[buttons.length + 1];
 		for (int i = 0; i < buttons.length; i++) {
 			newButtons[i] = buttons[i];
@@ -141,7 +141,7 @@ public class AppModeDialog {
 				container.setLayoutParams(params);
 				ll.addView(container);
 			}
-			buttons[i] = createToggle(a, container, allModes.get(i));
+			buttons[i] = createToggle(a, container, allModes.get(i), true);
 		}
 		for (int i = 0; i < buttons.length; i++) {
 			setButtonListener(allModes, selected, onClickListener, buttons, i, true);
@@ -170,7 +170,7 @@ public class AppModeDialog {
 	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values , final Set<ApplicationMode> selected, 
 			ViewGroup parent, final boolean singleSelection, final View.OnClickListener onClickListener) {
 		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
-		final ToggleButton[] buttons = createToggles(values, ll, a); 
+		final ToggleButton[] buttons = createToggles(values, ll, a, false);
 		for (int i = 0; i < buttons.length; i++) {
 			setButtonListener(values, selected, onClickListener, buttons, i, singleSelection);
 		}
@@ -219,7 +219,7 @@ public class AppModeDialog {
 		}
 	}
 
-	static ToggleButton[] createToggles(final List<ApplicationMode> values, LinearLayout topLayout, Context ctx) {
+	static ToggleButton[] createToggles(final List<ApplicationMode> values, LinearLayout topLayout, Context ctx, boolean drawer) {
 		final ToggleButton[] buttons = new ToggleButton[values.size()];
 		HorizontalScrollView scroll = new HorizontalScrollView(ctx);
 		
@@ -230,13 +230,19 @@ public class AppModeDialog {
 		
 		int k = 0;
 		for(ApplicationMode ma : values) {
-			buttons[k++] = createToggle(ctx, ll, ma);
+			buttons[k++] = createToggle(ctx, ll, ma, drawer);
 		}
 		return buttons;
 	}
 
-	static private ToggleButton createToggle(Context ctx, LinearLayout layout, ApplicationMode mode){
-		int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, ctx.getResources().getDisplayMetrics());
+	static private ToggleButton createToggle(Context ctx, LinearLayout layout, ApplicationMode mode, boolean drawer){
+		int margin = 0;
+		if (drawer) {
+			margin = 5;
+		} else {
+			margin = 10;
+		}
+		int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, margin, ctx.getResources().getDisplayMetrics());
 		int metrics = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 64, ctx.getResources().getDisplayMetrics());
 		ToggleButton tb = new ToggleButton(ctx);
 		tb.setTextOn("");
