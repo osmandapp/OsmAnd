@@ -1874,4 +1874,6 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="rendering_attr_tramTrainRoutes_name">Tramvajus ir traukinys</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Maršrutinis taksi</string>
     <string name="rendering_category_hide">Slėpti</string>
+    <string name="wake_on_voice">Įjungti ekraną</string>
+    <string name="wake_on_voice_descr">Įjungti ekraną artėjant prie posūkio</string>
     </resources>
