@@ -1787,7 +1787,7 @@
     <string name="anonymous_user_hint">Egy anonim felhasználó nem tud:\n- csoportot létrehozni;\n- csoportokat és eszközöket szinkronizálni a szerverrel;\n- csoportokat és eszközöket kezelni privát módon.</string>
     <string name="anonymous_user">Anonim felhasználó</string>
     <string name="logged_as">Bejelentkezve mint %1$s</string>
-	<string name="tip_recent_changes_1_9_t">"Az 1.9-es verzió újdonságai: * Frissített térképstílusok útburkolat megjelenítéssel, tömegközlekedési réteggel és turistajelzésekkel * POI-k keresése az útvonal mentén * Út járhatatlannak jelölése szezonálisan * Térképek egyszerűbb letöltése és frissítése * Hangjelzés és vizuális értesítés útpontok elérésekor * Itiner és kanyarodási információk nyomtatása * Kanyarodósávok megjelenítése * Android Wear támogatás * Sok felhasználói felület csiszolás * Külön zoom a szövegméretnek a térképen * Külön hangjelzés, ha letértél az útról * OsMo bejelentkezési lehetőség * OsMo  verzió inkompatibilitási javítás "</string>
+	<string name="tip_recent_changes_1_9_t">"Az 1.9-es verzió újdonságai: * Frissített térképstílusok útburkolat megjelenítéssel, tömegközlekedési rétegekkel és turistajelzésekkel * POI-k keresése az útvonal mentén * Út járhatatlannak jelölése szezonálisan * Térképek egyszerűbb letöltése és frissítése * Hangjelzés és vizuális értesítés útpontok elérésekor * Itiner és kanyarodási információk nyomtatása * Kanyarodósávok megjelenítése * Android Wear támogatás * Sok felhasználói felület csiszolás * Külön zoom a szövegméretnek a térképen * Külön hangjelzés, ha letértél az útról * OsMo bejelentkezési lehetőség * OsMo  verzió inkompatibilitási javítás "</string>
     <string name="rendering_category_routes">Útvonalak</string>
     <string name="rendering_category_details">Részletek</string>
     <string name="rendering_category_transport">Tömegközlekedés</string>
@@ -1808,4 +1808,6 @@
     <string name="rendering_attr_busRoutes_name">Busz</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Iránytaxi</string>
     <string name="rendering_category_hide">Elrejtés</string>
+    <string name="wake_on_voice">Képernyő bekapcsolása</string>
+    <string name="wake_on_voice_descr">Az eszköz képernyőjének bekapcsolása egy kanyarodáshoz közeledve</string>
     </resources>
