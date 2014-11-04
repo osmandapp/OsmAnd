@@ -1855,4 +1855,6 @@ Nogle af de centrale funktioner:
     <string name="select_impassable_road">Vælg på kort</string>
     <string name="impassable_road">Undgå veje…</string>
     <string name="rendering_category_hide">Skjul</string>
+    <string name="wake_on_voice">Tænd for skærmen</string>
+    <string name="wake_on_voice_descr">Tænder for skærmen når man nærmer sig et sving</string>
     </resources>
