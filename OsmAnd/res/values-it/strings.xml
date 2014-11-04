@@ -2024,4 +2024,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="select_impassable_road">Seleziona nella mappa</string>
     <string name="impassable_road">Evita strade …</string>
     <string name="rendering_category_hide">Nascondi</string>
+    <string name="wake_on_voice">Accendi lo schermo</string>
+    <string name="wake_on_voice_descr">Accendi lo schermo all\'approssimarsi di una curva</string>
     </resources>
