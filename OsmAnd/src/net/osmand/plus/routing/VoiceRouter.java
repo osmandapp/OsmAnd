@@ -871,10 +871,14 @@ public class VoiceRouter {
 					for (final VoiceMessageListener voiceMessageListener : voiceMessageListeners) {
 						Runnable closure = new Runnable() {
 							public void run() {
-								synchronized (voiceMessageListeners) {
-									if (voiceMessageListeners
-											.contains(voiceMessageListener)) {
-										voiceMessageListener.onVoiceMessage();
+								if (settings.WAKE_ON_VOICE.get()) {
+									synchronized (voiceMessageListeners) {
+										if (voiceMessageListeners
+												.contains(voiceMessageListener)
+												&& settings.WAKE_ON_VOICE.get()) {
+											voiceMessageListener
+													.onVoiceMessage();
+										}
 									}
 								}
 							}
