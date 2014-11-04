@@ -1857,4 +1857,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="select_impassable_road">Sélectionnez sur la carte</string>
     <string name="impassable_road">Évitez les routes…</string>
     <string name="rendering_category_hide">Masquer</string>
+    <string name="wake_on_voice">Allumer l\'écran</string>
+    <string name="wake_on_voice_descr">Allumer l\'écran à l\'approche d\'un changement de direction</string>
     </resources>
