@@ -1914,4 +1914,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_attr_trolleybusRoutes_name">Rutas de trolebús</string>
     <string name="rendering_attr_busRoutes_name">Rutas de autobús</string>
     <string name="rendering_category_hide">Ocultar</string>
+    <string name="wake_on_voice">Encender pantalla</string>
+    <string name="wake_on_voice_descr">Encender pantalla al aproximarse a un giro</string>
     </resources>
