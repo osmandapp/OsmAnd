@@ -2,6 +2,7 @@ package net.osmand.plus.activities;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import net.osmand.plus.R;
 import net.osmand.plus.render.MapVectorLayer;
@@ -20,8 +21,10 @@ public class DashboardActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.dashboard);
 		prepareMapView();
+
 
 	}
 

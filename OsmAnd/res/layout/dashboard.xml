@@ -4,11 +4,14 @@
 			  android:orientation="vertical"
 			  android:layout_width="match_parent"
 			  android:padding="8dp"
-			  android:layout_height="match_parent">
+			  android:layout_height="match_parent"
+			  android:background="@drawable/background">
 	<LinearLayout android:id="@+id/search"
 				  android:orientation="vertical"
-				  android:layout_width="wrap_content"
-				  android:layout_height="wrap_content">
+				  android:layout_width="fill_parent"
+				  android:layout_height="wrap_content"
+				  android:background="@color/color_white"
+				  android:layout_marginBottom="8dp">
 			<TextView android:text="@string/tip_search"
 					  android:layout_width="fill_parent"
 					  android:gravity="center_horizontal"
@@ -17,6 +20,8 @@
 
 	<LinearLayout android:id="@+id/home"
 				  android:orientation="horizontal"
+				  android:background="@color/color_white"
+				  android:layout_marginBottom="8dp"
 				  android:layout_width="fill_parent"
 				  android:layout_height="wrap_content">
 		<ImageView android:id="@+id/home_img"
@@ -32,8 +37,10 @@
 	</LinearLayout>
 
 	<LinearLayout android:orientation="vertical"
-				  android:layout_width="wrap_content"
-				  android:layout_height="fill_parent">
+				  android:background="@color/color_white"
+				  android:layout_marginBottom="8dp"
+				  android:layout_width="fill_parent"
+				  android:layout_height="wrap_content">
 		<LinearLayout android:orientation="horizontal"
 					  android:layout_width="fill_parent"
 					  android:layout_height="wrap_content">
@@ -57,6 +64,8 @@
 	</LinearLayout>
 
 	<LinearLayout android:orientation="horizontal"
+				  android:background="@color/color_white"
+				  android:layout_marginBottom="8dp"
 				  android:layout_width="fill_parent"
 				  android:layout_height="wrap_content">
 		<TextView android:layout_width="0dp"
@@ -64,11 +73,13 @@
 				  android:text="@string/my_data_Button"
 				  android:layout_weight="1"/>
 		<Button android:id="@+id/btn_show_all"
+				android:text="show all"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"/>
 	</LinearLayout>
 
 	<ListView android:id="@+id/list_favorites"
+			  android:background="@color/color_white"
 			  android:layout_width="fill_parent"
 			  android:layout_height="wrap_content"/>
 </LinearLayout>
