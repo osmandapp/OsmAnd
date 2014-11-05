@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><!-- Language: Vietnamese; Language code: vi
-Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Language: Vietnamese; Language code: vi
+Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
+<resources>
 	
 	<string name="choose_auto_follow_route_descr">Chọn thời gian chờ hiển thị bản đồ để quay lại vị trí vừa xong</string>
 	<string name="auto_follow_route_never">Không bao giờ</string>
@@ -665,4 +667,12 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 <string name="edit_filter_delete_message">Bộ lọc {0} đã bị xóa</string>
 <string name="edit_filter_create_message">Bộ lọc {0} đã được tạo</string>
 <string name="default_buttons_selectall">Chọn tất</string>
-</resources>
+<string name="wake_on_voice">Bật màn hình</string>
+    <string name="wake_on_voice_descr">Bật màn hình điện thoại khi tiếp cận một lượt</string>
+    <string name="select_impassable_road">Chọn sơ đồ</string>
+    <string name="impassable_road">Tránh đường …</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Xe điện và xe lửa</string>
+    <string name="tip_recent_changes_1_9_t">"Những thay đổi trong 1.9: * Cập nhật bản đồ phong cách với vẽ mặt đường, lớp vận chuyển và biểu tượng đi bộ đường dài * Tìm kiếm POI dọc theo tuyến đường * Mark đường như không thể vượt qua mỗi phiên * Dễ dàng hơn để tải về và cập nhật bản đồ * Nhận thông báo hình ảnh và âm thanh bằng cách tiếp cận với điểm tham chiếu * In hành trình và biến thông tin * Hỗ trợ làn đường lần lượt * Hỗ trợ Mang Android * Rất nhiều thay đổi giao diện người dùng * zoom riêng biệt cho Text Size trên bản đồ * thông báo âm thanh đặc biệt trong trường hợp bạn tắt các chức năng đăng nhập Osmo tuyến đường * * Fix Osmo phiên bản không tương thích "</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Đào tạo và lightrail tuyến</string>
+    <string name="rendering_attr_tramRoutes_name">Định tuyến xe điện</string>
+    </resources>
