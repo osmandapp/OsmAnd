@@ -455,6 +455,11 @@ public class MapActivity extends AccessibleActivity implements
 		}
 	}
 
+	public void changeZoom(int stp, long time) {
+		mapViewTrackingUtilities.setZoomTime(time);
+		changeZoom(stp);
+	}
+
 	public void changeZoom(int stp){
 		// delta = Math.round(delta * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
 		boolean changeLocation = false;
