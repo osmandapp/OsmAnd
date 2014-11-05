@@ -1,5 +1,7 @@
 package net.osmand.plus.base;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import net.osmand.Location;
@@ -36,7 +38,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private boolean followingMode;
 	private boolean routePlanningMode;
 	private boolean showViewAngle = false;
-	
+	private boolean isUserZoomed = false;
+
 	public MapViewTrackingUtilities(OsmandApplication app){
 		this.app = app;
 		settings = app.getSettings();
@@ -196,7 +199,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					// decrease a bit
 					zdelta += 1;
 				}
-				if (now - lastTimeAutoZooming > 4500) {
+				int threshold = settings.AUTO_FOLLOW_ROUTE.get();
+				if (now - lastTimeAutoZooming > 4500 && (now - lastTimeAutoZooming > threshold || !isUserZoomed)) {
+					isUserZoomed = false;
 					lastTimeAutoZooming = now;
 					double settingsZoomScale = mapView.getSettingsZoomScale();
 					double complexZoom = tb.getZoom() + tb.getZoomScale() + zdelta;
@@ -320,5 +325,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void routeWasCancelled() {
 	}
 
+	public void setZoomTime(long time) {
+		lastTimeAutoZooming = time;
+		isUserZoomed = true;
+	}
 
 }
