@@ -263,6 +263,19 @@ public class MapActivity extends AccessibleActivity implements
 		});
 	}
 
+	private void changeKeyguardFlags() {
+		if (settings.WAKE_ON_VOICE.get() > 0) {
+			getWindow().setFlags(
+					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+							| WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
+					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+							| WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+		} else {
+			getWindow().clearFlags(
+					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+							| WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+		}
+	}
 	
 	@SuppressWarnings("rawtypes")
 	public Object getLastNonConfigurationInstanceByKey(String key) {
@@ -318,6 +331,8 @@ public class MapActivity extends AccessibleActivity implements
 		} else {
 			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		}
+		
+		changeKeyguardFlags();
 
 		applicationModeListener = new StateChangedListener<ApplicationMode>() {
 			@Override
@@ -642,6 +657,7 @@ public class MapActivity extends AccessibleActivity implements
 
 	
 	public void updateApplicationModeSettings() {
+		changeKeyguardFlags();
 		// update vector renderer
 		RendererRegistry registry = app.getRendererRegistry();
 		RenderingRulesStorage newRenderer = registry.getRenderer(settings.RENDERER.get());
