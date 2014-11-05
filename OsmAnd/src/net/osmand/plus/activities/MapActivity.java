@@ -22,6 +22,7 @@ import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
+import net.osmand.plus.DeviceAdminRecv;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -49,11 +50,12 @@ import net.osmand.plus.views.corenative.NativeQtLibrary;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import android.app.Dialog;
-import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -84,7 +86,6 @@ public class MapActivity extends AccessibleActivity implements
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
-	private static final int WAKE_ON_VOICE_INTERVAL = 10000;		// 10 seconds
 	
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 	
@@ -113,9 +114,11 @@ public class MapActivity extends AccessibleActivity implements
 	private FrameLayout lockView;
 	private GpxImportHelper gpxImportHelper;
 	private PowerManager.WakeLock wakeLock = null;
-	private KeyguardManager.KeyguardLock keyguardLock = null;
 	private ReleaseWakeLocksRunnable releaseWakeLocksRunnable = new ReleaseWakeLocksRunnable();
 	private boolean active = false;
+	
+	private DevicePolicyManager mDevicePolicyManager;
+	private ComponentName mDeviceAdmin;
 	
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
@@ -222,6 +225,9 @@ public class MapActivity extends AccessibleActivity implements
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
 
 		mapActions.prepareStartOptionsMenu();
+		
+		mDeviceAdmin = new ComponentName(getApplicationContext(), DeviceAdminRecv.class);
+		mDevicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
 	}
 	
 	public void addLockView(FrameLayout lockView) {
@@ -292,7 +298,7 @@ public class MapActivity extends AccessibleActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if ((wakeLock != null) || (keyguardLock != null)) {
+		if (wakeLock != null) {
 			return;
 		}
 		cancelNotification();
@@ -541,7 +547,7 @@ public class MapActivity extends AccessibleActivity implements
 	protected void onStart() {
 		super.onStart();
 		active = true;
-		if ((wakeLock == null) || (keyguardLock == null)) {
+		if (wakeLock == null) {
 			VoiceRouter voiceRouter = app.getRoutingHelper().getVoiceRouter();
 			voiceRouter.removeVoiceMessageListener(this);
 		}
@@ -567,7 +573,7 @@ public class MapActivity extends AccessibleActivity implements
 			progressDlg.dismiss();
 			progressDlg = null;
 		}
-		if (!isFinishing() && settings.WAKE_ON_VOICE.get()) {
+		if (!isFinishing() && (settings.WAKE_ON_VOICE.get() > 0)) {
 			VoiceRouter voiceRouter = app.getRoutingHelper().getVoiceRouter();
 			voiceRouter.addVoiceMessageListener(this);
 		}
@@ -788,35 +794,44 @@ public class MapActivity extends AccessibleActivity implements
 
 	@Override
 	public void onVoiceMessage() {
-		if (settings.WAKE_ON_VOICE.get()) {
+		final Integer screenPowerSave = settings.WAKE_ON_VOICE.get();
+		if (screenPowerSave > 0) {
 			uiHandler.removeCallbacks(releaseWakeLocksRunnable);
 
-			if (!active && (wakeLock == null)) {
+			if (!active && wakeLock == null) {
 				PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
 				wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
 						| PowerManager.ACQUIRE_CAUSES_WAKEUP,
 						"OsmAndOnVoiceWakeupTag");
 				wakeLock.acquire();
-				
-				if (keyguardLock == null) {
-					KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-					keyguardLock = km.newKeyguardLock("OsmAndKeyguardLock");
-					keyguardLock.disableKeyguard();
-				}
 			}
 
-			uiHandler.postDelayed(releaseWakeLocksRunnable, WAKE_ON_VOICE_INTERVAL);
+			uiHandler.postDelayed(releaseWakeLocksRunnable,
+					screenPowerSave * 1000L);
 		}
 	}
 	
 	private void releaseWakeLocks() {
-		if (keyguardLock != null) {
-			keyguardLock.reenableKeyguard();
-			keyguardLock = null;
-		}
 		if (wakeLock != null) {
 			wakeLock.release();
 			wakeLock = null;
+		}
+		
+		if (mDevicePolicyManager != null && mDeviceAdmin != null) {
+			final Integer screenPowerSave = settings.WAKE_ON_VOICE.get();
+			if (screenPowerSave > 0) {
+				if (mDevicePolicyManager.isAdminActive(mDeviceAdmin)) {
+					try {
+						mDevicePolicyManager.lockNow();
+					} catch (SecurityException e) {
+//						Log.d(TAG,
+//								"SecurityException: No device admin permission to lock the screen!");
+					}
+				} else {
+//					Log.d(TAG,
+//							"No device admin permission to lock the screen!");
+				}
+			}
 		}
 	}
 	

@@ -6,18 +6,23 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.DeviceAdminRecv;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -35,6 +40,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private ListPreference autoZoomMapPreference;
 	private ListPreference speedLimitExceed;
 	
+	private ComponentName mDeviceAdmin;
+	private static final int DEVICE_ADMIN_REQUEST = 5;
 	
 	private List<RoutingParameter> avoidParameters = new ArrayList<RoutingParameter>();
 	private List<RoutingParameter> preferParameters = new ArrayList<RoutingParameter>();
@@ -50,6 +57,40 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	
 		createUI();
     }
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == DEVICE_ADMIN_REQUEST) {
+			if (resultCode == RESULT_OK) {
+//				Log.d("DeviceAdmin", "Lock screen permission approved.");
+			} else {
+				settings.WAKE_ON_VOICE.set(0);
+//				Log.d("DeviceAdmin", "Lock screen permission refused.");
+			}
+			return;
+		}
+	}
+
+	private void requestLockScreenAdmin() {
+		mDeviceAdmin = new ComponentName(getApplicationContext(),
+				DeviceAdminRecv.class);
+
+		DevicePolicyManager mDevicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
+
+		if (!mDevicePolicyManager.isAdminActive(mDeviceAdmin)) {
+			// request permission from user
+			Intent intent = new Intent(
+					DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+			intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,
+					mDeviceAdmin);
+			intent.putExtra(
+					DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+					getString(R.string.lock_screen_request_explanation,
+							Version.getAppName(getMyApplication())));
+			startActivityForResult(intent, DEVICE_ADMIN_REQUEST);
+		}
+	};
 	
 	private void createUI() {
 		addPreferencesFromResource(R.xml.navigation_settings);
@@ -91,8 +132,17 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
         }
         registerListPreference(settings.KEEP_INFORMING, screen, keepInformingNames, keepInformingValues);
         
+		// screen power save option:
+		Integer[] screenPowerSaveValues = new Integer[] { 0, 5, 10, 15, 20, 30, 45, 60 };
+		String[] screenPowerSaveNames = new String[screenPowerSaveValues.length];
+		screenPowerSaveNames[0] = getString(R.string.wake_on_voice_never);
+		for (int i = 1; i < screenPowerSaveValues.length; i++) {
+			screenPowerSaveNames[i] = screenPowerSaveValues[i] + " "
+					+ getString(R.string.int_seconds);
+		}
+		registerListPreference(settings.WAKE_ON_VOICE, screen, screenPowerSaveNames, screenPowerSaveValues);
+        
         registerBooleanPreference(settings.SHOW_ZOOM_BUTTONS_NAVIGATION, screen);
-        registerBooleanPreference(settings.WAKE_ON_VOICE, screen);
 
 		autoZoomMapPreference = (ListPreference) screen.findPreference(settings.AUTO_ZOOM_MAP.getId());
 		autoZoomMapPreference.setOnPreferenceChangeListener(this);
@@ -248,6 +298,16 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					+ settings.ROUTER_SERVICE.get() + "]");
 			prepareRoutingPrefs(getPreferenceScreen());
 			super.updateAllSettings();
+		} else if (id.equals(settings.WAKE_ON_VOICE.getId())) {
+			Integer value;
+			try {
+				value = Integer.parseInt(newValue.toString());
+			} catch (NumberFormatException e) {
+				value = 0;
+			}
+			if (value > 0) {
+				requestLockScreenAdmin();
+			}
 		}
 		return true;
 	}

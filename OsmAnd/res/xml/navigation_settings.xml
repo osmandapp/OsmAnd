@@ -28,6 +28,9 @@
 				android:title="@string/speed_limit_exceed"
 				android:summary="@string/speed_limit_exceed_message"/>
             <CheckBoxPreference android:title="@string/show_zoom_buttons_navigation" android:summary="@string/show_zoom_buttons_navigation_descr" android:key="show_zoom_buttons_navigation" />
-            <CheckBoxPreference android:title="@string/wake_on_voice" android:summary="@string/wake_on_voice_descr" android:key="wake_on_voice" />
+            <ListPreference
+                    android:key="wake_on_voice"
+                    android:title="@string/wake_on_voice"
+                    android:summary="@string/wake_on_voice_descr" />
         </PreferenceCategory>
 </PreferenceScreen>
