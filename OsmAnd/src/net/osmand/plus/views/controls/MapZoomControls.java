@@ -4,6 +4,7 @@ import android.view.Gravity;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import net.osmand.data.RotatedTileBox;
@@ -82,10 +83,11 @@ public class MapZoomControls extends MapControls {
 			@Override
 			public void onClick(View v) {
 				notifyClicked();
+				long time = Calendar.getInstance().getTime().getTime();
 				if (view.isZooming()) {
-					mapActivity.changeZoom(2);
+					mapActivity.changeZoom(2, time);
 				} else {
-					mapActivity.changeZoom(1);
+					mapActivity.changeZoom(1, time);
 				}
 
 			}
@@ -95,8 +97,9 @@ public class MapZoomControls extends MapControls {
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				long time = Calendar.getInstance().getTime().getTime();
 				notifyClicked();
-				mapActivity.changeZoom(-1);
+				mapActivity.changeZoom(-1, time);
 			}
 		});
 		zoomOutButton.setOnLongClickListener(listener);		

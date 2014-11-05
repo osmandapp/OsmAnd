@@ -1,5 +1,7 @@
 package net.osmand.plus.base;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import net.osmand.Location;
@@ -36,6 +38,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private boolean followingMode;
 	private boolean routePlanningMode;
 	private boolean showViewAngle = false;
+	private long zoomTime = 0;
 	
 	public MapViewTrackingUtilities(OsmandApplication app){
 		this.app = app;
@@ -88,7 +91,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
 			if (isMapLinkedToLocation() && location != null) {
 				if (settings.AUTO_ZOOM_MAP.get() != AutoZoomMap.NONE) {
-					autozoom(location);
+					Calendar c = Calendar.getInstance();
+					long new_time = c.getTime().getTime();
+					int threshold = settings.AUTO_FOLLOW_ROUTE.get();
+					if (new_time - zoomTime > threshold * 1000){
+						zoomTime = 0;
+						autozoom(location);
+					}
 				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
 				boolean smallSpeed = isSmallSpeedForCompass(location);
@@ -320,5 +329,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void routeWasCancelled() {
 	}
 
+	public void setZoomTime(long time){
+		zoomTime = time;
+	}
 
 }
