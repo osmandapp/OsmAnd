@@ -1774,4 +1774,9 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="rendering_attr_trolleybusRoutes_name">Àndalas in filobus</string>
     <string name="rendering_attr_busRoutes_name">Àndalas in postale</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tram e trenu</string>
+    <string name="wake_on_voice">Allughe s\'ischermu</string>
+    <string name="wake_on_voice_descr">Allughe s\'ischermu cando b\'est una bortada a curtzu</string>
+    <string name="select_impassable_road">Ischerta in sa mapa</string>
+    <string name="impassable_road">Istransi istradas…</string>
+    <string name="rendering_category_hide">Cua</string>
     </resources>
