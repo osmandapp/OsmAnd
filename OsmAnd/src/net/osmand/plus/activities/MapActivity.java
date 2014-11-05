@@ -839,9 +839,7 @@ public class MapActivity extends AccessibleActivity implements
 			if (screenPowerSave > 0) {
 				if (mDevicePolicyManager.isAdminActive(mDeviceAdmin)) {
 					try {
-						if (settings.MAP_ACTIVITY_ENABLED.get()) {
-							mDevicePolicyManager.lockNow();
-						}
+						mDevicePolicyManager.lockNow();
 					} catch (SecurityException e) {
 //						Log.d(TAG,
 //								"SecurityException: No device admin permission to lock the screen!");

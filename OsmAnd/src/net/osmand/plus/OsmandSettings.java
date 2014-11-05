@@ -931,12 +931,12 @@ public class OsmandSettings {
 	}
 	
 	// screen power save
-	public final CommonPreference<Integer> WAKE_ON_VOICE = new IntPreference("wake_on_voice_int", 0).makeProfile();
+	public final CommonPreference<Integer> WAKE_ON_VOICE_INT = new IntPreference("wake_on_voice_int", 0).makeProfile();
 	{
 		// 0 means never
-		WAKE_ON_VOICE.setModeDefaultValue(ApplicationMode.CAR, 0);
-		WAKE_ON_VOICE.setModeDefaultValue(ApplicationMode.BICYCLE, 0);
-		WAKE_ON_VOICE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0);
+		WAKE_ON_VOICE_INT.setModeDefaultValue(ApplicationMode.CAR, 0);
+		WAKE_ON_VOICE_INT.setModeDefaultValue(ApplicationMode.BICYCLE, 0);
+		WAKE_ON_VOICE_INT.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0);
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
