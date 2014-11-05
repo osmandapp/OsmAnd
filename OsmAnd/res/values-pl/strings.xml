@@ -1975,4 +1975,16 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="layers_category_show">Pokaż</string>
 	<string name="configure_map">Skonfiguruj mapę</string>
     <string name="search_radius_proximity">W odległości</string>
+    <string name="wake_on_voice">Włączyć ekran</string>
+    <string name="wake_on_voice_descr">Włącz na ekran telefonu podczas zbliżania się do zakrętu</string>
+    <string name="select_impassable_road">Wybierz mapę</string>
+    <string name="impassable_road">Unikaj dróg…</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tramwaj i pociąg</string>
+    <string name="tip_recent_changes_1_9_t">"Zmiany w 1.9: * Aktualizacja stylów mapy z renderowaniem warstw nawierzchni drogi, transportu i symboli turystycznych * Wyszukiwanie punktów POI wzdłuż trasy * Zaznacz nieprzejezdną drogę dla danego przejazdu * Łatwiejsze do pobrania i aktualizacji mapy * Otrzymywanie powiadomień wizualnych i audio podczas zbliżania się do punktu * Drukuj informacje o trasie i manewrach * Wsparcie dla asystenta pasa ruchu * Wsparcie Android Wear * Dużo zmiany UI * Oddzielne powiększenie rozmiaru dla tekstu na mapie * Specjalne powiadomienia dźwiękowe w przypadku niewyświetlania trasy * Funkcjonalności logowania do Osmo * Poprawienie niezgodności versio Osmo "</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Trasy pociągów i kolejek</string>
+    <string name="rendering_attr_tramRoutes_name">Trasy tramwajowe</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Trasy taxi</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Trasy trolejbusowe</string>
+    <string name="rendering_attr_busRoutes_name">Trasy autobusowe</string>
+    <string name="rendering_category_hide">Ukryj</string>
     </resources>
