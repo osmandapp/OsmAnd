@@ -65,7 +65,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			if (resultCode == RESULT_OK) {
 //				Log.d("DeviceAdmin", "Lock screen permission approved.");
 			} else {
-				settings.WAKE_ON_VOICE.set(0);
+				settings.WAKE_ON_VOICE_INT.set(0);
 //				Log.d("DeviceAdmin", "Lock screen permission refused.");
 			}
 			return;
@@ -140,7 +140,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			screenPowerSaveNames[i] = screenPowerSaveValues[i] + " "
 					+ getString(R.string.int_seconds);
 		}
-		registerListPreference(settings.WAKE_ON_VOICE, screen, screenPowerSaveNames, screenPowerSaveValues);
+		registerListPreference(settings.WAKE_ON_VOICE_INT, screen, screenPowerSaveNames, screenPowerSaveValues);
         
         registerBooleanPreference(settings.SHOW_ZOOM_BUTTONS_NAVIGATION, screen);
 
@@ -298,7 +298,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					+ settings.ROUTER_SERVICE.get() + "]");
 			prepareRoutingPrefs(getPreferenceScreen());
 			super.updateAllSettings();
-		} else if (id.equals(settings.WAKE_ON_VOICE.getId())) {
+		} else if (id.equals(settings.WAKE_ON_VOICE_INT.getId())) {
 			Integer value;
 			try {
 				value = Integer.parseInt(newValue.toString());
