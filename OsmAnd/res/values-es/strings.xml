@@ -1822,7 +1822,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="lang_sr">Serbio</string>
 	<string name="lang_zh_CN">Chino Simplificado</string>
 	<string name="lang_zh_TW">Chino Tradicional</string>
-	<string name="rendering_attr_subwayMode_name">Modo metro</string>
+	<string name="rendering_attr_subwayMode_name">Rutas de metro</string>
  	<string name="continue_navigation">Continuar Navegación</string>
     <string name="pause_navigation">Pausar Navegación</string>
 	<string name="rendering_attr_alpineHiking_name">Escala senderismo Alpino (SAC)</string>
@@ -1907,8 +1907,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_category_routes">Rutas</string>
     <string name="select_impassable_road">Seleccionar en el mapa</string>
     <string name="impassable_road">Evitar carreteras…</string>
-    <string name="rendering_attr_tramTrainRoutes_name">tranvía y tren</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Tren y rutas de raíles eléctricos</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Rutas de tranvía y tren</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Rutas de tren</string>
     <string name="rendering_attr_tramRoutes_name">Rutas de tranvía</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Compartir rutas de taxi</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rutas de trolebús</string>
