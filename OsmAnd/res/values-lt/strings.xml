@@ -1783,7 +1783,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="lang_zh_TW">Tradicinė kinų</string>
 	<string name="lang_sc">Sardinų</string>
 	<string name="lang_zh_CN">Supaprastinta kinų</string>
-	<string name="rendering_attr_subwayMode_name">Metro režimas</string>
+	<string name="rendering_attr_subwayMode_name">Metro maršrutai</string>
  	<string name="continue_navigation">Tęsti navigaciją</string>
     <string name="pause_navigation">Pristabdyti navigaciją</string>
 	<string name="rendering_attr_alpineHiking_description">Užkrauti kelius pagal SAC skalę</string>
@@ -1820,7 +1820,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="int_hour">val</string>
     <string name="duration">Trukmė</string>
     <string name="distance">Atstumas</string>
-    <string name="rendering_attr_publicTransportMode_name">Visuomeninio transporto režimas</string>
+    <string name="rendering_attr_publicTransportMode_name">Visuomeninio transporto maršrutai</string>
 	<string name="save_track_to_gpx_globally">Įrašyti maršrutą į GPX failą</string>
 	<string name="save_track_interval_globally">Įrašymo intervalas</string>
 	<string name="save_track_to_gpx_globally_descr">Bendras vietos išsaugojimas į GPX failą gali būti įjungtas ar išjungtas panaudojant GPX įrankį žemėlapio ekrane</string>
@@ -1871,9 +1871,11 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="rendering_attr_trainLightrailRoutes_name">Traukinių maršrutai</string>
     <string name="select_impassable_road">Pasirinkite žemėlapį</string>
     <string name="impassable_road">Vengti kelių…</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Tramvajus ir traukinys</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tramvajų ir traukinių maršrutai</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Maršrutinis taksi</string>
     <string name="rendering_category_hide">Slėpti</string>
     <string name="wake_on_voice">Įjungti ekraną</string>
     <string name="wake_on_voice_descr">Įjungti ekraną artėjant prie posūkio</string>
+    <string name="lock_screen_request_explanation">%1$s prašo leidimo išjungti ekraną tausojant energiją.</string>
+    <string name="wake_on_voice_never">Niekada</string>
     </resources>
