@@ -1858,6 +1858,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_category_hide">Masquer</string>
     <string name="wake_on_voice">Allumer l\'écran</string>
     <string name="wake_on_voice_descr">Allumer l\'écran à l\'approche d\'une bifurcation</string>
-    <string name="lock_screen_request_explanation">%1$s a besoin de cette permission afin d\'éteindre l\'écran pour la fonctionnalité d\'économie d\'énergie.</string>
+    <string name="lock_screen_request_explanation">%1$s a besoin de cette permission pour éteindre l\'écran en mode économie d\'énergie.</string>
     <string name="wake_on_voice_never">Jamais</string>
     </resources>
