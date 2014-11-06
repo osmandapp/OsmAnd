@@ -645,7 +645,7 @@
 	<string name="map_screen_orientation_descr">세로, 가로, 자동</string>
 	<string name="opening_hours_not_supported">오프닝 시간 형식은 편집을 지원하지 않습니다</string>
 	<string name="add_new_rule">새로운 규칙 추가</string>
-	<string name="transport_Routes">경로</string>
+	<string name="transport_Routes">노선</string>
 	<string name="transport_Stop">정류소</string>
 	<string name="transport_stops">정류소들</string>
 	
@@ -1394,7 +1394,7 @@
 	<string name="avoid_ferries">뱃길 회피</string>
 	<string name="avoid_in_routing_title">회피하기…</string>
 	<string name="avoid_in_routing_descr">유료도로, 비포장, 뱃길 회피하기</string>
-	<string name="map_widget_fluorescent">형광색상 경로</string>
+	<string name="map_widget_fluorescent">형광색상 노선</string>
 	<string name="map_widget_show_ruler">축척(Ruler)</string>
 	<string name="map_widget_view_direction">방향 보기</string>
 	<string name="map_widget_transparent">투명 스킨</string>
@@ -1958,7 +1958,7 @@
     <string name="rendering_attr_showAccess_name">접근 제한 보이기</string>
     <string name="rendering_attr_showSurfaceGrade_name">도로 등급 표시</string>
     <string name="rendering_attr_showSurfaces_name">도로 표면 표시</string>
-    <string name="rendering_attr_showCycleRoutes_name">자전거 경로 보이기</string>
+    <string name="rendering_attr_showCycleRoutes_name">자전거 노선 보이기</string>
     <string name="keep_navigation_service">계속</string>
 	<string name="stop_navigation_service">중지</string>
 	<string name="enable_sleep_mode">GPS 절전 모드 활성화</string>
@@ -1985,7 +1985,7 @@
 	<string name="lang_sr">세르비아어</string>
 	<string name="lang_zh_CN">중국어 간체</string>
 	<string name="lang_zh_TW">중국어 번체</string>
-	<string name="rendering_attr_subwayMode_name">지하철 경로</string>
+	<string name="rendering_attr_subwayMode_name">지하철 노선</string>
  	<string name="continue_navigation">운행 계속</string>
     <string name="pause_navigation">운행 일시중지</string>
 	<string name="rendering_attr_alpineHiking_name">고산 하이킹 규모 (SAC)</string>
@@ -2023,7 +2023,7 @@
     <string name="way_alarms">교통 경고</string>
     <string name="speak_favorites">가까운 즐겨찾기 알리기</string>
     <string name="speak_poi">가까운 POI 알리기</string>
-    <string name="rendering_attr_publicTransportMode_name">대중 교통 모드</string>
+    <string name="rendering_attr_publicTransportMode_name">버스, 무궤도전차, 셔틀 노선</string>
 	<string name="save_track_to_gpx_globally">트랙을 GPX파일로 저장</string>
 	<string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 기록 위젯을 사용하여 켜거나 끌 수 있습니다</string>
 	<string name="save_track_interval_globally">로깅 간격</string>
@@ -2075,15 +2075,15 @@
 \n* 지도에 텍스트 크기에 대한 별도의 줌 지원\n* 경로 이탈한 경우에 특별한 오디오 알림 지원
 \n* OsMo 로그인 기능
 \n* OsMo 버전 비 호환성 수정 "</string>
-    <string name="rendering_category_routes">경로 (Routes)</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">기차 및 경전철 노선</string>
+    <string name="rendering_category_routes">노선 (Routes)</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">기차 노선</string>
     <string name="rendering_attr_tramRoutes_name">트램 노선</string>
     <string name="rendering_attr_shareTaxiRoutes_name">택시 노선 공유</string>
     <string name="rendering_attr_trolleybusRoutes_name">무궤도 전차 노선</string>
     <string name="rendering_attr_busRoutes_name">버스 노선</string>
     <string name="select_impassable_road">지도에서 선택</string>
     <string name="impassable_road">도로 회피…</string>
-    <string name="rendering_attr_tramTrainRoutes_name">트램과 기차 경로</string>
+    <string name="rendering_attr_tramTrainRoutes_name">트램과 기차 노선</string>
     <string name="rendering_category_hide">숨기기</string>
     <string name="wake_on_voice">화면 켜기</string>
     <string name="wake_on_voice_descr">교차로에 접근할 때 전화 화면 켜기</string>
