@@ -2025,4 +2025,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_category_hide">Nascondi</string>
     <string name="wake_on_voice">Accendi lo schermo</string>
     <string name="wake_on_voice_descr">Accendi lo schermo all\'approssimarsi di una svolta</string>
+    <string name="wake_on_voice_never">Mai</string>
     </resources>
