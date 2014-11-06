@@ -1916,4 +1916,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_category_hide">Ocultar</string>
     <string name="wake_on_voice">Encender pantalla</string>
     <string name="wake_on_voice_descr">Encender pantalla al aproximarse a un giro</string>
+    <string name="lock_screen_request_explanation">%1$s necesita este permiso para apagar la pantalla para la característica de ahorro energético.</string>
+    <string name="wake_on_voice_never">Nunca</string>
     </resources>
