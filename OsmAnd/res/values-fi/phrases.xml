@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <resources>
-	<string name="poi_&amp;quot;yes&amp;quot;">Rakennus</string>
+	<string name="poi_yes">Rakennus</string>
 	<string name="poi_abandoned">Hylätty rautatie</string>
 	<string name="poi_administrative">Hallinnollinen raja</string>
 	<string name="poi_airport">Lentokenttä</string>

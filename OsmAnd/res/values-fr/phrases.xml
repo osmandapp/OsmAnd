@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <resources>
-	<string name="poi_&amp;quot;yes&amp;quot;">Bâtiment</string>
+	<string name="poi_yes">Bâtiment</string>
 	<string name="poi_10pin">Bowling américain</string>
 	<string name="poi_9pin">Bowling à 9 quilles</string>
 	<string name="poi_abandoned">Voie ferrée abandonnée</string>
@@ -271,7 +271,7 @@
 	<string name="poi_foundation">Fondation</string>
 	<string name="poi_fountain">Fontaine</string>
 	<string name="poi_fuel">Carburant</string>
-	<string name="poi_full-height_turnstile">Tourniquet pleine hauteur</string>
+	<string name="poi_full_height_turnstile">Tourniquet pleine hauteur</string>
 	<string name="poi_funeral_directors">Pompes funèbres</string>
 	<string name="poi_funicular">Voie de funiculaire</string>
 	<string name="poi_furniture">Magasin d\'ameublement</string>
@@ -418,7 +418,7 @@
 	<string name="poi_newspaper">Presse</string>
 	<string name="poi_ngo">ONG</string>
 	<string name="poi_nightclub">Boîte de nuit</string>
-	<string name="poi_not found">Non trouvé</string>
+	<string name="poi_not_found">Non trouvé</string>
 	<string name="poi_notary">Notaire</string>
 	<string name="poi_notice">Informations</string>
 	<string name="poi_nursery">Nurseries</string>

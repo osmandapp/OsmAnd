@@ -261,7 +261,7 @@ public class ConfigureMapMenu {
 		if (renderer != null) {
 			List<RenderingRuleProperty> customRules = new ArrayList<RenderingRuleProperty>(renderer.PROPS.getCustomRules());
 			
-			//createProperties(customRules, R.string.rendering_category_transport, "transport",
+			createProperties(customRules, R.string.rendering_category_transport, "transport",
 					adapter, activity);
 			createProperties(customRules, R.string.rendering_category_routes, "routes",
 					adapter, activity);

@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <resources>
-	<string name="poi_&amp;quot;yes&amp;quot;">Будівля</string>
+	<string name="poi_yes">Будівля</string>
 	<string name="poi_abandoned">Кинуті колії</string>
 	<string name="poi_administrative">Адміністративний кордон</string>
 	<string name="poi_airport">Аеропорт</string>

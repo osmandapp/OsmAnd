@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <resources>
-	<string name="poi_&amp;quot;yes&amp;quot;">Tòa nhà</string>
+	<string name="poi_yes">Tòa nhà</string>
 	<string name="poi_administrative">Biên giới Hành chính</string>
 	<string name="poi_airport">Trung tâm Nghệ thuật</string>
 	<string name="poi_allotments">Khu Vườn Gia đình</string>

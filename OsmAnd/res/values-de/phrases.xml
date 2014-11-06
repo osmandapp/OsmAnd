@@ -266,7 +266,7 @@
 	<string name="poi_fountain">Springbrunnen</string>
 	<string name="poi_free_flying">Freeflying</string>
 	<string name="poi_fuel">Tankstelle</string>
-	<string name="poi_full-height_turnstile">hohes Drehkreuz</string>
+	<string name="poi_full_height_turnstile">hohes Drehkreuz</string>
 	<string name="poi_funeral_directors">Bestatter</string>
 	<string name="poi_funicular">Seilbahn</string>
 	<string name="poi_furniture">Möbelgeschäft</string>
@@ -501,7 +501,7 @@
 	<string name="poi_rugby_union">Rugby Union</string>
 	<string name="poi_ruins">Ruine</string>
 	<string name="poi_running_track">Laufsport</string>
-	<string name="poi_sally port">Gebäudedurchfahrt</string>
+	<string name="poi_sally_port">Gebäudedurchfahrt</string>
 	<string name="poi_salon">Salon</string>
 	<string name="poi_salt_pond">Meerwassersaline</string>
 	<string name="poi_sauna">Sauna</string>

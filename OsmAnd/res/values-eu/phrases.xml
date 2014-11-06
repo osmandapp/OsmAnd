@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <resources>
-	<string name="poi_&amp;quot;yes&amp;quot;">Eraikina</string>
+	<string name="poi_yes">Eraikina</string>
 	<string name="poi_administrative">Muga Administratiboa</string>
 	<string name="poi_airport">Aireportu</string>
 	<string name="poi_alpine_hut">Aterpe alpinoa</string>
