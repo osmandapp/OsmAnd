@@ -1890,7 +1890,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="lang_sr">Serbski</string>
 	<string name="lang_zh_CN">Chiński uproszczony</string>
 	<string name="lang_zh_TW">Chiński tradycyjny</string>
-	<string name="rendering_attr_subwayMode_name">Tryb metra</string>
+	<string name="rendering_attr_subwayMode_name">Trasy metra</string>
  	<string name="download_additional_maps">Pobrać brakujące mapy %1$s (%2$d MB)?</string>
     <string name="more">Więcej...</string>
     <string name="rendering_value_browse_map_name">Przeglądaj mapę</string>  
@@ -1916,7 +1916,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="av_camera_pic_size_descr">Wybierz rozmiar obrazu wewnętrznego aparatu</string>
     <string name="hide_all_waypoints">Usuń wszystkie</string>
     <string name="announce_nearby_favorites">Ogłaszaj pobliskie ulubione</string>
-<string name="rendering_attr_publicTransportMode_name">Tryb transportu publicznego</string>
+<string name="rendering_attr_publicTransportMode_name">Trasy autobusowe, trolejbusowe, transportowe</string>
 	<string name="record_plugin_name">Nagrywaj swoje wycieczki</string>
     <string name="int_hour">godz.</string>
     <string name="duration">Czas trwania</string>
@@ -1975,9 +1975,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="wake_on_voice_descr">Włącz na ekran telefonu podczas zbliżania się do zakrętu</string>
     <string name="select_impassable_road">Wybierz mapę</string>
     <string name="impassable_road">Unikaj dróg…</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Tramwaj i pociąg</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Trasy tramwajowe i kolejowe</string>
     <string name="tip_recent_changes_1_9_t">"Zmiany w 1.9: * Aktualizacja stylów mapy z renderowaniem warstw nawierzchni drogi, transportu i symboli turystycznych * Wyszukiwanie punktów POI wzdłuż trasy * Zaznacz nieprzejezdną drogę dla danego przejazdu * Łatwiejsze do pobrania i aktualizacji mapy * Otrzymywanie powiadomień wizualnych i audio podczas zbliżania się do punktu * Drukuj informacje o trasie i manewrach * Wsparcie dla asystenta pasa ruchu * Wsparcie Android Wear * Dużo zmiany UI * Oddzielne powiększenie rozmiaru dla tekstu na mapie * Specjalne powiadomienia dźwiękowe w przypadku niewyświetlania trasy * Funkcjonalności logowania do Osmo * Poprawienie niezgodności versio Osmo "</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Trasy pociągów i kolejek</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Trasy pociągów</string>
     <string name="rendering_attr_tramRoutes_name">Trasy tramwajowe</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Trasy taxi</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trasy trolejbusowe</string>
