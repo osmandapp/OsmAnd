@@ -1693,7 +1693,7 @@
     <string name="osmo_invite">Meghívás…</string>
     <string name="continue_navigation">Navigáció folytatása</string>
     <string name="pause_navigation">Navigáció szüneteltetése</string>
-    <string name="rendering_attr_subwayMode_name">Metró nézet</string>
+    <string name="rendering_attr_subwayMode_name">Metró útvonalak</string>
  	<string name="lang_al">albán</string>
 	<string name="lang_ar">arab</string>
 	<string name="lang_sc">szárd</string>
@@ -1801,8 +1801,8 @@
     <string name="search_radius_proximity">ennek a közelében</string>
     <string name="select_impassable_road">Kiválasztás a térképen</string>
     <string name="impassable_road">Utak elkerülése…</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Villamos és vasút</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Vasút és HÉV</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Villamos- és vasútvonalak</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Vasútvonalak</string>
     <string name="rendering_attr_tramRoutes_name">Villamos</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trolibusz</string>
     <string name="rendering_attr_busRoutes_name">Busz</string>
