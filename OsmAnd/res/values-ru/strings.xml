@@ -358,7 +358,7 @@
   <string name="gpx_option_reverse_route">Выбрать обратное направление пути</string>
   <string name="gpx_option_destination_point">Использовать текущую точку назначения</string>
   <string name="gpx_option_from_start_point">Пройти весь путь</string>
-  <string name="switch_to_vector_map_to_see">Для этой позиции доступны локальные векторные карты.\n\t\n\tДля их использования выберите меню \"Слои\" → \"Источник карты…\" → \"Векторные карты\".</string>
+  <string name="switch_to_vector_map_to_see">Для этой позиции доступны локальные векторные карты.\n\t\n\tДля их использования выберите меню \"Настройка карты\" → \"Источник карты…\" → \"Векторные карты\".</string>
   <string name="binary_map_download_success">"Загрузка завершена.
 \n\t\n\tВы можете переключиться на использование локальных векторных карт через меню \"Слои\" → \"Источник карты…\" → \"Векторные карты\". "</string>
   <string name="choose_audio_stream">Голосовые инструкции</string>
@@ -966,7 +966,8 @@
   <string name="tip_location_sharing_t">"Вы можете поделиться местоположением интересных мест в ходе поездки с семьёй и друзьями используя меню \"Настройки\" → \"Контекстное меню\" → \"Поделиться местоположением\".
 \n\nЗатем выберите способ, которым хотите поделиться местоположением. Поддерживаемые варианты: E-Mail, SMS (текстовое сообщение), либо, просто скопируйте координаты местоположения в буфер обмена устройства. "</string>
   <string name="tip_favorites">Избранные точки</string>
-  <string name="tip_favorites_t">"Часто используемые точки могут быть сохранены в \"Мои места\" \tЧтобы сохранить точку в \"Мои места\" откройте контекстное меню карты, выберите пункт \"Добавить в мои места\" и введите имя для этой точки. После сохранения, эта точка будет доступна через меню \"Мои места\".\n\n\tДолгое нажатие на точку в \"Мои места\" позволяет установить её как место назначения, редактировать или удалить её.\n\n\tЧтобы отобразить все избранные точки на карте, включите слой \"Мои места\" в меню \"Слои\". "</string>
+  <string name="tip_favorites_t">"Часто используемые точки могут быть сохранены в \"Мои места\":\n\nЧтобы сохранить точку в \"Мои места\" откройте контекстное меню карты, выберите пункт \"Добавить в мои места\" и введите имя для этой точки.
+\n\nПосле сохранения, эта точка будет доступна через меню \"Мои места\". Долгое нажатие на точку в \"Мои места\" позволяет установить её как место назначения, редактировать или удалить её.\n\nЧтобы отобразить все избранные точки на карте, включите слой \"Избранные\" в меню \"Настройка карты\". "</string>
   <string name="contribution_activity">Установка версии</string>
   <string name="process_navigation_service">Навигационный сервис OsmAnd</string>
   <string name="offline_navigation_not_available">Локальная навигация OsmAnd временно недоступна.</string>
@@ -1403,8 +1404,8 @@
 	<string name="routing_attr_avoid_unpaved_description">Избегать грунтовые дороги</string>
 	<string name="routing_attr_avoid_ferries_name">Избегать паромов</string>
 	<string name="routing_attr_avoid_ferries_description">Избегать паромов</string>
-	<string name="routing_attr_weight_name">Максимальный вес</string>
-	<string name="routing_attr_weight_description">Уточнить ограничение веса машины</string>
+	<string name="routing_attr_weight_name">Максимальная масса</string>
+	<string name="routing_attr_weight_description">Укажите массу автомобиля разрешенную на маршрутах</string>
     
     <string name="map_widget_map_rendering">Отображение карты</string>
     <string name="amenity_type_seamark">Навигационный знак</string>
@@ -1715,7 +1716,7 @@
 	<string name="lang_sr">Сербский</string>
 	<string name="lang_zh_CN">Упрощенный китайский</string>
 	<string name="lang_zh_TW">Традиционный китайский</string>
-    <string name="rendering_attr_subwayMode_name">Линии метро</string>
+    <string name="rendering_attr_subwayMode_name">Маршруты метро</string>
 	<string name="osmo_invite">Пригласить...</string>
     <string name="osmo_leave_confirmation_msg">Вы хотите выйти из группы %1$s?</string>
     <string name="osmo_specify_tracker_id">Пожалуйста, укажите ID</string>
@@ -1731,8 +1732,8 @@
     <string name="osmo_group_information_desc">" - Все созданные группы являются открытыми! Если вы хотите сохранить анонимность, подключите устройства непосредственно через ID трекера.\n - В группе могут состоять до 16 человек.\n - Если в группе не будет активным хотя бы 1 человек в течении 2-х недель группа будет удалена.\n - Вы можете ограничить вход в группу, только по приглашениям, но для управления группой вы должны войти в консоль администратора.\n - Если вам нужно создать группу, но с другими условиями, пожалуйста, свяжитесь со службой поддержки http://osmo.mobi</string>
     <string name="rendering_attr_alpineHiking_name">Пеший горный туризм по шкале (SAC)</string>
     <string name="rendering_attr_osmcTraces_name">Наложение символов пешего туризма</string>
-    <string name="rendering_attr_coloredBuildings_name">Цветные здания</string>
-    <string name="rendering_attr_publicTransportMode_name">Маршруты общественного транспорта</string>
+    <string name="rendering_attr_coloredBuildings_name">Цветовая маркировка зданий по типу</string>
+    <string name="rendering_attr_publicTransportMode_name">Маршруты автобусов, троллейбусов и маршруток</string>
     <string name="hide_all_waypoints">Удалить все</string>
     <string name="announce_nearby_favorites">Объявлять ближайшие избранные</string>
 <string name="rendering_value_browse_map_name">Обзор карты</string>  
@@ -1800,17 +1801,17 @@
 <string name="search_radius_proximity">Поблизости от</string>
     <string name="map_widget_top">Верхняя панель</string>
 	<string name="tip_recent_changes_1_9_t">"Изменения в 1.9: * Обновлены стили карт с указанием типов покрытия дорог, маршрутов общественного транспорта и символов пешего туризма * Поиск POI вдоль маршрута * Маркировка дорог как непроходимых за сеанс * Легкие загрузка и обновление карт * Визуальное и звуковое оповещение при приближении к точке маршрута * Печать маршрута и передача данных * Поддержка полос * Поддержка Android Wear * Множество изменений в интерфейсе * Отдельный зум для текста на карте * Специальные аудио уведомления в случае, если вы находитесь вне маршрута * Авторизация на OsMo * Исправление несовместимости с версией Osmo "</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Маршруты ж/д и легкорельсового транспорта</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Маршруты поездов</string>
     <string name="rendering_attr_tramRoutes_name">Маршруты трамваев</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Маршрутное такси</string>
     <string name="rendering_attr_trolleybusRoutes_name">Маршруты троллейбусов</string>
     <string name="rendering_attr_busRoutes_name">Маршруты автобусов</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Трамвай и поезд</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Маршруты трамваев и поездов</string>
     <string name="rendering_category_hide">Скрыть</string>
     <string name="select_impassable_road">Выбрать на карте</string>
     <string name="impassable_road">Избегать дороги…</string>
     <string name="wake_on_voice_never">Никогда</string>
     <string name="lock_screen_request_explanation">%1$s необходимо это разрешение, чтобы выключить экран для экономии энергии.</string>
-    <string name="wake_on_voice">Включение экрана</string>
+    <string name="wake_on_voice">Включать экран</string>
     <string name="wake_on_voice_descr">Включать экран телефона при приближении к повороту</string>
     </resources>
