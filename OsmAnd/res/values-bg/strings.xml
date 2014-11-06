@@ -1652,7 +1652,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="routing_attr_weight_description">Изберете максималната разрешена маса (тегло) на МПС</string>
     <string name="copying_osmand_files">Копиране файловете на OsmAnd</string>
     <string name="app_mode_truck">Камион</string>
-    <string name="rendering_attr_publicTransportMode_name">Обществен транспорт</string>
+    <string name="rendering_attr_publicTransportMode_name">Автобусни и тролейбусни линии</string>
 	<string name="record_plugin_name">Запис на Вашето пътуване</string>
     <string name="int_hour">ч.</string>
     <string name="duration">Продължителност</string>
@@ -1676,7 +1676,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="osmo_specify_tracker_id">Уточнете id</string>
     <string name="continue_navigation">Продължи навигацията</string>
     <string name="pause_navigation">Пауза на навигацията</string>
-    <string name="rendering_attr_subwayMode_name">Режим тунел</string>
+    <string name="rendering_attr_subwayMode_name">Подземен транспорт</string>
  	<string name="keep_navigation_service">Запази</string>
 	<string name="stop_navigation_service">Прекъсване</string>
 	<string name="local_map_names">Местни имена</string>
@@ -1748,7 +1748,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="hide_all_waypoints">Изтриване на всички</string>
 <string name="fav_point_dublicate">Дублиране името на запазено място</string>
     <string name="fav_point_dublicate_message">Мястото беше запазено под името %1$s за избягване на дублирането в имената.</string>
-    <string name="use_native_render_descr">Използване на програма C++ вместо Java</string>
+    <string name="use_native_render_descr">Използване на C++ вместо Java за изчертаване</string>
     <string name="rendering_category_routes">Маршрути</string>
     <string name="rendering_category_details">Детайли</string>
     <string name="rendering_category_transport">Транспорт</string>
@@ -1759,4 +1759,16 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="map_widget_left">Ляв панел</string>
     <string name="layers_category_show">Покажи</string>
 	<string name="configure_map">Настройка на картата</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Трамваи и влакове</string>
+	<string name="lock_screen_request_explanation">%1$s изисква това разрешение за да изключи екрана с цел пестене на енергия.</string>
+    <string name="wake_on_voice">Включи екрана</string>
+    <string name="wake_on_voice_descr">Включи екрана, когато приближава завой</string>
+    <string name="wake_on_voice_never">Никога</string>
+    <string name="select_impassable_road">Избери на картата</string>
+    <string name="impassable_road">Избягване на пътища…</string>
+    <string name="rendering_attr_tramRoutes_name">Трамвайни линии</string>
+    <string name="rendering_category_hide">Скрий</string>
+    <string name="rendering_attr_busRoutes_name">Автобусни линии</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Маршрути на влакове</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Тролейбусни линии</string>
     </resources>
