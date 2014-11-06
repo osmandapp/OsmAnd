@@ -9,8 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="lock_screen_request_explanation">%1$s needs this permission to turn off the screen for the power saving feature.</string>
     <string name="wake_on_voice">Turn on the screen</string>
     <string name="wake_on_voice_descr">Turn on the phone screen when approaching a turn</string>
+    <string name="wake_on_voice_never">Never</string>
     <string name="select_impassable_road">Select on map</string>
     <string name="impassable_road">Avoid roads&#8230;</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tram and train</string>
