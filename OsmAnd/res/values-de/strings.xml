@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -1620,7 +1620,7 @@
 	<string name="map_preferred_locale_descr">Bevorzugte Sprache für Beschriftungen auf der Karte (ist diese nicht verfügbar, wird auf Englisch oder lokale Namen gewechselt)</string>
 	<string name="map_preferred_locale">Bevorzugte Sprache für Karten-Beschriftung</string>
 	<string name="local_map_names">Lokale Namen</string>
-	<string name="rendering_attr_subwayMode_name">U-Bahn-Modus</string>
+	<string name="rendering_attr_subwayMode_name">U-Bahn-Linien</string>
 	<string name="gps_wake_up_timer">GPS-Aufwach-Intervall</string>
 	<string name="forward">Weiter</string>
 	<string name="hide_all_waypoints">Alle löschen</string>
@@ -1959,7 +1959,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="more">Mehr...</string>
     <string name="osmo_specify_tracker_id">Bitte ID eingeben</string>
     <string name="home">Ausgangsposition</string>
-    <string name="rendering_attr_publicTransportMode_name">ÖPNV-Modus</string>
+    <string name="rendering_attr_publicTransportMode_name">Bus-, Trolleybus-, Sammeltaxi-Linien</string>
 	<string name="record_plugin_name">Zeichnen Sie Ihre Strecken auf</string>
     <string name="int_hour">h</string>
     <string name="duration">Dauer</string>
@@ -2001,15 +2001,15 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="search_radius_proximity">im Umkreis von</string>
     <string name="tip_recent_changes_1_9_t">"Änderungen in 1.9: * Verbesserte Karten-Stile mit Darstellung der Straßenoberflächen, ÖPNV-Layer und Wander-Symbolen * POI-Suche entlang einer berechneten Route * pro Sitzung eine Straße als nicht passierbar kennzeichnen * Vereinfachung des Karten-Downloads und der Karten-Updates * Audio-visuelle Benachrichtigung bei Annäherung an ein Zwischenziel  * Ausdruck der Reiseroute und der Fahr-Anweisungen * Auswertung von Abbiegespuren * Unterstützung von Android Wear Geräten * viele Änderungen an der Programm-Oberfläche * Separater Zoom nur für die Beschriftungen auf der Karte * Besondere Benachrichtigung bei Abweichen von der vorgegebenen Route * Anmeldung beim Dienst OsMo * Verbesserungen bei der Kompatibilität zu OsMo-Versionen "</string>
     <string name="rendering_category_others">Sonstiges</string>
-    <string name="rendering_attr_tramRoutes_name">Straßenbahnen</string>
+    <string name="rendering_attr_tramRoutes_name">Straßenbahnenlinien</string>
     <string name="wake_on_voice">Bildschirm aktivieren</string>
     <string name="wake_on_voice_descr">Bildschirm aktivieren bei Navigations-Anweisung</string>
     <string name="select_impassable_road">Auswählen auf der Karte</string>
     <string name="impassable_road">Straße blockieren …</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Schienenfahrzeuge</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Straßen- und Eisenbahnlinien</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Eisenbahn-Strecken</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">Sammel-Taxi-Routen</string>
-    <string name="rendering_attr_trolleybusRoutes_name">Oberleitungsbus-Routen</string>
-    <string name="rendering_attr_busRoutes_name">Bus-Routen</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Sammeltaxi-Routen</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Oberleitungsbuslinien</string>
+    <string name="rendering_attr_busRoutes_name">Buslinien</string>
     <string name="rendering_category_hide">Ausblenden</string>
     </resources>
