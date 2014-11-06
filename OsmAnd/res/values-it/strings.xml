@@ -1931,7 +1931,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="lang_sr">Serbo</string>
 	<string name="lang_zh_CN">Cinese semplificato</string>
 	<string name="lang_zh_TW">Cinese tradizionale</string>
-	<string name="rendering_attr_subwayMode_name">Modalità metro</string>
+	<string name="rendering_attr_subwayMode_name">Percorsi metró</string>
  	<string name="osmo_invite">Invita ...</string>
     <string name="osmo_leave_confirmation_msg">Vuoi abbandonare il gruppo %1$s?</string>
     <string name="osmo_specify_tracker_id">Per favore specifica l\'id</string>
@@ -1973,7 +1973,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="save_track_to_gpx_globally">Registra la traccia in un file GPX</string>
 	<string name="save_track_to_gpx_globally_descr">La registrazione della posizione in un file GPX può essere accesa o spenta dal widget registrazione GPX sulla schermata della mappa</string>
 	<string name="save_track_interval_globally">Intervallo registrazione</string>
-	<string name="rendering_attr_publicTransportMode_name">Modo trasporto pubblico</string>
+	<string name="rendering_attr_publicTransportMode_name">Modalità percorsi bus, tram, servizi navetta</string>
 	<string name="confirm_every_run">Chiedi sempre</string>
 	<string name="save_global_track_interval_descr">Scegli l\'intervallo di tempo generale per la registrazione del percorso (abilitata attraverso il widget registrazione GPX sulla mappa)</string>
 	<string name="save_global_track_interval">Intervallo generale di registrazione</string>
@@ -2014,12 +2014,12 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="layers_category_show">Mostra</string>
 	<string name="search_radius_proximity">Nei pressi di</string>
     <string name="tip_recent_changes_1_9_t">"Novità nella 1.9: * Aggiornati gli stili delle mappe con il disegno del tipo di superficie, dei livelli del trasporto pubblico e i simboli escursionistici * Ricerca dei PDI lungo il percorso * Indicazione della strada come impercorribile per la sessione * Download e aggiornamento delle mappe più facili * Notifiche visive e audio all\'approssimarsi a un punto intermedio * Stampa dell\'itinerario e delle indicazioni  * Supporto alle corsie di svolta * Supporto ad Android Wear * Molte modifiche della IU * Zoom per la dimensione del testo sulla mappa * Notifiche audio speciali nel caso si sia fuori rotta * Funzionalità login OsMo  * Correzione incompatibilità versione OsMo "</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Percorsi in treno e metropolitana leggera</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Percorsi in treno</string>
     <string name="rendering_attr_tramRoutes_name">Percorsi in tram</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Condividi percorsi in taxi</string>
     <string name="rendering_attr_trolleybusRoutes_name">Percorsi in filobus</string>
     <string name="rendering_attr_busRoutes_name">Percorsi in bus</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Tram e treno</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Percorsi tram e treno</string>
     <string name="select_impassable_road">Seleziona nella mappa</string>
     <string name="impassable_road">Evita strade …</string>
     <string name="rendering_category_hide">Nascondi</string>
