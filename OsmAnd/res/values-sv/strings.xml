@@ -1730,4 +1730,6 @@
     <string name="rendering_category_hide">Dölj</string>
     <string name="wake_on_voice">Slå på skärmen</string>
     <string name="wake_on_voice_descr">Slå på skärmen när jag närmar mig en sväng</string>
+    <string name="lock_screen_request_explanation">%1$s behöver denna tillåtelse för att stänga av skärmen för strömsparningsfunktionen.</string>
+    <string name="wake_on_voice_never">Aldrig</string>
     </resources>
