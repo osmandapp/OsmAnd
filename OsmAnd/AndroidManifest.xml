@@ -10,7 +10,6 @@
 
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
@@ -238,5 +237,19 @@
 
 		<receiver android:name="net.osmand.plus.OnNavigationServiceAlarmReceiver" />
 		<activity android:name="net.osmand.plus.activities.PrintDialogActivity" />
+		
+		<receiver
+			android:name="net.osmand.plus.DeviceAdminRecv"
+			android:label="@string/app_name"
+			android:permission="android.permission.BIND_DEVICE_ADMIN" >
+			<meta-data
+				android:name="android.app.device_admin"
+				android:resource="@xml/device_admin" />
+
+			<intent-filter>
+				<action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+				<action android:name="android.app.action.DEVICE_ADMIN_DISABLED" />
+			</intent-filter>
+		</receiver>
 </application>
 </manifest> 
