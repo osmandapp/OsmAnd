@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <resources>
-	<string name="poi_&amp;quot;yes&amp;quot;">Edifici</string>
+	<string name="poi_yes">Edifici</string>
 	<string name="poi_airport">Aeroport</string>
 	<string name="poi_alpine_hut">Cabanya alpina</string>
 	<string name="poi_apartments">Bloc d\'apartaments</string>

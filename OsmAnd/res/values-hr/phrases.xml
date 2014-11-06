@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <resources>
-	<string name="poi_&amp;quot;yes&amp;quot;">Zgrada</string>
+	<string name="poi_yes">Zgrada</string>
 	<string name="poi_abandoned">Napuštena prugas</string>
 	<string name="poi_administrative">Administrativna granica</string>
 	<string name="poi_airport">Zračna luka</string>

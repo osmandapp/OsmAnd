@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <resources>
-	<string name="poi_&amp;quot;yes&amp;quot;">Gebou</string>
+	<string name="poi_yes">Gebou</string>
 	<string name="poi_administrative">Administratiewe grens</string>
 	<string name="poi_airport">Lughawe</string>
 	<string name="poi_alpine_hut">Berghut</string>

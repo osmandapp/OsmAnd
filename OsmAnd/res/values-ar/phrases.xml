@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <resources>
-	<string name="poi_&amp;quot;yes&amp;quot;">مبنى</string>
+	<string name="poi_yes">مبنى</string>
 	<string name="poi_abandoned">سكة حديد مهجورة</string>
 	<string name="poi_administrative">حدود إدارية</string>
 	<string name="poi_airport">مطار</string>

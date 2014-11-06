@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <resources>
-	<string name="poi_&amp;quot;yes&amp;quot;">Edificio</string>
+	<string name="poi_yes">Edificio</string>
 	<string name="poi_abandoned">Vía de tren abandonada</string>
 	<string name="poi_account">Contable</string>
 	<string name="poi_adit">Galería de mina</string>
