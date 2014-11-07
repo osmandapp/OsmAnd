@@ -580,6 +580,9 @@ public class MapActivityActions implements DialogProvider {
 					if (mDrawerList != null && refreshDrawer){
 						if (currentDrawer == DrawerType.WAYPOINTS){
 							showWaypointsInDrawer(false);
+						} else if (currentDrawer == DrawerType.MAIN_MENU){
+							final ContextMenuAdapter cm = createOptionsMenu();
+							prepareOptionsMenu(cm);
 						} else {
 							mDrawerList.invalidateViews();
 						}
