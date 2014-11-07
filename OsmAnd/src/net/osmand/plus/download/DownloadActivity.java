@@ -147,7 +147,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 				}
 			}
 
-			String tab = intent.getExtras().get(TAB_TO_OPEN).toString();
+			String tab = intent.getExtras().getString(TAB_TO_OPEN);
 			if (tab != null) {
 				if (tab.equals(DOWNLOAD_TAB)){
 					tabHost.setCurrentTab(1);
