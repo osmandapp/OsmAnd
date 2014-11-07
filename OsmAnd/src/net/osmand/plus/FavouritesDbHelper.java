@@ -191,7 +191,7 @@ public class FavouritesDbHelper {
 			}
 		}
 		if (index.length() > 0 || emoticons){
-			AlertDialog.Builder builder = new AlertDialog.Builder(context.getMapActivity());
+			AlertDialog.Builder builder = new AlertDialog.Builder(context);
 			builder.setTitle(R.string.fav_point_dublicate);
 			if (emoticons){
 				builder.setMessage(context.getString(R.string.fav_point_emoticons_message, name));
