@@ -64,7 +64,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	}
 
 	public void collapseTrees(final CharSequence constraint) {
-		if (downloadFragment == null) {
+		if (downloadFragment == null || downloadFragment.getDownloadActivity() == null) {
 			return;
 		}
 		downloadFragment.getDownloadActivity().runOnUiThread(new Runnable() {
