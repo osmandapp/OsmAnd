@@ -371,7 +371,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 
 				@Override
 				public void onClick(View v) {
-					IntermediatePointsDialog.openIntermediatePointsDialog(app.getMapActivity(), app, true);
+					IntermediatePointsDialog.openIntermediatePointsDialog(a, app, true);
 					if (dlg != null) {
 						dlg.dismiss();
 					} else if(a instanceof MapActivity){
