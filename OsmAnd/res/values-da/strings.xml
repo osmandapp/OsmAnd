@@ -1851,7 +1851,7 @@ Nogle af de centrale funktioner:
     <string name="rendering_attr_shareTaxiRoutes_name">Delebilruter</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trolleybusruter</string>
     <string name="rendering_attr_busRoutes_name">Busruter</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Sporvogns- og togruter</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tog- og sporvognsruter</string>
     <string name="select_impassable_road">Vælg på kort</string>
     <string name="impassable_road">Undgå veje…</string>
     <string name="rendering_category_hide">Skjul</string>
