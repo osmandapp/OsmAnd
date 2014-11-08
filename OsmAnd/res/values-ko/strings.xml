@@ -127,7 +127,7 @@
 	<string name="settings_preset_descr">각 프로필마다 맵뷰어 와 라우팅 설정을 기억합니다. 여기에 기본 프로필을 설정합니다.</string>
 	
 	
-	<string name="routing_settings">라우팅 설정</string>
+	<string name="routing_settings">운행 (라우팅)</string>
 	<string name="routing_settings_descr">라우팅을 위한 옵션을 설정합니다</string>
 	<string name="global_settings">글로벌 설정</string>
 	<string name="index_settings">지도 데이터 관리</string>
@@ -385,7 +385,7 @@
 	<string name="tip_favorites">즐겨찾기 포인트</string>
 	<string name="tip_favorites_t">"자주 사용되는 포인트는 아래처럼 즐겨 찾기에 저장할 수 있습니다. ↵
 \n\n포인트를 즐겨 찾기에 저장하려면 맵 컨텍스트 메뉴로 이동하여 \'즐겨 찾기에 추가\'옵션을 선택하고 이름을 붙여주세요.
-\n\n즐겨 찾기 저장 후 \'메인 메뉴\'-&gt; \'내 장소\'를 통해 사용할 수 있습니다.  \'즐겨 찾기\'메뉴에서 즐겨 찾기를 길게 누르면 탐색 할 옵션이 나타나고, 편집 및 삭제할 수 있습니다. ↵
+\n\n즐겨 찾기 저장 후 \'메인 메뉴\'-&gt; \'장소\'를 통해 사용할 수 있습니다.  \'즐겨 찾기\'메뉴에서 즐겨 찾기를 길게 누르면 탐색 할 옵션이 나타나고, 편집 및 삭제할 수 있습니다. ↵
 \n\n지도에 직접 모든 즐겨 찾기 지점을 표시하려면 \'맵 컨텍스트 메뉴\'-&gt; \'지도 구성\'의 \'즐겨 찾기\'레이어를 활성화하십시오. "</string>
 
 	<string name="create_poi_link_to_osm_doc">이미지와 함께 <u>온라인 OSM</u> 맵 분류</string>
@@ -444,7 +444,7 @@
 	<string name="amenity_type_entertainment">오락기관</string>
 	<string name="amenity_type_finance">은행</string>
 	<string name="amenity_type_geocache">지오캐시</string>
-	<string name="amenity_type_healthcare">헬스장</string>
+	<string name="amenity_type_healthcare">병의원</string>
 	<string name="amenity_type_historic">유적지</string>
 	<string name="amenity_type_landuse">사유지</string>
 	<string name="amenity_type_leisure">레저</string>
@@ -689,7 +689,7 @@
 	<string name="max_level_download_tile_descr">다운로드할 최대 줌 레벨을 선택하세요</string>
 	<string name="route_general_information">전체거리 %1$s, 여행시간 %2$d h %3$d m.</string>
 	<string name="router_service_descr">온라인 또는 오프라인 라우팅 서비스를 선택합니다</string>
-	<string name="router_service">라우터 서비스</string>
+	<string name="router_service">라우팅 서비스</string>
 	<string name="sd_dir_not_accessible">저장할 SD 카드 디렉토리에 접근할 수 없습니다</string>
 	<string name="download_question">{0} - {1} 을 다운로드할까요?</string>
 	<string name="download_question_exist">{0} 에 대한 오프라인 데이터가 이미 존재합니다({1}). 업데이트할까요({2}) ?</string>
@@ -798,7 +798,7 @@
 <string name="exit_Button">종료</string>
 <string name="map_Button">지도</string>
 <string name="settings_Button">설정</string>
-<string name="favorites_Button">내 장소</string>
+<string name="favorites_Button">장소</string>
 <string name="search_button">검색</string>
 <string name="search_activity">검색</string>
 
@@ -978,7 +978,7 @@
     <string name="speech_rate">음성 속도</string>
     <string name="complex_route_calculation_failed">빠른 경로 계산 실패(%s), 느린 계산으로 돌아감.</string>
     <string name="disable_complex_routing">복잡한 라우팅 사용불가</string>
-    <string name="amenity_type_seamark">Seamark</string>
+    <string name="amenity_type_seamark">만조선(Seamark)</string>
     <string name="app_modes_choose">앱 프로필</string>
 	<string name="map_widget_map_rendering">지도 렌더링</string>
     <string name="app_mode_hiking">하이킹</string>
@@ -1787,7 +1787,7 @@
 	<string name="osmo_settings_uuid">고유 장치 id</string>
     <string name="osmo_settings_descr">모니터링 설정을 구성하고 개인 모니터링 채널을 설정</string>
     <string name="osmo_plugin_description">"OpenStreetMap 고급 실시간 모니터링. 이에 대해서는 http://osmo.mobi를 참조 하십시오. 다른 장치를 추적하고 추적받는 가능성을 제공 합니다. 익명 그룹을 만들고, 서로의 위치를 공유하고 소통한다. 세션 트래킹 또는 영구 트래킹에 대한 다양한 설정을 합니다. 익명그룹는 수많은 날에 제한되며  일부 기능 즉, 원격 제어 및 그룹 관리자는 제한된다. 완벽하게 기능적인 그룹은 웹사이트에 생성하고 그들에게 등록된 사용자만 액세스할 수 있습니다. "</string>
-    <string name="osmo_plugin_name">OsMo (실시간 친구위치 공유)</string>
+    <string name="osmo_plugin_name">OsMo (친구위치 공유)</string>
     <string name="osmo_settings">OsMo (실시간 친구찾기)</string>
    	<string name="share_route_as_gpx">루트를 GPX 파일로 공유</string>
 	<string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
@@ -1892,8 +1892,8 @@
     <string name="selected_track">선택된 경로</string>
     <string name="my_tracks">내 GPX경로</string>
     <string name="my_favorites">내 즐겨찾기</string>
-    <string name="my_data_Button">내 장소</string>
-    <string name="my_data_activity">내 장소</string>
+    <string name="my_data_Button">장소</string>
+    <string name="my_data_activity">장소</string>
     <string name="gpx_info_subtracks">"하위 경로 : %1$s "</string>
 	<string name="gpx_info_distance">거리: %1$s (%2$s points) </string>
 	<string name="gpx_info_start_time">시작 시간: %1$tF,  %1$tR </string>
