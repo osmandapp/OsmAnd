@@ -129,12 +129,12 @@
 	
 	<string name="routing_settings">운행 (라우팅)</string>
 	<string name="routing_settings_descr">라우팅을 위한 옵션을 설정합니다</string>
-	<string name="global_settings">글로벌 설정</string>
+	<string name="global_settings">일반 설정</string>
 	<string name="index_settings">지도 데이터 관리</string>
 	<string name="index_settings_descr">기기에 저장된 오프라인 지도를 다운로드하고 관리합니다</string>
 	<string name="general_settings">일반</string>
 	<string name="general_settings_descr">앱에 대한 디스플레이와 일반 설정을 구성합니다</string>
-	<string name="global_app_settings">글로벌 앱 설정</string>
+	<string name="global_app_settings">일반 앱 설정</string>
 	<string name="user_name">OSM 사용자 이름</string>
 	<string name="user_name_descr">http://openstreetmap.org 에 데이터 제출을 위해 필요합니다</string>
 	<string name="user_password">OSM 패스워드</string>
@@ -200,8 +200,8 @@
 	<string name="pref_vector_map">벡터 지도 설정</string>
 	<string name="delete_confirmation_msg">%1$s 를 삭제하시겠습니까?</string>
 	
-	<string name="animate_route_off">시뮬레이션 정지</string>
-	<string name="animate_route">시뮬레이션을 시작합니다</string>
+	<string name="animate_route_off">모의주행 정지</string>
+	<string name="animate_route">모의주행 시작</string>
 	
 	<string name="tip_recent_changes_0_6_8_t">0.6.8 버전에 대한 변경사항들 :
 \n\t- 완전히 재설계한 검색 (POI, 주소)! 주소 검색을 훨씬 빠르게 응답하도록 함. 여러가지 많은 옵션을 가진 단일 검색 인터페이스 생성.
@@ -810,7 +810,7 @@
 <string name="choose_available_region">목록에서 지역을 선택합니다</string>
 <string name="choose_intersected_street">교차로를 선택합니다</string>
 <string name="Closest_Amenities">가장 가까운 시설들</string>
-<string name="app_mode_default">지도 찾기</string>
+<string name="app_mode_default">지도 보기</string>
 <string name="app_mode_car">자동차</string>
 <string name="app_mode_bicycle">자전거</string>
 <string name="app_mode_pedestrian">보행자</string>
