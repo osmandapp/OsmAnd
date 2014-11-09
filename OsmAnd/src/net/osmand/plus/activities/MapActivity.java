@@ -312,9 +312,7 @@ public class MapActivity extends AccessibleActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (wakeLock != null) {
-			return;
-		}
+
 		cancelNotification();
 		//fixing bug with action bar appearing on android 2.3.3
 		if (getSupportActionBar() != null){
@@ -356,8 +354,8 @@ public class MapActivity extends AccessibleActivity implements
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode() && (
-				!Algorithms.objectEquals(targets.getPointToNavigate(), routingHelper.getFinalLocation() )||
-				!Algorithms.objectEquals(targets.getIntermediatePoints(), routingHelper.getIntermediatePoints())
+				!Algorithms.objectEquals(targets.getPointToNavigate().point, routingHelper.getFinalLocation() )||
+				!Algorithms.objectEquals(targets.getIntermediatePointsLatLon(), routingHelper.getIntermediatePoints())
 				)) {
 			targets.updateRouteAndReferesh(true);
 		}
