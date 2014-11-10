@@ -1861,7 +1861,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="distance">Distancia</string>
     <string name="record_plugin_name">Grabar tus viajes</string>
     <string name="record_plugin_description">Guardar tus trazas tocando un botón en la pantalla del mapa. Mostrar las opciones para grabar tus viajes a archivos GPX locales o usando un servicio web en línea.</string>
-    <string name="rendering_attr_publicTransportMode_name">Rutas de autobús</string>
+    <string name="rendering_attr_publicTransportMode_name">Rutas de autobús, trolebús, transporte</string>
 	<string name="save_track_to_gpx_globally">Guardar traza en fichero GPX</string>
 	<string name="save_track_interval_globally">Intervalo de guardado</string>
 	<string name="save_track_to_gpx_globally_descr">El registro de la posición en un archivo GPX puede activarse o desactivarse usando el control de grabación GPX en la pantalla del mapa</string>
@@ -1910,7 +1910,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_attr_tramTrainRoutes_name">Rutas de tranvía y tren</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rutas de tren</string>
     <string name="rendering_attr_tramRoutes_name">Rutas de tranvía</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">Rutas de taxi compartido</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Compartir rutas de taxi</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rutas de trolebús</string>
     <string name="rendering_attr_busRoutes_name">Rutas de autobús</string>
     <string name="rendering_category_hide">Ocultar</string>
