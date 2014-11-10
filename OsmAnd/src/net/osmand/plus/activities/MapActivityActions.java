@@ -94,6 +94,7 @@ public class MapActivityActions implements DialogProvider {
 
 	private enum DrawerType{
 		WAYPOINTS,
+		CONFIGURE_SCREEN,
 		CONFIGURE_MAP,
 		MAIN_MENU
 	}
@@ -816,6 +817,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						currentDrawer = DrawerType.CONFIGURE_MAP;
 						prepareConfigureMap();
 						return false;
 					}
@@ -825,7 +827,7 @@ public class MapActivityActions implements DialogProvider {
 			.listen(new OnContextMenuClick() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					currentDrawer = DrawerType.CONFIGURE_MAP;
+					currentDrawer = DrawerType.CONFIGURE_SCREEN;
 					ContextMenuAdapter cm = mapActivity.getMapLayers().getMapInfoLayer().getViewConfigureMenuAdapter();
 					prepareOptionsMenu(cm);
 					return false;
