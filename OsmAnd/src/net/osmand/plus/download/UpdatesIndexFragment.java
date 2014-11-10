@@ -41,7 +41,12 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 		format = getMyApplication().getResourceManager().getDateFormat();
 		updateColor = getResources().getColor(R.color.color_update);
 		osmandRegions = getMyApplication().getResourceManager().getOsmandRegions();
-		listAdapter = new UpdateIndexAdapter(getDownloadActivity(), R.layout.download_index_list_item, DownloadActivity.downloadListIndexThread.getItemsToUpdate());
+		List<IndexItem> indexItems = new ArrayList<IndexItem>();
+		if (DownloadActivity.downloadListIndexThread != null &&
+				DownloadActivity.downloadListIndexThread.getItemsToUpdate() != null) {
+			indexItems = DownloadActivity.downloadListIndexThread.getItemsToUpdate();
+		}
+		listAdapter = new UpdateIndexAdapter(getDownloadActivity(), R.layout.download_index_list_item, indexItems);
 		listAdapter.sort(new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem indexItem, IndexItem indexItem2) {
