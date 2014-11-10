@@ -42,8 +42,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 		updateColor = getResources().getColor(R.color.color_update);
 		osmandRegions = getMyApplication().getResourceManager().getOsmandRegions();
 		List<IndexItem> indexItems = new ArrayList<IndexItem>();
-		if (DownloadActivity.downloadListIndexThread != null &&
-				DownloadActivity.downloadListIndexThread.getItemsToUpdate() != null) {
+		if (DownloadActivity.downloadListIndexThread != null) {
 			indexItems = DownloadActivity.downloadListIndexThread.getItemsToUpdate();
 		}
 		listAdapter = new UpdateIndexAdapter(getDownloadActivity(), R.layout.download_index_list_item, indexItems);
