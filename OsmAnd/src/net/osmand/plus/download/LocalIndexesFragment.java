@@ -701,6 +701,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 			@Override
 			protected void onPostExecute(List<String> warnings) {
+				if ( getDownloadActivity() == null) {
+					return;
+				}
 				getDownloadActivity().setProgressBarIndeterminateVisibility(false);
 				if (!warnings.isEmpty()) {
 					final StringBuilder b = new StringBuilder();
