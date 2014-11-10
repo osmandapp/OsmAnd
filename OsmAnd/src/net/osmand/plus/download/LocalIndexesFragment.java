@@ -268,9 +268,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		protected void onPostExecute(List<LocalIndexInfo> result) {
 			this.result = result;
 			listAdapter.sortData();
-			
-			getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
-			getDownloadActivity().setLocalIndexInfos(result);
+			if (getDownloadActivity() != null){
+				getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
+				getDownloadActivity().setLocalIndexInfos(result);
+			}
 		}
 
 		public List<LocalIndexInfo> getResult() {
