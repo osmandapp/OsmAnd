@@ -133,18 +133,20 @@
 	<string name="poi_parking_entrance">Parking entrance</string>
 	<string name="poi_garages">Garages</string>
 
-	<string name="poi_bus_station">Bus station</string>
-	<string name="poi_subway_entrance">Subway entrance</string>
-	<string name="poi_railway_station">Railway station</string>
-	<string name="poi_public_transport_platform">Public transport platform</string>
-	<string name="poi_railway_platform">Railway platform</string>
-	<string name="poi_railway_halt">Railway halt</string>
+	<string name="poi_public_transport_platform">Public transport stop</string>
+	<string name="poi_public_transport_platform_bus">Bus stop</string>
+	<string name="poi_public_transport_platform_trolleybus">Trolleybus stop</string>
+	<string name="poi_bus_stop">Bus stop (obsolete)</string>
+	<string name="poi_public_transport_platform_tram">Tram stop</string>
+	<string name="poi_tram_stop">Tram stop (obsolete)</string>
 	<string name="poi_public_transport_station">Public transport station</string>
+	<string name="poi_bus_station">Bus station (obsolete)</string>
+	<string name="poi_railway_station">Railway station (obsolete)</string>
+	<string name="poi_railway_platform">Railway platform (obsolete)</string>
+	<string name="poi_railway_halt">Railway stop (obsolete)</string>
+	<string name="poi_subway_entrance">Subway entrance</string>
 	<string name="poi_subway_station">Subway station</string>
-	<string name="poi_bus_stop">Bus stop</string>
-	<string name="poi_tram_stop">Tram stop</string>
 	<string name="poi_taxi">Taxi stand</string>
-	<string name="poi_funicular">Funicular</string>
 
 	<string name="poi_airport">Airport</string>
 	<string name="poi_helipad">Helipad</string>
@@ -188,7 +190,6 @@
 	<string name="poi_waterway_turning_point">Waterway turning point</string>
 	<string name="poi_weir">Weir</string>
 	<string name="poi_dam">Dam</string>
-	<string name="poi_mill_pond">Mill pond</string>
 	<string name="poi_water_mill">Water mill</string>
 
 	<string name="poi_power_substation">Substation</string>
