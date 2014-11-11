@@ -1432,7 +1432,7 @@
 	<string name="index_item_world_basemap">Översiktskarta (världen)</string>
     <string name="index_item_world_ski">Skidkarta (världen)</string>
     <string name="lang_hr">Kroatiska</string>
-    <string name="always_center_position_on_map">Visa alltid positionen i mitten</string>
+    <string name="always_center_position_on_map">Visa alltid min position i mitten</string>
     <string name="voice_pref_title">Röst</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Översättning</string>
@@ -1624,7 +1624,7 @@
     <string name="rendering_attr_showAccess_name">Visa tillfarts- inskränkningar</string>
     <string name="rendering_attr_showSurfaceGrade_name">Visa vägkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Visa vägbeläggning</string>
-    <string name="rendering_attr_showCycleRoutes_name">Visa cykelrutter</string>
+    <string name="rendering_attr_showCycleRoutes_name">Visa cykelleder</string>
     <string name="lang_fa">Persiska</string>
 	<string name="osmo_auth_error_short">Godkännandet misslyckades</string>
     <string name="osmo_auth_error">Fel vid godkännande av OsMo: %1$s.↵\nTjänsten kan vara tillfälligt nere eller så har din registrering förfallit.\nVill du fortsätta med en ny registrering?</string>
