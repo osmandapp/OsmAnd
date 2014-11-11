@@ -33,7 +33,7 @@
 	<string name="poi_filter_food_shop">Matbutikk</string>
 	<string name="poi_filter_for_tourists">For turister</string>
 	<string name="poi_filter_fuel">Drivstoff</string>
-	<string name="show_warnings_title">Vis alarmer…</string>
+	<string name="show_warnings_title">Vis varsler…</string>
 	<string name="show_warnings_descr">Still inn trafikkvarsler (fartsgrenser, tvungne stopp, fartsdumper), fotoboksvarsler og kjørefeltinformasjon</string>
 	<string name="use_compass_navigation_descr">Bruk kompass hvis det ikke er mulig med annen retningsfastsettelse</string>
 	<string name="use_compass_navigation">Bruk kompass</string>
@@ -335,7 +335,11 @@
 	<string name="tip_app_mode_t_v2">"OsmAnd støtter forskjellige (tilpasningsbare) programprofiler for ulike bruksmåter.
 \n\nDu kan endre profiler via profilknappen i nedre venstre hjørne av kartskjermen (ikon for bil, sykkel eller fotgjenger), eller når du oppretter en rute (\'transportmodus\'). "</string>
 	<string name="tip_navigation">Navigering</string>
-	<string name="tip_navigation_t"/>
+	<string name="tip_navigation_t">"For å få anvisninger til et sted, enten trykk lenge direkte på det på kartet, (så trykk dets beskrivelsesmarkør og velg \'Anvisninger til\'), eller velg \'Anvisninger til\' etter å ha trykket på en oppføring i en liste med søkeresultater eller favorittliste.
+\n\nReisemålet er markert som et målflagg på kartet og OsmAnd viser avstanden til det og retningen til det (orange trekant).
+\n\nVelg enten \'Start navigering\', som betyr at OsmAnd gir veiledning og taleinstruksjoner (hvis aktivert) etc. Eller velg \'Vis rute\', som resulterer i en statisk rute uten veiledning eller justeringer mens du beveger deg.
+\n\nFor å vise en rute til det valgte reisemålet fra ethvert punkt annet enn din gjeldende posisjon, velg startpunktet på kartet og trykk \'Anvisninger fra\'.
+\n\nHvis du bruker \'Anvisninger fra\' sammen med \'Start navigering\', vil OsmAnd skifte til din faktiske posisjon så snart den er funnet (slik at dette kan brukes til å hurtig-starte ruting før posisjonen er funnet), mens \'Anvisninger fra\' i kombinasjon med \'Vis rute\' bare viser deg ruten fra ethvert vilkårlig punkt du hadde valgt uten påfølgende oppdateringer. "</string>
 	<string name="tip_search">Søk</string>
 	<string name="tip_search_t">"Du kan søke etter steder direkte på kartet via \'Bruk posisjon\' → \'Søk nær her\', eller ved å kalle søkeskjermen via \'Meny\' → \'Søk\'.
 \n\nSøkeskjermen gir maler for søk
@@ -941,4 +945,5 @@
 	<string name="map_preferences_descr">Spesifiser kartinnstillinger: Kartkilde, rotasjon, markørposisjon, skjermorientering</string>
 	<string name="navigation_intent_invalid">Ugyldig format: %s</string>
     <string name="hide_all_waypoints">Fjern alle</string>
-</resources>
+<string name="rendering_attr_shareTaxiRoutes_name">Samletaxi-ruter</string>
+    </resources>
