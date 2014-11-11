@@ -14,12 +14,12 @@
 		<item name="android:layout_height">fill_parent</item>
 		<item name="android:gravity">center_vertical</item>
 		<item name="android:textColor">@color/color_black</item>
-		<item name="android:layout_marginLeft">10dp</item>
+		<item name="android:layout_marginLeft">16dp</item>
 		<item name="android:textSize">16sp</item>
 	</style>
 
 	<style name="DashboardGeneralButton">
-		<item name="android:layout_marginRight">10dp</item>
+		<item name="android:layout_marginRight">16dp</item>
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textColor">@color/gpx_time_span_color</item>

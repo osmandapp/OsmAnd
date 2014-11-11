@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent"
+<ScrollView android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:background="@drawable/background"
+
 			xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<LinearLayout android:orientation="vertical"
 				  android:layout_width="match_parent"
-				  android:padding="8dp"
-				  android:layout_height="match_parent"
-				  android:background="@drawable/background">
+				  android:layout_height="wrap_content">
 
 		<LinearLayout android:id="@+id/search"
 					  android:orientation="vertical"
 					  android:layout_width="fill_parent"
 					  android:layout_height="wrap_content"
 					  android:background="@drawable/bg_cardui"
-					  android:layout_marginBottom="8dp">
+					  android:layout_marginBottom="6dp">
 			<TextView android:text="@string/search_for"
-					  android:layout_width="wrap_content"
-					  android:gravity="center_vertical"
-					  android:textColor="@color/color_black"
-					  android:layout_marginLeft="10dp"
-					  android:textSize="16sp"
-					  android:layout_height="30dp"/>
+					  style="@style/DashboardSubHeader"
+					  android:layout_height="40dp"
+					  android:layout_width="wrap_content"/>
 			<LinearLayout android:orientation="horizontal"
 						  android:layout_width="fill_parent"
 						  android:background="@color/group_background"
-						  android:layout_height="80dp">
+						  android:layout_height="90dp">
 				<Button android:id="@+id/poi"
 						android:text="@string/poi"
 						android:drawableTop="@drawable/ic_action_info_light"
@@ -45,7 +43,7 @@
 			<LinearLayout android:orientation="horizontal"
 						  android:layout_width="fill_parent"
 						  android:background="@color/group_background"
-						  android:layout_height="80dp">
+						  android:layout_height="90dp">
 				<Button android:id="@+id/fav"
 						android:text="@string/my_favorites"
 						android:drawableTop="@drawable/ic_action_fav_light"
@@ -67,12 +65,12 @@
 
 		<LinearLayout android:orientation="vertical"
 					  android:background="@drawable/bg_cardui"
-					  android:layout_marginBottom="8dp"
+					  android:layout_marginBottom="6dp"
 					  android:layout_width="fill_parent"
 					  android:layout_height="wrap_content">
 			<LinearLayout android:orientation="horizontal"
 						  android:layout_width="fill_parent"
-						  android:layout_height="wrap_content">
+						  android:layout_height="40dp">
 				<TextView android:text="@string/map_Button"
 						  style="@style/DashboardSubHeader"/>
 				<Button android:id="@+id/show_map"
@@ -94,7 +92,7 @@
 					  android:orientation="vertical">
 			<LinearLayout android:orientation="horizontal"
 						  android:layout_width="fill_parent"
-						  android:layout_height="wrap_content">
+						  android:layout_height="40dp">
 				<TextView android:text="@string/my_data_Button"
 						  style="@style/DashboardSubHeader"/>
 				<Button android:id="@+id/show_all"
