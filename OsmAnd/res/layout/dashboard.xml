@@ -13,11 +13,11 @@
 				  android:layout_height="wrap_content"
 				  android:background="@color/color_white"
 				  android:layout_marginBottom="8dp">
-			<TextView android:text="@string/tip_search"
+			<TextView android:text="@string/search_for"
 					  android:layout_width="wrap_content"
-					  android:layout_gravity="center_horizontal"
 					  android:gravity="center_vertical"
 					  android:textColor="@color/color_black"
+					  android:layout_marginLeft="10dp"
 					  android:textSize="16sp"
 					  android:layout_height="30dp"/>
 		<LinearLayout android:orientation="horizontal"
@@ -64,24 +64,6 @@
 		</LinearLayout>
 	</LinearLayout>
 
-	<LinearLayout android:id="@+id/home"
-				  android:orientation="horizontal"
-				  android:background="@color/color_white"
-				  android:layout_marginBottom="8dp"
-				  android:layout_width="fill_parent"
-				  android:layout_height="wrap_content">
-		<ImageView android:id="@+id/home_img"
-				   android:layout_gravity="center_vertical"
-				   android:src="@drawable/ic_action_home_light"
-				   android:layout_width="wrap_content"
-				   android:layout_height="wrap_content"/>
-		<TextView android:text="@string/favorite_home_category"
-				  style="@style/DashboardSubHeader"/>
-		<Button android:id="@+id/navigation"
-				android:text="@string/tip_navigation"
-				style="@style/DashboardGeneralButton"/>
-	</LinearLayout>
-
 	<LinearLayout android:orientation="vertical"
 				  android:background="@color/color_white"
 				  android:layout_marginBottom="8dp"
@@ -90,9 +72,9 @@
 		<LinearLayout android:orientation="horizontal"
 					  android:layout_width="fill_parent"
 					  android:layout_height="wrap_content">
-			<TextView android:text="@string/map_Button"
+			<TextView android:text="@string/show_map"
 					  style="@style/DashboardSubHeader"/>
-			<Button android:id="@+id/show_on_map"
+			<Button android:id="@+id/show_map"
 					android:text="@string/search_shown_on_map"
 					style="@style/DashboardGeneralButton"/>
 		</LinearLayout>
@@ -112,7 +94,7 @@
 				  android:layout_height="wrap_content">
 		<TextView android:text="@string/my_data_Button"
 				  style="@style/DashboardSubHeader"/>
-		<Button android:id="@+id/btn_show_all"
+		<Button android:id="@+id/show_all"
 				android:text="@string/show_all"
 				style="@style/DashboardGeneralButton"/>
 	</LinearLayout>

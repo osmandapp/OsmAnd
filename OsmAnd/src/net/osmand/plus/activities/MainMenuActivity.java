@@ -240,7 +240,7 @@ public class MainMenuActivity extends Activity {
 		favouritesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
+				final Intent favorites = new Intent(activity, DashboardActivity.class);
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(favorites);
 			}
