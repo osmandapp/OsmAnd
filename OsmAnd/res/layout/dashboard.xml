@@ -2,7 +2,7 @@
 <ScrollView android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
 			android:background="@drawable/background"
-
+			android:padding="6dp"
 			xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<LinearLayout android:orientation="vertical"
@@ -86,7 +86,8 @@
 					android:visibility="gone"/>
 		</LinearLayout>
 
-		<LinearLayout android:background="@drawable/bg_cardui"
+		<LinearLayout android:id="@+id/favorites"
+					  android:background="@drawable/bg_cardui"
 					  android:layout_width="fill_parent"
 					  android:layout_height="wrap_content"
 					  android:orientation="vertical">
@@ -100,9 +101,6 @@
 						style="@style/DashboardGeneralButton"/>
 			</LinearLayout>
 
-			<ListView android:id="@+id/list_favorites"
-					  android:layout_width="fill_parent"
-					  android:layout_height="wrap_content"/>
 		</LinearLayout>
 
 	</LinearLayout>

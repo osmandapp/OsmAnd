@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import alice.tuprolog.event.LibraryEvent;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -50,36 +51,33 @@ public class DashboardActivity extends SherlockFragmentActivity {
 	private void setupFavorites(){
 		final FavouritesDbHelper helper = getMyApplication().getFavorites();
 		final List<FavouritePoint> points = helper.getFavouritePoints();
-		ArrayAdapter<FavouritePoint> adapter = new ArrayAdapter<FavouritePoint>(this, R.layout.favourites_list_item, 0, points) {
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				View view = convertView;
-				if (view == null) {
-					LayoutInflater inflater = getLayoutInflater();
-					view = inflater.inflate(R.layout.favourites_list_item, parent, false);
-				}
-
-				TextView label = (TextView) view.findViewById(R.id.favourite_label);
-				ImageView icon = (ImageView) view.findViewById(R.id.favourite_icon);
-				final FavouritePoint model = points.get(position);
-				view.setTag(model);
-				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(DashboardActivity.this, model.getColor()));
-				LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
-				int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
-						lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
-				String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
-				label.setText(distance + model.getName(), TextView.BufferType.SPANNABLE);
-				label.setTypeface(Typeface.DEFAULT, model.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
-				((Spannable) label.getText()).setSpan(
-						new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
-						0);
-				final CheckBox ch = (CheckBox) view.findViewById(R.id.check_item);
-				view.findViewById(R.id.favourite_icon).setVisibility(View.VISIBLE);
-				ch.setVisibility(View.GONE);
-				return view;
+		if (points.size() > 3){
+			while (points.size() != 3){
+				points.remove(3);
 			}
-		};
-		((ListView) findViewById(R.id.list_favorites)).setAdapter(adapter);
+		}
+		LinearLayout favorites = (LinearLayout) findViewById(R.id.favorites);
+		for(int i =0; i<3; i++){
+			LayoutInflater inflater = getLayoutInflater();
+			View view = inflater.inflate(R.layout.dash_fav_list, null, false);
+			TextView name = (TextView) view.findViewById(R.id.name);
+			TextView label = (TextView) view.findViewById(R.id.distance);
+			ImageView icon = (ImageView) view.findViewById(R.id.icon);
+			final FavouritePoint model = points.get(i);
+			view.setTag(model);
+			name.setText(model.getName());
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(DashboardActivity.this, model.getColor()));
+			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
+			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
+					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
+			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
+			label.setText(distance, TextView.BufferType.SPANNABLE);
+			label.setTypeface(Typeface.DEFAULT, model.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
+			((Spannable) label.getText()).setSpan(
+					new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
+					0);
+			favorites.addView(view);
+		}
 	}
 
 	private void setupButtons(){
@@ -120,6 +118,7 @@ public class DashboardActivity extends SherlockFragmentActivity {
 		osmandMapTileView.setMainLayer(mapVectorLayer);
 		mapVectorLayer.setVisible(true);
 	}
+
 
 	private OsmandApplication getMyApplication() {
 		return (OsmandApplication) getApplication();
