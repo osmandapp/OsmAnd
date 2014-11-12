@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<color name="dashboard_black">#212121</color>
+	<color name="dashboard_blue">#536DFE</color>
     <color name="gpx_color_point">#cd2c33</color>
     <color name="gpx_speed">#c79c00</color>
     <color name="gpx_altitude_desc">#32CD32</color>

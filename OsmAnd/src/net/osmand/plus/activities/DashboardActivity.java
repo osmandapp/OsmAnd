@@ -73,9 +73,6 @@ public class DashboardActivity extends SherlockFragmentActivity {
 			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
 			label.setText(distance, TextView.BufferType.SPANNABLE);
 			label.setTypeface(Typeface.DEFAULT, model.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
-			((Spannable) label.getText()).setSpan(
-					new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
-					0);
 			favorites.addView(view);
 		}
 	}

@@ -13,16 +13,17 @@
 		<item name="android:layout_weight">1</item>
 		<item name="android:layout_height">fill_parent</item>
 		<item name="android:gravity">center_vertical</item>
-		<item name="android:textColor">@color/color_black</item>
+		<item name="android:textColor">@color/dashboard_black</item>
 		<item name="android:layout_marginLeft">16dp</item>
-		<item name="android:textSize">16sp</item>
+		<item name="android:textSize">14sp</item>
 	</style>
 
 	<style name="DashboardGeneralButton">
 		<item name="android:layout_marginRight">16dp</item>
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
-		<item name="android:textColor">@color/gpx_time_span_color</item>
+		<item name="android:textSize">12sp</item>
+		<item name="android:textColor">@color/dashboard_blue</item>
 		<item name="android:background">@color/color_white</item>
 	</style>
 
@@ -31,8 +32,8 @@
 		<item name="android:layout_width">0dp</item>
 		<item name="android:layout_height">fill_parent</item>
 		<item name="android:layout_weight">1</item>
-		<item name="android:textSize">14sp</item>
-		<item name="android:textColor">@color/color_black</item>
+		<item name="android:textSize">12sp</item>
+		<item name="android:textColor">@color/dashboard_black</item>
 		<item name="android:background">@color/color_white</item>
 		<item name="android:layout_marginTop">2dp</item>
 	</style>
