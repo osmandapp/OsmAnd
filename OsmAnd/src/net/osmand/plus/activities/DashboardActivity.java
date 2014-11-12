@@ -73,6 +73,15 @@ public class DashboardActivity extends SherlockFragmentActivity {
 			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
 			label.setText(distance, TextView.BufferType.SPANNABLE);
 			label.setTypeface(Typeface.DEFAULT, model.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
+			view.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					final Intent mapIndent = new Intent(DashboardActivity.this, getMyApplication().getAppCustomization().getMapActivity());
+					mapIndent.putExtra(MapActivity.START_LAT, model.getLatitude());
+					mapIndent.putExtra(MapActivity.START_LON, model.getLongitude());
+					startActivityForResult(mapIndent, 0);
+				}
+			});
 			favorites.addView(view);
 		}
 	}

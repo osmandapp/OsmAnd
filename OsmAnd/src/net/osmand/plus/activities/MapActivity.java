@@ -80,6 +80,9 @@ import android.widget.Toast;
 
 public class MapActivity extends AccessibleActivity implements
 		VoiceRouter.VoiceMessageListener {
+
+	public static final String START_LAT = "START_LAT";
+	public static final String START_LON = "START_LON";
 	
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
@@ -116,6 +119,7 @@ public class MapActivity extends AccessibleActivity implements
 	private KeyguardManager.KeyguardLock keyguardLock = null;
 	private ReleaseWakeLocksRunnable releaseWakeLocksRunnable = new ReleaseWakeLocksRunnable();
 	private boolean active = false;
+	private boolean intentLocation = false;
 	
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
@@ -222,6 +226,17 @@ public class MapActivity extends AccessibleActivity implements
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
 
 		mapActions.prepareStartOptionsMenu();
+
+		Intent intent = getIntent();
+		if (intent != null && intent.getExtras() != null) {
+			double lat = intent.getExtras().getDouble(START_LAT);
+			double lon = intent.getExtras().getDouble(START_LON);
+			if(lat != 0 && lon != 0){
+				mapView.setLatLon(lat, lon);
+				mapView.setIntZoom(14);
+				intentLocation = true;
+			}
+		}
 	}
 	
 	public void addLockView(FrameLayout lockView) {
@@ -341,10 +356,12 @@ public class MapActivity extends AccessibleActivity implements
 		}
 		app.getLocationProvider().resumeAllUpdates();
 
-		if (settings != null && settings.isLastKnownMapLocation()) {
+		if (settings != null && settings.isLastKnownMapLocation() && !intentLocation) {
 			LatLon l = settings.getLastKnownMapLocation();
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
 			mapView.setIntZoom(settings.getLastKnownMapZoom());
+		} else {
+			intentLocation = false;
 		}
 
 		settings.MAP_ACTIVITY_ENABLED.set(true);
