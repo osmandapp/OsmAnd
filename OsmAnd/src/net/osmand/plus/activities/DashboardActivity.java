@@ -114,6 +114,12 @@ public class DashboardActivity extends SherlockFragmentActivity {
 		osmandMapTileView.addLayer(mapVectorLayer, 0.5f);
 		osmandMapTileView.setMainLayer(mapVectorLayer);
 		mapVectorLayer.setVisible(true);
+		net.osmand.Location location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
+		if(location != null){
+			osmandMapTileView.setLatLon(location.getLatitude(), location.getLongitude());
+			osmandMapTileView.setIntZoom(14);
+		}
+		osmandMapTileView.refreshMap(true);
 	}
 
 
