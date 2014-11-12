@@ -28,7 +28,7 @@ public class AppModeDialog {
 		if (showDefault || settings.getApplicationMode() != ApplicationMode.DEFAULT) {
 			selected.add(settings.getApplicationMode());
 		}
-		return prepareAppModeView(a, values, selected, parent, singleSelection, onClickListener);
+		return prepareAppModeView(a, values, selected, parent, singleSelection, false, onClickListener);
 	}
 
 	//special method for drawer menu
@@ -41,7 +41,7 @@ public class AppModeDialog {
 		if (values.size() > 4) {
 			return createDrawerView(a, visible, values, selected, allModes, onClickListener);
 		} else {
-			return prepareAppModeView(a, values, selected, null, true, onClickListener);
+			return prepareAppModeView(a, values, selected, null, true, true, onClickListener);
 		}
 	}
 
@@ -168,9 +168,9 @@ public class AppModeDialog {
 	}
 
 	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values , final Set<ApplicationMode> selected, 
-			ViewGroup parent, final boolean singleSelection, final View.OnClickListener onClickListener) {
+			ViewGroup parent, final boolean singleSelection,boolean drawer, final View.OnClickListener onClickListener) {
 		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
-		final ToggleButton[] buttons = createToggles(values, ll, a, false);
+		final ToggleButton[] buttons = createToggles(values, ll, a, drawer);
 		for (int i = 0; i < buttons.length; i++) {
 			setButtonListener(values, selected, onClickListener, buttons, i, singleSelection);
 		}
