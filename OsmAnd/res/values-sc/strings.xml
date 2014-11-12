@@ -1095,7 +1095,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="download_files_question_space">Sa memòria disponìbile est de {2} MB! Iscarrigare {0} documentu(os) ({1} MB)?</string>
 	<string name="use_transparent_map_theme">Tema transparente</string>
 	<string name="native_library_not_supported">Sa libreria nativa no est suportada dae custu dispositivu.</string>
-	<string name="init_native_library">Inizalizatzione libreria nativa…</string>
+	<string name="init_native_library">Inizializatzione libreria nativa…</string>
 	<string name="rendering_value_browse_map_name">Esploratzione mapa</string>  
     <string name="rendering_value_car_name">Màchina</string>
     <string name="rendering_value_bicycle_name">Bitzicleta</string>

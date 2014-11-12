@@ -130,7 +130,7 @@
 	<string name="routing_settings">운행 (라우팅)</string>
 	<string name="routing_settings_descr">라우팅을 위한 옵션을 설정합니다</string>
 	<string name="global_settings">일반 설정</string>
-	<string name="index_settings">지도 데이터 관리</string>
+	<string name="index_settings">지도 관리</string>
 	<string name="index_settings_descr">기기에 저장된 오프라인 지도를 다운로드하고 관리합니다</string>
 	<string name="general_settings">일반</string>
 	<string name="general_settings_descr">앱에 대한 디스플레이와 일반 설정을 구성합니다</string>
@@ -547,7 +547,7 @@
 	<string name="voice">음성</string>
 	<string name="no_vector_map_loaded">벡터 맵을 적재하지 않았습니다</string>
 
-	<string name="map_route_by_gpx">GPX파일을 변환한 루트</string>
+	<string name="map_route_by_gpx">GPX파일을 이용한 경로안내</string>
 	<string name="gpx_files_not_found">GPX 파일을 /osmand/tracks 폴더에서 찾을 수 없습니다</string>
 	<string name="layer_gpx_layer">GPX 경로…</string>
 	<string name="error_reading_gpx">GPX 데이터를 읽는 도중 오류</string>
@@ -632,9 +632,8 @@
 	<string name="route_head">전방</string>
 	<string name="first_time_continue">계속하세요</string>
 	<string name="first_time_download">영역 다운로드</string>
-	<string name="first_time_msg">OsmAnd 를 선택해 주셔서 감사합니다. 
-앱의 모든 기능을 사용하려면, 인덱스 파일을 다운로드(설정-&gt;데이터관리)하거나 준비하세요. 
-그런 다음, 지도를 보거나 주소, POI, 대중교통을 검색할 수 있습니다.</string>
+	<string name="first_time_msg">"OsmAnd 를 선택해 주셔서 감사합니다. 앱의 모든 기능을 사용하려면, 인덱스 파일을 (설정-&gt;지도 관리)  다운로드 하여 준비하세요.
+\n그런 다음, 지도를 보거나 주소, POI, 공공장소 등등을 찾을 수 있습니다."</string>
 	<string name="search_poi_location">신호 위치 찾는 중…</string>
 	<string name="search_near_map">지난번 지도 위치 검색</string>
 	<string name="search_nearby">근처 검색</string>
@@ -689,7 +688,7 @@
 	<string name="max_level_download_tile_descr">다운로드할 최대 줌 레벨을 선택하세요</string>
 	<string name="route_general_information">전체거리 %1$s, 여행시간 %2$d h %3$d m.</string>
 	<string name="router_service_descr">온라인 또는 오프라인 라우팅 서비스를 선택합니다</string>
-	<string name="router_service">라우팅 서비스</string>
+	<string name="router_service">라우터 선택</string>
 	<string name="sd_dir_not_accessible">저장할 SD 카드 디렉토리에 접근할 수 없습니다</string>
 	<string name="download_question">{0} - {1} 을 다운로드할까요?</string>
 	<string name="download_question_exist">{0} 에 대한 오프라인 데이터가 이미 존재합니다({1}). 업데이트할까요({2}) ?</string>
@@ -793,7 +792,7 @@
     <string name="settings_activity">설정</string>
     <string name="show_gps_coordinates_text">지도에 GPS 좌표 표시</string>
     <string name="use_internet_to_download_tile">누락된 맵 타일을 다운로드하기 위해 인터넷을 사용합니다</string>
-    <string name="app_description">내비게이션 앱</string>
+    <string name="app_description">운행 (라우팅) 앱</string>
 
 <string name="exit_Button">종료</string>
 <string name="map_Button">지도</string>
@@ -1208,7 +1207,7 @@
     <string name="audionotes_plugin_name">오디오/비디오 노트</string>
     <string name="index_srtm_parts">부분</string>
     <string name="index_srtm_ele">등고선</string>
-    <string name="srtm_plugin_description">오프라인 등고선 과 음영은 다운로드를 용이하게 한다. (설정→데이터 관리→다운로드→ 원하는 지도 유형 선택)</string>
+    <string name="srtm_plugin_description">오프라인 등고선 과 음영은 다운로드를 용이하게 한다. (설정→지도 관리→다운로드→ 원하는 지도 유형 선택)</string>
     <string name="srtm_plugin_name">등고선 플러그인</string>
     <string name="download_select_map_types">다른 지도</string>
     <string name="download_roads_only_item">도로 전용</string>
@@ -1377,8 +1376,14 @@
 \n- 중동 : ** ↵
 \n- 아프리카 : ** ↵
 \n- 남극 : * ↵ ↵
-\n\n지원하는 국가의 목록 (기본적으로 전세계 대응) : ↵
-\n아프가니스탄, 알바니아 알제리 안도라, 앙골라, 앵 귈라, 안티구아 바부 다, 아르헨티나, 아르메니아, 아루바, 호주, 오스트리아, 아제르바이잔, 바하마, 바레인, 방글라데시, 바베이도스, 벨로루시, 벨기에, 벨리즈, 베냉, 버뮤다, 부탄, 볼리비아, 보네르 보스니아 헤르체고비나, 보츠와나, 브라질, 영국령 버진 아일랜드, 브루나이, 불가리아, 부르 키나 파소, 부룬디, 캄보디아, 카메룬, 캐나다, 카보 베르데, 중앙 아프리카 공화국, 차드, 칠레, 중국, 콜롬비아, 코모로, 콩고, 코스타리카, 코트 디부 아르, 크로아티아, 쿠바, 큐라 소, 키프로스, 체코, 덴마크, 지부티, 도미니카, 도미니카 공화국, 에콰도르, 이집트, 엘살바도르, 적도 기니, 에리트레아, 에스토니아, 에티오피아, 피지, 핀란드, 프랑스, 프랑스 령 기아나, 프랑스 령 폴리네시아, 가봉, 감비아, 조지아, 독일, 가나, 지브롤터, 그리스, 그린 랜드, 그레나다, 과들루프, 괌, 과테말라, 건지, 기니, 기니 비사우, 가이아나, 아이티, 바티칸, 온두라스, 홍콩, 헝가리, 아이슬란드, 인도, 인도네시아,이란, 이라크 아일랜드 맨섬 이스라엘 이탈리아 자메이카 일본 저지 요르단 카자흐스탄 케냐 키리바시 북한과 한국, 쿠웨이트, 키르기스스탄, 라오스, 라트비아, 레바논, 레소토, 라이베리아, 리비아, 리히텐슈타인, 리투아니아, 룩셈부르크, 마카오, 마케도니아, 마다가스카르, 말라위, 말레이시아, 몰디브, 말리, 몰타, 마르티니크, 모리타니, 모리셔스, 마 요트, 멕시코, 미크로네시아, 몰도바, 모나코, 몽골, 몬테네그로, 몬세 라트, 모로코, 모잠비크, 미얀마, 나미비아, 나우루, 네팔, 네덜란드, 네덜란드 령 안틸레스, 뉴 칼레도니아, 뉴질랜드, 니카라과, 니제르, 나이지리아, 노르웨이, 오만, 파키스탄, 팔라우, 팔레스타인, 파나마, 파푸아 뉴기니, 파라과이, 페루, 필리핀, 폴란드, 포르투갈, 푸에르토 리코, 카타르, 루마니아, 러시아, 르완다, 생 바르 텔레 미 세인트 헬레나 세인트 키츠 네비스, 세인트 루시아, 세인트 마틴, 생 피에르 미 클롱, 세인트 빈센트 그레나딘, 사모아, 산 마리노, 사우디 아라비아, 세네갈, 세르비아, 세이셸, 시에라 리온, 싱가포르 , 슬로바키아, 슬로베니아, 소말리아, 남아프리카 공화국, 사우스 조지아 남부 수단, 스페인, 스리랑카, 수단, 수리남, 스와질란드, 스웨덴, 스위스, 시리아, 대만, 타지키스탄, 탄자니아, 태국, 동 티모르, 토고, 토켈 라우, 통가, 트리니다드 토바고, 튀니지, 터키, 투르크 메니스탄, 투발루, 우간다, 우크라이나, 아랍 에미리트, 영국 (UK), 미국 (USA), 우루과이, 우즈베키스탄, 바누아투, 베네수엘라, 베트남, 월리스 푸 투나 서부 사하라 예멘 잠비아 짐바브웨 "</string>
+\n\n\n지원하는 국가의 목록 (기본적으로 전세계 대응) : ↵
+\n\n아프가니스탄, 알바니아 알제리 안도라, 앙골라, 앵 귈라, 안티구아 바부 다, 아르헨티나, 아르메니아, 아루바, 호주, 오스트리아, 아제르바이잔, 바하마, 바레인, 방글라데시, 바베이도스, 벨로루시, 벨기에, 벨리즈, 베냉, 버뮤다, 부탄, 볼리비아, 보네르 보스니아 헤르체고비나, 보츠와나, 브라질, 영국령 버진 아일랜드, 브루나이, 불가리아, 부르 키나 파소, 부룬디,
+\n\n캄보디아, 카메룬, 캐나다, 카보 베르데, 중앙 아프리카 공화국, 차드, 칠레, 중국, 콜롬비아, 코모로, 콩고, 코스타리카, 코트 디부 아르, 크로아티아, 쿠바, 큐라 소, 키프로스, 체코, 덴마크, 지부티, 도미니카, 도미니카 공화국, 에콰도르, 이집트, 엘살바도르, 적도 기니, 에리트레아, 에스토니아, 에티오피아, 피지, 핀란드, 프랑스, 프랑스 령 기아나, 프랑스 령 폴리네시아,
+\n\n가봉, 감비아, 조지아, 독일, 가나, 지브롤터, 그리스, 그린 랜드, 그레나다, 과들루프, 괌, 과테말라, 건지, 기니, 기니 비사우, 가이아나, 아이티, 바티칸, 온두라스, 홍콩, 헝가리, 아이슬란드, 인도, 인도네시아,이란, 이라크 아일랜드 맨섬 이스라엘 이탈리아 자메이카 일본 저지 요르단
+\n\n카자흐스탄 케냐 키리바시 북한과 한국, 쿠웨이트, 키르기스스탄, 라오스, 라트비아, 레바논, 레소토, 라이베리아, 리비아, 리히텐슈타인, 리투아니아, 룩셈부르크, 마카오, 마케도니아, 마다가스카르, 말라위, 말레이시아, 몰디브, 말리, 몰타, 마르티니크, 모리타니, 모리셔스, 마 요트, 멕시코, 미크로네시아, 몰도바, 모나코, 몽골, 몬테네그로, 몬세 라트, 모로코, 모잠비크, 미얀마,
+\n\n나미비아, 나우루, 네팔, 네덜란드, 네덜란드 령 안틸레스, 뉴 칼레도니아, 뉴질랜드, 니카라과, 니제르, 나이지리아, 노르웨이, 오만, 파키스탄, 팔라우, 팔레스타인, 파나마, 파푸아 뉴기니, 파라과이, 페루, 필리핀, 폴란드, 포르투갈, 푸에르토 리코, 카타르, 루마니아, 러시아, 르완다,
+\n\n생 바르 텔레 미 세인트 헬레나 세인트 키츠 네비스, 세인트 루시아, 세인트 마틴, 생 피에르 미 클롱, 세인트 빈센트 그레나딘, 사모아, 산 마리노, 사우디 아라비아, 세네갈, 세르비아, 세이셸, 시에라 리온, 싱가포르 , 슬로바키아, 슬로베니아, 소말리아, 남아프리카 공화국, 사우스 조지아 남부 수단, 스페인, 스리랑카, 수단, 수리남, 스와질란드, 스웨덴, 스위스, 시리아,
+\n\n대만, 타지키스탄, 탄자니아, 태국, 동 티모르, 토고, 토켈 라우, 통가, 트리니다드 토바고, 튀니지, 터키, 투르크 메니스탄, 투발루, 우간다, 우크라이나, 아랍 에미리트, 영국 (UK), 미국 (USA), 우루과이, 우즈베키스탄, 바누아투, 베네수엘라, 베트남, 월리스 푸 투나 서부 사하라 예멘 잠비아 짐바브웨 "</string>
 	<string name="filterpoi_activity">POI 필터 만들기</string>
 	<string name="select_navigation_mode">전송 모드 선택</string>
 	<string name="day_night_info_description">일출: %1$s \n일몰: %2$s</string>
@@ -1583,20 +1588,10 @@
 \n\t* 경로 플래닝에서 새로운 화면(더 직관적이고 더 강력하게).
 \n\t* 주의! GPS 경로파일은 경로설정 버튼으로 이용할 수 있습니다.
 \n\t* 길안내모드에서 자동 숨김 버튼.
-\n\t* GPX 경로파일의 첫 포인트에서 오프라인 경로를 계산.
+\n\t* GPX 경로파일의 첫 포인트에서 오프라인 경로를 계산  ( \"pass the whole track\"옵션).
 \n\t* 터널에서 시뮬레이션 활성화.
 \n\t* 많은 UX 개선 및 사용성 고정.
-\n\t* 음성 속도 접근성 설정.
-\n\n1.7의 변경 사항 : ↵ ↵
-\n→ * 중요한지도는 2014 년 2 월 이후의 것을 사용하십시오. ↵ ↵
-\n→ * 라우팅 기능 업데이트 (빨리 더 정확하게) - ↵ ↵
-\n→ * 루트 설정을 위한 새로운 화면을 추가 (더 직관적이고 더 강력하게) ↵ ↵
-\n→ * 참고 GPX 라우팅 경로 설정 버튼에서 가능하게되었습니다 ↵ ↵
-\n→ * 운행 모드에서 자동으로 버튼을 숨기도록했습니다 ↵ ↵
-\n→ * GPX 루트의 첫 번째 포인트에 오프라인 루트를 계산 ( \"pass the whole track\"옵션) ↵ ↵
-\n→ * 터널의 동적 시뮬레이션 ↵ ↵
-\n→ * 섬세한 조작감 (사용자 경험) 등의 개선, 접근성의 수정 ↵
-\n→ * 음성 속도 설정 추가 (접근성 설정에서) ↵ "</string>
+\n\t* 음성 속도 설정 추가. "</string>
     <string name="av_camera_focus_edof">필드의 확장된 깊이(EDoF )</string>
 	<string name="local_index_installed">편집</string>
 	<string name="voice_not_specified">지정없음</string>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="map_widget_gps_info">GPS informacije</string>
     <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
@@ -646,7 +646,7 @@
 	<string name="save_track_interval">Interval bilježenja</string>
 	<string name="save_track_interval_descr">Odaberite interval bilježenja za staze</string>
 	<string name="save_track_to_gpx_descrp">Staze se spremaju u direktorij \'tracks\' grupirane po danima</string>
-	<string name="save_track_to_gpx">Spremi stazu u GPX datoteku</string>
+	<string name="save_track_to_gpx">Spremi GPX tijekom navigacije</string>
 	<string name="map_view_3d_descr">Omogući 3D prikaz na karti</string>
 	<string name="map_view_3d">3D prikaz karte</string>
 	<string name="show_poi_over_map_description">Prikaži POI preko karte (koristi zadnji odabrani filtar)</string>
@@ -676,7 +676,7 @@
 	<string name="off_router_service_no_gps_available">Navigacija u stanju mirovanja zahtijeva da lokacijske usluge budu uključene.</string>
 	<string name="background_service_provider">Lokacijske usluge</string>
 	<string name="background_service_provider_descr">Odaberite lokaciju davatelja usluge koju koristi stanje mirovanja</string>
-	<string name="background_service_int">Interval buđenja</string>
+	<string name="background_service_int">Interval buđenja GPS-a</string>
 	<string name="background_service_int_descr">Postavite interval buđenja koji koristi stanje mirovanja</string>
 	<string name="int_min">min.</string>
 	<string name="process_navigation_service">OsmAnd navigacija</string>
@@ -1198,8 +1198,8 @@
     <string name="distance">Udaljenost</string>
     <string name="flat_list_waypoints">Sve</string>
     <string name="targets">Destinacije</string>
-    <string name="way_alarms">Prepreke</string>
-    <string name="speak_favorites">Najavi favorite</string>
+    <string name="way_alarms">Prometna upozorenja</string>
+    <string name="speak_favorites">Najavi favorite u blizini</string>
     <string name="speak_poi">Najavi POI</string>
     <string name="download_additional_maps">Preuzeti karte koje nedostaju %1$s (%2$d MB)?</string>
     <string name="live_monitoring_start">Započnite online praćenje</string>
@@ -1294,4 +1294,38 @@
     <string name="text_size_descr">Postavi veličinu teksta na karti.</string>
     <string name="text_size">Veličina teksta</string>
     <string name="save_track_interval_globally">Interval bilježenja</string>
-	</resources>
+	<string name="rendering_attr_tramTrainRoutes_name">Tramvajske i željezničke rute</string>
+	<string name="wake_on_voice">Uključi ekran</string>
+    <string name="wake_on_voice_descr">Uključiti zaslon telefona kada se približavate skretanju</string>
+    <string name="wake_on_voice_never">Nikad</string>
+    <string name="select_impassable_road">Označi na karti</string>
+    <string name="impassable_road">Izbjegavaj ceste…</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Željezničke rute</string>
+    <string name="rendering_attr_tramRoutes_name">Tramvajske rute</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Podijeli taxi rute</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Trolejbus rute</string>
+    <string name="rendering_attr_busRoutes_name">Autobusne rute</string>
+    <string name="rendering_category_hide">Sakrij</string>
+    <string name="rendering_category_routes">Rute</string>
+    <string name="rendering_category_details">Detalji</string>
+    <string name="rendering_category_transport">Prijevoz</string>
+    <string name="rendering_category_others">Ostale značajke karte</string>
+    <string name="map_widget_top">Statusna traka</string>
+	<string name="map_widget_right">Desni panel</string>
+	<string name="map_widget_left">Lijevi panel</string>
+    <string name="layers_category_show">Prikaži</string>
+	<string name="configure_map">Konfiguracija karte</string>
+    <string name="search_radius_proximity">U blizini</string>
+    <string name="osmo_device_not_found">Uređaj nije pronađen</string>
+    <string name="anonymous_user">Anonimni korisnik</string>
+    <string name="logged_as">Prijavljen kao %1$s</string>
+	<string name="print_route">Ispis rute</string>
+    <string name="confirm_every_run">Uvijek pitaj</string>
+	<string name="speed_limit_exceed">Tolerancija ograničenja brzine</string>
+	<string name="gpx_info_diff_altitude">Raspon nadmorske visine: %1$s</string>
+	<string name="my_favorites">Moji favoriti</string>
+    <string name="my_data_Button">Moja mjesta</string>
+    <string name="my_data_activity">Moja mjesta</string>
+    <string name="osmo_show_group_notifications_descr">Prikaži obavjest kada se korisnik pridruži ili napusti grupu</string>
+    <string name="osmo_regenerate_login_ids">Regenerirajte korisničko ime</string>
+    </resources>
