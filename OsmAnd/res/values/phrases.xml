@@ -220,6 +220,7 @@
 	<string name="poi_vineyard">Vineyard</string>
 	<string name="poi_orchard">Orchard</string>
 	<string name="poi_salt_pond">Salt pond</string>
+	<string name="poi_cricket_nets">Cricket nets</string>
 
 	<string name="poi_driving_school">Driving school</string>
 	<string name="poi_school">School</string>
@@ -292,18 +293,18 @@
 	<string name="poi_chess">Chess</string>
 	<string name="poi_climbing">Climbing</string>
 	<string name="poi_cricket">Cricket</string>
-	<string name="poi_cricket_nets">Cricket nets</string>
 	<string name="poi_croquet">Croquet</string>
 	<string name="poi_cycling">Cycling</string>
 	<string name="poi_diving">Diving</string>
 	<string name="poi_scuba_diving">Scuba diving</string>
 	<string name="poi_dog_racing">Dog racing</string>
 	<string name="poi_equestrian">Equestrian</string>
-	<string name="poi_football">Football</string>
 	<string name="poi_golf">Golf</string>
 	<string name="poi_gymnastics">Gymnastics</string>
+	<string name="poi_handball">Handball</string>
 	<string name="poi_hockey">Hockey</string>
 	<string name="poi_horse_racing">Horse racing</string>
+	<string name="poi_ice_skating">Ice skating</string>
 	<string name="poi_ice_stock">Ice stock</string>
 	<string name="poi_korfbal">Korfbal</string>
 	<string name="poi_motor_sport">Motor sport</string>
@@ -313,8 +314,10 @@
 	<string name="poi_paragliding">Paragliding</string>
 	<string name="poi_pelota">Pelota</string>
 	<string name="poi_racquet">Racquet</string>
+	<string name="poi_roller_skating">Roller skating</string>
 	<string name="poi_rowing">Rowing</string>
-	<string name="poi_rugby">Rugby</string>
+	<string name="poi_rugby_union">Rugby union</string>
+	<string name="poi_rugby_league">Rugby league</string>
 	<string name="poi_shooting">Shooting</string>
 	<string name="poi_skating">Skating</string>
 	<string name="poi_skateboard">Skateboard</string>
@@ -322,7 +325,6 @@
 	<string name="poi_soccer">Soccer</string>
 	<string name="poi_swimming">Swimming</string>
 	<string name="poi_table_tennis">Table tennis</string>
-	<string name="poi_team_handball">Team handball</string>
 	<string name="poi_tennis">Tennis</string>
 	<string name="poi_toboggan">Toboggan</string>
 	<string name="poi_volleyball">Volleyball</string>
@@ -575,6 +577,7 @@
 	<string name="poi_seamark_topmark">Topmark, seamark</string>
 	<string name="poi_seamark_rock">Rock, seamark</string>
 	<string name="poi_seamark_wreck">Wreck, seamark</string>
+
 	<string name="poi_military_airfield">Military airfield</string>
 	<string name="poi_military_bunker">Military bunker</string>
 	<string name="poi_military_barracks">Barracks</string>
