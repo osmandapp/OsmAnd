@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,16 @@ public class DashboardActivity extends SherlockFragmentActivity {
 		setupMapView();
 		setupButtons();
 		setupFavorites();
+		setupFonts();
+	}
 
+	private void setupFonts() {
+		Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
+		((TextView) findViewById(R.id.search_for)).setTypeface(typeface);
+		((TextView) findViewById(R.id.map_text)).setTypeface(typeface);
+		((TextView) findViewById(R.id.fav_text)).setTypeface(typeface);
+		((Button) findViewById(R.id.show_map)).setTypeface(typeface);
+		((Button) findViewById(R.id.show_all)).setTypeface(typeface);
 	}
 
 	private void setupFavorites(){
@@ -64,7 +74,6 @@ public class DashboardActivity extends SherlockFragmentActivity {
 			TextView label = (TextView) view.findViewById(R.id.distance);
 			ImageView icon = (ImageView) view.findViewById(R.id.icon);
 			final FavouritePoint model = points.get(i);
-			view.setTag(model);
 			name.setText(model.getName());
 			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(DashboardActivity.this, model.getColor()));
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
@@ -82,6 +91,11 @@ public class DashboardActivity extends SherlockFragmentActivity {
 					startActivityForResult(mapIndent, 0);
 				}
 			});
+			int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+			int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics());
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+			lp.setMargins(0, margin, 0, 0);
+			view.setLayoutParams(lp);
 			favorites.addView(view);
 		}
 	}

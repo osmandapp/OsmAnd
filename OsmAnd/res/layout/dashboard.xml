@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
-			android:background="@drawable/background"
+			android:background="@color/color_white"
 			android:padding="6dp"
 			xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -15,13 +15,15 @@
 					  android:layout_height="wrap_content"
 					  android:background="@drawable/bg_cardui"
 					  android:layout_marginBottom="6dp">
-			<TextView android:text="@string/search_for"
+			<TextView android:id="@+id/search_for"
+					  android:text="@string/search_for"
 					  style="@style/DashboardSubHeader"
+					  android:gravity="center_vertical"
 					  android:layout_height="40dp"
 					  android:layout_width="wrap_content"/>
 			<LinearLayout android:orientation="horizontal"
 						  android:layout_width="fill_parent"
-						  android:background="@color/group_background"
+						  android:background="@color/dashboard_divider"
 						  android:layout_height="90dp">
 				<Button android:id="@+id/poi"
 						android:text="@string/poi"
@@ -42,7 +44,7 @@
 			</LinearLayout>
 			<LinearLayout android:orientation="horizontal"
 						  android:layout_width="fill_parent"
-						  android:background="@color/group_background"
+						  android:background="@color/dashboard_divider"
 						  android:layout_height="90dp">
 				<Button android:id="@+id/fav"
 						android:text="@string/my_favorites"
@@ -71,7 +73,8 @@
 			<LinearLayout android:orientation="horizontal"
 						  android:layout_width="fill_parent"
 						  android:layout_height="40dp">
-				<TextView android:text="@string/map_Button"
+				<TextView android:id="@+id/map_text"
+						  android:text="@string/map_Button"
 						  style="@style/DashboardSubHeader"/>
 				<Button android:id="@+id/show_map"
 						android:text="@string/show_map"
@@ -81,26 +84,31 @@
 			<net.osmand.plus.views.OsmAndMapSurfaceView
 					android:id="@+id/MapView"
 					android:layout_width="fill_parent"
-					android:layout_height="160dp"
+					android:layout_height="110dp"
 					android:contentDescription="@string/map_view"
 					android:visibility="gone"/>
 		</LinearLayout>
 
-		<LinearLayout android:id="@+id/favorites"
-					  android:background="@drawable/bg_cardui"
+		<LinearLayout android:background="@drawable/bg_cardui"
 					  android:layout_width="fill_parent"
 					  android:layout_height="wrap_content"
 					  android:orientation="vertical">
 			<LinearLayout android:orientation="horizontal"
 						  android:layout_width="fill_parent"
 						  android:layout_height="40dp">
-				<TextView android:text="@string/my_data_Button"
+				<TextView android:id="@+id/fav_text"
+						  android:text="@string/my_data_Button"
 						  style="@style/DashboardSubHeader"/>
 				<Button android:id="@+id/show_all"
 						android:text="@string/show_all"
 						style="@style/DashboardGeneralButton"/>
-			</LinearLayout>
 
+			</LinearLayout>
+			<LinearLayout android:id="@+id/favorites"
+						  android:orientation="vertical"
+						  android:layout_width="fill_parent"
+						  android:layout_height="wrap_content"
+						  android:background="@color/dashboard_divider"/>
 		</LinearLayout>
 
 	</LinearLayout>
