@@ -66,7 +66,7 @@
   
   <string name="switch_to_raster_map_to_see">Nessuna mappa vettoriale è presente per questa posizione. Ne puoi scaricare una in Impostazioni (Gestisci i file mappe), o passa alle mappe online (abilita il plugin delle mappe online).</string>
   <string name="binary_map_download_success">"Download completato.
-\n\t\n\tPer usarle attivare \'Impostazioni\' → \'Configurazione delle mappe\' → \'Sorgenti mappe...\'\t\'Mappe vettoriali offline\'. "</string>
+\n\t\n\tPer usarle attivare \'Impostazioni\' → \'Gestisci i file delle mappe\' → \'Sorgenti mappe...\' → \'Mappe vettoriali offline\'. "</string>
   <string name="tip_day_night_mode">Modo giorno/notte</string>
   
   <string name="tip_osm_improve">Migliora i dati OSM</string>
