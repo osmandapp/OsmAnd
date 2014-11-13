@@ -1586,11 +1586,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="about_settings_descr">Informazioni versione, licenze, membri del progetto</string>
     <string name="tips_and_tricks">Aiuto</string>
     <string name="tip_map_styles">Stili mappa</string>
-	<string name="tip_map_styles_t">"OsmAnd supporta la visualizzazione delle mappe vettoriali in differenti stili mappa per adattarsi alle tue esigenze:
-\n\nDiversi stili mappa da quello bilanciato preimpostato, li trovi sotto \'Menu\' -&gt; \'Configura mappa\' -&gt; \'Stile Mappa\' scegli per esempio
-\n\t* Lo stile \'Touring view\': contiene le più dettagliate informazioni possibile per viaggiare e per visitare, incluse le ottimizzazioni per i guidatori professionali (strade contrasto maggiormente distinguibile), opzione per l\'escursionismo Alpino (scala SAC), itinerari ciclistici, simboli per escursionismo, etc.
-\n\t* \'Alto contrasto strade \' mostra le strade con una luminosità dei colori molto accentuata per le situazioni di cattiva illuminazione
-\n\t* \'Inverno e sci\' crea una vista del paesaggio invernale (coperto da neve), e visione globale delle piste da sci e degli impianti di risalita (in abbinata con \'World ski\' download mappa) "</string>
+	<string name="tip_map_styles_t">"OsmAnd supporta le mappe vettoriali offline con stili di visualizzazione differenti per adattarsi alle tue esigenze:
+\n\nOltre allo stile bilanciato preimpostato, sotto \'Menu\' → \'Configura la mappa\' → \'Stile della mappa\' puoi scegliere ad esempio
+\n\t* Lo stile \'Touring view\', che contiene le informazioni più dettagliate possibili per viaggiatori e turisti, incluse le ottimizzazioni per gli autisti professionisti (maggiore contrasto, strade distinguibili), opzioni per l\'escursionismo Alpino (scala SAC), itinerari ciclistici, simboli per escursionismo, ecc.\n\t* \'High contrast roads\' mostra le strade con colori molto accentuati per le situazioni con intensa luminosità ambientale
+\n\t* \'Winter and ski\' crea una vista da paesaggio invernale (coperto da neve) e mostra pendenze sciistiche e impianti di risalita (abbinata alle mappe scaricabili \'World ski\') "</string>
     <string name="base_world_map">Mappa mondiale di base</string>
 	
     
