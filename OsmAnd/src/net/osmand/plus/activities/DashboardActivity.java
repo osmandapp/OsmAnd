@@ -38,7 +38,7 @@ public class DashboardActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard);
 		getSupportActionBar().setTitle(R.string.app_version);
-		ColorDrawable color = new ColorDrawable(Color.parseColor("#FF9305"));
+		ColorDrawable color = new ColorDrawable(Color.parseColor("#ff8f00"));
 		getSupportActionBar().setBackgroundDrawable(color);
 		getSupportActionBar().setIcon(android.R.color.transparent);
 		setupMapView();
@@ -215,11 +215,11 @@ public class DashboardActivity extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.add(0, 0, 0, R.string.close).setIcon(R.drawable.help_icon)
+		menu.add(0, 0, 0, R.string.close).setIcon(R.drawable.ic_ac_help)
 				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-		menu.add(0, 1, 0, R.string.settings).setIcon(R.drawable.ic_action_settings_light)
+		menu.add(0, 1, 0, R.string.settings).setIcon(R.drawable.ic_ac_settings)
 				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-		menu.add(0, 2, 0, R.string.exit_Button).setIcon(R.drawable.headliner_close)
+		menu.add(0, 2, 0, R.string.exit_Button).setIcon(R.drawable.ic_ac_close)
 				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 		return true;
 	}
