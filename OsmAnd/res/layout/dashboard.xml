@@ -91,7 +91,7 @@
 					  android:orientation="vertical">
 			<LinearLayout android:orientation="horizontal"
 						  android:layout_width="fill_parent"
-						  android:layout_height="40dp">
+						  android:layout_height="38dp">
 				<TextView android:id="@+id/fav_text"
 						  android:text="@string/my_data_Button"
 						  style="@style/DashboardSubHeader"/>
