@@ -2,10 +2,10 @@
 <ScrollView android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
 			android:background="@color/dashboard_background"
-			android:padding="6dp"
 			xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<LinearLayout android:orientation="vertical"
+				  android:padding="6dp"
 				  android:layout_width="match_parent"
 				  android:layout_height="wrap_content">
 
@@ -28,7 +28,6 @@
 				<Button android:id="@+id/poi"
 						android:text="@string/poi"
 						android:drawableTop="@drawable/ic_action_info_light"
-						android:layout_marginRight="1dp"
 						style="@style/DashboardSearchButton"/>
 				<Button android:id="@+id/address"
 						android:text="@string/address"
@@ -38,7 +37,6 @@
 						style="@style/DashboardSearchButton"/>
 				<Button android:id="@+id/coord"
 						android:text="@string/coordinates"
-						android:layout_marginLeft="1dp"
 						android:drawableTop="@drawable/ic_action_marker_light"
 						style="@style/DashboardSearchButton"/>
 			</LinearLayout>
@@ -46,10 +44,9 @@
 						  android:layout_width="fill_parent"
 						  android:background="@color/dashboard_divider"
 						  android:layout_height="90dp">
-				<Button android:id="@+id/fav"
+				<Button android:id="@+id/fav_btn"
 						android:text="@string/my_favorites"
 						android:drawableTop="@drawable/ic_action_fav_light"
-						android:layout_marginRight="1dp"
 						style="@style/DashboardSearchButton"/>
 				<Button android:id="@+id/history"
 						android:text="@string/history"
@@ -60,7 +57,6 @@
 				<Button android:id="@+id/transport"
 						android:text="@string/rendering_category_transport"
 						android:drawableTop="@drawable/ic_action_bus_light"
-						android:layout_marginLeft="1dp"
 						style="@style/DashboardSearchButton"/>
 			</LinearLayout>
 		</LinearLayout>

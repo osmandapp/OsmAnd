@@ -53,8 +53,9 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 	public static final int POI_TAB_INDEX = 0;
 	public static final int ADDRESS_TAB_INDEX = 1;
 	public static final int LOCATION_TAB_INDEX = 2;
-	public static final int HISTORY_TAB_INDEX = 3;
-	public static final int TRANSPORT_TAB_INDEX = 4;
+	public static final int FAVORITES_TAB_INDEX = 3;
+	public static final int HISTORY_TAB_INDEX = 4;
+	public static final int TRANSPORT_TAB_INDEX = 5;
 	
 	protected static final int POSITION_CURRENT_LOCATION = 1;
 	protected static final int POSITION_LAST_MAP_VIEW = 2;

@@ -19,6 +19,7 @@ import com.actionbarsherlock.view.Menu;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.*;
+import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.views.MapTextLayer;
@@ -104,8 +105,7 @@ public class DashboardActivity extends SherlockFragmentActivity {
 		final Activity activity = this;
 		final OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
 
-		Button showMap = (Button) findViewById(R.id.show_map);
-		showMap.setOnClickListener(new View.OnClickListener() {
+		(findViewById(R.id.show_map)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				final Intent mapIndent = new Intent(activity, appCustomization.getMapActivity());
@@ -113,13 +113,72 @@ public class DashboardActivity extends SherlockFragmentActivity {
 			}
 		});
 
-		Button showFavorites = (Button) findViewById(R.id.show_all);
-		showFavorites.setOnClickListener(new View.OnClickListener() {
+		(findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(favorites);
+			}
+		});
+
+		(findViewById(R.id.poi)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
+				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.POI_TAB_INDEX);
+				activity.startActivity(search);
+			}
+		});
+
+		(findViewById(R.id.address)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
+				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.ADDRESS_TAB_INDEX);
+				activity.startActivity(search);
+			}
+		});
+
+		(findViewById(R.id.coord)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
+				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.LOCATION_TAB_INDEX);
+				activity.startActivity(search);
+			}
+		});
+
+		(findViewById(R.id.fav_btn)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
+				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.FAVORITES_TAB_INDEX);
+				activity.startActivity(search);
+			}
+		});
+
+		(findViewById(R.id.history)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
+				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.HISTORY_TAB_INDEX);
+				activity.startActivity(search);
+			}
+		});
+
+		(findViewById(R.id.transport)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
+				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.TRANSPORT_TAB_INDEX);
+				activity.startActivity(search);
 			}
 		});
 	}
