@@ -19,7 +19,7 @@
 					  android:text="@string/search_for"
 					  style="@style/DashboardSubHeader"
 					  android:gravity="center_vertical"
-					  android:layout_height="40dp"
+					  android:layout_height="38dp"
 					  android:layout_width="wrap_content"/>
 			<LinearLayout android:orientation="horizontal"
 						  android:layout_width="fill_parent"
@@ -68,7 +68,7 @@
 					  android:layout_height="wrap_content">
 			<LinearLayout android:orientation="horizontal"
 						  android:layout_width="fill_parent"
-						  android:layout_height="40dp">
+						  android:layout_height="38dp">
 				<TextView android:id="@+id/map_text"
 						  android:text="@string/map_Button"
 						  style="@style/DashboardSubHeader"/>
