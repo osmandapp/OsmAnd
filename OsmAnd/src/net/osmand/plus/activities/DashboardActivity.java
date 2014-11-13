@@ -37,7 +37,7 @@ public class DashboardActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard);
-		getSupportActionBar().setTitle(R.string.app_name);
+		getSupportActionBar().setTitle(R.string.app_name_ver);
 		ColorDrawable color = new ColorDrawable(Color.parseColor("#ff8f00"));
 		getSupportActionBar().setBackgroundDrawable(color);
 		getSupportActionBar().setIcon(android.R.color.transparent);
