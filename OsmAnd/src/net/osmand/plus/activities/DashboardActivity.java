@@ -1,21 +1,19 @@
 package net.osmand.plus.activities;
 
-import alice.tuprolog.event.LibraryEvent;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.*;
@@ -35,7 +33,6 @@ import java.util.List;
 public class DashboardActivity extends SherlockFragmentActivity {
 	public static final boolean TIPS_AND_TRICKS = false;
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,8 +43,13 @@ public class DashboardActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setIcon(android.R.color.transparent);
 		setupMapView();
 		setupButtons();
-		setupFavorites();
 		setupFonts();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		setupFavorites();
 	}
 
 	private void setupFonts() {
@@ -62,33 +64,38 @@ public class DashboardActivity extends SherlockFragmentActivity {
 	private void setupFavorites(){
 		final FavouritesDbHelper helper = getMyApplication().getFavorites();
 		final List<FavouritePoint> points = helper.getFavouritePoints();
+		if (points.size() == 0){
+			(findViewById(R.id.main_fav)).setVisibility(View.GONE);
+			return;
+		}
+
 		if (points.size() > 3){
 			while (points.size() != 3){
 				points.remove(3);
 			}
 		}
+
 		LinearLayout favorites = (LinearLayout) findViewById(R.id.favorites);
-		for(int i =0; i<3; i++){
+		for (final FavouritePoint point : points) {
 			LayoutInflater inflater = getLayoutInflater();
 			View view = inflater.inflate(R.layout.dash_fav_list, null, false);
 			TextView name = (TextView) view.findViewById(R.id.name);
 			TextView label = (TextView) view.findViewById(R.id.distance);
 			ImageView icon = (ImageView) view.findViewById(R.id.icon);
-			final FavouritePoint model = points.get(i);
-			name.setText(model.getName());
-			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(DashboardActivity.this, model.getColor()));
+			name.setText(point.getName());
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(DashboardActivity.this, point.getColor()));
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
-			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
+			int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
 			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
 			label.setText(distance, TextView.BufferType.SPANNABLE);
-			label.setTypeface(Typeface.DEFAULT, model.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
+			label.setTypeface(Typeface.DEFAULT, point.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					final Intent mapIndent = new Intent(DashboardActivity.this, getMyApplication().getAppCustomization().getMapActivity());
-					mapIndent.putExtra(MapActivity.START_LAT, model.getLatitude());
-					mapIndent.putExtra(MapActivity.START_LON, model.getLongitude());
+					mapIndent.putExtra(MapActivity.START_LAT, point.getLatitude());
+					mapIndent.putExtra(MapActivity.START_LON, point.getLongitude());
 					startActivityForResult(mapIndent, 0);
 				}
 			});
@@ -204,6 +211,42 @@ public class DashboardActivity extends SherlockFragmentActivity {
 		osmandMapTileView.refreshMap(true);
 	}
 
+
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.add(0, 0, 0, R.string.close).setIcon(R.drawable.help_icon)
+				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		menu.add(0, 1, 0, R.string.settings).setIcon(R.drawable.ic_action_settings_light)
+				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		menu.add(0, 2, 0, R.string.exit_Button).setIcon(R.drawable.headliner_close)
+				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
+		if (item.getItemId() == 0) {
+			if(TIPS_AND_TRICKS) {
+				TipsAndTricksActivity activity = new TipsAndTricksActivity(this);
+				Dialog dlg = activity.getDialogToShowTips(false, true);
+				dlg.show();
+			} else {
+				final Intent helpIntent = new Intent(this, HelpActivity.class);
+				startActivity(helpIntent);
+			}
+		} else if (item.getItemId() == 1){
+			final Intent settings = new Intent(this, appCustomization.getSettingsActivity());
+			startActivity(settings);
+		} else if (item.getItemId() == 2){
+			Intent newIntent = new Intent(this, appCustomization.getMainMenuActivity());
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			newIntent.putExtra(MainMenuActivity.APP_EXIT_KEY, MainMenuActivity.APP_EXIT_CODE);
+			startActivity(newIntent);
+		}
+		return true;
+	}
 
 	private OsmandApplication getMyApplication() {
 		return (OsmandApplication) getApplication();
