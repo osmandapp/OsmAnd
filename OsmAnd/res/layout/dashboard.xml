@@ -11,7 +11,7 @@
 
 		<LinearLayout android:id="@+id/search"
 					  android:orientation="vertical"
-					  android:layout_width="fill_parent"
+					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:background="@drawable/bg_cardui"
 					  android:layout_marginBottom="6dp">
@@ -22,7 +22,7 @@
 					  android:layout_height="38dp"
 					  android:layout_width="wrap_content"/>
 			<LinearLayout android:orientation="horizontal"
-						  android:layout_width="fill_parent"
+						  android:layout_width="match_parent"
 						  android:background="@color/dashboard_divider"
 						  android:layout_height="90dp">
 				<Button android:id="@+id/poi"

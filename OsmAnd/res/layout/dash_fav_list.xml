@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:orientation="horizontal"
 			  android:layout_width="match_parent"
-			  android:background="@color/color_white"
+			  android:background="@drawable/dashboard_button"
 			  android:layout_marginTop="1dp"
 			  android:layout_height="50dp">
 	<ImageView android:id="@+id/icon"

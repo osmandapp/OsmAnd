@@ -37,7 +37,7 @@ public class DashboardActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard);
-		getSupportActionBar().setTitle(R.string.app_version);
+		getSupportActionBar().setTitle(R.string.app_name);
 		ColorDrawable color = new ColorDrawable(Color.parseColor("#ff8f00"));
 		getSupportActionBar().setBackgroundDrawable(color);
 		getSupportActionBar().setIcon(android.R.color.transparent);
@@ -64,6 +64,8 @@ public class DashboardActivity extends SherlockFragmentActivity {
 	private void setupFavorites(){
 		final FavouritesDbHelper helper = getMyApplication().getFavorites();
 		final List<FavouritePoint> points = helper.getFavouritePoints();
+		LinearLayout favorites = (LinearLayout) findViewById(R.id.favorites);
+		favorites.removeAllViews();
 		if (points.size() == 0){
 			(findViewById(R.id.main_fav)).setVisibility(View.GONE);
 			return;
@@ -75,7 +77,7 @@ public class DashboardActivity extends SherlockFragmentActivity {
 			}
 		}
 
-		LinearLayout favorites = (LinearLayout) findViewById(R.id.favorites);
+
 		for (final FavouritePoint point : points) {
 			LayoutInflater inflater = getLayoutInflater();
 			View view = inflater.inflate(R.layout.dash_fav_list, null, false);
