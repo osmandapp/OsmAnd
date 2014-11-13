@@ -27,13 +27,13 @@
 						  android:layout_height="90dp">
 				<Button android:id="@+id/poi"
 						android:text="@string/poi"
-						android:drawableTop="@drawable/ic_action_info_light"
+						android:drawableTop="@drawable/ic_action_info2"
 						style="@style/DashboardSearchButton"/>
 				<Button android:id="@+id/address"
 						android:text="@string/address"
 						android:layout_marginRight="1dp"
 						android:layout_marginLeft="1dp"
-						android:drawableTop="@drawable/ic_action_info2"
+						android:drawableTop="@drawable/ic_action_home2"
 						style="@style/DashboardSearchButton"/>
 				<Button android:id="@+id/coord"
 						android:text="@string/coordinates"
