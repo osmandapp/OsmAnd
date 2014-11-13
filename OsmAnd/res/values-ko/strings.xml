@@ -127,14 +127,14 @@
 	<string name="settings_preset_descr">각 프로필마다 맵뷰어 와 라우팅 설정을 기억합니다. 여기에 기본 프로필을 설정합니다.</string>
 	
 	
-	<string name="routing_settings">라우팅 설정</string>
+	<string name="routing_settings">운행 (라우팅)</string>
 	<string name="routing_settings_descr">라우팅을 위한 옵션을 설정합니다</string>
-	<string name="global_settings">글로벌 설정</string>
-	<string name="index_settings">지도 데이터 관리</string>
+	<string name="global_settings">일반 설정</string>
+	<string name="index_settings">지도 관리</string>
 	<string name="index_settings_descr">기기에 저장된 오프라인 지도를 다운로드하고 관리합니다</string>
 	<string name="general_settings">일반</string>
 	<string name="general_settings_descr">앱에 대한 디스플레이와 일반 설정을 구성합니다</string>
-	<string name="global_app_settings">글로벌 앱 설정</string>
+	<string name="global_app_settings">일반 앱 설정</string>
 	<string name="user_name">OSM 사용자 이름</string>
 	<string name="user_name_descr">http://openstreetmap.org 에 데이터 제출을 위해 필요합니다</string>
 	<string name="user_password">OSM 패스워드</string>
@@ -200,8 +200,8 @@
 	<string name="pref_vector_map">벡터 지도 설정</string>
 	<string name="delete_confirmation_msg">%1$s 를 삭제하시겠습니까?</string>
 	
-	<string name="animate_route_off">시뮬레이션 정지</string>
-	<string name="animate_route">시뮬레이션을 시작합니다</string>
+	<string name="animate_route_off">모의주행 정지</string>
+	<string name="animate_route">모의주행 시작</string>
 	
 	<string name="tip_recent_changes_0_6_8_t">0.6.8 버전에 대한 변경사항들 :
 \n\t- 완전히 재설계한 검색 (POI, 주소)! 주소 검색을 훨씬 빠르게 응답하도록 함. 여러가지 많은 옵션을 가진 단일 검색 인터페이스 생성.
@@ -385,7 +385,7 @@
 	<string name="tip_favorites">즐겨찾기 포인트</string>
 	<string name="tip_favorites_t">"자주 사용되는 포인트는 아래처럼 즐겨 찾기에 저장할 수 있습니다. ↵
 \n\n포인트를 즐겨 찾기에 저장하려면 맵 컨텍스트 메뉴로 이동하여 \'즐겨 찾기에 추가\'옵션을 선택하고 이름을 붙여주세요.
-\n\n즐겨 찾기 저장 후 \'메인 메뉴\'-&gt; \'내 장소\'를 통해 사용할 수 있습니다.  \'즐겨 찾기\'메뉴에서 즐겨 찾기를 길게 누르면 탐색 할 옵션이 나타나고, 편집 및 삭제할 수 있습니다. ↵
+\n\n즐겨 찾기 저장 후 \'메인 메뉴\'-&gt; \'장소\'를 통해 사용할 수 있습니다.  \'즐겨 찾기\'메뉴에서 즐겨 찾기를 길게 누르면 탐색 할 옵션이 나타나고, 편집 및 삭제할 수 있습니다. ↵
 \n\n지도에 직접 모든 즐겨 찾기 지점을 표시하려면 \'맵 컨텍스트 메뉴\'-&gt; \'지도 구성\'의 \'즐겨 찾기\'레이어를 활성화하십시오. "</string>
 
 	<string name="create_poi_link_to_osm_doc">이미지와 함께 <u>온라인 OSM</u> 맵 분류</string>
@@ -444,7 +444,7 @@
 	<string name="amenity_type_entertainment">오락기관</string>
 	<string name="amenity_type_finance">은행</string>
 	<string name="amenity_type_geocache">지오캐시</string>
-	<string name="amenity_type_healthcare">헬스장</string>
+	<string name="amenity_type_healthcare">병의원</string>
 	<string name="amenity_type_historic">유적지</string>
 	<string name="amenity_type_landuse">사유지</string>
 	<string name="amenity_type_leisure">레저</string>
@@ -547,7 +547,7 @@
 	<string name="voice">음성</string>
 	<string name="no_vector_map_loaded">벡터 맵을 적재하지 않았습니다</string>
 
-	<string name="map_route_by_gpx">GPX파일을 변환한 루트</string>
+	<string name="map_route_by_gpx">GPX파일을 이용한 경로안내</string>
 	<string name="gpx_files_not_found">GPX 파일을 /osmand/tracks 폴더에서 찾을 수 없습니다</string>
 	<string name="layer_gpx_layer">GPX 경로…</string>
 	<string name="error_reading_gpx">GPX 데이터를 읽는 도중 오류</string>
@@ -632,9 +632,8 @@
 	<string name="route_head">전방</string>
 	<string name="first_time_continue">계속하세요</string>
 	<string name="first_time_download">영역 다운로드</string>
-	<string name="first_time_msg">OsmAnd 를 선택해 주셔서 감사합니다. 
-앱의 모든 기능을 사용하려면, 인덱스 파일을 다운로드(설정-&gt;데이터관리)하거나 준비하세요. 
-그런 다음, 지도를 보거나 주소, POI, 대중교통을 검색할 수 있습니다.</string>
+	<string name="first_time_msg">"OsmAnd 를 선택해 주셔서 감사합니다. 앱의 모든 기능을 사용하려면, 인덱스 파일을 (설정-&gt;지도 관리)  다운로드 하여 준비하세요.
+\n그런 다음, 지도를 보거나 주소, POI, 공공장소 등등을 찾을 수 있습니다."</string>
 	<string name="search_poi_location">신호 위치 찾는 중…</string>
 	<string name="search_near_map">지난번 지도 위치 검색</string>
 	<string name="search_nearby">근처 검색</string>
@@ -645,7 +644,7 @@
 	<string name="map_screen_orientation_descr">세로, 가로, 자동</string>
 	<string name="opening_hours_not_supported">오프닝 시간 형식은 편집을 지원하지 않습니다</string>
 	<string name="add_new_rule">새로운 규칙 추가</string>
-	<string name="transport_Routes">경로</string>
+	<string name="transport_Routes">노선</string>
 	<string name="transport_Stop">정류소</string>
 	<string name="transport_stops">정류소들</string>
 	
@@ -689,7 +688,7 @@
 	<string name="max_level_download_tile_descr">다운로드할 최대 줌 레벨을 선택하세요</string>
 	<string name="route_general_information">전체거리 %1$s, 여행시간 %2$d h %3$d m.</string>
 	<string name="router_service_descr">온라인 또는 오프라인 라우팅 서비스를 선택합니다</string>
-	<string name="router_service">라우터 서비스</string>
+	<string name="router_service">라우터 선택</string>
 	<string name="sd_dir_not_accessible">저장할 SD 카드 디렉토리에 접근할 수 없습니다</string>
 	<string name="download_question">{0} - {1} 을 다운로드할까요?</string>
 	<string name="download_question_exist">{0} 에 대한 오프라인 데이터가 이미 존재합니다({1}). 업데이트할까요({2}) ?</string>
@@ -793,12 +792,12 @@
     <string name="settings_activity">설정</string>
     <string name="show_gps_coordinates_text">지도에 GPS 좌표 표시</string>
     <string name="use_internet_to_download_tile">누락된 맵 타일을 다운로드하기 위해 인터넷을 사용합니다</string>
-    <string name="app_description">내비게이션 앱</string>
+    <string name="app_description">운행 (라우팅) 앱</string>
 
 <string name="exit_Button">종료</string>
 <string name="map_Button">지도</string>
 <string name="settings_Button">설정</string>
-<string name="favorites_Button">내 장소</string>
+<string name="favorites_Button">장소</string>
 <string name="search_button">검색</string>
 <string name="search_activity">검색</string>
 
@@ -810,7 +809,7 @@
 <string name="choose_available_region">목록에서 지역을 선택합니다</string>
 <string name="choose_intersected_street">교차로를 선택합니다</string>
 <string name="Closest_Amenities">가장 가까운 시설들</string>
-<string name="app_mode_default">지도 찾기</string>
+<string name="app_mode_default">지도 보기</string>
 <string name="app_mode_car">자동차</string>
 <string name="app_mode_bicycle">자전거</string>
 <string name="app_mode_pedestrian">보행자</string>
@@ -978,7 +977,7 @@
     <string name="speech_rate">음성 속도</string>
     <string name="complex_route_calculation_failed">빠른 경로 계산 실패(%s), 느린 계산으로 돌아감.</string>
     <string name="disable_complex_routing">복잡한 라우팅 사용불가</string>
-    <string name="amenity_type_seamark">Seamark</string>
+    <string name="amenity_type_seamark">만조선(Seamark)</string>
     <string name="app_modes_choose">앱 프로필</string>
 	<string name="map_widget_map_rendering">지도 렌더링</string>
     <string name="app_mode_hiking">하이킹</string>
@@ -1208,7 +1207,7 @@
     <string name="audionotes_plugin_name">오디오/비디오 노트</string>
     <string name="index_srtm_parts">부분</string>
     <string name="index_srtm_ele">등고선</string>
-    <string name="srtm_plugin_description">오프라인 등고선 과 음영은 다운로드를 용이하게 한다. (설정→데이터 관리→다운로드→ 원하는 지도 유형 선택)</string>
+    <string name="srtm_plugin_description">오프라인 등고선 과 음영은 다운로드를 용이하게 한다. (설정→지도 관리→다운로드→ 원하는 지도 유형 선택)</string>
     <string name="srtm_plugin_name">등고선 플러그인</string>
     <string name="download_select_map_types">다른 지도</string>
     <string name="download_roads_only_item">도로 전용</string>
@@ -1377,8 +1376,14 @@
 \n- 중동 : ** ↵
 \n- 아프리카 : ** ↵
 \n- 남극 : * ↵ ↵
-\n\n지원하는 국가의 목록 (기본적으로 전세계 대응) : ↵
-\n아프가니스탄, 알바니아 알제리 안도라, 앙골라, 앵 귈라, 안티구아 바부 다, 아르헨티나, 아르메니아, 아루바, 호주, 오스트리아, 아제르바이잔, 바하마, 바레인, 방글라데시, 바베이도스, 벨로루시, 벨기에, 벨리즈, 베냉, 버뮤다, 부탄, 볼리비아, 보네르 보스니아 헤르체고비나, 보츠와나, 브라질, 영국령 버진 아일랜드, 브루나이, 불가리아, 부르 키나 파소, 부룬디, 캄보디아, 카메룬, 캐나다, 카보 베르데, 중앙 아프리카 공화국, 차드, 칠레, 중국, 콜롬비아, 코모로, 콩고, 코스타리카, 코트 디부 아르, 크로아티아, 쿠바, 큐라 소, 키프로스, 체코, 덴마크, 지부티, 도미니카, 도미니카 공화국, 에콰도르, 이집트, 엘살바도르, 적도 기니, 에리트레아, 에스토니아, 에티오피아, 피지, 핀란드, 프랑스, 프랑스 령 기아나, 프랑스 령 폴리네시아, 가봉, 감비아, 조지아, 독일, 가나, 지브롤터, 그리스, 그린 랜드, 그레나다, 과들루프, 괌, 과테말라, 건지, 기니, 기니 비사우, 가이아나, 아이티, 바티칸, 온두라스, 홍콩, 헝가리, 아이슬란드, 인도, 인도네시아,이란, 이라크 아일랜드 맨섬 이스라엘 이탈리아 자메이카 일본 저지 요르단 카자흐스탄 케냐 키리바시 북한과 한국, 쿠웨이트, 키르기스스탄, 라오스, 라트비아, 레바논, 레소토, 라이베리아, 리비아, 리히텐슈타인, 리투아니아, 룩셈부르크, 마카오, 마케도니아, 마다가스카르, 말라위, 말레이시아, 몰디브, 말리, 몰타, 마르티니크, 모리타니, 모리셔스, 마 요트, 멕시코, 미크로네시아, 몰도바, 모나코, 몽골, 몬테네그로, 몬세 라트, 모로코, 모잠비크, 미얀마, 나미비아, 나우루, 네팔, 네덜란드, 네덜란드 령 안틸레스, 뉴 칼레도니아, 뉴질랜드, 니카라과, 니제르, 나이지리아, 노르웨이, 오만, 파키스탄, 팔라우, 팔레스타인, 파나마, 파푸아 뉴기니, 파라과이, 페루, 필리핀, 폴란드, 포르투갈, 푸에르토 리코, 카타르, 루마니아, 러시아, 르완다, 생 바르 텔레 미 세인트 헬레나 세인트 키츠 네비스, 세인트 루시아, 세인트 마틴, 생 피에르 미 클롱, 세인트 빈센트 그레나딘, 사모아, 산 마리노, 사우디 아라비아, 세네갈, 세르비아, 세이셸, 시에라 리온, 싱가포르 , 슬로바키아, 슬로베니아, 소말리아, 남아프리카 공화국, 사우스 조지아 남부 수단, 스페인, 스리랑카, 수단, 수리남, 스와질란드, 스웨덴, 스위스, 시리아, 대만, 타지키스탄, 탄자니아, 태국, 동 티모르, 토고, 토켈 라우, 통가, 트리니다드 토바고, 튀니지, 터키, 투르크 메니스탄, 투발루, 우간다, 우크라이나, 아랍 에미리트, 영국 (UK), 미국 (USA), 우루과이, 우즈베키스탄, 바누아투, 베네수엘라, 베트남, 월리스 푸 투나 서부 사하라 예멘 잠비아 짐바브웨 "</string>
+\n\n\n지원하는 국가의 목록 (기본적으로 전세계 대응) : ↵
+\n\n아프가니스탄, 알바니아 알제리 안도라, 앙골라, 앵 귈라, 안티구아 바부 다, 아르헨티나, 아르메니아, 아루바, 호주, 오스트리아, 아제르바이잔, 바하마, 바레인, 방글라데시, 바베이도스, 벨로루시, 벨기에, 벨리즈, 베냉, 버뮤다, 부탄, 볼리비아, 보네르 보스니아 헤르체고비나, 보츠와나, 브라질, 영국령 버진 아일랜드, 브루나이, 불가리아, 부르 키나 파소, 부룬디,
+\n\n캄보디아, 카메룬, 캐나다, 카보 베르데, 중앙 아프리카 공화국, 차드, 칠레, 중국, 콜롬비아, 코모로, 콩고, 코스타리카, 코트 디부 아르, 크로아티아, 쿠바, 큐라 소, 키프로스, 체코, 덴마크, 지부티, 도미니카, 도미니카 공화국, 에콰도르, 이집트, 엘살바도르, 적도 기니, 에리트레아, 에스토니아, 에티오피아, 피지, 핀란드, 프랑스, 프랑스 령 기아나, 프랑스 령 폴리네시아,
+\n\n가봉, 감비아, 조지아, 독일, 가나, 지브롤터, 그리스, 그린 랜드, 그레나다, 과들루프, 괌, 과테말라, 건지, 기니, 기니 비사우, 가이아나, 아이티, 바티칸, 온두라스, 홍콩, 헝가리, 아이슬란드, 인도, 인도네시아,이란, 이라크 아일랜드 맨섬 이스라엘 이탈리아 자메이카 일본 저지 요르단
+\n\n카자흐스탄 케냐 키리바시 북한과 한국, 쿠웨이트, 키르기스스탄, 라오스, 라트비아, 레바논, 레소토, 라이베리아, 리비아, 리히텐슈타인, 리투아니아, 룩셈부르크, 마카오, 마케도니아, 마다가스카르, 말라위, 말레이시아, 몰디브, 말리, 몰타, 마르티니크, 모리타니, 모리셔스, 마 요트, 멕시코, 미크로네시아, 몰도바, 모나코, 몽골, 몬테네그로, 몬세 라트, 모로코, 모잠비크, 미얀마,
+\n\n나미비아, 나우루, 네팔, 네덜란드, 네덜란드 령 안틸레스, 뉴 칼레도니아, 뉴질랜드, 니카라과, 니제르, 나이지리아, 노르웨이, 오만, 파키스탄, 팔라우, 팔레스타인, 파나마, 파푸아 뉴기니, 파라과이, 페루, 필리핀, 폴란드, 포르투갈, 푸에르토 리코, 카타르, 루마니아, 러시아, 르완다,
+\n\n생 바르 텔레 미 세인트 헬레나 세인트 키츠 네비스, 세인트 루시아, 세인트 마틴, 생 피에르 미 클롱, 세인트 빈센트 그레나딘, 사모아, 산 마리노, 사우디 아라비아, 세네갈, 세르비아, 세이셸, 시에라 리온, 싱가포르 , 슬로바키아, 슬로베니아, 소말리아, 남아프리카 공화국, 사우스 조지아 남부 수단, 스페인, 스리랑카, 수단, 수리남, 스와질란드, 스웨덴, 스위스, 시리아,
+\n\n대만, 타지키스탄, 탄자니아, 태국, 동 티모르, 토고, 토켈 라우, 통가, 트리니다드 토바고, 튀니지, 터키, 투르크 메니스탄, 투발루, 우간다, 우크라이나, 아랍 에미리트, 영국 (UK), 미국 (USA), 우루과이, 우즈베키스탄, 바누아투, 베네수엘라, 베트남, 월리스 푸 투나 서부 사하라 예멘 잠비아 짐바브웨 "</string>
 	<string name="filterpoi_activity">POI 필터 만들기</string>
 	<string name="select_navigation_mode">전송 모드 선택</string>
 	<string name="day_night_info_description">일출: %1$s \n일몰: %2$s</string>
@@ -1394,7 +1399,7 @@
 	<string name="avoid_ferries">뱃길 회피</string>
 	<string name="avoid_in_routing_title">회피하기…</string>
 	<string name="avoid_in_routing_descr">유료도로, 비포장, 뱃길 회피하기</string>
-	<string name="map_widget_fluorescent">형광색상 경로</string>
+	<string name="map_widget_fluorescent">형광색상 노선</string>
 	<string name="map_widget_show_ruler">축척(Ruler)</string>
 	<string name="map_widget_view_direction">방향 보기</string>
 	<string name="map_widget_transparent">투명 스킨</string>
@@ -1583,20 +1588,10 @@
 \n\t* 경로 플래닝에서 새로운 화면(더 직관적이고 더 강력하게).
 \n\t* 주의! GPS 경로파일은 경로설정 버튼으로 이용할 수 있습니다.
 \n\t* 길안내모드에서 자동 숨김 버튼.
-\n\t* GPX 경로파일의 첫 포인트에서 오프라인 경로를 계산.
+\n\t* GPX 경로파일의 첫 포인트에서 오프라인 경로를 계산  ( \"pass the whole track\"옵션).
 \n\t* 터널에서 시뮬레이션 활성화.
 \n\t* 많은 UX 개선 및 사용성 고정.
-\n\t* 음성 속도 접근성 설정.
-\n\n1.7의 변경 사항 : ↵ ↵
-\n→ * 중요한지도는 2014 년 2 월 이후의 것을 사용하십시오. ↵ ↵
-\n→ * 라우팅 기능 업데이트 (빨리 더 정확하게) - ↵ ↵
-\n→ * 루트 설정을 위한 새로운 화면을 추가 (더 직관적이고 더 강력하게) ↵ ↵
-\n→ * 참고 GPX 라우팅 경로 설정 버튼에서 가능하게되었습니다 ↵ ↵
-\n→ * 운행 모드에서 자동으로 버튼을 숨기도록했습니다 ↵ ↵
-\n→ * GPX 루트의 첫 번째 포인트에 오프라인 루트를 계산 ( \"pass the whole track\"옵션) ↵ ↵
-\n→ * 터널의 동적 시뮬레이션 ↵ ↵
-\n→ * 섬세한 조작감 (사용자 경험) 등의 개선, 접근성의 수정 ↵
-\n→ * 음성 속도 설정 추가 (접근성 설정에서) ↵ "</string>
+\n\t* 음성 속도 설정 추가. "</string>
     <string name="av_camera_focus_edof">필드의 확장된 깊이(EDoF )</string>
 	<string name="local_index_installed">편집</string>
 	<string name="voice_not_specified">지정없음</string>
@@ -1787,7 +1782,7 @@
 	<string name="osmo_settings_uuid">고유 장치 id</string>
     <string name="osmo_settings_descr">모니터링 설정을 구성하고 개인 모니터링 채널을 설정</string>
     <string name="osmo_plugin_description">"OpenStreetMap 고급 실시간 모니터링. 이에 대해서는 http://osmo.mobi를 참조 하십시오. 다른 장치를 추적하고 추적받는 가능성을 제공 합니다. 익명 그룹을 만들고, 서로의 위치를 공유하고 소통한다. 세션 트래킹 또는 영구 트래킹에 대한 다양한 설정을 합니다. 익명그룹는 수많은 날에 제한되며  일부 기능 즉, 원격 제어 및 그룹 관리자는 제한된다. 완벽하게 기능적인 그룹은 웹사이트에 생성하고 그들에게 등록된 사용자만 액세스할 수 있습니다. "</string>
-    <string name="osmo_plugin_name">OsMo (실시간 친구위치 공유)</string>
+    <string name="osmo_plugin_name">OsMo (친구위치 공유)</string>
     <string name="osmo_settings">OsMo (실시간 친구찾기)</string>
    	<string name="share_route_as_gpx">루트를 GPX 파일로 공유</string>
 	<string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
@@ -1892,8 +1887,8 @@
     <string name="selected_track">선택된 경로</string>
     <string name="my_tracks">내 GPX경로</string>
     <string name="my_favorites">내 즐겨찾기</string>
-    <string name="my_data_Button">내 장소</string>
-    <string name="my_data_activity">내 장소</string>
+    <string name="my_data_Button">장소</string>
+    <string name="my_data_activity">장소</string>
     <string name="gpx_info_subtracks">"하위 경로 : %1$s "</string>
 	<string name="gpx_info_distance">거리: %1$s (%2$s points) </string>
 	<string name="gpx_info_start_time">시작 시간: %1$tF,  %1$tR </string>
@@ -1958,7 +1953,7 @@
     <string name="rendering_attr_showAccess_name">접근 제한 보이기</string>
     <string name="rendering_attr_showSurfaceGrade_name">도로 등급 표시</string>
     <string name="rendering_attr_showSurfaces_name">도로 표면 표시</string>
-    <string name="rendering_attr_showCycleRoutes_name">자전거 경로 보이기</string>
+    <string name="rendering_attr_showCycleRoutes_name">자전거 노선 보이기</string>
     <string name="keep_navigation_service">계속</string>
 	<string name="stop_navigation_service">중지</string>
 	<string name="enable_sleep_mode">GPS 절전 모드 활성화</string>
@@ -1985,7 +1980,7 @@
 	<string name="lang_sr">세르비아어</string>
 	<string name="lang_zh_CN">중국어 간체</string>
 	<string name="lang_zh_TW">중국어 번체</string>
-	<string name="rendering_attr_subwayMode_name">지하철 모드</string>
+	<string name="rendering_attr_subwayMode_name">지하철 노선</string>
  	<string name="continue_navigation">운행 계속</string>
     <string name="pause_navigation">운행 일시중지</string>
 	<string name="rendering_attr_alpineHiking_name">고산 하이킹 규모 (SAC)</string>
@@ -2023,7 +2018,7 @@
     <string name="way_alarms">교통 경고</string>
     <string name="speak_favorites">가까운 즐겨찾기 알리기</string>
     <string name="speak_poi">가까운 POI 알리기</string>
-    <string name="rendering_attr_publicTransportMode_name">대중 교통 모드</string>
+    <string name="rendering_attr_publicTransportMode_name">버스, 무궤도전차, 셔틀 노선</string>
 	<string name="save_track_to_gpx_globally">트랙을 GPX파일로 저장</string>
 	<string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 기록 위젯을 사용하여 켜거나 끌 수 있습니다</string>
 	<string name="save_track_interval_globally">로깅 간격</string>
@@ -2037,7 +2032,7 @@
     <string name="traffic_warning_calming">교통량 감소</string>
     <string name="traffic_warning_speed_camera">속도 경고 카메라</string>
     <string name="traffic_warning">트래픽 경고</string>
-	<string name="local_index_description">기존 항목을 클릭하여 더 많은 정보를 보세요. 비활성화 하려면 꾹 눌러주시거나 삭제하세요. 현재 데이터는 (%1$ s 무료):</string>
+	<string name="local_index_description">기존 항목을 클릭하여 더 많은 정보를 보세요. 비활성화 하려면 꾹 눌러주시거나 삭제하세요. 현재 데이터는 (%1$s 무료):</string>
 	<string name="text_size_descr">지도에 텍스트 크기를 설정 합니다.</string>
     <string name="text_size">텍스트 크기</string>
     <string name="fav_point_dublicate">즐겨찾기 포인트 이름 중복</string>
@@ -2075,16 +2070,18 @@
 \n* 지도에 텍스트 크기에 대한 별도의 줌 지원\n* 경로 이탈한 경우에 특별한 오디오 알림 지원
 \n* OsMo 로그인 기능
 \n* OsMo 버전 비 호환성 수정 "</string>
-    <string name="rendering_category_routes">경로 (Routes)</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">기차 및 경전철 노선</string>
+    <string name="rendering_category_routes">노선 (Routes)</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">기차 노선</string>
     <string name="rendering_attr_tramRoutes_name">트램 노선</string>
     <string name="rendering_attr_shareTaxiRoutes_name">택시 노선 공유</string>
     <string name="rendering_attr_trolleybusRoutes_name">무궤도 전차 노선</string>
     <string name="rendering_attr_busRoutes_name">버스 노선</string>
     <string name="select_impassable_road">지도에서 선택</string>
     <string name="impassable_road">도로 회피…</string>
-    <string name="rendering_attr_tramTrainRoutes_name">트램과 기차</string>
+    <string name="rendering_attr_tramTrainRoutes_name">트램과 기차 노선</string>
     <string name="rendering_category_hide">숨기기</string>
     <string name="wake_on_voice">화면 켜기</string>
     <string name="wake_on_voice_descr">교차로에 접근할 때 전화 화면 켜기</string>
+    <string name="lock_screen_request_explanation">%1$의 절전 기능에 대한 화면을 해제 하려면 이 권한이 필요 합니다.</string>
+    <string name="wake_on_voice_never">결코</string>
     </resources>

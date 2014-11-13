@@ -1822,7 +1822,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="lang_sr">Serbio</string>
 	<string name="lang_zh_CN">Chino Simplificado</string>
 	<string name="lang_zh_TW">Chino Tradicional</string>
-	<string name="rendering_attr_subwayMode_name">Modo metro</string>
+	<string name="rendering_attr_subwayMode_name">Rutas de metro</string>
  	<string name="continue_navigation">Continuar Navegación</string>
     <string name="pause_navigation">Pausar Navegación</string>
 	<string name="rendering_attr_alpineHiking_name">Escala senderismo Alpino (SAC)</string>
@@ -1861,7 +1861,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="distance">Distancia</string>
     <string name="record_plugin_name">Grabar tus viajes</string>
     <string name="record_plugin_description">Guardar tus trazas tocando un botón en la pantalla del mapa. Mostrar las opciones para grabar tus viajes a archivos GPX locales o usando un servicio web en línea.</string>
-    <string name="rendering_attr_publicTransportMode_name">Modo de transporte público</string>
+    <string name="rendering_attr_publicTransportMode_name">Rutas de autobús, trolebús, transporte</string>
 	<string name="save_track_to_gpx_globally">Guardar traza en fichero GPX</string>
 	<string name="save_track_interval_globally">Intervalo de guardado</string>
 	<string name="save_track_to_gpx_globally_descr">El registro de la posición en un archivo GPX puede activarse o desactivarse usando el control de grabación GPX en la pantalla del mapa</string>
@@ -1903,12 +1903,12 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="layers_category_show">Mostrar</string>
 	<string name="configure_map">Configurar mapa</string>
     <string name="search_radius_proximity">En las proximidades de</string>
-    <string name="tip_recent_changes_1_9_t">"Cambios en 1.9: * Actualizados los estilos de los mapas con dibujado de la superficie de la carretera, capa de transporte y símbolos de senderismo * Buscar PDI a lo largo de la ruta * Marcar ruta como intransitable por sesión * Más facilidades para descargar y actualizar mapas * Recibir notificaciones visuales y sonoras al acercarse a un punto de la ruta * Imprimir itinerario e información de giros * Soporte de carriles de giro * Soporte de Android Wear * Muchos cambios en la IU * Zoom separado para el Tamaño del Texto en el mapa * Notificación de audio especial en caso de que estés fuera de la ruta * Funcionalidad de login en OsMo * Corregidas incompatibilidades de versión de OsMo "</string>
+    <string name="tip_recent_changes_1_9_t">"Cambios en 1.9: * Actualizados los estilos de los mapas con dibujado de la superficie de la carretera, capas de transporte y símbolos de senderismo * Buscar PDI a lo largo de la ruta * Marcar ruta como intransitable, por sesión * Descarga y actualización de mapas, más sencillas * Recibir notificaciones visuales y sonoras al acercarse a un punto de la ruta * Imprimir itinerario e información de giros * Soporte de carriles de giro * Soporte de Android Wear * Muchos cambios en la IU * Zoom separado para el Tamaño del Texto en el mapa * Notificación de audio especial en caso de que estés fuera de la ruta * Funcionalidad de login en OsMo * Corregidas incompatibilidades de versión de OsMo "</string>
     <string name="rendering_category_routes">Rutas</string>
     <string name="select_impassable_road">Seleccionar en el mapa</string>
     <string name="impassable_road">Evitar carreteras…</string>
-    <string name="rendering_attr_tramTrainRoutes_name">tranvía y tren</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Tren y rutas de raíles eléctricos</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Rutas de tranvía y tren</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Rutas de tren</string>
     <string name="rendering_attr_tramRoutes_name">Rutas de tranvía</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Compartir rutas de taxi</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rutas de trolebús</string>
@@ -1916,4 +1916,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_category_hide">Ocultar</string>
     <string name="wake_on_voice">Encender pantalla</string>
     <string name="wake_on_voice_descr">Encender pantalla al aproximarse a un giro</string>
+    <string name="lock_screen_request_explanation">%1$s necesita este permiso para apagar la pantalla para la característica de ahorro energético.</string>
+    <string name="wake_on_voice_never">Nunca</string>
     </resources>

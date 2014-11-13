@@ -190,7 +190,8 @@ public class FavouritesDbHelper {
 				}
 			}
 		}
-		if (index.length() > 0 || emoticons){
+		if ((index.length() > 0 || emoticons)&&
+				context.getMapActivity() != null){
 			AlertDialog.Builder builder = new AlertDialog.Builder(context.getMapActivity());
 			builder.setTitle(R.string.fav_point_dublicate);
 			if (emoticons){

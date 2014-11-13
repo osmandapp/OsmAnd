@@ -64,6 +64,9 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	}
 
 	public void collapseTrees(final CharSequence constraint) {
+		if (downloadFragment == null || downloadFragment.getDownloadActivity() == null) {
+			return;
+		}
 		downloadFragment.getDownloadActivity().runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -170,9 +173,9 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				if (items != null && !items.isEmpty()) {
 					list.addAll(IndexItemCategory.categorizeIndexItems(app, items));
 				} else if(DownloadIndexAdapter.this.indexFiles.isEmpty()){
-					list.add(new IndexItemCategory(downloadFragment.getResources().getString(R.string.no_index_file_to_download), 1));
+					list.add(new IndexItemCategory(app.getString(R.string.no_index_file_to_download), 1));
 				} else {
-					list.add(new IndexItemCategory(downloadFragment.getResources().getString(R.string.select_index_file_to_download), 1));
+					list.add(new IndexItemCategory(app.getString(R.string.select_index_file_to_download), 1));
 				}
 			}
 			notifyDataSetChanged();

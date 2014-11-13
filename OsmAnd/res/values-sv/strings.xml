@@ -270,9 +270,7 @@
 \n\t- Tillgänglighet
 \n\t- Massor av buggfixar
 	</string>
-<string name="osmand_long_description_1000_chars">
-		" OsmAnd (Open Street Maps Automated Navigation Directions) är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar i valfri mapp) - Kompakta offline-vektorkartor för hela världen finns - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för korta sträckor (experimentell) - Bil-, cykel- och fotgängalägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar av denna gratisversion av OsmAnd: - Antal nedladdningar av kartor är begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testdriving ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "
-	</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Automated Navigation Directions) är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar i valfri mapp) - Kompakta offline-vektorkartor för hela världen finns - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för korta sträckor (experimentell) - Bil-, cykel- och fotgängarlägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar i denna gratisversion av OsmAnd: - Antalet nedladdningar av kartor är begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testning av ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "</string>
 <string name="native_rendering">Inbyggd rendering</string>
 <string name="default_buttons_support">Support</string>
 <string name="support_new_features">Ge stöd till nya funktioner</string>
@@ -1434,7 +1432,7 @@
 	<string name="index_item_world_basemap">Översiktskarta (världen)</string>
     <string name="index_item_world_ski">Skidkarta (världen)</string>
     <string name="lang_hr">Kroatiska</string>
-    <string name="always_center_position_on_map">Visa alltid positionen i mitten</string>
+    <string name="always_center_position_on_map">Visa alltid min position i mitten</string>
     <string name="voice_pref_title">Röst</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Översättning</string>
@@ -1626,7 +1624,7 @@
     <string name="rendering_attr_showAccess_name">Visa tillfarts- inskränkningar</string>
     <string name="rendering_attr_showSurfaceGrade_name">Visa vägkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Visa vägbeläggning</string>
-    <string name="rendering_attr_showCycleRoutes_name">Visa cykelrutter</string>
+    <string name="rendering_attr_showCycleRoutes_name">Visa cykelleder</string>
     <string name="lang_fa">Persiska</string>
 	<string name="osmo_auth_error_short">Godkännandet misslyckades</string>
     <string name="osmo_auth_error">Fel vid godkännande av OsMo: %1$s.↵\nTjänsten kan vara tillfälligt nere eller så har din registrering förfallit.\nVill du fortsätta med en ny registrering?</string>
@@ -1636,7 +1634,7 @@
 	<string name="lang_sr">Serbiska</string>
 	<string name="lang_zh_CN">Förenklad kinesiska</string>
 	<string name="lang_zh_TW">Traditionell kinesiska</string>
-	<string name="rendering_attr_subwayMode_name">Tunnelbaneläge</string>
+	<string name="rendering_attr_subwayMode_name">Tunnelbanelinjer</string>
  	<string name="continue_navigation">Fortsätt navigera</string>
     <string name="pause_navigation">Pausa navigeringen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpvandringsskala (SAC)</string>
@@ -1675,7 +1673,7 @@
     <string name="int_hour">h</string>
     <string name="duration">Längd</string>
     <string name="distance">Sträcka</string>
-    <string name="rendering_attr_publicTransportMode_name">Kollektivtrafiksläge</string>
+    <string name="rendering_attr_publicTransportMode_name">Buss-, trådbuss-, matarbusslinjer</string>
 	<string name="save_track_to_gpx_globally">Logga spår till GPX-fil</string>
 	<string name="save_track_to_gpx_globally_descr">Allmän loggning av position till en GPX-fil kan slås på/av via GPX-inspelningswidgeten på kartskärmen</string>
 	<string name="save_track_interval_globally">Loggningsintervall</string>
@@ -1718,16 +1716,18 @@
 	<string name="map_widget_left">Vänster panel</string>
     <string name="layers_category_show">Visa</string>
 	<string name="rendering_category_routes">Rutter</string>
-    <string name="tip_recent_changes_1_9_t">"Nyheter i 1.9: * Uppdaterade kartstilar med återgivning av vägbeläggning, transportlager och vandringssymboler * Sök efter POI längs rutten * Markera väg som avstängd per session * Lättare hämtning och uppdatering av kartor * Få visuell och ljudnotifiering när du närmar dig en waypoint * Skriv ut information om resväg * Stöd för vändningsfiler * Stöd för Android Wear * En mängd förändringar i gränssnittet * Separat zoom för textstorlek på kartan * Speciella ljudnotifieringar när du lämnat rutten * Logga in på OsMo * Fix av OsMo- inkompablitet "</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Tåg- och snabbspårvägsrutter</string>
+    <string name="tip_recent_changes_1_9_t">"Nyheter i 1.9: * Uppdaterade kartstilar med återgivning av vägbeläggning, transportlager och vandringssymboler * Sök efter POI längs rutten * Markera väg som avstängd per session * Lättare hämtning och uppdatering av kartor * Få visuell och ljudnotifiering när du närmar dig en waypoint * Skriv ut information om resväg * Stöd för vändningsfiler * Stöd för Android Wear * En mängd förändringar i gränssnittet * Separat zoom för textstorlek på kartan * Speciella ljudnotifieringar när du lämnat rutten * Logga in på OsMo * Fix av OsMo- inkompatibilitet "</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Tåglinjer</string>
     <string name="rendering_attr_tramRoutes_name">Spårvagnsrutter</string>
     <string name="rendering_attr_shareTaxiRoutes_name">\"Delad taxi\"-rutter</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trådbussrutter</string>
     <string name="rendering_attr_busRoutes_name">Bussrutter</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Spårvagn och tåg</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Spårvagns- och tåglinjer</string>
     <string name="select_impassable_road">Välj på kartan</string>
     <string name="impassable_road">Undvik vägar …</string>
     <string name="rendering_category_hide">Dölj</string>
     <string name="wake_on_voice">Slå på skärmen</string>
     <string name="wake_on_voice_descr">Slå på skärmen när jag närmar mig en sväng</string>
+    <string name="lock_screen_request_explanation">%1$s behöver denna tillåtelse för att stänga av skärmen för strömsparningsfunktionen.</string>
+    <string name="wake_on_voice_never">Aldrig</string>
     </resources>

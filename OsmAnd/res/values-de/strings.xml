@@ -684,9 +684,9 @@
 		\n\tZur Verwendung aktivieren: \'Menu\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
 	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (Systemabhängig)</string>
-	<string name="voice_stream_voice_call">wie Anrufe</string>
-	<string name="voice_stream_notification">wie Benachrichtigungen</string>
-	<string name="voice_stream_music">wie Medien/Musik</string>
+	<string name="voice_stream_voice_call">Wie Anrufe</string>
+	<string name="voice_stream_notification">Wie Benachrichtigungen</string>
+	<string name="voice_stream_music">Wie Medien/Musik</string>
 	<string name="warning_tile_layer_not_downloadable">Kartenebene %1$s wurde nicht heruntergeladen, bitte nochmal laden.</string>
 	<string name="overlay_transparency_descr">Transparenz der Overlay-Karte ändern</string>
 	<string name="overlay_transparency">Overlay-Transparenz</string>
@@ -1596,8 +1596,8 @@
 	<string name="sort_by_distance">Sortieren nach Entfernung</string>
 	<string name="sort_by_name">Sortieren nach Namen</string>
 	<string name="visible_element">Auf Karte anzeigen</string>
-	<string name="show_zoom_buttons_navigation_descr">Zoom-Buttons bei Navigation anzeigen</string>
-	<string name="show_zoom_buttons_navigation">Zeige Zoom-Buttons</string>
+	<string name="show_zoom_buttons_navigation_descr">Zoom-Tasten bei Navigation anzeigen</string>
+	<string name="show_zoom_buttons_navigation">Zoom-Tasten anzeigen</string>
 	<string name="no_index_file_to_download">Download-Ziel nicht gefunden. Bitte Internet-Verbindung überprüfen.</string>
 	<string name="none_selected_gpx">Keine GPX-Spur ausgewählt. Zum Auswählen auf eine Spur lange drücken.</string>
 	<string name="local_index_unselect_gpx_file">Deselektieren</string>
@@ -1620,7 +1620,7 @@
 	<string name="map_preferred_locale_descr">Bevorzugte Sprache für Beschriftungen auf der Karte (ist diese nicht verfügbar, wird auf Englisch oder lokale Namen gewechselt)</string>
 	<string name="map_preferred_locale">Bevorzugte Sprache für Karten-Beschriftung</string>
 	<string name="local_map_names">Lokale Namen</string>
-	<string name="rendering_attr_subwayMode_name">U-Bahn-Modus</string>
+	<string name="rendering_attr_subwayMode_name">U-Bahn-Linien</string>
 	<string name="gps_wake_up_timer">GPS-Aufwach-Intervall</string>
 	<string name="forward">Weiter</string>
 	<string name="hide_all_waypoints">Alle löschen</string>
@@ -1848,8 +1848,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_auto_send_locations_descr">Aufzeichnung automatisch starten und Standorte nach dem Starten der Anwendung senden</string>
 	<string name="osmo_auto_send_locations">Aufzeichnung automatisch starten</string>
 	<string name="osmo_tracker_id">Persönliche Aufzeichnungs-ID</string>
-	<string name="osmo_tracker_id_descr">Zum Anzeigen oder Teilen der Aufzeichnungs-ID tippen.
-	Mit der Aufzeichnungs-ID verbundene Geräte können alle Bewegungen dieses Geräts aufzeigen! Zum Trennen der Verbindung die Regenerieren-Option auswählen.</string>
+	<string name="osmo_tracker_id_descr">Zum Anzeigen oder Teilen der Aufzeichnungs-ID tippen. Mit der Aufzeichnungs-ID verbundene Geräte können alle Bewegungen dieses Geräts aufzeigen! Zum Trennen der Verbindung die Regenerieren-Option auswählen.</string>
 	<string name="osmo_session_token">Sitzungstoken: %1$s</string>
 	<string name="osmo_auth_pending">Auf Autorisierung warten…</string>
 	<string name="osmo_locations_sent">Gesendete Standorte %1$d (im Zwischenspeicher %2$d) </string>
@@ -1959,7 +1958,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="more">Mehr...</string>
     <string name="osmo_specify_tracker_id">Bitte ID eingeben</string>
     <string name="home">Ausgangsposition</string>
-    <string name="rendering_attr_publicTransportMode_name">ÖPNV-Modus</string>
+    <string name="rendering_attr_publicTransportMode_name">Bus-, Trolleybus-, Sammeltaxi-Linien</string>
 	<string name="record_plugin_name">Zeichnen Sie Ihre Strecken auf</string>
     <string name="int_hour">h</string>
     <string name="duration">Dauer</string>
@@ -1971,7 +1970,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="way_alarms">Verkehrswarnungen</string>
     <string name="record_plugin_description">Speichern Sie Ihre Tracks mit einem Klick. Zeigt die Einstellung, wie Strecken aufgezeichnet werden – in lokale GPX-Dateien oder online via Web-Service.</string>
     <string name="route_descr_destination"/>
-    <string name="local_index_description">Antippen eines Elements um mehr Details zu erfahren, Tippen und Halten zum Deaktivieren oder Löschen des Elements. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
+    <string name="local_index_description">Ein Element antippen, um mehr Details zu erfahren oder antippen und halten zum Deaktivieren oder Löschen. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
     <string name="text_size">Schriftgröße</string>
     <string name="fav_point_dublicate">Doppelung beim Favoriten-Namen</string>
@@ -1987,19 +1986,31 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_device_not_found">Gerät wurde nicht gefunden</string>
     <string name="osmo_no_connection_msg">OsMo-Dienst ist nicht verfügbar:\n- bitte Verbindung prüfen;\n- bitte Einstellungen prüfen;\n- ggf. Meldung auf Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user">Anonymer Benutzer</string>
-    <string name="logged_as">angemeldet als %1$s</string>
-	<string name="anonymous_user_hint">Anynyme Benutzer können nicht::\n- Gruppen bilden;\n- Synchronisieren von Gruppen und Geräten auf dem Server;\n- Verwalten von Gruppen und Geräten im Privatbereich.</string>
+    <string name="logged_as">Angemeldet als %1$s</string>
+	<string name="anonymous_user_hint">Anonyme Benutzer können nicht:\n- Gruppen bilden;\n- Gruppen und Geräte mit dem Server synchronisieren;\n- Gruppen und Geräte im Privatbereich verwalten.</string>
     <string name="rendering_category_routes">Routen</string>
     <string name="rendering_category_details">Details</string>
     <string name="rendering_category_transport">Routen und ÖPNV</string>
-    <string name="map_widget_appearance_rem">verbleibende Elemente</string>
+    <string name="map_widget_appearance_rem">Verbleibende Elemente</string>
     <string name="map_widget_top">Statuszeile</string>
-	<string name="map_widget_right">rechtes Panel</string>
-	<string name="map_widget_left">linkes Panel</string>
+	<string name="map_widget_right">Rechtes Panel</string>
+	<string name="map_widget_left">Linkes Panel</string>
     <string name="layers_category_show">Anzeigen</string>
 	<string name="configure_map">Karte konfigurieren</string>
-    <string name="search_radius_proximity">im Umkreis von</string>
+    <string name="search_radius_proximity">Im Umkreis von</string>
     <string name="tip_recent_changes_1_9_t">"Änderungen in 1.9: * Verbesserte Karten-Stile mit Darstellung der Straßenoberflächen, ÖPNV-Layer und Wander-Symbolen * POI-Suche entlang einer berechneten Route * pro Sitzung eine Straße als nicht passierbar kennzeichnen * Vereinfachung des Karten-Downloads und der Karten-Updates * Audio-visuelle Benachrichtigung bei Annäherung an ein Zwischenziel  * Ausdruck der Reiseroute und der Fahr-Anweisungen * Auswertung von Abbiegespuren * Unterstützung von Android Wear Geräten * viele Änderungen an der Programm-Oberfläche * Separater Zoom nur für die Beschriftungen auf der Karte * Besondere Benachrichtigung bei Abweichen von der vorgegebenen Route * Anmeldung beim Dienst OsMo * Verbesserungen bei der Kompatibilität zu OsMo-Versionen "</string>
     <string name="rendering_category_others">Sonstiges</string>
-    <string name="rendering_attr_tramRoutes_name">Straßenbahnen</string>
+    <string name="rendering_attr_tramRoutes_name">Straßenbahnenlinien</string>
+    <string name="wake_on_voice">Bildschirm aktivieren</string>
+    <string name="wake_on_voice_descr">Bildschirm bei Navigationsanweisung aktivieren</string>
+    <string name="wake_on_voice_never">Niemals</string>
+    <string name="select_impassable_road">Auswählen auf der Karte</string>
+    <string name="impassable_road">Straße blockieren …</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Straßen- und Eisenbahnlinien</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Eisenbahn-Strecken</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Sammeltaxi-Routen</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Oberleitungsbuslinien</string>
+    <string name="rendering_attr_busRoutes_name">Buslinien</string>
+    <string name="rendering_category_hide">Ausblenden</string>
+    <string name="lock_screen_request_explanation">%1$s benötigt diese Berechtigung, um den Bildschirm auszuschalten (Energiesparfunktion).</string>
     </resources>

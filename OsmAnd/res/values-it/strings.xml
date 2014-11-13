@@ -665,7 +665,7 @@
   <string name="show_gps_coordinates_text">Visualizza coordinate GPS sulla mappa</string>
   <string name="use_internet_to_download_tile">Utilizza internet per scaricare i tasselli della mappa mancanti</string>
   <string name="app_description">Applicazione di navigazione</string>
-  <string name="exit_Button">Uscita</string>
+  <string name="exit_Button">Esci</string>
   <string name="map_Button">Mappa</string>
   <string name="settings_Button">Impostazioni</string>
   <string name="favorites_Button">I miei luoghi</string>
@@ -903,7 +903,7 @@
   <string name="transport_search_desc">Ricerca dei trasporti pubblici</string>
   <string name="favourites_search_desc">Ricerca dei preferiti</string>
   <string name="history_search_desc">Cronologia ricerche</string>
-  <string name="rendering_attr_noPolygons_description">Rendi trasparenti tutte le caratteristiche delle aree del terreno</string>
+  <string name="rendering_attr_noPolygons_description">Rendi trasparenti tutte le aree del terreno</string>
   <string name="rendering_attr_noPolygons_name">Nascondi i poligoni</string>
   <string name="rendering_attr_appMode_name">Modalità di disegno</string>
   <string name="rendering_attr_appMode_description">Ottimizza la mappa per</string>
@@ -1657,7 +1657,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="routing_attr_avoid_motorway_name">Evita le autostrade</string>
 	<string name="routing_attr_avoid_motorway_description">Evita le autostrade</string>
 	<string name="routing_attr_weight_name">Limite di peso</string>
-	<string name="routing_attr_weight_description">Specifica il peso del veicolo permesso sul percorso</string>
+	<string name="routing_attr_weight_description">Specifica il peso del veicolo consentito sulle strade</string>
     <string name="select_gpx">Scegli GPX…</string>
     <string name="route_descr_select_destination">Scegli la destinazione</string>
     <string name="route_descr_select_on_map">Scegli sulla mappa…</string>
@@ -1931,7 +1931,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="lang_sr">Serbo</string>
 	<string name="lang_zh_CN">Cinese semplificato</string>
 	<string name="lang_zh_TW">Cinese tradizionale</string>
-	<string name="rendering_attr_subwayMode_name">Modalità metro</string>
+	<string name="rendering_attr_subwayMode_name">Percorsi metró</string>
  	<string name="osmo_invite">Invita ...</string>
     <string name="osmo_leave_confirmation_msg">Vuoi abbandonare il gruppo %1$s?</string>
     <string name="osmo_specify_tracker_id">Per favore specifica l\'id</string>
@@ -1942,7 +1942,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_attr_osmcTraces_name">Strato simboli escursionistici</string>
     <string name="rendering_attr_osmcTraces_description">Disegna i percorsi in base alle tracce OSMC</string>
     
-	<string name="rendering_attr_coloredBuildings_name">Edifici colorati per tipologia</string>
+	<string name="rendering_attr_coloredBuildings_name">Colora gli edifici per tipo</string>
     <string name="arrival_distance_factor_early">Presto</string>
     <string name="arrival_distance_factor_normally">Normale</string>
     <string name="arrival_distance_factor_late">Tardi</string>
@@ -1973,7 +1973,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="save_track_to_gpx_globally">Registra la traccia in un file GPX</string>
 	<string name="save_track_to_gpx_globally_descr">La registrazione della posizione in un file GPX può essere accesa o spenta dal widget registrazione GPX sulla schermata della mappa</string>
 	<string name="save_track_interval_globally">Intervallo registrazione</string>
-	<string name="rendering_attr_publicTransportMode_name">Modo trasporto pubblico</string>
+	<string name="rendering_attr_publicTransportMode_name">Percorsi bus, tram, filubus, servizi navetta</string>
 	<string name="confirm_every_run">Chiedi sempre</string>
 	<string name="save_global_track_interval_descr">Scegli l\'intervallo di tempo generale per la registrazione del percorso (abilitata attraverso il widget registrazione GPX sulla mappa)</string>
 	<string name="save_global_track_interval">Intervallo generale di registrazione</string>
@@ -1989,7 +1989,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="text_size">Dimensione del testo</string>
     <string name="test_native_render">Prova il rendering nativo</string>
     <string name="test_native_render_msg">Inizia l\'attività con il rendering nativo</string>
-    <string name="fav_point_dublicate">Nome del punto preferito duplicato</string>
+    <string name="fav_point_dublicate">Duplicato del nome del punto preferito</string>
     <string name="fav_point_dublicate_message">Per evitare duplicati il nome del vostro punto preferito è stato modificato in %1$s.</string>
     <string name="use_native_render">Usa il rendering nativo</string>
     <string name="use_native_render_descr">Usa il rendering C++ anziché Java</string>
@@ -2014,15 +2014,17 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="layers_category_show">Mostra</string>
 	<string name="search_radius_proximity">Nei pressi di</string>
     <string name="tip_recent_changes_1_9_t">"Novità nella 1.9: * Aggiornati gli stili delle mappe con il disegno del tipo di superficie, dei livelli del trasporto pubblico e i simboli escursionistici * Ricerca dei PDI lungo il percorso * Indicazione della strada come impercorribile per la sessione * Download e aggiornamento delle mappe più facili * Notifiche visive e audio all\'approssimarsi a un punto intermedio * Stampa dell\'itinerario e delle indicazioni  * Supporto alle corsie di svolta * Supporto ad Android Wear * Molte modifiche della IU * Zoom per la dimensione del testo sulla mappa * Notifiche audio speciali nel caso si sia fuori rotta * Funzionalità login OsMo  * Correzione incompatibilità versione OsMo "</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Percorsi in treno e metropolitana leggera</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Percorsi in treno</string>
     <string name="rendering_attr_tramRoutes_name">Percorsi in tram</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Condividi percorsi in taxi</string>
     <string name="rendering_attr_trolleybusRoutes_name">Percorsi in filobus</string>
     <string name="rendering_attr_busRoutes_name">Percorsi in bus</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Tram e treno</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Percorsi tram e treno</string>
     <string name="select_impassable_road">Seleziona nella mappa</string>
     <string name="impassable_road">Evita strade …</string>
     <string name="rendering_category_hide">Nascondi</string>
     <string name="wake_on_voice">Accendi lo schermo</string>
     <string name="wake_on_voice_descr">Accendi lo schermo all\'approssimarsi di una svolta</string>
+    <string name="wake_on_voice_never">Mai</string>
+    <string name="lock_screen_request_explanation">%1$s necessita di questa autorizzazione per spegnere lo schermo per la funzionalità di risparmio energetico.</string>
     </resources>

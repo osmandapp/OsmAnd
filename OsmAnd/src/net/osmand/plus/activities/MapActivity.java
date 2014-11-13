@@ -22,6 +22,7 @@ import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
+import net.osmand.plus.DeviceAdminRecv;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -49,11 +50,12 @@ import net.osmand.plus.views.corenative.NativeQtLibrary;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import android.app.Dialog;
-import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -74,6 +76,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewStub;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -87,7 +90,6 @@ public class MapActivity extends AccessibleActivity implements
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
-	private static final int WAKE_ON_VOICE_INTERVAL = 10000;		// 10 seconds
 	
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 	
@@ -116,10 +118,12 @@ public class MapActivity extends AccessibleActivity implements
 	private FrameLayout lockView;
 	private GpxImportHelper gpxImportHelper;
 	private PowerManager.WakeLock wakeLock = null;
-	private KeyguardManager.KeyguardLock keyguardLock = null;
 	private ReleaseWakeLocksRunnable releaseWakeLocksRunnable = new ReleaseWakeLocksRunnable();
 	private boolean active = false;
 	private boolean intentLocation = false;
+	
+	private DevicePolicyManager mDevicePolicyManager;
+	private ComponentName mDeviceAdmin;
 	
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
@@ -226,7 +230,10 @@ public class MapActivity extends AccessibleActivity implements
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
 
 		mapActions.prepareStartOptionsMenu();
-
+		
+		mDeviceAdmin = new ComponentName(getApplicationContext(), DeviceAdminRecv.class);
+		mDevicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
+		
 		Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
 			double lat = intent.getExtras().getDouble(START_LAT);
@@ -272,6 +279,19 @@ public class MapActivity extends AccessibleActivity implements
 		});
 	}
 
+	private void changeKeyguardFlags() {
+		if (settings.WAKE_ON_VOICE_INT.get() > 0) {
+			getWindow().setFlags(
+					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+							| WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
+					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+							| WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+		} else {
+			getWindow().clearFlags(
+					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+							| WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+		}
+	}
 	
 	@SuppressWarnings("rawtypes")
 	public Object getLastNonConfigurationInstanceByKey(String key) {
@@ -307,9 +327,7 @@ public class MapActivity extends AccessibleActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if ((wakeLock != null) || (keyguardLock != null)) {
-			return;
-		}
+
 		cancelNotification();
 		//fixing bug with action bar appearing on android 2.3.3
 		if (getSupportActionBar() != null){
@@ -327,6 +345,8 @@ public class MapActivity extends AccessibleActivity implements
 		} else {
 			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		}
+		
+		changeKeyguardFlags();
 
 		applicationModeListener = new StateChangedListener<ApplicationMode>() {
 			@Override
@@ -349,8 +369,8 @@ public class MapActivity extends AccessibleActivity implements
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode() && (
-				!Algorithms.objectEquals(targets.getPointToNavigate(), routingHelper.getFinalLocation() )||
-				!Algorithms.objectEquals(targets.getIntermediatePoints(), routingHelper.getIntermediatePoints())
+				!Algorithms.objectEquals(targets.getPointToNavigate().point, routingHelper.getFinalLocation() )||
+				!Algorithms.objectEquals(targets.getIntermediatePointsLatLon(), routingHelper.getIntermediatePoints())
 				)) {
 			targets.updateRouteAndReferesh(true);
 		}
@@ -473,6 +493,11 @@ public class MapActivity extends AccessibleActivity implements
 		}
 	}
 
+	public void changeZoom(int stp, long time) {
+		mapViewTrackingUtilities.setZoomTime(time);
+		changeZoom(stp);
+	}
+
 	public void changeZoom(int stp){
 		// delta = Math.round(delta * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
 		boolean changeLocation = false;
@@ -558,7 +583,7 @@ public class MapActivity extends AccessibleActivity implements
 	protected void onStart() {
 		super.onStart();
 		active = true;
-		if ((wakeLock == null) || (keyguardLock == null)) {
+		if (wakeLock == null) {
 			VoiceRouter voiceRouter = app.getRoutingHelper().getVoiceRouter();
 			voiceRouter.removeVoiceMessageListener(this);
 		}
@@ -584,7 +609,7 @@ public class MapActivity extends AccessibleActivity implements
 			progressDlg.dismiss();
 			progressDlg = null;
 		}
-		if (!isFinishing() && settings.WAKE_ON_VOICE.get()) {
+		if (!isFinishing() && (settings.WAKE_ON_VOICE_INT.get() > 0)) {
 			VoiceRouter voiceRouter = app.getRoutingHelper().getVoiceRouter();
 			voiceRouter.addVoiceMessageListener(this);
 		}
@@ -653,6 +678,7 @@ public class MapActivity extends AccessibleActivity implements
 
 	
 	public void updateApplicationModeSettings() {
+		changeKeyguardFlags();
 		// update vector renderer
 		RendererRegistry registry = app.getRendererRegistry();
 		RenderingRulesStorage newRenderer = registry.getRenderer(settings.RENDERER.get());
@@ -805,35 +831,44 @@ public class MapActivity extends AccessibleActivity implements
 
 	@Override
 	public void onVoiceMessage() {
-		if (settings.WAKE_ON_VOICE.get()) {
+		final Integer screenPowerSave = settings.WAKE_ON_VOICE_INT.get();
+		if (screenPowerSave > 0) {
 			uiHandler.removeCallbacks(releaseWakeLocksRunnable);
 
-			if (!active && (wakeLock == null)) {
+			if (!active && wakeLock == null) {
 				PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
 				wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
 						| PowerManager.ACQUIRE_CAUSES_WAKEUP,
 						"OsmAndOnVoiceWakeupTag");
 				wakeLock.acquire();
-				
-				if (keyguardLock == null) {
-					KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-					keyguardLock = km.newKeyguardLock("OsmAndKeyguardLock");
-					keyguardLock.disableKeyguard();
-				}
 			}
 
-			uiHandler.postDelayed(releaseWakeLocksRunnable, WAKE_ON_VOICE_INTERVAL);
+			uiHandler.postDelayed(releaseWakeLocksRunnable,
+					screenPowerSave * 1000L);
 		}
 	}
 	
 	private void releaseWakeLocks() {
-		if (keyguardLock != null) {
-			keyguardLock.reenableKeyguard();
-			keyguardLock = null;
-		}
 		if (wakeLock != null) {
 			wakeLock.release();
 			wakeLock = null;
+		}
+		
+		if (mDevicePolicyManager != null && mDeviceAdmin != null) {
+			final Integer screenPowerSave = settings.WAKE_ON_VOICE_INT.get();
+			if (screenPowerSave > 0) {
+				if (mDevicePolicyManager.isAdminActive(mDeviceAdmin)) {
+					try {
+						mDevicePolicyManager.lockNow();
+					} catch (SecurityException e) {
+//						Log.d(TAG,
+//								"SecurityException: No device admin permission to lock the screen!");
+					}
+				} else {
+//					Log.d(TAG,
+//							"No device admin permission to lock the screen!");
+				}
+			}
 		}
 	}
 	

@@ -379,7 +379,7 @@
 	<string name="native_rendering">Indbygget optegning</string>
 	<string name="test_voice_prompts">Test stemmemeddelelser</string>    
 	<string name="switch_to_raster_map_to_see">Ingen offline vektorkort til stede for denne placering. Hent et kort i \'Indstillinger\' → \'Korthåndtering\' eller skifte til onlinekort (aktiver online kort udvidelsen først).</string>
-	<string name="send_files_to_osm">Send GPX-filer til OSM?</string>
+	<string name="send_files_to_osm">Sende GPX-filer til OSM?</string>
 	<string name="gpx_visibility_txt">Synlighed</string>
 	<string name="gpx_description_txt">Beskrivelse</string>
 	<string name="validate_gpx_upload_name_pwd">Angiv OSM brugernavn og kodeord til at sende GPX-filer.</string>
@@ -1763,7 +1763,7 @@ Nogle af de centrale funktioner:
 	<string name="lang_zh_CN">Kinesisk, forenklet</string>
 	<string name="lang_zh_TW">Kinesisk, traditionelt</string>
 	<string name="lang_sc">Sardisk</string>
-	<string name="rendering_attr_subwayMode_name">Metrotilstand</string>
+	<string name="rendering_attr_subwayMode_name">Metroruter</string>
  	<string name="continue_navigation">Fortsæt navigation</string>
     <string name="pause_navigation">Pause navigation</string>
 	<string name="rendering_attr_alpineHiking_name">Alpin vandreskala (SAC)</string>
@@ -1802,7 +1802,7 @@ Nogle af de centrale funktioner:
     <string name="int_hour">t</string>
     <string name="record_plugin_name">Optag dine ture</string>
     <string name="record_plugin_description">Gem dine spor via et tryk på en knap på skærmen. Vis indstillinger til optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
-    <string name="rendering_attr_publicTransportMode_name">Kollektivtrafik tilstand</string>
+    <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus-, shuttlebusruter</string>
 	<string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
 	<string name="save_track_interval_globally">Logningsinterval</string>
 	<string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til/fra med \'GPX optagelse\' på hovedskærmen</string>
@@ -1846,15 +1846,17 @@ Nogle af de centrale funktioner:
     <string name="layers_category_show">Vis</string>
 	<string name="tip_recent_changes_1_9_t">"Ændringer i 1.9:\n * Opdaterede kort stilarter med vejbelægning rendering, transport lag og vandreture symbolerne\n * Søg efter interessepunkter (IP) langs ruten\n * Marker vej som ufremkommelige pr. session\n * Nemmere at hentning og opdatering af kort\n * Få visuel og audio meddelelse ved at nærme til rutepunkt\n * Udskriv rejseplan og svinginformation\n * Understøttelse af vognbaner\n * Understøtter Android Wear\n * Masser UI ændringer\n * Separat zoom af tekststørrelsen på kortet\n * Specielt lydsignal i tilfælde af afvigelse fra ruten\n * OsMo login-funktionalitet\n * Fix Osmo version uforenelighed "</string>
     <string name="rendering_category_routes">Ruter</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Tog- og letbaneruter</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Togruter</string>
     <string name="rendering_attr_tramRoutes_name">Sporvognsruter</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Delebilruter</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trolleybusruter</string>
     <string name="rendering_attr_busRoutes_name">Busruter</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Sporvogn og tog</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tog- og sporvognsruter</string>
     <string name="select_impassable_road">Vælg på kort</string>
     <string name="impassable_road">Undgå veje…</string>
     <string name="rendering_category_hide">Skjul</string>
     <string name="wake_on_voice">Tænd for skærmen</string>
     <string name="wake_on_voice_descr">Tænd for skærmen når et sving nærmer sig</string>
+    <string name="lock_screen_request_explanation">%1$s behøver denne tilladelse til at slukke for skærmen for strømbesparende funktion.</string>
+    <string name="wake_on_voice_never">Aldrig</string>
     </resources>

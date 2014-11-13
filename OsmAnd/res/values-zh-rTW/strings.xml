@@ -890,7 +890,7 @@
 	<string name="save_track_interval">在導航期間的記錄間隔</string>
 	<string name="save_track_interval_descr">在導航整個期間，為軌跡記錄選取記錄間隔</string>
 	<string name="save_track_to_gpx_descrp">在導航的整個期間，軌跡將會儲存在 track 目錄</string>
-	<string name="save_track_to_gpx">在導航的整個期間，記錄軌跡成 GPX 檔案</string>
+	<string name="save_track_to_gpx">導航期間記錄軌跡成 GPX 檔案</string>
 	<string name="update_tile">更新地圖</string>
 	<string name="reload_tile">重新載入圖磚</string>
 	<string name="mark_point">目的地</string>
@@ -1758,7 +1758,7 @@
 	<string name="lang_sr">塞爾維亞</string>
 	<string name="lang_zh_CN">簡體中文</string>
 	<string name="lang_zh_TW">正體中文</string>
-	<string name="rendering_attr_subwayMode_name">地鐵模式</string>
+	<string name="rendering_attr_subwayMode_name">捷運路線</string>
  	<string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
 	<string name="osmo_invite">邀請...</string>
@@ -1797,7 +1797,7 @@
     <string name="int_hour">小時</string>
     <string name="duration">持續時間</string>
     <string name="distance">距離</string>
-    <string name="rendering_attr_publicTransportMode_name">大眾運輸模式</string>
+    <string name="rendering_attr_publicTransportMode_name">公車、無軌電車、班車路線</string>
 	<string name="save_track_to_gpx_globally">記錄軌跡成 GPX 檔案</string>
 	<string name="save_track_interval_globally">記錄間隔</string>
 	<string name="save_track_to_gpx_globally_descr">通常位置記錄到 GPX 檔案，在地圖畫面上使用 GPX 記錄小工具，可以開啟或關閉</string>
@@ -1841,15 +1841,17 @@
     <string name="search_radius_proximity">在接近度上</string>
     <string name="tip_recent_changes_1_9_t">"在1.9的變更：* 更新了地圖的樣式與路面的繪製，輸運層和徒步旅行符號 * 沿著路線搜尋 POI * 為每個無法通行的道路階段標記 * 更容易的下載和更新地圖 * 接近中途點時給予視覺和音訊通知 * 列印行程並打開資訊 * 支援轉彎車道 * 支援 Android 穿戴 * 很多 UI 的更改 * 單獨縮放在地圖上文字的大小 * 您偏離路線的情況下特別的音訊通知 * OsMo 登入功能 * 修復 OsMo 版本的不相容 "</string>
     <string name="rendering_category_routes">導航路線</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">火車和輕軌電車路線</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">火車路線</string>
     <string name="rendering_attr_tramRoutes_name">有軌電車路線</string>
     <string name="rendering_attr_shareTaxiRoutes_name">分享計程車路線</string>
     <string name="rendering_attr_trolleybusRoutes_name">無軌電車路線</string>
     <string name="rendering_attr_busRoutes_name">公車路線</string>
     <string name="select_impassable_road">在地圖上選取</string>
     <string name="impassable_road">避開的道路…</string>
-    <string name="rendering_attr_tramTrainRoutes_name">有軌電車和火車</string>
+    <string name="rendering_attr_tramTrainRoutes_name">有軌電車和火車路線</string>
     <string name="rendering_category_hide">隱藏</string>
     <string name="wake_on_voice">開啟螢幕</string>
     <string name="wake_on_voice_descr">當接近轉彎時，開啟手機螢幕</string>
+    <string name="lock_screen_request_explanation">為了節電作用 %1$s 需要此許可權才能關閉螢幕。</string>
+    <string name="wake_on_voice_never">永不</string>
     </resources>

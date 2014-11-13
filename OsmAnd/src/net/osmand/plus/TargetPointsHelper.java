@@ -124,7 +124,15 @@ public class TargetPointsHelper {
 		return intermediatePoints;
 	}
 	
-
+	public List<LatLon> getIntermediatePointsLatLon() {
+		List<LatLon> intermediatePointsLatLon = new ArrayList<LatLon>();
+		
+		for (TargetPoint t : intermediatePoints) {
+			intermediatePointsLatLon.add(t.point);
+		}
+		
+		return intermediatePointsLatLon;
+	}
 
 	public List<TargetPoint> getIntermediatePointsWithTarget() {
 		List<TargetPoint> res = new ArrayList<TargetPoint>();

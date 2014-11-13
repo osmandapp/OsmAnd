@@ -1911,7 +1911,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="lang_sr">Servisch</string>
 	<string name="lang_zh_CN">Vereenvoudigd Chinees</string>
 	<string name="lang_zh_TW">Traditioneel Chinees</string>
-	<string name="rendering_attr_subwayMode_name">Tunnel modus</string>
+	<string name="rendering_attr_subwayMode_name">Metrolijnen</string>
  	<string name="continue_navigation">Navigatie voortzetten</string>
     <string name="pause_navigation">navigatie pauzeren</string>
 	<string name="rendering_attr_alpineHiking_name">Alpine wandelschaal (SAC)</string>
@@ -1953,7 +1953,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="save_track_to_gpx_globally">Track maken in GPX-bestand</string>
 	<string name="save_track_to_gpx_globally_descr">Het registreren van de afgelegde weg in een GPX-bestand kan worden aan- en uitgeschakeld met een knop op het kaartscherm</string>
 	<string name="save_track_interval_globally">Interval tussen geregistreerde punten</string>
-	<string name="rendering_attr_publicTransportMode_name">Openbaar vervoer-modus</string>
+	<string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus- en minibuslijnen</string>
 	<string name="confirm_every_run">Altijd vragen</string>
 	<string name="save_global_track_interval_descr">Selecteer de loggings-interval voor de standaard track opname (te starten via de GPX opname widget in het scherm)</string>
 	<string name="save_global_track_interval">Standaard loggings-interval</string>
@@ -1999,10 +1999,12 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_attr_shareTaxiRoutes_name">Deeltaxi routes</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trolleybus lijnen</string>
     <string name="rendering_attr_busRoutes_name">Buslijnen</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Tram en trein</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tram- en treinverbindingen</string>
     <string name="wake_on_voice">Zet het scherm aan</string>
     <string name="wake_on_voice_descr">Zet het scherm aan bij nieuwe instructies</string>
     <string name="select_impassable_road">Selecteer op kaart</string>
     <string name="impassable_road">Vermijd wegen…</string>
     <string name="rendering_category_hide">Verberg</string>
+    <string name="wake_on_voice_never">Nooit</string>
+    <string name="lock_screen_request_explanation">%1$s heeft deze permissie nodig om het scherm uit te kunnen schakelen (stroombesparing).</string>
     </resources>

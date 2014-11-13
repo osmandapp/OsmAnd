@@ -531,7 +531,7 @@ public class DownloadIndexesThread {
 			itemsToUpdate.clear();
 			for (IndexItem item : filtered) {
 				String sfName = item.getTargetFileName();
-				java.text.DateFormat format = uiActivity.getMyApplication().getResourceManager().getDateFormat();
+				java.text.DateFormat format = app.getResourceManager().getDateFormat();
 				String date = item.getDate(format);
 				String indexactivateddate = indexActivatedFileNames.get(sfName);
 				String indexfilesdate = indexFileNames.get(sfName);

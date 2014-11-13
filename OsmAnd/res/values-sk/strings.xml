@@ -1931,7 +1931,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_showCycleRoutes_name">Zobraziť cyklotrasy</string>
     <string name="lang_fa">Perzsky</string>
 	<string name="keep_navigation_service">Ponechať</string>
-	<string name="rendering_attr_subwayMode_name">Režim metra</string>
+	<string name="rendering_attr_subwayMode_name">Linky metra</string>
  	<string name="lang_al">Albánsky</string>
 	<string name="lang_ar">Arabsky</string>
 	<string name="lang_sc">Sardínsky</string>
@@ -1982,7 +1982,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="save_track_to_gpx_globally">Zaznamenať stopu do GPX súboru</string>
 	<string name="save_track_to_gpx_globally_descr">Zaznamenávanie polohy do GPX súboru môže byť zapnuté a vypnuté cez tlačidlo záznamu GPX na obrazovke mapy</string>
 	<string name="save_track_interval_globally">Interval zaznamenávania</string>
-	<string name="rendering_attr_publicTransportMode_name">Režim hromadnej dopravy</string>
+	<string name="rendering_attr_publicTransportMode_name">Linky autobusov a trolejbusov</string>
 	<string name="traffic_warning_speed_limit">Obmedzenie rýchlosti</string>
     <string name="traffic_warning_border_control">Hraničná kontrola</string>
     <string name="traffic_warning_payment">Mýtna stanica</string>
@@ -2029,6 +2029,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="wake_on_voice_descr">Rozsvietiť obrazovku keď sa blíži odbočenie</string>
     <string name="select_impassable_road">Vybrať na mape</string>
     <string name="impassable_road">Vyhnúť sa cestám…</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Električka a vlak</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Linky električiek a vlakov</string>
     <string name="rendering_category_hide">Skryť</string>
+    <string name="lock_screen_request_explanation">%1$s potrebuje toto oprávnenie na vypnutie obrazovky pre šetrenie energiou.</string>
+    <string name="wake_on_voice_never">Nikdy</string>
     </resources>

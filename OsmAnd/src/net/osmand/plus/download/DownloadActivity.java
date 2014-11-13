@@ -71,6 +71,16 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		setProgressBarIndeterminateVisibility(false);
 
 		setContentView(R.layout.tab_content);
+		if(downloadListIndexThread == null) {
+			downloadListIndexThread = new DownloadIndexesThread(this);
+		}
+		if (downloadListIndexThread.getCachedIndexFiles() != null && downloadListIndexThread.isDownloadedFromInternet()) {
+			downloadListIndexThread.runCategorization(type);
+		} else {
+			downloadListIndexThread.runReloadIndexFiles();
+		}
+		downloadListIndexThread.setUiActivity(this);
+
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabHost.setup();
@@ -90,16 +100,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 
 		tabHost.setCurrentTab(0);
 
-		if(downloadListIndexThread == null) {
-			downloadListIndexThread = new DownloadIndexesThread(this);
-		}
-		if (downloadListIndexThread.getCachedIndexFiles() != null && downloadListIndexThread.isDownloadedFromInternet()) {
-			downloadListIndexThread.runCategorization(type);
-		} else {
-			downloadListIndexThread.runReloadIndexFiles();
-		}
-		downloadListIndexThread.setUiActivity(this);
-
+		
 		settings = ((OsmandApplication)getApplication()).getSettings();
 
 		indeterminateProgressBar = (ProgressBar) findViewById(R.id.IndeterminateProgressBar);
@@ -146,7 +147,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 				}
 			}
 
-			String tab = intent.getExtras().get(TAB_TO_OPEN).toString();
+			String tab = intent.getExtras().getString(TAB_TO_OPEN);
 			if (tab != null) {
 				if (tab.equals(DOWNLOAD_TAB)){
 					tabHost.setCurrentTab(1);

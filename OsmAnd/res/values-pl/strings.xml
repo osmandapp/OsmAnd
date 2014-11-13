@@ -125,10 +125,10 @@
   <string name="tip_rotation_switching">Orientacja mapy</string>
   
   <string name="switch_to_raster_map_to_see">Obecna pozycja nie ma pokrycia w zainstalowanych mapach offline. Możesz pobrać nową w Ustawieniach (Zarządzanie plikami map) lub przełączyć się na mapy online (włącz plugin map online).</string>
-  <string name="switch_to_vector_map_to_see">Dla tej lokalizacji dostępna jest wektorowa mapa offline. \n\t\n\tAby użyć wybierz \'Menu\' → \'Warstwy mapy\' → \'Źródło mapy…\' → \'Wektorowe mapy offline\'.</string>
-  <string name="binary_map_download_success">Pobieranie zakończone.
-		\n\t\n\tAby użyć aktywuj \'Menu\' -&gt; \'Warstwy mapy\' -&gt; \'Źródło mapy…\' -&gt; \'Wektorowe mapy offline\'.
-	</string>
+  <string name="switch_to_vector_map_to_see">Dla tej lokalizacji dostępna jest wektorowa mapa offline.
+\n\t\n\tAby użyć wybierz \'Menu\' → \'Konfiguruj mapę\' → \'Źródło mapy…\' → \'Wektorowe mapy offline\'.</string>
+  <string name="binary_map_download_success">"Pobieranie zakończone.
+\n\t\n\tAby użyć aktywuj \'Menu\' -&gt; \'Konfiguruj mapę\' -&gt; \'Źródło mapy…\' -&gt; \'Wektorowe mapy offline\'. "</string>
   <string name="choose_audio_stream">Wyjście głosu nawigatora</string>
   <string name="choose_audio_stream_descr">Wybierz kanał do odtwarzania głosu nawigatora (zależne od możliwości systemu)</string>
   <string name="voice_stream_voice_call">Kanał głosowy</string>
@@ -169,11 +169,10 @@
 		\n\nWybierz z podziel się lokalizacją a następnie wybierz sposób udostępnienia. Do wyboru jest e-mail, SMS lub zwykłe skopiowanie koordynat do schowka.
 	</string>
   <string name="tip_favorites">Ulubione punkty</string>
-  <string name="tip_favorites_t">Często używane punkty mogą zostać zapisane jako Ulubione.
-		\n\nAby zapisać punkt jako ulubiony przejdź do menu kontekstowego, wybierz \'Opcje punktu\' -&gt; \'Dodaj do ulubionych\' i wprowadź jego nazwę.
-		\n\nPo zapisaniu, punkt będzie można znaleźć w głównym menu -&gt; \'Moje miejsca\'. Dłuższe naciśnięcie pozycji w \'Ulubionych\' pokaże opcje dotyczące tego punktu.
-		\n\nAby wyświetlić wszystkie ulubione punkty bezpośrednio na mapie, włącz warstwę \'Ulubione\' w \'Warstwy mapy\'.
-	</string>
+  <string name="tip_favorites_t">"Często używane punkty mogą zostać zapisane jako Ulubione.
+\n\nAby zapisać punkt jako ulubiony przejdź do menu kontekstowego, wybierz \'Opcje punktu\' -&gt; \'Dodaj do ulubionych\' i wprowadź jego nazwę.
+\n\nPo zapisaniu, punkt będzie można znaleźć w głównym menu -&gt; \'Moje miejsca\'. Dłuższe naciśnięcie pozycji w \'Ulubionych\' pokaże opcje dotyczące tego punktu.
+\n\nAby wyświetlić wszystkie ulubione punkty bezpośrednio na mapie, włącz warstwę \'Ulubione\' w \'Konfiguruj mapę\'. "</string>
   <string name="error_doing_search">Wystąpił błąd podczas wyszukiwania offline</string>
   <string name="search_offline_geo_error">Nie można zinterpretować \'%s\'</string>
   <string name="search_osm_offline">Wyszukaj adres korzystając z map offline</string>
@@ -1077,17 +1076,15 @@
 	
 	<string name="gps_wakeup_interval">Częstość wybudzania GPS: %s</string>
 	<string name="int_continuosly">Ciągły</string>
-	<string name="tip_day_night_mode_t_v2">Tryb wyświetlania niektórych map wektorowych może być wybierany jako dzienny (jaśniejszy) lub nocny (ciemniejszy). Nocne kolory są bezpieczniejsze podczas jazdy w nocy.
-		\n\nMożesz przełączyć tryb dzienny/nocny wybierając \'Menu\'-&gt;\'Zdefiniuj widok\'-&gt;\'Konfiguruj ekran\'-&gt;\'mapa dzień/noc\'.
-		\n\nMożliwość wyboru:
-		\n\t\* \'Wschód/Zachód\' - tryb automatyczny, kontrolowany przez pozycję Słońca (domyślny)
-		\n\t\* \'Dzień\' - zawsze używaj trybu dziennego\n\t\'Noc\' - Zawsze używaj trybu nocnego
-		\n\t\* \'Czujnik światła\' - wygląd mapy kontrolowany jest przez czujnik światła w Twoim urządzeni (jeśli taki posiadasz)
-	</string>	
-	<string name="tip_map_switch_t_v2">Źródło mapy oraz wyświetlane warstwy można zmienić przez \'Menu\' -&gt; \'Warstwy mapy\'.
-		\n\nWskazując \'Źródło mapy…\' możesz wybrać wykorzystanie pobranych wcześniej map wektorowych, predefiniowanych map rastrowych (włącz wtyczkę \'Mapy online\') lub map utworzonych ręcznie z wykorzystaniem narzędzi takich jak OsmAndMapCreator na PC.
-		\n\nOsmAnd wspiera również własne źródła map.
-	</string>
+	<string name="tip_day_night_mode_t_v2">"Tryb wyświetlania niektórych map wektorowych może być wybierany jako dzienny (jaśniejszy) lub nocny (ciemniejszy). Nocne kolory są bezpieczniejsze podczas jazdy w nocy.
+\n\nMożesz przełączyć tryb dzienny/nocny wybierając \'Menu\'-&gt;\'Zdefiniuj widok\'-&gt;\'Konfiguruj mapę\'-&gt;\'mapa dzień/noc\'.
+\n\nMożliwość wyboru:
+\n\t \'Wschód/Zachód\' - tryb automatyczny, kontrolowany przez pozycję Słońca (domyślny)
+\n\t \'Dzień\' - zawsze używaj trybu dziennego\n\t\'Noc\' - Zawsze używaj trybu nocnego
+\n\t \'Czujnik światła\' - wygląd mapy kontrolowany jest przez czujnik światła w Twoim urządzeni (jeśli taki posiadasz) "</string>	
+	<string name="tip_map_switch_t_v2">"Źródło mapy oraz wyświetlane warstwy można zmienić przez \'Menu\' -&gt; \'Konfiguruj mapę\'.
+\n\nWskazując \'Źródło mapy…\' możesz wybrać wykorzystanie pobranych wcześniej map wektorowych, predefiniowanych map rastrowych (włącz wtyczkę \'Mapy online\') lub map utworzonych ręcznie z wykorzystaniem narzędzi takich jak OsmAndMapCreator na PC.
+\n\nOsmAnd wspiera również własne źródła map. "</string>
 	<string name="tip_app_mode_t_v2">OsmAnd wspiera różne (konfigurowalne) profile aplikacji do różnych przypadków użycia.
 		\n\nProfile można zmienić wybierając przycisk w lewym dolnym rogu ekranu (ikonka samochodu, roweru lub pieszego), lub podczas wybierania trasy.
 	</string>
@@ -1457,12 +1454,11 @@ Orientacyjny zasięg map i ich jakość:
 Lista krajów obsługiwanych (w zasadzie na cały świat!)
 Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Antigua i Barbuda, Antyle Holenderskie, Arabia Saudyjska, Argentyna, Armenia, Aruba, Australia, Austria, Azerbejdżan, Bahamy, Bahrajn, Bangladesz, Barbados, Belgia, Belize, Benin, Bermudy, Bhutan, Białoruś, Boliwia, Bonaire, Bośnia i Hercegowina, Botswana, Brazylia, Brunei, Brytyjskie Wyspy Dziewicze, Bułgaria, Burkina Faso, Burundi, Chile, Chiny, Chorwacja, Curaçao, Cypr, Czad, Czarnogóra, Czechy, Dania, Dominika, Dominikana, Dżibuti, Egipt, Ekwador, Erytrea, Estonia, Etiopia, Fidżi, Filipiny, Finlandia, Francja, Gabon, Gambia, Georgia Południowa, Ghana, Gibraltar, Grecja, Grenada, Grenlandia, Gruzja, Guam, Guernsey, Gujana Francuska, Gujana, Gwadelupa, Gwatemala, Gwinea Bissau, Gwinea Równikowa, Gwinea, Haiti, Hiszpania, Holandia, Honduras, Hong Kong, Indie, Indonezja, Irak, Iran, Irlandia, Islandia, Izrael, Jamajka, Japonia, Jemen, Jersey, Jordania, Kambodża, Kamerun, Kanada, Katar, Kazachstan, Kenia, Kirgistan, Kiribati, Kolumbia, Komory, Kongo, Korea Północna i Korea Południowa, Kostaryka , Kuba, Kuwejt, Laos, Lesotho, Liban, Liberia , Libia, Liechtenstein, Litwa, Luksemburg, Łotwa, Macedonia, Madagaskar, Majotta, Makao, Malawi, Malediwy, Malezja, Mali, Malta, Maroko, Martynika, Mauretania, Mauritius, Meksyk, Mikronezja, Mołdawia, Monako, Mongolia, Montserrat, Mozambik , Myanmar, Namibia, Nauru, Nepal, Niemcy, Niger, Nigeria, Nikaragua, Norwegia, Nowa Kaledonia, Nowa Zelandia, Oman, Pakistan, Palau, Palestyna, Panama, Papua Nowa Gwinea, Paragwaj, Peru, Polinezja Francuska, Polska, Południowy Sudan,  Portugalia, Puerto Rico, Republika Środkowoafrykańska, Republika Vanuatu, Republika Zielonego Przylądka, Rosja, Rumunia, Rwanda, Sahara Zachodnia, Saint Helena, Saint Kitts i Nevis, Saint Lucia, Saint Martin, Saint Vincent i Grenadyny, Saint-Barthélemy, Saint-Pierre i Miquelon, Salwador, Samoa, San Marino, Senegal, Serbia, Seszele, Sierra Leone, Singapur, Słowacja, Słowenia, Somalia, Sri Lanka, Stany Zjednoczone Ameryki (USA), Suazi, Sudan, Surinam, Syria, Szwajcaria, Szwecja, Tadżykistan, Tajlandia , Tajwan, Tanzania, Timor Wschodni, Togo, Tokelau, Tonga, Trynidad i Tobago, Tunezja, Turcja, Turkmenistan, Tuvalu, Uganda, Ukraina, Urugwaj, Uzbekistan, Wallis i Futuna, Watykan, Wenezuela, Węgry, Wielka Brytania (UK), Wietnam, Włochy, Wybrzeże Kości Słoniowej, Wyspa Man, Zambia, Zimbabwe, Zjednoczone Emiraty Arabskie.
 	</string>
-	<string name="tip_map_styles_t">OsmAnd obsługuje wyświetlanie w trybie offline map wektorowych w różnych stylach map dopasowanych do twoich potrzeb:
-		\n\nInne niż zrównoważony \'domyślny\' styl mapy możesz wybrać w \'Menu\' → \'Konfiguruj ekran\' → \'Style renderowania\'
-		\n\t*Styl \'Widok krajoznawczy\', który zawiera najbardziej szczegółowe informacje oczekiwane w podróży i turystyce, zawierający optymalizację dla kierowców zawodowych (wyższy kontrast, rozróżnialne drogi), opcje na górskie wędrówki (skala SAC), wycieczki rowerowe oraz opcje potrzebne w wędrówkach pieszych, itp.
-		\n\t* \'Wysoki kontrast dróg\' pokazuje drogi w bardzo rozróżnialnych kolorach przy mocny oświetleniu zewnętrznym
-		\n\t* \'Zima i narty\' tworzy (pokryte śniegiem) widoki zimowych krajobrazów i pokazuje stoki i wyciągi narciarskie (w związku z mapą z możliwą do pobrania mapą \'World ski\')
-	</string>
+	<string name="tip_map_styles_t">"OsmAnd obsługuje wyświetlanie w trybie offline map wektorowych w różnych stylach map dopasowanych do twoich potrzeb:
+\n\nInne niż zrównoważony \'domyślny\' styl mapy możesz wybrać w \'Menu\' → \'Konfiguruj mapę\' → \'Style renderowania\'
+\n\t*Styl \'Widok krajoznawczy\', który zawiera najbardziej szczegółowe informacje oczekiwane w podróży i turystyce, zawierający optymalizację dla kierowców zawodowych (wyższy kontrast, rozróżnialne drogi), opcje na górskie wędrówki (skala SAC), wycieczki rowerowe oraz opcje potrzebne w wędrówkach pieszych, itp.
+\n\t* \'Wysoki kontrast dróg\' pokazuje drogi w bardzo rozróżnialnych kolorach przy mocny oświetleniu zewnętrznym
+\n\t* \'Zima i narty\' tworzy (pokryte śniegiem) widoki zimowych krajobrazów i pokazuje stoki i wyciągi narciarskie (w związku z mapą z możliwą do pobrania mapą \'World ski\') "</string>
     <string name="tip_recent_changes_1_6_t">Zmiany w 1.6:
 	\n\t* Wsparcie dla urządzeń z rozdzielczością Full HD
 	\n\t* Wsparcie dla całkowicie przezroczystego tła mapy
@@ -1613,7 +1609,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_avoid_ferries_description">Unikaj przepraw promowych</string>
 	<string name="routing_attr_avoid_motorway_name">Unikaj autostrad</string>
 	<string name="routing_attr_avoid_motorway_description">Unikaj autostrad</string>
-	<string name="routing_attr_weight_name">Limie wagi</string>
+	<string name="routing_attr_weight_name">Limit wagi</string>
 	<string name="routing_attr_weight_description">Określ ograniczenie masy pojazdu dozwolone na drodze</string>
     <string name="select_gpx">Wybierz GPX …</string>
     <string name="route_descr_select_destination">Wybierz cel podróży</string>
@@ -1894,7 +1890,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="lang_sr">Serbski</string>
 	<string name="lang_zh_CN">Chiński uproszczony</string>
 	<string name="lang_zh_TW">Chiński tradycyjny</string>
-	<string name="rendering_attr_subwayMode_name">Tryb metra</string>
+	<string name="rendering_attr_subwayMode_name">Trasy metra</string>
  	<string name="download_additional_maps">Pobrać brakujące mapy %1$s (%2$d MB)?</string>
     <string name="more">Więcej...</string>
     <string name="rendering_value_browse_map_name">Przeglądaj mapę</string>  
@@ -1920,7 +1916,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="av_camera_pic_size_descr">Wybierz rozmiar obrazu wewnętrznego aparatu</string>
     <string name="hide_all_waypoints">Usuń wszystkie</string>
     <string name="announce_nearby_favorites">Ogłaszaj pobliskie ulubione</string>
-<string name="rendering_attr_publicTransportMode_name">Tryb transportu publicznego</string>
+<string name="rendering_attr_publicTransportMode_name">Trasy autobusowe, trolejbusowe, transportowe</string>
 	<string name="record_plugin_name">Nagrywaj swoje wycieczki</string>
     <string name="int_hour">godz.</string>
     <string name="duration">Czas trwania</string>
@@ -1967,7 +1963,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="rendering_category_routes">Trasy</string>
     <string name="rendering_category_details">Szczegóły</string>
     <string name="rendering_category_transport">Transport</string>
-    <string name="rendering_category_others">Inne atrybuty map</string>
+    <string name="rendering_category_others">Inne atrybuty mapy</string>
     <string name="map_widget_appearance_rem">Pozostałe elementy</string>
     <string name="map_widget_top">Pasek statusu</string>
 	<string name="map_widget_right">Prawy panel</string>
@@ -1975,4 +1971,18 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="layers_category_show">Pokaż</string>
 	<string name="configure_map">Skonfiguruj mapę</string>
     <string name="search_radius_proximity">W odległości</string>
+    <string name="wake_on_voice">Włączyć ekran</string>
+    <string name="wake_on_voice_descr">Włącz na ekran telefonu podczas zbliżania się do zakrętu</string>
+    <string name="select_impassable_road">Wybierz mapę</string>
+    <string name="impassable_road">Unikaj dróg…</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Trasy tramwajowe i kolejowe</string>
+    <string name="tip_recent_changes_1_9_t">"Zmiany w 1.9: * Aktualizacja stylów mapy z renderowaniem warstw nawierzchni drogi, transportu i symboli turystycznych * Wyszukiwanie punktów POI wzdłuż trasy * Zaznaczanie nieprzejezdnej drogi dla danego przejazdu * Ułatwienia pobrania i aktualizacji mapy * Otrzymywanie powiadomień wizualnych i audio podczas zbliżania się do punktu * Drukuj informacje o trasie i manewrach * Wsparcie dla asystenta pasa ruchu * Wsparcie Android Wear * Dużo zmian UI * Oddzielne powiększenie rozmiaru dla tekstu na mapie * Specjalne powiadomienia dźwiękowe w przypadku zjechania z trasy * Funkcjonalności logowania do Osmo * Poprawienie niezgodności wersji OsMo "</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Trasy pociągów</string>
+    <string name="rendering_attr_tramRoutes_name">Trasy tramwajowe</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Udostępniaj trasy taxi</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Trasy trolejbusowe</string>
+    <string name="rendering_attr_busRoutes_name">Trasy autobusowe</string>
+    <string name="rendering_category_hide">Ukryj</string>
+    <string name="lock_screen_request_explanation">%1$s potrzebuje uprawnień do wyłączenia ekranu dla funkcji oszczędzania energii.</string>
+    <string name="wake_on_voice_never">Nigdy</string>
     </resources>

@@ -13,11 +13,15 @@
 	<string name="show_map">SHOW MAP</string>
 	<string name="show_all">SHOW ALL</string>
 	<string name="coordinates">Coordinates</string>
+	<string name="rendering_attr_publicTransportMode_name">Bus, trolleybus, shuttle routes</string>
+	<string name="rendering_attr_tramTrainRoutes_name">Tram and train routes</string>
+	<string name="rendering_attr_subwayMode_name">Subway routes</string>
+    <string name="lock_screen_request_explanation">%1$s needs this permission to turn off the screen for the power saving feature.</string>
     <string name="wake_on_voice">Turn on the screen</string>
     <string name="wake_on_voice_descr">Turn on the phone screen when approaching a turn</string>
+    <string name="wake_on_voice_never">Never</string>
     <string name="select_impassable_road">Select on map</string>
     <string name="impassable_road">Avoid roads&#8230;</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Tram and train</string>
     <string name="tip_recent_changes_1_9_t">Changes in 1.9:
         * Updated maps styles with road surface rendering, transport layers and hiking symbols
         * Search POI along the route
@@ -33,7 +37,7 @@
         * OsMo login functionality
         * Fix OsMo version incompatibilities
     </string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Train and lightrail routes</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Train routes</string>
     <string name="rendering_attr_tramRoutes_name">Tram routes</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Share taxi routes</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trolleybus routes</string>
@@ -114,7 +118,6 @@
 	<string name="save_track_interval_descr">Choose logging interval for track recording during navigation</string>
 	<string name="voice_provider_descr">Select voice guidance for navigation</string>
 	<string name="voice_provider">Voice guidance</string>
-	<string name="rendering_attr_publicTransportMode_name">Public transport mode</string>
 	<string name="tips_and_tricks">Help</string>
 	<string name="tip_initial">Help</string>
 	<string name="tip_initial_t">OsmAnd is a navigation application with many features. 
@@ -145,7 +148,6 @@
     <string name="osmo_specify_tracker_id">Please specify id</string>
     <string name="continue_navigation">Continue Navigation</string>
     <string name="pause_navigation">Pause Navigation</string>
-    <string name="rendering_attr_subwayMode_name">Subway mode</string>
  	<string name="keep_navigation_service">Keep</string>
 	<string name="gps_wake_up_timer">GPS wake-up interval</string>
 	<string name="map_preferred_locale_descr">Preferred language for labels on the map (if it is not available will switch to English or to local names)</string>
