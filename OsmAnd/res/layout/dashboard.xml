@@ -85,7 +85,8 @@
 					android:visibility="gone"/>
 		</LinearLayout>
 
-		<LinearLayout android:background="@drawable/bg_cardui"
+		<LinearLayout android:id="@+id/main_fav"
+                      android:background="@drawable/bg_cardui"
 					  android:layout_width="fill_parent"
 					  android:layout_height="wrap_content"
 					  android:orientation="vertical">
