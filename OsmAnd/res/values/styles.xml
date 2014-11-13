@@ -24,18 +24,18 @@
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textSize">12sp</item>
 		<item name="android:textColor">@color/dashboard_blue</item>
-		<item name="android:background">@color/color_white</item>
+		<item name="android:background">@drawable/dashboard_button</item>
 	</style>
 
 	<style name="DashboardSearchButton">
 		<item name="android:paddingTop">10dp</item>
 		<item name="android:layout_width">0dp</item>
-		<item name="android:layout_height">fill_parent</item>
+		<item name="android:layout_height">match_parent</item>
 		<item name="android:layout_weight">1</item>
 		<item name="android:textSize">12sp</item>
 		<item name="android:textColor">@color/dashboard_black</item>
-		<item name="android:background">@color/color_white</item>
-		<item name="android:layout_marginTop">2dp</item>
+		<item name="android:background">@drawable/dashboard_button</item>
+		<item name="android:layout_marginTop">1dp</item>
 	</style>
 
 	<style name="ListText">
