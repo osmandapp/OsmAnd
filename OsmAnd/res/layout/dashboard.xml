@@ -33,11 +33,11 @@
 						android:text="@string/address"
 						android:layout_marginRight="1dp"
 						android:layout_marginLeft="1dp"
-						android:drawableTop="@drawable/ic_action_home_light"
+						android:drawableTop="@drawable/ic_action_info2"
 						style="@style/DashboardSearchButton"/>
 				<Button android:id="@+id/coord"
 						android:text="@string/coordinates"
-						android:drawableTop="@drawable/ic_action_marker_light"
+						android:drawableTop="@drawable/ic_action_marker2"
 						style="@style/DashboardSearchButton"/>
 			</LinearLayout>
 			<LinearLayout android:orientation="horizontal"
@@ -46,17 +46,17 @@
 						  android:layout_height="90dp">
 				<Button android:id="@+id/fav_btn"
 						android:text="@string/my_favorites"
-						android:drawableTop="@drawable/ic_action_fav_light"
+						android:drawableTop="@drawable/ic_action_fav2"
 						style="@style/DashboardSearchButton"/>
 				<Button android:id="@+id/history"
 						android:text="@string/history"
-						android:drawableTop="@drawable/ic_action_fav_light"
+						android:drawableTop="@drawable/ic_action_history2"
 						android:layout_marginRight="1dp"
 						android:layout_marginLeft="1dp"
 						style="@style/DashboardSearchButton"/>
 				<Button android:id="@+id/transport"
 						android:text="@string/rendering_category_transport"
-						android:drawableTop="@drawable/ic_action_bus_light"
+						android:drawableTop="@drawable/ic_action_bus2"
 						style="@style/DashboardSearchButton"/>
 			</LinearLayout>
 		</LinearLayout>
