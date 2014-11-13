@@ -1,112 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:background="@color/dashboard_background"
-			xmlns:android="http://schemas.android.com/apk/res/android">
+            android:layout_height="fill_parent"
+            android:background="@color/dashboard_background"
+            xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<LinearLayout android:orientation="vertical"
-				  android:padding="6dp"
-				  android:layout_width="match_parent"
-				  android:layout_height="wrap_content">
+    <LinearLayout android:orientation="vertical"
+                  android:padding="6dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
 
-		<LinearLayout android:id="@+id/search"
-					  android:orientation="vertical"
-					  android:layout_width="match_parent"
-					  android:layout_height="wrap_content"
-					  android:background="@drawable/bg_cardui"
-					  android:layout_marginBottom="6dp">
-			<TextView android:id="@+id/search_for"
-					  android:text="@string/search_for"
-					  style="@style/DashboardSubHeader"
-					  android:gravity="center_vertical"
-					  android:layout_height="38dp"
-					  android:layout_width="wrap_content"/>
-			<LinearLayout android:orientation="horizontal"
-						  android:layout_width="match_parent"
-						  android:background="@color/dashboard_divider"
-						  android:layout_height="90dp">
-				<Button android:id="@+id/poi"
-						android:text="@string/poi"
-						android:drawableTop="@drawable/ic_action_info2"
-						style="@style/DashboardSearchButton"/>
-				<Button android:id="@+id/address"
-						android:text="@string/address"
-						android:layout_marginRight="1dp"
-						android:layout_marginLeft="1dp"
-						android:drawableTop="@drawable/ic_action_home2"
-						style="@style/DashboardSearchButton"/>
-				<Button android:id="@+id/coord"
-						android:text="@string/coordinates"
-						android:drawableTop="@drawable/ic_action_marker2"
-						style="@style/DashboardSearchButton"/>
-			</LinearLayout>
-			<LinearLayout android:orientation="horizontal"
-						  android:layout_width="fill_parent"
-						  android:background="@color/dashboard_divider"
-						  android:layout_height="90dp">
-				<Button android:id="@+id/fav_btn"
-						android:text="@string/my_favorites"
-						android:drawableTop="@drawable/ic_action_fav2"
-						style="@style/DashboardSearchButton"/>
-				<Button android:id="@+id/history"
-						android:text="@string/history"
-						android:drawableTop="@drawable/ic_action_history2"
-						android:layout_marginRight="1dp"
-						android:layout_marginLeft="1dp"
-						style="@style/DashboardSearchButton"/>
-				<Button android:id="@+id/transport"
-						android:text="@string/rendering_category_transport"
-						android:drawableTop="@drawable/ic_action_bus2"
-						style="@style/DashboardSearchButton"/>
-			</LinearLayout>
-		</LinearLayout>
-
-		<LinearLayout android:orientation="vertical"
-					  android:background="@drawable/bg_cardui"
-					  android:layout_marginBottom="6dp"
-					  android:layout_width="fill_parent"
-					  android:layout_height="wrap_content">
-			<LinearLayout android:orientation="horizontal"
-						  android:layout_width="fill_parent"
-						  android:layout_height="38dp">
-				<TextView android:id="@+id/map_text"
-						  android:text="@string/map_Button"
-						  style="@style/DashboardSubHeader"/>
-				<Button android:id="@+id/show_map"
-						android:text="@string/show_map"
-						style="@style/DashboardGeneralButton"/>
-			</LinearLayout>
-
-			<net.osmand.plus.views.OsmAndMapSurfaceView
-					android:id="@+id/MapView"
-					android:layout_width="fill_parent"
-					android:layout_height="110dp"
-					android:contentDescription="@string/map_view"
-					android:visibility="gone"/>
-		</LinearLayout>
-
-		<LinearLayout android:id="@+id/main_fav"
+        <LinearLayout android:id="@+id/search"
+                      android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
                       android:background="@drawable/bg_cardui"
-					  android:layout_width="fill_parent"
-					  android:layout_height="wrap_content"
-					  android:orientation="vertical">
-			<LinearLayout android:orientation="horizontal"
-						  android:layout_width="fill_parent"
-						  android:layout_height="38dp">
-				<TextView android:id="@+id/fav_text"
-						  android:text="@string/my_data_Button"
-						  style="@style/DashboardSubHeader"/>
-				<Button android:id="@+id/show_all"
-						android:text="@string/show_all"
-						style="@style/DashboardGeneralButton"/>
+                      android:layout_marginBottom="6dp">
+            <TextView android:id="@+id/search_for"
+                      android:text="@string/search_for"
+                      style="@style/DashboardSubHeader"
+                      android:gravity="center_vertical"
+                      android:layout_height="38dp"
+                      android:layout_width="wrap_content"/>
+            <View android:layout_width="match_parent"
+                  android:background="@color/dashboard_divider"
+                  android:layout_height="1dp"/>
+            <LinearLayout android:orientation="horizontal"
+                          android:layout_width="match_parent"
+                          android:layout_height="90dp">
+                <Button android:id="@+id/poi"
+                        android:text="@string/poi"
+                        android:drawableTop="@drawable/ic_action_info2"
+                        style="@style/DashboardSearchButton"/>
+                <View android:layout_width="1dp"
+                      android:background="@color/dashboard_divider"
+                      android:layout_height="match_parent"/>
+                <Button android:id="@+id/address"
+                        android:text="@string/address"
+                        android:drawableTop="@drawable/ic_action_home2"
+                        style="@style/DashboardSearchButton"/>
+                <View android:layout_width="1dp"
+                      android:background="@color/dashboard_divider"
+                      android:layout_height="match_parent"/>
+                <Button android:id="@+id/coord"
+                        android:text="@string/coordinates"
+                        android:drawableTop="@drawable/ic_action_marker2"
+                        style="@style/DashboardSearchButton"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/dashboard_divider"
+                  android:layout_height="1dp"/>
+            <LinearLayout android:orientation="horizontal"
+                          android:layout_width="fill_parent"
+                          android:layout_height="90dp">
+                <Button android:id="@+id/fav_btn"
+                        android:text="@string/my_favorites"
+                        android:drawableTop="@drawable/ic_action_fav2"
+                        style="@style/DashboardSearchButton"/>
+                <View android:layout_width="1dp"
+                      android:background="@color/dashboard_divider"
+                      android:layout_height="match_parent"/>
+                <Button android:id="@+id/history"
+                        android:text="@string/history"
+                        android:drawableTop="@drawable/ic_action_history2"
+                        style="@style/DashboardSearchButton"/>
+                <View android:layout_width="1dp"
+                      android:background="@color/dashboard_divider"
+                      android:layout_height="match_parent"/>
+                <Button android:id="@+id/transport"
+                        android:text="@string/rendering_category_transport"
+                        android:drawableTop="@drawable/ic_action_bus2"
+                        style="@style/DashboardSearchButton"/>
+            </LinearLayout>
+        </LinearLayout>
 
-			</LinearLayout>
-			<LinearLayout android:id="@+id/favorites"
-						  android:orientation="vertical"
-						  android:layout_width="fill_parent"
-						  android:layout_height="wrap_content"
-						  android:background="@color/dashboard_divider"/>
-		</LinearLayout>
+        <LinearLayout android:orientation="vertical"
+                      android:background="@drawable/bg_cardui"
+                      android:layout_marginBottom="6dp"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content">
+            <LinearLayout android:orientation="horizontal"
+                          android:layout_width="fill_parent"
+                          android:layout_height="38dp">
+                <TextView android:id="@+id/map_text"
+                          android:text="@string/map_Button"
+                          style="@style/DashboardSubHeader"/>
+                <Button android:id="@+id/show_map"
+                        android:text="@string/show_map"
+                        style="@style/DashboardGeneralButton"/>
+            </LinearLayout>
 
-	</LinearLayout>
+            <net.osmand.plus.views.OsmAndMapSurfaceView
+                    android:id="@+id/MapView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:contentDescription="@string/map_view"
+                    android:visibility="gone"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/main_fav"
+                      android:background="@drawable/bg_cardui"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <LinearLayout android:orientation="horizontal"
+                          android:layout_width="fill_parent"
+                          android:layout_height="38dp">
+                <TextView android:id="@+id/fav_text"
+                          android:text="@string/my_data_Button"
+                          style="@style/DashboardSubHeader"/>
+                <Button android:id="@+id/show_all"
+                        android:text="@string/show_all"
+                        style="@style/DashboardGeneralButton"/>
+
+            </LinearLayout>
+            <LinearLayout android:id="@+id/favorites"
+                          android:orientation="vertical"
+                          android:layout_width="fill_parent"
+                          android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
 </ScrollView>

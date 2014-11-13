@@ -101,11 +101,6 @@ public class DashboardActivity extends SherlockFragmentActivity {
 					startActivityForResult(mapIndent, 0);
 				}
 			});
-			int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
-			int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics());
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
-			lp.setMargins(0, margin, 0, 0);
-			view.setLayoutParams(lp);
 			favorites.addView(view);
 		}
 	}
