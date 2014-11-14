@@ -14,7 +14,7 @@
 		<item name="android:layout_height">fill_parent</item>
 		<item name="android:gravity">center_vertical</item>
 		<item name="android:textColor">@color/dashboard_black</item>
-		<item name="android:layout_marginLeft">16dp</item>ll
+		<item name="android:layout_marginLeft">15dp</item>ll
 		<item name="android:textSize">14sp</item>
 	</style>
 
@@ -29,7 +29,7 @@
 	</style>
 
 	<style name="DashboardSearchButton">
-		<item name="android:paddingTop">10dp</item>
+		<item name="android:paddingTop">17dp</item>
 		<item name="android:layout_width">0dp</item>
 		<item name="android:layout_height">match_parent</item>
 		<item name="android:layout_weight">1</item>
