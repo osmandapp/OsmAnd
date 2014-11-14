@@ -10,7 +10,7 @@
           android:layout_height="1dp"/>
     <LinearLayout android:orientation="horizontal"
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content">
+                  android:layout_height="match_parent">
         <ImageView android:id="@+id/icon"
                    android:layout_gravity="center_vertical"
                    android:layout_marginLeft="12dp"

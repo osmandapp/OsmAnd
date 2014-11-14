@@ -101,6 +101,9 @@ public class DashboardActivity extends SherlockFragmentActivity {
 					startActivityForResult(mapIndent, 0);
 				}
 			});
+			int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+			view.setLayoutParams(lp);
 			favorites.addView(view);
 		}
 	}
