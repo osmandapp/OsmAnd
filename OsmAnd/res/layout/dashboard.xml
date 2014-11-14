@@ -17,8 +17,6 @@
                       android:layout_marginBottom="6dp">
             <TextView android:id="@+id/search_for"
                       android:text="@string/search_for"
-                      style="@style/DashboardSubHeader"
-                      android:gravity="center_vertical"
                       android:layout_height="40dp"
                       android:layout_width="wrap_content"/>
             <View android:layout_width="match_parent"
@@ -119,7 +117,7 @@
             <LinearLayout android:id="@+id/favorites"
                           android:orientation="vertical"
                           android:layout_width="fill_parent"
-                          android:layout_height="50dp"/>
+                          android:layout_height="wrap_content"/>
         </LinearLayout>
 
     </LinearLayout>
