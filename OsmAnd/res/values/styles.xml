@@ -36,6 +36,8 @@
 		<item name="android:textSize">12sp</item>
 		<item name="android:textColor">@color/dashboard_black</item>
 		<item name="android:background">@drawable/dashboard_button</item>
+		<item name="android:gravity">bottom|center_horizontal</item>
+		<item name="android:paddingBottom">11dp</item>
 	</style>
 
 	<style name="ListText">
