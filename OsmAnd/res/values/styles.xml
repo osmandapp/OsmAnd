@@ -12,33 +12,34 @@
 		<item name="android:layout_width">0dp</item>
 		<item name="android:layout_weight">1</item>
 		<item name="android:layout_height">fill_parent</item>
-		<item name="android:gravity">center_vertical</item>
-		<item name="android:textColor">@color/dashboard_black</item>
-		<item name="android:layout_marginLeft">15dp</item>ll
-		<item name="android:textSize">14sp</item>
-	</style>
+        <item name="android:paddingTop">11dp</item>
+        <!--<item name="android:gravity">center_vertical</item>-->
+        <item name="android:textColor">@color/dashboard_black</item>
+        <item name="android:layout_marginLeft">15dp</item>ll
+        <item name="android:textSize">14sp</item>
+    </style>
 
-	<style name="DashboardGeneralButton">
-		<item name="android:layout_marginRight">16dp</item>
-		<item name="android:layout_width">wrap_content</item>
-		<item name="android:layout_height">36dp</item>
+    <style name="DashboardGeneralButton">
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">36dp</item>
         <item name="android:layout_gravity">center_vertical</item>
-		<item name="android:textSize">12sp</item>
-		<item name="android:textColor">@color/dashboard_blue</item>
-		<item name="android:background">@drawable/dashboard_button</item>
-	</style>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/dashboard_blue</item>
+        <item name="android:background">@drawable/dashboard_button</item>
+    </style>
 
-	<style name="DashboardSearchButton">
-		<item name="android:paddingTop">17dp</item>
-		<item name="android:layout_width">0dp</item>
-		<item name="android:layout_height">match_parent</item>
-		<item name="android:layout_weight">1</item>
-		<item name="android:textSize">12sp</item>
-		<item name="android:textColor">@color/dashboard_black</item>
-		<item name="android:background">@drawable/dashboard_button</item>
-	</style>
+    <style name="DashboardSearchButton">
+        <item name="android:paddingTop">17dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/dashboard_black</item>
+        <item name="android:background">@drawable/dashboard_button</item>
+    </style>
 
-	<style name="ListText">
+    <style name="ListText">
         <item name="android:textSize">20sp</item>
     </style>
     <style name="ListText.Small">
