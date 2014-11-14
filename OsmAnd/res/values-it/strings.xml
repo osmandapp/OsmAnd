@@ -66,7 +66,7 @@
   
   <string name="switch_to_raster_map_to_see">Nessuna mappa vettoriale è presente per questa posizione. Ne puoi scaricare una in Impostazioni (Gestisci i file mappe), o passa alle mappe online (abilita il plugin delle mappe online).</string>
   <string name="binary_map_download_success">"Download completato.
-\n\t\n\tPer usarle attivare \'Impostazioni\' → \'Configurazione delle mappe\' → \'Sorgenti mappe...\'\t\'Mappe vettoriali offline\'. "</string>
+\n\t\n\tPer usarle attivare \'Impostazioni\' → \'Gestisci i file delle mappe\' → \'Sorgenti mappe...\' → \'Mappe vettoriali offline\'. "</string>
   <string name="tip_day_night_mode">Modo giorno/notte</string>
   
   <string name="tip_osm_improve">Migliora i dati OSM</string>
@@ -231,7 +231,7 @@
   <string name="gpx_option_reverse_route">Inverti direzione GPX</string>
   <string name="gpx_option_destination_point">Usa il punto di destinazione attuale</string>
   <string name="gpx_option_from_start_point">Percorri tutta la traccia</string>
-  <string name="switch_to_vector_map_to_see">Mappa vettoriale offline presente per quest\'area.\n\t\n\tPer usarla attivare \'Menu\'→\'Strati mappa\'→\'Fonte Mappa…\'→\'Mappe vettoriali offline\'.</string>
+  <string name="switch_to_vector_map_to_see">Mappa vettoriale offline presente per quest\'area.\n\t\n\tPer usarla attivare \'Menu\' → \'Configura la mappa\' → \'Sorgente mappa…\' → \'Mappe vettoriali offline\'.</string>
   <string name="choose_audio_stream">Canale d\'uscita della voce guida</string>
   <string name="choose_audio_stream_descr">Scegli il canale per la guida vocale (dipendente dal sistema)</string>
   <string name="voice_stream_voice_call">Audio chiamate vocali</string>
@@ -269,7 +269,7 @@
 		\n\nScegli poi un modo per condividere la tua posizione. Le opzioni sono: E-Mail, SMS o semplicemente copia le coordinate sugli appunti.
 	</string>
   <string name="tip_favorites">Punti Preferiti</string>
-  <string name="tip_favorites_t">"I punti usati di frequente possono essere salvati come Preferiti in questo modo:\n\nNel menu contestuale per ogni punto \'Utilizza posizione\' scegliere \'Aggiungi ai favoriti\' e quindi immettere un nome per esso.\n\nDopo il salvataggio, il punto preferito sarà accessibile nel \'Menu\'→\'I miei luoghi\'. Premendo su una qualsiasi voce della lista dei \'Preferiti\', appariranno le opzioni per impostarlo come destinazione, modificarlo o eliminarlo.\n\nPer visualizzare tutti i punti preferiti direttamente sulla mappa, attiva nella schermata della mappa il livello \'Preferiti\' dal menù \'Strati mappa\'. "</string>
+  <string name="tip_favorites_t">"I punti usati di frequente possono essere salvati come Preferiti in questo modo:\n\nPer qualsiasi punto, nel menu contestuale \'Utilizza la posizione…\' scegliere \'Aggiungi ai Preferiti\' e quindi immettere un nome.\n\nDopo il salvataggio, il punto sarà accessibile attraverso \'Menu\' → \'I miei luoghi\'. Premendo su una voce della lista dei \'Preferiti\', appariranno le opzioni per impostarlo come destinazione, modificarlo o eliminarlo.\n\nPer visualizzare tutti i punti preferiti direttamente sulla mappa, nella schermata della mappa attiva il livello \'Preferiti\' da \'Menu\' → \'Configura la mappa\'. "</string>
   <string name="create_poi_link_to_osm_doc">  <u>OSM Online</u> con immagini</string>
   <string name="error_doing_search">Errore nella ricerca offline</string>
   <string name="search_offline_geo_error">Impossibile leggere geo intent \'%s\'</string>
@@ -1586,11 +1586,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="about_settings_descr">Informazioni versione, licenze, membri del progetto</string>
     <string name="tips_and_tricks">Aiuto</string>
     <string name="tip_map_styles">Stili mappa</string>
-	<string name="tip_map_styles_t">"OsmAnd supporta la visualizzazione delle mappe vettoriali in differenti stili mappa per adattarsi alle tue esigenze:
-\n\nDiversi stili mappa da quello bilanciato preimpostato, li trovi sotto \'Menu\' -&gt; \'Configura mappa\' -&gt; \'Stile Mappa\' scegli per esempio
-\n\t* Lo stile \'Touring view\': contiene le più dettagliate informazioni possibile per viaggiare e per visitare, incluse le ottimizzazioni per i guidatori professionali (strade contrasto maggiormente distinguibile), opzione per l\'escursionismo Alpino (scala SAC), itinerari ciclistici, simboli per escursionismo, etc.
-\n\t* \'Alto contrasto strade \' mostra le strade con una luminosità dei colori molto accentuata per le situazioni di cattiva illuminazione
-\n\t* \'Inverno e sci\' crea una vista del paesaggio invernale (coperto da neve), e visione globale delle piste da sci e degli impianti di risalita (in abbinata con \'World ski\' download mappa) "</string>
+	<string name="tip_map_styles_t">"OsmAnd supporta le mappe vettoriali offline con stili di visualizzazione differenti per adattarsi alle tue esigenze:
+\n\nOltre allo stile bilanciato preimpostato, sotto \'Menu\' → \'Configura la mappa\' → \'Stile della mappa\' puoi scegliere ad esempio
+\n\t* Lo stile \'Touring view\', che contiene le informazioni più dettagliate possibili per viaggiatori e turisti, incluse le ottimizzazioni per gli autisti professionisti (maggiore contrasto, strade distinguibili), opzioni per l\'escursionismo Alpino (scala SAC), itinerari ciclistici, simboli per escursionismo, ecc.\n\t* \'High contrast roads\' mostra le strade con colori molto accentuati per le situazioni con intensa luminosità ambientale
+\n\t* \'Winter and ski\' crea una vista da paesaggio invernale (coperto da neve) e mostra pendenze sciistiche e impianti di risalita (abbinata alle mappe scaricabili \'World ski\') "</string>
     <string name="base_world_map">Mappa mondiale di base</string>
 	
     
