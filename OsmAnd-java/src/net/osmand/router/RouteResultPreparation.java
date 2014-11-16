@@ -40,7 +40,7 @@ public class RouteResultPreparation {
 		splitRoadsAndAttachRoadSegments(ctx, result);
 		// calculate time
 		calculateTimeSpeed(ctx, result);
-		
+
 		addTurnInfo(ctx.leftSideNavigation, result);
 		return result;
 	}
@@ -389,6 +389,76 @@ public class RouteResultPreparation {
 				dist += result.get(i).getDistance();
 			}
 		}
+
+		for (int i = result.size() - 2; i >= 0; i--) {
+			RouteSegmentResult currentSegment = result.get(i);
+			RouteSegmentResult nextSegment = null;
+
+			// We need to get the next segment that has a turn and lanes attached.
+			for (int j = i + 1; j < result.size(); j++) {
+				RouteSegmentResult possibleSegment = result.get(j);
+				if (possibleSegment.getTurnType() != null && possibleSegment.getTurnType().getLanes() != null) {
+					nextSegment = possibleSegment;
+					break;
+				}
+			}
+
+			if (currentSegment.getTurnType() == null || currentSegment.getTurnType().getLanes() == null
+					|| nextSegment == null) {
+				continue;
+			}
+
+			// Only allow slight turns that are nearby to be merged.
+			if (currentSegment.getDistance() < 60 && nextSegment.getTurnType().getLanes().length <= currentSegment.getTurnType().getLanes().length
+					&& (currentSegment.getTurnType().getValue() == TurnType.C
+					 || currentSegment.getTurnType().getValue() == TurnType.TSLL
+					 || currentSegment.getTurnType().getValue() == TurnType.TSLR
+					 || currentSegment.getTurnType().getValue() == TurnType.KL
+					 || currentSegment.getTurnType().getValue() == TurnType.KR)) {
+				mergeTurnLanes(leftside, currentSegment, nextSegment);
+			}
+		}
+	}
+
+	private void mergeTurnLanes(boolean leftSide, RouteSegmentResult currentSegment, RouteSegmentResult nextSegment) {
+		boolean isUsingTurnLanes = TurnType.getPrimaryTurn(currentSegment.getTurnType().getLanes()[0]) != 0
+			&& TurnType.getPrimaryTurn(nextSegment.getTurnType().getLanes()[0]) != 0;
+		if (isUsingTurnLanes) {
+			int[] lanes = new int[currentSegment.getTurnType().getLanes().length];
+			// Unset the allowed lane bit
+			for (int i = 0; i < lanes.length; i++) {
+				lanes[i] = currentSegment.getTurnType().getLanes()[i] & ~1;
+			}
+
+			// Find the first lane that matches (based on the turn being taken), and how many lanes match
+			int matchingIndex = 0;
+			int maxMatchedLanes = 0;
+			for (int i = 0; i < lanes.length; i++) {
+				int matchedLanes = 0;
+				for (int j = 0; j < nextSegment.getTurnType().getLanes().length - i; j++) {
+					if (TurnType.getPrimaryTurn(nextSegment.getTurnType().getLanes()[j])
+                            == TurnType.getPrimaryTurn(currentSegment.getTurnType().getLanes()[i + j])) {
+						matchedLanes++;
+					} else {
+						break;
+					}
+				}
+				if (matchedLanes > maxMatchedLanes) {
+					matchingIndex = i;
+					maxMatchedLanes = matchedLanes;
+				}
+			}
+			if (maxMatchedLanes <= 1) {
+				return;
+			}
+
+			// Copy the allowed bit from the next segment's lanes to the current segment's matching lanes
+			for (int i = matchingIndex; i - matchingIndex < nextSegment.getTurnType().getLanes().length; i++) {
+				lanes[i] |= nextSegment.getTurnType().getLanes()[i - matchingIndex] & 1;
+			}
+			currentSegment.getTurnType().setLanes(lanes);
+			currentSegment.setTurnType(inferTurnFromLanes(currentSegment.getTurnType(), leftSide));
+		}
 	}
 	
 	private static final int MAX_SPEAK_PRIORITY = 5;
@@ -566,6 +636,7 @@ public class RouteResultPreparation {
 		int right = 0;
 		boolean speak = false;
 		int speakPriority = Math.max(highwaySpeakPriority(prevSegm.getObject().getHighway()), highwaySpeakPriority(currentSegm.getObject().getHighway()));
+		boolean otherRoutesExist = false;
 		if (attachedRoutes != null) {
 			for (RouteSegmentResult attached : attachedRoutes) {
 				double ex = MapUtils.degreesDiff(attached.getBearingBegin(), currentSegm.getBearingBegin());
@@ -596,6 +667,9 @@ public class RouteResultPreparation {
 							left += lns;
 						}
 						speak = speak || rsSpeakPriority <= speakPriority;
+					} else if (mpi >= TURN_DEGREE_MIN) {
+						// Indicate that there are other turns at this intersection, and displaying the lanes may be helpful here.
+						otherRoutesExist = true;
 					}
 				}
 			}
@@ -631,13 +705,40 @@ public class RouteResultPreparation {
 
 		double devation = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin()));
 		boolean makeSlightTurn = devation > 5 && (!isMotorway(prevSegm) || !isMotorway(currentSegm));
-		if (kl) {
+		if (kl && kr) {
+			t = TurnType.valueOf(TurnType.C, leftSide);
+			t.setSkipToSpeak(!speak);
+		} else if (kl) {
 			t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLL : TurnType.KL, leftSide);
 			t.setSkipToSpeak(!speak);
-		} 
-		if (kr) {
+		} else if (kr) {
 			t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLR : TurnType.KR, leftSide);
 			t.setSkipToSpeak(!speak);
+		} else if (otherRoutesExist && getTurnLanesString(prevSegm) != null) {
+			// Maybe going straight at a 90-degree intersection
+			t = TurnType.valueOf(TurnType.C, leftSide);
+			t.setSkipToSpeak(true);
+
+			// When going straight, the lanes have to be calculated from the previous segment, not the current/next segment.
+			int prevLanes = prevSegm.getObject().getLanes();
+			if (prevSegm.getObject().getOneway() == 0) {
+				prevLanes = countLanes(prevSegm, prevLanes);
+			}
+			if (prevLanes <= 0) {
+				prevLanes = 1;
+			}
+
+			t.setLanes(new int[prevLanes]);
+			t = attachTurnLanesData(leftSide, prevSegm, t);
+
+			// Manually set the allowed lanes based on the turn type
+			for (int i = 0; i < t.getLanes().length; i++) {
+				if (TurnType.getPrimaryTurn(t.getLanes()[i]) == TurnType.C) {
+					t.getLanes()[i] |= 1;
+				}
+			}
+
+			return t;
 		}
 		if (t != null && lanes != null) {
 			t.setLanes(lanes);
