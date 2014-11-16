@@ -1,25 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent" android:orientation="vertical">
-  <!-- 
-<LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:layout_marginTop="3dp" android:layout_marginRight="5dp"
-    android:orientation="horizontal">
-<TextView android:text="" android:id="@+id/Label" android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center"></TextView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    <!--
+  <LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:layout_marginTop="3dp" android:layout_marginRight="5dp"
+      android:orientation="horizontal">
+  <TextView android:text="" android:id="@+id/Label" android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center"></TextView>
 
-</LinearLayout>
- -->
+  </LinearLayout>
+   -->
 
-<LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:layout_marginTop="1dp" android:layout_marginRight="3dp">
-<ProgressBar android:id="@+id/ProgressBar" android:layout_width="wrap_content" android:layout_height="wrap_content"></ProgressBar>
-<EditText android:text="" android:id="@+id/SearchText" android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:inputType="textFilter"></EditText>
-<Button android:id="@+id/ResetButton" android:layout_width="wrap_content" android:layout_height="wrap_content" 
-			android:layout_weight="0" android:text="@string/default_buttons_reset"></Button>
+    <LinearLayout
+        android:id="@+id/LinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="1dp">
 
-</LinearLayout>
+        <ProgressBar
+            android:id="@+id/ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-<ListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_height="fill_parent" 
-		android:layout_marginLeft="3dp" android:layout_marginTop="3dp" android:layout_marginRight="3dp" style="@style/OsmandListView"></ListView>
+        <EditText
+            android:id="@+id/SearchText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/ResetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/default_buttons_reset" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        style="@style/OsmandListView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp" />
 
 </LinearLayout>
