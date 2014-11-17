@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent" android:orientation="vertical">
-<RadioGroup  android:layout_width="fill_parent" android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
         <RadioButton
             android:id="@+id/radio_route"
             android:text="@string/animate_routing_route"
@@ -12,30 +16,63 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1" />
-		<RadioButton
+
+        <RadioButton
             android:id="@+id/radio_gpx"
             android:text="@string/animate_routing_gpx"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1" />
-        
-	</RadioGroup>
-    <LinearLayout  android:layout_width="fill_parent" android:id="@+id/layout_animate_gpx"
-		  android:layout_height="fill_parent" android:orientation="vertical" android:visibility="gone">
-    
-  <TextView android:text="@string/select_animate_speedup" android:gravity="left"
-			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginTop="5dp"/>
-  <SeekBar android:id="@+id/Speedup" android:layout_width="fill_parent" android:layout_height="wrap_content" 
-      android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginTop="5dp"/>
-  <LinearLayout 
-  			android:layout_width="fill_parent" android:layout_height="wrap_content" 
-  			android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginTop="5dp">
-  	<TextView android:text="10" android:gravity="left" android:layout_weight="0.5" android:id="@+id/MinSpeedup"
-  			android:layout_width="wrap_content" android:layout_height="wrap_content"/> 
-  	<TextView android:text="15" android:gravity="right" android:layout_weight="0.5" android:id="@+id/MaxSpeedup"
-  			android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-  </LinearLayout>
-  </LinearLayout>
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:id="@+id/layout_animate_gpx"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:text="@string/select_animate_speedup"
+            android:gravity="left"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp" />
+
+        <SeekBar
+            android:id="@+id/Speedup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:text="10"
+                android:gravity="left"
+                android:layout_weight="0.5"
+                android:id="@+id/MinSpeedup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="15"
+                android:gravity="right"
+                android:layout_weight="0.5"
+                android:id="@+id/MaxSpeedup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

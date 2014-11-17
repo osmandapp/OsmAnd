@@ -6,17 +6,16 @@
     android:paddingBottom="4dp"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:paddingTop="4dp" >
+    android:paddingTop="4dp">
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:layout_marginLeft="3dp"
-            >
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp">
 
             <ImageView
                 android:id="@+id/icon"
@@ -32,8 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginRight="3dp"
-                android:layout_marginLeft="2dp"  >
-            </TextView>
+                android:layout_marginLeft="2dp"></TextView>
         </FrameLayout>
 
         <TextView
@@ -44,8 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical" >
-        </TextView>
+            android:layout_gravity="center_vertical"></TextView>
     </LinearLayout>
 
     <TextView
@@ -54,7 +51,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:maxLines="25" >
-    </TextView>
+        android:maxLines="25"></TextView>
 
 </LinearLayout>

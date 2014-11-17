@@ -4,22 +4,24 @@
     android:layout_height="wrap_content"
     android:paddingBottom="8dp"
     android:paddingTop="8dp"
-    android:orientation="horizontal" >
+    android:orientation="horizontal">
 
-    <FrameLayout 
+    <FrameLayout
         android:layout_width="48dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" >
-    	<ImageView
-        	android:id="@+id/Icon"
-        	android:layout_width="48dp"
-        	android:layout_height="48dp"/>
-	</FrameLayout>
+        android:layout_marginRight="8dp">
+
+        <ImageView
+            android:id="@+id/Icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp" />
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1" 
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
