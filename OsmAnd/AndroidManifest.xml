@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	android:installLocation="auto" 
 	android:versionName="@string/app_version" 
-	android:versionCode="191"
+	android:versionCode="201"
 	package="net.osmand.plus">
 
 	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="19" />
