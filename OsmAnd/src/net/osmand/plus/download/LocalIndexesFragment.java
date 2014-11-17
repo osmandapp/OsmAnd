@@ -781,19 +781,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				Collections.sort(i, new Comparator<LocalIndexInfo>() {
 					@Override
 					public int compare(LocalIndexInfo lhs, LocalIndexInfo rhs) {
-						String[] filenames = new String[2];
-						for (int i =0; i< 2;i++){
-							String mapDescr = getMapDescription(i == 0 ? lhs.getFileName() : rhs.getFileName());
-							String mapName = FileNameTranslationHelper.getFileName(ctx,
-									((OsmandApplication) getDownloadActivity().getApplication()).getResourceManager().getOsmandRegions(),
-									i == 0 ? lhs.getFileName() : rhs.getFileName());
-							if (mapDescr.length() > 0){
-								filenames[i] = mapDescr + " - " + mapName;
-							} else {
-								filenames[i] = mapName;
-							}
-						}
-						return cl.compare(filenames[0], filenames[1]);
+						return cl.compare(getNameToDisplay(lhs), getNameToDisplay(rhs));
 					}
 				});
 			}
@@ -913,14 +901,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				v = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
 			}
 			TextView viewName = ((TextView) v.findViewById(R.id.local_index_name));
-			String mapDescr = getMapDescription(child.getFileName());
-			String mapName = FileNameTranslationHelper.getFileName(ctx, ((OsmandApplication) getDownloadActivity().getApplication()).getResourceManager().getOsmandRegions(), child.getFileName());
-
-			if (mapDescr.length() > 0){
-				viewName.setText(mapDescr + " - " + mapName);
-			} else {
-				viewName.setText(mapName);
-			}
+			viewName.setText(getNameToDisplay(child));
 			if (child.isNotSupported()) {
 				viewName.setTextColor(warningColor);
 				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
@@ -976,6 +957,17 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			
 
 			return v;
+		}
+
+		private String getNameToDisplay(LocalIndexInfo child) {
+			String mapDescr = getMapDescription(child.getFileName());
+			String mapName = FileNameTranslationHelper.getFileName(ctx, ((OsmandApplication) getDownloadActivity().getApplication()).getResourceManager().getOsmandRegions(), child.getFileName());
+
+			if (mapDescr.length() > 0){
+				 return mapDescr + " - " + mapName;
+			} else {
+				return mapName;
+			}
 		}
 
 		@Override
