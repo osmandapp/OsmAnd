@@ -779,10 +779,21 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			final Collator cl = Collator.getInstance();
 			for(List<LocalIndexInfo> i : data.values()) {
 				Collections.sort(i, new Comparator<LocalIndexInfo>() {
-
 					@Override
 					public int compare(LocalIndexInfo lhs, LocalIndexInfo rhs) {
-						return cl.compare(lhs.getName(), rhs.getName());
+						String[] filenames = new String[2];
+						for (int i =0; i< 2;i++){
+							String mapDescr = getMapDescription(i == 0 ? lhs.getFileName() : rhs.getFileName());
+							String mapName = FileNameTranslationHelper.getFileName(ctx,
+									((OsmandApplication) getDownloadActivity().getApplication()).getResourceManager().getOsmandRegions(),
+									i == 0 ? lhs.getFileName() : rhs.getFileName());
+							if (mapDescr.length() > 0){
+								filenames[i] = mapDescr + " - " + mapName;
+							} else {
+								filenames[i] = mapName;
+							}
+						}
+						return cl.compare(filenames[0], filenames[1]);
 					}
 				});
 			}
