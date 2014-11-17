@@ -476,7 +476,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			for(LocalIndexInfo info : getDownloadActivity().getLocalIndexInfos()){
 				listAdapter.addLocalIndexInfo(info);
 			}
-			listAdapter.notifyDataSetChanged();
+			listAdapter.sortData();
 		}
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		//hide action bar from downloadindexfragment
