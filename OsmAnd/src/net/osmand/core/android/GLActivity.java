@@ -54,11 +54,11 @@ public class GLActivity extends Activity {
     private ResolvedMapStyle _mapStyle;
     private ObfsCollection _obfsCollection;
     private MapPresentationEnvironment _mapPresentationEnvironment;
-    private Primitiviser _primitiviser;
-    private BinaryMapDataProvider _binaryMapDataProvider;
-    private BinaryMapPrimitivesProvider _binaryMapPrimitivesProvider;
-    private BinaryMapStaticSymbolsProvider _binaryMapStaticSymbolsProvider;
-    private BinaryMapRasterLayerProvider _binaryMapRasterLayerProvider;
+    private MapPrimitiviser _mapPrimitiviser;
+    private ObfMapObjectsProvider _obfMapObjectsProvider;
+    private MapPrimitivesProvider _mapPrimitivesProvider;
+    private MapObjectsSymbolsProvider _mapObjectsSymbolsProvider;
+    private MapRasterLayerProvider _mapRasterLayerProvider;
 	private OnlineRasterMapLayerProvider _onlineMapRasterLayerProvider;
     private IMapRenderer _mapRenderer;
     private GpuWorkerThreadPrologue _gpuWorkerThreadPrologue;
@@ -194,19 +194,19 @@ public class GLActivity extends Activity {
                 _displayDensityFactor,
                 "en"); //TODO: here should be current locale
         //mapPresentationEnvironment->setSettings(configuration.styleSettings);
-        _primitiviser = new Primitiviser(
+        _mapPrimitiviser = new MapPrimitiviser(
                 _mapPresentationEnvironment);
-        _binaryMapDataProvider = new BinaryMapDataProvider(
+        _obfMapObjectsProvider = new ObfMapObjectsProvider(
                 _obfsCollection);
-        _binaryMapPrimitivesProvider = new BinaryMapPrimitivesProvider(
-                _binaryMapDataProvider,
-                _primitiviser,
+        _mapPrimitivesProvider = new MapPrimitivesProvider(
+                _obfMapObjectsProvider,
+                _mapPrimitiviser,
                 _rasterTileSize);
-        _binaryMapStaticSymbolsProvider = new BinaryMapStaticSymbolsProvider(
-                _binaryMapPrimitivesProvider,
+        _mapObjectsSymbolsProvider = new MapObjectsSymbolsProvider(
+                _mapPrimitivesProvider,
                 _rasterTileSize);
-        _binaryMapRasterLayerProvider = new BinaryMapRasterLayerProvider_Software(
-                _binaryMapPrimitivesProvider);
+        _mapRasterLayerProvider = new MapRasterLayerProvider_Software(
+                _mapPrimitivesProvider);
 
 		_onlineMapRasterLayerProvider = OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)");
 
@@ -222,14 +222,14 @@ public class GLActivity extends Activity {
         atlasRendererConfiguration.setReferenceTileSizeOnScreenInPixels(_referenceTileSize);
         _mapRenderer.setConfiguration(AtlasMapRendererConfiguration.Casts.downcastTo_MapRendererConfiguration(atlasRendererConfiguration));
 
-        _mapRenderer.addSymbolsProvider(_binaryMapStaticSymbolsProvider);
+        _mapRenderer.addSymbolsProvider(_mapObjectsSymbolsProvider);
         updateView();
         /*
         IMapRasterLayerProvider mapnik = OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)");
         if (mapnik == null)
             Log.e(TAG, "Failed to create mapnik");
         */
-        _mapRenderer.setMapLayerProvider(0, _binaryMapRasterLayerProvider);
+        _mapRenderer.setMapLayerProvider(0, _mapRasterLayerProvider);
 
         _glSurfaceView = (GLSurfaceView) findViewById(R.id.glSurfaceView);
         //TODO:_glSurfaceView.setPreserveEGLContextOnPause(true);
@@ -289,29 +289,29 @@ public class GLActivity extends Activity {
             _mapPresentationEnvironment = null;
         }
 
-        if (_primitiviser != null) {
-            _primitiviser.delete();
-            _primitiviser = null;
+        if (_mapPrimitiviser != null) {
+            _mapPrimitiviser.delete();
+            _mapPrimitiviser = null;
         }
 
-        if (_binaryMapDataProvider != null) {
-            _binaryMapDataProvider.delete();
-            _binaryMapDataProvider = null;
+        if (_obfMapObjectsProvider != null) {
+            _obfMapObjectsProvider.delete();
+            _obfMapObjectsProvider = null;
         }
 
-        if (_binaryMapPrimitivesProvider != null) {
-            _binaryMapPrimitivesProvider.delete();
-            _binaryMapPrimitivesProvider = null;
+        if (_mapPrimitivesProvider != null) {
+            _mapPrimitivesProvider.delete();
+            _mapPrimitivesProvider = null;
         }
 
-        if (_binaryMapStaticSymbolsProvider != null) {
-            _binaryMapStaticSymbolsProvider.delete();
-            _binaryMapStaticSymbolsProvider = null;
+        if (_mapObjectsSymbolsProvider != null) {
+            _mapObjectsSymbolsProvider.delete();
+            _mapObjectsSymbolsProvider = null;
         }
 
-        if (_binaryMapRasterLayerProvider != null) {
-            _binaryMapRasterLayerProvider.delete();
-            _binaryMapRasterLayerProvider = null;
+        if (_mapRasterLayerProvider != null) {
+            _mapRasterLayerProvider.delete();
+            _mapRasterLayerProvider = null;
         }
 
         if (_mapRenderer != null) {

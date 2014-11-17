@@ -12,10 +12,10 @@ import javax.microedition.khronos.egl.EGLSurface;
 
 import net.osmand.core.android.CoreResourcesFromAndroidAssetsCustom;
 import net.osmand.core.jni.AtlasMapRendererConfiguration;
-import net.osmand.core.jni.BinaryMapDataProvider;
-import net.osmand.core.jni.BinaryMapPrimitivesProvider;
-import net.osmand.core.jni.BinaryMapRasterLayerProvider_Software;
-import net.osmand.core.jni.BinaryMapStaticSymbolsProvider;
+import net.osmand.core.jni.ObfMapObjectsProvider;
+import net.osmand.core.jni.MapPrimitivesProvider;
+import net.osmand.core.jni.MapRasterLayerProvider_Software;
+import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.IMapRenderer;
 import net.osmand.core.jni.Logger;
 import net.osmand.core.jni.MapPresentationEnvironment;
@@ -26,7 +26,7 @@ import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.OnlineRasterMapLayerProvider;
 import net.osmand.core.jni.OnlineTileSources;
 import net.osmand.core.jni.OsmAndCore;
-import net.osmand.core.jni.Primitiviser;
+import net.osmand.core.jni.MapPrimitiviser;
 import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.plus.OsmandApplication;
@@ -158,15 +158,15 @@ public class NativeQtLibrary {
 			MapPresentationEnvironment presentation = notGc(new MapPresentationEnvironment(mapStyle, displayDensityFactor, "en")); 
 			//TODO: here should be current locale
 			//mapPresentationEnvironment->setSettings(configuration.styleSettings);
-			BinaryMapPrimitivesProvider binaryMapPrimitivesProvider = notGc(new BinaryMapPrimitivesProvider(
-					notGc(new BinaryMapDataProvider(obfsCollection)), 
-					notGc(new Primitiviser(presentation)), rasterTileSize));
-			BinaryMapRasterLayerProvider_Software binaryMapRasterLayerProvider = notGc(new BinaryMapRasterLayerProvider_Software(
-					binaryMapPrimitivesProvider));
-			mapRenderer.setMapLayerProvider(0, binaryMapRasterLayerProvider);
-			BinaryMapStaticSymbolsProvider binaryMapStaticSymbolsProvider = notGc(new BinaryMapStaticSymbolsProvider(
-					binaryMapPrimitivesProvider, rasterTileSize));
-			mapRenderer.addSymbolsProvider(binaryMapStaticSymbolsProvider);
+			MapPrimitivesProvider mapPrimitivesProvider = notGc(new MapPrimitivesProvider(
+					notGc(new ObfMapObjectsProvider(obfsCollection)), 
+					notGc(new MapPrimitiviser(presentation)), rasterTileSize));
+			MapRasterLayerProvider_Software mapRasterLayerProvider = notGc(new MapRasterLayerProvider_Software(
+					mapPrimitivesProvider));
+			mapRenderer.setMapLayerProvider(0, mapRasterLayerProvider);
+			MapObjectsSymbolsProvider mapObjectsSymbolsProvider = notGc(new MapObjectsSymbolsProvider(
+					mapPrimitivesProvider, rasterTileSize));
+			mapRenderer.addSymbolsProvider(mapObjectsSymbolsProvider);
 		} else {
 			OnlineRasterMapLayerProvider onlineMapRasterLayerProvider = notGc(OnlineTileSources.getBuiltIn()
 					.createProviderFor("Mapnik (OsmAnd)"));
