@@ -806,6 +806,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				LocalIndexInfo c = findCategory(i, i.isBackupedData());
 				if(c != null){
 					data.get(c).remove(i);
+					if (data.get(c).size() == 0){
+						data.remove(c);
+						category.remove(c);
+					}
 				}
 			}
 			listAdapter.notifyDataSetChanged();
