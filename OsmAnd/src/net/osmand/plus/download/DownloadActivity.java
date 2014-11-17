@@ -100,7 +100,6 @@ public class DownloadActivity extends SherlockFragmentActivity {
 
 		tabHost.setCurrentTab(0);
 
-		
 		settings = ((OsmandApplication)getApplication()).getSettings();
 
 		indeterminateProgressBar = (ProgressBar) findViewById(R.id.IndeterminateProgressBar);
@@ -448,7 +447,11 @@ public class DownloadActivity extends SherlockFragmentActivity {
 	public void downloadedIndexes(){
 		for(WeakReference<Fragment> ref : fragList) {
 			Fragment f = ref.get();
-			if(f instanceof DownloadIndexFragment) {
+			if(f instanceof LocalIndexesFragment){
+				if(!f.isDetached()){
+					((LocalIndexesFragment) f).reloadData();
+				}
+			} else if(f instanceof DownloadIndexFragment) {
 				if(!f.isDetached()) {
 					DownloadIndexAdapter adapter = ((DownloadIndexAdapter)((DownloadIndexFragment) f).getExpandableListAdapter());
 					if (adapter != null) {
