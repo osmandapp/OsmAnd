@@ -41,6 +41,7 @@ import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -312,6 +313,9 @@ public class EditingPOIActivity implements DialogProvider {
 	private Dialog createPOIDialog(final int dialogID, Bundle args) {
 		final Dialog dlg = new Dialog(ctx);
 		dlg.setContentView(R.layout.editing_poi);
+		
+		dlg.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);;
+		
 		nameText = ((EditText)dlg.findViewById(R.id.Name));
 		openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
 		typeText = ((AutoCompleteTextView)dlg.findViewById(R.id.Type));
