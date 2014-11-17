@@ -114,8 +114,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	public void onResume() {
 		super.onResume();
 		if (asyncLoader == null || asyncLoader.getResult() == null) {
-			asyncLoader = new LoadLocalIndexTask();
-			asyncLoader.execute(getActivity());
+			reloadData();
 		}
 
 		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
@@ -131,8 +130,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			}
 		});
 	}
-	
-	
+
+	public void reloadData() {
+		asyncLoader = new LoadLocalIndexTask();
+		asyncLoader.execute(getActivity());
+	}
+
+
 	private void showContextMenu(final LocalIndexInfo info) {
 		Builder builder = new AlertDialog.Builder(getActivity());
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(getActivity());
@@ -241,6 +245,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPreExecute() {
 			getDownloadActivity().setSupportProgressBarIndeterminateVisibility(true);
+			listAdapter.clear();
 		}
 
 		@Override
