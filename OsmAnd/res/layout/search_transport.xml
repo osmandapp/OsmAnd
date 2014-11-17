@@ -1,28 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- This file is at /res/layout/list.xml -->
+<?xml version="1.0" encoding="utf-8"?><!-- This file is at /res/layout/list.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RootLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <ProgressBar
             android:id="@+id/ProgressBar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </ProgressBar>
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/SearchTransportLevelButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
-        </Button>
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/SearchAreaText"
@@ -35,7 +32,7 @@
         android:id="@+id/RelativeLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_gravity="center" >
+        android:layout_gravity="center">
 
         <ListView
             android:id="@android:id/list"
@@ -43,16 +40,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_below="@+id/listView"
-            style="@style/OsmandListView">
-        </ListView>
+            style="@style/OsmandListView" />
 
         <ListView
             android:id="@+id/listView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true" 
-            style="@style/OsmandListView" >
-        </ListView>
+            android:layout_alignParentTop="true"
+            style="@style/OsmandListView" />
     </RelativeLayout>
 
 </LinearLayout>

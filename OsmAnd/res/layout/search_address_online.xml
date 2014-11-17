@@ -2,21 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/LinearLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp" >
-        
+        android:layout_marginTop="5dp">
+
         <ProgressBar
             android:id="@+id/ProgressBar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:visibility="invisible">
-        </ProgressBar>
+            android:layout_height="wrap_content"
+            android:visibility="invisible"></ProgressBar>
 
         <EditText
             android:id="@+id/SearchText"
@@ -24,16 +23,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/hint_search_online"
-            android:text="" >
-        </EditText>
+            android:text=""></EditText>
 
         <Button
             android:id="@+id/SearchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
-            android:text="@string/search_button" >
-        </Button>
+            android:text="@string/search_button"></Button>
     </LinearLayout>
 
     <ListView
@@ -41,7 +38,6 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        style="@style/OsmandListView">
-    </ListView>
+        style="@style/OsmandListView"></ListView>
 
 </LinearLayout>

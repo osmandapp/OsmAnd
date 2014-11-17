@@ -6,12 +6,12 @@
     android:layout_marginLeft="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginRight="5dp"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/osmo_status"
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="3dp"
-        android:layout_marginTop="3dp" >
+        android:layout_marginTop="3dp">
 
         <TextView
             android:id="@+id/osmo_user_name_text_view"
@@ -66,7 +66,7 @@
             android:minWidth="0dp"
             android:text="\?"
             android:textAppearance="?android:attr/textAppearance" />
-        
+
     </RelativeLayout>
 
     <CheckBox

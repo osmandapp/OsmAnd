@@ -856,7 +856,7 @@ public class MapActivity extends AccessibleActivity implements
 		
 		if (mDevicePolicyManager != null && mDeviceAdmin != null) {
 			final Integer screenPowerSave = settings.WAKE_ON_VOICE_INT.get();
-			if (screenPowerSave > 0) {
+			if (screenPowerSave > 0 && settings.MAP_ACTIVITY_ENABLED.get()) {
 				if (mDevicePolicyManager.isAdminActive(mDeviceAdmin)) {
 					try {
 						mDevicePolicyManager.lockNow();

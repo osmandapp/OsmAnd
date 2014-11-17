@@ -2,132 +2,120 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res/net.osmand.plus"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <net.osmand.view.ExpandableLinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            custom:maxVisibleWidth="800dp" >
+            custom:maxVisibleWidth="800dp">
 
             <TableLayout
                 android:id="@+id/TableLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:stretchColumns="1" >
+                android:stretchColumns="1">
 
                 <TableRow
                     android:id="@+id/TableRow"
-                    android:layout_marginLeft="5dp" >
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:id="@+id/TextView"
-                        android:text="@string/search_address_region" >
-                    </TextView>
+                        android:text="@string/search_address_region" />
 
                     <Button
                         android:id="@+id/CountryButton"
-                        android:text="@string/ChooseCountry" 
-                        android:scrollHorizontally="true" 
-    					android:lines="1"
-    					android:ellipsize="end"
-    					android:layout_width="150dp"
-    					/>
+                        android:layout_width="150dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:scrollHorizontally="true"
+                        android:text="@string/ChooseCountry" />
 
                     <ImageButton
                         android:id="@+id/ResetCountry"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
                         android:background="?attr/reset_image"
-                        android:contentDescription="@string/default_buttons_reset" >
-                    </ImageButton>
+                        android:contentDescription="@string/default_buttons_reset" />
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/TableRow"
-                    android:layout_marginLeft="5dp" >
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:id="@+id/TextView"
-                        android:text="@string/search_address_city" >
-                    </TextView>
+                        android:text="@string/search_address_city" />
 
                     <Button
                         android:id="@+id/CityButton"
-                        android:text="@string/choose_city"
-                        android:scrollHorizontally="true" 
-    					android:lines="1"
-    					android:ellipsize="end" 
-    					android:layout_width="150dp"
-                        />
+                        android:layout_width="150dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:scrollHorizontally="true"
+                        android:text="@string/choose_city" />
 
                     <ImageButton
                         android:id="@+id/ResetCity"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
                         android:background="?attr/reset_image"
-                        android:contentDescription="@string/default_buttons_reset" >
-                    </ImageButton>
+                        android:contentDescription="@string/default_buttons_reset" />
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/TableRow"
-                    android:layout_marginLeft="5dp" >
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:id="@+id/TextView"
-                        android:text="@string/search_address_street" >
-                    </TextView>
+                        android:text="@string/search_address_street" />
 
                     <Button
                         android:id="@+id/StreetButton"
-                        android:text="@string/choose_street"
-                        android:scrollHorizontally="true" 
-    					android:lines="1"
-    					android:ellipsize="end"
-    					android:layout_width="150dp"
-                         />
+                        android:layout_width="150dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:scrollHorizontally="true"
+                        android:text="@string/choose_street" />
 
                     <ImageButton
                         android:id="@+id/ResetStreet"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
                         android:background="?attr/reset_image"
-                        android:contentDescription="@string/default_buttons_reset" >
-                    </ImageButton>
+                        android:contentDescription="@string/default_buttons_reset" />
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/TableRow"
-                    android:layout_marginLeft="5dp" >
+                    android:layout_marginLeft="5dp">
 
                     <TextView
                         android:id="@+id/BuildingText"
-                        android:text="@string/search_address_building" >
-                    </TextView>
+                        android:text="@string/search_address_building" />
 
                     <Button
                         android:id="@+id/BuildingButton"
-                        android:text="@string/choose_building"
-                        android:scrollHorizontally="true" 
-    					android:lines="1"
-    					android:ellipsize="end"
-    					android:layout_width="150dp"
-    					 />
+                        android:layout_width="150dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:scrollHorizontally="true"
+                        android:text="@string/choose_building" />
 
                     <ImageButton
                         android:id="@+id/ResetBuilding"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
                         android:background="?attr/reset_image"
-                        android:contentDescription="@string/default_buttons_reset" >
-                    </ImageButton>
+                        android:contentDescription="@string/default_buttons_reset" />
                 </TableRow>
             </TableLayout>
 
@@ -137,22 +125,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_span="3"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/RadioBuilding"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/search_address_building_option" >
-                </RadioButton>
+                    android:text="@string/search_address_building_option" />
 
                 <RadioButton
                     android:id="@+id/RadioIntersStreet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="@string/search_address_street_option" >
-                </RadioButton>
+                    android:text="@string/search_address_street_option" />
             </RadioGroup>
         </net.osmand.view.ExpandableLinearLayout>
     </LinearLayout>
