@@ -388,9 +388,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		protected void onPostExecute(String result) {
 			getDownloadActivity().setProgressBarIndeterminateVisibility(false);
 			AccessibleToast.makeText(getDownloadActivity(), result, Toast.LENGTH_LONG).show();
-			listAdapter.clear();
-			reloadIndexes();
-			
+			if (operation == RESTORE_OPERATION){
+				listAdapter.clear();
+				reloadIndexes();
+			}
 		}
 	}
 	
