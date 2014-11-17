@@ -96,7 +96,7 @@
 	<string name="day_night_info_description">Ανατολή : %1$s \nΔύση : %2$s</string>
 	<string name="day_night_info">Πληρ. Ημέρας/Νύχτας</string>
 	<string name="map_widget_day_night">Χάρτης ημέρας/νύχτας</string>
-	<string name="map_widget_vector_attributes">Χαρακτηριστικά απεικόνισης:</string>
+	<string name="map_widget_vector_attributes">Χαρακτηριστικά απεικόνισης</string>
 	<string name="map_widget_renderer">Στυλ χάρτη</string>
 	
 	
@@ -417,18 +417,16 @@
 		\n\t* \'Προς την κατεύθυνση κίνησης\': Ο χάρτης συνεχώς θα συγχρονίζεται με την κατεύθυνσή σας
 		\n\t* \'Πυξίδα\': Ο χάρτης συνεχώς θα συγχρονίζεται με την κατεύθυνση της πυξίδας
 	</string>
-	<string name="binary_map_download_success">Η λήψη ήταν επιτυχής.
-		\n\t\n\tΓια χρήση ενεργοποιήστε \'Μενού\' → \'Επίπεδα χάρτη\' → \'Πηγή χάρτη…\' → \'Offline διανυσματικοί χάρτες\'.
-	</string>
+	<string name="binary_map_download_success">"Η λήψη ήταν επιτυχής.
+\n\t\n\tΓια χρήση ενεργοποιήστε \'Μενού\' → \'Διαμόρφωση χάρτη\' → \'Πηγή χάρτη…\' → \'Offline διανυσματικοί χάρτες\'. "</string>
 	<string name="tip_day_night_mode">Λειτουργία ημέρας/νύχτας</string>
-	<string name="tip_day_night_mode_t_v2">Η εμφάνιση μπορεί στους διανυσματικούς χάρτες να αλλάξει μεταξύ ημέρας (πιο φωτεινό) και νύχτας (πιο σκοτεινό). Τα νυχτερινά χρώματα είναι πιο βολικά για νυχτερινή οδήγηση.
-		\n\nΜπορείτε να ορίσετε μια πολιτική για την εναλλαγή ημέρα/νύχτα στο \'Μενού\' → \'Ρύθμιση οθόνης …\' →\'Χάρτης ημέρας/νύχτας\'.
-		\n\nΟι επιλογές είναι:
-		\n\t* \'Ανατολή/Δύση\': αυτόματος τρόπος, ελεγχόμενο από τη θέση του ήλιου (προκαθορισμένο)
-		\n\t* \'Ημέρα\': πάντα χρήση της λειτουργίας ημέρας
-		\n\t* \'Νύχτα\': πάντα χρήση της λειτουργίας νύχτας
-		\n\t* \'Αισθητήρας φωτός\': η εμφάνιση του χάρτη ελέγχεται από τον αισθητήρα φωτός της συσκευής σας (μόνο αν υπάρχει)
-	</string>	
+	<string name="tip_day_night_mode_t_v2">"Η εμφάνιση μπορεί στους διανυσματικούς χάρτες να αλλάξει μεταξύ ημέρας (πιο φωτεινό) και νύχτας (πιο σκοτεινό). Τα νυχτερινά χρώματα είναι πιο βολικά για νυχτερινή οδήγηση.
+\n\nΜπορείτε να ορίσετε μια πολιτική για την εναλλαγή ημέρα/νύχτα στο \'Μενού\' → \'Διαμόρφωση χάρτη\' →\'Χάρτης ημέρας/νύχτας\'.
+\n\nΟι επιλογές είναι:
+\n\t* \'Ανατολή/Δύση\': αυτόματος τρόπος, ελεγχόμενο από τη θέση του ήλιου (προκαθορισμένο)
+\n\t* \'Ημέρα\': πάντα χρήση της λειτουργίας ημέρας
+\n\t* \'Νύχτα\': πάντα χρήση της λειτουργίας νύχτας
+\n\t* \'Αισθητήρας φωτός\': η εμφάνιση του χάρτη ελέγχεται από τον αισθητήρα φωτός της συσκευής σας (μόνο αν υπάρχει) "</string>	
 	<string name="tip_osm_improve">Βελτίωση Δεδομένων OSM</string>
 	<string name="tip_osm_improve_t">Ο OsmAnd χρησιμοποιεί χάρτες βασισμένους στα δεδομένα του Openstreetmap.org (OSM) και μπορεί να χρησιμοποιηθεί για τη βελτίωση της ποιότητας των δεδομένων OSM. Μπορείτε εύκολα να δημιουργήσετε και να αποστείλετε νέα Σημ. Ενδ. ή αναφορές σφαλμάτων με λίγα μόνο κλικ.
 		\n\nΓια το σκοπό αυτό χρειάζεται να ενεργοποιήσετε το πρόσθετο \'Επεξεργασία OSM\' από το \'Ρυθμίσεις\'→\'Πρόσθετα\', και μετά να εισάγετε τις πληροφορίες σύνδεσης για το OSM στο \'Ρυθμίσεις\'→\'Επεξεργασία OSM\'.
@@ -585,7 +583,7 @@
 	<string name="gpx_option_reverse_route">Αντιστροφή κατεύθυνσης GPX</string>
 	<string name="gpx_option_destination_point">Χρήση τρέχοντος προορισμού</string>
 	<string name="gpx_option_from_start_point">Πέρασμα κατά μήκος ολόκληρου του ίχνους</string>
-	<string name="switch_to_vector_map_to_see">Υπάρχουν διαθέσιμοι offline διανυσματικοί χάρτες για αυτή την τοποθεσία.\n\t\n\tΓια χρήση ενεργοποιήστε \'Μενού\'→  \'Επίπεδα χάρτη\' → \'Πηγή χάρτη…\' → \'Offline διανυσματικοί χάρτες\'.</string>
+	<string name="switch_to_vector_map_to_see">Υπάρχουν διαθέσιμοι offline διανυσματικοί χάρτες για αυτή την τοποθεσία.\n\t\n\tΓια χρήση ενεργοποιήστε \'Μενού\'→ \'Διαμόρφωση χάρτη\' → \'Πηγή χάρτη…\' → \'Offline διανυσματικοί χάρτες\'.</string>
 	<string name="choose_audio_stream">Έξοδος φωνητικής καθοδήγησης</string>
 	<string name="choose_audio_stream_descr">Επιλέξτε το κανάλι εκτέλεσης της φωνητικής καθοδήγησης (εξαρτώμενο από το σύστημα)</string>
 	<string name="voice_stream_voice_call">Ήχος κλήσης φωνής</string>
@@ -614,11 +612,10 @@
 		\n\nΜετά επιλέξτε τον τρόπο διαμοιρασμού της τοποθεσίας σας. Οι επιλογές είναι : E-Mail, SMS(κείμενο), ή απλά αντιγράψτε τις συντεταγμένες της τοποθεσίας στο πρόχειρο.
 	</string>
 	<string name="tip_favorites">Αγαπημένα Σημεία</string>
-	<string name="tip_favorites_t">Τα σημεία που χρησιμοποιούνται συχνά μπορούν να αποθηκευτούν ως Αγαπημένα, ως ακολούθως.
-		\n\nΣτο \'Χρήση τοποθεσίας\'του μενού περιβάλλοντος χάρτη για οποιοδήποτε σημείο, επιλέξτε \'Προσθήκη στα αγαπημένα\' και δώστε του κάποιο όνομα.
-		\n\nΜετά την αποθήκευση ενός Αγαπημένου, είναι προσβάσιμο μέσω του \'Μενού\' → \'Τα Μέρη μου\'. Πατώντας σε κάποια καταχώρηση της λίστας \'Αγαπημένα\' σας παρέχει επιλογές να το ορίσετε ως προορισμό, να το επεξεργαστείτε ή να το διαγράψετε.
-		\n\nΓια να εμφανιστούν όλα τα Αγαπημένα κατευθείαν στο χάρτη, στην οθόνη χάρτη ενεργοποιήστε το επίπεδο \'Αγαπημένα\' στο \'Μενού\' → \'Επίπεδα χάρτη\'.
-	</string>
+	<string name="tip_favorites_t">"Τα σημεία που χρησιμοποιούνται συχνά μπορούν να αποθηκευτούν ως Αγαπημένα, ως ακολούθως.
+\n\nΣτο \'Χρήση τοποθεσίας\'του μενού περιβάλλοντος χάρτη για οποιοδήποτε σημείο, επιλέξτε \'Προσθήκη στα αγαπημένα\' και δώστε του κάποιο όνομα.
+\n\nΜετά την αποθήκευση ενός Αγαπημένου, είναι προσβάσιμο μέσω του \'Μενού\' → \'Τα Μέρη μου\'. Πατώντας σε κάποια καταχώρηση της λίστας \'Αγαπημένα\' σας παρέχει επιλογές να το ορίσετε ως προορισμό, να το επεξεργαστείτε ή να το διαγράψετε.
+\n\nΓια να εμφανιστούν όλα τα Αγαπημένα κατευθείαν στο χάρτη, στην οθόνη χάρτη ενεργοποιήστε το επίπεδο \'Αγαπημένα\' στο \'Μενού\' → \'Διαμόρφωση χάρτη\'. "</string>
 	<string name="error_doing_search">Προέκυψε σφάλμα κατά την offline αναζήτηση</string>
 	<string name="search_offline_geo_error">Δεν ήταν δυνατή η ανάλυση της γεωγρ πρόθεσης \'%s\'</string>
 	<string name="search_osm_offline">Αναζήτηση γεωγραφικής τοποθεσίας</string>
@@ -626,10 +623,9 @@
 	<string name="preferred_locale_descr">Επιλέξτε γλώσσα εμφάνισης</string>
 	<string name="preferred_locale">Γλώσσα εμφάνισης</string>
 	<string name="tip_map_switch">Επιλογή Πηγής Χάρτη</string>
-	<string name="tip_map_switch_t_v2">Η πηγή χάρτη και οι στρώσεις χάρτη που εμφανίζονται αλλάζουν μέσω του \'Μενού\' → \'Επίπεδα χάρτη\'.
-		\n\nΚάτω από το \'Πηγή χάρτη…\' μπορείτε να επιλέξετε τη χρήση των εγκατεστημένων offline διανυσματικών χαρτών, προκαθορισμένων (online) πηγών πλακιδίων (ενεργοποιήστε το πρόσθετο \'Online χάρτες\' για αυτό), ή χάρτες που κατασκευάστηκαν χειροκίνητα χρησιμοποιώντας π.χ. το OsmAndMapCreator σε κάποιο PC.
-		\n\nΟ OsmAnd επίσης υποστηρίζει προσαρμόσιμες πηγές.
-	</string>
+	<string name="tip_map_switch_t_v2">"Η πηγή χάρτη και οι στρώσεις χάρτη που εμφανίζονται αλλάζουν μέσω του \'Μενού\' → \'Διαμόρφωση χάρτη\'.
+\n\nΚάτω από το \'Πηγή χάρτη…\' μπορείτε να επιλέξετε τη χρήση των εγκατεστημένων offline διανυσματικών χαρτών, προκαθορισμένων (online) πηγών πλακιδίων (ενεργοποιήστε το πρόσθετο \'Online χάρτες\' για αυτό), ή χάρτες που κατασκευάστηκαν χειροκίνητα χρησιμοποιώντας π.χ. το OsmAndMapCreator σε κάποιο PC.
+\n\nΟ OsmAnd επίσης υποστηρίζει προσαρμόσιμες πηγές. "</string>
 	<string name="tip_app_mode">Χρήση Προφίλ</string>
 	<string name="tip_app_mode_t_v2">Ο OsmAnd υποστηρίζει διαφορετικά (προσαρμόσιμα) προφίλ εφαρμογής για διαφορετικές περιπτώσεις χρήσης.
 		\n\nΜπορείτε να αλλάξετε τα προφίλ μέσω του κουμπιού προφίλ στην κάτω αριστερή γωνία της οθόνης χάρτη (εικονίδιο αυτοκίνητο, ποδήλατο, ή πεζός), ή κατά τη δημιουργία κάποιου δρομολογίου.
@@ -1377,7 +1373,7 @@
 	<string name="driving_region">Περιοχή Οδήγησης</string>
 	<string name="av_photo_play_sound_descr">Επιλέξτε εάν θα αναπαράγεται ήχος κατά τη λήψη φωτογραφίας</string>
 <string name="app_modes_choose">Προφίλ εφαρμογής</string>
-	<string name="map_widget_map_rendering">Επανασχεδιασμός χάρτη:</string>
+	<string name="map_widget_map_rendering">Σχεδιασμός χάρτη</string>
     <string name="app_mode_hiking">Πεζοπορία</string>
     <string name="app_mode_motorcycle">Μοτοσυκλέτα</string>
     <string name="app_mode_boat">Πλοίο</string>
@@ -1611,7 +1607,7 @@
     <string name="rendering_attr_showAccess_name">Εμφάνιση περιορισμών πρόσβασης</string>
     <string name="rendering_attr_showSurfaceGrade_name">Εμφάνιση ποιότητας των δρόμων</string>
     <string name="osmo_auth_error_short">Αποτυχία εξουσιοδότησης</string>
-    <string name="rendering_attr_coloredBuildings_name">Έγχρωμα κτίρια</string>
+    <string name="rendering_attr_coloredBuildings_name">Έγχρωμα κτίρια κατά τύπο</string>
     <string name="osmo_invite">Προσκαλέστε…</string>
     <string name="osmo_leave_confirmation_msg">Θέλετε να φύγετε από την ομάδα %1$s?</string>
     <string name="continue_navigation">Συνέχιση της Πλοήγησης</string>
@@ -1676,4 +1672,23 @@
     <string name="osmo_device_not_found">Η συσκευή δεν βρέθηκε</string>
     <string name="anonymous_user">Ανώνυμος χρήστης</string>
     <string name="logged_as">Συνδεδεμένος ως %1$s</string>
+	<string name="wake_on_voice_never">Ποτέ</string>
+    <string name="select_impassable_road">Επιλογή στον χάρτη</string>
+    <string name="impassable_road">Αποφυγή δρόμων…</string>
+    <string name="rendering_category_hide">Απόκρυψη</string>
+    <string name="rendering_category_routes">Δρομολόγια</string>
+    <string name="rendering_category_details">Λεπτομέρειες</string>
+    <string name="rendering_category_others">Άλλα χαρακτηριστικά χάρτη</string>
+    <string name="map_widget_right">Δεξιός πίνακας</string>
+	<string name="map_widget_left">Αριστερός πίνακας</string>
+    <string name="layers_category_show">Εμφάνιση</string>
+	<string name="configure_map">Διαμόρφωση χάρτη</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Δρομολόγια τραμ και τρένων</string>
+	<string name="rendering_attr_trainLightrailRoutes_name">Δρομολόγια τρένου</string>
+    <string name="rendering_attr_tramRoutes_name">Δρομολόγια τραμ</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Δρομολόγια τρόλεϋ</string>
+    <string name="rendering_attr_busRoutes_name">Δρομολόγια λεωφορείων</string>
+    <string name="rendering_category_transport">Μεταφορές</string>
+    <string name="map_widget_top">Γραμμή κατάστασης</string>
+	<string name="speed_limit_exceed">Ανοχή ορίου ταχύτητας</string>
 	</resources>

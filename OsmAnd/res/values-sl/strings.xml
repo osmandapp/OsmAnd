@@ -187,7 +187,7 @@
 	<string name="starting_point_too_far">Izhodišče predaleč od najbližje ceste.</string>
 	<string name="rendering_attr_noPolygons_description">Naredite vse ploskovne entitete na zemljevidu prosojne</string>
 	<string name="rendering_attr_noPolygons_name">Brez ploskev</string>
-	<string name="rendering_attr_appMode_name">Način izrisa</string>
+	<string name="rendering_attr_appMode_name">Način upodabljanja</string>
 	<string name="rendering_attr_appMode_description">Optimiziranje karte za</string>
 	<string name="rendering_attr_contourLines_name">Prikaži izohipse</string>
 	<string name="zoomOut">Oddalji</string>
@@ -618,7 +618,7 @@
 	<string name="osm_editing_plugin_description">Pokaži nastavitve, ki so zahtevane za povratne informacije OSM kot so zbiranje/spreminjanje predmetov POI OSM, odpiranje/komentiranje hroščev OSM in prispevanje posnetih sledi GPX (zahteva poverila OSM).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorski zemljevidi se bodo verjetno prikazali hitreje. Morda na nekaterih napravah ne bodo dobro delovali.</string>
 	<string name="debugging_and_development">Razvoj OsmAnd</string>
-	<string name="native_rendering">Nativno izrisovanje</string>
+	<string name="native_rendering">Izvirno upodabljanje</string>
 	<string name="switch_to_raster_map_to_see">Za to mesto krajevni zemljevidi niso prisotni. Prejmete jih lahko v nastavitvah (Upravljanje datotek zemljevidov) ali preklopite na spletne zemljevide (za to morate omogočiti vtičnik za spletne zemljevide).</string>
 	<string name="gpx_tags_txt">Oznake</string>
 	<string name="gpx_description_txt">Opis</string>
@@ -719,9 +719,8 @@
 	<string name="index_settings">Upravljanje datotek zemljevidov</string>
 	<string name="osmand_service">Način spanja</string>
 	<string name="osmand_service_descr">Uporabi za izvajanje OsmAnd, ko je zaslon izklopljen</string>
-	<string name="binary_map_download_success">Prejem je uspešen.
-		\n\t\n\tZa uporabo omogočite \'Meni\' → \'Sloji zemljevida\' → \'Vir zemljevidov …\' → Nepovezani vektorski zemljevidi\'.
-	</string>
+	<string name="binary_map_download_success">"Prejem je uspešen.
+\n\t\n\tZa uporabo omogočite \'Meni\' → \'Nastavitve zemljevida\' → \'Vir zemljevidov …\' → \'Nepovezani vektorski zemljevidi\'. "</string>
 	<string name="tip_day_night_mode">Način dneva/noči</string>
 	<string name="daynight_mode_auto">Sončni vzhod / zahod</string>
 	<string name="daynight_mode_day">Dnevni</string>
@@ -729,14 +728,13 @@
 	<string name="daynight_mode_sensor">Svetlobno tipalo</string>
 	<string name="daynight">Dnevni / nočni način</string>
 	<string name="daynight_descr">Izberi način preklopa za Dnevni / Nočni način</string>
-	<string name="tip_day_night_mode_t_v2">Izgled zemljevida se lahko za vektorske karte menja med dnevnim (svetlejšim) in nočnim (temnejšim) videzom. Nočne barve so varnejše za nočno vožnjo.
-		\n\nPreklop med dnevnim in nočnim načinom lahko nastavljate v \'Meni\' → \'Nastavitev zaslona …\' → \'zemljevid dan/noč\'.
-		\n\nMožnosti so:
-		\n\t\* \'Sončni vzhod/zahod\': avtomatski način glede na položaj sonca (privzeto)
-		\n\t\* \'Dnevni\': vedno se uporablja dnevni način
-		\n\t\* \'Nočni\': vedno se uporablja nočni način
-		\n\t\* \'Svetlobni senzor\': izgled zemljevida nadzoruje svetlobno tipalo naprave (če je na voljo)
-	</string>	
+	<string name="tip_day_night_mode_t_v2">"Izgled zemljevida se lahko za vektorske karte menja med dnevnim (svetlejšim) in nočnim (temnejšim) videzom. Nočne barve so varnejše za nočno vožnjo.
+\n\nPreklop med dnevnim in nočnim načinom lahko nastavljate v \'Meni\' → \'Nastavitve zemljevida\' → \'Zemljevid dan/noč\'.
+\n\nMožnosti so:
+\n\t* \'Sončni vzhod/zahod\': avtomatski način glede na položaj sonca (privzeto)
+\n\t* \'Dnevni\': vedno se uporablja dnevni način
+\n\t* \'Nočni\': vedno se uporablja nočni način
+\n\t* \'Svetlobni senzor\': izgled zemljevida nadzoruje svetlobno tipalo naprave (če je na voljo) "</string>	
 	<string name="download_files_not_enough_space">Ni dovolj razpoložljivega prostora za prejem %1$s MB(prosto: %2$s).</string>
 	<string name="download_files_question_space">Razpoložljiv prostor je sedaj {2}MB! Ali želite prejeti {0} datotek(o) ({1}MB)?</string>
 	
@@ -784,8 +782,8 @@
 	<string name="local_index_installed">Izdaja</string>
 	<string name="map_text_size_descr">Izberite velikost besedila za imena na zemljevidu</string>
 	<string name="map_text_size">Velikost pisave zemljevida</string>
-	<string name="trace_rendering">Podatki razhroščevanja izrisovanja</string>
-	<string name="trace_rendering_descr">Prikaži zmogljivost izrisovanja</string>
+	<string name="trace_rendering">Podatki razhroščevanja upodabljanja</string>
+	<string name="trace_rendering_descr">Prikaži zmogljivost upodabljanja</string>
 	<string name="voice_not_use">Ne uporabi</string>
 	<string name="voice_not_specified">Brez</string>
 	<string name="internet_connection_required_for_online_route">Izbrana je storitev spletne navigacije, vendar internetna povezava ni na voljo.</string>
@@ -793,7 +791,7 @@
 	<string name="gpx_option_reverse_route">Obratna smer GPX</string>
 	<string name="gpx_option_destination_point">Uporabi trenuten cilj</string>
 	<string name="gpx_option_from_start_point">Podaj celotno sled</string>
-	<string name="switch_to_vector_map_to_see">Za to mesto so na voljo vektorski zemljevidi za uporabo brez povezave.\n\t\n\tZa njihovo uporabi omogočite \'Meni\' → \'Sloji zemljevida\' → \'Vir zemljevida …\' → \'Vektorski zemljevidi za uporabo brez povezave\'.</string>
+	<string name="switch_to_vector_map_to_see">Za to mesto so na voljo vektorski zemljevidi za uporabo brez povezave.\n\t\n\tZa njihovo uporabi omogočite \'Meni\' → \'Nastavitve zemljevida\' → \'Vir zemljevida …\' → \'Vektorski zemljevidi za uporabo brez povezave\'.</string>
 	<string name="voice_stream_notification">Obvestilni zvok</string>
 	<string name="voice_stream_music">Zvok predstavnosti/glasbe</string>
 	<string name="warning_tile_layer_not_downloadable">Program ne more prejeti plasti zemljevida %1$s, poskusite jo ponovno namestiti.</string>
@@ -828,7 +826,7 @@
 	<string name="tip_favorites_t">"Pogosto uporabljene točke si lahko shranite kot Priljubljene na naslednji način:
 \n\nPojdite v \'Uporabi lokacijo\' kontekstni meni katerikoli točke zemljevida in izberite \'Dodaj med priljubljene\' in nato vnesite ime.
 \n\nPo shranjevanju priljubljene točke je ta dostopna preko \'Meni\' → \'Moji kraji\'. Dolg pritisk na priljubljeni točki v meniju \'Priljubljene\' vam nudi možnost, da jo določite kot cilj, uredite ali izbrišete.
-\n\nZa prikaz vseh priljubljenih točk direktno na zemljevidu, omogočite sloj \'Priljubljene\' v \'Meni\' → \'Sloji zemljevida\'. "</string>
+\n\nZa prikaz vseh priljubljenih točk direktno na zemljevidu, omogočite sloj \'Priljubljene\' v \'Meni\' → \'Nastavitve zemljevida\'. "</string>
 	<string name="transport">Prevoz</string>
 	<string name="additional_settings">Dodatne nastavitve</string>
 	<string name="settings">Nastavitve</string>
@@ -870,13 +868,13 @@
 	<string name="context_menu_item_download_map">Prenos zemljevida</string>
 	<string name="select_max_zoom_preload_area">Izberite največjo povečavo za predhodno nalaganje</string>
 	<string name="maps_could_not_be_downloaded">Tega zemljevida ni bilo mogoče prejeti</string>
-	<string name="continuous_rendering">Stalno izrisovanje</string>
-	<string name="continuous_rendering_descr">Prikaži stalno izrisovanje namesto slike-na-enkrat</string>
+	<string name="continuous_rendering">Stalno upodabljanje</string>
+	<string name="continuous_rendering_descr">Prikaži stalno upodabljanje namesto slike-na-enkrat</string>
 	<string name="rendering_exception">Med izrisovanjem izbranega področja je prišlo do napake</string>
 	<string name="renderer_load_sucess">Izrisovalnik je bil uspešno naložen</string>
 	<string name="renderer_load_exception">Prišlo je do izjeme: izrisovalnik ni bil naložen</string>
 	<string name="renderers">Vektorski izrisovalnik</string>
-	<string name="renderers_descr">Izberite videz izrisovalnika</string>
+	<string name="renderers_descr">Izberite videz upodabljanja</string>
 	<string name="poi_context_menu_website">Pokaži spletišče POI</string>
 	<string name="poi_context_menu_call">Pokaži telefon POI</string>
 	<string name="download_type_to_filter">tipkajte za filtriranje</string>
@@ -992,10 +990,9 @@ Pomembnejše lastnosti:
 	<string name="first_time_download">Prenos območij</string>
 	<string name="search_poi_location">Iskanje znaka …</string>
 	<string name="search_near_map">Iskanje v bližini zadnje lokacije</string>
-	<string name="tip_map_switch_t_v2">Vir zemljevida in prikazane plasti lahko spreminjate preko \'Meni\' → \'Sloji zemljevida\'.
-		\n\nPod \'Vir zemljevida …\' lahko izberete med uporabo prednaloženih vektorskih zemljevidov za delo brez povezave, vnaprej določenih spletnih zemljevidov (za to aktivirajte vtičnik \'Spletni zemljevidi\' v \'Nastavitve\' → \'Upravljalnik vtičnikov\'), ali ročno ustvarjenih zemljevidov z uporabo npr. OsmAndMapCreator-ja na računalniku.
-		\n\nOsmAnd podpira tudi vire po meri.
-	</string>
+	<string name="tip_map_switch_t_v2">"Vir zemljevida in prikazane plasti lahko spreminjate preko \'Meni\' → \'Nastavitve zemljevida\'.
+\n\nPod \'Vir zemljevida …\' lahko izberete med uporabo prednaloženih vektorskih zemljevidov za delo brez povezave, vnaprej določenih spletnih zemljevidov (za to aktivirajte vtičnik \'Spletni zemljevidi\' v \'Nastavitve\' → \'Upravljalnik vtičnikov\'), ali ročno ustvarjenih zemljevidov z uporabo npr. OsmAndMapCreator-ja na računalniku.
+\n\nOsmAnd podpira tudi vire po meri. "</string>
 	<string name="fav_saved_sucessfully">Priljubljene točke uspešno shranjene v {0}</string>
 	<string name="opening_hours_not_supported">Oblika delovnega časa ni podprta za urejanje</string>
 	<string name="add_new_rule">Dodajanje novega pravila</string>
@@ -1549,12 +1546,9 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="edit_tilesource_choose_existing">Izberite obstoječo…</string>
     <string name="edit_tilesource_name">Ime</string>
     <string name="maps_define_edit">Določi/Uredi …</string>
-	<string name="tip_map_styles_t">OsmAnd podpira prikazovanje vektorskih zemljevidov za uporabo brez povezave v različnih slogih, tako da ustrezajo vašim potrebam:
-		\n\nRazen \'privzetega\' sloga zemljevida, lahko v \'Meni\' → \'Nastavitve zaslona\' → \'Slog zemljevida\' zberete npr.:
-		\n\t* 
-		\n\t* 
-		\n\t*
-	</string>
+	<string name="tip_map_styles_t">"OsmAnd podpira prikazovanje vektorskih zemljevidov za uporabo brez povezave v različnih slogih, tako da ustrezajo vašim potrebam:
+\n\nRazen \'privzetega\' sloga zemljevida, lahko v \'Meni\' → \'Nastavitve zemljevida\' → \'Slog zemljevida\' zberete npr.:
+\n\t* The \'Touring view\' style, which contains the most detailed information feasable for traveling and touring, including optimization for professional drivers (higher contrast, distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc. ↵\n\t* \'High contrast roads\' shows roads in very accentuated colors for bright ambient lighting situations ↵\n\t* \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download) "</string>
     <string name="base_world_map">Osnovni zemljevid sveta</string>
 	<string name="default_and">in</string>
     <string name="default_or">ali</string>
@@ -1647,8 +1641,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="routing_attr_avoid_ferries_description">Izogibanje trajektom</string>
 	<string name="routing_attr_avoid_motorway_name">Izogibanje avtocestam</string>
 	<string name="routing_attr_avoid_motorway_description">Izogibanje avtocestam</string>
-	<string name="routing_attr_weight_name">Največja teža</string>
-	<string name="routing_attr_weight_description">Določite težo vozila za omejitve</string>
+	<string name="routing_attr_weight_name">Omejitev teže</string>
+	<string name="routing_attr_weight_description">Označuje dovoljeno težo vozila na poti</string>
     <string name="app_mode_truck">Tovornjak</string>
     <string name="index_item_world_bitcoin_payments">Svetovna Bitcoin plačila</string>
 	<string name="index_item_world_basemap">Pregledni zemljevid sveta</string>
@@ -1884,7 +1878,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="lang_zh_CN">Poenostavljena kitajščina</string>
 	<string name="lang_zh_TW">Tradicionalna kitajščina</string>
 	<string name="lang_sc">Sardinščina</string>
-	<string name="rendering_attr_subwayMode_name">Način podzemne železnice</string>
+	<string name="rendering_attr_subwayMode_name">Proge podzemne železnice</string>
  	<string name="continue_navigation">Nadaljuj navigacijo</string>
     <string name="rendering_attr_alpineHiking_name">Skala alpskega pohodništva (SAC)</string>
     <string name="osmo_invite">Povabite...</string>
@@ -1916,7 +1910,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="save_global_track_interval">Splošni interval beleženja</string>
 	<string name="save_track_to_gpx_globally">Beleži sled v datoteko GPX</string>
 	<string name="save_track_interval_globally">Interval beleženja</string>
-	<string name="rendering_attr_publicTransportMode_name">Način javni prevoz</string>
+	<string name="rendering_attr_publicTransportMode_name">Avtobusne, trolejbusne in druge proge</string>
 	<string name="record_plugin_name">Registracija vaših potovanj</string>
     <string name="index_tours">Izleti</string>
     <string name="waypoints">Točke</string>
@@ -1942,12 +1936,42 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_attr_osmcTraces_name">Prosojnica s simboli za pohodništvo</string>
     <string name="select_impassable_road">Izberi na zemljevidu</string>
     <string name="impassable_road">Izogibanje cestam…</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Tramvaj in vlak</string>
-    <string name="rendering_attr_busRoutes_name">Avtobusne linije</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Proge tramvaja in vlaka</string>
+    <string name="rendering_attr_busRoutes_name">Proge avtobusov</string>
     <string name="rendering_category_hide">Skrij</string>
     <string name="rendering_category_routes">Proge</string>
-    <string name="rendering_attr_trolleybusRoutes_name">Troljebusne linije</string>
-    <string name="rendering_attr_tramRoutes_name">Tramvajske proge</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">Linije deljenih taksijev</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Proge trolejbusa</string>
+    <string name="rendering_attr_tramRoutes_name">Proge tramvaja</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Proge deljenih taksijev</string>
     <string name="rendering_category_details">Podrobnosti</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Proge vlakov</string>
+    <string name="wake_on_voice">Vklopiti zaslon</string>
+    <string name="wake_on_voice_descr">Zaslon telefona se vklopi, ko se približujete obratu</string>
+    <string name="wake_on_voice_never">Nikoli</string>
+    <string name="rendering_category_transport">Prevoz</string>
+    <string name="rendering_category_others">Druge lastnosti zemljevida</string>
+    <string name="map_widget_appearance_rem">Preostali elementi</string>
+    <string name="map_widget_top">Statusna vrstica</string>
+	<string name="map_widget_right">Desna plošča</string>
+	<string name="map_widget_left">Leva plošča</string>
+    <string name="layers_category_show">Pokaži</string>
+	<string name="configure_map">Nastavitve zemljevida</string>
+    <string name="search_radius_proximity">V bližini</string>
+    <string name="osmo_device_not_found">Naprave ni mogoče najti</string>
+    <string name="osmo_no_connection_msg">OsMo storitev ni na voljo:\n- preverite povezavo;\n- preverite nastavitve;\n- oglejte si naš Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Anonimni uporabnik ne more:\n- ustvariti skupin;\n- sinhronizirati skupin in naprav s strežnikom;\n- upravljati skupin in naprav v zasebnem uradu.</string>
+    <string name="anonymous_user">Anonimni uporabnik</string>
+    <string name="logged_as">Prijavljen kot %1$s</string>
+	<string name="speed_limit_exceed">Toleranca omejitve hitrosti</string>
+	<string name="speed_limit_exceed_message">Izberite mejo tolerance omejitve hitrosti, nad katero boste prejeli glasovno opozorilo.</string>
+	<string name="print_route">Tiskanje poti</string>
+    <string name="test_native_render">Poskus izvirnega upodabljanja</string>
+    <string name="use_native_render_descr">Uporabi C++ upodabljanje namesto Java</string>
+    <string name="tip_recent_changes_1_9_t">"Spremembe v 1.9:\n\t* Posodobljeni stili zemljevida s upodabljanjem površine cestišča, transportnih plasti in pohodniških simbolov\n\t* Iskanje POI na poti\n\t* Označi cesto kot neprehodno na sejo\n\t* Lažje nalaganje in posodabljanje zemljevidov\n\t* Vizualno in zvočno obvestilo, ki se izvede ko se približujete točkam\n\t* Tisk poti in informacij o zavojih\n\t* Podpora pasov za zavijanje\n\t* Podpora Android Wear\n\t* Veliko sprememb grafičnega vmesnika\n\t* Ločena povečava za velikost črk na zemljevidu\n\t* Posebna zvočna obvestila v primeru, da niste na poti\n\t* Funkcionalnost prijave v OsMo\n\t* Popravilo OsMo nezdružljivosti različic "</string>
+    <string name="test_native_render_msg">Začetek aktivnosti z izvirnim upodabljanjem</string>
+    <string name="fav_point_dublicate">Podvojeno ime priljubljene lokacije</string>
+    <string name="fav_point_dublicate_message">Ime vaše priljubljene lokacije je bilo spremenjeno v %1$s, da bi se izognili podvojenih imen.</string>
+    <string name="use_native_render">Uporabi izvirno upodabljanje</string>
+    <string name="lock_screen_request_explanation">%1$s potrebuje to dovoljenje za izklop zaslona za funkcijo varčevanja z energijo.</string>
+    <string name="fav_point_emoticons_message">Ime vaše priljubljene lokacije je bilo spremenjeno v %1$s, da se omogoči pravilno shranjevanje nizov s smeški v datoteko.</string>
     </resources>

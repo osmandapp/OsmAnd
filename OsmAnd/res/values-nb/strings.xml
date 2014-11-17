@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -12,7 +13,7 @@
     <string name="add_as_last_destination_point">Legg til som siste rutepunkt</string>
     <string name="add_as_first_destination_point">Legg til som første rutepunkt</string>
     <string name="replace_destination_point">Erstatt reisemålpunkt</string>
-    <string name="new_destination_point_dialog">Du har allerede satt reisemålpunkt.</string>
+    <string name="new_destination_point_dialog">Du har allerede satt reisemålpunktet.</string>
     <string name="target_points">Rutepunkter</string>
     <string name="intermediate_point_too_far">Rutepunkt %1$s for langt fra nærmeste vei.</string>
     <string name="arrived_at_intermediate_point">Du har kommet til ditt rutepunkt</string>
@@ -32,8 +33,8 @@
 	<string name="poi_filter_food_shop">Matbutikk</string>
 	<string name="poi_filter_for_tourists">For turister</string>
 	<string name="poi_filter_fuel">Drivstoff</string>
-	<string name="show_warnings_title">Vis alarmer…</string>
-	<string name="show_warnings_descr">Still inn trafikkadvarsler (fartsgrenser, tvungne stopp, fartsdumper), fotoboksadvarsler og kjørefeltinformasjon</string>
+	<string name="show_warnings_title">Vis varsler…</string>
+	<string name="show_warnings_descr">Still inn trafikkvarsler (fartsgrenser, tvungne stopp, fartsdumper), fotoboksvarsler og kjørefeltinformasjon</string>
 	<string name="use_compass_navigation_descr">Bruk kompass hvis det ikke er mulig med annen retningsfastsettelse</string>
 	<string name="use_compass_navigation">Bruk kompass</string>
 	<string name="avoid_motorway">Unngå motorveier</string>
@@ -41,14 +42,14 @@
 	<string name="auto_zoom_map">Auto-zoom kart</string>
 	<string name="snap_to_road_descr">Hold posisjon på veien under navigering</string>
 	<string name="snap_to_road">Hold på vei</string>
-	<string name="osmand_short_description_80_chars">OsmAnd er et navigeringsprogram for offline og online kart og som er åpen kildekode</string>
-	<string name="osmand_plus_short_description_80_chars">Global mobilkartvisning &amp; navigering for offline og nettbasert OSM-kart</string>
+	<string name="osmand_short_description_80_chars">Global mobilkartvisning &amp; navigering for offline og nettbaserte OSM-kart</string>
+	<string name="osmand_plus_short_description_80_chars">Global mobilkartvisning &amp; navigering for offline og nettbaserte OSM-kart</string>
 	<string name="recalculate_route_to_your_location">Transportmodus:</string>
-	<string name="select_navigation_mode">Velg transportmetode</string>
+	<string name="select_navigation_mode">Velg transportmåte</string>
 	<string name="day_night_info_description">Soloppgang: %1$s \nSolnedgang: %2$s</string>
 	<string name="day_night_info">Dag/natt-info</string>
 	<string name="map_widget_day_night">Dag/natt-kart</string>
-	<string name="map_widget_vector_attributes">Opptegningsattributter:</string>
+	<string name="map_widget_vector_attributes">Opptegningsattributter</string>
 	<string name="map_widget_renderer">Kartstil</string>
 	<string name="layer_map_appearance">Still inn skjerm</string>
 	<string name="show_lanes">Vis kjørefelt</string>
@@ -84,10 +85,10 @@
 	<string name="bg_service_screen_lock_toast">Skjermen er låst</string>
 	<string name="bg_service_interval">Sett oppvåkningsintervall:</string>
 	<string name="show_cameras">Vis fotobokser</string>
-	<string name="show_traffic_warnings">Vis fartsgrenser</string>
+	<string name="show_traffic_warnings">Vis trafikkvarsler</string>
 	<string name="avoid_toll_roads">Unngå bomveier</string>
 	<string name="continue_follow_previous_route_auto">Forrige navigering var ikke ferdig. Fortsette å følge den? (%1$s sekunder)</string>
-	<string name="route_updated_loc_found">Ruten blir beregnet på nytt når sted blir funnet</string>
+	<string name="route_updated_loc_found">Rute blir beregnet når posisjon blir funnet</string>
 	<string name="osmand_parking_hours">Timer</string>
 	<string name="osmand_parking_minutes">Minutter</string>
 	<string name="osmand_parking_position_description_add_time">Bilen ble parkert her:</string>
@@ -109,22 +110,22 @@
 	<string name="download_link_and_local_description">Klikk her for å laste ned eller oppdatere offline-data. \nKlikk eksisterende element for å se flere detaljer, trykk og hold for å deaktivere eller slette. Gjeldende data på enheten (%1$s ledig):</string>
 	<string name="unknown_from_location">Startpunkt er ennå ikke bestemt</string>
 	<string name="unknown_location">Posisjon ennå ikke kjent</string>
-	<string name="local_indexes_cat_tile">Nettbaserte kart (fliser)</string>
+	<string name="local_indexes_cat_tile">Nettbaserte- og flis-kart</string>
 	<string name="local_indexes_cat_map">Offline-kart (vektor)</string>
 	
-	<string name="index_settings_descr">Last ned, vis detaljer og behandle offline-kart</string>
+	<string name="index_settings_descr">Last ned og håndter offline-kart lagret på enheten</string>
 	<string name="map_online_plugin_is_not_installed">Aktiver programtillegg for nettbaserte kart for å velge ulike kartkilder</string>
-	<string name="map_online_data">Nettbaserte kart (fliser)</string>
-	<string name="map_online_data_descr">Bruk nettbaserte kart (laste ned og mellomlagre fliser på SD-kort)</string>
+	<string name="map_online_data">Nettbaserte- og flis-kart</string>
+	<string name="map_online_data_descr">Bruk nettbaserte kart (last ned og bufre fliser på SD-kort)</string>
 	<string name="online_map_settings">Nettbaserte kart</string>
 	<string name="online_map_settings_descr">Still inn nettbaserte eller hurtigbufrede flis-kartkilder</string>
 	<string name="map_settings">Kartinnstillinger</string>
 	<string name="map_settings_descr">Still inn kartvisningen</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorkart vises trolig raskere. Fungerer kanskje ikke bra på enkelte enheter.</string>
-	<string name="native_rendering">Rask opptegning</string>
+	<string name="native_rendering">Intern opptegning</string>
 	<string name="show_ruler_level">Vis målestokk</string>
 	<string name="info_button">Info</string>
-	<string name="back_to_location">Tilbake til sted</string>
+	<string name="back_to_location">Tilbake til posisjon</string>
 	<string name="help">Hjelp</string>
 	<string name="show_details">Vis detaljer</string>
 	<string name="accessibility_extensions_descr">Tilgjengelighetsmoduler for gamle Android-versjoner</string>
@@ -170,7 +171,7 @@
 	<string name="direction_style_sidewise">Sideveis (8 sektorer)</string>
 	<string name="direction_style_clockwise">Med klokken (12 sektorer)</string>
 	<string name="settings_direction_style">Retningsstil</string>
-	<string name="settings_direction_style_descr">Velg stil å uttrykke relative retninger under bevegelse</string>
+	<string name="settings_direction_style_descr">Velg stil til å uttrykke relative retninger under bevegelse</string>
 	<string name="auto_announce_on">Start auto-annonsering</string>
 	<string name="auto_announce_off">Stopp auto-annonsering</string>
 	<string name="scroll_map_by_gestures_descr">Rull kartet med bevegelser på berøringsskjermen</string>
@@ -203,7 +204,7 @@
 	<string name="index_name_asia">Asia</string>
 	<string name="index_name_oceania">Oseania</string>
 	<string name="index_name_other">Verdens- og emnekart</string>
-	<string name="index_name_wiki">Verdensomspennende Wikipedia</string>
+	<string name="index_name_wiki">Verdensomspennende Wikipedia-interessepunkter</string>
 	<string name="index_name_voice">Talepakker (opptak, begrenset funksjonalitet)</string>
 	<string name="index_name_tts_voice">Talepakker (TTS kunstig tale, foretrekk)</string>
 	<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
@@ -211,32 +212,26 @@
 	<string name="fav_export_confirmation">Fil med tidligere eksporterte favoritter finnes allerede. Vil du erstatte den?</string>
 	<string name="profile_settings">Profilspesifikke innstillinger</string>
 	<string name="settings_preset">Standardprofil</string>
-	<string name="settings_preset_descr">Velg en brukerprofil med egendefinert kart og navigeringsinnstillinger.</string>
+	<string name="settings_preset_descr">Kartvisning- og navigeringsinnstillinger lagres per profil. Sett din standardprofil her.</string>
 	<string name="routing_settings">Navigering</string>
 	<string name="routing_settings_descr">Spesifiser navigeringsalternativer</string>
 	<string name="global_settings">Globale innstillinger</string>
-	<string name="index_settings">Databehandling</string>
+	<string name="index_settings">Karthåndtering</string>
 	<string name="general_settings">Generelt</string>
 	<string name="general_settings_descr">Still inn visning og generelle programinnstillinger</string>
 	<string name="global_app_settings">Globale programinnstillinger</string>
 	<string name="tip_rotation_switching">Kartorientering</string>
-	<string name="tip_rotation_switching_t_v2">\tDu kan velge hvordan kartvisningen roteres ved å gjentatte ganger klikke på kompassikonet.
-		\n\tValgene er:
-		\n\t\'Ingen rotasjon (nord er opp)\' - Kart vil ikke roteres. Nord vil alltid være opp
-		\n\t\'I bevegelsesretning\' - Kartorienteringen justeres kontinuerlig til bevegelsesretningen
-		\n\t\'Ifølge kompass\' - Kartrotasjon tilpasses kontinuerlig til kompassavlesningen for enheten
-	</string>
-	<string name="binary_map_download_success">Nedlasting vellykket.\n\t\n\tFor å bruke aktiver \'Meny\' -&gt; \'Vis\' -&gt; \'Kartkilde...\' -&gt; \'Offline vektorkart\'.</string>
+	<string name="tip_rotation_switching_t_v2">"Du kan slå av/på om og hvordan kartvisningen roteres ved å gjentatte ganger klikke på kartskjermens kompassikon.
+\n\nValgene er:
+\n\t* \'Ingen rotasjon (nord er opp)\': Kart vil ikke roteres. Nord vil alltid være opp
+\n\t* \'I bevegelsesretning\': Kartorienteringen justeres kontinuerlig til bevegelsesretningen
+\n\t* \'Ifølge kompass\': Kartrotasjon tilpasses kontinuerlig til kompassavlesningen for enheten "</string>
+	<string name="binary_map_download_success">"Nedlasting vellykket.
+\n\t\n\tFor å bruke aktiver \'Meny\' → \'Still inn kart\' → \'Kartkilde…\' → \'Offline vektorkart\'. "</string>
 	<string name="tip_day_night_mode">Dag/natt-modus</string>
-	<string name="tip_day_night_mode_t_v2">\tKartutseende kan for noen vektorkart endres mellom dag (lysere) og natt (mørkere).
-		\n\tNattfarger er tryggere for mørkekjøring.
-		\n\tDag/natt-veksling kan velges i \'Meny\' -&gt; \'Konfigurer skjerm...\' -&gt;\'Dag/natt-kart\'.
-		\n\tValgene er:
-		\n\t\'Soloppgang/-nedgang\' - automatisk modus, kontrollert av solens posisjon (standard)
-		\n\t\'Dag\' - bruk alltid dagmodus
-		\n\t\'Natt\' - bruk alltid nattmodus 
-		\n\t\'Lyssensor\' - kartutseende styres av lyssensoren på enheten (kun hvis utstyrt med)
-	</string>	
+	<string name="tip_day_night_mode_t_v2">"Kartutseende kan for offline-vektorkart endres mellom dag (lysere) og natt (mørkere).\tNattfarger er tryggere og mer komfortable for mørkekjøring.
+\n\nSett regler for skifte av dag/natt i \'Meny\' → \'Still inn kart\' → \'Dag/natt-kart\'.
+\n\nValgene er: ↵\n→* \'Soloppgang/-nedgang\': Automatisk modus, kontrollert av solens posisjon (standard) ↵\n→* \'Dag\': Bruk alltid dagmodus ↵\n→* \'Natt\': Bruk alltid nattmodus ↵\n→* \'Lyssensor\': Kartutseende styres av lyssensoren på enheten (kun hvis utstyrt med) "</string>	
 	
 	 
 	<string name="choose_auto_follow_route">Auto-sentrer kartvisning</string>
@@ -257,12 +252,12 @@
 	<string name="file_with_name_already_exists">Fil med dette navnet finnes allerede.</string>
 	<string name="gpx_navigation">GPX-rute</string>
 	<string name="poi_query_by_name_matches_categories">Flere interessepunktkategorier funnet som samsvarer med søket:</string>
-	<string name="data_to_search_poi_not_available">Lokale data til å søke interessepunkter er ikke til stede.</string>
+	<string name="data_to_search_poi_not_available">Lokale data til å søke interessepunkter foreligger ikke.</string>
 	<string name="poi_filter_by_name">Søk på navn</string>
 	<string name="old_poi_file_should_be_deleted">Interessepunktfilen \'%1$s\' er overflødig og kan slettes.</string>
 	<string name="update_poi_file_not_found">Lokal fil for å opprettholde interessepunktendringer ikke funnet og kunne ikke opprettes.</string>
 	<string name="button_upgrade_osmandplus">Oppgrader OsmAnd+</string>
-	<string name="map_version_changed_info">Server inneholder kartfiler som ikke er kompatible med din nåværende versjon av programmet. For å laste ned og bruke dem, oppgrader programmet til nyere versjon.</string>
+	<string name="map_version_changed_info">Server inneholder kartfiler som ikke er kompatible med din gjeldende versjon av programmet. For å laste ned og bruke dem, oppgrader programmet til nyere versjon.</string>
 	<string name="local_index_mi_rename">Endre navn</string>
 	<string name="show_gpx_route">Vis på kart</string>
 	<string name="search_position_current_location_search">Søker posisjon…</string>
@@ -280,7 +275,7 @@
 	<string name="filename_input">Filnavn: </string>
 	<string name="file_with_name_already_exist">Fil med samme navn finnes allerede.</string>
 	<string name="default_buttons_save">Lagre</string>
-	<string name="menu_save_directions">Lagre rute</string>
+	<string name="menu_save_directions">Lagre anvisninger</string>
 	<string name="show_more_map_detail">Vis flere kartdetaljer</string>
 	<string name="favourites_delete_multiple_succesful">Favorittpunkt(er) vellykket slettet.</string>
 	<string name="favorite_delete_multiple">Du kommer til å slette %1$d favoritt(er) og %2$d favorittgruppe(r). Er du sikker?</string>
@@ -293,7 +288,7 @@
 	<string name="vector_map_not_needed">Nei takk</string>
 	<string name="basemap_missing">Basis-verdenskart (som dekker hele verden ved lav zoom) mangler. Vurder å laste ned World_basemap_x.obf for et komplett miljø.</string>
 	<string name="local_index_gpx_info_show">\n\nTrykk og hold for alternativer</string>
-	<string name="local_index_descr_title">Databehandling</string>
+	<string name="local_index_descr_title">Karthåndtering</string>
 	<string name="local_index_mi_restore">Aktiver</string>
 	<string name="local_index_mi_backup">Deaktiver</string>
 	<string name="local_index_mi_delete">Slett</string>
@@ -317,44 +312,49 @@
 	<string name="voice_not_specified">Ingen</string>
 	<string name="internet_connection_required_for_online_route">En nettbasert navigeringstjeneste er valgt, men ingen internett-tilkobling er tilgjengelig.</string>
 	<string name="tts_language_not_supported_title">Språk ikke støttet</string>
-	<string name="tts_language_not_supported">Det valgte språket støttes ikke av den installerte Android TTS(tekst-til-tale)-motoren. Vil du gå til markedet for å se etter en annen TTS-motor? Ellers vil det forhåndsinnstilte TTS-språket brukes.</string>
+	<string name="tts_language_not_supported">Det valgte språket støttes ikke av den installerte Android TTS (tekst-til-tale)-motoren. Vil du gå til markedet for å se etter en annen TTS-motor? Ellers vil det forhåndsinnstilte TTS-språket brukes.</string>
 	<string name="tts_missing_language_data_title">Manglende data</string>
-	<string name="switch_to_vector_map_to_see">Offline-vektorkart til stede for dette stedet. \n\t\n\tFor å bruke aktiver \'Meny\' -&gt; \'Vis\' -&gt; \'Kartkilde…\' -&gt; \'Offline-vektorkart\'.</string>
+	<string name="switch_to_vector_map_to_see">Offline-vektorkart foreligger for dette stedet.
+\n\t\n\tFor å bruke aktiver \'Meny\' → \'Still inn kart\' → \'Kartkilde…\' → \'Offline vektorkart\'.</string>
 	<string name="install_more">Installer flere…</string>
 	<string name="tip_favorites">Favorittpunkter</string>
-	<string name="tip_favorites_t">\tOfte brukte punkter kan lagres som favoritter.
-		\n\tFor å lagre et punkt som favoritt gå til kartets lokalmeny, velg alternativet \'Legg til i favoritter\' og skriv deretter inn et navn for den. Etter å ha lagret en favoritt er den tilgjengelig via \'Hovedskjerm\' -&gt; \'Favoritter\'.
-		\n\tLang-trykking på en favoritt i \'Favoritter\'-menyen gir muligheter for å sette den som reisemål, redigere eller slette den.
-		\n\tFor å vise alle favorittpunkter direkte på kartet, aktiver på kartskjermen laget \'Favoritter\' under \'Meny\' -&gt; \'Vis\'.
-	</string>
-	<string name="search_osm_offline">Søk adresse ved bruk av offline-kart</string>
+	<string name="tip_favorites_t">"Ofte brukte punkter kan lagres som favoritter, som følger:
+\n\nI lokalmenyen \'Bruk posisjon\' for et punkt, velg alternativet \'Legg til i favoritter\' og skriv deretter inn et navn for den.
+\n\nEtter å ha lagret en favoritt er den tilgjengelig via \'Meny\' → \'Mine steder\'. Trykking på en oppføring i \'Favoritter\'-listen gir muligheter som å navigere til den, redigere eller slette den.
+\n\nFor å vise alle favorittpunkter direkte på kartet, aktiver på kartskjermen laget \'Favoritter\' i \'Meny\' → \'Still inn kart\'. "</string>
+	<string name="search_osm_offline">Søk geografisk plassering</string>
 	<string name="system_locale">System</string>
-	<string name="preferred_locale_descr">Velg skjermspråk</string>
-	<string name="preferred_locale">Språk</string>
+	<string name="preferred_locale_descr">Velg visningsspråk</string>
+	<string name="preferred_locale">Visningsspråk</string>
 	<string name="tip_map_switch">Velg en kartkilde</string>
-	<string name="tip_map_switch_t_v2">\tKartkilden og lag som vises endres via \'Meny\' -&gt; \'Vis\' i kartvisning.
-		\n\tUnder \'Kartkilde…\' kan du velge å bruke de forhåndslastede offline vektorkartene, forhåndsdefinerte (nettbaserte) fliskilder (aktiver programtillegget for \'Nettbaserte kart\' for dette), eller kart manuelt opprettet ved bruk av f.eks. OsmAndMapCreator på en PC.
-		\n\tOsmAnd støtter også egendefinerte kilder.
-	</string>
+	<string name="tip_map_switch_t_v2">"Kartkilden og kartlag som vises endres via \'Meny\' → \'Still inn kart\'.
+\n\nUnder \'Kartkilde…\' kan du velge å bruke de forhåndslastede offline vektorkartene (standard, trengs også for offline navigering), eller forhåndsdefinerte (nettbaserte eller bufret offline) fliskilder (aktiver programtillegget for \'Nettbaserte kart\' under \'Innstillinger\' → \'Programtillegg\' for dette), eller kart manuelt opprettet ved bruk av f.eks. OsmAndMapCreator på en PC.
+\n\nOsmAnd støtter også egendefinerte kilder. "</string>
 	<string name="tip_app_mode">Bruk profil</string>
-	<string name="tip_app_mode_t_v2">\tOsmAnd støtter forskjellige (tilpasningsbare) programprofiler for ulike bruksmåter.
-		\n\tDu kan endre profiler via profilknappen i nedre venstre hjørne av kartskjermen (ikon for bil, sykkel eller fotgjenger), eller når du oppretter en rute.
-	</string>
+	<string name="tip_app_mode_t_v2">"OsmAnd støtter forskjellige (tilpasningsbare) programprofiler for ulike bruksmåter.
+\n\nDu kan endre profiler via profilknappen i nedre venstre hjørne av kartskjermen (ikon for bil, sykkel eller fotgjenger), eller når du oppretter en rute (\'transportmodus\'). "</string>
 	<string name="tip_navigation">Navigering</string>
-	<string name="tip_navigation_t">\tFør du starter en navigering må du velge et reisemål. Etterpå trykk \'Meny\' -&gt; \'Anvisninger\' på kartet og velg navigeringstypen.</string>
+	<string name="tip_navigation_t">"For å få anvisninger til et sted, enten trykk lenge direkte på det på kartet, (så trykk dets beskrivelsesmarkør og velg \'Anvisninger til\'), eller velg \'Anvisninger til\' etter å ha trykket på en oppføring i en liste med søkeresultater eller favorittliste.
+\n\nReisemålet er markert som et målflagg på kartet og OsmAnd viser avstanden til det og retningen til det (orange trekant).
+\n\nVelg enten \'Start navigering\', som betyr at OsmAnd gir veiledning og taleinstruksjoner (hvis aktivert) etc. Eller velg \'Vis rute\', som resulterer i en statisk rute uten veiledning eller justeringer mens du beveger deg.
+\n\nFor å vise en rute til det valgte reisemålet fra ethvert punkt annet enn din gjeldende posisjon, velg startpunktet på kartet og trykk \'Anvisninger fra\'.
+\n\nHvis du bruker \'Anvisninger fra\' sammen med \'Start navigering\', vil OsmAnd skifte til din faktiske posisjon så snart den er funnet (slik at dette kan brukes til å hurtig-starte ruting før posisjonen er funnet), mens \'Anvisninger fra\' i kombinasjon med \'Vis rute\' bare viser deg ruten fra ethvert vilkårlig punkt du hadde valgt uten påfølgende oppdateringer. "</string>
 	<string name="tip_search">Søk</string>
-	<string name="tip_search_t">\tDu kan søke etter steder direkte på kartet, eller etter adresse, etter plassering, interessepunkt eller som forhåndsdefinert favoritt.
-		\n\tÅ trykke \'Søk\' på hovedskjermen åpner søkeaktivitetene. For alle treff tilbyr en lokalmeny 2 valg: \'Sett som reisemål\' eller \'Vis på kart\'.
-	</string>
-	<string name="tip_map_context_menu">\'Bruk sted\' meny</string>
-	<string name="tip_map_context_menu_t">\tLokalmenyen for kart er tilgjengelig ved å trykke og holde på kartet eller ved å trykke på styrekule-knappen.
-		\n\tDette gir en boks med punktkoordinater. Kort trykk på den åpner lokalmenyen. (Eller trykk og hold på den for å skjule boksen igjen.)
-		\n\tLokalmenyen for kart inneholder alle handlinger som refererer til et punkt (sted).
-	</string>
-	<string name="tip_initial">Tips og triks</string>
-	<string name="tip_initial_t">\tOsmAnd er et navigeringsprogram med mange funksjoner. 
-		\n\tSom en grunnleggende innføring er noen brukertips og triks lenket til på hovedskjermen.
-	</string>
+	<string name="tip_search_t">"Du kan søke etter steder direkte på kartet via \'Bruk posisjon\' → \'Søk nær her\', eller ved å kalle søkeskjermen via \'Meny\' → \'Søk\'.
+\n\nSøkeskjermen gir maler for søk
+\n\t* etter adresse
+\n\t* via koordinater
+\n\t* som interessepunkt (etter type eller etter navn)
+\n\t* via din søkehistorikk
+\n\t* eller via dine forhåndsdefinerte favoritter.
+\n\nFor alle treff tilbyr en lokalmeny eller en handlingslinje alternativer som \'Anvisninger til\' eller \'Vis på kart\' etc. "</string>
+	<string name="tip_map_context_menu">\'Bruk posisjon\'-meny</string>
+	<string name="tip_map_context_menu_t">"Lokalmenyen \'Bruk posisjon\' inneholder alle handlinger som refererer til et punkt (posisjon).
+\n\nDen er tilgjengelig ved å trykke lenge på ethvert punkt på kartet (deretter trykkes på markøren), eller ved å trykke styrekule-knappen, eller ved å velge \'Meny\' → \'Bruk posisjon\' (de to siste måtene tar kartsenteret som referanse).
+\n\nEn markør-boks kan skjules igjen ved å trykke lenge på den. "</string>
+	<string name="tip_initial">Hjelp</string>
+	<string name="tip_initial_t">"OsmAnd er et navigeringsprogram med mange funksjoner.
+\n\nSom en grunnleggende innføring er noen brukertips og triks lenket til via \'Meny\' → \'Hjelp\' fra kartskjermen. "</string>
 	<string name="next_button">Neste</string>
 	<string name="previous_button">Forrige</string>
 	<string name="unit_of_length_descr">Endre lengde- og hastighetsenhet</string>
@@ -403,7 +403,7 @@
 	<string name="daynight">Dag/natt-modus</string>
 	<string name="download_files_question">Laste ned {0} fil(er) ({1} MB)?</string>
 	<string name="items_were_selected">{0} element(er) valgt</string>
-	<string name="filter_existing_indexes">Filtrer nedlastede</string>
+	<string name="filter_existing_indexes">Nedlastet</string>
 	<string name="deselect_all">Fravelg alle</string>
 	<string name="select_all">Velg alle</string>
 	<string name="reload">Gjenoppfrisk</string>
@@ -413,7 +413,7 @@
 	<string name="context_menu_item_download_map">Last ned kart</string>
 	<string name="renderers">Vektor-opptegning</string>
 	<string name="renderers_descr">Velg utseende på opptegningen</string>
-	<string name="website">nettsted</string>
+	<string name="website">Nettsted</string>
 	<string name="phone">Telefon</string>
 	<string name="context_menu_item_search_transport">Søk transport</string>
 	<string name="transport_searching_transport">Transportresultater (ingen mål):</string>
@@ -461,7 +461,7 @@
 	<string name="hide_poi_filter">Skjul filter</string>
 	<string name="show_poi_filter">Vis filter</string>
 	<string name="search_poi_filter">Filter</string>
-	<string name="voice_provider_descr">Velg taleveiledning for navigering (språkkoder se ISO 639-1)</string>
+	<string name="voice_provider_descr">Velg taleveiledning for navigering</string>
 	<string name="voice_provider">Taleveiledning</string>
 	<string name="search_near_map">Søk i nærheten av siste kartplassering</string>
 	<string name="search_nearby">Søk i nærheten</string>
@@ -485,7 +485,7 @@
 	<string name="search_history_int_streets">Veikryss: {0} x {1} i {2}</string>
 	<string name="search_history_building">Bygning: {0}, {1}, {2}</string>
 	<string name="favorite">Favoritt</string>
-	<string name="clear_all">Fjern alle</string>
+	<string name="clear_all">Slett alle</string>
 	<string name="history">Historikk</string>
 	<string name="uploading_data">Laster opp data…</string>
 	<string name="uploading">Laster opp…</string>
@@ -493,8 +493,8 @@
 	<string name="searching">Søker…</string>
 	<string name="searching_address">Søker adresse…</string>
 	<string name="hint_search_online">Husnummer, gate, by</string>
-	<string name="search_offline_address">Offline</string>
-	<string name="search_online_address">Internett</string>
+	<string name="search_offline_address">Offline-søk</string>
+	<string name="search_online_address">Nettbasert søk</string>
 	<string name="max_level_download_tile">Maks. nettbasert zoom</string>
 	<string name="max_level_download_tile_descr">Velg maksimalt zoomnivå å laste ned for nettbaserte kartseksjoner</string>
 	<string name="route_general_information">Total distanse %1$s, reisetid %2$d t %3$d m.</string>
@@ -502,7 +502,7 @@
 	<string name="router_service">Navigeringstjeneste</string>
 	<string name="sd_dir_not_accessible">Lagringsmappe på SD-kortet ikke tilgjengelig</string>
 	<string name="download_question">Laste ned {0} - {1} ?</string>
-	<string name="download_question_exist">Offline-data for {0} finnes allerede ({1}). Vil du oppdatere det ({2}) ?</string>
+	<string name="download_question_exist">Offline-data for {0} finnes allerede ({1}). Vil du oppdatere ({2}) ?</string>
 	<string name="address">Adresse</string>
 	<string name="download_index_success">Nedlasting vellykket</string>
 	<string name="error_io_error">I/O feil oppstod</string>
@@ -525,10 +525,10 @@
 	<string name="settings">Innstillinger</string>
 	<string name="save_current_track_descr">Lagre gjeldende spor til SD nå</string>
 	<string name="save_current_track">Lagre gjeldende GPX-spor</string>
-	<string name="save_track_interval">Loggeintervall</string>
-	<string name="save_track_interval_descr">Velg posisjoneringsintervall for spor</string>
-	<string name="save_track_to_gpx_descrp">Spor vil lagres i spor-mappe gruppert etter dager</string>
-	<string name="save_track_to_gpx">Logg spor til GPX-fil</string>
+	<string name="save_track_interval">Loggeintervall under navigering</string>
+	<string name="save_track_interval_descr">Velg loggeintervall for sporregistrering under navigering</string>
+	<string name="save_track_to_gpx_descrp">Spor blir lagret i spor-mappe under navigering</string>
+	<string name="save_track_to_gpx">Logg spor til GPX-fil under navigering</string>
 	<string name="update_tile">Oppdater kart</string>
 	<string name="reload_tile">Last kartdel på nytt</string>
 	<string name="mark_point">Mål</string>
@@ -536,7 +536,7 @@
 	<string name="show_osm_bugs">Vis OpenStreet-feil</string>
 	<string name="favourites_activity">Favoritter</string>
 	<string name="add_to_favourite">Legg til i favoritter</string>
-	<string name="use_english_names_descr">Bruk lokale eller engelske navn</string>
+	<string name="use_english_names_descr">Velg mellom lokale og engelske navn</string>
 	<string name="use_english_names">Bruk engelske navn i kartene</string>
 	<string name="app_settings">Programinnstillinger</string>
 	<string name="search_address">Søk adresse</string>
@@ -544,13 +544,13 @@
 	<string name="choose_street">Velg gate</string>
 	<string name="choose_city">Velg by</string>
 	<string name="ChooseCountry">Velg land</string>
-	<string name="show_view_angle">Vis synsretningen</string>
+	<string name="show_view_angle">Vis synsretning</string>
 	<string name="map_view_3d_descr">Aktiver 3D-visning av kartet</string>
 	<string name="map_view_3d">3D-kartvisning</string>
 	<string name="show_poi_over_map_description">Vis interessepunkt over kart (bruk sist valgte filter)</string>
 	<string name="show_poi_over_map">Vis interessepunkt</string>
 	<string name="map_tile_source_descr">Velg kilden til nettbaserte eller hurtigbufrede kartdeler</string>
-	<string name="map_tile_source">Flislegg kartkilde</string>
+	<string name="map_tile_source">Fliskartkilde</string>
 	<string name="map_source">Kartkilde</string>
 	<string name="use_internet">Bruk internett</string>
 	<string name="show_location">Vis sted</string>
@@ -562,7 +562,7 @@
 	<string name="exit_Button">Avslutt</string>
 	<string name="map_Button">Kart</string>
 	<string name="settings_Button">Innstillinger</string>
-	<string name="favorites_Button">Favoritter</string>
+	<string name="favorites_Button">Mine steder</string>
 	<string name="search_button">Søk</string>
 	<string name="search_activity">Søk</string>
 	<string name="searchpoi_activity">Velg interessepunkt</string>
@@ -573,13 +573,13 @@
 	<string name="choose_available_region">Velg region fra liste</string>
 	<string name="choose_intersected_street">Velg kryssende gate</string>
 	<string name="Closest_Amenities">Nærmeste fasiliteter</string>
-	<string name="app_mode_default">Se på kartet</string>
+	<string name="app_mode_default">Se gjennom kart</string>
 	<string name="app_mode_car">Bil</string>
 	<string name="app_mode_bicycle">Sykkel</string>
 	<string name="app_mode_pedestrian">Fotgjenger</string>
 	<string name="position_on_map_center">Senter</string>
 	<string name="position_on_map_bottom">Nederst</string>
-	<string name="navigate_point_top_text">Oppfør bredde- og lengdegrad i følgende format (G - grader, M - minutter, S - sekunder)</string>
+	<string name="navigate_point_top_text">Oppfør bredde- og lengdegrad i det valgte formatet (G - grader, M - minutter, S - sekunder)</string>
 	<string name="navigate_point_latitude">Breddegrad</string>
 	<string name="navigate_point_longitude">Lengdegrad</string>
 	<string name="navigate_point_format_D">GGG.GG</string>
@@ -639,7 +639,7 @@
     <string name="access_arrival_time">Ankomsttid</string>
     <string name="map_view">Kart</string>
     <string name="prefer_motorways">Foretrekk motorveier</string>
-	<string name="prefer_in_routing_title">Foretrekk …</string>
+	<string name="prefer_in_routing_title">Foretrekk…</string>
 	<string name="prefer_in_routing_descr">Foretrekk motorveier</string>
     <string name="max_speed_none">ingen</string>
     <string name="choose_osmand_theme_descr">Velg programtema</string>
@@ -652,58 +652,48 @@
 	<string name="driving_region">Region for bilkjøring</string>
 	<string name="osmodroid_mode_on">Stopp OsMoDroid</string>    
     <string name="osmodroid_mode_off">Start OsMoDroid</string>
-    <string name="announce_gpx_waypoints">Fortell om GPX-rutepunkter</string>
-    <string name="speak_title">Les opp…</string>
-	<string name="speak_descr">Still inn for å lese opp gatenavn, trafikkadvarsler (f.eks. fartsdumper), fotoboksadvarsler, fartsgrenser</string>
-	<string name="speak_street_names">Les opp gatenavn (TTS)</string>
-    <string name="speak_speed_limit">Informer om fartsgrense</string>
-    <string name="speak_cameras">Informer om fotobokser</string>
-	<string name="speak_traffic_warnings">Les opp trafikkmeldinger</string>
-    <string name="tip_recent_changes_1_5_t">Endringer i 1.5:↵
-→\n\t* Stemmevarslinger om fartsgrenser og fotobokser
-↵
-→\n\t* Flere muligheter for opplesning (gatenavn blir lest opp)
-↵
-→\n\t* Kartikoner i høy oppløsning
-↵
-→\n\t* Flere endringer i brukergrensesnittet
-↵
-→\n\t* Feilrettinger i avstandsvisningen, GPX-analyse, håndtering av rutepunkter, planleggingsmodulen, opplasting til OSM, https-håndtering
-    </string>
+    <string name="announce_gpx_waypoints">Meld om GPX-rutepunkter</string>
+    <string name="speak_title">Meld om…</string>
+	<string name="speak_descr">Still inn for å meddele gatenavn, trafikkvarsler (tvungne stopp, fartsdumper), fotoboksvarsler, fartsgrenser</string>
+	<string name="speak_street_names">Meddel gatenavn (TTS)</string>
+    <string name="speak_speed_limit">Meld om fartsgrense</string>
+    <string name="speak_cameras">Meld om fotobokser</string>
+	<string name="speak_traffic_warnings">Meld trafikkvarsler</string>
+    <string name="tip_recent_changes_1_5_t">"Endringer i 1.5:↵ →\n\t* Talevarslinger om fartsgrenser og fotobokser ↵ →\n\t* Flere muligheter for talemeldinger (gatenavn blir meddelt) ↵ →\n\t* Kartikoner i høy oppløsning ↵ →\n\t* Flere endringer i brukergrensesnittet ↵ →\n\t* Feilrettinger i avstandsvisningen, GPX-analyse, håndtering av rutepunkter, planleggingsmodulen, opplasting til OSM, https-håndtering "</string>
     <string name="osb_author_or_password_not_specified">Oppgi OSM brukernavn og passord i Innstillinger</string>
     <string name="clear_intermediate_points">Slett mellomliggende rutepunkter</string>
     <string name="keep_intermediate_points">Behold mellomliggende rutepunkter</string>
     <string name="new_directions_point_dialog">Mellomliggende rutepunkter er allerede angitt.</string>
-    <string name="context_menu_item_directions_to">Kjøreveiledning til</string>
-    <string name="context_menu_item_directions_from">Kjøreveiledning fra</string>
+    <string name="context_menu_item_directions_to">Anvisninger til</string>
+    <string name="context_menu_item_directions_from">Anvisninger fra</string>
     <string name="route_descr_map_location">Kart: </string>
     <string name="route_descr_lat_lon">Br %1$.3f, Le %2$.3f</string>
-    <string name="route_descr_current_location">Aktuell posisjon</string>
+    <string name="route_descr_current_location">Gjeldende posisjon</string>
     <string name="route_to">Til:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">Fra:</string>
 	
 	
-	<string name="destination_point">Mål %1$s</string>
-    <string name="context_menu_item_destination_point">Velg som mål</string>
+	<string name="destination_point">Reisemål %1$s</string>
+    <string name="context_menu_item_destination_point">Sett som reisemål</string>
     <string name="please_select_address">Velg by eller gate først</string>
     <string name="search_street_in_neighborhood_cities">Søk etter gaten i nabobyer</string>
     <string name="tip_map_styles">Kartstiler</string>
-	<string name="about_version">Utgave:</string>
+	<string name="about_version">Versjon:</string>
     <string name="about_settings">Om</string>
-    <string name="about_settings_descr">Versjonsinformasjon, lisenser, prosjektmedlem</string>
-    <string name="tips_and_tricks">Tips</string>
+    <string name="about_settings_descr">Versjonsinformasjon, lisenser, prosjektmedlemmer</string>
+    <string name="tips_and_tricks">Hjelp</string>
     <string name="local_index_tile_data_downloadable">Nedlastbar: %1$s</string>
-    <string name="local_index_tile_data_maxzoom">Største zoom: %1$s</string>
-    <string name="local_index_tile_data_minzoom">Minste zoomnivå: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maksimum zoom: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimum zoom: %1$s</string>
     <string name="edit_tilesource_maxzoom">Maks-zoom</string>
     <string name="edit_tilesource_minzoom">Min-zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Velg eksisterende…</string>
     <string name="edit_tilesource_name">Navn</string>
-    <string name="maps_define_edit">Definer/rediger …</string>
+    <string name="maps_define_edit">Definer/rediger…</string>
 	<string name="route_is_too_long">OsmAnd offline ruteplanlegging kan ta veldig lang tid (eller ikke virke noen ganger) for punkter mere enn 200km fra hverandre. Man kan da legge til mellomliggende rutepunkter for bedre ytelse.</string>
-	<string name="auto_zoom_none">Ingen autozoom</string>
+	<string name="auto_zoom_none">Ingen auto-zoom</string>
 	<string name="auto_zoom_close">Nært hold</string>
 	<string name="auto_zoom_far">Middels hold</string>
 	<string name="auto_zoom_farthest">Langt hold</string>
@@ -711,7 +701,7 @@
 	<string name="base_world_map">Grunnkart verden</string>
 	<string name="amenity_type_seamark">Sjømerke</string>
     <string name="app_modes_choose">Programprofiler</string>
-	<string name="map_widget_map_rendering">Kartopptegning:</string>
+	<string name="map_widget_map_rendering">Kartopptegning</string>
     <string name="app_mode_hiking">Vandring</string>
     <string name="app_mode_motorcycle">Motorsykkel</string>
     <string name="app_mode_boat">Båt</string>
@@ -750,7 +740,7 @@
 	<string name="lang_it">Italiensk</string>
 	<string name="lang_ja">Japansk</string>
 	<string name="lang_ko">Koreansk</string>
-	<string name="lang_lv">Lettisk</string>
+	<string name="lang_lv">Latvisk</string>
 	<string name="lang_lt">Litauisk</string>
 	<string name="lang_mr">Marathi</string>
 	<string name="lang_no">Norsk</string>
@@ -772,17 +762,296 @@
     <string name="lang_pt_br">Portugisisk (Brasil)</string>
     <string name="index_name_canada">Nord-Amerika - Canada</string>
     <string name="index_item_nation_addresses">adresser (hele landet)</string>
-	<string name="index_item_world_altitude_correction">Korreksjon av høyde (verden)</string>
-	<string name="index_item_world_seamarks">Sjømerkene(verden)</string>
-	<string name="index_item_world_bitcoin_payments">Bitcoinbetalinger (verden)</string>
+	<string name="index_item_world_altitude_correction">Høydekorrigering (verden)</string>
+	<string name="index_item_world_seamarks">Sjømerker (verden)</string>
+	<string name="index_item_world_bitcoin_payments">Bitcoin-betalinger (verden)</string>
 	<string name="index_item_world_basemap">Oversiktskart (verden)</string>
     <string name="index_item_world_ski">Skikart (verden)</string>
     <string name="lang_hr">Kroatisk</string>
     <string name="calculate_osmand_route_without_internet">Beregn OsmAnd rutesegment uten internett</string>
-    <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd rute for første og siste rute segment</string>
+    <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd-rute for første og siste rutesegment</string>
     <string name="osmo_settings_uuid">Unik enhets-id</string>
-    <string name="osmo_settings_descr">Se unik registreringsnøkkel for enheten og andre spesifikke innstillinger </string>
-    <string name="osmo_plugin_description">OpenStreetMap-Overvåkning - Avansert Live Overvåkning med mange funksjoner for fjernkontroll http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (Avansert Live Overvåkning)</string>
-    <string name="osmo_settings">OSMo</string>
-   	</resources>
+    <string name="osmo_settings_descr">Still inn overvåking og personlig overvåkingskanal</string>
+    <string name="osmo_plugin_description"/>
+    <string name="osmo_plugin_name">OsMo (Avansert Live Overvåkning)</string>
+    <string name="osmo_settings">OpenStreetMap-overvåking</string>
+   	<string name="map_widget_top">Statuslinje</string>
+	<string name="map_preferred_locale_descr">Foretrukket språk for påskrifter på kartet (hvis det ikke er tilgjengelig skiftes til engelsk eller til lokale navn)</string>
+    <string name="map_preferred_locale">Foretrukket språk på kart</string>
+    <string name="home">Hjem</string>
+    <string name="rendering_attr_showCycleRoutes_name">Vis sykkelruter</string>
+    <string name="show_zoom_buttons_navigation_descr">Vis zoom-knapper under navigering</string>
+    <string name="show_zoom_buttons_navigation">Vis zoom-knapper</string>
+    <string name="map_widget_plain_time">Gjeldende tid</string>
+    <string name="my_data_Button">Mine steder</string>
+    <string name="my_data_activity">Mine steder</string>
+    <string name="osmo_edit_color">Visningsfarge</string>
+    <string name="always_center_position_on_map">Vis posisjon alltid i midten</string>
+    <string name="guidance_preferences_descr">Innstillinger for navigering</string>
+    <string name="routing_preferences_descr">Innstillinger for ruteplanlegging</string>
+    <string name="rendering_attr_noAdminboundaries_name">Skjul grenser</string>
+	<string name="map_widget_max_speed">Fartsgrense</string>
+    <string name="map_widget_transparent">Gjennomsiktig layout</string>
+	<string name="rendering_attr_noPolygons_name">Skjul polygoner</string>
+	<string name="plugins_screen">Programtillegg</string>
+	<string name="prefs_plugins_descr">Programtillegg aktiverer avanserte innstillinger og flere funksjoner</string>
+	<string name="prefs_plugins">Programtillegg</string>
+	<string name="show_point_options">Bruk posisjon…</string>
+	<string name="wake_on_voice">Slå på skjermen</string>
+    <string name="select_impassable_road">Velg på kart</string>
+    <string name="impassable_road">Unngå veier…</string>
+    <string name="rendering_attr_busRoutes_name">Bussruter</string>
+    <string name="rendering_category_hide">Skjul</string>
+    <string name="rendering_category_routes">Ruter</string>
+    <string name="rendering_category_details">Detaljer</string>
+    <string name="rendering_category_transport">Transport</string>
+    <string name="map_widget_right">Høyre panel</string>
+	<string name="map_widget_left">Venstre panel</string>
+    <string name="layers_category_show">Vis</string>
+	<string name="configure_map">Still inn kart</string>
+    <string name="osmo_device_not_found">Enhet ikke funnet</string>
+    <string name="speed_limit_exceed">Toleranse for fartsgrense</string>
+	<string name="text_size_descr">Sett tekststørrelsen på kartet.</string>
+    <string name="text_size">Tekststørrelse</string>
+    <string name="traffic_warning_speed_limit">Fartsgrense</string>
+    <string name="rendering_value_car_name">Bil</string>
+    <string name="rendering_value_bicycle_name">Sykkel</string>
+    <string name="rendering_value_pedestrian_name">Fotgjenger</string>
+    <string name="local_map_names">Lokale navn</string>
+    <string name="lang_sw">Swahili</string>
+    <string name="lang_he">Hebraisk</string>
+    <string name="rendering_attr_hideText_name">Skjul tekst</string>
+    <string name="visible_element">Vis på kart</string>
+    <string name="switch_to_raster_map_to_see">Ingen offline-vektorkart foreligger for dette stedet. Du kan laste ned et kart i Innstillinger (Karthåndtering), eller skifte til nettbaserte kart (aktiver programtillegg for online-kart for dette).</string>
+	<string name="rendering_category_others">Andre kartattributter</string>
+    <string name="av_control_start">Start</string>
+    <string name="save_route_as_gpx">Lagre rute som GPX-fil</string>
+	<string name="rendering_attr_publicTransportMode_name">Buss-, trolleybuss-, skyttelbussruter</string>
+	<string name="rendering_attr_tramTrainRoutes_name">Trikk- og togruter</string>
+	<string name="rendering_attr_subwayMode_name">Undergrunnsruter</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Togruter</string>
+    <string name="rendering_attr_tramRoutes_name">Trikkeruter</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Trolleybussruter</string>
+    <string name="map_widget_appearance_rem">Resterende elementer</string>
+    <string name="print_route">Skriv ut rute</string>
+    <string name="traffic_warning_border_control">Grensekontroll</string>
+    <string name="traffic_warning_stop">Stoppskilt</string>
+    <string name="traffic_warning_speed_camera">Fotoboks</string>
+    <string name="traffic_warning">Trafikkvarsel</string>
+	<string name="way_alarms">Trafikkvarsler</string>
+	<string name="save_track_interval_globally">Loggeintervall</string>
+	<string name="waypoints">Rutepunkter</string>
+    <string name="targets">Reisemål</string>
+    <string name="rendering_attr_hideBuildings_name">Skjul bygninger</string>
+    <string name="osmand_parking_warning">Varsel</string>
+	<string name="wake_on_voice_descr">Slå på telefonskjermen når du nærmer deg en sving</string>
+    <string name="wake_on_voice_never">Aldri</string>
+    <string name="search_radius_proximity">I nærhet av</string>
+    <string name="speed_limit_exceed_message">Velg toleransemargin for fartsgrense, overskrides denne vil du få talevarsel.</string>
+	<string name="fav_point_dublicate">Duplisering av favorittpunktnavn</string>
+    <string name="traffic_warning_payment">Bomstasjon</string>
+    <string name="speak_favorites">Meld om nærliggende favoritter</string>
+	<string name="speak_poi">Meld om nærliggende interessepunkter</string>
+	<string name="save_global_track_interval">Generelt loggeintervall</string>
+	<string name="int_hour">t</string>
+    <string name="duration">Varighet</string>
+    <string name="distance">Avstand</string>
+    <string name="index_tours">Turer</string>
+    <string name="flat_list_waypoints">Alle</string>
+    <string name="more">Mer...</string>
+    <string name="rendering_value_browse_map_name">Se gjennom kart</string>  
+    <string name="rendering_attr_coloredBuildings_name">Fargekod bygninger etter type</string>
+    <string name="rendering_attr_buildings15zoom_name">Bygninger på zoom 15</string>
+    <string name="rendering_attr_moreDetailed_name">Flere detaljer</string>
+    <string name="rendering_attr_hideAccess_name">Skjul adgangsrestriksjoner</string>
+    <string name="rendering_attr_showAccess_name">Vis adgangsrestriksjoner</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Vis veikvalitet</string>
+    <string name="rendering_attr_showSurfaces_name">Vis veidekke</string>
+    <string name="select_destination_and_intermediate_points">Velg rutepunkter</string>
+    <string name="layer_amenity_label">Punktnavn</string>
+    <string name="gpx_wpt">Rutepunkt</string>
+    <string name="voice_pref_title">Tale</string>
+    <string name="misc_pref_title">Diverse</string>
+    <string name="localization_pref_title">Lokaltilpassing</string>
+    <string name="lang_al">Albansk</string>
+	<string name="lang_ar">Arabisk</string>
+	<string name="lang_fa">Persisk</string>
+	<string name="lang_sc">Sardinsk</string>
+	<string name="route_descr_select_destination">Velg reisemål</string>
+    <string name="routing_attr_prefer_motorway_name">Foretrekk motorveier</string>
+	<string name="routing_attr_prefer_motorway_description">Foretrekk motorveier</string>
+	<string name="routing_attr_short_way_name">Korteste vei</string>
+	<string name="routing_attr_short_way_description">Bruk korteste vei</string>
+	<string name="routing_attr_avoid_toll_name">Unngå bomveier</string>
+	<string name="routing_attr_avoid_toll_description">Unngå bomveier</string>
+	<string name="routing_attr_avoid_unpaved_name">Unngå uasfalterte veier</string>
+	<string name="routing_attr_avoid_unpaved_description">Unngå uasfalterte veier</string>
+	<string name="routing_attr_avoid_ferries_name">Unngå ferger</string>
+	<string name="routing_attr_avoid_ferries_description">Unngå ferger</string>
+	<string name="routing_attr_avoid_motorway_name">Unngå motorveier</string>
+	<string name="routing_attr_avoid_motorway_description">Unngå motorveier</string>
+	<string name="routing_attr_weight_name">Vektgrense</string>
+	<string name="routing_attr_weight_description">Angi kjøretøyets vekt som er tillatt på ruter</string>
+    <string name="copying_osmand_files_descr">Kopierer OsmAnd-filer til nytt sted (%s)</string>
+    <string name="distance_measurement_clear_route">Slett alle punkter</string>
+    <string name="use_kalman_filter_compass_descr">Bruk Kalmanfilter for å unngå kompassavvik</string>
+    <string name="use_kalman_filter_compass">Bruk Kalmanfilter</string>
+    <string name="other_location">Annen</string>
+    <string name="available_downloads_left">Er tilgjengelig %1$d filer til nedlasting</string>
+    <string name="install_paid">Fullversjon</string>
+    <string name="clear_destination">Slett reisemål</string>
+    <string name="street_name">Gate</string>
+	<string name="choose_osmand_theme">Tema</string>
+    <string name="clear_dest_confirm">Er du sikker på at du vil slette reisemålpunktet (og rutepunkter)?</string>
+    <string name="rendering_attr_osmcTraces_name">Fottursymbol-overlegg</string>
+    <string name="safe_mode_description">Kjør programmet i sikker modus (med tregere Android i stedet for egen kode).</string>
+    <string name="safe_mode">Sikker modus</string>
+    <string name="native_library_not_running">Programmet kjører i sikker modus (kan deaktiveres i Innstillinger).</string>
+    <string name="interrupt_music_descr">Avbryt musikk ved meldinger</string>
+	<string name="interrupt_music">Avbryt musikk</string>
+	<string name="gpxup_public">Offentlig</string>
+	<string name="rendering_attr_appMode_description">Optimaliser kart for</string>
+	<string name="rendering_attr_contourLines_description">Vis fra zoom-nivå (krever kote-data):</string>
+	<string name="local_index_description">Klikk på et eksisterende element for å se flere detaljer, trykk og hold for å deaktivere eller slette. Gjeldende data på enheten (%1$s ledig):</string>
+	<string name="send_files_to_osm">Sende GPX-filer til OSM?</string>
+	<string name="arrival_distance_factor_early">Tidlig</string>
+    <string name="arrival_distance_factor_normally">Normal</string>
+    <string name="arrival_distance_factor_late">Sen</string>
+    <string name="arrival_distance_factor_at_last">De siste meterne</string>
+    <string name="arrival_distance">Ankomstmelding</string>
+    <string name="arrival_distance_descr">Hvor raskt vil du ha ankomstmeldingen?</string>
+    <string name="keep_informing_descr">Gjenta navigeringsinstruksjoner med jevne mellomrom</string>
+    <string name="keep_informing">Gjenta navigeringsinstruksjoner</string>
+	<string name="show_more_map_detail_descr">Vis noen vektorkartdetaljer (veier etc.) allerede ved lavere zoom</string>
+	<string name="choose_audio_stream">Utdata for taleveiledning</string>
+	<string name="choose_audio_stream_descr">Velg kanal til å avspille taleveiledning (systemavhengig)</string>
+	<string name="voice_stream_voice_call">Taleanropslyd</string>
+	<string name="voice_stream_notification">Varslingslyd</string>
+	<string name="voice_stream_music">Media-/musikklyd</string>
+	<string name="level_to_switch_vector_raster_descr">Minimum zoomnivå for å bruke vektorkart</string>
+	<string name="level_to_switch_vector_raster">Min. vektor-zoomnivå</string>
+	<string name="incomplete_locale">ufullstendig</string>
+	<string name="context_menu_item_add_waypoint">Legg til GPX-rutepunkt</string>
+	<string name="voice_is_not_available_title">Ingen taleveiledning valgt</string>
+	<string name="select_max_zoom_preload_area">Velg maksimum zoom til å forhåndslaste</string>
+	<string name="voice_data_initializing">Initialiserer taledata…</string>
+	<string name="update_poi_is_not_available_for_zoom">Oppdatering av interessepunkter er ikke tilgjengelig ved lave zoomnivåer</string>
+	<string name="arrived_at_destination">Du har ankommet ditt reisemål</string>
+	<string name="download_indexes_descr">Last ned eller oppdater data for offline bruk fra internett</string>
+	<string name="download_indexes">Last ned offline-data</string>
+	<string name="use_online_routing_descr">Bruk internett til å beregne rute</string>
+	<string name="use_online_routing">Bruk nettbasert navigering</string>
+	<string name="map_preferences_descr">Spesifiser kartinnstillinger: Kartkilde, rotasjon, markørposisjon, skjermorientering</string>
+	<string name="navigation_intent_invalid">Ugyldig format: %s</string>
+    <string name="hide_all_waypoints">Fjern alle</string>
+<string name="rendering_attr_shareTaxiRoutes_name">Samletaxi-ruter</string>
+    <string name="continue_navigation">Fortsett navigering</string>
+    <string name="pause_navigation">Midlertidig stopp navigering</string>
+ 	<string name="rendering_attr_hideWoodScrubs_name">Skjul skog og kratt</string>
+    <string name="rendering_attr_lessDetailed_name">Færre detaljer</string>
+    <string name="sort_by_distance">Sorter etter avstand</string>
+    <string name="sort_by_name">Sorter etter navn</string>
+    <string name="selected_gpx_info_show">\n\nTrykk og hold for å se på kartet</string>
+    <string name="gpx_info_waypoints">"Rutepunkter: %1$s "</string>
+	<string name="loading_streets">Laster gater…</string>
+	<string name="loading_cities">Laster byer…</string>
+	<string name="invalid_locations">Koordinater er ugyldige!</string>
+	<string name="go_back_to_osmand">Tilbake til OsmAnd-kart</string>
+	<string name="osb_comment_dialog_add_button">Legg til kommentar</string>
+	<string name="osb_comment_dialog_success">Kommentar ble vellykket lagt til</string>
+	<string name="no_buildings_found">Ingen bygninger funnet.</string>
+    <string name="loading_streets_buildings">Laster gater/bygninger…</string>
+	<string name="osmo_activity">OpenStreetMap-overvåking</string>
+    <string name="fav_point_dublicate_message">Favorittpunktnavn er endret til %1$s for å unngå dupliserte navn.</string>
+    <string name="gpx_selection_point">Punkt %1$s</string>
+    <string name="my_favorites">Mine favoritter</string>
+    <string name="osmo_center_location">Sentrer på skjermen</string>
+    <string name="color_red">rød</string>
+	<string name="color_pink">rosa</string>
+	<string name="color_orange">orange</string>
+	<string name="color_brown">brun</string>
+	<string name="color_yellow">gul</string>
+	<string name="color_lightblue">lyseblå</string>
+	<string name="color_blue">blå</string>
+	<string name="color_green">grønn</string>
+	
+    <string name="osmo_group_info">Info</string>
+    <string name="osmo_track_interval">Loggeintervall</string>
+	<string name="osmo_group_description">Beskrivelse</string>
+    <string name="use_points_as_intermediates">Beregn rute mellom punkter</string>
+    <string name="lang_sr">Serbisk</string>
+	<string name="lang_zh_CN">Forenklet kinesisk</string>
+	<string name="lang_zh_TW">Tradisjonell kinesisk</string>
+	<string name="keep_and_add_destination_point">Legg til som målpunkt</string>
+    <string name="select_gpx">Velg GPX …</string>
+    <string name="route_descr_select_on_map">Velg på kart…</string>
+    <string name="route_descr_favorite">Favoritt…</string>
+    <string name="route_preferences">Ruteinnstillinger</string>
+    <string name="route_info">Ruteinformasjon</string>
+    <string name="calculate_osmand_route_gpx">Beregn OsmAnd offline-rute</string>
+    <string name="app_mode_truck">Lastebil</string>
+    <string name="local_index_tile_data_name">Flisdata: %1$s</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptisk mercator</string>
+    <string name="delete_point">Slett punkt</string>
+    <string name="plugin_distance_point_time">tid</string>
+    <string name="plugin_distance_point_hdop">presisjon</string>
+    <string name="plugin_distance_point_speed">fart</string>
+    <string name="plugin_distance_point_ele">høyde</string>
+    <string name="plugin_distance_point">Punkt</string>
+    <string name="default_buttons_do_not_show_again">Ikke vis igjen</string>
+    <string name="use_magnetic_sensor">Bruk magnetisk sensor</string>
+    <string name="files_limit">%1$d filer igjen</string>
+    <string name="cancel_navigation">Stopp navigering</string>
+    <string name="hno">Husnummer</string>
+    <string name="select_address_activity">Velg adresse</string>
+    <string name="favourites_list_activity">Velg favoritt</string>
+    <string name="local_indexes_cat_srtm">Kotedata</string>
+    <string name="recording_context_menu_show">Vis</string>
+    <string name="srtm_paid_version_title">Programtillegg for koter</string>
+    <string name="av_settings_descr">Still inn lyd og video</string>
+    <string name="av_settings">"Lyd/video-innstillinger "</string>
+    <string name="av_control_stop">Stopp</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-programtillegg for offline koter</string>
+    <string name="map_widget_distancemeasurement">Avstandsmåling</string>
+    <string name="monitoring_control_stop">Stopp</string>
+    <string name="index_srtm_ele">Koter</string>
+    <string name="srtm_plugin_name">Programtillegg for koter</string>
+    <string name="download_select_map_types">Andre kart</string>
+    <string name="download_roads_only_item">Bare veier</string>
+    <string name="download_srtm_maps">Koter</string>
+    <string name="download_regular_maps">Vanlige kart</string>
+    <string name="download_roads_only_maps">Rene veikart</string>
+    <string name="osmodroid_plugin_name">OsMoDroid-programtillegg</string>
+	<string name="tip_altitude_offset">Høydekorrigering</string>
+	<string name="search_villages_and_postcodes">Søk landsbyer/postnummer</string>
+	<string name="rendering_attr_showRoadMaps_description">Velg når det skal vises rene veikart:</string>
+	<string name="rendering_attr_showRoadMaps_name">Rene veikart</string>
+    <string name="osmand_play_title_30_chars">OsmAnd kart &amp; navigering</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ kart &amp; navigering</string>
+	<string name="map_widget_view_direction">Synsretning</string>
+	<string name="gpxup_private">Privat</string>
+	<string name="share_route_as_gpx">Del rute som GPX-fil</string>
+	<string name="modify_transparency">Endre gjennomsiktighet (0 - gjennomsiktig, 255 - ugjennomsiktig)</string>
+	<string name="extra_settings">Avanserte innstillinger</string>
+	<string name="select_plugin_to_activate">Trykk på et programtillegg for å aktivere eller deaktivere det. (Omstart av OsmAnd kan være nødvendig.)</string>
+	<string name="gpx_visibility_txt">Synlighet</string>
+	<string name="gpx_description_txt">Beskrivelse</string>
+	<string name="use_transparent_map_theme">Gjennomsiktig tema</string>
+	<string name="keep_informing_never">Aldri</string>
+    <string name="local_index_installed">Utgave</string>
+	<string name="local_index_mi_export">Eksporter</string>
+	<string name="gpx_option_destination_point">Bruk gjeldende mål</string>
+	<string name="tip_location_sharing">Del en posisjon</string>
+	<string name="error_doing_search">Feil oppstod i offline-søk</string>
+	<string name="send_location">Send posisjon</string>
+	<string name="amenity_type_administrative">Administrative</string>
+	<string name="import_save">Lagre</string>
+	<string name="layer_transport_route">Transportrute</string>
+	<string name="unzipping_file">Pakker ut fil…</string>
+	<string name="transport_Stop">Stoppested</string>
+	<string name="transport_stops">Stoppesteder</string>
+	<string name="downloading_file_new">Laster ned…</string>
+	<string name="loading_postcodes">Laster postnummer…</string>
+	<string name="close">Lukk</string>
+	<string name="loading_data">Laster data…</string>
+	</resources>

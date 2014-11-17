@@ -1963,7 +1963,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="rendering_category_routes">Trasy</string>
     <string name="rendering_category_details">Szczegóły</string>
     <string name="rendering_category_transport">Transport</string>
-    <string name="rendering_category_others">Inny atrybuty map</string>
+    <string name="rendering_category_others">Inne atrybuty mapy</string>
     <string name="map_widget_appearance_rem">Pozostałe elementy</string>
     <string name="map_widget_top">Pasek statusu</string>
 	<string name="map_widget_right">Prawy panel</string>
@@ -1976,10 +1976,10 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="select_impassable_road">Wybierz mapę</string>
     <string name="impassable_road">Unikaj dróg…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Trasy tramwajowe i kolejowe</string>
-    <string name="tip_recent_changes_1_9_t">"Zmiany w 1.9: * Aktualizacja stylów mapy z renderowaniem warstw nawierzchni drogi, transportu i symboli turystycznych * Wyszukiwanie punktów POI wzdłuż trasy * Zaznacz nieprzejezdną drogę dla danego przejazdu * Łatwiejsze do pobrania i aktualizacji mapy * Otrzymywanie powiadomień wizualnych i audio podczas zbliżania się do punktu * Drukuj informacje o trasie i manewrach * Wsparcie dla asystenta pasa ruchu * Wsparcie Android Wear * Dużo zmiany UI * Oddzielne powiększenie rozmiaru dla tekstu na mapie * Specjalne powiadomienia dźwiękowe w przypadku niewyświetlania trasy * Funkcjonalności logowania do Osmo * Poprawienie niezgodności versio Osmo "</string>
+    <string name="tip_recent_changes_1_9_t">"Zmiany w 1.9: * Aktualizacja stylów mapy z renderowaniem warstw nawierzchni drogi, transportu i symboli turystycznych * Wyszukiwanie punktów POI wzdłuż trasy * Zaznaczanie nieprzejezdnej drogi dla danego przejazdu * Ułatwienia pobrania i aktualizacji mapy * Otrzymywanie powiadomień wizualnych i audio podczas zbliżania się do punktu * Drukuj informacje o trasie i manewrach * Wsparcie dla asystenta pasa ruchu * Wsparcie Android Wear * Dużo zmian UI * Oddzielne powiększenie rozmiaru dla tekstu na mapie * Specjalne powiadomienia dźwiękowe w przypadku zjechania z trasy * Funkcjonalności logowania do Osmo * Poprawienie niezgodności wersji OsMo "</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Trasy pociągów</string>
     <string name="rendering_attr_tramRoutes_name">Trasy tramwajowe</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">Trasy taxi</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Udostępniaj trasy taxi</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trasy trolejbusowe</string>
     <string name="rendering_attr_busRoutes_name">Trasy autobusowe</string>
     <string name="rendering_category_hide">Ukryj</string>
