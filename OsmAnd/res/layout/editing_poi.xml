@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/LinkToOsmDoc"
@@ -18,7 +18,7 @@
         <TableLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="1">
+            android:stretchColumns="1" >
 
             <TableRow>
 
@@ -33,11 +33,11 @@
                 <EditText
                     android:id="@+id/Name"
                     android:layout_width="250dp"
-                    android:minWidth="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="">
+                    android:minWidth="250dp"
+                    android:text="" >
 
                     <requestFocus />
                 </EditText>
@@ -54,10 +54,10 @@
                 <AutoCompleteTextView
                     android:id="@+id/Type"
                     android:layout_width="250dp"
-                    android:minWidth="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:minWidth="250dp"
                     android:text="" />
             </TableRow>
 
@@ -72,12 +72,13 @@
                 <EditText
                     android:id="@+id/OpeningHours"
                     android:layout_width="250dp"
-                    android:minWidth="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:hint="Mo-Su 08:00-20:00"
-                    android:text=""></EditText>
+                    android:minWidth="250dp"
+                    android:text="" >
+                </EditText>
             </TableRow>
 
             <TableRow>
@@ -91,10 +92,11 @@
                 <EditText
                     android:id="@+id/StreetName"
                     android:layout_width="250dp"
-                    android:minWidth="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"></EditText>
+                    android:layout_marginRight="5dp"
+                    android:minWidth="250dp" >
+                </EditText>
             </TableRow>
 
             <TableRow>
@@ -108,10 +110,11 @@
                 <EditText
                     android:id="@+id/HouseNumber"
                     android:layout_width="250dp"
-                    android:minWidth="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"></EditText>
+                    android:layout_marginRight="5dp"
+                    android:minWidth="250dp" >
+                </EditText>
             </TableRow>
 
             <TableRow>
@@ -120,18 +123,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="@string/phone"
-                    android:id="@+id/" />
+                    android:text="@string/phone" />
 
                 <EditText
                     android:id="@+id/Phone"
                     android:layout_width="250dp"
-                    android:minWidth="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:hint="0123456789"
-                    android:inputType="phone"></EditText>
+                    android:inputType="phone"
+                    android:minWidth="250dp" >
+                </EditText>
             </TableRow>
 
             <TableRow>
@@ -145,11 +148,12 @@
                 <EditText
                     android:id="@+id/Website"
                     android:layout_width="250dp"
-                    android:minWidth="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:hint="http://osmand.net"></EditText>
+                    android:hint="http://osmand.net"
+                    android:minWidth="250dp" >
+                </EditText>
             </TableRow>
 
             <TableRow>
@@ -164,11 +168,12 @@
                 <EditText
                     android:id="@+id/Comment"
                     android:layout_width="250dp"
-                    android:minWidth="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="@string/poi_dialog_comment_default"></EditText>
+                    android:minWidth="250dp"
+                    android:text="@string/poi_dialog_comment_default" >
+                </EditText>
             </TableRow>
 
             <TableRow>
@@ -183,17 +188,17 @@
             </TableRow>
         </TableLayout>
 
-
         <TableLayout
             android:id="@+id/advancedModeTable"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:stretchColumns="1"
-            android:visibility="gone"></TableLayout>
+            android:visibility="gone" >
+        </TableLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" >
 
             <Button
                 android:id="@+id/addTag"
@@ -206,36 +211,39 @@
             <Button
                 android:id="@+id/advancedMode"
                 android:layout_width="wrap_content"
-                android:minWidth="150dp"
                 android:layout_height="wrap_content"
+                android:minWidth="150dp"
                 android:text="@string/btn_advanced_mode" />
         </LinearLayout>
 
         <TextView
-            android:text="@string/poi_dialog_other_tags_message"
             android:id="@+id/TextView"
-            android:layout_marginLeft="5dp"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/poi_dialog_other_tags_message" />
 
         <LinearLayout
             android:id="@+id/LinearLayout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            android:gravity="bottom|center">
+            android:gravity="bottom|center"
+            android:orientation="horizontal" >
 
             <Button
+                android:id="@+id/Cancel"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:text="@string/default_buttons_cancel"
-                android:id="@+id/Cancel"></Button>
+                android:text="@string/default_buttons_cancel" >
+            </Button>
 
             <Button
+                android:id="@+id/Commit"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:text="@string/default_buttons_commit"
-                android:id="@+id/Commit"></Button>
+                android:text="@string/default_buttons_commit" >
+            </Button>
         </LinearLayout>
     </LinearLayout>
+
 </ScrollView>
