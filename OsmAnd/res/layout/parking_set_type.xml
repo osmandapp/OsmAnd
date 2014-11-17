@@ -2,12 +2,12 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-   android:gravity="center_horizontal" >
+    android:gravity="center_horizontal">
 
     <TableRow
         android:id="@+id/tableRow1"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <ImageButton
             android:id="@+id/parking_no_lim_button"
@@ -31,7 +31,7 @@
     <TableRow
         android:id="@+id/tableRow2"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/parking_lim_text"

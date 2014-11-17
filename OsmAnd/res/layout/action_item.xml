@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:gravity="center_vertical|center_horizontal"
-	android:paddingTop="0dip"
-	android:paddingBottom="0dip"
-	android:paddingLeft="12dip"
-	android:paddingRight="12dip" 
-	android:clickable="true"
-	android:background="@drawable/quickaction_slider_btn">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical|center_horizontal"
+    android:paddingTop="0dip"
+    android:paddingBottom="0dip"
+    android:paddingLeft="12dip"
+    android:paddingRight="12dip"
+    android:clickable="true"
+    android:background="@drawable/quickaction_slider_btn">
 
-	<ImageView
-		android:id="@+id/icon" 
-		android:layout_width="fill_parent" 
-		android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 
-	<TextView 
-		android:id="@+id/title"
-		android:layout_width="fill_parent" 
-		android:layout_height="fill_parent" 
-		android:gravity="center_vertical|center_horizontal"
-		android:textSize="12sp"
-		android:textColor="#666"/>
-		
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="12sp"
+        android:textColor="#666" />
+
 </LinearLayout>

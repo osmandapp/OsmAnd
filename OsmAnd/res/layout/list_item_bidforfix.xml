@@ -3,7 +3,7 @@
     android:id="@+id/bidforfixitemlayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/white" >
+    android:background="@android:color/white">
 
     <TextView
         android:id="@+id/bffiText"

@@ -6,7 +6,7 @@
     android:paddingBottom="5dp"
     android:paddingLeft="8dp"
     android:paddingRight="4dp"
-    android:paddingTop="5dp" >
+    android:paddingTop="5dp">
 
     <ImageView
         android:id="@+id/osmo_user_icon"
@@ -18,19 +18,18 @@
     <TextView
         android:id="@+id/osmo_label"
         style="@style/ListText"
-        android:layout_width="0dp" 
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:maxLines="7"
         android:layout_weight="1" />
-    
+
     <TextView
         android:id="@+id/osmo_label_time"
         style="@style/ListText.Small"
-        android:layout_width="wrap_content" 
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-         />
+        android:layout_marginLeft="3dp" />
 
     <!-- <include layout="@layout/check_item" />  -->
 

@@ -6,7 +6,7 @@
     android:paddingBottom="5dp"
     android:paddingLeft="4dp"
     android:paddingRight="4dp"
-    android:paddingTop="5dp" >
+    android:paddingTop="5dp">
 
     <ImageView
         android:id="@+id/explist_indicator"
@@ -24,13 +24,12 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="0dp"
         android:gravity="center_vertical"
-        android:textSize="18sp">
-    </TextView>
-    
-        <LinearLayout
+        android:textSize="18sp"></TextView>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right" >
+        android:layout_gravity="right">
 
         <ImageView
             android:id="@+id/check_item"
@@ -38,10 +37,9 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_settings_dark"
             android:focusable="false"
-            android:gravity="center_vertical"
-            />
-        
+            android:gravity="center_vertical" />
+
     </LinearLayout>
-    
+
 
 </LinearLayout>
