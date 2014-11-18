@@ -1054,4 +1054,15 @@
 	<string name="loading_postcodes">Laster postnummer…</string>
 	<string name="close">Lukk</string>
 	<string name="loading_data">Laster data…</string>
+	<string name="advanced_settings">Avansert</string>
+	<string name="srtm_plugin_description">Muliggjør å laste ned offline koter og relieff-skygger (\'Innstillinger\' → \'Karthåndtering\' → \'Last ned\' → Velg ønsket karttype).</string>
+    <string name="tip_update_index_t">"Oppdaterte kartdata er viktig for offline kartvisning, for interessepunkt/adresse-søk og for offline navigering. OsmAnd tilbyr en filbehandler for kart til å laste ned disse offline-kartene og for å se etter tilgjengelige oppdateringer.
+\n\nFor å laste ned kart gå til \'Innstillinger\' → \'Karthåndtering\' → \'Last ned\'.
+\n\nEtter at den globale regionlisten er hentet fra internett, trykk på en oppføring for å laste ned eller oppdatere en fil. Vær oppmerksom på filtypevelgeren nær toppen av skjermen for å velge den typen nedlasting du ønsker (vanlige kart, relieff-overlegg etc.).
+\n\nDu kan filtrere regionlisten ved å skrive noen bokstaver, eller du kan velge alternativet \'Innstillinger\' → \'Filtrer nedlastede\' for å se oppdateringer bare for de dataene som allerede er på enheten.
+\n\n\t* Oppføringer i \'grønt\' indikerer datafiler identiske på enhet og server
+\n\t* Oppføringer i  \'blått\' indikerer tilgjengelige oppdateringer på server
+\n\t* Oppføringer i kursiv skrift indikerer data deaktiverte på enheten "</string>
+	<string name="first_time_msg">Takk for at du bruker OsmAnd. For mange funksjoner i dette programmet trenger du noen regionale offline-data som du kan laste ned via \'Innstillinger\' → \'Karthåndtering\'. Etterpå vil du være i stand til å se kart, finne adresser, lete etter interessepunkter og finne offentlig transport.</string>    
+	<string name="download_files">Last ned</string>
 	</resources>
