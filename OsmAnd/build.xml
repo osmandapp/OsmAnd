@@ -97,6 +97,9 @@
 			<fileset dir="../../resources/obf_creation/">
 				<include name="rendering_types.xml" />
 			</fileset>
+			<fileset dir="../../resources/poi/">
+				<include name="poi_types.xml" />
+			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/map/">
 			<fileset dir="../../resources/countries-info/">
