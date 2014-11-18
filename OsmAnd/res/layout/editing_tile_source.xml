@@ -41,14 +41,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/edit_tilesource_choose_existing"></TextView>
+                    android:text="@string/edit_tilesource_choose_existing" />
 
                 <Spinner
                     android:id="@+id/TileSourceSpinner"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"></Spinner>
+                    android:layout_marginRight="5dp" />
             </TableRow>
 
             <TableRow
@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:lines="5"
                     android:minLines="2"
-                    android:text=""></EditText>
+                    android:text="" />
             </TableRow>
 
             <TableRow
@@ -82,7 +82,7 @@
                     android:id="@+id/MinZoom"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:text=""></EditText>
+                    android:text="" />
             </TableRow>
 
             <TableRow
@@ -98,7 +98,7 @@
                     android:id="@+id/MaxZoom"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:text=""></EditText>
+                    android:text="" />
             </TableRow>
 
             <TableRow
@@ -114,7 +114,7 @@
                     android:id="@+id/ExpirationTime"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:text=""></EditText>
+                    android:text="" />
             </TableRow>
 
             <TableRow

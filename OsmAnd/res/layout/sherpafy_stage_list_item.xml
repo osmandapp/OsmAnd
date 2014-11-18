@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:paddingBottom="8dp"
-    android:paddingTop="8dp"
-    android:orientation="horizontal">
+    android:paddingTop="8dp">
 
     <FrameLayout
         android:layout_width="48dp"
@@ -47,9 +47,9 @@
         android:id="@+id/AdditionalText"
         android:layout_width="40dp"
         android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
-        android:layout_gravity="center_vertical"
         android:textColor="@color/sherpafy_add_text"
         android:textSize="14sp" />
 

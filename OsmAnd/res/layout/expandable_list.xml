@@ -19,11 +19,11 @@
         android:id="@android:id/list"
         style="@style/OsmandListView"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="0dp"
         android:layout_weight="1"
-        android:groupIndicator="@android:color/transparent"></ExpandableListView>
+        android:groupIndicator="@android:color/transparent" />
 
 </LinearLayout>

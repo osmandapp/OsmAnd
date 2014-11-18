@@ -12,29 +12,29 @@
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:layout_gravity="center_vertical"
         tools:src="@drawable/ic_action_info_dark" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_weight="1"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginLeft="11dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:textSize="18sp"
         tools:text="Some title text" />
 
     <CheckBox
         android:id="@+id/check_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginLeft="11dp"
-        android:focusable="false"
-        android:layout_gravity="center_vertical" />
+        android:focusable="false" />
 
 </LinearLayout>

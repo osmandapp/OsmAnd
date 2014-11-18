@@ -5,13 +5,13 @@
     android:background="@drawable/sherpafy_tour_row">
 
     <LinearLayout
+        android:id="@+id/AreaPreview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
         android:layout_marginTop="15dp"
-        android:id="@+id/AreaPreview"
         android:background="@drawable/tour_bg"
         android:orientation="vertical">
 
@@ -20,13 +20,13 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginTop="1dp"
                 android:id="@+id/TourImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"></ImageView>
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginTop="1dp"
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/TourName"
@@ -45,7 +45,7 @@
         <TextView
             android:id="@+id/TourDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -57,18 +57,18 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
             android:layout_marginLeft="14dp"
             android:layout_marginRight="14dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="3dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/MoreInformation"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:focusable="false" />
+                android:focusable="false"
+                android:textSize="14sp" />
         </LinearLayout>
 
 

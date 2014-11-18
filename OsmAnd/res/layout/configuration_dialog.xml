@@ -5,16 +5,16 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/TopBar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:id="@+id/TopBar" />
+        android:orientation="horizontal" />
 
     <ListView
         android:id="@android:id/list"
         style="@style/OsmandListView"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"></ListView>
+        android:layout_height="fill_parent" />
 
 </LinearLayout>

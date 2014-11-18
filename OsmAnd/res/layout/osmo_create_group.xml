@@ -13,28 +13,28 @@
         <TableRow>
 
             <TextView
-                android:paddingLeft="3dp"
-                android:layout_span="2"
+                android:id="@+id/osmo_group_create_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/osmo_group_create_info"
-                android:textSize="18sp"
+                android:layout_span="2"
                 android:drawableRight="@drawable/ic_action_info_dark"
-                android:text="@string/osmo_group_information" />
+                android:paddingLeft="3dp"
+                android:text="@string/osmo_group_information"
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:paddingLeft="3dp"
                 android:id="@+id/osmo_group_create_dinfo"
-                android:textSize="16sp"
-                android:layout_span="2"
-                android:minLines="3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/osmo_group_information_desc"
+                android:layout_span="2"
                 android:animateLayoutChanges="true"
+                android:minLines="3"
+                android:paddingLeft="3dp"
+                android:text="@string/osmo_group_information_desc"
+                android:textSize="16sp"
                 android:visibility="gone" />
         </TableRow>
 

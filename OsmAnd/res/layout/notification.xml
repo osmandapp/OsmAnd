@@ -3,16 +3,16 @@
     android:id="@+id/layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="@color/color_black">
+    android:background="@color/color_black"
+    android:orientation="vertical">
 
     <net.osmand.access.NotificationTextView
         android:id="@+id/message"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:textSize="18sp"
-        android:gravity="fill_horizontal" />
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:gravity="fill_horizontal"
+        android:textSize="18sp" />
 
 </LinearLayout>

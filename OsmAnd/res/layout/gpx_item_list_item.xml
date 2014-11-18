@@ -30,19 +30,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginRight="3dp"
-                android:layout_marginLeft="2dp"></TextView>
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="3dp" />
         </FrameLayout>
 
         <TextView
             android:id="@+id/name"
             style="@style/ListText.Small"
             android:layout_width="0dp"
-            android:paddingTop="2dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"></TextView>
+            android:paddingTop="2dp" />
     </LinearLayout>
 
     <TextView
@@ -51,6 +51,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:maxLines="25"></TextView>
+        android:maxLines="25" />
 
 </LinearLayout>

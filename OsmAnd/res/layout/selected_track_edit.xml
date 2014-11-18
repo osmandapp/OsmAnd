@@ -28,14 +28,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gpx_split_interval"></TextView>
+            android:text="@string/gpx_split_interval" />
 
         <Spinner
             android:id="@+id/Spinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"></Spinner>
+            android:layout_marginRight="5dp" />
     </TableRow>
 
 </TableLayout>

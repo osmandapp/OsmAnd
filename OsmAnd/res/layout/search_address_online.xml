@@ -15,7 +15,7 @@
             android:id="@+id/ProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible"></ProgressBar>
+            android:visibility="invisible" />
 
         <EditText
             android:id="@+id/SearchText"
@@ -23,21 +23,21 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/hint_search_online"
-            android:text=""></EditText>
+            android:text="" />
 
         <Button
             android:id="@+id/SearchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
-            android:text="@string/search_button"></Button>
+            android:text="@string/search_button" />
     </LinearLayout>
 
     <ListView
         android:id="@android:id/list"
+        style="@style/OsmandListView"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        style="@style/OsmandListView"></ListView>
+        android:layout_weight="1" />
 
 </LinearLayout>

@@ -6,10 +6,10 @@
 
     <TextView
         android:id="@+id/local_openstreetmap_name"
-        android:gravity="center_vertical"
+        style="@style/ListText.Small"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
         android:layout_weight="1"
-        style="@style/ListText.Small"
-        android:layout_marginLeft="8dp"></TextView>
+        android:gravity="center_vertical" />
 </LinearLayout>

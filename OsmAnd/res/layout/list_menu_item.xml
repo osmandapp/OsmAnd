@@ -3,32 +3,32 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:layout_marginLeft="5dip"
     android:layout_marginRight="5dip"
-    android:background="@color/color_white">
+    android:background="@color/color_white"
+    android:orientation="horizontal">
 
     <ImageView
-        android:layout_marginLeft="7dip"
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="7dip"
         android:gravity="center"
-        android:layout_gravity="center_vertical" />
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="12dip"
         android:layout_marginLeft="12dip"
         android:layout_marginTop="12dip"
-        android:layout_marginBottom="12dip"
+        android:layout_weight="1"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
-        android:textSize="18sp"
         android:textColor="@color/color_black"
-        android:layout_weight="1" />
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -39,9 +39,9 @@
             android:id="@+id/icon_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:focusable="false"
             android:gravity="center_vertical"
-            android:visibility="gone"
-            android:focusable="false" />
+            android:visibility="gone" />
 
         <CheckBox
             android:id="@+id/check_item"

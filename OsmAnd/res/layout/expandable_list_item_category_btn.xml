@@ -19,12 +19,12 @@
     <TextView
         android:id="@+id/category_name"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="0dp"
+        android:layout_weight="1"
         android:gravity="center_vertical"
-        android:textSize="18sp"></TextView>
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -35,9 +35,9 @@
             android:id="@+id/check_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_action_settings_dark"
             android:focusable="false"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:src="@drawable/ic_action_settings_dark" />
 
     </LinearLayout>
 

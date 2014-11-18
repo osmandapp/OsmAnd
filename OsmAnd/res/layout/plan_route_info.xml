@@ -10,32 +10,32 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp">
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp">
 
         <LinearLayout
+            android:id="@+id/RouteTargets"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/RouteTargets">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/ValidateTextView"
-                android:textSize="16sp"
-                android:visibility="gone"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:gravity="center"
-                android:textColor="@color/color_invalid"></TextView>
+                android:text=""
+                android:textColor="@color/color_invalid"
+                android:textSize="16sp"
+                android:visibility="gone" />
 
             <TextView
+                android:id="@+id/Targets"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/map_config_white"
                 android:drawablePadding="3dp"
                 android:text="@string/target_points"
-                android:id="@+id/Targets"
                 android:textSize="24sp" />
 
             <LinearLayout
@@ -47,14 +47,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:text="@string/route_from"
-                    android:textSize="18sp"></TextView>
+                    android:textSize="18sp" />
 
                 <Spinner
                     android:id="@+id/FromSpinner"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:textSize="18sp"></Spinner>
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -89,7 +89,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:textSize="18sp"></Spinner>
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View
@@ -101,19 +101,19 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/RouteInfoControls"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center"
-        android:id="@+id/RouteInfoControls">
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/Prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="centerInside"
             android:background="@drawable/map_btn_plain"
             android:contentDescription="@string/previous_button"
+            android:scaleType="centerInside"
             android:src="@drawable/ax_1_navigation_previous_item_light" />
 
         <ImageButton
@@ -121,9 +121,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:scaleType="centerInside"
             android:background="@drawable/map_btn_plain"
             android:contentDescription="@string/info_button"
+            android:scaleType="centerInside"
             android:src="@drawable/ax_2_action_about_light" />
 
         <ImageButton
@@ -131,9 +131,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:scaleType="centerInside"
             android:background="@drawable/map_btn_plain"
             android:contentDescription="@string/next_button"
+            android:scaleType="centerInside"
             android:src="@drawable/ax_1_navigation_next_item_light" />
 
     </LinearLayout>
@@ -142,8 +142,8 @@
         android:id="@+id/SimulateRoute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_gravity="center_horizontal"
         android:drawableLeft="@drawable/ic_action_play_dark"
+        android:gravity="center"
         android:text="@string/animate_route" />
 </LinearLayout>

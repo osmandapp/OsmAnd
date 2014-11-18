@@ -5,48 +5,48 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_marginLeft="5dp"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:text="@string/osb_comment_dialog_message" />
 
     <EditText
         android:id="@+id/BugMessage"
-        android:minLines="1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:minLines="1" />
 
 
     <TextView
-        android:layout_marginLeft="5dp"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:text="@string/osb_comment_dialog_author" />
 
     <EditText
         android:id="@+id/AuthorName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
         android:text="NoName" />
 
 
     <TextView
-        android:layout_marginLeft="5dp"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:text="@string/osb_author_dialog_password" />
 
     <EditText
         android:id="@+id/Password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
         android:inputType="textPassword" />
 
 

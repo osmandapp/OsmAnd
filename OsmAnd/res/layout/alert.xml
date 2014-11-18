@@ -7,12 +7,12 @@
 
     <TextView
         android:id="@+id/message"
-        android:focusable="true"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:textSize="18sp"
-        android:gravity="fill_horizontal" />
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:focusable="true"
+        android:gravity="fill_horizontal"
+        android:textSize="18sp" />
 
 </LinearLayout>
