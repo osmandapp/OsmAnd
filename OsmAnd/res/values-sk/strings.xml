@@ -2033,4 +2033,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_category_hide">Skryť</string>
     <string name="lock_screen_request_explanation">%1$s potrebuje toto oprávnenie na vypnutie obrazovky pre šetrenie energiou.</string>
     <string name="wake_on_voice_never">Nikdy</string>
-    </resources>
+    <string name="advanced_settings">Pokročilé</string>
+	</resources>
