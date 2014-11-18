@@ -35,7 +35,7 @@ public class ConfigureMapMenu {
 
 	private boolean allModes = false;
 
-	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
+	public ContextMenuAdapter createListAdapter(final MapActivity ma, final boolean advanced) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(ma, allModes);
 		adapter.setDefaultLayoutId(R.layout.drawer_list_item);
 		adapter.item(R.string.configure_map).icons(R.drawable.ic_back_drawer_dark, R.drawable.ic_back_drawer_white)
@@ -52,12 +52,26 @@ public class ConfigureMapMenu {
 			@Override
 			public void onClick(boolean result) {
 				allModes = true;
-				ma.getMapActions().prepareOptionsMenu(createListAdapter(ma));
+				ma.getMapActions().prepareOptionsMenu(createListAdapter(ma, advanced));
 			}
 		});
 
 		createLayersItems(adapter, ma);
-		createRenderingAttributeItems(adapter, ma);
+		if (!advanced){
+			adapter.item(R.string.btn_advanced_mode).icons(R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_light)
+					.selected(advanced ? 1 : 0)
+					.listen(new OnContextMenuClick() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+							ma.getMapActions().prepareOptionsMenu(createListAdapter(ma, isChecked));
+							return false;
+						}
+					}).reg();
+		}
+
+		if (advanced) {
+			createRenderingAttributeItems(adapter, ma);
+		}
 		return adapter;
 	}
 	
@@ -191,7 +205,7 @@ public class ConfigureMapMenu {
 						}
 						adapter.setItemDescription(pos, getRenderDescr(activity));
 						dialog.dismiss();
-						activity.getMapActions().prepareOptionsMenu(createListAdapter(activity));
+						activity.getMapActions().prepareOptionsMenu(createListAdapter(activity, true));
 					}
 
 				});

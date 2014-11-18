@@ -650,7 +650,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	public void prepareConfigureMap() {
-		prepareOptionsMenu(new ConfigureMapMenu().createListAdapter(mapActivity));
+		prepareOptionsMenu(new ConfigureMapMenu().createListAdapter(mapActivity, true));
 	}
 
 	private ContextMenuAdapter createOptionsMenu() {
