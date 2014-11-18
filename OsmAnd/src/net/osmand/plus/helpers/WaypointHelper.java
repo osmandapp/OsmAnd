@@ -57,7 +57,7 @@ public class WaypointHelper {
 	public static final int FAVORITES = 3;
 	public static final int ALARMS = 4;
 	public static final int MAX = 5;
-	public static final int[] SEARCH_RADIUS_VALUES = {50, 100, 250, 500, 1000, 1500};
+	public static final int[] SEARCH_RADIUS_VALUES = {50, 100, 150, 250, 500, 1000, 1500};
 	
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<List<LocationPointWrapper>>();
 	private ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<LocationPoint, Integer>();
