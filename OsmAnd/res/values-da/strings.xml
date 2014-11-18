@@ -1859,4 +1859,5 @@ Nogle af de centrale funktioner:
     <string name="wake_on_voice_descr">Tænd for skærmen når et sving nærmer sig</string>
     <string name="lock_screen_request_explanation">%1$s behøver denne tilladelse til at slukke for skærmen for strømbesparende funktion.</string>
     <string name="wake_on_voice_never">Aldrig</string>
-    </resources>
+    <string name="advanced_settings">Avanceret</string>
+	</resources>
