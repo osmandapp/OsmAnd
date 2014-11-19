@@ -2,15 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
-	<TextView android:id="@+id/ValidateTextView" android:textSize="16sp"  android:visibility="gone"  android:layout_width="fill_parent" android:layout_height="wrap_content" 
-	    	android:text="" android:gravity="center" android:textColor="@color/color_invalid"></TextView>
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/ValidateTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/color_invalid"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/LinearLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
 
     </LinearLayout>
@@ -20,24 +29,23 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp" >
+        android:layout_marginTop="5dp">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:text="@string/route_from"
-                    android:textSize="18sp" >
-                </TextView>
+                    android:textSize="18sp" />
 
                 <Spinner
                     android:id="@+id/FromSpinner"
@@ -45,8 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-					android:textSize="18sp" >
-                </Spinner>
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <TextView
@@ -56,19 +63,19 @@
                 android:layout_marginLeft="3dp"
                 android:gravity="left"
                 android:textSize="18sp" />
-                
-            
-             <LinearLayout
+
+
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:text="@string/route_to"
-                    android:textSize="18sp" >
-                    
+                    android:textSize="18sp">
+
                 </TextView>
 
                 <Spinner
@@ -76,11 +83,10 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp" 
-                    android:textSize="18sp" >
-                </Spinner>
+                    android:layout_marginRight="5dp"
+                    android:textSize="18sp" />
             </LinearLayout>
-            
+
         </LinearLayout>
     </ScrollView>
 

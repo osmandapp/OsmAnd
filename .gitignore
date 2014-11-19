@@ -1,5 +1,6 @@
 *.render.xml
 *.render_template.xml
+poi_types.xml
 *.map_styles_presets.xml
 routing*.xml
 rendering_types.xml

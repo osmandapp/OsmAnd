@@ -2,44 +2,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
-        android:background="?attr/expandable_category_color"
-        android:paddingTop="6dp"
-        android:paddingBottom="3dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingLeft="5dp"
-            >
-        <CheckBox android:id="@+id/check_item" android:focusable="false" android:gravity="top" 
-            		android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"/>
-        </LinearLayout>
-    <TextView
-        android:id="@+id/plugin_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="top"
-        android:textStyle="bold"
-        android:textColor="?android:textColorPrimary"
-        style="@style/ListText" android:text="@string/extra_settings"
-        android:paddingRight="10dp">
-    </TextView>
-	</LinearLayout>
+        android:background="?attr/expandable_category_color"
+        android:paddingBottom="3dp"
+        android:paddingTop="6dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp">
+
+            <CheckBox
+                android:id="@+id/check_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:gravity="top" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/plugin_name"
+            style="@style/ListText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:paddingRight="10dp"
+            android:text="@string/extra_settings"
+            android:textColor="?android:textColorPrimary"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/plugin_descr"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:maxLines="7"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
         android:text="@string/osmand_extra_settings_description"
         android:textColor="?android:textColorSecondary"
         android:textSize="14sp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp">
+        android:visibility="gone">
 
     </TextView>
 

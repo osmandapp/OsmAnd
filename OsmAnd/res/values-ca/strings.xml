@@ -1837,7 +1837,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="lang_sr">Serbi</string>
 	<string name="lang_zh_CN">Xinès simplificat</string>
 	<string name="lang_zh_TW">Xinès tradicional</string>
-	<string name="rendering_attr_subwayMode_name">Mode subterrani</string>
+	<string name="rendering_attr_subwayMode_name">Rutes de subterrani</string>
  	<string name="continue_navigation">Continua la navegació</string>
     <string name="pause_navigation">Suspèn la navegació</string>
 	<string name="rendering_attr_alpineHiking_name">Escala senderista SAC (Club Alpí Suís)</string>
@@ -1876,7 +1876,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
     <string name="distance">Distància</string>
-    <string name="rendering_attr_publicTransportMode_name">Mode transport públic</string>
+    <string name="rendering_attr_publicTransportMode_name">"Rutes de bus,  troleibus i tramvia"</string>
 	<string name="save_track_to_gpx_globally">Desa la traça a un arxiu GPX</string>
 	<string name="save_track_to_gpx_globally_descr">L\'enregistrament de la posició en un arxiu GPX es pot activar o desactivar utilitzant el giny associat, a la pantalla del mapa</string>
 	<string name="save_track_interval_globally">Interval d\'enregistrament</string>
@@ -1925,7 +1925,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_attr_shareTaxiRoutes_name">Comparteix rutes de taxi</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rutes de troleibús</string>
     <string name="rendering_attr_busRoutes_name">Rutes de bus</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Tramvia i tren</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Rutes de tramvia i tren</string>
     <string name="select_impassable_road">Selecciona en el mapa</string>
     <string name="impassable_road">Evita carreteres…</string>
     <string name="rendering_category_hide">Amaga</string>
@@ -1933,4 +1933,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="wake_on_voice_descr">Activa la pantalla del mòbil en aproximar-se a un gir</string>
     <string name="lock_screen_request_explanation">"%1$s necessita  aquest permís per la funcionalitat de posar la pantalla en mode d\'estalvi d\'energia."</string>
     <string name="wake_on_voice_never">Mai</string>
-    </resources>
+    <string name="advanced_settings">Avançat</string>
+	</resources>

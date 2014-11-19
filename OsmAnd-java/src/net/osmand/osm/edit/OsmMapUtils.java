@@ -349,7 +349,7 @@ public class OsmMapUtils {
      */
     public static double polygonAreaPixels(List<Node> nodes, int zoom) {
         double area = 0.;
-        double mult = 1 / MapUtils.getPowZoom(Math.max(31 - (zoom + 8), 0));
+        double mult = 1 / MapUtils.getPowZoom((double)Math.max(31 - (zoom + 8), 0));
         int j = nodes.size() - 1;
         for (int i = 0; i < nodes.size(); i++) {
             Node x = nodes.get(i);

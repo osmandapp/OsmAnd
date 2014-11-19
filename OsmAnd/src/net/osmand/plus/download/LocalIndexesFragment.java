@@ -114,8 +114,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	public void onResume() {
 		super.onResume();
 		if (asyncLoader == null || asyncLoader.getResult() == null) {
-			asyncLoader = new LoadLocalIndexTask();
-			asyncLoader.execute(getActivity());
+			reloadData();
 		}
 
 		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
@@ -131,8 +130,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			}
 		});
 	}
-	
-	
+
+	public void reloadData() {
+		asyncLoader = new LoadLocalIndexTask();
+		asyncLoader.execute(getActivity());
+	}
+
+
 	private void showContextMenu(final LocalIndexInfo info) {
 		Builder builder = new AlertDialog.Builder(getActivity());
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(getActivity());
@@ -241,6 +245,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPreExecute() {
 			getDownloadActivity().setSupportProgressBarIndeterminateVisibility(true);
+			listAdapter.clear();
 		}
 
 		@Override
@@ -383,9 +388,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		protected void onPostExecute(String result) {
 			getDownloadActivity().setProgressBarIndeterminateVisibility(false);
 			AccessibleToast.makeText(getDownloadActivity(), result, Toast.LENGTH_LONG).show();
-			listAdapter.clear();
-			reloadIndexes();
-			
+			if (operation == RESTORE_OPERATION){
+				listAdapter.clear();
+				reloadIndexes();
+			}
 		}
 	}
 	
@@ -470,7 +476,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			for(LocalIndexInfo info : getDownloadActivity().getLocalIndexInfos()){
 				listAdapter.addLocalIndexInfo(info);
 			}
-			listAdapter.notifyDataSetChanged();
+			listAdapter.sortData();
 		}
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		//hide action bar from downloadindexfragment
@@ -773,10 +779,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			final Collator cl = Collator.getInstance();
 			for(List<LocalIndexInfo> i : data.values()) {
 				Collections.sort(i, new Comparator<LocalIndexInfo>() {
-
 					@Override
 					public int compare(LocalIndexInfo lhs, LocalIndexInfo rhs) {
-						return cl.compare(lhs.getName(), rhs.getName());
+						return cl.compare(getNameToDisplay(lhs), getNameToDisplay(rhs));
 					}
 				});
 			}
@@ -800,6 +805,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				LocalIndexInfo c = findCategory(i, i.isBackupedData());
 				if(c != null){
 					data.get(c).remove(i);
+					if (data.get(c).size() == 0){
+						data.remove(c);
+						category.remove(c);
+					}
 				}
 			}
 			listAdapter.notifyDataSetChanged();
@@ -892,14 +901,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				v = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
 			}
 			TextView viewName = ((TextView) v.findViewById(R.id.local_index_name));
-			String mapDescr = getMapDescription(child.getFileName());
-			String mapName = FileNameTranslationHelper.getFileName(ctx, ((OsmandApplication) getDownloadActivity().getApplication()).getResourceManager().getOsmandRegions(), child.getFileName());
-
-			if (mapDescr.length() > 0){
-				viewName.setText(mapDescr + " - " + mapName);
-			} else {
-				viewName.setText(mapName);
-			}
+			viewName.setText(getNameToDisplay(child));
 			if (child.isNotSupported()) {
 				viewName.setTextColor(warningColor);
 				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
@@ -955,6 +957,17 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			
 
 			return v;
+		}
+
+		private String getNameToDisplay(LocalIndexInfo child) {
+			String mapDescr = getMapDescription(child.getFileName());
+			String mapName = FileNameTranslationHelper.getFileName(ctx, ((OsmandApplication) getDownloadActivity().getApplication()).getResourceManager().getOsmandRegions(), child.getFileName());
+
+			if (mapDescr.length() > 0){
+				 return mapDescr + " - " + mapName;
+			} else {
+				return mapName;
+			}
 		}
 
 		@Override

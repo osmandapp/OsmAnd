@@ -84,7 +84,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 			return;
 		}
 
-		List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), getDownloadActivity().getDownloadType(), new ArrayList<DownloadEntry>());
+		List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), e.getType(), new ArrayList<DownloadEntry>());
 		if (download.size() > 0) {
 			getDownloadActivity().getEntriesToDownload().put(e, download);
 			getDownloadActivity().updateDownloadButton(true);

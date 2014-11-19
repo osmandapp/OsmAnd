@@ -231,7 +231,7 @@
   <string name="gpx_option_reverse_route">Inverti direzione GPX</string>
   <string name="gpx_option_destination_point">Usa il punto di destinazione attuale</string>
   <string name="gpx_option_from_start_point">Percorri tutta la traccia</string>
-  <string name="switch_to_vector_map_to_see">Mappa vettoriale offline presente per quest\'area.\n\t\n\tPer usarla attivare \'Menu\'→\'Strati mappa\'→\'Fonte Mappa…\'→\'Mappe vettoriali offline\'.</string>
+  <string name="switch_to_vector_map_to_see">Mappa vettoriale offline presente per quest\'area.\n\t\n\tPer usarla attivare \'Menu\' → \'Configura la mappa\' → \'Sorgente mappa…\' → \'Mappe vettoriali offline\'.</string>
   <string name="choose_audio_stream">Canale d\'uscita della voce guida</string>
   <string name="choose_audio_stream_descr">Scegli il canale per la guida vocale (dipendente dal sistema)</string>
   <string name="voice_stream_voice_call">Audio chiamate vocali</string>
@@ -269,7 +269,7 @@
 		\n\nScegli poi un modo per condividere la tua posizione. Le opzioni sono: E-Mail, SMS o semplicemente copia le coordinate sugli appunti.
 	</string>
   <string name="tip_favorites">Punti Preferiti</string>
-  <string name="tip_favorites_t">"I punti usati di frequente possono essere salvati come Preferiti in questo modo:\n\nNel menu contestuale per ogni punto \'Utilizza posizione\' scegliere \'Aggiungi ai favoriti\' e quindi immettere un nome per esso.\n\nDopo il salvataggio, il punto preferito sarà accessibile nel \'Menu\'→\'I miei luoghi\'. Premendo su una qualsiasi voce della lista dei \'Preferiti\', appariranno le opzioni per impostarlo come destinazione, modificarlo o eliminarlo.\n\nPer visualizzare tutti i punti preferiti direttamente sulla mappa, attiva nella schermata della mappa il livello \'Preferiti\' dal menù \'Strati mappa\'. "</string>
+  <string name="tip_favorites_t">"I punti usati di frequente possono essere salvati come Preferiti in questo modo:\n\nPer qualsiasi punto, nel menu contestuale \'Utilizza la posizione…\' scegliere \'Aggiungi ai Preferiti\' e quindi immettere un nome.\n\nDopo il salvataggio, il punto sarà accessibile attraverso \'Menu\' → \'I miei luoghi\'. Premendo su una voce della lista dei \'Preferiti\', appariranno le opzioni per impostarlo come destinazione, modificarlo o eliminarlo.\n\nPer visualizzare tutti i punti preferiti direttamente sulla mappa, nella schermata della mappa attiva il livello \'Preferiti\' da \'Menu\' → \'Configura la mappa\'. "</string>
   <string name="create_poi_link_to_osm_doc">  <u>OSM Online</u> con immagini</string>
   <string name="error_doing_search">Errore nella ricerca offline</string>
   <string name="search_offline_geo_error">Impossibile leggere geo intent \'%s\'</string>
@@ -2026,4 +2026,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="wake_on_voice_descr">Accendi lo schermo all\'approssimarsi di una svolta</string>
     <string name="wake_on_voice_never">Mai</string>
     <string name="lock_screen_request_explanation">%1$s necessita di questa autorizzazione per spegnere lo schermo per la funzionalità di risparmio energetico.</string>
-    </resources>
+    <string name="advanced_settings">Avanzato</string>
+	</resources>

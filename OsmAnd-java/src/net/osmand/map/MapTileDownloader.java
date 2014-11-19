@@ -8,16 +8,21 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;
-import net.osmand.util.LIFOBlockingDeque;
 
 import org.apache.commons.logging.Log;
 
@@ -106,13 +111,33 @@ public class MapTileDownloader {
 	
 	
 	public MapTileDownloader(int numberOfThreads){
+		
 		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads, TILE_DOWNLOAD_SECONDS_TO_WORK, 
-				TimeUnit.SECONDS, new LIFOBlockingDeque<Runnable>());
+				TimeUnit.SECONDS, createQueue());
 		// 1.6 method but very useful to kill non-running threads
 //		threadPoolExecutor.allowCoreThreadTimeOut(true);
 		pendingToDownload = Collections.synchronizedSet(new HashSet<File>());
 		currentlyDownloaded = Collections.synchronizedSet(new HashSet<File>());
 		
+	}
+
+	protected BlockingQueue<Runnable> createQueue() {
+		boolean loaded = false;
+		try {
+			Class<?> cl = Class.forName("java.util.concurrent.LinkedBlockingDeque");
+			loaded = cl != null;
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		if(!loaded) {
+			// for Android 2.2
+			return new LinkedBlockingQueue<Runnable>();
+		}
+		return createDeque();
+	}
+
+	protected static BlockingQueue<Runnable> createDeque() {
+		return new net.osmand.util.LIFOBlockingDeque<Runnable>();
 	}
 	
 	public void addDownloaderCallback(IMapDownloaderCallback callback){

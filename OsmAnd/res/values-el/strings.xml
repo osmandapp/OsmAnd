@@ -1683,4 +1683,12 @@
 	<string name="map_widget_left">Αριστερός πίνακας</string>
     <string name="layers_category_show">Εμφάνιση</string>
 	<string name="configure_map">Διαμόρφωση χάρτη</string>
-    </resources>
+    <string name="rendering_attr_tramTrainRoutes_name">Δρομολόγια τραμ και τρένων</string>
+	<string name="rendering_attr_trainLightrailRoutes_name">Δρομολόγια τρένου</string>
+    <string name="rendering_attr_tramRoutes_name">Δρομολόγια τραμ</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Δρομολόγια τρόλεϋ</string>
+    <string name="rendering_attr_busRoutes_name">Δρομολόγια λεωφορείων</string>
+    <string name="rendering_category_transport">Μεταφορές</string>
+    <string name="map_widget_top">Γραμμή κατάστασης</string>
+	<string name="speed_limit_exceed">Ανοχή ορίου ταχύτητας</string>
+	</resources>

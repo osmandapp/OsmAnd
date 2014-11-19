@@ -1,14 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
-	<!-- This file is at /res/layout/list.xml -->
+<?xml version="1.0" encoding="utf-8"?>    <!-- This file is at /res/layout/list.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/SearchFilterLayout" android:visibility="gone"
-	    android:layout_marginLeft = "5dp" >
-		<TextView android:layout_width="wrap_content" android:text="@string/search_poi_filter" android:id="@+id/TextView" android:layout_height="wrap_content"/>
-		<EditText android:layout_marginLeft = "5dp"  android:layout_marginRight = "5dp" android:layout_width="fill_parent" android:text="" android:id="@+id/SearchFilter" android:layout_height="wrap_content"/>
-	</LinearLayout>
-	<ListView android:id="@android:id/list" android:layout_width="fill_parent" 
-		android:layout_height="fill_parent" style="@style/OsmandListView"></ListView>
-	
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/SearchFilterLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_poi_filter" />
+
+        <EditText
+            android:id="@+id/SearchFilter"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        style="@style/OsmandListView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
 </LinearLayout>
