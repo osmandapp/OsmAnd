@@ -30,6 +30,7 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
     @Override
     public boolean abandonFocus(Context context, int streamType)
     {
+        AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
     }
 
