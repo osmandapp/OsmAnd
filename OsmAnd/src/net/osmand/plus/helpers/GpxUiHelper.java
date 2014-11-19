@@ -141,7 +141,8 @@ public class GpxUiHelper {
 			if(showCurrentGpx){
 				allGpxList.add(0, activity.getString(R.string.show_current_gpx_title));
 			}
-			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity,allGpxList, selectedGpxList, multipleChoice);
+			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, allGpxList, selectedGpxList, multipleChoice);
+
 			return createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, allGpxList, adapter);
 		}
 		return null;
@@ -166,7 +167,8 @@ public class GpxUiHelper {
 		return null;
 	}
 
-	private static ContextMenuAdapter createGpxContextMenuAdapter(Activity activity, List<String> allGpxList, List<String> selectedGpxList, boolean multipleChoice) {
+	private static ContextMenuAdapter createGpxContextMenuAdapter(Activity activity, List<String> allGpxList,
+																  List<String> selectedGpxList, boolean multipleChoice) {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
 		//element position in adapter
 		int i = 0;

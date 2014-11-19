@@ -298,6 +298,8 @@ public class MapActivityLayers {
 						if (!settings.SAVE_TRACK_TO_GPX.get() && !
 								settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
 							AccessibleToast.makeText(activity, R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
+						} else {
+							g.path = getString(R.string.show_current_gpx_title);
 						}
 						break;
 					}
