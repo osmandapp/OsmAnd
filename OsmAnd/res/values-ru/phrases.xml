@@ -252,6 +252,19 @@
 	<string name="poi_baby_hatch">Бэби-бокс</string>
 	<string name="poi_veterinary">Ветеринарная лечебница</string>
 	<string name="poi_sanatorium">Санаторий</string>
+	<string name="healthcare_alternative">Альтернативная медицина</string>
+	<string name="audiologist">Отоларинголог</string>
+	<string name="blood_bank">Банк крови</string>
+	<string name="healthcare_centre">Медицинский центр</string>
+	<string name="midwife">Акушерка</string>
+	<string name="occupational_therapist">Профессиональный врач</string>
+	<string name="optometrist">Оптометрист</string>
+	<string name="physiotherapist">Физиотерапевт</string>
+	<string name="podiatrist">Ортопед</string>
+	<string name="psychotherapist">Психотерапевт</string>
+	<string name="healthcare_rehabilitation">Реабилитация</string>
+	<string name="speech_therapist">Логопед</string>
+	<string name="healthcare_yes">Медицинское учреждение</string>
 
 	<string name="poi_company">Фирма</string>
 	<string name="poi_insurance">Страховая компания</string>
