@@ -1814,4 +1814,5 @@
     <string name="lock_screen_request_explanation">%1$s необходимо это разрешение, чтобы выключить экран для экономии энергии.</string>
     <string name="wake_on_voice">Включать экран</string>
     <string name="wake_on_voice_descr">Включать экран телефона при приближении к повороту</string>
-    </resources>
+    <string name="advanced_settings">Расширенные</string>
+	</resources>
