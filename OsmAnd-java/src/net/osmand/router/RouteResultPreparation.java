@@ -675,13 +675,9 @@ public class RouteResultPreparation {
 		}
 
 		String[] splitLaneOptions = turnLanes.split("\\|", -1);
-		if (splitLaneOptions.length != lanes) {
-			// Error in data or missing data
-			return t;
-		}
 
 		if (t.getLanes().length != lanes) {
-			// The turn:lanes don't easily match up to the target road.
+			// The lanes from prevSegm don't easily match up to the target roads.
 			List<Integer> sourceLanes = new ArrayList<Integer>();
 
 			int outgoingLanesIndex = 0;
