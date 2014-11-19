@@ -114,8 +114,10 @@ public class RoutingConfiguration {
 		}
 		
 		public void addImpassableRoad(RouteDataObject r) {
-			impassableRoadIds.add(r.id);
-			impassableRoads.add(r);
+			if (!impassableRoadIds.contains(r.id)){
+				impassableRoadIds.add(r.id);
+				impassableRoads.add(r);
+			}
 		}
 		
 		
