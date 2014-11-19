@@ -775,6 +775,9 @@ public class RouteResultPreparation {
 
 	private TurnType attachTurnLanesData(boolean leftSide, RouteSegmentResult prevSegm, TurnType t) {
 		int lanes = prevSegm.getObject().getLanes();
+		if (prevSegm.getObject().getOneway() == 0) {
+			lanes = countLanes(prevSegm, lanes);
+		}
 		String turnLanes = getTurnLanesString(prevSegm);
 
 		if (turnLanes == null) {
