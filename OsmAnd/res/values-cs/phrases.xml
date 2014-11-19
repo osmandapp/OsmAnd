@@ -1,2 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_bakery">Pekařství</string>
+	<string name="poi_alcohol"/>
+	<string name="poi_convenience"/>
+	<string name="poi_mall"/>
+	<string name="poi_beverages"/>
+	<string name="poi_butcher">Masna</string>
+	<string name="poi_deli"/>
+	<string name="poi_shop_farm"/>
+	<string name="poi_greengrocer"/>
+	<string name="poi_seafood"/>
+	<string name="poi_supermarket">Supermarket</string>
+	<string name="poi_bookshop">Knihkupectví</string>
+	<string name="poi_bicycle_shop"/>
+	<string name="poi_anime_shop"/>
+	<string name="poi_antiques_shop">Starožitnosti</string>
+	<string name="poi_art_shop"/>
+	<string name="poi_baby_goods"/>
+	<string name="poi_bag_shop"/>
+	<string name="poi_bathroom_furnishing_shop"/>
+	<string name="poi_bed_shop"/>
+	<string name="poi_boutique"/>
+	<string name="poi_carpet_shop"/>
+	<string name="poi_chemist_shop">Drogerie</string>
+	<string name="poi_clothes_shop"/>
+	<string name="poi_children_clothes_shop"/>
+	<string name="poi_shoes">Obuv</string>
+	<string name="poi_computer_shop"/>
+	<string name="poi_copyshop"/>
+	<string name="poi_hardware_shop">Železářství</string>
+	<string name="poi_tobacco_shop">Tabák</string>
+	</resources>
