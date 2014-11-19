@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="poi_bakery">Pekařství</string>
-	<string name="poi_alcohol"/>
-	<string name="poi_convenience"/>
-	<string name="poi_mall"/>
-	<string name="poi_beverages"/>
+	<string name="poi_alcohol">Obchod s alkoholem</string>
+	<string name="poi_convenience">Samoobsluha</string>
+	<string name="poi_mall">Obchodní dům</string>
+	<string name="poi_beverages">Obchod s nápoji</string>
 	<string name="poi_butcher">Masna</string>
 	<string name="poi_deli"/>
 	<string name="poi_shop_farm"/>
@@ -15,11 +15,11 @@
 	<string name="poi_anime_shop"/>
 	<string name="poi_antiques_shop">Starožitnosti</string>
 	<string name="poi_art_shop"/>
-	<string name="poi_baby_goods"/>
+	<string name="poi_baby_goods">Dětské zboží</string>
 	<string name="poi_bag_shop"/>
 	<string name="poi_bathroom_furnishing_shop"/>
 	<string name="poi_bed_shop"/>
-	<string name="poi_boutique"/>
+	<string name="poi_boutique">Módní butik</string>
 	<string name="poi_carpet_shop"/>
 	<string name="poi_chemist_shop">Drogerie</string>
 	<string name="poi_clothes_shop"/>
@@ -29,4 +29,37 @@
 	<string name="poi_copyshop"/>
 	<string name="poi_hardware_shop">Železářství</string>
 	<string name="poi_tobacco_shop">Tabák</string>
+	<string name="poi_dive_shop">Potapěčské vybavení</string>
+	<string name="poi_hunting_shop">Lovecké vybavení</string>
+	<string name="poi_jewelry_shop">Klenotnictví</string>
+	<string name="poi_kiosk">Kiosek</string>
+	<string name="poi_kitchen_shop">Kuchyňské náčiní</string>
+	<string name="poi_musical_instrument_shop">Hudební nástroje</string>
+	<string name="poi_optician_shop">Optik</string>
+	<string name="poi_pet_shop">Zverimex</string>
+	<string name="poi_sports_shop">Sportovní vybavení</string>
+	<string name="poi_toys_shop">Hračkářství</string>
+	<string name="poi_cosmetics_shop">Kosmetika</string>
+	<string name="poi_marketplace">Tržiště</string>
+	<string name="poi_police">Policie</string>
+	<string name="poi_fire_station">Hasiči</string>
+	<string name="poi_emergency_phone">Nouzový telefon</string>
+	<string name="poi_fire_hydrant">Hydrant</string>
+	<string name="poi_fire_extinguisher">Hasicí přístroj</string>
+	<string name="poi_ambulance_station">Ambulance</string>
+	<string name="poi_ford">Ford</string>
+	<string name="poi_mountain_pass">Horské sedlo</string>
+	<string name="poi_gate">Brána</string>
+	<string name="poi_toll_booth">Mýtné</string>
+	<string name="poi_border_control">Hraniční kontrola</string>
+	<string name="poi_traffic_signals">Semafor</string>
+
+	<string name="poi_car_repair">Opravna aut</string>
+	<string name="poi_service_tyres">Pneu</string>
+	<string name="poi_car_wash">Myčka</string>
+	<string name="poi_fuel">Čerpací stanice</string>
+	<string name="poi_charging_station">Dobíjecí stanice</string>
+	<string name="poi_parking">Parkování</string>
+	<string name="poi_garages">Garáže</string>
+
 	</resources>
