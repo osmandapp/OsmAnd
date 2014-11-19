@@ -62,7 +62,7 @@
         <string name="poi_mobile_phone_shop">Mobiltelefoner</string>
         <string name="poi_motorcycle_shop">Motorcykler</string>
         <string name="poi_musical_instrument_shop">Musikinstrumenter</string>
-        <string name="poi_newsagent_shop">Kiosk</string>
+        <string name="poi_newsagent_shop">Nyhedsbureau</string>
         <string name="poi_optician_shop">Optiker</string>
         <string name="poi_organic_shop">Økologiske fødevarer</string>
         <string name="poi_outdoor_shop">Fritidsbeklædning</string>
@@ -81,7 +81,7 @@
         <string name="poi_vacuum_cleaner_shop">Støvsuger</string>
         <string name="poi_variety_store">Fastpris butik</string>
         <string name="poi_video_shop">Video</string>
-        <string name="poi_window_blind_shop">Gardinforretning</string>
+        <string name="poi_window_blind_shop">Persienner</string>
         <string name="poi_department_store">Stormagasin</string>
         <string name="poi_electronics_shop">Elektronik</string>
         <string name="poi_car_shop">Autohandel</string>
@@ -118,7 +118,7 @@
         <string name="poi_traffic_calming_rumble_strip">Rumlestriber</string>
         <string name="poi_traffic_calming_table">Trafikdæmpning, bord</string>
         <string name="poi_traffic_calming_choker">Indsnævring</string>
-        <string name="poi_traffic_signals">Trafiksignaler</string>
+        <string name="poi_traffic_signals">Trafiksignal</string>
 
         <string name="poi_car_repair">Autoværksted</string>
         <string name="poi_service_tyres">Dækservice</string>
@@ -189,7 +189,7 @@
         <string name="poi_lock_gate">Sluseport</string>
         <string name="poi_waterway_turning_point">Vendepunkt på vandet</string>
         <string name="poi_weir">Stemmeværk</string>
-        <string name="poi_dam">Dam</string>
+        <string name="poi_dam">Dæmning</string>
         <string name="poi_water_mill">Vandmølle</string>
 
         <string name="poi_power_substation">Transformerstation</string>
@@ -214,7 +214,7 @@
         <string name="poi_mineshaft">Mineskakt</string>
         <string name="poi_adit">Stoll</string>
         <string name="poi_petroleum_well">Oliebrønd</string>
-        <string name="poi_survey_point">Undersøgelses punkt</string>
+        <string name="poi_survey_point">Landmålings punkt</string>
         <string name="poi_windmill">Vindmølle</string>
         <string name="poi_quarry">Stenbrud</string>
         <string name="poi_vineyard">Vingård</string>
@@ -235,7 +235,7 @@
         <string name="poi_embassy">Ambassade</string>
         <string name="poi_government">Regering</string>
         <string name="poi_bailiff">Foged</string>
-        <string name="poi_prosecutor">Anklagemyndighed</string>
+        <string name="poi_prosecutor">Anklager</string>
         <string name="poi_pension_fund">Pensionskasse</string>
         <string name="poi_migration">Migration</string>
         <string name="poi_tax_inspection">Skattekontrol</string>
@@ -309,7 +309,7 @@
         <string name="poi_croquet">Kroket</string>
         <string name="poi_cycling">Cykling</string>
         <string name="poi_diving">Dykning</string>
-        <string name="poi_scuba_diving">Dykning</string>
+        <string name="poi_scuba_diving">Scuba dykning</string>
         <string name="poi_dog_racing">Hundevæddeløb</string>
         <string name="poi_equestrian">Hestesport</string>
         <string name="poi_golf">Golf</string>
@@ -329,10 +329,10 @@
         <string name="poi_racquet">Ketsjer</string>
         <string name="poi_roller_skating">Rulleskøjteløb</string>
         <string name="poi_rowing">Roning</string>
-        <string name="poi_rugby_union">Rugby</string>
-        <string name="poi_rugby_league">Rugby</string>
+        <string name="poi_rugby_union">Rugby union</string>
+        <string name="poi_rugby_league">Rugby league</string>
         <string name="poi_shooting">Skydning</string>
-        <string name="poi_skating">Skøjteløb</string>
+        <string name="poi_skating">Skating</string>
         <string name="poi_skateboard">Skateboard</string>
         <string name="poi_skiing">Skiløb</string>
         <string name="poi_soccer">Fodbold</string>
@@ -496,7 +496,7 @@
         <string name="poi_sun_protection_craft">Solbeskyttelse håndværk</string>
         <string name="poi_sweep">Skorstensfejer</string>
         <string name="poi_tailor">Skrædder</string>
-        <string name="poi_tiler">Tagdækker</string>
+        <string name="poi_tiler">Fliselægger</string>
         <string name="poi_tinsmith">Blikkenslager</string>
         <string name="poi_upholsterer">Møbelpolstrer</string>
         <string name="poi_watchmaker">Urmager</string>
