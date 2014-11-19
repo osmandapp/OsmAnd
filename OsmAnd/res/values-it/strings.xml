@@ -2026,4 +2026,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="wake_on_voice_descr">Accendi lo schermo all\'approssimarsi di una svolta</string>
     <string name="wake_on_voice_never">Mai</string>
     <string name="lock_screen_request_explanation">%1$s necessita di questa autorizzazione per spegnere lo schermo per la funzionalità di risparmio energetico.</string>
-    </resources>
+    <string name="advanced_settings">Avanzato</string>
+	</resources>
