@@ -18,6 +18,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Window;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleAlertBuilder;
+import net.osmand.map.OsmandRegions;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.activities.LocalIndexInfo;
@@ -594,6 +595,22 @@ public class DownloadActivity extends SherlockFragmentActivity {
 			builder.show();
 
 		}
+	}
+
+	public static String getFullName(IndexItem e, OsmandApplication app, OsmandRegions osmandRegions) {
+		String eName;
+		List<IndexItem> forCat = new ArrayList<IndexItem>();
+		forCat.add(e);
+		List<IndexItemCategory> category = IndexItemCategory.categorizeIndexItems(app, forCat);
+		if (category.size() != 0){
+			eName = e.getVisibleDescription(app) + "\n"
+					+ category.get(0).name + " "
+					+ e.getVisibleName(app, osmandRegions);
+		} else {
+			eName = e.getVisibleDescription(app) + "\n"
+					+ e.getVisibleName(app, osmandRegions);
+		}
+		return eName;
 	}
 
 }
