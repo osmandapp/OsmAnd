@@ -158,7 +158,7 @@ public class GLActivity extends Activity {
         // Get device display density factor
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        _displayDensityFactor = displayMetrics.densityDpi / 160.0f;
+        _displayDensityFactor = displayMetrics.density;
         _referenceTileSize = (int)(256 * _displayDensityFactor);
         _rasterTileSize = Integer.highestOneBit(_referenceTileSize - 1) * 2;
         Log.i(TAG, "displayDensityFactor = " + _displayDensityFactor);

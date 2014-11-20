@@ -117,7 +117,13 @@ public class NativeQtLibrary {
 //		DisplayMetrics displayMetrics = new DisplayMetrics();
 //		act.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 		DisplayMetrics displayMetrics = app.getResources().getDisplayMetrics();
-		float displayDensityFactor = displayMetrics.densityDpi / 160.0f;
+		// TODO getSettings().getSettingsZoomScale() + Math.sqrt(Math.max(0, getDensity() - 1))
+		float scaleCoefficient = displayMetrics.density;
+		if (Math.min(dm.widthPixels / (dm.density * 160), dm.heightPixels / (dm.density * 160)) > 2.5f) {
+			// large screen
+			scaleCoefficient *= 1.5f;
+		}
+		float displayDensityFactor = scaleCoefficient;
 		int referenceTileSize = (int)(256 * displayDensityFactor);
 		int rasterTileSize = Integer.highestOneBit(referenceTileSize - 1) * 2;
 		Log.i(NATIVE_TAG, "displayDensityFactor = " + displayDensityFactor + 
