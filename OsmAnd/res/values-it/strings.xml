@@ -249,7 +249,7 @@
   <string name="layer_overlay">Mappa sovrapposta…</string>
   <string name="default_none">Nessuno</string>
   <string name="map_overlay">Mappa sovrapposta</string>
-  <string name="map_overlay_descr">Scegli mappa di sovrapposizione</string>
+  <string name="map_overlay_descr">Scegli la mappa sovrapposta</string>
   <string name="tile_source_already_installed">La mappa è già installata, le impostazioni verranno aggiornate</string>
   <string name="select_tile_source_to_install">Seleziona le mappe (mattonella) da installare o aggiornare</string>
   <string name="internet_not_available">La connessione internet è richiesta per questa operazione ma non è disponibile</string>
@@ -1972,7 +1972,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="save_track_to_gpx_globally">Registra la traccia in un file GPX</string>
 	<string name="save_track_to_gpx_globally_descr">La registrazione della posizione in un file GPX può essere accesa o spenta dal widget registrazione GPX sulla schermata della mappa</string>
 	<string name="save_track_interval_globally">Intervallo registrazione</string>
-	<string name="rendering_attr_publicTransportMode_name">Percorsi bus, tram, filubus, servizi navetta</string>
+	<string name="rendering_attr_publicTransportMode_name">Percorsi bus, filubus, servizi navetta</string>
 	<string name="confirm_every_run">Chiedi sempre</string>
 	<string name="save_global_track_interval_descr">Scegli l\'intervallo di tempo generale per la registrazione del percorso (abilitata attraverso il widget registrazione GPX sulla mappa)</string>
 	<string name="save_global_track_interval">Intervallo generale di registrazione</string>
@@ -2026,4 +2026,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="wake_on_voice_descr">Accendi lo schermo all\'approssimarsi di una svolta</string>
     <string name="wake_on_voice_never">Mai</string>
     <string name="lock_screen_request_explanation">%1$s necessita di questa autorizzazione per spegnere lo schermo per la funzionalità di risparmio energetico.</string>
-    </resources>
+    <string name="advanced_settings">Avanzato</string>
+	</resources>

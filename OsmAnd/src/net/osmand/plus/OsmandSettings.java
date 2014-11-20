@@ -792,7 +792,7 @@ public class OsmandSettings {
 		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.BICYCLE, true);
 	}
 	
-	public final CommonPreference<Boolean> INTERRUPT_MUSIC = new BooleanPreference("interrupt_music", true).makeGlobal();
+	public final CommonPreference<Boolean> INTERRUPT_MUSIC = new BooleanPreference("interrupt_music", false).makeGlobal();
 
 
 	// this value string is synchronized with settings_pref.xml preference name
