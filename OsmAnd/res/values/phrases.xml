@@ -241,6 +241,14 @@
 	<string name="poi_tax_inspection">Tax inspection</string>
 	<string name="poi_administrative_office">Administrative office</string>
 	<string name="poi_customs">Customs</string>
+	<string name="poi_city">City</string>
+	<string name="poi_town">Town</string>
+	<string name="poi_village">Village</string>
+	<string name="poi_hamlet">Hamlet</string>
+	<string name="poi_isolated_dwelling">Isolated dwelling</string>
+	<string name="poi_suburb">Suburb</string>
+	<string name="poi_neighbourhood">Neighbourhood</string>
+	<string name="poi_locality">Locality</string>
 
 	<string name="poi_pharmacy">Pharmacy</string>
 	<string name="poi_hospital">Hospital</string>
@@ -252,19 +260,19 @@
 	<string name="poi_baby_hatch">Baby hatch</string>
 	<string name="poi_veterinary">Veterinary</string>
 	<string name="poi_sanatorium">Sanatorium</string>
-	<string name="healthcare_alternative"></string>
-	<string name="audiologist">Audiologist</string>
-	<string name="blood_bank">Blood bank</string>
-	<string name="healthcare_centre"></string>
-	<string name="midwife">Midwife</string>
-	<string name="occupational_therapist">Occupational therapist</string>
-	<string name="optometrist">Optometrist</string>
-	<string name="physiotherapist">Physiotherapist</string>
-	<string name="podiatrist">Podiatrist</string>
-	<string name="psychotherapist">Psychotherapist</string>
-	<string name="healthcare_rehabilitation">Rehabilitation</string>
-	<string name="speech_therapist">Speech therapist</string>
-	<string name="healthcare_yes"></string>
+	<string name="poi_healthcare_alternative"></string>
+	<string name="poi_audiologist">Audiologist</string>
+	<string name="poi_blood_bank">Blood bank</string>
+	<string name="poi_healthcare_centre"></string>
+	<string name="poi_midwife">Midwife</string>
+	<string name="poi_occupational_therapist">Occupational therapist</string>
+	<string name="poi_optometrist">Optometrist</string>
+	<string name="poi_physiotherapist">Physiotherapist</string>
+	<string name="poi_podiatrist">Podiatrist</string>
+	<string name="poi_psychotherapist">Psychotherapist</string>
+	<string name="poi_healthcare_rehabilitation">Rehabilitation</string>
+	<string name="poi_speech_therapist">Speech therapist</string>
+	<string name="poi_healthcare_yes"></string>
 
 	<string name="poi_company">Company</string>
 	<string name="poi_insurance">Insurance</string>
