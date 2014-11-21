@@ -676,14 +676,41 @@ public class RouteResultPreparation {
 
 		String[] splitLaneOptions = turnLanes.split("\\|", -1);
 
+		if (splitLaneOptions.length != lanes) {
+			log.warn("Number of lanes in lanes key (" + lanes + ") does not match number of lanes from turn:lanes key (" + splitLaneOptions.length + "). Errors may occur.");
+
+			int leftLanes = 0;
+			int rightLanes = 0;
+			boolean processingLeft = true;
+			for (int i = 0; i < t.getLanes().length; i++) {
+				if (t.getLanes()[i] == 0) {
+					if (processingLeft) {
+						leftLanes++;
+					} else {
+						rightLanes++;
+					}
+				} else {
+					processingLeft = false;
+				}
+			}
+
+			int[] adjustedLanes = new int[lanes + leftLanes + rightLanes];
+
+			for (int i = leftLanes; i < leftLanes + lanes; i++) {
+				adjustedLanes[i] = 1;
+			}
+
+			t.setLanes(adjustedLanes);
+		}
+
 		if (t.getLanes().length != lanes) {
-			// The lanes from prevSegm don't easily match up to the target roads.
+			// The lanes from prevSegm don't easily match up to the target roads (it's not one-to-one).
 			List<Integer> sourceLanes = new ArrayList<Integer>();
 
 			int outgoingLanesIndex = 0;
 			int sourceLanesIndex = 0;
 
-			while (outgoingLanesIndex < t.getLanes().length && sourceLanesIndex < lanes) {
+			while (outgoingLanesIndex < t.getLanes().length && sourceLanesIndex < splitLaneOptions.length) {
 				if (splitLaneOptions[sourceLanesIndex].contains(";")) {
 					// Two or more allowed turns for this lane
 					int options = countOccurrences(splitLaneOptions[sourceLanesIndex], ';');
