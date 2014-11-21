@@ -10,9 +10,9 @@
         android:id="@+id/search_box"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:layout_marginBottom="5dp"
         android:hint="@string/download_type_to_filter"
         android:inputType="textFilter"
         android:maxLines="1" />

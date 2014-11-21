@@ -3,20 +3,20 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:layout_marginLeft="5dip"
-    android:layout_marginRight="5dip">
+    android:layout_marginRight="5dip"
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dip"
         android:layout_marginBottom="4dip"
+        android:layout_marginTop="4dip"
+        android:layout_weight="1"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
-        android:textSize="18sp"
-        android:layout_weight="1" />
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"

@@ -16,11 +16,11 @@
     <TextView
         android:id="@+id/Text"
         android:layout_width="match_parent"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
-        android:textSize="17sp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:ellipsize="end"
-        android:maxLines="1" />
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:textSize="17sp" />
 
 </LinearLayout>

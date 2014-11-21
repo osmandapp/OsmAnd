@@ -7,24 +7,24 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <net.osmand.view.ExpandableLinearLayout
-            custom:maxVisibleWidth="800dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            custom:maxVisibleWidth="800dp">
 
             <TextView
                 android:id="@+id/TextView"
-                android:textSize="16sp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:text="@string/navigate_point_top_text"></TextView>
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="@string/navigate_point_top_text"
+                android:textSize="16sp" />
 
             <TableLayout
                 android:layout_width="fill_parent"
@@ -34,65 +34,65 @@
                 <TableRow android:layout_width="fill_parent">
 
                     <TextView
-                        android:textSize="20sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="@string/navigate_point_latitude"></TextView>
+                        android:text="@string/navigate_point_latitude"
+                        android:textSize="20sp" />
 
                     <EditText
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
                         android:id="@+id/LatitudeEdit"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:inputType="phone"></EditText>
-                </TableRow>
-
-                <TableRow android:layout_width="fill_parent">
-
-                    <TextView
-                        android:textSize="20sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/navigate_point_longitude"></TextView>
-
-                    <EditText
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/LongitudeEdit"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
-                        android:inputType="phone"></EditText>
+                        android:inputType="phone" />
                 </TableRow>
 
                 <TableRow android:layout_width="fill_parent">
 
                     <TextView
-                        android:textSize="20sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="@string/navigate_point_format"></TextView>
+                        android:text="@string/navigate_point_longitude"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/LongitudeEdit"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:inputType="phone" />
+                </TableRow>
+
+                <TableRow android:layout_width="fill_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/navigate_point_format"
+                        android:textSize="20sp" />
 
                     <Spinner
+                        android:id="@+id/Format"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/Format"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"></Spinner>
+                        android:layout_marginRight="5dp" />
                 </TableRow>
 
                 <TextView
                     android:id="@+id/ValidateTextView"
-                    android:textSize="16sp"
-                    android:visibility="gone"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:gravity="center"
-                    android:textColor="@color/color_invalid"></TextView>
+                    android:text=""
+                    android:textColor="@color/color_invalid"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
             </TableLayout>
 
         </net.osmand.view.ExpandableLinearLayout>

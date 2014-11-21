@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:id="@+id/package_delivered_layout"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:background="@drawable/view_transparent_selection"
-    android:id="@+id/package_delivered_layout"
+    android:descendantFocusability="blocksDescendants"
     android:minHeight="48dp"
-    android:descendantFocusability="blocksDescendants">
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/waypoint_icon"
-        android:layout_marginLeft="8dp"
-        android:src="@drawable/list_favorite"
-        android:layout_height="25dp"
         android:layout_width="25dp"
-        android:layout_gravity="center_vertical" />
+        android:layout_height="25dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/list_favorite" />
 
     <TextView
         android:id="@+id/waypoint_dist"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/distance_color"
+        android:layout_marginLeft="4dp"
         android:maxLines="2"
-        android:textStyle="bold"
-        android:textSize="15sp"></TextView>
+        android:textColor="@color/distance_color"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/waypoint_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:maxLines="2"
-        android:ellipsize="end"
         android:layout_gravity="center_vertical"
+        android:layout_marginLeft="4dp"
         android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:textSize="18sp" />
 
     <ImageButton
         android:id="@+id/all_points"
+        style="@style/Widget.Sherlock.ActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/more"
         android:layout_gravity="center_vertical"
-        android:visibility="gone"
+        android:contentDescription="@string/more"
         android:focusable="false"
-        style="@style/Widget.Sherlock.ActionButton"
-        android:src="@drawable/ic_action_core_overflow_dark" />
+        android:src="@drawable/ic_action_core_overflow_dark"
+        android:visibility="gone" />
 
     <ImageButton
         android:id="@+id/info_close"
+        style="@style/Widget.Sherlock.ActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/close"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="4dp"
-        style="@style/Widget.Sherlock.ActionButton"
+        android:contentDescription="@string/close"
         android:focusable="false"
         android:src="@drawable/ic_action_gremove_dark" />
 

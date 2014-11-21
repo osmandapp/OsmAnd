@@ -5,9 +5,9 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/ProgressView"
@@ -36,8 +36,8 @@
                 <TextView
                     android:id="@+id/ProgressPercent"
                     android:layout_width="48dp"
-                    android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:gravity="right|center_vertical"
                     android:text=""
@@ -83,10 +83,10 @@
 
         <TabWidget
             android:id="@android:id/tabs"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:orientation="horizontal" />
 
 
         <FrameLayout

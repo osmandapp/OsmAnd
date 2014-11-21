@@ -16,23 +16,23 @@
             android:id="@+id/check_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:focusable="false"
+            android:gravity="center_vertical"
             android:visibility="gone" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/favourite_icon"
         android:layout_width="25dp"
+        android:layout_height="fill_parent"
         android:paddingRight="2dp"
-        android:paddingTop="2dp"
-        android:layout_height="fill_parent" />
+        android:paddingTop="2dp" />
 
     <TextView
         android:id="@+id/favourite_label"
+        style="@style/ListText"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="10dp"
         android:layout_height="wrap_content"
-        style="@style/ListText" />
+        android:layout_marginLeft="10dp" />
 
 </LinearLayout>

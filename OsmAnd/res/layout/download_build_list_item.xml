@@ -5,18 +5,18 @@
 
     <TextView
         android:id="@+id/download_tag"
-        android:gravity="center_vertical"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="19sp"></TextView>
+        android:gravity="center_vertical"
+        android:textSize="19sp" />
 
     <TextView
         android:id="@+id/download_descr"
-        android:layout_marginLeft="3dp"
-        android:gravity="center_vertical"
         android:layout_width="105dp"
         android:layout_height="wrap_content"
-        android:textSize="19sp"></TextView>
+        android:layout_marginLeft="3dp"
+        android:gravity="center_vertical"
+        android:textSize="19sp" />
 
 </LinearLayout>

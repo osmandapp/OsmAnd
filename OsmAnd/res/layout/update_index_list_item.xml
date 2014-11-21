@@ -3,32 +3,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="1dp"
     android:paddingBottom="1dp"
-    android:paddingRight="8dp">
+    android:paddingRight="8dp"
+    android:paddingTop="1dp">
 
     <CheckBox
         android:id="@+id/check_download_item"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:focusable="false" />
+        android:focusable="false"
+        android:gravity="center_vertical" />
 
     <TextView
+        android:id="@+id/download_item"
+        style="@style/ListText.Small"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:id="@+id/download_item"
-        android:gravity="center_vertical"
-        android:maxLines="7"
         android:layout_weight="1"
-        style="@style/ListText.Small" />
+        android:gravity="center_vertical"
+        android:maxLines="7" />
 
     <TextView
+        android:id="@+id/download_descr"
+        style="@style/ListText.Small"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/download_descr"
         android:layout_marginLeft="3dp"
-        android:gravity="right|center_vertical"
-        style="@style/ListText.Small" />
+        android:gravity="right|center_vertical" />
 
 </LinearLayout>

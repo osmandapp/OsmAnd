@@ -3,34 +3,34 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="2dip"
     android:layout_marginLeft="5dip"
     android:layout_marginRight="5dip"
-    android:weightSum="1"
-    android:background="@color/color_white">
+    android:layout_marginTop="2dip"
+    android:background="@color/color_white"
+    android:orientation="horizontal"
+    android:weightSum="1">
 
     <ImageButton
-        android:src="@drawable/av_download"
         android:id="@+id/down"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:src="@drawable/av_download" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_weight="1"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
-        android:textSize="18sp"
         android:textColor="@color/color_black"
-        android:layout_weight="1" />
+        android:textSize="18sp" />
 
     <ImageButton
-        android:src="@drawable/av_upload"
         android:id="@+id/up"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:src="@drawable/av_upload" />
 
 </LinearLayout>

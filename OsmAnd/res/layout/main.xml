@@ -13,10 +13,10 @@
 
         <ViewStub
             android:id="@+id/glSurfaceStub"
-            android:inflatedId="@+id/glSurfaceView"
-            android:layout="@layout/gl_surface"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:inflatedId="@+id/glSurfaceView"
+            android:layout="@layout/gl_surface" />
 
         <net.osmand.plus.views.OsmAndMapSurfaceView
             android:id="@+id/MapView"

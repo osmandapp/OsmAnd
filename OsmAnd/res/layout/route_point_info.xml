@@ -8,17 +8,17 @@
     <ImageView
         android:id="@+id/point_icon"
         android:layout_width="32dp"
-        android:padding="3dp"
-        android:layout_marginLeft="5dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="5dp"
+        android:padding="3dp" />
 
     <TextView
         android:id="@+id/name"
-        android:layout_marginLeft="6dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_marginLeft="6dp"
         android:layout_marginRight="10dp"
         android:layout_weight="1" />
 
@@ -26,7 +26,7 @@
         android:id="@+id/date_or_distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="5dp" />
 
 </LinearLayout>
