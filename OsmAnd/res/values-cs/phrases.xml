@@ -6,9 +6,9 @@
 	<string name="poi_beverages">Obchod s nápoji</string>
 	<string name="poi_butcher">Masna</string>
 	<string name="poi_deli">Delikatesy</string>
-	<string name="poi_shop_farm"/>
-	<string name="poi_greengrocer"/>
-	<string name="poi_seafood"/>
+	<string name="poi_shop_farm">Farmářský obchod</string>
+	<string name="poi_greengrocer">Zelinářství</string>
+	<string name="poi_seafood">Obchod mořskými plody</string>
 	<string name="poi_supermarket">Supermarket</string>
 	<string name="poi_bookshop">Knihkupectví</string>
 	<string name="poi_bicycle_shop"/>
@@ -23,7 +23,7 @@
 	<string name="poi_carpet_shop"/>
 	<string name="poi_chemist_shop">Drogerie</string>
 	<string name="poi_clothes_shop"/>
-	<string name="poi_children_clothes_shop"/>
+	<string name="poi_children_clothes_shop">Dětské oblečení</string>
 	<string name="poi_shoes">Obuv</string>
 	<string name="poi_computer_shop"/>
 	<string name="poi_copyshop"/>
@@ -196,4 +196,20 @@
 	<string name="poi_seamark_harbour">Přístav</string>
 	<string name="poi_military_barracks">Kasárna</string>
 	<string name="poi_military_danger_area">Nebezpečná oblast</string>
+	<string name="poi_confectionery">Cukrárna</string>
+	<string name="poi_shop_tea">Obchod čajem</string>
+	<string name="poi_dairy">Mlékárna</string>
+	<string name="poi_vending_machine">Prodejní automat</string>
+
+	<string name="poi_florist">Květinářství</string>
+	<string name="poi_furniture_shop">Nábytek</string>
+	<string name="poi_garden_centre">Zahradní centrum</string>
+	<string name="poi_glaziery_shop">Sklenářství</string>
+	<string name="poi_hearing_aids_shop">Sluchové pomůcky</string>
+	<string name="poi_herbalist">Obchod bylinkami</string>
+	<string name="poi_houseware_shop">Domácí potřeby</string>
+	<string name="poi_interior_decoration_shop">Dekorace interiéru</string>
+	<string name="poi_newsagent_shop">Zpravodajská agentura</string>
+	<string name="poi_stationery_shop">Kancelářské potřeby</string>
+	<string name="poi_trade_shop">Obchodní místo</string>
 	</resources>
