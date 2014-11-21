@@ -25,7 +25,7 @@ import net.osmand.plus.views.OsmAndMapSurfaceView;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Denis on 05.11.2014.
@@ -63,7 +63,18 @@ public class DashboardActivity extends SherlockFragmentActivity {
 
 	private void setupFavorites(){
 		final FavouritesDbHelper helper = getMyApplication().getFavorites();
-		final List<FavouritePoint> points = helper.getFavouritePoints();
+		final List<FavouritePoint> points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
+		Collections.sort(points, new Comparator<FavouritePoint>() {
+			@Override
+			public int compare(FavouritePoint point, FavouritePoint point2) {
+				LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
+				int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
+						lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
+				int dist2 = (int) (MapUtils.getDistance(point2.getLatitude(), point2.getLongitude(),
+						lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
+				return (dist - dist2);
+			}
+		});
 		LinearLayout favorites = (LinearLayout) findViewById(R.id.favorites);
 		favorites.removeAllViews();
 		if (points.size() == 0){
