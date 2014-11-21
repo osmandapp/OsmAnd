@@ -23,7 +23,7 @@
     
     <style name="OsmandLightTheme" parent="Theme.Sherlock.Light">
         <item name="expandable_category_color">@color/group_background</item>
-        <item name="reset_image">@drawable/ic_action_delete_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
+        <item name="reset_image">@drawable/ic_action_gdiscard_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
     </style>
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.Sherlock.Light.DarkActionBar">
         <!--<item name="android:windowContentOverlay">@null</item>
@@ -36,13 +36,13 @@
         <item name="android:textColorTertiary">@color/activity_text</item>
         <item name="android:listViewStyle">@style/OsmandListView</item> 
         -->
-        <item name="reset_image">@drawable/ic_action_delete_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
+        <item name="reset_image">@drawable/ic_action_gdiscard_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
         <item name="expandable_category_color">@color/group_background</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
     </style>
     <style name="OsmandDarkTheme" parent="Theme.Sherlock">
-        <item name="reset_image">@drawable/ic_action_delete_dark</item> <!--  @drawable/a_1_navigation_cancel_dark -->
+        <item name="reset_image">@drawable/ic_action_gdiscard_dark</item> <!--  @drawable/a_1_navigation_cancel_dark -->
         <item name="expandable_category_color">?android:attr/colorBackground</item>
      </style>
      
