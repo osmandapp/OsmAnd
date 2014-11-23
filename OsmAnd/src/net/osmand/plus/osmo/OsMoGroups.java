@@ -26,6 +26,7 @@ import android.text.TextUtils;
 public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
 	private static final String GROUP_NAME = "name";
+	private static final String ACTIVE = "active";
 	private static final String GROUP_ID = "group_id";
 	private static final String EXPIRE_TIME = "expireTime";
 	private static final String DESCRIPTION = "description";
@@ -250,14 +251,14 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				JSONArray arr = new JSONArray(data);
 				int arrLength = arr.length();
 				if (arrLength > 0) {
-					Map<String, OsMoGroup> resivedGroups = new HashMap<String, OsMoGroupsStorage.OsMoGroup>();
+					Map<String, OsMoGroup> receivedGroups = new HashMap<String, OsMoGroupsStorage.OsMoGroup>();
 					for (int i = 0; i < arrLength; i++) {
 						JSONObject o = arr.getJSONObject(i);
 						OsMoGroup parsedGroup = parseGroup(o);
-						resivedGroups.put(parsedGroup.getGroupId(), parsedGroup);
+						receivedGroups.put(parsedGroup.getGroupId(), parsedGroup);
 					}
 					
-					storage.mergeGroups(resivedGroups);
+					storage.mergeGroups(receivedGroups);
 					storage.save();
 				}
 				processed = true;
@@ -360,7 +361,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 
 	private OsMoGroup parseGroup(JSONObject obj) throws JSONException {
 		OsMoGroup groupe = new OsMoGroup();
-		groupe.enabled = true;
+		groupe.enabled = !(obj.has(ACTIVE) && ("0".equals(obj.getString(ACTIVE)) || 
+				"false".equals(obj.getString(ACTIVE))));
 		groupe.name = obj.optString(GROUP_NAME);
 		groupe.groupId = obj.getString(GROUP_ID);
 		groupe.description = obj.optString(DESCRIPTION);
