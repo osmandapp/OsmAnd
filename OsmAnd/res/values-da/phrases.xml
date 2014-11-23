@@ -493,7 +493,7 @@
         <string name="poi_shoemaker">Skomager</string>
         <string name="poi_stand_builder">Udstillingsbygger</string>
         <string name="poi_stonemason">Stenhugger</string>
-        <string name="poi_sun_protection_craft">Solafskærmning håndværk</string>
+        <string name="poi_sun_protection_craft">Solafskærmning</string>
         <string name="poi_sweep">Skorstensfejer</string>
         <string name="poi_tailor">Skrædder</string>
         <string name="poi_tiler">Fliselægger</string>
@@ -529,7 +529,7 @@
         <string name="poi_accountant">Revisor</string>
         <string name="poi_bitcoin_yes">Bitcoin betaling</string>
 
-        <string name="poi_cave_entrance">Hule indgang</string>
+        <string name="poi_cave_entrance">Huleindgang</string>
         <string name="poi_peak">Bjergtinde</string>
         <string name="poi_saddle">Bjergsadel</string>
         <string name="poi_volcano">Vulkan</string>
@@ -552,14 +552,14 @@
         <string name="poi_seamark_anchorage">Ankringsområde</string>
         <string name="poi_seamark_anchor_berth">Ankerplads</string>
         <string name="poi_seamark_beacon">Båke</string>
-        <string name="poi_seamark_beacon_cardinal">Cardinal båke</string>
+        <string name="poi_seamark_beacon_cardinal">Kardinal båke</string>
         <string name="poi_seamark_beacon_lateral">Lateral båke</string>
         <string name="poi_seamark_beacon_safe_water">Sikkervand båke</string>
         <string name="poi_seamark_beacon_special_purpose">Speciel formål båke</string>
         <string name="poi_seamark_berth">Kajplads</string>
         <string name="poi_seamark_building">Sømærke bygning</string>
         <string name="poi_seamark_bridge">Sømærke bro</string>
-        <string name="poi_seamark_buoy_cardinal">Cardinal tønde</string>
+        <string name="poi_seamark_buoy_cardinal">Kardinal tønde</string>
         <string name="poi_seamark_buoy_installation">Installation tønde</string>
         <string name="poi_seamark_buoy_isolated_danger">Tønde, isoleret fare</string>
         <string name="poi_seamark_buoy_lateral">Lateral tønde</string>
@@ -597,7 +597,7 @@
         <string name="poi_military_danger_area">Farezone</string>
         <string name="poi_military_range">Militærsøvelsesområde</string>
         <string name="poi_military_naval_base">Militærflådebase</string>
-        <string name="poi_military_nuclear_explosion_site">Nuklear eksplosion område</string>
+        <string name="poi_military_nuclear_explosion_site">Nuklear eksplosionsområde</string>
 <string name="poi_city">Storby</string>
 	<string name="poi_town">By</string>
 	<string name="poi_village">Landsby</string>
