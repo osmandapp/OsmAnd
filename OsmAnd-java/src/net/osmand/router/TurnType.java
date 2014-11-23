@@ -163,6 +163,10 @@ public class TurnType {
 	}
 	
 	// Note that there is no "weight" or ordering between the primary and secondary turns.
+	public static void setPrimaryTurn(int[] lanes, int lane, int turnType) {
+		lanes[lane] |= (turnType << 1);
+	}
+	
 	public void setPrimaryTurn(int lane, int turnType) {
 		lanes[lane] |= (turnType << 1);
 	}
@@ -172,6 +176,10 @@ public class TurnType {
 		return (laneValue >> 1) & ((1 << 4) - 1);
 	}
 
+	public static void setSecondaryTurn(int[] lanes, int lane, int turnType) {
+		lanes[lane] |= (turnType << 5);
+	}
+	
 	public void setSecondaryTurn(int lane, int turnType) {
 		lanes[lane] |= (turnType << 5);
 	}
@@ -236,5 +244,13 @@ public class TurnType {
 			return "Off route";
 		}
 		return super.toString();
+	}
+
+	public static boolean isLeftTurn(int type) {
+		return type == TL || type == TSHL || type == TSLL;
+	}
+	
+	public static boolean isRightTurn(int type) {
+		return type == TR || type == TSHR || type == TSLR;
 	}
 }
