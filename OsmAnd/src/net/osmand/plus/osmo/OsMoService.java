@@ -58,7 +58,7 @@ public class OsMoService implements OsMoReactor {
 	private static final String HTTPS_API_PREPARE = "https://api.osmo.mobi/prepare";
 	private static final String HTTP_AUTH = "http://api.osmo.mobi/auth";
 	private static final String HTTPS_AUTH = "https://api.osmo.mobi/auth";
-	private static final boolean USE_RSA_ENCRYPTION = false;
+	private static final boolean USE_RSA_ENCRYPTION = true;
 	
 	public static final String REGENERATE_CMD = "TRACKER_REGENERATE_ID";
 	public static final String SIGN_IN_URL = "http://osmo.mobi/signin?key=";
