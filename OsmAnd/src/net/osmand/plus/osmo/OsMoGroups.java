@@ -287,6 +287,9 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 						if (!mid.equals(trackerId)) {
 							if (toDelete.contains(trackerId)) {
 								toDelete.remove(trackerId);
+								OsMoDevice dv = mainGroup.users.get(trackerId);
+								dv.serverColor = device.userColor;
+								dv.serverName  = device.userName;
 							} else {
 								mainGroup.users.put(trackerId, device);
 							}
@@ -478,7 +481,9 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 					}
 					points.add(pt);
 				}
-				plugin.getSaveGpxTask(gr.groupId + "_points", modify).execute(points.toArray(new WptPt[points.size()]));
+				if(points.size() > 0) {
+					plugin.getSaveGpxTask(gr.name + " points", modify, false).execute(points.toArray(new WptPt[points.size()]));
+				}
 			}
 			if(deleteUsers) {
 				for(OsMoDevice s : toDelete.values()) {

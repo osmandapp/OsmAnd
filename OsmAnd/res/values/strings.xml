@@ -9,6 +9,13 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmo_use_https_descr">Use secure connection with server</string>
+    <string name="osmo_use_https">Use https</string>
+	<string name="advanced_settings">Advanced</string>
+	<string name="rendering_attr_publicTransportMode_name">Bus, trolleybus, shuttle routes</string>
+	<string name="rendering_attr_tramTrainRoutes_name">Tram and train routes</string>
+	<string name="rendering_attr_subwayMode_name">Subway routes</string>
+    <string name="lock_screen_request_explanation">%1$s needs this permission to turn off the screen for the power saving feature.</string>
     <string name="wake_on_voice">Turn on the screen</string>
     <string name="wake_on_voice_descr">Turn on the phone screen when approaching a turn</string>
     <string name="select_impassable_road">Select on map</string>
