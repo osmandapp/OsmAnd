@@ -2013,4 +2013,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_attr_busRoutes_name">Buslinien</string>
     <string name="rendering_category_hide">Ausblenden</string>
     <string name="lock_screen_request_explanation">%1$s benötigt diese Berechtigung, um den Bildschirm auszuschalten (Energiesparfunktion).</string>
+    <string name="advanced_settings">Erweitert</string>
     </resources>
