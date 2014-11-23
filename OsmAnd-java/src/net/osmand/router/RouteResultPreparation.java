@@ -642,7 +642,7 @@ public class RouteResultPreparation {
 		if(lns == 0) {
 			String tls = getTurnLanesString(attached);
 			if(tls != null) {
-				lns = countOccurrences(tls, '|');
+				return Math.max(1, countOccurrences(tls, '|'));
 			}
 		}
 		if (oneway) {
@@ -654,7 +654,7 @@ public class RouteResultPreparation {
 			} else if (!attached.isForwardDirection() && attached.getObject().getValue("lanes:backward") != null) {
 				return Integer.parseInt(attached.getObject().getValue("lanes:backward"));
 			}
-		} catch (NumberFormatException e) {
+		} catch(NumberFormatException e) {
 			e.printStackTrace();
 		}
 		return Math.max(1, (lns + 1) / 2);

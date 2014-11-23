@@ -1878,4 +1878,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="wake_on_voice_descr">Įjungti ekraną artėjant prie posūkio</string>
     <string name="lock_screen_request_explanation">%1$s prašo leidimo išjungti ekraną tausojant energiją.</string>
     <string name="wake_on_voice_never">Niekada</string>
-    </resources>
+    <string name="osmo_use_https">Naudoti https</string>
+	<string name="osmo_use_https_descr">Prie serverio jungtis saugiu ryšiu</string>
+    <string name="advanced_settings">Plačiau</string>
+	</resources>
