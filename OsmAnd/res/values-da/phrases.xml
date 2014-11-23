@@ -346,7 +346,7 @@
         <string name="poi_attraction">Turistattraktion</string>
         <string name="poi_memorial">Mindesmærke</string>
         <string name="poi_artwork">Kunstværk</string>
-        <string name="poi_archaeological_site">Arkæologiske område</string>
+        <string name="poi_archaeological_site">Arkæologisk område</string>
         <string name="poi_battlefield">Slagmark</string>
         <string name="poi_boundary_stone">Grænsesten</string>
         <string name="poi_castle">Slot</string>
@@ -387,7 +387,7 @@
         <string name="poi_travel_agent">Rejsebureau</string>
         <string name="poi_viewpoint">Udsigtspunkt</string>
         <string name="poi_camp_site">Campingplads</string>
-        <string name="poi_caravan_site">campingvognsplads</string>
+        <string name="poi_caravan_site">Campingvognsplads</string>
         <string name="poi_picnic_site">Skovtur/rasteplads</string>
         <string name="poi_spring">Kilde</string>
         <string name="poi_cemetery">Kirkegård</string>
@@ -598,7 +598,7 @@
         <string name="poi_military_range">Militærsøvelsesområde</string>
         <string name="poi_military_naval_base">Militærflådebase</string>
         <string name="poi_military_nuclear_explosion_site">Nuklear eksplosion område</string>
-<string name="poi_city">Stor by</string>
+<string name="poi_city">Storby</string>
 	<string name="poi_town">By</string>
 	<string name="poi_village">Landsby</string>
 	<string name="poi_hamlet">Lille landsby</string>
@@ -610,7 +610,7 @@
 	<string name="poi_healthcare_alternative">Alternativ medicin</string>
 	<string name="poi_audiologist">Audiolog</string>
 	<string name="poi_blood_bank">Blodbank</string>
-	<string name="poi_healthcare_centre">Medicinsk center</string>
+	<string name="poi_healthcare_centre">Medicinskcenter</string>
 	<string name="poi_midwife">Jordemoder</string>
 	<string name="poi_occupational_therapist">Ergoterapeut</string>
 	<string name="poi_optometrist">Optiker</string>
