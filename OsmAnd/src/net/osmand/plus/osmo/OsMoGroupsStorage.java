@@ -73,7 +73,6 @@ public class OsMoGroupsStorage {
 	public void load() {
 		String grp = pref.get();
 		try {
-			System.out.println("DEBUG : OsMo groups load info " + grp);
 			JSONObject obj = new JSONObject(grp);
 			parseGroupUsers(mainGroup, obj);
 			if(!obj.has(GROUPS)) {
