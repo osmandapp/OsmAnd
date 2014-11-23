@@ -834,7 +834,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="osmand_accessibility_description">Ammustra sas impostaduras pro funtzionalidades ispetziales pro s\'atzessibilidade.</string>
 	<string name="extra_settings">Impostaduras avantzadas</string>
 	<string name="plugins_screen">Plugins</string>
-	<string name="select_plugin_to_activate">Issèbera unu plugin pro l\'ativare o lu deativare. (Diat pòdere serbire su reaviu de OsmAnd.)</string>
+	<string name="select_plugin_to_activate">Issèbera unu plugin pro l\'ativare o lu disativare. (Diat pòdere serbire su reaviu de OsmAnd.)</string>
 	<string name="prefs_plugins_descr">Sos plugins abìlitana funtzionalidades azuntivas e impostaduras avantzadas</string>
 	<string name="prefs_plugins">Plugins</string>
 	<string name="debugging_and_development">Isvilupu de OsmAnd</string>
@@ -1737,7 +1737,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="traffic_warning_calming">Moderatzione de su tràficu</string>
     <string name="traffic_warning_speed_camera">Autovelox</string>
     <string name="traffic_warning">Avisu de tràficu</string>
-	<string name="local_index_description">Ischerta unu elementu esistente pro bìere prus detallios, carca e mantène carcau pro lu deativare o burrare. Datos como in su dispositivu (%1$s lìberos):</string>
+	<string name="local_index_description">Ischerta unu elementu esistente pro bìere prus detallios, carca e mantène carcau pro lu disativare o burrare. Datos como in su dispositivu (%1$s lìberos):</string>
 	<string name="text_size_descr">Issèbera sa mannària de su testu in sa mapa.</string>
     <string name="text_size">Mannària de su testu</string>
     <string name="fav_point_dublicate_message">Amus cambiau su nùmene de su prefèrridu tuo a %1$s pro evitare nùmenes dòpios.</string>

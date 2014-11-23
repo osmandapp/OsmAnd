@@ -62,17 +62,18 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	private OsMoPositionLayer olayer;
 	protected MapActivity mapActivity;
 	protected OsMoGroupsActivity groupsActivity;
+	protected OsMoControlDevice deviceControl;
 	
 	private final static Log log = PlatformUtil.getLog(OsMoPlugin.class);
 	
 
 	public OsMoPlugin(final OsmandApplication app) {
+		this.app = app;
 		service = new OsMoService(app, this);
 		tracker = new OsMoTracker(service, app.getSettings().OSMO_SAVE_TRACK_INTERVAL,
 				app.getSettings().OSMO_AUTO_SEND_LOCATIONS);
-		new OsMoControlDevice(app, this, service, tracker);
+		deviceControl = new OsMoControlDevice(app, this, service, tracker);
 		groups = new OsMoGroups(this, service, tracker, app);
-		this.app = app;
 		ApplicationMode.regWidget("osmo_control", (ApplicationMode[])null);
 	}
 
@@ -84,6 +85,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		}
 		return true;
 	}
+	
 	
 	public OsMoGroupsActivity getGroupsActivity() {
 		return groupsActivity;
@@ -229,8 +231,17 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				if (si != null) {
 					String uname = si.username;
 					if (uname != null && uname.length() > 0) {
-						if (uname.length() > 7 && uname.indexOf(' ') != -1) {
-							uname = uname.substring(0, uname.indexOf(' '));
+						if (uname.length() > 7) {
+							for(int k = 4; k < uname.length(); k++) {
+								if(!Character.isLetterOrDigit(uname.charAt(k)) &&
+										uname.charAt(k) != '.' && uname.charAt(k) != '-') {
+									uname = uname.substring(0, k);
+									break;
+								}
+							}
+							if(uname.length() > 12) {
+								uname = uname.substring(0, 12);
+							}
 						}
 						if (uname.length() > 4) {
 							txt = "";
@@ -350,11 +361,11 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		return service;
 	}
 	
-	public AsyncTask<WptPt, String, String> getSaveGpxTask(final String name, final long timestamp) {
+	public AsyncTask<WptPt, String, String> getSaveGpxTask(final String name, final long timestamp, final boolean generateToast) {
 		return new AsyncTask<WptPt, String, String>() {
 
 			protected void onProgressUpdate(String... values) {
-				if (values != null) {
+				if (values != null && generateToast) {
 					String t = "";
 					for (String s : values) {
 						t += s + "\n";
@@ -381,7 +392,9 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					if (errors == null) {
 						errors = "";
 					}
-					publishProgress(app.getString(R.string.osmo_gpx_points_downloaded, name));
+					if(generateToast) {
+						publishProgress(app.getString(R.string.osmo_gpx_points_downloaded, name));
+					}
 				}
 				SelectedGpxFile byPath = app.getSelectedGpxHelper().getSelectedFileByPath(ps.getAbsolutePath());
 				if (byPath == null || changed) {
@@ -396,7 +409,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 
 			@Override
 			protected void onPostExecute(String result) {
-				if (result.length() > 0) {
+				if (result.length() > 0 && generateToast) {
 					app.showToastMessage(app.getString(R.string.osmo_io_error) + result);
 				}
 			}
@@ -523,6 +536,10 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		if (groupsActivity != null) {
 			groupsActivity.handleDisconnect(msg);
 		}
+	}
+
+	public boolean useHttps() {
+		return app.getSettings().OSMO_USE_HTTPS.get();
 	}
 
 }

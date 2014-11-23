@@ -533,10 +533,7 @@ public class RouteResultPreparation {
 	}
 
 	private void assignLanesInfo(RouteSegmentResult prevSegm, TurnType t, boolean leftSide) {
-		int lanes = prevSegm.getObject().getLanes();
-		if (prevSegm.getObject().getOneway() == 0) {
-			lanes = countLanes(prevSegm, lanes);
-		}
+		int lanes = countLanes(prevSegm);
 		if (lanes <= 0) {
 			return;
 		}
@@ -645,10 +642,7 @@ public class RouteResultPreparation {
 				if (rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
 					if ((ex < TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex >= 0) {
 						kl = true;
-						int lns = attached.getObject().getLanes();
-						if(attached.getObject().getOneway() == 0) {
-							lns = countLanes(attached, lns);
-						}
+						int lns = countLanes(attached);
 						if (lns <= 0) {
 							right += 1;
 						} else {
@@ -657,10 +651,7 @@ public class RouteResultPreparation {
 						speak = speak || rsSpeakPriority <= speakPriority;
 					} else if ((ex > -TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex <= 0) {
 						kr = true;
-						int lns = attached.getObject().getLanes();
-						if(attached.getObject().getOneway() == 0) {
-							lns = countLanes(attached, lns);
-						}
+						int lns = countLanes(attached);
 						if (lns <= 0) {
 							left += 1;
 						} else {
@@ -679,11 +670,8 @@ public class RouteResultPreparation {
 		} else if(kl && right == 0) {
 			right = 1;
 		}
-		int current = currentSegm.getObject().getLanes();
+		int current = countLanes(currentSegm);
 		// attachedRoutes covers all allowed outbound routes at that point except currentSegm.
-		if (currentSegm.getObject().getOneway() == 0) {
-			current = countLanes(currentSegm, current);
-		}
 		if (current <= 0) {
 			current = 1;
 		}
@@ -748,17 +736,23 @@ public class RouteResultPreparation {
 		return t;
 	}
 
-	protected int countLanes(RouteSegmentResult attached, int lns) {
-		try {
-			if (attached.isForwardDirection() && attached.getObject().getValue("lanes:forward") != null) {
-				return Integer.parseInt(attached.getObject().getValue("lanes:forward"));
-			} else if (!attached.isForwardDirection() && attached.getObject().getValue("lanes:backward") != null) {
-				return Integer.parseInt(attached.getObject().getValue("lanes:backward"));
+	protected int countLanes(RouteSegmentResult attached) {
+		if (attached.getObject().getOneway() == 0) {
+			try {
+				if (attached.isForwardDirection() && attached.getObject().getValue("lanes:forward") != null) {
+					return Integer.parseInt(attached.getObject().getValue("lanes:forward"));
+				} else if (!attached.isForwardDirection() && attached.getObject().getValue("lanes:backward") != null) {
+					return Integer.parseInt(attached.getObject().getValue("lanes:backward"));
+				} else {
+					return -1;
+				}
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				return -1;
 			}
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
+		} else {
+			return attached.getObject().getLanes();
 		}
-		return (lns + 1) / 2;
 	}
 
 	protected String getTurnLanesString(RouteSegmentResult segment) {
@@ -774,10 +768,7 @@ public class RouteResultPreparation {
 	}
 
 	private TurnType attachTurnLanesData(boolean leftSide, RouteSegmentResult prevSegm, TurnType t) {
-		int lanes = prevSegm.getObject().getLanes();
-		if (prevSegm.getObject().getOneway() == 0) {
-			lanes = countLanes(prevSegm, lanes);
-		}
+		int lanes = countLanes(prevSegm);
 		String turnLanes = getTurnLanesString(prevSegm);
 
 		if (turnLanes == null) {
@@ -785,19 +776,42 @@ public class RouteResultPreparation {
 		}
 
 		String[] splitLaneOptions = turnLanes.split("\\|", -1);
+
 		if (splitLaneOptions.length != lanes) {
-			// Error in data or missing data
-			return t;
+			log.warn("Number of lanes in lanes key (" + lanes + ") does not match number of lanes from turn:lanes key (" + splitLaneOptions.length + "). Errors may occur.");
+
+			int leftLanes = 0;
+			int rightLanes = 0;
+			boolean processingLeft = true;
+			for (int i = 0; i < t.getLanes().length; i++) {
+				if (t.getLanes()[i] == 0) {
+					if (processingLeft) {
+						leftLanes++;
+					} else {
+						rightLanes++;
+					}
+				} else {
+					processingLeft = false;
+				}
+			}
+
+			int[] adjustedLanes = new int[lanes + leftLanes + rightLanes];
+
+			for (int i = leftLanes; i < leftLanes + lanes; i++) {
+				adjustedLanes[i] = 1;
+			}
+
+			t.setLanes(adjustedLanes);
 		}
 
 		if (t.getLanes().length != lanes) {
-			// The turn:lanes don't easily match up to the target road.
+			// The lanes from prevSegm don't easily match up to the target roads (it's not one-to-one).
 			List<Integer> sourceLanes = new ArrayList<Integer>();
 
 			int outgoingLanesIndex = 0;
 			int sourceLanesIndex = 0;
 
-			while (outgoingLanesIndex < t.getLanes().length && sourceLanesIndex < lanes) {
+			while (outgoingLanesIndex < t.getLanes().length && sourceLanesIndex < splitLaneOptions.length) {
 				if (splitLaneOptions[sourceLanesIndex].contains(";")) {
 					// Two or more allowed turns for this lane
 					int options = countOccurrences(splitLaneOptions[sourceLanesIndex], ';');
