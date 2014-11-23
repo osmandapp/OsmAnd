@@ -341,7 +341,7 @@
 	<string name="poi_swimming">Плавание</string>
 	<string name="poi_table_tennis">Пинг-понг</string>
 	<string name="poi_tennis">Теннис</string>
-	<string name="poi_toboggan"/>
+	<string name="poi_toboggan">Санный спорт</string>
 	<string name="poi_volleyball">Воллейбол</string>
 
 	<string name="poi_museum">Музей</string>
@@ -553,7 +553,7 @@
 
 	<string name="poi_seamark_anchorage">Якорная стоянка</string>
 	<string name="poi_seamark_anchor_berth"/>
-	<string name="poi_seamark_beacon"/>
+	<string name="poi_seamark_beacon">Бакен</string>
 	<string name="poi_seamark_beacon_cardinal"/>
 	<string name="poi_seamark_beacon_lateral"/>
 	<string name="poi_seamark_beacon_safe_water"/>
@@ -574,14 +574,14 @@
 	<string name="poi_seamark_floating_dock"/>
 	<string name="poi_seamark_fog_signal">Сигнал при тумане</string>
 	<string name="poi_seamark_harbour_basin"/>
-	<string name="poi_seamark_harbour"/>
+	<string name="poi_seamark_harbour">Гавань</string>
 	<string name="poi_seamark_landmark"/>
 	<string name="poi_seamark_light"/>
 	<string name="poi_seamark_light_major"/>
 	<string name="poi_seamark_light_minor"/>
 	<string name="poi_seamark_light_float"/>
 	<string name="poi_seamark_light_vessel"/>
-	<string name="poi_seamark_mooring"/>
+	<string name="poi_seamark_mooring">Причал</string>
 	<string name="poi_seamark_notice"/>
 	<string name="poi_seamark_pile"/>
 	<string name="poi_seamark_radar_transponder"/>
@@ -600,4 +600,11 @@
 	<string name="poi_military_range">Военное стрельбище</string>
 	<string name="poi_military_naval_base">Военно-морская база</string>
 	<string name="poi_military_nuclear_explosion_site">Место ядерного взрыва</string>
-</resources>
+<string name="poi_city">Город</string>
+	<string name="poi_town">Город</string>
+	<string name="poi_village">Деревня</string>
+	<string name="poi_hamlet">Деревня</string>
+	<string name="poi_isolated_dwelling">Хутор</string>
+	<string name="poi_locality">Урочище</string>
+
+	</resources>
