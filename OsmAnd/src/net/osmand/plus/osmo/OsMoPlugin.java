@@ -62,6 +62,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	private OsMoPositionLayer olayer;
 	protected MapActivity mapActivity;
 	protected OsMoGroupsActivity groupsActivity;
+	protected OsMoControlDevice deviceControl;
 	
 	private final static Log log = PlatformUtil.getLog(OsMoPlugin.class);
 	
@@ -71,7 +72,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		service = new OsMoService(app, this);
 		tracker = new OsMoTracker(service, app.getSettings().OSMO_SAVE_TRACK_INTERVAL,
 				app.getSettings().OSMO_AUTO_SEND_LOCATIONS);
-		new OsMoControlDevice(app, this, service, tracker);
+		deviceControl = new OsMoControlDevice(app, this, service, tracker);
 		groups = new OsMoGroups(this, service, tracker, app);
 		ApplicationMode.regWidget("osmo_control", (ApplicationMode[])null);
 	}

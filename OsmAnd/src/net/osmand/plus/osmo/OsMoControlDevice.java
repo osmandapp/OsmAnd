@@ -33,7 +33,6 @@ public class OsMoControlDevice implements OsMoReactor {
 		this.plugin = plugin;
 		this.service = service;
 		this.tracker = tracker;
-		service.registerReactor(this);
 	}
 	
 	public JSONObject getBatteryLevel() throws JSONException {
