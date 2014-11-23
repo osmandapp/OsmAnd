@@ -390,6 +390,10 @@ public class RouteResultPreparation {
 			}
 		}
 
+		determineTurnsToMerge(leftside, result);
+	}
+
+	private void determineTurnsToMerge(boolean leftside, List<RouteSegmentResult> result) {
 		for (int i = result.size() - 2; i >= 0; i--) {
 			RouteSegmentResult currentSegment = result.get(i);
 			RouteSegmentResult nextSegment = null;
