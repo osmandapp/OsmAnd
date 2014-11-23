@@ -241,7 +241,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		mtd.setVisibility(visible? View.VISIBLE:View.GONE);
 		if(visible) {
 			mtd.setText(si.motd);
+			mtd.setLinksClickable(true);
+			mtd.setMovementMethod(LinkMovementMethod.getInstance());
 		}
+		
 		
 		CompoundButton login = (CompoundButton) header.findViewById(R.id.osmo_login_logoff);
 		login.setChecked(osMoPlugin.getService().isLoggedIn());

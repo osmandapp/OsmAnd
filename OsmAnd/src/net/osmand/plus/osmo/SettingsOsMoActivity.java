@@ -68,6 +68,11 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		showGroupNotifiations.setSummary(R.string.osmo_show_group_notifications_descr);
 		grp.addPreference(showGroupNotifiations);
 		
+		CheckBoxPreference useHttps = createCheckBoxPreference(settings.OSMO_USE_HTTPS);
+		useHttps.setTitle(R.string.osmo_use_https);
+		useHttps.setSummary(R.string.osmo_use_https_descr);
+		grp.addPreference(useHttps);
+		
 		if (OsmandPlugin.isDevelopment()) {
 			debugPref = new Preference(this);
 			debugPref.setTitle(R.string.osmo_settings_debug);
