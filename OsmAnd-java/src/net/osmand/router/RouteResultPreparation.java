@@ -708,10 +708,7 @@ public class RouteResultPreparation {
 			t.setSkipToSpeak(true);
 
 			// When going straight, the lanes have to be calculated from the previous segment, not the current/next segment.
-			int prevLanes = prevSegm.getObject().getLanes();
-			if (prevSegm.getObject().getOneway() == 0) {
-				prevLanes = countLanes(prevSegm, prevLanes);
-			}
+			int prevLanes = countLanes(prevSegm);
 			if (prevLanes <= 0) {
 				prevLanes = 1;
 			}
