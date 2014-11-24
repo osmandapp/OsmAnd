@@ -1862,5 +1862,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="wake_on_voice_never">Jamais</string>
     <string name="advanced_settings">Avancé</string>
 	<string name="osmo_use_https_descr">Utiliser une connexion sécurisée avec le serveur</string>
-    <string name="osmo_use_https">Utiliser https</string>
+    <string name="osmo_use_https">Utiliser HTTPS</string>
 	</resources>
