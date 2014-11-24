@@ -33,8 +33,16 @@ public class DashPluginsFragment extends DashBaseFragment {
 				startActivityForResult(new Intent(getActivity(), getMyApplication().getAppCustomization().getPluginsActivity()), 1);
 			}
 		});
-		addPlugins(view);
+
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		LinearLayout layout = (LinearLayout) getView().findViewById(R.id.plugins);
+		layout.removeAllViews();
+		addPlugins(layout);
 	}
 
 	private void addPlugins(View parent){
