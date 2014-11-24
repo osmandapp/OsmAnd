@@ -143,7 +143,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 							double lat = o.getLastLocation() == null ? latitude : o.getLastLocation().getLatitude();
 							double lon = o.getLastLocation() == null ? longitude : o.getLastLocation().getLongitude();
 							mapActivity.getMapView().setLatLon(lat, lon);
-							MapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+							MapActivity.getSingleMapViewTrackingUtilities().setMapLinkedToLocation(false);
 							OsMoPositionLayer.setFollowTrackerId(o);
 							return true;
 						}

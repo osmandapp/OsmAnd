@@ -84,17 +84,17 @@ public class MapNavigateControl extends MapControls {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if(routingHelper.isFollowingMode()) {
 			routingHelper.setRoutePlanningMode(false);
-			MapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 		} else {
 			OsmandApplication ctx = mapActivity.getMyApplication();
 			if(!ctx.getTargetPointsHelper().checkPointToNavigateShort()) {
 				ri.showDialog();
 			} else {
-				MapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 				app.getSettings().FOLLOW_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);
 				routingHelper.setRoutePlanningMode(false);
-				MapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 				routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 				app.getRoutingHelper().notifyIfRouteIsCalculated();
 			}
