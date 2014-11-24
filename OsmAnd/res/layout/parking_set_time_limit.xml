@@ -2,20 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-	<TextView
-	    android:id="@+id/parkTime"
-	    android:layout_width="wrap_content"
-	    android:layout_height="30dp"
-	    android:layout_gravity="center"
-	    android:text="@string/osmand_parking_position_description_add" />
+    <TextView
+        android:id="@+id/parkTime"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:text="@string/osmand_parking_position_description_add" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_gravity="center_horizontal" >
+        android:layout_gravity="center_horizontal">
 
         <TextView
             android:id="@+id/textView1"

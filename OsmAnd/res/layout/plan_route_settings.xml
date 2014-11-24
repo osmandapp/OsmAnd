@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/TopBar"
@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" 
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp">
 
         <TextView
@@ -21,8 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:text="@string/gpx_navigation"
-            android:textSize="18sp" >
-        </TextView>
+            android:textSize="18sp"></TextView>
 
         <Spinner
             android:id="@+id/GPXRouteSpinner"
@@ -30,8 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:textSize="18sp" >
-        </Spinner>
+            android:textSize="18sp"></Spinner>
     </LinearLayout>
 
     <ListView
@@ -39,7 +37,6 @@
         style="@style/OsmandListView"
         android:layout_marginTop="5dp"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-    </ListView>
+        android:layout_height="fill_parent"></ListView>
 
 </LinearLayout>

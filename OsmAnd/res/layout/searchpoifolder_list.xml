@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="wrap_content"
-	android:paddingTop="5dp"
-	android:paddingBottom="5dp"
-	android:orientation="horizontal">
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
 
-	<ImageView android:id="@+id/folder_icon" android:layout_width="37dip"
-		android:paddingLeft="8dp" android:paddingRight="8dp"
-		android:paddingTop="2dp" android:layout_height="fill_parent" />
-	<TextView android:id="@+id/folder_label" android:layout_width="0dp" android:layout_weight="1"
-		android:layout_height="wrap_content" style="@style/ListText"/>
-	
-	<ImageView android:id="@+id/folder_edit_icon"
-		android:paddingLeft="4dp" android:paddingRight="8dp" android:src="@android:drawable/ic_input_get"
-		android:layout_width="37dip"
-		android:paddingTop="2dp" android:layout_height="fill_parent" />
+    <ImageView
+        android:id="@+id/folder_icon"
+        android:layout_width="37dip"
+        android:layout_height="fill_parent"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp" />
+
+    <TextView
+        android:id="@+id/folder_label"
+        style="@style/ListText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/folder_edit_icon"
+        android:layout_width="37dip"
+        android:layout_height="fill_parent"
+        android:paddingLeft="4dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp"
+        android:src="@android:drawable/ic_input_get" />
 </LinearLayout>

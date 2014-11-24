@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/Text"
@@ -11,7 +11,6 @@
         android:layout_marginLeft="20dip"
         android:layout_marginTop="12dip"
         android:gravity="center_vertical"
-        android:textSize="20sp" >
-    </TextView>
+        android:textSize="20sp"></TextView>
 
 </LinearLayout>

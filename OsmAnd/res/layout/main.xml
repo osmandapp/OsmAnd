@@ -2,21 +2,21 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:clipChildren="false"
         android:keepScreenOn="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
-        <ViewStub android:id="@+id/glSurfaceStub"
-           android:inflatedId="@+id/glSurfaceView"
-           android:layout="@layout/gl_surface"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent" />
+        <ViewStub
+            android:id="@+id/glSurfaceStub"
+            android:inflatedId="@+id/glSurfaceView"
+            android:layout="@layout/gl_surface"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <net.osmand.plus.views.OsmAndMapSurfaceView
             android:id="@+id/MapView"

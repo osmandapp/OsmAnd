@@ -1771,7 +1771,7 @@
     <string name="traffic_warning_calming">Снизьте скорость</string>
     <string name="traffic_warning_speed_camera">Скоростной радар</string>
     <string name="traffic_warning">Ограничение скорости</string>
-	<string name="speed_limit_exceed_message">Выберите допустимое значение превышения скорости выше которого вы получите голосовое предупреждение</string>
+	<string name="speed_limit_exceed_message">Выберите допустимое значение превышения скорости выше которого вы получите голосовое предупреждение.</string>
 	<string name="speed_limit_exceed">Допустимое значение превышения скорости</string>
 	<string name="test_native_render">Тест нативной визуализации</string>
     <string name="fav_point_emoticons_message">Название избранной точки было изменено на %1$s для возможности сохранения строки со смайликом в файл.</string>

@@ -148,7 +148,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public void updateSettings(){
 		if (mapView != null) {
-			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS || routePlanningMode) {
+			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE || routePlanningMode) {
 				mapView.setRotate(0);
 			}
 			mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING

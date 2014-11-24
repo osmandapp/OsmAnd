@@ -1268,7 +1268,7 @@
 	<string name="bg_service_screen_lock_toast">Bildschirm gesperrt</string>
 	<string name="bg_service_interval">Aufwachintervall setzen:</string>
 	<string name="map_widget_day_night">Tag/Nacht-Modus</string>
-	<string name="map_widget_vector_attributes">Karten-Zusatzoptionen:</string>
+	<string name="map_widget_vector_attributes">Karten-Zusatzoptionen</string>
 	<string name="map_widget_renderer">Kartendarstellung</string>
 
 	<string name="layer_map_appearance">Anzeige konfigurieren</string>
