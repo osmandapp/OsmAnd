@@ -114,9 +114,8 @@ public class DashFavoritesFragment extends DashBaseFragment {
 				}
 			});
 			int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
-			int marginRight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, getResources().getDisplayMetrics());
+
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
-			lp.setMargins(0,0,marginRight,0);
 			view.setLayoutParams(lp);
 			favorites.addView(view);
 		}
