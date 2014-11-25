@@ -52,10 +52,8 @@ public class NativeOsmandLibrary extends NativeLibrary {
 							try {
 								System.loadLibrary("jnigraphics");
 							} catch( UnsatisfiedLinkError e ) {
-								// tolerate missing jnigraphics on Lollipop
+								// handle "Shared library already opened" error
 								log.debug("Failed to load jnigraphics: " + e); //$NON-NLS-1$
-								if (android.os.Build.VERSION.SDK_INT <= 20)
-									throw e;
 							}
 						}
 						final String libCpuSuffix = cpuHasNeonSupport() ? "_neon" : "";
