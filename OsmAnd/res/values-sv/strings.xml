@@ -1731,4 +1731,5 @@
     <string name="lock_screen_request_explanation">%1$s behöver denna tillåtelse för att stänga av skärmen för strömsparningsfunktionen.</string>
     <string name="wake_on_voice_never">Aldrig</string>
     <string name="advanced_settings">Avancerat</string>
+	<string name="osmo_use_https">Använd https</string>
 	</resources>
