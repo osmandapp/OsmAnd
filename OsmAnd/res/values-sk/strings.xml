@@ -2034,4 +2034,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="lock_screen_request_explanation">%1$s potrebuje toto oprávnenie na vypnutie obrazovky pre šetrenie energiou.</string>
     <string name="wake_on_voice_never">Nikdy</string>
     <string name="advanced_settings">Pokročilé</string>
+	<string name="osmo_use_https_descr">Použiť zabezpečené spojenie so serverom</string>
+    <string name="osmo_use_https">Použiť HTTPS</string>
 	</resources>

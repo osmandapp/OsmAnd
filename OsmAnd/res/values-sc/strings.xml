@@ -1781,4 +1781,6 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="wake_on_voice_never">Mai</string>
     <string name="lock_screen_request_explanation">%1$s tenet bisòngiu de custa autorizatzione pro istudare s\'ischermu pro sa funtzionalidade de rispàrmiu energèticu.</string>
     <string name="advanced_settings">Avantzadas</string>
+	<string name="osmo_use_https_descr">Imprea una cunnessione segura cun su server</string>
+    <string name="osmo_use_https">Imprea https</string>
 	</resources>
