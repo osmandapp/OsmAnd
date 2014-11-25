@@ -43,7 +43,7 @@ import android.view.View;
 import android.widget.Toast;
 
 public class DownloadIndexesThread {
-	private DownloadActivity uiActivity = null;
+	private BaseDownloadActivity uiActivity = null;
 	private IndexFileList indexFiles = null;
 	private Map<IndexItem, List<DownloadEntry>> entriesToDownload = new ConcurrentHashMap<IndexItem, List<DownloadEntry>>();
 	private Set<DownloadEntry> currentDownloads = new HashSet<DownloadEntry>();
@@ -69,7 +69,7 @@ public class DownloadIndexesThread {
 		indexFiles = null;
 	}
 	
-	public void setUiActivity(DownloadActivity uiActivity) {
+	public void setUiActivity(BaseDownloadActivity uiActivity) {
 		this.uiActivity = uiActivity;
 	}
 	

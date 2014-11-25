@@ -63,6 +63,12 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		View mainView = getView();
 		final FavouritesDbHelper helper = getMyApplication().getFavorites();
 		final List<FavouritePoint> points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
+		if (points.size() == 0){
+			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
+			return;
+		} else {
+			(mainView.findViewById(R.id.main_fav)).setVisibility(View.VISIBLE);
+		}
 		Collections.sort(points, new Comparator<FavouritePoint>() {
 			@Override
 			public int compare(FavouritePoint point, FavouritePoint point2) {
@@ -76,12 +82,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		});
 		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.favorites);
 		favorites.removeAllViews();
-		if (points.size() == 0){
-			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
-			return;
-		} else {
-			(mainView.findViewById(R.id.main_fav)).setVisibility(View.VISIBLE);
-		}
+
 
 		if (points.size() > 3){
 			while (points.size() != 3){

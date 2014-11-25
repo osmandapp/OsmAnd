@@ -22,6 +22,9 @@ import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TipsAndTricksActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.download.BaseDownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.util.MapUtils;
 
 import java.util.*;
@@ -29,8 +32,10 @@ import java.util.*;
 /**
  * Created by Denis on 05.11.2014.
  */
-public class DashboardActivity extends SherlockFragmentActivity {
+public class DashboardActivity extends BaseDownloadActivity {
 	public static final boolean TIPS_AND_TRICKS = false;
+
+	public static DownloadIndexesThread downloadListIndexThread;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,16 @@ public class DashboardActivity extends SherlockFragmentActivity {
 		ColorDrawable color = new ColorDrawable(Color.parseColor("#ff8f00"));
 		getSupportActionBar().setBackgroundDrawable(color);
 		getSupportActionBar().setIcon(android.R.color.transparent);
+
+		if(downloadListIndexThread == null) {
+			downloadListIndexThread = new DownloadIndexesThread(this);
+		}
+		if (downloadListIndexThread.getCachedIndexFiles() != null && downloadListIndexThread.isDownloadedFromInternet()) {
+			downloadListIndexThread.runCategorization(DownloadActivityType.NORMAL_FILE);
+		} else {
+			downloadListIndexThread.runReloadIndexFiles();
+		}
+		downloadListIndexThread.setUiActivity(this);
 
 		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
@@ -90,10 +105,6 @@ public class DashboardActivity extends SherlockFragmentActivity {
 			startActivity(newIntent);
 		}
 		return true;
-	}
-
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getApplication();
 	}
 
 	@Override

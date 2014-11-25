@@ -72,8 +72,5 @@ public class DashPluginsFragment extends DashBaseFragment {
 			view.setLayoutParams(lp);
 			layout.addView(view);
 		}
-
-
-
 	}
 }

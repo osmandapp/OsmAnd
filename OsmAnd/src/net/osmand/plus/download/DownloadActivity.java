@@ -35,15 +35,10 @@ import java.util.*;
 /**
  * Created by Denis on 08.09.2014.
  */
-public class DownloadActivity extends SherlockFragmentActivity {
+public class DownloadActivity extends BaseDownloadActivity {
 
 	private TabHost tabHost;
 	private FavouritesActivity.TabsAdapter mTabsAdapter;
-	public static DownloadIndexesThread downloadListIndexThread;
-	private DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
-	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
-
-	private OsmandSettings settings;
 
 	private View progressView;
 	private ProgressBar indeterminateProgressBar;
@@ -241,8 +236,6 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		return localIndexInfos;
 	}
 
-	public DownloadActivityType getDownloadType() { return type;}
-
 	public void setType(DownloadActivityType type) { this.type = type;}
 
 	public void changeType(final DownloadActivityType tp) {
@@ -253,89 +246,11 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		}
 	}
 
-	public void downloadFilesPreCheckSpace() {
-		double sz = 0;
-		List<DownloadEntry> list = downloadListIndexThread.flattenDownloadEntries();
-		for (DownloadEntry es :  list) {
-			sz += es.sizeMB;
-		}
-		// get availabile space
-		double asz = downloadListIndexThread.getAvailableSpace();
-		if (asz != -1 && asz > 0 && sz / asz > 0.4) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(MessageFormat.format(getString(R.string.download_files_question_space), list.size(), sz, asz));
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					downloadListIndexThread.runDownloadFiles();
-				}
-			});
-			builder.setNegativeButton(R.string.default_buttons_no, null);
-			builder.show();
-		} else {
-			downloadListIndexThread.runDownloadFiles();
-		}
-
-	}
-
-	public Map<IndexItem, List<DownloadEntry>> getEntriesToDownload() {
-		if(downloadListIndexThread == null) {
-			return new LinkedHashMap<IndexItem, List<DownloadEntry>>();
-		}
-		return downloadListIndexThread.getEntriesToDownload();
-	}
-
 	@Override
 	public void onPause() {
 		super.onPause();
 		(getMyApplication()).setDownloadActivity(null);
 	}
-
-	protected void downloadFilesCheckFreeVersion() {
-		if (Version.isFreeVersion(getMyApplication()) ) {
-			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
-			boolean wiki = false;
-			for (IndexItem es : DownloadActivity.downloadListIndexThread.getEntriesToDownload().keySet()) {
-				if (es.getBasename() != null && es.getBasename().contains("_wiki")) {
-					wiki = true;
-					break;
-				} else if (DownloadActivityType.isCountedInDownloads(es.getType())) {
-					total++;
-				}
-			}
-			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS || wiki) {
-				String msgTx = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
-				AlertDialog.Builder msg = new AlertDialog.Builder(this);
-				msg.setTitle(R.string.free_version_title);
-				msg.setMessage(msgTx);
-				msg.setPositiveButton(R.string.default_buttons_ok, null);
-				msg.show();
-			} else {
-				downloadFilesCheckInternet();
-			}
-		} else {
-			downloadFilesCheckInternet();
-		}
-	}
-
-	protected void downloadFilesCheckInternet() {
-		if(!getMyApplication().getSettings().isWifiConnected()) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(getString(R.string.download_using_mobile_internet));
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					downloadFilesPreCheckSpace();
-				}
-			});
-			builder.setNegativeButton(R.string.default_buttons_no, null);
-			builder.show();
-		} else {
-			downloadFilesPreCheckSpace();
-		}
-	}
-
-	public OsmandApplication getMyApplication(){ return (OsmandApplication)getApplication();}
 
 	public void showDialogOfFreeDownloadsIfNeeded() {
 		if (Version.isFreeVersion(getMyApplication())) {
@@ -361,6 +276,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		}
 	}
 
+	@Override
 	public void updateProgress(boolean updateOnlyProgress) {
 		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
 		//needed when rotation is performed and progress can be null
@@ -411,6 +327,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		bld.show();
 	}
 
+	@Override
 	public void updateDownloadList(List<IndexItem> list){
 		for(WeakReference<Fragment> ref : fragList) {
 			Fragment f = ref.get();
@@ -422,6 +339,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		}
 	}
 
+	@Override
 	public void categorizationFinished(List<IndexItem> filtered, List<IndexItemCategory> cats){
 		for(WeakReference<Fragment> ref : fragList) {
 			Fragment f = ref.get();
@@ -444,6 +362,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 		}
 	}
 
+	@Override
 	public void downloadedIndexes(){
 		for(WeakReference<Fragment> ref : fragList) {
 			Fragment f = ref.get();
@@ -464,6 +383,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 
 	}
 
+	@Override
 	public void updateDownloadButton(boolean scroll) {
 //		View view = getView();
 //		if (view == null || getExpandableListView() == null){
