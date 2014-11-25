@@ -68,7 +68,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -755,7 +754,11 @@ public class MapActivity extends AccessibleActivity implements
 		return mapView;
 	}
 	
-	public static MapViewTrackingUtilities getMapViewTrackingUtilities() {
+	public MapViewTrackingUtilities getMapViewTrackingUtilities() {
+		return mapViewTrackingUtilities;
+	}
+	
+	public static MapViewTrackingUtilities getSingleMapViewTrackingUtilities() {
 		return mapViewTrackingUtilities;
 	}
 	
