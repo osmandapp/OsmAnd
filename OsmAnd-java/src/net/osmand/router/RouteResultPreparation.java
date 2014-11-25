@@ -462,8 +462,15 @@ public class RouteResultPreparation {
 			for (int i = matchingIndex; i - matchingIndex < nextSegment.getTurnType().getLanes().length; i++) {
 				lanes[i] |= nextSegment.getTurnType().getLanes()[i - matchingIndex] & 1;
 			}
-			currentSegment.getTurnType().setLanes(lanes);
-			currentSegment.setTurnType(inferTurnFromLanes(currentSegment.getTurnType(), leftSide));
+			TurnType t = currentSegment.getTurnType();
+			t.setLanes(lanes);
+			int turn = inferTurnFromLanes(lanes);
+			if (turn != 0 && turn != t.getValue()) {
+				TurnType newTurnType = TurnType.valueOf(turn, leftSide);
+				newTurnType.setLanes(lanes);
+				newTurnType.setSkipToSpeak(t.isSkipToSpeak());
+				currentSegment.setTurnType(newTurnType);
+			}
 		}
 	}
 	
@@ -696,13 +703,12 @@ public class RouteResultPreparation {
 			t.setSkipToSpeak(true);
 
 			// When going straight, the lanes have to be calculated from the previous segment, not the current/next segment.
-			int prevLanes = countLanes(prevSegm);
+			int prevLanes = countLanesMinOne(prevSegm);
 			if (prevLanes <= 0) {
 				prevLanes = 1;
 			}
 
-			t.setLanes(new int[prevLanes]);
-			t = attachTurnLanesData(leftSide, prevSegm, t);
+			t.setLanes(attachTurnLanesData(prevSegm, new int[prevLanes]));
 
 			// Manually set the allowed lanes based on the turn type
 			for (int i = 0; i < t.getLanes().length; i++) {
