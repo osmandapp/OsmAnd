@@ -430,7 +430,7 @@
   <string name="voice">Voix</string>
   <string name="no_vector_map_loaded">Aucune carte vectorielle n\'a été chargée</string>
   <string name="map_route_by_gpx">Naviguer en utilisant l\'itinéraire GPX enregistré</string>
-  <string name="gpx_files_not_found">Aucun fichier GPX n\'a été trouvé dans le dossier /osmand/tracks</string>
+  <string name="gpx_files_not_found">Aucun fichier GPX n\'a été trouvé dans le dossier de traces</string>
   <string name="layer_gpx_layer">Trace GPX…</string>
   <string name="error_reading_gpx">Erreur de lecteur des données GPX</string>
   <string name="vector_data">Cartes vectorielles OSM</string>
@@ -568,7 +568,7 @@
   <string name="route_general_information">Distance totale : %1$s, durée estimée : %2$d h %3$d m.</string>
   <string name="router_service_descr">Sélectionner un service de navigation, hors-ligne ou en ligne</string>
   <string name="router_service">Service de navigation</string>
-  <string name="sd_dir_not_accessible">Dossier de la carte SD inaccessible</string>
+  <string name="sd_dir_not_accessible">Le dossier données de la carte SD est inaccessible</string>
   <string name="download_question">Voulez-vous télécharger {0} - {1} ?</string>
   <string name="download_question_exist">les données pour {0} existent déjà ({1}). Voulez-vous les mettre à jour ({2}) ?</string>
   <string name="address">Adresse</string>
@@ -636,7 +636,7 @@
   <string name="save_current_track">Enregistrer la trace GPX</string>
   <string name="save_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement de la trace pendant la navigation</string>
   <string name="save_track_interval">Intervalle d\'enregistrement pendant la navigation</string>
-  <string name="save_track_to_gpx_descrp">Les traces seront enregistrées dans le dossier des traces pendant la navigation</string>
+  <string name="save_track_to_gpx_descrp">Les traces seront enregistrées dans le dossier des traces durant le trajet</string>
   <string name="save_track_to_gpx">Enregistrer la trace dans un fichier GPX pendant la navigation</string>
   <string name="update_tile">Mettre à jour la carte</string>
   <string name="reload_tile">Recharger carreau</string>
@@ -774,7 +774,7 @@
   <string name="online_map_settings_descr">Configurer la source de la carte en ligne ou en cache</string>
   <string name="map_settings">- Paramètres des cartes</string>
   <string name="map_settings_descr">Configurer l\'affichage des cartes</string>
-  <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'accéder à une grande gamme de cartes sous forme de tuiles téléchargées ou conservées en cache, utilisables comme carte de base, fond de carte, ou sur-couche. Les cartes peuvent également être préparées hors-ligne et copiées dans le dossier OsmAnd.</string>
+  <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'accéder à une grande gamme de cartes sous forme de tuiles téléchargées ou conservées en cache, utilisables comme carte de base, fond de carte, ou sur-couche. Les cartes peuvent également être préparées hors-ligne et copiées dans le dossier de données d\'OsmAnd.</string>
   <string name="osmand_background_plugin_description">Ce greffon permet d\'utiliser l\'enregistrement des traces et la navigation en mode économie (écran éteint) en réveillant périodiquement le GPS pour enregistrer une position ou jouer une instruction vocale.</string>
   <string name="osmand_accessibility_description">Ce greffon permet de configurer les fonctionnalités d\'accessibilité.</string>
   <string name="extra_settings">Paramètres avancés</string>
@@ -1467,7 +1467,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="android_19_location_disabled">"Depuis Android KitKat (4.4), vous ne pouvez plus télécharger et mettre à jour la carte dans l\'ancien emplacement de sauvegarde (%s). Voulez-vous changer pour en autoriser un nouveau et y copier l\'ensemble des fichiers ?
 \n Note : Les anciens fichiers ne seront pas touchés
 \n Note : Il ne sera pas possible de partager des fichiers entre OsmAnd et OsmAnd+. "</string>
-    <string name="application_dir_change_warning2">Souhaitez-vous qu\'OsmAnd déplace les données vers la nouvelle destination ?</string>
+    <string name="application_dir_change_warning2">Souhaitez-vous qu\'OsmAnd copie les données vers la nouvelle destination ?</string>
     <string name="copying_osmand_one_file_descr">Copie des fichiers (%s) vers la nouvelle destination...</string>
     <string name="copying_osmand_files_descr">Copie des fichiers OsmAnd vers la nouvelle destination (%s)</string>
     <string name="copying_osmand_files">Copie des fichiers OsmAnd</string>
