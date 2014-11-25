@@ -660,7 +660,7 @@ public class RouteResultPreparation {
 		return Math.max(1, (lns + 1) / 2);
 	}
 
-	protected String getTurnLanesString(RouteSegmentResult segment) {
+	protected static String getTurnLanesString(RouteSegmentResult segment) {
 		if (segment.getObject().getOneway() == 0) {
 			if (segment.isForwardDirection()) {
 				return segment.getObject().getValue("turn:lanes:forward");
@@ -722,7 +722,27 @@ public class RouteResultPreparation {
 		return count;
 	}
 
-	private int[] calculateRawTurnLanes(String[] splitLaneOptions, int calcTurnType) {
+	public static int[] parseTurnLanes(RouteDataObject ro, double dirToNorthEastPi) {
+		String turnLanes = null;
+		if (ro.getOneway() == 0) {
+			// we should get direction to detect forward or backward
+			double cmp = ro.directionRoute(0, true);
+			if(Math.abs(MapUtils.alignAngleDifference(dirToNorthEastPi -cmp)) < Math.PI / 2) {
+				turnLanes = ro.getValue("turn:lanes:forward");
+			} else {
+				turnLanes = ro.getValue("turn:lanes:backward");
+			}
+		} else {
+			turnLanes = ro.getValue("turn:lanes");
+		}
+		if(turnLanes == null) {
+			return null;
+		}
+		String[] splitLaneOptions = turnLanes.split("\\|", -1);
+		return calculateRawTurnLanes(splitLaneOptions, 0);
+	}
+	
+	private static int[] calculateRawTurnLanes(String[] splitLaneOptions, int calcTurnType) {
 		int[] lanes = new int[splitLaneOptions.length];
 		for (int i = 0; i < splitLaneOptions.length; i++) {
 			String[] laneOptions = splitLaneOptions[i].split(";");

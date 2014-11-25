@@ -152,7 +152,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory(scaleCoefficient);
 		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory(scaleCoefficient);
 		OsmandApplication app = view.getApplication();
-		lanesControl = ric.createLanesControl(app.getRoutingHelper(), view);
+		lanesControl = ric.createLanesControl(map, view);
 		lanesControl.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
 		
 		alarmControl = ric.createAlarmInfoControl(app, map);
