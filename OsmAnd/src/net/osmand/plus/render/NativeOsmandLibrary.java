@@ -49,7 +49,12 @@ public class NativeOsmandLibrary extends NativeLibrary {
 						System.loadLibrary("cpufeatures_proxy");
 						if (android.os.Build.VERSION.SDK_INT >= 8) {
 							log.debug("Loading jnigraphics, since Android >= 2.2 ..."); //$NON-NLS-1$
-							System.loadLibrary("jnigraphics");
+							try {
+								System.loadLibrary("jnigraphics");
+							} catch( UnsatisfiedLinkError e ) {
+								// handle "Shared library already opened" error
+								log.debug("Failed to load jnigraphics: " + e); //$NON-NLS-1$
+							}
 						}
 						final String libCpuSuffix = cpuHasNeonSupport() ? "_neon" : "";
 						log.debug("Loading native libraries..."); //$NON-NLS-1$

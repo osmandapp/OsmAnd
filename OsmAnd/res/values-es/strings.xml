@@ -1826,9 +1826,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
  	<string name="continue_navigation">Continuar Navegación</string>
     <string name="pause_navigation">Pausar Navegación</string>
 	<string name="rendering_attr_alpineHiking_name">Escala senderismo Alpino (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Visualizar caminos de acuerdo a la escala SAC</string>
+    <string name="rendering_attr_alpineHiking_description">Dibujar caminos de acuerdo a la escala SAC</string>
     <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
-    <string name="rendering_attr_osmcTraces_description">Visualizar caminos de acuerdo a las trazas de OSMC</string>
+    <string name="rendering_attr_osmcTraces_description">Dibujar caminos de acuerdo a las trazas de OSMC</string>
     
 	<string name="osmo_invite">Invitar...</string>
     <string name="osmo_leave_confirmation_msg">¿Quieres abandonar el grupo %1$s?</string>
@@ -1910,7 +1910,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_attr_tramTrainRoutes_name">Rutas de tranvía y tren</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rutas de tren</string>
     <string name="rendering_attr_tramRoutes_name">Rutas de tranvía</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">Compartir rutas de taxi</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Rutas de taxi compartido</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rutas de trolebús</string>
     <string name="rendering_attr_busRoutes_name">Rutas de autobús</string>
     <string name="rendering_category_hide">Ocultar</string>
