@@ -2,13 +2,17 @@ package net.osmand.plus.download;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 
+import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +24,23 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 	protected DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
 	protected OsmandSettings settings;
 	public static DownloadIndexesThread downloadListIndexThread;
+	protected List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 
 	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if(downloadListIndexThread == null) {
+			downloadListIndexThread = new DownloadIndexesThread(this);
+		}
+		if (downloadListIndexThread.getCachedIndexFiles() != null && downloadListIndexThread.isDownloadedFromInternet()) {
+			downloadListIndexThread.runCategorization(type);
+		} else {
+			downloadListIndexThread.runReloadIndexFiles();
+		}
+		downloadListIndexThread.setUiActivity(this);
+	}
 
 	public void updateDownloadList(List<IndexItem> list){
 
@@ -129,5 +148,11 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 			downloadFilesPreCheckSpace();
 		}
 	}
+
+	@Override
+	public void onAttachFragment(Fragment fragment) {
+		fragList.add(new WeakReference<Fragment>(fragment));
+	}
+
 }
 

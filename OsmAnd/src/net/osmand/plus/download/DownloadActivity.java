@@ -47,7 +47,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 	private TextView progressPercent;
 	private ImageView cancel;
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<LocalIndexInfo>();
-	List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 
 	private String initialFilter = "";
 
@@ -56,6 +55,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	public static final String TAB_TO_OPEN = "Tab_to_open";
 	public static final String DOWNLOAD_TAB = "download";
+	public static final String UPDATES_TAB = "updates";
 
 
 	@Override
@@ -66,15 +66,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 		setProgressBarIndeterminateVisibility(false);
 
 		setContentView(R.layout.tab_content);
-		if(downloadListIndexThread == null) {
-			downloadListIndexThread = new DownloadIndexesThread(this);
-		}
-		if (downloadListIndexThread.getCachedIndexFiles() != null && downloadListIndexThread.isDownloadedFromInternet()) {
-			downloadListIndexThread.runCategorization(type);
-		} else {
-			downloadListIndexThread.runReloadIndexFiles();
-		}
-		downloadListIndexThread.setUiActivity(this);
 
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		tabHost = (TabHost) findViewById(android.R.id.tabhost);
@@ -145,6 +136,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 			if (tab != null) {
 				if (tab.equals(DOWNLOAD_TAB)){
 					tabHost.setCurrentTab(1);
+				} else if (tab.equals(UPDATES_TAB)){
+					tabHost.setCurrentTab(2);
 				}
 			}
 		}
@@ -439,10 +432,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
 	}
 
-	@Override
-	public void onAttachFragment(Fragment fragment) {
-		fragList.add(new WeakReference<Fragment>(fragment));
-	}
 
 	private void copyFilesForAndroid19(final String newLoc) {
 		SettingsGeneralActivity.MoveFilesToDifferentDirectory task =
