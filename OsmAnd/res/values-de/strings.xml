@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -131,7 +131,7 @@
 		OsmAnd ist eine Open-Source-Navigationsapplikation mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap (OSM) Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine offline und online Routing-Funktion inklusive Sprachnavigation.
 
 		Einige der Kernfunktionen:
-		- Komplette Offline-Funktionalität (Kartenmaterial kann in einem frei wählbaren Verzeichnis abgelegt werden)
+		- Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden)
 		- Kompakte Vektorkarten für die ganze Welt verfügbar
 		- Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus
 		- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz
@@ -160,7 +160,7 @@
 		OsmAnd+ ist die Kaufversion von OsmAnd. Durch den Kauf fördern Sie das Projekt, unterstützen die Entwicklung neuer Funktionen und erhalten neue Aktualisierungen.
 
 		Einige der Kernfunktionen:
-		- Komplette Offline-Funktionalität (Kartenmaterial kann in einem frei wählbaren Verzeichnis abgelegt werden)
+		- Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden)
 		- Kompakte Vektorkarten für die ganze Welt verfügbar
 		- Unbeschränktes, direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus
 		- Offline Wikipedia-Funktion (Anzeige von Wikipedia-POIs), sehr nützlich für Besichtigungstouren
@@ -198,7 +198,7 @@
 	<string name="online_map_settings_descr">Konfiguration von Kachel-Kartenquellen, sowie Over- &amp; Underlay Einstellungen</string>
 	<string name="map_settings">Karten-Einstellungen</string>
 	<string name="map_settings_descr">Konfigurieren der Karten-Anzeige</string>
-	<string name="osmand_rastermaps_plugin_description">Ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen (auch als Over- oder Underlay). Online-Karten werden im Unterverzeichnis \'tiles\' zwischengespeichert. Karten-Kacheln können auch offline erstellt und in das Unterverzeichnis \'tiles\' kopiert werden.</string>
+	<string name="osmand_rastermaps_plugin_description">Ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen (auch als Over- oder Underlay). Online-Karten werden im Unterordner \'tiles\' zwischengespeichert. Karten-Kacheln können auch offline erstellt und in das Unterordner \'tiles\' kopiert werden.</string>
 	<string name="osmand_background_plugin_description">Zeigt Einstellungen für die Standort-Aufzeichnung oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
 	<string name="osmand_accessibility_description">Zeigt Einstellungen für spezielle Eingabehilfen.</string>
 	<string name="extra_settings">Erweiterte Einstellungen</string>
@@ -809,7 +809,7 @@
 	<string name="use_osmand_routing_service_descr">OsmAnd Offline-Navigation für große Entfernungen verwenden (experimentell) anstatt automatisch CloudMade zu nehmen</string>
 	<string name="osmand_routing_experimental">OsmAnd Offline-Navigation ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Navigationsdienst wird temporär online CloudMade verwendet.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
-	<string name="application_dir">Verzeichnis</string>
+	<string name="application_dir">Daten-Ordner</string>
 	
 	<string name="osmand_net_previously_installed">Eine Vorversion von OsmAnd ist installiert. Alle Offline-Daten werden weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
 	<string name="build_installed">Build {0} erfolgreich installiert ({1}).</string>
@@ -999,7 +999,7 @@
 	<string name="route_general_information">Gesamtentfernung: %1$s\nReisezeit: %2$d h %3$d min</string>
 	<string name="router_service_descr">Online- oder Offline-Dienst zur Routenberechnung wählen</string>
 	<string name="router_service">Navigationsdienst</string>
-	<string name="sd_dir_not_accessible">Auf das Verzeichnis auf der SD-Karte kann nicht zugegriffen werden</string>
+	<string name="sd_dir_not_accessible">Auf den Daten-Ordner auf der SD-Karte kann nicht zugegriffen werden</string>
 	<string name="download_question">Herunterladen {0} - {1}?</string>
 	<string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Wollen Sie die überschreiben ({2})?</string>
 	<string name="address">Adresse</string>
@@ -1535,10 +1535,10 @@
 	<string name="routing_attr_avoid_motorway_description">Autobahnen vermeiden</string>
 	<string name="routing_attr_weight_name">Gewichtsbeschränkung</string>
 	<string name="routing_attr_weight_description">Angabe eines Fahrzeuggewichts für die Zulässigkeit Route</string>
-	<string name="android_19_location_disabled">"Seit Android 4.4 (KitKat) können neue Karten-Downloads nicht mehr am Speicherort früherer Android-Versionen gespeichert werden (%s). Jetzt einen zulässigen Speicherort wählen und alle notwendigen Dateien dorthin kopieren?
-\n Hinweis: Ursprüngliche Dateien bleiben hiervon unberührt.
-\n Hinweis: Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden. "</string>
-	<string name="application_dir_change_warning2">Osmand kann versuchen, die Dateien an den neuen Speicherort zu kopieren. Fortfahren?</string>
+	<string name="android_19_location_disabled">"Seit Android 4.4 (KitKat) können neue Karten-Downloads nicht mehr am Speicherort früherer Android-Versionen gespeichert werden (%s). Jetzt den zulässigen Speicherort wählen und alle OsmAnd Dateien dorthin kopieren?
+\n Hinweis 1: Die ursprünglichen Dateien bleiben hiervon unberührt, können aber nachfolgend manuell gelöscht werden.
+\n Hinweis 2: Die Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden."</string>
+	<string name="application_dir_change_warning2">Soll Osmand versuchen, die Dateien an den neuen Speicherort zu verschieben?</string>
 	<string name="copying_osmand_one_file_descr">Kopieren der Datei (%s) an den neuen Speicherort…</string>
 	<string name="copying_osmand_files_descr">Kopieren der Osmand-Dateien zum neuen Speicherort (%s)</string>
 	<string name="copying_osmand_files">Kopiere Osmand-Dateien</string>
