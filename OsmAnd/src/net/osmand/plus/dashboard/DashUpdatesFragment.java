@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import net.osmand.plus.R;
 import net.osmand.plus.download.BaseDownloadActivity;
@@ -78,12 +79,11 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			String eName = name.replace("\n", " ");
 			((TextView) view.findViewById(R.id.map_name)).setText(eName);
 			((TextView) view.findViewById(R.id.map_descr)).setText(d);
+			final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.ProgressBar);
 			(view.findViewById(R.id.btn_download)).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					List<DownloadEntry> download = item.createDownloadEntry(getMyApplication(), item.getType(), new ArrayList<DownloadEntry>());
-					getDownloadActivity().getEntriesToDownload().put(item, download);
-					getDownloadActivity().startDownload();
+					getDownloadActivity().startDownload(progressBar, item);
 				}
 			});
 			updates.addView(view);

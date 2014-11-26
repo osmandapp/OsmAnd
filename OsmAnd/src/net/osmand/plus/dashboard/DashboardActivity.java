@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
@@ -22,6 +23,7 @@ import net.osmand.plus.activities.HelpActivity;
 import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TipsAndTricksActivity;
+import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.download.*;
 import net.osmand.util.MapUtils;
@@ -33,6 +35,8 @@ import java.util.*;
  * Created by Denis on 05.11.2014.
  */
 public class DashboardActivity extends BaseDownloadActivity {
+
+
 	public static final boolean TIPS_AND_TRICKS = false;
 
 	@Override
@@ -103,6 +107,32 @@ public class DashboardActivity extends BaseDownloadActivity {
 				if(!f.isDetached()) {
 					((DashUpdatesFragment) f).updatedDownloadsList(list);
 				}
+			}
+		}
+	}
+
+	@Override
+	public void updateProgress(boolean updateOnlyProgress) {
+		//needed when rotation is performed and progress can be null
+		if (progressBar == null){
+			return;
+		}
+		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask = BaseDownloadActivity.downloadListIndexThread.getCurrentRunningTask();
+
+		if(updateOnlyProgress){
+			if(!basicProgressAsyncTask.isIndeterminate()){
+				progressBar.setProgress(basicProgressAsyncTask.getProgressPercentage());
+			}
+		} else {
+			boolean visible = basicProgressAsyncTask != null && basicProgressAsyncTask.getStatus() != AsyncTask.Status.FINISHED;
+			if (!visible) {
+				return;
+			}
+
+			boolean intermediate = basicProgressAsyncTask.isIndeterminate();
+			progressBar.setVisibility(intermediate ? View.GONE : View.VISIBLE);
+			if (!intermediate) {
+				progressBar.setProgress(basicProgressAsyncTask.getProgressPercentage());
 			}
 		}
 	}

@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -25,6 +27,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 	protected OsmandSettings settings;
 	public static DownloadIndexesThread downloadListIndexThread;
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
+	protected ProgressBar progressBar;
 
 	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
 
@@ -81,7 +84,14 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 
 	}
 
-	public void startDownload(){
+	public void startDownload(ProgressBar progressBar, IndexItem item){
+		if (downloadListIndexThread.getCurrentRunningTask() != null){
+			Toast.makeText(this, "Please wait before previous download is finished", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		List<DownloadEntry> download = item.createDownloadEntry(getMyApplication(), item.getType(), new ArrayList<DownloadEntry>());
+		getEntriesToDownload().put(item, download);
+		this.progressBar = progressBar;
 		downloadFilesCheckFreeVersion();
 	}
 
