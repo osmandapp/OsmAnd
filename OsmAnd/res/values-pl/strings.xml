@@ -1985,4 +1985,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_category_hide">Ukryj</string>
     <string name="lock_screen_request_explanation">%1$s potrzebuje uprawnień do wyłączenia ekranu dla funkcji oszczędzania energii.</string>
     <string name="wake_on_voice_never">Nigdy</string>
-    </resources>
+    <string name="osmo_use_https_descr">Użyj bezpiecznego połączenia z serwerem</string>
+    <string name="osmo_use_https">Użyj https</string>
+	<string name="advanced_settings">Zaawansowane</string>
+	</resources>
