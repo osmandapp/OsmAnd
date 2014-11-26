@@ -362,8 +362,8 @@
   <string name="use_osmand_routing_service">Navegación OsmAnd &gt;20km</string>
   <string name="use_osmand_routing_service_descr">El uso de la navegación sin conexión OsmAnd se aplica solo a rutas &gt; 20 km (experimental)</string>
   <string name="osmand_routing_experimental">La navegación sin conexión OsmAnd es una característica experimental y no funciona para distancias de más de unos 20 km.\n\nEl servicio de navegación se cambia temporalmente al servicio con conexión CloudMade.</string>
-  <string name="specified_dir_doesnt_exist">No puedo encontrar el directorio especificado.</string>
-  <string name="application_dir">Directorio de almacenamiento</string>
+  <string name="specified_dir_doesnt_exist">No se puede encontrar la carpeta especificada.</string>
+  <string name="application_dir">Carpeta de almacenamiento de datos</string>
   
   <string name="osmand_net_previously_installed">Una versión anterior de OsmAnd está instalada. Todos los datos descargados están soportados por la nueva aplicación. Pero los Favoritos deben exportarse desde la aplicación antigua y después importarse en la nueva.</string>
   <string name="build_installed">Compilación {0} correctamente instalada ({1}).</string>
@@ -421,7 +421,7 @@
   <string name="voice">Voz</string>
   <string name="no_vector_map_loaded">Los mapas vectoriales no están cargados</string>
   <string name="map_route_by_gpx">Navegar usando GPX</string>
-  <string name="gpx_files_not_found">No se han encontrado archivos GPX en el directorio /tracks</string>
+  <string name="gpx_files_not_found">No se han encontrado archivos GPX en la carpeta de trazas</string>
   <string name="layer_gpx_layer">Traza GPX…</string>
   <string name="error_reading_gpx">Error leyendo datos GPX</string>
   <string name="vector_data">Mapas vectoriales descargados</string>
@@ -626,7 +626,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="save_current_track">Guardar traza actual</string>
   <string name="save_track_interval">Intervalo de guardado durante navegación</string>
   <string name="save_track_interval_descr">Elige el intervalo de registro de trazas durante la navegación</string>
-  <string name="save_track_to_gpx_descrp">Las trazas se almacenarán en el directorio de trazas durante la navegación</string>
+  <string name="save_track_to_gpx_descrp">Las trazas se almacenarán en la carpeta de trazas durante la navegación</string>
   <string name="save_track_to_gpx">Guardar traza en archivo GPX durante la navegación</string>
   <string name="update_tile">Actualizar mapa</string>
   <string name="reload_tile">Recargar tesela</string>
@@ -1527,8 +1527,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="speech_rate">Velocidad del habla sintetizada (TTS)</string>
     <string name="application_dir_change_warning2">OsmAnd podría intentar mover los datos al nuevo destino. ¿Lo quieres hacer?</string>
     <string name="copying_osmand_one_file_descr">Copiando archivo (%s) al nuevo destino...</string>
-    <string name="copying_osmand_files_descr">Copiando archivos al nuevo destino (%s)</string>
-    <string name="copying_osmand_files">Copiando archivos OsmAnd</string>
+    <string name="copying_osmand_files_descr">Copiando archivos de OsmAnd al nuevo destino (%s)</string>
+    <string name="copying_osmand_files">Copiando archivos de datos de OsmAnd</string>
     <string name="app_mode_truck">Camión</string>
     <string name="complex_route_calculation_failed">Falló el cálculo rápido de la ruta (%s), regresando a cálculo lento.</string>
     <string name="disable_complex_routing_descr">Deshabilitar la planificación de ruta de dos fases para la navegación con automóvil</string>
@@ -1549,9 +1549,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="routing_attr_avoid_motorway_description">Evita las autopistas</string>
 	<string name="routing_attr_weight_name">Límite de peso</string>
 	<string name="routing_attr_weight_description">Indicar el peso del vehículo permitido en rutas</string>
-    <string name="android_19_location_disabled">Desde la versión Android KitKat (4.4), no puedes descargar ni actualizar el mapa en el anterior lugar de almacenamiento (%s). ¿Quieres cambiar a una nueva localización permitida y copiar todos los archivos allí?
-        \n Nota: los archivos antiguos permanecerán intactos. 
-        \n Nota: no será posible compartir archivos entre OsmAnd y OsmAnd+. </string>
+    <string name="android_19_location_disabled">Desde la versión Android 4.4 (KitKat) no puedes descargar ni actualizar los mapas en la carpeta de almacenamiento anterior (%s). ¿Quieres cambiar a la localización de almacenamiento permitida y copiar todos los archivos de OsmAnd allí?
+\n Nota 1: Tus archivos antiguos permanecerán intactos (pero pueden ser borrados manualmente).
+\n Nota 2: En la nueva localización de almacenamiento no será posible compartir archivos entre OsmAnd y OsmAnd+.</string>
     <string name="use_displayed_track_for_navigation">¿Desea usar la ruta mostrada para la navegación?</string>
     <string name="keep_and_add_destination_point">Añadir como punto de destino</string>
     <string name="select_gpx">Seleccionar GPX …</string>
