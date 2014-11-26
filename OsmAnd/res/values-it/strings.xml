@@ -366,7 +366,7 @@
   <string name="use_osmand_routing_service_descr">L\'uso della navigazione offline OsmAnd si applica solo alle rotte&gt; 20 km (sperimentale)</string>
   <string name="osmand_routing_experimental">Il routing offline di OsmAnd è sperimentale e non funziona per distanze superiori ai 20 km.\n\nIl servizio routing viene fornito temporaneamente tramite CloudMade online.</string>
   <string name="specified_dir_doesnt_exist">Impossibile trovare la cartella specificata.</string>
-  <string name="application_dir">Cartella deposito</string>
+  <string name="application_dir">Cartella salvataggio dati</string>
   
   <string name="osmand_net_previously_installed">C\'è installata una versione precedente di OsmAnd. Tutti i dati verranno supportati dalla nuova applicazione. I Preferiti devono essere esportati dalla vecchia applicazione e importati manualmente nella nuova.</string>
   <string name="build_installed">Build {0} installata correttamente({1}).</string>
@@ -424,7 +424,7 @@
   <string name="voice">Voce</string>
   <string name="no_vector_map_loaded">Mappe vettoriali non sono state caricate</string>
   <string name="map_route_by_gpx">Percorso tramite GPX</string>
-  <string name="gpx_files_not_found">File GPX non trovati nella cartella /tracks</string>
+  <string name="gpx_files_not_found">File GPX non trovati nella cartella tracce</string>
   <string name="layer_gpx_layer">Percorso GPX…</string>
   <string name="error_reading_gpx">Errore lettura dati GPX</string>
   <string name="vector_data">Mappe vettoriali offline</string>
@@ -562,7 +562,7 @@
   <string name="route_general_information">Distanza totale = %1$s, durata del viaggio = %2$d h %3$d m.</string>
   <string name="router_service_descr">Scegli un servizio online oppure offline di navigazione</string>
   <string name="router_service">Servizio di navigazione</string>
-  <string name="sd_dir_not_accessible">Cartella di salvataggio su SD card inaccessibile</string>
+  <string name="sd_dir_not_accessible">La cartella di salvataggio su SD card non è accessibile</string>
   <string name="download_question">Scaricare {0} - {1} ?</string>
   <string name="download_question_exist">I dati offline per {0} sono già presenti ({1}). Aggiornarli ({2}) ?</string>
   <string name="address">Indirizzo</string>
@@ -1638,10 +1638,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="android_19_location_disabled">Dalla versione KitKat non è più possibile scaricare e aggiornare le mappe nel precedente indirizzo di memorizzazione (%s). Vuoi sostituirlo con quello consentito e copiare lì tutti i file?
 \n Nota: i file precedenti non verranno modificati.
 \n Nota: non sarà possibile condividere i files fra OsmAnd and OsmAnd+.</string>
-    <string name="application_dir_change_warning2">OsmAnd può provare a spostare i dati nella nuova destinazione. Volete farlo?</string>
+    <string name="application_dir_change_warning2">Volete che OsmAnd provi a spostare i propri dati nella nuova destinazione?</string>
     <string name="copying_osmand_one_file_descr">Copia in corso del file (%s) nella nuova destinazione...</string>
     <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)</string>
-    <string name="copying_osmand_files">Copia dei file di OsmAnd</string>
+    <string name="copying_osmand_files">Copia dei file di dati di OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Calcola percorso OsmAnd offline</string>
     <string name="routing_attr_prefer_motorway_name">Preferisci le autostrade</string>
 	<string name="routing_attr_prefer_motorway_description">Preferisci le autostrade</string>
