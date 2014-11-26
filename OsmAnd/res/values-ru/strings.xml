@@ -323,7 +323,7 @@
   <string name="local_index_action_do">Вы собираетесь %1$s %2$s объектов. Вы уверены?</string>
   <string name="local_index_descr_title">Управление файлами карт</string>
   <string name="local_index_mi_restore">Активировать</string>
-  <string name="local_index_mi_backup">Архив</string>
+  <string name="local_index_mi_backup">Архивировать</string>
   <string name="local_index_mi_delete">Удалить</string>
   <string name="local_index_mi_reload">Перечитать с SD-накопителя</string>
   <string name="local_index_download">Загрузить</string>
@@ -333,7 +333,7 @@
   <string name="local_index_transport_data">Транспорт</string>
   <string name="local_index_map_data">Карта</string>
   
-  <string name="local_indexes_cat_backup">Архив</string>
+  <string name="local_indexes_cat_backup">Архивировано</string>
   <string name="local_indexes_cat_tts">Голосовые данные (TTS)</string>
   <string name="local_indexes_cat_voice">Голосовые данные (запись)</string>
   <string name="local_indexes_cat_gpx">Данные GPX</string>
