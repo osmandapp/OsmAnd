@@ -1,2 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_bakery">Piekarnia</string>
+	<string name="poi_alcohol">Sklep monopolowy</string>
+	<string name="poi_convenience">Sklep ogólnospożywczy</string>
+	<string name="poi_mall">Centrum handlowe</string>
+	<string name="poi_beverages">Sklep z napojami</string>
+	<string name="poi_butcher">Sklep mięsny</string>
+	<string name="poi_deli">Delikatesy</string>
+	<string name="poi_shop_farm">Sklep z produktami rolnymi</string>
+	<string name="poi_greengrocer">Warzywniak</string>
+	<string name="poi_seafood">Sklep z owocami morza</string>
+	<string name="poi_confectionery">Cukiernia</string>
+	<string name="poi_ice_cream">Lodziarnia</string>
+	</resources>
