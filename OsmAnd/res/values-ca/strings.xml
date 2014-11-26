@@ -1352,7 +1352,7 @@
     <string name="application_dir_change_warning2">Voleu que l\'OsmAnd intenti copiar els seus arxius de dades a la nova destinació?</string>
     <string name="copying_osmand_one_file_descr">S\'està copiant el fitxer (%s) a la nova destinació...</string>
     <string name="copying_osmand_files_descr">S\'estan copiant els fitxers de dades de l\'OsmAnd a la nova destinació (%s)</string>
-    <string name="copying_osmand_files">S\'estan copiant fitxers de dades de l\' OsmAnd</string>
+    <string name="copying_osmand_files">S\'estan copiant fitxers de dades de l\'OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Calcula una ruta fora de línia amb l\'OsmAnd</string>
     <string name="app_mode_truck">Camió</string>
     <string name="tip_map_styles_t">"OsmAnd pot representar els mapes vectorials en diferents estils per tal d\'adaptar-se millor al que necessiteu:
@@ -1837,7 +1837,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
     <string name="distance">Distància</string>
-    <string name="rendering_attr_publicTransportMode_name">"Rutes de bus,  troleibus i tramvia"</string>
+    <string name="rendering_attr_publicTransportMode_name">Rutes de bus, troleibús i tramvia</string>
 	<string name="save_track_to_gpx_globally">Desa la traça a un arxiu GPX</string>
 	<string name="save_track_to_gpx_globally_descr">L\'enregistrament de la posició en un arxiu GPX es pot activar o desactivar utilitzant el giny associat, a la pantalla del mapa</string>
 	<string name="save_track_interval_globally">Interval d\'enregistrament</string>
