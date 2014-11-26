@@ -1185,7 +1185,7 @@
     <string name="pause_navigation">Pauziraj navigaciju</string>
     <string name="enable_sleep_mode">Omogućite stanje mirovanja GPS-a</string>
 	<string name="gps_wake_up_timer">Interval uključivanja GPS-a</string>
-	<string name="sleep_mode_stop_dialog">Ostaviti GPS uključen?</string>
+	<string name="sleep_mode_stop_dialog">Prekinuti GPS stanje mirovanja?</string>
 	<string name="map_preferred_locale_descr">Izaberite jezik za oznake na karti(ako jezik nije dostupan prebaciti će se na Engleski ili lokalni jezik)</string>
     <string name="map_preferred_locale">Jezik karte</string>
     <string name="local_map_names">Lokalni nazivi</string>
@@ -1254,7 +1254,7 @@
     <string name="traffic_warning_speed_camera">Mjerenje brzine</string>
     <string name="traffic_warning">Upozorenja u prometu</string>
 	<string name="stop_navigation_service">Prekini</string>
-	<string name="rendering_attr_publicTransportMode_name">Javni prijevoz</string>
+	<string name="rendering_attr_publicTransportMode_name">Autobus, trolejbus, Shuttle bus</string>
 	<string name="monitoring_settings_descr">Konfigurirajte kako zabilježiti vaše putovanje</string>
     <string name="waypoints">Međutočke</string>
     <string name="rendering_attr_subwayMode_name">Podzemna željeznica</string>
@@ -1328,4 +1328,8 @@
     <string name="my_data_activity">Moja mjesta</string>
     <string name="osmo_show_group_notifications_descr">Prikaži obavjest kada se korisnik pridruži ili napusti grupu</string>
     <string name="osmo_regenerate_login_ids">Regenerirajte korisničko ime</string>
+    <string name="osmo_use_https_descr">Koristiti sigurnu vezu s poslužiteljem</string>
+    <string name="osmo_use_https">Koristiti HTTPS</string>
+	<string name="advanced_settings">Napredno</string>
+	<string name="lock_screen_request_explanation">%1$s treba dozvolu za isključivanje zaslona za značajku uštede energije.</string>
     </resources>
