@@ -363,7 +363,7 @@
   <string name="gpx_option_from_start_point">Пройти весь путь</string>
   <string name="switch_to_vector_map_to_see">Для этой позиции доступны локальные векторные карты.\n\t\n\tДля их использования выберите меню \"Настройка карты\" → \"Источник карты…\" → \"Векторные карты\".</string>
   <string name="binary_map_download_success">"Загрузка завершена.
-\n\t\n\tВы можете переключиться на использование локальных векторных карт через меню \"Слои\" → \"Источник карты…\" → \"Векторные карты\". "</string>
+\n\t\n\tВы можете переключиться на использование локальных векторных карт через \"Меню\" → \"Настройка карты\" → \"Источник карты…\" → \"Векторные карты\". "</string>
   <string name="choose_audio_stream">Голосовые инструкции</string>
   <string name="choose_audio_stream_descr">Выберите канал для голосовых инструкций (зависит от системы)</string>
   <string name="voice_stream_voice_call">Поток голосовых звонков</string>
@@ -478,7 +478,7 @@
   <string name="use_osmand_routing_service_descr">Использовать автономную навигацию на большие расстояние (экспериментально)</string>
   <string name="osmand_routing_experimental">Автономная навигация OsmAnd является экспериментальной и не работает на расстояния более 20 километров.\n\nВ этом случае для прокладывания маршрута используется online-сервис CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Невозможно найти указанную директорию.</string>
-  <string name="application_dir">Директория приложения</string>
+  <string name="application_dir">Директория хранения данных</string>
   
   <string name="osmand_net_previously_installed">У вас имеется предыдущая версия OsmAnd. Все локальные данные поддерживаются новой версией. Однако избранные точки нужно выгрузить из предыдущей версии приложения и загрузить в новую.</string>
   <string name="build_installed">Сборка {0} успешно установлена ({1}).</string>
@@ -678,7 +678,7 @@
   <string name="route_general_information">Общая протяженность = %1$s, время в пути = %2$d ч. %3$d мин.</string>
   <string name="router_service_descr">Выберите сервис для прокладки маршрута</string>
   <string name="router_service">Прокладка маршрута</string>
-  <string name="sd_dir_not_accessible">Директория на SD-карте не доступна для сохранения</string>
+  <string name="sd_dir_not_accessible">Директория хранения данных на SD-карте не доступна</string>
   <string name="download_question">Вы хотите загрузить {0} - {1} ?</string>
   <string name="download_question_exist">Локальная карта для {0} уже существует ({1}). Хотите её обновить ({2}) ?</string>
   <string name="address">Адрес</string>
@@ -1418,18 +1418,18 @@
     <string name="routing_preferences_descr">Установки маршрутизации</string>
     <string name="app_mode_truck">Грузовик</string>
     <string name="calculate_osmand_route_gpx">Рассчитать оффлайновый маршрут OsmAnd</string>
-    <string name="copying_osmand_files">Копирование файлов OsmAnd</string>
+    <string name="copying_osmand_files">Копирование файлов данных OsmAnd</string>
     <string name="speech_rate">Скорость произношения</string>
     <string name="app_modes_choose_descr">Выберите профили, видимые в приложении</string>
     <string name="app_modes_choose">Профили приложения</string>
 	<string name="edit_tilesource_choose_existing">Выберите существующий…</string>
     <string name="maps_define_edit">Задать/отредактировать …</string>
-	<string name="android_19_location_disabled">Начиная с версии KitKat Вы не можете скачивать и обновлять карту в прежнее хранилище (%s). Вы хотите изменить на допустимое и скопировать все файлы туда?
-	\n Примечание: старые файлы останутся нетронутыми;
-	\n Примечание: совместное использование файлов OsmAnd и OsmAnd+ не возможно. </string>
+	<string name="android_19_location_disabled">Начиная с версии Android 4.4 (KitKat) Вы не можете скачивать и обновлять карту в прежнее хранилище (%s). Вы хотите изменить расположение на допустимое и скопировать все файлы OsmAnd туда?
+\n Примечание 1: Ваши старые файлы останутся нетронутыми (но могут быть удалены вручную).
+\n Примечание 2: При переносе файлов в новое хранилище совместное использование файлов OsmAnd и OsmAnd+ не возможно.</string>
     <string name="application_dir_change_warning2">OsmAnd пытается перенести данные на новое место. Вы хотите этого?</string>
     <string name="copying_osmand_one_file_descr">Копирование файла (%s) на новое место…</string>
-    <string name="copying_osmand_files_descr">Копирование файлов OsmAnd на новое место (%s)</string>
+    <string name="copying_osmand_files_descr">Копирование файлов данных OsmAnd на новое место (%s)</string>
     <string name="tip_recent_changes_1_6_t">Изменения в 1.6:
 	\n\t* Поддержка устройств с разрешением Full HD;
 	\n\t* Поддержка прозрачного фона карты;
