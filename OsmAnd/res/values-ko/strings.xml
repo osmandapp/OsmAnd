@@ -2086,4 +2086,5 @@
     <string name="wake_on_voice_never">결코</string>
     <string name="advanced_settings">고급</string>
 	<string name="osmo_use_https">Https를 사용하기</string>
-	</resources>
+	<string name="osmo_use_https_descr">서버를 이용하여 보안 연결</string>
+    </resources>
