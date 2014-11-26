@@ -2090,4 +2090,23 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="rendering_attr_trainLightrailRoutes_name">電車でのルート</string>
     <string name="rendering_attr_tramRoutes_name">路面電車でのルート</string>
     <string name="rendering_attr_shareTaxiRoutes_name">タクシーのルート共有</string>
-    </resources>
+    <string name="rendering_attr_trolleybusRoutes_name">トロリーバスでのルート</string>
+    <string name="rendering_attr_busRoutes_name">バスでのルート</string>
+    <string name="rendering_category_hide">隠す</string>
+    <string name="rendering_category_routes">ルート</string>
+    <string name="rendering_category_details">詳細</string>
+    <string name="rendering_category_transport">移送</string>
+    <string name="rendering_category_others">他のマップ属性</string>
+    <string name="map_widget_appearance_rem">残りの要素</string>
+    <string name="map_widget_top">ステータスバー</string>
+	<string name="map_widget_right">右パネル</string>
+	<string name="map_widget_left">左パネル</string>
+    <string name="layers_category_show">表示</string>
+	<string name="configure_map">マップ設定</string>
+    <string name="search_radius_proximity">付近に</string>
+    <string name="osmo_device_not_found">デバイスが見つかりません</string>
+    <string name="osmo_no_connection_msg">OsMoサービスが有効ではありません:↵\n- 接続を確認して下さい;↵\n- 設定を確認して下さい;↵\n- 私達のTwitterをご参照下さい: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">以下は匿名ユーザーでは使用できません:↵\n- グループ作成;↵\n- サーバを利用してのグループやデバイスの同期;↵\n- 専用の場所でのグループやデバイスの管理.</string>
+    <string name="anonymous_user">匿名ユーザー</string>
+    <string name="logged_as">%1$sとしてログインしました</string>
+	</resources>
