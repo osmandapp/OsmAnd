@@ -64,4 +64,15 @@
 	<string name="poi_prison">Gefängnis</string>
 	<string name="poi_embassy">Botschaft</string>
 	<string name="poi_pharmacy">Apotheke</string>
+	<string name="poi_convenience">Lebensmittel</string>
+	<string name="poi_beverages">Getränke</string>
+	<string name="poi_deli">Delikatessen</string>
+	<string name="poi_confectionery">Süßwaren</string>
+	<string name="poi_shop_tea">Tee</string>
+	<string name="poi_baby_goods">Babyartikel</string>
+	<string name="poi_bag_shop">Taschen</string>
+	<string name="poi_carpet_shop">Teppiche</string>
+	<string name="poi_computer_shop">Computers</string>
+	<string name="poi_frame_shop">Rahmen</string>
+	<string name="poi_glaziery_shop">Glaserei</string>
 	</resources>
