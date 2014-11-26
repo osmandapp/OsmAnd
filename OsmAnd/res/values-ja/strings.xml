@@ -24,17 +24,15 @@
 		\n\t\n\t有効にするには「メニュー」→「ビュー定義」→「マップソース…」→「オフラインベクターマップ」としてください。
 	</string>
      <string name="choose_audio_stream">音声案内ストリーム</string>
-     <string name="choose_audio_stream_descr">音声案内を再生するチャンネルを
-選んでください(システム構成によります)</string>
+     <string name="choose_audio_stream_descr">音声案内を再生するチャンネルを選択(システムに依存)</string>
      <string name="voice_stream_voice_call">音声呼出ストリーム(通話音)</string>
      <string name="voice_stream_notification">通知ストリーム</string>
      <string name="voice_stream_music">音楽ストリーム</string>
-     <string name="warning_tile_layer_not_downloadable">アプリケーションは
-マップレイヤー %1$s をダウンロードできません、インストールしてみてください。</string>
-     <string name="overlay_transparency_descr">オーバーレイ透過性を変更</string>
-     <string name="overlay_transparency">オーバーレイ透過性</string>
-     <string name="map_transparency_descr">ベースマップ透過性を変更</string>
-     <string name="map_transparency">ベースマップ透過性</string>
+     <string name="warning_tile_layer_not_downloadable">アプリケーションはマップレイヤー %1$sをダウンロードできません、再度インストールしてみてください。</string>
+     <string name="overlay_transparency_descr">オーバーレイの透明度を設定</string>
+     <string name="overlay_transparency">オーバーレイの透明度</string>
+     <string name="map_transparency_descr">ベースマップ透明度を設定</string>
+     <string name="map_transparency">ベースマップ透明度</string>
      <string name="modify_transparency">透明度を変更</string>
      <string name="layer_underlay">アンダーレイマップ…</string>
      <string name="map_underlay">アンダーレイマップ</string>
@@ -49,7 +47,7 @@
 更新する(タイル)マップを選んでください</string>
      <string name="internet_not_available">操作に必要なインターネット接続が
 利用できません</string>
-     <string name="install_more">別のマップをインストールする…</string>
+     <string name="install_more">リスト以外のものをインストール…</string>
 
      <string name="tip_update_index">オフラインマップの更新</string>
      <string name="tip_update_index_t">"最新のマップデータを持っていることは とても重要です。OsmAnd は利用できるオフラインデータの更新をチェックできる ダウンロードマネージャを提供しています。
@@ -58,8 +56,7 @@
 \n\t\'緑\' - データファイルが端末装置とサーバで同一であることを表わします
 \n\t\'青\' - サーバに利用可能な更新があることを表わします "</string>
 
-     <string name="level_to_switch_vector_raster_descr">マップタイルの
-代わりにベクターレンダリングを利用するための最小ズームレベル</string>
+     <string name="level_to_switch_vector_raster_descr">ベクター形式マップを使用する際の最小ズームレベルを選択</string>
      <string name="level_to_switch_vector_raster">最小ベクターズームレベル</string>
 
      <string name="tip_day_night_mode">日中/夜間 モード</string>
@@ -88,7 +85,7 @@ Eメール, SMS(テキスト), あるいはクリップボードに位置座標�
  <string name="search_offline_geo_error">次のgeoインテントをパースできません:\'%s\'</string>
      <string name="search_osm_offline">オフラインマップで住所検索</string>
 
-     <string name="system_locale">システム</string>
+     <string name="system_locale">システムで設定した言語</string>
      <string name="preferred_locale_descr">表示言語を選択</string>
      <string name="preferred_locale">表示言語</string>
 
@@ -217,7 +214,7 @@ OsmAnd バージョンがインストールされています。全てのオフ�
      <string name="voice_is_not_available_msg">音声案内は利用できません。
 設定で適切な音声データパッケージを選んでダウンロードしてください。</string>
      <string name="voice_is_not_available_title">音声案内が選択されていません</string>
-     <string name="trace_rendering_descr">マップ操作時に速度やオブジェクト数等のレンダリング能力を表示します</string>
+     <string name="trace_rendering_descr">マップ操作時に速度やオブジェクト数等のレンダリング能力を表示</string>
  <string name="trace_rendering">レンダリング速度を表示</string>
      <string name="daynight_mode_day">日中</string>
      <string name="daynight_mode_night">夜間</string>
@@ -242,8 +239,7 @@ MB)をダウンロードしますか?</string>
      <string name="osmand_service">スリープモード</string>
      <string name="osmand_service_descr">画面オフの間OsmAndを使うためのバックグラウンドサービスを実行</string>
      <string name="fast_route_mode">最速ルート</string>
-     <string name="fast_route_mode_descr">有効化して最速ルートを計算するか
-無効化して最短ルートを計算します </string>
+     <string name="fast_route_mode_descr">"有効化なら目的地までの最速ルートで計算、無効化なら最短ルートで計算 "</string>
      <string name="tiles_to_download_estimated_size">ズームレベル {0}で
 {1} 件のタイル({2} MB)をダウンロード</string>
      <string name="context_menu_item_download_map">マップをダウンロード</string>
@@ -376,9 +372,9 @@ MB)をダウンロードしますか?</string>
      <string name="search_poi_location">シグナルを探査中…</string>
      <string name="search_near_map">前回のマップ位置近くを検索</string>
      <string name="search_nearby">近くを検索</string>
-     <string name="map_orientation_default">端末装置と同じ</string>
-     <string name="map_orientation_portrait">タテ</string>
-     <string name="map_orientation_landscape">ヨコ</string>
+     <string name="map_orientation_default">端末設定に従う</string>
+     <string name="map_orientation_portrait">縦向き</string>
+     <string name="map_orientation_landscape">横向き</string>
      <string name="map_screen_orientation">マップ画面方向</string>
      <string name="map_screen_orientation_descr">画面の方向を選択</string>
      <string name="opening_hours_not_supported">営業時間形式は編集ではサポートされません</string>
@@ -496,7 +492,7 @@ POIの更新は利用できません</string>
  <string name="use_online_routing">オンラインルーティングを使用</string>
  <string name="user_password_descr">あなたのOSM パスワード</string>
  <string name="user_password">OSM パスワード</string>
- <string name="osm_settings_descr">OSM登録に必要なOpenstreetmap.org (OSM)設定を指定</string>
+ <string name="osm_settings_descr">Openstreetmap.org (OSM)にデータを提出する際に必要な項目の設定</string>
  
  <string name="data_settings_descr">言語、データのダウンロード/リロードを指定</string>
  <string name="data_settings">データ</string>
@@ -514,7 +510,7 @@ POIの更新は利用できません</string>
  <string name="save_track_interval_descr">ナビゲーション中の経路の記録間隔を選択</string>
  <string name="save_track_interval">ナビゲーション中の経路記録間隔</string>
  
- <string name="save_track_to_gpx_descrp">ナビゲーション中の経路はtracksディレクトリに保存されます</string>
+ <string name="save_track_to_gpx_descrp">ナビゲーション中の経路はtracksフォルダに保存されます</string>
  <string name="save_track_to_gpx">ナビゲーション中に経路ログをGPXに記録</string>
  <string name="update_tile">マップを更新</string>
  <string name="reload_tile">タイルをリロード</string>
@@ -543,16 +539,15 @@ POIの更新は利用できません</string>
  <string name="show_poi_over_map_description">マップ上にPOIを表示
 (前回選択したフィルタを使用)</string>
  <string name="show_poi_over_map">POIを表示</string>
- <string name="map_tile_source_descr">オンラインまたはオフラインマップタイルのソースを選ぶ</string>
- <string name="map_tile_source">タイルマップソース</string>
+ <string name="map_tile_source_descr">オンラインで使用するマップソース、またはオフラインマップタイルキャッシュを選択</string>
+ <string name="map_tile_source">タイルマップ選択</string>
  <string name="map_source">マップソース</string>
  <string name="use_internet">インターネットを使用</string>
  <string name="show_location">位置を表示</string>
  <string name="map_preferences">マップ</string>
  <string name="settings_activity">設定</string>
  <string name="show_gps_coordinates_text">マップ上にGPS座標を表示</string>
- <string name="use_internet_to_download_tile">見つからないマップタイルのダウンロードに
-インターネットを使用</string>
+ <string name="use_internet_to_download_tile">見つからないマップタイルをインターネットからダウンロードする</string>
  
  <string name="app_description">ナビゲーションアプリケーション</string>
 
@@ -776,7 +771,7 @@ POIの更新は利用できません</string>
     <string name="use_kalman_filter_compass_descr">電子コンパスの誤差を改善するためにカルマンフィルタを使用</string>
     <string name="use_kalman_filter_compass">カルマンフィルタを使用</string>
     <string name="access_mark_final_location_first">アクセシビリティモード:最初に目的地を選択して下さい</string> 
-    <string name="use_magnetic_sensor_descr">回転センサーの代わりに磁気センサーの値をコンパスの値として使用する</string>
+    <string name="use_magnetic_sensor_descr">回転センサーの代わりに磁気センサーの値をコンパスの値として使用</string>
     <string name="use_magnetic_sensor">磁気センサーを使用</string>
     <string name="other_location">その他</string>
     <string name="files_limit">%1$d ファイルが残っています</string>
@@ -809,7 +804,7 @@ POIの更新は利用できません</string>
     <string name="item_unchecked">未選択</string>
     <string name="map_view">マップ</string>
     <string name="prefer_motorways">高速道路を優先</string>
-	<string name="prefer_in_routing_title">経路検索時の道路種別優先設定…</string>
+	<string name="prefer_in_routing_title">ルート検索時の優先道路設定…</string>
 	<string name="prefer_in_routing_descr">高速道路を優先</string>
     <string name="max_speed_none">なし</string>
     <string name="download_hillshade_item">陰影起伏</string>
@@ -896,7 +891,7 @@ POIの更新は利用できません</string>
     <string name="search_villages_and_postcodes">市町村検索/郵便番号</string>
 	<string name="rendering_attr_showRoadMaps_description">道路のみの地図を表示するときに選択します。</string>
 	<string name="rendering_attr_showRoadMaps_name">道路のみの地図</string>
-    <string name="safe_mode_description">セーフモード(遅いAndroidの代わりにネイティブコード)でアプリケーションを実行します。</string>
+    <string name="safe_mode_description">セーフモード(ネイティブコードの代わりにやや遅いAndroid用コード)でアプリケーションを実行。</string>
     <string name="safe_mode">セーフモード</string>
     <string name="native_library_not_running">アプリケーションは、セーフモードで実行されています(設定で無効にできます)</string>
     <string name="background_service_is_enabled_question">OsmAndのスリープモードになっています。停止しますか？</string>
@@ -938,7 +933,7 @@ POIの更新は利用できません</string>
 	<string name="day_night_info_description">日の出: %1$s \n日の入: %2$s</string>
 	<string name="day_night_info">昼/夜の情報</string>
 	<string name="map_widget_day_night">日中/夜間モード</string>
-	<string name="map_widget_vector_attributes">描画方法の属性:</string>
+	<string name="map_widget_vector_attributes">描画方法の属性</string>
 	<string name="map_widget_renderer">地図のスタイル</string>
 	
 	
@@ -947,7 +942,7 @@ POIの更新は利用できません</string>
 	<string name="avoid_unpaved">未舗装の道路を使用しない</string>
 	<string name="avoid_ferries">フェリーを使用しない</string>
 	<string name="avoid_in_routing_title">使用しない道路の指定</string>
-	<string name="avoid_in_routing_descr">有料道路、未舗装道路、フェリーを無視するか設定</string>
+	<string name="avoid_in_routing_descr">有料道路、未舗装道路、フェリー等指定の手段を使用しないように設定</string>
 	<string name="map_widget_fluorescent">使用ルートを明滅させる</string>
 	<string name="map_widget_show_ruler">縮尺</string>
 	<string name="map_widget_appearance">その他:</string>
@@ -1062,11 +1057,11 @@ POIの更新は利用できません</string>
 	<string name="osmand_extra_settings_description">地図の詳細設定(増加のマップ詳細など)と一部デバイスの設定を表示します。</string>
 	<string name="osmand_development_plugin_description">ルートシミュレーションやレンダリング性能表示のような開発およびデバッグ機能の設定を表示します。</string>
 	<string name="plugins_screen">プラグイン</string>
-	<string name="select_plugin_to_activate">有効または無効にするにはプラグインをタップします。 (OsmAndの再起動が必要な場合があります)</string>
-	<string name="prefs_plugins_descr">プラグインは、高度な設定や追加機能を有効にします</string>
+	<string name="select_plugin_to_activate">有効、無効を切り替えるにはプラグイン名をタップします。 (OsmAndの再起動が必要な場合があります)</string>
+	<string name="prefs_plugins_descr">プラグインの有効化で、より高度な設定や各プラグインの追加機能を利用可能</string>
 	<string name="prefs_plugins">プラグイン</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">ベクター形式の地図はすばやく表示されます。一部のデバイスではうまく動作しない場合があります。</string>
-	<string name="play_commands_of_currently_selected_voice">現在選択されている音声のコマンドを再生する</string>
+	<string name="play_commands_of_currently_selected_voice">選択した文字列を設定された言語の音声で再生</string>
 	<string name="debugging_and_development">OsmAnd開発者向けオプション</string>
 	<string name="native_rendering">ネイティブレンダリング</string>
 	<string name="test_voice_prompts">音声案内テスト用文字列</string>    
@@ -1085,11 +1080,11 @@ POIの更新は利用できません</string>
 	<string name="show_details">詳細を表示</string>
 	<string name="accessibility_extensions_descr">古いバージョンのAndroid用アクセシビリティ拡張</string>
 	<string name="accessibility_extensions">アクセシビリティ拡張</string>
-	<string name="accessibility_mode">アクセシビリティ·モード</string>
-	<string name="accessibility_mode_descr">アクセシビリティ機能をオンにします</string>
+	<string name="accessibility_mode">アクセシビリティモード</string>
+	<string name="accessibility_mode_descr">アクセシビリティ機能の切り替え</string>
 	<string name="accessibility_on">オン</string>
 	<string name="accessibility_off">オフ</string>
-	<string name="accessibility_default">グローバルなシステム設定する</string>
+	<string name="accessibility_default">グローバルシステム設定に従う</string>
 	<string name="backToMenu">メニューに戻る</string>
 	<string name="zoomOut">縮小</string>
 	<string name="zoomIn">拡大</string>
@@ -1126,14 +1121,14 @@ POIの更新は利用できません</string>
 	<string name="direction_style_sidewise">横向き(8セクタ)</string>
 	<string name="direction_style_clockwise">時計回り(12セクタ)</string>
 	<string name="settings_direction_style">方向の形式</string>
-	<string name="settings_direction_style_descr">移動状態での相対方向を示す方法を選択してください</string>
+	<string name="settings_direction_style_descr">移動中での相対方向を示す方法を選択</string>
 	<string name="auto_announce_on">アナウンスの開始</string>
 	<string name="auto_announce_off">アナウンスの停止</string>
 	<string name="scroll_map_by_gestures_descr">タッチスクリーン上のジェスチャーで地図をスクロール</string>
 	<string name="scroll_map_by_gestures">自然な地図スクルール</string>
 	<string name="i_am_here">私はここです(現在位置)</string>
-	<string name="zoom_by_trackball_descr">水平方向のトラックボールの動きによってズームマップを変更します</string>
-	<string name="zoom_by_trackball">ズームコントロールにトラックボールを使用する</string>
+	<string name="zoom_by_trackball_descr">トラックボールを水平方向に動かすことでマップズームを変更</string>
+	<string name="zoom_by_trackball">ズームコントロールにトラックボールを使用</string>
 	<string name="use_short_object_names_descr">タッチで検索する場合に短いオブジェクト名を使用</string>
 	<string name="use_short_object_names">オブジェクト名を使用</string>
 	<string name="accessibility_preferences_descr">アクセシビリティ関連の設定</string>
@@ -1141,7 +1136,7 @@ POIの更新は利用できません</string>
 	<string name="use_fluorescent_overlays">蛍光色の重ね表示</string>
 	<string name="use_fluorescent_overlays_descr">経路とルートを表示する際に、蛍光色を使用</string>
 	<string name="offline_edition">オフライン編集</string>
-	<string name="offline_edition_descr">常にオフライン編集を使用する</string>
+	<string name="offline_edition_descr">常にオフライン編集を使用</string>
 	<string name="update_poi_does_not_change_indexes">アプリケーション内部POIの変更はローカルファイルに保存され、ダウンロードしたマップファイルには影響しません。</string>
 	<string name="local_openstreetmap_uploading">アップロード中…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI/バグ報告はアップロードされました</string>
@@ -1150,7 +1145,7 @@ POIの更新は利用できません</string>
 	<string name="local_openstreetmap_upload">OSMへの変更をアップロードする</string>
 	<string name="local_openstreetmap_delete">変更を削除する</string>
 	<string name="local_openstreetmap_descr_title">非同期OSMの編集:</string>
-	<string name="local_openstreetmap_settings">OSM POIとバグはローカルに保存されました</string>
+	<string name="local_openstreetmap_settings">保存済みOSM POIとバグ</string>
 	<string name="animate_routing_route_not_calculated">まず、ルートを検索して下さい</string>
     <string name="animate_routing_route">検索されたルートを利用してシミュレーション </string>
     <string name="animate_routing_gpx">GPXトラックを利用してシミュレーション</string>
@@ -1170,7 +1165,7 @@ POIの更新は利用できません</string>
 ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム開発利用推進機構（J-spacesystems）の共同作業によるものです。</string>
     <string name="audionotes_location_not_defined">メモに関連付ける場所が未定義です。 指定された場所にメモをとるためには\"場所を利用…\"を利用します</string>
     <string name="map_widget_audionotes">音声メモ</string>
-    <string name="audionotes_plugin_description">旅行中に音声/ビデオメモをとる</string>
+    <string name="audionotes_plugin_description">旅行中に音声/ビデオメモをとる事が出来ます</string>
     <string name="audionotes_plugin_name">音声/ビデオメモ</string>
     <string name="index_srtm_parts">パート</string>
     <string name="index_srtm_ele">等高線</string>
@@ -1182,7 +1177,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
     <string name="rendering_attr_noAdminboundaries_description">地域の境界線表示（管理者レベル 5-9）を隠す</string>
     <string name="tip_altitude_offset">高度補正</string>
 	<string name="close_changeset">チェンジセットを閉じる</string>
-	<string name="local_openstreetmap_settings_descr">ローカルデータベースに記載されているPOIとバグの閲覧と管理</string>
+	<string name="local_openstreetmap_settings_descr">ローカルストレージに保存されたOpenStreetMapのPOIやバグの閲覧と管理</string>
 	
 	
 	<string name="live_monitoring_interval_descr">オンライン追跡間隔を指定</string>
@@ -1731,8 +1726,8 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="routing_attr_avoid_ferries_description">フェリーを使用しない</string>
 	<string name="routing_attr_avoid_motorway_name">高速道路を使用しない</string>
 	<string name="routing_attr_avoid_motorway_description">高速道路を使用しない</string>
-	<string name="routing_attr_weight_name">最大重量</string>
-	<string name="routing_attr_weight_description">車両重量制限を使用する</string>
+	<string name="routing_attr_weight_name">重量制限</string>
+	<string name="routing_attr_weight_description">ルート上で通行可能な車両重量を指定</string>
     <string name="android_19_location_disabled">"KitKat以降のAndroidバージョンでは以前のストレージの場所にダウンロードやアップデートが出来ません。(%s) 新しい場所にファイルをコピーしますか？
 \n備考:古いファイルはそのままそこに残ります。
 \n備考:その場合OsmAndとOsmAnd+とでファイルの共有は出来ません。 "</string>
@@ -1770,7 +1765,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="sleep_mode_stop_dialog">GPSのスリープモードを停止しますか？</string>
 	<string name="map_preferred_locale_descr">地図上の名称の優先言語(利用できない場合は、英語またはローカル名に切り替わります)</string>
     <string name="map_preferred_locale">地名等の優先言語</string>
-    <string name="local_map_names">その国での名称</string>
+    <string name="local_map_names">ローカル名(その国での名称)</string>
     <string name="lang_sw">スワヒリ語</string>
     <string name="lang_he">ヘブライ語</string>
     <string name="home">自宅</string>
@@ -1884,11 +1879,11 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="osmo_share_current_session">ブラウザで現在のセッションを共有する</string>
     <string name="osmo_session_not_available">セッションはが利用できません「送信場所」がオンになっていることを確認してください。</string>
     <string name="osmo_share_session">セッションの共有</string>
-    <string name="rendering_attr_subwayMode_name">地下鉄モード</string>
+    <string name="rendering_attr_subwayMode_name">地下鉄ルート</string>
  	<string name="osmo_session_id_share">デバイスを追跡するためのセッションURL (%1$s)</string>
     <string name="osmo_tracker_id_share">目的のデバイス %2$sに接続するには、リンク %3$sをクリックするかトラッカーIDを指定してください(%1$s)</string>
     <string name="osmo_track_interval">記録間隔</string>
-	<string name="osmo_track_interval_descr">位置を送信する時間間隔を選択してください</string>
+	<string name="osmo_track_interval_descr">位置を送信する時間間隔を選択</string>
     <string name="int_days">日</string>
     <string name="osmo_connect_menu">接続</string>
     <string name="osmo_expire_group">失効</string>
@@ -1911,14 +1906,14 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="seconds_ago">秒前</string>
     <string name="osmo_connected_devices">デバイスと接続されました</string>
     <string name="osmo_groups">OsMoグループ/デバイス</string>
-    <string name="osmo_auto_send_locations_descr">アプリケーション起動後に自動的にトラッカーセッションを開始し場所を送信する</string>
-    <string name="osmo_auto_send_locations">自動的トラッカーセッションを開始する</string>
+    <string name="osmo_auto_send_locations_descr">アプリケーション起動後に自動的にトラッカーセッションを開始し場所を送信</string>
+    <string name="osmo_auto_send_locations">自動的にトラッカーセッションを開始</string>
     <string name="osmo_tracker_id">パーソナルトラッカーID</string>
     <string name="osmo_tracker_id_descr">クリックでトラッカーIDを表示したり共有したりします。トラッカーIDにて接続されたデバイスを使用すると、このデバイスのすべての動きを監視することができます！解除するには[再作成]オプションを選択してください。</string>
     <string name="osmo_session_token">セッショントークン: %1$s</string>
     <string name="osmo_auth_pending">認証を待っています...</string>
     <string name="osmo_locations_sent">"位置の送信 %1$d (バッファ内 %2$d) "</string>
-    <string name="osmo_conn_successfull">"接続が確立されました: %1$s "</string>
+    <string name="osmo_conn_successfull">"確立された接続: %1$s "</string>
     <string name="osmo_io_error">"OsMoの接続に問題があります "</string>
     <string name="osmo_settings_uuid">固有のデバイスID</string>
     <string name="tip_recent_changes_1_8_alpha">"1.8での変更点：* GPXトラックのルートポイント間のルートを計算 * 国別ダウンロードのレイアウト変更(ローカル名検索をサポート) * GPX / KMLのインポートをサポート(KMLからGPXに変換) * GPXトラックは「マイデータ」に移動 * GPXトラックを分割し、距離/標高差/速度を確認することができます * ナビゲーションを遅延させて自動開始 "</string>
@@ -1930,10 +1925,10 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="osmo_settings_descr">監視についての設定と各個の監視チャネルのセットアップ</string>
     <string name="osmo_settings">OpenStreetMap監視</string>
     <string name="keep_informing">ナビゲーション指示の繰り返し</string>
-	<string name="keep_informing_descr">定期的にナビゲーション指示を繰り返す</string>
-    <string name="arrival_distance">目的地周辺のお知らせ</string>
-    <string name="arrival_distance_descr">どの程度の距離で目的地周辺のアナウンスを希望するか？</string>
-    <string name="osmo_plugin_description">"OpenStreetMapは、http://osmo.mobiを参照し高度なリアルタイム監視をします。他のデバイスを相互に追跡します。匿名のグループを作成し、互いの場所を共有しコミュニケーションもできます。セッション追跡または恒久的な追跡用設定ができます。匿名のグループは数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全に機能するグループはウェブサイト上で作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
+	<string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔の設定</string>
+    <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
+    <string name="arrival_distance_descr">どのタイミングで目的地周辺のアナウンスをするか設定</string>
+    <string name="osmo_plugin_description">"OpenStreetMapにて、http://osmo.mobiを参照し高度なリアルタイム監視をします。他のデバイスを相互に追跡します。匿名のグループを作成し、互いの場所を共有しコミュニケーションもできます。セッション追跡または恒久的な追跡用設定ができます。匿名のグループは数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全に機能するグループはウェブサイト上で作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
     <string name="osmo_plugin_name">OsMo(高度なリアルタイム監視)</string>
    	<string name="always_center_position_on_map">位置を常に中央表示</string>
     <string name="voice_pref_title">音声</string>
@@ -1955,7 +1950,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="lang_eu">バスク語</string>
 	<string name="lang_be">ベラルーシ語</string>
 	<string name="lang_bs">ボスニア語</string>
-	<string name="rendering_attr_coloredBuildings_name">色つき建物</string>
+	<string name="rendering_attr_coloredBuildings_name">タイプ別に建物に着色</string>
     <string name="osmo_invite">招待…</string>
     <string name="osmo_leave_confirmation_msg">グループ %1$sから退出しますか？</string>
     <string name="osmo_specify_tracker_id">IDを指定してください</string>
@@ -2044,12 +2039,12 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="rendering_value_car_name">車</string>
     <string name="rendering_value_bicycle_name">自転車</string>
     <string name="rendering_value_pedestrian_name">歩行者</string>
-    <string name="record_plugin_description">マップ画面上のボタンをタップすることであなたの経路を保存します。ローカルのGPXファイルへの旅行の記録やオンラインWebサービスの利用の設定が出来ます。</string>
-    <string name="record_plugin_name">OsmAnd開発</string>
+    <string name="record_plugin_description">マップ画面上のボタンをタップすることで経路等を保存します。ローカルのGPXファイルへの旅行の記録やオンラインWebサービスの利用の設定が出来ます。</string>
+    <string name="record_plugin_name">旅程の記録</string>
     <string name="int_hour">時間</string>
     <string name="duration">期限</string>
     <string name="distance">距離</string>
-    <string name="rendering_attr_publicTransportMode_name">公共交通機関モード</string>
+    <string name="rendering_attr_publicTransportMode_name">バス、トロリーバス、シャトルバスルート</string>
 	<string name="save_track_to_gpx_globally">GPXファイルに経路を記録</string>
 	<string name="save_track_to_gpx_globally_descr">GPXファイルへの一般の位置(General position)記録は、マップ画面上のGPX記録ウィジェットを使用してオンとオフを切り替えることができます</string>
 	<string name="save_track_interval_globally">記録間隔</string>
@@ -2065,18 +2060,18 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="traffic_warning">交通警告</string>
 	<string name="local_index_description">選択解除または削除するには長押し、詳細を見るにはタップして下さい。現在のデバイス上のデータ(空き容量 %1$s):</string>
 	<string name="speed_limit_exceed">制限速度の許容範囲</string>
-	<string name="speed_limit_exceed_message">制限速度超過による警告音声が鳴る時の許容値を選択。</string>
+	<string name="speed_limit_exceed_message">制限速度超過による警告音声の許容値を選択。</string>
 	<string name="fav_point_emoticons_message">お気に入り地点名%1$sはファイルに絵文字を含む文字列を保存し、分かり易いよう変更されています。</string>
     <string name="print_route">経路印刷</string>
     <string name="test_native_render">ネイティブレンダリングのテスト</string>
-    <string name="test_native_render_msg">ネイティブレンダリングを有効化して開始します</string>
+    <string name="test_native_render_msg">ネイティブレンダリングを有効化して開始</string>
     <string name="fav_point_dublicate">お気に入り地点の重複</string>
     <string name="fav_point_dublicate_message">名前の重複を避けるために、%1$s にお気に入り地点の名前を変更しました。</string>
     <string name="use_native_render">ネイティブレンダリングを使用</string>
     <string name="use_native_render_descr">JavaではなくC++のレンダリングを使用</string>
     <string name="text_size_descr">地図上の文字サイズを設定します。</string>
     <string name="text_size">文字サイズ</string>
-    <string name="osmo_use_https_descr">サーバーとの接続にセキュリティで保護されたものを使用します</string>
+    <string name="osmo_use_https_descr">サーバーとの接続にセキュリティで保護されたプロトコルを使用</string>
     <string name="osmo_use_https">httpsを使用します</string>
 	<string name="advanced_settings">高度な設定</string>
 	<string name="rendering_attr_tramTrainRoutes_name">路面電車や鉄道での経路</string>
