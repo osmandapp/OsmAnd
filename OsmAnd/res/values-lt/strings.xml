@@ -78,7 +78,7 @@
   <string name="online_map_settings_descr">Nustatykite interneto ar laikinai išsaugotų žemėlapių šaltinius</string>
   <string name="map_settings">- Žemėlapio nustatymai</string>
   <string name="map_settings_descr">Suderinkite žemėlapio rodymą</string>
-  <string name="osmand_rastermaps_plugin_description">Rodyti nustatymus įvairiems interneto ir laikinai išsaugotiems žemėlapiams: padaryti baziniu žemėlapiu ar sluoksniais rodomais virš ar po juo. Šie žemėlapiai gali būti sukurti savarankiškai ir įkelti į OsmAnd segtuvą.</string>
+  <string name="osmand_rastermaps_plugin_description">Rodyti nustatymus įvairiems interneto ir laikinai išsaugotiems žemėlapiams: padaryti baziniu žemėlapiu ar sluoksniais rodomais virš ar po juo. Šie žemėlapiai gali būti sukurti savarankiškai ir įkelti į OsmAnd duomenų segtuvą.</string>
   <string name="osmand_background_plugin_description">Rodyti nustatymus sekimui ir navigacijai miego režime (išjungus ekraną) periodiškai žadinant GPS įrenginį.</string>
   <string name="osmand_accessibility_description">Rodyti nustatymus specialiosios prieigos funkcionalumui.</string>
   <string name="extra_settings">Sudėtingesni nustatymai</string>
@@ -625,7 +625,7 @@
   <string name="voice">Balsas</string>
   <string name="no_vector_map_loaded">Vektoriniai žemėlapiai neįkelti</string>
   <string name="map_route_by_gpx">Vykdyti navigaciją naudojant GPX</string>
-  <string name="gpx_files_not_found">/tracks segtuve nerasta jokių GPX failų</string>
+  <string name="gpx_files_not_found">tracks segtuve nerasta jokių GPX failų</string>
   <string name="layer_gpx_layer">GPX maršrutas…</string>
   <string name="error_reading_gpx">Įvyko klaida skaitant GPX duomenis</string>
   <string name="vector_data">Parsiųsti vektoriniai žemėlapiai</string>
@@ -827,7 +827,7 @@
   <string name="save_current_track">Išsaugoti dabartinę judėjimo istoriją</string>
   <string name="save_track_interval">Informacijos išsaugojimo intervalas naviguojant</string>
   <string name="save_track_interval_descr">Pasirinkti judėjimo istorijos išsaugojimo pozicijos intervalą naviguojant</string>
-  <string name="save_track_to_gpx_descrp">Navigavimo metu judėjimo istorija bus išsaugota į tracks segtuvą</string>
+  <string name="save_track_to_gpx_descrp">Navigavimo metu judėjimo istorija bus išsaugota į track segtuvą</string>
   <string name="save_track_to_gpx">Naviguojant išsaugoti judėjimo istoriją į GPX failą</string>
   <string name="update_tile">Atnaujinti žemėlapį</string>
   <string name="reload_tile">Iš naujo įkelti lakštą</string>
@@ -1062,44 +1062,9 @@
 \n\t* Klaidų pataisymai "</string>
 <string name="snap_to_road_descr">Poziciją rodyti ant kelių kai naviguojama</string>
 <string name="snap_to_road">Rodyti ant kelio</string>
-<string name="osmand_long_description_1000_chars">
-		OsmAnd (OSM Automated Navigation Directions)
-
-OsmAnd yra atviro kodo programa naudojanti visą spektrą OpenStreetMap (OSM) duomenų. Visi žemėlapiai (vektoriniai ar lakštiniai) gali būti išsaugoti telefone ir naudojami be interneto prieigos. OsmAnd taip pat gali pasiūlyti maršruto skaičiavimo paslaugas internete ar įrenginyje, bei balso nurodymus kalionei apskaičiuotu maršrutu.
-
-Sąvybės:
-- Kompaktiški vektoriniai viso pasaulio žemėlapiai
-- Adresų ir LV paieška nenaudojant interneto
-- Automobilio, dviračio ir pėsčiojo režimai
-
-Šios nemokamos OsmAnd versijos apribojimai:
-- Ribojamas žemėlapių parsiuntimų skaičius
-- Nėra prieigos prie iš Wikipedia parsiunčiamų LV
-
-OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas priklauso nuo finansinės paramos, kuri įgalina tolesnį vystymą ir naujų funkcijų kūrimą. Norime paskatinti jus nusipirkti OsmAnd+ programą arba finansiškai prisidėti prie specifinių funkcijų kūrimo arba šiaip paremti programą osmand.net puslapyje.
-	</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd yra atviro kodo programa naudojanti visą spektrą OpenStreetMap (OSM) duomenų. Visi žemėlapiai (vektoriniai ar lakštiniai) gali būti išsaugoti telefone ir naudojami be interneto prieigos. OsmAnd taip pat gali pasiūlyti maršruto skaičiavimo paslaugas internete ar įrenginyje, bei balso nurodymus kalionei apskaičiuotu maršrutu. Kelios pagrindinės savybės: - Veikia be interneto (išsaugokite parsiųstus žemėlapius ar jų lakštus įrenginyje) - Kompaktiški vektoriniai viso pasaulio žemėlapiai - Galimybė atsisiųsti šalies ar regiono žemėlapius tiesiog programoje - Adresų ir LV paieška nenaudojant interneto - Automobilio, dviračio ir pėsčiojo režimai Šios nemokamos OsmAnd versijos apribojimai: - Ribojamas žemėlapių parsiuntimų skaičius - Nėra prieigos prie iš Wikipedia parsiunčiamų LV OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas priklauso nuo finansinės paramos, kuri įgalina tolesnį vystymą ir naujų funkcijų kūrimą. Norime paskatinti jus nusipirkti OsmAnd+ programą arba finansiškai prisidėti prie specifinių funkcijų kūrimo arba šiaip paremti programą osmand.net puslapyje. "</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd - atviro kodo navigacijos programa su žemėlapiais</string>
-<string name="osmand_plus_long_description_1000_chars">
-		OsmAnd+ (OSM Automated Navigation Directions)
-
-		OsmAnd+ yra atviro kodo programa naudojanti visą spektrą OpenStreetMap (OSM) duomenų. Visi žemėlapiai (vektoriniai ar lakštiniai) gali būti išsaugoti telefono atmintyje ar atminties kortelėje ir naudojami be interneto prieigos. OsmAnd taip pat gali pasiūlyti maršruto skaičiavimo paslaugas internete ar įrenginyje, bei balso nurodymus kelionei apskaičiuotu maršrutu.
-
-		OsmAnd+ yra mokama programos versiją, kurią pirkdami jūs remiate šį projektą, skiriate lėšas naujų funkcijų kūrimui ir tuo pačiu gaunate naujausius atnaujinimus.
-
-		Sąvybės:
-		- Veikia visiškai be interneto (išsaugokite parsiųstus žemėlapius ar jų lakštus pasirinktame segtuve)
-		- Kompaktiški vektoriniai viso pasaulio žemėlapiai
-		- Neribota galimybė parsisiųsti šalies ar regiono žemėlapius pačioje programoje
-		- Parsiųstos Vikpedijos funkcionalumas (parsisiųskite LV iš Vikipedijos) puikiai tinkantis lankytinų objektų pažinimui
-		- Galimybė sudėti kelis žemėlapių sluoksnius, pvz. GPX ar kelionės istoriją, Lankytinas, Išsaugotas vietas, kontūrų linijas, viešo transporto sustojimus, papildomus žemėlapius pasirenkant jų permatomumą
-		- Adresų ir LV paieška nenaudojant interneto
-		- Trumpų maršrutų skaičiavimas nenaudojant interneto (eksperimentinė funkcija)
-		- Automobilio, dviračio ir pėsčiojo režimai su:
-		- pasirenkamu automatiniu dienos/nakties vaizdo perjungimu
-		- pasirenkamas prie judėjimo greičio priderinamas žemėlapio didinimas
-		- pasirenkamas žemėlapio pasukimas pagal kompasą arba judėjimo kryptį
-		- pasirenkamas eismo juostų keitimo nurodymų įjungimas, greičių apribojimo rodymas, įrašyti arba sintetiniai (TTS) balsai
-	</string>
+<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ yra atviro kodo programa naudojanti visą spektrą OpenStreetMap (OSM) duomenų. Visi žemėlapiai (vektoriniai ar lakštiniai) gali būti išsaugoti telefono atmintyje ar atminties kortelėje ir naudojami be interneto prieigos. OsmAnd taip pat gali pasiūlyti maršruto skaičiavimo paslaugas internete ar įrenginyje, bei balso nurodymus kelionei apskaičiuotu maršrutu. OsmAnd+ yra mokama programos versiją, kurią pirkdami jūs remiate šį projektą, skiriate lėšas naujų funkcijų kūrimui ir tuo pačiu gaunate naujausius atnaujinimus. Savybės: - Veikia visiškai be interneto (išsaugokite parsiųstus žemėlapius ar jų lakštus įrenginyje) - Kompaktiški vektoriniai viso pasaulio žemėlapiai - Neribota galimybė parsisiųsti šalies ar regiono žemėlapius pačioje programoje - Parsiųstos Vikpedijos funkcionalumas (parsisiųskite LV iš Vikipedijos) puikiai tinkantis lankytinų objektų pažinimui - Galimybė sudėti kelis žemėlapių sluoksnius, pvz. GPX ar kelionės istoriją, Lankytinas, Išsaugotas vietas, kontūrų linijas, viešo transporto sustojimus, papildomus žemėlapius pasirenkant jų permatomumą - Adresų ir LV paieška nenaudojant interneto - Trumpų maršrutų skaičiavimas nenaudojant interneto (eksperimentinė funkcija) - Automobilio, dviračio ir pėsčiojo režimai su: - pasirenkamu automatiniu dienos/nakties vaizdo perjungimu - pasirenkamas prie judėjimo greičio priderinamas žemėlapio didinimas - pasirenkamas žemėlapio pasukimas pagal kompasą arba judėjimo kryptį - pasirenkamas eismo juostų keitimo nurodymų įjungimas, greičių apribojimo rodymas, įrašyti arba sintetiniai (TTS) balsai "</string>
 <string name="tip_map_switch_t_v2">"Žemėlapių šaltiniai ir rodomi sluoksniai keičiami per \'Meniu\' → \'Konfigūruoti žemėlapį\'.
 \n\nPunkte \'Žemėlapio šaltinis…\' galite pasirinkti parsiųstus vektorinius žemėlapius, nustatytus (interneto ar laikinai išsagotų) žemėlapių šaltinius (aktyvuokite \'Interneto žemėlapiai\' įskiepį per \'Nustatymai\' → \'Įskiepiai\'), arba savarankiškai sukurtus žemėlapius, pvz. naudojant OsmAndMapCreator programą kompiuteriui.
 \n\nOsmAnd taip pat gali naudoti ir kitokius šaltinius. "</string>
@@ -1503,9 +1468,9 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="routing_attr_avoid_motorway_description">Vengti greitkelių</string>
 	<string name="routing_attr_weight_name">Maksimalus svoris</string>
 	<string name="routing_attr_weight_description">Įvesti automobilio svorio apribojimą</string>
-    <string name="android_19_location_disabled">"Pradedant KitKat versija jūs nebegalėsite parsisųsti ir atnaujinti žemėlapių ankstesnėse saugojimo vietose (%s). Ar norite pakeisti saugyklos vietą ir į ją nukopijuoti visus failus?
-\n Pastaba: Seni failai išliks kur buvę.
-\n Pastaba: dalintis tais pačiais failais tarp OsmAnd ir OsmAnd+ nebus galima. "</string>
+    <string name="android_19_location_disabled">Pradedant Android 4.4 versija jūs nebegalėsite parsisųsti ir atnaujinti žemėlapių ankstesnėse saugojimo vietose (%s). Ar norite pakeisti saugyklos vietą ir į ją nukopijuoti visus failus?
+\n Pastaba: Seni failai išliks kur buvę (galima bus ištrinti rankiniu būdu).
+\n Pastaba: dalintis tais pačiais failais tarp OsmAnd ir OsmAnd+ nebus galima.</string>
     <string name="application_dir_change_warning2">OsmAnd gali pabandyti perkelti duomenis į naują saugyklą. Ar atlikti tai?</string>
     <string name="copying_osmand_one_file_descr">Kopijuojami failai (%/s) į naują saugojimo vietą...</string>
     <string name="copying_osmand_files_descr">OsmAnd failai kopijuojami į naują vietą (%/s)</string>
