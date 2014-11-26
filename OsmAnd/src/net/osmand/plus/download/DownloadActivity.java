@@ -59,6 +59,12 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 
 	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		BaseDownloadActivity.downloadListIndexThread.resetUiActivity(DownloadActivity.class);
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);

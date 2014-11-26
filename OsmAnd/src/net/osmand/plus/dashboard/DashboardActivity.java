@@ -1,13 +1,19 @@
 package net.osmand.plus.dashboard;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
@@ -20,6 +26,7 @@ import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.*;
@@ -29,7 +36,9 @@ import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.download.*;
 import net.osmand.util.MapUtils;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
 import java.util.*;
 
 /**
@@ -38,6 +47,7 @@ import java.util.*;
 public class DashboardActivity extends BaseDownloadActivity {
 
 	private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
+	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
 	public static final boolean TIPS_AND_TRICKS = false;
 
@@ -142,27 +152,20 @@ public class DashboardActivity extends BaseDownloadActivity {
 	}
 
 	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		downloadListIndexThread.resetUiActivity(DashboardActivity.class);
+	}
+
+	@Override
 	public void updateProgress(boolean updateOnlyProgress) {
-		//needed when rotation is performed and progress can be null
-		if (progressBar == null){
-			return;
-		}
 		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask = BaseDownloadActivity.downloadListIndexThread.getCurrentRunningTask();
-
-		if(updateOnlyProgress){
-			if(!basicProgressAsyncTask.isIndeterminate()){
-				progressBar.setProgress(basicProgressAsyncTask.getProgressPercentage());
-			}
-		} else {
-			boolean visible = basicProgressAsyncTask != null && basicProgressAsyncTask.getStatus() != AsyncTask.Status.FINISHED;
-			if (!visible) {
-				return;
-			}
-
-			boolean intermediate = basicProgressAsyncTask.isIndeterminate();
-			progressBar.setVisibility(intermediate ? View.GONE : View.VISIBLE);
-			if (!intermediate) {
-				progressBar.setProgress(basicProgressAsyncTask.getProgressPercentage());
+		for(WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if(f instanceof DashUpdatesFragment) {
+				if(!f.isDetached()) {
+					((DashUpdatesFragment) f).updateProgress(basicProgressAsyncTask, updateOnlyProgress);
+				}
 			}
 		}
 	}
@@ -170,5 +173,52 @@ public class DashboardActivity extends BaseDownloadActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return true;
+	}
+
+	public void checkPreviousRunsForExceptions(boolean firstTime) {
+		long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
+		final OsmandApplication app = ((OsmandApplication) getApplication());
+		final File file = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
+		if (file.exists() && file.length() > 0) {
+			if (size != file.length() && !firstTime) {
+				String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
+				AlertDialog.Builder builder = new AccessibleAlertBuilder(DashboardActivity.this);
+				builder.setMessage(msg).setNeutralButton(getString(R.string.close), null);
+				builder.setPositiveButton(R.string.send_report, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent = new Intent(Intent.ACTION_SEND);
+						intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "osmand.app+crash@gmail.com" }); //$NON-NLS-1$
+						intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+						intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
+						intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug"); //$NON-NLS-1$
+						StringBuilder text = new StringBuilder();
+						text.append("\nDevice : ").append(Build.DEVICE); //$NON-NLS-1$
+						text.append("\nBrand : ").append(Build.BRAND); //$NON-NLS-1$
+						text.append("\nModel : ").append(Build.MODEL); //$NON-NLS-1$
+						text.append("\nProduct : ").append(Build.PRODUCT); //$NON-NLS-1$
+						text.append("\nBuild : ").append(Build.DISPLAY); //$NON-NLS-1$
+						text.append("\nVersion : ").append(Build.VERSION.RELEASE); //$NON-NLS-1$
+						text.append("\nApp Version : ").append(Version.getAppName(app)); //$NON-NLS-1$
+						try {
+							PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+							if (info != null) {
+								text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode); //$NON-NLS-1$ //$NON-NLS-2$
+							}
+						} catch (PackageManager.NameNotFoundException e) {
+						}
+						intent.putExtra(Intent.EXTRA_TEXT, text.toString());
+						startActivity(Intent.createChooser(intent, getString(R.string.send_report)));
+					}
+
+				});
+				builder.show();
+			}
+			getPreferences(MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
+		} else {
+			if (size > 0) {
+				getPreferences(MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, 0).commit();
+			}
+		}
 	}
 }

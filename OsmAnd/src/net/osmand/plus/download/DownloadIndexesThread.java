@@ -72,7 +72,7 @@ public class DownloadIndexesThread {
 	public void setUiActivity(BaseDownloadActivity uiActivity) {
 		this.uiActivity = uiActivity;
 	}
-	
+
 	public List<DownloadEntry> flattenDownloadEntries() {
 		List<DownloadEntry> res = new ArrayList<DownloadEntry>();
 		for(List<DownloadEntry> ens : getEntriesToDownload().values()) {
@@ -120,7 +120,17 @@ public class DownloadIndexesThread {
 	}
 
 	public List<IndexItem> getItemsToUpdate() { return itemsToUpdate;}
-	
+
+	public void resetUiActivity(Class<?> downloadActivityClass) {
+		if (uiActivity== null){
+			return;
+		}
+
+		if (uiActivity.getClass().equals(downloadActivityClass)){
+			uiActivity = null;
+		}
+	}
+
 	public class DownloadIndexesAsyncTask extends BasicProgressAsyncTask<IndexItem, Object, String> implements DownloadFileShowWarning {
 
 		private OsmandPreference<Integer> downloads;
