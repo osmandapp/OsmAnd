@@ -423,8 +423,8 @@
         \n Note 2: In the new storage location it will not be possible to share files between OsmAnd and OsmAnd+.</string>
     <string name="application_dir_change_warning2">Do you want OsmAnd to try to copy its data files to the new destination?</string>
     <string name="copying_osmand_one_file_descr">Copying file (%s) to the new destination...</string>
-    <string name="copying_osmand_files_descr">Copying OsmAnd files to the new destination (%s)</string>
-    <string name="copying_osmand_files">Copying OsmAnd files</string>
+    <string name="copying_osmand_files_descr">Copying OsmAnd data files to the new destination (%s)</string>
+    <string name="copying_osmand_files">Copying OsmAnd data files</string>
     <string name="calculate_osmand_route_gpx">Calculate OsmAnd offline route</string>
     <string name="app_mode_truck">Truck</string>
     <string name="guidance_preferences_descr">Navigation preferences</string>
