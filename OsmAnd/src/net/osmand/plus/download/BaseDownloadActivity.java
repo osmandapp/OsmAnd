@@ -81,6 +81,10 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 
 	}
 
+	public void startDownload(){
+		downloadFilesCheckFreeVersion();
+	}
+
 	public void downloadFilesPreCheckSpace() {
 		double sz = 0;
 		List<DownloadEntry> list = downloadListIndexThread.flattenDownloadEntries();

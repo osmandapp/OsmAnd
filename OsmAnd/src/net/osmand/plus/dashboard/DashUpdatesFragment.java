@@ -83,6 +83,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 				public void onClick(View view) {
 					List<DownloadEntry> download = item.createDownloadEntry(getMyApplication(), item.getType(), new ArrayList<DownloadEntry>());
 					getDownloadActivity().getEntriesToDownload().put(item, download);
+					getDownloadActivity().startDownload();
 				}
 			});
 			updates.addView(view);

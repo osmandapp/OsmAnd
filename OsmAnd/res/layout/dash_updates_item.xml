@@ -14,7 +14,9 @@
 				  android:layout_width="fill_parent"
 				  android:layout_height="wrap_content">
 		<LinearLayout android:orientation="vertical"
-					  android:layout_width="fill_parent"
+					  android:layout_gravity="center_vertical"
+					  android:layout_width="0dp"
+					  android:layout_weight="1"
 					  android:layout_height="50dp">
 			<TextView android:id="@+id/map_name"
 					  android:textColor="@color/dashboard_black"
@@ -25,6 +27,7 @@
 					  android:layout_height="wrap_content"/>
 		</LinearLayout>
 		<Button android:id="@+id/btn_download"
+				android:drawableStart="@drawable/ic_action_gup_light"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"/>
 	</LinearLayout>
