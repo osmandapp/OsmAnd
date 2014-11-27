@@ -19,31 +19,19 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
     private static final Log log = PlatformUtil.getLog(AudioFocusHelperImpl.class);
 
     @Override
-    public boolean requestFocus(Context context, int streamType)
-    {
+    public boolean requestFocus(Context context, int streamType) {
         AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        if (((OsmandApplication) context.getApplicationContext()).getSettings().INTERRUPT_MUSIC.get())
-        {
-            return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.requestAudioFocus(this, streamType, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
-        }
-        else
-        {
-            return true;
-        }
+        return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.requestAudioFocus(this, streamType, 
+              ((OsmandApplication) context.getApplicationContext()).getSettings().INTERRUPT_MUSIC.get()?
+              AudioManager.AUDIOFOCUS_GAIN_TRANSIENT: 
+              AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK );
     }
 
     @Override
     public boolean abandonFocus(Context context, int streamType)
     {
         AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        if (((OsmandApplication) context.getApplicationContext()).getSettings().INTERRUPT_MUSIC.get())
-        {
-            return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
-        }
-        else
-        {
-            return true;
-        }
+        return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
     }
 
     @Override

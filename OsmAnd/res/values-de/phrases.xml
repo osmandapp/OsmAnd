@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_bakery">Bäckerei</string>
+	<string name="poi_mall">Einkaufszentrum</string>
+	<string name="poi_butcher">Fleischerei</string>
+	<string name="poi_supermarket">Supermarkt</string>
+	<string name="poi_vending_machine">Verkaufsautomat</string>
+
+	<string name="poi_bookshop">Buchhandlung</string>
+	<string name="poi_bicycle_shop">Fahrradgeschäft</string>
+	<string name="poi_antiques_shop">Antiquitätenhändler</string>
+	<string name="poi_bathroom_furnishing_shop">Badmöbel</string>
+	<string name="poi_boutique">Boutique</string>
+	<string name="poi_chemist_shop">Drogerie</string>
+	<string name="poi_shoes">Schuhgeschäft</string>
+	<string name="poi_copyshop">Copyshop</string>
+	<string name="poi_fabric_shop">Werksverkauf</string>
+	<string name="poi_doityourself_shop">Baumarkt</string>
+	<string name="poi_florist">Blumenhandlung</string>
+	<string name="poi_furniture_shop">Möbelgeschäft</string>
+	<string name="poi_garden_centre">Gartencenter</string>
+	<string name="poi_gift_shop">Andenken-Laden</string>
+	<string name="poi_hardware_shop">Eisenhandlung</string>
+	<string name="poi_jewelry_shop">Juwelier</string>
+	<string name="poi_musical_instrument_shop">Musikgeschäft</string>
+	<string name="poi_optician_shop">Optiker</string>
+	<string name="poi_stationery_shop">Bürobedarf</string>
+	<string name="poi_toys_shop">Spielwarenhandlung</string>
+	<string name="poi_video_shop">Videothek</string>
+	<string name="poi_car_shop">Autohändler</string>
+	<string name="poi_marketplace">Marktplatz</string>
+	<string name="poi_police">Polizei</string>
+	<string name="poi_fire_station">Feuerwehr</string>
+	<string name="poi_fire_hydrant">Hydrant</string>
+	<string name="poi_fire_extinguisher">Feuerlöscher</string>
+	<string name="poi_gate">Tor</string>
+	<string name="poi_city_wall">Stadtmauer</string>
+	<string name="poi_border_control">Grenzkontrolle</string>
+	<string name="poi_traffic_signals">Ampel</string>
+
+	<string name="poi_car_repair">Kfz-Werkstatt</string>
+	<string name="poi_service_tyres">Reifenhändler</string>
+	<string name="poi_car_wash">Autowaschanlage</string>
+	<string name="poi_fuel">Tankstelle</string>
+	<string name="poi_parking">Parkplatz</string>
+	<string name="poi_airport">Flughafen</string>
+	<string name="poi_lighthouse">Leuchtturm</string>
+
+	<string name="poi_bicycle_rental">Fahrradvermietung</string>
+	<string name="poi_bicycle_parking">Fahrradständer</string>
+
+	<string name="poi_tunnel">Tunnel</string>
+	<string name="poi_bridge">Brücke</string>
+
+	<string name="poi_turning_circle">Wendehammer</string>
+
+	<string name="poi_water_mill">Wassermühle</string>
+
+	<string name="poi_waste_basket">Mülleimer</string>
+
+	<string name="poi_windmill">Windmühle</string>
+	<string name="poi_driving_school">Fahrschule</string>
+	<string name="poi_school">Schule</string>
+	<string name="poi_kindergarten">Kindergarten</string>
+	<string name="poi_prison">Gefängnis</string>
+	<string name="poi_embassy">Botschaft</string>
+	<string name="poi_pharmacy">Apotheke</string>
+	<string name="poi_convenience">Lebensmittel</string>
+	<string name="poi_beverages">Getränke</string>
+	<string name="poi_deli">Delikatessen</string>
+	<string name="poi_confectionery">Süßwaren</string>
+	<string name="poi_shop_tea">Tee</string>
+	<string name="poi_baby_goods">Babyartikel</string>
+	<string name="poi_bag_shop">Taschen</string>
+	<string name="poi_carpet_shop">Teppiche</string>
+	<string name="poi_computer_shop">Computers</string>
+	<string name="poi_frame_shop">Rahmen</string>
+	<string name="poi_glaziery_shop">Glaserei</string>
+	</resources>

@@ -393,8 +393,8 @@
 	<string name="old_map_index_is_not_supported">Foreldet kartdataformat \'\'{0}\'\' støttes ikke</string>
 	<string name="poi_filter_closest_poi">Nærmeste interessepunkt</string>
 	<string name="poi_filter_custom_filter">Egendefinert filter</string>
-	<string name="specified_dir_doesnt_exist">Kan ikke finne spesifisert mappe.</string>
-	<string name="application_dir">Lagringsmappe</string>
+	<string name="specified_dir_doesnt_exist">Kan ikke finne den spesifiserte mappen.</string>
+	<string name="application_dir">Datalagringsmappe</string>
 	<string name="daynight_mode_day">Dag</string>
 	<string name="daynight_mode_night">Natt</string>
 	<string name="daynight_mode_auto">Soloppgang/-nedgang</string>
@@ -500,7 +500,7 @@
 	<string name="route_general_information">Total distanse %1$s, reisetid %2$d t %3$d m.</string>
 	<string name="router_service_descr">Velg en nettbasert eller offline navigeringstjeneste</string>
 	<string name="router_service">Navigeringstjeneste</string>
-	<string name="sd_dir_not_accessible">Lagringsmappe på SD-kortet ikke tilgjengelig</string>
+	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet er ikke tilgjengelig</string>
 	<string name="download_question">Laste ned {0} - {1} ?</string>
 	<string name="download_question_exist">Offline-data for {0} finnes allerede ({1}). Vil du oppdatere ({2}) ?</string>
 	<string name="address">Adresse</string>
@@ -527,7 +527,7 @@
 	<string name="save_current_track">Lagre gjeldende GPX-spor</string>
 	<string name="save_track_interval">Loggeintervall under navigering</string>
 	<string name="save_track_interval_descr">Velg loggeintervall for sporregistrering under navigering</string>
-	<string name="save_track_to_gpx_descrp">Spor blir lagret i spor-mappe under navigering</string>
+	<string name="save_track_to_gpx_descrp">Spor blir lagret i spor-mappen under navigering</string>
 	<string name="save_track_to_gpx">Logg spor til GPX-fil under navigering</string>
 	<string name="update_tile">Oppdater kart</string>
 	<string name="reload_tile">Last kartdel på nytt</string>
@@ -892,7 +892,7 @@
 	<string name="routing_attr_avoid_motorway_description">Unngå motorveier</string>
 	<string name="routing_attr_weight_name">Vektgrense</string>
 	<string name="routing_attr_weight_description">Angi kjøretøyets vekt som er tillatt på ruter</string>
-    <string name="copying_osmand_files_descr">Kopierer OsmAnd-filer til nytt sted (%s)</string>
+    <string name="copying_osmand_files_descr">Kopierer OsmAnd-datafiler til nytt sted (%s)</string>
     <string name="distance_measurement_clear_route">Slett alle punkter</string>
     <string name="use_kalman_filter_compass_descr">Bruk Kalmanfilter for å unngå kompassavvik</string>
     <string name="use_kalman_filter_compass">Bruk Kalmanfilter</string>
@@ -1054,4 +1054,18 @@
 	<string name="loading_postcodes">Laster postnummer…</string>
 	<string name="close">Lukk</string>
 	<string name="loading_data">Laster data…</string>
-	</resources>
+	<string name="advanced_settings">Avansert</string>
+	<string name="srtm_plugin_description">Muliggjør å laste ned offline koter og relieff-skygger (\'Innstillinger\' → \'Karthåndtering\' → \'Last ned\' → Velg ønsket karttype).</string>
+    <string name="tip_update_index_t">"Oppdaterte kartdata er viktig for offline kartvisning, for interessepunkt/adresse-søk og for offline navigering. OsmAnd tilbyr en filbehandler for kart til å laste ned disse offline-kartene og for å se etter tilgjengelige oppdateringer.
+\n\nFor å laste ned kart gå til \'Innstillinger\' → \'Karthåndtering\' → \'Last ned\'.
+\n\nEtter at den globale regionlisten er hentet fra internett, trykk på en oppføring for å laste ned eller oppdatere en fil. Vær oppmerksom på filtypevelgeren nær toppen av skjermen for å velge den typen nedlasting du ønsker (vanlige kart, relieff-overlegg etc.).
+\n\nDu kan filtrere regionlisten ved å skrive noen bokstaver, eller du kan velge alternativet \'Innstillinger\' → \'Filtrer nedlastede\' for å se oppdateringer bare for de dataene som allerede er på enheten.
+\n\n\t* Oppføringer i \'grønt\' indikerer datafiler identiske på enhet og server
+\n\t* Oppføringer i  \'blått\' indikerer tilgjengelige oppdateringer på server
+\n\t* Oppføringer i kursiv skrift indikerer data deaktiverte på enheten "</string>
+	<string name="first_time_msg">Takk for at du bruker OsmAnd. For mange funksjoner i dette programmet trenger du noen regionale offline-data som du kan laste ned via \'Innstillinger\' → \'Karthåndtering\'. Etterpå vil du være i stand til å se kart, finne adresser, lete etter interessepunkter og finne offentlig transport.</string>    
+	<string name="download_files">Last ned</string>
+	<string name="osmo_use_https_descr">Bruk sikker forbindelse med server</string>
+    <string name="osmo_use_https">Bruk https</string>
+	<string name="application_dir_change_warning2">Skal OsmAnd forsøke å kopiere datafilene til det nye stedet?</string>
+    </resources>

@@ -29,6 +29,7 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
+import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import android.content.Context;
@@ -545,7 +546,7 @@ public class RouteInfoWidgetsFactory {
 		return p;
 	}
 	
-	public BaseMapWidget createLanesControl(final RoutingHelper routingHelper, final OsmandMapTileView view) {
+	public BaseMapWidget createLanesControl(final MapActivity map, final OsmandMapTileView view) {
 		final List<Path> paths = new ArrayList<Path>();
 		final Path laneStraight = getPathFromTurnType(paths, TurnType.C, null);
 		 
@@ -560,11 +561,12 @@ public class RouteInfoWidgetsFactory {
 		paintRouteDirection.setColor(view.getResources().getColor(R.color.nav_arrow));
 		paintRouteDirection.setAntiAlias(true);
 		final float w = 72 * scaleCoefficient / miniCoeff;
-		
+		final MapViewTrackingUtilities trackingUtilities = map.getMapViewTrackingUtilities();
+		final OsmAndLocationProvider locationProvider = map.getMyApplication().getLocationProvider();
+		final RoutingHelper rh = map.getMyApplication().getRoutingHelper();
 		
 		final BaseMapWidget lanesControl = new BaseMapWidget(view.getContext()) {
 			int[] lanes = null; 
-			private TurnType turn;
 			boolean imminent = false;
 
 			
@@ -604,13 +606,21 @@ public class RouteInfoWidgetsFactory {
 				boolean visible = false;
 				int locimminent = -1;
 				int[] loclanes = null;
-				TurnType primary = null;
-				if (routingHelper != null && routingHelper.isRouteCalculated() && view.getSettings().SHOW_LANES.get()) {
-					if (routingHelper.isFollowingMode()) {
-						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
+				// TurnType primary = null;
+				if ((rh == null || !rh.isFollowingMode()) && trackingUtilities.isMapLinkedToLocation()
+						&& view.getSettings().SHOW_LANES.get()) {
+					RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
+					Location lp = locationProvider.getLastKnownLocation();
+					if(ro != null) {
+						float degree = lp == null || !lp.hasBearing() ? 0 : lp.getBearing();
+						loclanes = RouteResultPreparation.parseTurnLanes(ro, degree / 180 * Math.PI);
+					}
+				} else if (rh != null && rh.isRouteCalculated() ) {
+					if (rh.isFollowingMode() && view.getSettings().SHOW_LANES.get()) {
+						NextDirectionInfo r = rh.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
 						if(r != null && r.directionInfo != null && r.directionInfo.getTurnType() != null) {
 							loclanes  = r.directionInfo.getTurnType().getLanes();
-							primary = r.directionInfo.getTurnType();
+							// primary = r.directionInfo.getTurnType();
 							locimminent = r.imminent;
 							// Do not show too far 
 							if ((r.distanceTo > 700 && r.directionInfo.getTurnType().isSkipToSpeak()) || r.distanceTo > 1200) {
@@ -620,11 +630,11 @@ public class RouteInfoWidgetsFactory {
 					} else {
 						int di = MapRouteInfoControl.getDirectionInfo();
 						if (di >= 0 && MapRouteInfoControl.isControlVisible()
-								&& di < routingHelper.getRouteDirections().size()) {
-							RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
+								&& di < rh.getRouteDirections().size()) {
+							RouteDirectionInfo next = rh.getRouteDirections().get(di);
 							if (next != null) {
 								loclanes = next.getTurnType().getLanes();
-								primary = next.getTurnType();
+								// primary = next.getTurnType();
 							}
 						}
 					}
@@ -633,7 +643,6 @@ public class RouteInfoWidgetsFactory {
 				if (visible) {
 					if (!Arrays.equals(lanes, loclanes)) {
 						lanes = loclanes;
-						turn = primary;
 						requestLayout();
 						invalidate();
 					}

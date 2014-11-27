@@ -17,7 +17,11 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+
 import net.osmand.PlatformUtil;
+import net.osmand.osm.io.Base64;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 
 import org.apache.commons.logging.Log;
@@ -261,6 +265,15 @@ public class OsMoThread {
 				while ((i = readCommand.indexOf('\n')) != -1) {
 					String cmd = readCommand.substring(0, i);
 					readCommand = readCommand.substring(i + 1);
+					if(sessionInfo != null && sessionInfo.clientDecCypher != null) {
+						try {
+							final byte[] inMsg = android.util.Base64.decode(cmd.getBytes(), android.util.Base64.DEFAULT);
+							final byte[] byts = sessionInfo.clientDecCypher.doFinal(inMsg);
+							cmd = new String(byts);
+						} catch (Exception e) {
+							exc("Error decrypting", e);
+						}
+					}
 					queueOfMessages.add(cmd.replace("\\n", "\n"));
 				}
 			}
@@ -449,15 +462,23 @@ public class OsMoThread {
 
 	private String prepareCommand(String l) {
 		StringBuilder res = new StringBuilder(l.length());
-		for(int i = 0; i < l.length(); i++) {
+		for (int i = 0; i < l.length(); i++) {
 			char c = l.charAt(i);
-			if(c == '\n' || c == '=' || c == '\\') {
-			 res.append('\\');
+			if (c == '\n' || c == '=' || c == '\\') {
+				res.append('\\');
 			}
 			res.append(c);
 		}
 		
-		return res.toString().trim() + "=\n";
+		String finalCmd = res.toString().trim();
+		if(sessionInfo != null && sessionInfo.clientEncCypher != null) {
+			try {
+				finalCmd = Base64.encode(sessionInfo.clientEncCypher.doFinal(finalCmd.getBytes()));
+			} catch (Exception e) {
+				exc("Error encrypting", e);
+			}
+		}
+		return finalCmd + "=\n";
 	}
 
 	public long getLastCommandTime() {

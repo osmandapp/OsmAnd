@@ -477,6 +477,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				listAdapter.addLocalIndexInfo(info);
 			}
 			listAdapter.sortData();
+			getExpandableListView().setAdapter(listAdapter);
 		}
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		//hide action bar from downloadindexfragment
@@ -961,8 +962,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 		private String getNameToDisplay(LocalIndexInfo child) {
 			String mapDescr = getMapDescription(child.getFileName());
-			String mapName = FileNameTranslationHelper.getFileName(ctx, ((OsmandApplication) getDownloadActivity().getApplication()).getResourceManager().getOsmandRegions(), child.getFileName());
-
+			String mapName = FileNameTranslationHelper.getFileName(ctx,
+					((OsmandApplication) getDownloadActivity().getApplication()).getResourceManager().getOsmandRegions(),
+					child.getFileName());
 			if (mapDescr.length() > 0){
 				 return mapDescr + " - " + mapName;
 			} else {

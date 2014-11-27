@@ -27,8 +27,7 @@
             android:id="@+id/SearchText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number" />
+            android:layout_weight="1"/>
 
         <Button
             android:id="@+id/ResetButton"

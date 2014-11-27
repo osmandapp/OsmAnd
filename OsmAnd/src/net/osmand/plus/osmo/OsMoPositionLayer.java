@@ -8,7 +8,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
-import net.osmand.core.jni.ColorARGB;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
@@ -294,6 +293,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	private static String followTrackerId;
 	private static LatLon followMapLocation;
 	private static String followDestinationId;
+	private static LatLon followTargetLocation;
 	
 	public static void setFollowTrackerId(OsMoDevice d) {
 		if(d != null) {
@@ -322,17 +322,29 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		Location l = device.getLastLocation();
 		if(sameDestId && l != null) {
 			TargetPointsHelper targets = map.getMyApplication().getTargetPointsHelper();
-			RoutingHelper rh = map.getMyApplication().getRoutingHelper();
-			double dist = 1;
-			if(rh.isRouteBeingCalculated()) {
-				dist = 100;
-			} else if(rh.isRouteCalculated()) {
-				dist = 30;
-			}
-			LatLon lt = new LatLon(l.getLatitude(), l.getLongitude());
 			final TargetPoint pn = targets.getPointToNavigate();
-			if(pn == null || MapUtils.getDistance(pn.point, lt) > dist) {
-				targets.navigateToPoint(lt, true, -1);
+			LatLon lt = new LatLon(l.getLatitude(), l.getLongitude());
+			boolean cancelDestinationId = false;
+			if(followTargetLocation != null ) {
+				if(pn == null || pn.point == null || !pn.point.equals(lt) ) {
+					cancelDestinationId = true;
+				}
+			}
+			if(cancelDestinationId) {
+				followTargetLocation = null;
+				followDestinationId = null;
+			} else {
+				RoutingHelper rh = map.getMyApplication().getRoutingHelper();
+				double dist = 1;
+				if (rh.isRouteBeingCalculated()) {
+					dist = 100;
+				} else if (rh.isRouteCalculated()) {
+					dist = 30;
+				}
+				if (pn == null || MapUtils.getDistance(pn.point, lt) > dist) {
+					followTargetLocation = lt;
+					targets.navigateToPoint(lt, true, -1);
+				}
 			}
 		}
 		

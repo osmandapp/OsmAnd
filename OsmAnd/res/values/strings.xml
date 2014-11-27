@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+    <string name="osmo_use_https_descr">Use secure connection with server</string>
+    <string name="osmo_use_https">Use https</string>
+	<string name="advanced_settings">Advanced</string>
 	<string name="map_update">Map update:</string>
 	<string name="search_for">Search for</string>
 	<string name="show_map">SHOW MAP</string>
@@ -113,7 +117,7 @@
 	<string name="save_current_track_descr">Save current track to SD now</string>
 	<string name="save_current_track">Save current GPX track</string>
 	<string name="save_track_to_gpx">Log track to GPX file during navigation</string>
-	<string name="save_track_to_gpx_descrp">Tracks will be saved to track directory during navigation</string>
+	<string name="save_track_to_gpx_descrp">Tracks will be saved to the tracks folder during navigation</string>
 	<string name="save_track_interval_globally">Logging interval</string>
 	<string name="save_track_interval">Logging interval during navigation</string>
 	<string name="save_track_interval_descr">Choose logging interval for track recording during navigation</string>
@@ -420,13 +424,13 @@
 	<string name="routing_attr_avoid_motorway_description">Avoid motorways</string>
 	<string name="routing_attr_weight_name">Weight limit</string>
 	<string name="routing_attr_weight_description">Specify vehicle weight to be permitted on routes</string>
-    <string name="android_19_location_disabled">Since KitKat version you can\'t download and update map in previous storage location (%s). Do you want to change to allowed one and copy all files there?
-        \n Note: old files will stay untouched.  
-        \n Note: it will not be possible to share files between OsmAnd and OsmAnd+. </string>
-    <string name="application_dir_change_warning2">OsmAnd could try to move the data to new destination. Do you want it?</string>
-    <string name="copying_osmand_one_file_descr">Copying file (%s) to new destination...</string>
-    <string name="copying_osmand_files_descr">Copying OsmAnd files to new destination (%s)</string>
-    <string name="copying_osmand_files">Copying OsmAnd files</string>
+    <string name="android_19_location_disabled">Since Android version 4.4 (KitKat) you cannot download and update maps to the previous storage folder (%s). Do you want to change to the permitted storage location and copy all OsmAnd files there?
+        \n Note 1: Your old files will remain untouched (but can be deleted manually).
+        \n Note 2: In the new storage location it will not be possible to share files between OsmAnd and OsmAnd+.</string>
+    <string name="application_dir_change_warning2">Do you want OsmAnd to try to copy its data files to the new destination?</string>
+    <string name="copying_osmand_one_file_descr">Copying file (%s) to the new destination...</string>
+    <string name="copying_osmand_files_descr">Copying OsmAnd data files to the new destination (%s)</string>
+    <string name="copying_osmand_files">Copying OsmAnd data files</string>
     <string name="calculate_osmand_route_gpx">Calculate OsmAnd offline route</string>
     <string name="app_mode_truck">Truck</string>
     <string name="guidance_preferences_descr">Navigation preferences</string>
@@ -843,7 +847,7 @@
 		OsmAnd is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. OsmAnd also offers offline and online routing functionality including turn-by-turn voice guidance.
 
 		Some of the core features:
-		- Complete offline functionality (store downloaded vector or tile maps in a selectable folder)
+		- Complete offline functionality (store downloaded vector or tile maps in the device storage)
 		- Compact offline vector maps for the whole world available
 		- Download of country or region maps directly from the app 
 		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transportation stops, additional maps with customizable transparency
@@ -942,7 +946,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		OsmAnd+ is the paid application version, by buying it you support the project, fund the development of new features, and receive the latest updates.
 
 		Some of the core features:
-		- Complete offline functionality (store downloaded vector or tile maps in a selectable folder)
+		- Complete offline functionality (store downloaded vector or tile maps in the device storage)
 		- Compact offline vector maps for the whole world available
 		- Unlimited downloading of country or region maps directly from the app 
 		- Offline Wikipedia feature (download Wikipedia POIs), great for sightseeing
@@ -1174,7 +1178,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
 	<string name="map_settings">Map Settings</string>
 	<string name="map_settings_descr">Configure the map display</string>
-	<string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
+	<string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd data folder.</string>
 	
 	<string name="osmand_accessibility_description">Show settings for special accessibility features.</string>
 	<string name="extra_settings">Advanced settings</string>
@@ -1645,8 +1649,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_osmand_routing_service">OsmAnd navigation >20km</string>
 	<string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes > 20 km (experimental)</string>
 	<string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
-	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
-	<string name="application_dir">Storage directory</string>
+	<string name="specified_dir_doesnt_exist">Can not find the specified folder.</string>
+	<string name="application_dir">Data storage folder</string>
 	
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
@@ -1699,7 +1703,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="voice">Voice</string>
 	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
 	<string name="map_route_by_gpx">Navigate using GPX</string>
-	<string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
+	<string name="gpx_files_not_found">No GPX files found in the tracks folder</string>
 	<string name="layer_gpx_layer">GPX track&#8230;</string>
 	<string name="error_reading_gpx">Error reading GPX data</string>
 	<string name="vector_data">Offline vector maps</string>
@@ -1833,7 +1837,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
 	<string name="router_service_descr">Choose an online or offline navigation service</string>
 	<string name="router_service">Navigation service</string>
-	<string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>
+	<string name="sd_dir_not_accessible">The data storage folder on the SD card is not accessible</string>
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Address</string>
