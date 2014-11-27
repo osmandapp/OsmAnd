@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/dashboard_background" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp" >
+		<include android:id="@layout/dashboard_search"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/bg_cardui"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/map_text"
+                    style="@style/DashboardSubHeader"
+                    android:text="@string/map_Button" />
+
+                <Button
+                    android:id="@+id/show_map"
+                    style="@style/DashboardGeneralButton"
+                    android:text="@string/show_map" />
+            </LinearLayout>
+
+            <net.osmand.plus.views.OsmAndMapSurfaceView
+                android:id="@+id/MapView"
+                android:layout_width="fill_parent"
+                android:layout_height="110dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:contentDescription="@string/map_view"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_fav"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_cardui"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/fav_text"
+                    style="@style/DashboardSubHeader"
+                    android:text="@string/my_data_Button" />
+
+                <Button
+                    android:id="@+id/show_all"
+                    style="@style/DashboardGeneralButton"
+                    android:text="@string/show_all" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/favorites"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+        
+            <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="6dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/About"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
+                android:text="@string/about_settings"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/Copyright"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/OpenStreetMaps"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:autoLink="web"
+                android:text="@string/openstreetmap_copyright"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+
+
+
+</ScrollView>

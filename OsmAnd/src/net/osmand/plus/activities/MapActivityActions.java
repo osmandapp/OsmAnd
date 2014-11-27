@@ -838,16 +838,6 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}).reg();
 
-		optionsMenuHelper.item(R.string.settings_Button).icons(R.drawable.ic_action_settings2_dark, R.drawable.ic_action_settings2_light)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						final Intent intentSettings = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getSettingsActivity());
-						mapActivity.startActivity(intentSettings);
-						return true;
-					}
-				}).reg();
-
 		
 		//////////// Others
 		if (Version.isGpsStatusEnabled(app)) {
@@ -861,23 +851,6 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}).reg();
 		}
-		optionsMenuHelper.item(R.string.tips_and_tricks).
-				icons(R.drawable.ic_action_ghelp_dark, R.drawable.ic_action_ghelp_light).
-				listen(new OnContextMenuClick() {
-					
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						if (MainMenuActivity.TIPS_AND_TRICKS) {
-							TipsAndTricksActivity tactivity = new TipsAndTricksActivity(mapActivity);
-							Dialog dlg = tactivity.getDialogToShowTips(false, true);
-							dlg.show();
-						} else {
-							final Intent helpIntent = new Intent(mapActivity, HelpActivity.class);
-							mapActivity.startActivity(helpIntent);
-						}
-						return true;
-					}
-				}).reg();
 		final OsmAndLocationProvider loc = app.getLocationProvider();
 		if (app.getTargetPointsHelper().getPointToNavigate() != null || loc.getLocationSimulation().isRouteAnimating()) {
 			if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
@@ -897,14 +870,15 @@ public class MapActivityActions implements DialogProvider {
 		}
 
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
-		optionsMenuHelper.item(R.string.exit_Button).icons(R.drawable.ic_action_quit_dark, R.drawable.ic_action_quit_light )
+		optionsMenuHelper.item(R.string.home_button).icons(R.drawable.ic_action_quit_dark, R.drawable.ic_action_quit_light )
 					.listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				// 1. Work for almost all cases when user open apps from main menu
 				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getMainMenuActivity());
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				newIntent.putExtra(MainMenuActivity.APP_EXIT_KEY, MainMenuActivity.APP_EXIT_CODE);
+				// not exit
+				// newIntent.putExtra(DashboardActivity.APP_EXIT_KEY, DashboardActivity.APP_EXIT_CODE);
 				mapActivity.startActivity(newIntent);
 				// In future when map will be main screen this should change
 				// app.closeApplication(mapActivity);

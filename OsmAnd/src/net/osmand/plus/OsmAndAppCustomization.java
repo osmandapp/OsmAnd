@@ -9,6 +9,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LocationPoint;
+import net.osmand.plus.activities.DashboardActivity;
 import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
@@ -47,9 +48,6 @@ public class OsmAndAppCustomization {
 		return true;
 	}
 
-	public void customizeMainMenu(Window window, Activity activity) {
-	}
-	
 	
 	// Activities
 	public Class<? extends Activity> getSettingsActivity(){
@@ -68,8 +66,8 @@ public class OsmAndAppCustomization {
 		return FavouritesActivity.class;
 	}
 
-	public Class<MainMenuActivity> getMainMenuActivity() {
-		return MainMenuActivity.class;
+	public Class<DashboardActivity> getMainMenuActivity() {
+		return DashboardActivity.class;
 	}
 	
 	public Class<? extends Activity> getDownloadIndexActivity() {
