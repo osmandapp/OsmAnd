@@ -3,9 +3,11 @@ package net.osmand.plus.dashboard;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -20,6 +22,7 @@ import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
@@ -31,9 +34,11 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.*;
+import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.download.*;
+import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
@@ -46,12 +51,16 @@ import java.util.*;
  */
 public class DashboardActivity extends BaseDownloadActivity {
 
-
-
+	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
+	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
 	private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
+	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
+	private static final String TIPS_SHOW = "TIPS_SHOW"; //$NON-NLS-1$
 
 	public static final boolean TIPS_AND_TRICKS = false;
+
+	private ProgressDialog startProgressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +85,77 @@ public class DashboardActivity extends BaseDownloadActivity {
 		getSupportActionBar().setBackgroundDrawable(color);
 		getSupportActionBar().setIcon(android.R.color.transparent);
 
+		addFragments();
+
+		final OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
+		final Activity activity = this;
+		OsmandApplication app = getMyApplication();
+		// restore follow route mode
+		if(app.getSettings().FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()){
+			final Intent mapIndent = new Intent(this, appCustomization.getMapActivity());
+			startActivityForResult(mapIndent, 0);
+			return;
+		}
+		startProgressDialog = new ProgressDialog(this);
+		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
+		boolean dialogShown = false;
+		boolean firstTime = false;
+		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
+		boolean appVersionChanged = false;
+		if (!pref.contains(FIRST_TIME_APP_RUN)) {
+			firstTime = true;
+			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
+			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
+		} else if (!Version.getFullVersion(app).equals(pref.getString(VERSION_INSTALLED, ""))) {
+			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
+			appVersionChanged = true;
+		}
+		if (appCustomization.showFirstTimeRunAndTips(firstTime, appVersionChanged)) {
+			if (firstTime) {
+				applicationInstalledFirstTime();
+				dialogShown = true;
+			} else {
+				int i = pref.getInt(TIPS_SHOW, 0);
+				if (i < 7) {
+					pref.edit().putInt(TIPS_SHOW, ++i).commit();
+				}
+				if (i == 1 || i == 5 || appVersionChanged) {
+					if(TIPS_AND_TRICKS) {
+						TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
+						Dialog dlg = tipsActivity.getDialogToShowTips(!appVersionChanged, false);
+						dlg.show();
+						dialogShown = true;
+					} else {
+						if(appVersionChanged) {
+							final Intent helpIntent = new Intent(activity, HelpActivity.class);
+							helpIntent.putExtra(HelpActivity.TITLE, Version.getAppVersion(getMyApplication()));
+							helpIntent.putExtra(HelpActivity.URL, "changes-1.9.html");
+							activity.startActivity(helpIntent);
+							dialogShown = true;
+						}
+					}
+				}
+			}
+		}
+		if(!dialogShown && appCustomization.checkBasemapDownloadedOnStart()) {
+			if (startProgressDialog.isShowing()) {
+				startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						checkVectorIndexesDownloaded();
+					}
+				});
+			} else {
+				checkVectorIndexesDownloaded();
+			}
+		}
+		if(appCustomization.checkExceptionsOnStart() && !dialogShown){
+			checkPreviousRunsForExceptions(firstTime);
+		}
+
+	}
+
+	private void addFragments() {
 		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
 		//after rotation list of fragments in fragment transaction is not cleared
@@ -103,8 +183,6 @@ public class DashboardActivity extends BaseDownloadActivity {
 			DashPluginsFragment pluginsFragment = new DashPluginsFragment();
 			fragmentTransaction.add(R.id.content, pluginsFragment, DashPluginsFragment.TAG).commit();
 		}
-
-
 	}
 
 	private static void enableLink(final Activity activity, String textVersion, TextView textVersionView) {
@@ -237,5 +315,88 @@ public class DashboardActivity extends BaseDownloadActivity {
 				getPreferences(MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, 0).commit();
 			}
 		}
+	}
+
+	private void applicationInstalledFirstTime() {
+		boolean netOsmandWasInstalled = false;
+		try {
+			ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo("net.osmand", PackageManager.GET_META_DATA);
+			netOsmandWasInstalled = applicationInfo != null && !Version.isFreeVersion(getMyApplication());
+		} catch (PackageManager.NameNotFoundException e) {
+			netOsmandWasInstalled = false;
+		}
+
+		if(netOsmandWasInstalled){
+//			Builder builder = new AccessibleAlertBuilder(this);
+//			builder.setMessage(R.string.osmand_net_previously_installed);
+//			builder.setPositiveButton(R.string.default_buttons_ok, null);
+//			builder.show();
+		} else {
+			AlertDialog.Builder builder = new AccessibleAlertBuilder(this);
+			builder.setMessage(R.string.first_time_msg);
+			builder.setPositiveButton(R.string.first_time_download, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					startActivity(new Intent(DashboardActivity.this, getMyApplication().getAppCustomization().getDownloadIndexActivity()));
+				}
+
+			});
+			builder.setNegativeButton(R.string.first_time_continue, null);
+			builder.show();
+		}
+	}
+
+	protected void checkVectorIndexesDownloaded() {
+		MapRenderRepositories maps = getMyApplication().getResourceManager().getRenderer();
+		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
+		boolean check = pref.getBoolean(VECTOR_INDEXES_CHECK, true);
+		// do not show each time
+		if (check && new Random().nextInt() % 5 == 1) {
+			AlertDialog.Builder builder = new AccessibleAlertBuilder(this);
+			if(maps.isEmpty()){
+				builder.setMessage(R.string.vector_data_missing);
+			} else if(!maps.basemapExists()){
+				builder.setMessage(R.string.basemap_missing);
+			} else {
+				return;
+			}
+			builder.setPositiveButton(R.string.download_files, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					startActivity(new Intent(DashboardActivity.this, DownloadActivity.class));
+				}
+
+			});
+			builder.setNeutralButton(R.string.vector_map_not_needed, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					getPreferences(MODE_WORLD_WRITEABLE).edit().putBoolean(VECTOR_INDEXES_CHECK, false).commit();
+				}
+			});
+			builder.setNegativeButton(R.string.first_time_continue, null);
+			builder.show();
+		}
+	}
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		if(id == OsmandApplication.PROGRESS_DIALOG){
+			return startProgressDialog;
+		}
+		return super.onCreateDialog(id);
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_SEARCH
+				&& event.getRepeatCount() == 0) {
+			final Intent search = new Intent(DashboardActivity.this, SearchActivity.class);
+			search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			startActivity(search);
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

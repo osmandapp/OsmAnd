@@ -15,6 +15,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.dashboard.DashboardActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.WaypointHelper;
@@ -68,8 +69,8 @@ public class OsmAndAppCustomization {
 		return FavouritesActivity.class;
 	}
 
-	public Class<MainMenuActivity> getMainMenuActivity() {
-		return MainMenuActivity.class;
+	public Class<DashboardActivity> getMainMenuActivity() {
+		return DashboardActivity.class;
 	}
 	
 	public Class<? extends Activity> getDownloadIndexActivity() {

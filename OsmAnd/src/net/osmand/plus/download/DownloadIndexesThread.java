@@ -405,7 +405,9 @@ public class DownloadIndexesThread {
 							uiActivity.getEntriesToDownload().put(basemap, downloadEntry);
 							AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download,
 									Toast.LENGTH_LONG).show();
-							uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+							if (uiActivity instanceof DownloadActivity){
+								uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+							}
 						}
 					}
 					if (indexFiles.isIncreasedMapVersion()) {
