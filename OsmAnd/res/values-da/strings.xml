@@ -1851,4 +1851,5 @@
 	<string name="show_map">VIS KORT</string>
 	<string name="show_all">VIS ALLE</string>
 	<string name="coordinates">Koordinater</string>
+	<string name="map_update">Kort</string>
 	</resources>

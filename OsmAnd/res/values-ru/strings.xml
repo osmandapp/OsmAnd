@@ -1100,7 +1100,7 @@
 <string name="select_navigation_mode">Выберите вид транспорта</string>
 <string name="day_night_info_description">Восход : %1$s
 \nЗакат : %2$s</string>
-<string name="map_widget_vector_attributes">Настройки отрисовки (векторн.):</string>
+<string name="map_widget_vector_attributes">Атрибуты визуализации</string>
 <string name="map_widget_renderer">Стиль отрисовки (векторн.)</string>
 
 
