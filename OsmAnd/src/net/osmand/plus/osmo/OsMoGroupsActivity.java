@@ -241,7 +241,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		mtd.setVisibility(visible? View.VISIBLE:View.GONE);
 		if(visible) {
 			mtd.setText(si.motd);
+			mtd.setLinksClickable(true);
+			mtd.setMovementMethod(LinkMovementMethod.getInstance());
 		}
+		
 		
 		CompoundButton login = (CompoundButton) header.findViewById(R.id.osmo_login_logoff);
 		login.setChecked(osMoPlugin.getService().isLoggedIn());
@@ -511,7 +514,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				} else if(item.getItemId() == SHOW_ON_MAP_ID) {
 					if(device != null) {
 						Location location = device.getLastLocation();
-						MapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+						MapActivity.getSingleMapViewTrackingUtilities().setMapLinkedToLocation(false);
 						if (location != null){
 							app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), app.getSettings().getLastKnownMapZoom(),
 									null, device.getVisibleName(), device);
@@ -1293,7 +1296,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 	@Override
 	public void updateLocation(Location location) {
-		MapViewTrackingUtilities mv = MapActivity.getMapViewTrackingUtilities();
+		MapViewTrackingUtilities mv = MapActivity.getSingleMapViewTrackingUtilities();
 		if(mv != null && mv.isMapLinkedToLocation() && location != null) {
 			Location lt = mapLocation;
 			mapLocation = location;

@@ -129,7 +129,7 @@ public class MapActivityLayers {
 		mapView.addLayer(transportInfoLayer, 5.5f);
 		// 5.95 all text labels
 		// 6. point location layer 
-		locationLayer = new PointLocationLayer(MapActivity.getMapViewTrackingUtilities());
+		locationLayer = new PointLocationLayer(activity.getMapViewTrackingUtilities());
 		mapView.addLayer(locationLayer, 6);
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer(activity);
@@ -197,7 +197,7 @@ public class MapActivityLayers {
 //		mapView.addLayer(transportInfoLayer, 5.5f);
 		// 5.95 all text labels
 		// 6. point location layer
-		locationLayer = new PointLocationLayer(MapActivity.getMapViewTrackingUtilities());
+		locationLayer = new PointLocationLayer(activity.getMapViewTrackingUtilities());
 //		mapView.addLayer(locationLayer, 6);
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer(activity);

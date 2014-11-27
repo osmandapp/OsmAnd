@@ -57,6 +57,8 @@ public class OsmandSettings {
 		void addListener(StateChangedListener<T> listener);
 		
 		void removeListener(StateChangedListener<T> listener);
+		
+		boolean isSet();
 	}
 	
 	private abstract class PreferenceWithListener<T> implements OsmandPreference<T> {
@@ -168,6 +170,11 @@ public class OsmandSettings {
 			set(ApplicationMode.DEFAULT);
 		};
 
+		@Override
+		public boolean isSet() {
+			return true;
+		};
+		
 		@Override
 		public boolean set(ApplicationMode val) {
 			ApplicationMode oldMode = currentMode;
@@ -816,7 +823,10 @@ public class OsmandSettings {
 	
 	public final OsmandPreference<Boolean> SHOW_TRAFFIC_WARNINGS = new BooleanPreference("show_traffic_warnings", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SHOW_CAMERAS = new BooleanPreference("show_cameras", true).makeProfile().cache();
-	public final OsmandPreference<Boolean> SHOW_LANES = new BooleanPreference("show_lanes", true).makeProfile().cache();
+	public final CommonPreference<Boolean> SHOW_LANES = new BooleanPreference("show_lanes", true).makeProfile().cache();
+	{
+		SHOW_LANES.setModeDefaultValue(ApplicationMode.DEFAULT, false);
+	}
 	
 	public final OsmandPreference<Boolean> SPEAK_TRAFFIC_WARNINGS = new BooleanPreference("speak_traffic_warnings", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_STREET_NAMES = new BooleanPreference("speak_street_names", true).makeProfile().cache();
@@ -874,6 +884,9 @@ public class OsmandSettings {
 	public final OsmandPreference<String> OSMO_USER_PWD = new StringPreference("osmo_user_pwd", null).makeGlobal();
 	
 	public final OsmandPreference<Boolean> OSMO_AUTO_CONNECT = new BooleanPreference("osmo_automatically_connect", false).makeGlobal();
+	
+	public final CommonPreference<Boolean> OSMO_USE_HTTPS = new BooleanPreference("osmo_use_https", 
+			Build.VERSION.SDK_INT < 14/*Build.VERSION_CODES.ICE_CREAM_SANDWICH*/? false : true).makeGlobal();
 	
 	public final OsmandPreference<Long> OSMO_LAST_PING = new LongPreference("osmo_last_ping", 0).makeGlobal().cache();
 	

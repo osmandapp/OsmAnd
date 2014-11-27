@@ -54,7 +54,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewParent;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {

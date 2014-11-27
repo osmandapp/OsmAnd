@@ -263,10 +263,10 @@
 	<string name="poi_baby_hatch">Baby hatch</string>
 	<string name="poi_veterinary">Veterinary</string>
 	<string name="poi_sanatorium">Sanatorium</string>
-	<string name="poi_healthcare_alternative"></string>
+	<string name="poi_healthcare_alternative">Alternative medicine</string>
 	<string name="poi_audiologist">Audiologist</string>
 	<string name="poi_blood_bank">Blood bank</string>
-	<string name="poi_healthcare_centre"></string>
+	<string name="poi_healthcare_centre">Medical center</string>
 	<string name="poi_midwife">Midwife</string>
 	<string name="poi_occupational_therapist">Occupational therapist</string>
 	<string name="poi_optometrist">Optometrist</string>
@@ -275,7 +275,7 @@
 	<string name="poi_psychotherapist">Psychotherapist</string>
 	<string name="poi_healthcare_rehabilitation">Rehabilitation</string>
 	<string name="poi_speech_therapist">Speech therapist</string>
-	<string name="poi_healthcare_yes"></string>
+	<string name="poi_healthcare_yes">Medical facility</string>
 
 	<string name="poi_company">Company</string>
 	<string name="poi_insurance">Insurance</string>

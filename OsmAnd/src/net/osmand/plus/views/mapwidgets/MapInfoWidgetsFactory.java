@@ -162,7 +162,7 @@ public class MapInfoWidgetsFactory {
 			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
 				boolean enabled = map.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
-				boolean tracked = MapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
+				boolean tracked = map.getMapViewTrackingUtilities().isMapLinkedToLocation();
 				Drawable d;
 				if(!enabled) {
 					d = nightMode ? backToLocDisabledWhite : backToLocDisabled; 
@@ -183,7 +183,7 @@ public class MapInfoWidgetsFactory {
 		backToLocation.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+				map.getMapViewTrackingUtilities().backToLocationImpl();
 			}
 		});
 		return backToLocation;

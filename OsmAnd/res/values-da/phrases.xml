@@ -6,14 +6,14 @@
         <string name="poi_mall">Butikscenter</string>
         <string name="poi_beverages">Drikkevarebutik</string>
         <string name="poi_butcher">Kødmarked</string>
-        <string name="poi_deli">Delikatesser</string>
+        <string name="poi_deli">Delikatesse</string>
         <string name="poi_shop_farm">Gårdbutik</string>
         <string name="poi_greengrocer">Grønthandler</string>
         <string name="poi_seafood">Fiskehandler</string>
         <string name="poi_confectionery">Konfektureforretning</string>
         <string name="poi_ice_cream">Isbar</string>
         <string name="poi_supermarket">Supermarked</string>
-        <string name="poi_shop_tea">Tebutik</string>
+        <string name="poi_shop_tea">Tehandel</string>
         <string name="poi_dairy">Mejeriudsalg</string>
         <string name="poi_vending_machine">Automat</string>
 
@@ -53,7 +53,7 @@
         <string name="poi_hearing_aids_shop">Høreapparater</string>
         <string name="poi_herbalist">Urter</string>
         <string name="poi_hifi_shop">HiFi</string>
-        <string name="poi_houseware_shop">Isenkræmmer</string>
+        <string name="poi_houseware_shop">Husholdningsartikler</string>
         <string name="poi_hunting_shop">Jagtudstyr</string>
         <string name="poi_interior_decoration_shop">Boligindretning</string>
         <string name="poi_jewelry_shop">Smykkeforretning</string>
@@ -62,7 +62,7 @@
         <string name="poi_mobile_phone_shop">Mobiltelefoner</string>
         <string name="poi_motorcycle_shop">Motorcykler</string>
         <string name="poi_musical_instrument_shop">Musikinstrumenter</string>
-        <string name="poi_newsagent_shop">Kiosk</string>
+        <string name="poi_newsagent_shop">Nyhedsbureau</string>
         <string name="poi_optician_shop">Optiker</string>
         <string name="poi_organic_shop">Økologiske fødevarer</string>
         <string name="poi_outdoor_shop">Fritidsbeklædning</string>
@@ -81,7 +81,7 @@
         <string name="poi_vacuum_cleaner_shop">Støvsuger</string>
         <string name="poi_variety_store">Fastpris butik</string>
         <string name="poi_video_shop">Video</string>
-        <string name="poi_window_blind_shop">Gardinforretning</string>
+        <string name="poi_window_blind_shop">Persienner</string>
         <string name="poi_department_store">Stormagasin</string>
         <string name="poi_electronics_shop">Elektronik</string>
         <string name="poi_car_shop">Autohandel</string>
@@ -100,7 +100,7 @@
         <string name="poi_fire_hose">Brandslange</string>
         <string name="poi_fire_water_pond">Branddam</string>
         <string name="poi_grit_bin">Grusbeholder</string>
-        <string name="poi_ambulance_station">Ambulance station</string>
+        <string name="poi_ambulance_station">Ambulancestation</string>
         <string name="poi_ses_station">SES station</string>
         <string name="poi_emergency_access_point">Nødstilfælde punkt</string>
 
@@ -118,7 +118,7 @@
         <string name="poi_traffic_calming_rumble_strip">Rumlestriber</string>
         <string name="poi_traffic_calming_table">Trafikdæmpning, bord</string>
         <string name="poi_traffic_calming_choker">Indsnævring</string>
-        <string name="poi_traffic_signals">Trafiksignaler</string>
+        <string name="poi_traffic_signals">Trafiksignal</string>
 
         <string name="poi_car_repair">Autoværksted</string>
         <string name="poi_service_tyres">Dækservice</string>
@@ -136,15 +136,15 @@
         <string name="poi_public_transport_platform">Offentlig transport stoppested</string>
         <string name="poi_public_transport_platform_bus">Busstoppested</string>
         <string name="poi_public_transport_platform_trolleybus">Trolley busstoppested</string>
-        <string name="poi_bus_stop">Busstoppested</string>
+        <string name="poi_bus_stop">Busstoppested (forældet)</string>
         <string name="poi_public_transport_platform_tram">Sporvognsstoppested</string>
-        <string name="poi_tram_stop">Sporvognsstoppestedet</string>
+        <string name="poi_tram_stop">Sporvognsstoppestedet (forældet)</string>
         <string name="poi_public_transport_station">Offentlig transport station</string>
-        <string name="poi_bus_station">Busstation</string>
+        <string name="poi_bus_station">Busstation (forældet)</string>
         <string name="poi_railway_station">Banegård (forældet)</string>
         <string name="poi_railway_platform">Perron (forældet)</string>
-        <string name="poi_railway_halt">Trinbrædt</string>
-        <string name="poi_subway_entrance">Metro indgang</string>
+        <string name="poi_railway_halt">Trinbrædt (forældet)</string>
+        <string name="poi_subway_entrance">Metroindgang</string>
         <string name="poi_subway_station">Metrostation</string>
         <string name="poi_taxi">Taxaholdeplads</string>
 
@@ -167,7 +167,7 @@
         <string name="poi_aerialway_chair_lift">Stolelift</string>
         <string name="poi_aerialway_t_bar">T-bar lift</string>
         <string name="poi_aerialway_j_bar">J-bar lift</string>
-        <string name="poi_aerialway_platter">Tallerken lift</string>
+        <string name="poi_aerialway_platter">Tallerkenlift</string>
         <string name="poi_aerialway_mixed_lift">Blandet lift</string>
         <string name="poi_aerialway_drag_lift">Træklift</string>
         <string name="poi_aerialway_rope_tow">Reblift</string>
@@ -189,7 +189,7 @@
         <string name="poi_lock_gate">Sluseport</string>
         <string name="poi_waterway_turning_point">Vendepunkt på vandet</string>
         <string name="poi_weir">Stemmeværk</string>
-        <string name="poi_dam">Dam</string>
+        <string name="poi_dam">Dæmning</string>
         <string name="poi_water_mill">Vandmølle</string>
 
         <string name="poi_power_substation">Transformerstation</string>
@@ -200,7 +200,7 @@
         <string name="poi_post_office">Posthus</string>
         <string name="poi_post_box">Postkasse</string>
         <string name="poi_telephone">Telefon</string>
-        <string name="poi_communication_tower">Kommunikation tårn</string>
+        <string name="poi_communication_tower">Kommunikationstårn</string>
         <string name="poi_telephone_exchange">Telefoncentral</string>
 
         <string name="poi_recycling">Genbrugsplads</string>
@@ -214,7 +214,7 @@
         <string name="poi_mineshaft">Mineskakt</string>
         <string name="poi_adit">Stoll</string>
         <string name="poi_petroleum_well">Oliebrønd</string>
-        <string name="poi_survey_point">Undersøgelses punkt</string>
+        <string name="poi_survey_point">Trianguleringspunkt</string>
         <string name="poi_windmill">Vindmølle</string>
         <string name="poi_quarry">Stenbrud</string>
         <string name="poi_vineyard">Vingård</string>
@@ -235,7 +235,7 @@
         <string name="poi_embassy">Ambassade</string>
         <string name="poi_government">Regering</string>
         <string name="poi_bailiff">Foged</string>
-        <string name="poi_prosecutor">Anklagemyndighed</string>
+        <string name="poi_prosecutor">Anklager</string>
         <string name="poi_pension_fund">Pensionskasse</string>
         <string name="poi_migration">Migration</string>
         <string name="poi_tax_inspection">Skattekontrol</string>
@@ -309,7 +309,7 @@
         <string name="poi_croquet">Kroket</string>
         <string name="poi_cycling">Cykling</string>
         <string name="poi_diving">Dykning</string>
-        <string name="poi_scuba_diving">Dykning</string>
+        <string name="poi_scuba_diving">Scuba dykning</string>
         <string name="poi_dog_racing">Hundevæddeløb</string>
         <string name="poi_equestrian">Hestesport</string>
         <string name="poi_golf">Golf</string>
@@ -329,10 +329,10 @@
         <string name="poi_racquet">Ketsjer</string>
         <string name="poi_roller_skating">Rulleskøjteløb</string>
         <string name="poi_rowing">Roning</string>
-        <string name="poi_rugby_union">Rugby</string>
-        <string name="poi_rugby_league">Rugby</string>
+        <string name="poi_rugby_union">Rugby union</string>
+        <string name="poi_rugby_league">Rugby league</string>
         <string name="poi_shooting">Skydning</string>
-        <string name="poi_skating">Skøjteløb</string>
+        <string name="poi_skating">Skating</string>
         <string name="poi_skateboard">Skateboard</string>
         <string name="poi_skiing">Skiløb</string>
         <string name="poi_soccer">Fodbold</string>
@@ -346,7 +346,7 @@
         <string name="poi_attraction">Turistattraktion</string>
         <string name="poi_memorial">Mindesmærke</string>
         <string name="poi_artwork">Kunstværk</string>
-        <string name="poi_archaeological_site">Arkæologiske område</string>
+        <string name="poi_archaeological_site">Arkæologisk område</string>
         <string name="poi_battlefield">Slagmark</string>
         <string name="poi_boundary_stone">Grænsesten</string>
         <string name="poi_castle">Slot</string>
@@ -387,7 +387,7 @@
         <string name="poi_travel_agent">Rejsebureau</string>
         <string name="poi_viewpoint">Udsigtspunkt</string>
         <string name="poi_camp_site">Campingplads</string>
-        <string name="poi_caravan_site">campingvognsplads</string>
+        <string name="poi_caravan_site">Campingvognsplads</string>
         <string name="poi_picnic_site">Skovtur/rasteplads</string>
         <string name="poi_spring">Kilde</string>
         <string name="poi_cemetery">Kirkegård</string>
@@ -408,7 +408,7 @@
         <string name="poi_club_cinema">Filmklub</string>
         <string name="poi_club_fan">Fanklub</string>
         <string name="poi_club_fishing">Lystfiskerklub</string>
-        <string name="poi_club_veterans">Veteranklub</string>
+        <string name="poi_club_veterans">Veteranforening</string>
         <string name="poi_club_linux">Linux klub</string>
         <string name="poi_club_theatre">Teaterklub</string>
         <string name="poi_club_history">Historieklub</string>
@@ -417,7 +417,7 @@
         <string name="poi_club_nature">Naturklub</string>
         <string name="poi_club_photography">Fotoklub</string>
         <string name="poi_club_hunting">Jagtklub</string>
-        <string name="poi_club_shooting">Skytteforeningen</string>
+        <string name="poi_club_shooting">Skytteforening</string>
         <string name="poi_club_tourism">Turistklub</string>
         <string name="poi_club_charity">Velgørenhedsklub</string>
 
@@ -493,10 +493,10 @@
         <string name="poi_shoemaker">Skomager</string>
         <string name="poi_stand_builder">Udstillingsbygger</string>
         <string name="poi_stonemason">Stenhugger</string>
-        <string name="poi_sun_protection_craft">Solbeskyttelse håndværk</string>
+        <string name="poi_sun_protection_craft">Solafskærmning</string>
         <string name="poi_sweep">Skorstensfejer</string>
         <string name="poi_tailor">Skrædder</string>
-        <string name="poi_tiler">Tagdækker</string>
+        <string name="poi_tiler">Fliselægger</string>
         <string name="poi_tinsmith">Blikkenslager</string>
         <string name="poi_upholsterer">Møbelpolstrer</string>
         <string name="poi_watchmaker">Urmager</string>
@@ -529,7 +529,7 @@
         <string name="poi_accountant">Revisor</string>
         <string name="poi_bitcoin_yes">Bitcoin betaling</string>
 
-        <string name="poi_cave_entrance">Hule indgang</string>
+        <string name="poi_cave_entrance">Huleindgang</string>
         <string name="poi_peak">Bjergtinde</string>
         <string name="poi_saddle">Bjergsadel</string>
         <string name="poi_volcano">Vulkan</string>
@@ -552,14 +552,14 @@
         <string name="poi_seamark_anchorage">Ankringsområde</string>
         <string name="poi_seamark_anchor_berth">Ankerplads</string>
         <string name="poi_seamark_beacon">Båke</string>
-        <string name="poi_seamark_beacon_cardinal">Cardinal båke</string>
+        <string name="poi_seamark_beacon_cardinal">Kardinal båke</string>
         <string name="poi_seamark_beacon_lateral">Lateral båke</string>
         <string name="poi_seamark_beacon_safe_water">Sikkervand båke</string>
         <string name="poi_seamark_beacon_special_purpose">Speciel formål båke</string>
         <string name="poi_seamark_berth">Kajplads</string>
         <string name="poi_seamark_building">Sømærke bygning</string>
         <string name="poi_seamark_bridge">Sømærke bro</string>
-        <string name="poi_seamark_buoy_cardinal">Cardinal tønde</string>
+        <string name="poi_seamark_buoy_cardinal">Kardinal tønde</string>
         <string name="poi_seamark_buoy_installation">Installation tønde</string>
         <string name="poi_seamark_buoy_isolated_danger">Tønde, isoleret fare</string>
         <string name="poi_seamark_buoy_lateral">Lateral tønde</string>
@@ -597,5 +597,28 @@
         <string name="poi_military_danger_area">Farezone</string>
         <string name="poi_military_range">Militærsøvelsesområde</string>
         <string name="poi_military_naval_base">Militærflådebase</string>
-        <string name="poi_military_nuclear_explosion_site">Nuklear eksplosion område</string>
-</resources>
+        <string name="poi_military_nuclear_explosion_site">Nuklear eksplosionsområde</string>
+<string name="poi_city">Storby</string>
+	<string name="poi_town">By</string>
+	<string name="poi_village">Landsby</string>
+	<string name="poi_hamlet">Lille landsby</string>
+	<string name="poi_isolated_dwelling">Bebyggelse</string>
+	<string name="poi_suburb">Forstad</string>
+	<string name="poi_neighbourhood">Kvarter</string>
+	<string name="poi_locality">Lokalitet</string>
+
+	<string name="poi_healthcare_alternative">Alternativ medicin</string>
+	<string name="poi_audiologist">Audiolog</string>
+	<string name="poi_blood_bank">Blodbank</string>
+	<string name="poi_healthcare_centre">Medicinskcenter</string>
+	<string name="poi_midwife">Jordemoder</string>
+	<string name="poi_occupational_therapist">Ergoterapeut</string>
+	<string name="poi_optometrist">Optiker</string>
+	<string name="poi_physiotherapist">Fysioterapeut</string>
+	<string name="poi_podiatrist">Ortopæd</string>
+	<string name="poi_psychotherapist">Psykoterapeut</string>
+	<string name="poi_healthcare_rehabilitation">Rehabilitering</string>
+	<string name="poi_speech_therapist">Talepædagog</string>
+	<string name="poi_healthcare_yes">Medicinsk facilitet</string>
+
+	</resources>
