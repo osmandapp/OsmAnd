@@ -1733,4 +1733,9 @@
     <string name="advanced_settings">Avancerat</string>
 	<string name="osmo_use_https">Använd https</string>
 	<string name="osmo_use_https_descr">Använd säker anslutning till servern</string>
-    </resources>
+    <string name="home_button">Hem</string>
+    <string name="search_for">Sök efter</string>
+	<string name="show_map">VISA KARTA</string>
+	<string name="show_all">VISA ALLA</string>
+	<string name="coordinates">Koordinater</string>
+	</resources>
