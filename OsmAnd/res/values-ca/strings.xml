@@ -1798,7 +1798,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="lang_sr">Serbi</string>
 	<string name="lang_zh_CN">Xinès simplificat</string>
 	<string name="lang_zh_TW">Xinès tradicional</string>
-	<string name="rendering_attr_subwayMode_name">Rutes de subterrani</string>
+	<string name="rendering_attr_subwayMode_name">Rutes de metro</string>
  	<string name="continue_navigation">Continua la navegació</string>
     <string name="pause_navigation">Suspèn la navegació</string>
 	<string name="rendering_attr_alpineHiking_name">Escala senderista SAC (Club Alpí Suís)</string>
