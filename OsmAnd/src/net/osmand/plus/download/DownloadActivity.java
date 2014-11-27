@@ -308,24 +308,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 		}
 	}
 
-	private void makeSureUserCancelDownload() {
-		AlertDialog.Builder bld = new AlertDialog.Builder(this);
-		bld.setTitle(getString(R.string.default_buttons_cancel));
-		bld.setMessage(R.string.confirm_interrupt_download);
-		bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-				BasicProgressAsyncTask<?, ?, ?> t = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
-				if(t != null) {
-					t.setInterrupted(true);
-				}
-			}
-		});
-		bld.setNegativeButton(R.string.default_buttons_no, null);
-		bld.show();
-	}
-
 	@Override
 	public void updateDownloadList(List<IndexItem> list){
 		for(WeakReference<Fragment> ref : fragList) {

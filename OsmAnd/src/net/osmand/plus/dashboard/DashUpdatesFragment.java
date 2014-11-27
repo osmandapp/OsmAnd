@@ -1,12 +1,14 @@
 package net.osmand.plus.dashboard;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,7 +29,8 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	private ProgressBar currentProgress;
 	private List<ProgressBar> progressBars = new ArrayList<ProgressBar>();
 	private List<String> baseNames = new ArrayList<String>();
-	private List<View> downloadButtons = new ArrayList<View>();
+	private List<ImageButton> downloadButtons = new ArrayList<ImageButton>();
+	private ImageButton cancelButton;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,6 +55,8 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	public void onResume() {
 		super.onResume();
 		if (BaseDownloadActivity.downloadListIndexThread != null){
+			currentProgress = null;
+			cancelButton = null;
 			updatedDownloadsList(BaseDownloadActivity.downloadListIndexThread.getItemsToUpdate());
 		}
 	}
@@ -96,14 +101,15 @@ public class DashUpdatesFragment extends DashBaseFragment {
 				public void onClick(View view) {
 					getDownloadActivity().startDownload(item);
 					currentProgress = progressBar;
+					cancelButton = (ImageButton)view;
 				}
 			});
-			downloadButtons.add(downloadButton);
+			downloadButtons.add((ImageButton)downloadButton);
 			baseNames.add(item.getBasename());
 			progressBars.add(progressBar);
 			updates.addView(view);
 		}
-		updateProgress(BaseDownloadActivity.downloadListIndexThread.getCurrentRunningTask(), true);
+		updateProgress(BaseDownloadActivity.downloadListIndexThread.getCurrentRunningTask(), false);
 	}
 
 	private BaseDownloadActivity getDownloadActivity(){
@@ -127,11 +133,18 @@ public class DashUpdatesFragment extends DashBaseFragment {
 				currentProgress.setProgress(basicProgressAsyncTask.getProgressPercentage());
 			}
 		} else {
-			boolean visible = basicProgressAsyncTask != null && basicProgressAsyncTask.getStatus() != AsyncTask.Status.FINISHED;
+			boolean visible = basicProgressAsyncTask.getStatus() != AsyncTask.Status.FINISHED;
 			if (!visible) {
 				return;
 			}
 
+			cancelButton.setImageResource(R.drawable.cancel_button);
+			cancelButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					getDownloadActivity().makeSureUserCancelDownload();
+				}
+			});
 			boolean intermediate = basicProgressAsyncTask.isIndeterminate();
 			currentProgress.setVisibility(intermediate ? View.GONE : View.VISIBLE);
 			if (!intermediate) {
@@ -144,6 +157,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		for (int i =0; i<baseNames.size(); i++){
 			if (message.equals(getActivity().getString(R.string.downloading_file_new) + " " + baseNames.get(i))){
 				currentProgress = progressBars.get(i);
+				cancelButton = downloadButtons.get(i);
 				currentProgress.setVisibility(View.VISIBLE);
 				return;
 			}

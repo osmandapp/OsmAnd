@@ -12,6 +12,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.dashboard.DashboardActivity;
 
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
@@ -50,6 +52,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 		super.onResume();
 		downloadListIndexThread.setUiActivity(this);
 	}
+
 
 	public void updateDownloadList(List<IndexItem> list){
 
@@ -173,5 +176,26 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 		fragList.add(new WeakReference<Fragment>(fragment));
 	}
 
+	public void makeSureUserCancelDownload() {
+		AlertDialog.Builder bld = new AlertDialog.Builder(this);
+		bld.setTitle(getString(R.string.default_buttons_cancel));
+		bld.setMessage(R.string.confirm_interrupt_download);
+		bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				BasicProgressAsyncTask<?, ?, ?> t = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
+				if (t != null) {
+					t.setInterrupted(true);
+				}
+				//list of items to download need to be cleared in case of dashboard activity
+				if (BaseDownloadActivity.this instanceof DashboardActivity){
+					getEntriesToDownload().clear();
+				}
+			}
+		});
+		bld.setNegativeButton(R.string.default_buttons_no, null);
+		bld.show();
+	}
 }
 

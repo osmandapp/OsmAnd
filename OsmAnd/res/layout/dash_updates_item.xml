@@ -11,7 +11,6 @@
 		  android:layout_height="1dp"/>
 	<LinearLayout android:orientation="horizontal"
 				  android:layout_marginLeft="12dp"
-				  android:layout_marginRight="12dp"
 				  android:layout_width="fill_parent"
 				  android:layout_height="fill_parent">
 		<LinearLayout android:orientation="vertical"
@@ -27,11 +26,12 @@
 					  android:layout_width="wrap_content"
 					  android:layout_height="wrap_content"/>
 		</LinearLayout>
-		<Button android:id="@+id/btn_download"
+		<ImageButton android:id="@+id/btn_download"
 				android:layout_gravity="center_vertical"
-				android:background="@drawable/ic_action_gup_light"
-				android:layout_width="40dp"
-				android:layout_height="40dp"/>
+				android:src="@drawable/download_button"
+				android:background="@drawable/dashboard_button"
+				android:layout_width="50dp"
+				android:layout_height="50dp"/>
 	</LinearLayout>
 
 	<ProgressBar android:id="@+id/ProgressBar"
