@@ -26,6 +26,9 @@ import java.util.List;
  * Created by Denis on 21.11.2014.
  */
 public class DashUpdatesFragment extends DashBaseFragment {
+
+	public static final String TAG = "DASH_UPDATES_FRAGMENT";
+
 	private ProgressBar currentProgress;
 	private List<ProgressBar> progressBars = new ArrayList<ProgressBar>();
 	private List<String> baseNames = new ArrayList<String>();

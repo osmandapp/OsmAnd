@@ -22,6 +22,8 @@ import net.osmand.plus.views.OsmandMapTileView;
  */
 public class DashMapFragment extends DashBaseFragment {
 
+	public static final String TAG = "DASH_MAP_FRAGMENT";
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_map_fragment, container, false);

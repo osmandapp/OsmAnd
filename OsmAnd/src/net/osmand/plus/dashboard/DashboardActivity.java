@@ -46,6 +46,8 @@ import java.util.*;
  */
 public class DashboardActivity extends BaseDownloadActivity {
 
+
+
 	private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
@@ -76,17 +78,32 @@ public class DashboardActivity extends BaseDownloadActivity {
 
 		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
+		//after rotation list of fragments in fragment transaction is not cleared
+		//so we need to check whether some fragments are already existing
+		if (manager.findFragmentByTag(DashSearchFragment.TAG) == null){
+			DashSearchFragment searchFragment = new DashSearchFragment();
+			fragmentTransaction.add(R.id.content, searchFragment, DashSearchFragment.TAG);
+		}
+		if (manager.findFragmentByTag(DashMapFragment.TAG) == null){
+			DashMapFragment mapFragment = new DashMapFragment();
+			fragmentTransaction.add(R.id.content, mapFragment, DashMapFragment.TAG);
+		}
 
-		DashSearchFragment searchFragment = new DashSearchFragment();
-		fragmentTransaction.add(R.id.content, searchFragment);
-		DashMapFragment mapFragment = new DashMapFragment();
-		fragmentTransaction.add(R.id.content, mapFragment);
-		DashFavoritesFragment favoritesFragment = new DashFavoritesFragment();
-		fragmentTransaction.add(R.id.content, favoritesFragment);
-		DashUpdatesFragment updatesFragment = new DashUpdatesFragment();
-		fragmentTransaction.add(R.id.content, updatesFragment);
-		DashPluginsFragment pluginsFragment = new DashPluginsFragment();
-		fragmentTransaction.add(R.id.content, pluginsFragment).commit();
+		if (manager.findFragmentByTag(DashFavoritesFragment.TAG) == null){
+			DashFavoritesFragment favoritesFragment = new DashFavoritesFragment();
+			fragmentTransaction.add(R.id.content, favoritesFragment, DashFavoritesFragment.TAG);
+		}
+
+		if (manager.findFragmentByTag(DashUpdatesFragment.TAG) == null){
+			DashUpdatesFragment updatesFragment = new DashUpdatesFragment();
+			fragmentTransaction.add(R.id.content, updatesFragment, DashUpdatesFragment.TAG);
+		}
+
+		if (manager.findFragmentByTag(DashPluginsFragment.TAG) == null){
+			DashPluginsFragment pluginsFragment = new DashPluginsFragment();
+			fragmentTransaction.add(R.id.content, pluginsFragment, DashPluginsFragment.TAG).commit();
+		}
+
 
 	}
 

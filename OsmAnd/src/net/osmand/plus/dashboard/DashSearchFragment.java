@@ -19,6 +19,8 @@ import net.osmand.plus.activities.search.SearchActivity;
  */
 public class DashSearchFragment extends DashBaseFragment {
 
+	public static final String TAG = "DASH_SEARCH_FRAGMENT";
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_search_fragment, container, false);

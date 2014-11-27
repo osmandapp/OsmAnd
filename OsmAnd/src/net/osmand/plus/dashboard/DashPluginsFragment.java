@@ -21,6 +21,9 @@ import java.util.List;
  * Created by Denis on 21.11.2014.
  */
 public class DashPluginsFragment extends DashBaseFragment {
+
+	public static final String TAG = "DASH_PLUGINS_FRAGMENT";
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_plugins_fragment, container, false);

@@ -32,6 +32,7 @@ import java.util.List;
  * Created by Denis on 24.11.2014.
  */
 public class DashFavoritesFragment extends DashBaseFragment {
+	public static final String TAG = "DASH_FAVORITES_FRAGMENT";
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_favorites_fragment, container, false);
