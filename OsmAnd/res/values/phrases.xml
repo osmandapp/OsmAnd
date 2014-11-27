@@ -1,5 +1,8 @@
 <?xml version="1.0" ?>
 <resources>
+
+	<string name="poi_palaeontological_site">Palaeontological site</string>
+
 	<string name="poi_bakery">Bakery</string>
 	<string name="poi_alcohol">Liquor store</string>
 	<string name="poi_convenience">Convenience store</string>
