@@ -1,64 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:id="@+id/search"
-			  android:orientation="vertical"
-			  android:layout_width="match_parent"
-			  android:layout_height="wrap_content"
-			  android:background="@drawable/bg_cardui"
-			  android:layout_marginBottom="4dp">
-	<TextView android:id="@+id/search_for"
-			  android:text="@string/search_for"
-			  android:layout_height="40dp"
-			  style="@style/DashboardSubHeader"
-			  android:layout_width="wrap_content"/>
-	<View android:layout_width="match_parent"
-		  android:background="@color/dashboard_divider"
-		  android:layout_height="1dp"/>
-	<LinearLayout android:orientation="horizontal"
-				  android:layout_width="match_parent"
-				  android:layout_height="90dp">
-		<Button android:id="@+id/poi"
-				android:text="@string/poi"
-				android:drawableTop="@drawable/ic_action_info2"
-				style="@style/DashboardSearchButton"/>
-		<View android:layout_width="1dp"
-			  android:background="@color/dashboard_divider"
-			  android:layout_height="match_parent"/>
-		<Button android:id="@+id/address"
-				android:text="@string/address"
-				android:drawableTop="@drawable/ic_action_home2"
-				style="@style/DashboardSearchButton"/>
-		<View android:layout_width="1dp"
-			  android:background="@color/dashboard_divider"
-			  android:layout_height="match_parent"/>
-		<Button android:id="@+id/coord"
-				android:text="@string/coordinates"
-				android:drawableTop="@drawable/ic_action_marker2"
-				style="@style/DashboardSearchButton"/>
-	</LinearLayout>
-	<View android:layout_width="match_parent"
-		  android:background="@color/dashboard_divider"
-		  android:layout_height="1dp"/>
-	<LinearLayout android:orientation="horizontal"
-				  android:layout_width="fill_parent"
-				  android:layout_height="90dp">
-		<Button android:id="@+id/fav_btn"
-				android:text="@string/my_favorites"
-				android:drawableTop="@drawable/ic_action_fav2"
-				style="@style/DashboardSearchButton"/>
-		<View android:layout_width="1dp"
-			  android:background="@color/dashboard_divider"
-			  android:layout_height="match_parent"/>
-		<Button android:id="@+id/history"
-				android:text="@string/history"
-				android:drawableTop="@drawable/ic_action_history2"
-				style="@style/DashboardSearchButton"/>
-		<View android:layout_width="1dp"
-			  android:background="@color/dashboard_divider"
-			  android:layout_height="match_parent"/>
-		<Button android:id="@+id/transport"
-				android:text="@string/rendering_category_transport"
-				android:drawableTop="@drawable/ic_action_bus2"
-				style="@style/DashboardSearchButton"/>
-	</LinearLayout>
+    android:id="@+id/search"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/bg_cardui"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/search_for"
+        style="@style/DashboardSubHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="@string/search_for" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dashboard_divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/poi"
+            style="@style/DashboardSearchButton"
+            android:drawableTop="@drawable/ic_action_info2"
+            android:text="@string/poi" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/dashboard_divider" />
+
+        <Button
+            android:id="@+id/address"
+            style="@style/DashboardSearchButton"
+            android:drawableTop="@drawable/ic_action_home2"
+            android:text="@string/address" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/dashboard_divider" />
+
+        <Button
+            android:id="@+id/coord"
+            style="@style/DashboardSearchButton"
+            android:drawableTop="@drawable/ic_action_marker2"
+            android:text="@string/coordinates" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dashboard_divider" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/fav_btn"
+            style="@style/DashboardSearchButton"
+            android:drawableTop="@drawable/ic_action_fav2"
+            android:text="@string/my_favorites" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/dashboard_divider" />
+
+        <Button
+            android:id="@+id/history"
+            style="@style/DashboardSearchButton"
+            android:drawableTop="@drawable/ic_action_history2"
+            android:text="@string/history" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/dashboard_divider" />
+
+        <Button
+            android:id="@+id/transport"
+            style="@style/DashboardSearchButton"
+            android:drawableTop="@drawable/ic_action_bus2"
+            android:text="@string/rendering_category_transport" />
+    </LinearLayout>
+
 </LinearLayout>
