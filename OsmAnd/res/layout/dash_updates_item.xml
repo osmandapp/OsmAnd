@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:layout_width="match_parent"
+			  android:layout_marginLeft="12dp"
+			  android:layout_marginRight="12dp"
+			  android:layout_height="50dp">
+	<View android:layout_width="match_parent"
+		  android:background="@color/dashboard_divider"
+		  android:layout_height="1dp"/>
+	<LinearLayout android:orientation="horizontal"
+				  android:layout_marginLeft="12dp"
+				  android:layout_width="fill_parent"
+				  android:layout_height="fill_parent">
+		<LinearLayout android:orientation="vertical"
+					  android:layout_gravity="center_vertical"
+					  android:layout_width="0dp"
+					  android:layout_weight="1"
+					  android:layout_height="wrap_content">
+			<TextView android:id="@+id/map_name"
+					  android:textColor="@color/dashboard_black"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"/>
+			<TextView android:id="@+id/map_descr"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"/>
+		</LinearLayout>
+		<ImageButton android:id="@+id/btn_download"
+				android:layout_gravity="center_vertical"
+				android:src="@drawable/download_button"
+				android:background="@drawable/dashboard_button"
+				android:layout_width="50dp"
+				android:layout_height="50dp"/>
+	</LinearLayout>
+
+	<ProgressBar android:id="@+id/ProgressBar"
+				 android:layout_marginLeft="12dp"
+				 android:layout_marginRight="12dp"
+				 android:visibility="gone"
+				 style="?android:attr/progressBarStyleHorizontal"
+				 android:layout_width="fill_parent"
+				 android:layout_height="wrap_content"/>
+
+</LinearLayout>

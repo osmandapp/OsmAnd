@@ -281,7 +281,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	    	EditText filterText = (EditText) getView().findViewById(R.id.search_box);
 	    	filterText.removeTextChangedListener(textWatcher);
 	    }
-		DownloadActivity.downloadListIndexThread.setUiActivity(null);
 	}
 
 	public List<String> toString(List<DownloadActivityType> t) {

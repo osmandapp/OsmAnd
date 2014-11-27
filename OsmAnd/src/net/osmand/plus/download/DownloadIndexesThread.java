@@ -43,7 +43,7 @@ import android.view.View;
 import android.widget.Toast;
 
 public class DownloadIndexesThread {
-	private DownloadActivity uiActivity = null;
+	private BaseDownloadActivity uiActivity = null;
 	private IndexFileList indexFiles = null;
 	private Map<IndexItem, List<DownloadEntry>> entriesToDownload = new ConcurrentHashMap<IndexItem, List<DownloadEntry>>();
 	private Set<DownloadEntry> currentDownloads = new HashSet<DownloadEntry>();
@@ -69,10 +69,10 @@ public class DownloadIndexesThread {
 		indexFiles = null;
 	}
 	
-	public void setUiActivity(DownloadActivity uiActivity) {
+	public void setUiActivity(BaseDownloadActivity uiActivity) {
 		this.uiActivity = uiActivity;
 	}
-	
+
 	public List<DownloadEntry> flattenDownloadEntries() {
 		List<DownloadEntry> res = new ArrayList<DownloadEntry>();
 		for(List<DownloadEntry> ens : getEntriesToDownload().values()) {
@@ -120,7 +120,17 @@ public class DownloadIndexesThread {
 	}
 
 	public List<IndexItem> getItemsToUpdate() { return itemsToUpdate;}
-	
+
+	public void resetUiActivity(Class<?> downloadActivityClass) {
+		if (uiActivity== null){
+			return;
+		}
+
+		if (uiActivity.getClass().equals(downloadActivityClass)){
+			uiActivity = null;
+		}
+	}
+
 	public class DownloadIndexesAsyncTask extends BasicProgressAsyncTask<IndexItem, Object, String> implements DownloadFileShowWarning {
 
 		private OsmandPreference<Integer> downloads;
@@ -395,7 +405,9 @@ public class DownloadIndexesThread {
 							uiActivity.getEntriesToDownload().put(basemap, downloadEntry);
 							AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download,
 									Toast.LENGTH_LONG).show();
-							uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+							if (uiActivity instanceof DownloadActivity){
+								uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+							}
 						}
 					}
 					if (indexFiles.isIncreasedMapVersion()) {
