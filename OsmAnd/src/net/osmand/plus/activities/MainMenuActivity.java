@@ -11,8 +11,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.dashboard.DashboardActivity;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.sherpafy.TourViewActivity;
 import android.app.Activity;
@@ -240,7 +240,7 @@ public class MainMenuActivity extends Activity {
 		favouritesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
+				final Intent favorites = new Intent(activity, DashboardActivity.class);
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(favorites);
 			}

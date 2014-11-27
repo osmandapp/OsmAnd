@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:id="@+id/main_fav"
+			  android:background="@drawable/bg_cardui"
+			  android:layout_width="fill_parent"
+			  android:layout_height="wrap_content"
+			  android:orientation="vertical">
+	<LinearLayout android:orientation="horizontal"
+				  android:layout_width="fill_parent"
+				  android:layout_height="40dp">
+		<TextView android:id="@+id/fav_text"
+				  android:text="@string/my_data_Button"
+				  style="@style/DashboardSubHeader"/>
+		<Button android:id="@+id/show_all"
+				android:text="@string/show_all"
+				style="@style/DashboardGeneralButton"/>
+	</LinearLayout>
+	<LinearLayout android:id="@+id/favorites"
+				  android:orientation="vertical"
+				  android:layout_width="fill_parent"
+				  android:layout_height="wrap_content"/>
+</LinearLayout>
