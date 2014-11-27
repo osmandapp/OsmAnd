@@ -92,18 +92,6 @@ public class DashboardActivity extends BaseDownloadActivity {
 		
 		final String textVersion = Version.getFullVersion(getMyApplication());
 		getSupportActionBar().setTitle(textVersion);
-		final int abTitleId = getResources().getIdentifier("action_bar_title", "id", "android");
-		final SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
-		findViewById(abTitleId).setOnClickListener(new View.OnClickListener() {
-			int i=0;
-			@Override
-			public void onClick(View view) {
-				if(i++ > 8) {
-					prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
-					enableLink(DashboardActivity.this, textVersion, (TextView)view);
-				}
-			}
-		});
 		ColorDrawable color = new ColorDrawable(getResources().getColor(R.color.actionbar_color));
 		getSupportActionBar().setBackgroundDrawable(color);
 		getSupportActionBar().setIcon(android.R.color.transparent);
