@@ -1993,4 +1993,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="advanced_settings">Pokročilé</string>
 	<string name="osmo_use_https_descr">Použiť zabezpečené spojenie so serverom</string>
     <string name="osmo_use_https">Použiť HTTPS</string>
+	<string name="home_button">Domov</string>
+    <string name="search_for">Hľadať</string>
+	<string name="show_map">ZOBRAZIŤ MAPU</string>
+	<string name="show_all">ZOBRAZIŤ VŠETKO</string>
+	<string name="coordinates">Súradnice</string>
 	</resources>
