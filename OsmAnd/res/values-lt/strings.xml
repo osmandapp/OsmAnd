@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
@@ -1807,8 +1807,6 @@
     <string name="local_index_description">Spustelėkite bet kurį elementą, norėdami gauti daugiau informacijos, paspauskite ir laikykite, norėdami išjungti arba ištrinti. Dabartiniai duomenys įrenginyje (%1$s laisva):</string>
 	<string name="print_route">Išspausdinti maršrutą</string>
     <string name="fav_point_emoticons_message">Mes pakeitėme jūsų įsimintos vietos pavadinimą į %1$s, nes teksto su veidukais išsaugoti faile neįmanoma.</string>
-    <string name="test_native_render">Testuoti aparatinį atvaizdavimą</string>
-    <string name="test_native_render_msg">Pradeda veiklą su aparatiniu atvaizdavimu</string>
     <string name="use_native_render">Naudoti aparatinį atvaizdavimą</string>
     <string name="use_native_render_descr">Naudoti C++ vietoje Java atvaizdavimo</string>
     <string name="speed_limit_exceed">Greičio ribojimo viršijimo reikšmė</string>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
@@ -2063,8 +2063,6 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="speed_limit_exceed_message">制限速度超過による警告音声の許容値を選択。</string>
 	<string name="fav_point_emoticons_message">お気に入り地点名%1$sはファイルに絵文字を含む文字列を保存し、分かり易いよう変更されています。</string>
     <string name="print_route">経路印刷</string>
-    <string name="test_native_render">ネイティブレンダリングのテスト</string>
-    <string name="test_native_render_msg">ネイティブレンダリングを有効化して開始</string>
     <string name="fav_point_dublicate">お気に入り地点の重複</string>
     <string name="fav_point_dublicate_message">名前の重複を避けるために、%1$s にお気に入り地点の名前を変更しました。</string>
     <string name="use_native_render">ネイティブレンダリングを使用</string>
