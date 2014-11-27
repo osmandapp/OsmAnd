@@ -1,33 +1,26 @@
 package net.osmand.plus.activities;
 
+
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 import net.osmand.access.AccessibleAlertBuilder;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
-import net.osmand.map.MapTileDownloader.DownloadRequest;
-import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmAndAppCustomization;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.dashboard.DashFavoritesFragment;
+import net.osmand.plus.dashboard.DashMapFragment;
+import net.osmand.plus.dashboard.DashPluginsFragment;
+import net.osmand.plus.dashboard.DashSearchFragment;
+import net.osmand.plus.dashboard.DashUpdatesFragment;
+import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.render.MapVectorLayer;
-import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.sherpafy.TourViewActivity;
-import net.osmand.plus.views.MapTextLayer;
-import net.osmand.plus.views.OsmAndMapSurfaceView;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -40,7 +33,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -51,27 +43,18 @@ import android.text.format.DateFormat;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.TypedValue;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.ibm.icu.util.Calendar;
 
 /**
  * Created by Denis on 05.11.2014.
  */
-public class DashboardActivity extends SherlockFragmentActivity implements IMapDownloaderCallback {
+public class DashboardActivity extends BaseDownloadActivity {
 	public static final boolean TIPS_AND_TRICKS = false;
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
@@ -84,14 +67,9 @@ public class DashboardActivity extends SherlockFragmentActivity implements IMapD
 	
 	private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
 	private ProgressDialog startProgressDialog;
-	private OsmandMapTileView osmandMapTileView;
 
 	
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		getMyApplication().getResourceManager().getMapTileDownloader().removeDownloaderCallback(this);
-	}
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -111,15 +89,28 @@ public class DashboardActivity extends SherlockFragmentActivity implements IMapD
 			return;
 		}
 		setContentView(R.layout.dashboard);
-		setupContributionVersion();
-		getSupportActionBar().setTitle(Version.getFullVersion(getMyApplication()));
+		
+		final String textVersion = Version.getFullVersion(getMyApplication());
+		getSupportActionBar().setTitle(textVersion);
+		final int abTitleId = getResources().getIdentifier("action_bar_title", "id", "android");
+		final SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
+		findViewById(abTitleId).setOnClickListener(new View.OnClickListener() {
+			int i=0;
+			@Override
+			public void onClick(View view) {
+				if(i++ > 8) {
+					prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
+					enableLink(DashboardActivity.this, textVersion, (TextView)view);
+				}
+			}
+		});
 		ColorDrawable color = new ColorDrawable(getResources().getColor(R.color.actionbar_color));
 		getSupportActionBar().setBackgroundDrawable(color);
 		getSupportActionBar().setIcon(android.R.color.transparent);
-		setupMapView();
-		setupButtons();
-		setupFonts();
-		getMyApplication().getResourceManager().getMapTileDownloader().addDownloaderCallback(this);
+		
+		setupContributionVersion();
+		addFragments();
+		initApp(this, getMyApplication());
 	}
 	
 	@Override
@@ -167,6 +158,36 @@ public class DashboardActivity extends SherlockFragmentActivity implements IMapD
 		about.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 	
+	private void addFragments() {
+		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+		android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
+		//after rotation list of fragments in fragment transaction is not cleared
+		//so we need to check whether some fragments are already existing
+		if (manager.findFragmentByTag(DashSearchFragment.TAG) == null){
+			DashSearchFragment searchFragment = new DashSearchFragment();
+			fragmentTransaction.add(R.id.content, searchFragment, DashSearchFragment.TAG);
+		}
+		if (manager.findFragmentByTag(DashMapFragment.TAG) == null){
+			DashMapFragment mapFragment = new DashMapFragment();
+			fragmentTransaction.add(R.id.content, mapFragment, DashMapFragment.TAG);
+		}
+
+		if (manager.findFragmentByTag(DashFavoritesFragment.TAG) == null){
+			DashFavoritesFragment favoritesFragment = new DashFavoritesFragment();
+			fragmentTransaction.add(R.id.content, favoritesFragment, DashFavoritesFragment.TAG);
+		}
+
+		if (manager.findFragmentByTag(DashUpdatesFragment.TAG) == null){
+			DashUpdatesFragment updatesFragment = new DashUpdatesFragment();
+			fragmentTransaction.add(R.id.content, updatesFragment, DashUpdatesFragment.TAG);
+		}
+
+		if (manager.findFragmentByTag(DashPluginsFragment.TAG) == null){
+			DashPluginsFragment pluginsFragment = new DashPluginsFragment();
+			fragmentTransaction.add(R.id.content, pluginsFragment, DashPluginsFragment.TAG).commit();
+		}
+	}
+	
 	public static void showAboutDialog(final Activity activity, final OsmandApplication app) {
 		Builder bld = new AlertDialog.Builder(activity);
 		bld.setTitle(R.string.about_settings);
@@ -212,15 +233,9 @@ public class DashboardActivity extends SherlockFragmentActivity implements IMapD
 		
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		setupFavorites();
-	}
 	
-	
-	
-	protected void initApp(final OsmAndAppCustomization appCustomization, final Activity activity, OsmandApplication app) {
+	protected void initApp(final Activity activity, OsmandApplication app) {
+		final OsmAndAppCustomization appCustomization = app.getAppCustomization();
 		// restore follow route mode
 		if(app.getSettings().FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()){
 			final Intent mapIndent = new Intent(this, appCustomization.getMapActivity());
@@ -370,162 +385,7 @@ public class DashboardActivity extends SherlockFragmentActivity implements IMapD
 		}
 	}
 
-	private void setupFonts() {
-		Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
-		((TextView) findViewById(R.id.search_for)).setTypeface(typeface);
-		((TextView) findViewById(R.id.map_text)).setTypeface(typeface);
-		((TextView) findViewById(R.id.fav_text)).setTypeface(typeface);
-		((Button) findViewById(R.id.show_map)).setTypeface(typeface);
-		((Button) findViewById(R.id.show_all)).setTypeface(typeface);
-	}
 
-	private void setupFavorites(){
-		final FavouritesDbHelper helper = getMyApplication().getFavorites();
-		final List<FavouritePoint> points = helper.getFavouritePoints();
-		LinearLayout favorites = (LinearLayout) findViewById(R.id.favorites);
-		favorites.removeAllViews();
-		if (points.size() == 0){
-			(findViewById(R.id.main_fav)).setVisibility(View.GONE);
-			return;
-		}
-
-		if (points.size() > 3){
-			while (points.size() != 3){
-				points.remove(3);
-			}
-		}
-
-
-		for (final FavouritePoint point : points) {
-			LayoutInflater inflater = getLayoutInflater();
-			View view = inflater.inflate(R.layout.dash_fav_list, null, false);
-			TextView name = (TextView) view.findViewById(R.id.name);
-			TextView label = (TextView) view.findViewById(R.id.distance);
-			ImageView icon = (ImageView) view.findViewById(R.id.icon);
-			name.setText(point.getName());
-			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(DashboardActivity.this, point.getColor()));
-			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
-			int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
-					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
-			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
-			label.setText(distance, TextView.BufferType.SPANNABLE);
-			label.setTypeface(Typeface.DEFAULT, point.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					final Intent mapIntent = new Intent(DashboardActivity.this, getMyApplication().getAppCustomization().getMapActivity());
-					getMyApplication().getSettings().setLastKnownMapLocation(point.getLatitude(), point.getLongitude());
-					startActivity(mapIntent);
-				}
-			});
-			int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
-			view.setLayoutParams(lp);
-			favorites.addView(view);
-		}
-	}
-
-	private void setupButtons(){
-		final Activity activity = this;
-		final OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
-
-		(findViewById(R.id.show_map)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				final Intent mapIndent = new Intent(activity, appCustomization.getMapActivity());
-				activity.startActivityForResult(mapIndent, 0);
-			}
-		});
-
-		(findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
-				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				activity.startActivity(favorites);
-			}
-		});
-
-		(findViewById(R.id.poi)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.POI_TAB_INDEX);
-				activity.startActivity(search);
-			}
-		});
-
-		(findViewById(R.id.address)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.ADDRESS_TAB_INDEX);
-				activity.startActivity(search);
-			}
-		});
-
-		(findViewById(R.id.coord)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.LOCATION_TAB_INDEX);
-				activity.startActivity(search);
-			}
-		});
-
-		(findViewById(R.id.fav_btn)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.FAVORITES_TAB_INDEX);
-				activity.startActivity(search);
-			}
-		});
-
-		(findViewById(R.id.history)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.HISTORY_TAB_INDEX);
-				activity.startActivity(search);
-			}
-		});
-
-		(findViewById(R.id.transport)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.TRANSPORT_TAB_INDEX);
-				activity.startActivity(search);
-			}
-		});
-	}
-
-	private void setupMapView() {
-		OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
-		osmandMapTileView = surf.getMapView();
-		osmandMapTileView.getView().setVisibility(View.VISIBLE);
-		osmandMapTileView.removeAllLayers();
-		MapVectorLayer mapVectorLayer = new MapVectorLayer(null);
-		MapTextLayer mapTextLayer = new MapTextLayer();
-		mapTextLayer.setAlwaysVisible(true);
-		// 5.95 all labels
-		osmandMapTileView.addLayer(mapTextLayer, 5.95f);
-		osmandMapTileView.addLayer(mapVectorLayer, 0.5f);
-		osmandMapTileView.setMainLayer(mapVectorLayer);
-		mapVectorLayer.setVisible(true);
-		LatLon lm = getMyApplication().getSettings().getLastKnownMapLocation();
-		int zm = getMyApplication().getSettings().getLastKnownMapZoom();
-		osmandMapTileView.setLatLon(lm.getLatitude(), lm.getLongitude());
-		osmandMapTileView.setIntZoom(zm);
-		osmandMapTileView.refreshMap(true);
-	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -539,10 +399,8 @@ public class DashboardActivity extends SherlockFragmentActivity implements IMapD
 	}
 
 
-
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		
 		return true;
 	}
 
@@ -565,10 +423,6 @@ public class DashboardActivity extends SherlockFragmentActivity implements IMapD
 			getMyApplication().closeApplication(this);
 		}
 		return true;
-	}
-
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getApplication();
 	}
 
 	protected void checkVectorIndexesDownloaded() {
@@ -617,18 +471,5 @@ public class DashboardActivity extends SherlockFragmentActivity implements IMapD
 		}, 0, content.length(), 0);
 		textVersionView.setText(content);
 		textVersionView.setMovementMethod(LinkMovementMethod.getInstance());
-	}
-
-	@Override
-	public void tileDownloaded(DownloadRequest request) {
-		if(request != null && !request.error && request.fileToSave != null){
-			ResourceManager mgr = getMyApplication().getResourceManager();
-			mgr.tileDownloaded(request);
-		}
-		if(request == null || !request.error){
-			if(osmandMapTileView != null) {
-				osmandMapTileView.tileDownloaded(request);
-			}
-		}		
 	}
 }

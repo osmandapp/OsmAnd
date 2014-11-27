@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="app_name_ver">OsmAnd 1.9</string>
     <string name="app_name">OsmAnd~</string>
 
     <!--
