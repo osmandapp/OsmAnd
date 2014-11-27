@@ -1867,4 +1867,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="show_map">AFFICHER LA CARTE</string>
 	<string name="show_all">AFFICHER TOUT</string>
 	<string name="coordinates">Coordonnées</string>
+	<string name="map_update">Cartes</string>
 	</resources>
