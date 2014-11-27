@@ -2088,7 +2088,7 @@
     <string name="home_button">집</string>
     <string name="map_update">지도</string>
 	<string name="search_for">검색</string>
-	<string name="show_map">지도 보기</string>
-	<string name="show_all">모두 보기</string>
+	<string name="show_map">지도 표시</string>
+	<string name="show_all">모두 표시</string>
 	<string name="coordinates">좌표</string>
 	</resources>
