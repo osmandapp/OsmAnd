@@ -362,8 +362,8 @@
   <string name="use_osmand_routing_service">Navegación OsmAnd &gt;20km</string>
   <string name="use_osmand_routing_service_descr">El uso de la navegación sin conexión OsmAnd se aplica solo a rutas &gt; 20 km (experimental)</string>
   <string name="osmand_routing_experimental">La navegación sin conexión OsmAnd es una característica experimental y no funciona para distancias de más de unos 20 km.\n\nEl servicio de navegación se cambia temporalmente al servicio con conexión CloudMade.</string>
-  <string name="specified_dir_doesnt_exist">No puedo encontrar el directorio especificado.</string>
-  <string name="application_dir">Directorio de almacenamiento</string>
+  <string name="specified_dir_doesnt_exist">No se puede encontrar la carpeta especificada.</string>
+  <string name="application_dir">Carpeta de almacenamiento de datos</string>
   
   <string name="osmand_net_previously_installed">Una versión anterior de OsmAnd está instalada. Todos los datos descargados están soportados por la nueva aplicación. Pero los Favoritos deben exportarse desde la aplicación antigua y después importarse en la nueva.</string>
   <string name="build_installed">Compilación {0} correctamente instalada ({1}).</string>
@@ -421,7 +421,7 @@
   <string name="voice">Voz</string>
   <string name="no_vector_map_loaded">Los mapas vectoriales no están cargados</string>
   <string name="map_route_by_gpx">Navegar usando GPX</string>
-  <string name="gpx_files_not_found">No se han encontrado archivos GPX en el directorio /tracks</string>
+  <string name="gpx_files_not_found">No se han encontrado archivos GPX en la carpeta de trazas</string>
   <string name="layer_gpx_layer">Traza GPX…</string>
   <string name="error_reading_gpx">Error leyendo datos GPX</string>
   <string name="vector_data">Mapas vectoriales descargados</string>
@@ -558,7 +558,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="route_general_information">Distancia total %1$s, tiempo de viaje %2$d h %3$d m.</string>
   <string name="router_service_descr">Elige un servicio de navegación con o sin conexión</string>
   <string name="router_service">Servicio de navegación</string>
-  <string name="sd_dir_not_accessible">El directorio de almacenamiento en la tarjeta SD no está disponible</string>
+  <string name="sd_dir_not_accessible">No se puede acceder a la carpeta de almacenamiento en la tarjeta SD</string>
   <string name="download_question">¿Descargar {0} - {1} ?</string>
   <string name="download_question_exist">Ya existen datos descargados ({1}) para {0}. ¿Desea actualizarlos ({2}) ?</string>
   <string name="address">Dirección</string>
@@ -626,7 +626,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="save_current_track">Guardar traza actual</string>
   <string name="save_track_interval">Intervalo de guardado durante navegación</string>
   <string name="save_track_interval_descr">Elige el intervalo de registro de trazas durante la navegación</string>
-  <string name="save_track_to_gpx_descrp">Las trazas se almacenarán en el directorio de trazas durante la navegación</string>
+  <string name="save_track_to_gpx_descrp">Las trazas se almacenarán en la carpeta de trazas durante la navegación</string>
   <string name="save_track_to_gpx">Guardar traza en archivo GPX durante la navegación</string>
   <string name="update_tile">Actualizar mapa</string>
   <string name="reload_tile">Recargar tesela</string>
@@ -770,7 +770,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="online_map_settings_descr">Configurar fuentes de mapas en línea o teselas guardadas</string>
   <string name="map_settings">Configuraciones de Mapa</string>
   <string name="map_settings_descr">Configurar la pantalla del mapa</string>
-  <string name="osmand_rastermaps_plugin_description">Muestra opciones para configurar diversos mapas teselados, online o guardados, como mapa base o como mapa superpuesto / subyacente. Estos mapas también se pueden preparar offline y copiarlos en la carpeta de OsmAnd.</string>
+  <string name="osmand_rastermaps_plugin_description">Muestra opciones para configurar diversos mapas de teselas, online o guardados, como mapa base o como mapa superpuesto / subyacente. Estos mapas también se pueden preparar offline y copiarlos en la carpeta de datos de OsmAnd.</string>
   <string name="osmand_background_plugin_description">Muestra configuraciones para habilitar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
   <string name="osmand_accessibility_description">Muestra configuraciones para características especiales de accesibilidad.</string>
   <string name="extra_settings">Configuraciones avanzadas</string>
@@ -996,50 +996,9 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
 <string name="tip_app_mode_t_v2">"OsmAnd admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.
 \n\nPuedes cambiar de perfil mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono coche, bicicleta o peatón), o al crear una ruta (\'modo de transporte\'). "</string>
 <string name="osmand_short_description_80_chars">Visor y navegador de mapas móvil global para mapas OSM con y sin conexión</string>
-<string name="osmand_long_description_1000_chars">
-		OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada)
-
-	OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión incluyendo indicaciones giro-a-giro mediante voz. 
-	Algunas de las características fundamentales:
-	- Completa funcionalidad sin conexión (almacena los mapas de vectores o teselas descargados en una carpeta seleccionable) 
-	- Mapas vectoriales compactos disponibles de todo el planeta 
-	- Descarga de mapas de país o región directamente desde la app 
-	- Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
-	- Búsqueda sin conexión de direcciones y lugares (PDI) 
-	- Rutas sin conexión para distancias cortas (experimental) 
-	- Modos de coche, bicicleta, y peatón con: 
-	- opción de cambio automático de vista diurna/nocturna 
-	- opción de zoom dependiente de la velocidad 
-	- opción de alineamiento del mapa opcional según brújula o dirección de movimiento 
-	- opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y generadas 
-
-	Limitaciones de la versión gratuita de OsmAnd: 
-	- Límite de número de mapas descargados 
-	- Sin acceso a los PDIs descargados de Wikipedia 
-
-	OsmAnd está siendo desarrollado activamente y nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas características o hacer una donación en general en osmand.net.
-	</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada) OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión incluyendo indicaciones giro-a-giro mediante voz. Algunas de las características fundamentales: - Completa funcionalidad sin conexión (almacena los mapas de vectores o teselas descargados en el almacenamiento del dispositivo) - Mapas vectoriales compactos disponibles de todo el planeta - Descarga de mapas de país o región directamente desde la app - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - opción de cambio automático de vista diurna/nocturna - opción de zoom dependiente de la velocidad - opción de alineamiento del mapa opcional según brújula o dirección de movimiento - opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y generadas Limitaciones de la versión gratuita de OsmAnd: - Límite de número de mapas descargados - Sin acceso a los PDIs descargados de Wikipedia OsmAnd está siendo desarrollado activamente y nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas características o hacer una donación en general en osmand.net. "</string>
 <string name="osmand_plus_short_description_80_chars">Visor de mapas y navegador móvil global para mapas de OSM con y sin conexión</string>
-<string name="osmand_plus_long_description_1000_chars">
-		OsmAnd+ (OSM Automated Navigation Directions)
-
-		OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz.
-
-		OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas características, y recibe las últimas actualizaciones.
-
-		Algunas de las características fundamentales:
-		 - Completa funcionalidad sin conexión (almacenar los mapas de vectores o teselas descargados en una carpeta seleccionable)
-		 - Mapas de vectores compactos disponibles de todo el planeta
-		 - Descarga de mapa de país o región directamente desde la aplicación
-		 - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
-		 - Búsqueda sin conexión de direcciones y lugares (PDI)
-		 - Rutas sin conexión para distancias cortas (experimental)
-		 - Modos de coche, bicicleta, y peatón con:
-			 - Cambio automático opcional de vista diurna/nocturna
-			 - Zoom opcional dependiente de la velocidad
-			 - Alineamiento del mapa opcional según brújula o dirección de movimiento
-			 - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales
-	</string>
+<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas características, y recibe las últimas actualizaciones. Algunas de las características fundamentales: - Completa funcionalidad sin conexión (almacenar los mapas de vectores o teselas descargados en el almacenamiento del dispositivo) - Mapas de vectores compactos disponibles de todo el planeta - Descarga de mapa de país o región directamente desde la aplicación - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - Cambio automático opcional de vista diurna/nocturna - Zoom opcional dependiente de la velocidad - Alineamiento del mapa opcional según brújula o dirección de movimiento - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales "</string>
 <string name="avoid_motorway">Evitar autopistas</string>
 <string name="tip_recent_changes_0_8_3_t">"﻿Cambios en 0.8.3:
 \n\t* Puntos de ruta\n\t* Mejoras en indicaciones de ruta
@@ -1525,10 +1484,10 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="routing_preferences_descr">Preferencias de ruteo</string>
     <string name="speech_rate_descr">Especifica la velocidad en el habla sintetizada (TTS)</string>
     <string name="speech_rate">Velocidad del habla sintetizada (TTS)</string>
-    <string name="application_dir_change_warning2">OsmAnd podría intentar mover los datos al nuevo destino. ¿Lo quieres hacer?</string>
+    <string name="application_dir_change_warning2">¿Quieres que OsmAnd intente mover sus archivos de datos al nuevo destino?</string>
     <string name="copying_osmand_one_file_descr">Copiando archivo (%s) al nuevo destino...</string>
-    <string name="copying_osmand_files_descr">Copiando archivos al nuevo destino (%s)</string>
-    <string name="copying_osmand_files">Copiando archivos OsmAnd</string>
+    <string name="copying_osmand_files_descr">Copiando archivos de OsmAnd al nuevo destino (%s)</string>
+    <string name="copying_osmand_files">Copiando archivos de datos de OsmAnd</string>
     <string name="app_mode_truck">Camión</string>
     <string name="complex_route_calculation_failed">Falló el cálculo rápido de la ruta (%s), regresando a cálculo lento.</string>
     <string name="disable_complex_routing_descr">Deshabilitar la planificación de ruta de dos fases para la navegación con automóvil</string>
@@ -1549,9 +1508,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="routing_attr_avoid_motorway_description">Evita las autopistas</string>
 	<string name="routing_attr_weight_name">Límite de peso</string>
 	<string name="routing_attr_weight_description">Indicar el peso del vehículo permitido en rutas</string>
-    <string name="android_19_location_disabled">Desde la versión Android KitKat (4.4), no puedes descargar ni actualizar el mapa en el anterior lugar de almacenamiento (%s). ¿Quieres cambiar a una nueva localización permitida y copiar todos los archivos allí?
-        \n Nota: los archivos antiguos permanecerán intactos. 
-        \n Nota: no será posible compartir archivos entre OsmAnd y OsmAnd+. </string>
+    <string name="android_19_location_disabled">Desde la versión Android 4.4 (KitKat) no puedes descargar ni actualizar los mapas en la carpeta de almacenamiento anterior (%s). ¿Quieres cambiar a la localización de almacenamiento permitida y copiar todos los archivos de OsmAnd allí?
+\n Nota 1: Tus archivos antiguos permanecerán intactos (pero pueden ser borrados manualmente).
+\n Nota 2: En la nueva localización de almacenamiento no será posible compartir archivos entre OsmAnd y OsmAnd+.</string>
     <string name="use_displayed_track_for_navigation">¿Desea usar la ruta mostrada para la navegación?</string>
     <string name="keep_and_add_destination_point">Añadir como punto de destino</string>
     <string name="select_gpx">Seleccionar GPX …</string>

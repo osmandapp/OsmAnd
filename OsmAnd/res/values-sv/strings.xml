@@ -233,7 +233,7 @@
 <string name="online_map_settings_descr">Konfigurera online- eller cachade källor för kartbitar</string>
 <string name="map_settings">Kartinställningar</string>
 <string name="map_settings_descr">Konfigurera kartvisning</string>
-<string name="osmand_rastermaps_plugin_description">Visa inställningar för att konfigurera en rad olika online-kartor eller cachade kartbitar som baskarta eller som överläggs-/underläggskartor. Dessa kartor kan också förberedas offline och kopieras till OsmAnd-mappen.</string>
+<string name="osmand_rastermaps_plugin_description">Visa inställningar för att konfigurera en rad olika online-kartor eller cachade kartbitar som baskarta eller som överläggs-/underläggskartor. Dessa kartor kan också förberedas offline och kopieras till OsmAnd-datamappen.</string>
 <string name="osmand_background_plugin_description">Visa inställningar för att aktivera spårning och navigering i viloläge (skärm av) genom att periodvis väcka GPS-enheten.</string>
 <string name="osmand_extra_settings_description">Visa inställningar för avancerad kartkonfiguration (som att öka kartdetaljer) och vissa enhetsspecifika inställningar.</string>
 <string name="osmand_development_plugin_description">Visa inställningar för utvecklings- och felsökningsfunktioner som ruttsimulering eller visning av renderingsprestanda.</string>
@@ -270,7 +270,7 @@
 \n\t- Tillgänglighet
 \n\t- Massor av buggfixar
 	</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Automated Navigation Directions) är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar i valfri mapp) - Kompakta offline-vektorkartor för hela världen finns - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för korta sträckor (experimentell) - Bil-, cykel- och fotgängarlägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar i denna gratisversion av OsmAnd: - Antalet nedladdningar av kartor är begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testning av ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Automated Navigation Directions) är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar på enheten) - Kompakta offline-vektorkartor för hela världen finns - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för korta sträckor (experimentell) - Bil-, cykel- och fotgängarlägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar i denna gratisversion av OsmAnd: - Antalet nedladdningar av kartor är begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testning av ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "</string>
 <string name="native_rendering">Inbyggd rendering</string>
 <string name="default_buttons_support">Support</string>
 <string name="support_new_features">Ge stöd till nya funktioner</string>
@@ -607,7 +607,7 @@
 <string name="version_index_is_not_supported">Denna version av indexet \"{0}\" stöds inte</string>
 <string name="use_osmand_routing_service">OsmAnd-navigering &gt;20km</string>
 <string name="use_osmand_routing_service_descr">Använd OsmAnd offline navigering gäller endast rutter &gt;20 km (experimentell)</string>
-<string name="specified_dir_doesnt_exist">Kan inte hitta angiven katalog.</string>
+<string name="specified_dir_doesnt_exist">Kan inte hitta den angivna mappen.</string>
 <string name="tip_recent_changes_0_8_4_t">Förändringar i 0.8.4:
 	\n\t* Några buggfixar
 	\n\t* Kartan tappar inte bort positionslås efter avbrott
@@ -636,7 +636,7 @@
     <string name="poi_filter_restaurants">Restauranger</string>
     <string name="tip_map_context_menu_t">"Kontextmenyn \'Använd plats\' innehåller alla åtgärder med anknytning till en punkt (plats).\n\nMan kommer åt den genom att trycka och hålla på valfri plats på kartan (och sedan klickar på markören), genom att trycka på knappen på styrkulan eller genom att välja \'Meny\' → \'Använd plats\' (de två sista tar kartcentrum som referens).\n\nEn markörbox kan gömmas igen genom att långklicka på den. "</string>
 	<string name="tip_initial_t">"OsmAnd är en navigeringsapp med många funktioner.\n\nGrundläggande introduktion, tips och avancerad hjälp finns via \'Meny\' → \'Hjälp\' från kartskärmen. "</string>
-	<string name="application_dir">Lagringskatalog</string>
+	<string name="application_dir">Datalagringsmapp</string>
 	
 	<string name="osmand_net_previously_installed">En tidigare OsmAnd-version är installerad. Alla offline-data kommer att stödjas av den nya appen. Men favoritpunkter bör exporteras från den gamla appen och senare importeras i den nya.</string>
 	<string name="build_installed">Bygge {0} installerades korrekt ({1}).</string>
@@ -699,7 +699,7 @@
 	<string name="voice">Röst</string>
 	<string name="no_vector_map_loaded">Vektorkartorna laddades inte</string>
 	<string name="map_route_by_gpx">Navigera med GPX</string>
-	<string name="gpx_files_not_found">GPX-filerna hittades inte i katalogen /tracks</string>
+	<string name="gpx_files_not_found">Hittar inga GPX-filer i spårmappen</string>
 	<string name="layer_gpx_layer">GPX-spår …</string>
 	<string name="error_reading_gpx">Fel vid läsning av GPX-data</string>
 	<string name="vector_data">Offline vektorkartor</string>
@@ -834,7 +834,7 @@
 	<string name="route_general_information">Total sträcka %1$s, restid %2$d h %3$d m.</string>
 	<string name="router_service_descr">Välj en online- eller offline-navigeringstjänst</string>
 	<string name="router_service">Navigeringstjänst</string>
-	<string name="sd_dir_not_accessible">Lagringskatalogen på SD-kortet är inte tillgänglig</string>
+	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet är inte tillgänglig</string>
 	<string name="download_question">Ladda ner {0} - {1}?</string>
 	<string name="download_question_exist">Offline-data för {0} finns redan ({1}). Vill du uppdatera den ({2})?</string>
 	<string name="address">Adress</string>
@@ -1045,7 +1045,7 @@
 	<string name="save_current_track">Spara aktuellt GPX-spår</string>
 	<string name="save_track_interval">Loggningsintervall under navigering</string>
 	<string name="save_track_interval_descr">Välj loggningsintervall för inspelning av spår under navigering</string>
-	<string name="save_track_to_gpx_descrp">Spår kommer att sparas i spårkatalogen under navigering</string>
+	<string name="save_track_to_gpx_descrp">Spår kommer att sparas i spårmappen under navigering</string>
 	<string name="save_track_to_gpx">Logga spår till GPX-fil under navigering</string>
 	<string name="update_tile">Uppdatera kartan</string>
 	<string name="reload_tile">Läs om kartbit</string>
@@ -1336,13 +1336,13 @@
     <string name="disable_complex_routing">Inaktivera komplex ruttning</string>
     <string name="guidance_preferences_descr">Navigationsinställningar</string>
     <string name="routing_preferences_descr">Ruttningsinställningar</string>
-    <string name="android_19_location_disabled">Efter KitKat går det inte att hämta och uppdatera kartor på den tidigare lagringsplatsen (%s). Vill du byta till en tillåten plats och flytta alla filer dit?
-     \n OBS: Gamla filer berörs inte.
-     \n OBS: Det kommer inte att vara möjligt att dela filer mellan OsmAnd och OsmAnd+. </string>
-    <string name="application_dir_change_warning2">OsmAnd kan försöka att flytta data till den nya platsen. Vill du detta?</string>
-    <string name="copying_osmand_one_file_descr">Flyttar filen (%s) till ny plats...</string>
-    <string name="copying_osmand_files_descr">Flyttar OsmAnd-filer till ny plats (%s)</string>
-    <string name="copying_osmand_files">Kopierar OsmAnd-filer</string>
+    <string name="android_19_location_disabled">Efter Androidversion 4.4 (KitKat) går det inte att hämta och uppdatera kartor på den tidigare lagringsmappen (%s). Vill du byta till en tillåten plats och kopiera alla OsmAnd-filerna dit?
+\n OBS: Gamla filer berörs inte (men kan tas bort manuellt).
+\n OBS: På den nya lagringsplatsen kommer det inte att vara möjligt att dela filer mellan OsmAnd och OsmAnd+.</string>
+    <string name="application_dir_change_warning2">Vill du att OsmAnd ska försöka kopiera datafilerna till den nya platsen?</string>
+    <string name="copying_osmand_one_file_descr">Kopierar filen (%s) till den nya platsen …</string>
+    <string name="copying_osmand_files_descr">Kopierar OsmAnd-datafiler till den nya platsen (%s)</string>
+    <string name="copying_osmand_files">Kopierar OsmAnd-datafiler</string>
     <string name="calculate_osmand_route_gpx">Beräkna OsmAnd offline-rutt</string>
     <string name="app_mode_truck">Lastbil</string>
     <string name="routing_attr_prefer_motorway_name">Föredra motorvägar</string>
@@ -1732,4 +1732,5 @@
     <string name="wake_on_voice_never">Aldrig</string>
     <string name="advanced_settings">Avancerat</string>
 	<string name="osmo_use_https">Använd https</string>
-	</resources>
+	<string name="osmo_use_https_descr">Använd säker anslutning till servern</string>
+    </resources>

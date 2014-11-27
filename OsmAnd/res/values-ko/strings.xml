@@ -145,7 +145,7 @@
 	<string name="tip_rotation_switching">지도 방향</string>
 	
 
-	<string name="binary_map_download_success">"성공적으로 다운로드하였습니다.\n\n 사용을 위해 [메뉴-&gt;지도 구성-&gt;지도 소스-&gt;오프라인 벡터 지도] 를 활성화하세요. "</string>
+	<string name="binary_map_download_success">"성공적으로 다운로드하였습니다.\n\n 사용하려면 [메뉴-&gt;지도 구성-&gt;지도 소스-&gt;오프라인 벡터 지도] 를 활성화하세요. "</string>
 
 	<string name="tip_day_night_mode">주간/야간 모드</string>
 		
@@ -482,7 +482,7 @@
 	<string name="use_osmand_routing_service_descr">20km 이상 긴 거리를 위해 CloudMade 대신에 OsmAnd 오프라인 라우팅을 사용합니다</string>
 	<string name="osmand_routing_experimental">OsmAnd 오프라인 라우팅은 실험적인 기능이며 20 km 이상의 거리에서는 동작하지 않습니다.\n\n라우팅 서비스는 일시적으로 온라인서비스인 CloudMade로 변경합니다.</string>
 	<string name="specified_dir_doesnt_exist">지정한 폴더를 찾을 수 없습니다.</string>
-	<string name="application_dir">저장 폴더</string>
+	<string name="application_dir">데이터 저장 폴더</string>
 	
 
 	<string name="osmand_net_previously_installed">이전 OsmAnd 버전이 설치되어 있습니다. 모든 오프라인 데이터는 새로운 앱에서 지원합니다. 하지만 즐겨찾기 포인트는 이전 앱에서 익스포트되어야 하며 나중에 새로운 것으로 임포트(가져오기)하여야 합니다..</string>
@@ -689,7 +689,7 @@
 	<string name="route_general_information">전체거리 %1$s, 여행시간 %2$d h %3$d m.</string>
 	<string name="router_service_descr">온라인 또는 오프라인 라우팅 서비스를 선택합니다</string>
 	<string name="router_service">라우터 선택</string>
-	<string name="sd_dir_not_accessible">저장할 SD 카드 디렉토리에 접근할 수 없습니다</string>
+	<string name="sd_dir_not_accessible">데이터 저정 폴더인 SD 카드에 접근할 수 없습니다</string>
 	<string name="download_question">{0} - {1} 을 다운로드할까요?</string>
 	<string name="download_question_exist">{0} 에 대한 오프라인 데이터가 이미 존재합니다({1}). 업데이트할까요({2}) ?</string>
 	<string name="address">주소</string>
@@ -962,14 +962,13 @@
 	<string name="routing_attr_avoid_motorway_description">전용도로 회피하기</string>
 	<string name="routing_attr_weight_name">중량 제한</string>
 	<string name="routing_attr_weight_description">도로에 허가된 차량중량 지정하기</string>
-    <string name="android_19_location_disabled">"킷캣(KitKat) 버전 이후로 이전에 저장한 위치에 지도를 다운로드하고 업데이트 할 수 없습니다 (%s).
-\n모든 파일을 그곳에 복사하는 것을 허락하겠습니까?
-\n Note : 이전 파일은 그대로 유지됩니다.
-\n Note : OsmAnd 와 OsmAnd+ 간에 파일을 공유 할 수 없습니다. "</string>
-    <string name="application_dir_change_warning2">OsmAnd는 새 목적지로 데이터를 이동하려고 합니다. 그렇게 하겠습니까?</string>
+    <string name="android_19_location_disabled">킷캣(KitKat) 버전 이후로 이전에 저장한 폴더 (%s)에 지도를 다운로드하고 업데이트 할 수 없습니다.
+\n저장 위치를 변경하고 모든 파일을 그곳에 복사하는 것을 허락하겠습니까?
+\n Note : 이전 파일은 그대로 유지됩니다. (그러나 수동으로 삭제할 수 있습니다)\n Note : 새로운 저장소는 OsmAnd 와 OsmAnd+ 간에 파일을 공유 할 수 없습니다.</string>
+    <string name="application_dir_change_warning2">OsmAnd는 새 목적지로 데이터 파일을 복사하겠습니까?</string>
     <string name="copying_osmand_one_file_descr">새 목적지로 파일(%s)을 복사중...</string>
-    <string name="copying_osmand_files_descr">새로운 목적지에 OsmAnd 파일을 복사중 (%s)</string>
-    <string name="copying_osmand_files">OsmAnd 파일을 복사중</string>
+    <string name="copying_osmand_files_descr">새로운 목적지에 OsmAnd 데이터 파일을 복사중 (%s)</string>
+    <string name="copying_osmand_files">OsmAnd 데이터 파일을 복사중</string>
     <string name="calculate_osmand_route_gpx">OsmAnd 오프라인 경로 계산하기</string>
     <string name="app_mode_truck">트럭</string>
     <string name="routing_preferences_descr">라우팅 환경설정</string>
@@ -1197,7 +1196,7 @@
     <string name="recording_description">레코딩 %1$s %2$s of %3$s</string>
     <string name="recording_default_name">레코딩</string>
     <string name="av_control_stop">정지</string>
-    <string name="av_control_start">시작(찍기)</string>
+    <string name="av_control_start">A/V 찍기</string>
     <string name="map_widget_av_notes">오디오/비디오 노트</string>
     <string name="osmand_srtm_short_description_80_chars">오프라인 등고선에 대한 OsmAnd 플러그인</string>
     <string name="map_widget_distancemeasurement">거리 측정</string>
@@ -1483,7 +1482,7 @@
 	<string name="gpxup_trackable">추적 가능</string>
 	<string name="gpxup_private">개인</string>
 	<string name="asap">가능한 빨리</string>
-	<string name="save_route_as_gpx">루트를 변환하여 GPX 파일로 저장</string>
+	<string name="save_route_as_gpx">루트를 GPX 파일로 저장</string>
 	<string name="route_roundabout">변곡점: take %1$d exit and go</string>
 	<string name="route_kl">왼쪽을 유지하고 가기</string>
 	<string name="route_kr">오른족을 유지하고 가기</string>
@@ -1710,8 +1709,7 @@
 \n- Antarctica: *
 \n\nList of countries supported (basically world wide!):
 \nAfghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe. "</string>
-	<string name="osmand_rastermaps_plugin_description">기본 맵으로 또는 오버레이/언더레이 지도로 온라인 또는 캐시 타일맵의 다양한 구성을 위한 설정을 표시합니다. 
-이 지도는 오프라인으로  준비하거나 OsmAnd 폴더에 복사 할 수 있습니다.</string>
+	<string name="osmand_rastermaps_plugin_description">기본 맵으로 또는 오버레이/언더레이 지도로 온라인 또는 캐시 타일맵의 다양한 구성을 위한 설정을 표시합니다. 이 지도는 오프라인으로 준비하거나 OsmAnd 데이터 폴더에 복사 할 수 있습니다.</string>
 	
 	<string name="towards">쪽으로</string>
 	<string name="tip_rotation_switching_t_v2">You can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
@@ -2086,4 +2084,5 @@
     <string name="wake_on_voice_never">결코</string>
     <string name="advanced_settings">고급</string>
 	<string name="osmo_use_https">Https를 사용하기</string>
-	</resources>
+	<string name="osmo_use_https_descr">서버를 이용하여 보안 연결</string>
+    </resources>
