@@ -82,7 +82,7 @@ import android.widget.Toast;
 
 public class MapActivity extends AccessibleActivity implements
 		VoiceRouter.VoiceMessageListener {
-	
+
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
@@ -228,6 +228,7 @@ public class MapActivity extends AccessibleActivity implements
 		
 		mDeviceAdmin = new ComponentName(getApplicationContext(), DeviceAdminRecv.class);
 		mDevicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
+		
 	}
 	
 	public void addLockView(FrameLayout lockView) {

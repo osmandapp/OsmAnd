@@ -29,7 +29,6 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
-import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.SelectedGPXFragment;
@@ -38,6 +37,7 @@ import net.osmand.plus.api.FileSettingsAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
@@ -56,9 +56,7 @@ import android.os.Environment;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.view.Window;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -152,29 +150,6 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	public boolean checkBasemapDownloadedOnStart() {
 		return false;
 	}
-	
-	@Override
-	public void customizeMainMenu(Window window, final Activity activity) {
-		// Update app name
-		TextView v =  (TextView) window.findViewById(R.id.AppName);
-		v.setText("Sherpafy");
-		
-//		TextView toursButtonText = (TextView) window.findViewById(R.id.SettingsButtonText);
-//		toursButtonText.setText(R.string.tour);
-//		View toursButton = window.findViewById(R.id.SettingsButton);
-//		toursButton.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				final Intent search = new Intent(activity, getTourSelectionActivity());
-//				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//				activity.startActivity(search);
-//			}
-//		});
-
-
-		// the image could be also updated
-	}
-	
 	
 	@Override
 	public void getDownloadTypes(List<DownloadActivityType> items) {
