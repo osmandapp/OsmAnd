@@ -135,6 +135,7 @@ public class BinaryRoutePlanner {
 			checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() >= 0, graphDirectSegments, start, visitedDirectSegments,
 					"Route is not found from selected start point.");
 			if (ctx.planRouteIn2Directions()) {
+				if(!graphDirectSegments.isEmpty() && !graphReverseSegments.isEmpty())
 				forwardSearch = (nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) < 0);
 //				if (graphDirectSegments.size() * 2 > graphReverseSegments.size()) {
 //					forwardSearch = false;
@@ -206,14 +207,41 @@ public class BinaryRoutePlanner {
 			}
 		}
 	}
+	
+	public RouteSegment initRouteSegment(final RoutingContext ctx, RouteSegment segment, boolean positiveDirection) {
+		if(segment.getSegmentStart() == 0 && !positiveDirection && segment.getRoad().getPointsLength() > 0) {
+			segment = loadSameSegment(ctx, segment, 1);
+		} else if(segment.getSegmentStart() == segment.getRoad().getPointsLength() -1 && positiveDirection && segment.getSegmentStart() > 0) {
+			segment = loadSameSegment(ctx, segment, segment.getSegmentStart() -1);
+		}
+		if(segment == null) {
+			return null;
+		}
+		return segment.initRouteSegment(positiveDirection);
+	}
+
+
+	protected RouteSegment loadSameSegment(final RoutingContext ctx, RouteSegment segment, int ind) {
+		int x31 = segment.getRoad().getPoint31XTile(ind);
+		int y31 = segment.getRoad().getPoint31YTile(ind);
+		RouteSegment s = ctx.loadRouteSegment(x31, y31, 0);
+		while(s != null) {
+			if(s.getRoad().getId() == segment.getRoad().getId()) {
+				segment = s;
+				break;
+			}
+			s = s.getNext();
+		}
+		return segment;
+	}
 
 
 	private void initQueuesWithStartEnd(final RoutingContext ctx, RouteSegment start, RouteSegment end,
 			PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments) {
-		RouteSegment startPos = start.initRouteSegment(true);
-		RouteSegment startNeg = start.initRouteSegment(false);
-		RouteSegment endPos = end.initRouteSegment(true);
-		RouteSegment endNeg = end.initRouteSegment(false);
+		RouteSegment startPos = initRouteSegment(ctx, start, true);
+		RouteSegment startNeg = initRouteSegment(ctx, start, false);
+		RouteSegment endPos = initRouteSegment(ctx, end, true);
+		RouteSegment endNeg = initRouteSegment(ctx, end, false);
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
 		if(ctx.config.initialDirection != null) {
 			// mark here as positive for further check
