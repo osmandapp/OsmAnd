@@ -14,7 +14,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="32dp"
             android:gravity="center_horizontal"
-            android:background="@drawable/poi_parking_pos_no_limit_menu"
+            android:src="@drawable/poi_parking_pos_no_limit_menu"
             android:contentDescription="@string/osmand_parking_time_no_limit" />
 
         <ImageButton
@@ -23,7 +23,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginLeft="32dp"
             android:gravity="center_horizontal"
-            android:background="@drawable/poi_parking_pos_limit_menu"
+            android:src="@drawable/poi_parking_pos_limit_menu"
             android:contentDescription="@string/osmand_parking_time_limit" />
 
     </TableRow>
