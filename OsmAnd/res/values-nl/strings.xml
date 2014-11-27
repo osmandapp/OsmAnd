@@ -1610,9 +1610,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="guidance_preferences_descr">Navigatievoorkeuren</string>
     <string name="routing_preferences_descr">Routeberekening-voorkeuren</string>
     <string name="app_mode_truck">Vrachtauto</string>
-    <string name="android_19_location_disabled">Sinds Android KitKat kunnen kaarten niet meer worden opgeslagen in de huidige map(%s). Wil je deze wijzigen in een toegestane map en de bestanden daar naartoe kopiëren?
-\t\n Let op: oude bestanden blijven bestaan.
-\t\n Let op: het is niet meer mogelijk bestanden te delen tussen OsmAnd en Osmand+. </string>
+    <string name="android_19_location_disabled">Vanaf Android 4.4 (KitKat) kunnen kaarten niet meer worden opgeslagen in de bestaande map(%s). Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar naartoe kopiëren?\n Let op: oude bestanden blijven bestaan. U kunt ze zelf verwijderen.\n Let op: het is niet meer mogelijk bestanden te delen tussen OsmAnd en Osmand+.</string>
     <string name="application_dir_change_warning2">OsmAnd kan proberen de bestanden naar de nieuwe bestemming te verplaatsen. Wil je dat?</string>
     <string name="copying_osmand_one_file_descr">Bestand (%s) wordt gekopieerd naar de nieuwe locatie...</string>
     <string name="copying_osmand_files_descr">OsmAnd-bestanden worden naar de nieuwe locatie gekopieerd (%s)</string>
