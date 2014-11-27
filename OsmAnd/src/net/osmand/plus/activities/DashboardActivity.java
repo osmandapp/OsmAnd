@@ -86,6 +86,13 @@ public class DashboardActivity extends SherlockFragmentActivity implements IMapD
 	private ProgressDialog startProgressDialog;
 	private OsmandMapTileView osmandMapTileView;
 
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		getMyApplication().getResourceManager().getMapTileDownloader().removeDownloaderCallback(this);
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
@@ -112,6 +119,7 @@ public class DashboardActivity extends SherlockFragmentActivity implements IMapD
 		setupMapView();
 		setupButtons();
 		setupFonts();
+		getMyApplication().getResourceManager().getMapTileDownloader().addDownloaderCallback(this);
 	}
 	
 	@Override

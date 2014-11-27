@@ -52,9 +52,9 @@
             android:drawableTop="@drawable/ic_action_marker2"
             android:text="@string/coordinates" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
+	<View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
             android:background="@color/dashboard_divider" />
 
         <Button

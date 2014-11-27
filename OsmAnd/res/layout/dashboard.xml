@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="6dp" >
-		<include android:id="@layout/dashboard_search"/>
+		<include layout="@layout/dashboard_search"/>
 
         <LinearLayout
             android:layout_width="fill_parent"
