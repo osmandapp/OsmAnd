@@ -11,7 +11,6 @@ import net.osmand.Location;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.DashboardActivity;
 import net.osmand.plus.activities.FavouritesActivity;
-import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;

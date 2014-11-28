@@ -52,7 +52,7 @@
             android:drawableTop="@drawable/ic_action_marker2"
             android:text="@string/coordinates" />
 
-	<View
+       <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="@color/dashboard_divider" />
