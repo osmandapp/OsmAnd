@@ -609,4 +609,10 @@
 
 	<string name="poi_palaeontological_site">Палеонтологический сайт</string>
 
+	<string name="poi_ridge">Горный хребет</string>
+	<string name="poi_glacier">Ледник</string>
+	<string name="poi_river">Река</string>
+	<string name="poi_stream">Ручей</string>
+	<string name="poi_military">Военная зона</string>
+	<string name="poi_pier">Пирс</string>
 	</resources>
