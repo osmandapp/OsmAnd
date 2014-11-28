@@ -1818,4 +1818,6 @@
     <string name="wake_on_voice">Включать экран</string>
     <string name="wake_on_voice_descr">Включать экран телефона при приближении к повороту</string>
     <string name="advanced_settings">Расширенные</string>
+	<string name="map_update">Карты</string>
+	<string name="coordinates">Координаты</string>
 	</resources>
