@@ -1850,13 +1850,13 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="routing_attr_avoid_motorway_description">Уникати автомагістралі</string>
 	<string name="routing_attr_weight_name">Максимальна вага</string>
 	<string name="routing_attr_weight_description">Задайте обмеження маси автівки</string>
-    <string name="android_19_location_disabled">"Починаючи з версії KitKat ви не в змозі завантажувати та оновлювати мапи у попередньому сховищі (%s). Чи бажаєте його змінити та скопіювати всі файли в нове місце?
-\n Примітка: старі фали залишаться недоторканими.
-\n Примітка: спільне користування фалами між OsmAnd та OsmAnd+ не можливе. "</string>
+    <string name="android_19_location_disabled">"Починаючи з версії  Android 4.4 (KitKat) ви не в змозі завантажувати та оновлювати мапи у попередню теку (%s). Чи бажаєте її змінити та скопіювати всі файли в нове місце?
+\n Примітка 1: ваші старі фали залишаться недоторканими (їх можна вилучити вручну).
+\n Примітка 2: в новій теці спільне користування фалами між OsmAnd та OsmAnd+ не можливе."</string>
     <string name="application_dir_change_warning2">OsmAnd намагається перенести дані до нового місця. Ви згодні?</string>
     <string name="copying_osmand_one_file_descr">Файл (%s) копіюється на нове місце…</string>
-    <string name="copying_osmand_files_descr">Копіювання файлів OsmAnd до нового місця (%s)</string>
-    <string name="copying_osmand_files">Копіювання файлів OsmAnd</string>
+    <string name="copying_osmand_files_descr">Копіювання файлів даних OsmAnd до нового місця (%s)</string>
+    <string name="copying_osmand_files">Копіювання файлів даних OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Розрахувати офлайн маршрут в OsmAnd</string>
     <string name="app_mode_truck">Вантажівка</string>
     <string name="guidance_preferences_descr">Налаштування навігації</string>
@@ -1879,7 +1879,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="amenity_type_seamark">Навігаційний знак</string>
     <string name="app_modes_choose_descr">Виберіть профілі, видимі в застосунку</string>
     <string name="app_modes_choose">Профілі застосунку</string>
-	<string name="map_widget_map_rendering">Рендерінг мапи:</string>
+	<string name="map_widget_map_rendering">Візуалізація мапи</string>
     <string name="app_mode_hiking">Піший туризм</string>
     <string name="app_mode_motorcycle">Мотоцикл</string>
     <string name="app_mode_boat">Човен</string>
