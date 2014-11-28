@@ -965,7 +965,7 @@
     <string name="android_19_location_disabled">킷캣(KitKat) 버전 이후로 이전에 저장한 폴더 (%s)에 지도를 다운로드하고 업데이트 할 수 없습니다.
 \n저장 위치를 변경하고 모든 파일을 그곳에 복사하는 것을 허락하겠습니까?
 \n Note : 이전 파일은 그대로 유지됩니다. (그러나 수동으로 삭제할 수 있습니다)\n Note : 새로운 저장소는 OsmAnd 와 OsmAnd+ 간에 파일을 공유 할 수 없습니다.</string>
-    <string name="application_dir_change_warning2">OsmAnd는 새 목적지로 데이터 파일을 복사하겠습니까?</string>
+    <string name="application_dir_change_warning2">OsmAnd에 새 목적지로 데이터 파일을 복사하겠습니까?</string>
     <string name="copying_osmand_one_file_descr">새 목적지로 파일(%s)을 복사중...</string>
     <string name="copying_osmand_files_descr">새로운 목적지에 OsmAnd 데이터 파일을 복사중 (%s)</string>
     <string name="copying_osmand_files">OsmAnd 데이터 파일을 복사중</string>
