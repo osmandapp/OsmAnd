@@ -73,14 +73,11 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		progressBars.clear();
 		baseNames.clear();
 		downloadButtons.clear();
-		if (list.size() > 0) {
-			mainView.setVisibility(View.VISIBLE);
-		} else {
-			mainView.setVisibility(View.GONE);
+		mainView.findViewById(R.id.main_progress).setVisibility(View.GONE);
+		((TextView)mainView.findViewById(R.id.update_count)).setText(String.valueOf(list.size()));
+		if (list.size() < 1) {
 			return;
 		}
-
-		((TextView)mainView.findViewById(R.id.update_count)).setText(String.valueOf(list.size()));
 
 		LinearLayout updates = (LinearLayout) mainView.findViewById(R.id.updates_items);
 		updates.removeAllViews();
@@ -150,6 +147,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			});
 			boolean intermediate = basicProgressAsyncTask.isIndeterminate();
 			currentProgress.setVisibility(intermediate ? View.GONE : View.VISIBLE);
+			getView().findViewById(R.id.main_progress).setVisibility(intermediate ? View.VISIBLE : View.GONE);
 			if (!intermediate) {
 				currentProgress.setProgress(basicProgressAsyncTask.getProgressPercentage());
 			}
