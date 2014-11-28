@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="app_name_ver">OsmAnd 1.9</string>
+    <string name="app_name_ver">OsmAnd 1.9.3</string>
     <string name="app_name">OsmAnd~</string>
-
     <!--
     When changing the following app_version string please remember to keep the version prefix for our apk in sync at
-    http://builder.osmand.net:8080/view/OsmAnd%20Builds/job/OsmAnd-main-default/configure  ( Ant, Properties, build.version=${GIT_BRANCH} 1.9.#${BUILD_NUMBER}D )
+    http://builder.osmand.net:8080/view/OsmAnd%20Builds/job/OsmAnd-main-default/configure  ( Ant, Properties, build.version=${GIT_BRANCH} 1.9.3#${BUILD_NUMBER}D )
     -->
-    <string name="app_version">1.9 alpha</string>
+    <string name="app_version">1.9.3</string>
 
     <!-- Not translatable -->
     <string name="ga_api_key">UA-28342846-2</string>
