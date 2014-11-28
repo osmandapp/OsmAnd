@@ -628,4 +628,8 @@
 	<string name="poi_pier">Mole</string>
 	<string name="poi_leisure_track">Sportsbane</string>
 	<string name="poi_ridge">Højderyg</string>
+	<string name="poi_glacier">Gletscher</string>
+	<string name="poi_river">Flod</string>
+	<string name="poi_stream">Vandløb</string>
+	<string name="poi_military">Militærområde</string>
 	</resources>
