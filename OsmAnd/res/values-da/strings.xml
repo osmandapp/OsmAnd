@@ -1455,7 +1455,7 @@
     <string name="routing_preferences_descr">Indstillinger for ruteplanlægning</string>
     <string name="app_mode_truck">Lastbil</string>
     <string name="calculate_osmand_route_gpx">Beregn OsmAnd offline rute</string>
-    <string name="application_dir_change_warning2">OsmAnd kan forsøge at flytte data til ny destination . Vil du det?\n\nSkal OsmAnd forsøge at kopiere datafiler til den nye placering?</string>
+    <string name="application_dir_change_warning2">"Skal OsmAnd også  kopiere datafiler til den nye placering?"</string>
     <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til den ny placering...</string>
     <string name="copying_osmand_files_descr">Kopierer OsmAnd datafiler til ny destination (%s)</string>
     <string name="copying_osmand_files">Kopierer OsmAnd datafiler</string>
@@ -1844,4 +1844,10 @@
     <string name="advanced_settings">Avanceret</string>
 	<string name="osmo_use_https_descr">Brug sikker forbindelse med server</string>
     <string name="osmo_use_https">Brug https</string>
+	<string name="home_button">Start</string>
+    <string name="search_for">Søg efter</string>
+	<string name="show_map">VIS KORT</string>
+	<string name="show_all">VIS ALLE</string>
+	<string name="coordinates">Koordinater</string>
+	<string name="map_update">Kort</string>
 	</resources>

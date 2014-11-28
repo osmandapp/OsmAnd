@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:background="@drawable/bg_cardui"
+			  android:layout_marginBottom="4dp"
+			  android:layout_width="fill_parent"
+			  android:layout_height="wrap_content">
+	<LinearLayout android:orientation="horizontal"
+				  android:layout_width="fill_parent"
+				  android:layout_height="40dp">
+		<TextView android:id="@+id/map_text"
+				  android:text="@string/map_Button"
+				  style="@style/DashboardSubHeader"/>
+		<Button android:id="@+id/show_map"
+				android:text="@string/show_map"
+				style="@style/DashboardGeneralButton"/>
+	</LinearLayout>
+
+	<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+		<ProgressBar android:id="@+id/map_progress"
+					 android:layout_width="wrap_content"
+					 android:layout_height="wrap_content"
+					 android:layout_centerInParent="true"
+					 style="@android:style/Widget.ProgressBar.Small"
+					 android:indeterminate="true"
+					 android:indeterminateOnly="true"/>
+
+		<net.osmand.plus.views.OsmAndMapSurfaceView
+				android:id="@+id/MapView"
+				android:layout_width="fill_parent"
+				android:layout_height="110dp"
+				android:layout_marginLeft="2dp"
+				android:layout_marginRight="2dp"
+				android:layout_marginBottom="2dp"
+				android:contentDescription="@string/map_view"
+				android:visibility="gone"/>
+	</RelativeLayout>
+
+</LinearLayout>

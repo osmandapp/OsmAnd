@@ -118,7 +118,7 @@
         <string name="poi_traffic_calming_rumble_strip">Rumlestriber</string>
         <string name="poi_traffic_calming_table">Trafikdæmpning, bord</string>
         <string name="poi_traffic_calming_choker">Indsnævring</string>
-        <string name="poi_traffic_signals">Trafiksignal</string>
+        <string name="poi_traffic_signals">Trafiklys</string>
 
         <string name="poi_car_repair">Autoværksted</string>
         <string name="poi_service_tyres">Dækservice</string>
@@ -449,7 +449,7 @@
         <string name="poi_fast_food">Fastfood</string>
         <string name="poi_bar">Bar</string>
         <string name="poi_pub">Pub</string>
-        <string name="poi_food_court">Fødevaremarked</string>
+        <string name="poi_food_court">Madmarked</string>
         <string name="poi_drinking_water">Drikkevand</string>
         <string name="poi_barbecue">Barbecue</string>
 
@@ -623,4 +623,13 @@
 
 	<string name="poi_palaeontological_site">Palæontologisk område</string>
 
+	<string name="poi_motorway_junction">Motorvejskryds</string>
+
+	<string name="poi_pier">Mole</string>
+	<string name="poi_leisure_track">Sportsbane</string>
+	<string name="poi_ridge">Højderyg</string>
+	<string name="poi_glacier">Gletscher</string>
+	<string name="poi_river">Flod</string>
+	<string name="poi_stream">Vandløb</string>
+	<string name="poi_military">Militærområde</string>
 	</resources>

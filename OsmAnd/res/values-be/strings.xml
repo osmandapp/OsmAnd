@@ -1520,7 +1520,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="routing_attr_avoid_motorway_description">Пазьбягаць аўтамагістралі</string>
 	<string name="routing_attr_weight_name">Абмежаваньне вагі</string>
 	<string name="routing_attr_weight_description">Задайце вагу аўтамабіля для пракладаньня маршрутаў</string>
-    <string name="application_dir_change_warning2">Вы хочаце каб OsmAnd паспрабаваў скапіяваць свае зьвесткі ў новае месца?</string>
+    <string name="application_dir_change_warning2">Вы хочаце каб OsmAnd таксама скапіяваў свае зьвесткі ў новае месца?</string>
     <string name="copying_osmand_one_file_descr">Капіраваньне файла (%s) у новае месца...</string>
     <string name="copying_osmand_files_descr">Капіяваньне дадзеных OsmAnd у новае месца (%s)</string>
     <string name="copying_osmand_files">Капіяваньне дадзеных OsmAnd</string>
@@ -1953,4 +1953,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="advanced_settings">Дадатковыя</string>
 	<string name="osmo_use_https_descr">Выкарыстоўваць бясьпечнае злучэньне з серверам</string>
     <string name="osmo_use_https">Выкарыстоўваць HTTPS</string>
+	<string name="home_button">Дамоў</string>
+    <string name="map_update">Мапы</string>
+	<string name="search_for">Шукаць</string>
+	<string name="show_map">ПАКАЗАЦЬ МАПУ</string>
+	<string name="show_all">ПАКАЗАЦЬ УСЁ</string>
+	<string name="coordinates">Каардынаты</string>
 	</resources>

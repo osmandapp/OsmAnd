@@ -1381,9 +1381,8 @@ s často kladenými otázkami.</string>
 	<string name="routing_attr_avoid_motorway_description">Vyhnout se dálnicím</string>
 	<string name="routing_attr_weight_name">Hmotnostní limit</string>
 	<string name="routing_attr_weight_description">Zadejte hmotnost vozidla, která musí být povolená na cestách</string>
-    <string name="android_19_location_disabled">Od verze KitKat není možné stahovat a aktualizovat mapy v předchozím úložišti (%s). Chcete ho změnit na vhodné nové a zkopírovat do něj všechny soubory.
-        \n Poznámka: původní soubory zůstanou nedotčeny.  
-        \n Poznámka: nebude možné sdílet soubory mezi OsmAnd a OsmAnd+. </string>
+    <string name="android_19_location_disabled">Od verze Androidu 4.4 (KitKat) není možné stahovat a aktualizovat mapy v předchozím úložišti (%s). Chcete ho změnit na vhodné nové úložiště a zkopírovat do něj všechny soubory?\n Poznámka 1: Původní soubory zůstanou nedotčeny a mohou být smazány ručně.
+\n Poznámka 2: V novém úložišti nebude možné sdílet soubory mezi OsmAnd a OsmAnd+.</string>
     <string name="application_dir_change_warning2">OsmAnd může zkusit přesunout data do nového cíle. Souhlasíte?</string>
     <string name="copying_osmand_one_file_descr">Kopírování souboru (%s) do nového umístění...</string>
     <string name="copying_osmand_files_descr">Kopírování souborů OsmAnd do nového umístění (%s)</string>
@@ -1772,4 +1771,12 @@ s často kladenými otázkami.</string>
 	<string name="lock_screen_request_explanation">%1$s potřebuje tato oprávnění pro vypnutí obrazovky při režimu šetření energie.</string>
     <string name="wake_on_voice_never">Nikdy</string>
     <string name="advanced_settings">Pokročilé</string>
+	<string name="home_button">Domov</string>
+    <string name="show_map">ZOBRAZIT MAPU</string>
+	<string name="osmo_use_https_descr">Použít zabezpečené spojení se serverem</string>
+    <string name="osmo_use_https">Použít HTTPS</string>
+	<string name="map_update">Mapy</string>
+	<string name="search_for">Hledat</string>
+	<string name="show_all">ZOBRAZIT VŠE</string>
+	<string name="coordinates">Souřadnice</string>
 	</resources>

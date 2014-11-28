@@ -2083,4 +2083,10 @@
     <string name="advanced_settings">고급</string>
 	<string name="osmo_use_https">Https를 사용하기</string>
 	<string name="osmo_use_https_descr">서버를 이용하여 보안 연결</string>
-    </resources>
+    <string name="home_button">집</string>
+    <string name="map_update">지도</string>
+	<string name="search_for">검색</string>
+	<string name="show_map">지도 표시</string>
+	<string name="show_all">모두 표시</string>
+	<string name="coordinates">좌표</string>
+	</resources>

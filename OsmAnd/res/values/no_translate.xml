@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="app_name">OsmAnd~</string>
-
+    <string name="app_name_ver">OsmAnd 1.9.3</string>
+    <string name="app_version">1.9.3</string>
     <!--
-    When changing the following app_version string please remember to keep the version prefix for our apk in sync at
-    http://builder.osmand.net:8080/view/OsmAnd%20Builds/job/OsmAnd-main-default/configure  ( Ant, Properties, build.version=${GIT_BRANCH} 1.9.#${BUILD_NUMBER}D )
+    Note: The above app_version should also provided as the build number prefix ('based-on version') to our dev APKs via the builder configs, e.g.
+    http://builder.osmand.net:8080/view/OsmAnd%20Builds/job/OsmAnd-main/configure  ( Ant, Properties, build.version=${GIT_BRANCH} 1.9.3#${BUILD_NUMBER}M )
+    MUST BE KEPT IN SYNC THERE MANUALLY!
     -->
-    <string name="app_version">1.9 alpha</string>
 
     <!-- Not translatable -->
     <string name="ga_api_key">UA-28342846-2</string>
@@ -14,24 +15,22 @@
     <string name="ga_debug">true</string>
     <string name="versionFeatures">+play_market +gps_status -parking_plugin -blackberry -free_version -amazon</string>
     <string name="next_tips_and_tricks_not_translate"></string>
+    <string name="openstreetmap_copyright"><a href="http://www.openstreetmap.org/copyright">&#169; OpenStreetMap</a></string>
     <string name="about_content">Data is powered by OpenStreetMaps ODbL
     
 	\n\nAll rights belong to OsmAnd app.
 
-	\n\nCopyright (C) 2010-2014 OsmAnd Authors :
-	\n\tVictor Shcherb - all parts of the project, originator
-	\n\tAlexey Pelykh - rendering and core parts
-	\n\tHardy Mueller - main parts of the project, mostly rendering, UI interaction design
-
+	\n\nCopyright &#169; 2010-2014 OsmAnd
 	\n\nCredits to all major Contributors/Developers :
-	\n\tVictor Shcherb - project lead
-	\n\tPavol Zibrita - first contributor and developer of some utilities
+	\n\tVictor Shcherb - project lead.
+	\n\tDr. Hardy Mueller - map appearance concept and base renderers, international consistency and testing, usability, app scoping, concepts, documentation, wiki, market research.
+	\n\tAlexey Pelykh - C++ developer, created native library and made application much snappier.
+	\n\tLeonid (xmd5a) - co-author of main OsmAnd rendering, author of UniRS, LightRS styles.
 	\n\tDusan Kazik - one of the first contributors
 	\n\tAndre Van Atten - project supporter, active forum participant, one of the first users.
-	\n\tDr. Hardy Mueller - map appearance concept and base renderers, international consistency and testing, usability, app scoping, concepts, documentation, wiki, market research.
 	\n\tYvecai - main contributor to Contour Lines and Hillshade maps
-	\n\tAlexey Pelykh - C++ developer, created native library and made application much snappier.
 	\n\tMax (Zahnstocher) - Java contributor, active forum participant.
+	\n\tPavol Zibrita - first contributor and developer of some utilities
 	\n\tHarry van der Wolf - contributor (contribute to country boundaries + configuration file + address files and else), active forum participant.
     </string>
 </resources>
