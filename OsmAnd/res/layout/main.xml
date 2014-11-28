@@ -12,9 +12,9 @@
         android:orientation="vertical">
 
         <ViewStub
-            android:id="@+id/glSurfaceStub"
-            android:inflatedId="@+id/glSurfaceView"
-            android:layout="@layout/gl_surface"
+            android:id="@+id/atlasMapRendererViewStub"
+            android:inflatedId="@+id/atlasMapRendererView"
+            android:layout="@layout/atlas_map_renderer_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

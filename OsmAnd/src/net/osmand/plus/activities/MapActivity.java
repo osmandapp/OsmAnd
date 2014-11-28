@@ -15,6 +15,7 @@ import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapAccessibilityActions;
+import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
@@ -46,7 +47,7 @@ import net.osmand.plus.views.OsmAndMapLayersView;
 import net.osmand.plus.views.OsmAndMapSurfaceView;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.corenative.NativeQtLibrary;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import android.app.Dialog;
@@ -91,7 +92,7 @@ public class MapActivity extends AccessibleActivity implements
 	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
-	private GLSurfaceView glSurfaceView;
+	private AtlasMapRendererView atlasMapRendererView;
 	
 	private MapActivityActions mapActions;
 	private MapActivityLayers mapLayers;
@@ -150,14 +151,16 @@ public class MapActivity extends AccessibleActivity implements
 		app.checkApplicationIsBeingInitialized(this, startProgressDialog);
 		parseLaunchIntentLocation();
 		
-		if(settings.USE_NATIVE_RENDER.get() && NativeQtLibrary.isInit()) {
-			ViewStub stub = (ViewStub) findViewById(R.id.glSurfaceStub);
-			glSurfaceView = (GLSurfaceView) stub.inflate();
+		if(settings.USE_NATIVE_RENDER.get() && NativeCoreContext.isInit()) {
+			ViewStub stub = (ViewStub) findViewById(R.id.atlasMapRendererViewStub);
+			atlasMapRendererView = (AtlasMapRendererView) stub.inflate();
 			OsmAndMapLayersView ml = (OsmAndMapLayersView) findViewById(R.id.MapLayersView);
 			ml.setVisibility(View.VISIBLE);
-			NativeQtLibrary.initView(glSurfaceView);
+			atlasMapRendererView.setAzimuth(0);
+			atlasMapRendererView.setElevationAngle(90);
+			NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
 			mapView = ml.getMapView();
-			mapView.setMapRender(NativeQtLibrary.getMapRenderer());
+			mapView.setMapRender(atlasMapRendererView);
 		} else {
 			OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) findViewById(R.id.MapView);
 			surf.setVisibility(View.VISIBLE);
@@ -438,8 +441,8 @@ public class MapActivity extends AccessibleActivity implements
 
 		OsmandPlugin.onMapActivityResume(this);
 		mapView.refreshMap(true);
-		if(glSurfaceView != null) {
-			glSurfaceView.onResume();
+		if(atlasMapRendererView != null) {
+			atlasMapRendererView.handleOnResume();
 		}
 	}
 
@@ -607,6 +610,9 @@ public class MapActivity extends AccessibleActivity implements
 		mapViewTrackingUtilities.setMapView(null);
 		cancelNotification();
 		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
+		if(atlasMapRendererView != null) {
+			atlasMapRendererView.handleOnDestroy();
+		}
 	}
 
 	private void cancelNotification() {
@@ -653,8 +659,8 @@ public class MapActivity extends AccessibleActivity implements
 		app.getResourceManager().interruptRendering();
 		app.getResourceManager().setBusyIndicator(null);
 		OsmandPlugin.onMapActivityPause(this);
-		if(glSurfaceView != null) {
-			glSurfaceView.onPause();
+		if(atlasMapRendererView != null) {
+			atlasMapRendererView.handleOnPause();
 		}
 	}
 

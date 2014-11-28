@@ -33,7 +33,7 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.sherpafy.SherpafyCustomization;
-import net.osmand.plus.views.corenative.NativeQtLibrary;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;
@@ -558,7 +558,7 @@ public class OsmandApplication extends Application {
 				if (osmandSettings.USE_NATIVE_RENDER.get()) {
 					if (!osmandSettings.CPP_RENDER_FAILED.get()) {
 						osmandSettings.CPP_RENDER_FAILED.set(true);
-						boolean success = NativeQtLibrary.tryCatchInit(this);
+						boolean success = NativeCoreContext.tryCatchInit(this);
 						if (success) {
 							osmandSettings.CPP_RENDER_FAILED.set(false);
 						}

@@ -1,5 +1,6 @@
 package net.osmand.plus.render;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.IMapRenderer;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.QuadPointDouble;
@@ -89,7 +90,7 @@ public class MapVectorLayer extends BaseMapLayer {
 			tileLayer.drawTileMap(canvas, tilesRect);
 			resourceManager.getRenderer().interruptLoadingMap();
 		} else {
-			final IMapRenderer mapRenderer = view.getMapRenderer();
+			final MapRendererView mapRenderer = view.getMapRenderer();
 			if (mapRenderer != null) {
 				// opengl renderer
 				mapRenderer.setTarget(new PointI(tilesRect.getCenter31X(), tilesRect.getCenter31Y()));
