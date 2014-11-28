@@ -20,9 +20,17 @@
 				  android:textSize="14sp"
 				  android:textColor="@color/dashboard_black"/>
 		<TextView android:id="@+id/update_count"
+				  android:layout_marginLeft="2dp"
 				  android:layout_width="wrap_content"
 				  android:textColor="@color/dashboard_blue"
 				  android:layout_height="wrap_content"/>
+		<ProgressBar android:id="@+id/main_progress"
+					 android:visibility="visible"
+					 android:layout_marginLeft="2dp"
+					 android:indeterminate="true"
+					 android:indeterminateOnly="true"
+					 android:layout_width="wrap_content"
+					 android:layout_height="wrap_content"/>
 		<View android:layout_width="0dp"
 			  android:layout_weight="1"
 			  android:layout_height="wrap_content"/>
