@@ -135,7 +135,6 @@ public class BinaryRoutePlanner {
 			checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() >= 0, graphDirectSegments, start, visitedDirectSegments,
 					"Route is not found from selected start point.");
 			if (ctx.planRouteIn2Directions()) {
-				if(!graphDirectSegments.isEmpty() && !graphReverseSegments.isEmpty())
 				forwardSearch = (nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) < 0);
 //				if (graphDirectSegments.size() * 2 > graphReverseSegments.size()) {
 //					forwardSearch = false;
