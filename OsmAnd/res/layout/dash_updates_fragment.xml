@@ -25,6 +25,7 @@
 				  android:textColor="@color/dashboard_blue"
 				  android:layout_height="wrap_content"/>
 		<ProgressBar android:id="@+id/main_progress"
+					 android:visibility="visible"
 					 android:layout_marginLeft="2dp"
 					 android:indeterminate="true"
 					 android:indeterminateOnly="true"
