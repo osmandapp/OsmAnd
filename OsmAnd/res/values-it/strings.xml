@@ -792,9 +792,9 @@
 		\n\t- Il rendering delle mappe è ora più veloce e preciso (la gran parte delle linee costiere e le zone allagate sono state sistemate).
 		\n\t- Devi scaricare dati offline completamente nuovi (i vecchi non saranno più supportati)
 		\n\t- *Calcolo dei percorsi offline*
-		\n\t	- Il calcolo dei percorsi offline diventa più solido
+		\n\t- Il calcolo dei percorsi offline diventa più solido
 		\n\t- *Miglioramento usabilità e UI*
-		\n\t	- Miglioramenti in svariate aree		
+		\n\t- Miglioramenti in svariate aree		
 	</string>
   <string name="osm_editing_plugin_description">Visualizza le impostazioni necessarie per contributi a OSM come la raccolta/modifica dei PDI di OSM, aprire/commentare errori di OSM e inviare file GPX registrati (richiede le credenziali di OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
@@ -1964,7 +1964,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="speak_poi">Annuncia PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
     <string name="flat_list_waypoints">Tutto</string>
-    <string name="record_plugin_description">Registra le tue tracce con il pulsante dedicato nello schermo della mappa. Mostra le impostazioni per la registrazione dei tuoi viaggi in file GPX localmente o online utilizzando un servizio web.</string>
+    <string name="record_plugin_description">Registra le tue tracce con il pulsante dedicato nello schermo della mappa. Mostra le impostazioni per la registrazione dei vostri viaggi in file GPX localmente o online utilizzando un servizio web.</string>
     <string name="record_plugin_name">Registra i tuoi viaggi</string>
     <string name="int_hour">h</string>
     <string name="duration">Durata</string>
@@ -2030,7 +2030,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="show_all">MOSTRA TUTTO</string>
 	<string name="coordinates">Coordinate</string>
 	<string name="home_button">Casa</string>
-    <string name="map_update">Mappe</string>
+    <string name="map_update">Mappe </string>
 	<string name="search_for">Cerca</string>
 	<string name="show_map">MOSTRA LA MAPPA</string>
 	</resources>

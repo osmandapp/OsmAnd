@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+﻿<?xml version="1.0" encoding="utf-8"?>
+=======
 <?xml version='1.0' encoding='utf-8'?>
+>>>>>>> f2ef85bf407bf1d001f7de1502c7d4b37955eb8d
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
