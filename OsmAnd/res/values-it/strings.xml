@@ -792,9 +792,9 @@
 		\n\t- Il rendering delle mappe è ora più veloce e preciso (la gran parte delle linee costiere e le zone allagate sono state sistemate).
 		\n\t- Devi scaricare dati offline completamente nuovi (i vecchi non saranno più supportati)
 		\n\t- *Calcolo dei percorsi offline*
-		\n\t	- Il calcolo dei percorsi offline diventa più solido
+		\n\t- Il calcolo dei percorsi offline diventa più solido
 		\n\t- *Miglioramento usabilità e UI*
-		\n\t	- Miglioramenti in svariate aree		
+		\n\t- Miglioramenti in svariate aree		
 	</string>
   <string name="osm_editing_plugin_description">Visualizza le impostazioni necessarie per contributi a OSM come la raccolta/modifica dei PDI di OSM, aprire/commentare errori di OSM e inviare file GPX registrati (richiede le credenziali di OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
