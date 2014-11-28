@@ -385,4 +385,21 @@
 	<string name="poi_works">Usine</string>
 	<string name="poi_wreck">Épave</string>
 	<string name="poi_zoo">Zoo</string>
-</resources>
+<string name="poi_shop_tea">Salon de thé</string>
+	<string name="poi_art_shop">Boutique d\'Art</string>
+	<string name="poi_carpet_shop">Magasin de tapis</string>
+	<string name="poi_computer_shop">Boutique informatique</string>
+	<string name="poi_dive_shop">Équipement de plongée sous-marine</string>
+	<string name="poi_ship_chandler">Magasin d\'accastillage</string>
+	<string name="poi_gate">Pont</string>
+	<string name="poi_traffic_signals">Feux tricolores</string>
+
+	<string name="poi_service_tyres">Pneus</string>
+	<string name="poi_public_transport_platform_bus">Arrêt de bus</string>
+	<string name="poi_subway_station">Station de métro</string>
+	<string name="poi_tunnel">Tunnel</string>
+	<string name="poi_register_office">Bureau d\'état civil</string>
+	<string name="poi_customs">Douanes</string>
+	<string name="poi_healthcare_centre">Centre médical</string>
+	<string name="poi_speech_therapist">Orthophoniste</string>
+	</resources>
