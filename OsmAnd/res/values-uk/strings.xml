@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
 		\n\t* Більш точні маршрути (трохи повільніше)
 		\n\t* Розумний і швидкий перерахунок маршруту
@@ -1145,7 +1145,7 @@
 \nЗахід: %2$s</string>
 	<string name="day_night_info">Схід/Захід</string>
 	<string name="map_widget_day_night">Денний/нічний режим</string>
-	<string name="map_widget_vector_attributes">Налаштування рендерингу:</string>
+	<string name="map_widget_vector_attributes">Налаштування візуалізації</string>
 	<string name="map_widget_renderer">Стиль мапи (векторн.)</string>
 	<string name="layer_map_appearance">Налаштування екрану</string>
 	<string name="show_lanes">Відображати смуги руху</string>
@@ -1927,7 +1927,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_specify_tracker_id">Будь ласка, вкажіть id</string>
     <string name="continue_navigation">Продовжити навігацію</string>
     <string name="pause_navigation">Призупинити навігацію</string>
-    <string name="rendering_attr_subwayMode_name">Режим метро</string>
+    <string name="rendering_attr_subwayMode_name">Маршрути метро</string>
  	<string name="rendering_attr_alpineHiking_name">Піший гірський туризм (шкала SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Візуалізація шляху за шкалою SAC</string>
     <string name="rendering_attr_osmcTraces_name">Шар символів для пішого туризму</string>
@@ -1951,7 +1951,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="save_track_to_gpx_globally">Писати трек у файл GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Загальний запис місцезнаходження в файл GPX можна ввімкнути або вимкнути кнопкою запису GPX на екрані з мапою</string>
 	<string name="save_track_interval_globally">Інтервал записування</string>
-	<string name="rendering_attr_publicTransportMode_name">Режим громадського транспорту</string>
+	<string name="rendering_attr_publicTransportMode_name">Маршрути автобусів, тролейбусів та маршруток</string>
 	<string name="record_plugin_name">Запис власних подорожей</string>
     <string name="int_hour">г</string>
     <string name="duration">Тривалісьть</string>
