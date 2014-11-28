@@ -409,31 +409,31 @@ public class RouteResultPreparation {
 				}
 			}
 
-			if (currentSegment.getTurnType() == null || currentSegment.getTurnType().getLanes() == null
-					|| nextSegment == null) {
+			TurnType currentTurn = currentSegment.getTurnType();
+			TurnType nextTurn = nextSegment.getTurnType();
+
+			if (currentTurn == null || currentTurn.getLanes() == null || nextTurn == null || nextTurn.getLanes() == null) {
 				continue;
 			}
 
 			// Only allow slight turns that are nearby to be merged.
-			if (currentSegment.getDistance() < 60 && nextSegment.getTurnType().getLanes().length <= currentSegment.getTurnType().getLanes().length
-					&& (currentSegment.getTurnType().getValue() == TurnType.C
-					 || currentSegment.getTurnType().getValue() == TurnType.TSLL
-					 || currentSegment.getTurnType().getValue() == TurnType.TSLR
-					 || currentSegment.getTurnType().getValue() == TurnType.KL
-					 || currentSegment.getTurnType().getValue() == TurnType.KR)) {
+			if (currentSegment.getDistance() < 60 && nextTurn.getLanes().length <= currentTurn.getLanes().length
+					&& TurnType.isSlightTurn(currentTurn.getValue())) {
 				mergeTurnLanes(leftside, currentSegment, nextSegment);
 			}
 		}
 	}
 
 	private void mergeTurnLanes(boolean leftSide, RouteSegmentResult currentSegment, RouteSegmentResult nextSegment) {
-		boolean isUsingTurnLanes = TurnType.getPrimaryTurn(currentSegment.getTurnType().getLanes()[0]) != 0
-			&& TurnType.getPrimaryTurn(nextSegment.getTurnType().getLanes()[0]) != 0;
+		TurnType currentTurn = currentSegment.getTurnType();
+		TurnType nextTurn = nextSegment.getTurnType();
+		boolean isUsingTurnLanes = TurnType.getPrimaryTurn(currentTurn.getLanes()[0]) != 0
+			&& TurnType.getPrimaryTurn(nextTurn.getLanes()[0]) != 0;
 		if (isUsingTurnLanes) {
-			int[] lanes = new int[currentSegment.getTurnType().getLanes().length];
+			int[] lanes = new int[currentTurn.getLanes().length];
 			// Unset the allowed lane bit
 			for (int i = 0; i < lanes.length; i++) {
-				lanes[i] = currentSegment.getTurnType().getLanes()[i] & ~1;
+				lanes[i] = currentTurn.getLanes()[i] & ~1;
 			}
 
 			// Find the first lane that matches (based on the turn being taken), and how many lanes match
@@ -441,9 +441,9 @@ public class RouteResultPreparation {
 			int maxMatchedLanes = 0;
 			for (int i = 0; i < lanes.length; i++) {
 				int matchedLanes = 0;
-				for (int j = 0; j < nextSegment.getTurnType().getLanes().length - i; j++) {
-					if (TurnType.getPrimaryTurn(nextSegment.getTurnType().getLanes()[j])
-                            == TurnType.getPrimaryTurn(currentSegment.getTurnType().getLanes()[i + j])) {
+				for (int j = 0; j < nextTurn.getLanes().length - i; j++) {
+					if (TurnType.getPrimaryTurn(nextTurn.getLanes()[j])
+                            == TurnType.getPrimaryTurn(currentTurn.getLanes()[i + j])) {
 						matchedLanes++;
 					} else {
 						break;
@@ -459,16 +459,15 @@ public class RouteResultPreparation {
 			}
 
 			// Copy the allowed bit from the next segment's lanes to the current segment's matching lanes
-			for (int i = matchingIndex; i - matchingIndex < nextSegment.getTurnType().getLanes().length; i++) {
-				lanes[i] |= nextSegment.getTurnType().getLanes()[i - matchingIndex] & 1;
+			for (int i = matchingIndex; i - matchingIndex < nextTurn.getLanes().length; i++) {
+				lanes[i] |= nextTurn.getLanes()[i - matchingIndex] & 1;
 			}
-			TurnType t = currentSegment.getTurnType();
-			t.setLanes(lanes);
+			currentTurn.setLanes(lanes);
 			int turn = inferTurnFromLanes(lanes);
-			if (turn != 0 && turn != t.getValue()) {
+			if (turn != 0 && turn != currentTurn.getValue()) {
 				TurnType newTurnType = TurnType.valueOf(turn, leftSide);
 				newTurnType.setLanes(lanes);
-				newTurnType.setSkipToSpeak(t.isSkipToSpeak());
+				newTurnType.setSkipToSpeak(currentTurn.isSkipToSpeak());
 				currentSegment.setTurnType(newTurnType);
 			}
 		}
