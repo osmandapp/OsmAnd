@@ -169,7 +169,7 @@
   <string name="show_more_map_detail_descr">Visualizza qualche dettaglio delle mappe vettoriali (strade ecc.) anche agli zoom piu\' bassi</string>
   <string name="favourites_delete_multiple_succesful">Punto/i preferito/i eliminati.</string>
   <string name="favorite_delete_multiple">Stai eliminando %1$d preferito/i e %2$d gruppo/i preferito/i. Sicuro?</string>
-  <string name="favorite_home_category">Casa</string>
+  <string name="favorite_home_category">Finestra iniziale</string>
   <string name="favorite_friends_category">Amici</string>
   <string name="favorite_places_category">Luoghi</string>
   <string name="favorite_default_category">Altro</string>
