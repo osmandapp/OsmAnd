@@ -1820,4 +1820,6 @@
     <string name="advanced_settings">Расширенные</string>
 	<string name="map_update">Карты</string>
 	<string name="coordinates">Координаты</string>
+	<string name="home_button">Дом</string>
+    <string name="search_for">Поиск</string>
 	</resources>
