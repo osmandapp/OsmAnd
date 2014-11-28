@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<resources>
+	<string name="poi_airport">空港</string>
+	<string name="poi_bank">銀行</string>
+	<string name="poi_bus_stop">バス停</string>
+	<string name="poi_car_rental">レンタカー</string>
+	<string name="poi_car_wash">洗車</string>
+	<string name="poi_casino">賭場</string>
+	<string name="poi_city">市</string>
+	<string name="poi_college">大学</string>
+	<string name="poi_dentist">歯科医</string>
+	<string name="poi_embassy">大使館</string>
+	<string name="poi_hotel">ホテル</string>
+	<string name="poi_kindergarten">幼稚園</string>
+	<string name="poi_library">図書館</string>
+	<string name="poi_pub">パブ（立ち吞み屋）</string>
+	<string name="poi_sauna">サウナ</string>
+	<string name="poi_school">学校</string>
+	<string name="poi_general_shop">店舗</string>
+	<string name="poi_taxi">タクシー乗り場</string>
+	<string name="poi_theme_park">テーマパーク</string>
+	<string name="poi_university">大学</string>
+	<string name="poi_zoo">動物園</string>
+</resources>
