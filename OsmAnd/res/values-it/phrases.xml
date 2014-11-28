@@ -1,3 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="poi_mall">Centro commerciale</string>
+	<string name="poi_seafood">Pescheria</string>
+	<string name="poi_supermarket">Supermercato</string>
+	<string name="poi_bicycle_shop">Negozio di biciclette</string>
+	<string name="poi_vending_machine">Distributore automatico</string>
+
+	<string name="poi_bookshop">Libreria</string>
 	</resources>
