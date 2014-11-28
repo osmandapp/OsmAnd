@@ -625,7 +625,7 @@
   <string name="voice">Balsas</string>
   <string name="no_vector_map_loaded">Vektoriniai žemėlapiai neįkelti</string>
   <string name="map_route_by_gpx">Vykdyti navigaciją naudojant GPX</string>
-  <string name="gpx_files_not_found">tracks segtuve nerasta jokių GPX failų</string>
+  <string name="gpx_files_not_found">Tracks segtuve nerasta jokių GPX failų</string>
   <string name="layer_gpx_layer">GPX maršrutas…</string>
   <string name="error_reading_gpx">Įvyko klaida skaitant GPX duomenis</string>
   <string name="vector_data">Parsiųsti vektoriniai žemėlapiai</string>
@@ -1846,4 +1846,10 @@
     <string name="osmo_use_https">Naudoti https</string>
 	<string name="osmo_use_https_descr">Prie serverio jungtis saugiu ryšiu</string>
     <string name="advanced_settings">Plačiau</string>
+	<string name="home_button">Namai</string>
+    <string name="map_update">Žemėlapiai</string>
+	<string name="search_for">Ieškoti (ko)</string>
+	<string name="show_map">RODYTI ŽEMĖLAPĮ</string>
+	<string name="show_all">RODYTI VISKĄ</string>
+	<string name="coordinates">Koordinatės</string>
 	</resources>
