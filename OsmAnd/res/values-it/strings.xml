@@ -195,7 +195,7 @@
   
   <string name="local_index_poi_data">Dati PDI</string>
   <string name="local_index_address_data">Dati indirizzi</string>
-  <string name="local_index_transport_data">Dati trasporti</string>
+  <string name="local_index_transport_data">Dati trasporti pubblici</string>
   <string name="local_index_map_data">Dati mappa</string>
   
   <string name="local_indexes_cat_backup">Disattivato</string>
@@ -346,7 +346,7 @@
   <string name="indexing_address">Indicizzazione indirizzi…</string>
   <string name="indexing_map">Indicizzazione mappa…</string>
   <string name="indexing_poi">Indicizzazione PDI…</string>
-  <string name="indexing_transport">Indicizzazione trasporti…</string>
+  <string name="indexing_transport">Indicizzazione trasporti pubblici…</string>
   <string name="input_output_error">Errore di I/O</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
@@ -450,7 +450,7 @@
   <string name="none_region_found">Non è stata trovato nessuna dato per la regione nella scheda SD. Scarica una regione da internet.</string>
   <string name="poi_namefinder_query_empty">Inserisci i parametri di ricerca per trovare un PDI</string>
   <string name="any_poi">Tutti</string>
-  <string name="layer_transport_route">Percorso di trasporto pubblico</string>
+  <string name="layer_transport_route">Percorso su trasporto pubblico</string>
   <string name="thanks_yandex_traffic">Grazie a Yandex per le informazioni sul traffico.</string>
   <string name="layer_yandex_traffic">Yandex (traffico)</string>
   <string name="layer_route">Percorso</string>
@@ -2003,7 +2003,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="logged_as">Registrato come %1$s</string>
 	<string name="rendering_category_routes">Percorsi</string>
     <string name="rendering_category_details">Dettagli</string>
-    <string name="rendering_category_transport">Trasporto</string>
+    <string name="rendering_category_transport">Trasporto pubblico</string>
     <string name="rendering_category_others">Altri attributi della mappa</string>
     <string name="map_widget_right">Pannello di destra</string>
 	<string name="map_widget_left">Pannello di sinistra</string>
