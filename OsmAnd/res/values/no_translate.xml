@@ -14,12 +14,12 @@
     <string name="ga_debug">true</string>
     <string name="versionFeatures">+play_market +gps_status -parking_plugin -blackberry -free_version -amazon</string>
     <string name="next_tips_and_tricks_not_translate"></string>
-    <string name="openstreetmap_copyright"><a href="http://www.openstreetmap.org/copyright">©OpenStreetMap</a></string>
+    <string name="openstreetmap_copyright"><a href="http://www.openstreetmap.org/copyright">&copy;OpenStreetMap</a></string>
     <string name="about_content">Data is powered by OpenStreetMaps ODbL
     
 	\n\nAll rights belong to OsmAnd app.
 
-	\n\nCopyright © 2010-2014 OsmAnd Authors :
+	\n\nCopyright &copy; 2010-2014 OsmAnd Authors :
 	\n\tVictor Shcherb - all parts of the project, originator
 	\n\tAlexey Pelykh - rendering and core parts
 	\n\tHardy Mueller - main parts of the project, mostly rendering, UI interaction design

@@ -113,7 +113,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 		final TextView textVersionView = (TextView) findViewById(R.id.Copyright);
 		final Calendar inst = Calendar.getInstance();
 		inst.setTime(new Date());
-		final String textVersion = "©OsmAnd " + inst.get(Calendar.YEAR);
+		final String textVersion = "&copy;OsmAnd " + inst.get(Calendar.YEAR);
 		textVersionView.setText(textVersion);
 		final SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
 		textVersionView.setOnClickListener(new OnClickListener(){
