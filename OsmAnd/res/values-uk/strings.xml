@@ -1086,7 +1086,7 @@
 \n\nДля кращого обчислення висоти використовується проекція EGM96.
 \n\nOsmAnd покаже висоту над рівнем моря в EGM96 після завантаження файлу \'World Altitide Correction\' (WW15MGH.DAC), використовуючи \'Налаштування\'-&gt;\'Управління мапами\' (http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="monitoring_control_start">старт</string>
-    <string name="background_service_is_enabled_question">Фоновий режим запущений. Ви хочете його відключити?</string>
+    <string name="background_service_is_enabled_question">Фоновий режим запущений. Ви хочете зупинити його роботу також?</string>
     <string name="close_changeset">Закрити набір змін</string>
 	<string name="zxing_barcode_scanner_not_found">Програму \'Сканер штрих-кодів\' не знайдено. Шукати в Market?</string>
 	<string name="rendering_attr_roadColors_description">Виберіть кольорову схему доріг:</string>
@@ -1652,7 +1652,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="stop_navigation_service">Зупинити</string>
 	<string name="enable_sleep_mode">Ввімкнути режим сну GPS</string>
 	<string name="gps_wake_up_timer">Інтервал вмикання GPS</string>
-	<string name="sleep_mode_stop_dialog">Збудити зі сну GPS?</string>
+	<string name="sleep_mode_stop_dialog">Зупинити фоновий режим GPS?</string>
 	<string name="map_preferred_locale_descr">Бажана мова для етикеток на мапі (якщо вона недоступна будуть показані позначки англійською чи місцевою мовами)</string>
     <string name="map_preferred_locale">Бажана мова мапи</string>
     <string name="local_map_names">Назви місцевою мовою</string>
