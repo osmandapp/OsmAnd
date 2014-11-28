@@ -1964,7 +1964,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="speak_poi">Annuncia PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
     <string name="flat_list_waypoints">Tutto</string>
-    <string name="record_plugin_description">Registrate le vostre tracce con il pulsante dedicato nello schermo della mappa. Mostra le impostazioni per la registrazione dei vostri viaggi in file GPX localmente o online utilizzando un servizio web.</string>
+    <string name="record_plugin_description">Registra le tue tracce con il pulsante dedicato nello schermo della mappa. Mostra le impostazioni per la registrazione dei tuoi viaggi in file GPX localmente o online utilizzando un servizio web.</string>
     <string name="record_plugin_name">Registra i tuoi viaggi</string>
     <string name="int_hour">h</string>
     <string name="duration">Durata</string>
