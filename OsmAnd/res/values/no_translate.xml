@@ -2,12 +2,11 @@
 <resources>
     <string name="app_name_ver">OsmAnd 1.9.3</string>
     <string name="app_name">OsmAnd~</string>
+    <string name="app_version">1.9.3a</string>
     <!--
-    When changing the following app_version string please remember to keep the version prefix for our dev apks in sync at
-    http://builder.osmand.net:8080/view/OsmAnd%20Builds/job/OsmAnd-main-default/configure  ( Ant, Properties, build.version=${GIT_BRANCH} 1.9.3#${BUILD_NUMBER}D )
-    http://builder.osmand.net:8080/view/OsmAnd%20Builds/job/OsmAnd-main/configure  ( Ant, Properties, build.version=${GIT_BRANCH} 1.9.3#${BUILD_NUMBER}D )
+    Note: The above APK base version display is provided as the build number prefix to our dev APKs via the builder configs, e.g.
+    http://builder.osmand.net:8080/view/OsmAnd%20Builds/job/OsmAnd-main-default/configure  ( Ant, Properties, build.version=${GIT_BRANCH} $APK_VERSION#${BUILD_NUMBER}D )
     -->
-    <string name="app_version">1.9.3</string>
 
     <!-- Not translatable -->
     <string name="ga_api_key">UA-28342846-2</string>
