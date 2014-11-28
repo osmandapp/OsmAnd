@@ -404,4 +404,7 @@
 	<string name="poi_speech_therapist">Orthophoniste</string>
 	<string name="poi_advertising_agency">Agence de publicité</string>
 	<string name="poi_chess">Échecs</string>
+	<string name="poi_palaeontological_site">Site paléontologique</string>
+
+	<string name="poi_shop_farm">Commerce à la ferme</string>
 	</resources>
