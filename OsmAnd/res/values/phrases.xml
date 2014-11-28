@@ -182,6 +182,7 @@
 
 	<string name="poi_speed_camera">Speed camera</string>
 	<string name="poi_turning_circle">Turning circle</string>
+	<string name="poi_motorway_junction">Motorway junction</string>
 
 	<string name="poi_water_well">Water well</string>
 	<string name="poi_standpipe">Standpipe</string>
@@ -211,6 +212,7 @@
 	<string name="poi_waste_disposal">Waste disposal</string>
 	<string name="poi_waste_basket">Waste basket</string>
 
+	<string name="poi_pier">Pier</string>
 	<string name="poi_surveillance">Surveillance</string>
 	<string name="poi_construction">Construction</string>
 	<string name="poi_works">Works</string>
@@ -299,6 +301,7 @@
 	<string name="poi_golf_course">Golf course</string>
 	<string name="poi_ice_rink">Ice rink</string>
 	<string name="poi_pitch">Pitch</string>
+	<string name="poi_leisure_track">Sports track</string>
 	<string name="poi_running_track">Running track</string>
 	<string name="poi_bicycle_track">Bicycle track</string>
 	<string name="poi_horse_track">Horse track</string>
@@ -545,8 +548,12 @@
 	<string name="poi_saddle">Saddle</string>
 	<string name="poi_volcano">Volcano</string>
 	<string name="poi_crater">Crater</string>
+	<string name="poi_ridge">Ridge</string>
+	<string name="poi_glacier">Glacier</string>
 	<string name="poi_sinkhole">Sinkhole</string>
 	<string name="poi_waterfall">Waterfall</string>
+	<string name="poi_river">River</string>
+	<string name="poi_stream">Stream</string>
 	<string name="poi_rapids">Rapids</string>
 	<string name="poi_stone">Remarkable stone</string>
 	<string name="poi_cape">Cape</string>
@@ -602,6 +609,7 @@
 	<string name="poi_seamark_rock">Rock, seamark</string>
 	<string name="poi_seamark_wreck">Wreck, seamark</string>
 
+	<string name="poi_military">Military zone</string>
 	<string name="poi_military_airfield">Military airfield</string>
 	<string name="poi_military_bunker">Military bunker</string>
 	<string name="poi_military_barracks">Barracks</string>
