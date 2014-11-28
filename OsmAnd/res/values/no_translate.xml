@@ -20,20 +20,17 @@
     
 	\n\nAll rights belong to OsmAnd app.
 
-	\n\nCopyright &#169; 2010-2014 OsmAnd Authors :
-	\n\tVictor Shcherb - all parts of the project, originator
-	\n\tAlexey Pelykh - rendering and core parts
-	\n\tHardy Mueller - main parts of the project, mostly rendering, UI interaction design
-
+	\n\nCopyright &#169; 2010-2014 OsmAnd
 	\n\nCredits to all major Contributors/Developers :
-	\n\tVictor Shcherb - project lead
-	\n\tPavol Zibrita - first contributor and developer of some utilities
+	\n\tVictor Shcherb - project lead.
+	\n\tDr. Hardy Mueller - map appearance concept and base renderers, international consistency and testing, usability, app scoping, concepts, documentation, wiki, market research.
+	\n\tAlexey Pelykh - C++ developer, created native library and made application much snappier.
+	\n\tLeonid (xmd5a) - co-author of main OsmAnd rendering, author of UniRS, LightRS styles.
 	\n\tDusan Kazik - one of the first contributors
 	\n\tAndre Van Atten - project supporter, active forum participant, one of the first users.
-	\n\tDr. Hardy Mueller - map appearance concept and base renderers, international consistency and testing, usability, app scoping, concepts, documentation, wiki, market research.
 	\n\tYvecai - main contributor to Contour Lines and Hillshade maps
-	\n\tAlexey Pelykh - C++ developer, created native library and made application much snappier.
 	\n\tMax (Zahnstocher) - Java contributor, active forum participant.
+	\n\tPavol Zibrita - first contributor and developer of some utilities
 	\n\tHarry van der Wolf - contributor (contribute to country boundaries + configuration file + address files and else), active forum participant.
     </string>
 </resources>

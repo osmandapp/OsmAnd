@@ -1955,4 +1955,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="advanced_settings">Дадатковыя</string>
 	<string name="osmo_use_https_descr">Выкарыстоўваць бясьпечнае злучэньне з серверам</string>
     <string name="osmo_use_https">Выкарыстоўваць HTTPS</string>
+	<string name="home_button">Дамоў</string>
+    <string name="map_update">Мапы</string>
+	<string name="search_for">Шукаць</string>
+	<string name="show_map">ПАКАЗАЦЬ МАПУ</string>
+	<string name="show_all">ПАКАЗАЦЬ УСЁ</string>
+	<string name="coordinates">Каардынаты</string>
 	</resources>

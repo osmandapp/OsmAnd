@@ -1846,7 +1846,7 @@
     <string name="osmo_use_https">Naudoti https</string>
 	<string name="osmo_use_https_descr">Prie serverio jungtis saugiu ryšiu</string>
     <string name="advanced_settings">Plačiau</string>
-	<string name="home_button">Pradžia</string>
+	<string name="home_button">Namai</string>
     <string name="map_update">Žemėlapiai</string>
 	<string name="search_for">Ieškoti (ko)</string>
 	<string name="show_map">RODYTI ŽEMĖLAPĮ</string>
