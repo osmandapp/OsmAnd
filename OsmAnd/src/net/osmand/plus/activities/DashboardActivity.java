@@ -2,16 +2,20 @@ package net.osmand.plus.activities;
 
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
+import android.support.v4.app.Fragment;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.dashboard.DashFavoritesFragment;
 import net.osmand.plus.dashboard.DashMapFragment;
 import net.osmand.plus.dashboard.DashPluginsFragment;
@@ -19,6 +23,7 @@ import net.osmand.plus.dashboard.DashSearchFragment;
 import net.osmand.plus.dashboard.DashUpdatesFragment;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.sherpafy.TourViewActivity;
 import android.app.Activity;
@@ -382,7 +387,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 		menu.add(0, 1, 0, R.string.settings).setIcon(R.drawable.ic_ac_settings)
 				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 		menu.add(0, 2, 0, R.string.exit_Button).setIcon(R.drawable.ic_ac_close)
-				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 		return true;
 	}
 
@@ -459,5 +464,30 @@ public class DashboardActivity extends BaseDownloadActivity {
 		}, 0, content.length(), 0);
 		textVersionView.setText(content);
 		textVersionView.setMovementMethod(LinkMovementMethod.getInstance());
+	}
+
+	@Override
+	public void updateProgress(boolean updateOnlyProgress) {
+		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask = BaseDownloadActivity.downloadListIndexThread.getCurrentRunningTask();
+		for(WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if(f instanceof DashUpdatesFragment) {
+				if(!f.isDetached()) {
+					((DashUpdatesFragment) f).updateProgress(basicProgressAsyncTask, updateOnlyProgress);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void updateDownloadList(List<IndexItem> list){
+		for(WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if(f instanceof DashUpdatesFragment) {
+				if(!f.isDetached()) {
+					((DashUpdatesFragment) f).updatedDownloadsList(list);
+				}
+			}
+		}
 	}
 }
