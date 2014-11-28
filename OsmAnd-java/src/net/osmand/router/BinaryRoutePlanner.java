@@ -28,7 +28,7 @@ public class BinaryRoutePlanner {
 	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlanner.class);
 	
 	private static final int ROUTE_POINTS = 11;
-	private static final boolean TRACE_ROUTING = true;
+	private static final boolean TRACE_ROUTING = false;
 	
 	
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
@@ -135,7 +135,6 @@ public class BinaryRoutePlanner {
 			checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() >= 0, graphDirectSegments, start, visitedDirectSegments,
 					"Route is not found from selected start point.");
 			if (ctx.planRouteIn2Directions()) {
-				if(!graphDirectSegments.isEmpty() && !graphReverseSegments.isEmpty())
 				forwardSearch = (nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) < 0);
 //				if (graphDirectSegments.size() * 2 > graphReverseSegments.size()) {
 //					forwardSearch = false;
