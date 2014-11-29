@@ -121,6 +121,8 @@ public class OsmandApplication extends Application {
 	MapActivity mapActivity;
 	DownloadActivity downloadActivity;
 	
+	// Typeface
+	
 	@Override
 	public void onCreate() {
 		long timeToStart = System.currentTimeMillis();

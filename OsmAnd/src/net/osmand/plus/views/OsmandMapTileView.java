@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityActionsProvider;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapExplorer;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.IMapRenderer;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
@@ -27,7 +27,9 @@ import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.util.MapUtils;
+
 import org.apache.commons.logging.Log;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;

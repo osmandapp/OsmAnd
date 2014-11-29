@@ -3,6 +3,7 @@ package net.osmand.plus.dashboard;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.helpers.FontCache;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -28,8 +29,7 @@ public class DashSearchFragment extends DashBaseFragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_search_fragment, container, false);
 		setupButtons(view);
-		// TODO cache typeface ?
-		Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Medium.ttf");
+		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		((TextView) view.findViewById(R.id.search_for)).setTypeface(typeface);
 		return view;
 	}

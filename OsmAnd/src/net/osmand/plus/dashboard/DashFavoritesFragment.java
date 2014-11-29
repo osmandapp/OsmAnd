@@ -21,6 +21,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_favorites_fragment, container, false);
-		Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Medium.ttf");
+		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		((TextView) view.findViewById(R.id.fav_text)).setTypeface(typeface);
 		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
 

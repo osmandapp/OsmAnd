@@ -15,6 +15,9 @@ import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.MapTextLayer;
@@ -41,22 +44,25 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 		getMyApplication().getResourceManager().getMapTileDownloader().addDownloaderCallback(this);
 	}
 
+	protected void startMapActivity() {
+		MapActivity.launchMapActivityMoveToTop(getActivity());
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_map_fragment, container, false);
 		setupMapView(view);
-		Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Medium.ttf");
+		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		((TextView) view.findViewById(R.id.map_text)).setTypeface(typeface);
 		((Button) view.findViewById(R.id.show_map)).setTypeface(typeface);
 
 		(view.findViewById(R.id.show_map)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Activity activity = getActivity();
-				OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
-				final Intent mapIndent = new Intent(activity, appCustomization.getMapActivity());
-				activity.startActivityForResult(mapIndent, 0);
+				startMapActivity();
 			}
+
+			
 		});
 
 		return view;
@@ -64,6 +70,13 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 
 	private void setupMapView(View view){
 		OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) view.findViewById(R.id.MapView);
+		surf.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startMapActivity();
+			}
+		});
 		osmandMapTileView = surf.getMapView();
 		osmandMapTileView.getView().setVisibility(View.VISIBLE);
 		osmandMapTileView.removeAllLayers();
@@ -75,10 +88,16 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 		osmandMapTileView.addLayer(mapVectorLayer, 0.5f);
 		osmandMapTileView.setMainLayer(mapVectorLayer);
 		mapVectorLayer.setVisible(true);
+		osmandMapTileView.setShowMapPosition(false);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
 		LatLon lm = getMyApplication().getSettings().getLastKnownMapLocation();
 		int zm = getMyApplication().getSettings().getLastKnownMapZoom();
 		osmandMapTileView.setLatLon(lm.getLatitude(), lm.getLongitude());
-		osmandMapTileView.setIntZoom(zm);
+		osmandMapTileView.setComplexZoom(zm, osmandMapTileView.getSettingsZoomScale());
 		osmandMapTileView.refreshMap(true);
 	}
 	

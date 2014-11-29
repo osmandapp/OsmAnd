@@ -11,6 +11,7 @@ import android.view.SurfaceView;
 public class OsmAndMapSurfaceView extends SurfaceView implements Callback {
 	
 	private OsmandMapTileView mapView;
+	private OnClickListener onClickListener;
 
 	public OsmAndMapSurfaceView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -53,6 +54,11 @@ public class OsmAndMapSurfaceView extends SurfaceView implements Callback {
 	}
 	
 	@Override
+	public void setOnClickListener(OnClickListener l) {
+		super.setOnClickListener(l);
+		this.onClickListener = l;
+	}
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		Boolean r = mapView.onKeyDown(keyCode, event);
 		if(r == null) {
@@ -63,6 +69,9 @@ public class OsmAndMapSurfaceView extends SurfaceView implements Callback {
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		if(onClickListener != null) {
+			return super.onTouchEvent(event);
+		}
 		return mapView.onTouchEvent(event);
 	}
 	

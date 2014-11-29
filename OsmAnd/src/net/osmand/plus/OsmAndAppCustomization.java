@@ -21,7 +21,6 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
-import android.view.Window;
 
 public class OsmAndAppCustomization {
 	
