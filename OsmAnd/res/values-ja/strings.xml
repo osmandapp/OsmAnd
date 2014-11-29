@@ -2104,4 +2104,10 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="anonymous_user_hint">以下は匿名ユーザーでは使用できません:↵\n- グループ作成;↵\n- サーバを利用してのグループやデバイスの同期;↵\n- 専用の場所でのグループやデバイスの管理.</string>
     <string name="anonymous_user">匿名ユーザー</string>
     <string name="logged_as">%1$sとしてログインしました</string>
+	<string name="home_button">ホーム画面</string>
+    <string name="map_update">マップ</string>
+	<string name="search_for">検索</string>
+	<string name="show_map">マップ表示</string>
+	<string name="show_all">全て表示</string>
+	<string name="coordinates">座標</string>
 	</resources>
