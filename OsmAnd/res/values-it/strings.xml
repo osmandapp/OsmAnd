@@ -1547,7 +1547,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="announce_gpx_waypoints">Annuncia i punti GPX di passaggio</string>
     <string name="osmodroid_mode_on">Ferma OsMoDroid</string>    
     <string name="osmodroid_mode_off">Avvia OsMoDroid</string>
-    <string name="driving_region_descr">Scegliete la regione di guida: USA, Europa, UK, Asia o Altre</string>
+    <string name="driving_region_descr">Scegliete la regione di guida: USA, Europa, UK, Asia o altre</string>
 	<string name="driving_region">Regione di guida</string>
 	<string name="driving_region_japan">Giappone</string>
 	<string name="driving_region_us">Stati Uniti</string>
@@ -1583,7 +1583,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     </string>
     <string name="about_version">Versione:</string>
     <string name="about_settings">Informazioni</string>
-    <string name="about_settings_descr">Informazioni versione, licenze, membri del progetto</string>
+    <string name="about_settings_descr">Informazioni versione, licenze e membri del progetto</string>
     <string name="tips_and_tricks">Aiuto</string>
     <string name="tip_map_styles">Stili mappa</string>
 	<string name="tip_map_styles_t">"OsmAnd supporta le mappe vettoriali offline con stili di visualizzazione differenti per adattarsi alle tue esigenze:
