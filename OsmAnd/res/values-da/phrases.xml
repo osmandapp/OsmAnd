@@ -24,8 +24,8 @@
         <string name="poi_art_shop">Kunsthandler</string>
         <string name="poi_baby_goods">Babyudstryr</string>
         <string name="poi_bag_shop">Tasker</string>
-        <string name="poi_bathroom_furnishing_shop">Badeværelser</string>
-        <string name="poi_bed_shop">Senge</string>
+        <string name="poi_bathroom_furnishing_shop">Badeværelsesmøbler</string>
+        <string name="poi_bed_shop">Soveværelsesmøbler</string>
         <string name="poi_boutique">Modebutik</string>
         <string name="poi_carpet_shop">Tæppeforretning</string>
         <string name="poi_chemist_shop">Materialist</string>
@@ -52,7 +52,7 @@
         <string name="poi_hardware_shop">Værktøj</string>
         <string name="poi_hearing_aids_shop">Høreapparater</string>
         <string name="poi_herbalist">Urter</string>
-        <string name="poi_hifi_shop">HiFi</string>
+        <string name="poi_hifi_shop">HiFi butik</string>
         <string name="poi_houseware_shop">Husholdningsartikler</string>
         <string name="poi_hunting_shop">Jagtudstyr</string>
         <string name="poi_interior_decoration_shop">Boligindretning</string>
@@ -70,7 +70,7 @@
         <string name="poi_pet_shop">Dyrehandel</string>
         <string name="poi_radiotechnics_shop">Radiodele</string>
         <string name="poi_second_hand">Genbrugsbutik</string>
-        <string name="poi_ship_chandler">Skibsproviantere</string>
+        <string name="poi_ship_chandler">Skibsproviant</string>
         <string name="poi_sports_shop">Sportsforretning</string>
         <string name="poi_stationery_shop">Papirvare</string>
         <string name="poi_tableware_shop">Isenkræmmer</string>
