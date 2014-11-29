@@ -1,2 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_palaeontological_site">Giassu paleontològicu</string>
+
+	<string name="poi_bakery">Furru de su pane</string>
+	<string name="poi_alcohol">Alcòlicos</string>
+	<string name="poi_convenience">Drogheria</string>
+	<string name="poi_mall">Tzentru cummertziale</string>
+	<string name="poi_beverages">Butega de bèvidas</string>
+	<string name="poi_butcher">Bancu</string>
+	<string name="poi_deli">Gastronomia</string>
+	<string name="poi_shop_farm">Butega prodotos de fatoria</string>
+	<string name="poi_greengrocer">Bendidore de frùtora</string>
+	<string name="poi_seafood">Pischeria</string>
+	<string name="poi_confectionery">Butega de durches</string>
+	<string name="poi_ice_cream">Gelateria</string>
+	<string name="poi_supermarket">Supermercadu</string>
+	<string name="poi_shop_tea">Butega de su té</string>
+	<string name="poi_dairy">Lateria</string>
+	<string name="poi_vending_machine">Distribudore automàticu</string>
+
+	<string name="poi_bookshop">Libreria</string>
+	<string name="poi_bicycle_shop">Butega de bitziclètas</string>
+	<string name="poi_anime_shop">Butega de ànime</string>
+	<string name="poi_antiques_shop">Anticuariadu</string>
+	<string name="poi_art_shop">Butega d\'arte</string>
+	<string name="poi_baby_goods">Butega pro pitzinnos</string>
+	<string name="poi_bag_shop">Valigeria</string>
+	<string name="poi_bathroom_furnishing_shop">Arredu bagnu</string>
+	<string name="poi_bed_shop">Arredu aposentu de letu</string>
+	<string name="poi_boutique">Butega de moda</string>
+	<string name="poi_carpet_shop">Butega de tapetes</string>
+	<string name="poi_chemist_shop">Potecaria</string>
+	<string name="poi_clothes_shop">Bestimenta</string>
+	<string name="poi_children_clothes_shop">Bestimenta pro pitzinnos</string>
+	<string name="poi_shoes">Butega de iscarpas</string>
+	<string name="poi_computer_shop">Butega de informàtica</string>
+	<string name="poi_copyshop">Copisteria</string>
+	<string name="poi_curtain_shop">Butega pro su campègiu</string>
+	<string name="poi_fabric_shop">Butega de drapègios</string>
+	<string name="poi_bedding_shop">Butega de banitas</string>
+	<string name="poi_dive_shop">Butega de artìculos pro imberghidura</string>
+	<string name="poi_doityourself_shop">Butega de artìculos pro sa domo</string>
+	<string name="poi_erotic_shop">Sexy shop</string>
+	<string name="poi_fishing_shop">Butega pro sa pisca</string>
+	<string name="poi_florist">Froraju</string>
+	<string name="poi_frame_shop">Curnisas</string>
+	<string name="poi_furniture_shop">Butega de mòbiles</string>
+	<string name="poi_garden_centre">Artìculos pro su giardinu</string>
+	<string name="poi_gas_shop">Butega de gas lìcuidu</string>
+	<string name="poi_general_shop">Empòriu</string>
+	</resources>
