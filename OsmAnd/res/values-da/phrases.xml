@@ -214,7 +214,7 @@
         <string name="poi_mineshaft">Mineskakt</string>
         <string name="poi_adit">Stoll</string>
         <string name="poi_petroleum_well">Oliebrønd</string>
-        <string name="poi_survey_point">Trianguleringspunkt</string>
+        <string name="poi_survey_point">Geodætisk punkt</string>
         <string name="poi_windmill">Vindmølle</string>
         <string name="poi_quarry">Stenbrud</string>
         <string name="poi_vineyard">Vingård</string>
