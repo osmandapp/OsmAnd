@@ -42,35 +42,32 @@ public class CurrentPositionHelper {
 		ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, app.getResourceManager().getRoutingMapFiles());
 	}
 	
-	public synchronized RouteDataObject runUpdateInThread(double lat , double lon) {
+	public synchronized RouteDataObject runUpdateInThread(double lat, double lon) throws IOException {
 		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd(false);
-		try {
-			if(ctx == null || am != app.getSettings().getApplicationMode()) {
-				initCtx(app);
-				if(ctx == null) {
-					return null;
-				}
-			}
-			RouteSegment sg = rp.findRouteSegment(lat, lon, ctx);
-			if(sg == null) {
+		if (ctx == null || am != app.getSettings().getApplicationMode()) {
+			initCtx(app);
+			if (ctx == null) {
 				return null;
 			}
-			return sg.getRoad();
-		} catch (IOException e) {
+		}
+		RouteSegment sg = rp.findRouteSegment(lat, lon, ctx);
+		if (sg == null) {
 			return null;
 		}
+		return sg.getRoad();
+
 	}
 	
 	
 	private void scheduleRouteSegmentFind(final Location loc){
 		if(calculatingThread == Thread.currentThread()) {
-			lastFound = runUpdateInThread(loc.getLatitude(), loc.getLongitude());
+			lastFound = runUpdateInThreadCatch(loc.getLatitude(), loc.getLongitude());
 		} else if(calculatingThread == null && loc != null) {
 			Runnable run = new Runnable() {
 				@Override
 				public void run() {
 					try {
-						lastFound = runUpdateInThread(loc.getLatitude(), loc.getLongitude());
+						lastFound = runUpdateInThreadCatch(loc.getLatitude(), loc.getLongitude());
 						if (lastAskedLocation != loc) {
 							// refresh and run new task if needed
 							getLastKnownRouteSegment(lastAskedLocation);
@@ -85,6 +82,15 @@ public class CurrentPositionHelper {
 		
 	}
 	
+	protected RouteDataObject runUpdateInThreadCatch(double latitude, double longitude) {
+		try {
+			return runUpdateInThread(latitude, longitude);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	private static double getOrthogonalDistance(RouteDataObject r, Location loc){
 		double d = 1000;
 		if (r.getPointsLength() > 0) {
