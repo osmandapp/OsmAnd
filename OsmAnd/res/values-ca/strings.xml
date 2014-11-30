@@ -793,7 +793,7 @@
 \n\t* S\'ha corregit Arabic, Kannada scripting i llenguatges RTL "</string>
 <string name="gpxup_trackable">Seguible</string>
 <string name="search_offline_geo_error">No s\'ha pogut analitzar la geo intenció «%s»</string>
-<string name="amenity_type_geocache">Geoenmegatzament</string>
+<string name="amenity_type_geocache">Geocerca</string>
 <string name="use_osmand_routing_service_descr">L\'us de la navagacio fora de línia d\'OsmAnd s\'aplica nomes a rutes &gt; 20km (experimental)</string>
 <string name="btn_advanced_mode">Mode avançat…</string>
 <string name="poi_filter_parking">Aparcament</string>
@@ -896,7 +896,7 @@
 	<string name="show_transport_over_map_description">Mostra les parades del transport públic al mapa</string>
 	<string name="search_history_int_streets">Intersecció: {0} x {1} a {2}</string>
 	<string name="favorite">Preferit</string>
-	<string name="history">Història</string>
+	<string name="history">Historial</string>
 	<string name="uploading">Enviant…</string>
 	<string name="search_osm_nominatim">Cerca una adreça utilitzant OSM Nominatim</string>
 	<string name="hint_search_online">Núm. de la casa, carrer, ciutat</string>
@@ -1702,7 +1702,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="selected_track">Traces seleccionades</string>
     <string name="my_tracks">Totes les traces</string>
     <string name="my_favorites">Preferits</string>
-    <string name="my_data_Button">Llocs personals</string>
+    <string name="my_data_Button">Preferits</string>
     <string name="my_data_activity">Llocs personals</string>
     <string name="osmo_user_joined">L\'usuari %1$s s\'ha unit al grup %2$s</string>
     <string name="osmo_user_left">L\'usuari %1$s ha deixat el grup %2$s</string>
@@ -1897,10 +1897,10 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="advanced_settings">Avançat</string>
 	<string name="osmo_use_https_descr">Utilitzeu una connexió segura amb el servidor</string>
     <string name="osmo_use_https">Utilitzeu https</string>
-	<string name="home_button">Casa</string>
-    <string name="search_for">Recerca de</string>
-	<string name="show_map">VEURE EL MAPA</string>
-	<string name="show_all">VEURE TOT</string>
+	<string name="home_button">Inici</string>
+    <string name="search_for">Cerca per</string>
+	<string name="show_map">MOSTRA EL MAPA</string>
+	<string name="show_all">MOSTRA\'LS TOTS</string>
 	<string name="coordinates">Coordenades</string>
 	<string name="map_update">Mapes</string>
 	</resources>
