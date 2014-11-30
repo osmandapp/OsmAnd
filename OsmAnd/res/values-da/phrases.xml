@@ -434,7 +434,7 @@
         <string name="poi_stripclub">Stripklub</string>
         <string name="poi_beach_resort">Badeby</string>
         <string name="poi_dog_park">Hundeskov</string>
-        <string name="poi_fishing_place">Fiskested</string>
+        <string name="poi_fishing_place">Fiskeplads</string>
         <string name="poi_hunting_stand">Jagtstand</string>
         <string name="poi_marina">Marina</string>
         <string name="poi_miniature_golf">Minigolf</string>
@@ -474,7 +474,7 @@
         <string name="poi_jeweller">Juvelér</string>
         <string name="poi_locksmith">Låsesmed</string>
         <string name="poi_key_cutter">Nøglebar</string>
-        <string name="poi_metal_construction_craft">Metalarbejder</string>
+        <string name="poi_metal_construction_craft">Metalarbejde</string>
         <string name="poi_optician">Optiker</string>
         <string name="poi_painter">Maler</string>
         <string name="poi_parquet_layer">Gulvlægger</string>
@@ -496,7 +496,7 @@
         <string name="poi_sun_protection_craft">Solafskærmning</string>
         <string name="poi_sweep">Skorstensfejer</string>
         <string name="poi_tailor">Skrædder</string>
-        <string name="poi_tiler">Fliselægger</string>
+        <string name="poi_tiler">Brolægger</string>
         <string name="poi_tinsmith">Blikkenslager</string>
         <string name="poi_upholsterer">Møbelpolstrer</string>
         <string name="poi_watchmaker">Urmager</string>
@@ -592,11 +592,11 @@
         <string name="poi_seamark_wreck">Vrag, sømærke</string>
 
         <string name="poi_military_airfield">Militærflyveplads</string>
-        <string name="poi_military_bunker">Militærbunker</string>
+        <string name="poi_military_bunker">Bunker</string>
         <string name="poi_military_barracks">Kaserne</string>
         <string name="poi_military_danger_area">Farezone</string>
         <string name="poi_military_range">Militærsøvelsesområde</string>
-        <string name="poi_military_naval_base">Militærflådebase</string>
+        <string name="poi_military_naval_base">Flådebase</string>
         <string name="poi_military_nuclear_explosion_site">Nuklear eksplosionsområde</string>
 <string name="poi_city">Storby</string>
 	<string name="poi_town">By</string>
