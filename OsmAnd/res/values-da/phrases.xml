@@ -130,16 +130,16 @@
         <string name="poi_compressed_air">Trykluft</string>
         <string name="poi_parking">Parkering</string>
         <string name="poi_motorcycle_parking">Motorcykelparkering</string>
-        <string name="poi_parking_entrance">Parkering indgang</string>
-        <string name="poi_garages">Garager</string>
+        <string name="poi_parking_entrance">Indgang til parkering</string>
+        <string name="poi_garages">Garage</string>
 
         <string name="poi_public_transport_platform">Offentlig transport stoppested</string>
         <string name="poi_public_transport_platform_bus">Busstoppested</string>
-        <string name="poi_public_transport_platform_trolleybus">Trolley busstoppested</string>
+        <string name="poi_public_transport_platform_trolleybus">Trolleybus stoppested</string>
         <string name="poi_bus_stop">Busstoppested (forældet)</string>
         <string name="poi_public_transport_platform_tram">Sporvognsstoppested</string>
         <string name="poi_tram_stop">Sporvognsstoppestedet (forældet)</string>
-        <string name="poi_public_transport_station">Offentlig transport station</string>
+        <string name="poi_public_transport_station">Offentligtransport station</string>
         <string name="poi_bus_station">Busstation (forældet)</string>
         <string name="poi_railway_station">Banegård (forældet)</string>
         <string name="poi_railway_platform">Perron (forældet)</string>
@@ -182,7 +182,7 @@
 
         <string name="poi_water_well">Brønd</string>
         <string name="poi_standpipe">Standrør</string>
-        <string name="poi_water_works">Vandværker</string>
+        <string name="poi_water_works">Vandværk</string>
         <string name="poi_boatyard">Værft</string>
         <string name="poi_wastewater_plant">Renseanlæg</string>
         <string name="poi_water_tower">Vandtårn</string>
@@ -244,7 +244,7 @@
 
         <string name="poi_pharmacy">Apotek</string>
         <string name="poi_hospital">Hospital</string>
-        <string name="poi_doctors">Læger</string>
+        <string name="poi_doctors">Læge</string>
         <string name="poi_clinic">Klinik</string>
         <string name="poi_first_aid">Førstehjælp</string>
         <string name="poi_dentist">Tandlæge</string>
@@ -270,7 +270,7 @@
         <string name="poi_insurance">Forsikring</string>
         <string name="poi_estate_agent">Ejendomsmægler</string>
         <string name="poi_lawyer">Advokat</string>
-        <string name="poi_telecommunication_office">Teleselvskab</string>
+        <string name="poi_telecommunication_office">Telekommunikation selskab</string>
         <string name="poi_ngo">NGO</string>
         <string name="poi_town_hall">Rådhus</string>
         <string name="poi_employment_agency">Arbejdsformidling</string>
@@ -280,14 +280,14 @@
         <string name="poi_architect_office">Arkitekt</string>
         <string name="poi_advertising_agency">Reklamebureau</string>
         <string name="poi_educational_institution">Uddannelsesinstitution</string>
-        <string name="poi_studio">Studio</string>
+        <string name="poi_studio">Lydstudio</string>
         <string name="poi_bookmaker">Bookmaker</string>
 
         <string name="poi_stadium">Stadium</string>
         <string name="poi_sports_centre">Sportscenter</string>
         <string name="poi_golf_course">Golfbane</string>
         <string name="poi_ice_rink">Skøjtebane</string>
-        <string name="poi_pitch">Boldbane</string>
+        <string name="poi_pitch">Sportsplads</string>
         <string name="poi_running_track">Løbebane</string>
         <string name="poi_bicycle_track">Cykelbane</string>
         <string name="poi_horse_track">Travbane</string>
@@ -610,7 +610,7 @@
 	<string name="poi_healthcare_alternative">Alternativ medicin</string>
 	<string name="poi_audiologist">Audiolog</string>
 	<string name="poi_blood_bank">Blodbank</string>
-	<string name="poi_healthcare_centre">Medicinskcenter</string>
+	<string name="poi_healthcare_centre">Medicinsk center</string>
 	<string name="poi_midwife">Jordemoder</string>
 	<string name="poi_occupational_therapist">Ergoterapeut</string>
 	<string name="poi_optometrist">Optiker</string>
