@@ -1339,7 +1339,7 @@
     <string name="android_19_location_disabled">Efter Androidversion 4.4 (KitKat) går det inte att hämta och uppdatera kartor på den tidigare lagringsmappen (%s). Vill du byta till en tillåten plats och kopiera alla OsmAnd-filerna dit?
 \n OBS: Gamla filer berörs inte (men kan tas bort manuellt).
 \n OBS: På den nya lagringsplatsen kommer det inte att vara möjligt att dela filer mellan OsmAnd och OsmAnd+.</string>
-    <string name="application_dir_change_warning2">Vill du att OsmAnd ska försöka kopiera datafilerna till den nya platsen?</string>
+    <string name="application_dir_change_warning2">Vill du att OsmAnd också ska kopiera datafilerna till den nya platsen?</string>
     <string name="copying_osmand_one_file_descr">Kopierar filen (%s) till den nya platsen …</string>
     <string name="copying_osmand_files_descr">Kopierar OsmAnd-datafiler till den nya platsen (%s)</string>
     <string name="copying_osmand_files">Kopierar OsmAnd-datafiler</string>
