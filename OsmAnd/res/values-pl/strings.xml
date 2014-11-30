@@ -1951,4 +1951,10 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_use_https_descr">Użyj bezpiecznego połączenia z serwerem</string>
     <string name="osmo_use_https">Użyj https</string>
 	<string name="advanced_settings">Zaawansowane</string>
+	<string name="home_button">Dom</string>
+    <string name="map_update">Mapy</string>
+	<string name="search_for">Wyszukaj</string>
+	<string name="show_map">POKAŻ MAPĘ</string>
+	<string name="show_all">POKAŻ WSZYSTKIE</string>
+	<string name="coordinates">Współrzędne</string>
 	</resources>
