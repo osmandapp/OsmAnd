@@ -781,10 +781,10 @@
   <string name="osmand_monitoring_description">Visualizza impostazioni per facilitare la registrazione dei tuoi spostamenti su un file GPX o il live tracking tramite un servizio web.</string>
   <string name="osmand_extra_settings_description">Visualizza le impostazioni per la configurazione avanzata della mappa (come aumentarne i dettagli) e alcune di specifici dispositivi.</string>
   <string name="osmand_development_plugin_description">Visualizza impostazioni per funzionalità in sviluppo e debug come la navigazione animata o visualizzare la prestazione del rendering.</string>
-  <string name="plugins_screen">Plugin</string>
+  <string name="plugins_screen">Componenti aggiuntivi</string>
   <string name="select_plugin_to_activate">Seleziona un plugin per attivarlo o disattivarlo. (Potrebbe essere richiesto il riavvio di OsmAnd.)</string>
   <string name="prefs_plugins_descr">I plugin abilitano funzionalità aggiuntive e impostazioni avanzate</string>
-  <string name="prefs_plugins">Plugin</string>
+  <string name="prefs_plugins">Componenti aggiuntivi</string>
   <string name="tip_recent_changes_0_8_0_t">Novità nella versione 0.8.0:
 		\n\t- *Funzionalità a plugin*\n\t- Molte delle funzionalità sono raggruppate per caratteristiche e possono essere abilitate/disabilitate nel Plugin Manager.
 		Si possono abilitare sorgenti di mappe a tasselli (online o in cache), impostazioni per il tracking e molte altre funzionalità nuove o preesistenti.
@@ -1790,7 +1790,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_track_interval">Intervallo di registrazione</string>
 	<string name="osmo_track_interval_descr">Scegli l\'intervallo di tempo per l\'invio della posizione</string>
     <string name="int_days">giorni</string>
-    <string name="osmo_connect_menu">Connetti</string>
+    <string name="osmo_connect_menu">Attiva</string>
     <string name="osmo_expire_group">Scade fra</string>
     <string name="osmo_group_description">Descrizione</string>
     <string name="osmo_group_policy">Regole</string>
