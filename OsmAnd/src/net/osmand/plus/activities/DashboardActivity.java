@@ -278,6 +278,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 					@Override
 					public void onDismiss(DialogInterface dialog) {
 						checkVectorIndexesDownloaded();
+						updateDownloads();
 						// Do some action on close
 						// FIXME uncomment
 						// app.getResourceManager().getRenderer().clearCache();
@@ -286,6 +287,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 				});
 			} else {
 				checkVectorIndexesDownloaded();
+				updateDownloads();
 			}
 		}
 		if(appCustomization.checkExceptionsOnStart() && !dialogShown){
