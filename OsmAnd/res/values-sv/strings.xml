@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -1737,4 +1737,5 @@
 	<string name="show_all">VISA ALLA</string>
 	<string name="coordinates">Koordinater</string>
 	<string name="map_update">Kartor</string>
-	</resources>
+	<string name="error_avoid_specific_road">Hittar inte närmaste väg</string>
+    </resources>

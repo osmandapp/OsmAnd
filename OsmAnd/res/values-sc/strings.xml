@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1787,4 +1787,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="show_all">AMMUSTRA TOTU</string>
 	<string name="coordinates">Coordinatas</string>
 	<string name="map_update">Mapas</string>
-	</resources>
+	<string name="error_avoid_specific_road">No est istada agatada peruna istada a curtzu</string>
+    </resources>

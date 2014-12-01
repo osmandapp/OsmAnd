@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
@@ -1954,7 +1954,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="osmo_leave_confirmation_msg">グループ %1$sから退出しますか？</string>
     <string name="osmo_specify_tracker_id">IDを指定してください</string>
     <string name="continue_navigation">ナビゲーションを継続</string>
-    <string name="pause_navigation">ナビゲーションを一時停止</string>
+    <string name="pause_navigation">ナビを一時停止</string>
     <string name="lang_bg">ブルガリア語</string>
 	<string name="lang_ca">カタロニア語</string>
 	<string name="lang_hr">クロアチア語</string>
