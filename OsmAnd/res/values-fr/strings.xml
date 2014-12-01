@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -1866,4 +1866,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="show_all">AFFICHER TOUT</string>
 	<string name="coordinates">Coordonnées</string>
 	<string name="map_update">Cartes</string>
-	</resources>
+	<string name="error_avoid_specific_road">Aucune route n\'a été trouvée à proximité</string>
+    </resources>
