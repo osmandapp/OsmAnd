@@ -1901,5 +1901,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="show_all">MOSTRA\'LS TOTS</string>
 	<string name="coordinates">Coordenades</string>
 	<string name="map_update">Mapes</string>
-	<string name="error_avoid_specific_road">No s\'ha trobat cap ruta aprop</string>
+	<string name="error_avoid_specific_road">No s\'ha trobat cap ruta a prop</string>
     </resources>
