@@ -13,10 +13,18 @@ import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPrimitivesProvider;
 import net.osmand.core.jni.MapPrimitiviser;
 import net.osmand.core.jni.MapRasterLayerProvider_Software;
+import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
 import net.osmand.core.jni.ResolvedMapStyle;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.render.RendererRegistry;
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 /**
  * Context container and utility class for MapRendererView and derivatives. 
@@ -26,32 +34,61 @@ import net.osmand.core.jni.ResolvedMapStyle;
  */
 public class MapRendererContext {
 
-	public MapRendererContext() {
-	}
-	
-	public MapRendererContext(MapRendererView mapRendererView) {
-		_mapRendererView = mapRendererView;
-	}
+	private static final int OBF_RASTER_LAYER = 0;
+	private OsmandApplication app;
 	
 	/**
-	 * Synchronisation object used to perform state changes atomically
+	 * Cached map styles per name
 	 */
-	private final Object _syncObject = new Object(); 
+	private Map<String, ResolvedMapStyle> mapStyles = new HashMap<String, ResolvedMapStyle>();
+	
+	/**
+	 * Reference to OBF map symbols provider (if used)
+	 */
+	private IMapTiledSymbolsProvider obfMapSymbolsProvider;
+	
+	/**
+	 * Map styles collection
+	 */
+	private MapStylesCollection mapStylesCollection;
+	
+	/**
+	 * Reference to map presentation environment (if used)
+	 */
+	private MapPresentationEnvironment mapPresentationEnvironment;
+
+	/**
+	 * Reference to OBFs collection (if present)
+	 */
+	private IObfsCollection obfsCollection;
 	
 	/**
 	 * Reference to map renderer view that is currently managed by this
 	 * context
 	 */
-	private MapRendererView _mapRendererView;
+	private MapRendererView mapRendererView;
+	
+
+	/**
+	 * Display density factor
+	 */
+	private float displayDensityFactor = 1;
 	
 	/**
-	 * Get currently bound map renderer view
-	 * @return Reference to MapRendererView 
+	 * Reference tile size on screen in pixels
 	 */
-	public MapRendererView getMapRendererView() {
-		synchronized (_syncObject) {
-			return _mapRendererView;
-		}
+	private float referenceTileSizef = 256;
+	
+	/**
+	 * Raster tile size in texels
+	 */
+	private int rasterTileSize = 256;
+	
+	private CachedMapPresentation presentationObjectParams;
+
+	
+	public MapRendererContext(OsmandApplication app) {
+		this.app = app;
 	}
 	
 	/**
@@ -59,266 +96,149 @@ public class MapRendererContext {
 	 * @param mapRendererView Reference to MapRendererView
 	 */
 	public void setMapRendererView(MapRendererView mapRendererView) {
-		synchronized (_syncObject) {
-			boolean update = (_mapRendererView != mapRendererView);
-			if (!update)
-				return;
-			
-			_mapRendererView = mapRendererView;
-			if (_mapRendererView != null)
-				apply();
+		boolean update = (this.mapRendererView != mapRendererView);
+		if (!update) {
+			return;
+		}
+		this.mapRendererView = mapRendererView;
+		if (mapRendererView != null) {
+			apply();
 		}
 	}
 	
-	/**
-	 * Display density factor
-	 */
-	private float _displayDensityFactor = 1;
 	
-	/**
-	 * Reference tile size on screen in pixels
-	 */
-	private float _referenceTileSize = 256;
-	
-	/**
-	 * Raster tile size in texels
-	 */
-	private int _rasterTileSize = 256;
+	private class CachedMapPresentation {
+		String langId ;
+		LanguagePreference langPref;
+		ResolvedMapStyle mapStyle;
+		double displayDensityFactor;
+		
+		public CachedMapPresentation(String langId,
+				LanguagePreference langPref, ResolvedMapStyle mapStyle,
+				double displayDensityFactor) {
+			this.langId = langId;
+			this.langPref = langPref;
+			this.mapStyle = mapStyle;
+			this.displayDensityFactor = displayDensityFactor;
+		}
+		
+		
+		public boolean equalsFields(CachedMapPresentation other ) {
+			if (Double.doubleToLongBits(displayDensityFactor) != Double
+					.doubleToLongBits(other.displayDensityFactor))
+				return false;
+			if (langId == null) {
+				if (other.langId != null)
+					return false;
+			} else if (!langId.equals(other.langId))
+				return false;
+			if (langPref != other.langPref)
+				return false;
+			if (mapStyle == null) {
+				if (other.mapStyle != null)
+					return false;
+			} else if (!mapStyle.equals(other.mapStyle))
+				return false;
+			return true;
+		}
+		
+	}
 
-	/**
-	 * Get current display density factor 
-	 * @return Display density factor
-	 */
-	public float getDisplayDensityFactor() {
-		synchronized (_syncObject) {
-			return _displayDensityFactor;	
-		}
-	}
 	
 	/**
 	 * Set display density factor and update context (if needed) 
 	 * @param displayDensityFactor New display density factor
 	 */
 	public void setDisplayDensityFactor(float displayDensityFactor) {
-		synchronized (_syncObject) {
-			boolean update = (_displayDensityFactor != displayDensityFactor);
-			if (!update)
-				return;
-			
-			_displayDensityFactor = displayDensityFactor;
-			_referenceTileSize = 256.0f * _displayDensityFactor;
-			_rasterTileSize = Integer.highestOneBit((int)_referenceTileSize - 1) * 2;
-			
-			if (_mapRendererView instanceof AtlasMapRendererView)
-				((AtlasMapRendererView)_mapRendererView).setReferenceTileSizeOnScreenInPixels(_referenceTileSize);
-			if (_mapPresentationEnvironment != null)
-				updateMapPresentationEnvironment();
-		}
+		this.displayDensityFactor = displayDensityFactor;
+		referenceTileSizef = 256.0f * displayDensityFactor;
+		rasterTileSize = Integer.highestOneBit((int) referenceTileSizef - 1) * 2;
+
+		if (mapRendererView instanceof AtlasMapRendererView)
+			((AtlasMapRendererView) mapRendererView)
+					.setReferenceTileSizeOnScreenInPixels(referenceTileSizef);
+		if (mapPresentationEnvironment != null)
+			updateMapPresentationEnvironment();
 	}
 	
-	/**
-	 * Reference to resolved map style (if used)
-	 */
-	private ResolvedMapStyle _mapStyle;
-	
-	/**
-	 * Get current map style
-	 * @return Reference to current map style
-	 */
-	public ResolvedMapStyle getMapStyle() {
-		synchronized (_syncObject) {
-			return _mapStyle;			
-		}
-	}
-	
-	/**
-	 * Set map style and update context (if needed)
-	 * @param mapStyle
-	 */
-	public void setMapStyle(ResolvedMapStyle mapStyle) {
-		synchronized (_syncObject) {
-			boolean update = (_mapStyle != mapStyle);
-			if (!update)
-				return;
-			
-			_mapStyle = mapStyle;
-			if (_mapPresentationEnvironment != null)
-				updateMapPresentationEnvironment();
-		}
-	}
-	
-	/**
-	 * Reference to map style settings (if present) 
-	 */
-	private Map<String, String> _mapStyleSettings;
-	
-	/**
-	 * Get current map style settings
-	 * @return
-	 */
-	public Map<String, String> getMapStyleSettings() {
-		synchronized (_syncObject) {
-			if (_mapStyleSettings == null)
-				return null;
-			return Collections.unmodifiableMap(_mapStyleSettings);
-		}
-	}
-	
-	/**
-	 * Set map style settings and update context (if needed)
-	 * @param mapStyleSettings Map style settings
-	 */
-	public void setMapStyleSettings(Map<String, String> mapStyleSettings) {
-		synchronized (_syncObject) {
-			boolean update = !_mapStyleSettings.equals(mapStyleSettings);
-			if (!update)
-				return;
-			
-			_mapStyleSettings = new HashMap<String, String>(mapStyleSettings);
-			if (_mapPresentationEnvironment != null)
-				updateMapPresentationEnvironment();
-		}
-	}
-	
-	/**
-	 * Locale language
-	 */
-	private String _localeLanguageId = "en";
-	
-	/**
-	 * Get current locale language
-	 * @return Locale language identifier
-	 */
-	public String getLocaleLanguageId() {
-		synchronized (_syncObject) {
-			return _localeLanguageId;	
-		}
-	}
-	
-	/**
-	 * Set current locale language and update context (if needed)
-	 * @param localeLanguageId Locale language identifier
-	 */
-	public void setLocaleLanguageId(String localeLanguageId) {
-		synchronized (_syncObject) {
-			boolean update = !_localeLanguageId.equals(localeLanguageId);
-			if (!update)
-				return;
-			
-			_localeLanguageId = localeLanguageId;
-			if (_mapPresentationEnvironment != null)
-				updateMapPresentationEnvironment();
-		}
-	}
-	
-	/**
-	 * Language preference
-	 */
-	private LanguagePreference _languagePreference = LanguagePreference.LocalizedAndNative;
-	
-	/**
-	 * Get current language preference
-	 * @return Language preference
-	 */
-	public LanguagePreference getLanguagePreference() {
-		synchronized (_syncObject) {
-			return _languagePreference;
-		}
-	}
-	
-	/**
-	 * Set language preference and update context (if needed)
-	 * @param languagePreference
-	 */
-	public void setLanguagePreference(LanguagePreference languagePreference) {
-		synchronized (_syncObject) {
-			boolean update = (_languagePreference != languagePreference);
-			if (!update)
-				return;
-			
-			_languagePreference = languagePreference;
-			if (_mapPresentationEnvironment != null)
-				updateMapPresentationEnvironment();
-		}
-	}
-	
-	/**
-	 * Reference to OBFs collection (if present)
-	 */
-	private IObfsCollection _obfsCollection;
-	
-	/**
-	 * Get current OBFs collection
-	 * @return OBFs collection
-	 */
-	public IObfsCollection getObfsCollection() {
-		synchronized (_syncObject) {
-			return _obfsCollection;	
-		}
-	}
-	
-	/**
-	 * Set OBFs collection and update context (if needed)
-	 * @param obfsCollection
-	 */
-	public void setObfsCollection(IObfsCollection obfsCollection) {
-		synchronized (_syncObject) {
-			boolean update = (_obfsCollection != obfsCollection);
-			if (!update)
-				return;
-			
-			_obfsCollection = obfsCollection;
-			if (_obfMapObjectsProvider != null)
-				updateObfMapObjectsProvider();
-		}
-	}
-	
-	/**
-	 * Reference to map presentation environment (if used)
-	 */
-	private MapPresentationEnvironment _mapPresentationEnvironment;
+
 
 	/**
 	 * Update map presentation environment and everything that depends on it
 	 */
 	private void updateMapPresentationEnvironment() {
 		// Create new map presentation environment
-		_mapPresentationEnvironment = new MapPresentationEnvironment(
-				_mapStyle,
-				_displayDensityFactor,
-				_localeLanguageId,
-				_languagePreference);
-
-		// Apply map style settings
-		if (_mapStyleSettings != null) {
-			QStringStringHash convertedStyleSettings = new QStringStringHash();
-			for (Iterator<Map.Entry<String, String>> itSetting = _mapStyleSettings
-					.entrySet().iterator(); itSetting.hasNext();) {
-				Map.Entry<String, String> setting = itSetting.next();
-				convertedStyleSettings.set(setting.getKey(), setting.getValue());
-			}
-			_mapPresentationEnvironment.setSettings(convertedStyleSettings);
+		String langId = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		// TODO make setting
+		LanguagePreference langPref = LanguagePreference.LocalizedOrNative;
+		String rendName = app.getSettings().RENDERER.get();
+		if(rendName.length() == 0 || rendName.equals(RendererRegistry.DEFAULT_RENDER)) {
+			rendName = "default";
+		}
+		if(!mapStyles.containsKey(rendName)) {
+			mapStyles.put(rendName, mapStylesCollection.getResolvedStyleByName(rendName));
+		}
+		ResolvedMapStyle mapStyle = mapStyles.get(rendName);
+		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, displayDensityFactor);
+		if (this.presentationObjectParams == null
+				|| !this.presentationObjectParams.equalsFields(pres)) {
+			this.presentationObjectParams = pres;
+			mapPresentationEnvironment = new MapPresentationEnvironment(
+					mapStyle, displayDensityFactor, langId, langPref);
 		}
 
+		// Apply map style settings
+		OsmandSettings prefs = app.getSettings();
+		RenderingRulesStorage storage = app.getRendererRegistry()
+				.getCurrentSelectedRenderer();
+		Map<String, String> props = new HashMap<String, String>();
+		for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
+			if (customProp.isBoolean()) {
+				CommonPreference<Boolean> pref = prefs
+						.getCustomRenderBooleanProperty(customProp
+								.getAttrName());
+				props.put(customProp.getAttrName(), pref.get() + "");
+			} else {
+				CommonPreference<String> settings = prefs
+						.getCustomRenderProperty(customProp.getAttrName());
+				String res = settings.get();
+				if (!Algorithms.isEmpty(res)) {
+					props.put(customProp.getAttrName(), res);
+				}
+			}
+		}
+
+		QStringStringHash convertedStyleSettings = new QStringStringHash();
+		for (Iterator<Map.Entry<String, String>> itSetting = props.entrySet()
+				.iterator(); itSetting.hasNext();) {
+			Map.Entry<String, String> setting = itSetting.next();
+			convertedStyleSettings.set(setting.getKey(), setting.getValue());
+		}
+		if(nightMode) {
+			convertedStyleSettings.set("nightMode", "true");
+		}
+		mapPresentationEnvironment.setSettings(convertedStyleSettings);
+
 		// Update all dependencies
-		if (_mapPrimitiviser != null)
+		if (mapPrimitiviser != null) {
 			updateMapPrimitiviser();
+		}
 	}
 	
 	/**
 	 * Reference to map primitiviser (if used)
 	 */
-	private MapPrimitiviser _mapPrimitiviser; 
+	private MapPrimitiviser mapPrimitiviser; 
 	
 	/**
 	 * Update map primitiviser and everything that depends on it
 	 */
 	private void updateMapPrimitiviser() {
 		// Create new map primitiviser
-		_mapPrimitiviser = new MapPrimitiviser(_mapPresentationEnvironment);
+		mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
 		
 		// Update all dependencies
-		if (_mapPrimitivesProvider != null)
+		if (mapPrimitivesProvider != null)
 			updateMapPrimitivesProvider();
 	}
 	
@@ -332,146 +252,123 @@ public class MapRendererContext {
 	 */
 	private void updateObfMapObjectsProvider() {
 		_obfMapObjectsProvider = new ObfMapObjectsProvider(
-				_obfsCollection);
+				obfsCollection);
 		
 		// Update all dependencies
-		if (_mapPrimitivesProvider != null)
+		if (mapPrimitivesProvider != null)
 			updateMapPrimitivesProvider();
 	}
 	
 	/**
 	 * Reference to map primitives provider (if used)
 	 */
-	private MapPrimitivesProvider _mapPrimitivesProvider;
+	private MapPrimitivesProvider mapPrimitivesProvider;
 	
 	/**
 	 * Update map primitives provider and everything that depends on it
 	 */
 	private void updateMapPrimitivesProvider() {
 		// Create new map primitives provider
-		_mapPrimitivesProvider = new MapPrimitivesProvider(
+		mapPrimitivesProvider = new MapPrimitivesProvider(
 				_obfMapObjectsProvider,
-				_mapPrimitiviser,
-				_rasterTileSize);
+				mapPrimitiviser,
+				rasterTileSize);
 		
 		// Update all dependencies
-		if (_obfMapRasterLayerProvider != null)
+		if (obfMapRasterLayerProvider != null)
 			updateObfMapRasterLayerProvider();
-		if (_obfMapSymbolsProvider != null)
+		if (obfMapSymbolsProvider != null)
 			updateObfMapSymbolsProvider();
 	}
 	
 	/**
 	 * Reference to OBF map raster layer provider (if used)
 	 */
-	private IRasterMapLayerProvider _obfMapRasterLayerProvider;
+	private IRasterMapLayerProvider obfMapRasterLayerProvider;
 	
 	/**
 	 * Index of OBF map raster layer in bound map renderer view (if set)
 	 */
-	private Integer _obfMapRasterLayer;
+	private Integer obfMapRasterLayer;
+	private boolean nightMode;
 	
 	/**
 	 * Update OBF map raster layer provider and everything that depends on it
 	 */
 	private void updateObfMapRasterLayerProvider() {
 		// Create new OBF map raster layer provider
-		_obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(
-				_mapPrimitivesProvider);
+		obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(
+				mapPrimitivesProvider);
 		
 		// In case there's bound view and configured layer, perform setup
-		if(_mapRendererView != null && _obfMapRasterLayer != null)
-			_mapRendererView.setMapLayerProvider(_obfMapRasterLayer, _obfMapRasterLayerProvider);
+		if(mapRendererView != null && obfMapRasterLayer != null)
+			mapRendererView.setMapLayerProvider(obfMapRasterLayer, obfMapRasterLayerProvider);
 	}
 	
-	/**
-	 * Reference to OBF map symbols provider (if used)
-	 */
-	private IMapTiledSymbolsProvider _obfMapSymbolsProvider;
+	
 	
 	/**
 	 * Update OBF map symbols provider and everything that depends on it
 	 */
 	private void updateObfMapSymbolsProvider() {
 		// If there's current provider and bound view, remove it
-		if (_obfMapSymbolsProvider != null && _mapRendererView != null)
-			_mapRendererView.removeSymbolsProvider(_obfMapSymbolsProvider);
+		if (obfMapSymbolsProvider != null && mapRendererView != null)
+			mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
 		
 		// Create new OBF map symbols provider
-		_obfMapSymbolsProvider = new MapObjectsSymbolsProvider(
-				_mapPrimitivesProvider,
-				_referenceTileSize);
+		obfMapSymbolsProvider = new MapObjectsSymbolsProvider(
+				mapPrimitivesProvider,
+				referenceTileSizef);
 		
 		// If there's bound view, add new provider
-		if (_mapRendererView != null)
-			_mapRendererView.addSymbolsProvider(_obfMapSymbolsProvider);
+		if (mapRendererView != null)
+			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
 	}
 	
 	/**
 	 * Apply current context to view
 	 */
 	private void apply() {
-		if (_mapRendererView instanceof AtlasMapRendererView)
-			((AtlasMapRendererView)_mapRendererView).setReferenceTileSizeOnScreenInPixels(_referenceTileSize);
+		if (mapRendererView instanceof AtlasMapRendererView)
+			((AtlasMapRendererView)mapRendererView).setReferenceTileSizeOnScreenInPixels(referenceTileSizef);
 		
 		// Layers
-		if (_obfMapRasterLayer != null && _obfMapRasterLayerProvider != null)
-			_mapRendererView.setMapLayerProvider(_obfMapRasterLayer, _obfMapRasterLayerProvider);
+		if (obfMapRasterLayer != null && obfMapRasterLayerProvider != null)
+			mapRendererView.setMapLayerProvider(obfMapRasterLayer, obfMapRasterLayerProvider);
 		
 		// Symbols
-		if (_obfMapSymbolsProvider != null)
-			_mapRendererView.addSymbolsProvider(_obfMapSymbolsProvider);
+		if (obfMapSymbolsProvider != null)
+			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
 	}
 	
 	/**
 	 * Setup OBF map on layer 0 with symbols
 	 * @param obfsCollection OBFs collection
 	 */
-	public void setupObfMap(ResolvedMapStyle mapStyle, IObfsCollection obfsCollection) {
-		setupObfMap(mapStyle, obfsCollection, 0, true);
+	public void setupObfMap(MapStylesCollection mapStylesCollection, IObfsCollection obfsCollection) {
+		this.obfsCollection = obfsCollection;
+		this.mapStylesCollection = mapStylesCollection;
+		this.obfMapRasterLayer = OBF_RASTER_LAYER;
+		updateMapPresentationEnvironment();
+		updateMapPrimitiviser();
+		updateMapPrimitivesProvider();
+		updateObfMapObjectsProvider();
+		updateObfMapRasterLayerProvider();
+		updateObfMapSymbolsProvider();
 	}
 	
-	/**
-	 * Setup OBF map on specified layer with optional symbols
-	 * @param obfsCollection OBFs collection
-	 * @param layer Layer index
-	 * @param withSymbols True if with symbols, false otherwise
-	 */
-	public void setupObfMap(ResolvedMapStyle mapStyle,
-			IObfsCollection obfsCollection,
-			int layer,
-			boolean withSymbols) {
-		synchronized (_syncObject) {
-			boolean update = false;
-			
-			if (_mapStyle != mapStyle) {
-				_mapStyle = mapStyle;
-				update = true;
-			}
-			
-			if (_obfsCollection != obfsCollection) {
-				_obfsCollection = obfsCollection;
-				update = true;
-			}
-			
-			if (_obfMapRasterLayer == null || _obfMapRasterLayer != layer) {
-				_obfMapRasterLayer = layer;
-				update = true;
-			}
-			
-			if (withSymbols != (_obfMapSymbolsProvider != null)) {
-				update = true;
-			}
-			
-			if (!update)
-				return;
-			
+	public void updateMapSettings() {
+		if (mapPresentationEnvironment != null) {
 			updateMapPresentationEnvironment();
-			updateMapPrimitiviser();
-			updateMapPrimitivesProvider();
-			updateObfMapObjectsProvider();
-			updateObfMapRasterLayerProvider();
-			updateObfMapSymbolsProvider();
 		}
+	}
+
+	public boolean isNightMode() {
+		return nightMode;
+	}
+
+	public void setNightMode(boolean nightMode) {
+		this.nightMode = nightMode;
+		updateMapSettings();
 	}
 }
