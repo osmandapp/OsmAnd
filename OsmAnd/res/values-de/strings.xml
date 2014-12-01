@@ -2013,12 +2013,13 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="lock_screen_request_explanation">%1$s benötigt diese Berechtigung, um den Bildschirm auszuschalten (Energiesparfunktion).</string>
     <string name="advanced_settings">Erweitert</string>
     <string name="home_button">Start</string>
-    <string name="osmo_use_https_descr">Sichere Server-Verbindung verwenden</string>
-    <string name="osmo_use_https">Https nutzen</string>
-    <string name="map_update">Karten</string>
-    <string name="search_for">Suchen nach</string>
-    <string name="show_map">KARTE ZEIGEN</string>
-    <string name="show_all">ALLES ZEIGEN</string>
     <string name="coordinates">Koordinaten</string>
     <string name="error_avoid_specific_road">Nächstgelegene Straße konnte nicht gefunden werden</string>
+    <string name="osmo_use_https_descr">Sichere Verbindung zum Server</string>
+    <string name="osmo_use_https">Nutze https</string>
+	<string name="map_update">Karten</string>
+	<string name="show_map">KARTE ANZEIGEN</string>
+	<string name="show_all">ALLES ANZEIGEN</string>
+	<string name="coordinates">Koordinaten</string>
+	<string name="search_for">Suche nach</string>
     </resources>

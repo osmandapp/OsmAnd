@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -81,7 +81,7 @@
     <string name="android_19_location_disabled">Dae sa versione Android 4.4 (KitKat) non podes prus iscarrigare e agiornare sas mapas in sa cartella bècia (%s). La bòles remplasare cun sa chi est acusentida e copiare in cue totus sos datos?
 \n Nota 1: sos datos antepostos tuos non at a èssere mudados (ma podent essere burrados manualmente).
 \n Nota 2: in sa cartella noa non at a èssere possìbile cumpartzire sos datos intra OsmAnd e OsmAnd+.</string>
-    <string name="application_dir_change_warning2">OsmAnd podet proare a copiare sos datos suos in sa destinatzione noa. Boles a lu fàghere?</string>
+    <string name="application_dir_change_warning2">Boles chi OsmAnd còpiet sos datos suos fintzas in sa destinatzione noa?</string>
     <string name="copying_osmand_one_file_descr">Copiande su documentu (%s) in sa destinatzione noa...</string>
     <string name="copying_osmand_files_descr">Copiande sos datos de OsmAnd in (%s), sa destinatzione noa</string>
     <string name="copying_osmand_files">Copiande sos datos de OsmAnd</string>
@@ -1783,8 +1783,9 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="osmo_use_https">Imprea https</string>
 	<string name="home_button">Domo</string>
     <string name="search_for">Chirca pro</string>
-	<string name="show_map">AMMUSTRA MAPA</string>
+	<string name="show_map">AMMUSTRA SA MAPA</string>
 	<string name="show_all">AMMUSTRA TOTU</string>
 	<string name="coordinates">Coordinatas</string>
 	<string name="map_update">Mapas</string>
-	</resources>
+	<string name="error_avoid_specific_road">No est istada agatada peruna istada a curtzu</string>
+    </resources>

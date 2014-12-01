@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -793,7 +793,7 @@
 \n\t* S\'ha corregit Arabic, Kannada scripting i llenguatges RTL "</string>
 <string name="gpxup_trackable">Seguible</string>
 <string name="search_offline_geo_error">No s\'ha pogut analitzar la geo intenció «%s»</string>
-<string name="amenity_type_geocache">Geoenmegatzament</string>
+<string name="amenity_type_geocache">Geocerca</string>
 <string name="use_osmand_routing_service_descr">L\'us de la navagacio fora de línia d\'OsmAnd s\'aplica nomes a rutes &gt; 20km (experimental)</string>
 <string name="btn_advanced_mode">Mode avançat…</string>
 <string name="poi_filter_parking">Aparcament</string>
@@ -896,7 +896,7 @@
 	<string name="show_transport_over_map_description">Mostra les parades del transport públic al mapa</string>
 	<string name="search_history_int_streets">Intersecció: {0} x {1} a {2}</string>
 	<string name="favorite">Preferit</string>
-	<string name="history">Història</string>
+	<string name="history">Historial</string>
 	<string name="uploading">Enviant…</string>
 	<string name="search_osm_nominatim">Cerca una adreça utilitzant OSM Nominatim</string>
 	<string name="hint_search_online">Núm. de la casa, carrer, ciutat</string>
@@ -1349,7 +1349,7 @@
     <string name="android_19_location_disabled">"Des de la versió 4.4 d\'Android (KitKat) no es pot descarregar i actualitzar després els  mapes a la mateixa carpeta (%s). Voleu canviar-la a un altre lloc permès i copiar-hi tots els arxius OsmAnd?
 \n Nota 1: Els vostres arxius obsolets  quedaran intactes (els podeu esborrar manualment).
 \n Nota 2: En el nou lloc d\'emmagatzemament no serà possible compartir arxius entre l\'OsmAnd i l\'OsmAnd+."</string>
-    <string name="application_dir_change_warning2">Voleu que l\'OsmAnd intenti copiar els seus arxius de dades a la nova destinació?</string>
+    <string name="application_dir_change_warning2">Voleu que l\'OsmAnd també copiï els seus arxius de dades a la nova destinació?</string>
     <string name="copying_osmand_one_file_descr">S\'està copiant el fitxer (%s) a la nova destinació...</string>
     <string name="copying_osmand_files_descr">S\'estan copiant els fitxers de dades de l\'OsmAnd a la nova destinació (%s)</string>
     <string name="copying_osmand_files">S\'estan copiant fitxers de dades de l\'OsmAnd</string>
@@ -1702,7 +1702,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="selected_track">Traces seleccionades</string>
     <string name="my_tracks">Totes les traces</string>
     <string name="my_favorites">Preferits</string>
-    <string name="my_data_Button">Llocs personals</string>
+    <string name="my_data_Button">Preferits</string>
     <string name="my_data_activity">Llocs personals</string>
     <string name="osmo_user_joined">L\'usuari %1$s s\'ha unit al grup %2$s</string>
     <string name="osmo_user_left">L\'usuari %1$s ha deixat el grup %2$s</string>
@@ -1895,10 +1895,11 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="advanced_settings">Avançat</string>
 	<string name="osmo_use_https_descr">Utilitzeu una connexió segura amb el servidor</string>
     <string name="osmo_use_https">Utilitzeu https</string>
-	<string name="home_button">Casa</string>
-    <string name="search_for">Recerca de</string>
-	<string name="show_map">VEURE EL MAPA</string>
-	<string name="show_all">VEURE TOT</string>
+	<string name="home_button">Inici</string>
+    <string name="search_for">Cerca per</string>
+	<string name="show_map">MOSTRA EL MAPA</string>
+	<string name="show_all">MOSTRA\'LS TOTS</string>
 	<string name="coordinates">Coordenades</string>
 	<string name="map_update">Mapes</string>
-	</resources>
+	<string name="error_avoid_specific_road">No s\'ha trobat cap ruta aprop</string>
+    </resources>

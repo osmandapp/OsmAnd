@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
@@ -965,7 +965,7 @@
     <string name="android_19_location_disabled">킷캣(KitKat) 버전 이후로 이전에 저장한 폴더 (%s)에 지도를 다운로드하고 업데이트 할 수 없습니다.
 \n저장 위치를 변경하고 모든 파일을 그곳에 복사하는 것을 허락하겠습니까?
 \n Note : 이전 파일은 그대로 유지됩니다. (그러나 수동으로 삭제할 수 있습니다)\n Note : 새로운 저장소는 OsmAnd 와 OsmAnd+ 간에 파일을 공유 할 수 없습니다.</string>
-    <string name="application_dir_change_warning2">OsmAnd는 새 목적지로 데이터 파일을 복사하겠습니까?</string>
+    <string name="application_dir_change_warning2">OsmAnd에 새 목적지로 데이터 파일을 복사하겠습니까?</string>
     <string name="copying_osmand_one_file_descr">새 목적지로 파일(%s)을 복사중...</string>
     <string name="copying_osmand_files_descr">새로운 목적지에 OsmAnd 데이터 파일을 복사중 (%s)</string>
     <string name="copying_osmand_files">OsmAnd 데이터 파일을 복사중</string>
@@ -2089,4 +2089,5 @@
 	<string name="show_map">지도 표시</string>
 	<string name="show_all">모두 표시</string>
 	<string name="coordinates">좌표</string>
-	</resources>
+	<string name="error_avoid_specific_road">가장 가까운 도로를 찾을 수 없습니다</string>
+    </resources>

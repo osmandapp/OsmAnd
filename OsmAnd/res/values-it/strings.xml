@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -781,10 +781,10 @@
   <string name="osmand_monitoring_description">Visualizza impostazioni per facilitare la registrazione dei tuoi spostamenti su un file GPX o il live tracking tramite un servizio web.</string>
   <string name="osmand_extra_settings_description">Visualizza le impostazioni per la configurazione avanzata della mappa (come aumentarne i dettagli) e alcune di specifici dispositivi.</string>
   <string name="osmand_development_plugin_description">Visualizza impostazioni per funzionalità in sviluppo e debug come la navigazione animata o visualizzare la prestazione del rendering.</string>
-  <string name="plugins_screen">Plugin</string>
-  <string name="select_plugin_to_activate">Seleziona un plugin per attivarlo o disattivarlo. (potrebbe essere richiesto il riavvio di OsmAnd.)</string>
+  <string name="plugins_screen">Componenti aggiuntivi</string>
+  <string name="select_plugin_to_activate">Seleziona un plugin per attivarlo o disattivarlo. (Potrebbe essere richiesto il riavvio di OsmAnd.)</string>
   <string name="prefs_plugins_descr">I plugin abilitano funzionalità aggiuntive e impostazioni avanzate</string>
-  <string name="prefs_plugins">Plugin</string>
+  <string name="prefs_plugins">Componenti aggiuntivi</string>
   <string name="tip_recent_changes_0_8_0_t">Novità nella versione 0.8.0:
 		\n\t- *Funzionalità a plugin*\n\t- Molte delle funzionalità sono raggruppate per caratteristiche e possono essere abilitate/disabilitate nel Plugin Manager.
 		Si possono abilitare sorgenti di mappe a tasselli (online o in cache), impostazioni per il tracking e molte altre funzionalità nuove o preesistenti.
@@ -1547,7 +1547,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="announce_gpx_waypoints">Annuncia i punti GPX di passaggio</string>
     <string name="osmodroid_mode_on">Ferma OsMoDroid</string>    
     <string name="osmodroid_mode_off">Avvia OsMoDroid</string>
-    <string name="driving_region_descr">Scegliete la regione di guida: USA, Europa, UK, Asia o Altre</string>
+    <string name="driving_region_descr">Scegliete la regione di guida: USA, Europa, UK, Asia o altre</string>
 	<string name="driving_region">Regione di guida</string>
 	<string name="driving_region_japan">Giappone</string>
 	<string name="driving_region_us">Stati Uniti</string>
@@ -1583,7 +1583,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     </string>
     <string name="about_version">Versione:</string>
     <string name="about_settings">Informazioni</string>
-    <string name="about_settings_descr">Informazioni versione, licenze, membri del progetto</string>
+    <string name="about_settings_descr">Informazioni versione, licenze e membri del progetto</string>
     <string name="tips_and_tricks">Aiuto</string>
     <string name="tip_map_styles">Stili mappa</string>
 	<string name="tip_map_styles_t">"OsmAnd supporta le mappe vettoriali offline con stili di visualizzazione differenti per adattarsi alle tue esigenze:
@@ -1638,7 +1638,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="android_19_location_disabled">Dalla versione KitKat non è più possibile scaricare e aggiornare le mappe nel precedente indirizzo di memorizzazione (%s). Vuoi sostituirlo con quello consentito e copiare lì tutti i file?
 \n Nota: i file precedenti non verranno modificati.
 \n Nota: non sarà possibile condividere i files fra OsmAnd and OsmAnd+.</string>
-    <string name="application_dir_change_warning2">Volete che OsmAnd provi a spostare i propri dati nella nuova destinazione?</string>
+    <string name="application_dir_change_warning2">Volete che OsmAnd sposti anche i propri dati nella nuova destinazione?</string>
     <string name="copying_osmand_one_file_descr">Copia in corso del file (%s) nella nuova destinazione...</string>
     <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)</string>
     <string name="copying_osmand_files">Copia dei file di dati di OsmAnd</string>
@@ -1741,7 +1741,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="navigation_intent_invalid">Formato non valido: %s</string>
 <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
-    <string name="osmo_plugin_description">"OpenStreetMap monitoraggio avanzato in diretta, vedi http://osmo.mobi. Fornisce la possibilità di tracciare altri dispositivi e di essere tracciati. Crea gruppo anonimi, condivide reciprocamente la posizione e comunica. Sono disponibili varie impostazioni di monitoraggio, per la sessione in corso o permanenti. I gruppi anonimi sono limitate per il numero di giorni e alcune funzioni es. non c\'è il controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. "</string>
+    <string name="osmo_plugin_description">"OpenStreetMap monitoraggio avanzato in diretta, vedi http://osmo.mobi. Fornisce la possibilità di tracciare altri dispositivi e di essere tracciati. Crea gruppo anonimi, condivide reciprocamente la posizione e comunica. Sono disponibili varie impostazioni di monitoraggio, per la sessione in corso o permanenti. I gruppi anonimi sono limitati a un numero di giorni e alcune funzioni es. non c\'è il controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. "</string>
     <string name="osmo_plugin_name">OsMo (Monitoraggio avanzato in tempo reale)</string>
     <string name="osmo_settings">Monitoraggio OpenStreetMap</string>
    	<string name="keep_informing_never">Mai</string>
@@ -1790,7 +1790,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_track_interval">Intervallo di registrazione</string>
 	<string name="osmo_track_interval_descr">Scegli l\'intervallo di tempo per l\'invio della posizione</string>
     <string name="int_days">giorni</string>
-    <string name="osmo_connect_menu">Connetti</string>
+    <string name="osmo_connect_menu">Attiva</string>
     <string name="osmo_expire_group">Scade fra</string>
     <string name="osmo_group_description">Descrizione</string>
     <string name="osmo_group_policy">Regole</string>
@@ -2033,4 +2033,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="map_update">Mappe </string>
 	<string name="search_for">Cerca</string>
 	<string name="show_map">MOSTRA LA MAPPA</string>
-	</resources>
+	<string name="error_avoid_specific_road">Non è stata trovata una strada nelle vicinanze</string>
+    </resources>
