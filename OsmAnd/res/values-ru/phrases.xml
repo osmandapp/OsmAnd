@@ -615,4 +615,8 @@
 	<string name="poi_stream">Ручей</string>
 	<string name="poi_military">Военная зона</string>
 	<string name="poi_pier">Пирс</string>
+	<string name="poi_observatory">Обсерватория</string>
+	<string name="poi_astronomical_observatory">Астрономическая обсерватория</string>
+	<string name="poi_hot_spring">Горячий источник</string>
+	<string name="poi_geyser">Гейзер</string>
 	</resources>
