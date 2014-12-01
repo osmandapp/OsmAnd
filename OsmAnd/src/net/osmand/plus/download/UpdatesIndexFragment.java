@@ -43,7 +43,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 		osmandRegions = getMyApplication().getResourceManager().getOsmandRegions();
 		List<IndexItem> indexItems = new ArrayList<IndexItem>();
 		if (BaseDownloadActivity.downloadListIndexThread != null) {
-			indexItems = DownloadActivity.downloadListIndexThread.getItemsToUpdate();
+			indexItems =  new ArrayList<IndexItem>(DownloadActivity.downloadListIndexThread.getItemsToUpdate());
 		}
 		createListView(indexItems);
 		setHasOptionsMenu(true);
@@ -73,7 +73,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 			return;
 		}
 
-		createListView(items);
+		createListView(new ArrayList<IndexItem>(items));
 	}
 
 	@Override
