@@ -45,6 +45,14 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 		if (BaseDownloadActivity.downloadListIndexThread != null) {
 			indexItems = DownloadActivity.downloadListIndexThread.getItemsToUpdate();
 		}
+		createListView(indexItems);
+		setHasOptionsMenu(true);
+	}
+
+	private void createListView(List<IndexItem> indexItems) {
+		if (indexItems.size() == 0){
+			indexItems.add(new IndexItem(getString(R.string.everything_up_to_date),"",0,"",0,0, null));
+		}
 		listAdapter = new UpdateIndexAdapter(getDownloadActivity(), R.layout.download_index_list_item, indexItems);
 		listAdapter.sort(new Comparator<IndexItem>() {
 			@Override
@@ -53,7 +61,6 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 			}
 		});
 		setListAdapter(listAdapter);
-		setHasOptionsMenu(true);
 	}
 
 	@Override
@@ -65,8 +72,8 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 		if(listAdapter == null){
 			return;
 		}
-		listAdapter = new UpdateIndexAdapter(getDownloadActivity(), R.layout.download_index_list_item, items);
-		setListAdapter(listAdapter);
+
+		createListView(items);
 	}
 
 	@Override
@@ -201,14 +208,22 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 
 			TextView name = (TextView) v.findViewById(R.id.download_item);
 			TextView description = (TextView) v.findViewById(R.id.download_descr);
+			final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
 			IndexItem e = items.get(position);
+			if (e.getFileName() == getString(R.string.everything_up_to_date)){
+				name.setText(e.getFileName());
+				description.setText("");
+				ch.setVisibility(View.INVISIBLE);
+				return v;
+			} else {
+				ch.setVisibility(View.VISIBLE);
+			}
 			String eName = DownloadActivity.getFullName(e, getMyApplication(), osmandRegions);
 
 			name.setText(eName.trim()); //$NON-NLS-1$
 			String d = e.getDate(format) + "\n" + e.getSizeDescription(getMyApplication());
 			description.setText(d);
 
-			final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
 			ch.setChecked(getDownloadActivity().getEntriesToDownload().containsKey(e));
 			ch.setOnClickListener(new View.OnClickListener() {
 				@Override
