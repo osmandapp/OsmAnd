@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import android.support.v4.app.Fragment;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
@@ -42,6 +41,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.format.DateFormat;
@@ -57,7 +57,6 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
 /**
- * Created by Denis on 05.11.2014.
  */
 public class DashboardActivity extends BaseDownloadActivity {
 	public static final boolean TIPS_AND_TRICKS = false;
@@ -71,10 +70,10 @@ public class DashboardActivity extends BaseDownloadActivity {
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 	
 	private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
+	private static final int HELP_ID = 0;
+	private static final int SETTINGS_ID = 1;
+	private static final int EXIT_ID = 2;
 	private ProgressDialog startProgressDialog;
-
-	
-	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -156,25 +155,22 @@ public class DashboardActivity extends BaseDownloadActivity {
 		android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
 		//after rotation list of fragments in fragment transaction is not cleared
 		//so we need to check whether some fragments are already existing
-		if (manager.findFragmentByTag(DashSearchFragment.TAG) == null){
-			DashSearchFragment searchFragment = new DashSearchFragment();
-			fragmentTransaction.add(R.id.content, searchFragment, DashSearchFragment.TAG);
-		}
 		if (manager.findFragmentByTag(DashMapFragment.TAG) == null){
 			DashMapFragment mapFragment = new DashMapFragment();
 			fragmentTransaction.add(R.id.content, mapFragment, DashMapFragment.TAG);
 		}
-
+		if (manager.findFragmentByTag(DashSearchFragment.TAG) == null){
+			DashSearchFragment searchFragment = new DashSearchFragment();
+			fragmentTransaction.add(R.id.content, searchFragment, DashSearchFragment.TAG);
+		}
 		if (manager.findFragmentByTag(DashFavoritesFragment.TAG) == null){
 			DashFavoritesFragment favoritesFragment = new DashFavoritesFragment();
 			fragmentTransaction.add(R.id.content, favoritesFragment, DashFavoritesFragment.TAG);
 		}
-
 		if (manager.findFragmentByTag(DashUpdatesFragment.TAG) == null){
 			DashUpdatesFragment updatesFragment = new DashUpdatesFragment();
 			fragmentTransaction.add(R.id.content, updatesFragment, DashUpdatesFragment.TAG);
 		}
-
 		if (manager.findFragmentByTag(DashPluginsFragment.TAG) == null){
 			DashPluginsFragment pluginsFragment = new DashPluginsFragment();
 			fragmentTransaction.add(R.id.content, pluginsFragment, DashPluginsFragment.TAG).commit();
@@ -282,6 +278,10 @@ public class DashboardActivity extends BaseDownloadActivity {
 					@Override
 					public void onDismiss(DialogInterface dialog) {
 						checkVectorIndexesDownloaded();
+						// Do some action on close
+						// FIXME uncomment
+						// app.getResourceManager().getRenderer().clearCache();
+						// mapView.refreshMap(true);
 					}
 				});
 			} else {
@@ -382,12 +382,12 @@ public class DashboardActivity extends BaseDownloadActivity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, 0, 0, R.string.tips_and_tricks).setIcon(R.drawable.ic_ac_help)
-				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-		menu.add(0, 1, 0, R.string.settings).setIcon(R.drawable.ic_ac_settings)
-				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-		menu.add(0, 2, 0, R.string.exit_Button).setIcon(R.drawable.ic_ac_close)
-				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+		menu.add(0, HELP_ID, 0, R.string.tips_and_tricks).setIcon(R.drawable.ic_ac_help)
+				.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		menu.add(0, SETTINGS_ID, 0, R.string.settings).setIcon(R.drawable.ic_ac_settings)
+				.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		menu.add(0, EXIT_ID, 0, R.string.exit_Button).setIcon(R.drawable.ic_ac_close)
+				.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		return true;
 	}
 
@@ -400,7 +400,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
-		if (item.getItemId() == 0) {
+		if (item.getItemId() == HELP_ID) {
 			if(TIPS_AND_TRICKS) {
 				TipsAndTricksActivity activity = new TipsAndTricksActivity(this);
 				Dialog dlg = activity.getDialogToShowTips(false, true);
@@ -409,10 +409,10 @@ public class DashboardActivity extends BaseDownloadActivity {
 				final Intent helpIntent = new Intent(this, HelpActivity.class);
 				startActivity(helpIntent);
 			}
-		} else if (item.getItemId() == 1){
+		} else if (item.getItemId() == SETTINGS_ID){
 			final Intent settings = new Intent(this, appCustomization.getSettingsActivity());
 			startActivity(settings);
-		} else if (item.getItemId() == 2){
+		} else if (item.getItemId() == EXIT_ID){
 			getMyApplication().closeApplication(this);
 		}
 		return true;

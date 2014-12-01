@@ -214,6 +214,8 @@
 
 	<string name="poi_pier">Pier</string>
 	<string name="poi_surveillance">Surveillance</string>
+	<string name="poi_observatory">Observatory</string>
+	<string name="poi_astronomical_observatory">Astronomical observatory</string>
 	<string name="poi_construction">Construction</string>
 	<string name="poi_works">Works</string>
 	<string name="poi_mineshaft">Mineshaft</string>
@@ -404,6 +406,8 @@
 	<string name="poi_caravan_site">Caravan site</string>
 	<string name="poi_picnic_site">Picnic site</string>
 	<string name="poi_spring">Spring</string>
+	<string name="poi_hot_spring">Hot spring</string>
+	<string name="poi_geyser">Geyser</string>
 	<string name="poi_cemetery">Cemetery</string>
 	<string name="poi_grave_yard">Graveyard</string>
 	<string name="poi_shelter">Shelter</string>

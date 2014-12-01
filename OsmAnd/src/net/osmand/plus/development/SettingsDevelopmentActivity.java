@@ -6,7 +6,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import net.osmand.core.android.GLActivity;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
@@ -45,19 +44,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.USE_NATIVE_RENDER, R.string.use_native_render,R.string.use_native_render_descr));
 
 		Preference pref = new Preference(this);
-		pref.setTitle(R.string.test_native_render);
-		pref.setSummary(R.string.test_native_render_msg);
-		pref.setKey("test_native_render");
-		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				startActivity(new Intent(SettingsDevelopmentActivity.this, GLActivity.class));
-				return true;
-			}
-		});
-		cat.addPreference(pref);
-
-		pref = new Preference(this);
 		pref.setTitle(R.string.test_voice_prompts);
 		pref.setSummary(R.string.play_commands_of_currently_selected_voice);
 		pref.setKey("test_voice_commands");

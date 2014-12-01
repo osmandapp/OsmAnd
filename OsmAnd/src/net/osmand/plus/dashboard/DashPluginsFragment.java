@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.FontCache;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_plugins_fragment, container, false);
-		Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Medium.ttf");
+		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		((TextView) view.findViewById(R.id.plugin_text)).setTypeface(typeface);
 		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
 		view.findViewById(R.id.show_all).setOnClickListener(new View.OnClickListener() {

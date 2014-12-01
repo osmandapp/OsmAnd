@@ -1,18 +1,22 @@
 package net.osmand.plus.dashboard;
 
+import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.helpers.FontCache;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.TextView;
-import net.osmand.plus.OsmAndAppCustomization;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.search.SearchActivity;
 
 /**
  * Created by Denis on 24.11.2014.
@@ -25,7 +29,7 @@ public class DashSearchFragment extends DashBaseFragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_search_fragment, container, false);
 		setupButtons(view);
-		Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Medium.ttf");
+		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		((TextView) view.findViewById(R.id.search_for)).setTypeface(typeface);
 		return view;
 	}
@@ -39,6 +43,8 @@ public class DashSearchFragment extends DashBaseFragment {
 	private void setupButtons(View view){
 		final Activity activity = getActivity();
 		final OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
+//		EditText searchText = (EditText) view.findViewById(R.id.search_text);
+//		searchText.addTextChangedListener(textWatcher);
 		(view.findViewById(R.id.poi)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

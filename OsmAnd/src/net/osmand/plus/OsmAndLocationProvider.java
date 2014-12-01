@@ -216,7 +216,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 	
 	public RouteDataObject findRoute(double lat , double lon) {
-		return currentPositionHelper.runUpdateInThread(lat, lon);
+		return currentPositionHelper.runUpdateInThreadCatch(lat, lon);
 	}
 
 	public void resumeAllUpdates() {

@@ -10,7 +10,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityActionsProvider;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapExplorer;
-import net.osmand.core.jni.IMapRenderer;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
@@ -30,6 +30,7 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -146,7 +147,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private DisplayMetrics dm;
 	
-	private IMapRenderer mapRenderer;
+	private MapRendererView mapRenderer;
 
 	private OsmandApplication application;
 
@@ -514,6 +515,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return additional.fps;
 	}
 
+	@SuppressLint("WrongCall")
 	public void drawOverMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		if(mapRenderer == null) {
 			fillCanvas(canvas, drawSettings);
@@ -736,11 +738,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return true;
 	}
 	
-	public void setMapRender(IMapRenderer mapRenderer) {
+	public void setMapRender(MapRendererView mapRenderer) {
 		this.mapRenderer = mapRenderer;
 	}
 	
-	public IMapRenderer getMapRenderer() {
+	public MapRendererView getMapRenderer() {
 		return mapRenderer;
 	}
 

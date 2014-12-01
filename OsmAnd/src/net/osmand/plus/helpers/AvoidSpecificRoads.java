@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AvoidSpecificRoads {
 	private List<RouteDataObject> missingRoads;
@@ -143,14 +144,23 @@ public class AvoidSpecificRoads {
 	}
 	private void findRoad(final MapActivity activity, final LatLon loc) {
 		new AsyncTask<LatLon, Void, RouteDataObject>() {
+			Exception e = null;
 
 			@Override
 			protected RouteDataObject doInBackground(LatLon... params) {
-				return app.getLocationProvider().findRoute(loc.getLatitude(), loc.getLongitude());
+				try {
+					return app.getLocationProvider().findRoute(loc.getLatitude(), loc.getLongitude());
+				} catch (Exception e) {
+					this.e = e;
+					e.printStackTrace();
+					return null;
+				}
 			}
 			
 			protected void onPostExecute(RouteDataObject result) {
-				if(result != null) {
+				if(e != null) {
+					Toast.makeText(activity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
+				} else if(result != null) {
 					getBuilder().addImpassableRoad(result);
 					RoutingHelper rh = app.getRoutingHelper();
 					if(rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {

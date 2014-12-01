@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -1856,8 +1856,6 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="text_size">Mida del text</string>
     <string name="fav_point_dublicate">Nom de punt preferit duplicat</string>
     <string name="fav_point_dublicate_message">S\'ha canviat el nom del vostre punt preferit a %1$s per evitar duplicitats.</string>
-    <string name="test_native_render">Prova de renderització nativa</string>
-    <string name="test_native_render_msg">Inicia l\'activitat amb renderització nativa</string>
     <string name="use_native_render">Utilitza la renderització nativa</string>
     <string name="use_native_render_descr">Ús de renderització C++ en comptes de Java</string>
     <string name="fav_point_emoticons_message">El nom del vostre punt preferit s\'ha canviat a %1$s per facilitar el desar bé la cadena amb emoticones en un fitxer.</string>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="fav_point_dublicate_message">O nome do punto favorito foi cambiado a %1$s para evitar os duplicados.</string>
     <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>
     <string name="text_size">Tamaño da letra</string>
@@ -16,8 +16,6 @@
 	<string name="tip_search_t">"Pódense buscar sitios directamente no mapa con «Empregar o lugar» → «Buscar preto de aquí» ou chamando pola pantalla de busca mediante «Menú» → «Buscar».\n\nA pantalla de busca fornece modelos para buscar\n\t* polo enderezo\n\t* mediante coordenadas\n\t* como punto de interese (PDI, por tipo ou polo nome)\n\t* mediante o historial de buscas\n\t* ou mediante os favoritos predefinidos.\n\nCon todas as coincidencias hai un menú de contexto ou barra de accións que ofrece opcións tipo «Indicacións a» ou «Mostrar no mapa», etc. "</string>
 	<string name="fav_point_emoticons_message">Cambiamos o punto favorito a %1$s para facilitar que se garde a cadea con emoticonas nun ficheiro.</string>
     <string name="print_route">Imprimir o itinerario</string>
-    <string name="test_native_render">Probar o renderizador nativo</string>
-    <string name="test_native_render_msg">Inicia a actividade cun renderizador nativo</string>
     <string name="fav_point_dublicate">O nome do punto favorito está duplicado</string>
     <string name="use_native_render">Empregar o renderizador nativo</string>
     <string name="use_native_render_descr">Empregar o renderizador en C++ en troques de en Java</string>

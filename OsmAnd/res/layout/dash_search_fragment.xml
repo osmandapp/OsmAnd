@@ -7,12 +7,16 @@
     android:background="@drawable/bg_cardui"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/search_for"
-        style="@style/DashboardSubHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="@string/search_for" />
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content">
+    	<TextView
+        	android:id="@+id/search_for"
+        	style="@style/DashboardSubHeader"
+        	android:layout_width="wrap_content"
+        	android:layout_height="40dp"
+        	android:text="@string/search_for" />
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

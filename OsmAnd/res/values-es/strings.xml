@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
   
   <string name="layer_map_appearance">Configura pantalla</string>
@@ -1839,8 +1839,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="text_size">Tamaño de texto</string>
     <string name="fav_point_dublicate">Nombre de punto favorito duplicado</string>
     <string name="fav_point_dublicate_message">Hemos cambiado el nombre de tu punto favorito a %1$s para evitar nombres duplicados.</string>
-    <string name="test_native_render">Probar renderización nativa</string>
-    <string name="test_native_render_msg">Iniciar la actividad con renderización nativa</string>
     <string name="use_native_render">Usar renderización nativa</string>
     <string name="use_native_render_descr">Usar el renderizado C++ en lugar de Java</string>
     <string name="print_route">Imprimir ruta</string>
