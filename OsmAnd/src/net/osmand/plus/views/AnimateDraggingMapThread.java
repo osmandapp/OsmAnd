@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.util.MapUtils;
 
@@ -8,6 +9,7 @@ import org.apache.commons.logging.Log;
 
 import android.os.SystemClock;
 import android.util.FloatMath;
+import android.view.MotionEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
@@ -103,10 +105,12 @@ public class AnimateDraggingMapThread {
 			
 			@Override
 			public void run() {
-				try {
+				try { 
+					suspendUpdate();
 					runnable.run();
 				} finally {
 					currentThread = null;
+					resumeUpdate();
 				}
 			}
 		}, "Animating Thread");
@@ -303,6 +307,20 @@ public class AnimateDraggingMapThread {
 	private void clearTargetValues(){
 		targetIntZoom = 0;
 		targetZoomScale = 0;
+	}
+	
+	private void suspendUpdate() {
+		final MapRendererView mapRenderer = tileView.getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.suspendSymbolsUpdate();
+		}
+	}
+	
+	private void resumeUpdate() {
+		final MapRendererView mapRenderer = tileView.getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.resumeSymbolsUpdate();
+		}
 	}
 	
 	private void setTargetValues(int zoom, double zoomScale, double lat, double lon){

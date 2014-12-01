@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
+import net.osmand.IndexConstants;
 import net.osmand.core.android.CoreResourcesFromAndroidAssetsCustom;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.NativeCore;
@@ -22,6 +23,8 @@ public class NativeCoreContext {
 	private static final String TAG = "NativeCoreContext";
 	
 	private static boolean init;
+	
+	private static MapRendererContext mapRendererContext;
 	
 	public static boolean isInit() {
 		return init;
@@ -52,42 +55,44 @@ public class NativeCoreContext {
 				WindowManager mgr = (WindowManager)app.getSystemService(Context.WINDOW_SERVICE);
 				DisplayMetrics dm = new DisplayMetrics();
 				mgr.getDefaultDisplay().getMetrics(dm);
-
-				// Get device display density factor
-//				DisplayMetrics displayMetrics = new DisplayMetrics();
-//				act.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-				DisplayMetrics displayMetrics = app.getResources().getDisplayMetrics();
-				// TODO getSettings().getSettingsZoomScale() + Math.sqrt(Math.max(0, getDensity() - 1))
-				float scaleCoefficient = displayMetrics.density;
-				if (Math.min(dm.widthPixels / (dm.density * 160), dm.heightPixels / (dm.density * 160)) > 2.5f) {
-					// large screen
-					scaleCoefficient *= 1.5f;
-				}
-				float displayDensityFactor = scaleCoefficient;
+				float displayDensityFactor = (float) Math.pow(2, (app.getSettings().getSettingsZoomScale()  + Math.sqrt(Math.max(0, dm.density - 1))));
 				
-				_obfsCollection = new ObfsCollection();
-				_obfsCollection.addDirectory(directory.getAbsolutePath(), false);
+				ObfsCollection obfsCollection = new ObfsCollection();
+				obfsCollection.addDirectory(directory.getAbsolutePath(), false);
 				
-				_mapStylesCollection = new MapStylesCollection();
-				
-				_mapRendererContext = new MapRendererContext();
-				_mapRendererContext.setDisplayDensityFactor(displayDensityFactor);
-				_mapRendererContext.setupObfMap(
-						_mapStylesCollection.getResolvedStyleByName("default"),
-						_obfsCollection);
+				MapStylesCollection mapStylesCollection = setupMapStyleCollection(app);
+				mapRendererContext = new MapRendererContext(app);
+				mapRendererContext.setDisplayDensityFactor(displayDensityFactor);
+				mapRendererContext.setupObfMap(mapStylesCollection, obfsCollection);
 				
 				init = true;
 			}
 		}
 	}
-	
-	private static MapStylesCollection _mapStylesCollection;
-	
-	private static ObfsCollection _obfsCollection;
-	
-	private static MapRendererContext _mapRendererContext;
+
+	private static MapStylesCollection setupMapStyleCollection(
+			OsmandApplication app) {
+		MapStylesCollection mapStylesCollection = new MapStylesCollection();
+		// Alexey TODO
+//		internalRenderers.put("Touring-view_(more-contrast-and-details)", "Touring-view_(more-contrast-and-details)" +".render.xml");
+//		internalRenderers.put("UniRS", "UniRS" + ".render.xml");
+//		internalRenderers.put("LightRS", "LightRS" + ".render.xml");
+//		internalRenderers.put("High-contrast-roads", "High-contrast-roads" + ".render.xml");
+//		internalRenderers.put("Winter-and-ski", "Winter-and-ski" + ".render.xml");
+		File renderers = app.getAppPath(IndexConstants.RENDERERS_DIR);
+		File[] lf = renderers.listFiles();
+		if(lf != null) {
+			for(File f : lf) {
+				if(f.getName().endsWith(IndexConstants.RENDERER_INDEX_EXT)) {
+					mapStylesCollection.addStyleFromFile(f.getAbsolutePath());
+				}
+			}
+		}
+		return mapStylesCollection;
+	}
+
 	
 	public static MapRendererContext getMapRendererContext() {
-		return _mapRendererContext;
+		return mapRendererContext;
 	}
 }
