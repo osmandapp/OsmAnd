@@ -46,7 +46,7 @@
 	<string name="poi_bicycle_shop">Magasin de vélos</string>
 	<string name="poi_bicycle_parking">Parking à vélos</string>
 	<string name="poi_bicycle_rental">Location de vélos</string>
-	<string name="poi_biergarten">Biergarten</string>
+	<string name="poi_biergarten">Brasserie en plein air</string>
 	<string name="poi_bitcoin_yes">Paiement par bitcoins</string>
 	<string name="poi_boat_sharing">Partage de voiliers</string>
 	<string name="poi_boatyard">Cale sèche</string>
@@ -471,4 +471,6 @@
 	<string name="poi_seamark_mooring">Mouillage</string>
 	<string name="poi_seamark_wreck">Épave</string>
 
+	<string name="poi_bag_shop">Maroquinerie</string>
+	<string name="poi_military_airfield">Aérodrome militaire</string>
 	</resources>
