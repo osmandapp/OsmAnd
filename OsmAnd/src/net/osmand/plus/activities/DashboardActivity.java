@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import android.support.v4.app.FragmentManager;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -16,15 +17,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.dashboard.DashFavoritesFragment;
-import net.osmand.plus.dashboard.DashMapFragment;
-import net.osmand.plus.dashboard.DashPluginsFragment;
-import net.osmand.plus.dashboard.DashSearchFragment;
-import net.osmand.plus.dashboard.DashUpdatesFragment;
+import net.osmand.plus.dashboard.*;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.sherpafy.SherpafyLoadingFragment;
 import net.osmand.plus.sherpafy.TourViewActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -74,9 +72,8 @@ public class DashboardActivity extends BaseDownloadActivity {
 	private static final int HELP_ID = 0;
 	private static final int SETTINGS_ID = 1;
 	private static final int EXIT_ID = 2;
-	private ProgressDialog startProgressDialog;
 	private OsmAndLocationProvider lp;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
@@ -103,10 +100,8 @@ public class DashboardActivity extends BaseDownloadActivity {
 		getSupportActionBar().setBackgroundDrawable(color);
 		getSupportActionBar().setIcon(android.R.color.transparent);
 		
-		setupContributionVersion();
-		addFragments();
 		initApp(this, getMyApplication());
-		
+		addFragments();
 	}
 	
 	@Override
@@ -118,6 +113,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 	}
 	
 	protected void setupContributionVersion() {
+		findViewById(R.id.credentials).setVisibility(View.VISIBLE);
 		final TextView textVersionView = (TextView) findViewById(R.id.Copyright);
 		final Calendar inst = Calendar.getInstance();
 		inst.setTime(new Date());
@@ -154,7 +150,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 		about.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 	
-	private void addFragments() {
+	public void addFragments() {
 		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
 		//after rotation list of fragments in fragment transaction is not cleared
@@ -178,6 +174,16 @@ public class DashboardActivity extends BaseDownloadActivity {
 		if (manager.findFragmentByTag(DashPluginsFragment.TAG) == null){
 			DashPluginsFragment pluginsFragment = new DashPluginsFragment();
 			fragmentTransaction.add(R.id.content, pluginsFragment, DashPluginsFragment.TAG).commit();
+		}
+		setupContributionVersion();
+	}
+
+	private void addErrorFragment(){
+		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+		android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
+		if (manager.findFragmentByTag(DashErrorFragment.TAG) == null){
+			DashErrorFragment errorFragment = new DashErrorFragment();
+			fragmentTransaction.add(R.id.content, errorFragment, DashErrorFragment.TAG).commit();
 		}
 	}
 	
@@ -235,9 +241,6 @@ public class DashboardActivity extends BaseDownloadActivity {
 			startActivityForResult(mapIndent, 0);
 			return;
 		}
-		startProgressDialog = new ProgressDialog(this);
-		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
-		boolean dialogShown = false;
 		boolean firstTime = false;
 		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
 		boolean appVersionChanged = false;
@@ -252,7 +255,6 @@ public class DashboardActivity extends BaseDownloadActivity {
 		if (appCustomization.showFirstTimeRunAndTips(firstTime, appVersionChanged)) {
 			if (firstTime) {
 				applicationInstalledFirstTime();
-				dialogShown = true;
 			} else {
 				int i = pref.getInt(TIPS_SHOW, 0);
 				if (i < 7) {
@@ -263,46 +265,21 @@ public class DashboardActivity extends BaseDownloadActivity {
 					TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
 					Dialog dlg = tipsActivity.getDialogToShowTips(!appVersionChanged, false);
 					dlg.show();
-					dialogShown = true;
 					} else {
 						if(appVersionChanged) {
 							final Intent helpIntent = new Intent(activity, HelpActivity.class);
 							helpIntent.putExtra(HelpActivity.TITLE, Version.getAppVersion(getMyApplication()));
 							helpIntent.putExtra(HelpActivity.URL, "changes-1.9.html");
 							activity.startActivity(helpIntent);
-							dialogShown = true;
 						}
 					}
 				}
 			}
 		}
-		if(!dialogShown && appCustomization.checkBasemapDownloadedOnStart()) {
-			if (startProgressDialog.isShowing()) {
-				startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						checkVectorIndexesDownloaded();
-						// Do some action on close
-						// FIXME uncomment
-						// app.getResourceManager().getRenderer().clearCache();
-						// mapView.refreshMap(true);
-					}
-				});
-			} else {
-				checkVectorIndexesDownloaded();
-			}
-		}
-		if(appCustomization.checkExceptionsOnStart() && !dialogShown){
+
+		if(appCustomization.checkExceptionsOnStart()){
 			checkPreviousRunsForExceptions(firstTime);
 		}
-	}
-	
-	@Override
-	protected Dialog onCreateDialog(int id) {
-		if(id == OsmandApplication.PROGRESS_DIALOG){
-			return startProgressDialog;
-		}
-		return super.onCreateDialog(id);
 	}
 	
 	private void applicationInstalledFirstTime() {
@@ -341,38 +318,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 		final File file = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !firstTime) {
-				String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
-				Builder builder = new AccessibleAlertBuilder(DashboardActivity.this);
-				builder.setMessage(msg).setNeutralButton(getString(R.string.close), null);
-				builder.setPositiveButton(R.string.send_report, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_SEND);
-						intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "osmand.app+crash@gmail.com" }); //$NON-NLS-1$
-						intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-						intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
-						intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug"); //$NON-NLS-1$
-						StringBuilder text = new StringBuilder();
-						text.append("\nDevice : ").append(Build.DEVICE); //$NON-NLS-1$
-						text.append("\nBrand : ").append(Build.BRAND); //$NON-NLS-1$
-						text.append("\nModel : ").append(Build.MODEL); //$NON-NLS-1$
-						text.append("\nProduct : ").append(Build.PRODUCT); //$NON-NLS-1$
-						text.append("\nBuild : ").append(Build.DISPLAY); //$NON-NLS-1$
-						text.append("\nVersion : ").append(Build.VERSION.RELEASE); //$NON-NLS-1$
-						text.append("\nApp Version : ").append(Version.getAppName(app)); //$NON-NLS-1$
-						try {
-							PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
-							if (info != null) {
-								text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode); //$NON-NLS-1$ //$NON-NLS-2$
-							}
-						} catch (NameNotFoundException e) {
-						}
-						intent.putExtra(Intent.EXTRA_TEXT, text.toString());
-						startActivity(Intent.createChooser(intent, getString(R.string.send_report)));
-					}
-
-				});
-				builder.show();
+				addErrorFragment();
 			}
 			getPreferences(MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
 		} else {

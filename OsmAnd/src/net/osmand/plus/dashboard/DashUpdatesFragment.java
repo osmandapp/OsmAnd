@@ -75,12 +75,13 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		downloadButtons.clear();
 		mainView.findViewById(R.id.main_progress).setVisibility(View.GONE);
 		((TextView) mainView.findViewById(R.id.update_count)).setText(String.valueOf(list.size()));
-		if (list.size() < 1) {
-			return;
-		}
 
 		LinearLayout updates = (LinearLayout) mainView.findViewById(R.id.updates_items);
 		updates.removeAllViews();
+
+		if (list.size() < 1) {
+			return;
+		}
 
 		for (int i = 0; i < list.size(); i++) {
 			final IndexItem item = list.get(i);

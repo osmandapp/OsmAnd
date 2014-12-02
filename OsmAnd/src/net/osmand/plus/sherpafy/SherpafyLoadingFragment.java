@@ -20,7 +20,7 @@ public class SherpafyLoadingFragment extends SherlockFragment {
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container,
 			Bundle savedInstanceState) {
 		app = (OsmandApplication) getSherlockActivity().getApplication();
-		view = inflater.inflate(R.layout.sherpafy_loading, container, false);
+		view = inflater.inflate(R.layout.loading, container, false);
 		return view;
 	}
 	

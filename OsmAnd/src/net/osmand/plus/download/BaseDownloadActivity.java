@@ -1,5 +1,6 @@
 package net.osmand.plus.download;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -7,11 +8,18 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import net.osmand.IndexConstants;
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.DashboardActivity;
+import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -20,6 +28,7 @@ import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 
 /**
  * Created by Denis on 25.11.2014.
@@ -38,8 +47,12 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 		if(downloadListIndexThread == null) {
 			downloadListIndexThread = new DownloadIndexesThread(this);
 		}
+		prepareDownloadDirectory();
+	}
+
+	public void updateDownloads() {
 		if (downloadListIndexThread.getCachedIndexFiles() != null && downloadListIndexThread.isDownloadedFromInternet()) {
-			downloadListIndexThread.runCategorization(type);
+			downloadListIndexThread.runCategorization(DownloadActivityType.NORMAL_FILE);
 		} else {
 			downloadListIndexThread.runReloadIndexFiles();
 		}
@@ -195,6 +208,97 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 		});
 		bld.setNegativeButton(R.string.default_buttons_no, null);
 		bld.show();
+	}
+
+	private void prepareDownloadDirectory() {
+		if(getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
+			boolean showedDialog = false;
+			if(Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
+				SuggestExternalDirectoryDialog.showDialog(this, null, null);
+			}
+			if(!showedDialog) {
+				showDialogOfFreeDownloadsIfNeeded();
+			}
+		} else {
+			showDialogOfFreeDownloadsIfNeeded();
+		}
+
+
+		if (Build.VERSION.SDK_INT >= OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
+			final String currentStorage = settings.getExternalStorageDirectory().getAbsolutePath();
+			String primaryStorage = settings.getDefaultExternalStorageLocation();
+			if (!currentStorage.startsWith(primaryStorage)) {
+				// secondary storage
+				boolean currentDirectoryNotWritable = true;
+				for (String writeableDirectory : settings.getWritableSecondaryStorageDirectorys()) {
+					if (currentStorage.startsWith(writeableDirectory)) {
+						currentDirectoryNotWritable = false;
+						break;
+					}
+				}
+				if (currentDirectoryNotWritable) {
+					currentDirectoryNotWritable = !OsmandSettings.isWritable(settings.getExternalStorageDirectory());
+				}
+				if (currentDirectoryNotWritable) {
+					final String newLoc = settings.getMatchingExternalFilesDir(currentStorage);
+					if (newLoc != null && newLoc.length() != 0) {
+						AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
+						ab.setMessage(getString(R.string.android_19_location_disabled,
+								settings.getExternalStorageDirectory()));
+						ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								copyFilesForAndroid19(newLoc);
+							}
+						});
+						ab.setNegativeButton(R.string.default_buttons_cancel, null);
+						ab.show();
+					}
+				}
+			}
+		}
+	}
+
+	private void showDialogOfFreeDownloadsIfNeeded() {
+		if (Version.isFreeVersion(getMyApplication())) {
+			AlertDialog.Builder msg = new AlertDialog.Builder(this);
+			msg.setTitle(R.string.free_version_title);
+			String m = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "") + "\n";
+			m += getString(R.string.available_downloads_left, MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get());
+			msg.setMessage(m);
+			if (Version.isMarketEnabled(getMyApplication())) {
+				msg.setNeutralButton(R.string.install_paid, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(getMyApplication()) + "net.osmand.plus"));
+						try {
+							startActivity(intent);
+						} catch (ActivityNotFoundException e) {
+						}
+					}
+				});
+			}
+			msg.setPositiveButton(R.string.default_buttons_ok, null);
+			msg.show();
+		}
+	}
+
+	private void copyFilesForAndroid19(final String newLoc) {
+		SettingsGeneralActivity.MoveFilesToDifferentDirectory task =
+				new SettingsGeneralActivity.MoveFilesToDifferentDirectory(this,
+						new File(settings.getExternalStorageDirectory(), IndexConstants.APP_DIR),
+						new File(newLoc, IndexConstants.APP_DIR)) {
+					protected Boolean doInBackground(Void[] params) {
+						Boolean result = super.doInBackground(params);
+						if(result) {
+							settings.setExternalStorageDirectory(newLoc);
+							getMyApplication().getResourceManager().resetStoreDirectory();
+							getMyApplication().getResourceManager().reloadIndexes(progress)	;
+						}
+						return result;
+					};
+				};
+		task.execute();
 	}
 }
 
