@@ -1851,4 +1851,6 @@
 	<string name="show_all">RODYTI VISKĄ</string>
 	<string name="coordinates">Koordinatės</string>
 	<string name="error_avoid_specific_road">Nerastas trumpiausias kelias</string>
+    <string name="use_opengl_render">Naudoti OpenGL vaizdavimą</string>
+    <string name="use_opengl_render_descr">Naudoti aparatinį OpenGL vaizdavimą (gali neveikti kai kurioje įrangoje)</string>
     </resources>
