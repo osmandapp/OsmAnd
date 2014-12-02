@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="osmo_use_https_descr">Использовать безопасное соединение с сервером</string>
     <string name="osmo_use_https">Использовать https</string>
@@ -440,7 +440,7 @@
   <string name="amenity_type_emergency">Экстренные службы</string>
   <string name="amenity_type_entertainment">Развлечения</string>
   <string name="amenity_type_finance">Финансы</string>
-  <string name="amenity_type_geocache">Геокэшинг</string>
+  <string name="amenity_type_geocache">Геокэшинг (игра)</string>
   <string name="amenity_type_healthcare">Здоровье</string>
   <string name="amenity_type_historic">Историческое</string>
   <string name="amenity_type_landuse">Землепользование</string>
@@ -1411,7 +1411,7 @@
 	<string name="routing_attr_weight_description">Укажите массу автомобиля разрешенную на маршрутах</string>
     
     <string name="map_widget_map_rendering">Отображение карты</string>
-    <string name="amenity_type_seamark">Навигационный знак</string>
+    <string name="amenity_type_seamark">Навигационные знаки (водоемы)</string>
     <string name="disable_complex_routing">Отключить сложную маршрутизацию</string>
     <string name="speech_rate_descr">Указать скорость произношения для TTS</string>
     <string name="guidance_preferences_descr">Установки навигации</string>
