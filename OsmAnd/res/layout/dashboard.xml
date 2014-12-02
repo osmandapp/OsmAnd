@@ -13,14 +13,13 @@
             android:orientation="vertical"
             android:id="@+id/content"
             android:layout_width="match_parent"
-        	android:layout_height="wrap_content">
-            
-        </LinearLayout>
+        	android:layout_height="match_parent"/>
 
-        <LinearLayout
+        <LinearLayout android:id="@+id/credentials"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:padding="6dp" >
 
             <LinearLayout
