@@ -98,10 +98,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 		getSupportActionBar().setIcon(android.R.color.transparent);
 		
 		initApp(this, getMyApplication());
-		if (getMyApplication().isApplicationInitializing()) {
-			FragmentManager fragmentManager = getSupportFragmentManager();
-			fragmentManager.beginTransaction().replace(R.id.content, new DashLoadingFragment()).commit();
-		}
+		addFragments();
 	}
 	
 	@Override
