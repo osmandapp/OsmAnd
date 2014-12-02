@@ -1820,4 +1820,5 @@
 	<string name="coordinates">Координаты</string>
 	<string name="home_button">Дом</string>
     <string name="search_for">Поиск</string>
-	</resources>
+	<string name="everything_up_to_date">Всё обновлено</string>
+    </resources>
