@@ -26,9 +26,11 @@ public class MapVectorLayer extends BaseMapLayer {
 	private RectF destImage = new RectF();
 	private final MapTileLayer tileLayer;
 	private boolean visible = false;
+	private boolean oldRender = false;
 	
-	public MapVectorLayer(MapTileLayer tileLayer){
+	public MapVectorLayer(MapTileLayer tileLayer, boolean oldRender){
 		this.tileLayer = tileLayer;
+		this.oldRender = oldRender;
 	}
 	
 
@@ -94,7 +96,7 @@ public class MapVectorLayer extends BaseMapLayer {
 			resourceManager.getRenderer().interruptLoadingMap();
 		} else {
 			final MapRendererView mapRenderer = view.getMapRenderer();
-			if (mapRenderer != null) {
+			if (mapRenderer != null && !oldRender) {
 				NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
 				// opengl renderer
 				mapRenderer.setTarget(new PointI(tilesRect.getCenter31X(), tilesRect.getCenter31Y()));
