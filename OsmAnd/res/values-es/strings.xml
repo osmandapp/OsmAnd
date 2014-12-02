@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   
   <string name="layer_map_appearance">Configura pantalla</string>
@@ -1884,4 +1884,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="show_map">MOSTRAR MAPA</string>
 	<string name="show_all">MOSTRAR TODO</string>
 	<string name="coordinates">Coordenadas</string>
-	</resources>
+	<string name="use_opengl_render">Usar renderizado opengl</string>
+    <string name="use_opengl_render_descr">Usar renderizado opengl acelerado por hardware (podría no funcionar en algunos dispositivos)</string>
+    <string name="error_avoid_specific_road">No se ha encontrado la carretera más cercana</string>
+    </resources>
