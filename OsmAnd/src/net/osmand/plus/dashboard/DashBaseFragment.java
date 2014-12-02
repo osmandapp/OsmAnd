@@ -11,4 +11,5 @@ public class DashBaseFragment extends SherlockFragment {
 	public OsmandApplication getMyApplication(){
 		return (OsmandApplication) getActivity().getApplication();
 	}
+	
 }

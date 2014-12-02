@@ -41,8 +41,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		
 		cat.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS, R.string.use_magnetic_sensor, R.string.use_magnetic_sensor_descr));
 
-		cat.addPreference(createCheckBoxPreference(settings.USE_NATIVE_RENDER, R.string.use_native_render,R.string.use_native_render_descr));
-
 		Preference pref = new Preference(this);
 		pref.setTitle(R.string.test_voice_prompts);
 		pref.setSummary(R.string.play_commands_of_currently_selected_voice);

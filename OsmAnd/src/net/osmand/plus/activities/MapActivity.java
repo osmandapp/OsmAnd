@@ -37,6 +37,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.GpxImportHelper;
+import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -81,8 +82,7 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class MapActivity extends AccessibleActivity implements
-		VoiceRouter.VoiceMessageListener {
+public class MapActivity extends AccessibleActivity {
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
@@ -114,13 +114,9 @@ public class MapActivity extends AccessibleActivity implements
 	private StateChangedListener<ApplicationMode> applicationModeListener;
 	private FrameLayout lockView;
 	private GpxImportHelper gpxImportHelper;
-	private PowerManager.WakeLock wakeLock = null;
-	private ReleaseWakeLocksRunnable releaseWakeLocksRunnable = new ReleaseWakeLocksRunnable();
-	private boolean active = false;
+	private WakeLockHelper wakeLockHelper ;
 	private boolean intentLocation = false;
 	
-	private DevicePolicyManager mDevicePolicyManager;
-	private ComponentName mDeviceAdmin;
 	
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
@@ -152,7 +148,7 @@ public class MapActivity extends AccessibleActivity implements
 		app.checkApplicationIsBeingInitialized(this, startProgressDialog);
 		parseLaunchIntentLocation();
 		
-		if(settings.USE_NATIVE_RENDER.get() && NativeCoreContext.isInit()) {
+		if(settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
 			ViewStub stub = (ViewStub) findViewById(R.id.atlasMapRendererViewStub);
 			atlasMapRendererView = (AtlasMapRendererView) stub.inflate();
 			OsmAndMapLayersView ml = (OsmAndMapLayersView) findViewById(R.id.MapLayersView);
@@ -229,9 +225,8 @@ public class MapActivity extends AccessibleActivity implements
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
 
 		mapActions.prepareStartOptionsMenu();
-		
-		mDeviceAdmin = new ComponentName(getApplicationContext(), DeviceAdminRecv.class);
-		mDevicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
+	
+		wakeLockHelper = new WakeLockHelper(getMyApplication());
 		
 	}
 	
@@ -571,11 +566,7 @@ public class MapActivity extends AccessibleActivity implements
 	@Override
 	protected void onStart() {
 		super.onStart();
-		active = true;
-		if (wakeLock == null) {
-			VoiceRouter voiceRouter = app.getRoutingHelper().getVoiceRouter();
-			voiceRouter.removeVoiceMessageListener(this);
-		}
+		wakeLockHelper.onStart(this);
 	}
 
 	protected void setProgressDlg(Dialog progressDlg) {
@@ -598,11 +589,7 @@ public class MapActivity extends AccessibleActivity implements
 			progressDlg.dismiss();
 			progressDlg = null;
 		}
-		if (!isFinishing() && (settings.WAKE_ON_VOICE_INT.get() > 0)) {
-			VoiceRouter voiceRouter = app.getRoutingHelper().getVoiceRouter();
-			voiceRouter.addVoiceMessageListener(this);
-		}
-		active = false;
+		wakeLockHelper.onStop(this);
 		super.onStop();
 	}
 
@@ -671,16 +658,7 @@ public class MapActivity extends AccessibleActivity implements
 	
 	public void updateApplicationModeSettings() {
 		changeKeyguardFlags();
-		// update vector renderer
-		RendererRegistry registry = app.getRendererRegistry();
-		RenderingRulesStorage newRenderer = registry.getRenderer(settings.RENDERER.get());
-		if (newRenderer == null) {
-			newRenderer = registry.defaultRender();
-		}
-		if (registry.getCurrentSelectedRenderer() != newRenderer) {
-			registry.setCurrentSelectedRender(newRenderer);
-			app.getResourceManager().getRenderer().clearCache();
-		}
+		updateMapSettings();
 		mapViewTrackingUtilities.updateSettings();
 		app.getRoutingHelper().setAppMode(settings.getApplicationMode());
 		if (mapLayers.getMapInfoLayer() != null) {
@@ -696,6 +674,22 @@ public class MapActivity extends AccessibleActivity implements
 			}
 		});
 		getMapView().refreshMap(true);
+	}
+
+	public void updateMapSettings() {
+		// update vector renderer
+		RendererRegistry registry = app.getRendererRegistry();
+		RenderingRulesStorage newRenderer = registry.getRenderer(settings.RENDERER.get());
+		if (newRenderer == null) {
+			newRenderer = registry.defaultRender();
+		}
+		if(mapView.getMapRenderer() != null) {
+			NativeCoreContext.getMapRendererContext().updateMapSettings();
+		}
+		if (registry.getCurrentSelectedRenderer() != newRenderer) {
+			registry.setCurrentSelectedRender(newRenderer);
+			app.getResourceManager().getRenderer().clearCache();
+		}
 	}
 	
 	
@@ -825,54 +819,5 @@ public class MapActivity extends AccessibleActivity implements
 		return getWindow().getDecorView().findViewById(android.R.id.content);
 	}
 
-	@Override
-	public void onVoiceMessage() {
-		final Integer screenPowerSave = settings.WAKE_ON_VOICE_INT.get();
-		if (screenPowerSave > 0) {
-			uiHandler.removeCallbacks(releaseWakeLocksRunnable);
 
-			if (!active && wakeLock == null) {
-				PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
-				wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
-						| PowerManager.ACQUIRE_CAUSES_WAKEUP,
-						"OsmAndOnVoiceWakeupTag");
-				wakeLock.acquire();
-			}
-
-			uiHandler.postDelayed(releaseWakeLocksRunnable,
-					screenPowerSave * 1000L);
-		}
-	}
-	
-	private void releaseWakeLocks() {
-		if (wakeLock != null) {
-			wakeLock.release();
-			wakeLock = null;
-		}
-		
-		if (mDevicePolicyManager != null && mDeviceAdmin != null) {
-			final Integer screenPowerSave = settings.WAKE_ON_VOICE_INT.get();
-			if (screenPowerSave > 0 && settings.MAP_ACTIVITY_ENABLED.get()) {
-				if (mDevicePolicyManager.isAdminActive(mDeviceAdmin)) {
-					try {
-						mDevicePolicyManager.lockNow();
-					} catch (SecurityException e) {
-//						Log.d(TAG,
-//								"SecurityException: No device admin permission to lock the screen!");
-					}
-				} else {
-//					Log.d(TAG,
-//							"No device admin permission to lock the screen!");
-				}
-			}
-		}
-	}
-	
-	private class ReleaseWakeLocksRunnable implements Runnable {
-		
-		@Override
-		public void run() {
-			releaseWakeLocks();
-		}
-	}
 }

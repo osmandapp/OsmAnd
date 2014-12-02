@@ -9,11 +9,13 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.view.MotionEvent;
 
 public class MapVectorLayer extends BaseMapLayer {
 
@@ -80,6 +82,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		
 	}
 	
+	
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect,
 			DrawSettings drawSettings) {
@@ -92,6 +95,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		} else {
 			final MapRendererView mapRenderer = view.getMapRenderer();
 			if (mapRenderer != null) {
+				NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
 				// opengl renderer
 				mapRenderer.setTarget(new PointI(tilesRect.getCenter31X(), tilesRect.getCenter31Y()));
 				mapRenderer.setAzimuth(-tilesRect.getRotate());

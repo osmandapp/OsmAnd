@@ -12,6 +12,7 @@ import java.util.Random;
 import android.support.v4.app.FragmentManager;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -71,6 +72,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 	private static final int HELP_ID = 0;
 	private static final int SETTINGS_ID = 1;
 	private static final int EXIT_ID = 2;
+	private OsmAndLocationProvider lp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 			return;
 		}
 		setContentView(R.layout.dashboard);
+		lp = getMyApplication().getLocationProvider();
 		
 		final String textVersion = Version.getFullVersion(getMyApplication());
 		getSupportActionBar().setTitle(textVersion);

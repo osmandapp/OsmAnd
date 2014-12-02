@@ -1867,4 +1867,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="coordinates">Coordonnées</string>
 	<string name="map_update">Cartes</string>
 	<string name="error_avoid_specific_road">Aucune route n\'a été trouvée à proximité</string>
+    <string name="use_opengl_render">Utiliser le rendu OpenGL</string>
+    <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (cette option peut être inefficace sur certains appareils)</string>
     </resources>

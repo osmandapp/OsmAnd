@@ -557,16 +557,16 @@ public class OsmandApplication extends Application {
 			}
 			
 			if (!"qnx".equals(System.getProperty("os.name"))) {
-				if (osmandSettings.USE_NATIVE_RENDER.get()) {
-					if (!osmandSettings.CPP_RENDER_FAILED.get()) {
-						osmandSettings.CPP_RENDER_FAILED.set(true);
+				if (osmandSettings.USE_OPENGL_RENDER.get()) {
+					if (!osmandSettings.OPENGL_RENDER_FAILED.get()) {
+						osmandSettings.OPENGL_RENDER_FAILED.set(true);
 						boolean success = NativeCoreContext.tryCatchInit(this);
 						if (success) {
-							osmandSettings.CPP_RENDER_FAILED.set(false);
+							osmandSettings.OPENGL_RENDER_FAILED.set(false);
 						}
 					} else {
 						// try next time once again ?
-						osmandSettings.CPP_RENDER_FAILED.set(false);
+						osmandSettings.OPENGL_RENDER_FAILED.set(false);
 						warnings.add("Native OpenGL library is not supported. Please try again after exit");
 					}
 				}

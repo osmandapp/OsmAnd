@@ -10,6 +10,8 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="everything_up_to_date">Everything up to date</string>
+    <string name="use_opengl_render">Use opengl rendering</string>
+    <string name="use_opengl_render_descr">Use hardware accelerated opengl rendering (may not work on some device)</string>
     <string name="error_avoid_specific_road">Nearest road was not found</string>
     <string name="home_button">Home</string>
     <string name="osmo_use_https_descr">Use secure connection with server</string>
@@ -73,8 +75,6 @@
     <string name="print_route">Print route</string>
     <string name="fav_point_dublicate">Favorite point name duplicate</string>
     <string name="fav_point_dublicate_message">We changed your favorite point name to %1$s to avoid duplicated names.</string>
-    <string name="use_native_render">Use native rendering</string>
-    <string name="use_native_render_descr">Use C++ rendering instead of Java</string>
     <string name="text_size_descr">Set the text size on the map.</string>
     <string name="text_size">Text size</string>
     <string name="traffic_warning_speed_limit">Speed limit</string>

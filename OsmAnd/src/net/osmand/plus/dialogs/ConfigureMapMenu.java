@@ -166,6 +166,7 @@ public class ConfigureMapMenu {
 
 	protected void refreshMapComplete(final MapActivity activity) {
 		activity.getMyApplication().getResourceManager().getRenderer().clearCache();
+		activity.updateMapSettings();
 		activity.getMapView().refreshMap(true);
 	}
 	
@@ -368,8 +369,7 @@ public class ConfigureMapMenu {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								pref.set(p.getPossibleValues()[which]);
-								app.getResourceManager().getRenderer().clearCache();
-								view.refreshMap(true);
+								refreshMapComplete(activity);
 								adapter.setItemDescription(pos, SettingsActivity.getStringPropertyValue(activity, pref.get()));
 								dialog.dismiss();
 								ad.notifyDataSetInvalidated();

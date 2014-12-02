@@ -1960,4 +1960,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="show_all">ПАКАЗАЦЬ УСЁ</string>
 	<string name="coordinates">Каардынаты</string>
 	<string name="error_avoid_specific_road">Бліжэйшая дарога не была знойдзена</string>
+    <string name="use_opengl_render">Выкарыстоўваць OpenGL</string>
+    <string name="use_opengl_render_descr">Выкарыстоўваць апаратнае паскарэньне OpenGL (можа не працаваць на некаторых прыстасаваньнях)</string>
     </resources>
