@@ -174,6 +174,15 @@ public class DashboardActivity extends BaseDownloadActivity {
 		}
 		setupContributionVersion();
 	}
+
+	private void addErrorFragment(){
+		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+		android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
+		if (manager.findFragmentByTag(DashErrorFragment.TAG) == null){
+			DashErrorFragment errorFragment = new DashErrorFragment();
+			fragmentTransaction.add(R.id.content, errorFragment, DashErrorFragment.TAG).commit();
+		}
+	}
 	
 	public static void showAboutDialog(final Activity activity, final OsmandApplication app) {
 		Builder bld = new AlertDialog.Builder(activity);
@@ -306,38 +315,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 		final File file = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !firstTime) {
-				String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
-				Builder builder = new AccessibleAlertBuilder(DashboardActivity.this);
-				builder.setMessage(msg).setNeutralButton(getString(R.string.close), null);
-				builder.setPositiveButton(R.string.send_report, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_SEND);
-						intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "osmand.app+crash@gmail.com" }); //$NON-NLS-1$
-						intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-						intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
-						intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug"); //$NON-NLS-1$
-						StringBuilder text = new StringBuilder();
-						text.append("\nDevice : ").append(Build.DEVICE); //$NON-NLS-1$
-						text.append("\nBrand : ").append(Build.BRAND); //$NON-NLS-1$
-						text.append("\nModel : ").append(Build.MODEL); //$NON-NLS-1$
-						text.append("\nProduct : ").append(Build.PRODUCT); //$NON-NLS-1$
-						text.append("\nBuild : ").append(Build.DISPLAY); //$NON-NLS-1$
-						text.append("\nVersion : ").append(Build.VERSION.RELEASE); //$NON-NLS-1$
-						text.append("\nApp Version : ").append(Version.getAppName(app)); //$NON-NLS-1$
-						try {
-							PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
-							if (info != null) {
-								text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode); //$NON-NLS-1$ //$NON-NLS-2$
-							}
-						} catch (NameNotFoundException e) {
-						}
-						intent.putExtra(Intent.EXTRA_TEXT, text.toString());
-						startActivity(Intent.createChooser(intent, getString(R.string.send_report)));
-					}
-
-				});
-				builder.show();
+				addErrorFragment();
 			}
 			getPreferences(MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
 		} else {

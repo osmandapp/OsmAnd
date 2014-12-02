@@ -34,8 +34,7 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 
 	public static final String TAG = "DASH_MAP_FRAGMENT";
 	private OsmandMapTileView osmandMapTileView;
-	OsmandApplication app;
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -67,8 +66,6 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 
 			
 		});
-		app = (OsmandApplication) getSherlockActivity().getApplication();
-
 		return view;
 	}
 
@@ -109,8 +106,8 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 	public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		view.findViewById(R.id.MapView).setVisibility(View.GONE);
-		if(app.isApplicationInitializing()) {
-			app.checkApplicationIsBeingInitialized(getActivity(), (TextView) view.findViewById(R.id.ProgressMessage),
+		if(getMyApplication().isApplicationInitializing()) {
+			getMyApplication().checkApplicationIsBeingInitialized(getActivity(), (TextView) view.findViewById(R.id.ProgressMessage),
 					(ProgressBar) view.findViewById(R.id.ProgressBar), new Runnable() {
 						@Override
 						public void run() {
@@ -125,8 +122,10 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 	private void applicationInitialized(View view) {
 		view.findViewById(R.id.loading).setVisibility(View.GONE);
 		DashboardActivity dashboardActivity =((DashboardActivity)getSherlockActivity());
-		dashboardActivity.updateDownloads();
-		view.findViewById(R.id.MapView).setVisibility(View.VISIBLE);
+		if (dashboardActivity != null){
+			dashboardActivity.updateDownloads();
+			view.findViewById(R.id.MapView).setVisibility(View.VISIBLE);
+		}
 	}
 
 	@Override
