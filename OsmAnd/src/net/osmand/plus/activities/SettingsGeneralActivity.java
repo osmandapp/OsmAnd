@@ -24,7 +24,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.voice.CommandPlayer;
@@ -330,6 +329,9 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				nativeCheckbox.setChecked(true);
 			}
 			misc.addPreference(nativeCheckbox);
+			
+			final CheckBoxPreference openGlRender = createCheckBoxPreference(settings.USE_OPENGL_RENDER, R.string.use_opengl_render,R.string.use_opengl_render_descr);
+			misc.addPreference(openGlRender);
 			
 			int nav = getResources().getConfiguration().navigation;
 			if (nav == Configuration.NAVIGATION_DPAD || nav == Configuration.NAVIGATION_TRACKBALL || 

@@ -82,19 +82,6 @@ public class MapVectorLayer extends BaseMapLayer {
 		
 	}
 	
-	@Override
-	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
-		final MapRendererView mapRenderer = view.getMapRenderer();
-		if (mapRenderer != null) {
-			if (event.getAction() == MotionEvent.ACTION_DOWN) {
-				mapRenderer.suspendSymbolsUpdate();
-			} else if (event.getAction() == MotionEvent.ACTION_UP) {
-				mapRenderer.resumeSymbolsUpdate();
-			}
-		}
-		
-		return false;
-	}
 	
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect,
@@ -108,9 +95,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		} else {
 			final MapRendererView mapRenderer = view.getMapRenderer();
 			if (mapRenderer != null) {
-				if(NativeCoreContext.getMapRendererContext().isNightMode() != drawSettings.isNightMode()) {
-					NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
-				}
+				NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
 				// opengl renderer
 				mapRenderer.setTarget(new PointI(tilesRect.getCenter31X(), tilesRect.getCenter31Y()));
 				mapRenderer.setAzimuth(-tilesRect.getRotate());

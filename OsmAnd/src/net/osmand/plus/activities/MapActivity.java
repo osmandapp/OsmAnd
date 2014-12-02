@@ -148,7 +148,7 @@ public class MapActivity extends AccessibleActivity {
 		app.checkApplicationIsBeingInitialized(this, startProgressDialog);
 		parseLaunchIntentLocation();
 		
-		if(settings.USE_NATIVE_RENDER.get() && NativeCoreContext.isInit()) {
+		if(settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
 			ViewStub stub = (ViewStub) findViewById(R.id.atlasMapRendererViewStub);
 			atlasMapRendererView = (AtlasMapRendererView) stub.inflate();
 			OsmAndMapLayersView ml = (OsmAndMapLayersView) findViewById(R.id.MapLayersView);

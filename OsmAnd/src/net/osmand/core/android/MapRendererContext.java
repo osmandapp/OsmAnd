@@ -73,13 +73,11 @@ public class MapRendererContext {
 		}
 	}
 
-	public boolean isNightMode() {
-		return nightMode;
-	}
-
 	public void setNightMode(boolean nightMode) {
-		this.nightMode = nightMode;
-		updateMapSettings();
+		if (nightMode != this.nightMode) {
+			this.nightMode = nightMode;
+			updateMapSettings();
+		}
 	}
 	
 	public void updateMapSettings() {
