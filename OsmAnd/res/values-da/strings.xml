@@ -1853,4 +1853,5 @@
 	<string name="error_avoid_specific_road">Nærmeste vej blev ikke fundet</string>
     <string name="use_opengl_render">Brug OpenGL optegning</string>
     <string name="use_opengl_render_descr">Brug hardware accelereret OpenGL optegning (virker muligvis ikke på alle enheder)</string>
+    <string name="everything_up_to_date">Alt er opdateret</string>
     </resources>

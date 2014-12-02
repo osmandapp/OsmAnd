@@ -1,2 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_palaeontological_site">Palaeontological 사이트</string>
+
+	<string name="poi_bakery">베이커리</string>
+	<string name="poi_alcohol">술집</string>
+	<string name="poi_convenience">편의점</string>
+	<string name="poi_mall">쇼핑몰</string>
+	<string name="poi_beverages">음료 가게</string>
+	<string name="poi_butcher">고기 시장</string>
+	<string name="poi_deli">델리</string>
+	<string name="poi_shop_farm">농장 가게</string>
+	<string name="poi_greengrocer">Greengrocery</string>
+	</resources>
