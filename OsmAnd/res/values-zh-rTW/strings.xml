@@ -1839,4 +1839,7 @@
 	<string name="coordinates">座標</string>
 	<string name="home_button">首頁</string>
     <string name="error_avoid_specific_road">找不到最近的路</string>
+    <string name="everything_up_to_date">一切都為最新的</string>
+    <string name="use_opengl_render">使用 OpenGL 繪製</string>
+    <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能在某些裝置無法工作）</string>
     </resources>
