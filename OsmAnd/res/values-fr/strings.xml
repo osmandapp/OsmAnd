@@ -1869,4 +1869,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="error_avoid_specific_road">Aucune route n\'a été trouvée à proximité</string>
     <string name="use_opengl_render">Utiliser le rendu OpenGL</string>
     <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (cette option peut être inefficace sur certains appareils)</string>
+    <string name="everything_up_to_date">Vous disposez de la dernière version</string>
+    <string name="dismiss">Ignorer</string>
     </resources>
