@@ -74,8 +74,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 		setProgressBarIndeterminateVisibility(false);
 
 		setContentView(R.layout.tab_content);
-
-		settings = ((OsmandApplication) getApplication()).getSettings();
+		
 		tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabHost.setup();
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

@@ -44,6 +44,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		settings = ((OsmandApplication) getApplication()).getSettings();
 		if(downloadListIndexThread == null) {
 			downloadListIndexThread = new DownloadIndexesThread(this);
 		}
