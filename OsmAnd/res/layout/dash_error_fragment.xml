@@ -30,7 +30,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="@string/default_buttons_cancel"
+                android:text="@string/dismiss"
                 style="@style/DashboardGeneralButton"/>
     </LinearLayout>
 
