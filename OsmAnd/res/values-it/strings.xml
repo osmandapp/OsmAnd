@@ -2034,4 +2034,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="search_for">Cerca</string>
 	<string name="show_map">MOSTRA LA MAPPA</string>
 	<string name="error_avoid_specific_road">Non è stata trovata una strada nelle vicinanze</string>
+    <string name="use_opengl_render">Utilizzare il rendering opengl</string>
+    <string name="use_opengl_render_descr">Utilizzare il rendering opengl accelerato via hardware (potrebbe non funzionare in alcuni dispositivi)</string>
     </resources>
