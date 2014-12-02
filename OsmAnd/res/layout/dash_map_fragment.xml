@@ -18,13 +18,25 @@
 	</LinearLayout>
 
 	<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<ProgressBar android:id="@+id/map_progress"
-					 android:layout_width="wrap_content"
-					 android:layout_height="wrap_content"
-					 android:layout_centerInParent="true"
-					 style="@android:style/Widget.ProgressBar.Small"
-					 android:indeterminate="true"
-					 android:indeterminateOnly="true"/>
+		<LinearLayout android:id="@+id/loading"
+					  android:layout_width="fill_parent"
+					  android:layout_height="110dp"
+					  android:gravity="center_vertical|center_horizontal"
+					  android:orientation="horizontal">
+
+			<ProgressBar
+					android:id="@+id/ProgressBar"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+
+			<TextView
+					android:id="@+id/ProgressMessage"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:maxLines="3"
+					android:text="@string/loading_data"
+					android:textSize="18sp" />
+		</LinearLayout>
 
 		<net.osmand.plus.views.OsmAndMapSurfaceView
 				android:id="@+id/MapView"
