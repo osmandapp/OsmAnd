@@ -58,8 +58,6 @@ import android.widget.Toast;
  * Object is responsible to maintain layers using by map activity 
  */
 public class MapActivityLayers {
-	
-
 
 	private final MapActivity activity;
 	

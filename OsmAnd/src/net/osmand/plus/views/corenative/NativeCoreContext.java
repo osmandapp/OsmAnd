@@ -55,16 +55,14 @@ public class NativeCoreContext {
 				WindowManager mgr = (WindowManager)app.getSystemService(Context.WINDOW_SERVICE);
 				DisplayMetrics dm = new DisplayMetrics();
 				mgr.getDefaultDisplay().getMetrics(dm);
-				float displayDensityFactor = (float) Math.pow(2, (app.getSettings().getSettingsZoomScale()  + Math.sqrt(Math.max(0, dm.density - 1))));
+				float density = Math.max(0, dm.density - 1);
 				
 				ObfsCollection obfsCollection = new ObfsCollection();
 				obfsCollection.addDirectory(directory.getAbsolutePath(), false);
 				
 				MapStylesCollection mapStylesCollection = setupMapStyleCollection(app);
-				mapRendererContext = new MapRendererContext(app);
-				mapRendererContext.setDisplayDensityFactor(displayDensityFactor);
+				mapRendererContext = new MapRendererContext(app, density);
 				mapRendererContext.setupObfMap(mapStylesCollection, obfsCollection);
-				
 				init = true;
 			}
 		}
