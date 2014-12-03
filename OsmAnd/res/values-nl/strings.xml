@@ -2013,8 +2013,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="coordinates">Coördinaten</string>
 	<string name="map_update">Kaarten</string>
 	<string name="everything_up_to_date">Alles is up-to-date</string>
-    <string name="use_opengl_render">Met OpenGL tekenen</string>
-    <string name="use_opengl_render_descr">Gebruik op hardware gebaseerde OpenGL weergave (werkt niet op alle apparaten)</string>
+    <string name="use_opengl_render">Gebruik OpenGL</string>
+    <string name="use_opengl_render_descr">Gebruik snelle, hardware-gebaseerde OpenGL weergave (werkt niet op alle apparaten)</string>
     <string name="error_avoid_specific_road">Er is in de buurt geen weg gevonden</string>
     <string name="dismiss">Sluiten</string>
     </resources>
