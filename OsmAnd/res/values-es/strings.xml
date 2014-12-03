@@ -1888,4 +1888,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="use_opengl_render_descr">Usar renderizado opengl acelerado por hardware (podría no funcionar en algunos dispositivos)</string>
     <string name="error_avoid_specific_road">No se ha encontrado la carretera más cercana</string>
     <string name="everything_up_to_date">Todo actualizado</string>
+    <string name="dismiss">Descartar</string>
     </resources>
