@@ -2081,7 +2081,7 @@
     <string name="lock_screen_request_explanation">%1$의 절전 기능에 대한 화면을 해제 하려면 이 권한이 필요 합니다.</string>
     <string name="wake_on_voice_never">결코</string>
     <string name="advanced_settings">고급</string>
-	<string name="osmo_use_https">Https를 사용하기</string>
+	<string name="osmo_use_https">HTTPS 사용하기</string>
 	<string name="osmo_use_https_descr">서버를 이용하여 보안 연결</string>
     <string name="home_button">집</string>
     <string name="map_update">지도</string>
@@ -2090,8 +2090,8 @@
 	<string name="show_all">모두 표시</string>
 	<string name="coordinates">좌표</string>
 	<string name="error_avoid_specific_road">가장 가까운 도로를 찾을 수 없습니다</string>
-    <string name="use_opengl_render">Opengl 렌더링 사용</string>
-    <string name="use_opengl_render_descr">하드웨어로 가속된 opengl 렌더링 사용 (일부 장치에는 작동 하지 않을 수 있습니다)</string>
+    <string name="use_opengl_render">OpenGL 렌더링 사용</string>
+    <string name="use_opengl_render_descr">하드웨어로 가속된 OpenGL 렌더링 사용 (일부 장치에는 작동 하지 않을 수 있습니다)</string>
     <string name="dismiss">해제</string>
     <string name="everything_up_to_date">최신 자료</string>
     </resources>
