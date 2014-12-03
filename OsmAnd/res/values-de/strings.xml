@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8" ?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -1950,7 +1950,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="gpx_option_reverse_route">GPX-Route umkehren</string>
 	<string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
 	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
-	<string name="gpx_files_not_found">Keine GPX-Dateien gefunden im /tracks-Ordner</string>
+	<string name="gpx_files_not_found">Keine GPX-Dateien gefunden in /tracks-Ordner</string>
 	<string name="gpx_file_name">GPX-Dateiname</string>
 	<string name="gpx_saved_sucessfully">GPX-Datei erfolgreich gespeichert unter {0}</string>
 	<string name="gpx_option_calculate_first_last_segment">Berechnen des ersten und letzten Abschnitts der OsmAnd-Route</string>
@@ -1975,8 +1975,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="text_size">Schriftgröße</string>
     <string name="fav_point_dublicate">Doppelung beim Favoriten-Namen</string>
     <string name="fav_point_dublicate_message">Name des Favoriten bereits vergeben, er wurde auf %1$s geändert.</string>
-    <string name="use_native_render">Nativen Renderer benutzen</string>
-    <string name="use_native_render_descr">C++ Renderer statt Java-Renderer nutzen</string>
     <string name="fav_point_emoticons_message">Der Name des Favoriten wurde auf %1$s geändert, denn Zeichenketten mit Emoticons können nicht gespeichert werden.</string>
     <string name="print_route">Route drucken</string>
     <string name="speed_limit_exceed">Toleranz für Tempolimit</string>
@@ -2013,13 +2011,16 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="lock_screen_request_explanation">%1$s benötigt diese Berechtigung, um den Bildschirm auszuschalten (Energiesparfunktion).</string>
     <string name="advanced_settings">Erweitert</string>
     <string name="home_button">Start</string>
+    <string name="osmo_use_https_descr">Sichere Server-Verbindung verwenden</string>
+    <string name="osmo_use_https">Https nutzen</string>
+    <string name="map_update">Karten</string>
+    <string name="search_for">Suchen nach</string>
+    <string name="show_map">KARTE ZEIGEN</string>
+    <string name="show_all">ALLES ZEIGEN</string>
     <string name="coordinates">Koordinaten</string>
     <string name="error_avoid_specific_road">Nächstgelegene Straße konnte nicht gefunden werden</string>
-    <string name="osmo_use_https_descr">Sichere Verbindung zum Server</string>
-    <string name="osmo_use_https">Nutze https</string>
-	<string name="map_update">Karten</string>
-	<string name="show_map">KARTE ANZEIGEN</string>
-	<string name="show_all">ALLES ANZEIGEN</string>
-	<string name="coordinates">Koordinaten</string>
-	<string name="search_for">Suche nach</string>
+    <string name="dismiss">Ablehnen</string>
+    <string name="everything_up_to_date">Alles ist aktuell</string>
+    <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
+    <string name="use_opengl_render_descr">Hardware beschleunigte OpenGL-Renderung verwenden (Funktioniert nicht auf allen Geräten)</string>
     </resources>
