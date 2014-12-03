@@ -389,7 +389,7 @@
 	<string name="poi_travel_agent">Турагенство</string>
 	<string name="poi_viewpoint">Место с хорошим видом</string>
 	<string name="poi_camp_site">Место для лагеря</string>
-	<string name="poi_caravan_site"/>
+	<string name="poi_caravan_site">Место для ночлега</string>
 	<string name="poi_picnic_site">Место для пикника</string>
 	<string name="poi_spring">Родник</string>
 	<string name="poi_cemetery">Кладбище</string>
@@ -620,4 +620,7 @@
 	<string name="poi_hot_spring">Горячий источник</string>
 	<string name="poi_geyser">Гейзер</string>
 	<string name="poi_leisure_track">Спортивная дорожка</string>
+	<string name="poi_place_farm">Ферма</string>
+
+	<string name="poi_place_allotments">Садоводческое товарищество</string>
 	</resources>
