@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
@@ -1955,4 +1955,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="show_map">POKAŻ MAPĘ</string>
 	<string name="show_all">POKAŻ WSZYSTKIE</string>
 	<string name="coordinates">Współrzędne</string>
-	</resources>
+	<string name="dismiss">Odwołać</string>
+    <string name="everything_up_to_date">Wszystko jest aktualne</string>
+    <string name="use_opengl_render">Użyj renderowania OpenGL</string>
+    <string name="use_opengl_render_descr">Użyj renderowania z akceleracją OpenGL (może nie działać na niektórych urządzeniach)</string>
+    <string name="error_avoid_specific_road">Najbliższa droga nie została znaleziona</string>
+    </resources>
