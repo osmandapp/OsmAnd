@@ -39,4 +39,16 @@
 	<string name="poi_bedding_shop">Sklep z pościelą</string>
 	<string name="poi_dive_shop">Sprzęt do nurkowania</string>
 	<string name="poi_copyshop">Punkt ksero i drukowania</string>
+	<string name="poi_doityourself_shop">Sklep dla majsterkowiczów</string>
+	<string name="poi_erotic_shop">Sklep erotyczny</string>
+	<string name="poi_fishing_shop">Sklep wędkarski</string>
+	<string name="poi_florist">Kwiaciarnia</string>
+	<string name="poi_frame_shop">Sklep z ramami do obrazów</string>
+	<string name="poi_furniture_shop">Sklep meblowy</string>
+	<string name="poi_garden_centre">Centrum ogrodnicze</string>
+	<string name="poi_gas_shop">Magazyn gazu płynnego</string>
+	<string name="poi_general_shop">Magazyn</string>
+	<string name="poi_gift_shop">Sklep pamiątkarski</string>
+	<string name="poi_glaziery_shop">Szklarz</string>
+	<string name="poi_hardware_shop">Sklep z narzędziami</string>
 	</resources>

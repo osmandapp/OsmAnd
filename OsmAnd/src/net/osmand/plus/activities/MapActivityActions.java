@@ -348,12 +348,8 @@ public class MapActivityActions implements DialogProvider {
 						standardId == R.string.context_menu_item_destination_point) {
 					boolean dest = standardId == R.string.context_menu_item_destination_point;
 					String selected = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
-					String target = null;
-					if(dest && selected != null){
-						target = selected.replaceAll(getString(R.string.context_menu_item_destination_point), "");
-					}
-					targets.navigateToPoint(new LatLon(latitude, longitude), true, 
-							dest ? -1 : targets.getIntermediatePoints().size(), dest? target : selected);
+					targets.navigateToPoint(new LatLon(latitude, longitude), true,
+							dest ? -1 : targets.getIntermediatePoints().size(), dest? "" : selected);
 					if(targets.getIntermediatePoints().size() > 0) {
 						openIntermediatePointsDialog();
 					}

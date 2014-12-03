@@ -3,13 +3,11 @@ package net.osmand.plus.activities;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import android.support.v4.app.FragmentManager;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -17,28 +15,28 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.dashboard.*;
+import net.osmand.plus.dashboard.DashErrorFragment;
+import net.osmand.plus.dashboard.DashFavoritesFragment;
+import net.osmand.plus.dashboard.DashMapFragment;
+import net.osmand.plus.dashboard.DashPluginsFragment;
+import net.osmand.plus.dashboard.DashSearchFragment;
+import net.osmand.plus.dashboard.DashUpdatesFragment;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.sherpafy.SherpafyLoadingFragment;
 import net.osmand.plus.sherpafy.TourViewActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
@@ -58,6 +56,7 @@ import com.actionbarsherlock.view.MenuItem;
 /**
  */
 public class DashboardActivity extends BaseDownloadActivity {
+	private static final String LATEST_CHANGES_URL = "changes-1.9.html";
 	public static final boolean TIPS_AND_TRICKS = false;
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
@@ -261,15 +260,15 @@ public class DashboardActivity extends BaseDownloadActivity {
 					pref.edit().putInt(TIPS_SHOW, ++i).commit();
 				}
 				if (i == 1 || i == 5 || appVersionChanged) {
-					if(TIPS_AND_TRICKS) {
-					TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
-					Dialog dlg = tipsActivity.getDialogToShowTips(!appVersionChanged, false);
-					dlg.show();
+					if (TIPS_AND_TRICKS) {
+						TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
+						Dialog dlg = tipsActivity.getDialogToShowTips(!appVersionChanged, false);
+						dlg.show();
 					} else {
-						if(appVersionChanged) {
+						if (appVersionChanged) {
 							final Intent helpIntent = new Intent(activity, HelpActivity.class);
 							helpIntent.putExtra(HelpActivity.TITLE, Version.getAppVersion(getMyApplication()));
-							helpIntent.putExtra(HelpActivity.URL, "changes-1.9.html");
+							helpIntent.putExtra(HelpActivity.URL, LATEST_CHANGES_URL);
 							activity.startActivity(helpIntent);
 						}
 					}

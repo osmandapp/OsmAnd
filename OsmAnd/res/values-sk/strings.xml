@@ -1998,4 +1998,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="coordinates">Súradnice</string>
 	<string name="map_update">Mapy</string>
 	<string name="error_avoid_specific_road">Nenašla sa najbližšia cesta</string>
+    <string name="dismiss">Odmietnuť</string>
+    <string name="everything_up_to_date">Všetko je aktuálne</string>
+    <string name="use_opengl_render">Použiť vykresľovanie OpenGL</string>
+    <string name="use_opengl_render_descr">Použiť hardvérovo urýchľované vykresľovanie pomocou OpenGL (nemusí na niektorých zariadeniach fungovať)</string>
     </resources>
