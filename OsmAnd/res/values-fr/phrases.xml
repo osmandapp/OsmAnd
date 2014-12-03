@@ -25,7 +25,7 @@
 	<string name="poi_atm">Distributeur de billets</string>
 	<string name="poi_attraction">Attraction touristique</string>
 	<string name="poi_baby_hatch">Tour d\'abandon</string>
-	<string name="poi_bailiff">Administration publique</string>
+	<string name="poi_bailiff">Huissier</string>
 	<string name="poi_bakery">Boulangerie</string>
 	<string name="poi_bank">Banque</string>
 	<string name="poi_bar">Bar</string>
@@ -119,7 +119,7 @@
 	<string name="poi_currencyexchange">Bureau de change</string>
 	<string name="poi_dam">Barrage</string>
 	<string name="poi_dance_floor">Salle de danse</string>
-	<string name="poi_military_danger_area">Zone d\'exclusion</string>
+	<string name="poi_military_danger_area">Zone dangereuse</string>
 	<string name="poi_deli">Épicerie fine</string>
 	<string name="poi_dentist">Dentiste</string>
 	<string name="poi_department_store">Grand magasin</string>
@@ -473,4 +473,26 @@
 
 	<string name="poi_bag_shop">Maroquinerie</string>
 	<string name="poi_military_airfield">Aérodrome militaire</string>
+	<string name="poi_bedding_shop">Magasin de literie</string>
+	<string name="poi_erotic_shop">Boutique coquine</string>
+	<string name="poi_hearing_aids_shop">Magasin d\'appareils auditifs</string>
+	<string name="poi_herbalist">Herboriste</string>
+	<string name="poi_kitchen_shop">Boutique d\'ustensiles de cuisine</string>
+	<string name="poi_stationery_shop">Papeterie</string>
+	<string name="poi_tableware_shop">Boutique de vaisselle</string>
+	<string name="poi_ticket_shop">Guichet</string>
+	<string name="poi_vacuum_cleaner_shop">Boutique de gadgets</string>
+	<string name="poi_mountain_pass">Col</string>
+	<string name="poi_garages">Garages</string>
+
+	<string name="poi_aerialway_rope_tow">Télécorde</string>
+	<string name="poi_aerialway_t_bar">Téléski</string>
+	<string name="poi_aerialway_j_bar">Téléski</string>
+	<string name="poi_aerialway_magic_carpet">Tapis-roulant</string>
+
+	<string name="poi_observatory">Observatoire</string>
+	<string name="poi_astronomical_observatory">Observatoire astronomique</string>
+	<string name="poi_orchard">Verger</string>
+	<string name="poi_prosecutor">Procureur</string>
+	<string name="poi_administrative_office">Centre administratif</string>
 	</resources>
