@@ -1791,4 +1791,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="everything_up_to_date">Totu agiornadu</string>
     <string name="use_opengl_render">Impreare sa renderizatzione opengl</string>
     <string name="use_opengl_render_descr">Impreare sa renderizatzione opengl tràmite hardware (diat pòdere non funtzionare in carchi dispositivu)</string>
+    <string name="dismiss">Abbandona</string>
     </resources>
