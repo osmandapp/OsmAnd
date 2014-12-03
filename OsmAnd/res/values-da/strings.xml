@@ -1843,7 +1843,7 @@
     <string name="wake_on_voice_never">Aldrig</string>
     <string name="advanced_settings">Avanceret</string>
 	<string name="osmo_use_https_descr">Brug sikker forbindelse med server</string>
-    <string name="osmo_use_https">Brug https</string>
+    <string name="osmo_use_https">Brug HTTPS</string>
 	<string name="home_button">Start</string>
     <string name="search_for">Søg efter</string>
 	<string name="show_map">VIS KORT</string>
