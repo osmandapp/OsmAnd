@@ -1894,7 +1894,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="wake_on_voice_never">Mai</string>
     <string name="advanced_settings">Avançat</string>
 	<string name="osmo_use_https_descr">Utilitzeu una connexió segura amb el servidor</string>
-    <string name="osmo_use_https">Utilitzeu https</string>
+    <string name="osmo_use_https">Utilitzeu HTTPS</string>
 	<string name="home_button">Inici</string>
     <string name="search_for">Cerca per</string>
 	<string name="show_map">MOSTRA EL MAPA</string>
