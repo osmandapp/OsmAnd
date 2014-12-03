@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -2012,4 +2012,9 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="show_all">TOON ALLES</string>
 	<string name="coordinates">Coördinaten</string>
 	<string name="map_update">Kaarten</string>
-	</resources>
+	<string name="everything_up_to_date">Alles is up-to-date</string>
+    <string name="use_opengl_render">Met OpenGL tekenen</string>
+    <string name="use_opengl_render_descr">Gebruik op hardware gebaseerde OpenGL weergave (werkt niet op alle apparaten)</string>
+    <string name="error_avoid_specific_road">Er is in de buurt geen weg gevonden</string>
+    <string name="dismiss">Sluiten</string>
+    </resources>
