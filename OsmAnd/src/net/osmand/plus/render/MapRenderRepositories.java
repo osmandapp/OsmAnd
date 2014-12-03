@@ -614,15 +614,15 @@ public class MapRenderRepositories {
 			// calculate data box
 			QuadRect dataBox = requestedBox.getLatLonBounds();
 			long now = System.currentTimeMillis();
-			if (cObjectsBox.left > dataBox.left || cObjectsBox.top > dataBox.top || cObjectsBox.right < dataBox.right
-					|| cObjectsBox.bottom < dataBox.bottom || (nativeLib != null) == (cNativeObjects == null)) {
+			if (cObjectsBox.left > dataBox.left || cObjectsBox.top < dataBox.top || cObjectsBox.right < dataBox.right
+					|| cObjectsBox.bottom > dataBox.bottom || (nativeLib != null) == (cNativeObjects == null)) {
 				// increase data box in order for rotate
 				if ((dataBox.right - dataBox.left) > (dataBox.top - dataBox.bottom)) {
-					double wi = (dataBox.right - dataBox.left) * .2;
+					double wi = (dataBox.right - dataBox.left) * .05;
 					dataBox.left -= wi;
 					dataBox.right += wi;
 				} else {
-					double hi = (dataBox.top - dataBox.bottom) * .2;
+					double hi = (dataBox.top - dataBox.bottom) * .05;
 					dataBox.top += hi;
 					dataBox.bottom -= hi;
 				}

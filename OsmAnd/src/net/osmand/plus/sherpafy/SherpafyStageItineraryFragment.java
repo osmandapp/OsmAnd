@@ -34,7 +34,7 @@ public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment im
 		app.getResourceManager().getMapTileDownloader().addDownloaderCallback(this);
 		osmandMapTileView.getView().setVisibility(View.VISIBLE);
 		osmandMapTileView.removeAllLayers();
-		MapVectorLayer mapVectorLayer = new MapVectorLayer(null);
+		MapVectorLayer mapVectorLayer = new MapVectorLayer(null, true);
 		MapTextLayer mapTextLayer = new MapTextLayer();
 		mapTextLayer.setAlwaysVisible(true);
 		// 5.95 all labels

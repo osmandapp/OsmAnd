@@ -1597,7 +1597,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="copying_osmand_files_descr">Kopírujem dátové súbory OsmAnd do nového cieľa (%s)</string>
     <string name="copying_osmand_files">Kopírujem dátové súbory OsmAnd</string>
     <string name="copying_osmand_one_file_descr">Kopírujem súbor (%s) do nového cieľa...</string>
-    <string name="application_dir_change_warning2">Chcete aby sa OsmAnd pokúsil presunúť údaje do nového cieľa?</string>
+    <string name="application_dir_change_warning2">Chcete aby OsmAnd presunul údajové súbory do nového cieľa?</string>
     <string name="calculate_osmand_route_gpx">Vypočítať OsmAnd offline trasu</string>
     <string name="android_19_location_disabled">Od Androidu verzie 4.4 (KitKat) nie je možné sťahovať a aktualizovať mapy v pôvodnom úložnom priečinku (%s). Chcete ho zmeniť na vhodné nové úložisko a skopírovať tam všetky súbory?
 \n Poznámka 1: pôvodné súbory zostanú nedotknuté (môžete ich neskôr vymazať ručne).\n Poznámka 2: v novom úložisku nebude možné zdieľať súbory medzi OsmAnd a OsmAnd+.</string>
@@ -1952,8 +1952,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="text_size">Veľkosť textu</string>
     <string name="fav_point_dublicate">Duplicitný názov obľúbeného bodu</string>
     <string name="fav_point_dublicate_message">Názov obľúbeného bodu bol zmenený na %1$s, aby nevznikla duplicita.</string>
-    <string name="test_native_render">Testovať natívne vykresľovanie</string>
-    <string name="test_native_render_msg">Spustí činnosť s natívnym vykresľovaním</string>
     <string name="use_native_render">Použiť natívne vykresľovanie</string>
     <string name="use_native_render_descr">Použiť vykresľovanie v C++ namiesto Javy</string>
     <string name="fav_point_emoticons_message">Názov obľúbeného bodu bol upravený na %1$s, aby bolo možné správne uložiť názov s emotikonom do súboru.</string>
@@ -1998,4 +1996,10 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="show_map">ZOBRAZIŤ MAPU</string>
 	<string name="show_all">ZOBRAZIŤ VŠETKO</string>
 	<string name="coordinates">Súradnice</string>
-	</resources>
+	<string name="map_update">Mapy</string>
+	<string name="error_avoid_specific_road">Nenašla sa najbližšia cesta</string>
+    <string name="dismiss">Odmietnuť</string>
+    <string name="everything_up_to_date">Všetko je aktuálne</string>
+    <string name="use_opengl_render">Použiť vykresľovanie OpenGL</string>
+    <string name="use_opengl_render_descr">Použiť hardvérovo urýchľované vykresľovanie pomocou OpenGL (nemusí na niektorých zariadeniach fungovať)</string>
+    </resources>

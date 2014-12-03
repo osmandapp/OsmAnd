@@ -1466,7 +1466,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="routing_preferences_descr">Paramètres d\'itinéraire</string>
     <string name="android_19_location_disabled">Depuis Android 4.4 (KitKat), vous ne pouvez plus télécharger et mettre à jour les cartes dans le dossier (%s) utilisé jusqu\'à présent. Voulez-vous utiliser le nouveau dossier et y copier l\'ensemble des fichiers OsmAnd ?
 \n Note 1 : Les anciens fichiers seront conservés (mais vous pouvez les supprimer manuellement)\n Note 2 : En raison de ce nouveau dossier de stockage, il ne sera plus possible de partager des fichiers entre OsmAnd et OsmAnd+.</string>
-    <string name="application_dir_change_warning2">Souhaitez-vous qu\'OsmAnd copie les données vers la nouvelle destination ?</string>
+    <string name="application_dir_change_warning2">Souhaitez-vous qu\'OsmAnd copie aussi ses données vers la nouvelle destination ?</string>
     <string name="copying_osmand_one_file_descr">Copie des fichiers (%s) vers la nouvelle destination...</string>
     <string name="copying_osmand_files_descr">Copie des fichiers de données OsmAnd vers la nouvelle destination (%s)</string>
     <string name="copying_osmand_files">Copie des fichiers de données OsmAnd</string>
@@ -1821,8 +1821,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="fav_point_dublicate">Ce nom est déjà utilisé pour un favori.</string>
     <string name="fav_point_dublicate_message">Nous avons modifié le nom de votre favori en %1$s pour éviter les doublons.</string>
     <string name="text_size_descr">Sélectionnez la taille du texte sur la carte.</string>
-    <string name="test_native_render">Tester le moteur de rendu natif</string>
-    <string name="test_native_render_msg">Démarrer l\'activité avec le moteur de rendu natif</string>
     <string name="use_native_render">Utiliser le moteur natif de rendu</string>
     <string name="use_native_render_descr">Utiliser le moteur de rendu C++ au lieu de Java</string>
     <string name="print_route">Exporter l\'itinéraire</string>
@@ -1862,10 +1860,15 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="advanced_settings">Avancé</string>
 	<string name="osmo_use_https_descr">Utiliser une connexion sécurisée avec le serveur</string>
     <string name="osmo_use_https">Utiliser HTTPS</string>
-	<string name="home_button">Accueil</string>
+	<string name="home_button">Domicile</string>
     <string name="search_for">Rechercher</string>
 	<string name="show_map">AFFICHER LA CARTE</string>
 	<string name="show_all">AFFICHER TOUT</string>
 	<string name="coordinates">Coordonnées</string>
 	<string name="map_update">Cartes</string>
-	</resources>
+	<string name="error_avoid_specific_road">Aucune route n\'a été trouvée à proximité</string>
+    <string name="use_opengl_render">Utiliser le rendu OpenGL</string>
+    <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (cette option peut être inefficace sur certains appareils)</string>
+    <string name="everything_up_to_date">Vous disposez de la dernière version</string>
+    <string name="dismiss">Ignorer</string>
+    </resources>

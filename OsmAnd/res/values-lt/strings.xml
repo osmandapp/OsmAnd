@@ -1471,7 +1471,7 @@
     <string name="android_19_location_disabled">Pradedant Android 4.4 versija jūs nebegalėsite parsisųsti ir atnaujinti žemėlapių ankstesnėse saugojimo vietose (%s). Ar norite pakeisti saugyklos vietą ir į ją nukopijuoti visus failus?
 \n Pastaba: Seni failai išliks kur buvę (galima bus ištrinti rankiniu būdu).
 \n Pastaba: dalintis tais pačiais failais tarp OsmAnd ir OsmAnd+ nebus galima.</string>
-    <string name="application_dir_change_warning2">OsmAnd gali pabandyti perkelti duomenis į naują saugyklą. Ar atlikti tai?</string>
+    <string name="application_dir_change_warning2">Ar norite, kad OsmAnd perkeltų duomenis ir į naują saugyklą?</string>
     <string name="copying_osmand_one_file_descr">Kopijuojami failai (%/s) į naują saugojimo vietą...</string>
     <string name="copying_osmand_files_descr">OsmAnd failai kopijuojami į naują vietą (%/s)</string>
     <string name="copying_osmand_files">Kopijuojami OsmAnd failai</string>
@@ -1807,8 +1807,6 @@
     <string name="local_index_description">Spustelėkite bet kurį elementą, norėdami gauti daugiau informacijos, paspauskite ir laikykite, norėdami išjungti arba ištrinti. Dabartiniai duomenys įrenginyje (%1$s laisva):</string>
 	<string name="print_route">Išspausdinti maršrutą</string>
     <string name="fav_point_emoticons_message">Mes pakeitėme jūsų įsimintos vietos pavadinimą į %1$s, nes teksto su veidukais išsaugoti faile neįmanoma.</string>
-    <string name="test_native_render">Testuoti aparatinį atvaizdavimą</string>
-    <string name="test_native_render_msg">Pradeda veiklą su aparatiniu atvaizdavimu</string>
     <string name="use_native_render">Naudoti aparatinį atvaizdavimą</string>
     <string name="use_native_render_descr">Naudoti C++ vietoje Java atvaizdavimo</string>
     <string name="speed_limit_exceed">Greičio ribojimo viršijimo reikšmė</string>
@@ -1852,4 +1850,8 @@
 	<string name="show_map">RODYTI ŽEMĖLAPĮ</string>
 	<string name="show_all">RODYTI VISKĄ</string>
 	<string name="coordinates">Koordinatės</string>
-	</resources>
+	<string name="error_avoid_specific_road">Nerastas trumpiausias kelias</string>
+    <string name="use_opengl_render">Naudoti OpenGL vaizdavimą</string>
+    <string name="use_opengl_render_descr">Naudoti aparatinį OpenGL vaizdavimą (gali neveikti kai kurioje įrangoje)</string>
+    <string name="everything_up_to_date">Viskas atnaujinta</string>
+    </resources>

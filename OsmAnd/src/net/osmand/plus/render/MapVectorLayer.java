@@ -1,5 +1,6 @@
 package net.osmand.plus.render;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.IMapRenderer;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.QuadPointDouble;
@@ -8,11 +9,13 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.view.MotionEvent;
 
 public class MapVectorLayer extends BaseMapLayer {
 
@@ -23,9 +26,11 @@ public class MapVectorLayer extends BaseMapLayer {
 	private RectF destImage = new RectF();
 	private final MapTileLayer tileLayer;
 	private boolean visible = false;
+	private boolean oldRender = false;
 	
-	public MapVectorLayer(MapTileLayer tileLayer){
+	public MapVectorLayer(MapTileLayer tileLayer, boolean oldRender){
 		this.tileLayer = tileLayer;
+		this.oldRender = oldRender;
 	}
 	
 
@@ -79,6 +84,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		
 	}
 	
+	
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect,
 			DrawSettings drawSettings) {
@@ -89,8 +95,9 @@ public class MapVectorLayer extends BaseMapLayer {
 			tileLayer.drawTileMap(canvas, tilesRect);
 			resourceManager.getRenderer().interruptLoadingMap();
 		} else {
-			final IMapRenderer mapRenderer = view.getMapRenderer();
-			if (mapRenderer != null) {
+			final MapRendererView mapRenderer = view.getMapRenderer();
+			if (mapRenderer != null && !oldRender) {
+				NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
 				// opengl renderer
 				mapRenderer.setTarget(new PointI(tilesRect.getCenter31X(), tilesRect.getCenter31Y()));
 				mapRenderer.setAzimuth(-tilesRect.getRotate());

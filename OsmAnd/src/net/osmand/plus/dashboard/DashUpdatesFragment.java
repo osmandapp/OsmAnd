@@ -57,11 +57,11 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (BaseDownloadActivity.downloadListIndexThread != null){
+		if (BaseDownloadActivity.downloadListIndexThread != null) {
 			currentProgress = null;
 			cancelButton = null;
-			updatedDownloadsList(BaseDownloadActivity.downloadListIndexThread.getItemsToUpdate());
 		}
+		updatedDownloadsList(BaseDownloadActivity.downloadListIndexThread.getItemsToUpdate());
 	}
 
 	public void updatedDownloadsList(List<IndexItem> list) {
@@ -73,17 +73,15 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		progressBars.clear();
 		baseNames.clear();
 		downloadButtons.clear();
-		if (list.size() > 0) {
-			mainView.setVisibility(View.VISIBLE);
-		} else {
-			mainView.setVisibility(View.GONE);
-			return;
-		}
-
-		((TextView)mainView.findViewById(R.id.update_count)).setText(String.valueOf(list.size()));
+		mainView.findViewById(R.id.main_progress).setVisibility(View.GONE);
+		((TextView) mainView.findViewById(R.id.update_count)).setText(String.valueOf(list.size()));
 
 		LinearLayout updates = (LinearLayout) mainView.findViewById(R.id.updates_items);
 		updates.removeAllViews();
+
+		if (list.size() < 1) {
+			return;
+		}
 
 		for (int i = 0; i < list.size(); i++) {
 			final IndexItem item = list.get(i);
@@ -104,10 +102,10 @@ public class DashUpdatesFragment extends DashBaseFragment {
 				public void onClick(View view) {
 					getDownloadActivity().startDownload(item);
 					currentProgress = progressBar;
-					cancelButton = (ImageButton)view;
+					cancelButton = (ImageButton) view;
 				}
 			});
-			downloadButtons.add((ImageButton)downloadButton);
+			downloadButtons.add((ImageButton) downloadButton);
 			baseNames.add(item.getBasename());
 			progressBars.add(progressBar);
 			updates.addView(view);
@@ -115,24 +113,24 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		updateProgress(BaseDownloadActivity.downloadListIndexThread.getCurrentRunningTask(), false);
 	}
 
-	private BaseDownloadActivity getDownloadActivity(){
-		return (BaseDownloadActivity)getActivity();
+	private BaseDownloadActivity getDownloadActivity() {
+		return (BaseDownloadActivity) getActivity();
 	}
 
 	public void updateProgress(BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask, boolean updateOnlyProgress) {
-		if (basicProgressAsyncTask == null){
+		if (basicProgressAsyncTask == null) {
 			return;
 		}
 		//needed when rotation is performed and progress can be null
-		if (currentProgress == null){
+		if (currentProgress == null) {
 			getProgressIfPossible(basicProgressAsyncTask.getDescription());
-			if (currentProgress == null){
+			if (currentProgress == null) {
 				return;
 			}
 		}
 
-		if(updateOnlyProgress){
-			if(!basicProgressAsyncTask.isIndeterminate()){
+		if (updateOnlyProgress) {
+			if (!basicProgressAsyncTask.isIndeterminate()) {
 				currentProgress.setProgress(basicProgressAsyncTask.getProgressPercentage());
 			}
 		} else {
@@ -150,6 +148,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			});
 			boolean intermediate = basicProgressAsyncTask.isIndeterminate();
 			currentProgress.setVisibility(intermediate ? View.GONE : View.VISIBLE);
+			//getView().findViewById(R.id.main_progress).setVisibility(intermediate ? View.VISIBLE : View.GONE);
 			if (!intermediate) {
 				currentProgress.setProgress(basicProgressAsyncTask.getProgressPercentage());
 			}
@@ -157,8 +156,11 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	}
 
 	private void getProgressIfPossible(String message) {
-		for (int i =0; i<baseNames.size(); i++){
-			if (message.equals(getActivity().getString(R.string.downloading_file_new) + " " + baseNames.get(i))){
+		if (getActivity() == null){
+			return;
+		}
+		for (int i = 0; i < baseNames.size(); i++) {
+			if (message.equals(getActivity().getString(R.string.downloading_file_new) + " " + baseNames.get(i))) {
 				currentProgress = progressBars.get(i);
 				cancelButton = downloadButtons.get(i);
 				currentProgress.setVisibility(View.VISIBLE);

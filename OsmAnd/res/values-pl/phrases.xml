@@ -11,4 +11,44 @@
 	<string name="poi_seafood">Sklep z owocami morza</string>
 	<string name="poi_confectionery">Cukiernia</string>
 	<string name="poi_ice_cream">Lodziarnia</string>
+	<string name="poi_palaeontological_site">Stanowisko paleontologiczne</string>
+
+	<string name="poi_supermarket">Supermarket</string>
+	<string name="poi_shop_tea">Sklep herbaciany</string>
+	<string name="poi_dairy">Sklep z nabiałem</string>
+	<string name="poi_vending_machine">Automat sprzedający</string>
+
+	<string name="poi_bookshop">Księgarnia</string>
+	<string name="poi_bicycle_shop">Sklep rowerowy</string>
+	<string name="poi_antiques_shop">Sklep z antykami</string>
+	<string name="poi_anime_shop">Sklep zoologiczny</string>
+	<string name="poi_art_shop">Sklep ze sztuką</string>
+	<string name="poi_baby_goods">Towary dziecięce</string>
+	<string name="poi_bag_shop">Sklep z torbami</string>
+	<string name="poi_bathroom_furnishing_shop">Wyposażenie łazienek</string>
+	<string name="poi_bed_shop">Wyposażenie pokoji</string>
+	<string name="poi_boutique">Butik</string>
+	<string name="poi_carpet_shop">Sklep z dywanami</string>
+	<string name="poi_chemist_shop">Sklep z narkotykami</string>
+	<string name="poi_clothes_shop">Sklep odzieżowy</string>
+	<string name="poi_children_clothes_shop">Sklep odzieżowy dla dzieci</string>
+	<string name="poi_shoes">Sklep obuwniczy</string>
+	<string name="poi_computer_shop">Sklep komputerowy</string>
+	<string name="poi_curtain_shop">Sklep z zasłonami</string>
+	<string name="poi_fabric_shop">Sklep z firankami</string>
+	<string name="poi_bedding_shop">Sklep z pościelą</string>
+	<string name="poi_dive_shop">Sprzęt do nurkowania</string>
+	<string name="poi_copyshop">Punkt ksero i drukowania</string>
+	<string name="poi_doityourself_shop">Sklep dla majsterkowiczów</string>
+	<string name="poi_erotic_shop">Sklep erotyczny</string>
+	<string name="poi_fishing_shop">Sklep wędkarski</string>
+	<string name="poi_florist">Kwiaciarnia</string>
+	<string name="poi_frame_shop">Sklep z ramami do obrazów</string>
+	<string name="poi_furniture_shop">Sklep meblowy</string>
+	<string name="poi_garden_centre">Centrum ogrodnicze</string>
+	<string name="poi_gas_shop">Magazyn gazu płynnego</string>
+	<string name="poi_general_shop">Magazyn</string>
+	<string name="poi_gift_shop">Sklep pamiątkarski</string>
+	<string name="poi_glaziery_shop">Szklarz</string>
+	<string name="poi_hardware_shop">Sklep z narzędziami</string>
 	</resources>

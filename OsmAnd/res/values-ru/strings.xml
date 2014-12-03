@@ -125,7 +125,7 @@
   <string name="online_map_settings_descr">Настройки источников онлайн карт и слоёв</string>
   <string name="map_settings">Настройки карты</string>
   <string name="map_settings_descr">Настроить отображение карты</string>
-  <string name="osmand_rastermaps_plugin_description">Этот плагин позволяет использовать различные источники онлайн карты, а также подготовленные растровые карты в качестве базовой карты или подложки/покрытия. Карты могут быть подготовлены на компьютере и скопированы в папку osmand на scard.</string>
+  <string name="osmand_rastermaps_plugin_description">Этот плагин позволяет использовать различные источники онлайн карт, а также подготовленные растровые карты в качестве базовой карты или подложки/покрытия. Карты могут быть подготовлены на компьютере и скопированы в папку данных OsmAnd.</string>
   <string name="osmand_background_plugin_description">Этот плагин предоставляет навигацию и запись маршрутов в энергосберегающем режиме. Плагин работает в фоновом режиме и периодически активизирует GPS для записи маршрута или воспроизведения голосовых команд.</string>
   <string name="osmand_accessibility_description">Этот плагин содержит настройки для дополнительных возможностей (accessibility).</string>
   <string name="extra_settings">Дополнительные настройки</string>
@@ -440,7 +440,7 @@
   <string name="amenity_type_emergency">Экстренные службы</string>
   <string name="amenity_type_entertainment">Развлечения</string>
   <string name="amenity_type_finance">Финансы</string>
-  <string name="amenity_type_geocache">Геокэшинг</string>
+  <string name="amenity_type_geocache">Геокэшинг (игра)</string>
   <string name="amenity_type_healthcare">Здоровье</string>
   <string name="amenity_type_historic">Историческое</string>
   <string name="amenity_type_landuse">Землепользование</string>
@@ -1411,7 +1411,7 @@
 	<string name="routing_attr_weight_description">Укажите массу автомобиля разрешенную на маршрутах</string>
     
     <string name="map_widget_map_rendering">Отображение карты</string>
-    <string name="amenity_type_seamark">Навигационный знак</string>
+    <string name="amenity_type_seamark">Навигационные знаки (водоемы)</string>
     <string name="disable_complex_routing">Отключить сложную маршрутизацию</string>
     <string name="speech_rate_descr">Указать скорость произношения для TTS</string>
     <string name="guidance_preferences_descr">Установки навигации</string>
@@ -1776,8 +1776,7 @@
     <string name="traffic_warning">Ограничение скорости</string>
 	<string name="speed_limit_exceed_message">Выберите допустимое значение превышения скорости выше которого вы получите голосовое предупреждение.</string>
 	<string name="speed_limit_exceed">Допустимое значение превышения скорости</string>
-	<string name="test_native_render">Тест нативной визуализации</string>
-    <string name="fav_point_emoticons_message">Название избранной точки было изменено на %1$s для возможности сохранения строки со смайликом в файл.</string>
+	<string name="fav_point_emoticons_message">Название избранной точки было изменено на %1$s для возможности сохранения строки со смайликом в файл.</string>
     <string name="print_route">Печать маршрута</string>
     <string name="fav_point_dublicate">Дублирование названия избранной точки</string>
     <string name="fav_point_dublicate_message">Название избранной точки %1$s было изменено для предотвращения дублирования имен.</string>
@@ -1786,8 +1785,7 @@
     <string name="text_size_descr">Установите размер текста для карты.</string>
     <string name="text_size">Размер текста</string>
     <string name="local_index_description">Нажмите на любой элемент списка для просмотра более подробной информации, нажмите и удерживайте, чтобы поместить в архив или удалить. Текущие данные на устройстве (%1$s свободно):</string>
-	<string name="test_native_render_msg">Запустить activity с нативной визуализацией</string>
-    <string name="osmo_device_not_found">Устройство не обнаружено</string>
+	<string name="osmo_device_not_found">Устройство не обнаружено</string>
     <string name="anonymous_user">Анонимный пользователь</string>
     <string name="osmo_no_connection_msg">Сервис OsMo не доступен:\n- проверьте соединение;\n- проверьте настройки;\n- проверьте наш Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Анонимному пользователю недоступно:\n- создание групп;\n- синхронизация групп и устройств с сервером;\n- управление группами и устройствами в личном кабинете.</string>
@@ -1820,4 +1818,7 @@
     <string name="advanced_settings">Расширенные</string>
 	<string name="map_update">Карты</string>
 	<string name="coordinates">Координаты</string>
-	</resources>
+	<string name="home_button">Дом</string>
+    <string name="search_for">Поиск</string>
+	<string name="everything_up_to_date">Всё обновлено</string>
+    </resources>

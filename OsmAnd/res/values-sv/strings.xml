@@ -1339,7 +1339,7 @@
     <string name="android_19_location_disabled">Efter Androidversion 4.4 (KitKat) går det inte att hämta och uppdatera kartor på den tidigare lagringsmappen (%s). Vill du byta till en tillåten plats och kopiera alla OsmAnd-filerna dit?
 \n OBS: Gamla filer berörs inte (men kan tas bort manuellt).
 \n OBS: På den nya lagringsplatsen kommer det inte att vara möjligt att dela filer mellan OsmAnd och OsmAnd+.</string>
-    <string name="application_dir_change_warning2">Vill du att OsmAnd ska försöka kopiera datafilerna till den nya platsen?</string>
+    <string name="application_dir_change_warning2">Vill du att OsmAnd också ska kopiera datafilerna till den nya platsen?</string>
     <string name="copying_osmand_one_file_descr">Kopierar filen (%s) till den nya platsen …</string>
     <string name="copying_osmand_files_descr">Kopierar OsmAnd-datafiler till den nya platsen (%s)</string>
     <string name="copying_osmand_files">Kopierar OsmAnd-datafiler</string>
@@ -1690,8 +1690,6 @@
     <string name="local_index_description">Peta på en post för att se fler detaljer, tryck och håll för att inaktivera eller ta bort. Data på enheten (%1$s ledigt):</string>
 	<string name="text_size_descr">Ange textstorlek på kartan.</string>
     <string name="text_size">Textstorlek</string>
-    <string name="test_native_render">Testa inbyggd rendering</string>
-    <string name="test_native_render_msg">Startar aktivitet med inbyggd rendering</string>
     <string name="fav_point_dublicate">Duplicerat namn på favoritpunkt</string>
     <string name="fav_point_dublicate_message">Namnet på din favoritpunkt %1$s ändrades för att undvika duplicerade namn.</string>
     <string name="use_native_render">Använd inbyggd rendering</string>
@@ -1738,4 +1736,6 @@
 	<string name="show_map">VISA KARTA</string>
 	<string name="show_all">VISA ALLA</string>
 	<string name="coordinates">Koordinater</string>
-	</resources>
+	<string name="map_update">Kartor</string>
+	<string name="error_avoid_specific_road">Hittar inte närmaste väg</string>
+    </resources>

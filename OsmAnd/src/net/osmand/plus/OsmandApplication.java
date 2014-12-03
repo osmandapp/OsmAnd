@@ -33,7 +33,7 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.sherpafy.SherpafyCustomization;
-import net.osmand.plus.views.corenative.NativeQtLibrary;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;
@@ -120,6 +120,8 @@ public class OsmandApplication extends Application {
 
 	MapActivity mapActivity;
 	DownloadActivity downloadActivity;
+	
+	// Typeface
 	
 	@Override
 	public void onCreate() {
@@ -555,16 +557,16 @@ public class OsmandApplication extends Application {
 			}
 			
 			if (!"qnx".equals(System.getProperty("os.name"))) {
-				if (osmandSettings.USE_NATIVE_RENDER.get()) {
-					if (!osmandSettings.CPP_RENDER_FAILED.get()) {
-						osmandSettings.CPP_RENDER_FAILED.set(true);
-						boolean success = NativeQtLibrary.tryCatchInit(this);
+				if (osmandSettings.USE_OPENGL_RENDER.get()) {
+					if (!osmandSettings.OPENGL_RENDER_FAILED.get()) {
+						osmandSettings.OPENGL_RENDER_FAILED.set(true);
+						boolean success = NativeCoreContext.tryCatchInit(this);
 						if (success) {
-							osmandSettings.CPP_RENDER_FAILED.set(false);
+							osmandSettings.OPENGL_RENDER_FAILED.set(false);
 						}
 					} else {
 						// try next time once again ?
-						osmandSettings.CPP_RENDER_FAILED.set(false);
+						osmandSettings.OPENGL_RENDER_FAILED.set(false);
 						warnings.add("Native OpenGL library is not supported. Please try again after exit");
 					}
 				}

@@ -582,12 +582,12 @@
 	<string name="poi_seamark_light_float"/>
 	<string name="poi_seamark_light_vessel"/>
 	<string name="poi_seamark_mooring">Причал</string>
-	<string name="poi_seamark_notice"/>
+	<string name="poi_seamark_notice">Уведомление</string>
 	<string name="poi_seamark_pile"/>
 	<string name="poi_seamark_radar_transponder"/>
-	<string name="poi_seamark_radio_station"/>
+	<string name="poi_seamark_radio_station">Радиостанция</string>
 	<string name="poi_seamark_signal_station_traffic"/>
-	<string name="poi_seamark_signal_station_warning"/>
+	<string name="poi_seamark_signal_station_warning">Сигнал опасности</string>
 	<string name="poi_seamark_small_craft_facility"/>
 	<string name="poi_seamark_topmark"/>
 	<string name="poi_seamark_rock"/>
@@ -601,12 +601,23 @@
 	<string name="poi_military_naval_base">Военно-морская база</string>
 	<string name="poi_military_nuclear_explosion_site">Место ядерного взрыва</string>
 <string name="poi_city">Город</string>
-	<string name="poi_town">Город</string>
+	<string name="poi_town">Город (небольшой)</string>
 	<string name="poi_village">Деревня</string>
-	<string name="poi_hamlet">Деревня</string>
+	<string name="poi_hamlet">Деревня (небольшая)</string>
 	<string name="poi_isolated_dwelling">Хутор</string>
 	<string name="poi_locality">Урочище</string>
 
 	<string name="poi_palaeontological_site">Палеонтологический сайт</string>
 
+	<string name="poi_ridge">Горный хребет</string>
+	<string name="poi_glacier">Ледник</string>
+	<string name="poi_river">Река</string>
+	<string name="poi_stream">Ручей</string>
+	<string name="poi_military">Военная зона</string>
+	<string name="poi_pier">Пирс</string>
+	<string name="poi_observatory">Обсерватория</string>
+	<string name="poi_astronomical_observatory">Астрономическая обсерватория</string>
+	<string name="poi_hot_spring">Горячий источник</string>
+	<string name="poi_geyser">Гейзер</string>
+	<string name="poi_leisure_track">Спортивная дорожка</string>
 	</resources>

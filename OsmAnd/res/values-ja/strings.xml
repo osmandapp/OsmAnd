@@ -505,8 +505,8 @@ POIの更新は利用できません</string>
  <string name="settings_preset_descr">地図の表示とナビゲーションの設定はプロファイルごとに記憶されます。デフォルトのプロファイルを設定してください。</string>
  <string name="settings_preset">デフォルトプロファイル</string>
  <string name="settings">設定</string>
- <string name="save_current_track_descr">今すぐ現在のトラックをSDに保存</string>
- <string name="save_current_track">現在のトラックを保存</string>
+ <string name="save_current_track_descr">現在の経路を今すぐSDに保存</string>
+ <string name="save_current_track">現在の経路を保存</string>
  <string name="save_track_interval_descr">ナビゲーション中の経路の記録間隔を選択</string>
  <string name="save_track_interval">ナビゲーション中の経路記録間隔</string>
  
@@ -783,8 +783,8 @@ POIの更新は利用できません</string>
     <string name="download_using_mobile_internet">現在Wi-Fiに接続されていません。現在のインターネット接続のままでダウンロードを続行しますか？</string>
     <string name="street_name">通り</string>
 	<string name="hno">家屋番号</string>
-    <string name="monitoring_settings">旅行についての記録</string>
-    <string name="monitoring_settings_descr">旅行の記録に関する設定します</string>
+    <string name="monitoring_settings">旅程の記録</string>
+    <string name="monitoring_settings_descr">移動中の経路記録に関する設定</string>
     <string name="osmand_monitoring_plugin_description">スリープ（画面消灯）モード時のトラッキングとナビをGPSデバイスを定期的にウェイクアップすることで有効化します。
 あなたの旅行のローカルのGPXファイルかオンラインのウェブサービスで記録するかを容易に設定する画面を表示します。</string>
     <string name="osmand_monitoring_plugin_name">ロギングサービス</string>
@@ -856,7 +856,7 @@ POIの更新は利用できません</string>
     <string name="recording_description">記録中 %1$s %3$s の %2$s</string>
     <string name="recording_default_name">記録中</string>
     <string name="av_control_stop">停止</string>
-    <string name="av_control_start">開始</string>
+    <string name="av_control_start">記録</string>
     <string name="map_widget_av_notes">音声/ビデオメモ</string>
     <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>
     <string name="map_widget_distancemeasurement">距離の測定</string>
@@ -1182,7 +1182,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	
 	<string name="live_monitoring_interval_descr">オンライン追跡間隔を指定</string>
 	<string name="live_monitoring_interval">オンライン追跡間隔</string>
-	<string name="live_monitoring_url_descr">パラメータの構文を使用してWebアドレスを指定します:緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}</string>
+	<string name="live_monitoring_url_descr">指定したWebアドレスに経路データを送信／使えるパラメータ:緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}</string>
 	<string name="live_monitoring_url">オンライン追跡ウェブアドレス</string>
 	<string name="gpx_monitoring_disabled_warn">\'追跡ログをGPXに記録\'を有効にして下さい。</string>
 	<string name="show_current_gpx_title">現在のトラックを表示</string>
@@ -1695,14 +1695,13 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 		\n\t- TTSエンジンの改善(より正確な距離による指示、マイルを有効に)
 		\n\t- バグ修正
 	</string>
-	<string name="tip_recent_changes_0_6_6_t">0.6.6の変更と追加:
-		\n\t- 音声案内用にテキスト読み上げエンジン搭載
-		\n\t- 地図描写は、より詳細に
-		\n\t- 全世界用基本マップをアプリと一緒にパッケージ
-		\n\t- オフラインでのナビゲーションを微調整(実験段階)
-		\n\t- GPXのナビゲーションオプション
-		\n\t- ユーザーインターフェイスの更新と大きなバグを修正
-	</string>
+	<string name="tip_recent_changes_0_6_6_t">"0.6.6の変更と追加:
+\n\t- 音声案内用にテキスト読み上げエンジン搭載
+\n\t- マップ描写に、詳細(細かな施設)表示を追加
+\n\t- 全世界用基本マップをアプリと一緒にパッケージ
+\n\t- オフラインでのナビゲーションを微調整(実験段階)
+\n\t- GPXのナビゲーションオプション
+\n\t- ユーザーインターフェイスの更新と大きなバグを修正 "</string>
 	<string name="tip_map_switch_t_v2">マップソースとマップレイヤーの変更は「メニュー」→「マップレイヤー」から。
 		\n\n「マップソース」下の事前にロードされたオフラインベクター形式マップを選択することができます(オフラインナビゲーションには必要です)、もしくは事前定義された(オンラインまたはオフラインキャッシュ)タイルマップ(有効化するには「オンラインマップ」プラグインは「設定」→「プラグイン」)もしくはPC上のOsmAndMapCreatorで作成されたe.g.も使用できます。
 		\n\nOsmAndまた、カスタムソースをサポートしています。
@@ -1769,8 +1768,8 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="lang_sw">スワヒリ語</string>
     <string name="lang_he">ヘブライ語</string>
     <string name="home">自宅</string>
-    <string name="live_monitoring_m_descr">GPX記録が有効になっている場合は、指定したWebサービスへデータを送信します。</string>
-	<string name="live_monitoring_m">オンライントラッキング(GPXが必要)</string>
+    <string name="live_monitoring_m_descr">GPX記録が有効になっている場合、指定したWebサービスへデータを送信。</string>
+	<string name="live_monitoring_m">オンライン追跡(GPXが必要)</string>
     <string name="live_monitoring_start">オンライントラッキング開始</string>
 	<string name="live_monitoring_stop">オンライントラッキング停止</string>
 	<string name="gpx_monitoring_start">GPX記録開始</string>
@@ -1780,7 +1779,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="rendering_attr_hideText_name">文字列を隠す</string>
     <string name="rendering_attr_hideWoodScrubs_name">森林、低木等を隠す</string>
     <string name="rendering_attr_buildings15zoom_name">ズーム15で建物表示</string>
-    <string name="rendering_attr_moreDetailed_name">より詳細に</string>
+    <string name="rendering_attr_moreDetailed_name">細かな施設も表示</string>
     <string name="rendering_attr_lessDetailed_name">詳細を省く</string>
     <string name="rendering_attr_hideAccess_name">アクセス制限を非表示</string>
     <string name="rendering_attr_showAccess_name">アクセス制限を表示</string>
@@ -1955,7 +1954,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="osmo_leave_confirmation_msg">グループ %1$sから退出しますか？</string>
     <string name="osmo_specify_tracker_id">IDを指定してください</string>
     <string name="continue_navigation">ナビゲーションを継続</string>
-    <string name="pause_navigation">ナビゲーションを一時停止</string>
+    <string name="pause_navigation">ナビを一時停止</string>
     <string name="lang_bg">ブルガリア語</string>
 	<string name="lang_ca">カタロニア語</string>
 	<string name="lang_hr">クロアチア語</string>
@@ -2025,7 +2024,7 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="navigation_intent_invalid">無効なフォーマット: %s</string>
     <string name="hide_all_waypoints">すべて削除</string>
     <string name="announce_nearby_favorites">近くのお気に入りを知らせる</string>
-<string name="route_descr_destination">方向(仮翻訳)</string>
+<string name="route_descr_destination">目的地(仮翻訳)</string>
     <string name="index_tours">旅行</string>
     <string name="flat_list_waypoints">全て</string>
     <string name="waypoints">経由点</string>
@@ -2063,8 +2062,6 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	<string name="speed_limit_exceed_message">制限速度超過による警告音声の許容値を選択。</string>
 	<string name="fav_point_emoticons_message">お気に入り地点名%1$sはファイルに絵文字を含む文字列を保存し、分かり易いよう変更されています。</string>
     <string name="print_route">経路印刷</string>
-    <string name="test_native_render">ネイティブレンダリングのテスト</string>
-    <string name="test_native_render_msg">ネイティブレンダリングを有効化して開始</string>
     <string name="fav_point_dublicate">お気に入り地点の重複</string>
     <string name="fav_point_dublicate_message">名前の重複を避けるために、%1$s にお気に入り地点の名前を変更しました。</string>
     <string name="use_native_render">ネイティブレンダリングを使用</string>
@@ -2104,4 +2101,10 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="anonymous_user_hint">以下は匿名ユーザーでは使用できません:↵\n- グループ作成;↵\n- サーバを利用してのグループやデバイスの同期;↵\n- 専用の場所でのグループやデバイスの管理.</string>
     <string name="anonymous_user">匿名ユーザー</string>
     <string name="logged_as">%1$sとしてログインしました</string>
+	<string name="home_button">ホーム画面</string>
+    <string name="map_update">マップ</string>
+	<string name="search_for">検索</string>
+	<string name="show_map">マップ表示</string>
+	<string name="show_all">全て表示</string>
+	<string name="coordinates">座標</string>
 	</resources>

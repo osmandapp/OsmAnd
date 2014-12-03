@@ -58,8 +58,6 @@ import android.widget.Toast;
  * Object is responsible to maintain layers using by map activity 
  */
 public class MapActivityLayers {
-	
-
 
 	private final MapActivity activity;
 	
@@ -103,7 +101,7 @@ public class MapActivityLayers {
 		mapView.setMainLayer(mapTileLayer);
 		
 		// 0.5 layer
-		mapVectorLayer = new MapVectorLayer(mapTileLayer);
+		mapVectorLayer = new MapVectorLayer(mapTileLayer, false);
 		mapView.addLayer(mapVectorLayer, 0.5f);
 
 		downloadedRegionsLayer = new DownloadedRegionsLayer();
@@ -171,7 +169,7 @@ public class MapActivityLayers {
 //		mapView.setMainLayer(mapTileLayer);
 
 		// 0.5 layer
-		mapVectorLayer = new MapVectorLayer(mapTileLayer);
+		mapVectorLayer = new MapVectorLayer(mapTileLayer, true);
 //		mapView.addLayer(mapVectorLayer, 0.5f);
 
 		downloadedRegionsLayer = new DownloadedRegionsLayer();

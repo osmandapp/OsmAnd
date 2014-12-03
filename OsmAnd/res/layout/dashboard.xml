@@ -6,22 +6,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="6dp" >
         <LinearLayout 
             android:orientation="vertical"
             android:id="@+id/content"
             android:layout_width="match_parent"
-        	android:layout_height="wrap_content">
-            
-        </LinearLayout>
+        	android:layout_height="match_parent"/>
 
-        <LinearLayout
+        <LinearLayout android:id="@+id/credentials"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="6dp" >
+            android:visibility="gone"
+            android:padding="6dp"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -33,7 +33,7 @@
                     android:id="@+id/About"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left|bottom"
+                    android:layout_gravity="start|bottom"
                     android:text="@string/about_settings"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -48,17 +48,17 @@
                     android:id="@+id/Copyright"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:gravity="right"
+                    android:layout_gravity="end"
+                    android:gravity="end"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/OpenStreetMaps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:layout_marginTop="5dp"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:text="@string/openstreetmap_copyright"
                     android:textSize="14sp" />
             </LinearLayout>

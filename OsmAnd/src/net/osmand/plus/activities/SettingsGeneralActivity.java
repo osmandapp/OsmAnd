@@ -24,7 +24,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.voice.CommandPlayer;
@@ -247,7 +246,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				getString(R.string.lang_hu),
 				getString(R.string.lang_id) + incompleteSuffix,
 				getString(R.string.lang_it),
-				getString(R.string.lang_ja) + incompleteSuffix,
+				getString(R.string.lang_ja),
 				getString(R.string.lang_ko),
 				getString(R.string.lang_lv),
 				getString(R.string.lang_lt),
@@ -258,7 +257,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				getString(R.string.lang_pt),
 				getString(R.string.lang_ro),
 				getString(R.string.lang_ru),
-				getString(R.string.lang_sc) + incompleteSuffix,
+				getString(R.string.lang_sc),
 				getString(R.string.lang_sr) + incompleteSuffix,
 				getString(R.string.lang_zh_CN) + incompleteSuffix,
 				getString(R.string.lang_sk),
@@ -330,6 +329,9 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				nativeCheckbox.setChecked(true);
 			}
 			misc.addPreference(nativeCheckbox);
+			
+			final CheckBoxPreference openGlRender = createCheckBoxPreference(settings.USE_OPENGL_RENDER, R.string.use_opengl_render,R.string.use_opengl_render_descr);
+			misc.addPreference(openGlRender);
 			
 			int nav = getResources().getConfiguration().navigation;
 			if (nav == Configuration.NAVIGATION_DPAD || nav == Configuration.NAVIGATION_TRACKBALL || 

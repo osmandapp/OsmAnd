@@ -1484,7 +1484,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="routing_preferences_descr">Preferencias de ruteo</string>
     <string name="speech_rate_descr">Especifica la velocidad en el habla sintetizada (TTS)</string>
     <string name="speech_rate">Velocidad del habla sintetizada (TTS)</string>
-    <string name="application_dir_change_warning2">¿Quieres que OsmAnd intente mover sus archivos de datos al nuevo destino?</string>
+    <string name="application_dir_change_warning2">¿Quieres que OsmAnd copie sus archivos de datos al nuevo destino?</string>
     <string name="copying_osmand_one_file_descr">Copiando archivo (%s) al nuevo destino...</string>
     <string name="copying_osmand_files_descr">Copiando archivos de OsmAnd al nuevo destino (%s)</string>
     <string name="copying_osmand_files">Copiando archivos de datos de OsmAnd</string>
@@ -1839,8 +1839,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="text_size">Tamaño de texto</string>
     <string name="fav_point_dublicate">Nombre de punto favorito duplicado</string>
     <string name="fav_point_dublicate_message">Hemos cambiado el nombre de tu punto favorito a %1$s para evitar nombres duplicados.</string>
-    <string name="test_native_render">Probar renderización nativa</string>
-    <string name="test_native_render_msg">Iniciar la actividad con renderización nativa</string>
     <string name="use_native_render">Usar renderización nativa</string>
     <string name="use_native_render_descr">Usar el renderizado C++ en lugar de Java</string>
     <string name="print_route">Imprimir ruta</string>
@@ -1886,4 +1884,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="show_map">MOSTRAR MAPA</string>
 	<string name="show_all">MOSTRAR TODO</string>
 	<string name="coordinates">Coordenadas</string>
-	</resources>
+	<string name="use_opengl_render">Usar renderizado opengl</string>
+    <string name="use_opengl_render_descr">Usar renderizado opengl acelerado por hardware (podría no funcionar en algunos dispositivos)</string>
+    <string name="error_avoid_specific_road">No se ha encontrado la carretera más cercana</string>
+    <string name="everything_up_to_date">Todo actualizado</string>
+    </resources>

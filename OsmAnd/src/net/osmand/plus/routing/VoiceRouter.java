@@ -4,6 +4,7 @@ package net.osmand.plus.routing;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
@@ -76,8 +77,7 @@ public class VoiceRouter {
     public interface VoiceMessageListener {
     	void onVoiceMessage();
     }
-    private List<VoiceMessageListener> voiceMessageListeners;
-    private Handler handler;
+    private ConcurrentHashMap<VoiceMessageListener, Integer> voiceMessageListeners;
     
 	public VoiceRouter(RoutingHelper router, final OsmandSettings settings, CommandPlayer player) {
 		this.router = router;
@@ -85,12 +85,7 @@ public class VoiceRouter {
         this.settings = settings;
 
 		empty = new Struct("");
-		voiceMessageListeners = new ArrayList<VoiceRouter.VoiceMessageListener>();
-		Looper looper = Looper.myLooper();
-		if (looper == null) {
-			looper = Looper.getMainLooper();
-		}
-		handler = new Handler(looper);
+		voiceMessageListeners = new ConcurrentHashMap<VoiceRouter.VoiceMessageListener, Integer>();
 	}
 	
 	public void setPlayer(CommandPlayer player) {
@@ -847,46 +842,24 @@ public class VoiceRouter {
 	}
 
 	public void addVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
-		synchronized (voiceMessageListeners) {
-			if (!voiceMessageListeners.contains(voiceMessageListener)) {
-				voiceMessageListeners.add(voiceMessageListener);
-			}
-		}
+		voiceMessageListeners.put(voiceMessageListener, 0);
 	}
 	
 	public void removeVoiceMessageListener(VoiceMessageListener voiceMessageListener) {
-		synchronized (voiceMessageListeners) {
-			if (voiceMessageListeners.contains(voiceMessageListener)) {
-				voiceMessageListeners.remove(voiceMessageListener);
-			}
-		}
+		voiceMessageListeners.remove(voiceMessageListener);
 	}
 
 	public void notifyOnVoiceMessage() {
-		handler.post(new Runnable() {
-
-			@Override
-			public void run() {
-				synchronized (voiceMessageListeners) {
-					for (final VoiceMessageListener voiceMessageListener : voiceMessageListeners) {
-						Runnable closure = new Runnable() {
-							public void run() {
-								if (settings.WAKE_ON_VOICE_INT.get() > 0) {
-									synchronized (voiceMessageListeners) {
-										if (voiceMessageListeners
-												.contains(voiceMessageListener)
-												&& (settings.WAKE_ON_VOICE_INT.get() > 0)) {
-											voiceMessageListener
-													.onVoiceMessage();
-										}
-									}
-								}
-							}
-						};
-						handler.post(closure);
+		if (settings.WAKE_ON_VOICE_INT.get() > 0) {
+			router.getApplication().runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					for (VoiceMessageListener lnt : voiceMessageListeners
+							.keySet()) {
+						lnt.onVoiceMessage();
 					}
 				}
-			}
-		});
+			});
+		}
 	}
 }

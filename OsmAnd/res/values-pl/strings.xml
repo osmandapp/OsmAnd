@@ -1556,7 +1556,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="copying_osmand_one_file_descr">Kopiowanie pliku (%s) do nowej lokalizacji...</string>
     <string name="copying_osmand_files_descr">Kopiowanie plików OsmAnd do nowej lokalizacji (%s)</string>
     <string name="copying_osmand_files">Kopiowanie plików OsmAnd</string>
-    <string name="application_dir_change_warning2">Czy chcesz aby OsmAnd spróbował przenieść dane do nowej lokalizacji?</string>
+    <string name="application_dir_change_warning2">Czy chcesz aby OsmAnd równierz skopiował dane do nowej lokalizacji?</string>
     <string name="android_19_location_disabled">Od wersji 4.4 KitKat nie można pobierać ani aktualizować map w poprzedniej lokalizacji (%s). Czy chcesz ją zmienić na lokalizację dozwoloną i skopiować do niej wszystkie pliki?
 \n Uwaga 1: Twoje stare pliki zostaną nienaruszone (mogą być usunięte manualnie).
 \n Uwaga 2: W nowej lokalizacji nie będzie możliwe współdzielenie tych samych plików pomiędzy OsmAnd i OsmAnd+.</string>
@@ -1910,8 +1910,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="text_size">Rozmiar tekstu</string>
     <string name="fav_point_dublicate">Zduplikowana nazwa ulubionego punktu</string>
     <string name="fav_point_dublicate_message">Zmieniliśmy nazwa twojego ulubionego punktu na %1$s w celu uniknięcia duplikatów nazw.</string>
-    <string name="test_native_render">Test renderowania natywnego</string>
-    <string name="test_native_render_msg">Rozpocznij aktywność z renderowaniem natywnym</string>
     <string name="use_native_render">Użyj renderowania natywnego</string>
     <string name="use_native_render_descr">Użyj kodu renderowania C++ zamiast Java</string>
     <string name="speed_limit_exceed">Tolerancja ograniczenia prędkości</string>
@@ -1951,4 +1949,15 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_use_https_descr">Użyj bezpiecznego połączenia z serwerem</string>
     <string name="osmo_use_https">Użyj https</string>
 	<string name="advanced_settings">Zaawansowane</string>
-	</resources>
+	<string name="home_button">Dom</string>
+    <string name="map_update">Mapy</string>
+	<string name="search_for">Wyszukaj</string>
+	<string name="show_map">POKAŻ MAPĘ</string>
+	<string name="show_all">POKAŻ WSZYSTKIE</string>
+	<string name="coordinates">Współrzędne</string>
+	<string name="dismiss">Odwołać</string>
+    <string name="everything_up_to_date">Wszystko jest aktualne</string>
+    <string name="use_opengl_render">Użyj renderowania OpenGL</string>
+    <string name="use_opengl_render_descr">Użyj renderowania z akceleracją OpenGL (może nie działać na niektórych urządzeniach)</string>
+    <string name="error_avoid_specific_road">Najbliższa droga nie została znaleziona</string>
+    </resources>

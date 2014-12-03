@@ -69,12 +69,12 @@ public class DownloadActivity extends BaseDownloadActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
+		updateDownloads();
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setProgressBarIndeterminateVisibility(false);
 
 		setContentView(R.layout.tab_content);
 
-		settings = ((OsmandApplication) getApplication()).getSettings();
 		tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabHost.setup();
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -144,54 +144,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 				if (tab.equals(DOWNLOAD_TAB)){
 					tabHost.setCurrentTab(1);
 				} else if (tab.equals(UPDATES_TAB)){
-					tabHost.setCurrentTab(2);
-				}
-			}
-		}
-
-		if(getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
-			boolean showedDialog = false;
-			if(Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
-				SuggestExternalDirectoryDialog.showDialog(this, null, null);
-			}
-			if(!showedDialog) {
-				showDialogOfFreeDownloadsIfNeeded();
-			}
-		} else {
-			showDialogOfFreeDownloadsIfNeeded();
-		}
-
-
-		if (Build.VERSION.SDK_INT >= OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
-			final String currentStorage = settings.getExternalStorageDirectory().getAbsolutePath();
-			String primaryStorage = settings.getDefaultExternalStorageLocation();
-			if (!currentStorage.startsWith(primaryStorage)) {
-				// secondary storage
-				boolean currentDirectoryNotWritable = true;
-				for (String writeableDirectory : settings.getWritableSecondaryStorageDirectorys()) {
-					if (currentStorage.startsWith(writeableDirectory)) {
-						currentDirectoryNotWritable = false;
-						break;
-					}
-				}
-				if (currentDirectoryNotWritable) {
-					currentDirectoryNotWritable = !OsmandSettings.isWritable(settings.getExternalStorageDirectory());
-				}
-				if (currentDirectoryNotWritable) {
-					final String newLoc = settings.getMatchingExternalFilesDir(currentStorage);
-					if (newLoc != null && newLoc.length() != 0) {
-						AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
-						ab.setMessage(getString(R.string.android_19_location_disabled,
-								settings.getExternalStorageDirectory()));
-						ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								copyFilesForAndroid19(newLoc);
-							}
-						});
-						ab.setNegativeButton(R.string.default_buttons_cancel, null);
-						ab.show();
-					}
+ 					tabHost.setCurrentTab(2);
 				}
 			}
 		}
@@ -199,6 +152,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
+
+
 
 	public Map<String, String> getIndexActivatedFileNames() {
 		return downloadListIndexThread != null ? downloadListIndexThread.getIndexActivatedFileNames() : null;
@@ -250,30 +205,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 	public void onPause() {
 		super.onPause();
 		(getMyApplication()).setDownloadActivity(null);
-	}
-
-	public void showDialogOfFreeDownloadsIfNeeded() {
-		if (Version.isFreeVersion(getMyApplication())) {
-			AlertDialog.Builder msg = new AlertDialog.Builder(this);
-			msg.setTitle(R.string.free_version_title);
-			String m = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "") + "\n";
-			m += getString(R.string.available_downloads_left, MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get());
-			msg.setMessage(m);
-			if (Version.isMarketEnabled(getMyApplication())) {
-				msg.setNeutralButton(R.string.install_paid, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(getMyApplication()) + "net.osmand.plus"));
-						try {
-							startActivity(intent);
-						} catch (ActivityNotFoundException e) {
-						}
-					}
-				});
-			}
-			msg.setPositiveButton(R.string.default_buttons_ok, null);
-			msg.show();
-		}
 	}
 
 	@Override
@@ -419,25 +350,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	public boolean isLightActionBar() {
 		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
-	}
-
-
-	private void copyFilesForAndroid19(final String newLoc) {
-		SettingsGeneralActivity.MoveFilesToDifferentDirectory task =
-				new SettingsGeneralActivity.MoveFilesToDifferentDirectory(this,
-						new File(settings.getExternalStorageDirectory(), IndexConstants.APP_DIR),
-						new File(newLoc, IndexConstants.APP_DIR)) {
-					protected Boolean doInBackground(Void[] params) {
-						Boolean result = super.doInBackground(params);
-						if(result) {
-							settings.setExternalStorageDirectory(newLoc);
-							getMyApplication().getResourceManager().resetStoreDirectory();
-							getMyApplication().getResourceManager().reloadIndexes(progress)	;
-						}
-						return result;
-					};
-				};
-		task.execute();
 	}
 
 

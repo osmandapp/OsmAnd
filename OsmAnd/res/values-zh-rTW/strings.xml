@@ -51,32 +51,9 @@
 	<string name="snap_to_road_descr">導航過程中對齊道路位置</string>
 	<string name="snap_to_road">對齊道路</string>
 	<string name="osmand_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖檢視和導航</string>
-	<string name="osmand_long_description_1000_chars">
-		OsmAnd (OSM Automated Navigation Directions)
-
-		OsmAnd 是開放程式碼的導航應用程式，存取各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於手機的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
-
-		主要功能：
-		- 完整的離線功能(存放下載的向量圖或地圖圖磚)
-		- 提供細致的全球離線向量圖資
-		- 直接從應用程式下載各國或區域圖資
-		- 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的最愛、公共運輸站
-		- 離線查尋地址、場所(POI)
-		- 短距離的離線使用路線(實驗性)
-		- 汽車、自行車、步行模式有下列選項：
-		- 可選的自動日夜模式切換
-		- 可選的依據速度自動地圖比例尺縮放
-		- 可選的地圖正北朝上或行進方向朝上
-		- 可選的車道引導、速限顯示、使用真人語音或 TTS 語音
-
-		OsmAnd 免費版限制:
-		- 地圖下載數量
-		- 無法使用離線維基百科的 POI
-
-		OsmAnd 正在積極開發我們的專案，並且它的更進一步發展依賴於提供資金的捐助，用以資助發展和新功能的駕駛測試。請考慮購買 OsmAnd +，或資助特定的新功能或在 osmand.net 網站上一般捐贈。
-	</string>
+	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd 是開放程式碼的導航應用程式，存取各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於手機的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。 主要功能： - 完整的離線功能(存放下載的向量圖或地圖圖磚於裝置存儲器) - 提供細致的全球離線向量圖資 - 直接從應用程式下載各國或區域圖資 - 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的最愛、公共運輸站 - 離線查尋地址、場所(POI) - 短距離的離線使用路線(實驗性) - 汽車、自行車、步行模式有下列選項： - 可選的自動日夜模式切換 - 可選的依據速度自動地圖比例尺縮放 - 可選的地圖正北朝上或行進方向朝上 - 可選的車道引導、速限顯示、使用真人語音或 TTS 語音 OsmAnd 免費版限制: - 地圖下載數量 - 無法使用離線維基百科的 POI OsmAnd 正在積極開發我們的專案，並且它的更進一步發展依賴於提供資金的捐助，用以資助發展和新功能的駕駛測試。請考慮購買 OsmAnd +，或資助特定的新功能或在 osmand.net 網站上一般捐贈。 "</string>
 	<string name="osmand_plus_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖檢視和導航</string>
-	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ OsmAnd (OSM Automated Navigation Directions) OsmAnd 是開放源碼導航應用程式，可以使用各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。 主要功能： - 完整離線功能 (存放下載的向量圖或地圖圖磚) - 全球離線向量圖資 - 直接由手機下載各國或區域圖資 - 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的最愛、等高線、大眾運輸停靠站 - 離線查尋地址、場所(POI) - 離線尋找導航路線 - 汽車、自行車、步行模式有下列選項： - 自動日/夜模式切換選項 - 取決於速度的地圖縮放選項 - 地圖正北朝上或行進方向朝上選項 - 車道引導、速限顯示、使用真人語音或 TTS 語音選項 "</string>
+	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ OsmAnd (OSM Automated Navigation Directions) OsmAnd 是開放源碼導航應用程式，可以使用各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。 主要功能： - 完整離線功能 (存放下載的向量圖或地圖圖磚於裝置存儲器) - 全球離線向量圖資 - 直接由手機下載各國或區域圖資 - 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的最愛、等高線、大眾運輸停靠站 - 離線查尋地址、場所(POI) - 離線尋找導航路線 - 汽車、自行車、步行模式有下列選項： - 自動日/夜模式切換選項 - 取決於速度的地圖縮放選項 - 地圖正北朝上或行進方向朝上選項 - 車道引導、速限顯示、使用真人語音或 TTS 語音選項 "</string>
 	<string name="tip_update_index">更新離線地圖</string>
 	<string name="tip_update_index_t">"離線地圖的查看與 POI/位址查尋，以及離線導航，有最新的圖資是不可或缺的。OsmAnd 提供了地圖檔案的管理用以下載那些離線圖資，並且檢查能用的更新。
 \n\n下載圖資更新由\'設定\' -&gt; \'管理地圖檔案\' -&gt; \'下載\'。
@@ -633,8 +610,8 @@
 	<string name="use_osmand_routing_service">OsmAnd 導航 &gt; 20公里</string>
 	<string name="use_osmand_routing_service_descr">使用 OsmAnd 離線導航僅適用于路線 &gt; 20 公里(實驗性的)</string>
 	<string name="osmand_routing_experimental">OsmAndd 離線導航是個實驗性的功能，它不能運作超過 20 公里的距離。\n\n導航服務暫時切為線上的 CloudMade。</string>
-	<string name="specified_dir_doesnt_exist">指定的目錄不存在。</string>
-	<string name="application_dir">存儲目錄</string>
+	<string name="specified_dir_doesnt_exist">找不到指定的資料夾。</string>
+	<string name="application_dir">資料存儲器資料夾</string>
 	
 	<string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的離線資料將被新版引用。但我的最愛內的標點須以舊版程式匯出後再用新版程式匯入。</string>
 	<string name="build_installed">編譯 {0} 成功安裝({1})。</string>
@@ -690,7 +667,7 @@
 	<string name="voice">語音</string>
 	<string name="no_vector_map_loaded">向量地圖未載入</string>
 	<string name="map_route_by_gpx">以 GPX 導航</string>
-	<string name="gpx_files_not_found">在/tracks 目錄找不到 GPX 檔案</string>
+	<string name="gpx_files_not_found">在 /tracks 資料夾找不到 GPX 檔案</string>
 	<string name="layer_gpx_layer">GPX 軌跡…</string>
 	<string name="error_reading_gpx">讀取 GPX 資料錯誤</string>
 	<string name="vector_data">離線向量地圖</string>
@@ -825,7 +802,7 @@
 	<string name="route_general_information">總距離 %1$s、行駛時間 %2$d 小時 %3$d 分。</string>
 	<string name="router_service_descr">選擇線上或離線的導航服務</string>
 	<string name="router_service">導航服務</string>
-	<string name="sd_dir_not_accessible">SD卡上的儲存目錄不可存取</string>
+	<string name="sd_dir_not_accessible">在 SD 卡上的存儲資料夾無法存取</string>
 	<string name="download_question">下載 {0} - {1}？</string>
 	<string name="download_question_exist">離線資料 {0}已存在 ({1})。您要更新 ({2})嗎 ?</string>
 	<string name="address">地址</string>
@@ -889,7 +866,7 @@
 	<string name="save_current_track">儲存目前的 GPX 軌跡</string>
 	<string name="save_track_interval">在導航期間的記錄間隔</string>
 	<string name="save_track_interval_descr">在導航整個期間，為軌跡記錄選取記錄間隔</string>
-	<string name="save_track_to_gpx_descrp">在導航的整個期間，軌跡將會儲存在 track 目錄</string>
+	<string name="save_track_to_gpx_descrp">在整個導航期間，軌跡將會儲存在 track 資料夾</string>
 	<string name="save_track_to_gpx">導航期間記錄軌跡成 GPX 檔案</string>
 	<string name="update_tile">更新地圖</string>
 	<string name="reload_tile">重新載入圖磚</string>
@@ -1465,14 +1442,14 @@
     <string name="guidance_preferences_descr">導航偏好</string>
     <string name="routing_preferences_descr">路線偏好</string>
     <string name="app_mode_truck">卡車</string>
-    <string name="application_dir_change_warning2">OsmAnd 可以試著將資料移到新的目的地。您想要移動嗎？</string>
+    <string name="application_dir_change_warning2">您想要將 OsmAnd 資料複製到新的目的地嗎？</string>
     <string name="copying_osmand_one_file_descr">複製檔案 (%s) 到新的目的地...</string>
-    <string name="copying_osmand_files_descr">複製 OsmAnd 檔案到新的目的地 (%s)</string>
-    <string name="copying_osmand_files">複製 OsmAnd 的檔案</string>
+    <string name="copying_osmand_files_descr">複製 OsmAnd 資料檔到新的目的地 (%s)</string>
+    <string name="copying_osmand_files">複製 OsmAnd 資料檔案</string>
     <string name="calculate_osmand_route_gpx">OsmAnd 預估離線路線</string>
-    <string name="android_19_location_disabled">由於 KitKat 版本，您無法下載和更新地圖於之前的存儲位置 (%s)。您是否想變更以允許複製所有檔案到那裡？
-        \n注意：舊的檔案將保持不變。
-        \n注意：它將不可能在 OsmAnd 和 OsmAnd + 兩者之間共用檔案。 </string>
+    <string name="android_19_location_disabled">由於 Android 4.4 (KitKat) 版本，您無法下載和更新地圖於之前的存儲檔案夾 (%s)。您是否想變更到允許的存儲位置並複製所有的 OsmAnd 檔案到那裡？
+\n注意 1：您舊的檔案將保持不變（但可以手動刪除）。
+\n注意 2：在新的存儲位置，它不可能在 OsmAnd 和 OsmAnd + 兩者之間共用檔案。</string>
     <string name="routing_attr_prefer_motorway_name">高速公路優先</string>
 	<string name="routing_attr_prefer_motorway_description">高速公路優先</string>
 	<string name="routing_attr_short_way_name">最短路線</string>
@@ -1816,8 +1793,6 @@
     <string name="text_size">文字大小</string>
     <string name="fav_point_dublicate">我的最愛標點，名稱重複</string>
     <string name="fav_point_dublicate_message">我們把我的最愛標點名稱，改為 %1$s 以避免名稱重複。</string>
-    <string name="test_native_render">測試原生繪製</string>
-    <string name="test_native_render_msg">開始啟動原生繪製</string>
     <string name="use_native_render">使用原生繪製</string>
     <string name="use_native_render_descr">使用 C++ 替代 JAVA 繪製</string>
     <string name="print_route">列印路線</string>
@@ -1857,4 +1832,14 @@
     <string name="advanced_settings">進階</string>
 	<string name="osmo_use_https_descr">使用安全協定連線於伺服器</string>
     <string name="osmo_use_https">使用 https</string>
-	</resources>
+	<string name="map_update">地圖</string>
+	<string name="search_for">查尋</string>
+	<string name="show_map">顯示地圖</string>
+	<string name="show_all">全部顯示</string>
+	<string name="coordinates">座標</string>
+	<string name="home_button">首頁</string>
+    <string name="error_avoid_specific_road">找不到最近的路</string>
+    <string name="everything_up_to_date">一切都為最新的</string>
+    <string name="use_opengl_render">使用 OpenGL 繪製</string>
+    <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能在某些裝置無法工作）</string>
+    </resources>
