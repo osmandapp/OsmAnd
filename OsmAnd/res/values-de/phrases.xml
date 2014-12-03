@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="poi_10pin">Bowling</string>
 	<string name="poi_9pin">Kegeln</string>
