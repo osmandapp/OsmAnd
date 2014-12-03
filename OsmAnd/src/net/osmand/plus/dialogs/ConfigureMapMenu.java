@@ -325,8 +325,10 @@ public class ConfigureMapMenu {
 	private void createCustomRenderingProperties(final ContextMenuAdapter adapter , final MapActivity activity,
 			List<RenderingRuleProperty> customRules ){
 		final OsmandMapTileView view = activity.getMapView();
-		final OsmandApplication app = view.getApplication();
 		for (final RenderingRuleProperty p : customRules) {
+			if (p.getAttrName().equals("appMode")){
+				continue;
+			}
 			String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(),
 					p.getName());
 			// test old descr as title
