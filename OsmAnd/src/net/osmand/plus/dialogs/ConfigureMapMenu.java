@@ -20,6 +20,7 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -326,7 +327,8 @@ public class ConfigureMapMenu {
 			List<RenderingRuleProperty> customRules ){
 		final OsmandMapTileView view = activity.getMapView();
 		for (final RenderingRuleProperty p : customRules) {
-			if (p.getAttrName().equals("appMode")){
+			if (p.getAttrName().equals(RenderingRuleStorageProperties.A_APP_MODE) ||
+					p.getAttrName().equals(RenderingRuleStorageProperties.A_ENGINE_V1)){
 				continue;
 			}
 			String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(),
