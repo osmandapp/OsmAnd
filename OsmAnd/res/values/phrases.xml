@@ -314,12 +314,16 @@
 	<string name="poi_10pin">Ten pin bowling</string>
 	<string name="poi_archery">Archery</string>
 	<string name="poi_athletics">Athletics</string>
+	<string name="poi_american_football">American football</string>
 	<string name="poi_australian_football">Australian football</string>
+	<string name="poi_base">Base jumping</string>
 	<string name="poi_baseball">Baseball</string>
 	<string name="poi_basketball">Basketball</string>
 	<string name="poi_beachvolleyball">Beach volleyball</string>
+	<string name="poi_bmx_sport">BMX</string>
 	<string name="poi_boules">Boules</string>
 	<string name="poi_bowls">Bowls</string>
+	<string name="poi_canadian_football">Canadian football</string>
 	<string name="poi_canoe">Canoe</string>
 	<string name="poi_chess">Chess</string>
 	<string name="poi_climbing">Climbing</string>
@@ -354,6 +358,7 @@
 	<string name="poi_skateboard">Skateboard</string>
 	<string name="poi_skiing">Skiing</string>
 	<string name="poi_soccer">Soccer</string>
+	<string name="poi_surfing">Surfing</string>
 	<string name="poi_swimming">Swimming</string>
 	<string name="poi_table_tennis">Table tennis</string>
 	<string name="poi_tennis">Tennis</string>

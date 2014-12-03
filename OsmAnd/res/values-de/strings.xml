@@ -2022,4 +2022,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="show_all">ALLES ANZEIGEN</string>
 	<string name="coordinates">Koordinaten</string>
 	<string name="search_for">Suche nach</string>
+    <string name="everything_up_to_date">Alle Dateien sind auf dem neuesten Stand.</string>
+    <string name="use_opengl_render">OpenGL-Rendering aktivieren</string>
+    <string name="use_opengl_render_descr">Nutze Hardware-beschleunigtes OpenGL-Rendering (ggf. nicht auf allen Geräten verfügbar)</string>
     </resources>
