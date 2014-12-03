@@ -1771,7 +1771,7 @@ s často kladenými otázkami.</string>
 	<string name="lock_screen_request_explanation">%1$s potřebuje tato oprávnění pro vypnutí obrazovky při režimu šetření energie.</string>
     <string name="wake_on_voice_never">Nikdy</string>
     <string name="advanced_settings">Pokročilé</string>
-	<string name="home_button">Domov</string>
+	<string name="home_button">Domovská obrazovka</string>
     <string name="show_map">ZOBRAZIT MAPU</string>
 	<string name="osmo_use_https_descr">Použít zabezpečené spojení se serverem</string>
     <string name="osmo_use_https">Použít HTTPS</string>
