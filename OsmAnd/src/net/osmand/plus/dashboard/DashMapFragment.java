@@ -81,7 +81,7 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 		osmandMapTileView = surf.getMapView();
 		osmandMapTileView.getView().setVisibility(View.VISIBLE);
 		osmandMapTileView.removeAllLayers();
-		MapVectorLayer mapVectorLayer = new MapVectorLayer(null);
+		MapVectorLayer mapVectorLayer = new MapVectorLayer(null, true);
 		MapTextLayer mapTextLayer = new MapTextLayer();
 		mapTextLayer.setAlwaysVisible(true);
 		// 5.95 all labels
