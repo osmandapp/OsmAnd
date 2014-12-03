@@ -639,4 +639,9 @@
 	<string name="poi_place_allotments">Kolonihaver</string>
 	<string name="poi_place_farm">Gård</string>
 
+	<string name="poi_american_football">Amerikansk fodbold</string>
+	<string name="poi_bmx_sport">BMX</string>
+	<string name="poi_canadian_football">Canadisk fodbold</string>
+	<string name="poi_surfing">Surfing</string>
+	<string name="poi_base">Base jumping</string>
 	</resources>
