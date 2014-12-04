@@ -9,11 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.telephony.TelephonyManager;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleAlertBuilder;
+import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -174,13 +177,42 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					downloadFilesPreCheckSpace();
+					downloadFilesCheckSim();
 				}
 			});
 			builder.setNegativeButton(R.string.default_buttons_no, null);
 			builder.show();
 		} else {
 			downloadFilesPreCheckSpace();
+		}
+	}
+
+	protected void downloadFilesCheckSim(){
+		TelephonyManager telMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+		int phoneType = telMgr.getPhoneType();
+
+		if (phoneType == TelephonyManager.PHONE_TYPE_NONE){
+			AccessibleToast.makeText(this, R.string.sim_card_not_supported, Toast.LENGTH_LONG).show();
+			return;
+		}
+		int simState = telMgr.getSimState();
+		switch (simState) {
+			case TelephonyManager.SIM_STATE_NETWORK_LOCKED:
+				AccessibleToast.makeText(this, R.string.network_locked, Toast.LENGTH_LONG).show();
+				break;
+			case TelephonyManager.SIM_STATE_PIN_REQUIRED:
+				AccessibleToast.makeText(this, R.string.sim_pin_required, Toast.LENGTH_LONG).show();
+				break;
+			case TelephonyManager.SIM_STATE_PUK_REQUIRED:
+				AccessibleToast.makeText(this, R.string.sim_puk_required, Toast.LENGTH_LONG).show();
+				break;
+			case TelephonyManager.SIM_STATE_READY:
+				downloadFilesPreCheckSpace();
+				break;
+			case TelephonyManager.SIM_STATE_ABSENT:
+			case TelephonyManager.SIM_STATE_UNKNOWN:
+				AccessibleToast.makeText(this, R.string.no_sim_card, Toast.LENGTH_LONG).show();
+				break;
 		}
 	}
 
