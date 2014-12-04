@@ -165,6 +165,10 @@ public class DownloadOsmandIndexesHelper {
 			res.add(new DownloadEntry(this, assetName, destFile, dateModified));
 			return res;
 		}
+
+		public String getDestFile(){
+			return destFile;
+		}
 	}
 	
 	

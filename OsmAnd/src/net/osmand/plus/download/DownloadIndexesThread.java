@@ -551,7 +551,19 @@ public class DownloadIndexesThread {
 						!date.equals(indexactivateddate) &&
 						!date.equals(indexfilesdate) &&
 						indexActivatedFileNames.containsKey(sfName)) {
-					itemsToUpdate.add(item);
+					if (item.getType() == DownloadActivityType.NORMAL_FILE ||
+							item.getType() == DownloadActivityType.ROADS_FILE ||
+							item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
+						itemsToUpdate.add(item);
+					} else {
+						long itemSize = item.getSize();
+						File file = new File(((DownloadOsmandIndexesHelper.AssetIndexItem) item).getDestFile());
+						long oldItemSize = file.length();
+						if (itemSize != oldItemSize){
+							itemsToUpdate.add(item);
+						}
+					}
+
 				}
 			}
 			if (uiActivity != null){

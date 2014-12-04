@@ -80,7 +80,10 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		updates.removeAllViews();
 
 		if (list.size() < 1) {
+			mainView.findViewById(R.id.maps).setVisibility(View.GONE);
 			return;
+		} else {
+			mainView.findViewById(R.id.maps).setVisibility(View.VISIBLE);
 		}
 
 		for (int i = 0; i < list.size(); i++) {
