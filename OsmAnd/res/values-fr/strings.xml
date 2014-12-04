@@ -1871,4 +1871,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (cette option peut être inefficace sur certains appareils)</string>
     <string name="everything_up_to_date">Vous disposez de la dernière version</string>
     <string name="dismiss">Ignorer</string>
+    <string name="no_internet_connection">Téléchargement impossible. Merci de vous connecter en Wifi.</string>
     </resources>
