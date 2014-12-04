@@ -338,8 +338,7 @@ public class MapActivityActions implements DialogProvider {
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					mapActivity.startActivity(intent);
 				} else if (standardId == R.string.context_menu_item_directions_to) {
-					String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
-					targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, name);
+					targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, "");
 					enterRoutePlanningMode(null, null, false);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
 					String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
