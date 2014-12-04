@@ -375,7 +375,7 @@
 		\n\t*\ \'Efter kompassen\' - Kartan kommer att anpassas kontinuerligt till enhetens kompass.
 	</string>
 <string name="binary_map_download_success">"Hämtades utan problem.
-\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Konfigurera karta\' -&gt; \'Kartkälla …\' -&gt; \'Offline vektorkartor\'. "</string>
+\n\t\n\tFör användning aktivera \'Meny\' \t \'Konfigurera karta\' \t \'Kartkälla …\' \t \'Offline vektorkartor\'. "</string>
 <string name="tip_day_night_mode">Dag-/Nattläge</string>
 <string name="tip_osm_improve">Förbättrar OSM-data</string>
 <string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att ladda ner %1$s MB (ledigt: %2$s).</string>
@@ -1729,7 +1729,7 @@
     <string name="lock_screen_request_explanation">%1$s behöver denna tillåtelse för att stänga av skärmen för strömsparningsfunktionen.</string>
     <string name="wake_on_voice_never">Aldrig</string>
     <string name="advanced_settings">Avancerat</string>
-	<string name="osmo_use_https">Använd https</string>
+	<string name="osmo_use_https">Använd HTTPS</string>
 	<string name="osmo_use_https_descr">Använd säker anslutning till servern</string>
     <string name="home_button">Hem</string>
     <string name="search_for">Sök efter</string>
@@ -1738,4 +1738,8 @@
 	<string name="coordinates">Koordinater</string>
 	<string name="map_update">Kartor</string>
 	<string name="error_avoid_specific_road">Hittar inte närmaste väg</string>
+    <string name="dismiss">Avfärda</string>
+    <string name="everything_up_to_date">Allt är uppdaterat</string>
+    <string name="use_opengl_render">Använd OpenGL-rendering</string>
+    <string name="use_opengl_render_descr">Använd hårdvaruaccelererad OpenGL-rendering (fungerar kanske inte på vissa enheter)</string>
     </resources>
