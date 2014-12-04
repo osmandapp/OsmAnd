@@ -437,7 +437,7 @@
   <string name="use_osmand_routing_service_descr">Používat offline navigaci pro dlouhé vzdálenosti (experimentální)</string>
   <string name="osmand_routing_experimental">Offline navigace je experimentální a funguje jen pro vzdálenosti do 20 km.\n\nNavigační služba je dočasně přepnuta na online CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
-  <string name="application_dir">Adresář pro data</string>
+  <string name="application_dir">Úložiště pro data</string>
   
   <string name="gps_status_app_not_found">Aplikace pro zobrazení stavu GPS naní instalovaná. Hledat na Marketu?</string>
   <string name="voice_is_not_available_msg">Hlasové navádění není dostupné. V nastaveních vyberte požadovaná hlasová data nebo je stáhněte.</string>
@@ -489,7 +489,7 @@
   <string name="voice">Hlasové údaje</string>
   <string name="no_vector_map_loaded">Vektorové mapy nebyly načteny</string>
   <string name="map_route_by_gpx">Cestovat podle GPX</string>
-  <string name="gpx_files_not_found">Soubory GPX nebyly nalezeny v adresáři /osmand/tracks</string>
+  <string name="gpx_files_not_found">Žádné GPX soubory nebyly nalezeny v adresáři tracks</string>
   <string name="layer_gpx_layer">GPX trasa…</string>
   <string name="error_reading_gpx">Chyba při načítání dat GPX</string>
   <string name="vector_data">Vektorové mapy OSM</string>
@@ -625,7 +625,7 @@
   <string name="route_general_information">Celková vzdálenost %1$s, doba cesty %2$d h %3$d m.</string>
   <string name="router_service_descr">Vyberte navigační službu</string>
   <string name="router_service">Navigace</string>
-  <string name="sd_dir_not_accessible">Adresář pro uložení na SD kartě není dostupný</string>
+  <string name="sd_dir_not_accessible">Datový adresář pro uložení na SD kartě není dostupný</string>
   <string name="download_question">Stáhnout {0} - {1} ?</string>
   <string name="download_question_exist">Index pro {0} už existuje ({1}). Chcete ho aktualizovat ({2}) ?</string>
   <string name="address">Adresa</string>
@@ -834,7 +834,7 @@
   <string name="online_map_settings_descr">Nastavení rastrových překryvných nebo podkresových map</string>
   <string name="map_settings">- Mapa</string>
   <string name="map_settings_descr">Nastavení mapového zobrazení</string>
-  <string name="osmand_rastermaps_plugin_description">Pokročilá nastavení pro použití mnoha rastrových map jako základní mapu, překryv nebo podkres. Rastrové mapy lze získat online nebo připravit pro offline použití v adresáři OsmAnd na SD kartě.</string>
+  <string name="osmand_rastermaps_plugin_description">Pokročilá nastavení pro použití mnoha rastrových map jako základní mapu, překryv nebo podkres. Rastrové mapy lze získat online nebo připravit offline a nakopírovat do datového adresáře OsmAnd.</string>
   <string name="osmand_background_plugin_description">Pokročilá nastavení pro záznam trasy nebo navigaci v úsporném režimu (při vypnuté obrazovce). Aplikace pravidelně zapíná GPS přijímač, aby zaznamenala bod trasy nebo přehrála hlasový pokyn.</string>
   <string name="osmand_accessibility_description">Pokročilá nastavení zpřístupnění pro osoby s omezením zraku.</string>
   <string name="extra_settings">Pokročilá nastavení</string>
@@ -1044,11 +1044,11 @@
     <string name="new_destination_point_dialog">Cílový bod je již nastaven.</string>
     <string name="target_point">Cíl %1$s</string>
     <string name="target_points">Cíle</string>
-    <string name="osmand_long_description_1000_chars">"OsmAnd\n\nOsmAnd je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).\nVeškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
-\n\nVýčet některých hlavních funkcí:\n- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného adresáře)\n- kompaktní offline vektorové mapy celého světa dostupné zdarma\n- stahování národních nebo regionálních map přímo z aplikace\n- možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností\n- offline vyhledávání adres a bodů zájmu\n- offline navigace na krátké vzdálenosti (experimentální)\n- režim auto, kolo a pěší s volitelným:\n    - přepínáním denního a nočního zobrazení\n    - automatickým zvětšováním podle rychlosti pohybu\n    - natáčením mapy podle kompasu nebo směru pohybu\n    - naváděním do jízdních pruhů, zobrazením rychlostních limitů\n    - TTS nebo audio hlasovými pokyny
+    <string name="osmand_long_description_1000_chars">" OsmAnd\n\nOsmAnd je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).\nVeškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
+\n\nVýčet některých hlavních funkcí:\n- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného úložiště zařízení)\n- kompaktní offline vektorové mapy celého světa dostupné zdarma\n- stahování národních nebo regionálních map přímo z aplikace\n- možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností\n- offline vyhledávání adres a bodů zájmu\n- offline navigace na krátké vzdálenosti (experimentální)\n- režim auto, kolo a pěší s volitelným:\n    - přepínáním denního a nočního zobrazení\n    - automatickým zvětšováním podle rychlosti pohybu\n    - natáčením mapy podle kompasu nebo směru pohybu\n    - naváděním do jízdních pruhů, zobrazením rychlostních limitů\n    - TTS nebo audio hlasovými pokyny
 \n\nOmezení této verze zdarma:\n- omezený počet stažitelných map\n- chybějící přístup na offline Wikipedia POI\n\nOsmAnd je aktivně vyvíjen a náš projekt i jeho budoucí vývoj závisí na finančních příspěvcích. Prosím zvažte zakoupení verze OsmAnd+, sponzorování konkrétní nové funkce nebo obecný dar na osmand.net. "</string>
-	<string name="osmand_plus_long_description_1000_chars">"OsmAnd+\n\nOsmAnd+ je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).\nVeškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd+ také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
-\n\nOsmAnd+ je placená verze aplikace, jejím zakoupením sponzorujete projekt, vývoj nových funkcí a obdržíte nejnovější aktualizace.\n\nVýčet některých hlavních funkcí:\n- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného adresáře)\n- kompaktní offline vektorové mapy celého světa dostupné zdarma\n- neomezené stahování národních nebo regionálních map přímo z aplikace\n- funkce offline Wikipedie (stažení informací o bodech zájmu z Wikipedie), vynikající pro turisty\n- možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností\n- offline vyhledávání adres a bodů zájmu\n- offline navigace na krátké vzdálenosti (experimentální)\n- režim auto, kolo a pěší s volitelným:\n    - přepínáním denního a nočního zobrazení\n    - automatickým zvětšováním podle rychlosti pohybu\n    - natáčením mapy podle kompasu nebo směru pohybu\n    - naváděním do jízdních pruhů, zobrazením rychlostních limitů\n    - TTS nebo audio hlasovými pokyny "</string>
+	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+\n\nOsmAnd+ je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).\nVeškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd+ také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
+\n\nOsmAnd+ je placená verze aplikace, jejím zakoupením sponzorujete projekt, vývoj nových funkcí a obdržíte nejnovější aktualizace.\n\nVýčet některých hlavních funkcí:\n- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného úložiště zařízení)\n- kompaktní offline vektorové mapy celého světa dostupné zdarma\n- neomezené stahování národních nebo regionálních map přímo z aplikace\n- funkce offline Wikipedie (stažení informací o bodech zájmu z Wikipedie), vynikající pro turisty\n- možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností\n- offline vyhledávání adres a bodů zájmu\n- offline navigace na krátké vzdálenosti (experimentální)\n- režim auto, kolo a pěší s volitelným:\n    - přepínáním denního a nočního zobrazení\n    - automatickým zvětšováním podle rychlosti pohybu\n    - natáčením mapy podle kompasu nebo směru pohybu\n    - naváděním do jízdních pruhů, zobrazením rychlostních limitů\n    - TTS nebo audio hlasovými pokyny "</string>
 	<string name="map_widget_monitoring_services">Sledování polohy</string>
 	<string name="no_route">Žádná cesta</string>
 	<string name="delete_target_point">Smazat cíl</string>
@@ -1383,10 +1383,10 @@ s často kladenými otázkami.</string>
 	<string name="routing_attr_weight_description">Zadejte hmotnost vozidla, která musí být povolená na cestách</string>
     <string name="android_19_location_disabled">Od verze Androidu 4.4 (KitKat) není možné stahovat a aktualizovat mapy v předchozím úložišti (%s). Chcete ho změnit na vhodné nové úložiště a zkopírovat do něj všechny soubory?\n Poznámka 1: Původní soubory zůstanou nedotčeny a mohou být smazány ručně.
 \n Poznámka 2: V novém úložišti nebude možné sdílet soubory mezi OsmAnd a OsmAnd+.</string>
-    <string name="application_dir_change_warning2">OsmAnd může zkusit přesunout data do nového cíle. Souhlasíte?</string>
+    <string name="application_dir_change_warning2">Chcete aby OsmAnd také zkopíroval jeho datové soubory do nového cíle?</string>
     <string name="copying_osmand_one_file_descr">Kopírování souboru (%s) do nového umístění...</string>
-    <string name="copying_osmand_files_descr">Kopírování souborů OsmAnd do nového umístění (%s)</string>
-    <string name="copying_osmand_files">Kopírování souborů OsmAnd</string>
+    <string name="copying_osmand_files_descr">Kopírování datových souborů OsmAnd do nového umístění (%s)</string>
+    <string name="copying_osmand_files">Kopírování datových souborů OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Vypočítat OsmAnd offline trasu</string>
     <string name="app_mode_truck">Kamion</string>
     <string name="guidance_preferences_descr">Nastavení navigace</string>
