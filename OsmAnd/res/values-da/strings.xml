@@ -1855,4 +1855,5 @@
     <string name="use_opengl_render_descr">Brug hardware accelereret OpenGL optegning (virker muligvis ikke på alle enheder)</string>
     <string name="everything_up_to_date">Alt er opdateret</string>
     <string name="dismiss">Afvis</string>
+    <string name="no_internet_connection">Ikke muligt at hente. Opret forbindelse til Wi-Fi for at fortsætte.</string>
     </resources>
