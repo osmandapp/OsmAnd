@@ -1889,4 +1889,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="error_avoid_specific_road">No se ha encontrado la carretera más cercana</string>
     <string name="everything_up_to_date">Todo actualizado</string>
     <string name="dismiss">Descartar</string>
+    <string name="no_internet_connection">Imposible descargar. Por favor, conéctate al Wi-Fi para proceder.</string>
     </resources>
