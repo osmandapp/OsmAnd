@@ -256,7 +256,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		}
 		return files;
 	}
-	
+
 	public static File findFileInDir(File file) {
 		if(file.isDirectory()) {
 			File[] lf = file.listFiles();
