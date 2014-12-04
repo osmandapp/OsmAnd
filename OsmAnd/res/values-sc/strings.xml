@@ -1792,4 +1792,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="use_opengl_render">Imprea sa renderizatzione OpengL</string>
     <string name="use_opengl_render_descr">Imprea sa renderizatzione OpengL tràmite hardware (diat pòdere non funtzionare in carchi dispositivu)</string>
     <string name="dismiss">Abbandona</string>
+    <string name="no_internet_connection">Impossìbile iscarrigare. Pro piaghere allue su Wi-fi pro sighire.</string>
     </resources>
