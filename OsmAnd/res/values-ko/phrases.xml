@@ -93,4 +93,31 @@
 	<string name="poi_sewing_shop">건조 용품 가게</string>
 
 	<string name="poi_police">경찰</string>
+	<string name="poi_fire_station">소방서</string>
+	<string name="poi_emergency_phone">긴급 전화</string>
+	<string name="poi_fire_hydrant">소화</string>
+	<string name="poi_fire_extinguisher">소화기</string>
+	<string name="poi_fire_hose">소방 호스</string>
+	<string name="poi_ambulance_station">구급차 역</string>
+	<string name="poi_emergency_access_point">긴급 액세스 포인트</string>
+
+	<string name="poi_ford">포드</string>
+	<string name="poi_mountain_pass">마운틴 패스</string>
+	<string name="poi_gate">게이트</string>
+	<string name="poi_city_wall">도시 벽</string>
+	<string name="poi_lift_gate">리프트 게이트</string>
+	<string name="poi_toll_booth">톨게이트 부스</string>
+	<string name="poi_border_control">국경 통제</string>
+	<string name="poi_traffic_calming_bump">범프</string>
+	<string name="poi_traffic_calming_cushion">쿠션</string>
+	<string name="poi_traffic_calming_chicane">시케인</string>
+	<string name="poi_traffic_calming_rumble_strip">럼블 스트립</string>
+	<string name="poi_traffic_calming_table">테이블</string>
+	<string name="poi_traffic_calming_choker">초커</string>
+	<string name="poi_traffic_signals">빛을 중지</string>
+
+	<string name="poi_car_repair">자동차 수리</string>
+	<string name="poi_service_tyres">타이어</string>
+	<string name="poi_vehicle_inspection">차량 검사</string>
+	<string name="poi_car_wash">세차장</string>
 	</resources>
