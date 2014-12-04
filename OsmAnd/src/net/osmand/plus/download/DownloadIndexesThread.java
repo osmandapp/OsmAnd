@@ -551,7 +551,9 @@ public class DownloadIndexesThread {
 						!date.equals(indexactivateddate) &&
 						!date.equals(indexfilesdate) &&
 						indexActivatedFileNames.containsKey(sfName)) {
-					if (item.getType() == DownloadActivityType.NORMAL_FILE){
+					if (item.getType() == DownloadActivityType.NORMAL_FILE ||
+							item.getType() == DownloadActivityType.ROADS_FILE ||
+							item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
 						itemsToUpdate.add(item);
 					} else {
 						long itemSize = item.getSize();
