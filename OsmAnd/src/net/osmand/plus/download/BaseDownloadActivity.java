@@ -48,7 +48,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		settings = ((OsmandApplication) getApplication()).getSettings();
-		if(downloadListIndexThread == null) {
+		if (downloadListIndexThread == null) {
 			downloadListIndexThread = new DownloadIndexesThread(this);
 		}
 		prepareDownloadDirectory();
@@ -70,7 +70,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 	}
 
 
-	public void updateDownloadList(List<IndexItem> list){
+	public void updateDownloadList(List<IndexItem> list) {
 
 	}
 
@@ -78,12 +78,12 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 
 	}
 
-	public DownloadActivityType getDownloadType(){
+	public DownloadActivityType getDownloadType() {
 		return type;
 	}
 
 	public Map<IndexItem, List<DownloadEntry>> getEntriesToDownload() {
-		if(downloadListIndexThread == null) {
+		if (downloadListIndexThread == null) {
 			return new LinkedHashMap<IndexItem, List<DownloadEntry>>();
 		}
 		return downloadListIndexThread.getEntriesToDownload();
@@ -97,20 +97,20 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 
 	}
 
-	public void downloadListUpdated(){
+	public void downloadListUpdated() {
 
 	}
 
-	public OsmandApplication getMyApplication(){
-		return (OsmandApplication)getApplication();
+	public OsmandApplication getMyApplication() {
+		return (OsmandApplication) getApplication();
 	}
 
-	public void categorizationFinished(List<IndexItem> filtered, List<IndexItemCategory> cats){
+	public void categorizationFinished(List<IndexItem> filtered, List<IndexItemCategory> cats) {
 
 	}
 
-	public void startDownload(IndexItem item){
-		if (downloadListIndexThread.getCurrentRunningTask() != null){
+	public void startDownload(IndexItem item) {
+		if (downloadListIndexThread.getCurrentRunningTask() != null) {
 			Toast.makeText(this, "Please wait before previous download is finished", Toast.LENGTH_SHORT).show();
 			return;
 		}
@@ -122,7 +122,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 	public void downloadFilesPreCheckSpace() {
 		double sz = 0;
 		List<DownloadEntry> list = downloadListIndexThread.flattenDownloadEntries();
-		for (DownloadEntry es :  list) {
+		for (DownloadEntry es : list) {
 			sz += es.sizeMB;
 		}
 		// get availabile space
@@ -144,7 +144,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 	}
 
 	protected void downloadFilesCheckFreeVersion() {
-		if (Version.isFreeVersion(getMyApplication()) ) {
+		if (Version.isFreeVersion(getMyApplication())) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			boolean wiki = false;
 			for (IndexItem es : DownloadActivity.downloadListIndexThread.getEntriesToDownload().keySet()) {
@@ -171,48 +171,23 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 	}
 
 	protected void downloadFilesCheckInternet() {
-		if(!getMyApplication().getSettings().isWifiConnected()) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(getString(R.string.download_using_mobile_internet));
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					downloadFilesCheckSim();
-				}
-			});
-			builder.setNegativeButton(R.string.default_buttons_no, null);
-			builder.show();
+		if (!getMyApplication().getSettings().isWifiConnected()) {
+			if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setMessage(getString(R.string.download_using_mobile_internet));
+				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						downloadFilesPreCheckSpace();
+					}
+				});
+				builder.setNegativeButton(R.string.default_buttons_no, null);
+				builder.show();
+			} else {
+				AccessibleToast.makeText(this, R.string.no_internet_connection, Toast.LENGTH_LONG).show();
+			}
 		} else {
 			downloadFilesPreCheckSpace();
-		}
-	}
-
-	protected void downloadFilesCheckSim(){
-		TelephonyManager telMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-		int phoneType = telMgr.getPhoneType();
-
-		if (phoneType == TelephonyManager.PHONE_TYPE_NONE){
-			AccessibleToast.makeText(this, R.string.sim_card_not_supported, Toast.LENGTH_LONG).show();
-			return;
-		}
-		int simState = telMgr.getSimState();
-		switch (simState) {
-			case TelephonyManager.SIM_STATE_NETWORK_LOCKED:
-				AccessibleToast.makeText(this, R.string.network_locked, Toast.LENGTH_LONG).show();
-				break;
-			case TelephonyManager.SIM_STATE_PIN_REQUIRED:
-				AccessibleToast.makeText(this, R.string.sim_pin_required, Toast.LENGTH_LONG).show();
-				break;
-			case TelephonyManager.SIM_STATE_PUK_REQUIRED:
-				AccessibleToast.makeText(this, R.string.sim_puk_required, Toast.LENGTH_LONG).show();
-				break;
-			case TelephonyManager.SIM_STATE_READY:
-				downloadFilesPreCheckSpace();
-				break;
-			case TelephonyManager.SIM_STATE_ABSENT:
-			case TelephonyManager.SIM_STATE_UNKNOWN:
-				AccessibleToast.makeText(this, R.string.no_sim_card, Toast.LENGTH_LONG).show();
-				break;
 		}
 	}
 
@@ -244,12 +219,12 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 	}
 
 	private void prepareDownloadDirectory() {
-		if(getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
+		if (getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
 			boolean showedDialog = false;
-			if(Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
+			if (Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
 				SuggestExternalDirectoryDialog.showDialog(this, null, null);
 			}
-			if(!showedDialog) {
+			if (!showedDialog) {
 				showDialogOfFreeDownloadsIfNeeded();
 			}
 		} else {
@@ -323,13 +298,15 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 						new File(newLoc, IndexConstants.APP_DIR)) {
 					protected Boolean doInBackground(Void[] params) {
 						Boolean result = super.doInBackground(params);
-						if(result) {
+						if (result) {
 							settings.setExternalStorageDirectory(newLoc);
 							getMyApplication().getResourceManager().resetStoreDirectory();
-							getMyApplication().getResourceManager().reloadIndexes(progress)	;
+							getMyApplication().getResourceManager().reloadIndexes(progress);
 						}
 						return result;
-					};
+					}
+
+					;
 				};
 		task.execute();
 	}
