@@ -586,8 +586,12 @@ public class MapRenderRepositories {
 			renderingReq.setBooleanFilter(renderingReq.ALL.R_NIGHT_MODE, nightMode);
 			for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
 				if (customProp.isBoolean()) {
-					CommonPreference<Boolean> pref = prefs.getCustomRenderBooleanProperty(customProp.getAttrName());
-					renderingReq.setBooleanFilter(customProp, pref.get());
+					if(customProp.getAttrName().equals(RenderingRuleStorageProperties.A_ENGINE_V1)) {
+						renderingReq.setBooleanFilter(customProp, true);
+					} else {
+						CommonPreference<Boolean> pref = prefs.getCustomRenderBooleanProperty(customProp.getAttrName());
+						renderingReq.setBooleanFilter(customProp, pref.get());
+					}
 				} else {
 					CommonPreference<String> settings = prefs.getCustomRenderProperty(customProp.getAttrName());
 					String res = settings.get();

@@ -11,12 +11,12 @@
     -->
     <string name="dismiss">Dismiss</string>
     <string name="everything_up_to_date">Everything up to date</string>
-    <string name="use_opengl_render">Use opengl rendering</string>
-    <string name="use_opengl_render_descr">Use hardware accelerated opengl rendering (may not work on some device)</string>
+    <string name="use_opengl_render">Use OpenGL rendering</string>
+    <string name="use_opengl_render_descr">Use hardware accelerated OpenGL rendering (may not work on some devices)</string>
     <string name="error_avoid_specific_road">Nearest road was not found</string>
     <string name="home_button">Home</string>
     <string name="osmo_use_https_descr">Use secure connection with server</string>
-    <string name="osmo_use_https">Use https</string>
+    <string name="osmo_use_https">Use HTTPS</string>
 	<string name="advanced_settings">Advanced</string>
 	<string name="map_update">Maps</string>
 	<string name="search_for">Search for</string>

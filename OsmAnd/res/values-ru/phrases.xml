@@ -389,7 +389,7 @@
 	<string name="poi_travel_agent">Турагенство</string>
 	<string name="poi_viewpoint">Место с хорошим видом</string>
 	<string name="poi_camp_site">Место для лагеря</string>
-	<string name="poi_caravan_site"/>
+	<string name="poi_caravan_site">Место для ночлега</string>
 	<string name="poi_picnic_site">Место для пикника</string>
 	<string name="poi_spring">Родник</string>
 	<string name="poi_cemetery">Кладбище</string>
@@ -552,7 +552,7 @@
 	<string name="poi_islet">Остров (небольшой)</string>
 
 	<string name="poi_seamark_anchorage">Якорная стоянка</string>
-	<string name="poi_seamark_anchor_berth"/>
+	<string name="poi_seamark_anchor_berth">Якорный причал</string>
 	<string name="poi_seamark_beacon">Бакен</string>
 	<string name="poi_seamark_beacon_cardinal"/>
 	<string name="poi_seamark_beacon_lateral"/>
@@ -620,4 +620,12 @@
 	<string name="poi_hot_spring">Горячий источник</string>
 	<string name="poi_geyser">Гейзер</string>
 	<string name="poi_leisure_track">Спортивная дорожка</string>
+	<string name="poi_place_farm">Ферма</string>
+
+	<string name="poi_place_allotments">Садоводческое товарищество</string>
+	<string name="poi_american_football">Американский футбол</string>
+	<string name="poi_base">Бейсджампинг</string>
+	<string name="poi_bmx_sport">Веломотокросс</string>
+	<string name="poi_canadian_football">Канадский футбол</string>
+	<string name="poi_surfing">Серфинг</string>
 	</resources>
