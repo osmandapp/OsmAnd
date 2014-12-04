@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="no_internet_connection">Not possible to download. Please connect to Wi-Fi to proceed.</string>
     <string name="dismiss">Dismiss</string>
     <string name="everything_up_to_date">Everything up to date</string>
     <string name="use_opengl_render">Use OpenGL rendering</string>
