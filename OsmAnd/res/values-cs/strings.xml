@@ -1784,4 +1784,5 @@ s často kladenými otázkami.</string>
     <string name="use_opengl_render">Použít OpenGL</string>
     <string name="use_opengl_render_descr">Použít hardwarově akcelerované renderování pomocí OpenGL (nemusí fungovat na všech zařízeních)</string>
     <string name="error_avoid_specific_road">Nebyla nalezena nejbližší silnice</string>
+    <string name="no_internet_connection">Není možné stáhnout. Prosím připojte se na Wi-Fi, aby bylo možné pokračovat.</string>
     </resources>
