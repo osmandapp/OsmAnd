@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +23,6 @@ import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,7 +45,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	
     private TextWatcher textWatcher ;
 	private EditText filterText;
-	private OsmandSettings settings;
 
 	DownloadIndexAdapter listAdapter;
 
@@ -94,10 +91,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		super.onCreate(savedInstanceState);
 
 		setHasOptionsMenu(true);
-
-		settings = getMyApplication().getSettings();
-
-
 	}
 	
 	@Override
@@ -312,7 +305,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		}
 		a.setLoadedFiles(indexActivatedFileNames, indexFileNames);
 		a.setIndexFiles(filtered, cats);
-
 		a.notifyDataSetChanged();
 		a.getFilter().filter(getFilterText());
 		if ((type == DownloadActivityType.SRTM_COUNTRY_FILE || type == DownloadActivityType.HILLSHADE_FILE)
