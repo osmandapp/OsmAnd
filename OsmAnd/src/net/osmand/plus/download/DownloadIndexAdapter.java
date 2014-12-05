@@ -25,8 +25,8 @@ import android.widget.TextView;
 public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 
 	private DownloadIndexFilter myFilter;
-	private final List<IndexItem> indexFiles;
-	private final List<IndexItemCategory> list = new ArrayList<IndexItemCategory>();
+	private List<IndexItem> indexFiles = new ArrayList<IndexItem>();
+	private List<IndexItemCategory> list = new ArrayList<IndexItemCategory>();
 	private DownloadIndexFragment downloadFragment;
 
 	private Map<String, String> indexFileNames = null;
@@ -43,11 +43,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		
 		this.indexFiles = new ArrayList<IndexItem>(indexFiles);
 		app = downloadFragment.getMyApplication();
-		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(app, indexFiles);
-		synchronized (this) {
-			list.clear();
-			list.addAll(cats);
-		}
+		list = new ArrayList<IndexItemCategory>(IndexItemCategory.categorizeIndexItems(app, indexFiles));
 		format = downloadFragment.getMyApplication().getResourceManager().getDateFormat();
 		okColor = downloadFragment.getResources().getColor(R.color.color_ok);
 		TypedArray ta = downloadFragment.getDownloadActivity().getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
@@ -70,17 +66,15 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		downloadFragment.getDownloadActivity().runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				synchronized (DownloadIndexAdapter.this) {
 					final ExpandableListView expandableListView = downloadFragment.getExpandableListView();
 					for (int i = 0; i < getGroupCount(); i++) {
 						int cp = getChildrenCount(i);
-						if (cp < 7) {
+						if (cp < 7 && i == 0) {
 							expandableListView.expandGroup(i);
 						} else {
 							expandableListView.collapseGroup(i);
 						}
 					}
-				}
 			}
 		});
 
@@ -92,10 +86,8 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	
 	
 	public void setIndexFiles(List<IndexItem> indexFiles, Collection<? extends IndexItemCategory> cats) {
-		this.indexFiles.clear();
-		this.indexFiles.addAll(indexFiles);
-		list.clear();
-		list.addAll(cats);
+		this.indexFiles = new ArrayList<IndexItem>(indexFiles);
+		list = new ArrayList<IndexItemCategory>(cats);
 		notifyDataSetChanged();
 	}
 	
@@ -167,17 +159,16 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		@SuppressWarnings("unchecked")
 		@Override
 		protected void publishResults(CharSequence constraint, FilterResults results) {
-			synchronized (DownloadIndexAdapter.this) {
-				list.clear();
-				Collection<IndexItem> items = (Collection<IndexItem>) results.values;
-				if (items != null && !items.isEmpty()) {
-					list.addAll(IndexItemCategory.categorizeIndexItems(app, items));
-				} else if(DownloadIndexAdapter.this.indexFiles.isEmpty()){
-					list.add(new IndexItemCategory(app.getString(R.string.no_index_file_to_download), 1));
-				} else {
-					list.add(new IndexItemCategory(app.getString(R.string.select_index_file_to_download), 1));
-				}
+			List<IndexItemCategory> clist = new ArrayList<IndexItemCategory>();
+			Collection<IndexItem> items = (Collection<IndexItem>) results.values;
+			if (items != null && !items.isEmpty()) {
+				clist.addAll(IndexItemCategory.categorizeIndexItems(app, items));
+			} else if (DownloadIndexAdapter.this.indexFiles.isEmpty()) {
+				clist.add(new IndexItemCategory(app.getString(R.string.no_index_file_to_download), 1));
+			} else {
+				clist.add(new IndexItemCategory(app.getString(R.string.select_index_file_to_download), 1));
 			}
+			list = clist;
 			notifyDataSetChanged();
 			collapseTrees(constraint);
 		}

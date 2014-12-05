@@ -24,7 +24,6 @@ import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -312,7 +311,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		}
 		a.setLoadedFiles(indexActivatedFileNames, indexFileNames);
 		a.setIndexFiles(filtered, cats);
-
 		a.notifyDataSetChanged();
 		a.getFilter().filter(getFilterText());
 		if ((type == DownloadActivityType.SRTM_COUNTRY_FILE || type == DownloadActivityType.HILLSHADE_FILE)
