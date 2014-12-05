@@ -82,6 +82,7 @@ public class MapRenderRepositories {
 
 	// lat/lon box of requested vector data
 	private QuadRect cObjectsBox = new QuadRect();
+	private int cObjectsZoom = 0;
 	// cached objects in order to render rotation without reloading data from db
 	private List<BinaryMapDataObject> cObjects = new LinkedList<BinaryMapDataObject>();
 	private NativeSearchResult cNativeObjects = null;
@@ -273,6 +274,7 @@ public class MapRenderRepositories {
 		}
 		cNativeObjects = resultHandler;
 		cObjectsBox = dataBox;
+		cObjectsZoom = zoom;
 		log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
 				dataBox.bottom, dataBox.top, dataBox.left, dataBox.right, zoom));
 		log.info(String.format("Native search: %s ms ", System.currentTimeMillis() - now)); //$NON-NLS-1$
@@ -445,6 +447,7 @@ public class MapRenderRepositories {
 
 		cObjects = tempResult;
 		cObjectsBox = dataBox;
+		cObjectsZoom = zoom;
 
 		return true;
 	}
@@ -617,9 +620,11 @@ public class MapRenderRepositories {
 			requestedBox = new RotatedTileBox(tileRect);
 			// calculate data box
 			QuadRect dataBox = requestedBox.getLatLonBounds();
+			int dataBoxZoom = requestedBox.getZoom();
 			long now = System.currentTimeMillis();
 			if (cObjectsBox.left > dataBox.left || cObjectsBox.top < dataBox.top || cObjectsBox.right < dataBox.right
-					|| cObjectsBox.bottom > dataBox.bottom || (nativeLib != null) == (cNativeObjects == null)) {
+					|| cObjectsBox.bottom > dataBox.bottom || (nativeLib != null) == (cNativeObjects == null)
+					|| dataBoxZoom != cObjectsZoom) {
 				// increase data box in order for rotate
 				if ((dataBox.right - dataBox.left) > (dataBox.top - dataBox.bottom)) {
 					double wi = (dataBox.right - dataBox.left) * .05;
