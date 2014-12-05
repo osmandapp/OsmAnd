@@ -297,6 +297,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		if(newRoute && rh.isRoutePlanningMode() && mapView != null) {
 			RotatedTileBox rt = mapView.getCurrentRotatedTileBox();
 			Location lt = rh.getLastProjection();
+			if(lt == null) {
+				lt = app.getTargetPointsHelper().getPointToStartLocation();
+			}
 			if(lt != null) {
 				double left = lt.getLongitude(), right = lt.getLongitude();
 				double top = lt.getLatitude(), bottom = lt.getLatitude();

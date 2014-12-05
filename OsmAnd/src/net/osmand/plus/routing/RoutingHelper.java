@@ -544,8 +544,8 @@ public class RoutingHelper {
 		return false;
 	}
 
-	private void setNewRoute(RouteCalculationResult res, Location start){
-		final boolean newRoute = !this.route.isCalculated();
+	private void setNewRoute(RouteCalculationResult prevRoute, RouteCalculationResult res, Location start){
+		final boolean newRoute = !prevRoute.isCalculated();
 		if (isFollowingMode) {
 			if(lastFixedLocation != null) {
 				start = lastFixedLocation;
@@ -574,8 +574,7 @@ public class RoutingHelper {
 			if (!wrongMovementDirection || newRoute) {
 				voiceRouter.newRouteIsCalculated(newRoute);
 			}
-		} 
-		app.getWaypointHelper().setNewRoute(res);
+		}
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
@@ -584,7 +583,7 @@ public class RoutingHelper {
 				}
 			}
 		});
-		
+		app.getWaypointHelper().setNewRoute(res);
 	}
 	
 	public int getLeftDistance(){
@@ -737,7 +736,7 @@ public class RoutingHelper {
 					res = provider.recalculatePartOfflineRoute(res, params);
 				}
 			}
-			
+			RouteCalculationResult prev = route;
 			synchronized (RoutingHelper.this) {
 				if (res.isCalculated()) {
 					route = res;
@@ -748,10 +747,8 @@ public class RoutingHelper {
 				currentRunningJob = null;
 			}
 			if(res.isCalculated()){
-				setNewRoute(res, params.start);
-			}
-
-			if (res.isCalculated()) {
+				setNewRoute(prev, res, params.start);
+				
 				String msg = app.getString(R.string.new_route_calculated_dist) + ": " + 
 							OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app);
 				if (res.getRoutingTime() != 0f) {
