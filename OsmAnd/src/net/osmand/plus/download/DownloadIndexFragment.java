@@ -47,7 +47,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	
     private TextWatcher textWatcher ;
 	private EditText filterText;
-	private OsmandSettings settings;
 
 	DownloadIndexAdapter listAdapter;
 
@@ -94,10 +93,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		super.onCreate(savedInstanceState);
 
 		setHasOptionsMenu(true);
-
-		settings = getMyApplication().getSettings();
-
-
 	}
 	
 	@Override
