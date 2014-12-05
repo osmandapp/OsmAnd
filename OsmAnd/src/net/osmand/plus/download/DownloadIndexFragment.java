@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +45,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	
     private TextWatcher textWatcher ;
 	private EditText filterText;
-	private OsmandSettings settings;
 
 	DownloadIndexAdapter listAdapter;
 
@@ -93,10 +91,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		super.onCreate(savedInstanceState);
 
 		setHasOptionsMenu(true);
-
-		settings = getMyApplication().getSettings();
-
-
 	}
 	
 	@Override
