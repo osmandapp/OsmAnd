@@ -322,23 +322,24 @@ public class ContextMenuAdapter {
 				}
 
 				if (v.findViewById(R.id.check_item) != null) {
-					CompoundButton ch = (CompoundButton) v.findViewById(R.id.check_item);
+					final CompoundButton ch = (CompoundButton) v.findViewById(R.id.check_item);
 					if(selectedList.get(position) != -1) {
 						ch.setOnCheckedChangeListener(null);
 						ch.setVisibility(View.VISIBLE);
 						ch.setChecked(selectedList.get(position) > 0);
 						final ArrayAdapter<String> la = this;
-						ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+						final OnCheckedChangeListener listener = new OnCheckedChangeListener() {
 
 							@Override
 							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 								OnContextMenuClick ca = getClickAdapter(position);
+								selectedList.set(position, isChecked ? 1 : 0);
 								if (ca != null) {
 									ca.onContextMenuClick(la, getElementId(position), position, isChecked);
 								}
-								selectedList.set(position, isChecked ? 1 : 0);
 							}
-						});
+						};
+						ch.setOnCheckedChangeListener(listener);
 						ch.setVisibility(View.VISIBLE);
 					} else if (ch != null) {
 						ch.setVisibility(View.GONE);

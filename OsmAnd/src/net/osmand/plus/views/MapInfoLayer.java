@@ -376,7 +376,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 
 	protected String getText(final ApplicationMode mode, final MapWidgetRegInfo r) {
-		return (r.visibleCollapsed(mode)? " - " : "  ") + map.getString(r.messageId);
+		return (r.visibleCollapsed(mode)? " + " : "  ") + map.getString(r.messageId);
 	}
 
 	private int themeId = -1;
