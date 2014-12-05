@@ -1854,4 +1854,5 @@
     <string name="use_opengl_render">Naudoti OpenGL vaizdavimą</string>
     <string name="use_opengl_render_descr">Naudoti aparatinį OpenGL vaizdavimą (gali neveikti kai kurioje įrangoje)</string>
     <string name="everything_up_to_date">Viskas atnaujinta</string>
+    <string name="no_internet_connection">Parsisiųsti nepavyko. Prašome prisijungti prie Wi-Fi, jei norite tęsti.</string>
     </resources>
