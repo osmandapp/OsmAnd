@@ -73,8 +73,8 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				synchronized (DownloadIndexAdapter.this) {
 					final ExpandableListView expandableListView = downloadFragment.getExpandableListView();
 					for (int i = 0; i < getGroupCount(); i++) {
-						int cp = getChildrenCount(i);
-						if (cp < 7) {
+						IndexItemCategory group = getGroup(i);
+						if (group.name.equals("Worldwide and topic maps")){
 							expandableListView.expandGroup(i);
 						} else {
 							expandableListView.collapseGroup(i);
