@@ -255,6 +255,6 @@ public class TurnType {
 	}
 
 	public static boolean isSlightTurn(int type) {
-		return !isLeftTurn(type) && !isRightTurn(type) && type != TU && type != TRU && type != OFFR;
+		return type == TSLL || type == TSLR || type == C || type == KL || type == KR;
 	}
 }

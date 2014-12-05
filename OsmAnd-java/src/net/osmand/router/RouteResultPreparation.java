@@ -703,9 +703,6 @@ public class RouteResultPreparation {
 
 			// When going straight, the lanes have to be calculated from the previous segment, not the current/next segment.
 			int prevLanes = countLanesMinOne(prevSegm);
-			if (prevLanes <= 0) {
-				prevLanes = 1;
-			}
 
 			t.setLanes(attachTurnLanesData(prevSegm, new int[prevLanes]));
 
