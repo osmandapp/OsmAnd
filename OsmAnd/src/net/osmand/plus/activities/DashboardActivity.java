@@ -221,7 +221,6 @@ public class DashboardActivity extends BaseDownloadActivity {
     			
     		}, st, st + version.length(), 0);
     		tv.setText(content);
-		tv.setMovementMethod(LinkMovementMethod.getInstance());
         } else {
         	tv.setText(vt + version +"\n\n" +
     				activity.getString(R.string.about_content));
