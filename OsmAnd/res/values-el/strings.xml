@@ -667,7 +667,7 @@
 	<string name="use_osmand_routing_service_descr">Χρήση της εκτός σύνδεσης πλοήγησης του OsmAnd ισχύει μόνο για διαδρομές &gt; 20 χλμ (πειραματικό)</string>
 	<string name="osmand_routing_experimental">Η πλοήγηση εκτός δικτύου OsmAnd είναι μια πειραματική λειτουργία και δε λειτουργεί για αποστάσεις άνω των 20 χλμ.\n\nΗ υπηρεσία πλοήγησης έχει προσωρινά αλλάξει στην δικτυακή CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Δεν μπορώ να βρω τον καθορισμένο φάκελο.</string>
-	<string name="application_dir">Κατάλογος αποθήκευσης</string>
+	<string name="application_dir">Φάκελος αποθήκευσης δεδομένων</string>
 	
 	<string name="osmand_net_previously_installed">Μια προηγούμενη έκδοση OsmAnd είναι εγκατεστημένη. Όλα τα offline δεδομένα θα υποστηρίζονται από τη νέα εφαρμογή. Αλλά τα Αγαπημένα σημεία θα πρέπει να εξαχθούν από την παλιά εφαρμογή και στη συνέχεια να εισαχθούν στη νέα.</string>
 	<string name="build_installed">Το Build {0} εγκαταστάθηκε επιτυχώς ({1}).</string>
@@ -723,7 +723,7 @@
 	<string name="voice">Φωνή</string>
 	<string name="no_vector_map_loaded">Οι διανυσματικοί χάρτες δεν φορτώθηκαν</string>
 	<string name="map_route_by_gpx">Πλοήγηση χρησιμοποιώντας GPX</string>
-	<string name="gpx_files_not_found">Τα GPX αρχεία δεν βρέθηκαν στον κατάλογο /tracks</string>
+	<string name="gpx_files_not_found">Δεν βρέθηκαν αρχεία GPX στον κατάλογο ιχνών</string>
 	<string name="layer_gpx_layer">Ίχνος GPX…</string>
 	<string name="error_reading_gpx">Σφάλμα ανάγνωσης δεδομένων GPX</string>
 	<string name="vector_data">Offline διανυσματικοί χάρτες</string>
@@ -858,7 +858,7 @@
 	<string name="route_general_information">Συνολική απόσταση %1$s, χρόνος ταξιδιού %2$d ω %3$d λ.</string>
 	<string name="router_service_descr">Επιλέξτε μια online ή offline υπηρεσία πλοήγησης</string>
 	<string name="router_service">Υπηρεσία πλοήγησης</string>
-	<string name="sd_dir_not_accessible">Η κατάλογος αποθήκευσης στην SD κάρτα δεν είναι προσβάσιμος</string>
+	<string name="sd_dir_not_accessible">Η κατάλογος αποθήκευσης δεδομένων στην SD κάρτα δεν είναι προσβάσιμος</string>
 	<string name="download_question">Λήψη {0} - {1} ?</string>
 	<string name="download_question_exist">Offline δεδομένα για {0} υπάρχουν ήδη ({1}). Θέλετε να τα ενημερώσετε ({2}) ?</string>
 	<string name="address">Διεύθυνση</string>
@@ -1649,4 +1649,13 @@
     <string name="rendering_category_transport">Μεταφορές</string>
     <string name="map_widget_top">Γραμμή κατάστασης</string>
 	<string name="speed_limit_exceed">Ανοχή ορίου ταχύτητας</string>
+	<string name="download_tab_downloads">Λήψεις</string>
+    <string name="download_tab_updates">Ενημερώσεις</string>
+    <string name="download_tab_local">Τοπικά</string>
+	<string name="no_internet_connection">Αδύνατη η λήψη, Παρακαλώ συνδεθείτε στο ασύρματο για να συνεχίσετε.</string>
+    <string name="everything_up_to_date">Όλα ενημερωμένα</string>
+    <string name="osmo_use_https">Χρήση HTTPS</string>
+	<string name="map_update">Χάρτες</string>
+	<string name="search_for">Αναζήτηση για</string>
+	<string name="coordinates">Συντεταγμένες</string>
 	</resources>
