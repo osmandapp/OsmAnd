@@ -1906,8 +1906,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="use_opengl_render_descr">Ús de renderització OpenGL per accelerador gràfic (no funciona a tots els dispositius)</string>
     <string name="everything_up_to_date">Tot està actualitzat</string>
     <string name="dismiss">Descarta</string>
-    <string name="no_internet_connection">No es pot descarregar. Si us plau connecteu la Wifi per procedir.</string>
-    <string name="download_tab_downloads">Descàrregues</string>
+    <string name="no_internet_connection">No s\'ha pogut baixar. Connecteu la Wi-Fi per continuar.</string>
+    <string name="download_tab_downloads">Baixades</string>
     <string name="download_tab_updates">Actualitzacions</string>
     <string name="download_tab_local">Local</string>
 	</resources>
