@@ -59,6 +59,10 @@ public class IndexItem implements Comparable<IndexItem> {
 	public long getSize(){
 		return containerSize;
 	}
+	
+	public long getContentSize() {
+		return contentSize;
+	}
 
 	public String getSizeDescription(Context ctx) {
 		return size + " MB";

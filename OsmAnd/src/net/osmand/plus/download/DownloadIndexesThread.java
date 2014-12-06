@@ -556,8 +556,8 @@ public class DownloadIndexesThread {
 							item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
 						itemsToUpdate.add(item);
 					} else {
-						long itemSize = item.getSize();
-						File file = new File(((DownloadOsmandIndexesHelper.AssetIndexItem) item).getDestFile());
+						long itemSize = item.getContentSize();
+						File file = new File(item.getType().getDownloadFolder(app, item), sfName);
 						long oldItemSize = file.length();
 						if (itemSize != oldItemSize){
 							itemsToUpdate.add(item);
