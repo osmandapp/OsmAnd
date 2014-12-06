@@ -409,6 +409,10 @@ public class RouteResultPreparation {
 				}
 			}
 
+			if (nextSegment == null) {
+				continue;
+			}
+
 			TurnType currentTurn = currentSegment.getTurnType();
 			TurnType nextTurn = nextSegment.getTurnType();
 
