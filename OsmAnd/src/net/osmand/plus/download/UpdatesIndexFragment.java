@@ -218,7 +218,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 			} else {
 				ch.setVisibility(View.VISIBLE);
 			}
-			String eName = DownloadActivity.getFullName(e, getMyApplication(), osmandRegions);
+			String eName = e.getVisibleName(getMyApplication(), osmandRegions);
 
 			name.setText(eName.trim()); //$NON-NLS-1$
 			String d = e.getDate(format) + "\n" + e.getSizeDescription(getMyApplication());
