@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,7 @@ public class OsmandRegions {
 	Integer nameLocaleType = null;
 	String locale = "en";
 	Integer suffixType;
+	Integer keyNameType;
 
 
 	public void prepareFile(String fileName) throws IOException {
@@ -112,6 +114,13 @@ public class OsmandRegions {
 			return null;
 		}
 		return o.getNameByType(suffixType);
+	}
+	
+	public String getKeyName(BinaryMapDataObject o) {
+		if(keyNameType == null) {
+			return null;
+		}
+		return o.getNameByType(keyNameType);
 	}
 
 	public boolean isInitialized(){
@@ -240,19 +249,27 @@ public class OsmandRegions {
 	
 	public void initLocaleNames() throws IOException {
 //		final Collator clt = OsmAndCollator.primaryCollator();
+		final Map<String, BinaryMapDataObject> downloadNamesPrefix = new LinkedHashMap<String, BinaryMapDataObject>();
 		final ResultMatcher<BinaryMapDataObject> resultMatcher = new ResultMatcher<BinaryMapDataObject>() {
 			
 			@Override
 			public boolean publish(BinaryMapDataObject object) {
 				initTypes(object);
 				String downloadName = object.getNameByType(downloadNameType).toLowerCase();
-				String prefix = object.getNameByType(prefixType);
+				String prefix = getPrefix(object);
+				String keyName = getKeyName(object);
 				if(prefix == null) {
 					prefix = "";
 				}
 				String locName = getLocaleName(object);
 				if(locName != null && locName.length() > 0){
+					String kn = keyName.toLowerCase();
+					if(prefix.length() > 0) {
+						downloadNamesPrefix.put(downloadName, object);
+						kn = prefix.toLowerCase() +"_" + keyName;
+					}
 					downloadNamesToLocaleNames.put(downloadName, locName);
+					downloadNamesToLocaleNames.put(kn, locName);
 				}
 				MapIndex mi = object.getMapIndex();
 				TIntObjectIterator<String> it = object.getObjectNames().iterator();
@@ -281,6 +298,18 @@ public class OsmandRegions {
 			}
 		};
 		iterateOverAllObjects(resultMatcher);
+		// post process download names
+		for(Map.Entry<String, BinaryMapDataObject> e : downloadNamesPrefix.entrySet()) {
+			String downloadName = e.getKey();
+			BinaryMapDataObject o = e.getValue();
+			String prefix = getPrefix(o).toLowerCase();
+			String locPrefix = downloadNamesToLocaleNames.get(prefix);
+			String locName = downloadNamesToLocaleNames.get(downloadName);
+			downloadNamesToLocaleNames.put(downloadName, locPrefix + " " + locName);
+			String index = downloadNamesToLowercaseIndex.get(downloadName);
+			downloadNamesToLowercaseIndex.put(downloadName, index + " " + prefix + " " + locPrefix.toLowerCase());
+		}
+		
 	}
 
 
@@ -354,6 +383,7 @@ public class OsmandRegions {
 			nameLocaleType = object.getMapIndex().getRule("name:" + locale, null);
 			prefixType = object.getMapIndex().getRule("region_prefix", null);
 			suffixType = object.getMapIndex().getRule("region_suffix", null);
+			keyNameType = object.getMapIndex().getRule("key_name", null);
 			if (downloadNameType == null || nameType == null) {
 				throw new IllegalStateException();
 			}
@@ -379,7 +409,8 @@ public class OsmandRegions {
 
 	public static void main(String[] args) throws IOException {
 		OsmandRegions or = new OsmandRegions();
-		or.prepareFile("/home/victor/projects/osmand/osm-gen/Osmand_regions.obf");
+		or.setLocale("ru");
+		or.prepareFile("/home/victor/projects/osmand/repo/resources/countries-info/regions.ocbf");
 //		or.cacheAllCountries();
 //		long t = System.currentTimeMillis();
 //		or.cacheAllCountries();

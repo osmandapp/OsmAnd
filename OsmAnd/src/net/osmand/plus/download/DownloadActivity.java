@@ -1,37 +1,36 @@
 package net.osmand.plus.download;
 
-import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.widget.*;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Window;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.map.OsmandRegions;
-import net.osmand.plus.*;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
-import net.osmand.plus.voice.TTSCommandPlayerImpl;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TabHost;
+import android.widget.TextView;
 
-import java.io.File;
-import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
-import java.util.*;
+import com.actionbarsherlock.view.Window;
 
 /**
  * Created by Denis on 08.09.2014.
@@ -80,14 +79,14 @@ public class DownloadActivity extends BaseDownloadActivity {
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 		mTabsAdapter = new FavouritesActivity.TabsAdapter(this, tabHost, viewPager, settings, false);
 		if (getMyApplication().getAppCustomization().onlyTourDownload()){
-			mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS").setIndicator("Downloads"),
+			mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS").setIndicator(getString(R.string.download_tab_downloads)),
 					DownloadIndexFragment.class, null);
 		} else {
-			mTabsAdapter.addTab(tabHost.newTabSpec("LOCAL_INDEX").setIndicator("Local"),
+			mTabsAdapter.addTab(tabHost.newTabSpec("LOCAL_INDEX").setIndicator(getString(R.string.download_tab_local)),
 					LocalIndexesFragment.class, null);
-			mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS").setIndicator("Downloads"),
+			mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS").setIndicator(getString(R.string.download_tab_downloads)),
 					DownloadIndexFragment.class, null);
-			mTabsAdapter.addTab(tabHost.newTabSpec("UPDATES").setIndicator("Updates"),
+			mTabsAdapter.addTab(tabHost.newTabSpec("UPDATES").setIndicator(getString(R.string.download_tab_updates)),
 					UpdatesIndexFragment.class, null);
 		}
 
@@ -406,20 +405,5 @@ public class DownloadActivity extends BaseDownloadActivity {
 		}
 	}
 
-	public static String getFullName(IndexItem e, OsmandApplication app, OsmandRegions osmandRegions) {
-		String eName;
-		List<IndexItem> forCat = new ArrayList<IndexItem>();
-		forCat.add(e);
-		List<IndexItemCategory> category = IndexItemCategory.categorizeIndexItems(app, forCat);
-		if (category.size() != 0){
-			eName = e.getVisibleDescription(app) + "\n"
-					+ category.get(0).name + " "
-					+ e.getVisibleName(app, osmandRegions);
-		} else {
-			eName = e.getVisibleDescription(app) + "\n"
-					+ e.getVisibleName(app, osmandRegions);
-		}
-		return eName;
-	}
 
 }
