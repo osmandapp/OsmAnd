@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -2023,4 +2023,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="everything_up_to_date">Alles ist aktuell</string>
     <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigte OpenGL-Renderung verwenden (Funktioniert nicht auf allen Geräten)</string>
+    <string name="no_internet_connection">Herunterladen nicht möglich. Zum Fortsetzen mit WLAN verbinden!</string>
     </resources>
