@@ -94,7 +94,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 		lp = getMyApplication().getLocationProvider();
 		
 		final String textVersion = Version.getFullVersion(getMyApplication());
-		getSupportActionBar().setTitle(textVersion);
+		getSupportActionBar().setTitle(textVersion.subString(0, textVersion.getIndex("#")));
 		ColorDrawable color = new ColorDrawable(getResources().getColor(R.color.actionbar_color));
 		getSupportActionBar().setBackgroundDrawable(color);
 		getSupportActionBar().setIcon(android.R.color.transparent);
