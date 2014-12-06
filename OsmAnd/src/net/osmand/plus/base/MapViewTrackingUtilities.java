@@ -1,7 +1,5 @@
 package net.osmand.plus.base;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import net.osmand.Location;
@@ -203,13 +201,14 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				if (now - lastTimeAutoZooming > 4500 && (now - lastTimeAutoZooming > threshold || !isUserZoomed)) {
 					isUserZoomed = false;
 					lastTimeAutoZooming = now;
-					double settingsZoomScale = mapView.getSettingsZoomScale();
-					double complexZoom = tb.getZoom() + tb.getZoomScale() + zdelta;
+					double settingsZoomScale = Math.log(mapView.getSettingsMapDensity()) / Math.log(2.0f);
+					double zoomScale = Math.log(tb.getMapDensity()) / Math.log(2.0f);
+					double complexZoom = tb.getZoom() + zoomScale + zdelta;
 					// round to 0.33
 					double newZoom = Math.round((complexZoom - settingsZoomScale) * 3) / 3f;
-					int nz = (int)Math.round(newZoom);
-					double nzscale = newZoom - nz + settingsZoomScale;
-					mapView.setComplexZoom(nz, nzscale);
+					int newIntegerZoom = (int)Math.round(newZoom);
+					double nzscale = newZoom - newIntegerZoom + settingsZoomScale;
+					mapView.setComplexZoom(newIntegerZoom, Math.pow(2, nzscale));
 					// mapView.getAnimatedDraggingThread().startZooming(mapView.getFloatZoom() + zdelta, false);
 				}
 			}

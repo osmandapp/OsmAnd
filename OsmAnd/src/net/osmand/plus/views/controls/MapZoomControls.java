@@ -1,6 +1,5 @@
 package net.osmand.plus.views.controls;
 
-import android.view.Gravity;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
@@ -127,11 +126,10 @@ public class MapZoomControls extends MapControls {
 		zoomShadow.draw(canvas);
 		if (drawZoomLevel) {
 			String zoomText = tb.getZoom() + "";
-			double frac = tb.getZoomScale();
+			double frac = tb.getMapDensity();
 			if (frac != 0) {
 				int ifrac = (int) (frac * 10);
-				boolean pos = ifrac > 0;
-				zoomText += (pos ? "+" : "-");
+				zoomText += " ";
 				zoomText += Math.abs(ifrac) / 10;
 				if (ifrac % 10 != 0) {
 					zoomText += "." + Math.abs(ifrac) % 10;
@@ -237,11 +235,10 @@ public class MapZoomControls extends MapControls {
 
 			@Override
 			public boolean onLongClick(View notUseCouldBeNull) {
-				final OsmandSettings.OsmandPreference<Float> zoomScale = view.getSettings().MAP_ZOOM_SCALE_BY_DENSITY;
+				final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
-				float scale = zoomScale.get();// view.getZoomScale();
-				int p = (int) ((scale > 0 ? 1 : -1) * Math.round(scale * scale * 100)) + 100;
-				final TIntArrayList tlist = new TIntArrayList(new int[] {50, 75, 100, 150, 200, 300, 400, 500 });
+				int p = (int) (mapDensity.get() * 100);
+				final TIntArrayList tlist = new TIntArrayList(new int[] {33, 50, 75, 100, 150, 200, 300, 400 });
 				final List<String> values = new ArrayList<String>();
 				int i = -1;
 				for (int k = 0; k <= tlist.size(); k++) {
@@ -269,15 +266,8 @@ public class MapZoomControls extends MapControls {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								int p = tlist.get(which);
-								float newScale;
-								if (p >= 100) {
-									newScale = (float) Math.sqrt((tlist.get(which) - 100f) / 100f);
-								} else {
-									newScale = -(float) Math.sqrt((100f - tlist.get(which)) / 100f);
-								}
-								zoomScale.set(newScale);
-								view.getAnimatedDraggingThread().startZooming(view.getZoom(),
-										view.getSettingsZoomScale(), false);
+								mapDensity.set(p / 100.0f);
+								view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
 								dialog.dismiss();
 							}
 						});

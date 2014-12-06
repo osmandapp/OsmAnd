@@ -128,7 +128,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private int updatePaints(int color, boolean routePoints, DrawSettings nightMode, RotatedTileBox tileBox){
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		final boolean isNight = nightMode != null && nightMode.isNightMode();
-		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getZoomScale());
+		int hsh = calculateHash(rrs, routePoints, isNight, tileBox.getMapDensity());
 		if (hsh != cachedHash) {
 			cachedHash = hsh;
 			cachedColor = view.getResources().getColor(R.color.gpx_track);
@@ -140,7 +140,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				}
 				if (req.searchRenderingAttribute("gpx")) {
 					RenderingContext rc = new OsmandRenderer.RenderingContext(view.getContext());
-					rc.setDensityValue((float) Math.pow(2, tileBox.getZoomScale()));
+					rc.setDensityValue((float) tileBox.getMapDensity());
 					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
 					osmandRenderer.updatePaint(req, paint, 0, false, rc);
 					isPaint2 = osmandRenderer.updatePaint(req, paint2, 1, false, rc);

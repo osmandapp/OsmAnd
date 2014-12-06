@@ -98,7 +98,7 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 		LatLon lm = getMyApplication().getSettings().getLastKnownMapLocation();
 		int zm = getMyApplication().getSettings().getLastKnownMapZoom();
 		osmandMapTileView.setLatLon(lm.getLatitude(), lm.getLongitude());
-		osmandMapTileView.setComplexZoom(zm, osmandMapTileView.getSettingsZoomScale());
+		osmandMapTileView.setComplexZoom(zm, osmandMapTileView.getSettingsMapDensity());
 		osmandMapTileView.refreshMap(true);
 	}
 

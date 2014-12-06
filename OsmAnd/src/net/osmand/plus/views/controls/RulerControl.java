@@ -58,9 +58,9 @@ public class RulerControl extends MapControls {
 			// update cache
 			if (view.isZooming()) {
 				cacheRulerText = null;
-			} else if((tb.getZoom() + tb.getZoomScale()) != cacheRulerZoom ||
+			} else if((tb.getZoom()) != cacheRulerZoom ||
 					Math.abs(tb.getCenterTileX() - cacheRulerTileX) +  Math.abs(tb.getCenterTileY() - cacheRulerTileY) > 1){
-				cacheRulerZoom = (tb.getZoom() + tb.getZoomScale());
+				cacheRulerZoom = (tb.getZoom());
 				cacheRulerTileX = tb.getCenterTileX();
 				cacheRulerTileY = tb.getCenterTileY();
 				final double dist = tb.getDistance(0, tb.getPixHeight() / 2, tb.getPixWidth(), tb.getPixHeight() / 2);

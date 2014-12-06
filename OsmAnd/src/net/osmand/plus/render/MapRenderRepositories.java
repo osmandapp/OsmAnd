@@ -196,7 +196,7 @@ public class MapRenderRepositories {
 			return true;
 		}
 		if (requestedBox.getZoom() != box.getZoom() ||
-				requestedBox.getZoomScale() != box.getZoomScale()) {
+				requestedBox.getMapDensity() != box.getMapDensity()) {
 			return true;
 		}
 
@@ -667,10 +667,11 @@ public class MapRenderRepositories {
 			if(renderingReq.searchRenderingAttribute("polygonMinSizeToDisplay")) {
 				currentRenderingContext.polygonMinSizeToDisplay = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 			}
-			final QuadPointDouble lt = requestedBox.getLeftTopTile(requestedBox.getZoom() + requestedBox.getZoomScale());
+			final QuadPointDouble lt = requestedBox.getLeftTopTile(requestedBox.getZoom());
+			lt.x *= requestedBox.getMapDensity();
+			lt.y *= requestedBox.getMapDensity();
 //			LatLon ltn = requestedBox.getLeftTopLatLon();
-			final double tileDivisor = MapUtils.getPowZoom(31 - requestedBox.getZoom() -
-						requestedBox.getZoomScale());
+			final double tileDivisor = MapUtils.getPowZoom(31 - requestedBox.getZoom()) / requestedBox.getMapDensity();
 			
 			currentRenderingContext.leftX = lt.x;
 			currentRenderingContext.topY = lt.y;
@@ -680,7 +681,7 @@ public class MapRenderRepositories {
 			currentRenderingContext.height = requestedBox.getPixHeight();
 			currentRenderingContext.nightMode = nightMode;
 			currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
-			final float mapDensity = (float) Math.pow(2, requestedBox.getZoomScale());
+			final float mapDensity = (float) requestedBox.getMapDensity();
 			currentRenderingContext.setDensityValue(mapDensity);
 			//Text/icon scales according to mapDensity (so text is size of road)
 //			currentRenderingContext.textScale = (requestedBox.getDensity()*app.getSettings().TEXT_SCALE.get()); 
