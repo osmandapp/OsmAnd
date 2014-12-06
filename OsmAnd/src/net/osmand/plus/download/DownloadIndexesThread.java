@@ -253,7 +253,7 @@ public class DownloadIndexesThread {
 							boolean result = downloadFile(entry, filesToReindex, forceWifi);
 							success = result || success;
 							if (result) {
-								if (DownloadActivityType.isCountedInDownloads(entry.item.getType())) {
+								if (DownloadActivityType.isCountedInDownloads(entry.item)) {
 									downloads.set(downloads.get() + 1);
 								}
 								if (entry.existingBackupFile != null) {
@@ -288,7 +288,7 @@ public class DownloadIndexesThread {
 
 		private boolean exceedsFreelimit(DownloadEntry entry) {
 			return Version.isFreeVersion(app) &&
-					DownloadActivityType.isCountedInDownloads(entry.item.getType()) && downloads.get() >= DownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+					DownloadActivityType.isCountedInDownloads(entry.item) && downloads.get() >= DownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 		}
 
 		private String reindexFiles(List<File> filesToReindex) {
@@ -551,7 +551,7 @@ public class DownloadIndexesThread {
 						!date.equals(indexactivateddate) &&
 						!date.equals(indexfilesdate) &&
 						indexActivatedFileNames.containsKey(sfName)) {
-					if (item.getType() == DownloadActivityType.NORMAL_FILE ||
+					if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra) ||
 							item.getType() == DownloadActivityType.ROADS_FILE ||
 							item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
 						itemsToUpdate.add(item);
@@ -649,7 +649,7 @@ public class DownloadIndexesThread {
 		Collection<List<DownloadEntry>> vs = getEntriesToDownload().values();
 		for (List<DownloadEntry> v : vs) {
 			for(DownloadEntry e : v) {
-				if(DownloadActivityType.isCountedInDownloads(e.item.getType())) {
+				if(DownloadActivityType.isCountedInDownloads(e.item)) {
 					i++;
 				}
 			}

@@ -153,7 +153,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 				if (es.getBasename() != null && es.getBasename().contains("_wiki")) {
 					wiki = true;
 					break;
-				} else if (DownloadActivityType.isCountedInDownloads(es.getType())) {
+				} else if (DownloadActivityType.isCountedInDownloads(es)) {
 					total++;
 				}
 			}

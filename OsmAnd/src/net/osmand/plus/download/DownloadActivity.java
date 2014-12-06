@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.IndexConstants;
-import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -323,7 +322,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 				boolean excessLimit = left < 0;
 				if (left < 0)
 					left = 0;
-				if (DownloadActivityType.isCountedInDownloads(getDownloadType())) {
+				if (getDownloadType() == DownloadActivityType.NORMAL_FILE || getDownloadType() == DownloadActivityType.ROADS_FILE) {
 					text += " (" + (excessLimit ? "! " : "") + getString(R.string.files_limit, left).toLowerCase() + ")";
 				}
 			}

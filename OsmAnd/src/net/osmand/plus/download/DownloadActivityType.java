@@ -49,10 +49,14 @@ public class DownloadActivityType {
 	public String getTag() {
 		return tags[0];
 	}
+	
 
-	public static boolean isCountedInDownloads(DownloadActivityType tp) {
+	public static boolean isCountedInDownloads(IndexItem es) {
+		DownloadActivityType tp = es.getType();
 		if(tp == NORMAL_FILE || tp == ROADS_FILE){
-			return true;
+			if (!es.extra) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -179,6 +183,7 @@ public class DownloadActivityType {
 		long timestamp = Algorithms.parseLongSilently(
 				parser.getAttributeValue(null, "timestamp"), 0);
 		IndexItem it = new IndexItem(name, description, timestamp, size, contentSize, containerSize, this);
+		it.extra = FileNameTranslationHelper.getStandardMapName(ctx, it.getBasename()) != null;
 		return it;
 	}
 

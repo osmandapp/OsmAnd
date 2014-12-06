@@ -2,7 +2,6 @@ package net.osmand.plus.download;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,6 @@ import net.osmand.plus.R;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
-import android.text.format.DateFormat;
 
 public class IndexItem implements Comparable<IndexItem> {
 	private static final Log log = PlatformUtil.getLog(IndexItem.class);
@@ -28,6 +26,7 @@ public class IndexItem implements Comparable<IndexItem> {
 	long contentSize;
 	long containerSize;
 	DownloadActivityType type;
+	boolean extra;
 
 
 	public IndexItem(String fileName, String description, long timestamp, String size, long contentSize,
