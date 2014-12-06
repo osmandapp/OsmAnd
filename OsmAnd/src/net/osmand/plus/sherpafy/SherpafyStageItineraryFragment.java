@@ -5,9 +5,9 @@ import java.util.List;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.render.MapVectorLayer;
@@ -114,7 +114,7 @@ public class SherpafyStageItineraryFragment extends SherpafyStageInfoFragment im
 			tb.setZoom(tb.getZoom() - 1);
 		}
 		osmandMapTileView.setLatLon(tb.getCenterLatLon().getLatitude(), tb.getCenterLatLon().getLongitude());
-		osmandMapTileView.setComplexZoom(tb.getZoom(), osmandMapTileView.getSettingsZoomScale());
+		osmandMapTileView.setComplexZoom(tb.getZoom(), osmandMapTileView.getSettingsMapDensity());
 
 	}
 	

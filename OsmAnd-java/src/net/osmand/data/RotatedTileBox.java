@@ -9,7 +9,7 @@ public class RotatedTileBox {
 	private float rotate;
 	private float density;
 	private int zoom;
-	private double zoomScale;
+	private double mapDensity = 1;
 	private double zoomAnimation;
 	private int cx;
 	private int cy;
@@ -41,7 +41,7 @@ public class RotatedTileBox {
 		this.lat = r.lat;
 		this.lon = r.lon;
 		this.zoom = r.zoom;
-		this.zoomScale = r.zoomScale;
+		this.mapDensity = r.mapDensity;
 		this.zoomAnimation = r.zoomAnimation;
 		this.rotate = r.rotate;
 		this.density = r.density;
@@ -67,7 +67,7 @@ public class RotatedTileBox {
 	}
 
 	public void calculateDerivedFields() {
-		zoomFactor = Math.pow(2, zoomScale + zoomAnimation ) * 256;
+		zoomFactor = Math.pow(2, zoomAnimation ) * 256 * mapDensity;
 		double rad = Math.toRadians(this.rotate);
 		rotateCos = Math.cos(rad);
 		rotateSin = Math.sin(rad);
@@ -392,10 +392,13 @@ public class RotatedTileBox {
 				MapUtils.getLongitudeFromTile(zoom, alignTile(tileRB.x)));
 	}
 
-	public void setZoom(int zoom, double zoomScale) {
-		this.zoom = zoom;
-		this.zoomScale = zoomScale;
+	public void setMapDensity(double mapDensity) {
+		this.mapDensity = mapDensity;
 		calculateDerivedFields();
+	}
+	
+	public double getMapDensity() {
+		return mapDensity;
 	}
 
 	public void setZoom(int zoom) {
@@ -403,17 +406,12 @@ public class RotatedTileBox {
 		calculateDerivedFields();
 	}
 
-	public void setZoom(int zoom, double zoomScale, double zoomToAnimate) {
+	public void setZoomWithAnimate(int zoom,double zoomToAnimate) {
 		this.zoom = zoom;
-		this.zoomScale = zoomScale;
 		this.zoomAnimation = zoomToAnimate;
 		calculateDerivedFields();
 	}
 
-	public double getZoomScale() {
-		return zoomScale;
-	}
-	
 	public float getRotate() {
 		return rotate;
 	}
@@ -499,13 +497,17 @@ public class RotatedTileBox {
 			return this;
 		}
 
-		public RotatedTileBoxBuilder setZoomAndScale(int zoom, double scale) {
-			tb.zoom = zoom;
-			tb.zoomScale = scale;
-			zoomSet = true;
+		public RotatedTileBoxBuilder setMapDensity(double mapDensity) {
+			tb.mapDensity = mapDensity;
 			return this;
 		}
 
+		public RotatedTileBoxBuilder setZoom(int zoom) {
+			tb.zoom = zoom;
+			zoomSet = true;
+			return this;
+		}
+		
 		public RotatedTileBoxBuilder setLocation(double lat, double lon) {
 			tb.lat = lat;
 			tb.lon = lon;

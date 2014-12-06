@@ -1,7 +1,6 @@
 package net.osmand.plus.render;
 
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.IMapRenderer;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
@@ -15,7 +14,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.view.MotionEvent;
 
 public class MapVectorLayer extends BaseMapLayer {
 

@@ -716,15 +716,11 @@ public class OsmandSettings {
 		TEXT_SCALE.setModeDefaultValue(ApplicationMode.CAR, 1.25f);
 	}
 	
-	public final CommonPreference<Float> MAP_ZOOM_SCALE_BY_DENSITY = new FloatPreference("map_zoom_scale_wo_density", 0f).makeProfile().cache();
+	public final CommonPreference<Float> MAP_DENSITY = new FloatPreference("map_density_n", 1f).makeProfile().cache();
 	{
-		MAP_ZOOM_SCALE_BY_DENSITY.setModeDefaultValue(ApplicationMode.CAR, 0.5f);
+		MAP_DENSITY.setModeDefaultValue(ApplicationMode.CAR, 1.5f);
 	}
 	
-	
-	public float getSettingsZoomScale(){
-		return MAP_ZOOM_SCALE_BY_DENSITY.get() ;
-	}
 	
 
 	// this value string is synchronized with settings_pref.xml preference name

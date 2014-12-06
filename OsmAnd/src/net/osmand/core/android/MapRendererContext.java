@@ -101,7 +101,7 @@ public class MapRendererContext {
 	}
 
 	protected float getDisplayDensityFactor() {
-		return (float) Math.pow(2, Math.sqrt((app.getSettings().getSettingsZoomScale()  + density)));
+		return (float) (app.getSettings().MAP_DENSITY.get()) * Math.max(1, density);
 	}
 
 	protected int getRasterTileSize() {
@@ -199,7 +199,8 @@ public class MapRendererContext {
 			mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
 		}
 		// Create new OBF map symbols provider
-		obfMapSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider, getReferenceTileSize());
+		obfMapSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider, getReferenceTileSize(),
+				app.getSettings().TEXT_SCALE.get() / Math.max(1, density) );
 		// If there's bound view, add new provider
 		if (mapRendererView != null) {
 			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);

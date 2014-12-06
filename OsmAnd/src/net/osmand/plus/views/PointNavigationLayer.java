@@ -177,7 +177,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	
 	public int getRadiusPoi(RotatedTileBox tb){
 		int r = 0;
-		final double zoom = tb.getZoom() + tb.getZoomScale();
+		final double zoom = tb.getZoom();
 		if(zoom <= 15){
 			r = 10;
 		} else if(zoom <= 16){
