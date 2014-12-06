@@ -51,7 +51,8 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 		if (downloadListIndexThread == null) {
 			downloadListIndexThread = new DownloadIndexesThread(this);
 		}
-		prepareDownloadDirectory();
+//Having the next line here causes bug AND-197: The storage folder dialogue popped up upon EVERY app startup, because the map list is not indexed yet. Hence line moved to updateDownloads() now.
+//		prepareDownloadDirectory();
 	}
 
 	public void updateDownloads() {
@@ -60,6 +61,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 		} else {
 			downloadListIndexThread.runReloadIndexFiles();
 		}
+		prepareDownloadDirectory();
 	}
 
 

@@ -1844,4 +1844,7 @@
     <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能在某些裝置上無法工作）</string>
     <string name="dismiss">排除</string>
     <string name="no_internet_connection">不能下載。請連接到 Wifi 網路進行。</string>
-    </resources>
+    <string name="download_tab_downloads">下載</string>
+    <string name="download_tab_updates">更新</string>
+    <string name="download_tab_local">本機</string>
+	</resources>

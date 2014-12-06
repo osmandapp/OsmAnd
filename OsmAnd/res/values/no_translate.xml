@@ -4,9 +4,11 @@
     <string name="app_name_ver">OsmAnd 2.0.0</string>
     <string name="app_version">2.0.0</string>
     <!--
-    Note: The above app_version should also provided as the build number prefix ('based-on version') to our dev APKs via the builder configs, e.g.
-    http://builder.osmand.net:8080/view/OsmAnd%20Builds/job/OsmAnd-main/configure  ( Ant, Properties, build.version=${GIT_BRANCH} 1.9.3#${BUILD_NUMBER}M )
-    MUST BE KEPT IN SYNC THERE MANUALLY!
+    Note: For our dev build apk's, the above "app_version" is provided (via osmand/build.xml) as the base version prefix to our build number in the format:
+             X.X.X#YYYYZ , where
+             X.X.X         is the above base (released) "app_version",
+                   YYYY    is the build number of build branch Z
+                       Z : M=-master, D=-design, B=-Blackberry, MD=-main-default, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
     -->
 
     <!-- Not translatable -->

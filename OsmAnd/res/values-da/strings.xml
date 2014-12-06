@@ -1857,6 +1857,6 @@
     <string name="dismiss">Afvis</string>
     <string name="no_internet_connection">Ikke muligt at hente. Opret forbindelse til Wi-Fi for at fortsætte.</string>
     <string name="download_tab_downloads">Hent</string>
-    <string name="download_tab_updates">Opdateringer</string>
-    <string name="download_tab_local">Lokalt</string>
+    <string name="download_tab_updates">Opdater</string>
+    <string name="download_tab_local">Lokal</string>
 	</resources>
