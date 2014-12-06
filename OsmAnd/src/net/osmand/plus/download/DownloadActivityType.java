@@ -183,7 +183,7 @@ public class DownloadActivityType {
 		long timestamp = Algorithms.parseLongSilently(
 				parser.getAttributeValue(null, "timestamp"), 0);
 		IndexItem it = new IndexItem(name, description, timestamp, size, contentSize, containerSize, this);
-		it.extra = FileNameTranslationHelper.getStandardMapName(ctx, it.getBasename()) != null;
+		it.extra = FileNameTranslationHelper.getStandardMapName(ctx, it.getBasename().toLowerCase()) != null;
 		return it;
 	}
 

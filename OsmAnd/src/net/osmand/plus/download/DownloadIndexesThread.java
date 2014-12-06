@@ -542,34 +542,42 @@ public class DownloadIndexesThread {
 		if (filtered != null) {
 			itemsToUpdate.clear();
 			for (IndexItem item : filtered) {
-				String sfName = item.getTargetFileName();
-				java.text.DateFormat format = app.getResourceManager().getDateFormat();
-				String date = item.getDate(format);
-				String indexactivateddate = indexActivatedFileNames.get(sfName);
-				String indexfilesdate = indexFileNames.get(sfName);
-				if (date != null &&
-						!date.equals(indexactivateddate) &&
-						!date.equals(indexfilesdate) &&
-						indexActivatedFileNames.containsKey(sfName)) {
-					if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra) ||
-							item.getType() == DownloadActivityType.ROADS_FILE ||
-							item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
-						itemsToUpdate.add(item);
-					} else {
-						long itemSize = item.getSize();
-						File file = new File(((DownloadOsmandIndexesHelper.AssetIndexItem) item).getDestFile());
-						long oldItemSize = file.length();
-						if (itemSize != oldItemSize){
-							itemsToUpdate.add(item);
-						}
-					}
-
+				boolean outdated = checkIfItemOutdated(item);
+				if(outdated) {
+					itemsToUpdate.add(item);
 				}
 			}
 			if (uiActivity != null){
 				uiActivity.updateDownloadList(itemsToUpdate);
 			}
 		}
+	}
+
+	public boolean checkIfItemOutdated(IndexItem item) {
+		boolean outdated = false;
+		String sfName = item.getTargetFileName();
+		java.text.DateFormat format = app.getResourceManager().getDateFormat();
+		String date = item.getDate(format);
+		String indexactivateddate = indexActivatedFileNames.get(sfName);
+		String indexfilesdate = indexFileNames.get(sfName);
+		if (date != null &&
+				!date.equals(indexactivateddate) &&
+				!date.equals(indexfilesdate) &&
+				indexActivatedFileNames.containsKey(sfName)) {
+			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra) ||
+					item.getType() == DownloadActivityType.ROADS_FILE ||
+					item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
+				outdated = true;
+			} else {
+				long itemSize = item.getContentSize();
+				File file = new File(item.getType().getDownloadFolder(app, item), sfName);
+				long oldItemSize = file.length();
+				if (itemSize != oldItemSize){
+					outdated = true;
+				}
+			}
+		}
+		return outdated;
 	}
 
 	private void updateFilesToUpdate(){
