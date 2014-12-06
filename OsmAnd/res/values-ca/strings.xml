@@ -1907,4 +1907,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="everything_up_to_date">Tot està actualitzat</string>
     <string name="dismiss">Descarta</string>
     <string name="no_internet_connection">No es pot descarregar. Si us plau connecteu la Wifi per procedir.</string>
-    </resources>
+    <string name="download_tab_downloads">Descàrregues</string>
+    <string name="download_tab_updates">Actualitzacions</string>
+    <string name="download_tab_local">Local</string>
+	</resources>
