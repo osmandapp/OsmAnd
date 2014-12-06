@@ -239,7 +239,8 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 
 				if (indexActivatedFileNames != null && indexFileNames != null){
 					String sfName = e.getTargetFileName();
-					if (e.getDate(format).equals(indexActivatedFileNames.get(sfName))) {
+					final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
+					if (updatableResource && !DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e)) {
 						name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
 						name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
@@ -247,7 +248,7 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 						name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
 								+ indexFileNames.get(sfName));
 						name.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
-					} else if (indexActivatedFileNames.containsKey(sfName)) {
+					} else if (updatableResource) {
 						name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
 						name.setTextColor(updateColor); // LIGHT_BLUE
