@@ -119,6 +119,10 @@ public class DashboardActivity extends BaseDownloadActivity {
 		final String textVersion = "\u00A9 OsmAnd " + inst.get(Calendar.YEAR);
 		textVersionView.setText(textVersion);
 		final SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
+
+		//TODO: textversionview should be totally removed here as it has been moved to the About screen
+		textVersionView.setVisibility(View.GONE);
+
 		textVersionView.setOnClickListener(new OnClickListener(){
 
 			int i = 0;
