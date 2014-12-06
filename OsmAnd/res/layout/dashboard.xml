@@ -38,6 +38,7 @@
                     android:textSize="20sp" />
             </LinearLayout>
 
+<!--   All Copyright notes and links have been put on the 'About' screen
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -62,6 +63,7 @@
                     android:text="@string/openstreetmap_copyright"
                     android:textSize="14sp" />
             </LinearLayout>
+-->
         </LinearLayout>
     </LinearLayout>
 

@@ -113,28 +113,28 @@ public class DashboardActivity extends BaseDownloadActivity {
 	
 	protected void setupContributionVersion() {
 		findViewById(R.id.credentials).setVisibility(View.VISIBLE);
-		final TextView textVersionView = (TextView) findViewById(R.id.Copyright);
-		final Calendar inst = Calendar.getInstance();
-		inst.setTime(new Date());
-		final String textVersion = "\u00A9 OsmAnd " + inst.get(Calendar.YEAR);
-		textVersionView.setText(textVersion);
+//Copyright notes and links have been put on the 'About' screen
+//		final TextView textVersionView = (TextView) findViewById(R.id.Copyright);
+//		final Calendar inst = Calendar.getInstance();
+//		inst.setTime(new Date());
+//		final String textVersion = "\u00A9 OsmAnd " + inst.get(Calendar.YEAR);
+//		textVersionView.setText(textVersion);
 		final SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
-		textVersionView.setOnClickListener(new OnClickListener(){
-
-			int i = 0;
-			@Override
-			public void onClick(View v) {
-				if(i++ > 8 && Version.isDeveloperVersion(getMyApplication())) {
-					prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
-					enableLink(DashboardActivity.this, textVersion, textVersionView);
-				}
-			}
-		});
+//		textVersionView.setOnClickListener(new OnClickListener(){
+//			int i = 0;
+//			@Override
+//			public void onClick(View v) {
+//				if(i++ > 8 && Version.isDeveloperVersion(getMyApplication())) {
+//					prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
+//					enableLink(DashboardActivity.this, textVersion, textVersionView);
+//				}
+//			}
+//		});
 		// only one commit should be with contribution version flag
 //		 prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
-		if (prefs.contains(CONTRIBUTION_VERSION_FLAG) && Version.isDeveloperVersion(getMyApplication())) {
-			enableLink(this, textVersion, textVersionView);
-		}
+//		if (prefs.contains(CONTRIBUTION_VERSION_FLAG) && Version.isDeveloperVersion(getMyApplication())) {
+//			enableLink(this, textVersion, textVersionView);
+//		}
 		final TextView about = (TextView) findViewById(R.id.About);
 		final String aboutString = getString(R.string.about_settings);
 		SpannableString ss = new SpannableString(aboutString);
@@ -202,7 +202,7 @@ public class DashboardActivity extends BaseDownloadActivity {
                 PackageManager pm = activity.getPackageManager();
                 ApplicationInfo appInfo = pm.getApplicationInfo(OsmandApplication.class.getPackage().getName(), 0);
                 Date date = new Date(new File(appInfo.sourceDir).lastModified());
-                edition = activity.getString(R.string.local_index_installed) + " :\t" + DateFormat.getDateFormat(app).format(date);
+                edition = activity.getString(R.string.local_index_installed) + " : \t" + DateFormat.getDateFormat(app).format(date);
             } catch (Exception e) {
             }
             SpannableString content = new SpannableString(vt + version +"\n" +
@@ -401,19 +401,19 @@ public class DashboardActivity extends BaseDownloadActivity {
 		
 	}
 	
-	private static void enableLink(final Activity activity, String textVersion, TextView textVersionView) {
-		SpannableString content = new SpannableString(textVersion);
-		content.setSpan(new ClickableSpan() {
-
-			@Override
-			public void onClick(View widget) {
-				final Intent mapIntent = new Intent(activity, ContributionVersionActivity.class);
-				activity.startActivityForResult(mapIntent, 0);
-			}
-		}, 0, content.length(), 0);
-		textVersionView.setText(content);
-		textVersionView.setMovementMethod(LinkMovementMethod.getInstance());
-	}
+//	private static void enableLink(final Activity activity, String textVersion, TextView textVersionView) {
+//		SpannableString content = new SpannableString(textVersion);
+//		content.setSpan(new ClickableSpan() {
+//
+//			@Override
+//			public void onClick(View widget) {
+//				final Intent mapIntent = new Intent(activity, ContributionVersionActivity.class);
+//				activity.startActivityForResult(mapIntent, 0);
+//			}
+//		}, 0, content.length(), 0);
+//		textVersionView.setText(content);
+//		textVersionView.setMovementMethod(LinkMovementMethod.getInstance());
+//	}
 
 	@Override
 	public void updateProgress(boolean updateOnlyProgress) {
