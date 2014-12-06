@@ -2039,4 +2039,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="everything_up_to_date">Tutto aggiornato</string>
     <string name="dismiss">Abbandona</string>
     <string name="no_internet_connection">Non è possibile scaricare. Prego, connettersi al Wi-Fi per procedere.</string>
+    <string name="download_tab_downloads">In download</string>
+    <string name="download_tab_updates">Aggiornamenti</string>
     </resources>
