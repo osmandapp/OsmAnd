@@ -479,4 +479,13 @@
 	<string name="poi_company">Azienda</string>
 	<string name="poi_trade_shop">Trading post</string>
 	<string name="poi_window_blind_shop">Butega de bentanas tzurpas</string>
+	<string name="poi_department_store">Supermercadu</string>
+	<string name="poi_aeroway_terminal">Terminal aeroportu</string>
+	<string name="poi_aeroway_gate">Gate aeroportu</string>
+
+	<string name="poi_ferry_terminal">Terminal pro naviles</string>
+	<string name="poi_weir">Nassàrgiu</string>
+	<string name="poi_power_substation">Sutaistatzione</string>
+	<string name="poi_post_box">Casseta postale</string>
+	<string name="poi_pitch">Pitch</string>
 	</resources>
