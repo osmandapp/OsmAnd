@@ -558,13 +558,15 @@ public class OsmandApplication extends Application {
 			
 			if (!"qnx".equals(System.getProperty("os.name"))) {
 				if (osmandSettings.USE_OPENGL_RENDER.get()) {
+					boolean success = false;
 					if (!osmandSettings.OPENGL_RENDER_FAILED.get()) {
 						osmandSettings.OPENGL_RENDER_FAILED.set(true);
-						boolean success = NativeCoreContext.tryCatchInit(this);
+						success = NativeCoreContext.tryCatchInit(this);
 						if (success) {
 							osmandSettings.OPENGL_RENDER_FAILED.set(false);
 						}
-					} else {
+					}
+					if (!success) {
 						// try next time once again ?
 						osmandSettings.OPENGL_RENDER_FAILED.set(false);
 						warnings.add("Native OpenGL library is not supported. Please try again after exit");
