@@ -1965,4 +1965,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="everything_up_to_date">Усё ў актуальным стане</string>
     <string name="dismiss">Скасаваць</string>
     <string name="no_internet_connection">Немагчыма спампаваць. Калі ласка, падлучыцеся да Wi-Fi, каб працягнуць.</string>
-    </resources>
+    <string name="download_tab_downloads">Сьцягваньні</string>
+    <string name="download_tab_updates">Абнаўленьні</string>
+    <string name="download_tab_local">Лякальны</string>
+	</resources>
