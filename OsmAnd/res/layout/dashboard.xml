@@ -38,7 +38,7 @@
                     android:textSize="20sp" />
             </LinearLayout>
 
-<!--   TODO: All Copyright notes and links should be removed here, have moved to the 'About' screen -->
+<!--   TODO: All Copyright notes and links should be removed here, have been put on the 'About' screen -->
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

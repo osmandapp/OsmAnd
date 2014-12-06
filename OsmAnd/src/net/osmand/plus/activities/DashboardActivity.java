@@ -120,7 +120,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 		textVersionView.setText(textVersion);
 		final SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
 
-		//TODO: textversionview should be totally removed here as it has been moved to the About screen
+	//TODO: All Copyright notes and links should be removed here, have been put on the 'About' screen
 		textVersionView.setVisibility(View.GONE);
 
 		textVersionView.setOnClickListener(new OnClickListener(){
