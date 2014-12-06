@@ -16,7 +16,7 @@
     <string name="versionFeatures">+play_market +gps_status -parking_plugin -blackberry -free_version -amazon</string>
     <string name="next_tips_and_tricks_not_translate"></string>
     <string name="openstreetmap_copyright"><a href="http://www.openstreetmap.org/copyright">&#169; OpenStreetMap</a></string>
-    <string name="about_content">Data is powered by OpenStreetMaps ODbL
+    <string name="about_content">Data is powered by OpenStreetMap ODbL
     
 	\n\nAll rights belong to OsmAnd app.
 

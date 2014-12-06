@@ -202,7 +202,7 @@ public class DashboardActivity extends BaseDownloadActivity {
                 PackageManager pm = activity.getPackageManager();
                 ApplicationInfo appInfo = pm.getApplicationInfo(OsmandApplication.class.getPackage().getName(), 0);
                 Date date = new Date(new File(appInfo.sourceDir).lastModified());
-                edition = activity.getString(R.string.local_index_installed) + " :\t" + DateFormat.getDateFormat(app).format(date);
+                edition = activity.getString(R.string.local_index_installed) + " : \t" + DateFormat.getDateFormat(app).format(date);
             } catch (Exception e) {
             }
             SpannableString content = new SpannableString(vt + version +"\n" +
