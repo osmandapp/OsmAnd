@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="app_name">OsmAnd~</string>
-    <string name="app_name_ver">OsmAnd 1.9.3</string>
-    <string name="app_version">1.9.3</string>
+    <string name="app_name_ver">OsmAnd 2.0.0</string>
+    <string name="app_version">2.0.0</string>
     <!--
     Note: The above app_version should also provided as the build number prefix ('based-on version') to our dev APKs via the builder configs, e.g.
     http://builder.osmand.net:8080/view/OsmAnd%20Builds/job/OsmAnd-main/configure  ( Ant, Properties, build.version=${GIT_BRANCH} 1.9.3#${BUILD_NUMBER}M )
@@ -18,12 +18,13 @@
     <string name="openstreetmap_copyright"><a href="http://www.openstreetmap.org/copyright">&#169; OpenStreetMap</a></string>
     <string name="about_content">Data is powered by OpenStreetMap ODbL, &#169; <a href="http://www.openstreetmap.org/copyright">http://www.openstreetmap.org/copyright</a>.
     
-	\n\nAll rights belong to OsmAnd app, Copyright &#169; 2010-2014 OsmAnd.
+	\n\nAll rights belong to OsmAnd app, Copyright &#169; 2010-2015 OsmAnd.
 
 	\n\nCredits to all Developers and major Contributors :
 	\n\tVictor Shcherb - project lead.
 	\n\tDr. Hardy Mueller - map appearance concept and base renderers, international consistency and testing, usability, app scoping, concepts, documentation, wiki, market research.
 	\n\tAlexey Pelykh - C++ developer, created native library and made application much snappier.
+	\n\tDenis Bars - Java developer, worked mostly on new UI and usability from 1.8 version.
 	\n\tLeonid (xmd5a) - co-author of main OsmAnd rendering, author of UniRS, LightRS styles.
 	\n\tDusan Kazik - one of the first contributors
 	\n\tAndre Van Atten - project supporter, active forum participant, one of the first users.

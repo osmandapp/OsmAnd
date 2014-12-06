@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -34,13 +35,20 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
+import com.jwetherell.openmap.common.LatLonPoint;
+import com.jwetherell.openmap.common.UTMPoint;
 
 public class NavigatePointFragment extends SherlockFragment implements SearchActivityChild {
 	int currentFormat = Location.FORMAT_DEGREES;
 	
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
+	public static final String SEARCH_NORTHING = "NORTHING";
+	public static final String SEARCH_EASTING = "EASTING";
+	public static final String SEARCH_ZONE = "ZONE";
+	private static final int UTM_FORMAT = 3;
 	private static final String SELECTION = "SELECTION";
+	
 
 	private static final int NAVIGATE_TO = 1;
 	private static final int ADD_WAYPOINT = 2;
@@ -71,7 +79,8 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 			loc = app.getSettings().getLastKnownMapLocation();
 		}
 		initUI(loc.getLatitude(), loc.getLongitude());
-		if(savedInstanceState != null && savedInstanceState.containsKey(SEARCH_LAT) && savedInstanceState.containsKey(SEARCH_LON)) {
+		if(savedInstanceState != null && savedInstanceState.containsKey(SEARCH_LAT) && savedInstanceState.containsKey(SEARCH_LON) && 
+				currentFormat != UTM_FORMAT) {
 			String lat = savedInstanceState.getString(SEARCH_LAT);
 			String lon = savedInstanceState.getString(SEARCH_LON);
 			if(lat != null && lon != null && lat.length() > 0 && lon.length() > 0) {
@@ -164,36 +173,64 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	public void locationUpdate(LatLon loc) {
 		if (view != null) {
 			if (loc != null) {
-				updateUI(loc.getLatitude(), loc.getLongitude());
+				showCurrentFormat(loc);
 			} else {
-				updateUI(0, 0);
+				showCurrentFormat(new LatLon(0, 0));
 			}
 		}
 	}
 	
-	public void updateUI(double latitude, double longitude) {
-		latitude = MapUtils.checkLatitude(latitude);
-		longitude = MapUtils.checkLongitude(longitude);
-		final TextView latEdit = ((TextView)view.findViewById(R.id.LatitudeEdit));
-		final TextView lonEdit = ((TextView)view.findViewById(R.id.LongitudeEdit));
-		latEdit.setText(convert(latitude, currentFormat));
-		lonEdit.setText(convert(longitude, currentFormat));
+	protected void showCurrentFormat( LatLon loc) {
+		final EditText latEdit = ((EditText)view.findViewById(R.id.LatitudeEdit));
+		final EditText lonEdit = ((EditText)view.findViewById(R.id.LongitudeEdit));
+		boolean utm = currentFormat == UTM_FORMAT;
+		view.findViewById(R.id.easting_row).setVisibility(utm ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.northing_row).setVisibility(utm ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.zone_row).setVisibility(utm ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.lat_row).setVisibility(!utm ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.lon_row).setVisibility(!utm ? View.VISIBLE : View.GONE);
+		if(currentFormat == UTM_FORMAT) {
+			final EditText northingEdit = ((EditText)view.findViewById(R.id.NorthingEdit));
+			final EditText eastingEdit = ((EditText)view.findViewById(R.id.EastingEdit));
+			final EditText zoneEdit = ((EditText)view.findViewById(R.id.ZoneEdit));
+			UTMPoint pnt = new UTMPoint(new LatLonPoint(loc.getLatitude(), loc.getLongitude()));
+			zoneEdit.setText(pnt.zone_number + ""+pnt.zone_letter);
+			northingEdit.setText(((long)pnt.northing)+"");
+			eastingEdit.setText(((long)pnt.easting)+"");
+		} else {
+			latEdit.setText(convert(MapUtils.checkLatitude(loc.getLatitude()), currentFormat));
+			lonEdit.setText(convert(MapUtils.checkLongitude(loc.getLongitude()), currentFormat));
+		}
+	}
+
+	protected LatLon parseLocation() {
+		LatLon loc ;
+		if(currentFormat == UTM_FORMAT) { 
+			double northing = Double.parseDouble(((EditText)view.findViewById(R.id.NorthingEdit)).getText().toString());
+			double easting = Double.parseDouble(((EditText)view.findViewById(R.id.EastingEdit)).getText().toString());
+			String zone = ((EditText)view.findViewById(R.id.ZoneEdit)).getText().toString();
+			char c = zone.charAt(zone.length() -1);
+			int z = Integer.parseInt(zone.substring(0, zone.length() - 1));
+			UTMPoint upoint = new UTMPoint(northing, easting, z, c);
+			LatLonPoint ll = upoint.toLatLonPoint();
+			loc = new LatLon(ll.getLatitude(), ll.getLongitude());
+		} else {
+			double lat = convert(((EditText) view.findViewById(R.id.LatitudeEdit)).getText().toString());
+			double lon = convert(((EditText) view.findViewById(R.id.LongitudeEdit)).getText().toString());
+			loc = new LatLon(lat, lon);	
+		}
+		return loc;
 	}
 	
-	
 	public void initUI(double latitude, double longitude){
-		latitude = MapUtils.checkLatitude(latitude);
-		longitude = MapUtils.checkLongitude(longitude);
-		final TextView latEdit = ((TextView)view.findViewById(R.id.LatitudeEdit));
-		final TextView lonEdit = ((TextView)view.findViewById(R.id.LongitudeEdit));
 		currentFormat = Location.FORMAT_DEGREES;
-		latEdit.setText(convert(latitude, Location.FORMAT_DEGREES));
-		lonEdit.setText(convert(longitude, Location.FORMAT_DEGREES));
+		showCurrentFormat(new LatLon(latitude, longitude));
 		final Spinner format = ((Spinner)view.findViewById(R.id.Format));
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getSherlockActivity(), android.R.layout.simple_spinner_item, new String[] {
 				getString(R.string.navigate_point_format_D),
 				getString(R.string.navigate_point_format_DM),
-				getString(R.string.navigate_point_format_DMS)
+				getString(R.string.navigate_point_format_DMS),
+				"UTM"
 		});
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		format.setAdapter(adapter);
@@ -210,14 +247,14 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 					newFormat = Location.FORMAT_MINUTES;
 				} else if(getString(R.string.navigate_point_format_DMS).equals(itm)){
 					newFormat = Location.FORMAT_SECONDS;
+				} else if (position == UTM_FORMAT) {
+					newFormat = UTM_FORMAT;
 				}
-				currentFormat = newFormat;
 				try { 
-					double lat = convert(((TextView) view.findViewById(R.id.LatitudeEdit)).getText().toString());
-					double lon = convert(((TextView) view.findViewById(R.id.LongitudeEdit)).getText().toString());
+					LatLon loc = parseLocation();
+					currentFormat = newFormat;
 					((TextView) view.findViewById(R.id.ValidateTextView)).setVisibility(View.INVISIBLE);
-					latEdit.setText(convert(lat, newFormat));
-					lonEdit.setText(convert(lon, newFormat));
+					showCurrentFormat(loc);
 				} catch (RuntimeException e) {
 					((TextView) view.findViewById(R.id.ValidateTextView)).setVisibility(View.VISIBLE);
 					((TextView) view.findViewById(R.id.ValidateTextView)).setText(R.string.invalid_locations);
@@ -226,10 +263,18 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 				
 			}
 
+		
+
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
+		addPasteListeners();
+	}
+
+	protected void addPasteListeners() {
+		final EditText latEdit = ((EditText)view.findViewById(R.id.LatitudeEdit));
+		final EditText lonEdit = ((EditText)view.findViewById(R.id.LongitudeEdit));
 		TextWatcher textWatcher = new TextWatcher() {
 			String pasteString = null;
 			@Override
@@ -302,10 +347,13 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		lonEdit.addTextChangedListener(textWatcher);
 	}
 	
+
+	
 	public void select(int mode){
 		try {
-			double lat = convert(((TextView) view.findViewById(R.id.LatitudeEdit)).getText().toString());
-			double lon = convert(((TextView) view.findViewById(R.id.LongitudeEdit)).getText().toString());
+			LatLon loc = parseLocation();
+			double lat = loc.getLatitude();
+			double lon = loc.getLongitude();
 			if(mode == ADD_TO_FAVORITE) {
 				Bundle b = new Bundle();
 				Dialog dlg = FavoriteDialogs.createAddFavouriteDialog(getActivity(), b);
