@@ -38,7 +38,7 @@
                     android:textSize="20sp" />
             </LinearLayout>
 
-<!--   TODO: All Copyright notes and links should be removed here, have been put on the 'About' screen -->
+<!--   All Copyright notes and links have been put on the 'About' screen
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                     android:layout_gravity="end"
                     android:gravity="end"
                     android:textSize="14sp" />
-<!--
+
                 <TextView
                     android:id="@+id/OpenStreetMaps"
                     android:layout_width="wrap_content"
