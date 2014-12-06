@@ -62,8 +62,8 @@
                     android:gravity="end"
                     android:text="@string/openstreetmap_copyright"
                     android:textSize="14sp" />
--->
             </LinearLayout>
+-->
         </LinearLayout>
     </LinearLayout>
 
