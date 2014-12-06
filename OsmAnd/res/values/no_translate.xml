@@ -6,7 +6,7 @@
     <!--
     Note: For our dev build apk's, the above "app_version" is provided (via osmand/build.xml) as the base version prefix to our build number in the format:
              X.X.X#YYYYZ , where
-             X.X.X         is the above base (released) app version,
+             X.X.X         is the above base (released) "app_version",
                    YYYY    is the build number of build branch Z
                        Z : M=-master, D=-design, B=-Blackberry, MD=-main-default, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
     -->
