@@ -51,7 +51,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 		if (downloadListIndexThread == null) {
 			downloadListIndexThread = new DownloadIndexesThread(this);
 		}
-		prepareDownloadDirectory();
+//		prepareDownloadDirectory();
 	}
 
 	public void updateDownloads() {
@@ -60,6 +60,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 		} else {
 			downloadListIndexThread.runReloadIndexFiles();
 		}
+		prepareDownloadDirectory();
 	}
 
 
@@ -221,7 +222,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 	private void prepareDownloadDirectory() {
 		if (getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
 			boolean showedDialog = false;
-			if ((Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) && settings.getExternalStorageDirectory().getAbsolutePath().isEmpty()) {
+			if (Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
 				SuggestExternalDirectoryDialog.showDialog(this, null, null);
 			}
 			if (!showedDialog) {
