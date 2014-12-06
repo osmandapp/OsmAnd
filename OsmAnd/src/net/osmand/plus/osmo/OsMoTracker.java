@@ -13,7 +13,6 @@ import org.json.JSONObject;
 
 public class OsMoTracker implements OsMoReactor {
 	private ConcurrentLinkedQueue<Location> bufferOfLocations = new ConcurrentLinkedQueue<Location>();
-	private boolean startSendingLocations;
 	private OsMoService service;
 	private int locationsSent = 0;
 	private OsmoTrackerListener trackerListener = null;
@@ -23,6 +22,7 @@ public class OsMoTracker implements OsMoReactor {
 	private String sessionURL;
 	private Map<String, OsMoDevice> trackingDevices = new java.util.concurrent.ConcurrentHashMap<String, OsMoGroupsStorage.OsMoDevice>();
 	private OsmandPreference<Boolean> autoStart;
+	private OsmandPreference<Boolean> stateSendLocation;
 	
 	public interface OsmoTrackerListener {
 		
@@ -31,10 +31,11 @@ public class OsMoTracker implements OsMoReactor {
 	
 
 	public OsMoTracker(OsMoService service, OsmandPreference<Integer> interval,
-			OsmandPreference<Boolean> autoStart) {
+			OsmandPreference<Boolean> autoStart, OsmandPreference<Boolean> stateSendLocation) {
 		this.service = service;
 		this.pref = interval;
 		this.autoStart = autoStart;
+		this.stateSendLocation = stateSendLocation;
 		service.registerReactor(this);
 	}
 	
@@ -46,19 +47,22 @@ public class OsMoTracker implements OsMoReactor {
 	}
 	
 	public boolean isEnabledTracker() {
-		return startSendingLocations;
+		return stateSendLocation.get();
 	}
 	
 	public void enableTracker() {
-		if(!startSendingLocations) {
-			startSendingLocations = true;
+		if(!isEnabledTracker()) {
+			stateSendLocation.set(true);
 			service.pushCommand("TRACKER_SESSION_OPEN");
 		}
 	}
 	
 	public void disableTracker() {
-		if(startSendingLocations) {
-			startSendingLocations = false;
+		if(isEnabledTracker()) {
+			if(autoStart.get()) {
+				autoStart.set(false);
+			}
+			stateSendLocation.set(false);
 			service.pushCommand("TRACKER_SESSION_CLOSE");
 		}
 	}
@@ -110,7 +114,7 @@ public class OsMoTracker implements OsMoReactor {
 	}
 
 	public void sendCoordinate(Location location) {
-		if(startSendingLocations && location != null) {
+		if(stateSendLocation.set(true) && location != null) {
 			long ltime = lastBufferLocation == null ? 0 : lastBufferLocation.getTime();
 			
 			if (location.getTime() - ltime  > pref.get()) {
@@ -214,7 +218,10 @@ public class OsMoTracker implements OsMoReactor {
 
 	@Override
 	public void onConnected() {
-		if(autoStart.get() || startSendingLocations) {
+		if(autoStart.get() || stateSendLocation.get()) {
+			if(autoStart.get() && !stateSendLocation.get()) {
+				stateSendLocation.set(true);
+			}
 			enableTracker();
 		}
 	}
