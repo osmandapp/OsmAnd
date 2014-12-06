@@ -221,7 +221,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 	private void prepareDownloadDirectory() {
 		if (getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
 			boolean showedDialog = false;
-			if (Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
+			if ((Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) && settings.getExternalStorageDirectory().getAbsolutePath().isEmpty()) {
 				SuggestExternalDirectoryDialog.showDialog(this, null, null);
 			}
 			if (!showedDialog) {
