@@ -82,6 +82,7 @@
         - junidecode-0.1.jar - BSD-4-Clause-UC (http://sourceforge.net/projects/junidecode/)
         - kxml2-2.3.0.jar - BSD license (http://www.kxml.org/)
         - tuprolog.jar - LGPL (http://apice.unibo.it/xwiki/bin/view/Tuprolog/)
+        - OpenMap framework - Apache License (https://code.google.com/p/android-openmap-framework/)
 
     * Pull-requests and translations:
         - All pull requests are accepted under MIT License (most honorable contributors are mentioned in AUTHORS list)
