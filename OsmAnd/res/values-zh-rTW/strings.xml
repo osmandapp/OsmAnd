@@ -1831,7 +1831,7 @@
     <string name="wake_on_voice_never">永不</string>
     <string name="advanced_settings">進階</string>
 	<string name="osmo_use_https_descr">使用安全協定連線於伺服器</string>
-    <string name="osmo_use_https">使用 https</string>
+    <string name="osmo_use_https">使用 HTTPS</string>
 	<string name="map_update">地圖</string>
 	<string name="search_for">查尋</string>
 	<string name="show_map">顯示地圖</string>
@@ -1841,6 +1841,7 @@
     <string name="error_avoid_specific_road">找不到最近的路</string>
     <string name="everything_up_to_date">一切都為最新的</string>
     <string name="use_opengl_render">使用 OpenGL 繪製</string>
-    <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能在某些裝置無法工作）</string>
+    <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能在某些裝置上無法工作）</string>
     <string name="dismiss">排除</string>
+    <string name="no_internet_connection">不能下載。請連接到 Wifi 網路進行。</string>
     </resources>
