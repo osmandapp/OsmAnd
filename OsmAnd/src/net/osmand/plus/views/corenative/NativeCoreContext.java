@@ -55,13 +55,12 @@ public class NativeCoreContext {
 				WindowManager mgr = (WindowManager)app.getSystemService(Context.WINDOW_SERVICE);
 				DisplayMetrics dm = new DisplayMetrics();
 				mgr.getDefaultDisplay().getMetrics(dm);
-				float density = Math.max(0, dm.density - 1);
 				
 				ObfsCollection obfsCollection = new ObfsCollection();
 				obfsCollection.addDirectory(directory.getAbsolutePath(), false);
 				
 				MapStylesCollection mapStylesCollection = setupMapStyleCollection(app);
-				mapRendererContext = new MapRendererContext(app, density);
+				mapRendererContext = new MapRendererContext(app, dm.density);
 				mapRendererContext.setupObfMap(mapStylesCollection, obfsCollection);
 				init = true;
 			}
