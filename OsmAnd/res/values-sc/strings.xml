@@ -81,7 +81,7 @@
     <string name="android_19_location_disabled">Dae sa versione Android 4.4 (KitKat) non podes prus iscarrigare e agiornare sas mapas in sa cartella bècia (%s). La bòles remplasare cun sa chi est acusentida e copiare in cue totus sos datos?
 \n Nota 1: sos datos antepostos tuos non at a èssere mudados (ma podent essere burrados manualmente).
 \n Nota 2: in sa cartella noa non at a èssere possìbile cumpartzire sos datos intra OsmAnd e OsmAnd+.</string>
-    <string name="application_dir_change_warning2">Boles chi OsmAnd còpiet sos datos suos fintzas in sa destinatzione noa?</string>
+    <string name="application_dir_change_warning2">Boles chi OsmAnd còpiet sos datos suos fintzas in sa destinatzione noa? Icherta \"Nono\" pro fàghere petzi creare ed impreare una cartella noa a OsmAnd.</string>
     <string name="copying_osmand_one_file_descr">Copiande su documentu (%s) in sa destinatzione noa...</string>
     <string name="copying_osmand_files_descr">Copiande sos datos de OsmAnd in (%s), sa destinatzione noa</string>
     <string name="copying_osmand_files">Copiande sos datos de OsmAnd</string>
