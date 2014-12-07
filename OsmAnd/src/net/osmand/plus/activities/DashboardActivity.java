@@ -196,19 +196,21 @@ public class DashboardActivity extends BaseDownloadActivity {
 		String vt = activity.getString(R.string.about_version) +"\t";
 		int st = vt.length();
 		String edition = "";
+		if (!activity.getString(R.string.app_edition).equals("") {
+			edition = activity.getString(R.string.local_index_installed) + " : \t" + activity.getString(R.string.app_edition);
+		}
         SharedPreferences prefs = app.getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
         if (prefs.contains(CONTRIBUTION_VERSION_FLAG) && Version.isDeveloperVersion(app)) {
-            try {
-		//Next 4 lines produced bogus Edition dates in many situtations, let us try to use the BUILD_ID here as delivered from builder
+		//Next 7 lines produced bogus Edition dates in many situtations, let us try (see above) to use the BUILD_ID as delivered from builder
+            //try {
                 //PackageManager pm = activity.getPackageManager();
                 //ApplicationInfo appInfo = pm.getApplicationInfo(OsmandApplication.class.getPackage().getName(), 0);
 		//Date date = new Date(new File(appInfo.sourceDir).lastModified());
                 //edition = activity.getString(R.string.local_index_installed) + " : \t" + DateFormat.getDateFormat(app).format(date);
-                edition = activity.getString(R.string.local_index_installed) + " : \t" + activity.getString(R.string.app_edition);
-            } catch (Exception e) {
-            }
-            SpannableString content = new SpannableString(vt + version +"\n" +
-    				edition +"\n\n"+
+            //} catch (Exception e) {
+            //}
+            SpannableString content = new SpannableString(vt + version + "\n" +
+    				edition + "\n\n" +
     				activity.getString(R.string.about_content));
     		content.setSpan(new ClickableSpan() {
     			@Override
@@ -220,8 +222,9 @@ public class DashboardActivity extends BaseDownloadActivity {
     		}, st, st + version.length(), 0);
     		tv.setText(content);
         } else {
-        	tv.setText(vt + version +"\n\n" +
-    				activity.getString(R.string.about_content));
+		tv.setText(vt + version + "\n" +
+				edition + "\n\n" +
+				activity.getString(R.string.about_content));
         }
         
 		tv.setPadding(5, 0, 5, 5);
