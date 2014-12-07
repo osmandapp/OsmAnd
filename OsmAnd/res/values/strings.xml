@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="application_dir_change_warning2">Do you want OsmAnd to also copy its data files to the new destination?  Select \'No\' for OsmAnd to just create and use the new folder.</string>
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_northing">Northing</string>
     <string name="navigate_point_easting">Easting</string>
@@ -435,7 +436,7 @@
     <string name="android_19_location_disabled">Since Android version 4.4 (KitKat) you cannot download and update maps to the previous storage folder (%s). Do you want to change to the permitted storage location and copy all OsmAnd files there?
         \n Note 1: Your old files will remain untouched (but can be deleted manually).
         \n Note 2: In the new storage location it will not be possible to share files between OsmAnd and OsmAnd+.</string>
-    <string name="application_dir_change_warning2">Do you want OsmAnd to also copy its data files to the new destination?</string>
+    <string name="application_dir_change_warning2">Do you want OsmAnd to also copy its data files to the new destination?  Select \'No\' for OsmAnd to just create and use the new folder.</string>
     <string name="copying_osmand_one_file_descr">Copying file (%s) to the new destination...</string>
     <string name="copying_osmand_files_descr">Copying OsmAnd data files to the new destination (%s)</string>
     <string name="copying_osmand_files">Copying OsmAnd data files</string>
