@@ -1874,4 +1874,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="no_internet_connection">Téléchargement impossible. Merci de vous connecter en Wifi.</string>
     <string name="download_tab_downloads">Téléchargements</string>
     <string name="download_tab_updates">Mises à jour</string>
-    </resources>
+    <string name="navigate_point_zone">Zone</string>
+    <string name="navigate_point_easting">Abscisse</string>
+    <string name="navigate_point_northing">Ordonnée</string>
+    <string name="download_tab_local">Local</string>
+	</resources>
