@@ -2095,4 +2095,10 @@
     <string name="dismiss">해제</string>
     <string name="everything_up_to_date">최신 자료</string>
     <string name="no_internet_connection">다운로드가 불가능 합니다. lWi-Fi를 연결하여 진행해 주시기 바랍니다.</string>
-    </resources>
+    <string name="navigate_point_zone">존(지역)</string>
+    <string name="navigate_point_northing">북향</string>
+    <string name="navigate_point_easting">동향</string>
+    <string name="download_tab_downloads">다운로드</string>
+    <string name="download_tab_updates">업데이트</string>
+    <string name="download_tab_local">로컬</string>
+	</resources>
