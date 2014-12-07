@@ -35,4 +35,5 @@
 	\n\tPavol Zibrita - first contributor and developer of some utilities
 	\n\tHarry van der Wolf - contributor (contribute to country boundaries + configuration file + address files and else), active forum participant.
     </string>
+    <string name="app_edition"></string>
 </resources>

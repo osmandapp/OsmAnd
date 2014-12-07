@@ -201,8 +201,10 @@ public class DashboardActivity extends BaseDownloadActivity {
             try {
                 PackageManager pm = activity.getPackageManager();
                 ApplicationInfo appInfo = pm.getApplicationInfo(OsmandApplication.class.getPackage().getName(), 0);
-                Date date = new Date(new File(appInfo.sourceDir).lastModified());
-                edition = activity.getString(R.string.local_index_installed) + " : \t" + DateFormat.getDateFormat(app).format(date);
+		//Next line produced bogus dates in man situtations, let us try to use the BUILD_ID here as delivered from builder
+		//Date date = new Date(new File(appInfo.sourceDir).lastModified());
+                //edition = activity.getString(R.string.local_index_installed) + " : \t" + DateFormat.getDateFormat(app).format(date);
+                edition = activity.getString(R.string.local_index_installed) + " : \t" + activity.getString(R.string.app_edition);
             } catch (Exception e) {
             }
             SpannableString content = new SpannableString(vt + version +"\n" +
