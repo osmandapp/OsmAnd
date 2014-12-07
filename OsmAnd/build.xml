@@ -205,7 +205,14 @@
 				<replaceregexp file="res/values/no_translate.xml" match='"app_version"&gt;([^#]+)(.*)&lt;' replace='"app_version"&gt;\1${build.version}&lt;' byline="true" />
 			</then>
 		</if>
-
+		<if>
+			<condition>
+				<isset property="app.edition" />
+			</condition>
+			<then>
+				<replaceregexp file="res/values/no_translate.xml" match='"app_edition"&gt;(.*)&lt;' replace='"app_edition"&gt;${app.edition}&lt;' byline="true" />
+			</then>
+		</if>
 	</target>
 
 
