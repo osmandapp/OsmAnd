@@ -1597,7 +1597,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="copying_osmand_files_descr">Kopírujem dátové súbory OsmAnd do nového cieľa (%s)</string>
     <string name="copying_osmand_files">Kopírujem dátové súbory OsmAnd</string>
     <string name="copying_osmand_one_file_descr">Kopírujem súbor (%s) do nového cieľa...</string>
-    <string name="application_dir_change_warning2">Chcete aby OsmAnd presunul údajové súbory do nového cieľa?</string>
+    <string name="application_dir_change_warning2">Chcete aby OsmAnd presunul údajové súbory do nového cieľa? Zvoľte \"Nie\" ak chcete, aby OsmAnd len vytvoril a použil nový prázdny priečinok.</string>
     <string name="calculate_osmand_route_gpx">Vypočítať OsmAnd offline trasu</string>
     <string name="android_19_location_disabled">Od Androidu verzie 4.4 (KitKat) nie je možné sťahovať a aktualizovať mapy v pôvodnom úložnom priečinku (%s). Chcete ho zmeniť na vhodné nové úložisko a skopírovať tam všetky súbory?
 \n Poznámka 1: pôvodné súbory zostanú nedotknuté (môžete ich neskôr vymazať ručne).\n Poznámka 2: v novom úložisku nebude možné zdieľať súbory medzi OsmAnd a OsmAnd+.</string>
@@ -2003,4 +2003,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="use_opengl_render">Použiť vykresľovanie OpenGL</string>
     <string name="use_opengl_render_descr">Použiť hardvérovo urýchľované vykresľovanie pomocou OpenGL (nemusí na niektorých zariadeniach fungovať)</string>
     <string name="no_internet_connection">Nie je možné stiahnuť. Prosím pripojte sa na Wi-Fi, aby bolo možné pokračovať.</string>
-    </resources>
+    <string name="navigate_point_zone">Zóna</string>
+    <string name="download_tab_downloads">Sťahovania</string>
+    <string name="download_tab_updates">Aktualizácie</string>
+    <string name="download_tab_local">Lokálne</string>
+	</resources>
