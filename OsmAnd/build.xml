@@ -201,6 +201,7 @@
 			</condition>
 			<then>
 				<!-- old expression with manual version input:  replaceregexp file="res/values/no_translate.xml" match='"app_version"&gt;(.*)&lt;' replace='"app_version"&gt;2.0.0${build.version}&lt;' byline="true" / -->
+				<!-- From old dev apk version string, cut off old build number ("#old_build_number" and after) and compile new apk version from app_version and #new_build_number -->
 				<replaceregexp file="res/values/no_translate.xml" match='"app_version"&gt;([^#]+)(.*)&lt;' replace='"app_version"&gt;\1${build.version}&lt;' byline="true" />
 			</then>
 		</if>
