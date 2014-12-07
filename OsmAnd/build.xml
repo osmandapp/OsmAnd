@@ -200,8 +200,8 @@
 				<isset property="build.version" />
 			</condition>
 			<then>
-				<!-- replaceregexp file="res/values/no_translate.xml" match='"app_version"&gt;(.*)&lt;' replace='"app_version"&gt;\1${build.version}&lt;' byline="true" / -->
-				<replaceregexp file="res/values/no_translate.xml" match='"app_version"&gt;(.*)&lt;' replace='"app_version"&gt;2.0.0${build.version}&lt;' byline="true" />
+				<!-- old expression with manual version input:  replaceregexp file="res/values/no_translate.xml" match='"app_version"&gt;(.*)&lt;' replace='"app_version"&gt;2.0.0${build.version}&lt;' byline="true" / -->
+				<replaceregexp file="res/values/no_translate.xml" match='"app_version"&gt;([^#]+)(.*)&lt;' replace='"app_version"&gt;\1${build.version}&lt;' byline="true" />
 			</then>
 		</if>
 
