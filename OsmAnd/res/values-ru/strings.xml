@@ -120,7 +120,7 @@
   <string name="index_settings_descr">Загрузка и управление локальными файлами карт на вашем устройстве</string>
   <string name="map_online_plugin_is_not_installed">Активируйте плагин онлайн карт, чтобы выбирать различные источники карт</string>
   <string name="map_online_data">Онлайн карты</string>
-  <string name="map_online_data_descr">Использовать онлайн карты (кэшируются на SD-носителе)</string>
+  <string name="map_online_data_descr">Использовать онлайн карты (загрузка и кэширование на SD-карте)</string>
   <string name="online_map_settings">Онлайн карты</string>
   <string name="online_map_settings_descr">Настройки источников онлайн карт и слоёв</string>
   <string name="map_settings">Настройки карты</string>
@@ -155,7 +155,7 @@
   <string name="debugging_and_development">Отладка и разработка</string>
   <string name="native_rendering">Быстрый рендеринг</string>
   
-  <string name="test_voice_prompts">Протестировать голосовые подсказки</string>
+  <string name="test_voice_prompts">Тест голосовых подсказок</string>
   <string name="switch_to_raster_map_to_see">Для текущей позиции карта отсутствует. Вы можете загрузить карту с помощью меню \"Настройки\" → \"Управление файлами карт\" или переключиться на использование онлайн карт (для этого необходимо включить плагин онлайн карты).</string>
   <string name="tip_recent_changes_0_7_2_t">Изменения в 0.7.2:
 		\n\t- Быстрый рендеринг для всех устройств
@@ -310,7 +310,7 @@
   <string name="favorite_default_category">Другое</string>
   <string name="vector_map_not_needed">Не нужно</string>
   <string name="basemap_missing">Отсутствует базовая карта, покрывающая весь мир на мелком масштабе. Пожалуйста загрузите World_basemap_x.obf для полноценный работы приложения.</string>
-  <string name="vector_data_missing">Локальные данные отсутствуют на SD-носителе. Пожалуйста, загрузите их для того, чтобы использовать приложение без Интернета.</string>
+  <string name="vector_data_missing">Локальные данные отсутствуют на SD-карте. Пожалуйста, загрузите их для того, чтобы использовать приложение без Интернета.</string>
   <string name="local_index_gpx_info_show">\n\nНажать и удерживать для вызова меню</string>
   
   
@@ -488,7 +488,7 @@
   <string name="loading_builds">Загружаются сборки OsmAnd…</string>
   <string name="select_build_to_install">Выберите одну из сборок OsmAnd для установки</string>
   <string name="voice_is_not_available_msg">Голосовая навигация недоступна. Перейдите в настройки и укажите голосовые данные или загрузите их.</string>
-  <string name="voice_is_not_available_title">Голосовые данные не найдены</string>
+  <string name="voice_is_not_available_title">Голосовые данные не выбраны</string>
   <string name="trace_rendering_descr">Отображает производительность рендеринга</string>
   <string name="trace_rendering">Отладочная информация о рендеринге</string>
   <string name="daynight_mode_day">Дневной</string>
@@ -550,9 +550,9 @@
   <string name="poi_context_menu_delete">Удалить POI</string>
   <string name="rotate_map_compass_opt">По направлению компаса</string>
   <string name="rotate_map_bearing_opt">По направлению движения</string>
-  <string name="rotate_map_none_opt">Не вращать</string>
+  <string name="rotate_map_none_opt">Не вращать (север сверху)</string>
   <string name="rotate_map_to_bearing_descr">Выберите способ вращения карты</string>
-  <string name="rotate_map_to_bearing">Вращать карту</string>
+  <string name="rotate_map_to_bearing">Ориентация карты</string>
   <string name="show_route">Показать маршрут</string>
   <string name="fav_imported_sucessfully">Избранные точки успешно импортированы</string>
   <string name="fav_file_to_load_not_found">Файл GPX, содержащий точки, не был найден в {0}</string>
@@ -601,7 +601,7 @@
   <string name="search_poi_filter">Фильтр</string>
   <string name="menu_mute_off">Звук</string>
   <string name="menu_mute_on">Без звука</string>
-  <string name="voice_provider_descr">Выберите голосовые инструкции для навигации</string>
+  <string name="voice_provider_descr">Выберите язык голосовых инструкции для навигации</string>
   <string name="voice_provider">Голосовые данные</string>
   <string name="voice_data_initializing">Инициализируются голосовые данные…</string>
   <string name="voice_data_not_supported">Голосовые данные не поддерживаются текущей версией приложения</string>
@@ -725,7 +725,7 @@
   <string name="loading_data">Загрузка данных…</string>
   <string name="reading_indexes">Чтение локальных данных…</string>
   <string name="previous_run_crashed">Приложение завершилось некорректно. Лог-файл в {0}. Сообщите разработчику об ошибке и приложите лог-файл.</string>
-  <string name="saving_gpx_tracks">Сохранение треков GPX на SD…</string>
+  <string name="saving_gpx_tracks">Сохранение треков GPX на SD-карту…</string>
   <string name="finished_task">Окончен</string>
   <string name="reload_indexes_descr">Перечитать локальные векторные карты с SD</string>
   <string name="reload_indexes">Перечитать локальные данные</string>
@@ -733,7 +733,7 @@
   <string name="download_indexes">Загрузить локальные данные</string>
   <string name="use_online_routing_descr">Использовать Интернет-сервис для прокладки маршрута</string>
   <string name="use_online_routing">Онлайн маршрутизация</string>
-  <string name="user_password_descr">Указать пароль для работы с OSM</string>
+  <string name="user_password_descr">Укажите пароль (требуется для работы с OSM)</string>
   <string name="user_password">Пароль</string>
   <string name="osm_settings_descr">Установка логина/пароля OpenStreetMap</string>
   
@@ -745,16 +745,16 @@
   <string name="auto_zoom_map">Масштаб</string>
   <string name="additional_settings">Дополнительные настройки</string>
   <string name="settings">Настройки</string>
-  <string name="save_current_track_descr">Сохранить текущий трек на SD</string>
+  <string name="save_current_track_descr">Сохранить текущий трек на SD-карту сейчас</string>
   <string name="save_current_track">Сохранить текущий трек GPX</string>
   <string name="save_track_interval_descr">Выберите интервал журналирования для записи трека во время навигации</string>
   <string name="save_track_interval">Интервал журналирования во время навигации</string>
   
   <string name="save_track_to_gpx_descrp">Треки будут сохранены в папку для треков во время навигации</string>
-  <string name="save_track_to_gpx">Журналирование трека в файл GPX во время навигации</string>
+  <string name="save_track_to_gpx">Запись трека в файл GPX во время навигации</string>
   <string name="update_tile">Обновить карту</string>
   <string name="reload_tile">Обновить часть карты</string>
-  <string name="user_name_descr">Указать имя пользователя для работы с OSM</string>
+  <string name="user_name_descr">Укажите имя пользователя (требуется для работы с OSM)</string>
   <string name="user_name">Имя пользователя</string>
   <string name="mark_point">Точка</string>
   <string name="show_osm_bugs_descr">Показывать слой Open Street Bugs</string>
@@ -1125,8 +1125,8 @@
 		OsmAnd+ (OSM Automated Navigation Directions) OsmAnd - это навигационное приложение для путешествий с открытым исходным кодом для пользователей электронных карт, которое позволяет сориентироваться на незнакомой местности, найти интересующие объекты на карте и добраться до них, а также получить различную туристическую информацию об этих объекта; используя данные из Open Street Maps (OSM) без доступа в Интернет. OsmAnd+ - это платная версия приложения. Покупая эту версию, Вы поддерживаете проект, финансируя разработку новых функциональных возможностей. Платная версия позволяет автоматически получать обновления для приложения. Некоторые из основных возможностей приложения: - работа с векторными и растровыми картами без доступа в Интернет (для этого нужно предварительно сохранить карты на карту памяти устройства); - загрузка векторных и растровых карт из самого приложения; - доступность компактных векторных карт для всех стран мира; - загрузка произвольной области для растровых карт; - отображение дополнительной информации на карте, такой как GPX или навигационные маршруты, объекты (POI), избранные местоположения, линии высот, остановки общественного транспорта; наложение дополнительных карт с настраиваемой прозрачностью; - поиск адресов и объектов (POI) без доступа в Интернет; - прокладка маршрутов на любые расстояния с использованием Интернет сервисов; - прокладка маршрутов на небольшие расстояния без доступа в Интернет (экспериментальная возможность); - режимы автомобиля, велосипеда и пешехода с возможностями: - автоматического переключения на дневной/ночной режим отрисовки карты; - изменения масштабы карты в зависимости от скорости; - вращения карты по компасу или направлению движения; - использования голосовых команд (воспроизводимых записанными или генерированными голосами) при движении по маршруту; - предупреждения о превышении допустимой скорости движения.
 	</string>
 <string name="avoid_motorway">Избегать автомагистралей</string>
-<string name="snap_to_road_descr">Привязать текущую позицию к дороге</string>
-<string name="snap_to_road">Привязать к дороге</string>
+<string name="snap_to_road_descr">Привязывать текущую позицию к дороге</string>
+<string name="snap_to_road">Привязка к дороге</string>
 <string name="intermediate_point_too_far">Промежуточная точка %1$s слишком далеко от ближайшей дороги.</string>
 <string name="arrived_at_intermediate_point">Вы достигли промежуточного пункта</string>
 <string name="context_menu_item_intermediate_point">Добавить промежуточную точку</string>
@@ -1408,14 +1408,14 @@
 	<string name="routing_attr_avoid_ferries_name">Избегать паромов</string>
 	<string name="routing_attr_avoid_ferries_description">Избегать паромов</string>
 	<string name="routing_attr_weight_name">Максимальная масса</string>
-	<string name="routing_attr_weight_description">Укажите массу автомобиля разрешенную на маршрутах</string>
+	<string name="routing_attr_weight_description">Укажите массу автомобиля для учёта при построении маршрута</string>
     
     <string name="map_widget_map_rendering">Отображение карты</string>
     <string name="amenity_type_seamark">Навигационные знаки (водоемы)</string>
     <string name="disable_complex_routing">Отключить сложную маршрутизацию</string>
-    <string name="speech_rate_descr">Указать скорость произношения для TTS</string>
-    <string name="guidance_preferences_descr">Установки навигации</string>
-    <string name="routing_preferences_descr">Установки маршрутизации</string>
+    <string name="speech_rate_descr">Укажите скорость произношения для TTS</string>
+    <string name="guidance_preferences_descr">Настройки навигации</string>
+    <string name="routing_preferences_descr">Настройки маршрутизации</string>
     <string name="app_mode_truck">Грузовик</string>
     <string name="calculate_osmand_route_gpx">Рассчитать оффлайновый маршрут OsmAnd</string>
     <string name="copying_osmand_files">Копирование файлов данных OsmAnd</string>
@@ -1541,7 +1541,7 @@
     <string name="keep_informing_descr">Повторять навигационные инструкции с регулярными интервалами</string>
     <string name="keep_informing">Повторять навигационные инструкции</string>
 	<string name="arrival_distance">Объявление прибытия</string>
-    <string name="arrival_distance_descr">Как скоро вы хотите объявить прибытие?</string>
+    <string name="arrival_distance_descr">Как скоро вы хотите объявить о прибытии?</string>
     
     <string name="osmo_io_error">Проблема подключения OsMo: </string>
     <string name="share_fav">Поделиться</string>
@@ -1759,7 +1759,7 @@
     <string name="record_plugin_name">Запись поездок</string>
     <string name="int_hour">час</string>
     <string name="duration">Продолжительность</string>
-    <string name="save_track_to_gpx_globally">Журналирование трека в файл GPX</string>
+    <string name="save_track_to_gpx_globally">Запись трека в файл GPX</string>
 	<string name="save_track_interval_globally">Интервал журналирования</string>
 	<string name="save_track_to_gpx_globally_descr">Общие положения журналирования в файл GPX могут быть включены или выключены с помощью виджета записи GPX на экране карты</string>
 	<string name="record_plugin_description">Сохранение ваших треков с помощью кнопки на экране с картой. Отображение настроек записи треков в локальные GPX-файлы или онлайн, в web-сервис.</string>
@@ -1813,7 +1813,7 @@
     <string name="impassable_road">Избегать дороги…</string>
     <string name="wake_on_voice_never">Никогда</string>
     <string name="lock_screen_request_explanation">%1$s необходимо это разрешение, чтобы выключить экран для экономии энергии.</string>
-    <string name="wake_on_voice">Включать экран</string>
+    <string name="wake_on_voice">Авто-включение экрана</string>
     <string name="wake_on_voice_descr">Включать экран телефона при приближении к повороту</string>
     <string name="advanced_settings">Расширенные</string>
 	<string name="map_update">Карты</string>
@@ -1829,4 +1829,5 @@
     <string name="download_tab_downloads">Загрузки</string>
     <string name="download_tab_updates">Обновления</string>
     <string name="download_tab_local">Локально</string>
-	</resources>
+	<string name="navigate_point_zone">Зона</string>
+    </resources>
