@@ -1818,7 +1818,7 @@
     <string name="advanced_settings">Расширенные</string>
 	<string name="map_update">Карты</string>
 	<string name="coordinates">Координаты</string>
-	<string name="home_button">Дом</string>
+	<string name="home_button">Домой</string>
     <string name="search_for">Поиск</string>
 	<string name="everything_up_to_date">Всё обновлено</string>
     <string name="use_opengl_render">Использовать OpenGL для рендеринга</string>
