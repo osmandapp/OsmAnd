@@ -570,7 +570,7 @@
   <string name="layer_yandex_traffic">Яндекс.Пробки</string>
   <string name="layer_route">Маршрут</string>
   <string name="layer_favorites">Избранные</string>
-  <string name="layer_osm_bugs">OSM Bugs</string>
+  <string name="layer_osm_bugs">OSM Bugs (онлайн)</string>
   <string name="layer_transport">Остановки транспорта</string>
   <string name="layer_poi">POI…</string>
   <string name="layer_map">Источник карты…</string>
@@ -757,8 +757,8 @@
   <string name="user_name_descr">Укажите имя пользователя (требуется для работы с OSM)</string>
   <string name="user_name">Имя пользователя</string>
   <string name="mark_point">Точка</string>
-  <string name="show_osm_bugs_descr">Показывать слой Open Street Bugs</string>
-  <string name="show_osm_bugs">Open Street Bugs</string>
+  <string name="show_osm_bugs_descr">Показывать слой OSM Bugs на карте</string>
+  <string name="show_osm_bugs">Показывать OSM Bugs</string>
   <string name="favourites_activity">Список избранных точек</string>
   <string name="add_to_favourite">Добавить в Избранное</string>
   <string name="use_english_names_descr">Использовать английские названия вместо местных</string>
@@ -985,7 +985,7 @@
   <string name="favourites_search_desc">Поиск в избранном</string>
   <string name="history_search_desc">История поиска</string>
   <string name="rendering_attr_noPolygons_description">Отображать только границы многоугольников, без заливки</string>
-  <string name="rendering_attr_noPolygons_name">Без полигонов</string>
+  <string name="rendering_attr_noPolygons_name">Скрыть полигоны</string>
   <string name="rendering_attr_appMode_name">Режим рендеринга</string>
   <string name="rendering_attr_appMode_description">Оптимизация карты для соответствующего профиля</string>
   <string name="rendering_attr_contourLines_description">Выберите минимальный уровень масштаба для отображения горизонталей (необходимо предварительно загрузить соответствующий SRTM-файл):</string>
@@ -1058,7 +1058,7 @@
   <string name="map_widget_lock_screen">Заблокировать экран</string>
   <string name="map_widget_compass">Компас</string>
   <string name="map_widget_top_stack">Строка состояния:</string>
-  <string name="map_widget_reset">Сброс настроек</string>
+  <string name="map_widget_reset">Сбросить настройки</string>
   <string name="map_widget_right_stack">Правая сторона:</string>
   <string name="map_widget_left_stack">Левая сторона:</string>
   <string name="map_widget_parking">Парковка</string>
@@ -1521,7 +1521,7 @@
     <string name="index_item_world_seamarks">Мировые морские объекты</string>
 	<string name="index_item_world_altitude_correction">Мировая коррекция высоты</string>
 	<string name="index_name_canada">Северная Америка - Канада</string>
-    <string name="always_center_position_on_map">Отображать положение всегда в центре</string>
+    <string name="always_center_position_on_map">Отображать положение в центре экрана</string>
     <string name="voice_pref_title">Голос</string>
     <string name="misc_pref_title">Разное</string>
     <string name="localization_pref_title">Локализация</string>
