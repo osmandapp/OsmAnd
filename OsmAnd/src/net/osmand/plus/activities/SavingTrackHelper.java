@@ -70,10 +70,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		gx.showCurrentTrack = true;
 		this.currentTrack.setGpxFile(gx);
 		this.currentTrack.getGpxFile().tracks.add(new Track());
-		updateScript = "INSERT INTO " + TRACK_NAME + 
-		" (" +TRACK_COL_LAT +", " +TRACK_COL_LON+", " +TRACK_COL_ALTITUDE+", " +TRACK_COL_SPEED
-			 +", " +TRACK_COL_HDOP+", " +TRACK_COL_DATE+ ")" +
-		" VALUES (?, ?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
+		updateScript = "INSERT INTO " + TRACK_NAME + " (" + TRACK_COL_LAT + ", " + TRACK_COL_LON + ", "
+				+ TRACK_COL_ALTITUDE + ", " + TRACK_COL_SPEED + ", " + TRACK_COL_HDOP + ", " + TRACK_COL_DATE + ")"
+				+ " VALUES (?, ?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
 		updatePointsScript = "INSERT INTO " + POINT_NAME + " VALUES (?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
@@ -231,6 +230,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				long time = query.getLong(2);
 				pt.time = time;
 				pt.name = query.getString(3);
+				// check if name is extension (needed for audio/video plugin & josm integration)
+				if(pt.name != null && pt.name.length() > 4 && pt.name.charAt(pt.name.length() - 4) == '.') {
+					pt.link = pt.name;
+				}
 				
 				String date = DateFormat.format("yyyy-MM-dd", time).toString(); //$NON-NLS-1$
 				GPXFile gpx;

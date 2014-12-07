@@ -87,6 +87,7 @@ public class GPXUtilities {
 		public double lat;
 		public double lon;
 		public String name = null;
+		public String link = null;
 		public String category = null;
 		public String desc = null;
 		// by default
@@ -754,6 +755,11 @@ public class GPXUtilities {
 		}
 		writeNotNullText(serializer, "name", p.name);
 		writeNotNullText(serializer, "desc", p.desc);
+		if(p.link != null) {
+			serializer.startTag(null, "link");
+			serializer.attribute(null, "link", p.link);
+			serializer.endTag(null, "link");
+		}
 		writeNotNullText(serializer, "category", p.category);
 		if (!Double.isNaN(p.hdop)) {
 			writeNotNullText(serializer, "hdop", p.hdop + "");
@@ -915,6 +921,8 @@ public class GPXUtilities {
 								((WptPt) parse).name = readText(parser, "name");
 							} else if (parser.getName().equals("desc")) {
 								((WptPt) parse).desc = readText(parser, "desc");
+							} else if (parser.getName().equals("link")) {
+								((WptPt) parse).link = parser.getAttributeValue("", "href");
 							} else if (tag.equals("category")) {
 								((WptPt) parse).category = readText(parser, "category");
 							} else if (parser.getName().equals("ele")) {

@@ -273,17 +273,18 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					}
 				} else if (e.getDate(format) != null) {
 					String sfName = e.getTargetFileName();
-					if (e.getDate(format).equals(indexActivatedFileNames.get(sfName))) {
+					final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
+					if (updatableResource && !DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e)) {
 						item.setText(item.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
 						item.setTextColor(okColor); // GREEN
 						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-					} else if (e.getDate(format).equals(indexFileNames.get(sfName))) {
+					} else if (indexFileNames.containsKey(sfName) && !DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e)) {
 						item.setText(item.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexFileNames.get(sfName));
 						item.setTextColor(okColor);
 						item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
-					} else if (indexActivatedFileNames.containsKey(sfName)) {
+					} else if (updatableResource) {
 						item.setText(item.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
 						item.setTextColor(updateColor); // LIGHT_BLUE
