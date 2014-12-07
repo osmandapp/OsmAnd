@@ -525,4 +525,19 @@
 	<string name="poi_toilets">Bagnu</string>
 	<string name="poi_currencyexchange">Cambiadore de valutas</string>
 	<string name="poi_accountant">Istùdiu contàbile</string>
+	<string name="poi_cape">Ispuntone/promontòriu</string>
+	<string name="poi_reef">Costera</string>
+	<string name="poi_seamark_anchorage">Ancoràggiu</string>
+	<string name="poi_seamark_beacon">Faru/fogu de sinnalatzione</string>
+	<string name="poi_seamark_berth">Atracu</string>
+	<string name="poi_seamark_dyke">Àrgine</string>
+	<string name="poi_seamark_floating_dock">Pontinu gallegiante</string>
+	<string name="poi_seamark_fog_signal">Nautòfonu</string>
+	<string name="poi_seamark_harbour">Portu</string>
+	<string name="poi_seamark_landmark">Puntu de riferimentu</string>
+	<string name="poi_seamark_mooring">Ormègiu</string>
+	<string name="poi_seamark_pile">Palu de ancoràgiu</string>
+	<string name="poi_seamark_wreck">Relitu</string>
+
+	<string name="poi_nursing_home">Domo de cura</string>
 	</resources>
