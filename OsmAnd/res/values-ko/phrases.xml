@@ -458,7 +458,7 @@
 	<string name="poi_dog_park">강아지 공원</string>
 	<string name="poi_fishing_place">낚시 장소</string>
 	<string name="poi_hunting_stand">헌팅 스탠드</string>
-	<string name="poi_marina"/>
+	<string name="poi_marina">마리나</string>
 	<string name="poi_miniature_golf">미니 골프</string>
 	<string name="poi_playground">놀이터</string>
 	<string name="poi_swimming_pool">수영장</string>
@@ -466,7 +466,7 @@
 	<string name="poi_park">공원</string>
 
 	<string name="poi_cafe">카페</string>
-	<string name="poi_biergarten"/>
+	<string name="poi_biergarten">Biergarten</string>
 	<string name="poi_restaurant">레스토랑</string>
 	<string name="poi_fast_food">패스트 푸드</string>
 	<string name="poi_bar">바</string>
@@ -506,4 +506,7 @@
 	<string name="poi_plumber">배관공</string>
 	<string name="poi_pottery_craft">도자기 공예</string>
 	<string name="poi_roofer">지붕 업자</string>
+	<string name="poi_grit_bin">Grit bin</string>
+	<string name="poi_rigger">Rigger</string>
+	<string name="poi_saddler">Saddler</string>
 	</resources>
