@@ -167,7 +167,7 @@
   <string name="index_settings_descr">Download en beheer kaarten en stemmen</string>
   <string name="general_settings">Algemene instellingen</string>
   <string name="general_settings_descr">Kaartweergave en algemene instellingen</string>
-  <string name="global_app_settings">Algemene app instellingen</string>
+  <string name="global_app_settings">Algemene instellingen</string>
   <string name="user_name">OSM gebruikersnaam</string>
   <string name="user_name_descr">Nodig voor openstreetmap.org aanmelding</string>
   <string name="user_password">OSM wachtwoord</string>
@@ -376,7 +376,7 @@
   <string name="search_offline_geo_error">Kan de geo intent \'%s\' niet verwerken</string>
   <string name="search_osm_offline">Zoek adres in de offline kaarten</string>
   <string name="system_locale">Systeem</string>
-  <string name="preferred_locale_descr">Kies taal</string>
+  <string name="preferred_locale_descr">Kies de taal van het menu</string>
   <string name="preferred_locale">Taal</string>
   <string name="tip_map_switch">Kies een kaartbron</string>
   
@@ -723,10 +723,10 @@
   <string name="settings">Instellingen</string>
   <string name="save_current_track_descr">Huidige track nu op SD-kaart opslaan</string>
   <string name="save_current_track">Huidige GPX-track opslaan</string>
-  <string name="save_track_interval">Registratie-interval tijdens de navigatie</string>
-  <string name="save_track_interval_descr">Kies logging-interval voor track opname tijdens navigatie</string>
-  <string name="save_track_to_gpx_descrp">Tracks worden in de track-map opgeslagen tijdens de navigatie</string>
-  <string name="save_track_to_gpx">Registreer track in GPX-bestand tijdens de navigatie</string>
+  <string name="save_track_interval">Registratie-interval bij navigatie</string>
+  <string name="save_track_interval_descr">Kies logging-interval voor trackregistratie tijdens navigatie</string>
+  <string name="save_track_to_gpx_descrp">Tijdens het navigeren worden tracks gemaakt en opgeslagen</string>
+  <string name="save_track_to_gpx">Track registreren tijdens navigatie</string>
   <string name="update_tile">Kaart bijwerken</string>
   <string name="reload_tile">Herlaad kaartsegment</string>
   <string name="mark_point">Doel</string>
@@ -1422,7 +1422,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	\n\t* Extra instellingen voor kompasstabilisatie
 	\n\t* Menuknop vervangen door knop linksboven in het kaartvenster
     </string>
-    <string name="monitoring_settings">Trip registratie</string>
+    <string name="monitoring_settings">Trip-registratie</string>
     <string name="monitoring_settings_descr">Configureer: hoe uw trips op te nemen</string>
     <string name="osmand_monitoring_plugin_description">Activeren van tracking en navigatie in slaapmodus (scherm uit). De GPS gaat dan regelmatig aan. Toon de instellingen om uw reis vast te leggen als GPX-bestand of online via een webdienst.</string>
     <string name="street_name">Straat</string>
@@ -1884,7 +1884,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_attr_showSurfaces_name">Wegoppervlak tonen</string>
     <string name="rendering_attr_showCycleRoutes_name">Toon fietsroutes</string>
     <string name="map_preferred_locale_descr">Gewenste taal voor aanduidingen op de kaart (indien niet beschikbaar worden Engelse of plaatselijke namen gebruikt)</string>
-    <string name="map_preferred_locale">Kaart voorkeurstaal</string>
+    <string name="map_preferred_locale">Taal voor teksten op de kaart</string>
     <string name="local_map_names">Plaatselijke namen</string>
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebreeuws</string>
@@ -2018,7 +2018,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="error_avoid_specific_road">Er is in de buurt geen weg gevonden</string>
     <string name="dismiss">Sluiten</string>
     <string name="no_internet_connection">Kan niet downloaden. Maak verbinding met Wifi om verder te gaan.</string>
-    <string name="download_tab_downloads">Downloads</string>
+    <string name="download_tab_downloads">Downloaden</string>
     <string name="download_tab_updates">Updates</string>
     <string name="download_tab_local">Geïnstalleerd</string>
 	<string name="navigate_point_easting">Oostwaarde</string>
