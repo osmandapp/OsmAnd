@@ -2029,7 +2029,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="osmo_use_https_descr">Usa la connessione sicura con il server</string>
     <string name="show_all">MOSTRA TUTTO</string>
 	<string name="coordinates">Coordinate</string>
-	<string name="home_button">Casa</string>
+	<string name="home_button">Schermata iniziale</string>
     <string name="map_update">Mappe </string>
 	<string name="search_for">Cerca</string>
 	<string name="show_map">MOSTRA LA MAPPA</string>
@@ -2039,8 +2039,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="everything_up_to_date">Tutto aggiornato</string>
     <string name="dismiss">Abbandona</string>
     <string name="no_internet_connection">Non è possibile scaricare. Prego, connettersi al Wi-Fi per procedere.</string>
-    <string name="download_tab_downloads">In download</string>
-    <string name="download_tab_updates">Aggiornamenti</string>
+    <string name="download_tab_downloads">Download</string>
+    <string name="download_tab_updates">Aggiornabili</string>
     <string name="download_tab_local">Nel dispositivo</string>
 	<string name="navigate_point_zone">Zona</string>
     <string name="navigate_point_northing">In direzione Nord</string>
