@@ -2042,4 +2042,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="download_tab_downloads">In download</string>
     <string name="download_tab_updates">Aggiornamenti</string>
     <string name="download_tab_local">Nel dispositivo</string>
-	</resources>
+	<string name="navigate_point_zone">Zona</string>
+    <string name="navigate_point_northing">In direzione Nord</string>
+    <string name="navigate_point_easting">In direzione Est</string>
+    </resources>
