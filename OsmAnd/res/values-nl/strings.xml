@@ -2023,4 +2023,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="download_tab_local">In de omgeving</string>
 	<string name="navigate_point_easting">Oostwaarde</string>
     <string name="navigate_point_northing">Noordwaarde</string>
+    <string name="navigate_point_zone">Zone</string>
     </resources>

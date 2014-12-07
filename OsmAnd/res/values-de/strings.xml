@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -290,7 +290,7 @@
 	<string name="offline_edition">Offline-Bearbeitung</string>
 	<string name="offline_edition_descr">Immer Offline-Bearbeitung verwenden</string>
 	<string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb von OsmAnd beeinflusst nicht die Offline-Karten, sondern wird in einer eigenen Datei gespeichert.</string>
-	<string name="local_openstreetmap_uploading">hochladen…</string>
+	<string name="local_openstreetmap_uploading">Hochladen…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs wurden hochgeladen</string>
 	<string name="local_openstreetmap_uploadall">Alle hochladen</string>
 	
@@ -625,7 +625,7 @@
 	<string name="menu_save_directions">Route speichern</string>
 	<string name="local_index_upload_gpx_description">GPX Dateien an OSM-Gemeinschaft übermitteln. Die Dateien können dort zur Kartenverbesserung verwendet werden.</string>
 	<string name="local_index_items_uploaded">%1$d von %2$d Datei(en) erfolgreich hochgeladen.</string>
-	<string name="local_index_mi_upload_gpx">Senden an OSM</string>
+	<string name="local_index_mi_upload_gpx">An OSM senden</string>
 	<string name="show_more_map_detail">Mehr Kartendetails</string>
 	<string name="show_more_map_detail_descr">Einige Vektor-Daten (Straßen etc.) bereits bei kleineren Vergrößerungen zeigen</string>
 	<string name="favourites_delete_multiple_succesful">Favorit(en) erfolgreich gelöscht.</string>
@@ -776,7 +776,7 @@
 	<string name="amenity_type_historic">Historisches</string>
 	<string name="amenity_type_landuse">Landnutzung</string>
 	<string name="amenity_type_leisure">Freizeit</string>
-	<string name="amenity_type_man_made">von Menschenhand</string>
+	<string name="amenity_type_man_made">Von Menschenhand</string>
 	<string name="amenity_type_military">Militär</string>
 	<string name="amenity_type_natural">Natur</string>
 	<string name="amenity_type_office">Büro</string>
@@ -848,8 +848,8 @@
 	<string name="renderer_load_exception">Fehler aufgetreten: Renderer wurde nicht geladen</string>
 	<string name="renderers">Vektor-Renderer</string>
 	<string name="renderers_descr">Wähle Anzeigemodus für Offline-Vektor-Karten</string>
-	<string name="poi_context_menu_website">Zeige POI-Internetseite</string>
-	<string name="poi_context_menu_call">Zeige POI-Telefon</string>
+	<string name="poi_context_menu_website">POI-Internetseite anzeigen</string>
+	<string name="poi_context_menu_call">POI-Telefon anzeigen</string>
 	<string name="website">Internetseite</string>
 	<string name="phone">Telefon</string>
 	<string name="download_type_to_filter">Filtern nach Typ</string>
@@ -968,8 +968,8 @@
 	<string name="transport_route_distance">Streckenlänge</string>
 	<string name="transport">Öffentlicher Personenverkehr</string>
 	<string name="default_buttons_ok">OK</string>
-	<string name="show_transport_over_map_description">Zeige öffentliche Haltestellen auf der Karte</string>
-	<string name="show_transport_over_map">Zeige Haltestellen</string>
+	<string name="show_transport_over_map_description">Öffentl. Haltestellen auf der Karte anzeigen</string>
+	<string name="show_transport_over_map">Haltestellen anzeigen</string>
 	<string name="hello">Navigationsanwendung OsmAnd</string>
 	<string name="update_poi_success">POI-Daten wurden erfolgreich aktualisiert ({0} wurden geladen)</string>
 	<string name="update_poi_error_local">Fehler beim aktualisieren der Offline-Daten</string>
@@ -1896,7 +1896,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_user_joined">Nutzer %1$s hat die Gruppe %2$s betreten</string>
 	<string name="osmo_user_left">Nutzer %1$s hat die Gruppe %2$s verlassen</string>
 	<string name="osmo_show_group_notifications">Gruppenbenachrichtigungen anzeigen</string>
-	<string name="osmo_show_group_notifications_descr">Zeige Pop-up-Meldung, wenn eine Nutzer der Gruppe beitritt oder sie verlässt</string>
+	<string name="osmo_show_group_notifications_descr">Pop-up-Meldung, wenn eine Nutzer der Gruppe beitritt oder sie verlässt anzeigen</string>
 	<string name="osmo_tracker_id_share">Um eine Verbindung zum Gerät %2$s herzustellen, bitte den Link %3$s antippen oder die Tracker-ID (%1$s) angeben</string>
 	<string name="osmo_auth_error_short">Anmeldung fehlgeschlagen</string>
 	<string name="osmo_auth_error">Fehler bei der OsMo-Anmeldung: %1$s.\n Möglicherweise ist der Dienst nicht verfügbar oder Ihre Anmeldung ist abgelaufen.\n Fortsetzen mit einer neuen Registrierung?</string>
@@ -2023,4 +2023,10 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="everything_up_to_date">Alles ist aktuell</string>
     <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigte OpenGL-Renderung verwenden (Funktioniert nicht auf allen Geräten)</string>
+    <string name="no_internet_connection">Herunterladen nicht möglich. Zum Fortsetzen mit WLAN verbinden!</string>
+    <string name="download_tab_downloads">Heruntergeladen</string>
+    <string name="download_tab_updates">Aktualisierungen</string>
+    <string name="download_tab_local">Lokal</string>
+    <string name="wake_on_voice">Bildschirm aktivieren</string>
+    <string name="wake_on_voice_descr">Bei Annäherung einer Richtungsänderung den Bildschirm einschalten</string>
     </resources>
