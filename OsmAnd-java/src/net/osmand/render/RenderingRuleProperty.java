@@ -154,9 +154,9 @@ public class RenderingRuleProperty {
 				}
 				return (int) Float.parseFloat(value);
 			} catch (NumberFormatException e) {
-				log.error("Rendering parse " + value);
+				log.error("Rendering parse " + value + " in " + attrName);
 			}
-			return -1;
+ 			return -1;
 		} else if(type == BOOLEAN_TYPE){
 			return Boolean.parseBoolean(value) ? TRUE_VALUE : FALSE_VALUE;
 		} else if(type == STRING_TYPE){
