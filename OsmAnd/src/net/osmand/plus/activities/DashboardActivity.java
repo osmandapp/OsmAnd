@@ -196,7 +196,7 @@ public class DashboardActivity extends BaseDownloadActivity {
 		String vt = activity.getString(R.string.about_version) +"\t";
 		int st = vt.length();
 		String edition = "";
-		if (!activity.getString(R.string.app_edition).equals("") {
+		if (!activity.getString(R.string.app_edition).equals("")) {
 			edition = activity.getString(R.string.local_index_installed) + " : \t" + activity.getString(R.string.app_edition);
 		}
         SharedPreferences prefs = app.getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
