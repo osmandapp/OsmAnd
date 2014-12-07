@@ -1859,4 +1859,7 @@
     <string name="download_tab_downloads">Hent</string>
     <string name="download_tab_updates">Opdater</string>
     <string name="download_tab_local">Lokal</string>
-	</resources>
+	<string name="navigate_point_zone">Zone</string>
+    <string name="navigate_point_northing">Nordlig</string>
+    <string name="navigate_point_easting">Østlig</string>
+    </resources>
