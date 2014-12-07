@@ -747,8 +747,8 @@
   <string name="settings">Настройки</string>
   <string name="save_current_track_descr">Сохранить текущий трек на SD-карту сейчас</string>
   <string name="save_current_track">Сохранить текущий трек GPX</string>
-  <string name="save_track_interval_descr">Выберите интервал журналирования для записи трека во время навигации</string>
-  <string name="save_track_interval">Интервал журналирования во время навигации</string>
+  <string name="save_track_interval_descr">Выберите интервал для записи трека во время навигации</string>
+  <string name="save_track_interval">Интервал записи во время навигации</string>
   
   <string name="save_track_to_gpx_descrp">Треки будут сохранены в папку для треков во время навигации</string>
   <string name="save_track_to_gpx">Запись трека в файл GPX во время навигации</string>
@@ -1531,7 +1531,7 @@
 	<string name="osmo_settings_uuid">Ключ доступа</string>
     <string name="osmo_settings_descr">Настройка параметров мониторинга и установка персонального канала мониторинга</string>
     <string name="osmo_plugin_description">OpenStreetMap Мониторинг - продвинутый живой мониторинг с множеством средств удалённого контроля http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OsMo (Продвинутый онлайн-мониторинг)</string>
+    <string name="osmo_plugin_name">OsMo (Онлайн-мониторинг)</string>
     <string name="osmo_settings">OpenStreetMap мониторинг</string>
    	<string name="navigation_intent_invalid">Неправильный формат: %s</string>
 <string name="share_route_subject">Маршрут предоставленный через OsmAnd</string>
@@ -1760,13 +1760,13 @@
     <string name="int_hour">час</string>
     <string name="duration">Продолжительность</string>
     <string name="save_track_to_gpx_globally">Запись трека в файл GPX</string>
-	<string name="save_track_interval_globally">Интервал журналирования</string>
-	<string name="save_track_to_gpx_globally_descr">Общие положения журналирования в файл GPX могут быть включены или выключены с помощью виджета записи GPX на экране карты</string>
+	<string name="save_track_interval_globally">Интервал записи</string>
+	<string name="save_track_to_gpx_globally_descr">Общие положения записи в файл GPX могут быть включены или выключены с помощью виджета записи GPX на экране карты</string>
 	<string name="record_plugin_description">Сохранение ваших треков с помощью кнопки на экране с картой. Отображение настроек записи треков в локальные GPX-файлы или онлайн, в web-сервис.</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> карта с картинками</string>
 	<string name="confirm_every_run">Всегда спрашивать</string>
-	<string name="save_global_track_interval_descr">Выберите интервал журналирования для записи общего трека (включается через виджет записи GPX на карте)</string>
-	<string name="save_global_track_interval">Общий интервал журналирования</string>
+	<string name="save_global_track_interval_descr">Выберите интервал для записи трека (включается через виджет записи GPX на карте)</string>
+	<string name="save_global_track_interval">Общий интервал записи трека</string>
 	<string name="traffic_warning_speed_limit">Ограничение скорости</string>
     <string name="traffic_warning_border_control">Пограничный контроль</string>
     <string name="traffic_warning_payment">Платный проезд</string>
@@ -1828,6 +1828,6 @@
 	<string name="no_internet_connection">Загрузка невозможна. Подключите Wi-Fi для продолжения.</string>
     <string name="download_tab_downloads">Загрузки</string>
     <string name="download_tab_updates">Обновления</string>
-    <string name="download_tab_local">Локально</string>
+    <string name="download_tab_local">Локальные</string>
 	<string name="navigate_point_zone">Зона</string>
     </resources>
