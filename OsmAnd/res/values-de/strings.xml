@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -1538,7 +1538,7 @@
 	<string name="android_19_location_disabled">"Seit Android 4.4 (KitKat) können neue Karten-Downloads nicht mehr am Speicherort früherer Android-Versionen gespeichert werden (%s). Jetzt den zulässigen Speicherort wählen und alle OsmAnd-Dateien dorthin kopieren?
 \n Hinweis 1: Die ursprünglichen Dateien bleiben hiervon unberührt, können aber nachfolgend manuell gelöscht werden.
 \n Hinweis 2: Die Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden."</string>
-	<string name="application_dir_change_warning2">Soll Osmand auch die Dateien an den neuen Speicherort verschieben?</string>
+	<string name="application_dir_change_warning2">Soll Osmand auch die Dateien an den neuen Speicherort verschieben?  Mit \'Nein\' wird OsmAnd nur den neuen Speicherort anlegen und als Standard verwenden.</string>
 	<string name="copying_osmand_one_file_descr">Kopieren der Datei (%s) an den neuen Speicherort…</string>
 	<string name="copying_osmand_files_descr">Kopieren der Osmand-Dateien zum neuen Speicherort (%s)</string>
 	<string name="copying_osmand_files">Kopiere Osmand-Dateien</string>
