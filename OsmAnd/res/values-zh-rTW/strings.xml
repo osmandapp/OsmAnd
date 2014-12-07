@@ -1847,4 +1847,7 @@
     <string name="download_tab_downloads">下載</string>
     <string name="download_tab_updates">更新</string>
     <string name="download_tab_local">本機</string>
-	</resources>
+	<string name="navigate_point_northing">北距</string>
+    <string name="navigate_point_easting">東距</string>
+    <string name="navigate_point_zone">地區</string>
+    </resources>

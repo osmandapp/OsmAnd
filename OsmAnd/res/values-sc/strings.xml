@@ -1796,4 +1796,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="download_tab_downloads">Iscarrigàbiles</string>
     <string name="download_tab_updates">Agiornamentos</string>
     <string name="download_tab_local">Iscarrigadas</string>
-	</resources>
+	<string name="navigate_point_zone">Zona</string>
+    <string name="navigate_point_northing">In diretzione Nord</string>
+    <string name="navigate_point_easting">In diretzione Est</string>
+    </resources>

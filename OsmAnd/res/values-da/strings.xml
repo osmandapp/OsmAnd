@@ -1455,7 +1455,7 @@
     <string name="routing_preferences_descr">Indstillinger for ruteplanlægning</string>
     <string name="app_mode_truck">Lastbil</string>
     <string name="calculate_osmand_route_gpx">Beregn OsmAnd offline rute</string>
-    <string name="application_dir_change_warning2">"Skal OsmAnd også  kopiere datafiler til den nye placering?"</string>
+    <string name="application_dir_change_warning2">"Skal OsmAnd også kopiere datafiler til den nye placering? Vælg \'Nej\' hvis OsmAnd kun skal oprette og bruge den nye  mappe."</string>
     <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til den ny placering...</string>
     <string name="copying_osmand_files_descr">Kopierer OsmAnd datafiler til ny destination (%s)</string>
     <string name="copying_osmand_files">Kopierer OsmAnd datafiler</string>
@@ -1859,4 +1859,7 @@
     <string name="download_tab_downloads">Hent</string>
     <string name="download_tab_updates">Opdater</string>
     <string name="download_tab_local">Lokal</string>
-	</resources>
+	<string name="navigate_point_zone">Zone</string>
+    <string name="navigate_point_northing">Nordlig</string>
+    <string name="navigate_point_easting">Østlig</string>
+    </resources>
