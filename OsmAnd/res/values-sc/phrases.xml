@@ -488,4 +488,41 @@
 	<string name="poi_power_substation">Sutaistatzione</string>
 	<string name="poi_post_box">Casseta postale</string>
 	<string name="poi_pitch">Pitch</string>
+	<string name="poi_occupational_therapist">Terapèuta ocupatzionale</string>
+	<string name="poi_leisure_track">Pista pro isports</string>
+	<string name="poi_raceway">Tzircùitu automobilìsticu</string>
+	<string name="poi_9pin">Nine pin bowling</string>
+	<string name="poi_10pin">Ten pin bowling</string>
+	<string name="poi_base">Base jumping</string>
+	<string name="poi_bowls">Bowls</string>
+	<string name="poi_climbing">Aperrinzada</string>
+	<string name="poi_diving">Imbèrghidas</string>
+	<string name="poi_scuba_diving">Imbèrghidas in suta de s\'abba</string>
+	<string name="poi_orienteering">Orientamentu (isport)</string>
+	<string name="poi_paragliding">Parapendiu</string>
+	<string name="poi_table_tennis">Tennis da mesa</string>
+	<string name="poi_hot_spring">Mitza de abba caente</string>
+	<string name="poi_resort">Bidditzolu turìsticu</string>
+
+	<string name="poi_club_ethnic">Assòtziu ètnicu</string>
+	<string name="poi_club_nature">Assòtziu naturalìsticu</string>
+	<string name="poi_club_charity">Assòtziu de caridade</string>
+
+	<string name="poi_stripclub">Locale de ispogiamentos (Stripclub)</string>
+	<string name="poi_beach_resort">Istabilimentu balneare</string>
+	<string name="poi_dog_park">Parcu pro sos canes</string>
+	<string name="poi_fishing_place">Logu pro piscare</string>
+	<string name="poi_miniature_golf">Mini golf</string>
+	<string name="poi_biergarten">Giardinu de sa birra (Biergarten)</string>
+	<string name="poi_fast_food">Fast food</string>
+	<string name="poi_caterer">Servìtziu de ristorazione</string>
+	<string name="poi_rigger">Atrezadura pro barcas a vela</string>
+	<string name="poi_roofer">Fraigadura e acontzamentu de cobertas</string>
+	<string name="poi_stand_builder">Ammàniu de bancos de bèndida</string>
+	<string name="poi_watchmaker">Relogiàiu</string>
+	<string name="poi_window_construction">Fraigadura de bentanas</string>
+
+	<string name="poi_toilets">Bagnu</string>
+	<string name="poi_currencyexchange">Cambiadore de valutas</string>
+	<string name="poi_accountant">Istùdiu contàbile</string>
 	</resources>
