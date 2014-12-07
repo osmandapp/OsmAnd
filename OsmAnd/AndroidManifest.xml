@@ -54,7 +54,8 @@
 		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W" android:resource="@dimen/app_minimumsize_w" android:value="" />
 		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H" android:resource="@dimen/app_minimumsize_h" android:value="" />
 		<meta-data android:name="com.sec.minimode.icon.portrait.normal" android:resource="@drawable/icon" android:value="" />
-		<meta-data android:name="com.sec.minimode.icon.landscape.normal" android:resource="@drawable/icon" android:value="" /><activity
+		<meta-data android:name="com.sec.minimode.icon.landscape.normal" android:resource="@drawable/icon" android:value="" />
+	<activity
             android:name="net.osmand.plus.activities.MainMenuActivity"
             android:label="@string/app_name" >
         </activity>
