@@ -304,7 +304,7 @@
   <string name="show_more_map_detail_descr">Показывать детали (дороги и др.), начиная с мелких масштабов</string>
   <string name="favourites_delete_multiple_succesful">Избранные точки удалены.</string>
   <string name="favorite_delete_multiple">Вы собираетесь удалить %1$d избранных и %2$d групп. Вы уверены?</string>
-  <string name="favorite_home_category">Дома</string>
+  <string name="favorite_home_category">Дом</string>
   <string name="favorite_friends_category">Друзья</string>
   <string name="favorite_places_category">Места</string>
   <string name="favorite_default_category">Другое</string>
