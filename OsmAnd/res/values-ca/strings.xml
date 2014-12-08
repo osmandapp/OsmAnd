@@ -1349,7 +1349,7 @@
     <string name="android_19_location_disabled">"Des de la versió 4.4 d\'Android (KitKat) no es pot descarregar i actualitzar després els  mapes a la mateixa carpeta (%s). Voleu canviar-la a un altre lloc permès i copiar-hi tots els arxius OsmAnd?
 \n Nota 1: Els vostres arxius obsolets  quedaran intactes (els podeu esborrar manualment).
 \n Nota 2: En el nou lloc d\'emmagatzemament no serà possible compartir arxius entre l\'OsmAnd i l\'OsmAnd+."</string>
-    <string name="application_dir_change_warning2">Voleu que l\'OsmAnd també copiï els seus arxius de dades a la nova destinació?</string>
+    <string name="application_dir_change_warning2">Voleu que l\'OsmAnd també copiï els seus arxius de dades a la nova destinació? Indiqueu \'No\' i l\'OsmAnd crearà i utilitzarà una carpeta nova.</string>
     <string name="copying_osmand_one_file_descr">S\'està copiant el fitxer (%s) a la nova destinació...</string>
     <string name="copying_osmand_files_descr">S\'estan copiant els fitxers de dades de l\'OsmAnd a la nova destinació (%s)</string>
     <string name="copying_osmand_files">S\'estan copiant fitxers de dades de l\'OsmAnd</string>
@@ -1910,4 +1910,9 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="download_tab_downloads">Baixades</string>
     <string name="download_tab_updates">Actualitzacions</string>
     <string name="download_tab_local">Local</string>
-	</resources>
+	<string name="map_locale">Llengua del mapa</string>
+    <string name="rendering_attr_transportStops_name">Parades del transport</string>
+    <string name="navigate_point_zone">Àrea</string>
+    <string name="navigate_point_northing">Coordenada y</string>
+    <string name="navigate_point_easting">Abscissa</string>
+    </resources>
