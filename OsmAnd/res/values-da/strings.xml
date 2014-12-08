@@ -1862,4 +1862,5 @@
 	<string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_northing">Nordlig</string>
     <string name="navigate_point_easting">Østlig</string>
+    <string name="map_locale">Sprog på kort</string>
     </resources>
