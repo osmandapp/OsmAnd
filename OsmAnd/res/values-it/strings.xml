@@ -2047,4 +2047,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="navigate_point_easting">In direzione Est</string>
     <string name="map_locale">Lingua della mappa</string>
     <string name="rendering_attr_transportStops_name">Fermate mezzi pubblici</string>
-    </resources>
+    <string name="voices">Suggerimenti vocali</string>
+	</resources>
