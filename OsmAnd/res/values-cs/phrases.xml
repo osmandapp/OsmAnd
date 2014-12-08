@@ -14,11 +14,11 @@
 	<string name="poi_bicycle_shop"/>
 	<string name="poi_anime_shop"/>
 	<string name="poi_antiques_shop">Starožitnosti</string>
-	<string name="poi_art_shop"/>
+	<string name="poi_art_shop">Obchod uměním</string>
 	<string name="poi_baby_goods">Dětské zboží</string>
 	<string name="poi_bag_shop"/>
-	<string name="poi_bathroom_furnishing_shop"/>
-	<string name="poi_bed_shop"/>
+	<string name="poi_bathroom_furnishing_shop">Vybavení koupelen</string>
+	<string name="poi_bed_shop">Vybavení ložnic</string>
 	<string name="poi_boutique">Módní butik</string>
 	<string name="poi_carpet_shop"/>
 	<string name="poi_chemist_shop">Drogerie</string>
@@ -212,4 +212,7 @@
 	<string name="poi_newsagent_shop">Zpravodajská agentura</string>
 	<string name="poi_stationery_shop">Kancelářské potřeby</string>
 	<string name="poi_trade_shop">Obchodní místo</string>
+	<string name="poi_palaeontological_site">Paleontologické naleziště</string>
+
+	<string name="poi_ice_cream">Zmrzlinářství</string>
 	</resources>
