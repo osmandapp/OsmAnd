@@ -1785,4 +1785,12 @@ s často kladenými otázkami.</string>
     <string name="use_opengl_render_descr">Použít hardwarově akcelerované renderování pomocí OpenGL (nemusí fungovat na všech zařízeních)</string>
     <string name="error_avoid_specific_road">Nebyla nalezena nejbližší silnice</string>
     <string name="no_internet_connection">Není možné stáhnout. Prosím připojte se na Wi-Fi, aby bylo možné pokračovat.</string>
+    <string name="map_locale">Jazyk map</string>
+    <string name="rendering_attr_transportStops_name">Dopravní zastávky</string>
+    <string name="navigate_point_zone">Zóna</string>
+    <string name="download_tab_downloads">Stahování</string>
+    <string name="download_tab_updates">Aktualizace</string>
+    <string name="download_tab_local">Lokální</string>
+	<string name="navigate_point_northing">Souřadnice Y</string>
+    <string name="navigate_point_easting">Souřadnice X</string>
     </resources>
