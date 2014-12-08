@@ -560,7 +560,7 @@
     <string name="route_descr_map_location">Map: </string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
     <string name="route_descr_current_location">Current position</string>
-    <string name="route_descr_destination"></string>
+    <string name="route_descr_destination">Destination</string>
     <string name="route_to">To:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">From:</string>
