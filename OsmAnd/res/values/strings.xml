@@ -1519,7 +1519,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_indexes_cat_voice">Voice data (recorded)</string>
 	<string name="local_indexes_cat_gpx">GPX data</string>
 	<string name="local_indexes_cat_poi">POI data</string>
-	<string name="ttsvoice">TTS Voice</string>
+	<string name="ttsvoice">TTS voice</string>
 	<string name="search_offline_clear_search">New Search</string>
 	<string name="map_text_size_descr">Select text size for names on the map</string>
 	<string name="map_text_size">Map font size</string>
@@ -1710,7 +1710,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="transport_search_none">none</string>
 	<string name="transport_search_again">Reset Transportation search</string>
 	<string name="map_index">Map</string>
-	<string name="voice">Voice</string>
+	<string name="voice">Recorded voice</string>
+	<string name="voices">Voice packs</string>
 	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
 	<string name="map_route_by_gpx">Navigate using GPX</string>
 	<string name="gpx_files_not_found">No GPX files found in the tracks folder</string>

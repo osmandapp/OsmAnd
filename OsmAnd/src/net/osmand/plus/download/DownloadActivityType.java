@@ -30,7 +30,7 @@ public class DownloadActivityType {
 	private static Map<String, DownloadActivityType> byTag = new HashMap<String, DownloadActivityType>();
 	
 	public static final DownloadActivityType NORMAL_FILE = new DownloadActivityType(R.string.download_regular_maps, "map");
-	public static final DownloadActivityType VOICE_FILE = new DownloadActivityType(R.string.voice, "voice");
+	public static final DownloadActivityType VOICE_FILE = new DownloadActivityType(R.string.voices, "voice");
 	public static final DownloadActivityType ROADS_FILE = new DownloadActivityType(R.string.download_roads_only_maps, "road_map");
 	public static final DownloadActivityType SRTM_COUNTRY_FILE  = new DownloadActivityType(R.string.download_srtm_maps, "srtm_map"); 
 	public static final DownloadActivityType HILLSHADE_FILE = new DownloadActivityType(R.string.download_hillshade_maps, "hillshade");
