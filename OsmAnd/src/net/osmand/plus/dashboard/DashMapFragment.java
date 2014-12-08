@@ -17,7 +17,7 @@ import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.DashboardActivity;
+import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.helpers.FontCache;
@@ -121,7 +121,7 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 
 	private void applicationInitialized(View view) {
 		view.findViewById(R.id.loading).setVisibility(View.GONE);
-		DashboardActivity dashboardActivity =((DashboardActivity)getSherlockActivity());
+		MainMenuActivity dashboardActivity =((MainMenuActivity)getSherlockActivity());
 		if (dashboardActivity != null){
 			dashboardActivity.updateDownloads();
 			view.findViewById(R.id.MapView).setVisibility(View.VISIBLE);

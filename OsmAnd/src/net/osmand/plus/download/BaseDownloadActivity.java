@@ -21,7 +21,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.DashboardActivity;
+import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import android.app.AlertDialog;
@@ -212,7 +212,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 					t.setInterrupted(true);
 				}
 				// list of items to download need to be cleared in case of dashboard activity
-				if (BaseDownloadActivity.this instanceof DashboardActivity) {
+				if (BaseDownloadActivity.this instanceof MainMenuActivity) {
 					getEntriesToDownload().clear();
 				}
 			}
