@@ -863,7 +863,8 @@
 	<string name="transport_search_none">kein</string>
 	<string name="transport_search_again">ÖPNV-Suche zurücksetzen</string>
 	<string name="map_index">Karte</string>
-	<string name="voice">Ansagen</string>
+	<string name="voices">Sprachansagen</string>
+	<string name="voice">Sprachansage</string>
 	<string name="no_vector_map_loaded">Offline-Daten wurden nicht geladen</string>
 	<string name="map_route_by_gpx">Navigation mittels GPX</string>
 	<string name="layer_gpx_layer">GPX-Track…</string>
