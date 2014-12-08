@@ -49,7 +49,7 @@ public class ConfigureMapMenu {
 
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						ma.getMapActions().prepareStartOptionsMenu();
+						ma.getMapActions().onDrawerBack();
 						return false;
 					}
 				}).reg();
