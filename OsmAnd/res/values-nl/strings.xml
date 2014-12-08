@@ -444,7 +444,7 @@
   <string name="indexing_address">Adres wordt geïndexeerd…</string>
   <string name="indexing_map">Kaart wordt geïndexeerd…</string>
   <string name="indexing_poi">Interessepunten worden geïndexeerd…</string>
-  <string name="indexing_transport">Vervoer wordt geïndexeerd…</string>
+  <string name="indexing_transport">OV wordt geïndexeerd…</string>
   <string name="input_output_error">Datatransportfout opgetreden</string>
   <string name="km">km</string>
   <string name="km_h">km/u</string>
@@ -513,7 +513,7 @@
   <string name="unknown_location">Positie nog niet bekend</string>
   <string name="download_files">Download</string>
   <string name="context_menu_item_search_transport">Zoek openbaar vervoer</string>
-  <string name="transport_searching_transport">Vervoer resultaten (geen bestemming):</string>
+  <string name="transport_searching_transport">Openbaar vervoer-resultaten (geen bestemming):</string>
   <string name="transport_searching_route">Vervoer resultaten ({0} naar bestemming):</string>
   <string name="transport_search_none">geen</string>
   <string name="transport_search_again">Opnieuw OV zoeken</string>
@@ -1973,7 +1973,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="print_route">Route afdrukken</string>
     <string name="speed_limit_exceed">Te hoge snelheid melden bij...</string>
 	<string name="speed_limit_exceed_message">Hoeveel de maximumsnelheid mag worden overschreden voordat een melding volgt.</string>
-	<string name="rendering_category_transport">Vervoer</string>
+	<string name="rendering_category_transport">Openbaar vervoer</string>
     <string name="rendering_category_others">Overige kaart attributen</string>
     <string name="map_widget_appearance_rem">Resterende onderdelen</string>
     <string name="map_widget_top">Statusbalk</string>
