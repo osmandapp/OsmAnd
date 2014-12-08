@@ -1368,7 +1368,7 @@
 	<string name="recording_can_not_be_played">Aufnahme kann nicht abgespielt werden</string>
 	<string name="recording_context_menu_delete">Aufnahme löschen</string>
 
-	<string name="layer_recordings">Aufnahme-Ebene</string>
+	<string name="layer_recordings">Audio/Video-Notizen</string>
 	<string name="map_widget_av_notes">Audio/Video-Notiz</string>
 	<string name="osmand_srtm_short_description_80_chars">OsmAnd-Plugin für Offline-Höhenlinien</string>
 	<string name="map_widget_distancemeasurement">Entfernungsmessung</string>
