@@ -320,7 +320,7 @@
   <string name="foot">ft</string>
   <string name="mile_per_hour">mph</string>
   <string name="mile">mi</string>
-  <string name="send_location_way_choose_title">Partager un point en utilisant</string>
+  <string name="send_location_way_choose_title">Partager ce point en utilisant</string>
   <string name="send_location_sms_pattern">Position : %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Pour voir ce point, ouvrez le lien web %1$s ou Android %2$s</string>
   <string name="send_location">Envoyer le point</string>
