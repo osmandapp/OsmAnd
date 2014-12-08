@@ -337,7 +337,7 @@
 <string name="search_osm_offline">Cerca l\'adreça utilitzant mapes fora de línia</string>
 <string name="system_locale">Sistema</string>
 <string name="tip_navigation">Navegació</string>
-<string name="tip_initial">Suport</string>
+<string name="tip_initial">Ajuda</string>
 <string name="next_button">Endavant</string>
 <string name="previous_button">Enrere</string>
 <string name="unit_of_length_descr">Canvieu les unitats de longitud i velocitat</string>
@@ -466,7 +466,7 @@
 <string name="settings">Configuració</string>
 <string name="data_settings">Dades</string>
 <string name="close">Tanca</string>
-<string name="update_existing">Reemplaçar</string>
+<string name="update_existing">Reemplaça</string>
 <string name="follow">Inicia la navegació</string>
 <string name="address">Adreça</string>
 <string name="search_online_address">Internet</string>
@@ -486,7 +486,7 @@
 <string name="clear_all">Neteja-ho tot</string>
 <string name="recalculate_route_to_your_location">Mitjà de transport:</string>
 <string name="use_short_object_names_descr">Utilitza el nom curt dels objectes en el mode d\'exploració tàctil</string>
-<string name="amenity_type_user_defined">Usuari definit</string>
+<string name="amenity_type_user_defined">Definit per l\'usuari</string>
 <string name="tip_osm_improve">Millora de les dades d\'OSM</string>
 
 <string name="choose_auto_follow_route">Visualització del mapa centrada automàticament</string>
@@ -553,7 +553,7 @@
 <string name="search_offline_address">Fora de línia</string>
 <string name="download_index_success">Baixada amb èxit</string>
 
-<string name="show_poi_on_map">Mostrar al mapa</string>
+<string name="show_poi_on_map">Mostra al mapa</string>
 <string name="show_gps_status">Mostra l\'estat del GPS</string>
 <string name="opening_hours">Horari d\'obertura</string>
 <string name="poi">PDI</string>
@@ -670,15 +670,15 @@
 <string name="error_calculating_route">S\'ha produït un error en calcular la ruta</string>
 <string name="loading_postcodes">S\'estan carregant els codis postals…</string>
 <string name="arrived_at_destination">Heu arribat a la vostra destinació</string>
-<string name="invalid_locations">Les coordenades no són vàlides !</string>
+<string name="invalid_locations">Les coordenades no són vàlides!</string>
 <string name="saving_gpx_tracks">S\'estan desant els seguiments GPX a la SD…</string>
-<string name="download_indexes">Baixar dades fora de linía</string>
+<string name="download_indexes">Baixa dades fora de línia</string>
 <string name="osm_settings">Edició d\'OSM</string>
 <string name="save_track_interval">Interval d\'enregistrament durant la navegació</string>
 <string name="additional_settings">Preferències addicionals</string>
-<string name="data_settings_descr">Especifiqueu la llengua, baixeu/recarregueu dades</string>
-<string name="use_online_routing">Usa navegació en linía</string>
-<string name="save_current_track_descr">Guardeu el seguiment actual a la SD en aquest moment</string>
+<string name="data_settings_descr">Especifiqueu la llengua, baixeu / torneu a carregar les dades</string>
+<string name="use_online_routing">Utilitza la navegació en línia</string>
+<string name="save_current_track_descr">Deseu la traça actual a la SD en aquest moment</string>
 <string name="add_to_favourite">Afegeix a Preferits</string>
 <string name="ChooseCountry">Trieu el país</string>
 <string name="choose_street">Trieu el carrer</string>
@@ -906,12 +906,12 @@
 	<string name="download_question">Voleu baixar {0} - {1} ?</string>
 	<string name="download_question_exist">Ja existeixen dades fora de línia per {0} ({1}). Voleu actualitzar-les ({2}) ?</string>
 	<string name="fav_points_edited">S\'ha editat un punt preferit</string>
-	<string name="only_show">Només mostra</string>
+	<string name="only_show">Mostra la ruta</string>
 	<string name="mark_final_location_first">Primer de tot cal que seleccioneu una destinació</string>
 	<string name="auth_failed">Ha fallat l\'autorització</string>
 	<string name="loading_streets_buildings">S\'estan carregant els carrers/edificis…</string>
 	<string name="error_calculating_route_occured">S\'ha produït un error en calcular la ruta</string>
-	<string name="empty_route_calculated">Error: La ruta calculada és buida</string>					
+	<string name="empty_route_calculated">S\'ha produït un error: la ruta calculada és buida</string>					
 	<string name="go_back_to_osmand">Torna enrere al mapa de l\'OsmAnd</string>
 	<string name="reading_indexes">S\'estan llegint les dades locals…</string>
 	<string name="download_indexes_descr">Baixeu o actualitzeu dades des d\'Internet pel seu ús fora de línia</string>
@@ -1147,7 +1147,7 @@
     <string name="support_new_features_descr">Feu un donatiu per veure noves funcionalitats implementades a l\'aplicació</string>
 	<string name="direction_style_sidewise">Lateral (8 sectors)</string>
 	<string name="direction_style_clockwise">Sentit horari (12 sectors)</string>
-	<string name="sd_dir_not_accessible">La carpeta d\'emmagatzematge a la targeta SD no és accessible</string>
+	<string name="sd_dir_not_accessible">La carpeta d\'emmagatzematge a la targeta SD no és accessible!</string>
 	<string name="please_select_address">Seleccioneu primer un municipi o carrer</string>
     <string name="search_street_in_neighborhood_cities">Cerca el carrer en els municipis propers</string>
     <string name="intermediate_items_sort_by_distance">Ordre (porta a porta)</string>
@@ -1349,7 +1349,7 @@
     <string name="android_19_location_disabled">"Des de la versió 4.4 d\'Android (KitKat) no es pot descarregar i actualitzar després els  mapes a la mateixa carpeta (%s). Voleu canviar-la a un altre lloc permès i copiar-hi tots els arxius OsmAnd?
 \n Nota 1: Els vostres arxius obsolets  quedaran intactes (els podeu esborrar manualment).
 \n Nota 2: En el nou lloc d\'emmagatzemament no serà possible compartir arxius entre l\'OsmAnd i l\'OsmAnd+."</string>
-    <string name="application_dir_change_warning2">Voleu que l\'OsmAnd també copiï els seus arxius de dades a la nova destinació?</string>
+    <string name="application_dir_change_warning2">Voleu que l\'OsmAnd també copiï els seus arxius de dades a la nova destinació? Indiqueu «No» i l\'OsmAnd crearà i utilitzarà una carpeta nova.</string>
     <string name="copying_osmand_one_file_descr">S\'està copiant el fitxer (%s) a la nova destinació...</string>
     <string name="copying_osmand_files_descr">S\'estan copiant els fitxers de dades de l\'OsmAnd a la nova destinació (%s)</string>
     <string name="copying_osmand_files">S\'estan copiant fitxers de dades de l\'OsmAnd</string>
@@ -1385,7 +1385,7 @@
 	<string name="poi_error_unexpected_template">S\'ha produït un error inesperat en fer l\'acció {0}.</string>
 	<string name="osb_close_dialog_error">S\'ha produït una excepció: no s\'ha tancat l\'error</string>
 	<string name="map_tile_source_descr">Trieu l\'origen de les tessel·les, en línia o de la memòria cau</string>
-	<string name="previous_run_crashed">La darrera execució d\'OsmAnd s\'ha estavellat. El fitxer log és a {0}. Si us plau informeu del problema i adjunteu el fitxer log.</string>
+	<string name="previous_run_crashed">La darrera execució de l\'OsmAnd ha fallat. El fitxer log és a {0}. Si us plau informeu del problema i adjunteu el fitxer log.</string>
 	<string name="transport_stop_to_go_out">Trieu aturada per sortir</string>
 	<string name="route_head">Endavant</string>
 	<string name="off_router_service_no_gps_available">El servei de navegació en segon pla necessita tenir un sistema d\'ubicació activat.</string>
@@ -1614,8 +1614,7 @@ Mapa aproximat de la cobertura i qualitat:
 
 La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, Alemanya, Antilles Holandeses, Algèria, Andorra, Angola, Anguila, Antigua i Barbados, Aràbia Saudita, Argentina, Armènia, Aruba, Austràlia, Àustria, Azerbaidjan, Bahames, Bahrain, Bangladesh, Barbados, Bèlgica, Belize, Benín, Bermuda, Bielorússia, Butà, Bolívia, Bonaire, Bòsnia i Hercegovina, Botswana, Brasil, Illes Verges Britàniques, Brunei, Bulgària, Burkina Faso, Burundi, Cambotja, Camerun, Canadà, Cap Vert, República Centreafricana, Txad, Xile, Xina, Xipre, Colòmbia, Comores, Congo, Costa de Marfil, Costa Rica, Croàcia, Cuba, Curaçao, Dinamarca, Djibouti, Dominica, Equador, Egipte, El Salvador, El Vaticà, Emirats Àrabs Units, Eritrea, Eslovàquia, Eslovènia, Espanya, Estats Units d\'Amèrica, Estònia, Etiòpia, Fiji, Filipines, Finlàndia, França, Guyana Francesa, Gabó, Gàmbia, Geòrgia, Geòrgia del Sud, Ghana, Gibraltar, Grècia, Granada, Groenlàndia, Guadalupe, Guam, Guatemala, Guernsey, Guinea, Guinea Ecuatorial, Guinea-Bissau, Guyana, Haití, Hondures, Hong Kong, Hongria, Índia, Indonèsia, Iran, Iraq, Irlanda, Illa de Man, Islàndia, Israel, Itàlia, Jamaica, Japó, Jersei, Jordània, Kazakhstan, Kenya, Kiribati, Corea del Nord i Corea del Sud, Kuwait, Kirguizistan, Laos, Letònia, Lesotho, Líban, Libèria, Líbia, Liechtenstein, Lituània, Luxemburg, Macau, Macedònia, Madagascar, Malaïsia, Malawi, Maldives, Mali, Malta, Marroc, Martinica, Maurici, Mauritània, Mayotte, Mèxic, Micronèsia, Moldàvia, Mònaco, Mongòlia, Montenegro, Montserrat, Moçambic, Myanmar, Namíbia, Nauru, Nepal, Nicaragua, Níger, Nigèria, Noruega, Nova Caledònia, Nova Zelanda, Oman, Països Baixos, Pakistan, Palau, Panamà, Papua Nova Guinea, Paraguai, Perú, Polinèsia Francesa, Polònia, Portugal, Puerto Rico, Qatar, Regne Unit, República Txeca, República Dominicana, Romania, Rússia, Ruanda, Sàhara Occidental, Saint-Barthelemy, Santa Helena, Saint Kitts i Nevis, Samoa, San Martí, San Pere i Miqueló, Sant Vicenç i les Granadines, San Marino, Santa Lucia, Senegal, Sèrbia, Seychelles, Serra Lleona, Singapur, Síria, Somàlia, Sud-àfrica, Sudan, Sudan del Sur, Surinam, Sri Lanka, Suècia, Suïssa, Swazilàndia, Tailàndia, Taiwan, Tanzània, Tadjikistan, Territori Palestí, Timor Oriental, Togo, Tokelau, Tonga, Trinitat i Tobago, Tunis, Turkmenistan, Turquia, Tuvalu, Ucraïna, Uganda, Uruguai, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis i Futuna, Iemen, Zàmbia, Zimbabwe.↵
 	</string>
-	<string name="route_descr_destination">
-</string>
+	<string name="route_descr_destination">Destí</string>
     <string name="share_fav">Compartir</string>
 	<string name="share_fav_subject">Favorits compartits via OsmAnd</string>
 	<string name="use_points_as_intermediates">Calcula la ruta entre punts</string>
@@ -1746,7 +1745,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="none_selected_gpx">Cap arxiu GPX seleccionat. Per seleccionar-ne un premeu i mantingueu sobre una traça disponible.</string>
     <string name="local_index_unselect_gpx_file">Desselecciona</string>
     <string name="local_index_select_gpx_file">Selecciona per mostrar</string>
-    <string name="no_index_file_to_download">No s\'ha trobat res per baixar, verifiqueu la connexió a internet.</string>
+    <string name="no_index_file_to_download">No s\'ha trobat res per baixar, verifiqueu la connexió a Internet.</string>
     <string name="osmo_gpx_points_downloaded">S\'han baixat %1$s punts OsMo.</string>
     <string name="osmo_auto_connect_descr">Connecta automàticament amb el servei desprès d\'iniciar l\'aplicació</string>
     <string name="osmo_auto_connect">Connexió automàtica</string>
@@ -1827,7 +1826,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="flat_list_waypoitns">Totes</string>
     <string name="waypoints">Fites</string>
     <string name="targets">Destinacions</string>
-    <string name="way_alarms">Notificacions de tràfic</string>
+    <string name="way_alarms">Notificacions de trànsit</string>
     <string name="speak_favorites">Indica els preferits propers</string>
     <string name="speak_poi">Indica els PDI propers</string>
     <string name="index_tours">Itineraris</string>
@@ -1907,7 +1906,13 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="everything_up_to_date">Tot està actualitzat</string>
     <string name="dismiss">Descarta</string>
     <string name="no_internet_connection">No s\'ha pogut baixar. Connecteu la Wi-Fi per continuar.</string>
-    <string name="download_tab_downloads">Baixades</string>
+    <string name="download_tab_downloads">Totes les baixades</string>
     <string name="download_tab_updates">Actualitzacions</string>
     <string name="download_tab_local">Local</string>
+	<string name="map_locale">Llengua del mapa</string>
+    <string name="rendering_attr_transportStops_name">Parades del transport</string>
+    <string name="navigate_point_zone">Àrea</string>
+    <string name="navigate_point_northing">Ordenada</string>
+    <string name="navigate_point_easting">Abscissa</string>
+    <string name="voices">Paquets de veu</string>
 	</resources>

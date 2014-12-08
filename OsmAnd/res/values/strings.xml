@@ -15,7 +15,7 @@
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_northing">Northing</string>
     <string name="navigate_point_easting">Easting</string>
-    <string name="download_tab_downloads">Downloads</string>
+    <string name="download_tab_downloads">All&#160;Downloads</string>
     <string name="download_tab_updates">Updates</string>
     <string name="download_tab_local">Local</string>
 	<string name="no_internet_connection">Not possible to download. Please connect to Wi-Fi to proceed.</string>
@@ -560,7 +560,7 @@
     <string name="route_descr_map_location">Map: </string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
     <string name="route_descr_current_location">Current position</string>
-    <string name="route_descr_destination"></string>
+    <string name="route_descr_destination">Destination</string>
     <string name="route_to">To:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">From:</string>
@@ -1350,8 +1350,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="index_name_oceania">Oceania</string>
 	<string name="index_name_other">Worldwide and topic maps</string>
 	<string name="index_name_wiki">Worldwide Wikipedia POIs</string>
-	<string name="index_name_voice">Voice packs (recorded, limited features)</string>
-	<string name="index_name_tts_voice">Voice packs (TTS-synthesized, prefer)</string>
+	<string name="index_name_voice">Voice prompts (recorded, limited features)</string>
+	<string name="index_name_tts_voice">Voice prompts (TTS-synthesized, prefer)</string>
 	<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">User defined</string>
 	<string name="fav_export_confirmation">File with previously exported favorites already exists. Do you want to replace it?</string>
@@ -1519,7 +1519,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_indexes_cat_voice">Voice data (recorded)</string>
 	<string name="local_indexes_cat_gpx">GPX data</string>
 	<string name="local_indexes_cat_poi">POI data</string>
-	<string name="ttsvoice">TTS Voice</string>
+	<string name="ttsvoice">TTS voice</string>
 	<string name="search_offline_clear_search">New Search</string>
 	<string name="map_text_size_descr">Select text size for names on the map</string>
 	<string name="map_text_size">Map font size</string>
@@ -1670,7 +1670,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="loading_builds">Loading OsmAnd builds&#8230;</string>
 	<string name="select_build_to_install">Select an OsmAnd build to install</string>
 	<string name="gps_status_app_not_found">GPS Status application not installed. Search in Market?</string>
-	<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferred voice data package, and download it.</string>
+	<string name="voice_is_not_available_msg">No voice guidance available, please go to the Navigation Settings and select or download a voice prompt package.</string>
 	<string name="voice_is_not_available_title">No voice guidance selected</string>
 	<string name="daynight_mode_day">Day</string>
 	<string name="daynight_mode_night">Night</string>
@@ -1710,7 +1710,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="transport_search_none">none</string>
 	<string name="transport_search_again">Reset Transportation search</string>
 	<string name="map_index">Map</string>
-	<string name="voice">Voice</string>
+	<string name="voice">Recorded voice</string>
+	<string name="voices">Voice prompts</string>
 	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
 	<string name="map_route_by_gpx">Navigate using GPX</string>
 	<string name="gpx_files_not_found">No GPX files found in the tracks folder</string>
@@ -1847,7 +1848,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
 	<string name="router_service_descr">Choose an online or offline navigation service</string>
 	<string name="router_service">Navigation service</string>
-	<string name="sd_dir_not_accessible">The data storage folder on the SD card is not accessible</string>
+	<string name="sd_dir_not_accessible">The data storage folder on the SD card is not accessible!</string>
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Address</string>

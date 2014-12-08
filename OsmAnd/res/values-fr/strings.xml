@@ -320,7 +320,7 @@
   <string name="foot">ft</string>
   <string name="mile_per_hour">mph</string>
   <string name="mile">mi</string>
-  <string name="send_location_way_choose_title">Partager un point en utilisant</string>
+  <string name="send_location_way_choose_title">Partager ce point en utilisant</string>
   <string name="send_location_sms_pattern">Position : %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Pour voir ce point, ouvrez le lien web %1$s ou Android %2$s</string>
   <string name="send_location">Envoyer le point</string>
@@ -568,7 +568,7 @@
   <string name="route_general_information">Distance totale : %1$s, durée estimée : %2$d h %3$d m.</string>
   <string name="router_service_descr">Sélectionner un service de navigation, hors-ligne ou en ligne</string>
   <string name="router_service">Service de navigation</string>
-  <string name="sd_dir_not_accessible">Le dossier données de la carte SD est inaccessible</string>
+  <string name="sd_dir_not_accessible">Le dossier contenant les données sur la carte SD est inaccessible !</string>
   <string name="download_question">Voulez-vous télécharger {0} - {1} ?</string>
   <string name="download_question_exist">les données pour {0} existent déjà ({1}). Voulez-vous les mettre à jour ({2}) ?</string>
   <string name="address">Adresse</string>
@@ -1872,10 +1872,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="everything_up_to_date">Vous disposez de la dernière version</string>
     <string name="dismiss">Ignorer</string>
     <string name="no_internet_connection">Téléchargement impossible. Merci de vous connecter en Wifi.</string>
-    <string name="download_tab_downloads">Téléchargements</string>
+    <string name="download_tab_downloads">Tous les téléchargements</string>
     <string name="download_tab_updates">Mises à jour</string>
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_easting">Abscisse</string>
     <string name="navigate_point_northing">Ordonnée</string>
     <string name="download_tab_local">Local</string>
-	</resources>
+	<string name="map_locale">Langue pour la carte</string>
+    <string name="rendering_attr_transportStops_name">Arrêts de transports en commun</string>
+    </resources>

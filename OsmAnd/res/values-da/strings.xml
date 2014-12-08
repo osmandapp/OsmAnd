@@ -1113,7 +1113,7 @@
 	<string name="route_general_information">Total afstand %1$s, rejsetid %2$d t %3$d m.</string>
 	<string name="router_service_descr">Vælg en online eller offline navigationstjeneste</string>
 	<string name="router_service">Navigationstjeneste</string>
-	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet er ikke tilgængelig</string>
+	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet er ikke tilgængelig!</string>
 	<string name="download_question_exist">Offline-data for {0} eksisterer allerede ({1}). Opdater ({2})?</string>
 	<string name="download_question">Hent {0} - {1}?</string>
 	<string name="address">Adresse</string>
@@ -1409,7 +1409,7 @@
 \n * \'Turvisning \' kortformat, indeholder de mest detaljerede oplysninger for rejser og rejsebrug, herunder optimering for erhvervschauffører (veje der er lette at skelne og med højere kontrast), mulighed for Alpine vandring (SAC-skalaen), cykelruter, symbolsupport for vandreture mv.
 \n * \'Veje med høj kontrast\' viser veje med meget forstærkede farver til lyse omgivelser
 \n * \'Vinter og ski\' giver en visning af et (snedækket) vinterlandskab og viser globale skiløjper og lifter (hent \'World ski\' kortet) "</string>
-    <string name="route_descr_destination"> </string>
+    <string name="route_descr_destination">Destination</string>
     <string name="base_world_map">Verdensgrundkort</string>
 	
     
@@ -1862,4 +1862,6 @@
 	<string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_northing">Nordlig</string>
     <string name="navigate_point_easting">Østlig</string>
+    <string name="map_locale">Sprog på kort</string>
+    <string name="rendering_attr_transportStops_name">Stoppesteder</string>
     </resources>

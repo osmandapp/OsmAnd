@@ -14,11 +14,11 @@
 	<string name="poi_bicycle_shop"/>
 	<string name="poi_anime_shop"/>
 	<string name="poi_antiques_shop">Starožitnosti</string>
-	<string name="poi_art_shop"/>
+	<string name="poi_art_shop">Obchod uměním</string>
 	<string name="poi_baby_goods">Dětské zboží</string>
 	<string name="poi_bag_shop"/>
-	<string name="poi_bathroom_furnishing_shop"/>
-	<string name="poi_bed_shop"/>
+	<string name="poi_bathroom_furnishing_shop">Vybavení koupelen</string>
+	<string name="poi_bed_shop">Vybavení ložnic</string>
 	<string name="poi_boutique">Módní butik</string>
 	<string name="poi_carpet_shop"/>
 	<string name="poi_chemist_shop">Drogerie</string>
@@ -212,4 +212,22 @@
 	<string name="poi_newsagent_shop">Zpravodajská agentura</string>
 	<string name="poi_stationery_shop">Kancelářské potřeby</string>
 	<string name="poi_trade_shop">Obchodní místo</string>
+	<string name="poi_palaeontological_site">Paleontologické naleziště</string>
+
+	<string name="poi_ice_cream">Zmrzlinářství</string>
+	<string name="poi_gas_shop">Obchod tekutým palivem</string>
+	<string name="poi_organic_shop">Organické potraviny</string>
+	<string name="poi_second_hand">Second hand</string>
+	<string name="poi_department_store">Obchodní dům</string>
+	<string name="poi_fire_hose">Požární hadice</string>
+	<string name="poi_fire_water_pond">Požární nádrž</string>
+	<string name="poi_emergency_access_point">Záchranný přístupový bod</string>
+
+	<string name="poi_city_wall">Městská hradba</string>
+	<string name="poi_lift_gate">Zvedací brána</string>
+	<string name="poi_traffic_calming_bump">Retardér</string>
+	<string name="poi_traffic_calming_hump">Retardér</string>
+	<string name="poi_vehicle_inspection">Kontrola vozidel</string>
+	<string name="poi_parking_entrance">Vjezd parkoviště</string>
+	<string name="poi_tram_stop">Zastávka tramvaje (zastaralé)</string>
 	</resources>

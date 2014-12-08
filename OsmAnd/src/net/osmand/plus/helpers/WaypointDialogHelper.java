@@ -357,7 +357,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				if (dlg != null) {
 					dlg.dismiss();
 				} else if(a instanceof MapActivity){
-					((MapActivity) a).getMapActions().prepareStartOptionsMenu();
+					((MapActivity) a).getMapActions().onDrawerBack();
 					((MapActivity) a).getMapActions().toggleDrawer();
 				}
 			}
@@ -375,7 +375,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 					if (dlg != null) {
 						dlg.dismiss();
 					} else if(a instanceof MapActivity){
-						((MapActivity) a).getMapActions().prepareStartOptionsMenu();
+						((MapActivity) a).getMapActions().onDrawerBack();
 						((MapActivity) a).getMapActions().toggleDrawer();
 					}
 				}
@@ -527,7 +527,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
 				if (item == 0) {
-					mapActivity.getMapActions().prepareStartOptionsMenu();
+					mapActivity.getMapActions().onDrawerBack();
 				} else if (listAdapter.getItem(item) instanceof LocationPointWrapper) {
 					LocationPointWrapper ps = (LocationPointWrapper) listAdapter.getItem(item);
 					showOnMap(app, ctx, ps.getPoint(), dialog);

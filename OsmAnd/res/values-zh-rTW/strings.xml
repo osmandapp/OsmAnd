@@ -1442,7 +1442,7 @@
     <string name="guidance_preferences_descr">導航偏好</string>
     <string name="routing_preferences_descr">路線偏好</string>
     <string name="app_mode_truck">卡車</string>
-    <string name="application_dir_change_warning2">您想要將 OsmAnd 資料複製到新的目的地嗎？</string>
+    <string name="application_dir_change_warning2">您想要將 OsmAnd 資料複製到新的目的地嗎？選擇否，OsmAnd 只建立和使用新的資料夾。</string>
     <string name="copying_osmand_one_file_descr">複製檔案 (%s) 到新的目的地...</string>
     <string name="copying_osmand_files_descr">複製 OsmAnd 資料檔到新的目的地 (%s)</string>
     <string name="copying_osmand_files">複製 OsmAnd 資料檔案</string>
@@ -1850,4 +1850,6 @@
 	<string name="navigate_point_northing">北距</string>
     <string name="navigate_point_easting">東距</string>
     <string name="navigate_point_zone">地區</string>
+    <string name="map_locale">地圖上的語言</string>
+    <string name="rendering_attr_transportStops_name">候車亭</string>
     </resources>

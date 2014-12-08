@@ -562,7 +562,7 @@
   <string name="route_general_information">Distanza totale = %1$s, durata del viaggio = %2$d h %3$d m.</string>
   <string name="router_service_descr">Scegli un servizio online oppure offline di navigazione</string>
   <string name="router_service">Servizio di navigazione</string>
-  <string name="sd_dir_not_accessible">La cartella di salvataggio su SD card non è accessibile</string>
+  <string name="sd_dir_not_accessible">La cartella di salvataggio sulla SD card non è accessibile!</string>
   <string name="download_question">Scaricare {0} - {1} ?</string>
   <string name="download_question_exist">I dati offline per {0} sono già presenti ({1}). Aggiornarli ({2}) ?</string>
   <string name="address">Indirizzo</string>
@@ -1638,7 +1638,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="android_19_location_disabled">Dalla versione KitKat non è più possibile scaricare e aggiornare le mappe nel precedente indirizzo di memorizzazione (%s). Vuoi sostituirlo con quello consentito e copiare lì tutti i file?
 \n Nota: i file precedenti non verranno modificati.
 \n Nota: non sarà possibile condividere i files fra OsmAnd and OsmAnd+.</string>
-    <string name="application_dir_change_warning2">Volete che OsmAnd sposti anche i propri dati nella nuova destinazione?</string>
+    <string name="application_dir_change_warning2">Vuoi che OsmAnd sposti anche i propri dati nella nuova destinazione? Scegli \'No\' perché OsmAnd crei e utilizzi una nuova cartella.</string>
     <string name="copying_osmand_one_file_descr">Copia in corso del file (%s) nella nuova destinazione...</string>
     <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)</string>
     <string name="copying_osmand_files">Copia dei file di dati di OsmAnd</string>
@@ -2037,7 +2037,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="use_opengl_render">Utilizzare il rendering opengl</string>
     <string name="use_opengl_render_descr">Utilizzare il rendering opengl accelerato via hardware (potrebbe non funzionare in alcuni dispositivi)</string>
     <string name="everything_up_to_date">Tutto aggiornato</string>
-    <string name="dismiss">Abbandona</string>
+    <string name="dismiss">Tralascia</string>
     <string name="no_internet_connection">Non è possibile scaricare. Prego, connettersi al Wi-Fi per procedere.</string>
     <string name="download_tab_downloads">Download</string>
     <string name="download_tab_updates">Aggiornabili</string>
@@ -2045,4 +2045,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="navigate_point_zone">Zona</string>
     <string name="navigate_point_northing">In direzione Nord</string>
     <string name="navigate_point_easting">In direzione Est</string>
+    <string name="map_locale">Lingua della mappa</string>
+    <string name="rendering_attr_transportStops_name">Fermate mezzi pubblici</string>
     </resources>

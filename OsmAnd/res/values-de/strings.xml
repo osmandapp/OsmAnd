@@ -820,7 +820,7 @@
 	<string name="select_build_to_install">Auswählen eines OsmAnd-Builds für die Installation</string>
 	<string name="contribution_activity">Installations Version</string>
 	<string name="gps_status_app_not_found">Anwendung \'GPS Status\' ist nicht installiert. Soll diese installiert werden?</string>
-	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter Einstellungen ein Sprachpaket auswählen oder herunterladen.</string>
+	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte in den Navigations-Einstellungen ein Sprachansage-Paket auswählen oder herunterladen.</string>
 	<string name="voice_is_not_available_title">Keine Sprachansage ausgewählt</string>
 	<string name="daynight_mode_day">Tag</string>
 	<string name="daynight_mode_night">Nacht</string>
@@ -863,7 +863,8 @@
 	<string name="transport_search_none">kein</string>
 	<string name="transport_search_again">ÖPNV-Suche zurücksetzen</string>
 	<string name="map_index">Karte</string>
-	<string name="voice">Ansagen</string>
+	<string name="voices">Sprachansagen</string>
+	<string name="voice">Sprachansage</string>
 	<string name="no_vector_map_loaded">Offline-Daten wurden nicht geladen</string>
 	<string name="map_route_by_gpx">Navigation mittels GPX</string>
 	<string name="layer_gpx_layer">GPX-Track…</string>
@@ -1368,7 +1369,7 @@
 	<string name="recording_can_not_be_played">Aufnahme kann nicht abgespielt werden</string>
 	<string name="recording_context_menu_delete">Aufnahme löschen</string>
 
-	<string name="layer_recordings">Aufnahme-Ebene</string>
+	<string name="layer_recordings">Audio/Video-Notizen</string>
 	<string name="map_widget_av_notes">Audio/Video-Notiz</string>
 	<string name="osmand_srtm_short_description_80_chars">OsmAnd-Plugin für Offline-Höhenlinien</string>
 	<string name="map_widget_distancemeasurement">Entfernungsmessung</string>
@@ -1969,7 +1970,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
     <string name="record_plugin_description">Speichern Sie Ihre Tracks mit einem Klick. Zeigt die Einstellung, wie Strecken aufgezeichnet werden – in lokale GPX-Dateien oder online via Web-Service.</string>
-    <string name="route_descr_destination"/>
+    <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Ein Element antippen, um mehr Details zu erfahren oder antippen und halten zum Deaktivieren oder Löschen. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
     <string name="text_size">Schriftgröße</string>
@@ -1984,9 +1985,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="anonymous_user">Anonymer Benutzer</string>
     <string name="logged_as">Angemeldet als %1$s</string>
 	<string name="anonymous_user_hint">Anonyme Benutzer können nicht:\n- Gruppen bilden;\n- Gruppen und Geräte mit dem Server synchronisieren;\n- Gruppen und Geräte im Privatbereich verwalten.</string>
-    <string name="rendering_category_routes">Routen</string>
+    <string name="rendering_category_routes">ÖPNV Linien</string>
     <string name="rendering_category_details">Details</string>
-    <string name="rendering_category_transport">Routen und ÖPNV</string>
+    <string name="rendering_category_transport">ÖPNV Linien</string>
     <string name="map_widget_appearance_rem">Verbleibende Elemente</string>
     <string name="map_widget_top">Statuszeile</string>
 	<string name="map_widget_right">Rechtes Panel</string>
@@ -2004,13 +2005,13 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="impassable_road">Straße blockieren…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Straßen- und Eisenbahnlinien</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Eisenbahn-Strecken</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">Sammeltaxi-Routen</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Sammeltaxi-Linien</string>
     <string name="rendering_attr_trolleybusRoutes_name">Oberleitungsbuslinien</string>
     <string name="rendering_attr_busRoutes_name">Buslinien</string>
     <string name="rendering_category_hide">Ausblenden</string>
     <string name="lock_screen_request_explanation">%1$s benötigt diese Berechtigung, um den Bildschirm auszuschalten (Energiesparfunktion).</string>
     <string name="advanced_settings">Erweitert</string>
-    <string name="home_button">Start</string>
+    <string name="home_button">Startbildschirm</string>
     <string name="osmo_use_https_descr">Sichere Server-Verbindung verwenden</string>
     <string name="osmo_use_https">Https nutzen</string>
     <string name="map_update">Karten</string>
@@ -2024,9 +2025,14 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigte OpenGL-Renderung verwenden (Funktioniert nicht auf allen Geräten)</string>
     <string name="no_internet_connection">Herunterladen nicht möglich. Zum Fortsetzen mit WLAN verbinden!</string>
-    <string name="download_tab_downloads">Heruntergeladen</string>
+    <string name="download_tab_downloads">Alle&#160;Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
     <string name="wake_on_voice">Bildschirm aktivieren</string>
     <string name="wake_on_voice_descr">Bei Annäherung einer Richtungsänderung den Bildschirm einschalten</string>
+    <string name="map_locale">Beschriftungssprache</string>
+    <string name="rendering_attr_transportStops_name">ÖPNV Haltestellen</string>
+    <string name="navigate_point_zone">Zone</string>
+    <string name="navigate_point_northing">Nordwert</string>
+    <string name="navigate_point_easting">Ostwert</string>
     </resources>

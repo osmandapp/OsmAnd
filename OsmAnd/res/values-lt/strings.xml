@@ -760,7 +760,7 @@
   <string name="route_general_information">Visas atstumas %1$s, kelionės trukmė %2$d h %3$d m.</string>
   <string name="router_service_descr">Pasirinkti navigacijos paslaugą internete arba įrenginyje</string>
   <string name="router_service">Navigacijos paslauga</string>
-  <string name="sd_dir_not_accessible">Duomenų išsaugojimo segtuvas SD kortelėje nepasiekiamas</string>
+  <string name="sd_dir_not_accessible">Duomenų išsaugojimo segtuvas SD kortelėje nepasiekiamas!</string>
   <string name="download_question">Parsiųsti {0} - {1} ?</string>
   <string name="download_question_exist">Parsiųsti duomenys {0} jau egzistuoja ({1}). Ar norite juos atnaujinti ({2}) ?</string>
   <string name="address">Adresas</string>
@@ -1471,7 +1471,7 @@
     <string name="android_19_location_disabled">Pradedant Android 4.4 versija jūs nebegalėsite parsisųsti ir atnaujinti žemėlapių ankstesnėse saugojimo vietose (%s). Ar norite pakeisti saugyklos vietą ir į ją nukopijuoti visus failus?
 \n Pastaba: Seni failai išliks kur buvę (galima bus ištrinti rankiniu būdu).
 \n Pastaba: dalintis tais pačiais failais tarp OsmAnd ir OsmAnd+ nebus galima.</string>
-    <string name="application_dir_change_warning2">Ar norite, kad OsmAnd perkeltų duomenis ir į naują saugyklą?</string>
+    <string name="application_dir_change_warning2">Ar norite, kad OsmAnd perkeltų duomenis ir į naują saugyklą? Pasirinkite \"Ne\", jei norite, kad OsmAnd tik sukurtų ir naudotų naują folderį.</string>
     <string name="copying_osmand_one_file_descr">Kopijuojami failai (%/s) į naują saugojimo vietą...</string>
     <string name="copying_osmand_files_descr">OsmAnd failai kopijuojami į naują vietą (%/s)</string>
     <string name="copying_osmand_files">Kopijuojami OsmAnd failai</string>
@@ -1855,4 +1855,12 @@
     <string name="use_opengl_render_descr">Naudoti aparatinį OpenGL vaizdavimą (gali neveikti kai kurioje įrangoje)</string>
     <string name="everything_up_to_date">Viskas atnaujinta</string>
     <string name="no_internet_connection">Parsisiųsti nepavyko. Prašome prisijungti prie Wi-Fi, jei norite tęsti.</string>
-    </resources>
+    <string name="map_locale">Žemėlapio kalba</string>
+    <string name="rendering_attr_transportStops_name">Transporto stotelės</string>
+    <string name="navigate_point_zone">Zona</string>
+    <string name="download_tab_downloads">Atsisiuntimai</string>
+    <string name="download_tab_updates">Atnaujinimai</string>
+    <string name="navigate_point_northing">Šiaurė</string>
+    <string name="navigate_point_easting">Rytai</string>
+    <string name="download_tab_local">Vietinis</string>
+	</resources>

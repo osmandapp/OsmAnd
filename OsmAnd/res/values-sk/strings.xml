@@ -251,8 +251,8 @@
   <string name="index_name_oceania">Oceánia</string>
   <string name="index_name_other">Celosvetové a tematické mapy</string>
   <string name="index_name_wiki">Celosvetové body z Wikipedie</string>
-  <string name="index_name_voice">Hlasové balíky (nahrávky, obmedzená funkcionalita)</string>
-  <string name="index_name_tts_voice">Hlasové balíky (TTS-generované, odporúčané)</string>
+  <string name="index_name_voice">Hlasové povely (nahrávky, obmedzená funkcionalita)</string>
+  <string name="index_name_tts_voice">Hlasové povely (TTS-generované, odporúčané)</string>
   <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Užívateľský</string>
   <string name="fav_export_confirmation">Súbor s predošle exportovanými obľúbenými bodmi už existuje. Chcete ho nahradiť?</string>
@@ -567,7 +567,7 @@
   <string name="select_build_to_install">Vyberte jednu zo zostáv OsmAndu na nainštalovanie</string>
   <string name="contribution_activity">Špeciálna aktivita pre kontribútorskú verziu</string>
   <string name="gps_status_app_not_found">Aplikácia pre stav GPS nie je nainštalovaná. Nájsť ju na Markete?</string>
-  <string name="voice_is_not_available_msg">Hlasové navigovanie nie je dostupné. Prosím, choďte do nastavení a zvoľte alebo stiahnite preferované hlasové údaje.</string>
+  <string name="voice_is_not_available_msg">Hlasové navigovanie nie je dostupné, prosím choďte do nastavení a zvoľte alebo stiahnite balík hlasových povelov.</string>
   <string name="voice_is_not_available_title">Hlasové údaje nie sú určené</string>
   <string name="daynight_mode_day">Denný režim</string>
   <string name="daynight_mode_night">Nočný režim</string>
@@ -616,7 +616,7 @@
   <string name="transport_search_none">nič</string>
   <string name="transport_search_again">Hľadať znova prepravu</string>
   <string name="map_index">Mapa</string>
-  <string name="voice">Hlasové údaje</string>
+  <string name="voice">Nahrávka hlasu</string>
   <string name="no_vector_map_loaded">Vektorové mapy neboli načítané</string>
   <string name="map_route_by_gpx">Cestovať použitím GPX</string>
   <string name="gpx_files_not_found">Žiadne GPX súbory neboli nájdené v priečinku stôp</string>
@@ -757,7 +757,7 @@
   <string name="route_general_information">Celková vzdialenosť %1$s, čas cestovania %2$d h %3$d m.</string>
   <string name="router_service_descr">Výber online alebo offline navigačnej služby</string>
   <string name="router_service">Navigačná služba</string>
-  <string name="sd_dir_not_accessible">Priečinok pre uloženie na SD karte nie je prístupný</string>
+  <string name="sd_dir_not_accessible">Priečinok pre uloženie na SD karte nie je prístupný!</string>
   <string name="download_question">Stiahnuť {0} - {1} ?</string>
   <string name="download_question_exist">Offline údaje pre {0} už existujú ({1}). Chcete ich aktualizovať ({2}) ?</string>
   <string name="address">Adresa</string>
@@ -1843,7 +1843,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="none_selected_gpx">Žiadny súbor GPX nebol vybraný. Podržaním vyberte z dostupných stôp.</string>
     <string name="local_index_unselect_gpx_file">Odznačiť</string>
     <string name="local_index_select_gpx_file">Vybrať na zobrazenie</string>
-    <string name="route_descr_destination">\t</string>
+    <string name="route_descr_destination">Cieľ</string>
     <string name="no_index_file_to_download">Nenašlo sa nič na stiahnutie, prosím skontrolujte pripojenie na Internet.</string>
     <string name="osmo_gpx_points_downloaded">OsMo body %1$s stiahnuté.</string>
     <string name="osmo_auto_connect_descr">Automaticky pripojiť k zariadeniu po spustení aplikácie</string>
@@ -2004,7 +2004,12 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="use_opengl_render_descr">Použiť hardvérovo urýchľované vykresľovanie pomocou OpenGL (nemusí na niektorých zariadeniach fungovať)</string>
     <string name="no_internet_connection">Nie je možné stiahnuť. Prosím pripojte sa na Wi-Fi, aby bolo možné pokračovať.</string>
     <string name="navigate_point_zone">Zóna</string>
-    <string name="download_tab_downloads">Sťahovania</string>
+    <string name="download_tab_downloads">Všetky sťahovania</string>
     <string name="download_tab_updates">Aktualizácie</string>
     <string name="download_tab_local">Lokálne</string>
-	</resources>
+	<string name="map_locale">Jazyk mapy</string>
+    <string name="rendering_attr_transportStops_name">Zastávky verejnej dopravy</string>
+    <string name="voices">Hlasové povely</string>
+	<string name="navigate_point_northing">Vertikálna súradnica</string>
+    <string name="navigate_point_easting">Horizontálna súradnica</string>
+    </resources>

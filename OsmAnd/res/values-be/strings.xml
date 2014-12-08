@@ -1252,7 +1252,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="route_general_information">Агульная адлегласць %1$s, час у дарозе %2$d г. %3$d хв.</string>
 	<string name="router_service_descr">Абраць сеціўны ці пазасеціўны сэрвіс навігацыі</string>
 	<string name="router_service">Сэрвіс навігацыі</string>
-	<string name="sd_dir_not_accessible">Каталог на SD-карце недаступны для захоўваньня</string>
+	<string name="sd_dir_not_accessible">Каталёг на SD-карце недаступны для захоўваньня!</string>
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Лакальная карта для {0} ужо існуе ({1}). Хочаце яе абнавіць ({2})?</string>
 	<string name="address">Адрас</string>
@@ -1591,7 +1591,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_plugin_name">OsMo (Пашыранае адсочваньне ў рэальным часе)</string>
     <string name="osmo_settings">Маніторынг OpenStreetMap</string>
    	<string name="always_center_position_on_map">Паказваць становішча заўсёды ў цэнтры</string>
-    <string name="route_descr_destination"> </string>
+    <string name="route_descr_destination">Пункт прызначэньня</string>
     <string name="interrupt_music_descr">Перапыняць музыку робячы аб\'яву</string>
 	<string name="share_route_as_gpx">Падзяліцца маршрутам праз GPX файл</string>
 	<string name="share_route_subject">Маршрут апублікаваны з дапамогай OsmAnd</string>
@@ -1965,10 +1965,12 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="everything_up_to_date">Усё ў актуальным стане</string>
     <string name="dismiss">Скасаваць</string>
     <string name="no_internet_connection">Немагчыма спампаваць. Калі ласка, падлучыцеся да Wi-Fi, каб працягнуць.</string>
-    <string name="download_tab_downloads">Сьцягваньні</string>
+    <string name="download_tab_downloads">Усе загрузкі</string>
     <string name="download_tab_updates">Абнаўленьні</string>
     <string name="download_tab_local">Лякальны</string>
 	<string name="navigate_point_zone">Зона</string>
     <string name="navigate_point_northing">На поўнач</string>
     <string name="navigate_point_easting">На ўсход</string>
+    <string name="map_locale">Мова мапы</string>
+    <string name="rendering_attr_transportStops_name">Прыпынкі транспарту</string>
     </resources>

@@ -500,7 +500,7 @@
 	<string name="route_general_information">Total distanse %1$s, reisetid %2$d t %3$d m.</string>
 	<string name="router_service_descr">Velg en nettbasert eller offline navigeringstjeneste</string>
 	<string name="router_service">Navigeringstjeneste</string>
-	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet er ikke tilgjengelig</string>
+	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet er ikke tilgjengelig!</string>
 	<string name="download_question">Laste ned {0} - {1} ?</string>
 	<string name="download_question_exist">Offline-data for {0} finnes allerede ({1}). Vil du oppdatere ({2}) ?</string>
 	<string name="address">Adresse</string>
@@ -1067,18 +1067,22 @@
 	<string name="download_files">Last ned</string>
 	<string name="osmo_use_https_descr">Bruk sikker forbindelse med server</string>
     <string name="osmo_use_https">Bruk HTTPS</string>
-	<string name="application_dir_change_warning2">Skal OsmAnd også kopiere datafilene til det nye stedet?</string>
+	<string name="application_dir_change_warning2">Skal OsmAnd også kopiere datafilene til det nye stedet? Velg \'Nei\' for at OsmAnd kun skal opprette og bruke den nye mappen.</string>
     <string name="error_avoid_specific_road">Nærmeste vei ble ikke funnet</string>
     <string name="home_button">Hjem</string>
     <string name="map_update">Kart</string>
 	<string name="search_for">Søk etter</string>
 	<string name="show_map">VIS KART</string>
 	<string name="coordinates">Koordinater</string>
-	<string name="download_tab_downloads">Nedlastinger</string>
+	<string name="download_tab_downloads">Alle nedlastinger</string>
     <string name="download_tab_updates">Oppdateringer</string>
     <string name="no_internet_connection">Ikke mulig å laste ned. Koble til Wi-Fi for å fortsette.</string>
     <string name="dismiss">Avvis</string>
     <string name="everything_up_to_date">Alt er oppdatert</string>
     <string name="use_opengl_render">Bruk OpenGL-opptegning</string>
     <string name="use_opengl_render_descr">Bruk maskinvareakselerert OpenGL-opptegning (virker kanskje ikke på enkelte enheter)</string>
-    </resources>
+    <string name="map_locale">Språk på kart</string>
+    <string name="rendering_attr_transportStops_name">Stoppesteder</string>
+    <string name="navigate_point_zone">Sone</string>
+    <string name="download_tab_local">Lokal</string>
+	</resources>
