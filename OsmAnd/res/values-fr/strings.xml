@@ -1872,11 +1872,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="everything_up_to_date">Vous disposez de la dernière version</string>
     <string name="dismiss">Ignorer</string>
     <string name="no_internet_connection">Téléchargement impossible. Merci de vous connecter en Wifi.</string>
-    <string name="download_tab_downloads">Téléchargements</string>
+    <string name="download_tab_downloads">Tous les téléchargements</string>
     <string name="download_tab_updates">Mises à jour</string>
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_easting">Abscisse</string>
     <string name="navigate_point_northing">Ordonnée</string>
     <string name="download_tab_local">Local</string>
 	<string name="map_locale">Langue pour la carte</string>
+    <string name="rendering_attr_transportStops_name">Arrêts (transports en commun)</string>
     </resources>
