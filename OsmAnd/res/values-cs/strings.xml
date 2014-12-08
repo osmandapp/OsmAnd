@@ -1383,7 +1383,7 @@ s často kladenými otázkami.</string>
 	<string name="routing_attr_weight_description">Zadejte hmotnost vozidla, která musí být povolená na cestách</string>
     <string name="android_19_location_disabled">Od verze Androidu 4.4 (KitKat) není možné stahovat a aktualizovat mapy v předchozím úložišti (%s). Chcete ho změnit na vhodné nové úložiště a zkopírovat do něj všechny soubory?\n Poznámka 1: Původní soubory zůstanou nedotčeny a mohou být smazány ručně.
 \n Poznámka 2: V novém úložišti nebude možné sdílet soubory mezi OsmAnd a OsmAnd+.</string>
-    <string name="application_dir_change_warning2">Chcete aby OsmAnd také zkopíroval jeho datové soubory do nového cíle?</string>
+    <string name="application_dir_change_warning2">Chcete aby OsmAnd také zkopíroval své datové soubory do nového cíle? Vybráním \'Ne\' OsmAnd pouze vytvoří a použije nový adresář.</string>
     <string name="copying_osmand_one_file_descr">Kopírování souboru (%s) do nového umístění...</string>
     <string name="copying_osmand_files_descr">Kopírování datových souborů OsmAnd do nového umístění (%s)</string>
     <string name="copying_osmand_files">Kopírování datových souborů OsmAnd</string>
