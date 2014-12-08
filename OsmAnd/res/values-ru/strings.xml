@@ -678,7 +678,7 @@
   <string name="route_general_information">Общая протяженность = %1$s, время в пути = %2$d ч. %3$d мин.</string>
   <string name="router_service_descr">Выберите онлайн или оффлайн сервис для прокладки маршрута</string>
   <string name="router_service">Прокладка маршрута</string>
-  <string name="sd_dir_not_accessible">Директория хранения данных на SD-карте не доступна</string>
+  <string name="sd_dir_not_accessible">Директория хранения данных на SD-карте не доступна!</string>
   <string name="download_question">Вы хотите загрузить {0} - {1} ?</string>
   <string name="download_question_exist">Локальная карта для {0} уже существует ({1}). Хотите её обновить ({2}) ?</string>
   <string name="address">Адрес</string>
