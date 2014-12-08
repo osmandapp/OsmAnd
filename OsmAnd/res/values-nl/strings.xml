@@ -2024,4 +2024,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="navigate_point_easting">Oostwaarde</string>
     <string name="navigate_point_northing">Noordwaarde</string>
     <string name="navigate_point_zone">Zone</string>
+    <string name="map_locale">Taal van de kaart</string>
+    <string name="rendering_attr_transportStops_name">OV-haltes</string>
     </resources>
