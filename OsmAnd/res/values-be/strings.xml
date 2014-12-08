@@ -1971,4 +1971,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="navigate_point_zone">Зона</string>
     <string name="navigate_point_northing">На поўнач</string>
     <string name="navigate_point_easting">На ўсход</string>
+    <string name="map_locale">Мова мапы</string>
+    <string name="rendering_attr_transportStops_name">Прыпынкі транспарту</string>
     </resources>
