@@ -1670,7 +1670,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="loading_builds">Loading OsmAnd builds&#8230;</string>
 	<string name="select_build_to_install">Select an OsmAnd build to install</string>
 	<string name="gps_status_app_not_found">GPS Status application not installed. Search in Market?</string>
-	<string name="voice_is_not_available_msg">No voice guidance available, please go to the Navigation Settings and select or download a voice prompt package.</string>
+	<string name="voice_is_not_available_msg">No voice guidance available, please go to \'Settings\' → \'General\' → \'Voice guidance\' and select or download a voice prompt package.</string>
 	<string name="voice_is_not_available_title">No voice guidance selected</string>
 	<string name="daynight_mode_day">Day</string>
 	<string name="daynight_mode_night">Night</string>
