@@ -50,7 +50,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.opengl.GLSurfaceView;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
@@ -159,8 +158,9 @@ public class MapActivityLayers {
 	public void updateLayers(OsmandMapTileView mapView){
 		OsmandSettings settings = getApplication().getSettings();
 		updateMapSource(mapView, settings.MAP_TILE_SOURCES);
-		if(mapView.getLayers().contains(transportStopsLayer) != settings.SHOW_TRANSPORT_OVER_MAP.get()){
-			if(settings.SHOW_TRANSPORT_OVER_MAP.get()){
+		boolean showStops = settings.getCustomRenderBooleanProperty(OsmandSettings.TRANSPORT_STOPS_OVER_MAP).get();
+		if(mapView.getLayers().contains(transportStopsLayer) != showStops){
+			if(showStops){
 				mapView.addLayer(transportStopsLayer, 5);
 			} else {
 				mapView.removeLayer(transportStopsLayer);

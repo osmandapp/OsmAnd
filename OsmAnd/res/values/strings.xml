@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rendering_attr_transportStops_name">Transport Stops</string>
     <string name="application_dir_change_warning2">Do you want OsmAnd to also copy its data files to the new destination?  Select \'No\' for OsmAnd to just create and use the new folder.</string>
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_northing">Northing</string>
