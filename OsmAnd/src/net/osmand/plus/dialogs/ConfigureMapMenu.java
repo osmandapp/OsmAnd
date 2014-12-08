@@ -274,7 +274,7 @@ public class ConfigureMapMenu {
 			}
 		}).description(getScale(activity)).layout(R.layout.drawer_list_doubleitem).reg();
 		
-		adapter.item(R.string.map_preferred_locale).listen(new OnContextMenuClick() {
+		adapter.item(R.string.map_locale).listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
 				final OsmandMapTileView view = activity.getMapView();
