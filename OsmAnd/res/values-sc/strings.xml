@@ -1801,4 +1801,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="navigate_point_easting">In diretzione Est</string>
     <string name="rendering_attr_transportStops_name">Firmadas traspòrtu pùblicu</string>
     <string name="map_locale">Limba de sa mapa</string>
-    </resources>
+    <string name="voices">Indicatziones vocales</string>
+	</resources>
