@@ -1913,6 +1913,6 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="map_locale">Llengua del mapa</string>
     <string name="rendering_attr_transportStops_name">Parades del transport</string>
     <string name="navigate_point_zone">Àrea</string>
-    <string name="navigate_point_northing">Coordenada y</string>
+    <string name="navigate_point_northing">Ordenada</string>
     <string name="navigate_point_easting">Abscissa</string>
     </resources>
