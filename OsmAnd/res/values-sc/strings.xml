@@ -683,7 +683,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="osmo_mode_restart">Reavia sa sessione OsMo</string>
     <string name="osmo_settings_debug">Informatziones de debug</string>
     <string name="lang_fa">Persianu</string>
-	<string name="route_descr_destination">\t</string>
+	<string name="route_descr_destination">Destinatzione</string>
     <string name="osmo_not_signed_in">Atzessu ad OsMo falliu</string>
     <string name="osmo_auto_connect_descr">Connèttidi automaticamente a su servìtziu a pustis de s\'allughinzu</string>
     <string name="osmo_auto_connect">Connessione automàtica</string>
@@ -1482,7 +1482,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="route_general_information">Distàntzia totale %1$s, durada de su biàgiu %2$d h %3$d m.</string>
 	<string name="router_service_descr">Issèbera unu servìtziu in lìnia o sena lìnia de nàvigu</string>
 	<string name="router_service">Servìtziu de nàvigu</string>
-	<string name="sd_dir_not_accessible">Sa cartella de sarbamentu in s\'ischeda SD no est atzessiva</string>
+	<string name="sd_dir_not_accessible">Sa cartella de sarbamentu in s\'ischeda SD no est atzessiva!</string>
 	<string name="download_question">Iscarrigare {0} - {1} ?</string>
 	<string name="download_question_exist">Sos datos non in lìnia pro {0} esistint giai ({1}). Los boles agiornare ({2}) ?</string>
 	<string name="address">Indiritzu</string>
