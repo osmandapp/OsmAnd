@@ -2007,4 +2007,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="download_tab_downloads">Všetky sťahovania</string>
     <string name="download_tab_updates">Aktualizácie</string>
     <string name="download_tab_local">Lokálne</string>
-	</resources>
+	<string name="map_locale">Jazyk mapy</string>
+    <string name="rendering_attr_transportStops_name">Zastávky verejnej dopravy</string>
+    <string name="voices">Hlasové povely</string>
+	<string name="navigate_point_northing">Vertikálna súradnica</string>
+    <string name="navigate_point_easting">Horizontálna súradnica</string>
+    </resources>
