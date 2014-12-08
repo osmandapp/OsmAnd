@@ -1252,7 +1252,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="route_general_information">Агульная адлегласць %1$s, час у дарозе %2$d г. %3$d хв.</string>
 	<string name="router_service_descr">Абраць сеціўны ці пазасеціўны сэрвіс навігацыі</string>
 	<string name="router_service">Сэрвіс навігацыі</string>
-	<string name="sd_dir_not_accessible">Каталог на SD-карце недаступны для захоўваньня</string>
+	<string name="sd_dir_not_accessible">Каталёг на SD-карце недаступны для захоўваньня!</string>
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Лакальная карта для {0} ужо існуе ({1}). Хочаце яе абнавіць ({2})?</string>
 	<string name="address">Адрас</string>
