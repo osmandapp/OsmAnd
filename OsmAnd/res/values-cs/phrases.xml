@@ -217,4 +217,17 @@
 	<string name="poi_ice_cream">Zmrzlinářství</string>
 	<string name="poi_gas_shop">Obchod tekutým palivem</string>
 	<string name="poi_organic_shop">Organické potraviny</string>
+	<string name="poi_second_hand">Second hand</string>
+	<string name="poi_department_store">Obchodní dům</string>
+	<string name="poi_fire_hose">Požární hadice</string>
+	<string name="poi_fire_water_pond">Požární nádrž</string>
+	<string name="poi_emergency_access_point">Záchranný přístupový bod</string>
+
+	<string name="poi_city_wall">Městská hradba</string>
+	<string name="poi_lift_gate">Zvedací brána</string>
+	<string name="poi_traffic_calming_bump">Retardér</string>
+	<string name="poi_traffic_calming_hump">Retardér</string>
+	<string name="poi_vehicle_inspection">Kontrola vozidel</string>
+	<string name="poi_parking_entrance">Vjezd parkoviště</string>
+	<string name="poi_tram_stop">Zastávka tramvaje (zastaralé)</string>
 	</resources>
