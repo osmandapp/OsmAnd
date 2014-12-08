@@ -1427,7 +1427,7 @@
 	<string name="android_19_location_disabled">Начиная с версии Android 4.4 (KitKat) Вы не можете скачивать и обновлять карту в прежнее хранилище (%s). Вы хотите изменить расположение на допустимое и скопировать все файлы OsmAnd туда?
 \n Примечание 1: Ваши старые файлы останутся нетронутыми (но могут быть удалены вручную).
 \n Примечание 2: При переносе файлов в новое хранилище совместное использование файлов OsmAnd и OsmAnd+ не возможно.</string>
-    <string name="application_dir_change_warning2">OsmAnd пытается перенести данные на новое место. Вы хотите этого?</string>
+    <string name="application_dir_change_warning2">Хотите ли Вы, чтобы OsmAnd скопировал файлы данных на новое место? Выберите \"Нет\", чтобы OsmAnd только создал и использовал новую директорию.</string>
     <string name="copying_osmand_one_file_descr">Копирование файла (%s) на новое место…</string>
     <string name="copying_osmand_files_descr">Копирование файлов данных OsmAnd на новое место (%s)</string>
     <string name="tip_recent_changes_1_6_t">Изменения в 1.6:
@@ -1830,4 +1830,5 @@
     <string name="download_tab_updates">Обновления</string>
     <string name="download_tab_local">Локальные</string>
 	<string name="navigate_point_zone">Зона</string>
+    <string name="rendering_attr_transportStops_name">Остановки транспорта</string>
     </resources>
