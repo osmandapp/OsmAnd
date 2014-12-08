@@ -1926,7 +1926,7 @@
     <string name="sort_by_distance">거리로 정렬</string>
     <string name="sort_by_name">이름으로 정렬</string>
     <string name="visible_element">지도에서 보기</string>
-    <string name="route_descr_destination">\t</string>
+    <string name="route_descr_destination">목적지</string>
     <string name="no_index_file_to_download">아무것도 다운로드 되지 않았다면, 인터넷 연결을 확인 하십시오.</string>
     <string name="osmo_auth_error_short">인증 실패</string>
     <string name="osmo_auth_error">OsMo 인증 오류가 발생 했습니다: %1$s.\n임시로 서비스가 다운되었거나 또는 등록 만료가 되었습니다.\n신규 등록을 진행 하시겠습니까?</string>
@@ -2098,7 +2098,7 @@
     <string name="navigate_point_zone">존(지역)</string>
     <string name="navigate_point_northing">북향</string>
     <string name="navigate_point_easting">동향</string>
-    <string name="download_tab_downloads">다운로드</string>
+    <string name="download_tab_downloads">모두 다운로드</string>
     <string name="download_tab_updates">업데이트</string>
     <string name="download_tab_local">로컬</string>
 	<string name="map_locale">지도 언어</string>
