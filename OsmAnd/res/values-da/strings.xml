@@ -1863,4 +1863,5 @@
     <string name="navigate_point_northing">Nordlig</string>
     <string name="navigate_point_easting">Østlig</string>
     <string name="map_locale">Sprog på kort</string>
+    <string name="rendering_attr_transportStops_name">Stoppesteder</string>
     </resources>
