@@ -562,7 +562,7 @@
   <string name="route_general_information">Distanza totale = %1$s, durata del viaggio = %2$d h %3$d m.</string>
   <string name="router_service_descr">Scegli un servizio online oppure offline di navigazione</string>
   <string name="router_service">Servizio di navigazione</string>
-  <string name="sd_dir_not_accessible">La cartella di salvataggio su SD card non è accessibile</string>
+  <string name="sd_dir_not_accessible">La cartella di salvataggio sulla SD card non è accessibile!</string>
   <string name="download_question">Scaricare {0} - {1} ?</string>
   <string name="download_question_exist">I dati offline per {0} sono già presenti ({1}). Aggiornarli ({2}) ?</string>
   <string name="address">Indirizzo</string>
