@@ -1788,7 +1788,7 @@ s často kladenými otázkami.</string>
     <string name="map_locale">Jazyk map</string>
     <string name="rendering_attr_transportStops_name">Dopravní zastávky</string>
     <string name="navigate_point_zone">Zóna</string>
-    <string name="download_tab_downloads">Stahování</string>
+    <string name="download_tab_downloads">Všechna stahování</string>
     <string name="download_tab_updates">Aktualizace</string>
     <string name="download_tab_local">Lokální</string>
 	<string name="navigate_point_northing">Souřadnice Y</string>
