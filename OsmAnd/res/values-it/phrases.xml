@@ -199,7 +199,7 @@
 	<string name="poi_baby_hatch">Culla per la vita</string>
 	<string name="poi_veterinary">Veterinario</string>
 	<string name="poi_healthcare_alternative">Medicina alternativa</string>
-	<string name="poi_audiologist"/>
+	<string name="poi_audiologist">Audiologo</string>
 	<string name="poi_blood_bank">Banca del sangue</string>
 	<string name="poi_healthcare_centre">Centro medico</string>
 	<string name="poi_midwife">Levatrice</string>
@@ -506,4 +506,12 @@
 	<string name="poi_stream">Ruscello</string>
 	<string name="poi_islet">Isoletta</string>
 
+	<string name="poi_observatory">Osservatorio</string>
+	<string name="poi_astronomical_observatory">Osservatorio astronomico</string>
+	<string name="poi_place_farm">Fattoria</string>
+
+	<string name="poi_occupational_therapist">Terapista occupazionale</string>
+	<string name="poi_telecommunication_office">Ufficio telecomunicazioni</string>
+	<string name="poi_american_football">Football americano</string>
+	<string name="poi_bmx_sport">BMX</string>
 	</resources>
