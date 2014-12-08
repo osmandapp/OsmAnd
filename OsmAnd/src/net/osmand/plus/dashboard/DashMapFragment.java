@@ -1,7 +1,17 @@
 package net.osmand.plus.dashboard;
 
-import android.app.Activity;
-import android.content.Intent;
+import net.osmand.data.LatLon;
+import net.osmand.map.MapTileDownloader.DownloadRequest;
+import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MainMenuActivity;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.render.MapVectorLayer;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.views.MapTextLayer;
+import net.osmand.plus.views.OsmAndMapSurfaceView;
+import net.osmand.plus.views.OsmandMapTileView;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,21 +21,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import net.osmand.data.LatLon;
-import net.osmand.map.MapTileDownloader.DownloadRequest;
-import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
-import net.osmand.plus.OsmAndAppCustomization;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MainMenuActivity;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityActions;
-import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.render.MapVectorLayer;
-import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.MapTextLayer;
-import net.osmand.plus.views.OsmAndMapSurfaceView;
-import net.osmand.plus.views.OsmandMapTileView;
 
 /**
  * Created by Denis on 24.11.2014.
@@ -97,6 +92,7 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 		super.onResume();
 		LatLon lm = getMyApplication().getSettings().getLastKnownMapLocation();
 		int zm = getMyApplication().getSettings().getLastKnownMapZoom();
+		zm = Math.max(zm - 3, 4);
 		osmandMapTileView.setLatLon(lm.getLatitude(), lm.getLongitude());
 		osmandMapTileView.setComplexZoom(zm, osmandMapTileView.getSettingsMapDensity());
 		osmandMapTileView.refreshMap(true);
