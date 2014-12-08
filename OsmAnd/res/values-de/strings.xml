@@ -2029,7 +2029,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="download_tab_local">Lokal</string>
     <string name="wake_on_voice">Bildschirm aktivieren</string>
     <string name="wake_on_voice_descr">Bei Annäherung einer Richtungsänderung den Bildschirm einschalten</string>
-    <string name="map_locale">Landkartensprache</string>
+    <string name="map_locale">Beschriftungssprache</string>
     <string name="rendering_attr_transportStops_name">ÖPNV Haltestellen</string>
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_northing">Nordwert</string>
