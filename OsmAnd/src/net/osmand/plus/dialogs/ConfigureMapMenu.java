@@ -14,6 +14,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
@@ -23,7 +24,11 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.preference.PreferenceGroup;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -128,8 +133,6 @@ public class ConfigureMapMenu {
 				}
 			} else if (itemId == R.string.layer_transport_route) {
 				ma.getMapLayers().getTransportInfoLayer().setVisible(isChecked);
-			} else if (itemId == R.string.layer_transport) {
-				settings.SHOW_TRANSPORT_OVER_MAP.set(isChecked);
 			}
 			ma.getMapLayers().updateLayers(ma.getMapView());
 			ma.getMapView().refreshMap();
@@ -154,8 +157,6 @@ public class ConfigureMapMenu {
 //				.icons(R.drawable.ic_action_foot_dark, R.drawable.ic_action_foot_light)
 				.icons(R.drawable.ic_action_polygom_dark, R.drawable.ic_action_polygom_light)
 				.listen(l).reg();
-		adapter.item(R.string.layer_transport).selected(settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).listen(l).reg();
 		if(TransportRouteHelper.getInstance().routeIsCalculated()){
 			adapter.item(R.string.layer_transport_route).selected(1)
 				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).listen(l).reg();
@@ -272,6 +273,37 @@ public class ConfigureMapMenu {
 				return false;
 			}
 		}).description(getScale(activity)).layout(R.layout.drawer_list_doubleitem).reg();
+		
+		adapter.item(R.string.map_preferred_locale).listen(new OnContextMenuClick() {
+			@Override
+			public boolean onContextMenuClick(final ArrayAdapter<?> ad, int itemId, final int pos, boolean isChecked) {
+				final OsmandMapTileView view = activity.getMapView();
+				AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
+				// test old descr as title
+				b.setTitle(R.string.map_preferred_locale);
+				final String[] txtValues = mapNamesIds;
+				final String[] txtNames = getMapNamesValues(activity);
+				int selected = -1;
+				for (int i = 0; i < txtValues.length; i++) {
+					if(view.getSettings().MAP_PREFERRED_LOCALE.get().equals(txtValues[i])) {
+						selected = i;
+						break;
+					}
+				}
+				b.setSingleChoiceItems(txtNames, selected, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						view.getSettings().MAP_PREFERRED_LOCALE.set(txtValues[which]);
+						refreshMapComplete(activity);
+						adapter.setItemDescription(pos, txtValues[which]);
+						ad.notifyDataSetInvalidated();
+						dialog.dismiss();
+					}
+				});
+				b.show();
+				return false;
+			}
+		}).description(activity.getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get()).layout(R.layout.drawer_list_doubleitem).reg();
 
 		RenderingRulesStorage renderer = activity.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
@@ -279,11 +311,11 @@ public class ConfigureMapMenu {
 			
 			createProperties(customRules, R.string.rendering_category_transport, "transport",
 					adapter, activity);
-			createProperties(customRules, R.string.rendering_category_routes, "routes",
-					adapter, activity);
 			createProperties(customRules, R.string.rendering_category_details, "details",
 					adapter, activity);
 			createProperties(customRules, R.string.rendering_category_hide, "hide",
+					adapter, activity);
+			createProperties(customRules, R.string.rendering_category_routes, "routes",
 					adapter, activity);
 			
 			if(customRules.size() > 0) {
@@ -292,21 +324,112 @@ public class ConfigureMapMenu {
 			}
 		}
 	}
+	
+	static String[] mapNamesIds = new String[] { "", "en", "be", "ca", "cs", "da", "de", "el", "es", "fi", "fr", "he", "hi",
+			"hr", "hu", "it", "ja", "ko", "lv", "nl", "pl", "ro", "ru", "sk", "sl", "sv", "sw", "zh" };
 
-	private void createProperties(List<RenderingRuleProperty> customRules, int strId, String cat, ContextMenuAdapter adapter, MapActivity activity) {
-		List<RenderingRuleProperty> ps = new ArrayList<RenderingRuleProperty>();
+	private String[] getMapNamesValues(Context ctx) {
+		return new String[] { ctx.getString(R.string.local_map_names), ctx.getString(R.string.lang_en),
+				ctx.getString(R.string.lang_be), ctx.getString(R.string.lang_ca), ctx.getString(R.string.lang_cs),
+				ctx.getString(R.string.lang_da), ctx.getString(R.string.lang_de), ctx.getString(R.string.lang_el),
+				ctx.getString(R.string.lang_es), ctx.getString(R.string.lang_fi), ctx.getString(R.string.lang_fr),
+				ctx.getString(R.string.lang_he), ctx.getString(R.string.lang_hi), ctx.getString(R.string.lang_hr),
+				ctx.getString(R.string.lang_hu), ctx.getString(R.string.lang_it), ctx.getString(R.string.lang_ja),
+				ctx.getString(R.string.lang_ko), ctx.getString(R.string.lang_lv), ctx.getString(R.string.lang_nl),
+				ctx.getString(R.string.lang_pl), ctx.getString(R.string.lang_ro), ctx.getString(R.string.lang_ru),
+				ctx.getString(R.string.lang_sk), ctx.getString(R.string.lang_sl), ctx.getString(R.string.lang_sv),
+				ctx.getString(R.string.lang_sw), ctx.getString(R.string.lang_zh) };
+	}
+
+	private void createProperties(List<RenderingRuleProperty> customRules, final int strId, String cat, 
+			final ContextMenuAdapter adapter, final MapActivity activity) {
+		final List<RenderingRuleProperty> ps = new ArrayList<RenderingRuleProperty>();
+		final List<OsmandSettings.CommonPreference<Boolean>> prefs = new ArrayList<OsmandSettings.CommonPreference<Boolean>>();
 		Iterator<RenderingRuleProperty> it = customRules.iterator();
-		while(it.hasNext()) {
+		
+		while (it.hasNext()) {
 			RenderingRuleProperty p = it.next();
-			if(cat.equals(p.getCategory())) {
+			if (cat.equals(p.getCategory()) && p.isBoolean()) {
 				ps.add(p);
+				final OsmandSettings.CommonPreference<Boolean> pref = activity.getMyApplication().getSettings()
+						.getCustomRenderBooleanProperty(p.getAttrName());
+				prefs.add(pref);
 				it.remove();
 			}
 		}
-		if(ps.size() > 0) {
-			adapter.item(strId).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
-			createCustomRenderingProperties(adapter, activity, ps);
+		if(prefs.size() > 0) {
+			final String descr = getDescription(prefs);
+			adapter.item(strId).description(descr).
+					layout(R.layout.drawer_list_doubleitem).listen(new OnContextMenuClick() {
+						
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<?> a, int itemId, int pos, boolean isChecked) {
+							showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs);
+							return false;
+						}
+					}).reg();
+//			createCustomRenderingProperties(adapter, activity, ps);
 		}
+	}
+
+	protected String getDescription(final List<OsmandSettings.CommonPreference<Boolean>> prefs) {
+		int count = 0;
+		int enabled = 0;
+		for(OsmandSettings.CommonPreference<Boolean> p : prefs) {
+			count ++;
+			if(p.get()) {
+				enabled++;
+			}
+		}
+		final String descr = enabled +"/"+count;
+		return descr;
+	}
+
+	protected void showPreferencesDialog(final ContextMenuAdapter adapter, final ArrayAdapter<?> a, final int pos, final MapActivity activity, 
+			String category, List<RenderingRuleProperty> ps, final List<CommonPreference<Boolean>> prefs) {
+		Builder bld = new AlertDialog.Builder(activity);
+		boolean[] checkedItems = new boolean[prefs.size()];
+		for (int i = 0; i < prefs.size(); i++) {
+			checkedItems[i] = prefs.get(i).get();
+		}
+		
+		final boolean[] tempPrefs = new boolean[prefs.size()];
+		for (int i = 0; i < prefs.size(); i++) {
+			tempPrefs[i] = prefs.get(i).get();
+		}
+		final String[] vals = new String[ps.size()];
+		for(int i = 0; i < ps.size(); i++) {
+			RenderingRuleProperty p = ps.get(i);
+			String propertyName = SettingsActivity.getStringPropertyName(activity, p.getAttrName(),
+					p.getName());
+			vals[i] = propertyName;
+		}
+		
+		bld.setMultiChoiceItems(vals, checkedItems, new OnMultiChoiceClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				tempPrefs[which] = isChecked;
+			}
+		});
+		
+		bld.setTitle(category);
+		
+		bld.setNegativeButton(R.string.default_buttons_cancel, null);
+		
+		bld.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+		    public void onClick(DialogInterface dialog, int whichButton) {
+				for (int i = 0; i < prefs.size(); i++) {
+					prefs.get(i).set(tempPrefs[i]);
+				}
+				adapter.setItemDescription(pos, getDescription(prefs));
+				a.notifyDataSetInvalidated();
+				refreshMapComplete(activity);
+				activity.getMapLayers().updateLayers(activity.getMapView());
+		    }
+		});
+		
+		bld.show();
 	}
 
 	protected String getRenderDescr(final MapActivity activity) {

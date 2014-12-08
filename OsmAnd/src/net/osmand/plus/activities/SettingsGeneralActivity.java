@@ -132,27 +132,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	}
 
 	
-	private void addPrefmapNames(PreferenceGroup screen) {
-		String[] entrieValues  = new String[] { "", "en", "be", "ca", "cs", "da", "de", "el", "es", "fi", "fr", "he", "hi",
-				"hr", "hu", "it", "ja", "ko", "lv", "nl", "pl", "ro", "ru", "sk", "sl", "sv", "sw", "zh" };
-		String[] entries = new String[] { getString(R.string.local_map_names), getString(R.string.lang_en),
-				getString(R.string.lang_be), getString(R.string.lang_ca), getString(R.string.lang_cs),
-				getString(R.string.lang_da), getString(R.string.lang_de), getString(R.string.lang_el),
-				getString(R.string.lang_es), getString(R.string.lang_fi), getString(R.string.lang_fr),
-				getString(R.string.lang_he), getString(R.string.lang_hi), getString(R.string.lang_hr),
-				getString(R.string.lang_hu), getString(R.string.lang_it), getString(R.string.lang_ja),
-				getString(R.string.lang_ko), getString(R.string.lang_lv), getString(R.string.lang_nl),
-				getString(R.string.lang_pl), getString(R.string.lang_ro), getString(R.string.lang_ru),
-				getString(R.string.lang_sk), getString(R.string.lang_sl), getString(R.string.lang_sv),
-				getString(R.string.lang_sw), getString(R.string.lang_zh) };
-		registerListPreference(settings.MAP_PREFERRED_LOCALE, screen, entries, entrieValues);
-	}
-
 
 	private void addLocalPrefs(PreferenceGroup screen) {
 		String[] entries;
 		String[] entrieValues;
-		addPrefmapNames(screen);
 		
 		DrivingRegion[] drs  = DrivingRegion.values();
 		entries = new String[drs.length];
