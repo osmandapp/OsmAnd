@@ -670,7 +670,7 @@
 <string name="error_calculating_route">S\'ha produït un error en calcular la ruta</string>
 <string name="loading_postcodes">S\'estan carregant els codis postals…</string>
 <string name="arrived_at_destination">Heu arribat a la vostra destinació</string>
-<string name="invalid_locations">Les coordenades no són vàlides.</string>
+<string name="invalid_locations">Les coordenades no són vàlides!</string>
 <string name="saving_gpx_tracks">S\'estan desant els seguiments GPX a la SD…</string>
 <string name="download_indexes">Baixa dades fora de línia</string>
 <string name="osm_settings">Edició d\'OSM</string>
