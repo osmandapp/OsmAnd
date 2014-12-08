@@ -251,8 +251,8 @@
   <string name="index_name_oceania">Oceánia</string>
   <string name="index_name_other">Celosvetové a tematické mapy</string>
   <string name="index_name_wiki">Celosvetové body z Wikipedie</string>
-  <string name="index_name_voice">Hlasové balíky (nahrávky, obmedzená funkcionalita)</string>
-  <string name="index_name_tts_voice">Hlasové balíky (TTS-generované, odporúčané)</string>
+  <string name="index_name_voice">Hlasové povely (nahrávky, obmedzená funkcionalita)</string>
+  <string name="index_name_tts_voice">Hlasové povely (TTS-generované, odporúčané)</string>
   <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Užívateľský</string>
   <string name="fav_export_confirmation">Súbor s predošle exportovanými obľúbenými bodmi už existuje. Chcete ho nahradiť?</string>
@@ -757,7 +757,7 @@
   <string name="route_general_information">Celková vzdialenosť %1$s, čas cestovania %2$d h %3$d m.</string>
   <string name="router_service_descr">Výber online alebo offline navigačnej služby</string>
   <string name="router_service">Navigačná služba</string>
-  <string name="sd_dir_not_accessible">Priečinok pre uloženie na SD karte nie je prístupný</string>
+  <string name="sd_dir_not_accessible">Priečinok pre uloženie na SD karte nie je prístupný!</string>
   <string name="download_question">Stiahnuť {0} - {1} ?</string>
   <string name="download_question_exist">Offline údaje pre {0} už existujú ({1}). Chcete ich aktualizovať ({2}) ?</string>
   <string name="address">Adresa</string>
@@ -1843,7 +1843,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="none_selected_gpx">Žiadny súbor GPX nebol vybraný. Podržaním vyberte z dostupných stôp.</string>
     <string name="local_index_unselect_gpx_file">Odznačiť</string>
     <string name="local_index_select_gpx_file">Vybrať na zobrazenie</string>
-    <string name="route_descr_destination">\t</string>
+    <string name="route_descr_destination">Cieľ</string>
     <string name="no_index_file_to_download">Nenašlo sa nič na stiahnutie, prosím skontrolujte pripojenie na Internet.</string>
     <string name="osmo_gpx_points_downloaded">OsMo body %1$s stiahnuté.</string>
     <string name="osmo_auto_connect_descr">Automaticky pripojiť k zariadeniu po spustení aplikácie</string>
@@ -2004,7 +2004,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="use_opengl_render_descr">Použiť hardvérovo urýchľované vykresľovanie pomocou OpenGL (nemusí na niektorých zariadeniach fungovať)</string>
     <string name="no_internet_connection">Nie je možné stiahnuť. Prosím pripojte sa na Wi-Fi, aby bolo možné pokračovať.</string>
     <string name="navigate_point_zone">Zóna</string>
-    <string name="download_tab_downloads">Sťahovania</string>
+    <string name="download_tab_downloads">Všetky sťahovania</string>
     <string name="download_tab_updates">Aktualizácie</string>
     <string name="download_tab_local">Lokálne</string>
 	</resources>
