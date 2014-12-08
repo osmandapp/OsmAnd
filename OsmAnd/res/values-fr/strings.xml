@@ -568,7 +568,7 @@
   <string name="route_general_information">Distance totale : %1$s, durée estimée : %2$d h %3$d m.</string>
   <string name="router_service_descr">Sélectionner un service de navigation, hors-ligne ou en ligne</string>
   <string name="router_service">Service de navigation</string>
-  <string name="sd_dir_not_accessible">Le dossier données de la carte SD est inaccessible</string>
+  <string name="sd_dir_not_accessible">Le dossier contenant les données sur la carte SD est inaccessible !</string>
   <string name="download_question">Voulez-vous télécharger {0} - {1} ?</string>
   <string name="download_question_exist">les données pour {0} existent déjà ({1}). Voulez-vous les mettre à jour ({2}) ?</string>
   <string name="address">Adresse</string>
@@ -1878,4 +1878,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="navigate_point_easting">Abscisse</string>
     <string name="navigate_point_northing">Ordonnée</string>
     <string name="download_tab_local">Local</string>
-	</resources>
+	<string name="map_locale">Langue pour la carte</string>
+    </resources>
