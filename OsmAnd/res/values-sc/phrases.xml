@@ -540,4 +540,34 @@
 	<string name="poi_seamark_wreck">Relitu</string>
 
 	<string name="poi_nursing_home">Domo de cura</string>
+	<string name="poi_fire_flapper">Pala catzafogu</string>
+	<string name="poi_fire_hose">Manicotu anti-incèndiu</string>
+	<string name="poi_fire_water_pond">Lagu de abba anti-incèndiu</string>
+	<string name="poi_border_control">Puntu de controllu</string>
+	<string name="poi_traffic_calming_cushion">Cabitzales rallentadores</string>
+	<string name="poi_traffic_calming_rumble_strip">Istrìscias rallentadoras</string>
+	<string name="poi_traffic_calming_table">Dossu a mesa</string>
+	<string name="poi_traffic_calming_choker">Restringhimentu de carrutzada rallentadore</string>
+	<string name="poi_car_wash">Autosabunadore</string>
+	<string name="poi_fuel">Rifornidore de carburante</string>
+	<string name="poi_skiing">Iscì</string>
+	<string name="poi_wreck">Relitu navale</string>
+	<string name="poi_alpine_hut">Refùgiu alpinu</string>
+	<string name="poi_shelter">Cuadorju</string>
+	<string name="poi_metal_construction_craft">Costrutziones metàllicas</string>
+	<string name="poi_parquet_layer">Assentadore de parquet</string>
+	<string name="poi_tiler">Assentadore de regiolas</string>
+	<string name="poi_seamark_radio_station">Istatzione ràdio (in mare)</string>
+	<string name="poi_seamark_light">Lughe (in mare)</string>
+	<string name="poi_seamark_light_major">Lughe manna (in mare)</string>
+	<string name="poi_seamark_light_minor">Lughe minore (in mare)</string>
+	<string name="poi_seamark_light_float">Lughe gallegiante (in mare)</string>
+	<string name="poi_seamark_light_vessel">Lughe de nave ancorada</string>
+	<string name="poi_seamark_notice">Cartellu de informatziones (in mare)</string>
+	<string name="poi_seamark_signal_station_traffic">Istatzione de sinnalatzione, tràficu (in mare)</string>
+	<string name="poi_seamark_signal_station_warning">Istatzione de sinnalatzione, avertimentu de perìgulu (in mare)</string>
+	<string name="poi_seamark_small_craft_facility">Servìtzios pro barcas minores</string>
+	<string name="poi_seamark_topmark">Miràgliu</string>
+	<string name="poi_motor_sport">Isport a motore</string>
+	<string name="poi_carpet_layer">Assentadore de moquette</string>
 	</resources>
