@@ -15,7 +15,7 @@ import android.widget.TextView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.DashboardActivity;
+import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.helpers.FontCache;
 
 import java.io.File;
@@ -72,7 +72,7 @@ public class DashErrorFragment extends DashBaseFragment {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DashboardActivity dashboardActivity =((DashboardActivity)getSherlockActivity());
+                MainMenuActivity dashboardActivity =((MainMenuActivity)getSherlockActivity());
                 if (dashboardActivity != null) {
                     dashboardActivity.getSupportFragmentManager().beginTransaction().remove(DashErrorFragment.this).commit();
                 }

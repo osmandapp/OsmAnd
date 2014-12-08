@@ -94,7 +94,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 			startActivity(new Intent(this, SettingsNavigationActivity.class));
 			return true;
 		} else if (preference == about) {
-			DashboardActivity.showAboutDialog(this, getMyApplication());
+			MainMenuActivity.showAboutDialog(this, getMyApplication());
 			return true;
 		} else if (preference == plugins) {
 			startActivityForResult(new Intent(this, getMyApplication().getAppCustomization().getPluginsActivity()), PLUGINS_SELECTION_REQUEST);
