@@ -567,7 +567,7 @@
   <string name="select_build_to_install">Vyberte jednu zo zostáv OsmAndu na nainštalovanie</string>
   <string name="contribution_activity">Špeciálna aktivita pre kontribútorskú verziu</string>
   <string name="gps_status_app_not_found">Aplikácia pre stav GPS nie je nainštalovaná. Nájsť ju na Markete?</string>
-  <string name="voice_is_not_available_msg">Hlasové navigovanie nie je dostupné. Prosím, choďte do nastavení a zvoľte alebo stiahnite preferované hlasové údaje.</string>
+  <string name="voice_is_not_available_msg">Hlasové navigovanie nie je dostupné, prosím choďte do nastavení a zvoľte alebo stiahnite balík hlasových povelov.</string>
   <string name="voice_is_not_available_title">Hlasové údaje nie sú určené</string>
   <string name="daynight_mode_day">Denný režim</string>
   <string name="daynight_mode_night">Nočný režim</string>
@@ -616,7 +616,7 @@
   <string name="transport_search_none">nič</string>
   <string name="transport_search_again">Hľadať znova prepravu</string>
   <string name="map_index">Mapa</string>
-  <string name="voice">Hlasové údaje</string>
+  <string name="voice">Nahrávka hlasu</string>
   <string name="no_vector_map_loaded">Vektorové mapy neboli načítané</string>
   <string name="map_route_by_gpx">Cestovať použitím GPX</string>
   <string name="gpx_files_not_found">Žiadne GPX súbory neboli nájdené v priečinku stôp</string>
