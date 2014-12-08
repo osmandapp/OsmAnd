@@ -1914,4 +1914,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="navigate_point_zone">Àrea</string>
     <string name="navigate_point_northing">Ordenada</string>
     <string name="navigate_point_easting">Abscissa</string>
-    </resources>
+    <string name="voices">Paquets de veu</string>
+	</resources>
