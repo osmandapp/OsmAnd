@@ -1591,7 +1591,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_plugin_name">OsMo (Пашыранае адсочваньне ў рэальным часе)</string>
     <string name="osmo_settings">Маніторынг OpenStreetMap</string>
    	<string name="always_center_position_on_map">Паказваць становішча заўсёды ў цэнтры</string>
-    <string name="route_descr_destination"> </string>
+    <string name="route_descr_destination">Пункт прызначэньня</string>
     <string name="interrupt_music_descr">Перапыняць музыку робячы аб\'яву</string>
 	<string name="share_route_as_gpx">Падзяліцца маршрутам праз GPX файл</string>
 	<string name="share_route_subject">Маршрут апублікаваны з дапамогай OsmAnd</string>
