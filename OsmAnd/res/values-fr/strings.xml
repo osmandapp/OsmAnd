@@ -49,8 +49,8 @@
   <string name="index_name_oceania">Océanie</string>
   <string name="index_name_other">Cartes mondiales et thématiques</string>
   <string name="index_name_wiki">Wikipédia Monde</string>
-  <string name="index_name_voice">Voix enregistrées (fonctions limitées)</string>
-  <string name="index_name_tts_voice">Voix de synthèse TTS (à préférer)</string>
+  <string name="index_name_voice">Voix enregistrée (guidage limité)</string>
+  <string name="index_name_tts_voice">Voix de synthèse (TTS, recommandée)</string>
   <string name="amenity_type_osmwiki">Wikipédia (hors-ligne)</string>
   <string name="amenity_type_user_defined">Défini par l\'utilisateur</string>
   <string name="fav_export_confirmation">Un fichier de favoris précédemment exporté existe déjà. Voulez vous le remplacer ?</string>
@@ -383,7 +383,7 @@
   <string name="select_build_to_install">Sélectionnez la version d\'OsmAnd à installer</string>
   <string name="contribution_activity">Fonction spéciale pour la version des contributeurs</string>
   <string name="gps_status_app_not_found">L\'application GPS sélectionnée n\'est pas installée. Souhaitez-vous l\'installer depuis la boutique ?</string>
-  <string name="voice_is_not_available_msg">Guidage vocal indisponible. Allez dans \"Paramètres\" puis téléchargez des voix.</string>
+  <string name="voice_is_not_available_msg">Aucun guidage vocal disponible. Allez dans \'Paramètres\' → \'Général\' → \'Guidage vocal\' puis sélectionnez ou téléchargez des voix.</string>
   <string name="voice_is_not_available_title">Aucune donnée vocale n\'est spécifiée</string>
   <string name="daynight_mode_day">Jour</string>
   <string name="daynight_mode_night">Nuit</string>
@@ -427,7 +427,7 @@
   <string name="transport_search_none">aucun</string>
   <string name="transport_search_again">Réinitialiser la recherche</string>
   <string name="map_index">Carte</string>
-  <string name="voice">Voix</string>
+  <string name="voice">Voix enregistrée</string>
   <string name="no_vector_map_loaded">Aucune carte vectorielle n\'a été chargée</string>
   <string name="map_route_by_gpx">Naviguer en utilisant l\'itinéraire GPX enregistré</string>
   <string name="gpx_files_not_found">Aucun fichier GPX n\'a été trouvé dans le dossier de traces</string>
@@ -1880,4 +1880,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="download_tab_local">Local</string>
 	<string name="map_locale">Langue pour la carte</string>
     <string name="rendering_attr_transportStops_name">Arrêts de transports en commun</string>
-    </resources>
+    <string name="voices">Guidages vocaux</string>
+	</resources>
