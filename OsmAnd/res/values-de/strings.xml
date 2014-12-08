@@ -2024,7 +2024,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigte OpenGL-Renderung verwenden (Funktioniert nicht auf allen Geräten)</string>
     <string name="no_internet_connection">Herunterladen nicht möglich. Zum Fortsetzen mit WLAN verbinden!</string>
-    <string name="download_tab_downloads">Verfügbare Downloads</string>
+    <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
     <string name="wake_on_voice">Bildschirm aktivieren</string>

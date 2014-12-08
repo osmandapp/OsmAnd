@@ -15,7 +15,7 @@
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_northing">Northing</string>
     <string name="navigate_point_easting">Easting</string>
-    <string name="download_tab_downloads">Downloads</string>
+    <string name="download_tab_downloads">All Downloads</string>
     <string name="download_tab_updates">Updates</string>
     <string name="download_tab_local">Local</string>
 	<string name="no_internet_connection">Not possible to download. Please connect to Wi-Fi to proceed.</string>
