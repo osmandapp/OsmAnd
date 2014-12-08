@@ -564,6 +564,21 @@ public class MapActivity extends AccessibleActivity {
 	}
 
 	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		MapActivityActions.DrawerType drawerState = mapActions.getDrawerType();
+		outState.putSerializable("drawer_state",drawerState);
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		if (savedInstanceState != null){
+			mapActions.setDrawerType((MapActivityActions.DrawerType) savedInstanceState.getSerializable("drawer_state"));
+		}
+	}
+
+	@Override
 	protected void onStart() {
 		super.onStart();
 		wakeLockHelper.onStart(this);

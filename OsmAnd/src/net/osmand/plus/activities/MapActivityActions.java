@@ -92,14 +92,14 @@ public class MapActivityActions implements DialogProvider {
 	ListView mDrawerList;
 	private WaypointDialogHelper waypointDialogHelper;
 
-	private enum DrawerType{
+	public enum DrawerType{
 		WAYPOINTS,
 		CONFIGURE_SCREEN,
 		CONFIGURE_MAP,
 		MAIN_MENU
 	}
 
-	private DrawerType currentDrawer;
+	private DrawerType currentDrawer = DrawerType.MAIN_MENU;
 
 	public MapActivityActions(MapActivity mapActivity){
 		this.mapActivity = mapActivity;
@@ -176,8 +176,14 @@ public class MapActivityActions implements DialogProvider {
     	mapActivity.showDialog(DIALOG_RELOAD_TITLE);
     }
 
-    
-    
+	public DrawerType getDrawerType(){
+		return currentDrawer;
+	}
+
+	public void setDrawerType(DrawerType type){
+		this.currentDrawer = type;
+		prepareStartOptionsMenu();
+	}
     
     protected String getString(int res){
     	return mapActivity.getString(res);
@@ -581,7 +587,7 @@ public class MapActivityActions implements DialogProvider {
 						if (currentDrawer == DrawerType.WAYPOINTS){
 							showWaypointsInDrawer(false);
 						} else if (currentDrawer == DrawerType.MAIN_MENU){
-							final ContextMenuAdapter cm = createOptionsMenu();
+							final ContextMenuAdapter cm = createMainOptionsMenu();
 							prepareOptionsMenu(cm);
 						} else {
 							mDrawerList.invalidateViews();
@@ -600,8 +606,20 @@ public class MapActivityActions implements DialogProvider {
 				}
 			});
 		}
-		final ContextMenuAdapter cm = createOptionsMenu();
-		prepareOptionsMenu(cm);
+		switch (currentDrawer){
+			case MAIN_MENU:
+				prepareOptionsMenu(createMainOptionsMenu());
+				break;
+			case CONFIGURE_MAP:
+				prepareConfigureMap();
+				break;
+			case CONFIGURE_SCREEN:
+				prepareConfigureScreen();
+				break;
+			case WAYPOINTS:
+				showWaypointsInDrawer(false);
+				break;
+		}
 	}
 
 	public void prepareOptionsMenu(final ContextMenuAdapter cm) {
@@ -652,7 +670,12 @@ public class MapActivityActions implements DialogProvider {
 		prepareOptionsMenu(new ConfigureMapMenu().createListAdapter(mapActivity, true));
 	}
 
-	private ContextMenuAdapter createOptionsMenu() {
+	public void onDrawerBack() {
+		currentDrawer = DrawerType.MAIN_MENU;
+		prepareStartOptionsMenu();
+	}
+
+	private ContextMenuAdapter createMainOptionsMenu() {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
@@ -826,9 +849,7 @@ public class MapActivityActions implements DialogProvider {
 			.listen(new OnContextMenuClick() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					currentDrawer = DrawerType.CONFIGURE_SCREEN;
-					ContextMenuAdapter cm = mapActivity.getMapLayers().getMapInfoLayer().getViewConfigureMenuAdapter();
-					prepareOptionsMenu(cm);
+					prepareConfigureScreen();
 					return false;
 				}
 			}).reg();
@@ -883,6 +904,12 @@ public class MapActivityActions implements DialogProvider {
 
 		getMyApplication().getAppCustomization().prepareOptionsMenu(mapActivity, optionsMenuHelper);
 		return optionsMenuHelper;
+	}
+
+	private void prepareConfigureScreen() {
+		currentDrawer = DrawerType.CONFIGURE_SCREEN;
+		ContextMenuAdapter cm = mapActivity.getMapLayers().getMapInfoLayer().getViewConfigureMenuAdapter();
+		prepareOptionsMenu(cm);
 	}
 
 	public void showWaypointsInDrawer(boolean flat) {

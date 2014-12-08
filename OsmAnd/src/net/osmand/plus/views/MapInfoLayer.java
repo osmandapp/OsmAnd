@@ -298,7 +298,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						map.getMapActions().prepareStartOptionsMenu();
+						map.getMapActions().onDrawerBack();
 						return false;
 					}
 				}).reg();
