@@ -162,12 +162,13 @@ public class TurnType {
 		this.lanes = lanes;
 	}
 	
-	// Note that there is no "weight" or ordering between the primary and secondary turns.
+	// Note that the primary turn will be the one displayed on the map.
 	public static void setPrimaryTurn(int[] lanes, int lane, int turnType) {
 		lanes[lane] |= (turnType << 1);
 	}
 	
 	public void setPrimaryTurn(int lane, int turnType) {
+		lanes[lane] &= ~(15 << 1);
 		lanes[lane] |= (turnType << 1);
 	}
 	
@@ -177,6 +178,7 @@ public class TurnType {
 	}
 
 	public static void setSecondaryTurn(int[] lanes, int lane, int turnType) {
+		lanes[lane] &= ~(15 << 5);
 		lanes[lane] |= (turnType << 5);
 	}
 	
