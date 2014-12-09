@@ -3,6 +3,7 @@ package net.osmand.plus.dashboard;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.widget.*;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.BaseDownloadActivity;
@@ -15,10 +16,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 /**
  * Created by Denis on 21.11.2014.
@@ -140,7 +137,11 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			if (!visible) {
 				return;
 			}
-
+			for(ImageButton button : downloadButtons){
+				if (!button.equals(cancelButton)){
+					button.setImageResource(R.drawable.ic_download_disabled);
+				}
+			}
 			cancelButton.setImageResource(R.drawable.cancel_button);
 			cancelButton.setOnClickListener(new View.OnClickListener() {
 				@Override
