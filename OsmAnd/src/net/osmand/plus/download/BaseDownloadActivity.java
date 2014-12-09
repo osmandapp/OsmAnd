@@ -41,6 +41,7 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 	protected OsmandSettings settings;
 	public static DownloadIndexesThread downloadListIndexThread;
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
+	protected List<IndexItem> downloadQueue = new ArrayList<IndexItem>();
 
 	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
 
@@ -113,13 +114,18 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 	}
 
 	public void startDownload(IndexItem item) {
-		if (downloadListIndexThread.getCurrentRunningTask() != null) {
-			Toast.makeText(this, "Please wait before previous download is finished", Toast.LENGTH_SHORT).show();
+		if (downloadListIndexThread.getCurrentRunningTask() != null && getEntriesToDownload().get(item) == null) {
+			downloadQueue.add(item);
+			Toast.makeText(this, "Added to download queue", Toast.LENGTH_SHORT).show();
 			return;
 		}
+		addToDownload(item);
+		downloadFilesCheckFreeVersion();
+	}
+
+	private void addToDownload(IndexItem item) {
 		List<DownloadEntry> download = item.createDownloadEntry(getMyApplication(), item.getType(), new ArrayList<DownloadEntry>());
 		getEntriesToDownload().put(item, download);
-		downloadFilesCheckFreeVersion();
 	}
 
 	public void downloadFilesPreCheckSpace() {

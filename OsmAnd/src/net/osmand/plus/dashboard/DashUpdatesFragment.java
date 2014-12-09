@@ -1,8 +1,11 @@
 package net.osmand.plus.dashboard;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import android.widget.*;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.BaseDownloadActivity;
@@ -15,10 +18,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 /**
  * Created by Denis on 21.11.2014.
@@ -31,6 +30,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	private List<ProgressBar> progressBars = new ArrayList<ProgressBar>();
 	private List<String> baseNames = new ArrayList<String>();
 	private List<ImageButton> downloadButtons = new ArrayList<ImageButton>();
+	private List<IndexItem> downloadQueue = new ArrayList<IndexItem>();
 	private ImageButton cancelButton;
 
 	@Override
@@ -56,6 +56,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		downloadQueue.clear();
 		if (BaseDownloadActivity.downloadListIndexThread != null) {
 			currentProgress = null;
 			cancelButton = null;
@@ -64,6 +65,13 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	}
 
 	public void updatedDownloadsList(List<IndexItem> list) {
+		List<IndexItem> itemList = new ArrayList<IndexItem>(list);
+		Collections.sort(itemList, new Comparator<IndexItem>() {
+			@Override
+			public int compare(IndexItem indexItem, IndexItem t1) {
+				return (int)(t1.getTimestamp() - indexItem.getTimestamp());
+			}
+		});
 		View mainView = getView();
 		//it may be null because download index thread is async
 		if (mainView == null) {
@@ -73,20 +81,20 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		baseNames.clear();
 		downloadButtons.clear();
 		mainView.findViewById(R.id.main_progress).setVisibility(View.GONE);
-		((TextView) mainView.findViewById(R.id.update_count)).setText(String.valueOf(list.size()));
+		((TextView) mainView.findViewById(R.id.header)).setText(getString(R.string.map_update ,String.valueOf(list.size())));
 
 		LinearLayout updates = (LinearLayout) mainView.findViewById(R.id.updates_items);
 		updates.removeAllViews();
 
-		if (list.size() < 1) {
+		if (itemList.size() < 1) {
 			mainView.findViewById(R.id.maps).setVisibility(View.GONE);
 			return;
 		} else {
 			mainView.findViewById(R.id.maps).setVisibility(View.VISIBLE);
 		}
 
-		for (int i = 0; i < list.size(); i++) {
-			final IndexItem item = list.get(i);
+		for (int i = 0; i < itemList.size(); i++) {
+			final IndexItem item = itemList.get(i);
 			if (i > 2) {
 				break;
 			}
@@ -103,8 +111,6 @@ public class DashUpdatesFragment extends DashBaseFragment {
 				@Override
 				public void onClick(View view) {
 					getDownloadActivity().startDownload(item);
-					currentProgress = progressBar;
-					cancelButton = (ImageButton) view;
 				}
 			});
 			downloadButtons.add((ImageButton) downloadButton);
@@ -124,7 +130,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			return;
 		}
 		//needed when rotation is performed and progress can be null
-		if (currentProgress == null) {
+		if (!updateOnlyProgress) {
 			getProgressIfPossible(basicProgressAsyncTask.getDescription());
 			if (currentProgress == null) {
 				return;
@@ -140,7 +146,6 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			if (!visible) {
 				return;
 			}
-
 			cancelButton.setImageResource(R.drawable.cancel_button);
 			cancelButton.setOnClickListener(new View.OnClickListener() {
 				@Override
