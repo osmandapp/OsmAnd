@@ -614,6 +614,9 @@ public class RouteInfoWidgetsFactory {
 					if(ro != null) {
 						float degree = lp == null || !lp.hasBearing() ? 0 : lp.getBearing();
 						loclanes = RouteResultPreparation.parseTurnLanes(ro, degree / 180 * Math.PI);
+						if(loclanes == null) {
+							loclanes = RouteResultPreparation.parseLanes(ro, degree / 180 * Math.PI);
+						}
 					}
 				} else if (rh != null && rh.isRouteCalculated() ) {
 					if (rh.isFollowingMode() && view.getSettings().SHOW_LANES.get()) {
