@@ -377,7 +377,7 @@
   <string name="select_build_to_install">Seleziona una versione OsmAnd da installare</string>
   <string name="contribution_activity">Installa la versione</string>
   <string name="gps_status_app_not_found">Applicazione stato GPS non installata. Cercarla in Market?</string>
-  <string name="voice_is_not_available_msg">Voce guida non disponibile. Vai nelle impostazioni, scegli il pacchetto voce preferito e scaricarlo.</string>
+  <string name="voice_is_not_available_msg">Nessuna voce guida dispobibile, andare in \'Impostazioni\' → \'Impostazioni generali → \'Guida vocale\' e scegli o scarica un pacchetto voce guida.</string>
   <string name="voice_is_not_available_title">Nessuna voce guida selezionata</string>
   <string name="daynight_mode_day">Giorno</string>
   <string name="daynight_mode_night">Notte</string>
@@ -421,7 +421,7 @@
   <string name="transport_search_none">nessuno</string>
   <string name="transport_search_again">Reimposta la ricerca dei trasporti pubblici</string>
   <string name="map_index">Mappa</string>
-  <string name="voice">Voce</string>
+  <string name="voice">Voci registrate</string>
   <string name="no_vector_map_loaded">Mappe vettoriali non sono state caricate</string>
   <string name="map_route_by_gpx">Percorso tramite GPX</string>
   <string name="gpx_files_not_found">File GPX non trovati nella cartella tracce</string>
@@ -891,8 +891,8 @@
   <string name="index_name_oceania">Oceania</string>
   <string name="index_name_other">Mappe mondiali e di base</string>
   <string name="index_name_wiki">Wikipedia mondiale</string>
-  <string name="index_name_voice">Pacchetti voce (registrati, funzionalità limitate)</string>
-  <string name="index_name_tts_voice">Pacchetti voce (TTS-sintetizzati, preferibile)</string>
+  <string name="index_name_voice">Annunci vocali (registrati, funzionalità limitate)</string>
+  <string name="index_name_tts_voice">Annunci vocali (TTS-sintetizzati, preferibile)</string>
   <string name="favourites_edit_dialog_name">Nome</string>
   <string name="favourites_edit_dialog_category">Categoria</string>
   <string name="local_index_routing_data">Dati percorso</string>
@@ -1879,7 +1879,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="none_selected_gpx">Nessun file GPX selezionato. Per selezionarlo tieni premuto su una delle tracce disponibili.</string>
     <string name="local_index_unselect_gpx_file">Deseleziona</string>
     <string name="local_index_select_gpx_file">Seleziona per visualizzarlo</string>
-    <string name="route_descr_destination">\t</string>
+    <string name="route_descr_destination">Destinazione</string>
     <string name="no_index_file_to_download">Nulla da scaricare, per favore controllare la connessione internet.</string>
     <string name="osmo_gpx_points_downloaded">Scaricati %1$s punti OsMo.</string>
     <string name="osmo_auto_connect_descr">Connettiti al servizio automaticamente dopo l\'accensione</string>
@@ -2025,7 +2025,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="wake_on_voice_never">Mai</string>
     <string name="lock_screen_request_explanation">%1$s necessita di questa autorizzazione per spegnere lo schermo per la funzionalità di risparmio energetico.</string>
     <string name="advanced_settings">Avanzato</string>
-	<string name="osmo_use_https">Usa https</string>
+	<string name="osmo_use_https">Usa HTTPS</string>
 	<string name="osmo_use_https_descr">Usa la connessione sicura con il server</string>
     <string name="show_all">MOSTRA TUTTO</string>
 	<string name="coordinates">Coordinate</string>
@@ -2034,12 +2034,12 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="search_for">Cerca</string>
 	<string name="show_map">MOSTRA LA MAPPA</string>
 	<string name="error_avoid_specific_road">Non è stata trovata una strada nelle vicinanze</string>
-    <string name="use_opengl_render">Utilizzare il rendering opengl</string>
-    <string name="use_opengl_render_descr">Utilizzare il rendering opengl accelerato via hardware (potrebbe non funzionare in alcuni dispositivi)</string>
+    <string name="use_opengl_render">Utilizzare il rendering OpenGL</string>
+    <string name="use_opengl_render_descr">Utilizzare il rendering OpenGL accelerato via hardware (potrebbe non funzionare in alcuni dispositivi)</string>
     <string name="everything_up_to_date">Tutto aggiornato</string>
     <string name="dismiss">Tralascia</string>
     <string name="no_internet_connection">Non è possibile scaricare. Prego, connettersi al Wi-Fi per procedere.</string>
-    <string name="download_tab_downloads">Download</string>
+    <string name="download_tab_downloads">Tutti i download</string>
     <string name="download_tab_updates">Aggiornabili</string>
     <string name="download_tab_local">Nel dispositivo</string>
 	<string name="navigate_point_zone">Zona</string>
@@ -2047,7 +2047,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="navigate_point_easting">In direzione Est</string>
     <string name="map_locale">Lingua della mappa</string>
     <string name="rendering_attr_transportStops_name">Fermate mezzi pubblici</string>
-    <string name="voices">Suggerimenti vocali</string>
+    <string name="voices">Annunci vocali</string>
 	<string name="dash_download_msg_none">Vuoi scaricare una mappa offline?</string>
     <string name="dash_download_msg">Hai %1$s mappe scaricate</string>
     <string name="dash_download_new_one">Scarica una nuova mappa</string>

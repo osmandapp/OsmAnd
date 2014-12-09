@@ -444,6 +444,10 @@ public class MainMenuActivity extends BaseDownloadActivity {
 			Fragment f = ref.get();
 			if(f instanceof DashUpdatesFragment) {
 				if(!f.isDetached()) {
+					if (downloadQueue.size() > 0){
+						startDownload(downloadQueue.get(0));
+						downloadQueue.remove(0);
+					}
 					((DashUpdatesFragment) f).updatedDownloadsList(list);
 				}
 			}

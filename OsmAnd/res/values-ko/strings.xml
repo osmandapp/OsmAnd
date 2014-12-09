@@ -2104,4 +2104,8 @@
 	<string name="map_locale">지도 언어</string>
     <string name="rendering_attr_transportStops_name">대중교통 정류소</string>
     <string name="voices">음성 안내</string>
-	</resources>
+	<string name="dash_download_msg_none">오프라인 지도를 다운로드 하시겠습니까?</string>
+    <string name="dash_download_msg">%1 $s 지도 다운로드됨</string>
+    <string name="dash_download_new_one">새로운 지도 다운로드</string>
+    <string name="dash_download_manage">관리</string>
+    </resources>

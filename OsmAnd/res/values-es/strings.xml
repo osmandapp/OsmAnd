@@ -558,7 +558,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="route_general_information">Distancia total %1$s, tiempo de viaje %2$d h %3$d m.</string>
   <string name="router_service_descr">Elige un servicio de navegación con o sin conexión</string>
   <string name="router_service">Servicio de navegación</string>
-  <string name="sd_dir_not_accessible">No se puede acceder a la carpeta de almacenamiento en la tarjeta SD</string>
+  <string name="sd_dir_not_accessible">¡No se puede acceder a la carpeta de almacenamiento en la tarjeta SD!</string>
   <string name="download_question">¿Descargar {0} - {1} ?</string>
   <string name="download_question_exist">Ya existen datos descargados ({1}) para {0}. ¿Desea actualizarlos ({2}) ?</string>
   <string name="address">Dirección</string>
@@ -1484,7 +1484,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="routing_preferences_descr">Preferencias de ruteo</string>
     <string name="speech_rate_descr">Especifica la velocidad en el habla sintetizada (TTS)</string>
     <string name="speech_rate">Velocidad del habla sintetizada (TTS)</string>
-    <string name="application_dir_change_warning2">¿Quieres que OsmAnd copie sus archivos de datos al nuevo destino?</string>
+    <string name="application_dir_change_warning2">¿Quieres que OsmAnd copie sus archivos de datos al nuevo destino? Selecciona \'No\' para que OsmAnd cree y use la nueva carpeta.</string>
     <string name="copying_osmand_one_file_descr">Copiando archivo (%s) al nuevo destino...</string>
     <string name="copying_osmand_files_descr">Copiando archivos de OsmAnd al nuevo destino (%s)</string>
     <string name="copying_osmand_files">Copiando archivos de datos de OsmAnd</string>
@@ -1893,4 +1893,11 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="download_tab_downloads">Descargas</string>
     <string name="download_tab_updates">Actualizaciones</string>
     <string name="download_tab_local">Local</string>
+	<string name="dash_download_msg">Tienes %1$s mapas descargados</string>
+    <string name="dash_download_new_one">Nuevo Mapa Descargado</string>
+    <string name="dash_download_manage">Administrar</string>
+    <string name="map_locale">Idioma de mapa</string>
+    <string name="rendering_attr_transportStops_name">Paradas de transporte</string>
+    <string name="navigate_point_zone">Zona</string>
+    <string name="voices">Avisos de voz</string>
 	</resources>
