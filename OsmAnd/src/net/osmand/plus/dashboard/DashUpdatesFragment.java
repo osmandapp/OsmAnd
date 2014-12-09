@@ -1,7 +1,14 @@
 package net.osmand.plus.dashboard;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.osmand.plus.R;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.BaseDownloadActivity;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.IndexItem;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,15 +19,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import net.osmand.plus.R;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.BaseDownloadActivity;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadEntry;
-import net.osmand.plus.download.IndexItem;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Denis on 21.11.2014.

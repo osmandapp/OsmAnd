@@ -1,10 +1,18 @@
 package net.osmand.plus.dashboard;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.helpers.FontCache;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +20,6 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.helpers.FontCache;
-
-import java.util.List;
 
 /**
  * Created by Denis on 21.11.2014.
@@ -24,6 +27,8 @@ import java.util.List;
 public class DashPluginsFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_PLUGINS_FRAGMENT";
+	private ArrayList<OsmandPlugin> showedPlugins;
+	private ArrayList<CompoundButton> checks;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,43 +42,67 @@ public class DashPluginsFragment extends DashBaseFragment {
 				startActivityForResult(new Intent(getActivity(), getMyApplication().getAppCustomization().getPluginsActivity()), 1);
 			}
 		});
-
+		LinearLayout layout = (LinearLayout) view.findViewById(R.id.plugins);
+		addPlugins(inflater, layout);
 		return view;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		LinearLayout layout = (LinearLayout) getView().findViewById(R.id.plugins);
-		layout.removeAllViews();
-		addPlugins(layout);
+		for (int i = 0; i < checks.size(); i++) {
+			final CompoundButton ch = checks.get(i);
+			final OsmandPlugin o = showedPlugins.get(i);
+			ch.setOnCheckedChangeListener(null);
+			ch.setChecked(OsmandPlugin.getEnabledPlugins().contains(o));
+			ch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+					OsmandPlugin.enablePlugin(getMyApplication(), o, b);
+				}
+			});
+		}
+		
 	}
 
-	private void addPlugins(View parent){
+	private void addPlugins(LayoutInflater inflater, View parent) {
 		LinearLayout layout = (LinearLayout) parent;
-		LayoutInflater inflater = getActivity().getLayoutInflater();
 
 		List<OsmandPlugin> availablePlugins = OsmandPlugin.getAvailablePlugins();
 		List<OsmandPlugin> enabledPlugins = OsmandPlugin.getEnabledPlugins();
-		for (int i=0; i < availablePlugins.size(); i++){
-			if (i> 2){
+		List<OsmandPlugin> toShow = new ArrayList<OsmandPlugin>();
+		showedPlugins = new ArrayList<OsmandPlugin>();
+		checks = new ArrayList<CompoundButton>();
+		for(OsmandPlugin o : availablePlugins) {
+			if(!(o instanceof OsmandDevelopmentPlugin)) {
+				if(enabledPlugins.contains(o)) {
+					showedPlugins.add(o);
+				} else{
+					toShow.add(o);
+				}
+			}
+		}
+		Collections.shuffle(toShow, new Random(System.currentTimeMillis()));
+		while (!toShow.isEmpty()) {
+			showedPlugins.add(toShow.remove(0));
+			if (showedPlugins.size() > 2) {
 				break;
 			}
+		}
+		
+		for (int i = 0; i < showedPlugins.size(); i++) {
 			final OsmandPlugin plugin = availablePlugins.get(i);
 			View view = inflater.inflate(R.layout.dash_plugin_item, null, false);
 			((TextView) view.findViewById(R.id.plugin_name)).setText(plugin.getName());
 			((TextView) view.findViewById(R.id.plugin_descr)).setText(plugin.getDescription());
+			
 			CompoundButton check = (CompoundButton) view.findViewById(R.id.check_item);
+			checks.add(check);
 			check.setChecked(enabledPlugins.contains(plugin));
-			check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-				@Override
-				public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-					OsmandPlugin.enablePlugin(getMyApplication(),plugin, b);
-				}
-			});
-			int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
-			view.setLayoutParams(lp);
+//			int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources()
+//					.getDisplayMetrics());
+//			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+//			view.setLayoutParams(lp);
 			layout.addView(view);
 		}
 	}

@@ -9,13 +9,9 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -40,6 +36,14 @@ public class DashSearchFragment extends DashBaseFragment {
 
 	}
 
+	protected void searchActivity(final Activity activity, final OsmAndAppCustomization appCustomization, int tab) {
+		final Intent search = new Intent(activity, appCustomization.getSearchActivity());
+		search.putExtra(SearchActivity.SHOW_ONLY_ONE_TAB, true);
+		search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		getMyApplication().getSettings().SEARCH_TAB.set(tab);
+		activity.startActivity(search);
+	}
+	
 	private void setupButtons(View view){
 		final Activity activity = getActivity();
 		final OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
@@ -48,60 +52,42 @@ public class DashSearchFragment extends DashBaseFragment {
 		(view.findViewById(R.id.poi)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.POI_TAB_INDEX);
-				activity.startActivity(search);
+				searchActivity(activity, appCustomization, SearchActivity.POI_TAB_INDEX);
 			}
 		});
 
 		(view.findViewById(R.id.address)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.ADDRESS_TAB_INDEX);
-				activity.startActivity(search);
+				searchActivity(activity, appCustomization, SearchActivity.ADDRESS_TAB_INDEX);
 			}
 		});
 
 		(view.findViewById(R.id.coord)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.LOCATION_TAB_INDEX);
-				activity.startActivity(search);
+				searchActivity(activity, appCustomization, SearchActivity.LOCATION_TAB_INDEX);
 			}
 		});
 
 		(view.findViewById(R.id.fav_btn)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.FAVORITES_TAB_INDEX);
-				activity.startActivity(search);
+				searchActivity(activity, appCustomization, SearchActivity.FAVORITES_TAB_INDEX);
 			}
 		});
 
 		(view.findViewById(R.id.history)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.HISTORY_TAB_INDEX);
-				activity.startActivity(search);
+				searchActivity(activity, appCustomization, SearchActivity.HISTORY_TAB_INDEX);
 			}
 		});
 
 		(view.findViewById(R.id.transport)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.TRANSPORT_TAB_INDEX);
-				activity.startActivity(search);
+				searchActivity(activity, appCustomization, SearchActivity.TRANSPORT_TAB_INDEX);
 			}
 		});
 	}
