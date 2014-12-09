@@ -91,7 +91,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 		}
 		
 		for (int i = 0; i < showedPlugins.size(); i++) {
-			final OsmandPlugin plugin = availablePlugins.get(i);
+			final OsmandPlugin plugin = showedPlugins.get(i);
 			View view = inflater.inflate(R.layout.dash_plugin_item, null, false);
 			((TextView) view.findViewById(R.id.plugin_name)).setText(plugin.getName());
 			((TextView) view.findViewById(R.id.plugin_descr)).setText(plugin.getDescription());
