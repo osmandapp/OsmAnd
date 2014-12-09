@@ -17,6 +17,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.content.Intent;
@@ -164,7 +165,10 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 		}
 		
 		public String getName(FavouritePoint model){
-			return model.getCategory() + " : " + model.getName();
+			if(Algorithms.isEmpty(model.getCategory())) {
+				return model.getName();
+			}
+			return model.getCategory() + ": " + model.getName();
 		}
 		
 		@Override
