@@ -163,7 +163,10 @@ public class DownloadIndexesThread {
 						uiActivity.updateDownloadButton(false);
 					}
 				} else if (o instanceof String) {
-					AccessibleToast.makeText(ctx, (String) o, Toast.LENGTH_LONG).show();
+					String message = (String) o;
+					if(!message.equals("I/O error occurred : Interrupted")){
+						AccessibleToast.makeText(ctx, message, Toast.LENGTH_LONG).show();
+					}
 				}
 			}
 			super.onProgressUpdate(values);
