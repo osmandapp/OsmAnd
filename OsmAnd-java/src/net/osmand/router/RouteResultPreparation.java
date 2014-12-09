@@ -850,6 +850,36 @@ public class RouteResultPreparation {
 		return calculateRawTurnLanes(splitLaneOptions, 0);
 	}
 	
+	public static int[] parseLanes(RouteDataObject ro, double dirToNorthEastPi) {
+		int lns = 0;
+		try {
+			if (ro.getOneway() == 0) {
+				// we should get direction to detect forward or backward
+				double cmp = ro.directionRoute(0, true);
+				
+				if(Math.abs(MapUtils.alignAngleDifference(dirToNorthEastPi -cmp)) < Math.PI / 2) {
+					if(ro.getValue("lanes:forward") != null) {
+						lns = Integer.parseInt(ro.getValue("lanes:forward"));
+					}
+				} else {
+					if(ro.getValue("lanes:backward") != null) {
+					lns = Integer.parseInt(ro.getValue("lanes:backward"));
+					}
+				}
+				if (lns == 0 && ro.getValue("lanes") != null) {
+					lns = Integer.parseInt(ro.getValue("lanes")) / 2;
+				}
+			} else {
+				lns = Integer.parseInt(ro.getValue("lanes"));
+			}
+			if(lns > 0 ) {
+				return new int[lns];
+			}
+		} catch (NumberFormatException e) {
+		}
+		return null;
+	}
+	
 	private static int[] calculateRawTurnLanes(String[] splitLaneOptions, int calcTurnType) {
 		int[] lanes = new int[splitLaneOptions.length];
 		for (int i = 0; i < splitLaneOptions.length; i++) {
