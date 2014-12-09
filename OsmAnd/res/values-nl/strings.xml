@@ -2027,4 +2027,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="map_locale">Taal van de kaart</string>
     <string name="rendering_attr_transportStops_name">OV-haltes</string>
     <string name="voices">Gesproken aanwijzingen</string>
-	</resources>
+	<string name="dash_download_msg_none">Kaarten downloaden naar het toestel?</string>
+    <string name="dash_download_msg">U hebt %1$s kaarten gedownload</string>
+    <string name="dash_download_new_one">Download een nieuwe kaart</string>
+    <string name="dash_download_manage">Beheer</string>
+    </resources>
