@@ -63,6 +63,10 @@ public class OsmandRegions {
 		return o.getNameByType(downloadNameType);
 	}
 	
+	public Integer getNameEnType() {
+		return nameEnType;
+	}
+	
 	public String getLocaleName(String downloadName) {
 		final String lc = downloadName.toLowerCase();
 		if(downloadNamesToLocaleNames.containsKey(lc)) {
@@ -396,11 +400,16 @@ public class OsmandRegions {
 		List<BinaryMapDataObject> cs = or.query(MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat));
 		Set<String> expected = new TreeSet<String>(Arrays.asList(test));
 		Set<String> found = new TreeSet<String>();
-			for(BinaryMapDataObject b : cs) {
-				found.add(b.getName());
-			}
 
-		if(!found.equals(expected)) {
+		for (BinaryMapDataObject b : cs) {
+			String nm = b.getNameByType(or.nameEnType);
+			if(nm == null) {
+				nm = b.getName();
+			}
+			found.add(nm.toLowerCase());
+		}
+
+		if (!found.equals(expected)) {
 			throw new IllegalStateException(" Expected " + expected + " but was " + found);
 		}
 		System.out.println("Found " + expected + " in " + (System.currentTimeMillis() - t) + " ms");
@@ -409,21 +418,20 @@ public class OsmandRegions {
 
 	public static void main(String[] args) throws IOException {
 		OsmandRegions or = new OsmandRegions();
-		or.setLocale("ru");
 		or.prepareFile("/home/victor/projects/osmand/repo/resources/countries-info/regions.ocbf");
-//		or.cacheAllCountries();
+		or.cacheAllCountries();
 //		long t = System.currentTimeMillis();
 //		or.cacheAllCountries();
 //		System.out.println("Init " + (System.currentTimeMillis() - t));
 
 		//testCountry(or, 15.8, 23.09, "chad");
-		testCountry(or, 52.10, 4.92, "netherlands");
-		testCountry(or, 52.15, 7.50, "nordrhein-westfalen");
-		testCountry(or, 40.0760, 9.2807, "italy", "sardegna");
+		testCountry(or, 52.10, 4.92, "the netherlands");
+		testCountry(or, 52.15, 7.50, "north rhine-westphalia");
+		testCountry(or, 40.0760, 9.2807, "italy", "sardinia");
 		testCountry(or, 28.8056, 29.9858, "africa", "egypt" );
 		testCountry(or, 35.7521, 139.7887, "japan");
 		testCountry(or, 46.5145, 102.2580, "mongolia");
-		testCountry(or, 62.54, 43.36, "arkhangelsk", "northwestern-federal-district");
+		testCountry(or, 62.54, 43.36, "arkhangelsk oblast", "northwestern federal district");
 
 
 	}

@@ -99,8 +99,8 @@ public class MainMenuActivity extends BaseDownloadActivity {
 		getSupportActionBar().setBackgroundDrawable(color);
 		getSupportActionBar().setIcon(android.R.color.transparent);
 		
-		initApp(this, getMyApplication());
-		addFragments();
+		boolean firstTime = initApp(this, getMyApplication());
+		addFragments(firstTime);
 	}
 	
 	@Override
@@ -149,7 +149,7 @@ public class MainMenuActivity extends BaseDownloadActivity {
 		about.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 	
-	public void addFragments() {
+	public void addFragments(boolean firstTime) {
 		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
 		//after rotation list of fragments in fragment transaction is not cleared
@@ -157,6 +157,9 @@ public class MainMenuActivity extends BaseDownloadActivity {
 		if (manager.findFragmentByTag(DashMapFragment.TAG) == null){
 			DashMapFragment mapFragment = new DashMapFragment();
 			fragmentTransaction.add(R.id.content, mapFragment, DashMapFragment.TAG);
+		}
+		if(getMyApplication().getAppCustomization().checkExceptionsOnStart()){
+			checkPreviousRunsForExceptions(firstTime);
 		}
 		if (manager.findFragmentByTag(DashSearchFragment.TAG) == null){
 			DashSearchFragment searchFragment = new DashSearchFragment();
@@ -241,13 +244,13 @@ public class MainMenuActivity extends BaseDownloadActivity {
 	}
 
 	
-	protected void initApp(final Activity activity, OsmandApplication app) {
+	protected boolean initApp(final Activity activity, OsmandApplication app) {
 		final OsmAndAppCustomization appCustomization = app.getAppCustomization();
 		// restore follow route mode
 		if(app.getSettings().FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()){
 			final Intent mapIndent = new Intent(this, appCustomization.getMapActivity());
 			startActivityForResult(mapIndent, 0);
-			return;
+			return false;
 		}
 		boolean firstTime = false;
 		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
@@ -285,9 +288,7 @@ public class MainMenuActivity extends BaseDownloadActivity {
 			}
 		}
 
-		if(appCustomization.checkExceptionsOnStart()){
-			checkPreviousRunsForExceptions(firstTime);
-		}
+		return firstTime;
 	}
 	
 	private void applicationInstalledFirstTime() {
