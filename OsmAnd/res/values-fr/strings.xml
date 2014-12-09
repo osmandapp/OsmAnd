@@ -1881,4 +1881,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="map_locale">Langue pour la carte</string>
     <string name="rendering_attr_transportStops_name">Arrêts de transports en commun</string>
     <string name="voices">Guidage vocal</string>
-	</resources>
+	<string name="dash_download_msg_none">Souhaitez-vous télécharger des cartes ?</string>
+    <string name="dash_download_msg">Vous avez téléchargé %1$s carte(s)</string>
+    <string name="dash_download_new_one">Télécharger une nouvelle carte</string>
+    <string name="dash_download_manage">Gérer</string>
+    </resources>

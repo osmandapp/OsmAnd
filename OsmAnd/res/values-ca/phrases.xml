@@ -1,2 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_palaeontological_site">Jaciment paleolític</string>
+
+	<string name="poi_bakery">Fleca</string>
+	<string name="poi_alcohol">Botiga de licors</string>
+	<string name="poi_mall">Centre comercial</string>
+	<string name="poi_beverages">Botiga de begudes</string>
+	<string name="poi_butcher">Carnisseria</string>
+	<string name="poi_seafood">Peixateria</string>
+	<string name="poi_supermarket">Supermercat</string>
+	<string name="poi_bookshop">Llibreria</string>
+	<string name="poi_antiques_shop">Antiquari</string>
+	<string name="poi_art_shop">Galeria d\'art</string>
+	<string name="poi_chemist_shop">Drogueria</string>
+	<string name="poi_shoes">Sabateria</string>
+	<string name="poi_florist">Floristeria</string>
+	<string name="poi_garden_centre">Centre de jardineria</string>
+	<string name="poi_gift_shop">Botiga de regals</string>
+	<string name="poi_glaziery_shop">Vidrier</string>
+	<string name="poi_hardware_shop">Ferreteria</string>
+	<string name="poi_herbalist">Herbodietètica</string>
+	<string name="poi_interior_decoration_shop">Botiga de decoració</string>
+	<string name="poi_jewelry_shop">Joieria</string>
+	<string name="poi_kiosk">Kiosc</string>
+	<string name="poi_optician_shop">Optometria</string>
+	</resources>

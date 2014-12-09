@@ -1832,4 +1832,11 @@
 	<string name="navigate_point_zone">Зона</string>
     <string name="rendering_attr_transportStops_name">Остановки транспорта</string>
     <string name="dismiss">Не отправлять</string>
+    <string name="dash_download_msg_none">Вы хотите загрузить оффлайн карты?</string>
+    <string name="dash_download_msg">Вы загрузили %1$s карт</string>
+    <string name="dash_download_new_one">Загрузка Новой Карты</string>
+    <string name="dash_download_manage">Менеджер загрузок</string>
+    <string name="map_locale">Язык карты</string>
+    <string name="navigate_point_northing">Северной широты</string>
+    <string name="navigate_point_easting">Восточной долготы</string>
     </resources>

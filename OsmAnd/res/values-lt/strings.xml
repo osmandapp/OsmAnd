@@ -622,7 +622,7 @@
   <string name="transport_search_none">nėra</string>
   <string name="transport_search_again">Pradėti transporto paiešką iš pradžių</string>
   <string name="map_index">Žemėlapis</string>
-  <string name="voice">Balsas</string>
+  <string name="voice">Įrašytas balsas</string>
   <string name="no_vector_map_loaded">Vektoriniai žemėlapiai neįkelti</string>
   <string name="map_route_by_gpx">Vykdyti navigaciją naudojant GPX</string>
   <string name="gpx_files_not_found">Tracks segtuve nerasta jokių GPX failų</string>
@@ -1863,4 +1863,5 @@
     <string name="navigate_point_northing">Šiaurė</string>
     <string name="navigate_point_easting">Rytai</string>
     <string name="download_tab_local">Vietinis</string>
-	</resources>
+	<string name="dash_download_msg">Atsisųsta %1$s žemėlapių</string>
+    </resources>
