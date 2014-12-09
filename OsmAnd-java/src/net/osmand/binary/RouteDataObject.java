@@ -66,14 +66,18 @@ public class RouteDataObject {
 	}
 	
 	public String getRef(){
-		if(names != null ) {
+		if (names != null) {
+			String ref = names.get(region.destinationRefTypeRule);
+			if (ref != null) {
+				return ref;
+			}
 			return names.get(region.refTypeRule);
 		}
 		return null;
 	}
 
 	public String getDestinationName(){
-		if(names != null ) {
+		if(names != null) {
 			return names.get(region.destinationTypeRule);
 		}
 		return null;
