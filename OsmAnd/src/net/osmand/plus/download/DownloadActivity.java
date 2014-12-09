@@ -77,7 +77,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 		setContentView(R.layout.tab_content);
 		singleTab = getIntent() != null && getIntent().getBooleanExtra(SINGLE_TAB, false);
 		int currentTab = 0;
-		String tab = getIntent() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);
+		String tab = getIntent() == null || getIntent().getExtras() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);
 		if (tab != null) {
 			if (tab.equals(DOWNLOAD_TAB)){
 				currentTab = 1;
