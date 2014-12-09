@@ -1860,8 +1860,10 @@
     <string name="navigate_point_zone">Zona</string>
     <string name="download_tab_downloads">Atsisiuntimai</string>
     <string name="download_tab_updates">Atnaujinimai</string>
-    <string name="navigate_point_northing">Šiaurė</string>
-    <string name="navigate_point_easting">Rytai</string>
+    <string name="navigate_point_northing">Šiaurės platumos</string>
+    <string name="navigate_point_easting">Rytų ilgumos</string>
     <string name="download_tab_local">Vietinis</string>
 	<string name="dash_download_msg">Atsisųsta %1$s žemėlapių</string>
+    <string name="dash_download_new_one">Atsisiųsti naują žemėlapį</string>
+    <string name="dash_download_manage">Valdyti</string>
     </resources>
