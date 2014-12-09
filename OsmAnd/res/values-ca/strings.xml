@@ -325,7 +325,7 @@
 <string name="local_indexes_cat_voice">Dades de veu (gravades)</string>
 <string name="local_indexes_cat_gpx">Dades GPX</string>
 <string name="local_indexes_cat_poi">Dades dels PDI</string>
-<string name="ttsvoice">Veu TTS</string>
+<string name="ttsvoice">Veu sintetitzada TTS</string>
 <string name="search_offline_clear_search">Una altra cerca</string>
 <string name="map_text_size_descr">Seleccioneu la mida del text dels noms al mapa</string>
 <string name="map_text_size">Mida de la lletra al mapa</string>
@@ -1915,4 +1915,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="navigate_point_northing">Ordenada</string>
     <string name="navigate_point_easting">Abscissa</string>
     <string name="voices">Indicadors de veu</string>
-	</resources>
+	<string name="dash_download_msg_none">Voleu baixar algun mapa per quan no hi ha connexió?</string>
+    <string name="dash_download_msg">Teniu baixats %1$s mapes</string>
+    <string name="dash_download_new_one">Baixa Nou Mapa</string>
+    <string name="dash_download_manage">Gestiona</string>
+    </resources>
