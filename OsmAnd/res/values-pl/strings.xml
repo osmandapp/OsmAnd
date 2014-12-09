@@ -1960,4 +1960,12 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="use_opengl_render">Użyj renderowania OpenGL</string>
     <string name="use_opengl_render_descr">Użyj renderowania z akceleracją OpenGL (może nie działać na niektórych urządzeniach)</string>
     <string name="error_avoid_specific_road">Najbliższa droga nie została znaleziona</string>
+    <string name="dash_download_msg_none">Chcesz pobrać jakąś mapę offline?</string>
+    <string name="dash_download_msg">Masz %1$s pobrane mapy</string>
+    <string name="dash_download_new_one">Pobierz Nową Mapę</string>
+    <string name="dash_download_manage">Zarządzaj</string>
+    <string name="map_locale">Język Mapy</string>
+    <string name="navigate_point_zone">Strefa</string>
+    <string name="download_tab_downloads">Pobrane</string>
+    <string name="download_tab_updates">Aktualizacje</string>
     </resources>
