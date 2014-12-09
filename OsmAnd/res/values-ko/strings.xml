@@ -116,7 +116,7 @@
 	
 	<string name="index_name_other">전세계 및 주제 지도</string>
 	<string name="index_name_wiki">전세계 위키피디아 POIs</string>
-	<string name="index_name_voice">음성 팩 (녹음된 소리, 제한된 기능)</string>
+	<string name="index_name_voice">음성 안내 (녹음된 소리, 제한된 기능)</string>
 	<string name="index_name_tts_voice">음성 팩 (TTS-합성소리, 선호)</string>
 
 	<string name="amenity_type_osmwiki">위키피디아 (오프라인)</string>
@@ -496,7 +496,7 @@
 
 	<string name="gps_status_app_not_found">GPS Status 앱이 설치되지 않았습니다. 구글마켓에서 찾을까요?</string>
 
-	<string name="voice_is_not_available_msg">음성 안내를 사용할 수 없습니다. 설정으로 가서, 선호하는 음성 데이터 패키지를 선택하고, 다운로드합니다.</string>
+	<string name="voice_is_not_available_msg">"음성 안내를 사용할 수 없습니다. \'설정 - 일반 - 음성안내\' 로 가서, 선호하는 음성 안내  패키지를 선택하고 다운로드하세요."</string>
 	<string name="voice_is_not_available_title">선택된 음성 안내 없음</string>
 	<string name="daynight_mode_day">주간</string>
 	<string name="daynight_mode_night">야간</string>
@@ -544,7 +544,7 @@
 	<string name="transport_search_again">대중교통 검색 재설정</string>
 
 	<string name="map_index">지도</string>
-	<string name="voice">음성</string>
+	<string name="voice">녹음된 음성</string>
 	<string name="no_vector_map_loaded">벡터 맵을 적재하지 않았습니다</string>
 
 	<string name="map_route_by_gpx">GPX파일을 이용한 경로안내</string>
