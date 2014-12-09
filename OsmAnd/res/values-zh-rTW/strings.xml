@@ -324,8 +324,8 @@
 	<string name="index_name_oceania">大洋洲</string>
 	<string name="index_name_other">世界各地和專題地圖</string>
 	<string name="index_name_wiki">全球維基百科 POI</string>
-	<string name="index_name_voice">語音包 (真人發音，功能有限)</string>
-	<string name="index_name_tts_voice">語音包 (TTS-合成音，優先)</string>
+	<string name="index_name_voice">提示語音 (真人發音，功能有限)</string>
+	<string name="index_name_tts_voice">提示語音 (TTS-合成語音，優先)</string>
 	<string name="amenity_type_osmwiki">維基百科 (離線)</string>
 	<string name="amenity_type_user_defined">使用者定義</string>
 	<string name="fav_export_confirmation">我的最愛已有上次匯出的檔，要取代它嗎？</string>
@@ -622,7 +622,7 @@
 	<string name="select_build_to_install">選擇 OsmAnd 編譯安裝</string>
 	<string name="contribution_activity">安裝的版本</string>
 	<string name="gps_status_app_not_found">GPS 狀態工具未安裝，到 Play 商場找嗎？</string>
-	<string name="voice_is_not_available_msg">語音導航無法使用。請到設定功能，選取喜歡的語音資料然後下載。</string>
+	<string name="voice_is_not_available_msg">語音導航無法使用時。請到\'設定\'→ \'一般設定\' → \'語音導航\'，選取或下載提示語音包。</string>
 	<string name="voice_is_not_available_title">未選定語音導航</string>
 	<string name="daynight_mode_day">日間</string>
 	<string name="daynight_mode_night">夜間</string>
@@ -664,7 +664,7 @@
 	<string name="transport_search_none">無</string>
 	<string name="transport_search_again">重置交通運輸查尋</string>
 	<string name="map_index">地圖</string>
-	<string name="voice">語音</string>
+	<string name="voice">真人語音</string>
 	<string name="no_vector_map_loaded">向量地圖未載入</string>
 	<string name="map_route_by_gpx">以 GPX 導航</string>
 	<string name="gpx_files_not_found">在 /tracks 資料夾找不到 GPX 檔案</string>
@@ -802,7 +802,7 @@
 	<string name="route_general_information">總距離 %1$s、行駛時間 %2$d 小時 %3$d 分。</string>
 	<string name="router_service_descr">選擇線上或離線的導航服務</string>
 	<string name="router_service">導航服務</string>
-	<string name="sd_dir_not_accessible">在 SD 卡上的存儲資料夾無法存取</string>
+	<string name="sd_dir_not_accessible">在 SD 卡上的存儲資料夾無法存取！</string>
 	<string name="download_question">下載 {0} - {1}？</string>
 	<string name="download_question_exist">離線資料 {0}已存在 ({1})。您要更新 ({2})嗎 ?</string>
 	<string name="address">地址</string>
@@ -1683,7 +1683,7 @@
     <string name="none_selected_gpx">沒有選定 GPX 檔案。選取現有的軌跡再按住。</string>
     <string name="local_index_unselect_gpx_file">取消選擇</string>
     <string name="local_index_select_gpx_file">選取要顯示的</string>
-    <string name="route_descr_destination">\t</string>
+    <string name="route_descr_destination">目的地</string>
     <string name="no_index_file_to_download">無法下載，請檢查網路連線。</string>
     <string name="osmo_gpx_points_downloaded">OsMo 標點 %1$s 已下載。</string>
     <string name="osmo_auto_connect_descr">自動連線至服務，隨後啟動應用程式</string>
@@ -1844,7 +1844,7 @@
     <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能在某些裝置上無法工作）</string>
     <string name="dismiss">排除</string>
     <string name="no_internet_connection">不能下載。請連接到 Wifi 網路進行。</string>
-    <string name="download_tab_downloads">下載</string>
+    <string name="download_tab_downloads">全部下載</string>
     <string name="download_tab_updates">更新</string>
     <string name="download_tab_local">本機</string>
 	<string name="navigate_point_northing">北距</string>
@@ -1852,4 +1852,5 @@
     <string name="navigate_point_zone">地區</string>
     <string name="map_locale">地圖上的語言</string>
     <string name="rendering_attr_transportStops_name">候車亭</string>
-    </resources>
+    <string name="voices">提示語音</string>
+	</resources>

@@ -2103,4 +2103,5 @@
     <string name="download_tab_local">로컬</string>
 	<string name="map_locale">지도 언어</string>
     <string name="rendering_attr_transportStops_name">대중교통 정류소</string>
-    </resources>
+    <string name="voices">음성 안내</string>
+	</resources>

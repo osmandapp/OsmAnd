@@ -1068,8 +1068,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 \n\t- Mapas agiornadas
 \n\t- Àteras caraterìsticas minores "</string>    
 	<string name="free_version_message">Custa versione gratùita de OsmAnd est limitada a %1$s iscarrigamentos e non suportada sos artìculos sena lìnia de Wikipedia.</string>
-	<string name="index_name_voice">Pachetos boghe (registrados, funtzionalidades limitadas)</string>
-	<string name="index_name_tts_voice">Pachetos boghe (TTS-sintetizados, preferìbiles)</string>
+	<string name="index_name_voice">Indicatziones vocales (registradas, funtzionalidades limitadas)</string>
+	<string name="index_name_tts_voice">Indicatziones vocales (TTS-sintetizadas, preferìbiles)</string>
 	<string name="amenity_type_user_defined">Definidu dae s\'impitadore</string>
 	<string name="fav_export_confirmation">Esistint documentos cun prefèrridos esportados giai. Los boles remplasare?</string>
 	<string name="index_settings">Gesti sos documentos de sas mapas</string>
@@ -1330,7 +1330,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="context_menu_item_search_transport">Chirca trasportos pùblicos</string>
 	<string name="transport_search_none">perunu</string>
 	<string name="map_index">Mapa</string>
-	<string name="voice">Boghe</string>
+	<string name="voice">Boghe registrada</string>
 	<string name="no_vector_map_loaded">Sas mapas vetoriales non sunt istadas carrigadas</string>
 	<string name="map_route_by_gpx">Àndala tramite GPX</string>
 	<string name="gpx_files_not_found">Perunu documentu GPX agatadu in sa cartella /tracks</string>
@@ -1391,7 +1391,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="osmand_routing_experimental">"Su nàvigu sena lìnia de OsmAnd est isperimentale e non funtzionada pro distàntzias prus mannas de  20 km.\n\nSu servìtziu de nàvigu benit furnidu intertantu tramite CloudMade in lìnia."</string>
 	<string name="osmand_net_previously_installed">B\'est installada una versione pretzedente de OsmAnd. Totu sos datos ant a èssere suportados dae s\'aplicu nou. Sos prefèrridos depent èssere esportados dae s\'aplicu bètzu e importados a manuda in su nou.</string>
 	<string name="gps_status_app_not_found">Aplicu istadu GPS no installada. La boles chircare in su Market?</string>
-	<string name="voice_is_not_available_msg">Boghe gia non disponìbile. Bae in sas impostaduras, issèbera su pachete prefèrridu e iscàrrigalu.</string>
+	<string name="voice_is_not_available_msg">Boghe de ghia non disponìbile. Intra in \'Impostaduras\' → \'Impostaduras generales\' → \'Ghia vocale\', issèbera su pachete prefèrridu e/o iscàrrigalu.</string>
 	<string name="daynight_descr">Issèbera sas règulas pro sa muda de sa modalidade die/note</string>
 	<string name="download_files_question">Iscarrigare {0} documentu/os ({1} MB)?</string>
 	<string name="reload">Torra a carrigare</string>
@@ -1801,4 +1801,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="navigate_point_easting">In diretzione Est</string>
     <string name="rendering_attr_transportStops_name">Firmadas traspòrtu pùblicu</string>
     <string name="map_locale">Limba de sa mapa</string>
-    </resources>
+    <string name="voices">Indicatziones vocales</string>
+	</resources>
