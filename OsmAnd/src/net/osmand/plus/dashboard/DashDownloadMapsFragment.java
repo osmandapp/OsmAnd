@@ -76,7 +76,7 @@ public class DashDownloadMapsFragment extends DashBaseFragment {
 				}
 				
 			}
-		};
+		}.execute((Void)null);
         
         
         
