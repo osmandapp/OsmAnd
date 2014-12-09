@@ -1802,4 +1802,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="rendering_attr_transportStops_name">Firmadas traspòrtu pùblicu</string>
     <string name="map_locale">Limba de sa mapa</string>
     <string name="voices">Indicatziones vocales</string>
-	</resources>
+	<string name="dash_download_msg_none">Boles iscarrigare carchi mapa non in lìnia?</string>
+    <string name="dash_download_msg">Tenes %1$s mapas iscarrigadas</string>
+    <string name="dash_download_new_one">Iscàrriga una mapa noa</string>
+    <string name="dash_download_manage">Gesti</string>
+    </resources>
