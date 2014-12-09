@@ -24,4 +24,19 @@
 	<string name="poi_kiosk">Quiosc</string>
 	<string name="poi_optician_shop">Optometria</string>
 	<string name="poi_convenience">Botiga de queviures</string>
+	<string name="poi_deli">Delicadeses</string>
+	<string name="poi_shop_farm">Productes de granja</string>
+	<string name="poi_greengrocer">Verdureria</string>
+	<string name="poi_confectionery">Confiteria</string>
+	<string name="poi_ice_cream">Gelateria</string>
+	<string name="poi_shop_tea">Botiga de te</string>
+	<string name="poi_dairy">Productes làctics</string>
+	<string name="poi_vending_machine">Màquina expenedora</string>
+
+	<string name="poi_bicycle_shop">Taller de bicicletes</string>
+	<string name="poi_anime_shop">Botiga d\'anime</string>
+	<string name="poi_baby_goods">Articles per a bebès</string>
+	<string name="poi_bathroom_furnishing_shop">Mobles de bany</string>
+	<string name="poi_bed_shop">Matalasseria</string>
+	<string name="poi_boutique">Boutique</string>
 	</resources>
