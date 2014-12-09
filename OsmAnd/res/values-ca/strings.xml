@@ -182,7 +182,7 @@
 <string name="index_name_africa">Àfrica</string>
 <string name="index_name_asia">Àsia</string>
 <string name="index_name_oceania">Oceania</string>
-<string name="index_name_voice">Paquets de veu (enregistrats, funcionalitats limitades)</string>
+<string name="index_name_voice">Indicadors de veu (enregistrats, funcionalitats limitades)</string>
 <string name="amenity_type_osmwiki">Viquipèdia (fora de línia)</string>
 <string name="routing_settings">Navegació</string>
 <string name="routing_settings_descr">Especifiqueu les opcions de navegació</string>
@@ -231,7 +231,7 @@
 <string name="index_name_central_america">Amèrica Central</string>
 <string name="index_name_south_america">Amèrica del Sud</string>
 <string name="index_name_europe">Europa</string>
-<string name="index_name_tts_voice">Paquets de veu (sintetitzat TTS)</string>
+<string name="index_name_tts_voice">Indicadors de veu (sintetitzats amb TTS, recomanat)</string>
 <string name="native_library_not_supported">La llibreria nativa no està suportada en aquest dispositiu.</string>
 <string name="init_native_library">S\'està inicialitzant la llibreria nativa…</string>
 <string name="auto_follow_route_never">Mai</string>
@@ -646,7 +646,7 @@
 <string name="continuous_rendering">Dibuixat continu</string>
 <string name="use_high_res_maps">Pantalla d\'alta resolució</string>
 <string name="transport_search_none">cap</string>
-<string name="voice">veu</string>
+<string name="voice">Veu enregistrada</string>
 <string name="error_reading_gpx">S\'ha produït un error en llegir les dades del GPX</string>
 <string name="thanks_yandex_traffic">Gracies a Yandex per informació del transit.</string>
 <string name="no_fav_to_save">Cap punt preferit per desar</string>
@@ -767,7 +767,7 @@
 <string name="downloading_build">Baixant compilació…</string>
 <string name="loading_builds">Carregant paquets de l\'OsmAnd…</string>
 <string name="select_build_to_install">Seleccioneu un dels paquets de l\'OsmAnd per instal·lar-lo</string>
-<string name="voice_is_not_available_msg">El guiatge de veu no està disponible. Aneu a la configuració, escolliu el paquet de dades de veu preferit i baixeu-lo.</string>
+<string name="voice_is_not_available_msg">El guiatge per veu no està disponible. Aneu a «Configuració» → «Paràmetres generals» → «Guiatge per veu» i seleccioneu o baixeu un paquet d\'indicadors de veu.</string>
 <string name="voice_is_not_available_title">Cap guiatge de veu seleccionat</string>
 <string name="daynight_descr">Trieu la regla de commutació del mode dia/nit</string>
 <string name="maps_could_not_be_downloaded">Aquest mapa podria no haver-se baixat</string>
@@ -1771,8 +1771,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_attr_cycleRoutes_name">Mostra vies de ciclista</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostra les vies ciclistes</string>
     
-    <string name="map_preferred_locale_descr">Idioma que preferiu a les etiquetes del mapa (si no està disponible es canviarà la preferència actual entre l\'anglès i les denominacions locals)</string>
-    <string name="map_preferred_locale">Idioma preferit al mapa</string>
+    <string name="map_preferred_locale_descr">Llengua que preferiu a les etiquetes del mapa (si no està disponible es canviarà la preferència actual entre l\'anglès i les denominacions locals)</string>
+    <string name="map_preferred_locale">Llengua preferida al mapa</string>
     <string name="local_map_names">Denominacions locals</string>
     <string name="lang_sw">Suahili</string>
     <string name="lang_he">Hebreu</string>
@@ -1914,5 +1914,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="navigate_point_zone">Àrea</string>
     <string name="navigate_point_northing">Ordenada</string>
     <string name="navigate_point_easting">Abscissa</string>
-    <string name="voices">Paquets de veu</string>
+    <string name="voices">Indicadors de veu</string>
 	</resources>
