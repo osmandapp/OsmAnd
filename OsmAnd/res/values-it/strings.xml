@@ -377,7 +377,7 @@
   <string name="select_build_to_install">Seleziona una versione OsmAnd da installare</string>
   <string name="contribution_activity">Installa la versione</string>
   <string name="gps_status_app_not_found">Applicazione stato GPS non installata. Cercarla in Market?</string>
-  <string name="voice_is_not_available_msg">Nessuna voce guida dispobibile, andare in \'Impostazioni\' → \'Impostazioni generali → \'Guida vocale\' e scegli o scarica un pacchetto voce guida.</string>
+  <string name="voice_is_not_available_msg">Nessuna voce guida disponibile, andare in \'Impostazioni\' → \'Impostazioni generali\' → \'Guida vocale\' e scegli o scarica un pacchetto voce guida.</string>
   <string name="voice_is_not_available_title">Nessuna voce guida selezionata</string>
   <string name="daynight_mode_day">Giorno</string>
   <string name="daynight_mode_night">Notte</string>
@@ -2030,7 +2030,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="show_all">MOSTRA TUTTO</string>
 	<string name="coordinates">Coordinate</string>
 	<string name="home_button">Schermata iniziale</string>
-    <string name="map_update">Mappe </string>
+    <string name="map_update">Hai %1$s mappe da aggiornabili</string>
 	<string name="search_for">Cerca</string>
 	<string name="show_map">MOSTRA LA MAPPA</string>
 	<string name="error_avoid_specific_road">Non è stata trovata una strada nelle vicinanze</string>
