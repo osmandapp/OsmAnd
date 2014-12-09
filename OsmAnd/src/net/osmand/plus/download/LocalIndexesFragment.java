@@ -13,9 +13,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import android.text.method.LinkMovementMethod;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.*;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
@@ -24,8 +21,11 @@ import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.*;
+import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -38,6 +38,7 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StatFs;
+import android.text.method.LinkMovementMethod;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -51,7 +52,13 @@ import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.ActionMode.Callback;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.SubMenu;
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment {
 

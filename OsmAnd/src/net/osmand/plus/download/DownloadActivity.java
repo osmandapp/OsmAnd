@@ -48,13 +48,16 @@ public class DownloadActivity extends BaseDownloadActivity {
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<LocalIndexInfo>();
 
 	private String initialFilter = "";
+	private boolean singleTab;
 
 	public static final String FILTER_KEY = "filter";
 	public static final String FILTER_CAT = "filter_cat";
 
 	public static final String TAB_TO_OPEN = "Tab_to_open";
+	public static final String LOCAL_TAB = "local";
 	public static final String DOWNLOAD_TAB = "download";
 	public static final String UPDATES_TAB = "updates";
+	public static final String SINGLE_TAB = "SINGLE_TAB";
 
 
 	@Override
@@ -72,24 +75,45 @@ public class DownloadActivity extends BaseDownloadActivity {
 		setProgressBarIndeterminateVisibility(false);
 
 		setContentView(R.layout.tab_content);
-
-		tabHost = (TabHost) findViewById(android.R.id.tabhost);
-		tabHost.setup();
-		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-		mTabsAdapter = new FavouritesActivity.TabsAdapter(this, tabHost, viewPager, settings, false);
-		if (getMyApplication().getAppCustomization().onlyTourDownload()){
-			mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS").setIndicator(getString(R.string.download_tab_downloads)),
-					DownloadIndexFragment.class, null);
-		} else {
-			mTabsAdapter.addTab(tabHost.newTabSpec("LOCAL_INDEX").setIndicator(getString(R.string.download_tab_local)),
-					LocalIndexesFragment.class, null);
-			mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS").setIndicator(getString(R.string.download_tab_downloads)),
-					DownloadIndexFragment.class, null);
-			mTabsAdapter.addTab(tabHost.newTabSpec("UPDATES").setIndicator(getString(R.string.download_tab_updates)),
-					UpdatesIndexFragment.class, null);
+		singleTab = getIntent() != null && getIntent().getBooleanExtra(SINGLE_TAB, false);
+		int currentTab = 0;
+		String tab = getIntent() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);
+		if (tab != null) {
+			if (tab.equals(DOWNLOAD_TAB)){
+				currentTab = 1;
+			} else if (tab.equals(UPDATES_TAB)){
+				currentTab = 2;
+			}
 		}
+		if (singleTab) {
+			ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+			viewPager.setVisibility(View.GONE);
+			Fragment f = currentTab == 0 ? new LocalIndexesFragment() : 
+				(currentTab == 1? new DownloadIndexFragment() : new UpdatesIndexFragment());
+			findViewById(R.id.layout).setVisibility(View.VISIBLE);
+			getSupportFragmentManager().beginTransaction().add(R.id.layout, f).commit();
+		} else {
+			tabHost = (TabHost) findViewById(android.R.id.tabhost);
+			tabHost.setup();
+			ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+			mTabsAdapter = new FavouritesActivity.TabsAdapter(this, tabHost, viewPager, settings, false);
+			if (getMyApplication().getAppCustomization().onlyTourDownload()) {
+				mTabsAdapter.addTab(
+						tabHost.newTabSpec("DOWNLOADS").setIndicator(getString(R.string.download_tab_downloads)),
+						DownloadIndexFragment.class, null);
+			} else {
+				mTabsAdapter.addTab(
+						tabHost.newTabSpec("LOCAL_INDEX").setIndicator(getString(R.string.download_tab_local)),
+						LocalIndexesFragment.class, null);
+				mTabsAdapter.addTab(
+						tabHost.newTabSpec("DOWNLOADS").setIndicator(getString(R.string.download_tab_downloads)),
+						DownloadIndexFragment.class, null);
+				mTabsAdapter.addTab(tabHost.newTabSpec("UPDATES")
+						.setIndicator(getString(R.string.download_tab_updates)), UpdatesIndexFragment.class, null);
+			}
 
-		tabHost.setCurrentTab(0);
+			tabHost.setCurrentTab(currentTab);
+		}
 
 		settings = ((OsmandApplication)getApplication()).getSettings();
 
@@ -136,15 +160,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 					downloadTypes.add(0, type);
 				}
 			}
-
-			String tab = intent.getExtras().getString(TAB_TO_OPEN);
-			if (tab != null) {
-				if (tab.equals(DOWNLOAD_TAB)){
-					tabHost.setCurrentTab(1);
-				} else if (tab.equals(UPDATES_TAB)){
- 					tabHost.setCurrentTab(2);
-				}
-			}
 		}
 
 		getSupportActionBar().setHomeButtonEnabled(true);
@@ -165,7 +180,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 	protected void onResume() {
 		super.onResume();
 		getMyApplication().setDownloadActivity(this);
-		BasicProgressAsyncTask<?, ?, ?> t = downloadListIndexThread.getCurrentRunningTask();
 	}
 
 

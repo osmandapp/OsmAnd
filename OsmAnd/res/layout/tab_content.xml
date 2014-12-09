@@ -90,6 +90,13 @@
 
 
         <FrameLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" 
+            android:visibility="gone"/>
+        
+        <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="0dp"
             android:layout_height="0dp" />

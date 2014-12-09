@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.dashboard.DashDownloadMapsFragment;
 import net.osmand.plus.dashboard.DashErrorFragment;
 import net.osmand.plus.dashboard.DashFavoritesFragment;
 import net.osmand.plus.dashboard.DashMapFragment;
@@ -168,6 +169,10 @@ public class MainMenuActivity extends BaseDownloadActivity {
 		if (manager.findFragmentByTag(DashUpdatesFragment.TAG) == null){
 			DashUpdatesFragment updatesFragment = new DashUpdatesFragment();
 			fragmentTransaction.add(R.id.content, updatesFragment, DashUpdatesFragment.TAG);
+		}
+		if (manager.findFragmentByTag(DashDownloadMapsFragment.TAG) == null){
+			DashDownloadMapsFragment fragment = new DashDownloadMapsFragment();
+			fragmentTransaction.add(R.id.content, fragment, DashDownloadMapsFragment.TAG);
 		}
 		if (manager.findFragmentByTag(DashPluginsFragment.TAG) == null){
 			DashPluginsFragment pluginsFragment = new DashPluginsFragment();
