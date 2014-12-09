@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="poi_palaeontological_site">Jaciment paleolític</string>
+<resources><string name="poi_palaeontological_site">Jaciment paleontològic</string>
 
 	<string name="poi_bakery">Fleca</string>
 	<string name="poi_alcohol">Botiga de licors</string>
@@ -16,11 +16,12 @@
 	<string name="poi_florist">Floristeria</string>
 	<string name="poi_garden_centre">Centre de jardineria</string>
 	<string name="poi_gift_shop">Botiga de regals</string>
-	<string name="poi_glaziery_shop">Vidrier</string>
+	<string name="poi_glaziery_shop">Vidrieria</string>
 	<string name="poi_hardware_shop">Ferreteria</string>
 	<string name="poi_herbalist">Herbodietètica</string>
-	<string name="poi_interior_decoration_shop">Botiga de decoració</string>
+	<string name="poi_interior_decoration_shop">Botiga d\'interiorisme</string>
 	<string name="poi_jewelry_shop">Joieria</string>
-	<string name="poi_kiosk">Kiosc</string>
+	<string name="poi_kiosk">Quiosc</string>
 	<string name="poi_optician_shop">Optometria</string>
+	<string name="poi_convenience">Botiga de queviures</string>
 	</resources>
