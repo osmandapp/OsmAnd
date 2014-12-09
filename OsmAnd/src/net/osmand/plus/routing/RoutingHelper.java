@@ -823,8 +823,9 @@ public class RoutingHelper {
 				}, "Calculating position"); //$NON-NLS-1$
 				currentRunningJob.start();
 			}
+			return currentRunningJob;
 		}
-		return currentRunningJob;
+		return null;
 	}
 	
 	

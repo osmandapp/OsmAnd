@@ -59,27 +59,31 @@ public class CurrentPositionHelper {
 	}
 	
 	
-	private void scheduleRouteSegmentFind(final Location loc){
-		if(calculatingThread == Thread.currentThread()) {
+	private void scheduleRouteSegmentFind(final Location loc) {
+		if (calculatingThread == Thread.currentThread()) {
 			lastFound = runUpdateInThreadCatch(loc.getLatitude(), loc.getLongitude());
-		} else if(calculatingThread == null && loc != null) {
-			Runnable run = new Runnable() {
-				@Override
-				public void run() {
-					try {
-						lastFound = runUpdateInThreadCatch(loc.getLatitude(), loc.getLongitude());
-						if (lastAskedLocation != loc) {
-							// refresh and run new task if needed
-							getLastKnownRouteSegment(lastAskedLocation);
+		} else if (loc != null) {
+			if (calculatingThread == null) {
+				Runnable run = new Runnable() {
+					@Override
+					public void run() {
+						try {
+							lastFound = runUpdateInThreadCatch(loc.getLatitude(), loc.getLongitude());
+							if (lastAskedLocation != loc) {
+								// refresh and run new task if needed
+								getLastKnownRouteSegment(lastAskedLocation);
+							}
+						} finally {
+							calculatingThread = null;
 						}
-					} finally {
-						calculatingThread = null;
 					}
-				}
-			};
-			calculatingThread = app.getRoutingHelper().startTaskInRouteThreadIfPossible(run);
+				};
+				calculatingThread = app.getRoutingHelper().startTaskInRouteThreadIfPossible(run);
+			} else if (!calculatingThread.isAlive()) {
+				calculatingThread = null;
+			}
 		}
-		
+
 	}
 	
 	protected RouteDataObject runUpdateInThreadCatch(double latitude, double longitude) {
