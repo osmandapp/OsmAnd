@@ -105,7 +105,7 @@ public class CoreResourcesFromAndroidAssetsCustom extends interface_ICoreResourc
 						if (containgDir != null && !containgDir.exists())
 							containgDir.mkdirs();
 						extractedPath.createNewFile();
-						
+
 						final InputStream resourceStream = assetManager.open(path, AssetManager.ACCESS_STREAMING);
 						final FileOutputStream fileStream = new FileOutputStream(extractedPath);
 						Algorithms.streamCopy(resourceStream, fileStream);
@@ -114,7 +114,7 @@ public class CoreResourcesFromAndroidAssetsCustom extends interface_ICoreResourc
 					} catch (IOException e2) {
 						if (extractedPath.exists())
 							extractedPath.delete();
-						
+
 						Log.e(NATIVE_TAG, "Failed to extract '" + resourceInBundle + "'", e2);
 						continue;
 					}
@@ -239,8 +239,8 @@ public class CoreResourcesFromAndroidAssetsCustom extends interface_ICoreResourc
 		}
 		System.out.println(resourceEntry.defaultVariant.path.getAbsolutePath());
 		final SWIGTYPE_p_QByteArray bt;
-		if (resourceEntry.defaultVariant.offset == 0 &&
-				resourceEntry.defaultVariant.size == resourceEntry.defaultVariant.path.length()) {
+		if (resourceEntry.defaultVariant.offset == 0
+				&& resourceEntry.defaultVariant.size == resourceEntry.defaultVariant.path.length()) {
 			bt = SwigUtilities.readEntireFile(resourceEntry.defaultVariant.path.getAbsolutePath());
 		} else {
 			bt = SwigUtilities.readPartOfFile(resourceEntry.defaultVariant.path.getAbsolutePath(),

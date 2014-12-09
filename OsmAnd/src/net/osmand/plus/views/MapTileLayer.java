@@ -12,6 +12,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.MapUtils;
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -110,6 +111,7 @@ public class MapTileLayer extends BaseMapLayer {
 		return mapTileAdapter;
 	}
 	
+	@SuppressLint("WrongCall")
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox,
 			DrawSettings drawSettings) {
