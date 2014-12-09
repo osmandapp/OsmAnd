@@ -21,6 +21,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.util.MapUtils;
 
@@ -101,6 +102,12 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
 			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
+			view.findViewById(R.id.navigate_to).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), point.getLatitude(), point.getLongitude(), point.getName());
+				}
+			});
 			label.setText(distance, TextView.BufferType.SPANNABLE);
 			label.setTypeface(Typeface.DEFAULT, point.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
 			view.setOnClickListener(new View.OnClickListener() {
