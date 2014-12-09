@@ -262,7 +262,7 @@ public class SQLiteTileSource implements ITileSource {
 		return db.isDbLockedByOtherThreads();
 	}
 
-	public Bitmap getImage(int x, int y, int zoom, long[] timeHolder) {
+	public byte[] getBytes(int x, int y, int zoom, long[] timeHolder) throws IOException {
 		SQLiteConnection db = getDatabase();
 		if(db == null){
 			return null;
@@ -283,15 +283,7 @@ public class SQLiteTileSource implements ITileSource {
 					}
 				}
 				cursor.close();
-				if (blob != null) {
-					Bitmap bmp = null;
-					bmp = BitmapFactory.decodeByteArray(blob, 0, blob.length);
-					if(bmp == null) {
-						// broken image delete it
-						db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", params); 
-					}
-					return bmp;
-				}
+				return blob;
 			}
 			return null;
 		} finally {
@@ -300,6 +292,34 @@ public class SQLiteTileSource implements ITileSource {
 					+ " ms ");
 			}
 		}
+	}
+	
+	public byte[] getBytes(int x, int y, int zoom) throws IOException {
+		return getBytes(x, y, zoom, null);
+	}
+	
+	public Bitmap getImage(int x, int y, int zoom, long[] timeHolder) {
+		SQLiteConnection db = getDatabase();
+		if(db == null){
+			return null;
+		}
+		String[] params = new String[] { x + "", y + "", getFileZoom(zoom) + "" };
+		byte[] blob;
+		try {
+			blob = getBytes(x, y, zoom, timeHolder);
+		} catch (IOException e) {
+			return null;
+		}
+		if (blob != null) {
+			Bitmap bmp = null;
+			bmp = BitmapFactory.decodeByteArray(blob, 0, blob.length);
+			if(bmp == null) {
+				// broken image delete it
+				db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", params); 
+			}
+			return bmp;
+		}
+		return null;
 	}
 	 
 	public ITileSource getBase() {
