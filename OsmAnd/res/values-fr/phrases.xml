@@ -416,7 +416,7 @@
 	<string name="poi_traffic_calming_table">Table</string>
 	<string name="poi_vehicle_inspection">Centre de contrôle technique automobile</string>
 	<string name="poi_pier">Jetée</string>
-	<string name="poi_surveillance"/>
+	<string name="poi_surveillance">Surveillance</string>
 	<string name="poi_government">Gouvernement</string>
 	<string name="poi_pension_fund">Fond de pension</string>
 	<string name="poi_tax_inspection">Centre des impôts</string>
@@ -545,4 +545,33 @@
 	<string name="poi_curtain_shop">Boutique de rideaux</string>
 	<string name="poi_dairy">Crèmerie</string>
 	<string name="poi_baby_goods">Articles pour bébé</string>
+	<string name="poi_doityourself_shop">Magasin de domotique</string>
+	<string name="poi_gas_shop">Magasin de gaz liquéfié</string>
+	<string name="poi_houseware_shop">Magasin de fournitures ménagères</string>
+	<string name="poi_paint_shop">Magasin de peinture</string>
+	<string name="poi_radiotechnics_shop">Magasin de matériel radio</string>
+	<string name="poi_trade_shop">Poste de traite</string>
+	<string name="poi_window_blind_shop">Magasin de persiennes</string>
+	<string name="poi_atv_shop">Magasin de quads</string>
+	<string name="poi_sewing_shop">Magasin de vêtements</string>
+
+	<string name="poi_fire_flapper">Pelle à feu</string>
+	<string name="poi_fire_water_pond">Réserve d\'eau incendie</string>
+	<string name="poi_toll_booth">Barrière de péage</string>
+	<string name="poi_vehicle_ramp">Rampe pour véhicules</string>
+	<string name="poi_public_transport_platform_trolleybus">Arrêt de trolleybus</string>
+	<string name="poi_public_transport_platform_tram">Arrêt de tramway</string>
+	<string name="poi_aerialway_platter">Remontée mécanique</string>
+	<string name="poi_standpipe">Colonne d\'alimentation</string>
+	<string name="poi_migration">Migration</string>
+	<string name="poi_nursing_home">Crèche</string>
+	<string name="poi_healthcare_alternative">Médecine alternative</string>
+	<string name="poi_audiologist">Audiologiste</string>
+	<string name="poi_optometrist">Optométriste</string>
+	<string name="poi_healthcare_rehabilitation">Réhabilitation</string>
+	<string name="poi_healthcare_yes">Centre de soins médicaux</string>
+
+	<string name="poi_bookmaker">Preneur de paris</string>
+
+	<string name="poi_running_track">Piste de course</string>
 	</resources>
