@@ -28,6 +28,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	private List<ProgressBar> progressBars = new ArrayList<ProgressBar>();
 	private List<String> baseNames = new ArrayList<String>();
 	private List<ImageButton> downloadButtons = new ArrayList<ImageButton>();
+	private List<IndexItem> downloadQueue = new ArrayList<IndexItem>();
 	private ImageButton cancelButton;
 
 	@Override
@@ -53,6 +54,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		downloadQueue.clear();
 		if (BaseDownloadActivity.downloadListIndexThread != null) {
 			currentProgress = null;
 			cancelButton = null;
@@ -100,8 +102,6 @@ public class DashUpdatesFragment extends DashBaseFragment {
 				@Override
 				public void onClick(View view) {
 					getDownloadActivity().startDownload(item);
-					currentProgress = progressBar;
-					cancelButton = (ImageButton) view;
 				}
 			});
 			downloadButtons.add((ImageButton) downloadButton);
@@ -121,7 +121,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			return;
 		}
 		//needed when rotation is performed and progress can be null
-		if (currentProgress == null) {
+		if (!updateOnlyProgress) {
 			getProgressIfPossible(basicProgressAsyncTask.getDescription());
 			if (currentProgress == null) {
 				return;
@@ -136,11 +136,6 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			boolean visible = basicProgressAsyncTask.getStatus() != AsyncTask.Status.FINISHED;
 			if (!visible) {
 				return;
-			}
-			for(ImageButton button : downloadButtons){
-				if (!button.equals(cancelButton)){
-					button.setImageResource(R.drawable.ic_download_disabled);
-				}
 			}
 			cancelButton.setImageResource(R.drawable.cancel_button);
 			cancelButton.setOnClickListener(new View.OnClickListener() {
