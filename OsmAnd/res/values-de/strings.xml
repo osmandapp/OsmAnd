@@ -46,7 +46,6 @@
 	<string name="save_track_interval_globally">Aufzeichnungs-Intervall</string>
 	<string name="save_track_interval">Aufzeichnungs-Intervall während Navigation</string>
 	<string name="save_track_interval_descr">Intervall zwischen zwei Aufzeichnungspunkten während Navigation</string>
-	<string name="tips_and_tricks">Hilfe</string>
 	<string name="tip_initial">Hilfe</string>
 	<string name="tip_initial_t">OsmAnd ist eine Navigationsanwendung mit vielen Fähigkeiten.
 		\n\nHilfe und Tipps sind über das \'Menü\' → \'Hilfe\' zugänglich.

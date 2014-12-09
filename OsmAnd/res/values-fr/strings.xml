@@ -1577,15 +1577,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osmo_mode_off">Démarrer session OsMo</string>
 	<string name="osmo_mode_restart">Redémarrer session OsMo</string>
 	<string name="osmo_settings_debug">Informations de débogage</string>
-	<string name="osmo_tracker_id">Identifiant personnel de suivi</string>
 	<string name="osmo_tracker_id_descr">Cliquer pour voir ou partager l\'identifiant de suivi. 
        L\'utilisation d\'appareils connectés par identifiant de suivi permettra de suivre tous les mouvements de cet appareil ! Pour se déconnecter, sélectionnez l\'option Redémarrer.</string>
 	<string name="osmo_session_token">Jeton de session : %1$s</string>
 	<string name="osmo_auth_pending">En attente d\'autorisation…</string>
 	<string name="osmo_locations_sent">"Positions envoyées : %1$d (en attente : %2$d) "</string>
 	<string name="osmo_conn_successfull">Connexion établie : %1$s </string>
-	<string name="osmo_auto_send_locations_descr">Démarrer automatiquement une session de suivi et l\'envoi des emplacements dès le démarrage de l\'application</string>
-	<string name="osmo_auto_send_locations">Démarrage automatique de session de suivi</string>
 <string name="keep_informing_never">Jamais</string>
 <string name="keep_informing_descr">Répéter les instructions de navigation à intervalles réguliers</string>
 <string name="keep_informing">Répéter les instructions de navigation</string>
