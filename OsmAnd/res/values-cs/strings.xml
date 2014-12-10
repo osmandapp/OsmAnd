@@ -1793,7 +1793,7 @@ s často kladenými otázkami.</string>
     <string name="download_tab_local">Lokální</string>
 	<string name="navigate_point_northing">Souřadnice Y</string>
     <string name="navigate_point_easting">Souřadnice X</string>
-    <string name="dash_download_msg">Máte stažené %1$s map</string>
+    <string name="dash_download_msg">Máte staženo %1$s map</string>
     <string name="dash_download_new_one">Stáhnout novou mapu</string>
     <string name="dash_download_manage">Spravovat</string>
     <string name="dash_download_msg_none">Chcete stáhnout nějakou offline mapu?</string>
