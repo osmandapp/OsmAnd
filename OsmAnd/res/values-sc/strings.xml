@@ -1786,7 +1786,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="show_map">AMMUSTRA SA MAPA</string>
 	<string name="show_all">AMMUSTRA TOTU</string>
 	<string name="coordinates">Coordinatas</string>
-	<string name="map_update">Mapas</string>
+	<string name="map_update">Tenes %1$s mapas de agiornare</string>
 	<string name="error_avoid_specific_road">No est istada agatada peruna istrada a curtzu</string>
     <string name="everything_up_to_date">Totu agiornadu</string>
     <string name="use_opengl_render">Imprea sa renderizatzione OpengL</string>
