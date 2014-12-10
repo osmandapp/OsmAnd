@@ -517,7 +517,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			MenuItem item;
 			if (j + 1 >= max && optionsMenuAdapter.length() > max) {
 				if (split == null) {
-					split = menu.addSubMenu(0, 1, 0, R.string.default_buttons_other_actions);
+					split = menu.addSubMenu(0, 1, j + 1, R.string.default_buttons_other_actions);
 					split.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
 							: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
 					split.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
