@@ -1973,4 +1973,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="navigate_point_easting">На ўсход</string>
     <string name="map_locale">Мова мапы</string>
     <string name="rendering_attr_transportStops_name">Прыпынкі транспарту</string>
-    </resources>
+    <string name="dash_download_msg_none">Вы хочаце спампаваць якія-небудзь мапы?</string>
+    <string name="dash_download_msg">Вы зладавалі %1$s мапы</string>
+    <string name="dash_download_new_one">Спампаваць новую мапу</string>
+    <string name="dash_download_manage">Кіраваць</string>
+    <string name="voices">Галасавыя падказкі</string>
+	</resources>
