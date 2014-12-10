@@ -1840,4 +1840,5 @@
     <string name="navigate_point_northing">Северной широты</string>
     <string name="navigate_point_easting">Восточной долготы</string>
     <string name="voices">Голосовые данные</string>
-	</resources>
+	<string name="error_avoid_specific_road">Ближайшая дорога не найдена</string>
+    </resources>
