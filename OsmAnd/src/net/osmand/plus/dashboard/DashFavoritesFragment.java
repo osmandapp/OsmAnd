@@ -59,6 +59,8 @@ public class DashFavoritesFragment extends DashBaseFragment implements OsmAndLoc
 			}
 		});
 
+
+
 		return view;
 	}
 
@@ -72,12 +74,27 @@ public class DashFavoritesFragment extends DashBaseFragment implements OsmAndLoc
 	@Override
 	public void onResume() {
 		super.onResume();
-		getLocationProvider().addLocationListener(this);
-		getLocationProvider().addCompassListener(this);
-		location = getLocationProvider().getLastKnownLocation();
-		updateLocation(location);
+		if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
+			registerListeners();
+			if(!getMyApplication().getSettings().isLastKnownMapLocation()) {
+				// show first time when application ran
+				location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
+			} else {
+				location = getLocationProvider().getLastKnownLocation();
+			}
+			updateLocation(location);
+		}
+
+
 		setupFavorites();
 
+	}
+
+	private void registerListeners() {
+		getLocationProvider().addLocationListener(this);
+		getLocationProvider().addCompassListener(this);
+		getLocationProvider().registerOrUnregisterCompassListener(true);
+		getLocationProvider().resumeAllUpdates();
 	}
 
 	private void setupFavorites(){
@@ -120,9 +137,8 @@ public class DashFavoritesFragment extends DashBaseFragment implements OsmAndLoc
 			if(location != null){
 				direction.setVisibility(View.VISIBLE);
 				updateArrow(point, direction);
-				arrows.add(direction);
 			}
-
+			arrows.add(direction);
 			name.setText(point.getName());
 			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), point.getColor()));
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
@@ -157,7 +173,9 @@ public class DashFavoritesFragment extends DashBaseFragment implements OsmAndLoc
 		if (location == null) {
 			return;
 		}
+
 		for(int i =0; i<arrows.size(); i++){
+			arrows.get(i).setVisibility(View.VISIBLE);
 			updateArrow(points.get(i), arrows.get(i));
 		}
 	}
