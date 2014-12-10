@@ -145,7 +145,7 @@
 	<string name="tip_rotation_switching">지도 방향</string>
 	
 
-	<string name="binary_map_download_success">"성공적으로 다운로드하였습니다.\n\n 사용하려면 [메뉴-&gt;지도 구성-&gt;지도 소스-&gt;오프라인 벡터 지도] 를 활성화하세요. "</string>
+	<string name="binary_map_download_success">"성공적으로 다운로드하였습니다.\n\n 사용하려면 [메뉴-&gt;지도 구성-&gt;지도 소스-&gt;오프라인 벡터 지도] 를 활성화 하세요. "</string>
 
 	<string name="tip_day_night_mode">주간/야간 모드</string>
 		
@@ -266,7 +266,7 @@
 
 	<string name="favourites_delete_multiple_succesful">즐겨찾기 포인트(들)이 성공적으로 삭제되었습니다.</string>
 	<string name="favorite_delete_multiple">%1$d 개의 즐겨찾기와  %2$d 즐겨찾기 그룹을 삭제하려고 합니다. 확실한가요?</string>
-	<string name="favorite_home_category">홈</string>
+	<string name="favorite_home_category">집</string>
 	<string name="favorite_friends_category">친구</string>
 	<string name="favorite_places_category">장소</string>
 	<string name="favorite_default_category">기타</string>
@@ -2083,8 +2083,8 @@
     <string name="advanced_settings">고급</string>
 	<string name="osmo_use_https">HTTPS 사용하기</string>
 	<string name="osmo_use_https_descr">서버를 이용하여 보안 연결</string>
-    <string name="home_button">집</string>
-    <string name="map_update">지도</string>
+    <string name="home_button">홈 화면</string>
+    <string name="map_update">업데이트할 %1$s 지도가 있습니다</string>
 	<string name="search_for">검색</string>
 	<string name="show_map">지도 표시</string>
 	<string name="show_all">모두 표시</string>
