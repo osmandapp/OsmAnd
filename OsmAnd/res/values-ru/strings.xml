@@ -518,7 +518,7 @@
   <string name="continuous_rendering_descr">Выберите способ отрисовки карты</string>
   <string name="rendering_exception">Во время отображения карты произошла непредвиденная ошибка</string>
   <string name="rendering_out_of_memory">Ошибка : недостаточно памяти процесса, чтобы отобразить карту</string>
-  <string name="show_point_options">Контекстное меню</string>
+  <string name="show_point_options">Контекстное меню…</string>
   <string name="renderer_load_sucess">Стиль успешно загружен</string>
   <string name="renderer_load_exception">Произошла ошибка во время загрузки данного стиля</string>
   <string name="renderers">Стиль отрисовки векторной карты</string>
@@ -1659,7 +1659,7 @@
     <string name="gpx_selection_current_track">запись</string>
     <string name="gpx_selection_route_points">%1$s \nМаршрутных точек %2$s</string>
     <string name="show_zoom_buttons_navigation_descr">Показывать кнопки изменения масштаба во время навигации</string>
-    <string name="show_zoom_buttons_navigation">Показывать кнопки изменения масштаба</string>
+    <string name="show_zoom_buttons_navigation">Кнопки масштаба</string>
     <string name="sort_by_distance">Сортировать по дистанции</string>
     <string name="sort_by_name">Сортировать по имени</string>
     <string name="visible_element">Отображать на карте</string>
