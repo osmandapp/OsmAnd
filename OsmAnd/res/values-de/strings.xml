@@ -820,7 +820,7 @@
 	<string name="select_build_to_install">Auswählen eines OsmAnd-Builds für die Installation</string>
 	<string name="contribution_activity">Installations Version</string>
 	<string name="gps_status_app_not_found">Anwendung \'GPS Status\' ist nicht installiert. Soll diese installiert werden?</string>
-	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter \'Einstellungen\' → \'Allgemein\' → \'Sprachansagen\' ein Sprachansage-Paket auswählen oder herunterladen.</string>
+	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter \'Einstellungen\' → \'Allgemein\' → \'Sprachansagen\' ein Sprachpaket auswählen oder herunterladen.</string>
 	<string name="voice_is_not_available_title">Keine Sprachansage ausgewählt</string>
 	<string name="daynight_mode_day">Tag</string>
 	<string name="daynight_mode_night">Nacht</string>
@@ -1539,7 +1539,7 @@
 	<string name="android_19_location_disabled">"Seit Android 4.4 (KitKat) können neue Karten-Downloads nicht mehr am Speicherort früherer Android-Versionen gespeichert werden (%s). Jetzt den zulässigen Speicherort wählen und alle OsmAnd-Dateien dorthin kopieren?
 \n Hinweis 1: Die ursprünglichen Dateien bleiben hiervon unberührt, können aber nachfolgend manuell gelöscht werden.
 \n Hinweis 2: Die Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden."</string>
-	<string name="application_dir_change_warning2">Soll OsmAnd auch die Dateien an den neuen Speicherort verschieben?  Mit \'Nein\' wird OsmAnd den neuen Speicherort nur anlegen und als Standard verwenden.</string>
+	<string name="application_dir_change_warning2">Soll OsmAnd auch die Dateien an den neuen Speicherort verschieben? Mit \'Nein\' wird OsmAnd den neuen Speicherort nur anlegen und als Standard verwenden.</string>
 	<string name="copying_osmand_one_file_descr">Kopieren der Datei (%s) an den neuen Speicherort…</string>
 	<string name="copying_osmand_files_descr">Kopieren der OsmAnd-Dateien zum neuen Speicherort (%s)</string>
 	<string name="copying_osmand_files">Kopiere OsmAnd-Dateien</string>
@@ -2014,7 +2014,11 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="home_button">Startbildschirm</string>
     <string name="osmo_use_https_descr">Sichere Server-Verbindung verwenden</string>
     <string name="osmo_use_https">Https nutzen</string>
+<<<<<<< HEAD
     <string name="map_update">Aktualisierungen für %1$s Karten sind verfügbar</string>
+=======
+    <string name="map_update">Noch %1$s Karten zum Aktualisieren</string>
+>>>>>>> origin/master
     <string name="search_for">Suchen nach</string>
     <string name="show_map">KARTE ZEIGEN</string>
     <string name="show_all">ALLES ZEIGEN</string>
@@ -2035,7 +2039,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_northing">Nordwert</string>
     <string name="navigate_point_easting">Ostwert</string>
-    <string name="dash_download_msg_none">Sollen Offline-Karten heruntergeladen werden?</string>
+    <string name="dash_download_msg_none">Möchten Sie Offline-Karten herunterladen?</string>
     <string name="dash_download_msg">%1$s Karten bereits heruntergeladen</string>
     <string name="dash_download_new_one">Neue Karte herunterladen</string>
     <string name="dash_download_manage">Karten verwalten</string>
