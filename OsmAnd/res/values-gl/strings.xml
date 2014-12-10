@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="fav_point_dublicate_message">O nome do punto favorito foi cambiado a %1$s para evitar os duplicados.</string>
     <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>
     <string name="text_size">Tamaño da letra</string>
@@ -41,7 +41,7 @@
 	<string name="save_track_interval_descr">Escoller o intervalo de rexistro da gravación de pistas durante a navegación</string>
 	<string name="voice_provider_descr">Seleccionar a orientación por voz para a navegación</string>
 	<string name="voice_provider">Orientación por voz</string>
-	<string name="rendering_attr_publicTransportMode_name">Modo de transporte público</string>
+	<string name="rendering_attr_publicTransportMode_name">Bus, trolebús, rutas directas</string>
 	<string name="tips_and_tricks">Axuda</string>
 	<string name="tip_initial">Axuda</string>
 	<string name="tip_initial_t">"OsmAnd é un aplicativo de navegación con moitas funcionalidades.
@@ -70,7 +70,7 @@
     <string name="osmo_specify_tracker_id">Indique o identificar</string>
     <string name="continue_navigation">Continuar coa navegación</string>
     <string name="pause_navigation">Deter a navegación</string>
-    <string name="rendering_attr_subwayMode_name">Modo de metro</string>
+    <string name="rendering_attr_subwayMode_name">Rutas de metro</string>
  	<string name="keep_navigation_service">Manter</string>
 	<string name="gps_wake_up_timer">Intervalo para espertar o GPS</string>
 	<string name="map_preferred_locale_descr">Idioma preferido para os nomes no mapa (de non estaren dispoñíbeis pasará ao inglés ou ao idioma local)</string>
@@ -327,7 +327,7 @@
 	<string name="routing_attr_weight_name">Peso máximo</string>
 	<string name="routing_attr_weight_description">Indique o peso do vehículo permitido nos itinerarios</string>
     <string name="android_19_location_disabled">"Desde a versión KitKat é posíbel descargar e actualizar os mapas no lugar de almacenamento anterior (%s). Desexa cambiar a un sitio con permiso e copiar nel todos os ficheiros?\n Nota: os ficheiros antigos fican sen seren tocados.\n Nota: non será posíbel compartir ficheiros entre OsmAnd e OsmAnd+. "</string>
-    <string name="application_dir_change_warning2">OsmAnd podería tentar mover os datos ao novo destino. Desexa facelo?</string>
+    <string name="application_dir_change_warning2">Desexa que OsmAnd copie tamén os seus ficheiros de datos ao novo destino? Seleccione «Non» para que OsmAnd simplemente cree e empregue o novo cartafol.</string>
     <string name="copying_osmand_one_file_descr">A copiar o ficherio (%s) ao seu novo destino...</string>
     <string name="copying_osmand_files_descr">A copiar os ficheiros de OsmAnd ao seu novo destino (%s)</string>
     <string name="copying_osmand_files">A copiar os ficheiros de OsmAnd</string>
@@ -1701,4 +1701,32 @@
 <string name="speed_limit_exceed">Tolerancia no límite de velocidade</string>
 	<string name="speed_limit_exceed_message">Seleccione a marxe de tolerancia do límite de velocidade por riba da cal desexa ser avisado por voz.</string>
 	<string name="route_descr_destination"/>
+    <string name="dash_download_msg_none">Desexa descargar un mapa para empregar sen conexión?</string>
+    <string name="dash_download_msg">Ten descargados %1$s mapas</string>
+    <string name="dash_download_new_one">Descargar un mapa novo</string>
+    <string name="dash_download_manage">Xestionar</string>
+    <string name="map_locale">Idioma do mapa</string>
+    <string name="rendering_attr_transportStops_name">Paradas de transporte</string>
+    <string name="navigate_point_zone">Zona</string>
+    <string name="download_tab_downloads">Todas as descargas</string>
+    <string name="download_tab_updates">Actualizacións</string>
+    <string name="download_tab_local">Local</string>
+	<string name="no_internet_connection">Non é posíbel descargar. Conéctese a unha rede con wi-fi para proseguir.</string>
+    <string name="dismiss">Desbotar</string>
+    <string name="everything_up_to_date">Todo está actualizado</string>
+    <string name="use_opengl_render">Empregar o renderizado con OpenGL</string>
+    <string name="use_opengl_render_descr">Empregar renderizado con OpenGL acelerado co hardware (podería non funcionar nalgúns dispositivos)</string>
+    <string name="error_avoid_specific_road">Non foi posíbel atopar a estrada máis próxima</string>
+    <string name="home_button">Inicio</string>
+    <string name="osmo_use_https_descr">Empregar unha conexión segura co servidor</string>
+    <string name="osmo_use_https">Empregar HTTPS</string>
+	<string name="advanced_settings">Avanzado</string>
+	<string name="map_update">Ten %1$s mapas que hai que actualizar</string>
+	<string name="search_for">Buscar</string>
+	<string name="show_map">MOSTRAR O MAPA</string>
+	<string name="show_all">MOSTRAR TODO</string>
+	<string name="coordinates">Coordenadas</string>
+	<string name="rendering_attr_tramTrainRoutes_name">Rutas de tranvía e de tren</string>
+	<string name="lock_screen_request_explanation">%1$s require este permiso para apagar a pantalla para a funcionalidade de aforro de enerxía.</string>
+    <string name="wake_on_voice">Acender a pantalla</string>
     </resources>

@@ -567,7 +567,7 @@
   <string name="select_build_to_install">Vyberte jednu zo zostáv OsmAndu na nainštalovanie</string>
   <string name="contribution_activity">Špeciálna aktivita pre kontribútorskú verziu</string>
   <string name="gps_status_app_not_found">Aplikácia pre stav GPS nie je nainštalovaná. Nájsť ju na Markete?</string>
-  <string name="voice_is_not_available_msg">Hlasové navigovanie nie je dostupné, prosím choďte do nastavení a zvoľte alebo stiahnite balík hlasových povelov.</string>
+  <string name="voice_is_not_available_msg">"Hlasové navigovanie nie je dostupné, prosím choďte do Nastavenia → \'Všeobecné\' → \'Hlasové povely\'  a zvoľte alebo stiahnite balík hlasových povelov."</string>
   <string name="voice_is_not_available_title">Hlasové údaje nie sú určené</string>
   <string name="daynight_mode_day">Denný režim</string>
   <string name="daynight_mode_night">Nočný režim</string>
@@ -1996,7 +1996,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="show_map">ZOBRAZIŤ MAPU</string>
 	<string name="show_all">ZOBRAZIŤ VŠETKO</string>
 	<string name="coordinates">Súradnice</string>
-	<string name="map_update">Mapy</string>
+	<string name="map_update">Máte %1$s aktualizácií máp</string>
 	<string name="error_avoid_specific_road">Nenašla sa najbližšia cesta</string>
     <string name="dismiss">Odmietnuť</string>
     <string name="everything_up_to_date">Všetko je aktuálne</string>
@@ -2012,4 +2012,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="voices">Hlasové povely</string>
 	<string name="navigate_point_northing">Vertikálna súradnica</string>
     <string name="navigate_point_easting">Horizontálna súradnica</string>
+    <string name="dash_download_msg_none">Chcete stiahnuť nejaké offline mapy?</string>
+    <string name="dash_download_msg">Máte %1$s stiahnutých máp</string>
+    <string name="dash_download_new_one">Stiahnuť novú mapu</string>
+    <string name="dash_download_manage">Spravovať</string>
     </resources>
