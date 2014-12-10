@@ -372,7 +372,7 @@
 	<string name="prefs_plugins">Udvidelser</string>
 	<string name="osm_editing_plugin_description">Vis indstillinger, der kræves for OSM tilbagemelding, som f.eks. at indsamle/ændre OSM interessepunkter (IP), åbne/kommentere OSM fejl, og bidrage med optagede GPX-filer (kræver OSM legitimationsoplysninger).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorkort vises sandsynligvis hurtigere. Fungerer muligvis ikke godt på nogle enheder.</string>
-	<string name="play_commands_of_currently_selected_voice">Afspil kommandoer fra den valgte stemme</string>
+	<string name="play_commands_of_currently_selected_voice">Afspil kommandoer med den valgte stemme</string>
 	<string name="debugging_and_development">OsmAnd udvikling</string>
 	<string name="native_rendering">Indbygget optegning</string>
 	<string name="test_voice_prompts">Test stemmemeddelelser</string>    
@@ -487,7 +487,7 @@
 	<string name="index_name_other">Verdens- og emnekort</string>
 	<string name="index_name_wiki">Wikipedia interessepunkter på verdensplan</string>
 	<string name="index_name_voice">Stemmemeddelelser (optaget, begrænset funktionalitet)</string>
-	<string name="index_name_tts_voice">Stemmemeddelelser (TTS stemmegenerator, anbefalet)</string>
+	<string name="index_name_tts_voice">Stemmemeddelelser (TTS talegenerator, anbefalet)</string>
 	<string name="amenity_type_user_defined">Brugerdefineret</string>
 	<string name="fav_export_confirmation">Fil med tidligere eksporterede favoritter eksisterer allerede. Overskriv?</string>
 	<string name="profile_settings">Profilspecifikke indstillinger</string>
@@ -698,7 +698,7 @@
 	<string name="local_indexes_cat_tts">Stemmedata (TTS)</string>
 	<string name="local_indexes_cat_voice">Stemmedata (optaget)</string>
 	<string name="local_indexes_cat_poi">Interessepunkt-data</string>
-	<string name="ttsvoice">TTS-stemme</string>
+	<string name="ttsvoice">TTS stemme</string>
 	<string name="search_offline_clear_search">Ny søgning</string>
 	<string name="map_text_size_descr">Vælg tekststørrelse for navne på kortet</string>
 	<string name="map_text_size">Tekststørrelse</string>
@@ -727,7 +727,7 @@
 	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.
 \n\nFor at anvende aktiver \'Menu\' → \'Konfigurer kort\' → \'Vælg kortkilde…\' → \'Offline vektor-kort\'.</string>
 	<string name="choose_audio_stream">Stemmeindstillinger</string>
-	<string name="choose_audio_stream_descr">Vælg audiokanal til at afspille talevejledning (system afhængig)</string>
+	<string name="choose_audio_stream_descr">Vælg audiokanal til at afspille stemmevejledning (system afhængig)</string>
 	<string name="voice_stream_voice_call">Stemmeopkald lyd</string>
 	<string name="voice_stream_notification">Meddelelselyd</string>
 	<string name="voice_stream_music">Medie-/musiklyd</string>
@@ -834,7 +834,7 @@
 	<string name="select_build_to_install">Vælg en OsmAnd version til installation</string>
 	<string name="contribution_activity">Installer version</string>
 	<string name="gps_status_app_not_found">GPS-Status applikation er ikke installeret. Søg på Play butik?</string>
-	<string name="voice_is_not_available_title">Ingen talevejledning er valgt</string>
+	<string name="voice_is_not_available_title">Ingen stemmevejledning er valgt</string>
 	<string name="daynight_mode_day">Dag</string>
 	<string name="daynight_mode_night">Nat</string>
 	<string name="daynight_mode_auto">Solopgang/-nedgang</string>
@@ -857,7 +857,7 @@
 \n\nBruges \'Kørselsvejledning fra\' sammen med \'Begynd navigation\', vil OsmAnd skifte til den faktiske position, så snart den er fundet (dette kan bruges til at komme hurtigt i gang med rutevejledning før positionen findes), mens \'Kørselsvejledning fra\' i kombination med \'Vis rute\' kun viser ruten fra ethvert vilkårligt valgt punkt uden efterfølgende opdateringer.\nHvis du bruger \"Kørselsvejledning fra \'sammen med\' Start navigation\", vil Osmand så hurtigt skifte til din aktuelle position som det findes (så dette kan bruges til at kickstarte routing før positionen er fundet), mens \"Kørselsvejledning fra \'i kombination med \'Vis rute\' bare viser dig ruten fra enhver vilkårlig punkt, du havde valgt uden efterfølgende opdateringer. "</string>
 	<string name="amenity_type_landuse">Arealanvendelse</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
-	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
+	<string name="voice_is_not_available_msg">Stemmevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
 	<string name="items_were_selected">{0} enheder valgt</string>
 	<string name="filter_existing_indexes">Hentet</string>
 	<string name="deselect_all">Fravælg alle</string>
@@ -1042,18 +1042,18 @@
 	<string name="search_address_street">Gade</string>
 	<string name="search_address_city">By</string>
 	<string name="search_address_top_text">Vælg adresse</string>
-	<string name="voice_provider_descr">Vælg talevejledning til navigation</string>
+	<string name="voice_provider_descr">Vælg stemmevejledning til navigation</string>
 	<string name="transport_Stop">Stoppested</string>
 	<string name="transport_stops">Stoppesteder</string>
 	<string name="tip_initial_t">"OsmAnd er et navigationsprogram med mange funktioner.
 \n\nEn grundlæggende introduktion, tips om anvendelse og avanceret hjælp findes via \'Menu\' → \'Hjælp\' på hovedskærmen. "</string>
 	
 	<string name="osmand_net_previously_installed">En tidligere OsmAnd version er installeret. Alle offline data er understøttet af det nye program, men favoritter bør eksporteres i den gamle version og senere importeres i den nye.</string>
-	<string name="voice_provider">Talevejledning</string>
-	<string name="voice_data_initializing">Initialisere taledata…</string>
+	<string name="voice_provider">Stemmevejledning</string>
+	<string name="voice_data_initializing">Initialisere stemmedata…</string>
 	<string name="voice_data_not_supported">Ikke understøttet version af stemmedata</string>
-	<string name="voice_data_corrupted">De angivne taledata er fejlbehæftet</string>
-	<string name="voice_data_unavailable">De valgte taledata er ikke tilgængelig</string>
+	<string name="voice_data_corrupted">De angivne stemmedata er fejlbehæftet</string>
+	<string name="voice_data_unavailable">De valgte stemmedata er ikke tilgængelig</string>
 	<string name="opening_hours_not_supported">Åbningstider format understøtter ikke redigering</string>
 	<string name="transport_stop_to_go_out">Vælg stoppestedet for afstigning</string>
 	<string name="transport_stops_to_pass">stoppesteder der skal passeres</string>
@@ -1864,5 +1864,5 @@
     <string name="dash_download_msg">%1$s kort er hentet</string>
     <string name="dash_download_new_one">Hent nye kort</string>
     <string name="dash_download_manage">Administrer</string>
-    <string name="voices">Talevejledning</string>
+    <string name="voices">Stemmevejledning</string>
 	</resources>
