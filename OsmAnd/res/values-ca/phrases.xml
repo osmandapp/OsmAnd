@@ -18,7 +18,7 @@
 	<string name="poi_gift_shop">Botiga de regals</string>
 	<string name="poi_glaziery_shop">Vidrieria</string>
 	<string name="poi_hardware_shop">Ferreteria</string>
-	<string name="poi_herbalist">Herbodietètica</string>
+	<string name="poi_herbalist">Herbolari</string>
 	<string name="poi_interior_decoration_shop">Botiga d\'interiorisme</string>
 	<string name="poi_jewelry_shop">Joieria</string>
 	<string name="poi_kiosk">Quiosc</string>
@@ -53,7 +53,7 @@
 	<string name="poi_mobile_phone_shop">Botiga de telèfons mòbils</string>
 	<string name="poi_motorcycle_shop">Botiga de motocicletes</string>
 	<string name="poi_musical_instrument_shop">Instruments musicals</string>
-	<string name="poi_newsagent_shop">Venda de diaris</string>
+	<string name="poi_newsagent_shop">Agència de notícies</string>
 	<string name="poi_second_hand">Botiga de segona mà</string>
 	<string name="poi_electronics_shop">Botiga d\'electrodomèstics</string>
 	<string name="poi_police">Policia</string>
@@ -66,4 +66,18 @@
 	<string name="poi_mountain_pass">Port de muntanya</string>
 	<string name="poi_city_wall">Muralla</string>
 	<string name="poi_vehicle_inspection">Inspecció de vehicles</string>
+	<string name="poi_military_nuclear_explosion_site">Centre d\'explosió nuclear</string>
+<string name="poi_military_range">Àmbit militar</string>
+	<string name="poi_military_naval_base">Base naval militar</string>
+	<string name="poi_military">Zona militar</string>
+	<string name="poi_military_airfield">Pista d\'aterratge militar</string>
+	<string name="poi_military_bunker">Búnquer militar</string>
+	<string name="poi_military_barracks">Barracons</string>
+	<string name="poi_military_danger_area">Zona de tir</string>
+	<string name="poi_organic_shop">Menjar orgànic</string>
+	<string name="poi_paint_shop">Pintures</string>
+	<string name="poi_pet_shop">Botiga d\'animals</string>
+	<string name="poi_radiotechnics_shop">Electrònica</string>
+	<string name="poi_sports_shop">Material esportiu</string>
+	<string name="poi_ticket_shop">Guixeta</string>
 	</resources>
