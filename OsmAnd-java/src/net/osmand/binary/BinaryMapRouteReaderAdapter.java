@@ -200,6 +200,7 @@ public class BinaryMapRouteReaderAdapter {
 		int nameTypeRule = -1;
 		int refTypeRule = -1;
 		int destinationTypeRule = -1;
+		int destinationRefTypeRule = -1;
 		
 		public RouteTypeRule quickGetEncodingRule(int id) {
 			return routeEncodingRules.get(id);
@@ -216,6 +217,8 @@ public class BinaryMapRouteReaderAdapter {
 				refTypeRule = id;
 			} else if (tags.equals("destination")) {
 				destinationTypeRule = id;
+			} else if (tags.equals("destination:ref")) {
+				destinationRefTypeRule = id;
 			}
 		}
 		

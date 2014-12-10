@@ -148,5 +148,8 @@ public class OsmAndAppCustomization {
 
 	public boolean showNavigationControls() { return true;}
 
-	public boolean onlyTourDownload() { return false;}
+	public boolean onlyTourDownload() {
+		return false;
+	}
+
 }

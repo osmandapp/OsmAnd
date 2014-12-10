@@ -379,6 +379,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	public void startDownloadActivity() {
 		final Intent download = new Intent(this, DownloadActivity.class);
 		download.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		download.putExtra(DownloadActivity.SINGLE_TAB, true);
+		download.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
 		refreshListAfterDownload = true;
 		startActivity(download);
 	}
@@ -418,6 +420,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	}
 
 
-	
+	public boolean onlyTourDownload() {
+		return true;
+	}	
 
 }

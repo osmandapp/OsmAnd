@@ -222,7 +222,7 @@
 		</activity>
 
 		<activity android:name="net.osmand.plus.development.TestVoiceActivity" />
-		<activity android:name="net.osmand.plus.download.DownloadActivity" android:label="@string/local_index_descr_title" />
+		<activity android:name="net.osmand.plus.download.DownloadActivity" android:label="" />
 		<activity android:name="net.osmand.plus.osmedit.LocalOpenstreetmapActivity" android:label="@string/local_openstreetmap_act_title" />
 
 		<!-- keep android:process on a separate line !! -->
