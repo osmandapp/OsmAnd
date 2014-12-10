@@ -239,8 +239,8 @@
   <string name="index_name_oceania">Okeanija</string>
   <string name="index_name_other">Pasauliniai ir specialieji žemėlapiai</string>
   <string name="index_name_wiki">Pasaulinė Wikipedia</string>
-  <string name="index_name_voice">Balso paketai (įrašyti, ribotos galimybės)</string>
-  <string name="index_name_tts_voice">Balso paketai (TTS-sintetinis balsas, siūloma)</string>
+  <string name="index_name_voice">Balso pranešimai (įrašyti, ribotos galimybės)</string>
+  <string name="index_name_tts_voice">Balso pranešimai (TTS-sintetinis balsas, siūloma)</string>
   <string name="amenity_type_osmwiki">Wikipedia (įrenginyje)</string>
   <string name="amenity_type_user_defined">Nustatyta vartotojo</string>
   <string name="fav_export_confirmation">Failas su anksčiau eksportuotomis išsaugotomis vietomis jau egzistuoja. Ar norite jį pakeisti kitu?</string>
@@ -1697,7 +1697,7 @@
     <string name="none_selected_gpx">Nepasirinktas joks GPX failas. Norėdami pasirinkti paspauskite ir laikykite pageidaujamą failą.</string>
     <string name="local_index_unselect_gpx_file">Panaikinti žymėjimą</string>
     <string name="local_index_select_gpx_file">Pasirinkite ką atvaizduoti</string>
-    <string name="route_descr_destination">\t</string>
+    <string name="route_descr_destination">Paskirties punktas</string>
     <string name="no_index_file_to_download">Nėra ką parsisiųsti. Pasitikrinkite interneto ryšį.</string>
     <string name="osmo_gpx_points_downloaded">OsMo taškai %1$s parsiųsti.</string>
     <string name="osmo_auto_connect_descr">Automatiškai prisijungti paleidus programą</string>
@@ -1845,7 +1845,7 @@
 	<string name="osmo_use_https_descr">Prie serverio jungtis saugiu ryšiu</string>
     <string name="advanced_settings">Plačiau</string>
 	<string name="home_button">Namai</string>
-    <string name="map_update">Žemėlapiai</string>
+    <string name="map_update">Liko atnaujinti %1$s žemėlapių</string>
 	<string name="search_for">Ieškoti (ko)</string>
 	<string name="show_map">RODYTI ŽEMĖLAPĮ</string>
 	<string name="show_all">RODYTI VISKĄ</string>
@@ -1866,4 +1866,5 @@
 	<string name="dash_download_msg">Atsisųsta %1$s žemėlapių</string>
     <string name="dash_download_new_one">Atsisiųsti naują žemėlapį</string>
     <string name="dash_download_manage">Valdyti</string>
-    </resources>
+    <string name="voices">Balso pranešimai</string>
+	</resources>
