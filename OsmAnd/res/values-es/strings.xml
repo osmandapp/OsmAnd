@@ -1900,4 +1900,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_attr_transportStops_name">Paradas de transporte</string>
     <string name="navigate_point_zone">Zona</string>
     <string name="voices">Avisos de voz</string>
-	</resources>
+	<string name="dash_download_msg_none">¿Quieres bajar algún mapa offline?</string>
+    </resources>
