@@ -34,53 +34,7 @@ public class DashDownloadMapsFragment extends DashBaseFragment {
         final TextView message =((TextView) view.findViewById(R.id.message));
         final Button local = ((Button) view.findViewById(R.id.local_downloads));
         message.setTypeface(typeface);
-        new AsyncTask<Void, Void, Void>() {
-        	int countMaps = 0;
-            long size = 0;
-			@Override
-			protected Void doInBackground(Void... params) {
-				updateCount(IndexConstants.MAPS_PATH);
-				updateCount(IndexConstants.SRTM_INDEX_DIR);
-				return null;
-			}
 
-			protected void updateCount(String s) {
-				File ms = getMyApplication().getAppPath(s);
-				if (ms.exists()) {
-					File[] lf = ms.listFiles();
-					if (lf != null) {
-						for (File f : ms.listFiles()) {
-							if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-								size += f.length();
-								countMaps++;
-							}
-						}
-					}
-				}
-			}
-			
-			@Override
-			protected void onPostExecute(Void result) {
-				super.onPostExecute(result);
-				if(countMaps > 0) {
-					long mb = 1 << 20;
-					long gb = 1 << 30;
-					String sz = size > gb ?  
-							formatGb.format(new Object[] { (float) size / (gb) }) :
-							formatMb.format(new Object[] { (float) size / mb }) ;
-					message.setText(getString(R.string.dash_download_msg, countMaps+"") + " (" + sz +")");
-					local.setVisibility(View.VISIBLE);
-				} else {
-					message.setText(getString(R.string.dash_download_msg_none));
-					local.setVisibility(View.GONE);
-				}
-				
-			}
-		}.execute((Void)null);
-        
-        
-        
-        
         local.setTypeface(typeface);
         local.setOnClickListener(new View.OnClickListener() {
 			
@@ -106,4 +60,63 @@ public class DashDownloadMapsFragment extends DashBaseFragment {
         });
         return view;
     }
+
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		refreshData();
+	}
+
+	public void refreshData() {
+		if (getView() == null){
+			return;
+		}
+
+		final TextView message =((TextView) getView().findViewById(R.id.message));
+		final Button local = ((Button) getView().findViewById(R.id.local_downloads));
+		new AsyncTask<Void, Void, Void>() {
+			int countMaps = 0;
+			long size = 0;
+			@Override
+			protected Void doInBackground(Void... params) {
+				updateCount(IndexConstants.MAPS_PATH);
+				updateCount(IndexConstants.SRTM_INDEX_DIR);
+				return null;
+			}
+
+			protected void updateCount(String s) {
+				File ms = getMyApplication().getAppPath(s);
+				if (ms.exists()) {
+					File[] lf = ms.listFiles();
+					if (lf != null) {
+						for (File f : ms.listFiles()) {
+							if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+								size += f.length();
+								countMaps++;
+							}
+						}
+					}
+				}
+			}
+
+			@Override
+			protected void onPostExecute(Void result) {
+				super.onPostExecute(result);
+				if(countMaps > 0) {
+					long mb = 1 << 20;
+					long gb = 1 << 30;
+					String sz = size > gb ?
+							formatGb.format(new Object[] { (float) size / (gb) }) :
+							formatMb.format(new Object[] { (float) size / mb }) ;
+					message.setText(getString(R.string.dash_download_msg, countMaps+"") + " (" + sz +")");
+					local.setVisibility(View.VISIBLE);
+				} else {
+					message.setText(getString(R.string.dash_download_msg_none));
+					local.setVisibility(View.GONE);
+				}
+
+			}
+		}.execute((Void)null);
+	}
 }
