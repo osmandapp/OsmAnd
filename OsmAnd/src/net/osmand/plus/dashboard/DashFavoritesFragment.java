@@ -3,6 +3,7 @@ package net.osmand.plus.dashboard;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.TypedValue;
@@ -13,16 +14,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.OsmAndAppCustomization;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.R;
+import net.osmand.plus.*;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.search.SearchPOIActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -33,8 +34,13 @@ import java.util.List;
 /**
  * Created by Denis on 24.11.2014.
  */
-public class DashFavoritesFragment extends DashBaseFragment {
+public class DashFavoritesFragment extends DashBaseFragment implements OsmAndLocationProvider.OsmAndCompassListener, OsmAndLocationProvider.OsmAndLocationListener {
 	public static final String TAG = "DASH_FAVORITES_FRAGMENT";
+	private net.osmand.Location location = null;
+	private Float heading = null;
+	private List<ImageView> arrows = new ArrayList<ImageView>();
+	List<FavouritePoint> points = new ArrayList<FavouritePoint>();
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_favorites_fragment, container, false);
@@ -57,15 +63,28 @@ public class DashFavoritesFragment extends DashBaseFragment {
 	}
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		getLocationProvider().removeCompassListener(this);
+		getLocationProvider().removeLocationListener(this);
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
+		getLocationProvider().addLocationListener(this);
+		getLocationProvider().addCompassListener(this);
+		location = getLocationProvider().getLastKnownLocation();
+		updateLocation(location);
 		setupFavorites();
+
 	}
 
 	private void setupFavorites(){
 		View mainView = getView();
 		final FavouritesDbHelper helper = getMyApplication().getFavorites();
-		final List<FavouritePoint> points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
+		points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
+		arrows.clear();
 		if (points.size() == 0){
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
 			return;
@@ -96,6 +115,14 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			TextView name = (TextView) view.findViewById(R.id.name);
 			TextView label = (TextView) view.findViewById(R.id.distance);
 			ImageView icon = (ImageView) view.findViewById(R.id.icon);
+			ImageView direction = (ImageView) view.findViewById(R.id.direction);
+
+			if(location != null){
+				direction.setVisibility(View.VISIBLE);
+				updateArrow(point, direction);
+				arrows.add(direction);
+			}
+
 			name.setText(point.getName());
 			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), point.getColor()));
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
@@ -124,5 +151,45 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			view.setLayoutParams(lp);
 			favorites.addView(view);
 		}
+	}
+
+	private void updateArrows() {
+		if (location == null) {
+			return;
+		}
+		for(int i =0; i<arrows.size(); i++){
+			updateArrow(points.get(i), arrows.get(i));
+		}
+	}
+
+	private void updateArrow(FavouritePoint point, ImageView direction) {
+		float[] mes = new float[2];
+		LatLon l = new LatLon(point.getLatitude(), point.getLongitude());
+		Location.distanceBetween(l.getLatitude(), l.getLongitude(), location.getLatitude(), location.getLongitude(), mes);
+		DirectionDrawable draw = new DirectionDrawable(getActivity(), 10, 10, true);
+		Float h = heading;
+		float a = h != null ? h : 0;
+		draw.setAngle(mes[1] - a + 180);
+		direction.setImageDrawable(draw);
+	}
+
+	@Override
+	public void updateCompassValue(float value) {
+		heading = value;
+		updateArrows();
+	}
+
+	@Override
+	public void updateLocation(Location location) {
+		if (location == null){
+			return;
+		}
+		this.location = location;
+		updateArrows();
+
+	}
+
+	private OsmAndLocationProvider getLocationProvider() {
+		return getMyApplication().getLocationProvider();
 	}
 }
