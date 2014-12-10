@@ -169,7 +169,7 @@
   <string name="show_more_map_detail_descr">Visualizza qualche dettaglio delle mappe vettoriali (strade ecc.) anche agli zoom piu\' bassi</string>
   <string name="favourites_delete_multiple_succesful">Punto/i preferito/i eliminati.</string>
   <string name="favorite_delete_multiple">Stai eliminando %1$d preferito/i e %2$d gruppo/i preferito/i. Sicuro?</string>
-  <string name="favorite_home_category">Finestra iniziale</string>
+  <string name="favorite_home_category">Casa</string>
   <string name="favorite_friends_category">Amici</string>
   <string name="favorite_places_category">Luoghi</string>
   <string name="favorite_default_category">Altro</string>
@@ -2003,8 +2003,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_category_details">Dettagli</string>
     <string name="rendering_category_transport">Trasporto pubblico</string>
     <string name="rendering_category_others">Altri attributi della mappa</string>
-    <string name="map_widget_right">Pannello di destra</string>
-	<string name="map_widget_left">Pannello di sinistra</string>
+    <string name="map_widget_right">Pannello destro</string>
+	<string name="map_widget_left">Pannello sinistro</string>
     <string name="configure_map">Configura la mappa</string>
     <string name="map_widget_appearance_rem">Elementi rimanenti</string>
     <string name="map_widget_top">Barra di stato</string>
@@ -2030,7 +2030,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="show_all">MOSTRA TUTTO</string>
 	<string name="coordinates">Coordinate</string>
 	<string name="home_button">Schermata iniziale</string>
-    <string name="map_update">Hai %1$s mappe da aggiornabili</string>
+    <string name="map_update">Hai %1$s mappe aggiornabili</string>
 	<string name="search_for">Cerca</string>
 	<string name="show_map">MOSTRA LA MAPPA</string>
 	<string name="error_avoid_specific_road">Non è stata trovata una strada nelle vicinanze</string>
