@@ -205,8 +205,8 @@
 	<string name="index_name_oceania">Oseania</string>
 	<string name="index_name_other">Verdens- og emnekart</string>
 	<string name="index_name_wiki">Verdensomspennende Wikipedia-interessepunkter</string>
-	<string name="index_name_voice">Talepakker (opptak, begrenset funksjonalitet)</string>
-	<string name="index_name_tts_voice">Talepakker (TTS kunstig tale, foretrekk)</string>
+	<string name="index_name_voice">Talemeldinger (opptak, begrenset funksjonalitet)</string>
+	<string name="index_name_tts_voice">Talemeldinger (TTS-syntetisert, anbefales)</string>
 	<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">Brukerdefinert</string>
 	<string name="fav_export_confirmation">Fil med tidligere eksporterte favoritter finnes allerede. Vil du erstatte den?</string>
@@ -421,7 +421,7 @@
 	<string name="transport_search_none">ingen</string>
 	<string name="transport_search_again">Tilbakestill transportsøk</string>
 	<string name="map_index">Kart</string>
-	<string name="voice">Tale</string>
+	<string name="voice">Taleopptak</string>
 	<string name="no_vector_map_loaded">Vektorkart ble ikke lastet</string>
 	<string name="map_route_by_gpx">Naviger ved bruk av GPX</string>
 	<string name="vector_data">Offline vektorkart</string>
@@ -1070,7 +1070,7 @@
 	<string name="application_dir_change_warning2">Skal OsmAnd også kopiere datafilene til det nye stedet? Velg \'Nei\' for at OsmAnd kun skal opprette og bruke den nye mappen.</string>
     <string name="error_avoid_specific_road">Nærmeste vei ble ikke funnet</string>
     <string name="home_button">Hjem</string>
-    <string name="map_update">Kart</string>
+    <string name="map_update">Det er %1$s kart å oppdatere</string>
 	<string name="search_for">Søk etter</string>
 	<string name="show_map">VIS KART</string>
 	<string name="coordinates">Koordinater</string>
@@ -1085,4 +1085,8 @@
     <string name="rendering_attr_transportStops_name">Stoppesteder</string>
     <string name="navigate_point_zone">Sone</string>
     <string name="download_tab_local">Lokal</string>
-	</resources>
+	<string name="dash_download_msg_none">Vil du laste ned offline-kart?</string>
+    <string name="dash_download_msg">%1$s kart er lastet ned</string>
+    <string name="dash_download_new_one">Last ned nytt kart</string>
+    <string name="dash_download_manage">Administrer</string>
+    </resources>
