@@ -85,7 +85,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.local_index, container, false);
 
-		getDownloadActivity().getSupportActionBar().setTitle(R.string.local_index_descr_title);
+//		getDownloadActivity().getSupportActionBar().setTitle(R.string.local_index_descr_title);
 		getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
 
 		ExpandableListView listView = (ExpandableListView)view.findViewById(android.R.id.list);
@@ -998,18 +998,23 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
 			List<LocalIndexInfo> list = data.get(group);
 			int size = 0;
-			for(int i=0; i<list.size(); i++){
+			for (int i = 0; i < list.size(); i++) {
 				int sz = list.get(i).getSize();
-				if(sz < 0){
+				if (sz < 0) {
 					size = 0;
 					break;
 				} else {
 					size += sz;
 				}
 			}
-			size = size / (1 << 10);
-			if(size > 0){
-				t.append(" [").append(size).append(" MB]");
+			if (size > 0) {
+				String sz;
+				if (size > 1 << 20) {
+					sz = formatGb.format(new Object[] { (float) size / (1 << 20) });
+				} else {
+					sz = formatMb.format(new Object[] { (float) size / (1 << 10) });
+				}
+				t.append(" [").append(sz).append("]");
 			}
 			nameView.setText(t.toString());
 			if (!group.isBackupedData()) {

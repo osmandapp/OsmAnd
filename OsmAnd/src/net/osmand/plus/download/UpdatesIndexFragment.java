@@ -50,8 +50,8 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 	}
 
 	private void createListView(List<IndexItem> indexItems) {
-		if (indexItems.size() == 0){
-			indexItems.add(new IndexItem(getString(R.string.everything_up_to_date),"",0,"",0,0, null));
+		if (indexItems.size() == 0) {
+			indexItems.add(new IndexItem(getString(R.string.everything_up_to_date), "", 0, "", 0, 0, null));
 		}
 		listAdapter = new UpdateIndexAdapter(getDownloadActivity(), R.layout.download_index_list_item, indexItems);
 		listAdapter.sort(new Comparator<IndexItem>() {
@@ -109,8 +109,12 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
 		if (getMyApplication().getAppCustomization().showDownloadExtraActions()) {
+			MenuItem item = menu.add(0, DownloadIndexFragment.RELOAD_ID, 0, R.string.update_downlod_list);
+			item.setIcon(isLightActionBar() ? R.drawable.ic_action_refresh_light :
+				R.drawable.ic_action_refresh_dark);
+			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			
 			SubMenu s = menu.addSubMenu(0, DownloadIndexFragment.MORE_ID, 0, R.string.default_buttons_other_actions);
-			s.add(0, DownloadIndexFragment.RELOAD_ID, 0, R.string.update_downlod_list);
 			s.add(0, DownloadIndexFragment.SELECT_ALL_ID, 0, R.string.select_all);
 			s.add(0, DownloadIndexFragment.DESELECT_ALL_ID, 0, R.string.deselect_all);
 

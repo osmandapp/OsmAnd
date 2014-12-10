@@ -732,8 +732,4 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		return false;
 	}
 
-	@Override
-	public boolean onlyTourDownload() {
-		return true;
-	}
 }

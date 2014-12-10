@@ -97,20 +97,12 @@ public class DownloadActivity extends BaseDownloadActivity {
 			tabHost.setup();
 			ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 			mTabsAdapter = new FavouritesActivity.TabsAdapter(this, tabHost, viewPager, settings, false);
-			if (getMyApplication().getAppCustomization().onlyTourDownload()) {
-				mTabsAdapter.addTab(
-						tabHost.newTabSpec("DOWNLOADS").setIndicator(getString(R.string.download_tab_downloads)),
-						DownloadIndexFragment.class, null);
-			} else {
-				mTabsAdapter.addTab(
-						tabHost.newTabSpec("LOCAL_INDEX").setIndicator(getString(R.string.download_tab_local)),
-						LocalIndexesFragment.class, null);
-				mTabsAdapter.addTab(
-						tabHost.newTabSpec("DOWNLOADS").setIndicator(getString(R.string.download_tab_downloads)),
-						DownloadIndexFragment.class, null);
-				mTabsAdapter.addTab(tabHost.newTabSpec("UPDATES")
-						.setIndicator(getString(R.string.download_tab_updates)), UpdatesIndexFragment.class, null);
-			}
+			mTabsAdapter.addTab(tabHost.newTabSpec("LOCAL_INDEX").setIndicator(getString(R.string.download_tab_local)),
+					LocalIndexesFragment.class, null);
+			mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS")
+					.setIndicator(getString(R.string.download_tab_downloads)), DownloadIndexFragment.class, null);
+			mTabsAdapter.addTab(tabHost.newTabSpec("UPDATES").setIndicator(getString(R.string.download_tab_updates)),
+					UpdatesIndexFragment.class, null);
 
 			tabHost.setCurrentTab(currentTab);
 		}
