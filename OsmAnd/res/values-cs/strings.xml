@@ -126,8 +126,8 @@
   <string name="index_name_oceania">Oceánie</string>
   <string name="index_name_other">Mapy celého světa a tematické mapy</string>
   <string name="index_name_wiki">Celý svět - Wikipedie</string>
-  <string name="index_name_voice">Hlasová data (audio)</string>
-  <string name="index_name_tts_voice">Hlasová data (TTS)</string>
+  <string name="index_name_voice">Hlasové pokyny (nahrávky, omezené funkce)</string>
+  <string name="index_name_tts_voice">Hlasové pokyny (TTS-generované)</string>
   <string name="amenity_type_osmwiki">Wikipedie (offline)</string>
   <string name="amenity_type_user_defined">Uživatelsky definované</string>
   <string name="fav_export_confirmation">Soubor se záložkami již existuje. Chcete ho nahradit?</string>
@@ -285,7 +285,7 @@
   <string name="local_indexes_cat_tile">Online mapová data (rastrová)</string>
   <string name="local_indexes_cat_map">Offline mapová data (vektorová)</string>
   <string name="local_indexes_cat_poi">Data POI</string>
-  <string name="ttsvoice">Hlasová data TTS</string>
+  <string name="ttsvoice">TTS hlas</string>
   <string name="amenity_type_administrative">Administrativa</string>
   <string name="amenity_type_barrier">Překážky</string>
   <string name="amenity_type_education">Školství</string>
@@ -440,7 +440,7 @@
   <string name="application_dir">Úložiště pro data</string>
   
   <string name="gps_status_app_not_found">Aplikace pro zobrazení stavu GPS naní instalovaná. Hledat na Marketu?</string>
-  <string name="voice_is_not_available_msg">Hlasové navádění není dostupné. V nastaveních vyberte požadovaná hlasová data nebo je stáhněte.</string>
+  <string name="voice_is_not_available_msg">Hlasové navádění není dostupné, jděte prosím do \'Nastavení\' → \'Obecné\' → \'Hlasové pokyny\' a vyberte, nebo stáhněte balíček s hlasovými pokyny.</string>
   <string name="voice_is_not_available_title">Žádná hlasová data nejsou zvolena</string>
   <string name="trace_rendering_descr">Zaškrtněte pro zobrazení statistik o vykreslování mapy</string>
   <string name="trace_rendering">Sledovat vykreslování</string>
@@ -486,7 +486,7 @@
   <string name="transport_search_none">nic</string>
   <string name="transport_search_again">Znovu hledat dopravu</string>
   <string name="map_index">Mapa</string>
-  <string name="voice">Hlasové údaje</string>
+  <string name="voice">Nahrávka hlasu</string>
   <string name="no_vector_map_loaded">Vektorové mapy nebyly načteny</string>
   <string name="map_route_by_gpx">Cestovat podle GPX</string>
   <string name="gpx_files_not_found">Žádné GPX soubory nebyly nalezeny v adresáři tracks</string>
@@ -1775,7 +1775,7 @@ s často kladenými otázkami.</string>
     <string name="show_map">ZOBRAZIT MAPU</string>
 	<string name="osmo_use_https_descr">Použít zabezpečené spojení se serverem</string>
     <string name="osmo_use_https">Použít HTTPS</string>
-	<string name="map_update">Mapy</string>
+	<string name="map_update">Máte %1$s aktualizací map</string>
 	<string name="search_for">Hledat</string>
 	<string name="show_all">ZOBRAZIT VŠE</string>
 	<string name="coordinates">Souřadnice</string>
@@ -1797,5 +1797,5 @@ s často kladenými otázkami.</string>
     <string name="dash_download_new_one">Stáhnout novou mapu</string>
     <string name="dash_download_manage">Spravovat</string>
     <string name="dash_download_msg_none">Chcete stáhnout nějakou offline mapu?</string>
-    <string name="voices">Hlasové povely</string>
+    <string name="voices">Hlasové pokyny</string>
 	</resources>
