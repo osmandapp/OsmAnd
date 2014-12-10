@@ -740,7 +740,7 @@
 \nSolpor: %2$s</string>
 	<string name="day_night_info">Información sobre o día e a noite</string>
 	<string name="map_widget_day_night">Mapa diúrno/nocturo</string>
-	<string name="map_widget_vector_attributes">Atributos de renderizado:</string>
+	<string name="map_widget_vector_attributes">Atributos de renderizado</string>
 	<string name="map_widget_renderer">Estilo de mapa</string>
 	<string name="layer_map_appearance">Configurar a pantalla</string>
 	<string name="show_lanes">Mostrar as faixas da estrada</string>
@@ -1035,7 +1035,7 @@
 	<string name="amenity_type_user_defined">Definido polo usuairo</string>
 	<string name="fav_export_confirmation">Xa existe un ficheiro con favoritos exportados previamente. Desexa substituílo?</string>
 	<string name="profile_settings">Configuración específica dos perfís</string>
-	<string name="routing_settings">Navegaicón</string>
+	<string name="routing_settings">Navegación</string>
 	<string name="routing_settings_descr">Especificar as opcións para a navegación</string>
 	<string name="global_settings">Configuración global</string>
 	<string name="index_settings">Xestionar os ficheiros de mapas</string>
@@ -1632,7 +1632,7 @@
 	<string name="default_buttons_cancel">Cancelar</string>
 	<string name="default_buttons_apply">Aplicar</string>
 	<string name="default_buttons_add">Engadir</string>
-	<string name="default_buttons_no">No</string>
+	<string name="default_buttons_no">Non</string>
 	<string name="add_favorite_dialog_top_text">Introduza o nome do favorito</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorito</string>
 	<string name="add_favorite_dialog_favourite_added_template">O punto favorito «{0}» foi engadido correctamente.</string>
@@ -1729,4 +1729,31 @@
 	<string name="rendering_attr_tramTrainRoutes_name">Rutas de tranvía e de tren</string>
 	<string name="lock_screen_request_explanation">%1$s require este permiso para apagar a pantalla para a funcionalidade de aforro de enerxía.</string>
     <string name="wake_on_voice">Acender a pantalla</string>
-    </resources>
+    <string name="wake_on_voice_descr">Acender a pantalla do teléfono ao aproximarse unha manobra</string>
+    <string name="wake_on_voice_never">Nunca</string>
+    <string name="select_impassable_road">Seleccionar no mapa</string>
+    <string name="impassable_road">Evitar estradas…</string>
+    <string name="tip_recent_changes_1_9_t">"Cambios en 1.9: * Updated maps styles with road surface rendering, transport layers and hiking symbols * Search POI along the route * Mark road as impassable per session * Easier to download and update maps * Get visual and audio notification by approaching to waypoint * Print itinerary and turn information * Support of turn lanes * Support Android Wear * Lots UI changes * Separate zoom for Text Size on the map * Special audio notifications in case you are off the route * OsMo login functionality * Fix OsMo version incompatibilities "</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Rutas de tren</string>
+    <string name="rendering_attr_tramRoutes_name">Rutas de tranvía</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Rutas de taxi compartido</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Rutas de trolebús</string>
+    <string name="rendering_attr_busRoutes_name">Rutas de bus</string>
+    <string name="rendering_category_hide">Agochar</string>
+    <string name="rendering_category_routes">Rutas</string>
+    <string name="rendering_category_details">Detalles</string>
+    <string name="rendering_category_transport">Transporte</string>
+    <string name="rendering_category_others">Outros atributos do mapa</string>
+    <string name="map_widget_appearance_rem">Elementos restantes</string>
+    <string name="map_widget_top">Barra de estado</string>
+	<string name="map_widget_right">Panel dereito</string>
+	<string name="map_widget_left">Panel esquerdo</string>
+    <string name="layers_category_show">Mostrar</string>
+	<string name="configure_map">Configurar o mapa</string>
+    <string name="search_radius_proximity">Perto de</string>
+    <string name="osmo_device_not_found">Dispositivo non atopado</string>
+    <string name="osmo_no_connection_msg">O servizo OsMo non está dispoñíbel:\n - comprobe a conexións;\n - comprobe a configuración;\n - comprobe o noso Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">Os usuarios anónimos non poden:\n - crear grupos;\n - sincronizar grupos e dispositivos co servidor;\n - xestionar grupos e dispositivos nunha oficina privada.</string>
+    <string name="anonymous_user">Usuario anónimo</string>
+    <string name="logged_as">Identificado como %1$s</string>
+	</resources>
