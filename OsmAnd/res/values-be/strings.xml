@@ -771,8 +771,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="index_name_oceania">Акеанія</string>
 	<string name="index_name_other">Сусьветныя і тэматычныя мапы</string>
 	<string name="index_name_wiki">Сусветная Вікіпедыя</string>
-	<string name="index_name_voice">Галасавыя пакункі (запісаныя, абмежаваныя магчымасьці)</string>
-	<string name="index_name_tts_voice">Галасавыя пакункі (TTS, пажадана)</string>
+	<string name="index_name_voice">Галасавыя падказкі (запісаныя, абмежаваныя магчымасьці)</string>
+	<string name="index_name_tts_voice">Галасавыя падказкі (TTS, пажадана)</string>
 	<string name="amenity_type_osmwiki">Вікіпэдыя (пазасеціўная)</string>
 	<string name="amenity_type_user_defined">Вызначанае карыстальнікам</string>
 	<string name="fav_export_confirmation">Файл з экспартаванымі ўпадабанымі ўжо існуе. Ці хочаце замяніць яго ?</string>
@@ -1076,7 +1076,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="loading_builds">Загружаюцца зборкі OsmAnd…</string>
 	<string name="select_build_to_install">Выберыце зборку OsmAnd для ўстаноўкі</string>
 	<string name="gps_status_app_not_found">Праграма статуса GPS не ўсталяваная. Пашукаць яе ў Market?</string>
-	<string name="voice_is_not_available_msg">Галасавыя каманды не даступны. Калі ласка, перайдзіце ў налады, абярыце пажаданы пакет галасавых дадзеных і спампуйце яго.</string>
+	<string name="voice_is_not_available_msg">Галасавыя каманды не даступныя. Калі ласка, перайдзіце ў \"Налады\" → \"Агульныя\" → \"Галасавыя дадзеныя\" і абярыце ці спампуйце пакет галасавых падказак.</string>
 	<string name="voice_is_not_available_title">Галасавыя падказкі не абраныя</string>
 	<string name="daynight_mode_day">Дзень</string>
 	<string name="daynight_mode_night">Ноч</string>
@@ -1116,7 +1116,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="transport_search_none">няма</string>
 	<string name="transport_search_again">Шукаць транспарт зноў</string>
 	<string name="map_index">Мапа</string>
-	<string name="voice">Голас</string>
+	<string name="voice">Запісаны голас</string>
 	<string name="no_vector_map_loaded">Вектарныя мапы не былі загружаны</string>
 	<string name="map_route_by_gpx">Навігацыя з выкарыстаньнем GPX</string>
 	<string name="gpx_files_not_found">GPX файлы не знойдзены ў каталогу tracks</string>
@@ -1954,7 +1954,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="osmo_use_https_descr">Выкарыстоўваць бясьпечнае злучэньне з серверам</string>
     <string name="osmo_use_https">Выкарыстоўваць HTTPS</string>
 	<string name="home_button">Дамоў</string>
-    <string name="map_update">Мапы</string>
+    <string name="map_update">Ёсьць абнаўленьні для %1$s мапаў</string>
 	<string name="search_for">Шукаць</string>
 	<string name="show_map">ПАКАЗАЦЬ МАПУ</string>
 	<string name="show_all">ПАКАЗАЦЬ УСЁ</string>
