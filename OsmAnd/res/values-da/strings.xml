@@ -842,7 +842,7 @@
 	<string name="daynight_descr">Vælg regel for dag/nat skift</string>
 	<string name="daynight">Dag-/nattilstand</string>
 	<string name="download_files_question">Hent {0} filer ({1} MB)?</string>
-	<string name="tip_favorites_t">"Steder, som du ofte bruger, kan gemmes som favoritter:
+	<string name="tip_favorites_t">"Steder, som ofte bruges, kan gemmes som favoritter:
 \n\nI genvejsmenuen \'Brug pladseringer\' vælg \'Tilføj til favoritter\', og indtast et navn.
 \n\nNår favoritten er gemt, er den tilgængelig via \'Menu\' → \'Mine steder\'. Tryk på en favorit i åbner mulighed for at bruge den som destination, redigere eller slette den.
 \n\nFor at vise alle favoritsteder direkte på kortet, aktiver kortlag \'Favoritter\' under \'Menu\' → \'Konfigurer kort\'. "</string>
@@ -857,7 +857,7 @@
 \n\nBruges \'Kørselsvejledning fra\' sammen med \'Begynd navigation\', vil OsmAnd skifte til den faktiske position, så snart den er fundet (dette kan bruges til at komme hurtigt i gang med rutevejledning før positionen findes), mens \'Kørselsvejledning fra\' i kombination med \'Vis rute\' kun viser ruten fra ethvert vilkårligt valgt punkt uden efterfølgende opdateringer.\nHvis du bruger \"Kørselsvejledning fra \'sammen med\' Start navigation\", vil Osmand så hurtigt skifte til din aktuelle position som det findes (så dette kan bruges til at kickstarte routing før positionen er fundet), mens \"Kørselsvejledning fra \'i kombination med \'Vis rute\' bare viser dig ruten fra enhver vilkårlig punkt, du havde valgt uden efterfølgende opdateringer. "</string>
 	<string name="amenity_type_landuse">Arealanvendelse</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
-	<string name="voice_is_not_available_msg">Stemmevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
+	<string name="voice_is_not_available_msg">Stemmevejledning er ikke tilgængelig. Gå til \'Indstillinger\'\t→ \'Generelt\' → \'Stemmevejledning\' og vælg eller hent en stemmevejledning.</string>
 	<string name="items_were_selected">{0} enheder valgt</string>
 	<string name="filter_existing_indexes">Hentet</string>
 	<string name="deselect_all">Fravælg alle</string>
@@ -1631,7 +1631,7 @@
     <string name="osmo_edit_device">Ændre brugeregenskaber</string>
     <string name="osmo_edit_color">Visningsfarve</string>
     <string name="osmo_sign_in">Log på</string>
-    <string name="osmo_create_groups_confirm">For at oprette grupper, skal du være registreret som bruger af OsMo.</string>
+    <string name="osmo_create_groups_confirm">For at oprette grupper, skal man være registreret som bruger af OsMo.</string>
     <string name="osmo_credentials_not_valid">Dine OsMo legitimationsoplysninger er ikke gyldige.</string>
     <string name="osmo_regenerate_login_ids_confirm">Er det sikkert at du vil forny det personlige id? Alle enheder, der er tilsluttet vil ikke være i stand til at spore dig mere.</string>
     <string name="osmo_regenerate_login_ids">Forny bruger-id</string>
@@ -1700,11 +1700,11 @@
     <string name="osmo_start_service">OsMo tjeneste</string>
     <string name="osmo_gpx_track_downloaded">OsMo spor %1$s hentet.</string>
     <string name="osmo_not_signed_in">OsMo log ind mislykkedes</string>
-    <string name="osmo_group_information">Læs dette før du opretter en gruppe!</string>
+    <string name="osmo_group_information">Læs dette før oprettelse af en gruppe!</string>
     <string name="osmo_group_by_invite">Tilslut med invitation</string>
     <string name="osmo_group_information_desc">" -Alle grupper der oprettes er offentlige! Hvis de skal være anonyme, tilsluttes enheder direkte via sporings-id\'er.\n -Op til 16 personer kan registreres i gruppen.\n -I tilfælde af inaktivitet eller aktivitet af kun 1 person i 2 uger, vil gruppen blive slettet.\n -Du kan begrænse adgangen til gruppen, til kun med invitation, men for at kontrollere gruppen skal man bruge administrationskonsollen.\n -Hvis du har brug at oprette en gruppe, men med andre betingelser, kontakt http://osmo.mobi"</string>
     <string name="osmo_auth_error_short">Autorisation fejlede</string>
-    <string name="osmo_auth_error">"OsMo autorisation fejl: %$s.\nDet kan være at tjenesten midlertidig  er nede eller din  registrering er udløbet.\nVil du fortsætte med en ny registrering?"</string>
+    <string name="osmo_auth_error">"OsMo autorisation fejl: %$s.\nDet kan være at tjenesten midlertidig  er nede eller registreringen er ududløbet. Fortsæt med en ny registrering?"</string>
     <string name="rendering_attr_hideBuildings_name">Skjul bygninger</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Skjul gang- og cykelstier</string>
     <string name="rendering_attr_hideText_name">Skjul tekst</string>
@@ -1752,7 +1752,7 @@
     <string name="rendering_attr_osmcTraces_description">Generer stier efter OSMC spor</string>
     
 	<string name="osmo_invite">Inviter…</string>
-    <string name="osmo_leave_confirmation_msg">Vil du forlade gruppen %$s?</string>
+    <string name="osmo_leave_confirmation_msg">Forlad gruppen %$s?</string>
     <string name="osmo_specify_tracker_id">Angiv id</string>
     <string name="arrival_distance_factor_early">Tidligt</string>
     <string name="arrival_distance_factor_normally">Normal</string>
@@ -1860,7 +1860,7 @@
     <string name="navigate_point_easting">Østlig</string>
     <string name="map_locale">Sprog på kort</string>
     <string name="rendering_attr_transportStops_name">Stoppesteder</string>
-    <string name="dash_download_msg_none">Vil du hente nogen offline kort?</string>
+    <string name="dash_download_msg_none">Vil du hente offline kort?</string>
     <string name="dash_download_msg">%1$s kort er hentet</string>
     <string name="dash_download_new_one">Hent nye kort</string>
     <string name="dash_download_manage">Administrer</string>

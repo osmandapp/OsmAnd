@@ -67,17 +67,17 @@
 	<string name="poi_city_wall">Muralla</string>
 	<string name="poi_vehicle_inspection">Inspecció de vehicles</string>
 	<string name="poi_military_nuclear_explosion_site">Centre d\'explosió nuclear</string>
-<string name="poi_military_range">Àmbit militar</string>
+<string name="poi_military_range">Camp d\'instrucció</string>
 	<string name="poi_military_naval_base">Base naval militar</string>
 	<string name="poi_military">Zona militar</string>
-	<string name="poi_military_airfield">Pista d\'aterratge militar</string>
+	<string name="poi_military_airfield">Base aèria militar</string>
 	<string name="poi_military_bunker">Búnquer militar</string>
-	<string name="poi_military_barracks">Barracons</string>
+	<string name="poi_military_barracks">Barracons militars</string>
 	<string name="poi_military_danger_area">Zona de tir</string>
-	<string name="poi_organic_shop">Menjar orgànic</string>
+	<string name="poi_organic_shop">Menjar ecològic</string>
 	<string name="poi_paint_shop">Pintures</string>
 	<string name="poi_pet_shop">Botiga d\'animals</string>
-	<string name="poi_radiotechnics_shop">Electrònica</string>
+	<string name="poi_radiotechnics_shop">Radiotècnia</string>
 	<string name="poi_sports_shop">Material esportiu</string>
-	<string name="poi_ticket_shop">Guixeta</string>
+	<string name="poi_ticket_shop">Taquilla</string>
 	</resources>
