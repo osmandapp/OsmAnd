@@ -108,9 +108,9 @@
 	</string>
   <string name="oclock">ч.</string>
   <string name="unknown_from_location">Начальное местоположение ещё не определено</string>
-  <string name="unknown_location">Местоположение ещё не определено</string>
+  <string name="unknown_location">Определяем местоположение</string>
   <string name="modify_transparency">Изменить прозрачность (0 - прозрачный, 255 - непрозрачный)</string>
-  <string name="confirm_interrupt_download">Вы хотите прервать загрузку файла?</string>
+  <string name="confirm_interrupt_download">Прервать загрузку файла?</string>
   <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из Интернета с помощью пункта меню \"Настройки\" → \"Управление файлами карт\". После загрузки Вы сможете просматривать карты, осуществлять поиск адресов, POI и остановок общественного транспорта.</string>
   <string name="basemap_was_selected_to_download">Базовая карта необходима для корректной работы приложения и автоматически была выбрана для загрузки.</string>
   <string name="select_index_file_to_download">Ничего не было найдено. Вы можете создать карту самостоятельно (смотрите на osmand.net).</string>
@@ -417,7 +417,7 @@
 \n\nНекоторые базовые сведения, советы по использованию и дополнительную справку можно посмотреть вызвав меню \"Справка\" на экране карты. "</string>
   <string name="next_button">След.</string>
   <string name="previous_button">Пред.</string>
-  <string name="unit_of_length_descr">Изменить единицы измерения длины и скорости</string>
+  <string name="unit_of_length_descr">Единицы измерения длины и скорости</string>
   <string name="unit_of_length">Единицы измерения</string>
   <string name="si_mi_foots">Мили/футы</string>
   <string name="si_mi_yard">Мили/ярды</string>
@@ -518,7 +518,7 @@
   <string name="continuous_rendering_descr">Выберите способ отрисовки карты</string>
   <string name="rendering_exception">Во время отображения карты произошла непредвиденная ошибка</string>
   <string name="rendering_out_of_memory">Ошибка : недостаточно памяти процесса, чтобы отобразить карту</string>
-  <string name="show_point_options">Контекстное меню…</string>
+  <string name="show_point_options">Контекстное меню</string>
   <string name="renderer_load_sucess">Стиль успешно загружен</string>
   <string name="renderer_load_exception">Произошла ошибка во время загрузки данного стиля</string>
   <string name="renderers">Стиль отрисовки векторной карты</string>
@@ -940,7 +940,7 @@
   <string name="accessibility_preferences">Специальные возможности</string>
   <string name="tip_rotation_switching">Поворот карты</string>
   
-  <string name="tip_day_night_mode">Дневной/ночной режим</string>
+  <string name="tip_day_night_mode">Режим карты</string>
   
   <string name="pref_vector_rendering">Настройки векторного рендеринга</string>
   <string name="pref_overlay">Дополнительные слои</string>
@@ -1525,7 +1525,7 @@
     <string name="voice_pref_title">Голос</string>
     <string name="misc_pref_title">Разное</string>
     <string name="localization_pref_title">Локализация</string>
-    <string name="interrupt_music_descr">Прерывание музыки во время объявления</string>
+    <string name="interrupt_music_descr">Прерывание музыки во время объявления навигации</string>
 	<string name="interrupt_music">Прерывание музыки</string>
 	<string name="share_route_as_gpx">Поделиться маршрутом используя файл GPX</string>
 	<string name="osmo_settings_uuid">Ключ доступа</string>
