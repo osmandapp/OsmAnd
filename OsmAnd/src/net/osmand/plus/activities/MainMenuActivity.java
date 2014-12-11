@@ -108,8 +108,8 @@ public class MainMenuActivity extends BaseDownloadActivity {
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			FloatingActionButton fabButton = new FloatingActionButton.Builder(this)
-					.withDrawable(getResources().getDrawable(R.drawable.ic_ac_settings))
-					.withButtonColor(Color.WHITE)
+					.withDrawable(getResources().getDrawable(R.drawable.ic_action_map))
+					.withButtonColor(Color.parseColor("#ff8f00"))
 					.withGravity(Gravity.BOTTOM | Gravity.RIGHT)
 					.withMargins(0, 0, 16, 16)
 					.create();
