@@ -2,6 +2,7 @@ package net.osmand.plus.render;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.TileSourceProxyProvider;
+import net.osmand.core.jni.MapLayerConfiguration;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
@@ -30,6 +31,9 @@ public class MapVectorLayer extends BaseMapLayer {
 	private boolean visible = false;
 	private boolean oldRender = false;
 	private String cachedUnderlay;
+	private Integer cachedMapTransparency;
+	private String cachedOverlay;
+	private Integer cachedOverlayTransparency;
 
 	public MapVectorLayer(MapTileLayer tileLayer, boolean oldRender) {
 		this.tileLayer = tileLayer;
@@ -107,6 +111,29 @@ public class MapVectorLayer extends BaseMapLayer {
 					} else {
 						mapRenderer.resetMapLayerProvider(-1);
 					}
+				}
+				if (st.MAP_TRANSPARENCY.get() != cachedMapTransparency) {
+					cachedMapTransparency = st.MAP_TRANSPARENCY.get();
+					MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+					mapLayerConfiguration.setOpacity(((float)cachedMapTransparency) / 255.0f);
+					mapRenderer.setMapLayerConfiguration(0, mapLayerConfiguration);
+				}
+				if (!Algorithms.objectEquals(st.MAP_OVERLAY.get(), cachedOverlay)) {
+					cachedOverlay = st.MAP_OVERLAY.get();
+					ITileSource tileSource = st.getTileSourceByName(cachedOverlay, false);
+					if (tileSource != null) {
+						TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
+						mapRenderer.setMapLayerProvider(1, prov.instantiateProxy(true));
+						prov.swigReleaseOwnership();
+					} else {
+						mapRenderer.resetMapLayerProvider(1);
+					}
+				}
+				if (st.MAP_OVERLAY_TRANSPARENCY.get() != cachedOverlayTransparency) {
+					cachedOverlayTransparency = st.MAP_OVERLAY_TRANSPARENCY.get();
+					MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+					mapLayerConfiguration.setOpacity(((float)cachedOverlayTransparency) / 255.0f);
+					mapRenderer.setMapLayerConfiguration(1, mapLayerConfiguration);
 				}
 				// opengl renderer
 				mapRenderer.setTarget(new PointI(tilesRect.getCenter31X(), tilesRect.getCenter31Y()));

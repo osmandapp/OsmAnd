@@ -41,6 +41,8 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 		} catch(IOException e) {
 			return SwigUtilities.emptyQByteArray();
 		}
+		if (image == null)
+			return SwigUtilities.emptyQByteArray();
 
 		return SwigUtilities.createQByteArrayAsCopyOf(image);
 	}
