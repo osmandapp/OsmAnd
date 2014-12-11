@@ -113,14 +113,14 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 
 	}
 
-	public void startDownload(IndexItem item) {
+	public boolean startDownload(IndexItem item) {
 		if (downloadListIndexThread.getCurrentRunningTask() != null && getEntriesToDownload().get(item) == null) {
 			downloadQueue.add(item);
-			Toast.makeText(this, "Added to download queue", Toast.LENGTH_SHORT).show();
-			return;
+			return false;
 		}
 		addToDownload(item);
 		downloadFilesCheckFreeVersion();
+		return true;
 	}
 
 	private void addToDownload(IndexItem item) {
@@ -213,18 +213,22 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				BasicProgressAsyncTask<?, ?, ?> t = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
-				if (t != null) {
-					t.setInterrupted(true);
-				}
-				// list of items to download need to be cleared in case of dashboard activity
-				if (BaseDownloadActivity.this instanceof MainMenuActivity) {
-					getEntriesToDownload().clear();
-				}
+				cancelDownload();
 			}
 		});
 		bld.setNegativeButton(R.string.default_buttons_no, null);
 		bld.show();
+	}
+
+	public void cancelDownload() {
+		BasicProgressAsyncTask<?, ?, ?> t = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
+		if (t != null) {
+			t.setInterrupted(true);
+		}
+		// list of items to download need to be cleared in case of dashboard activity
+		if (this instanceof MainMenuActivity) {
+			getEntriesToDownload().clear();
+		}
 	}
 
 	private void prepareDownloadDirectory() {
@@ -318,6 +322,14 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 					;
 				};
 		task.execute();
+	}
+
+	public boolean isInQueue(IndexItem item) {
+		return downloadQueue.contains(item);
+	}
+
+	public void removeFromQueue(IndexItem item) {
+		downloadQueue.remove(item);
 	}
 }
 

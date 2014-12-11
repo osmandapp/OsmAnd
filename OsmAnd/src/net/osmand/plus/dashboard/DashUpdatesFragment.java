@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import android.media.Image;
 import android.widget.*;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BasicProgressAsyncTask;
@@ -110,7 +111,12 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			downloadButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					getDownloadActivity().startDownload(item);
+					if (getDownloadActivity().isInQueue(item)) {
+						getDownloadActivity().removeFromQueue(item);
+						((ImageButton)view).setImageResource(R.drawable.download_button);
+					} else if (!getDownloadActivity().startDownload(item)) {
+						((ImageButton)view).setImageResource(R.drawable.cancel_button);
+					}
 				}
 			});
 			downloadButtons.add((ImageButton) downloadButton);
@@ -150,7 +156,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			cancelButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					getDownloadActivity().makeSureUserCancelDownload();
+					getDownloadActivity().cancelDownload();
 				}
 			});
 			boolean intermediate = basicProgressAsyncTask.isIndeterminate();
