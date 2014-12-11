@@ -9,6 +9,13 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rendering_attr_roadStyle_name">Road style</string>
+    <string name="rendering_value_default_name">Default</string>
+    <string name="rendering_value_orange_name">Orange</string>
+    <string name="rendering_value_germanRoadAtlas_name">German Road Atlas</string>
+    <string name="rendering_value_americanRoadAtlas_name">American Road Atlas</string>
+    <string name="routing_attr_no_new_routing_name">Do not use v1.9 routing</string>
+    <string name="routing_attr_no_new_routing_description">Do not use v1.9 routing</string>
     <string name="dash_download_msg_none">Do you want to download any offline map?</string>
     <string name="dash_download_msg">You have %1$s maps downloaded</string>
     <string name="dash_download_new_one">Download New Map</string>
