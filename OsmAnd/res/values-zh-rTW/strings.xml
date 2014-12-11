@@ -1832,7 +1832,7 @@
     <string name="advanced_settings">進階</string>
 	<string name="osmo_use_https_descr">使用安全協定連線於伺服器</string>
     <string name="osmo_use_https">使用 HTTPS</string>
-	<string name="map_update">地圖</string>
+	<string name="map_update">您有 %1$ 個地圖更新</string>
 	<string name="search_for">查尋</string>
 	<string name="show_map">顯示地圖</string>
 	<string name="show_all">全部顯示</string>
