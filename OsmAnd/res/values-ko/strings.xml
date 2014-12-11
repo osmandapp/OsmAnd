@@ -1017,8 +1017,8 @@
 	<string name="driving_region_japan">일본</string>
 	<string name="driving_region_us">미국</string>
 	<string name="driving_region_canada">캐나다</string>
-	<string name="driving_region_europe_asia">한국(아시아 &amp; 유렵)</string>
-	<string name="driving_region_uk">영국(인도, 호주 및 기타)</string>
+	<string name="driving_region_europe_asia">한국 &amp; 유럽</string>
+	<string name="driving_region_uk">영국, 인도, 호주 및 기타</string>
 	<string name="osmodroid_mode_on">OsMoDroid 정지</string>    
     <string name="osmodroid_mode_off">OsMoDroid 시작</string>
     <string name="osmodroid_refresh">채널 새로 고침</string>
@@ -1125,7 +1125,7 @@
          \n\t* 나침반을 안정화하기 위해 추가 설정
          \n\t* 지도 화면에서 좌상단 버튼는  메뉴버튼을 대체
     </string>
-    <string name="monitoring_settings">여행 레코딩</string>
+    <string name="monitoring_settings">트랙 레코딩</string>
     <string name="monitoring_settings_descr">트랙을 기록하는 방법을 구성합니다</string>
     <string name="osmand_monitoring_plugin_description">절전모드(스크린 끄기)에서 트래킹 및 경로탐색 활성화, 주기적으로 GPS 장치가 작동중일 때 . 표시 설정은 로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 트랙을 기록하는 설비 가능.</string>
     <string name="osmand_monitoring_plugin_name">로깅 서비스</string>
@@ -1781,7 +1781,7 @@
     <string name="osmo_settings_descr">모니터링 설정을 구성하고 개인 모니터링 채널을 설정</string>
     <string name="osmo_plugin_description">"OpenStreetMap 고급 실시간 모니터링. 이에 대해서는 http://osmo.mobi를 참조 하십시오. 다른 장치를 추적하고 추적받는 가능성을 제공 합니다. 익명 그룹을 만들고, 서로의 위치를 공유하고 소통한다. 세션 트래킹 또는 영구 트래킹에 대한 다양한 설정을 합니다. 익명그룹는 수많은 날에 제한되며  일부 기능 즉, 원격 제어 및 그룹 관리자는 제한된다. 완벽하게 기능적인 그룹은 웹사이트에 생성하고 그들에게 등록된 사용자만 액세스할 수 있습니다. "</string>
     <string name="osmo_plugin_name">OsMo (친구위치 공유)</string>
-    <string name="osmo_settings">OsMo (실시간 친구찾기)</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="share_route_as_gpx">루트를 GPX 파일로 공유</string>
 	<string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
 	<string name="arrival_distance">도착 알림</string>
