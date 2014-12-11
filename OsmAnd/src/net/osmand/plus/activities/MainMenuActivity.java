@@ -6,6 +6,9 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Random;
 
+import android.graphics.Color;
+import android.os.Build;
+import android.view.Gravity;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -49,6 +52,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import net.osmand.plus.views.controls.FloatingActionButton;
 
 /**
  */
@@ -101,6 +105,21 @@ public class MainMenuActivity extends BaseDownloadActivity {
 		
 		boolean firstTime = initApp(this, getMyApplication());
 		addFragments(firstTime);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			FloatingActionButton fabButton = new FloatingActionButton.Builder(this)
+					.withDrawable(getResources().getDrawable(R.drawable.ic_ac_settings))
+					.withButtonColor(Color.WHITE)
+					.withGravity(Gravity.BOTTOM | Gravity.RIGHT)
+					.withMargins(0, 0, 16, 16)
+					.create();
+			fabButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					startMapActivity();
+				}
+			});
+		}
 	}
 	
 	@Override
@@ -248,8 +267,7 @@ public class MainMenuActivity extends BaseDownloadActivity {
 		final OsmAndAppCustomization appCustomization = app.getAppCustomization();
 		// restore follow route mode
 		if(app.getSettings().FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()){
-			final Intent mapIndent = new Intent(this, appCustomization.getMapActivity());
-			startActivityForResult(mapIndent, 0);
+			startMapActivity();
 			return false;
 		}
 		boolean firstTime = false;
@@ -290,7 +308,12 @@ public class MainMenuActivity extends BaseDownloadActivity {
 
 		return firstTime;
 	}
-	
+
+	private void startMapActivity() {
+		final Intent mapIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
+		startActivityForResult(mapIndent, 0);
+	}
+
 	private void applicationInstalledFirstTime() {
 		boolean netOsmandWasInstalled = false;
 		try {

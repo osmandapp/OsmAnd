@@ -8,7 +8,7 @@
     android:layout_marginRight="5dip">
 
     <ImageView
-        android:layout_marginLeft="7dip"
+        android:layout_marginLeft="14dip"
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,8 +21,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dip"
-        android:layout_marginTop="12dip"
-        android:layout_marginBottom="12dip"
+        android:layout_marginTop="11dip"
+        android:layout_marginBottom="11dip"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
         style="@style/ListText"
