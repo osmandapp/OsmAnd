@@ -41,6 +41,7 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
@@ -117,7 +118,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	
 	private Handler uiHandler;
 	private OsmandSettings settings;
-	private Path directionPath = new Path();
+
 	private float width = 24;
 	private float height = 24;
 	
@@ -235,8 +236,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		uiHandler = new Handler();
 		searchFilter = (EditText) findViewById(R.id.SearchFilter);
 		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
-		directionPath = createDirectionPath();
-		
+
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		
 		searchFilter.addTextChangedListener(new TextWatcher(){
@@ -296,33 +296,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		getListView().addFooterView(ll);
 	}
 	
-	private Path createDirectionPath() {
-		int h = 15;
-		int w = 4;
-		float sarrowL = 8; // side of arrow
-		float harrowL = (float) Math.sqrt(2) * sarrowL; // hypotenuse of arrow
-		float hpartArrowL = (float) (harrowL - w) / 2;
-		Path path = new Path();
-		path.moveTo(width / 2, height - (height - h) / 3);
-		path.rMoveTo(w / 2, 0);
-		path.rLineTo(0, -h);
-		path.rLineTo(hpartArrowL, 0);
-		path.rLineTo(-harrowL / 2, -harrowL / 2); // center
-		path.rLineTo(-harrowL / 2, harrowL / 2);
-		path.rLineTo(hpartArrowL, 0);
-		path.rLineTo(0, h);
-		
-		Matrix pathTransform = new Matrix();
-		WindowManager mgr = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-		DisplayMetrics dm = new DisplayMetrics();
-		mgr.getDefaultDisplay().getMetrics(dm);
-		pathTransform.postScale(dm.density, dm.density);
-		path.transform(pathTransform);
-		width *= dm.density;
-		height *= dm.density;
-		return path;
-	}
-
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -793,7 +766,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				}
 			}
 			if(loc != null){
-				DirectionDrawable draw = new DirectionDrawable();
+				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height, false);
 				Float h = heading;
 				float a = h != null ? h : 0;
 				draw.setAngle(mes[1] - a + 180);
@@ -902,57 +875,5 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			});
 		b.show();
 	}
-
-	
-	class DirectionDrawable extends Drawable {
-		Paint paintRouteDirection;
-		
-		private float angle;
-		
-		public DirectionDrawable(){
-			paintRouteDirection = new Paint();
-			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-			paintRouteDirection.setColor(getResources().getColor(R.color.color_unknown));
-			paintRouteDirection.setAntiAlias(true);
-		}
-		
-		public void setOpenedColor(int opened){
-			if(opened == 0){
-				paintRouteDirection.setColor(getResources().getColor(R.color.color_ok));
-			} else if(opened == -1){
-				paintRouteDirection.setColor(getResources().getColor(R.color.color_unknown));
-			} else {
-				paintRouteDirection.setColor(getResources().getColor(R.color.color_warning));
-			}
-		}
-		
-		
-		public void setAngle(float angle){
-			this.angle = angle;
-		}
-
-		@Override
-		public void draw(Canvas canvas) {
-			canvas.rotate(angle, width/2, height/2);
-			canvas.drawPath(directionPath, paintRouteDirection);
-		}
-
-		@Override
-		public int getOpacity() {
-			return 0;
-		}
-
-		@Override
-		public void setAlpha(int alpha) {
-			paintRouteDirection.setAlpha(alpha);
-			
-		}
-
-		@Override
-		public void setColorFilter(ColorFilter cf) {
-			paintRouteDirection.setColorFilter(cf);
-		}
-	}
-
 
 }

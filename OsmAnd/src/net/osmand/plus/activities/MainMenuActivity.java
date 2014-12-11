@@ -451,6 +451,11 @@ public class MainMenuActivity extends BaseDownloadActivity {
 					((DashUpdatesFragment) f).updatedDownloadsList(list);
 				}
 			}
+			if(f instanceof DashDownloadMapsFragment) {
+				if(!f.isDetached()) {
+					((DashDownloadMapsFragment) f).refreshData();
+				}
+			}
 		}
 	}
 }
