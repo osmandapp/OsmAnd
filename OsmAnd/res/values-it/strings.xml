@@ -2052,11 +2052,11 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="dash_download_msg">Hai %1$s mappe scaricate</string>
     <string name="dash_download_new_one">Scarica una nuova mappa</string>
     <string name="dash_download_manage">Gestisci</string>
-    <string name="rendering_attr_roadStyle_name">Rappresentazione delle strade</string>
+    <string name="rendering_attr_roadStyle_name">Stile disegno delle strade</string>
     <string name="rendering_value_default_name">Default</string>
     <string name="rendering_value_orange_name">Arancione</string>
-    <string name="rendering_value_germanRoadAtlas_name">Atlas strade tedesche</string>
-    <string name="rendering_value_americanRoadAtlas_name">Atlas strade americane</string>
+    <string name="rendering_value_germanRoadAtlas_name">Atlante strade tedesche</string>
+    <string name="rendering_value_americanRoadAtlas_name">Atlante strade americane</string>
     <string name="routing_attr_no_new_routing_name">Non usare il calcolo del percorso v1.9</string>
     <string name="routing_attr_no_new_routing_description">Non usare il calcolo del percorso v1.9</string>
     </resources>
