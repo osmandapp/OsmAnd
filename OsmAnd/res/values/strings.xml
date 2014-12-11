@@ -13,6 +13,10 @@
     <string name="rendering_value_default_name">Default</string>
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">German Road Atlas</string>
+	<string name="traffic_warning_railways">Railways</string>
+	<string name="traffic_waring_pedestrian">Pedestrian</string>
+	<string name="show_railway_warnings">Show railway warnings</string>
+	<string name="show_pedestrian_warnings">Show pedestrian warnings</string>
     <string name="rendering_value_americanRoadAtlas_name">American Road Atlas</string>
     <string name="routing_attr_no_new_routing_name">Do not use v1.9 routing</string>
     <string name="routing_attr_no_new_routing_description">Do not use v1.9 routing</string>
