@@ -2013,7 +2013,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="advanced_settings">Erweitert</string>
     <string name="home_button">Startbildschirm</string>
     <string name="osmo_use_https_descr">Sichere Server-Verbindung verwenden</string>
-    <string name="osmo_use_https">Https nutzen</string>
+    <string name="osmo_use_https">HTTPS nutzen</string>
     <string name="map_update">Aktualisierungen für %1$s Karten sind verfügbar</string>
     <string name="search_for">Suchen nach</string>
     <string name="show_map">KARTE ZEIGEN</string>
