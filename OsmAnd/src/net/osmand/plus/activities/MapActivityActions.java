@@ -856,7 +856,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 
-		optionsMenuHelper.item(R.string.layer_map_appearance).icons(R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_light) 
+		optionsMenuHelper.item(R.string.layer_map_appearance).icons(R.drawable.ic_configure_screen_dark, R.drawable.ic_configure_screen_light)
 			.listen(new OnContextMenuClick() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
