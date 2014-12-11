@@ -12,7 +12,7 @@ public interface ITileSource {
 
 	public String getUrlToLoad(int x, int y, int zoom);
 
-	public byte[] getBytes(int x, int y, int zoom) throws IOException;
+	public byte[] getBytes(int x, int y, int zoom, String dirWithTiles) throws IOException;
 
 	public int getMinimumZoomSupported();
 

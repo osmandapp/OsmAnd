@@ -1,14 +1,18 @@
 package net.osmand.plus.render;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.TileSourceProxyProvider;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.map.ITileSource;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.util.Algorithms;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -20,17 +24,17 @@ public class MapVectorLayer extends BaseMapLayer {
 	private OsmandMapTileView view;
 	private ResourceManager resourceManager;
 	private Paint paintImg;
-	
+
 	private RectF destImage = new RectF();
 	private final MapTileLayer tileLayer;
 	private boolean visible = false;
 	private boolean oldRender = false;
-	
-	public MapVectorLayer(MapTileLayer tileLayer, boolean oldRender){
+	private String cachedUnderlay;
+
+	public MapVectorLayer(MapTileLayer tileLayer, boolean oldRender) {
 		this.tileLayer = tileLayer;
 		this.oldRender = oldRender;
 	}
-	
 
 	@Override
 	public void destroyLayer() {
@@ -49,43 +53,39 @@ public class MapVectorLayer extends BaseMapLayer {
 		paintImg.setFilterBitmap(true);
 		paintImg.setAlpha(getAlpha());
 	}
-	
+
 	public boolean isVectorDataVisible() {
-		return visible &&  view.getZoom() >= view.getSettings().LEVEL_TO_SWITCH_VECTOR_RASTER.get();
+		return visible && view.getZoom() >= view.getSettings().LEVEL_TO_SWITCH_VECTOR_RASTER.get();
 	}
-	
-	
+
 	public boolean isVisible() {
 		return visible;
 	}
-	
+
 	public void setVisible(boolean visible) {
 		this.visible = visible;
-		if(!visible){
+		if (!visible) {
 			resourceManager.getRenderer().clearCache();
 		}
 	}
-	
+
 	@Override
 	public int getMaximumShownMapZoom() {
 		return 23;
 	}
-	
+
 	@Override
 	public int getMinimumShownMapZoom() {
 		return 1;
 	}
-	
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
-		
+
 	}
-	
-	
+
 	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect,
-			DrawSettings drawSettings) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
 		if (!visible) {
 			return;
 		}
@@ -96,10 +96,23 @@ public class MapVectorLayer extends BaseMapLayer {
 			final MapRendererView mapRenderer = view.getMapRenderer();
 			if (mapRenderer != null && !oldRender) {
 				NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
+				OsmandSettings st = view.getApplication().getSettings();
+				if (!Algorithms.objectEquals(st.MAP_UNDERLAY.get(), cachedUnderlay)) {
+					cachedUnderlay = st.MAP_UNDERLAY.get();
+					ITileSource tileSource = st.getTileSourceByName(cachedUnderlay, false);
+					if (tileSource != null) {
+						TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
+						mapRenderer.setMapLayerProvider(-1, prov.instantiateProxy(true));
+						prov.swigReleaseOwnership();
+					} else {
+						mapRenderer.resetMapLayerProvider(-1);
+					}
+				}
 				// opengl renderer
 				mapRenderer.setTarget(new PointI(tilesRect.getCenter31X(), tilesRect.getCenter31Y()));
 				mapRenderer.setAzimuth(-tilesRect.getRotate());
-				mapRenderer.setZoom((float) (tilesRect.getZoom() /*+ tilesRect.getZoomScale() */+ tilesRect.getZoomAnimation()));
+				mapRenderer.setZoom((float) (tilesRect.getZoom() /* + tilesRect.getZoomScale() */+ tilesRect
+						.getZoomAnimation()));
 			} else {
 				if (!view.isZooming()) {
 					if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings)) {
@@ -122,7 +135,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	private boolean drawRenderedMap(Canvas canvas, Bitmap bmp, RotatedTileBox bmpLoc, RotatedTileBox currentViewport) {
 		boolean shown = false;
 		if (bmp != null && bmpLoc != null) {
-			float rot = - bmpLoc.getRotate();
+			float rot = -bmpLoc.getRotate();
 			int cz = currentViewport.getZoom();
 			canvas.rotate(rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 			final RotatedTileBox calc = currentViewport.copy();
@@ -134,7 +147,7 @@ public class MapVectorLayer extends BaseMapLayer {
 			final float y1 = calc.getPixYFromTile(lt.x, lt.y, cz);
 			final float y2 = calc.getPixYFromTile(rb.x, rb.y, cz);
 			destImage.set(x1, y1, x2, y2);
-			if(!bmp.isRecycled()){
+			if (!bmp.isRecycled()) {
 				canvas.drawBitmap(bmp, null, destImage, paintImg);
 				shown = true;
 			}
@@ -143,15 +156,14 @@ public class MapVectorLayer extends BaseMapLayer {
 		return shown;
 	}
 
-	
 	@Override
 	public void setAlpha(int alpha) {
 		super.setAlpha(alpha);
 		if (paintImg != null) {
 			paintImg.setAlpha(alpha);
 		}
-	}	
-	
+	}
+
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		return false;
