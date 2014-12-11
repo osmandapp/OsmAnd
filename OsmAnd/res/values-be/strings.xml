@@ -1978,4 +1978,11 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="dash_download_new_one">Спампаваць новую мапу</string>
     <string name="dash_download_manage">Кіраваць</string>
     <string name="voices">Галасавыя падказкі</string>
-	</resources>
+	<string name="rendering_value_orange_name">Аранжавы</string>
+    <string name="rendering_value_germanRoadAtlas_name">Нямецкі атлас аўтадарог</string>
+    <string name="rendering_value_americanRoadAtlas_name">Амерыканскі атлас аўтадарог</string>
+    <string name="routing_attr_no_new_routing_name">Не выкарыстоўваць маршрутызацыю v1.9</string>
+    <string name="routing_attr_no_new_routing_description">Не выкарыстоўваць маршрутызацыю v1.9</string>
+    <string name="rendering_value_default_name">Па змоўчаньні</string>
+    <string name="rendering_attr_roadStyle_name">Стыль аўтадарог</string>
+    </resources>
