@@ -1865,4 +1865,11 @@
     <string name="dash_download_new_one">Hent nye kort</string>
     <string name="dash_download_manage">Administrer</string>
     <string name="voices">Stemmevejledning</string>
-	</resources>
+	<string name="rendering_attr_roadStyle_name">Vej stil</string>
+    <string name="rendering_value_default_name">Standardværdi</string>
+    <string name="rendering_value_orange_name">Orange</string>
+    <string name="rendering_value_germanRoadAtlas_name">Tysk vej Atlas</string>
+    <string name="rendering_value_americanRoadAtlas_name">Amerikansk vej Atlas</string>
+    <string name="routing_attr_no_new_routing_name">Brug ikke v1.9 routing</string>
+    <string name="routing_attr_no_new_routing_description">Brug ikke v1.9 routing</string>
+    </resources>
