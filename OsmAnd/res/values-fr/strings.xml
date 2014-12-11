@@ -1885,4 +1885,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="dash_download_msg">Vous avez téléchargé %1$s carte(s)</string>
     <string name="dash_download_new_one">Télécharger une nouvelle carte</string>
     <string name="dash_download_manage">Gérer</string>
+    <string name="rendering_attr_roadStyle_name">Style de route</string>
+    <string name="rendering_value_default_name">Par défaut</string>
+    <string name="rendering_value_orange_name">Orange</string>
     </resources>
