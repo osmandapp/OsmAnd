@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
@@ -28,6 +27,7 @@ import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.hardware.Sensor;
@@ -987,18 +987,18 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_DESTINATION_ARROW = new BooleanPreference("show_destination_arrow", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<String> MAP_OVERLAY = new StringPreference("map_overlay", null).makeGlobal();
+	public final CommonPreference<String> MAP_OVERLAY = new StringPreference("map_overlay", null).makeGlobal().cache();
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<String> MAP_UNDERLAY = new StringPreference("map_underlay", null).makeGlobal();
+	public final CommonPreference<String> MAP_UNDERLAY = new StringPreference("map_underlay", null).makeGlobal().cache();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> MAP_OVERLAY_TRANSPARENCY = new IntPreference("overlay_transparency",
-			100).makeGlobal();
+			100).makeGlobal().cache();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> MAP_TRANSPARENCY = new IntPreference("map_transparency",
-			255).makeGlobal();
+			255).makeGlobal().cache();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference("map_tile_sources",
@@ -1158,6 +1158,7 @@ public class OsmandSettings {
 		return writableSecondaryStorage;
 	}
 	
+	@SuppressLint("NewApi")
 	public String getMatchingExternalFilesDir(String dir) {
 		// only API 19 !!
 		try {
@@ -1181,6 +1182,7 @@ public class OsmandSettings {
 		}
 	}
 
+	@SuppressLint("NewApi")
 	public List<String> getWritableSecondaryStorageDirectorys() {
 		// only API 19 !!
 		// primary external storage directory
