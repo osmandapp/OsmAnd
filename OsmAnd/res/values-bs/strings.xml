@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_8_1_t">"Promjene u 0.8.1 : "</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_0_8_1_t">"Promjene u 0.8.1 : "</string>
   <string name="asap">Što prije</string>
   <string name="save_route_as_gpx">Sačuvajte put kao GPX datoteku</string>
   <string name="route_roundabout">Kružni tok : idite %1$d izlaz i idite</string>
@@ -75,7 +76,7 @@
   <string name="bg_service_screen_unlock">Otključaj ekran</string>
   <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
   <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
-<string name="show_warnings_title">Prikazi alarme.</string>
+<string name="show_warnings_title">Prikazi alarme…</string>
 <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
     <string name="map_view">Karta</string>
@@ -119,7 +120,7 @@
     <string name="search_villages_and_postcodes">Traži sela / poštanski broj</string>
 	<string name="rendering_attr_showRoadMaps_description">Odaberite kada će se prikazati samo cestovne karte:</string>
 	<string name="rendering_attr_showRoadMaps_name">Samo cestovne karte</string>
-    <string name="prefer_in_routing_title">Preferiraj...</string>
+    <string name="prefer_in_routing_title">Preferiraj…</string>
 	<string name="prefer_in_routing_descr">Preferiraj autocestu</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     
