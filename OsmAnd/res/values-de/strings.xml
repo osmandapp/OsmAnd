@@ -2039,4 +2039,15 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="dash_download_msg">%1$s Karten bereits heruntergeladen</string>
     <string name="dash_download_new_one">Neue Karte herunterladen</string>
     <string name="dash_download_manage">Karten verwalten</string>
+    <string name="rendering_attr_roadStyle_name">Straßenführung</string>
+    <string name="rendering_value_default_name">Standard</string>
+    <string name="rendering_value_orange_name">Orange</string>
+    <string name="rendering_value_germanRoadAtlas_name">Deutscher Autoatlas</string>
+    <string name="traffic_warning_railways">Eisenbahnen</string>
+    <string name="traffic_waring_pedestrian">Fußgänger</string>
+    <string name="show_railway_warnings">Eisenbahn-Warnungen anzeigen</string>
+    <string name="show_pedestrian_warnings">Fußgänger-Warnungen anzeigen</string>
+    <string name="rendering_value_americanRoadAtlas_name">Amerikanischer Autoatlas</string>
+    <string name="routing_attr_no_new_routing_name">Routing v1.9 nicht verwenden</string>
+    <string name="routing_attr_no_new_routing_description">Neue Routenberechnung nicht verwenden</string>
     </resources>
