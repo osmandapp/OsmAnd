@@ -574,4 +574,6 @@
 	<string name="poi_bookmaker">Preneur de paris</string>
 
 	<string name="poi_running_track">Piste de course</string>
+	<string name="poi_base">Saut B.A.S.E.</string>
+	<string name="poi_roller_skating">Roller skating</string>
 	</resources>
