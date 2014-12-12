@@ -1872,4 +1872,8 @@
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk vej Atlas</string>
     <string name="routing_attr_no_new_routing_name">Brug ikke v1.9 routing</string>
     <string name="routing_attr_no_new_routing_description">Brug ikke v1.9 routing</string>
+    <string name="traffic_warning_railways">Jernbaner</string>
+	<string name="traffic_waring_pedestrian">Fodgænger</string>
+	<string name="show_railway_warnings">Vis jernbaneadvarsler</string>
+	<string name="show_pedestrian_warnings">Vis fodgængeradvarsler</string>
     </resources>
