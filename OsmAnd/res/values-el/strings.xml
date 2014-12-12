@@ -347,8 +347,8 @@
 	<string name="index_name_oceania">Ωκεανία</string>
 	<string name="index_name_other">Παγκόσμιοι και τοπικοί χάρτες</string>
 	<string name="index_name_wiki">ΣΕ Παγκόσμιας Wikipedia</string>
-	<string name="index_name_voice">Πακέτα φωνής (ηχογραφημένα, περιορισμένες δυνατότητες)</string>
-	<string name="index_name_tts_voice">Πακέτα φωνής (σύνθεση-TTS, προτιμώμενο)</string>
+	<string name="index_name_voice">Φωνητικές οδηγίες (ηχογραφημένες, περιορισμένες δυνατότητες)</string>
+	<string name="index_name_tts_voice">Φωνητικές οδηγίες (σύνθεση-TTS, προτιμώμενο)</string>
 	<string name="amenity_type_osmwiki">Wikipedia (εκτός σύνδεσης)</string>
 	<string name="amenity_type_user_defined">Ορισμένο από το χρήστη</string>
 	<string name="fav_export_confirmation">Υπάρχει ήδη αρχείο από προηγούμενη εξαγωγή αγαπημένων. Θέλετε να αντικατασταθεί?</string>
@@ -678,7 +678,7 @@
 	<string name="select_build_to_install">Επιλέξτε ένα από τα OsmAnd builds προς εγκατάσταση</string>
 	<string name="contribution_activity">Εγκατάσταση έκδοσης</string>
 	<string name="gps_status_app_not_found">Η εφαρμογή GPS Status δεν είναι εγκατεστημένη. Αναζήτηση στο Market;</string>
-	<string name="voice_is_not_available_msg">Δεν υπάρχει διαθέσιμη φωνητική καθοδήγηση. Μεταβείτε στις ρυθμίσεις, επιλέξτε το προτιμώμενο πακέτο φωνής, και κατεβάστε το.</string>
+	<string name="voice_is_not_available_msg">"Δεν υπάρχει διαθέσιμη φωνητική καθοδήγηση. Μεταβείτε στις \'Ρυθμίσεις\' →  \'Γενικές\' → \'Φωνητική καθοδήγηση\', και επιλέξτε ή κατεβάστε ένα πακέτο φωνητικών οδηγιών."</string>
 	<string name="voice_is_not_available_title">Δεν επιλέχτηκε φωνητική καθοδήγηση</string>
 	<string name="daynight_mode_day">Ημέρα</string>
 	<string name="daynight_mode_night">Νύχτα</string>
@@ -720,7 +720,7 @@
 	<string name="transport_search_none">κανένα</string>
 	<string name="transport_search_again">Καθαρισμός αναζήτησης ΜΜΜ</string>
 	<string name="map_index">Χάρτης</string>
-	<string name="voice">Φωνή</string>
+	<string name="voice">Ηχογραφημένη φωνή</string>
 	<string name="no_vector_map_loaded">Οι διανυσματικοί χάρτες δεν φορτώθηκαν</string>
 	<string name="map_route_by_gpx">Πλοήγηση χρησιμοποιώντας GPX</string>
 	<string name="gpx_files_not_found">Δεν βρέθηκαν αρχεία GPX στον κατάλογο ιχνών</string>
@@ -858,7 +858,7 @@
 	<string name="route_general_information">Συνολική απόσταση %1$s, χρόνος ταξιδιού %2$d ω %3$d λ.</string>
 	<string name="router_service_descr">Επιλέξτε μια online ή offline υπηρεσία πλοήγησης</string>
 	<string name="router_service">Υπηρεσία πλοήγησης</string>
-	<string name="sd_dir_not_accessible">Η κατάλογος αποθήκευσης δεδομένων στην SD κάρτα δεν είναι προσβάσιμος</string>
+	<string name="sd_dir_not_accessible">Η κατάλογος αποθήκευσης δεδομένων στην SD κάρτα δεν είναι προσβάσιμος!</string>
 	<string name="download_question">Λήψη {0} - {1} ?</string>
 	<string name="download_question_exist">Offline δεδομένα για {0} υπάρχουν ήδη ({1}). Θέλετε να τα ενημερώσετε ({2}) ?</string>
 	<string name="address">Διεύθυνση</string>
@@ -1618,7 +1618,7 @@
     <string name="save_track_to_gpx_globally">Καταγραφή ίχνους σε αρχείο GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Η γενική καταγραφή θέσης σε αρχείο GPX μπορεί να ενεργοποιηθεί και να απενεργοποιηθεί χρησιμοποιώντας το γραφικό στοιχείο GPX στην οθόνη χάρτη</string>
 	<string name="save_track_interval_globally">Διάστημα καταγραφής</string>
-	<string name="rendering_attr_publicTransportMode_name">Λειτουργία δημόσιων μεταφορών</string>
+	<string name="rendering_attr_publicTransportMode_name">Λεωφορεία, τρόλεϊ, shuttle routes</string>
 	<string name="confirm_every_run">Πάντα ερώτηση</string>
 	<string name="traffic_warning_speed_limit">Όριο ταχύτητας</string>
     <string name="traffic_warning_border_control">Συνοριακός έλεγχος</string>
@@ -1649,13 +1649,16 @@
     <string name="rendering_category_transport">Μεταφορές</string>
     <string name="map_widget_top">Γραμμή κατάστασης</string>
 	<string name="speed_limit_exceed">Ανοχή ορίου ταχύτητας</string>
-	<string name="download_tab_downloads">Λήψεις</string>
+	<string name="download_tab_downloads">Όλες οι λήψεις</string>
     <string name="download_tab_updates">Ενημερώσεις</string>
     <string name="download_tab_local">Τοπικά</string>
 	<string name="no_internet_connection">Αδύνατη η λήψη, Παρακαλώ συνδεθείτε στο ασύρματο για να συνεχίσετε.</string>
     <string name="everything_up_to_date">Όλα ενημερωμένα</string>
     <string name="osmo_use_https">Χρήση HTTPS</string>
-	<string name="map_update">Χάρτες</string>
+	<string name="map_update">Έχετε %1$s χάρτες προς ενημέρωση</string>
 	<string name="search_for">Αναζήτηση για</string>
 	<string name="coordinates">Συντεταγμένες</string>
-	</resources>
+	<string name="dash_download_msg">Έχετε κατεβάσει %1$s χάρτες</string>
+    <string name="dash_download_new_one">Λήψη Νέου Χάρτη</string>
+    <string name="map_locale">Γλώσσα χάρτη</string>
+    </resources>
