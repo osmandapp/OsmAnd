@@ -2048,4 +2048,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="show_railway_warnings">Zeige Eisenbahn-Warnungen</string>
 	<string name="show_pedestrian_warnings">Zeige Warnungen für Fußgänger</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikanischer Straßenaltlas</string>
+    <string name="routing_attr_no_new_routing_name">Routing v1.9 nicht verwenden</string>
+    <string name="routing_attr_no_new_routing_description">Neue Routenberechnung nicht verwenden</string>
     </resources>
