@@ -1867,4 +1867,13 @@
     <string name="dash_download_new_one">Atsisiųsti naują žemėlapį</string>
     <string name="dash_download_manage">Valdyti</string>
     <string name="voices">Balso pranešimai</string>
-	</resources>
+	<string name="rendering_attr_roadStyle_name">Kelių vaizdavimo stilius</string>
+    <string name="rendering_value_default_name">Numatytasis</string>
+    <string name="rendering_value_orange_name">Oranžinis</string>
+    <string name="rendering_value_germanRoadAtlas_name">Vokietijos kelių atlasas</string>
+    <string name="rendering_value_americanRoadAtlas_name">Amerikos kelių atlasas</string>
+    <string name="routing_attr_no_new_routing_name">Nenaudoti 1.9 versijos maršrutizavimo</string>
+    <string name="routing_attr_no_new_routing_description">Nenaudoti 1.9 versijos maršrutizavimo</string>
+    <string name="dash_download_msg_none">Ar norite atsisiųsti bet kurį žemėlapį naudojimui be interneto?</string>
+    <string name="dismiss">Nesiųsti</string>
+    </resources>
