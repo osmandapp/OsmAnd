@@ -1841,4 +1841,11 @@
     <string name="navigate_point_easting">Восточной долготы</string>
     <string name="voices">Голосовые данные</string>
 	<string name="error_avoid_specific_road">Ближайшая дорога не найдена</string>
+    <string name="rendering_attr_roadStyle_name">Стиль отображения дорог</string>
+    <string name="rendering_value_default_name">По умолчанию</string>
+    <string name="rendering_value_orange_name">Оранжевый</string>
+    <string name="rendering_value_germanRoadAtlas_name">Атлас дорог Германии</string>
+    <string name="rendering_value_americanRoadAtlas_name">Атлас дорог Америки</string>
+    <string name="routing_attr_no_new_routing_name">Не использовать маршрутизацию версии 1.9</string>
+    <string name="routing_attr_no_new_routing_description">Не использовать для построение маршрута алгоритм версии 1.9</string>
     </resources>
