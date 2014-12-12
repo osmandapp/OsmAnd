@@ -1864,4 +1864,8 @@
     <string name="rendering_value_orange_name">橙色</string>
     <string name="rendering_value_germanRoadAtlas_name">德國道路地圖集</string>
     <string name="rendering_value_americanRoadAtlas_name">美國道路地圖集</string>
+    <string name="traffic_warning_railways">鐵路</string>
+	<string name="traffic_waring_pedestrian">步行</string>
+	<string name="show_railway_warnings">顯示鐵路警告</string>
+	<string name="show_pedestrian_warnings">顯示步行警告</string>
     </resources>
