@@ -14,7 +14,9 @@ public class AlarmInfo implements LocationPoint {
 		TRAFFIC_CALMING(4),
 		TOLL_BOOTH(5),
 		STOP(6),
-		MAXIMUM(7);
+		MAXIMUM(7),
+		PEDESTRIAN(8),
+		RAILWAY(9);
 		
 		private int priority;
 
@@ -29,18 +31,22 @@ public class AlarmInfo implements LocationPoint {
 		
 		public String getVisualName(Context ctx) {
 			switch (priority) {
-			case 1:
-				return ctx.getString(R.string.traffic_warning_speed_camera);
-			case 2:
-				return ctx.getString(R.string.traffic_warning_speed_limit);
-			case 3:
-				return ctx.getString(R.string.traffic_warning_border_control);
-			case 4:
-				return ctx.getString(R.string.traffic_warning_calming);
-			case 5:
-				return ctx.getString(R.string.traffic_warning_payment);
-			case 6:
-				return ctx.getString(R.string.traffic_warning_stop);
+				case 1:
+					return ctx.getString(R.string.traffic_warning_speed_camera);
+				case 2:
+					return ctx.getString(R.string.traffic_warning_speed_limit);
+				case 3:
+					return ctx.getString(R.string.traffic_warning_border_control);
+				case 4:
+					return ctx.getString(R.string.traffic_warning_calming);
+				case 5:
+					return ctx.getString(R.string.traffic_warning_payment);
+				case 6:
+					return ctx.getString(R.string.traffic_warning_stop);
+				case 8:
+					return ctx.getString(R.string.traffic_waring_pedestrian);
+				case 9:
+					return ctx.getString(R.string.traffic_warning_railways);
 			}
 			return ctx.getString(R.string.traffic_warning);
 		}

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="no_route">Ei reittiä</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista välietappi</string>
 	<string name="target_point">Välietappi %1$s</string>
     <string name="intermediate_point">Välietappi %1$s</string>
@@ -689,7 +690,7 @@
     <string name="edit_tilesource_maxzoom">Maksimi zoomi</string>
     <string name="edit_tilesource_minzoom">Minimi zoomi</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">Valitse olemassaoleva...</string>
+    <string name="edit_tilesource_choose_existing">Valitse olemassaoleva…</string>
     <string name="edit_tilesource_name">Nimi</string>
     <string name="driving_region_descr">Valitse ajoalue: USA, Eurooppa, UK, Aasia ja muut</string>
 	<string name="driving_region">Ajoalue</string>

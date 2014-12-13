@@ -69,7 +69,7 @@
   <string name="show_more_map_detail_descr">Pokazuje więcej szczegółów na mapie wektorowej na niższych poziomach powiększenia</string>
   <string name="favourites_delete_multiple_succesful">Ulubiony punkt został skasowany.</string>
   <string name="favorite_delete_multiple">Zamierzasz usunąć %1$d ulubiony punkt i %2$d grupę ulubionych. Czy na pewno?</string>
-  <string name="favorite_home_category">Start</string>
+  <string name="favorite_home_category">Dom</string>
   <string name="favorite_friends_category">Znajomi</string>
   <string name="favorite_places_category">Miejsca</string>
   <string name="favorite_default_category">Inne</string>
@@ -280,7 +280,7 @@
   <string name="select_build_to_install">Wybierz, którą kompilację OsmAnd zainstalować</string>
   <string name="contribution_activity">Specialne opcje dla wersji \"contribution\"</string>
   <string name="gps_status_app_not_found">Nie zainstalowano aplikacji GPS Status. Wyszukać ją w Market?</string>
-  <string name="voice_is_not_available_msg">Głos nawigatora nie jest dostępny. Przejdź do ustawień, wybierz ulubiony zestaw i zainstaluj go.</string>
+  <string name="voice_is_not_available_msg">Głos nawigatora nie jest dostępny. Przejdź do \'Ustawienia\'→\'Ogólne\'→\'Nawigacja głosowa\', wybierz ulubiony zestaw i zainstaluj go.</string>
   <string name="voice_is_not_available_title">Nie wybrano głosu nawigatora</string>
   <string name="daynight_mode_day">Dzień</string>
   <string name="daynight_mode_night">Noc</string>
@@ -330,7 +330,7 @@
   <string name="transport_search_none">Żaden</string>
   <string name="transport_search_again">Resetuj wyszukiwanie transportu</string>
   <string name="map_index">Mapa</string>
-  <string name="voice">Głos</string>
+  <string name="voice">Nagrany głos</string>
   <string name="no_vector_map_loaded">Mapy wektorowe nie zostały wczytane</string>
   <string name="map_route_by_gpx">Nawiguj używając GPX</string>
   <string name="gpx_files_not_found">Nie znaleziono plików GPX w katalogu tras</string>
@@ -471,7 +471,7 @@
   <string name="route_general_information">Całkowity dystans %1$s, czas podróży %2$d h %3$d m.</string>
   <string name="router_service_descr">Wybierz usługę nawigacyjną (online lub offline)</string>
   <string name="router_service">Usługa nawigacyjna</string>
-  <string name="sd_dir_not_accessible">Katalog przechowywania danych na karcie SD jest niedostępny</string>
+  <string name="sd_dir_not_accessible">Katalog przechowywania danych na karcie SD jest niedostępny!</string>
   <string name="download_question">Pobrać {0} - {1} ?</string>
   <string name="download_question_exist">Dane offline {0} już istnieją ({1}). Czy chcesz je uaktualnić ({2}) ?</string>
   <string name="address">Adres</string>
@@ -830,8 +830,8 @@
   <string name="index_name_oceania">Oceania</string>
   <string name="index_name_other">Mapy świata i tematyczne</string>
   <string name="index_name_wiki">Wikipedia dla POI</string>
-  <string name="index_name_voice">Zestawy głosów (nagrane, ograniczone możliwości)</string>
-  <string name="index_name_tts_voice">Zestawy głosów (TTS, zalecane)</string>
+  <string name="index_name_voice">Wskazówki głosowe (nagrane, ograniczone możliwości)</string>
+  <string name="index_name_tts_voice">Wskazówki głosowe (TTS, zalecane)</string>
   <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Własne</string>
   <string name="fav_export_confirmation">Plik z poprzednio wyeksportowanymi ulubionymi już istnieje. Nadpisać go?</string>
@@ -1556,7 +1556,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="copying_osmand_one_file_descr">Kopiowanie pliku (%s) do nowej lokalizacji...</string>
     <string name="copying_osmand_files_descr">Kopiowanie plików OsmAnd do nowej lokalizacji (%s)</string>
     <string name="copying_osmand_files">Kopiowanie plików OsmAnd</string>
-    <string name="application_dir_change_warning2">Czy chcesz aby OsmAnd równierz skopiował dane do nowej lokalizacji?</string>
+    <string name="application_dir_change_warning2">Czy chcesz, aby OsmAnd skopiował też swoje dane do nowej lokalizacji? Wybierz \'Nie\', aby OsmAnd utworzył tylko nowy folder.</string>
     <string name="android_19_location_disabled">Od wersji 4.4 KitKat nie można pobierać ani aktualizować map w poprzedniej lokalizacji (%s). Czy chcesz ją zmienić na lokalizację dozwoloną i skopiować do niej wszystkie pliki?
 \n Uwaga 1: Twoje stare pliki zostaną nienaruszone (mogą być usunięte manualnie).
 \n Uwaga 2: W nowej lokalizacji nie będzie możliwe współdzielenie tych samych plików pomiędzy OsmAnd i OsmAnd+.</string>
@@ -1949,16 +1949,16 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_use_https_descr">Użyj bezpiecznego połączenia z serwerem</string>
     <string name="osmo_use_https">Użyj https</string>
 	<string name="advanced_settings">Zaawansowane</string>
-	<string name="home_button">Dom</string>
-    <string name="map_update">Mapy</string>
+	<string name="home_button">Strona startowa</string>
+    <string name="map_update">Liczba map do uaktualnienia: %1$s</string>
 	<string name="search_for">Wyszukaj</string>
 	<string name="show_map">POKAŻ MAPĘ</string>
 	<string name="show_all">POKAŻ WSZYSTKIE</string>
 	<string name="coordinates">Współrzędne</string>
-	<string name="dismiss">Odwołać</string>
+	<string name="dismiss">Odrzuć</string>
     <string name="everything_up_to_date">Wszystko jest aktualne</string>
     <string name="use_opengl_render">Użyj renderowania OpenGL</string>
-    <string name="use_opengl_render_descr">Użyj renderowania z akceleracją OpenGL (może nie działać na niektórych urządzeniach)</string>
+    <string name="use_opengl_render_descr">"Użyj sprzętowego renderowania  OpenGL (może nie działać na niektórych urządzeniach)"</string>
     <string name="error_avoid_specific_road">Najbliższa droga nie została znaleziona</string>
     <string name="dash_download_msg_none">Chcesz pobrać jakąś mapę offline?</string>
     <string name="dash_download_msg">Masz %1$s pobrane mapy</string>
@@ -1968,4 +1968,17 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="navigate_point_zone">Strefa</string>
     <string name="download_tab_downloads">Pobrane</string>
     <string name="download_tab_updates">Aktualizacje</string>
-    </resources>
+    <string name="rendering_attr_roadStyle_name">Styl rysowania drogi</string>
+    <string name="rendering_value_default_name">Domyślnie</string>
+    <string name="rendering_value_orange_name">Pomarańczowy</string>
+    <string name="rendering_value_germanRoadAtlas_name">Niemiecki atlas drogowy</string>
+    <string name="rendering_value_americanRoadAtlas_name">Amerykański atlas drogowy</string>
+    <string name="routing_attr_no_new_routing_name">Nie używaj trasowania z wersji 1.9</string>
+    <string name="routing_attr_no_new_routing_description">Nie używaj trasowania z wersji 1.9</string>
+    <string name="navigate_point_northing">Linia współrzędnych y\"</string>
+    <string name="rendering_attr_transportStops_name">Przystanki transportu miejskiego</string>
+    <string name="navigate_point_easting">Linia współrzędnych x\"</string>
+    <string name="download_tab_local">W urządzeniu</string>
+	<string name="no_internet_connection">Pobieranie niemożliwe. Proszę się podłączyć do sieci Wi-Fi, aby kontynuować.</string>
+    <string name="voices">Wskazówki głosowe</string>
+	</resources>

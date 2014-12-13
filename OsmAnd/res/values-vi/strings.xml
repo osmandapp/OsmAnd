@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <!-- Language: Vietnamese; Language code: vi
 Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <resources>
@@ -89,7 +89,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="local_index_mi_backup">Sao lưu</string>
 	<string name="local_index_mi_delete">Xóa</string>
 	<string name="local_index_mi_reload">Làm tươi</string>
-	<string name="local_index_download">Tải xuống…</string>
+	<string name="local_index_download">Tải xuống</string>
 	
 	<string name="local_index_poi_data">dữ liệu POI</string>
 	<string name="local_index_address_data">dữ liệu Địa chỉ</string>
@@ -297,7 +297,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="continuous_rendering_descr">Hiển thị bản đồ liên tục thay cho hiển thị một lần một ảnh</string>
 	<string name="rendering_exception">Có lỗi khi hiển thị khu vực được chọn</string>
 	<string name="rendering_out_of_memory">Không đủ bộ nhớ để hiện khu vực được chọn</string>
-	<string name="show_point_options">Tùy chọn điểm</string>
+	<string name="show_point_options">Tùy chọn điểm …</string>
 	<string name="renderer_load_sucess">Hiển thị thành công</string>
 	<string name="renderer_load_exception">Có lỗi: Không hiển thị được</string>
 	<string name="renderers">Hiển thị Vector</string>
@@ -456,14 +456,14 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="route_general_information">Tổng khoảng cách %1$s, thời gian đi %2$d h %3$d m.</string>
 	<string name="router_service_descr">Chọn dịch vụ tìm đường Online hoặc Offline</string>
 	<string name="router_service">Dịch vụ tìm đường</string>
-	<string name="sd_dir_not_accessible">Không truy xuất được thư mục trên thẻ nhớ</string>
+	<string name="sd_dir_not_accessible">Không truy xuất được thư mục trên thẻ nhớ!</string>
 	<string name="download_question">Tải về {0} - {1} ?</string>
 	<string name="download_question_exist">Dữ liệu Offline cho {0} đã có ({1}). Bạn muốn cập nhật nó ({2}) ?</string>
 	<string name="address">Địa chỉ</string>
 	<string name="download_index_success">Tải về thành công</string>
 	<string name="error_io_error">Có lỗi xảy ra với I/O</string>
 	
-	<string name="downloading">Đang tải..</string>
+	<string name="downloading">Đang tải…</string>
 	<string name="downloading_list_indexes">Đang tải danh sách các khu vực hiện có…</string>
 	<string name="list_index_files_was_not_loaded">Không thể truy cập danh sách các khu vực có bản đồ từ osmand.net.</string>
     <string name="select_index_file_to_download">Nếu không có bản đồ trong khu vực bạn cần, bạn có thể tự làm bằng cách tham khảo hướng dẫn tại osmand.net</string>
@@ -496,7 +496,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="empty_route_calculated">Empty route is calculated</string>					
 	<string name="new_route_calculated_dist">New route is calculated, distance</string>
 	<string name="arrived_at_destination">Bạn đã đến điểm đích</string>
-	<string name="invalid_locations">Khu vực không xác định</string>
+	<string name="invalid_locations">Khu vực không xác định!</string>
 	<string name="go_back_to_osmand">Quay lại bản đồ OsmAnd</string>
 	<string name="close">Đóng</string>
 	<string name="loading_data">Đang đọc dữ liệu…</string>
@@ -519,7 +519,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="osm_settings">OSM</string>
     <string name="auto_zoom_map_descr">Tự động Zoom bản đồ theo tốc độ di chuyển</string>
     <string name="auto_zoom_map">Tự động Zoom bản đồ</string>
-    <string name="additional_settings">Thiết lập thêm…</string>
+    <string name="additional_settings">Thiết lập thêm</string>
     <string name="settings_preset_descr">Select a use profile. (Each profile\'s settings can be customized below.)</string>
     <string name="settings_preset">Chế độ Ứng dụng</string>
     <string name="settings">Thiết lập</string>
