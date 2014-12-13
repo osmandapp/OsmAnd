@@ -541,6 +541,7 @@
 	<string name="poi_car_rental">Car rental</string>
 	<string name="poi_car_sharing">Car sharing</string>
 	<string name="poi_boat_sharing">Boat sharing</string>
+	<string name="poi_dock">Dock</string>
 	<string name="poi_toilets">Restroom</string>
 	<string name="poi_sauna">Sauna</string>
 	<string name="poi_brothel">Brothel</string>
