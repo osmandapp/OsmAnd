@@ -1916,18 +1916,18 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="navigate_point_easting">Abscissa</string>
     <string name="voices">Indicadors de veu</string>
 	<string name="dash_download_msg_none">Voleu baixar algun mapa per quan no hi ha connexió?</string>
-    <string name="dash_download_msg">Teniu baixats %1$s mapes</string>
-    <string name="dash_download_new_one">Baixa Nou Mapa</string>
+    <string name="dash_download_msg">Teniu %1$s mapes baixats</string>
+    <string name="dash_download_new_one">Baixa un mapa nou</string>
     <string name="dash_download_manage">Gestiona</string>
     <string name="rendering_attr_roadStyle_name">Estil de via</string>
     <string name="rendering_value_default_name">Per defecte</string>
     <string name="rendering_value_orange_name">Taronja</string>
-    <string name="rendering_value_germanRoadAtlas_name">Atles de Carreteres d\'Alemània</string>
+    <string name="rendering_value_germanRoadAtlas_name">Atles de carreteres alemany</string>
 	<string name="traffic_warning_railways">Ferrocarril</string>
 	<string name="traffic_waring_pedestrian">Vianant</string>
 	<string name="show_railway_warnings">Mostra avisos de ferrocarril</string>
 	<string name="show_pedestrian_warnings">Mostra avisos de vianant</string>
-    <string name="rendering_value_americanRoadAtlas_name">Atles de Carreteres Americà</string>
+    <string name="rendering_value_americanRoadAtlas_name">Atles de carreteres americà</string>
     <string name="routing_attr_no_new_routing_name">No utilitzeu la navegació de la v1.9</string>
-    <string name="routing_attr_no_new_routing_description">No utilitzeu la navegació de la v1.9</string>
+    <string name="routing_attr_no_new_routing_description">No feu ús de la navegació de la v1.9</string>
     </resources>
