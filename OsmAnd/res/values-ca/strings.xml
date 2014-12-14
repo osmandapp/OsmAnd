@@ -1899,7 +1899,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="show_map">MOSTRA EL MAPA</string>
 	<string name="show_all">MOSTRA\'LS TOTS</string>
 	<string name="coordinates">Coordenades</string>
-	<string name="map_update">Mapes</string>
+	<string name="map_update">Teniu% 1$s mapes per actualitzar</string>
 	<string name="error_avoid_specific_road">No s\'ha trobat cap ruta a prop</string>
     <string name="use_opengl_render">Utilitza la renderització OpenGL</string>
     <string name="use_opengl_render_descr">Ús de renderització OpenGL per accelerador gràfic (no funciona a tots els dispositius)</string>
