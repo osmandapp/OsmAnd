@@ -434,7 +434,7 @@
   <string name="select_build_to_install">A telepítéshez válassz egy OsmAnd buildet</string>
   <string name="contribution_activity">Telepítési verzió</string>
   <string name="gps_status_app_not_found">GPS Státusz alkalmazás nincs telepítve. Megkeresed a Marketen?</string>
-  <string name="voice_is_not_available_msg">A beszéd alapú navigáció nem érhető el. A Beállításoknál kiválasztható vagy letölthető.</string>
+  <string name="voice_is_not_available_msg">A beszéd alapú navigáció nem érhető el. A Beállítások → \'Általános\' → \'Hangutasítás\' menüben kiválaszthatsz, vagy letölthetsz hangcsomagokat.</string>
   <string name="voice_is_not_available_title">Nincs kiválasztva hang adat</string>
   <string name="daynight_mode_day">Nappal</string>
   <string name="daynight_mode_night">Éjjel</string>
