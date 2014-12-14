@@ -1799,4 +1799,13 @@
     <string name="voices">Hangutasítások</string>
 	<string name="navigate_point_northing">Északi</string>
     <string name="navigate_point_easting">Keleti</string>
+    <string name="rendering_attr_roadStyle_name">Út stílus</string>
+    <string name="rendering_value_default_name">Alapértelmezett</string>
+    <string name="rendering_value_orange_name">Narancs</string>
+    <string name="rendering_value_germanRoadAtlas_name">Német autós atlasz</string>
+	<string name="traffic_warning_railways">Vasútvonalak</string>
+	<string name="traffic_waring_pedestrian">Gyalogos</string>
+	<string name="show_railway_warnings">Vasúti figyelmeztetések megjelenítése</string>
+	<string name="show_pedestrian_warnings">Gyalogos figyelmeztetések megjelenítése</string>
+    <string name="rendering_value_americanRoadAtlas_name">Amerikai autós atlasz</string>
     </resources>
