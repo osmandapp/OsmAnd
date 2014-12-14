@@ -1808,4 +1808,6 @@
 	<string name="show_railway_warnings">Vasúti figyelmeztetések megjelenítése</string>
 	<string name="show_pedestrian_warnings">Gyalogos figyelmeztetések megjelenítése</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikai autós atlasz</string>
+    <string name="routing_attr_no_new_routing_name">v1.9-es útvonaltervező letiltása</string>
+    <string name="routing_attr_no_new_routing_description">Ne használja az új, 1.9-es verzió útvonaltervezőjét</string>
     </resources>
