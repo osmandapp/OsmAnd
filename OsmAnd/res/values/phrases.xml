@@ -366,7 +366,6 @@
 	<string name="poi_volleyball">Volleyball</string>
 
 	<string name="poi_museum">Museum</string>
-	<string name="poi_attraction">Tourism attraction</string>
 	<string name="poi_memorial">Memorial</string>
 	<string name="poi_artwork">Artwork</string>
 	<string name="poi_archaeological_site">Archaeological site</string>
@@ -385,6 +384,19 @@
 	<string name="poi_monument">Monument</string>
 	<string name="poi_zoo">Zoo</string>
 	<string name="poi_theme_park">Theme park</string>
+	
+	<string name="poi_attraction">Tourism attraction</string>
+	<string name="poi_amusement_ride">Amusement ride</string>
+	<string name="poi_attraction_animal">Animal (attraction)</string>
+	<string name="poi_ferris_wheel">Ferris wheel</string>
+	<string name="poi_carousel">Carousel</string>
+	<string name="poi_maze">Maze</string>
+	<string name="poi_roller_coaster">Roller coaster</string>
+	<string name="poi_slide">Slide</string>
+	<string name="poi_summer_toboggan">Summer toboggan</string>
+	<string name="poi_swing_carousel">Swing carousel</string>
+	<string name="poi_attraction_train">Train (attraction)</string>
+	<string name="poi_water_slide">Water slide</string>
 
 	<string name="poi_hotel">Hotel</string>
 	<string name="poi_guest_house">Guest house</string>
