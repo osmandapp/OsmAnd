@@ -606,4 +606,31 @@
 	<string name="poi_attraction_train">Train touristique</string>
 	<string name="poi_water_slide">Toboggan aquatique</string>
 
+	<string name="poi_rugby_union">Union rugby</string>
+	<string name="poi_rugby_league">Ligue de rugby</string>
+	<string name="poi_surfing">Surf</string>
+	<string name="poi_amusement_ride">Attractions mécaniques</string>
+	<string name="poi_slide">Toboggan</string>
+	<string name="poi_swing_carousel">Carrousel</string>
+	<string name="poi_club_game">Club de jeux</string>
+	<string name="poi_club_fan">Club de fans</string>
+	<string name="poi_club_ethnic">Club ethnique</string>
+	<string name="poi_club_nature">Club nature</string>
+	<string name="poi_club_tourism">Club de tourisme</string>
+	<string name="poi_hvac">Chauffage, ventilation, air conditionné</string>
+	<string name="poi_insulation_craft">Isolation</string>
+	<string name="poi_metal_construction_craft">Artisan ferronnier</string>
+	<string name="poi_stand_builder">Constructeur de stand</string>
+	<string name="poi_sun_protection_craft">Protection solaire artisanale</string>
+	<string name="poi_window_construction">Construction de fenêtres</string>
+
+	<string name="poi_computer_craft">Assembleur d\'ordinateurs</string>
+	<string name="poi_seamark_daymark">Amer</string>
+	<string name="poi_seamark_notice">Signalétique maritime</string>
+	<string name="poi_seamark_signal_station_warning">Station de signaux, avertissements</string>
+	<string name="poi_seamark_small_craft_facility">Facilité pour petites embarcations</string>
+	<string name="poi_military_nuclear_explosion_site">Site d\'explosions nucléaires</string>
+<string name="poi_carpet_layer">Couvreur de moquettes</string>
+	<string name="poi_parquet_layer">Couvreur de parquets</string>
+	<string name="poi_saddle">Selle</string>
 	</resources>
