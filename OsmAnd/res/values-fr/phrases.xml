@@ -597,4 +597,13 @@
 	<string name="poi_seamark_bridge">Pont remarquable (amer)</string>
 	<string name="poi_seamark_radio_station">Station radio (amer)</string>
 	<string name="poi_seamark_signal_station_traffic">Sémaphore</string>
+	<string name="poi_attraction_animal">Parc animalier</string>
+	<string name="poi_ferris_wheel">Grande roue</string>
+	<string name="poi_carousel">Carrousel</string>
+	<string name="poi_maze">Labyrinthe</string>
+	<string name="poi_roller_coaster">Montagnes russes</string>
+	<string name="poi_summer_toboggan">Luge d\'été</string>
+	<string name="poi_attraction_train">Train touristique</string>
+	<string name="poi_water_slide">Toboggan aquatique</string>
+
 	</resources>
