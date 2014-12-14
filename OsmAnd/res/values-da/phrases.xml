@@ -647,4 +647,16 @@
 	<string name="poi_cannon">Historisk kanon</string>
 	<string name="poi_harbour">Havn</string>
 	<string name="poi_dock">Dok</string>
+	<string name="poi_amusement_ride">Forlystelse</string>
+	<string name="poi_attraction_animal">Dyr (attraktion)</string>
+	<string name="poi_ferris_wheel">Pariserhjul</string>
+	<string name="poi_carousel">Karrusel</string>
+	<string name="poi_maze">Labyrint</string>
+	<string name="poi_roller_coaster">Rutschebane</string>
+	<string name="poi_slide">Slide</string>
+	<string name="poi_summer_toboggan">Sommer kælk</string>
+	<string name="poi_swing_carousel">Gynge karrusel</string>
+	<string name="poi_attraction_train">Tog (attraktion)</string>
+	<string name="poi_water_slide">Vandrutsjebane</string>
+
 	</resources>
