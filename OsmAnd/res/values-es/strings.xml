@@ -1906,4 +1906,12 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_value_orange_name">Naranja</string>
     <string name="routing_attr_no_new_routing_name">No usar v1.9 de ruteo</string>
     <string name="routing_attr_no_new_routing_description">No usar v1.9 de ruteo</string>
+    <string name="rendering_value_germanRoadAtlas_name">Atlas de carreteras alemanas</string>
+	<string name="traffic_warning_railways">Ferrocarriles</string>
+	<string name="traffic_waring_pedestrian">Peatonal</string>
+	<string name="show_railway_warnings">Mostrar avisos de ferrocarril</string>
+	<string name="show_pedestrian_warnings">Mostrar avisos de peatón</string>
+    <string name="rendering_value_americanRoadAtlas_name">Atlas de carreteras americanas</string>
+    <string name="navigate_point_easting">Al este</string>
+    <string name="navigate_point_northing">Al norte</string>
     </resources>
