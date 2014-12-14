@@ -314,7 +314,7 @@
 	<string name="poi_filter_for_tourists">Для турыстаў</string>
 	<string name="poi_filter_fuel">Паліва</string>
 	<string name="show_warnings_title">Папярэджваць…</string>
-	<string name="show_warnings_descr">Наладзіць папярэджаньні руху (абмежаваньня хуткасьці, вымушаныя прыпынкі, штучныя няроўнасьці), камэры хуткасьці, інфармацыю па палосах</string>
+	<string name="show_warnings_descr">Наладзіць папярэджаньні руху (абмежаваньні хуткасьці, вымушаныя прыпынкі, штучныя няроўнасьці), камэры хуткасьці, інфармацыю па палосах</string>
 	<string name="use_compass_navigation_descr">Выкарыстоўваць компас калі інакш немагчыма вызначыць напрамак</string>
 	<string name="use_compass_navigation">Выкарыстоўваць компас</string>
 	<string name="avoid_motorway">Пазьбягаць аўтамагістраляў</string>
@@ -1258,14 +1258,14 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="address">Адрас</string>
 	<string name="download_index_success">Загрузка паспяховая</string>
 	<string name="error_io_error">Адбылася памылка ўводу/вываду</string>
-	<string name="downloading_file_new">Ладаванье…</string>
-	<string name="downloading">Ладаванье…</string>
+	<string name="downloading_file_new">Ладаваньне…</string>
+	<string name="downloading">Ладаваньне…</string>
 	<string name="downloading_list_indexes">Зладоўваем сьпіс даступных рэгіёнаў…</string>
 	<string name="list_index_files_was_not_loaded">Сьпіс даступных рэгіёнаў ня быў зладаваны з osmand.net.</string>
 	<string name="show_poi_on_map">Паказаць на мапе</string>
-	<string name="fav_points_edited">Захаваная кропка была зменена</string>
-	<string name="fav_points_not_exist">Няма ўпадабаным месцаў</string>
-	<string name="update_existing">Зьмяніць</string>
+	<string name="fav_points_edited">Захаваная кропка была зьменена</string>
+	<string name="fav_points_not_exist">Няма ўпадабаных месцаў</string>
+	<string name="update_existing">Замяніць</string>
 	<string name="only_show">Паказаць маршрут</string>
 	<string name="follow">Пачаць навігацыю</string>
 	<string name="mark_final_location_first">Абярыце спачатку месца прызначэньня</string>
@@ -1985,4 +1985,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="routing_attr_no_new_routing_description">Не выкарыстоўваць маршрутызацыю v1.9</string>
     <string name="rendering_value_default_name">Па змоўчаньні</string>
     <string name="rendering_attr_roadStyle_name">Стыль аўтадарог</string>
-    </resources>
+    <string name="show_pedestrian_warnings">Паказваць папярэджаньні для пешаходаў</string>
+    <string name="traffic_waring_pedestrian">Пешаходныя</string>
+	<string name="traffic_warning_railways">Чыгуначныя</string>
+	<string name="show_railway_warnings">Паказваць чыгуначныя папярэджаньні</string>
+	</resources>

@@ -562,7 +562,7 @@
 	<string name="poi_seamark_building"/>
 	<string name="poi_seamark_bridge"/>
 	<string name="poi_seamark_buoy_cardinal"/>
-	<string name="poi_seamark_buoy_installation"/>
+	<string name="poi_seamark_buoy_installation">Знак изолированной опасности</string>
 	<string name="poi_seamark_buoy_isolated_danger"/>
 	<string name="poi_seamark_buoy_lateral"/>
 	<string name="poi_seamark_buoy_safe_water"/>
@@ -591,7 +591,7 @@
 	<string name="poi_seamark_small_craft_facility"/>
 	<string name="poi_seamark_topmark"/>
 	<string name="poi_seamark_rock"/>
-	<string name="poi_seamark_wreck"/>
+	<string name="poi_seamark_wreck">Кораблекрушение</string>
 
 	<string name="poi_military_airfield">Военный аэродром</string>
 	<string name="poi_military_bunker">Военный бункер</string>
@@ -628,4 +628,6 @@
 	<string name="poi_bmx_sport">Веломотокросс</string>
 	<string name="poi_canadian_football">Канадский футбол</string>
 	<string name="poi_surfing">Серфинг</string>
+	<string name="poi_cannon">Исторические пушки</string>
+	<string name="poi_harbour">Гавань</string>
 	</resources>

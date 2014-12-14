@@ -64,8 +64,8 @@
   <string name="index_name_oceania">Oceanía</string>
   <string name="index_name_other">Mapas mundial y temáticos</string>
   <string name="index_name_wiki">Wikipedia mundial</string>
-  <string name="index_name_voice">Paquetes de voz (grabado, funciones limitadas)</string>
-  <string name="index_name_tts_voice">Paquetes de voz (sintetizado, preferido)</string>
+  <string name="index_name_voice">Avisos de voz (grabado, funciones limitadas)</string>
+  <string name="index_name_tts_voice">Avisos de voz (TTS-sintetizado, preferido)</string>
   <string name="amenity_type_osmwiki">Wikipedia (sin conexión)</string>
   <string name="amenity_type_user_defined">Definido por el usuario</string>
   <string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quiere sustituirlo?</string>
@@ -205,7 +205,7 @@
   <string name="local_indexes_cat_tile">Mapas en línea y teselas</string>
   <string name="local_indexes_cat_map">Mapas descargados (vectores)</string>
   <string name="local_indexes_cat_poi">Datos de PDI</string>
-  <string name="ttsvoice">Voz sintetizada</string>
+  <string name="ttsvoice">Voz TTS</string>
   <string name="search_offline_clear_search">Nueva búsqueda</string>
   <string name="map_text_size_descr">Selecciona tamaño del texto para los nombres en el mapa</string>
   <string name="map_text_size">Tamaño de texto</string>
@@ -374,7 +374,7 @@
   <string name="select_build_to_install">Seleccione una de las compilaciones OsmAnd a instalar</string>
   <string name="contribution_activity">Actividad especial para versión de donación</string>
   <string name="gps_status_app_not_found">La aplicación GPS Status no está instalada. ¿Buscar en G. Play?</string>
-  <string name="voice_is_not_available_msg">Las indicaciones de voz no están disponibles. Por favor, ve a las opciones, elije el paquete de datos de voz preferido y descárgalo.</string>
+  <string name="voice_is_not_available_msg">Las indicaciones de voz no están disponibles, por favor, ve a \'Opciones\' → \'Opciones Generales\' → \'Indicaciones de voz\' y elije o descarga un paquete de avisos de voz.</string>
   <string name="voice_is_not_available_title">No se han seleccionado indicaciones por voz</string>
   <string name="daynight_mode_day">Día</string>
   <string name="daynight_mode_night">Noche</string>
@@ -418,7 +418,7 @@
   <string name="transport_search_none">ninguno</string>
   <string name="transport_search_again">Reiniciar búsqueda de transporte</string>
   <string name="map_index">Mapa</string>
-  <string name="voice">Voz</string>
+  <string name="voice">Voz grabada</string>
   <string name="no_vector_map_loaded">Los mapas vectoriales no están cargados</string>
   <string name="map_route_by_gpx">Navegar usando GPX</string>
   <string name="gpx_files_not_found">No se han encontrado archivos GPX en la carpeta de trazas</string>
@@ -1724,7 +1724,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
     <string name="show_zoom_buttons_navigation_descr">Mostrar botones de zoom durante la navegación</string>
     <string name="show_zoom_buttons_navigation">Mostrar botones de zoom</string>
-    <string name="route_descr_destination">\t</string>
+    <string name="route_descr_destination">Destino</string>
     <string name="sort_by_distance">Ordenar por distancia</string>
     <string name="sort_by_name">Ordenar por nombre</string>
     <string name="visible_element">Mostrar en el mapa</string>
@@ -1879,7 +1879,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="osmo_use_https_descr">Usar conexión segura con el servidor</string>
     <string name="osmo_use_https">Usar HTTPS</string>
 	<string name="home_button">Casa</string>
-    <string name="map_update">Mapas</string>
+    <string name="map_update">Tienes %1$s mapas para actualizar</string>
 	<string name="search_for">Buscar</string>
 	<string name="show_map">MOSTRAR MAPA</string>
 	<string name="show_all">MOSTRAR TODO</string>
@@ -1890,7 +1890,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="everything_up_to_date">Todo actualizado</string>
     <string name="dismiss">Descartar</string>
     <string name="no_internet_connection">Imposible descargar. Por favor, conéctate al Wi-Fi para proceder.</string>
-    <string name="download_tab_downloads">Descargas</string>
+    <string name="download_tab_downloads">Todas las Descargas</string>
     <string name="download_tab_updates">Actualizaciones</string>
     <string name="download_tab_local">Local</string>
 	<string name="dash_download_msg">Tienes %1$s mapas descargados</string>
@@ -1901,4 +1901,17 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="navigate_point_zone">Zona</string>
     <string name="voices">Avisos de voz</string>
 	<string name="dash_download_msg_none">¿Quieres bajar algún mapa offline?</string>
+    <string name="rendering_attr_roadStyle_name">Estilo de carretera</string>
+    <string name="rendering_value_default_name">Por defecto</string>
+    <string name="rendering_value_orange_name">Naranja</string>
+    <string name="routing_attr_no_new_routing_name">No usar v1.9 de ruteo</string>
+    <string name="routing_attr_no_new_routing_description">No usar v1.9 de ruteo</string>
+    <string name="rendering_value_germanRoadAtlas_name">Atlas de carreteras alemanas</string>
+	<string name="traffic_warning_railways">Ferrocarriles</string>
+	<string name="traffic_waring_pedestrian">Peatonal</string>
+	<string name="show_railway_warnings">Mostrar avisos de ferrocarril</string>
+	<string name="show_pedestrian_warnings">Mostrar avisos de peatón</string>
+    <string name="rendering_value_americanRoadAtlas_name">Atlas de carreteras americanas</string>
+    <string name="navigate_point_easting">Al este</string>
+    <string name="navigate_point_northing">Al norte</string>
     </resources>

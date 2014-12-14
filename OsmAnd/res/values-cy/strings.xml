@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="avoid_in_routing_title">Osgoi…</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="avoid_in_routing_title">Osgoi…</string>
 <string name="avoid_in_routing_descr">Osgoi tollffyrdd, ffyrdd garw, fferïau</string>
-<string name="show_warnings_title">Dangos larymau</string>
+<string name="show_warnings_title">Dangos larymau…</string>
 <string name="show_warnings_descr">Dangos cyfyngiad cyflymder, camerâu cyflymder a thwmpathau traffig</string>
 <string name="map_widget_fluorescent">Lliwiau fflwroleuol</string>
 <string name="map_widget_show_ruler">Mesurydd</string>

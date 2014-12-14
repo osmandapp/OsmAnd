@@ -1806,4 +1806,15 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="dash_download_msg">Tenes %1$s mapas iscarrigadas</string>
     <string name="dash_download_new_one">Iscàrriga una mapa noa</string>
     <string name="dash_download_manage">Gesti</string>
+    <string name="rendering_attr_roadStyle_name">Istile disinnu de sas istradas</string>
+    <string name="rendering_value_default_name">Predefinidu</string>
+    <string name="rendering_value_orange_name">Arantzu</string>
+    <string name="rendering_value_germanRoadAtlas_name">Atlante de sas istradas tedescas</string>
+    <string name="rendering_value_americanRoadAtlas_name">Atlante de sas istradas americanas</string>
+    <string name="routing_attr_no_new_routing_name">No impreare su càlculu de s\'àndala v1.9</string>
+    <string name="routing_attr_no_new_routing_description">No impreare su càlculu de s\'àndala v1.9</string>
+    <string name="traffic_warning_railways">Ferrovias</string>
+	<string name="traffic_waring_pedestrian">Pedonale</string>
+	<string name="show_railway_warnings">Ammustra sos avisos ferroviàrios</string>
+	<string name="show_pedestrian_warnings">Ammustra sos avisos pedonales</string>
     </resources>

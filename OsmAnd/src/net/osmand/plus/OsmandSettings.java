@@ -822,6 +822,8 @@ public class OsmandSettings {
 	{
 		SHOW_LANES.setModeDefaultValue(ApplicationMode.DEFAULT, false);
 	}
+	public final CommonPreference<Boolean> SHOW_PEDESTRIAN = new BooleanPreference("show_pedastrian", true).makeProfile().cache();
+	public final CommonPreference<Boolean> SHOW_RAILWAYS = new BooleanPreference("show_railways", true).makeProfile().cache();
 	
 	public final OsmandPreference<Boolean> SPEAK_TRAFFIC_WARNINGS = new BooleanPreference("speak_traffic_warnings", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_STREET_NAMES = new BooleanPreference("speak_street_names", true).makeProfile().cache();

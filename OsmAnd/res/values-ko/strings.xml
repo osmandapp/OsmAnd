@@ -2108,4 +2108,15 @@
     <string name="dash_download_msg">%1 $s 지도 다운로드됨</string>
     <string name="dash_download_new_one">새로운 지도 다운로드</string>
     <string name="dash_download_manage">관리</string>
+    <string name="rendering_attr_roadStyle_name">도로 스타일</string>
+    <string name="rendering_value_default_name">기본</string>
+    <string name="rendering_value_orange_name">오렌지</string>
+    <string name="rendering_value_germanRoadAtlas_name">독일 도로 지도</string>
+    <string name="rendering_value_americanRoadAtlas_name">미국 도로 지도</string>
+    <string name="routing_attr_no_new_routing_name">V1.9 라우팅을 사용하지 마십시오</string>
+    <string name="routing_attr_no_new_routing_description">V1.9 라우팅을 사용하지 마십시오</string>
+    <string name="traffic_warning_railways">철도</string>
+	<string name="traffic_waring_pedestrian">보행자</string>
+	<string name="show_railway_warnings">철도 경고 표시</string>
+	<string name="show_pedestrian_warnings">보행자 경고 표시</string>
     </resources>

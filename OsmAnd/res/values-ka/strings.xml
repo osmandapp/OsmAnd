@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
   <string name="left_side_navigation">მარცხენა ხელით ტარება</string>
   <string name="left_side_navigation_descr">აირჩიეთ მარცხენა მხარეს საჭის გამომყენებელი ქვეყნებისათვის</string>
   <string name="download_link_and_local_description">დააწკაპუნეთ გათიშული რეჟიმის მონაცემების ჩამოტვირთვა/ატვირთვისათვის.\nდააწკაპუნეთ არსებულ მონაცემს მეტი დეტალების მისაღებას. დააჭირეთ და გეჭიროთ მისი დეაქტივაციის ან წაშლისათვის. \nმიმდინარე მონაცემები მოწყობილობაზე (თავისუფალია %1$s):</string>
@@ -278,7 +279,7 @@
   <string name="local_index_mi_backup">დეაქტივაცია</string>
   <string name="local_index_mi_delete">წაშლა</string>
   <string name="local_index_mi_reload">განახლება SDCard-დან</string>
-  <string name="local_index_download">ჩამოტვირთვა…</string>
+  <string name="local_index_download">ჩამოტვირთვა</string>
   
   <string name="local_index_poi_data">POI მონაცემები</string>
   <string name="local_index_address_data">მისამართის მონაცემები</string>
@@ -459,7 +460,7 @@
   <string name="continuous_rendering">გაგრძელებადი რენდერი</string>
   <string name="continuous_rendering_descr">მიყოლებული რენდერის ჩვენება ცალცალკე სურათების ჩვენების მაგიერ</string>
   <string name="rendering_exception">მონიშნული არეალის რენდერის დროს მოხდა შეცდომა</string>
-  <string name="show_point_options">მდებარეობის პარამეტრები...</string>
+  <string name="show_point_options">მდებარეობის პარამეტრები …</string>
   <string name="renderer_load_sucess">რენდერერი წარმატებით ჩაიტვირთა</string>
   <string name="renderer_load_exception">მოხდა შეცდომა: რენდერერი არ ჩაიტვირთა</string>
   <string name="renderers">ვექტორული მარენდერებელი</string>
@@ -1113,7 +1114,7 @@
     <string name="edit_tilesource_expiration_time">დროის გასვლა (წთ)</string>
     <string name="edit_tilesource_minzoom">მინ. გადიდება</string>
     <string name="edit_tilesource_url_to_load">ბმული</string>
-    <string name="edit_tilesource_choose_existing">აირჩიეთ არსებული...</string>
+    <string name="edit_tilesource_choose_existing">აირჩიეთ არსებული…</string>
     <string name="edit_tilesource_name">სახელი</string>
     <string name="maps_define_edit">აღწერა/ჩასწორება…</string>
 	<string name="map_widget_fps_info">FPS გარჩევის ინფორმაცია</string>

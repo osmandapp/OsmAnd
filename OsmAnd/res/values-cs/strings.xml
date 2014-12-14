@@ -1798,4 +1798,15 @@ s často kladenými otázkami.</string>
     <string name="dash_download_manage">Spravovat</string>
     <string name="dash_download_msg_none">Chcete stáhnout nějakou offline mapu?</string>
     <string name="voices">Hlasové pokyny</string>
-	</resources>
+	<string name="rendering_attr_roadStyle_name">Styl cesty</string>
+    <string name="rendering_value_default_name">Výchozí</string>
+    <string name="rendering_value_orange_name">Oranžová</string>
+    <string name="rendering_value_germanRoadAtlas_name">Německý atlas cest</string>
+	<string name="traffic_warning_railways">Železnice</string>
+	<string name="traffic_waring_pedestrian">Chodec</string>
+	<string name="show_railway_warnings">Zobrazovat varování železnice</string>
+	<string name="show_pedestrian_warnings">Zobrazovat varování chodců</string>
+    <string name="rendering_value_americanRoadAtlas_name">Americký atlas cest</string>
+    <string name="routing_attr_no_new_routing_name">Nepoužívat v1.9 routování</string>
+    <string name="routing_attr_no_new_routing_description">Nepoužívat výpočet trasy verze 1.9</string>
+    </resources>

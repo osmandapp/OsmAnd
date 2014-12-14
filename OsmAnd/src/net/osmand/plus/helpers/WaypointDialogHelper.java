@@ -475,8 +475,19 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			}
 
 		});
+
 		TextView tv = (TextView) v.findViewById(R.id.header_text);
 		tv.setText(getHeader(type, checked, ctx));
+		v.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (type == WaypointHelper.POI && btn.isChecked()){
+					running[0] = position;
+					thisAdapter.notifyDataSetInvalidated();
+					selectPoi(running, thisAdapter, type, true, ctx);
+				}
+			}
+		});
 		return v;
 	}
 

@@ -2016,4 +2016,15 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="dash_download_msg">Máte %1$s stiahnutých máp</string>
     <string name="dash_download_new_one">Stiahnuť novú mapu</string>
     <string name="dash_download_manage">Spravovať</string>
+    <string name="rendering_attr_roadStyle_name">Štýl cesty</string>
+    <string name="rendering_value_default_name">Predvolené</string>
+    <string name="rendering_value_orange_name">Oranžová</string>
+    <string name="rendering_value_germanRoadAtlas_name">Nemecký atlas ciest</string>
+	<string name="traffic_warning_railways">Železnice</string>
+	<string name="traffic_waring_pedestrian">Chodec</string>
+	<string name="show_railway_warnings">Zobrazovať varovania železnice</string>
+	<string name="show_pedestrian_warnings">Zobrazovať varovania chodcov</string>
+    <string name="rendering_value_americanRoadAtlas_name">Americký atlas ciest</string>
+    <string name="routing_attr_no_new_routing_name">Nepoužívať výpočet trasy v1.9</string>
+    <string name="routing_attr_no_new_routing_description">Nepoužívať výpočet trasy verzie 1.9</string>
     </resources>

@@ -329,8 +329,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			return true;
 		} else if (preference == showAlarms) {
 			showBooleanSettings(new String[] { getString(R.string.show_traffic_warnings), getString(R.string.show_cameras), 
-					getString(R.string.show_lanes) }, new OsmandPreference[] { settings.SHOW_TRAFFIC_WARNINGS, 
-					settings.SHOW_CAMERAS, settings.SHOW_LANES }, preference.getTitle());
+					getString(R.string.show_lanes) ,getString(R.string.show_pedestrian_warnings) ,
+					getString(R.string.show_railway_warnings) }, new OsmandPreference[] { settings.SHOW_TRAFFIC_WARNINGS,
+					settings.SHOW_CAMERAS, settings.SHOW_LANES, settings.SHOW_PEDESTRIAN, settings.SHOW_RAILWAYS }, preference.getTitle());
 			return true;
 		} else if (preference == speakAlarms) {
 			showBooleanSettings(new String[] { getString(R.string.speak_street_names),  getString(R.string.speak_traffic_warnings), 
