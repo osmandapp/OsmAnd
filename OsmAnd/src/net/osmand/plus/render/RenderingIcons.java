@@ -82,6 +82,9 @@ public class RenderingIcons {
 	}
 	
 	public static Bitmap getIcon(Context ctx, String s) {
+		if(s == null) {
+			return null;
+		}
 		if (!iconsBmp.containsKey(s)) {
 			Integer resId = icons.get(s);
 			if (resId != null) {
