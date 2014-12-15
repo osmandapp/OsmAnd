@@ -16,13 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.dashboard.DashDownloadMapsFragment;
-import net.osmand.plus.dashboard.DashErrorFragment;
-import net.osmand.plus.dashboard.DashFavoritesFragment;
-import net.osmand.plus.dashboard.DashMapFragment;
-import net.osmand.plus.dashboard.DashPluginsFragment;
-import net.osmand.plus.dashboard.DashSearchFragment;
-import net.osmand.plus.dashboard.DashUpdatesFragment;
+import net.osmand.plus.dashboard.*;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
@@ -446,6 +440,9 @@ public class MainMenuActivity extends BaseDownloadActivity {
 				if(!f.isDetached()) {
 					((DashDownloadMapsFragment) f).refreshData();
 				}
+			}
+			if(f instanceof DashAudioVideoNotesFragment && !f.isDetached()){
+				((DashAudioVideoNotesFragment) f).setupNotes();
 			}
 		}
 	}

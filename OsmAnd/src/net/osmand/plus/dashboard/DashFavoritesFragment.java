@@ -59,8 +59,6 @@ public class DashFavoritesFragment extends DashBaseFragment implements OsmAndLoc
 			}
 		});
 
-
-
 		return view;
 	}
 
