@@ -81,8 +81,14 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		for (final AudioVideoNotesPlugin.Recording recording : notes){
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.dash_note_item, null, false);
-			((TextView) view.findViewById(R.id.name)).setText(recording.name);
-			((TextView) view.findViewById(R.id.descr)).setText(recording.getDescription(getActivity()));
+
+			if (recording.name != null){
+				((TextView) view.findViewById(R.id.name)).setText(recording.name);
+				((TextView) view.findViewById(R.id.descr)).setText(recording.getDescription(getActivity()));
+			} else {
+				((TextView) view.findViewById(R.id.name)).setText(recording.getDescription(getActivity()));
+			}
+
 			ImageView icon = (ImageView) view.findViewById(R.id.icon);
 			if (recording.isAudio()){
 				icon.setImageResource(R.drawable.ic_type_audio);
