@@ -843,7 +843,7 @@
 	<string name="daynight">Dag-/nattilstand</string>
 	<string name="download_files_question">Hent {0} filer ({1} MB)?</string>
 	<string name="tip_favorites_t">"Steder, som ofte bruges, kan gemmes som favoritter:
-\n\nI genvejsmenuen \'Brug pladseringer\' vælg \'Tilføj til favoritter\', og indtast et navn.
+\n\nI genvejsmenuen \'Brug placeringer\' vælg \'Tilføj til favoritter\', og indtast et navn.
 \n\nNår favoritten er gemt, er den tilgængelig via \'Menu\' → \'Mine steder\'. Tryk på en favorit i åbner mulighed for at bruge den som destination, redigere eller slette den.
 \n\nFor at vise alle favoritsteder direkte på kortet, aktiver kortlag \'Favoritter\' under \'Menu\' → \'Konfigurer kort\'. "</string>
 	<string name="tip_recent_changes_1_1_4_t">Ændringer i 1.1.4:
@@ -857,7 +857,7 @@
 \n\nBruges \'Kørselsvejledning fra\' sammen med \'Begynd navigation\', vil OsmAnd skifte til den faktiske position, så snart den er fundet (dette kan bruges til at komme hurtigt i gang med rutevejledning før positionen findes), mens \'Kørselsvejledning fra\' i kombination med \'Vis rute\' kun viser ruten fra ethvert vilkårligt valgt punkt uden efterfølgende opdateringer.\nHvis du bruger \"Kørselsvejledning fra \'sammen med\' Start navigation\", vil Osmand så hurtigt skifte til din aktuelle position som det findes (så dette kan bruges til at kickstarte routing før positionen er fundet), mens \"Kørselsvejledning fra \'i kombination med \'Vis rute\' bare viser dig ruten fra enhver vilkårlig punkt, man havde valgt uden efterfølgende opdateringer. "</string>
 	<string name="amenity_type_landuse">Arealanvendelse</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
-	<string name="voice_is_not_available_msg">Stemmevejledning er ikke tilgængelig. Gå til \'Indstillinger\'\t→ \'Generelt\' → \'Stemmevejledning\' og vælg eller hent en stemmevejledning.</string>
+	<string name="voice_is_not_available_msg">Stemmevejledning er ikke tilgængelig. Gå til \'Indstillinger\' → \'Generelt\' → \'Stemmevejledning\' og vælg eller hent en stemmevejledning.</string>
 	<string name="items_were_selected">{0} enheder valgt</string>
 	<string name="filter_existing_indexes">Hentet</string>
 	<string name="deselect_all">Fravælg alle</string>
