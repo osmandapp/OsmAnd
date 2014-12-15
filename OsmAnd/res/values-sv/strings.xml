@@ -347,8 +347,8 @@
 <string name="index_name_oceania">Oceanien</string>
 <string name="index_name_other">Hela världen och ämneskartor</string>
 <string name="index_name_wiki">Wikipedia</string>
-<string name="index_name_voice">Röstpaket (inspelat, begränsad funktion)</string>
-<string name="index_name_tts_voice">Röstpaket (TTS, rekommenderas)</string>
+<string name="index_name_voice">Röstprompter (inspelade med begränsad funktion)</string>
+<string name="index_name_tts_voice">Röstprompter (TTS - text-till-tal, rekommenderas)</string>
 <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
 <string name="amenity_type_user_defined">Användardefinierat</string>
 <string name="fav_export_confirmation">En fil med tidigare exporterade favoriter finns redan. Vill du ersätta den?</string>
@@ -647,7 +647,7 @@
 	<string name="select_build_to_install">Välj en OsmAnd-kompilering att installera</string>
 	<string name="contribution_activity">Särskild aktivitet för bidragsversionen</string>
 	<string name="gps_status_app_not_found">Appen GPS-status är inte installerad. Vill du söka på Play Butik?</string>
-	<string name="voice_is_not_available_msg">Röstvägledning är inte tillgänglig. Gå till inställningar, välj önskat röstdatapaket och hämta det.</string>
+	<string name="voice_is_not_available_msg">Röstvägledning är inte tillgänglig. Gå till \'Inställningar\' \t\'Allmänt\' \t\'Röstvägleding\' och välj eller hämta ett paket med röstprompter.</string>
 	<string name="voice_is_not_available_title">Ingen röstvägledning vald</string>
 	<string name="daynight_mode_day">Dag</string>
 	<string name="daynight_mode_night">Natt</string>
@@ -696,7 +696,7 @@
 	<string name="transport_search_none">ingen</string>
 	<string name="transport_search_again">Återställ transportsökning</string>
 	<string name="map_index">Karta</string>
-	<string name="voice">Röst</string>
+	<string name="voice">Inspelad röst</string>
 	<string name="no_vector_map_loaded">Vektorkartorna laddades inte</string>
 	<string name="map_route_by_gpx">Navigera med GPX</string>
 	<string name="gpx_files_not_found">Hittar inga GPX-filer i spårmappen</string>
@@ -834,7 +834,7 @@
 	<string name="route_general_information">Total sträcka %1$s, restid %2$d h %3$d m.</string>
 	<string name="router_service_descr">Välj en online- eller offline-navigeringstjänst</string>
 	<string name="router_service">Navigeringstjänst</string>
-	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet är inte tillgänglig</string>
+	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet är inte tillgänglig!</string>
 	<string name="download_question">Ladda ner {0} - {1}?</string>
 	<string name="download_question_exist">Offline-data för {0} finns redan ({1}). Vill du uppdatera den ({2})?</string>
 	<string name="address">Adress</string>
@@ -1339,7 +1339,7 @@
     <string name="android_19_location_disabled">Efter Androidversion 4.4 (KitKat) går det inte att hämta och uppdatera kartor på den tidigare lagringsmappen (%s). Vill du byta till en tillåten plats och kopiera alla OsmAnd-filerna dit?
 \n OBS: Gamla filer berörs inte (men kan tas bort manuellt).
 \n OBS: På den nya lagringsplatsen kommer det inte att vara möjligt att dela filer mellan OsmAnd och OsmAnd+.</string>
-    <string name="application_dir_change_warning2">Vill du att OsmAnd också ska kopiera datafilerna till den nya platsen?</string>
+    <string name="application_dir_change_warning2">Vill du att OsmAnd också ska kopiera datafilerna till den nya platsen? Välj \'Nej\' om du vill att OsmAnd ska skapa och använda den nya mappen.</string>
     <string name="copying_osmand_one_file_descr">Kopierar filen (%s) till den nya platsen …</string>
     <string name="copying_osmand_files_descr">Kopierar OsmAnd-datafiler till den nya platsen (%s)</string>
     <string name="copying_osmand_files">Kopierar OsmAnd-datafiler</string>
@@ -1736,11 +1736,36 @@
 	<string name="show_map">VISA KARTAN</string>
 	<string name="show_all">VISA ALLA</string>
 	<string name="coordinates">Koordinater</string>
-	<string name="map_update">Kartor</string>
+	<string name="map_update">Du har %1$s kartor att uppdatera</string>
 	<string name="error_avoid_specific_road">Hittar inte närmaste väg</string>
     <string name="dismiss">Avfärda</string>
     <string name="everything_up_to_date">Allt är uppdaterat</string>
     <string name="use_opengl_render">Använd OpenGL-rendering</string>
     <string name="use_opengl_render_descr">Använd hårdvaruaccelererad OpenGL-rendering (fungerar kanske inte på vissa enheter)</string>
     <string name="no_internet_connection">Kan inte ladda ner. Anslut till Wi-Fi för att fortsätta.</string>
-    </resources>
+    <string name="rendering_attr_roadStyle_name">Vägstil</string>
+    <string name="rendering_value_default_name">Standard</string>
+    <string name="rendering_value_orange_name">Brandgul</string>
+    <string name="rendering_value_germanRoadAtlas_name">Tysk vägkarta</string>
+	<string name="traffic_warning_railways">Järnvägar</string>
+	<string name="traffic_waring_pedestrian">Fotgängare</string>
+	<string name="show_railway_warnings">Visa järnvägsvarningar</string>
+	<string name="show_pedestrian_warnings">Visa fotgängarvarningar</string>
+    <string name="rendering_value_americanRoadAtlas_name">Amerikansk vägkarta</string>
+    <string name="routing_attr_no_new_routing_name">Använd inte ruttning från v 1.9</string>
+    <string name="routing_attr_no_new_routing_description">Använd inte ruttning från v 1.9</string>
+    <string name="dash_download_msg_none">Vill du hämta några offline-kartor?</string>
+    <string name="dash_download_msg">Du har hämtat %1$s kartor</string>
+    <string name="dash_download_new_one">Hämta ny karta</string>
+    <string name="dash_download_manage">Hantera</string>
+    <string name="map_locale">Kartspråk</string>
+    <string name="rendering_attr_transportStops_name">Hållplatser</string>
+    <string name="navigate_point_zone">Zon</string>
+    <string name="navigate_point_northing">Nordlig</string>
+    <string name="navigate_point_easting">Östlig</string>
+    <string name="download_tab_downloads">Alla hämtningar</string>
+    <string name="download_tab_updates">Uppdateringar</string>
+    <string name="download_tab_local">Hämtat</string>
+	<string name="route_descr_destination">Destination</string>
+    <string name="voices">Röstprompter</string>
+	</resources>
