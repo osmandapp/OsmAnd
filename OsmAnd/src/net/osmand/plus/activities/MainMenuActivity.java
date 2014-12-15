@@ -171,6 +171,7 @@ public class MainMenuActivity extends BaseDownloadActivity {
 	public void addFragments(boolean firstTime) {
 		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
+		boolean tablet = findViewById(R.id.content_land) != null;
 		//after rotation list of fragments in fragment transaction is not cleared
 		//so we need to check whether some fragments are already existing
 		if (manager.findFragmentByTag(DashMapFragment.TAG) == null){
@@ -182,7 +183,11 @@ public class MainMenuActivity extends BaseDownloadActivity {
 		}
 		if (manager.findFragmentByTag(DashSearchFragment.TAG) == null){
 			DashSearchFragment searchFragment = new DashSearchFragment();
-			fragmentTransaction.add(R.id.content, searchFragment, DashSearchFragment.TAG);
+			if (tablet) {
+				fragmentTransaction.add(R.id.content_land, searchFragment, DashSearchFragment.TAG);
+			} else {
+				fragmentTransaction.add(R.id.content, searchFragment, DashSearchFragment.TAG);
+			}
 		}
 		if (manager.findFragmentByTag(DashFavoritesFragment.TAG) == null){
 			DashFavoritesFragment favoritesFragment = new DashFavoritesFragment();
@@ -194,11 +199,21 @@ public class MainMenuActivity extends BaseDownloadActivity {
 		}
 		if (manager.findFragmentByTag(DashDownloadMapsFragment.TAG) == null){
 			DashDownloadMapsFragment fragment = new DashDownloadMapsFragment();
-			fragmentTransaction.add(R.id.content, fragment, DashDownloadMapsFragment.TAG);
+			if (tablet) {
+				fragmentTransaction.add(R.id.content_land, fragment, DashDownloadMapsFragment.TAG);
+			} else {
+				fragmentTransaction.add(R.id.content, fragment, DashDownloadMapsFragment.TAG);
+			}
+
 		}
 		if (manager.findFragmentByTag(DashPluginsFragment.TAG) == null){
 			DashPluginsFragment pluginsFragment = new DashPluginsFragment();
-			fragmentTransaction.add(R.id.content, pluginsFragment, DashPluginsFragment.TAG).commit();
+			if (tablet) {
+				fragmentTransaction.add(R.id.content_land, pluginsFragment, DashPluginsFragment.TAG).commit();
+			} else {
+				fragmentTransaction.add(R.id.content, pluginsFragment, DashPluginsFragment.TAG).commit();
+			}
+
 		}
 		setupContributionVersion();
 	}
