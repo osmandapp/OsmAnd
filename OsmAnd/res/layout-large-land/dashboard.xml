@@ -15,17 +15,61 @@
 					  android:layout_height="wrap_content">
 			<LinearLayout
 					android:orientation="vertical"
-					android:id="@+id/content"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
-					android:layout_weight="1"/>
+					android:layout_weight="1">
+
+				<LinearLayout android:id="@+id/content"
+							  android:orientation="horizontal"
+							  android:layout_width="match_parent"
+							  android:layout_height="wrap_content"/>
+
+
+				<fragment
+						xmlns:android="http://schemas.android.com/apk/res/android"
+						android:name="net.osmand.plus.dashboard.DashMapFragment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				<fragment
+						xmlns:android="http://schemas.android.com/apk/res/android"
+						android:name="net.osmand.plus.dashboard.DashFavoritesFragment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				<fragment
+						xmlns:android="http://schemas.android.com/apk/res/android"
+						android:name="net.osmand.plus.dashboard.DashUpdatesFragment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				<fragment
+						xmlns:android="http://schemas.android.com/apk/res/android"
+						android:name="net.osmand.plus.dashboard.DashDownloadMapsFragment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+			</LinearLayout>
 
 			<LinearLayout
 					android:orientation="vertical"
-					android:id="@+id/content_land"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
-					android:layout_weight="1"/>
+					android:layout_weight="1">
+
+				<fragment
+						xmlns:android="http://schemas.android.com/apk/res/android"
+						android:name="net.osmand.plus.dashboard.DashSearchFragment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				<fragment
+						xmlns:android="http://schemas.android.com/apk/res/android"
+						android:name="net.osmand.plus.dashboard.DashPluginsFragment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				</LinearLayout>
 		</LinearLayout>
 
 
