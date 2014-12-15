@@ -139,6 +139,10 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_TEXT_MIN_DISTANCE;
 	public RenderingRuleProperty R_TEXT_ON_PATH;
 	public RenderingRuleProperty R_ICON;
+	public RenderingRuleProperty R_ICON_2;
+	public RenderingRuleProperty R_ICON_3;
+	public RenderingRuleProperty R_ICON_4;
+	public RenderingRuleProperty R_ICON_5;
 	public RenderingRuleProperty R_ICON_VISIBLE_SIZE;
 	public RenderingRuleProperty R_LAYER;
 	public RenderingRuleProperty R_ORDER;
@@ -228,6 +232,10 @@ public class RenderingRuleStorageProperties {
 
 		// point
 		R_ICON = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(ICON));
+		R_ICON_2 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty("icon_2"));
+		R_ICON_3 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty("icon_3"));
+		R_ICON_4 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty("icon_4"));
+		R_ICON_5 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty("icon_5"));
 		R_SHIELD = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(SHIELD));
 
 		// polygon/way
