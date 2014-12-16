@@ -18,3 +18,16 @@ OsmAndCore_android.aar
 .idea
 out/
 
+# Android Studio
+/.idea
+*.iml
+
+# Gradle
+.gradle
+/local.properties
+
+# MacOSX
+.DS_Store
+
+# Output files
+/build

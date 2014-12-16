@@ -1605,9 +1605,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     
     <string name="osmo_connected_devices">Appareils connectés</string>
     <string name="osmo_groups">Groupes/appareils OsMo</string>
-    <string name="osmo_auto_send_locations_descr">Démarrer automatiquement la session de suivi et envoyer les positions après le démarrage de l\'application</string>
-    <string name="osmo_auto_send_locations">Démarre automatiquement la session de suivi</string>
-    <string name="osmo_tracker_id">Identifiant personnel de suivi</string>
 <string name="osmo_group_info">Info</string>
     <string name="osmo_group">Groupe OsMo</string>
     <string name="osmo_group_share">Pour vous connecter au groupe %2$s, veuillez spécifier l\'identifiant du groupe (%1$s) ou cliquer %3$s.</string>

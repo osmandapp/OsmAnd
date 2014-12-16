@@ -130,7 +130,6 @@
 	<string name="poi_doityourself">Magasin de bricolage</string>
 	<string name="poi_drinking_water">Eau potable</string>
 	<string name="poi_driving_school">École de conduite</string>
-	<string name="poi_pharmacy">Pharmacie</string>
 	<string name="poi_dry_cleaning">Pressing</string>
 	<string name="poi_seamark_dyke">Digue</string>
 	<string name="poi_electrician">Électricien</string>
@@ -213,7 +212,6 @@
 	<string name="poi_seamark_light_vessel">Bateau-feu</string>
 	<string name="poi_lighthouse">Phare</string>
 	<string name="poi_locality">Lieu-dit</string>
-	<string name="poi_lock_gate">Porte d\'écluse</string>
 	<string name="poi_locksmith">Serrurier</string>
 	<string name="poi_mall">Galerie marchande</string>
 	<string name="poi_marina">Port de plaisance</string>

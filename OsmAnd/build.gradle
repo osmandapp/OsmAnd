@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        minSdkVersion 7
+        targetSdkVersion 21
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    // This is from OsmAndCore_android.aar - for some reason it's not inherited
+    aaptOptions {
+        // Don't compress any embedded resources
+        noCompress "qz"
+    }
+
+    dexOptions {
+        jumboMode = true
+    }
+
+    sourceSets {
+        main {
+            manifest {
+                srcFile "AndroidManifest.xml"
+            }
+            jni {
+                srcDirs = []
+            }
+            jniLibs {
+                srcDirs = ["libs"]
+            }
+            aidl {
+                srcDirs = ["src"]
+            }
+            java {
+                srcDirs = [
+                    "src",
+                    fileTree(dir: "../OsmAnd-java/src", exclude: "**/PlatformUtil.java")]
+            }
+            resources {
+                srcDirs = ["src", "../OsmAnd-java/src"]
+            }
+            renderscript {
+                srcDirs = ["src"]
+            }
+            res {
+                srcDirs = ["res"]
+            }
+            assets {
+                srcDirs = ["assets"]
+            }
+        }
+    }
+
+    productFlavors {
+        x86 {
+            ndk {
+                abiFilter "x86"
+            }
+        }
+        mips {
+            ndk {
+                abiFilter "mips"
+            }
+        }
+        armv7 {
+            ndk {
+                abiFilter "armeabi-v7a"
+            }
+        }
+        armv5 {
+            ndk {
+                abiFilter "armeabi"
+            }
+        }
+        fat
+    }
+}
+
+dependencies {
+    compile "com.actionbarsherlock:actionbarsherlock:4.4.0@aar"
+    compile fileTree(dir: "libs", include: ["*.jar"])
+}

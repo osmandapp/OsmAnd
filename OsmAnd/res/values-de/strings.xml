@@ -1488,7 +1488,6 @@
 	<string name="about_version">Version :</string>
 	<string name="about_settings">Über</string>
 	<string name="about_settings_descr">Versionsinfo, Lizenz, Projekt-Mitglieder</string>
-	<string name="tips_and_tricks">Hilfe</string>
 	<string name="local_index_tile_data_zooms">Zooms heruntergeladen: %1$s</string>
 	<string name="local_index_tile_data_expire">Gültigkeit endet in (Minuten): %1$s</string>
 	<string name="local_index_tile_data_downloadable">Herunterladbar: %1$s</string>
@@ -2028,8 +2027,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
-    <string name="wake_on_voice">Bildschirm aktivieren</string>
-    <string name="wake_on_voice_descr">Bei Annäherung einer Richtungsänderung den Bildschirm einschalten</string>
     <string name="map_locale">Beschriftungssprache</string>
     <string name="rendering_attr_transportStops_name">ÖPNV Haltestellen</string>
     <string name="navigate_point_zone">Zone</string>
