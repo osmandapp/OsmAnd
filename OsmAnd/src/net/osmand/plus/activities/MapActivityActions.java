@@ -681,7 +681,7 @@ public class MapActivityActions implements DialogProvider {
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
 		currentDrawer = DrawerType.MAIN_MENU;
 		
-		optionsMenuHelper.item(R.string.home_button).icons(R.drawable.ic_action_quit_dark, R.drawable.ic_action_quit_light )
+		optionsMenuHelper.item(R.string.home_button).icons(R.drawable.ic_dashboard_dark, R.drawable.ic_dashboard_light )
 					.listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

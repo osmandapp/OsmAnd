@@ -104,7 +104,10 @@ public class MainMenuActivity extends BaseDownloadActivity {
 		getSupportActionBar().setIcon(android.R.color.transparent);
 		
 		boolean firstTime = initApp(this, getMyApplication());
-		addFragments(firstTime);
+		if(getMyApplication().getAppCustomization().checkExceptionsOnStart()){
+			checkPreviousRunsForExceptions(firstTime);
+		}
+		setupContributionVersion();
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			FloatingActionButton fabButton = new FloatingActionButton.Builder(this)
@@ -168,41 +171,6 @@ public class MainMenuActivity extends BaseDownloadActivity {
 		about.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 	
-	public void addFragments(boolean firstTime) {
-		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-		android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
-		//after rotation list of fragments in fragment transaction is not cleared
-		//so we need to check whether some fragments are already existing
-		if (manager.findFragmentByTag(DashMapFragment.TAG) == null){
-			DashMapFragment mapFragment = new DashMapFragment();
-			fragmentTransaction.add(R.id.content, mapFragment, DashMapFragment.TAG);
-		}
-		if(getMyApplication().getAppCustomization().checkExceptionsOnStart()){
-			checkPreviousRunsForExceptions(firstTime);
-		}
-		if (manager.findFragmentByTag(DashSearchFragment.TAG) == null){
-			DashSearchFragment searchFragment = new DashSearchFragment();
-			fragmentTransaction.add(R.id.content, searchFragment, DashSearchFragment.TAG);
-		}
-		if (manager.findFragmentByTag(DashFavoritesFragment.TAG) == null){
-			DashFavoritesFragment favoritesFragment = new DashFavoritesFragment();
-			fragmentTransaction.add(R.id.content, favoritesFragment, DashFavoritesFragment.TAG);
-		}
-		if (manager.findFragmentByTag(DashUpdatesFragment.TAG) == null){
-			DashUpdatesFragment updatesFragment = new DashUpdatesFragment();
-			fragmentTransaction.add(R.id.content, updatesFragment, DashUpdatesFragment.TAG);
-		}
-		if (manager.findFragmentByTag(DashDownloadMapsFragment.TAG) == null){
-			DashDownloadMapsFragment fragment = new DashDownloadMapsFragment();
-			fragmentTransaction.add(R.id.content, fragment, DashDownloadMapsFragment.TAG);
-		}
-		if (manager.findFragmentByTag(DashPluginsFragment.TAG) == null){
-			DashPluginsFragment pluginsFragment = new DashPluginsFragment();
-			fragmentTransaction.add(R.id.content, pluginsFragment, DashPluginsFragment.TAG).commit();
-		}
-		setupContributionVersion();
-	}
-
 	private void addErrorFragment(){
 		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();

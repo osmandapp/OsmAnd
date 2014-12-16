@@ -408,8 +408,6 @@ public class MapRoutePreferencesControl extends MapControls {
 	@Override
 	public void hideControls(FrameLayout layout) {
 		removeButton(layout, settingsAppModeButton);
-		layout.removeView(settingsAppModeButton);
-		mapActivity.accessibleContent.remove(settingsAppModeButton);
 	}
 
 	@Override

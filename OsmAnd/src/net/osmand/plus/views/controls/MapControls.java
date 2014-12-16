@@ -110,8 +110,14 @@ public abstract class MapControls {
 		return gravity;
 	}
 
-	protected void removeButton(FrameLayout layout, View b) {
-		layout.removeView(b);
+	protected void removeButton(final FrameLayout layout, final View b) {
+		b.setVisibility(View.GONE);
+		layout.getHandler().post(new Runnable() {
+			@Override
+			public void run() {
+				layout.removeView(b);
+			}
+		});
 		mapActivity.accessibleContent.remove(b);
 	}
 

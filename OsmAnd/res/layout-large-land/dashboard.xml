@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:background="@color/dashboard_background" >
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			android:padding="6dp" >
+
+		<LinearLayout android:orientation="horizontal"
+					  android:layout_width="match_parent"
+					  android:layout_height="wrap_content">
+			<LinearLayout
+					android:orientation="vertical"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1">
+
+				<LinearLayout android:id="@+id/content"
+							  android:orientation="horizontal"
+							  android:layout_width="match_parent"
+							  android:layout_height="wrap_content"/>
+
+
+				<fragment
+						xmlns:android="http://schemas.android.com/apk/res/android"
+						android:name="net.osmand.plus.dashboard.DashMapFragment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				<fragment
+						xmlns:android="http://schemas.android.com/apk/res/android"
+						android:name="net.osmand.plus.dashboard.DashFavoritesFragment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				<fragment
+						xmlns:android="http://schemas.android.com/apk/res/android"
+						android:name="net.osmand.plus.dashboard.DashUpdatesFragment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				<fragment
+						xmlns:android="http://schemas.android.com/apk/res/android"
+						android:name="net.osmand.plus.dashboard.DashDownloadMapsFragment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+					android:orientation="vertical"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1">
+
+				<fragment
+						xmlns:android="http://schemas.android.com/apk/res/android"
+						android:name="net.osmand.plus.dashboard.DashSearchFragment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				<fragment
+						xmlns:android="http://schemas.android.com/apk/res/android"
+						android:name="net.osmand.plus.dashboard.DashPluginsFragment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				</LinearLayout>
+		</LinearLayout>
+
+
+		<LinearLayout android:id="@+id/credentials"
+					  android:layout_width="fill_parent"
+					  android:layout_height="wrap_content"
+					  android:orientation="horizontal"
+					  android:visibility="gone"
+					  android:padding="6dp"
+					  android:baselineAligned="false">
+
+			<LinearLayout
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom"
+					android:layout_weight="0.5" >
+
+				<TextView
+						android:id="@+id/About"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="start|bottom"
+						android:text="@string/about_settings"
+						android:textSize="20sp" />
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</ScrollView>
