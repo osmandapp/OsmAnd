@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -1182,7 +1182,7 @@
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">Tysk veiatlas</string>
 	<string name="traffic_warning_railways">Jernbaner</string>
-	<string name="traffic_waring_pedestrian">Fotgjenger</string>
+	<string name="traffic_warning_pedestrian">Fotgjenger</string>
 	<string name="show_railway_warnings">Vis jernbanevarsler</string>
 	<string name="show_pedestrian_warnings">Vis fotgjengervarsler</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk veiatlas</string>

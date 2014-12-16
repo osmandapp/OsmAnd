@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -2021,7 +2021,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_orange_name">Oranžová</string>
     <string name="rendering_value_germanRoadAtlas_name">Nemecký atlas ciest</string>
 	<string name="traffic_warning_railways">Železnice</string>
-	<string name="traffic_waring_pedestrian">Chodec</string>
+	<string name="traffic_warning_pedestrian">Chodec</string>
 	<string name="show_railway_warnings">Zobrazovať varovania železnice</string>
 	<string name="show_pedestrian_warnings">Zobrazovať varovania chodcov</string>
     <string name="rendering_value_americanRoadAtlas_name">Americký atlas ciest</string>

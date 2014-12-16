@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -1873,7 +1873,7 @@
     <string name="routing_attr_no_new_routing_name">Ver.1.9 routing</string>
     <string name="routing_attr_no_new_routing_description">Brug ikke v1.9 routing</string>
     <string name="traffic_warning_railways">Jernbaner</string>
-	<string name="traffic_waring_pedestrian">Fodgænger</string>
+	<string name="traffic_warning_pedestrian">Fodgænger</string>
 	<string name="show_railway_warnings">Jernbaneadvarsler</string>
 	<string name="show_pedestrian_warnings">Fodgængeradvarsler</string>
     </resources>

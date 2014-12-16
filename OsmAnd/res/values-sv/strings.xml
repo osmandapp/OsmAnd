@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -1748,7 +1748,7 @@
     <string name="rendering_value_orange_name">Brandgul</string>
     <string name="rendering_value_germanRoadAtlas_name">Tysk vägkarta</string>
 	<string name="traffic_warning_railways">Järnvägar</string>
-	<string name="traffic_waring_pedestrian">Fotgängare</string>
+	<string name="traffic_warning_pedestrian">Fotgängare</string>
 	<string name="show_railway_warnings">Visa järnvägsvarningar</string>
 	<string name="show_pedestrian_warnings">Visa fotgängarvarningar</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk vägkarta</string>
