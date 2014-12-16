@@ -2082,19 +2082,19 @@
     <string name="wake_on_voice_never">결코</string>
     <string name="advanced_settings">고급</string>
 	<string name="osmo_use_https">HTTPS 사용하기</string>
-	<string name="osmo_use_https_descr">서버를 이용하여 보안 연결</string>
+	<string name="osmo_use_https_descr">서버에 보안 연결 이용</string>
     <string name="home_button">홈 화면</string>
     <string name="map_update">업데이트할 %1$s 지도가 있습니다</string>
 	<string name="search_for">검색</string>
 	<string name="show_map">지도 표시</string>
 	<string name="show_all">모두 표시</string>
 	<string name="coordinates">좌표</string>
-	<string name="error_avoid_specific_road">가장 가까운 도로를 찾을 수 없습니다</string>
+	<string name="error_avoid_specific_road">우회로 없음</string>
     <string name="use_opengl_render">OpenGL 렌더링 사용</string>
     <string name="use_opengl_render_descr">하드웨어로 가속된 OpenGL 렌더링 사용 (일부 장치에는 작동 하지 않을 수 있습니다)</string>
     <string name="dismiss">해제</string>
-    <string name="everything_up_to_date">최신 자료</string>
-    <string name="no_internet_connection">다운로드가 불가능 합니다. lWi-Fi를 연결하여 진행해 주시기 바랍니다.</string>
+    <string name="everything_up_to_date">모든 파일 업데이트</string>
+    <string name="no_internet_connection">다운로드가 불가능 합니다. WiFi를 연결하여 진행해 주시기 바랍니다.</string>
     <string name="navigate_point_zone">존(지역)</string>
     <string name="navigate_point_northing">북향</string>
     <string name="navigate_point_easting">동향</string>
@@ -2117,6 +2117,6 @@
     <string name="routing_attr_no_new_routing_description">V1.9 라우팅을 사용하지 마십시오</string>
     <string name="traffic_warning_railways">철도</string>
 	<string name="traffic_waring_pedestrian">보행자</string>
-	<string name="show_railway_warnings">철도 경고 표시</string>
-	<string name="show_pedestrian_warnings">보행자 경고 표시</string>
+	<string name="show_railway_warnings">철도 횡단 표시</string>
+	<string name="show_pedestrian_warnings">보행자 교차로 표시</string>
     </resources>
