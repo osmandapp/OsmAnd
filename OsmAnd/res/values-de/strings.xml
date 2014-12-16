@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -2003,7 +2003,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="select_impassable_road">Auswählen auf der Karte</string>
     <string name="impassable_road">Straße blockieren…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Straßen- und Eisenbahnlinien</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Eisenbahn-Strecken</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Stadtbahnlinien</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Sammeltaxi-Linien</string>
     <string name="rendering_attr_trolleybusRoutes_name">Oberleitungsbuslinien</string>
     <string name="rendering_attr_busRoutes_name">Buslinien</string>
@@ -2018,12 +2018,12 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="show_map">KARTE ZEIGEN</string>
     <string name="show_all">ALLES ZEIGEN</string>
     <string name="coordinates">Koordinaten</string>
-    <string name="error_avoid_specific_road">Nächstgelegene Straße konnte nicht gefunden werden</string>
+    <string name="error_avoid_specific_road">Es konnte keine alternative Wegführung gefunden werden</string>
     <string name="dismiss">Ablehnen</string>
-    <string name="everything_up_to_date">Alles ist aktuell</string>
+    <string name="everything_up_to_date">Alle Dateien sind aktuell</string>
     <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
-    <string name="use_opengl_render_descr">Hardware beschleunigte OpenGL-Renderung verwenden (Funktioniert nicht auf allen Geräten)</string>
-    <string name="no_internet_connection">Herunterladen nicht möglich. Zum Fortsetzen mit WLAN verbinden!</string>
+    <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (Funktioniert nicht auf allen Geräten)</string>
+    <string name="no_internet_connection">Herunterladen nicht möglich, zum Fortsetzen mit WLAN verbinden!</string>
     <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
@@ -2033,17 +2033,17 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="navigate_point_northing">Nordwert</string>
     <string name="navigate_point_easting">Ostwert</string>
     <string name="dash_download_msg_none">Möchten Sie Offline-Karten herunterladen?</string>
-    <string name="dash_download_msg">%1$s Karten bereits heruntergeladen</string>
+    <string name="dash_download_msg">%1$s heruntergeladenen Karten</string>
     <string name="dash_download_new_one">Neue Karte herunterladen</string>
     <string name="dash_download_manage">Karten verwalten</string>
-    <string name="rendering_attr_roadStyle_name">Straßen-Stil</string>
+    <string name="rendering_attr_roadStyle_name">Straßen-Darstellung</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">Deutscher Straßenatlas</string>
-    <string name="traffic_warning_railways">Eisenbahnen</string>
+    <string name="traffic_warning_railways">Eisenbahn</string>
     <string name="traffic_waring_pedestrian">Fußgänger</string>
-    <string name="show_railway_warnings">Eisenbahn-Warnungen anzeigen</string>
-    <string name="show_pedestrian_warnings">Fußgänger-Warnungen anzeigen</string>
+    <string name="show_railway_warnings">Eisenbahn-Übergänge anzeigen</string>
+    <string name="show_pedestrian_warnings">Fußgänger-Übergänge anzeigen</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikanischer Straßenatlas</string>
     <string name="routing_attr_no_new_routing_name">Routing v1.9 nicht verwenden</string>
     <string name="routing_attr_no_new_routing_description">Neue Routenberechnung nicht verwenden</string>
