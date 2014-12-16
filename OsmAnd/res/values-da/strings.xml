@@ -1838,20 +1838,20 @@
     <string name="lock_screen_request_explanation">%1$s behøver denne tilladelse til at slukke for skærmen for strømbesparende funktion.</string>
     <string name="wake_on_voice_never">Aldrig</string>
     <string name="advanced_settings">Avanceret</string>
-	<string name="osmo_use_https_descr">Brug sikker forbindelse med server</string>
+	<string name="osmo_use_https_descr">Brug sikker forbindelse til server</string>
     <string name="osmo_use_https">Brug HTTPS</string>
 	<string name="home_button">Start</string>
     <string name="search_for">Søg efter</string>
 	<string name="show_map">VIS KORT</string>
 	<string name="show_all">VIS ALLE</string>
 	<string name="coordinates">Koordinater</string>
-	<string name="map_update">Der er %1$s kort til opdatering</string>
-	<string name="error_avoid_specific_road">Nærmeste vej blev ikke fundet</string>
+	<string name="map_update">Der er %1$s opdateringer til kort</string>
+	<string name="error_avoid_specific_road">Ingen omfartsvej fundet</string>
     <string name="use_opengl_render">Brug OpenGL optegning</string>
     <string name="use_opengl_render_descr">Brug hardware accelereret OpenGL optegning (virker muligvis ikke på alle enheder)</string>
     <string name="everything_up_to_date">Alt er opdateret</string>
     <string name="dismiss">Afvis</string>
-    <string name="no_internet_connection">Ikke muligt at hente. Opret forbindelse til Wi-Fi for at fortsætte.</string>
+    <string name="no_internet_connection">Ikke muligt at hente. Opret forbindelse til WiFi for at fortsætte.</string>
     <string name="download_tab_downloads">Hent</string>
     <string name="download_tab_updates">Opdater</string>
     <string name="download_tab_local">Lokal</string>
@@ -1872,8 +1872,8 @@
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk vejatlas</string>
     <string name="routing_attr_no_new_routing_name">Ver.1.9 routing</string>
     <string name="routing_attr_no_new_routing_description">Brug ikke v1.9 routing</string>
-    <string name="traffic_warning_railways">Jernbaner</string>
-	<string name="traffic_waring_pedestrian">Fodgænger</string>
-	<string name="show_railway_warnings">Jernbaneadvarsler</string>
-	<string name="show_pedestrian_warnings">Fodgængeradvarsler</string>
+    <string name="traffic_warning_railways">Jernbane</string>
+	<string name="traffic_waring_pedestrian">Fodgængere</string>
+	<string name="show_railway_warnings">Jernbaneoverskæringer</string>
+	<string name="show_pedestrian_warnings">Fodgængerovergange</string>
     </resources>
