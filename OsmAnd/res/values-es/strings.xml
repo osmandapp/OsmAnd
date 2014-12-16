@@ -1886,7 +1886,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="coordinates">Coordenadas</string>
 	<string name="use_opengl_render">Usar renderizado OpenGL</string>
     <string name="use_opengl_render_descr">Usar renderizado OpenGL acelerado por hardware (podría no funcionar en algunos dispositivos)</string>
-    <string name="error_avoid_specific_road">No se ha encontrado enlace</string>
+    <string name="error_avoid_specific_road">No se ha encontrado circunvalación</string>
     <string name="everything_up_to_date">Todos los archivos actualizados</string>
     <string name="dismiss">Descartar</string>
     <string name="no_internet_connection">Imposible descargar. Por favor, conéctate al WiFi para proceder.</string>
