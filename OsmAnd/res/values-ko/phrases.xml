@@ -9,7 +9,7 @@
 	<string name="poi_butcher">고기 시장</string>
 	<string name="poi_deli">델리</string>
 	<string name="poi_shop_farm">농장 가게</string>
-	<string name="poi_greengrocer">Greengrocery</string>
+	<string name="poi_greengrocer">그린그로서리</string>
 	<string name="poi_seafood">해산물 가게</string>
 	<string name="poi_confectionery">과자</string>
 	<string name="poi_ice_cream">아이스크림 응접실</string>
@@ -49,7 +49,7 @@
 	<string name="poi_gas_shop">LPG 주유소</string>
 	<string name="poi_general_shop">일반 상점</string>
 	<string name="poi_gift_shop">선물 가게</string>
-	<string name="poi_glaziery_shop">Glaziery</string>
+	<string name="poi_glaziery_shop">글라지어리</string>
 	<string name="poi_hardware_shop">하드웨어 스토어</string>
 	<string name="poi_hearing_aids_shop">청력 도움</string>
 	<string name="poi_herbalist">허브 상점</string>
@@ -127,8 +127,8 @@
 	<string name="poi_parking">주차</string>
 	<string name="poi_motorcycle_parking">오토바이 주차</string>
 	<string name="poi_parking_entrance">주차장 입구</string>
-	<string name="poi_fire_flapper">Fire flapper</string>
-	<string name="poi_fire_water_pond">Fire water pond</string>
+	<string name="poi_fire_flapper">불 파리채</string>
+	<string name="poi_fire_water_pond">불 물 연못</string>
 	<string name="poi_garages">차고</string>
 
 	<string name="poi_public_transport_platform">대중 교통 정류장</string>
@@ -152,7 +152,7 @@
 	<string name="poi_aeroway_terminal">Aeroway 터미널</string>
 	<string name="poi_aeroway_gate">Aeroway 게이트</string>
 
-	<string name="poi_slipway">Slipway</string>
+	<string name="poi_slipway">슬립웨이</string>
 	<string name="poi_ferry_terminal">페리 터미널</string>
 	<string name="poi_lighthouse">등대</string>
 
@@ -177,7 +177,7 @@
 	<string name="poi_turning_circle">터 닝 서클</string>
 	<string name="poi_motorway_junction">고속도로 분기점</string>
 
-	<string name="poi_boatyard">Boatyard</string>
+	<string name="poi_boatyard">보트야드</string>
 	<string name="poi_wastewater_plant">폐수 공장</string>
 	<string name="poi_water_tower">급수 탑</string>
 	<string name="poi_lock_gate">게이트 잠금</string>
@@ -207,7 +207,7 @@
 	<string name="poi_astronomical_observatory">천문대</string>
 	<string name="poi_construction">건설</string>
 	<string name="poi_works">작업</string>
-	<string name="poi_mineshaft">Mineshaft</string>
+	<string name="poi_mineshaft">마인샤프트</string>
 	<string name="poi_adit">입구가</string>
 	<string name="poi_petroleum_well">석유</string>
 	<string name="poi_survey_point">측량 포인트</string>
@@ -266,7 +266,7 @@
 	<string name="poi_occupational_therapist">직업 치료사</string>
 	<string name="poi_optometrist">검안</string>
 	<string name="poi_physiotherapist">물리 요법가</string>
-	<string name="poi_podiatrist">Podiatrist</string>
+	<string name="poi_podiatrist">포디아트리스트</string>
 	<string name="poi_psychotherapist">심리 치료사</string>
 	<string name="poi_healthcare_rehabilitation">재활</string>
 	<string name="poi_speech_therapist">음성 치료사</string>
@@ -313,7 +313,7 @@
 	<string name="poi_basketball">농구</string>
 	<string name="poi_beachvolleyball">비치 발리 볼</string>
 	<string name="poi_bmx_sport">BMX</string>
-	<string name="poi_boules">Boules</string>
+	<string name="poi_boules">보울스</string>
 	<string name="poi_bowls">그릇</string>
 	<string name="poi_canadian_football">캐나다 축구</string>
 	<string name="poi_canoe">카누</string>
@@ -332,16 +332,16 @@
 	<string name="poi_hockey">하키</string>
 	<string name="poi_horse_racing">경마</string>
 	<string name="poi_ice_skating">아이스 스케이팅</string>
-	<string name="poi_korfbal">Korfbal</string>
+	<string name="poi_korfbal">코프발</string>
 	<string name="poi_motor_sport">모터 스포츠</string>
 	<string name="poi_multi_sport">멀티 스포츠</string>
 	<string name="poi_orienteering">오리엔티어 링</string>
 	<string name="poi_paddle_tennis">패들 테니스</string>
 	<string name="poi_paragliding">패러글라이딩</string>
-	<string name="poi_pelota">Pelota</string>
+	<string name="poi_pelota">페롤타</string>
 	<string name="poi_racquet">라켓</string>
 	<string name="poi_roller_skating">롤러 스케이트</string>
-	<string name="poi_rowing">Rowing</string>
+	<string name="poi_rowing">로잉</string>
 	<string name="poi_rugby_union">럭비 연합</string>
 	<string name="poi_rugby_league">럭비 리그</string>
 	<string name="poi_shooting">촬영</string>
@@ -353,7 +353,7 @@
 	<string name="poi_swimming">수영</string>
 	<string name="poi_table_tennis">테이블 테니스</string>
 	<string name="poi_tennis">테니스</string>
-	<string name="poi_toboggan">Toboggan</string>
+	<string name="poi_toboggan">토보간</string>
 	<string name="poi_volleyball">배구</string>
 
 	<string name="poi_museum">박물관</string>
@@ -380,7 +380,7 @@
 	<string name="poi_guest_house">게스트 하우스</string>
 	<string name="poi_hostel">호스텔</string>
 	<string name="poi_motel">모텔</string>
-	<string name="poi_alpine_hut">Alpine hut</string>
+	<string name="poi_alpine_hut">알파인 헛</string>
 	<string name="poi_chalet">샬레</string>
 
 	<string name="poi_place_of_worship">예배 장소</string>
@@ -402,12 +402,12 @@
 	<string name="poi_viewpoint">관점</string>
 	<string name="poi_camp_site">캠프 사이트</string>
 	<string name="poi_caravan_site">캐러밴 사이트</string>
-	<string name="poi_ses_station">SES station</string>
-	<string name="poi_traffic_calming_hump">Hump</string>
-	<string name="poi_standpipe">Standpipe</string>
-	<string name="poi_water_works">Water works</string>
-	<string name="poi_weir">Weir</string>
-	<string name="poi_ice_stock">Ice stock</string>
+	<string name="poi_ses_station">SES 역</string>
+	<string name="poi_traffic_calming_hump">험프</string>
+	<string name="poi_standpipe">스탠드파이프</string>
+	<string name="poi_water_works">물 작품</string>
+	<string name="poi_weir">위어</string>
+	<string name="poi_ice_stock">아이스 스톡</string>
 	<string name="poi_picnic_site">피크닉 사이트</string>
 	<string name="poi_spring">봄</string>
 	<string name="poi_hot_spring">온천</string>
@@ -506,14 +506,14 @@
 	<string name="poi_plumber">배관공</string>
 	<string name="poi_pottery_craft">도자기 공예</string>
 	<string name="poi_roofer">지붕 업자</string>
-	<string name="poi_grit_bin">Grit bin</string>
-	<string name="poi_rigger">Rigger</string>
-	<string name="poi_saddler">Saddler</string>
-	<string name="poi_sailmaker">Sailmaker</string>
+	<string name="poi_grit_bin">그리트 빈</string>
+	<string name="poi_rigger">리거</string>
+	<string name="poi_saddler">새들러</string>
+	<string name="poi_sailmaker">Sail 메이커</string>
 	<string name="poi_cannon">역사적인 대포</string>
 	<string name="poi_harbour">항구</string>
 	<string name="poi_sawmill">제재소</string>
-	<string name="poi_scaffolder">Scaffolder</string>
+	<string name="poi_scaffolder">스카프폴더</string>
 	<string name="poi_sculptor">조각가</string>
 	<string name="poi_shoemaker">구두 메이커</string>
 	<string name="poi_stand_builder">스탠드 빌더</string>
@@ -595,7 +595,7 @@
 	<string name="poi_seamark_buoy_lateral">측면 부표</string>
 	<string name="poi_seamark_buoy_safe_water">안전 수상 부표</string>
 	<string name="poi_seamark_buoy_special_purpose">특수 목적 부표</string>
-	<string name="poi_seamark_daymark">Daymark</string>
+	<string name="poi_seamark_daymark">Day 마크</string>
 	<string name="poi_seamark_distance_mark">거리 표시</string>
 	<string name="poi_seamark_dry_dock">드라이 도크</string>
 	<string name="poi_seamark_dyke">제방</string>
@@ -629,16 +629,16 @@
 	<string name="poi_military_range">군사 지역</string>
 	<string name="poi_military_naval_base">해군 기지</string>
 	<string name="poi_military_nuclear_explosion_site">핵 폭발 사이트</string>
-<string name="poi_amusement_ride">오락 라이드</string>
-	<string name="poi_attraction_animal">동물 (매력)</string>
+<string name="poi_amusement_ride">라이드 즐기기</string>
+	<string name="poi_attraction_animal">동물 (명소)</string>
 	<string name="poi_ferris_wheel">페리스 휠</string>
-	<string name="poi_carousel">회전 목마</string>
+	<string name="poi_carousel">목마</string>
 	<string name="poi_maze">미로</string>
 	<string name="poi_roller_coaster">롤러 코스터</string>
 	<string name="poi_slide">슬라이드</string>
 	<string name="poi_summer_toboggan">여름 토보간</string>
 	<string name="poi_swing_carousel">회전 목마</string>
-	<string name="poi_attraction_train">기차 (매력)</string>
+	<string name="poi_attraction_train">기차 (명소)</string>
 	<string name="poi_water_slide">워터 슬라이드</string>
 
 	</resources>
