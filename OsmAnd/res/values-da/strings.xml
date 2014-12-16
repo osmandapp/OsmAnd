@@ -1834,7 +1834,7 @@
     <string name="impassable_road">Undgå veje…</string>
     <string name="rendering_category_hide">Skjul</string>
     <string name="wake_on_voice">Tænd for skærmen</string>
-    <string name="wake_on_voice_descr">Tænd for skærmen når et sving nærmer sig</string>
+    <string name="wake_on_voice_descr">Tænd for skærmen ved navigationsinstruktioner</string>
     <string name="lock_screen_request_explanation">%1$s behøver denne tilladelse til at slukke for skærmen for strømbesparende funktion.</string>
     <string name="wake_on_voice_never">Aldrig</string>
     <string name="advanced_settings">Avanceret</string>
@@ -1865,7 +1865,7 @@
     <string name="dash_download_new_one">Hent nye kort</string>
     <string name="dash_download_manage">Administrer</string>
     <string name="voices">Stemmevejledning</string>
-	<string name="rendering_attr_roadStyle_name">Vej stil</string>
+	<string name="rendering_attr_roadStyle_name">Vejstil</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">Tysk vejatlas</string>
