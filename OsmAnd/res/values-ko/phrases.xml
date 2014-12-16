@@ -629,4 +629,16 @@
 	<string name="poi_military_range">군사 지역</string>
 	<string name="poi_military_naval_base">해군 기지</string>
 	<string name="poi_military_nuclear_explosion_site">핵 폭발 사이트</string>
-</resources>
+<string name="poi_amusement_ride">오락 라이드</string>
+	<string name="poi_attraction_animal">동물 (매력)</string>
+	<string name="poi_ferris_wheel">페리스 휠</string>
+	<string name="poi_carousel">회전 목마</string>
+	<string name="poi_maze">미로</string>
+	<string name="poi_roller_coaster">롤러 코스터</string>
+	<string name="poi_slide">슬라이드</string>
+	<string name="poi_summer_toboggan">여름 토보간</string>
+	<string name="poi_swing_carousel">회전 목마</string>
+	<string name="poi_attraction_train">기차 (매력)</string>
+	<string name="poi_water_slide">워터 슬라이드</string>
+
+	</resources>
