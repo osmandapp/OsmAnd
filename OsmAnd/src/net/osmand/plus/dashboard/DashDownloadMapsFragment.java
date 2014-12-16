@@ -39,7 +39,7 @@ public class DashDownloadMapsFragment extends DashBaseFragment {
         local.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {
+			public void onClick(View view) {
 				final Intent intent = new Intent(view.getContext(), getMyApplication().getAppCustomization().getDownloadIndexActivity());
 				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.LOCAL_TAB);
 				intent.putExtra(DownloadActivity.SINGLE_TAB, true);
