@@ -29,9 +29,6 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
-		if (plugin == null) {
-			return super.onCreateView(inflater, container, savedInstanceState);
-		}
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_audio_video_notes_plugin, container, false);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
@@ -51,6 +48,9 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (plugin == null) {
+			plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+		}
 		setupNotes();
 	}
 
@@ -61,6 +61,10 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 
 	public void setupNotes() {
 		View mainView = getView();
+		if (plugin == null){
+			(mainView.findViewById(R.id.main_notes)).setVisibility(View.GONE);
+			return;
+		}
 
 		List<AudioVideoNotesPlugin.Recording> notes = new ArrayList<AudioVideoNotesPlugin.Recording>(plugin.getAllRecordings());
 		if (notes.size() == 0){
