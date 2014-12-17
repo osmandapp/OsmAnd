@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -403,7 +403,7 @@
   <string name="voice_not_use">Nepoužívať</string>
   <string name="voice_not_specified">Žiadny</string>
   <string name="installing_new_resources">Rozbaľujú sa nové údaje…</string>
-  <string name="internet_connection_required_for_online_route">Je vybratá online navigačná služba, ale nie je dostupné internetové pripojenie.</string>
+  <string name="internet_connection_required_for_online_route">Je vybratá online navigačná služba, ale nie je dostupné pripojenie na Internet.</string>
   <string name="tts_language_not_supported_title">Nepodporovaný jazyk</string>
   <string name="tts_language_not_supported">Zvolený jazyk nie je podporovaný nainštalovaným TTS (text-to-speech) v Androide. Chcete ísť na Market pozrieť iný TTS? Inak bude použitý prednastavený TTS jazyk.</string>
   <string name="tts_missing_language_data_title">Chýbajúce údaje</string>
@@ -437,17 +437,16 @@
   <string name="map_overlay_descr">Výber mapy na prekrytie</string>
   <string name="tile_source_already_installed">Mapa je už nainštalovaná, nastavenia budú zaktualizované</string>
   <string name="select_tile_source_to_install">Vyberte mapy na inštaláciu alebo aktualizáciu</string>
-  <string name="internet_not_available">Internetové pripojenie potrebné pre operáciu nie je dostupné</string>
+  <string name="internet_not_available">Pre túto operáciu je potrebné internetové pripojenie, avšak nie je dostupné</string>
   <string name="install_more">Inštalovať viac…</string>
   <string name="tip_update_index">Aktualizácia offline máp</string>
-  <string name="tip_update_index_t">Veľmi dôležité je mať aktuálne mapové údaje, aby bolo možné zobrazovať mapu, hľadať adresy, body záujmu a navigovať. OsmAnd je vybavený sťahovacím manažérom, ktorý môže sťahovať offline mapy (a iné súbory) a zistiť, či sú dostupné aktualizácie.
-		\n\nPre stiahnutie máp choďte do "Nastavenia" → "Správca mapových súborov" → "Stiahnuť offline údaje".
-		\n\nPo načítaní zoznamu oblastí z internetu, vyberte ktorýkoľvek súbor pre jeho stiahnutie alebo aktualizovanie. Všimnite si tiež výber typu súborov v hornej časti obrazovky, kde je potrebé zvoliť aký typ dát chcete stiahnuť (bežné mapy, tieňované reliéfy, atď.).
-		\n\nZoznam oblastí môžete filtrovať napísaním niekoľkých písmen alebo vyberte možnosť "Zobraziť stiahnuté". Potom uvidíte len aktualizácie pre súbory, ktoré už máte vo svojom zariadení.
-		\n\n\t* "Zelená" - indikuje, že súbor je aktuálny (na serveri rovnaký ako v zariadení)
-		\n\t* "Modrá" - indikuje, že pre súbor existuje aktualizácia na serveri
-		\n\t* Súbory šikmým písmom sú v zariadení deaktivované
-	</string>
+  <string name="tip_update_index_t">"Veľmi dôležité je mať aktuálne mapové údaje, aby bolo možné zobrazovať mapu, hľadať adresy, body záujmu a navigovať. OsmAnd je vybavený sťahovacím manažérom, ktorý môže sťahovať offline mapy (a iné súbory) a zistiť, či sú dostupné aktualizácie.
+\n\nPre stiahnutie máp choďte do Nastavenia → Správca mapových súborov → Stiahnuť offline údaje.
+\n\nPo načítaní zoznamu oblastí z Internetu, vyberte ktorýkoľvek súbor pre jeho stiahnutie alebo aktualizovanie. Všimnite si tiež výber typu súborov v hornej časti obrazovky, kde je potrebé zvoliť aký typ dát chcete stiahnuť (bežné mapy, tieňované reliéfy, atď.).
+\n\nZoznam oblastí môžete filtrovať napísaním niekoľkých písmen alebo vyberte možnosť Zobraziť stiahnuté. Potom uvidíte len aktualizácie pre súbory, ktoré už máte vo svojom zariadení.
+\n\n\t* Zelená - indikuje, že súbor je aktuálny (na serveri rovnaký ako v zariadení)
+\n\t* Modrá - indikuje, že pre súbor existuje aktualizácia na serveri
+\n\t* Súbory šikmým písmom sú v zariadení deaktivované "</string>
   <string name="level_to_switch_vector_raster_descr">Max. úroveň priblíženia použitá pri vektorovom vykresľovaní a nie rastrovom</string>
   <string name="level_to_switch_vector_raster">Úroveň vektorového zoomu</string>
   <string name="tip_day_night_mode">Denný/Nočný režim</string>
@@ -1238,7 +1237,7 @@
     <string name="favourites_list_activity">Vybrať obľúbený bod</string>
     <string name="local_openstreetmap_act_title">OSM úpravy</string>
     <string name="default_buttons_other_actions">Ostatné akcie</string>
-    <string name="download_using_mobile_internet">Momentálne nie ste pripojený cez WiFi. Chcete pokračovať so sťahovaním pomocou aktuálneho internetového pripojenia?</string>
+    <string name="download_using_mobile_internet">Momentálne nie ste pripojený na WiFi. Chcete použiť aktuálne internetové pripojenie na sťahovanie?</string>
     <string name="tip_recent_changes_1_3_t">Zmeny vo verzii 1.3:
     \n\t* Prepracovaná podpora tabletov a veľkých obrazoviek
     \n\t* Téma Holo (prispôsobenie témy)
