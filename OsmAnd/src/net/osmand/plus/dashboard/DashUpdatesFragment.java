@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import android.graphics.Typeface;
 import android.media.Image;
 import android.widget.*;
 import net.osmand.plus.R;
@@ -19,6 +20,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import net.osmand.plus.helpers.FontCache;
 
 /**
  * Created by Denis on 21.11.2014.
@@ -37,7 +39,11 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_updates_fragment, container, false);
-		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
+		Typeface typeface = FontCache.getRobotoMedium(getActivity());
+		((TextView) view.findViewById(R.id.header)).setTypeface(typeface);
+		Button showAll = (Button) view.findViewById(R.id.show_all);
+		showAll.setTypeface(typeface);
+		showAll.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				final Intent intent = new Intent(view.getContext(), getMyApplication().getAppCustomization().getDownloadIndexActivity());
@@ -81,7 +87,6 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		progressBars.clear();
 		baseNames.clear();
 		downloadButtons.clear();
-		mainView.findViewById(R.id.main_progress).setVisibility(View.GONE);
 		((TextView) mainView.findViewById(R.id.header)).setText(getString(R.string.map_update ,String.valueOf(list.size())));
 
 		LinearLayout updates = (LinearLayout) mainView.findViewById(R.id.updates_items);
@@ -161,7 +166,6 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			});
 			boolean intermediate = basicProgressAsyncTask.isIndeterminate();
 			currentProgress.setVisibility(intermediate ? View.GONE : View.VISIBLE);
-			//getView().findViewById(R.id.main_progress).setVisibility(intermediate ? View.VISIBLE : View.GONE);
 			if (!intermediate) {
 				currentProgress.setProgress(basicProgressAsyncTask.getProgressPercentage());
 			}
