@@ -92,7 +92,8 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 		super.onResume();
 		LatLon lm = getMyApplication().getSettings().getLastKnownMapLocation();
 		int zm = getMyApplication().getSettings().getLastKnownMapZoom();
-		zm = Math.max(zm - 3, 4);
+		//Let us not change zoom here, it provides for a smoother transition between the map and the dashboard screens, and provides better recognition of the map fragment
+		//zm = Math.max(zm - 3, 4);
 		osmandMapTileView.setLatLon(lm.getLatitude(), lm.getLongitude());
 		osmandMapTileView.setComplexZoom(zm, osmandMapTileView.getSettingsMapDensity());
 		osmandMapTileView.refreshMap(true);

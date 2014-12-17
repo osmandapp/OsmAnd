@@ -205,12 +205,12 @@
 
         <string name="poi_recycling">Genbrugsplads</string>
         <string name="poi_landfill">Losseplads</string>
-        <string name="poi_waste_disposal">Bortskaffelse af affald</string>
+        <string name="poi_waste_disposal">Affaldshåndtering</string>
         <string name="poi_waste_basket">Skraldespand</string>
 
         <string name="poi_surveillance">Overvågning</string>
         <string name="poi_construction">Byggeri</string>
-        <string name="poi_works">Værker</string>
+        <string name="poi_works">Fabrik</string>
         <string name="poi_mineshaft">Mineskakt</string>
         <string name="poi_adit">Stoll</string>
         <string name="poi_petroleum_well">Oliebrønd</string>
@@ -231,7 +231,7 @@
         <string name="poi_social_facility">Socialinstitution</string>
         <string name="poi_courthouse">Retsbygning</string>
         <string name="poi_prison">Fængsel</string>
-        <string name="poi_register_office">Civilregistrering</string>
+        <string name="poi_register_office">Borgerservice</string>
         <string name="poi_embassy">Ambassade</string>
         <string name="poi_government">Regering</string>
         <string name="poi_bailiff">Foged</string>
@@ -500,7 +500,7 @@
         <string name="poi_tinsmith">Blikkenslager</string>
         <string name="poi_upholsterer">Møbelpolstrer</string>
         <string name="poi_watchmaker">Urmager</string>
-        <string name="poi_window_construction">Vinduer</string>
+        <string name="poi_window_construction">Vinduefremstilling</string>
 
         <string name="poi_funeral_directors">Bedemand</string>
         <string name="poi_computer_craft">Computerværksted</string>
@@ -575,7 +575,7 @@
         <string name="poi_seamark_harbour">Havn</string>
         <string name="poi_seamark_landmark">Vartegn</string>
         <string name="poi_seamark_light">Fyr, sømærke</string>
-        <string name="poi_seamark_light_major">Store fyr, sømærke</string>
+        <string name="poi_seamark_light_major">Større fyr, sømærke</string>
         <string name="poi_seamark_light_minor">Mindre fyr, sømærke</string>
         <string name="poi_seamark_light_float">Flydefyr, sømærke</string>
         <string name="poi_seamark_light_vessel">Fartøjslys, sømærke</string>
@@ -653,8 +653,8 @@
 	<string name="poi_carousel">Karrusel</string>
 	<string name="poi_maze">Labyrint</string>
 	<string name="poi_roller_coaster">Rutschebane</string>
-	<string name="poi_slide">Rutsjebane</string>
-	<string name="poi_summer_toboggan">Sommer kælk</string>
+	<string name="poi_slide">Rutsjebane, legeplads</string>
+	<string name="poi_summer_toboggan">Sommer kælkning</string>
 	<string name="poi_swing_carousel">Gynge karrusel</string>
 	<string name="poi_attraction_train">Tog (attraktion)</string>
 	<string name="poi_water_slide">Vandrutsjebane</string>

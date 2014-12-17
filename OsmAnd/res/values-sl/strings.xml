@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	<string name="settings_Button">Nastavitve</string>
@@ -1934,7 +1934,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_value_orange_name">Oranžno</string>
     <string name="rendering_value_germanRoadAtlas_name">Nemški cesti atlas</string>
 	<string name="traffic_warning_railways">Železnice</string>
-	<string name="traffic_waring_pedestrian">Pešci</string>
+	<string name="traffic_warning_pedestrian">Pešci</string>
 	<string name="show_railway_warnings">Prikaz železniških opozoril</string>
 	<string name="show_pedestrian_warnings">Prikaži opozorila za pešce</string>
     <string name="rendering_value_americanRoadAtlas_name">Ameriški cesti atlas</string>

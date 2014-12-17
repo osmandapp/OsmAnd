@@ -130,7 +130,6 @@
 	<string name="poi_doityourself">Magasin de bricolage</string>
 	<string name="poi_drinking_water">Eau potable</string>
 	<string name="poi_driving_school">École de conduite</string>
-	<string name="poi_pharmacy">Pharmacie</string>
 	<string name="poi_dry_cleaning">Pressing</string>
 	<string name="poi_seamark_dyke">Digue</string>
 	<string name="poi_electrician">Électricien</string>
@@ -213,7 +212,6 @@
 	<string name="poi_seamark_light_vessel">Bateau-feu</string>
 	<string name="poi_lighthouse">Phare</string>
 	<string name="poi_locality">Lieu-dit</string>
-	<string name="poi_lock_gate">Porte d\'écluse</string>
 	<string name="poi_locksmith">Serrurier</string>
 	<string name="poi_mall">Galerie marchande</string>
 	<string name="poi_marina">Port de plaisance</string>
@@ -342,7 +340,7 @@
 	<string name="poi_tobacco_shop">Tabac</string>
 	<string name="poi_toboggan">Toboggan</string>
 	<string name="poi_toilets">Toilettes</string>
-	<string name="poi_seamark_topmark">Voyant</string>
+	<string name="poi_seamark_topmark">Voyant maritime</string>
 	<string name="poi_town">Ville</string>
 	<string name="poi_toys_shop">Magasin de jouets</string>
 	<string name="poi_leisure_track">Piste de sport</string>
@@ -629,7 +627,7 @@
 	<string name="poi_seamark_notice">Signalétique maritime</string>
 	<string name="poi_seamark_signal_station_warning">Station de signaux, avertissements</string>
 	<string name="poi_seamark_small_craft_facility">Facilité pour petites embarcations</string>
-	<string name="poi_military_nuclear_explosion_site">Site d\'explosions nucléaires</string>
+	<string name="poi_military_nuclear_explosion_site">Site d\'essais nucléaires</string>
 <string name="poi_carpet_layer">Couvreur de moquettes</string>
 	<string name="poi_parquet_layer">Couvreur de parquets</string>
 	<string name="poi_saddle">Selle</string>

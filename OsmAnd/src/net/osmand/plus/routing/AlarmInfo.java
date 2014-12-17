@@ -44,7 +44,7 @@ public class AlarmInfo implements LocationPoint {
 				case 6:
 					return ctx.getString(R.string.traffic_warning_stop);
 				case 8:
-					return ctx.getString(R.string.traffic_waring_pedestrian);
+					return ctx.getString(R.string.traffic_warning_pedestrian);
 				case 9:
 					return ctx.getString(R.string.traffic_warning_railways);
 			}
