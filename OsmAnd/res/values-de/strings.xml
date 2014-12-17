@@ -1598,7 +1598,7 @@
 	<string name="visible_element">Auf Karte anzeigen</string>
 	<string name="show_zoom_buttons_navigation_descr">Zoom-Tasten bei Navigation anzeigen</string>
 	<string name="show_zoom_buttons_navigation">Zoom-Tasten anzeigen</string>
-	<string name="no_index_file_to_download">Download-Ziel nicht gefunden. Bitte Internet-Verbindung überprüfen.</string>
+	<string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internet-Verbindung überprüfen.</string>
 	<string name="none_selected_gpx">Keine GPX-Spur ausgewählt. Zum Auswählen auf eine Spur lange drücken.</string>
 	<string name="local_index_unselect_gpx_file">Deselektieren</string>
 	<string name="local_index_select_gpx_file">Zum Anzeigen auswählen</string>
@@ -2023,7 +2023,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="everything_up_to_date">Alle Dateien sind aktuell</string>
     <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (Funktioniert nicht auf allen Geräten)</string>
-    <string name="no_internet_connection">Herunterladen nicht möglich, zum Fortsetzen mit WLAN verbinden!</string>
+    <string name="no_internet_connection">Herunterladen nicht möglich, bitte die Internet-Verbindung überprüfen.</string>
     <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
