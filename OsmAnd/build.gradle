@@ -222,7 +222,7 @@ task cleanupDuplicatesInCore(type: Delete) {
     delete "libs/*/libgnustl_shared.so"
 }
 tasks.withType(JavaCompile) {
-    compileTask -> compileTask.dependsOn << buildOsmAndCore, cleanupDuplicatesInCore
+    compileTask -> compileTask.dependsOn << [buildOsmAndCore, cleanupDuplicatesInCore]
 }
 
 repositories {
