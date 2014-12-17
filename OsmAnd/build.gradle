@@ -231,10 +231,10 @@ repositories {
 }
 
 dependencies {
+    compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.actionbarsherlock:actionbarsherlock:4.4.0@aar"
     compile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
     debugCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
     nativeDebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
     releaseCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
-    compile fileTree(dir: "libs", include: ["*.jar"])
 }
