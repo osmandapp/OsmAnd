@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   
   <string name="layer_map_appearance">Configura pantalla</string>
@@ -246,7 +246,7 @@
   <string name="map_overlay_descr">Elige el mapa superpuesto</string>
   <string name="tile_source_already_installed">El mapa ya está instalado, se actualizarán las opciones</string>
   <string name="select_tile_source_to_install">Seleccione mapas (teselas) a instalar o actualizar</string>
-  <string name="internet_not_available">No está disponible la conexión a Internet que se necesita para la operación</string>
+  <string name="internet_not_available">Se necesita una conexión a Internet para esta operación pero no está disponible</string>
   <string name="install_more">Instalar más…</string>
   <string name="tip_update_index">Actualizar mapas descargados</string>
   <string name="tip_update_index_t">"Es esencial tener datos de mapa actualizados tanto para visualización de mapas, búsqueda de direcciones/PDI y navegación sin conexión. OsmAnd proporciona un gestor de mapas para descargar estos mapas (y otros archivos de datos) y comprobar las actualizaciones disponibles.
@@ -1261,7 +1261,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="cancel_route">Descartar ruta</string>
     <string name="cancel_navigation">Parar navegación</string>
     <string name="clear_destination">Borrar destino</string>
-    <string name="download_using_mobile_internet">Actualmente WiFi no está conectado. ¿Desea continuar la descarga con la conexión actual a Internet?</string>
+    <string name="download_using_mobile_internet">El Wi-Fi no está conectado en este momento. ¿Desea usar la conexión actual a Internet para descargar?</string>
     <string name="local_indexes_cat_srtm">Datos de curvas de nivel</string>
     <string name="wait_current_task_finished">Por favor, espera hasta que termine la tarea actual</string>
     <string name="downloading_file_new">Descargando…</string>
@@ -1731,7 +1731,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="none_selected_gpx">No hay archivos GPX seleccionados. Para seleccionar presione y mantenga presionado en la traza disponible.</string>
     <string name="local_index_unselect_gpx_file">No seleccionado</string>
     <string name="local_index_select_gpx_file">Seleccionar para mostrar</string>
-    <string name="no_index_file_to_download">No hay nada que descargar, compruebe la conexión a Internet.</string>
+    <string name="no_index_file_to_download">No se han encontrado descargas, comprueba tu conexión a Internet.</string>
     <string name="rendering_attr_hideBuildings_name">Ocultar edificios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ocultar vías no aptas para vehículos</string>
     <string name="rendering_attr_hideText_name">Ocultar textos</string>
@@ -1872,7 +1872,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_attr_busRoutes_name">Rutas de autobús</string>
     <string name="rendering_category_hide">Ocultar</string>
     <string name="wake_on_voice">Encender pantalla</string>
-    <string name="wake_on_voice_descr">Encender la pantalla al aproximarse a un giro</string>
+    <string name="wake_on_voice_descr">Encender la pantalla del dispositivo al aproximarse a un giro</string>
     <string name="lock_screen_request_explanation">%1$s necesita este permiso para apagar la pantalla para la característica de ahorro energético.</string>
     <string name="wake_on_voice_never">Nunca</string>
     <string name="advanced_settings">Avanzado</string>
@@ -1889,7 +1889,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="error_avoid_specific_road">No se ha encontrado circunvalación</string>
     <string name="everything_up_to_date">Todos los archivos actualizados</string>
     <string name="dismiss">Descartar</string>
-    <string name="no_internet_connection">Imposible descargar. Por favor, conéctate al WiFi para proceder.</string>
+    <string name="no_internet_connection">Imposible descargar. Por favor, comprueba tu conexión a Internet.</string>
     <string name="download_tab_downloads">Todas las Descargas</string>
     <string name="download_tab_updates">Actualizaciones</string>
     <string name="download_tab_local">Local</string>
