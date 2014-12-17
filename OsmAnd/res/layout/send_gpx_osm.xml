@@ -34,7 +34,7 @@
     <TableRow android:layout_width="fill_parent">
 
         <TextView
-            android:id="@+id/TextView"
+            android:id="@id/TextView"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="@string/gpx_tags_txt" />
@@ -51,7 +51,7 @@
     <TableRow android:layout_width="fill_parent">
 
         <TextView
-            android:id="@+id/TextView"
+            android:id="@id/TextView"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="@string/gpx_visibility_txt" />
