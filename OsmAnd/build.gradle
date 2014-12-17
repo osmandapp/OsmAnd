@@ -178,10 +178,9 @@ task collectRegionsInfo(type: Copy) {
 
 task collectHelpContents(type: Sync) {
     from "../../help"
-    into "helpAssets"
+    into "helpAssets/help"
     include "*.html"
     include "images/**/*.png"
-    include "*.css"
 }
 
 task collectMiscResources(type: Copy) {
