@@ -205,12 +205,12 @@
 
         <string name="poi_recycling">Genbrugsplads</string>
         <string name="poi_landfill">Losseplads</string>
-        <string name="poi_waste_disposal">Bortskaffelse af affald</string>
+        <string name="poi_waste_disposal">Affaldshåndtering</string>
         <string name="poi_waste_basket">Skraldespand</string>
 
         <string name="poi_surveillance">Overvågning</string>
         <string name="poi_construction">Byggeri</string>
-        <string name="poi_works">Værker</string>
+        <string name="poi_works">Fabrik</string>
         <string name="poi_mineshaft">Mineskakt</string>
         <string name="poi_adit">Stoll</string>
         <string name="poi_petroleum_well">Oliebrønd</string>
@@ -231,7 +231,7 @@
         <string name="poi_social_facility">Socialinstitution</string>
         <string name="poi_courthouse">Retsbygning</string>
         <string name="poi_prison">Fængsel</string>
-        <string name="poi_register_office">Civilregistrering</string>
+        <string name="poi_register_office">Borgerservice</string>
         <string name="poi_embassy">Ambassade</string>
         <string name="poi_government">Regering</string>
         <string name="poi_bailiff">Foged</string>

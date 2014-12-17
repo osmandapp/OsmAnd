@@ -1862,13 +1862,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="show_map">AFFICHER LA CARTE</string>
 	<string name="show_all">AFFICHER TOUT</string>
 	<string name="coordinates">Coordonnées</string>
-	<string name="map_update">Il y a %1$s carte(s) à mettre à jour</string>
-	<string name="error_avoid_specific_road">Aucune route n\'a été trouvée à proximité</string>
+	<string name="map_update">Mise à jour disponible pour %1$s carte(s)</string>
+	<string name="error_avoid_specific_road">Aucun raccourci n\'a été trouvé</string>
     <string name="use_opengl_render">Utiliser le rendu OpenGL</string>
     <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (cette option peut être inefficace sur certains appareils)</string>
-    <string name="everything_up_to_date">Vous disposez de la dernière version</string>
+    <string name="everything_up_to_date">Tous les fichiers sont à jour</string>
     <string name="dismiss">Ignorer</string>
-    <string name="no_internet_connection">Téléchargement impossible. Merci de vous connecter en Wifi.</string>
+    <string name="no_internet_connection">Téléchargement impossible. Veuillez vous connecter en Wifi pour poursuivre.</string>
     <string name="download_tab_downloads">Tous les téléchargements</string>
     <string name="download_tab_updates">Mises à jour</string>
     <string name="navigate_point_zone">Zone</string>
@@ -1891,4 +1891,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="show_pedestrian_warnings">Afficher les alertes de passage piéton</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas de routes allemandes</string>
 	<string name="rendering_value_americanRoadAtlas_name">Atlas des routes américaines</string>
+    <string name="routing_attr_no_new_routing_description">Ne pas utiliser la navigation dans sa version 1.9</string>
+    <string name="routing_attr_no_new_routing_name">Ne pas utiliser la navigation dans sa version 1.9</string>
     </resources>

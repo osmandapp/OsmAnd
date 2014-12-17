@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="osmo_use_https_descr">Использовать безопасное соединение с сервером</string>
+    <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
     <string name="srtm_plugin_description">Плагин позволяет загружать контурные линии и затемнение высот для использования оффлайн (\"Настройки\" → \"Управление файлами карт\" → \"Загрузить\").</string>
     <string name="srtm_paid_version_msg">Рассмотрите, пожалуйста, покупку плагина \"Линии высот\" в Google Play, чтобы поддержать последующую разработку.</string>
@@ -1812,11 +1812,11 @@
     <string name="wake_on_voice">Авто-включение экрана</string>
     <string name="wake_on_voice_descr">Включать экран телефона при приближении к повороту</string>
     <string name="advanced_settings">Расширенные</string>
-	<string name="map_update">Карт для обновления: %1$s</string>
+	<string name="map_update">Карты доступные для обновления: %1$s</string>
 	<string name="coordinates">Координаты</string>
 	<string name="home_button">Домой</string>
     <string name="search_for">Поиск</string>
-	<string name="everything_up_to_date">Всё обновлено</string>
+	<string name="everything_up_to_date">Все файлы обновлены</string>
     <string name="use_opengl_render">Использовать OpenGL для рендеринга</string>
     <string name="use_opengl_render_descr">Использовать аппаратное ускорение OpenGL для рендеринга (может не работать на некоторых устройствах)</string>
     <string name="show_map">ПОКАЗАТЬ КАРТУ</string>
@@ -1830,13 +1830,13 @@
     <string name="dismiss">Не отправлять</string>
     <string name="dash_download_msg_none">Вы хотите загрузить оффлайн карты?</string>
     <string name="dash_download_msg">Загружено карт: %1$s</string>
-    <string name="dash_download_new_one">Загрузка Новой Карты</string>
+    <string name="dash_download_new_one">Загрузить новую карту</string>
     <string name="dash_download_manage">Менеджер загрузок</string>
     <string name="map_locale">Язык карты</string>
     <string name="navigate_point_northing">Северной широты</string>
     <string name="navigate_point_easting">Восточной долготы</string>
     <string name="voices">Голосовые данные</string>
-	<string name="error_avoid_specific_road">Ближайшая дорога не найдена</string>
+	<string name="error_avoid_specific_road">Объезд не найден</string>
     <string name="rendering_attr_roadStyle_name">Стиль отображения дорог</string>
     <string name="rendering_value_default_name">По умолчанию</string>
     <string name="rendering_value_orange_name">Оранжевый</string>
@@ -1844,6 +1844,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Атлас дорог Америки</string>
     <string name="routing_attr_no_new_routing_name">Не использовать маршрутизацию версии 1.9</string>
     <string name="routing_attr_no_new_routing_description">Не использовать для построение маршрута алгоритм версии 1.9</string>
-    <string name="show_railway_warnings">Информировать о ж/д переездах</string>
-	<string name="show_pedestrian_warnings">Информировать о пешеходных переходах</string>
-    </resources>
+    <string name="show_railway_warnings">Показывать ж/д переезды</string>
+	<string name="show_pedestrian_warnings">Показывать пешеходные переходы</string>
+    <string name="traffic_warning_railways">Железная дорога</string>
+	</resources>

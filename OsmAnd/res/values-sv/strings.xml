@@ -1736,10 +1736,10 @@
 	<string name="show_map">VISA KARTAN</string>
 	<string name="show_all">VISA ALLA</string>
 	<string name="coordinates">Koordinater</string>
-	<string name="map_update">Du har %1$s kartor att uppdatera</string>
-	<string name="error_avoid_specific_road">Hittar inte närmaste väg</string>
+	<string name="map_update">Det finns uppdateringar av %1$s kartor</string>
+	<string name="error_avoid_specific_road">Hittar ingen förbifart</string>
     <string name="dismiss">Avfärda</string>
-    <string name="everything_up_to_date">Allt är uppdaterat</string>
+    <string name="everything_up_to_date">Alla filer är uppdaterade</string>
     <string name="use_opengl_render">Använd OpenGL-rendering</string>
     <string name="use_opengl_render_descr">Använd hårdvaruaccelererad OpenGL-rendering (fungerar kanske inte på vissa enheter)</string>
     <string name="no_internet_connection">Kan inte ladda ner. Anslut till Wi-Fi för att fortsätta.</string>
@@ -1754,7 +1754,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk vägkarta</string>
     <string name="routing_attr_no_new_routing_name">Använd inte ruttning från v 1.9</string>
     <string name="routing_attr_no_new_routing_description">Använd inte ruttning från v 1.9</string>
-    <string name="dash_download_msg_none">Vill du hämta några offline-kartor?</string>
+    <string name="dash_download_msg_none">Vill du hämta offline-kartor?</string>
     <string name="dash_download_msg">Du har hämtat %1$s kartor</string>
     <string name="dash_download_new_one">Hämta ny karta</string>
     <string name="dash_download_manage">Hantera</string>
