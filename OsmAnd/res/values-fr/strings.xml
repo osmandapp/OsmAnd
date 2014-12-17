@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -227,7 +227,7 @@
   <string name="voice_not_use">Non utilisé</string>
   <string name="voice_not_specified">Aucun</string>
   <string name="installing_new_resources">Dépaquetage de nouvelles données…</string>
-  <string name="internet_connection_required_for_online_route">Vous avez sélectionné un moteur de calcul d\'itinéraire en ligne, mais vous n\'avez pas de connexion internet.</string>
+  <string name="internet_connection_required_for_online_route">Vous avez sélectionné un moteur de calcul d\'itinéraire en ligne, mais vous n\'avez pas de connexion Internet.</string>
   <string name="tts_language_not_supported_title">Langue non disponible</string>
   <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Voulez-vous allez sur le Market et chercher d\'autres moteurs de synthèse vocale ? Sinon la langue par défaut sera utilisée.</string>
   <string name="tts_missing_language_data_title">Données manquantes</string>
@@ -257,7 +257,7 @@
   <string name="map_overlay_descr">Choisir la carte en sur-couche</string>
   <string name="tile_source_already_installed">Carte déjà installée, paramètres seront mis à jour</string>
   <string name="select_tile_source_to_install">Sélectionnez les cartes à installer ou mettre à jour</string>
-  <string name="internet_not_available">Connexion Internet nécessaire pour cette opération non disponible</string>
+  <string name="internet_not_available">Une connexion Internet est nécessaire pour cette opération mais est indisponible</string>
   <string name="install_more">Installer d\'autres langues …</string>
   <string name="tip_update_index">Mise à jour des cartes hors-ligne</string>
   <string name="tip_update_index_t">"Il est très important d\'avoir des données cartographiques à jour pour la visualisation des cartes hors-ligne, la recherche de points d\'intérêt ou d\'adresses, et la navigation hors-ligne. OsmAnd fournit un gestionnaire de données qui permet de télécharger ces cartes hors-ligne (et d\'autres données), et de vérifier si des mises à jour sont disponibles.
@@ -1292,7 +1292,7 @@ Couverture géographique et qualité :
 Liste des pays pris en charge (pratiquement le monde entier !) :
 Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et-Barbuda, Argentine, Arménie, Aruba, Australie, Autriche, Azerbaïdjan, Bahamas, Bahreïn, Bangladesh, Barbade, Bélarus, Belgique, Belize, Bénin, Bermudes, Bhoutan, Bolivie, Bonaire, Bosnie-Herzégovine, Botswana, Brésil, Îles Vierges britanniques, Brunei, Bulgarie, Burkina Faso, Burundi, Cambodge, Cameroun, Canada, Cap-Vert, République centrafricaine, Tchad, Chili, Chine, Colombie, Comores, Congo, Costa Rica , Côte d\'Ivoire, Croatie, Cuba, Curaçao, Chypre, République tchèque, Danemark, Djibouti, Dominique, République dominicaine, Équateur, Égypte, Érythrée, Espagne, Estonie, Éthiopie, Fidji, Finlande, France, Gabon, Gambie, Géorgie, Ghana, Gibraltar, Grèce, Groenland, Grenade, Guadeloupe, Guam, Guatemala, Guernsey, Guinée, Guinée-Bissau, Guinée équatoriale, Guyana, Guyane française, Haïti, Vatican, Honduras, Hong Kong, Hongrie, Islande, Inde , Indonésie, Iran, Irak, Irlande, Île de Man, Israël, Italie, Jamaïque, Japon, Jersey, Jordanie, Kazakhstan, Kenya, Kiribati, Corée du Nord et Corée du Sud, Koweït, Kirghizistan, Laos, Lettonie, Liban, Lesotho, Libéria , Libye, Liechtenstein, Lituanie, Luxembourg, Macao, Macédoine, Madagascar, Malaisie, Malawi, Maldives, Mali, Malte, Martinique, Maurice, Mauritanie, Mayotte, Mexique, Micronésie, Moldavie, Monaco, Mongolie, Monténégro, Montserrat, Maroc, Mozambique , Myanmar, Namibie, Nauru, Népal, Pays-Bas, les Antilles néerlandaises, Nicaragua, Niger, Nigéria, Norvège, Nouvelle-Calédonie, Nouvelle-Zélande, Oman, Pakistan, Palau, Territoire palestinien, Panama, Papouasie-Nouvelle-Guinée, Paraguay, Pérou, Philippines, Pologne , Portugal, Polynésie française, Puerto Rico, Qatar, Roumanie, Russie, Rwanda, Sahara occidental, Saint-Barthélemy, Sainte-Hélène, Saint-Kitts-et-Nevis, Sainte-Lucie, Saint-Marin, Saint-Martin, Saint-Pierre-et-Miquelon, Saint-Vincent-et-les Grenadines, Samoa, Salvador, Arabie saoudite, Sénégal, Serbie, Seychelles, Sierra Leone, Singapour, Slovaquie, Slovénie, Somalie, Afrique du Sud, Géorgie du Sud, Soudan du Sud, Sri Lanka, Soudan, Suriname, Swaziland, Suède, Suisse, Syrie, Taiwan, Tadjikistan, Tanzanie, Thaïlande , le Timor-Leste, Togo, Tokelau, Tonga, Trinité-et-Tobago, Tunisie, Turkménistan, Turquie, Tuvalu, Ouganda, Ukraine, Émirats arabes unis, Royaume-Uni (UK), États-Unis d\'Amérique (USA), Uruguay, Ouzbékistan, Vanuatu , Venezuela, Vietnam, Wallis et Futuna, Yémen, Zambie, Zimbabwe.
 	</string>
-	<string name="download_using_mobile_internet">Le WiFi n\\\'est pas activé en ce moment. Voulez-vous continuer le téléchargement avec la connexion actuelle ?</string>
+	<string name="download_using_mobile_internet">Le WiFi n\\\'est actuellement pas activé. Voulez-vous continuer le téléchargement avec la connexion Internet actuelle ?</string>
     <string name="cancel_route">Arrêter la navigation</string>
     <string name="cancel_navigation">Arrêter la navigation</string>
     <string name="clear_destination">Supprimer la destination</string>
@@ -1868,7 +1868,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (cette option peut être inefficace sur certains appareils)</string>
     <string name="everything_up_to_date">Tous les fichiers sont à jour</string>
     <string name="dismiss">Ignorer</string>
-    <string name="no_internet_connection">Téléchargement impossible. Veuillez vous connecter en Wifi pour poursuivre.</string>
+    <string name="no_internet_connection">Téléchargement impossible. Veuillez vous connecter à Internet (Wifi ou données mobiles) pour poursuivre.</string>
     <string name="download_tab_downloads">Tous les téléchargements</string>
     <string name="download_tab_updates">Mises à jour</string>
     <string name="navigate_point_zone">Zone</string>
@@ -1878,7 +1878,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="map_locale">Langue pour la carte</string>
     <string name="rendering_attr_transportStops_name">Arrêts de transports en commun</string>
     <string name="voices">Guidage vocal</string>
-	<string name="dash_download_msg_none">Souhaitez-vous télécharger des cartes ?</string>
+	<string name="dash_download_msg_none">Souhaitez-vous télécharger des cartes hors-ligne ?</string>
     <string name="dash_download_msg">Vous avez téléchargé %1$s carte(s)</string>
     <string name="dash_download_new_one">Télécharger une nouvelle carte</string>
     <string name="dash_download_manage">Gérer</string>
