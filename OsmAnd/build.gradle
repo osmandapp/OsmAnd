@@ -55,10 +55,6 @@ android {
         jumboMode = true
     }
 
-    packagingOptions {
-        exclude 'lib/armeabi/libgnustl_shared.so'
-    }
-
     sourceSets {
         main {
             manifest.srcFile "AndroidManifest.xml"
@@ -220,8 +216,13 @@ task buildOsmAndCore(type: Exec) {
         commandLine ""
     }
 }
+task cleanupDuplicatesInCore(type: Delete) {
+    dependsOn buildOsmAndCore
+
+    delete "libs/*/libgnustl_shared.so"
+}
 tasks.withType(JavaCompile) {
-    compileTask -> compileTask.dependsOn << buildOsmAndCore
+    compileTask -> compileTask.dependsOn << buildOsmAndCore, cleanupDuplicatesInCore
 }
 
 repositories {
