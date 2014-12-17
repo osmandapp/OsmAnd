@@ -56,10 +56,7 @@ android {
     }
 
     packagingOptions {
-        exclude "libs/armeabi/libgnustl_shared.so"
-        exclude "libs/armeabi-v7a/libgnustl_shared.so"
-        exclude "libs/mips/libgnustl_shared.so"
-        exclude "libs/x86/libgnustl_shared.so"
+        exclude 'lib/armeabi/libgnustl_shared.so'
     }
 
     sourceSets {
