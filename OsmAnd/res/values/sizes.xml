@@ -8,7 +8,7 @@
     <dimen name="dashListItemHeight">50dp</dimen>
     <dimen name="dashFavIconSize">28dp</dimen>
     <dimen name="dashFavIconMargin">12dp</dimen>
-    <dimen name="dashFavDirectionSize">10sp</dimen>
+    <dimen name="dashFavDirectionSize">10dp</dimen>
     <dimen name="dashMapHeight">110dp</dimen>
     <dimen name="dashMapMargin">2dp</dimen>
     <dimen name="dashNoteIconSize">28dp</dimen>

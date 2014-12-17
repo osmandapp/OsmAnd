@@ -8,7 +8,7 @@
     <dimen name="dashListItemHeight">75dp</dimen>
     <dimen name="dashFavIconSize">42dp</dimen>
     <dimen name="dashFavIconMargin">18dp</dimen>
-    <dimen name="dashFavDirectionSize">15sp</dimen>
+    <dimen name="dashFavDirectionSize">15dp</dimen>
     <dimen name="dashMapHeight">165dp</dimen>
     <dimen name="dashMapMargin">3dp</dimen>
     <dimen name="dashProgressTextSize">27sp</dimen>
@@ -25,5 +25,5 @@
     <!-- TextSizes -->
     <dimen name="showAllButtonTextSize">18sp</dimen>
     <dimen name="subHeaderTextSize">21sp</dimen>
-    <dimen name="dashFavNameTextSize">18sp</dimen>
+    <dimen name="dashFavNameTextSize">24sp</dimen>
 </resources>
