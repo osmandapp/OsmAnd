@@ -231,7 +231,7 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: "libs", include: ["*.jar"])
+    compile fileTree(dir: "libs", include: ["*.jar"], exclude: ["QtAndroid-bundled.jar", "QtAndroidAccessibility-bundled.jar"])
     compile "com.actionbarsherlock:actionbarsherlock:4.4.0@aar"
     compile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
     debugCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
