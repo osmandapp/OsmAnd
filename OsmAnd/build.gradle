@@ -211,7 +211,7 @@ task buildOsmAndCore(type: Exec) {
     description "Build Legacy OsmAndCore"
 
     if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
-        commandLine "sh", file("../old-ndk-build.sh").getAbsolutePath()
+        commandLine "sh", file("./old-ndk-build.sh").getAbsolutePath()
     } else {
         commandLine ""
     }
