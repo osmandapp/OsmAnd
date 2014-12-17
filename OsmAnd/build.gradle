@@ -43,6 +43,7 @@ android {
 
     lintOptions {
         lintConfig file("lint.xml")
+        abortOnError false
     }
 
     // This is from OsmAndCore_android.aar - for some reason it's not inherited
