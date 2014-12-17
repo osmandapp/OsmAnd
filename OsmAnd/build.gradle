@@ -55,6 +55,10 @@ android {
         jumboMode = true
     }
 
+    packagingOptions {
+        exclude "lib/armeabi/libgnustl_shared.so"
+    }
+
     sourceSets {
         main {
             manifest.srcFile "AndroidManifest.xml"
@@ -211,7 +215,7 @@ task buildOsmAndCore(type: Exec) {
     description "Build Legacy OsmAndCore"
 
     if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
-        commandLine "sh", file("./old-ndk-build.sh").getAbsolutePath()
+        commandLine "bash", file("./old-ndk-build.sh").getAbsolutePath()
     } else {
         commandLine ""
     }
