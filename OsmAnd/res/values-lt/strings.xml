@@ -1879,5 +1879,5 @@
     <string name="traffic_warning_railways">Geležinkeliai</string>
 	<string name="traffic_waring_pedestrian">Pėstieji</string>
 	<string name="show_railway_warnings">Rodyti geležinkelių pervažas</string>
-	<string name="show_pedestrian_warnings">Rodyti pesčiųjų perėjas</string>
+	<string name="show_pedestrian_warnings">Rodyti pėsčiųjų perėjas</string>
     </resources>
