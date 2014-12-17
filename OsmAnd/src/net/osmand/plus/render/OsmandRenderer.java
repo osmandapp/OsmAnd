@@ -83,6 +83,7 @@ public class OsmandRenderer {
 	private static class IconDrawInfo {
 		float x = 0;
 		float y = 0;
+		String resId_1;
 		String resId;
 		String resId2;
 		String resId3;
@@ -351,12 +352,14 @@ public class OsmandRenderer {
 							}
 							if (coeff != 1f) {
 								Rect src = new Rect(0, 0, ico.getWidth(), ico.getHeight());
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId_1), rf, src);
 								drawBitmap(cv, ico, rf, src);
 								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId2), rf, src);
 								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId3), rf, src);
 								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId4), rf, src);
 								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId5), rf, src);
 							} else {
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId_1), rf);
 								drawBitmap(cv, ico, rf);
 								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId2), rf);
 								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId3), rf);
@@ -808,6 +811,7 @@ public class OsmandRenderer {
 			ico.iconOrder = render.getIntPropertyValue(render.ALL.R_ICON_ORDER, 100);
 			ico.iconSize = rc.getComplexValue(render, render.ALL.R_ICON_VISIBLE_SIZE, -1);
 			ico.shieldId = render.getStringPropertyValue(render.ALL.R_SHIELD);
+			ico.resId_1 = render.getStringPropertyValue(render.ALL.R_ICON__1);
 			ico.resId = resId;
 			ico.resId2 = render.getStringPropertyValue(render.ALL.R_ICON_2);
 			ico.resId3 = render.getStringPropertyValue(render.ALL.R_ICON_3);
