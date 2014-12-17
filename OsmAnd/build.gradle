@@ -1,16 +1,48 @@
 apply plugin: 'com.android.application'
 
+//<target name="fix_apostrophe_issues">
+//<replace token="version='1.0'" value="version=&quot;1.0&quot;" encoding="UTF-8">
+//<fileset dir="res" includes="**/strings.xml" />
+//</replace>
+//               <replace token="encoding='utf-8'" value="encoding=&quot;utf-8&quot;" encoding="UTF-8">
+//                       <fileset dir="res" includes="**/strings.xml" />
+//</replace>
+//
+//               <replaceregexp  match="([^\\])'" replace="\1\\\\'" flags="-g" byline="off" encoding="UTF-8">
+//                       <fileset dir="res" includes="**/strings.xml" />
+//</replaceregexp>
+//       </target>
+
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
 
+    signingConfigs {
+        development {
+            storeFile file("../keystores/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+
+        publishing {
+            storeFile file("osmand_key")
+            storePassword System.getenv("PWD")
+            keyAlias "androiddebugkey"
+            keyPassword System.getenv("PWD")
+        }
+    }
+
     defaultConfig {
-        minSdkVersion 7
+        minSdkVersion 9
         targetSdkVersion 21
+
+        versionCode System.getenv("APK_NUMBER_VERSION") ?: versionCode
+        versionName System.getenv("APK_VERSION") ?: versionName
     }
 
     lintOptions {
-        abortOnError false
+        lintConfig file("lint.xml")
     }
 
     // This is from OsmAndCore_android.aar - for some reason it's not inherited
@@ -25,64 +57,185 @@ android {
 
     sourceSets {
         main {
-            manifest {
-                srcFile "AndroidManifest.xml"
-            }
-            jni {
-                srcDirs = []
-            }
-            jniLibs {
-                srcDirs = ["libs"]
-            }
-            aidl {
-                srcDirs = ["src"]
-            }
-            java {
-                srcDirs = [
+            manifest.srcFile "AndroidManifest.xml"
+            jni.srcDirs = []
+            jniLibs.srcDirs = ["libs"]
+            aidl.srcDirs = ["src"]
+            java.srcDirs = [
                     "src",
-                    fileTree(dir: "../OsmAnd-java/src", exclude: "**/PlatformUtil.java")]
-            }
-            resources {
-                srcDirs = ["src", "../OsmAnd-java/src"]
-            }
-            renderscript {
-                srcDirs = ["src"]
-            }
-            res {
-                srcDirs = ["res"]
-            }
-            assets {
-                srcDirs = ["assets"]
-            }
+                    fileTree(dir: "../OsmAnd-java/src", exclude: "**/PlatformUtil.java"),
+                    "resourcesSrc"
+            ]
+            resources.srcDirs = [
+                    "src",
+                    "../OsmAnd-java/src",
+                    "resourcesSrc"
+            ]
+            renderscript.srcDirs = ["src"]
+            res.srcDirs = [
+                    "res",
+                    "../../resources/rendering_styles/style-icons/"
+            ]
+            assets.srcDirs = [
+                    "assets",
+                    "voiceAssets",
+                    "helpAssets"
+            ]
         }
     }
 
+    flavorDimensions "version", "distribution", "abi"
     productFlavors {
+        // ABI
         x86 {
+            flavorDimension "abi"
             ndk {
                 abiFilter "x86"
             }
         }
         mips {
+            flavorDimension "abi"
             ndk {
                 abiFilter "mips"
             }
         }
         armv7 {
+            flavorDimension "abi"
             ndk {
                 abiFilter "armeabi-v7a"
             }
         }
         armv5 {
+            flavorDimension "abi"
             ndk {
                 abiFilter "armeabi"
             }
         }
-        fat
+        fat {
+            flavorDimension "abi"
+        }
+
+        // Version
+        free {
+            flavorDimension "version"
+            applicationId "net.osmand"
+        }
+        paid {
+            flavorDimension "version"
+            applicationId "net.osmand.plus"
+        }
+        sherpafy {
+            flavorDimension "version"
+            applicationId "net.osmand.sherpafy"
+        }
+
+        // Distribution
+        googleplay {
+            flavorDimension "distribution"
+        }
+        amazon {
+            flavorDimension "distribution"
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.development
+        }
+        nativeDebug {
+            signingConfig signingConfigs.development
+        }
+        release {
+            signingConfig signingConfigs.publishing
+        }
+    }
+}
+
+task collectVoiceAssets(type: Sync) {
+    from "../../resources"
+    into "voiceAssets"
+    include "specialphrases/**"
+    include "voice/**/*.p"
+}
+
+task collectRoutingResources(type: Sync) {
+    from "../../resources/routing"
+    into "resourcesSrc/net/osmand/router"
+    include "*.xml"
+}
+
+task collectRenderingStyles(type: Sync) {
+    from "../../resources/rendering_styles"
+    into "resourcesSrc/net/osmand/render"
+    include "*.xml"
+}
+
+task collectRegionsInfo(type: Copy) {
+    from "../../resources/countries-info"
+    into "resourcesSrc/net/osmand/map"
+    include "regions.ocbf"
+}
+
+task collectHelpContents(type: Sync) {
+    from "../../help"
+    into "helpAssets"
+    include "*.html"
+    include "images/**/*.png"
+    include "*.css"
+}
+
+task collectMiscResources(type: Copy) {
+    from("../../../resources/obf_creation") {
+        include "rendering_types.xml"
+    }
+    from("../../../resources/poi") {
+        include "poi_types.xml"
+    }
+
+    into "resourcesSrc/net/osmand/osm"
+}
+
+task collectExternalResources << {}
+collectExternalResources.dependsOn collectVoiceAssets,
+        collectRoutingResources,
+        collectRenderingStyles,
+        collectRegionsInfo,
+        collectHelpContents,
+        collectMiscResources
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn << collectExternalResources
+}
+
+// Legacy core build
+import org.apache.tools.ant.taskdefs.condition.Os
+task buildOsmAndCore(type: Exec) {
+    description "Build Legacy OsmAndCore"
+
+    if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
+        commandLine "sh", file("../old-ndk-build.sh").getAbsolutePath()
+    } else {
+        commandLine ""
+    }
+}
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn << buildOsmAndCore
+}
+
+repositories {
+    ivy {
+        name = "OsmAndBinariesIvy"
+        url = "http://builder.osmand.net:81"
+        layout "pattern" , {
+            artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
+        }
     }
 }
 
 dependencies {
     compile "com.actionbarsherlock:actionbarsherlock:4.4.0@aar"
+    compile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+    debugCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
+    nativeDebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
+    releaseCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
     compile fileTree(dir: "libs", include: ["*.jar"])
 }

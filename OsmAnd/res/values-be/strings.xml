@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
@@ -1958,10 +1958,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="show_map">ПАКАЗАЦЬ МАПУ</string>
 	<string name="show_all">ПАКАЗАЦЬ УСЁ</string>
 	<string name="coordinates">Каардынаты</string>
-	<string name="error_avoid_specific_road">Аб\'езд не знойдзены</string>
+	<string name="error_avoid_specific_road">Бліжэйшая дарога не была знойдзена</string>
     <string name="use_opengl_render">Выкарыстоўваць OpenGL</string>
     <string name="use_opengl_render_descr">Выкарыстоўваць апаратнае паскарэньне OpenGL (можа не працаваць на некаторых прыстасаваньнях)</string>
-    <string name="everything_up_to_date">Усе файлы ў актуальным стане</string>
+    <string name="everything_up_to_date">Усё ў актуальным стане</string>
     <string name="dismiss">Скасаваць</string>
     <string name="no_internet_connection">Немагчыма спампаваць. Калі ласка, падлучыцеся да Wi-Fi, каб працягнуць.</string>
     <string name="download_tab_downloads">Усе загрузкі</string>
@@ -1985,7 +1985,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_value_default_name">Па змоўчаньні</string>
     <string name="rendering_attr_roadStyle_name">Стыль аўтадарог</string>
     <string name="show_pedestrian_warnings">Паказваць папярэджаньні для пешаходаў</string>
-    <string name="traffic_warning_pedestrian">Пешаходныя</string>
+    <string name="traffic_waring_pedestrian">Пешаходныя</string>
 	<string name="traffic_warning_railways">Чыгуначныя</string>
-	<string name="show_railway_warnings">Паказваць чыгуначныя пераезды</string>
+	<string name="show_railway_warnings">Паказваць чыгуначныя папярэджаньні</string>
 	</resources>

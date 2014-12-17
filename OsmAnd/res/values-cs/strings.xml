@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
@@ -1803,7 +1803,7 @@ s často kladenými otázkami.</string>
     <string name="rendering_value_orange_name">Oranžová</string>
     <string name="rendering_value_germanRoadAtlas_name">Německý atlas cest</string>
 	<string name="traffic_warning_railways">Železnice</string>
-	<string name="traffic_warning_pedestrian">Chodec</string>
+	<string name="traffic_waring_pedestrian">Chodec</string>
 	<string name="show_railway_warnings">Zobrazovat varování železnice</string>
 	<string name="show_pedestrian_warnings">Zobrazovat varování chodců</string>
     <string name="rendering_value_americanRoadAtlas_name">Americký atlas cest</string>
