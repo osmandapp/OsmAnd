@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -2039,7 +2039,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="routing_attr_no_new_routing_name">Gebruik routeberekening v1.9 niet</string>
     <string name="routing_attr_no_new_routing_description">Gebruik routeberekening v1.9 niet</string>
     <string name="traffic_warning_railways">Spoorwegen</string>
-	<string name="traffic_waring_pedestrian">Voetgangers</string>
+	<string name="traffic_warning_pedestrian">Voetgangers</string>
 	<string name="show_railway_warnings">Waarschuw voor spoorwegovergangen</string>
 	<string name="show_pedestrian_warnings">Waarschuw voor oversteekplaatsen</string>
     </resources>

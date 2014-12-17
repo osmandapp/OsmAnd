@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -1065,12 +1065,12 @@
 \n\t* Oppføringer i kursiv skrift indikerer data deaktiverte på enheten "</string>
 	<string name="first_time_msg">Takk for at du bruker OsmAnd. For mange funksjoner i dette programmet trenger du noen regionale offline-data som du kan laste ned via \'Innstillinger\' → \'Karthåndtering\'. Etterpå vil du være i stand til å se kart, finne adresser, lete etter interessepunkter og finne offentlig transport.</string>    
 	<string name="download_files">Last ned</string>
-	<string name="osmo_use_https_descr">Bruk sikker forbindelse med server</string>
+	<string name="osmo_use_https_descr">Bruk sikker forbindelse til server</string>
     <string name="osmo_use_https">Bruk HTTPS</string>
 	<string name="application_dir_change_warning2">Skal OsmAnd også kopiere datafilene til det nye stedet? Velg \'Nei\' for at OsmAnd kun skal opprette og bruke den nye mappen.</string>
-    <string name="error_avoid_specific_road">Nærmeste vei ble ikke funnet</string>
+    <string name="error_avoid_specific_road">Ingen omkjøring funnet</string>
     <string name="home_button">Hjem</string>
-    <string name="map_update">Det er %1$s kart å oppdatere</string>
+    <string name="map_update">Oppdateringer tilgjengelig for %1$s kart</string>
 	<string name="search_for">Søk etter</string>
 	<string name="show_map">VIS KART</string>
 	<string name="coordinates">Koordinater</string>
@@ -1078,7 +1078,7 @@
     <string name="download_tab_updates">Oppdateringer</string>
     <string name="no_internet_connection">Ikke mulig å laste ned. Koble til Wi-Fi for å fortsette.</string>
     <string name="dismiss">Avvis</string>
-    <string name="everything_up_to_date">Alt er oppdatert</string>
+    <string name="everything_up_to_date">Alle filer er oppdaterte</string>
     <string name="use_opengl_render">Bruk OpenGL-opptegning</string>
     <string name="use_opengl_render_descr">Bruk maskinvareakselerert OpenGL-opptegning (virker kanskje ikke på enkelte enheter)</string>
     <string name="map_locale">Språk på kart</string>
@@ -1182,7 +1182,7 @@
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">Tysk veiatlas</string>
 	<string name="traffic_warning_railways">Jernbaner</string>
-	<string name="traffic_waring_pedestrian">Fotgjenger</string>
+	<string name="traffic_warning_pedestrian">Fotgjenger</string>
 	<string name="show_railway_warnings">Vis jernbanevarsler</string>
 	<string name="show_pedestrian_warnings">Vis fotgjengervarsler</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk veiatlas</string>

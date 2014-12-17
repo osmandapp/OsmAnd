@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -1924,7 +1924,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_value_orange_name">Taronja</string>
     <string name="rendering_value_germanRoadAtlas_name">Atles de carreteres alemany</string>
 	<string name="traffic_warning_railways">Ferrocarril</string>
-	<string name="traffic_waring_pedestrian">Vianant</string>
+	<string name="traffic_warning_pedestrian">Vianant</string>
 	<string name="show_railway_warnings">Mostra avisos de ferrocarril</string>
 	<string name="show_pedestrian_warnings">Mostra avisos de vianant</string>
     <string name="rendering_value_americanRoadAtlas_name">Atles de carreteres americà</string>

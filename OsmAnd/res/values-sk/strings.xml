@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -1989,20 +1989,20 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="lock_screen_request_explanation">%1$s potrebuje toto oprávnenie na vypnutie obrazovky pre šetrenie energiou.</string>
     <string name="wake_on_voice_never">Nikdy</string>
     <string name="advanced_settings">Pokročilé</string>
-	<string name="osmo_use_https_descr">Použiť zabezpečené spojenie so serverom</string>
+	<string name="osmo_use_https_descr">Použiť zabezpečené spojenie na server</string>
     <string name="osmo_use_https">Použiť HTTPS</string>
 	<string name="home_button">Domov</string>
     <string name="search_for">Hľadať</string>
 	<string name="show_map">ZOBRAZIŤ MAPU</string>
 	<string name="show_all">ZOBRAZIŤ VŠETKO</string>
 	<string name="coordinates">Súradnice</string>
-	<string name="map_update">Máte %1$s aktualizácií máp</string>
-	<string name="error_avoid_specific_road">Nenašla sa najbližšia cesta</string>
+	<string name="map_update">Aktualizácie pre %1$s máp</string>
+	<string name="error_avoid_specific_road">Nenašla sa blízka cesta</string>
     <string name="dismiss">Odmietnuť</string>
-    <string name="everything_up_to_date">Všetko je aktuálne</string>
+    <string name="everything_up_to_date">Všetky súbory sú aktuálne</string>
     <string name="use_opengl_render">Použiť vykresľovanie OpenGL</string>
     <string name="use_opengl_render_descr">Použiť hardvérovo urýchľované vykresľovanie pomocou OpenGL (nemusí na niektorých zariadeniach fungovať)</string>
-    <string name="no_internet_connection">Nie je možné stiahnuť. Prosím pripojte sa na Wi-Fi, aby bolo možné pokračovať.</string>
+    <string name="no_internet_connection">Sťahovanie nie je možné, prosím pripojte sa na WiFi, aby bolo možné pokračovať.</string>
     <string name="navigate_point_zone">Zóna</string>
     <string name="download_tab_downloads">Všetky sťahovania</string>
     <string name="download_tab_updates">Aktualizácie</string>
@@ -2012,8 +2012,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="voices">Hlasové povely</string>
 	<string name="navigate_point_northing">Vertikálna súradnica</string>
     <string name="navigate_point_easting">Horizontálna súradnica</string>
-    <string name="dash_download_msg_none">Chcete stiahnuť nejaké offline mapy?</string>
-    <string name="dash_download_msg">Máte %1$s stiahnutých máp</string>
+    <string name="dash_download_msg_none">Chcete stiahnuť offline mapy?</string>
+    <string name="dash_download_msg">Stiahli ste %1$s máp</string>
     <string name="dash_download_new_one">Stiahnuť novú mapu</string>
     <string name="dash_download_manage">Spravovať</string>
     <string name="rendering_attr_roadStyle_name">Štýl cesty</string>
@@ -2021,7 +2021,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_orange_name">Oranžová</string>
     <string name="rendering_value_germanRoadAtlas_name">Nemecký atlas ciest</string>
 	<string name="traffic_warning_railways">Železnice</string>
-	<string name="traffic_waring_pedestrian">Chodec</string>
+	<string name="traffic_warning_pedestrian">Chodec</string>
 	<string name="show_railway_warnings">Zobrazovať varovania železnice</string>
 	<string name="show_pedestrian_warnings">Zobrazovať varovania chodcov</string>
     <string name="rendering_value_americanRoadAtlas_name">Americký atlas ciest</string>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -1865,7 +1865,7 @@
     <string name="rendering_value_germanRoadAtlas_name">德國道路地圖集</string>
     <string name="rendering_value_americanRoadAtlas_name">美國道路地圖集</string>
     <string name="traffic_warning_railways">鐵路</string>
-	<string name="traffic_waring_pedestrian">步行</string>
+	<string name="traffic_warning_pedestrian">步行</string>
 	<string name="show_railway_warnings">顯示鐵路警告</string>
 	<string name="show_pedestrian_warnings">顯示步行警告</string>
     </resources>

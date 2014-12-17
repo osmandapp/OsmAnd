@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
@@ -1804,7 +1804,7 @@
     <string name="rendering_value_orange_name">Narancs</string>
     <string name="rendering_value_germanRoadAtlas_name">Német autós atlasz</string>
 	<string name="traffic_warning_railways">Vasútvonalak</string>
-	<string name="traffic_waring_pedestrian">Gyalogos</string>
+	<string name="traffic_warning_pedestrian">Gyalogos</string>
 	<string name="show_railway_warnings">Vasúti figyelmeztetések megjelenítése</string>
 	<string name="show_pedestrian_warnings">Gyalogos figyelmeztetések megjelenítése</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikai autós atlasz</string>
