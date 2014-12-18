@@ -863,7 +863,7 @@
 \n\nRebreu un llistat de regions de Internet i podreu seleccionar per descarregar o actualitzar un arxiu. Fixeu-vos el selector de tipus d\'arxiu de la part superior de la pantalla per descarregar el que voleu (mapes normals, amb relleu, etc.).
 \n\nPodeu filtrar les opcions disponibles introduint les primeres lletres o podeu seleccionar l\'opció \'Configuració → \'Filtrar baixades\' per veure només les actualitzacions disponibles per les dades que ja teniu al vostre dispositiu.
 \n\n\t Color \'verd\' indica que les dades ja són actualitzades
-\n\t Color \'Blau\' indica que hi ha actualitzacions disponibles al servidor
+\n\t Color \'blau\' indica que hi ha actualitzacions disponibles al servidor
 \n\t Tipus de lletra cursiva indica que les dades estan desactivades al dispositiu "</string>
 	
 	
@@ -1839,7 +1839,7 @@
     <string name="download_tab_updates">Actualitzacions</string>
     <string name="download_tab_local">Local</string>
 	<string name="map_locale">Llengua del mapa</string>
-    <string name="rendering_attr_transportStops_name">Parades del transport</string>
+    <string name="rendering_attr_transportStops_name">Parades de transport</string>
     <string name="navigate_point_zone">Àrea</string>
     <string name="navigate_point_northing">Ordenada</string>
     <string name="navigate_point_easting">Abscissa</string>
@@ -1857,6 +1857,6 @@
 	<string name="show_railway_warnings">Mostra passos a nivell</string>
 	<string name="show_pedestrian_warnings">Mostra passos de zebra</string>
     <string name="rendering_value_americanRoadAtlas_name">Atles de carreteres americà</string>
-    <string name="routing_attr_no_new_routing_name">No utilitzeu la navegació de la v1.9</string>
-    <string name="routing_attr_no_new_routing_description">No feu ús de la navegació de la v1.9</string>
+    <string name="routing_attr_no_new_routing_name">Sense preferències de navegació v1.9</string>
+    <string name="routing_attr_no_new_routing_description">No feu ús de les preferències de navegació introduïdes a la v1.9</string>
     </resources>
