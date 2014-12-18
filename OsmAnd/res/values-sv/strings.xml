@@ -1752,8 +1752,8 @@
 	<string name="show_railway_warnings">Visa järnvägsövergångar</string>
 	<string name="show_pedestrian_warnings">Visa övergångsställen</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk vägkarta</string>
-    <string name="routing_attr_no_new_routing_name">Använd inte version 1.9-ruttning</string>
-    <string name="routing_attr_no_new_routing_description">Använd inte version 1.9-ruttning</string>
+    <string name="routing_attr_no_new_routing_name">Inga regler från version 1.9-ruttning</string>
+    <string name="routing_attr_no_new_routing_description">Använd inte de ruttningsregler som infördes i version 1.9</string>
     <string name="dash_download_msg_none">Vill du hämta offline-kartor?</string>
     <string name="dash_download_msg">Du har hämtat %1$s kartor</string>
     <string name="dash_download_new_one">Hämta ny karta</string>
