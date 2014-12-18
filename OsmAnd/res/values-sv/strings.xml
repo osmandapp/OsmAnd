@@ -865,7 +865,7 @@
 	<string name="loading_postcodes">Laddar postnummer …</string>
 	<string name="loading_streets">Laddar gator …</string>
 	<string name="loading_cities">Laddar städer …</string>
-	<string name="poi">POI</string>
+	<string name="poi">Intressepunkter (POI)</string>
 	<string name="arrived_at_destination">Du har anlänt till din destination</string>
 	<string name="close">Stäng</string>
 	<string name="loading_data">Laddar data …</string>
@@ -1738,7 +1738,7 @@
 	<string name="coordinates">Koordinater</string>
 	<string name="map_update">Det finns uppdateringar av %1$s kartor</string>
 	<string name="error_avoid_specific_road">Hittar ingen förbifart</string>
-    <string name="dismiss">Avfärda</string>
+    <string name="dismiss">Avvisa</string>
     <string name="everything_up_to_date">Alla filer är uppdaterade</string>
     <string name="use_opengl_render">Använd OpenGL-rendering</string>
     <string name="use_opengl_render_descr">Använd hårdvaruaccelererad OpenGL-rendering (fungerar kanske inte på vissa enheter)</string>
