@@ -743,6 +743,10 @@ public class RouteInfoWidgetsFactory {
 							locimgId = R.drawable.warnings_stop;
 							text = "";
 							//text = "STOP";
+						} else if(alarm.getType() == AlarmInfoType.RAILWAY) {
+							locimgId = R.drawable.warnings_railways;
+						} else if(alarm.getType() == AlarmInfoType.PEDESTRIAN) {
+							locimgId = R.drawable.warnings_pedestrian;
 						}
 						visible = (text != null &&  text.length() > 0) || locimgId != 0;
 						if (visible) {
