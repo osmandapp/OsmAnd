@@ -2046,5 +2046,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="show_pedestrian_warnings">Fußgänger-Übergänge anzeigen</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikanischer Straßenatlas</string>
     <string name="routing_attr_no_new_routing_name">Routing v1.9 nicht verwenden</string>
-    <string name="routing_attr_no_new_routing_description">Neue Routenberechnung nicht verwenden</string>
+    <string name="routing_attr_no_new_routing_description">Keine Routenberechnung nach dem neuen Algorithmus</string>
     </resources>
