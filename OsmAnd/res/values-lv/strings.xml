@@ -1888,4 +1888,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="wake_on_voice_never">Nekad</string>
     <string name="select_impassable_road">Arzīmēt kartē</string>
     <string name="impassable_road">Izvairīties no ceļiem…</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Vilciena maršruti</string>
+    <string name="rendering_attr_tramRoutes_name">Tramvaja maršruti</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">"Kopīgot  taksometru maršrutus"</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Trolejbusu maršruti</string>
+    <string name="rendering_attr_busRoutes_name">Autobusu maršruti</string>
+    <string name="rendering_category_hide">Paslēpt</string>
+    <string name="rendering_category_routes">Maršruti</string>
     </resources>
