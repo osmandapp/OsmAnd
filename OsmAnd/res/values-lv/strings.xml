@@ -346,12 +346,11 @@
   <string name="tip_app_mode">Lietotāja profils</string>
   
   <string name="tip_navigation">Navigācija</string>
-  <string name="tip_navigation_t">Pirms sākt navigāciju, jums jāizvēlas galapunkts, tad nospiediet \'Izvēlne\' -&gt; \'Navigācija\' uz kartes un izvēlieties navigācijas veidu.
-		\n\nGalapunkts ir atzīmēts uz kartes kā oranžs punkts un OsmAnd rāda attālumu līdz tam and norādes.
-		\n\nJūs varat izvēlēties "sākt navigāciju", kas dos jums balss instrukcijas vai "rādīt maršrutu" bez vadības.
-		\n\nLai parādītu maršrutu no jebkura punkta uz jūsu pašreizējo atrašanās vietu, iezīmejiet punktu uz kartes un izvēlieties "norādes uz...".
-		\n\nJa lietosiet "norādes uz..." kopā ar "sākt navigāciju", OsmAnd pārslēgsies uz jūsu pašreizējo ātrašanās vietu, tiklīdz tā būs noteikta, kamēr "norādes uz..." kopā ar "rādīt maršrutu" tikai parādīs maršrutu no jebkura punkta, jūs esat izvēlējies, bez automātiskas kartes atjauinošanās.
-	</string>
+  <string name="tip_navigation_t">"Pirms sākt navigāciju, jums jāizvēlas galapunkts, tad nospiediet \'Izvēlne\' -&gt; \'Navigācija\' un izvēlieties navigācijas veidu.
+\n\nGalapunkts ir atzīmēts kā oranžs punkts uz kartes, līdz kuram OsmAnd rāda attālumu un norādes.
+\n\nJūs varat izvēlēties sākt navigāciju, kas dos jums balss instrukcijas vai rādīt maršrutu bez vadības.
+\n\nLai parādītu maršrutu no jebkura punkta uz jūsu pašreizējo atrašanās vietu, iezīmējiet punktu uz kartes un izvēlieties norādes uz....
+\n\nJa lietosiet norādes uz... kopā ar sākt navigāciju, OsmAnd pārslēgsies uz jūsu pašreizējo atrašanās vietu, tiklīdz tā būs noteikta, kamēr norādes uz... kopā ar rādīt maršrutu tikai parādīs maršrutu no jebkura punkta, ko jūs esat izvēlējies, bez automātiskas kartes atjaunošanās. "</string>
   <string name="tip_search">Meklē</string>
   <string name="tip_search_t">\tJūs variet meklēt vietas tieši kartē, pēc adreses, atrašanās vietas, kā POI, vai arī kā iepriekš definētu izlases punktu.
 \n\tNospiežot galvenajā izvēlnē \'Meklēt\' atver meklēšanas logu. Katram atrastajam ierakstam tiek piedāvātas divas iespējas: \'Izvēlēties kā galamērķi\' vai \'Rādīt kartē\'.</string>
@@ -1027,7 +1026,7 @@
 	<string name="day_night_info_description">Saullēkts: %1$s\nSaulriets: %2$s</string>
 	<string name="day_night_info">Dienas/nakts info</string>
 	<string name="map_widget_day_night">Dienas/nakts karte</string>
-	<string name="map_widget_vector_attributes">Renderēšanas attribūti:</string>
+	<string name="map_widget_vector_attributes">Renderēšanas attribūti</string>
 	<string name="map_widget_renderer">Renderēšananas veids</string>
 	<string name="int_continuosly">Nepārtraukti</string>
 	<string name="map_widget_show_destination_arrow">Rādīt mērķa virzienu</string>
@@ -1895,4 +1894,36 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="rendering_attr_busRoutes_name">Autobusu maršruti</string>
     <string name="rendering_category_hide">Paslēpt</string>
     <string name="rendering_category_routes">Maršruti</string>
-    </resources>
+    <string name="rendering_category_details">Detaļas</string>
+    <string name="rendering_category_transport">Transports</string>
+    <string name="rendering_category_others">Citi kartes atribūti</string>
+    <string name="map_widget_appearance_rem">Atlikušie elementi</string>
+    <string name="map_widget_top">Statusa josla</string>
+	<string name="map_widget_right">Labais panelis</string>
+	<string name="map_widget_left">Kreisais panelis</string>
+    <string name="layers_category_show">Rādīt</string>
+	<string name="configure_map">Konfigurēt karti</string>
+    <string name="osmo_device_not_found">Ierīce nav atrasta</string>
+    <string name="anonymous_user">Anonīms lietotājs</string>
+    <string name="anonymous_user_hint">Anonīms lietotājs nevar pārvaldīt grupas.</string>
+    <string name="osmo_no_connection_msg">OsMo serviss nav pieejams, pārbaudiet interneta savienojumu un uzstādījumus, vairāk Twitter vietnē: https://twitter.com/OsMomobi</string>
+    <string name="logged_as">Pievienojies kā %1$s</string>
+	<string name="speed_limit_exceed">Braukšanas ātruma pieļaujamās robežas</string>
+	<string name="speed_limit_exceed_message">Pārsniedzot noteikto robežu, saņemsiet balss brīdinājumu.</string>
+	<string name="fav_point_emoticons_message">Izlases vietas vārds tika pārdēvēts uz %1$s, lai varētu saglabāt kopu ar sejiņām failā.</string>
+    <string name="print_route">Printēt maršrutu</string>
+    <string name="fav_point_dublicate">Šāds vārds izlasē jau eksistē</string>
+    <string name="fav_point_dublicate_message">Mēs pārdēvējām izlases vietas vārdu uz %1$s, lai izvairītos no vienādiem vārdiem.</string>
+    <string name="text_size_descr">Teksta lielums uz kartes.</string>
+    <string name="text_size">Teksta lielums</string>
+    <string name="traffic_warning_speed_limit">Ātruma robeža</string>
+    <string name="traffic_warning_border_control">Robežkontrole</string>
+    <string name="traffic_warning_payment">Nodevu stends</string>
+    <string name="traffic_warning_stop">STOP zīme</string>
+    <string name="traffic_warning_calming">Satiksmes intensitāte</string>
+    <string name="traffic_warning_speed_camera">Fotoradars</string>
+    <string name="traffic_warning">Satiksmes brīdinājums</string>
+	<string name="speak_favorites">Ziņot tuvumā esošas izlases vietas</string>
+	<string name="speak_poi">Ziņot tuvumā esošus POI</string>
+	<string name="way_alarms">Satiksmes brīdinājumi</string>
+	</resources>
