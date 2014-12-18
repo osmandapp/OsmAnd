@@ -44,7 +44,7 @@ android {
     lintOptions {
         lintConfig file("lint.xml")
         abortOnError false
-        checkReleaseBuilds false
+        warningsAsErrors false
     }
 
     // This is from OsmAndCore_android.aar - for some reason it's not inherited
@@ -126,18 +126,22 @@ android {
             flavorDimension "version"
             applicationId "net.osmand.plus"
         }
+        /*
         sherpafy {
             flavorDimension "version"
             applicationId "net.osmand.sherpafy"
         }
+        */
 
         // Distribution
         googleplay {
             flavorDimension "distribution"
         }
+        /*
         amazon {
             flavorDimension "distribution"
         }
+        */
     }
 
     buildTypes {
@@ -215,7 +219,7 @@ task buildOsmAndCore(type: Exec) {
     if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
         commandLine "bash", file("./old-ndk-build.sh").getAbsolutePath()
     } else {
-        commandLine ""
+        commandLine "cmd", "/c", "echo", "Not supported"
     }
 }
 task cleanupDuplicatesInCore(type: Delete) {
