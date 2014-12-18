@@ -47,11 +47,9 @@
                 </TableRow>
 
                 <TableRow
-                    android:id="@id/TableRow"
                     android:layout_marginLeft="5dp">
 
                     <TextView
-                        android:id="@id/TextView"
                         android:text="@string/search_address_city" />
 
                     <Button
@@ -71,11 +69,9 @@
                 </TableRow>
 
                 <TableRow
-                    android:id="@id/TableRow"
                     android:layout_marginLeft="5dp">
 
                     <TextView
-                        android:id="@id/TextView"
                         android:text="@string/search_address_street" />
 
                     <Button
@@ -95,7 +91,6 @@
                 </TableRow>
 
                 <TableRow
-                    android:id="@id/TableRow"
                     android:layout_marginLeft="5dp">
 
                     <TextView

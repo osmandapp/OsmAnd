@@ -141,7 +141,7 @@ public class MapActivityActions implements DialogProvider {
 		builder.setTitle(R.string.add_waypoint_dialog_title);
 		FrameLayout parent = new FrameLayout(mapActivity);
 		final EditText editText = new EditText(mapActivity);
-		editText.setId(R.id.TextView);
+		editText.setId(android.R.id.edit);
 		parent.setPadding(15, 0, 15, 0);
 		parent.addView(editText);
 		builder.setView(parent);
@@ -540,7 +540,7 @@ public class MapActivityActions implements DialogProvider {
 					args.getDouble(KEY_LATITUDE), args.getDouble(KEY_LONGITUDE),args.getString(KEY_NAME));
 			break;
 		case DIALOG_ADD_WAYPOINT:
-			EditText v = (EditText) dialog.getWindow().findViewById(R.id.TextView);
+			EditText v = (EditText) dialog.getWindow().findViewById(android.R.id.edit);
 			v.setPadding(5, 0, 5, 0);
 			if(args.getString(KEY_NAME) != null) {
 				v.setText(args.getString(KEY_NAME));

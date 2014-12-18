@@ -200,7 +200,7 @@ public class MapRendererContext {
 		}
 		// Create new OBF map symbols provider
 		obfMapSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider, getReferenceTileSize(),
-				app.getSettings().TEXT_SCALE.get() / Math.max(1, density) );
+				app.getSettings().TEXT_SCALE.get());
 		// If there's bound view, add new provider
 		if (mapRendererView != null) {
 			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
