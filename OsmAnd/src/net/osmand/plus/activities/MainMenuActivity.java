@@ -9,6 +9,8 @@ import java.util.Random;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.Gravity;
+import android.view.ViewTreeObserver;
+import android.widget.LinearLayout;
 import net.osmand.Location;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -113,7 +115,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		setupContributionVersion();
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			FloatingActionButton fabButton = new FloatingActionButton.Builder(this)
+			final FloatingActionButton fabButton = new FloatingActionButton.Builder(this)
 					.withDrawable(getResources().getDrawable(R.drawable.ic_action_map))
 					.withButtonColor(Color.parseColor("#ff8f00"))
 					.withGravity(Gravity.BOTTOM | Gravity.RIGHT)
@@ -124,6 +126,37 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 				public void onClick(View view) {
 					startMapActivity();
 				}
+			});
+
+			final ScrollView mainScroll = (ScrollView) findViewById(R.id.main_scroll);
+			if (mainScroll == null){
+				return;
+			}
+			mainScroll.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+				private int previousScroll = 0;
+
+				@Override
+				public void onScrollChanged() {
+					int scrollY = mainScroll.getScrollY();
+					if (previousScroll == scrollY){
+						return;
+					}
+
+					if (scrollY > previousScroll && previousScroll >= 0){
+						if (!fabButton.isHidden() ){
+							fabButton.hideFloatingActionButton();
+						}
+					} else {
+						int layoutHeight = mainScroll.getChildAt(0).getMeasuredHeight();
+						int scrollHeight = scrollY + mainScroll.getHeight();
+						//scroll can actually be more than entire layout height
+						if (fabButton.isHidden() && scrollHeight < layoutHeight){
+							fabButton.showFloatingActionButton();
+						}
+					}
+					previousScroll = scrollY;
+				}
+
 			});
 		}
 	}
