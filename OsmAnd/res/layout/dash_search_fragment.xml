@@ -3,7 +3,6 @@
     android:id="@+id/search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="4dp"
     android:background="@drawable/bg_cardui"
     android:orientation="vertical" >
 
@@ -14,7 +13,7 @@
         	android:id="@+id/search_for"
         	style="@style/DashboardSubHeader"
         	android:layout_width="wrap_content"
-        	android:layout_height="40dp"
+        	android:layout_height="@dimen/dashHeaderHeight"
         	android:text="@string/search_for" />
     </LinearLayout>
 
@@ -25,7 +24,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="@dimen/dashSearchBtnHeight"
         android:orientation="horizontal" >
 
         <Button
@@ -64,7 +63,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="90dp"
+        android:layout_height="@dimen/dashSearchBtnHeight"
         android:orientation="horizontal" >
 
         <Button
