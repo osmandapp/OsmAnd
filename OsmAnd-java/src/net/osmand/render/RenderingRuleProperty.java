@@ -166,7 +166,7 @@ public class RenderingRuleProperty {
 			try {
 				return parseColor(value);
 			} catch (RuntimeException e) {
-				log.error("Rendering parse " + e.getMessage());
+				log.error("Rendering parse " + e.getMessage() + " in " + attrName);
 			}
 			return -1;
 		} else if(type == FLOAT_TYPE){
@@ -178,7 +178,7 @@ public class RenderingRuleProperty {
 				}
 				return 0;
 			} catch (NumberFormatException e) {
-				log.error("Rendering parse " + value);
+				log.error("Rendering parse " + value + " in " + attrName);
 			}
 			return -1;
 		} else {
@@ -198,7 +198,7 @@ public class RenderingRuleProperty {
 				}
 				return Float.parseFloat(value);
 			} catch (NumberFormatException e) {
-				log.error("Rendering parse " + value);
+				log.error("Rendering parse " + value + " in " + attrName);
 			}
 			return -1;
 		} else {
