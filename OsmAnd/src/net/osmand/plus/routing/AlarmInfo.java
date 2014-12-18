@@ -11,12 +11,12 @@ public class AlarmInfo implements LocationPoint {
 		SPEED_CAMERA(1),
 		SPEED_LIMIT(2),
 		BORDER_CONTROL(3),
-		TRAFFIC_CALMING(4),
-		TOLL_BOOTH(5),
-		STOP(6),
-		MAXIMUM(7),
+		RAILWAY(4),
+		TRAFFIC_CALMING(5),
+		TOLL_BOOTH(6),
+		STOP(7),
 		PEDESTRIAN(8),
-		RAILWAY(9);
+		MAXIMUM(9);
 		
 		private int priority;
 
