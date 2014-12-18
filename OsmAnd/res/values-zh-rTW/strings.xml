@@ -1857,8 +1857,8 @@
     <string name="dash_download_msg">您已下載了 %1$s 的地圖</string>
     <string name="dash_download_new_one">下載新的地圖</string>
     <string name="dash_download_manage">管理</string>
-    <string name="routing_attr_no_new_routing_name">不使用 v1.9 的路徑</string>
-    <string name="routing_attr_no_new_routing_description">不使用 v1.9 的路徑</string>
+    <string name="routing_attr_no_new_routing_name">不用 v1.9 的路徑規則</string>
+    <string name="routing_attr_no_new_routing_description">在 v1.9 不使用路徑規則引導</string>
     <string name="rendering_attr_roadStyle_name">道路樣式</string>
     <string name="rendering_value_default_name">預設</string>
     <string name="rendering_value_orange_name">橙色</string>
