@@ -1979,8 +1979,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="rendering_value_orange_name">Аранжавы</string>
     <string name="rendering_value_germanRoadAtlas_name">Нямецкі атлас аўтадарог</string>
     <string name="rendering_value_americanRoadAtlas_name">Амерыканскі атлас аўтадарог</string>
-    <string name="routing_attr_no_new_routing_name">Не выкарыстоўваць маршрутызацыю v1.9</string>
-    <string name="routing_attr_no_new_routing_description">Не выкарыстоўваць маршрутызацыю v1.9</string>
+    <string name="routing_attr_no_new_routing_name">Без правілаў маршрутызацыі v1.9</string>
+    <string name="routing_attr_no_new_routing_description">Не выкарыстоўваць правілы маршрутызацыі ўведзеныя ў v1.9</string>
     <string name="rendering_value_default_name">Па змоўчаньні</string>
     <string name="rendering_attr_roadStyle_name">Стыль аўтадарог</string>
     <string name="show_pedestrian_warnings">Паказваць папярэджаньні для пешаходаў</string>
