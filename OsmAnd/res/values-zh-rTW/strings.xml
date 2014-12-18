@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -474,7 +474,7 @@
 	<string name="voice_not_use">不要使用</string>
 	<string name="voice_not_specified">無</string>
 	<string name="installing_new_resources">安裝新資料…</string>
-	<string name="internet_connection_required_for_online_route">選用線上導航服務，但是沒有能使用的網路連線。</string>
+	<string name="internet_connection_required_for_online_route">選用線上導航服務，但是無可用的網路連線。</string>
 	<string name="tts_language_not_supported_title">該語言未支援</string>
 	<string name="tts_language_not_supported">選用的語言 Android TTS 引擎未支援，您要到 Play 商場找其它引擎嗎？否則使用之前設定的語言。</string>
 	<string name="tts_missing_language_data_title">資料遺失</string>
@@ -502,7 +502,7 @@
 	<string name="map_overlay_descr">選擇上層地圖</string>
 	<string name="tile_source_already_installed">地圖已安裝，設定將被更新</string>
 	<string name="select_tile_source_to_install">選擇要安裝或更新的(圖磚)地圖</string>
-	<string name="internet_not_available">因網際網路無法連線，所以無法操作</string>
+	<string name="internet_not_available">此操作無法使用，因為需要網路連線</string>
 	<string name="install_more">安裝更多…</string>
 	<string name="level_to_switch_vector_raster_descr">向量地圖使用最小的縮放比級別</string>
 	<string name="level_to_switch_vector_raster">最小向量縮放比級別</string>
@@ -1025,7 +1025,7 @@
     <string name="cancel_route">排除路線</string>
     <string name="cancel_navigation">停止導航</string>
     <string name="clear_destination">清除目的地</string>
-    <string name="download_using_mobile_internet">現在 WiFi 並未連線。您想要使用目前的網路連線繼續下載嗎？</string>
+    <string name="download_using_mobile_internet">WiFi 現在並未連線。您想要使用目前的網路連線下載嗎？</string>
     <string name="street_name">街道</string>
 	<string name="hno">門牌號碼</string>
     <string name="monitoring_settings">旅程記錄</string>
@@ -1472,7 +1472,7 @@
     <string name="route_info">路線資訊</string>
     <string name="keep_and_add_destination_point">加為目的地標點</string>
     <string name="use_displayed_track_for_navigation">您是否要將顯示軌跡使用於導航？</string>
-    <string name="calculate_osmand_route_without_internet">OsmAnd 預估的路段沒有網際網路</string>
+    <string name="calculate_osmand_route_without_internet">OsmAnd 預計的路段沒有網際網路</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd 預估最初和最後路段的路線</string>
     <string name="tip_recent_changes_1_7_1_t">"在1.7的變更：
 \n\t* 重要，地圖應該會比 2014 年 2 月更新。
@@ -1684,7 +1684,7 @@
     <string name="local_index_unselect_gpx_file">取消選擇</string>
     <string name="local_index_select_gpx_file">選取要顯示的</string>
     <string name="route_descr_destination">目的地</string>
-    <string name="no_index_file_to_download">無法下載，請檢查網路連線。</string>
+    <string name="no_index_file_to_download">無法下載，請檢查您的網路連線。</string>
     <string name="osmo_gpx_points_downloaded">OsMo 標點 %1$s 已下載。</string>
     <string name="osmo_auto_connect_descr">自動連線至服務，隨後啟動應用程式</string>
     <string name="osmo_auto_connect">自動連線</string>
@@ -1826,24 +1826,24 @@
     <string name="rendering_attr_tramTrainRoutes_name">有軌電車和火車路線</string>
     <string name="rendering_category_hide">隱藏</string>
     <string name="wake_on_voice">開啟螢幕</string>
-    <string name="wake_on_voice_descr">當接近轉彎時，開啟手機螢幕</string>
+    <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕</string>
     <string name="lock_screen_request_explanation">為了節電作用 %1$s 需要此許可權才能關閉螢幕。</string>
     <string name="wake_on_voice_never">永不</string>
     <string name="advanced_settings">進階</string>
-	<string name="osmo_use_https_descr">使用安全協定連線於伺服器</string>
+	<string name="osmo_use_https_descr">使用安全協定連線到伺服器</string>
     <string name="osmo_use_https">使用 HTTPS</string>
-	<string name="map_update">您有 %1$ 個地圖更新</string>
+	<string name="map_update">有 %1$ 個地圖可更新</string>
 	<string name="search_for">查尋</string>
 	<string name="show_map">顯示地圖</string>
 	<string name="show_all">全部顯示</string>
 	<string name="coordinates">座標</string>
 	<string name="home_button">首頁</string>
-    <string name="error_avoid_specific_road">找不到最近的路</string>
-    <string name="everything_up_to_date">一切都為最新的</string>
+    <string name="error_avoid_specific_road">沒發現支道</string>
+    <string name="everything_up_to_date">全部都是最新的檔案</string>
     <string name="use_opengl_render">使用 OpenGL 繪製</string>
     <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能在某些裝置上無法工作）</string>
     <string name="dismiss">排除</string>
-    <string name="no_internet_connection">不能下載。請連接到 Wifi 網路進行。</string>
+    <string name="no_internet_connection">不能下載。請檢查您的網路連線。</string>
     <string name="download_tab_downloads">全部下載</string>
     <string name="download_tab_updates">更新</string>
     <string name="download_tab_local">本機</string>
@@ -1853,9 +1853,9 @@
     <string name="map_locale">地圖上的語言</string>
     <string name="rendering_attr_transportStops_name">候車亭</string>
     <string name="voices">提示語音</string>
-	<string name="dash_download_msg_none">您想要下載任何的離線地圖嗎？</string>
-    <string name="dash_download_msg">您有 %1$s 的地圖已下載</string>
-    <string name="dash_download_new_one">下載新地圖</string>
+	<string name="dash_download_msg_none">您想要下載離線地圖嗎？</string>
+    <string name="dash_download_msg">您已下載了 %1$s 的地圖</string>
+    <string name="dash_download_new_one">下載新的地圖</string>
     <string name="dash_download_manage">管理</string>
     <string name="routing_attr_no_new_routing_name">不使用 v1.9 的路徑</string>
     <string name="routing_attr_no_new_routing_description">不使用 v1.9 的路徑</string>
@@ -1866,6 +1866,6 @@
     <string name="rendering_value_americanRoadAtlas_name">美國道路地圖集</string>
     <string name="traffic_warning_railways">鐵路</string>
 	<string name="traffic_warning_pedestrian">步行</string>
-	<string name="show_railway_warnings">顯示鐵路警告</string>
-	<string name="show_pedestrian_warnings">顯示步行警告</string>
+	<string name="show_railway_warnings">顯示鐵路平交道</string>
+	<string name="show_pedestrian_warnings">顯示行人穿越道</string>
     </resources>
