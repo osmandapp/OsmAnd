@@ -11,18 +11,18 @@
 	<string name="poi_bakery">Panificio</string>
 	<string name="poi_alcohol">Alcolici</string>
 	<string name="poi_convenience">Drogheria</string>
-	<string name="poi_beverages">Negozio bevande</string>
+	<string name="poi_beverages">Negozio di bevande</string>
 	<string name="poi_butcher">Macelleria</string>
 	<string name="poi_deli">Gastronomia</string>
 	<string name="poi_shop_farm">Vendita prodotti di fattoria</string>
 	<string name="poi_greengrocer">Fruttivendolo</string>
-	<string name="poi_confectionery">Negozio dolciumi</string>
+	<string name="poi_confectionery">Negozio di dolciumi</string>
 	<string name="poi_ice_cream">Gelateria</string>
 	<string name="poi_shop_tea">Negozio di té</string>
 	<string name="poi_dairy">Latteria</string>
 	<string name="poi_antiques_shop">Antiquariato</string>
 	<string name="poi_art_shop">Galleria</string>
-	<string name="poi_baby_goods">Negozio bambini</string>
+	<string name="poi_baby_goods">Articoli per l\'infanzia</string>
 	<string name="poi_bag_shop">Valigeria</string>
 	<string name="poi_bathroom_furnishing_shop">Arredo bagno</string>
 	<string name="poi_bed_shop">Arredamento camera da letto</string>
@@ -40,7 +40,7 @@
 	<string name="poi_doityourself_shop">Negozio per fai-da-te</string>
 	<string name="poi_erotic_shop">Sexy shop</string>
 	<string name="poi_fishing_shop">Negozio pesca</string>
-	<string name="poi_florist">Fioreria-fiorista</string>
+	<string name="poi_florist">Fioreria / fiorista</string>
 	<string name="poi_frame_shop">Cornici</string>
 	<string name="poi_furniture_shop">Negozio mobili</string>
 	<string name="poi_garden_centre">Articoli per Giardinaggio</string>
@@ -52,7 +52,7 @@
 	<string name="poi_lift_gate">Ponte levatoio</string>
 	<string name="poi_traffic_calming_bump">Dosso</string>
 	<string name="poi_traffic_calming_chicane">Chicane</string>
-	<string name="poi_traffic_calming_rumble_strip">Striscie rallentatrici</string>
+	<string name="poi_traffic_calming_rumble_strip">Strisce rallentatrici</string>
 	<string name="poi_car_repair">Autoriparatore</string>
 	<string name="poi_service_tyres">Gommista</string>
 	<string name="poi_vehicle_inspection">Centro revisioni</string>
@@ -79,14 +79,14 @@
 	<string name="poi_bicycle_parking">Parcheggio bici</string>
 
 	<string name="poi_anime_shop">Negozio anime</string>
-	<string name="poi_boutique">Boutique moda</string>
+	<string name="poi_boutique">Boutique</string>
 	<string name="poi_general_shop">Emporio</string>
 	<string name="poi_gift_shop">Negozio regali</string>
 	<string name="poi_glaziery_shop">Vetreria</string>
 	<string name="poi_hardware_shop">Ferramenta</string>
 	<string name="poi_hearing_aids_shop">Negozi apparecchi acustici</string>
 	<string name="poi_herbalist">Negozio erba</string>
-	<string name="poi_hifi_shop">Negozio HiFi</string>
+	<string name="poi_hifi_shop">Negozio di HiFi</string>
 	<string name="poi_hunting_shop">Negozio caccia-pesca</string>
 	<string name="poi_interior_decoration_shop">Negozio decorazione d\'interni</string>
 	<string name="poi_jewelry_shop">Gioielleria</string>
@@ -204,7 +204,7 @@
 	<string name="poi_healthcare_centre">Centro medico</string>
 	<string name="poi_midwife">Levatrice</string>
 	<string name="poi_optometrist">Optometrista</string>
-	<string name="poi_physiotherapist">Fisioterpista</string>
+	<string name="poi_physiotherapist">Fisioterapista</string>
 	<string name="poi_psychotherapist">Psicoterapeuta</string>
 	<string name="poi_speech_therapist">Logopedista</string>
 	<string name="poi_insurance">Assicurazione</string>
@@ -356,7 +356,7 @@
 	<string name="poi_tram_stop">Fermata tram (absoleta)</string>
 	<string name="poi_aeroway_terminal">Terminal aeroporto</string>
 	<string name="poi_slipway">Scivolo</string>
-	<string name="poi_ferry_terminal">Terminal traghetto</string>
+	<string name="poi_ferry_terminal">Terminal traghetti</string>
 	<string name="poi_lighthouse">Faro</string>
 
 	<string name="poi_aerialway_station">Stazione skilift</string>
@@ -426,8 +426,8 @@
 	<string name="poi_club_chess">Club scacchistico</string>
 	<string name="poi_club_cinema">Club cinefili</string>
 	<string name="poi_club_fan">Fan club</string>
-	<string name="poi_club_fishing">Club pesca</string>
-	<string name="poi_club_veterans">Club veterani</string>
+	<string name="poi_club_fishing">Club di pesca</string>
+	<string name="poi_club_veterans">Club di veterani</string>
 	<string name="poi_club_linux">Club Linux Lug</string>
 	<string name="poi_club_theatre">Club teatrale</string>
 	<string name="poi_club_photography">Club fotografico</string>
@@ -514,4 +514,43 @@
 	<string name="poi_telecommunication_office">Ufficio telecomunicazioni</string>
 	<string name="poi_american_football">Football americano</string>
 	<string name="poi_bmx_sport">BMX</string>
+	<string name="poi_taxi">Posteggio taxi</string>
+
+	<string name="poi_motorway_junction">Svincolo autostradale</string>
+
+	<string name="poi_customs">Dogana</string>
+	<string name="poi_podiatrist">Podologo</string>
+	<string name="poi_company">Azienda</string>
+	<string name="poi_lawyer">Avvocato</string>
+	<string name="poi_golf_course">Campo da golf</string>
+	<string name="poi_horse_track">Ippodromo</string>
+	<string name="poi_9pin">Bowling a nove birilli</string>
+	<string name="poi_10pin">Bowling a dieci birilli</string>
+	<string name="poi_climbing">Arrampicata</string>
+	<string name="poi_croquet">Croquet</string>
+	<string name="poi_scuba_diving">Immersioni subacquee</string>
+	<string name="poi_ice_stock">Stock sport</string>
+	<string name="poi_korfbal">Korfball</string>
+	<string name="poi_orienteering">Orientamento</string>
+	<string name="poi_paddle_tennis">Paddle tennis</string>
+	<string name="poi_surfing">Surf</string>
+	<string name="poi_artwork">Opera d\'arte</string>
+	<string name="poi_cannon">Cannone storico</string>
+	<string name="poi_ferris_wheel">Ruota panoramica</string>
+	<string name="poi_carousel">Giostra</string>
+	<string name="poi_maze">Labirinto</string>
+	<string name="poi_roller_coaster">Montagne russe</string>
+	<string name="poi_summer_toboggan">Toboga estivo</string>
+	<string name="poi_place_of_worship_jewish">Luogo di culto: ebreo</string>
+	<string name="poi_geyser">Geyser</string>
+	<string name="poi_arts_centre">Centro artistico</string>
+	<string name="poi_fishing_place">Postazione di pesca</string>
+	<string name="poi_harbour">Porto</string>
+	<string name="poi_biergarten">Biergarten</string>
+	<string name="poi_agricultural_engines_craft">Motori agricoli</string>
+	<string name="poi_basket_maker">Cestaio</string>
+	<string name="poi_cape">Capo</string>
+	<string name="poi_strait">Stretto</string>
+	<string name="poi_seamark_anchorage">Ancoraggio</string>
+	<string name="poi_seamark_harbour">Porto</string>
 	</resources>
