@@ -1843,7 +1843,7 @@
     <string name="rendering_value_germanRoadAtlas_name">Атлас дорог Германии</string>
     <string name="rendering_value_americanRoadAtlas_name">Атлас дорог Америки</string>
     <string name="routing_attr_no_new_routing_name">Не использовать маршрутизацию версии 1.9</string>
-    <string name="routing_attr_no_new_routing_description">Не использовать для построение маршрута алгоритм версии 1.9</string>
+    <string name="routing_attr_no_new_routing_description">Не использовать для построение маршрута алгоритм представленный в версии 1.9</string>
     <string name="show_railway_warnings">Показывать ж/д переезды</string>
 	<string name="show_pedestrian_warnings">Показывать пешеходные переходы</string>
     <string name="traffic_warning_railways">Железная дорога</string>
