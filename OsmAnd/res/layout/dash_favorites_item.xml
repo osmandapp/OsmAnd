@@ -4,7 +4,7 @@
 			  android:orientation="vertical"
 			  android:layout_width="match_parent"
 			  android:background="@drawable/dashboard_button"
-			  android:layout_height="50dp">
+			  android:layout_height="@dimen/dashListItemHeight">
     <View android:layout_width="match_parent"
           android:background="@color/dashboard_divider"
           android:layout_height="1dp"/>
@@ -13,18 +13,17 @@
                   android:layout_height="match_parent">
         <ImageView android:id="@+id/icon"
                    android:layout_gravity="center_vertical"
-                   android:layout_marginLeft="12dp"
-                   android:layout_marginRight="12dp"
-                   android:layout_width="28dp"
-                   android:layout_height="28dp"/>
-
+                   android:layout_marginLeft="@dimen/dashFavIconMargin"
+                   android:layout_marginRight="@dimen/dashFavIconMargin"
+                   android:layout_width="wrap_content"
+                   android:layout_height="fill_parent"/>
         <LinearLayout android:orientation="vertical"
                       android:layout_weight="1"
                       android:layout_gravity="center_vertical"
                       android:layout_width="0dp"
                       android:layout_height="wrap_content">
             <TextView android:id="@+id/name"
-                      android:textSize="16sp"
+                      android:textSize="@dimen/dashFavNameTextSize"
                       android:textColor="@color/dashboard_black"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"/>
@@ -34,10 +33,10 @@
 				<ImageView android:visibility="gone"
 						   android:id="@+id/direction"
 						   android:layout_gravity="center_vertical"
-						   android:layout_width="10dp"
-						   android:layout_height="10dp"/>
+						   android:layout_width="@dimen/dashFavDirectionSize"
+						   android:layout_height="@dimen/dashFavDirectionSize"/>
 				<TextView android:id="@+id/distance"
-						  android:textSize="12sp"
+						  android:textSize="@dimen/showAllButtonTextSize"
 						  android:textColor="@color/dashboard_blue"
 						  android:layout_width="wrap_content"
 						  android:layout_height="wrap_content"/>
@@ -46,11 +45,12 @@
         </LinearLayout>
 
         <ImageButton android:id="@+id/navigate_to"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_action_gdirections_light"
                 android:background="@drawable/dashboard_button"
-                android:layout_marginLeft="12dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"/>
+                android:layout_marginLeft="@dimen/dashFavIconMargin"
+                android:layout_width="@dimen/dashListItemHeight"
+                android:layout_height="@dimen/dashListItemHeight"/>
     </LinearLayout>
 
 

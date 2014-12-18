@@ -8,7 +8,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:orientation="vertical"
-			android:padding="6dp" >
+			android:padding="@dimen/dashPadding" >
 
 		<LinearLayout android:orientation="horizontal"
 					  android:layout_width="match_parent"
@@ -24,7 +24,6 @@
 							  android:layout_width="match_parent"
 							  android:layout_height="wrap_content"/>
 
-
 				<fragment
 						xmlns:android="http://schemas.android.com/apk/res/android"
 						android:name="net.osmand.plus.dashboard.DashMapFragment"
@@ -33,19 +32,15 @@
 
 				<fragment
 						xmlns:android="http://schemas.android.com/apk/res/android"
-						android:name="net.osmand.plus.dashboard.DashFavoritesFragment"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"/>
-
-				<fragment
-						xmlns:android="http://schemas.android.com/apk/res/android"
 						android:name="net.osmand.plus.dashboard.DashUpdatesFragment"
+						android:layout_marginTop="@dimen/dashCardMargin"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"/>
 
 				<fragment
 						xmlns:android="http://schemas.android.com/apk/res/android"
-						android:name="net.osmand.plus.dashboard.DashDownloadMapsFragment"
+						android:name="net.osmand.plus.dashboard.DashFavoritesFragment"
+						android:layout_marginTop="@dimen/dashCardMargin"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"/>
 
@@ -65,13 +60,22 @@
 
 				<fragment
 						xmlns:android="http://schemas.android.com/apk/res/android"
+						android:name="net.osmand.plus.dashboard.DashDownloadMapsFragment"
+						android:layout_marginTop="@dimen/dashCardMargin"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"/>
+
+				<fragment
+						xmlns:android="http://schemas.android.com/apk/res/android"
 						android:name="net.osmand.plus.dashboard.DashAudioVideoNotesFragment"
+						android:layout_marginTop="@dimen/dashCardMargin"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"/>
 
 				<fragment
 						xmlns:android="http://schemas.android.com/apk/res/android"
 						android:name="net.osmand.plus.dashboard.DashPluginsFragment"
+						android:layout_marginTop="@dimen/dashCardMargin"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"/>
 
@@ -84,7 +88,7 @@
 					  android:layout_height="wrap_content"
 					  android:orientation="horizontal"
 					  android:visibility="gone"
-					  android:padding="6dp"
+					  android:padding="@dimen/dashPadding"
 					  android:baselineAligned="false">
 
 			<LinearLayout
@@ -99,7 +103,7 @@
 						android:layout_height="wrap_content"
 						android:layout_gravity="start|bottom"
 						android:text="@string/about_settings"
-						android:textSize="20sp" />
+						android:textSize="@dimen/dashAboutTextSize" />
 			</LinearLayout>
 
 		</LinearLayout>
