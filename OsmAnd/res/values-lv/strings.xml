@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu (varētu būt nepieciešams OsmAnd restarts)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus funkcijas un uzstādījumus kā piemēram sekošana, enerģijas taupīšana, pieejamība un daudzas citas</string>
@@ -1464,7 +1464,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="android_19_location_disabled">Pēc KitKat jauninājuma vecā karšu krātuve (%s) vairs nav pieejama. Vai vēlaties to nomainīt uz pieejamu vietu un pārkopēt visus failus?
 …………\n Piezīme: vecie faili netiks aiztikti.
 …………\n Piezīme: nebūs iespējams koplietot failus starp OsmAnd un OsmAnd+. </string>
-    <string name="application_dir_change_warning2">OsmAnd var mēģināt pārsūtīt failus uz jauno vietu. Vai vēlaties to darīt?</string>
+    <string name="application_dir_change_warning2">Vai kopēt OsmAnd datus uz jauno vietu? Nospiežot \'Nē\', OsmAnd izveidos jaunu datu mapi.</string>
     <string name="copying_osmand_one_file_descr">Kopē (%s) failu uz jauno vietu...</string>
     <string name="copying_osmand_files_descr">Kopē OsmAnd failus uz jauno vietu (%s)</string>
     <string name="copying_osmand_files">Kopē OsmAnd failus</string>
@@ -1803,7 +1803,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_specify_tracker_id">Lūdzu norādiet id</string>
     <string name="continue_navigation">Turpināt navigāciju</string>
     <string name="pause_navigation">Nopauzēt navigāciju</string>
-    <string name="rendering_attr_subwayMode_name">Tuneļu režīms</string>
+    <string name="rendering_attr_subwayMode_name">Metro maršruti</string>
  	<string name="keep_navigation_service">Paturēt</string>
 	<string name="gps_wake_up_timer">GPS pamošanās intervāls</string>
 	<string name="local_map_names">Vietējie nosaukumi</string>
@@ -1843,4 +1843,49 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="local_index_unselect_gpx_file">Neatzīmēt</string>
     <string name="local_index_select_gpx_file">Atzīmēt rādīšanai</string>
     <string name="visible_element">Rādīt uz kartes</string>
+    <string name="rendering_value_default_name">Noklusētais</string>
+    <string name="rendering_value_orange_name">Oranžs</string>
+    <string name="rendering_value_germanRoadAtlas_name">Vāciešu ceļu karte</string>
+	<string name="traffic_warning_railways">Dzelzceļš</string>
+	<string name="traffic_warning_pedestrian">Gājēju ceļš</string>
+	<string name="show_railway_warnings">Rādīt dzelzceļa pārejas</string>
+	<string name="show_pedestrian_warnings">Rādīt gājēju pārejas</string>
+    <string name="rendering_value_americanRoadAtlas_name">Amerikāņu ceļu karte</string>
+    <string name="routing_attr_no_new_routing_name">Ne v1.9 maršruta nosacījumi</string>
+    <string name="routing_attr_no_new_routing_description">Nelietot jaunos maršruta nosacījumus, kas atrodami 1.9 versijā</string>
+    <string name="dash_download_msg_none">Vai lejupielādēt kartes telefonā?</string>
+    <string name="dash_download_msg">Lejupielādēti %1$s no kartēm</string>
+    <string name="dash_download_new_one">Lejupielādēt jaunu karti</string>
+    <string name="dash_download_manage">Pārvaldīt</string>
+    <string name="map_locale">Kartes valoda</string>
+    <string name="rendering_attr_transportStops_name">Sabiedriskā transporta pieturas</string>
+    <string name="navigate_point_zone">Zona</string>
+    <string name="navigate_point_northing">Ziemeļvirziens</string>
+    <string name="navigate_point_easting">Austrumvirziens</string>
+    <string name="download_tab_downloads">Visas lejupielādes</string>
+    <string name="download_tab_updates">Atjauninājumi</string>
+    <string name="download_tab_local">Vietējie</string>
+	<string name="no_internet_connection">Lejupielāde neizdevās, lūdzu pārbaudiet interneta savienojumu.</string>
+    <string name="dismiss">Atcelt</string>
+    <string name="everything_up_to_date">Visi faili ir atjaunoti</string>
+    <string name="use_opengl_render">Lietot OpenGL renderēšanu</string>
+    <string name="use_opengl_render_descr">Lietot iebūvēto paātrināto OpenGL renderēšanu (jābūt saderīgai ierīcei)</string>
+    <string name="error_avoid_specific_road">Apvedceļš nav atrasts</string>
+    <string name="home_button">Mājas</string>
+    <string name="osmo_use_https_descr">Lietot drošo savienojumu ar serveri</string>
+    <string name="osmo_use_https">Lietot HTTPS</string>
+	<string name="advanced_settings">Papildus</string>
+	<string name="map_update">Ir pieejami atjauninājumi %1$s kartēm</string>
+	<string name="search_for">Ko meklēt</string>
+	<string name="show_map">Rādīt karti</string>
+	<string name="show_all">Rādīt visu</string>
+	<string name="coordinates">Koordinātas</string>
+	<string name="rendering_attr_publicTransportMode_name">Autobusu, mikroautobusu un trolejbusu maršruti</string>
+	<string name="rendering_attr_tramTrainRoutes_name">Tramvaju un vilcienu maršruti</string>
+	<string name="lock_screen_request_explanation">%1$s ir nepieciešama šī atļauja, lai izslēgtu ekrānu enerģijas taupīšanai.</string>
+    <string name="wake_on_voice">Ieslēgt ekrānu</string>
+    <string name="wake_on_voice_descr">Ieslēgt ekrānu, kad tuvojas pagrieziens</string>
+    <string name="wake_on_voice_never">Nekad</string>
+    <string name="select_impassable_road">Arzīmēt kartē</string>
+    <string name="impassable_road">Izvairīties no ceļiem…</string>
     </resources>
