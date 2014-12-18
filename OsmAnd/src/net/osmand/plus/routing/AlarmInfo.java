@@ -118,6 +118,10 @@ public class AlarmInfo implements LocationPoint {
 			}
 		} else if("traffic_calming".equals(ruleType.getTag())) {
 			alarmInfo = new AlarmInfo(AlarmInfoType.TRAFFIC_CALMING, locInd);
+		} else if ("railway".equals(ruleType.getTag()) && "level_crossing".equals(ruleType.getValue())) {
+			alarmInfo = new AlarmInfo(AlarmInfoType.RAILWAY, locInd);
+		} else if ("crossing".equals(ruleType.getTag()) && "uncontrolled".equals(ruleType.getValue())){
+			alarmInfo = new AlarmInfo(AlarmInfoType.PEDESTRIAN, locInd);
 		}
 		if(alarmInfo != null) {
 			alarmInfo.setLatLon(loc.getLatitude(), loc.getLongitude());
