@@ -31,3 +31,8 @@ assets/OsmAndCore_ResourcesBundle/
 
 # Output
 /build
+
+# Project-specific
+/helpAssets
+/voiceAssets
+/resourcesSrc

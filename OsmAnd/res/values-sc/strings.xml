@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1217,7 +1217,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="map_overlay_descr">Issèbera mapa de subrapositzione</string>
 	<string name="tile_source_already_installed">Sa mapa est giai installata, sas impostaduras ant a èssere agiornadas</string>
 	<string name="select_tile_source_to_install">Issèbera sas mapas (tasseddos) da installare o agiornare</string>
-	<string name="internet_not_available">Sa connessione ìnternet est netzessària pro custa operatzione ma no est disponìbile</string>
+	<string name="internet_not_available">Una connessione ìnternet est netzessària pro custa operatzione, ma no nde bi sunt disponìbiles</string>
 	<string name="install_more">Installa àteru…</string>
 	<string name="level_to_switch_vector_raster_descr">Livellu mìnimu de zoom pro impreare sas mapas vetoriales</string>
 	<string name="level_to_switch_vector_raster">Liv. min. zoom vetoriale</string>
@@ -1786,13 +1786,13 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="show_map">AMMUSTRA SA MAPA</string>
 	<string name="show_all">AMMUSTRA TOTU</string>
 	<string name="coordinates">Coordinatas</string>
-	<string name="map_update">Tenes %1$s mapas de agiornare</string>
-	<string name="error_avoid_specific_road">No est istada agatada peruna istrada a curtzu</string>
+	<string name="map_update">Podes agiornare %1$s mapas</string>
+	<string name="error_avoid_specific_road">No est istada agatada peruna tangentziale</string>
     <string name="everything_up_to_date">Totu agiornadu</string>
     <string name="use_opengl_render">Imprea sa renderizatzione OpengL</string>
     <string name="use_opengl_render_descr">Imprea sa renderizatzione OpengL tràmite hardware (diat pòdere non funtzionare in carchi dispositivu)</string>
     <string name="dismiss">Abbandona</string>
-    <string name="no_internet_connection">Impossìbile iscarrigare. Pro piaghere allue su Wi-fi pro sighire.</string>
+    <string name="no_internet_connection">Impossìbile iscarrigare. Pro piaghere còmpida sa cunnessione tua pro sighire.</string>
     <string name="download_tab_downloads">Iscarrigàbiles</string>
     <string name="download_tab_updates">Agiornamentos</string>
     <string name="download_tab_local">Iscarrigadas</string>
@@ -1802,8 +1802,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="rendering_attr_transportStops_name">Firmadas traspòrtu pùblicu</string>
     <string name="map_locale">Limba de sa mapa</string>
     <string name="voices">Indicatziones vocales</string>
-	<string name="dash_download_msg_none">Boles iscarrigare carchi mapa non in lìnia?</string>
-    <string name="dash_download_msg">Tenes %1$s mapas iscarrigadas</string>
+	<string name="dash_download_msg_none">Boles iscarrigare una mapa non in lìnia?</string>
+    <string name="dash_download_msg">As iscarrigadu %1$s mapas</string>
     <string name="dash_download_new_one">Iscàrriga una mapa noa</string>
     <string name="dash_download_manage">Gesti</string>
     <string name="rendering_attr_roadStyle_name">Istile disinnu de sas istradas</string>
@@ -1813,8 +1813,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="rendering_value_americanRoadAtlas_name">Atlante de sas istradas americanas</string>
     <string name="routing_attr_no_new_routing_name">No impreare su càlculu de s\'àndala v1.9</string>
     <string name="routing_attr_no_new_routing_description">No impreare su càlculu de s\'àndala v1.9</string>
-    <string name="traffic_warning_railways">Ferrovias</string>
+    <string name="traffic_warning_railways">Ferrovia</string>
 	<string name="traffic_warning_pedestrian">Pedonale</string>
-	<string name="show_railway_warnings">Ammustra sos avisos ferroviàrios</string>
-	<string name="show_pedestrian_warnings">Ammustra sos avisos pedonales</string>
+	<string name="show_railway_warnings">Ammustra sas rugradas ferroviàrias</string>
+	<string name="show_pedestrian_warnings">Ammustra sas istrìscias pedonales</string>
     </resources>

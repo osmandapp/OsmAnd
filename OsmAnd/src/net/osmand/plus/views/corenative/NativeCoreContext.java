@@ -58,37 +58,15 @@ public class NativeCoreContext {
 				
 				ObfsCollection obfsCollection = new ObfsCollection();
 				obfsCollection.addDirectory(directory.getAbsolutePath(), false);
-				
-				MapStylesCollection mapStylesCollection = setupMapStyleCollection(app);
-				mapRendererContext = new MapRendererContext(app, dm.density);
-				mapRendererContext.setupObfMap(mapStylesCollection, obfsCollection);
+
+                mapRendererContext = new MapRendererContext(app, dm.density);
+				mapRendererContext.setupObfMap(new MapStylesCollection(), obfsCollection);
+                app.getRendererRegistry().setRendererLoadedEventListener(mapRendererContext);
 				init = true;
 			}
 		}
 	}
 
-	private static MapStylesCollection setupMapStyleCollection(
-			OsmandApplication app) {
-		MapStylesCollection mapStylesCollection = new MapStylesCollection();
-		// Alexey TODO
-//		internalRenderers.put("Touring-view_(more-contrast-and-details)", "Touring-view_(more-contrast-and-details)" +".render.xml");
-//		internalRenderers.put("UniRS", "UniRS" + ".render.xml");
-//		internalRenderers.put("LightRS", "LightRS" + ".render.xml");
-//		internalRenderers.put("High-contrast-roads", "High-contrast-roads" + ".render.xml");
-//		internalRenderers.put("Winter-and-ski", "Winter-and-ski" + ".render.xml");
-		File renderers = app.getAppPath(IndexConstants.RENDERERS_DIR);
-		File[] lf = renderers.listFiles();
-		if(lf != null) {
-			for(File f : lf) {
-				if(f.getName().endsWith(IndexConstants.RENDERER_INDEX_EXT)) {
-					mapStylesCollection.addStyleFromFile(f.getAbsolutePath());
-				}
-			}
-		}
-		return mapStylesCollection;
-	}
-
-	
 	public static MapRendererContext getMapRendererContext() {
 		return mapRendererContext;
 	}

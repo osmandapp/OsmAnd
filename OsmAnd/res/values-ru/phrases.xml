@@ -557,7 +557,7 @@
 	<string name="poi_seamark_beacon_cardinal"/>
 	<string name="poi_seamark_beacon_lateral"/>
 	<string name="poi_seamark_beacon_safe_water"/>
-	<string name="poi_seamark_beacon_special_purpose"/>
+	<string name="poi_seamark_beacon_special_purpose">Бакен специального назначения</string>
 	<string name="poi_seamark_berth">Причал</string>
 	<string name="poi_seamark_building"/>
 	<string name="poi_seamark_bridge"/>

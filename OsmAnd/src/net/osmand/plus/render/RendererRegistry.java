@@ -32,6 +32,12 @@ public class RendererRegistry {
 	private Map<String, String> internalRenderers = new LinkedHashMap<String, String>();
 	
 	private Map<String, RenderingRulesStorage> renderers = new LinkedHashMap<String, RenderingRulesStorage>();
+
+    public interface IRendererLoadedEventListener {
+        void onRendererLoaded(String name, RenderingRulesStorage rules, InputStream source);
+    }
+
+    private IRendererLoadedEventListener rendererLoadedEventListener;
 	
 	public RendererRegistry(){
 		internalRenderers.put(DEFAULT_RENDER, "default.render.xml");
@@ -126,12 +132,16 @@ public class RendererRegistry {
 		} finally {
 			is.close();
 		}
+
+        if (rendererLoadedEventListener != null)
+            rendererLoadedEventListener.onRendererLoaded(name, main, getInputStream(name));
+
 		return main;
 	}
 
 	@SuppressWarnings("resource")
-	private InputStream getInputStream(String name) throws FileNotFoundException {
-		InputStream is = null;
+	public InputStream getInputStream(String name) throws FileNotFoundException {
+		InputStream is;
 		if("default".equalsIgnoreCase(name)) {
 			name = DEFAULT_RENDER;
 		} 
@@ -169,5 +179,11 @@ public class RendererRegistry {
 		this.currentSelectedRender = currentSelectedRender;
 	}
 
-	
+    public void setRendererLoadedEventListener(IRendererLoadedEventListener listener) {
+        rendererLoadedEventListener = listener;
+    }
+
+    public IRendererLoadedEventListener getRendererLoadedEventListener() {
+        return rendererLoadedEventListener;
+    }
 }

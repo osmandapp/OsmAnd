@@ -1283,7 +1283,7 @@
     <string name="cancel_route">Atšaukti maršrutą</string>
     <string name="cancel_navigation">Stabdyti navigaciją</string>
     <string name="clear_destination">Išvalyti tikslą</string>
-    <string name="download_using_mobile_internet">Šiuo metu WiFi neprijungta. Ar norite tęsti siuntimąsį dabartiniu interneto ryšiu?</string>
+    <string name="download_using_mobile_internet">Šiuo metu Wi-Fi neprijungta. Ar norite tęsti siuntimąsį dabartiniu interneto ryšiu?</string>
     <string name="use_magnetic_sensor_descr">Maudoti magnetinį sensorių naudoti vietoje pokrypio sensoriaus kompaso reikšmei nustatyti</string>
     <string name="use_magnetic_sensor">Naudoti magnetinį sensorių (kompasą)</string>
     <string name="use_kalman_filter_compass_descr">Naudoti Kalmano fltrą kompaso parodymų išlyginimui</string>
@@ -1854,7 +1854,7 @@
     <string name="use_opengl_render">Naudoti OpenGL vaizdavimą</string>
     <string name="use_opengl_render_descr">Naudoti aparatinį OpenGL vaizdavimą (gali neveikti kai kurioje įrangoje)</string>
     <string name="everything_up_to_date">Viskas atnaujinta</string>
-    <string name="no_internet_connection">Parsisiųsti nepavyko. Prašome prisijungti prie Wi-Fi, jei norite tęsti.</string>
+    <string name="no_internet_connection">Parsisiųsti nepavyko. Prašome patikrinti, ar prisijungėte prie interneto.</string>
     <string name="map_locale">Žemėlapio kalba</string>
     <string name="rendering_attr_transportStops_name">Transporto stotelės</string>
     <string name="navigate_point_zone">Zona</string>

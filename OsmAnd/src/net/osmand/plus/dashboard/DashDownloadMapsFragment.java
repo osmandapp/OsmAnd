@@ -84,6 +84,9 @@ public class DashDownloadMapsFragment extends DashBaseFragment {
 			}
 
 			protected void updateCount(String s) {
+				if (DashDownloadMapsFragment.this.isDetached()){
+					return;
+				}
 				File ms = getMyApplication().getAppPath(s);
 				if (ms.exists()) {
 					File[] lf = ms.listFiles();
@@ -101,6 +104,9 @@ public class DashDownloadMapsFragment extends DashBaseFragment {
 			@Override
 			protected void onPostExecute(Void result) {
 				super.onPostExecute(result);
+				if (DashDownloadMapsFragment.this.isDetached()){
+					return;
+				}
 				if(countMaps > 0) {
 					long mb = 1 << 20;
 					long gb = 1 << 30;

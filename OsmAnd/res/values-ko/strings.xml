@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
@@ -323,7 +323,7 @@
 \n\t- UI 개선 및 큰 버그 수정 "</string>
 	<string name="voice_not_use">사용하지 않음</string>
 	<string name="installing_new_resources">새로운 데이터 풀기(Unpacking)…</string>
-	<string name="internet_connection_required_for_online_route">온라인 라우팅 서비스가 선택되었지만 인터넷 연결을 할 수 없습니다.</string>
+	<string name="internet_connection_required_for_online_route">온라인 라우팅 서비스가 선택되었지만 인터넷이 연결되지 않았습니다.</string>
 	<string name="tts_language_not_supported_title">지원되지 않은 언어</string>
 	<string name="tts_language_not_supported">선택한 언어는  설치된 안드로이드 TTS (text-to-speech) 엔진이 지원되지 않습니다. 다른 TTS 엔진을 찾기 위해 구글마켓으로 가시겠습니까? 아니면 미리설정된 TTS 언어가 사용될 것입니다.</string>
 	<string name="tts_missing_language_data_title">누락된 데이터</string>
@@ -355,7 +355,7 @@
 	<string name="map_overlay_descr">오버레이 맵을 선택합니다</string>
 	<string name="tile_source_already_installed">맵이 이미 설치되어, 설정이 업데이트될 것입니다</string>
 	<string name="select_tile_source_to_install">설치할 또는 업데이트할 (타일) 맵을 선택합니다</string>
-	<string name="internet_not_available">동작에 필요한 인터넷 연결이 되지 않습니다</string>
+	<string name="internet_not_available">인터넷 연결이 필요하지만 연결되지 않았습니다</string>
 	<string name="install_more">추가 설치…</string>
 
 	<string name="tip_update_index">오프라인 지도 업데이트중</string>
@@ -1116,7 +1116,7 @@
     <string name="cancel_route">경로 해제</string>
     <string name="cancel_navigation">운행 중지</string>
     <string name="clear_destination">목적지 지우기</string>
-    <string name="download_using_mobile_internet">현재 와이파이가 연결되어 있지 않습니다. 현재의 인터넷 연결(3G)을 통해서 계속 다운로드 하시겠습니까?</string>
+    <string name="download_using_mobile_internet">현재 와이파이(WiFi)가 연결되어 있지 않습니다. 현재의 인터넷 연결(3G)을 통해서 계속 다운로드 하시겠습니까?</string>
     <string name="street_name">거리</string>
 	<string name="hno">주택 수</string>
     <string name="tip_recent_changes_1_3_t">버전 1.3 의 변경 사항 :
@@ -1650,22 +1650,23 @@
 \n\t* 아랍어, 칸나다어 스크립트와 RTL (오른쪽에서 작성) 언어 수정 "</string>
 	<string name="osmand_extended_description_4000_chars">" OsmAnd 은 전세계에 무료로, 고품질의 OpenStreetMap 데이터에 액세스가 가능한 지도 및 운행 앱입니다.
 \n모든 지도 데이터를 오프라인으로 사용할수 있도록 메모리 카드에 저장할 수 있습니다. 장치의 GPS 를 통해,
-\nOsmAnd 는 자동차, 자전거 및 보행자을 위한 광센서 및 음성 안내와 함께 라우팅(길찾기)을 제공합니다. 모든 주요 기능은 온라인과 오프라인(인터넷연결 필요없음)에서 모두 작동합니다.
+\nOsmAnd 는 자동차, 자전거 및 보행자를 위한 광센서 및 음성 안내와 함께 라우팅(길찾기)을 제공합니다.
+\n모든 주요 기능은 온라인과 오프라인에서 모두 작동합니다.
 \nOsmAnd+ 는 유료 버전 앱입니다.
 \nOsmAnd+ 를 구입하므로써 새로운 기능의 프로젝트와 개발을 지원하게 됩니다.
 \n\n주요 기능 중 일부 :
 \n\nNavigation : 운행
-\n- 온라인 또는 오프라인 작업
+\n- 온라인 또는 오프라인으로 작업
 \n- 턴바이턴 음성안내
 \n- 선택적 길안내, 거리이름 표시, 도착예상시각 표시
-\n- 트래킹하는 동안 중간 포인트 지원
+\n- 트래킹하는 동안 중간 경유지 지원
 \n- 루트를 이탈하였을 때 자동으로 길찾기 재실행
-\n- 주소 또는 좌표로 장소를 검색(또는 레스토랑, 호텔, 주유소, 박물관 등등)
+\n- 주소 또는 좌표로 장소를 검색 (또는 레스토랑, 호텔, 주유소, 박물관 등등)
 \n\nMap Viewing :지도 보기
 \n- 지도에 현재위치와 방향을 표시
 \n- 선택적으로 나침반 또는 GPS로 진행방향를 지도에 표시 가능
 \n- 즐겨찾기로 중요한 장소를 저장하기
-\n- 주의에 있는 POI를 표시하기
+\n- 주위에 있는 POI를 표시하기
 \n- 특정 온라인 타일맵 표시하기
 \n- 위성지도(Bing) 보기
 \n- 다른 오버레이 지도 표시
@@ -1927,7 +1928,7 @@
     <string name="sort_by_name">이름으로 정렬</string>
     <string name="visible_element">지도에서 보기</string>
     <string name="route_descr_destination">목적지</string>
-    <string name="no_index_file_to_download">아무것도 다운로드 되지 않았다면, 인터넷 연결을 확인 하십시오.</string>
+    <string name="no_index_file_to_download">다운로드 되지 않았습니다, 인터넷 연결을 체크하세요.</string>
     <string name="osmo_auth_error_short">인증 실패</string>
     <string name="osmo_auth_error">OsMo 인증 오류가 발생 했습니다: %1$s.\n임시로 서비스가 다운되었거나 또는 등록 만료가 되었습니다.\n신규 등록을 진행 하시겠습니까?</string>
     <string name="osmo_group_by_invite">메시지를 입력하세요</string>
@@ -2094,7 +2095,7 @@
     <string name="use_opengl_render_descr">하드웨어로 가속된 OpenGL 렌더링 사용 (일부 장치에는 작동 하지 않을 수 있습니다)</string>
     <string name="dismiss">해제</string>
     <string name="everything_up_to_date">모든 파일 업데이트</string>
-    <string name="no_internet_connection">다운로드가 불가능 합니다. WiFi를 연결하여 진행해 주시기 바랍니다.</string>
+    <string name="no_internet_connection">다운로드가 불가능 합니다. 인터넷 연결을 체크해 주세요.</string>
     <string name="navigate_point_zone">존(지역)</string>
     <string name="navigate_point_northing">북향</string>
     <string name="navigate_point_easting">동향</string>
@@ -2113,8 +2114,8 @@
     <string name="rendering_value_orange_name">오렌지</string>
     <string name="rendering_value_germanRoadAtlas_name">독일 도로 지도</string>
     <string name="rendering_value_americanRoadAtlas_name">미국 도로 지도</string>
-    <string name="routing_attr_no_new_routing_name">V1.9 라우팅을 사용하지 마십시오</string>
-    <string name="routing_attr_no_new_routing_description">V1.9 라우팅을 사용하지 마십시오</string>
+    <string name="routing_attr_no_new_routing_name">No v1.9 라우팅 룰</string>
+    <string name="routing_attr_no_new_routing_description">v1.9에서 도입된 라우팅 룰을 사용하지 마십시오</string>
     <string name="traffic_warning_railways">철도</string>
 	<string name="traffic_warning_pedestrian">보행자</string>
 	<string name="show_railway_warnings">철도 경고 표시</string>

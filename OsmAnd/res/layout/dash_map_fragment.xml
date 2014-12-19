@@ -3,12 +3,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:orientation="vertical"
 			  android:background="@drawable/bg_cardui"
-			  android:layout_marginBottom="4dp"
 			  android:layout_width="fill_parent"
 			  android:layout_height="wrap_content">
 	<LinearLayout android:orientation="horizontal"
 				  android:layout_width="fill_parent"
-				  android:layout_height="40dp">
+				  android:layout_height="@dimen/dashHeaderHeight">
 		<TextView android:id="@+id/map_text"
 				  android:text="@string/map_Button"
 				  style="@style/DashboardSubHeader"/>
@@ -17,10 +16,12 @@
 				style="@style/DashboardGeneralButton"/>
 	</LinearLayout>
 
-	<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+	<RelativeLayout android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+			android:padding="@dimen/subHeaderPadding">
 		<LinearLayout android:id="@+id/loading"
 					  android:layout_width="fill_parent"
-					  android:layout_height="110dp"
+					  android:layout_height="@dimen/dashMapHeight"
 					  android:gravity="center_vertical|center_horizontal"
 					  android:orientation="horizontal">
 
@@ -35,16 +36,16 @@
 					android:layout_height="wrap_content"
 					android:maxLines="3"
 					android:text="@string/loading_data"
-					android:textSize="18sp" />
+					android:textSize="@dimen/dashProgressTextSize" />
 		</LinearLayout>
 
 		<net.osmand.plus.views.OsmAndMapSurfaceView
 				android:id="@+id/MapView"
 				android:layout_width="fill_parent"
-				android:layout_height="110dp"
-				android:layout_marginLeft="2dp"
-				android:layout_marginRight="2dp"
-				android:layout_marginBottom="2dp"
+				android:layout_height="@dimen/dashMapHeight"
+				android:layout_marginLeft="@dimen/dashMapMargin"
+				android:layout_marginRight="@dimen/dashMapMargin"
+				android:layout_marginBottom="@dimen/dashMapMargin"
 				android:contentDescription="@string/map_view"
 				android:visibility="gone"/>
 	</RelativeLayout>

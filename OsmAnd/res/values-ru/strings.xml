@@ -353,7 +353,7 @@
   <string name="voice_not_use">Не использовать</string>
   <string name="voice_not_specified">Нет</string>
   <string name="installing_new_resources">Распаковываются новые данные…</string>
-  <string name="internet_connection_required_for_online_route">Вы собираетесь использовать Интернет-маршрутизацию, но у вас нет активного Интернет соединения.</string>
+  <string name="internet_connection_required_for_online_route">Вы собираетесь использовать Интернет-маршрутизацию, но у Вас нет активного Интернет соединения.</string>
   <string name="tts_language_not_supported_title">Язык не поддерживается</string>
   <string name="tts_language_not_supported">Выбранный язык не поддерживается активным Android TTS (text-to-speech). Будет использован язык по-умолчанию. Хотите найти в Google Play другой TTS? Иначе будет использоваться предустановленный язык TTS.</string>
   <string name="tts_missing_language_data_title">Данные отсутствуют</string>
@@ -383,7 +383,7 @@
   <string name="map_overlay_descr">Выберите слой для покрытия основной карты</string>
   <string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены</string>
   <string name="select_tile_source_to_install">Выберите карты для установки или обновления</string>
-  <string name="internet_not_available">Интернет-соединение недоступно</string>
+  <string name="internet_not_available">Требуется Интернет-соединение для данной операции, но оно недоступно</string>
   <string name="install_more">Загрузить ещё…</string>
   <string name="level_to_switch_vector_raster_descr">Максимальный масштаб для использования векторных карт вместо растровых</string>
   <string name="level_to_switch_vector_raster">Масштаб векторных карт</string>
@@ -961,7 +961,7 @@
   <string name="tip_update_index">Обновление локальных данных</string>
   <string name="tip_update_index_t">"Актуальные картографические данные крайне важны для автономного просмотра карты, поиска POI/адресов и навигации. OsmAnd имеет встроенный менеджер локальных данных, который позволяет проверить наличие обновлений для установленных карт.
 \n\nЧтобы проверить наличие обновлений, перейдите в \"Настройки\" → \"Управление файлами карт\" → \"Загрузить\".
-\n\nПосле загрузки из интернета глобального списка регионов, нажмите на любую запись для загрузки или обновления файла. Обратите внимание на селектор типа файлов в верхней части экрана, в котором можно выбрать необходимый для загрузки тип файлов (полные карты, голосовые данные и т.д.).
+\n\nПосле загрузки из Интернет глобального списка регионов, нажмите на любую запись для загрузки или обновления файла. Обратите внимание на селектор типа файлов в верхней части экрана, в котором можно выбрать необходимый для загрузки тип файлов (полные карты, голосовые данные и т.д.).
 \n\nВы можете отфильтровать список регионов, введя несколько букв, или выбрать опцию \"Настройки\" → \"Загруженные\", чтобы увидеть обновления только для уже установленных на вашем устройстве карт.\n\n\t* \"Зелёным\" показываются данные на устройстве, которые не нуждаются в обновлении
 \n\t* \"Синим\" показываются данные, для которых доступна обновленная версия
 \n\t* курсивом отмечаются данные, деактивированные на вашем устройстве "</string>
@@ -1226,7 +1226,7 @@
     
 	<string name="street_name">Улица</string>
 	<string name="hno">Номер дома</string>
-    <string name="download_using_mobile_internet">В настоящее время нет соединения по WiFi. Хотите продолжить загрузку по текущему интернет-соединению?</string>
+    <string name="download_using_mobile_internet">В настоящее время нет соединения по Wi-Fi. Хотите использовать текущее интернет-соединение для загрузки?</string>
     <string name="tip_recent_changes_1_3_t">Изменения в 1.3:
 	\n\t* Переработана поддержка планшетов и крупных экранов
 	\n\t* Тема Holo (настройка тем)
@@ -1703,7 +1703,7 @@
 	<string name="osmo_auth_error">Ошибка авторизации OsMo : %1$s.↵\n Это может быть временно недоступный сервис или срок вашей регистрации истек.↵\n Желаете продолжить с новой регистрацией?</string>
     <string name="osmo_not_signed_in">Не удалось войти в OsMo</string>
     <string name="osmo_gpx_track_downloaded">OsMo трек %1$s загружен.</string>
-    <string name="no_index_file_to_download">Ничего не загружено, пожалуйста, проверьте подключение к Интернету.</string>
+    <string name="no_index_file_to_download">Загрузок не найдено. Проверьте подключение к Интернет.</string>
     <string name="osmo_expire_group">Истекает</string>
     <string name="osmo_gpx_points_downloaded">Точки OsMo %1$s загружены.</string>
     <string name="osmo_session_not_available">Сессия недоступна, пожалуйста проверьте, что \"отправка местоположения\" включена.</string>
@@ -1810,7 +1810,7 @@
     <string name="wake_on_voice_never">Никогда</string>
     <string name="lock_screen_request_explanation">%1$s необходимо это разрешение, чтобы выключить экран для экономии энергии.</string>
     <string name="wake_on_voice">Авто-включение экрана</string>
-    <string name="wake_on_voice_descr">Включать экран телефона при приближении к повороту</string>
+    <string name="wake_on_voice_descr">Включать экран устройства при приближении к повороту</string>
     <string name="advanced_settings">Расширенные</string>
 	<string name="map_update">Карты доступные для обновления: %1$s</string>
 	<string name="coordinates">Координаты</string>
@@ -1821,7 +1821,7 @@
     <string name="use_opengl_render_descr">Использовать аппаратное ускорение OpenGL для рендеринга (может не работать на некоторых устройствах)</string>
     <string name="show_map">ПОКАЗАТЬ КАРТУ</string>
 	<string name="show_all">ПОКАЗАТЬ ВСЕ</string>
-	<string name="no_internet_connection">Загрузка невозможна. Подключите Wi-Fi для продолжения.</string>
+	<string name="no_internet_connection">Загрузка невозможна. Проверьте подключение к Интернет.</string>
     <string name="download_tab_downloads">Загрузки</string>
     <string name="download_tab_updates">Обновления</string>
     <string name="download_tab_local">Локальные</string>
@@ -1843,8 +1843,9 @@
     <string name="rendering_value_germanRoadAtlas_name">Атлас дорог Германии</string>
     <string name="rendering_value_americanRoadAtlas_name">Атлас дорог Америки</string>
     <string name="routing_attr_no_new_routing_name">Не использовать маршрутизацию версии 1.9</string>
-    <string name="routing_attr_no_new_routing_description">Не использовать для построение маршрута алгоритм версии 1.9</string>
+    <string name="routing_attr_no_new_routing_description">Не использовать для построение маршрута алгоритм представленный в версии 1.9</string>
     <string name="show_railway_warnings">Показывать ж/д переезды</string>
 	<string name="show_pedestrian_warnings">Показывать пешеходные переходы</string>
     <string name="traffic_warning_railways">Железная дорога</string>
+	<string name="traffic_warning_pedestrian">Пешеходы</string>
 	</resources>

@@ -2,13 +2,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+	android:id="@+id/main_scroll"
     android:background="@color/dashboard_background" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="6dp" >
+        android:padding="@dimen/dashPadding" >
         <LinearLayout 
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -28,36 +29,42 @@
 			<fragment
 					xmlns:android="http://schemas.android.com/apk/res/android"
 					android:name="net.osmand.plus.dashboard.DashSearchFragment"
+                    android:layout_marginTop="@dimen/dashCardMargin"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
 
 			<fragment
 					xmlns:android="http://schemas.android.com/apk/res/android"
 					android:name="net.osmand.plus.dashboard.DashFavoritesFragment"
-					android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/dashCardMargin"
+                    android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
 
 			<fragment
 					xmlns:android="http://schemas.android.com/apk/res/android"
 					android:name="net.osmand.plus.dashboard.DashAudioVideoNotesFragment"
+                    android:layout_marginTop="@dimen/dashCardMargin"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
 
 			<fragment
 					xmlns:android="http://schemas.android.com/apk/res/android"
 					android:name="net.osmand.plus.dashboard.DashUpdatesFragment"
+                    android:layout_marginTop="@dimen/dashCardMargin"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
 
 			<fragment
 					xmlns:android="http://schemas.android.com/apk/res/android"
 					android:name="net.osmand.plus.dashboard.DashDownloadMapsFragment"
+                    android:layout_marginTop="@dimen/dashCardMargin"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
 
 			<fragment
 					xmlns:android="http://schemas.android.com/apk/res/android"
 					android:name="net.osmand.plus.dashboard.DashPluginsFragment"
+                    android:layout_marginTop="@dimen/dashCardMargin"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
 		</LinearLayout>
@@ -67,7 +74,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="gone"
-            android:padding="6dp"
+            android:padding="@dimen/dashPadding"
             android:baselineAligned="false">
 
             <LinearLayout
@@ -82,35 +89,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|bottom"
                     android:text="@string/about_settings"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/dashAboutTextSize" />
             </LinearLayout>
 
-<!--   All Copyright notes and links have been put on the 'About' screen
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/Copyright"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:gravity="end"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/OpenStreetMaps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="5dp"
-                    android:gravity="end"
-                    android:text="@string/openstreetmap_copyright"
-                    android:textSize="14sp" />
-            </LinearLayout>
--->
         </LinearLayout>
     </LinearLayout>
 

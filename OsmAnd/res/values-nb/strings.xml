@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -310,7 +310,7 @@
 	<string name="map_text_size">Skriftstørrelse for kart</string>
 	<string name="voice_not_use">Ikke bruk</string>
 	<string name="voice_not_specified">Ingen</string>
-	<string name="internet_connection_required_for_online_route">En nettbasert navigeringstjeneste er valgt, men ingen internett-tilkobling er tilgjengelig.</string>
+	<string name="internet_connection_required_for_online_route">En nettbasert navigeringstjeneste er valgt, men ingen internettforbindelse er tilgjengelig.</string>
 	<string name="tts_language_not_supported_title">Språk ikke støttet</string>
 	<string name="tts_language_not_supported">Det valgte språket støttes ikke av den installerte Android TTS (tekst-til-tale)-motoren. Vil du gå til markedet for å se etter en annen TTS-motor? Ellers vil det forhåndsinnstilte TTS-språket brukes.</string>
 	<string name="tts_missing_language_data_title">Manglende data</string>
@@ -768,7 +768,7 @@
 	<string name="index_item_world_basemap">Oversiktskart (verden)</string>
     <string name="index_item_world_ski">Skikart (verden)</string>
     <string name="lang_hr">Kroatisk</string>
-    <string name="calculate_osmand_route_without_internet">Beregn OsmAnd rutesegment uten internett</string>
+    <string name="calculate_osmand_route_without_internet">Beregn OsmAnd-rutesegment uten internett</string>
     <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd-rute for første og siste rutesegment</string>
     <string name="osmo_settings_uuid">Unik enhets-id</string>
     <string name="osmo_settings_descr">Still inn overvåking og personlig overvåkingskanal</string>
@@ -844,7 +844,7 @@
     <string name="targets">Reisemål</string>
     <string name="rendering_attr_hideBuildings_name">Skjul bygninger</string>
     <string name="osmand_parking_warning">Varsel</string>
-	<string name="wake_on_voice_descr">Slå på telefonskjermen når du nærmer deg en sving</string>
+	<string name="wake_on_voice_descr">Slå på enhetens skjerm når du nærmer deg en sving</string>
     <string name="wake_on_voice_never">Aldri</string>
     <string name="search_radius_proximity">I nærhet av</string>
     <string name="speed_limit_exceed_message">Velg toleransemargin for fartsgrense, overskrides denne vil du få talevarsel.</string>
@@ -1076,7 +1076,7 @@
 	<string name="coordinates">Koordinater</string>
 	<string name="download_tab_downloads">Alle nedlastinger</string>
     <string name="download_tab_updates">Oppdateringer</string>
-    <string name="no_internet_connection">Ikke mulig å laste ned. Koble til Wi-Fi for å fortsette.</string>
+    <string name="no_internet_connection">Ikke mulig å laste ned, kontroller internettforbindelsen.</string>
     <string name="dismiss">Avvis</string>
     <string name="everything_up_to_date">Alle filer er oppdaterte</string>
     <string name="use_opengl_render">Bruk OpenGL-opptegning</string>
@@ -1181,10 +1181,10 @@
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">Tysk veiatlas</string>
-	<string name="traffic_warning_railways">Jernbaner</string>
-	<string name="traffic_warning_pedestrian">Fotgjenger</string>
-	<string name="show_railway_warnings">Vis jernbanevarsler</string>
-	<string name="show_pedestrian_warnings">Vis fotgjengervarsler</string>
+	<string name="traffic_warning_railways">Jernbane</string>
+	<string name="traffic_warning_pedestrian">Fotgjengere</string>
+	<string name="show_railway_warnings">Vis jernbaneoverganger</string>
+	<string name="show_pedestrian_warnings">Vis fotgjengeroverganger</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk veiatlas</string>
     <string name="av_camera_focus_hiperfocal">Hyperfokal fokus</string>
 	<string name="lock_screen_request_explanation">%1$s trenger denne tillatelsen til å slå av skjermen (Strømsparingsfunksjon).</string>

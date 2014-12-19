@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -151,7 +151,7 @@
 
 <string name="index_settings_descr">Ladda ner och hantera offline-kartor lagrade på din enhet</string>
 <string name="online_map_settings">Online-kartor</string>
-<string name="osmand_accessibility_description">Visa inställningar för speciella tillgänglighetsanpassning.</string>
+<string name="osmand_accessibility_description">Visa inställningar för speciella tillgänglighetsanpassningar.</string>
 <string name="extra_settings">Avancerade inställningar</string>
 <string name="osmand_monitoring_description">Visa inställningar som underlättar att spela in dina resor till GPX-filer eller att leva spår med hjälp av en webbtjänst.</string>
 <string name="debugging_and_development">Utveckling av OsmAnd</string>
@@ -259,7 +259,7 @@
 \n\t - Offline-ruttning blir mer robust↵
 \n\t *Användbarhet och UIerfarenhet*↵
 \n\t - Förbättrats på många områden "</string>
-<string name="osm_editing_plugin_description">Visa inställningar som behövs för OSM-återkoppling såsom samlande/modifierade av OSM POI-objekt, öppnande/kommenterande av OSM-buggar, och bidragande med inspelade GPX-filer (kräver OSM-referenser).</string>
+<string name="osm_editing_plugin_description">Visa inställningar som behövs för OSM-återkoppling såsom samlande/modifierande av OSM POI-objekt, öppnande/kommenterande av OSM-buggar, och bidragande med inspelade GPX-filer (kräver OSM-referenser).</string>
 <string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor ritas sannolikt upp snabbare. Fungerar kanske inte så bra på vissa enheter.</string>
 <string name="play_commands_of_currently_selected_voice">Spela upp kommandon med aktuell röst</string>
 <string name="test_voice_prompts">Test av röstmeddelanden</string>
@@ -489,7 +489,7 @@
 <string name="voice_not_use">Använd inte</string>
 <string name="voice_not_specified">Ingen</string>
 <string name="installing_new_resources">Packar upp nya data …</string>
-<string name="internet_connection_required_for_online_route">En online-navigeringstjänst är vald men ingen internet-anslutning är tillgänglig.</string>
+<string name="internet_connection_required_for_online_route">En online-navigeringstjänst är vald men ingen internetanslutning är tillgänglig.</string>
 <string name="tts_language_not_supported_title">Språket stöds inte</string>
 <string name="tts_language_not_supported">Det valda språket stöds inte av den installerade Android TTS (text-till-tal)-motorn. Vill du söka efter en annan TTS-motor på Market? Annars kommer det förinställda TTS-språket att användas.</string>
 <string name="tts_missing_language_data_title">Data saknas</string>
@@ -518,7 +518,7 @@
 <string name="map_overlay_descr">Välj överläggskarta</string>
 <string name="tile_source_already_installed">Kartan är redan installerad; inställningarna kommer att uppdateras</string>
 <string name="select_tile_source_to_install">Välj kartor/kartrutor att installera eller uppdatera</string>
-<string name="internet_not_available">Internetanslutning krävs för åtgärden men är inte tillgänglig</string>
+<string name="internet_not_available">En anslutning till Internet krävs för denna åtgärd men någon sådan är inte tillgänglig</string>
 <string name="install_more">Installera fler …</string>
 <string name="level_to_switch_vector_raster_descr">Minsta zoomnivå för att använda vektorkartor</string>
 <string name="level_to_switch_vector_raster">Minsta vektor-zoomnivå</string>
@@ -810,7 +810,7 @@
 	<string name="show_transport_over_map_description">Visa hållplatser för kollektivtrafik på kartan</string>
 	<string name="show_transport_over_map">Visa hållplatser</string>
 	<string name="hello">Navigationsappen OsmAnd</string>
-	<string name="update_poi_success">POI-data har uppdaterats ({0} laddades)</string>
+	<string name="update_poi_success">POI-data har uppdaterats utan problem ({0} laddades)</string>
 	<string name="update_poi_error_local">Fel vid uppdatering av lokal POI-lista</string>
 	<string name="update_poi_error_loading">Fel vid laddning av data från servern</string>
 	<string name="update_poi_no_offline_poi_index">Inga offline POI-data tillgängliga för detta område</string>
@@ -865,7 +865,7 @@
 	<string name="loading_postcodes">Laddar postnummer …</string>
 	<string name="loading_streets">Laddar gator …</string>
 	<string name="loading_cities">Laddar städer …</string>
-	<string name="poi">POI</string>
+	<string name="poi">Intressepunkter (POI)</string>
 	<string name="arrived_at_destination">Du har anlänt till din destination</string>
 	<string name="close">Stäng</string>
 	<string name="loading_data">Laddar data …</string>
@@ -1154,7 +1154,7 @@
     <string name="cancel_route">Avbryt rutten</string>
     <string name="cancel_navigation">Avbryt navigeringen</string>
     <string name="clear_destination">Ta bort destinationen</string>
-    <string name="download_using_mobile_internet">Wi-Fi är för tillfället inte anslutet. Vill du fortsätta att ladda ned med nuvarande anslutning till Internet?</string>
+    <string name="download_using_mobile_internet">Wi-Fi är för tillfället inte anslutet. Vill du ladda ned med din nuvarande anslutning till Internet?</string>
     <string name="street_name">Gata</string>
 	<string name="hno">Husnummer</string>
     <string name="osmand_monitoring_plugin_name">Loggningstjänster</string>
@@ -1706,7 +1706,7 @@
 	<string name="configure_map">Konfigurera karta</string>
     <string name="search_radius_proximity">Närmare än</string>
     <string name="rendering_category_details">Detaljer</string>
-    <string name="rendering_category_transport">Transport</string>
+    <string name="rendering_category_transport">Kollektivtrafik</string>
     <string name="rendering_category_others">Andra kartattribut</string>
     <string name="map_widget_appearance_rem">Kvarvarande element</string>
     <string name="map_widget_top">Statusfält</string>
@@ -1714,7 +1714,7 @@
 	<string name="map_widget_left">Vänster panel</string>
     <string name="layers_category_show">Visa</string>
 	<string name="rendering_category_routes">Rutter</string>
-    <string name="tip_recent_changes_1_9_t">"Nyheter i 1.9: * Uppdaterade kartstilar med återgivning av vägbeläggning, transportlager och vandringssymboler * Sök efter POI längs rutten * Markera väg som avstängd per session * Lättare hämtning och uppdatering av kartor * Få visuell och ljudnotifiering när du närmar dig en waypoint * Skriv ut information om resväg * Stöd för vändningsfiler * Stöd för Android Wear * En mängd förändringar i gränssnittet * Separat zoom för textstorlek på kartan * Speciella ljudnotifieringar när du lämnat rutten * Logga in på OsMo * Fix av OsMo- inkompatibilitet "</string>
+    <string name="tip_recent_changes_1_9_t">"Nyheter i 1.9: * Uppdaterade kartstilar med återgivning av vägbeläggning, kollektivtrafikslager och vandringssymboler * Sök efter POI längs rutten * Markera väg som avstängd per session * Lättare hämtning och uppdatering av kartor * Få visuell notifiering och ljudnotifiering när du närmar dig en waypoint * Skriv ut information om resväg * Stöd för vändningsfiler * Stöd för Android Wear * En mängd förändringar i gränssnittet * Separat zoom för textstorlek på kartan * Speciella ljudnotifieringar när du lämnat rutten * Logga in på OsMo * Fix av OsMo- inkompatibilitet "</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Tåglinjer</string>
     <string name="rendering_attr_tramRoutes_name">Spårvagnsrutter</string>
     <string name="rendering_attr_shareTaxiRoutes_name">\"Delad taxi\"-rutter</string>
@@ -1738,22 +1738,22 @@
 	<string name="coordinates">Koordinater</string>
 	<string name="map_update">Det finns uppdateringar av %1$s kartor</string>
 	<string name="error_avoid_specific_road">Hittar ingen förbifart</string>
-    <string name="dismiss">Avfärda</string>
+    <string name="dismiss">Avvisa</string>
     <string name="everything_up_to_date">Alla filer är uppdaterade</string>
     <string name="use_opengl_render">Använd OpenGL-rendering</string>
     <string name="use_opengl_render_descr">Använd hårdvaruaccelererad OpenGL-rendering (fungerar kanske inte på vissa enheter)</string>
-    <string name="no_internet_connection">Kan inte ladda ner. Anslut till Wi-Fi för att fortsätta.</string>
-    <string name="rendering_attr_roadStyle_name">Vägstil</string>
+    <string name="no_internet_connection">Kan inte ladda ner; kontrollera din internetsanslutning.</string>
+    <string name="rendering_attr_roadStyle_name">Vägtyp</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Brandgul</string>
     <string name="rendering_value_germanRoadAtlas_name">Tysk vägkarta</string>
-	<string name="traffic_warning_railways">Järnvägar</string>
+	<string name="traffic_warning_railways">Järnväg</string>
 	<string name="traffic_warning_pedestrian">Fotgängare</string>
-	<string name="show_railway_warnings">Visa järnvägsvarningar</string>
-	<string name="show_pedestrian_warnings">Visa fotgängarvarningar</string>
+	<string name="show_railway_warnings">Visa järnvägsövergångar</string>
+	<string name="show_pedestrian_warnings">Visa övergångsställen</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk vägkarta</string>
-    <string name="routing_attr_no_new_routing_name">Använd inte ruttning från v 1.9</string>
-    <string name="routing_attr_no_new_routing_description">Använd inte ruttning från v 1.9</string>
+    <string name="routing_attr_no_new_routing_name">Inga regler från version 1.9-ruttning</string>
+    <string name="routing_attr_no_new_routing_description">Använd inte de ruttningsregler som infördes i version 1.9</string>
     <string name="dash_download_msg_none">Vill du hämta offline-kartor?</string>
     <string name="dash_download_msg">Du har hämtat %1$s kartor</string>
     <string name="dash_download_new_one">Hämta ny karta</string>
@@ -1761,8 +1761,8 @@
     <string name="map_locale">Kartspråk</string>
     <string name="rendering_attr_transportStops_name">Hållplatser</string>
     <string name="navigate_point_zone">Zon</string>
-    <string name="navigate_point_northing">Nordlig</string>
-    <string name="navigate_point_easting">Östlig</string>
+    <string name="navigate_point_northing">Nordlig (y-koord.)</string>
+    <string name="navigate_point_easting">Östlig (x-koord.)</string>
     <string name="download_tab_downloads">Alla hämtningar</string>
     <string name="download_tab_updates">Uppdateringar</string>
     <string name="download_tab_local">Hämtat</string>
