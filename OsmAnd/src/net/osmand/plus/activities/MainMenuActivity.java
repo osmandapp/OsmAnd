@@ -138,7 +138,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 				@Override
 				public void onScrollChanged() {
 					int scrollY = mainScroll.getScrollY();
-					if (previousScroll == scrollY){
+					if (previousScroll == scrollY || mainScroll.getChildAt(0) == null){
 						return;
 					}
 
