@@ -1981,4 +1981,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="download_tab_local">W urządzeniu</string>
 	<string name="no_internet_connection">Pobieranie niemożliwe. Proszę się podłączyć do sieci Wi-Fi, aby kontynuować.</string>
     <string name="voices">Wskazówki głosowe</string>
-	</resources>
+	<string name="traffic_warning_railways">Kolej</string>
+	<string name="traffic_warning_pedestrian">Piesi</string>
+	<string name="show_railway_warnings">Pokazuj przejazdy kolejowe</string>
+	<string name="show_pedestrian_warnings">Pokazuj przejścia dla pieszych</string>
+    </resources>
