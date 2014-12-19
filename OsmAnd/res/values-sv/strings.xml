@@ -259,7 +259,7 @@
 \n\t - Offline-ruttning blir mer robust↵
 \n\t *Användbarhet och UIerfarenhet*↵
 \n\t - Förbättrats på många områden "</string>
-<string name="osm_editing_plugin_description">Visa inställningar som behövs för OSM-återkoppling såsom samlande/modifierade av OSM POI-objekt, öppnande/kommenterande av OSM-buggar, och bidragande med inspelade GPX-filer (kräver OSM-referenser).</string>
+<string name="osm_editing_plugin_description">Visa inställningar som behövs för OSM-återkoppling såsom samlande/modifierande av OSM POI-objekt, öppnande/kommenterande av OSM-buggar, och bidragande med inspelade GPX-filer (kräver OSM-referenser).</string>
 <string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor ritas sannolikt upp snabbare. Fungerar kanske inte så bra på vissa enheter.</string>
 <string name="play_commands_of_currently_selected_voice">Spela upp kommandon med aktuell röst</string>
 <string name="test_voice_prompts">Test av röstmeddelanden</string>
