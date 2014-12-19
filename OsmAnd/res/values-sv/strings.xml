@@ -1736,7 +1736,7 @@
 	<string name="show_map">VISA KARTAN</string>
 	<string name="show_all">VISA ALLA</string>
 	<string name="coordinates">Koordinater</string>
-	<string name="map_update">Det finns uppdateringar av %1$s kartor</string>
+	<string name="map_update">"Det finns  %1$s uppdatering(ar)"</string>
 	<string name="error_avoid_specific_road">Hittar ingen förbifart</string>
     <string name="dismiss">Avvisa</string>
     <string name="everything_up_to_date">Alla filer är uppdaterade</string>
