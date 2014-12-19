@@ -1847,4 +1847,5 @@
     <string name="show_railway_warnings">Показывать ж/д переезды</string>
 	<string name="show_pedestrian_warnings">Показывать пешеходные переходы</string>
     <string name="traffic_warning_railways">Железная дорога</string>
+	<string name="traffic_warning_pedestrian">Пешеходы</string>
 	</resources>
