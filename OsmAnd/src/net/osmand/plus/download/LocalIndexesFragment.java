@@ -479,16 +479,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		//fixes issue when local files not shown after switching tabs
-		//temporarily separate this if statement to identify NPE on soma installations
-		//if (listAdapter.getGroupCount() == 0 && getDownloadActivity().getLocalIndexInfos().size() > 0){
-		if (listAdapter.getGroupCount() == 0){
-		  if (getDownloadActivity().getLocalIndexInfos().size() > 0){
+		if (listAdapter.getGroupCount() == 0 && getDownloadActivity().getLocalIndexInfos().size() > 0){
 			for(LocalIndexInfo info : getDownloadActivity().getLocalIndexInfos()){
 				listAdapter.addLocalIndexInfo(info);
 			}
 			listAdapter.sortData();
 			getExpandableListView().setAdapter(listAdapter);
-		  }
 		}
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		//hide action bar from downloadindexfragment
