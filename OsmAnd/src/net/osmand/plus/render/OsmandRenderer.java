@@ -382,10 +382,16 @@ public class OsmandRenderer {
 	}
 
 	protected void drawBitmap(Canvas cv, Bitmap ico, RectF rf) {
+		if(ico == null) {
+			return;
+		}
 		cv.drawBitmap(ico, rf.left, rf.top, paintIcon);
 	}
 
 	protected void drawBitmap(Canvas cv, Bitmap ico, RectF rf, Rect src) {
+		if(ico == null) {
+			return;
+		}
 		cv.drawBitmap(ico, src, rf, paintIcon);
 	}
 
