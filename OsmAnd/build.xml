@@ -32,9 +32,22 @@
 	        </patternset>
 	        <cutdirsmapper dirs="1"/>
 	    </unzip>
+	    <unzip src="OsmAndCore_android.aar" dest="libs">
+	        <patternset>
+	            <include name="jni/armeabi-v7a/*"/>
+	        </patternset>
+	        <cutdirsmapper dirs="1"/>
+	    </unzip>
 	    <unzip src="OsmAndCore_android.aar" dest=".">
 	        <patternset>
 	            <include name="assets/**/*"/>
+	            <exclude name="assets/OsmAndCore_ResourcesBundle/map/fonts/**/*"/>
+	        </patternset>
+	    </unzip>
+	    <unzip src="OsmAndCore_android.aar" dest=".">
+	        <patternset>
+	            <include name="assets/**/map/fonts/OpenSans/*"/>
+	            <include name="assets/**/map/fonts/NotoSans/*"/>
 	        </patternset>
 	    </unzip>
 	</target>

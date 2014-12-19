@@ -11,7 +11,7 @@ g_*.png
 mm_*.png
 mx_*.png
 OsmAndCore_wrapper.jar
-OsmAndCore_android.aar
+OsmAndCore_*.aar
 *.class
 *.iml
 .settings
