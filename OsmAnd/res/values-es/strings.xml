@@ -1904,7 +1904,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_attr_roadStyle_name">Estilo de carretera</string>
     <string name="rendering_value_default_name">Por defecto</string>
     <string name="rendering_value_orange_name">Naranja</string>
-    <string name="routing_attr_no_new_routing_name">No usar v1.9 de ruteo</string>
+    <string name="routing_attr_no_new_routing_name">No usar reglas de ruteo de v1.9</string>
     <string name="routing_attr_no_new_routing_description">No usar v1.9 de ruteo</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas de carreteras alemanas</string>
 	<string name="traffic_warning_railways">Ferrocarriles</string>
