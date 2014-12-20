@@ -1984,7 +1984,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_value_default_name">Па змоўчаньні</string>
     <string name="rendering_attr_roadStyle_name">Стыль аўтадарог</string>
     <string name="show_pedestrian_warnings">Паказваць папярэджаньні для пешаходаў</string>
-    <string name="traffic_warning_pedestrian">Пешаходныя</string>
-	<string name="traffic_warning_railways">Чыгуначныя</string>
+    <string name="traffic_warning_pedestrian">Пешаходны пераход</string>
+	<string name="traffic_warning_railways">Чыгуначны пераезд</string>
 	<string name="show_railway_warnings">Паказваць чыгуначныя пераезды</string>
 	</resources>
