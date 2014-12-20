@@ -755,7 +755,7 @@ public class RouteInfoWidgetsFactory {
 								locimgId = R.drawable.warnings_railways;
 							}
 							text = "";
-						} else if((alarm.getType() == AlarmInfoType.PEDESTRIAN) && peds) {
+						} else if(alarm.getType() == AlarmInfoType.PEDESTRIAN) {
 							if(settings.DRIVING_REGION.get().americanSigns){
 								locimgId = R.drawable.warnings_pedestrian_us;
 							} else {
@@ -767,6 +767,8 @@ public class RouteInfoWidgetsFactory {
 						if (visible) {
 							if (alarm.getType() == AlarmInfoType.SPEED_CAMERA) {
 								visible = cams;
+							} else if (alarm.getType() == AlarmInfoType.PEDESTRIAN) {
+								visible = peds;
 							} else {
 								visible = trafficWarnings;
 							}
