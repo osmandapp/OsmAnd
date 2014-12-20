@@ -334,14 +334,14 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			return true;
 		} else if (preference == speakAlarms) {
 			showBooleanSettings(new String[] { getString(R.string.speak_street_names), getString(R.string.speak_traffic_warnings),
-					getString(R.string.speak_pedestrian),
-					getString(R.string.speak_speed_limit), getString(R.string.speak_cameras),
+					getString(R.string.speak_pedestrian), getString(R.string.speak_cameras),
+					getString(R.string.speak_speed_limit),
 					getString(R.string.announce_gpx_waypoints),
 					getString(R.string.speak_favorites),
 					getString(R.string.speak_poi)},
 					new OsmandPreference[] { settings.SPEAK_STREET_NAMES, settings.SPEAK_TRAFFIC_WARNINGS,
-					settings.SPEAK_PEDESTRIAN,
-					settings.SPEAK_SPEED_LIMIT, settings.SPEAK_SPEED_CAMERA, 
+					settings.SPEAK_PEDESTRIAN, settings.SPEAK_SPEED_CAMERA,
+					settings.SPEAK_SPEED_LIMIT,
 					settings.ANNOUNCE_WPT, settings.ANNOUNCE_NEARBY_FAVORITES, settings.ANNOUNCE_NEARBY_POI}, preference.getTitle());
 			return true;
 		}
