@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
@@ -1786,7 +1786,7 @@ s často kladenými otázkami.</string>
     <string name="error_avoid_specific_road">Nebyla nalezena nejbližší silnice</string>
     <string name="no_internet_connection">Není možné stáhnout. Prosím připojte se na Wi-Fi, aby bylo možné pokračovat.</string>
     <string name="map_locale">Jazyk map</string>
-    <string name="rendering_attr_transportStops_name">Dopravní zastávky</string>
+    <string name="rendering_attr_transportStops_name">Zastávky veřejné dopravy</string>
     <string name="navigate_point_zone">Zóna</string>
     <string name="download_tab_downloads">Všechna stahování</string>
     <string name="download_tab_updates">Aktualizace</string>
