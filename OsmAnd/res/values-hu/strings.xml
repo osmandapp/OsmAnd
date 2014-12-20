@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
@@ -1391,10 +1391,9 @@
 	<string name="routing_attr_avoid_motorway_description">Autópályák elkerülése</string>
 	<string name="routing_attr_weight_name">Súlykorlátozás</string>
 	<string name="routing_attr_weight_description">Jármű súlyának megadása, ami az úton megengedett kell legyen</string>
-    <string name="android_19_location_disabled">Az Android 4.4 KitKat verzió óta nem lehet térképet letölteni és frissíteni a korábbi helyre (%s). Szeretnéd az összes fájlt egy engedélyezett helyre másolni?
-        \n Megjegyzés: a régi fájlok érintetlenül maradnak.
-        \n Megjegyzés: nem lehetséges az OsmAnd és OsmAnd+ között fájlokat megosztani. </string>
-    <string name="application_dir_change_warning2">Szeretnéd, hogy az OsmAnd az adatokat az új helyre másolja?</string>
+    <string name="android_19_location_disabled">Az Android 4.4 (KitKat) verzió óta nem lehet térképet letölteni és frissíteni a korábbi tárolási helyre (%s). Szeretnéd az engedélyezett tárolóhelyet megváltoztatni és az összes OsmAnd fájlt oda másolni?\n 1. megjegyzés: a régi fájlok érintetlenül maradnak (de kézzel törölhetők).
+\n 2. megjegyzés: az új tárolóhelyen nem lehetséges az OsmAnd és OsmAnd+ között fájlokat megosztani.</string>
+    <string name="application_dir_change_warning2">Szeretnéd, hogy az OsmAnd az adatokat az új helyre másolja? A „Nem” választásával az OsmAnd létrehozza az új mappát és azt használja.</string>
     <string name="copying_osmand_one_file_descr">%s fájl másolása az új helyre…</string>
     <string name="copying_osmand_files_descr">OsmAnd adatainak másolása új helyre (%s)</string>
     <string name="copying_osmand_files">OsmAnd adatok másolása</string>
@@ -1782,7 +1781,7 @@
 	<string name="show_all">MUTASD MIND</string>
 	<string name="coordinates">Koordináták</string>
 	<string name="dash_download_msg_none">Szeretnél offline térképeket letölteni?</string>
-    <string name="dash_download_msg">%1$s letöltött térképed van</string>
+    <string name="dash_download_msg">%1$s térképet töltöttél le</string>
     <string name="dash_download_new_one">Új térkép letöltése</string>
     <string name="dash_download_manage">Térképek kezelése</string>
     <string name="map_locale">Térkép nyelve</string>
@@ -1805,9 +1804,9 @@
     <string name="rendering_value_germanRoadAtlas_name">Német autós atlasz</string>
 	<string name="traffic_warning_railways">Vasútvonalak</string>
 	<string name="traffic_warning_pedestrian">Gyalogos</string>
-	<string name="show_railway_warnings">Vasúti figyelmeztetések megjelenítése</string>
-	<string name="show_pedestrian_warnings">Gyalogos figyelmeztetések megjelenítése</string>
+	<string name="show_railway_warnings">Vasúti kereszteződések megjelenítése</string>
+	<string name="show_pedestrian_warnings">Gyalogátkelőhelyek megjelenítése</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikai autós atlasz</string>
-    <string name="routing_attr_no_new_routing_name">v1.9-es útvonaltervező letiltása</string>
-    <string name="routing_attr_no_new_routing_description">Ne használja az új, 1.9-es verzió útvonaltervezőjét</string>
+    <string name="routing_attr_no_new_routing_name">Nincsenek v1.9-es útvonalszabályok</string>
+    <string name="routing_attr_no_new_routing_description">Ne használja az 1.9-es verzióban bevezetett útvonalszabályokat</string>
     </resources>
