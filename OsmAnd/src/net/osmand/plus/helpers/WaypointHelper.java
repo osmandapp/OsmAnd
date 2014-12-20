@@ -199,6 +199,8 @@ public class WaypointHelper {
 		if(type == ALARMS) {
 			app.getSettings().SHOW_TRAFFIC_WARNINGS.set(enable);
 			app.getSettings().SPEAK_TRAFFIC_WARNINGS.set(enable);
+			app.getSettings().SHOW_PEDESTRIAN.set(enable);
+			app.getSettings().SPEAK_PEDESTRIAN.set(enable);
 		} else if(type == POI) {
 			app.getSettings().SHOW_NEARBY_POI.set(enable);
 			app.getSettings().ANNOUNCE_NEARBY_POI.set(enable);
