@@ -1885,7 +1885,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_attr_roadStyle_name">Style de route</string>
     <string name="rendering_value_default_name">Par défaut</string>
     <string name="rendering_value_orange_name">Orange</string>
-    <string name="traffic_warning_railways">Voies ferrées</string>
+    <string name="traffic_warning_railways">Passage à niveau</string>
 	<string name="traffic_warning_pedestrian">Passage piéton</string>
 	<string name="show_railway_warnings">Afficher les alertes de voie ferrée</string>
 	<string name="show_pedestrian_warnings">Afficher les alertes de passage piéton</string>
