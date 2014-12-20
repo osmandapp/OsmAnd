@@ -1747,8 +1747,8 @@
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Brandgul</string>
     <string name="rendering_value_germanRoadAtlas_name">Tysk vägkarta</string>
-	<string name="traffic_warning_railways">Järnväg</string>
-	<string name="traffic_warning_pedestrian">Fotgängare</string>
+	<string name="traffic_warning_railways">Järnvägskorsning</string>
+	<string name="traffic_warning_pedestrian">Övergångsställe</string>
 	<string name="show_railway_warnings">Visa järnvägsövergångar</string>
 	<string name="show_pedestrian_warnings">Visa övergångsställen</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk vägkarta</string>
@@ -1768,4 +1768,5 @@
     <string name="download_tab_local">Hämtat</string>
 	<string name="route_descr_destination">Destination</string>
     <string name="voices">Röstprompter</string>
-	</resources>
+	<string name="speak_pedestrian">Meddela om övergångsställen</string>
+    </resources>
