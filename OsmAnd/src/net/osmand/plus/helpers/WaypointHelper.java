@@ -678,9 +678,9 @@ public class WaypointHelper {
 				//assign alarm list icons manually for now
 				//attention, some list icons are only temporary test icons, not pixel perfect yet.
 				if(((AlarmInfo) point).getType().toString() == "SPEED_CAMERA") {
-					return uiCtx.getResources().getDrawable(R.drawable.mx_highway_speed_camera);
+					return R.drawable.mx_highway_speed_camera;
 				} else if(((AlarmInfo) point).getType().toString() == "BORDER_CONTROL") {
-					R.drawable.mx_barrier_border_control;
+					return R.drawable.mx_barrier_border_control;
 				} else	if(((AlarmInfo) point).getType().toString() == "RAILWAY") {
 					//this produces error: non-static variable app cannot be referenced from a static context
 					//if(app.getSettings.DRIVING_REGION.get().americanSigns){
