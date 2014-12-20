@@ -682,15 +682,27 @@ public class WaypointHelper {
 				} else if(((AlarmInfo) point).getType().toString()="BORDER_CONTROL") {
 					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_border_control);
 				} else	if(((AlarmInfo) point).getType().toString()="RAILWAY") {
-					return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways);
+					if(app.getSettings.DRIVING_REGION.get().americanSigns){
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways_us);
+					} else {
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways);
+					}
 				} else if(((AlarmInfo) point).getType().toString()="TRAFFIC_CALMING") {
-					return uiCtx.getResources().getDrawable(R.drawable.list_traffic_calming);
+					if(app.getSettings.DRIVING_REGION.get().americanSigns){
+						return uiCtx.getResources().getDrawable(R.drawable.list_traffic_calming_us);
+					} else {
+						return uiCtx.getResources().getDrawable(R.drawable.list_traffic_calming);
+					}
 				} else if(((AlarmInfo) point).getType().toString()="TOLL_BOOTH") {
 					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_toll_booth);
 				} else if(((AlarmInfo) point).getType().toString()="STOP") {
 					return uiCtx.getResources().getDrawable(R.drawable.list_stop);
 				} else if(((AlarmInfo) point).getType().toString()="PEDESTRIAN") {
-					return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian);
+					if(app.getSettings.DRIVING_REGION.get().americanSigns){
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian_us);
+					} else {
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian);
+					}
 				} else {
 					return 0;
 				}
@@ -726,15 +738,27 @@ public class WaypointHelper {
 				} else if(((AlarmInfo) point).getType().toString()="BORDER_CONTROL") {
 					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_border_control);
 				} else	if(((AlarmInfo) point).getType().toString()="RAILWAY") {
-					return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways);
+					if(app.getSettings.DRIVING_REGION.get().americanSigns){
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways_us);
+					} else {
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways);
+					}
 				} else if(((AlarmInfo) point).getType().toString()="TRAFFIC_CALMING") {
-					return uiCtx.getResources().getDrawable(R.drawable.list_traffic_calming);
+					if(app.getSettings.DRIVING_REGION.get().americanSigns){
+						return uiCtx.getResources().getDrawable(R.drawable.list_traffic_calming_us);
+					} else {
+						return uiCtx.getResources().getDrawable(R.drawable.list_traffic_calming);
+					}
 				} else if(((AlarmInfo) point).getType().toString()="TOLL_BOOTH") {
 					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_toll_booth);
 				} else if(((AlarmInfo) point).getType().toString()="STOP") {
 					return uiCtx.getResources().getDrawable(R.drawable.list_stop);
 				} else if(((AlarmInfo) point).getType().toString()="PEDESTRIAN") {
-					return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian);
+					if(app.getSettings.DRIVING_REGION.get().americanSigns){
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian_us);
+					} else {
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian);
+					}
 				} else {
 					return null;
 				}
