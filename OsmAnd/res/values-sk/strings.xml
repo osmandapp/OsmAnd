@@ -2024,6 +2024,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="show_railway_warnings">Zobrazovať varovania železnice</string>
 	<string name="show_pedestrian_warnings">Zobrazovať varovania chodcov</string>
     <string name="rendering_value_americanRoadAtlas_name">Americký atlas ciest</string>
-    <string name="routing_attr_no_new_routing_name">Nepoužívať výpočet trasy v1.9</string>
-    <string name="routing_attr_no_new_routing_description">Nepoužívať výpočet trasy verzie 1.9</string>
+    <string name="routing_attr_no_new_routing_name">Bez smerovacích pravidiel verzie 1.9</string>
+    <string name="routing_attr_no_new_routing_description">Nepoužívať pravidlá výpočtu trasy zavedené vo verzii 1.9</string>
     </resources>
