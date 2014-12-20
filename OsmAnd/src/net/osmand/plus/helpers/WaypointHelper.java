@@ -675,9 +675,22 @@ public class WaypointHelper {
 				//return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
 				return 0;
 			} else if(type == ALARMS) {
-				//TODO: Looks like this does not work yet, not sure why:
-				if(RenderingIcons.containsBigIcon("list_" + ((AlarmInfo) point).getType().toString().toLowerCase())) {
-					return RenderingIcons.getBigIconResourceId("list_" + ((AlarmInfo) point).getType().toString().toLowerCase());
+				//assign alarm list icons manually for now
+				//attention, some list icons are only temporary test icons, not pixel perfect yet.
+				if(((AlarmInfo) point).getType().toString()="SPEED_CAMERA") {
+					return uiCtx.getResources().getDrawable(R.drawable.mx_highway_speed_camera);
+				} else if(((AlarmInfo) point).getType().toString()="BORDER_CONTROL") {
+					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_border_control);
+				} else	if(((AlarmInfo) point).getType().toString()="RAILWAY") {
+					return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways);
+				} else if(((AlarmInfo) point).getType().toString()="TRAFFIC_CALMING") {
+					return uiCtx.getResources().getDrawable(R.drawable.list_traffic_calming);
+				} else if(((AlarmInfo) point).getType().toString()="TOLL_BOOTH") {
+					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_toll_booth);
+				} else if(((AlarmInfo) point).getType().toString()="STOP") {
+					return uiCtx.getResources().getDrawable(R.drawable.list_stop);
+				} else if(((AlarmInfo) point).getType().toString()="PEDESTRIAN") {
+					return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian);
 				} else {
 					return 0;
 				}
@@ -706,9 +719,22 @@ public class WaypointHelper {
 			} else if(type == FAVORITES || type == WAYPOINTS) {
 				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
 			} else if(type == ALARMS) {
-				//TODO: Looks like this does not work yet, not sure why:
-				if(RenderingIcons.containsBigIcon("list_" + ((AlarmInfo) point).getType().toString().toLowerCase())) {
-					return uiCtx.getResources().getDrawable(RenderingIcons.getBigIconResourceId("list_" + ((AlarmInfo) point).getType().toString().toLowerCase()));
+				//assign alarm list icons manually for now
+				//attention, some list icons are only temporary test icons, not pixel perfect yet.
+				if(((AlarmInfo) point).getType().toString()="SPEED_CAMERA") {
+					return uiCtx.getResources().getDrawable(R.drawable.mx_highway_speed_camera);
+				} else if(((AlarmInfo) point).getType().toString()="BORDER_CONTROL") {
+					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_border_control);
+				} else	if(((AlarmInfo) point).getType().toString()="RAILWAY") {
+					return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways);
+				} else if(((AlarmInfo) point).getType().toString()="TRAFFIC_CALMING") {
+					return uiCtx.getResources().getDrawable(R.drawable.list_traffic_calming);
+				} else if(((AlarmInfo) point).getType().toString()="TOLL_BOOTH") {
+					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_toll_booth);
+				} else if(((AlarmInfo) point).getType().toString()="STOP") {
+					return uiCtx.getResources().getDrawable(R.drawable.list_stop);
+				} else if(((AlarmInfo) point).getType().toString()="PEDESTRIAN") {
+					return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian);
 				} else {
 					return null;
 				}
