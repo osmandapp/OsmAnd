@@ -1845,7 +1845,7 @@
 	<string name="show_map">VIS KORT</string>
 	<string name="show_all">VIS ALLE</string>
 	<string name="coordinates">Koordinater</string>
-	<string name="map_update">Der er %1$s opdateringer til kort</string>
+	<string name="map_update">Der er %1$s opdateringer</string>
 	<string name="error_avoid_specific_road">Ingen omfartsvej fundet</string>
     <string name="use_opengl_render">Brug OpenGL optegning</string>
     <string name="use_opengl_render_descr">Brug hardware accelereret OpenGL optegning (virker muligvis ikke på alle enheder)</string>
@@ -1874,6 +1874,6 @@
     <string name="routing_attr_no_new_routing_description">Brug ikke routing regler indført i v1.9</string>
     <string name="traffic_warning_railways">Jernbaner</string>
 	<string name="traffic_warning_pedestrian">Fodgænger</string>
-	<string name="show_railway_warnings">Jernbaneadvarsler</string>
-	<string name="show_pedestrian_warnings">Fodgængeradvarsler</string>
+	<string name="show_railway_warnings">Jernbaneoverskæringer</string>
+	<string name="show_pedestrian_warnings">Fodgængerovergange</string>
     </resources>
