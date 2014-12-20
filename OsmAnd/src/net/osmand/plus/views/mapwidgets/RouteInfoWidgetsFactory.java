@@ -737,16 +737,28 @@ public class RouteInfoWidgetsFactory {
 						} else if(alarm.getType() == AlarmInfoType.TOLL_BOOTH) {
 							text = "$";
 						} else if(alarm.getType() == AlarmInfoType.TRAFFIC_CALMING) {
-							locimgId = R.drawable.warnings_traffic_calming;
+							if(settings.DRIVING_REGION.get().americanSigns){
+								locimgId = R.drawable.warnings_traffic_calming_us;
+							} else {
+								locimgId = R.drawable.warnings_traffic_calming;
+							}
 							text = "";
 						} else if(alarm.getType() == AlarmInfoType.STOP) {
 							locimgId = R.drawable.warnings_stop;
 							text = "";
 							//text = "STOP";
 						} else if(alarm.getType() == AlarmInfoType.RAILWAY) {
-							locimgId = R.drawable.warnings_railways;
+							if(settings.DRIVING_REGION.get().americanSigns){
+								locimgId = R.drawable.warnings_railways_us;
+							} else {
+								locimgId = R.drawable.warnings_railways;
+							}
 						} else if(alarm.getType() == AlarmInfoType.PEDESTRIAN) {
-							locimgId = R.drawable.warnings_pedestrian;
+							if(settings.DRIVING_REGION.get().americanSigns){
+								locimgId = R.drawable.warnings_pedestrian_us;
+							} else {
+								locimgId = R.drawable.warnings_pedestrian;
+							}
 						}
 						visible = (text != null &&  text.length() > 0) || locimgId != 0;
 						if (visible) {
