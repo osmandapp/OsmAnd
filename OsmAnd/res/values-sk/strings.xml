@@ -2019,8 +2019,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_default_name">Predvolené</string>
     <string name="rendering_value_orange_name">Oranžová</string>
     <string name="rendering_value_germanRoadAtlas_name">Nemecký atlas ciest</string>
-	<string name="traffic_warning_railways">Železnice</string>
-	<string name="traffic_warning_pedestrian">Chodec</string>
+	<string name="traffic_warning_railways">Železničné priecestie</string>
+	<string name="traffic_warning_pedestrian">Priechod pre chodcov</string>
 	<string name="show_railway_warnings">Zobrazovať varovania železnice</string>
 	<string name="show_pedestrian_warnings">Zobrazovať varovania chodcov</string>
     <string name="rendering_value_americanRoadAtlas_name">Americký atlas ciest</string>
