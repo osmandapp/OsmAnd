@@ -1817,4 +1817,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="traffic_warning_pedestrian">Pedonale</string>
 	<string name="show_railway_warnings">Ammustra sas rugradas ferroviàrias</string>
 	<string name="show_pedestrian_warnings">Ammustra sas istrìscias pedonales</string>
+    <string name="speak_pedestrian">Annùntzia sos atraessamentos pedonales</string>
     </resources>
