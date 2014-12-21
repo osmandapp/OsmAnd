@@ -165,12 +165,12 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	@Override
 	protected void onResume() {
 		super.onResume();
-		//if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
+		if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
 		//	getLocationProvider().addLocationListener(this);
-		//	getLocationProvider().addCompassListener(this);
-		//	getLocationProvider().registerOrUnregisterCompassListener(true);
+			getLocationProvider().addCompassListener(this);
+			getLocationProvider().registerOrUnregisterCompassListener(true);
 		//	getLocationProvider().resumeAllUpdates();
-		//}
+		}
 	}
 
 	@Override
