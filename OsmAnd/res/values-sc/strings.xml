@@ -1813,8 +1813,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="rendering_value_americanRoadAtlas_name">Atlante de sas istradas americanas</string>
     <string name="routing_attr_no_new_routing_name">No impreare su càlculu de s\'àndala v1.9</string>
     <string name="routing_attr_no_new_routing_description">No impreare su càlculu de s\'àndala v1.9</string>
-    <string name="traffic_warning_railways">Ferrovia</string>
-	<string name="traffic_warning_pedestrian">Pedonale</string>
+    <string name="traffic_warning_railways">Atraessamentu de sa ferrovia</string>
+	<string name="traffic_warning_pedestrian">Atraessamentu pedonale</string>
 	<string name="show_railway_warnings">Ammustra sas rugradas ferroviàrias</string>
 	<string name="show_pedestrian_warnings">Ammustra sas istrìscias pedonales</string>
     <string name="speak_pedestrian">Annùntzia sos atraessamentos pedonales</string>
