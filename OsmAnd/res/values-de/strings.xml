@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -702,7 +702,7 @@
 	<string name="map_overlay_descr">Wähle Overlay-Karte</string>
 	<string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert</string>
 	<string name="select_tile_source_to_install">Kartenauswahl (Installation oder Aktualisierung)</string>
-	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
+	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar!</string>
 	<string name="install_more">Weitere installieren…</string>
 	<string name="tip_update_index">Offline-Karten</string>
 	<string name="tip_update_index_t">Aktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und die Offline-Navigation. OsmAnd hat einen Karten-Manager für das Herunterladen oder Aktualisieren von Offline-Karten.
@@ -1598,7 +1598,7 @@
 	<string name="visible_element">Auf Karte anzeigen</string>
 	<string name="show_zoom_buttons_navigation_descr">Zoom-Tasten bei Navigation anzeigen</string>
 	<string name="show_zoom_buttons_navigation">Zoom-Tasten anzeigen</string>
-	<string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internet-Verbindung überprüfen.</string>
+	<string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internet-Verbindung überprüfen!</string>
 	<string name="none_selected_gpx">Keine GPX-Spur ausgewählt. Zum Auswählen auf eine Spur lange drücken.</string>
 	<string name="local_index_unselect_gpx_file">Deselektieren</string>
 	<string name="local_index_select_gpx_file">Zum Anzeigen auswählen</string>
@@ -2018,12 +2018,12 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="show_map">KARTE ZEIGEN</string>
     <string name="show_all">ALLES ZEIGEN</string>
     <string name="coordinates">Koordinaten</string>
-    <string name="error_avoid_specific_road">Es konnte keine alternative Wegführung gefunden werden</string>
+    <string name="error_avoid_specific_road">Es konnte keine alternative Streckenführung gefunden werden</string>
     <string name="dismiss">Ablehnen</string>
-    <string name="everything_up_to_date">Alle Dateien sind aktuell</string>
+    <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (Funktioniert nicht auf allen Geräten)</string>
-    <string name="no_internet_connection">Herunterladen nicht möglich, bitte die Internet-Verbindung überprüfen.</string>
+    <string name="no_internet_connection">Herunterladen nicht möglich. Internet-Verbindung prüfen!</string>
     <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
@@ -2033,7 +2033,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="navigate_point_northing">Nordwert</string>
     <string name="navigate_point_easting">Ostwert</string>
     <string name="dash_download_msg_none">Möchten Sie Offline-Karten herunterladen?</string>
-    <string name="dash_download_msg">%1$s heruntergeladenen Karten</string>
+    <string name="dash_download_msg">%1$s heruntergeladene Karten</string>
     <string name="dash_download_new_one">Neue Karte herunterladen</string>
     <string name="dash_download_manage">Karten verwalten</string>
     <string name="rendering_attr_roadStyle_name">Straßen-Darstellung</string>
@@ -2046,5 +2046,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="show_pedestrian_warnings">Fußgänger-Übergänge anzeigen</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikanischer Straßenatlas</string>
     <string name="routing_attr_no_new_routing_name">Routing v1.9 nicht verwenden</string>
-    <string name="routing_attr_no_new_routing_description">Keine Routenberechnung nach dem neuen Algorithmus</string>
+    <string name="routing_attr_no_new_routing_description">Neuen Routenalgorithmus nicht verwenden</string>
+    <string name="speak_pedestrian">Fußgänger-Übergänge ankündigen</string>
     </resources>
