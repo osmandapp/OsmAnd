@@ -32,14 +32,14 @@
 
 				<fragment
 						xmlns:android="http://schemas.android.com/apk/res/android"
-						android:name="net.osmand.plus.dashboard.DashUpdatesFragment"
+						android:name="net.osmand.plus.dashboard.DashFavoritesFragment"
 						android:layout_marginTop="@dimen/dashCardMargin"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"/>
 
 				<fragment
 						xmlns:android="http://schemas.android.com/apk/res/android"
-						android:name="net.osmand.plus.dashboard.DashFavoritesFragment"
+						android:name="net.osmand.plus.dashboard.DashAudioVideoNotesFragment"
 						android:layout_marginTop="@dimen/dashCardMargin"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"/>
@@ -67,7 +67,7 @@
 
 				<fragment
 						xmlns:android="http://schemas.android.com/apk/res/android"
-						android:name="net.osmand.plus.dashboard.DashAudioVideoNotesFragment"
+						android:name="net.osmand.plus.dashboard.DashUpdatesFragment"
 						android:layout_marginTop="@dimen/dashCardMargin"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"/>
