@@ -76,8 +76,8 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	public void onPause() {
 		super.onPause();
 		getMyApplication().getLocationProvider().pauseAllUpdates();
-		getMyApplication().getLocationProvider().removeCompassListener(this);
 		getMyApplication().getLocationProvider().removeLocationListener(this);
+		getMyApplication().getLocationProvider().removeCompassListener(this);
 	}
 
 	@Override

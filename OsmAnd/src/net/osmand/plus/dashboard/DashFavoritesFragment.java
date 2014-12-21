@@ -67,15 +67,15 @@ public class DashFavoritesFragment extends DashBaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		//if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
-		//	if(!getMyApplication().getSettings().isLastKnownMapLocation()) {
+		if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
+			if(!getMyApplication().getSettings().isLastKnownMapLocation()) {
 				// show first time when application ran
-		//		location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
-		//	} else {
-		//		location = getLocationProvider().getLastKnownLocation();
-		//	}
-		//	updateLocation(location);
-		//}
+				location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
+			} else {
+				location = getLocationProvider().getLastKnownLocation();
+			}
+			updateLocation(location);
+		}
 
 
 		setupFavorites();
