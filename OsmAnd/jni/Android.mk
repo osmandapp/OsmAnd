@@ -6,7 +6,7 @@ $(info OsmAnd root: $(ROOT_PATH))
 ifdef BUILD_ONLY_OLD_LIB
 OSMAND_MAKEFILES := \
     $(all-subdir-makefiles) \
-    $(call all-makefiles-under,$(ROOT_PATH)/core/targets/android)
+    $(call all-makefiles-under,$(ROOT_PATH)/core-legacy/targets/android)
 else 
 # } LEGACY
 OSMAND_MAKEFILES := \
