@@ -1872,8 +1872,8 @@
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk vejkort</string>
     <string name="routing_attr_no_new_routing_name">Ingen v1.9 routing regler</string>
     <string name="routing_attr_no_new_routing_description">Brug ikke routing regler indført i v1.9</string>
-    <string name="traffic_warning_railways">Jernbaner</string>
-	<string name="traffic_warning_pedestrian">Fodgænger</string>
+    <string name="traffic_warning_railways">Jernbaneoverskæring</string>
+	<string name="traffic_warning_pedestrian">Fodgængerovergang</string>
 	<string name="show_railway_warnings">Jernbaneoverskæringer</string>
 	<string name="show_pedestrian_warnings">Fodgængerovergange</string>
     <string name="speak_pedestrian">Fodgængerovergange</string>
