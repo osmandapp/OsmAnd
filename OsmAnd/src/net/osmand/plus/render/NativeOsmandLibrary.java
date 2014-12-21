@@ -1,6 +1,5 @@
 package net.osmand.plus.render;
 
-
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -27,15 +26,6 @@ public class NativeOsmandLibrary extends NativeLibrary {
 			return library;
 		}
 	}
-	public static void loadLibrary(String name) {
-		try {
-        	System.out.println("Loading " + name);
-            System.loadLibrary(name);
-        } catch( UnsatisfiedLinkError e ) {
-            System.err.println("Failed to load '"+name + "':" + e);
-            throw e;
-        }
-	}
 
     public static NativeOsmandLibrary getLibrary(RenderingRulesStorage storage, OsmandApplication ctx) {
 		if (!isLoaded()) {
@@ -45,8 +35,6 @@ public class NativeOsmandLibrary extends NativeLibrary {
 					try {
 						log.debug("Loading native gnustl_shared..."); //$NON-NLS-1$
 						System.loadLibrary("gnustl_shared");
-						log.debug("Loading native cpufeatures_proxy..."); //$NON-NLS-1$
-						System.loadLibrary("cpufeatures_proxy");
 						if (android.os.Build.VERSION.SDK_INT >= 8) {
 							log.debug("Loading jnigraphics, since Android >= 2.2 ..."); //$NON-NLS-1$
 							try {
@@ -56,9 +44,8 @@ public class NativeOsmandLibrary extends NativeLibrary {
 								log.debug("Failed to load jnigraphics: " + e); //$NON-NLS-1$
 							}
 						}
-						final String libCpuSuffix = cpuHasNeonSupport() ? "_neon" : "";
 						log.debug("Loading native libraries..."); //$NON-NLS-1$
-						loadOldCore(libCpuSuffix);
+                        System.loadLibrary("osmand");
 						log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
 						library = new NativeOsmandLibrary(false);
 						log.debug("Initializing rendering rules storage..."); //$NON-NLS-1$
@@ -72,10 +59,6 @@ public class NativeOsmandLibrary extends NativeLibrary {
 			
 		}
 		return library;
-	}
-
-	private static void loadOldCore(final String libCpuSuffix) {
-		System.loadLibrary("osmand" + libCpuSuffix);
 	}
 
 	public static boolean isSupported()
@@ -116,8 +99,4 @@ public class NativeOsmandLibrary extends NativeLibrary {
 	
 	private static native RenderingGenerationResult generateRenderingDirect(RenderingContext rc, long searchResultHandler,
 			Bitmap bitmap, RenderingRuleSearchRequest render);
-			
-	public static native int getCpuCount();
-	public static native boolean cpuHasNeonSupport();
-	
 }

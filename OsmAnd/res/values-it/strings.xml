@@ -2043,4 +2043,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="traffic_warning_pedestrian">Pedonale</string>
 	<string name="show_railway_warnings">Mostra i passaggi a livello</string>
 	<string name="show_pedestrian_warnings">Mostra gli attraversamenti pedonali</string>
+    <string name="speak_pedestrian">Annuncia gli attraversamenti pedonali</string>
     </resources>
