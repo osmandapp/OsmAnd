@@ -1914,4 +1914,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_value_americanRoadAtlas_name">Atlas de carreteras americanas</string>
     <string name="navigate_point_easting">Al este</string>
     <string name="navigate_point_northing">Al norte</string>
+    <string name="speak_pedestrian">Anunciar pasos de cebra</string>
     </resources>
