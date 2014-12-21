@@ -1846,6 +1846,7 @@
     <string name="routing_attr_no_new_routing_description">Не использовать для построение маршрута алгоритм представленный в версии 1.9</string>
     <string name="show_railway_warnings">Показывать ж/д переезды</string>
 	<string name="show_pedestrian_warnings">Показывать пешеходные переходы</string>
-    <string name="traffic_warning_railways">Железная дорога</string>
-	<string name="traffic_warning_pedestrian">Пешеходы</string>
-	</resources>
+    <string name="traffic_warning_railways">Железнодорожный переезд</string>
+	<string name="traffic_warning_pedestrian">Пешеходный переход</string>
+	<string name="speak_pedestrian">Сообщать о пешеходных переходах</string>
+    </resources>
