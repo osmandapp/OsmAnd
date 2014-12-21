@@ -75,7 +75,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		//		location = getLocationProvider().getLastKnownLocation();
 		//	}
 		//	updateLocation(location);
-		}
+		//}
 
 
 		setupFavorites();
