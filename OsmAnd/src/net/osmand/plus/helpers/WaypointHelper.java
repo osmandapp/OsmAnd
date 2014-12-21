@@ -657,66 +657,9 @@ public class WaypointHelper {
 		}
 
 
-		public int getDrawableId(Context uiCtx) {
-			if(type == POI) {
-				Amenity amenity = ((AmenityLocationPoint) point).a;
-				StringBuilder tag = new StringBuilder();
-				StringBuilder value = new StringBuilder();
-				MapRenderingTypes.getDefault().getAmenityTagValue(amenity.getType(), amenity.getSubType(),
-						tag, value);
-				if(RenderingIcons.containsBigIcon(tag + "_" + value)) {
-					return RenderingIcons.getBigIconResourceId(tag + "_" + value);
-				} else if(RenderingIcons.containsBigIcon(value.toString())) {
-					return RenderingIcons.getBigIconResourceId(value.toString());
-				}
-				return 0;
-			} else if(type == TARGETS) {
-				return !((TargetPoint)point).intermediate? R.drawable.list_destination:
-								R.drawable.list_intermediate;
-			} else if(type == FAVORITES || type == WAYPOINTS) {
-				//return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
-				return 0;
-			} else if(type == ALARMS) {
-				//assign alarm list icons manually for now
-				//attention, some list icons are only temporary test icons, not pixel perfect yet.
-				if(((AlarmInfo) point).getType().toString() == "SPEED_CAMERA") {
-					return R.drawable.mx_highway_speed_camera;
-				} else if(((AlarmInfo) point).getType().toString() == "BORDER_CONTROL") {
-					return R.drawable.mx_barrier_border_control;
-				} else	if(((AlarmInfo) point).getType().toString() == "RAILWAY") {
-					//this produces error: non-static variable app cannot be referenced from a static context
-					//if(app.getSettings.DRIVING_REGION.get().americanSigns){
-					//	return R.drawable.list_warnings_railways_us;
-					//} else {
-						return R.drawable.list_warnings_railways;
-					//}
-				} else if(((AlarmInfo) point).getType().toString() == "TRAFFIC_CALMING") {
-					//this produces error: non-static variable app cannot be referenced from a static context
-					//if(app.getSettings.DRIVING_REGION.get().americanSigns){
-					//	return R.drawable.list_traffic_calming_us;
-					//} else {
-						return R.drawable.list_traffic_calming;
-					//}
-				} else if(((AlarmInfo) point).getType().toString() == "TOLL_BOOTH") {
-					return R.drawable.mx_barrier_toll_booth;
-				} else if(((AlarmInfo) point).getType().toString() == "STOP") {
-					return R.drawable.list_stop;
-				} else if(((AlarmInfo) point).getType().toString() == "PEDESTRIAN") {
-					//this produces error: non-static variable app cannot be referenced from a static context
-					//if(app.getSettings.DRIVING_REGION.get().americanSigns){
-					//	return R.drawable.list_warnings_pedestrian_us;
-					//} else {
-						return R.drawable.list_warnings_pedestrian;
-					//}
-				} else {
-					return 0;
-				}
-			} else {
-				return 0;
-			}
-		}
+		
 
-		public Drawable getDrawable(Context uiCtx) {
+		public Drawable getDrawable(Context uiCtx, OsmandApplication app) {
 			if(type == POI) {
 				Amenity amenity = ((AmenityLocationPoint) point).a;
 				StringBuilder tag = new StringBuilder();
@@ -743,30 +686,27 @@ public class WaypointHelper {
 				} else if(((AlarmInfo) point).getType().toString() == "BORDER_CONTROL") {
 					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_border_control);
 				} else	if(((AlarmInfo) point).getType().toString() == "RAILWAY") {
-					//this produces error: non-static variable app cannot be referenced from a static context
-					//if(app.getSettings.DRIVING_REGION.get().americanSigns){
-					//	return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways_us);
-					//} else {
+					if(app.getSettings().DRIVING_REGION.get().americanSigns){
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways_us);
+					} else {
 						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways);
-					//}
+					}
 				} else if(((AlarmInfo) point).getType().toString() == "TRAFFIC_CALMING") {
-					//this produces error: non-static variable app cannot be referenced from a static context
-					//if(app.getSettings.DRIVING_REGION.get().americanSigns){
-					//	return uiCtx.getResources().getDrawable(R.drawable.list_traffic_calming_us);
-					//} else {
+					if(app.getSettings().DRIVING_REGION.get().americanSigns){
 						return uiCtx.getResources().getDrawable(R.drawable.list_traffic_calming);
-					//}
+					} else {
+						return uiCtx.getResources().getDrawable(R.drawable.list_traffic_calming);
+					}
 				} else if(((AlarmInfo) point).getType().toString() == "TOLL_BOOTH") {
 					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_toll_booth);
 				} else if(((AlarmInfo) point).getType().toString() == "STOP") {
 					return uiCtx.getResources().getDrawable(R.drawable.list_stop);
 				} else if(((AlarmInfo) point).getType().toString() == "PEDESTRIAN") {
-					//this produces error: non-static variable app cannot be referenced from a static context
-					//if(app.getSettings.DRIVING_REGION.get().americanSigns){
-					//	return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian_us);
-					//} else {
+					if(app.getSettings().DRIVING_REGION.get().americanSigns){
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian_us);
+					} else {
 						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian);
-					//}
+					}
 				} else {
 					return null;
 				}

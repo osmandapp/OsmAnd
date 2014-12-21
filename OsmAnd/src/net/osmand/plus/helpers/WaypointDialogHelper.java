@@ -145,7 +145,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			}
 		});
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
-		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(ctx));
+		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(ctx, app));
 		int dist = -1;
 		if (!wh.isRouteCalculated()) {
 			if (ctx instanceof MapActivity) {
