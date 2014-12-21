@@ -480,13 +480,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		//fixes issue when local files not shown after switching tabs
 		//TODO: But next line throws NPE in some circumstances when called from dashboard, so needs fixing, commented out for now
-		//if (listAdapter.getGroupCount() == 0 && getDownloadActivity().getLocalIndexInfos().size() > 0) {
-		//	for(LocalIndexInfo info : getDownloadActivity().getLocalIndexInfos()) {
-		//		listAdapter.addLocalIndexInfo(info);
-		//	}
-		//	listAdapter.sortData();
-		//	getExpandableListView().setAdapter(listAdapter);
-		//}
+		if (listAdapter.getGroupCount() == 0 && getDownloadActivity().getLocalIndexInfos().size() > 0) {
+			for(LocalIndexInfo info : getDownloadActivity().getLocalIndexInfos()) {
+				if (info != null) {
+					listAdapter.addLocalIndexInfo(info);
+				}
+			}
+			listAdapter.sortData();
+			getExpandableListView().setAdapter(listAdapter);
+		}
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		//hide action bar from downloadindexfragment
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
