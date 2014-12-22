@@ -111,4 +111,5 @@
 	<string name="poi_tram_stop">Parada de tramvia (obsolet)</string>
 	<string name="poi_public_transport_station">Estació de transport públic</string>
 	<string name="poi_mine_historic">Mina històrica</string>
+	<string name="poi_gate">Porta</string>
 	</resources>
