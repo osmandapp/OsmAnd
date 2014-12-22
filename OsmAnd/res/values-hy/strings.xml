@@ -39,7 +39,7 @@
     <string name="install_paid">Լրիվ տարբերակ</string>
     <string name="cancel_navigation">Վերջացնել նավիգացիան</string>
     <string name="clear_destination">Մաքրել նպատակակետը</string>
-    <string name="download_using_mobile_internet">Ներկայումս WiFi կապ չկա. Դուք ցանկանու՞մ եք շարունակել բեռնե գործող ինտերնետային կապով.</string>
+    <string name="download_using_mobile_internet">Ներկայումս WiFi կապ չկա. Դուք ցանկանու՞մ եք շարունակել բեռնել ընթացիկ ինտերնետային կապով.</string>
     <string name="street_name">Փողոց</string>
 	<string name="hno">Տան համարը</string>
     <string name="website">Վեբ կայք</string>
@@ -147,6 +147,6 @@
 	<string name="routing_attr_weight_name">Կշիռ</string>
 	<string name="routing_attr_weight_description">Կշռի սահմանափակման նշում</string>
     <string name="osmand_distance_planning_plugin_description">Ստեղծել ուղիներ (կամ օգտագործել/փոփոխել առկա GPX ֆայլերը) կետեռի միջև հեռավորության չափման համար։ Պահպանել որպես GPX, որը կարող է օգտագործվել GPX ուղիների պլանավորման համար։</string>
-    <string name="default_buttons_no">No</string>
-	<string name="default_buttons_yes"/>
+    <string name="default_buttons_no">Ոչ</string>
+	<string name="default_buttons_yes">Այո</string>
 	</resources>
