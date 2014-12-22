@@ -61,6 +61,10 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 
 	public void setupNotes() {
 		View mainView = getView();
+		if (mainView == null) {
+			return;
+		}
+
 		if (plugin == null){
 			(mainView.findViewById(R.id.main_notes)).setVisibility(View.GONE);
 			return;
