@@ -865,7 +865,7 @@
 	<string name="loading_postcodes">Laddar postnummer …</string>
 	<string name="loading_streets">Laddar gator …</string>
 	<string name="loading_cities">Laddar städer …</string>
-	<string name="poi">Intressepunkter (POI)</string>
+	<string name="poi">Intresse- punkter (POI)</string>
 	<string name="arrived_at_destination">Du har anlänt till din destination</string>
 	<string name="close">Stäng</string>
 	<string name="loading_data">Laddar data …</string>
