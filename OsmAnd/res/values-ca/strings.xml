@@ -1852,11 +1852,12 @@
     <string name="rendering_value_default_name">Per defecte</string>
     <string name="rendering_value_orange_name">Taronja</string>
     <string name="rendering_value_germanRoadAtlas_name">Atles de carreteres alemany</string>
-	<string name="traffic_warning_railways">Via férrea</string>
-	<string name="traffic_warning_pedestrian">Vianant</string>
+	<string name="traffic_warning_railways">Pas a nivell</string>
+	<string name="traffic_warning_pedestrian">Pas de vianants</string>
 	<string name="show_railway_warnings">Mostra passos a nivell</string>
 	<string name="show_pedestrian_warnings">Mostra passos de zebra</string>
     <string name="rendering_value_americanRoadAtlas_name">Atles de carreteres americà</string>
     <string name="routing_attr_no_new_routing_name">Sense preferències de navegació v1.9</string>
     <string name="routing_attr_no_new_routing_description">No feu ús de les preferències de navegació introduïdes a la v1.9</string>
+    <string name="speak_pedestrian">Anuncia els pas zebra</string>
     </resources>
