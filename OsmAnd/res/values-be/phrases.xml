@@ -1,4 +1,36 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="poi_bakery">Пякарня</string>
 	<string name="poi_alcohol">Сьпіртныя напоі</string>
+	<string name="poi_convenience">Крама</string>
+	<string name="poi_palaeontological_site">Палеанталяґічныя раскопы</string>
+
+	<string name="poi_mall">Гандлёвы цэнтар</string>
+	<string name="poi_beverages">Напоі</string>
+	<string name="poi_butcher">Мясны рынак</string>
+	<string name="poi_deli">Дэлікатэсы</string>
+	<string name="poi_shop_farm">Фэрмэрскія прадукты</string>
+	<string name="poi_greengrocer">Садавіна і гародніна</string>
+	<string name="poi_seafood">Морапрадукты</string>
+	<string name="poi_confectionery">Кандытарскія вырабы</string>
+	<string name="poi_ice_cream">Марозіва</string>
+	<string name="poi_supermarket">Супэрмаркет</string>
+	<string name="poi_dairy">Малочная крама</string>
+	<string name="poi_vending_machine">Гандлёвы аўтамат</string>
+
+	<string name="poi_bookshop">Кнігарня</string>
+	<string name="poi_bicycle_shop">Крама ровараў</string>
+	<string name="poi_anime_shop">Крама анімэ</string>
+	<string name="poi_antiques_shop">Антыкварыят</string>
+	<string name="poi_art_shop">Творы мастацтва</string>
+	<string name="poi_bag_shop">Сумкі, валізкі</string>
+	<string name="poi_military_naval_base">Ваенна-марская база</string>
+	<string name="poi_military_nuclear_explosion_site">Месца ядзернага выбуху</string>
+<string name="poi_mine_historic">Гістарычная шахта</string>
+	<string name="poi_carpet_shop">Крама дываноў</string>
+	<string name="poi_florist">Кветі</string>
+	<string name="poi_furniture_shop">Мэбля</string>
+	<string name="poi_garden_centre">Сад і агарод</string>
+	<string name="poi_gas_shop">Звадкаваны газ</string>
+	<string name="poi_general_shop">Крама</string>
+	<string name="poi_gift_shop">Сувэніры</string>
 	</resources>
