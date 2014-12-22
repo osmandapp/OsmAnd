@@ -196,11 +196,14 @@ public class WaypointHelper {
 	}
 	
 	public void enableWaypointType(int type, boolean enable) {
+		//An item will be displayed in the Waypoint list if either "Show..." or "Announce..." is selected for it in the Navigation settings
+		//Keep both "Show..." and "Announce..." Nav settings in sync when user changes what to display in the Waypoint list, as follows:
 		if(type == ALARMS) {
 			app.getSettings().SHOW_TRAFFIC_WARNINGS.set(enable);
 			app.getSettings().SPEAK_TRAFFIC_WARNINGS.set(enable);
 			app.getSettings().SHOW_PEDESTRIAN.set(enable);
 			app.getSettings().SPEAK_PEDESTRIAN.set(enable);
+			//But do not implicitly change speed_cam settings here because of legal restrictions in some countries, so Nav settings must prevail
 		} else if(type == POI) {
 			app.getSettings().SHOW_NEARBY_POI.set(enable);
 			app.getSettings().ANNOUNCE_NEARBY_POI.set(enable);
