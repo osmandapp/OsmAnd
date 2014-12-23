@@ -1,5 +1,7 @@
 package net.osmand.plus.dashboard;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
@@ -24,23 +27,31 @@ import java.util.List;
  */
 public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	AudioVideoNotesPlugin plugin;
+	boolean allNotes;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
 		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_audio_video_notes_plugin, container, false);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
-		((TextView) view.findViewById(R.id.notes_text)).setTypeface(typeface);
-		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
+		allNotes = getActivity() instanceof DashAudioVideoNotesActivity;
+		if (allNotes) {
+			view.findViewById(R.id.header).setVisibility(View.GONE);
+		} else {
+			Typeface typeface = FontCache.getRobotoMedium(getActivity());
+			((TextView) view.findViewById(R.id.notes_text)).setTypeface(typeface);
+			((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
 
-		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-
-			}
-		});
+			(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Activity activity = getActivity();
+					final Intent favorites = new Intent(activity, DashAudioVideoNotesActivity.class);
+					favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					activity.startActivity(favorites);
+				}
+			});
+		}
 
 		return view;
 	}
@@ -80,7 +91,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 
 		LinearLayout notesLayout = (LinearLayout) mainView.findViewById(R.id.notes);
 		notesLayout.removeAllViews();
-		if (notes.size() > 3){
+		if (notes.size() > 3 && !allNotes){
 			while (notes.size() != 3){
 				notes.remove(3);
 			}
@@ -95,6 +106,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 				((TextView) view.findViewById(R.id.descr)).setText(recording.getDescription(getActivity()));
 			} else {
 				((TextView) view.findViewById(R.id.name)).setText(recording.getDescription(getActivity()));
+				view.findViewById(R.id.descr).setVisibility(View.GONE);
 			}
 
 			ImageView icon = (ImageView) view.findViewById(R.id.icon);
@@ -105,12 +117,21 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			} else {
 				icon.setImageResource(R.drawable.ic_type_img);
 			}
-			view.findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
+
+			View.OnClickListener playListener = new View.OnClickListener() {
 				@Override
-				public void onClick(View view) {
+				public void onClick(View v) {
 					plugin.playRecording(getActivity(), recording);
 				}
-			});
+			};
+
+			if (allNotes){
+				view.findViewById(R.id.play).setVisibility(View.GONE);
+				view.setOnClickListener(playListener);
+			} else {
+				view.findViewById(R.id.play).setOnClickListener(playListener);
+			}
+
 			int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
 
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
