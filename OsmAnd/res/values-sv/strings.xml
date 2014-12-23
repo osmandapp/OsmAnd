@@ -206,7 +206,7 @@
 <string name="osmand_parking_am">fm</string>
 <string name="osmand_parking_position_name">Parkeringspunkt</string>
 <string name="osmand_parking_plugin_description">Denna plugin gör det möjligt att spara platsen där du parkerade bilen.</string>
-<string name="osmand_parking_plugin_name">Plugin för parkeringsplats</string>
+<string name="osmand_parking_plugin_name">Modul för parkeringsplats</string>
 <string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
 <string name="context_menu_item_delete_parking_point">Ta bort P-markering</string>
 <string name="asap">Snarast</string>
@@ -237,7 +237,7 @@
 <string name="osmand_background_plugin_description">Visa inställningar för att aktivera spårning och navigering i viloläge (skärm av) genom att periodvis väcka GPS-enheten.</string>
 <string name="osmand_extra_settings_description">Visa inställningar för avancerad kartkonfiguration (som att öka kartdetaljer) och vissa enhetsspecifika inställningar.</string>
 <string name="osmand_development_plugin_description">Visa inställningar för utvecklings- och felsökningsfunktioner som ruttsimulering eller visning av renderingsprestanda.</string>
-<string name="plugins_screen">Plugin-hanterare</string>
+<string name="plugins_screen">Hantera insticksmoduler</string>
 <string name="tip_recent_changes_0_8_2_t">"Förändringar i 0.8.2 :\n\t* Förbättrad ruttuträkning\n\t* Widgets för dynamisk karta\n\t* Kartinställningar flyttade till kartskärmen\n\t* Lås skärm knapp med logga tjänster\n\t* Fixat arabiska, Kannada skript och RTL språk "</string>
 
 <string name="map_widget_fluorescent">Fluorescerande rutter</string>
@@ -248,7 +248,7 @@
 <string name="osmand_parking_position_description">Din parkerade bils position. %1$s</string>
 <string name="select_plugin_to_activate">Tryck på en plugin för att aktivera eller inaktivera den (omstart av OsmAnd kan krävas)</string>
 <string name="prefs_plugins_descr">Plugins aktiverar avancerade inställningar samt ger ytterligare funktionalitet</string>
-<string name="prefs_plugins">Plugin</string>
+<string name="prefs_plugins">Insticksmoduler</string>
 <string name="tip_recent_changes_0_8_0_t">"Förändringar i 0.8.0 : ↵
 \n\t- *Plugin-funktionalitet*↵
 \n\t- De flesta är grupperade efter funktion och kan aktiveras/inaktiveras i Inställningar &gt; Plugins. Du kan aktivera (online eller cachad) källor till kartbitar, spårningsinställningar och många andra nya och tidigare befintliga funktioner. ↵
@@ -837,7 +837,7 @@
 	<string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet är inte tillgänglig!</string>
 	<string name="download_question">Ladda ner {0} - {1}?</string>
 	<string name="download_question_exist">Offline-data för {0} finns redan ({1}). Vill du uppdatera den ({2})?</string>
-	<string name="address">Adress</string>
+	<string name="address">Adresser</string>
 	<string name="download_index_success">Nedladdningen slutfördes utan problem</string>
 	<string name="error_io_error">Ett I/O-fel inträffade</string>
 	
@@ -899,7 +899,7 @@
     <string name="safe_mode">Felsäkert läge</string>
     <string name="native_library_not_running">Programmet körs i felsäkert läge (inaktivera det i Inställningar).</string>
     <string name="background_service_is_enabled_question">Vilolägestjänsten körs fortfarande. Vill du avbryta den också?</string>
-    <string name="osmodroid_plugin_name">OsMoDroid-plugin</string>
+    <string name="osmodroid_plugin_name">Modul för OsMoDroid</string>
 	<string name="edit_filter_create_message">Filter {0} har skapats</string>
 	<string name="poi_error_info_not_loaded">Info om noden laddades inte</string>
 	<string name="poi_action_change">ändra</string>
@@ -949,7 +949,7 @@
     <string name="recording_default_name">spelar in</string>
     <string name="av_control_stop">Stoppa</string>
     <string name="map_widget_av_notes">Ljud-/Videoanteckningar</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin för höjdkurvor offline</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-modul för höjdkurvor offline</string>
     
     <string name="map_widget_distancemeasurement">Avståndsmätning</string>
     <string name="monitoring_control_stop">Stoppa</string>
@@ -959,13 +959,12 @@
     <string name="index_srtm_parts">delar</string>
     <string name="index_srtm_ele">Höjdkurvor</string>
     <string name="download_select_map_types">Andra kartor</string>
-    <string name="srtm_plugin_name">Plugin för höjdkurvor</string>
+    <string name="srtm_plugin_name">Modul för höjdkurvor</string>
     <string name="download_srtm_maps">Höjdkurvsdata</string>
-    <string name="tip_recent_changes_1_1_0_t">Förändringar i 1.1.0:
-\n\t* Plugin för beräkning av avstånd\n\t* Plugin för ljud-/videoanteckningar\n\t* Plugin för höjdkurvor\n\t* Buggfixar
+    <string name="tip_recent_changes_1_1_0_t">"Förändringar i 1.1.0:
+\n\t* Insticksmodul för beräkning av avstånd\n\t* Insticksmodul för ljud-/videoanteckningar\n\t* Insticksmodul för höjdkurvor\n\t* Buggfixar
 \n\t* \'Touring View\' - kartutseende med mer kartdetaljer, nytt utseende för vägar, mer kontrast och fjällvandringsalternativ (SAC-skala)
-\n\t* EGM96 geoid offsetkorrigering för GPS-höjdavläsningar
-    </string>
+\n\t* EGM96 geoid offsetkorrigering för GPS-höjdavläsningar "</string>
     
     
     
@@ -984,10 +983,10 @@
     <string name="recording_context_menu_show">Visa</string>
     <string name="recording_photo_description">Foto %1$s av %2$s</string>
     <string name="recording_context_menu_precord">Ta ett foto</string>
-    <string name="dropbox_plugin_name">Dropbox-plugin</string>
+    <string name="dropbox_plugin_name">Modul för Dropbox</string>
     
     <string name="intermediate_points_change_order">Ändra ordning</string>
-    <string name="srtm_paid_version_title">Plugin för höjdkurvor</string>
+    <string name="srtm_paid_version_title">Modul för höjdkurvor</string>
     <string name="av_def_action_video">Spela in video</string>
     <string name="precise_routing_mode">Exakt ruttning (alfa)</string>
     <string name="av_def_action_picture">Ta ett foto</string>
