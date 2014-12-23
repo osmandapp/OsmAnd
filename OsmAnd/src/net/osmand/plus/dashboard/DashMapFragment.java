@@ -62,7 +62,7 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 
 			
 		});
-		((ImageView) view.findViewById(R.id.map_image)).setOnClickListener(new View.OnClickListener() {
+		view.findViewById(R.id.map_image).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				startMapActivity();

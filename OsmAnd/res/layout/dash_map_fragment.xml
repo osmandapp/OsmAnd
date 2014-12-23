@@ -44,9 +44,9 @@
 				   android:src="@drawable/background"
 				   android:layout_width="match_parent"
 				   android:layout_height="@dimen/dashMapHeight"
-				   android:layout_marginLeft="@dimen/dashMapMargin"
-				   android:layout_marginRight="@dimen/dashMapMargin"
-				   android:layout_marginBottom="@dimen/dashMapMargin"
+				   android:layout_marginLeft="@dimen/subHeaderPadding"
+				   android:layout_marginRight="@dimen/subHeaderPadding"
+				   android:layout_marginBottom="@dimen/subHeaderPadding"
 				   android:visibility="gone"/>
 	</RelativeLayout>
 
