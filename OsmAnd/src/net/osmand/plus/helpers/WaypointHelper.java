@@ -683,7 +683,6 @@ public class WaypointHelper {
 				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
 			} else if(type == ALARMS) {
 				//assign alarm list icons manually for now
-				//attention, some list icons are only temporary test icons, not pixel perfect yet.
 				if(((AlarmInfo) point).getType().toString() == "SPEED_CAMERA") {
 					return uiCtx.getResources().getDrawable(R.drawable.mx_highway_speed_camera);
 				} else if(((AlarmInfo) point).getType().toString() == "BORDER_CONTROL") {
@@ -696,9 +695,9 @@ public class WaypointHelper {
 					}
 				} else if(((AlarmInfo) point).getType().toString() == "TRAFFIC_CALMING") {
 					if(app.getSettings().DRIVING_REGION.get().americanSigns){
-						return uiCtx.getResources().getDrawable(R.drawable.list_traffic_calming);
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_traffic_calming_us);
 					} else {
-						return uiCtx.getResources().getDrawable(R.drawable.list_traffic_calming);
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_traffic_calming);
 					}
 				} else if(((AlarmInfo) point).getType().toString() == "TOLL_BOOTH") {
 					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_toll_booth);
