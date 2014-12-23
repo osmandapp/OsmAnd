@@ -1,5 +1,7 @@
 package net.osmand.plus.dashboard;
 
+import android.graphics.Bitmap;
+import android.widget.ImageView;
 import net.osmand.data.LatLon;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
@@ -28,7 +30,6 @@ import android.widget.TextView;
 public class DashMapFragment extends DashBaseFragment  implements IMapDownloaderCallback {
 
 	public static final String TAG = "DASH_MAP_FRAGMENT";
-	private OsmandMapTileView osmandMapTileView;
 
 	@Override
 	public void onDestroy() {
@@ -52,7 +53,7 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		((TextView) view.findViewById(R.id.map_text)).setTypeface(typeface);
 		((Button) view.findViewById(R.id.show_map)).setTypeface(typeface);
-		setupMapView(view);
+
 		(view.findViewById(R.id.show_map)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -61,48 +62,40 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 
 			
 		});
-		return view;
-	}
-
-	private void setupMapView(View view){
-		OsmAndMapSurfaceView surf = (OsmAndMapSurfaceView) view.findViewById(R.id.MapView);
-		surf.setOnClickListener(new View.OnClickListener() {
-			
+		((ImageView) view.findViewById(R.id.map_image)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				startMapActivity();
 			}
 		});
-		osmandMapTileView = surf.getMapView();
-		osmandMapTileView.getView().setVisibility(View.VISIBLE);
-		osmandMapTileView.removeAllLayers();
-		MapVectorLayer mapVectorLayer = new MapVectorLayer(null, true);
-		MapTextLayer mapTextLayer = new MapTextLayer();
-		mapTextLayer.setAlwaysVisible(true);
-		// 5.95 all labels
-		osmandMapTileView.addLayer(mapTextLayer, 5.95f);
-		osmandMapTileView.addLayer(mapVectorLayer, 0.5f);
-		osmandMapTileView.setMainLayer(mapVectorLayer);
-		mapVectorLayer.setVisible(true);
-		osmandMapTileView.setShowMapPosition(false);
+		setMapImage(view);
+
+		return view;
 	}
-	
+
+	private void setMapImage(View view) {
+		if (view == null) {
+			return;
+		}
+		Bitmap image = getMyApplication().getResourceManager().getRenderer().getBitmap();
+		ImageView map = (ImageView) view.findViewById(R.id.map_image);
+		if (image != null){
+			map.setImageBitmap(image);
+		}
+	}
+
+
 	@Override
 	public void onResume() {
 		super.onResume();
-		LatLon lm = getMyApplication().getSettings().getLastKnownMapLocation();
-		int zm = getMyApplication().getSettings().getLastKnownMapZoom();
-		//Let us not change zoom here, it provides for a smoother transition between the map and the dashboard screens, and provides better recognition of the map fragment
-		//zm = Math.max(zm - 3, 4);
-		osmandMapTileView.setLatLon(lm.getLatitude(), lm.getLongitude());
-		osmandMapTileView.setComplexZoom(zm, osmandMapTileView.getSettingsMapDensity());
-		osmandMapTileView.refreshMap(true);
+		setMapImage(getView());
+
 	}
 
 	@Override
 	public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		view.findViewById(R.id.MapView).setVisibility(View.GONE);
+		view.findViewById(R.id.map_image).setVisibility(View.GONE);
 		if(getMyApplication().isApplicationInitializing()) {
 			getMyApplication().checkApplicationIsBeingInitialized(getActivity(), (TextView) view.findViewById(R.id.ProgressMessage),
 					(ProgressBar) view.findViewById(R.id.ProgressBar), new Runnable() {
@@ -121,7 +114,7 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 		MainMenuActivity dashboardActivity =((MainMenuActivity)getSherlockActivity());
 		if (dashboardActivity != null){
 			dashboardActivity.updateDownloads();
-			view.findViewById(R.id.MapView).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.map_image).setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -130,11 +123,7 @@ public class DashMapFragment extends DashBaseFragment  implements IMapDownloader
 		if(request != null && !request.error && request.fileToSave != null){
 			ResourceManager mgr = getMyApplication().getResourceManager();
 			mgr.tileDownloaded(request);
+			setMapImage(getView());
 		}
-		if(request == null || !request.error){
-			if(osmandMapTileView != null) {
-				osmandMapTileView.tileDownloaded(request);
-			}
-		}		
 	}
 }
