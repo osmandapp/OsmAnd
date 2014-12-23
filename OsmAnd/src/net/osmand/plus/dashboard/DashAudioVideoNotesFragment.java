@@ -16,6 +16,7 @@ import android.widget.TextView;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.helpers.FontCache;
 
@@ -118,24 +119,26 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 				icon.setImageResource(R.drawable.ic_type_img);
 			}
 
-			View.OnClickListener playListener = new View.OnClickListener() {
+			view.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, null,
+							recording.name != null ? recording.name : recording.getDescription(getActivity()),
+							recording); //$NON-NLS-1$
+					MapActivity.launchMapActivityMoveToTop(getActivity());
+				}
+			});
+			view.findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					plugin.playRecording(getActivity(), recording);
 				}
-			};
+			});
 
-			if (allNotes){
-				view.findViewById(R.id.play).setVisibility(View.GONE);
-				view.setOnClickListener(playListener);
-			} else {
-				view.findViewById(R.id.play).setOnClickListener(playListener);
-			}
+			//int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
 
-			int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
-
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
-			view.setLayoutParams(lp);
+			//LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+			//view.setLayoutParams(lp);
 			notesLayout.addView(view);
 
 		}
