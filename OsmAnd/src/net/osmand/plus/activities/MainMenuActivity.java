@@ -163,7 +163,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		getLocationProvider().addCompassListener(this);
 		getLocationProvider().registerOrUnregisterCompassListener(true);
 		//Looks like the next line may be needed to reliably show the DashFavoritesFragment upon app start also on devices which have no compass
-		updateCompassValue(0);
+		updateCompassValue(0.0);
 	}
 
 	@Override
