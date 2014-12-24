@@ -88,7 +88,7 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
     @Override
     public void onResume() {
         super.onResume();
-        if (!getMyApplication().isApplicationInitializing()){
+        if (!getMyApplication().isApplicationInitializing()) {
             updateMapImage();
         }
 
