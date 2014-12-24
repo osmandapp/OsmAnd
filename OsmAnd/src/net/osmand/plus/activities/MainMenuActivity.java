@@ -6,11 +6,6 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Random;
 
-import android.graphics.Color;
-import android.os.Build;
-import android.view.Gravity;
-import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
 import net.osmand.Location;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -19,12 +14,17 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.dashboard.*;
+import net.osmand.plus.dashboard.DashAudioVideoNotesFragment;
+import net.osmand.plus.dashboard.DashDownloadMapsFragment;
+import net.osmand.plus.dashboard.DashErrorFragment;
+import net.osmand.plus.dashboard.DashFavoritesFragment;
+import net.osmand.plus.dashboard.DashUpdatesFragment;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.sherpafy.TourViewActivity;
+import net.osmand.plus.views.controls.FloatingActionButton;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -35,7 +35,9 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
@@ -43,13 +45,14 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import net.osmand.plus.views.controls.FloatingActionButton;
 
 /**
  */
