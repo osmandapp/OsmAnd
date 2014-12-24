@@ -6,7 +6,7 @@
     android:paddingTop="4dp"
     android:paddingBottom="4dp"
     android:paddingRight="8dp"
-    android:paddingLeft="8dp">
+    android:paddingLeft="12dp">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            style="@style/ListText.Small"></TextView>
+            style="@style/ListText.Small"/>
 
         <TextView
             android:id="@+id/local_index_size"
@@ -38,7 +38,7 @@
             android:gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/ListText.Small"></TextView>
+            style="@style/ListText.Small"/>
     </LinearLayout>
 
     <TextView
@@ -47,6 +47,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="25"
-        style="@style/ListText.Small"></TextView>
+        style="@style/ListText.Small"/>
 
 </LinearLayout>
