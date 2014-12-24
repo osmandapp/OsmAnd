@@ -91,6 +91,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		ExpandableListView listView = (ExpandableListView)view.findViewById(android.R.id.list);
 		listAdapter = new LocalIndexesAdapter(getActivity());
 		listView.setAdapter(listAdapter);
+		expandAllGroups();
 		setListView(listView);
 		//getDownloadActivity().getSupportActionBar().setLogo(R.drawable.tab_download_screen_icon);
 		descriptionText = (TextView) view.findViewById(R.id.DescriptionText);
@@ -261,6 +262,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				listAdapter.addLocalIndexInfo(v);
 			}
 			listAdapter.notifyDataSetChanged();
+			expandAllGroups();
 		}
 
 		public void setResult(List<LocalIndexInfo> result) {
@@ -272,6 +274,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 					listAdapter.addLocalIndexInfo(v);
 				}
 				listAdapter.notifyDataSetChanged();
+				expandAllGroups();
 				onPostExecute(result);
 			}
 		}
@@ -489,6 +492,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			}
 			listAdapter.sortData();
 			getExpandableListView().setAdapter(listAdapter);
+			expandAllGroups();
 		}
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		//hide action bar from downloadindexfragment
@@ -577,11 +581,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	}
 	
 	
-	private void collapseAllGroups() {
+	private void expandAllGroups() {
 		for (int i = 0; i < listAdapter.getGroupCount(); i++) {
-			getExpandableListView().collapseGroup(i);
+			getExpandableListView().expandGroup(i);
 		}
-
 	}
 	
 	private void openSelectionMode(final int actionResId, final int actionIconId, 
@@ -596,7 +599,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			AccessibleToast.makeText(getDownloadActivity(), getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 			return;
 		}
-		collapseAllGroups();
+		expandAllGroups();
 		
 		selectionMode = true;
 		selectedItems.clear();
@@ -641,7 +644,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				descriptionText.setVisibility(View.VISIBLE);
 				updateDescriptionTextWithSize();
 				listAdapter.cancelFilter();
-				collapseAllGroups();
+				expandAllGroups();
 				listAdapter.notifyDataSetChanged();
 			}
 
@@ -998,7 +1001,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			if (group.isBackupedData()) {
 				t.append(" - ").append(getString(R.string.local_indexes_cat_backup));
 			}
-			adjustIndicator(groupPosition, isExpanded, v);
+
+			v.findViewById(R.id.explist_indicator).setVisibility(View.GONE);
+
 			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
 			List<LocalIndexInfo> list = data.get(group);
 			int size = 0;
@@ -1027,6 +1032,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				nameView.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 			}
 
+			v.setOnClickListener(null);
 			return v;
 		}
 

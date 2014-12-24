@@ -10,7 +10,6 @@
     <dimen name="dashFavIconMargin">12dp</dimen>
     <dimen name="dashFavDirectionSize">10dp</dimen>
     <dimen name="dashMapHeight">110dp</dimen>
-    <dimen name="dashMapMargin">2dp</dimen>
     <dimen name="dashNoteIconSize">28dp</dimen>
     <dimen name="dashPluginPadding">4dp</dimen>
     <dimen name="dashPluginMargin">8dp</dimen>

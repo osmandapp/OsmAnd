@@ -5,13 +5,24 @@
               android:background="@drawable/bg_cardui"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
-    <TextView android:id="@+id/error_header"
-              android:layout_height="wrap_content"
-              android:padding="@dimen/dashFavIconMargin"
-              android:layout_width="match_parent"
-              android:gravity="center_horizontal"
-              android:textColor="@color/dashboard_black"
-              android:layout_gravity="center_horizontal"/>
+	<LinearLayout android:orientation="horizontal"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content">
+		<ImageView android:src="@drawable/ic_crashlog"
+				   android:layout_marginLeft="@dimen/dashFavIconMargin"
+				   android:layout_marginRight="@dimen/dashFavIconMargin"
+				   android:layout_gravity="center_vertical"
+				   android:layout_width="wrap_content"
+				   android:layout_height="wrap_content"/>
+		<TextView android:id="@+id/error_header"
+				  android:layout_height="wrap_content"
+				  android:layout_width="match_parent"
+				  android:layout_marginBottom="@dimen/subHeaderPadding"
+				  android:layout_marginTop="@dimen/subHeaderPadding"
+				  android:textColor="@color/dashboard_black"
+				  android:layout_gravity="center_horizontal"/>
+	</LinearLayout>
+
     <View android:layout_width="match_parent"
           android:background="@color/dashboard_divider"
           android:layout_height="1dp"/>
