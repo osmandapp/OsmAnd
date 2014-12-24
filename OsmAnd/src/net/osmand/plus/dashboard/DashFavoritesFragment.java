@@ -59,6 +59,17 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			}
 		});
 
+		if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
+			if(!getMyApplication().getSettings().isLastKnownMapLocation()) {
+				// show first time when application ran
+				location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
+			} else {
+				location = getLocationProvider().getLastKnownLocation();
+			}
+			updateLocation(location);
+		}
+		setupFavorites();
+
 		return view;
 	}
 
@@ -76,10 +87,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			}
 			updateLocation(location);
 		}
-
-
 		setupFavorites();
-
 	}
 
 
@@ -185,7 +193,6 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		}
 		this.location = location;
 		updateArrows();
-
 	}
 
 	private OsmAndLocationProvider getLocationProvider() {
