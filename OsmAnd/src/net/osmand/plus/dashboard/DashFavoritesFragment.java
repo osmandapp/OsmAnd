@@ -58,18 +58,6 @@ public class DashFavoritesFragment extends DashBaseFragment {
 				activity.startActivity(favorites);
 			}
 		});
-
-		if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
-			if(!getMyApplication().getSettings().isLastKnownMapLocation()) {
-				// show first time when application ran
-				location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
-			} else {
-				location = getLocationProvider().getLastKnownLocation();
-			}
-			updateLocation(location);
-		}
-		setupFavorites();
-
 		return view;
 	}
 
