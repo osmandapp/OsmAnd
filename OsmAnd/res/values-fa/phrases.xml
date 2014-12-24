@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+﻿<?xml version="1.0" ?>
 <resources>
 
 <string name="poi_palaeontological_site">مرکز دیرینه شناسی</string>
@@ -360,7 +360,7 @@
 <string name="poi_soccer">فوتبال</string>
 <string name="poi_surfing">موج سواری</string>
 <string name="poi_swimming">استخر شنا</string>
-<string name="poi_table_tennis"تنیس روی میز</string>
+<string name="poi_table_tennis">تنیس روی میز</string>
 <string name="poi_tennis">تنیس</string>
 <string name="poi_toboggan">سورتمه سواری</string>
 <string name="poi_volleyball">زمین والیبال</string>
