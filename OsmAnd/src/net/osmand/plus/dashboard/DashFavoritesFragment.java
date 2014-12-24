@@ -58,7 +58,6 @@ public class DashFavoritesFragment extends DashBaseFragment {
 				activity.startActivity(favorites);
 			}
 		});
-
 		return view;
 	}
 
@@ -76,10 +75,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			}
 			updateLocation(location);
 		}
-
-
 		setupFavorites();
-
 	}
 
 
@@ -185,7 +181,6 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		}
 		this.location = location;
 		updateArrows();
-
 	}
 
 	private OsmAndLocationProvider getLocationProvider() {

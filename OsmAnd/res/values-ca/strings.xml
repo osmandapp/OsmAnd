@@ -858,13 +858,13 @@
     <string name="poi_filter_accomodation">Allotjament</string>
     <string name="poi_filter_sightseeing">Vistes panoràmiques</string>
     <string name="poi_filter_car_aid">Assistència a vehicles</string>
-	<string name="tip_update_index_t">"És essencial tenir actualitzats els mapes locals per poder visualitzar-los, fer recerca d\'adreces/punts d\'interès i navegació quan no hi ha connexió. L\'OsmAnd conta amb un gestor de fitxers de mapes per baixar aquests mapes en desconnexió i comprovar si hi ha actualitzacions disponibles.
-\n\nPer baixar mapes aneu a \'Configuració\' → \'Gestió de fitxers de mapes\' → \'Descàrrega\'.
-\n\nRebreu un llistat de regions de Internet i podreu seleccionar per descarregar o actualitzar un arxiu. Fixeu-vos el selector de tipus d\'arxiu de la part superior de la pantalla per descarregar el que voleu (mapes normals, amb relleu, etc.).
-\n\nPodeu filtrar les opcions disponibles introduint les primeres lletres o podeu seleccionar l\'opció \'Configuració → \'Filtrar baixades\' per veure només les actualitzacions disponibles per les dades que ja teniu al vostre dispositiu.
-\n\n\t Color \'verd\' indica que les dades ja són actualitzades
-\n\t Color \'blau\' indica que hi ha actualitzacions disponibles al servidor
-\n\t Tipus de lletra cursiva indica que les dades estan desactivades al dispositiu "</string>
+	<string name="tip_update_index_t">"És essencial mantenir actualitzats els mapes fora de línia per poder visualitzar-los, cercar-hi adreces / punts d\'interès i navegar-hi quan no hi ha connexió. L\'OsmAnd compta amb un gestor de fitxers de mapes per baixar aquests mapes fora de línia i comprovar si hi ha actualitzacions disponibles.
+\n\nPer baixar mapes aneu a «Configuració» → «Gestió de fitxers de mapes» → «Baixa».
+\n\nRebreu un llistat de regions des d\'Internet i podreu seleccionar-ne una per baixar o actualitzar-ne el fitxer. Fixeu-vos en el selector de tipus de fitxer de la part superior de la pantalla per baixar el que voleu (mapes normals, amb relleu, etc.).
+\n\nPodeu filtrar les opcions disponibles introduint les primeres lletres, o podeu seleccionar l\'opció «Configuració» → «Filtra les baixades» per veure només les actualitzacions disponibles per les dades que ja teniu al vostre dispositiu.
+\n\n\t El color «verd» indica que les dades ja són actualitzades
+\n\t El color «blau» indica que hi ha actualitzacions disponibles al servidor
+\n\t El tipus de lletra cursiva indica que les dades estan desactivades al dispositiu "</string>
 	
 	
 	<string name="create_poi_link_to_osm_doc">LLegenda del mapa <u>OSM en línia</u> amb imatges</string><string name="osmand_routing_experimental">La navegació fora de línia de l\'OsmAnd és una característica experimental i no funciona per distàncies superiors als 20Km.\n\nEl servei de navegació s\'ha desviat temporalment cap a CloudMade en línia.</string>
@@ -1859,5 +1859,5 @@
     <string name="rendering_value_americanRoadAtlas_name">Atles de carreteres americà</string>
     <string name="routing_attr_no_new_routing_name">Sense preferències de navegació v1.9</string>
     <string name="routing_attr_no_new_routing_description">No feu ús de les preferències de navegació introduïdes a la v1.9</string>
-    <string name="speak_pedestrian">Anuncia els pas zebra</string>
+    <string name="speak_pedestrian">Anuncia els passos de zebra</string>
     </resources>

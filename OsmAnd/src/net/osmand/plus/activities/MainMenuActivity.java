@@ -163,6 +163,8 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 
 			});
 		}
+		getLocationProvider().addCompassListener(this);
+		getLocationProvider().registerOrUnregisterCompassListener(true);
 	}
 
 	@Override
