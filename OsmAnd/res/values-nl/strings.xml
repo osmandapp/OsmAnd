@@ -2042,4 +2042,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="traffic_warning_pedestrian">Voetgangers</string>
 	<string name="show_railway_warnings">Waarschuw voor spoorwegovergangen</string>
 	<string name="show_pedestrian_warnings">Waarschuw voor oversteekplaatsen</string>
+    <string name="speak_pedestrian">Meld oversteekplaatsen</string>
     </resources>
