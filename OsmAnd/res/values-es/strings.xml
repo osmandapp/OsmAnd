@@ -1913,6 +1913,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="show_pedestrian_warnings">Mostrar avisos de peatón</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlas de carreteras norte-americanas</string>
     <string name="navigate_point_easting">Al este</string>
-    <string name="navigate_point_northing">Al norte</string>
+    <string name="navigate_point_northing">Northing</string>
     <string name="speak_pedestrian">Anunciar pasos de cebra</string>
     </resources>
