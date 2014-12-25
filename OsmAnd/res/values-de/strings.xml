@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -1984,9 +1984,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="anonymous_user">Anonymer Benutzer</string>
     <string name="logged_as">Angemeldet als %1$s</string>
 	<string name="anonymous_user_hint">Anonyme Benutzer können nicht:\n- Gruppen bilden;\n- Gruppen und Geräte mit dem Server synchronisieren;\n- Gruppen und Geräte im Privatbereich verwalten.</string>
-    <string name="rendering_category_routes">ÖPNV Linien</string>
+    <string name="rendering_category_routes">Routen</string>
     <string name="rendering_category_details">Details</string>
-    <string name="rendering_category_transport">ÖPNV Linien</string>
+    <string name="rendering_category_transport">ÖPNV-Linien</string>
     <string name="map_widget_appearance_rem">Verbleibende Elemente</string>
     <string name="map_widget_top">Statuszeile</string>
 	<string name="map_widget_right">Rechtes Panel</string>
@@ -2028,7 +2028,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
     <string name="map_locale">Beschriftungssprache</string>
-    <string name="rendering_attr_transportStops_name">ÖPNV Haltestellen</string>
+    <string name="rendering_attr_transportStops_name">ÖPNV-Haltestellen</string>
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_northing">Nordwert</string>
     <string name="navigate_point_easting">Ostwert</string>
