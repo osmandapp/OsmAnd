@@ -2,6 +2,7 @@ package net.osmand.plus.dashboard;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.view.*;
 import android.widget.ImageView;
 import net.osmand.data.LatLon;
@@ -131,19 +132,26 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
     }
 
     private void updateMapImage() {
-        MapRenderRepositories repositories = getMyApplication().getResourceManager().getRenderer();
-        LatLon lm = getMyApplication().getSettings().getLastKnownMapLocation();
-        int zm = getMyApplication().getSettings().getLastKnownMapZoom();
+		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+			@Override
+			protected Void doInBackground(Void... params) {
+				MapRenderRepositories repositories = getMyApplication().getResourceManager().getRenderer();
+				LatLon lm = getMyApplication().getSettings().getLastKnownMapLocation();
+				int zm = getMyApplication().getSettings().getLastKnownMapZoom();
 
-        WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        int height = (int) getActivity().getResources().getDimension(R.dimen.dashMapHeight);
-        int width = display.getWidth();
+				WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+				Display display = wm.getDefaultDisplay();
+				int height = (int) getActivity().getResources().getDimension(R.dimen.dashMapHeight);
+				int width = display.getWidth();
 
-        RotatedTileBox rotatedTileBox = new RotatedTileBox.RotatedTileBoxBuilder().
-                setZoom(zm).setLocation(lm.getLatitude(), lm.getLongitude()).
-                setPixelDimensions(width, height).build();
-        repositories.loadMap(rotatedTileBox,
-                getMyApplication().getResourceManager().getMapTileDownloader().getDownloaderCallbacks());
+				RotatedTileBox rotatedTileBox = new RotatedTileBox.RotatedTileBoxBuilder().
+						setZoom(zm).setLocation(lm.getLatitude(), lm.getLongitude()).
+						setPixelDimensions(width, height).build();
+				repositories.loadMap(rotatedTileBox,
+						getMyApplication().getResourceManager().getMapTileDownloader().getDownloaderCallbacks());
+				return null;
+			}
+		};
+		task.execute();
     }
 }
