@@ -534,19 +534,19 @@
 <string name="tip_app_mode">Användarprofil</string>
 <string name="tip_app_mode_t_v2">"OsmAnd stöder olika (anpassningsbara) profiler för olika användningar.\n\nDu kan byta profil via profilknappen i det nedre vänstra hörnet på kartbilden (bil, cykel eller fotgängare), eller när du skapar en rutt (\'transportläge\'). "</string>
 <string name="tip_navigation">Navigering</string>
-<string name="tip_navigation_t">"För att få vägvisning till en plats, antingen peta länge på den direkt på kartan (peta sedan på beskrivningsmarkören och välj \'Vägvisning till\') eller \'Vägvisning\' efter att du petat på valfri post i en sökresultatslista eller i favoritlistan.
+<string name="tip_navigation_t">"För att få vägvisning till en plats, antingen peta länge på den direkt på kartan (peta sedan på beskrivningsmarkören och välj \'Vägvisning till\') eller \'Vägvisning till\' efter att du petat på valfri post i en sökresultatslista eller i favoritlistan.
 \n\nDestinationen markeras med en målflagga på kartan och OsmAnd visar avståndet och riktningen till den (en orange triangel).
-\n\nFör att visa vägen till destinationen från varje annan punkt än din aktuella position, markera den på kartan och peta på \'Vägvisning från\'. "</string>
+\n\nDu kan antingen välja \'Starta navigeringen\' vilket innebär att OsmAnd vägleder dig, ger dig röstinstruktioner (om aktiverade) etc. Eller så kan du välja \'Visa rutten\' som visar dig en statisk rutt utan röstinstruktioner eller justeringar medan du åker.\n\nFör att visa vägen till destinationen från varje annan punkt än din aktuella position, markera den på kartan och peta på \'Vägvisning från\'.
+\n\nOm du använder \'Vägvisning från\' tillsammans med \'Starta navigeringen\' så kommer OsmAnd att byta till din aktuella position så snart den hittats, medan \'Vägvisning från\' i kombination med \'Visa rutten\' endast visar dig rutten från valfri punkt som du angivit utan några följande uppdateringar, "</string>
 <string name="tip_search">Söker</string>
-<string name="tip_search_t">Du kan söka efter platser direkt på kartan via \'Använd platsen\' → \'Sök i närheten\', eller genom att använda sökskärmen via \'Meny\' → \'Sök\'.
-		\n\nSökskärmen har mallar för sökning
-		\n\t* via adress
-		\n\t* via koordinater
-		\n\t* som POI (Point of Interest) - efter typ eller efter namn
-		\n\t* via din sökhistorik
-		\n\t* via dina sparade favoriter
-		\n\nFör alla träffar erbjuds alternativ som \'Vägvisning\' eller \'Visa på kartan\' etc.
-	</string>
+<string name="tip_search_t">"Du kan söka efter platser direkt på kartan via \'Använd platsen\' → \'Sök i närheten\', eller genom att använda sökskärmen via \'Meny\' → \'Sök\'.
+\n\nSökskärmen har mallar för sökning
+\n\t* via adress
+\n\t* via koordinater
+\n\t* som POI (Intressepunkt) - efter typ eller efter namn
+\n\t* via din sökhistorik
+\n\t* via dina sparade favoriter
+\n\nFör alla träffar erbjuds alternativ som \'Vägvisning\' eller \'Visa på kartan\' etc. "</string>
 <string name="tip_map_context_menu">Snabbmeny för karta</string>
 <string name="tip_initial">Hjälp</string>
 <string name="next_button">Nästa</string>
@@ -758,7 +758,7 @@
 	<string name="search_poi_filter">Filter</string>
 	<string name="menu_mute_off">Ljudet är på</string>
 	<string name="menu_mute_on">Ljudet är av</string>
-	<string name="voice_provider_descr">Välj röstguidning för navigering</string>
+	<string name="voice_provider_descr">Välj röstvägledning för navigering</string>
 	<string name="tip_location_sharing_t">Du kan dela med dig av intressanta platser på din resa till familj eller vänner via menyn \'Använd platsen …\' -&gt; \'Dela ut platsen\'.
 		\n\nVälj sedan ett sätt att dela med dig av platsen: e-post, SMS, eller helt enkelt kopiera koordinaterna till Urklipp.
 	</string>
@@ -954,8 +954,8 @@
     <string name="map_widget_distancemeasurement">Avståndsmätning</string>
     <string name="monitoring_control_stop">Stoppa</string>
     <string name="map_widget_audionotes">Ljudanteckningar</string>
-    <string name="audionotes_plugin_description">Göra ljud-/videoanteckningar under resan</string>
-    <string name="audionotes_plugin_name">Ljud-/videoanteckningar</string>
+    <string name="audionotes_plugin_description">Gör ljud-/videoanteckningar under resan</string>
+    <string name="audionotes_plugin_name">Ljud-/Videoanteckningar</string>
     <string name="index_srtm_parts">delar</string>
     <string name="index_srtm_ele">Höjdkurvor</string>
     <string name="download_select_map_types">Andra kartor</string>
@@ -990,7 +990,7 @@
     <string name="av_def_action_video">Spela in video</string>
     <string name="precise_routing_mode">Exakt ruttning (alfa)</string>
     <string name="av_def_action_picture">Ta ett foto</string>
-    <string name="dropbox_plugin_description">Dropbox-pluginen låter dig synkronisera spår och ljud-/videoanteckningar med ditt Dropbox-konto.</string>
+    <string name="dropbox_plugin_description">Dropbox-modulen låter dig synkronisera spår och ljud-/videoanteckningar med ditt Dropbox-konto.</string>
     <string name="srtm_paid_version_msg">Köp gärna pluginen Höjdkurvor på Market för att stödja fortsatt utveckling.</string>
     <string name="av_def_action_audio">Spela in ljud</string>
     <string name="av_widget_action_descr">Välj standardåtgärd för widget</string>
@@ -1301,7 +1301,7 @@
     
     
     <string name="map_magnifier">Kartförstoring</string>
-    <string name="route_is_too_long">OsmAnd offline-ruttning kan ta väldigt lång tid (eller inte fungera alls) för punkter mer än 200 km från varandra. Lägg till en eller flera mellanliggande waypoints för bättre prestanda.</string>
+    <string name="route_is_too_long">OsmAnd offline-ruttning kan ta väldigt lång tid (eller ibland inte fungera alls) för punkter mer än 200 km från varandra. Lägg till en eller flera mellanliggande waypoints för bättre prestanda.</string>
 	<string name="auto_zoom_none">Ingen auto-zoom</string>
 	<string name="auto_zoom_close">Nära</string>
 	<string name="auto_zoom_far">Medelavstånd</string>
@@ -1330,12 +1330,12 @@
 	<string name="speech_rate_descr">Ange talhastighet för TTS</string>
     <string name="speech_rate">Talhastighet</string>
     
-    <string name="complex_route_calculation_failed">Snabbkalkylering av rutt misslyckades (%s), går tillbaka till långsam kalkylering.</string>
+    <string name="complex_route_calculation_failed">Snabbberäkning av rutt misslyckades (%s), går tillbaka till långsam beräkning.</string>
     <string name="disable_complex_routing_descr">Inaktivera 2-fasruttning för bilnavigering</string>
     <string name="disable_complex_routing">Inaktivera komplex ruttning</string>
     <string name="guidance_preferences_descr">Navigationsinställningar</string>
     <string name="routing_preferences_descr">Ruttningsinställningar</string>
-    <string name="android_19_location_disabled">Efter Androidversion 4.4 (KitKat) går det inte att hämta och uppdatera kartor på den tidigare lagringsmappen (%s). Vill du byta till en tillåten plats och kopiera alla OsmAnd-filerna dit?
+    <string name="android_19_location_disabled">Efter Androidversion 4.4 (KitKat) går det inte att hämta och uppdatera kartor till den tidigare lagringsmappen (%s). Vill du byta till en tillåten plats och kopiera alla OsmAnd-filerna dit?
 \n OBS: Gamla filer berörs inte (men kan tas bort manuellt).
 \n OBS: På den nya lagringsplatsen kommer det inte att vara möjligt att dela filer mellan OsmAnd och OsmAnd+.</string>
     <string name="application_dir_change_warning2">Vill du att OsmAnd också ska kopiera datafilerna till den nya platsen? Välj \'Nej\' om du vill att OsmAnd ska skapa och använda den nya mappen.</string>
@@ -1357,7 +1357,7 @@
 	<string name="routing_attr_weight_name">Viktgräns</string>
 	<string name="routing_attr_weight_description">Ange fordonsvikt tillåten på rutter</string>
     <string name="routing_attr_short_way_name">Kortast väg</string>
-	<string name="routing_attr_short_way_description">Använd kortast väg</string>
+	<string name="routing_attr_short_way_description">Använd kortaste väg</string>
 	<string name="select_gpx">Välj GPX …</string>
     <string name="route_descr_select_destination">Välj destination</string>
     <string name="route_descr_select_on_map">Välj på karta …</string>
@@ -1438,9 +1438,9 @@
     <string name="navigation_intent_invalid">Ogiltigt format: %s</string>
 <string name="osmo_settings_uuid">Unikt enhets-id</string>
     <string name="osmo_settings_descr">Konfigurera inställningar för övervakning och ställ in personlig övervakningskanal</string>
-    <string name="osmo_plugin_name">OSMo (Avancerad live-spårning)</string>
+    <string name="osmo_plugin_name">OSMo (Avancerad direktspårning)</string>
     <string name="osmo_settings">OpenStreetMap-övervakning</string>
-   	<string name="osmo_plugin_description">"OpenStreetMap - avancerad direktspårning, se http://osmo.mobi. Spåra andra enheter och bli spårad själv. Skapa anonyma grupper, dela ut varandras platser och kommunicera. Det finns olika inställningar för sessions- eller permanent spårning. Anonyma grupper är begränsade till ett antal dagar och för vissa funktioner finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
+   	<string name="osmo_plugin_description">"OpenStreetMap - avancerad direktspårning, se http://osmo.mobi. Spåra andra enheter och bli spårad själv. Skapa anonyma grupper, dela med er av era positioner och kommunicera med varandra. Det finns olika inställningar för sessionsspårning eller permanent spårning. Anonyma grupper är begränsade till ett antal dagar och för vissa funktioner finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
     <string name="interrupt_music_descr">Avbryt musik vid meddelanden</string>
 	<string name="interrupt_music">Avbryt musik</string>
 	<string name="share_route_as_gpx">Dela rutt som GPX-fil</string>
@@ -1594,7 +1594,7 @@
     <string name="osmo_group_information_desc">" - Alla skapade grupper är offentliga! Om du vill vara anonym, anslut enheter direkt via Tracker-id-\n- Upp till 16 personer kan vara registrerade i gruppen.\n- Grupper tas bort i fall av inaktivitet eller aktivitet av endast 1 person under två veckor.\n- Du kan begränsa inträde i grupp (som t.ex. endast via inbjudan) men för att kontrollera gruppen måste du gå till adminkonsollen.\n- Om du behöver skapa en grupp med andra villkor kontakta http://osmo.mobi"</string>
     <string name="osmo_group_information">Läs detta innan du skapar en grupp!</string>
     <string name="keep_navigation_service">Behåll</string>
-	<string name="stop_navigation_service">Avbryta</string>
+	<string name="stop_navigation_service">Avbryt</string>
 	<string name="enable_sleep_mode">Aktivera GPS-viloläge</string>
 	<string name="gps_wake_up_timer">Väckningsintervall för GPS</string>
 	<string name="sleep_mode_stop_dialog">Avbryta GPS-viloläget?</string>
@@ -1634,7 +1634,7 @@
 	<string name="lang_zh_CN">Förenklad kinesiska</string>
 	<string name="lang_zh_TW">Traditionell kinesiska</string>
 	<string name="rendering_attr_subwayMode_name">Tunnelbanelinjer</string>
- 	<string name="continue_navigation">Fortsätt navigera</string>
+ 	<string name="continue_navigation">Fortsätt navigeringen</string>
     <string name="pause_navigation">Pausa navigeringen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpvandringsskala (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Återge stigar enligt SAC-skala</string>
@@ -1664,7 +1664,7 @@
     <string name="targets">Mål</string>
     <string name="way_alarms">Trafikskyltar</string>
     <string name="speak_favorites">Meddela om närbelägna favoriter</string>
-    <string name="speak_poi">Meddela om närbelägna POI</string>
+    <string name="speak_poi">Meddela om närbelägna intresssepunkter</string>
     <string name="index_tours">Rundturer</string>
     <string name="flat_list_waypoints">Alla</string>
     <string name="record_plugin_description">Spara dina spår med ett tryck på en knapp på kartskärmen. Visa inställningar som underlättar inspelningen av dina resor till lokala GPX-filer eller online via en webbtjänst.</string>
@@ -1679,11 +1679,11 @@
 	<string name="confirm_every_run">Fråga alltid</string>
 	<string name="save_global_track_interval_descr">Välj loggningsintervall för den allmänna spårinspelningen (aktiverad via widgeten GPX-inspelning på kartan)</string>
 	<string name="save_global_track_interval">Allmänt loggningsintervall</string>
-	<string name="traffic_warning_speed_limit">Hastighets- begränsning</string>
+	<string name="traffic_warning_speed_limit">Hastighetsbegränsning</string>
     <string name="traffic_warning_border_control">Gränskontroll</string>
     <string name="traffic_warning_payment">Vägavgiftshytt</string>
     <string name="traffic_warning_stop">Stopptecken</string>
-    <string name="traffic_warning">Trafikvarning</string>
+    <string name="traffic_warning">Trafikskylt</string>
 	<string name="traffic_warning_speed_camera">Fartkamera</string>
     <string name="traffic_warning_calming">Trafikdämpning</string>
     <string name="local_index_description">Peta på en post för att se fler detaljer, tryck och håll för att inaktivera eller ta bort. Data på enheten (%1$s ledigt):</string>
@@ -1698,7 +1698,7 @@
     <string name="speed_limit_exceed_message">Välj hur mycket hastighetsgränsen måste överskridas för att du ska få ett röstmeddelande.</string>
 	<string name="speed_limit_exceed">Tolerans för hastighetsgräns</string>
 	<string name="osmo_device_not_found">Hittar ingen enhet</string>
-    <string name="osmo_no_connection_msg">OsMo-tjänsten är inte tillgänglig:\n- kolla din uppkoppling;\n- kolla inställningarna;\n- besök vårt Twitter-konto: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">OsMo-tjänsten är inte tillgänglig:\n- kolla din anslutning;\n- kolla inställningarna;\n- besök vårt Twitter-konto: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">En anonym användare kan inte:\n- skapa grupper;\n- synkronisera grupper och enheter med servern;\n- hantera grupper och enheter i ett privat kontor.</string>
     <string name="anonymous_user">Anonym användare</string>
     <string name="logged_as">Inloggad som %1$s</string>
@@ -1715,10 +1715,10 @@
 	<string name="rendering_category_routes">Rutter</string>
     <string name="tip_recent_changes_1_9_t">"Nyheter i 1.9: * Uppdaterade kartstilar med återgivning av vägbeläggning, kollektivtrafikslager och vandringssymboler * Sök efter POI längs rutten * Markera väg som avstängd per session * Lättare hämtning och uppdatering av kartor * Få visuell notifiering och ljudnotifiering när du närmar dig en waypoint * Skriv ut information om resväg * Stöd för vändningsfiler * Stöd för Android Wear * En mängd förändringar i gränssnittet * Separat zoom för textstorlek på kartan * Speciella ljudnotifieringar när du lämnat rutten * Logga in på OsMo * Fix av OsMo- inkompatibilitet "</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Tåglinjer</string>
-    <string name="rendering_attr_tramRoutes_name">Spårvagnsrutter</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">\"Delad taxi\"-rutter</string>
-    <string name="rendering_attr_trolleybusRoutes_name">Trådbussrutter</string>
-    <string name="rendering_attr_busRoutes_name">Bussrutter</string>
+    <string name="rendering_attr_tramRoutes_name">Spårvagnslinjer</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">\"Delad taxi\"-linjer</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Trådbusslinjer</string>
+    <string name="rendering_attr_busRoutes_name">Busslinjer</string>
     <string name="rendering_attr_tramTrainRoutes_name">Spårvagns- och tåglinjer</string>
     <string name="select_impassable_road">Välj på kartan</string>
     <string name="impassable_road">Undvik vägar …</string>
