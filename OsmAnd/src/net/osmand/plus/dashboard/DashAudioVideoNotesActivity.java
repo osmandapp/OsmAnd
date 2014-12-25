@@ -24,6 +24,7 @@ public class DashAudioVideoNotesActivity extends SherlockFragmentActivity {
 		actionBar.setBackgroundDrawable(color);
 		actionBar.setIcon(android.R.color.transparent);
 		actionBar.setHomeButtonEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
