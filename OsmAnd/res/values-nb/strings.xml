@@ -1181,12 +1181,13 @@
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">Tysk veiatlas</string>
-	<string name="traffic_warning_railways">Jernbane</string>
-	<string name="traffic_warning_pedestrian">Fotgjengere</string>
+	<string name="traffic_warning_railways">Jernbaneovergang</string>
+	<string name="traffic_warning_pedestrian">Fotgjengerovergang</string>
 	<string name="show_railway_warnings">Vis jernbaneoverganger</string>
 	<string name="show_pedestrian_warnings">Vis fotgjengeroverganger</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk veiatlas</string>
     <string name="av_camera_focus_hiperfocal">Hyperfokal fokus</string>
 	<string name="lock_screen_request_explanation">%1$s trenger denne tillatelsen til å slå av skjermen (Strømsparingsfunksjon).</string>
     <string name="show_all">VIS ALLE</string>
-	</resources>
+	<string name="speak_pedestrian">Meld om fotgjengeroverganger</string>
+    </resources>
