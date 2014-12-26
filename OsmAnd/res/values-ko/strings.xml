@@ -190,8 +190,8 @@
 	<string name="choose_auto_follow_route">자동-센터 지도 보기</string>
 	<string name="choose_auto_follow_route_descr">지도 보기가 현재 위치와 동기화하여 복귀할 때까지 걸리는 시간입니다</string>
 	<string name="auto_follow_route_never">결코(Never)</string>
-	<string name="auto_follow_route_navigation">자동-센터 길안내 전용</string>
-	<string name="auto_follow_route_navigation_descr">길안내 중에만 자동-센터 지도 보기를 사용합니다.</string>
+	<string name="auto_follow_route_navigation">자동-센터 운행 전용</string>
+	<string name="auto_follow_route_navigation_descr">운행 중에만 자동-센터 지도 보기를 사용합니다.</string>
 	<string name="auto_follow_location_enabled">자동-센터 지도 보기 사용 중입니다.</string>
 	
 	<string name="pref_vector_rendering">벡터 렌더러(renderer) 특정 옵션들</string>
@@ -404,10 +404,10 @@
 	
 
 	<string name="tip_navigation">운행</string>
-	<string name="tip_navigation_t">"길안내를 시작하기 전에 목적지를 선택하여야 합니다. 그런 다음 맵 상에서 \'메뉴\' -&gt; \'방향\' 을 누르고 네비게이션 종류를 선택합니다.
-\n\n목적지는 지도에 대상 플래그 마커로 표시되고 OsmAnd는 주황색 삼각형으로 목적지까지의 거리와 목적지까지의 방향을 표시합니다.
-\n\n당신이 \"운행시작\"을 선택 할 수 있습니다. 이는 OsmAnd, 당신을 살 - 가이드 (활성화 된 경우) 음성 안내를 제공 할 것을 의미, \'탐색 시작\'아니면 모든 라이브 guideance 또는 조정없이 정적 경로의 결과로, \'디스플레이 노선\'을 선택할 수 있습니다 당신은 이동.
-\n\n현재 위치가 아닌 다른 위치에서 선택한 목적지로 경로를 표시하려면지도에 시작 지점을 선택하고 \'~부터 길안내\'을 누릅니다.
+	<string name="tip_navigation_t">"운행시작을 하기 전에 목적지를 선택하여야 합니다. 그런 다음 맵 상에서 \'메뉴\' -&gt; \'운행시작\' 을 누르고 내비게이션 종류를 선택합니다.
+\n\n목적지는 지도에 도착지 플래그 마커로 표시되고 OsmAnd는 주황색 삼각형으로 목적지까지의 거리와 목적지까지의 방향을 표시합니다.
+\n\n당신이 \"운행시작\"을 선택 할 수 있습니다. 이는 OsmAnd가 당신을 라이브 - 가이드 (활성화 된 경우) 음성 안내를 제공 할 것을 의미합니다, 어떤 라이브 guideance 또는 조정없이 정적 경로의 결과로, \'경로 표시\'를 선택할 수 있습니다.
+\n\n현재 위치가 아닌 다른 위치에서 선택한 목적지로 경로를 표시하려면 지도에 시작 지점을 선택하고 \'출발지 운행시작\'을 누릅니다.
 \n\n당신이 함께 \'운행시작 \'에서 \"~로부터 길안내\'을 사용하는 경우, OsmAnd 는 즉시 실제 위치로 전환됩니다 (그래서 이것은 사용할 수 있는 위치가 발견되기 전에 라우팅 바로 시작할 수) \'에서 오시는 길\'동안 \'디스플레이 경로\'와 함께 당신에게 당신이 이후의 업데이트없이 선택했다 임의의 지점에서 경로를 보여줍니다. "</string>
 
 	<string name="tip_search">검색 중</string>
@@ -593,7 +593,7 @@
 	<string name="use_trackball">트랙볼 사용</string>
 	<string name="background_service_wait_int_descr">위치를 찾는 최대 대기시간을 설정합니다</string>
 	<string name="background_service_wait_int">최대 대기시간</string>
-	<string name="service_stop_background_service">OsmAnd 절전 모드 길안내 서비스 정지</string>
+	<string name="service_stop_background_service">OsmAnd 절전 모드 운행 서비스 정지</string>
 	<string name="where_am_i">GPS 위치</string>
 	<string name="process_navigation_service">OsmAnd 네비게이션 서비스</string>
 	<string name="network_provider">네트워크</string>
@@ -708,7 +708,7 @@
 	<string name="follow">운행 시작</string>
 	<string name="recalculate_route_to_your_location">전송 모드 :</string>
 	<string name="mark_final_location_first">먼저 목적지를 선택하세요</string>
-	<string name="get_directions">길안내</string>
+	<string name="get_directions">안내시작</string>
     <string name="show_gps_status">GPS 정보</string>
 	<string name="opening_hours">오프닝 시간</string>
 	<string name="opening_changeset">변경사항 여는중…</string>
@@ -1060,8 +1060,8 @@
     <string name="clear_intermediate_points">경유지 지우기</string>
     <string name="keep_intermediate_points">경유지 유지</string>
     <string name="new_directions_point_dialog">이미 경유자를 설정했습니다.</string>
-    <string name="context_menu_item_directions_to">~까지 길안내</string>
-    <string name="context_menu_item_directions_from">~부터 길안내</string>
+    <string name="context_menu_item_directions_to">도착지 설정</string>
+    <string name="context_menu_item_directions_from">출발지 설정</string>
     <string name="route_descr_map_location">지도 : </string>
     <string name="route_descr_lat_lon">위도 %1$.3f, 경도 %2$.3f</string>
     <string name="route_descr_current_location">현재 위치</string>
@@ -1240,7 +1240,7 @@
 	<string name="zxing_barcode_scanner_not_found">ZXing 바코드 스캐너 앱이 설치되어 있지 않습니다 .  구글시장에서 검색할까요 ?</string>
 	<string name="rendering_attr_roadColors_description">도로 색상을 선택합니다:</string>
 	<string name="rendering_attr_roadColors_name">도로 색상</string>
-    <string name="map_widget_show_destination_arrow">목적지 길안내 표시</string>
+    <string name="map_widget_show_destination_arrow">목적지 방향 표시</string>
     <string name="enable_plugin_monitoring_services">트랙로깅 서비스(GPX 기록, 온라인 트래킹)를 사용하여 트래킹 플러그인을 활성화</string>
     <string name="non_optimal_route_calculation">장거리를 가능하게 하는 비-최적 경로 계산</string>
 	<string name="gps_not_available">설정에서 GPS를 활성화하십시오</string>
@@ -1713,18 +1713,11 @@
 	<string name="osmand_rastermaps_plugin_description">기본 맵으로 또는 오버레이/언더레이 지도로 온라인 또는 캐시 타일맵의 다양한 구성을 위한 설정을 표시합니다. 이 지도는 오프라인으로 준비하거나 OsmAnd 데이터 폴더에 복사 할 수 있습니다.</string>
 	
 	<string name="towards">쪽으로</string>
-	<string name="tip_rotation_switching_t_v2">You can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
-지도 표시는 반복적으로 지도 화면의 나침반 아이콘을 클릭하여 회전 여부 및 방법을 전환 할 수 있습니다.
-
-		\n\nThe choices are:
-		선택은 :
-		\n\t* \'Don\'t rotate (north is up)\': Map will not be rotated. North will be always up
-		지도고정(북쪽방향) : 지도는 회전하지 않고 북쪽은 항상 위를 가르킨다,
-		\n\t* \'To direction of movement\': Map will continuously be aligned with your heading
-		이동방향(GPS) : 지도는 계속 GPS의 진행방향을 가르킨다,
-		\n\t* \'To compass\': Map will continuously be aligned with the device\'s compass reading
-		이동방향(나침반) : 지도는 계속 나침반의 진행방향을 가르킨다
-	</string>
+	<string name="tip_rotation_switching_t_v2">"지도 표시는 반복적으로 지도 화면의 나침반 아이콘을 클릭하여 회전 여부 및 방법을 전환 할 수 있습니다.
+\n\n선택은 :
+\n\t* 지도고정(북쪽방향) : 지도는 회전하지 않고 북쪽은 항상 위를 가르킨다,
+\n\t* 이동방향(GPS) : 지도는 계속 GPS의 진행방향을 가르킨다,
+\n\t* 이동방향(나침반) : 지도는 계속 나침반의 진행방향을 가르킨다 "</string>
 	<string name="mile_per_hour">mph</string>
 	<string name="tip_recent_changes_1_6_t">Changes in 1.6:
 	\n\t* 풀 HD 기기 지원. 
