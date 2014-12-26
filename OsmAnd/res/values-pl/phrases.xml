@@ -176,4 +176,16 @@
 	<string name="poi_bridge">Most</string>
 
 	<string name="poi_speed_camera">Fotoradar</string>
+	<string name="poi_emergency_access_point">Pogotowie</string>
+
+	<string name="poi_railway_halt">Dworzec kolejowy (nieaktualne)</string>
+	<string name="poi_turning_circle">Punkt zawracania</string>
+	<string name="poi_motorway_junction">Zjazd z autostrady</string>
+
+	<string name="poi_water_well">Fontanna</string>
+	<string name="poi_standpipe">Fontanna</string>
+	<string name="poi_water_works">Wodociąg</string>
+	<string name="poi_boatyard">Stocznia</string>
+	<string name="poi_wastewater_plant">Oczyszczalnia ścieków</string>
+	<string name="poi_water_tower">Wieża ciśnień</string>
 	</resources>
