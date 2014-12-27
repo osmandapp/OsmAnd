@@ -1146,7 +1146,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="map_version_changed_info">In su server bi sunt documentos de mapas non compatìbiles cun sa versione atuale de su programma. Pro los iscarrigare e impreare agiorna s\'aplicu a s\'ùritma versione.</string>
 	<string name="local_index_mi_rename">Torra a numenare</string>
 	<string name="search_position_undefined">Non dessinidu</string>
-	<string name="search_position_fixed">Fissadu</string>
+	<string name="search_position_fixed"></string>
 	<string name="search_position_current_location">Positzione currente…</string>
 	<string name="search_position_map_view">Ùrtima bisura mapa</string>
 	<string name="local_index_mi_upload_gpx">Imbia ad OSM</string>
