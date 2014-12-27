@@ -169,7 +169,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 				LatLon l = new LatLon(lat, lon);
 				if(!Algorithms.objectEquals(reqSearchPoint, l)){
 					reqSearchPoint = l;
-					updateSearchPoint(reqSearchPoint, getString(R.string.search_position_fixed), true);
+					updateSearchPoint(reqSearchPoint, getString(R.string.select_search_position) + " " + getString(R.string.search_position_fixed), true);
 				}
 			}
 		}
@@ -239,7 +239,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 						searchAroundCurrentLocation = false;
 						endSearchCurrentLocation();
 						if (position == POSITION_LAST_MAP_VIEW) {
-							updateSearchPoint(settings.getLastKnownMapLocation(), getString(R.string.search_position_fixed), true);
+							updateSearchPoint(settings.getLastKnownMapLocation(), getString(R.string.select_search_position) + " " + getString(R.string.search_position_fixed), true);
 						} else if (position == POSITION_FAVORITES) {
 							Intent intent = new Intent(SearchActivity.this, FavouritesListActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -276,7 +276,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 			FavouritePoint p = (FavouritePoint) data.getSerializableExtra(FavouritesListFragment.SELECT_FAVORITE_POINT_INTENT_KEY);
 			if (p != null) {
 				LatLon latLon = new LatLon(p.getLatitude(), p.getLongitude());
-				updateSearchPoint(latLon, p.getName(), false);
+				updateSearchPoint(latLon, getString(R.string.select_search_position) + " " + p.getName(), false);
 			}
 		} else if(requestCode == REQUEST_ADDRESS_SELECT && resultCode == SearchAddressFragment.SELECT_ADDRESS_POINT_RESULT_OK){
 			String name = data.getStringExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY);
@@ -284,9 +284,9 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 					data.getDoubleExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_LAT, 0), 
 					data.getDoubleExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_LON, 0));
 			if(name != null){
-				updateSearchPoint(latLon, name, false);
+				updateSearchPoint(latLon, getString(R.string.select_search_position) + " " + name, false);
 			} else {
-				updateSearchPoint(latLon, getString(R.string.search_position_fixed), true);
+				updateSearchPoint(latLon, getString(R.string.select_search_position) + " " + getString(R.string.search_position_fixed), true);
 			}
 		}
 	}
@@ -295,7 +295,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 	public void updateLocation(net.osmand.Location location){
 		if (location != null) {
 			updateSearchPoint(new LatLon(location.getLatitude(), location.getLongitude()),
-					getString(R.string.search_position_current_location_found), false);
+					getString(R.string.select_search_position) + " " + getString(R.string.search_position_current_location_found), false);
 			if (location.getAccuracy() < 20) {
 				endSearchCurrentLocation();
 			}

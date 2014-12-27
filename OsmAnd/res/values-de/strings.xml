@@ -610,12 +610,12 @@
 	<string name="search_position_current_location_search">Standort wird ermittelt…</string>
 	<string name="search_position_current_location_found">Standort (gefunden)</string>
 	<string name="search_position_address">Adresse…</string>
-	<string name="search_position_favorites">Favoriten…</string>
+	<string name="search_position_favorites">Favorit…</string>
 	<string name="search_position_undefined">Undefiniert</string>
-	<string name="search_position_fixed">Festgelegt</string>
+	<string name="search_position_fixed"></string>
 	<string name="search_position_current_location">Aktueller Standort…</string>
 	<string name="search_position_map_view">Letzte Kartenposition</string>
-	<string name="select_search_position">Suchen in der Nähe von:</string>
+	<string name="select_search_position">Ausgangspunkt:</string>
 	<string name="context_menu_item_search">In der Nähe suchen</string>
 	<string name="save_route_dialog_title">Route als GPX-Track speichern</string>
 	<string name="route_successfully_saved_at">Route erfolgreich gespeichert als \'%1$s\'.</string>
