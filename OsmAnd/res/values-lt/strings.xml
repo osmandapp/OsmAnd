@@ -338,10 +338,10 @@
   <string name="search_position_address">Adresas…</string>
   <string name="search_position_favorites">Įsimintos…</string>
   <string name="search_position_undefined">Nenurodyta</string>
-  <string name="search_position_fixed">Fiksuota</string>
+  <string name="search_position_fixed"/>
   <string name="search_position_current_location">Esama vieta…</string>
   <string name="search_position_map_view">Paskutinė žiūrėta žemėlapio vieta</string>
-  <string name="select_search_position">Ieškoti šalia :</string>
+  <string name="select_search_position">Kilmė:</string>
   <string name="context_menu_item_search">Ieškoti netoliese nuo čia</string>
   <string name="tip_recent_changes_0_6_7_t">Pakeitimai 0.6.7 versijoje : 
 		\n\t- Parsiųstų duomenų valdymas (parsiųsti, ištrinti, aktyvuoti / deaktyvuoti parsiųstus duomenis tiesiogiai OsmAnd programoje) 
@@ -580,7 +580,7 @@
   <string name="select_build_to_install">Įdiegimui pasirinkite vieną iš OsmAnd versijų</string>
   <string name="contribution_activity">Specialūs veiksmai tobulinamai versijai</string>
   <string name="gps_status_app_not_found">GPS statuso programa neįdiegta. Ieškoti Parduotuvėje?</string>
-  <string name="voice_is_not_available_msg">Balso nurodymai neprieinami. Eikite į nustatymus, išsirinkite pageidaujamą kalbos paketą ir jį parsisiųskite.</string>
+  <string name="voice_is_not_available_msg">Balso nurodymai neprieinami. Eikite į Nustatymus→Bendra→Balso pranešiai, išsirinkite arba parsisiųskite pageidaujamą kalbos paketą .</string>
   <string name="voice_is_not_available_title">Balso nurodymai nepasirinkti</string>
   <string name="daynight_mode_day">Diena</string>
   <string name="daynight_mode_night">Naktis</string>
@@ -1876,8 +1876,10 @@
     <string name="routing_attr_no_new_routing_description">Nenaudoti 1.9 versijos maršrutizavimo</string>
     <string name="dash_download_msg_none">Ar norite atsisiųsti bet kurį žemėlapį naudojimui be interneto?</string>
     <string name="dismiss">Nesiųsti</string>
-    <string name="traffic_warning_railways">Geležinkeliai</string>
+    <string name="traffic_warning_railways">Geležinkelio pervaža</string>
 	<string name="traffic_waring_pedestrian">Pėstieji</string>
 	<string name="show_railway_warnings">Rodyti geležinkelių pervažas</string>
 	<string name="show_pedestrian_warnings">Rodyti pėsčiųjų perėjas</string>
-    </resources>
+    <string name="speak_pedestrian">Pranešti apie perėjas</string>
+    <string name="traffic_warning_pedestrian">Pėčiųjų perėja</string>
+	</resources>
