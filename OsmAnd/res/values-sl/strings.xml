@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	<string name="settings_Button">Nastavitve</string>
@@ -1613,9 +1613,9 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="route_descr_select_destination">Izberite cilj</string>
     <string name="route_descr_select_on_map">Izberite na zemljevidu…</string>
     <string name="route_descr_favorite">Priljubljene…</string>
-    <string name="android_19_location_disabled">Od verzije KitKat naprej prenos posodobitev zemljevidov ni mogoč na prejšnjo mesto hrambe (%s). Ali želite to spremeniti na takšno mesto, kjer bo posodobitev dovoljena in skopirati vse zemljevide tja?
-        \n Opomba: stare datoteke ne bodo spremenjene.
-        \n Opomba: zemljevidov si aplikaciji OsmAnd and OsmAnd+ ne bosta mogli deliti. </string>
+    <string name="android_19_location_disabled">Od Android verzije 4.4 (KitKat) naprej, prenos posodobitev zemljevidov ni mogoč na prejšnjo mesto hrambe (%s). Ali želite to spremeniti na takšno mesto, kjer bo to mogoče in skopirati vse OsmAnd podatke tja?
+\n Opomba 1: stare datoteke ne bodo spremenjene (vendar jih lahko ročno izbrišete).
+\n Opomba 2: v novem mestu shrambe si aplikaciji OsmAnd and OsmAnd+ ne bosta mogli deliti podatkov.</string>
     <string name="application_dir_change_warning2">OsmAnd lahko poskusi premakniti podatke na novo mesto hrambe. Ali si želite tega? Izberite \'Ne\' če želite, da OsmAnd ustvari in uporablja novo mapo.</string>
     <string name="copying_osmand_one_file_descr">Kopiranje datoteke (%s) na novo mesto hrambe...</string>
     <string name="copying_osmand_files_descr">Kopiranje datotek s podatki za OsmAnd na novo mesto hrambe (%s)</string>
@@ -1934,9 +1934,9 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_value_orange_name">Oranžno</string>
     <string name="rendering_value_germanRoadAtlas_name">Nemški cesti atlas</string>
 	<string name="traffic_warning_railways">Železnice</string>
-	<string name="traffic_warning_pedestrian">Pešci</string>
+	<string name="traffic_warning_pedestrian">Prehod za pešce</string>
 	<string name="show_railway_warnings">Prikaz železniških opozoril</string>
-	<string name="show_pedestrian_warnings">Prikaži opozorila za pešce</string>
+	<string name="show_pedestrian_warnings">Prikaži prehode za pešce</string>
     <string name="rendering_value_americanRoadAtlas_name">Ameriški cesti atlas</string>
     <string name="dash_download_msg_none">Ali želite prenesti kak zemljevid v krajevno shrambo?</string>
     <string name="dash_download_msg">Imate %1$s prenešenih zemljevidov</string>
@@ -1963,4 +1963,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="osmo_use_https_descr">Uporabi varno povezavo s strežnikom</string>
     <string name="error_avoid_specific_road">Najbližje ceste ni bilo mogoče najti</string>
     <string name="voices">Glasovna navodila</string>
-	</resources>
+	<string name="speak_pedestrian">Napovej prehode za pešce</string>
+    <string name="navigate_point_zone">Območje</string>
+    <string name="navigate_point_northing">y koordinata</string>
+    <string name="navigate_point_easting">x koordinata</string>
+    </resources>
