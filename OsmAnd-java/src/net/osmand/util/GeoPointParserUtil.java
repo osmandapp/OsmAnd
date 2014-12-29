@@ -97,6 +97,17 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse("geo", url);
 		assertGeoPoint(actual, new GeoParsedPoint(qstr));
 
+		// geo:50.451300,30.569900?z=15&q=50.451300,30.569900 (Kiev)
+		z = 15;
+		String qname = "Kiev";
+		double qlat = 50.4513;
+		double qlon = 30.5699;
+
+		url = "geo:50.451300,30.569900?z=15&q=50.451300,30.569900 (Kiev)";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse("geo", url);
+		assertGeoPoint(actual, new GeoParsedPoint(qlat, qlon, z, qname));
+
 		// http://download.osmand.net/go?lat=34&lon=-106&z=11
 		url = "http://download.osmand.net/go?lat=" + ilat + "&lon=" + ilon + "&z=" + z;
 		System.out.println("url: " + url);
@@ -335,7 +346,7 @@ public class GeoPointParserUtil {
 	 *
 	 * @param scheme
 	 *            The intent scheme
-	 * @param data
+	 * @param uri
 	 *            The URI object
 	 * @return {@link GeoParsedPoint}
 	 */
