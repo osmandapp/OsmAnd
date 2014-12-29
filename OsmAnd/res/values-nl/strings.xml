@@ -2038,9 +2038,9 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_value_americanRoadAtlas_name">Amerikaanse wegenkaart</string>
     <string name="routing_attr_no_new_routing_name">Gebruik routeberekening v1.9 niet</string>
     <string name="routing_attr_no_new_routing_description">Gebruik routeberekening v1.9 niet</string>
-    <string name="traffic_warning_railways">Spoorweg</string>
-	<string name="traffic_warning_pedestrian">Voetgangers</string>
-	<string name="show_railway_warnings">Waarschuw voor spoorwegovergangen</string>
-	<string name="show_pedestrian_warnings">Waarschuw voor oversteekplaatsen</string>
+    <string name="traffic_warning_railways">Spoorweg overgang</string>
+	<string name="traffic_warning_pedestrian">Voetgangers oversteekplaats</string>
+	<string name="show_railway_warnings">Toon spoorwegovergangen</string>
+	<string name="show_pedestrian_warnings">Toon voetgangers oversteekplaatsen</string>
     <string name="speak_pedestrian">Meld oversteekplaatsen</string>
     </resources>
