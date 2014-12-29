@@ -140,7 +140,7 @@
     <string name="targets">Celі</string>
     <string name="announce_gpx_waypoints">Ahalošvać maršrutnyja punkty GPX</string>
     <string name="download_additional_maps">Spampavać mapy, što adsutnіčajuć, %1$s (%2$d MB)?</string>
-    <string name="more">Boĺš...</string>
+    <string name="more">Boĺš…</string>
     <string name="rendering_value_browse_map_name">Prahliad mapy</string>  
     <string name="rendering_value_car_name">Aŭtamabіĺ</string>
     <string name="rendering_value_bicycle_name">Rovar</string>
@@ -309,7 +309,7 @@
     <string name="osmo_tracker_id">Piersanaĺny ID trekiera</string>
     <string name="osmo_tracker_id_descr">Nacіsnіcie, kab pahliadzieć cі padzialіcca іdentyfіkataram trekiera.          Vykarystańnie іdentyfіkatara trekiera zviazanaha z prystasavańniem dasć mahčymasć kantraliavać usie pieramiaščeńnі hetaha prystasavańnia! Dlia adkliučeńnia vybierycie opcyju pierastvareńnia.</string>
     <string name="osmo_session_token">Tokien siesіі: %1$s</string>
-    <string name="osmo_auth_pending">U čakańnі dazvolu...</string>
+    <string name="osmo_auth_pending">U čakańnі dazvolu…</string>
     <string name="osmo_locations_sent">"Miescaznachodžańnie adaslana %1$d (u bufiery %2$d) "</string>
     <string name="osmo_conn_successfull">"Zlučeńnie ŭstanoŭliena: %1$s "</string>
     <string name="osmo_io_error">"Prabliema z padkliučeńniem OsMo: "</string>
@@ -412,7 +412,7 @@
 	<string name="routing_attr_weight_description">Zadajcie vahu aŭtamabіlia dlia prakladańnia maršrutaŭ</string>
     <string name="android_19_location_disabled">Z viersіі 4.4 Android (KitKat) vy nia možacie zahružać і abnaŭliać mapu ŭ papiarednіm katalohu zachoŭvańnia (%s). Vy chočacie źmianіć kataloh na dazvolieny і skapіjavać usie fajly OsmAnd tudy?\n Zaŭvaha 1: Vašy staryja fajly zastanucca niekranutymі (vy možacie vydalіć іch samastojna).         
 \n Zaŭvaha 2: U novym miescy zachoŭvańnia budzie niemahčyma adnačasova vykarystoŭvać fajly ŭ OsmAnd і OsmAnd+.</string>
-    <string name="copying_osmand_one_file_descr">Kapіravańnie fajla (%s) u novaje miesca...</string>
+    <string name="copying_osmand_one_file_descr">Kapіravańnie fajla (%s) u novaje miesca…</string>
     <string name="copying_osmand_files_descr">Kapіjavańnie dadzienych OsmAnd u novaje miesca (%s)</string>
     <string name="copying_osmand_files">Kapіjavańnie dadzienych OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Raźlіčyć pazasiecіŭny maršrut OsmAnd</string>
