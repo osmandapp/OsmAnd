@@ -1595,7 +1595,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="app_mode_truck">Kamión</string>
     <string name="copying_osmand_files_descr">Kopírujem dátové súbory OsmAnd do nového cieľa (%s)</string>
     <string name="copying_osmand_files">Kopírujem dátové súbory OsmAnd</string>
-    <string name="copying_osmand_one_file_descr">Kopírujem súbor (%s) do nového cieľa...</string>
+    <string name="copying_osmand_one_file_descr">Kopírujem súbor (%s) do nového cieľa…</string>
     <string name="application_dir_change_warning2">Chcete aby OsmAnd presunul údajové súbory do nového cieľa? Zvoľte \"Nie\" ak chcete, aby OsmAnd len vytvoril a použil nový prázdny priečinok.</string>
     <string name="calculate_osmand_route_gpx">Vypočítať OsmAnd offline trasu</string>
     <string name="android_19_location_disabled">Od Androidu verzie 4.4 (KitKat) nie je možné sťahovať a aktualizovať mapy v pôvodnom úložnom priečinku (%s). Chcete ho zmeniť na vhodné nové úložisko a skopírovať tam všetky súbory?
@@ -1614,10 +1614,10 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="routing_attr_avoid_motorway_description">Vyhnúť sa diaľniciam</string>
 	<string name="routing_attr_weight_name">Hmotnostný limit</string>
 	<string name="routing_attr_weight_description">Zadajte hmotnosť vozidla, ktorá musí byť povolená na cestách</string>
-    <string name="select_gpx">Vybrať GPX …</string>
+    <string name="select_gpx">Vybrať GPX…</string>
     <string name="route_descr_select_destination">Vybrať cieľ</string>
-    <string name="route_descr_select_on_map">Vybrať na mape …</string>
-    <string name="route_descr_favorite">Obľúbené …</string>
+    <string name="route_descr_select_on_map">Vybrať na mape…</string>
+    <string name="route_descr_favorite">Obľúbené…</string>
     <string name="route_preferences">Predvoľby trasy</string>
     <string name="route_info">Informácie trasy</string>
     <string name="keep_and_add_destination_point">Pridať ako cieľový bod</string>
@@ -1736,7 +1736,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_tracker_id_descr">Kliknite pre zobrazenia alebo zdieľanie ID sledovacieho zariadenia.
         Pomocou ID budú pripojené zariadenia schopné sledovať všetky pohyby tohto zariadenia! Pre odpojenie použite možnosť "Pregenerovať".</string>
     <string name="osmo_session_token">Token relácie: %1$s</string>
-    <string name="osmo_auth_pending">Čaká sa na autorizáciu...</string>
+    <string name="osmo_auth_pending">Čaká sa na autorizáciu…</string>
     <string name="osmo_locations_sent">Odoslané polohy %1$d (v zásobníku %2$d) </string>
     <string name="osmo_conn_successfull">Vytvorené spojenie: %1$s </string>
     <string name="osmo_mode_restart">Reštartovať reláciu OsMo</string>
@@ -1804,7 +1804,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_expire_group">Vyprší za</string>
     <string name="osmo_group_description">Popis</string>
     <string name="osmo_group_policy">Pravidlá</string>
-    <string name="loading_smth">Načítava sa %1$s …</string>
+    <string name="loading_smth">Načítava sa %1$s…</string>
     <string name="map_widget_plain_time">Aktuálny čas</string>
     <string name="gpx_wpt">Prechodný bod</string>
     <string name="selected_gpx_info_show">\n\nStlačte a podržte pre zobrazenie na mape</string>
@@ -1902,7 +1902,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_osmcTraces_description">Kresliť chodníky podľa značenia OSMC</string>
     
 	<string name="rendering_attr_coloredBuildings_name">Vyfarbiť budovy podľa typu</string>
-    <string name="osmo_invite">Pozvať...</string>
+    <string name="osmo_invite">Pozvať…</string>
     <string name="osmo_leave_confirmation_msg">Chcete opustiť skupinu %1$s?</string>
     <string name="osmo_specify_tracker_id">Prosím zadajte ID</string>
     <string name="arrival_distance_factor_early">Skoro</string>
@@ -1918,7 +1918,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_bicycle_name">Bicykel</string>
     <string name="rendering_value_pedestrian_name">Chodec</string>
     <string name="download_additional_maps">Stiahnuť chýbajúce mapy %1$s (%2$d MB)?</string>
-    <string name="more">Viac...</string>
+    <string name="more">Viac…</string>
     <string name="flat_list_waypoitns">Všetky</string>
     <string name="waypoints">Prechodné body</string>
     <string name="targets">Ciele</string>
