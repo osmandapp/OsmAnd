@@ -1737,7 +1737,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebreo</string>
     <string name="forward">Siguiente</string>
-    <string name="home">Casa</string>
+    <string name="home">Inicio</string>
     <string name="live_monitoring_m_descr">Enviar seguimiento a un servicio web específico si la grabación GPX está habilitada.</string>
 	<string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
@@ -1849,7 +1849,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="advanced_settings">Avanzado</string>
 	<string name="osmo_use_https_descr">Usar conexión segura con el servidor</string>
     <string name="osmo_use_https">Usar HTTPS</string>
-	<string name="home_button">Casa</string>
+	<string name="home_button">Inicio</string>
     <string name="map_update">Hay actualizaciones disponibles para %1$s mapa(s)</string>
 	<string name="search_for">Buscar</string>
 	<string name="show_map">MOSTRAR MAPA</string>
@@ -1879,11 +1879,11 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="routing_attr_no_new_routing_description">No usar reglas de ruteo introducidas en v.1.9</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas de carreteras alemanas</string>
 	<string name="traffic_warning_railways">Cruce de ferrocarril</string>
-	<string name="traffic_warning_pedestrian">Paso peatonal</string>
+	<string name="traffic_warning_pedestrian">Paso de peatones</string>
 	<string name="show_railway_warnings">Mostrar cruces de ferrocarril</string>
-	<string name="show_pedestrian_warnings">Mostrar pasos peatonales</string>
-    <string name="rendering_value_americanRoadAtlas_name">Atlas de carreteras norte-americanas</string>
+	<string name="show_pedestrian_warnings">Mostrar pasos de peatones</string>
+    <string name="rendering_value_americanRoadAtlas_name">Atlas americano de carreteras</string>
     <string name="navigate_point_easting">Al este</string>
     <string name="navigate_point_northing">Al norte</string>
-    <string name="speak_pedestrian">Anunciar pasos peatonales</string>
+    <string name="speak_pedestrian">Anunciar pasos de peatones</string>
     </resources>
