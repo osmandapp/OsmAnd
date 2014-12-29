@@ -580,7 +580,7 @@
   <string name="select_build_to_install">Įdiegimui pasirinkite vieną iš OsmAnd versijų</string>
   <string name="contribution_activity">Specialūs veiksmai tobulinamai versijai</string>
   <string name="gps_status_app_not_found">GPS statuso programa neįdiegta. Ieškoti Parduotuvėje?</string>
-  <string name="voice_is_not_available_msg">Balso nurodymai neprieinami. Eikite į Nustatymus→Bendra→Balso pranešiai, išsirinkite arba parsisiųskite pageidaujamą kalbos paketą .</string>
+  <string name="voice_is_not_available_msg">Balso nurodymai neprieinami. Eikite į Nustatymus→Bendra→Balso pranešimai, pasirinkite arba parsisiųskite pageidaujamą kalbos paketą .</string>
   <string name="voice_is_not_available_title">Balso nurodymai nepasirinkti</string>
   <string name="daynight_mode_day">Diena</string>
   <string name="daynight_mode_night">Naktis</string>
@@ -1472,7 +1472,7 @@
 \n Pastaba: Seni failai išliks kur buvę (galima bus ištrinti rankiniu būdu).
 \n Pastaba: dalintis tais pačiais failais tarp OsmAnd ir OsmAnd+ nebus galima.</string>
     <string name="application_dir_change_warning2">Ar norite, kad OsmAnd perkeltų duomenis ir į naują saugyklą? Pasirinkite \"Ne\", jei norite, kad OsmAnd tik sukurtų ir naudotų naują folderį.</string>
-    <string name="copying_osmand_one_file_descr">Kopijuojami failai (%/s) į naują saugojimo vietą...</string>
+    <string name="copying_osmand_one_file_descr">Kopijuojami failai (%/s) į naują saugojimo vietą…</string>
     <string name="copying_osmand_files_descr">OsmAnd failai kopijuojami į naują vietą (%/s)</string>
     <string name="copying_osmand_files">Kopijuojami OsmAnd failai</string>
     <string name="keep_and_add_destination_point">Įtraukti kaip kelionės tikslą</string>
@@ -1586,7 +1586,7 @@
     <string name="osmo_tracker_id_descr">Paspauskite peržiūrėti ar bendrinti sekiklio ID. 
         Naudodami sekiklio ID prijungti prietaisai galės stebėti visą šio įrenginio judėjimą! Norėdami atjungti pasirinkite Regeneravimo nustatymą.</string>
     <string name="osmo_session_token">Sesijos žymė: %1$s</string>
-    <string name="osmo_auth_pending">Laukiama autorizavimo...</string>
+    <string name="osmo_auth_pending">Laukiama autorizavimo…</string>
     <string name="osmo_locations_sent">Buvimo vieta išsiųsta %1$d (talpykloje %2$d) </string>
     <string name="osmo_conn_successfull">Prisijungta sėkmingai: %1$s </string>
     <string name="tip_recent_changes_1_8_alpha">"Pakeitimai 1.8 versijoje: * Apskaičiouti maršrutą tarp GPX failo taškų * Pakeistas šalių sąrašo išdėstymas žemėlapių parsiuntimui (palaikoma vietovardžių paieška) * Palaiko GPX/KML importavimą (konvertuoja KML į GPX) * GPX maršrutai perkelti į \'Mano duomenys\' * GPX maršrutus galima padalinti į kelias dalis pagal atstumą ir patikrinti altitudės skirtumus ir greitį * Automatiškai pradėti navigaciją su uždelsimu "</string>
@@ -1754,7 +1754,7 @@
 	<string name="rendering_attr_alpineHiking_description">Užkrauti kelius pagal SAC skalę</string>
     <string name="rendering_attr_osmcTraces_description">Užkrauti kelius pagal OSMC pėdsakus</string>
     
-	<string name="osmo_invite">Pakvietimas...</string>
+	<string name="osmo_invite">Pakvietimas…</string>
     <string name="osmo_leave_confirmation_msg">Ar norite atsijungti nuo grupės %1$s?</string>
     <string name="osmo_specify_tracker_id">Prašome nurodyti id</string>
     <string name="arrival_distance_factor_early">Anksti</string>

@@ -1549,7 +1549,7 @@
     <string name="osmo_connected_devices">Устройства</string>
     <string name="osmo_groups">Управление OsMo</string>
     <string name="osmo_connect_to_device">Подключиться к устройству</string>
-    <string name="osmo_auth_pending">Ожидание авторизации...</string>
+    <string name="osmo_auth_pending">Ожидание авторизации…</string>
     <string name="osmo_conn_successfull">Соединение установлено: %1$s </string>
     <string name="hours_ago">часов назад</string>
     <string name="minutes_ago">минут назад</string>
@@ -1716,7 +1716,7 @@
 	<string name="lang_zh_CN">Упрощенный китайский</string>
 	<string name="lang_zh_TW">Традиционный китайский</string>
     <string name="rendering_attr_subwayMode_name">Маршруты метро</string>
-	<string name="osmo_invite">Пригласить...</string>
+	<string name="osmo_invite">Пригласить…</string>
     <string name="osmo_leave_confirmation_msg">Вы хотите выйти из группы %1$s?</string>
     <string name="osmo_specify_tracker_id">Пожалуйста, укажите ID</string>
     <string name="continue_navigation">Продолжить навигацию</string>
@@ -1740,7 +1740,7 @@
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пешеход</string>
     <string name="download_additional_maps">Скачать недостающие карты %1$s (%2$d MB)?</string>
-    <string name="more">Более...</string>
+    <string name="more">Более…</string>
     <string name="flat_list_waypoitns">Все</string>
     <string name="waypoints">Путевые точки</string>
     <string name="targets">Пункты назначения</string>
