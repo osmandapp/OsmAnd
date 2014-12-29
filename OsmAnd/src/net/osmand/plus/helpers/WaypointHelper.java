@@ -683,11 +683,7 @@ public class WaypointHelper {
 				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
 			} else if(type == ALARMS) {
 				//assign alarm list icons manually for now
-				if(((AlarmInfo) point).getType().toString() == "SPEED_CAMERA") {
-					return uiCtx.getResources().getDrawable(R.drawable.mx_highway_speed_camera);
-				} else if(((AlarmInfo) point).getType().toString() == "BORDER_CONTROL") {
-					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_border_control);
-				} else	if(((AlarmInfo) point).getType().toString() == "RAILWAY") {
+				if(((AlarmInfo) point).getType().toString() == "RAILWAY") {
 					if(app.getSettings().DRIVING_REGION.get().americanSigns){
 						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways_us);
 					} else {
@@ -699,8 +695,6 @@ public class WaypointHelper {
 					} else {
 						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_traffic_calming);
 					}
-				} else if(((AlarmInfo) point).getType().toString() == "TOLL_BOOTH") {
-					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_toll_booth);
 				} else if(((AlarmInfo) point).getType().toString() == "STOP") {
 					return uiCtx.getResources().getDrawable(R.drawable.list_stop);
 				} else if(((AlarmInfo) point).getType().toString() == "PEDESTRIAN") {
