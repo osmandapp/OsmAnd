@@ -1,12 +1,12 @@
 package net.osmand.plus.activities.search;
 
+import android.support.v7.app.ActionBarActivity;
 import net.osmand.plus.OsmandApplication;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-public class SearchAddressActivity extends SherlockFragmentActivity {
+public class SearchAddressActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

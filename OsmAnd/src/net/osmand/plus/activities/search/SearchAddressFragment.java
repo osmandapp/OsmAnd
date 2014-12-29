@@ -2,6 +2,11 @@ package net.osmand.plus.activities.search;
 
 import java.text.MessageFormat;
 
+import android.support.v4.app.Fragment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
@@ -24,13 +29,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
-
-public class SearchAddressFragment extends SherlockFragment {
+public class SearchAddressFragment extends Fragment {
 
 	public static final String SELECT_ADDRESS_POINT_INTENT_KEY = "SELECT_ADDRESS_POINT_INTENT_KEY";
 	public static final int SELECT_ADDRESS_POINT_RESULT_OK = 1;	
@@ -80,23 +79,23 @@ public class SearchAddressFragment extends SherlockFragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		boolean light = ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
 		if(getActivity() instanceof SearchAddressActivity) {
-			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, SELECT_POINT, 0, "").setShowAsActionFlags(
+			MenuItem menuItem = menu.add(0, SELECT_POINT, 0, "").setShowAsActionFlags(
 					MenuItem.SHOW_AS_ACTION_ALWAYS );
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_ok_light : R.drawable.ic_action_ok_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
-				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				public boolean onMenuItemClick(MenuItem item) {
 					select(SELECT_POINT);
 					return true;
 				}
 			});
 		} else {
-			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to).setShowAsActionFlags(
+			MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to).setShowAsActionFlags(
 					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
-				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				public boolean onMenuItemClick(MenuItem item) {
 					select(NAVIGATE_TO);
 					return true;
 				}
@@ -113,7 +112,7 @@ public class SearchAddressFragment extends SherlockFragment {
 			}
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
-				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				public boolean onMenuItemClick(MenuItem item) {
 					select(ADD_WAYPOINT);
 					return true;
 				}
@@ -123,7 +122,7 @@ public class SearchAddressFragment extends SherlockFragment {
 
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
-				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				public boolean onMenuItemClick(MenuItem item) {
 					select(SHOW_ON_MAP);
 					return true;
 				}
@@ -134,7 +133,7 @@ public class SearchAddressFragment extends SherlockFragment {
 
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
-				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				public boolean onMenuItemClick(MenuItem item) {
 					select(ADD_TO_FAVORITE);
 					return true;
 				}
@@ -143,7 +142,7 @@ public class SearchAddressFragment extends SherlockFragment {
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
-				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				public boolean onMenuItemClick(MenuItem item) {
 					((SearchActivity) getActivity()).startSearchAddressOnline();
 					return true;
 				}

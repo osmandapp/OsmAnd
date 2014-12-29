@@ -2,6 +2,9 @@ package net.osmand.plus.sherpafy;
 
 import java.util.WeakHashMap;
 
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -27,14 +30,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
-
 /**
  */
-public class TourViewActivity extends SherlockFragmentActivity {
+public class TourViewActivity extends ActionBarActivity {
 
 	private enum viewState {
 		STATE_LOADING,
@@ -226,7 +224,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	}
 
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType,
-								   final OnMenuItemClickListener listener) {
+								   final MenuItem.OnMenuItemClickListener listener) {
 		// int r = getMyApplication().getSettings().isLightActionBar() ? iconLight : iconDark;
 		int r = iconLight;
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
@@ -241,7 +239,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		return (OsmandApplication) getApplication();
 	}
 
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home && mDrawerToggle.isDrawerIndicatorEnabled()) {
 			if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
 				mDrawerLayout.closeDrawer(mDrawerList);

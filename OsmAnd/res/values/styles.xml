@@ -53,11 +53,11 @@
     </style>
     
     
-    <style name="OsmandLightTheme" parent="Theme.Sherlock.Light">
+    <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
         <item name="expandable_category_color">@color/group_background</item>
         <item name="reset_image">@drawable/ic_action_delete_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
     </style>
-    <style name="OsmandLightDarkActionBarTheme" parent="Theme.Sherlock.Light.DarkActionBar">
+    <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--<item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/activity_background</item>
         <item name="android:colorBackground">@color/activity_background</item>
@@ -73,12 +73,12 @@
         <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
     </style>
-    <style name="OsmandDarkTheme" parent="Theme.Sherlock">
+    <style name="OsmandDarkTheme" parent="Theme.AppCompat">
         <item name="reset_image">@drawable/ic_action_delete_dark</item> <!--  @drawable/a_1_navigation_cancel_dark -->
         <item name="expandable_category_color">?android:attr/colorBackground</item>
      </style>
      
-    <style name="Widget.Styled.ActionBar" parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
+    <style name="Widget.Styled.ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@drawable/bg_striped</item>
         <item name="android:background">@drawable/bg_striped</item>
     </style>

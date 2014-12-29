@@ -8,6 +8,7 @@ import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
 
+import android.support.v7.app.ActionBarActivity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -40,11 +41,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-
-
-public class SearchActivity extends SherlockFragmentActivity implements OsmAndLocationListener {
+public class SearchActivity extends ActionBarActivity implements OsmAndLocationListener {
 	private static final String SEARCH_HISTORY = "Search_History";
 	private static final String SEARCH_FAVORITES = "Search_Favorites";
 	private static final String SEARCH_TRANSPORT = "Search_Transport";

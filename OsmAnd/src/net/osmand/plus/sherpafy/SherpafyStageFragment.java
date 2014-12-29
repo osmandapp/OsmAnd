@@ -3,6 +3,8 @@ package net.osmand.plus.sherpafy;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import android.support.v7.app.ActionBarActivity;
+import android.view.*;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.sherpafy.TourInformation.StageFavoriteGroup;
@@ -14,20 +16,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
-public class SherpafyStageFragment extends SherlockFragment {
+public class SherpafyStageFragment extends Fragment {
 	public static final String STAGE_PARAM = "STAGE";
 	public static final String TOUR_PARAM = "TOUR";
 	private static final int START = 8;
@@ -46,7 +40,7 @@ public class SherpafyStageFragment extends SherlockFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		app = (OsmandApplication) getSherlockActivity().getApplication();
+		app = (OsmandApplication) getActivity().getApplication();
 		customization = (SherpafyCustomization) app.getAppCustomization();
 
 		setHasOptionsMenu(true);
@@ -54,7 +48,7 @@ public class SherpafyStageFragment extends SherlockFragment {
 		for(TourInformation ti : customization.getTourInformations()) {
 			if(ti.getId().equals(id)) {
 				tour = ti;
-				getSherlockActivity().getSupportActionBar().setTitle(tour.getName());
+				((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(tour.getName());
 				break;
 			}
 		}
@@ -63,7 +57,7 @@ public class SherpafyStageFragment extends SherlockFragment {
 			stage = tour.getStageInformation().get(k);
 		}
 		if (stage != null){
-			getSherlockActivity().getSupportActionBar().setTitle(stage.getName());
+			((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(stage.getName());
 		}
 	}
 	
@@ -81,17 +75,17 @@ public class SherpafyStageFragment extends SherlockFragment {
 			if(customization.isStageVisited(stage.getOrder())) {
 				text = R.string.stage_is_completed;
 			}
-			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, START, text, 0, 0, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT,
-					new OnMenuItemClickListener() {
+			((TourViewActivity) getActivity()).createMenuItem(menu, START, text, 0, 0, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT,
+					new MenuItem.OnMenuItemClickListener() {
 						@Override
 						public boolean onMenuItemClick(MenuItem item) {
 							return onOptionsItemSelected(item);
 						}
 					});
 			if (customization.isStageVisited(stage.getOrder()) && customization.getNextAvailableStage(tour) != null) {
-				((TourViewActivity) getSherlockActivity()).createMenuItem(menu, NEXT_STAGE, R.string.next_stage, 0, 0,
+				((TourViewActivity) getActivity()).createMenuItem(menu, NEXT_STAGE, R.string.next_stage, 0, 0,
 						MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT,
-						new OnMenuItemClickListener() {
+						new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
 								return onOptionsItemSelected(item);
@@ -104,13 +98,13 @@ public class SherpafyStageFragment extends SherlockFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
-			((TourViewActivity) getSherlockActivity()).selectMenu(tour);
+			((TourViewActivity) getActivity()).selectMenu(tour);
 			return true;
 		} else if(item.getItemId() == START) {
-			((TourViewActivity) getSherlockActivity()).startStage(stage);
+			((TourViewActivity) getActivity()).startStage(stage);
 			return true;
 		} else if(item.getItemId() == NEXT_STAGE) {
-			((TourViewActivity) getSherlockActivity()).selectMenu(customization.getNextAvailableStage(tour));
+			((TourViewActivity) getActivity()).selectMenu(customization.getNextAvailableStage(tour));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -125,7 +119,7 @@ public class SherpafyStageFragment extends SherlockFragment {
 
 		ViewPager mViewPager = (ViewPager) view.findViewById(R.id.pager);
 		
-		mTabsAdapter = new TabsAdapter(getChildFragmentManager(), getSherlockActivity(), tabHost, mViewPager, stage);
+		mTabsAdapter = new TabsAdapter(getChildFragmentManager(), getActivity(), tabHost, mViewPager, stage);
 		if (stage != null) {
 			mTabsAdapter.addTab(tabHost.newTabSpec("INFO").setIndicator(getString(R.string.sherpafy_stage_tab_info)),
 					SherpafyStageInfoFragment.class);
@@ -169,7 +163,7 @@ public class SherpafyStageFragment extends SherlockFragment {
 	}
 
 	public void onBackPressed() {
-		((TourViewActivity) getSherlockActivity()).selectMenu(tour);
+		((TourViewActivity) getActivity()).selectMenu(tour);
 	}
 
 

@@ -7,6 +7,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.support.v4.app.Fragment;
 import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -44,9 +45,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 
-public class SearchTransportFragment extends SherlockFragment implements SearchActivityChild, OnItemClickListener {
+public class SearchTransportFragment extends Fragment implements SearchActivityChild, OnItemClickListener {
 
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;

@@ -33,8 +33,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
 
 public abstract class SettingsBaseActivity extends SherlockPreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
 

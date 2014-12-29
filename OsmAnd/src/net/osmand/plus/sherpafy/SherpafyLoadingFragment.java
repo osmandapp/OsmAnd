@@ -1,5 +1,6 @@
 package net.osmand.plus.sherpafy;
 
+import android.support.v4.app.Fragment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.os.Bundle;
@@ -7,9 +8,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 
-public class SherpafyLoadingFragment extends SherlockFragment {
+public class SherpafyLoadingFragment extends Fragment {
 	OsmandApplication app;
 	private View view;
 
@@ -19,7 +19,7 @@ public class SherpafyLoadingFragment extends SherlockFragment {
 
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container,
 			Bundle savedInstanceState) {
-		app = (OsmandApplication) getSherlockActivity().getApplication();
+		app = (OsmandApplication) getActivity().getApplication();
 		view = inflater.inflate(R.layout.loading, container, false);
 		return view;
 	}
@@ -34,11 +34,11 @@ public class SherpafyLoadingFragment extends SherlockFragment {
 					public void run() {
 						((TextView) view.findViewById(R.id.ProgressMessage)).setVisibility(View.GONE);
 						view.findViewById(R.id.ProgressBar).setVisibility(View.GONE);
-						((TourViewActivity)getSherlockActivity()).showSelectedItem();			
+						((TourViewActivity)getActivity()).showSelectedItem();
 					}
 				});
 		} else {
-			((TourViewActivity)getSherlockActivity()).showSelectedItem();
+			((TourViewActivity)getActivity()).showSelectedItem();
 		}
 	}
 

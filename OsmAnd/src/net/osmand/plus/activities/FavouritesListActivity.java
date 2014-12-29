@@ -1,11 +1,11 @@
 package net.osmand.plus.activities;
 
+import android.support.v7.app.ActionBarActivity;
 import net.osmand.plus.OsmandApplication;
 import android.os.Bundle;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-public class FavouritesListActivity extends SherlockFragmentActivity {
+public class FavouritesListActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

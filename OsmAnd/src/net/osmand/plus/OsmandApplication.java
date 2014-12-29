@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
@@ -75,10 +77,6 @@ import android.widget.Toast;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.SherlockExpandableListActivity;
-import com.actionbarsherlock.app.SherlockListActivity;
 
 
 public class OsmandApplication extends Application {
@@ -809,13 +807,14 @@ public class OsmandApplication extends Application {
 		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_DARK_ACTIONBAR_THEME
 				&& Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			ActionBar ab = null;
-			if (c instanceof SherlockActivity) {
-				ab = ((SherlockActivity) c).getSupportActionBar();
-			} else if (c instanceof SherlockListActivity) {
-				ab = ((SherlockListActivity) c).getSupportActionBar();
-			} else if (c instanceof SherlockExpandableListActivity) {
-				ab = ((SherlockExpandableListActivity) c).getSupportActionBar();
+			if (c instanceof ActionBarActivity) {
+				ab = ((ActionBarActivity) c).getSupportActionBar();
 			}
+//			else if (c instanceof SherlockListActivity) {
+//				ab = ((SherlockListActivity) c).getSupportActionBar();
+//			} else if (c instanceof Expandable) {
+//				ab = ((SherlockExpandableListActivity) c).getSupportActionBar();
+//			}
 			if (ab != null) {
 				BitmapDrawable bg = (BitmapDrawable) getResources().getDrawable(R.drawable.bg_striped);
 				bg.setTileModeXY(TileMode.REPEAT, TileMode.REPEAT);

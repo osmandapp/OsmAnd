@@ -7,6 +7,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Window;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -26,13 +28,10 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Window;
-
 /**
  *
  */
-public class FavouritesActivity extends SherlockFragmentActivity {
+public class FavouritesActivity extends ActionBarActivity {
 
 	private static final String FAVOURITES_INFO = "FAVOURITES_INFO";
 	private static final String TRACKS = "TRACKS";

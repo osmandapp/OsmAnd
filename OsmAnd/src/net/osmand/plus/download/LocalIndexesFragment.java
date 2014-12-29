@@ -13,6 +13,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import android.support.v7.app.ActionBar;
+import android.support.v7.view.ActionMode;
+import android.view.*;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
@@ -39,11 +42,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StatFs;
 import android.text.method.LinkMovementMethod;
-import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -52,13 +51,6 @@ import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.ActionMode.Callback;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.SubMenu;
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
@@ -603,7 +595,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		
 		selectionMode = true;
 		selectedItems.clear();
-		actionMode = getDownloadActivity().startActionMode(new Callback() {
+		actionMode = getDownloadActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {

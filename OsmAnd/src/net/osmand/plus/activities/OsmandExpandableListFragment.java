@@ -1,5 +1,10 @@
 package net.osmand.plus.activities;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.view.Menu;
+import android.view.MenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.graphics.Shader.TileMode;
@@ -11,12 +16,7 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
-
-public abstract class OsmandExpandableListFragment extends SherlockFragment implements OnChildClickListener {
+public abstract class OsmandExpandableListFragment extends Fragment implements OnChildClickListener {
 	
 	
 	private ExpandableListView listView;
@@ -75,12 +75,13 @@ public abstract class OsmandExpandableListFragment extends SherlockFragment impl
 		if (r != 0) {
 			menuItem.setIcon(r);
 		}
-		menuItem.setShowAsActionFlags(menuItemType).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
-			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+			public boolean onMenuItemClick(MenuItem item) {
 				return onOptionsItemSelected(item);
 			}
 		});
+		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
 		return menuItem;
 	}
 	

@@ -26,7 +26,7 @@
         android:textColor="@color/distance_color"
         android:maxLines="2"
         android:textStyle="bold"
-        android:textSize="15sp"></TextView>
+        android:textSize="15sp"/>
 
     <TextView
         android:id="@+id/waypoint_text"
@@ -47,7 +47,7 @@
         android:layout_gravity="center_vertical"
         android:visibility="gone"
         android:focusable="false"
-        style="@style/Widget.Sherlock.ActionButton"
+        style="@style/Widget.AppCompat.ActionButton"
         android:src="@drawable/ic_action_core_overflow_dark" />
 
     <ImageButton
@@ -57,7 +57,7 @@
         android:contentDescription="@string/close"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="4dp"
-        style="@style/Widget.Sherlock.ActionButton"
+        style="@style/Widget.AppCompat.ActionButton"
         android:focusable="false"
         android:src="@drawable/ic_action_gremove_dark" />
 

@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleAlertBuilder;
@@ -30,13 +31,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 
 /**
  * Created by Denis on 25.11.2014.
  */
-public class BaseDownloadActivity extends SherlockFragmentActivity {
+public class BaseDownloadActivity extends ActionBarActivity {
 	protected DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
 	protected OsmandSettings settings;
 	public static DownloadIndexesThread downloadListIndexThread;
