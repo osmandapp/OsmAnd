@@ -595,7 +595,7 @@
 
 	<string name="poi_military_airfield">Военный аэродром</string>
 	<string name="poi_military_bunker">Военный бункер</string>
-	<string name="poi_military_barracks">Бараки</string>
+	<string name="poi_military_barracks">Казармы</string>
 	<string name="poi_military_danger_area">Опасная зона</string>
 	<string name="poi_military_range">Военное стрельбище</string>
 	<string name="poi_military_naval_base">Военно-морская база</string>
