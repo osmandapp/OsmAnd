@@ -127,7 +127,7 @@
 	<string name="settings_preset_descr">각 프로필마다 맵뷰어 와 라우팅 설정을 기억합니다. 여기에 기본 프로필을 설정합니다.</string>
 	
 	
-	<string name="routing_settings">운행 (라우팅)</string>
+	<string name="routing_settings">운행</string>
 	<string name="routing_settings_descr">라우팅을 위한 옵션을 설정합니다</string>
 	<string name="global_settings">일반 설정</string>
 	<string name="index_settings">지도 관리</string>
@@ -215,7 +215,7 @@
 	</string>
 	<string name="file_can_not_be_renamed">파일 이름을 바꿀 수 없습니다.</string>
 	<string name="file_with_name_already_exists">같은 이름을 가진 파일이 이미 존재합니다.</string>
-	<string name="gpx_navigation">GPX 운행 경로</string>
+	<string name="gpx_navigation">GPX 경로</string>
 	<string name="poi_query_by_name_matches_categories">이름으로 검색한 POI에 해당하는 몇몇 카테고리를 찾았습니다 :</string>
 	<string name="data_to_search_poi_not_available">검색한 POI에 대한 로컬 데이터가 존재하지 않습니다.</string>
 	<string name="poi_filter_by_name">이름으로 검색</string>
@@ -338,7 +338,7 @@
 	<string name="choose_audio_stream">음성 안내 출력</string>
 	<string name="choose_audio_stream_descr">음성 안내를 재생할 채널을 선택합니다 (시스템 의존)</string>
 	<string name="voice_stream_voice_call">음성 호출 오디오</string>
-	<string name="voice_stream_notification">알림 오디오</string>
+	<string name="voice_stream_notification">오디오 알림</string>
 	<string name="voice_stream_music">미디어/음악 오디오</string>
 	<string name="warning_tile_layer_not_downloadable">OsmAnd 앱이 계층 지도 %1$s 를 다운로드할 수 없으니, 재설치 하세요.</string>
 	<string name="overlay_transparency_descr">오버레이 맵 투명도를 수정합니다</string>
@@ -756,9 +756,9 @@
     <string name="save_current_track_descr">현재 트랙을 SD 카드에 저장합니다</string>
     <string name="save_current_track">현재 트랙을 GPX 파일로 저장</string>
     <string name="save_track_interval_descr">운행하는 동안 트랙 레코딩을 저장하는 로깅 간격을 선택합니다</string>
-    <string name="save_track_interval">운행하는 로깅 간격</string>
+    <string name="save_track_interval">운행중 로깅 간격</string>
     <string name="save_track_to_gpx_descrp">운행하는 동안 트랙을 GPX파일로 저장합니다</string>
-    <string name="save_track_to_gpx">운행하는 동안 트랙을 GPX파일로 저장</string>
+    <string name="save_track_to_gpx">운행하는 동안 트랙을 GPX파일로 기록</string>
     <string name="update_tile">맵 업데이트</string>
     <string name="reload_tile">타일 재로드</string>
     <string name="mark_point">목적지</string>
@@ -792,7 +792,7 @@
     <string name="settings_activity">설정</string>
     <string name="show_gps_coordinates_text">지도에 GPS 좌표 표시</string>
     <string name="use_internet_to_download_tile">누락된 맵 타일을 다운로드하기 위해 인터넷을 사용합니다</string>
-    <string name="app_description">운행 (라우팅) 앱</string>
+    <string name="app_description">운행 앱</string>
 
 <string name="exit_Button">종료</string>
 <string name="map_Button">지도</string>
@@ -943,7 +943,7 @@
     <string name="gpx_option_calculate_first_last_segment">첫번째와 마지막 경로 구간 계산</string>
     <string name="use_displayed_track_for_navigation">운행을 위해 맵뷰어에 표시된 경로를 사용하시겠습니까?</string>
     <string name="keep_and_add_destination_point">목적지로 추가</string>
-    <string name="select_gpx">GPX파일 선택…</string>
+    <string name="select_gpx">GPX 선택…</string>
     <string name="route_descr_select_destination">목적지 선택</string>
     <string name="route_descr_select_on_map">지도에서 선택…</string>
     <string name="route_descr_favorite">즐겨찾기…</string>
@@ -966,8 +966,8 @@
 \n저장 위치를 변경하고 모든 파일을 그곳에 복사하는 것을 허락하겠습니까?
 \n Note : 이전 파일은 그대로 유지됩니다. (그러나 수동으로 삭제할 수 있습니다)\n Note : 새로운 저장소는 OsmAnd 와 OsmAnd+ 간에 파일을 공유 할 수 없습니다.</string>
     <string name="application_dir_change_warning2">OsmAnd에 새 목적지로 데이터 파일을 복사하겠습니까? OsmAnd가 새 폴더를 만들고 사용하려면 \'아니오\'를 선택하세요.</string>
-    <string name="copying_osmand_one_file_descr">새 목적지로 파일(%s)을 복사중...</string>
-    <string name="copying_osmand_files_descr">새로운 목적지에 OsmAnd 데이터 파일을 복사중 (%s)</string>
+    <string name="copying_osmand_one_file_descr">새 도착지에 파일(%s)을 복사중…</string>
+    <string name="copying_osmand_files_descr">새로운 도착지에 OsmAnd 데이터 파일을 복사중 (%s)</string>
     <string name="copying_osmand_files">OsmAnd 데이터 파일을 복사중</string>
     <string name="calculate_osmand_route_gpx">OsmAnd 오프라인 경로 계산하기</string>
     <string name="app_mode_truck">트럭</string>
@@ -1043,7 +1043,7 @@
 	<string name="lang_sl">슬로베니아어</string>
 	<string name="lang_cy">웨일스어</string>
 	<string name="route_preferences">경로 환경설정</string>
-    <string name="guidance_preferences_descr">라우팅 환경설정</string>
+    <string name="guidance_preferences_descr">운행 환경설정</string>
     <string name="disable_complex_routing_descr">자동차용 라우팅의 복잡한 출발지/도착지 2단계 라우팅 사용불가</string>
     <string name="app_modes_choose_descr">앱에서 볼 수있는 사용자 프로필를 선택합니다</string>
     <string name="map_widget_appearance">나머지 요소 :</string>
@@ -1187,8 +1187,8 @@
     <string name="recording_open_external_player">외부 플레이어 열기</string>
     <string name="recording_delete_confirm">이 기록을 삭제하시겠습니까 ?</string>
     <string name="recording_unavailable">사용 불가능</string>
-    <string name="recording_context_menu_arecord">오디오 노트 기록하기</string>
-    <string name="recording_context_menu_vrecord">비디오 노트 기록하기</string>
+    <string name="recording_context_menu_arecord">오디오 녹음</string>
+    <string name="recording_context_menu_vrecord">비디오 녹화</string>
     <string name="layer_recordings">레코딩 레이어</string>
     <string name="recording_can_not_be_played">레코딩을 재생할 수 없습니다</string>
     <string name="recording_context_menu_delete">레코딩 삭제</string>
@@ -1805,7 +1805,7 @@
     <string name="osmo_tracker_id">개인 트래커 ID</string>
     <string name="osmo_tracker_id_descr">트래커 ID를 보거나 공유하려면 클릭하십시오. 트래커 ID 연결된 장치를 사용하면 이 장치의 모든 움직임을 모니터 할 수 있습니다! 선택 재생성 옵션을 분리합니다.</string>
     <string name="osmo_session_token">세션 토큰 : %1$s</string>
-    <string name="osmo_auth_pending">허가를 기다리는 중...</string>
+    <string name="osmo_auth_pending">허가를 기다리는 중…</string>
     <string name="osmo_locations_sent">위치 전송 %1$d (in buffer %2$d) </string>
     <string name="osmo_conn_successfull">설정된 연결 : %1$s </string>
     <string name="tip_recent_changes_1_8_alpha">"1.8의 변경 사항 :
@@ -1981,7 +1981,7 @@
     <string name="rendering_attr_osmcTraces_description">OSMC 흔적에 따라 경로 렌더링</string>
     
 	<string name="rendering_attr_coloredBuildings_name">유형별 색상 코드 건물</string>
-    <string name="osmo_invite">초대...</string>
+    <string name="osmo_invite">초대…</string>
     <string name="osmo_leave_confirmation_msg">그룹 %1$s를 떠나시겠습니까?</string>
     <string name="osmo_specify_tracker_id">Id를 지정 하십시오</string>
     <string name="arrival_distance_factor_early">일찍</string>
@@ -1996,17 +1996,17 @@
     <string name="rendering_value_car_name">자동차</string>
     <string name="rendering_value_bicycle_name">자전거</string>
     <string name="rendering_value_pedestrian_name">보행자</string>
-    <string name="more">기타...</string>
+    <string name="more">더 보기…</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
     <string name="record_plugin_description">지도 화면에 하나의 버튼 터치로 경로를 저장 합니다. 로컬 GPX 파일 또는 웹 서비스를 사용하여 온라인에 여행을 기록하기 위해 설정을 보여줍니다.</string>
-    <string name="record_plugin_name">여행 기록</string>
+    <string name="record_plugin_name">트랙 기록</string>
     <string name="int_hour">h</string>
     <string name="duration">경과시간</string>
     <string name="distance">거리</string>
     <string name="index_tours">여행</string>
     <string name="flat_list_waypoints">모두</string>
     <string name="waypoints">경유지</string>
-    <string name="targets">목적지</string>
+    <string name="targets">도착지</string>
     <string name="way_alarms">교통 경고</string>
     <string name="speak_favorites">가까운 즐겨찾기 알리기</string>
     <string name="speak_poi">가까운 POI 알리기</string>
