@@ -1619,7 +1619,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 \n Nota: i file precedenti non verranno modificati.
 \n Nota: non sarà possibile condividere i files fra OsmAnd and OsmAnd+.</string>
     <string name="application_dir_change_warning2">Vuoi che OsmAnd sposti anche i propri dati nella nuova destinazione? Scegli \'No\' perché OsmAnd crei e utilizzi una nuova cartella.</string>
-    <string name="copying_osmand_one_file_descr">Copia in corso del file (%s) nella nuova destinazione...</string>
+    <string name="copying_osmand_one_file_descr">Copia in corso del file (%s) nella nuova destinazione…</string>
     <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)</string>
     <string name="copying_osmand_files">Copia dei file di dati di OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Calcola percorso OsmAnd offline</string>
@@ -1743,7 +1743,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_tracker_id_descr">Clicca per visualizzare o condividere l\'id della tracciabilità.
  Usando l\'id della tracciabilità i dispositivi connessi saranno in grado di seguire tutti i movimenti di questo dispositivo! Per disconnettersi seleziona Opzione rigenera.</string>
     <string name="osmo_session_token">Token della sessione: %1$s</string>
-    <string name="osmo_auth_pending">In attesa di autorizzazione...</string>
+    <string name="osmo_auth_pending">In attesa di autorizzazione…</string>
     <string name="osmo_locations_sent">Localizzazioni inviate %1$d (nel buffer %2$d) </string>
     <string name="osmo_conn_successfull">Connessione stabilita: %1$s </string>
     <string name="osmo_mode_restart">Riavvia la sessione OsMo</string>
@@ -1911,7 +1911,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="lang_zh_CN">Cinese semplificato</string>
 	<string name="lang_zh_TW">Cinese tradizionale</string>
 	<string name="rendering_attr_subwayMode_name">Percorsi metró</string>
- 	<string name="osmo_invite">Invita ...</string>
+ 	<string name="osmo_invite">Invita…</string>
     <string name="osmo_leave_confirmation_msg">Vuoi abbandonare il gruppo %1$s?</string>
     <string name="osmo_specify_tracker_id">Per favore specifica l\'id</string>
     <string name="continue_navigation">Prosegui la navigazione</string>
@@ -1934,7 +1934,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_car_name">Automobile</string>
     <string name="rendering_value_bicycle_name">Bicicletta</string>
     <string name="rendering_value_pedestrian_name">Pedone</string>
-    <string name="more">Altro...</string>
+    <string name="more">Altro…</string>
     <string name="download_additional_maps">Scaricare le mappe mancanti %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">Tutti</string>
     <string name="waypoints">Punti intermedi</string>
