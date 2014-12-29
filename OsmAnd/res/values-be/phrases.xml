@@ -607,4 +607,14 @@
 	<string name="poi_suburb">Прыгарад</string>
 	<string name="poi_neighbourhood">Ваколіцы</string>
 	<string name="poi_dock">Док</string>
+	<string name="poi_motorway_junction">Дарожная разьвязка</string>
+
+	<string name="poi_amusement_ride">Атракцыён</string>
+	<string name="poi_attraction_animal">Жывёла (атракцыён)</string>
+	<string name="poi_roller_coaster">Амэрыканскія горкі</string>
+	<string name="poi_slide">Жолаб</string>
+	<string name="poi_summer_toboggan">Летнія сані</string>
+	<string name="poi_seamark_rock">Скала</string>
+	<string name="poi_seamark_dry_dock">Сухі док</string>
+	<string name="poi_seamark_floating_dock">Плывучы док</string>
 	</resources>
