@@ -793,7 +793,7 @@ public class VoiceRouter {
 	//	}
 	//}
 
-	public void onApplicationTerminate(Context ctx) {
+	public void onApplicationTerminate() {
 		if (player != null) {
 			player.clear();
 		}
