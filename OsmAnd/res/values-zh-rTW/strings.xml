@@ -1443,7 +1443,7 @@
     <string name="routing_preferences_descr">路線偏好</string>
     <string name="app_mode_truck">卡車</string>
     <string name="application_dir_change_warning2">您想要將 OsmAnd 資料複製到新的目的地嗎？選擇否，OsmAnd 只建立和使用新的資料夾。</string>
-    <string name="copying_osmand_one_file_descr">複製檔案 (%s) 到新的目的地...</string>
+    <string name="copying_osmand_one_file_descr">複製檔案 (%s) 到新的目的地…</string>
     <string name="copying_osmand_files_descr">複製 OsmAnd 資料檔到新的目的地 (%s)</string>
     <string name="copying_osmand_files">複製 OsmAnd 資料檔案</string>
     <string name="calculate_osmand_route_gpx">OsmAnd 預估離線路線</string>
@@ -1566,7 +1566,7 @@
     <string name="osmo_tracker_id">個人追蹤 ID</string>
     <string name="osmo_tracker_id_descr">點擊查看或分享追蹤 ID。          使用追蹤 ID 連線的裝置將能夠監控該裝置的所有動作！ 要斷開選擇恢復選項。</string>
     <string name="osmo_session_token">連線階段標記：%1$s</string>
-    <string name="osmo_auth_pending">等候授權...</string>
+    <string name="osmo_auth_pending">等候授權…</string>
     <string name="osmo_locations_sent">發送位置 %1$d（在緩衝區 %2$d） </string>
     <string name="osmo_conn_successfull">已建立的連線：%1$s </string>
     <string name="osmo_mode_restart">重新啟動 OsMo 連線階段</string>
@@ -1738,7 +1738,7 @@
 	<string name="rendering_attr_subwayMode_name">捷運路線</string>
  	<string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
-	<string name="osmo_invite">邀請...</string>
+	<string name="osmo_invite">邀請…</string>
     <string name="osmo_leave_confirmation_msg">您想要離開 %1$s 群組嗎？</string>
     <string name="osmo_specify_tracker_id">請指定 ID</string>
     <string name="rendering_attr_alpineHiking_name">高山徒步比例尺 (SAC)</string>
@@ -1759,7 +1759,7 @@
     <string name="rendering_value_car_name">汽車</string>
     <string name="rendering_value_bicycle_name">自行車</string>
     <string name="rendering_value_pedestrian_name">步行</string>
-    <string name="more">更多...</string>
+    <string name="more">更多…</string>
     <string name="download_additional_maps">要下載缺少的地圖 %1$s (%2$d MB) 嗎？</string>
     <string name="flat_list_waypoitns">全部</string>
     <string name="waypoints">中途點</string>
