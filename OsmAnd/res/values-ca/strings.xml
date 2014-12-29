@@ -252,7 +252,7 @@
 <string name="search_position_current_location_found">Posició (trobada)</string>
 <string name="search_position_address">Adreça…</string>
 <string name="search_position_undefined">Indefinida</string>
-<string name="search_position_fixed">Fixada</string>
+<string name="search_position_fixed">Posició fixada</string>
 <string name="search_position_current_location">Posició actual…</string>
 <string name="context_menu_item_search">Cerca prop d\'aquí</string>
 <string name="save_route_dialog_title">Desa la ruta com una traça GPX</string>
@@ -294,7 +294,7 @@
 <string name="old_poi_file_should_be_deleted">El fitxer de dades de PDI «%1$s» és redundant i serà suprimit.</string>
 <string name="search_position_favorites">Preferits…</string>
 <string name="search_position_map_view">Darrera visualització del mapa</string>
-<string name="select_search_position">Cerca a prop:</string>
+<string name="select_search_position">Cerca prop de:</string>
 <string name="menu_save_directions">Desa les indicacions</string>
 <string name="local_index_upload_gpx_description">Pengeu els fitxers GPX a la comunitat d\'OSM. Es faran servir per millorar els mapes.</string>
 <string name="local_index_items_uploaded">%1$d de %2$d ítem(s) s\'han penjat amb èxit.</string>

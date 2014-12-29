@@ -237,7 +237,7 @@
 	<string name="search_position_current_location">현재 위치…</string>
 	<string name="search_position_map_view">마지막 지도 보기</string>
 	
-	<string name="select_search_position">주변 검색 :</string>
+	<string name="select_search_position">기원 :</string>
 	<string name="context_menu_item_search">가까운 주변 검색</string>
 	<string name="tip_recent_changes_0_6_7_t">"0.6.7 버전에 대한 변경사항들 :
 \n\t- 오프라인 데이터 관리 (OsmAnd 에서 직접 오프라인 데이터 다운로드, 삭제, 활성화 / 비활성화)
@@ -404,7 +404,7 @@
 	
 
 	<string name="tip_navigation">운행</string>
-	<string name="tip_navigation_t">"운행시작을 하기 전에 목적지를 선택하여야 합니다. 그런 다음 맵 상에서 \'메뉴\' -&gt; \'운행시작\' 을 누르고 내비게이션 종류를 선택합니다.
+	<string name="tip_navigation_t">"운행을 시작하기 전에 목적지를 선택하여야 합니다. 그런 다음 맵 상에서 \'메뉴\' -&gt; \'운행시작\' 을 누르고 내비게이션 종류를 선택합니다.
 \n\n목적지는 지도에 도착지 플래그 마커로 표시되고 OsmAnd는 주황색 삼각형으로 목적지까지의 거리와 목적지까지의 방향을 표시합니다.
 \n\n당신이 \"운행시작\"을 선택 할 수 있습니다. 이는 OsmAnd가 당신을 라이브 - 가이드 (활성화 된 경우) 음성 안내를 제공 할 것을 의미합니다, 어떤 라이브 guideance 또는 조정없이 정적 경로의 결과로, \'경로 표시\'를 선택할 수 있습니다.
 \n\n현재 위치가 아닌 다른 위치에서 선택한 목적지로 경로를 표시하려면 지도에 시작 지점을 선택하고 \'출발지 운행시작\'을 누릅니다.
@@ -708,7 +708,7 @@
 	<string name="follow">운행 시작</string>
 	<string name="recalculate_route_to_your_location">전송 모드 :</string>
 	<string name="mark_final_location_first">먼저 목적지를 선택하세요</string>
-	<string name="get_directions">안내시작</string>
+	<string name="get_directions">운행시작</string>
     <string name="show_gps_status">GPS 정보</string>
 	<string name="opening_hours">오프닝 시간</string>
 	<string name="opening_changeset">변경사항 여는중…</string>

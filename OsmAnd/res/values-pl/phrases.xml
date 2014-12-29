@@ -71,7 +71,7 @@
 	<string name="poi_pet_shop">Zoologiczny</string>
 	<string name="poi_radiotechnics_shop">Art. RTV</string>
 	<string name="poi_second_hand">Rzeczy \"z drugiej ręki\"</string>
-	<string name="poi_ship_chandler">Żeglarski</string>
+	<string name="poi_ship_chandler">Armator</string>
 	<string name="poi_sports_shop">Sportowy</string>
 	<string name="poi_stationery_shop">Papierniczy</string>
 	<string name="poi_tableware_shop">Zastawy stołowe</string>
@@ -135,13 +135,13 @@
 	<string name="poi_public_transport_platform">Przystanek transportu miejskiego</string>
 	<string name="poi_public_transport_platform_bus">Przystanek autobusowy</string>
 	<string name="poi_public_transport_platform_trolleybus">Przystanek trolejbusowy</string>
-	<string name="poi_bus_stop">Przystanek autobusowy (nieczynny)</string>
+	<string name="poi_bus_stop">Przystanek autobusowy (przestarzałe)</string>
 	<string name="poi_public_transport_platform_tram">Przystanek tramwajowy</string>
-	<string name="poi_tram_stop">Przystanek tramwajowy (nieczynny)</string>
+	<string name="poi_tram_stop">Przystanek tramwajowy (przestarzałe)</string>
 	<string name="poi_public_transport_station">Dworzec transportu miejskiego</string>
-	<string name="poi_bus_station">Przystanek autobusowy (nieczynny)</string>
-	<string name="poi_railway_station">Przystanek kolejowy (nieczynny)</string>
-	<string name="poi_railway_platform">Peron kolejowy (nieczynny)</string>
+	<string name="poi_bus_station">Dworzec autobusowy (przestarzałe)</string>
+	<string name="poi_railway_station">Stacja kolejowa (przestarzałe)</string>
+	<string name="poi_railway_platform">Peron kolejowy (przestarzałe)</string>
 	<string name="poi_subway_entrance">Metro - wejście</string>
 	<string name="poi_subway_station">Stacja metra</string>
 	<string name="poi_taxi">Postój TAXI</string>
@@ -179,7 +179,7 @@
 	<string name="poi_emergency_access_point">Pogotowie</string>
 
 	<string name="poi_railway_halt">Dworzec kolejowy (nieaktualne)</string>
-	<string name="poi_turning_circle">Punkt zawracania</string>
+	<string name="poi_turning_circle">Miejsce do zawracania</string>
 	<string name="poi_motorway_junction">Zjazd z autostrady</string>
 
 	<string name="poi_water_well">Fontanna</string>
@@ -188,4 +188,14 @@
 	<string name="poi_boatyard">Stocznia</string>
 	<string name="poi_wastewater_plant">Oczyszczalnia ścieków</string>
 	<string name="poi_water_tower">Wieża ciśnień</string>
+	<string name="poi_dam">Tama</string>
+	<string name="poi_water_mill">Młyn wodny</string>
+
+	<string name="poi_power_substation">Podstacja</string>
+	<string name="poi_power_transformer">Transformator</string>
+	<string name="poi_post_office">Urząd pocztowy</string>
+	<string name="poi_post_box">Skrzynka pocztowa</string>
+	<string name="poi_telephone">Telefon</string>
+	<string name="poi_waste_basket">Kosz na śmieci</string>
+
 	</resources>
