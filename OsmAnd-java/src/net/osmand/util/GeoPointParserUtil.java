@@ -1,6 +1,8 @@
 package net.osmand.util;
 
 import java.net.URI;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -82,15 +84,15 @@ public class GeoPointParserUtil {
 
 		// google calendar
 		// geo:0,0?q=760 West Genesee Street Syracuse NY 13204
-		String qstr = "q=760 West Genesee Street Syracuse NY 13204";
-		url = "geo:0,0?" + qstr;
+		String qstr = "760 West Genesee Street Syracuse NY 13204";
+		url = "geo:0,0?q=" + qstr;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse("geo", url);
-		assertGeoPoint(actual, new GeoParsedPoint(qstr.replaceAll("\\s+", "+")));
+		assertGeoPoint(actual, new GeoParsedPoint(qstr));
 
 		// geo:0,0?z=11&q=1600+Amphitheatre+Parkway,+CA
-		qstr = "q=1600+Amphitheatre+Parkway,+CA";
-		url = "geo:0,0?z=11&" + qstr;
+		qstr = "1600 Amphitheatre Parkway, CA";
+		url = "geo:0,0?z=11&q=" + URLEncoder.encode(qstr);
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse("geo", url);
 		assertGeoPoint(actual, new GeoParsedPoint(qstr));
@@ -450,48 +452,79 @@ public class GeoPointParserUtil {
 			return null;
 		}
 		if ("geo".equals(scheme) || "osmand.geo".equals(scheme)) {
-			final String schemeSpecific = data.getSchemeSpecificPart();
-			if (schemeSpecific == null) {
-				return null;
-			}
-			if (schemeSpecific.startsWith("0,0?")) {
-				// geo:0,0?q=34.99,-106.61(Treasure Island)
-				// geo:0,0?z=11&q=34.99,-106.61(Treasure Island)
-				String query = schemeSpecific.substring("0,0?".length());
-				final String pattern = "(?:z=(\\d{1,2}))?&?q=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)[\\+]?(?:\\((.+?)\\))?";
-				final Matcher matcher = Pattern.compile(pattern).matcher(query);
-				if (matcher.matches()) {
-					final String z = matcher.group(1);
-					final String name = matcher.group(4);
-					final int zoom = z != null ? Integer.parseInt(z) : GeoParsedPoint.NO_ZOOM;
-					final double lat = Double.parseDouble(matcher.group(2));
-					final double lon = Double.parseDouble(matcher.group(3));
-					return new GeoParsedPoint(lat, lon, zoom, name);
-				} else {
-					// geo:0,0?q=1600+Amphitheatre+Parkway%2C+CA
-					if (query.contains("z="))
-						query = query.substring(query.indexOf("&") + 1);
-					return new GeoParsedPoint(query);
-				}
-			} else {
-				// geo:47.6,-122.3
-				// geo:47.6,-122.3?z=11 (Treasure Island)
-				final String pattern = "([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:(?:\\?z=(\\d{1,2}))?|(?:\\?q=.*?)?)[\\+]?(?:\\((.*?)\\))?";
-				final Matcher matcher = Pattern.compile(pattern).matcher(schemeSpecific);
-				if (matcher.matches()) {
-					final double lat = Double.valueOf(matcher.group(1));
-					final double lon = Double.valueOf(matcher.group(2));
-					final String name = matcher.group(4);
-					int zoom = matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : GeoParsedPoint.NO_ZOOM;
-					if (zoom != GeoParsedPoint.NO_ZOOM) {
-						return new GeoParsedPoint(lat, lon, zoom, name);
-					} else {
-						return new GeoParsedPoint(lat, lon, name);
-					}
-				} else {
-					return null;
-				}
-			}
+            String schemeSpecific = data.getSchemeSpecificPart();
+            if (schemeSpecific == null) {
+                return null;
+            }
+
+            String name = null;
+            final Pattern namePattern = Pattern.compile("[\\+\\s]*\\((.*)\\)[\\+\\s]*$");
+            final Matcher nameMatcher = namePattern.matcher(schemeSpecific);
+            if (nameMatcher.find()) {
+                name = URLDecoder.decode(nameMatcher.group(1));
+                if (name != null) {
+                    schemeSpecific = schemeSpecific.substring(0, nameMatcher.start());
+                }
+            }
+
+            String positionPart;
+            String queryPart = "";
+            int queryStartIndex = schemeSpecific.indexOf('?');
+            if (queryStartIndex == -1) {
+                positionPart = schemeSpecific;
+            } else {
+                positionPart = schemeSpecific.substring(0, queryStartIndex);
+                if (queryStartIndex < schemeSpecific.length())
+                    queryPart = schemeSpecific.substring(queryStartIndex + 1);
+            }
+
+            final Pattern positionPattern = Pattern.compile(
+                    "([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)");
+            final Matcher positionMatcher = positionPattern.matcher(positionPart);
+            if (!positionMatcher.find()) {
+                return null;
+            }
+            double lat = Double.valueOf(positionMatcher.group(1));
+			double lon = Double.valueOf(positionMatcher.group(2));
+
+            int zoom = GeoParsedPoint.NO_ZOOM;
+            String searchRequest = null;
+            for (String param : queryPart.split("&")) {
+                String paramName;
+                String paramValue = null;
+                int nameValueDelimititerIndex = param.indexOf('=');
+                if (nameValueDelimititerIndex == -1) {
+                    paramName = param;
+                } else {
+                    paramName = param.substring(0, nameValueDelimititerIndex);
+                    if (nameValueDelimititerIndex < param.length())
+                        paramValue = param.substring(nameValueDelimititerIndex + 1);
+                }
+
+                if ("z".equals(paramName) && paramValue != null) {
+                    zoom = Integer.parseInt(paramValue);
+                } else if ("q".equals(paramName) && paramValue != null) {
+                    searchRequest = URLDecoder.decode(paramValue);
+                }
+            }
+
+            if (searchRequest != null) {
+                final Matcher positionInSearchRequestMatcher =
+                        positionPattern.matcher(searchRequest);
+                if (lat == 0.0 && lon == 0.0 && positionInSearchRequestMatcher.find()) {
+                    lat = Double.valueOf(positionInSearchRequestMatcher.group(1));
+                    lon = Double.valueOf(positionInSearchRequestMatcher.group(2));
+                }
+            }
+
+            if (lat == 0.0 && lon == 0.0 && searchRequest != null) {
+                return new GeoParsedPoint(searchRequest);
+            }
+
+            if (zoom != GeoParsedPoint.NO_ZOOM) {
+                return new GeoParsedPoint(lat, lon, zoom, name);
+            }
+            return new GeoParsedPoint(lat, lon, name);
 		}
 		return null;
 	}
