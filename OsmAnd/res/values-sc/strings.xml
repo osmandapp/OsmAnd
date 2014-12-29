@@ -60,8 +60,8 @@
     <string name="keep_and_add_destination_point">Annànghe unu puntu de destinatzione</string>
     <string name="select_gpx">Issèbera GPX…</string>
     <string name="route_descr_select_destination">Issèbera sa destinatzione</string>
-    <string name="route_descr_select_on_map">Issèbera in sa mapa…</string>
-    <string name="route_descr_favorite">Preferridu…</string>
+    <string name="route_descr_select_on_map">Ischerta in sa mapa…</string>
+    <string name="route_descr_favorite">Prefèrridu…</string>
     <string name="route_preferences">Preferèntzias pro s\'àndala</string>
     <string name="route_info">Informatziones de s\'àndalas</string>
     <string name="routing_attr_prefer_motorway_name">Preferre sas autostradas</string>
@@ -82,7 +82,7 @@
 \n Nota 1: sos datos antepostos tuos non at a èssere mudados (ma podent essere burrados manualmente).
 \n Nota 2: in sa cartella noa non at a èssere possìbile cumpartzire sos datos intra OsmAnd e OsmAnd+.</string>
     <string name="application_dir_change_warning2">Boles chi OsmAnd còpiet sos datos suos fintzas in sa destinatzione noa? Icherta \"Nono\" pro fàghere petzi creare ed impreare una cartella noa a OsmAnd.</string>
-    <string name="copying_osmand_one_file_descr">Copiande su documentu (%s) in sa destinatzione noa...</string>
+    <string name="copying_osmand_one_file_descr">Copiande su documentu (%s) in sa destinatzione noa…</string>
     <string name="copying_osmand_files_descr">Copiande sos datos de OsmAnd in (%s), sa destinatzione noa</string>
     <string name="copying_osmand_files">Copiande sos datos de OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Càlcula s\'àndala OsmAnd sena lìnia</string>
@@ -574,7 +574,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="save_as_favorites_points">Sarba comente grupu de prefèrridos</string>
     <string name="select_destination_and_intermediate_points">Issèbera sas tapas</string>
     <string name="layer_amenity_label">Etichetas de sos puntos</string>
-    <string name="loading_smth">Carrigamentu de %1$s …</string>
+    <string name="loading_smth">Carrigamentu de %1$s…</string>
     <string name="map_widget_plain_time">Oràriu atuale</string>
     <string name="gpx_wpt">Tapa</string>
     <string name="selected_gpx_info_show">\n\nTene carcau pro lu bìere in sa mapa</string>
@@ -675,7 +675,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="osmo_tracker_id">Id pessonale arrastamentu</string>
     <string name="osmo_tracker_id_descr">Carca pro visualizzare o cumpartzire s\'id de arrastamentu. Impreande s\'id de arrastamentu sos dispositivos connessos ant a èssere capatzes de sighire totu sos movimentos de custu dispositivu! Pro ti disconnèttere ischerta s\'optzione Reingendra.</string>
     <string name="osmo_session_token">Token de sa sessione: %1$s</string>
-    <string name="osmo_auth_pending">Isetande pro s\'autorizatzione...</string>
+    <string name="osmo_auth_pending">Isetande pro s\'autorizatzione…</string>
     <string name="osmo_locations_sent">"Localizatziones imbiadas %1$d (in su buffer %2$d) "</string>
     <string name="osmo_conn_successfull">"Connessione istabilida: %1$s "</string>
     <string name="tip_recent_changes_1_8_alpha">"Mudas in sa 1.8: * Càlcula s\'àndala intre duos puntos de una rasta GPX * Mudada s\'aspetu pro s\'isgarrigamentu de sos istados (suportu pro sa chirca cun nùmenes locales) * Suportu pro s\'importatzione GPX/KML (cunvertere dae KML a GPX) * Sas rastas GPX sunt istadas mòvidas in \'Datos meos\' * Como podes partzire sas rastas GPX pro distantzia e compidare sa diferèntzia de artària/ lestresa * Aviu automàticu de su nàvigu a pustis de un isetu curtzu "</string>
@@ -948,7 +948,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="default_buttons_save">Sarba</string>
 	<string name="menu_save_directions">Sarba diretziones</string>
 	<string name="rendering_attr_coloredBuildings_name">Edifìtzios colorados pro casta</string>
-    <string name="osmo_invite">Invita...</string>
+    <string name="osmo_invite">Invita…</string>
     <string name="osmo_leave_confirmation_msg">Boles essire dae su grupu %1$s?</string>
     <string name="osmo_specify_tracker_id">Pro piaghere dislinda s\'id</string>
     <string name="continue_navigation">Sighi cun su nàvigu</string>
@@ -1382,7 +1382,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="menu_mute_off">S\'àudio est deativadu</string>
 	<string name="menu_mute_on">Àudio deativadu</string>
 	<string name="download_additional_maps">Iscarrigare sas mapas fartantes %1$s (%2$d MB)?</string>
-    <string name="more">Àteru...</string>
+    <string name="more">Àteru…</string>
     <string name="local_index_upload_gpx_description">Imbiu de sos documentos GPX a sa comunidade OSM. Los ant a impreare pro megiorare sas mapas.</string>
 	<string name="local_index_items_uploaded">Ogetu/os %1$d de %2$d carrigadu curretamente.</string>
 	<string name="tip_location_sharing_t">"Podes cumpartzire sa positzione de sos logos interesantes de sos biagios tuos cun familiares e amigos, tràmite su Menù cuntestuale \'Imprea sa positzione\' → \'Cumpartzi positzione\'.
