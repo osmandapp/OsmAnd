@@ -332,7 +332,7 @@ public class GeoPointParserUtil {
 
 	/**
 	 * Parses geo and map intents:
-	 * 
+	 *
 	 * @param scheme
 	 *            The intent scheme
 	 * @param data
@@ -452,79 +452,79 @@ public class GeoPointParserUtil {
 			return null;
 		}
 		if ("geo".equals(scheme) || "osmand.geo".equals(scheme)) {
-            String schemeSpecific = data.getSchemeSpecificPart();
-            if (schemeSpecific == null) {
-                return null;
-            }
+			String schemeSpecific = data.getSchemeSpecificPart();
+			if (schemeSpecific == null) {
+				return null;
+			}
 
-            String name = null;
-            final Pattern namePattern = Pattern.compile("[\\+\\s]*\\((.*)\\)[\\+\\s]*$");
-            final Matcher nameMatcher = namePattern.matcher(schemeSpecific);
-            if (nameMatcher.find()) {
-                name = URLDecoder.decode(nameMatcher.group(1));
-                if (name != null) {
-                    schemeSpecific = schemeSpecific.substring(0, nameMatcher.start());
-                }
-            }
+			String name = null;
+			final Pattern namePattern = Pattern.compile("[\\+\\s]*\\((.*)\\)[\\+\\s]*$");
+			final Matcher nameMatcher = namePattern.matcher(schemeSpecific);
+			if (nameMatcher.find()) {
+				name = URLDecoder.decode(nameMatcher.group(1));
+				if (name != null) {
+					schemeSpecific = schemeSpecific.substring(0, nameMatcher.start());
+				}
+			}
 
-            String positionPart;
-            String queryPart = "";
-            int queryStartIndex = schemeSpecific.indexOf('?');
-            if (queryStartIndex == -1) {
-                positionPart = schemeSpecific;
-            } else {
-                positionPart = schemeSpecific.substring(0, queryStartIndex);
-                if (queryStartIndex < schemeSpecific.length())
-                    queryPart = schemeSpecific.substring(queryStartIndex + 1);
-            }
+			String positionPart;
+			String queryPart = "";
+			int queryStartIndex = schemeSpecific.indexOf('?');
+			if (queryStartIndex == -1) {
+				positionPart = schemeSpecific;
+			} else {
+				positionPart = schemeSpecific.substring(0, queryStartIndex);
+				if (queryStartIndex < schemeSpecific.length())
+					queryPart = schemeSpecific.substring(queryStartIndex + 1);
+			}
 
-            final Pattern positionPattern = Pattern.compile(
-                    "([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)");
-            final Matcher positionMatcher = positionPattern.matcher(positionPart);
-            if (!positionMatcher.find()) {
-                return null;
-            }
-            double lat = Double.valueOf(positionMatcher.group(1));
+			final Pattern positionPattern = Pattern.compile(
+					"([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)");
+			final Matcher positionMatcher = positionPattern.matcher(positionPart);
+			if (!positionMatcher.find()) {
+				return null;
+			}
+			double lat = Double.valueOf(positionMatcher.group(1));
 			double lon = Double.valueOf(positionMatcher.group(2));
 
-            int zoom = GeoParsedPoint.NO_ZOOM;
-            String searchRequest = null;
-            for (String param : queryPart.split("&")) {
-                String paramName;
-                String paramValue = null;
-                int nameValueDelimititerIndex = param.indexOf('=');
-                if (nameValueDelimititerIndex == -1) {
-                    paramName = param;
-                } else {
-                    paramName = param.substring(0, nameValueDelimititerIndex);
-                    if (nameValueDelimititerIndex < param.length())
-                        paramValue = param.substring(nameValueDelimititerIndex + 1);
-                }
+			int zoom = GeoParsedPoint.NO_ZOOM;
+			String searchRequest = null;
+			for (String param : queryPart.split("&")) {
+				String paramName;
+				String paramValue = null;
+				int nameValueDelimititerIndex = param.indexOf('=');
+				if (nameValueDelimititerIndex == -1) {
+					paramName = param;
+				} else {
+					paramName = param.substring(0, nameValueDelimititerIndex);
+					if (nameValueDelimititerIndex < param.length())
+						paramValue = param.substring(nameValueDelimititerIndex + 1);
+				}
 
-                if ("z".equals(paramName) && paramValue != null) {
-                    zoom = Integer.parseInt(paramValue);
-                } else if ("q".equals(paramName) && paramValue != null) {
-                    searchRequest = URLDecoder.decode(paramValue);
-                }
-            }
+				if ("z".equals(paramName) && paramValue != null) {
+					zoom = Integer.parseInt(paramValue);
+				} else if ("q".equals(paramName) && paramValue != null) {
+					searchRequest = URLDecoder.decode(paramValue);
+				}
+			}
 
-            if (searchRequest != null) {
-                final Matcher positionInSearchRequestMatcher =
-                        positionPattern.matcher(searchRequest);
-                if (lat == 0.0 && lon == 0.0 && positionInSearchRequestMatcher.find()) {
-                    lat = Double.valueOf(positionInSearchRequestMatcher.group(1));
-                    lon = Double.valueOf(positionInSearchRequestMatcher.group(2));
-                }
-            }
+			if (searchRequest != null) {
+				final Matcher positionInSearchRequestMatcher =
+						positionPattern.matcher(searchRequest);
+				if (lat == 0.0 && lon == 0.0 && positionInSearchRequestMatcher.find()) {
+					lat = Double.valueOf(positionInSearchRequestMatcher.group(1));
+					lon = Double.valueOf(positionInSearchRequestMatcher.group(2));
+				}
+			}
 
-            if (lat == 0.0 && lon == 0.0 && searchRequest != null) {
-                return new GeoParsedPoint(searchRequest);
-            }
+			if (lat == 0.0 && lon == 0.0 && searchRequest != null) {
+				return new GeoParsedPoint(searchRequest);
+			}
 
-            if (zoom != GeoParsedPoint.NO_ZOOM) {
-                return new GeoParsedPoint(lat, lon, zoom, name);
-            }
-            return new GeoParsedPoint(lat, lon, name);
+			if (zoom != GeoParsedPoint.NO_ZOOM) {
+				return new GeoParsedPoint(lat, lon, zoom, name);
+			}
+			return new GeoParsedPoint(lat, lon, name);
 		}
 		return null;
 	}
