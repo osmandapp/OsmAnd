@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.Window;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
@@ -51,7 +52,7 @@ public class FavouritesActivity extends ActionBarActivity {
         //class in com.actionbarsherlock.view and NOT android.view
 		((OsmandApplication) getApplication()).applyTheme(this);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+        //getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		super.onCreate(icicle);
 		setSupportProgressBarIndeterminateVisibility(false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -140,7 +141,7 @@ public class FavouritesActivity extends ActionBarActivity {
 
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
 		case android.R.id.home:

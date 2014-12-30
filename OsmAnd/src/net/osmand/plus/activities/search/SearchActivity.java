@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -23,7 +24,6 @@ import net.osmand.util.Algorithms;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -40,6 +40,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
+import android.support.v7.app.ActionBar.OnNavigationListener;
 
 public class SearchActivity extends ActionBarActivity implements OsmAndLocationListener {
 	private static final String SEARCH_HISTORY = "Search_History";
@@ -99,7 +100,7 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		long t = System.currentTimeMillis();
-		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		//getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		setContentView(R.layout.search_main);
 		settings = ((OsmandApplication) getApplication()).getSettings();
@@ -197,7 +198,7 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
 		case android.R.id.home:

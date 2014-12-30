@@ -2,6 +2,9 @@ package net.osmand.plus.routepointsnavigation;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import android.support.v7.view.ActionMode;
+import android.view.*;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
@@ -9,6 +12,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandExpandableListActivity;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routepointsnavigation.RoutePointsPlugin.RoutePoint;
@@ -23,18 +27,11 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.Window;
 
 /**
  * Created by Bars on 13.06.2014.
@@ -145,11 +142,9 @@ public class RoutePointsActivity extends OsmandListActivity {
 		listView.setAdapter(adapter);
 	}
 	
-	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
 		RoutePoint rp = adapter.getItem(position);
-		getSherlock().startActionMode(getPointActionModeCallback(rp));
+		getSupportActionBar().startActionMode(getPointActionModeCallback(rp));
 		adapter.notifyDataSetChanged();
 	}
 
@@ -224,7 +219,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 	private void saveGPXAsync() {
 		new AsyncTask<SelectedRouteGpxFile, Void, Void>() {
 			protected void onPreExecute() {
-				getSherlock().setProgressBarIndeterminateVisibility(true);
+				//getSherlock().setProgressBarIndeterminateVisibility(true);
 			}
 
 			@Override
@@ -236,7 +231,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 			}
 
 			protected void onPostExecute(Void result) {
-				getSherlock().setProgressBarIndeterminateVisibility(false);
+				//getSherlock().setProgressBarIndeterminateVisibility(false);
 
 			}
 		}.execute(plugin.getCurrentRoute());
@@ -300,7 +295,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) {
 		createMenuItem(menu, OK_ID, R.string.default_buttons_ok, 
 				R.drawable.ic_action_map_marker_light, R.drawable.ic_action_map_marker_dark ,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -311,7 +306,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == OK_ID) {
 			finish();
 			return true;

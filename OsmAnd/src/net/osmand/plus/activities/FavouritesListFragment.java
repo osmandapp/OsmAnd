@@ -6,6 +6,7 @@ package net.osmand.plus.activities;
 import java.util.Comparator;
 import java.util.List;
 
+import android.support.v4.app.ListFragment;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
@@ -33,12 +34,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
-import com.actionbarsherlock.app.SherlockListFragment;
-
 /**
  * 
  */
-public class FavouritesListFragment extends SherlockListFragment implements SearchActivityChild {
+public class FavouritesListFragment extends ListFragment implements SearchActivityChild {
 
 	public static final String SELECT_FAVORITE_POINT_INTENT_KEY = "SELECT_FAVORITE_POINT_INTENT_KEY"; 
 	public static final int SELECT_FAVORITE_POINT_RESULT_OK = 1;

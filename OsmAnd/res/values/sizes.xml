@@ -19,7 +19,7 @@
     <dimen name="dashPadding">6dp</dimen>
     <dimen name="dashAboutTextSize">20sp</dimen>
     <dimen name="dashCardMargin">4dp</dimen>
-
+	<dimen name="abp__shadow_height">4dp</dimen>
 
     <!-- TextSizes -->
     <dimen name="showAllButtonTextSize">12sp</dimen>

@@ -3,16 +3,12 @@ package net.osmand.plus.download;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
+import android.view.*;
 import android.widget.*;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockListFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.SubMenu;
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
@@ -27,7 +23,7 @@ import java.util.Map;
 /**
  * Created by Denis on 09.09.2014.
  */
-public class UpdatesIndexFragment extends SherlockListFragment {
+public class UpdatesIndexFragment extends ListFragment {
 
 	private OsmandRegions osmandRegions;
 	private java.text.DateFormat format;
@@ -112,15 +108,14 @@ public class UpdatesIndexFragment extends SherlockListFragment {
 			MenuItem item = menu.add(0, DownloadIndexFragment.RELOAD_ID, 0, R.string.update_downlod_list);
 			item.setIcon(isLightActionBar() ? R.drawable.ic_action_refresh_light :
 				R.drawable.ic_action_refresh_dark);
-			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-			
+			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			SubMenu s = menu.addSubMenu(0, DownloadIndexFragment.MORE_ID, 0, R.string.default_buttons_other_actions);
 			s.add(0, DownloadIndexFragment.SELECT_ALL_ID, 0, R.string.select_all);
 			s.add(0, DownloadIndexFragment.DESELECT_ALL_ID, 0, R.string.deselect_all);
 
 			s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
 					: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
-			s.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			MenuItemCompat.setShowAsAction(s.getItem(), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		}
 	}
 

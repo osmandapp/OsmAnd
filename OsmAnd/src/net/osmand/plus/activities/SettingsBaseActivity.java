@@ -11,6 +11,7 @@ import java.util.Set;
 
 import android.os.Build;
 import android.preference.*;
+import android.view.MenuItem;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -34,7 +35,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 
-public abstract class SettingsBaseActivity extends SherlockPreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
+public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
+		implements OnPreferenceChangeListener, OnPreferenceClickListener {
 
 
 	
@@ -287,7 +289,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
 		case android.R.id.home:
@@ -301,9 +303,9 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
-		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setTitle(R.string.settings_activity);
+		//getToolbar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		//getToolbar().setDisplayHomeAsUpEnabled(true);
+		getToolbar().setTitle(R.string.settings_activity);
 		// R.drawable.tab_settings_screen_icon
 		super.onCreate(savedInstanceState);
 		
@@ -316,24 +318,24 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 					modes.add(a);
 				}
 			}
-			getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+			//getToolbar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 			List<String> s = new ArrayList<String>();
 			for (ApplicationMode a : modes) {
 				s.add(a.toHumanString(getMyApplication()));
 			}
 
-			ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(),
-					R.layout.sherlock_spinner_item, s);
-			spinnerAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
-			getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, new OnNavigationListener() {
-
-				@Override
-				public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-					settings.APPLICATION_MODE.set(modes.get(itemPosition));
-					updateAllSettings();
-					return true;
-				}
-			});
+//			ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(),
+//					R.layout.sherlock_spinner_item, s);
+//			spinnerAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
+//			getToolbar().setListNavigationCallbacks(spinnerAdapter, new OnNavigationListener() {
+//
+//				@Override
+//				public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+//					settings.APPLICATION_MODE.set(modes.get(itemPosition));
+//					updateAllSettings();
+//					return true;
+//				}
+//			});
 		}
 		setPreferenceScreen(getPreferenceManager().createPreferenceScreen(this));
     }
@@ -349,7 +351,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 			previousAppMode = settings.getApplicationMode();
 			boolean found = setSelectedAppMode(previousAppMode);
 			if (!found) {
-				getSupportActionBar().setSelectedNavigationItem(0);
+				//getToolbar().setSelectedNavigationItem(0);
 			}
 		} else {
 			updateAllSettings();
@@ -383,7 +385,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		boolean found = false;
 		for (ApplicationMode a : modes) {
 			if (am == a) {
-				getSupportActionBar().setSelectedNavigationItem(ind);
+				//getSupportActionBar().setSelectedNavigationItem(ind);
 				found = true;
 				break;
 			}

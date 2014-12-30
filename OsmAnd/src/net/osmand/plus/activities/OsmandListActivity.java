@@ -1,64 +1,98 @@
 package net.osmand.plus.activities;
 
+import android.app.ExpandableListActivity;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ExpandableListView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import net.osmand.plus.OsmandApplication;
 import android.app.ActionBar;
-import android.content.pm.ActivityInfo;
+import android.graphics.Shader.TileMode;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 
-import com.actionbarsherlock.app.SherlockListActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
-public abstract class OsmandListActivity extends SherlockListActivity {
+public abstract class OsmandListActivity extends
+		ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
-		setActionBarSettings();
-	}
-
-	protected void setActionBarSettings() {
-		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
-	protected OsmandApplication getMyApplication() {
-		return (OsmandApplication) getApplication();
+
+	public OsmandApplication getMyApplication() {
+		return (OsmandApplication)getApplication();
 	}
-	
-	
+
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
-		case android.R.id.home:
-			finish();
-			return true;
+			case android.R.id.home:
+				finish();
+				return true;
 
 		}
 		return false;
 	}
-	
-	public void createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType) {
-		com.actionbarsherlock.view.MenuItem menuItem = m.add(0, id, 0, titleRes);
-		int res = isLightActionBar() ? iconLight : iconDark;
-		if(res != 0) {
-			menuItem = menuItem.setIcon(res);
-		}
-		menuItem.setShowAsActionFlags(menuItemType)
-				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-					@Override
-					public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-						return onOptionsItemSelected(item);
-					}
-				});
 
+	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType) {
+		int r = isLightActionBar() ? iconLight : iconDark;
+		MenuItem menuItem = m.add(0, id, 0, titleRes);
+		if (r != 0) {
+			menuItem.setIcon(r);
+		}
+		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				return onOptionsItemSelected(item);
+			}
+		});
+		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
+		return menuItem;
 	}
-	
+
+	public void fixBackgroundRepeat(View view) {
+		Drawable bg = view.getBackground();
+		if (bg != null) {
+			if (bg instanceof BitmapDrawable) {
+				BitmapDrawable bmp = (BitmapDrawable) bg;
+				// bmp.mutate(); // make sure that we aren't sharing state anymore
+				bmp.setTileModeXY(TileMode.REPEAT, TileMode.REPEAT);
+			}
+		}
+	}
+
+
+	public void setListAdapter(ListAdapter adapter){
+		((ListView)findViewById(android.R.id.list)).setAdapter(adapter);
+	}
+
+	public ListView getListView() {
+		return (ListView)findViewById(android.R.id.list);
+	}
+
+	public ListAdapter getListAdapter() {
+		return ((ListView)findViewById(android.R.id.list)).getAdapter();
+	}
+
+	public void setOnItemClickListener(AdapterView.OnItemClickListener childClickListener){
+		((ListView)findViewById(android.R.id.list)).setOnItemClickListener(childClickListener);
+	}
+
 	public boolean isLightActionBar() {
 		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
 	}
+
 }

@@ -6,6 +6,8 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Random;
 
+import android.support.v4.view.MenuItemCompat;
+import android.view.*;
 import net.osmand.Location;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -45,14 +47,9 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 
 /**
  */
@@ -384,12 +381,12 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, HELP_ID, 0, R.string.tips_and_tricks).setIcon(R.drawable.ic_ac_help)
-				.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		menu.add(0, SETTINGS_ID, 0, R.string.settings).setIcon(R.drawable.ic_ac_settings)
-				.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		menu.add(0, EXIT_ID, 0, R.string.exit_Button).setIcon(R.drawable.ic_ac_close)
-				.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		MenuItem menuItem = menu.add(0, HELP_ID, 0, R.string.tips_and_tricks).setIcon(R.drawable.ic_ac_help);
+		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		menuItem = menu.add(0, SETTINGS_ID, 0, R.string.settings).setIcon(R.drawable.ic_ac_settings);
+		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		menuItem = menu.add(0, EXIT_ID, 0, R.string.exit_Button).setIcon(R.drawable.ic_ac_close);
+		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		return true;
 	}
 

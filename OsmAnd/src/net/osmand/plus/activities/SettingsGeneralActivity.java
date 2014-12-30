@@ -9,6 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import android.view.Window;
 import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -52,7 +53,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.actionbarsherlock.view.Window;
 
 public class SettingsGeneralActivity extends SettingsBaseActivity {
 

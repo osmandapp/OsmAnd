@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.view.*;
+import android.view.MenuItem.OnMenuItemClickListener;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -44,11 +46,6 @@ import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -58,10 +55,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.TextView.OnEditorActionListener;
-
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 
 public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity {
@@ -521,13 +514,13 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	public boolean onCreateOptionsMenu(Menu menu) {
 		if (sequentialSearch) {
 			boolean light = ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
-			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to)
+			MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to)
 					.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light
 					: R.drawable.ic_action_gdirections_dark);
-			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
-				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				public boolean onMenuItemClick(MenuItem item) {
 					select(NAVIGATE_TO);
 					return true;
 				}
@@ -544,7 +537,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			}
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
-				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				public boolean onMenuItemClick(MenuItem item) {
 					select(ADD_WAYPOINT);
 					return true;
 				}
@@ -555,7 +548,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
-				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				public boolean onMenuItemClick(MenuItem item) {
 					select(SHOW_ON_MAP);
 					return true;
 				}
@@ -567,7 +560,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
-				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				public boolean onMenuItemClick(MenuItem item) {
 					select(ADD_TO_FAVORITE);
 					return true;
 				}

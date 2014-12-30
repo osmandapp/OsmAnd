@@ -2,19 +2,16 @@ package net.osmand.plus.dashboard;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 
 import java.util.ArrayList;

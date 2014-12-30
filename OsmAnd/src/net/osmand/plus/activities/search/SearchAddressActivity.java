@@ -1,6 +1,7 @@
 package net.osmand.plus.activities.search;
 
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import net.osmand.plus.OsmandApplication;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -12,7 +13,7 @@ public class SearchAddressActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
-		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		//getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		if (savedInstanceState == null) {
 			// During initial setup, plug in the details fragment.
@@ -23,7 +24,7 @@ public class SearchAddressActivity extends ActionBarActivity {
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
 		case android.R.id.home:
