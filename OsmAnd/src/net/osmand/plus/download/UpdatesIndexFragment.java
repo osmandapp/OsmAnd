@@ -113,8 +113,8 @@ public class UpdatesIndexFragment extends ListFragment {
 			s.add(0, DownloadIndexFragment.SELECT_ALL_ID, 0, R.string.select_all);
 			s.add(0, DownloadIndexFragment.DESELECT_ALL_ID, 0, R.string.deselect_all);
 
-			s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
-					: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
+//			s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
+//					: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
 			MenuItemCompat.setShowAsAction(s.getItem(), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		}
 	}

@@ -61,13 +61,18 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	private ListPreference applicationModePreference;
 	private ListPreference drivingRegionPreference;
 
-	
+
+	@Override
+	protected int getPreferencesXmlId() {
+		return 0;
+	}
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
-		setSupportProgressBarIndeterminateVisibility(false);
-		getSupportActionBar().setTitle(R.string.global_app_settings);
+		//setSupportProgressBarIndeterminateVisibility(false);
+		getToolbar().setTitle(R.string.global_app_settings);
 		addPreferencesFromResource(R.xml.general_settings);
 		String[] entries;
 		String[] entrieValues;
@@ -535,10 +540,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	}
 
 	public void reloadIndexes() {
-		setSupportProgressBarIndeterminateVisibility(true);
-		final CharSequence oldTitle = getSupportActionBar().getTitle();
-		getSupportActionBar(). setTitle(getString(R.string.loading_data));
-		getSupportActionBar().setSubtitle(getString(R.string.reading_indexes));
+		//setSupportProgressBarIndeterminateVisibility(true);
+		final CharSequence oldTitle = getToolbar().getTitle();
+		getToolbar(). setTitle(getString(R.string.loading_data));
+		getToolbar().setSubtitle(getString(R.string.reading_indexes));
 		new AsyncTask<Void, Void, List<String>>() {
 
 			@Override
@@ -548,10 +553,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			
 			protected void onPostExecute(List<String> result) {
 				showWarnings(result);
-				getSupportActionBar().setTitle(oldTitle);
-				getSupportActionBar().setSubtitle("");
-				setSupportProgressBarIndeterminateVisibility(false);
-			};
+				getToolbar().setTitle(oldTitle);
+				getToolbar().setSubtitle("");
+				//setSupportProgressBarIndeterminateVisibility(false);
+			}
 			
 		}.execute();
 	}
@@ -563,8 +568,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 				@Override
 				protected void onPreExecute() {
-					setSupportProgressBarIndeterminateVisibility(true);
-				};
+					//setSupportProgressBarIndeterminateVisibility(true);
+				}
 
 				@Override
 				protected Void doInBackground(Void... params) {
@@ -574,11 +579,11 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 				@Override
 				protected void onPostExecute(Void result) {
-					setSupportProgressBarIndeterminateVisibility(false);
+					//setSupportProgressBarIndeterminateVisibility(false);
 					if (!NativeOsmandLibrary.isNativeSupported(storage, getMyApplication())) {
 						AccessibleToast.makeText(SettingsGeneralActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
 					}
-				};
+				}
 			}.execute();
 		}
 	}

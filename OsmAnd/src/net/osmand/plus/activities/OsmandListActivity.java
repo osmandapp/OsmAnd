@@ -19,7 +19,7 @@ import android.view.View;
 
 
 public abstract class OsmandListActivity extends
-		ActionBarActivity {
+		ActionBarActivity implements AdapterView.OnItemClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,4 +95,8 @@ public abstract class OsmandListActivity extends
 		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
 	}
 
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+	}
 }

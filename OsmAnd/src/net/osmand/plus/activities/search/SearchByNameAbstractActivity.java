@@ -11,6 +11,7 @@ import java.util.Map;
 
 import android.view.*;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.widget.*;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -47,12 +48,6 @@ import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -313,15 +308,17 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		return CollatorStringMatcher.cmatches(collator, getText(obj), filter, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 	}
 	
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		T repo = getListAdapter().getItem(position);
-		itemSelectedBase(repo, v);
-	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
+		setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				T repo = getListAdapter().getItem(position);
+				itemSelectedBase(repo, view);
+			}
+		});
 		Intent intent = getIntent();
 		sequentialSearch = false;
 		if(intent != null){

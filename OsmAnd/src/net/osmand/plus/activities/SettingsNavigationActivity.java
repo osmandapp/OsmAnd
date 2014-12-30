@@ -53,7 +53,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setTitle(R.string.routing_settings);
+		getToolbar().setTitle(R.string.routing_settings);
 	
 		createUI();
     }

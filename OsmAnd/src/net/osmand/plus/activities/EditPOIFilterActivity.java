@@ -12,6 +12,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import android.view.*;
+import android.widget.*;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
@@ -30,15 +31,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * 
@@ -300,7 +293,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	}
 	
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		showDialog(getListAdapter().getItem(position));
 	}
 

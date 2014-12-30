@@ -2,6 +2,7 @@ package net.osmand.plus.activities.search;
 
 import java.util.List;
 
+import android.support.v4.app.ListFragment;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmAndFormatter;
@@ -30,9 +31,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
-import com.actionbarsherlock.app.SherlockListFragment;
 
-public class SearchHistoryFragment extends SherlockListFragment  implements SearchActivityChild {
+public class SearchHistoryFragment extends ListFragment implements SearchActivityChild {
 	private LatLon location;
 	private SearchHistoryHelper helper;
 	private Button clearButton;

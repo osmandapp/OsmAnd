@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -16,7 +17,8 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 
-public abstract class OsmandExpandableListFragment extends Fragment implements OnChildClickListener {
+public abstract class OsmandExpandableListFragment extends Fragment
+		implements OnChildClickListener {
 	
 	
 	private ExpandableListView listView;
@@ -109,5 +111,12 @@ public abstract class OsmandExpandableListFragment extends Fragment implements O
 			}
 		});
 
+	}
+
+	public ActionBarActivity getActionBarActivity() {
+		if (getActivity() instanceof ActionBarActivity) {
+			return (ActionBarActivity) getActivity();
+		}
+		return null;
 	}
 }

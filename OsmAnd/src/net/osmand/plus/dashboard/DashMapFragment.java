@@ -114,7 +114,7 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 	private void applicationInitialized(View view) {
 		updateMapImage();
 		view.findViewById(R.id.loading).setVisibility(View.GONE);
-		MainMenuActivity dashboardActivity = ((MainMenuActivity) getSherlockActivity());
+		MainMenuActivity dashboardActivity = ((MainMenuActivity) getActivity());
 		if (dashboardActivity != null) {
 			dashboardActivity.updateDownloads();
 			view.findViewById(R.id.map_image).setVisibility(View.VISIBLE);

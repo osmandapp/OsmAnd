@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
+import android.widget.AdapterView;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
@@ -178,7 +179,12 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		}
 		quitActivity(SearchStreetByNameActivity.class);
 	}
-	
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+	}
+
 	private final class CityComparator implements Comparator<City> {
 		private final StringMatcherMode startsWith;
 		private final net.osmand.Collator cs;

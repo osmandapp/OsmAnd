@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.support.v7.view.ActionMode;
 import android.view.*;
+import android.widget.*;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
@@ -27,10 +28,6 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 
 /**
@@ -142,7 +139,8 @@ public class RoutePointsActivity extends OsmandListActivity {
 		listView.setAdapter(adapter);
 	}
 	
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		RoutePoint rp = adapter.getItem(position);
 		getSupportActionBar().startActionMode(getPointActionModeCallback(rp));
 		adapter.notifyDataSetChanged();

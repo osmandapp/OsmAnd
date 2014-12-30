@@ -13,6 +13,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.view.ActionMode;
 import android.view.*;
@@ -511,23 +512,24 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 						.listen(listener).position(4).reg();
 		OsmandPlugin.onOptionsMenuActivity(getDownloadActivity(), null, optionsMenuAdapter);
 		// doesn't work correctly
-		int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
+		//int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
+		int max = 4;
 		SubMenu split = null;
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
 			if (j + 1 >= max && optionsMenuAdapter.length() > max) {
 				if (split == null) {
 					split = menu.addSubMenu(0, 1, j + 1, R.string.default_buttons_other_actions);
-					split.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
-							: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
-					split.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+//					split.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
+//							: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
+					split.getItem();
+					MenuItemCompat.setShowAsAction(split.getItem(),MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
 				item = split.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
-				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM );
+				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
 			} else {
 				item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
-				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM  
-						);
+				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
 			}
 			if (optionsMenuAdapter.getImageId(j, isLightActionBar()) != 0) {
 				item.setIcon(optionsMenuAdapter.getImageId(j, isLightActionBar()));
@@ -604,8 +606,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				if (actionIconId != 0) {
 					it.setIcon(actionIconId);
 				}
-				it.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM |
-						MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.setShowAsAction(it, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
+						MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 				return true;
 			}
 

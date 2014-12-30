@@ -299,7 +299,12 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		}
 		return false;
 	}
-	
+
+	@Override
+	protected int getPreferencesXmlId() {
+		return 0;
+	}
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);

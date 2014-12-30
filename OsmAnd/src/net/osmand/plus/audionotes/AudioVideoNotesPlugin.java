@@ -14,6 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.support.v4.app.Fragment;
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -87,7 +88,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
 
@@ -1098,7 +1098,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void contextMenuLocalIndexes(Activity activity, SherlockFragment fragment, Object obj,
+	public void contextMenuLocalIndexes(Activity activity, Fragment fragment, Object obj,
 			ContextMenuAdapter adapter) {
 		if (activity instanceof DownloadActivity) {
 			final DownloadActivity la = (DownloadActivity) activity;

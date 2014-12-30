@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.content.pm.ActivityInfo;
@@ -14,12 +17,8 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
-public class HelpActivity extends SherlockActivity {
+public class HelpActivity extends ActionBarActivity {
 	
 	private static final String FILE_ANDROID_ASSET_HELP = "file:///android_asset/help/";
 	public static final String URL = "url";
@@ -35,7 +34,7 @@ public class HelpActivity extends SherlockActivity {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		//getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		wv = new WebView(this);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		String title = getString(R.string.help);
@@ -102,7 +101,7 @@ public class HelpActivity extends SherlockActivity {
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) {
 		createMenuItem(menu, HOME, R.string.home, 
 				R.drawable.ic_action_home_light, R.drawable.ic_action_home_dark,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM );
@@ -119,7 +118,7 @@ public class HelpActivity extends SherlockActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
 		case android.R.id.home:
@@ -151,9 +150,9 @@ public class HelpActivity extends SherlockActivity {
 		if (r != 0) {
 			menuItem.setIcon(r);
 		}
-		menuItem.setShowAsActionFlags(menuItemType).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		menuItem.setShowAsActionFlags(menuItemType).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
-			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+			public boolean onMenuItemClick(MenuItem item) {
 				return onOptionsItemSelected(item);
 			}
 		});

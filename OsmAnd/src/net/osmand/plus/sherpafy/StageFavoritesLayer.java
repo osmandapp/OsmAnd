@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import android.graphics.PointF;
+import android.support.v4.app.FragmentActivity;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -62,9 +62,9 @@ public class StageFavoritesLayer extends FavoritesLayer {
 		getFavoriteFromPoint(tileBox, point, favs);
 		if (favs.size() > 0){
 			SherpafyCustomization customization = (SherpafyCustomization) app.getAppCustomization();
-			if (view.getContext() instanceof SherlockFragmentActivity) {
+			if (view.getContext() instanceof FragmentActivity) {
 				customization
-						.showFavoriteDialog((SherlockFragmentActivity) view.getContext(), 
+						.showFavoriteDialog((FragmentActivity) view.getContext(),
 								givenStage != null ? givenStage : customization.getSelectedStage(),
 								(StageFavorite) favs.get(0));
 				return true;

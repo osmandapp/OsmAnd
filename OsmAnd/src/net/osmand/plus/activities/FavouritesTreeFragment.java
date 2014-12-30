@@ -1,5 +1,9 @@
 package net.osmand.plus.activities;
 
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.SearchView;
+import android.view.*;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.io.File;
@@ -42,10 +46,7 @@ import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
@@ -58,14 +59,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.ActionMode.Callback;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnActionExpandListener;
-import com.actionbarsherlock.widget.SearchView;
-import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
 
 public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
@@ -257,7 +250,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 //		if (item.getElementId() == EXPORT_ID) {
 //			export();
 //			return true;
@@ -306,11 +299,11 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_light,
-				R.drawable.ic_action_search_dark, MenuItem.SHOW_AS_ACTION_ALWAYS
-						| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-		searchView = new com.actionbarsherlock.widget.SearchView(getActivity());
-		mi.setActionView(searchView);
-		searchView.setOnQueryTextListener(new OnQueryTextListener() {
+				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS
+						| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+		searchView = new SearchView(getActivity());
+		MenuItemCompat.setActionView(mi, searchView);
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
 
 			@Override
@@ -325,13 +318,13 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 				return true;
 			}
 		});
-		mi.setOnActionExpandListener(new OnActionExpandListener() {
-			
+		MenuItemCompat.setOnActionExpandListener(mi, new MenuItemCompat.OnActionExpandListener() {
+
 			@Override
 			public boolean onMenuItemActionExpand(MenuItem item) {
 				return true;
 			}
-			
+
 			@Override
 			public boolean onMenuItemActionCollapse(MenuItem item) {
 				favouritesAdapter.setFilterResults(null);
@@ -354,15 +347,15 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 	}
 
 	public void showProgressBar() {
-		getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
+		getActionBarActivity().setSupportProgressBarIndeterminateVisibility(true);
 	}
 
 	public void hideProgressBar() {
-		getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
+		getActionBarActivity().setSupportProgressBarIndeterminateVisibility(false);
 	}
 	
 	private void enterIntermediatesMode() {
-		actionMode = getSherlockActivity().startActionMode(new Callback() {
+		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -417,7 +410,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 	}
 
 	private void enterDeleteMode() {
-		actionMode = getSherlockActivity().startActionMode(new Callback() {
+		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {

@@ -23,7 +23,7 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setTitle(R.string.accessibility_preferences);
+		getToolbar().setTitle(R.string.accessibility_preferences);
 		PreferenceScreen grp = getPreferenceScreen();
 
 		String[] entries = new String[AccessibilityMode.values().length];

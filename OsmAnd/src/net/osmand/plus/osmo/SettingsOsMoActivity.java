@@ -33,12 +33,17 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 	
 	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 30, 60, 90};
 	public static final int[] MINUTES = new int[] {2, 3, 5};
-	
-	
+
+
+	@Override
+	protected int getPreferencesXmlId() {
+		return 0;
+	}
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setTitle(R.string.osmo_settings);
+		getToolbar().setTitle(R.string.osmo_settings);
 		PreferenceScreen grp = getPreferenceScreen();
 		
 		

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+import android.support.v7.app.ActionBar;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -59,8 +60,6 @@ import android.support.v4.app.FragmentManager;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 public class SherpafyCustomization extends OsmAndAppCustomization {
 	
@@ -500,7 +499,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		}
 	}
 	
-	public void showFavoriteDialog(SherlockFragmentActivity mapActivity, StageInformation stage, StageFavorite sf) {
+	public void showFavoriteDialog(FragmentActivity mapActivity, StageInformation stage, StageFavorite sf) {
 		Bundle bl = new Bundle();
 		bl.putInt(SherpafyFavoriteFragment.STAGE_PARAM, stage.getOrder());
 		bl.putString(SherpafyFavoriteFragment.TOUR_PARAM, stage.getTour().getId());

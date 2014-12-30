@@ -3,6 +3,7 @@ package net.osmand.plus.activities.search;
 import java.util.Comparator;
 import java.util.List;
 
+import android.widget.AdapterView;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Building;
 import net.osmand.data.City;
@@ -136,5 +137,8 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	}
 
 
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+	}
 }

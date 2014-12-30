@@ -6,6 +6,9 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.ListFragment;
+import android.support.v7.app.ActionBarActivity;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.NameFinderPoiFilter;
@@ -30,11 +33,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.app.SherlockListFragment;
 
 
-public class SearchPoiFilterActivity extends SherlockListFragment  implements SearchActivityChild {
+public class SearchPoiFilterActivity extends ListFragment implements SearchActivityChild {
 
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
@@ -74,14 +75,14 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 	}
 	
 	public OsmandApplication getApp(){
-		return (OsmandApplication) getSherlockActivity().getApplication();
+		return (OsmandApplication) getActivity().getApplication();
 	}
 	
 	
 	private void updateIntentToLaunch(Intent intentToLaunch){
 		LatLon loc = null;
 		boolean searchAround = false;
-		SherlockFragmentActivity parent = getSherlockActivity();
+		FragmentActivity parent = getActivity();
 		if (loc == null && parent instanceof SearchActivity) {
 			loc = ((SearchActivity) parent).getSearchPoint();
 			searchAround = ((SearchActivity) parent).isSearchAroundCurrentLocation();
@@ -96,7 +97,7 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 	}
 
 	private void showEditActivity(PoiFilter poi) {
-		Intent newIntent = new Intent(getSherlockActivity(), EditPOIFilterActivity.class);
+		Intent newIntent = new Intent(getActivity(), EditPOIFilterActivity.class);
 		// folder selected
 		newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
 		updateIntentToLaunch(newIntent);
@@ -121,11 +122,11 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 		if(!(filter instanceof NameFinderPoiFilter)){
 			ResourceManager rm = getApp().getResourceManager();
 			if(!rm.containsAmenityRepositoryToSearch(filter instanceof SearchByNameFilter)){
-				AccessibleToast.makeText(getSherlockActivity(), R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
+				AccessibleToast.makeText(getActivity(), R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
 				return;
 			}
 		}
-		final Intent newIntent = new Intent(getSherlockActivity(), SearchPOIActivity.class);
+		final Intent newIntent = new Intent(getActivity(), SearchPOIActivity.class);
 		newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
 		updateIntentToLaunch(newIntent);
 		startActivityForResult(newIntent, 0);
@@ -135,14 +136,14 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 
 	class AmenityAdapter extends ArrayAdapter<PoiFilter> {
 		AmenityAdapter(List<PoiFilter> list) {
-			super(getSherlockActivity(), R.layout.searchpoifolder_list, list);
+			super(getActivity(), R.layout.searchpoifolder_list, list);
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if(row == null) {
-				LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
+				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.searchpoifolder_list, parent, false);
 			}
 			TextView label = (TextView) row.findViewById(R.id.folder_label);
