@@ -127,6 +127,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	}
 
 	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
+		private LatLon location;
 
 		public void updateLocation(LatLon l) {
 			location = l;
