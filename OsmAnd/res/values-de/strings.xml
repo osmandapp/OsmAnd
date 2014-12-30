@@ -701,7 +701,7 @@
 	<string name="map_overlay_descr">Wähle Overlay-Karte</string>
 	<string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert</string>
 	<string name="select_tile_source_to_install">Kartenauswahl (Installation oder Aktualisierung)</string>
-	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar!</string>
+	<string name="internet_not_available">Internet Verbindung erforderlich, aber nicht verfügbar!</string>
 	<string name="install_more">Weitere installieren…</string>
 	<string name="tip_update_index">Offline-Karten</string>
 	<string name="tip_update_index_t">Aktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und die Offline-Navigation. OsmAnd hat einen Karten-Manager für das Herunterladen oder Aktualisieren von Offline-Karten.
@@ -1585,7 +1585,7 @@
 	<string name="my_favorites">Meine Favoriten</string>
 	<string name="my_data_Button">Meine Orte</string>
 	<string name="my_data_activity">Meine Orte</string>
-	<string name="loading_smth">Lade %1$s …</string>
+	<string name="loading_smth">Lade %1$s…</string>
 	<string name="map_widget_plain_time">Aktuelle Zeit</string>
 	<string name="selected_gpx_info_show">\n\nZur Darstellung auf der Karte Antippen und Halten</string>
 	<string name="delay_navigation_start">Navigation automatisch starten</string>
@@ -1954,7 +1954,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="gpx_saved_sucessfully">GPX-Datei erfolgreich gespeichert unter {0}</string>
 	<string name="gpx_option_calculate_first_last_segment">Berechnen des ersten und letzten Abschnitts der OsmAnd-Route</string>
 <string name="download_additional_maps">Fehlende Karten herunterladen: %1$s (%2$d MB)?</string>
-    <string name="more">Mehr...</string>
+    <string name="more">Mehr…</string>
     <string name="osmo_specify_tracker_id">Bitte ID eingeben</string>
     <string name="home">Ausgangsposition</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, Trolleybus-, Sammeltaxi-Linien</string>
@@ -2022,15 +2022,15 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (Funktioniert nicht auf allen Geräten)</string>
-    <string name="no_internet_connection">Herunterladen nicht möglich. Internet-Verbindung prüfen!</string>
+    <string name="no_internet_connection">Herunterladen nicht möglich, bitte die Internet-Verbindung prüfen!</string>
     <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
     <string name="map_locale">Beschriftungssprache</string>
     <string name="rendering_attr_transportStops_name">ÖPNV-Haltestellen</string>
     <string name="navigate_point_zone">Zone</string>
-    <string name="navigate_point_northing">Nordwert</string>
-    <string name="navigate_point_easting">Ostwert</string>
+    <string name="navigate_point_northing">Rechtswert (y-Wert)</string>
+    <string name="navigate_point_easting">Hochwert (x-Wert)</string>
     <string name="dash_download_msg_none">Möchten Sie Offline-Karten herunterladen?</string>
     <string name="dash_download_msg">%1$s heruntergeladene Karten</string>
     <string name="dash_download_new_one">Neue Karte herunterladen</string>
