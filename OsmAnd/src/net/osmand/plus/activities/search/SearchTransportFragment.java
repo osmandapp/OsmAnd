@@ -220,13 +220,13 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 					}
 					@Override
 					protected void onPostExecute(List<RouteInfoLocation> result) {
-						// isAdded here tries to fix FC when rapidly changing screen orientation
+						// isAdded() here fixes the "not attached to Activity" FC when rapidly changing screen orientation
 						if (isAdded()) {
-						stopsAdapter.setNewModel(result);
-						updateSearchMoreButton();
-						searchArea.setText(getSearchArea());
-						progress.setVisibility(View.INVISIBLE);
-						asyncTask = null;
+							stopsAdapter.setNewModel(result);
+							updateSearchMoreButton();
+							searchArea.setText(getSearchArea());
+							progress.setVisibility(View.INVISIBLE);
+							asyncTask = null;
 						}
 					}
 				};
