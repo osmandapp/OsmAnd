@@ -194,7 +194,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 //		inst.setTime(new Date());
 //		final String textVersion = "\u00A9 OsmAnd " + inst.get(Calendar.YEAR);
 //		textVersionView.setText(textVersion);
-		final SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
+//		final SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
 //		textVersionView.setOnClickListener(new OnClickListener(){
 //			int i = 0;
 //			@Override
