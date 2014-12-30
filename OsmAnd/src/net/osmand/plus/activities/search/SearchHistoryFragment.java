@@ -89,6 +89,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 		if (location == null) {
 			location = ((OsmandApplication) activity.getApplication()).getSettings().getLastKnownMapLocation();
 		}
+		locationUpdate(location);
 		clearButton.setVisibility(historyAdapter.isEmpty() ? View.GONE : View.VISIBLE);
 		
 	}
@@ -97,8 +98,6 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	public void locationUpdate(LatLon l) {
 		location = l;
 		if(historyAdapter != null) {
-			//historyAdapter.notifyDataSetChanged();
-			//This did not update distances when origin was changed, try this:
 			historyAdapter.updateLocation(l);
 		}
 	}
