@@ -452,10 +452,10 @@
 	<string name="search_position_address">Διεύθυνση…</string>
 	<string name="search_position_favorites">Αγαπημένα…</string>
 	<string name="search_position_undefined">Ακαθόριστο</string>
-	<string name="search_position_fixed">Βρέθηκε</string>
+	<string name="search_position_fixed"/>
 	<string name="search_position_current_location">Τρέχουσα θέση…</string>
 	<string name="search_position_map_view">Τελευταία οπτική χάρτη</string>
-	<string name="select_search_position">Αναζήτηση κοντά:</string>
+	<string name="select_search_position">Πηγή:</string>
 	<string name="context_menu_item_search">Αναζήτηση εδώ κοντά</string>
 	<string name="tip_recent_changes_0_6_7_t">"Πρόσφατες αλλαγές στην 0.6.7 :
 \n\t- Offline data manager (download, διαγραφή, activate / deactivate offline data directly in OsmAnd)
@@ -1452,7 +1452,7 @@
     <string name="osmo_activity">Παρακολούθηση OpenStreetMap</string>
     <string name="osmo_connected_devices">Συνδεδεμένες συσκευές</string>
     <string name="osmo_groups">Ομάδες/συσκευές OsMo</string>
-    <string name="osmo_auth_pending">Αναμονή εξουσιοδότησης...</string>
+    <string name="osmo_auth_pending">Αναμονή εξουσιοδότησης…</string>
     <string name="osmo_settings_uuid">Μοναδικό αναγνωριστικό συσκευής</string>
     <string name="use_points_as_intermediates">Υπολογισμός διαδρομής μεταξύ σημείων</string>
     <string name="always_center_position_on_map">Εμφάνιση της θέσης πάντα στο κέντρο</string>
@@ -1528,7 +1528,7 @@
 	<string name="routing_attr_avoid_motorway_description">Αποφυγή αυτοκινητόδρομων</string>
 	<string name="routing_attr_weight_name">Όριο βάρους</string>
 	<string name="routing_attr_weight_description">Καθορίσετε το βάρος του οχήματος που θα είναι επιτρεπτό στις διαδρομές</string>
-    <string name="copying_osmand_one_file_descr">Αντιγραφή αρχείου (%s) στο νέο προορισμό...</string>
+    <string name="copying_osmand_one_file_descr">Αντιγραφή αρχείου (%s) στο νέο προορισμό…</string>
     <string name="copying_osmand_files_descr">Αντιγραφή αρχείων δεδομένων OsmAnd στο νέο προορισμό (%s)</string>
     <string name="copying_osmand_files">Αντιγραφή αρχείων δεδομένων OsmAnd</string>
     <string name="app_mode_truck">Φορτηγό</string>
