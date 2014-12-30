@@ -1474,7 +1474,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_position_address">Address&#8230;</string>
 	<string name="search_position_favorites">Favorites&#8230;</string>
 	<string name="search_position_undefined">Undefined</string>
-	<string name="search_position_fixed"></string>
 	<string name="search_position_current_location">Current position&#8230;</string>
 	<string name="search_position_map_view">Last map view</string>
 	<string name="select_search_position">Origin:</string>

@@ -612,7 +612,6 @@
 	<string name="search_position_address">Adresse…</string>
 	<string name="search_position_favorites">Favorit…</string>
 	<string name="search_position_undefined">Undefiniert</string>
-	<string name="search_position_fixed"></string>
 	<string name="search_position_current_location">Aktueller Standort…</string>
 	<string name="search_position_map_view">Letzte Kartenposition</string>
 	<string name="select_search_position">Ausgangspunkt:</string>
