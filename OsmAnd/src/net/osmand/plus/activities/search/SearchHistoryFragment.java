@@ -80,7 +80,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
 			if (lat != 0 || lon != 0) {
-				location = new LatLon(lat, lon);
+				historyAdapter.location = new LatLon(lat, lon);
 			}
 		}
 		if (location == null && activity instanceof SearchActivity) {
@@ -90,7 +90,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 			location = ((OsmandApplication) activity.getApplication()).getSettings().getLastKnownMapLocation();
 		}
 		//TODO: Next line somehow breaks that distances are updated in list after origin is changed, but omitting it leads to no distences are shown upon first list view
-		//locationUpdate(location);
+		locationUpdate(location);
 		clearButton.setVisibility(historyAdapter.isEmpty() ? View.GONE : View.VISIBLE);
 		
 	}
