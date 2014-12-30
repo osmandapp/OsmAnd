@@ -97,7 +97,9 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	public void locationUpdate(LatLon l) {
 		location = l;
 		if(historyAdapter != null) {
-			historyAdapter.notifyDataSetChanged();
+			//historyAdapter.notifyDataSetChanged();
+			//This did not update distances when origin was changed, try this:
+			historyAdapter.updateLocation(l);
 		}
 	}
 
@@ -125,6 +127,11 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	}
 
 	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
+
+		public void updateLocation(LatLon l) {
+			location = l;
+			notifyDataSetChanged();
+		}
 
 		public HistoryAdapter(List<HistoryEntry> list) {
 			super(getActivity(), R.layout.search_history_list_item, list);
