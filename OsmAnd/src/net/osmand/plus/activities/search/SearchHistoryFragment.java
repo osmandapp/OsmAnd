@@ -75,14 +75,14 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	public void onResume() {
 		super.onResume();
 		FragmentActivity activity = getActivity();
-		//Intent intent = activity.getIntent();
-		//if (intent != null) {
-		//	double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
-		//	double lon = intent.getDoubleExtra(SEARCH_LON, 0);
-		//	if (lat != 0 || lon != 0) {
-		//		historyAdapter.location = new LatLon(lat, lon);
-		//	}
-		//}
+		Intent intent = activity.getIntent();
+		if (intent != null) {
+			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
+			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
+			if (lat != 0 || lon != 0) {
+				historyAdapter.location = new LatLon(lat, lon);
+			}
+		}
 		if (location == null && activity instanceof SearchActivity) {
 			location = ((SearchActivity) activity).getSearchPoint();
 		}
