@@ -426,7 +426,7 @@
 <string name="show_gpx_route">Visa på karta</string>
 <string name="search_position_current_location_search">Söker plats …</string>
 <string name="search_position_current_location_found">Plats (hittad)</string>
-<string name="search_position_address">Adress …</string>
+<string name="search_position_address">Adresser …</string>
 <string name="search_position_favorites">Favoriter …</string>
 <string name="search_position_undefined">Odefinierad</string>
 <string name="search_position_fixed"/>
@@ -586,7 +586,7 @@
 <string name="amenity_type_sustenance">Näring</string>
 <string name="amenity_type_tourism">Turism</string>
 <string name="amenity_type_transportation">Transport</string>
-<string name="indexing_address">Indexerar adress …</string>
+<string name="indexing_address">Indexerar adresser …</string>
 <string name="indexing_map">Indexerar kartan …</string>
 <string name="indexing_poi">Indexerar POI …</string>
 <string name="indexing_transport">Indexerar transport …</string>
