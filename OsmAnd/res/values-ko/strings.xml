@@ -237,7 +237,7 @@
 	<string name="search_position_current_location">현재 위치…</string>
 	<string name="search_position_map_view">마지막 지도 보기</string>
 	
-	<string name="select_search_position">기원 :</string>
+	<string name="select_search_position">원점 :</string>
 	<string name="context_menu_item_search">가까운 주변 검색</string>
 	<string name="tip_recent_changes_0_6_7_t">"0.6.7 버전에 대한 변경사항들 :
 \n\t- 오프라인 데이터 관리 (OsmAnd 에서 직접 오프라인 데이터 다운로드, 삭제, 활성화 / 비활성화)
