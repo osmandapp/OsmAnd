@@ -347,6 +347,9 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 		this.searchPoint = searchPoint;
 		for(WeakReference<Fragment> ref : fragList) {
 	        Fragment f = ref.get();
+		//TODO: If we keep the tabbed search screen also: Looks like the following code does not update the searchPoint on search tabs other than on the last used tab (which will be shown again first).
+		//      So if user starts the tabbed search screen, then changes the search origin, then changes the tab to e.g. the search coordinates or search history, the (changed) origin displayed in the headline will initially not be the one used by the new tab.
+		//      (Changing the origin again on that tab will correct the situation)
 	        if(f instanceof SearchActivityChild) {
 	            if(!f.isDetached()) {
 	            	((SearchActivityChild) f).locationUpdate(searchPoint);
