@@ -89,7 +89,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 		if (location == null) {
 			location = ((OsmandApplication) activity.getApplication()).getSettings().getLastKnownMapLocation();
 		}
-
+		locationUpdate(location);
 		clearButton.setVisibility(historyAdapter.isEmpty() ? View.GONE : View.VISIBLE);
 		
 	}
