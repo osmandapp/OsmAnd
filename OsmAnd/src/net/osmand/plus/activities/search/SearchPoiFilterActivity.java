@@ -156,8 +156,6 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 			} else {
 				if(RenderingIcons.containsBigIcon(model.getSimplifiedId())) {
 					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), model.getSimplifiedId()));
-				} else {
-					icon.setImageResource(R.drawable.mx_user_defined);
 				}
 			}
 			ImageView editIcon = (ImageView) row.findViewById(R.id.folder_edit_icon);
