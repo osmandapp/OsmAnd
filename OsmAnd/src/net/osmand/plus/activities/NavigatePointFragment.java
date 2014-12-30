@@ -167,6 +167,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	public void onResume() {
 		super.onResume();
 		LatLon location;
+		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 		Intent intent = getSherlockActivity().getIntent();
 		if (intent != null) {
 			if (intent.hasExtra(SearchActivity.SEARCH_LAT) && intent.hasExtra(SearchActivity.SEARCH_LON)) {
@@ -181,7 +182,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 			location = ((SearchActivity) getActivity()).getSearchPoint();
 		}
 		if (location == null) {
-			location = settings.getLastKnownMapLocation();
+			location = app.getSettings().getLastKnownMapLocation();
 		}
 		locationUpdate(location);
 	}
