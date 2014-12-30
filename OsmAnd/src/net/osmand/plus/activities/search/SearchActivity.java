@@ -169,7 +169,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 				LatLon l = new LatLon(lat, lon);
 				if(!Algorithms.objectEquals(reqSearchPoint, l)){
 					reqSearchPoint = l;
-					updateSearchPoint(reqSearchPoint, getString(R.string.select_search_position) + " "), true);
+					updateSearchPoint(reqSearchPoint, getString(R.string.select_search_position) + " ", true);
 				}
 			}
 		}
@@ -239,7 +239,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 						searchAroundCurrentLocation = false;
 						endSearchCurrentLocation();
 						if (position == POSITION_LAST_MAP_VIEW) {
-							updateSearchPoint(settings.getLastKnownMapLocation(), getString(R.string.select_search_position) + " "), true);
+							updateSearchPoint(settings.getLastKnownMapLocation(), getString(R.string.select_search_position) + " ", true);
 						} else if (position == POSITION_FAVORITES) {
 							Intent intent = new Intent(SearchActivity.this, FavouritesListActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -286,7 +286,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 			if(name != null){
 				updateSearchPoint(latLon, getString(R.string.select_search_position) + " " + name, false);
 			} else {
-				updateSearchPoint(latLon, getString(R.string.select_search_position) + " "), true);
+				updateSearchPoint(latLon, getString(R.string.select_search_position) + " ", true);
 			}
 		}
 	}
