@@ -166,7 +166,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	@Override
 	public void onResume() {
 		super.onResume();
-		LatLon location;
+		LatLon location = null;
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 		Intent intent = getSherlockActivity().getIntent();
 		if (intent != null) {
@@ -186,7 +186,6 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		}
 		locationUpdate(location);
 	}
-	
 	
 	@Override
 	public void locationUpdate(LatLon loc) {
@@ -365,9 +364,8 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		latEdit.addTextChangedListener(textWatcher);
 		lonEdit.addTextChangedListener(textWatcher);
 	}
-	
 
-	
+
 	public void select(int mode){
 		try {
 			LatLon loc = parseLocation();
@@ -474,7 +472,6 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
             throw new IllegalArgumentException("coordinate=" + coordinate);
         }
     }
-	
 
 
 	public static String convert(double coordinate, int outputType) {
@@ -511,7 +508,5 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		sb.append(df.format(coordinate));
 		return sb.toString();
 	}
-	
-	
 
 }
