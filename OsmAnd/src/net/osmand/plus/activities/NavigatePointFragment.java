@@ -166,7 +166,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	@Override
 	public void onResume() {
 		super.onResume();
-		private LatLon location;
+		LatLon location;
 		Intent intent = getSherlockActivity().getIntent();
 		if (intent != null) {
 			if (intent.hasExtra(SearchActivity.SEARCH_LAT) && intent.hasExtra(SearchActivity.SEARCH_LON)) {
