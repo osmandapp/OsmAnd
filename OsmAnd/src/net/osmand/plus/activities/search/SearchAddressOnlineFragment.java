@@ -132,13 +132,14 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 		if (location == null) {
 			location = settings.getLastKnownMapLocation();
 		}
+		locationUpdate(location);
 	}
 	
 	@Override
 	public void locationUpdate(LatLon l) {
 		location = l;
 		if(adapter != null){
-			adapter.notifyDataSetInvalidated();
+			adapter.updateLocation(l);
 		}
 	}
 
@@ -244,6 +245,12 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 	}
 	
 	class PlacesAdapter extends ArrayAdapter<Place> {
+		private LatLon location;
+
+		public void updateLocation(LatLon l) {
+			location = l;
+			notifyDataSetChanged();
+		}
 
 		public PlacesAdapter(List<Place> places) {
 			super(getActivity(), R.layout.search_address_online_list_item, places);
