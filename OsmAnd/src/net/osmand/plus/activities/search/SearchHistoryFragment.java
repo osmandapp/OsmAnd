@@ -128,6 +128,10 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
 		private LatLon location;
 
+		public LatLon getLocation() {
+			return location;
+		}
+
 		public void updateLocation(LatLon l) {
 			location = l;
 			notifyDataSetChanged();
@@ -138,7 +142,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 		}
 
 		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
+		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
