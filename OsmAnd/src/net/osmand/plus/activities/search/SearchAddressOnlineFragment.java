@@ -132,7 +132,8 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 		if (location == null) {
 			location = settings.getLastKnownMapLocation();
 		}
-		locationUpdate(location);
+		//TODO: Next line somehow breaks that distances are updated in list after origin is changed, but omitting it leads to no distences are shown upon first list view
+		//locationUpdate(location);
 	}
 	
 	@Override
