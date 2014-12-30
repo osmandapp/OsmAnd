@@ -113,4 +113,8 @@
 	<string name="poi_mine_historic">Mina històrica</string>
 	<string name="poi_gate">Porta</string>
 	<string name="poi_tobacco_shop">Venda de tabac</string>
+	<string name="poi_carpet_shop">Botiga de catifes</string>
+	<string name="poi_clothes_shop">Magatzem de roba</string>
+	<string name="poi_children_clothes_shop">Roba infantil</string>
+	<string name="poi_curtain_shop">Pelleteria</string>
 	</resources>
