@@ -1809,4 +1809,5 @@ s často kladenými otázkami.</string>
     <string name="rendering_value_americanRoadAtlas_name">Americký atlas cest</string>
     <string name="routing_attr_no_new_routing_name">Nepoužívat v1.9 routování</string>
     <string name="routing_attr_no_new_routing_description">Nepoužívat výpočet trasy verze 1.9</string>
+    <string name="speak_pedestrian">Oznamovat přechody pro chodce</string>
     </resources>
