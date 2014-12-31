@@ -96,7 +96,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 
 	@Override
 	public void locationUpdate(LatLon l) {
-		location = l;
+		//location = l;
 		if(historyAdapter != null) {
 			historyAdapter.updateLocation(l);
 		}
