@@ -1679,4 +1679,10 @@
     <string name="dash_download_manage">Διαχείριση</string>
     <string name="application_dir_change_warning2">Θέλετε ο OsmAnd να αντιγράψει επίσης τα δεδομένα του στη νέα τοποθεσία; Επιλέξτε \'Όχι\' ώστε ο OsmAnd απλά να δημιουργήσει και να χρησιμοποιήσει τον νέο φάκελο.</string>
     <string name="navigate_point_zone">Ζώνη</string>
-    </resources>
+    <string name="error_avoid_specific_road">Δεν βρέθηκε παράκαμψη</string>
+    <string name="osmo_use_https_descr">Χρήση ασφαλούς σύνδεσης με τον διακομιστή</string>
+    <string name="advanced_settings">Προηγμένες</string>
+	<string name="wake_on_voice">Άναμμα της οθόνης</string>
+    <string name="map_widget_appearance_rem">Εναπομείναντα στοιχεία</string>
+    <string name="speed_limit_exceed_message">Επιλέξτε το περιθώριο του ορίου ταχύτητας, πάνω από το οποίο θα ακούτε ηχητική προειδοποίηση.</string>
+	</resources>
