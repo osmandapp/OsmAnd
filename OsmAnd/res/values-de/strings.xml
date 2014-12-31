@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -1538,10 +1538,10 @@
 \n Hinweis 1: Die ursprünglichen Dateien bleiben hiervon unberührt, können aber nachfolgend manuell gelöscht werden.
 \n Hinweis 2: Die Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden."</string>
 	<string name="application_dir_change_warning2">Soll OsmAnd auch die Dateien an den neuen Speicherort verschieben? Mit \'Nein\' wird OsmAnd den neuen Speicherort nur anlegen und als Standard verwenden.</string>
-	<string name="copying_osmand_one_file_descr">Kopieren der Datei (%s) an den neuen Speicherort…</string>
-	<string name="copying_osmand_files_descr">Kopieren der OsmAnd-Dateien zum neuen Speicherort (%s)</string>
-	<string name="copying_osmand_files">Kopiere OsmAnd-Dateien</string>
-	<string name="calculate_osmand_route_gpx">Berechne OsmAnd-Offline-Route</string>
+	<string name="copying_osmand_one_file_descr">Datei (%s) an den neuen Speicherort kopieren…</string>
+	<string name="copying_osmand_files_descr">OsmAnd-Dateien zum neuen Speicherort (%s) kopieren</string>
+	<string name="copying_osmand_files">OsmAnd-Dateien kopieren</string>
+	<string name="calculate_osmand_route_gpx">OsmAnd-Offline-Route berechnen</string>
 	<string name="app_mode_truck">LKW</string>
 	<string name="guidance_preferences_descr">Navigations-Einstellungen</string>
 	<string name="routing_preferences_descr">Einstellungen für Routenberechnung</string>
@@ -1563,7 +1563,7 @@
 	<string name="always_center_position_on_map">Position immer in Bildschirmmitte anzeigen</string>
 	<string name="voice_pref_title">Stimme</string>
 	<string name="misc_pref_title">Verschiedene</string>
-	<string name="share_route_as_gpx">Teilen der Route als GPX-Datei</string>
+	<string name="share_route_as_gpx">Route als GPX-Datei teilen</string>
 	<string name="share_route_subject">Route über OsmAnd teilen</string>
 	<string name="localization_pref_title">Ländereinstellungen</string>
 	<string name="interrupt_music">Musikwiedergabe unterbrechen</string>
@@ -1573,7 +1573,7 @@
 	<string name="use_points_as_intermediates">Route zwischen Punkten berechnen</string>
 	<string name="keep_informing_never">Niemals</string>
 	<string name="keep_informing_descr">Navigationsanweisungen in regelmäßigen Abständen wiederholen</string>
-	<string name="keep_informing">Wiederholen von Navigationsanweisungen</string>
+	<string name="keep_informing">Navigationsanweisungen wiederholen</string>
 	<string name="arrival_distance">Zielankündigung</string>
 	<string name="arrival_distance_descr">Wann soll die Ankunft am Ziel angekündigt werden?</string>
 	<string name="int_days">Tage</string>
@@ -1585,7 +1585,7 @@
 	<string name="my_favorites">Meine Favoriten</string>
 	<string name="my_data_Button">Meine Orte</string>
 	<string name="my_data_activity">Meine Orte</string>
-	<string name="loading_smth">Lade %1$s…</string>
+	<string name="loading_smth">Lade %1$s …</string>
 	<string name="map_widget_plain_time">Aktuelle Zeit</string>
 	<string name="selected_gpx_info_show">\n\nZur Darstellung auf der Karte Antippen und Halten</string>
 	<string name="delay_navigation_start">Navigation automatisch starten</string>
@@ -1838,7 +1838,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungs-Einstellungen und des persönlichen Überwachungs-Kanals</string>
-	<string name="osmo_plugin_description">"Erweiterte OpenStreetMap-basierte Live-Überwachung, siehe http://osmo.mobi ... Ermöglicht die Positionsdarstellung in von einzelnen Geräten in Echtzeit. Bei anonym erstellten Gruppen sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff. "</string>
+	<string name="osmo_plugin_description">"Erweiterte OpenStreetMap-basierte Live-Überwachung, siehe http://osmo.mobi … Ermöglicht die Positionsdarstellung in von einzelnen Geräten in Echtzeit. Bei anonym erstellten Gruppen sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff."</string>
 	<string name="osmo_plugin_name">OsMo (Erweiterte Live-Überwachung)</string>
 	<string name="osmo_settings">OsMo OpenStreetMap-Überwachung</string>
 	<string name="osmo_io_error">OsMo Verbindungsproblem: </string>
@@ -2022,7 +2022,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (Funktioniert nicht auf allen Geräten)</string>
-    <string name="no_internet_connection">Herunterladen nicht möglich, bitte die Internet-Verbindung prüfen!</string>
+    <string name="no_internet_connection">Herunterladen nicht möglich. Internet-Verbindung prüfen!</string>
     <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
@@ -2040,11 +2040,11 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">Deutscher Straßenatlas</string>
     <string name="traffic_warning_railways">Bahnübergang</string>
-    <string name="traffic_warning_pedestrian">Fußgängerüberweg</string>
-    <string name="show_railway_warnings">Eisenbahn-Übergänge anzeigen</string>
-    <string name="show_pedestrian_warnings">Fußgänger-Übergänge anzeigen</string>
+    <string name="traffic_warning_pedestrian">Fußgängerübergang</string>
+    <string name="show_railway_warnings">Eisenbahnübergänge anzeigen</string>
+    <string name="show_pedestrian_warnings">Fußgängerübergänge anzeigen</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikanischer Straßenatlas</string>
     <string name="routing_attr_no_new_routing_name">Routing v1.9 nicht verwenden</string>
     <string name="routing_attr_no_new_routing_description">Neuen Routenalgorithmus nicht verwenden</string>
-    <string name="speak_pedestrian">Fußgänger-Übergänge ankündigen</string>
+    <string name="speak_pedestrian">Fußgängerübergänge ankündigen</string>
     </resources>
