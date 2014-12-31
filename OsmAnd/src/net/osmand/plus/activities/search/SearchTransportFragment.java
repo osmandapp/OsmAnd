@@ -52,15 +52,13 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 
 	private Button searchTransportLevel;
-	
-	
+
 	private TextView searchArea;
 	
 	private final static int finalZoom = 13;
 	private final static int initialZoom = 17;
 	private int zoom = initialZoom;
 	private ProgressBar progress;
-	
 
 	private LatLon lastKnownMapLocation;
 	private LatLon destinationLocation;
@@ -71,7 +69,6 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 	private OsmandSettings settings;
 	private View view;
 	private AsyncTask<?, ?, ?> asyncTask;
-	
 
 	private OsmandApplication getApplication() {
 		return (OsmandApplication) getActivity().getApplication();
@@ -140,7 +137,8 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
 			if(lat != 0 || lon != 0){
-				startPoint = new LatLon(lat, lon);
+				//This prevents origin update on this tab when switching to it after origin was changed on previous tab
+				//startPoint = new LatLon(lat, lon);
 			}
 		}
 		if(startPoint == null && getActivity() instanceof SearchActivity){
