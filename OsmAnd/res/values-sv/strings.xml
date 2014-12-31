@@ -137,7 +137,7 @@
 <string name="rendering_attr_appMode_description">Optimera karta för</string>
 <string name="address_search_desc">Adressökning</string>
 <string name="navpoint_search_desc">Koordinater</string>
-<string name="transport_search_desc">Transportsökning</string>
+<string name="transport_search_desc">Kollektivtrafiksökning</string>
 <string name="offline_navigation_not_available">OsmAnd offlinenavigering är inte tillgänglig för tillfället.</string>
 <string name="left_side_navigation">Vänstertrafik</string>
 <string name="left_side_navigation_descr">Välj för länder med vänstertrafik</string>
@@ -472,7 +472,7 @@
 
 <string name="local_index_poi_data">POI-data</string>
 <string name="local_index_address_data">Adressdata</string>
-<string name="local_index_transport_data">Transportdata</string>
+<string name="local_index_transport_data">Kollektivtrafikdata</string>
 <string name="local_index_map_data">Kartdata</string>
 <string name="local_indexes_cat_backup">Inaktiverade</string>
 <string name="local_indexes_cat_tts">Röstdata (TTS)</string>
@@ -690,7 +690,7 @@
 	<string name="use_high_res_maps">Skärm med hög upplösning</string>
 	<string name="use_high_res_maps_descr">Sträck inte ut (och gör oskarpa) kartbitar på högupplösta skärmar</string>
 	<string name="download_files">Ladda ner</string>
-	<string name="context_menu_item_search_transport">Sök transport</string>
+	<string name="context_menu_item_search_transport">Sök kollektivtrafik</string>
 	<string name="transport_searching_transport">Transportresultat (ingen destination):</string>
 	<string name="transport_searching_route">Transportresultat ({0} till destinationen):</string>
 	<string name="transport_search_none">ingen</string>
@@ -797,14 +797,14 @@
 	<string name="transport_Routes">Rutter</string>
 	<string name="transport_Stop">Hållplats</string>
 	<string name="transport_stops">hållplatser</string>
-	<string name="transport_search_after">Följande rutt</string>	
-	<string name="transport_search_before">Tidigare rutt</string>
+	<string name="transport_search_after">Följande resväg</string>	
+	<string name="transport_search_before">Tidigare resväg</string>
 	<string name="transport_finish_search">Avsluta sökningen</string>
 	<string name="transport_stop_to_go_out">Välj hållplats att kliva av vid</string>
 	<string name="transport_to_go_after">tidigare sträcka</string>
 	<string name="transport_to_go_before">följande sträcka</string>
 	<string name="transport_stops_to_pass">hållplatser att passera</string>
-	<string name="transport_route_distance">Ruttavstånd</string>
+	<string name="transport_route_distance">Resvägssträcka</string>
 	<string name="transport">Transport</string>
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Visa hållplatser för kollektivtrafik på kartan</string>
