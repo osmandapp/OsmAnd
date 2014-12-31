@@ -1678,4 +1678,5 @@
     <string name="dash_download_msg_none">Θέλετε να κατεβάσετε χάρτες για χρήση εκτός σύνδεσης;</string>
     <string name="dash_download_manage">Διαχείριση</string>
     <string name="application_dir_change_warning2">Θέλετε ο OsmAnd να αντιγράψει επίσης τα δεδομένα του στη νέα τοποθεσία; Επιλέξτε \'Όχι\' ώστε ο OsmAnd απλά να δημιουργήσει και να χρησιμοποιήσει τον νέο φάκελο.</string>
+    <string name="navigate_point_zone">Ζώνη</string>
     </resources>
