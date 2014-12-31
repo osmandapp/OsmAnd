@@ -277,7 +277,7 @@
   <string name="search_position_fixed">Точка</string>
   <string name="search_position_current_location">Текущее местоположение…</string>
   <string name="search_position_map_view">Вид карты</string>
-  <string name="select_search_position">Искать рядом:</string>
+  <string name="select_search_position">Начало:</string>
   <string name="context_menu_item_search">Искать рядом</string>
   <string name="tip_recent_changes_0_6_7_t">Изменения в 0.6.7:
 		\n\t- Менеджер локальных данных (просмотр, удаление, создание архива данных прямо в OsmAnd)
