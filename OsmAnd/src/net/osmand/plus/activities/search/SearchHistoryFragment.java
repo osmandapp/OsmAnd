@@ -73,6 +73,8 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	@Override
 	public void onResume() {
 		super.onResume();
+
+		//Hardy: onResume() code is needed so that search origin is properly reflected in tab contents when origin has been changed on one tab, then tab is changed to another one.
 		location = null;
 		FragmentActivity activity = getActivity();
 		Intent intent = activity.getIntent();
