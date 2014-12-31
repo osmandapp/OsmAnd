@@ -166,6 +166,8 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	@Override
 	public void onResume() {
 		super.onResume();
+
+		//Hardy: onResume() code is needed so that search origin is properly reflected in tab contents when origin has been changed on one tab, then tab is changed to another one.
 		location = null;
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 		//Intent intent = getSherlockActivity().getIntent();
