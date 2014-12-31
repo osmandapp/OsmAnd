@@ -175,7 +175,7 @@
 	<string name="poi_search_desc">POI(興趣點)查尋</string>
 	<string name="address_search_desc">地址查尋</string>
 	<string name="navpoint_search_desc">座標查尋</string>
-	<string name="transport_search_desc">交通設施查尋</string>
+	<string name="transport_search_desc">大眾運輸查尋</string>
 	<string name="favourites_search_desc">我的最愛查尋</string>
 	<string name="history_search_desc">歷史記錄查尋</string>
 	<string name="offline_navigation_not_available">OsmAnd 離線導航，暫時不能使用。</string>
@@ -186,7 +186,7 @@
 	<string name="unknown_location">未知地理位置</string>
 	<string name="modify_transparency">調整透明度(0 - 透明, 255 - 不透明)</string>
 	<string name="confirm_interrupt_download">您要中斷下載中的檔案嗎？</string>
-	<string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些地區的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'來下載。之後您可瀏覽地圖、位置的地址、查看興趣點以及找到大眾運輸設施。</string>    
+	<string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些地區的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'來下載。之後您可瀏覽地圖、位置的地址、查看興趣點以及尋找大眾運輸。</string>    
 	<string name="basemap_was_selected_to_download">底圖為某些特別的應用功能必需使用的，並且預設為下載。</string>
 	<string name="select_index_file_to_download">找不到任何資料。如果您不能在您的區域找到，您可以自行製作(參考http://osmand.net)。</string>
 	<string name="local_indexes_cat_tile">線上地圖圖磚</string>
@@ -457,7 +457,7 @@
 	
 	<string name="local_index_poi_data">興趣點資料</string>
 	<string name="local_index_address_data">地址資料</string>
-	<string name="local_index_transport_data">交通設施資料</string>
+	<string name="local_index_transport_data">大眾運輸資料</string>
 	<string name="local_index_map_data">地圖資料</string>
 	<string name="local_indexes_cat_backup">已停用</string>
 	<string name="local_indexes_cat_tts">語音資料(TTS)</string>
@@ -591,7 +591,7 @@
 	<string name="amenity_type_sport">運動</string>
 	<string name="amenity_type_sustenance">飲食</string>
 	<string name="amenity_type_tourism">旅遊、住宿</string>
-	<string name="amenity_type_transportation">交通設施</string>
+	<string name="amenity_type_transportation">交通工具</string>
 	<string name="indexing_address">地址索引…</string>
 	<string name="indexing_map">地圖索引…</string>
 	<string name="indexing_poi">興趣點索引…</string>
@@ -658,9 +658,9 @@
 	<string name="use_high_res_maps">高解析顯示</string>
 	<string name="use_high_res_maps_descr">不要伸展（模糊）在高解析螢幕上的地圖圖磚</string>
 	<string name="download_files">下載</string>
-	<string name="context_menu_item_search_transport">查尋交通運輸</string>
-	<string name="transport_searching_transport">交通設施結果(無目的地)：</string>
-	<string name="transport_searching_route">交通設施(有{0}到目的地)：</string>
+	<string name="context_menu_item_search_transport">查尋大眾運輸</string>
+	<string name="transport_searching_transport">交通運輸結果(無目的地)：</string>
+	<string name="transport_searching_route">交通運輸結果(有{0}到目的地)：</string>
 	<string name="transport_search_none">無</string>
 	<string name="transport_search_again">重置交通運輸查尋</string>
 	<string name="map_index">地圖</string>
@@ -671,7 +671,7 @@
 	<string name="layer_gpx_layer">GPX 軌跡…</string>
 	<string name="error_reading_gpx">讀取 GPX 資料錯誤</string>
 	<string name="vector_data">離線向量地圖</string>
-	<string name="transport_context_menu">在終點查尋交通運輸</string>
+	<string name="transport_context_menu">查尋交通運輸車站</string>
 	<string name="point_on_map">位置：\n 緯度 %1$.5f\n 經度 %2$.5f</string>
 	<string name="osb_bug_name">程式臭蟲</string>
 	<string name="poi_context_menu_modify">修改興趣點</string>
@@ -693,13 +693,13 @@
 	<string name="none_region_found">在 SD 卡上沒有該地區離線資料。由網路下載資料。</string>
 	<string name="poi_namefinder_query_empty">輸入查尋條件以查尋興趣點</string>
 	<string name="any_poi">任何</string>
-	<string name="layer_transport_route">交通路線</string>
+	<string name="layer_transport_route">交通運輸路線</string>
 	<string name="thanks_yandex_traffic">感謝 Yandex 提供的交通資訊。</string>
 	<string name="layer_yandex_traffic">Yandex 的交通資訊</string>
 	<string name="layer_route">導航路線</string>
 	<string name="layer_favorites">我的最愛</string>
 	<string name="layer_osm_bugs">OSM 錯誤(線上)</string>
-	<string name="layer_transport">車站、站牌</string>
+	<string name="layer_transport">候車亭</string>
 	<string name="layer_poi">興趣點…</string>
 	<string name="layer_map">地圖來源…</string>
 	<string name="menu_layers">地圖圖層</string>
@@ -760,7 +760,7 @@
 	<string name="add_new_rule">新增新規則</string>
 	<string name="transport_Routes">導航路線</string>
 	<string name="transport_Stop">停止</string>
-	<string name="transport_stops">車站</string>
+	<string name="transport_stops">站牌</string>
 	<string name="transport_search_after">後續路線</string>	
 	<string name="transport_search_before">優先路線</string>
 	<string name="transport_finish_search">查尋完成</string>
@@ -1444,8 +1444,8 @@
     <string name="app_mode_truck">卡車</string>
     <string name="application_dir_change_warning2">您想要將 OsmAnd 資料複製到新的目的地嗎？選擇否，OsmAnd 只建立和使用新的資料夾。</string>
     <string name="copying_osmand_one_file_descr">複製檔案 (%s) 到新的目的地…</string>
-    <string name="copying_osmand_files_descr">複製 OsmAnd 資料檔到新的目的地 (%s)</string>
-    <string name="copying_osmand_files">複製 OsmAnd 資料檔案</string>
+    <string name="copying_osmand_files_descr">複製 OsmAnd 資料檔到新的目的地 (%s)…</string>
+    <string name="copying_osmand_files">複製 OsmAnd 資料檔案…</string>
     <string name="calculate_osmand_route_gpx">OsmAnd 預估離線路線</string>
     <string name="android_19_location_disabled">由於 Android 4.4 (KitKat) 版本，您無法下載和更新地圖於之前的存儲檔案夾 (%s)。您是否想變更到允許的存儲位置並複製所有的 OsmAnd 檔案到那裡？
 \n注意 1：您舊的檔案將保持不變（但可以手動刪除）。
