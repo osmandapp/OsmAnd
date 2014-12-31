@@ -1414,7 +1414,7 @@
     <string name="routing_preferences_descr">Настройки маршрутизации</string>
     <string name="app_mode_truck">Грузовик</string>
     <string name="calculate_osmand_route_gpx">Рассчитать оффлайновый маршрут OsmAnd</string>
-    <string name="copying_osmand_files">Копирование файлов данных OsmAnd</string>
+    <string name="copying_osmand_files">Копирование файлов данных OsmAnd…</string>
     <string name="speech_rate">Скорость произношения</string>
     <string name="app_modes_choose_descr">Выберите профили, видимые в приложении</string>
     <string name="app_modes_choose">Профили приложения</string>
@@ -1425,7 +1425,7 @@
 \n Примечание 2: При переносе файлов в новое хранилище совместное использование файлов OsmAnd и OsmAnd+ не возможно.</string>
     <string name="application_dir_change_warning2">Хотите ли Вы, чтобы OsmAnd скопировал файлы данных на новое место? Выберите \"Нет\", чтобы OsmAnd только создал и использовал новую директорию.</string>
     <string name="copying_osmand_one_file_descr">Копирование файла (%s) на новое место…</string>
-    <string name="copying_osmand_files_descr">Копирование файлов данных OsmAnd на новое место (%s)</string>
+    <string name="copying_osmand_files_descr">Копирование файлов данных OsmAnd на новое место (%s)…</string>
     <string name="tip_recent_changes_1_6_t">Изменения в 1.6:
 	\n\t* Поддержка устройств с разрешением Full HD;
 	\n\t* Поддержка прозрачного фона карты;
