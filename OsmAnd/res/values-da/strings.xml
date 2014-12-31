@@ -1453,8 +1453,8 @@
     <string name="calculate_osmand_route_gpx">Beregn OsmAnd offline rute</string>
     <string name="application_dir_change_warning2">"Skal OsmAnd også kopiere datafiler til den nye placering? Vælg \'Nej\' hvis OsmAnd kun skal oprette og bruge den nye  mappe."</string>
     <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til den ny placering…</string>
-    <string name="copying_osmand_files_descr">Kopierer OsmAnd datafiler til ny destination (%s)</string>
-    <string name="copying_osmand_files">Kopierer OsmAnd datafiler</string>
+    <string name="copying_osmand_files_descr">Kopierer OsmAnd datafiler til ny destination (%s)…</string>
+    <string name="copying_osmand_files">Kopierer OsmAnd datafiler…</string>
     <string name="android_19_location_disabled">"Siden Android version 4.4  (KitKat) kan man ikke hente og opdatere kort i den tidligere lagerplacering (%s). Ønsker du at skifte til den tilladte placering og kopiere alle OsmAnd  datafiler dertil?         
 \n Note 1: De gamle datafiler forbliver urørt. (men kan slettes manuelt).        
 \n Note 2: I den nye placering vil det ikke være muligt at dele filer mellem OsmAnd og OsmAnd+."</string>
