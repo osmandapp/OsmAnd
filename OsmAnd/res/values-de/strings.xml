@@ -2029,8 +2029,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="map_locale">Beschriftungssprache</string>
     <string name="rendering_attr_transportStops_name">ÖPNV-Haltestellen</string>
     <string name="navigate_point_zone">Zone</string>
-    <string name="navigate_point_northing">Nord-/Hochwert)</string>
-    <string name="navigate_point_easting">Ost-/Rechtswert)</string>
+    <string name="navigate_point_northing">Nord-/Hochwert</string>
+    <string name="navigate_point_easting">Ost-/Rechtswert</string>
     <string name="dash_download_msg_none">Möchten Sie Offline-Karten herunterladen?</string>
     <string name="dash_download_msg">%1$s heruntergeladene Karten</string>
     <string name="dash_download_new_one">Neue Karte herunterladen</string>
