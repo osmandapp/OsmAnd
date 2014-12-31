@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -1538,9 +1538,9 @@
 \n Hinweis 1: Die ursprünglichen Dateien bleiben hiervon unberührt, können aber nachfolgend manuell gelöscht werden.
 \n Hinweis 2: Die Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden."</string>
 	<string name="application_dir_change_warning2">Soll OsmAnd auch die Dateien an den neuen Speicherort verschieben? Mit \'Nein\' wird OsmAnd den neuen Speicherort nur anlegen und als Standard verwenden.</string>
-	<string name="copying_osmand_one_file_descr">Datei (%s) an den neuen Speicherort kopieren…</string>
-	<string name="copying_osmand_files_descr">OsmAnd-Dateien zum neuen Speicherort (%s) kopieren</string>
-	<string name="copying_osmand_files">OsmAnd-Dateien kopieren</string>
+	<string name="copying_osmand_one_file_descr">Datei (%s) wird an den neuen Speicherort kopiert&#8230;</string>
+	<string name="copying_osmand_files_descr">OsmAnd-Dateien werden zum neuen Speicherort (%s) kopiert&#8230;</string>
+	<string name="copying_osmand_files">OsmAnd-Dateien werden kopiert&#8230;</string>
 	<string name="calculate_osmand_route_gpx">OsmAnd-Offline-Route berechnen</string>
 	<string name="app_mode_truck">LKW</string>
 	<string name="guidance_preferences_descr">Navigations-Einstellungen</string>

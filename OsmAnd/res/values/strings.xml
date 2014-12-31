@@ -455,8 +455,8 @@
         \n Note 1: Your old files will remain untouched (but can be deleted manually).
         \n Note 2: In the new storage location it will not be possible to share files between OsmAnd and OsmAnd+.</string>
     <string name="copying_osmand_one_file_descr">Copying file (%s) to the new destination&#8230;</string>
-    <string name="copying_osmand_files_descr">Copying OsmAnd data files to the new destination (%s)</string>
-    <string name="copying_osmand_files">Copying OsmAnd data files</string>
+    <string name="copying_osmand_files_descr">Copying OsmAnd data files to the new destination (%s)&#8230;</string>
+    <string name="copying_osmand_files">Copying OsmAnd data files&#8230;</string>
     <string name="calculate_osmand_route_gpx">Calculate OsmAnd offline route</string>
     <string name="app_mode_truck">Truck</string>
     <string name="guidance_preferences_descr">Navigation preferences</string>
