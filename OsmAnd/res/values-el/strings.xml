@@ -1685,4 +1685,5 @@
 	<string name="wake_on_voice">Άναμμα της οθόνης</string>
     <string name="map_widget_appearance_rem">Εναπομείναντα στοιχεία</string>
     <string name="speed_limit_exceed_message">Επιλέξτε το περιθώριο του ορίου ταχύτητας, πάνω από το οποίο θα ακούτε ηχητική προειδοποίηση.</string>
-	</resources>
+	<string name="fav_point_dublicate_message">Αλλάχτηκε το όνομα του αγαπημένου σημείου σε %1$s για να αποφευχθούν διπλά ονόματα.</string>
+    </resources>
