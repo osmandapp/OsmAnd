@@ -585,7 +585,7 @@
 <string name="amenity_type_sport">Sport</string>
 <string name="amenity_type_sustenance">Näring</string>
 <string name="amenity_type_tourism">Turism</string>
-<string name="amenity_type_transportation">Transport</string>
+<string name="amenity_type_transportation">Transporter</string>
 <string name="indexing_address">Indexerar adresser …</string>
 <string name="indexing_map">Indexerar kartan …</string>
 <string name="indexing_poi">Indexerar POI …</string>
@@ -805,7 +805,7 @@
 	<string name="transport_to_go_before">följande sträcka</string>
 	<string name="transport_stops_to_pass">hållplatser att passera</string>
 	<string name="transport_route_distance">Resvägssträcka</string>
-	<string name="transport">Transport</string>
+	<string name="transport">Transporter</string>
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Visa hållplatser för kollektivtrafik på kartan</string>
 	<string name="show_transport_over_map">Visa hållplatser</string>
@@ -1340,8 +1340,8 @@
 \n OBS: På den nya lagringsplatsen kommer det inte att vara möjligt att dela filer mellan OsmAnd och OsmAnd+.</string>
     <string name="application_dir_change_warning2">Vill du att OsmAnd också ska kopiera datafilerna till den nya platsen? Välj \'Nej\' om du vill att OsmAnd ska skapa och använda den nya mappen.</string>
     <string name="copying_osmand_one_file_descr">Kopierar filen (%s) till den nya platsen …</string>
-    <string name="copying_osmand_files_descr">Kopierar OsmAnd-datafiler till den nya platsen (%s)</string>
-    <string name="copying_osmand_files">Kopierar OsmAnd-datafiler</string>
+    <string name="copying_osmand_files_descr">Kopierar OsmAnd-datafiler till den nya platsen (%s) …</string>
+    <string name="copying_osmand_files">Kopierar OsmAnd-datafiler …</string>
     <string name="calculate_osmand_route_gpx">Beräkna OsmAnd offline-rutt</string>
     <string name="app_mode_truck">Lastbil</string>
     <string name="routing_attr_prefer_motorway_name">Föredra motorvägar</string>
