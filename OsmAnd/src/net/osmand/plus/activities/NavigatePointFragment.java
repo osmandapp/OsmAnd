@@ -61,7 +61,8 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.navigate_point, container, false);
 		setHasOptionsMenu(true);
-		
+
+		location = null;
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 		Intent intent = getSherlockActivity().getIntent();
 		if(intent != null){
@@ -165,6 +166,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	@Override
 	public void onResume() {
 		super.onResume();
+		location = null;
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 		//Intent intent = getSherlockActivity().getIntent();
 		//if (intent != null) {

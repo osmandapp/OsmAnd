@@ -40,7 +40,6 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	private HistoryAdapter historyAdapter;
 
-	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -74,6 +73,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	@Override
 	public void onResume() {
 		super.onResume();
+		location = null;
 		FragmentActivity activity = getActivity();
 		Intent intent = activity.getIntent();
 		if (intent != null) {
