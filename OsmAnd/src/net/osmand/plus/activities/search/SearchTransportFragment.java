@@ -137,7 +137,10 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
 			if(lat != 0 || lon != 0){
-				//This prevents origin update on this tab when switching to it after origin was changed on previous tab
+				// Not commenting out the next line will cause the follwing issue:
+				// (1) When the transport search was called from the dashboard, everything still works: You can change the search origin on the tab, this resets any previous (if any) search results, and any new searches will be centered around the new origin.
+				// (2) But when the tab was called from map screen, changing the search origin on the tab keeps any search results, does not reset anything.
+				// (3) If the search origin had been changed on anoother search tab before switching to this one, new transport searches would still center around the OLD search origin (the last map view)
 				//startPoint = new LatLon(lat, lon);
 			}
 		}
