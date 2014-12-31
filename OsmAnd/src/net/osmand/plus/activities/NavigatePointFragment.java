@@ -191,9 +191,9 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	
 	@Override
 	public void locationUpdate(LatLon l) {
+		//location = l;
 		if (view != null) {
 			if (l != null) {
-				//location = l;
 				showCurrentFormat(l);
 			} else {
 				showCurrentFormat(new LatLon(0, 0));
