@@ -1620,8 +1620,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 \n Nota: non sarà possibile condividere i files fra OsmAnd and OsmAnd+.</string>
     <string name="application_dir_change_warning2">Vuoi che OsmAnd sposti anche i propri dati nella nuova destinazione? Scegli \'No\' perché OsmAnd crei e utilizzi una nuova cartella.</string>
     <string name="copying_osmand_one_file_descr">Copia in corso del file (%s) nella nuova destinazione…</string>
-    <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)</string>
-    <string name="copying_osmand_files">Copia dei file di dati di OsmAnd</string>
+    <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)…</string>
+    <string name="copying_osmand_files">Copia dei file di dati di OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">Calcola percorso OsmAnd offline</string>
     <string name="routing_attr_prefer_motorway_name">Preferisci le autostrade</string>
 	<string name="routing_attr_prefer_motorway_description">Preferisci le autostrade</string>
