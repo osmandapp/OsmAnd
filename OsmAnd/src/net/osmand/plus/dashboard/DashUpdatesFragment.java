@@ -70,8 +70,8 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		}
 		updatedDownloadsList(BaseDownloadActivity.downloadListIndexThread.getItemsToUpdate());
 
-		View mainView = getView();
-		if (mainView != null) {
+		View view = getView();
+		if (view != null) {
 			view.invalidate();
 		}
 	}
