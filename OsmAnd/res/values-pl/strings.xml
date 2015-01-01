@@ -1949,7 +1949,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_use_https_descr">Użyj bezpiecznego połączenia z serwerem</string>
     <string name="osmo_use_https">Użyj HTTPS</string>
 	<string name="advanced_settings">Zaawansowane</string>
-	<string name="home_button">Strona startowa</string>
+	<string name="home_button">Dom</string>
     <string name="map_update">Dostępne aktualizacje dla %1$s map</string>
 	<string name="search_for">Wyszukaj</string>
 	<string name="show_map">POKAŻ MAPĘ</string>
