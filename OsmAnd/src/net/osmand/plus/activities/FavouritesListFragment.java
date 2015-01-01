@@ -86,6 +86,12 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 			}
 		}
 		locationUpdate(location);
+
+		//This fixes the "all lists are empty when returning to the Dashboard" issue, but should likely be placed more centrally, like in MainMenuActivity?
+		View view = getView();
+		if (view != null) {
+			view.invalidate();
+		}
 	}
 
 	@Override
