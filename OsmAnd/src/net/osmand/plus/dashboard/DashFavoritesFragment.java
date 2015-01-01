@@ -76,6 +76,12 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			updateLocation(location);
 		}
 		setupFavorites();
+
+		//Ckeck if this fixes that lists are empty when returning from the map screen
+		View view = getView();
+		if (view != null) {
+			view.invalidate();
+		}
 	}
 
 
