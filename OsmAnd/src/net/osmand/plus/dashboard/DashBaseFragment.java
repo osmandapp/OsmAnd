@@ -16,7 +16,7 @@ public class DashBaseFragment extends SherlockFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		//Test if this works
+		//This fixes the "list are empty when returning to the Dashboard" issue
 		View view = getView();
 		if (view != null) {
 			view.invalidate();

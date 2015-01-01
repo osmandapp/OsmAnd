@@ -69,12 +69,6 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			cancelButton = null;
 		}
 		updatedDownloadsList(BaseDownloadActivity.downloadListIndexThread.getItemsToUpdate());
-
-		//This seems to fix the "list are empty when returning to Dashboard" issue, but should probably be called more globally in MainMenuActivity or DashBaseFragment?
-		//View view = getView();
-		//if (view != null) {
-		//	view.invalidate();
-		//}
 	}
 
 	public void updatedDownloadsList(List<IndexItem> list) {
