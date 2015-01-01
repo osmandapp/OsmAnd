@@ -855,10 +855,10 @@
 <u>Online OSM</u> map classification with images"</string>
   <string name="local_index_routing_data">Dane trasowania</string>
   <string name="navigate_point_format">Format:</string>
-  <string name="poi_search_desc">Wyszukaj POI</string>
+  <string name="poi_search_desc">Wyszukiwanie POI</string>
   <string name="address_search_desc">Wyszukiwanie adresu</string>
   <string name="navpoint_search_desc">Współrzędne</string>
-  <string name="transport_search_desc">Wyszukaj transport</string>
+  <string name="transport_search_desc">Wyszukiwanie transportu publicznego</string>
   <string name="favourites_search_desc">Wyszukaj w ulubionych</string>
   <string name="history_search_desc">Historia wyszukiwania</string>
   <string name="rendering_attr_noPolygons_description">"Ukryj wszystkie elementy mapy będące terenami ziemnymi"</string>
@@ -980,7 +980,7 @@
 		\n\t* \'Względem kompasu\' - Mapa będzie ciągle ustawiana zgodnie z kierunkiem wskazywanym przez kompas.
 	</string>
 <string name="osmand_short_description_80_chars">OsmAnd to aplikacja nawigacyjna open source  wspierająca mapy kafelkowe oraz wektorowe</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automatyczne Nawigowanie Do celu) OsmAnd jest programem open source do nawigacji z dostępem do szerokiej gamy globalnych map OpenStreetMap (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu w użycia offline. OsmAnd oferuje również funkcjonalność routingu w trybie offline i online zawierającą zapowiedzi głosowe. Niektóre z podstawowych funkcji: - Funkcjonalnowanie w trybie offline (przechowuje pobrane mapy wektorowych lub kafelkowe w pamięci urządzenia) - Dostępne kompaktowe mapy w trybie offlinie dla całego świata - Pobieranie map kraju lub regionu bezpośrednio z aplikacji - Możliwość nakładania kilku warstw map, takich jak GPX lub tras nawigacji, ciekawe miejsc, ulubionych, linii konturu, przystanków komunikacji miejskiej, dodatkowe mapy z konfigurowalną przejrzystością - Wyszukiwanie Offline adresów i miejsc (POI) - Wyznaczanie w trybie Offline tras na krótkich dystansach (eksperymentalne) - Tryby samochodowy, rowerowy i pieszy z: - opcjonalnym automatycznym przełączaniem widoku dzień/noc - opcjonalnie skalowanie map w zależności od prędkości - opcjonalne wyrównanie map według kompasu lub kierunku ruchu - opcjonalne wyświetlanie wskazywanie pasów, ograniczeń prędkości, głosy nagrane i głowy TTS w bezpłatnej wersji OsmAnd: - limitowana liczba pobrań mapy - Brak dostępu do Wikipedii dla POI w trybie offline jest aktywnie rozwijany i dalszy rozwój jest uzależniony od wkładu pieniężnego na finansowanie rozwoju i testowania nowych funkcjonalności. Proszę rozważyć zakup OsmAnd + lub finansowanie konkretnych nowych funkcji lub dokonania ogólnej darowizny na osmand.net. "</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automatyczne Nawigowanie Do celu) OsmAnd jest programem open source do nawigacji z dostępem do szerokiej gamy globalnych map OpenStreetMap (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu w użycia offline. OsmAnd oferuje również nawigację w trybie offline i online zawierającą zapowiedzi głosowe. Niektóre z podstawowych funkcji: - Funkcjonowanie w trybie offline (przechowuje pobrane mapy wektorowych lub kafelkowe w pamięci urządzenia) - Dostępne kompaktowe mapy w trybie offlinie dla całego świata - Pobieranie map kraju lub regionu bezpośrednio z aplikacji - Możliwość nakładania kilku warstw map, takich jak GPX lub tras nawigacji, ciekawe miejsc, ulubionych, linii konturu, przystanków komunikacji miejskiej, dodatkowe mapy z konfigurowalną przejrzystością - Wyszukiwanie Offline adresów i miejsc (POI) - Wyznaczanie w trybie Offline tras na krótkich dystansach (eksperymentalne) - Tryby samochodowy, rowerowy i pieszy z: - opcjonalnym automatycznym przełączaniem widoku dzień/noc - opcjonalnie skalowanie map w zależności od prędkości - opcjonalne wyrównanie map według kompasu lub kierunku ruchu - opcjonalne wyświetlanie wskazywanie pasów, ograniczeń prędkości, głosy nagrane i głowy TTS w bezpłatnej wersji OsmAnd: - limitowana liczba pobrań mapy - Brak dostępu do Wikipedii dla POI w trybie offline jest aktywnie rozwijany i dalszy rozwój jest uzależniony od wkładu pieniężnego na finansowanie rozwoju i testowania nowych funkcjonalności. Proszę rozważyć zakup OsmAnd + lub finansowanie konkretnych nowych funkcji lub dokonania ogólnej darowizny na osmand.net. "</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd to aplikacja open source do nawigacji obsługująca mapy offline i online</string>
 <string name="avoid_motorway">Autostrad</string>
 <string name="snap_to_road_descr">Przyciągaj pozycję do drogi podczas nawigacji</string>
@@ -1553,9 +1553,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="guidance_preferences_descr">Ustawienia nawigacji</string>
     <string name="routing_preferences_descr">Ustawienia obliczania trasy</string>
     <string name="app_mode_truck">Ciężarówka</string>
-    <string name="copying_osmand_one_file_descr">Kopiowanie pliku (%s) do nowej lokalizacji...</string>
-    <string name="copying_osmand_files_descr">Kopiowanie plików OsmAnd do nowej lokalizacji (%s)</string>
-    <string name="copying_osmand_files">Kopiowanie plików OsmAnd</string>
+    <string name="copying_osmand_one_file_descr">Kopiowanie pliku (%s) do nowej lokalizacji…</string>
+    <string name="copying_osmand_files_descr">Kopiowanie plików OsmAnd do nowej lokalizacji (%s)…</string>
+    <string name="copying_osmand_files">Kopiowanie plików OsmAnd…</string>
     <string name="application_dir_change_warning2">Czy chcesz, aby OsmAnd skopiował też swoje dane do nowej lokalizacji? Wybierz \'Nie\', aby OsmAnd utworzył tylko nowy folder.</string>
     <string name="android_19_location_disabled">Od wersji 4.4 KitKat nie można pobierać ani aktualizować map w poprzedniej lokalizacji (%s). Czy chcesz ją zmienić na lokalizację dozwoloną i skopiować do niej wszystkie pliki?
 \n Uwaga 1: Twoje stare pliki zostaną nienaruszone (mogą być usunięte manualnie).
@@ -1574,10 +1574,10 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_avoid_motorway_description">Unikaj autostrad</string>
 	<string name="routing_attr_weight_name">Limit wagi</string>
 	<string name="routing_attr_weight_description">Określ ograniczenie masy pojazdu dozwolone na drodze</string>
-    <string name="select_gpx">Wybierz GPX …</string>
+    <string name="select_gpx">Wybierz GPX…</string>
     <string name="route_descr_select_destination">Wybierz cel podróży</string>
-    <string name="route_descr_select_on_map">Wybierz na mapie …</string>
-    <string name="route_descr_favorite">Ulubione …</string>
+    <string name="route_descr_select_on_map">Wybierz na mapie…</string>
+    <string name="route_descr_favorite">Ulubione…</string>
     <string name="route_preferences">Ustawienia trasy</string>
     <string name="route_info">Informacje o trasie</string>
     <string name="calculate_osmand_route_gpx">Przelicz trasę offline w OsmAnd</string>
@@ -1685,7 +1685,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_auto_send_locations">Automatycznie uruchom sesję trackera</string>
     <string name="osmo_tracker_id">Osobisty identyfikator trackera</string>
     <string name="osmo_session_token">Token sesji: %1$s</string>
-    <string name="osmo_auth_pending">Oczekiwanie na autoryzację...</string>
+    <string name="osmo_auth_pending">Oczekiwanie na autoryzację…</string>
     <string name="osmo_conn_successfull">Ustanowiono połączenie: %1$s </string>
     <string name="osmo_mode_restart">Uruchom ponownie sesję OsMo</string>
     <string name="osmo_settings_debug">Informacje debugowania</string>
@@ -1789,7 +1789,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="delay_navigation_start">Rozpocznij nawigację automatycznie</string>
     <string name="selected">wybrano</string>
     <string name="gpx_split_interval">Interwał podziału</string>
-    <string name="loading_smth">Ładowanie %1$s …</string>
+    <string name="loading_smth">Wczytywanie %1$s…</string>
     <string name="map_widget_plain_time">Aktualny czas</string>
     <string name="gpx_wpt">Punkt trasy</string>
     <string name="save_as_favorites_points">Zapisz jako grupę ulubionych</string>
@@ -1855,13 +1855,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="lang_zh_TW">Chiński tradycyjny</string>
 	<string name="rendering_attr_subwayMode_name">Trasy metra</string>
  	<string name="download_additional_maps">Pobrać brakujące mapy %1$s (%2$d MB)?</string>
-    <string name="more">Więcej...</string>
+    <string name="more">Więcej…</string>
     <string name="rendering_value_browse_map_name">Przeglądaj mapę</string>  
     <string name="rendering_value_car_name">Samochód</string>
     <string name="rendering_value_bicycle_name">Rower</string>
     <string name="rendering_value_pedestrian_name">Pieszy</string>
     <string name="rendering_attr_coloredBuildings_name">Kolorowy kod typów budynków</string>
-    <string name="osmo_invite">Zaproś...</string>
+    <string name="osmo_invite">Zaproś…</string>
     <string name="osmo_leave_confirmation_msg">Czy chcesz opuścić grupę %1$s?</string>
     <string name="osmo_specify_tracker_id">Określ id</string>
     <string name="continue_navigation">Kontynuuj nawigację</string>
