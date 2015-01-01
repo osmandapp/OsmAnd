@@ -57,6 +57,12 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 		OsmandApplication app = (OsmandApplication) getApplication();
 		favouritesAdapter = new FavouritesAdapter(activity, app.getFavorites().getFavouritePoints());
 		setListAdapter(favouritesAdapter);
+
+		//Ckeck if this fixes that lists are still sometimes empty when returning from the map screen
+		View view = getView();
+		if (view != null) {
+			view.invalidate();
+		}
 	}
 
 	private OsmandApplication getApplication() {

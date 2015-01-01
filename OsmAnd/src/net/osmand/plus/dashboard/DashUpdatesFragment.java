@@ -58,6 +58,12 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		//Ckeck if this fixes that lists are still sometimes empty when returning from the map screen
+		View view = getView();
+		if (view != null) {
+			view.invalidate();
+		}
 	}
 
 	@Override
