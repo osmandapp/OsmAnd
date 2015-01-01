@@ -179,7 +179,7 @@
 	<string name="tip_update_index">Opdatering af offlinekort</string>
 	<string name="filterpoi_activity">Opret interessepunkt-filter</string>
 	<string name="recalculate_route_to_your_location">Transportform:</string>
-	<string name="select_navigation_mode">Vælg transportmetode</string>
+	<string name="select_navigation_mode">Vælg transportform</string>
 	
 	<string name="day_night_info_description">Solopgang: %1$s
 \nSolnedgang: %2$s</string>
@@ -345,7 +345,7 @@
 	<string name="unknown_location">Position endnu ikke kendt</string>
 	<string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
 	<string name="confirm_interrupt_download">Afbryd hentning af fil?</string>
-	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Administrer kortfiler\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og finde offentligtrafik.</string>    
+	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Administrer kortfiler\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og finde kolllektivtrafik.</string>    
 	<string name="basemap_was_selected_to_download">Basiskort er nødvendige for korrekt programfunktion og blev automatisk valgt.</string>
 	<string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sin region kan man lave den selv (se http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online- og delkort</string>
@@ -898,7 +898,7 @@
 	<string name="layer_gpx_layer">GPX-spor…</string>
 	<string name="error_reading_gpx">Fejl under læsning af GPX-data</string>
 	<string name="vector_data">Offline vektorkort</string>
-	<string name="transport_context_menu">Søg transport ved stoppested</string>
+	<string name="transport_context_menu">Søg efter transport ved stoppested</string>
 	<string name="point_on_map">Placering:
 \n Lat %1$.5f
 \n Long %2$.5f</string>
@@ -1057,7 +1057,7 @@
 	<string name="opening_hours_not_supported">Åbningstider format understøtter ikke redigering</string>
 	<string name="transport_stop_to_go_out">Vælg stoppestedet for afstigning</string>
 	<string name="transport_stops_to_pass">stoppesteder der skal passeres</string>
-	<string name="show_transport_over_map_description">Vis stoppesteder for kollektivtrfikt på kortet</string>
+	<string name="show_transport_over_map_description">Vis stoppesteder for kollektivtrafik på kortet</string>
 	<string name="show_transport_over_map">Vis stoppesteder</string>
 	<string name="hello">Navigationsprogram OsmAnd</string>
 	<string name="update_poi_success">Interessepunkt-data blev opdateret ({0} blev indlæst)</string>
@@ -1087,9 +1087,8 @@
 	<string name="tip_map_switch_t_v2">"Kortkilden og lag der vises kan ændres via \'Menu\' → \'Konfigurer kort\'.
 \n\nUnder \'Kortkilde...\' vælges de forhåndsindlæste vektorkort, forhåndsdefinerede (online) delkortkilder (aktiver \'Online og delkort\' udvidelsen) eller kort der er manuelt oprettet f.eks. ved hjælp af OsmAndMapCreator på en PC.
 \n\nOsmAnd understøtter også brugerdefinerede kilder. "</string>
-	<string name="tip_app_mode_t_v2">OsmAnd understøtter forskellige profiler (kan konfigureres) til forskellige brugstilfælde.
-\n\nSkift profil via profilknappen i nederste venstre hjørne af skærmen (bil, cykel eller fodgænger) eller når en rute oprettes (\'Transportform\').
-	</string>
+	<string name="tip_app_mode_t_v2">"OsmAnd understøtter forskellige profiler (kan konfigureres) til forskellige brugstilfælde.
+\n\nSkift profil via profilknappen i nederste venstre hjørne af skærmen (bil, cykel eller fodgænger) eller når en rute oprettes (\'transportform\'). "</string>
 	<string name="tip_search_t">"Søg efter steder direkte på kortet via \'Brug placeringer\' → \'Søg i nærheden , eller ved at bruge søgeskærmen via \'Menu\' → \'Søg\'.
 \n\nSøgeskærmen indeholder skabeloner for søgning
 \n * efter adresse
