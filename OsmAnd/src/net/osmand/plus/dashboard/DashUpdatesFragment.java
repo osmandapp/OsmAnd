@@ -69,6 +69,12 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			cancelButton = null;
 		}
 		updatedDownloadsList(BaseDownloadActivity.downloadListIndexThread.getItemsToUpdate());
+
+		//This fixes the "all lists are empty when returning to the Dashboard" issue, but should likely be placed more centrally, like in MainMenuActivity?
+		View view = getView();
+		if (view != null) {
+			view.invalidate();
+		}
 	}
 
 	public void updatedDownloadsList(List<IndexItem> list) {
