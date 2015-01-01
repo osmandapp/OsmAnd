@@ -69,9 +69,6 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			cancelButton = null;
 		}
 		updatedDownloadsList(BaseDownloadActivity.downloadListIndexThread.getItemsToUpdate());
-
-		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_updates_fragment, container, false);
-		view.invalidate();
 	}
 
 	public void updatedDownloadsList(List<IndexItem> list) {
