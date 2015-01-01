@@ -144,8 +144,6 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			});
 			favorites.addView(view);
 		}
-		//Check if this fixes that lists are empty when returning from the map screen
-		mainView.invalidate();
 	}
 
 	private void updateArrows() {
