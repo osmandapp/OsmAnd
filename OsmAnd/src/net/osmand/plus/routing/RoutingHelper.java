@@ -274,8 +274,10 @@ public class RoutingHelper {
 						calculateRoute = true;
 					}
 					if(dist > 350) {
-						voiceRouter.announceOffRoute(dist);
-						announceBackOnRoute = true;
+						if (isFollowingMode) {
+							voiceRouter.announceOffRoute(dist);
+							announceBackOnRoute = true;
+						}
 					}
 				}
 				// 3. Identify wrong movement direction
@@ -325,7 +327,7 @@ public class RoutingHelper {
 				if(!thread.isParamsChanged()) {
 					thread.stopCalculation();
 				}
-				if (announceBackOnRoute){
+				if (announceBackOnRoute && isFollowingMode){
 					voiceRouter.announceBackOnRoute();
 					announceBackOnRoute = false;
 				}

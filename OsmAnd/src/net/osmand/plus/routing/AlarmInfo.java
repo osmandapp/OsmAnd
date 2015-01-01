@@ -11,12 +11,12 @@ public class AlarmInfo implements LocationPoint {
 		SPEED_CAMERA(1),
 		SPEED_LIMIT(2),
 		BORDER_CONTROL(3),
-		TRAFFIC_CALMING(4),
-		TOLL_BOOTH(5),
-		STOP(6),
-		MAXIMUM(7),
+		RAILWAY(4),
+		TRAFFIC_CALMING(5),
+		TOLL_BOOTH(6),
+		STOP(7),
 		PEDESTRIAN(8),
-		RAILWAY(9);
+		MAXIMUM(9);
 		
 		private int priority;
 
@@ -38,15 +38,15 @@ public class AlarmInfo implements LocationPoint {
 				case 3:
 					return ctx.getString(R.string.traffic_warning_border_control);
 				case 4:
-					return ctx.getString(R.string.traffic_warning_calming);
+					return ctx.getString(R.string.traffic_warning_railways);
 				case 5:
-					return ctx.getString(R.string.traffic_warning_payment);
+					return ctx.getString(R.string.traffic_warning_calming);
 				case 6:
+					return ctx.getString(R.string.traffic_warning_payment);
+				case 7:
 					return ctx.getString(R.string.traffic_warning_stop);
 				case 8:
-					return ctx.getString(R.string.traffic_waring_pedestrian);
-				case 9:
-					return ctx.getString(R.string.traffic_warning_railways);
+					return ctx.getString(R.string.traffic_warning_pedestrian);
 			}
 			return ctx.getString(R.string.traffic_warning);
 		}
@@ -118,6 +118,10 @@ public class AlarmInfo implements LocationPoint {
 			}
 		} else if("traffic_calming".equals(ruleType.getTag())) {
 			alarmInfo = new AlarmInfo(AlarmInfoType.TRAFFIC_CALMING, locInd);
+		} else if ("railway".equals(ruleType.getTag()) && "level_crossing".equals(ruleType.getValue())) {
+			alarmInfo = new AlarmInfo(AlarmInfoType.RAILWAY, locInd);
+		} else if ("crossing".equals(ruleType.getTag()) && "uncontrolled".equals(ruleType.getValue())){
+			alarmInfo = new AlarmInfo(AlarmInfoType.PEDESTRIAN, locInd);
 		}
 		if(alarmInfo != null) {
 			alarmInfo.setLatLon(loc.getLatitude(), loc.getLongitude());

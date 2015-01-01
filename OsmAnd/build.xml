@@ -18,12 +18,20 @@
 
 	<target name="download_resources">
 	    <get src="http://builder.osmand.net:81/binaries/android/OsmAndCore_wrapper.jar"
-	        dest="libs/OsmAndCore_wrapper.jar"  usetimestamp="true"/>
-	    <get src="http://builder.osmand.net:81/binaries/android/OsmAndCore_android.aar"
-	        dest="OsmAndCore_android.aar"  usetimestamp="true"/>
+	        dest="libs/OsmAndCore_wrapper.jar" usetimestamp="true"/>
+	    <get src="http://builder.osmand.net:81/ivy/net.osmand/OsmAndCore_android/0.1-SNAPSHOT/OsmAndCore_android-0.1-SNAPSHOT.aar"
+	        dest="OsmAndCore_android.aar" usetimestamp="true"/>
+	    <get src="http://builder.osmand.net:81/ivy/net.osmand/OsmAndCore_androidNativeRelease/0.1-SNAPSHOT/OsmAndCore_androidNativeRelease-0.1-SNAPSHOT.aar"
+	        dest="OsmAndCore_androidNativeRelease.aar" usetimestamp="true"/>
 	</target>
 	
 	<target name="use_qt_core" depends="download_resources">
+	    <unzip src="OsmAndCore_androidNativeRelease.aar" dest="libs">
+	        <patternset>
+	            <include name="jni/armeabi-v7a/*"/>
+	        </patternset>
+	        <cutdirsmapper dirs="1"/>
+	    </unzip>
 	    <unzip src="OsmAndCore_android.aar" dest="libs">
 	        <patternset>
 	            <include name="jni/armeabi-v7a/*"/>
@@ -33,6 +41,13 @@
 	    <unzip src="OsmAndCore_android.aar" dest=".">
 	        <patternset>
 	            <include name="assets/**/*"/>
+	            <exclude name="assets/OsmAndCore_ResourcesBundle/map/fonts/**/*"/>
+	        </patternset>
+	    </unzip>
+	    <unzip src="OsmAndCore_android.aar" dest=".">
+	        <patternset>
+	            <include name="assets/**/map/fonts/OpenSans/*"/>
+	            <include name="assets/**/map/fonts/NotoSans/*"/>
 	        </patternset>
 	    </unzip>
 	</target>

@@ -9,23 +9,24 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="speak_pedestrian">Announce pedestrian crosswalks</string>
     <string name="rendering_attr_roadStyle_name">Road style</string>
     <string name="rendering_value_default_name">Default</string>
     <string name="rendering_value_orange_name">Orange</string>
-    <string name="rendering_value_germanRoadAtlas_name">German Road Atlas</string>
-	<string name="traffic_warning_railways">Railways</string>
-	<string name="traffic_waring_pedestrian">Pedestrian</string>
-	<string name="show_railway_warnings">Show railway warnings</string>
-	<string name="show_pedestrian_warnings">Show pedestrian warnings</string>
-    <string name="rendering_value_americanRoadAtlas_name">American Road Atlas</string>
-    <string name="routing_attr_no_new_routing_name">Do not use v1.9 routing</string>
-    <string name="routing_attr_no_new_routing_description">Do not use v1.9 routing</string>
-    <string name="dash_download_msg_none">Do you want to download any offline map?</string>
-    <string name="dash_download_msg">You have %1$s maps downloaded</string>
-    <string name="dash_download_new_one">Download New Map</string>
+    <string name="rendering_value_germanRoadAtlas_name">German road atlas</string>
+	<string name="traffic_warning_railways">Railroad crossing</string>
+	<string name="traffic_warning_pedestrian">Pedestrian crosswalk</string>
+	<string name="show_railway_warnings">Show railroad crossings</string>
+	<string name="show_pedestrian_warnings">Show pedestrian crosswalks</string>
+    <string name="rendering_value_americanRoadAtlas_name">American road atlas</string>
+    <string name="routing_attr_no_new_routing_name">No v1.9 routing rules</string>
+    <string name="routing_attr_no_new_routing_description">Do not use routing rules introduced in v1.9</string>
+    <string name="dash_download_msg_none">Do you want to download offline maps?</string>
+    <string name="dash_download_msg">You have downloaded %1$s maps</string>
+    <string name="dash_download_new_one">Download new map</string>
     <string name="dash_download_manage">Manage</string>
     <string name="map_locale">Map language</string>
-    <string name="rendering_attr_transportStops_name">Transport Stops</string>
+    <string name="rendering_attr_transportStops_name">Transport stops</string>
     <string name="application_dir_change_warning2">Do you want OsmAnd to also copy its data files to the new destination?  Select \'No\' for OsmAnd to just create and use the new folder.</string>
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_northing">Northing</string>
@@ -33,17 +34,17 @@
     <string name="download_tab_downloads">All&#160;Downloads</string>
     <string name="download_tab_updates">Updates</string>
     <string name="download_tab_local">Local</string>
-	<string name="no_internet_connection">Not possible to download. Please connect to Wi-Fi to proceed.</string>
+	<string name="no_internet_connection">Downloading not possible, please check your Internet connetion.</string>
     <string name="dismiss">Dismiss</string>
-    <string name="everything_up_to_date">Everything up to date</string>
+    <string name="everything_up_to_date">All files up to date</string>
     <string name="use_opengl_render">Use OpenGL rendering</string>
     <string name="use_opengl_render_descr">Use hardware accelerated OpenGL rendering (may not work on some devices)</string>
-    <string name="error_avoid_specific_road">Nearest road was not found</string>
+    <string name="error_avoid_specific_road">No bypass found</string>
     <string name="home_button">Home</string>
-    <string name="osmo_use_https_descr">Use secure connection with server</string>
+    <string name="osmo_use_https_descr">Use secure connection to server</string>
     <string name="osmo_use_https">Use HTTPS</string>
 	<string name="advanced_settings">Advanced</string>
-	<string name="map_update">You have %1$s maps to update</string>
+	<string name="map_update">Updates available for %1$s maps</string>
 	<string name="search_for">Search for</string>
 	<string name="show_map">SHOW MAP</string>
 	<string name="show_all">SHOW ALL</string>
@@ -53,7 +54,7 @@
 	<string name="rendering_attr_subwayMode_name">Subway routes</string>
     <string name="lock_screen_request_explanation">%1$s needs this permission to turn off the screen for the power saving feature.</string>
     <string name="wake_on_voice">Turn on the screen</string>
-    <string name="wake_on_voice_descr">Turn on the phone screen when approaching a turn</string>
+    <string name="wake_on_voice_descr">Turn on the device screen when approaching a turn</string>
     <string name="wake_on_voice_never">Never</string>
     <string name="select_impassable_road">Select on map</string>
     <string name="impassable_road">Avoid roads&#8230;</string>
@@ -168,13 +169,13 @@
     <string name="targets">Destinations</string>
     <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>
-    <string name="more">More...</string>
+    <string name="more">More&#8230;</string>
     <string name="rendering_value_browse_map_name">Browse map</string>  
     <string name="rendering_value_car_name">Car</string>
     <string name="rendering_value_bicycle_name">Bicycle</string>
     <string name="rendering_value_pedestrian_name">Pedestrian</string>
     <string name="rendering_attr_coloredBuildings_name">Color-code buildings by type</string>
-    <string name="osmo_invite">Invite...</string>
+    <string name="osmo_invite">Invite&#8230;</string>
     <string name="osmo_leave_confirmation_msg">Do you want to leave group %1$s?</string>
     <string name="osmo_specify_tracker_id">Please specify id</string>
     <string name="continue_navigation">Continue Navigation</string>
@@ -225,7 +226,7 @@
     <string name="osmo_auto_connect">Auto-connect</string>
     <string name="osmo_start_service">OsMo service</string>
     <string name="osmo_gpx_track_downloaded">OsMo track %1$s downloaded.</string>
-    <string name="no_index_file_to_download">Nothing to download, please check internet connection.</string>
+    <string name="no_index_file_to_download">No downloads found, please check your Internet connection.</string>
     <string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
     <string name="none_selected_gpx">No GPX files selected. In order to select press and hold on available track.</string>
     <string name="local_index_unselect_gpx_file">Unselect</string>
@@ -239,7 +240,7 @@
     <string name="save_as_favorites_points">Save as group of favorites</string>
     <string name="select_destination_and_intermediate_points">Select waypoints</string>
     <string name="layer_amenity_label">Point labels</string>
-    <string name="loading_smth">Loading %1$s &#8230;</string>
+    <string name="loading_smth">Loading %1$s&#8230;</string>
     <string name="map_widget_plain_time">Current time</string>
     <string name="gpx_wpt">Waypoint</string>
     <string name="selected_gpx_info_show">\n\nPress and hold to see on map</string>
@@ -338,7 +339,7 @@
     <string name="osmo_tracker_id_descr">Click to view or share tracker id. 
         Using tracker id connected devices will be able to monitor all movements of this device! To disconnect select Regenerate option.</string>
     <string name="osmo_session_token">Session token: %1$s</string>
-    <string name="osmo_auth_pending">Waiting for authorization...</string>
+    <string name="osmo_auth_pending">Waiting for authorization&#8230;</string>
     <string name="osmo_locations_sent">Locations sent %1$d (in buffer %2$d) </string>
     <string name="osmo_conn_successfull">Connection established: %1$s </string>
     <string name="osmo_io_error">OsMo connection problem: </string>
@@ -426,14 +427,14 @@
 	<string name="index_name_canada">North America - Canada</string>
     <string name="index_name_italy">Europe - Italy</string>
     <string name="index_name_gb">Europe - Great Britain</string>
-    <string name="calculate_osmand_route_without_internet">Calculate OsmAnd route segment without internet</string>
+    <string name="calculate_osmand_route_without_internet">Calculate OsmAnd route segment without Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calculate OsmAnd route for first and last route segment</string>
     <string name="use_displayed_track_for_navigation">Do you want to use displayed track for navigation?</string>
     <string name="keep_and_add_destination_point">Add as destination point</string>
-    <string name="select_gpx">Select GPX &#8230;</string>
+    <string name="select_gpx">Select GPX&#8230;</string>
     <string name="route_descr_select_destination">Select Destination</string>
-    <string name="route_descr_select_on_map">Select on map &#8230;</string>
-    <string name="route_descr_favorite">Favorite &#8230;</string>
+    <string name="route_descr_select_on_map">Select on map&#8230;</string>
+    <string name="route_descr_favorite">Favorite&#8230;</string>
     <string name="route_preferences">Route preferences</string>
     <string name="route_info">Route information</string>
     <string name="routing_attr_prefer_motorway_name">Prefer motorways</string>
@@ -453,9 +454,9 @@
     <string name="android_19_location_disabled">Since Android version 4.4 (KitKat) you cannot download and update maps to the previous storage folder (%s). Do you want to change to the permitted storage location and copy all OsmAnd files there?
         \n Note 1: Your old files will remain untouched (but can be deleted manually).
         \n Note 2: In the new storage location it will not be possible to share files between OsmAnd and OsmAnd+.</string>
-    <string name="copying_osmand_one_file_descr">Copying file (%s) to the new destination...</string>
-    <string name="copying_osmand_files_descr">Copying OsmAnd data files to the new destination (%s)</string>
-    <string name="copying_osmand_files">Copying OsmAnd data files</string>
+    <string name="copying_osmand_one_file_descr">Copying file (%s) to the new destination&#8230;</string>
+    <string name="copying_osmand_files_descr">Copying OsmAnd data files to the new destination (%s)&#8230;</string>
+    <string name="copying_osmand_files">Copying OsmAnd data files&#8230;</string>
     <string name="calculate_osmand_route_gpx">Calculate OsmAnd offline route</string>
     <string name="app_mode_truck">Truck</string>
     <string name="guidance_preferences_descr">Navigation preferences</string>
@@ -635,7 +636,7 @@
     <string name="cancel_route">Dismiss route</string>
     <string name="cancel_navigation">Stop navigation</string>
     <string name="clear_destination">Clear destination</string>
-    <string name="download_using_mobile_internet">Currently WiFi is not connected. Do you want to continue downloading with current internet connection?</string>
+    <string name="download_using_mobile_internet">Wi-Fi is currently not connected. Do you want to use the current Internet connection for downloading?</string>
     <string name="street_name">Street</string>
 	<string name="hno">House number</string>
     <string name="website">Web site</string>
@@ -837,7 +838,7 @@
     <string name="btn_advanced_mode">Advanced Mode&#8230;</string>
     <string name="poi_filter_parking">Parking</string>
     <string name="poi_filter_emergency">Emergency</string>
-    <string name="poi_filter_public_transport">Public Transport</string>
+    <string name="poi_filter_public_transport">Public transport</string>
     <string name="poi_filter_entertainment">Entertainment</string>
     <string name="poi_filter_accomodation">Accommodation</string>
     <string name="poi_filter_restaurants">Restaurants</string>
@@ -875,7 +876,7 @@
 		- Complete offline functionality (store downloaded vector or tile maps in the device storage)
 		- Compact offline vector maps for the whole world available
 		- Download of country or region maps directly from the app 
-		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transportation stops, additional maps with customizable transparency
+		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transport stops, additional maps with customizable transparency
 		- Offline search for addresses and places (POIs)
 		- Offline routing for short distances (experimental)
 		- Car, bicycle, and pedestrian modes with:
@@ -891,7 +892,7 @@
 		OsmAnd is actively being developed and our project and its further progress relies on financial contributions to fund the development and testdriving new functionality. Please consider buying OsmAnd+, or funding specific new features or making a general donation on osmand.net.
 	</string>
 	<string name="osmand_extended_description_4000_chars">
-OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no internet needed).
+OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no Internet needed).
 
 Some of the main features:
 
@@ -975,7 +976,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		- Compact offline vector maps for the whole world available
 		- Unlimited downloading of country or region maps directly from the app 
 		- Offline Wikipedia feature (download Wikipedia POIs), great for sightseeing
-		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transportation stops, additional maps with customizable transparency
+		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transport stops, additional maps with customizable transparency
 		- Offline search for addresses and places (POIs)
 		- Offline routing for short distances (experimental)
 		- Car, bicycle, and pedestrian modes with:
@@ -985,7 +986,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		-  optional lane guidance, speed limit display, recorded and TTS voices
 	</string>
 	<string name="osmand_plus_extended_description_4000_chars">
-OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no internet needed).
+OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no Internet needed).
 
 OsmAnd+ is the paid application version. By buying it you support the project, fund the development of new features, and receive the latest updates. You can test the application before buying by installing the free version called OsmAnd.
 
@@ -1060,7 +1061,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_update_index">Updating Offline Maps</string>
 	<string name="tip_update_index_t">Up-to-date map data is essential for offline map viewing, for POI/address search, and for offline navigation. OsmAnd provides a map file manager to download these offline maps and to check for available updates.
 		\n\nTo download maps go to \'Settings\' → \'Manage map files\' → \'Download\'.
-		\n\nAfter the global region list is retrieved from the internet, click on any entry to download or update a file. Please note the file type selector near the top of the screen to select the type of download you want (regular maps, hillshade overlays, etc.).
+		\n\nAfter the global region list is retrieved from the Internet, click on any entry to download or update a file. Please note the file type selector near the top of the screen to select the type of download you want (regular maps, hillshade overlays, etc.).
 		\n\nYou can filter the region list by typing some letters, or you may select the option \'Settings\' → \'Filter downloaded\' to see updates only for the data already on your device.
 		\n\n\t* Entries in \'green\' indicate data files identical on device and server
 		\n\t* Entries in \'blue\' indicate available updates on server
@@ -1180,7 +1181,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_search_desc">POI (Point of interest) search</string>
 	<string name="address_search_desc">Address search</string>
 	<string name="navpoint_search_desc">Coordinates</string>
-	<string name="transport_search_desc">Transportation search</string>
+	<string name="transport_search_desc">Public transport search</string>
 	<string name="favourites_search_desc">Favorites search</string>
 	<string name="history_search_desc">Search history</string>
 	<string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
@@ -1191,7 +1192,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="unknown_location">Position not yet known</string>
 	<string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
 	<string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
-	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' →  \'Manage map files\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transportation.</string>    
+	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' →  \'Manage map files\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transport.</string>    
 	<string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
 	<string name="local_indexes_cat_tile">Online and tile maps</string>
 	<string name="local_indexes_cat_map">Offline maps (vector)</string>
@@ -1473,10 +1474,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_position_address">Address&#8230;</string>
 	<string name="search_position_favorites">Favorites&#8230;</string>
 	<string name="search_position_undefined">Undefined</string>
-	<string name="search_position_fixed">Fixed</string>
 	<string name="search_position_current_location">Current position&#8230;</string>
 	<string name="search_position_map_view">Last map view</string>
-	<string name="select_search_position">Search near:</string>
+	<string name="select_search_position">Origin:</string>
 	<string name="context_menu_item_search">Search near here</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7:
 		\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd)
@@ -1527,7 +1527,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_index_download">Download</string>
 	<string name="local_index_poi_data">POI data</string>
 	<string name="local_index_address_data">Address data</string>
-	<string name="local_index_transport_data">Transportation data</string>
+	<string name="local_index_transport_data">Public transport data</string>
 	<string name="local_index_map_data">Map data</string>
 	<string name="local_indexes_cat_backup">Deactivated</string>
 	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
@@ -1552,7 +1552,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="voice_not_use">Do not use</string>
 	<string name="voice_not_specified">None</string>
 	<string name="installing_new_resources">Unpacking new data&#8230;</string>
-	<string name="internet_connection_required_for_online_route">An online navigation service is selected but no internet connection is available.</string>
+	<string name="internet_connection_required_for_online_route">An online navigation service is selected but no Internet connection is available.</string>
 	<string name="tts_language_not_supported_title">Language not supported</string>
 	<string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to look for another TTS engine in Market? Otherwise the preset TTS language will be used.</string>
 	<string name="tts_missing_language_data_title">Missing data</string>
@@ -1580,7 +1580,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_overlay_descr">Choose overlay map</string>
 	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
 	<string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
-	<string name="internet_not_available">Internet connection required for operation is not available</string>
+	<string name="internet_not_available">An Internet connection is required for this operation but is not available</string>
 	<string name="install_more">Install more&#8230;</string>
 	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
@@ -1655,11 +1655,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="amenity_type_sport">Sport</string>
 	<string name="amenity_type_sustenance">Sustenance</string>
 	<string name="amenity_type_tourism">Tourism</string>
-	<string name="amenity_type_transportation">Transportation</string>
+	<string name="amenity_type_transportation">Transport</string>
 	<string name="indexing_address">Indexing address&#8230;</string>
 	<string name="indexing_map">Indexing map&#8230;</string>
 	<string name="indexing_poi">Indexing POI&#8230;</string>
-	<string name="indexing_transport">Indexing transportation&#8230;</string>
+	<string name="indexing_transport">Indexing transport&#8230;</string>
 	<string name="input_output_error">I/O error occurred</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
@@ -1719,11 +1719,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_high_res_maps">High resolution display</string>
 	<string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays</string>
 	<string name="download_files">Download</string>
-	<string name="context_menu_item_search_transport">Search transportation</string>
-	<string name="transport_searching_transport">Transportation results (no destination):</string>
-	<string name="transport_searching_route">Transportation results ({0} to destination):</string>
+	<string name="context_menu_item_search_transport">Search public transport</string>
+	<string name="transport_searching_transport">Transport results (no destination):</string>
+	<string name="transport_searching_route">Transport results ({0} to destination):</string>
 	<string name="transport_search_none">none</string>
-	<string name="transport_search_again">Reset Transportation search</string>
+	<string name="transport_search_again">Reset transport search</string>
 	<string name="map_index">Map</string>
 	<string name="voice">Recorded voice</string>
 	<string name="voices">Voice prompts</string>
@@ -1733,7 +1733,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="layer_gpx_layer">GPX track&#8230;</string>
 	<string name="error_reading_gpx">Error reading GPX data</string>
 	<string name="vector_data">Offline vector maps</string>
-	<string name="transport_context_menu">Search transportation at stop</string>
+	<string name="transport_context_menu">Search transport at stop</string>
 	<string name="point_on_map">Location:\n Lat %1$.5f\n Lon %2$.5f</string>
 	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Modify POI</string>
@@ -1759,13 +1759,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="none_region_found">No offline data for regions found on SD card. Download regions from the Internet.</string>
 	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
 	<string name="any_poi">Any</string>
-	<string name="layer_transport_route">Transportation route</string>
+	<string name="layer_transport_route">Transport route</string>
 	<string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
 	<string name="layer_yandex_traffic">Yandex traffic</string>
 	<string name="layer_route">Route</string>
 	<string name="layer_favorites">Favorites</string>
 	<string name="layer_osm_bugs">OSM bugs (online)</string>
-	<string name="layer_transport">Transportation stops</string>
+	<string name="layer_transport">Transport stops</string>
 	<string name="layer_poi">POI&#8230;</string>
 	<string name="layer_map">Map source&#8230;</string>
 	<string name="menu_layers">Map layers</string>
@@ -1822,18 +1822,18 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="transport_Routes">Routes</string>
 	<string name="transport_Stop">Stop</string>
 	<string name="transport_stops">stops</string>
-	<string name="transport_search_after">Subsequent route</string>	
-	<string name="transport_search_before">Prior route</string>
+	<string name="transport_search_after">Subsequent itinerary</string>
+	<string name="transport_search_before">Prior itinerary</string>
 	<string name="transport_finish_search">Finish search</string>
 	<string name="transport_stop_to_go_out">Choose stop to get off</string>
 	<string name="transport_to_go_after">prior distance</string>
 	<string name="transport_to_go_before">subsequent distance</string>
 	<string name="transport_stops_to_pass">stops to pass</string>
-	<string name="transport_route_distance">Route distance</string>
-	<string name="transport">Transportation</string>
+	<string name="transport_route_distance">Itinerary distance</string>
+	<string name="transport">Transport</string>
 	<string name="default_buttons_ok">OK</string>
-	<string name="show_transport_over_map_description">Show public transportation stops on map</string>
-	<string name="show_transport_over_map">Show transportation stops</string>
+	<string name="show_transport_over_map_description">Show public transport stops on map</string>
+	<string name="show_transport_over_map">Show transport stops</string>
 	<string name="hello">Navigation application OsmAnd</string>
 	<string name="update_poi_success">POI data was updated successfully ({0} were loaded)</string>
 	<string name="update_poi_error_local">Error updating local POI list</string>

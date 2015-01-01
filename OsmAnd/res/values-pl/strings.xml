@@ -543,7 +543,7 @@
   <string name="save_current_track_descr">Zapisz bieżący ślad na karcie SD</string>
   <string name="save_current_track">Zapisz bieżący ślad</string>
   <string name="save_track_interval_descr">Wybierz czas pomiędzy sprawdzaniem pozycji przy nagrywaniu ścieżek podczas nawigacji</string>
-  <string name="save_track_interval">Czas pomiędzy sprawdzaniem pozycji podczas nawigacji</string>
+  <string name="save_track_interval">Częstotliwość zapisywania podczas nawigacji</string>
   
   <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu ścieżek podczas nawigacji</string>
   <string name="save_track_to_gpx">Zapisuj ślad do pliku GPX podczas nawigacji</string>
@@ -1812,7 +1812,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_auto_connect">Auto-podłączenie</string>
     <string name="osmo_start_service">Serwis OsMo</string>
     <string name="osmo_gpx_track_downloaded">Pobrano %1$s ścieżek OsMo.</string>
-    <string name="no_index_file_to_download">Brak danych do pobrania, proszę sprawdź połączenie internetowe.</string>
+    <string name="no_index_file_to_download">Brak danych do pobrania, proszę sprawdzić połączenie internetowe.</string>
     <string name="osmo_auth_error_short">Błąd autoryzacji</string>
     <string name="osmo_auth_error">Wystąpił błąd autoryzacji OsMo: %1$s.\n To może być przerwa w działaniu usługi lub twoja rejestracja straciła ważność.\n Chcesz kontynuować z nową rejestracją?</string>
     <string name="keep_navigation_service">Utrzymuj</string>
@@ -1883,7 +1883,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="record_plugin_name">Nagrywaj swoje wycieczki</string>
     <string name="int_hour">godz.</string>
     <string name="duration">Czas trwania</string>
-    <string name="distance">Dystans</string>
+    <string name="distance">Odległość</string>
     <string name="index_tours">Wycieczki</string>
     <string name="flat_list_waypoints">Wszystkie</string>
     <string name="waypoints">Punkty trasy</string>
@@ -1896,8 +1896,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="save_track_interval_globally">Częstotliwość zapisywania</string>
 	<string name="record_plugin_description">Zapisz swoje ścieżki jednym guzikiem na ekranie mapy. Pokazuj ustawienia nagrywania twoich wycieczek do pliku GPX lub używając serwisu internetowego.</string>
     <string name="confirm_every_run">Zawsze pytaj</string>
-	<string name="save_global_track_interval_descr">Wybierz interwał rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet nagrywania GPX na mapie)</string>
-	<string name="save_global_track_interval">Ogólny interwał rejestrowania</string>
+	<string name="save_global_track_interval_descr">Wybierz częstotliwość rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet nagrywania GPX na mapie)</string>
+	<string name="save_global_track_interval">Ogólna częstotliwość zapisywania</string>
 	<string name="traffic_warning_speed_limit">Ograniczenie prędkości</string>
     <string name="traffic_warning_border_control">Kontrola graniczna</string>
     <string name="traffic_warning_payment">Punkt poboru opłat</string>
@@ -1913,8 +1913,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="use_native_render">Użyj renderowania natywnego</string>
     <string name="use_native_render_descr">Użyj kodu renderowania C++ zamiast Java</string>
     <string name="speed_limit_exceed">Tolerancja ograniczenia prędkości</string>
-	<string name="speed_limit_exceed_message">Wybierz margines tolerancji ograniczenia prędkości, powyżej której otrzymasz ostrzeżenie głosowe.</string>
-	<string name="fav_point_emoticons_message">Nazwa ulubionego punktu została zmodyfikowany na %1$s, aby prawidłowo ułatwić zapisywanie do pliku ciągu z emotikonem.</string>
+	<string name="speed_limit_exceed_message">Wybierz margines tolerancji ograniczenia prędkości, powyżej którego otrzymasz ostrzeżenie głosowe.</string>
+	<string name="fav_point_emoticons_message">Nazwa ulubionego punktu została zmieniona na %1$s, aby prawidłowo ułatwić zapisywanie do pliku ciągu z emotikonem.</string>
     <string name="print_route">Drukuj trasę</string>
     <string name="osmo_device_not_found">Nie znaleziono urządzenia</string>
     <string name="osmo_no_connection_msg">Serwis OsMo jest niedostępny:\n- sprawdź połączenie internetowe;\n- sprawdź ustawienia;\n- sprawdź Twitter: https://twitter.com/OsMomobi</string>
@@ -1932,9 +1932,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="layers_category_show">Pokaż</string>
 	<string name="configure_map">Skonfiguruj mapę</string>
     <string name="search_radius_proximity">W odległości</string>
-    <string name="wake_on_voice">Włączyć ekran</string>
-    <string name="wake_on_voice_descr">Włącz na ekran telefonu podczas zbliżania się do zakrętu</string>
-    <string name="select_impassable_road">Wybierz mapę</string>
+    <string name="wake_on_voice">Włącz ekran</string>
+    <string name="wake_on_voice_descr">Włącz ekran urządzenia podczas zbliżania się do skrętu</string>
+    <string name="select_impassable_road">Zaznacz na mapie</string>
     <string name="impassable_road">Unikaj dróg…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Trasy tramwajowe i kolejowe</string>
     <string name="tip_recent_changes_1_9_t">"Zmiany w 1.9: * Aktualizacja stylów mapy z renderowaniem warstw nawierzchni drogi, transportu i symboli turystycznych * Wyszukiwanie punktów POI wzdłuż trasy * Zaznaczanie nieprzejezdnej drogi dla danego przejazdu * Ułatwienia pobrania i aktualizacji mapy * Otrzymywanie powiadomień wizualnych i audio podczas zbliżania się do punktu * Drukuj informacje o trasie i manewrach * Wsparcie dla asystenta pasa ruchu * Wsparcie Android Wear * Dużo zmian UI * Oddzielne powiększenie rozmiaru dla tekstu na mapie * Specjalne powiadomienia dźwiękowe w przypadku zjechania z trasy * Funkcjonalności logowania do Osmo * Poprawienie niezgodności wersji OsMo "</string>
@@ -1947,24 +1947,24 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lock_screen_request_explanation">%1$s potrzebuje uprawnień do wyłączenia ekranu dla funkcji oszczędzania energii.</string>
     <string name="wake_on_voice_never">Nigdy</string>
     <string name="osmo_use_https_descr">Użyj bezpiecznego połączenia z serwerem</string>
-    <string name="osmo_use_https">Użyj https</string>
+    <string name="osmo_use_https">Użyj HTTPS</string>
 	<string name="advanced_settings">Zaawansowane</string>
 	<string name="home_button">Strona startowa</string>
-    <string name="map_update">Liczba map do uaktualnienia: %1$s</string>
+    <string name="map_update">Dostępne aktualizacje dla %1$s map</string>
 	<string name="search_for">Wyszukaj</string>
 	<string name="show_map">POKAŻ MAPĘ</string>
 	<string name="show_all">POKAŻ WSZYSTKIE</string>
 	<string name="coordinates">Współrzędne</string>
 	<string name="dismiss">Odrzuć</string>
-    <string name="everything_up_to_date">Wszystko jest aktualne</string>
+    <string name="everything_up_to_date">Wszystkie pliki aktualne</string>
     <string name="use_opengl_render">Użyj renderowania OpenGL</string>
-    <string name="use_opengl_render_descr">"Użyj sprzętowego renderowania  OpenGL (może nie działać na niektórych urządzeniach)"</string>
-    <string name="error_avoid_specific_road">Najbliższa droga nie została znaleziona</string>
-    <string name="dash_download_msg_none">Chcesz pobrać jakąś mapę offline?</string>
-    <string name="dash_download_msg">Masz %1$s pobrane mapy</string>
-    <string name="dash_download_new_one">Pobierz Nową Mapę</string>
+    <string name="use_opengl_render_descr">Użyj sprzętowego renderowania OpenGL (może nie działać na niektórych urządzeniach)</string>
+    <string name="error_avoid_specific_road">Nie znaleziono objazdu</string>
+    <string name="dash_download_msg_none">Czy chcesz pobrać mapy offline?</string>
+    <string name="dash_download_msg">Pobrałeś %1$s map</string>
+    <string name="dash_download_new_one">Pobierz nową mapę</string>
     <string name="dash_download_manage">Zarządzaj</string>
-    <string name="map_locale">Język Mapy</string>
+    <string name="map_locale">Język mapy</string>
     <string name="navigate_point_zone">Strefa</string>
     <string name="download_tab_downloads">Pobrane</string>
     <string name="download_tab_updates">Aktualizacje</string>
@@ -1973,12 +1973,17 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_value_orange_name">Pomarańczowy</string>
     <string name="rendering_value_germanRoadAtlas_name">Niemiecki atlas drogowy</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerykański atlas drogowy</string>
-    <string name="routing_attr_no_new_routing_name">Nie używaj trasowania z wersji 1.9</string>
-    <string name="routing_attr_no_new_routing_description">Nie używaj trasowania z wersji 1.9</string>
+    <string name="routing_attr_no_new_routing_name">Bez reguł trasowania z wersji 1.9</string>
+    <string name="routing_attr_no_new_routing_description">Nie używaj reguł trasowania wprowadzonych w wersji 1.9</string>
     <string name="navigate_point_northing">Linia współrzędnych y\"</string>
     <string name="rendering_attr_transportStops_name">Przystanki transportu miejskiego</string>
     <string name="navigate_point_easting">Linia współrzędnych x\"</string>
     <string name="download_tab_local">W urządzeniu</string>
-	<string name="no_internet_connection">Pobieranie niemożliwe. Proszę się podłączyć do sieci Wi-Fi, aby kontynuować.</string>
+	<string name="no_internet_connection">Pobieranie niemożliwe. Sprawdź połączenie z Internetem.</string>
     <string name="voices">Wskazówki głosowe</string>
-	</resources>
+	<string name="traffic_warning_railways">Przejazd kolejowy</string>
+	<string name="traffic_warning_pedestrian">Przejście dla pieszych</string>
+	<string name="show_railway_warnings">Pokazuj przejazdy kolejowe</string>
+	<string name="show_pedestrian_warnings">Pokazuj przejścia dla pieszych</string>
+    <string name="speak_pedestrian">Informuj o przejściach dla pieszych</string>
+    </resources>

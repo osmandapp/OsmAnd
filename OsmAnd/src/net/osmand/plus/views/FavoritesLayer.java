@@ -165,7 +165,10 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	public String getObjectDescription(Object o) {
 		Class<? extends LocationPoint> fcl = getFavoriteClass();
 		if(o!= null && fcl.isInstance(o)) {
-			return getObjName() + " : " + ((LocationPoint)o).getName(view.getContext()); //$NON-NLS-1$
+			String desciption = ((FavouritePoint)o).getDescription() != null ?
+					" " + ((FavouritePoint)o).getDescription() : "";
+			return getObjName() + ": " + ((LocationPoint)o).getName(view.getContext())
+					+ desciption; //$NON-NLS-1$
 		}
 		return null;
 	}

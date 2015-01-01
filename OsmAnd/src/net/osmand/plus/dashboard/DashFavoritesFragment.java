@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Created by Denis on 24.11.2014.
  */
-public class DashFavoritesFragment extends DashBaseFragment implements OsmAndLocationProvider.OsmAndCompassListener, OsmAndLocationProvider.OsmAndLocationListener {
+public class DashFavoritesFragment extends DashBaseFragment {
 	public static final String TAG = "DASH_FAVORITES_FRAGMENT";
 	private net.osmand.Location location = null;
 	private Float heading = null;
@@ -58,24 +58,15 @@ public class DashFavoritesFragment extends DashBaseFragment implements OsmAndLoc
 				activity.startActivity(favorites);
 			}
 		});
-
-
-
 		return view;
 	}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		getLocationProvider().removeCompassListener(this);
-		getLocationProvider().removeLocationListener(this);
-	}
+
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
-			registerListeners();
 			if(!getMyApplication().getSettings().isLastKnownMapLocation()) {
 				// show first time when application ran
 				location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
@@ -84,18 +75,10 @@ public class DashFavoritesFragment extends DashBaseFragment implements OsmAndLoc
 			}
 			updateLocation(location);
 		}
-
-
 		setupFavorites();
-
 	}
 
-	private void registerListeners() {
-		getLocationProvider().addLocationListener(this);
-		getLocationProvider().addCompassListener(this);
-		getLocationProvider().registerOrUnregisterCompassListener(true);
-		getLocationProvider().resumeAllUpdates();
-	}
+
 
 	private void setupFavorites(){
 		View mainView = getView();
@@ -161,10 +144,6 @@ public class DashFavoritesFragment extends DashBaseFragment implements OsmAndLoc
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			});
-			int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
-
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
-			view.setLayoutParams(lp);
 			favorites.addView(view);
 		}
 	}
@@ -191,20 +170,17 @@ public class DashFavoritesFragment extends DashBaseFragment implements OsmAndLoc
 		direction.setImageDrawable(draw);
 	}
 
-	@Override
 	public void updateCompassValue(float value) {
 		heading = value;
 		updateArrows();
 	}
 
-	@Override
 	public void updateLocation(Location location) {
 		if (location == null){
 			return;
 		}
 		this.location = location;
 		updateArrows();
-
 	}
 
 	private OsmAndLocationProvider getLocationProvider() {

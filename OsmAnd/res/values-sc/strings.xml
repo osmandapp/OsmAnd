@@ -60,8 +60,8 @@
     <string name="keep_and_add_destination_point">Annànghe unu puntu de destinatzione</string>
     <string name="select_gpx">Issèbera GPX…</string>
     <string name="route_descr_select_destination">Issèbera sa destinatzione</string>
-    <string name="route_descr_select_on_map">Issèbera in sa mapa…</string>
-    <string name="route_descr_favorite">Preferridu…</string>
+    <string name="route_descr_select_on_map">Ischerta in sa mapa…</string>
+    <string name="route_descr_favorite">Prefèrridu…</string>
     <string name="route_preferences">Preferèntzias pro s\'àndala</string>
     <string name="route_info">Informatziones de s\'àndalas</string>
     <string name="routing_attr_prefer_motorway_name">Preferre sas autostradas</string>
@@ -82,7 +82,7 @@
 \n Nota 1: sos datos antepostos tuos non at a èssere mudados (ma podent essere burrados manualmente).
 \n Nota 2: in sa cartella noa non at a èssere possìbile cumpartzire sos datos intra OsmAnd e OsmAnd+.</string>
     <string name="application_dir_change_warning2">Boles chi OsmAnd còpiet sos datos suos fintzas in sa destinatzione noa? Icherta \"Nono\" pro fàghere petzi creare ed impreare una cartella noa a OsmAnd.</string>
-    <string name="copying_osmand_one_file_descr">Copiande su documentu (%s) in sa destinatzione noa...</string>
+    <string name="copying_osmand_one_file_descr">Copiande su documentu (%s) in sa destinatzione noa…</string>
     <string name="copying_osmand_files_descr">Copiande sos datos de OsmAnd in (%s), sa destinatzione noa</string>
     <string name="copying_osmand_files">Copiande sos datos de OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Càlcula s\'àndala OsmAnd sena lìnia</string>
@@ -574,7 +574,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="save_as_favorites_points">Sarba comente grupu de prefèrridos</string>
     <string name="select_destination_and_intermediate_points">Issèbera sas tapas</string>
     <string name="layer_amenity_label">Etichetas de sos puntos</string>
-    <string name="loading_smth">Carrigamentu de %1$s …</string>
+    <string name="loading_smth">Carrigamentu de %1$s…</string>
     <string name="map_widget_plain_time">Oràriu atuale</string>
     <string name="gpx_wpt">Tapa</string>
     <string name="selected_gpx_info_show">\n\nTene carcau pro lu bìere in sa mapa</string>
@@ -675,7 +675,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="osmo_tracker_id">Id pessonale arrastamentu</string>
     <string name="osmo_tracker_id_descr">Carca pro visualizzare o cumpartzire s\'id de arrastamentu. Impreande s\'id de arrastamentu sos dispositivos connessos ant a èssere capatzes de sighire totu sos movimentos de custu dispositivu! Pro ti disconnèttere ischerta s\'optzione Reingendra.</string>
     <string name="osmo_session_token">Token de sa sessione: %1$s</string>
-    <string name="osmo_auth_pending">Isetande pro s\'autorizatzione...</string>
+    <string name="osmo_auth_pending">Isetande pro s\'autorizatzione…</string>
     <string name="osmo_locations_sent">"Localizatziones imbiadas %1$d (in su buffer %2$d) "</string>
     <string name="osmo_conn_successfull">"Connessione istabilida: %1$s "</string>
     <string name="tip_recent_changes_1_8_alpha">"Mudas in sa 1.8: * Càlcula s\'àndala intre duos puntos de una rasta GPX * Mudada s\'aspetu pro s\'isgarrigamentu de sos istados (suportu pro sa chirca cun nùmenes locales) * Suportu pro s\'importatzione GPX/KML (cunvertere dae KML a GPX) * Sas rastas GPX sunt istadas mòvidas in \'Datos meos\' * Como podes partzire sas rastas GPX pro distantzia e compidare sa diferèntzia de artària/ lestresa * Aviu automàticu de su nàvigu a pustis de un isetu curtzu "</string>
@@ -948,7 +948,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="default_buttons_save">Sarba</string>
 	<string name="menu_save_directions">Sarba diretziones</string>
 	<string name="rendering_attr_coloredBuildings_name">Edifìtzios colorados pro casta</string>
-    <string name="osmo_invite">Invita...</string>
+    <string name="osmo_invite">Invita…</string>
     <string name="osmo_leave_confirmation_msg">Boles essire dae su grupu %1$s?</string>
     <string name="osmo_specify_tracker_id">Pro piaghere dislinda s\'id</string>
     <string name="continue_navigation">Sighi cun su nàvigu</string>
@@ -1146,7 +1146,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="map_version_changed_info">In su server bi sunt documentos de mapas non compatìbiles cun sa versione atuale de su programma. Pro los iscarrigare e impreare agiorna s\'aplicu a s\'ùritma versione.</string>
 	<string name="local_index_mi_rename">Torra a numenare</string>
 	<string name="search_position_undefined">Non dessinidu</string>
-	<string name="search_position_fixed">Fissadu</string>
+	<string name="search_position_fixed"></string>
 	<string name="search_position_current_location">Positzione currente…</string>
 	<string name="search_position_map_view">Ùrtima bisura mapa</string>
 	<string name="local_index_mi_upload_gpx">Imbia ad OSM</string>
@@ -1217,7 +1217,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="map_overlay_descr">Issèbera mapa de subrapositzione</string>
 	<string name="tile_source_already_installed">Sa mapa est giai installata, sas impostaduras ant a èssere agiornadas</string>
 	<string name="select_tile_source_to_install">Issèbera sas mapas (tasseddos) da installare o agiornare</string>
-	<string name="internet_not_available">Sa connessione ìnternet est netzessària pro custa operatzione ma no est disponìbile</string>
+	<string name="internet_not_available">Una connessione ìnternet est netzessària pro custa operatzione, ma no nde bi sunt disponìbiles</string>
 	<string name="install_more">Installa àteru…</string>
 	<string name="level_to_switch_vector_raster_descr">Livellu mìnimu de zoom pro impreare sas mapas vetoriales</string>
 	<string name="level_to_switch_vector_raster">Liv. min. zoom vetoriale</string>
@@ -1382,7 +1382,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="menu_mute_off">S\'àudio est deativadu</string>
 	<string name="menu_mute_on">Àudio deativadu</string>
 	<string name="download_additional_maps">Iscarrigare sas mapas fartantes %1$s (%2$d MB)?</string>
-    <string name="more">Àteru...</string>
+    <string name="more">Àteru…</string>
     <string name="local_index_upload_gpx_description">Imbiu de sos documentos GPX a sa comunidade OSM. Los ant a impreare pro megiorare sas mapas.</string>
 	<string name="local_index_items_uploaded">Ogetu/os %1$d de %2$d carrigadu curretamente.</string>
 	<string name="tip_location_sharing_t">"Podes cumpartzire sa positzione de sos logos interesantes de sos biagios tuos cun familiares e amigos, tràmite su Menù cuntestuale \'Imprea sa positzione\' → \'Cumpartzi positzione\'.
@@ -1786,13 +1786,13 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="show_map">AMMUSTRA SA MAPA</string>
 	<string name="show_all">AMMUSTRA TOTU</string>
 	<string name="coordinates">Coordinatas</string>
-	<string name="map_update">Tenes %1$s mapas de agiornare</string>
-	<string name="error_avoid_specific_road">No est istada agatada peruna istrada a curtzu</string>
+	<string name="map_update">Podes agiornare %1$s mapas</string>
+	<string name="error_avoid_specific_road">No est istada agatada peruna tangentziale</string>
     <string name="everything_up_to_date">Totu agiornadu</string>
     <string name="use_opengl_render">Imprea sa renderizatzione OpengL</string>
     <string name="use_opengl_render_descr">Imprea sa renderizatzione OpengL tràmite hardware (diat pòdere non funtzionare in carchi dispositivu)</string>
     <string name="dismiss">Abbandona</string>
-    <string name="no_internet_connection">Impossìbile iscarrigare. Pro piaghere allue su Wi-fi pro sighire.</string>
+    <string name="no_internet_connection">Impossìbile iscarrigare. Pro piaghere còmpida sa cunnessione tua pro sighire.</string>
     <string name="download_tab_downloads">Iscarrigàbiles</string>
     <string name="download_tab_updates">Agiornamentos</string>
     <string name="download_tab_local">Iscarrigadas</string>
@@ -1802,8 +1802,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="rendering_attr_transportStops_name">Firmadas traspòrtu pùblicu</string>
     <string name="map_locale">Limba de sa mapa</string>
     <string name="voices">Indicatziones vocales</string>
-	<string name="dash_download_msg_none">Boles iscarrigare carchi mapa non in lìnia?</string>
-    <string name="dash_download_msg">Tenes %1$s mapas iscarrigadas</string>
+	<string name="dash_download_msg_none">Boles iscarrigare una mapa non in lìnia?</string>
+    <string name="dash_download_msg">As iscarrigadu %1$s mapas</string>
     <string name="dash_download_new_one">Iscàrriga una mapa noa</string>
     <string name="dash_download_manage">Gesti</string>
     <string name="rendering_attr_roadStyle_name">Istile disinnu de sas istradas</string>
@@ -1813,8 +1813,9 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="rendering_value_americanRoadAtlas_name">Atlante de sas istradas americanas</string>
     <string name="routing_attr_no_new_routing_name">No impreare su càlculu de s\'àndala v1.9</string>
     <string name="routing_attr_no_new_routing_description">No impreare su càlculu de s\'àndala v1.9</string>
-    <string name="traffic_warning_railways">Ferrovias</string>
-	<string name="traffic_waring_pedestrian">Pedonale</string>
-	<string name="show_railway_warnings">Ammustra sos avisos ferroviàrios</string>
-	<string name="show_pedestrian_warnings">Ammustra sos avisos pedonales</string>
+    <string name="traffic_warning_railways">Atraessamentu de sa ferrovia</string>
+	<string name="traffic_warning_pedestrian">Atraessamentu pedonale</string>
+	<string name="show_railway_warnings">Ammustra sas rugradas ferroviàrias</string>
+	<string name="show_pedestrian_warnings">Ammustra sas istrìscias pedonales</string>
+    <string name="speak_pedestrian">Annùntzia sos atraessamentos pedonales</string>
     </resources>

@@ -702,6 +702,7 @@ public class RouteInfoWidgetsFactory {
 			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean trafficWarnings = settings.SHOW_TRAFFIC_WARNINGS.get();
 				boolean cams = settings.SHOW_CAMERAS.get();
+				boolean peds = settings.SHOW_PEDESTRIAN.get();
 				boolean visible = false;
 				boolean eval = rh.isFollowingMode() || trackingUtilities.isMapLinkedToLocation();
 				if ((trafficWarnings || cams) && eval) {
@@ -722,32 +723,52 @@ public class RouteInfoWidgetsFactory {
 						int textDy = 0;
 						String text = null;
 						if(alarm.getType() == AlarmInfoType.SPEED_LIMIT) {
-							text = alarm.getIntValue() +"";
 							if(settings.DRIVING_REGION.get().americanSigns){
 								locimgId = R.drawable.warnings_speed_limit_us;
 								textDy = (int) (-12 * scaleCoefficient);
+							//else case is done by drawing red ring
 							}
+							text = alarm.getIntValue() +"";
 						} else if(alarm.getType() == AlarmInfoType.SPEED_CAMERA) {
 							locimgId = R.drawable.warnings_speed_camera;
 							text = "";
 						} else if(alarm.getType() == AlarmInfoType.BORDER_CONTROL) {
 							locimgId = R.drawable.warnings_border_control;
 							text = "";
-							//text = "CLO";
 						} else if(alarm.getType() == AlarmInfoType.TOLL_BOOTH) {
+							//image done by drawing red ring
 							text = "$";
 						} else if(alarm.getType() == AlarmInfoType.TRAFFIC_CALMING) {
-							locimgId = R.drawable.warnings_traffic_calming;
+							if(settings.DRIVING_REGION.get().americanSigns){
+								locimgId = R.drawable.warnings_traffic_calming_us;
+							} else {
+								locimgId = R.drawable.warnings_traffic_calming;
+							}
 							text = "";
 						} else if(alarm.getType() == AlarmInfoType.STOP) {
 							locimgId = R.drawable.warnings_stop;
 							text = "";
-							//text = "STOP";
+						} else if(alarm.getType() == AlarmInfoType.RAILWAY) {
+							if(settings.DRIVING_REGION.get().americanSigns){
+								locimgId = R.drawable.warnings_railways_us;
+							} else {
+								locimgId = R.drawable.warnings_railways;
+							}
+							text = "";
+						} else if(alarm.getType() == AlarmInfoType.PEDESTRIAN) {
+							if(settings.DRIVING_REGION.get().americanSigns){
+								locimgId = R.drawable.warnings_pedestrian_us;
+							} else {
+								locimgId = R.drawable.warnings_pedestrian;
+							}
+							text = "";
 						}
-						visible = (text != null &&  text.length() > 0) || locimgId != 0;
+						visible = (text != null &&  text.length() > 0) || (locimgId != 0);
 						if (visible) {
 							if (alarm.getType() == AlarmInfoType.SPEED_CAMERA) {
 								visible = cams;
+							} else if (alarm.getType() == AlarmInfoType.PEDESTRIAN) {
+								visible = peds;
 							} else {
 								visible = trafficWarnings;
 							}

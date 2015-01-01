@@ -65,7 +65,7 @@
         <string name="poi_newsagent_shop">Nyhedsbureau</string>
         <string name="poi_optician_shop">Optiker</string>
         <string name="poi_organic_shop">Økologiske fødevarer</string>
-        <string name="poi_outdoor_shop">Fritidsbeklædning</string>
+        <string name="poi_outdoor_shop">Friluftsudstyr</string>
         <string name="poi_paint_shop">Malerværksted</string>
         <string name="poi_pet_shop">Dyrehandel</string>
         <string name="poi_radiotechnics_shop">Radiodele</string>
@@ -205,12 +205,12 @@
 
         <string name="poi_recycling">Genbrugsplads</string>
         <string name="poi_landfill">Losseplads</string>
-        <string name="poi_waste_disposal">Bortskaffelse af affald</string>
+        <string name="poi_waste_disposal">Affaldshåndtering</string>
         <string name="poi_waste_basket">Skraldespand</string>
 
         <string name="poi_surveillance">Overvågning</string>
         <string name="poi_construction">Byggeri</string>
-        <string name="poi_works">Værker</string>
+        <string name="poi_works">Fabrik</string>
         <string name="poi_mineshaft">Mineskakt</string>
         <string name="poi_adit">Stoll</string>
         <string name="poi_petroleum_well">Oliebrønd</string>
@@ -231,7 +231,7 @@
         <string name="poi_social_facility">Socialinstitution</string>
         <string name="poi_courthouse">Retsbygning</string>
         <string name="poi_prison">Fængsel</string>
-        <string name="poi_register_office">Civilregistrering</string>
+        <string name="poi_register_office">Borgerservice</string>
         <string name="poi_embassy">Ambassade</string>
         <string name="poi_government">Regering</string>
         <string name="poi_bailiff">Foged</string>
@@ -500,7 +500,7 @@
         <string name="poi_tinsmith">Blikkenslager</string>
         <string name="poi_upholsterer">Møbelpolstrer</string>
         <string name="poi_watchmaker">Urmager</string>
-        <string name="poi_window_construction">Vinduer</string>
+        <string name="poi_window_construction">Vinduefremstilling</string>
 
         <string name="poi_funeral_directors">Bedemand</string>
         <string name="poi_computer_craft">Computerværksted</string>
@@ -552,32 +552,32 @@
         <string name="poi_seamark_anchorage">Ankringsområde</string>
         <string name="poi_seamark_anchor_berth">Ankerplads</string>
         <string name="poi_seamark_beacon">Båke</string>
-        <string name="poi_seamark_beacon_cardinal">Kardinal båke</string>
-        <string name="poi_seamark_beacon_lateral">Lateral båke</string>
-        <string name="poi_seamark_beacon_safe_water">Sikkervand båke</string>
-        <string name="poi_seamark_beacon_special_purpose">Speciel formål båke</string>
+        <string name="poi_seamark_beacon_cardinal">Kompasbåke</string>
+        <string name="poi_seamark_beacon_lateral">Sidebåke</string>
+        <string name="poi_seamark_beacon_safe_water">Midtfarvandsbåke</string>
+        <string name="poi_seamark_beacon_special_purpose">Specialbåke</string>
         <string name="poi_seamark_berth">Kajplads</string>
         <string name="poi_seamark_building">Sømærke bygning</string>
         <string name="poi_seamark_bridge">Sømærke bro</string>
-        <string name="poi_seamark_buoy_cardinal">Kardinal tønde</string>
+        <string name="poi_seamark_buoy_cardinal">Kompastønde</string>
         <string name="poi_seamark_buoy_installation">Installation tønde</string>
         <string name="poi_seamark_buoy_isolated_danger">Tønde, isoleret fare</string>
-        <string name="poi_seamark_buoy_lateral">Lateral tønde</string>
-        <string name="poi_seamark_buoy_safe_water">Sikkervand tønde</string>
-        <string name="poi_seamark_buoy_special_purpose">Speciel formål tønde</string>
+        <string name="poi_seamark_buoy_lateral">Sidetønde</string>
+        <string name="poi_seamark_buoy_safe_water">Midtfarvandstønde</string>
+        <string name="poi_seamark_buoy_special_purpose">Specialtønde</string>
         <string name="poi_seamark_daymark">Dagmærke</string>
         <string name="poi_seamark_distance_mark">Distance mærke</string>
-        <string name="poi_seamark_dry_dock">Tørdock</string>
+        <string name="poi_seamark_dry_dock">Tørdok</string>
         <string name="poi_seamark_dyke">Dige</string>
         <string name="poi_seamark_floating_dock">Flydedok</string>
         <string name="poi_seamark_fog_signal">Tågesignal</string>
         <string name="poi_seamark_harbour_basin">Havnebasin</string>
         <string name="poi_seamark_harbour">Havn</string>
         <string name="poi_seamark_landmark">Vartegn</string>
-        <string name="poi_seamark_light">Lys, sømærke</string>
-        <string name="poi_seamark_light_major">Stor lys, sømærke</string>
-        <string name="poi_seamark_light_minor">Mindre lys, sømærke</string>
-        <string name="poi_seamark_light_float">Flydelys, sømærke</string>
+        <string name="poi_seamark_light">Fyr, sømærke</string>
+        <string name="poi_seamark_light_major">Større fyr, sømærke</string>
+        <string name="poi_seamark_light_minor">Mindre fyr, sømærke</string>
+        <string name="poi_seamark_light_float">Flydefyr, sømærke</string>
         <string name="poi_seamark_light_vessel">Fartøjslys, sømærke</string>
         <string name="poi_seamark_mooring">Fortøjning</string>
         <string name="poi_seamark_notice">Varsel, sømærke</string>
@@ -647,4 +647,16 @@
 	<string name="poi_cannon">Historisk kanon</string>
 	<string name="poi_harbour">Havn</string>
 	<string name="poi_dock">Dok</string>
+	<string name="poi_amusement_ride">Forlystelse</string>
+	<string name="poi_attraction_animal">Dyr (attraktion)</string>
+	<string name="poi_ferris_wheel">Pariserhjul</string>
+	<string name="poi_carousel">Karrusel</string>
+	<string name="poi_maze">Labyrint</string>
+	<string name="poi_roller_coaster">Rutschebane</string>
+	<string name="poi_slide">Rutsjebane, legeplads</string>
+	<string name="poi_summer_toboggan">Sommer kælkning</string>
+	<string name="poi_swing_carousel">Gynge karrusel</string>
+	<string name="poi_attraction_train">Tog (attraktion)</string>
+	<string name="poi_water_slide">Vandrutsjebane</string>
+
 	</resources>

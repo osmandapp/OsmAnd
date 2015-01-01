@@ -12,6 +12,8 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.RotatedTileBox.RotatedTileBoxBuilder;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -274,6 +276,9 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		final Button simulateRoute = (Button) mainView.findViewById(R.id.SimulateRoute);
 		final OsmAndLocationProvider loc = ctx.getLocationProvider();
 		if(mapActivity.getRoutingHelper().isFollowingMode()) {
+			simulateRoute.setVisibility(View.GONE);
+		}
+		if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) == null) {
 			simulateRoute.setVisibility(View.GONE);
 		}
 		simulateRoute.setText(loc.getLocationSimulation().isRouteAnimating() ? R.string.animate_route_off : R.string.animate_route);

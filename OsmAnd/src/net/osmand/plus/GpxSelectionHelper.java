@@ -31,7 +31,7 @@ public class GpxSelectionHelper {
 	// save into settings
 //	public final CommonPreference<Boolean> SHOW_CURRENT_GPX_TRACK = 
 //			new BooleanPreference("show_current_gpx_track", false).makeGlobal().cache();
-	private List<SelectedGpxFile> selectedGPXFiles = new java.util.concurrent.CopyOnWriteArrayList<SelectedGpxFile>();
+	private List<SelectedGpxFile> selectedGPXFiles = new java.util.ArrayList<SelectedGpxFile>();
 	private SavingTrackHelper savingTrackHelper;
 	private Map<Class<?>, Runnable> uiListeners = new LinkedHashMap<Class<?>, Runnable>();
 

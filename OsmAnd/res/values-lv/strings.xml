@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu (varētu būt nepieciešams OsmAnd restarts)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus funkcijas un uzstādījumus kā piemēram sekošana, enerģijas taupīšana, pieejamība un daudzas citas</string>
@@ -346,12 +346,11 @@
   <string name="tip_app_mode">Lietotāja profils</string>
   
   <string name="tip_navigation">Navigācija</string>
-  <string name="tip_navigation_t">Pirms sākt navigāciju, jums jāizvēlas galapunkts, tad nospiediet \'Izvēlne\' -&gt; \'Navigācija\' uz kartes un izvēlieties navigācijas veidu.
-		\n\nGalapunkts ir atzīmēts uz kartes kā oranžs punkts un OsmAnd rāda attālumu līdz tam and norādes.
-		\n\nJūs varat izvēlēties "sākt navigāciju", kas dos jums balss instrukcijas vai "rādīt maršrutu" bez vadības.
-		\n\nLai parādītu maršrutu no jebkura punkta uz jūsu pašreizējo atrašanās vietu, iezīmejiet punktu uz kartes un izvēlieties "norādes uz...".
-		\n\nJa lietosiet "norādes uz..." kopā ar "sākt navigāciju", OsmAnd pārslēgsies uz jūsu pašreizējo ātrašanās vietu, tiklīdz tā būs noteikta, kamēr "norādes uz..." kopā ar "rādīt maršrutu" tikai parādīs maršrutu no jebkura punkta, jūs esat izvēlējies, bez automātiskas kartes atjauinošanās.
-	</string>
+  <string name="tip_navigation_t">"Pirms sākt navigāciju, jums jāizvēlas galapunkts, tad nospiediet \'Izvēlne\' -&gt; \'Navigācija\' un izvēlieties navigācijas veidu.
+\n\nGalapunkts ir atzīmēts kā oranžs punkts uz kartes, līdz kuram OsmAnd rāda attālumu un norādes.
+\n\nJūs varat izvēlēties sākt navigāciju, kas dos jums balss instrukcijas vai rādīt maršrutu bez vadības.
+\n\nLai parādītu maršrutu no jebkura punkta uz jūsu pašreizējo atrašanās vietu, iezīmējiet punktu uz kartes un izvēlieties norādes uz....
+\n\nJa lietosiet norādes uz... kopā ar sākt navigāciju, OsmAnd pārslēgsies uz jūsu pašreizējo atrašanās vietu, tiklīdz tā būs noteikta, kamēr norādes uz... kopā ar rādīt maršrutu tikai parādīs maršrutu no jebkura punkta, ko jūs esat izvēlējies, bez automātiskas kartes atjaunošanās. "</string>
   <string name="tip_search">Meklē</string>
   <string name="tip_search_t">\tJūs variet meklēt vietas tieši kartē, pēc adreses, atrašanās vietas, kā POI, vai arī kā iepriekš definētu izlases punktu.
 \n\tNospiežot galvenajā izvēlnē \'Meklēt\' atver meklēšanas logu. Katram atrastajam ierakstam tiek piedāvātas divas iespējas: \'Izvēlēties kā galamērķi\' vai \'Rādīt kartē\'.</string>
@@ -1027,7 +1026,7 @@
 	<string name="day_night_info_description">Saullēkts: %1$s\nSaulriets: %2$s</string>
 	<string name="day_night_info">Dienas/nakts info</string>
 	<string name="map_widget_day_night">Dienas/nakts karte</string>
-	<string name="map_widget_vector_attributes">Renderēšanas attribūti:</string>
+	<string name="map_widget_vector_attributes">Renderēšanas attribūti</string>
 	<string name="map_widget_renderer">Renderēšananas veids</string>
 	<string name="int_continuosly">Nepārtraukti</string>
 	<string name="map_widget_show_destination_arrow">Rādīt mērķa virzienu</string>
@@ -1464,7 +1463,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="android_19_location_disabled">Pēc KitKat jauninājuma vecā karšu krātuve (%s) vairs nav pieejama. Vai vēlaties to nomainīt uz pieejamu vietu un pārkopēt visus failus?
 …………\n Piezīme: vecie faili netiks aiztikti.
 …………\n Piezīme: nebūs iespējams koplietot failus starp OsmAnd un OsmAnd+. </string>
-    <string name="application_dir_change_warning2">OsmAnd var mēģināt pārsūtīt failus uz jauno vietu. Vai vēlaties to darīt?</string>
+    <string name="application_dir_change_warning2">Vai kopēt OsmAnd datus uz jauno vietu? Nospiežot \'Nē\', OsmAnd izveidos jaunu datu mapi.</string>
     <string name="copying_osmand_one_file_descr">Kopē (%s) failu uz jauno vietu...</string>
     <string name="copying_osmand_files_descr">Kopē OsmAnd failus uz jauno vietu (%s)</string>
     <string name="copying_osmand_files">Kopē OsmAnd failus</string>
@@ -1803,7 +1802,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_specify_tracker_id">Lūdzu norādiet id</string>
     <string name="continue_navigation">Turpināt navigāciju</string>
     <string name="pause_navigation">Nopauzēt navigāciju</string>
-    <string name="rendering_attr_subwayMode_name">Tuneļu režīms</string>
+    <string name="rendering_attr_subwayMode_name">Metro maršruti</string>
  	<string name="keep_navigation_service">Paturēt</string>
 	<string name="gps_wake_up_timer">GPS pamošanās intervāls</string>
 	<string name="local_map_names">Vietējie nosaukumi</string>
@@ -1843,4 +1842,88 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="local_index_unselect_gpx_file">Neatzīmēt</string>
     <string name="local_index_select_gpx_file">Atzīmēt rādīšanai</string>
     <string name="visible_element">Rādīt uz kartes</string>
-    </resources>
+    <string name="rendering_value_default_name">Noklusētais</string>
+    <string name="rendering_value_orange_name">Oranžs</string>
+    <string name="rendering_value_germanRoadAtlas_name">Vāciešu ceļu karte</string>
+	<string name="traffic_warning_railways">Dzelzceļš</string>
+	<string name="traffic_warning_pedestrian">Gājēju ceļš</string>
+	<string name="show_railway_warnings">Rādīt dzelzceļa pārejas</string>
+	<string name="show_pedestrian_warnings">Rādīt gājēju pārejas</string>
+    <string name="rendering_value_americanRoadAtlas_name">Amerikāņu ceļu karte</string>
+    <string name="routing_attr_no_new_routing_name">Ne v1.9 maršruta nosacījumi</string>
+    <string name="routing_attr_no_new_routing_description">Nelietot jaunos maršruta nosacījumus, kas atrodami 1.9 versijā</string>
+    <string name="dash_download_msg_none">Vai lejupielādēt kartes telefonā?</string>
+    <string name="dash_download_msg">Lejupielādēti %1$s no kartēm</string>
+    <string name="dash_download_new_one">Lejupielādēt jaunu karti</string>
+    <string name="dash_download_manage">Pārvaldīt</string>
+    <string name="map_locale">Kartes valoda</string>
+    <string name="rendering_attr_transportStops_name">Sabiedriskā transporta pieturas</string>
+    <string name="navigate_point_zone">Zona</string>
+    <string name="navigate_point_northing">Ziemeļvirziens</string>
+    <string name="navigate_point_easting">Austrumvirziens</string>
+    <string name="download_tab_downloads">Visas lejupielādes</string>
+    <string name="download_tab_updates">Atjauninājumi</string>
+    <string name="download_tab_local">Vietējie</string>
+	<string name="no_internet_connection">Lejupielāde neizdevās, lūdzu pārbaudiet interneta savienojumu.</string>
+    <string name="dismiss">Atcelt</string>
+    <string name="everything_up_to_date">Visi faili ir atjaunoti</string>
+    <string name="use_opengl_render">Lietot OpenGL renderēšanu</string>
+    <string name="use_opengl_render_descr">Lietot iebūvēto paātrināto OpenGL renderēšanu (jābūt saderīgai ierīcei)</string>
+    <string name="error_avoid_specific_road">Apvedceļš nav atrasts</string>
+    <string name="home_button">Mājas</string>
+    <string name="osmo_use_https_descr">Lietot drošo savienojumu ar serveri</string>
+    <string name="osmo_use_https">Lietot HTTPS</string>
+	<string name="advanced_settings">Papildus</string>
+	<string name="map_update">Ir pieejami atjauninājumi %1$s kartēm</string>
+	<string name="search_for">Ko meklēt</string>
+	<string name="show_map">Rādīt karti</string>
+	<string name="show_all">Rādīt visu</string>
+	<string name="coordinates">Koordinātas</string>
+	<string name="rendering_attr_publicTransportMode_name">Autobusu, mikroautobusu un trolejbusu maršruti</string>
+	<string name="rendering_attr_tramTrainRoutes_name">Tramvaju un vilcienu maršruti</string>
+	<string name="lock_screen_request_explanation">%1$s ir nepieciešama šī atļauja, lai izslēgtu ekrānu enerģijas taupīšanai.</string>
+    <string name="wake_on_voice">Ieslēgt ekrānu</string>
+    <string name="wake_on_voice_descr">Ieslēgt ekrānu, kad tuvojas pagrieziens</string>
+    <string name="wake_on_voice_never">Nekad</string>
+    <string name="select_impassable_road">Arzīmēt kartē</string>
+    <string name="impassable_road">Izvairīties no ceļiem…</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Vilciena maršruti</string>
+    <string name="rendering_attr_tramRoutes_name">Tramvaja maršruti</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">"Kopīgot  taksometru maršrutus"</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Trolejbusu maršruti</string>
+    <string name="rendering_attr_busRoutes_name">Autobusu maršruti</string>
+    <string name="rendering_category_hide">Paslēpt</string>
+    <string name="rendering_category_routes">Maršruti</string>
+    <string name="rendering_category_details">Detaļas</string>
+    <string name="rendering_category_transport">Transports</string>
+    <string name="rendering_category_others">Citi kartes atribūti</string>
+    <string name="map_widget_appearance_rem">Atlikušie elementi</string>
+    <string name="map_widget_top">Statusa josla</string>
+	<string name="map_widget_right">Labais panelis</string>
+	<string name="map_widget_left">Kreisais panelis</string>
+    <string name="layers_category_show">Rādīt</string>
+	<string name="configure_map">Konfigurēt karti</string>
+    <string name="osmo_device_not_found">Ierīce nav atrasta</string>
+    <string name="anonymous_user">Anonīms lietotājs</string>
+    <string name="anonymous_user_hint">Anonīms lietotājs nevar pārvaldīt grupas.</string>
+    <string name="osmo_no_connection_msg">OsMo serviss nav pieejams, pārbaudiet interneta savienojumu un uzstādījumus, vairāk Twitter vietnē: https://twitter.com/OsMomobi</string>
+    <string name="logged_as">Pievienojies kā %1$s</string>
+	<string name="speed_limit_exceed">Braukšanas ātruma pieļaujamās robežas</string>
+	<string name="speed_limit_exceed_message">Pārsniedzot noteikto robežu, saņemsiet balss brīdinājumu.</string>
+	<string name="fav_point_emoticons_message">Izlases vietas vārds tika pārdēvēts uz %1$s, lai varētu saglabāt kopu ar sejiņām failā.</string>
+    <string name="print_route">Printēt maršrutu</string>
+    <string name="fav_point_dublicate">Šāds vārds izlasē jau eksistē</string>
+    <string name="fav_point_dublicate_message">Mēs pārdēvējām izlases vietas vārdu uz %1$s, lai izvairītos no vienādiem vārdiem.</string>
+    <string name="text_size_descr">Teksta lielums uz kartes.</string>
+    <string name="text_size">Teksta lielums</string>
+    <string name="traffic_warning_speed_limit">Ātruma robeža</string>
+    <string name="traffic_warning_border_control">Robežkontrole</string>
+    <string name="traffic_warning_payment">Nodevu stends</string>
+    <string name="traffic_warning_stop">STOP zīme</string>
+    <string name="traffic_warning_calming">Satiksmes intensitāte</string>
+    <string name="traffic_warning_speed_camera">Fotoradars</string>
+    <string name="traffic_warning">Satiksmes brīdinājums</string>
+	<string name="speak_favorites">Ziņot tuvumā esošas izlases vietas</string>
+	<string name="speak_poi">Ziņot tuvumā esošus POI</string>
+	<string name="way_alarms">Satiksmes brīdinājumi</string>
+	</resources>

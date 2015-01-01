@@ -53,7 +53,7 @@
 	<string name="poi_mobile_phone_shop">Botiga de telèfons mòbils</string>
 	<string name="poi_motorcycle_shop">Botiga de motocicletes</string>
 	<string name="poi_musical_instrument_shop">Instruments musicals</string>
-	<string name="poi_newsagent_shop">Agència de notícies</string>
+	<string name="poi_newsagent_shop">Premsa</string>
 	<string name="poi_second_hand">Botiga de segona mà</string>
 	<string name="poi_electronics_shop">Botiga d\'electrodomèstics</string>
 	<string name="poi_police">Policia</string>
@@ -66,7 +66,7 @@
 	<string name="poi_mountain_pass">Port de muntanya</string>
 	<string name="poi_city_wall">Muralla</string>
 	<string name="poi_vehicle_inspection">Inspecció de vehicles</string>
-	<string name="poi_military_nuclear_explosion_site">Centre d\'explosió nuclear</string>
+	<string name="poi_military_nuclear_explosion_site">Lloc d\'explosió nuclear</string>
 <string name="poi_military_range">Camp d\'instrucció</string>
 	<string name="poi_military_naval_base">Base naval militar</string>
 	<string name="poi_military">Zona militar</string>
@@ -82,4 +82,40 @@
 	<string name="poi_ticket_shop">Taquilla</string>
 	<string name="poi_seamark_harbour">Port</string>
 	<string name="poi_seamark_fog_signal">Botzina de boira</string>
+	<string name="poi_cosmetics_shop">Cosmètica</string>
+	<string name="poi_marketplace">Mercat</string>
+	<string name="poi_sewing_shop">Merceria</string>
+
+	<string name="poi_ses_station">Estació de protecció civil</string>
+	<string name="poi_ford">Gual</string>
+	<string name="poi_lift_gate">Tanca llevadissa</string>
+	<string name="poi_border_control">Punt de control duaner</string>
+	<string name="poi_traffic_calming_bump">Banda reductora</string>
+	<string name="poi_traffic_calming_hump">Ressalt</string>
+	<string name="poi_traffic_calming_cushion">Coixí berlinès</string>
+	<string name="poi_traffic_calming_chicane">Xicana</string>
+	<string name="poi_traffic_calming_rumble_strip">Banda rugosa</string>
+	<string name="poi_traffic_calming_table">Plataforma</string>
+	<string name="poi_traffic_signals">Semàfor</string>
+
+	<string name="poi_service_tyres">Pneumàtics</string>
+	<string name="poi_parking">Aparcament</string>
+	<string name="poi_motorcycle_parking">Aparcament per a motocicletes</string>
+	<string name="poi_parking_entrance">Entrada d\'aparcament</string>
+	<string name="poi_garages">Garatges</string>
+
+	<string name="poi_public_transport_platform_bus">Parada d\'autobús</string>
+	<string name="poi_public_transport_platform_trolleybus">Parada de troleibús</string>
+	<string name="poi_bus_stop">Parada d\'autobús (obsolet)</string>
+	<string name="poi_public_transport_platform_tram">Parada de tramvia</string>
+	<string name="poi_tram_stop">Parada de tramvia (obsolet)</string>
+	<string name="poi_public_transport_station">Estació de transport públic</string>
+	<string name="poi_mine_historic">Mina històrica</string>
+	<string name="poi_gate">Porta</string>
+	<string name="poi_tobacco_shop">Venda de tabac</string>
+	<string name="poi_carpet_shop">Botiga de catifes</string>
+	<string name="poi_clothes_shop">Magatzem de roba</string>
+	<string name="poi_children_clothes_shop">Roba infantil</string>
+	<string name="poi_curtain_shop">Pelleteria</string>
+	<string name="poi_fabric_shop">Botiga de teixits</string>
 	</resources>

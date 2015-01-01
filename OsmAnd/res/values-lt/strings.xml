@@ -338,10 +338,10 @@
   <string name="search_position_address">Adresas…</string>
   <string name="search_position_favorites">Įsimintos…</string>
   <string name="search_position_undefined">Nenurodyta</string>
-  <string name="search_position_fixed">Fiksuota</string>
+  <string name="search_position_fixed"/>
   <string name="search_position_current_location">Esama vieta…</string>
   <string name="search_position_map_view">Paskutinė žiūrėta žemėlapio vieta</string>
-  <string name="select_search_position">Ieškoti šalia :</string>
+  <string name="select_search_position">Kilmė:</string>
   <string name="context_menu_item_search">Ieškoti netoliese nuo čia</string>
   <string name="tip_recent_changes_0_6_7_t">Pakeitimai 0.6.7 versijoje : 
 		\n\t- Parsiųstų duomenų valdymas (parsiųsti, ištrinti, aktyvuoti / deaktyvuoti parsiųstus duomenis tiesiogiai OsmAnd programoje) 
@@ -580,7 +580,7 @@
   <string name="select_build_to_install">Įdiegimui pasirinkite vieną iš OsmAnd versijų</string>
   <string name="contribution_activity">Specialūs veiksmai tobulinamai versijai</string>
   <string name="gps_status_app_not_found">GPS statuso programa neįdiegta. Ieškoti Parduotuvėje?</string>
-  <string name="voice_is_not_available_msg">Balso nurodymai neprieinami. Eikite į nustatymus, išsirinkite pageidaujamą kalbos paketą ir jį parsisiųskite.</string>
+  <string name="voice_is_not_available_msg">Balso nurodymai neprieinami. Eikite į Nustatymus→Bendra→Balso pranešimai, pasirinkite arba parsisiųskite pageidaujamą kalbos paketą .</string>
   <string name="voice_is_not_available_title">Balso nurodymai nepasirinkti</string>
   <string name="daynight_mode_day">Diena</string>
   <string name="daynight_mode_night">Naktis</string>
@@ -1283,7 +1283,7 @@
     <string name="cancel_route">Atšaukti maršrutą</string>
     <string name="cancel_navigation">Stabdyti navigaciją</string>
     <string name="clear_destination">Išvalyti tikslą</string>
-    <string name="download_using_mobile_internet">Šiuo metu WiFi neprijungta. Ar norite tęsti siuntimąsį dabartiniu interneto ryšiu?</string>
+    <string name="download_using_mobile_internet">Šiuo metu Wi-Fi neprijungta. Ar norite tęsti siuntimąsį dabartiniu interneto ryšiu?</string>
     <string name="use_magnetic_sensor_descr">Maudoti magnetinį sensorių naudoti vietoje pokrypio sensoriaus kompaso reikšmei nustatyti</string>
     <string name="use_magnetic_sensor">Naudoti magnetinį sensorių (kompasą)</string>
     <string name="use_kalman_filter_compass_descr">Naudoti Kalmano fltrą kompaso parodymų išlyginimui</string>
@@ -1472,7 +1472,7 @@
 \n Pastaba: Seni failai išliks kur buvę (galima bus ištrinti rankiniu būdu).
 \n Pastaba: dalintis tais pačiais failais tarp OsmAnd ir OsmAnd+ nebus galima.</string>
     <string name="application_dir_change_warning2">Ar norite, kad OsmAnd perkeltų duomenis ir į naują saugyklą? Pasirinkite \"Ne\", jei norite, kad OsmAnd tik sukurtų ir naudotų naują folderį.</string>
-    <string name="copying_osmand_one_file_descr">Kopijuojami failai (%/s) į naują saugojimo vietą...</string>
+    <string name="copying_osmand_one_file_descr">Kopijuojami failai (%/s) į naują saugojimo vietą…</string>
     <string name="copying_osmand_files_descr">OsmAnd failai kopijuojami į naują vietą (%/s)</string>
     <string name="copying_osmand_files">Kopijuojami OsmAnd failai</string>
     <string name="keep_and_add_destination_point">Įtraukti kaip kelionės tikslą</string>
@@ -1586,7 +1586,7 @@
     <string name="osmo_tracker_id_descr">Paspauskite peržiūrėti ar bendrinti sekiklio ID. 
         Naudodami sekiklio ID prijungti prietaisai galės stebėti visą šio įrenginio judėjimą! Norėdami atjungti pasirinkite Regeneravimo nustatymą.</string>
     <string name="osmo_session_token">Sesijos žymė: %1$s</string>
-    <string name="osmo_auth_pending">Laukiama autorizavimo...</string>
+    <string name="osmo_auth_pending">Laukiama autorizavimo…</string>
     <string name="osmo_locations_sent">Buvimo vieta išsiųsta %1$d (talpykloje %2$d) </string>
     <string name="osmo_conn_successfull">Prisijungta sėkmingai: %1$s </string>
     <string name="tip_recent_changes_1_8_alpha">"Pakeitimai 1.8 versijoje: * Apskaičiouti maršrutą tarp GPX failo taškų * Pakeistas šalių sąrašo išdėstymas žemėlapių parsiuntimui (palaikoma vietovardžių paieška) * Palaiko GPX/KML importavimą (konvertuoja KML į GPX) * GPX maršrutai perkelti į \'Mano duomenys\' * GPX maršrutus galima padalinti į kelias dalis pagal atstumą ir patikrinti altitudės skirtumus ir greitį * Automatiškai pradėti navigaciją su uždelsimu "</string>
@@ -1754,7 +1754,7 @@
 	<string name="rendering_attr_alpineHiking_description">Užkrauti kelius pagal SAC skalę</string>
     <string name="rendering_attr_osmcTraces_description">Užkrauti kelius pagal OSMC pėdsakus</string>
     
-	<string name="osmo_invite">Pakvietimas...</string>
+	<string name="osmo_invite">Pakvietimas…</string>
     <string name="osmo_leave_confirmation_msg">Ar norite atsijungti nuo grupės %1$s?</string>
     <string name="osmo_specify_tracker_id">Prašome nurodyti id</string>
     <string name="arrival_distance_factor_early">Anksti</string>
@@ -1854,7 +1854,7 @@
     <string name="use_opengl_render">Naudoti OpenGL vaizdavimą</string>
     <string name="use_opengl_render_descr">Naudoti aparatinį OpenGL vaizdavimą (gali neveikti kai kurioje įrangoje)</string>
     <string name="everything_up_to_date">Viskas atnaujinta</string>
-    <string name="no_internet_connection">Parsisiųsti nepavyko. Prašome prisijungti prie Wi-Fi, jei norite tęsti.</string>
+    <string name="no_internet_connection">Parsisiųsti nepavyko. Prašome patikrinti, ar prisijungėte prie interneto.</string>
     <string name="map_locale">Žemėlapio kalba</string>
     <string name="rendering_attr_transportStops_name">Transporto stotelės</string>
     <string name="navigate_point_zone">Zona</string>
@@ -1876,5 +1876,10 @@
     <string name="routing_attr_no_new_routing_description">Nenaudoti 1.9 versijos maršrutizavimo</string>
     <string name="dash_download_msg_none">Ar norite atsisiųsti bet kurį žemėlapį naudojimui be interneto?</string>
     <string name="dismiss">Nesiųsti</string>
-    <string name="traffic_warning_railways">Geležinkeliai</string>
+    <string name="traffic_warning_railways">Geležinkelio pervaža</string>
+	<string name="traffic_waring_pedestrian">Pėstieji</string>
+	<string name="show_railway_warnings">Rodyti geležinkelių pervažas</string>
+	<string name="show_pedestrian_warnings">Rodyti pėsčiųjų perėjas</string>
+    <string name="speak_pedestrian">Pranešti apie perėjas</string>
+    <string name="traffic_warning_pedestrian">Pėčiųjų perėja</string>
 	</resources>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -610,12 +610,11 @@
 	<string name="search_position_current_location_search">Standort wird ermittelt…</string>
 	<string name="search_position_current_location_found">Standort (gefunden)</string>
 	<string name="search_position_address">Adresse…</string>
-	<string name="search_position_favorites">Favoriten…</string>
+	<string name="search_position_favorites">Favorit…</string>
 	<string name="search_position_undefined">Undefiniert</string>
-	<string name="search_position_fixed">Festgelegt</string>
 	<string name="search_position_current_location">Aktueller Standort…</string>
 	<string name="search_position_map_view">Letzte Kartenposition</string>
-	<string name="select_search_position">Suchen in der Nähe von:</string>
+	<string name="select_search_position">Ausgangspunkt:</string>
 	<string name="context_menu_item_search">In der Nähe suchen</string>
 	<string name="save_route_dialog_title">Route als GPX-Track speichern</string>
 	<string name="route_successfully_saved_at">Route erfolgreich gespeichert als \'%1$s\'.</string>
@@ -702,7 +701,7 @@
 	<string name="map_overlay_descr">Wähle Overlay-Karte</string>
 	<string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert</string>
 	<string name="select_tile_source_to_install">Kartenauswahl (Installation oder Aktualisierung)</string>
-	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
+	<string name="internet_not_available">Internet Verbindung erforderlich, aber nicht verfügbar!</string>
 	<string name="install_more">Weitere installieren…</string>
 	<string name="tip_update_index">Offline-Karten</string>
 	<string name="tip_update_index_t">Aktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und die Offline-Navigation. OsmAnd hat einen Karten-Manager für das Herunterladen oder Aktualisieren von Offline-Karten.
@@ -1488,7 +1487,6 @@
 	<string name="about_version">Version :</string>
 	<string name="about_settings">Über</string>
 	<string name="about_settings_descr">Versionsinfo, Lizenz, Projekt-Mitglieder</string>
-	<string name="tips_and_tricks">Hilfe</string>
 	<string name="local_index_tile_data_zooms">Zooms heruntergeladen: %1$s</string>
 	<string name="local_index_tile_data_expire">Gültigkeit endet in (Minuten): %1$s</string>
 	<string name="local_index_tile_data_downloadable">Herunterladbar: %1$s</string>
@@ -1540,10 +1538,10 @@
 \n Hinweis 1: Die ursprünglichen Dateien bleiben hiervon unberührt, können aber nachfolgend manuell gelöscht werden.
 \n Hinweis 2: Die Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden."</string>
 	<string name="application_dir_change_warning2">Soll OsmAnd auch die Dateien an den neuen Speicherort verschieben? Mit \'Nein\' wird OsmAnd den neuen Speicherort nur anlegen und als Standard verwenden.</string>
-	<string name="copying_osmand_one_file_descr">Kopieren der Datei (%s) an den neuen Speicherort…</string>
-	<string name="copying_osmand_files_descr">Kopieren der OsmAnd-Dateien zum neuen Speicherort (%s)</string>
-	<string name="copying_osmand_files">Kopiere OsmAnd-Dateien</string>
-	<string name="calculate_osmand_route_gpx">Berechne OsmAnd-Offline-Route</string>
+	<string name="copying_osmand_one_file_descr">Datei (%s) wird an den neuen Speicherort kopiert&#8230;</string>
+	<string name="copying_osmand_files_descr">OsmAnd-Dateien werden zum neuen Speicherort (%s) kopiert&#8230;</string>
+	<string name="copying_osmand_files">OsmAnd-Dateien werden kopiert&#8230;</string>
+	<string name="calculate_osmand_route_gpx">OsmAnd-Offline-Route berechnen</string>
 	<string name="app_mode_truck">LKW</string>
 	<string name="guidance_preferences_descr">Navigations-Einstellungen</string>
 	<string name="routing_preferences_descr">Einstellungen für Routenberechnung</string>
@@ -1565,7 +1563,7 @@
 	<string name="always_center_position_on_map">Position immer in Bildschirmmitte anzeigen</string>
 	<string name="voice_pref_title">Stimme</string>
 	<string name="misc_pref_title">Verschiedene</string>
-	<string name="share_route_as_gpx">Teilen der Route als GPX-Datei</string>
+	<string name="share_route_as_gpx">Route als GPX-Datei teilen</string>
 	<string name="share_route_subject">Route über OsmAnd teilen</string>
 	<string name="localization_pref_title">Ländereinstellungen</string>
 	<string name="interrupt_music">Musikwiedergabe unterbrechen</string>
@@ -1575,7 +1573,7 @@
 	<string name="use_points_as_intermediates">Route zwischen Punkten berechnen</string>
 	<string name="keep_informing_never">Niemals</string>
 	<string name="keep_informing_descr">Navigationsanweisungen in regelmäßigen Abständen wiederholen</string>
-	<string name="keep_informing">Wiederholen von Navigationsanweisungen</string>
+	<string name="keep_informing">Navigationsanweisungen wiederholen</string>
 	<string name="arrival_distance">Zielankündigung</string>
 	<string name="arrival_distance_descr">Wann soll die Ankunft am Ziel angekündigt werden?</string>
 	<string name="int_days">Tage</string>
@@ -1599,7 +1597,7 @@
 	<string name="visible_element">Auf Karte anzeigen</string>
 	<string name="show_zoom_buttons_navigation_descr">Zoom-Tasten bei Navigation anzeigen</string>
 	<string name="show_zoom_buttons_navigation">Zoom-Tasten anzeigen</string>
-	<string name="no_index_file_to_download">Download-Ziel nicht gefunden. Bitte Internet-Verbindung überprüfen.</string>
+	<string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internet-Verbindung überprüfen!</string>
 	<string name="none_selected_gpx">Keine GPX-Spur ausgewählt. Zum Auswählen auf eine Spur lange drücken.</string>
 	<string name="local_index_unselect_gpx_file">Deselektieren</string>
 	<string name="local_index_select_gpx_file">Zum Anzeigen auswählen</string>
@@ -1840,7 +1838,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungs-Einstellungen und des persönlichen Überwachungs-Kanals</string>
-	<string name="osmo_plugin_description">"Erweiterte OpenStreetMap-basierte Live-Überwachung, siehe http://osmo.mobi ... Ermöglicht die Positionsdarstellung in von einzelnen Geräten in Echtzeit. Bei anonym erstellten Gruppen sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff. "</string>
+	<string name="osmo_plugin_description">"Erweiterte OpenStreetMap-basierte Live-Überwachung, siehe http://osmo.mobi … Ermöglicht die Positionsdarstellung in von einzelnen Geräten in Echtzeit. Bei anonym erstellten Gruppen sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff."</string>
 	<string name="osmo_plugin_name">OsMo (Erweiterte Live-Überwachung)</string>
 	<string name="osmo_settings">OsMo OpenStreetMap-Überwachung</string>
 	<string name="osmo_io_error">OsMo Verbindungsproblem: </string>
@@ -1956,7 +1954,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="gpx_saved_sucessfully">GPX-Datei erfolgreich gespeichert unter {0}</string>
 	<string name="gpx_option_calculate_first_last_segment">Berechnen des ersten und letzten Abschnitts der OsmAnd-Route</string>
 <string name="download_additional_maps">Fehlende Karten herunterladen: %1$s (%2$d MB)?</string>
-    <string name="more">Mehr...</string>
+    <string name="more">Mehr…</string>
     <string name="osmo_specify_tracker_id">Bitte ID eingeben</string>
     <string name="home">Ausgangsposition</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, Trolleybus-, Sammeltaxi-Linien</string>
@@ -1985,9 +1983,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="anonymous_user">Anonymer Benutzer</string>
     <string name="logged_as">Angemeldet als %1$s</string>
 	<string name="anonymous_user_hint">Anonyme Benutzer können nicht:\n- Gruppen bilden;\n- Gruppen und Geräte mit dem Server synchronisieren;\n- Gruppen und Geräte im Privatbereich verwalten.</string>
-    <string name="rendering_category_routes">ÖPNV Linien</string>
+    <string name="rendering_category_routes">Routen</string>
     <string name="rendering_category_details">Details</string>
-    <string name="rendering_category_transport">ÖPNV Linien</string>
+    <string name="rendering_category_transport">ÖPNV-Linien</string>
     <string name="map_widget_appearance_rem">Verbleibende Elemente</string>
     <string name="map_widget_top">Statuszeile</string>
 	<string name="map_widget_right">Rechtes Panel</string>
@@ -2004,7 +2002,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="select_impassable_road">Auswählen auf der Karte</string>
     <string name="impassable_road">Straße blockieren…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Straßen- und Eisenbahnlinien</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Eisenbahn-Strecken</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Stadtbahnlinien</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Sammeltaxi-Linien</string>
     <string name="rendering_attr_trolleybusRoutes_name">Oberleitungsbuslinien</string>
     <string name="rendering_attr_busRoutes_name">Buslinien</string>
@@ -2014,40 +2012,39 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="home_button">Startbildschirm</string>
     <string name="osmo_use_https_descr">Sichere Server-Verbindung verwenden</string>
     <string name="osmo_use_https">HTTPS nutzen</string>
-    <string name="map_update">Aktualisierungen für %1$s Karten sind verfügbar</string>
+    <string name="map_update">Aktualisierungen für %1$s Karten verfügbar</string>
     <string name="search_for">Suchen nach</string>
     <string name="show_map">KARTE ZEIGEN</string>
     <string name="show_all">ALLES ZEIGEN</string>
     <string name="coordinates">Koordinaten</string>
-    <string name="error_avoid_specific_road">Nächstgelegene Straße konnte nicht gefunden werden</string>
+    <string name="error_avoid_specific_road">Es konnte keine alternative Streckenführung gefunden werden</string>
     <string name="dismiss">Ablehnen</string>
-    <string name="everything_up_to_date">Alles ist aktuell</string>
+    <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
-    <string name="use_opengl_render_descr">Hardware beschleunigte OpenGL-Renderung verwenden (Funktioniert nicht auf allen Geräten)</string>
-    <string name="no_internet_connection">Herunterladen nicht möglich. Zum Fortsetzen mit WLAN verbinden!</string>
+    <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (Funktioniert nicht auf allen Geräten)</string>
+    <string name="no_internet_connection">Herunterladen nicht möglich. Internet-Verbindung prüfen!</string>
     <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
-    <string name="wake_on_voice">Bildschirm aktivieren</string>
-    <string name="wake_on_voice_descr">Bei Annäherung einer Richtungsänderung den Bildschirm einschalten</string>
     <string name="map_locale">Beschriftungssprache</string>
-    <string name="rendering_attr_transportStops_name">ÖPNV Haltestellen</string>
+    <string name="rendering_attr_transportStops_name">ÖPNV-Haltestellen</string>
     <string name="navigate_point_zone">Zone</string>
-    <string name="navigate_point_northing">Nordwert</string>
-    <string name="navigate_point_easting">Ostwert</string>
+    <string name="navigate_point_northing">Nord-/Hochwert</string>
+    <string name="navigate_point_easting">Ost-/Rechtswert</string>
     <string name="dash_download_msg_none">Möchten Sie Offline-Karten herunterladen?</string>
-    <string name="dash_download_msg">%1$s Karten bereits heruntergeladen</string>
+    <string name="dash_download_msg">%1$s heruntergeladene Karten</string>
     <string name="dash_download_new_one">Neue Karte herunterladen</string>
     <string name="dash_download_manage">Karten verwalten</string>
-    <string name="rendering_attr_roadStyle_name">Straßen-Stil</string>
-    <string name="rendering_value_default_name">Default</string>
+    <string name="rendering_attr_roadStyle_name">Straßen-Darstellung</string>
+    <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">Deutscher Straßenatlas</string>
-	<string name="traffic_warning_railways">Eisenbahnen</string>
-	<string name="traffic_waring_pedestrian">Fußgänger</string>
-	<string name="show_railway_warnings">Zeige Eisenbahn-Warnungen</string>
-	<string name="show_pedestrian_warnings">Zeige Warnungen für Fußgänger</string>
-    <string name="rendering_value_americanRoadAtlas_name">Amerikanischer Straßenaltlas</string>
+    <string name="traffic_warning_railways">Bahnübergang</string>
+    <string name="traffic_warning_pedestrian">Fußgängerübergang</string>
+    <string name="show_railway_warnings">Eisenbahnübergänge anzeigen</string>
+    <string name="show_pedestrian_warnings">Fußgängerübergänge anzeigen</string>
+    <string name="rendering_value_americanRoadAtlas_name">Amerikanischer Straßenatlas</string>
     <string name="routing_attr_no_new_routing_name">Routing v1.9 nicht verwenden</string>
-    <string name="routing_attr_no_new_routing_description">Neue Routenberechnung nicht verwenden</string>
+    <string name="routing_attr_no_new_routing_description">Neuen Routenalgorithmus nicht verwenden</string>
+    <string name="speak_pedestrian">Fußgängerübergänge ankündigen</string>
     </resources>

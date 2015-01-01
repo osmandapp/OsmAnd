@@ -16,22 +16,9 @@ ifneq ($(filter mips,$(OSMAND_ARCHITECTURES_SET)),)
 endif
 ifneq ($(filter arm,$(OSMAND_ARCHITECTURES_SET)),)
     APP_ABI += armeabi armeabi-v7a
-    OSMAND_SKIP_NEON_SUPPORT := false
-    OSMAND_FORCE_NEON_SUPPORT := false
 else
     ifneq ($(filter armv7,$(OSMAND_ARCHITECTURES_SET)),)
         APP_ABI += armeabi-v7a
-        ifeq ($(filter armv7-neon,$(OSMAND_ARCHITECTURES_SET)),)
-            OSMAND_SKIP_NEON_SUPPORT := true
-        endif
-        OSMAND_FORCE_NEON_SUPPORT := false
-    endif
-    ifneq ($(filter armv7-neon,$(OSMAND_ARCHITECTURES_SET)),)
-        APP_ABI += armeabi-v7a
-        OSMAND_SKIP_NEON_SUPPORT := false
-        ifeq ($(filter armv7,$(OSMAND_ARCHITECTURES_SET)),)
-            OSMAND_FORCE_NEON_SUPPORT := true
-        endif
     endif
 endif
     

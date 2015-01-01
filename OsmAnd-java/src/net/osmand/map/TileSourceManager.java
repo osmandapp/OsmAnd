@@ -2,6 +2,7 @@ package net.osmand.map;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.PlatformUtil;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -214,6 +216,27 @@ public class TileSourceManager {
 
 		public String getRule() {
 			return rule;
+		}
+		
+		public String calculateTileId(int x, int y, int zoom) {
+			StringBuilder builder = new StringBuilder(getName());
+			builder.append('/');
+			builder.append(zoom).append('/').append(x).append('/').append(y).append(getTileFormat()).append(".tile"); //$NON-NLS-1$ //$NON-NLS-2$
+			return builder.toString();
+		}
+		
+		@Override
+		public byte[] getBytes(int x, int y, int zoom, String dirWithTiles) throws IOException {
+			File f = new File(dirWithTiles, calculateTileId(x, y, zoom));
+			if (!f.exists())
+				return null;
+			
+			ByteArrayOutputStream bous = new ByteArrayOutputStream();
+			FileInputStream fis = new FileInputStream(f);
+			Algorithms.streamCopy(fis, bous);
+			fis.close();
+			bous.close();
+			return bous.toByteArray();
 		}
 	}
 	

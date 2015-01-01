@@ -42,7 +42,7 @@
 	<string name="tip_update_index">Ενημέρωση των offline Χαρτών</string>
 	<string name="tip_update_index_t">"Το να έχετε ενημερωμένα δεδομένα χάρτη είναι βασικό για εμφάνιση, αναζήτηση ΣΕ/Διευθύνσεων και offline πλοήγηση. Ο OsmAnd παρέχει έναν διαχειριστή δεδομένων για τη λήψη αυτών των offline χαρτών (και ορισμένα άλλα αρχεία δεδομένων) και τον έλεγχο διαθέσιμων ενημερώσεων.
 \n\nΓια λήψη χαρτών πηγαίνετε στο \'Ρυθμίσεις\' → \'Διαχείριση αρχείων χαρτών\' → \'Λήψη\'.
-\n\nΜόλις η παγκόσμια λίστα περιοχών ανακτηθεί από το internet, πατήστε σε οποιαδήποτε καταχώρηση για να κατεβάσετε ή να ενημερώσετε κάποιο αρχείο. Παρακαλώ δώστε βάση στον επιλογέα τύπου αρχείου στο πάνω μέρος της οθόνης για να επιλέξετε τον τύπο αρχείου που θέλετε (κανονικοί χάρτες, οδικοί μόνο κλπ)
+\n\nΜόλις η παγκόσμια λίστα περιοχών ανακτηθεί από το Internet, πατήστε σε οποιαδήποτε καταχώρηση για να κατεβάσετε ή να ενημερώσετε κάποιο αρχείο. Παρακαλώ δώστε βάση στον επιλογέα τύπου αρχείου στο πάνω μέρος της οθόνης για να επιλέξετε τον τύπο αρχείου που θέλετε (κανονικοί χάρτες, οδικοί μόνο κλπ)
 \n\nΜπορείτε να φιλτράρετε τη λίστα των περιοχών γράφοντας μερικά γράμματα, ή μπορείτε να επιλέξετε \'Menu\' → \'Φιλτράρισμα ληφθέντων\' για να εμφανιστούν μόνο οι ενημερώσεις για δεδομένα που έχετε ήδη στη συσκευή σας.
 \n\n\t* Καταχωρίσεις σε \'Πράσινο\' - δείχνουν αρχεία δεδομένων όμοια στη συσκευή και στο διακομιστή
 \n\t* Καταχωρίσεις σε \'Μπλε\' - δείχνουν διαθέσιμες ενημερώσεις στο διακομιστή
@@ -452,10 +452,10 @@
 	<string name="search_position_address">Διεύθυνση…</string>
 	<string name="search_position_favorites">Αγαπημένα…</string>
 	<string name="search_position_undefined">Ακαθόριστο</string>
-	<string name="search_position_fixed">Βρέθηκε</string>
+	<string name="search_position_fixed"/>
 	<string name="search_position_current_location">Τρέχουσα θέση…</string>
 	<string name="search_position_map_view">Τελευταία οπτική χάρτη</string>
-	<string name="select_search_position">Αναζήτηση κοντά:</string>
+	<string name="select_search_position">Πηγή:</string>
 	<string name="context_menu_item_search">Αναζήτηση εδώ κοντά</string>
 	<string name="tip_recent_changes_0_6_7_t">"Πρόσφατες αλλαγές στην 0.6.7 :
 \n\t- Offline data manager (download, διαγραφή, activate / deactivate offline data directly in OsmAnd)
@@ -533,7 +533,7 @@
 	<string name="voice_not_use">Να μη χρησιμοποιηθεί</string>
 	<string name="voice_not_specified">Κανένα</string>
 	<string name="installing_new_resources">Αποσυμπίεση νέων δεδομένων…</string>
-	<string name="internet_connection_required_for_online_route">Επιλέχτηκε μια online υπηρεσία πλοήγησης αλλά δεν υπάρχει σύνδεση στο διαδίκτυο.</string>
+	<string name="internet_connection_required_for_online_route">Επιλέχτηκε μια online υπηρεσία πλοήγησης αλλά δεν υπάρχει σύνδεση στο Διαδίκτυο.</string>
 	<string name="tts_language_not_supported_title">Η γλώσσα δεν υποστηρίζεται</string>
 	<string name="tts_language_not_supported">Η επιλεγμένη γλώσσα δεν υποστηρίζεται από την εγκατεστημένη μηχανή TTS (κείμενο σε ομιλία) του Android. Θέλετε να μεταβείτε στο Market για να αναζητήσετε κάποια άλλη μηχανή TTS? Ειδάλλως θα χρησιμοποιηθεί η προεπιλεγμένη γλώσσα TTS.</string>
 	<string name="tts_missing_language_data_title">Απουσία δεδομένων</string>
@@ -561,7 +561,7 @@
 	<string name="map_overlay_descr">Επιλογή χάρτη επικάλυψης</string>
 	<string name="tile_source_already_installed">Ο χάρτης είναι ήδη εγκατεστημένος, οι ρυθμίσεις θα ενημερωθούν</string>
 	<string name="select_tile_source_to_install">Επιλέξτε χάρτες (πλακίδια) για εγκατάσταση ή ενημέρωση</string>
-	<string name="internet_not_available">Σύνδεση στο Διαδίκτυο που απαιτείται για τη λειτουργία δεν είναι διαθέσιμη</string>
+	<string name="internet_not_available">Μια σύνδεση στο Διαδίκτυο απαιτείται για αυτή τη λειτουργία αλλά δεν είναι διαθέσιμη</string>
 	<string name="install_more">Εγκατάσταση περισσότερων…</string>
 	<string name="level_to_switch_vector_raster_descr">Ελάχιστη κλίμακα εστίασης για χρήση διανυσματικών χαρτών</string>
 	<string name="level_to_switch_vector_raster">Ελαχ. κλιμ. διανυσματικών</string>
@@ -1452,7 +1452,7 @@
     <string name="osmo_activity">Παρακολούθηση OpenStreetMap</string>
     <string name="osmo_connected_devices">Συνδεδεμένες συσκευές</string>
     <string name="osmo_groups">Ομάδες/συσκευές OsMo</string>
-    <string name="osmo_auth_pending">Αναμονή εξουσιοδότησης...</string>
+    <string name="osmo_auth_pending">Αναμονή εξουσιοδότησης…</string>
     <string name="osmo_settings_uuid">Μοναδικό αναγνωριστικό συσκευής</string>
     <string name="use_points_as_intermediates">Υπολογισμός διαδρομής μεταξύ σημείων</string>
     <string name="always_center_position_on_map">Εμφάνιση της θέσης πάντα στο κέντρο</string>
@@ -1528,7 +1528,7 @@
 	<string name="routing_attr_avoid_motorway_description">Αποφυγή αυτοκινητόδρομων</string>
 	<string name="routing_attr_weight_name">Όριο βάρους</string>
 	<string name="routing_attr_weight_description">Καθορίσετε το βάρος του οχήματος που θα είναι επιτρεπτό στις διαδρομές</string>
-    <string name="copying_osmand_one_file_descr">Αντιγραφή αρχείου (%s) στο νέο προορισμό...</string>
+    <string name="copying_osmand_one_file_descr">Αντιγραφή αρχείου (%s) στο νέο προορισμό…</string>
     <string name="copying_osmand_files_descr">Αντιγραφή αρχείων δεδομένων OsmAnd στο νέο προορισμό (%s)</string>
     <string name="copying_osmand_files">Αντιγραφή αρχείων δεδομένων OsmAnd</string>
     <string name="app_mode_truck">Φορτηγό</string>
@@ -1577,7 +1577,7 @@
     <string name="rendering_attr_showSurfaces_name">Εμφάνιση οδοστρωμάτων</string>
     <string name="osmo_group_by_invite">Είσοδος με πρόσκληση</string>
     <string name="osmo_group_information">Παρακαλώ διαβάστε πριν τη δημιουργία μιας ομάδας!</string>
-    <string name="no_index_file_to_download">Τίποτα προς λήψη, ελέγξτε τη σύνδεση στο internet.</string>
+    <string name="no_index_file_to_download">Δεν βρέθηκαν λήψεις, ελέγξτε τη σύνδεση στο internet.</string>
     <string name="osmo_mode_restart">Επανεκκίνηση της συνόδου OsMo</string>
     <string name="osmo_mode_off">Εκκίνηση συνόδου OsMo</string>
     <string name="osmo_settings_debug">Πληροφορίες αποσφαλμάτωσης</string>
@@ -1644,7 +1644,7 @@
     <string name="rendering_attr_tramTrainRoutes_name">Δρομολόγια τραμ και τρένων</string>
 	<string name="rendering_attr_trainLightrailRoutes_name">Δρομολόγια τρένου</string>
     <string name="rendering_attr_tramRoutes_name">Δρομολόγια τραμ</string>
-    <string name="rendering_attr_trolleybusRoutes_name">Δρομολόγια τρόλεϋ</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Δρομολόγια τρόλεϊ</string>
     <string name="rendering_attr_busRoutes_name">Δρομολόγια λεωφορείων</string>
     <string name="rendering_category_transport">Μεταφορές</string>
     <string name="map_widget_top">Γραμμή κατάστασης</string>
@@ -1652,13 +1652,38 @@
 	<string name="download_tab_downloads">Όλες οι λήψεις</string>
     <string name="download_tab_updates">Ενημερώσεις</string>
     <string name="download_tab_local">Τοπικά</string>
-	<string name="no_internet_connection">Αδύνατη η λήψη, Παρακαλώ συνδεθείτε στο ασύρματο για να συνεχίσετε.</string>
-    <string name="everything_up_to_date">Όλα ενημερωμένα</string>
+	<string name="no_internet_connection">Αδύνατη η λήψη, Παρακαλώ ελέγξτε τη σύνδεση στο Διαδίκτυο.</string>
+    <string name="everything_up_to_date">Όλα τα αρχεία είναι ενημερωμένα</string>
     <string name="osmo_use_https">Χρήση HTTPS</string>
-	<string name="map_update">Έχετε %1$s χάρτες προς ενημέρωση</string>
+	<string name="map_update">Υπάρχουν ενημερώσεις για %1$s χάρτες</string>
 	<string name="search_for">Αναζήτηση για</string>
 	<string name="coordinates">Συντεταγμένες</string>
 	<string name="dash_download_msg">Έχετε κατεβάσει %1$s χάρτες</string>
     <string name="dash_download_new_one">Λήψη Νέου Χάρτη</string>
     <string name="map_locale">Γλώσσα χάρτη</string>
+    <string name="rendering_attr_roadStyle_name">Στυλ δρόμου</string>
+    <string name="rendering_value_default_name">Προκαθορισμένο</string>
+    <string name="rendering_value_orange_name">Πορτοκαλί</string>
+    <string name="traffic_warning_railways">Διασταύρωση σιδηροτροχιάς</string>
+	<string name="show_railway_warnings">Εμφάνιση διασταυρώσεων σιδηροτροχιάς</string>
+	<string name="show_pedestrian_warnings">Εμφάνιση διαβάσεων πεζών</string>
+    <string name="rendering_attr_transportStops_name">Στάσεις ΜΜΜ</string>
+    <string name="dismiss">Απόρριψη</string>
+    <string name="show_map">ΕΜΦ ΧΑΡΤΗ</string>
+	<string name="show_all">ΕΜΦ ΌΛΩΝ</string>
+	<string name="speak_pedestrian">Ανακοίνωση διαβάσεων πεζών</string>
+    <string name="traffic_warning_pedestrian">Διάβαση πεζών</string>
+	<string name="routing_attr_no_new_routing_name">Κανόνες δρομολόγησης v1.9</string>
+    <string name="routing_attr_no_new_routing_description">Να μην χρησιμοποιηθούν οι κανόνες δρομολόγησης που εισήχθησαν στην έκδοση 1.9</string>
+    <string name="dash_download_msg_none">Θέλετε να κατεβάσετε χάρτες για χρήση εκτός σύνδεσης;</string>
+    <string name="dash_download_manage">Διαχείριση</string>
+    <string name="application_dir_change_warning2">Θέλετε ο OsmAnd να αντιγράψει επίσης τα δεδομένα του στη νέα τοποθεσία; Επιλέξτε \'Όχι\' ώστε ο OsmAnd απλά να δημιουργήσει και να χρησιμοποιήσει τον νέο φάκελο.</string>
+    <string name="navigate_point_zone">Ζώνη</string>
+    <string name="error_avoid_specific_road">Δεν βρέθηκε παράκαμψη</string>
+    <string name="osmo_use_https_descr">Χρήση ασφαλούς σύνδεσης με τον διακομιστή</string>
+    <string name="advanced_settings">Προηγμένες</string>
+	<string name="wake_on_voice">Άναμμα της οθόνης</string>
+    <string name="map_widget_appearance_rem">Εναπομείναντα στοιχεία</string>
+    <string name="speed_limit_exceed_message">Επιλέξτε το περιθώριο του ορίου ταχύτητας, πάνω από το οποίο θα ακούτε ηχητική προειδοποίηση.</string>
+	<string name="fav_point_dublicate_message">Αλλάχτηκε το όνομα του αγαπημένου σημείου σε %1$s για να αποφευχθούν διπλά ονόματα.</string>
     </resources>

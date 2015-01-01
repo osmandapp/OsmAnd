@@ -475,7 +475,7 @@
 	<string name="poi_dog_park">Dog park</string>
 	<string name="poi_fishing_place">Fishing place</string>
 	<string name="poi_hunting_stand">Hunting stand</string>
-	<string name="poi_harbour">Harbour</string>
+	<string name="poi_harbour">Harbor</string>
 	<string name="poi_marina">Marina</string>
 	<string name="poi_miniature_golf">Miniature golf</string>
 	<string name="poi_playground">Playground</string>
@@ -608,7 +608,7 @@
 	<string name="poi_seamark_buoy_installation">Installation buoy</string>
 	<string name="poi_seamark_buoy_isolated_danger">Buoy, isolated danger</string>
 	<string name="poi_seamark_buoy_lateral">Lateral buoy</string>
-	<string name="poi_seamark_buoy_safe_water">Safe water bouy</string>
+	<string name="poi_seamark_buoy_safe_water">Safe water buoy</string>
 	<string name="poi_seamark_buoy_special_purpose">Special purpose buoy</string>
 	<string name="poi_seamark_daymark">Daymark</string>
 	<string name="poi_seamark_distance_mark">Distance mark</string>

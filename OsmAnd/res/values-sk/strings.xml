@@ -321,10 +321,10 @@
   <string name="search_position_address">Adresa…</string>
   <string name="search_position_favorites">Obľúbené miesta…</string>
   <string name="search_position_undefined">Neurčené</string>
-  <string name="search_position_fixed">Súradnice</string>
+  <string name="search_position_fixed"/>
   <string name="search_position_current_location">Aktuálne umiestnenie…</string>
   <string name="search_position_map_view">Posledné mapové zobrazenie</string>
-  <string name="select_search_position">Hľadať v okolí:</string>
+  <string name="select_search_position">Východzí bod:</string>
   <string name="context_menu_item_search">Hľadať</string>
   <string name="tip_recent_changes_0_6_7_t">"Novinky vo verzii 0.6.7 :
 \n\t- Manažér offline údajov (sťahovanie, mazanie a záloha offline dát priamo v OsmAnde)
@@ -403,7 +403,7 @@
   <string name="voice_not_use">Nepoužívať</string>
   <string name="voice_not_specified">Žiadny</string>
   <string name="installing_new_resources">Rozbaľujú sa nové údaje…</string>
-  <string name="internet_connection_required_for_online_route">Je vybratá online navigačná služba, ale nie je dostupné internetové pripojenie.</string>
+  <string name="internet_connection_required_for_online_route">Je vybratá online navigačná služba, ale nie je dostupné pripojenie na Internet.</string>
   <string name="tts_language_not_supported_title">Nepodporovaný jazyk</string>
   <string name="tts_language_not_supported">Zvolený jazyk nie je podporovaný nainštalovaným TTS (text-to-speech) v Androide. Chcete ísť na Market pozrieť iný TTS? Inak bude použitý prednastavený TTS jazyk.</string>
   <string name="tts_missing_language_data_title">Chýbajúce údaje</string>
@@ -437,17 +437,16 @@
   <string name="map_overlay_descr">Výber mapy na prekrytie</string>
   <string name="tile_source_already_installed">Mapa je už nainštalovaná, nastavenia budú zaktualizované</string>
   <string name="select_tile_source_to_install">Vyberte mapy na inštaláciu alebo aktualizáciu</string>
-  <string name="internet_not_available">Internetové pripojenie potrebné pre operáciu nie je dostupné</string>
+  <string name="internet_not_available">Pre túto operáciu je potrebné internetové pripojenie, avšak nie je dostupné</string>
   <string name="install_more">Inštalovať viac…</string>
   <string name="tip_update_index">Aktualizácia offline máp</string>
-  <string name="tip_update_index_t">Veľmi dôležité je mať aktuálne mapové údaje, aby bolo možné zobrazovať mapu, hľadať adresy, body záujmu a navigovať. OsmAnd je vybavený sťahovacím manažérom, ktorý môže sťahovať offline mapy (a iné súbory) a zistiť, či sú dostupné aktualizácie.
-		\n\nPre stiahnutie máp choďte do "Nastavenia" → "Správca mapových súborov" → "Stiahnuť offline údaje".
-		\n\nPo načítaní zoznamu oblastí z internetu, vyberte ktorýkoľvek súbor pre jeho stiahnutie alebo aktualizovanie. Všimnite si tiež výber typu súborov v hornej časti obrazovky, kde je potrebé zvoliť aký typ dát chcete stiahnuť (bežné mapy, tieňované reliéfy, atď.).
-		\n\nZoznam oblastí môžete filtrovať napísaním niekoľkých písmen alebo vyberte možnosť "Zobraziť stiahnuté". Potom uvidíte len aktualizácie pre súbory, ktoré už máte vo svojom zariadení.
-		\n\n\t* "Zelená" - indikuje, že súbor je aktuálny (na serveri rovnaký ako v zariadení)
-		\n\t* "Modrá" - indikuje, že pre súbor existuje aktualizácia na serveri
-		\n\t* Súbory šikmým písmom sú v zariadení deaktivované
-	</string>
+  <string name="tip_update_index_t">"Veľmi dôležité je mať aktuálne mapové údaje, aby bolo možné zobrazovať mapu, hľadať adresy, body záujmu a navigovať. OsmAnd je vybavený sťahovacím manažérom, ktorý môže sťahovať offline mapy (a iné súbory) a zistiť, či sú dostupné aktualizácie.
+\n\nPre stiahnutie máp choďte do Nastavenia → Správca mapových súborov → Stiahnuť offline údaje.
+\n\nPo načítaní zoznamu oblastí z Internetu, vyberte ktorýkoľvek súbor pre jeho stiahnutie alebo aktualizovanie. Všimnite si tiež výber typu súborov v hornej časti obrazovky, kde je potrebé zvoliť aký typ dát chcete stiahnuť (bežné mapy, tieňované reliéfy, atď.).
+\n\nZoznam oblastí môžete filtrovať napísaním niekoľkých písmen alebo vyberte možnosť Zobraziť stiahnuté. Potom uvidíte len aktualizácie pre súbory, ktoré už máte vo svojom zariadení.
+\n\n\t* Zelená - indikuje, že súbor je aktuálny (na serveri rovnaký ako v zariadení)
+\n\t* Modrá - indikuje, že pre súbor existuje aktualizácia na serveri
+\n\t* Súbory šikmým písmom sú v zariadení deaktivované "</string>
   <string name="level_to_switch_vector_raster_descr">Max. úroveň priblíženia použitá pri vektorovom vykresľovaní a nie rastrovom</string>
   <string name="level_to_switch_vector_raster">Úroveň vektorového zoomu</string>
   <string name="tip_day_night_mode">Denný/Nočný režim</string>
@@ -1238,7 +1237,7 @@
     <string name="favourites_list_activity">Vybrať obľúbený bod</string>
     <string name="local_openstreetmap_act_title">OSM úpravy</string>
     <string name="default_buttons_other_actions">Ostatné akcie</string>
-    <string name="download_using_mobile_internet">Momentálne nie ste pripojený cez WiFi. Chcete pokračovať so sťahovaním pomocou aktuálneho internetového pripojenia?</string>
+    <string name="download_using_mobile_internet">Momentálne nie ste pripojený na WiFi. Chcete použiť aktuálne internetové pripojenie na sťahovanie?</string>
     <string name="tip_recent_changes_1_3_t">Zmeny vo verzii 1.3:
     \n\t* Prepracovaná podpora tabletov a veľkých obrazoviek
     \n\t* Téma Holo (prispôsobenie témy)
@@ -1596,7 +1595,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="app_mode_truck">Kamión</string>
     <string name="copying_osmand_files_descr">Kopírujem dátové súbory OsmAnd do nového cieľa (%s)</string>
     <string name="copying_osmand_files">Kopírujem dátové súbory OsmAnd</string>
-    <string name="copying_osmand_one_file_descr">Kopírujem súbor (%s) do nového cieľa...</string>
+    <string name="copying_osmand_one_file_descr">Kopírujem súbor (%s) do nového cieľa…</string>
     <string name="application_dir_change_warning2">Chcete aby OsmAnd presunul údajové súbory do nového cieľa? Zvoľte \"Nie\" ak chcete, aby OsmAnd len vytvoril a použil nový prázdny priečinok.</string>
     <string name="calculate_osmand_route_gpx">Vypočítať OsmAnd offline trasu</string>
     <string name="android_19_location_disabled">Od Androidu verzie 4.4 (KitKat) nie je možné sťahovať a aktualizovať mapy v pôvodnom úložnom priečinku (%s). Chcete ho zmeniť na vhodné nové úložisko a skopírovať tam všetky súbory?
@@ -1615,10 +1614,10 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="routing_attr_avoid_motorway_description">Vyhnúť sa diaľniciam</string>
 	<string name="routing_attr_weight_name">Hmotnostný limit</string>
 	<string name="routing_attr_weight_description">Zadajte hmotnosť vozidla, ktorá musí byť povolená na cestách</string>
-    <string name="select_gpx">Vybrať GPX …</string>
+    <string name="select_gpx">Vybrať GPX…</string>
     <string name="route_descr_select_destination">Vybrať cieľ</string>
-    <string name="route_descr_select_on_map">Vybrať na mape …</string>
-    <string name="route_descr_favorite">Obľúbené …</string>
+    <string name="route_descr_select_on_map">Vybrať na mape…</string>
+    <string name="route_descr_favorite">Obľúbené…</string>
     <string name="route_preferences">Predvoľby trasy</string>
     <string name="route_info">Informácie trasy</string>
     <string name="keep_and_add_destination_point">Pridať ako cieľový bod</string>
@@ -1737,7 +1736,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_tracker_id_descr">Kliknite pre zobrazenia alebo zdieľanie ID sledovacieho zariadenia.
         Pomocou ID budú pripojené zariadenia schopné sledovať všetky pohyby tohto zariadenia! Pre odpojenie použite možnosť "Pregenerovať".</string>
     <string name="osmo_session_token">Token relácie: %1$s</string>
-    <string name="osmo_auth_pending">Čaká sa na autorizáciu...</string>
+    <string name="osmo_auth_pending">Čaká sa na autorizáciu…</string>
     <string name="osmo_locations_sent">Odoslané polohy %1$d (v zásobníku %2$d) </string>
     <string name="osmo_conn_successfull">Vytvorené spojenie: %1$s </string>
     <string name="osmo_mode_restart">Reštartovať reláciu OsMo</string>
@@ -1805,7 +1804,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_expire_group">Vyprší za</string>
     <string name="osmo_group_description">Popis</string>
     <string name="osmo_group_policy">Pravidlá</string>
-    <string name="loading_smth">Načítava sa %1$s …</string>
+    <string name="loading_smth">Načítava sa %1$s…</string>
     <string name="map_widget_plain_time">Aktuálny čas</string>
     <string name="gpx_wpt">Prechodný bod</string>
     <string name="selected_gpx_info_show">\n\nStlačte a podržte pre zobrazenie na mape</string>
@@ -1903,7 +1902,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_osmcTraces_description">Kresliť chodníky podľa značenia OSMC</string>
     
 	<string name="rendering_attr_coloredBuildings_name">Vyfarbiť budovy podľa typu</string>
-    <string name="osmo_invite">Pozvať...</string>
+    <string name="osmo_invite">Pozvať…</string>
     <string name="osmo_leave_confirmation_msg">Chcete opustiť skupinu %1$s?</string>
     <string name="osmo_specify_tracker_id">Prosím zadajte ID</string>
     <string name="arrival_distance_factor_early">Skoro</string>
@@ -1919,7 +1918,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_bicycle_name">Bicykel</string>
     <string name="rendering_value_pedestrian_name">Chodec</string>
     <string name="download_additional_maps">Stiahnuť chýbajúce mapy %1$s (%2$d MB)?</string>
-    <string name="more">Viac...</string>
+    <string name="more">Viac…</string>
     <string name="flat_list_waypoitns">Všetky</string>
     <string name="waypoints">Prechodné body</string>
     <string name="targets">Ciele</string>
@@ -1989,20 +1988,20 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="lock_screen_request_explanation">%1$s potrebuje toto oprávnenie na vypnutie obrazovky pre šetrenie energiou.</string>
     <string name="wake_on_voice_never">Nikdy</string>
     <string name="advanced_settings">Pokročilé</string>
-	<string name="osmo_use_https_descr">Použiť zabezpečené spojenie so serverom</string>
+	<string name="osmo_use_https_descr">Použiť zabezpečené spojenie na server</string>
     <string name="osmo_use_https">Použiť HTTPS</string>
 	<string name="home_button">Domov</string>
     <string name="search_for">Hľadať</string>
 	<string name="show_map">ZOBRAZIŤ MAPU</string>
 	<string name="show_all">ZOBRAZIŤ VŠETKO</string>
 	<string name="coordinates">Súradnice</string>
-	<string name="map_update">Máte %1$s aktualizácií máp</string>
-	<string name="error_avoid_specific_road">Nenašla sa najbližšia cesta</string>
+	<string name="map_update">Aktualizácie pre %1$s máp</string>
+	<string name="error_avoid_specific_road">Nenašla sa blízka cesta</string>
     <string name="dismiss">Odmietnuť</string>
-    <string name="everything_up_to_date">Všetko je aktuálne</string>
+    <string name="everything_up_to_date">Všetky súbory sú aktuálne</string>
     <string name="use_opengl_render">Použiť vykresľovanie OpenGL</string>
     <string name="use_opengl_render_descr">Použiť hardvérovo urýchľované vykresľovanie pomocou OpenGL (nemusí na niektorých zariadeniach fungovať)</string>
-    <string name="no_internet_connection">Nie je možné stiahnuť. Prosím pripojte sa na Wi-Fi, aby bolo možné pokračovať.</string>
+    <string name="no_internet_connection">Sťahovanie nie je možné, prosím pripojte sa na WiFi, aby bolo možné pokračovať.</string>
     <string name="navigate_point_zone">Zóna</string>
     <string name="download_tab_downloads">Všetky sťahovania</string>
     <string name="download_tab_updates">Aktualizácie</string>
@@ -2012,19 +2011,20 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="voices">Hlasové povely</string>
 	<string name="navigate_point_northing">Vertikálna súradnica</string>
     <string name="navigate_point_easting">Horizontálna súradnica</string>
-    <string name="dash_download_msg_none">Chcete stiahnuť nejaké offline mapy?</string>
-    <string name="dash_download_msg">Máte %1$s stiahnutých máp</string>
+    <string name="dash_download_msg_none">Chcete stiahnuť offline mapy?</string>
+    <string name="dash_download_msg">Stiahli ste %1$s máp</string>
     <string name="dash_download_new_one">Stiahnuť novú mapu</string>
     <string name="dash_download_manage">Spravovať</string>
     <string name="rendering_attr_roadStyle_name">Štýl cesty</string>
     <string name="rendering_value_default_name">Predvolené</string>
     <string name="rendering_value_orange_name">Oranžová</string>
     <string name="rendering_value_germanRoadAtlas_name">Nemecký atlas ciest</string>
-	<string name="traffic_warning_railways">Železnice</string>
-	<string name="traffic_waring_pedestrian">Chodec</string>
+	<string name="traffic_warning_railways">Železničné priecestie</string>
+	<string name="traffic_warning_pedestrian">Priechod pre chodcov</string>
 	<string name="show_railway_warnings">Zobrazovať varovania železnice</string>
 	<string name="show_pedestrian_warnings">Zobrazovať varovania chodcov</string>
     <string name="rendering_value_americanRoadAtlas_name">Americký atlas ciest</string>
-    <string name="routing_attr_no_new_routing_name">Nepoužívať výpočet trasy v1.9</string>
-    <string name="routing_attr_no_new_routing_description">Nepoužívať výpočet trasy verzie 1.9</string>
+    <string name="routing_attr_no_new_routing_name">Bez smerovacích pravidiel verzie 1.9</string>
+    <string name="routing_attr_no_new_routing_description">Nepoužívať pravidlá výpočtu trasy zavedené vo verzii 1.9</string>
+    <string name="speak_pedestrian">Oznamovať priechody pre chodcov</string>
     </resources>

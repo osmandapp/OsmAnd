@@ -175,7 +175,7 @@
 	<string name="poi_search_desc">POI(興趣點)查尋</string>
 	<string name="address_search_desc">地址查尋</string>
 	<string name="navpoint_search_desc">座標查尋</string>
-	<string name="transport_search_desc">交通設施查尋</string>
+	<string name="transport_search_desc">大眾運輸查尋</string>
 	<string name="favourites_search_desc">我的最愛查尋</string>
 	<string name="history_search_desc">歷史記錄查尋</string>
 	<string name="offline_navigation_not_available">OsmAnd 離線導航，暫時不能使用。</string>
@@ -186,7 +186,7 @@
 	<string name="unknown_location">未知地理位置</string>
 	<string name="modify_transparency">調整透明度(0 - 透明, 255 - 不透明)</string>
 	<string name="confirm_interrupt_download">您要中斷下載中的檔案嗎？</string>
-	<string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些地區的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'來下載。之後您可瀏覽地圖、位置的地址、查看興趣點以及找到大眾運輸設施。</string>    
+	<string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些地區的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'來下載。之後您可瀏覽地圖、位置的地址、查看興趣點以及尋找大眾運輸。</string>    
 	<string name="basemap_was_selected_to_download">底圖為某些特別的應用功能必需使用的，並且預設為下載。</string>
 	<string name="select_index_file_to_download">找不到任何資料。如果您不能在您的區域找到，您可以自行製作(參考http://osmand.net)。</string>
 	<string name="local_indexes_cat_tile">線上地圖圖磚</string>
@@ -412,10 +412,10 @@
 	<string name="search_position_address">地址…</string>
 	<string name="search_position_favorites">我的最愛…</string>
 	<string name="search_position_undefined">未定義</string>
-	<string name="search_position_fixed">已定位</string>
+	<string name="search_position_fixed">" "</string>
 	<string name="search_position_current_location">目前位置…</string>
 	<string name="search_position_map_view">上次瀏覽的地圖</string>
-	<string name="select_search_position">附近查尋：</string>
+	<string name="select_search_position">起點：</string>
 	<string name="context_menu_item_search">查尋這附近</string>
 	<string name="save_route_dialog_title">儲存路線成 GPX 軌跡</string>
 	<string name="route_successfully_saved_at">導航路線成功存成\'%1$s\'。</string>
@@ -457,7 +457,7 @@
 	
 	<string name="local_index_poi_data">興趣點資料</string>
 	<string name="local_index_address_data">地址資料</string>
-	<string name="local_index_transport_data">交通設施資料</string>
+	<string name="local_index_transport_data">大眾運輸資料</string>
 	<string name="local_index_map_data">地圖資料</string>
 	<string name="local_indexes_cat_backup">已停用</string>
 	<string name="local_indexes_cat_tts">語音資料(TTS)</string>
@@ -474,7 +474,7 @@
 	<string name="voice_not_use">不要使用</string>
 	<string name="voice_not_specified">無</string>
 	<string name="installing_new_resources">安裝新資料…</string>
-	<string name="internet_connection_required_for_online_route">選用線上導航服務，但是沒有能使用的網路連線。</string>
+	<string name="internet_connection_required_for_online_route">選用線上導航服務，但是無可用的網路連線。</string>
 	<string name="tts_language_not_supported_title">該語言未支援</string>
 	<string name="tts_language_not_supported">選用的語言 Android TTS 引擎未支援，您要到 Play 商場找其它引擎嗎？否則使用之前設定的語言。</string>
 	<string name="tts_missing_language_data_title">資料遺失</string>
@@ -502,7 +502,7 @@
 	<string name="map_overlay_descr">選擇上層地圖</string>
 	<string name="tile_source_already_installed">地圖已安裝，設定將被更新</string>
 	<string name="select_tile_source_to_install">選擇要安裝或更新的(圖磚)地圖</string>
-	<string name="internet_not_available">因網際網路無法連線，所以無法操作</string>
+	<string name="internet_not_available">此操作無法使用，因為需要網路連線</string>
 	<string name="install_more">安裝更多…</string>
 	<string name="level_to_switch_vector_raster_descr">向量地圖使用最小的縮放比級別</string>
 	<string name="level_to_switch_vector_raster">最小向量縮放比級別</string>
@@ -591,7 +591,7 @@
 	<string name="amenity_type_sport">運動</string>
 	<string name="amenity_type_sustenance">飲食</string>
 	<string name="amenity_type_tourism">旅遊、住宿</string>
-	<string name="amenity_type_transportation">交通設施</string>
+	<string name="amenity_type_transportation">交通工具</string>
 	<string name="indexing_address">地址索引…</string>
 	<string name="indexing_map">地圖索引…</string>
 	<string name="indexing_poi">興趣點索引…</string>
@@ -658,9 +658,9 @@
 	<string name="use_high_res_maps">高解析顯示</string>
 	<string name="use_high_res_maps_descr">不要伸展（模糊）在高解析螢幕上的地圖圖磚</string>
 	<string name="download_files">下載</string>
-	<string name="context_menu_item_search_transport">查尋交通運輸</string>
-	<string name="transport_searching_transport">交通設施結果(無目的地)：</string>
-	<string name="transport_searching_route">交通設施(有{0}到目的地)：</string>
+	<string name="context_menu_item_search_transport">查尋大眾運輸</string>
+	<string name="transport_searching_transport">交通運輸結果(無目的地)：</string>
+	<string name="transport_searching_route">交通運輸結果(有{0}到目的地)：</string>
 	<string name="transport_search_none">無</string>
 	<string name="transport_search_again">重置交通運輸查尋</string>
 	<string name="map_index">地圖</string>
@@ -671,7 +671,7 @@
 	<string name="layer_gpx_layer">GPX 軌跡…</string>
 	<string name="error_reading_gpx">讀取 GPX 資料錯誤</string>
 	<string name="vector_data">離線向量地圖</string>
-	<string name="transport_context_menu">在終點查尋交通運輸</string>
+	<string name="transport_context_menu">查尋交通運輸車站</string>
 	<string name="point_on_map">位置：\n 緯度 %1$.5f\n 經度 %2$.5f</string>
 	<string name="osb_bug_name">程式臭蟲</string>
 	<string name="poi_context_menu_modify">修改興趣點</string>
@@ -693,13 +693,13 @@
 	<string name="none_region_found">在 SD 卡上沒有該地區離線資料。由網路下載資料。</string>
 	<string name="poi_namefinder_query_empty">輸入查尋條件以查尋興趣點</string>
 	<string name="any_poi">任何</string>
-	<string name="layer_transport_route">交通路線</string>
+	<string name="layer_transport_route">交通運輸路線</string>
 	<string name="thanks_yandex_traffic">感謝 Yandex 提供的交通資訊。</string>
 	<string name="layer_yandex_traffic">Yandex 的交通資訊</string>
 	<string name="layer_route">導航路線</string>
 	<string name="layer_favorites">我的最愛</string>
 	<string name="layer_osm_bugs">OSM 錯誤(線上)</string>
-	<string name="layer_transport">車站、站牌</string>
+	<string name="layer_transport">候車亭</string>
 	<string name="layer_poi">興趣點…</string>
 	<string name="layer_map">地圖來源…</string>
 	<string name="menu_layers">地圖圖層</string>
@@ -760,7 +760,7 @@
 	<string name="add_new_rule">新增新規則</string>
 	<string name="transport_Routes">導航路線</string>
 	<string name="transport_Stop">停止</string>
-	<string name="transport_stops">車站</string>
+	<string name="transport_stops">站牌</string>
 	<string name="transport_search_after">後續路線</string>	
 	<string name="transport_search_before">優先路線</string>
 	<string name="transport_finish_search">查尋完成</string>
@@ -1025,7 +1025,7 @@
     <string name="cancel_route">排除路線</string>
     <string name="cancel_navigation">停止導航</string>
     <string name="clear_destination">清除目的地</string>
-    <string name="download_using_mobile_internet">現在 WiFi 並未連線。您想要使用目前的網路連線繼續下載嗎？</string>
+    <string name="download_using_mobile_internet">WiFi 現在並未連線。您想要使用目前的網路連線下載嗎？</string>
     <string name="street_name">街道</string>
 	<string name="hno">門牌號碼</string>
     <string name="monitoring_settings">旅程記錄</string>
@@ -1443,9 +1443,9 @@
     <string name="routing_preferences_descr">路線偏好</string>
     <string name="app_mode_truck">卡車</string>
     <string name="application_dir_change_warning2">您想要將 OsmAnd 資料複製到新的目的地嗎？選擇否，OsmAnd 只建立和使用新的資料夾。</string>
-    <string name="copying_osmand_one_file_descr">複製檔案 (%s) 到新的目的地...</string>
-    <string name="copying_osmand_files_descr">複製 OsmAnd 資料檔到新的目的地 (%s)</string>
-    <string name="copying_osmand_files">複製 OsmAnd 資料檔案</string>
+    <string name="copying_osmand_one_file_descr">複製檔案 (%s) 到新的目的地…</string>
+    <string name="copying_osmand_files_descr">複製 OsmAnd 資料檔到新的目的地 (%s)…</string>
+    <string name="copying_osmand_files">複製 OsmAnd 資料檔案…</string>
     <string name="calculate_osmand_route_gpx">OsmAnd 預估離線路線</string>
     <string name="android_19_location_disabled">由於 Android 4.4 (KitKat) 版本，您無法下載和更新地圖於之前的存儲檔案夾 (%s)。您是否想變更到允許的存儲位置並複製所有的 OsmAnd 檔案到那裡？
 \n注意 1：您舊的檔案將保持不變（但可以手動刪除）。
@@ -1472,7 +1472,7 @@
     <string name="route_info">路線資訊</string>
     <string name="keep_and_add_destination_point">加為目的地標點</string>
     <string name="use_displayed_track_for_navigation">您是否要將顯示軌跡使用於導航？</string>
-    <string name="calculate_osmand_route_without_internet">OsmAnd 預估的路段沒有網際網路</string>
+    <string name="calculate_osmand_route_without_internet">OsmAnd 預計的路段沒有網際網路</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd 預估最初和最後路段的路線</string>
     <string name="tip_recent_changes_1_7_1_t">"在1.7的變更：
 \n\t* 重要，地圖應該會比 2014 年 2 月更新。
@@ -1566,7 +1566,7 @@
     <string name="osmo_tracker_id">個人追蹤 ID</string>
     <string name="osmo_tracker_id_descr">點擊查看或分享追蹤 ID。          使用追蹤 ID 連線的裝置將能夠監控該裝置的所有動作！ 要斷開選擇恢復選項。</string>
     <string name="osmo_session_token">連線階段標記：%1$s</string>
-    <string name="osmo_auth_pending">等候授權...</string>
+    <string name="osmo_auth_pending">等候授權…</string>
     <string name="osmo_locations_sent">發送位置 %1$d（在緩衝區 %2$d） </string>
     <string name="osmo_conn_successfull">已建立的連線：%1$s </string>
     <string name="osmo_mode_restart">重新啟動 OsMo 連線階段</string>
@@ -1684,7 +1684,7 @@
     <string name="local_index_unselect_gpx_file">取消選擇</string>
     <string name="local_index_select_gpx_file">選取要顯示的</string>
     <string name="route_descr_destination">目的地</string>
-    <string name="no_index_file_to_download">無法下載，請檢查網路連線。</string>
+    <string name="no_index_file_to_download">無法下載，請檢查您的網路連線。</string>
     <string name="osmo_gpx_points_downloaded">OsMo 標點 %1$s 已下載。</string>
     <string name="osmo_auto_connect_descr">自動連線至服務，隨後啟動應用程式</string>
     <string name="osmo_auto_connect">自動連線</string>
@@ -1738,7 +1738,7 @@
 	<string name="rendering_attr_subwayMode_name">捷運路線</string>
  	<string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
-	<string name="osmo_invite">邀請...</string>
+	<string name="osmo_invite">邀請…</string>
     <string name="osmo_leave_confirmation_msg">您想要離開 %1$s 群組嗎？</string>
     <string name="osmo_specify_tracker_id">請指定 ID</string>
     <string name="rendering_attr_alpineHiking_name">高山徒步比例尺 (SAC)</string>
@@ -1759,7 +1759,7 @@
     <string name="rendering_value_car_name">汽車</string>
     <string name="rendering_value_bicycle_name">自行車</string>
     <string name="rendering_value_pedestrian_name">步行</string>
-    <string name="more">更多...</string>
+    <string name="more">更多…</string>
     <string name="download_additional_maps">要下載缺少的地圖 %1$s (%2$d MB) 嗎？</string>
     <string name="flat_list_waypoitns">全部</string>
     <string name="waypoints">中途點</string>
@@ -1826,24 +1826,24 @@
     <string name="rendering_attr_tramTrainRoutes_name">有軌電車和火車路線</string>
     <string name="rendering_category_hide">隱藏</string>
     <string name="wake_on_voice">開啟螢幕</string>
-    <string name="wake_on_voice_descr">當接近轉彎時，開啟手機螢幕</string>
+    <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕</string>
     <string name="lock_screen_request_explanation">為了節電作用 %1$s 需要此許可權才能關閉螢幕。</string>
     <string name="wake_on_voice_never">永不</string>
     <string name="advanced_settings">進階</string>
-	<string name="osmo_use_https_descr">使用安全協定連線於伺服器</string>
+	<string name="osmo_use_https_descr">使用安全協定連線到伺服器</string>
     <string name="osmo_use_https">使用 HTTPS</string>
-	<string name="map_update">您有 %1$ 個地圖更新</string>
+	<string name="map_update">有 %1$ 個地圖可更新</string>
 	<string name="search_for">查尋</string>
 	<string name="show_map">顯示地圖</string>
 	<string name="show_all">全部顯示</string>
 	<string name="coordinates">座標</string>
 	<string name="home_button">首頁</string>
-    <string name="error_avoid_specific_road">找不到最近的路</string>
-    <string name="everything_up_to_date">一切都為最新的</string>
+    <string name="error_avoid_specific_road">沒發現支道</string>
+    <string name="everything_up_to_date">全部都是最新的檔案</string>
     <string name="use_opengl_render">使用 OpenGL 繪製</string>
     <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能在某些裝置上無法工作）</string>
     <string name="dismiss">排除</string>
-    <string name="no_internet_connection">不能下載。請連接到 Wifi 網路進行。</string>
+    <string name="no_internet_connection">不能下載。請檢查您的網路連線。</string>
     <string name="download_tab_downloads">全部下載</string>
     <string name="download_tab_updates">更新</string>
     <string name="download_tab_local">本機</string>
@@ -1853,19 +1853,20 @@
     <string name="map_locale">地圖上的語言</string>
     <string name="rendering_attr_transportStops_name">候車亭</string>
     <string name="voices">提示語音</string>
-	<string name="dash_download_msg_none">您想要下載任何的離線地圖嗎？</string>
-    <string name="dash_download_msg">您有 %1$s 的地圖已下載</string>
-    <string name="dash_download_new_one">下載新地圖</string>
+	<string name="dash_download_msg_none">您想要下載離線地圖嗎？</string>
+    <string name="dash_download_msg">您已下載了 %1$s 的地圖</string>
+    <string name="dash_download_new_one">下載新的地圖</string>
     <string name="dash_download_manage">管理</string>
-    <string name="routing_attr_no_new_routing_name">不使用 v1.9 的路徑</string>
-    <string name="routing_attr_no_new_routing_description">不使用 v1.9 的路徑</string>
+    <string name="routing_attr_no_new_routing_name">不用 v1.9 的路徑規則</string>
+    <string name="routing_attr_no_new_routing_description">在 v1.9 不使用路徑規則引導</string>
     <string name="rendering_attr_roadStyle_name">道路樣式</string>
     <string name="rendering_value_default_name">預設</string>
     <string name="rendering_value_orange_name">橙色</string>
     <string name="rendering_value_germanRoadAtlas_name">德國道路地圖集</string>
     <string name="rendering_value_americanRoadAtlas_name">美國道路地圖集</string>
-    <string name="traffic_warning_railways">鐵路</string>
-	<string name="traffic_waring_pedestrian">步行</string>
-	<string name="show_railway_warnings">顯示鐵路警告</string>
-	<string name="show_pedestrian_warnings">顯示步行警告</string>
+    <string name="traffic_warning_railways">鐵路平交道</string>
+	<string name="traffic_warning_pedestrian">行人穿越道</string>
+	<string name="show_railway_warnings">顯示鐵路平交道</string>
+	<string name="show_pedestrian_warnings">顯示行人穿越道</string>
+    <string name="speak_pedestrian">通報行人穿越道</string>
     </resources>

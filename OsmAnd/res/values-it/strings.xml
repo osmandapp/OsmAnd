@@ -252,7 +252,7 @@
   <string name="map_overlay_descr">Scegli la mappa sovrapposta</string>
   <string name="tile_source_already_installed">La mappa è già installata, le impostazioni verranno aggiornate</string>
   <string name="select_tile_source_to_install">Seleziona le mappe (mattonella) da installare o aggiornare</string>
-  <string name="internet_not_available">La connessione internet è richiesta per questa operazione ma non è disponibile</string>
+  <string name="internet_not_available">Una connessione internet è richiesta per questa operazione ma non è disponibile</string>
   <string name="install_more">Installa altro…</string>
   <string name="tip_update_index">Aggiornamento Mappe Offline</string>
   <string name="tip_update_index_t">"Mappe aggiornate aggiornati sono essenziali per la visione offline delle mappe, la ricerca dei PDI/indirizzi e la navigazione offline. OsmAnd fornisce un gestore delle mappe che le scarica e le rende disponibili offline e inoltre può controllare la disponibilità di aggiornamenti.
@@ -1079,27 +1079,7 @@
 →
 	</string>
 <string name="osmand_plus_short_description_80_chars">Visualizzazione &amp; navigazione mobile con le mappe mondiali OSM online e offline</string>
-<string name="osmand_plus_long_description_1000_chars">
-		OsmAnd+ (OSM Automatizzate Navigazione e Direzioni)
-
-		OsmAnd+ è un\'applicazione di navigazione open source con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) possono essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità di calcolo dell\'itinerario sia online che offline, compresa la voce guida svolta per svolta.
-
-		OsmANd+ è la versione a pagamento, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti.
-
-		Alcune delle caratteristiche principali:
-		- Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile)
-		- Mappe vettoriali offline compatte per tutto il mondo a disposizione
-		- Scarica le mappe delle nazioni o delle regioni direttamente dall\'applicazione, senza limiti
-		- Wikipedia Offline (scarica i PDI Wikipedia), ottimo per i giri turistici
-		- Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile
-		- Ricerca offline per indirizzi e luoghi (PDI)
-		- Calcolo del percorso per brevi distanze (sperimentale)
-		- Modalità automobile, bicicletta e pedonale con:
-		- commutazione opzionale automatica della vista giorno/notte
-		- zoom automatico opzionale in base alla velocità
-		- allineamento della mappa in base alla direzione o alla bussola
-		- opzionali indicazione di corsia, indicazione del limite di velocità, voci registrate e TTS
-	</string>
+<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automatizzate Navigazione e Direzioni) OsmAnd+ è un\'applicazione di navigazione open source con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) possono essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità di calcolo dell\'itinerario sia online che offline, compresa la voce guida svolta per svolta. OsmAnd+ è la versione a pagamento, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti. Alcune delle caratteristiche principali: - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile) - Mappe vettoriali offline compatte per tutto il mondo a disposizione - Scarica le mappe delle nazioni o delle regioni direttamente dall\'applicazione, senza limiti - Wikipedia Offline (scarica i PDI Wikipedia), ottimo per i giri turistici - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile - Ricerca offline per indirizzi e luoghi (PDI) - Calcolo del percorso per brevi distanze (sperimentale) - Modalità automobile, bicicletta e pedonale con: - commutazione opzionale automatica della vista giorno/notte - zoom automatico opzionale in base alla velocità - allineamento della mappa in base alla direzione o alla bussola - opzionali indicazione di corsia, indicazione del limite di velocità, voci registrate e TTS "</string>
 <string name="tip_recent_changes_0_8_3_t">Novità nella versione 0.8.3:
 	\n\t* Punti intermedi
 	\n\t* Migliorata la guida dell\'itinerario
@@ -1639,9 +1619,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 \n Nota: i file precedenti non verranno modificati.
 \n Nota: non sarà possibile condividere i files fra OsmAnd and OsmAnd+.</string>
     <string name="application_dir_change_warning2">Vuoi che OsmAnd sposti anche i propri dati nella nuova destinazione? Scegli \'No\' perché OsmAnd crei e utilizzi una nuova cartella.</string>
-    <string name="copying_osmand_one_file_descr">Copia in corso del file (%s) nella nuova destinazione...</string>
-    <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)</string>
-    <string name="copying_osmand_files">Copia dei file di dati di OsmAnd</string>
+    <string name="copying_osmand_one_file_descr">Copia in corso del file (%s) nella nuova destinazione…</string>
+    <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)…</string>
+    <string name="copying_osmand_files">Copia dei file di dati di OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">Calcola percorso OsmAnd offline</string>
     <string name="routing_attr_prefer_motorway_name">Preferisci le autostrade</string>
 	<string name="routing_attr_prefer_motorway_description">Preferisci le autostrade</string>
@@ -1763,7 +1743,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_tracker_id_descr">Clicca per visualizzare o condividere l\'id della tracciabilità.
  Usando l\'id della tracciabilità i dispositivi connessi saranno in grado di seguire tutti i movimenti di questo dispositivo! Per disconnettersi seleziona Opzione rigenera.</string>
     <string name="osmo_session_token">Token della sessione: %1$s</string>
-    <string name="osmo_auth_pending">In attesa di autorizzazione...</string>
+    <string name="osmo_auth_pending">In attesa di autorizzazione…</string>
     <string name="osmo_locations_sent">Localizzazioni inviate %1$d (nel buffer %2$d) </string>
     <string name="osmo_conn_successfull">Connessione stabilita: %1$s </string>
     <string name="osmo_mode_restart">Riavvia la sessione OsMo</string>
@@ -1880,7 +1860,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="local_index_unselect_gpx_file">Deseleziona</string>
     <string name="local_index_select_gpx_file">Seleziona per visualizzarlo</string>
     <string name="route_descr_destination">Destinazione</string>
-    <string name="no_index_file_to_download">Nulla da scaricare, per favore controllare la connessione internet.</string>
+    <string name="no_index_file_to_download">Niente da scaricare, per favore controllare la connessione internet.</string>
     <string name="osmo_gpx_points_downloaded">Scaricati %1$s punti OsMo.</string>
     <string name="osmo_auto_connect_descr">Connettiti al servizio automaticamente dopo l\'accensione</string>
     <string name="osmo_auto_connect">Connesione automatica</string>
@@ -1931,7 +1911,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="lang_zh_CN">Cinese semplificato</string>
 	<string name="lang_zh_TW">Cinese tradizionale</string>
 	<string name="rendering_attr_subwayMode_name">Percorsi metró</string>
- 	<string name="osmo_invite">Invita ...</string>
+ 	<string name="osmo_invite">Invita…</string>
     <string name="osmo_leave_confirmation_msg">Vuoi abbandonare il gruppo %1$s?</string>
     <string name="osmo_specify_tracker_id">Per favore specifica l\'id</string>
     <string name="continue_navigation">Prosegui la navigazione</string>
@@ -1954,7 +1934,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_car_name">Automobile</string>
     <string name="rendering_value_bicycle_name">Bicicletta</string>
     <string name="rendering_value_pedestrian_name">Pedone</string>
-    <string name="more">Altro...</string>
+    <string name="more">Altro…</string>
     <string name="download_additional_maps">Scaricare le mappe mancanti %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">Tutti</string>
     <string name="waypoints">Punti intermedi</string>
@@ -2026,19 +2006,19 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lock_screen_request_explanation">%1$s necessita di questa autorizzazione per spegnere lo schermo per la funzionalità di risparmio energetico.</string>
     <string name="advanced_settings">Avanzato</string>
 	<string name="osmo_use_https">Usa HTTPS</string>
-	<string name="osmo_use_https_descr">Usa la connessione sicura con il server</string>
+	<string name="osmo_use_https_descr">Usa la connessione sicura al server</string>
     <string name="show_all">MOSTRA TUTTO</string>
 	<string name="coordinates">Coordinate</string>
 	<string name="home_button">Schermata iniziale</string>
-    <string name="map_update">Hai %1$s mappe aggiornabili</string>
+    <string name="map_update">Ci sono %1$s aggiornamenti per le mappe</string>
 	<string name="search_for">Cerca</string>
 	<string name="show_map">MOSTRA LA MAPPA</string>
-	<string name="error_avoid_specific_road">Non è stata trovata una strada nelle vicinanze</string>
+	<string name="error_avoid_specific_road">Nessuna alternativa trovata</string>
     <string name="use_opengl_render">Utilizzare il rendering OpenGL</string>
     <string name="use_opengl_render_descr">Utilizzare il rendering OpenGL accelerato via hardware (potrebbe non funzionare in alcuni dispositivi)</string>
-    <string name="everything_up_to_date">Tutto aggiornato</string>
+    <string name="everything_up_to_date">Tutti i file sono aggiornati</string>
     <string name="dismiss">Tralascia</string>
-    <string name="no_internet_connection">Non è possibile scaricare. Prego, connettersi al Wi-Fi per procedere.</string>
+    <string name="no_internet_connection">Non è possibile scaricare. Prego, verifica la connessione a internet.</string>
     <string name="download_tab_downloads">Tutti i download</string>
     <string name="download_tab_updates">Aggiornabili</string>
     <string name="download_tab_local">Nel dispositivo</string>
@@ -2048,8 +2028,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="map_locale">Lingua della mappa</string>
     <string name="rendering_attr_transportStops_name">Fermate mezzi pubblici</string>
     <string name="voices">Annunci vocali</string>
-	<string name="dash_download_msg_none">Vuoi scaricare una mappa offline?</string>
-    <string name="dash_download_msg">Hai %1$s mappe scaricate</string>
+	<string name="dash_download_msg_none">Vuoi scaricare delle mappe offline?</string>
+    <string name="dash_download_msg">Hai scaricato %1$s mappe</string>
     <string name="dash_download_new_one">Scarica una nuova mappa</string>
     <string name="dash_download_manage">Gestisci</string>
     <string name="rendering_attr_roadStyle_name">Stile disegno delle strade</string>
@@ -2060,7 +2040,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="routing_attr_no_new_routing_name">Non usare il calcolo del percorso v1.9</string>
     <string name="routing_attr_no_new_routing_description">Non usare il calcolo del percorso v1.9</string>
     <string name="traffic_warning_railways">Ferrovie</string>
-	<string name="traffic_waring_pedestrian">Pedonale</string>
-	<string name="show_railway_warnings">Mostra gli avvisi ferroviari</string>
-	<string name="show_pedestrian_warnings">Mostra gli avvisi pedonali</string>
+	<string name="traffic_warning_pedestrian">Pedonale</string>
+	<string name="show_railway_warnings">Mostra i passaggi a livello</string>
+	<string name="show_pedestrian_warnings">Mostra gli attraversamenti pedonali</string>
+    <string name="speak_pedestrian">Annuncia gli attraversamenti pedonali</string>
     </resources>

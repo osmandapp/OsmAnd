@@ -83,7 +83,12 @@ public class OsmandRenderer {
 	private static class IconDrawInfo {
 		float x = 0;
 		float y = 0;
+		String resId_1;
 		String resId;
+		String resId2;
+		String resId3;
+		String resId4;
+		String resId5;
 		String shieldId;
 		int iconOrder;
 		float iconSize;
@@ -340,16 +345,26 @@ public class OsmandRenderer {
 								RectF shieldRf = calculateRect(rc, icon, shield.getWidth(), shield.getHeight());
 								if (coeff != 1f) {
 									Rect src = new Rect(0, 0, shield.getWidth(), shield.getHeight());
-									cv.drawBitmap(shield, src, shieldRf, paintIcon);
+									drawBitmap(cv, shield, shieldRf, src);
 								} else {
-									cv.drawBitmap(shield, shieldRf.left, shieldRf.top, paintIcon);
+									drawBitmap(cv, shield, shieldRf);
 								}	
 							}
 							if (coeff != 1f) {
 								Rect src = new Rect(0, 0, ico.getWidth(), ico.getHeight());
-								cv.drawBitmap(ico, src, rf, paintIcon);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId_1), rf, src);
+								drawBitmap(cv, ico, rf, src);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId2), rf, src);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId3), rf, src);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId4), rf, src);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId5), rf, src);
 							} else {
-								cv.drawBitmap(ico, rf.left, rf.top, paintIcon);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId_1), rf);
+								drawBitmap(cv, ico, rf);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId2), rf);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId3), rf);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId4), rf);
+								drawBitmap(cv, RenderingIcons.getIcon(context, icon.resId5), rf);
 							}
 							if(visibleRect != null) {
 								visibleRect.inset(-visibleRect.width() / 4, -visibleRect.height() / 4);
@@ -364,6 +379,20 @@ public class OsmandRenderer {
 				return;
 			}
 		}
+	}
+
+	protected void drawBitmap(Canvas cv, Bitmap ico, RectF rf) {
+		if(ico == null) {
+			return;
+		}
+		cv.drawBitmap(ico, rf.left, rf.top, paintIcon);
+	}
+
+	protected void drawBitmap(Canvas cv, Bitmap ico, RectF rf, Rect src) {
+		if(ico == null) {
+			return;
+		}
+		cv.drawBitmap(ico, src, rf, paintIcon);
 	}
 
 	private RectF calculateRect(RenderingContext rc, IconDrawInfo icon, int visbleWidth, int visbleHeight) {
@@ -655,22 +684,26 @@ public class OsmandRenderer {
 			rStrokeW = req.ALL.R_STROKE_WIDTH__1;
 			rCap = req.ALL.R_CAP__1;
 			rPathEff = req.ALL.R_PATH_EFFECT__1;
-			
 		} else if(ind == 2){
 			rColor = req.ALL.R_COLOR_3;
 			rStrokeW = req.ALL.R_STROKE_WIDTH_3;
 			rCap = req.ALL.R_CAP_3;
 			rPathEff = req.ALL.R_PATH_EFFECT_3;
+		} else if(ind == -3){
+			rColor = req.ALL.R_COLOR__2;
+			rStrokeW = req.ALL.R_STROKE_WIDTH__2;
+			rCap = req.ALL.R_CAP__2;
+			rPathEff = req.ALL.R_PATH_EFFECT__2;
 		} else if(ind == 3){
 			rColor = req.ALL.R_COLOR_4;
 			rStrokeW = req.ALL.R_STROKE_WIDTH_4;
 			rCap = req.ALL.R_CAP_4;
 			rPathEff = req.ALL.R_PATH_EFFECT_4;
 		} else {
-			rColor = req.ALL.R_COLOR_4;
-			rStrokeW = req.ALL.R_STROKE_WIDTH_4;
-			rCap = req.ALL.R_CAP_4;
-			rPathEff = req.ALL.R_PATH_EFFECT_4;
+			rColor = req.ALL.R_COLOR_5;
+			rStrokeW = req.ALL.R_STROKE_WIDTH_5;
+			rCap = req.ALL.R_CAP_5;
+			rPathEff = req.ALL.R_PATH_EFFECT_5;
 		}
 		if(area){
 			if(!req.isSpecified(rColor) && !req.isSpecified(req.ALL.R_SHADER)){
@@ -784,7 +817,12 @@ public class OsmandRenderer {
 			ico.iconOrder = render.getIntPropertyValue(render.ALL.R_ICON_ORDER, 100);
 			ico.iconSize = rc.getComplexValue(render, render.ALL.R_ICON_VISIBLE_SIZE, -1);
 			ico.shieldId = render.getStringPropertyValue(render.ALL.R_SHIELD);
+			ico.resId_1 = render.getStringPropertyValue(render.ALL.R_ICON__1);
 			ico.resId = resId;
+			ico.resId2 = render.getStringPropertyValue(render.ALL.R_ICON_2);
+			ico.resId3 = render.getStringPropertyValue(render.ALL.R_ICON_3);
+			ico.resId4 = render.getStringPropertyValue(render.ALL.R_ICON_4);
+			ico.resId5 = render.getStringPropertyValue(render.ALL.R_ICON_5);
 			rc.iconsToDraw.add(ico);
 		}
 		if (renderText) {
@@ -902,6 +940,10 @@ public class OsmandRenderer {
 				drawPolylineShadow(canvas, rc, path, shadowColor, shadowRadius);
 			} else {
 				boolean update = false;
+				if (updatePaint(render, paint, -3, false, rc)) {
+					update = true;
+					canvas.drawPath(path, paint);
+				}
 				if (updatePaint(render, paint, -2, false, rc)) {
 					update = true;
 					canvas.drawPath(path, paint);
@@ -921,6 +963,9 @@ public class OsmandRenderer {
 					canvas.drawPath(path, paint);
 				}
 				if (updatePaint(render, paint, 3, false, rc)) {
+					canvas.drawPath(path, paint);
+				}
+				if (updatePaint(render, paint, 4, false, rc)) {
 					canvas.drawPath(path, paint);
 				}
 			}

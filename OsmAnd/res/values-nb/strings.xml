@@ -310,7 +310,7 @@
 	<string name="map_text_size">Skriftstørrelse for kart</string>
 	<string name="voice_not_use">Ikke bruk</string>
 	<string name="voice_not_specified">Ingen</string>
-	<string name="internet_connection_required_for_online_route">En nettbasert navigeringstjeneste er valgt, men ingen internett-tilkobling er tilgjengelig.</string>
+	<string name="internet_connection_required_for_online_route">En nettbasert navigeringstjeneste er valgt, men ingen internettforbindelse er tilgjengelig.</string>
 	<string name="tts_language_not_supported_title">Språk ikke støttet</string>
 	<string name="tts_language_not_supported">Det valgte språket støttes ikke av den installerte Android TTS (tekst-til-tale)-motoren. Vil du gå til markedet for å se etter en annen TTS-motor? Ellers vil det forhåndsinnstilte TTS-språket brukes.</string>
 	<string name="tts_missing_language_data_title">Manglende data</string>
@@ -768,7 +768,7 @@
 	<string name="index_item_world_basemap">Oversiktskart (verden)</string>
     <string name="index_item_world_ski">Skikart (verden)</string>
     <string name="lang_hr">Kroatisk</string>
-    <string name="calculate_osmand_route_without_internet">Beregn OsmAnd rutesegment uten internett</string>
+    <string name="calculate_osmand_route_without_internet">Beregn OsmAnd-rutesegment uten internett</string>
     <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd-rute for første og siste rutesegment</string>
     <string name="osmo_settings_uuid">Unik enhets-id</string>
     <string name="osmo_settings_descr">Still inn overvåking og personlig overvåkingskanal</string>
@@ -844,7 +844,7 @@
     <string name="targets">Reisemål</string>
     <string name="rendering_attr_hideBuildings_name">Skjul bygninger</string>
     <string name="osmand_parking_warning">Varsel</string>
-	<string name="wake_on_voice_descr">Slå på telefonskjermen når du nærmer deg en sving</string>
+	<string name="wake_on_voice_descr">Slå på enhetens skjerm når du nærmer deg en sving</string>
     <string name="wake_on_voice_never">Aldri</string>
     <string name="search_radius_proximity">I nærhet av</string>
     <string name="speed_limit_exceed_message">Velg toleransemargin for fartsgrense, overskrides denne vil du få talevarsel.</string>
@@ -1065,20 +1065,20 @@
 \n\t* Oppføringer i kursiv skrift indikerer data deaktiverte på enheten "</string>
 	<string name="first_time_msg">Takk for at du bruker OsmAnd. For mange funksjoner i dette programmet trenger du noen regionale offline-data som du kan laste ned via \'Innstillinger\' → \'Karthåndtering\'. Etterpå vil du være i stand til å se kart, finne adresser, lete etter interessepunkter og finne offentlig transport.</string>    
 	<string name="download_files">Last ned</string>
-	<string name="osmo_use_https_descr">Bruk sikker forbindelse med server</string>
+	<string name="osmo_use_https_descr">Bruk sikker forbindelse til server</string>
     <string name="osmo_use_https">Bruk HTTPS</string>
 	<string name="application_dir_change_warning2">Skal OsmAnd også kopiere datafilene til det nye stedet? Velg \'Nei\' for at OsmAnd kun skal opprette og bruke den nye mappen.</string>
-    <string name="error_avoid_specific_road">Nærmeste vei ble ikke funnet</string>
+    <string name="error_avoid_specific_road">Ingen omkjøring funnet</string>
     <string name="home_button">Hjem</string>
-    <string name="map_update">Det er %1$s kart å oppdatere</string>
+    <string name="map_update">Oppdateringer tilgjengelig for %1$s kart</string>
 	<string name="search_for">Søk etter</string>
 	<string name="show_map">VIS KART</string>
 	<string name="coordinates">Koordinater</string>
 	<string name="download_tab_downloads">Alle nedlastinger</string>
     <string name="download_tab_updates">Oppdateringer</string>
-    <string name="no_internet_connection">Ikke mulig å laste ned. Koble til Wi-Fi for å fortsette.</string>
+    <string name="no_internet_connection">Ikke mulig å laste ned, kontroller internettforbindelsen.</string>
     <string name="dismiss">Avvis</string>
-    <string name="everything_up_to_date">Alt er oppdatert</string>
+    <string name="everything_up_to_date">Alle filer er oppdaterte</string>
     <string name="use_opengl_render">Bruk OpenGL-opptegning</string>
     <string name="use_opengl_render_descr">Bruk maskinvareakselerert OpenGL-opptegning (virker kanskje ikke på enkelte enheter)</string>
     <string name="map_locale">Språk på kart</string>
@@ -1181,12 +1181,13 @@
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">Tysk veiatlas</string>
-	<string name="traffic_warning_railways">Jernbaner</string>
-	<string name="traffic_waring_pedestrian">Fotgjenger</string>
-	<string name="show_railway_warnings">Vis jernbanevarsler</string>
-	<string name="show_pedestrian_warnings">Vis fotgjengervarsler</string>
+	<string name="traffic_warning_railways">Jernbaneovergang</string>
+	<string name="traffic_warning_pedestrian">Fotgjengerovergang</string>
+	<string name="show_railway_warnings">Vis jernbaneoverganger</string>
+	<string name="show_pedestrian_warnings">Vis fotgjengeroverganger</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk veiatlas</string>
     <string name="av_camera_focus_hiperfocal">Hyperfokal fokus</string>
 	<string name="lock_screen_request_explanation">%1$s trenger denne tillatelsen til å slå av skjermen (Strømsparingsfunksjon).</string>
     <string name="show_all">VIS ALLE</string>
-	</resources>
+	<string name="speak_pedestrian">Meld om fotgjengeroverganger</string>
+    </resources>

@@ -145,7 +145,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 			}
 		});
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
-		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(ctx));
+		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(ctx, app));
 		int dist = -1;
 		if (!wh.isRouteCalculated()) {
 			if (ctx instanceof MapActivity) {
@@ -484,7 +484,17 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				if (type == WaypointHelper.POI && btn.isChecked()){
 					running[0] = position;
 					thisAdapter.notifyDataSetInvalidated();
-					selectPoi(running, thisAdapter, type, true, ctx);
+					MapActivity map = (MapActivity) ctx;
+					final PoiFilter[] selected = new PoiFilter[1];
+					AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView(), selected);
+					dlg.setOnDismissListener(new OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							if (selected != null) {
+								enableType(running, thisAdapter, type, true);
+							}
+						}
+					});
 				}
 			}
 		});
@@ -493,7 +503,8 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 
 	private void selectPoi(final int[] running, final ArrayAdapter<Object> listAdapter, final int type,
 						   final boolean enable, Activity ctx) {
-		if (ctx instanceof MapActivity && !PoiFilter.CUSTOM_FILTER_ID.equals(app.getSettings().getPoiFilterForMap())) {
+		if (ctx instanceof MapActivity &&
+				!PoiFilter.CUSTOM_FILTER_ID.equals(app.getSettings().getPoiFilterForMap())) {
 			MapActivity map = (MapActivity) ctx;
 			final PoiFilter[] selected = new PoiFilter[1];
 			AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView(), selected);

@@ -1019,8 +1019,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		recordings.unregisterObject(r.lat, r.lon, r);
 		recordingByFileName.remove(r.file.getName());
 		Algorithms.removeAllFiles(r.file);
-		activity.getMapLayers().getContextMenuLayer().setLocation(null, "");
-		activity.getMapView().refreshMap();
+		if (activity != null) {
+			activity.getMapLayers().getContextMenuLayer().setLocation(null, "");
+			activity.getMapView().refreshMap();
+		}
 	}
 
 	@Override

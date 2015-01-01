@@ -1,7 +1,11 @@
 package net.osmand.core.android;
 
+import android.util.Log;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
@@ -17,6 +21,7 @@ import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.ResolvedMapStyle;
+import net.osmand.core.jni.SwigUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -30,7 +35,8 @@ import net.osmand.util.Algorithms;
  * @author Alexey Pelykh
  *
  */
-public class MapRendererContext {
+public class MapRendererContext implements RendererRegistry.IRendererLoadedEventListener {
+    private static final String TAG = "MapRendererContext";
 
 	private static final int OBF_RASTER_LAYER = 0;
 	private OsmandApplication app;
@@ -101,7 +107,7 @@ public class MapRendererContext {
 	}
 
 	protected float getDisplayDensityFactor() {
-		return (float) (app.getSettings().MAP_DENSITY.get()) * Math.max(1, density);
+		return app.getSettings().MAP_DENSITY.get() * Math.max(1, density);
 	}
 
 	protected int getRasterTileSize() {
@@ -126,7 +132,28 @@ public class MapRendererContext {
 			rendName = "default";
 		}
 		if (!mapStyles.containsKey(rendName)) {
-			mapStyles.put(rendName, mapStylesCollection.getResolvedStyleByName(rendName));
+            Log.d(TAG, "Style '" + rendName + "' not in cache");
+            if (mapStylesCollection.getStyleByName(rendName) == null) {
+                Log.d(TAG, "Unknown '" + rendName + "' style, need to load");
+
+                // Ensure parents are loaded (this may also trigger load)
+                app.getRendererRegistry().getRenderer(rendName);
+
+                if (mapStylesCollection.getStyleByName(rendName) == null) {
+                    try {
+                        loadStyleFromStream(rendName, app.getRendererRegistry().getInputStream(rendName));
+                    } catch (IOException e) {
+                        Log.e(TAG, "Failed to load '" + rendName + "'", e);
+                    }
+                }
+            }
+            ResolvedMapStyle mapStyle = mapStylesCollection.getResolvedStyleByName(rendName);
+            if (mapStyle != null) {
+                mapStyles.put(rendName, mapStyle);
+            } else {
+                Log.d(TAG, "Failed to resolve '" + rendName + "', will use 'default'");
+                rendName = "default";
+            }
 		}
 		ResolvedMapStyle mapStyle = mapStyles.get(rendName);
 		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, displayDensityFactor);
@@ -163,10 +190,9 @@ public class MapRendererContext {
 		}
 
 		QStringStringHash convertedStyleSettings = new QStringStringHash();
-		for (Iterator<Map.Entry<String, String>> itSetting = props.entrySet().iterator(); itSetting.hasNext();) {
-			Map.Entry<String, String> setting = itSetting.next();
-			convertedStyleSettings.set(setting.getKey(), setting.getValue());
-		}
+        for (Map.Entry<String, String> setting : props.entrySet()) {
+            convertedStyleSettings.set(setting.getKey(), setting.getValue());
+        }
 		if (nightMode) {
 			convertedStyleSettings.set("nightMode", "true");
 		}
@@ -200,7 +226,7 @@ public class MapRendererContext {
 		}
 		// Create new OBF map symbols provider
 		obfMapSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider, getReferenceTileSize(),
-				app.getSettings().TEXT_SCALE.get() / Math.max(1, density) );
+				app.getSettings().TEXT_SCALE.get());
 		// If there's bound view, add new provider
 		if (mapRendererView != null) {
 			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
@@ -221,8 +247,7 @@ public class MapRendererContext {
 			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
 		}
 	}
-	
-	
+
 	private class CachedMapPresentation {
 		String langId ;
 		LanguagePreference langPref;
@@ -257,7 +282,45 @@ public class MapRendererContext {
 				return false;
 			return true;
 		}
-		
 	}
-	
+
+    public void onRendererLoaded(String name, RenderingRulesStorage rules, InputStream source) {
+        loadStyleFromStream(name, source);
+    }
+
+    private void loadStyleFromStream(String name, InputStream source) {
+        if (RendererRegistry.DEFAULT_RENDER.equals(name)) {
+            if (source != null) {
+                try {
+                    source.close();
+                } catch(IOException e) {}
+            }
+            return;
+        }
+
+        Log.d(TAG, "Going to pass '" + name + "' style content to native");
+        byte[] content;
+        try {
+            ByteArrayOutputStream intermediateBuffer = new ByteArrayOutputStream();
+            int nRead;
+            byte[] data = new byte[16384];
+            while ((nRead = source.read(data, 0, data.length)) != -1) {
+                intermediateBuffer.write(data, 0, nRead);
+            }
+            intermediateBuffer.flush();
+            content = intermediateBuffer.toByteArray();
+        } catch(IOException e) {
+            Log.e(TAG, "Failed to read style content", e);
+            return;
+        } finally {
+            try {
+                source.close();
+            } catch(IOException e) {}
+        }
+
+        if (!mapStylesCollection.addStyleFromByteArray(
+                SwigUtilities.createQByteArrayAsCopyOf(content), name)) {
+            Log.w(TAG, "Failed to add style from byte array");
+        }
+    }
 }

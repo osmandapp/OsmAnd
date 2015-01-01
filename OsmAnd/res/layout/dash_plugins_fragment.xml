@@ -7,7 +7,7 @@
 			  android:layout_height="match_parent">
 	<LinearLayout android:orientation="horizontal"
 				  android:layout_width="fill_parent"
-				  android:layout_height="40dp">
+				  android:layout_height="@dimen/dashHeaderHeight">
 		<TextView android:id="@+id/plugin_text"
 				  android:text="@string/prefs_plugins"
 				  style="@style/DashboardSubHeader"/>
