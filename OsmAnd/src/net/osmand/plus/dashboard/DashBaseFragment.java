@@ -11,5 +11,15 @@ public class DashBaseFragment extends SherlockFragment {
 	public OsmandApplication getMyApplication(){
 		return (OsmandApplication) getActivity().getApplication();
 	}
-	
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		//Test if this works
+		View view = getView();
+		if (view != null) {
+			view.invalidate();
+		}
+	}
+
 }

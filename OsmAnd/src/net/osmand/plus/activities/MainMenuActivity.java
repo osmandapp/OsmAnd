@@ -165,6 +165,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		}
 		getLocationProvider().addCompassListener(this);
 		getLocationProvider().registerOrUnregisterCompassListener(true);
+		ScrollView.invalidate();
 	}
 
 	@Override
@@ -177,10 +178,10 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		//	getLocationProvider().resumeAllUpdates();
 		}
 
-		View view = getView();
-		if (view != null) {
-			view.invalidate();
-		}
+		//View view = getView();
+		//if (view != null) {
+		//	view.invalidate();
+		//}
 	}
 
 	@Override
