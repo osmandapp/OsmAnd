@@ -2,6 +2,7 @@ package net.osmand.plus.dashboard;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import net.osmand.plus.OsmandApplication;
+import android.view.View;
 
 /**
  * Created by Denis on 24.11.2014.
