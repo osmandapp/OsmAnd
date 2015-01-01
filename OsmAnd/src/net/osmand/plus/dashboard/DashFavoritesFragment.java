@@ -61,8 +61,6 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		return view;
 	}
 
-
-
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -76,12 +74,6 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			updateLocation(location);
 		}
 		setupFavorites();
-
-		//Ckeck if this fixes that lists are empty when returning from the map screen
-		View view = getView();
-		if (view != null) {
-			view.invalidate();
-		}
 	}
 
 
@@ -152,6 +144,8 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			});
 			favorites.addView(view);
 		}
+		//Check if this fixes that lists are empty when returning from the map screen
+		mainView.invalidate();
 	}
 
 	private void updateArrows() {
