@@ -83,8 +83,8 @@
 \n Nota 2: in sa cartella noa non at a èssere possìbile cumpartzire sos datos intra OsmAnd e OsmAnd+.</string>
     <string name="application_dir_change_warning2">Boles chi OsmAnd còpiet sos datos suos fintzas in sa destinatzione noa? Icherta \"Nono\" pro fàghere petzi creare ed impreare una cartella noa a OsmAnd.</string>
     <string name="copying_osmand_one_file_descr">Copiande su documentu (%s) in sa destinatzione noa…</string>
-    <string name="copying_osmand_files_descr">Copiande sos datos de OsmAnd in (%s), sa destinatzione noa</string>
-    <string name="copying_osmand_files">Copiande sos datos de OsmAnd</string>
+    <string name="copying_osmand_files_descr">Copiande sos datos de OsmAnd in (%s), sa destinatzione noa…</string>
+    <string name="copying_osmand_files">Copiande sos datos de OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">Càlcula s\'àndala OsmAnd sena lìnia</string>
     <string name="app_mode_truck">Càmion</string>
     <string name="guidance_preferences_descr">Preferèntzias de nàvigu</string>
@@ -1146,7 +1146,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="map_version_changed_info">In su server bi sunt documentos de mapas non compatìbiles cun sa versione atuale de su programma. Pro los iscarrigare e impreare agiorna s\'aplicu a s\'ùritma versione.</string>
 	<string name="local_index_mi_rename">Torra a numenare</string>
 	<string name="search_position_undefined">Non dessinidu</string>
-	<string name="search_position_fixed"></string>
+	<string name="search_position_fixed"/>
 	<string name="search_position_current_location">Positzione currente…</string>
 	<string name="search_position_map_view">Ùrtima bisura mapa</string>
 	<string name="local_index_mi_upload_gpx">Imbia ad OSM</string>
@@ -1175,7 +1175,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="local_index_mi_reload">Torra a carrigare dae s\'ischeda SD</string>
 	<string name="local_index_download">Iscàrriga</string>
 	<string name="local_index_address_data">Datos indiritzos</string>
-	<string name="local_index_transport_data">Datos trasportos</string>
+	<string name="local_index_transport_data">Datos trasportos pùblicos</string>
 	<string name="local_index_map_data">Datos mapa</string>
 	<string name="local_indexes_cat_backup">Deativadu</string>
 	<string name="local_indexes_cat_tts">Boghes (TTS)</string>
@@ -1357,7 +1357,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="error_occurred_loading_gpx">Errore durante su carrigamentu de su documentu GPX</string>
 	<string name="send_report">Imbia resumu</string>
 	<string name="any_poi">Totus</string>
-	<string name="layer_transport_route">Àndala de trsportu pùblicu</string>
+	<string name="layer_transport_route">Àndala de trasportu pùblicu</string>
 	<string name="thanks_yandex_traffic">Gràtzias a Yandex pro sas informatziones pro su tràficu.</string>
 	<string name="layer_yandex_traffic">Yandex (tràficu)</string>
 	<string name="layer_route">Àndala</string>
