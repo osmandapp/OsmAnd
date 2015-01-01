@@ -275,7 +275,7 @@
   
   <string name="local_index_poi_data">Data POI</string>
   <string name="local_index_address_data">Addresy</string>
-  <string name="local_index_transport_data">Doprava</string>
+  <string name="local_index_transport_data">Údaje veřejné dopravy</string>
   <string name="local_index_map_data">Mapová data</string>
   
   <string name="local_indexes_cat_backup">Záloha</string>
@@ -480,7 +480,7 @@
   <string name="use_high_res_maps_descr">Použít mapu s vysokým rozlišením pro jemné displeje</string>
   <string name="unknown_location">Pozice ještě není známa</string>
   <string name="download_files">Stáhnout</string>
-  <string name="context_menu_item_search_transport">Hledat dopravu</string>
+  <string name="context_menu_item_search_transport">Hledat veřejnou dopravu</string>
   <string name="transport_searching_transport">Hledání dopravy (žádný cíl):</string>
   <string name="transport_searching_route">Hledání dopravy (cíl vzdálen {0}):</string>
   <string name="transport_search_none">nic</string>
@@ -867,7 +867,7 @@
   <string name="poi_search_desc">Hledat body zájmu (POI)</string>
   <string name="address_search_desc">Hledat adresu</string>
   <string name="navpoint_search_desc">Souřadnice</string>
-  <string name="transport_search_desc">Hledat dopravu</string>
+  <string name="transport_search_desc">Hledat veřejnou dopravu</string>
   <string name="favourites_search_desc">Hledat oblíbené místo</string>
   <string name="history_search_desc">Historie hledání</string>
   <string name="rendering_attr_noPolygons_description">Zobrazit všechny typy půdy průhledně</string>
@@ -1385,8 +1385,8 @@ s často kladenými otázkami.</string>
 \n Poznámka 2: V novém úložišti nebude možné sdílet soubory mezi OsmAnd a OsmAnd+.</string>
     <string name="application_dir_change_warning2">Chcete aby OsmAnd také zkopíroval své datové soubory do nového cíle? Vybráním \'Ne\' OsmAnd pouze vytvoří a použije nový adresář.</string>
     <string name="copying_osmand_one_file_descr">Kopírování souboru (%s) do nového umístění…</string>
-    <string name="copying_osmand_files_descr">Kopírování datových souborů OsmAnd do nového umístění (%s)</string>
-    <string name="copying_osmand_files">Kopírování datových souborů OsmAnd</string>
+    <string name="copying_osmand_files_descr">Kopírování datových souborů OsmAnd do nového umístění (%s)…</string>
+    <string name="copying_osmand_files">Kopírování datových souborů OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">Vypočítat OsmAnd offline trasu</string>
     <string name="app_mode_truck">Kamion</string>
     <string name="guidance_preferences_descr">Nastavení navigace</string>
