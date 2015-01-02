@@ -77,7 +77,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			if (loc == null) {
 				loc = getMyApplication().getSettings().getLastKnownMapLocation();
 			}
-			updateLocation(loc);
+			updateLocation(location);
 		}
 		setupFavorites();
 	}
@@ -179,11 +179,12 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		updateArrows();
 	}
 
-	public void updateLocation(LatLon location) {
+	public void updateLocation(Location location) {
 		if (location == null){
 			return;
 		}
-		this.loc = loc;
+		this.location = location;
+		this.loc = new LatLon(location.getLatitude(), location.getLongitude());
 		updateArrows();
 	}
 
