@@ -36,7 +36,8 @@ import java.util.List;
  */
 public class DashFavoritesFragment extends DashBaseFragment {
 	public static final String TAG = "DASH_FAVORITES_FRAGMENT";
-	private net.osmand.Location location = null;
+	//private net.osmand.Location location = null;
+	private LatLon location = null;
 	private Float heading = null;
 	private List<ImageView> arrows = new ArrayList<ImageView>();
 	List<FavouritePoint> points = new ArrayList<FavouritePoint>();
@@ -67,11 +68,15 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
 			if(!getMyApplication().getSettings().isLastKnownMapLocation()) {
 				// show first time when application ran
-				location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
+				//location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
+				location = new LatLon(getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLatitide(), getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLongitude());
 			} else {
-				location = getLocationProvider().getLastKnownLocation();
+				//location = getLocationProvider().getLastKnownLocation();
+				location = new LatLon(getLocationProvider().getLastKnownLocation().getLatitude(), getLocationProvider().getLastKnownLocation().getLongitude())
 			}
-			//TODO: Sufficient to use LatLon map center as origin if no position known!
+			if (location == null) {
+				location = getMyApplication().getSettings().getLastKnownMapLocation();
+			}
 			updateLocation(location);
 		}
 		setupFavorites();
@@ -174,7 +179,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		updateArrows();
 	}
 
-	public void updateLocation(Location location) {
+	public void updateLocation(LatLon location) {
 		if (location == null){
 			return;
 		}
