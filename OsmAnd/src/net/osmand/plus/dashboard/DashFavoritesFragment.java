@@ -72,7 +72,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 				location = new LatLon(getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLatitide(), getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLongitude());
 			} else {
 				//location = getLocationProvider().getLastKnownLocation();
-				location = new LatLon(getLocationProvider().getLastKnownLocation().getLatitude(), getLocationProvider().getLastKnownLocation().getLongitude())
+				location = new LatLon(getLocationProvider().getLastKnownLocation().getLatitude(), getLocationProvider().getLastKnownLocation().getLongitude());
 			}
 			if (location == null) {
 				location = getMyApplication().getSettings().getLastKnownMapLocation();
