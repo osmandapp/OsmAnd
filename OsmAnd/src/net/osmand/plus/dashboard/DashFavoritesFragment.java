@@ -175,15 +175,13 @@ public class DashFavoritesFragment extends DashBaseFragment {
 	}
 
 	public void updateLocation(Location location) {
-		//if (location == null) {
-		//	return;
-		//}
 		if (location != null) {
-			this.location = location;
+			//this.location = location;
 			loc = new LatLon(location.getLatitude(), location.getLongitude());
-		}
-		if (loc == null) {
+		} else if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
 			loc = getMyApplication().getSettings().getLastKnownMapLocation();
+		} else {
+			return;
 		}
 		this.loc = loc;
 		updateArrows();
