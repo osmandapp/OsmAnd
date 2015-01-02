@@ -116,7 +116,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			ImageView icon = (ImageView) view.findViewById(R.id.icon);
 			ImageView direction = (ImageView) view.findViewById(R.id.direction);
 
-			if(location != null){
+			if(loc != null){
 				direction.setVisibility(View.VISIBLE);
 				updateArrow(point, direction);
 			}
