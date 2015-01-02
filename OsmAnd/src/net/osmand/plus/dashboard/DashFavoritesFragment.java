@@ -148,7 +148,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 	}
 
 	private void updateArrows() {
-		if (location == null) {
+		if (loc == null) {
 			return;
 		}
 
