@@ -71,6 +71,10 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			} else {
 				location = getLocationProvider().getLastKnownLocation();
 			}
+			//Use map center as origin if no position known
+			if (location == null) {
+				location = getMyApplication().getSettings().isLastKnownMapLocation();
+			}
 			updateLocation(location);
 		}
 		setupFavorites();
