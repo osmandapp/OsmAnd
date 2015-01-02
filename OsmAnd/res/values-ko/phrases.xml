@@ -174,7 +174,7 @@
 	<string name="poi_bridge">다리</string>
 
 	<string name="poi_speed_camera">속도 경고 카메라</string>
-	<string name="poi_turning_circle">터 닝 서클</string>
+	<string name="poi_turning_circle">터닝 서클</string>
 	<string name="poi_motorway_junction">고속도로 분기점</string>
 
 	<string name="poi_boatyard">보트야드</string>
