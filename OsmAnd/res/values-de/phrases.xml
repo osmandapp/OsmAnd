@@ -607,4 +607,8 @@
 	<string name="poi_swing_carousel">Schaukel-Karussell</string>
 	<string name="poi_attraction_train">Eisenbahn (Attraktion)</string>
 	<string name="poi_water_slide">Wasserrutsche</string>
+	<string name="poi_tower">Sendeturm</string>
+	<string name="poi_mast">Mast</string>
+	<string name="poi_radar">Radar</string>
+	<string name="poi_aquarium">Aquarium</string>
   </resources>
