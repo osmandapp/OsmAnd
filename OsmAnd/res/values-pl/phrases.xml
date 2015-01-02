@@ -176,7 +176,7 @@
 	<string name="poi_bridge">Most</string>
 
 	<string name="poi_speed_camera">Fotoradar</string>
-	<string name="poi_emergency_access_point">Pogotowie</string>
+	<string name="poi_emergency_access_point">Ambulatoryjne świadczenia zdrowotne</string>
 
 	<string name="poi_railway_halt">Dworzec kolejowy (nieaktualne)</string>
 	<string name="poi_turning_circle">Miejsce do zawracania</string>
@@ -198,4 +198,26 @@
 	<string name="poi_telephone">Telefon</string>
 	<string name="poi_waste_basket">Kosz na śmieci</string>
 
+	<string name="poi_mine_historic">Zabytkowa kopalnia</string>
+	<string name="poi_waterway_turning_point">Żeglugowy punkt zwrotny</string>
+	<string name="poi_weir">Grobla</string>
+	<string name="poi_power_plant">Elektrownia</string>
+	<string name="poi_power_generator">Generator prądu</string>
+
+	<string name="poi_communication_tower">Wieża komunikacyjna</string>
+	<string name="poi_telephone_exchange">Centrala telefoniczna</string>
+
+	<string name="poi_landfill">Składowisko odpadów</string>
+	<string name="poi_waste_disposal">Złomowisko</string>
+	<string name="poi_pier">Molo</string>
+	<string name="poi_surveillance">Centrum nadzoru</string>
+	<string name="poi_observatory">Obserwatorium</string>
+	<string name="poi_astronomical_observatory">Obserwatorium astronomiczne</string>
+	<string name="poi_tower">Wieża</string>
+	<string name="poi_mast">Maszt</string>
+	<string name="poi_radar">Radar</string>
+	<string name="poi_construction">Budowa</string>
+	<string name="poi_works">Fabryka</string>
+	<string name="poi_mineshaft">Szyb</string>
+	<string name="poi_adit">Sztolnia</string>
 	</resources>
