@@ -8,6 +8,7 @@ import java.util.Random;
 
 import net.osmand.Location;
 import net.osmand.access.AccessibleAlertBuilder;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
