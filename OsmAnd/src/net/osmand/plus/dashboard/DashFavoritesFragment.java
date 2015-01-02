@@ -69,13 +69,8 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			if(!getMyApplication().getSettings().isLastKnownMapLocation()) {
 				// show first time when application ran
 				location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
-				loc = new LatLon(getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLatitude(), getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLongitude());
 			} else {
 				location = getLocationProvider().getLastKnownLocation();
-				loc = new LatLon(getLocationProvider().getLastKnownLocation().getLatitude(), getLocationProvider().getLastKnownLocation().getLongitude());
-			}
-			if (loc == null) {
-				loc = getMyApplication().getSettings().getLastKnownMapLocation();
 			}
 			updateLocation(location);
 		}
@@ -180,11 +175,17 @@ public class DashFavoritesFragment extends DashBaseFragment {
 	}
 
 	public void updateLocation(Location location) {
-		if (location == null){
-			return;
+		//if (location == null) {
+		//	return;
+		//}
+		if (location != null) {
+			this.location = location;
+			loc = new LatLon(location.getLatitude(), location.getLongitude());
 		}
-		this.location = location;
-		this.loc = new LatLon(location.getLatitude(), location.getLongitude());
+		if (loc == null) {
+			loc = getMyApplication().getSettings().getLastKnownMapLocation();
+		}
+		this.loc = loc;
 		updateArrows();
 	}
 
