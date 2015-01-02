@@ -512,7 +512,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	}
 
 	@Override
-	public void updateLocation(Location location) {
+	public void updateLocation(LatLon location) {
 		for (WeakReference<Fragment> ref : fragList) {
 			Fragment f = ref.get();
 			if (f instanceof DashFavoritesFragment && !f.isDetached()) {

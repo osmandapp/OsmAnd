@@ -69,7 +69,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			if(!getMyApplication().getSettings().isLastKnownMapLocation()) {
 				// show first time when application ran
 				//location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
-				location = new LatLon(getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLatitide(), getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLongitude());
+				location = new LatLon(getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLatitude(), getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLongitude());
 			} else {
 				//location = getLocationProvider().getLastKnownLocation();
 				location = new LatLon(getLocationProvider().getLastKnownLocation().getLatitude(), getLocationProvider().getLastKnownLocation().getLongitude());
