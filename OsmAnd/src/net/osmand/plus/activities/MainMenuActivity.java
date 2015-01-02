@@ -8,7 +8,6 @@ import java.util.Random;
 
 import net.osmand.Location;
 import net.osmand.access.AccessibleAlertBuilder;
-import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -512,16 +511,15 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		}
 	}
 
-	//Remove for now to check error
-	//@Override
-	//public void updateLocation(LatLon location) {
-	//	for (WeakReference<Fragment> ref : fragList) {
-	//		Fragment f = ref.get();
-	//		if (f instanceof DashFavoritesFragment && !f.isDetached()) {
-	//			((DashFavoritesFragment) f).updateLocation(location);
-	//		}
-	//	}
-	//}
+	@Override
+	public void updateLocation(Location location) {
+		for (WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if (f instanceof DashFavoritesFragment && !f.isDetached()) {
+				((DashFavoritesFragment) f).updateLocation(location);
+			}
+		}
+	}
 
 	private OsmAndLocationProvider getLocationProvider() {
 		return getMyApplication().getLocationProvider();

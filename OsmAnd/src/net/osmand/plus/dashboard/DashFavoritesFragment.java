@@ -36,8 +36,8 @@ import java.util.List;
  */
 public class DashFavoritesFragment extends DashBaseFragment {
 	public static final String TAG = "DASH_FAVORITES_FRAGMENT";
-	//private net.osmand.Location location = null;
-	private LatLon location = null;
+	private net.osmand.Location location = null;
+	private LatLon loc = null;
 	private Float heading = null;
 	private List<ImageView> arrows = new ArrayList<ImageView>();
 	List<FavouritePoint> points = new ArrayList<FavouritePoint>();
@@ -68,16 +68,16 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
 			if(!getMyApplication().getSettings().isLastKnownMapLocation()) {
 				// show first time when application ran
-				//location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
-				location = new LatLon(getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLatitude(), getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLongitude());
+				location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
+				loc = new LatLon(getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLatitude(), getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation().getLongitude());
 			} else {
-				//location = getLocationProvider().getLastKnownLocation();
-				location = new LatLon(getLocationProvider().getLastKnownLocation().getLatitude(), getLocationProvider().getLastKnownLocation().getLongitude());
+				location = getLocationProvider().getLastKnownLocation();
+				loc = new LatLon(getLocationProvider().getLastKnownLocation().getLatitude(), getLocationProvider().getLastKnownLocation().getLongitude());
 			}
-			if (location == null) {
-				location = getMyApplication().getSettings().getLastKnownMapLocation();
+			if (loc == null) {
+				loc = getMyApplication().getSettings().getLastKnownMapLocation();
 			}
-			updateLocation(location);
+			updateLocation(loc);
 		}
 		setupFavorites();
 	}
@@ -166,7 +166,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 	private void updateArrow(FavouritePoint point, ImageView direction) {
 		float[] mes = new float[2];
 		LatLon l = new LatLon(point.getLatitude(), point.getLongitude());
-		Location.distanceBetween(l.getLatitude(), l.getLongitude(), location.getLatitude(), location.getLongitude(), mes);
+		Location.distanceBetween(l.getLatitude(), l.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
 		DirectionDrawable draw = new DirectionDrawable(getActivity(), 10, 10, true);
 		Float h = heading;
 		float a = h != null ? h : 0;
@@ -183,7 +183,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		if (location == null){
 			return;
 		}
-		this.location = location;
+		this.loc = loc;
 		updateArrows();
 	}
 
