@@ -221,4 +221,5 @@
 	<string name="poi_mineshaft">Szyb</string>
 	<string name="poi_adit">Sztolnia</string>
 	<string name="poi_petroleum_well">Szyb ropy naftowej</string>
+	<string name="poi_windmill">Wiatrak</string>
 	</resources>
