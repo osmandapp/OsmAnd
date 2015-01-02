@@ -222,4 +222,25 @@
 	<string name="poi_adit">Sztolnia</string>
 	<string name="poi_petroleum_well">Szyb ropy naftowej</string>
 	<string name="poi_windmill">Wiatrak</string>
+	<string name="poi_quarry">Kamieniołom</string>
+	<string name="poi_vineyard">Winnica</string>
+	<string name="poi_orchard">Sad</string>
+	<string name="poi_driving_school">Szkoła nauki jazdy</string>
+	<string name="poi_school">Szkoła</string>
+	<string name="poi_kindergarten">Przedszkole</string>
+	<string name="poi_college">Uczelnia</string>
+	<string name="poi_university">Uniwersytet</string>
+
+	<string name="poi_social_facility">Placówka społeczna</string>
+	<string name="poi_courthouse">Sąd</string>
+	<string name="poi_prison">Więzienie</string>
+	<string name="poi_register_office">Urząd stanu cywilnego</string>
+	<string name="poi_embassy">Ambasada</string>
+	<string name="poi_government">Rząd</string>
+	<string name="poi_bailiff">Komornik</string>
+	<string name="poi_prosecutor">Prokurator</string>
+	<string name="poi_pension_fund">Fundusz emerytalny</string>
+	<string name="poi_tax_inspection">Urząd podatkowy</string>
+	<string name="poi_administrative_office">Urząd</string>
+	<string name="poi_customs">Urząd celny</string>
 	</resources>
