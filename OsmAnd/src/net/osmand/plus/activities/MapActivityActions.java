@@ -686,6 +686,9 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getMainMenuActivity());
+				LatLon loc = mapActivity.getMapLocation();
+				newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+				newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				mapActivity.startActivity(newIntent);
 				return true;
