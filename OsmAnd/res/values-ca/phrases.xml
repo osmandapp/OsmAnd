@@ -118,4 +118,39 @@
 	<string name="poi_children_clothes_shop">Roba infantil</string>
 	<string name="poi_curtain_shop">Pelleteria</string>
 	<string name="poi_fabric_shop">Botiga de teixits</string>
+	<string name="poi_public_transport_platform">Parada de transport públic</string>
+	<string name="poi_bus_station">Estació d\'autobús (obsolet)</string>
+	<string name="poi_railway_station">Estació de tren (obsolet)</string>
+	<string name="poi_railway_platform">Andana de tren (obsolet)</string>
+	<string name="poi_railway_halt">Parada de tren (obsolet)</string>
+	<string name="poi_subway_entrance">Entrada de metro</string>
+	<string name="poi_subway_station">Estació de metro</string>
+	<string name="poi_taxi">Parada de taxis</string>
+
+	<string name="poi_airport">Aeroport</string>
+	<string name="poi_helipad">Heliport</string>
+	<string name="poi_runway">Pista d\'aterratge</string>
+	<string name="poi_aeroway_terminal">Terminal d\'aeroport</string>
+	<string name="poi_lighthouse">Far</string>
+
+	<string name="poi_bicycle_rental">Lloguer de bicicletes</string>
+	<string name="poi_bicycle_parking">Aparcament per bicicletes</string>
+
+	<string name="poi_houseware_shop">Complements per la llar</string>
+	<string name="poi_stationery_shop">Papereria</string>
+	<string name="poi_tableware_shop">Botiga de vaixelles</string>
+	<string name="poi_toys_shop">Botiga de joguines</string>
+	<string name="poi_trade_shop">Materials de construcció</string>
+	<string name="poi_variety_store">Botiga de descompte</string>
+	<string name="poi_video_shop">Videoclub</string>
+	<string name="poi_window_blind_shop">Botiga de persianes</string>
+	<string name="poi_ferry_terminal">Terminal de ferri</string>
+	<string name="poi_aerialway_cable_car">Telefèric</string>
+	<string name="poi_aerialway_station">Estació de remuntador</string>
+	<string name="poi_aerialway_gondola">Telecabina</string>
+	<string name="poi_aerialway_chair_lift">Telecadira</string>
+	<string name="poi_aerialway_t_bar">Teleesquí</string>
+	<string name="poi_tunnel">Túnel</string>
+	<string name="poi_bridge">Pont</string>
+
 	</resources>
