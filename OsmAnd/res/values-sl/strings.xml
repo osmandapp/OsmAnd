@@ -954,13 +954,13 @@
 	<string name="transport_Routes">Poti</string>
 	<string name="transport_Stop">Postaja</string>
 	<string name="transport_stops">postaje</string>
-	<string name="transport_search_after">Naslednja pot</string>	
+	<string name="transport_search_after">Naknadna pot</string>	
 	<string name="transport_search_before">Prejšnja pot</string>
 	<string name="transport_stop_to_go_out">Izberite izstopno postajo</string>
 	<string name="transport_to_go_after">prejšnja razdalja</string>
 	<string name="transport_to_go_before">naslednja razdalja</string>
 	<string name="transport_stops_to_pass">postaje do izstopa</string>
-	<string name="transport_route_distance">razdalja poti</string>
+	<string name="transport_route_distance">Razdalja poti</string>
 	<string name="default_buttons_ok">V redu</string>
 	<string name="show_transport_over_map_description">Prikaz postaj javnega prevoza na zemljevidu</string>
 	<string name="show_transport_over_map">Prikaz postaj prevoza</string>
