@@ -243,4 +243,8 @@
 	<string name="poi_tax_inspection">Urząd podatkowy</string>
 	<string name="poi_administrative_office">Urząd</string>
 	<string name="poi_customs">Urząd celny</string>
+	<string name="poi_city">Miasto</string>
+	<string name="poi_town">Miasto</string>
+	<string name="poi_village">Wieś</string>
+	<string name="poi_hamlet">Wioska</string>
 	</resources>
