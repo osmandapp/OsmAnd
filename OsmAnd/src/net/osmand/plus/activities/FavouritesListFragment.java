@@ -86,6 +86,7 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 			}
 		}
 		locationUpdate(location);
+		setListAdapter(favouritesAdapter);
 	}
 
 	@Override
