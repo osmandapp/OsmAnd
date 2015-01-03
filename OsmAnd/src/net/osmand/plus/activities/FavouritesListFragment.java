@@ -156,7 +156,6 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 					}
 				}
 			});			
-			notifyDataSetChanged();
 		}
 
 		public FavouritesAdapter(Activity activity, List<FavouritePoint> list) {
