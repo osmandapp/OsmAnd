@@ -613,7 +613,7 @@
 	<string name="search_position_favorites">Favorit…</string>
 	<string name="search_position_undefined">Undefiniert</string>
 	<string name="search_position_current_location">Aktueller Standort…</string>
-	<string name="search_position_map_view">Aktuelle Kartenposition</string>
+	<string name="search_position_map_view">Aktueller Kartenmittelpunkt</string>
 	<string name="select_search_position">Ausgangspunkt:</string>
 	<string name="context_menu_item_search">In der Nähe suchen</string>
 	<string name="save_route_dialog_title">Route als GPX-Track speichern</string>
