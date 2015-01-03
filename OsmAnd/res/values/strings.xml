@@ -1475,7 +1475,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_position_favorites">Favorites&#8230;</string>
 	<string name="search_position_undefined">Undefined</string>
 	<string name="search_position_current_location">Current position&#8230;</string>
-	<string name="search_position_map_view">Last map view</string>
+	<string name="search_position_map_view">Current map view</string>
 	<string name="select_search_position">Origin:</string>
 	<string name="context_menu_item_search">Search near here</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7:
@@ -1810,7 +1810,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="first_time_continue">Later</string>
 	<string name="first_time_download">Download regions</string>
 	<string name="search_poi_location">Searching for signal&#8230;</string>
-	<string name="search_near_map">Search near last map location</string>
+	<string name="search_near_map">Search near current map location</string>
 	<string name="search_nearby">Search nearby</string>
 	<string name="map_orientation_default">Same as device</string>
 	<string name="map_orientation_portrait">Portrait</string>
