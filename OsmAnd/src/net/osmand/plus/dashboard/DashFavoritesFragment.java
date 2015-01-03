@@ -155,6 +155,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			favorites.addView(view);
 		}
 		updateLocation(location);
+		mainView.invalidate();
 	}
 
 	private void updateArrows() {
