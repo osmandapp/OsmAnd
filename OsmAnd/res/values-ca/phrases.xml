@@ -177,4 +177,53 @@
 	<string name="poi_telephone_exchange">Central telefònica</string>
 
 	<string name="poi_recycling">Reciclatge</string>
+	<string name="poi_landfill">Abocador d\'escombraries</string>
+	<string name="poi_waste_disposal">Contenidor d\'escombraries</string>
+	<string name="poi_waste_basket">Paperera</string>
+
+	<string name="poi_pier">Moll</string>
+	<string name="poi_surveillance">Equip de vigilància</string>
+	<string name="poi_observatory">Observatori</string>
+	<string name="poi_astronomical_observatory">Observatori astronòmic</string>
+	<string name="poi_tower">Torre</string>
+	<string name="poi_construction">En construcció</string>
+	<string name="poi_works">Fàbrica</string>
+	<string name="poi_quarry">Pedrera</string>
+	<string name="poi_vineyard">Vinya</string>
+	<string name="poi_orchard">Plantació de fruiters</string>
+	<string name="poi_salt_pond">Salina</string>
+	<string name="poi_cricket_nets">Xarxes de criquet</string>
+
+	<string name="poi_driving_school">Autoescola</string>
+	<string name="poi_school">Escola</string>
+	<string name="poi_kindergarten">Llar d\'infants</string>
+	<string name="poi_college">Institut</string>
+	<string name="poi_university">Universitat</string>
+
+	<string name="poi_social_facility">Serveis socials</string>
+	<string name="poi_courthouse">Palau de justícia</string>
+	<string name="poi_prison">Presó</string>
+	<string name="poi_register_office">Oficina de registre civil</string>
+	<string name="poi_embassy">Ambaixada</string>
+	<string name="poi_government">Oficina governamental</string>
+	<string name="poi_prosecutor">Fiscal</string>
+	<string name="poi_bailiff">Batlle</string>
+	<string name="poi_pension_fund">Fons de pensions</string>
+	<string name="poi_migration">Migració</string>
+	<string name="poi_tax_inspection">Recaptació d\'impostos</string>
+	<string name="poi_customs">Duana</string>
+	<string name="poi_city">Ciutat</string>
+	<string name="poi_town">Vila</string>
+	<string name="poi_village">Poble</string>
+	<string name="poi_hamlet">Llogaret</string>
+	<string name="poi_isolated_dwelling">Assentament aïllat</string>
+	<string name="poi_suburb">Barri</string>
+	<string name="poi_place_allotments">Horts familiars</string>
+	<string name="poi_place_farm">Granja</string>
+
+	<string name="poi_pharmacy">Farmàcia</string>
+	<string name="poi_hospital">Hospital</string>
+	<string name="poi_doctors">Centre mèdic</string>
+	<string name="poi_clinic">Clínica</string>
+	<string name="poi_first_aid">Primers auxilis</string>
 	</resources>
