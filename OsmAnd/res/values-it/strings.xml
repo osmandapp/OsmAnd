@@ -142,7 +142,7 @@
   <string name="search_position_fixed">Fissato</string>
   <string name="search_position_current_location">Posizione corrente…</string>
   <string name="search_position_map_view">Ultima vista mappa</string>
-  <string name="select_search_position">Cerca vicino a:</string>
+  <string name="select_search_position">Origine:</string>
   <string name="context_menu_item_search">Cerca nelle vicinanze</string>
   <string name="tip_recent_changes_0_6_7_t">Novità nella versione 0.6.7:
 		\n\t- Manager dati offline (scaricare, eliminare e backup di dati offline direttamente da OsmAnd)
@@ -223,7 +223,7 @@
   <string name="voice_not_use">Non usare</string>
   <string name="voice_not_specified">Nessuna</string>
   <string name="installing_new_resources">Scompattazione nuovi dati…</string>
-  <string name="internet_connection_required_for_online_route">E\' selezionato un servizio di navigazione online ma la connessione a internet non è disponibile.</string>
+  <string name="internet_connection_required_for_online_route">È stato selezionato un servizio di navigazione online, ma la connessione a Internet non è disponibile.</string>
   <string name="tts_language_not_supported_title">Lingua non supportata</string>
   <string name="tts_language_not_supported">La lingua selezionata non è supportata nel motore TTS (text-to-speech) Android installato. Vuoi vedere in Market un altro motore TTS? Altrimenti verrà utilizzata la lingua TTS preimpostata.</string>
   <string name="tts_missing_language_data_title">Dati mancanti</string>
@@ -342,7 +342,7 @@
   <string name="amenity_type_sport">Sport</string>
   <string name="amenity_type_sustenance">Alimentari</string>
   <string name="amenity_type_tourism">Turismo</string>
-  <string name="amenity_type_transportation">Trasporto</string>
+  <string name="amenity_type_transportation">Trasporti pubblici</string>
   <string name="indexing_address">Indicizzazione indirizzi…</string>
   <string name="indexing_map">Indicizzazione mappa…</string>
   <string name="indexing_poi">Indicizzazione PDI…</string>
@@ -353,7 +353,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Il formato dati mappa \'\'{0}\'\' è deprecato e non è supportato</string>
   <string name="poi_filter_car_aid">Servizi automobile</string>
-  <string name="poi_filter_closest_poi">PDI più vicini</string>
+  <string name="poi_filter_closest_poi">Tutti i PDI più vicini</string>
   <string name="poi_filter_custom_filter">Filtro personalizzato</string>
   <string name="poi_filter_food_shop">Alimentari</string>
   <string name="poi_filter_for_tourists">Turistico</string>
@@ -521,14 +521,14 @@
   <string name="transport_Routes">Percorsi</string>
   <string name="transport_Stop">Fermata</string>
   <string name="transport_stops">fermate</string>
-  <string name="transport_search_after">Percorso successivo</string>
-  <string name="transport_search_before">Percorso precedente</string>
+  <string name="transport_search_after">Itinerario successivo</string>
+  <string name="transport_search_before">Itinerario precedente</string>
   <string name="transport_finish_search">Completa la ricerca</string>
   <string name="transport_stop_to_go_out">Scegli ferma per uscire</string>
   <string name="transport_to_go_after">distanza precedente</string>
   <string name="transport_to_go_before">distanza successiva</string>
   <string name="transport_stops_to_pass">fermate da passare</string>
-  <string name="transport_route_distance">Distanza percorso</string>
+  <string name="transport_route_distance">Distanza itinerario</string>
   <string name="transport">Trasporto pubblico</string>
   <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Visualizza le fermate di trasporto pubblico sulla mappa</string>
@@ -1655,7 +1655,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	\n\t* Molte piccole migliorie dell\'interfaccia utente &amp; correzioni usabilità
 	\n\t* Impostazioni della velocità della vocalizzazione
     </string>
-    <string name="calculate_osmand_route_without_internet">Calcola un tratto di percorso OsmAnd senza l\'utilizzo di internet</string>
+    <string name="calculate_osmand_route_without_internet">Calcola un tratto di percorso OsmAnd senza l\'utilizzo di Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcola una percorso OsmAnd per il primo e l\'ultimo tratto del percorso</string>
     <string name="osmodroid_unseek">Oggetto non trovato</string>
     <string name="lang_en">Inglese</string>
@@ -1842,7 +1842,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="gpx_available_current_track">Traccia attualmente in registrazione</string>
     <string name="selected">selezionato</string>
     <string name="gpx_split_interval">Intervallo suddivisione</string>
-    <string name="loading_smth">Caricamento di %1$s …</string>
+    <string name="loading_smth">Caricamento di %1$s…</string>
     <string name="gpx_wpt">Tappa</string>
     <string name="selected_gpx_info_show">\n\nTieni premuto per vederlo sulla mappa</string>
     <string name="delay_navigation_start">Avvia la navigazione passo per passo automaticamente</string>
@@ -2009,7 +2009,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="show_all">MOSTRA TUTTO</string>
 	<string name="coordinates">Coordinate</string>
 	<string name="home_button">Schermata iniziale</string>
-    <string name="map_update">Ci sono %1$s aggiornamenti per le mappe</string>
+    <string name="map_update">Ci sono aggiornamenti per %1$s mappe</string>
 	<string name="search_for">Cerca</string>
 	<string name="show_map">MOSTRA LA MAPPA</string>
 	<string name="error_avoid_specific_road">Nessuna alternativa trovata</string>
@@ -2037,9 +2037,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_germanRoadAtlas_name">Atlante strade tedesche</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlante strade americane</string>
     <string name="routing_attr_no_new_routing_name">Non usare il calcolo del percorso v1.9</string>
-    <string name="routing_attr_no_new_routing_description">Non usare il calcolo del percorso v1.9</string>
-    <string name="traffic_warning_railways">Ferrovie</string>
-	<string name="traffic_warning_pedestrian">Pedonale</string>
+    <string name="routing_attr_no_new_routing_description">Non usare le regole di calcolo del percorso introdotte nella v1.9</string>
+    <string name="traffic_warning_railways">Passaggio a livello</string>
+	<string name="traffic_warning_pedestrian">Attraversamento pedonale</string>
 	<string name="show_railway_warnings">Mostra i passaggi a livello</string>
 	<string name="show_pedestrian_warnings">Mostra gli attraversamenti pedonali</string>
     <string name="speak_pedestrian">Annuncia gli attraversamenti pedonali</string>
