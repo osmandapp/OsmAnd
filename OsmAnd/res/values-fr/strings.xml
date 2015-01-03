@@ -359,7 +359,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
   <string name="poi_filter_car_aid">Pour conducteurs</string>
-  <string name="poi_filter_closest_poi">Tous les Points d\'Intérêt les plus proches</string>
+  <string name="poi_filter_closest_poi">Points d\'Intérêt les plus proches</string>
   <string name="poi_filter_custom_filter">Filtre personnalisé</string>
   <string name="poi_filter_food_shop">Alimentation</string>
   <string name="poi_filter_for_tourists">Pour voyageurs</string>
@@ -422,8 +422,8 @@
   <string name="unknown_location">Position inconnue</string>
   <string name="download_files">Télécharger</string>
   <string name="context_menu_item_search_transport">Chercher un transport public</string>
-  <string name="transport_searching_transport">Arrêts à proximité (aucune destination définie) :</string>
-  <string name="transport_searching_route">Arrêts à proximité ({0} de la destination) :</string>
+  <string name="transport_searching_transport">Transports possibles (aucune destination définie) :</string>
+  <string name="transport_searching_route">Transports possibles ({0} pour rejoindre la destination) :</string>
   <string name="transport_search_none">aucun</string>
   <string name="transport_search_again">Réinitialiser la recherche de transport</string>
   <string name="map_index">Carte</string>
@@ -534,7 +534,7 @@
   <string name="transport_to_go_after">parcourir ensuite</string>
   <string name="transport_to_go_before">parcourir au préalable</string>
   <string name="transport_stops_to_pass">nombre d\'arrêts :</string>
-  <string name="transport_route_distance">Distance du trajet :</string>
+  <string name="transport_route_distance">Distance de l\'itinéraire :</string>
   <string name="transport">Transport</string>
   <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Afficher les arrêts de transport publics sur la carte</string>
