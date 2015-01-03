@@ -657,7 +657,7 @@
 	<string name="km_h">χλμ/ω</string>
 	<string name="m">μ</string>
 	<string name="old_map_index_is_not_supported">Παρωχημένη μορφή δεδομένων χάρτη \'\'{0}\'\' δεν υποστηρίζεται</string>
-	<string name="poi_filter_closest_poi">Πλησιέστερο ΣΕ</string>
+	<string name="poi_filter_closest_poi">Πλησιέστερα ΣΕ</string>
 	<string name="poi_filter_custom_filter">Προσαρμοσμένο φίλτρο</string>
 	<string name="poi_filter_namefinder">Online NameFinder</string>
 	<string name="reading_cached_tiles">Ανάγνωση αποθηκευμένων πλακιδίων…</string>
