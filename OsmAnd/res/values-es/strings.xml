@@ -196,7 +196,7 @@
   
   <string name="local_index_poi_data">Datos de PDI</string>
   <string name="local_index_address_data">Datos de direcciones</string>
-  <string name="local_index_transport_data">Datos de transporte</string>
+  <string name="local_index_transport_data">Datos de transporte público</string>
   <string name="local_index_map_data">Datos de mapa</string>
   <string name="local_indexes_cat_backup">Desactivado</string>
   <string name="local_indexes_cat_tts">Datos de voz (sintetizado)</string>
@@ -412,9 +412,9 @@
   <string name="use_high_res_maps_descr">No estira (ni hace borrosas) las teselas de mapa en pantallas de alta densidad</string>
   <string name="unknown_location">Posición aún desconocida</string>
   <string name="download_files">Descargar</string>
-  <string name="context_menu_item_search_transport">Buscar transporte</string>
-  <string name="transport_searching_transport">Resultados transporte (sin destino):</string>
-  <string name="transport_searching_route">Resultados transporte ({0} al destino):</string>
+  <string name="context_menu_item_search_transport">Buscar transporte público</string>
+  <string name="transport_searching_transport">Resultados de transporte (sin destino):</string>
+  <string name="transport_searching_route">Resultados de transporte ({0} al destino):</string>
   <string name="transport_search_none">ninguno</string>
   <string name="transport_search_again">Reiniciar búsqueda de transporte</string>
   <string name="map_index">Mapa</string>
@@ -425,7 +425,7 @@
   <string name="layer_gpx_layer">Traza GPX…</string>
   <string name="error_reading_gpx">Error leyendo datos GPX</string>
   <string name="vector_data">Mapas vectoriales descargados</string>
-  <string name="transport_context_menu">buscar transporte en parada</string>
+  <string name="transport_context_menu">Buscar transporte en parada</string>
   <string name="point_on_map">Localización:\n Lat %1$.5f\n Lon %2$.5f</string>
   <string name="osb_bug_name">Fallo</string>
   <string name="poi_context_menu_modify">Modificar PDI</string>
@@ -517,17 +517,17 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="transport_Routes">Rutas</string>
   <string name="transport_Stop">Parada</string>
   <string name="transport_stops">paradas</string>
-  <string name="transport_search_after">Ruta subsiguiente</string>
-  <string name="transport_search_before">Ruta previa</string>
+  <string name="transport_search_after">Itinerario siguiente</string>
+  <string name="transport_search_before">Itinerario anterior</string>
   <string name="transport_finish_search">Finalizar búsqueda</string>
   <string name="transport_stop_to_go_out">Elige parada a la que ir</string>
   <string name="transport_to_go_after">distancia previa</string>
   <string name="transport_to_go_before">distancia siguiente</string>
   <string name="transport_stops_to_pass">paradas a pasar</string>
-  <string name="transport_route_distance">Distancia de ruta</string>
+  <string name="transport_route_distance">Distancia del itinerario</string>
   <string name="transport">Transporte</string>
   <string name="default_buttons_ok">Aceptar</string>
-  <string name="show_transport_over_map_description">Mostrar paradas de transporte público en el mapa</string>
+  <string name="show_transport_over_map_description">Muestra paradas de transporte público en el mapa</string>
   <string name="show_transport_over_map">Mostrar paradas de transporte</string>
   <string name="hello">Aplicación de navegación OsmAnd</string>
   <string name="update_poi_success">Datos de PDIs correctamente actualizados (se cargaron {0})</string>
@@ -867,7 +867,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="poi_search_desc">Buscar PDI (Punto De Interes)</string>
   <string name="address_search_desc">Buscar dirección</string>
   <string name="navpoint_search_desc">Coordenadas</string>
-  <string name="transport_search_desc">Buscar transportes</string>
+  <string name="transport_search_desc">Búsqueda de transporte público</string>
   <string name="favourites_search_desc">Buscar favorito</string>
   <string name="history_search_desc">Historial de búsqueda</string>
   <string name="rendering_attr_noPolygons_description">Hacer todas las características del terreno transparentes en el mapa</string>
@@ -1026,7 +1026,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="btn_advanced_mode">Modo Avanzado…</string>
     <string name="poi_filter_parking">Aparcamiento</string>
     <string name="poi_filter_emergency">Emergencia</string>
-    <string name="poi_filter_public_transport">Transporte Público</string>
+    <string name="poi_filter_public_transport">Transporte público</string>
     <string name="poi_filter_entertainment">Entretenimiento</string>
     <string name="poi_filter_accomodation">Alojamiento</string>
     <string name="poi_filter_restaurants">Restaurantes</string>
@@ -1455,9 +1455,9 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="speech_rate_descr">Especifica la velocidad en el habla sintetizada (TTS)</string>
     <string name="speech_rate">Velocidad del habla sintetizada (TTS)</string>
     <string name="application_dir_change_warning2">¿Quieres que OsmAnd copie sus archivos de datos al nuevo destino? Selecciona \'No\' para que OsmAnd cree y use la nueva carpeta.</string>
-    <string name="copying_osmand_one_file_descr">Copiando archivo (%s) al nuevo destino...</string>
-    <string name="copying_osmand_files_descr">Copiando archivos de OsmAnd al nuevo destino (%s)</string>
-    <string name="copying_osmand_files">Copiando archivos de datos de OsmAnd</string>
+    <string name="copying_osmand_one_file_descr">Copiando archivo (%s) al nuevo destino…</string>
+    <string name="copying_osmand_files_descr">Copiando archivos de OsmAnd al nuevo destino (%s)…</string>
+    <string name="copying_osmand_files">Copiando archivos de datos de OsmAnd…</string>
     <string name="app_mode_truck">Camión</string>
     <string name="complex_route_calculation_failed">Falló el cálculo rápido de la ruta (%s), regresando a cálculo lento.</string>
     <string name="disable_complex_routing_descr">Deshabilitar la planificación de ruta de dos fases para la navegación con automóvil</string>
@@ -1483,10 +1483,10 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
 \n Nota 2: En la nueva ubicación de almacenamiento no será posible compartir archivos entre OsmAnd y OsmAnd+.</string>
     <string name="use_displayed_track_for_navigation">¿Desea usar la ruta mostrada para la navegación?</string>
     <string name="keep_and_add_destination_point">Añadir como punto de destino</string>
-    <string name="select_gpx">Seleccionar GPX …</string>
+    <string name="select_gpx">Seleccionar GPX…</string>
     <string name="route_descr_select_destination">Seleccionar destino</string>
-    <string name="route_descr_select_on_map">Seleccionar en el mapa …</string>
-    <string name="route_descr_favorite">Favorito …</string>
+    <string name="route_descr_select_on_map">Seleccionar en el mapa…</string>
+    <string name="route_descr_favorite">Favorito…</string>
     <string name="route_preferences">Preferencias de la ruta</string>
     <string name="route_info">Información de la ruta</string>
     <string name="tip_recent_changes_1_7_1_t">"Cambios en 1.7:
@@ -1583,7 +1583,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="osmo_connect_to_device_name">Nombre de usuario</string>
     
     <string name="osmo_connected_devices">Dispositivos conectados</string>
-    <string name="osmo_auth_pending">Esperando autorización...</string>
+    <string name="osmo_auth_pending">Esperando autorización…</string>
     <string name="osmo_locations_sent">Localizaciones enviadas %1$d (en buffer %2$d) </string>
     <string name="osmo_conn_successfull">Conexión establecida: %1$s </string>
     <string name="osmo_groups">Grupos/Dispositivos OsMo</string>
@@ -1673,7 +1673,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="gpx_file_is_empty">La traza GPX está vacía</string>
     <string name="selected_track">Pista seleccionada</string>
     <string name="my_tracks">Todas las pistas</string>
-    <string name="loading_smth">Cargando %1$s …</string>
+    <string name="loading_smth">Cargando %1$s…</string>
     <string name="selected_gpx_info_show">\n\nMantenga pulsado para ver el mapa</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
     <string name="selected">seleccionado</string>
@@ -1760,7 +1760,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="rendering_attr_osmcTraces_name">Superponer símbolo de senderismo</string>
     <string name="rendering_attr_osmcTraces_description">Dibujar caminos de acuerdo a las trazas de OSMC</string>
     
-	<string name="osmo_invite">Invitar...</string>
+	<string name="osmo_invite">Invitar…</string>
     <string name="osmo_leave_confirmation_msg">¿Quieres abandonar el grupo %1$s?</string>
     <string name="osmo_specify_tracker_id">Especifique el id</string>
     <string name="arrival_distance_factor_early">Pronto</string>
@@ -1776,7 +1776,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="rendering_value_car_name">Coche</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">Peatón</string>
-    <string name="more">Más...</string>
+    <string name="more">Más…</string>
     <string name="download_additional_maps">¿Descargar los mapas que faltan %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">Todos</string>
     <string name="waypoints">Puntos de ruta</string>
