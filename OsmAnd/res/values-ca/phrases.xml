@@ -154,4 +154,12 @@
 	<string name="poi_bridge">Pont</string>
 
 	<string name="poi_vacuum_cleaner_shop">Aspiradores i aparells de neteja</string>
+	<string name="poi_motorway_junction">Sortida d\'autopista</string>
+
+	<string name="poi_water_well">Pou d\'aigua</string>
+	<string name="poi_boatyard">Drassana</string>
+	<string name="poi_wastewater_plant">Planta de tractament d\'aigües residuals</string>
+	<string name="poi_water_tower">Torre d\'aigua</string>
+	<string name="poi_lock_gate">Resclosa</string>
+	<string name="poi_weir">Abocador d\'aigua</string>
 	</resources>
