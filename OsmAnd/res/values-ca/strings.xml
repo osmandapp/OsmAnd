@@ -523,7 +523,7 @@
 <string name="yard">iardes</string>
 <string name="mile_per_hour">mph</string>
 <string name="mile">milles</string>
-<string name="poi_filter_closest_poi">PDI més proper</string>
+<string name="poi_filter_closest_poi">PDIs més propers</string>
 <string name="poi_context_menu_website">Mostra el lloc web del PDI</string>
 <string name="phone">Telèfon</string>
 <string name="download_type_to_filter">Tipus de filtre</string>
