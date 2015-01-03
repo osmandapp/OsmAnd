@@ -1038,8 +1038,8 @@
 		\n\t* \'Nella direzione del movimento\' - La mappa sarà sempre allineata alla vostra direzione
 		\n\t* \'Con la bussola\' - La mappa sarà sempre allineata alla lettura della bussola del dispositivo
 	</string>
-<string name="tip_day_night_mode_t_v2">"L\'aspetto della mappa può, per alcune mappe vettoriali, essere cambiato fra diurno (luminoso) e notturno (scuro). I colori notturni sono più sicuri e più confortevoli per la guida di notte.
-\n\nSi può impostare una regola per il cambio giorno/notte in \'Menu\' → \'Configurazione schermo…\' → \'Mappa giorno/notte\'.
+<string name="tip_day_night_mode_t_v2">"Per le mappe vettoriali offline, l\'aspetto della mappa può essere cambiato fra diurno (luminoso) e notturno (scuro). I colori notturni sono più sicuri e meno fastidiosi per la guida di notte.
+\n\nSi può impostare una regola per il cambio giorno/notte in \'Menu\' → \'Configura la mappa\' → \'Mappa giorno/notte\'.
 \n\nLe opzioni sono:
 \n\t* \'Alba/Tramonto\': automatico, in base alla posizione del sole (preimpostato)
 \n\t* \'Giorno\': usa sempre il modo diurno
