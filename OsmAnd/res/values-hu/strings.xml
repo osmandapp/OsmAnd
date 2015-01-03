@@ -212,7 +212,7 @@
   <string name="search_position_undefined">Meghatározatlan</string>
   <string name="search_position_fixed"/>
   <string name="search_position_current_location">Jelenlegi pozíció…</string>
-  <string name="search_position_map_view">Utolsó térképnézet</string>
+  <string name="search_position_map_view">Jelenlegi térkép középpont</string>
   <string name="select_search_position">Eredet:</string>
   <string name="context_menu_item_search">Keresés itt</string>
   <string name="tip_recent_changes_0_6_7_t">0.6.7 verzió változásai: \n\t- Offline - kapcsolat nélküli - adat kezelés (letöltés, törlés, aktiválás/deaktiválás közvetlenül az OsmAndban) \n\t- Kedvenc pontok és csoportok (csoportosítás, törlés, kedvencek kezelése) \n\t- Beépített GPX böngésző (útvonalak megjelenítése, távolság, átlagsebesség, magasság, stb.) \n\t- GPX navigáció (hasznos opciók, összeomlás után útvonal folytatása, körforgalmak kezelése) \n\t- Útvonal mentése GPX útvonalként kapcsolat nélküli munkához \n\t- GPX adatok kibővítése (pontatlan adatok kiszűrése és pontosság/emelkedés/sebesség mentése) \n\t- GPX útvonal feltöltése az OSM közösséghez (http://download.osmand.net/gpx/) \n\t- Vektoros megjelenítés javítása \n\t- TTS javítások (pontos távolság kimondása, mérföld) \n\t- Hibajavítások
@@ -414,7 +414,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Az elavult térkép formátum \'\'{0}\'\' nem támogatott</string>
   <string name="poi_filter_car_aid">Autós segítség</string>
-  <string name="poi_filter_closest_poi">Közeli POI</string>
+  <string name="poi_filter_closest_poi">Legközelebbi POI-k</string>
   <string name="poi_filter_custom_filter">Egyéni szűrő</string>
   <string name="poi_filter_food_shop">Élelmiszer üzlet</string>
   <string name="poi_filter_for_tourists">Turistáknak</string>
@@ -567,7 +567,7 @@
   <string name="first_time_download">Térképadatok letöltése</string>
   <string name="first_time_msg">Köszönjük, hogy az OsmAndot használod! Hogy a program minden lehetőségét kihasználhasd, regionális offline adatokra lesz szükséged, amiket a \'Beállítások\' → \'Térképek kezelése\' menüben szerezhetsz be. Ezt követően tudsz majd térképet nézni, címre, POI-ra és tömegközlekedési eszközre keresni.</string>
   <string name="search_poi_location">Jel keresése…</string>
-  <string name="search_near_map">Keresés az utolsó térképpozíció közelében</string>
+  <string name="search_near_map">Keresés a jelenlegi térkép középpontja közelében</string>
   <string name="search_nearby">Keresés a közelben</string>
   <string name="map_orientation_default">Mint a készülék</string>
   <string name="map_orientation_portrait">Függőleges</string>
