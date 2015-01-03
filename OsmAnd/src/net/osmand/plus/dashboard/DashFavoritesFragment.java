@@ -182,7 +182,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 	public void updateCompassValue(float value) {
 		//heading = value;
 		//updateArrows();
-		float lastHeading = heading;
+		float lastHeading = heading != null ? heading : 99;
 		heading = value;
 		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
 			updateArrows();
