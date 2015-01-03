@@ -177,7 +177,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 			LatLon last = settings.getLastKnownMapLocation();
 			if(!Algorithms.objectEquals(reqSearchPoint, last)){
 				reqSearchPoint = last;
-				updateSearchPoint(last, getString(R.string.select_search_position), true);
+				updateSearchPoint(last, getString(R.string.select_search_position) + " " + getString(R.string.search_position_map_view), false);
 			}
 		}
     }
@@ -239,7 +239,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 						searchAroundCurrentLocation = false;
 						endSearchCurrentLocation();
 						if (position == POSITION_LAST_MAP_VIEW) {
-							updateSearchPoint(settings.getLastKnownMapLocation(), getString(R.string.select_search_position) + " ", true);
+							updateSearchPoint(settings.getLastKnownMapLocation(), getString(R.string.select_search_position) + " " + getString(R.string.search_position_map_view), false);
 						} else if (position == POSITION_FAVORITES) {
 							Intent intent = new Intent(SearchActivity.this, FavouritesListActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
