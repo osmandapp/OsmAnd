@@ -882,7 +882,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="search_position_undefined">Нявызначана</string>
 	<string name="search_position_fixed">Вызначана</string>
 	<string name="search_position_current_location">Бягучае месцазнаходжаньне…</string>
-	<string name="search_position_map_view">Апошні выгляд мапы</string>
+	<string name="search_position_map_view">Бягучы выгляд мапы</string>
 	<string name="select_search_position">Пачатак:</string>
 	<string name="context_menu_item_search">Шукаць навокал</string>
 	<string name="save_route_dialog_title">Захаваць шлях як GPX сьлед</string>
@@ -925,7 +925,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="local_index_download">Зладаваць</string>
 	<string name="local_index_poi_data">Зьвесткі цікавосткаў</string>
 	<string name="local_index_address_data">Адрас</string>
-	<string name="local_index_transport_data">Транспартныя дадзеныя</string>
+	<string name="local_index_transport_data">Зьвесткi грамадзкага транспарту</string>
 	<string name="local_index_map_data">Дадзеныя мапы</string>
 	<string name="local_indexes_cat_backup">Не актыўны</string>
 	<string name="local_indexes_cat_tts">Галасавыя зьвесткі (TTS)</string>
@@ -1056,7 +1056,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="km_h">км/г</string>
 	<string name="m">м</string>
 	<string name="old_map_index_is_not_supported">Састарэлы фармат дадзеных мапы \'\'{0}\'\' не падтрымліваецца</string>
-	<string name="poi_filter_closest_poi">Бліжэйшыя цікавосткі</string>
+	<string name="poi_filter_closest_poi">Бліжэйшыя POI</string>
 	<string name="poi_filter_custom_filter">Свой фільтар</string>
 	<string name="poi_filter_namefinder">Сеткавы NameFinder</string>
 	<string name="reading_cached_tiles">Чытаньне кэшаваных растравых мапаў…</string>
@@ -1110,9 +1110,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="use_high_res_maps">Дысплей высокай рэзалюцыі</string>
 	<string name="use_high_res_maps_descr">Не расьцягваць (з размыццём) растравыя мапы на дысплеях з высокай шчыльнасьцю</string>
 	<string name="download_files">Зладаваць</string>
-	<string name="context_menu_item_search_transport">Пошук транспарту</string>
-	<string name="transport_searching_transport">Пошук транспарту (няма цэлі):</string>
-	<string name="transport_searching_route">Пошук транспарту ({0} да цэлі):</string>
+	<string name="context_menu_item_search_transport">Шукаць грамадзкi транспарт</string>
+	<string name="transport_searching_transport">Вынiк пошуку транспарту (няма цэлі):</string>
+	<string name="transport_searching_route">Вынiк пошуку транспарту ({0} да цэлі):</string>
 	<string name="transport_search_none">няма</string>
 	<string name="transport_search_again">Шукаць транспарт зноў</string>
 	<string name="map_index">Мапа</string>
@@ -1123,7 +1123,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="layer_gpx_layer">GPX сьлед…</string>
 	<string name="error_reading_gpx">Памылка пры чытаньні GPX дадзеных</string>
 	<string name="vector_data">Лакальныя вектарныя мапы</string>
-	<string name="transport_context_menu">Пошук транспарту на прыпынку</string>
+	<string name="transport_context_menu">Шукаць транспарт на прыпынку</string>
 	<string name="point_on_map">Месца:\n %1$.5f шыр.\n %2$.5f даў.</string>
 	<string name="osb_bug_name">Памылка</string>
 	<string name="poi_context_menu_modify">Зьмяніць цікавостку</string>
@@ -1145,7 +1145,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="none_region_found">На SD-карце не знойдзена лакальных дадзеных для рэгіёнаў. Спампаваць рэгіёны з Інтэрнэту.</string>
 	<string name="poi_namefinder_query_empty">Увядзіце запыт для пошуку POI</string>
 	<string name="any_poi">Усе</string>
-	<string name="layer_transport_route">Маршрут перавозкі</string>
+	<string name="layer_transport_route">Маршрут транспарту</string>
 	<string name="thanks_yandex_traffic">Дзякуй Яндэксу за дарожную інфармацыю.</string>
 	<string name="layer_yandex_traffic">Яндэкс заторы</string>
 	<string name="layer_route">Маршрут</string>
@@ -1199,7 +1199,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="first_time_continue">Далей</string>
 	<string name="first_time_download">Зладаваць рэгіёны</string>
 	<string name="search_poi_location">Пошук сігналу…</string>
-	<string name="search_near_map">Пошук побач з апошнім месцам на мапе</string>
+	<string name="search_near_map">Шукаць побач з бягучым месцам на мапе</string>
 	<string name="search_nearby">Шукаць паблізу</string>
 	<string name="map_orientation_default">Па змаўчаньні</string>
 	<string name="map_orientation_portrait">Вэртыкальная</string>
@@ -1211,7 +1211,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="transport_Routes">Маршруты</string>
 	<string name="transport_Stop">Прыпынак</string>
 	<string name="transport_stops">прыпынкаў</string>
-	<string name="transport_search_after">Наступны маршрут</string>	
+	<string name="transport_search_after">Далейшы маршрут</string>	
 	<string name="transport_search_before">Папярэдні маршрут</string>
 	<string name="transport_finish_search">Скончыць пошук</string>
 	<string name="transport_stop_to_go_out">Выберыце прыпынак для сходу</string>
@@ -1221,7 +1221,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="transport_route_distance">Даўжыня маршруту</string>
 	<string name="transport">Транспарт</string>
 	<string name="default_buttons_ok">Добра</string>
-	<string name="show_transport_over_map_description">Паказаць прыпынкі грамадскага транспарту на мапе</string>
+	<string name="show_transport_over_map_description">Паказаць прыпынкі грамадзкага транспарту на мапе</string>
 	<string name="show_transport_over_map">Паказваць прыпынкі транспарту</string>
 	<string name="hello">Навігацыйная праграма OsmAnd</string>
 	<string name="update_poi_success">Дадзеныя POI былі пасьпяхова абноўленыя ({0} аб\'ектаў загружана)</string>
