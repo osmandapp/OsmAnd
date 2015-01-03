@@ -506,17 +506,27 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 	@Override
 	public void updateCompassValue(float value) {
+		float lastHeading = heading;
 		heading = value;
-		if(!uiHandler.hasMessages(COMPASS_REFRESH_MSG_ID)){
-			Message msg = Message.obtain(uiHandler, new Runnable(){
-				@Override
-				public void run() {
-					amenityAdapter.notifyDataSetChanged();
-				}
-			});
-			msg.what = COMPASS_REFRESH_MSG_ID;
-			uiHandler.sendMessageDelayed(msg, 100);
+		if(heading != null && lastheading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 3) {
+			@Override
+			public void run() {
+				amenityAdapter.notifyDataSetChanged();
+			}
+		} else {
+			heading = lastHeading;
 		}
+		//Comment out and use lastHeading above to see if this fixes issues seen on some devices
+		//if(!uiHandler.hasMessages(COMPASS_REFRESH_MSG_ID)){
+		//	Message msg = Message.obtain(uiHandler, new Runnable(){
+		//		@Override
+		//		public void run() {
+		//			amenityAdapter.notifyDataSetChanged();
+		//		}
+		//	});
+		//	msg.what = COMPASS_REFRESH_MSG_ID;
+		//	uiHandler.sendMessageDelayed(msg, 100);
+		//}
 	}
 	
 	
