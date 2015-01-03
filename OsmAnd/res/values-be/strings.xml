@@ -881,7 +881,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="search_position_undefined">Нявызначана</string>
 	<string name="search_position_fixed">Вызначана</string>
 	<string name="search_position_current_location">Бягучае месцазнаходжаньне…</string>
-	<string name="search_position_map_view">Бягучы выгляд мапы</string>
+	<string name="search_position_map_view">Бягучы цэнтар мапы</string>
 	<string name="select_search_position">Пачатак:</string>
 	<string name="context_menu_item_search">Шукаць навокал</string>
 	<string name="save_route_dialog_title">Захаваць шлях як GPX сьлед</string>
@@ -1198,7 +1198,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="first_time_continue">Далей</string>
 	<string name="first_time_download">Зладаваць рэгіёны</string>
 	<string name="search_poi_location">Пошук сігналу…</string>
-	<string name="search_near_map">Шукаць побач з бягучым месцам на мапе</string>
+	<string name="search_near_map">Шукаць побач з бягучым цэнтрам мапы</string>
 	<string name="search_nearby">Шукаць паблізу</string>
 	<string name="map_orientation_default">Па змаўчаньні</string>
 	<string name="map_orientation_portrait">Вэртыкальная</string>
@@ -1976,8 +1976,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="voices">Галасавыя падказкі</string>
 	<string name="rendering_value_orange_name">Аранжавы</string>
     <string name="rendering_value_germanRoadAtlas_name">Нямецкі атлас аўтадарог</string>
-    <string name="rendering_value_americanRoadAtlas_name">Амерыканскі атлас аўтадарог</string>
-    <string name="routing_attr_no_new_routing_name">Без правілаў маршрутызацыі v1.9</string>
+    <string name="rendering_value_americanRoadAtlas_name">Амэрыканскі атлас аўтадарог</string>
+    <string name="routing_attr_no_new_routing_name">Бяз правілаў маршрутызацыі v1.9</string>
     <string name="routing_attr_no_new_routing_description">Не выкарыстоўваць правілы маршрутызацыі ўведзеныя ў v1.9</string>
     <string name="rendering_value_default_name">Па змоўчаньні</string>
     <string name="rendering_attr_roadStyle_name">Стыль аўтадарог</string>
