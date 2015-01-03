@@ -65,14 +65,22 @@ public class DashFavoritesFragment extends DashBaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
-			if(!getMyApplication().getSettings().isLastKnownMapLocation()) {
-				// show first time when application ran
-				location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
-			} else {
-				location = getLocationProvider().getLastKnownLocation();
-			}
-			updateLocation(location);
+
+		//'location' seems actually not needed in this Fragment, as both setupFavorites and updateArrow only reference lastKnownMapLocation
+		//if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
+		//	if(!getMyApplication().getSettings().isLastKnownMapLocation()) {
+		//		// show first time when application ran
+		//		location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
+		//	} else {
+		//		location = getLocationProvider().getLastKnownLocation();
+		//	}
+		//}
+
+		//This is used as origin for both Fav-list and direction arrows
+		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
+			loc = getMyApplication().getSettings().getLastKnownMapLocation();
+		} else {
+			loc = new LatLon(0f, 0f);
 		}
 		setupFavorites();
 	}
@@ -90,14 +98,15 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		} else {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.VISIBLE);
 		}
+
 		Collections.sort(points, new Comparator<FavouritePoint>() {
 			@Override
 			public int compare(FavouritePoint point, FavouritePoint point2) {
-				LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
+				//LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 				int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
-						lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
+						loc.getLatitude(), loc.getLongitude()));
 				int dist2 = (int) (MapUtils.getDistance(point2.getLatitude(), point2.getLongitude(),
-						lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
+						loc.getLatitude(), loc.getLongitude()));
 				return (dist - dist2);
 			}
 		});
@@ -123,9 +132,9 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			arrows.add(direction);
 			name.setText(point.getName());
 			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), point.getColor()));
-			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
+			//LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
-					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
+					loc.getLatitude(), loc.getLongitude()));
 			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
 			view.findViewById(R.id.navigate_to).setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -145,6 +154,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			});
 			favorites.addView(view);
 		}
+		updateLocation(location);
 	}
 
 	private void updateArrows() {
@@ -175,14 +185,24 @@ public class DashFavoritesFragment extends DashBaseFragment {
 	}
 
 	public void updateLocation(Location location) {
-		if (location != null) {
+		//'location' seems actually not needed in this Fragment, as both setupFavorites and updateArrow only reference lastKnownMapLocation
+		//if (location != null) {
 			//this.location = location;
-			loc = new LatLon(location.getLatitude(), location.getLongitude());
-		} else if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
+			//Next line commented out so that reference is always lastKnownMapLocation, because this is also always used as reference in setupFavorites
+		//	loc = new LatLon(location.getLatitude(), location.getLongitude());
+		//} else if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
+		//	loc = getMyApplication().getSettings().getLastKnownMapLocation();
+		//} else {
+		//	return;
+		//}
+
+		//This is used as origin for both Fav-list and direction arrows
+		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
 			loc = getMyApplication().getSettings().getLastKnownMapLocation();
 		} else {
-			return;
+			loc = new LatLon(0f, 0f);
 		}
+
 		this.loc = loc;
 		updateArrows();
 	}
