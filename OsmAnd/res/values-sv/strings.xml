@@ -431,7 +431,7 @@
 <string name="search_position_undefined">Odefinierad</string>
 <string name="search_position_fixed"/>
 <string name="search_position_current_location">Nuvarande position …</string>
-<string name="search_position_map_view">Senaste kartvyn</string>
+<string name="search_position_map_view">Aktuell kartmitt</string>
 <string name="select_search_position">Ursprung:</string>
 <string name="context_menu_item_search">Sök i närheten</string>
 <string name="save_route_dialog_title">Spara rutt som GPX-spår</string>
@@ -785,7 +785,7 @@
 	<string name="first_time_continue">Senare</string>
 	<string name="first_time_download">Ladda ner regioner</string>
 	<string name="search_poi_location">Söker efter signal …</string>
-	<string name="search_near_map">Sök i närheten av förra platsen på kartan</string>
+	<string name="search_near_map">Sök i närheten av aktuell kartmitt</string>
 	<string name="search_nearby">Sök i närheten</string>
 	<string name="map_orientation_default">Samma som enheten</string>
 	<string name="map_orientation_portrait">Stående</string>
