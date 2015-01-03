@@ -816,7 +816,7 @@
 	<string name="km_h">km/t</string>
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">Forældet kortdataformat \'{0}\' er ikke understøttet</string>
-	<string name="poi_filter_closest_poi">Nærmeste interessepunkt</string>
+	<string name="poi_filter_closest_poi">Nærmeste interessepunkter</string>
 	<string name="poi_filter_custom_filter">Brugerdefineret filter</string>
 	<string name="poi_filter_namefinder">Online navne-søger</string>
 	<string name="reading_cached_tiles">Læser cachelagrede delkort…</string>
