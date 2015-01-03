@@ -368,7 +368,7 @@
 <string name="indexing_address">S\'estan indexant les adreces-…</string>
 <string name="indexing_map">Indexant el mapa…</string>
 <string name="indexing_poi">S\'estan indexant els PDI …</string>
-<string name="indexing_transport">Indexant els transports…</string>
+<string name="indexing_transport">S\'estan indexant els transports…</string>
 <string name="poi_filter_custom_filter">Filtre personalitzat</string>
 <string name="poi_filter_for_tourists">Per a turistes</string>
 <string name="poi_filter_fuel">Carburants</string>
@@ -523,7 +523,7 @@
 <string name="yard">iardes</string>
 <string name="mile_per_hour">mph</string>
 <string name="mile">milles</string>
-<string name="poi_filter_closest_poi">PDIs més propers</string>
+<string name="poi_filter_closest_poi">PDI més propers</string>
 <string name="poi_context_menu_website">Mostra el lloc web del PDI</string>
 <string name="phone">Telèfon</string>
 <string name="download_type_to_filter">Tipus de filtre</string>
