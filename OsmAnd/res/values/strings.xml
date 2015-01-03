@@ -624,7 +624,7 @@
     <string name="distance_measurement_save_gpx">Save as GPX</string>
     <string name="distance_measurement_load_gpx">Open existing GPX</string>
     <string name="wait_current_task_finished">Please wait until current task is finished</string>
-    <string name="use_kalman_filter_compass_descr">Use Kalman filter to avoid compass aberrations</string>
+    <string name="use_kalman_filter_compass_descr">Reduces noise in compass readings but adds inertia</string>
     <string name="use_kalman_filter_compass">Use Kalman filter</string>
     <string name="access_mark_final_location_first">Accessibility mode: please select destination first</string> 
     <string name="use_magnetic_sensor_descr">Use magnetic sensor to determine compass value instead of orientation sensor</string>
