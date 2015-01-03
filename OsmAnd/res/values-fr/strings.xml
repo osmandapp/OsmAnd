@@ -359,7 +359,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
   <string name="poi_filter_car_aid">Pour conducteurs</string>
-  <string name="poi_filter_closest_poi">PI les plus proches</string>
+  <string name="poi_filter_closest_poi">Tous les Points d\'Intérêt les plus proches</string>
   <string name="poi_filter_custom_filter">Filtre personnalisé</string>
   <string name="poi_filter_food_shop">Alimentation</string>
   <string name="poi_filter_for_tourists">Pour voyageurs</string>
@@ -434,7 +434,7 @@
   <string name="layer_gpx_layer">Trace GPX…</string>
   <string name="error_reading_gpx">Erreur de lecteur des données GPX</string>
   <string name="vector_data">Cartes vectorielles OSM</string>
-  <string name="transport_context_menu">Chercher un transport à l\'arrivée</string>
+  <string name="transport_context_menu">Rechercher un transport à l\'arrivée</string>
   <string name="point_on_map">Position :\n Lat. %1$.5f\n Lon. %2$.5f</string>
   <string name="osb_bug_name">Bogue</string>
   <string name="poi_context_menu_modify">Modifier PI</string>
