@@ -1148,7 +1148,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="search_position_undefined">Non dessinidu</string>
 	<string name="search_position_fixed"/>
 	<string name="search_position_current_location">Positzione currente…</string>
-	<string name="search_position_map_view">Ùrtima bisura mapa</string>
+	<string name="search_position_map_view">Tzentru atuale de sa mapa</string>
 	<string name="local_index_mi_upload_gpx">Imbia ad OSM</string>
 	<string name="favourites_delete_multiple_succesful">Puntu/os prefèrridu/os burrados.</string>
 	<string name="favorite_delete_multiple">Ses burrande %1$d prefèrridu/os e %2$d grupu/os prefèrridos. Ses seguru?</string>
@@ -1431,7 +1431,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="first_time_continue">A pustis</string>
 	<string name="first_time_download">Iscàrriga sas regiones</string>
 	<string name="search_poi_location">Chirca sinnale GPS…</string>
-	<string name="search_near_map">Chirca a curtzu de s\'ùrtima positzione in sa mapa</string>
+	<string name="search_near_map">Chirca a curtzu de su tzentru atuale de sa mapa</string>
 	<string name="search_nearby">Chirca a curtzu</string>
 	<string name="map_orientation_default">Orientamentu predefinidu</string>
 	<string name="map_orientation_portrait">Verticale</string>
