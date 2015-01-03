@@ -169,7 +169,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 				LatLon l = new LatLon(lat, lon);
 				if(!Algorithms.objectEquals(reqSearchPoint, l)){
 					reqSearchPoint = l;
-					if (!Algorithms.objectEquals (reqSearchPoint, settings.getLastKnownMapLocation()) {
+					if (!Algorithms.objectEquals (reqSearchPoint, settings.getLastKnownMapLocation())) {
 						updateSearchPoint(reqSearchPoint, getString(R.string.select_search_position) + " " + getString(R.string.search_position_map_view), false);
 					} else {
 						updateSearchPoint(reqSearchPoint, getString(R.string.select_search_position) + " ", true);
