@@ -478,7 +478,7 @@
 <string name="local_indexes_cat_tts">Röstdata (TTS)</string>
 <string name="local_indexes_cat_voice">Röstdata (inspelat)</string>
 <string name="local_indexes_cat_gpx">GPX-data</string>
-<string name="local_indexes_cat_poi">POI-data</string>
+<string name="local_indexes_cat_poi">Intressepunktsdata</string>
 <string name="ttsvoice">TTS-röst</string>
 <string name="search_offline_clear_search">Ny sökning</string>
 <string name="map_text_size_descr">Välj textstorlek för namn på kartan</string>
@@ -588,7 +588,7 @@
 <string name="amenity_type_transportation">Transporter</string>
 <string name="indexing_address">Indexerar adresser …</string>
 <string name="indexing_map">Indexerar kartan …</string>
-<string name="indexing_poi">Indexerar POI …</string>
+<string name="indexing_poi">Indexerar Intressepunkter …</string>
 <string name="indexing_transport">Indexerar transport …</string>
 <string name="input_output_error">Ett I/O-fel har inträffat</string>
 <string name="km">km</string>
@@ -705,7 +705,7 @@
 	<string name="vector_data">Offline vektorkartor</string>
 	<string name="transport_context_menu">Sök transport vid stopp</string>
 	<string name="point_on_map">Plats:\n Lat %1$.5f\n Long %2$.5f</string>
-	<string name="poi_context_menu_modify">Ändra POI</string>
+	<string name="poi_context_menu_modify">Ändra Intressepunkt</string>
 	<string name="poi_context_menu_delete">Ta bort POI</string>
 	<string name="rotate_map_compass_opt">Till kompass</string>
 	<string name="rotate_map_bearing_opt">I körriktningen</string>
@@ -731,10 +731,10 @@
 	<string name="layer_favorites">Favoriter</string>
 	<string name="layer_osm_bugs">OSM-buggar</string>
 	<string name="layer_transport">Hållplatser</string>
-	<string name="layer_poi">POI …</string>
+	<string name="layer_poi">Intressepunkt …</string>
 	<string name="layer_map">Kartkälla …</string>
 	<string name="menu_layers">Kartlager</string>
-	<string name="context_menu_item_search_poi">Sök POI</string>
+	<string name="context_menu_item_search_poi">Sök intressepunkt</string>
 	
 	<string name="use_trackball_descr">Använd styrkulan för att flytta kartan</string>
 	<string name="use_trackball">Använd styrkula</string>
@@ -815,7 +815,7 @@
 	<string name="update_poi_error_loading">Fel vid laddning av data från servern</string>
 	<string name="update_poi_no_offline_poi_index">Inga offline POI-data tillgängliga för detta område</string>
 	<string name="update_poi_is_not_available_for_zoom">Det går inte att uppdatera POI för små zoomnivåer</string>
-	<string name="context_menu_item_update_poi">Uppdatera POI</string>
+	<string name="context_menu_item_update_poi">Uppdatera intressepunkt</string>
 	<string name="context_menu_item_update_map_confirm">Uppdatera lokala data via Internet?</string>
 	<string name="search_history_city">Stad: {0}</string>
 	<string name="search_history_street">Gata: {0},{1}</string>
@@ -860,7 +860,7 @@
 	<string name="mark_final_location_first">Välj en destination först</string>
 	<string name="show_gps_status">Visa GPS-status</string>
 	<string name="opening_hours">Öppettider</string>
-	<string name="loading_poi_obj">Laddar POI …</string>
+	<string name="loading_poi_obj">Laddar intressepunkt …</string>
 	<string name="loading_streets_buildings">Laddar gator/byggnader …</string>
 	<string name="loading_postcodes">Laddar postnummer …</string>
 	<string name="loading_streets">Laddar gator …</string>
@@ -1060,7 +1060,7 @@
 	<string name="map_view_3d_descr">Aktivera 3D-vy på kartan</string>
 	<string name="map_view_3d">3D-vy på kartan</string>
 	<string name="show_poi_over_map_description">Visa POI över karta (använd det senast valda filtret)</string>
-	<string name="show_poi_over_map">Visa POI</string>
+	<string name="show_poi_over_map">Visa intressepunkt</string>
 	<string name="map_tile_source_descr">Välj källa för onlinekartor eller cachade kartbitar</string>
 	<string name="map_tile_source">Källa för kartbitar</string>
 	<string name="map_source">Kartkälla</string>
@@ -1076,7 +1076,7 @@
 	<string name="favorites_Button">Mina platser</string>
 	<string name="search_button">Sök</string>
 	<string name="search_activity">Sök</string>
-	<string name="searchpoi_activity">Välj POI</string>
+	<string name="searchpoi_activity">Välj intressepunkt</string>
 	<string name="search_POI_level_btn">Sök efter fler</string>
 	<string name="choose_available_region">Välj region från lista</string>
 	<string name="choose_intersected_street">Välj korsande gata</string>
