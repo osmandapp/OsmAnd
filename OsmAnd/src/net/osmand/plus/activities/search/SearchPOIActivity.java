@@ -508,11 +508,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	public void updateCompassValue(float value) {
 		float lastHeading = heading;
 		heading = value;
-		if(heading != null && lastHeading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 3) {
-			@Override
-			public void run() {
-				amenityAdapter.notifyDataSetChanged();
-			}
+		if (heading != null && lastHeading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			amenityAdapter.notifyDataSetChanged();
 		} else {
 			heading = lastHeading;
 		}
