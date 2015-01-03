@@ -184,7 +184,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		//updateArrows();
 		float lastHeading = heading;
 		heading = value;
-		if (heading != null && lastHeading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
 			updateArrows();
 		} else {
 			heading = lastHeading;

@@ -43,6 +43,7 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 import android.app.AlertDialog;
@@ -508,7 +509,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	public void updateCompassValue(float value) {
 		float lastHeading = heading;
 		heading = value;
-		if (heading != null && lastHeading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
 			amenityAdapter.notifyDataSetChanged();
 		} else {
 			heading = lastHeading;
