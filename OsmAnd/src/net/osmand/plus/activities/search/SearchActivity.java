@@ -170,7 +170,6 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 				LatLon l = new LatLon(lat, lon);
 				if(!Algorithms.objectEquals(reqSearchPoint, l)){
 					reqSearchPoint = l;
-					//if (Algorithms.objectEquals(reqSearchPoint, settings.getLastKnownMapLocation())) {
 					if ((Math.abs(lat - last.getLatitude()) < 0.00001) && (Math.abs(lon - last.getLongitude()) < 0.00001)) {
 						updateSearchPoint(reqSearchPoint, getString(R.string.select_search_position) + " " + getString(R.string.search_position_map_view), false);
 					} else {
@@ -180,7 +179,6 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 			}
 		}
 		if(searchPoint == null){
-			//LatLon last = settings.getLastKnownMapLocation();
 			if(!Algorithms.objectEquals(reqSearchPoint, last)){
 				reqSearchPoint = last;
 				updateSearchPoint(last, getString(R.string.select_search_position) + " " + getString(R.string.search_position_map_view), false);
