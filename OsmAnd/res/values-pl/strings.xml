@@ -324,9 +324,9 @@
   <string name="use_high_res_maps_descr">Nie rozciągaj i rozmazuj kafelków mapy na ekranach o dużej rozdzielczości</string>
   <string name="unknown_location">Pozycja nie jest jeszcze znana</string>
   <string name="download_files">Pobierz</string>
-  <string name="context_menu_item_search_transport">Wyszukaj komunikację</string>
-  <string name="transport_searching_transport">Rezultat wyszukiwania komunikacji (brak celu):</string>
-  <string name="transport_searching_route">Rezultat wyszukiwania komunikacji ({0} do celu):</string>
+  <string name="context_menu_item_search_transport">Wyszukaj transport publiczny</string>
+  <string name="transport_searching_transport">Rezultat wyszukiwania transportu (brak celu):</string>
+  <string name="transport_searching_route">Rezultat wyszukiwania transportu ({0} do celu):</string>
   <string name="transport_search_none">Żaden</string>
   <string name="transport_search_again">Resetuj wyszukiwanie transportu</string>
   <string name="map_index">Mapa</string>
@@ -416,7 +416,7 @@
   <string name="route_head">Prosto</string>
   <string name="first_time_continue">Kontynuuj</string>
   <string name="first_time_download">Pobierz region</string>
-  <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które pobierzesz w \'Ustawienia\' → \'Zarządzaniu plikami map\'. Dzięki nim będziesz mógł przeglądać mapy, wyszukiwać adresy, POI i inne obiekty.</string>
+  <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które pobierzesz w \'Ustawienia\' → \'Zarządzaniu plikami map\'. Dzięki nim będziesz mógł przeglądać mapy, wyszukiwać adresy, POI i transport publiczny.</string>
   <string name="search_poi_location">Wyszukiwanie sygnału…</string>
   <string name="search_near_map">Szukaj w pobliżu ostatniej pozycji</string>
   <string name="search_nearby">Szukaj w pobliżu</string>
