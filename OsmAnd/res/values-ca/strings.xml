@@ -293,7 +293,7 @@
 <string name="user_password_descr">És necessària per a les trameses a openstreetmap.org</string>
 <string name="old_poi_file_should_be_deleted">El fitxer de dades de PDI «%1$s» és redundant i serà suprimit.</string>
 <string name="search_position_favorites">Preferits…</string>
-<string name="search_position_map_view">Visualització actual del mapa</string>
+<string name="search_position_map_view">Centre del mapa actual</string>
 <string name="select_search_position">Cerca prop de:</string>
 <string name="menu_save_directions">Desa les indicacions</string>
 <string name="local_index_upload_gpx_description">Pengeu els fitxers GPX a la comunitat d\'OSM. Es faran servir per millorar els mapes.</string>
@@ -885,7 +885,7 @@
 	<string name="route_tshl">Gireu fortamanent a l\'esquerra i continueu</string>
 	<string name="route_tsll">Gireu lleugerament a l\'esquerra i continueu</string>
 	<string name="route_tu">Feu un gir en forma d\'U i continueu</string>
-	<string name="search_near_map">Cerca la darrera localització propera al mapa</string>
+	<string name="search_near_map">Cerca propera a la posició actual al mapa</string>
 	<string name="transport_Stop">Parada</string>
 	<string name="transport_search_after">Itinerari subsegüent</string>	
 	<string name="transport_finish_search">Finalitza la cerca</string>
