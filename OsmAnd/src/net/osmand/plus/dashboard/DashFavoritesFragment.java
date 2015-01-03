@@ -175,7 +175,12 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		DirectionDrawable draw = new DirectionDrawable(getActivity(), 10, 10, true);
 		Float h = heading;
 		float a = h != null ? h : 0;
+
+		//TODO: Hardy: The arrow direction below is correct only for the default display's standard orientation
+		//      i.e. still needs to be corrected for .ROTATION_90/180/170
+		//	Keep in mind: getRotation was introduced from Android 2.2
 		draw.setAngle(mes[1] - a + 180);
+
 		direction.setImageDrawable(draw);
 	}
 

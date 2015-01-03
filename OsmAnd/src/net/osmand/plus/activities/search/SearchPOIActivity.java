@@ -777,7 +777,12 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height, false);
 				Float h = heading;
 				float a = h != null ? h : 0;
+
+				//TODO: Hardy: The arrow direction below is correct only for the default display's standard orientation
+				//      i.e. still needs to be corrected for .ROTATION_90/180/170
+				//	Keep in mind: getRotation was introduced from Android 2.2
 				draw.setAngle(mes[1] - a + 180);
+
 				draw.setOpenedColor(opened);
 				direction.setImageDrawable(draw);
 			} else {
