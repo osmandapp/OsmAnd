@@ -166,4 +166,15 @@
 	<string name="poi_water_mill">Molí hidràulic</string>
 
 	<string name="poi_power_substation">Subestació elèctrica</string>
+	<string name="poi_power_transformer">Transformador elèctric</string>
+	<string name="poi_power_plant">Central energètica</string>
+	<string name="poi_power_generator">Generador d\'energia</string>
+
+	<string name="poi_post_office">Oficina de correus</string>
+	<string name="poi_post_box">Bústia de correus</string>
+	<string name="poi_telephone">Telèfon públic</string>
+	<string name="poi_communication_tower">Torre de comunicacions</string>
+	<string name="poi_telephone_exchange">Central telefònica</string>
+
+	<string name="poi_recycling">Reciclatge</string>
 	</resources>
