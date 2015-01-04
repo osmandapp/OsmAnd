@@ -111,7 +111,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	}
 	
 	private Dialog createDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		View lmain = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_info, null);
 		boolean addButtons = routingHelper.isRouteCalculated();
 		updateInfo(lmain);
@@ -129,20 +129,20 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 				textView.setVisibility(View.GONE);
 			}
 		}
-        builder.setView(lmain);
-        
-        Dialog dialog = builder.create();
-        dialog.setCanceledOnTouchOutside(true);
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.gravity = Gravity.BOTTOM;
+		builder.setView(lmain);
+
+		Dialog dialog = builder.create();
+		dialog.setCanceledOnTouchOutside(true);
+		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+		lp.copyFrom(dialog.getWindow().getAttributes());
+		lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+		lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+		lp.gravity = Gravity.BOTTOM;
 		lp.y = (int) (infoButton.getBottom() - infoButton.getTop() + scaleCoefficient * 5 + getExtraVerticalMargin());
-        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setAttributes(lp);
-        return dialog;
+		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		dialog.getWindow().setAttributes(lp);
+		return dialog;
 	}
 	
 	private void updateInfo(final View parentView) {
