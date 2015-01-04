@@ -276,7 +276,7 @@
   <string name="search_position_undefined">Неопределенно</string>
   <string name="search_position_fixed">Точка</string>
   <string name="search_position_current_location">Текущее местоположение…</string>
-  <string name="search_position_map_view">Вид карты</string>
+  <string name="search_position_map_view">Текущий центр карты</string>
   <string name="select_search_position">Начало:</string>
   <string name="context_menu_item_search">Искать рядом</string>
   <string name="tip_recent_changes_0_6_7_t">Изменения в 0.6.7:
@@ -624,7 +624,7 @@
   <string name="first_time_continue">Продолжить</string>
   <string name="first_time_download">Загрузить детальные карты регионов</string>
   <string name="search_poi_location">Поиск сигнала…</string>
-  <string name="search_near_map">Искать вокруг выбранного центра карты</string>
+  <string name="search_near_map">Искать вокруг текущего центра карты</string>
   <string name="search_nearby">Искать рядом</string>
   <string name="map_orientation_default">По умолчанию</string>
   <string name="map_orientation_portrait">Портрет</string>
@@ -1247,7 +1247,7 @@
     <string name="av_def_action_choose">Выберите по запросу</string>
     <string name="osmand_play_title_30_chars">OsmAnd карты и навигация</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ карты и навигация</string>
-	<string name="use_kalman_filter_compass_descr">Использовать фильтр Калмана для избежания отклонений компаса</string>
+	<string name="use_kalman_filter_compass_descr">Уменьшает \"шум\" компаса, но добавляет инерцию</string>
     <string name="use_kalman_filter_compass">Использовать фильтр Калмана</string>
     <string name="cancel_navigation">Прекратить навигацию</string>
     <string name="use_magnetic_sensor">Использовать датчик магнитного поля</string>
