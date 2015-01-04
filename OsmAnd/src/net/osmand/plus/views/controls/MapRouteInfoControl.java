@@ -76,7 +76,6 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
 			selectFromMapTouch = false;
 		//TODO: Hardy: Looks like there is an old bug somewhere here: Re-selecting the From or To via "Select on map" during a route calculation does interrupt the ongoing route calculation, while reselecting From or To via "Fvorites" correctly re-starts any ongoing route recalculation with the updated point
-		showDialog();
 			if(selectFromMapForTarget) {
 				getTargets().navigateToPoint(latlon, true, -1);
 			} else {
@@ -208,7 +207,8 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	protected void selectOnScreen(View parentView, boolean target) {
 		selectFromMapTouch = true;
 		selectFromMapForTarget =  target;
-		hideDialog();
+		//hideDialog();
+		dialog.hide();
 	}
 
 	protected void selectFavorite(final View parentView, final boolean target) {
