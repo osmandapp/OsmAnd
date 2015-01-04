@@ -454,7 +454,7 @@
 	<string name="search_position_undefined">Ακαθόριστο</string>
 	<string name="search_position_fixed"/>
 	<string name="search_position_current_location">Τρέχουσα θέση…</string>
-	<string name="search_position_map_view">Τελευταία οπτική χάρτη</string>
+	<string name="search_position_map_view">Τρέχον κέντρο χάρτη</string>
 	<string name="select_search_position">Πηγή:</string>
 	<string name="context_menu_item_search">Αναζήτηση εδώ κοντά</string>
 	<string name="tip_recent_changes_0_6_7_t">"Πρόσφατες αλλαγές στην 0.6.7 :
@@ -805,7 +805,7 @@
 	<string name="first_time_continue">Αργότερα</string>
 	<string name="first_time_download">Λήψη περιοχών</string>
 	<string name="search_poi_location">Αναζήτηση σήματος…</string>
-	<string name="search_near_map">Αναζήτηση κοντά στην τελευταία τοποθεσία του χάρτη</string>
+	<string name="search_near_map">Αναζήτηση κοντά στο τρέχον κέντρο του χάρτη</string>
 	<string name="search_nearby">Αναζήτηση στη γύρω περιοχή</string>
 	<string name="map_orientation_default">Το ίδιο με τη συσκευή</string>
 	<string name="map_orientation_portrait">Πορτραίτο</string>
@@ -1233,7 +1233,7 @@
     <string name="install_paid">Πλήρης έκδοση</string>
     <string name="use_magnetic_sensor">Χρήση του μαγνητικού αισθητήρα</string>
     <string name="use_magnetic_sensor_descr">Χρήση του μαγνητικού αισθητήρα για τον προσδιορισμό της ένδειξης της πυξίδας, αντί του αισθητήρα προσανατολισμού</string>
-    <string name="use_kalman_filter_compass_descr">Χρήση φίλτρου Kalman για αποφυγή απόκλισης της πυξίδας</string>
+    <string name="use_kalman_filter_compass_descr">Μειώνει τον θόρυβο στην ανάγνωση της πυξίδας αλλά προσθέτει αδράνεια</string>
     <string name="use_kalman_filter_compass">Χρήση φίλτρου Kalman</string>
     <string name="access_mark_final_location_first">Λειτουργία προσβασιμότητας: παρακαλώ επιλέξτε πρώτα προορισμό</string> 
     <string name="wait_current_task_finished">Παρακαλώ περιμένετε μέχρι να τελειώσει η τρέχουσα διεργασία</string>
@@ -1686,4 +1686,14 @@
     <string name="map_widget_appearance_rem">Εναπομείναντα στοιχεία</string>
     <string name="speed_limit_exceed_message">Επιλέξτε το περιθώριο του ορίου ταχύτητας, πάνω από το οποίο θα ακούτε ηχητική προειδοποίηση.</string>
 	<string name="fav_point_dublicate_message">Αλλάχτηκε το όνομα του αγαπημένου σημείου σε %1$s για να αποφευχθούν διπλά ονόματα.</string>
-    </resources>
+    <string name="rendering_value_germanRoadAtlas_name">Γερμανικός άτλαντας δρόμων</string>
+	<string name="rendering_value_americanRoadAtlas_name">Αμερικάνικος άτλαντας δρόμων</string>
+    <string name="use_opengl_render">Χρήση αποτύπωσης OpenGL</string>
+    <string name="use_opengl_render_descr">Χρήση αποτύπωσης με επιτάχυνση υλικού OpenGL (μπορεί να μη λειτουργεί σε ορισμένες συσκευές)</string>
+    <string name="wake_on_voice_descr">Άναμμα της οθόνης όταν πλησιάζετε μια στροφή</string>
+    <string name="traffic_warning">Προειδοποίηση κυκλοφοριακού</string>
+	<string name="save_global_track_interval">Γενικό διάστημα καταγραφής</string>
+	<string name="use_displayed_track_for_navigation">Θέλετε να χρησιμοποιήσετε το εμφανιζόμενο ίχνος για πλοήγηση;</string>
+    <string name="route_descr_destination">Προορισμός</string>
+    <string name="voices">Φωνητικές οδηγίες</string>
+	</resources>
