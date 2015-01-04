@@ -414,7 +414,7 @@
 	<string name="search_position_undefined">未定義</string>
 	<string name="search_position_fixed">" "</string>
 	<string name="search_position_current_location">目前位置…</string>
-	<string name="search_position_map_view">上次瀏覽的地圖</string>
+	<string name="search_position_map_view">目前的地圖中心</string>
 	<string name="select_search_position">起點：</string>
 	<string name="context_menu_item_search">查尋這附近</string>
 	<string name="save_route_dialog_title">儲存路線成 GPX 軌跡</string>
@@ -1015,7 +1015,7 @@
     <string name="distance_measurement_save_gpx">另存為 GPX</string>
     <string name="distance_measurement_load_gpx">開啟現有的 GPX</string>
     <string name="wait_current_task_finished">請等待目前的作業結束</string>
-    <string name="use_kalman_filter_compass_descr">使用 Kalman 濾波器，以避免電子羅盤的偏差</string>
+    <string name="use_kalman_filter_compass_descr">降低電子羅盤讀值雜訊，但增加了慣性</string>
     <string name="use_kalman_filter_compass">使用 Kalman 濾波器</string>
     <string name="use_magnetic_sensor_descr">使用磁性感應器來判斷電子羅盤的值，而不是定位感應器</string>
     <string name="use_magnetic_sensor">使用磁性感應器</string>
