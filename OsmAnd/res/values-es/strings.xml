@@ -505,7 +505,7 @@
   <string name="first_time_msg">Gracias por elegir OsmAnd.
 Para poder usar muchas características de la aplicación necesitas algunos datos regionales, que puedes descargar vía \'Opciones\' → \'Gestionar mapas\'. Después, podrás ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
   <string name="search_poi_location">Buscando señal…</string>
-  <string name="search_near_map">Buscar cerca del dentro del centro del mapa</string>
+  <string name="search_near_map">Buscar cerca del centro del mapa</string>
   <string name="search_nearby">Buscar cercanos</string>
   <string name="map_orientation_default">Según dispositivo</string>
   <string name="map_orientation_portrait">Vertical</string>
