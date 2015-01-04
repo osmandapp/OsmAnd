@@ -205,7 +205,6 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	protected void selectOnScreen(View parentView, boolean target) {
 		selectFromMapTouch = true;
 		selectFromMapForTarget =  target;
-		//Dialogue should be hidden while selecting a target, but mus re-appear afterwards
 		hideDialog();
 	}
 
