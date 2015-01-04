@@ -208,7 +208,7 @@ public class OsmandApplication extends Application {
 	public void onTerminate() {
 		super.onTerminate();
 		if (routingHelper != null) {
-			routingHelper.getVoiceRouter().onApplicationTerminate(this);
+			routingHelper.getVoiceRouter().onApplicationTerminate();
 		}
 	}
 

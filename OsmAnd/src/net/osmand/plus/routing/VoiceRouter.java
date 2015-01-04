@@ -338,6 +338,14 @@ public class VoiceRouter {
 					p.attention(type+"").play();
 				}
 			}
+		} else if (type == AlarmInfoType.PEDESTRIAN) {
+			if (router.getSettings().SPEAK_PEDESTRIAN.get()) {
+				CommandBuilder p = getNewCommandPlayerToPlay();
+				if (p != null) {
+					notifyOnVoiceMessage();
+					p.attention(type+"").play();
+				}
+			}
 		} else {
 			if (router.getSettings().SPEAK_TRAFFIC_WARNINGS.get()) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
@@ -785,7 +793,7 @@ public class VoiceRouter {
 	//	}
 	//}
 
-	public void onApplicationTerminate(Context ctx) {
+	public void onApplicationTerminate() {
 		if (player != null) {
 			player.clear();
 		}

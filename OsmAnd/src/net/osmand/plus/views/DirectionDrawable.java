@@ -47,17 +47,15 @@ public class DirectionDrawable extends Drawable {
 
 	@Override
 	public void draw(Canvas canvas) {
-
 		if (favorite) {
 			canvas.rotate(angle, canvas.getHeight()/2, canvas.getWidth()/2);
 			Bitmap arrow = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_destination_arrow);
 			canvas.drawBitmap(arrow, null, new Rect(0,0,arrow.getHeight(), arrow.getWidth()), null);
 		} else {
-			canvas.rotate(angle, width / 2, height / 2);
+			canvas.rotate(angle, canvas.getHeight()/2, canvas.getWidth() / 2);
 			Path directionPath = createDirectionPath();
 			canvas.drawPath(directionPath, paintRouteDirection);
 		}
-
 	}
 
 	@Override

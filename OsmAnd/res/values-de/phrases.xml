@@ -596,4 +596,19 @@
 	<string name="poi_cannon">Historische Kanone</string>
 	<string name="poi_harbour">Hafen</string>
 	<string name="poi_dock">Dock</string>
+	<string name="poi_amusement_ride">Vergnügungsfahrt</string>
+	<string name="poi_attraction_animal">Tiere (Attraktion)</string>
+	<string name="poi_ferris_wheel">Riesenrad</string>
+	<string name="poi_carousel">Karussell</string>
+	<string name="poi_maze">Labyrinth</string>
+	<string name="poi_roller_coaster">Achterbahn</string>
+	<string name="poi_slide">Rutschbahn</string>
+	<string name="poi_summer_toboggan">Kunstbahnrodeln</string>
+	<string name="poi_swing_carousel">Schaukel-Karussell</string>
+	<string name="poi_attraction_train">Eisenbahn (Attraktion)</string>
+	<string name="poi_water_slide">Wasserrutsche</string>
+	<string name="poi_tower">Sendeturm</string>
+	<string name="poi_mast">Mast</string>
+	<string name="poi_radar">Radar</string>
+	<string name="poi_aquarium">Aquarium</string>
   </resources>

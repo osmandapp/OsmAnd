@@ -12,6 +12,8 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.RotatedTileBox.RotatedTileBoxBuilder;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -73,12 +75,16 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		if(selectFromMapTouch) {
 			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
 			selectFromMapTouch = false;
+		//TODO: Hardy: Looks like there is an old bug somewhere here: Re-selecting the From or To via "Select on map" during a route calculation does interrupt the ongoing route calculation, while reselecting From or To via "Fvorites" correctly re-starts any ongoing route recalculation with the updated point
 			if(selectFromMapForTarget) {
+				getTargets().navigateToPoint(latlon, true, -1);
 				getTargets().navigateToPoint(latlon, true, -1);
 			} else {
 				getTargets().setStartPoint(latlon, true, null);
+				getTargets().setStartPoint(latlon, true, null);
 			}
 			contextMenu.setLocation(latlon, null);
+			showDialog();
 			return true;
 		}
 		return super.onSingleTap(point, tileBox);
@@ -108,7 +114,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	}
 	
 	private Dialog createDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		View lmain = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_info, null);
 		boolean addButtons = routingHelper.isRouteCalculated();
 		updateInfo(lmain);
@@ -126,20 +132,20 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 				textView.setVisibility(View.GONE);
 			}
 		}
-        builder.setView(lmain);
-        
-        Dialog dialog = builder.create();
-        dialog.setCanceledOnTouchOutside(true);
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.gravity = Gravity.BOTTOM;
+		builder.setView(lmain);
+
+		Dialog dialog = builder.create();
+		dialog.setCanceledOnTouchOutside(true);
+		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+		lp.copyFrom(dialog.getWindow().getAttributes());
+		lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+		lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+		lp.gravity = Gravity.BOTTOM;
 		lp.y = (int) (infoButton.getBottom() - infoButton.getTop() + scaleCoefficient * 5 + getExtraVerticalMargin());
-        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setAttributes(lp);
-        return dialog;
+		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		dialog.getWindow().setAttributes(lp);
+		return dialog;
 	}
 	
 	private void updateInfo(final View parentView) {
@@ -224,6 +230,9 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 					getTargets().setStartPoint(point, true, name);
 				}
 				favoritesDialog.dismiss();
+				//Next 2 lines ensure Dialog is shown in the right correct position after a selection been made
+				hideDialog();
+				showDialog();
 			}
 		});
 		bld.setView(listView);
@@ -274,6 +283,9 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		final Button simulateRoute = (Button) mainView.findViewById(R.id.SimulateRoute);
 		final OsmAndLocationProvider loc = ctx.getLocationProvider();
 		if(mapActivity.getRoutingHelper().isFollowingMode()) {
+			simulateRoute.setVisibility(View.GONE);
+		}
+		if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) == null) {
 			simulateRoute.setVisibility(View.GONE);
 		}
 		simulateRoute.setText(loc.getLocationSimulation().isRouteAnimating() ? R.string.animate_route_off : R.string.animate_route);
@@ -361,20 +373,20 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	}
 	
 	public String getRoutePointDescription(double lat, double lon) {
-    	return mapActivity.getString(R.string.route_descr_lat_lon, lat, lon);
-    }
+		return mapActivity.getString(R.string.route_descr_lat_lon, lat, lon);
+	}
     
-    public String getRoutePointDescription(LatLon l, String d) {
-    	if(d != null && d.length() > 0) {
-    		return d.replace(':', ' ');
-    	}
-    	if(l != null) {
-    		return mapActivity.getString(R.string.route_descr_lat_lon, l.getLatitude(), l.getLongitude());
-    	}
-    	return "";
-    }
+	public String getRoutePointDescription(LatLon l, String d) {
+		if(d != null && d.length() > 0) {
+			return d.replace(':', ' ');
+		}
+		if(l != null) {
+			return mapActivity.getString(R.string.route_descr_lat_lon, l.getLatitude(), l.getLongitude());
+		}
+		return "";
+	}
     
-    private Spinner setupFromSpinner( View view) {
+	private Spinner setupFromSpinner( View view) {
 		ArrayList<String> fromActions = new ArrayList<String>();
 		fromActions.add(mapActivity.getString(R.string.route_descr_current_location));
 		fromActions.add(mapActivity.getString(R.string.route_descr_favorite));
@@ -404,8 +416,8 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		return fromSpinner;
 	}
     
-    private Spinner setupToSpinner(View view) {
-    	final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
+	private Spinner setupToSpinner(View view) {
+		final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
 		final TargetPointsHelper targets = getTargets();
 		ArrayList<String> toActions = new ArrayList<String>();
 		if (targets.getPointToNavigate() != null) {

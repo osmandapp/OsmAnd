@@ -32,7 +32,7 @@
     <string name="btn_advanced_mode">進階模式…</string>
     <string name="poi_filter_parking">停車場</string>
     <string name="poi_filter_emergency">緊急救助</string>
-    <string name="poi_filter_public_transport">大眾運輸</string>
+    <string name="poi_filter_public_transport">公共交通</string>
     <string name="poi_filter_entertainment">娛樂</string>
     <string name="poi_filter_accomodation">住宿</string>
     <string name="poi_filter_restaurants">餐廳</string>
@@ -63,8 +63,8 @@
 \n\t* 登錄為\'藍色\'，表示伺服器有更新的版本
 \n\t* 登錄為斜體字，表示未在裝置上使用 "</string>
 	<string name="filterpoi_activity">建立興趣點篩選</string>
-	<string name="recalculate_route_to_your_location">運輸模式：</string>
-	<string name="select_navigation_mode">選擇運輸模式</string>
+	<string name="recalculate_route_to_your_location">交通模式：</string>
+	<string name="select_navigation_mode">選擇交通模式</string>
 	
 	<string name="day_night_info_description">日出：%1$s \n日落：%2$s</string>
 	<string name="day_night_info">日/夜資訊</string>
@@ -175,7 +175,7 @@
 	<string name="poi_search_desc">POI(興趣點)查尋</string>
 	<string name="address_search_desc">地址查尋</string>
 	<string name="navpoint_search_desc">座標查尋</string>
-	<string name="transport_search_desc">交通設施查尋</string>
+	<string name="transport_search_desc">公共交通查尋</string>
 	<string name="favourites_search_desc">我的最愛查尋</string>
 	<string name="history_search_desc">歷史記錄查尋</string>
 	<string name="offline_navigation_not_available">OsmAnd 離線導航，暫時不能使用。</string>
@@ -186,7 +186,7 @@
 	<string name="unknown_location">未知地理位置</string>
 	<string name="modify_transparency">調整透明度(0 - 透明, 255 - 不透明)</string>
 	<string name="confirm_interrupt_download">您要中斷下載中的檔案嗎？</string>
-	<string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些地區的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'來下載。之後您可瀏覽地圖、位置的地址、查看興趣點以及找到大眾運輸設施。</string>    
+	<string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些地區的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'來下載。之後您可瀏覽地圖、位置的地址、查看興趣點以及尋找公共交通。</string>    
 	<string name="basemap_was_selected_to_download">底圖為某些特別的應用功能必需使用的，並且預設為下載。</string>
 	<string name="select_index_file_to_download">找不到任何資料。如果您不能在您的區域找到，您可以自行製作(參考http://osmand.net)。</string>
 	<string name="local_indexes_cat_tile">線上地圖圖磚</string>
@@ -412,10 +412,10 @@
 	<string name="search_position_address">地址…</string>
 	<string name="search_position_favorites">我的最愛…</string>
 	<string name="search_position_undefined">未定義</string>
-	<string name="search_position_fixed">已定位</string>
+	<string name="search_position_fixed">" "</string>
 	<string name="search_position_current_location">目前位置…</string>
-	<string name="search_position_map_view">上次瀏覽的地圖</string>
-	<string name="select_search_position">附近查尋：</string>
+	<string name="search_position_map_view">目前的地圖中心</string>
+	<string name="select_search_position">起點：</string>
 	<string name="context_menu_item_search">查尋這附近</string>
 	<string name="save_route_dialog_title">儲存路線成 GPX 軌跡</string>
 	<string name="route_successfully_saved_at">導航路線成功存成\'%1$s\'。</string>
@@ -457,7 +457,7 @@
 	
 	<string name="local_index_poi_data">興趣點資料</string>
 	<string name="local_index_address_data">地址資料</string>
-	<string name="local_index_transport_data">交通設施資料</string>
+	<string name="local_index_transport_data">公共交通資料</string>
 	<string name="local_index_map_data">地圖資料</string>
 	<string name="local_indexes_cat_backup">已停用</string>
 	<string name="local_indexes_cat_tts">語音資料(TTS)</string>
@@ -526,9 +526,8 @@
 \n\n在\'地圖來源…\'之下，您可以選擇使用預先載入的離線向量圖（預設，離線導航所需），或預先定義（連線或離線快取）圖磚來源（在此啟動\'線上地圖\'外掛元件下的\'設定\' → \'外掛元件\'），或手動建立地圖，例如在 PC 上使用的 OsmAndMapCreator。
 \n\nOsmAnd 也支援自訂來源。 "</string>
 	<string name="tip_app_mode">使用設定檔</string>
-	<string name="tip_app_mode_t_v2">OsmAnd 在不同的使用情況下，支援不同的使用者設定檔 (可自行訂製) 。
-		\n\n您可透過地圖畫面左下角的設定檔按鈕(汽車、自行車、步行三種圖示)更改使用設定檔 ，或是作路線規劃。
-	</string>
+	<string name="tip_app_mode_t_v2">"OsmAnd 在不同的使用情況下，支援不同的使用者設定檔 (可自行訂製) 。
+\n\n您可透過地圖畫面左下角的設定檔按鈕(汽車、自行車、步行三種圖示)更改使用設定檔 ，或是作路線規劃(\'交通模式\')。 "</string>
 	<string name="tip_navigation">導航</string>
 	<string name="tip_navigation_t">"需要導引到一個地點，可以直接在地圖上選擇並長按該地點，(然後再點選快顯功能表單的\'導引到\')，或著選擇\'導引\'後，在查尋結果清單或是我的最愛清單點選進入。
 \n\n目的地標點以一目標旗標記在地圖上，同時 OsmAnd 會顯示達到目的地的距離與它的方位(橙色三角形)。
@@ -591,7 +590,7 @@
 	<string name="amenity_type_sport">運動</string>
 	<string name="amenity_type_sustenance">飲食</string>
 	<string name="amenity_type_tourism">旅遊、住宿</string>
-	<string name="amenity_type_transportation">交通設施</string>
+	<string name="amenity_type_transportation">交通工具</string>
 	<string name="indexing_address">地址索引…</string>
 	<string name="indexing_map">地圖索引…</string>
 	<string name="indexing_poi">興趣點索引…</string>
@@ -601,7 +600,7 @@
 	<string name="km_h">公里/小時</string>
 	<string name="m">公尺</string>
 	<string name="old_map_index_is_not_supported">舊地圖格式 \'\'{0}\'\' 已不支援</string>
-	<string name="poi_filter_closest_poi">最近興趣點</string>
+	<string name="poi_filter_closest_poi">最近的興趣點</string>
 	<string name="poi_filter_custom_filter">自訂篩選</string>
 	<string name="poi_filter_namefinder">線上名稱尋找</string>
 	<string name="reading_cached_tiles">正在取讀暫存地圖圖磚…</string>
@@ -658,11 +657,11 @@
 	<string name="use_high_res_maps">高解析顯示</string>
 	<string name="use_high_res_maps_descr">不要伸展（模糊）在高解析螢幕上的地圖圖磚</string>
 	<string name="download_files">下載</string>
-	<string name="context_menu_item_search_transport">查尋交通運輸</string>
-	<string name="transport_searching_transport">交通設施結果(無目的地)：</string>
-	<string name="transport_searching_route">交通設施(有{0}到目的地)：</string>
+	<string name="context_menu_item_search_transport">查尋公共交通</string>
+	<string name="transport_searching_transport">交通運輸結果(無目的地)：</string>
+	<string name="transport_searching_route">交通運輸結果(有{0}到目的地)：</string>
 	<string name="transport_search_none">無</string>
-	<string name="transport_search_again">重置交通運輸查尋</string>
+	<string name="transport_search_again">重置公車查尋</string>
 	<string name="map_index">地圖</string>
 	<string name="voice">真人語音</string>
 	<string name="no_vector_map_loaded">向量地圖未載入</string>
@@ -671,7 +670,7 @@
 	<string name="layer_gpx_layer">GPX 軌跡…</string>
 	<string name="error_reading_gpx">讀取 GPX 資料錯誤</string>
 	<string name="vector_data">離線向量地圖</string>
-	<string name="transport_context_menu">在終點查尋交通運輸</string>
+	<string name="transport_context_menu">查尋公車站牌</string>
 	<string name="point_on_map">位置：\n 緯度 %1$.5f\n 經度 %2$.5f</string>
 	<string name="osb_bug_name">程式臭蟲</string>
 	<string name="poi_context_menu_modify">修改興趣點</string>
@@ -693,13 +692,13 @@
 	<string name="none_region_found">在 SD 卡上沒有該地區離線資料。由網路下載資料。</string>
 	<string name="poi_namefinder_query_empty">輸入查尋條件以查尋興趣點</string>
 	<string name="any_poi">任何</string>
-	<string name="layer_transport_route">交通路線</string>
+	<string name="layer_transport_route">公車路線</string>
 	<string name="thanks_yandex_traffic">感謝 Yandex 提供的交通資訊。</string>
 	<string name="layer_yandex_traffic">Yandex 的交通資訊</string>
 	<string name="layer_route">導航路線</string>
 	<string name="layer_favorites">我的最愛</string>
 	<string name="layer_osm_bugs">OSM 錯誤(線上)</string>
-	<string name="layer_transport">車站、站牌</string>
+	<string name="layer_transport">公車站牌</string>
 	<string name="layer_poi">興趣點…</string>
 	<string name="layer_map">地圖來源…</string>
 	<string name="menu_layers">地圖圖層</string>
@@ -749,7 +748,7 @@
 	<string name="first_time_continue">接著</string>
 	<string name="first_time_download">下載地區</string>
 	<string name="search_poi_location">搜尋訊號中…</string>
-	<string name="search_near_map">查尋上次位置附近</string>
+	<string name="search_near_map">查尋目前地圖中心附近</string>
 	<string name="search_nearby">在附近查尋</string>
 	<string name="map_orientation_default">與裝置一樣</string>
 	<string name="map_orientation_portrait">直豎</string>
@@ -760,7 +759,7 @@
 	<string name="add_new_rule">新增新規則</string>
 	<string name="transport_Routes">導航路線</string>
 	<string name="transport_Stop">停止</string>
-	<string name="transport_stops">車站</string>
+	<string name="transport_stops">站牌</string>
 	<string name="transport_search_after">後續路線</string>	
 	<string name="transport_search_before">優先路線</string>
 	<string name="transport_finish_search">查尋完成</string>
@@ -1016,7 +1015,7 @@
     <string name="distance_measurement_save_gpx">另存為 GPX</string>
     <string name="distance_measurement_load_gpx">開啟現有的 GPX</string>
     <string name="wait_current_task_finished">請等待目前的作業結束</string>
-    <string name="use_kalman_filter_compass_descr">使用 Kalman 濾波器，以避免電子羅盤的偏差</string>
+    <string name="use_kalman_filter_compass_descr">降低電子羅盤讀值雜訊，但增加了慣性</string>
     <string name="use_kalman_filter_compass">使用 Kalman 濾波器</string>
     <string name="use_magnetic_sensor_descr">使用磁性感應器來判斷電子羅盤的值，而不是定位感應器</string>
     <string name="use_magnetic_sensor">使用磁性感應器</string>
@@ -1443,9 +1442,9 @@
     <string name="routing_preferences_descr">路線偏好</string>
     <string name="app_mode_truck">卡車</string>
     <string name="application_dir_change_warning2">您想要將 OsmAnd 資料複製到新的目的地嗎？選擇否，OsmAnd 只建立和使用新的資料夾。</string>
-    <string name="copying_osmand_one_file_descr">複製檔案 (%s) 到新的目的地...</string>
-    <string name="copying_osmand_files_descr">複製 OsmAnd 資料檔到新的目的地 (%s)</string>
-    <string name="copying_osmand_files">複製 OsmAnd 資料檔案</string>
+    <string name="copying_osmand_one_file_descr">複製檔案 (%s) 到新的目的地…</string>
+    <string name="copying_osmand_files_descr">複製 OsmAnd 資料檔到新的目的地 (%s)…</string>
+    <string name="copying_osmand_files">複製 OsmAnd 資料檔案…</string>
     <string name="calculate_osmand_route_gpx">OsmAnd 預估離線路線</string>
     <string name="android_19_location_disabled">由於 Android 4.4 (KitKat) 版本，您無法下載和更新地圖於之前的存儲檔案夾 (%s)。您是否想變更到允許的存儲位置並複製所有的 OsmAnd 檔案到那裡？
 \n注意 1：您舊的檔案將保持不變（但可以手動刪除）。
@@ -1566,7 +1565,7 @@
     <string name="osmo_tracker_id">個人追蹤 ID</string>
     <string name="osmo_tracker_id_descr">點擊查看或分享追蹤 ID。          使用追蹤 ID 連線的裝置將能夠監控該裝置的所有動作！ 要斷開選擇恢復選項。</string>
     <string name="osmo_session_token">連線階段標記：%1$s</string>
-    <string name="osmo_auth_pending">等候授權...</string>
+    <string name="osmo_auth_pending">等候授權…</string>
     <string name="osmo_locations_sent">發送位置 %1$d（在緩衝區 %2$d） </string>
     <string name="osmo_conn_successfull">已建立的連線：%1$s </string>
     <string name="osmo_mode_restart">重新啟動 OsMo 連線階段</string>
@@ -1738,7 +1737,7 @@
 	<string name="rendering_attr_subwayMode_name">捷運路線</string>
  	<string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
-	<string name="osmo_invite">邀請...</string>
+	<string name="osmo_invite">邀請…</string>
     <string name="osmo_leave_confirmation_msg">您想要離開 %1$s 群組嗎？</string>
     <string name="osmo_specify_tracker_id">請指定 ID</string>
     <string name="rendering_attr_alpineHiking_name">高山徒步比例尺 (SAC)</string>
@@ -1759,7 +1758,7 @@
     <string name="rendering_value_car_name">汽車</string>
     <string name="rendering_value_bicycle_name">自行車</string>
     <string name="rendering_value_pedestrian_name">步行</string>
-    <string name="more">更多...</string>
+    <string name="more">更多…</string>
     <string name="download_additional_maps">要下載缺少的地圖 %1$s (%2$d MB) 嗎？</string>
     <string name="flat_list_waypoitns">全部</string>
     <string name="waypoints">中途點</string>
@@ -1805,7 +1804,7 @@
     <string name="anonymous_user">匿名使用者</string>
     <string name="logged_as">已登入於 %1$s</string>
 	<string name="rendering_category_details">詳細資訊</string>
-    <string name="rendering_category_transport">運輸</string>
+    <string name="rendering_category_transport">交通工具</string>
     <string name="rendering_category_others">其它地圖屬性</string>
     <string name="map_widget_appearance_rem">剩餘元件</string>
     <string name="map_widget_top">狀態列</string>
@@ -1851,7 +1850,7 @@
     <string name="navigate_point_easting">東距</string>
     <string name="navigate_point_zone">地區</string>
     <string name="map_locale">地圖上的語言</string>
-    <string name="rendering_attr_transportStops_name">候車亭</string>
+    <string name="rendering_attr_transportStops_name">公車站牌</string>
     <string name="voices">提示語音</string>
 	<string name="dash_download_msg_none">您想要下載離線地圖嗎？</string>
     <string name="dash_download_msg">您已下載了 %1$s 的地圖</string>
@@ -1864,8 +1863,9 @@
     <string name="rendering_value_orange_name">橙色</string>
     <string name="rendering_value_germanRoadAtlas_name">德國道路地圖集</string>
     <string name="rendering_value_americanRoadAtlas_name">美國道路地圖集</string>
-    <string name="traffic_warning_railways">鐵路</string>
-	<string name="traffic_warning_pedestrian">步行</string>
+    <string name="traffic_warning_railways">鐵路平交道</string>
+	<string name="traffic_warning_pedestrian">行人穿越道</string>
 	<string name="show_railway_warnings">顯示鐵路平交道</string>
 	<string name="show_pedestrian_warnings">顯示行人穿越道</string>
+    <string name="speak_pedestrian">通報行人穿越道</string>
     </resources>

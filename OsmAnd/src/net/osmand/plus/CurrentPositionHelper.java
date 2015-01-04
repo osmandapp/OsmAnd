@@ -60,10 +60,11 @@ public class CurrentPositionHelper {
 	
 	
 	private void scheduleRouteSegmentFind(final Location loc) {
-		if (calculatingThread == Thread.currentThread()) {
+		Thread calcThread = calculatingThread;
+		if (calcThread == Thread.currentThread()) {
 			lastFound = runUpdateInThreadCatch(loc.getLatitude(), loc.getLongitude());
 		} else if (loc != null) {
-			if (calculatingThread == null) {
+			if (calcThread == null) {
 				Runnable run = new Runnable() {
 					@Override
 					public void run() {
@@ -79,7 +80,7 @@ public class CurrentPositionHelper {
 					}
 				};
 				calculatingThread = app.getRoutingHelper().startTaskInRouteThreadIfPossible(run);
-			} else if (!calculatingThread.isAlive()) {
+			} else if (!calcThread.isAlive()) {
 				calculatingThread = null;
 			}
 		}

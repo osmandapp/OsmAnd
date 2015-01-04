@@ -142,7 +142,7 @@
   <string name="search_position_fixed">Fissato</string>
   <string name="search_position_current_location">Posizione corrente…</string>
   <string name="search_position_map_view">Ultima vista mappa</string>
-  <string name="select_search_position">Cerca vicino a:</string>
+  <string name="select_search_position">Origine:</string>
   <string name="context_menu_item_search">Cerca nelle vicinanze</string>
   <string name="tip_recent_changes_0_6_7_t">Novità nella versione 0.6.7:
 		\n\t- Manager dati offline (scaricare, eliminare e backup di dati offline direttamente da OsmAnd)
@@ -223,7 +223,7 @@
   <string name="voice_not_use">Non usare</string>
   <string name="voice_not_specified">Nessuna</string>
   <string name="installing_new_resources">Scompattazione nuovi dati…</string>
-  <string name="internet_connection_required_for_online_route">E\' selezionato un servizio di navigazione online ma la connessione a internet non è disponibile.</string>
+  <string name="internet_connection_required_for_online_route">È stato selezionato un servizio di navigazione online, ma la connessione a Internet non è disponibile.</string>
   <string name="tts_language_not_supported_title">Lingua non supportata</string>
   <string name="tts_language_not_supported">La lingua selezionata non è supportata nel motore TTS (text-to-speech) Android installato. Vuoi vedere in Market un altro motore TTS? Altrimenti verrà utilizzata la lingua TTS preimpostata.</string>
   <string name="tts_missing_language_data_title">Dati mancanti</string>
@@ -342,7 +342,7 @@
   <string name="amenity_type_sport">Sport</string>
   <string name="amenity_type_sustenance">Alimentari</string>
   <string name="amenity_type_tourism">Turismo</string>
-  <string name="amenity_type_transportation">Trasporto</string>
+  <string name="amenity_type_transportation">Trasporti pubblici</string>
   <string name="indexing_address">Indicizzazione indirizzi…</string>
   <string name="indexing_map">Indicizzazione mappa…</string>
   <string name="indexing_poi">Indicizzazione PDI…</string>
@@ -353,7 +353,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Il formato dati mappa \'\'{0}\'\' è deprecato e non è supportato</string>
   <string name="poi_filter_car_aid">Servizi automobile</string>
-  <string name="poi_filter_closest_poi">PDI più vicini</string>
+  <string name="poi_filter_closest_poi">Tutti i PDI più vicini</string>
   <string name="poi_filter_custom_filter">Filtro personalizzato</string>
   <string name="poi_filter_food_shop">Alimentari</string>
   <string name="poi_filter_for_tourists">Turistico</string>
@@ -521,14 +521,14 @@
   <string name="transport_Routes">Percorsi</string>
   <string name="transport_Stop">Fermata</string>
   <string name="transport_stops">fermate</string>
-  <string name="transport_search_after">Percorso successivo</string>
-  <string name="transport_search_before">Percorso precedente</string>
+  <string name="transport_search_after">Itinerario successivo</string>
+  <string name="transport_search_before">Itinerario precedente</string>
   <string name="transport_finish_search">Completa la ricerca</string>
   <string name="transport_stop_to_go_out">Scegli ferma per uscire</string>
   <string name="transport_to_go_after">distanza precedente</string>
   <string name="transport_to_go_before">distanza successiva</string>
   <string name="transport_stops_to_pass">fermate da passare</string>
-  <string name="transport_route_distance">Distanza percorso</string>
+  <string name="transport_route_distance">Distanza itinerario</string>
   <string name="transport">Trasporto pubblico</string>
   <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Visualizza le fermate di trasporto pubblico sulla mappa</string>
@@ -1038,14 +1038,13 @@
 		\n\t* \'Nella direzione del movimento\' - La mappa sarà sempre allineata alla vostra direzione
 		\n\t* \'Con la bussola\' - La mappa sarà sempre allineata alla lettura della bussola del dispositivo
 	</string>
-<string name="tip_day_night_mode_t_v2">L\'aspetto della mappa può, per alcune mappe vettoriali, essere cambiato fra diurno (luminoso) e notturno (scuro). I colori notturni sono più sicuri e meno fastidiosi per la guida di notte.
-		\n\nSi può impostare una regola per il cambio giorno/notte in \'Menu\' → \'Configurazione schermo…\' → \'Mappa giorno/notte\'.
-		\n\nLe opzioni sono:
-		\n\t* \'Alba/Tramonto\': automatico, in base alla posizione del sole (preimpostato)
-		\n\t* \'Giorno\': usa sempre il modo diurno
-		\n\t* \'Notte\': usa sempre il modo notturno
-		\n\t* \'Sensore di luminosità\': l\'aspetto della mappa è controllato dal sensore di luminosità del dispositivo (solo se presente)
-	</string>
+<string name="tip_day_night_mode_t_v2">"Per le mappe vettoriali offline, l\'aspetto della mappa può essere cambiato fra diurno (luminoso) e notturno (scuro). I colori notturni sono più sicuri e meno fastidiosi per la guida di notte.
+\n\nSi può impostare una regola per il cambio giorno/notte in \'Menu\' → \'Configura la mappa\' → \'Mappa giorno/notte\'.
+\n\nLe opzioni sono:
+\n\t* \'Alba/Tramonto\': automatico, in base alla posizione del sole (preimpostato)
+\n\t* \'Giorno\': usa sempre il modo diurno
+\n\t* \'Notte\': usa sempre il modo notturno
+\n\t* \'Sensore di luminosità\': l\'aspetto della mappa è controllato dal sensore di luminosità del dispositivo (solo se presente) "</string>
 <string name="tip_map_switch_t_v2">"La sorgente della mappa e i livelli visualizzati sono cambiati attraverso \'Menu\'-&gt;\'Configura la mappa\'.
 \n\nSotto \'Sorgente mappa…\' puoi scegliere di usare le mappe vettoriali offline precaricate (predefinito, sono necessarie anche per la navigazione offline), le sorgenti di tasselli predefinite -online o caricate in cache offline- (attiva il plugin \'Mappe online\' in \'Impostazioni\' → \'Gestore plugin\' per averle), o mappe create manualmente usando per esempio OsmAndMapCreator sul PC.
 \n\nOsmAnd supporta anche sorgenti personalizzate. "</string>
@@ -1619,9 +1618,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 \n Nota: i file precedenti non verranno modificati.
 \n Nota: non sarà possibile condividere i files fra OsmAnd and OsmAnd+.</string>
     <string name="application_dir_change_warning2">Vuoi che OsmAnd sposti anche i propri dati nella nuova destinazione? Scegli \'No\' perché OsmAnd crei e utilizzi una nuova cartella.</string>
-    <string name="copying_osmand_one_file_descr">Copia in corso del file (%s) nella nuova destinazione...</string>
-    <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)</string>
-    <string name="copying_osmand_files">Copia dei file di dati di OsmAnd</string>
+    <string name="copying_osmand_one_file_descr">Copia in corso del file (%s) nella nuova destinazione…</string>
+    <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)…</string>
+    <string name="copying_osmand_files">Copia dei file di dati di OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">Calcola percorso OsmAnd offline</string>
     <string name="routing_attr_prefer_motorway_name">Preferisci le autostrade</string>
 	<string name="routing_attr_prefer_motorway_description">Preferisci le autostrade</string>
@@ -1656,7 +1655,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	\n\t* Molte piccole migliorie dell\'interfaccia utente &amp; correzioni usabilità
 	\n\t* Impostazioni della velocità della vocalizzazione
     </string>
-    <string name="calculate_osmand_route_without_internet">Calcola un tratto di percorso OsmAnd senza l\'utilizzo di internet</string>
+    <string name="calculate_osmand_route_without_internet">Calcola un tratto di percorso OsmAnd senza l\'utilizzo di Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcola una percorso OsmAnd per il primo e l\'ultimo tratto del percorso</string>
     <string name="osmodroid_unseek">Oggetto non trovato</string>
     <string name="lang_en">Inglese</string>
@@ -1743,7 +1742,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_tracker_id_descr">Clicca per visualizzare o condividere l\'id della tracciabilità.
  Usando l\'id della tracciabilità i dispositivi connessi saranno in grado di seguire tutti i movimenti di questo dispositivo! Per disconnettersi seleziona Opzione rigenera.</string>
     <string name="osmo_session_token">Token della sessione: %1$s</string>
-    <string name="osmo_auth_pending">In attesa di autorizzazione...</string>
+    <string name="osmo_auth_pending">In attesa di autorizzazione…</string>
     <string name="osmo_locations_sent">Localizzazioni inviate %1$d (nel buffer %2$d) </string>
     <string name="osmo_conn_successfull">Connessione stabilita: %1$s </string>
     <string name="osmo_mode_restart">Riavvia la sessione OsMo</string>
@@ -1843,7 +1842,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="gpx_available_current_track">Traccia attualmente in registrazione</string>
     <string name="selected">selezionato</string>
     <string name="gpx_split_interval">Intervallo suddivisione</string>
-    <string name="loading_smth">Caricamento di %1$s …</string>
+    <string name="loading_smth">Caricamento di %1$s…</string>
     <string name="gpx_wpt">Tappa</string>
     <string name="selected_gpx_info_show">\n\nTieni premuto per vederlo sulla mappa</string>
     <string name="delay_navigation_start">Avvia la navigazione passo per passo automaticamente</string>
@@ -1911,7 +1910,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="lang_zh_CN">Cinese semplificato</string>
 	<string name="lang_zh_TW">Cinese tradizionale</string>
 	<string name="rendering_attr_subwayMode_name">Percorsi metró</string>
- 	<string name="osmo_invite">Invita ...</string>
+ 	<string name="osmo_invite">Invita…</string>
     <string name="osmo_leave_confirmation_msg">Vuoi abbandonare il gruppo %1$s?</string>
     <string name="osmo_specify_tracker_id">Per favore specifica l\'id</string>
     <string name="continue_navigation">Prosegui la navigazione</string>
@@ -1934,7 +1933,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_car_name">Automobile</string>
     <string name="rendering_value_bicycle_name">Bicicletta</string>
     <string name="rendering_value_pedestrian_name">Pedone</string>
-    <string name="more">Altro...</string>
+    <string name="more">Altro…</string>
     <string name="download_additional_maps">Scaricare le mappe mancanti %1$s (%2$d MB)?</string>
     <string name="flat_list_waypoitns">Tutti</string>
     <string name="waypoints">Punti intermedi</string>
@@ -2010,7 +2009,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="show_all">MOSTRA TUTTO</string>
 	<string name="coordinates">Coordinate</string>
 	<string name="home_button">Schermata iniziale</string>
-    <string name="map_update">Ci sono %1$s aggiornamenti per le mappe</string>
+    <string name="map_update">Ci sono aggiornamenti per %1$s mappe</string>
 	<string name="search_for">Cerca</string>
 	<string name="show_map">MOSTRA LA MAPPA</string>
 	<string name="error_avoid_specific_road">Nessuna alternativa trovata</string>
@@ -2038,9 +2037,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_germanRoadAtlas_name">Atlante strade tedesche</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlante strade americane</string>
     <string name="routing_attr_no_new_routing_name">Non usare il calcolo del percorso v1.9</string>
-    <string name="routing_attr_no_new_routing_description">Non usare il calcolo del percorso v1.9</string>
-    <string name="traffic_warning_railways">Ferrovie</string>
-	<string name="traffic_warning_pedestrian">Pedonale</string>
+    <string name="routing_attr_no_new_routing_description">Non usare le regole di calcolo del percorso introdotte nella v1.9</string>
+    <string name="traffic_warning_railways">Passaggio a livello</string>
+	<string name="traffic_warning_pedestrian">Attraversamento pedonale</string>
 	<string name="show_railway_warnings">Mostra i passaggi a livello</string>
 	<string name="show_pedestrian_warnings">Mostra gli attraversamenti pedonali</string>
+    <string name="speak_pedestrian">Annuncia gli attraversamenti pedonali</string>
     </resources>

@@ -196,9 +196,14 @@ public class WaypointHelper {
 	}
 	
 	public void enableWaypointType(int type, boolean enable) {
+		//An item will be displayed in the Waypoint list if either "Show..." or "Announce..." is selected for it in the Navigation settings
+		//Keep both "Show..." and "Announce..." Nav settings in sync when user changes what to display in the Waypoint list, as follows:
 		if(type == ALARMS) {
 			app.getSettings().SHOW_TRAFFIC_WARNINGS.set(enable);
 			app.getSettings().SPEAK_TRAFFIC_WARNINGS.set(enable);
+			app.getSettings().SHOW_PEDESTRIAN.set(enable);
+			app.getSettings().SPEAK_PEDESTRIAN.set(enable);
+			//But do not implicitly change speed_cam settings here because of legal restrictions in some countries, so Nav settings must prevail
 		} else if(type == POI) {
 			app.getSettings().SHOW_NEARBY_POI.set(enable);
 			app.getSettings().ANNOUNCE_NEARBY_POI.set(enable);
@@ -655,38 +660,9 @@ public class WaypointHelper {
 		}
 
 
-		public int getDrawableId(Context uiCtx) {
-			if(type == POI) {
-				Amenity amenity = ((AmenityLocationPoint) point).a;
-				StringBuilder tag = new StringBuilder();
-				StringBuilder value = new StringBuilder();
-				MapRenderingTypes.getDefault().getAmenityTagValue(amenity.getType(), amenity.getSubType(),
-						tag, value);
-				if(RenderingIcons.containsBigIcon(tag + "_" + value)) {
-					return RenderingIcons.getBigIconResourceId(tag + "_" + value);
-				} else if(RenderingIcons.containsBigIcon(value.toString())) {
-					return RenderingIcons.getBigIconResourceId(value.toString());
-				}
-				return 0;
-			} else if(type == TARGETS) {
-				return !((TargetPoint)point).intermediate? R.drawable.list_destination:
-								R.drawable.list_intermediate;
-			} else if(type == FAVORITES || type == WAYPOINTS) {
-				//return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
-				return 0;
-			} else if(type == ALARMS) {
-				//TODO: Looks like this does not work yet, not sure why:
-				if(RenderingIcons.containsBigIcon("list_" + ((AlarmInfo) point).getType().toString().toLowerCase())) {
-					return RenderingIcons.getBigIconResourceId("list_" + ((AlarmInfo) point).getType().toString().toLowerCase());
-				} else {
-					return 0;
-				}
-			} else {
-				return 0;
-			}
-		}
+		
 
-		public Drawable getDrawable(Context uiCtx) {
+		public Drawable getDrawable(Context uiCtx, OsmandApplication app) {
 			if(type == POI) {
 				Amenity amenity = ((AmenityLocationPoint) point).a;
 				StringBuilder tag = new StringBuilder();
@@ -706,9 +682,33 @@ public class WaypointHelper {
 			} else if(type == FAVORITES || type == WAYPOINTS) {
 				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
 			} else if(type == ALARMS) {
-				//TODO: Looks like this does not work yet, not sure why:
-				if(RenderingIcons.containsBigIcon("list_" + ((AlarmInfo) point).getType().toString().toLowerCase())) {
-					return uiCtx.getResources().getDrawable(RenderingIcons.getBigIconResourceId("list_" + ((AlarmInfo) point).getType().toString().toLowerCase()));
+				//assign alarm list icons manually for now
+				if(((AlarmInfo) point).getType().toString() == "SPEED_CAMERA") {
+					return uiCtx.getResources().getDrawable(R.drawable.mx_highway_speed_camera);
+				} else if(((AlarmInfo) point).getType().toString() == "BORDER_CONTROL") {
+					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_border_control);
+				} else	if(((AlarmInfo) point).getType().toString() == "RAILWAY") {
+					if(app.getSettings().DRIVING_REGION.get().americanSigns){
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways_us);
+					} else {
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_railways);
+					}
+				} else if(((AlarmInfo) point).getType().toString() == "TRAFFIC_CALMING") {
+					if(app.getSettings().DRIVING_REGION.get().americanSigns){
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_traffic_calming_us);
+					} else {
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_traffic_calming);
+					}
+				} else if(((AlarmInfo) point).getType().toString() == "TOLL_BOOTH") {
+					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_toll_booth);
+				} else if(((AlarmInfo) point).getType().toString() == "STOP") {
+					return uiCtx.getResources().getDrawable(R.drawable.list_stop);
+				} else if(((AlarmInfo) point).getType().toString() == "PEDESTRIAN") {
+					if(app.getSettings().DRIVING_REGION.get().americanSigns){
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian_us);
+					} else {
+						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_pedestrian);
+					}
 				} else {
 					return null;
 				}

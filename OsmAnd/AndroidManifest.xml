@@ -128,6 +128,7 @@
 		<activity android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.rastermaps.SettingsRasterMapsActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.routepointsnavigation.RoutePointsActivity" />
+		<activity android:name="net.osmand.plus.dashboard.DashAudioVideoNotesActivity" />
 
 		<activity android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="net.osmand.plus.development.SettingsDevelopmentActivity" android:configChanges="keyboardHidden|orientation" />
@@ -165,10 +166,15 @@
 
 		<activity android:name="net.osmand.plus.activities.search.GeoIntentActivity" android:label="@string/app_name">
 			<intent-filter>
-				<data android:scheme="geo" />
 				<data android:scheme="osmand.geo" />
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+			<intent-filter>
+				<data android:scheme="geo" />
+				<action android:name="android.intent.action.VIEW"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
 			</intent-filter>
 			<intent-filter>
 				<data android:scheme="http" android:host="maps.google.com" />

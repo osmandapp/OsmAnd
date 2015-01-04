@@ -177,6 +177,7 @@ public class FavoriteDialogs {
 		final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
 		builder.setView(v);
 		final EditText editText =  (EditText) v.findViewById(R.id.Name);
+		final EditText description = (EditText) v.findViewById(R.id.descr);
 		final AutoCompleteTextView cat =  (AutoCompleteTextView) v.findViewById(R.id.Category);
 		List<FavoriteGroup> gs = helper.getFavoriteGroups();
 		String[] list = new String[gs.size()];
@@ -208,6 +209,7 @@ public class FavoriteDialogs {
 				final FavouritesDbHelper helper = app.getFavorites();
 				app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(categoryStr);
 				point.setName(editText.getText().toString().trim());
+				point.setDescription(description.getText().toString().trim());
 				point.setCategory(categoryStr);
 				Builder bld = FavouritesDbHelper.checkDublicates(point, helper, activity);
 				if(bld != null) {

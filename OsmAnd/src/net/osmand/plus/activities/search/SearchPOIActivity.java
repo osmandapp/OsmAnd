@@ -43,6 +43,7 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 import android.app.AlertDialog;
@@ -506,17 +507,24 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 	@Override
 	public void updateCompassValue(float value) {
+		float lastHeading = heading != null ? heading : 99;
 		heading = value;
-		if(!uiHandler.hasMessages(COMPASS_REFRESH_MSG_ID)){
-			Message msg = Message.obtain(uiHandler, new Runnable(){
-				@Override
-				public void run() {
-					amenityAdapter.notifyDataSetChanged();
-				}
-			});
-			msg.what = COMPASS_REFRESH_MSG_ID;
-			uiHandler.sendMessageDelayed(msg, 100);
+		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			amenityAdapter.notifyDataSetChanged();
+		} else {
+			heading = lastHeading;
 		}
+		//Comment out and use lastHeading above to see if this fixes issues seen on some devices
+		//if(!uiHandler.hasMessages(COMPASS_REFRESH_MSG_ID)){
+		//	Message msg = Message.obtain(uiHandler, new Runnable(){
+		//		@Override
+		//		public void run() {
+		//			amenityAdapter.notifyDataSetChanged();
+		//		}
+		//	});
+		//	msg.what = COMPASS_REFRESH_MSG_ID;
+		//	uiHandler.sendMessageDelayed(msg, 100);
+		//}
 	}
 	
 	
@@ -769,7 +777,12 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height, false);
 				Float h = heading;
 				float a = h != null ? h : 0;
+
+				//TODO: Hardy: The arrow direction below is correct only for the default display's standard orientation
+				//      i.e. still needs to be corrected for .ROTATION_90/180/170
+				//	Keep in mind: getRotation was introduced from Android 2.2
 				draw.setAngle(mes[1] - a + 180);
+
 				draw.setOpenedColor(opened);
 				direction.setImageDrawable(draw);
 			} else {

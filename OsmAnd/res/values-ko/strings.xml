@@ -79,7 +79,7 @@
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs 가 업로드되었습니다</string>
 	<string name="local_openstreetmap_uploadall">모두 업로드하기</string>
 	
-	<string name="local_openstreetmap_show">지도에서 보기</string>
+	<string name="local_openstreetmap_show">지도에 표시</string>
 	<string name="local_openstreetmap_upload">대량수정을 OSM에 업로드</string>
 	<string name="local_openstreetmap_delete">대량수정 삭제</string>
 	<string name="local_openstreetmap_descr_title">비동기 OSM 편집 :</string>
@@ -101,7 +101,7 @@
 	</string>    
 	<string name="free_version_message">무료 OsmAnd 버전은 다운로드를 %1$s 번으로 제한되고 오프라인 위키피디아 기사를 제공하지 않습니다.</string>
 	<string name="free_version_title">무료 버전</string>
-	<string name="poi_context_menu_showdescription">POI 설명 보여주기</string>
+	<string name="poi_context_menu_showdescription">POI 설명 표시</string>
 
 	<string name="index_name_north_america">북아메리카</string>
 	<string name="index_name_us">북아메리카 - 미국</string>
@@ -124,11 +124,11 @@
 	<string name="fav_export_confirmation">이전에 익스포트한 즐겨찾기에 대한 파일이 이미 존재합니다. 이 파일을 대체하시겠습니까?</string>
 <string name="profile_settings">특정 설정 프로필</string>
 	<string name="settings_preset">기본 프로필</string>
-	<string name="settings_preset_descr">각 프로필마다 맵뷰어 와 라우팅 설정을 기억합니다. 여기에 기본 프로필을 설정합니다.</string>
+	<string name="settings_preset_descr">각 프로필마다 맵뷰어 와 운행 설정을 기억합니다. 여기에 기본 프로필을 설정합니다.</string>
 	
 	
-	<string name="routing_settings">운행 (라우팅)</string>
-	<string name="routing_settings_descr">라우팅을 위한 옵션을 설정합니다</string>
+	<string name="routing_settings">운행</string>
+	<string name="routing_settings_descr">운행을 위한 옵션을 설정합니다</string>
 	<string name="global_settings">일반 설정</string>
 	<string name="index_settings">지도 관리</string>
 	<string name="index_settings_descr">기기에 저장된 오프라인 지도를 다운로드하고 관리합니다</string>
@@ -190,8 +190,8 @@
 	<string name="choose_auto_follow_route">자동-센터 지도 보기</string>
 	<string name="choose_auto_follow_route_descr">지도 보기가 현재 위치와 동기화하여 복귀할 때까지 걸리는 시간입니다</string>
 	<string name="auto_follow_route_never">결코(Never)</string>
-	<string name="auto_follow_route_navigation">자동-센터 길안내 전용</string>
-	<string name="auto_follow_route_navigation_descr">길안내 중에만 자동-센터 지도 보기를 사용합니다.</string>
+	<string name="auto_follow_route_navigation">자동-센터 운행 전용</string>
+	<string name="auto_follow_route_navigation_descr">운행 중에만 자동-센터 지도 보기를 사용합니다.</string>
 	<string name="auto_follow_location_enabled">자동-센터 지도 보기 사용 중입니다.</string>
 	
 	<string name="pref_vector_rendering">벡터 렌더러(renderer) 특정 옵션들</string>
@@ -203,19 +203,18 @@
 	<string name="animate_route_off">모의주행 정지</string>
 	<string name="animate_route">모의주행 시작</string>
 	
-	<string name="tip_recent_changes_0_6_8_t">0.6.8 버전에 대한 변경사항들 :
+	<string name="tip_recent_changes_0_6_8_t">"0.6.8 버전에 대한 변경사항들 :
 \n\t- 완전히 재설계한 검색 (POI, 주소)! 주소 검색을 훨씬 빠르게 응답하도록 함. 여러가지 많은 옵션을 가진 단일 검색 인터페이스 생성.
-\n\t- 넓은 지역 (나라)의 POI 이름 검색 구현  
+\n\t- 넓은 지역 (나라)의 POI 이름 검색 구현
 \n\t- 태블릿에 대한 깜박이는 맵 화면 수정 (이슈 641번)
 \n\t- 자동-중심 맵 보기 옵션 (이슈 356번)
-\n\t- GPX 네비겨이션이 \'방향\' 으로 이동 및 \'방향 저장\' 이  \'About route\' 로 이동
-\n\t- POI 데이터가 .obf 파일에 포함됨 (01/10/11 이후 모든 다운로드 인덱스) 
-\n\t- 음성 안내 픽스 (GPS 위치 픽스, 첫번째 명령 생략) 
-\n\t- 몇몇 개선점들
-	</string>
+\n\t- GPX 내비게이션이 \'방향\' 으로 이동 및 \'방향 저장\' 이 \'About route\' 로 이동
+\n\t- POI 데이터가 .obf 파일에 포함됨 (01/10/11 이후 모든 다운로드 인덱스)
+\n\t- 음성 안내 픽스 (GPS 위치 픽스, 첫번째 명령 생략)
+\n\t- 몇몇 개선점들 "</string>
 	<string name="file_can_not_be_renamed">파일 이름을 바꿀 수 없습니다.</string>
 	<string name="file_with_name_already_exists">같은 이름을 가진 파일이 이미 존재합니다.</string>
-	<string name="gpx_navigation">GPX 운행 경로</string>
+	<string name="gpx_navigation">GPX 경로</string>
 	<string name="poi_query_by_name_matches_categories">이름으로 검색한 POI에 해당하는 몇몇 카테고리를 찾았습니다 :</string>
 	<string name="data_to_search_poi_not_available">검색한 POI에 대한 로컬 데이터가 존재하지 않습니다.</string>
 	<string name="poi_filter_by_name">이름으로 검색</string>
@@ -226,7 +225,7 @@
 	<string name="map_version_changed_info">서버가 현재 앱 버전과 호환되지 않는 지도 파일을 가지고 있습니다. 그것들을 다운로드하고 사용하기 위해, 앱을 새로운 버전으로 업그레이드 하세요.</string>
 	
 	<string name="local_index_mi_rename">이름 바꾸기</string>
-	<string name="show_gpx_route">지도에서 보기</string>
+	<string name="show_gpx_route">지도에 표시</string>
 	<string name="poi_filter_nominatim">온라인 지명</string>
 	<string name="search_position_current_location_search">위치 검색중…</string>
 	<string name="search_position_current_location_found">위치(발견)</string>
@@ -235,9 +234,9 @@
 	<string name="search_position_undefined">정의되지 않음</string>
 	<string name="search_position_fixed">고정</string>
 	<string name="search_position_current_location">현재 위치…</string>
-	<string name="search_position_map_view">마지막 지도 보기</string>
+	<string name="search_position_map_view">현재 지도 센터링</string>
 	
-	<string name="select_search_position">주변 검색 :</string>
+	<string name="select_search_position">원점 :</string>
 	<string name="context_menu_item_search">가까운 주변 검색</string>
 	<string name="tip_recent_changes_0_6_7_t">"0.6.7 버전에 대한 변경사항들 :
 \n\t- 오프라인 데이터 관리 (OsmAnd 에서 직접 오프라인 데이터 다운로드, 삭제, 활성화 / 비활성화)
@@ -250,7 +249,7 @@
 \n\t- 벡터 렌더링 개선
 \n\t- TTS 엔진 개선 (정확한 거리 안내, 마일 활성화)
 \n\t- 버그 수정 "</string>
-	<string name="save_route_dialog_title">루트를 변환하여 GPX파일로 저장</string>
+	<string name="save_route_dialog_title">경로를 GPX파일로 저장</string>
 	<string name="route_successfully_saved_at">경로가 \'%1$s\'로 성공적으로 저장되었습니다.</string>
 	<string name="filename_input">파일 이름 : </string>
 	<string name="file_with_name_already_exist">같은 이름의 파일이 이미 존재합니다.</string>
@@ -296,7 +295,7 @@
 	
 	<string name="local_index_poi_data">POI 데이터</string>
 	<string name="local_index_address_data">주소 데이터</string>
-	<string name="local_index_transport_data">운송 데이터</string>
+	<string name="local_index_transport_data">대중 교통 데이터</string>
 	<string name="local_index_map_data">지도 데이터</string>
 	
 	<string name="local_indexes_cat_backup">비활성화</string>
@@ -316,30 +315,30 @@
 	<string name="tip_recent_changes">최근 변경사항들</string>
 	<string name="tip_recent_changes_0_6_6_t">"0.6.6 버전에 대한 변경사항들 :
 \n\t- 음성 안내를 위한 Text To Speech 엔진
-\n\t- 지도 렌더러를 더욱 세밀하게 만듦
+\n\t- 지도 렌더링를 더욱 세밀하게 만듦
 \n\t- 앱과 함께 패키지된 전세계 기본맵
-\n\t- 오프라인 길안내 조정 (실험적)
-\n\t- GPX 길안내 옵션들
+\n\t- 오프라인 운행 조정 (실험적)
+\n\t- GPX 운행 옵션들
 \n\t- UI 개선 및 큰 버그 수정 "</string>
 	<string name="voice_not_use">사용하지 않음</string>
 	<string name="installing_new_resources">새로운 데이터 풀기(Unpacking)…</string>
-	<string name="internet_connection_required_for_online_route">온라인 라우팅 서비스가 선택되었지만 인터넷이 연결되지 않았습니다.</string>
+	<string name="internet_connection_required_for_online_route">온라인 운행 서비스를 선택하였지만 인터넷 연결이 되지 않습니다.</string>
 	<string name="tts_language_not_supported_title">지원되지 않은 언어</string>
 	<string name="tts_language_not_supported">선택한 언어는  설치된 안드로이드 TTS (text-to-speech) 엔진이 지원되지 않습니다. 다른 TTS 엔진을 찾기 위해 구글마켓으로 가시겠습니까? 아니면 미리설정된 TTS 언어가 사용될 것입니다.</string>
 	<string name="tts_missing_language_data_title">누락된 데이터</string>
 	<string name="tts_missing_language_data">선택한 언어에 대한 데이터가 설치되지 않았습니다. 설치하기 위해 구글마켓으로 가시겠습니까?</string>
 
 	<string name="gpx_option_reverse_route">GPX 길안내 반대로 가기</string>
-	<string name="gpx_option_destination_point">현재 목적지 사용</string>
+	<string name="gpx_option_destination_point">현재 도착지 사용</string>
 	<string name="gpx_option_from_start_point">전체 경로를 따라 이동</string>
 
 	<string name="switch_to_vector_map_to_see">이 위치에 대해 존재하는 오프라인 벡터 맵.
 \n\t\n\t사용하려면 [메뉴-&gt;계층 지도-&gt;맵 소스…-&gt;\'오프라인 벡터 맵] 을 활성화합니다.</string>
 	<string name="choose_audio_stream">음성 안내 출력</string>
 	<string name="choose_audio_stream_descr">음성 안내를 재생할 채널을 선택합니다 (시스템 의존)</string>
-	<string name="voice_stream_voice_call">음성 호출 오디오</string>
-	<string name="voice_stream_notification">알림 오디오</string>
-	<string name="voice_stream_music">미디어/음악 오디오</string>
+	<string name="voice_stream_voice_call">음성 호출 스트림(통화음)</string>
+	<string name="voice_stream_notification">소리 알림</string>
+	<string name="voice_stream_music">미디어/음악 스트림(통화음)</string>
 	<string name="warning_tile_layer_not_downloadable">OsmAnd 앱이 계층 지도 %1$s 를 다운로드할 수 없으니, 재설치 하세요.</string>
 	<string name="overlay_transparency_descr">오버레이 맵 투명도를 수정합니다</string>
 	<string name="overlay_transparency">오버레이 투명도</string>
@@ -371,21 +370,15 @@
 	<string name="level_to_switch_vector_raster">최소 벡터 줌 레벨</string>
 
 	<string name="tip_location_sharing">위치 공유</string>
-	<string name="tip_location_sharing_t">You can share the location of interesting places on your trip with family or friends via the \'Use location\' context menu → \'Share location\'.
-
-\t여행 도중 관심 지점의 위치를 가족 또는 친구와 공유할 수 있습니다.
-	\n\t원하는 위치를 공유하기 위해:
-	\n\t\'맵 컨텍스트 메뉴\' -&gt; \'위치 공유\' 메뉴를 사용합니다.
-
-		\n\nThen chose a way to share your location. The choices are: E-Mail, SMS(text), or just copy the location coordinates to the device clipboard.
-
-	\n\t그런 다음 위치를 공유할 방법을 선택합니다. 선택사항에 따라: E-Mail, SMS(문자), 또는  클립보드로 위치 좌표를 복사합니다.
-	</string>
+	<string name="tip_location_sharing_t">"여행 도중 관심 지점의 위치를 가족 또는 친구와 공유할 수 있습니다.
+\n\t원하는 위치를 공유하기 위해:
+\n\t\'맵 컨텍스트 메뉴\' -&gt; \'위치 공유\' 메뉴를 사용합니다.
+\n\t그런 다음 위치를 공유할 방법을 선택합니다. 선택사항에 따라: E-Mail, SMS(문자), 또는 클립보드로 위치 좌표를 복사합니다. "</string>
 
 	<string name="tip_favorites">즐겨찾기 포인트</string>
 	<string name="tip_favorites_t">"자주 사용되는 포인트는 아래처럼 즐겨 찾기에 저장할 수 있습니다. ↵
 \n\n포인트를 즐겨 찾기에 저장하려면 맵 컨텍스트 메뉴로 이동하여 \'즐겨 찾기에 추가\'옵션을 선택하고 이름을 붙여주세요.
-\n\n즐겨 찾기 저장 후 \'메인 메뉴\'-&gt; \'장소\'를 통해 사용할 수 있습니다.  \'즐겨 찾기\'메뉴에서 즐겨 찾기를 길게 누르면 탐색 할 옵션이 나타나고, 편집 및 삭제할 수 있습니다. ↵
+\n\n즐겨 찾기 저장 후 \'메인 메뉴\'-&gt; \'저장소\'를 통해 사용할 수 있습니다.  \'즐겨 찾기\'메뉴에서 즐겨 찾기를 길게 누르면 탐색 할 옵션이 나타나고, 편집 및 삭제할 수 있습니다. ↵
 \n\n지도에 직접 모든 즐겨 찾기 지점을 표시하려면 \'맵 컨텍스트 메뉴\'-&gt; \'지도 구성\'의 \'즐겨 찾기\'레이어를 활성화하십시오. "</string>
 
 	<string name="create_poi_link_to_osm_doc">이미지와 함께 <u>온라인 OSM</u> 맵 분류</string>
@@ -404,10 +397,10 @@
 	
 
 	<string name="tip_navigation">운행</string>
-	<string name="tip_navigation_t">"길안내를 시작하기 전에 목적지를 선택하여야 합니다. 그런 다음 맵 상에서 \'메뉴\' -&gt; \'방향\' 을 누르고 네비게이션 종류를 선택합니다.
-\n\n목적지는 지도에 대상 플래그 마커로 표시되고 OsmAnd는 주황색 삼각형으로 목적지까지의 거리와 목적지까지의 방향을 표시합니다.
-\n\n당신이 \"운행시작\"을 선택 할 수 있습니다. 이는 OsmAnd, 당신을 살 - 가이드 (활성화 된 경우) 음성 안내를 제공 할 것을 의미, \'탐색 시작\'아니면 모든 라이브 guideance 또는 조정없이 정적 경로의 결과로, \'디스플레이 노선\'을 선택할 수 있습니다 당신은 이동.
-\n\n현재 위치가 아닌 다른 위치에서 선택한 목적지로 경로를 표시하려면지도에 시작 지점을 선택하고 \'~부터 길안내\'을 누릅니다.
+	<string name="tip_navigation_t">"운행을 시작하기 전에 목적지를 선택하여야 합니다. 그런 다음 맵 상에서 \'메뉴\' -&gt; \'운행시작\' 을 누르고 내비게이션 종류를 선택합니다.
+\n\n목적지는 지도에 도착지 플래그 마커로 표시되고 OsmAnd는 주황색 삼각형으로 목적지까지의 거리와 목적지까지의 방향을 표시합니다.
+\n\n당신이 \"운행시작\"을 선택 할 수 있습니다. 이는 OsmAnd가 당신을 라이브 - 가이드 (활성화 된 경우) 음성 안내를 제공 할 것을 의미합니다, 어떤 라이브 guideance 또는 조정없이 정적 경로의 결과로, \'경로 표시\'를 선택할 수 있습니다.
+\n\n현재 위치가 아닌 다른 위치에서 선택한 목적지로 경로를 표시하려면 지도에 시작 지점을 선택하고 \'출발지 운행시작\'을 누릅니다.
 \n\n당신이 함께 \'운행시작 \'에서 \"~로부터 길안내\'을 사용하는 경우, OsmAnd 는 즉시 실제 위치로 전환됩니다 (그래서 이것은 사용할 수 있는 위치가 발견되기 전에 라우팅 바로 시작할 수) \'에서 오시는 길\'동안 \'디스플레이 경로\'와 함께 당신에게 당신이 이후의 업데이트없이 선택했다 임의의 지점에서 경로를 보여줍니다. "</string>
 
 	<string name="tip_search">검색 중</string>
@@ -417,7 +410,7 @@
 \n\nA marker box can be hidden again by long-clicking on it. "</string>
 
 	<string name="tip_initial">도움말</string>
-	<string name="tip_initial_t">"OsmAnd는 많은 기능을 가진 네비게이션 앱입니다.\n기본적인 소개로서, 몇 가지 유용한 도움말을 [메뉴-도움말]에서 찾을 수 있습니다. "</string>
+	<string name="tip_initial_t">"OsmAnd는 많은 기능을 가진 내비게이션 앱입니다.\n기본적인 소개로서, 몇 가지 유용한 도움말을 지도화면에서  [메뉴-도움말]에서 찾을 수 있습니다. "</string>
 	<string name="next_button">다음</string>
 	<string name="previous_button">이전</string>
 
@@ -434,8 +427,8 @@
 	<string name="send_location_email_pattern">위치를 보기 위해 웹 브라우저 링크  %1$s 또는 안드로이드 인텐트 링크 %2$s 를 따라갑니다</string>
 	<string name="send_location">위치 전송</string>
 	<string name="context_menu_item_share_location">위치 공유</string>
-	<string name="add_waypoint_dialog_added">GPX 포인트 \'\'{0}\'\' 가 성공적으로 추가되었습니다</string>
-	<string name="add_waypoint_dialog_title">기록된 GPX 경로에 포인트 추가</string>
+	<string name="add_waypoint_dialog_added">GPX 경유지 \'\'{0}\'\' 가 성공적으로 추가되었습니다</string>
+	<string name="add_waypoint_dialog_title">기록된 GPX 경로에 경유지 추가</string>
 	<string name="context_menu_item_add_waypoint">GPX 경유지 추가</string>
 	<string name="amenity_type_administrative">관리</string>
 	<string name="amenity_type_barrier">배리어(Barrier)</string>
@@ -468,7 +461,7 @@
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">사용되지 않은 지도 데이터 형식 \'\'{0}\'\' 은 지원되지 않습니다</string>
 	<string name="poi_filter_car_aid">주유소</string>
-	<string name="poi_filter_closest_poi">가장 가까운 POI</string>
+	<string name="poi_filter_closest_poi">가까운 POI</string>
 	<string name="poi_filter_custom_filter">사용자 필터</string>
 	<string name="poi_filter_food_shop">식품가게</string>
 	<string name="poi_filter_for_tourists">여행자</string>
@@ -528,8 +521,8 @@
 	<string name="renderers">벡터 렌더러</string>
 	<string name="renderers_descr">렌더링 스타일을 선택합니다</string>
 	
-	<string name="poi_context_menu_website">POI 웹사이트 보기</string>
-	<string name="poi_context_menu_call">POI 전화 보기</string>
+	<string name="poi_context_menu_website">POI 웹사이트 표시</string>
+	<string name="poi_context_menu_call">POI 전화번호 표시</string>
 	<string name="website">웹사이트</string>
 	<string name="phone">전화</string>
 	<string name="download_type_to_filter">필터 종류</string>
@@ -538,10 +531,10 @@
 	<string name="unknown_location">위치는 아직 알 수 없음</string>
 	<string name="download_files">다운로드</string>
 	<string name="context_menu_item_search_transport">대중교통 검색</string>
-	<string name="transport_searching_transport">대중교통 검색결과 (목적지 없음):</string>
-	<string name="transport_searching_route">대중교통 검색결과 (목적지에 {0}):</string>
+	<string name="transport_searching_transport">대중교통 검색결과 (도착지 없음):</string>
+	<string name="transport_searching_route">대중교통 검색결과 (도착지에 {0}):</string>
 	<string name="transport_search_none">없음</string>
-	<string name="transport_search_again">대중교통 검색 재설정</string>
+	<string name="transport_search_again">대중교통 재검색</string>
 
 	<string name="map_index">지도</string>
 	<string name="voice">녹음된 음성</string>
@@ -593,9 +586,9 @@
 	<string name="use_trackball">트랙볼 사용</string>
 	<string name="background_service_wait_int_descr">위치를 찾는 최대 대기시간을 설정합니다</string>
 	<string name="background_service_wait_int">최대 대기시간</string>
-	<string name="service_stop_background_service">OsmAnd 절전 모드 길안내 서비스 정지</string>
+	<string name="service_stop_background_service">OsmAnd 절전 모드 운행 서비스 정지</string>
 	<string name="where_am_i">GPS 위치</string>
-	<string name="process_navigation_service">OsmAnd 네비게이션 서비스</string>
+	<string name="process_navigation_service">OsmAnd 내비게이션 서비스</string>
 	<string name="network_provider">네트워크</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">초</string>
@@ -606,7 +599,7 @@
 	<string name="background_service_provider">위치 제공자</string>
 	<string name="background_router_service_descr">오랫동안 위치를 추적하기 위해 백그라운드 서비스를 활성화합니다</string>
 	<string name="background_router_service">절전 모드에서 실행</string>
-	<string name="off_router_service_no_gps_available">백그라운드 길안내 서비스를 위해 GPS가 켜져 있어야 합니다.</string>
+	<string name="off_router_service_no_gps_available">절전모드 운행 서비스를 위해 GPS가 켜져 있어야 합니다.</string>
 	<string name="hide_poi_filter">필터 숨김</string>
 	<string name="show_poi_filter">필터 보이기</string>
 	<string name="search_poi_filter">필터</string>
@@ -635,7 +628,7 @@
 	<string name="first_time_msg">"OsmAnd 를 선택해 주셔서 감사합니다. 앱의 모든 기능을 사용하려면, 인덱스 파일을 (설정-&gt;지도 관리)  다운로드 하여 준비하세요.
 \n그런 다음, 지도를 보거나 주소, POI, 공공장소 등등을 찾을 수 있습니다."</string>
 	<string name="search_poi_location">신호 위치 찾는 중…</string>
-	<string name="search_near_map">지난번 지도 위치 검색</string>
+	<string name="search_near_map">현재 지도 센터링 검색</string>
 	<string name="search_nearby">근처 검색</string>
 	<string name="map_orientation_default">장치와 같음</string>
 	<string name="map_orientation_portrait">세로</string>
@@ -644,23 +637,23 @@
 	<string name="map_screen_orientation_descr">세로, 가로, 자동</string>
 	<string name="opening_hours_not_supported">오프닝 시간 형식은 편집을 지원하지 않습니다</string>
 	<string name="add_new_rule">새로운 규칙 추가</string>
-	<string name="transport_Routes">노선</string>
+	<string name="transport_Routes">경로</string>
 	<string name="transport_Stop">정류소</string>
 	<string name="transport_stops">정류소들</string>
 	
-	<string name="transport_search_after">다음 경로</string>	
-	<string name="transport_search_before">이전 경로</string>
+	<string name="transport_search_after">다음 교차로</string>	
+	<string name="transport_search_before">이전 교차로</string>
 	<string name="transport_finish_search">검색 종료</string>
 	<string name="transport_stop_to_go_out">하차할 정류소 선택</string>
 	<string name="transport_to_go_after">이전 거리</string>
 	<string name="transport_to_go_before">이후 거리</string>
 	<string name="transport_stops_to_pass">경유할 정류소들</string>
-	<string name="transport_route_distance">경로 거리</string>
+	<string name="transport_route_distance">교처로까지 거리</string>
 	<string name="transport">대중교통</string>
 	<string name="default_buttons_ok">OK</string>
-	<string name="show_transport_over_map_description">대중교통 정류소를 지도에 표시합니다</string>
+	<string name="show_transport_over_map_description">대중교통 정류소를 지도에 표시</string>
 	<string name="show_transport_over_map">대중교통 정류소 표시</string>
-	<string name="hello">네비게이션 앱 OsmAnd</string>
+	<string name="hello">내비게이션 앱 OsmAnd</string>
 	<string name="update_poi_success">POI 데이터가 성공적으로 업데이트되었습니다 ({0} 이 로드되었습니다)</string>
 	<string name="update_poi_error_local">지역 POI 목록을 업데이트하는 도중 오류가 발생하였습니다</string>
 	<string name="update_poi_error_loading">서버로부터 데이터를 로드하는 도중 오류가 발생하였습니다</string>
@@ -688,7 +681,7 @@
 	<string name="max_level_download_tile_descr">다운로드할 최대 줌 레벨을 선택하세요</string>
 	<string name="route_general_information">전체거리 %1$s, 여행시간 %2$d h %3$d m.</string>
 	<string name="router_service_descr">온라인 또는 오프라인 라우팅 서비스를 선택합니다</string>
-	<string name="router_service">라우터 선택</string>
+	<string name="router_service">운행 서비스</string>
 	<string name="sd_dir_not_accessible">SD 카드에 있는 데이터 저장 폴더에 접근할 수 없습니다!</string>
 	<string name="download_question">{0} - {1} 을 다운로드할까요?</string>
 	<string name="download_question_exist">{0} 에 대한 오프라인 데이터가 이미 존재합니다({1}). 업데이트할까요({2}) ?</string>
@@ -700,16 +693,16 @@
 	<string name="downloading_list_indexes">사용 가능한 지역 목록을 다운로드하는 중…</string>
 	<string name="list_index_files_was_not_loaded">지역 목록을 osmand.googlecode.com 로부터 가져올 수 없습니다.</string>
     <string name="select_index_file_to_download">원하는 지역의 지도를 찾을 수 없으면, 직접 지도를 만들 수도 있습니다. http://osmand.net 를 참고하세요.</string>
-	<string name="show_poi_on_map">지도에서 보기</string>
+	<string name="show_poi_on_map">지도에 표시</string>
 	<string name="fav_points_edited">즐겨찾기 포인트가 수정되었습니다</string>
 	<string name="fav_points_not_exist">즐겨찾기 포인트가 하나도 존재하지 않습니다</string>
 	<string name="update_existing">대체</string>
 	<string name="only_show">경로 표시</string>
 	<string name="follow">운행 시작</string>
 	<string name="recalculate_route_to_your_location">전송 모드 :</string>
-	<string name="mark_final_location_first">먼저 목적지를 선택하세요</string>
-	<string name="get_directions">길안내</string>
-    <string name="show_gps_status">GPS 정보</string>
+	<string name="mark_final_location_first">먼저 도착지를 선택하세요</string>
+	<string name="get_directions">운행시작</string>
+    <string name="show_gps_status">GPS Status 표시</string>
 	<string name="opening_hours">오프닝 시간</string>
 	<string name="opening_changeset">변경사항 여는중…</string>
 	<string name="closing_changeset">변경사항 닫는중…</string>
@@ -725,11 +718,11 @@
 	
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">GPX를 저장하는 도중 오류가 발생하였습니다</string>
-	<string name="error_calculating_route">경로를 찾는 도중 오류</string>
+	<string name="error_calculating_route">경로 탐색 도중 오류</string>
 	<string name="error_calculating_route_occured">경로를 찾는 도중 오류가 발생하였습니다</string>
 	<string name="empty_route_calculated">경로를 찾지 못하였습니다</string>									
 	<string name="new_route_calculated_dist">새로운 경로를 찾았습니다, 거리</string>
-	<string name="arrived_at_destination">목적지에 도착하였습니다</string>
+	<string name="arrived_at_destination">도착지에 도착하였습니다</string>
 	<string name="invalid_locations">좌표가 유효하지 않습니다!</string>
 	<string name="go_back_to_osmand">OsmAnd 맵으로 되돌아감</string>
 	<string name="close">닫기</string>
@@ -755,14 +748,14 @@
     <string name="settings">설정</string>
     <string name="save_current_track_descr">현재 트랙을 SD 카드에 저장합니다</string>
     <string name="save_current_track">현재 트랙을 GPX 파일로 저장</string>
-    <string name="save_track_interval_descr">운행하는 동안 트랙 레코딩을 저장하는 로깅 간격을 선택합니다</string>
-    <string name="save_track_interval">운행하는 로깅 간격</string>
+    <string name="save_track_interval_descr">운행하는 동안 트랙 레코딩을 위한 로깅 간격을 선택합니다</string>
+    <string name="save_track_interval">운행중 로깅 간격</string>
     <string name="save_track_to_gpx_descrp">운행하는 동안 트랙을 GPX파일로 저장합니다</string>
-    <string name="save_track_to_gpx">운행하는 동안 트랙을 GPX파일로 저장</string>
+    <string name="save_track_to_gpx">운행하는 동안 트랙을 GPX파일로 기록</string>
     <string name="update_tile">맵 업데이트</string>
     <string name="reload_tile">타일 재로드</string>
     <string name="mark_point">목적지</string>
-    <string name="show_osm_bugs_descr">맵에 OpenStreetBugs 표시</string>
+    <string name="show_osm_bugs_descr">"OpenStreetBugs를 지도에  표시"</string>
     <string name="show_osm_bugs">OpenStreetBugs 표시</string>
     <string name="favourites_activity">즐겨찾기</string>
     <string name="add_to_favourite">즐겨찾기에 추가</string>
@@ -781,7 +774,7 @@
     <string name="map_view_3d_descr">맵의 3D 뷰 활성화</string>
     <string name="map_view_3d">맵 3D 뷰</string>
     
-    <string name="show_poi_over_map_description">POI를 맵에 표시합니다 (최근에 선택된 필터 사용)</string>
+    <string name="show_poi_over_map_description">POI를 지도에 표시합니다 (최근에 선택된 필터 사용)</string>
     <string name="show_poi_over_map">POI 표시</string>
     <string name="map_tile_source_descr">온라인소스 또는 캐시된 맵 타일 소스를 선택합니다</string>
     <string name="map_tile_source">타일 맵 소스</string>
@@ -792,12 +785,12 @@
     <string name="settings_activity">설정</string>
     <string name="show_gps_coordinates_text">지도에 GPS 좌표 표시</string>
     <string name="use_internet_to_download_tile">누락된 맵 타일을 다운로드하기 위해 인터넷을 사용합니다</string>
-    <string name="app_description">운행 (라우팅) 앱</string>
+    <string name="app_description">운행 앱</string>
 
 <string name="exit_Button">종료</string>
 <string name="map_Button">지도</string>
 <string name="settings_Button">설정</string>
-<string name="favorites_Button">장소</string>
+<string name="favorites_Button">저장소</string>
 <string name="search_button">검색</string>
 <string name="search_activity">검색</string>
 
@@ -808,8 +801,8 @@
 <string name="incremental_search_building">빌딩 검색</string>
 <string name="choose_available_region">목록에서 지역을 선택합니다</string>
 <string name="choose_intersected_street">교차로를 선택합니다</string>
-<string name="Closest_Amenities">가장 가까운 시설들</string>
-<string name="app_mode_default">지도 보기</string>
+<string name="Closest_Amenities">근접한 시설들</string>
+<string name="app_mode_default">지도 찾아보기</string>
 <string name="app_mode_car">자동차</string>
 <string name="app_mode_bicycle">자전거</string>
 <string name="app_mode_pedestrian">보행자</string>
@@ -821,7 +814,7 @@
 <string name="navigate_point_format_D">DDD.DD</string>
 <string name="navigate_point_format_DM">DDD MM.MMM</string>
 <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-<string name="search_shown_on_map">맵에 표시</string>
+<string name="search_shown_on_map">지도에 보이기</string>
 <string name="navigate_point_cancel">취소</string>
 <string name="search_address_top_text">주소를 선택하세요</string>
 <string name="search_address_region">지역</string>
@@ -942,9 +935,9 @@
     <string name="calculate_osmand_route_without_internet">인터넷 연결없이 OsmAnd 경로 구간 계산</string>
     <string name="gpx_option_calculate_first_last_segment">첫번째와 마지막 경로 구간 계산</string>
     <string name="use_displayed_track_for_navigation">운행을 위해 맵뷰어에 표시된 경로를 사용하시겠습니까?</string>
-    <string name="keep_and_add_destination_point">목적지로 추가</string>
-    <string name="select_gpx">GPX파일 선택…</string>
-    <string name="route_descr_select_destination">목적지 선택</string>
+    <string name="keep_and_add_destination_point">도착지로 추가</string>
+    <string name="select_gpx">GPX 선택…</string>
+    <string name="route_descr_select_destination">도착지 선택</string>
     <string name="route_descr_select_on_map">지도에서 선택…</string>
     <string name="route_descr_favorite">즐겨찾기…</string>
     <string name="route_info">경로 정보</string>
@@ -961,15 +954,15 @@
 	<string name="routing_attr_avoid_motorway_name">전용도로 회피</string>
 	<string name="routing_attr_avoid_motorway_description">전용도로 회피하기</string>
 	<string name="routing_attr_weight_name">중량 제한</string>
-	<string name="routing_attr_weight_description">도로에 허가된 차량중량 지정하기</string>
+	<string name="routing_attr_weight_description">도로에 통행가능한 차량중량을 지정</string>
     <string name="android_19_location_disabled">킷캣(KitKat) 버전 이후로 이전에 저장한 폴더 (%s)에 지도를 다운로드하고 업데이트 할 수 없습니다.
 \n저장 위치를 변경하고 모든 파일을 그곳에 복사하는 것을 허락하겠습니까?
 \n Note : 이전 파일은 그대로 유지됩니다. (그러나 수동으로 삭제할 수 있습니다)\n Note : 새로운 저장소는 OsmAnd 와 OsmAnd+ 간에 파일을 공유 할 수 없습니다.</string>
-    <string name="application_dir_change_warning2">OsmAnd에 새 목적지로 데이터 파일을 복사하겠습니까? OsmAnd가 새 폴더를 만들고 사용하려면 \'아니오\'를 선택하세요.</string>
-    <string name="copying_osmand_one_file_descr">새 목적지로 파일(%s)을 복사중...</string>
-    <string name="copying_osmand_files_descr">새로운 목적지에 OsmAnd 데이터 파일을 복사중 (%s)</string>
-    <string name="copying_osmand_files">OsmAnd 데이터 파일을 복사중</string>
-    <string name="calculate_osmand_route_gpx">OsmAnd 오프라인 경로 계산하기</string>
+    <string name="application_dir_change_warning2">OsmAnd에 새 도착지로 데이터 파일을 복사하겠습니까? OsmAnd가 새 폴더를 만들고 사용하려면 \'아니오\'를 선택하세요.</string>
+    <string name="copying_osmand_one_file_descr">새 도착지에 파일(%s)을 복사중…</string>
+    <string name="copying_osmand_files_descr">새로운 도착지(%s)에 OsmAnd 데이터 파일을 복사중…</string>
+    <string name="copying_osmand_files">OsmAnd 데이터 파일을 복사중…</string>
+    <string name="calculate_osmand_route_gpx">OsmAnd 오프라인 경로를 계산</string>
     <string name="app_mode_truck">트럭</string>
     <string name="routing_preferences_descr">라우팅 환경설정</string>
     <string name="speech_rate_descr">TTS에 대한 음성속도를 지정합니다</string>
@@ -987,7 +980,7 @@
     <string name="tip_faq">자주 묻는 질문 (FAQ)</string>
     <string name="local_osm_changes_delete_all">모두 삭제하기</string>
     <string name="animate_routing_route_not_calculated">먼저 경로를 계산하세요</string>
-    <string name="animate_routing_route">"탬색된 경로를 이용하여 모의주행하기 "</string>
+    <string name="animate_routing_route">"탐색한 경로를 이용하여 모의주행 "</string>
     <string name="animate_routing_gpx">GPX경로를 이용하여 모의주행하기</string>
     <string name="remember_choice">내 선택을 기억하기</string>
     <string name="gps_status_eclipsim">GPS status</string>
@@ -1043,13 +1036,13 @@
 	<string name="lang_sl">슬로베니아어</string>
 	<string name="lang_cy">웨일스어</string>
 	<string name="route_preferences">경로 환경설정</string>
-    <string name="guidance_preferences_descr">라우팅 환경설정</string>
-    <string name="disable_complex_routing_descr">자동차용 라우팅의 복잡한 출발지/도착지 2단계 라우팅 사용불가</string>
+    <string name="guidance_preferences_descr">운행 환경설정</string>
+    <string name="disable_complex_routing_descr">자동차 운행의 복잡한 출발지/도착지 2단계 라우팅 사용불가</string>
     <string name="app_modes_choose_descr">앱에서 볼 수있는 사용자 프로필를 선택합니다</string>
     <string name="map_widget_appearance">나머지 요소 :</string>
 	<string name="local_osm_changes_delete_all_confirm">%1$d OSM 변경 사항을 삭제하려고 합니다.  확실합니까?</string>
     <string name="route_is_too_long">OsmAnd 오프라인 라우팅(길찾기)는 200km 이상 떨어진 포인트를 계산할 때 매우 긴 시간이 걸리 수 있습니다. (가끔 작동 되지 않을 수 있습니다) 당신은 더 나은 성능을 위해 경유지를 추가할 수 있습니다.</string>
-	<string name="auto_zoom_close">가까운 거리에</string>
+	<string name="auto_zoom_close">좀 더 가깝게</string>
 	<string name="auto_zoom_far">중간 거리에</string>
 	<string name="auto_zoom_farthest">긴 거리에</string>
 	<string name="edit_tilesource_elliptic_tile">타원 메르카토르</string>
@@ -1060,8 +1053,8 @@
     <string name="clear_intermediate_points">경유지 지우기</string>
     <string name="keep_intermediate_points">경유지 유지</string>
     <string name="new_directions_point_dialog">이미 경유자를 설정했습니다.</string>
-    <string name="context_menu_item_directions_to">~까지 길안내</string>
-    <string name="context_menu_item_directions_from">~부터 길안내</string>
+    <string name="context_menu_item_directions_to">~까지 운행</string>
+    <string name="context_menu_item_directions_from">~부터 운행</string>
     <string name="route_descr_map_location">지도 : </string>
     <string name="route_descr_lat_lon">위도 %1$.3f, 경도 %2$.3f</string>
     <string name="route_descr_current_location">현재 위치</string>
@@ -1070,8 +1063,8 @@
     <string name="route_from">~부터 :</string>
 	
 	
-	<string name="destination_point">목적지 %1$s</string>
-    <string name="context_menu_item_destination_point">목적지로 설정</string>
+	<string name="destination_point">도착지 %1$s</string>
+    <string name="context_menu_item_destination_point">도착지로 설정</string>
     <string name="please_select_address">먼저 도시나 거리를 선택</string>
     <string name="tip_recent_changes_1_4_t">"Changes in 1.4:
 \n\t* 모든 곳을 방문하기 위한 최적화된 방식으로 포인트 순서
@@ -1082,7 +1075,7 @@
 \n\t* SRTM 파일 삭제
 \n\t* OSM 노트 지원 "</string>
     <string name="search_street_in_neighborhood_cities">인근 도시에서 거리 검색</string>
-    <string name="intermediate_items_sort_return">경유지는 목적지까지 가는 길에 경유지의 순서를 최적화하기 위해 재 정렬.</string>
+    <string name="intermediate_items_sort_return">경유지는 도착지까지 가는 길에 경유지의 순서를 최적화하기 위해 재 정렬.</string>
     <string name="intermediate_items_sort_by_distance">정렬 (도어 투 도어)</string>
     <string name="local_osm_changes_backup_successful">OSM 변경 파일이 성공적으로 생성되었습니다 %1$s</string>
     <string name="local_osm_changes_backup_failed">백업 OSM 변경 실패</string>
@@ -1095,7 +1088,7 @@
     <string name="plugin_distance_point">포인트</string>
     <string name="gpx_file_name">GPX 파일 이름</string>
     <string name="gpx_saved_sucessfully">GPX 파일이 성공적으로 {0} 에 저장</string>
-    <string name="osmand_distance_planning_plugin_description">포인트 사이의 거리를 측정하기 위해 경로(또는 기존 GPX 파일을 수정/사용)를 생성합니다. GPX로 저장하여, GPX 경로를 이용할 수 있습니다.</string>
+    <string name="osmand_distance_planning_plugin_description">지점 사이의 거리를 측정하기 위해 경로(또는 기존 GPX 파일을 수정/사용)를 생성합니다. GPX로 저장하여, GPX 경로를 이용할 수 있습니다.</string>
     <string name="osmand_distance_planning_plugin_name">거리 계산 및 플래닝 도구</string>
     <string name="default_buttons_do_not_show_again">다시 표시하지 않음</string>
     <string name="distance_measurement_start_editing">편집 시작</string>
@@ -1107,7 +1100,7 @@
     <string name="wait_current_task_finished">현재 작업이 완료 될 때까지 기다리십시오</string>
     <string name="use_kalman_filter_compass_descr">나침반 흔들림을 방지하기 위해 칼만 필터를 사용</string>
     <string name="use_kalman_filter_compass">칼만 필터 사용</string>
-    <string name="access_mark_final_location_first">접근성 모드 : 먼저 목적지를 선택하세요</string> 
+    <string name="access_mark_final_location_first">접근성 모드 : 먼저 도착지를 선택하세요</string> 
     <string name="use_magnetic_sensor_descr">방위센서(GPS) 대신 나침반 값을 결정하는 지자기센서를 사용</string>
     <string name="use_magnetic_sensor">지자기센서를 사용</string>
     <string name="other_location">기타</string>
@@ -1115,7 +1108,7 @@
     <string name="install_paid">정식 버전</string>
     <string name="cancel_route">경로 해제</string>
     <string name="cancel_navigation">운행 중지</string>
-    <string name="clear_destination">목적지 지우기</string>
+    <string name="clear_destination">도착지 지우기</string>
     <string name="download_using_mobile_internet">현재 와이파이(WiFi)가 연결되어 있지 않습니다. 현재의 인터넷 연결(3G)을 통해서 계속 다운로드 하시겠습니까?</string>
     <string name="street_name">거리</string>
 	<string name="hno">주택 수</string>
@@ -1125,11 +1118,11 @@
          \n\t* 나침반을 안정화하기 위해 추가 설정
          \n\t* 지도 화면에서 좌상단 버튼는  메뉴버튼을 대체
     </string>
-    <string name="monitoring_settings">트랙 레코딩</string>
-    <string name="monitoring_settings_descr">트랙을 기록하는 방법을 구성합니다</string>
+    <string name="monitoring_settings">경로 레코딩</string>
+    <string name="monitoring_settings_descr">경로를 기록하는 방법을 구성합니다</string>
     <string name="osmand_monitoring_plugin_description">절전모드(스크린 끄기)에서 트래킹 및 경로탐색 활성화, 주기적으로 GPS 장치가 작동중일 때 . 표시 설정은 로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 트랙을 기록하는 설비 가능.</string>
     <string name="osmand_monitoring_plugin_name">로깅 서비스</string>
-    <string name="osmand_background_plugin_description">주기적으로 GPS 장치를 On 시켜 절전모드(스크린 끄기)에서 트래킹 및 라우팅을 가능하게 합니다.</string>
+    <string name="osmand_background_plugin_description">주기적으로 GPS 장치를 On 시켜 절전모드(스크린 끄기)에서 트래킹 및 운행을 가능하게 합니다.</string>
     <string name="choose_osmand_theme_descr">앱 테마(색상)를 선택</string>
     <string name="choose_osmand_theme">앱 테마</string>
     <string name="accessibility_options">접근성(내게 필요한) 옵션</string>
@@ -1153,42 +1146,42 @@
     <string name="dist_control_start">시작</string>
     
     <string name="local_indexes_cat_srtm">등고선 데이터</string>
-    <string name="local_indexes_cat_av">오디오/비디오 데이터</string>
+    <string name="local_indexes_cat_av">소리/영상 데이터</string>
     <string name="stop_routing_confirm">운행을 중지하시겠습니까 ?</string>
-    <string name="clear_dest_confirm">목적지( 및 경유지)를지우겠습니까?</string>
-    <string name="precise_routing_mode_descr">고장없이 정확한 경로를 계산(라우팅) 할 수 있습니다. 현 단계에서는 거리가 한정되어있어 게다가 느립니다.</string>
+    <string name="clear_dest_confirm">도착지 (및 경유지) 를지우겠습니까?</string>
+    <string name="precise_routing_mode_descr">고장없이 정확한 경로를 계산(라우팅) 할 수 있습니다. 현 단계에서는 거리가 한정되어있고 게다가 느립니다.</string>
     <string name="precise_routing_mode">정확한 라우팅 모드</string>
     <string name="recording_context_menu_show">표시</string>
     <string name="recording_photo_description">사진 %1$s of %2$s</string>
     <string name="av_def_action_picture">사진 찍기</string>
     <string name="recording_context_menu_precord">사진 찍기</string>
-    <string name="dropbox_plugin_description">Dropbox 플러그인은 Dropbox 계정으로 GPX경로와 오디오/비디오 노트를 동기화 할 수 있습니다 .</string>
+    <string name="dropbox_plugin_description">Dropbox 플러그인은 Dropbox 계정으로 GPX경로와 소리/영상 노트를 동기화 할 수 있습니다 .</string>
     <string name="dropbox_plugin_name">드롭박스 플러그인</string>
     <string name="intermediate_points_change_order">순서 변경</string>
     <string name="srtm_paid_version_msg">등고선 추가 개발을 지원하기 위해 구글플레이에서 플러그인을 구입하시기 바랍니다 .</string>
     <string name="srtm_paid_version_title">등고선 플러그인</string>
     <string name="av_def_action_choose">요청에 대한 선택</string>
-    <string name="av_def_action_video">비디오 녹화</string>
-    <string name="av_def_action_audio">오디오 녹음</string>
+    <string name="av_def_action_video">영상 녹화</string>
+    <string name="av_def_action_audio">소리 녹음</string>
     <string name="av_widget_action_descr">기본 위젯의 동작을 선택합니다</string>
     <string name="av_widget_action">기본 위젯 작업</string>
-    <string name="av_video_format_descr">비디오 출력 형식 선택</string>
-    <string name="av_video_format">비디오 출력 형식</string>
-    <string name="av_use_external_recorder_descr">비디오에 시스템 레코더를 사용</string>
+    <string name="av_video_format_descr">영상 출력 형식 선택</string>
+    <string name="av_video_format">영상 출력 형식</string>
+    <string name="av_use_external_recorder_descr">영상 촬영시 시스템 레코더를 사용</string>
     <string name="av_use_external_recorder">시스템 레코더 사용</string>
     <string name="av_use_external_camera_descr">사진에 대한 시스템 앱을 사용</string>
     <string name="av_use_external_camera">카메라 앱을 사용</string>
-    <string name="av_settings_descr">오디오 및 비디오 설정을 구성합니다</string>
-    <string name="av_settings">오디오/비디오 설정 </string>
+    <string name="av_settings_descr">소리 및 영상 설정을 구성합니다</string>
+    <string name="av_settings">"소리/영상 설정 "</string>
     <string name="recording_error">"기록하는 동안 오류가 발생했습니다 "</string>
     <string name="recording_camera_not_available">카메라는 사용할 수 없습니다</string>
-    <string name="recording_is_recorded">오디오/비디오는 기록되고 있습니다. 정지하려면 AV 위젯을 누르면 됩니다.</string>
-    <string name="recording_playing">지정된 녹음기에서 오디오가 재생되고 있습니다.\n%1$s</string>
+    <string name="recording_is_recorded">소리/영상은 기록되고 있습니다. 정지하려면 AV 위젯을 누르면 됩니다.</string>
+    <string name="recording_playing">지정된 녹음기에서 소리가 재생되고 있습니다.\n%1$s</string>
     <string name="recording_open_external_player">외부 플레이어 열기</string>
     <string name="recording_delete_confirm">이 기록을 삭제하시겠습니까 ?</string>
     <string name="recording_unavailable">사용 불가능</string>
-    <string name="recording_context_menu_arecord">오디오 노트 기록하기</string>
-    <string name="recording_context_menu_vrecord">비디오 노트 기록하기</string>
+    <string name="recording_context_menu_arecord">소리 녹음</string>
+    <string name="recording_context_menu_vrecord">영상 녹화</string>
     <string name="layer_recordings">레코딩 레이어</string>
     <string name="recording_can_not_be_played">레코딩을 재생할 수 없습니다</string>
     <string name="recording_context_menu_delete">레코딩 삭제</string>
@@ -1197,13 +1190,13 @@
     <string name="recording_default_name">레코딩</string>
     <string name="av_control_stop">정지</string>
     <string name="av_control_start">A/V 찍기</string>
-    <string name="map_widget_av_notes">오디오/비디오 노트</string>
+    <string name="map_widget_av_notes">소리/영상 노트</string>
     <string name="osmand_srtm_short_description_80_chars">오프라인 등고선에 대한 OsmAnd 플러그인</string>
     <string name="map_widget_distancemeasurement">거리 측정</string>
     <string name="monitoring_control_stop">정지</string>
-    <string name="map_widget_audionotes">오디오 노트</string>
-    <string name="audionotes_plugin_description">여행하는 동안 오디오/비디오 노트 기록하기</string>
-    <string name="audionotes_plugin_name">오디오/비디오 노트</string>
+    <string name="map_widget_audionotes">소리 노트</string>
+    <string name="audionotes_plugin_description">여행하는 동안 소리/영상 노트 기록하기</string>
+    <string name="audionotes_plugin_name">소리/영상 노트</string>
     <string name="index_srtm_parts">부분</string>
     <string name="index_srtm_ele">등고선</string>
     <string name="srtm_plugin_description">오프라인 등고선 과 음영은 다운로드를 용이하게 한다. (설정→지도 관리→다운로드→ 원하는 지도 유형 선택)</string>
@@ -1234,13 +1227,13 @@
 \n\t* 향상된 라우팅(길찾기) : 더 빨리, 더 정확히, 최대 거리 250km
 \n\t* 도로 전용 지도 소개
 \n\t* 지도는 중단 후 위치 잠금을 잃지 않는다
-\n\t* 길안내하는 동안 절전 모드 서비스를 활성화 "</string>
-    <string name="tip_recent_changes_0_8_4_t">"버전 0.8.4 의 변경 사항 : →\n\t* 일부 버그 수정 →\n\t* 지도는 중단 후 위치 잠금을 잃지 않는다 →\n\t* 길안내하는 동안 절전 모드 서비스를 활성화 "</string>
+\n\t* 운행하는 동안 절전 모드 서비스를 활성화 "</string>
+    <string name="tip_recent_changes_0_8_4_t">"버전 0.8.4 의 변경 사항 : →\n\t* 일부 버그 수정 →\n\t* 지도는 중단 후 위치 잠금을 잃지 않는다 →\n\t* 운행하는 동안 절전 모드 서비스를 활성화 "</string>
     <string name="close_changeset">변경세트 닫기</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing 바코드 스캐너 앱이 설치되어 있지 않습니다 .  구글시장에서 검색할까요 ?</string>
 	<string name="rendering_attr_roadColors_description">도로 색상을 선택합니다:</string>
 	<string name="rendering_attr_roadColors_name">도로 색상</string>
-    <string name="map_widget_show_destination_arrow">목적지 길안내 표시</string>
+    <string name="map_widget_show_destination_arrow">도착지 방향 표시</string>
     <string name="enable_plugin_monitoring_services">트랙로깅 서비스(GPX 기록, 온라인 트래킹)를 사용하여 트래킹 플러그인을 활성화</string>
     <string name="non_optimal_route_calculation">장거리를 가능하게 하는 비-최적 경로 계산</string>
 	<string name="gps_not_available">설정에서 GPS를 활성화하십시오</string>
@@ -1254,10 +1247,10 @@
     <string name="add_as_last_destination_point">마지막 경유지로 추가</string>
     <string name="add_as_first_destination_point">첫번째 경유지로 추가</string>
 
-    <string name="replace_destination_point">목적지 대체</string>
-    <string name="new_destination_point_dialog">이미 목적지가 설정되었습니다.</string>
+    <string name="replace_destination_point">도착지로 대체</string>
+    <string name="new_destination_point_dialog">이미 도착지가 설정되었습니다.</string>
     <string name="target_points">경유지</string>
-    <string name="intermediate_point_too_far">도로에서 너무 멀리 떨어진 포인트 %1$s .</string>
+    <string name="intermediate_point_too_far">도로에서 너무 멀리 떨어진 경유지 %1$s .</string>
     <string name="arrived_at_intermediate_point">경유지에 도착했습니다</string>
     <string name="context_menu_item_intermediate_point">경유지로 추가</string>
     <string name="map_widget_intermediate_distance">경유지</string>
@@ -1271,15 +1264,15 @@
     <string name="poi_filter_accomodation">숙소</string>
     <string name="poi_filter_restaurants">레스토랑</string>
     <string name="poi_filter_sightseeing">관광</string>
-    <string name="show_warnings_title">알람 보기…</string>
+    <string name="show_warnings_title">알람 표시…</string>
 	<string name="show_warnings_descr">트래픽 경고(속도 제한, 강제 정지, 속도 범프), 속도 카메라 경고 및 차선 정보를 구성합니다</string>
 	<string name="use_compass_navigation_descr">GPS로 진행방향이 탐지되지 않을 때 나침반을 사용</string>
 	<string name="use_compass_navigation">나침반 사용</string>
 	<string name="avoid_motorway">전용도로 회피</string>
-	<string name="snap_to_road_descr">길안내할 동안 차량을 도로에 밀착시킴</string>
+	<string name="snap_to_road_descr">운행하는 동안 차량을 도로에 밀착시킴</string>
 	<string name="snap_to_road">도로에 밀착</string>
-	<string name="osmand_play_title_30_chars">OsmAnd 지도 및 네비게이션</string>
-	<string name="osmand_short_description_80_chars">글로벌 모바일 맵 뷰어 및 오프라인 및 온라인 OSM 지도를 위한 라우팅</string>
+	<string name="osmand_play_title_30_chars">OsmAnd 지도 및 내비게이션</string>
+	<string name="osmand_short_description_80_chars">글로벌 모바일 맵 뷰어 및 오프라인 및 온라인 OSM 지도를 위한 운행</string>
 	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM 자동 라우팅 및 길안내 시스템) OsmAnd 글로벌 OpenStreetMap의 다양한 데이터에 접근할 수 있는 오픈 소스 라우팅 응용 프로그램입니다.
 \n모든 지도 데이터(벡터 맵 또는 타일 맵 ) 는 오프라인 사용을 위하여 휴대 전화 메모리 카드에 저장할 수 있습니다.
 \nOsmAnd는 또한 턴-바이-턴 음성 안내 등의 오프라인 및 온라인 라우팅(길찾기) 기능을 제공합니다.
@@ -1301,8 +1294,8 @@
 \n- 위키 백과 또는 오프라인 관심 장소에 액세스할 수 없음.
 \n\nOsmAnd 는 적극적으로 개발하고 우리의 프로젝트와 프로젝트의 추가 진행은 개발 자금을 재정 지원에 의존하고 새로운 기능을 testdriving 하고있다.
 \nOsmAnd+ 를 구입, 또는 특정 새로운 기능에 자금을 지원하거나 osmand.net 에 일반 후원을 부탁드립니다. "</string>
-	<string name="osmand_plus_play_title_30_chars">OsmAnd+ 지도 및 네비게이션</string>
-	<string name="osmand_plus_short_description_80_chars">글로벌 모바일 지도보기 및 오프라인 및 온라인 OSM 지도를 위한 라우팅</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ 지도 및 내비게이션</string>
+	<string name="osmand_plus_short_description_80_chars">글로벌 모바일 지도보기 및 오프라인 및 온라인 OSM 지도를 위한 운행</string>
 	<string name="osmand_plus_long_description_1000_chars">" OsmAnd + (OSM 자동 안내 및 안내 ) OsmAnd + 글로벌 OpenStreetMap의 다양한 (OSM) 데이터에 접근할 수 있는 오픈 소스 운행 응용 프로그램입니다. 모든 지도 데이터 (벡터 또는 타일 맵 ) 오프라인 사용에 대한 휴대 전화 메모리 카드에 저장할 수 있습니다. OsmAnd 또한 턴-바이-턴 안내 등의 오프라인 및 온라인 라우팅 기능을 제공합니다. OsmAnd+는 프로젝트를 지원하는 새로운 기능의 개발을 투자하고, 최신 업데이트를 받을 수 있도록 구입하여 사용할 수 있는 유료 응용 프로그램 버전입니다.
 \n\n핵심 기능 중 일부 :
 \n- 전체 오프라인 기능 (선택 폴더 에 저장 다운로드 벡터 또는 타일 지도 )
@@ -1393,12 +1386,12 @@
 	
 	
 	<string name="layer_map_appearance">맵 뷰어</string>
-	<string name="show_lanes">레인 표시</string>
+	<string name="show_lanes">차선 표시</string>
 	<string name="avoid_unpaved">비포장 도로 회피</string>
 	<string name="avoid_ferries">뱃길 회피</string>
 	<string name="avoid_in_routing_title">회피하기…</string>
 	<string name="avoid_in_routing_descr">유료도로, 비포장, 뱃길 회피하기</string>
-	<string name="map_widget_fluorescent">형광색상 노선</string>
+	<string name="map_widget_fluorescent">깜박이는 경로</string>
 	<string name="map_widget_show_ruler">축척(Ruler)</string>
 	<string name="map_widget_view_direction">방향 보기</string>
 	<string name="map_widget_transparent">투명 스킨</string>
@@ -1421,7 +1414,7 @@
 	<string name="map_widget_parking">주차</string>
 	<string name="map_widget_monitoring">GPX 레코딩</string>
 	<string name="map_widget_speed">속도</string>
-	<string name="map_widget_distance">목적지</string>
+	<string name="map_widget_distance">도착지</string>
 	<string name="map_widget_altitude">고도</string>
 	<string name="map_widget_time">가야할 시간</string>
 	<string name="map_widget_next_turn">다음 턴</string>
@@ -1433,10 +1426,10 @@
 	<string name="bg_service_screen_lock_toast">화면이 잠김</string>
 	<string name="bg_service_interval">알람(wake-up) 간격을 설정 :</string>
 	<string name="show_cameras">속도 카메라 표시</string>
-	<string name="show_traffic_warnings">트래픽 경고 표시</string>
+	<string name="show_traffic_warnings">교통 경고 표시</string>
 	<string name="avoid_toll_roads">유료 도로 회피</string>
-	<string name="continue_follow_previous_route_auto">이전 길안내는 아직 끝나지 안났습니다. 계속 길안내를 받으시겠습니까? (%1$s 초)</string>
-	<string name="route_updated_loc_found">위치가 확정되면 경로를 찾을 것입니다</string>
+	<string name="continue_follow_previous_route_auto">이전 운행은 아직 끝나지 안났습니다. 계속 운행을 하시겠습니까? (%1$s 초)</string>
+	<string name="route_updated_loc_found">위치가 확정되면 경로를 탐색합니다</string>
 	<string name="osmand_parking_hours">시간</string>
 	<string name="osmand_parking_minutes">분</string>
 	<string name="osmand_parking_position_description_add_time">자동차를 ~에 주차했습니다 :</string>
@@ -1491,18 +1484,18 @@
 	<string name="rendering_attr_appMode_name">렌더링 모드</string>
 	<string name="rendering_attr_appMode_description">~에 대한 지도를 최적화</string>
 	<string name="rendering_attr_contourLines_description">줌 레벨에서 보여주기(등고선 데이터가 필요합니다):</string>
-	<string name="rendering_attr_contourLines_name">등고선 보이기</string>
-	<string name="rendering_attr_hmRendered_description">지도 세부사항 보이기 증가</string>
-	<string name="rendering_attr_hmRendered_name">지도 세부사항 보기</string>
+	<string name="rendering_attr_contourLines_name">등고선 표시</string>
+	<string name="rendering_attr_hmRendered_description">지도 세부사항 표시 증가</string>
+	<string name="rendering_attr_hmRendered_name">지도 세부사항 표시</string>
 	<string name="local_index_routing_data">데이터로 길찾기</string>
 	<string name="navigate_point_format">형식 :</string>
 	<string name="poi_search_desc">POI(관심지점) 검색</string>
 	<string name="address_search_desc">주소 검색</string>
 	<string name="navpoint_search_desc">좌표</string>
-	<string name="transport_search_desc">교통 검색</string>
+	<string name="transport_search_desc">대중 교통 검색</string>
 	<string name="favourites_search_desc">즐겨 찾기 검색</string>
 	<string name="history_search_desc">검색한 기록</string>
-	<string name="offline_navigation_not_available">OsmAnd 오프라인 라우팅은 일시적으로 사용할 수 없습니다.</string>
+	<string name="offline_navigation_not_available">OsmAnd 오프라인 라우팅을 일시적으로 사용할 수 없습니다.</string>
 	<string name="left_side_navigation">왼쪽좌석 운전</string>
 	<string name="left_side_navigation_descr">왼쪽좌석 운전 국가를 선택합니다</string>
 	<string name="download_link_and_local_description">오프라인 데이터를 다운로드 하거나 업데이트 하려면 여기를 클릭하십시오. 세부정보를 보려면 기존 아이템을 클릭하세요, 비활성화 하거나 삭제하려면 길게 누르세요. 기기에 남아있는 현재 데이터는 (%1$s free):</string>
@@ -1518,9 +1511,9 @@
 	<string name="map_settings_descr">지도 표시를 구성합니다</string>
 	<string name="osmand_accessibility_description">접근성(내게 필요한) 기능에 대한 설정을 표시하기.</string>
 	<string name="extra_settings">고급 설정</string>
-	<string name="osmand_monitoring_description">로컬 GPX 파일이나 온라인 웹 서비스를 사용하는 온라인을 기록하기 위해 설정기능을 표시합니다.</string>
+	<string name="osmand_monitoring_description">로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 경로를 기록하기 위한 설정 기능을 표시합니다.</string>
 	<string name="osmand_extra_settings_description">고급 지도 구성(지도 상세보기) 및 일부 장치 특성에 대한 설정을 표시합니다.</string>
-	<string name="osmand_development_plugin_description">경로 시뮬레이션 이나 렌더링 성능 표시와 같은 개발 및 디버깅 기능에 대한 설정을 표시합니다.</string>
+	<string name="osmand_development_plugin_description">모의 주행이나 렌더링 성능 표시와 같은 개발 및 디버깅 기능에 대한 설정을 표시합니다.</string>
 	<string name="plugins_screen">플러그인</string>
 	<string name="select_plugin_to_activate">활성화 또는 비활성화 하기위해 플러그인을 터치합니다.(OsmAnd는 재시작해야 합니다)</string>
 	<string name="prefs_plugins_descr">플러그인은 고급설정 및 추가기능을 활성화합니다</string>
@@ -1613,8 +1606,8 @@
 \n→ * 다른 사소한 수정 ↵
 \n↵
 \n* 1.2의 변경 사항 : ↵
-\n→ * 버그 수정 (라우팅 조정, 검색, AV 레코딩, 음성 지시, 일부 디스플레이 개선) ↵
-\n→ * 좀 더 쉽게 음영 기복도 오버레이 구성 (등고선 플러그인 필요) ↵
+\n→ * 버그 수정 (라우팅 조정, 검색, AV 레코딩, 음성 안내, 일부 디스플레이 개선) ↵
+\n→ * 좀 더 쉽게 음영 오버레이 구성 (등고선 플러그인 필요) ↵
 \n→ * maps.google.com의 위치 링크 허용 ↵
 \n→ * 새로운 위젯 (GPS 정보) ↵
 \n→ * 최근 삼성 장치 등의 멀티 윈도우를 지원 ↵
@@ -1624,20 +1617,20 @@
 \n\t* UI 재디자인
 \n\t* 버그 수정 "</string>
     <string name="tip_recent_changes_1_1_2_t">"Changes in 1.1.2:
-\n\t* 오디오/비디오 플러그인 개선사항
+\n\t* 소리/영상 플러그인 개선사항
 \n\t* 사용성 고정 및 등고선 플러그인 재 구성
 \n\t* 등고선 플러그인을 위한 음영 팩키지
 \n\t* 버그 수정 "</string>
     <string name="tip_recent_changes_1_1_0_t">"Changes in 1.1.0:
 \n\t* 거리 계산 플러그인
-\n\t* 오디오/비디오 메모 플러그인
+\n\t* 소리/영상 노트 플러그인
 \n\t* 등고선 플러그인
 \n\t* 버그 수정
 \n\t* 지도 세부정보아 함께 지도 스타일 옵션, 새 도로 스타일,
 \n\t* EGM96 geoid 오프셋 보정, GPS 고도 읽기 "</string>
     <string name="audionotes_location_not_defined">노트와 연결할 위치는 아직 정의되지 않았습니다. 지정된 위치에 노트를 할당하려면 \"위치 사용…\"</string>
     <string name="tip_recent_changes_0_8_3_t">"Changes in 0.8.3:
-\n\t* 포인트
+\n\t* 경유지
 \n\t* 향상된 경로 안내
 \n\t* 경로를 생성하는 동안 전용도로를 회피하는 것을 허락하는 설정을 추가
 \n\t* 지도에 자전거 도로의 유형을 추가
@@ -1713,18 +1706,11 @@
 	<string name="osmand_rastermaps_plugin_description">기본 맵으로 또는 오버레이/언더레이 지도로 온라인 또는 캐시 타일맵의 다양한 구성을 위한 설정을 표시합니다. 이 지도는 오프라인으로 준비하거나 OsmAnd 데이터 폴더에 복사 할 수 있습니다.</string>
 	
 	<string name="towards">쪽으로</string>
-	<string name="tip_rotation_switching_t_v2">You can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
-지도 표시는 반복적으로 지도 화면의 나침반 아이콘을 클릭하여 회전 여부 및 방법을 전환 할 수 있습니다.
-
-		\n\nThe choices are:
-		선택은 :
-		\n\t* \'Don\'t rotate (north is up)\': Map will not be rotated. North will be always up
-		지도고정(북쪽방향) : 지도는 회전하지 않고 북쪽은 항상 위를 가르킨다,
-		\n\t* \'To direction of movement\': Map will continuously be aligned with your heading
-		이동방향(GPS) : 지도는 계속 GPS의 진행방향을 가르킨다,
-		\n\t* \'To compass\': Map will continuously be aligned with the device\'s compass reading
-		이동방향(나침반) : 지도는 계속 나침반의 진행방향을 가르킨다
-	</string>
+	<string name="tip_rotation_switching_t_v2">"지도 표시는 반복적으로 지도 화면의 나침반 아이콘을 클릭하여 회전 여부 및 방법을 전환 할 수 있습니다.
+\n\n선택은 :
+\n\t* 지도고정(북쪽방향) : 지도는 회전하지 않고 북쪽은 항상 위를 가르킨다,
+\n\t* 이동방향(GPS) : 지도는 계속 GPS의 진행방향을 가르킨다,
+\n\t* 이동방향(나침반) : 지도는 계속 나침반의 진행방향을 가르킨다 "</string>
 	<string name="mile_per_hour">mph</string>
 	<string name="tip_recent_changes_1_6_t">Changes in 1.6:
 	\n\t* 풀 HD 기기 지원. 
@@ -1769,15 +1755,14 @@
 \n\t* \'Light sensor\': map appearance is controlled by the device\'s light sensor (only if equipped) "</string>	
 	<string name="tip_map_switch_t_v2">"표시된 맵 소스와 계층 지도는 [메뉴]-&gt;[계층 지도]에서 변경할 수 있다.\n[맵 소스] 아래에.. 미리 로드된 오프라인 벡터 지도를 사용하여 선택할 수 있다. OsmAnd 는 또한 사용자 지도를 지원합니다. "</string>
 	<string name="tip_app_mode_t_v2">"OsmAnd 는 다른 사용 사례에 대해 서로 다른 (사용자 정의) 앱 프로필을 지원합니다. 지도 화면 (아이콘 자동차, 자전거 또는 보행자 )의 왼쪽 하단 모서리에 있는 프로필 버튼을 통해 프로필을 변경하거나 경로(\'전송 모드\')을 만들 때 할 수 있습니다. "</string>
-	<string name="tip_search_t">[위치사용-&gt;가까운 장소 검색] 메뉴를 통해서 지도에서 장소를 직접 검색할 수 있습니다. 또는 [메뉴-&gt;검색]을 통해서 화면에서 검색할 수 도 있습니다.
-		\n\n검색화면은 검색을 위한 템플릿을 제공합니다
-		\n\t* 주소로
-		\n\t* 좌표로
-		\n\t* POI로 (by type or by name)
-		\n\t* 기록된 검색으로
-		\n\t* 즐겨찾기로 검색할 수 있습니다.
-		\n\n컨텍스트 메뉴를 이용하거나 또는 액션 바는 [길안내 또는 지도에서 보기] 등을 제공합니다.
-	</string>
+	<string name="tip_search_t">"[위치사용-&gt;주변 장소 검색] 메뉴를 통해서 지도에서 장소를 직접 검색할 수 있습니다. 또는 [메뉴-&gt;검색]을 통해서 화면에서 검색할 수 도 있습니다.
+\n\n검색화면은 검색을 위한 템플릿을 제공합니다
+\n\t* 주소로
+\n\t* 좌표로
+\n\t* POI로 (by type or by name)
+\n\t* 기록된 검색으로
+\n\t* 즐겨찾기로 검색할 수 있습니다.
+\n\n컨텍스트 메뉴를 이용하거나 또는 액션 바는 [길안내 또는 지도에서 보기] 등을 제공합니다. "</string>
 	<string name="osmo_settings_uuid">고유 장치 id</string>
     <string name="osmo_settings_descr">모니터링 설정을 구성하고 개인 모니터링 채널을 설정</string>
     <string name="osmo_plugin_description">"OpenStreetMap 고급 실시간 모니터링. 이에 대해서는 http://osmo.mobi를 참조 하십시오. 다른 장치를 추적하고 추적받는 가능성을 제공 합니다. 익명 그룹을 만들고, 서로의 위치를 공유하고 소통한다. 세션 트래킹 또는 영구 트래킹에 대한 다양한 설정을 합니다. 익명그룹는 수많은 날에 제한되며  일부 기능 즉, 원격 제어 및 그룹 관리자는 제한된다. 완벽하게 기능적인 그룹은 웹사이트에 생성하고 그들에게 등록된 사용자만 액세스할 수 있습니다. "</string>
@@ -1788,8 +1773,8 @@
 	<string name="arrival_distance">도착 알림</string>
     <string name="arrival_distance_descr">도착 알림을 원하세요 ?</string>
     <string name="keep_informing_never">결코</string>
-    <string name="keep_informing_descr">정기적인 간격으로 라우팅 명령을 재실행</string>
-    <string name="keep_informing">라우팅 명령을 반복</string>
+    <string name="keep_informing_descr">정기적인 간격으로 운행 명령을 다시 알리기</string>
+    <string name="keep_informing">운행 명령을 반복</string>
 	<string name="navigation_intent_invalid">잘못된 포맷 : %s</string>
 
     <string name="osmo_io_error">"OsMo 연결 문제 : "</string>
@@ -1812,16 +1797,16 @@
     <string name="osmo_tracker_id">개인 트래커 ID</string>
     <string name="osmo_tracker_id_descr">트래커 ID를 보거나 공유하려면 클릭하십시오. 트래커 ID 연결된 장치를 사용하면 이 장치의 모든 움직임을 모니터 할 수 있습니다! 선택 재생성 옵션을 분리합니다.</string>
     <string name="osmo_session_token">세션 토큰 : %1$s</string>
-    <string name="osmo_auth_pending">허가를 기다리는 중...</string>
+    <string name="osmo_auth_pending">허가를 기다리는 중…</string>
     <string name="osmo_locations_sent">위치 전송 %1$d (in buffer %2$d) </string>
     <string name="osmo_conn_successfull">설정된 연결 : %1$s </string>
     <string name="tip_recent_changes_1_8_alpha">"1.8의 변경 사항 :
-\n\n* GPX 트랙의 루트 지점 간의 경로를 계산
+\n\n* GPX 트랙의 지점 간 경로를 계산
 \n* 국가 별 다운로드 레이아웃 변경 (로컬 이름 검색을 지원)
 \n* GPX / KML 가져 오기를 지원 (KML에서 GPX로 변환)
 \n* GPX 트랙 \"내 데이터\"로 이동
 \n* GPX 트랙을 분할하고 고도차 / 속도를 확인 할 수 있습니다
-\n* 지연이후  자동으로 운행 시작 "</string>
+\n* 일정시간 지연이후  자동으로 운행 시작 "</string>
     <string name="use_points_as_intermediates">포인트 사이의 경로를 계산</string>
     <string name="osmo_mode_restart">OsMo 세션 재시작</string>
     <string name="osmo_settings_debug">디버그 정보</string>
@@ -1833,7 +1818,7 @@
     <string name="osmo_session_not_available">세션을 사용할 수 없습니다 , \'위치 전송하기\' 가 켜져 있는지 확인하시기 바랍니다</string>
     <string name="osmo_share_session">세션 공유</string>
     <string name="osmo_session_id_share">장치를 추적하기 위한 세션 URL(%1$s)</string>
-    <string name="osmo_tracker_id_share">%2$s 목적지 장치를 연결하려면, %3$s 링크를 클릭하거나 tracker id(%1$s)를 지정하세요</string>
+    <string name="osmo_tracker_id_share">%2$s 대상 장치를 연결하려면, %3$s 링크를 클릭하거나 tracker id(%1$s)를 지정하세요</string>
     <string name="osmo_track_interval">로깅 간격</string>
 	<string name="osmo_track_interval_descr">위치를 전송하도록 시간 간격을 선택</string>
     <string name="int_days">하루</string>
@@ -1880,14 +1865,14 @@
 	
     <string name="osmo_user_joined">사용자 %1$s이(가) 그룹 %2$s에 합류합니다</string>
     <string name="osmo_user_left">"사용자 %1$s가  그룹 %2$s에 남습니다"</string>
-    <string name="osmo_show_group_notifications">그룹 알림 보기</string>
+    <string name="osmo_show_group_notifications">그룹 알림 표시</string>
     <string name="osmo_show_group_notifications_descr">사용자가 그룹에 참여 또는 해체 할때 토스트 메시지를 표시</string>
     <string name="gpx_file_is_empty">GPX 경로가 비어있습니다</string>
     <string name="selected_track">선택된 경로</string>
-    <string name="my_tracks">내 GPX경로</string>
-    <string name="my_favorites">내 즐겨찾기</string>
-    <string name="my_data_Button">장소</string>
-    <string name="my_data_activity">장소</string>
+    <string name="my_tracks">모든 경로</string>
+    <string name="my_favorites">모든 즐겨찾기</string>
+    <string name="my_data_Button">저장소</string>
+    <string name="my_data_activity">저장소</string>
     <string name="gpx_info_subtracks">"하위 경로 : %1$s "</string>
 	<string name="gpx_info_distance">거리: %1$s (%2$s points) </string>
 	<string name="gpx_info_start_time">시작 시간: %1$tF,  %1$tR </string>
@@ -1901,9 +1886,9 @@
     <string name="gpx_selection_segment_title">구간</string>
     <string name="gpx_selection_number_of_points"> %1$s 포인트</string>
     <string name="gpx_selection_point">포인트 %1$s</string>
-    <string name="gpx_selection_current_track">트랙 레코딩</string>
+    <string name="gpx_selection_current_track">레코딩</string>
     <string name="gpx_selection_route_points">%1$s
-\n 루트 포인트 %2$s</string>
+\n 경로 포인트 %2$s</string>
     <string name="gpx_selection_points">%1$s\n 포인트</string>
     <string name="gpx_selection_track">%1$s\n GPX경로 %2$s</string>
     <string name="gpx_available_current_track">현재 기록중인 트랙</string>
@@ -1919,15 +1904,15 @@
     <string name="save_as_favorites_points">즐겨찾기 그룹으로 저장</string>
     <string name="select_destination_and_intermediate_points">경유지 선택</string>
     <string name="layer_amenity_label">포인트 이름</string>
-    <string name="show_zoom_buttons_navigation_descr">운행중 줌 버튼 보기</string>
-    <string name="show_zoom_buttons_navigation">줌 버튼 보이기</string>
+    <string name="show_zoom_buttons_navigation_descr">운행하는 동안 줌 버튼 표시</string>
+    <string name="show_zoom_buttons_navigation">줌 버튼 표시</string>
     <string name="none_selected_gpx">선택한 GPX 파일 없음. 이용 가능한 GPX 파일을 선택하려면 누르고 있어요.</string>
     <string name="local_index_unselect_gpx_file">선택을 취소합니다.</string>
-    <string name="local_index_select_gpx_file">보이기위해 선택</string>
+    <string name="local_index_select_gpx_file">선택하여 표시</string>
     <string name="sort_by_distance">거리로 정렬</string>
     <string name="sort_by_name">이름으로 정렬</string>
-    <string name="visible_element">지도에서 보기</string>
-    <string name="route_descr_destination">목적지</string>
+    <string name="visible_element">지도에 표시</string>
+    <string name="route_descr_destination">도착지</string>
     <string name="no_index_file_to_download">다운로드 되지 않았습니다, 인터넷 연결을 체크하세요.</string>
     <string name="osmo_auth_error_short">인증 실패</string>
     <string name="osmo_auth_error">OsMo 인증 오류가 발생 했습니다: %1$s.\n임시로 서비스가 다운되었거나 또는 등록 만료가 되었습니다.\n신규 등록을 진행 하시겠습니까?</string>
@@ -1949,10 +1934,10 @@
     <string name="rendering_attr_moreDetailed_name">상세 접보</string>
     <string name="rendering_attr_lessDetailed_name">덜 상세</string>
     <string name="rendering_attr_hideAccess_name">접근 제한 숨기기</string>
-    <string name="rendering_attr_showAccess_name">접근 제한 보이기</string>
+    <string name="rendering_attr_showAccess_name">접근 제한 표시</string>
     <string name="rendering_attr_showSurfaceGrade_name">도로 등급 표시</string>
     <string name="rendering_attr_showSurfaces_name">도로 표면 표시</string>
-    <string name="rendering_attr_showCycleRoutes_name">자전거 노선 보이기</string>
+    <string name="rendering_attr_showCycleRoutes_name">자전거 경로 표시</string>
     <string name="keep_navigation_service">계속</string>
 	<string name="stop_navigation_service">중지</string>
 	<string name="enable_sleep_mode">GPS 절전 모드 활성화</string>
@@ -1988,7 +1973,7 @@
     <string name="rendering_attr_osmcTraces_description">OSMC 흔적에 따라 경로 렌더링</string>
     
 	<string name="rendering_attr_coloredBuildings_name">유형별 색상 코드 건물</string>
-    <string name="osmo_invite">초대...</string>
+    <string name="osmo_invite">초대…</string>
     <string name="osmo_leave_confirmation_msg">그룹 %1$s를 떠나시겠습니까?</string>
     <string name="osmo_specify_tracker_id">Id를 지정 하십시오</string>
     <string name="arrival_distance_factor_early">일찍</string>
@@ -1999,24 +1984,24 @@
 <string name="av_camera_pic_size">카메라 사진 크기</string>
 	<string name="av_camera_pic_size_descr">내부 카메라 사진 크기 선택</string>
     <string name="announce_nearby_favorites">가까운 즐겨찾기 알리기</string>
-<string name="rendering_value_browse_map_name">지도 보기</string>  
+<string name="rendering_value_browse_map_name">지도 찾아보기</string>  
     <string name="rendering_value_car_name">자동차</string>
     <string name="rendering_value_bicycle_name">자전거</string>
     <string name="rendering_value_pedestrian_name">보행자</string>
-    <string name="more">기타...</string>
+    <string name="more">더 보기…</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
-    <string name="record_plugin_description">지도 화면에 하나의 버튼 터치로 경로를 저장 합니다. 로컬 GPX 파일 또는 웹 서비스를 사용하여 온라인에 여행을 기록하기 위해 설정을 보여줍니다.</string>
-    <string name="record_plugin_name">여행 기록</string>
+    <string name="record_plugin_description">지도 화면에 하나의 버튼 터치로 경로를 저장 합니다. 로컬 GPX 파일 또는 웹 서비스를 사용하여 온라인에 경로를 기록하기 위해 설정을 보여줍니다.</string>
+    <string name="record_plugin_name">경로 기록</string>
     <string name="int_hour">h</string>
     <string name="duration">경과시간</string>
     <string name="distance">거리</string>
     <string name="index_tours">여행</string>
     <string name="flat_list_waypoints">모두</string>
     <string name="waypoints">경유지</string>
-    <string name="targets">목적지</string>
+    <string name="targets">도착지</string>
     <string name="way_alarms">교통 경고</string>
-    <string name="speak_favorites">가까운 즐겨찾기 알리기</string>
-    <string name="speak_poi">가까운 POI 알리기</string>
+    <string name="speak_favorites">주변의 즐겨찾기 알리기</string>
+    <string name="speak_poi">주변의 POI 알리기</string>
     <string name="rendering_attr_publicTransportMode_name">버스, 무궤도전차, 셔틀 노선</string>
 	<string name="save_track_to_gpx_globally">트랙을 GPX파일로 저장</string>
 	<string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 기록 위젯을 사용하여 켜거나 끌 수 있습니다</string>
@@ -2067,15 +2052,15 @@
 \n* 지도에 텍스트 크기에 대한 별도의 줌 지원\n* 경로 이탈한 경우에 특별한 오디오 알림 지원
 \n* OsMo 로그인 기능
 \n* OsMo 버전 비 호환성 수정 "</string>
-    <string name="rendering_category_routes">노선 (Routes)</string>
+    <string name="rendering_category_routes">경로 (Routes)</string>
     <string name="rendering_attr_trainLightrailRoutes_name">기차 노선</string>
-    <string name="rendering_attr_tramRoutes_name">트램 노선</string>
+    <string name="rendering_attr_tramRoutes_name">전차 노선</string>
     <string name="rendering_attr_shareTaxiRoutes_name">택시 노선 공유</string>
     <string name="rendering_attr_trolleybusRoutes_name">무궤도 전차 노선</string>
     <string name="rendering_attr_busRoutes_name">버스 노선</string>
     <string name="select_impassable_road">지도에서 선택</string>
     <string name="impassable_road">도로 회피…</string>
-    <string name="rendering_attr_tramTrainRoutes_name">트램과 기차 노선</string>
+    <string name="rendering_attr_tramTrainRoutes_name">전차 및 기차 노선</string>
     <string name="rendering_category_hide">숨기기</string>
     <string name="wake_on_voice">화면 켜기</string>
     <string name="wake_on_voice_descr">교차로에 접근할 때 전화 화면 켜기</string>
@@ -2116,8 +2101,9 @@
     <string name="rendering_value_americanRoadAtlas_name">미국 도로 지도</string>
     <string name="routing_attr_no_new_routing_name">No v1.9 라우팅 룰</string>
     <string name="routing_attr_no_new_routing_description">v1.9에서 도입된 라우팅 룰을 사용하지 마십시오</string>
-    <string name="traffic_warning_railways">철도</string>
-	<string name="traffic_warning_pedestrian">보행자</string>
-	<string name="show_railway_warnings">철도 경고 표시</string>
-	<string name="show_pedestrian_warnings">보행자 경고 표시</string>
+    <string name="traffic_warning_railways">철도 교차로</string>
+	<string name="traffic_warning_pedestrian">보행자 횡단보도</string>
+	<string name="show_railway_warnings">철도 교차로 표시</string>
+	<string name="show_pedestrian_warnings">보행자 횡단보도 표시</string>
+    <string name="speak_pedestrian">보행자 횡단보도 알리기</string>
     </resources>

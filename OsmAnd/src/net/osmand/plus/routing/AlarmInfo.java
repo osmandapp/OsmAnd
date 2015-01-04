@@ -38,15 +38,15 @@ public class AlarmInfo implements LocationPoint {
 				case 3:
 					return ctx.getString(R.string.traffic_warning_border_control);
 				case 4:
-					return ctx.getString(R.string.traffic_warning_calming);
+					return ctx.getString(R.string.traffic_warning_railways);
 				case 5:
-					return ctx.getString(R.string.traffic_warning_payment);
+					return ctx.getString(R.string.traffic_warning_calming);
 				case 6:
+					return ctx.getString(R.string.traffic_warning_payment);
+				case 7:
 					return ctx.getString(R.string.traffic_warning_stop);
 				case 8:
 					return ctx.getString(R.string.traffic_warning_pedestrian);
-				case 9:
-					return ctx.getString(R.string.traffic_warning_railways);
 			}
 			return ctx.getString(R.string.traffic_warning);
 		}

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import android.app.FragmentManager;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -90,8 +91,13 @@ public class DownloadActivity extends BaseDownloadActivity {
 			viewPager.setVisibility(View.GONE);
 			Fragment f = currentTab == 0 ? new LocalIndexesFragment() : 
 				(currentTab == 1? new DownloadIndexFragment() : new UpdatesIndexFragment());
+			String tag = currentTab == 0 ? LOCAL_TAB :
+					(currentTab == 1 ? DOWNLOAD_TAB : UPDATES_TAB);
 			findViewById(R.id.layout).setVisibility(View.VISIBLE);
-			getSupportFragmentManager().beginTransaction().add(R.id.layout, f).commit();
+			android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+			if (manager.findFragmentByTag(tag) == null){
+				getSupportFragmentManager().beginTransaction().add(R.id.layout, f, tag).commit();
+			}
 		} else {
 			tabHost = (TabHost) findViewById(android.R.id.tabhost);
 			tabHost.setup();

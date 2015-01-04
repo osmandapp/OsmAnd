@@ -342,6 +342,7 @@ public class FavouritesDbHelper {
 				pt.setColor(p.getColor());
 			}
 			pt.name = p.getName();
+			pt.desc = p.getDescription();
 			if (p.getCategory().length() > 0)
 				pt.category = p.getCategory();
 			gpx.points.add(pt);
@@ -430,6 +431,7 @@ public class FavouritesDbHelper {
 				name = p.name.substring(0, c);
 			}
 			FavouritePoint fp = new FavouritePoint(p.lat, p.lon, name, categoryName);
+			fp.setDescription(p.desc);
 			fp.setColor(p.getColor(0));
 			fp.setVisible(!p.getExtensionsToRead().containsKey(HIDDEN));
 			points.put(getKey(fp), fp);

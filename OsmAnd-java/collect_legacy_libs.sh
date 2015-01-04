@@ -3,7 +3,7 @@
 set -e
 
 SCRIPT_LOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-CORE_LOC="$SCRIPT_LOC/../../core"
+CORE_LOC="$SCRIPT_LOC/../../core-legacy"
 
 if [[ "$(uname -a)" =~ Linux ]]; then
 	if [[ -z "$OSMAND_BUILD_CPU_CORES_NUM" ]]; then

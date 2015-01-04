@@ -112,12 +112,16 @@ public abstract class MapControls {
 
 	protected void removeButton(final FrameLayout layout, final View b) {
 		b.setVisibility(View.GONE);
-		layout.getHandler().post(new Runnable() {
-			@Override
-			public void run() {
-				layout.removeView(b);
-			}
-		});
+
+		if (layout.getHandler() != null){
+			layout.getHandler().post(new Runnable() {
+				@Override
+				public void run() {
+					layout.removeView(b);
+				}
+			});
+		}
+
 		mapActivity.accessibleContent.remove(b);
 	}
 

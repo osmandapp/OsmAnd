@@ -53,7 +53,7 @@
 	<string name="poi_mobile_phone_shop">Botiga de telèfons mòbils</string>
 	<string name="poi_motorcycle_shop">Botiga de motocicletes</string>
 	<string name="poi_musical_instrument_shop">Instruments musicals</string>
-	<string name="poi_newsagent_shop">Quiosc</string>
+	<string name="poi_newsagent_shop">Premsa</string>
 	<string name="poi_second_hand">Botiga de segona mà</string>
 	<string name="poi_electronics_shop">Botiga d\'electrodomèstics</string>
 	<string name="poi_police">Policia</string>
@@ -66,7 +66,7 @@
 	<string name="poi_mountain_pass">Port de muntanya</string>
 	<string name="poi_city_wall">Muralla</string>
 	<string name="poi_vehicle_inspection">Inspecció de vehicles</string>
-	<string name="poi_military_nuclear_explosion_site">Centre d\'explosió nuclear</string>
+	<string name="poi_military_nuclear_explosion_site">Lloc d\'explosió nuclear</string>
 <string name="poi_military_range">Camp d\'instrucció</string>
 	<string name="poi_military_naval_base">Base naval militar</string>
 	<string name="poi_military">Zona militar</string>
@@ -111,4 +111,119 @@
 	<string name="poi_tram_stop">Parada de tramvia (obsolet)</string>
 	<string name="poi_public_transport_station">Estació de transport públic</string>
 	<string name="poi_mine_historic">Mina històrica</string>
+	<string name="poi_gate">Porta</string>
+	<string name="poi_tobacco_shop">Venda de tabac</string>
+	<string name="poi_carpet_shop">Botiga de catifes</string>
+	<string name="poi_clothes_shop">Magatzem de roba</string>
+	<string name="poi_children_clothes_shop">Roba infantil</string>
+	<string name="poi_curtain_shop">Pelleteria</string>
+	<string name="poi_fabric_shop">Botiga de teixits</string>
+	<string name="poi_public_transport_platform">Parada de transport públic</string>
+	<string name="poi_bus_station">Estació d\'autobús (obsolet)</string>
+	<string name="poi_railway_station">Estació de tren (obsolet)</string>
+	<string name="poi_railway_platform">Andana de tren (obsolet)</string>
+	<string name="poi_railway_halt">Parada de tren (obsolet)</string>
+	<string name="poi_subway_entrance">Entrada de metro</string>
+	<string name="poi_subway_station">Estació de metro</string>
+	<string name="poi_taxi">Parada de taxis</string>
+
+	<string name="poi_airport">Aeroport</string>
+	<string name="poi_helipad">Heliport</string>
+	<string name="poi_runway">Pista d\'aterratge</string>
+	<string name="poi_aeroway_terminal">Terminal d\'aeroport</string>
+	<string name="poi_lighthouse">Far</string>
+
+	<string name="poi_bicycle_rental">Lloguer de bicicletes</string>
+	<string name="poi_bicycle_parking">Aparcament per bicicletes</string>
+
+	<string name="poi_houseware_shop">Complements per la llar</string>
+	<string name="poi_stationery_shop">Papereria</string>
+	<string name="poi_tableware_shop">Botiga de vaixelles</string>
+	<string name="poi_toys_shop">Botiga de joguines</string>
+	<string name="poi_trade_shop">Materials de construcció</string>
+	<string name="poi_variety_store">Botiga de descompte</string>
+	<string name="poi_video_shop">Videoclub</string>
+	<string name="poi_window_blind_shop">Botiga de persianes</string>
+	<string name="poi_ferry_terminal">Terminal de ferri</string>
+	<string name="poi_aerialway_cable_car">Telefèric</string>
+	<string name="poi_aerialway_station">Estació de remuntador</string>
+	<string name="poi_aerialway_gondola">Telecabina</string>
+	<string name="poi_aerialway_chair_lift">Telecadira</string>
+	<string name="poi_aerialway_t_bar">Teleesquí</string>
+	<string name="poi_tunnel">Túnel</string>
+	<string name="poi_bridge">Pont</string>
+
+	<string name="poi_vacuum_cleaner_shop">Aspiradores i aparells de neteja</string>
+	<string name="poi_motorway_junction">Sortida d\'autopista</string>
+
+	<string name="poi_water_well">Pou d\'aigua</string>
+	<string name="poi_boatyard">Drassana</string>
+	<string name="poi_wastewater_plant">Planta de tractament d\'aigües residuals</string>
+	<string name="poi_water_tower">Torre d\'aigua</string>
+	<string name="poi_lock_gate">Resclosa</string>
+	<string name="poi_weir">Abocador d\'aigua</string>
+	<string name="poi_dam">Presa d\'aigua</string>
+	<string name="poi_water_mill">Molí hidràulic</string>
+
+	<string name="poi_power_substation">Subestació elèctrica</string>
+	<string name="poi_power_transformer">Transformador elèctric</string>
+	<string name="poi_power_plant">Central energètica</string>
+	<string name="poi_power_generator">Generador d\'energia</string>
+
+	<string name="poi_post_office">Oficina de correus</string>
+	<string name="poi_post_box">Bústia de correus</string>
+	<string name="poi_telephone">Telèfon públic</string>
+	<string name="poi_communication_tower">Torre de comunicacions</string>
+	<string name="poi_telephone_exchange">Central telefònica</string>
+
+	<string name="poi_recycling">Reciclatge</string>
+	<string name="poi_landfill">Abocador d\'escombraries</string>
+	<string name="poi_waste_disposal">Contenidor d\'escombraries</string>
+	<string name="poi_waste_basket">Paperera</string>
+
+	<string name="poi_pier">Moll</string>
+	<string name="poi_surveillance">Equip de vigilància</string>
+	<string name="poi_observatory">Observatori</string>
+	<string name="poi_astronomical_observatory">Observatori astronòmic</string>
+	<string name="poi_tower">Torre</string>
+	<string name="poi_construction">En construcció</string>
+	<string name="poi_works">Fàbrica</string>
+	<string name="poi_quarry">Pedrera</string>
+	<string name="poi_vineyard">Vinya</string>
+	<string name="poi_orchard">Plantació de fruiters</string>
+	<string name="poi_salt_pond">Salina</string>
+	<string name="poi_cricket_nets">Xarxes de criquet</string>
+
+	<string name="poi_driving_school">Autoescola</string>
+	<string name="poi_school">Escola</string>
+	<string name="poi_kindergarten">Llar d\'infants</string>
+	<string name="poi_college">Institut</string>
+	<string name="poi_university">Universitat</string>
+
+	<string name="poi_social_facility">Serveis socials</string>
+	<string name="poi_courthouse">Palau de justícia</string>
+	<string name="poi_prison">Presó</string>
+	<string name="poi_register_office">Oficina de registre civil</string>
+	<string name="poi_embassy">Ambaixada</string>
+	<string name="poi_government">Oficina governamental</string>
+	<string name="poi_prosecutor">Fiscal</string>
+	<string name="poi_bailiff">Batlle</string>
+	<string name="poi_pension_fund">Fons de pensions</string>
+	<string name="poi_migration">Migració</string>
+	<string name="poi_tax_inspection">Recaptació d\'impostos</string>
+	<string name="poi_customs">Duana</string>
+	<string name="poi_city">Ciutat</string>
+	<string name="poi_town">Vila</string>
+	<string name="poi_village">Poble</string>
+	<string name="poi_hamlet">Llogaret</string>
+	<string name="poi_isolated_dwelling">Assentament aïllat</string>
+	<string name="poi_suburb">Barri</string>
+	<string name="poi_place_allotments">Horts familiars</string>
+	<string name="poi_place_farm">Granja</string>
+
+	<string name="poi_pharmacy">Farmàcia</string>
+	<string name="poi_hospital">Hospital</string>
+	<string name="poi_doctors">Centre mèdic</string>
+	<string name="poi_clinic">Clínica</string>
+	<string name="poi_first_aid">Primers auxilis</string>
 	</resources>

@@ -216,6 +216,9 @@
 	<string name="poi_surveillance">Surveillance</string>
 	<string name="poi_observatory">Observatory</string>
 	<string name="poi_astronomical_observatory">Astronomical observatory</string>
+	<string name="poi_tower">Tower</string>
+	<string name="poi_mast">Mast</string>
+	<string name="poi_radar">Radar</string>
 	<string name="poi_construction">Construction</string>
 	<string name="poi_works">Works</string>
 	<string name="poi_mineshaft">Mineshaft</string>
@@ -383,6 +386,7 @@
 	<string name="poi_mine_historic">Historic mine</string>
 	<string name="poi_monument">Monument</string>
 	<string name="poi_zoo">Zoo</string>
+	<string name="poi_aquarium">Aquarium</string>
 	<string name="poi_theme_park">Theme park</string>
 	
 	<string name="poi_attraction">Tourism attraction</string>
@@ -607,7 +611,7 @@
 	<string name="poi_seamark_buoy_installation">Installation buoy</string>
 	<string name="poi_seamark_buoy_isolated_danger">Buoy, isolated danger</string>
 	<string name="poi_seamark_buoy_lateral">Lateral buoy</string>
-	<string name="poi_seamark_buoy_safe_water">Safe water bouy</string>
+	<string name="poi_seamark_buoy_safe_water">Safe water buoy</string>
 	<string name="poi_seamark_buoy_special_purpose">Special purpose buoy</string>
 	<string name="poi_seamark_daymark">Daymark</string>
 	<string name="poi_seamark_distance_mark">Distance mark</string>

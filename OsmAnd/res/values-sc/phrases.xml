@@ -570,4 +570,20 @@
 	<string name="poi_seamark_topmark">Miràgliu</string>
 	<string name="poi_motor_sport">Isport a motore</string>
 	<string name="poi_carpet_layer">Assentadore de moquette</string>
+	<string name="poi_motorway_junction">Illoidura autostradale</string>
+
+	<string name="poi_waterway_turning_point">Furriada de martza pro naviles</string>
+	<string name="poi_customs">Dogana</string>
+	<string name="poi_cannon">Cannone istòricu</string>
+	<string name="poi_ferris_wheel">Roda panoràmica</string>
+	<string name="poi_carousel">Giostra</string>
+	<string name="poi_maze">Labirintu</string>
+	<string name="poi_summer_toboggan">Toboca istivu</string>
+	<string name="poi_attraction_train">Trenu (atràida)</string>
+	<string name="poi_place_allotments">Ortos</string>
+	<string name="poi_ice_stock">Stock sport (birillos in s\'astra)</string>
+	<string name="poi_attraction_animal">Animales (atràida)</string>
+	<string name="poi_harbour">Portu</string>
+	<string name="poi_agricultural_engines_craft">Motores agrìcolos</string>
+	<string name="poi_hunting_stand">Posta de cassa</string>
 	</resources>

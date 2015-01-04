@@ -5,9 +5,9 @@
     <string name="auto_zoom_farthest">Драбней</string>
     <string name="map_magnifier">Лупа мапы</string>
     <string name="base_world_map">Асноўная мапа сьвету</string>
-    <string name="about_version">Версія:</string>
+    <string name="about_version">Вэрсія:</string>
     <string name="about_settings">Аб праграме</string>
-    <string name="about_settings_descr">Версія, ліцэнзіі, удзельнікі праекта</string>
+    <string name="about_settings_descr">Вэрсія, ліцэнзіі, удзельнікі праекту</string>
     <string name="tips_and_tricks">Дапамога</string>
     <string name="tip_recent_changes_1_6_t">Зьмены ў 1.6: ↵
 	\n\t* Падтрымка прылад з Full HD; ↵
@@ -24,7 +24,7 @@
     <string name="local_index_tile_data_zooms">Сьцягнутыя маштабы: %1$s</string>
     <string name="local_index_tile_data_expire">Тэрмін дзеяньня (у хвілінах): %1$s</string>
     <string name="local_index_tile_data_downloadable">Можна сьцягнуць: %1$s</string>
-    <string name="local_index_tile_data_maxzoom">Максімальнае павелічэньне: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Максымальнае павелічэньне: %1$s</string>
     <string name="local_index_tile_data_minzoom">Мінімальнае павелічэньне: %1$s</string>
     <string name="local_index_tile_data_name">Зьвесткі квадрата: %1$s</string>
     <string name="edit_tilesource_successfully">Крыніца квадратаў мапы %1$s пасьпяхова захаваная</string>
@@ -93,7 +93,7 @@
     <string name="intermediate_items_sort_return">Прамежкавыя кропкі шляху адсартаваныя аптымальным чынам ад пачатковай да канчатковай.</string>
     <string name="intermediate_items_sort_by_distance">Упарадкаваць па адлегласьці</string>
     <string name="local_osm_changes_backup_successful">Файл зьмен OSM пасьпяхова створаны ў %1$s</string>
-    <string name="local_osm_changes_backup_failed">Збой рэзервовага капіяванья файлу зьмяненьняў OSM</string>
+    <string name="local_osm_changes_backup_failed">Збой рэзервовага капіяваньня файлу зьмен OSM</string>
     <string name="local_osm_changes_backup">Рэзервовае капіяваньне файлу зьмен OSM</string>
     <string name="delete_point">Выдаліць кропку</string>
     <string name="plugin_distance_point_time">час</string>
@@ -114,7 +114,7 @@
     <string name="distance_measurement_save_gpx">Захаваць як GPX</string>
     <string name="distance_measurement_load_gpx">Адчыніць існы GPX</string>
     <string name="wait_current_task_finished">Калі ласка, пачакайце пакуль бягучая задача не будзе завершаная</string>
-    <string name="use_kalman_filter_compass_descr">Выкарыстоўваць фільтар Калмана каб прадухіліць абэрацыю компасу</string>
+    <string name="use_kalman_filter_compass_descr">Зьніжае шум паказаньняў компасу, але дадае інэрцыю</string>
     <string name="use_kalman_filter_compass">Выкарыстоўваць фільтар Калмана</string>
     <string name="access_mark_final_location_first">Рэжым даступнасьці: Калі ласка, спачатку абярыце пункт прызначэньня</string> 
     <string name="use_magnetic_sensor_descr">Выкарыстоўваць для працы компаса магнітны датчык замест датчыка арыентацыі</string>
@@ -138,7 +138,7 @@
     <string name="osmand_monitoring_plugin_description">Дазволіць адсочваньне месцазнаходжаньня і навігацыю ў рэжыме сну (калі экран выключаны) шляхам пэрыядычнага абуджэньня GPS прыймача.
 Паказаць налады запісу вандровак ў лякальныя GPX файлы ці ў сеткавы вэб-сэрвіс.</string>
     <string name="osmand_monitoring_plugin_name">Запіс сьледу</string>
-    <string name="osmand_background_plugin_description">Налады ўключэньня запісу сьледу і навігацыі ў рэжыме сну (экран выключаны) шляхам перыядычнага абуджэньня GPS прыймача.</string>
+    <string name="osmand_background_plugin_description">Налады ўключэньня запісу сьледу і навігацыі ў фонавым рэжыме (экран выключаны) шляхам пэрыядычнага абуджэньня GPS прыймача.</string>
     <string name="contribution_activity">Усталяваньне версіі</string>
     <string name="choose_osmand_theme_descr">Абраць выгляд праграмы</string>
     <string name="choose_osmand_theme">Выгляд</string>
@@ -261,13 +261,12 @@
     <string name="safe_mode_description">Працаваць у бясьпечным рэжыме (трохі павольней але бяз свойскіх бібліятэк).</string>
     <string name="safe_mode">Бясьпечны рэжым</string>
     <string name="native_library_not_running">Праграма працуе ў бясьпечным рэжыме (адключыць яго ў наладах).</string>
-    <string name="background_service_is_enabled_question">Сьпячы рэжым OsmAnd па-ранейшаму працуе. Хочаце прыпыніць яго?</string>
-    <string name="tip_recent_changes_1_0_0_t">Змены ў версіі 1.0.0:
-	\n\t* Палепшана маршрутызацыя: хутчэй, дакладней, да 250 км
-	\n\t* Уведзены карты дарог
-	\n\t* Карта не губляе прывязкі да пазіцыі пасля перарыванняў
-	\n\t* Уключана служба рэжыма сну падчас навігацыі
-    </string>
+    <string name="background_service_is_enabled_question">Фонавы рэжым OsmAnd па-ранейшаму працуе. Хочаце прыпыніць яго?</string>
+    <string name="tip_recent_changes_1_0_0_t">"Змены ў версіі 1.0.0:
+\n\t* Палепшана маршрутызацыя: хутчэй, дакладней, да 250 км
+\n\t* Уведзены карты дарог
+\n\t* Карта не губляе прывязкі да пазіцыі пасля перарыванняў
+\n\t* Уключана служба фонавага рэжыму падчас навігацыі "</string>
     <string name="close_changeset">Зачыніць мноства зьмен</string>
 	<string name="zxing_barcode_scanner_not_found">Праграма ZXing Barcode Scanner не ўстаноўлена. Шукаць у Market?</string>
 	<string name="rendering_attr_roadColors_description">Выберыце схему колераў дарог:</string>
@@ -496,8 +495,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="map_widget_transparent">Празрыстае афармленьне</string>
 	
 	
-	<string name="bg_service_sleep_mode_off">Ўключыць\n спячы рэжым</string>
-	<string name="bg_service_sleep_mode_on">Спынiць\n рэжым сну</string>
+	<string name="bg_service_sleep_mode_off">Уключыць\n фонавы рэжым</string>
+	<string name="bg_service_sleep_mode_on">Спынiць\n фонавы рэжым</string>
 	<string name="gps_wakeup_interval">Iнтэрвал абуджэньня GPS: %s</string>
 	<string name="int_continuosly">Безперапынны</string>
 	<string name="screen_is_locked">Для разблакоўкі экрана дакраніцеся да значка блакаваньня</string>
@@ -593,7 +592,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="poi_search_desc">Пошук цікавосткаў (POI)</string>
 	<string name="address_search_desc">Пошук па адрасе</string>
 	<string name="navpoint_search_desc">Каардынаты</string>
-	<string name="transport_search_desc">Пошук транспарту</string>
+	<string name="transport_search_desc">Пошук грамадзкага транспарту</string>
 	<string name="favourites_search_desc">Пошук упадабаных</string>
 	<string name="history_search_desc">Гісторыя пошуку</string>
 	<string name="offline_navigation_not_available">Аўтаномная навігацыя OsmAnd часова недаступная.</string>
@@ -882,8 +881,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="search_position_undefined">Нявызначана</string>
 	<string name="search_position_fixed">Вызначана</string>
 	<string name="search_position_current_location">Бягучае месцазнаходжаньне…</string>
-	<string name="search_position_map_view">Апошні выгляд мапы</string>
-	<string name="select_search_position">Шукаць блізу:</string>
+	<string name="search_position_map_view">Бягучы цэнтар мапы</string>
+	<string name="select_search_position">Пачатак:</string>
 	<string name="context_menu_item_search">Шукаць навокал</string>
 	<string name="save_route_dialog_title">Захаваць шлях як GPX сьлед</string>
 	<string name="route_successfully_saved_at">Маршрут пасьпяхова захаваны як \'%1$s\'.</string>
@@ -925,7 +924,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="local_index_download">Зладаваць</string>
 	<string name="local_index_poi_data">Зьвесткі цікавосткаў</string>
 	<string name="local_index_address_data">Адрас</string>
-	<string name="local_index_transport_data">Транспартныя дадзеныя</string>
+	<string name="local_index_transport_data">Зьвесткi грамадзкага транспарту</string>
 	<string name="local_index_map_data">Дадзеныя мапы</string>
 	<string name="local_indexes_cat_backup">Не актыўны</string>
 	<string name="local_indexes_cat_tts">Галасавыя зьвесткі (TTS)</string>
@@ -958,7 +957,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="gpx_option_reverse_route">Развярнуць кірунак GPX</string>
 	<string name="gpx_option_destination_point">Выкарыстоўваць бягучы пункт прызначэньня</string>
 	<string name="gpx_option_from_start_point">Прайсьці ўвесь шлях спачатку</string>
-	<string name="switch_to_vector_map_to_see">Для гэтай пазіцыі даступныя лакальныя вектарныя мапы.\n\t\n\tДля іх выкарыстаньня абярыце пункт меню \'Налада мапы\' → \'Крыніца мапы...\' → \'Лакальныя вектарныя мапы\'.</string>
+	<string name="switch_to_vector_map_to_see">Для гэтага рэгіёну даступныя лякальныя вэктарныя мапы.\n\t\n\tДля іх выкарыстаньня абярыце пункт мэню \'Налада мапы\' → \'Крыніца мапы...\' → \'Лякальныя вэктарныя мапы\'.</string>
 	<string name="choose_audio_stream">Вывад галасавых падказак</string>
 	<string name="choose_audio_stream_descr">Абярыце канал прайграваньня галасавых падказак</string>
 	<string name="voice_stream_voice_call">Канал телефанаваньня</string>
@@ -1056,7 +1055,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="km_h">км/г</string>
 	<string name="m">м</string>
 	<string name="old_map_index_is_not_supported">Састарэлы фармат дадзеных мапы \'\'{0}\'\' не падтрымліваецца</string>
-	<string name="poi_filter_closest_poi">Бліжэйшыя цікавосткі</string>
+	<string name="poi_filter_closest_poi">Бліжэйшыя POI</string>
 	<string name="poi_filter_custom_filter">Свой фільтар</string>
 	<string name="poi_filter_namefinder">Сеткавы NameFinder</string>
 	<string name="reading_cached_tiles">Чытаньне кэшаваных растравых мапаў…</string>
@@ -1110,9 +1109,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="use_high_res_maps">Дысплей высокай рэзалюцыі</string>
 	<string name="use_high_res_maps_descr">Не расьцягваць (з размыццём) растравыя мапы на дысплеях з высокай шчыльнасьцю</string>
 	<string name="download_files">Зладаваць</string>
-	<string name="context_menu_item_search_transport">Пошук транспарту</string>
-	<string name="transport_searching_transport">Пошук транспарту (няма цэлі):</string>
-	<string name="transport_searching_route">Пошук транспарту ({0} да цэлі):</string>
+	<string name="context_menu_item_search_transport">Шукаць грамадзкi транспарт</string>
+	<string name="transport_searching_transport">Вынiк пошуку транспарту (няма цэлі):</string>
+	<string name="transport_searching_route">Вынiк пошуку транспарту ({0} да цэлі):</string>
 	<string name="transport_search_none">няма</string>
 	<string name="transport_search_again">Шукаць транспарт зноў</string>
 	<string name="map_index">Мапа</string>
@@ -1123,7 +1122,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="layer_gpx_layer">GPX сьлед…</string>
 	<string name="error_reading_gpx">Памылка пры чытаньні GPX дадзеных</string>
 	<string name="vector_data">Лакальныя вектарныя мапы</string>
-	<string name="transport_context_menu">Пошук транспарту на прыпынку</string>
+	<string name="transport_context_menu">Шукаць транспарт на прыпынку</string>
 	<string name="point_on_map">Месца:\n %1$.5f шыр.\n %2$.5f даў.</string>
 	<string name="osb_bug_name">Памылка</string>
 	<string name="poi_context_menu_modify">Зьмяніць цікавостку</string>
@@ -1145,7 +1144,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="none_region_found">На SD-карце не знойдзена лакальных дадзеных для рэгіёнаў. Спампаваць рэгіёны з Інтэрнэту.</string>
 	<string name="poi_namefinder_query_empty">Увядзіце запыт для пошуку POI</string>
 	<string name="any_poi">Усе</string>
-	<string name="layer_transport_route">Маршрут перавозкі</string>
+	<string name="layer_transport_route">Маршрут транспарту</string>
 	<string name="thanks_yandex_traffic">Дзякуй Яндэксу за дарожную інфармацыю.</string>
 	<string name="layer_yandex_traffic">Яндэкс заторы</string>
 	<string name="layer_route">Маршрут</string>
@@ -1160,19 +1159,19 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="use_trackball">Выкарыстоўвайце трэкбол</string>
 	<string name="background_service_wait_int_descr">Задаць максімальны час чаканьня для кожнага фонавага вызначэньня каардынатаў</string>
 	<string name="background_service_wait_int">Максімальны час чаканьня вызначэньня каардынат</string>
-	<string name="service_stop_background_service">Выключыць навігацыю OsmAnd для рэжыму сну</string>
+	<string name="service_stop_background_service">Выключыць фонавы рэжым навігацыі OsmAnd</string>
 	<string name="where_am_i">Дзе я?</string>
 	<string name="process_navigation_service">Навігацыйны сэрвіс OsmAnd</string>
 	<string name="network_provider">Сетка</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">сэкундаў</string>
 	<string name="int_min">хв.</string>
-	<string name="background_service_int_descr">Абярыце інтэрвал абуджэньня для спячага рэжыму</string>
+	<string name="background_service_int_descr">Абярыце інтэрвал абуджэньня для фонавага рэжыму</string>
 	<string name="background_service_int">Інтэрвал абуджэньня GPS</string>
-	<string name="background_service_provider_descr">Абярыце крыніцу каардынат для выкарыстаньня падчас спячага рэжыму</string>
+	<string name="background_service_provider_descr">Абярыце крыніцу каардынат для выкарыстаньня фонавым сэрвісам</string>
 	<string name="background_service_provider">Крыніца каардынат</string>
 	<string name="background_router_service_descr">Запускае OsmAnd ў фонавым рэжыме для адсочвання месцазнаходжаньня пры выключаным экране</string>
-	<string name="background_router_service">Працаваць ў рэжыме сну</string>
+	<string name="background_router_service">Працаваць ў фонавым рэжыме</string>
 	<string name="off_router_service_no_gps_available">Фонаваму сэрвісу неабходная інфармацыя пра месцазнаходжаньне.</string>
 	<string name="hide_poi_filter">Схаваць фільтр</string>
 	<string name="show_poi_filter">Паказаць фільтр</string>
@@ -1199,7 +1198,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="first_time_continue">Далей</string>
 	<string name="first_time_download">Зладаваць рэгіёны</string>
 	<string name="search_poi_location">Пошук сігналу…</string>
-	<string name="search_near_map">Пошук побач з апошнім месцам на мапе</string>
+	<string name="search_near_map">Шукаць побач з бягучым цэнтрам мапы</string>
 	<string name="search_nearby">Шукаць паблізу</string>
 	<string name="map_orientation_default">Па змаўчаньні</string>
 	<string name="map_orientation_portrait">Вэртыкальная</string>
@@ -1211,7 +1210,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="transport_Routes">Маршруты</string>
 	<string name="transport_Stop">Прыпынак</string>
 	<string name="transport_stops">прыпынкаў</string>
-	<string name="transport_search_after">Наступны маршрут</string>	
+	<string name="transport_search_after">Далейшы маршрут</string>	
 	<string name="transport_search_before">Папярэдні маршрут</string>
 	<string name="transport_finish_search">Скончыць пошук</string>
 	<string name="transport_stop_to_go_out">Выберыце прыпынак для сходу</string>
@@ -1221,7 +1220,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="transport_route_distance">Даўжыня маршруту</string>
 	<string name="transport">Транспарт</string>
 	<string name="default_buttons_ok">Добра</string>
-	<string name="show_transport_over_map_description">Паказаць прыпынкі грамадскага транспарту на мапе</string>
+	<string name="show_transport_over_map_description">Паказаць прыпынкі грамадзкага транспарту на мапе</string>
 	<string name="show_transport_over_map">Паказваць прыпынкі транспарту</string>
 	<string name="hello">Навігацыйная праграма OsmAnd</string>
 	<string name="update_poi_success">Дадзеныя POI былі пасьпяхова абноўленыя ({0} аб\'ектаў загружана)</string>
@@ -1314,7 +1313,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="settings">Налады</string>
 	<string name="save_current_track_descr">Захаваць бягучы сьлед на SD зараз</string>
 	<string name="save_current_track">Захаваць бягучы GPX сьлед</string>
-	<string name="save_track_interval">Інтэрвал захоўванья падчас навігацыі</string>
+	<string name="save_track_interval">Інтэрвал захоўваньня падчас навігацыі</string>
 	<string name="save_track_interval_descr">Пазначыць інтэрвал захоўваньня пунктаў сьледу падчас навігацыі</string>
 	<string name="save_track_to_gpx_descrp">Сьляды будуць захаваныя ў каталог track падчас навігацыі</string>
 	<string name="save_track_to_gpx">Запісваць сьлед у GPX файл</string>
@@ -1407,7 +1406,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="osb_comment_dialog_author">Імя аўтара</string>
 	<string name="osb_comment_dialog_title">Даданьне каментара да памылкі</string>
 	<string name="osb_comment_dialog_add_button">Дадаць камэнтар</string>
-	<string name="osb_comment_dialog_success">Гэты каментар быў пасьпяхова дададзены</string>
+	<string name="osb_comment_dialog_success">Гэты камэнтар быў пасьпяхова дададзены</string>
 	<string name="osb_comment_dialog_error">Выключная сітуацыя: каментар не быў дададзены</string>
 	<string name="osb_close_menu_item">Зачыніць памылку</string>
 	<string name="osb_close_dialog_title">Закрыцьцё памылкі</string>
@@ -1468,7 +1467,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="lang_bs">баснійская</string>
 	<string name="lang_bg">балгарская</string>
 	<string name="lang_ca">каталонская</string>
-	<string name="lang_cs">чэшская</string>
+	<string name="lang_cs">чэская</string>
 	<string name="lang_da">дацкая</string>
 	<string name="lang_nl">галяндзкая</string>
 	<string name="lang_fi">фінская</string>
@@ -1502,10 +1501,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="index_name_canada">Паўночная Амэрыка - Канада</string>
     <string name="index_name_italy">Эўропа - Італія</string>
     <string name="index_name_gb">Эўропа - Вялікабрытанія</string>
-    <string name="calculate_osmand_route_without_internet">Вылічыць сегмент маршруту OsmAnd без Інтэрнэту</string>
+    <string name="calculate_osmand_route_without_internet">Вылічыць адрэзак маршруту OsmAnd без Інтэрнэту</string>
     <string name="gpx_option_calculate_first_last_segment">Вылічыць маршрут OsmAnd для першага і апошняга ўчастка маршруту</string>
     <string name="use_displayed_track_for_navigation">Ці хочаце вы выкарыстоўваць адлюстраваны сьлед для навігацыі?</string>
-    <string name="route_descr_select_on_map">Выбраць на мапе …</string>
+    <string name="route_descr_select_on_map">Выбраць на мапе…</string>
     <string name="route_info">Інфармацыя пра маршрут</string>
     <string name="routing_attr_prefer_motorway_name">Аддаваць перавагу аўтамагістралям</string>
 	<string name="routing_attr_short_way_name">Самы кароткі шлях</string>
@@ -1521,9 +1520,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="routing_attr_weight_name">Абмежаваньне вагі</string>
 	<string name="routing_attr_weight_description">Задайце вагу аўтамабіля для пракладаньня маршрутаў</string>
     <string name="application_dir_change_warning2">Вы хочаце каб OsmAnd таксама скапіяваў свае зьвесткі ў новае месца? Абярыце \"Не\" каб OsmAnd проста стварыў і выкарыстоўваў новы каталёг.</string>
-    <string name="copying_osmand_one_file_descr">Капіраваньне файла (%s) у новае месца...</string>
-    <string name="copying_osmand_files_descr">Капіяваньне дадзеных OsmAnd у новае месца (%s)</string>
-    <string name="copying_osmand_files">Капіяваньне дадзеных OsmAnd</string>
+    <string name="copying_osmand_one_file_descr">Капіраваньне файла (%s) у новае месца…</string>
+    <string name="copying_osmand_files_descr">Капіяваньне дадзеных OsmAnd у новае месца (%s)…</string>
+    <string name="copying_osmand_files">Капіяваньне дадзеных OsmAnd…</string>
     <string name="app_mode_truck">Грузавік</string>
     <string name="speech_rate_descr">Задайце хуткасць вымаўленьня для TTS</string>
     <string name="speech_rate">Хуткасьць вымаўленьня</string>
@@ -1542,7 +1541,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="remember_choice">Запомніць мой выбар</string>
     <string name="index_item_world_basemap">Сусьветная аглядная мапа</string>
     <string name="index_item_world_ski">Сусьветная лыжная мапа</string>
-    <string name="select_gpx">Выбраць GPX …</string>
+    <string name="select_gpx">Абраць GPX …</string>
     <string name="routing_attr_prefer_motorway_description">Аддаваць перавагу аўтамагістралям</string>
 	<string name="animate_routing_route">Імітацыя з выкарыстаньнем разлічанага маршруту </string>
     <string name="animate_routing_gpx">Імітацыя з выкарыстаньнем GPX-сьледу</string>
@@ -1552,7 +1551,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="index_item_world_bitcoin_payments">Bitcoin плацяжы ўсяго сьвету</string>
 	<string name="keep_and_add_destination_point">Дадаць пунктам прызначэньня</string>
     <string name="route_descr_select_destination">Выбраць месца прызначэньня</string>
-    <string name="route_descr_favorite">Упадабаныя .…</string>
+    <string name="route_descr_favorite">Упадабаныя…</string>
     <string name="route_preferences">Настройкі маршрута</string>
     <string name="calculate_osmand_route_gpx">Разьлічыць пазасеціўны маршрут OsmAnd</string>
     <string name="guidance_preferences_descr">Навігацыйныя настройкі</string>
@@ -1563,7 +1562,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="app_mode_hiking">Пешы турызм</string>
     <string name="app_mode_boat">Судна</string>
     <string name="tip_faq_t">Калі ласка, наведайце https://code.google.com/p/osmand/wiki/FAQ каб пабачыць часта задаваныя пытаньні.</string>
-    <string name="local_osm_changes_delete_all_confirm">Вы зьбіраецеся выдаліць %1$d змены OSM. Вы ўпэўненыя?</string>
+    <string name="local_osm_changes_delete_all_confirm">Вы зьбіраецеся выдаліць %1$d зьмены OSM. Вы ўпэўненыя?</string>
     <string name="animate_routing_route_not_calculated">Калі ласка, спачатку разьлічыце маршрут</string>
     <string name="osmodroid_unseek">Не адсочваць аб\'ект</string>
     <string name="android_19_location_disabled">З версіі 4.4 Android (KitKat) вы ня можаце загружаць і абнаўляць мапу ў папярэднім каталогу захоўваньня (%s). Вы хочаце зьмяніць каталог на дазволены і скапіяваць усе файлы OsmAnd туды?\n Заўвага 1: Вашы старыя файлы застануцца некранутымі (вы можаце выдаліць іх самастойна).         
@@ -1583,7 +1582,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="app_modes_choose_descr">Выберыце профілі карыстання бачныя ў праграме</string>
     <string name="voice_pref_title">Голас</string>
     <string name="misc_pref_title">Рознае</string>
-    <string name="localization_pref_title">Лакалізацыя</string>
+    <string name="localization_pref_title">Лякалізацыя</string>
     <string name="interrupt_music">Перапыненьне музыкі</string>
 	<string name="osmo_settings_uuid">Унікальны ідэнтыфікатар прылады</string>
     <string name="osmo_settings_descr">Глянуць унікальны рэгістрацыйны ключ прыстасаваньня і наладзіць асабісты канал адсочваньня</string>
@@ -1609,11 +1608,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	\n\t* \'Турыстычны\' варыянт стылю мапы з большай колькасьцю дэталяў, новымі стылямі дарог, павышанай кантрастнасцю і інш.
 	\n\t* Карэкцыя геоіду EGM96 для паказанняў вышыні GPS
     </string>
-    <string name="tip_recent_changes_0_8_4_t">Змены ў 0.8.4:
-	\n\t* Выпраўленне памылак
-	\n\t* Карта не губляе блакавання пазіцыі пасля перапыненняў
-	\n\t* Уключае рэжым сну падчас навігацыі
-    </string>
+    <string name="tip_recent_changes_0_8_4_t">"Змены ў 0.8.4:
+\n\t* Выпраўленне памылак
+\n\t* Карта не губляе блакавання пазіцыі пасля перапыненняў
+\n\t* Уключае фонавы рэжым падчас навігацыі "</string>
     <string name="osmand_srtm_long_description_1000_chars">Гэты модуль паказвае ізалініі вышынь на картах OsmAnd. Глабальныя дадзеныя (паміж 70 градусамі на поўначы і 70 градусамі на поўдні) грунтуюцца на вымярэннях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), дадзеных інструмента візуалізацыі Terra, флагманскага спадарожніка сістэмы назірання Зямлі ад NASA. ASTER - гэта вынік сумеснай працы NASA, міністэрства эканомікі Японіі, міністэрства гандлю і прамысловасці Японіі (METI), агенцтва касмічных сістэм Японіі (J-spacesystems).</string>
     <string name="srtm_plugin_description">Модуль дазваляе загружаць дадзеныя ізаліній вышынь (\'Налады\' → \'Кіраваньне файламі мапаў\' → \'Спампаваць\' → Выберыце пажаданы тып карты).</string>
     <string name="osmodroid_plugin_description">Модуль OsMoDroid - пашырэньне для OsmAnd, што выкарыстоўвае праграму OsModroid для сеткавага адсочваньня. Інфармацыю аб сэрвісе можна знайсьці на сайце http://esya.ru.</string>
@@ -1628,7 +1626,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 		\n\t* Кнопка блакавання экрана ў службе абсочваньня↵ 
 		\n\t* Выпраўлена напісанне арабскаю, моваю каннада і мовамі, якія маюць пісьменнасць справа налева 
 	</string>
-	<string name="arrival_distance_descr">Як хутка вы хочаце чуць паведамленье пра прыбыцьцё?</string>
+	<string name="arrival_distance_descr">Як хутка вы хочаце чуць паведамленьне пра прыбыцьцё?</string>
     <string name="tip_update_index_t">"Актуальныя картаграфічныя дадзеныя вельмі важныя для аўтаномнага прагляду мапы і адраснага пошуку. OsmAnd мае ўбудаваны мэнэджэр файлаў мапаў, які можа правяраць наяўнасць абнаўленьняў для лакальных мапаў.
 \n\nКаб выканаць загрузку мапаў абярыце пункт меню \'Налады\' → \'Кіраваньне файламі мапаў\' → \'Загрузка\'. ↵
 \n\nПасля таго як сьпіс рэгіёнаў будзе загружаны зь Інтэрнэту, націсьніце на любы пункт для загрузкі або абнаўленьня файла. Звярніце ўвагу, селектар тыпу файла знаходзіцца ў верхняй частцы экрана, каб выбраць патрэбны тып файлаў для загрузкі (карты, слаі рэльефу і г.д.) ↵
@@ -1664,8 +1662,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 		\n\t- Выпраўленні памылак ↵
 	</string>
 	<string name="osmo_io_error">Праблема з падключэньнем OsMo: </string>
-    <string name="osmo_mode_on">Спыніць сесію OsMo</string>    
-    <string name="osmo_mode_off">Запусьціць сесію OSMo</string>
+    <string name="osmo_mode_on">Спыніць сэсыю OsMo</string>    
+    <string name="osmo_mode_off">Запусьціць сэсыю OSMo</string>
     
     <string name="share_fav">Падзяліцца</string>
 	<string name="share_fav_subject">Выбранае адаслана праз OsmAnd</string>
@@ -1680,17 +1678,17 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     </string>
     <string name="osmo_auto_send_locations_descr">Аўтаматычна пачынаць запіс сьледу і перадачу месцазнаходжаньня пасьля старту праграмы</string>
     <string name="osmo_auto_send_locations">Аўтаматычна пачынаць адсылку месцазнаходжаньня</string>
-    <string name="osmo_tracker_id">Персанальны ID трэкера</string>
+    <string name="osmo_tracker_id">Пэрсанальны ID трэкера</string>
     <string name="osmo_tracker_id_descr">Націсніце, каб паглядзець ці падзяліцца ідэнтыфікатарам трэкера.          Выкарыстаньне ідэнтыфікатара трэкера звязанага з прыстасаваньнем дасць магчымасць кантраляваць усе перамяшчэньні гэтага прыстасаваньня! Для адключэньня выберыце опцыю перастварэньня.</string>
-    <string name="osmo_session_token">Токен сесіі: %1$s</string>
-    <string name="osmo_auth_pending">У чаканьні дазволу...</string>
+    <string name="osmo_session_token">Токен сэсыі: %1$s</string>
+    <string name="osmo_auth_pending">У чаканьні дазволу…</string>
     <string name="osmo_locations_sent">"Месцазнаходжаньне адаслана %1$d (у буферы %2$d) "</string>
     <string name="osmo_conn_successfull">Злучэньне ўстаноўлена: %1$s </string>
-    <string name="osmo_mode_restart">Пачаць OsMo сэсію паўторна</string>
+    <string name="osmo_mode_restart">Пачаць OsMo сэсыю паўторна</string>
     <string name="osmo_settings_debug">Адладачная інфармацыя</string>
     <string name="hours_ago">гадзін таму</string>
     <string name="minutes_ago">хвілін таму</string>
-    <string name="seconds_ago">секунд таму</string>
+    <string name="seconds_ago">сэкунд таму</string>
     <string name="osmo_connect_to_device_name">Імя карыстальніка</string>
     <string name="osmo_connect_to_device_tracker_id">ID трэкера</string>
     <string name="osmo_connect_to_device">Сувязь з прыстасаваньнем</string>
@@ -1702,9 +1700,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_group">Група OsMo</string>
     <string name="osmo_group_share">Каб падключыцца да групы %2$s, задайце ID групы (%1$s) або націсьніце %3$s.</string>
     <string name="osmo_share_connect_device">Дазволіць пастаянна адсочваць дадзенае прыстасаваньне</string>
-    <string name="osmo_share_current_session">Падзяліцца бягучай сесіяй у браўзэры</string>
-    <string name="osmo_share_session">Падзяліцца сэсіяй</string>
-    <string name="osmo_session_id_share">URL сесіі для адсочваньня прыстасаваньня (%1$s)</string>
+    <string name="osmo_share_current_session">Падзяліцца бягучай сэсыяй у браўзэры</string>
+    <string name="osmo_share_session">Падзяліцца сэсыяй</string>
+    <string name="osmo_session_id_share">URL сэсыі для адсочваньня прыстасаваньня (%1$s)</string>
     <string name="osmo_track_interval_descr">Выберыце часавы інтэрвал для адпраўкі месцазнаходжаньня</string>
     <string name="int_days">дзён</string>
     <string name="osmo_connect_menu">Падключыцца</string>
@@ -1724,7 +1722,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="osmo_track_interval">Інтэрвал адсылкі дадзеных</string>
 	<string name="osmo_expire_group">Тэрмін дзеяньня скончыцца праз</string>
     <string name="osmo_control">Хуткі доступ OsMo</string>
-    <string name="osmo_session_not_available">Сесія не даступная, калі ласка, пераканайцеся, што пункт \'Адсылаць месцазнаходжаньне\' уключаны.</string>
+    <string name="osmo_session_not_available">Сэсыя не даступная, калі ласка, пераканайцеся, што пункт \'Адсылаць месцазнаходжаньне\' уключаны.</string>
     <string name="osmo_tracker_id_share">Каб падключыцца да патрэбнага прыстасаваньня %2$s націсьніце на спасылку %3$s альбо задайце ідэнтыфікатар трэкеру (%1$s)</string>
     <string name="color_red">чырвоны</string>
 	<string name="color_pink">ружовы</string>
@@ -1738,7 +1736,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_edit_color">Выбар колеру</string>
     <string name="osmo_edit_device">Зьмяніць налады карыстальніка</string>
     <string name="osmo_sign_in">Увайсьці</string>
-    <string name="osmo_create_groups_confirm">Для таго каб стварыць групы вы павінны быць зарэгістраваным карыстальнікам OsMo.</string>
+    <string name="osmo_create_groups_confirm">Для стварэньня групы, вы павінны быць зарэгістраваным карыстальнікам OsMo.</string>
     <string name="osmo_credentials_not_valid">Уведзеныя зьвесткі не сапраўдныя.</string>
     <string name="osmo_regenerate_login_ids_confirm">Вы ўпэўненыя, што хочаце перастварыць асабістыя ідэнтыфікатары? Усе прыстасаваньні, падлучаныя да вас больш не змогуць адсочваць вас.</string>
     <string name="osmo_regenerate_login_ids">Перастварыць ідэнтыфікатар карыстальніка</string>
@@ -1747,8 +1745,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_user_name">Карыстальнік</string>
 	<string name="color_green">зялёны</string>
 	
-    <string name="osmo_set_moving_target">Усталяваць рухомай мішэньню</string>
-    <string name="osmo_cancel_moving_target">Скасаваць рухомую мішэнь</string>
+    <string name="osmo_set_moving_target">Усталяваць рухомай цэльлю</string>
+    <string name="osmo_cancel_moving_target">Скасаваць рухомую цэль</string>
     <string name="osmo_center_location">Цэнтраваць экран</string>
     <string name="osmo_follow">Суправаджаць</string>
     <string name="osmo_user_joined">Карыстальнік %1$s далучыўся да групы %2$s</string>
@@ -1767,11 +1765,11 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="gpx_info_start_time">Пачатак: %1$tF,  %1$tT </string>
 	<string name="gpx_info_end_time">Канец: %1$tF,  %1$tT </string>
 	<string name="gpx_info_average_speed">Сярэдняя хуткасьць: %1$s </string>
-	<string name="gpx_info_maximum_speed">Максімальная хуткасьць: %1$s </string>
+	<string name="gpx_info_maximum_speed">"Максымальная хуткасьць: %1$s "</string>
 	<string name="gpx_info_avg_altitude">Сярэдняя вышыня: %1$s</string>
 	<string name="gpx_timespan">Прамежак часу: %1$s</string>
 	<string name="gpx_timemoving">Час руху: %1$s</string>
-    <string name="gpx_selection_segment_title">Сегмент</string>
+    <string name="gpx_selection_segment_title">Адрэзак</string>
     <string name="gpx_selection_number_of_points">" %1$s пунктаў"</string>
     <string name="gpx_selection_point">Пункт %1$s</string>
     <string name="gpx_selection_current_track">запіс</string>
@@ -1783,7 +1781,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="gpx_split_interval">Інтэрвал нарэзкі</string>
     <string name="selected">выбрана</string>
     <string name="gpx_info_asc_altitude">Пад’ём/спад: %1$s</string>
-    <string name="loading_smth">Загрузка %1$s…</string>
+    <string name="loading_smth">Чытаньне %1$s…</string>
     <string name="map_widget_plain_time">Бягучы час</string>
     <string name="gpx_wpt">Пункт шляху</string>
     <string name="selected_gpx_info_show">\n\nНацісьніце і ўтрымлівайце, каб убачыць на мапе</string>
@@ -1819,7 +1817,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_attr_hideBuildings_name">Схаваць будынкі</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Схаваць не аўтамабільныя дарогі</string>
     <string name="rendering_attr_hideText_name">Схаваць тэкст</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Схаваць лясы і хмызнякі</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Схаваць лясы і хмызьнякі</string>
     <string name="rendering_attr_buildings15zoom_name">Будынкі на маштабе 15</string>
     <string name="rendering_attr_moreDetailed_name">Больш падрабязна</string>
     <string name="rendering_attr_lessDetailed_name">Менш падрабязна</string>
@@ -1829,14 +1827,14 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_attr_showSurfaces_name">Адлюстроўваць тып пакрыцьця</string>
     <string name="rendering_attr_showCycleRoutes_name">Паказаць веламаршруты</string>
     <string name="stop_navigation_service">Прыпыніць</string>
-	<string name="enable_sleep_mode">Уключыць рэжым сну GPS</string>
+	<string name="enable_sleep_mode">Уключыць фонавы рэжым GPS</string>
 	<string name="gps_wake_up_timer">Iнтэрвал абуджэньня GPS</string>
 	<string name="lang_sw">суахілі</string>
     <string name="lang_he">іўрыт</string>
     <string name="gpx_monitoring_start">Пачаць запіс GPX</string>
 	<string name="gpx_start_new_segment">Пачаць новы адрэзак</string>
     <string name="lang_fa">пэрсійдзкая</string>
-	<string name="sleep_mode_stop_dialog">Прыпыніць рэжым сну GPS?</string>
+	<string name="sleep_mode_stop_dialog">Прыпыніць фонавы рэжым GPS?</string>
 	<string name="map_preferred_locale_descr">Пажаданая мова надпісаў на мапе (калі не даступна, то будуць выкарыстны ангельскія ці мясцовыя назвы)</string>
     <string name="map_preferred_locale">Пажаданая мова мапы</string>
     <string name="local_map_names">Мясцовыя назвы</string>
@@ -1847,7 +1845,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="live_monitoring_start">Пачаць адсочваньне праз Інтэрнэт</string>
 	<string name="live_monitoring_stop">Спыніць адсочваньне праз Інтэрнэт</string>
 	<string name="live_monitoring_m">Адсочваньне праз Інтэрнэт (патрабуецца GPX)</string>
-    <string name="live_monitoring_m_descr">Адсылаць месцазнаходжаньне на пазначаны вэб сэрвіс пры ўключаным запісе GPX.</string>
+    <string name="live_monitoring_m_descr">Адсылаць месцазнаходжаньне на пазначаны вэб-сэрвіс пры ўключаным запісе GPX.</string>
 	<string name="lang_al">альбанская</string>
 	<string name="lang_ar">арабская</string>
 	<string name="lang_sr">сэрбская</string>
@@ -1879,7 +1877,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_value_bicycle_name">Ровар</string>
     <string name="rendering_value_pedestrian_name">Пешаход</string>
     <string name="download_additional_maps">Спампаваць мапы, што адсутнічаюць, %1$s (%2$d МБ)?</string>
-    <string name="more">Больш...</string>
+    <string name="more">Больш…</string>
     <string name="flat_list_waypoitns">Усе</string>
     <string name="waypoints">Кропкі шляху</string>
     <string name="way_alarms">Дарожныя папярэджаньні</string>
@@ -1898,8 +1896,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="save_track_interval_globally">Інтэрвал запісу</string>
 	<string name="save_track_to_gpx_globally_descr">Агульны запіс месцазнаходжаньня ў GPX файл можа быць уключаны або выключаны з дапамогай кнопкі запісу GPX на экране з мапай</string>
 	<string name="confirm_every_run">Пытацца заўсёды</string>
-	<string name="save_global_track_interval_descr">Выберыце інтэрвал рэгістраваньня для запісвання агульнага шляху (уключаецца віджэтам запісу GPX на мапе)</string>
-	<string name="save_global_track_interval">Агульны інтэрвал запісваньня</string>
+	<string name="save_global_track_interval_descr">Абярыце інтэрвал запісу сьледу (уключаецца віджэтам запісу GPX на мапе)</string>
+	<string name="save_global_track_interval">Агульны інтэрвал запісу</string>
 	<string name="traffic_warning_speed_limit">Абмежаваньне хуткасьці</string>
     <string name="traffic_warning_border_control">Памежны кантроль</string>
     <string name="traffic_warning_payment">Платны праезд</string>
@@ -1978,13 +1976,14 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="voices">Галасавыя падказкі</string>
 	<string name="rendering_value_orange_name">Аранжавы</string>
     <string name="rendering_value_germanRoadAtlas_name">Нямецкі атлас аўтадарог</string>
-    <string name="rendering_value_americanRoadAtlas_name">Амерыканскі атлас аўтадарог</string>
-    <string name="routing_attr_no_new_routing_name">Без правілаў маршрутызацыі v1.9</string>
+    <string name="rendering_value_americanRoadAtlas_name">Амэрыканскі атлас аўтадарог</string>
+    <string name="routing_attr_no_new_routing_name">Бяз правілаў маршрутызацыі v1.9</string>
     <string name="routing_attr_no_new_routing_description">Не выкарыстоўваць правілы маршрутызацыі ўведзеныя ў v1.9</string>
     <string name="rendering_value_default_name">Па змоўчаньні</string>
     <string name="rendering_attr_roadStyle_name">Стыль аўтадарог</string>
     <string name="show_pedestrian_warnings">Паказваць папярэджаньні для пешаходаў</string>
-    <string name="traffic_warning_pedestrian">Пешаходныя</string>
-	<string name="traffic_warning_railways">Чыгуначныя</string>
+    <string name="traffic_warning_pedestrian">Пешаходны пераход</string>
+	<string name="traffic_warning_railways">Чыгуначны пераезд</string>
 	<string name="show_railway_warnings">Паказваць чыгуначныя пераезды</string>
-	</resources>
+	<string name="speak_pedestrian">Папярэджваць пра пешаходныя пераходы</string>
+    </resources>
