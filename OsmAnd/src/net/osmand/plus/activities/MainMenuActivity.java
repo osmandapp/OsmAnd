@@ -498,6 +498,11 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			if (f instanceof DashAudioVideoNotesFragment && !f.isDetached()) {
 				((DashAudioVideoNotesFragment) f).setupNotes();
 			}
+
+			//Needed to reliably initialize DashFavoritesFragement on devices without compass
+			if (f instanceof DashFavoritesFragment && !f.isDetached()) {
+				((DashFavoritesFragment) f).updateLocation(null);
+			}
 		}
 	}
 
