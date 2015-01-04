@@ -234,7 +234,7 @@
 	<string name="search_position_undefined">정의되지 않음</string>
 	<string name="search_position_fixed">고정</string>
 	<string name="search_position_current_location">현재 위치…</string>
-	<string name="search_position_map_view">마지막 지도 보기</string>
+	<string name="search_position_map_view">현재 지도 센터링</string>
 	
 	<string name="select_search_position">원점 :</string>
 	<string name="context_menu_item_search">가까운 주변 검색</string>
@@ -461,7 +461,7 @@
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">사용되지 않은 지도 데이터 형식 \'\'{0}\'\' 은 지원되지 않습니다</string>
 	<string name="poi_filter_car_aid">주유소</string>
-	<string name="poi_filter_closest_poi">가장 가까운 POI</string>
+	<string name="poi_filter_closest_poi">가까운 POI</string>
 	<string name="poi_filter_custom_filter">사용자 필터</string>
 	<string name="poi_filter_food_shop">식품가게</string>
 	<string name="poi_filter_for_tourists">여행자</string>
@@ -628,7 +628,7 @@
 	<string name="first_time_msg">"OsmAnd 를 선택해 주셔서 감사합니다. 앱의 모든 기능을 사용하려면, 인덱스 파일을 (설정-&gt;지도 관리)  다운로드 하여 준비하세요.
 \n그런 다음, 지도를 보거나 주소, POI, 공공장소 등등을 찾을 수 있습니다."</string>
 	<string name="search_poi_location">신호 위치 찾는 중…</string>
-	<string name="search_near_map">지난번 지도 위치 검색</string>
+	<string name="search_near_map">현재 지도 센터링 검색</string>
 	<string name="search_nearby">근처 검색</string>
 	<string name="map_orientation_default">장치와 같음</string>
 	<string name="map_orientation_portrait">세로</string>
@@ -801,7 +801,7 @@
 <string name="incremental_search_building">빌딩 검색</string>
 <string name="choose_available_region">목록에서 지역을 선택합니다</string>
 <string name="choose_intersected_street">교차로를 선택합니다</string>
-<string name="Closest_Amenities">가장 가까운 시설들</string>
+<string name="Closest_Amenities">근접한 시설들</string>
 <string name="app_mode_default">지도 찾아보기</string>
 <string name="app_mode_car">자동차</string>
 <string name="app_mode_bicycle">자전거</string>
@@ -1042,7 +1042,7 @@
     <string name="map_widget_appearance">나머지 요소 :</string>
 	<string name="local_osm_changes_delete_all_confirm">%1$d OSM 변경 사항을 삭제하려고 합니다.  확실합니까?</string>
     <string name="route_is_too_long">OsmAnd 오프라인 라우팅(길찾기)는 200km 이상 떨어진 포인트를 계산할 때 매우 긴 시간이 걸리 수 있습니다. (가끔 작동 되지 않을 수 있습니다) 당신은 더 나은 성능을 위해 경유지를 추가할 수 있습니다.</string>
-	<string name="auto_zoom_close">가까운 거리에</string>
+	<string name="auto_zoom_close">좀 더 가깝게</string>
 	<string name="auto_zoom_far">중간 거리에</string>
 	<string name="auto_zoom_farthest">긴 거리에</string>
 	<string name="edit_tilesource_elliptic_tile">타원 메르카토르</string>
@@ -1755,15 +1755,14 @@
 \n\t* \'Light sensor\': map appearance is controlled by the device\'s light sensor (only if equipped) "</string>	
 	<string name="tip_map_switch_t_v2">"표시된 맵 소스와 계층 지도는 [메뉴]-&gt;[계층 지도]에서 변경할 수 있다.\n[맵 소스] 아래에.. 미리 로드된 오프라인 벡터 지도를 사용하여 선택할 수 있다. OsmAnd 는 또한 사용자 지도를 지원합니다. "</string>
 	<string name="tip_app_mode_t_v2">"OsmAnd 는 다른 사용 사례에 대해 서로 다른 (사용자 정의) 앱 프로필을 지원합니다. 지도 화면 (아이콘 자동차, 자전거 또는 보행자 )의 왼쪽 하단 모서리에 있는 프로필 버튼을 통해 프로필을 변경하거나 경로(\'전송 모드\')을 만들 때 할 수 있습니다. "</string>
-	<string name="tip_search_t">[위치사용-&gt;가까운 장소 검색] 메뉴를 통해서 지도에서 장소를 직접 검색할 수 있습니다. 또는 [메뉴-&gt;검색]을 통해서 화면에서 검색할 수 도 있습니다.
-		\n\n검색화면은 검색을 위한 템플릿을 제공합니다
-		\n\t* 주소로
-		\n\t* 좌표로
-		\n\t* POI로 (by type or by name)
-		\n\t* 기록된 검색으로
-		\n\t* 즐겨찾기로 검색할 수 있습니다.
-		\n\n컨텍스트 메뉴를 이용하거나 또는 액션 바는 [길안내 또는 지도에서 보기] 등을 제공합니다.
-	</string>
+	<string name="tip_search_t">"[위치사용-&gt;주변 장소 검색] 메뉴를 통해서 지도에서 장소를 직접 검색할 수 있습니다. 또는 [메뉴-&gt;검색]을 통해서 화면에서 검색할 수 도 있습니다.
+\n\n검색화면은 검색을 위한 템플릿을 제공합니다
+\n\t* 주소로
+\n\t* 좌표로
+\n\t* POI로 (by type or by name)
+\n\t* 기록된 검색으로
+\n\t* 즐겨찾기로 검색할 수 있습니다.
+\n\n컨텍스트 메뉴를 이용하거나 또는 액션 바는 [길안내 또는 지도에서 보기] 등을 제공합니다. "</string>
 	<string name="osmo_settings_uuid">고유 장치 id</string>
     <string name="osmo_settings_descr">모니터링 설정을 구성하고 개인 모니터링 채널을 설정</string>
     <string name="osmo_plugin_description">"OpenStreetMap 고급 실시간 모니터링. 이에 대해서는 http://osmo.mobi를 참조 하십시오. 다른 장치를 추적하고 추적받는 가능성을 제공 합니다. 익명 그룹을 만들고, 서로의 위치를 공유하고 소통한다. 세션 트래킹 또는 영구 트래킹에 대한 다양한 설정을 합니다. 익명그룹는 수많은 날에 제한되며  일부 기능 즉, 원격 제어 및 그룹 관리자는 제한된다. 완벽하게 기능적인 그룹은 웹사이트에 생성하고 그들에게 등록된 사용자만 액세스할 수 있습니다. "</string>
@@ -2001,8 +2000,8 @@
     <string name="waypoints">경유지</string>
     <string name="targets">도착지</string>
     <string name="way_alarms">교통 경고</string>
-    <string name="speak_favorites">가까운 즐겨찾기 알리기</string>
-    <string name="speak_poi">가까운 POI 알리기</string>
+    <string name="speak_favorites">주변의 즐겨찾기 알리기</string>
+    <string name="speak_poi">주변의 POI 알리기</string>
     <string name="rendering_attr_publicTransportMode_name">버스, 무궤도전차, 셔틀 노선</string>
 	<string name="save_track_to_gpx_globally">트랙을 GPX파일로 저장</string>
 	<string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 기록 위젯을 사용하여 켜거나 끌 수 있습니다</string>
