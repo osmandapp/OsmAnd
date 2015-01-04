@@ -82,8 +82,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 			}
 			contextMenu.setLocation(latlon, null);
 			showDialog();
-			//Check if this fixes the Issue of route-recalculation not starting when From point is changed while previous route was not finished
-			//return true;
+			return true;
 		}
 		return super.onSingleTap(point, tileBox);
 	}
