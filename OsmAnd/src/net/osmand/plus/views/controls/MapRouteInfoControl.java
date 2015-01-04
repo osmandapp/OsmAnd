@@ -228,6 +228,9 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 					getTargets().setStartPoint(point, true, name);
 				}
 				favoritesDialog.dismiss();
+				//Next 2 lines ensure Dialog is shown in the right correct position after a selection been made
+				hideDialog();
+				showDialog();
 			}
 		});
 		bld.setView(listView);
