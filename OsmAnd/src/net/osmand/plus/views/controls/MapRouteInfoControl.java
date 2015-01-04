@@ -82,7 +82,6 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 				getTargets().setStartPoint(latlon, true, null);
 			}
 			contextMenu.setLocation(latlon, null);
-		hideDialog();
 			showDialog();
 			return true;
 		}
@@ -207,8 +206,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	protected void selectOnScreen(View parentView, boolean target) {
 		selectFromMapTouch = true;
 		selectFromMapForTarget =  target;
-		//hideDialog();
-		dialog.hide();
+		hideDialog();
 	}
 
 	protected void selectFavorite(final View parentView, final boolean target) {
