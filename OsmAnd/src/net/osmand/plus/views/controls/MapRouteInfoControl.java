@@ -82,6 +82,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 			}
 			contextMenu.setLocation(latlon, null);
 			showDialog();
+		//TODO: Hardy: Looks like there is an old bug somewhere here: Re-selecting the From or To via "Select on map" during a route calculation does interrupt the ongoing route calculation, while reselecting From or To via "Fvorites" correctly re-starts any ongoing route recalculation with the updated point
 			return true;
 		}
 		return super.onSingleTap(point, tileBox);
