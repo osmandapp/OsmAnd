@@ -1165,7 +1165,7 @@
      \n\t* Ytterligare inställningar för att stabilisera kompassen
      \n\t* Översta knappen till vänster på kartskärmen ersätter menyknappen
     </string>
-    <string name="use_kalman_filter_compass_descr">Använd Kalman-filter för att undvika kompassmissvisning</string>
+    <string name="use_kalman_filter_compass_descr">Minskar kompassmissvisningen men blir trögare</string>
     <string name="use_kalman_filter_compass">Använd Kalman-filter</string>
     <string name="choose_osmand_theme">App-tema</string>
     <string name="choose_osmand_theme_descr">Välj tema för applikationen</string>
