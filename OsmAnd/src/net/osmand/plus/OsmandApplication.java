@@ -117,9 +117,6 @@ public class OsmandApplication extends Application {
 
 	SQLiteAPI sqliteAPI;
 	BRouterServiceConnection bRouterServiceConnection;
-
-	MapActivity mapActivity;
-	DownloadActivity downloadActivity;
 	
 	// Typeface
 	
@@ -915,19 +912,5 @@ public class OsmandApplication extends Application {
 		}		
 	}
 
-	public MapActivity getMapActivity() {
-		return mapActivity;
-	}
 
-	public void setMapActivity(MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
-	}
-	
-	public void setDownloadActivity(DownloadActivity downloadActivity) {
-		this.downloadActivity = downloadActivity;
-	}
-	
-	public DownloadActivity getDownloadActivity() {
-		return downloadActivity;
-	}
 }

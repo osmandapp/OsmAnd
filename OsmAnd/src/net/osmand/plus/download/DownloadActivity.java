@@ -171,7 +171,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		getMyApplication().setDownloadActivity(this);
+		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
 	}
 
 
@@ -208,7 +208,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 	@Override
 	public void onPause() {
 		super.onPause();
-		(getMyApplication()).setDownloadActivity(null);
+		getMyApplication().getAppCustomization().pauseActivity(DownloadActivity.class);
 	}
 
 	@Override

@@ -152,4 +152,10 @@ public class OsmAndAppCustomization {
 		return false;
 	}
 
+	public <T> void resumeActivity(Class<T> class1, T d) {
+	}
+	
+	public <T> void pauseActivity(Class<T> class1) {
+	}
+
 }

@@ -12,17 +12,17 @@ import net.osmand.AndroidUtils;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Build;
@@ -202,13 +202,27 @@ public class FavoriteDialogs {
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
+				final FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
 				OsmandApplication app = (OsmandApplication) activity.getApplication();
 				String categoryStr = cat.getText().toString().trim();
 				final FavouritesDbHelper helper = app.getFavorites();
 				app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(categoryStr);
 				point.setName(editText.getText().toString().trim());
 				point.setCategory(categoryStr);
+				Builder bld = FavouritesDbHelper.checkDublicates(point, helper, activity);
+				if(bld != null) {
+					bld.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							addFavorite(activity, point, helper);							
+						}
+					});
+				} else {
+					addFavorite(activity, point, helper);
+				}
+			}
+
+			protected void addFavorite(final Activity activity, FavouritePoint point, final FavouritesDbHelper helper) {
 				boolean added = helper.addFavourite(point);
 				if (added) {
 					AccessibleToast.makeText(activity, MessageFormat.format(
