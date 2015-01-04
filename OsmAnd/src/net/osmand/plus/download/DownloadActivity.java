@@ -217,8 +217,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		getMyApplication().setDownloadActivity(this);
-		BasicProgressAsyncTask<?, ?, ?> t = downloadListIndexThread.getCurrentRunningTask();
+		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
 	}
 
 
@@ -289,7 +288,7 @@ public class DownloadActivity extends SherlockFragmentActivity {
 	@Override
 	public void onPause() {
 		super.onPause();
-		(getMyApplication()).setDownloadActivity(null);
+		getMyApplication().getAppCustomization().pauseActivity(DownloadActivity.class);
 	}
 
 	protected void downloadFilesCheckFreeVersion() {

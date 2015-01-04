@@ -152,5 +152,14 @@ public class OsmAndAppCustomization {
 
 	public boolean showNavigationControls() { return true;}
 
-	public boolean onlyTourDownload() { return false;}
+	public boolean onlyTourDownload() {
+		return false;
+	}
+
+	public <T> void resumeActivity(Class<T> class1, T d) {
+	}
+	
+	public <T> void pauseActivity(Class<T> class1) {
+	}
+
 }
