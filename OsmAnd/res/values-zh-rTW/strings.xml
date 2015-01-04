@@ -600,7 +600,7 @@
 	<string name="km_h">公里/小時</string>
 	<string name="m">公尺</string>
 	<string name="old_map_index_is_not_supported">舊地圖格式 \'\'{0}\'\' 已不支援</string>
-	<string name="poi_filter_closest_poi">最近興趣點</string>
+	<string name="poi_filter_closest_poi">最近的興趣點</string>
 	<string name="poi_filter_custom_filter">自訂篩選</string>
 	<string name="poi_filter_namefinder">線上名稱尋找</string>
 	<string name="reading_cached_tiles">正在取讀暫存地圖圖磚…</string>
@@ -748,7 +748,7 @@
 	<string name="first_time_continue">接著</string>
 	<string name="first_time_download">下載地區</string>
 	<string name="search_poi_location">搜尋訊號中…</string>
-	<string name="search_near_map">查尋上次位置附近</string>
+	<string name="search_near_map">查尋目前地圖中心附近</string>
 	<string name="search_nearby">在附近查尋</string>
 	<string name="map_orientation_default">與裝置一樣</string>
 	<string name="map_orientation_portrait">直豎</string>
