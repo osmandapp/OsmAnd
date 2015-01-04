@@ -371,20 +371,20 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	}
 	
 	public String getRoutePointDescription(double lat, double lon) {
-    	return mapActivity.getString(R.string.route_descr_lat_lon, lat, lon);
-    }
+		return mapActivity.getString(R.string.route_descr_lat_lon, lat, lon);
+	}
     
-    public String getRoutePointDescription(LatLon l, String d) {
-    	if(d != null && d.length() > 0) {
-    		return d.replace(':', ' ');
-    	}
-    	if(l != null) {
-    		return mapActivity.getString(R.string.route_descr_lat_lon, l.getLatitude(), l.getLongitude());
-    	}
-    	return "";
-    }
+	public String getRoutePointDescription(LatLon l, String d) {
+		if(d != null && d.length() > 0) {
+			return d.replace(':', ' ');
+		}
+		if(l != null) {
+			return mapActivity.getString(R.string.route_descr_lat_lon, l.getLatitude(), l.getLongitude());
+		}
+		return "";
+	}
     
-    private Spinner setupFromSpinner( View view) {
+	private Spinner setupFromSpinner( View view) {
 		ArrayList<String> fromActions = new ArrayList<String>();
 		fromActions.add(mapActivity.getString(R.string.route_descr_current_location));
 		fromActions.add(mapActivity.getString(R.string.route_descr_favorite));
@@ -414,8 +414,8 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		return fromSpinner;
 	}
     
-    private Spinner setupToSpinner(View view) {
-    	final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
+	private Spinner setupToSpinner(View view) {
+		final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
 		final TargetPointsHelper targets = getTargets();
 		ArrayList<String> toActions = new ArrayList<String>();
 		if (targets.getPointToNavigate() != null) {
