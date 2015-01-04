@@ -151,7 +151,7 @@
   <string name="search_position_undefined">Indefinido</string>
   <string name="search_position_fixed">Corregido</string>
   <string name="search_position_current_location">Posición actual…</string>
-  <string name="search_position_map_view">Última vista del mapa</string>
+  <string name="search_position_map_view">Centro del mapa actual</string>
   <string name="select_search_position">Origen:</string>
   <string name="context_menu_item_search">Busca cerca de aquí</string>
   <string name="tip_recent_changes_0_6_7_t">"Cambios en 0.6.7 : \n\t- Gestor de datos descargados (descargar, borrar, activar/desactivar datos descargados directamente en OsmAnd) \n\t- Puntos y grupos favoritos (categorizar, borrar, gestionar favoritos) \n\t- Explorador de GPX en la aplicación (ver detalle del trayecto, distancia, velocidad media, elevación, etc.) \n\t- Navegación GPX (más opciones, continuar la navegación tras un fallo de aplicación, soportar rotondas) \n\t- Función para guardar la ruta como traza GPX para uso sin conexión \n\t- Mejora de la monitorización GPX (filtra alguna posición incorrecta y guarda precisión/elevación/velocidad) \n\t- Envía GPX a la comunidad OSM (http://download.osmand.net/gpx/) \n\t- Mejora del dibujo vectorial \n\t- Mejora del motor TTS (anuncia la distancia exacta, permite millas) \n\t- Arreglo de fallos "</string>
@@ -350,7 +350,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">No se soporta el formato \'\'{0}\'\' de datos obsoletos</string>
   <string name="poi_filter_car_aid">Asistencia de automóvil</string>
-  <string name="poi_filter_closest_poi">PDI más cercano</string>
+  <string name="poi_filter_closest_poi">PDIs más cercanos</string>
   <string name="poi_filter_custom_filter">Filtro propio</string>
   <string name="poi_filter_food_shop">Tienda de comida</string>
   <string name="poi_filter_for_tourists">Para turistas</string>
@@ -505,7 +505,7 @@
   <string name="first_time_msg">Gracias por elegir OsmAnd.
 Para poder usar muchas características de la aplicación necesitas algunos datos regionales, que puedes descargar vía \'Opciones\' → \'Gestionar mapas\'. Después, podrás ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
   <string name="search_poi_location">Buscando señal…</string>
-  <string name="search_near_map">Buscar cerca de la última localización</string>
+  <string name="search_near_map">Buscar cerca del dentro del centro del mapa</string>
   <string name="search_nearby">Buscar cercanos</string>
   <string name="map_orientation_default">Según dispositivo</string>
   <string name="map_orientation_portrait">Vertical</string>
@@ -1236,7 +1236,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="favourites_list_activity">Selecciona favorito</string>
     <string name="local_openstreetmap_act_title">Modificaciones OSM</string>
     <string name="default_buttons_other_actions">Otras acciones</string>
-    <string name="use_kalman_filter_compass_descr">Utiliza el filtro Kalman para evitar aberraciones de la brújula</string>
+    <string name="use_kalman_filter_compass_descr">Reduce el ruido en las lecturas de la brújula pero añade inercia</string>
     <string name="use_kalman_filter_compass">Usar filtro Kalman</string>
     <string name="access_mark_final_location_first">Modo Accesibilidad: seleccione el destino primero</string> 
     <string name="use_magnetic_sensor_descr">Utiliza el sensor magnético para determinar el valor de la brújula en vez del sensor de orientación</string>
