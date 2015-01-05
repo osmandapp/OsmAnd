@@ -781,8 +781,24 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 				//TODO: Hardy: The arrow direction below is correct only for the default display's standard orientation
 				//      i.e. still needs to be corrected for .ROTATION_90/180/170
-				//	Keep in mind: getRotation was introduced from Android 2.2
-				draw.setAngle(mes[1] - a + 180);
+				//TODO: API<8 use getOrientation() here
+				int screenOrientation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+				private static final int ORIENTATION_0 = 0;
+				private static final int ORIENTATION_90 = 3;
+				private static final int ORIENTATION_270 = 1;
+				switch (screenOrientation)
+				{
+				case ORIENTATION_0:   // Portrait
+					screenOrientation = 0;
+					break;
+				case ORIENTATION_90:  // Landscape right
+					screenOrientation = 90;
+					break;
+				case ORIENTATION_270: // Landscape left
+					screenOrientation = 270;
+					break;
+				}
+				draw.setAngle(mes[1] - a + 180 + screenOrientation);
 
 				draw.setOpenedColor(opened);
 				direction.setImageDrawable(draw);
