@@ -178,7 +178,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 				} else if(position == 1) {
 					selectFavorite(parentView, false);
 				} else if(position == 2) {
-					(parentView, false);
+					selectOnScreen(parentView, false);
 				}				
 			}
 
