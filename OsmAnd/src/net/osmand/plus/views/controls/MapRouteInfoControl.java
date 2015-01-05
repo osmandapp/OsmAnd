@@ -75,10 +75,12 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		if(selectFromMapTouch) {
 			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
 			selectFromMapTouch = false;
-		//TODO: Hardy: Looks like there is a small bug here somewhere: Re-selecting the "From" or "To" point during an ongoing route calculation (and only then) seems to (sometimes?) only interrupt the ongoing route calculation, but not restart it again with the new points
 			if(selectFromMapForTarget) {
 				getTargets().navigateToPoint(latlon, true, -1);
 			} else {
+		//TODO: Hardy: Looks like there is a small bug somewhere: Re-selecting the "From" or "To" point during an ongoing route calculation (and only then) seems to only interrupt the ongoing route calculation. but not restart it, if (and only if) a route origin other than "Current position" is set. (Looks like this case is treated like a mere position update in our RoutingHelper, so normally no complete re-calculation is needed.)
+		//So let's see if we can trigger route-recalculation duing an ongoing calculation by the inserting the following line
+				getTargets().clearStartPoint(true);
 				getTargets().setStartPoint(latlon, true, null);
 			}
 			contextMenu.setLocation(latlon, null);
