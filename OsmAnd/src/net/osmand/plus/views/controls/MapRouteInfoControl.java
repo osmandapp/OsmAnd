@@ -73,7 +73,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if(selectFromMapTouch) {
-			LatLon latlon = new LatLon(tileBox.getLatLonFromPixel(point.x, point.y));
+			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
 			selectFromMapTouch = false;
 		//TODO: Hardy: Looks like there is a small bug here somewhere: Re-selecting the "From" or "To" point during an ongoing route calculation (and only then) seems to (sometimes?) only interrupt the ongoing route calculation, but not restart it again with the new points
 			if(selectFromMapForTarget) {
