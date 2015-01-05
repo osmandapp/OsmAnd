@@ -594,9 +594,9 @@
 	<string name="poi_seamark_harbour">Гавань</string>
 	<string name="poi_seamark_mooring">Прычал</string>
 	<string name="poi_seamark_notice">Апавяшчэньне (навігацыйны знак)</string>
-	<string name="poi_seamark_radio_station">Радыёстанцыя</string>
+	<string name="poi_seamark_radio_station">Радыёстанцыя (навігацыйны знак)</string>
 	<string name="poi_seamark_signal_station_warning">Сыгнал небясьпекі</string>
-	<string name="poi_seamark_wreck">Караблекрушэньне</string>
+	<string name="poi_seamark_wreck">Караблекрушэньне (навігацыйны знак)</string>
 
 	<string name="poi_military">Ваенная зона</string>
 	<string name="poi_military_airfield">Ваенны аэрадром</string>
@@ -614,7 +614,7 @@
 	<string name="poi_roller_coaster">Амэрыканскія горкі</string>
 	<string name="poi_slide">Жолаб</string>
 	<string name="poi_summer_toboggan">Летнія сані</string>
-	<string name="poi_seamark_rock">Скала</string>
+	<string name="poi_seamark_rock">Скала (навігацыйны знак)</string>
 	<string name="poi_seamark_dry_dock">Сухі док</string>
 	<string name="poi_seamark_floating_dock">Плывучы док</string>
 	<string name="poi_tower">Вежа</string>
@@ -623,4 +623,18 @@
 	<string name="poi_aquarium">Акварыюм</string>
 	<string name="poi_seamark_buoy_isolated_danger">Буй (ізаляваная небясьпека)</string>
 	<string name="poi_seamark_buoy_lateral">Латэральны буй</string>
+	<string name="poi_seamark_dyke">Дамба</string>
+	<string name="poi_seamark_beacon_cardinal">Кардынальны бакен</string>
+	<string name="poi_seamark_beacon_lateral">Латэральны бакен</string>
+	<string name="poi_seamark_buoy_cardinal">Кардынальны буй</string>
+	<string name="poi_seamark_radar_transponder">Радыёлакацыйны транспондар (навігацыйны знак)</string>
+	<string name="poi_seamark_pile">Навігацыйны знак на палях</string>
+	<string name="poi_seamark_signal_station_traffic">Сігнальная станцыя (трафік)</string>
+	<string name="poi_seamark_topmark">Топавая фігура (навігацыйны знак)</string>
+	<string name="poi_seamark_building">Будынак (арыентыр)</string>
+	<string name="poi_seamark_bridge">Мост (арыентыр)</string>
+	<string name="poi_seamark_buoy_safe_water">Бясьпечная вада (буй)</string>
+	<string name="poi_seamark_beacon_safe_water">Бясьпечная вада (бакен)</string>
+	<string name="poi_seamark_harbour_basin">Акваторыя порту</string>
+	<string name="poi_seamark_landmark">Берагавы знак</string>
 	</resources>
