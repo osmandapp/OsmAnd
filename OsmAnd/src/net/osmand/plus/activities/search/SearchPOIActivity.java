@@ -345,6 +345,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		} else if(isSearchByNameFilter() ){
 			searchFilterLayout.setVisibility(View.VISIBLE);
 		}
+		//Freeze the direction arrows (reference is constant north) when Accessibility mode = ON, so screen can be read aloud without continuous updates
 		if(!app.accessibilityEnabled()) {
 			app.getLocationProvider().addCompassListener(this);
 			app.getLocationProvider().registerOrUnregisterCompassListener(true);
