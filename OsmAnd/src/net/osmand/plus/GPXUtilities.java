@@ -88,6 +88,7 @@ public class GPXUtilities {
 		public double lon;
 		public String name = null;
 		public String link = null;
+		// previous undocumented feature 'category' ,now 'type'
 		public String category = null;
 		public String desc = null;
 		// by default
@@ -760,7 +761,7 @@ public class GPXUtilities {
 			serializer.attribute(null, "link", p.link);
 			serializer.endTag(null, "link");
 		}
-		writeNotNullText(serializer, "category", p.category);
+		writeNotNullText(serializer, "type", p.category);
 		if (!Double.isNaN(p.hdop)) {
 			writeNotNullText(serializer, "hdop", p.hdop + "");
 		}
@@ -925,6 +926,10 @@ public class GPXUtilities {
 								((WptPt) parse).link = parser.getAttributeValue("", "href");
 							} else if (tag.equals("category")) {
 								((WptPt) parse).category = readText(parser, "category");
+							} else if (tag.equals("type")) {
+								if(((WptPt) parse).category == null) {
+									((WptPt) parse).category = readText(parser, "type");
+								}
 							} else if (parser.getName().equals("ele")) {
 								String text = readText(parser, "ele");
 								if (text != null) {
