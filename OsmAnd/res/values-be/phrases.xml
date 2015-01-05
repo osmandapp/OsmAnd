@@ -617,4 +617,10 @@
 	<string name="poi_seamark_rock">Скала</string>
 	<string name="poi_seamark_dry_dock">Сухі док</string>
 	<string name="poi_seamark_floating_dock">Плывучы док</string>
+	<string name="poi_tower">Вежа</string>
+	<string name="poi_mast">Шчогла</string>
+	<string name="poi_radar">Радар</string>
+	<string name="poi_aquarium">Акварыюм</string>
+	<string name="poi_seamark_buoy_isolated_danger">Буй (ізаляваная небясьпека)</string>
+	<string name="poi_seamark_buoy_lateral">Латэральны буй</string>
 	</resources>
