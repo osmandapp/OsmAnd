@@ -637,4 +637,11 @@
 	<string name="poi_seamark_beacon_safe_water">Бясьпечная вада (бакен)</string>
 	<string name="poi_seamark_harbour_basin">Акваторыя порту</string>
 	<string name="poi_seamark_landmark">Берагавы знак</string>
+	<string name="poi_seamark_light">Агонь маяка</string>
+	<string name="poi_seamark_daymark">Дзённы знак</string>
+	<string name="poi_seamark_light_major">Асноўны агонь маяка</string>
+	<string name="poi_seamark_light_minor">Малы агонь маяка</string>
+	<string name="poi_seamark_light_float">Агонь плывучага маяка</string>
+	<string name="poi_seamark_distance_mark">Пазнака дальнасьці</string>
+	<string name="poi_seamark_light_vessel">Агонь плывучага маяка (судна)</string>
 	</resources>
