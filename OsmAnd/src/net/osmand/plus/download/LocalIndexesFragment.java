@@ -841,6 +841,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				}
 			}
 			listAdapter.notifyDataSetChanged();
+			expandAllGroups();
 		}
 
 		public void cancelFilter(){
