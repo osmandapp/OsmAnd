@@ -108,6 +108,10 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private static final int SHOW_ON_MAP = 1;
 	private static final int FILTER = 2;
 
+	private static final int ORIENTATION_0 = 0;
+	private static final int ORIENTATION_90 = 3;
+	private static final int ORIENTATION_270 = 1;
+
 	private PoiFilter filter;
 	private AmenityAdapter amenityAdapter;
 	private EditText searchFilter;
@@ -779,13 +783,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				Float h = heading;
 				float a = h != null ? h : 0;
 
-				//TODO: Hardy: The arrow direction below is correct only for the default display's standard orientation
-				//      i.e. still needs to be corrected for .ROTATION_90/180/170
-				//TODO: API<8 use getOrientation() here
+				//TODO: Hardy: The arrow direction below is needs orrection for screen rotation if device's screen orientation switch is on (then correct only for the default display's standard orientation)
+				//TODO: Instead of getRotation() in API<8 use getOrientation() here:
 				int screenOrientation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
-				private static final int ORIENTATION_0 = 0;
-				private static final int ORIENTATION_90 = 3;
-				private static final int ORIENTATION_270 = 1;
 				switch (screenOrientation)
 				{
 				case ORIENTATION_0:   // Portrait
