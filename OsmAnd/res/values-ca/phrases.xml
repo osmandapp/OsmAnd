@@ -226,4 +226,14 @@
 	<string name="poi_doctors">Centre mèdic</string>
 	<string name="poi_clinic">Clínica</string>
 	<string name="poi_first_aid">Primers auxilis</string>
+	<string name="poi_survey_point">Vèrtex geodèsic</string>
+	<string name="poi_windmill">Molí de vent</string>
+	<string name="poi_veterinary">Veterinari</string>
+	<string name="poi_healthcare_alternative">Medicina alternativa</string>
+	<string name="poi_audiologist">Audiòleg</string>
+	<string name="poi_blood_bank">Banc de sang</string>
+	<string name="poi_healthcare_centre">Centre mèdic</string>
+	<string name="poi_midwife">Llevadora</string>
+	<string name="poi_occupational_therapist">Terapeuta ocupacional</string>
+	<string name="poi_optometrist">Optometrista</string>
 	</resources>
