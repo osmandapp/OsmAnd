@@ -317,7 +317,7 @@ public class FavouritesDbHelper {
 		return false;
 	}
 
-	private File getExternalFile() {
+	public File getExternalFile() {
 		return new File(context.getAppPath(null), FILE_TO_SAVE);
 	}
 	
