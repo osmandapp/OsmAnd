@@ -185,8 +185,8 @@ public class DashFavoritesFragment extends DashBaseFragment {
 
 		//Hardy: getRotation() is the correction if device's screen orientation != the default display's standard orientation
 		//TODO:  getOrientation() needs to be used for API<8, deprecated after that
-		//int screenOrientation = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
-	int screenOrientation = 0;
+		int screenOrientation = 0;
+		//screenOrientation = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 		switch (screenOrientation)
 		{
 		case ORIENTATION_0:   // Portrait
