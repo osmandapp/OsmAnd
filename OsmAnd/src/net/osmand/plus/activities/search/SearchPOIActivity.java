@@ -783,8 +783,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				Float h = heading;
 				float a = h != null ? h : 0;
 
-				//TODO: Hardy: The arrow direction below is needs orrection for screen rotation if device's screen orientation switch is on (then correct only for the default display's standard orientation)
-				//TODO: Instead of getRotation() in API<8 use getOrientation() here:
+				//Hardy: getRotation() is the correction if device's screen orientation != the default display's standard orientation
+				//TODO:  getOrientation() needs to be used for API<8, deprecated after that
 				int screenOrientation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 				switch (screenOrientation)
 				{
