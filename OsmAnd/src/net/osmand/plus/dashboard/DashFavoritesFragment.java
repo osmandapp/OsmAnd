@@ -211,6 +211,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 	public void updateCompassValue(float value) {
 		//heading = value;
 		//updateArrows();
+		//99 in next line used to one-time initalize arrows (with reference vs. fixed-north direction) on non-compass devices
 		float lastHeading = heading != null ? heading : 99;
 		heading = value;
 		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
