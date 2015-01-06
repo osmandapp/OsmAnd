@@ -206,8 +206,8 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		}
 
 		//Looks like screenOrientation correction must not be applied for devices without compass?
-		Sensor s  = ((SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-		if (s == null) {
+		Sensor compass  = ((SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+		if (compass == null) {
 			screenOrientation = 0;
 		}
 

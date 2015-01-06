@@ -807,8 +807,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				}
 
 				//Looks like screenOrientation correction must not be applied for devices without compass?
-				Sensor s  = ((SensorManager) getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-				if (s == null) {
+				Sensor compass  = ((SensorManager) getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+				if (compass == null) {
 					screenOrientation = 0;
 				}
 
