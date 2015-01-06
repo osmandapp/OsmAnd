@@ -51,6 +51,7 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.SensorManager;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
@@ -787,7 +788,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 				//Hardy: getRotation() is the correction if device's screen orientation != the default display's standard orientation
 				//TODO:  getOrientation() needs to be used for API<8, deprecated after that
-				//TODO:  Looks like screenOrientation correction must always be set 0 for devices without compass?
 				int screenOrientation = 0;
 				screenOrientation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 				switch (screenOrientation)
@@ -805,6 +805,13 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					screenOrientation = 180;
 					break;
 				}
+
+				//Looks like screenOrientation correction must not be applied for devices without compass?
+				Sensor s  = ((SensorManager) getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+				if (s == null) {
+					screenOrientation = 0;
+				{
+
 				draw.setAngle(mes[1] - a + 180 + screenOrientation);
 
 				draw.setOpenedColor(opened);

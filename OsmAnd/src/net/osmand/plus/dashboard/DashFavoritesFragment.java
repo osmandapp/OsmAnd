@@ -3,6 +3,7 @@ package net.osmand.plus.dashboard;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.SensorManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -186,7 +187,6 @@ public class DashFavoritesFragment extends DashBaseFragment {
 
 		//Hardy: getRotation() is the correction if device's screen orientation != the default display's standard orientation
 		//TODO:  getOrientation() needs to be used for API<8, deprecated after that
-		//TODO:  Looks like screenOrientation correction must always be set 0 for devices without compass?
 		int screenOrientation = 0;
 		screenOrientation = ((WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 		switch (screenOrientation)
@@ -204,6 +204,13 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			screenOrientation = 180;
 			break;
 		}
+
+		//Looks like screenOrientation correction must not be applied for devices without compass?
+		Sensor s  = ((SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+		if (s == null) {
+			screenOrientation = 0;
+		{
+
 		draw.setAngle(mes[1] - a + 180 + screenOrientation);
 
 		direction.setImageDrawable(draw);
