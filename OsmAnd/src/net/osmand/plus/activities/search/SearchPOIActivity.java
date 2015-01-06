@@ -787,6 +787,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 				//Hardy: getRotation() is the correction if device's screen orientation != the default display's standard orientation
 				//TODO:  getOrientation() needs to be used for API<8, deprecated after that
+				//TODO:  Looks like screenOrientation correction must always be set 0 for devices without compass?
 				int screenOrientation = 0;
 				screenOrientation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 				switch (screenOrientation)
