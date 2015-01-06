@@ -1,6 +1,7 @@
 package net.osmand.plus.dashboard;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
