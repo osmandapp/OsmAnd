@@ -305,6 +305,7 @@ public class MapRenderingTypes {
 			rType.poiSpecified = parent.poiSpecified;
 			rType.poiCategory = parent.poiCategory;
 			rType.poiPrefix = parent.poiPrefix;
+			rType.poiWithNameOnly = parent.poiWithNameOnly;
 			rType.namePrefix = parent.namePrefix;
 			rType = registerRuleType(rType);
 		}
@@ -375,15 +376,15 @@ public class MapRenderingTypes {
 		return null;
 	}
 	
-	public AmenityType getAmenityType(String tag, String val){
-		return getAmenityType(tag, val, false);
+	public AmenityType getAmenityType(String tag, String val, boolean hasName){
+		return getAmenityType(tag, val, false, hasName);
 	}
 	
-	public AmenityType getAmenityTypeForRelation(String tag, String val){
-		return getAmenityType(tag, val, true);
+	public AmenityType getAmenityTypeForRelation(String tag, String val, boolean hasName){
+		return getAmenityType(tag, val, true, hasName);
 	}
 	
-	private AmenityType getAmenityType(String tag, String val, boolean relation){
+	private AmenityType getAmenityType(String tag, String val, boolean relation, boolean hasName){
 		// register amenity types
 		Map<String, MapRulType> rules = getEncodingRuleTypes();
 		MapRulType rt = rules.get(constructRuleKey(tag, val));
@@ -391,11 +392,17 @@ public class MapRenderingTypes {
 			if((relation && !rt.relation) || rt.isAdditionalOrText()) {
 				return null;
 			}
+			if(rt.poiWithNameOnly && !hasName) {
+				return null;
+			}
 			return rt.poiCategory;
 		}
 		rt = rules.get(constructRuleKey(tag, null));
 		if(rt != null && rt.isPOISpecified()) {
 			if((relation && !rt.relation) || rt.isAdditionalOrText()) {
+				return null;
+			}
+			if(rt.poiWithNameOnly && !hasName) {
 				return null;
 			}
 			return rt.poiCategory;
@@ -526,6 +533,7 @@ public class MapRenderingTypes {
 				rtype.poiCategory = AmenityType.getAndRegisterType(poiCategory);
 			}
 		}
+		rtype.poiWithNameOnly = Boolean.parseBoolean(parser.getAttributeValue("", "poi_with_name"));
 		String poiPrefix = parser.getAttributeValue("", "poi_prefix");
 		if (poiPrefix != null) {
 			rtype.poiPrefix = poiPrefix;
@@ -704,6 +712,7 @@ public class MapRenderingTypes {
 		
 		protected String category = null;
 		protected String poiPrefix;
+		protected boolean poiWithNameOnly;
 		protected AmenityType poiCategory;
 		// poi_category was specially removed for one tag/value, to skip unnecessary objects
 		protected boolean poiSpecified;
