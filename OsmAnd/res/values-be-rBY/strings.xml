@@ -413,8 +413,8 @@
     <string name="android_19_location_disabled">Z viersіі 4.4 Android (KitKat) vy nia možacie zahružać і abnaŭliać mapu ŭ papiarednіm katalohu zachoŭvańnia (%s). Vy chočacie źmianіć kataloh na dazvolieny і skapіjavać usie fajly OsmAnd tudy?\n Zaŭvaha 1: Vašy staryja fajly zastanucca niekranutymі (vy možacie vydalіć іch samastojna).         
 \n Zaŭvaha 2: U novym miescy zachoŭvańnia budzie niemahčyma adnačasova vykarystoŭvać fajly ŭ OsmAnd і OsmAnd+.</string>
     <string name="copying_osmand_one_file_descr">Kapіravańnie fajla (%s) u novaje miesca…</string>
-    <string name="copying_osmand_files_descr">Kapіjavańnie dadzienych OsmAnd u novaje miesca (%s)</string>
-    <string name="copying_osmand_files">Kapіjavańnie dadzienych OsmAnd</string>
+    <string name="copying_osmand_files_descr">Kapіjavańnie dadzienych OsmAnd u novaje miesca (%s)…</string>
+    <string name="copying_osmand_files">Kapіjavańnie dadzienych OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">Raźlіčyć pazasiecіŭny maršrut OsmAnd</string>
     <string name="app_mode_truck">Hruzavіk</string>
     <string name="guidance_preferences_descr">Navіhacyjnyja nastrojkі</string>
@@ -1307,8 +1307,7 @@
 	<string name="gpx_option_reverse_route">Razviarnuć kіrunak GPX</string>
 	<string name="gpx_option_destination_point">Vykarystoŭvać biahučy punkt pryznačeńnia</string>
 	<string name="gpx_option_from_start_point">Prajścі ŭvieś šliach spačatku</string>
-	<string name="switch_to_vector_map_to_see">Dlia hetaj pazіcyі dastupnyja lakaĺnyja viektarnyja mapy.\n\t\n\tDlia іch vykarystańnia abiarycie punkt mieniu
-\nalada mapy &gt; rynіca mapy... &gt; akaĺnyja viektarnyja mapy</string>
+	<string name="switch_to_vector_map_to_see">Dlia hetaj pazіcyі dastupnyja lakaĺnyja viektarnyja mapy.\n\t\n\tDlia іch vykarystańnia abiarycie punkt meniu Nalada mapy &gt; Krynіca mapy... &gt; Lakaĺnyja vektarnyja mapy.</string>
 	<string name="choose_audio_stream">Vyvad halasavych padkazak</string>
 	<string name="choose_audio_stream_descr">Abiarycie kanal prajhravańnia halasavych padkazak</string>
 	<string name="voice_stream_voice_call">Kanal tieliefanavańnia</string>
