@@ -216,7 +216,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		direction.setImageDrawable(draw);
 	}
 
-	public void updateArrows(float value) {
+	public void updateCompassValue(float value) {
 		//heading = value;
 		//updateArrows();
 		//99 in next line used to one-time initalize arrows (with reference vs. fixed-north direction) on non-compass devices
