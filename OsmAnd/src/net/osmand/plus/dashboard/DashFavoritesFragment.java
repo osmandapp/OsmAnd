@@ -10,6 +10,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,6 +40,11 @@ public class DashFavoritesFragment extends DashBaseFragment {
 	private net.osmand.Location location = null;
 	private LatLon loc = null;
 	private Float heading = null;
+
+	private static final int ORIENTATION_0 = 0;
+	private static final int ORIENTATION_90 = 3;
+	private static final int ORIENTATION_270 = 1;
+
 	private List<ImageView> arrows = new ArrayList<ImageView>();
 	List<FavouritePoint> points = new ArrayList<FavouritePoint>();
 
@@ -176,10 +182,22 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		Float h = heading;
 		float a = h != null ? h : 0;
 
-		//TODO: Hardy: The arrow direction below is correct only for the default display's standard orientation
-		//      i.e. still needs to be corrected for .ROTATION_90/180/170
-		//	Keep in mind: getRotation was introduced from Android 2.2
-		draw.setAngle(mes[1] - a + 180);
+		//Hardy: getRotation() is the correction if device's screen orientation != the default display's standard orientation
+		//TODO:  getOrientation() needs to be used for API<8, deprecated after that
+		int screenOrientation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+		switch (screenOrientation)
+		{
+		case ORIENTATION_0:   // Portrait
+			screenOrientation = 0;
+			break;
+		case ORIENTATION_90:  // Landscape right
+			screenOrientation = 90;
+			break;
+		case ORIENTATION_270: // Landscape left
+			screenOrientation = 270;
+			break;
+		}
+		draw.setAngle(mes[1] - a + 180 + screenOrientation);
 
 		direction.setImageDrawable(draw);
 	}
