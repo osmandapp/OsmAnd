@@ -209,7 +209,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		Sensor s  = ((SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 		if (s == null) {
 			screenOrientation = 0;
-		{
+		}
 
 		draw.setAngle(mes[1] - a + 180 + screenOrientation);
 
