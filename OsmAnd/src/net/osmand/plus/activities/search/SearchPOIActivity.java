@@ -108,9 +108,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private static final int SHOW_ON_MAP = 1;
 	private static final int FILTER = 2;
 
-	private static final int ORIENTATION_0 = 0;     // Portrait
-	private static final int ORIENTATION_90 = 90;   // Landscape right
-	private static final int ORIENTATION_270 = 270; // Landscape left
+	private static final int ORIENTATION_0 = 0;
+	private static final int ORIENTATION_90 = 3;
+	private static final int ORIENTATION_270 = 1;
 
 	private PoiFilter filter;
 	private AmenityAdapter amenityAdapter;
@@ -787,6 +787,18 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				//TODO:  getOrientation() needs to be used for API<8, deprecated after that
 				int screenOrientation = 0;
 				screenOrientation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+				switch (screenOrientation)
+				{
+				case ORIENTATION_0:   // Portrait
+					screenOrientation = 0;
+					break;
+				case ORIENTATION_90:  // Landscape right
+					screenOrientation = 90;
+					break;
+				case ORIENTATION_270: // Landscape left
+					screenOrientation = 270;
+					break;
+				}
 				draw.setAngle(mes[1] - a + 180 + screenOrientation);
 
 				draw.setOpenedColor(opened);
