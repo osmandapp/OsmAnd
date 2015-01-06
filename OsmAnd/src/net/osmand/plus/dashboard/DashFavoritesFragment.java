@@ -3,6 +3,7 @@ package net.osmand.plus.dashboard;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -206,10 +207,10 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		}
 
 		//Looks like screenOrientation correction must not be applied for devices without compass?
-	//	Sensor s  = ((SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-	//	if (s == null) {
-	//		screenOrientation = 0;
-	//	}
+		Sensor s  = ((SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+		if (s == null) {
+			screenOrientation = 0;
+		}
 
 		draw.setAngle(mes[1] - a + 180 + screenOrientation);
 
