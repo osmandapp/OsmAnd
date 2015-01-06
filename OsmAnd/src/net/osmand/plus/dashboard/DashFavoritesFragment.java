@@ -45,6 +45,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 	private static final int ORIENTATION_0 = 0;
 	private static final int ORIENTATION_90 = 3;
 	private static final int ORIENTATION_270 = 1;
+	private static final int ORIENTATION_180 = 2;
 
 	private List<ImageView> arrows = new ArrayList<ImageView>();
 	List<FavouritePoint> points = new ArrayList<FavouritePoint>();
@@ -189,7 +190,7 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		screenOrientation = ((WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 		switch (screenOrientation)
 		{
-		case ORIENTATION_0:   // Portrait
+		case ORIENTATION_0:   // Device default (normally portrait)
 			screenOrientation = 0;
 			break;
 		case ORIENTATION_90:  // Landscape right
@@ -197,6 +198,9 @@ public class DashFavoritesFragment extends DashBaseFragment {
 			break;
 		case ORIENTATION_270: // Landscape left
 			screenOrientation = 270;
+			break;
+		case ORIENTATION_180: // Upside down
+			screenOrientation = 180;
 			break;
 		}
 		draw.setAngle(mes[1] - a + 180 + screenOrientation);
