@@ -617,6 +617,7 @@ public class MapRenderingTypes {
 			rtype.poiCategory = AmenityType.getAndRegisterType(poiParentCategory);
 			rtype.poiSpecified = true;
 			rtype.relation = Boolean.parseBoolean(parser.getAttributeValue("", "relation"));
+			rtype.poiWithNameOnly = Boolean.parseBoolean(parser.getAttributeValue("", "poi_with_name"));
 			rtype.poiPrefix = poiParentPrefix;
 			rtype.onlyPoi = true;
 			rtype.tagValuePattern = new TagValuePattern(poi_tag, null);
