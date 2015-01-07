@@ -20,7 +20,9 @@ import net.osmand.data.QuadPoint;
  */
 public class MapUtils {
 	
-	private static final String BASE_SHORT_OSM_URL = "http://osm.org/go/";
+    // TODO change the hostname back to osm.org once HTTPS works for it
+    // https://github.com/openstreetmap/operations/issues/2
+    private static final String BASE_SHORT_OSM_URL = "https://openstreetmap.org/go/";
 	
 	/**
      * This array is a lookup table that translates 6-bit positive integer
