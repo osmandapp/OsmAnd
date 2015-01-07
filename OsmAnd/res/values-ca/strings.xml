@@ -1166,7 +1166,7 @@
     <string name="distance_measurement_save_gpx">Desa com a GPX</string>
     <string name="distance_measurement_load_gpx">Obre un fitxer GPX existent</string>
     <string name="wait_current_task_finished">Espereu fins que finalitzi la tasca actual</string>
-    <string name="use_kalman_filter_compass_descr">Utilitzeu el filtre Kalman per evitar interferències a la brúixola</string>
+    <string name="use_kalman_filter_compass_descr">Allisat de la brúixola per estabilitzar lectures afegint inèrcia</string>
     <string name="use_kalman_filter_compass">Usa el filtre Kalman</string>
     <string name="access_mark_final_location_first">Mode d\'accessibilitat: seleccioneu primer la destinació</string> 
     <string name="use_magnetic_sensor_descr">Podeu usar el sensor magnètic per determinar el valor la brúixola en comptes del sensor d\'orientació</string>
