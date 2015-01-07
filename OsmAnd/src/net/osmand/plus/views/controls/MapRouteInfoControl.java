@@ -85,12 +85,14 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 					//if (!routingHelper.isRouteBeingCalculated()) {
 					//	getTargets().setStartPoint(latlon, true, null);
 					//}
-					//or like this:
-					//	routingHelper.recalculateRouteDueToSettingsChange();
 					//-----------------
 			}
 			contextMenu.setLocation(latlon, null);
 			showDialog();
+				//-Test code only--
+				//Try force resuming route re-caculation if stopped due to Issue2515
+				routingHelper.recalculateRouteDueToSettingsChange();
+				//-----------------
 			return true;
 		}
 		return super.onSingleTap(point, tileBox);
