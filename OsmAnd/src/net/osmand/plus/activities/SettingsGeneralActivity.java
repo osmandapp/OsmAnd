@@ -258,7 +258,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		registerListPreference(settings.PREFERRED_LOCALE, screen, entries, entrieValues);
 		// Display "Device language" in Latin for all non-en languages
 		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
-			((ListPreference) screen.findPreference(settings.PREFERRED_LOCALE.getId())).setTitle(R.string.preferred_locale + " (" + R.string.preferred_locale_no_translate + ")");
+			((ListPreference) screen.findPreference(settings.PREFERRED_LOCALE.getId())).setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
 		}
 	}
 
