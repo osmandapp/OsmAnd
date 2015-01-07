@@ -1860,4 +1860,5 @@
     <string name="routing_attr_no_new_routing_name">Sense preferències de navegació v1.9</string>
     <string name="routing_attr_no_new_routing_description">No feu ús de les preferències de navegació introduïdes a la v1.9</string>
     <string name="speak_pedestrian">Anuncia els passos de zebra</string>
-    </resources>
+    <string name="rendering_value__name">Renderització per defecte</string>
+	</resources>
