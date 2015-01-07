@@ -2001,7 +2001,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="everything_up_to_date">Všetky súbory sú aktuálne</string>
     <string name="use_opengl_render">Použiť vykresľovanie OpenGL</string>
     <string name="use_opengl_render_descr">Použiť hardvérovo urýchľované vykresľovanie pomocou OpenGL (nemusí na niektorých zariadeniach fungovať)</string>
-    <string name="no_internet_connection">Sťahovanie nie je možné, prosím pripojte sa na WiFi, aby bolo možné pokračovať.</string>
+    <string name="no_internet_connection">Sťahovanie nie je možné, prosím skontrolujte pripojenie na Internet.</string>
     <string name="navigate_point_zone">Zóna</string>
     <string name="download_tab_downloads">Všetky sťahovania</string>
     <string name="download_tab_updates">Aktualizácie</string>
