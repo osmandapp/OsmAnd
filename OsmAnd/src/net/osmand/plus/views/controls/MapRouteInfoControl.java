@@ -82,8 +82,8 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 
 
 		//Next few lines temporarily only to test something about app behavior
-		if(getMyApplication().getLocationProvider().getLocationSimulation().isRouteAnimating()) {
-			getMyApplication().getLocationProvider().getLocationSimulation().startStopRouteAnimation(mapActivity);
+		if(mapActivity.getMyApplication().getLocationProvider().getLocationSimulation().isRouteAnimating()) {
+			mapActivity.getMyApplication().getLocationProvider().getLocationSimulation().startStopRouteAnimation(mapActivity);
 		}
 		routingHelper.getVoiceRouter().interruptRouteCommands();
 		routingHelper.clearCurrentRoute(null, new ArrayList<LatLon>());
