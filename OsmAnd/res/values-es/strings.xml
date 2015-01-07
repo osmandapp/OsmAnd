@@ -1886,4 +1886,5 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="navigate_point_easting">Al este</string>
     <string name="navigate_point_northing">Al norte</string>
     <string name="speak_pedestrian">Anunciar pasos de peatones</string>
-    </resources>
+    <string name="rendering_value__name">Por defecto</string>
+	</resources>
