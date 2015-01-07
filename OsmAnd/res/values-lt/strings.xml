@@ -340,7 +340,7 @@
   <string name="search_position_undefined">Nenurodyta</string>
   <string name="search_position_fixed"/>
   <string name="search_position_current_location">Esama vieta…</string>
-  <string name="search_position_map_view">Paskutinė žiūrėta žemėlapio vieta</string>
+  <string name="search_position_map_view">Esamo žemėlapio centras</string>
   <string name="select_search_position">Pradžia:</string>
   <string name="context_menu_item_search">Ieškoti netoliese nuo čia</string>
   <string name="tip_recent_changes_0_6_7_t">Pakeitimai 0.6.7 versijoje : 
