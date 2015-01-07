@@ -235,8 +235,8 @@
   <string name="show_gpx_route">Toon op kaart</string>
   <string name="poi_filter_nominatim">Online (Nominatim)</string>
   <string name="search_position_current_location">Huidige positie…</string>
-  <string name="search_position_map_view">Laatste kaartweergave</string>
-  <string name="select_search_position">Zoek in de buurt van:</string>
+  <string name="search_position_map_view">Midden van kaart</string>
+  <string name="select_search_position">Startpunt:</string>
   <string name="context_menu_item_search">Zoek hier dichtbij</string>
   <string name="tip_recent_changes_0_6_7_t">Recent wijzigingen for 0.6.7:
 		\n\t- Offline gegevensmanager (download, verwijder, activeer / deactiveer offline gegevens direct vanuit OsmAnd)
@@ -451,7 +451,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Verouderd kaartformaat \'\'{0}\'\' wordt niet ondersteund</string>
   <string name="poi_filter_car_aid">Auto hulp</string>
-  <string name="poi_filter_closest_poi">Interessepunten dichtbij</string>
+  <string name="poi_filter_closest_poi">POI in de omgeving</string>
   <string name="poi_filter_custom_filter">Eigen filter</string>
   <string name="poi_filter_food_shop">Eten en drinken (winkel)</string>
   <string name="poi_filter_for_tourists">Voor toeristen</string>
@@ -514,7 +514,7 @@
   <string name="download_files">Download</string>
   <string name="context_menu_item_search_transport">Zoek openbaar vervoer</string>
   <string name="transport_searching_transport">Openbaar vervoer-resultaten (geen bestemming):</string>
-  <string name="transport_searching_route">Vervoer resultaten ({0} naar bestemming):</string>
+  <string name="transport_searching_route">Openbaar vervoer-resultaten ({0} naar bestemming):</string>
   <string name="transport_search_none">geen</string>
   <string name="transport_search_again">Opnieuw OV zoeken</string>
   <string name="map_index">Kaart</string>
@@ -602,9 +602,9 @@
   <string name="route_head">Koers</string>
   <string name="first_time_continue">Ga door</string>
   <string name="first_time_download">Download regio\'s</string>
-  <string name="first_time_msg">Om OsmAnd goed te gebruiken moet je kaartgegevens downloaden (\'Instellingen\' → \'Kaartbeheer\') of zelf aanmaken. Daarna kan je de kaart bekijken en adressen, interessepunten en openbaar vervoer opzoeken.</string>
+  <string name="first_time_msg">Om OsmAnd goed te gebruiken moet je kaartgegevens downloaden (\'Instellingen\' → \'Kaartbeheer\') of deze zelf aanmaken. Daarna kan je de kaart bekijken en adressen, interessepunten en openbaar vervoer opzoeken.</string>
   <string name="search_poi_location">Naar signaal zoeken…</string>
-  <string name="search_near_map">Zoek dichtbij de laatste kaartlocatie</string>
+  <string name="search_near_map">Zoek bij het midden van de kaart</string>
   <string name="search_nearby">Zoek dichtbij</string>
   <string name="map_orientation_default">Zelfde als apparaat-instelling</string>
   <string name="map_orientation_portrait">Portret</string>
@@ -616,14 +616,14 @@
   <string name="transport_Routes">Routes</string>
   <string name="transport_Stop">Halte</string>
   <string name="transport_stops">Haltes</string>
-  <string name="transport_search_after">Voorbij de route</string>
-  <string name="transport_search_before">Voorafgaand aan route</string>
+  <string name="transport_search_after">Aansluitende route</string>
+  <string name="transport_search_before">Voorafgaande route</string>
   <string name="transport_finish_search">Zoeken</string>
   <string name="transport_stop_to_go_out">Kies uitstaphalte</string>
   <string name="transport_to_go_after">Nog te volgen afstand</string>
   <string name="transport_to_go_before">Voorafgaande afstand</string>
   <string name="transport_stops_to_pass">Aantal haltes te gaan</string>
-  <string name="transport_route_distance">Lengte route</string>
+  <string name="transport_route_distance">Lengte van route</string>
   <string name="transport">Openbaar vervoer</string>
   <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Toon haltes openbaar vervoer op kaart</string>
@@ -1444,7 +1444,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="clear_destination">Wis bestemming</string>
     <string name="use_magnetic_sensor_descr">Gebruik magnetische sensor in plaats van oriëntatiesensor voor het kompas</string>
     <string name="use_magnetic_sensor">Gebruik magnetische sensor</string>
-    <string name="use_kalman_filter_compass_descr">Gebruik Kalman-filter om kompasafwijkingen te vermijden</string>
+    <string name="use_kalman_filter_compass_descr">Verminder storingen in het kompas (maakt de kompasweergave langzamer)</string>
     <string name="use_kalman_filter_compass">Gebruik Kalman-filter</string>
     <string name="access_mark_final_location_first">Toegankelijkheidsmodus: kies eerst een bestemming</string> 
     <string name="local_indexes_cat_srtm">Gegevens voor hoogtelijnen</string>
@@ -1612,9 +1612,9 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="app_mode_truck">Vrachtauto</string>
     <string name="android_19_location_disabled">Vanaf Android 4.4 (KitKat) kunnen kaarten niet meer worden opgeslagen in de bestaande map(%s). Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar naartoe kopiëren?\n Let op: oude bestanden blijven bestaan. U kunt ze zelf verwijderen.\n Let op: het is niet meer mogelijk bestanden te delen tussen OsmAnd en Osmand+.</string>
     <string name="application_dir_change_warning2">Wil je dat OsmAnd de bestanden naar de nieuwe map verplaatst? Als je \'Nee\' kiest, gebruikt Osmand een nieuwe, lege map.</string>
-    <string name="copying_osmand_one_file_descr">Bestand (%s) wordt gekopieerd naar de nieuwe locatie...</string>
-    <string name="copying_osmand_files_descr">OsmAnd-bestanden worden naar de nieuwe locatie gekopieerd (%s)</string>
-    <string name="copying_osmand_files">Kopieer OsmAnd-bestanden</string>
+    <string name="copying_osmand_one_file_descr">Kopieer bestand (%s) naar de nieuwe locatie…</string>
+    <string name="copying_osmand_files_descr">OsmAnd-bestanden worden naar de nieuwe locatie gekopieerd (%s)…</string>
+    <string name="copying_osmand_files">Kopieer OsmAnd-bestanden…</string>
     <string name="calculate_osmand_route_gpx">Bereken de route offline met OsmAnd</string>
     <string name="routing_attr_prefer_motorway_name">Bij voorkeur autowegen</string>
 	<string name="routing_attr_prefer_motorway_description">Gebruik bij voorkeur autowegen</string>
@@ -1630,7 +1630,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="routing_attr_avoid_motorway_description">Vermijd autowegen</string>
 	<string name="routing_attr_weight_description">Geef het gewicht van het voertuig voor de routeplanning</string>
     <string name="routing_attr_weight_name">Gewicht voertuig</string>
-	<string name="select_gpx">GPX-bestand kiezen …</string>
+	<string name="select_gpx">GPX-bestand kiezen…</string>
     <string name="route_descr_select_destination">Bestemming kiezen</string>
     <string name="route_descr_select_on_map">Kies op de kaart…</string>
     <string name="route_descr_favorite">Favoriet…</string>
@@ -1840,7 +1840,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
     <string name="gpx_available_current_track">Huidige geregistreerde track</string>
     <string name="save_as_favorites_points">Bewaar als groep van favorieten</string>
-    <string name="loading_smth">Laad %1$s …</string>
+    <string name="loading_smth">Laad %1$s…</string>
     <string name="map_widget_plain_time">Huidige tijd</string>
     <string name="select_destination_and_intermediate_points">Routepunten kiezen</string>
     <string name="layer_amenity_label">Namen van interessepunten</string>
@@ -2037,7 +2037,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_value_germanRoadAtlas_name">Duitse wegenkaart</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikaanse wegenkaart</string>
     <string name="routing_attr_no_new_routing_name">Gebruik routeberekening v1.9 niet</string>
-    <string name="routing_attr_no_new_routing_description">Gebruik routeberekening v1.9 niet</string>
+    <string name="routing_attr_no_new_routing_description">Gebruik de routeregels van vóór versie 1.9</string>
     <string name="traffic_warning_railways">Spoorweg overgang</string>
 	<string name="traffic_warning_pedestrian">Voetgangers oversteekplaats</string>
 	<string name="show_railway_warnings">Toon spoorwegovergangen</string>

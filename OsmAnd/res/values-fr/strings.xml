@@ -148,7 +148,7 @@
   <string name="search_position_undefined">Non défini</string>
   <string name="search_position_fixed"/>
   <string name="search_position_current_location">Position actuelle…</string>
-  <string name="search_position_map_view">Dernière vue</string>
+  <string name="search_position_map_view">Centre de la carte</string>
   <string name="select_search_position">Origine :</string>
   <string name="context_menu_item_search">Rechercher autour de ce point</string>
   <string name="tip_recent_changes_0_6_7_t">Changement pour 0.6.7 :
@@ -515,7 +515,7 @@
   <string name="first_time_download">Téléchargement des régions</string>
   <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. La plupart des fonctionnalités de l\'application nécessitent des données régionales, utilisables hors-ligne, que vous pouvez au préalable télécharger (\'Paramètres\' → \'Données hors-ligne\') ou préparer vous-même. Ces données permettront de visualiser les cartes et de rechercher une adresse, un point d\'intérêt (PI) ou un transport public.</string>
   <string name="search_poi_location">Recherche d\'un signal…</string>
-  <string name="search_near_map">Rechercher près de la dernière position</string>
+  <string name="search_near_map">Rechercher autour du centre de la carte</string>
   <string name="search_nearby">Rechercher à proximité</string>
   <string name="map_orientation_default">Automatique</string>
   <string name="map_orientation_portrait">Portrait</string>
@@ -1303,7 +1303,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_magnetic_sensor_descr">Utiliser le magnétomètre pour déterminer l\'orientation de la boussole au lieu du capteur d\'orientation</string>
     <string name="use_magnetic_sensor">Utiliser le magnétomètre (boussole)</string>
     <string name="local_indexes_cat_srtm">Courbes de niveau</string>
-    <string name="use_kalman_filter_compass_descr">Utiliser un filtre de Kalman pour éviter les interférences de la boussole</string>
+    <string name="use_kalman_filter_compass_descr">Réduit le bruit sur les mesures de la boussole, mais ajoute de l\'inertie</string>
     <string name="use_kalman_filter_compass">Utiliser un filtre de Kalman</string>
     <string name="access_mark_final_location_first">Mode d\'accessibilité : veuillez d\'abord définir une destination</string> 
     <string name="distance_measurement_start_editing">Mesurer sur la carte</string>
@@ -1894,4 +1894,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="routing_attr_no_new_routing_description">Ne pas utiliser les nouvelles règles de routage de la version 1.9</string>
     <string name="routing_attr_no_new_routing_name">Ne pas utiliser la version 1.9 des calculs de route</string>
     <string name="speak_pedestrian">Annoncer les passages piéton</string>
-    </resources>
+    <string name="rendering_value__name">Par défaut</string>
+	</resources>

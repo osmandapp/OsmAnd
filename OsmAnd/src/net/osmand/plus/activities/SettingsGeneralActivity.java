@@ -153,6 +153,9 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		
 		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/
 		String incompleteSuffix = " (" + getString(R.string.incomplete_locale) + ")";
+		// Add this in Latin also so it can be more easily identified if foreign language has been selected by mistake
+		String latinSystemDefaultSuffix = " (" + getString(R.string.system_locale_no_translate) + ")";
+
 		//getResources().getAssets().getLocales();
 		entrieValues = new String[] { "",
 				"en",
@@ -203,7 +206,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				"uk",
 				"vi",
 				"cy"};
-		entries = new String[] { getString(R.string.system_locale), 
+		entries = new String[] { getString(R.string.system_locale) + latinSystemDefaultSuffix,
 				getString(R.string.lang_en),
 				getString(R.string.lang_af),
 				getString(R.string.lang_al) + incompleteSuffix,
@@ -253,6 +256,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				getString(R.string.lang_vi) + incompleteSuffix,
 				getString(R.string.lang_cy) + incompleteSuffix,};
 		registerListPreference(settings.PREFERRED_LOCALE, screen, entries, entrieValues);
+		// Display "Device language" in Latin for all non-en languages
+		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
+			((ListPreference) screen.findPreference(settings.PREFERRED_LOCALE.getId())).setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
+		}
 	}
 
 

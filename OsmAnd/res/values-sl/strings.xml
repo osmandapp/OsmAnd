@@ -944,7 +944,7 @@
 	<string name="first_time_continue">Kasneje</string>
 	<string name="first_time_download">Prenos območij</string>
 	<string name="search_poi_location">Iskanje znaka …</string>
-	<string name="search_near_map">Iskanje v bližini zadnje lokacije</string>
+	<string name="search_near_map">Iskanje v bližini zadnje lokacije na zemljevidu</string>
 	<string name="tip_map_switch_t_v2">"Vir zemljevida in prikazane plasti lahko spreminjate preko \'Meni\' → \'Nastavitve zemljevida\'.
 \n\nPod \'Vir zemljevida …\' lahko izberete med uporabo prednaloženih vektorskih zemljevidov za delo brez povezave, vnaprej določenih spletnih zemljevidov (za to aktivirajte vtičnik \'Spletni zemljevidi\' v \'Nastavitve\' → \'Upravljalnik vtičnikov\'), ali ročno ustvarjenih zemljevidov z uporabo npr. OsmAndMapCreator-ja na računalniku.
 \n\nOsmAnd podpira tudi vire po meri. "</string>
@@ -1967,4 +1967,5 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="navigate_point_zone">Območje</string>
     <string name="navigate_point_northing">y koordinata</string>
     <string name="navigate_point_easting">x koordinata</string>
-    </resources>
+    <string name="rendering_value__name">Privzeto</string>
+	</resources>

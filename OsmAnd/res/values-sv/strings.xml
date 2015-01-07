@@ -1768,4 +1768,5 @@
 	<string name="route_descr_destination">Destination</string>
     <string name="voices">Röstprompter</string>
 	<string name="speak_pedestrian">Meddela om övergångsställen</string>
-    </resources>
+    <string name="rendering_value__name">Standard</string>
+	</resources>

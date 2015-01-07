@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rendering_value__name">Default</string>
 	<string name="speak_pedestrian">Announce pedestrian crosswalks</string>
     <string name="rendering_attr_roadStyle_name">Road style</string>
     <string name="rendering_value_default_name">Default</string>
@@ -34,7 +35,7 @@
     <string name="download_tab_downloads">All&#160;Downloads</string>
     <string name="download_tab_updates">Updates</string>
     <string name="download_tab_local">Local</string>
-	<string name="no_internet_connection">Downloading not possible, please check your Internet connetion.</string>
+	<string name="no_internet_connection">Downloading not possible, please check your Internet connection.</string>
     <string name="dismiss">Dismiss</string>
     <string name="everything_up_to_date">All files up to date</string>
     <string name="use_opengl_render">Use OpenGL rendering</string>

@@ -502,8 +502,7 @@
   <string name="route_head">Cabecera</string>
   <string name="first_time_continue">Después</string>
   <string name="first_time_download">Descargar regiones</string>
-  <string name="first_time_msg">Gracias por elegir OsmAnd.
-Para poder usar muchas características de la aplicación necesitas algunos datos regionales, que puedes descargar vía \'Opciones\' → \'Gestionar mapas\'. Después, podrás ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
+  <string name="first_time_msg">Gracias por elegir OsmAnd. Para poder usar muchas características de la aplicación necesitas algunos datos regionales, que puedes descargar vía \'Opciones\' → \'Gestionar mapas\'. Entonces podrás ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
   <string name="search_poi_location">Buscando señal…</string>
   <string name="search_near_map">Buscar cerca del centro del mapa</string>
   <string name="search_nearby">Buscar cercanos</string>
@@ -1860,7 +1859,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="error_avoid_specific_road">No se ha encontrado circunvalación</string>
     <string name="everything_up_to_date">Todos los archivos actualizados</string>
     <string name="dismiss">Descartar</string>
-    <string name="no_internet_connection">Imposible descargar, compruebe su conexión a Internet.</string>
+    <string name="no_internet_connection">Imposible descargar; por favor, comprueba tu conexión a Internet.</string>
     <string name="download_tab_downloads">Todas las descargas</string>
     <string name="download_tab_updates">Actualizaciones</string>
     <string name="download_tab_local">Local</string>
@@ -1886,4 +1885,5 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="navigate_point_easting">Al este</string>
     <string name="navigate_point_northing">Al norte</string>
     <string name="speak_pedestrian">Anunciar pasos de peatones</string>
-    </resources>
+    <string name="rendering_value__name">Por defecto</string>
+	</resources>
