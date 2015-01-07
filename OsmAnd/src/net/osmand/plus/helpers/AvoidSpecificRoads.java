@@ -125,7 +125,7 @@ public class AvoidSpecificRoads {
 			}
 			
 		});
-		bld.setPositiveButton(R.string.default_buttons_ok, null);
+		bld.setPositiveButton(R.string.close, null);
 		bld.show();
 	}
 	
