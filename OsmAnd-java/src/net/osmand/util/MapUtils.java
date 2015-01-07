@@ -277,6 +277,9 @@ public class MapUtils {
 		});
 	}
 	
+	public static String buildGeoUrl(double latitude, double longitude, int zoom) {
+        return "geo:" + ((float) latitude) + "," + ((float)longitude) + "?z=" + zoom;
+	}
 	
 	// Examples
 //	System.out.println(buildShortOsmUrl(51.51829d, 0.07347d, 16)); // http://osm.org/go/0EEQsyfu
