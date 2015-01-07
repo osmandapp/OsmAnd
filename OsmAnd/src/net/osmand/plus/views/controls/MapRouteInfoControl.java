@@ -83,7 +83,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 				//-Test code only--
 				//Try force route re-caculation if stopped due to Issue2515
 				//if (!routingHelper.isRouteBeingCalculated()) {
-					routingHelper.recalculateRouteDueToSettingsChange()
+					routingHelper.recalculateRouteDueToSettingsChange();
 				//	getTargets().setStartPoint(latlon, true, null);
 				//}
 				//-----------------
