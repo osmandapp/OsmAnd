@@ -1876,4 +1876,5 @@
 	<string name="show_railway_warnings">Jernbaneoverskæringer</string>
 	<string name="show_pedestrian_warnings">Fodgængerovergange</string>
     <string name="speak_pedestrian">Fodgængerovergange</string>
-    </resources>
+    <string name="rendering_value__name">Standard</string>
+	</resources>
