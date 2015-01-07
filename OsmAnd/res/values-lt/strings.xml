@@ -1882,4 +1882,5 @@
 	<string name="show_pedestrian_warnings">Rodyti pėsčiųjų perėjas</string>
     <string name="speak_pedestrian">Pranešti apie perėjas</string>
     <string name="traffic_warning_pedestrian">Pėčiųjų perėja</string>
+	<string name="rendering_value__name">Numatytasis</string>
 	</resources>
