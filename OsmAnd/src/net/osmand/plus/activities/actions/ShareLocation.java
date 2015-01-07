@@ -44,16 +44,16 @@ public class ShareLocation extends OsmAndAction {
 				final int zoom = args.getInt(MapActivityActions.KEY_ZOOM);
 				try {
 					final String shortOsmUrl = MapUtils.buildShortOsmUrl(latitude, longitude, zoom);
-					final String appLink = "http://download.osmand.net/go?lat=" + ((float) latitude) + "&lon=" + ((float) longitude) + "&z=" + zoom;
-					String sms = mapActivity.getString(R.string.send_location_sms_pattern, shortOsmUrl, appLink);
+					final String geoUrl = MapUtils.buildGeoUrl(latitude, longitude, zoom);
+					String sms = mapActivity.getString(R.string.send_location_sms_pattern, geoUrl, shortOsmUrl);
 					if (which == 0) {
-						sendEmail(shortOsmUrl, appLink);
+						sendEmail(shortOsmUrl, geoUrl);
 					} else if (which == 1) {
 						sendSms(sms);
 					} else if (which == 2) {
 						sendToClipboard(sms);
 					} else if (which == 3) {
-						sendGeoActivity(latitude, longitude, zoom);
+						sendGeoActivity(geoUrl);
 					} else if (which == 4) {
 						sendQRCode(latitude, longitude);
 					}
@@ -69,8 +69,8 @@ public class ShareLocation extends OsmAndAction {
 	
 
 
-	private void sendEmail(final String shortOsmUrl, final String appLink) {
-		String email = mapActivity.getString(R.string.send_location_email_pattern, shortOsmUrl, appLink);
+	private void sendEmail(final String shortOsmUrl, final String geoUrl) {
+		String email = mapActivity.getString(R.string.send_location_email_pattern, shortOsmUrl, geoUrl);
 		ShareDialog.sendEmail(mapActivity, email, getString(R.string.send_location));
 	}
 
@@ -83,10 +83,8 @@ public class ShareLocation extends OsmAndAction {
 		
 	}
 
-	private void sendGeoActivity(final double latitude, final double longitude, final int zoom) {
-		final String simpleGeo = "geo:"+((float) latitude)+","+((float)longitude) +"?z="+zoom;
-		Uri location = Uri.parse(simpleGeo);
-		Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+	private void sendGeoActivity(final String geoUrl) {
+		Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUrl));
 		mapActivity.startActivity(mapIntent);
 	}
 
