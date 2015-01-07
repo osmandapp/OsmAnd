@@ -1303,7 +1303,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_magnetic_sensor_descr">Utiliser le magnétomètre pour déterminer l\'orientation de la boussole au lieu du capteur d\'orientation</string>
     <string name="use_magnetic_sensor">Utiliser le magnétomètre (boussole)</string>
     <string name="local_indexes_cat_srtm">Courbes de niveau</string>
-    <string name="use_kalman_filter_compass_descr">Utiliser un filtre de Kalman pour éviter les interférences de la boussole</string>
+    <string name="use_kalman_filter_compass_descr">Réduit le bruit sur les mesures de la boussole, mais ajoute de l\'inertie</string>
     <string name="use_kalman_filter_compass">Utiliser un filtre de Kalman</string>
     <string name="access_mark_final_location_first">Mode d\'accessibilité : veuillez d\'abord définir une destination</string> 
     <string name="distance_measurement_start_editing">Mesurer sur la carte</string>
