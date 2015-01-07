@@ -582,7 +582,7 @@ public class MapRenderingTypes {
 						rt.applyToTagValue = null;
 					} else {
 						rt.applyToTagValue.addAll(mapRulType.applyToTagValue);
-						mapRulType.applyToTagValue.add(rt.tagValuePattern);
+						mapRulType.applyToTagValue.addAll(rt.applyToTagValue);
 					}
 				} else {
 					mapRulType.applyToTagValue = null;
