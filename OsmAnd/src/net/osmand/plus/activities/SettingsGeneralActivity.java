@@ -153,6 +153,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		
 		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/
 		String incompleteSuffix = " (" + getString(R.string.incomplete_locale) + ")";
+		String latinSystemDefaultSuffix = " (" + getString(R.string.system_default_no_translate) + ")";
+
 		//getResources().getAssets().getLocales();
 		entrieValues = new String[] { "",
 				"en",
@@ -203,7 +205,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				"uk",
 				"vi",
 				"cy"};
-		entries = new String[] { getString(R.string.system_locale), 
+		entries = new String[] { getString(R.string.system_locale) + latinSystemDefaultSuffix,
 				getString(R.string.lang_en),
 				getString(R.string.lang_af),
 				getString(R.string.lang_al) + incompleteSuffix,

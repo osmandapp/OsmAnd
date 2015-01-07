@@ -729,7 +729,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_POI_LABEL = new BooleanPreference("show_poi_label", false).makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<String> PREFERRED_LOCALE =  new StringPreference("preferred_locale", "").makeGlobal();
+	public final OsmandPreference<String> PREFERRED_LOCALE =  new StringPreference("preferred_locale" + " (" + preferred_locale_no_translate + ")", "").makeGlobal();
 	
 	public static final String TRANSPORT_STOPS_OVER_MAP = "transportStops";
 	
