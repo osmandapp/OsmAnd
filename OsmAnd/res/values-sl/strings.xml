@@ -1967,4 +1967,5 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="navigate_point_zone">Območje</string>
     <string name="navigate_point_northing">y koordinata</string>
     <string name="navigate_point_easting">x koordinata</string>
-    </resources>
+    <string name="rendering_value__name">Privzeto</string>
+	</resources>
