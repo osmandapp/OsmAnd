@@ -1811,4 +1811,5 @@
     <string name="routing_attr_no_new_routing_name">Nincsenek v1.9-es útvonalszabályok</string>
     <string name="routing_attr_no_new_routing_description">Ne használja az 1.9-es verzióban bevezetett útvonalszabályokat</string>
     <string name="speak_pedestrian">Gyalogátkelőhelyek bejelentése</string>
-    </resources>
+    <string name="rendering_value__name">Alapértelmezett</string>
+	</resources>
