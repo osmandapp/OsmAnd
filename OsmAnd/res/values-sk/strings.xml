@@ -1981,7 +1981,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_busRoutes_name">Autobusové linky</string>
     <string name="wake_on_voice">Rozsvietiť obrazovku</string>
     <string name="wake_on_voice_descr">Rozsvietiť obrazovku keď sa blíži odbočenie</string>
-    <string name="select_impassable_road">Vybrať na mape</string>
+    <string name="select_impassable_road">Vybrať na mape…</string>
     <string name="impassable_road">Vyhnúť sa cestám…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Linky električiek a vlakov</string>
     <string name="rendering_category_hide">Skryť</string>
