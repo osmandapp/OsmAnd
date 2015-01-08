@@ -729,7 +729,7 @@
 	<string name="search_offline_geo_error">Konnte geointent nicht verarbeiten: \'%s\'</string>
 	<string name="search_osm_offline">Adresssuche mit Offline-Daten</string>
 	<string name="system_locale">Systemeinstellung</string>
-	<string name="preferred_locale_descr">Anzeigesprache wählen</string>
+	<string name="preferred_locale_descr">Anzeigesprache wählen (OsmAnd nach Änderungen neu starten)</string>
 	<string name="preferred_locale">Anzeigesprache</string>
 	<string name="tip_map_switch">Kartenquelle auswählen</string>
 	<string name="tip_map_switch_t_v2">Die Kartenquelle und die angezeigten Ebenen können in der Kartenansicht über \'Menü\' → \'Karte konfigurieren\' gewählt werden.
