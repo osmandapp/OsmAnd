@@ -397,7 +397,7 @@
   <string name="search_offline_geo_error">Невозможно разобрать запрос: \"%s\"</string>
   <string name="search_osm_offline">Поиск по адресу в локальных картах</string>
   <string name="system_locale">Системная</string>
-  <string name="preferred_locale_descr">Изменить язык программы</string>
+  <string name="preferred_locale_descr">Выбор языка программы (перезапустите OsmAnd после изменения)</string>
   <string name="preferred_locale">Локализация</string>
   <string name="tip_map_switch">Источник карты</string>
   
