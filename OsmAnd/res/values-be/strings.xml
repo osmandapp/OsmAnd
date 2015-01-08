@@ -589,7 +589,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="rendering_attr_hmRendered_name">Паказаць больш дэталей мапы</string>
 	<string name="local_index_routing_data">Дадзеныя маршрутызацыі</string>
 	<string name="navigate_point_format">Фармат:</string>
-	<string name="poi_search_desc">Пошук цікавосткаў (POI)</string>
+	<string name="poi_search_desc">Пошук POI</string>
 	<string name="address_search_desc">Пошук па адрасе</string>
 	<string name="navpoint_search_desc">Каардынаты</string>
 	<string name="transport_search_desc">Пошук грамадзкага транспарту</string>
@@ -603,7 +603,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="unknown_location">Месца пакуль ня вызначанае</string>
 	<string name="modify_transparency">Змяніць празрыстасць (0 - празрысты, 255 - непразрысты)</string>
 	<string name="confirm_interrupt_download">Перапыніць cьцягваньне файла?</string>
-	<string name="first_time_msg">Дзякуй за карыстаньне OsmAnd. Каб карыстацца ўсімі магчымасьцямі праграмы, вам патрэбныя некаторыя пазасеціўныя зьвесткі для вашага рэгіёну. Іх можна cьцягнуць праз \'Налады\' → \'Кіраваць файламі мапаў\'. Пасьля гэтага вы зможаце глядзець мапу, шукаць адрасы, бачыць цікавосткі і грамадзкі транспарт.</string>    
+	<string name="first_time_msg">Дзякуй за карыстаньне OsmAnd. Каб карыстацца ўсімі магчымасьцямі праграмы, вам патрэбныя некаторыя пазасеціўныя зьвесткі для вашага рэгіёну. Іх можна cьцягнуць праз \'Налады\' → \'Кіраваць файламі мапаў\'. Пасьля гэтага вы зможаце глядзець мапу, шукаць адрасы, бачыць POI і грамадзкі транспарт.</string>    
 	<string name="basemap_was_selected_to_download">Базавая мапа неабходная для карэктнай працы праграмы і аўтаматычна была абраная для cьцягваньня.</string>
 	<string name="select_index_file_to_download">Нічога не знойдзена. Калі вы не знайшлі свой рэгіён, вы можаце стварыць мапу самастойна (гл. http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Сеціўныя і растравыя мапы</string>
@@ -639,7 +639,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 		\n\t * Графічны інтэрфейс і ўзаемадзеянне * ↵
 		\n\t → - Палепшана ў многіх напрамках → → ↵		
 	</string>
-	<string name="osm_editing_plugin_description">Паказваць налады патрэбныя для зваротнай сувязі OSM накшталт збору/зьменаў цікавосткаў, стварэньня/камэнтаваньня хібаў OSM і дасыланьня запісаных файлаў GPX (патрабуе лагін/пароль OSM).</string>
+	<string name="osm_editing_plugin_description">Паказваць налады патрэбныя для зваротнай сувязі OSM накшталт збору/зьменаў POI, стварэньня/камэнтаваньня хібаў OSM і дасыланьня запісаных файлаў GPX (патрабуе лагін/пароль OSM).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Вектарныя мапы могуць адлюстроўвацца хутчэй. Падтрымліваецца не ўсімі прыладамі.</string>
 	<string name="play_commands_of_currently_selected_voice">Прайграць каманды абраным голасам</string>
 	<string name="debugging_and_development">Для распрацоўшчыкаў OsmAnd</string>
@@ -924,7 +924,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="local_index_mi_delete">Выдаліць</string>
 	<string name="local_index_mi_reload">Перачытаць з карткі SD</string>
 	<string name="local_index_download">Сьцягнуць</string>
-	<string name="local_index_poi_data">Зьвесткі цікавосткаў</string>
+	<string name="local_index_poi_data">Зьвесткі POI</string>
 	<string name="local_index_address_data">Адрас</string>
 	<string name="local_index_transport_data">Зьвесткi грамадзкага транспарту</string>
 	<string name="local_index_map_data">Дадзеныя мапы</string>
@@ -932,7 +932,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="local_indexes_cat_tts">Галасавыя зьвесткі (TTS)</string>
 	<string name="local_indexes_cat_voice">Галасавыя зьвесткі (запісаныя)</string>
 	<string name="local_indexes_cat_gpx">Зьвесткі GPX</string>
-	<string name="local_indexes_cat_poi">Зьвесткі цікавосткаў</string>
+	<string name="local_indexes_cat_poi">Зьвесткі POI</string>
 	<string name="ttsvoice">TTS голас</string>
 	<string name="search_offline_clear_search">Новы пошук</string>
 	<string name="map_text_size_descr">Выберыце памер шрыфта для назваў на мапе</string>
@@ -1050,7 +1050,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="amenity_type_transportation">Транспарт</string>
 	<string name="indexing_address">Індэксаваньне адрасоў…</string>
 	<string name="indexing_map">Індэксаваньне мапаў…</string>
-	<string name="indexing_poi">Індэксаваньне цікавосткаў…</string>
+	<string name="indexing_poi">Індэксаваньне POI…</string>
 	<string name="indexing_transport">Індэксуецца транспарт…</string>
 	<string name="input_output_error">Надарылася I/O памылка</string>
 	<string name="km">км</string>
@@ -1127,8 +1127,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="transport_context_menu">Шукаць транспарт на прыпынку</string>
 	<string name="point_on_map">Месца:\n %1$.5f шыр.\n %2$.5f даў.</string>
 	<string name="osb_bug_name">Памылка</string>
-	<string name="poi_context_menu_modify">Зьмяніць цікавостку</string>
-	<string name="poi_context_menu_delete">Выдаліць цікавостку</string>
+	<string name="poi_context_menu_modify">Правіць POI</string>
+	<string name="poi_context_menu_delete">Выдаліць POI</string>
 	<string name="rotate_map_compass_opt">Па компасе</string>
 	<string name="rotate_map_bearing_opt">У напрамку руху</string>
 	<string name="rotate_map_none_opt">Не варочаць (поўнач уверсе)</string>
@@ -1153,7 +1153,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="layer_favorites">Упадабаныя</string>
 	<string name="layer_osm_bugs">OSM памылкі (онлайн)</string>
 	<string name="layer_transport">Прыпынкі транспарту</string>
-	<string name="layer_poi">Цікавосткі…</string>
+	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Крыніца мапы…</string>
 	<string name="menu_layers">Слаі мапы</string>
 	<string name="context_menu_item_search_poi">Пошук POI</string>
@@ -1230,7 +1230,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="update_poi_error_loading">Памылка пры загрузцы дадзеных з сервера</string>
 	<string name="update_poi_no_offline_poi_index">Для гэтай мясцовасці адсутнічаюць лакальныя дадзеныя аб POI</string>
 	<string name="update_poi_is_not_available_for_zoom">Абнаўленьне POI не даступна для малых узроўняў маштабаваньня</string>
-	<string name="context_menu_item_update_poi">Абнаўленьне POI</string>
+	<string name="context_menu_item_update_poi">Абнавіць POI</string>
 	<string name="context_menu_item_update_map_confirm">Абнавіць лакальныя дадзеныя праз Інтэрнэт?</string>
 	<string name="search_history_city">Горад: {0}</string>
 	<string name="search_history_street">Вуліца: {0}, {1}</string>
@@ -1276,7 +1276,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="opening_changeset">Адкрыцьцё пакета паправак…</string>
 	<string name="closing_changeset">Закрыцьцё пакета паправак…</string>
 	<string name="commiting_node">Захаваньне аб\'екта…</string>
-	<string name="loading_poi_obj">Загрузка POI…</string>
+	<string name="loading_poi_obj">Чытаньне POI…</string>
 	<string name="auth_failed">Не атрымалася выканаць аўтарызацыю</string>
 	<string name="failed_op">не ўдалося</string>
 	<string name="converting_names">Канвертацыя мясцовых/ангельскіх назваў…</string>
@@ -1355,7 +1355,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="favorites_Button">Мае мясьціны</string>
 	<string name="search_button">Пошук</string>
 	<string name="search_activity">Пошук</string>
-	<string name="searchpoi_activity">Абраць цікавостку</string>
+	<string name="searchpoi_activity">Абраць POI</string>
 	<string name="search_POI_level_btn">Знайсьці яшчэ</string>
 	<string name="incremental_search_street">Шукаць вуліцу</string>
 	<string name="incremental_search_building">Шукаць дом</string>
@@ -1386,7 +1386,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="context_menu_item_add_favorite">Дадаць да ўпадабаных</string>
 	<string name="context_menu_item_update_map">Абнавіць мапу</string>
 	<string name="context_menu_item_open_bug">Паведаміць пра памылку на мапе</string>
-	<string name="context_menu_item_create_poi">Стварыць цікавостку</string>
+	<string name="context_menu_item_create_poi">Стварыць POI</string>
 	<string name="default_buttons_yes">Так</string>
 	<string name="default_buttons_cancel">Скасаваць</string>
 	<string name="default_buttons_apply">Застасаваць</string>
@@ -1415,19 +1415,19 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="osb_close_dialog_close_button">Зачыніць памылку</string>
 	<string name="osb_close_dialog_success">Памылка была пасьпяхова зачынена</string>
 	<string name="osb_close_dialog_error">Выключная сітуацыя: памылка не была зачынена</string>
-	<string name="poi_edit_title">Рэдагаваць цікавостку</string>
-	<string name="poi_create_title">Стварыць цікавостку</string>
+	<string name="poi_edit_title">Правіць POI</string>
+	<string name="poi_create_title">Стварыць POI</string>
 	<string name="poi_error_poi_not_found">POI не знойдзена або не зьяўляецца кропкай</string>
 	<string name="poi_remove_confirm_template">Выдаліць {0} (дадаць каментар)?</string>
-	<string name="poi_remove_title">Выдаліць цікавостку</string>
+	<string name="poi_remove_title">Выдаліць POI</string>
 	<string name="default_buttons_delete">Выдаліць</string>
-	<string name="poi_remove_success">Цікавостка выдаленая</string>
+	<string name="poi_remove_success">POI выдаленая</string>
 	<string name="poi_action_add">дадаць</string>
 	<string name="poi_action_change">зьмяніць</string>
 	<string name="poi_action_succeded_template">Дзеяньне {0} пасьпяхова завершана.</string>
 	<string name="poi_error_unexpected_template">Нечаканая памылка пры выкананьні дзеяньня {0}.</string>
 	<string name="poi_error_io_error_template">Адбылася памылка ўводу/вываду пры выкананьні дзеяньня {0}.</string>
-	<string name="poi_error_info_not_loaded">Адбылася памылка пры загрузцы інфармацыі аб POI</string>
+	<string name="poi_error_info_not_loaded">Адбылася памылка пры чытаньні інфармацыі пра POI</string>
 	<string name="poi_dialog_name">Назва</string>
 	<string name="poi_dialog_opening_hours">Гадзіны працы</string>
 	<string name="poi_dialog_comment">Каментар</string>
