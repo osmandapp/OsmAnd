@@ -2036,7 +2036,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_orange_name">Arancione</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlante strade tedesche</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlante strade americane</string>
-    <string name="routing_attr_no_new_routing_name">Non usare le regole di calcolo del percorso v1.9</string>
+    <string name="routing_attr_no_new_routing_name">Ignora le regole di calcolo del percorso v1.9</string>
     <string name="routing_attr_no_new_routing_description">Non usare le regole di calcolo del percorso introdotte nella v1.9</string>
     <string name="traffic_warning_railways">Passaggio a livello</string>
 	<string name="traffic_warning_pedestrian">Attraversamento pedonale</string>
