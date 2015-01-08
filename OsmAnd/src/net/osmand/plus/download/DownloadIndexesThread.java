@@ -121,15 +121,6 @@ public class DownloadIndexesThread {
 
 	public List<IndexItem> getItemsToUpdate() { return itemsToUpdate;}
 
-	public void resetUiActivity(Class<?> downloadActivityClass) {
-		if (uiActivity== null){
-			return;
-		}
-
-		if (uiActivity.getClass().equals(downloadActivityClass)){
-			uiActivity = null;
-		}
-	}
 
 	public class DownloadIndexesAsyncTask extends BasicProgressAsyncTask<IndexItem, Object, String> implements DownloadFileShowWarning {
 

@@ -14,7 +14,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.dashboard.DashAudioVideoNotesFragment;
 import net.osmand.plus.dashboard.DashDownloadMapsFragment;
 import net.osmand.plus.dashboard.DashErrorFragment;
 import net.osmand.plus.dashboard.DashFavoritesFragment;
@@ -72,7 +71,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	private static final int HELP_ID = 0;
 	private static final int SETTINGS_ID = 1;
 	private static final int EXIT_ID = 2;
-	private OsmAndLocationProvider lp;
 
 
 	@Override
@@ -101,7 +99,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			return;
 		}
 		setContentView(R.layout.dashboard);
-		lp = getMyApplication().getLocationProvider();
 
 		String textVersion = Version.getFullVersion(getMyApplication());
 		if (textVersion.indexOf("#") != -1) {
@@ -494,12 +491,8 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			if (f instanceof DashDownloadMapsFragment && !f.isDetached()) {
 				((DashDownloadMapsFragment) f).refreshData();
 			}
-
-			if (f instanceof DashAudioVideoNotesFragment && !f.isDetached()) {
-				((DashAudioVideoNotesFragment) f).setupNotes();
-			}
-
 			//Needed to reliably initialize DashFavoritesFragement on devices without compass
+			// [Victor]: This doesn't look as a proper place, then it highly depends on internet connection and download list 
 			if (f instanceof DashFavoritesFragment && !f.isDetached()) {
 				((DashFavoritesFragment) f).setupFavorites();
 			}
