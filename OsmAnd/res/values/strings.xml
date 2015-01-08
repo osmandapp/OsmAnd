@@ -1600,7 +1600,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
 	<string name="search_osm_offline">Search geo location</string>
 	<string name="system_locale">System</string>
-	<string name="preferred_locale_descr">Select display language</string>
+	<string name="preferred_locale_descr">Select display language (please restart OsmAnd after changing)</string>
 	<string name="preferred_locale">Display language</string>
 	<string name="incomplete_locale">incomplete</string>
 	<string name="tip_map_switch">Select a Map Source</string>
