@@ -1804,4 +1804,5 @@
 	<string name="av_camera_pic_size_descr">Pamier fotazdymka z ubudavanaj kamiery</string>
     <string name="navigation_intent_invalid">Niapravіĺny farmat: %s</string>
     <string name="hide_all_waypoints">Vydalіć usie</string>
-</resources>
+<string name="rendering_value__name">Pa zmoŭčańni</string>
+	</resources>
