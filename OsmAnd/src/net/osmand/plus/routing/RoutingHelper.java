@@ -58,7 +58,7 @@ public class RoutingHelper {
 	
 	private Thread currentRunningJob;
 	private long lastTimeEvaluatedRoute = 0;
-	private int evalWaitInterval = 3000;
+	private int evalWaitInterval = 0;
 	
 	private ApplicationMode mode;
 	private OsmandSettings settings;
@@ -144,7 +144,7 @@ public class RoutingHelper {
 	public synchronized void clearCurrentRoute(LatLon newFinalLocation, List<LatLon> newIntermediatePoints) {
 		route = new RouteCalculationResult("");
 		isDeviatedFromRoute = false;
-		evalWaitInterval = 3000;
+		evalWaitInterval = 0;
 		app.getWaypointHelper().setNewRoute(route);
 		app.runInUIThread(new Runnable() {
 			@Override
@@ -561,9 +561,13 @@ public class RoutingHelper {
 					// This check is valid for Online/GPX services (offline routing is aware of route direction)
 					wrongMovementDirection = checkWrongMovementDirection(start, routeNodes.get(newCurrentRoute + 1));
 					// set/reset evalWaitInterval only if new route is in forward direction
+					
 					if (!wrongMovementDirection) {
 						evalWaitInterval = 3000;
 					} else {
+						if(evalWaitInterval == 0){
+							evalWaitInterval = 3000;
+						}
 						evalWaitInterval = evalWaitInterval * 3 / 2;
 						evalWaitInterval = Math.min(evalWaitInterval, 120000);
 					}
