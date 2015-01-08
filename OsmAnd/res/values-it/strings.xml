@@ -509,7 +509,7 @@
   <string name="first_time_download">Scarica le regioni</string>
   <string name="first_time_msg">Grazie di utilizzare OsmAnd. Per molte delle caratteristiche dell\'applicazione, hai bisogno dei dati offline locali, che possono essere scaricati da \'Impostazioni\'→\'Gestisci i file mappe\'. Sarà poi possibile visualizzare mappe, cercare indirizzi, PDI, e trovare trasporti pubblici.</string>
   <string name="search_poi_location">Ricerca segnale GPS…</string>
-  <string name="search_near_map">Ricerca vicino all\'ultima posizione sulla mappa</string>
+  <string name="search_near_map">Ricerca vicino all\'attuale centro della mappa</string>
   <string name="search_nearby">Ricerca vicino</string>
   <string name="map_orientation_default">Orientamento predefinito</string>
   <string name="map_orientation_portrait">Verticale</string>
@@ -1444,7 +1444,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="use_magnetic_sensor_descr">Utilizza il sensore magnetico per determinare il valore della bussola invece del sensore di orientamento</string>
     <string name="use_magnetic_sensor">Utilizza il sensore magnetico (bussola)</string>
     <string name="local_indexes_cat_srtm">Dati isocline</string>
-    <string name="use_kalman_filter_compass_descr">Usare il filtro di Kalman per evitare aberrazioni della bussola</string>
+    <string name="use_kalman_filter_compass_descr">Riduce il rumore delle letture della bussola ma introduce dell\'inerzia</string>
     <string name="use_kalman_filter_compass">Uso del filtro di Kalman</string>
     <string name="access_mark_final_location_first">Modalità di accesso facilitato: selezionare prima la destinazione</string> 
     <string name="wait_current_task_finished">Prego attendere il termine dell\'operazione</string>
@@ -1859,7 +1859,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="local_index_unselect_gpx_file">Deseleziona</string>
     <string name="local_index_select_gpx_file">Seleziona per visualizzarlo</string>
     <string name="route_descr_destination">Destinazione</string>
-    <string name="no_index_file_to_download">Niente da scaricare, per favore controllare la connessione internet.</string>
+    <string name="no_index_file_to_download">Non è stato trovato niente da scaricare, per favore controllare la connessione internet.</string>
     <string name="osmo_gpx_points_downloaded">Scaricati %1$s punti OsMo.</string>
     <string name="osmo_auto_connect_descr">Connettiti al servizio automaticamente dopo l\'accensione</string>
     <string name="osmo_auto_connect">Connesione automatica</string>
@@ -1996,7 +1996,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_attr_trolleybusRoutes_name">Percorsi in filobus</string>
     <string name="rendering_attr_busRoutes_name">Percorsi in bus</string>
     <string name="rendering_attr_tramTrainRoutes_name">Percorsi tram e treno</string>
-    <string name="select_impassable_road">Seleziona nella mappa</string>
+    <string name="select_impassable_road">Seleziona nella mappa…</string>
     <string name="impassable_road">Evita strade …</string>
     <string name="rendering_category_hide">Nascondi</string>
     <string name="wake_on_voice">Accendi lo schermo</string>
@@ -2036,7 +2036,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_orange_name">Arancione</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlante strade tedesche</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlante strade americane</string>
-    <string name="routing_attr_no_new_routing_name">Non usare il calcolo del percorso v1.9</string>
+    <string name="routing_attr_no_new_routing_name">Non usare le regole di calcolo del percorso v1.9</string>
     <string name="routing_attr_no_new_routing_description">Non usare le regole di calcolo del percorso introdotte nella v1.9</string>
     <string name="traffic_warning_railways">Passaggio a livello</string>
 	<string name="traffic_warning_pedestrian">Attraversamento pedonale</string>
