@@ -24,10 +24,6 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 	public static final String MORE_VALUE = "MORE_VALUE";
 	public static final String DEFINE_EDIT = "DEFINE_EDIT";
 
-	@Override
-	protected int getPreferencesXmlId() {
-		return 0;
-	}
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {

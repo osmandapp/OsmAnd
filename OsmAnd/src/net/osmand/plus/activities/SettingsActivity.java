@@ -27,10 +27,6 @@ public class SettingsActivity extends SettingsBaseActivity {
 	private Preference routing;
 	private Preference about;
 
-	@Override
-	protected int getPreferencesXmlId() {
-		return 0;
-	}
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {

@@ -37,11 +37,6 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 	}
 
 	@Override
-	protected int getPreferencesXmlId() {
-		return 0;
-	}
-
-	@Override
     public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		requestWindowFeature(Window.FEATURE_PROGRESS);

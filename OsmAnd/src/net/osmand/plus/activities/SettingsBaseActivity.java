@@ -300,20 +300,16 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		return false;
 	}
 
-	@Override
-	protected int getPreferencesXmlId() {
-		return 0;
-	}
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		//getToolbar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		//getToolbar().setDisplayHomeAsUpEnabled(true);
-		getToolbar().setTitle(R.string.settings_activity);
+
 		// R.drawable.tab_settings_screen_icon
 		super.onCreate(savedInstanceState);
-		
+		getToolbar().setTitle(R.string.settings_activity);
 		settings = getMyApplication().getSettings();
 		
 		if (profileSettings) {

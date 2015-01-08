@@ -27,11 +27,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 
 
 	@Override
-	protected int getPreferencesXmlId() {
-		return 0;
-	}
-
-	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.debugging_and_development);

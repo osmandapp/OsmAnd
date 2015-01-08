@@ -7,7 +7,7 @@
 			  tools:context="com.antonioleiva.materialeverywhere.SettingsActivity" >
 
 	<android.support.v7.widget.Toolbar
-			android:id="@+id/abp__toolbar"
+			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:background="?attr/colorPrimary"
@@ -24,7 +24,7 @@
 				android:layout_height="match_parent" />
 
 		<ImageView
-				android:id="@+id/abp__shadowView"
+				android:id="@+id/shadowView"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/abp__shadow_height"
 				android:src="@drawable/preference_activity_action_bar_shadow"

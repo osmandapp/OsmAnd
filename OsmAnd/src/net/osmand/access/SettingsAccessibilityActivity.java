@@ -19,7 +19,7 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 	private ListPreference accessibilityModePreference;
 	private ListPreference directionStylePreference;
 
-	
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

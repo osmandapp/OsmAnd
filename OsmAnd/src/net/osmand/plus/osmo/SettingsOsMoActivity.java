@@ -36,11 +36,6 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 
 
 	@Override
-	protected int getPreferencesXmlId() {
-		return 0;
-	}
-
-	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.osmo_settings);

@@ -33,10 +33,6 @@ public class SettingsAudioVideoActivity extends SettingsBaseActivity {
 
 	private static final Log log = PlatformUtil.getLog(AudioVideoNotesPlugin.class);
 
-	@Override
-	protected int getPreferencesXmlId() {
-		return 0;
-	}
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {

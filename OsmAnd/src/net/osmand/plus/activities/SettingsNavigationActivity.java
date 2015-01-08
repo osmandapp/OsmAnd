@@ -91,7 +91,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			startActivityForResult(intent, DEVICE_ADMIN_REQUEST);
 		}
 	};
-	
+
+
 	private void createUI() {
 		addPreferencesFromResource(R.xml.navigation_settings);
 		PreferenceScreen screen = getPreferenceScreen();
