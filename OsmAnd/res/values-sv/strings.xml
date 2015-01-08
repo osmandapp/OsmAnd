@@ -1720,7 +1720,7 @@
     <string name="rendering_attr_trolleybusRoutes_name">Trådbusslinjer</string>
     <string name="rendering_attr_busRoutes_name">Busslinjer</string>
     <string name="rendering_attr_tramTrainRoutes_name">Spårvagns- och tåglinjer</string>
-    <string name="select_impassable_road">Välj på kartan</string>
+    <string name="select_impassable_road">Välj på kartan …</string>
     <string name="impassable_road">Undvik vägar …</string>
     <string name="rendering_category_hide">Dölj</string>
     <string name="wake_on_voice">Slå på skärmen</string>
