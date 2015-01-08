@@ -433,6 +433,8 @@ public class MapRenderingTypes {
 						parseTypeFromXML(parser, parentCategory);
 					} else if (name.equals("routing_type")) {
 						parseRouteTagFromXML(parser);
+					} else if (name.equals("entity_convert")) {
+						parseEntityConvertXML(parser);
 					}
 				}
 			}
@@ -451,6 +453,10 @@ public class MapRenderingTypes {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
+	}
+
+	protected void parseEntityConvertXML(XmlPullParser parser) {
+		
 	}
 
 	protected void parseRouteTagFromXML(XmlPullParser parser) {
@@ -673,6 +679,10 @@ public class MapRenderingTypes {
 			return value.equals(e.get(tag));
 		}
 		
+		@Override
+		public String toString() {
+			return "tag="+tag + " val=" +value;
+		}
 		@Override
 		public int hashCode() {
 			final int prime = 31;
