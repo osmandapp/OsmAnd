@@ -195,6 +195,10 @@
 			<intent-filter>
 				<data android:scheme="http" android:host="www.openstreetmap.org" />
 				<data android:scheme="https" android:host="www.openstreetmap.org" />
+				<data android:scheme="http" android:host="openstreetmap.org" />
+				<data android:scheme="https" android:host="openstreetmap.org" />
+				<data android:scheme="http" android:host="osm.org" />
+				<data android:scheme="https" android:host="osm.org" />
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
