@@ -98,6 +98,9 @@ public class DashFavoritesFragment extends DashBaseFragment {
 
 
 	public void setupFavorites(){
+		if (getMyApplication() == null) {
+			return;
+		}
 		View mainView = getView();
 		final FavouritesDbHelper helper = getMyApplication().getFavorites();
 		points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
