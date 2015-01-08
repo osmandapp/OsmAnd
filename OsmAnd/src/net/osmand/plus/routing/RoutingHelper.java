@@ -772,7 +772,7 @@ public class RoutingHelper {
 	}
 	
 	public void recalculateRouteDueToSettingsChange() {
-		//See if this fixes route-recalculation if settings change during ongoing calculation
+		//This should fix route-recalculation if settings change during ongoing calculation
 		clearCurrentRoute(finalLocation, intermediatePoints);
 		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, 
 				true, false);
