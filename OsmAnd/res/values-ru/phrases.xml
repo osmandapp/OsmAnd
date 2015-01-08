@@ -554,20 +554,20 @@
 	<string name="poi_seamark_anchorage">Якорная стоянка</string>
 	<string name="poi_seamark_anchor_berth">Якорный причал</string>
 	<string name="poi_seamark_beacon">Бакен</string>
-	<string name="poi_seamark_beacon_cardinal"/>
-	<string name="poi_seamark_beacon_lateral"/>
+	<string name="poi_seamark_beacon_cardinal">Кардинальный бакен</string>
+	<string name="poi_seamark_beacon_lateral">Латеральный бакен</string>
 	<string name="poi_seamark_beacon_safe_water">Бакен безопасности</string>
 	<string name="poi_seamark_beacon_special_purpose">Бакен специального назначения</string>
 	<string name="poi_seamark_berth">Причал</string>
-	<string name="poi_seamark_building"/>
+	<string name="poi_seamark_building">Здание</string>
 	<string name="poi_seamark_bridge">Мост</string>
-	<string name="poi_seamark_buoy_cardinal"/>
+	<string name="poi_seamark_buoy_cardinal">Кардинальный буй</string>
 	<string name="poi_seamark_buoy_installation">Знак изолированной опасности</string>
-	<string name="poi_seamark_buoy_isolated_danger"/>
-	<string name="poi_seamark_buoy_lateral"/>
+	<string name="poi_seamark_buoy_isolated_danger">Буй (изолированная опасность)</string>
+	<string name="poi_seamark_buoy_lateral">Латеральный буй</string>
 	<string name="poi_seamark_buoy_safe_water"/>
 	<string name="poi_seamark_buoy_special_purpose">Специальный буй</string>
-	<string name="poi_seamark_daymark"/>
+	<string name="poi_seamark_daymark">Дневной маяк</string>
 	<string name="poi_seamark_distance_mark">Отметка расстояния</string>
 	<string name="poi_seamark_dry_dock">Сухой док</string>
 	<string name="poi_seamark_dyke"/>
@@ -641,10 +641,11 @@
 	<string name="poi_aquarium">Аквариум</string>
 	<string name="poi_motorway_junction">Съезд</string>
 
-	<string name="poi_tower"/>
+	<string name="poi_tower">Башня</string>
 	<string name="poi_mast">Мачта</string>
 	<string name="poi_attraction_animal">Животное (аттракцион)</string>
 	<string name="poi_slide">Горка</string>
 	<string name="poi_summer_toboggan">Летние санки</string>
 	<string name="poi_dock">Док</string>
+	<string name="poi_roller_coaster">Американские горки</string>
 	</resources>
