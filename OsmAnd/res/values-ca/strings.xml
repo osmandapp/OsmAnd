@@ -631,7 +631,7 @@
 <string name="map_underlay_descr">Escolliu el mapa de fons</string>
 <string name="map_overlay_descr">Escolliu el mapa superposat</string>
 <string name="tip_location_sharing">Comparteix una ubicació</string>
-<string name="preferred_locale_descr">Selecciona la llengua a mostrar</string>
+<string name="preferred_locale_descr">Seleccioneu la llengua (reinicieu OsmAnd després de modificar-la)</string>
 <string name="tip_app_mode_t_v2">L\'OsmAnd suporta diferents (i personalitzables) perfils d\'aplicació per a diferents usos.
 \n\nPodeu canviar de perfil amb el boto a la cantonada inferior esquerra de la pantalla del mapa(icona de cotxe,bici o vianant), o quan creeu una ruta.
 	</string>
