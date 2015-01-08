@@ -575,7 +575,7 @@
 	<string name="poi_seamark_fog_signal">Сигнал при тумане</string>
 	<string name="poi_seamark_harbour_basin"/>
 	<string name="poi_seamark_harbour">Гавань</string>
-	<string name="poi_seamark_landmark"/>
+	<string name="poi_seamark_landmark">Ориентир</string>
 	<string name="poi_seamark_light"/>
 	<string name="poi_seamark_light_major"/>
 	<string name="poi_seamark_light_minor"/>
@@ -586,7 +586,7 @@
 	<string name="poi_seamark_pile"/>
 	<string name="poi_seamark_radar_transponder"/>
 	<string name="poi_seamark_radio_station">Радиостанция</string>
-	<string name="poi_seamark_signal_station_traffic"/>
+	<string name="poi_seamark_signal_station_traffic">Сигнальная станция</string>
 	<string name="poi_seamark_signal_station_warning">Сигнал опасности</string>
 	<string name="poi_seamark_small_craft_facility"/>
 	<string name="poi_seamark_topmark"/>
