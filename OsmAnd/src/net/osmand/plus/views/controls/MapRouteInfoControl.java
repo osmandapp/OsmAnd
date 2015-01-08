@@ -92,6 +92,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 				//-Test code only--
 				//Try force resuming route re-caculation if stopped due to Issue2515
 				routingHelper.recalculateRouteDueToSettingsChange();
+				routingHelper.recalculateRouteDueToSettingsChange();
 				//-----------------
 			return true;
 		}
