@@ -423,21 +423,14 @@ public class MapRenderingTypes {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			int tok;
 			parser.setInput(is, "UTF-8");
-			String parentCategory = null;
-			String poiParentCategory = null;
-			String poiParentPrefix  = null;
-			String order = null;
+			MapRulType parentCategory = null;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					String name = parser.getName();
 					if (name.equals("category")) { //$NON-NLS-1$
-						parentCategory = parser.getAttributeValue("","name");
-						poiParentCategory = parser.getAttributeValue("","poi_category");
-						poiParentPrefix = parser.getAttributeValue("","poi_prefix");
-						order = parser.getAttributeValue("","order");
-						parseCategoryFromXml(parser, poiParentCategory, poiParentPrefix);
+						parentCategory = parseCategoryFromXml(parser);
 					} else if (name.equals("type")) {
-						parseTypeFromXML(parser, parentCategory, poiParentCategory, poiParentPrefix, order);
+						parseTypeFromXML(parser, parentCategory);
 					} else if (name.equals("routing_type")) {
 						parseRouteTagFromXML(parser);
 					}
@@ -463,11 +456,11 @@ public class MapRenderingTypes {
 	protected void parseRouteTagFromXML(XmlPullParser parser) {
 	}
 
-	protected MapRulType parseTypeFromXML(XmlPullParser parser, String parentCategory, String poiParentCategory, String poiParentPrefix, String parentOrder) {
-		return parseBaseRuleType(parser, parentCategory, poiParentCategory, poiParentPrefix, parentOrder, true);
+	protected MapRulType parseTypeFromXML(XmlPullParser parser, MapRulType parentCategory) {
+		return parseBaseRuleType(parser, parentCategory, true);
 	}
 
-	protected MapRulType parseBaseRuleType(XmlPullParser parser, String parentCategory, String poiParentCategory, String poiParentPrefix, String parentOrder, boolean filterOnlyMap) {
+	protected MapRulType parseBaseRuleType(XmlPullParser parser, MapRulType parentCategory, boolean filterOnlyMap) {
 		String tag = lc(parser.getAttributeValue("", "tag"));
 		String value = lc(parser.getAttributeValue("", "value"));
 		String additional = parser.getAttributeValue("", "additional");
@@ -501,8 +494,8 @@ public class MapRenderingTypes {
 		String order = parser.getAttributeValue("", "order");
 		if(!Algorithms.isEmpty(order)) {
 			rtype.order = Integer.parseInt(order);
-		} else if(!Algorithms.isEmpty(parentOrder)) {
-			rtype.order = Integer.parseInt(parentOrder);
+		} else if (parentCategory != null) {
+			rtype.order = parentCategory.order;
 		}
 		String applyTo = parser.getAttributeValue("", "apply_to");
 		String applyValue = parser.getAttributeValue("", "apply_value");
@@ -513,15 +506,15 @@ public class MapRenderingTypes {
 		if(!rtype.onlyMap) {
 			rtype = registerRuleType(rtype);
 		}
-		
 
-		rtype.category = parentCategory;
-		if (poiParentCategory != null && poiParentCategory.length() > 0) {
-			rtype.poiCategory = AmenityType.getAndRegisterType(poiParentCategory);
-			rtype.poiSpecified = true;
-		}
-		if (poiParentPrefix != null) {
-			rtype.poiPrefix = poiParentPrefix;
+		rtype.category = parentCategory == null ? null : parentCategory.category;
+		if (parentCategory != null) {
+			if (parentCategory.poiCategory != null) {
+				rtype.poiCategory = parentCategory.poiCategory;
+				rtype.poiSpecified = true;
+			}
+			rtype.poiPrefix = parentCategory.poiPrefix;
+			rtype.poiWithNameOnly = parentCategory.poiWithNameOnly;
 		}
 
 		String poiCategory = parser.getAttributeValue("", "poi_category");
@@ -533,7 +526,10 @@ public class MapRenderingTypes {
 				rtype.poiCategory = AmenityType.getAndRegisterType(poiCategory);
 			}
 		}
-		rtype.poiWithNameOnly = Boolean.parseBoolean(parser.getAttributeValue("", "poi_with_name"));
+		String poiWithName = parser.getAttributeValue("", "poi_with_name");
+		if (poiWithName != null) {
+			rtype.poiWithNameOnly = Boolean.parseBoolean(poiWithName);
+		}
 		String poiPrefix = parser.getAttributeValue("", "poi_prefix");
 		if (poiPrefix != null) {
 			rtype.poiPrefix = poiPrefix;
@@ -610,19 +606,26 @@ public class MapRenderingTypes {
 		}
 	}
 
-	protected void parseCategoryFromXml(XmlPullParser parser, String poiParentCategory, String poiParentPrefix) {
-		String poi_tag = parser.getAttributeValue("","poi_tag");
-		if (poi_tag != null && poiParentCategory.length() > 0) {
-			MapRulType rtype = new MapRulType();
-			rtype.poiCategory = AmenityType.getAndRegisterType(poiParentCategory);
+	protected MapRulType parseCategoryFromXml(XmlPullParser parser) {
+		String poiTag = parser.getAttributeValue("", "poi_tag");
+		String poiCategory = parser.getAttributeValue("", "poi_category");
+		MapRulType rtype = new MapRulType();
+		rtype.category = parser.getAttributeValue("", "name");
+		if (!Algorithms.isEmpty(parser.getAttributeValue("", "order"))) {
+			rtype.order = Integer.parseInt(parser.getAttributeValue("", "order"));
+		}
+		if (poiTag != null && poiCategory != null && poiCategory.length() > 0) {
+			rtype.poiCategory = AmenityType.getAndRegisterType(parser.getAttributeValue("", "poi_category"));
 			rtype.poiSpecified = true;
 			rtype.relation = Boolean.parseBoolean(parser.getAttributeValue("", "relation"));
 			rtype.poiWithNameOnly = Boolean.parseBoolean(parser.getAttributeValue("", "poi_with_name"));
-			rtype.poiPrefix = poiParentPrefix;
+			rtype.poiPrefix = parser.getAttributeValue("", "poi_prefix");
 			rtype.onlyPoi = true;
-			rtype.tagValuePattern = new TagValuePattern(poi_tag, null);
-			registerRuleType(rtype);
+
+			rtype.tagValuePattern = new TagValuePattern(poiTag, null);
+			return registerRuleType(rtype);
 		}
+		return rtype;
 	}
 	
 	protected static String constructRuleKey(String tag, String val) {
