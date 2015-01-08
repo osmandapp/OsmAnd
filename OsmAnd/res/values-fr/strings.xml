@@ -283,7 +283,7 @@
   <string name="search_offline_geo_error">Ne peut interpréter le geo intent:\'%s\'</string>
   <string name="search_osm_offline">Recherche d\'adresses dans les cartes hors-ligne</string>
   <string name="system_locale">Système</string>
-  <string name="preferred_locale_descr">Sélectionnez la langue pour l\'affichage</string>
+  <string name="preferred_locale_descr">Sélectionnez la langue pour l\'affichage (veuillez redémarrer OsmAnd après un changement)</string>
   <string name="preferred_locale">Langue de l\'application</string>
   <string name="tip_map_switch">Sélectionner une source de carte</string>
   

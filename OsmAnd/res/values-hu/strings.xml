@@ -335,7 +335,7 @@
   <string name="search_offline_geo_error">Nem sikerült értelmezni a geo intent által küldött parancsot:\'%s\'</string>
   <string name="search_osm_offline">Cím keresése offline térképen</string>
   <string name="system_locale">Rendszer nyelve</string>
-  <string name="preferred_locale_descr">Megjelenített feliratok nyelve</string>
+  <string name="preferred_locale_descr">Megjelenítési nyelv kiválasztása (módosítás után indítsa újra az OsmAnd programot)</string>
   <string name="preferred_locale">Preferált nyelv</string>
   <string name="tip_map_switch">Térképforrás kiválasztása</string>
   
