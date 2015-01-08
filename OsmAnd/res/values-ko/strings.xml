@@ -2106,4 +2106,5 @@
 	<string name="show_railway_warnings">철도 교차로 표시</string>
 	<string name="show_pedestrian_warnings">보행자 횡단보도 표시</string>
     <string name="speak_pedestrian">보행자 횡단보도 알리기</string>
-    </resources>
+    <string name="rendering_value__name">기본값</string>
+	</resources>
