@@ -569,9 +569,9 @@
 	<string name="poi_seamark_buoy_special_purpose">Специальный буй</string>
 	<string name="poi_seamark_daymark"/>
 	<string name="poi_seamark_distance_mark">Отметка расстояния</string>
-	<string name="poi_seamark_dry_dock"/>
+	<string name="poi_seamark_dry_dock">Сухой док</string>
 	<string name="poi_seamark_dyke"/>
-	<string name="poi_seamark_floating_dock"/>
+	<string name="poi_seamark_floating_dock">Плавучий док</string>
 	<string name="poi_seamark_fog_signal">Сигнал при тумане</string>
 	<string name="poi_seamark_harbour_basin"/>
 	<string name="poi_seamark_harbour">Гавань</string>
