@@ -1756,7 +1756,7 @@
     <string name="layers_category_show">Mutat</string>
 	<string name="configure_map">Térképi tartalom</string>
     <string name="search_radius_proximity">ennek a közelében</string>
-    <string name="select_impassable_road">Kiválasztás a térképen</string>
+    <string name="select_impassable_road">Kiválasztás a térképen…</string>
     <string name="impassable_road">Utak elkerülése…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Villamos- és vasútvonalak</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Vasútvonalak</string>
