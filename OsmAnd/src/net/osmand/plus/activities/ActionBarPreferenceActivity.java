@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import android.app.Activity;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
@@ -42,6 +44,9 @@ public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
 			}
 		});
 		getSpinner().setVisibility(View.GONE);
+		if (!((OsmandApplication)getApplication()).getSettings().isLightContent()){
+			getSpinner().setPopupBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.dashboard_black)));
+		}
 	}
 
 	private static int getResIdFromAttribute(final Activity activity, final int attr) {
