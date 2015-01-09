@@ -160,6 +160,13 @@ public class RenderingRule {
 		ifElseChildren.add(rr);
 	}
 	
+	public void addToBeginIfElseChildren(RenderingRule rr){
+		if(ifElseChildren == null){
+			ifElseChildren = new ArrayList<RenderingRule>();
+		}
+		ifElseChildren.add(0, rr);
+	}
+	
 	public boolean isGroup() {
 		return isGroup;
 	}

@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rendering_value__name">Default</string>
 	<string name="speak_pedestrian">Announce pedestrian crosswalks</string>
     <string name="rendering_attr_roadStyle_name">Road style</string>
     <string name="rendering_value_default_name">Default</string>
@@ -34,7 +35,7 @@
     <string name="download_tab_downloads">All&#160;Downloads</string>
     <string name="download_tab_updates">Updates</string>
     <string name="download_tab_local">Local</string>
-	<string name="no_internet_connection">Downloading not possible, please check your Internet connetion.</string>
+	<string name="no_internet_connection">Downloading not possible, please check your Internet connection.</string>
     <string name="dismiss">Dismiss</string>
     <string name="everything_up_to_date">All files up to date</string>
     <string name="use_opengl_render">Use OpenGL rendering</string>
@@ -56,7 +57,7 @@
     <string name="wake_on_voice">Turn on the screen</string>
     <string name="wake_on_voice_descr">Turn on the device screen when approaching a turn</string>
     <string name="wake_on_voice_never">Never</string>
-    <string name="select_impassable_road">Select on map</string>
+    <string name="select_impassable_road">Select on map&#8230;</string>
     <string name="impassable_road">Avoid roads&#8230;</string>
     <string name="tip_recent_changes_1_9_t">Changes in 1.9:
         * Updated maps styles with road surface rendering, transport layers and hiking symbols
@@ -169,13 +170,13 @@
     <string name="targets">Destinations</string>
     <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>
-    <string name="more">More...</string>
+    <string name="more">More&#8230;</string>
     <string name="rendering_value_browse_map_name">Browse map</string>  
     <string name="rendering_value_car_name">Car</string>
     <string name="rendering_value_bicycle_name">Bicycle</string>
     <string name="rendering_value_pedestrian_name">Pedestrian</string>
     <string name="rendering_attr_coloredBuildings_name">Color-code buildings by type</string>
-    <string name="osmo_invite">Invite...</string>
+    <string name="osmo_invite">Invite&#8230;</string>
     <string name="osmo_leave_confirmation_msg">Do you want to leave group %1$s?</string>
     <string name="osmo_specify_tracker_id">Please specify id</string>
     <string name="continue_navigation">Continue Navigation</string>
@@ -240,7 +241,7 @@
     <string name="save_as_favorites_points">Save as group of favorites</string>
     <string name="select_destination_and_intermediate_points">Select waypoints</string>
     <string name="layer_amenity_label">Point labels</string>
-    <string name="loading_smth">Loading %1$s &#8230;</string>
+    <string name="loading_smth">Loading %1$s&#8230;</string>
     <string name="map_widget_plain_time">Current time</string>
     <string name="gpx_wpt">Waypoint</string>
     <string name="selected_gpx_info_show">\n\nPress and hold to see on map</string>
@@ -339,7 +340,7 @@
     <string name="osmo_tracker_id_descr">Click to view or share tracker id. 
         Using tracker id connected devices will be able to monitor all movements of this device! To disconnect select Regenerate option.</string>
     <string name="osmo_session_token">Session token: %1$s</string>
-    <string name="osmo_auth_pending">Waiting for authorization...</string>
+    <string name="osmo_auth_pending">Waiting for authorization&#8230;</string>
     <string name="osmo_locations_sent">Locations sent %1$d (in buffer %2$d) </string>
     <string name="osmo_conn_successfull">Connection established: %1$s </string>
     <string name="osmo_io_error">OsMo connection problem: </string>
@@ -431,10 +432,10 @@
     <string name="gpx_option_calculate_first_last_segment">Calculate OsmAnd route for first and last route segment</string>
     <string name="use_displayed_track_for_navigation">Do you want to use displayed track for navigation?</string>
     <string name="keep_and_add_destination_point">Add as destination point</string>
-    <string name="select_gpx">Select GPX &#8230;</string>
+    <string name="select_gpx">Select GPX&#8230;</string>
     <string name="route_descr_select_destination">Select Destination</string>
-    <string name="route_descr_select_on_map">Select on map &#8230;</string>
-    <string name="route_descr_favorite">Favorite &#8230;</string>
+    <string name="route_descr_select_on_map">Select on map&#8230;</string>
+    <string name="route_descr_favorite">Favorite&#8230;</string>
     <string name="route_preferences">Route preferences</string>
     <string name="route_info">Route information</string>
     <string name="routing_attr_prefer_motorway_name">Prefer motorways</string>
@@ -454,9 +455,9 @@
     <string name="android_19_location_disabled">Since Android version 4.4 (KitKat) you cannot download and update maps to the previous storage folder (%s). Do you want to change to the permitted storage location and copy all OsmAnd files there?
         \n Note 1: Your old files will remain untouched (but can be deleted manually).
         \n Note 2: In the new storage location it will not be possible to share files between OsmAnd and OsmAnd+.</string>
-    <string name="copying_osmand_one_file_descr">Copying file (%s) to the new destination...</string>
-    <string name="copying_osmand_files_descr">Copying OsmAnd data files to the new destination (%s)</string>
-    <string name="copying_osmand_files">Copying OsmAnd data files</string>
+    <string name="copying_osmand_one_file_descr">Copying file (%s) to the new destination&#8230;</string>
+    <string name="copying_osmand_files_descr">Copying OsmAnd data files to the new destination (%s)&#8230;</string>
+    <string name="copying_osmand_files">Copying OsmAnd data files&#8230;</string>
     <string name="calculate_osmand_route_gpx">Calculate OsmAnd offline route</string>
     <string name="app_mode_truck">Truck</string>
     <string name="guidance_preferences_descr">Navigation preferences</string>
@@ -624,7 +625,7 @@
     <string name="distance_measurement_save_gpx">Save as GPX</string>
     <string name="distance_measurement_load_gpx">Open existing GPX</string>
     <string name="wait_current_task_finished">Please wait until current task is finished</string>
-    <string name="use_kalman_filter_compass_descr">Use Kalman filter to avoid compass aberrations</string>
+    <string name="use_kalman_filter_compass_descr">Reduces noise in compass readings but adds inertia</string>
     <string name="use_kalman_filter_compass">Use Kalman filter</string>
     <string name="access_mark_final_location_first">Accessibility mode: please select destination first</string> 
     <string name="use_magnetic_sensor_descr">Use magnetic sensor to determine compass value instead of orientation sensor</string>
@@ -838,7 +839,7 @@
     <string name="btn_advanced_mode">Advanced Mode&#8230;</string>
     <string name="poi_filter_parking">Parking</string>
     <string name="poi_filter_emergency">Emergency</string>
-    <string name="poi_filter_public_transport">Public Transport</string>
+    <string name="poi_filter_public_transport">Public transport</string>
     <string name="poi_filter_entertainment">Entertainment</string>
     <string name="poi_filter_accomodation">Accommodation</string>
     <string name="poi_filter_restaurants">Restaurants</string>
@@ -876,7 +877,7 @@
 		- Complete offline functionality (store downloaded vector or tile maps in the device storage)
 		- Compact offline vector maps for the whole world available
 		- Download of country or region maps directly from the app 
-		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transportation stops, additional maps with customizable transparency
+		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transport stops, additional maps with customizable transparency
 		- Offline search for addresses and places (POIs)
 		- Offline routing for short distances (experimental)
 		- Car, bicycle, and pedestrian modes with:
@@ -976,7 +977,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		- Compact offline vector maps for the whole world available
 		- Unlimited downloading of country or region maps directly from the app 
 		- Offline Wikipedia feature (download Wikipedia POIs), great for sightseeing
-		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transportation stops, additional maps with customizable transparency
+		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transport stops, additional maps with customizable transparency
 		- Offline search for addresses and places (POIs)
 		- Offline routing for short distances (experimental)
 		- Car, bicycle, and pedestrian modes with:
@@ -1181,7 +1182,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_search_desc">POI (Point of interest) search</string>
 	<string name="address_search_desc">Address search</string>
 	<string name="navpoint_search_desc">Coordinates</string>
-	<string name="transport_search_desc">Transportation search</string>
+	<string name="transport_search_desc">Public transport search</string>
 	<string name="favourites_search_desc">Favorites search</string>
 	<string name="history_search_desc">Search history</string>
 	<string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
@@ -1192,7 +1193,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="unknown_location">Position not yet known</string>
 	<string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
 	<string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
-	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' →  \'Manage map files\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transportation.</string>    
+	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' →  \'Manage map files\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transport.</string>    
 	<string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
 	<string name="local_indexes_cat_tile">Online and tile maps</string>
 	<string name="local_indexes_cat_map">Offline maps (vector)</string>
@@ -1474,9 +1475,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_position_address">Address&#8230;</string>
 	<string name="search_position_favorites">Favorites&#8230;</string>
 	<string name="search_position_undefined">Undefined</string>
-	<string name="search_position_fixed"></string>
 	<string name="search_position_current_location">Current position&#8230;</string>
-	<string name="search_position_map_view">Last map view</string>
+	<string name="search_position_map_view">Current map center</string>
 	<string name="select_search_position">Origin:</string>
 	<string name="context_menu_item_search">Search near here</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7:
@@ -1528,7 +1528,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_index_download">Download</string>
 	<string name="local_index_poi_data">POI data</string>
 	<string name="local_index_address_data">Address data</string>
-	<string name="local_index_transport_data">Transportation data</string>
+	<string name="local_index_transport_data">Public transport data</string>
 	<string name="local_index_map_data">Map data</string>
 	<string name="local_indexes_cat_backup">Deactivated</string>
 	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
@@ -1600,7 +1600,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
 	<string name="search_osm_offline">Search geo location</string>
 	<string name="system_locale">System</string>
-	<string name="preferred_locale_descr">Select display language</string>
+	<string name="preferred_locale_descr">Select display language (please restart OsmAnd after changing)</string>
 	<string name="preferred_locale">Display language</string>
 	<string name="incomplete_locale">incomplete</string>
 	<string name="tip_map_switch">Select a Map Source</string>
@@ -1656,17 +1656,17 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="amenity_type_sport">Sport</string>
 	<string name="amenity_type_sustenance">Sustenance</string>
 	<string name="amenity_type_tourism">Tourism</string>
-	<string name="amenity_type_transportation">Transportation</string>
+	<string name="amenity_type_transportation">Transport</string>
 	<string name="indexing_address">Indexing address&#8230;</string>
 	<string name="indexing_map">Indexing map&#8230;</string>
 	<string name="indexing_poi">Indexing POI&#8230;</string>
-	<string name="indexing_transport">Indexing transportation&#8230;</string>
+	<string name="indexing_transport">Indexing transport&#8230;</string>
 	<string name="input_output_error">I/O error occurred</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">Deprecated map data format \'\'{0}\'\' is not supported</string>
-	<string name="poi_filter_closest_poi">Closest POI</string>
+	<string name="poi_filter_closest_poi">Nearest POIs</string>
 	<string name="poi_filter_custom_filter">Custom filter</string>
 	<string name="poi_filter_namefinder">Online NameFinder</string>
 	<string name="reading_cached_tiles">Reading cached tiles&#8230;</string>
@@ -1720,11 +1720,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_high_res_maps">High resolution display</string>
 	<string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays</string>
 	<string name="download_files">Download</string>
-	<string name="context_menu_item_search_transport">Search transportation</string>
-	<string name="transport_searching_transport">Transportation results (no destination):</string>
-	<string name="transport_searching_route">Transportation results ({0} to destination):</string>
+	<string name="context_menu_item_search_transport">Search public transport</string>
+	<string name="transport_searching_transport">Transport results (no destination):</string>
+	<string name="transport_searching_route">Transport results ({0} to destination):</string>
 	<string name="transport_search_none">none</string>
-	<string name="transport_search_again">Reset Transportation search</string>
+	<string name="transport_search_again">Reset transport search</string>
 	<string name="map_index">Map</string>
 	<string name="voice">Recorded voice</string>
 	<string name="voices">Voice prompts</string>
@@ -1734,7 +1734,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="layer_gpx_layer">GPX track&#8230;</string>
 	<string name="error_reading_gpx">Error reading GPX data</string>
 	<string name="vector_data">Offline vector maps</string>
-	<string name="transport_context_menu">Search transportation at stop</string>
+	<string name="transport_context_menu">Search transport at stop</string>
 	<string name="point_on_map">Location:\n Lat %1$.5f\n Lon %2$.5f</string>
 	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Modify POI</string>
@@ -1760,13 +1760,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="none_region_found">No offline data for regions found on SD card. Download regions from the Internet.</string>
 	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
 	<string name="any_poi">Any</string>
-	<string name="layer_transport_route">Transportation route</string>
+	<string name="layer_transport_route">Transport route</string>
 	<string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
 	<string name="layer_yandex_traffic">Yandex traffic</string>
 	<string name="layer_route">Route</string>
 	<string name="layer_favorites">Favorites</string>
 	<string name="layer_osm_bugs">OSM bugs (online)</string>
-	<string name="layer_transport">Transportation stops</string>
+	<string name="layer_transport">Transport stops</string>
 	<string name="layer_poi">POI&#8230;</string>
 	<string name="layer_map">Map source&#8230;</string>
 	<string name="menu_layers">Map layers</string>
@@ -1811,7 +1811,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="first_time_continue">Later</string>
 	<string name="first_time_download">Download regions</string>
 	<string name="search_poi_location">Searching for signal&#8230;</string>
-	<string name="search_near_map">Search near last map location</string>
+	<string name="search_near_map">Search near current map center</string>
 	<string name="search_nearby">Search nearby</string>
 	<string name="map_orientation_default">Same as device</string>
 	<string name="map_orientation_portrait">Portrait</string>
@@ -1823,18 +1823,18 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="transport_Routes">Routes</string>
 	<string name="transport_Stop">Stop</string>
 	<string name="transport_stops">stops</string>
-	<string name="transport_search_after">Subsequent route</string>	
-	<string name="transport_search_before">Prior route</string>
+	<string name="transport_search_after">Subsequent itinerary</string>
+	<string name="transport_search_before">Prior itinerary</string>
 	<string name="transport_finish_search">Finish search</string>
 	<string name="transport_stop_to_go_out">Choose stop to get off</string>
 	<string name="transport_to_go_after">prior distance</string>
 	<string name="transport_to_go_before">subsequent distance</string>
 	<string name="transport_stops_to_pass">stops to pass</string>
-	<string name="transport_route_distance">Route distance</string>
-	<string name="transport">Transportation</string>
+	<string name="transport_route_distance">Itinerary distance</string>
+	<string name="transport">Transport</string>
 	<string name="default_buttons_ok">OK</string>
-	<string name="show_transport_over_map_description">Show public transportation stops on map</string>
-	<string name="show_transport_over_map">Show transportation stops</string>
+	<string name="show_transport_over_map_description">Show public transport stops on map</string>
+	<string name="show_transport_over_map">Show transport stops</string>
 	<string name="hello">Navigation application OsmAnd</string>
 	<string name="update_poi_success">POI data was updated successfully ({0} were loaded)</string>
 	<string name="update_poi_error_local">Error updating local POI list</string>

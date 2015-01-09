@@ -2,6 +2,7 @@ package net.osmand.plus.sherpafy;
 
 import java.util.WeakHashMap;
 
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,11 +10,9 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -231,7 +230,8 @@ public class TourViewActivity extends ActionBarActivity {
 		if (r != 0) {
 			menuItem.setIcon(r);
 		}
-		menuItem.setShowAsActionFlags(menuItemType).setOnMenuItemClickListener(listener);
+		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
+		menuItem.setOnMenuItemClickListener(listener);
 		return menuItem;
 	}
 

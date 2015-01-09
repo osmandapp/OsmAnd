@@ -4,7 +4,8 @@
 package net.osmand.plus.activities.search;
 
 
-import android.support.v4.content.res.ResourcesCompat;
+import android.content.Context;
+import android.support.v4.view.MenuItemCompat;
 import android.view.*;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.*;
@@ -47,12 +48,15 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
@@ -83,6 +87,11 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private static final int SHOW_ON_MAP = 1;
 	private static final int FILTER = 2;
 
+	private static final int ORIENTATION_0 = 0;
+	private static final int ORIENTATION_90 = 3;
+	private static final int ORIENTATION_270 = 1;
+	private static final int ORIENTATION_180 = 2;
+
 	private PoiFilter filter;
 	private AmenityAdapter amenityAdapter;
 	private EditText searchFilter;
@@ -109,8 +118,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		boolean light = getMyApplication().getSettings().isLightActionBar();
-		searchPOILevel = menu.add(0, SEARCH_MORE, 0, R.string.search_POI_level_btn).setShowAsActionFlags(
-				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		searchPOILevel = menu.add(0, SEARCH_MORE, 0, R.string.search_POI_level_btn);
+		MenuItemCompat.setShowAsAction(searchPOILevel,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		searchPOILevel.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -121,8 +131,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		});
 		updateSearchPoiTextButton(false);
 		
-		showFilterItem = menu.add(0, FILTER, 0, R.string.search_poi_filter).setShowAsActionFlags(
-				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		showFilterItem = menu.add(0, FILTER, 0, R.string.search_poi_filter);
+		MenuItemCompat.setShowAsAction(showFilterItem,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		showFilterItem = showFilterItem.setIcon(light ? R.drawable.ic_action_filter_light: R.drawable.ic_action_filter_dark);
 		showFilterItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
@@ -152,8 +163,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		}
 		
 
-		showOnMapItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(
-				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		showOnMapItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map);
+		MenuItemCompat.setShowAsAction(showOnMapItem,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		showOnMapItem = showOnMapItem.setIcon(light ? R.drawable.ic_action_map_marker_light : R.drawable.ic_action_map_marker_dark);
 		showOnMapItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
@@ -320,6 +332,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		} else if(isSearchByNameFilter() ){
 			searchFilterLayout.setVisibility(View.VISIBLE);
 		}
+		//Freeze the direction arrows (reference is constant north) when Accessibility mode = ON, so screen can be read aloud without continuous updates
 		if(!app.accessibilityEnabled()) {
 			app.getLocationProvider().addCompassListener(this);
 			app.getLocationProvider().registerOrUnregisterCompassListener(true);
@@ -483,17 +496,25 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 	@Override
 	public void updateCompassValue(float value) {
+		//99 in next line used to one-time initalize arrows (with reference vs. fixed-north direction) on non-compass devices
+		float lastHeading = heading != null ? heading : 99;
 		heading = value;
-		if(!uiHandler.hasMessages(COMPASS_REFRESH_MSG_ID)){
-			Message msg = Message.obtain(uiHandler, new Runnable(){
-				@Override
-				public void run() {
-					amenityAdapter.notifyDataSetChanged();
-				}
-			});
-			msg.what = COMPASS_REFRESH_MSG_ID;
-			uiHandler.sendMessageDelayed(msg, 100);
+		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			amenityAdapter.notifyDataSetChanged();
+		} else {
+			heading = lastHeading;
 		}
+		//Comment out and use lastHeading above to see if this fixes issues seen on some devices
+		//if(!uiHandler.hasMessages(COMPASS_REFRESH_MSG_ID)){
+		//	Message msg = Message.obtain(uiHandler, new Runnable(){
+		//		@Override
+		//		public void run() {
+		//			amenityAdapter.notifyDataSetChanged();
+		//		}
+		//	});
+		//	msg.what = COMPASS_REFRESH_MSG_ID;
+		//	uiHandler.sendMessageDelayed(msg, 100);
+		//}
 	}
 	
 	
@@ -744,7 +765,34 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height, false);
 				Float h = heading;
 				float a = h != null ? h : 0;
-				draw.setAngle(mes[1] - a + 180);
+
+				//Hardy: getRotation() is the correction if device's screen orientation != the default display's standard orientation
+				int screenOrientation = 0;
+				screenOrientation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+				switch (screenOrientation)
+				{
+				case ORIENTATION_0:   // Device default (normally portrait)
+					screenOrientation = 0;
+					break;
+				case ORIENTATION_90:  // Landscape right
+					screenOrientation = 90;
+					break;
+				case ORIENTATION_270: // Landscape left
+					screenOrientation = 270;
+					break;
+				case ORIENTATION_180: // Upside down
+					screenOrientation = 180;
+					break;
+				}
+
+				//Looks like screenOrientation correction must not be applied for devices without compass?
+				Sensor compass  = ((SensorManager) getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+				if (compass == null) {
+					screenOrientation = 0;
+				}
+
+				draw.setAngle(mes[1] - a + 180 + screenOrientation);
+
 				draw.setOpenedColor(opened);
 				direction.setImageDrawable(draw);
 			} else {

@@ -880,7 +880,7 @@
 	<string name="download_type_to_filter">tipkajte za filtriranje</string>
 	<string name="use_high_res_maps">Zaslon z visoko ločljivostjo</string>
 	<string name="use_high_res_maps_descr">Ne raztegni (in zamegli) ploščic zemljevida na zaslonih z visoko gostoto</string>
-	<string name="context_menu_item_search_transport">Iskanje prevoza</string>
+	<string name="context_menu_item_search_transport">Iskanje javnega prevoza</string>
 	<string name="transport_searching_transport">Rezultati prevoza (brez cilja):</string>
 	<string name="transport_searching_route">Rezultati prevoza ({0} do cilja):</string>
 	<string name="transport_search_none">brez</string>
@@ -898,8 +898,8 @@
 	<string name="show_route">Podrobnosti poti</string>
 	<string name="fav_imported_sucessfully">Priljubljene točke so bile uspešno uvožene</string>
 	<string name="fav_file_to_load_not_found">Datoteke GPX, ki vsebuje priljubljene, ni bilo mogoče najti na {0}</string>
-	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd je odprtokodna aplikacija za navigacijo, ki uporablja širok nabor zemljevidov OpenStreetMap (OSM) za cel svet. Vse podatke zemljevidov (vektorske in ploščice) lahko shranite v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja (turn-by-turn). Pomembnejše lastnosti: - Popolnoma uporaben brez povezave (shrani prenesene vektorske podatke ali ploščice zemljevida v shrambo naprave) - Na voljo so stisnjeni vektorski podatki zemljevida za cel svet - Prenos podatkov zemljevida posameznih držav ali področij znotraj aplikacije - Prekrivanje več plasti zemljevidov, npr. sled GPX, načrt poti, zanimive in priljubljene točke, izohipse, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo - Iskanje naslovov in krajev (POI) brez povezave do interneta - Izdelava načrta najkrajše poti (poskusno) - Način za avtomobiliste, kolesarje in pešce z: * nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom * nastavljivo povečavo zemljevida glede na hitrost gibanja * nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja * nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS). Brezplačna različica programa OsmAnd ima naslednje omejitve: - omejeno je število prenosov zemljevidov - brez povezave ni dostopa do točk iz Wikipedije. OsmAnd je v aktivnem razvoju. Napredek projekta je odvisen od finančnih prispevkov s katerimi se financira razvoj in testiranje novih funkcionalnosti. Prosimo, razmislite o nakupu aplikacije OsmAnd+, ali financiranju posamezne funkcionalnosti, ali nenamensko donacijo na spletni strani osmand.net. "</string>
-	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ je odprtokodna aplikacija za navigacijo, ki uporablja širok nabor zemljevidov OpenStreetMap (OSM) za cel svet. Vse podatke zemljevidov (vektorske in ploščice) lahko shranite v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd+ omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja (turn-by-turn). OsmAnd+ je plačljiva različica aplikacije. Z nakupom financirate nadaljnji razvoj in testiranje novih funkcionalnosti ter pridobite zadnje posodobitve. Pomembnejše lastnosti: - Popolnoma uporaben brez povezave (shrani prenesene vektorske podatke ali ploščice zemljevida v shrambo naprave) - Na voljo so stisnjeni vektorski podatki zemljevida za cel svet - Neomejen prenos podatkov zemljevida posameznih držav ali področij znotraj aplikacije - Wikipedia brez povezave (prenos točk iz Wikipedie), odlično za oglede znamenitosti - Prekrivanje več plasti zemljevidov, npr. sled GPX, načrt poti, zanimive in priljubljene točke, izohipse, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo - Iskanje naslovov in krajev (POI) brez povezave do interneta - Izdelava načrta najkrajše poti (poskusno) - Način za avtomobiliste, kolesarje in pešce z: * nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom * nastavljivo povečavo zemljevida glede na hitrost gibanja * nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja * nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS) "</string>
+	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd je odprtokodna aplikacija za navigacijo, ki uporablja širok nabor zemljevidov OpenStreetMap (OSM) za cel svet. Vse podatke zemljevidov (vektorske in ploščice) lahko shranite v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja (turn-by-turn). Pomembnejše lastnosti: - Popolnoma uporaben brez povezave (shrani prenesene vektorske podatke ali ploščice zemljevida v shrambo naprave) - Na voljo so stisnjeni vektorski podatki zemljevida za cel svet - Prenos podatkov zemljevida posameznih držav ali področij znotraj aplikacije - Prekrivanje več plasti zemljevidov, npr. sled GPX, načrt poti, zanimive in priljubljene točke, izohipse, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo - Iskanje naslovov in krajev (POI) brez povezave do interneta - Izdelava načrta najkrajše poti (poskusno) - Način za avtomobiliste, kolesarje in pešce z: - nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom - nastavljivo povečavo zemljevida glede na hitrost gibanja - nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja - nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS). Brezplačna različica programa OsmAnd ima naslednje omejitve: - omejeno je število prenosov zemljevidov - brez povezave ni dostopa do točk iz Wikipedije. OsmAnd je v aktivnem razvoju. Napredek projekta je odvisen od finančnih prispevkov s katerimi se financira razvoj in testiranje novih funkcionalnosti. Prosimo, razmislite o nakupu aplikacije OsmAnd+, ali financiranju posamezne funkcionalnosti, ali nenamensko donacijo na spletni strani osmand.net. "</string>
+	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ je odprtokodna aplikacija za navigacijo, ki uporablja širok nabor zemljevidov OpenStreetMap (OSM) za cel svet. Vse podatke zemljevidov (vektorske in ploščice) lahko shranite v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd+ omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja (turn-by-turn). OsmAnd+ je plačljiva različica aplikacije. Z nakupom financirate nadaljnji razvoj in testiranje novih funkcionalnosti ter pridobite zadnje posodobitve. Pomembnejše lastnosti: - Popolnoma uporaben brez povezave (shrani prenesene vektorske podatke ali ploščice zemljevida v shrambo naprave) - Na voljo so stisnjeni vektorski podatki zemljevida za cel svet - Neomejen prenos podatkov zemljevida posameznih držav ali področij znotraj aplikacije - Wikipedia brez povezave (prenos točk iz Wikipedie), odlično za oglede znamenitosti - Prekrivanje več plasti zemljevidov, npr. sled GPX, načrt poti, zanimive in priljubljene točke, izohipse, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo - Iskanje naslovov in krajev (POI) brez povezave do interneta - Izdelava načrta najkrajše poti (poskusno) - Način za avtomobiliste, kolesarje in pešce z: - nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom - nastavljivo povečavo zemljevida glede na hitrost gibanja - nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja - nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS) "</string>
 	<string name="error_occurred_loading_gpx">Napaka pri nalaganju GPX-a</string>
 	<string name="send_report">Pošlji poročilo</string>
 	<string name="none_region_found">Na SD kartici ni podatkov območij za uporabo brez povezave. Prenesite želena območja iz interneta.</string>
@@ -912,7 +912,7 @@
 	<string name="layer_route">Pot</string>
 	<string name="layer_favorites">Priljubljeni</string>
 	<string name="layer_osm_bugs">OSM hrošči</string>
-	<string name="layer_transport">Postaje javnega prevoza</string>
+	<string name="layer_transport">Postaje prevoza</string>
 	<string name="layer_poi">POI …</string>
 	<string name="layer_map">Vir zemljevida …</string>
 	<string name="context_menu_item_search_poi">Iskanje POI</string>
@@ -944,7 +944,7 @@
 	<string name="first_time_continue">Kasneje</string>
 	<string name="first_time_download">Prenos območij</string>
 	<string name="search_poi_location">Iskanje znaka …</string>
-	<string name="search_near_map">Iskanje v bližini zadnje lokacije</string>
+	<string name="search_near_map">Iskanje v bližini zadnje lokacije na zemljevidu</string>
 	<string name="tip_map_switch_t_v2">"Vir zemljevida in prikazane plasti lahko spreminjate preko \'Meni\' → \'Nastavitve zemljevida\'.
 \n\nPod \'Vir zemljevida …\' lahko izberete med uporabo prednaloženih vektorskih zemljevidov za delo brez povezave, vnaprej določenih spletnih zemljevidov (za to aktivirajte vtičnik \'Spletni zemljevidi\' v \'Nastavitve\' → \'Upravljalnik vtičnikov\'), ali ročno ustvarjenih zemljevidov z uporabo npr. OsmAndMapCreator-ja na računalniku.
 \n\nOsmAnd podpira tudi vire po meri. "</string>
@@ -954,13 +954,13 @@
 	<string name="transport_Routes">Poti</string>
 	<string name="transport_Stop">Postaja</string>
 	<string name="transport_stops">postaje</string>
-	<string name="transport_search_after">Naslednja pot</string>	
+	<string name="transport_search_after">Naknadna pot</string>	
 	<string name="transport_search_before">Prejšnja pot</string>
 	<string name="transport_stop_to_go_out">Izberite izstopno postajo</string>
 	<string name="transport_to_go_after">prejšnja razdalja</string>
 	<string name="transport_to_go_before">naslednja razdalja</string>
 	<string name="transport_stops_to_pass">postaje do izstopa</string>
-	<string name="transport_route_distance">razdalja poti</string>
+	<string name="transport_route_distance">Razdalja poti</string>
 	<string name="default_buttons_ok">V redu</string>
 	<string name="show_transport_over_map_description">Prikaz postaj javnega prevoza na zemljevidu</string>
 	<string name="show_transport_over_map">Prikaz postaj prevoza</string>
@@ -1609,17 +1609,17 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="index_item_world_altitude_correction">Svetovni popravki nadmorske višine</string>
 	<string name="index_item_world_seamarks">Svetovne pomorske oznake</string>
 	<string name="keep_and_add_destination_point">Dodaj kot ciljno točko</string>
-    <string name="select_gpx">Izberite GPX…</string>
+    <string name="select_gpx">Izberite GPX …</string>
     <string name="route_descr_select_destination">Izberite cilj</string>
-    <string name="route_descr_select_on_map">Izberite na zemljevidu…</string>
-    <string name="route_descr_favorite">Priljubljene…</string>
+    <string name="route_descr_select_on_map">Izberite na zemljevidu …</string>
+    <string name="route_descr_favorite">Priljubljene …</string>
     <string name="android_19_location_disabled">Od Android verzije 4.4 (KitKat) naprej, prenos posodobitev zemljevidov ni mogoč na prejšnjo mesto hrambe (%s). Ali želite to spremeniti na takšno mesto, kjer bo to mogoče in skopirati vse OsmAnd podatke tja?
 \n Opomba 1: stare datoteke ne bodo spremenjene (vendar jih lahko ročno izbrišete).
 \n Opomba 2: v novem mestu shrambe si aplikaciji OsmAnd and OsmAnd+ ne bosta mogli deliti podatkov.</string>
     <string name="application_dir_change_warning2">OsmAnd lahko poskusi premakniti podatke na novo mesto hrambe. Ali si želite tega? Izberite \'Ne\' če želite, da OsmAnd ustvari in uporablja novo mapo.</string>
-    <string name="copying_osmand_one_file_descr">Kopiranje datoteke (%s) na novo mesto hrambe...</string>
-    <string name="copying_osmand_files_descr">Kopiranje datotek s podatki za OsmAnd na novo mesto hrambe (%s)</string>
-    <string name="copying_osmand_files">Kopiranje datotek s podatki programa OsmAnd</string>
+    <string name="copying_osmand_one_file_descr">Kopiranje datoteke (%s) na novo mesto hrambe …</string>
+    <string name="copying_osmand_files_descr">Kopiranje datotek s podatki za OsmAnd na novo mesto hrambe (%s) …</string>
+    <string name="copying_osmand_files">Kopiranje datotek s podatki programa OsmAnd …</string>
     <string name="always_center_position_on_map">Prikaz položaja vedno v središču</string>
     <string name="index_item_nation_addresses">Naslovi za celotno državo</string>
 	<string name="lang_mr">Maratščina</string>
@@ -1703,7 +1703,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="osmo_enable_tracker">Pošiljanje mojih lokacij</string>
     <string name="osmo_control">OsMo hiter dostop</string>
     <string name="osmo_connected_devices">Povezane naprave</string>
-    <string name="osmo_auth_pending">Čakanje na dovoljenje...</string>
+    <string name="osmo_auth_pending">Čakanje na dovoljenje …</string>
     <string name="osmo_regenerate_login_ids_confirm">Ali ste prepričani, da želite ustvariti nov ID uporabnika? Vse naprave, ki so povezane z vami, vam ne bodo mogle več slediti.</string>
     <string name="osmo_track_interval_descr">Izberite časovni interval za pošiljanje lokacije</string>
     <string name="osmo_connect_menu">Poveži</string>
@@ -1836,7 +1836,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="rendering_attr_subwayMode_name">Proge podzemne železnice</string>
  	<string name="continue_navigation">Nadaljuj navigacijo</string>
     <string name="rendering_attr_alpineHiking_name">Skala alpskega pohodništva (SAC)</string>
-    <string name="osmo_invite">Povabite...</string>
+    <string name="osmo_invite">Povabite …</string>
     <string name="osmo_specify_tracker_id">Prosim, določite ID</string>
     <string name="arrival_distance_factor_early">Zgodaj</string>
     <string name="arrival_distance_factor_normally">Običajno</string>
@@ -1849,7 +1849,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="av_camera_pic_size_descr">Izberite velikost posnetkov vgrajenega fotoaparata</string>
     <string name="announce_nearby_favorites">Najavi bližino priljubljenih krajev</string>
 <string name="download_additional_maps">Prenos manjkajočih zemljevidov %1$s (%2$d MB)?</string>
-    <string name="more">Več...</string>
+    <string name="more">Več …</string>
     <string name="rendering_value_car_name">Avtomobil</string>
     <string name="rendering_value_bicycle_name">Kolo</string>
     <string name="rendering_value_pedestrian_name">Pešec</string>
@@ -1967,4 +1967,5 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="navigate_point_zone">Območje</string>
     <string name="navigate_point_northing">y koordinata</string>
     <string name="navigate_point_easting">x koordinata</string>
-    </resources>
+    <string name="rendering_value__name">Privzeto</string>
+	</resources>

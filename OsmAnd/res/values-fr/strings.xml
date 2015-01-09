@@ -148,7 +148,7 @@
   <string name="search_position_undefined">Non défini</string>
   <string name="search_position_fixed"/>
   <string name="search_position_current_location">Position actuelle…</string>
-  <string name="search_position_map_view">Dernière vue</string>
+  <string name="search_position_map_view">Centre de la carte</string>
   <string name="select_search_position">Origine :</string>
   <string name="context_menu_item_search">Rechercher autour de ce point</string>
   <string name="tip_recent_changes_0_6_7_t">Changement pour 0.6.7 :
@@ -200,7 +200,7 @@
   
   <string name="local_index_poi_data">Données PI</string>
   <string name="local_index_address_data">Données adresses</string>
-  <string name="local_index_transport_data">Données des transports</string>
+  <string name="local_index_transport_data">Données des transports publics</string>
   <string name="local_index_map_data">Cartes</string>
   
   <string name="local_indexes_cat_backup">Désactivé</string>
@@ -283,7 +283,7 @@
   <string name="search_offline_geo_error">Ne peut interpréter le geo intent:\'%s\'</string>
   <string name="search_osm_offline">Recherche d\'adresses dans les cartes hors-ligne</string>
   <string name="system_locale">Système</string>
-  <string name="preferred_locale_descr">Sélectionnez la langue pour l\'affichage</string>
+  <string name="preferred_locale_descr">Sélectionnez la langue d\'affichage (veuillez redémarrer OsmAnd après modification)</string>
   <string name="preferred_locale">Langue de l\'application</string>
   <string name="tip_map_switch">Sélectionner une source de carte</string>
   
@@ -359,7 +359,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
   <string name="poi_filter_car_aid">Pour conducteurs</string>
-  <string name="poi_filter_closest_poi">PI les plus proches</string>
+  <string name="poi_filter_closest_poi">Points d\'Intérêt les plus proches</string>
   <string name="poi_filter_custom_filter">Filtre personnalisé</string>
   <string name="poi_filter_food_shop">Alimentation</string>
   <string name="poi_filter_for_tourists">Pour voyageurs</string>
@@ -421,11 +421,11 @@
   <string name="use_high_res_maps_descr">Utilisez des cartes de haute résolution pour les appareils les mieux équipés</string>
   <string name="unknown_location">Position inconnue</string>
   <string name="download_files">Télécharger</string>
-  <string name="context_menu_item_search_transport">Chercher transport</string>
-  <string name="transport_searching_transport">Arrêts à proximité (aucune destination définie) :</string>
-  <string name="transport_searching_route">Arrêts à proximité ({0} de la destination) :</string>
+  <string name="context_menu_item_search_transport">Chercher un transport public</string>
+  <string name="transport_searching_transport">Transports possibles (aucune destination définie) :</string>
+  <string name="transport_searching_route">Transports possibles ({0} pour rejoindre la destination) :</string>
   <string name="transport_search_none">aucun</string>
-  <string name="transport_search_again">Réinitialiser la recherche</string>
+  <string name="transport_search_again">Réinitialiser la recherche de transport</string>
   <string name="map_index">Carte</string>
   <string name="voice">Voix enregistrée</string>
   <string name="no_vector_map_loaded">Aucune carte vectorielle n\'a été chargée</string>
@@ -434,7 +434,7 @@
   <string name="layer_gpx_layer">Trace GPX…</string>
   <string name="error_reading_gpx">Erreur de lecteur des données GPX</string>
   <string name="vector_data">Cartes vectorielles OSM</string>
-  <string name="transport_context_menu">Chercher transport à l\'arrivée</string>
+  <string name="transport_context_menu">Rechercher un transport à l\'arrivée</string>
   <string name="point_on_map">Position :\n Lat. %1$.5f\n Lon. %2$.5f</string>
   <string name="osb_bug_name">Bogue</string>
   <string name="poi_context_menu_modify">Modifier PI</string>
@@ -456,13 +456,13 @@
   <string name="none_region_found">Aucune région trouvée sur la carte SD. Essayez d\'en télécharger une d\'internet.</string>
   <string name="poi_namefinder_query_empty">Paramètres de recherche pour trouver le PI</string>
   <string name="any_poi">Tout</string>
-  <string name="layer_transport_route">Routes de transport</string>
+  <string name="layer_transport_route">Itinéraires de transports publics</string>
   <string name="thanks_yandex_traffic">Merci à Yandex de fournir des informations sur le trafic.</string>
   <string name="layer_yandex_traffic">Trafic Yandex</string>
   <string name="layer_route">Route</string>
   <string name="layer_favorites">Favoris</string>
   <string name="layer_osm_bugs">Bogues OSM</string>
-  <string name="layer_transport">Arrêts de transport</string>
+  <string name="layer_transport">Arrêts de transports publics</string>
   <string name="layer_poi">Points d\'intérêt…</string>
   <string name="layer_map">Source de la carte…</string>
   <string name="menu_layers">Couches</string>
@@ -513,9 +513,9 @@
   <string name="route_head">Avancez</string>
   <string name="first_time_continue">Continuer</string>
   <string name="first_time_download">Téléchargement des régions</string>
-  <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. La plupart des fonctionnalités de l\'application nécessitent des données régionales, utilisables hors-ligne, que vous pouvez au préalable télécharger (\'Paramètres\' → \'Données hors-ligne\') ou préparer vous-même. Ces données permettront de visualiser les cartes et de rechercher une adresse, un point d\'intérêt (PI) ou un transport en commun.</string>
+  <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. La plupart des fonctionnalités de l\'application nécessitent des données régionales, utilisables hors-ligne, que vous pouvez au préalable télécharger (\'Paramètres\' → \'Données hors-ligne\') ou préparer vous-même. Ces données permettront de visualiser les cartes et de rechercher une adresse, un point d\'intérêt (PI) ou un transport public.</string>
   <string name="search_poi_location">Recherche d\'un signal…</string>
-  <string name="search_near_map">Rechercher près de la dernière position</string>
+  <string name="search_near_map">Rechercher autour du centre de la carte</string>
   <string name="search_nearby">Rechercher à proximité</string>
   <string name="map_orientation_default">Automatique</string>
   <string name="map_orientation_portrait">Portrait</string>
@@ -534,11 +534,11 @@
   <string name="transport_to_go_after">parcourir ensuite</string>
   <string name="transport_to_go_before">parcourir au préalable</string>
   <string name="transport_stops_to_pass">nombre d\'arrêts :</string>
-  <string name="transport_route_distance">Distance du trajet :</string>
+  <string name="transport_route_distance">Distance de l\'itinéraire :</string>
   <string name="transport">Transport</string>
   <string name="default_buttons_ok">OK</string>
-  <string name="show_transport_over_map_description">Afficher les arrêts de transport en commun sur la carte</string>
-  <string name="show_transport_over_map">Afficher les arrêts de transport public</string>
+  <string name="show_transport_over_map_description">Afficher les arrêts de transport publics sur la carte</string>
+  <string name="show_transport_over_map">Afficher les arrêts de transports publics</string>
   <string name="hello">Application de navigation OsmAnd</string>
   <string name="update_poi_success">Mise à jour des données PI réussie ({0} ont été chargés)</string>
   <string name="update_poi_error_local">Erreur de mise à jour des index locaux</string>
@@ -877,7 +877,7 @@
   <string name="poi_search_desc">Recherche de points d\'intérêt (PI)</string>
   <string name="address_search_desc">Recherche par adresse</string>
   <string name="navpoint_search_desc">Coordonnées</string>
-  <string name="transport_search_desc">Recherche de transports en commun</string>
+  <string name="transport_search_desc">Recherche de transports publics</string>
   <string name="favourites_search_desc">Recherche parmi les favoris</string>
   <string name="history_search_desc">Historique des recherches</string>
   <string name="route_roundabout">Rond-point : prenez la %1$d sortie puis continuez</string>
@@ -1025,8 +1025,8 @@
 \n* Nombreuses corrections de bugs "</string>
 <string name="snap_to_road_descr">Coller à la route pendant la navigation</string>
 <string name="snap_to_road">Coller à la route</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans le périphérique de stockage) - Cartes hors-lignes compactes disponibles pour le monde entier - Téléchargement des cartes pour un pays ou une région directement depuis l\'application - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveau, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) Limitations de la version gratuite de OsmAnd : - Nombre de téléchargement de cartes limité - Pas d\'accès aux PI Wikipédia hors-ligne. OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique, ou un donation sur osmand.net. "</string>
-<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans le périphérique de stockage) - Cartes es compactes disponibles pour le monde entier - Téléchargement illimité des cartes pour un pays ou une région directement depuis l\'application - Points d\'intérêt (PI) Wikipédia hors-ligne, parfait pour le tourisme - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des courbes de niveau, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) - Affichage des limitations de vitesse, voix enregistrées et voix de synthèse "</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans le périphérique de stockage) - Cartes hors-lignes compactes disponibles pour le monde entier - Téléchargement des cartes pour un pays ou une région directement depuis l\'application - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveau, les arrêts de transport public, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) Limitations de la version gratuite de OsmAnd : - Nombre de téléchargement de cartes limité - Pas d\'accès aux PI Wikipédia hors-ligne. OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique, ou un donation sur osmand.net. "</string>
+<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans le périphérique de stockage) - Cartes es compactes disponibles pour le monde entier - Téléchargement illimité des cartes pour un pays ou une région directement depuis l\'application - Points d\'intérêt (PI) Wikipédia hors-ligne, parfait pour le tourisme - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des courbes de niveau, les arrêts de transport public, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) - Affichage des limitations de vitesse, voix enregistrées et voix de synthèse "</string>
 <string name="tip_map_switch_t_v2">"La source des cartes et des couches affichées est modifiable via \'Menu\' → \'Affichage de la carte\' → \'Source de la carte…\'.
 \n\tVous pouvez choisir entre les cartes vectorielles hors-ligne préchargées (choix par défaut, nécessaires pour la navigation hors-ligne), ou des sources prédéfinies de tuiles de carte en ligne ou en cache (activer le greffon \'Cartes en ligne\' pour cela), ou des cartes créées manuellement sur un PC grâce à OsmAndMapCreator.
 \n\tOsmAnd supporte également des sources personnalisées. "</string>
@@ -1053,7 +1053,7 @@
     <string name="btn_advanced_mode">Mode avancé…</string>
     <string name="poi_filter_parking">Parking</string>
     <string name="poi_filter_emergency">Urgences</string>
-    <string name="poi_filter_public_transport">Transports en commun</string>
+    <string name="poi_filter_public_transport">Transports publics</string>
     <string name="poi_filter_entertainment">Divertissements</string>
     <string name="poi_filter_restaurants">Restauration</string>
     <string name="poi_filter_sightseeing">Tourisme</string>
@@ -1303,7 +1303,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_magnetic_sensor_descr">Utiliser le magnétomètre pour déterminer l\'orientation de la boussole au lieu du capteur d\'orientation</string>
     <string name="use_magnetic_sensor">Utiliser le magnétomètre (boussole)</string>
     <string name="local_indexes_cat_srtm">Courbes de niveau</string>
-    <string name="use_kalman_filter_compass_descr">Utiliser un filtre de Kalman pour éviter les interférences de la boussole</string>
+    <string name="use_kalman_filter_compass_descr">Réduit le bruit sur les mesures de la boussole, mais ajoute de l\'inertie</string>
     <string name="use_kalman_filter_compass">Utiliser un filtre de Kalman</string>
     <string name="access_mark_final_location_first">Mode d\'accessibilité : veuillez d\'abord définir une destination</string> 
     <string name="distance_measurement_start_editing">Mesurer sur la carte</string>
@@ -1467,9 +1467,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="android_19_location_disabled">Depuis Android 4.4 (KitKat), vous ne pouvez plus télécharger et mettre à jour les cartes dans le dossier (%s) utilisé jusqu\'à présent. Voulez-vous utiliser le nouveau dossier et y copier l\'ensemble des fichiers OsmAnd ?
 \n Note 1 : Les anciens fichiers seront conservés (mais vous pouvez les supprimer manuellement)\n Note 2 : En raison de ce nouveau dossier de stockage, il ne sera plus possible de partager des fichiers entre OsmAnd et OsmAnd+.</string>
     <string name="application_dir_change_warning2">Souhaitez-vous qu\'OsmAnd copie aussi ses données vers la nouvelle destination ? (choisissez \'Non\' pour qu\'OsmAnd crée et utilise un nouveau dossier vierge)</string>
-    <string name="copying_osmand_one_file_descr">Copie des fichiers (%s) vers la nouvelle destination...</string>
-    <string name="copying_osmand_files_descr">Copie des fichiers de données OsmAnd vers la nouvelle destination (%s)</string>
-    <string name="copying_osmand_files">Copie des fichiers de données OsmAnd</string>
+    <string name="copying_osmand_one_file_descr">Copie du fichier (%s) vers le nouvel emplacement…</string>
+    <string name="copying_osmand_files_descr">Copie des fichiers de données OsmAnd vers la nouvelle destination (%s)…</string>
+    <string name="copying_osmand_files">Copie des fichiers de données OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">Calcul de la route OsmAnd hors-ligne</string>
     <string name="app_mode_truck">Camion</string>
     <string name="routing_attr_prefer_motorway_name">Privilégier les autoroutes</string>
@@ -1488,7 +1488,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_weight_description">Spécifier la limite de poids devant être autorisée sur les routes</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Sélectionnez la destination</string>
-    <string name="route_descr_select_on_map">Sélectionnez sur la carte…</string>
+    <string name="route_descr_select_on_map">Sélectionner sur la carte…</string>
     <string name="route_descr_favorite">Favori…</string>
     <string name="route_preferences">Préférences d\'itinéraire</string>
     <string name="route_info">Informations sur l\'itinéraire</string>
@@ -1696,7 +1696,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="gpx_available_current_track">Trace en cours d\'enregistrement</string>
     <string name="gpx_wpt">Point de passage</string>
     <string name="map_widget_plain_time">Heure actuelle</string>
-    <string name="loading_smth">Chargement de %1$s …</string>
+    <string name="loading_smth">Chargement de %1$s…</string>
     <string name="save_as_favorites_points">Enregistrer comme groupe de favoris</string>
     <string name="select_destination_and_intermediate_points">Sélectionnez les points de passage</string>
     <string name="layer_amenity_label">Libellés de point</string>
@@ -1784,7 +1784,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_value_car_name">Voiture</string>
     <string name="rendering_value_bicycle_name">Vélo</string>
     <string name="rendering_value_pedestrian_name">Piéton</string>
-    <string name="more">Plus...</string>
+    <string name="more">Plus…</string>
     <string name="download_additional_maps">Télécharger les cartes manquantes %1$s (%2$d Mo) ?</string>
     <string name="flat_list_waypoitns">Tous</string>
     <string name="waypoints">Points de passage</string>
@@ -1847,7 +1847,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_attr_tramRoutes_name">Voies de tramway</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Voies partagées pour les taxi</string>
     <string name="rendering_attr_tramTrainRoutes_name">Itinéraires de tramway et train</string>
-    <string name="select_impassable_road">Sélectionnez sur la carte</string>
+    <string name="select_impassable_road">Sélectionnez sur la carte…</string>
     <string name="impassable_road">Évitez les routes…</string>
     <string name="rendering_category_hide">Masquer</string>
     <string name="wake_on_voice">Allumer l\'écran</string>
@@ -1894,4 +1894,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="routing_attr_no_new_routing_description">Ne pas utiliser les nouvelles règles de routage de la version 1.9</string>
     <string name="routing_attr_no_new_routing_name">Ne pas utiliser la version 1.9 des calculs de route</string>
     <string name="speak_pedestrian">Annoncer les passages piéton</string>
-    </resources>
+    <string name="rendering_value__name">Par défaut</string>
+	</resources>

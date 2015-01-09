@@ -101,7 +101,7 @@
 	<string name="poi_search_desc">Interessepunktsøk</string>
 	<string name="address_search_desc">Adressesøk</string>
 	<string name="navpoint_search_desc">Koordinater</string>
-	<string name="transport_search_desc">Transportsøk</string>
+	<string name="transport_search_desc">Kollektivtrafikksøk</string>
 	<string name="favourites_search_desc">Favorittsøk</string>
 	<string name="history_search_desc">Søkehistorikk</string>
 	<string name="offline_navigation_not_available">OsmAnd offline navigering er midlertidig ikke tilgjengelig.</string>
@@ -268,7 +268,7 @@
 	<string name="search_position_fixed">Fast</string>
 	<string name="search_position_current_location">Gjeldende posisjon…</string>
 	<string name="search_position_map_view">Siste kartvisning</string>
-	<string name="select_search_position">Søk nær:</string>
+	<string name="select_search_position">Utgangspunkt:</string>
 	<string name="context_menu_item_search">Søk nær her</string>
 	<string name="save_route_dialog_title">Lagre rute som GPX-spor</string>
 	<string name="route_successfully_saved_at">Rute vellykket lagret som \'%1$s\'.</string>
@@ -297,7 +297,7 @@
 	
 	<string name="local_index_poi_data">Interessepunkt-data</string>
 	<string name="local_index_address_data">Adressedata</string>
-	<string name="local_index_transport_data">Transportdata</string>
+	<string name="local_index_transport_data">Kollektivtrafikkdata</string>
 	<string name="local_index_map_data">Kartdata</string>
 	<string name="local_indexes_cat_backup">Deaktivert</string>
 	<string name="local_indexes_cat_tts">Taledata (TTS)</string>
@@ -415,7 +415,7 @@
 	<string name="renderers_descr">Velg utseende på opptegningen</string>
 	<string name="website">Nettsted</string>
 	<string name="phone">Telefon</string>
-	<string name="context_menu_item_search_transport">Søk transport</string>
+	<string name="context_menu_item_search_transport">Søk offentlig transport</string>
 	<string name="transport_searching_transport">Transportresultater (ingen mål):</string>
 	<string name="transport_searching_route">Transportresultater ({0} til mål):</string>
 	<string name="transport_search_none">ingen</string>
@@ -472,7 +472,7 @@
 	<string name="map_screen_orientation_descr">Portrett, landskap eller enhet</string>
 	<string name="add_new_rule">Legg til ny regel</string>
 	<string name="transport_Routes">Ruter</string>
-	<string name="transport_route_distance">Rutedistanse</string>
+	<string name="transport_route_distance">Reiserutedistanse</string>
 	<string name="transport">Transport</string>
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Vis stoppesteder for offentlig transport på kart</string>
@@ -858,7 +858,7 @@
     <string name="distance">Avstand</string>
     <string name="index_tours">Turer</string>
     <string name="flat_list_waypoints">Alle</string>
-    <string name="more">Mer...</string>
+    <string name="more">Mer…</string>
     <string name="rendering_value_browse_map_name">Se gjennom kart</string>  
     <string name="rendering_attr_coloredBuildings_name">Fargekod bygninger etter type</string>
     <string name="rendering_attr_buildings15zoom_name">Bygninger på zoom 15</string>
@@ -892,7 +892,7 @@
 	<string name="routing_attr_avoid_motorway_description">Unngå motorveier</string>
 	<string name="routing_attr_weight_name">Vektgrense</string>
 	<string name="routing_attr_weight_description">Angi kjøretøyets vekt som er tillatt på ruter</string>
-    <string name="copying_osmand_files_descr">Kopierer OsmAnd-datafiler til nytt sted (%s)</string>
+    <string name="copying_osmand_files_descr">Kopierer OsmAnd-datafiler til det nye stedet (%s)…</string>
     <string name="distance_measurement_clear_route">Slett alle punkter</string>
     <string name="use_kalman_filter_compass_descr">Bruk Kalmanfilter for å unngå kompassavvik</string>
     <string name="use_kalman_filter_compass">Bruk Kalmanfilter</string>
@@ -983,7 +983,7 @@
 	<string name="lang_zh_CN">Forenklet kinesisk</string>
 	<string name="lang_zh_TW">Tradisjonell kinesisk</string>
 	<string name="keep_and_add_destination_point">Legg til som målpunkt</string>
-    <string name="select_gpx">Velg GPX …</string>
+    <string name="select_gpx">Velg GPX…</string>
     <string name="route_descr_select_on_map">Velg på kart…</string>
     <string name="route_descr_favorite">Favoritt…</string>
     <string name="route_preferences">Ruteinnstillinger</string>
@@ -1109,7 +1109,7 @@
     <string name="local_index_unselect_gpx_file">Fravelg</string>
     <string name="local_index_select_gpx_file">Velg for å vise</string>
     <string name="save_as_favorites_points">Lagre som gruppe av favoritter</string>
-    <string name="loading_smth">Laster %1$s …</string>
+    <string name="loading_smth">Laster %1$s…</string>
     <string name="gpx_info_distance">"Avstand: %1$s (%2$s punkter) "</string>
 	<string name="gpx_info_start_time">"Starttid: %1$tF, %1$tT "</string>
 	<string name="gpx_info_end_time">"Sluttid: %1$tF, %1$tT "</string>
@@ -1126,8 +1126,8 @@
     <string name="hours_ago">timer siden</string>
     <string name="minutes_ago">minutter siden</string>
     <string name="seconds_ago">sekunder siden</string>
-    <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til det nye stedet...</string>
-    <string name="copying_osmand_files">Kopierer OsmAnd-datafiler</string>
+    <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til det nye stedet…</string>
+    <string name="copying_osmand_files">Kopierer OsmAnd-datafiler…</string>
     <string name="route_descr_destination">Reisemål</string>
     <string name="gpx_file_name">GPX-filnavn</string>
     <string name="osmand_distance_planning_plugin_name">Distansekalkulator &amp; Planleggingsverktøy</string>

@@ -42,6 +42,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.text.Spannable;
@@ -518,9 +519,11 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 					hideProgressBar();
 					final Intent sendIntent = new Intent();
 					sendIntent.setAction(Intent.ACTION_SEND);
-					sendIntent.putExtra(Intent.EXTRA_TEXT, GPXUtilities.asString(gpxFile, getMyApplication()));
+					sendIntent.putExtra(Intent.EXTRA_TEXT, "Favourites.gpx:\n\n\n"+GPXUtilities.asString(gpxFile, getMyApplication()));
 					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
-					sendIntent.setType("application/gpx+xml");
+					sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(helper.getExternalFile()));
+//					sendIntent.setType("application/gpx+xml");
+					sendIntent.setType("text/plain");
 					startActivity(sendIntent);
 				}
 			};

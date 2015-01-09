@@ -179,7 +179,7 @@
 	<string name="tip_update_index">Opdatering af offlinekort</string>
 	<string name="filterpoi_activity">Opret interessepunkt-filter</string>
 	<string name="recalculate_route_to_your_location">Transportform:</string>
-	<string name="select_navigation_mode">Vælg transportmetode</string>
+	<string name="select_navigation_mode">Vælg transportform</string>
 	
 	<string name="day_night_info_description">Solopgang: %1$s
 \nSolnedgang: %2$s</string>
@@ -333,7 +333,7 @@
 	<string name="poi_search_desc">Søgning efter interessepunkt (IP)</string>
 	<string name="address_search_desc">Adressesøgning</string>
 	<string name="navpoint_search_desc">Koordinater</string>
-	<string name="transport_search_desc">Transportsøgning</string>
+	<string name="transport_search_desc">Kollektivtrafiksøgning</string>
 	<string name="favourites_search_desc">Favoritsøgning</string>
 	<string name="history_search_desc">Søgehistorik</string>
 	<string name="offline_navigation_not_available">OsmAnd offline navigation er midlertidig utilgængelig.</string>
@@ -345,7 +345,7 @@
 	<string name="unknown_location">Position endnu ikke kendt</string>
 	<string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
 	<string name="confirm_interrupt_download">Afbryd hentning af fil?</string>
-	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Administrer kortfiler\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og finde offentlig transport.</string>    
+	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Administrer kortfiler\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og finde kolllektivtrafik.</string>    
 	<string name="basemap_was_selected_to_download">Basiskort er nødvendige for korrekt programfunktion og blev automatisk valgt.</string>
 	<string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sin region kan man lave den selv (se http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online- og delkort</string>
@@ -553,7 +553,7 @@
 	<string name="search_position_undefined">Ikke defineret</string>
 	<string name="search_position_fixed">" "</string>
 	<string name="search_position_current_location">Aktuel position…</string>
-	<string name="search_position_map_view">Seneste kortvisning</string>
+	<string name="search_position_map_view">Nuværende kortcenter</string>
 	<string name="select_search_position">Udgangspunkt:</string>
 	<string name="context_menu_item_search">Søg i nærheden</string>
 	<string name="save_route_dialog_title">Gem rute som GPX-spor</string>
@@ -692,7 +692,7 @@
 	<string name="local_index_download">Hent</string>
 	
 	<string name="local_index_address_data">Adressedata</string>
-	<string name="local_index_transport_data">Transportdata</string>
+	<string name="local_index_transport_data">Kollektivtrafikdata</string>
 	<string name="local_index_map_data">Kortdata</string>
 	<string name="local_indexes_cat_backup">Deaktiveret</string>
 	<string name="local_indexes_cat_tts">Stemmedata (TTS)</string>
@@ -816,7 +816,7 @@
 	<string name="km_h">km/t</string>
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">Forældet kortdataformat \'{0}\' er ikke understøttet</string>
-	<string name="poi_filter_closest_poi">Nærmeste interessepunkt</string>
+	<string name="poi_filter_closest_poi">Nærmeste interessepunkter</string>
 	<string name="poi_filter_custom_filter">Brugerdefineret filter</string>
 	<string name="poi_filter_namefinder">Online navne-søger</string>
 	<string name="reading_cached_tiles">Læser cachelagrede delkort…</string>
@@ -885,7 +885,7 @@
 	<string name="use_high_res_maps">Højopløseligt visning</string>
 	<string name="use_high_res_maps_descr">Stræk (og slør) ikke delkort på skærme med stor opløsning</string>
 	<string name="download_files">Hent</string>
-	<string name="context_menu_item_search_transport">Søg transport</string>
+	<string name="context_menu_item_search_transport">Søg kollektivtrafik</string>
 	<string name="transport_searching_transport">Transportresultater (ingen destination):</string>
 	<string name="transport_searching_route">Transportresultater ({0} til destination):</string>
 	<string name="transport_search_none">ingen</string>
@@ -898,7 +898,7 @@
 	<string name="layer_gpx_layer">GPX-spor…</string>
 	<string name="error_reading_gpx">Fejl under læsning af GPX-data</string>
 	<string name="vector_data">Offline vektorkort</string>
-	<string name="transport_context_menu">Søg transport ved stoppested</string>
+	<string name="transport_context_menu">Søg efter transport ved stoppested</string>
 	<string name="point_on_map">Placering:
 \n Lat %1$.5f
 \n Long %2$.5f</string>
@@ -1005,7 +1005,7 @@
 	<string name="first_time_continue">Senere</string>
 	<string name="first_time_download">Hent regioner</string>
 	<string name="search_poi_location">Søger efter signal…</string>
-	<string name="search_near_map">Søg tæt på sidste kortplacering</string>
+	<string name="search_near_map">Søg i nærheden af nuværende kortcenter</string>
 	<string name="search_nearby">Søg i nærheden</string>
 	<string name="map_orientation_default">Samme som enhed</string>
 	<string name="map_orientation_portrait">Stående</string>
@@ -1014,12 +1014,12 @@
 	<string name="map_screen_orientation_descr">Stående, liggende eller som enhed</string>
 	<string name="add_new_rule">Tilføj ny regel</string>
 	<string name="transport_Routes">Ruter</string>
-	<string name="transport_search_after">Efterfølgende rute</string>	
-	<string name="transport_search_before">Forudgående rute</string>
+	<string name="transport_search_after">Efterfølgende ruteplan</string>	
+	<string name="transport_search_before">Forudgående ruteplan</string>
 	<string name="transport_finish_search">Afslut søgning</string>
 	<string name="transport_to_go_after">tidligere afstand</string>
 	<string name="transport_to_go_before">efterfølgende afstand</string>
-	<string name="transport_route_distance">Rutelængde</string>
+	<string name="transport_route_distance">Ruteplan længde</string>
 	<string name="transport">Transport</string>
 	<string name="default_buttons_no">Nej</string>
 	<string name="default_buttons_yes">Ja</string>
@@ -1057,7 +1057,7 @@
 	<string name="opening_hours_not_supported">Åbningstider format understøtter ikke redigering</string>
 	<string name="transport_stop_to_go_out">Vælg stoppestedet for afstigning</string>
 	<string name="transport_stops_to_pass">stoppesteder der skal passeres</string>
-	<string name="show_transport_over_map_description">Vis stoppesteder for kollektivtransport på kortet</string>
+	<string name="show_transport_over_map_description">Vis stoppesteder for kollektivtrafik på kortet</string>
 	<string name="show_transport_over_map">Vis stoppesteder</string>
 	<string name="hello">Navigationsprogram OsmAnd</string>
 	<string name="update_poi_success">Interessepunkt-data blev opdateret ({0} blev indlæst)</string>
@@ -1087,9 +1087,8 @@
 	<string name="tip_map_switch_t_v2">"Kortkilden og lag der vises kan ændres via \'Menu\' → \'Konfigurer kort\'.
 \n\nUnder \'Kortkilde...\' vælges de forhåndsindlæste vektorkort, forhåndsdefinerede (online) delkortkilder (aktiver \'Online og delkort\' udvidelsen) eller kort der er manuelt oprettet f.eks. ved hjælp af OsmAndMapCreator på en PC.
 \n\nOsmAnd understøtter også brugerdefinerede kilder. "</string>
-	<string name="tip_app_mode_t_v2">OsmAnd understøtter forskellige profiler (kan konfigureres) til forskellige brugstilfælde.
-\n\nSkift profil via profilknappen i nederste venstre hjørne af skærmen (bil, cykel eller fodgænger) eller når en rute oprettes (\'Transportform\').
-	</string>
+	<string name="tip_app_mode_t_v2">"OsmAnd understøtter forskellige profiler (kan konfigureres) til forskellige brugstilfælde.
+\n\nSkift profil via profilknappen i nederste venstre hjørne af skærmen (bil, cykel eller fodgænger) eller når en rute oprettes (\'transportform\'). "</string>
 	<string name="tip_search_t">"Søg efter steder direkte på kortet via \'Brug placeringer\' → \'Søg i nærheden , eller ved at bruge søgeskærmen via \'Menu\' → \'Søg\'.
 \n\nSøgeskærmen indeholder skabeloner for søgning
 \n * efter adresse
@@ -1280,7 +1279,7 @@
     <string name="use_magnetic_sensor">Magnetisk sensor</string>
     <string name="local_indexes_cat_srtm">Højdekurvedata</string>
     <string name="use_magnetic_sensor_descr">Brug magnetisksensor i stedet for retningssensor til at bestemme kompasværdi</string>
-    <string name="use_kalman_filter_compass_descr">Brug Kalman-filter for at undgå kompasmisvisning</string>
+    <string name="use_kalman_filter_compass_descr">Reducerer støj i kompasaflæsninger, men tilføjer inerti</string>
     <string name="use_kalman_filter_compass">Kalman filter</string>
     <string name="access_mark_final_location_first">Tilgængelighedstilstand: Vælg destination først</string> 
     <string name="wait_current_task_finished">Vent - mens aktuel opgave bliver færdig</string>
@@ -1452,9 +1451,9 @@
     <string name="app_mode_truck">Lastbil</string>
     <string name="calculate_osmand_route_gpx">Beregn OsmAnd offline rute</string>
     <string name="application_dir_change_warning2">"Skal OsmAnd også kopiere datafiler til den nye placering? Vælg \'Nej\' hvis OsmAnd kun skal oprette og bruge den nye  mappe."</string>
-    <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til den ny placering...</string>
-    <string name="copying_osmand_files_descr">Kopierer OsmAnd datafiler til ny destination (%s)</string>
-    <string name="copying_osmand_files">Kopierer OsmAnd datafiler</string>
+    <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til den ny placering…</string>
+    <string name="copying_osmand_files_descr">Kopierer OsmAnd datafiler til ny destination (%s)…</string>
+    <string name="copying_osmand_files">Kopierer OsmAnd datafiler…</string>
     <string name="android_19_location_disabled">"Siden Android version 4.4  (KitKat) kan man ikke hente og opdatere kort i den tidligere lagerplacering (%s). Ønsker du at skifte til den tilladte placering og kopiere alle OsmAnd  datafiler dertil?         
 \n Note 1: De gamle datafiler forbliver urørt. (men kan slettes manuelt).        
 \n Note 2: I den nye placering vil det ikke være muligt at dele filer mellem OsmAnd og OsmAnd+."</string>
@@ -1586,7 +1585,7 @@
     <string name="osmo_tracker_id">Personligt sporings-id</string>
     <string name="osmo_tracker_id_descr">Klik for at se eller dele sporings-id. Med sporings-id vil tilsluttede enheder være i stand til at overvåge alle bevægelser af enheden! For at afbryde, vælg \'Forny personlig id\' mulighed.</string>
     <string name="osmo_session_token">Sessiontoken: %1$s</string>
-    <string name="osmo_auth_pending">Venter på autorisation...</string>
+    <string name="osmo_auth_pending">Venter på autorisation…</string>
     <string name="osmo_locations_sent">Placeringer sendt %1$d (i buffer %2$d) </string>
     <string name="osmo_conn_successfull">Forbindelse oprettet: %1$s </string>
     <string name="osmo_mode_restart">Genstart OsMo session</string>
@@ -1830,7 +1829,7 @@
     <string name="rendering_attr_trolleybusRoutes_name">Trolleybusruter</string>
     <string name="rendering_attr_busRoutes_name">Busruter</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tog- og sporvognsruter</string>
-    <string name="select_impassable_road">Vælg på kort</string>
+    <string name="select_impassable_road">Vælg på kort…</string>
     <string name="impassable_road">Undgå veje…</string>
     <string name="rendering_category_hide">Skjul</string>
     <string name="wake_on_voice">Tænd for skærmen</string>
@@ -1877,4 +1876,5 @@
 	<string name="show_railway_warnings">Jernbaneoverskæringer</string>
 	<string name="show_pedestrian_warnings">Fodgængerovergange</string>
     <string name="speak_pedestrian">Fodgængerovergange</string>
-    </resources>
+    <string name="rendering_value__name">Standard</string>
+	</resources>

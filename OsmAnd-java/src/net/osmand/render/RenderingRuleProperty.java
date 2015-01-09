@@ -3,6 +3,7 @@ package net.osmand.render;
 
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 
 import org.apache.commons.logging.Log;
 
@@ -283,14 +284,25 @@ public class RenderingRuleProperty {
 					return val != null && val.equals(val2);
 				}
 				
-				int i = val.indexOf('=');
-				if (i != -1) {
-					String ts = val.substring(0, i);
-					String vs = val.substring(i + 1);
+				int k = val.indexOf('=');
+				if (k != -1) {
+					String ts = val.substring(0, k);
+					String vs = val.substring(k + 1);
 					Integer ruleInd = req.getObject().getMapIndex().getRule(ts, vs);
 					if (ruleInd != null) {
 						if (req.getObject().containsAdditionalType(ruleInd)) {
 							return true;
+						}
+					}
+				} else {
+					String ts = val.substring(0, k);
+					if (ts != null) {
+						int[] additionalTypes = obj.getAdditionalTypes();
+						for (int i = 0; i < additionalTypes.length; i++) {
+							TagValuePair vp = obj.getMapIndex().decodeType(additionalTypes[i]);
+							if (vp != null && ts.equals(vp.tag)) {
+								return true;
+							}
 						}
 					}
 				}

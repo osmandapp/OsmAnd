@@ -137,7 +137,7 @@
 <string name="rendering_attr_appMode_description">Optimera karta för</string>
 <string name="address_search_desc">Adressökning</string>
 <string name="navpoint_search_desc">Koordinater</string>
-<string name="transport_search_desc">Transportsökning</string>
+<string name="transport_search_desc">Kollektivtrafiksökning</string>
 <string name="offline_navigation_not_available">OsmAnd offlinenavigering är inte tillgänglig för tillfället.</string>
 <string name="left_side_navigation">Vänstertrafik</string>
 <string name="left_side_navigation_descr">Välj för länder med vänstertrafik</string>
@@ -426,12 +426,12 @@
 <string name="show_gpx_route">Visa på karta</string>
 <string name="search_position_current_location_search">Söker plats …</string>
 <string name="search_position_current_location_found">Plats (hittad)</string>
-<string name="search_position_address">Adress …</string>
+<string name="search_position_address">Adresser …</string>
 <string name="search_position_favorites">Favoriter …</string>
 <string name="search_position_undefined">Odefinierad</string>
 <string name="search_position_fixed"/>
 <string name="search_position_current_location">Nuvarande position …</string>
-<string name="search_position_map_view">Senaste kartvyn</string>
+<string name="search_position_map_view">Aktuell kartmitt</string>
 <string name="select_search_position">Ursprung:</string>
 <string name="context_menu_item_search">Sök i närheten</string>
 <string name="save_route_dialog_title">Spara rutt som GPX-spår</string>
@@ -470,15 +470,15 @@
 <string name="local_index_mi_reload">Ladda om från SD-kort</string>
 <string name="local_index_download">Ladda ner</string>
 
-<string name="local_index_poi_data">POI-data</string>
+<string name="local_index_poi_data">Intressepunktsdata</string>
 <string name="local_index_address_data">Adressdata</string>
-<string name="local_index_transport_data">Transportdata</string>
+<string name="local_index_transport_data">Kollektivtrafikdata</string>
 <string name="local_index_map_data">Kartdata</string>
 <string name="local_indexes_cat_backup">Inaktiverade</string>
 <string name="local_indexes_cat_tts">Röstdata (TTS)</string>
 <string name="local_indexes_cat_voice">Röstdata (inspelat)</string>
 <string name="local_indexes_cat_gpx">GPX-data</string>
-<string name="local_indexes_cat_poi">POI-data</string>
+<string name="local_indexes_cat_poi">Intressepunktsdata</string>
 <string name="ttsvoice">TTS-röst</string>
 <string name="search_offline_clear_search">Ny sökning</string>
 <string name="map_text_size_descr">Välj textstorlek för namn på kartan</string>
@@ -585,10 +585,10 @@
 <string name="amenity_type_sport">Sport</string>
 <string name="amenity_type_sustenance">Näring</string>
 <string name="amenity_type_tourism">Turism</string>
-<string name="amenity_type_transportation">Transport</string>
-<string name="indexing_address">Indexerar adress …</string>
+<string name="amenity_type_transportation">Transporter</string>
+<string name="indexing_address">Indexerar adresser …</string>
 <string name="indexing_map">Indexerar kartan …</string>
-<string name="indexing_poi">Indexerar POI …</string>
+<string name="indexing_poi">Indexerar Intressepunkter …</string>
 <string name="indexing_transport">Indexerar transport …</string>
 <string name="input_output_error">Ett I/O-fel har inträffat</string>
 <string name="km">km</string>
@@ -596,7 +596,7 @@
 <string name="m">m</string>
 <string name="old_map_index_is_not_supported">Det föråldrade kartdataformatet \"{0}\" stöds inte</string>
 <string name="poi_filter_car_aid">Bilhjälp</string>
-<string name="poi_filter_closest_poi">Närmaste POI</string>
+<string name="poi_filter_closest_poi">Närmaste intressepunkt</string>
 <string name="poi_filter_custom_filter">Anpassat filter</string>
 <string name="poi_filter_food_shop">Mataffär</string>
 <string name="poi_filter_for_tourists">För turister</string>
@@ -690,7 +690,7 @@
 	<string name="use_high_res_maps">Skärm med hög upplösning</string>
 	<string name="use_high_res_maps_descr">Sträck inte ut (och gör oskarpa) kartbitar på högupplösta skärmar</string>
 	<string name="download_files">Ladda ner</string>
-	<string name="context_menu_item_search_transport">Sök transport</string>
+	<string name="context_menu_item_search_transport">Sök kollektivtrafik</string>
 	<string name="transport_searching_transport">Transportresultat (ingen destination):</string>
 	<string name="transport_searching_route">Transportresultat ({0} till destinationen):</string>
 	<string name="transport_search_none">ingen</string>
@@ -705,7 +705,7 @@
 	<string name="vector_data">Offline vektorkartor</string>
 	<string name="transport_context_menu">Sök transport vid stopp</string>
 	<string name="point_on_map">Plats:\n Lat %1$.5f\n Long %2$.5f</string>
-	<string name="poi_context_menu_modify">Ändra POI</string>
+	<string name="poi_context_menu_modify">Ändra Intressepunkt</string>
 	<string name="poi_context_menu_delete">Ta bort POI</string>
 	<string name="rotate_map_compass_opt">Till kompass</string>
 	<string name="rotate_map_bearing_opt">I körriktningen</string>
@@ -731,10 +731,10 @@
 	<string name="layer_favorites">Favoriter</string>
 	<string name="layer_osm_bugs">OSM-buggar</string>
 	<string name="layer_transport">Hållplatser</string>
-	<string name="layer_poi">POI …</string>
+	<string name="layer_poi">Intressepunkt …</string>
 	<string name="layer_map">Kartkälla …</string>
 	<string name="menu_layers">Kartlager</string>
-	<string name="context_menu_item_search_poi">Sök POI</string>
+	<string name="context_menu_item_search_poi">Sök intressepunkt</string>
 	
 	<string name="use_trackball_descr">Använd styrkulan för att flytta kartan</string>
 	<string name="use_trackball">Använd styrkula</string>
@@ -785,7 +785,7 @@
 	<string name="first_time_continue">Senare</string>
 	<string name="first_time_download">Ladda ner regioner</string>
 	<string name="search_poi_location">Söker efter signal …</string>
-	<string name="search_near_map">Sök i närheten av förra platsen på kartan</string>
+	<string name="search_near_map">Sök i närheten av aktuell kartmitt</string>
 	<string name="search_nearby">Sök i närheten</string>
 	<string name="map_orientation_default">Samma som enheten</string>
 	<string name="map_orientation_portrait">Stående</string>
@@ -797,15 +797,15 @@
 	<string name="transport_Routes">Rutter</string>
 	<string name="transport_Stop">Hållplats</string>
 	<string name="transport_stops">hållplatser</string>
-	<string name="transport_search_after">Följande rutt</string>	
-	<string name="transport_search_before">Tidigare rutt</string>
+	<string name="transport_search_after">Följande resväg</string>	
+	<string name="transport_search_before">Tidigare resväg</string>
 	<string name="transport_finish_search">Avsluta sökningen</string>
 	<string name="transport_stop_to_go_out">Välj hållplats att kliva av vid</string>
 	<string name="transport_to_go_after">tidigare sträcka</string>
 	<string name="transport_to_go_before">följande sträcka</string>
 	<string name="transport_stops_to_pass">hållplatser att passera</string>
-	<string name="transport_route_distance">Ruttavstånd</string>
-	<string name="transport">Transport</string>
+	<string name="transport_route_distance">Resvägssträcka</string>
+	<string name="transport">Transporter</string>
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Visa hållplatser för kollektivtrafik på kartan</string>
 	<string name="show_transport_over_map">Visa hållplatser</string>
@@ -815,7 +815,7 @@
 	<string name="update_poi_error_loading">Fel vid laddning av data från servern</string>
 	<string name="update_poi_no_offline_poi_index">Inga offline POI-data tillgängliga för detta område</string>
 	<string name="update_poi_is_not_available_for_zoom">Det går inte att uppdatera POI för små zoomnivåer</string>
-	<string name="context_menu_item_update_poi">Uppdatera POI</string>
+	<string name="context_menu_item_update_poi">Uppdatera intressepunkt</string>
 	<string name="context_menu_item_update_map_confirm">Uppdatera lokala data via Internet?</string>
 	<string name="search_history_city">Stad: {0}</string>
 	<string name="search_history_street">Gata: {0},{1}</string>
@@ -860,7 +860,7 @@
 	<string name="mark_final_location_first">Välj en destination först</string>
 	<string name="show_gps_status">Visa GPS-status</string>
 	<string name="opening_hours">Öppettider</string>
-	<string name="loading_poi_obj">Laddar POI …</string>
+	<string name="loading_poi_obj">Laddar intressepunkt …</string>
 	<string name="loading_streets_buildings">Laddar gator/byggnader …</string>
 	<string name="loading_postcodes">Laddar postnummer …</string>
 	<string name="loading_streets">Laddar gator …</string>
@@ -1060,7 +1060,7 @@
 	<string name="map_view_3d_descr">Aktivera 3D-vy på kartan</string>
 	<string name="map_view_3d">3D-vy på kartan</string>
 	<string name="show_poi_over_map_description">Visa POI över karta (använd det senast valda filtret)</string>
-	<string name="show_poi_over_map">Visa POI</string>
+	<string name="show_poi_over_map">Visa intressepunkt</string>
 	<string name="map_tile_source_descr">Välj källa för onlinekartor eller cachade kartbitar</string>
 	<string name="map_tile_source">Källa för kartbitar</string>
 	<string name="map_source">Kartkälla</string>
@@ -1076,7 +1076,7 @@
 	<string name="favorites_Button">Mina platser</string>
 	<string name="search_button">Sök</string>
 	<string name="search_activity">Sök</string>
-	<string name="searchpoi_activity">Välj POI</string>
+	<string name="searchpoi_activity">Välj intressepunkt</string>
 	<string name="search_POI_level_btn">Sök efter fler</string>
 	<string name="choose_available_region">Välj region från lista</string>
 	<string name="choose_intersected_street">Välj korsande gata</string>
@@ -1165,7 +1165,7 @@
      \n\t* Ytterligare inställningar för att stabilisera kompassen
      \n\t* Översta knappen till vänster på kartskärmen ersätter menyknappen
     </string>
-    <string name="use_kalman_filter_compass_descr">Använd Kalman-filter för att undvika kompassmissvisning</string>
+    <string name="use_kalman_filter_compass_descr">Minskar kompassmissvisningen men blir trögare</string>
     <string name="use_kalman_filter_compass">Använd Kalman-filter</string>
     <string name="choose_osmand_theme">App-tema</string>
     <string name="choose_osmand_theme_descr">Välj tema för applikationen</string>
@@ -1340,8 +1340,8 @@
 \n OBS: På den nya lagringsplatsen kommer det inte att vara möjligt att dela filer mellan OsmAnd och OsmAnd+.</string>
     <string name="application_dir_change_warning2">Vill du att OsmAnd också ska kopiera datafilerna till den nya platsen? Välj \'Nej\' om du vill att OsmAnd ska skapa och använda den nya mappen.</string>
     <string name="copying_osmand_one_file_descr">Kopierar filen (%s) till den nya platsen …</string>
-    <string name="copying_osmand_files_descr">Kopierar OsmAnd-datafiler till den nya platsen (%s)</string>
-    <string name="copying_osmand_files">Kopierar OsmAnd-datafiler</string>
+    <string name="copying_osmand_files_descr">Kopierar OsmAnd-datafiler till den nya platsen (%s) …</string>
+    <string name="copying_osmand_files">Kopierar OsmAnd-datafiler …</string>
     <string name="calculate_osmand_route_gpx">Beräkna OsmAnd offline-rutt</string>
     <string name="app_mode_truck">Lastbil</string>
     <string name="routing_attr_prefer_motorway_name">Föredra motorvägar</string>
@@ -1720,7 +1720,7 @@
     <string name="rendering_attr_trolleybusRoutes_name">Trådbusslinjer</string>
     <string name="rendering_attr_busRoutes_name">Busslinjer</string>
     <string name="rendering_attr_tramTrainRoutes_name">Spårvagns- och tåglinjer</string>
-    <string name="select_impassable_road">Välj på kartan</string>
+    <string name="select_impassable_road">Välj på kartan …</string>
     <string name="impassable_road">Undvik vägar …</string>
     <string name="rendering_category_hide">Dölj</string>
     <string name="wake_on_voice">Slå på skärmen</string>
@@ -1735,7 +1735,7 @@
 	<string name="show_map">VISA KARTAN</string>
 	<string name="show_all">VISA ALLA</string>
 	<string name="coordinates">Koordinater</string>
-	<string name="map_update">"Det finns  %1$s uppdatering(ar)"</string>
+	<string name="map_update">Det finns %1$s uppdatering(ar)</string>
 	<string name="error_avoid_specific_road">Hittar ingen förbifart</string>
     <string name="dismiss">Avvisa</string>
     <string name="everything_up_to_date">Alla filer är uppdaterade</string>
@@ -1768,4 +1768,5 @@
 	<string name="route_descr_destination">Destination</string>
     <string name="voices">Röstprompter</string>
 	<string name="speak_pedestrian">Meddela om övergångsställen</string>
-    </resources>
+    <string name="rendering_value__name">Standard</string>
+	</resources>

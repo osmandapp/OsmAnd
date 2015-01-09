@@ -369,7 +369,6 @@ public class MapActivity extends AccessibleActivity {
 		}
 
 		settings.MAP_ACTIVITY_ENABLED.set(true);
-		app.setMapActivity(this);
 		checkExternalStorage();
 		showAndHideMapPosition();
 
@@ -443,6 +442,7 @@ public class MapActivity extends AccessibleActivity {
 		if(atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnResume();
 		}
+		getMyApplication().getAppCustomization().resumeActivity(MapActivity.class, this);
 	}
 
 
@@ -661,7 +661,7 @@ public class MapActivity extends AccessibleActivity {
 		
 		settings.setLastKnownMapZoom(mapView.getZoom());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
-		app.setMapActivity(null);
+		getMyApplication().getAppCustomization().pauseActivity(MapActivity.class);
 		app.getResourceManager().interruptRendering();
 		app.getResourceManager().setBusyIndicator(null);
 		OsmandPlugin.onMapActivityPause(this);

@@ -1249,6 +1249,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				float[] mes = new float[2];
 				net.osmand.Location.distanceBetween(location.getLatitude(), location.getLongitude(),
 						mapLocation.getLatitude(), mapLocation.getLongitude(), mes);
+				//TODO: Hardy: Check: The arrow direction below may only be correct for the default display's standard orientation
+				//      i.e. still needs to be corrected for .ROTATION_90/180/170
+				//	Keep in mind: getRotation was introduced from Android 2.2
 				draw.setAngle(mes[1] - lastCompass + 180);
 				long now = System.currentTimeMillis();
 				final boolean recent = Math.abs( now - location.getTime() ) < RECENT_THRESHOLD;

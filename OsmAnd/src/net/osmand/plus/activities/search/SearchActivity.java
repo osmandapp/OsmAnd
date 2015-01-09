@@ -160,6 +160,7 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 		
 		Intent intent = getIntent();
 		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
+		LatLon last = settings.getLastKnownMapLocation();
 		if (intent != null) {
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
@@ -167,15 +168,18 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 				LatLon l = new LatLon(lat, lon);
 				if(!Algorithms.objectEquals(reqSearchPoint, l)){
 					reqSearchPoint = l;
-					updateSearchPoint(reqSearchPoint, getString(R.string.select_search_position) + " " + getString(R.string.search_position_fixed), true);
+					if ((Math.abs(lat - last.getLatitude()) < 0.00001) && (Math.abs(lon - last.getLongitude()) < 0.00001)) {
+						updateSearchPoint(reqSearchPoint, getString(R.string.select_search_position) + " " + getString(R.string.search_position_map_view), false);
+					} else {
+						updateSearchPoint(reqSearchPoint, getString(R.string.select_search_position) + " ", true);
+					}
 				}
 			}
 		}
 		if(searchPoint == null){
-			LatLon last = settings.getLastKnownMapLocation();
 			if(!Algorithms.objectEquals(reqSearchPoint, last)){
 				reqSearchPoint = last;
-				updateSearchPoint(last, getString(R.string.select_search_position), true);
+				updateSearchPoint(last, getString(R.string.select_search_position) + " " + getString(R.string.search_position_map_view), false);
 			}
 		}
     }
@@ -237,7 +241,7 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 						searchAroundCurrentLocation = false;
 						endSearchCurrentLocation();
 						if (position == POSITION_LAST_MAP_VIEW) {
-							updateSearchPoint(settings.getLastKnownMapLocation(), getString(R.string.select_search_position) + " " + getString(R.string.search_position_fixed), true);
+							updateSearchPoint(settings.getLastKnownMapLocation(), getString(R.string.select_search_position) + " " + getString(R.string.search_position_map_view), false);
 						} else if (position == POSITION_FAVORITES) {
 							Intent intent = new Intent(SearchActivity.this, FavouritesListActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -284,7 +288,7 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 			if(name != null){
 				updateSearchPoint(latLon, getString(R.string.select_search_position) + " " + name, false);
 			} else {
-				updateSearchPoint(latLon, getString(R.string.select_search_position) + " " + getString(R.string.search_position_fixed), true);
+				updateSearchPoint(latLon, getString(R.string.select_search_position) + " ", true);
 			}
 		}
 	}

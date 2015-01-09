@@ -52,15 +52,13 @@ public class SearchTransportFragment extends Fragment implements SearchActivityC
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 
 	private Button searchTransportLevel;
-	
-	
+
 	private TextView searchArea;
 	
 	private final static int finalZoom = 13;
 	private final static int initialZoom = 17;
 	private int zoom = initialZoom;
 	private ProgressBar progress;
-	
 
 	private LatLon lastKnownMapLocation;
 	private LatLon destinationLocation;
@@ -71,7 +69,6 @@ public class SearchTransportFragment extends Fragment implements SearchActivityC
 	private OsmandSettings settings;
 	private View view;
 	private AsyncTask<?, ?, ?> asyncTask;
-	
 
 	private OsmandApplication getApplication() {
 		return (OsmandApplication) getActivity().getApplication();
@@ -140,7 +137,11 @@ public class SearchTransportFragment extends Fragment implements SearchActivityC
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
 			if(lat != 0 || lon != 0){
-				startPoint = new LatLon(lat, lon);
+				// Not commenting out the next line will cause the follwing issue:
+				// (1) When the transport search was called from the dashboard, everything still works: You can change the search origin on the tab, this resets any previous (if any) search results, and any new searches will be centered around the new origin.
+				// (2) But when the tab was called from map screen, changing the search origin on the tab keeps any search results, does not reset anything.
+				// (3) If the search origin had been changed on anoother search tab before switching to this one, new transport searches would still center around the OLD search origin (the last map view)
+				//startPoint = new LatLon(lat, lon);
 			}
 		}
 		if(startPoint == null && getActivity() instanceof SearchActivity){
@@ -220,11 +221,14 @@ public class SearchTransportFragment extends Fragment implements SearchActivityC
 					}
 					@Override
 					protected void onPostExecute(List<RouteInfoLocation> result) {
-						stopsAdapter.setNewModel(result);
-						updateSearchMoreButton();
-						searchArea.setText(getSearchArea());
-						progress.setVisibility(View.INVISIBLE);
-						asyncTask = null;
+						// isAdded() here fixes the "not attached to Activity" FC when rapidly changing screen orientation
+						if (isAdded()) {
+							stopsAdapter.setNewModel(result);
+							updateSearchMoreButton();
+							searchArea.setText(getSearchArea());
+							progress.setVisibility(View.INVISIBLE);
+							asyncTask = null;
+						}
 					}
 				};
 				asyncTask = current;

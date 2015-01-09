@@ -119,7 +119,7 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 			double lat = intent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SearchActivity.SEARCH_LON, 0);
 			if(lat != 0 || lon != 0){
-				location = new LatLon(lat, lon);
+				adapter.location = new LatLon(lat, lon);
 			}
 		}
 		if (location == null && getActivity() instanceof SearchActivity) {
@@ -128,13 +128,14 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 		if (location == null) {
 			location = settings.getLastKnownMapLocation();
 		}
+		locationUpdate(location);
 	}
 	
 	@Override
 	public void locationUpdate(LatLon l) {
 		location = l;
 		if(adapter != null){
-			adapter.notifyDataSetInvalidated();
+			adapter.updateLocation(l);
 		}
 	}
 
@@ -240,6 +241,12 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 	}
 	
 	class PlacesAdapter extends ArrayAdapter<Place> {
+		private LatLon location;
+
+		public void updateLocation(LatLon l) {
+			location = l;
+			notifyDataSetChanged();
+		}
 
 		public PlacesAdapter(List<Place> places) {
 			super(getActivity(), R.layout.search_address_online_list_item, places);
