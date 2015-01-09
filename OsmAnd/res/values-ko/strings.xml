@@ -387,7 +387,7 @@
 	<string name="search_osm_offline">지오 위치 검색</string>
 
 	<string name="system_locale">시스템 언어</string>
-	<string name="preferred_locale_descr">표시 언어를 선택합니다</string>
+	<string name="preferred_locale_descr">언어 선택 (OsmAnd를 재시작해 주세요)</string>
 	<string name="preferred_locale">언어 표시</string>
 
 	<string name="tip_map_switch">지도 소스를 선택</string>
@@ -2058,7 +2058,7 @@
     <string name="rendering_attr_shareTaxiRoutes_name">택시 노선 공유</string>
     <string name="rendering_attr_trolleybusRoutes_name">무궤도 전차 노선</string>
     <string name="rendering_attr_busRoutes_name">버스 노선</string>
-    <string name="select_impassable_road">지도에서 선택</string>
+    <string name="select_impassable_road">지도에서 선택…</string>
     <string name="impassable_road">도로 회피…</string>
     <string name="rendering_attr_tramTrainRoutes_name">전차 및 기차 노선</string>
     <string name="rendering_category_hide">숨기기</string>
