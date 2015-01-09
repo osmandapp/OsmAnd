@@ -92,7 +92,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 			}
 		}
 		return view;
-	};
+	}
 	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -256,10 +256,10 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 				try { 
 					LatLon loc = parseLocation();
 					currentFormat = newFormat;
-					((TextView) view.findViewById(R.id.ValidateTextView)).setVisibility(View.INVISIBLE);
+					view.findViewById(R.id.ValidateTextView).setVisibility(View.INVISIBLE);
 					showCurrentFormat(loc);
 				} catch (RuntimeException e) {
-					((TextView) view.findViewById(R.id.ValidateTextView)).setVisibility(View.VISIBLE);
+					view.findViewById(R.id.ValidateTextView).setVisibility(View.VISIBLE);
 					((TextView) view.findViewById(R.id.ValidateTextView)).setText(R.string.invalid_locations);
 					Log.w(PlatformUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
 				}
@@ -374,7 +374,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 			}
 			
 		} catch (RuntimeException e) {
-			((TextView) view.findViewById(R.id.ValidateTextView)).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.ValidateTextView).setVisibility(View.VISIBLE);
 			((TextView) view.findViewById(R.id.ValidateTextView)).setText(R.string.invalid_locations);
 			Log.w(PlatformUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
 		}

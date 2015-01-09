@@ -9,9 +9,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import android.os.Build;
 import android.preference.*;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -21,7 +21,6 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.views.SeekBarPreference;
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -300,14 +299,12 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		return false;
 	}
 
-
+	@SuppressWarnings("deprecation")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		//getToolbar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		//getToolbar().setDisplayHomeAsUpEnabled(true);
 
-		// R.drawable.tab_settings_screen_icon
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.settings_activity);
 		settings = getMyApplication().getSettings();
@@ -325,18 +322,24 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 				s.add(a.toHumanString(getMyApplication()));
 			}
 
-//			ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(),
-//					R.layout.sherlock_spinner_item, s);
-//			spinnerAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
-//			getToolbar().setListNavigationCallbacks(spinnerAdapter, new OnNavigationListener() {
-//
-//				@Override
-//				public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-//					settings.APPLICATION_MODE.set(modes.get(itemPosition));
-//					updateAllSettings();
-//					return true;
-//				}
-//			});
+			ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_spinner_item, s);
+			spinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+			getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+				@Override
+				public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+					settings.APPLICATION_MODE.set(modes.get(position));
+					updateAllSettings();
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> parent) {
+
+				}
+			});
+
+			getSpinner().setAdapter(spinnerAdapter);
+			getSpinner().setVisibility(View.VISIBLE);
 		}
 		setPreferenceScreen(getPreferenceManager().createPreferenceScreen(this));
     }
@@ -352,7 +355,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			previousAppMode = settings.getApplicationMode();
 			boolean found = setSelectedAppMode(previousAppMode);
 			if (!found) {
-				//getToolbar().setSelectedNavigationItem(0);
+				getSpinner().setSelection(0);
 			}
 		} else {
 			updateAllSettings();
@@ -386,7 +389,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		boolean found = false;
 		for (ApplicationMode a : modes) {
 			if (am == a) {
-				//getSupportActionBar().setSelectedNavigationItem(ind);
+				getSpinner().setSelection(ind);
 				found = true;
 				break;
 			}
@@ -440,7 +443,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		// handle boolean prefences
+		// handle boolean preferences
 		OsmandPreference<Boolean> boolPref = booleanPreferences.get(preference.getKey());
 		OsmandPreference<Integer> seekPref = seekBarPreferences.get(preference.getKey());
 		OsmandPreference<Object> listPref = (OsmandPreference<Object>) listPreferences.get(preference.getKey());

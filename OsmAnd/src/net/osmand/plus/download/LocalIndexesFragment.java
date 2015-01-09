@@ -92,7 +92,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		return view;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked","deprecation"})
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -125,7 +125,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				int group = ExpandableListView.getPackedPositionGroup(packedPos);
 				int child = ExpandableListView.getPackedPositionChild(packedPos);
 				if (child >= 0 && group >= 0) {
-					final LocalIndexInfo point = (LocalIndexInfo) listAdapter.getChild(group, child);
+					final LocalIndexInfo point = listAdapter.getChild(group, child);
 					showContextMenu(point);
 				}
 			}
@@ -472,6 +472,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 //		return super.onRetainNonConfigurationInstance();
 //	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		if (!this.isAdded()) {
@@ -646,7 +647,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		//findViewById(R.id.DescriptionText).setVisibility(View.GONE);
 		listAdapter.notifyDataSetChanged();
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	private void updateDescriptionTextWithSize(){
 		File dir = getMyApplication().getAppPath("").getParentFile();
 		String size = formatGb.format(new Object[]{0});
@@ -904,7 +906,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		@Override
 		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 			View v = convertView;
-			final LocalIndexInfo child = (LocalIndexInfo) getChild(groupPosition, childPosition);
+			final LocalIndexInfo child = getChild(groupPosition, childPosition);
 			if (v == null ) {
 				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
@@ -1001,8 +1003,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
 			List<LocalIndexInfo> list = data.get(group);
 			int size = 0;
-			for (int i = 0; i < list.size(); i++) {
-				int sz = list.get(i).getSize();
+			for (LocalIndexInfo aList : list) {
+				int sz = aList.getSize();
 				if (sz < 0) {
 					size = 0;
 					break;

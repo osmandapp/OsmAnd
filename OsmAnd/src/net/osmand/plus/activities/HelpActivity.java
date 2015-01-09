@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -104,16 +104,16 @@ public class HelpActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		createMenuItem(menu, HOME, R.string.home, 
 				R.drawable.ic_action_home_light, R.drawable.ic_action_home_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM );
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
 		createMenuItem(menu, BACK, R.string.previous_button,
 				0, 0, //R.drawable.ic_action_home_light, R.drawable.ic_action_home_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM );
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
 		createMenuItem(menu, FORWARD, R.string.next_button,
 				0, 0, //R.drawable.ic_action_home_light, R.drawable.ic_action_home_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM );
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
 		createMenuItem(menu, CLOSE, R.string.close, 
 				R.drawable.ic_action_ok_light, R.drawable.ic_action_ok_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM );
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -150,7 +150,8 @@ public class HelpActivity extends ActionBarActivity {
 		if (r != 0) {
 			menuItem.setIcon(r);
 		}
-		menuItem.setShowAsActionFlags(menuItemType).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
+		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				return onOptionsItemSelected(item);

@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import android.support.v4.view.MenuItemCompat;
 import android.view.*;
 import android.widget.*;
 import net.osmand.access.AccessibleToast;
@@ -91,15 +92,15 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		}
 		createMenuItem(menu, SAVE_FILTER, R.string.edit_filter_save_as_menu_item, 
 				R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark ,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		createMenuItem(menu, FILTER, R.string.filter_current_poiButton, 
 				0, 0,
 				//R.drawable.a_1_navigation_accept_light, R.drawable.a_1_navigation_accept_dark,
-				MenuItem.SHOW_AS_ACTION_WITH_TEXT | MenuItem.SHOW_AS_ACTION_ALWAYS);
+				MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT | MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		if(!filter.isStandardFilter()){
 			createMenuItem(menu, DELETE_FILTER, R.string.edit_filter_delete_menu_item, 
 					R.drawable.ic_action_gdiscard_light, R.drawable.ic_action_gdiscard_dark,
-					MenuItem.SHOW_AS_ACTION_IF_ROOM);
+					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		}
 		return super.onCreateOptionsMenu(menu);
 	}	

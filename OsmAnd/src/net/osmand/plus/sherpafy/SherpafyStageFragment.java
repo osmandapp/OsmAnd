@@ -3,6 +3,7 @@ package net.osmand.plus.sherpafy;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import net.osmand.plus.OsmandApplication;
@@ -75,7 +76,8 @@ public class SherpafyStageFragment extends Fragment {
 			if(customization.isStageVisited(stage.getOrder())) {
 				text = R.string.stage_is_completed;
 			}
-			((TourViewActivity) getActivity()).createMenuItem(menu, START, text, 0, 0, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT,
+			((TourViewActivity) getActivity()).createMenuItem(menu, START, text, 0, 0,
+					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT,
 					new MenuItem.OnMenuItemClickListener() {
 						@Override
 						public boolean onMenuItemClick(MenuItem item) {
@@ -84,7 +86,7 @@ public class SherpafyStageFragment extends Fragment {
 					});
 			if (customization.isStageVisited(stage.getOrder()) && customization.getNextAvailableStage(tour) != null) {
 				((TourViewActivity) getActivity()).createMenuItem(menu, NEXT_STAGE, R.string.next_stage, 0, 0,
-						MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT,
+						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT,
 						new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {

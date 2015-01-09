@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import android.support.v4.view.MenuItemCompat;
 import android.view.*;
 import android.widget.AdapterView;
 import net.osmand.access.AccessibleToast;
@@ -89,11 +90,11 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		createMenuItem(menu, UPLOAD_ID, R.string.local_openstreetmap_uploadall, R.drawable.ic_action_gup_light, R.drawable.ic_action_gup_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, BACKUP_ID, R.string.local_osm_changes_backup, R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, DELETE_ID, R.string.local_osm_changes_delete_all, R.drawable.ic_action_gdiscard_light, R.drawable.ic_action_gdiscard_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -157,12 +158,12 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 		int itemId = item.getItemId();
 		if(itemId == R.id.showmod) {
 			OsmandSettings settings = getMyApplication().getSettings();
-			OsmPoint info = (OsmPoint) listAdapter.getItem(pos);
+			OsmPoint info = listAdapter.getItem(pos);
 			settings.setMapLocationToShow(info.getLatitude(), info.getLongitude(), settings.getLastKnownMapZoom());
 			MapActivity.launchMapActivityMoveToTop(LocalOpenstreetmapActivity.this);
 			return true;
 		} else if(itemId == R.id.deletemod) {
-			OsmPoint info = (OsmPoint) listAdapter.getItem(pos);
+			OsmPoint info = listAdapter.getItem(pos);
 			if (info.getGroup() == OsmPoint.Group.POI) {
 				dbpoi.deletePOI((OpenstreetmapPoint) info);
 			} else if (info.getGroup() == OsmPoint.Group.BUG) {

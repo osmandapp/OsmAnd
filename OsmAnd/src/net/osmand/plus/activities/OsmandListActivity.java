@@ -1,12 +1,10 @@
 package net.osmand.plus.activities;
 
-import android.app.ExpandableListActivity;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.ExpandableListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import net.osmand.plus.OsmandApplication;
