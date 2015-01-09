@@ -9,7 +9,10 @@ import net.osmand.plus.OsmandApplication;
 public class DashBaseFragment extends SherlockFragment {
 
 	public OsmandApplication getMyApplication(){
+		if (getActivity() == null){
+			return null;
+		}
 		return (OsmandApplication) getActivity().getApplication();
 	}
-	
+
 }

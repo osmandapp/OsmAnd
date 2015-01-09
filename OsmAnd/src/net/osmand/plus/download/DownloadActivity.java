@@ -62,12 +62,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		BaseDownloadActivity.downloadListIndexThread.resetUiActivity(DownloadActivity.class);
-	}
-
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
@@ -177,7 +171,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		getMyApplication().setDownloadActivity(this);
+		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
 	}
 
 
@@ -214,7 +208,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 	@Override
 	public void onPause() {
 		super.onPause();
-		(getMyApplication()).setDownloadActivity(null);
+		getMyApplication().getAppCustomization().pauseActivity(DownloadActivity.class);
 	}
 
 	@Override

@@ -143,9 +143,10 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		//needed when rotation is performed and progress can be null
 		if (!updateOnlyProgress) {
 			getProgressIfPossible(basicProgressAsyncTask.getDescription());
-			if (currentProgress == null) {
-				return;
-			}
+		}
+
+		if (currentProgress == null) {
+			return;
 		}
 
 		if (updateOnlyProgress) {

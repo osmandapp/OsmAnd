@@ -333,7 +333,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	
 	@Override
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
-		helper.item(R.string.osmo_groups).icons(R.drawable.ic_action_eye_dark, R.drawable.ic_action_eye_light).position(6)
+		helper.item(R.string.osmo_groups).icons(R.drawable.ic_osmo_dark, R.drawable.ic_osmo_light).position(6)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

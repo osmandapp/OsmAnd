@@ -55,30 +55,30 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	private static final int SHOW_ON_MAP = 3;
 	private static final int ADD_TO_FAVORITE = 4;
 
-
 	private View view;
+	private LatLon location;
 
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.navigate_point, container, false);
 		setHasOptionsMenu(true);
-		
-		LatLon loc = null;
+
+		location = null;
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 		Intent intent = getSherlockActivity().getIntent();
 		if(intent != null){
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
 			if(lat != 0 || lon != 0){
-				loc = new LatLon(lat, lon);
+				location = new LatLon(lat, lon);
 			}
 		}
-		if (loc == null && getActivity() instanceof SearchActivity) {
-			loc = ((SearchActivity) getActivity()).getSearchPoint();
+		if (location == null && getActivity() instanceof SearchActivity) {
+			location = ((SearchActivity) getActivity()).getSearchPoint();
 		}
-		if (loc == null) {
-			loc = app.getSettings().getLastKnownMapLocation();
+		if (location == null) {
+			location = app.getSettings().getLastKnownMapLocation();
 		}
-		initUI(loc.getLatitude(), loc.getLongitude());
+		initUI(location.getLatitude(), location.getLongitude());
 		if(savedInstanceState != null && savedInstanceState.containsKey(SEARCH_LAT) && savedInstanceState.containsKey(SEARCH_LON) && 
 				currentFormat != UTM_FORMAT) {
 			String lat = savedInstanceState.getString(SEARCH_LAT);
@@ -166,21 +166,42 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	@Override
 	public void onResume() {
 		super.onResume();
+
+		//Hardy: onResume() code is needed so that search origin is properly reflected in tab contents when origin has been changed on one tab, then tab is changed to another one.
+		location = null;
+		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
+		//Intent intent = getSherlockActivity().getIntent();
+		//if (intent != null) {
+		//	if (intent.hasExtra(SearchActivity.SEARCH_LAT) && intent.hasExtra(SearchActivity.SEARCH_LON)) {
+		//		double lat = intent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0);
+		//		double lon = intent.getDoubleExtra(SearchActivity.SEARCH_LON, 0);
+		//		if (lat != 0 || lon != 0) {
+		//			location = new LatLon(lat, lon);
+		//		}
+		//	}
+		//}
+		if (location == null && getActivity() instanceof SearchActivity) {
+			location = ((SearchActivity) getActivity()).getSearchPoint();
+		}
+		if (location == null) {
+			location = app.getSettings().getLastKnownMapLocation();
+		}
+		locationUpdate(location);
 	}
 	
-	
 	@Override
-	public void locationUpdate(LatLon loc) {
+	public void locationUpdate(LatLon l) {
+		//location = l;
 		if (view != null) {
-			if (loc != null) {
-				showCurrentFormat(loc);
+			if (l != null) {
+				showCurrentFormat(l);
 			} else {
 				showCurrentFormat(new LatLon(0, 0));
 			}
 		}
 	}
 	
-	protected void showCurrentFormat( LatLon loc) {
+	protected void showCurrentFormat(LatLon l) {
 		final EditText latEdit = ((EditText)view.findViewById(R.id.LatitudeEdit));
 		final EditText lonEdit = ((EditText)view.findViewById(R.id.LongitudeEdit));
 		boolean utm = currentFormat == UTM_FORMAT;
@@ -193,13 +214,13 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 			final EditText northingEdit = ((EditText)view.findViewById(R.id.NorthingEdit));
 			final EditText eastingEdit = ((EditText)view.findViewById(R.id.EastingEdit));
 			final EditText zoneEdit = ((EditText)view.findViewById(R.id.ZoneEdit));
-			UTMPoint pnt = new UTMPoint(new LatLonPoint(loc.getLatitude(), loc.getLongitude()));
+			UTMPoint pnt = new UTMPoint(new LatLonPoint(l.getLatitude(), l.getLongitude()));
 			zoneEdit.setText(pnt.zone_number + ""+pnt.zone_letter);
 			northingEdit.setText(((long)pnt.northing)+"");
 			eastingEdit.setText(((long)pnt.easting)+"");
 		} else {
-			latEdit.setText(convert(MapUtils.checkLatitude(loc.getLatitude()), currentFormat));
-			lonEdit.setText(convert(MapUtils.checkLongitude(loc.getLongitude()), currentFormat));
+			latEdit.setText(convert(MapUtils.checkLatitude(l.getLatitude()), currentFormat));
+			lonEdit.setText(convert(MapUtils.checkLongitude(l.getLongitude()), currentFormat));
 		}
 	}
 
@@ -346,9 +367,8 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		latEdit.addTextChangedListener(textWatcher);
 		lonEdit.addTextChangedListener(textWatcher);
 	}
-	
 
-	
+
 	public void select(int mode){
 		try {
 			LatLon loc = parseLocation();
@@ -455,7 +475,6 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
             throw new IllegalArgumentException("coordinate=" + coordinate);
         }
     }
-	
 
 
 	public static String convert(double coordinate, int outputType) {
@@ -492,7 +511,5 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		sb.append(df.format(coordinate));
 		return sb.toString();
 	}
-	
-	
 
 }

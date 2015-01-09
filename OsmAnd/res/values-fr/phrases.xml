@@ -631,4 +631,8 @@
 <string name="poi_carpet_layer">Couvreur de moquettes</string>
 	<string name="poi_parquet_layer">Couvreur de parquets</string>
 	<string name="poi_saddle">Selle</string>
+	<string name="poi_tower">Tour</string>
+	<string name="poi_mast">Mât</string>
+	<string name="poi_radar">Radar</string>
+	<string name="poi_aquarium">Aquarium</string>
 	</resources>

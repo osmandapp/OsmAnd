@@ -554,28 +554,28 @@
 	<string name="poi_seamark_anchorage">Якорная стоянка</string>
 	<string name="poi_seamark_anchor_berth">Якорный причал</string>
 	<string name="poi_seamark_beacon">Бакен</string>
-	<string name="poi_seamark_beacon_cardinal"/>
-	<string name="poi_seamark_beacon_lateral"/>
-	<string name="poi_seamark_beacon_safe_water"/>
+	<string name="poi_seamark_beacon_cardinal">Кардинальный бакен</string>
+	<string name="poi_seamark_beacon_lateral">Латеральный бакен</string>
+	<string name="poi_seamark_beacon_safe_water">Бакен безопасности</string>
 	<string name="poi_seamark_beacon_special_purpose">Бакен специального назначения</string>
 	<string name="poi_seamark_berth">Причал</string>
-	<string name="poi_seamark_building"/>
-	<string name="poi_seamark_bridge"/>
-	<string name="poi_seamark_buoy_cardinal"/>
+	<string name="poi_seamark_building">Здание</string>
+	<string name="poi_seamark_bridge">Мост</string>
+	<string name="poi_seamark_buoy_cardinal">Кардинальный буй</string>
 	<string name="poi_seamark_buoy_installation">Знак изолированной опасности</string>
-	<string name="poi_seamark_buoy_isolated_danger"/>
-	<string name="poi_seamark_buoy_lateral"/>
+	<string name="poi_seamark_buoy_isolated_danger">Буй (изолированная опасность)</string>
+	<string name="poi_seamark_buoy_lateral">Латеральный буй</string>
 	<string name="poi_seamark_buoy_safe_water"/>
 	<string name="poi_seamark_buoy_special_purpose">Специальный буй</string>
-	<string name="poi_seamark_daymark"/>
-	<string name="poi_seamark_distance_mark"/>
-	<string name="poi_seamark_dry_dock"/>
+	<string name="poi_seamark_daymark">Дневной маяк</string>
+	<string name="poi_seamark_distance_mark">Отметка расстояния</string>
+	<string name="poi_seamark_dry_dock">Сухой док</string>
 	<string name="poi_seamark_dyke"/>
-	<string name="poi_seamark_floating_dock"/>
+	<string name="poi_seamark_floating_dock">Плавучий док</string>
 	<string name="poi_seamark_fog_signal">Сигнал при тумане</string>
 	<string name="poi_seamark_harbour_basin"/>
 	<string name="poi_seamark_harbour">Гавань</string>
-	<string name="poi_seamark_landmark"/>
+	<string name="poi_seamark_landmark">Ориентир</string>
 	<string name="poi_seamark_light"/>
 	<string name="poi_seamark_light_major"/>
 	<string name="poi_seamark_light_minor"/>
@@ -586,11 +586,11 @@
 	<string name="poi_seamark_pile"/>
 	<string name="poi_seamark_radar_transponder"/>
 	<string name="poi_seamark_radio_station">Радиостанция</string>
-	<string name="poi_seamark_signal_station_traffic"/>
+	<string name="poi_seamark_signal_station_traffic">Сигнальная станция</string>
 	<string name="poi_seamark_signal_station_warning">Сигнал опасности</string>
-	<string name="poi_seamark_small_craft_facility"/>
+	<string name="poi_seamark_small_craft_facility">Лодочная станция</string>
 	<string name="poi_seamark_topmark"/>
-	<string name="poi_seamark_rock"/>
+	<string name="poi_seamark_rock">Скала</string>
 	<string name="poi_seamark_wreck">Кораблекрушение</string>
 
 	<string name="poi_military_airfield">Военный аэродром</string>
@@ -637,4 +637,15 @@
 	<string name="poi_attraction_train">Поезд (аттракцион)</string>
 	<string name="poi_water_slide">Водные горки</string>
 
+	<string name="poi_radar">Радар</string>
+	<string name="poi_aquarium">Аквариум</string>
+	<string name="poi_motorway_junction">Съезд</string>
+
+	<string name="poi_tower">Башня</string>
+	<string name="poi_mast">Мачта</string>
+	<string name="poi_attraction_animal">Животное (аттракцион)</string>
+	<string name="poi_slide">Горка</string>
+	<string name="poi_summer_toboggan">Летние санки</string>
+	<string name="poi_dock">Док</string>
+	<string name="poi_roller_coaster">Американские горки</string>
 	</resources>

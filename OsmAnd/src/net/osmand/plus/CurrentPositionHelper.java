@@ -80,7 +80,7 @@ public class CurrentPositionHelper {
 					}
 				};
 				calculatingThread = app.getRoutingHelper().startTaskInRouteThreadIfPossible(run);
-			} else if (!calcThread.isAlive()) {
+			} else if (calcThread != null && !calcThread.isAlive()) {
 				calculatingThread = null;
 			}
 		}

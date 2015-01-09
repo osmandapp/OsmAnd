@@ -17,7 +17,6 @@
             android:id="@+id/Name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords"
             android:paddingLeft="3dp"
             android:selectAllOnFocus="true" />
     </TableRow>

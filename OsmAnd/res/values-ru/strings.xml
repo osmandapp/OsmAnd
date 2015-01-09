@@ -111,7 +111,7 @@
   <string name="unknown_location">Определяем местоположение</string>
   <string name="modify_transparency">Изменить прозрачность (0 - прозрачный, 255 - непрозрачный)</string>
   <string name="confirm_interrupt_download">Прервать загрузку файла?</string>
-  <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из Интернета с помощью пункта меню \"Настройки\" → \"Управление файлами карт\". После загрузки Вы сможете просматривать карты, осуществлять поиск адресов, POI и остановок общественного транспорта.</string>
+  <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из Интернета с помощью пункта меню \"Настройки\" → \"Управление файлами карт\". После загрузки Вы сможете просматривать карты, осуществлять поиск адресов, POI и общественного транспорта.</string>
   <string name="basemap_was_selected_to_download">Базовая карта необходима для корректной работы приложения и автоматически была выбрана для загрузки.</string>
   <string name="select_index_file_to_download">Ничего не было найдено. Вы можете создать карту самостоятельно (смотрите на osmand.net).</string>
   <string name="local_indexes_cat_tile">Онлайн карты (растровые)</string>
@@ -276,8 +276,8 @@
   <string name="search_position_undefined">Неопределенно</string>
   <string name="search_position_fixed">Точка</string>
   <string name="search_position_current_location">Текущее местоположение…</string>
-  <string name="search_position_map_view">Вид карты</string>
-  <string name="select_search_position">Искать рядом:</string>
+  <string name="search_position_map_view">Текущий центр карты</string>
+  <string name="select_search_position">Начало:</string>
   <string name="context_menu_item_search">Искать рядом</string>
   <string name="tip_recent_changes_0_6_7_t">Изменения в 0.6.7:
 		\n\t- Менеджер локальных данных (просмотр, удаление, создание архива данных прямо в OsmAnd)
@@ -330,7 +330,7 @@
   
   <string name="local_index_poi_data">POI</string>
   <string name="local_index_address_data">Адрес</string>
-  <string name="local_index_transport_data">Транспорт</string>
+  <string name="local_index_transport_data">Данные публичного транспорта</string>
   <string name="local_index_map_data">Карта</string>
   
   <string name="local_indexes_cat_backup">Архивировано</string>
@@ -397,7 +397,7 @@
   <string name="search_offline_geo_error">Невозможно разобрать запрос: \"%s\"</string>
   <string name="search_osm_offline">Поиск по адресу в локальных картах</string>
   <string name="system_locale">Системная</string>
-  <string name="preferred_locale_descr">Изменить язык программы</string>
+  <string name="preferred_locale_descr">Выбор языка программы (перезапустите OsmAnd после изменения)</string>
   <string name="preferred_locale">Локализация</string>
   <string name="tip_map_switch">Источник карты</string>
   
@@ -531,10 +531,10 @@
   <string name="use_high_res_maps">Дисплей высокого разрешения</string>
   <string name="use_high_res_maps_descr">Не растягивать (с размытием) растровые карты на дисплеях высокого разрешения</string>
   <string name="download_files">Загрузить</string>
-  <string name="context_menu_item_search_transport">Искать транспорт</string>
+  <string name="context_menu_item_search_transport">Искать общественный транспорт</string>
   <string name="transport_context_menu">Искать транспорт на остановке</string>
-  <string name="transport_searching_transport">Искать транспорт (нет цели):</string>
-  <string name="transport_searching_route">Искать транспорт (до цели {0}):</string>
+  <string name="transport_searching_transport">Результат поиска транспорта (нет цели):</string>
+  <string name="transport_searching_route">Результ поиска транспорта (до цели {0}):</string>
   <string name="transport_search_again">Искать транспорт заново</string>
   <string name="map_index">Карта</string>
   <string name="voice">Голосовые данные (запись)</string>
@@ -624,7 +624,7 @@
   <string name="first_time_continue">Продолжить</string>
   <string name="first_time_download">Загрузить детальные карты регионов</string>
   <string name="search_poi_location">Поиск сигнала…</string>
-  <string name="search_near_map">Искать вокруг выбранного центра карты</string>
+  <string name="search_near_map">Искать вокруг текущего центра карты</string>
   <string name="search_nearby">Искать рядом</string>
   <string name="map_orientation_default">По умолчанию</string>
   <string name="map_orientation_portrait">Портрет</string>
@@ -637,8 +637,8 @@
   <string name="transport_Stop">Остановка</string>
   <string name="transport_stops">остановок</string>
   <string name="transport_search_none">нет</string>
-  <string name="transport_search_after">Маршрут после</string>
-  <string name="transport_search_before">Маршрут до</string>
+  <string name="transport_search_after">Последующий маршрут</string>
+  <string name="transport_search_before">Предыдущий маршрут</string>
   <string name="transport_finish_search">Закончить поиск</string>
   <string name="transport_stop_to_go_out">Выберите остановку</string>
   <string name="transport_to_go_after">идти после</string>
@@ -647,8 +647,8 @@
   <string name="transport_route_distance">Длина пути</string>
   <string name="transport">Транспорт</string>
   <string name="default_buttons_ok">OK</string>
-  <string name="show_transport_over_map_description">Показать остановки транспорта на карте</string>
-  <string name="show_transport_over_map">Показать транспорт</string>
+  <string name="show_transport_over_map_description">Показывать остановки общественного транспорта на карте</string>
+  <string name="show_transport_over_map">Показать остановки транспорта</string>
   <string name="hello">Навигационное приложение OsmAnd</string>
   <string name="update_poi_success">Данные POI были успешно обновлены ({0} объектов загружено)</string>
   <string name="update_poi_error_local">Ошибка сохранения локальной POI</string>
@@ -981,7 +981,7 @@
   <string name="poi_search_desc">Поиск POI</string>
   <string name="address_search_desc">Поиск по адресу</string>
   <string name="navpoint_search_desc">Координаты</string>
-  <string name="transport_search_desc">Поиск транспорта</string>
+  <string name="transport_search_desc">Поиск общественного транспорта</string>
   <string name="favourites_search_desc">Поиск в избранном</string>
   <string name="history_search_desc">История поиска</string>
   <string name="rendering_attr_noPolygons_description">Отображать только границы многоугольников, без заливки</string>
@@ -1247,7 +1247,7 @@
     <string name="av_def_action_choose">Выберите по запросу</string>
     <string name="osmand_play_title_30_chars">OsmAnd карты и навигация</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ карты и навигация</string>
-	<string name="use_kalman_filter_compass_descr">Использовать фильтр Калмана для избежания отклонений компаса</string>
+	<string name="use_kalman_filter_compass_descr">Уменьшает \"шум\" компаса, но добавляет инерцию</string>
     <string name="use_kalman_filter_compass">Использовать фильтр Калмана</string>
     <string name="cancel_navigation">Прекратить навигацию</string>
     <string name="use_magnetic_sensor">Использовать датчик магнитного поля</string>
@@ -1414,7 +1414,7 @@
     <string name="routing_preferences_descr">Настройки маршрутизации</string>
     <string name="app_mode_truck">Грузовик</string>
     <string name="calculate_osmand_route_gpx">Рассчитать оффлайновый маршрут OsmAnd</string>
-    <string name="copying_osmand_files">Копирование файлов данных OsmAnd</string>
+    <string name="copying_osmand_files">Копирование файлов данных OsmAnd…</string>
     <string name="speech_rate">Скорость произношения</string>
     <string name="app_modes_choose_descr">Выберите профили, видимые в приложении</string>
     <string name="app_modes_choose">Профили приложения</string>
@@ -1425,7 +1425,7 @@
 \n Примечание 2: При переносе файлов в новое хранилище совместное использование файлов OsmAnd и OsmAnd+ не возможно.</string>
     <string name="application_dir_change_warning2">Хотите ли Вы, чтобы OsmAnd скопировал файлы данных на новое место? Выберите \"Нет\", чтобы OsmAnd только создал и использовал новую директорию.</string>
     <string name="copying_osmand_one_file_descr">Копирование файла (%s) на новое место…</string>
-    <string name="copying_osmand_files_descr">Копирование файлов данных OsmAnd на новое место (%s)</string>
+    <string name="copying_osmand_files_descr">Копирование файлов данных OsmAnd на новое место (%s)…</string>
     <string name="tip_recent_changes_1_6_t">Изменения в 1.6:
 	\n\t* Поддержка устройств с разрешением Full HD;
 	\n\t* Поддержка прозрачного фона карты;
@@ -1805,7 +1805,7 @@
     <string name="rendering_attr_busRoutes_name">Маршруты автобусов</string>
     <string name="rendering_attr_tramTrainRoutes_name">Маршруты трамваев и поездов</string>
     <string name="rendering_category_hide">Скрыть</string>
-    <string name="select_impassable_road">Выбрать на карте</string>
+    <string name="select_impassable_road">Выбрать на карте…</string>
     <string name="impassable_road">Избегать дороги…</string>
     <string name="wake_on_voice_never">Никогда</string>
     <string name="lock_screen_request_explanation">%1$s необходимо это разрешение, чтобы выключить экран для экономии энергии.</string>
@@ -1849,4 +1849,5 @@
     <string name="traffic_warning_railways">Железнодорожный переезд</string>
 	<string name="traffic_warning_pedestrian">Пешеходный переход</string>
 	<string name="speak_pedestrian">Сообщать о пешеходных переходах</string>
-    </resources>
+    <string name="rendering_value__name">По умолчанию</string>
+	</resources>

@@ -78,10 +78,16 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 		if (view == null) {
 			return;
 		}
-		Bitmap image = getMyApplication().getResourceManager().getRenderer().getBitmap();
-		ImageView map = (ImageView) view.findViewById(R.id.map_image);
+		final Bitmap image = getMyApplication().getResourceManager().getRenderer().getBitmap();
+		final ImageView map = (ImageView) view.findViewById(R.id.map_image);
 		if (image != null) {
-			map.setImageBitmap(image);
+			getActivity().runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					map.setImageBitmap(image);
+				}
+			});
+
 		}
 	}
 
