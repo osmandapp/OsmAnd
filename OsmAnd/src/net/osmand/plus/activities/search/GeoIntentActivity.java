@@ -101,7 +101,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 				while (getMyApplication().isApplicationInitializing()) {
 					Thread.sleep(200);
 				}
-				return extract(intent.getScheme(), intent.getData()).execute();
+				return extract(intent.getData()).execute();
 			} catch (Exception e) {
 				return null;
 			}
@@ -202,14 +202,12 @@ public class GeoIntentActivity extends OsmandListActivity {
 	 * geo:0,0?q=34.99,-106.61(Treasure)<br/>
 	 * geo:0,0?q=1600+Amphitheatre+Parkway%2C+CA<br/>
 	 * 
-	 * @param scheme
-	 *            The intent scheme
 	 * @param data
 	 *            The intent uri
 	 * @return
 	 */
-	private MyService extract(final String scheme, final Uri data) {
-		GeoPointParserUtil.GeoParsedPoint p = GeoPointParserUtil.parse(scheme, data.toString());
+	private MyService extract(final Uri uri) {
+		GeoPointParserUtil.GeoParsedPoint p = GeoPointParserUtil.parse(uri.toString());
 		if (p.isGeoPoint()) {
 			if (p.getName() != null) {
 				return new GeoPointSearch(p.getLat(), p.getLon(), p.getName(), p.getZoom());
