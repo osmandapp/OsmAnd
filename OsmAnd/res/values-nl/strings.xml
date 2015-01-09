@@ -2043,4 +2043,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="show_railway_warnings">Toon spoorwegovergangen</string>
 	<string name="show_pedestrian_warnings">Toon voetgangers oversteekplaatsen</string>
     <string name="speak_pedestrian">Meld oversteekplaatsen</string>
-    </resources>
+    <string name="rendering_value__name">Standaard</string>
+	</resources>
