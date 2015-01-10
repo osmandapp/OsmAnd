@@ -778,11 +778,11 @@ public class RoutingHelper {
 	public void recalculateRouteDueToSettingsChange() {
 		//This should fix route-recalculation if settings change during ongoing calculation
 		clearCurrentRoute(finalLocation, intermediatePoints);
-		// Try re-initialize start point to check impact on Issue 2515
-		if (settings.getPointToStart() != null) {
-			lastFixedLocation.setLatitude(settings.getPointToStart().getLatitude());
-			lastFixedLocation.setLongitude(settings.getPointToStart().getLongitude());
-		}
+		//Test only: Try re-initialize start point to check impact on Issue 2515
+		//if (settings.getPointToStart() != null) {
+		//	lastFixedLocation.setLatitude(settings.getPointToStart().getLatitude());
+		//	lastFixedLocation.setLongitude(settings.getPointToStart().getLongitude());
+		//}
 		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, true, false);
 	}
 	
