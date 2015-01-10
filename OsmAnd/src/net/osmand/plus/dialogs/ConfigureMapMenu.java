@@ -131,6 +131,11 @@ public class ConfigureMapMenu {
 				} else {
 					ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
 				}
+				adapter.item(R.string.layer_gpx_layer).selected(
+					app.getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0)
+					//.icons(R.drawable.ic_action_foot_dark, R.drawable.ic_action_foot_light)
+					.icons(R.drawable.ic_action_polygom_dark, R.drawable.ic_action_polygom_light)
+					.listen(l).reg();
 			} else if (itemId == R.string.layer_transport_route) {
 				ma.getMapLayers().getTransportInfoLayer().setVisible(isChecked);
 			}
