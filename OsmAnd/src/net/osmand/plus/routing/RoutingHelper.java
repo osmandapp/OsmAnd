@@ -783,9 +783,7 @@ public class RoutingHelper {
 		//	lastFixedLocation.setLatitude(settings.getPointToStart().getLatitude());
 		//	lastFixedLocation.setLongitude(settings.getPointToStart().getLongitude());
 		//}
-		//Try calling with previousRoute=null and check impact on Issue 2515
-		//recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, true, false);
-		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, null, true, false);
+		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, true, false);
 	}
 	
 	private void recalculateRouteInBackground(boolean force, final Location start, final LatLon end, final List<LatLon> intermediates,
