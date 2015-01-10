@@ -734,6 +734,8 @@ public class RoutingHelper {
 			RouteCalculationResult res = provider.calculateRouteImpl(params);
 			if (params.calculationProgress.isCancelled) {
 				currentRunningJob = null;
+//Try this for Issue 2515
+params.calculationProgress.isCancelled = false;
 				return;
 			}
 			final boolean onlineSourceWithoutInternet = !res.isCalculated() && params.type.isOnline() && !settings.isInternetConnectionAvailable();
