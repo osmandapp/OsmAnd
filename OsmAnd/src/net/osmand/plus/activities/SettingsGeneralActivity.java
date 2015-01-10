@@ -67,7 +67,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
-		//setSupportProgressBarIndeterminateVisibility(false);
 		getToolbar().setTitle(R.string.global_app_settings);
 		addPreferencesFromResource(R.xml.general_settings);
 		String[] entries;
@@ -543,7 +542,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	}
 
 	public void reloadIndexes() {
-		//setSupportProgressBarIndeterminateVisibility(true);
+		setProgressVisibility(true);
 		final CharSequence oldTitle = getToolbar().getTitle();
 		getToolbar(). setTitle(getString(R.string.loading_data));
 		getToolbar().setSubtitle(getString(R.string.reading_indexes));
@@ -558,7 +557,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				showWarnings(result);
 				getToolbar().setTitle(oldTitle);
 				getToolbar().setSubtitle("");
-				//setSupportProgressBarIndeterminateVisibility(false);
+				setProgressVisibility(false);
 			}
 			
 		}.execute();
@@ -571,7 +570,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 				@Override
 				protected void onPreExecute() {
-					//setSupportProgressBarIndeterminateVisibility(true);
+					setProgressVisibility(true);
 				}
 
 				@Override
@@ -582,7 +581,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 				@Override
 				protected void onPostExecute(Void result) {
-					//setSupportProgressBarIndeterminateVisibility(false);
+					setProgressVisibility(false);
 					if (!NativeOsmandLibrary.isNativeSupported(storage, getMyApplication())) {
 						AccessibleToast.makeText(SettingsGeneralActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
 					}

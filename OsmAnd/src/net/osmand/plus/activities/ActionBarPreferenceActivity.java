@@ -44,9 +44,7 @@ public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
 			}
 		});
 		getSpinner().setVisibility(View.GONE);
-		if (!((OsmandApplication)getApplication()).getSettings().isLightContent()){
-			getSpinner().setPopupBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.dashboard_black)));
-		}
+		setProgressVisibility(false);
 	}
 
 	private static int getResIdFromAttribute(final Activity activity, final int attr) {
@@ -69,5 +67,14 @@ public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
 
 	protected Spinner getSpinner() {
 		return (Spinner) findViewById(R.id.spinner_nav);
+	}
+
+	protected void setProgressVisibility(boolean visibility) {
+		if (visibility) {
+			findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
+		} else {
+			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
+		}
+
 	}
 }

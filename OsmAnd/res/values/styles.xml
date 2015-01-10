@@ -76,13 +76,18 @@
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
         <item name="reset_image">@drawable/ic_action_delete_dark</item> <!--  @drawable/a_1_navigation_cancel_dark -->
         <item name="expandable_category_color">?android:attr/colorBackground</item>
+		<item name="android:spinnerStyle">@style/Widget.Spinner</item>
      </style>
      
     <style name="Widget.Styled.ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@drawable/bg_striped</item>
         <item name="android:background">@drawable/bg_striped</item>
     </style>
-     
+
+	<style name="Widget.Spinner" parent="android:Widget">
+		<item name="android:colorBackground">@color/dashboard_black</item>
+		<item name="android:clickable">true</item>
+	</style>
 	
 	<!-- Dialog popup -->
 	<style name="Animations" />

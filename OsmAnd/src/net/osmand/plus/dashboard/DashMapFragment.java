@@ -2,7 +2,6 @@ package net.osmand.plus.dashboard;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.view.*;
 import android.widget.ImageView;
 import net.osmand.data.LatLon;
@@ -14,11 +13,7 @@ import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.MapTextLayer;
-import net.osmand.plus.views.OsmAndMapSurfaceView;
-import net.osmand.plus.views.OsmandMapTileView;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,7 +22,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
- * Created by Denis on 24.11.2014.
+ * Created by Denis on
+ * 24.11.2014.
  */
 public class DashMapFragment extends DashBaseFragment implements IMapDownloaderCallback {
 
@@ -136,6 +132,7 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 		setMapImage(getView());
 	}
 
+	@SuppressWarnings("deprecation")
 	private void updateMapImage() {
 		MapRenderRepositories repositories = getMyApplication().getResourceManager().getRenderer();
 		LatLon lm = getMyApplication().getSettings().getLastKnownMapLocation();
