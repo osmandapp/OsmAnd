@@ -156,13 +156,6 @@ public class RoutingHelper {
 		});
 		this.finalLocation = newFinalLocation;
 		this.intermediatePoints = newIntermediatePoints;
-
-		//Test only: Try re-initialize start point to check impact on Issue 2515
-		if (settings.getPointToStart() != null) {
-			this.lastFixedLocation.setLatitude(settings.getPointToStart().getLatitude());
-			this.lastFixedLocation.setLongitude(settings.getPointToStart().getLongitude());
-		}
-
 		if(currentRunningJob instanceof RouteRecalculationThread) {
 			((RouteRecalculationThread) currentRunningJob).stopCalculation();
 		}
