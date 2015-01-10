@@ -65,7 +65,7 @@ public class ConfigureMapMenu {
 		createLayersItems(adapter, ma);
 		if (!advanced){
 			adapter.item(R.string.btn_advanced_mode).icons(R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_light)
-					.selected(advanced ? 1 : 0)
+					.selected(advanced ? true : false)
 					.listen(new OnContextMenuClick() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
@@ -146,14 +146,14 @@ public class ConfigureMapMenu {
 		LayerMenuListener l = new LayerMenuListener(activity, adapter);
 		adapter.item(R.string.layers_category_show).setCategory(true).layout(R.layout.drawer_list_sub_header).reg();
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
-		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0)
+		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? true : false)
 				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).listen(l).reg();
-		adapter.item(R.string.layer_amenity_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0) 
+		adapter.item(R.string.layer_amenity_label).selected(settings.SHOW_POI_LABEL.get() ? true : false)
 				.icons(R.drawable.ic_action_text_dark, R.drawable.ic_action_text_light).listen(l).reg();
-		adapter.item(R.string.layer_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0) 
+		adapter.item(R.string.layer_favorites).selected(settings.SHOW_FAVORITES.get() ? true : false)
 				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).listen(l).reg();
 		adapter.item(R.string.layer_gpx_layer).selected(
-				app.getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0)
+				app.getSelectedGpxHelper().isShowingAnyGpxFiles() ? true : false)
 //				.icons(R.drawable.ic_action_foot_dark, R.drawable.ic_action_foot_light)
 				.icons(R.drawable.ic_action_polygom_dark, R.drawable.ic_action_polygom_light)
 				.listen(l).reg();
@@ -470,7 +470,7 @@ public class ConfigureMapMenu {
 						refreshMapComplete(activity);
 						return false;
 					}
-				}).selected(pref.get() ? 1 : 0).reg();
+				}).selected(pref.get() ? true : false).reg();
 			} else {
 				final OsmandSettings.CommonPreference<String> pref = view.getApplication().getSettings()
 						.getCustomRenderProperty(p.getAttrName());
