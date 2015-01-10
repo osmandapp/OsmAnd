@@ -1076,7 +1076,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="loading_builds_failed">Не ўдалося атрымаць сьпіс зборак OsmAnd</string>
 	<string name="loading_builds">Загружаюцца зборкі OsmAnd…</string>
 	<string name="select_build_to_install">Выберыце зборку OsmAnd для ўстаноўкі</string>
-	<string name="gps_status_app_not_found">Праграма статуса GPS не ўсталяваная. Пашукаць яе ў Market?</string>
+	<string name="gps_status_app_not_found">Праграма стану GPS не ўсталяваная. Шукаць яе ў Google Play?</string>
 	<string name="voice_is_not_available_msg">Галасавыя каманды не даступныя. Калі ласка, перайдзіце ў \"Налады\" → \"Агульныя\" → \"Галасавыя дадзеныя\" і абярыце ці сьцягніце пакет галасавых падказак.</string>
 	<string name="voice_is_not_available_title">Галасавыя падказкі не абраныя</string>
 	<string name="daynight_mode_day">Дзень</string>
@@ -1271,7 +1271,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="follow">Пачаць навігацыю</string>
 	<string name="mark_final_location_first">Абярыце спачатку месца прызначэньня</string>
 	<string name="get_directions">Навігацыя</string>
-	<string name="show_gps_status">Паказаць статус GPS</string>
+	<string name="show_gps_status">Паказаць стан GPS</string>
 	<string name="opening_hours">Гадзіны працы</string>
 	<string name="opening_changeset">Адкрыцьцё пакета паправак…</string>
 	<string name="closing_changeset">Закрыцьцё пакета паправак…</string>
@@ -1539,7 +1539,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmodroid_refresh">Абнавіць каналы</string>
     <string name="default_or">ці</string>
 	<string name="default_and">і</string>
-    <string name="gps_status_eclipsim">Статус GPS</string>
+    <string name="gps_status_eclipsim">Стан GPS</string>
     <string name="remember_choice">Запомніць мой выбар</string>
     <string name="index_item_world_basemap">Сусьветная аглядная мапа</string>
     <string name="index_item_world_ski">Сусьветная лыжная мапа</string>
@@ -1927,7 +1927,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_category_details">Падрабязнасьці</string>
     <string name="rendering_category_transport">Транспарт</string>
     <string name="layers_category_show">Паказаць</string>
-	<string name="map_widget_top">Статусны радок</string>
+	<string name="map_widget_top">Радок стану</string>
 	<string name="map_widget_right">Правая панэль</string>
 	<string name="map_widget_left">Левая панэль</string>
     <string name="rendering_category_others">Іншыя атрыбуты мапы</string>
