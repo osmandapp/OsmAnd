@@ -258,6 +258,14 @@ public class DashFavoritesFragment extends DashBaseFragment implements Favourite
 
 	@Override
 	public void updateFavourites() {
-		setupFavorites();
+		if (getActivity() == null) {
+			return;
+		}
+		getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				setupFavorites();
+			}
+		});
 	}
 }
