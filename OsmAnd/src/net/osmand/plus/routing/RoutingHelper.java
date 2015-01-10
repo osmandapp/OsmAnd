@@ -254,7 +254,7 @@ public class RoutingHelper {
 		boolean calculateRoute = false;
 		synchronized (this) {
 			// 0. Route empty or needs to be extended? Then re-calculate route.
-			if(route.isEmpty() || (settings.getPointToStart() != null)) {
+			if(route.isEmpty()) {
 				calculateRoute = true;
 			} else {
 				// 1. Update current route position status according to latest received location
