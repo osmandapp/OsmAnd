@@ -109,6 +109,7 @@ public class ConfigureMapMenu {
 				ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
 				//sync tick mark
 				cm.item(R.string.layer_gpx_layer).selected(ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0).reg();
+				cm.notifyDataSetChanged();
 				return false;
 			} else  {
 				return super.onRowItemClick(adapter, view, itemId, pos);
@@ -135,6 +136,7 @@ public class ConfigureMapMenu {
 				}
 				//sync tick mark
 				cm.item(R.string.layer_gpx_layer).selected(ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0).reg();
+				cm.notifyDataSetChanged();
 			} else if (itemId == R.string.layer_transport_route) {
 				ma.getMapLayers().getTransportInfoLayer().setVisible(isChecked);
 			}
