@@ -131,6 +131,8 @@ public class ConfigureMapMenu {
 				} else {
 					ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
 				}
+				//sync tick mark
+				cm.item(R.string.layer_gpx_layer).selected(ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0).reg();
 			} else if (itemId == R.string.layer_transport_route) {
 				ma.getMapLayers().getTransportInfoLayer().setVisible(isChecked);
 			}
