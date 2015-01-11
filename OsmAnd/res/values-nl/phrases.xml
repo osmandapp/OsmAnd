@@ -1,2 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_mine_historic">Historische mijn</string>
+	<string name="poi_palaeontological_site">Paleontologische site</string>
+
+	<string name="poi_bakery">Bakkerij</string>
+	<string name="poi_alcohol">Drankwinkel</string>
+	<string name="poi_convenience">Supermarkt</string>
+	<string name="poi_mall">Winkelcentrum</string>
+	<string name="poi_beverages">Drankwinkel</string>
+	<string name="poi_butcher">Vleesmarkt</string>
+	<string name="poi_deli">Delicatessenwinkel</string>
+	<string name="poi_shop_farm">Boerderijwinkel</string>
+	<string name="poi_greengrocer">Groentewinkel</string>
+	<string name="poi_seafood">Viswinkel</string>
+	<string name="poi_confectionery">Banketbakkerij</string>
+	<string name="poi_military_nuclear_explosion_site">Kernexplosiesite</string>
+<string name="poi_ice_cream">IJssalon</string>
+	<string name="poi_supermarket">Supermarkt</string>
+	<string name="poi_shop_tea">Theewinkel</string>
+	<string name="poi_dairy">Zuivelwinkel</string>
+	<string name="poi_vending_machine">Verkoopautomaat</string>
+
+	<string name="poi_bookshop">Boekhandel</string>
+	<string name="poi_bicycle_shop">Fietswinkel</string>
+	<string name="poi_anime_shop">Animewinkel</string>
+	<string name="poi_antiques_shop">Antiekwinkel</string>
+	<string name="poi_art_shop">Kunstwinkel</string>
+	<string name="poi_baby_goods">Babywinkel</string>
+	<string name="poi_bag_shop">Tassenwinkel</string>
+	<string name="poi_bathroom_furnishing_shop">Badkamermeubelwinkel</string>
+	<string name="poi_bed_shop">Slaapkamermeubelwinkel</string>
+	<string name="poi_boutique">Modezaak</string>
+	<string name="poi_carpet_shop">Tapijtwinkel</string>
+	<string name="poi_chemist_shop">Apotheek</string>
+	<string name="poi_clothes_shop">Kledingwinkel</string>
+	<string name="poi_children_clothes_shop">Kinderkledingwinkel</string>
+	<string name="poi_shoes">Schoenenwinkel</string>
+	<string name="poi_computer_shop">Computerwinkel</string>
+	<string name="poi_copyshop">Kopieerzaak</string>
+	<string name="poi_curtain_shop">Gordijnwinkel</string>
+	<string name="poi_fabric_shop">Stoffenwinkel</string>
+	</resources>
