@@ -107,6 +107,8 @@ public class ConfigureMapMenu {
 				return false;
 			} else if(itemId == R.string.layer_gpx_layer && cm.getSelection(pos) == 1) {
 				ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
+				//sync tick mark
+				cm.item(R.string.layer_gpx_layer).selected(ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0).reg();
 				return false;
 			} else  {
 				return super.onRowItemClick(adapter, view, itemId, pos);
