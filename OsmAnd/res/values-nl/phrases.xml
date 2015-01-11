@@ -39,4 +39,15 @@
 	<string name="poi_copyshop">Kopieerzaak</string>
 	<string name="poi_curtain_shop">Gordijnwinkel</string>
 	<string name="poi_fabric_shop">Stoffenwinkel</string>
+	<string name="poi_bedding_shop">Beddenwinkel</string>
+	<string name="poi_dive_shop">Duikbenodigdheden</string>
+	<string name="poi_doityourself_shop">Bouwmarkt</string>
+	<string name="poi_erotic_shop">Sex-shop</string>
+	<string name="poi_florist">Bloemenwinkel</string>
+	<string name="poi_garden_centre">Tuincentrum</string>
+	<string name="poi_gas_shop">Gasflessen</string>
+	<string name="poi_gift_shop">Cadeauwinkel</string>
+	<string name="poi_glaziery_shop">Glashandel</string>
+	<string name="poi_hardware_shop">IJzerhandel</string>
+	<string name="poi_hearing_aids_shop">Hoorapparaten</string>
 	</resources>
