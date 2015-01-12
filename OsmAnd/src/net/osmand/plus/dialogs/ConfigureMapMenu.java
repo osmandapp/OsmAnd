@@ -107,8 +107,7 @@ public class ConfigureMapMenu {
 				return false;
 			} else if(itemId == R.string.layer_gpx_layer && cm.getSelection(pos) == 1) {
 				ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
-				//sync tick mark
-				cm.item(R.string.layer_gpx_layer).selected(ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0).reg();
+				// TODO: tick mark of "Show GPX" needs to be synced after return form sub-selection screen (user may or may not have selected files!)
 				return false;
 			} else  {
 				return super.onRowItemClick(adapter, view, itemId, pos);
@@ -133,8 +132,7 @@ public class ConfigureMapMenu {
 				} else {
 					ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
 				}
-				//sync tick mark
-				cm.item(R.string.layer_gpx_layer).selected(ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0).reg();
+				// TODO: tick mark of "Show GPX" needs to be synced after return form sub-selection screen (user may or may not have selected files!)
 			} else if (itemId == R.string.layer_transport_route) {
 				ma.getMapLayers().getTransportInfoLayer().setVisible(isChecked);
 			}
