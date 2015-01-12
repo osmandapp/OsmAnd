@@ -8,8 +8,6 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import android.os.SystemClock;
-import android.util.FloatMath;
-import android.view.MotionEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
@@ -23,10 +21,10 @@ public class AnimateDraggingMapThread {
 	protected static final Log log = PlatformUtil.getLog(AnimateDraggingMapThread.class);
 	
 	private final static float DRAGGING_ANIMATION_TIME = 1200f;
-	private final static float ZOOM_ANIMATION_TIME = 800f;
-	private final static float ZOOM_MOVE_ANIMATION_TIME = 650f;
-	private final static float MOVE_MOVE_ANIMATION_TIME = 2000f;
-	private final static int DEFAULT_SLEEP_TO_REDRAW = 55;
+	private final static float ZOOM_ANIMATION_TIME = 500f;
+	private final static float ZOOM_MOVE_ANIMATION_TIME = 450f;
+	private final static float MOVE_MOVE_ANIMATION_TIME = 1300f;
+	private final static int DEFAULT_SLEEP_TO_REDRAW = 15;
 	
 	private volatile boolean stopped;
 	private volatile Thread currentThread = null;
@@ -36,6 +34,7 @@ public class AnimateDraggingMapThread {
 	private double targetLatitude = 0;
 	private double targetLongitude = 0;
 	private int targetIntZoom = 0;
+	private int targetFloatZoom = 0;
 
 	private boolean isAnimatingZoom;
 	
@@ -120,11 +119,13 @@ public class AnimateDraggingMapThread {
 	
 	public void startMoving(final double finalLat, final double finalLon, final int endZoom,  final boolean notifyListener){
 		stopAnimatingSync();
-		double startLat = tileView.getLatitude();
-		double startLon = tileView.getLongitude();
-		float rotate = tileView.getRotate();
-		final int startZoom = tileView.getZoom();
 		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
+		double startLat = rb.getLatitude();
+		double startLon = rb.getLongitude();
+		float rotate = rb.getRotate();
+		final int startZoom = rb.getZoom();
+		final double startZoomFP = rb.getZoomFloatPart();
+		
 		boolean skipAnimation = false;
 		float mStX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
 		float mStY = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
@@ -141,7 +142,7 @@ public class AnimateDraggingMapThread {
 		skipAnimation = skipAnimation || (Math.abs(moveZoom - startZoom) >= 3 || Math.abs(endZoom - moveZoom) > 3);
 		if (skipAnimation) {
 			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
-			tileView.setZoomAnimate(endZoom, notifyListener);
+			tileView.setFractionalZoom(endZoom, 0, notifyListener);
 			return;
 		}
 		final float mMoveX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
@@ -155,7 +156,7 @@ public class AnimateDraggingMapThread {
 			public void run() {
 				setTargetValues(endZoom, finalLat, finalLon);
 				if(moveZoom != startZoom){
-					animatingZoomInThread(startZoom, moveZoom, ZOOM_MOVE_ANIMATION_TIME, notifyListener);
+					animatingZoomInThread(startZoom, startZoomFP, moveZoom, startZoomFP,ZOOM_MOVE_ANIMATION_TIME, notifyListener);
 				}
 				
 				if(!stopped){
@@ -165,10 +166,10 @@ public class AnimateDraggingMapThread {
 					tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
 				}
 				
-				if (!stopped && moveZoom != endZoom) {
-					animatingZoomInThread(moveZoom, endZoom, ZOOM_MOVE_ANIMATION_TIME, notifyListener);
+				if (!stopped && (moveZoom != endZoom || startZoomFP != 0)) {
+					animatingZoomInThread(moveZoom, startZoomFP, endZoom, 0, ZOOM_MOVE_ANIMATION_TIME, notifyListener);
 				}
-				tileView.setZoomAnimate(endZoom, notifyListener);
+				tileView.setFractionalZoom(endZoom, 0, notifyListener);
 				
 				pendingRotateAnimation();
 			}
@@ -203,12 +204,17 @@ public class AnimateDraggingMapThread {
 		
 	}
 	
-	private void animatingZoomInThread(double zoomStart, int zoom, float animationTime, boolean notifyListener){
+	private void animatingZoomInThread(int zoomStart, double zoomFloatStart, 
+			int zoomEnd, double zoomFloatEnd, float animationTime, boolean notifyListener){
 		try {
 			isAnimatingZoom = true;
-			double curZoom = zoomStart;
-			double zoomEnd =  (zoom /*+ zoomScale*/);
-			animationTime *= Math.abs(zoomEnd - zoomStart);
+			// could be 0 ]-0.5,0.5], -1 ]-1,0], 1 ]0, 1]  
+			int threshold = ((int)(zoomFloatEnd * 2));
+			double beginZoom = zoomStart + zoomFloatStart;
+			double endZoom =  zoomEnd + zoomFloatEnd;
+			
+			double curZoom = beginZoom;
+			animationTime *= Math.abs(endZoom - beginZoom);
 			// AccelerateInterpolator interpolator = new AccelerateInterpolator(1);
 			LinearInterpolator interpolator = new LinearInterpolator();
 
@@ -220,15 +226,17 @@ public class AnimateDraggingMapThread {
 					break;
 				}
 				float interpolation = interpolator.getInterpolation(normalizedTime);
-				curZoom = interpolation * (zoomEnd - zoomStart) + zoomStart;
-				tileView.zoomToAnimate(curZoom, notifyListener);
+				curZoom = interpolation * (endZoom - beginZoom) + beginZoom;
+				int baseZoom = (int) Math.round(curZoom - 0.5 * threshold);
+				double zaAnimate = curZoom - baseZoom; 
+				tileView.zoomToAnimate(baseZoom, zaAnimate, notifyListener);
 				try {
 					Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
 				} catch (InterruptedException e) {
 					stopped = true;
 				}
 			}
-			tileView.setZoomAnimate(zoom, notifyListener);
+			tileView.setFractionalZoom(zoomEnd, zoomFloatEnd,  notifyListener);
 		} finally {
 			isAnimatingZoom = false;
 		}
@@ -238,14 +246,14 @@ public class AnimateDraggingMapThread {
 		return isAnimatingZoom;
 	}
 
-	public void startZooming(final int zoomEnd, final boolean notifyListener){
+	public void startZooming(final int zoomEnd, final double zoomPart, final boolean notifyListener){
 		final float animationTime = ZOOM_ANIMATION_TIME;
 		startThreadAnimating(new Runnable(){
 			@Override
 			public void run() {
-				final double zoomStart = tileView.getZoom() ;
+				RotatedTileBox tb = tileView.getCurrentRotatedTileBox();
 				setTargetValues(zoomEnd, tileView.getLatitude(), tileView.getLongitude());
-				animatingZoomInThread(zoomStart, zoomEnd, animationTime, notifyListener);
+				animatingZoomInThread(tb.getZoom(), tb.getZoomFloatPart(), zoomEnd, zoomPart, animationTime, notifyListener);
 				pendingRotateAnimation();
 			}
 		}); //$NON-NLS-1$

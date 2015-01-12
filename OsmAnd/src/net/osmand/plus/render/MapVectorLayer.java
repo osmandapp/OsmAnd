@@ -4,7 +4,7 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.TileSourceProxyProvider;
 import net.osmand.core.jni.MapLayerConfiguration;
 import net.osmand.core.jni.PointI;
-import net.osmand.data.QuadPointDouble;
+import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandSettings;
@@ -138,8 +138,8 @@ public class MapVectorLayer extends BaseMapLayer {
 				// opengl renderer
 				mapRenderer.setTarget(new PointI(tilesRect.getCenter31X(), tilesRect.getCenter31Y()));
 				mapRenderer.setAzimuth(-tilesRect.getRotate());
-				mapRenderer.setZoom((float) (tilesRect.getZoom() /* + tilesRect.getZoomScale() */+ tilesRect
-						.getZoomAnimation()));
+				mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect
+						.getZoomAnimation() + tilesRect.getZoomFloatPart()));
 			} else {
 				if (!view.isZooming()) {
 					if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings)) {
@@ -163,16 +163,22 @@ public class MapVectorLayer extends BaseMapLayer {
 		boolean shown = false;
 		if (bmp != null && bmpLoc != null) {
 			float rot = -bmpLoc.getRotate();
-			int cz = currentViewport.getZoom();
 			canvas.rotate(rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 			final RotatedTileBox calc = currentViewport.copy();
 			calc.setRotate(bmpLoc.getRotate());
-			QuadPointDouble lt = bmpLoc.getLeftTopTile(cz);
-			QuadPointDouble rb = bmpLoc.getRightBottomTile(cz);
-			final float x1 = calc.getPixXFromTile(lt.x, lt.y, cz);
-			final float x2 = calc.getPixXFromTile(rb.x, rb.y, cz);
-			final float y1 = calc.getPixYFromTile(lt.x, lt.y, cz);
-			final float y2 = calc.getPixYFromTile(rb.x, rb.y, cz);
+//			int cz = currentViewport.getZoom();
+//			QuadPointDouble lt = bmpLoc.getLeftTopTile(cz);
+//			QuadPointDouble rb = bmpLoc.getRightBottomTile(cz);
+//			final float x1 = calc.getPixXFromTile(lt.x, lt.y, cz);
+//			final float x2 = calc.getPixXFromTile(rb.x, rb.y, cz);
+//			final float y1 = calc.getPixYFromTile(lt.x, lt.y, cz);
+//			final float y2 = calc.getPixYFromTile(rb.x, rb.y, cz);
+			LatLon lt = bmpLoc.getLeftTopLatLon();
+			LatLon rb = bmpLoc.getRightBottomLatLon();
+			final float x1 = calc.getPixXFromLatLon(lt.getLatitude(), lt.getLongitude());
+			final float x2 = calc.getPixXFromLatLon(rb.getLatitude(), rb.getLongitude());
+			final float y1 = calc.getPixYFromLatLon(lt.getLatitude(), lt.getLongitude());
+			final float y2 = calc.getPixYFromLatLon(rb.getLatitude(), rb.getLongitude());
 			destImage.set(x1, y1, x2, y2);
 			if (!bmp.isRecycled()) {
 				canvas.drawBitmap(bmp, null, destImage, paintImg);
