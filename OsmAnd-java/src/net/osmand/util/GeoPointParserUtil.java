@@ -12,6 +12,7 @@ public class GeoPointParserUtil {
 	public static void main(String[] args) {
 		final int ilat = 34, ilon = -106;
 		final double dlat = 34.99, dlon = -106.61;
+		final double longLat = 34.993933029174805, longLon = -106.615680694580078;
 		final String name = "Treasure Island";
 		int z = GeoParsedPoint.NO_ZOOM;
 		String url;
@@ -121,17 +122,36 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://openstreetmap.org/map=11/34/-106
-		url = "http://openstreetmap.org/map=" + z + "/" + ilat + "/" + ilon;
+		// http://openstreetmap.org/#map=11/34/-106
+		url = "http://openstreetmap.org/#map=" + z + "/" + ilat + "/" + ilon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
-		// http://openstreetmap.org/map=11/34.99/-106.61
-		url = "http://openstreetmap.org/map=" + z + "/" + dlat + "/" + dlon;
+		// http://openstreetmap.org/#map=11/34.99/-106.61
+		url = "http://openstreetmap.org/#map=" + z + "/" + dlat + "/" + dlon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
+		// http://openstreetmap.org/#11/34.99/-106.61
+		url = "http://openstreetmap.org/#" + z + "/" + dlat + "/" + dlon;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
+        // https://www.openstreetmap.org/#map=11/49.563/17.291
+		url = "https://www.openstreetmap.org/#map=" + z + "/" + dlat + "/" + dlon;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
+        // https://www.openstreetmap.org/?mlat=49.56275939941406&mlon=17.291107177734375#map=11/49.563/17.291
+		url = "https://www.openstreetmap.org/?mlat=" + longLat + "&mlon=" + longLon
+            + "#map=" + z + "/" + dlat + "/" + dlon;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(longLat, longLon, z));
 
 		// http://openstreetmap.de/zoom=11&lat=34&lon=-106
 		url = "http://openstreetmap.de/zoom=" + z + "&lat=" + ilat + "&lon=" + ilon;
@@ -298,6 +318,25 @@ public class GeoPointParserUtil {
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
+
+        /* URLs straight from various services, instead of generated here */
+        
+        String urls[] = {
+            "https://www.openstreetmap.org/#map=0/0/0",
+            "https://www.openstreetmap.org/#map=0/180/180",
+            "https://www.openstreetmap.org/#map=0/-180/-180",
+            "https://www.openstreetmap.org/#map=0/180.0/180.0",
+            "https://www.openstreetmap.org/#map=6/33.907/34.662",
+            "https://www.openstreetmap.org/?mlat=49.56275939941406&mlon=17.291107177734375#map=8/49.563/17.291",
+        };
+
+        for (String u : urls) {
+            System.out.println("url: " + u);
+            actual = GeoPointParserUtil.parse(u);
+            assert(actual != null);
+            System.out.println("Passed!");
+        }
 	}
 
 	private static void assertGeoPoint(GeoParsedPoint actual, GeoParsedPoint expected) {
@@ -357,21 +396,21 @@ public class GeoPointParserUtil {
             return null;
         else
             scheme = scheme.toLowerCase(Locale.US);
+
 		if ("http".equals(scheme) || "https".equals(scheme)) {
+            String host = uri.getHost();
+            if (host == null)
+                return null;
+            else
+                host = host.toLowerCase(Locale.US);
 
 			final String schemeSpecific = uri.getSchemeSpecificPart();
-
-			if (schemeSpecific == null) {
+			if (schemeSpecific == null)
 				return null;
-			}
 
 			final String[] osmandNetSite = { "//download.osmand.net/go?" };
 
 			final String[] osmandNetPattern = { "lat=([+-]?\\d+(?:\\.\\d+)?)&lon=([+-]?\\d+(?:\\.\\d+)?)&?(z=\\d{1,2})" };
-
-			final String[] openstreetmapOrgSite = { "//openstreetmap.org/", "//www.openstreetmap.org/" };
-
-			final String[] openstreetmapOrgPattern = { "(?:.*)(?:map=)(\\d{1,2})/([+-]?\\d+(?:\\.\\d+)?)/([+-]?\\d+(?:\\.\\d+)?)(?:.*)" };
 
 			final String[] openstreetmapDeSite = { "//openstreetmap.de/", "//www.openstreetmap.de/" };
 
@@ -395,11 +434,56 @@ public class GeoPointParserUtil {
 
 			final String[] yandexRuPattern = { "(?:.*)ll=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.+)(z=\\d{1,2})(?:.*)" };
 
-			final String sites[][] = { osmandNetSite, openstreetmapOrgSite, openstreetmapDeSite, googleComSite,
-					yandexRuSite };
+			final String sites[][] = { osmandNetSite, openstreetmapDeSite,
+					googleComSite, yandexRuSite };
 
-			final String patterns[][] = { osmandNetPattern, openstreetmapOrgPattern, openstreetmapDePattern,
-					googleComPattern, yandexRuPattern };
+			final String patterns[][] = { osmandNetPattern,
+					openstreetmapDePattern, googleComPattern, yandexRuPattern };
+
+            try {
+                if (host.equals("osm.org") || host.endsWith("openstreetmap.org")) {
+                    Pattern p;
+                    Matcher matcher;
+                    String path = uri.getPath();
+                    if ("go".equals(path)) { // short URL form
+                        // TODO decode OSM short URL and delete this:
+                        p = Pattern.compile("(?:.*)(?:map=)(\\d{1,2})/([+-]?\\d+(?:\\.\\d+)?)/([+-]?\\d+(?:\\.\\d+)?)(?:.*)");
+                        matcher = p.matcher(schemeSpecific);
+                    } else { // data in the query and/or feature strings
+                        String lat = "0";
+                        String lon = "0";
+                        String zoom = String.valueOf(GeoParsedPoint.NO_ZOOM);
+                        String fragment = uri.getFragment();
+                        if (fragment != null) {
+                            p = Pattern.compile("(?:map=)?(\\d{1,2})/([+-]?\\d+(?:\\.\\d+)?)/([+-]?\\d+(?:\\.\\d+)?)(?:.*)");
+                            matcher = p.matcher(fragment);
+                            if (matcher.matches()) {
+                                zoom = matcher.group(1);
+                                lat = matcher.group(2);
+                                lon = matcher.group(3);
+                            }
+                        }
+                        String query = uri.getQuery();
+                        if (query != null) {
+                            // the query string sometimes has higher resolution values
+                            p = Pattern.compile("(?:.*)mlat=([+-]?\\d+(?:\\.\\d+)?)(?:.*)&mlon=([+-]?\\d+(?:\\.\\d+)?)(?:.*)?");
+                            matcher = p.matcher(query);
+                            if (matcher.matches()) {
+                                lat = matcher.group(1);
+                                lon = matcher.group(2);
+                            }
+                        }
+                        return new GeoParsedPoint(lat, lon, zoom);
+                    }
+                }
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+                return null;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                return null;
+            }
+
 			// search by geo coordinates
 			for (int s = 0; s < sites.length; s++) {
 				for (int si = 0; si < sites[s].length; si++) {
@@ -466,8 +550,7 @@ public class GeoPointParserUtil {
 				}
 			}
 			return null;
-		}
-		if ("geo".equals(scheme) || "osmand.geo".equals(scheme)) {
+		} else if ("geo".equals(scheme) || "osmand.geo".equals(scheme)) {
 			String schemeSpecific = uri.getSchemeSpecificPart();
 			if (schemeSpecific == null) {
 				return null;
@@ -545,6 +628,14 @@ public class GeoPointParserUtil {
 		return null;
 	}
 
+    private static int parseZoom(String zoom) {
+        try {
+            return Integer.valueOf(zoom);
+        } catch (NumberFormatException e) {
+            return GeoParsedPoint.NO_ZOOM;
+        }
+    }
+
 	public static class GeoParsedPoint {
 		private static final int NO_ZOOM = -1;
 
@@ -577,6 +668,16 @@ public class GeoPointParserUtil {
 		public GeoParsedPoint(double lat, double lon, int zoom, String name) {
 			this(lat, lon, name);
 			this.zoom = zoom;
+		}
+
+		public GeoParsedPoint(String latString, String lonString, String zoomString) throws NumberFormatException {
+			this(Double.valueOf(latString), Double.valueOf(lonString));
+			this.zoom = parseZoom(zoomString);
+		}
+
+		public GeoParsedPoint(String latString, String lonString) throws NumberFormatException {
+			this(Double.valueOf(latString), Double.valueOf(lonString));
+			this.zoom = NO_ZOOM;
 		}
 
 		public GeoParsedPoint(String query) {
