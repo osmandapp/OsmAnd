@@ -6,6 +6,7 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Random;
 
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.view.*;
@@ -17,10 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.dashboard.DashDownloadMapsFragment;
-import net.osmand.plus.dashboard.DashErrorFragment;
-import net.osmand.plus.dashboard.DashFavoritesFragment;
-import net.osmand.plus.dashboard.DashUpdatesFragment;
+import net.osmand.plus.dashboard.*;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
@@ -70,6 +68,42 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	private static final int SETTINGS_ID = 1;
 	private static final int EXIT_ID = 2;
 
+	private Drawable actionBarBackground;
+	FloatingActionButton fabButton;
+
+	private NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView.OnScrollChangedListener() {
+		public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
+			//making background of actionbar transparent with scroll
+			final int imageHeight = findViewById(R.id.map_image).getMeasuredHeight();
+			final int headerHeight = imageHeight - getSupportActionBar().getHeight();
+			final float ratio = (float) Math.min(Math.max(t, 0), headerHeight) / headerHeight;
+			final int newAlpha = 255 - (int) (ratio * 255);
+			if (imageHeight < t){
+				//hiding action bar - showing floating button
+				getSupportActionBar().hide();
+				fabButton.showFloatingActionButton();
+			} else if (!getSupportActionBar().isShowing()) {
+				getSupportActionBar().show();
+				fabButton.hideFloatingActionButton();
+			}
+			actionBarBackground.setAlpha(newAlpha);
+		}
+	};
+
+	private Drawable.Callback mDrawableCallback = new Drawable.Callback() {
+		@Override
+		public void invalidateDrawable(Drawable who) {
+			getSupportActionBar().setBackgroundDrawable(who);
+		}
+
+		@Override
+		public void scheduleDrawable(Drawable who, Runnable what, long when) {
+		}
+
+		@Override
+		public void unscheduleDrawable(Drawable who, Runnable what) {
+		}
+	};
 
 	@Override
 	public void onPause() {
@@ -99,15 +133,19 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		setContentView(R.layout.dashboard);
 
 		String textVersion = Version.getFullVersion(getMyApplication());
-		if (textVersion.indexOf("#") != -1) {
+		if (textVersion.contains("#")) {
 			textVersion = textVersion.substring(0, textVersion.indexOf("#") + 1);
 		}
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle(textVersion);
 		actionBar.setIcon(android.R.color.transparent);
-		actionBar.setBackgroundDrawable(new ColorDrawable(Color.argb(128, 0, 0, 0)));
-		//ColorDrawable color = new ColorDrawable(getResources().getColor(R.color.actionbar_color));
-		//getSupportActionBar().setBackgroundDrawable(color);
+		actionBarBackground = new ColorDrawable(Color.argb(180, 0, 0, 0));
+		actionBar.setBackgroundDrawable(actionBarBackground);
+		((NotifyingScrollView)findViewById(R.id.main_scroll)).setOnScrollChangedListener(onScrollChangedListener);
+		//setting up callback for drawable on actionbar for old android
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+			actionBarBackground.setCallback(mDrawableCallback);
+		}
 
 		boolean firstTime = initApp(this, getMyApplication());
 		if (getMyApplication().getAppCustomization().checkExceptionsOnStart()) {
@@ -116,7 +154,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		setupContributionVersion();
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			final FloatingActionButton fabButton = new FloatingActionButton.Builder(this)
+			fabButton = new FloatingActionButton.Builder(this)
 					.withDrawable(getResources().getDrawable(R.drawable.ic_action_map))
 					.withButtonColor(Color.parseColor("#ff8f00"))
 					.withGravity(Gravity.BOTTOM | Gravity.RIGHT)
@@ -128,38 +166,8 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 					startMapActivity();
 				}
 			});
-
-			final ScrollView mainScroll = (ScrollView) findViewById(R.id.main_scroll);
-			if (mainScroll == null){
-				return;
-			}
-			mainScroll.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-				private int previousScroll = 0;
-
-				@Override
-				public void onScrollChanged() {
-					int scrollY = mainScroll.getScrollY();
-					if (previousScroll == scrollY || mainScroll.getChildCount() == 0){
-						return;
-					}
-
-					if (scrollY > previousScroll && previousScroll >= 0){
-						if (!fabButton.isHidden() ){
-							fabButton.hideFloatingActionButton();
-						}
-					} else {
-						int layoutHeight = mainScroll.getChildAt(0).getMeasuredHeight();
-						int scrollHeight = scrollY + mainScroll.getHeight();
-						//scroll can actually be more than entire layout height
-						if (fabButton.isHidden() && scrollHeight < layoutHeight){
-							fabButton.showFloatingActionButton();
-						}
-					}
-					previousScroll = scrollY;
-				}
-
-			});
 		}
+		fabButton.hideFloatingActionButton();
 		getLocationProvider().addCompassListener(this);
 		getLocationProvider().registerOrUnregisterCompassListener(true);
 	}
