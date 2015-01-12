@@ -709,6 +709,7 @@ public class RoutingHelper {
 		
 		private final RouteCalculationParams params;
 		private boolean paramsChanged;
+		private Thread prevRunningJob;
 
 		public RouteRecalculationThread(String name, RouteCalculationParams params, boolean paramsChanged) {
 			super(name);
@@ -730,10 +731,23 @@ public class RoutingHelper {
 		
 		@Override
 		public void run() {
-			
+			if(prevRunningJob != null) {
+				while(prevRunningJob.isAlive()){
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			synchronized (RoutingHelper.this) {
+				currentRunningJob = this;
+			}
 			RouteCalculationResult res = provider.calculateRouteImpl(params);
 			if (params.calculationProgress.isCancelled) {
-				currentRunningJob = null;
+				synchronized (RoutingHelper.this) {
+					currentRunningJob = null;
+				}
 				return;
 			}
 			final boolean onlineSourceWithoutInternet = !res.isCalculated() && params.type.isOnline() && !settings.isInternetConnectionAvailable();
@@ -773,6 +787,10 @@ public class RoutingHelper {
 			}
 			lastTimeEvaluatedRoute = System.currentTimeMillis();
 		}
+
+		public void setWaitPrevJob(Thread prevRunningJob) {
+			this.prevRunningJob = prevRunningJob;
+		}
 	}
 	
 	public void recalculateRouteDueToSettingsChange() {
@@ -791,9 +809,9 @@ public class RoutingHelper {
 		if (start == null || end == null) {
 			return;
 		}
-		if (currentRunningJob == null) {
+		if (currentRunningJob == null || force) {
 			// do not evaluate very often
-			if (force || System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {
+			if (System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval || force) {
 				RouteCalculationParams params = new RouteCalculationParams();
 				params.start = start;
 				params.end = end;
@@ -811,7 +829,12 @@ public class RoutingHelper {
 					updateProgress(params.calculationProgress);
 				}
 				synchronized (this) {
-					currentRunningJob = new RouteRecalculationThread("Calculating route", params, paramsChanged); //$NON-NLS-1$
+					final Thread prevRunningJob = currentRunningJob;
+					RouteRecalculationThread newThread = new RouteRecalculationThread("Calculating route", params, paramsChanged); //$NON-NLS-1$
+					currentRunningJob = newThread ;
+					if(prevRunningJob != null) {
+						newThread.setWaitPrevJob(prevRunningJob);
+					}
 					currentRunningJob.start();
 				}
 			}
