@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:orientation="vertical"
 			  android:background="@drawable/bg_cardui"
 			  android:layout_width="fill_parent"
 			  android:layout_height="wrap_content">
-	<LinearLayout android:orientation="horizontal"
-				  android:layout_width="fill_parent"
-				  android:layout_height="@dimen/dashHeaderHeight">
-		<TextView android:id="@+id/map_text"
-				  android:text="@string/map_Button"
-				  style="@style/DashboardSubHeader"/>
-		<Button android:id="@+id/show_map"
-				android:text="@string/show_map"
-				style="@style/DashboardGeneralButton"/>
-	</LinearLayout>
 
-	<RelativeLayout android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:padding="@dimen/subHeaderPadding">
 		<LinearLayout android:id="@+id/loading"
 					  android:layout_width="fill_parent"
 					  android:layout_height="@dimen/dashMapHeight"
@@ -45,10 +32,5 @@
 				   android:src="@drawable/background"
 				   android:layout_width="match_parent"
 				   android:layout_height="@dimen/dashMapHeight"
-				   android:layout_marginLeft="@dimen/subHeaderPadding"
-				   android:layout_marginRight="@dimen/subHeaderPadding"
-				   android:layout_marginBottom="@dimen/subHeaderPadding"
 				   android:visibility="gone"/>
-	</RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

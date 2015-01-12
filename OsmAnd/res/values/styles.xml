@@ -52,10 +52,18 @@
         <item name="android:divider">@drawable/tab_text_separator</item>
     </style>
     
-    
+    <style name="MainMenuActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+		<!--<item name="android:windowActionBarOverlay">true</item>-->
+
+		<!-- Support library compatibility -->
+		<item name="windowActionBarOverlay">true</item>
+    </style>
+
+
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
         <item name="expandable_category_color">@color/group_background</item>
         <item name="reset_image">@drawable/ic_action_delete_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
+		<item name="windowActionBarOverlay">true</item>
     </style>
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--<item name="android:windowContentOverlay">@null</item>
@@ -77,6 +85,7 @@
         <item name="reset_image">@drawable/ic_action_delete_dark</item> <!--  @drawable/a_1_navigation_cancel_dark -->
         <item name="expandable_category_color">?android:attr/colorBackground</item>
 		<item name="android:spinnerStyle">@style/Widget.Spinner</item>
+		<item name="windowActionBarOverlay">true</item>
      </style>
      
     <style name="Widget.Styled.ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">

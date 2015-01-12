@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.view.*;
 import net.osmand.Location;
 import net.osmand.access.AccessibleAlertBuilder;
@@ -101,10 +102,12 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		if (textVersion.indexOf("#") != -1) {
 			textVersion = textVersion.substring(0, textVersion.indexOf("#") + 1);
 		}
-		getSupportActionBar().setTitle(textVersion);
-		ColorDrawable color = new ColorDrawable(getResources().getColor(R.color.actionbar_color));
-		getSupportActionBar().setBackgroundDrawable(color);
-		getSupportActionBar().setIcon(android.R.color.transparent);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle(textVersion);
+		actionBar.setIcon(android.R.color.transparent);
+		actionBar.setBackgroundDrawable(new ColorDrawable(Color.argb(128, 0, 0, 0)));
+		//ColorDrawable color = new ColorDrawable(getResources().getColor(R.color.actionbar_color));
+		//getSupportActionBar().setBackgroundDrawable(color);
 
 		boolean firstTime = initApp(this, getMyApplication());
 		if (getMyApplication().getAppCustomization().checkExceptionsOnStart()) {

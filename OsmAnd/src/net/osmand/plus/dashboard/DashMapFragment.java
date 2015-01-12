@@ -11,13 +11,10 @@ import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.resources.ResourceManager;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -48,18 +45,7 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_map_fragment, container, false);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
-		((TextView) view.findViewById(R.id.map_text)).setTypeface(typeface);
-		((Button) view.findViewById(R.id.show_map)).setTypeface(typeface);
 
-		(view.findViewById(R.id.show_map)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startMapActivity();
-			}
-
-
-		});
 		view.findViewById(R.id.map_image).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
