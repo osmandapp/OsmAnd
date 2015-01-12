@@ -64,7 +64,7 @@ public class BinaryInspector {
 				"-vmap", "-vmapobjects", 
 //				"-vrouting",
 //				"-vaddress", "-vcities", "-vstreets", "-vstreetgroups","-vbuildings", 
-				//"-zoom=16",
+//				"-zoom=16",
 //				"-bbox=1.74,51.17,1.75,51.16", 
 				"/home/victor/projects/osmand/osm-gen/Map.obf"
 					});

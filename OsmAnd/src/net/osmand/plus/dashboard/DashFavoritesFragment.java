@@ -71,6 +71,11 @@ public class DashFavoritesFragment extends DashBaseFragment implements Favourite
 		});
 		return view;
 	}
+	
+	@Override
+	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+	}
 
 	@Override
 	public void onResume() {
