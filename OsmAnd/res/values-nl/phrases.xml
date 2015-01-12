@@ -24,14 +24,14 @@
 	<string name="poi_bicycle_shop">Fietswinkel</string>
 	<string name="poi_anime_shop">Animewinkel</string>
 	<string name="poi_antiques_shop">Antiekwinkel</string>
-	<string name="poi_art_shop">Kunstwinkel</string>
+	<string name="poi_art_shop">Galerie</string>
 	<string name="poi_baby_goods">Babywinkel</string>
 	<string name="poi_bag_shop">Tassenwinkel</string>
 	<string name="poi_bathroom_furnishing_shop">Badkamermeubelwinkel</string>
-	<string name="poi_bed_shop">Slaapkamermeubelwinkel</string>
+	<string name="poi_bed_shop">Beddenwinkel</string>
 	<string name="poi_boutique">Modezaak</string>
 	<string name="poi_carpet_shop">Tapijtwinkel</string>
-	<string name="poi_chemist_shop">Apotheek</string>
+	<string name="poi_chemist_shop">Drogisterij</string>
 	<string name="poi_clothes_shop">Kledingwinkel</string>
 	<string name="poi_children_clothes_shop">Kinderkledingwinkel</string>
 	<string name="poi_shoes">Schoenenwinkel</string>
@@ -53,7 +53,7 @@
 	<string name="poi_fishing_shop">Hengelsportzaak</string>
 	<string name="poi_frame_shop">Fotolijstwinkel</string>
 	<string name="poi_furniture_shop">Meubelwinkel</string>
-	<string name="poi_general_shop">Winkel</string>
+	<string name="poi_general_shop">Winkel in diverse goederen</string>
 	<string name="poi_herbalist">Kruidenierszaak</string>
 	<string name="poi_hifi_shop">Hi-Fi-winkel</string>
 	<string name="poi_houseware_shop">Huishoudelijke winkel</string>
