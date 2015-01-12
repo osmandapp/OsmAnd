@@ -319,6 +319,14 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
+		// http://map.baidu.com/?l=13&tn=B_NORMAL_MAP&c=13748138,4889173&s=gibberish
+		z = 7;
+		int latint = ((int)(dlat * 100000));
+		int lonint = ((int)(dlon * 100000));
+		url = "http://map.baidu.com/?l=" + z + "&tn=B_NORMAL_MAP&c=" + latint + "," + lonint + "&s=gibberish";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
         /* URLs straight from various services, instead of generated here */
         
@@ -473,6 +481,17 @@ public class GeoPointParserUtil {
                                 lon = matcher.group(2);
                             }
                         }
+                        return new GeoParsedPoint(lat, lon, zoom);
+                    }
+                } else if (schemeSpecific.startsWith("//map.baidu.")) { // .com and .cn both work
+                    /* Baidu Map uses a custom format for lat/lon., it is basically standard lat/lon
+                     * multiplied by 100,000, then rounded to an integer */
+                    Pattern p = Pattern.compile(".*[/?&]l=(\\d{1,2}).*&c=([+-]?\\d+),([+-]?\\d+).*");
+                    Matcher matcher = p.matcher(schemeSpecific);
+                    if (matcher.matches()) {
+                        double lat = Integer.valueOf(matcher.group(2)) / 100000.;
+                        double lon = Integer.valueOf(matcher.group(3)) / 100000.;
+                        int zoom = parseZoom(matcher.group(1));
                         return new GeoParsedPoint(lat, lon, zoom);
                     }
                 }
