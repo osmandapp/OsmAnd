@@ -376,7 +376,7 @@
   <string name="search_offline_geo_error">Kan de geo intent \'%s\' niet verwerken</string>
   <string name="search_osm_offline">Zoek adres in de offline kaarten</string>
   <string name="system_locale">Systeem</string>
-  <string name="preferred_locale_descr">Kies de taal van het menu</string>
+  <string name="preferred_locale_descr">Kies de taal van het menu (gelieve OsmAnd daarna te herstarten)</string>
   <string name="preferred_locale">Taal</string>
   <string name="tip_map_switch">Kies een kaartbron</string>
   
@@ -1998,7 +1998,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_attr_tramTrainRoutes_name">Tram- en treinverbindingen</string>
     <string name="wake_on_voice">Zet het scherm aan</string>
     <string name="wake_on_voice_descr">Zet het scherm aan bij het naderen van een bocht</string>
-    <string name="select_impassable_road">Selecteer op kaart</string>
+    <string name="select_impassable_road">Selecteer op kaart…</string>
     <string name="impassable_road">Vermijd wegen…</string>
     <string name="rendering_category_hide">Verberg</string>
     <string name="wake_on_voice_never">Nooit</string>
@@ -2017,7 +2017,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="use_opengl_render_descr">Gebruik snelle, hardware-gebaseerde OpenGL weergave (werkt niet op alle apparaten)</string>
     <string name="error_avoid_specific_road">Er is geen alternatieve weg gevonden</string>
     <string name="dismiss">Sluiten</string>
-    <string name="no_internet_connection">Kan niet downloaden. Maak verbinding met internet om verder te gaan.</string>
+    <string name="no_internet_connection">Kan niet downloaden, gelieve uw internetverbinding na te kijken.</string>
     <string name="download_tab_downloads">Alle downloads</string>
     <string name="download_tab_updates">Updates</string>
     <string name="download_tab_local">Geïnstalleerd</string>
@@ -2043,4 +2043,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="show_railway_warnings">Toon spoorwegovergangen</string>
 	<string name="show_pedestrian_warnings">Toon voetgangers oversteekplaatsen</string>
     <string name="speak_pedestrian">Meld oversteekplaatsen</string>
-    </resources>
+    <string name="rendering_value__name">Standaard</string>
+	</resources>

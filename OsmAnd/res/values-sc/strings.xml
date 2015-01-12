@@ -1228,7 +1228,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="search_offline_geo_error">Impossìbile lèghere geo intent \'%s\'</string>
 	<string name="search_osm_offline">Chirca indiritzu impreande sas mapas non in lìnia</string>
 	<string name="system_locale">Sistema</string>
-	<string name="preferred_locale_descr">Ischerta limba interfàtzia</string>
+	<string name="preferred_locale_descr">Ischerta limba interfàtzia (pro piaghere torra a allùere OsmAnd a pustis de su càmbiu)</string>
 	<string name="preferred_locale">Limba interfàtzia</string>
 	<string name="incomplete_locale">non cumpridu</string>
 	<string name="tip_map_switch">Issèbera una Mitza pro sa Mapa</string>
@@ -1773,7 +1773,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="rendering_attr_tramTrainRoutes_name">Àndalas tram e trenu</string>
     <string name="wake_on_voice">Allughe s\'ischermu</string>
     <string name="wake_on_voice_descr">Allughe s\'ischermu cando b\'est una bortada a curtzu</string>
-    <string name="select_impassable_road">Ischerta in sa mapa</string>
+    <string name="select_impassable_road">Ischerta in sa mapa…</string>
     <string name="impassable_road">Istransi istradas…</string>
     <string name="rendering_category_hide">Cua</string>
     <string name="wake_on_voice_never">Mai</string>
@@ -1818,4 +1818,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="show_railway_warnings">Ammustra sas rugradas ferroviàrias</string>
 	<string name="show_pedestrian_warnings">Ammustra sas istrìscias pedonales</string>
     <string name="speak_pedestrian">Annùntzia sos atraessamentos pedonales</string>
-    </resources>
+    <string name="rendering_value__name">Predefinidu</string>
+	</resources>

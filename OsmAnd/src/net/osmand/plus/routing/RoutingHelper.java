@@ -796,8 +796,12 @@ public class RoutingHelper {
 	public void recalculateRouteDueToSettingsChange() {
 		//This should fix route-recalculation if settings change during ongoing calculation
 		clearCurrentRoute(finalLocation, intermediatePoints);
-		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, 
-				true, false);
+		//Issue 2515 test only: Try re-initialize start point here: No impact on Issue 2515
+		//if (settings.getPointToStart() != null) {
+		//	lastFixedLocation.setLatitude(settings.getPointToStart().getLatitude());
+		//	lastFixedLocation.setLongitude(settings.getPointToStart().getLongitude());
+		//}
+		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, true, false);
 	}
 	
 	private void recalculateRouteInBackground(boolean force, final Location start, final LatLon end, final List<LatLon> intermediates,

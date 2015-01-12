@@ -107,6 +107,8 @@ public class ConfigureMapMenu {
 				return false;
 			} else if(itemId == R.string.layer_gpx_layer && cm.getSelection(pos) == 1) {
 				ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
+				//sync tick mark
+				cm.item(R.string.layer_gpx_layer).selected(ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0).reg();
 				return false;
 			} else  {
 				return super.onRowItemClick(adapter, view, itemId, pos);
@@ -131,6 +133,8 @@ public class ConfigureMapMenu {
 				} else {
 					ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
 				}
+				//sync tick mark
+				cm.item(R.string.layer_gpx_layer).selected(ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0).reg();
 			} else if (itemId == R.string.layer_transport_route) {
 				ma.getMapLayers().getTransportInfoLayer().setVisible(isChecked);
 			}
@@ -148,9 +152,9 @@ public class ConfigureMapMenu {
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
 		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0)
 				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).listen(l).reg();
-		adapter.item(R.string.layer_amenity_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0) 
+		adapter.item(R.string.layer_amenity_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0)
 				.icons(R.drawable.ic_action_text_dark, R.drawable.ic_action_text_light).listen(l).reg();
-		adapter.item(R.string.layer_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0) 
+		adapter.item(R.string.layer_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0)
 				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).listen(l).reg();
 		adapter.item(R.string.layer_gpx_layer).selected(
 				app.getSelectedGpxHelper().isShowingAnyGpxFiles() ? 1 : 0)

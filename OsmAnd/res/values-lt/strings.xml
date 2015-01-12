@@ -477,7 +477,7 @@
   <string name="search_offline_geo_error">Nepavyko suprasti geo poreikio \'%s\'</string>
   <string name="search_osm_offline">Ieškoti adreso parsiųstuose žemėlapiuose</string>
   <string name="system_locale">Sistemos</string>
-  <string name="preferred_locale_descr">Pasirinkite programos kalbą</string>
+  <string name="preferred_locale_descr">Pasirinkite programos kalbą (pakeitę kalbą iš naujo aktyvuokite OsmAnd)</string>
   <string name="preferred_locale">Programos kalba</string>
   <string name="tip_map_switch">Pasirinkti žemėlapių šaltinį</string>
   
