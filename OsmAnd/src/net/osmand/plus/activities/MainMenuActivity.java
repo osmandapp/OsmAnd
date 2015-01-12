@@ -491,11 +491,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			if (f instanceof DashDownloadMapsFragment && !f.isDetached()) {
 				((DashDownloadMapsFragment) f).refreshData();
 			}
-			//Needed to reliably initialize DashFavoritesFragement on devices without compass
-			// [Victor]: This doesn't look as a proper place, then it highly depends on internet connection and download list 
-			if (f instanceof DashFavoritesFragment && !f.isDetached()) {
-				((DashFavoritesFragment) f).setupFavorites();
-			}
 		}
 	}
 

@@ -1964,10 +1964,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="no_internet_connection">Немагчыма cьцягнуць. Калі ласка, праверце ваша Інтэрнэт-злучэньне.</string>
     <string name="download_tab_downloads">Усе cьцягваньні</string>
     <string name="download_tab_updates">Абнаўленьні</string>
-    <string name="download_tab_local">Лякальны</string>
+    <string name="download_tab_local">Лякальныя</string>
 	<string name="navigate_point_zone">Зона</string>
-    <string name="navigate_point_northing">На поўнач</string>
-    <string name="navigate_point_easting">На ўсход</string>
+    <string name="navigate_point_northing">Па шыраце</string>
+    <string name="navigate_point_easting">Па даўгаце</string>
     <string name="map_locale">Мова мапы</string>
     <string name="rendering_attr_transportStops_name">Прыпынкі транспарту</string>
     <string name="dash_download_msg_none">Вы хочаце cьцягнуць якія-небудзь мапы?</string>
@@ -1982,7 +1982,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="routing_attr_no_new_routing_description">Не выкарыстоўваць правілы маршрутызацыі ўведзеныя ў v1.9</string>
     <string name="rendering_value_default_name">Па змоўчаньні</string>
     <string name="rendering_attr_roadStyle_name">Стыль аўтадарог</string>
-    <string name="show_pedestrian_warnings">Паказваць папярэджаньні для пешаходаў</string>
+    <string name="show_pedestrian_warnings">Паказваць пешаходныя пераходы</string>
     <string name="traffic_warning_pedestrian">Пешаходны пераход</string>
 	<string name="traffic_warning_railways">Чыгуначны пераезд</string>
 	<string name="show_railway_warnings">Паказваць чыгуначныя пераезды</string>
