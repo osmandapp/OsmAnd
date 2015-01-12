@@ -405,4 +405,5 @@
 	<string name="poi_service_tyres">Banden</string>
 	<string name="poi_vehicle_inspection">Autokeuring</string>
 	<string name="poi_car_wash">Wasstraat</string>
+	<string name="poi_charging_station">Oplaadpunt</string>
 	</resources>
