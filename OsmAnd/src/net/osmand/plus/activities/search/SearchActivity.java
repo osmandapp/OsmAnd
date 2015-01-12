@@ -100,7 +100,6 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		long t = System.currentTimeMillis();
-		//getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		setContentView(R.layout.search_main);
 		settings = ((OsmandApplication) getApplication()).getSettings();
@@ -142,9 +141,7 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 			mTabsAdapter.addTab(transportTab, getFragment(TRANSPORT_TAB_INDEX), null);
 			tabHost.setCurrentTab(tab);
 		} else {
-			FrameLayout fl = new FrameLayout(this);
-			fl.setId(R.id.layout);
-			setContentView(fl);
+			setContentView(R.layout.search_activity_single);
 			Class<?> cl = getFragment(tab);
 			try {
 				getSupportFragmentManager().beginTransaction().replace(R.id.layout, (Fragment) cl.newInstance()).commit();

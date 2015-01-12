@@ -71,9 +71,7 @@ public class FavouritesActivity extends ActionBarActivity {
 		}
 		
 		if(!hasGpx) {
-			FrameLayout fl = new FrameLayout(this);
-			fl.setId(R.id.layout);
-			setContentView(fl);
+			setContentView(R.layout.search_activity_single);
 			getSupportFragmentManager().beginTransaction().add(R.id.layout, new FavouritesTreeFragment()).commit();
 		} else {
 			setContentView(R.layout.tab_content);
