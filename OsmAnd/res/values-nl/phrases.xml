@@ -406,4 +406,36 @@
 	<string name="poi_vehicle_inspection">Autokeuring</string>
 	<string name="poi_car_wash">Wasstraat</string>
 	<string name="poi_charging_station">Oplaadpunt</string>
+	<string name="poi_vehicle_ramp">Voertuighelling</string>
+	<string name="poi_compressed_air">Perslucht</string>
+	<string name="poi_aerialway_cable_car">Kabelbaan</string>
+	<string name="poi_aerialway_chair_lift">Stoeltjeslift</string>
+	<string name="poi_aerialway_t_bar">T-bar-lift</string>
+	<string name="poi_aerialway_j_bar">J-bar-lift</string>
+	<string name="poi_aerialway_platter">Knoplift</string>
+	<string name="poi_aerialway_mixed_lift">Gemengde lift</string>
+	<string name="poi_aerialway_drag_lift">Sleeplift</string>
+	<string name="poi_aerialway_rope_tow">Sleeplift</string>
+	<string name="poi_aerialway_goods">Goederenlift</string>
+	<string name="poi_aerialway_magic_carpet">Tapijtlift</string>
+
+	<string name="poi_tunnel">Tunnel</string>
+	<string name="poi_bridge">Brug</string>
+
+	<string name="poi_speed_camera">Snelheidscamera</string>
+	<string name="poi_turning_circle">Draaicirkel</string>
+	<string name="poi_motorway_junction">Knooppunt</string>
+
+	<string name="poi_water_well">Waterput</string>
+	<string name="poi_standpipe">Standpijp</string>
+	<string name="poi_water_works">Waterwerken</string>
+	<string name="poi_boatyard">Scheepswerf</string>
+	<string name="poi_wastewater_plant">Afvalwaterstation</string>
+	<string name="poi_lock_gate">Schutsluis</string>
+	<string name="poi_waterway_turning_point">Draaipunt van vaarweg</string>
+	<string name="poi_weir">Stuw</string>
+	<string name="poi_water_mill">Watermolen</string>
+
+	<string name="poi_power_substation">Onderstation</string>
+	<string name="poi_power_transformer">Transformator</string>
 	</resources>
