@@ -377,6 +377,15 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
+		// https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/MapLinks/MapLinks.html
+
+		// http://maps.apple.com/?ll=
+		z = 11;
+		url = "http://maps.apple.com/?ll=" + dlat + "," + dlon + "&z=" + z;
+		System.out.println("\nurl: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
         /* URLs straight from various services, instead of generated here */
         
         String urls[] = {
@@ -604,6 +613,25 @@ public class GeoPointParserUtil {
                         int zoom = parseZoom(matcher.group(1));
                         return new GeoParsedPoint(lat, lon, zoom);
                     }
+				} else if (host.equals("maps.apple.com")) {
+					Pattern p = Pattern.compile(".*ll=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.+z=(\\d{1,2}).*)");
+					Matcher matcher = p.matcher(uri.getQuery());
+					if (matcher.matches()) {
+						String lat = matcher.group(1);
+						String lon = matcher.group(2);
+						String zoom = String.valueOf(GeoParsedPoint.NO_ZOOM);
+						if (matcher.groupCount() == 3) {
+							zoom = matcher.group(3);
+						} else if (matcher.groupCount() == 2) {
+							// see if z= precedes ll=
+							p = Pattern.compile(".*z=(\\d{1,2}).*");
+							Matcher zoomMatcher = p.matcher(uri.getQuery());
+							if (zoomMatcher.matches()) {
+								zoom = zoomMatcher.group(1);
+							}
+						}
+						return new GeoParsedPoint(lat, lon, zoom);
+					}
                 } else if (host.startsWith("maps.yandex.")) {
                     Pattern p = Pattern.compile("(?:.*)ll=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.+)z=(\\d{1,2})(?:.*)");
                     Matcher matcher = p.matcher(uri.getQuery());
