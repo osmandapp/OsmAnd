@@ -2,7 +2,9 @@ package net.osmand.plus.dashboard;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -31,8 +33,11 @@ public class DashAudioVideoNotesActivity extends ActionBarActivity {
 		setContentView(R.layout.editing_poi_filter);
 
 		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
-
-		ColorDrawable color = new ColorDrawable(getResources().getColor(R.color.actionbar_color));
+		int c = getResources().getColor(R.color.actionbar_color);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+			getWindow().setStatusBarColor(c);
+		}
+		ColorDrawable color = new ColorDrawable(c);
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle(R.string.audionotes_plugin_name);
 		actionBar.setBackgroundDrawable(color);

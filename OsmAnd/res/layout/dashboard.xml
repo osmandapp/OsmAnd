@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-		android:layout_marginBottom="60dp"
         android:orientation="vertical">
 
 		<fragment
@@ -80,6 +79,11 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
 		</LinearLayout>
+
+		<!--To make sure that floating button is always visible-->
+	<View	android:layout_width="match_parent"
+			android:layout_height="76dp"
+			android:orientation="vertical"/>
 
     </LinearLayout>
 
