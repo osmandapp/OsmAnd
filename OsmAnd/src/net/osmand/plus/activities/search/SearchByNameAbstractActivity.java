@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.content.pm.ActivityInfo;
+import android.os.*;
 import android.support.v4.view.MenuItemCompat;
 import android.view.*;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -38,11 +40,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.TextWatcher;
@@ -83,7 +81,9 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	
 	protected void setActionBarSettings() {
-//		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		}
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle(R.string.search_activity);

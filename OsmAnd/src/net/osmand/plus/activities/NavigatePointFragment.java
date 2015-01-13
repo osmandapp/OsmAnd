@@ -112,7 +112,8 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 		boolean light = app.getSettings().isLightActionBar();
 		MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to);
-		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+		MenuItemCompat.setShowAsAction(menuItem,
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
 		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -124,12 +125,14 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		if (targets.getPointToNavigate() != null) {
 			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point);
-			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+			MenuItemCompat.setShowAsAction(menuItem,
+					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flage_light
 					: R.drawable.ic_action_flage_dark);
 		} else {
 			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point);
-			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+			MenuItemCompat.setShowAsAction(menuItem,
+					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flag_light
 					: R.drawable.ic_action_flag_dark);
 		}
@@ -142,7 +145,8 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 			});
 		//}
 		menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map);
-		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+		MenuItemCompat.setShowAsAction(menuItem,
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -154,7 +158,8 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		});
 		
 		menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.add_to_favourite);
-		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+		MenuItemCompat.setShowAsAction(menuItem,
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {

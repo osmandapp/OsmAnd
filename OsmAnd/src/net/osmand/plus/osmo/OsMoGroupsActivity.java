@@ -3,6 +3,8 @@
  */
 package net.osmand.plus.osmo;
 
+import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
 import android.view.*;
@@ -126,7 +128,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		// This has to be called before setContentView and you must use the
 		// class in com.actionbarsherlock.view and NOT android.view
 		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		//getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		}
 		super.onCreate(icicle);
 		app = (OsmandApplication) getApplication();
 		osMoPlugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);

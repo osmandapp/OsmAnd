@@ -8,7 +8,10 @@ import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
 
+import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -101,6 +104,9 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 		super.onCreate(savedInstanceState);
 		long t = System.currentTimeMillis();
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		}
 		setContentView(R.layout.search_main);
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		Integer tab = settings.SEARCH_TAB.get();

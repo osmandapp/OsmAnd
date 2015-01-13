@@ -65,10 +65,10 @@ public class DownloadActivity extends BaseDownloadActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		updateDownloads();
-		setProgressBarIndeterminateVisibility(false);
+		setSupportProgressBarIndeterminateVisibility(false);
 
 		setContentView(R.layout.tab_content);
 		singleTab = getIntent() != null && getIntent().getBooleanExtra(SINGLE_TAB, false);

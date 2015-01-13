@@ -63,7 +63,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.local_openstreetmap);
 		getSupportActionBar().setTitle(R.string.download_files);

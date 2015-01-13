@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import net.osmand.IndexConstants;
@@ -43,7 +44,9 @@ public class TestVoiceActivity extends ActionBarActivity {
 	public void onCreate(Bundle icicle) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(icicle);
-		//setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		}
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
