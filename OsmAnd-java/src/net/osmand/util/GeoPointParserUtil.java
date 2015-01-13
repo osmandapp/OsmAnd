@@ -371,7 +371,7 @@ public class GeoPointParserUtil {
 			if (!expected.getQuery().equals(actual.getQuery()))
 				throw new RuntimeException("Query param not equal");
 		} else {
-			double aLat = actual.getLat(), eLat = expected.getLat(), aLon = actual.getLon(), eLon = expected.getLon();
+			double aLat = actual.getLatitude(), eLat = expected.getLatitude(), aLon = actual.getLongitude(), eLon = expected.getLongitude();
 			int aZoom = actual.getZoom(), eZoom = expected.getZoom();
 			String aName = actual.getName(), eName = expected.getName();
 			if (eName != null) {
@@ -714,11 +714,11 @@ public class GeoPointParserUtil {
 			this.geoAddress = true;
 		}
 
-		public double getLat() {
+		public double getLatitude() {
 			return lat;
 		}
 
-		public double getLon() {
+		public double getLongitude() {
 			return lon;
 		}
 

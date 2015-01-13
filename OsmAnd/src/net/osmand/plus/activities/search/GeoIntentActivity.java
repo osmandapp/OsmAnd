@@ -210,9 +210,9 @@ public class GeoIntentActivity extends OsmandListActivity {
 		GeoPointParserUtil.GeoParsedPoint p = GeoPointParserUtil.parse(uri.toString());
 		if (p.isGeoPoint()) {
 			if (p.getName() != null) {
-				return new GeoPointSearch(p.getLat(), p.getLon(), p.getName(), p.getZoom());
+				return new GeoPointSearch(p.getLatitude(), p.getLongitude(), p.getName(), p.getZoom());
 			}
-			return new GeoPointSearch(p.getLat(), p.getLon(), p.getZoom());
+			return new GeoPointSearch(p.getLatitude(), p.getLongitude(), p.getZoom());
 		} else {
 			return new GeoAddressSearch(p.getQuery());
 		}
