@@ -379,4 +379,7 @@
 	<string name="poi_military_danger_area">Zona perigosa</string>
 	<string name="poi_military_range">Campo de tiro militar</string>
 	<string name="poi_military_naval_base">Base naval militar</string>
+	<string name="poi_anime_shop">Tenda de anime</string>
+	<string name="poi_bag_shop">Tenda de bolsos</string>
+	<string name="poi_hardware_shop">Ferraxería</string>
 	</resources>
