@@ -172,6 +172,22 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertApproximateGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
+		// http://osm.org/go/TyFYuF6P~~-?m // current shortlink format with "~"
+		// https://www.openstreetmap.org/?mlat=34.993933029174805&mlon=-106.61568069458008#map=15/34.99393/-106.61568
+		z = 20;
+		url = "http://osm.org/go/TyFYuF6P~~-?m";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertApproximateGeoPoint(actual, new GeoParsedPoint(longLat, longLon, z));
+
+		// http://osm.org/go/TyFYuF6P@@--?m= // old, deprecated shortlink format with "@"
+		// https://www.openstreetmap.org/?mlat=34.993933029174805&mlon=-106.61568069458008#map=15/34.99393/-106.61568
+		z = 21;
+		url = "http://osm.org/go/TyFYuF6P@@--?m=";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertApproximateGeoPoint(actual, new GeoParsedPoint(longLat, longLon, z));
+
 		// http://openstreetmap.de/zoom=11&lat=34&lon=-106
 		z = 11;
 		url = "http://openstreetmap.de/zoom=" + z + "&lat=" + ilat + "&lon=" + ilon;
@@ -355,6 +371,10 @@ public class GeoPointParserUtil {
 			"http://osm.org/go/0LQ127-?m",
 			"http://osm.org/go/0EEQjE==",
 			"http://osm.org/go/0EEQjEEb",
+			"http://osm.org/go/0EE~jEEb",
+			"http://osm.org/go/0EE@jEEb",
+			"http://osm.org/go/~~~~",
+			"http://osm.org/go/@@@@",
             "https://www.openstreetmap.org/#map=0/0/0",
             "https://www.openstreetmap.org/#map=0/180/180",
             "https://www.openstreetmap.org/#map=0/-180/-180",
