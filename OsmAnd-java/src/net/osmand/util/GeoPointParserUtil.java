@@ -395,6 +395,19 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
+        // http://www.amap.com/#!poi!!q=38.174596,114.995033|2|%E5%AE%BE%E9%A6%86&radius=1000
+		z = 13; // amap uses radius, so 1000m is roughly zoom level 13
+		url = "http://www.amap.com/#!poi!!q=" + dlat + "," + dlon + "|2|%E5%AE%BE%E9%A6%86&radius=1000";
+		System.out.println("\nurl: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
+		z = GeoParsedPoint.NO_ZOOM;
+		url = "http://www.amap.com/?q=" + dlat + "," + dlon + ",%E4%B8%8A%E6%B5v%B7%E5%B8%82%E6%B5%A6%E4%B8%9C%E6%96%B0%E5%8C%BA%E4%BA%91%E5%8F%B0%E8%B7%AF8086";
+		System.out.println("\nurl: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
         /* URLs straight from various services, instead of generated here */
         
         String urls[] = {
@@ -412,13 +425,18 @@ public class GeoPointParserUtil {
             "https://www.openstreetmap.org/#map=0/180.0/180.0",
             "https://www.openstreetmap.org/#map=6/33.907/34.662",
             "https://www.openstreetmap.org/?mlat=49.56275939941406&mlon=17.291107177734375#map=8/49.563/17.291",
+            "http://www.amap.com/#!poi!!q=38.174596,114.995033,%E6%B2%B3%E5%8C%97%E7%9C%81%E7%9F%B3%E5%AE%B6%E5%BA%84%E5%B8%82%E6%97%A0%E6%9E%81%E5%8E%BF",
+            "http://wb.amap.com/?p=B013706PJN,38.179456,114.98577,%E6%96%B0%E4%B8%9C%E6%96%B9%E5%A4%A7%E9%85%92%E5%BA%97(%E4%BF%9D%E9%99%A9%E8%8A%B1...,%E5%BB%BA%E8%AE%BE%E8%B7%AF67%E5%8F%B7",
+            "http://www.amap.com/#!poi!!q=38.179456,114.98577|3|B013706PJN",
+            "http://www.amap.com/#!poi!!q=38.174596,114.995033|2|%E5%AE%BE%E9%A6%86&radius=1000",
+            "http://www.amap.com/?p=B013704EJT,38.17914,114.976337,%E6%97%A0%E6%9E%81%E5%8E%BF%E4%BA%BA%E6%B0%91%E6%94%BF%E5%BA%9C,%E5%BB%BA%E8%AE%BE%E4%B8%9C%E8%B7%AF12%E5%8F%B7",
         };
 
         for (String u : urls) {
             System.out.println("url: " + u);
             actual = GeoPointParserUtil.parse(u);
             assert(actual != null);
-            System.out.println("Passed!");
+            System.out.println("Properly parsed!");
         }
 	}
 
@@ -509,7 +527,16 @@ public class GeoPointParserUtil {
 	 * @return {@link GeoParsedPoint}
 	 */
 	public static GeoParsedPoint parse(final String uriString) {
-		final URI uri = URI.create(uriString.replaceAll("\\s+", "+").replaceAll("%20", "+").replaceAll("%2C", ","));
+        URI uri;
+        try {
+            // amap.com uses | in their URLs, which is an illegal character for a URL
+            uri = URI.create(uriString.replaceAll("\\s+", "+")
+                             .replaceAll("%20", "+")
+                             .replaceAll("%2C", ",")
+                             .replaceAll("\\|", ";"));
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
 
         String scheme = uri.getScheme();
         if (scheme == null)
@@ -638,6 +665,32 @@ public class GeoPointParserUtil {
 							path = path.substring(path.lastIndexOf(pref)
 									+ pref.length());
 							return parseGoogleMapsPath(path, params);
+						}
+					}
+				} else if (host.endsWith(".amap.com")) {
+					/* amap (mis)uses the Fragment, which is not included in the Scheme Specific Part,
+					 * so instead we make a custom "everything but the Authority subString */
+					// +4 for the :// and the /
+					final String subString = uri.toString().substring(scheme.length() + host.length() + 4);
+					Pattern p;
+					Matcher matcher;
+					final String[] patterns = {
+						/* though this looks like Query String, it is also used as part of the Fragment */
+						".*q=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?).*&radius=(\\d+).*",
+						".*q=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?).*",
+						".*p=(?:[A-Z0-9]+),([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?).*", };
+					for (int i = 0; i < patterns.length; i++) {
+						p = Pattern.compile(patterns[i]);
+						matcher = p.matcher(subString);
+						if (matcher.matches()) {
+							if (matcher.groupCount() == 3) {
+								// amap uses radius in meters, so do rough conversion into zoom level
+								float radius = Float.valueOf(matcher.group(3));
+								long zoom = Math.round(23. - Math.log(radius)/Math.log(2.0));
+								return new GeoParsedPoint(matcher.group(1), matcher.group(2), String.valueOf(zoom));
+							} else if (matcher.groupCount() == 2) {
+								return new GeoParsedPoint(matcher.group(1), matcher.group(2));
+							}
 						}
 					}
 				}
