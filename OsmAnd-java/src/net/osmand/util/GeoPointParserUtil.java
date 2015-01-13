@@ -494,6 +494,15 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
+		// https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/MapLinks/MapLinks.html
+
+		// http://maps.apple.com/?ll=
+		z = 11;
+		url = "http://maps.apple.com/?ll=" + dlat + "," + dlon + "&z=" + z;
+		System.out.println("\nurl: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
         /* URLs straight from various services, instead of generated here */
         
         String urls[] = {
@@ -525,6 +534,8 @@ public class GeoPointParserUtil {
             "http://map.wap.qq.com/loc/d.jsp?c=113.275020,39.188380&m=113.275020,39.188380&n=%E9%BC%93%E6%A5%BC&a=%E5%B1%B1%E8%A5%BF%E7%9C%81%E5%BF%BB%E5%B7%9E%E5%B8%82%E7%B9%81%E5%B3%99%E5%8E%BF+&p=+&i=16959367104973338386&z=0&m",
             "http://map.qq.com/AppBox/print/?t=&c=%7B%22base%22%3A%7B%22l%22%3A11%2C%22lat%22%3A39.90403%2C%22lng%22%3A116.407526%7D%7D",
             "http://maps.yandex.com/?text=Australia%2C%20Victoria%2C%20Christmas%20Hills&sll=145.319026%2C-37.650344&ll=145.319026%2C-37.650344&spn=0.352249%2C0.151501&z=12&l=map",
+            "http://maps.apple.com/?q=Bargou,+Tunisien",
+            "http://maps.apple.com/?daddr=Bargou,+Tunisien",
         };
 
 		for (String u : urls) {
@@ -532,7 +543,7 @@ public class GeoPointParserUtil {
 			actual = GeoPointParserUtil.parse(u);
 			if (actual == null)
 				throw new RuntimeException(u + " not parsable!");
-			System.out.println("Properly parsed as: " + actual);
+			System.out.println("Properly parsed as: " + actual.getGeoUriString());
 		}
 
 		// these URLs are not parsable, but should not crash or cause problems
@@ -916,6 +927,46 @@ public class GeoPointParserUtil {
 					}
 					if (x != null && y != null)
 						return new GeoParsedPoint(y, x, z, label);
+				} else if (host.equals("maps.apple.com")) {
+					// https://developer.apple.com/library/iad/featuredarticles/iPhoneURLScheme_Reference/MapLinks/MapLinks.html
+					Map<String, String> params = getQueryParameters(uri);
+					String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
+					String label = null;
+					if (params.containsKey("q")) {
+						label = params.get("q");
+					}
+					if (params.containsKey("near")) {
+						label = params.get("near");
+					}
+					if (params.containsKey("z")) {
+						z = params.get("z");
+					}
+					String ll = params.get("ll");
+					if (ll != null) {
+						Matcher matcher = commaSeparatedPairPattern.matcher(ll);
+						if (matcher.matches()) {
+							return new GeoParsedPoint(matcher.group(1), matcher.group(2), z, label);
+						}
+					}
+					String sll = params.get("sll");
+					if (sll != null) {
+						Matcher matcher = commaSeparatedPairPattern.matcher(sll);
+						if (matcher.matches()) {
+							return new GeoParsedPoint(matcher.group(1), matcher.group(2), z, label);
+						}
+					}
+					// if no ll= or sll=, then just use the q string
+					if (params.containsKey("q")) {
+						return new GeoParsedPoint(params.get("q"));
+					}
+					// if no q=, then just use the destination address
+					if (params.containsKey("daddr")) {
+						return new GeoParsedPoint(params.get("daddr"));
+					}
+					// if no daddr=, then just use the source address
+					if (params.containsKey("saddr")) {
+						return new GeoParsedPoint(params.get("saddr"));
+					}
 				}
 
             } catch (RuntimeException e) {
