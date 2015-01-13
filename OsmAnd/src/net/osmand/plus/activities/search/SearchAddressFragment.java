@@ -217,8 +217,8 @@ public class SearchAddressFragment extends SherlockFragment {
 				@Override
 				public void onClick(View v) {
 					street = null;
-					building = null;
 					street2 = null;
+					building = null;
 					searchPoint = null;
 					updateUI();
 				}
@@ -382,13 +382,13 @@ public class SearchAddressFragment extends SherlockFragment {
 	}
 
 	protected void updateUI(){
-		
 		findViewById(R.id.ResetCountry).setEnabled(!Algorithms.isEmpty(region));
 		if(Algorithms.isEmpty(region)){
 			countryButton.setText(R.string.ChooseCountry);
 		} else {
 			countryButton.setText(region.replace('_', ' '));
 		}
+
 		findViewById(R.id.ResetCity).setEnabled(!Algorithms.isEmpty(city) || !Algorithms.isEmpty(postcode));
 		if(Algorithms.isEmpty(city) && Algorithms.isEmpty(postcode)){
 			cityButton.setText(R.string.choose_city);
@@ -400,7 +400,7 @@ public class SearchAddressFragment extends SherlockFragment {
 			}
 		}
 		cityButton.setEnabled(!Algorithms.isEmpty(region));
-		
+
 		findViewById(R.id.ResetStreet).setEnabled(!Algorithms.isEmpty(street));
 		if(Algorithms.isEmpty(street)){
 			streetButton.setText(R.string.choose_street);
@@ -418,7 +418,6 @@ public class SearchAddressFragment extends SherlockFragment {
 			((RadioButton)findViewById(R.id.RadioIntersStreet)).setChecked(true);
 		}
 		updateBuildingSection();
-		
 	}
 	
 	public void loadData() {
