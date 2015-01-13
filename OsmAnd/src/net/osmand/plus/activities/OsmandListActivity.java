@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import net.osmand.plus.OsmandApplication;
@@ -82,7 +83,12 @@ public abstract class OsmandListActivity extends
 	}
 
 	public ListAdapter getListAdapter() {
-		return ((ListView)findViewById(android.R.id.list)).getAdapter();
+		ListAdapter adapter = getListView().getAdapter();
+		if (adapter instanceof HeaderViewListAdapter) {
+			return ((HeaderViewListAdapter)adapter).getWrappedAdapter();
+		} else {
+			return adapter;
+		}
 	}
 
 	public void setOnItemClickListener(AdapterView.OnItemClickListener childClickListener){

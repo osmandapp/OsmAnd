@@ -335,7 +335,6 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public NamesAdapter getListAdapter() {
 		return (NamesAdapter) super.getListAdapter();
