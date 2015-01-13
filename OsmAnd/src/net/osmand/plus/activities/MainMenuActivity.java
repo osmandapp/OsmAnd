@@ -68,6 +68,8 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	private static final int SETTINGS_ID = 1;
 	private static final int EXIT_ID = 2;
 
+	private static final int START_ALPHA = 60;
+
 	private Drawable actionBarBackground;
 	FloatingActionButton fabButton;
 
@@ -77,16 +79,19 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			final int imageHeight = findViewById(R.id.map_image).getMeasuredHeight();
 			final int headerHeight = imageHeight - getSupportActionBar().getHeight();
 			final float ratio = (float) Math.min(Math.max(t, 0), headerHeight) / headerHeight;
-			final int newAlpha = 255 - (int) (ratio * 255);
-			if (imageHeight < t){
+			final int newAlpha = (int) (ratio * 255);
+			if (headerHeight < t){
 				//hiding action bar - showing floating button
-				getSupportActionBar().hide();
+				//getSupportActionBar().hide();
 				fabButton.showFloatingActionButton();
-			} else if (!getSupportActionBar().isShowing()) {
-				getSupportActionBar().show();
+			} else {
+				//getSupportActionBar().show();
 				fabButton.hideFloatingActionButton();
 			}
-			actionBarBackground.setAlpha(newAlpha);
+			if (newAlpha > START_ALPHA) {
+				actionBarBackground.setAlpha(newAlpha);
+			}
+
 		}
 	};
 
@@ -140,6 +145,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		actionBar.setTitle(textVersion);
 		actionBar.setIcon(android.R.color.transparent);
 		actionBarBackground = new ColorDrawable(Color.argb(180, 0, 0, 0));
+		actionBarBackground.setAlpha(START_ALPHA);
 		actionBar.setBackgroundDrawable(actionBarBackground);
 		((NotifyingScrollView)findViewById(R.id.main_scroll)).setOnScrollChangedListener(onScrollChangedListener);
 		//setting up callback for drawable on actionbar for old android
@@ -151,7 +157,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		if (getMyApplication().getAppCustomization().checkExceptionsOnStart()) {
 			checkPreviousRunsForExceptions(firstTime);
 		}
-		setupContributionVersion();
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			fabButton = new FloatingActionButton.Builder(this)
@@ -189,44 +194,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		if (resultCode == APP_EXIT_CODE) {
 			getMyApplication().closeApplication(this);
 		}
-	}
-
-	protected void setupContributionVersion() {
-		findViewById(R.id.credentials).setVisibility(View.VISIBLE);
-//Copyright notes and links have been put on the 'About' screen
-//		final TextView textVersionView = (TextView) findViewById(R.id.Copyright);
-//		final Calendar inst = Calendar.getInstance();
-//		inst.setTime(new Date());
-//		final String textVersion = "\u00A9 OsmAnd " + inst.get(Calendar.YEAR);
-//		textVersionView.setText(textVersion);
-//		final SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
-//		textVersionView.setOnClickListener(new OnClickListener(){
-//			int i = 0;
-//			@Override
-//			public void onClick(View v) {
-//				if(i++ > 8 && Version.isDeveloperVersion(getMyApplication())) {
-//					prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
-//					enableLink(DashboardActivity.this, textVersion, textVersionView);
-//				}
-//			}
-//		});
-		// only one commit should be with contribution version flag
-//		 prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
-//		if (prefs.contains(CONTRIBUTION_VERSION_FLAG) && Version.isDeveloperVersion(getMyApplication())) {
-//			enableLink(this, textVersion, textVersionView);
-//		}
-		final TextView about = (TextView) findViewById(R.id.About);
-		final String aboutString = getString(R.string.about_settings);
-		SpannableString ss = new SpannableString(aboutString);
-		ClickableSpan clickableSpan = new ClickableSpan() {
-			@Override
-			public void onClick(View textView) {
-				showAboutDialog(MainMenuActivity.this, getMyApplication());
-			}
-		};
-		ss.setSpan(clickableSpan, 0, aboutString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		about.setText(ss);
-		about.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
 	private void addErrorFragment() {

@@ -9,7 +9,7 @@
     <dimen name="dashFavIconSize">42dp</dimen>
     <dimen name="dashFavIconMargin">18dp</dimen>
     <dimen name="dashFavDirectionSize">15dp</dimen>
-    <dimen name="dashMapHeight">165dp</dimen>
+    <dimen name="dashMapHeight">375dp</dimen>
     <dimen name="dashMapMargin">3dp</dimen>
     <dimen name="dashProgressTextSize">27sp</dimen>
     <dimen name="dashNoteIconSize">42dp</dimen>

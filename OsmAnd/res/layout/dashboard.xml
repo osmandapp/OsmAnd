@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+		android:layout_marginBottom="60dp"
         android:orientation="vertical">
 
 		<fragment
@@ -80,22 +81,6 @@
 					android:layout_height="wrap_content"/>
 		</LinearLayout>
 
-		<LinearLayout android:id="@+id/credentials"
-					  android:layout_width="fill_parent"
-					  android:layout_height="wrap_content"
-					  android:orientation="horizontal"
-					  android:visibility="gone"
-					  android:padding="@dimen/dashPadding"
-					  android:baselineAligned="false">
-
-			<TextView android:id="@+id/About"
-					  android:layout_width="wrap_content"
-					  android:layout_height="wrap_content"
-					  android:layout_gravity="start|bottom"
-					  android:text="@string/about_settings"
-					  android:textSize="@dimen/dashAboutTextSize"/>
-
-        </LinearLayout>
     </LinearLayout>
 
 </net.osmand.plus.dashboard.NotifyingScrollView>
