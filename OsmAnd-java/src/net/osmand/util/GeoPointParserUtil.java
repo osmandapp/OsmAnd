@@ -123,6 +123,7 @@ public class GeoPointParserUtil {
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
 		// http://openstreetmap.org/#map=11/34/-106
+		z = 11;
 		url = "http://openstreetmap.org/#map=" + z + "/" + ilat + "/" + ilon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
@@ -146,14 +147,33 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-        // https://www.openstreetmap.org/?mlat=49.56275939941406&mlon=17.291107177734375#map=11/49.563/17.291
+		// https://www.openstreetmap.org/?mlat=34.993933029174805&mlon=-106.61568069458008#map=11/34.99393/-106.61568
 		url = "https://www.openstreetmap.org/?mlat=" + longLat + "&mlon=" + longLon
             + "#map=" + z + "/" + dlat + "/" + dlon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
-		assertGeoPoint(actual, new GeoParsedPoint(longLat, longLon, z));
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
+		// https://wiki.openstreetmap.org/wiki/Shortlink
+
+		// http://osm.org/go/TyFSutZ-?m=
+		// https://www.openstreetmap.org/?mlat=34.993933029174805&mlon=-106.61568069458008#map=15/34.99393/-106.61568
+		z = 15;
+		url = "http://osm.org/go/TyFYuF6P--?m=";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertApproximateGeoPoint(actual, new GeoParsedPoint(longLat, longLon, z));
+
+		// http://osm.org/go/TyFS--
+		// http://www.openstreetmap.org/#map=3/34.99/-106.70
+		z = 3;
+		url = "http://osm.org/go/TyFS--";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertApproximateGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
 		// http://openstreetmap.de/zoom=11&lat=34&lon=-106
+		z = 11;
 		url = "http://openstreetmap.de/zoom=" + z + "&lat=" + ilat + "&lon=" + ilon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
@@ -331,6 +351,10 @@ public class GeoPointParserUtil {
         /* URLs straight from various services, instead of generated here */
         
         String urls[] = {
+			"https://openstreetmap.org/go/0LQ127-?m",
+			"http://osm.org/go/0LQ127-?m",
+			"http://osm.org/go/0EEQjE==",
+			"http://osm.org/go/0EEQjEEb",
             "https://www.openstreetmap.org/#map=0/0/0",
             "https://www.openstreetmap.org/#map=0/180/180",
             "https://www.openstreetmap.org/#map=0/-180/-180",
@@ -347,6 +371,17 @@ public class GeoPointParserUtil {
         }
 	}
 
+	private static boolean areCloseEnough(int a, int b) {
+		return a == b;
+	}
+
+	private static boolean areCloseEnough(double a, double b, long howClose) {
+		long aRounded = (long) Math.round(a * Math.pow(10, howClose));
+		long bRounded = (long) Math.round(b * Math.pow(10, howClose));
+		System.out.println("areCloseEnough: " + aRounded + ", " + bRounded);
+		return aRounded == bRounded;
+	}
+
 	private static void assertGeoPoint(GeoParsedPoint actual, GeoParsedPoint expected) {
 		if (expected.getQuery() != null) {
 			if (!expected.getQuery().equals(actual.getQuery()))
@@ -361,10 +396,37 @@ public class GeoPointParserUtil {
 							+ eName);
 				}
 			}
-			if (eLat != aLat) {
+			if (!areCloseEnough(eLat, aLat, 5)) {
 				throw new RuntimeException("Latitude is not equal; actual=" + aLat + ", expected=" + eLat);
 			}
-			if (eLon != aLon) {
+			if (!areCloseEnough(eLon, aLon, 5)) {
+				throw new RuntimeException("Longitude is not equal; actual=" + aLon + ", expected=" + eLon);
+			}
+			if (eZoom != aZoom) {
+				throw new RuntimeException("Zoom is not equal; actual=" + aZoom + ", expected=" + eZoom);
+			}
+		}
+		System.out.println("Passed!");
+	}
+
+	private static void assertApproximateGeoPoint(GeoParsedPoint actual, GeoParsedPoint expected) {
+		if (expected.getQuery() != null) {
+			if (!expected.getQuery().equals(actual.getQuery()))
+				throw new RuntimeException("Query param not equal");
+		} else {
+			double aLat = actual.getLatitude(), eLat = expected.getLatitude(), aLon = actual.getLongitude(), eLon = expected.getLongitude();
+			int aZoom = actual.getZoom(), eZoom = expected.getZoom();
+			String aName = actual.getName(), eName = expected.getName();
+			if (eName != null) {
+				if (!aName.equals(eName)) {
+					throw new RuntimeException("Point name\\capture is not equal; actual=" + aName + ", expected="
+							+ eName);
+				}
+			}
+			if (((int)eLat) != ((int)aLat)) {
+				throw new RuntimeException("Latitude is not equal; actual=" + aLat + ", expected=" + eLat);
+			}
+			if (((int)eLon) != ((int)aLon)) {
 				throw new RuntimeException("Longitude is not equal; actual=" + aLon + ", expected=" + eLon);
 			}
 			if (eZoom != aZoom) {
@@ -453,10 +515,12 @@ public class GeoPointParserUtil {
                     Pattern p;
                     Matcher matcher;
                     String path = uri.getPath();
-                    if ("go".equals(path)) { // short URL form
-                        // TODO decode OSM short URL and delete this:
-                        p = Pattern.compile("(?:.*)(?:map=)(\\d{1,2})/([+-]?\\d+(?:\\.\\d+)?)/([+-]?\\d+(?:\\.\\d+)?)(?:.*)");
-                        matcher = p.matcher(schemeSpecific);
+                    if (path != null && path.startsWith("/go/")) { // short URL form
+                        p = Pattern.compile("^/go/([A-Za-z0-9_@~]+-*)(?:.*)");
+                        matcher = p.matcher(uri.getPath());
+                        if (matcher.matches()) {
+                            return MapUtils.decodeShortLinkString(matcher.group(1));
+                        }
                     } else { // data in the query and/or feature strings
                         String lat = "0";
                         String lon = "0";
