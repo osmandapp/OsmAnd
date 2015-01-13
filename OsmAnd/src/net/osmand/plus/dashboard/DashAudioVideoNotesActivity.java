@@ -35,7 +35,10 @@ public class DashAudioVideoNotesActivity extends ActionBarActivity {
 		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
 		int c = getResources().getColor(R.color.actionbar_color);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-			getWindow().setStatusBarColor(c);
+			Window window = getWindow();
+			window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+			window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			window.setStatusBarColor(c);
 		}
 		ColorDrawable color = new ColorDrawable(c);
 		ActionBar actionBar = getSupportActionBar();
