@@ -1810,4 +1810,5 @@ s často kladenými otázkami.</string>
     <string name="routing_attr_no_new_routing_name">Nepoužívat routovací pravidla v1.9</string>
     <string name="routing_attr_no_new_routing_description">Nepoužívat pravidla výpočtu trasy zavedené ve verzi 1.9</string>
     <string name="speak_pedestrian">Oznamovat přechody pro chodce</string>
-    </resources>
+    <string name="rendering_value__name">Výchozí</string>
+	</resources>

@@ -38,7 +38,7 @@ import android.widget.TextView;
 /**
  * Created by Denis on 24.11.2014.
  */
-public class DashFavoritesFragment extends DashBaseFragment {
+public class DashFavoritesFragment extends DashBaseFragment implements FavouritesDbHelper.FavoritesUpdatedListener {
 	public static final String TAG = "DASH_FAVORITES_FRAGMENT";
 	private net.osmand.Location location = null;
 	private LatLon loc = null;
@@ -71,6 +71,11 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		});
 		return view;
 	}
+	
+	@Override
+	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+	}
 
 	@Override
 	public void onResume() {
@@ -92,10 +97,16 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		} else {
 			loc = new LatLon(0f, 0f);
 		}
+
+		getMyApplication().getFavorites().addFavoritesUpdatedListener(this);
 		setupFavorites();
 	}
 
-
+	@Override
+	public void onPause() {
+		super.onPause();
+		getMyApplication().getFavorites().removeFavoritesUpdatedListener(this);
+	}
 
 	public void setupFavorites(){
 		View mainView = getView();
@@ -250,4 +261,13 @@ public class DashFavoritesFragment extends DashBaseFragment {
 		updateArrows();
 	}
 
+	@Override
+	public void updateFavourites() {
+		getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				setupFavorites();
+			}
+		});
+	}
 }

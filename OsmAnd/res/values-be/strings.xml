@@ -26,8 +26,8 @@
     <string name="local_index_tile_data_downloadable">Можна сьцягнуць: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Максымальнае павелічэньне: %1$s</string>
     <string name="local_index_tile_data_minzoom">Мінімальнае павелічэньне: %1$s</string>
-    <string name="local_index_tile_data_name">Зьвесткі квадрата: %1$s</string>
-    <string name="edit_tilesource_successfully">Крыніца квадратаў мапы %1$s пасьпяхова захаваная</string>
+    <string name="local_index_tile_data_name">Зьвесткі фрагмэнту: %1$s</string>
+    <string name="edit_tilesource_successfully">Крыніца фрагмэнтаў мапы %1$s пасьпяхова захаваная</string>
     <string name="edit_tilesource_elliptic_tile">Эліптычны меркатар</string>
     <string name="edit_tilesource_maxzoom">Максімальнае павелічэньне</string>
     <string name="edit_tilesource_expiration_time">Тэрмін дзеяньня (у хвілінах)</string>
@@ -611,12 +611,12 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="index_settings_descr">Сьцягваньне і кіраваньне файламі мапаў, што захоўваюцца на вашым прыстасаваньні</string>
 	<string name="map_online_plugin_is_not_installed">Актывуйце модуль онлайн мапаў, каб выбіраць розныя крыніцы для мапаў</string>
 	<string name="map_online_data">Сеціўныя і растравыя мапы</string>
-	<string name="map_online_data_descr">Карыстацца сеціўнымі мапамі (cьцягнуць і захоўваць на картцы SD)</string>
+	<string name="map_online_data_descr">Карыстацца сеціўнымі мапамі (cьцягнуць і захоўваць фрагмэнты на картцы SD)</string>
 	<string name="online_map_settings">Сеціўныя мапы</string>
-	<string name="online_map_settings_descr">Настройка крыніц анлайн або кэшаваных растравых мапаў</string>
+	<string name="online_map_settings_descr">Настройка крыніц сеціўных або кэшаваных растравых мапаў</string>
 	<string name="map_settings">Налады мапы</string>
 	<string name="map_settings_descr">Налады адлюстраваньня мапы</string>
-	<string name="osmand_rastermaps_plugin_description">Паказаць налады для канфігураваньня сеткавых ці кэшаваных мапаў як базавых мапаў ці як overlay/underlay мапаў. Гэтыя мапы могуць быць падрыхтаваныя папярэдне й скапіяваныя ў каталёг зьвестак OsmAnd.</string>
+	<string name="osmand_rastermaps_plugin_description">Паказаць налады для канфігураваньня сеткавых ці кэшаваных растравых мапаў у якасьці асноўнай мапы ці дадатковым слоем. Гэтыя мапы могуць быць падрыхтаваныя папярэдне й скапіяваныя ў каталёг зьвестак OsmAnd.</string>
 	
 	<string name="osmand_accessibility_description">Паказаць налады для спэцыяльных магчымасьцяў даступнасьці.</string>
 	<string name="extra_settings">Пашыраныя налады</string>
@@ -978,7 +978,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="map_overlay">Мапа для накладаньня</string>
 	<string name="map_overlay_descr">Абраць мапу для накладаньня</string>
 	<string name="tile_source_already_installed">Мапа ўжо ўсталявана, налады будуць абноўлены</string>
-	<string name="select_tile_source_to_install">Выберыце (растравыя) мапы для ўстаноўкі або абнаўленьня</string>
+	<string name="select_tile_source_to_install">Выберыце (растравыя) мапы для ўсталёўкі або абнаўленьня</string>
 	<string name="internet_not_available">Патрабуецца падключэнне да Інтэрнэту для выкананьня аперацыі, але яго няма</string>
 	<string name="install_more">Усталяваць яшчэ…</string>
 	<string name="level_to_switch_vector_raster_descr">Мінімальнае павелічэньне для выкарыстаньня вектарных мапаў</string>
@@ -992,7 +992,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="search_offline_geo_error">Немагчыма апрацаваць запыт \'%s\'</string>
 	<string name="search_osm_offline">Пошук ў лакальных картах</string>
 	<string name="system_locale">Сістэма</string>
-	<string name="preferred_locale_descr">Абраць мову інтэрфэйсу</string>
+	<string name="preferred_locale_descr">Выбар мовы інтэрфэйсу (перазапусьціце OsmAnd пасьля зьмены)</string>
 	<string name="preferred_locale">Мова інтэрфэйсу</string>
 	<string name="incomplete_locale">няскончана</string>
 	<string name="tip_map_switch">Абраць крыніцу мапы</string>
@@ -1060,7 +1060,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="poi_filter_closest_poi">Бліжэйшыя POI</string>
 	<string name="poi_filter_custom_filter">Свой фільтар</string>
 	<string name="poi_filter_namefinder">Сеткавы NameFinder</string>
-	<string name="reading_cached_tiles">Чытаньне кэшаваных растравых мапаў…</string>
+	<string name="reading_cached_tiles">Чытаньне захаваных фрагмэнтаў…</string>
 	<string name="version_index_is_big_for_memory">Недастаткова памяці для лакальнай мапы \'\'{0}\'\'</string>
 	<string name="version_index_is_not_supported">Версія індэкса \'\'{0}\'\' не падтрымліваецца</string>
 	<string name="use_osmand_routing_service">Навігацыя OsmAnd &gt; 20 км</string>
@@ -1076,7 +1076,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="loading_builds_failed">Не ўдалося атрымаць сьпіс зборак OsmAnd</string>
 	<string name="loading_builds">Загружаюцца зборкі OsmAnd…</string>
 	<string name="select_build_to_install">Выберыце зборку OsmAnd для ўстаноўкі</string>
-	<string name="gps_status_app_not_found">Праграма статуса GPS не ўсталяваная. Пашукаць яе ў Market?</string>
+	<string name="gps_status_app_not_found">Праграма стану GPS не ўсталяваная. Шукаць яе ў Google Play?</string>
 	<string name="voice_is_not_available_msg">Галасавыя каманды не даступныя. Калі ласка, перайдзіце ў \"Налады\" → \"Агульныя\" → \"Галасавыя дадзеныя\" і абярыце ці сьцягніце пакет галасавых падказак.</string>
 	<string name="voice_is_not_available_title">Галасавыя падказкі не абраныя</string>
 	<string name="daynight_mode_day">Дзень</string>
@@ -1109,7 +1109,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="poi_context_menu_call">Паказаць тэлефон POI</string>
 	<string name="download_type_to_filter">набярыце каб фільтраваць</string>
 	<string name="use_high_res_maps">Дысплей высокай рэзалюцыі</string>
-	<string name="use_high_res_maps_descr">Не расьцягваць (з размыццём) растравыя мапы на дысплеях з высокай шчыльнасьцю</string>
+	<string name="use_high_res_maps_descr">Не расьцягваць (з размыццём) фрагмэнты мапы на дысплеях з высокай шчыльнасьцю</string>
 	<string name="download_files">Сьцягнуць</string>
 	<string name="context_menu_item_search_transport">Шукаць грамадзкi транспарт</string>
 	<string name="transport_searching_transport">Вынiк пошуку транспарту (няма цэлі):</string>
@@ -1249,7 +1249,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="search_offline_address">Пазасеціўны пошук</string>
 	<string name="search_online_address">Сеціўны пошук</string>
 	<string name="max_level_download_tile">Максімальнае павелічэньне онлайн мапаў</string>
-	<string name="max_level_download_tile_descr">Выберыце максімальны ўзровень павелічэньня для сьцягваньня растравых мапаў з Інтэрнэту</string>
+	<string name="max_level_download_tile_descr">Выберыце максімальны ўзровень павелічэньня для сьцягваньня фрагмэнтаў мапы з Інтэрнэту</string>
 	<string name="route_general_information">Агульная адлегласьць %1$s, час у дарозе %2$d г. %3$d хв.</string>
 	<string name="router_service_descr">Абраць сеціўны ці пазасеціўны сэрвіс навігацыі</string>
 	<string name="router_service">Сэрвіс навігацыі</string>
@@ -1271,7 +1271,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="follow">Пачаць навігацыю</string>
 	<string name="mark_final_location_first">Абярыце спачатку месца прызначэньня</string>
 	<string name="get_directions">Навігацыя</string>
-	<string name="show_gps_status">Паказаць статус GPS</string>
+	<string name="show_gps_status">Паказаць стан GPS</string>
 	<string name="opening_hours">Гадзіны працы</string>
 	<string name="opening_changeset">Адкрыцьцё пакета паправак…</string>
 	<string name="closing_changeset">Закрыцьцё пакета паправак…</string>
@@ -1320,7 +1320,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="save_track_to_gpx_descrp">Сьляды будуць захаваныя ў каталог track падчас навігацыі</string>
 	<string name="save_track_to_gpx">Запісваць сьлед у GPX файл</string>
 	<string name="update_tile">Абнавіць мапу</string>
-	<string name="reload_tile">Абнавіць частку мапы</string>
+	<string name="reload_tile">Абнавіць фрагмэнт мапы</string>
 	<string name="mark_point">Цэль</string>
 	<string name="show_osm_bugs_descr">Адлюстроўваць OpenStreetBugs на мапе</string>
 	<string name="show_osm_bugs">Паказаць OpenStreetBugs</string>
@@ -1339,7 +1339,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="map_view_3d">3D від</string>
 	<string name="show_poi_over_map_description">Паказаць POI на мапе (выкарыстаць апошні абраны фільтар)</string>
 	<string name="show_poi_over_map">Паказаць POI</string>
-	<string name="map_tile_source_descr">Выберыце крыніцу анлайн або кэшаваных растравых мапаў</string>
+	<string name="map_tile_source_descr">Выберыце крыніцу анлайн або кэшаваных фрагмэнтаў мапы</string>
 	<string name="map_tile_source">Крыніца растравых мапаў</string>
 	<string name="map_source">Крыніца мапы</string>
 	<string name="use_internet">Выкарыстоўваць Інтэрнэт</string>
@@ -1539,7 +1539,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmodroid_refresh">Абнавіць каналы</string>
     <string name="default_or">ці</string>
 	<string name="default_and">і</string>
-    <string name="gps_status_eclipsim">Статус GPS</string>
+    <string name="gps_status_eclipsim">Стан GPS</string>
     <string name="remember_choice">Запомніць мой выбар</string>
     <string name="index_item_world_basemap">Сусьветная аглядная мапа</string>
     <string name="index_item_world_ski">Сусьветная лыжная мапа</string>
@@ -1927,7 +1927,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_category_details">Падрабязнасьці</string>
     <string name="rendering_category_transport">Транспарт</string>
     <string name="layers_category_show">Паказаць</string>
-	<string name="map_widget_top">Статусны радок</string>
+	<string name="map_widget_top">Радок стану</string>
 	<string name="map_widget_right">Правая панэль</string>
 	<string name="map_widget_left">Левая панэль</string>
     <string name="rendering_category_others">Іншыя атрыбуты мапы</string>
@@ -1964,10 +1964,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="no_internet_connection">Немагчыма cьцягнуць. Калі ласка, праверце ваша Інтэрнэт-злучэньне.</string>
     <string name="download_tab_downloads">Усе cьцягваньні</string>
     <string name="download_tab_updates">Абнаўленьні</string>
-    <string name="download_tab_local">Лякальны</string>
+    <string name="download_tab_local">Лякальныя</string>
 	<string name="navigate_point_zone">Зона</string>
-    <string name="navigate_point_northing">На поўнач</string>
-    <string name="navigate_point_easting">На ўсход</string>
+    <string name="navigate_point_northing">Па шыраце</string>
+    <string name="navigate_point_easting">Па даўгаце</string>
     <string name="map_locale">Мова мапы</string>
     <string name="rendering_attr_transportStops_name">Прыпынкі транспарту</string>
     <string name="dash_download_msg_none">Вы хочаце cьцягнуць якія-небудзь мапы?</string>
@@ -1982,7 +1982,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="routing_attr_no_new_routing_description">Не выкарыстоўваць правілы маршрутызацыі ўведзеныя ў v1.9</string>
     <string name="rendering_value_default_name">Па змоўчаньні</string>
     <string name="rendering_attr_roadStyle_name">Стыль аўтадарог</string>
-    <string name="show_pedestrian_warnings">Паказваць папярэджаньні для пешаходаў</string>
+    <string name="show_pedestrian_warnings">Паказваць пешаходныя пераходы</string>
     <string name="traffic_warning_pedestrian">Пешаходны пераход</string>
 	<string name="traffic_warning_railways">Чыгуначны пераезд</string>
 	<string name="show_railway_warnings">Паказваць чыгуначныя пераезды</string>

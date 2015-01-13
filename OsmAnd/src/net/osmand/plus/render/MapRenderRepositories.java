@@ -668,10 +668,11 @@ public class MapRenderRepositories {
 				currentRenderingContext.polygonMinSizeToDisplay = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 			}
 			final QuadPointDouble lt = requestedBox.getLeftTopTile(requestedBox.getZoom());
-			lt.x *= requestedBox.getMapDensity();
-			lt.y *= requestedBox.getMapDensity();
+			double cfd = MapUtils.getPowZoom(requestedBox.getZoomFloatPart())* requestedBox.getMapDensity();
+			lt.x *= cfd;
+			lt.y *= cfd;
 //			LatLon ltn = requestedBox.getLeftTopLatLon();
-			final double tileDivisor = MapUtils.getPowZoom(31 - requestedBox.getZoom()) / requestedBox.getMapDensity();
+			final double tileDivisor = MapUtils.getPowZoom(31 - requestedBox.getZoom()) / cfd;
 			
 			currentRenderingContext.leftX = lt.x;
 			currentRenderingContext.topY = lt.y;

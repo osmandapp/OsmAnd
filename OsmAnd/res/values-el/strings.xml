@@ -578,7 +578,7 @@
 	<string name="search_offline_geo_error">Δεν ήταν δυνατή η ανάλυση της γεωγρ πρόθεσης \'%s\'</string>
 	<string name="search_osm_offline">Αναζήτηση γεωγραφικής τοποθεσίας</string>
 	<string name="system_locale">Σύστημα</string>
-	<string name="preferred_locale_descr">Επιλέξτε γλώσσα εμφάνισης</string>
+	<string name="preferred_locale_descr">Επιλέξτε γλώσσα εμφάνισης (επανεκκινήστε τον OsmAnd μετά την αλλαγή)</string>
 	<string name="preferred_locale">Γλώσσα εμφάνισης</string>
 	<string name="tip_map_switch">Επιλογή Πηγής Χάρτη</string>
 	<string name="tip_map_switch_t_v2">"Η πηγή χάρτη και οι στρώσεις χάρτη που εμφανίζονται αλλάζουν μέσω του \'Μενού\' → \'Διαμόρφωση χάρτη\'.

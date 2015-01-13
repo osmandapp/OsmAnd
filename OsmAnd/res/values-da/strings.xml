@@ -761,7 +761,7 @@
 	<string name="search_offline_geo_error">Kunne ikke fortolke geografisk hensigt \'%s\'</string>
 	<string name="search_osm_offline">Søg geografisk placering</string>
 	<string name="system_locale">System</string>
-	<string name="preferred_locale_descr">Vælg sprog</string>
+	<string name="preferred_locale_descr">Vælg sprog (genstart OsmAnd efter skift)</string>
 	<string name="preferred_locale">Sprog</string>
 	<string name="incomplete_locale">ufuldstændig</string>
 	<string name="tip_map_switch">Vælg kortkilde</string>
