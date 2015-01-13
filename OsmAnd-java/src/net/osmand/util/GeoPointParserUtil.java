@@ -195,42 +195,42 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://maps.google.com/maps/q=loc:34,-106&z=11
+		// http://maps.google.com/maps/?q=loc:34,-106&z=11
 		url = "http://maps.google.com/maps/q=loc:" + ilat + "," + ilon + "&z=" + z;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
-		// http://maps.google.com/maps/q=loc:34.99393,-106.61568&z=11
-		url = "http://maps.google.com/maps/q=loc:" + dlat + "," + dlon + "&z=" + z;
+		// http://maps.google.com/maps/?q=loc:34.99393,-106.61568&z=11
+		url = "http://maps.google.com/maps/?q=loc:" + dlat + "," + dlon + "&z=" + z;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
 		// whatsapp
-		// http://maps.google.com/maps/q=loc:34,-106 (You)
+		// http://maps.google.com/maps/?q=loc:34,-106 (You)
 		z = GeoParsedPoint.NO_ZOOM;
-		url = "http://maps.google.com/maps/q=loc:" + ilat + "," + ilon + " (You)";
+		url = "http://maps.google.com/maps/?q=loc:" + ilat + "," + ilon + " (You)";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
 		// whatsapp
-		// http://maps.google.com/maps/q=loc:34.99393,-106.61568 (You)
+		// http://maps.google.com/maps/?q=loc:34.99393,-106.61568 (You)
 		z = GeoParsedPoint.NO_ZOOM;
-		url = "http://maps.google.com/maps/q=loc:" + dlat + "," + dlon + " (You)";
+		url = "http://maps.google.com/maps/?q=loc:" + dlat + "," + dlon + " (You)";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://www.google.com/maps/search/food/34,-106,14z
-		url = "http://www.google.com/maps/search/food/" + ilat + "," + ilon + "," + z + "z";
+		// http://www.google.com/maps/search/food/@34,-106,14z
+		url = "http://www.google.com/maps/search/food/@" + ilat + "," + ilon + "," + z + "z";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
-		// http://www.google.com/maps/search/food/34.99393,-106.61568,14z
-		url = "http://www.google.com/maps/search/food/" + dlat + "," + dlon + "," + z + "z";
+		// http://www.google.com/maps/search/food/@34.99393,-106.61568,14z
+		url = "http://www.google.com/maps/search/food/@" + dlat + "," + dlon + "," + z + "z";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
@@ -337,6 +337,7 @@ public class GeoPointParserUtil {
             "https://www.openstreetmap.org/#map=0/180.0/180.0",
             "https://www.openstreetmap.org/#map=6/33.907/34.662",
             "https://www.openstreetmap.org/?mlat=49.56275939941406&mlon=17.291107177734375#map=8/49.563/17.291",
+            "https://www.google.com/maps/place/Wild+Herb+Market/@33.32787,-105.66291,14z/data=!4m5!1m2!2m1!1sfood!3m1!1s0x86e1ce2079e1f94b:0x1d7460465dcaf3ed",
         };
 
         for (String u : urls) {
@@ -416,38 +417,6 @@ public class GeoPointParserUtil {
 			if (schemeSpecific == null)
 				return null;
 
-			final String[] osmandNetSite = { "//download.osmand.net/go?" };
-
-			final String[] osmandNetPattern = { "lat=([+-]?\\d+(?:\\.\\d+)?)&lon=([+-]?\\d+(?:\\.\\d+)?)&?(z=\\d{1,2})" };
-
-			final String[] openstreetmapDeSite = { "//openstreetmap.de/", "//www.openstreetmap.de/" };
-
-			final String[] openstreetmapDePattern = {
-					"(?:.*)zoom=(\\d{1,2})&lat=([+-]?\\d+(?:\\.\\d+)?)&lon=([+-]?\\d+(?:\\.\\d+)?)(?:.*)",
-					"(?:.*)lat=([+-]?\\d+(?:\\.\\d+)?)&lon=([+-]?\\d+(?:\\.\\d+)?)&?(z(?:oom)?=\\d{1,2})(?:.*)" };
-
-			final String[] googleComSite = { "//www.google.com/maps/", "//maps.google.com/maps", "//maps.google.com" };
-
-			final String[] googleComPattern = {
-					"(?:.*)[@/]([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?),(\\d{1,2}z)(?:.*)",
-					"(?:.*)ll=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.+)(z=\\d{1,2})(?:.*)",
-					"(?:.*)q=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)&?(z=\\d{1,2})",
-					"(?:.*)(q=)([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)",
-					"(?:.*)q=loc:([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)&?(z=\\d{1,2})(?:.*)",
-					"(?:.*)(q=loc:)([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)",
-					"(.*)daddr=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)",
-					"(.*)/([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)" };
-
-			final String[] yandexRuSite = { "//maps.yandex.ru/" };
-
-			final String[] yandexRuPattern = { "(?:.*)ll=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.+)(z=\\d{1,2})(?:.*)" };
-
-			final String sites[][] = { osmandNetSite, openstreetmapDeSite,
-					googleComSite, yandexRuSite };
-
-			final String patterns[][] = { osmandNetPattern,
-					openstreetmapDePattern, googleComPattern, yandexRuPattern };
-
             try {
                 if (host.equals("osm.org") || host.endsWith("openstreetmap.org")) {
                     Pattern p;
@@ -483,6 +452,37 @@ public class GeoPointParserUtil {
                         }
                         return new GeoParsedPoint(lat, lon, zoom);
                     }
+                } else if (host.matches("(maps|www)\\.?google.[a-z]+")) { // support www./maps. and .de/.com/.in/.eg/etc.
+                    System.out.println("google: " + schemeSpecific);
+                    final String subString = schemeSpecific.substring(host.length() + 3); // +3 for the // and the /
+                    Pattern p;
+                    Matcher matcher;
+                    final String[] patterns = {
+                        "(?:.*)[@/]([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d{1,2})z(?:.*)",
+                        "(?:.*)ll=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.+)z=([+-]?\\d{1,2})(?:.*)",
+                        "(?:.*)q=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)&?z=([+-]?\\d{1,2})",
+                        "(?:.*)q=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)",
+                        "(?:.*)q=loc:([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)&?z=([+-]?\\d{1,2})(?:.*)",
+                        // only includes lat/lon, not zoom
+                        "(?:.*)q=loc:([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)",
+                        "(?:.*)daddr=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)",
+                        "(?:.*)/([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)",
+                        // match as a single group
+                        "(?:.*)daddr=(.*)",
+                        ".*[/?&]?q=(.*)",
+                        "(?:.*)/(.*)", };
+                    for (int i = 0; i < patterns.length; i++) {
+                        p = Pattern.compile(patterns[i]);
+                        matcher = p.matcher(subString);
+                        if (matcher.matches()) {
+                            if (matcher.groupCount() == 3)
+                                return new GeoParsedPoint(matcher.group(1), matcher.group(2), matcher.group(3));
+                            else if (matcher.groupCount() == 2)
+                                return new GeoParsedPoint(matcher.group(1), matcher.group(2));
+                            else if (matcher.groupCount() == 1)
+                                return new GeoParsedPoint(matcher.group(1));
+                        }
+                    }
                 } else if (schemeSpecific.startsWith("//map.baidu.")) { // .com and .cn both work
                     /* Baidu Map uses a custom format for lat/lon., it is basically standard lat/lon
                      * multiplied by 100,000, then rounded to an integer */
@@ -494,80 +494,36 @@ public class GeoPointParserUtil {
                         int zoom = parseZoom(matcher.group(1));
                         return new GeoParsedPoint(lat, lon, zoom);
                     }
+                } else if (host.startsWith("maps.yandex.")) {
+                    Pattern p = Pattern.compile("(?:.*)ll=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.+)z=(\\d{1,2})(?:.*)");
+                    Matcher matcher = p.matcher(uri.getQuery());
+                    if (matcher.matches()) {
+                        return new GeoParsedPoint(matcher.group(1), matcher.group(2), matcher.group(3));
+                    }
+                } else if (host.endsWith("openstreetmap.de")) {
+                    Pattern p = Pattern.compile("(?:.*)zoom=(\\d{1,2})&lat=([+-]?\\d+(?:\\.\\d+)?)&lon=([+-]?\\d+(?:\\.\\d+)?)(?:.*)");
+                    Matcher matcher = p.matcher(schemeSpecific);
+                    if (matcher.matches()) {
+                        return new GeoParsedPoint(matcher.group(2), matcher.group(3), matcher.group(1));
+                    }
+                    // try the secondary pattern
+                    p = Pattern.compile("(?:.*)lat=([+-]?\\d+(?:\\.\\d+)?)&lon=([+-]?\\d+(?:\\.\\d+)?)&?z(?:oom)?=(\\d{1,2})(?:.*)");
+                    matcher = p.matcher(schemeSpecific);
+                    if (matcher.matches()) {
+                        return new GeoParsedPoint(matcher.group(1), matcher.group(2), matcher.group(3));
+                    }
+                } else if (host.equals("download.osmand.net")) {
+                    Pattern p = Pattern.compile("lat=([+-]?\\d+(?:\\.\\d+)?)&lon=([+-]?\\d+(?:\\.\\d+)?)&?z=(\\d{1,2})");
+                    Matcher matcher = p.matcher(uri.getQuery());
+                    if (matcher.matches()) {
+                        return new GeoParsedPoint(matcher.group(1), matcher.group(2), matcher.group(3));
+                    }
                 }
             } catch (IllegalStateException e) {
                 e.printStackTrace();
-                return null;
             } catch (NumberFormatException e) {
                 e.printStackTrace();
-                return null;
             }
-
-			// search by geo coordinates
-			for (int s = 0; s < sites.length; s++) {
-				for (int si = 0; si < sites[s].length; si++) {
-					if (schemeSpecific.startsWith(sites[s][si])) {
-						for (int p = 0; p < patterns[s].length; p++) {
-							String subString = schemeSpecific.substring(sites[s][si].length());
-
-							if (subString.equals("")) {
-								subString = uri.getFragment();
-							}
-
-							final Matcher matcher = Pattern.compile(patterns[s][p]).matcher(subString);
-
-							if (matcher.matches()) {
-								try {
-
-									final double lat;
-									final double lon;
-									int zoom;
-
-									// check sequence of values
-									if (matcher.group(3).contains("z=")) {
-										lat = Double.valueOf(matcher.group(1));
-										lon = Double.valueOf(matcher.group(2));
-										zoom = Integer.valueOf(matcher.group(3).substring("z=".length()));
-									} else if (matcher.group(3).contains("zoom=")) {
-										lat = Double.valueOf(matcher.group(1));
-										lon = Double.valueOf(matcher.group(2));
-										zoom = Integer.valueOf(matcher.group(3).substring("zoom=".length()));
-									} else if (matcher.group(3).contains("z")) {
-										lat = Double.valueOf(matcher.group(1));
-										lon = Double.valueOf(matcher.group(2));
-										zoom = Integer.valueOf(matcher.group(3).substring(0,
-												matcher.group(3).length() - 1));
-									} else {
-										lat = Double.valueOf(matcher.group(2));
-										lon = Double.valueOf(matcher.group(3));
-										try {
-											zoom = Integer.valueOf(matcher.group(1));
-										} catch (NumberFormatException e) {
-											zoom = GeoParsedPoint.NO_ZOOM;
-										}
-									}
-
-									return new GeoParsedPoint(lat, lon, zoom);
-								} catch (NumberFormatException e) {
-									return null;
-								}
-							}
-						}
-						break;
-					}
-				}
-			}
-			// search by address string
-			final String[] googleComAddressPattern = new String[] { "(?:.*)daddr=(.*)", "q=(.*)", "(?:.*)/(.*)" };
-			for (int s = 0; s < googleComSite.length; s++) {
-				for (int p = 0; p < googleComAddressPattern.length; p++) {
-					final String subString = schemeSpecific.substring(googleComSite[s].length());
-					final Matcher matcher = Pattern.compile(googleComAddressPattern[p]).matcher(subString);
-					if (matcher.matches()) {
-						return new GeoParsedPoint(matcher.group(1));
-					}
-				}
-			}
 			return null;
 		} else if ("geo".equals(scheme) || "osmand.geo".equals(scheme)) {
 			String schemeSpecific = uri.getSchemeSpecificPart();
