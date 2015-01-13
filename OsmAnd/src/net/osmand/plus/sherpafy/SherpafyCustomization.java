@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +83,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	public static final String TOUR_SERVER = "download.osmand.net";
 	private static final String SAVE_GPX_FOLDER = "save_gpx_folder";
 	private Object originalGlobal;
+	private Map<Class<Object>, Object> activities = new HashMap<Class<Object>, Object>();
 
 	@Override
 	public void setup(OsmandApplication app) {
@@ -205,7 +207,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		}
 		this.tourPresent = tourPresent;
 		if(!suggestToDownloadMap.isEmpty()) {
-			final DownloadActivity da = app.getDownloadActivity();
+			final DownloadActivity da = (DownloadActivity) activities.get(DownloadActivity.class);
 			if (da != null) {
 				app.runInUIThread(new Runnable() {
 
@@ -662,7 +664,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 	
 	public boolean onDestinationReached() {
-		final MapActivity map = app.getMapActivity();
+		final MapActivity map = (MapActivity) activities.get(MapActivity.class);
 		if(map != null && getSelectedStage() != null) {
 			app.runInUIThread(new Runnable() {
 				
@@ -673,6 +675,17 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			});
 		}
 		return true;
+	}
+	
+	@Override
+	public <T> void pauseActivity(Class<T> class1) {
+		super.pauseActivity(class1);
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T> void resumeActivity(Class<T> class1, T d) {
+		activities.put((Class<Object>) class1, d);
 	}
 	
 	public void runStage(Activity a, TourInformation tour, StageInformation stage, boolean startOver) {

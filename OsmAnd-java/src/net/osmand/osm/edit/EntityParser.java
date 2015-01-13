@@ -114,9 +114,10 @@ public class EntityParser {
 		for(Map<String, String> tags : it) {
 			if (!tags.isEmpty()) {
 				boolean purerelation = relation && !"multipolygon".equals(tags.get("type"));
+				boolean hasName = !Algorithms.isEmpty(tags.get("name"));
 				for (Map.Entry<String, String> e : tags.entrySet()) {
-					AmenityType type = purerelation ? renderingTypes.getAmenityTypeForRelation(e.getKey(), e.getValue())
-							: renderingTypes.getAmenityType(e.getKey(), e.getValue());
+					AmenityType type = purerelation ? renderingTypes.getAmenityTypeForRelation(e.getKey(), e.getValue(), hasName)
+							: renderingTypes.getAmenityType(e.getKey(), e.getValue(), hasName );
 					if (type != null) {
 						String subtype = renderingTypes.getAmenitySubtype(e.getKey(), e.getValue());
 						Amenity a = parseAmenity(entity, type, subtype, tags, renderingTypes);

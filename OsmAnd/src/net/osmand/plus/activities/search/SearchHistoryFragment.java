@@ -40,7 +40,6 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	private HistoryAdapter historyAdapter;
 
-	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -74,13 +73,16 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	@Override
 	public void onResume() {
 		super.onResume();
+
+		//Hardy: onResume() code is needed so that search origin is properly reflected in tab contents when origin has been changed on one tab, then tab is changed to another one.
+		location = null;
 		FragmentActivity activity = getActivity();
 		Intent intent = activity.getIntent();
 		if (intent != null) {
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
 			if (lat != 0 || lon != 0) {
-				location = new LatLon(lat, lon);
+				historyAdapter.location = new LatLon(lat, lon);
 			}
 		}
 		if (location == null && activity instanceof SearchActivity) {
@@ -89,16 +91,16 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 		if (location == null) {
 			location = ((OsmandApplication) activity.getApplication()).getSettings().getLastKnownMapLocation();
 		}
-
+		locationUpdate(location);
 		clearButton.setVisibility(historyAdapter.isEmpty() ? View.GONE : View.VISIBLE);
 		
 	}
 
 	@Override
 	public void locationUpdate(LatLon l) {
-		location = l;
+		//location = l;
 		if(historyAdapter != null) {
-			historyAdapter.notifyDataSetChanged();
+			historyAdapter.updateLocation(l);
 		}
 	}
 
@@ -126,6 +128,12 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	}
 
 	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
+		private LatLon location;
+
+		public void updateLocation(LatLon l) {
+			location = l;
+			notifyDataSetChanged();
+		}
 
 		public HistoryAdapter(List<HistoryEntry> list) {
 			super(getActivity(), R.layout.search_history_list_item, list);

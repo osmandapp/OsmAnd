@@ -65,7 +65,8 @@ public class GpxImportHelper {
 
 		if (fileName != null && fileName.endsWith(KML_SUFFIX)) {
 			handleKmlImport(intentUri, fileName, saveFile);
-		} else if (fileName != null && fileName.endsWith("favourites.gpx")) {
+		} else if (fileName != null && (fileName.contains("favourite")|| 
+				fileName.contains("favorite"))) {
 			handleFavouritesImport(intentUri, fileName, saveFile);
 		} else {
 			handleGpxImport(intentUri, fileName, saveFile);

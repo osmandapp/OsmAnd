@@ -45,7 +45,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.Version;
-import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.resources.AsyncLoadingThread.MapLoadRequest;

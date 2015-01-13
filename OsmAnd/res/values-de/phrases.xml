@@ -42,7 +42,7 @@
 	<string name="poi_australian_football">Australischer Fußball</string>
 	<string name="poi_baby_goods">Babyartikel</string>
 	<string name="poi_baby_hatch">Babyklappe</string>
-	<string name="poi_bag_shop">Taschen</string>
+	<string name="poi_bag_shop">Taschengeschäft</string>
 	<string name="poi_bailiff">Gerichtsvollzieher</string>
 	<string name="poi_bakery">Bäckerei</string>
 	<string name="poi_bank">Bank</string>
@@ -62,7 +62,7 @@
 	<string name="poi_bed_shop">Badezimmereinrichtung</string>
 	<string name="poi_bedding_shop">Bettwarengeschäft</string>
 	<string name="poi_beekeeper">Bienenzüchter</string>
-	<string name="poi_beverages">Getränke</string>
+	<string name="poi_beverages">Getränkegeschäft</string>
 	<string name="poi_bicycle_parking">Fahrradständer</string>
 	<string name="poi_bicycle_rental">Fahrradvermietung</string>
 	<string name="poi_bicycle_shop">Fahrradgeschäft</string>
@@ -107,7 +107,7 @@
 	<string name="poi_caterer">Partyservice</string>
 	<string name="poi_cave_entrance">Höhleneingang</string>
 	<string name="poi_cemetery">Friedhof</string>
-	<string name="poi_chalet">Chalet</string>
+	<string name="poi_chalet">Berghütte</string>
 	<string name="poi_charging_station">Ladestation</string>
 	<string name="poi_chemist_shop">Drogerie</string>
 	<string name="poi_chess">Schach</string>
@@ -146,7 +146,7 @@
 	<string name="poi_club_theatre">Theaterklub</string>
 	<string name="poi_club_tourism">Tourismusverein</string>
 	<string name="poi_club_veterans">Veteranenklub</string>
-	<string name="poi_college">College</string>
+	<string name="poi_college">Hochschule</string>
 	<string name="poi_communication_tower">Kommunikationstumr</string>
 	<string name="poi_community_centre">Gemeindezentrum</string>
 	<string name="poi_company">Firma</string>
@@ -155,7 +155,7 @@
 	<string name="poi_computer_shop">Computer-Geschäft</string>
 	<string name="poi_confectionery">Süßwaren</string>
 	<string name="poi_construction">Anlage</string>
-	<string name="poi_convenience">Lebensmittel</string>
+	<string name="poi_convenience">Lebensmittelgeschäft</string>
 	<string name="poi_copyshop">Copy-Shop</string>
 	<string name="poi_cosmetics_shop">Kosmetik</string>
 	<string name="poi_courthouse">Gerichtsgebäude</string>
@@ -209,10 +209,10 @@
 	<string name="poi_fjord">Fjord</string>
 	<string name="poi_florist">Blumenhandlung</string>
 	<string name="poi_food_court">Markthalle</string>
-	<string name="poi_ford">Ford</string>
-	<string name="poi_fort">Fort</string>
+	<string name="poi_ford">Furt</string>
+	<string name="poi_fort">Festung</string>
 	<string name="poi_fountain">Brunnen</string>
-	<string name="poi_frame_shop">Rahmen</string>
+	<string name="poi_frame_shop">Bilderrahmen-Geschäft</string>
 	<string name="poi_fuel">Tankstelle</string>
 	<string name="poi_funeral_directors">Bestatter</string>
 	<string name="poi_funicular">Seilbahn</string>
@@ -307,7 +307,7 @@
 	<string name="poi_military_nuclear_explosion_site">Atombombenexplosionsgebiet</string>
 	<string name="poi_military_range">Militärbereich</string>
 	<string name="poi_mine_historic">Historisches Bergwerk</string>
-	<string name="poi_mineshaft">Mineshaft</string>
+	<string name="poi_mineshaft">Grubenschacht</string>
 	<string name="poi_miniature_golf">Minigolf</string>
 	<string name="poi_mobile_phone_shop">Handy-Geschäft</string>
 	<string name="poi_monastery">Kloster</string>
@@ -372,7 +372,7 @@
 	<string name="poi_place_of_worship_shinto">Shintoistische Kultstätte</string>
 	<string name="poi_place_of_worship_sikh">Sikh Kultstätte</string>
 	<string name="poi_place_of_worship_taoist">Taoistische Kultstätte</string>
-	<string name="poi_plasterer">Plasterer</string>
+	<string name="poi_plasterer">Stuckateur</string>
 	<string name="poi_playground">Spielplatz</string>
 	<string name="poi_plumber">Installateur</string>
 	<string name="poi_podiatrist">Fußpfleger</string>
@@ -497,7 +497,7 @@
 	<string name="poi_sports_centre">Sportzentrum</string>
 	<string name="poi_sports_shop">Sportartikel</string>
 	<string name="poi_spring">Quelle</string>
-	<string name="poi_stadium">Stadium</string>
+	<string name="poi_stadium">Stadion</string>
 	<string name="poi_stand_builder">Baumeister</string>
 	<string name="poi_standpipe">Brunnen</string>
 	<string name="poi_stationery_shop">Bürobedarf</string>
@@ -607,4 +607,8 @@
 	<string name="poi_swing_carousel">Schaukel-Karussell</string>
 	<string name="poi_attraction_train">Eisenbahn (Attraktion)</string>
 	<string name="poi_water_slide">Wasserrutsche</string>
+	<string name="poi_tower">Sendeturm</string>
+	<string name="poi_mast">Mast</string>
+	<string name="poi_radar">Radar</string>
+	<string name="poi_aquarium">Aquarium</string>
   </resources>

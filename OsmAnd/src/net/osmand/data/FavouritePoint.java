@@ -7,6 +7,7 @@ import android.content.Context;
 public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
 	private String name;
+	private String description;
 	private String category = "";
 	private double latitude;
 	private double longitude;
@@ -74,6 +75,14 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription () {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	@Override

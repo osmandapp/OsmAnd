@@ -6,7 +6,7 @@
 			  android:layout_width="fill_parent"
 			  android:layout_height="wrap_content"
 			  android:orientation="vertical">
-	<LinearLayout android:id="@+id/header"
+	<LinearLayout android:id="@+id/header_layout"
 				  android:orientation="horizontal"
 				  android:layout_width="fill_parent"
 				  android:layout_height="@dimen/dashHeaderHeight">

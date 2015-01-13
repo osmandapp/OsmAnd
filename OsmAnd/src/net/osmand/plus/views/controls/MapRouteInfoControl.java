@@ -81,6 +81,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 				getTargets().setStartPoint(latlon, true, null);
 			}
 			contextMenu.setLocation(latlon, null);
+			showDialog();
 			return true;
 		}
 		return super.onSingleTap(point, tileBox);
@@ -110,7 +111,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	}
 	
 	private Dialog createDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		View lmain = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_info, null);
 		boolean addButtons = routingHelper.isRouteCalculated();
 		updateInfo(lmain);
@@ -128,20 +129,20 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 				textView.setVisibility(View.GONE);
 			}
 		}
-        builder.setView(lmain);
-        
-        Dialog dialog = builder.create();
-        dialog.setCanceledOnTouchOutside(true);
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.gravity = Gravity.BOTTOM;
+		builder.setView(lmain);
+
+		Dialog dialog = builder.create();
+		dialog.setCanceledOnTouchOutside(true);
+		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+		lp.copyFrom(dialog.getWindow().getAttributes());
+		lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+		lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+		lp.gravity = Gravity.BOTTOM;
 		lp.y = (int) (infoButton.getBottom() - infoButton.getTop() + scaleCoefficient * 5 + getExtraVerticalMargin());
-        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setAttributes(lp);
-        return dialog;
+		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		dialog.getWindow().setAttributes(lp);
+		return dialog;
 	}
 	
 	private void updateInfo(final View parentView) {
@@ -226,6 +227,9 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 					getTargets().setStartPoint(point, true, name);
 				}
 				favoritesDialog.dismiss();
+				//Next 2 lines ensure Dialog is shown in the right correct position after a selection been made
+				hideDialog();
+				showDialog();
 			}
 		});
 		bld.setView(listView);
@@ -366,20 +370,20 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	}
 	
 	public String getRoutePointDescription(double lat, double lon) {
-    	return mapActivity.getString(R.string.route_descr_lat_lon, lat, lon);
-    }
+		return mapActivity.getString(R.string.route_descr_lat_lon, lat, lon);
+	}
     
-    public String getRoutePointDescription(LatLon l, String d) {
-    	if(d != null && d.length() > 0) {
-    		return d.replace(':', ' ');
-    	}
-    	if(l != null) {
-    		return mapActivity.getString(R.string.route_descr_lat_lon, l.getLatitude(), l.getLongitude());
-    	}
-    	return "";
-    }
+	public String getRoutePointDescription(LatLon l, String d) {
+		if(d != null && d.length() > 0) {
+			return d.replace(':', ' ');
+		}
+		if(l != null) {
+			return mapActivity.getString(R.string.route_descr_lat_lon, l.getLatitude(), l.getLongitude());
+		}
+		return "";
+	}
     
-    private Spinner setupFromSpinner( View view) {
+	private Spinner setupFromSpinner( View view) {
 		ArrayList<String> fromActions = new ArrayList<String>();
 		fromActions.add(mapActivity.getString(R.string.route_descr_current_location));
 		fromActions.add(mapActivity.getString(R.string.route_descr_favorite));
@@ -409,8 +413,8 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		return fromSpinner;
 	}
     
-    private Spinner setupToSpinner(View view) {
-    	final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
+	private Spinner setupToSpinner(View view) {
+		final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
 		final TargetPointsHelper targets = getTargets();
 		ArrayList<String> toActions = new ArrayList<String>();
 		if (targets.getPointToNavigate() != null) {

@@ -17,10 +17,26 @@
             android:id="@+id/Name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords"
             android:paddingLeft="3dp"
             android:selectAllOnFocus="true" />
     </TableRow>
+
+	<TableRow>
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/osmo_group_description" />
+
+		<EditText
+				android:id="@+id/descr"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:completionThreshold="1"
+				android:inputType="textCapWords"
+				android:paddingLeft="3dp"
+				android:selectAllOnFocus="true" />
+	</TableRow>
 
     <TableRow>
 

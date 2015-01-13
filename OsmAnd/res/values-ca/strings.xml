@@ -75,7 +75,7 @@
 <string name="navigate_point_format">Format:</string>
 <string name="navpoint_search_desc">Coordenades</string>
 <string name="address_search_desc">Cerca d\'adreces</string>
-<string name="transport_search_desc">Cerca de transports</string>
+<string name="transport_search_desc">Cerca de transport públic</string>
 <string name="favourites_search_desc">Cerca de preferits</string>
 <string name="history_search_desc">Cerca a l\'historial</string>
 <string name="left_side_navigation">Conducció per l\'esquerra</string>
@@ -252,7 +252,7 @@
 <string name="search_position_current_location_found">Posició (trobada)</string>
 <string name="search_position_address">Adreça…</string>
 <string name="search_position_undefined">Indefinida</string>
-<string name="search_position_fixed">Fixada</string>
+<string name="search_position_fixed">Posició fixada</string>
 <string name="search_position_current_location">Posició actual…</string>
 <string name="context_menu_item_search">Cerca prop d\'aquí</string>
 <string name="save_route_dialog_title">Desa la ruta com una traça GPX</string>
@@ -293,8 +293,8 @@
 <string name="user_password_descr">És necessària per a les trameses a openstreetmap.org</string>
 <string name="old_poi_file_should_be_deleted">El fitxer de dades de PDI «%1$s» és redundant i serà suprimit.</string>
 <string name="search_position_favorites">Preferits…</string>
-<string name="search_position_map_view">Darrera visualització del mapa</string>
-<string name="select_search_position">Cerca a prop:</string>
+<string name="search_position_map_view">Centre del mapa actual</string>
+<string name="select_search_position">Cerca prop de:</string>
 <string name="menu_save_directions">Desa les indicacions</string>
 <string name="local_index_upload_gpx_description">Pengeu els fitxers GPX a la comunitat d\'OSM. Es faran servir per millorar els mapes.</string>
 <string name="local_index_items_uploaded">%1$d de %2$d ítem(s) s\'han penjat amb èxit.</string>
@@ -318,7 +318,7 @@
 <string name="local_index_download">Baixa</string>
 <string name="local_index_poi_data">Dades dels PDI</string>
 <string name="local_index_address_data">Dades d\'adreces</string>
-<string name="local_index_transport_data">Dades de transports</string>
+<string name="local_index_transport_data">Dades de transports públics</string>
 <string name="local_index_map_data">Dades de mapes</string>
 <string name="local_indexes_cat_backup">Desactivat</string>
 <string name="local_indexes_cat_tts">Dades de veu (TTS)</string>
@@ -364,11 +364,11 @@
 <string name="amenity_type_sport">Esports</string>
 <string name="amenity_type_sustenance">Alimentació i beguda</string>
 <string name="amenity_type_tourism">Turisme</string>
-<string name="amenity_type_transportation">Transports</string>
+<string name="amenity_type_transportation">Transport</string>
 <string name="indexing_address">S\'estan indexant les adreces-…</string>
 <string name="indexing_map">Indexant el mapa…</string>
 <string name="indexing_poi">S\'estan indexant els PDI …</string>
-<string name="indexing_transport">Indexant els transports…</string>
+<string name="indexing_transport">S\'estan indexant els transports…</string>
 <string name="poi_filter_custom_filter">Filtre personalitzat</string>
 <string name="poi_filter_for_tourists">Per a turistes</string>
 <string name="poi_filter_fuel">Carburants</string>
@@ -410,8 +410,8 @@
 <string name="reading_cached_tiles">Llegint les tessel·les emmagatzemades…</string>
 <string name="specified_dir_doesnt_exist">No s\'ha trobat la carpeta especificada.</string>
 <string name="application_dir">Carpeta d\'emmagatzematge de dades</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) L\'OsmAnd és una aplicació de navegació de codi obert amb accés a una gran varietat de dades de la col·lecció oberta de mapes OpenStreetMap. Totes les dades, incloent mapes vectorials i de mosaic, poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes tant en línia com fora de línia, incloent a més l\'orientació per veu. Algunes de les característiques centrals són: - Funcionalitat completa fora de línia (desa al dispositiu d\'emmagatzemament els mapes vectorials i de mosaic baixats) - Mapes de vectors compactes de tot el món per usar fora de línia - Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació - Diverses capes de mapes alhora, com traces GPX o de navegació, PDIs, favorits, etc. amb nivell d\'opacitat personalitzada - Cerca fora de línia d\'adreces i llocs - Càlcul de rutes fora de línia per distàncies curtes (experimental) - Modalitats cotxe, bicicleta i vianant - Canvi automàtic de vista diürna a nocturna, opcional - Ampliació automàtica del mapa segons la velocitat, opcional - Alineació automàtica del mapa segons la brúixola o la direcció del moviment, opcional - Indicació de carril, velocitat màxima permesa, veus enregistrades i/o sintetitzades - Limitacions d\'aquesta versió gratuïta de OsmAnd: - Limitació en el nombre de mapes baixats - No té accés als PDIs fora de línia de Viquipèdia L\'OsmAnd està en desenvolupament actiu i el nostre projecte i el seu futur progrés depenen de les donacions per ajudar al desenvolupament i proves de noves funcions. Si us plau, considereu la possibilitat de comprar l\'OsmAnd+ o bé fer una donació per impulsar una nova característica, o fer una donació de manera general a la pàgina osmand.net. "</string>
-<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) L\'OsmAnd és una aplicació de navegació de codi obert amb accés a una gran varietat de dades de la col·lecció oberta de mapes OpenStreetMap. Totes les dades, incloent mapes de tessel·les i de vectors, poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes tant en línia com fora de línia, incloent a més l\'orientació per veu. L\'OsmAnd+ és la versió de pagament. Comprant-la estareu donant suport al projecte, ajudareu al desenvolupament de noves funcions i rebreu les darreres actualitzacions. Algunes de les característiques centrals són: - Funcionalitat completa fora de línia (desa en el dispositiu d\'emmagatzemament  els mapes vectorials i de mosaic baixats) - Mapes de vectors compactes de tot el món per usar fora de línia - Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació - Disponibilitat fora de línia dels PDI baixats prèviament de Viquipèdia, és genial per fer turisme - Diverses capes de mapes alhora, com traces GPX o de navegació, PDIs, favorits, etc. amb nivell d\'opacitat personalitzada - Cerca fora de línia d\'adreces i llocs - Càlcul de rutes fora de línia per distàncies curtes (experimental) - Modalitats cotxe, bicicleta i vianant - Canvi automàtic de vista diürna a nocturna, opcional - Ampliació automàtica del mapa segons la velocitat, opcional - Alineació automàtica del mapa segons la brúixola o la direcció del moviment, opcional - Indicació de carril, velocitat màxima permesa, veus enregistrades i/o sintetitzades "</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) L\'OsmAnd és una aplicació de navegació de codi obert amb accés a una gran varietat de dades de la col·lecció oberta de mapes OpenStreetMap. Totes les dades, incloent mapes vectorials i de mosaic, poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes tant en línia com fora de línia, incloent a més l\'orientació per veu. Algunes de les característiques centrals són: - Funcionalitat completa fora de línia (desa al dispositiu d\'emmagatzemament els mapes vectorials i de mosaic baixats) - Mapes de vectors compactes de tot el món per usar fora de línia - Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació - Diverses capes de mapes alhora, com traces GPX o de navegació, PDIs, favorits, parades de transport públic, etc. amb nivell d\'opacitat personalitzada - Cerca fora de línia d\'adreces i llocs - Càlcul de rutes fora de línia per distàncies curtes (experimental) - Modalitats cotxe, bicicleta i vianant - Canvi automàtic de vista diürna a nocturna, opcional - Ampliació automàtica del mapa segons la velocitat, opcional - Alineació automàtica del mapa segons la brúixola o la direcció del moviment, opcional - Indicació de carril, velocitat màxima permesa, veus enregistrades i/o sintetitzades - Limitacions d\'aquesta versió gratuïta de OsmAnd: - Limitació en el nombre de mapes baixats - No té accés als PDIs fora de línia de Viquipèdia L\'OsmAnd està en desenvolupament actiu i el nostre projecte i el seu futur progrés depenen de les donacions per ajudar al desenvolupament i proves de noves funcions. Si us plau, considereu la possibilitat de comprar l\'OsmAnd+ o bé fer una donació per impulsar una nova característica, o fer una donació de manera general a la pàgina osmand.net. "</string>
+<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) L\'OsmAnd és una aplicació de navegació de codi obert amb accés a una gran varietat de dades de la col·lecció oberta de mapes OpenStreetMap. Totes les dades, incloent mapes de tessel·les i de vectors, poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes tant en línia com fora de línia, incloent a més l\'orientació per veu. L\'OsmAnd+ és la versió de pagament. Comprant-la estareu donant suport al projecte, ajudareu al desenvolupament de noves funcions i rebreu les darreres actualitzacions. Algunes de les característiques centrals són: - Funcionalitat completa fora de línia (desa en el dispositiu d\'emmagatzemament  els mapes vectorials i de mosaic baixats) - Mapes de vectors compactes de tot el món per usar fora de línia - Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació - Disponibilitat fora de línia dels PDI baixats prèviament de Viquipèdia, és genial per fer turisme - Diverses capes de mapes alhora, com traces GPX o de navegació, PDIs, favorits, parades de transport públic, etc. amb nivell d\'opacitat personalitzada - Cerca fora de línia d\'adreces i llocs - Càlcul de rutes fora de línia per distàncies curtes (experimental) - Modalitats cotxe, bicicleta i vianant - Canvi automàtic de vista diürna a nocturna, opcional - Ampliació automàtica del mapa segons la velocitat, opcional - Alineació automàtica del mapa segons la brúixola o la direcció del moviment, opcional - Indicació de carril, velocitat màxima permesa, veus enregistrades i/o sintetitzades "</string>
 <string name="tip_recent_changes_0_8_1_t">"Canvis a la versió 0.8.1:
 \n\t* Rutes més precises (una mica més lent)
 \n\t* Torna a calcular rutes de manera intel·ligent i de pressa
@@ -523,7 +523,7 @@
 <string name="yard">iardes</string>
 <string name="mile_per_hour">mph</string>
 <string name="mile">milles</string>
-<string name="poi_filter_closest_poi">PDI més proper</string>
+<string name="poi_filter_closest_poi">PDI més propers</string>
 <string name="poi_context_menu_website">Mostra el lloc web del PDI</string>
 <string name="phone">Telèfon</string>
 <string name="download_type_to_filter">Tipus de filtre</string>
@@ -547,7 +547,7 @@
 <string name="unzipping_file">Descomprimint el fitxer…</string>
 <string name="first_time_download">Baixar regions</string>
 <string name="map_screen_orientation">Orientació de pantalla</string>
-<string name="transport_search_before">Ruta previa</string>
+<string name="transport_search_before">Itinerari anterior</string>
 <string name="context_menu_item_update_poi">Actualitzar PDI</string>
 <string name="searching_address">Cercant l\'adreça…</string>
 <string name="search_offline_address">Fora de línia</string>
@@ -631,7 +631,7 @@
 <string name="map_underlay_descr">Escolliu el mapa de fons</string>
 <string name="map_overlay_descr">Escolliu el mapa superposat</string>
 <string name="tip_location_sharing">Comparteix una ubicació</string>
-<string name="preferred_locale_descr">Selecciona la llengua a mostrar</string>
+<string name="preferred_locale_descr">Seleccioneu la llengua (reinicieu OsmAnd després de modificar-la)</string>
 <string name="tip_app_mode_t_v2">L\'OsmAnd suporta diferents (i personalitzables) perfils d\'aplicació per a diferents usos.
 \n\nPodeu canviar de perfil amb el boto a la cantonada inferior esquerra de la pantalla del mapa(icona de cotxe,bici o vianant), o quan creeu una ruta.
 	</string>
@@ -869,7 +869,7 @@
 	
 	<string name="create_poi_link_to_osm_doc">LLegenda del mapa <u>OSM en línia</u> amb imatges</string><string name="osmand_routing_experimental">La navegació fora de línia de l\'OsmAnd és una característica experimental i no funciona per distàncies superiors als 20Km.\n\nEl servei de navegació s\'ha desviat temporalment cap a CloudMade en línia.</string>
 	<string name="renderer_load_exception">S\'ha produït una excepció: el renderitzador no s\'ha carregat</string>
-	<string name="context_menu_item_search_transport">Cerca de transport</string>
+	<string name="context_menu_item_search_transport">Cerca de transports públics</string>
 	<string name="transport_search_again">Reinicia la cerca de transport</string>
 	<string name="no_vector_map_loaded">Els mapes de vectors no s\'han carregat</string>
 	<string name="gpx_files_not_found">No s\'ha trobat cap fitxer GPX a la carpeta de traces</string>
@@ -885,12 +885,12 @@
 	<string name="route_tshl">Gireu fortamanent a l\'esquerra i continueu</string>
 	<string name="route_tsll">Gireu lleugerament a l\'esquerra i continueu</string>
 	<string name="route_tu">Feu un gir en forma d\'U i continueu</string>
-	<string name="search_near_map">Cerca la darrera localització propera al mapa</string>
+	<string name="search_near_map">Cerca propera a la posició actual al mapa</string>
 	<string name="transport_Stop">Parada</string>
-	<string name="transport_search_after">Ruta subsegüent</string>	
+	<string name="transport_search_after">Itinerari subsegüent</string>	
 	<string name="transport_finish_search">Finalitza la cerca</string>
 	<string name="transport_to_go_before">distància subsegüent</string>
-	<string name="transport_route_distance">Distància de la ruta</string>
+	<string name="transport_route_distance">Longitud del itinerari</string>
 	<string name="show_transport_over_map_description">Mostra les parades del transport públic al mapa</string>
 	<string name="search_history_int_streets">Intersecció: {0} x {1} a {2}</string>
 	<string name="favorite">Preferit</string>
@@ -1166,7 +1166,7 @@
     <string name="distance_measurement_save_gpx">Desa com a GPX</string>
     <string name="distance_measurement_load_gpx">Obre un fitxer GPX existent</string>
     <string name="wait_current_task_finished">Espereu fins que finalitzi la tasca actual</string>
-    <string name="use_kalman_filter_compass_descr">Utilitzeu el filtre Kalman per evitar interferències a la brúixola</string>
+    <string name="use_kalman_filter_compass_descr">Allisat de la brúixola per estabilitzar lectures afegint inèrcia</string>
     <string name="use_kalman_filter_compass">Usa el filtre Kalman</string>
     <string name="access_mark_final_location_first">Mode d\'accessibilitat: seleccioneu primer la destinació</string> 
     <string name="use_magnetic_sensor_descr">Podeu usar el sensor magnètic per determinar el valor la brúixola en comptes del sensor d\'orientació</string>
@@ -1348,9 +1348,9 @@
 \n Nota 1: Els vostres arxius obsolets  quedaran intactes (els podeu esborrar manualment).
 \n Nota 2: En el nou lloc d\'emmagatzemament no serà possible compartir arxius entre l\'OsmAnd i l\'OsmAnd+."</string>
     <string name="application_dir_change_warning2">Voleu que l\'OsmAnd també copiï els seus arxius de dades a la nova destinació? Indiqueu «No» i l\'OsmAnd crearà i utilitzarà una carpeta nova.</string>
-    <string name="copying_osmand_one_file_descr">S\'està copiant el fitxer (%s) a la nova destinació...</string>
-    <string name="copying_osmand_files_descr">S\'estan copiant els fitxers de dades de l\'OsmAnd a la nova destinació (%s)</string>
-    <string name="copying_osmand_files">S\'estan copiant fitxers de dades de l\'OsmAnd</string>
+    <string name="copying_osmand_one_file_descr">S\'està copiant el fitxer (%s) a la nova destinació…</string>
+    <string name="copying_osmand_files_descr">S\'estan copiant els fitxers de dades de l\'OsmAnd a la nova destinació (%s)…</string>
+    <string name="copying_osmand_files">S\'estan copiant fitxers de dades de l\'OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">Calcula una ruta fora de línia amb l\'OsmAnd</string>
     <string name="app_mode_truck">Camió</string>
     <string name="tip_map_styles_t">"OsmAnd pot representar els mapes vectorials en diferents estils per tal d\'adaptar-se millor al que necessiteu:
@@ -1402,10 +1402,10 @@
 	\n\t* Entrada ràpida en la recerca d\'adreça
 	\n\t* Errors corregits de càlcul de rutes i visualització
     </string>
-    <string name="select_gpx">Selecciona una traça GPX …</string>
+    <string name="select_gpx">Selecciona una traça GPX…</string>
     <string name="route_descr_select_destination">Selecciona un destí</string>
-    <string name="route_descr_select_on_map">Selecciona al mapa …</string>
-    <string name="route_descr_favorite">Preferida …</string>
+    <string name="route_descr_select_on_map">Selecciona al mapa…</string>
+    <string name="route_descr_favorite">Preferida…</string>
     <string name="route_preferences">Preferències de ruta</string>
     <string name="route_info">Informació de ruta</string>
     <string name="tip_recent_changes_1_3_t">Canvis a la 1.3:
@@ -1813,7 +1813,7 @@
     <string name="rendering_attr_trolleybusRoutes_name">Rutes de troleibús</string>
     <string name="rendering_attr_busRoutes_name">Rutes de bus</string>
     <string name="rendering_attr_tramTrainRoutes_name">Rutes de tramvia i tren</string>
-    <string name="select_impassable_road">Selecciona en el mapa</string>
+    <string name="select_impassable_road">Selecciona en el mapa…</string>
     <string name="impassable_road">Evita carreteres…</string>
     <string name="rendering_category_hide">Amaga</string>
     <string name="wake_on_voice">Activa la pantalla</string>
@@ -1860,4 +1860,5 @@
     <string name="routing_attr_no_new_routing_name">Sense preferències de navegació v1.9</string>
     <string name="routing_attr_no_new_routing_description">No feu ús de les preferències de navegació introduïdes a la v1.9</string>
     <string name="speak_pedestrian">Anuncia els passos de zebra</string>
-    </resources>
+    <string name="rendering_value__name">Renderització per defecte</string>
+	</resources>

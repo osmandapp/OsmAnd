@@ -6,6 +6,7 @@
 			  android:background="@drawable/dashboard_button"
 			  android:layout_height="@dimen/dashListItemHeight">
 	<View android:layout_width="match_parent"
+		  android:id="@+id/divider"
 		  android:background="@color/dashboard_divider"
 		  android:layout_height="1dp"/>
 	<LinearLayout android:orientation="horizontal"

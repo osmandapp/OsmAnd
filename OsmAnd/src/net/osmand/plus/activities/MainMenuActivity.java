@@ -6,11 +6,6 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Random;
 
-import android.graphics.Color;
-import android.os.Build;
-import android.view.Gravity;
-import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
 import net.osmand.Location;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -19,12 +14,16 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.dashboard.*;
+import net.osmand.plus.dashboard.DashDownloadMapsFragment;
+import net.osmand.plus.dashboard.DashErrorFragment;
+import net.osmand.plus.dashboard.DashFavoritesFragment;
+import net.osmand.plus.dashboard.DashUpdatesFragment;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.sherpafy.TourViewActivity;
+import net.osmand.plus.views.controls.FloatingActionButton;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -35,7 +34,9 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
@@ -43,13 +44,14 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import net.osmand.plus.views.controls.FloatingActionButton;
 
 /**
  */
@@ -69,7 +71,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	private static final int HELP_ID = 0;
 	private static final int SETTINGS_ID = 1;
 	private static final int EXIT_ID = 2;
-	private OsmAndLocationProvider lp;
 
 
 	@Override
@@ -98,7 +99,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			return;
 		}
 		setContentView(R.layout.dashboard);
-		lp = getMyApplication().getLocationProvider();
 
 		String textVersion = Version.getFullVersion(getMyApplication());
 		if (textVersion.indexOf("#") != -1) {
@@ -160,6 +160,8 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 
 			});
 		}
+		getLocationProvider().addCompassListener(this);
+		getLocationProvider().registerOrUnregisterCompassListener(true);
 	}
 
 	@Override
@@ -189,7 +191,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 //		inst.setTime(new Date());
 //		final String textVersion = "\u00A9 OsmAnd " + inst.get(Calendar.YEAR);
 //		textVersionView.setText(textVersion);
-		final SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
+//		final SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
 //		textVersionView.setOnClickListener(new OnClickListener(){
 //			int i = 0;
 //			@Override
@@ -488,10 +490,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			}
 			if (f instanceof DashDownloadMapsFragment && !f.isDetached()) {
 				((DashDownloadMapsFragment) f).refreshData();
-			}
-
-			if (f instanceof DashAudioVideoNotesFragment && !f.isDetached()) {
-				((DashAudioVideoNotesFragment) f).setupNotes();
 			}
 		}
 	}

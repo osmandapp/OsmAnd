@@ -72,6 +72,12 @@ public class BaseDownloadActivity extends SherlockFragmentActivity {
 		super.onResume();
 		downloadListIndexThread.setUiActivity(this);
 	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		downloadListIndexThread.setUiActivity(null);
+	}
 
 
 	public void updateDownloadList(List<IndexItem> list) {
