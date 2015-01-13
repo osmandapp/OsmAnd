@@ -210,58 +210,75 @@ public class SearchAddressFragment extends SherlockFragment {
 			public void onClick(View v) {
 				building = null;
 				searchPoint = null;
+				osmandSettings.setLastSearchedBuilding("", null);
+				osmandSettings.setLastSearchedPoint(null);
 				updateUI();
 			}
 		 });
 		 findViewById(R.id.ResetStreet).setOnClickListener(new View.OnClickListener(){
-				@Override
-				public void onClick(View v) {
-					street = null;
-					street2 = null;
-					building = null;
-					searchPoint = null;
-					updateUI();
-				}
+			@Override
+			public void onClick(View v) {
+				street = null;
+				street2 = null;
+				building = null;
+				searchPoint = null;
+				osmandSettings.setLastSearchedStreet("", null);
+				osmandSettings.setLastSearchedIntersectedStreet("", null);
+				osmandSettings.setLastSearchedBuilding("", null);
+				osmandSettings.setLastSearchedPoint(null);
+				updateUI();
+			}
 		 });
 		 findViewById(R.id.ResetCity).setOnClickListener(new View.OnClickListener(){
-				@Override
-				public void onClick(View v) {
-					postcode = null;
-					city = null;
-					street = null;
-					street2 = null;
-					building = null;
-					searchPoint = null;
-					updateUI();
-				}
+			@Override
+			public void onClick(View v) {
+				postcode = null;
+				city = null;
+				street = null;
+				street2 = null;
+				building = null;
+				searchPoint = null;
+				osmandSettings.setLastSearchedPostcode("", null);
+				osmandSettings.setLastSearchedCity(0, "", null)
+				osmandSettings.setLastSearchedStreet("", null);
+				osmandSettings.setLastSearchedIntersectedStreet("", null);
+				osmandSettings.setLastSearchedBuilding("", null);
+				osmandSettings.setLastSearchedPoint(null);
+				updateUI();
+			}
 		 });
 		 findViewById(R.id.ResetCountry).setOnClickListener(new View.OnClickListener(){
-				@Override
-				public void onClick(View v) {
-					region = null;
-					postcode = null;
-					city = null;
-					street = null;
-					street2 = null;
-					building = null;
-					searchPoint = null;
-					updateUI();
+			@Override
+			public void onClick(View v) {
+				region = null;
+				postcode = null;
+				city = null;
+				street = null;
+				street2 = null;
+				building = null;
+				searchPoint = null;
+				osmandSettings.setLastSearchedRegion("", null);
+				osmandSettings.setLastSearchedPostcode("", null);
+				osmandSettings.setLastSearchedCity(0, "", null)
+				osmandSettings.setLastSearchedStreet("", null);
+				osmandSettings.setLastSearchedIntersectedStreet("", null);
+				osmandSettings.setLastSearchedBuilding("", null);
+				osmandSettings.setLastSearchedPoint(null);
+				updateUI();
+			}
+		});
+		((RadioGroup)findViewById(R.id.RadioGroup)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				SearchAddressFragment.this.radioBuilding = checkedId == R.id.RadioBuilding;
+				if(radioBuilding){
+					SearchAddressFragment.this.street2 = null;
+				} else {
+					SearchAddressFragment.this.building = null;
 				}
-		 });
-		 ((RadioGroup)findViewById(R.id.RadioGroup)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
-
-				@Override
-				public void onCheckedChanged(RadioGroup group, int checkedId) {
-					SearchAddressFragment.this.radioBuilding = checkedId == R.id.RadioBuilding;
-					if(radioBuilding){
-						SearchAddressFragment.this.street2 = null;
-					} else {
-						SearchAddressFragment.this.building = null;
-					}
-					updateBuildingSection();
-				}
-				
-			});
+				updateBuildingSection();
+			}
+		});
 	}
 	
 	public static class AddressInformation {
