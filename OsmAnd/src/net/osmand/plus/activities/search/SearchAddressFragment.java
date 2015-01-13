@@ -239,7 +239,7 @@ public class SearchAddressFragment extends SherlockFragment {
 				building = null;
 				searchPoint = null;
 				osmandSettings.setLastSearchedPostcode("", null);
-				osmandSettings.setLastSearchedCity(0, "", null);
+				osmandSettings.setLastSearchedCity(0L, "", null);
 				osmandSettings.setLastSearchedStreet("", null);
 				osmandSettings.setLastSearchedIntersectedStreet("", null);
 				osmandSettings.setLastSearchedBuilding("", null);
@@ -259,7 +259,7 @@ public class SearchAddressFragment extends SherlockFragment {
 				searchPoint = null;
 				osmandSettings.setLastSearchedRegion("", null);
 				osmandSettings.setLastSearchedPostcode("", null);
-				osmandSettings.setLastSearchedCity(0, "", null);
+				osmandSettings.setLastSearchedCity(0L, "", null);
 				osmandSettings.setLastSearchedStreet("", null);
 				osmandSettings.setLastSearchedIntersectedStreet("", null);
 				osmandSettings.setLastSearchedBuilding("", null);
