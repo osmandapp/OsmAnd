@@ -6,10 +6,12 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Random;
 
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.view.*;
+import android.widget.LinearLayout;
 import net.osmand.Location;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -70,6 +72,8 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 
 	private static final int START_ALPHA = 60;
 
+	int defaultMargin;
+
 	private Drawable actionBarBackground;
 	FloatingActionButton fabButton;
 
@@ -87,6 +91,18 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			} else {
 				//getSupportActionBar().show();
 				fabButton.hideFloatingActionButton();
+
+				//makes other cards to move on top of the map card to make it look like android animations
+				View fragments = findViewById(R.id.fragments);
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+				int margintop = -(int)(ratio * 60);
+				Resources r = getResources();
+				int px = (int) TypedValue.applyDimension(
+						TypedValue.COMPLEX_UNIT_DIP,
+						margintop,
+						r.getDisplayMetrics());
+				params.setMargins(0, px + defaultMargin, 0, 0);
+				fragments.setLayoutParams(params);
 			}
 			if (newAlpha > START_ALPHA) {
 				actionBarBackground.setAlpha(newAlpha);
@@ -175,6 +191,11 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		fabButton.hideFloatingActionButton();
 		getLocationProvider().addCompassListener(this);
 		getLocationProvider().registerOrUnregisterCompassListener(true);
+
+		defaultMargin = (int) TypedValue.applyDimension(
+				TypedValue.COMPLEX_UNIT_DIP,
+				-40,
+				getResources().getDisplayMetrics());
 	}
 
 	@Override
