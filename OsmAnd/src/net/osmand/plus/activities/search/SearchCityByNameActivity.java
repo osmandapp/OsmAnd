@@ -173,9 +173,10 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	@Override
 	public void itemSelected(City obj) {
 		settings.setLastSearchedCity(obj.getId(), obj.getName(region.useEnglishNames()), obj.getLocation());
-		if (region.getCityById(obj.getId(), obj.getName(region.useEnglishNames())) == null) {
-			region.addCityToPreloadedList((City) obj);
-		}
+	//Temporarily disable this to see if it fixes an issue
+	//	if (region.getCityById(obj.getId(), obj.getName(region.useEnglishNames())) == null) {
+	//		region.addCityToPreloadedList((City) obj);
+	//	}
 		quitActivity(SearchStreetByNameActivity.class);
 	}
 	
