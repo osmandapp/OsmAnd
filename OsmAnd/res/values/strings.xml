@@ -702,7 +702,7 @@
     <string name="precise_routing_mode_descr">Enable to calculate precise routes without glitches. Still distance-limited and slow.</string>
     <string name="precise_routing_mode">Precise routing (alpha)</string>
     <string name="recording_context_menu_show">Show</string>
-    <string name="recording_photo_description">Photo %1$s of %2$s</string>
+    <string name="recording_photo_description">Photo %1$s %2$s</string>
     <string name="av_def_action_picture">Take a photo</string>
     <string name="recording_context_menu_precord">Take a photo</string>
     <string name="dropbox_plugin_description">Dropbox plugin allows to synchronize tracks and audio/video notes with your dropbox account.</string>
@@ -744,7 +744,7 @@
     <string name="recording_can_not_be_played">Recording can not be played</string>
     <string name="recording_context_menu_delete">Delete recording</string>
     <string name="recording_context_menu_play">Play</string>
-    <string name="recording_description">Recording %1$s %2$s of %3$s</string>
+    <string name="recording_description">Recording %1$s %3$s %2$s</string>
     <string name="recording_default_name">recording</string>
     <string name="av_control_stop">Stop</string>
     <string name="av_control_start">Start</string>

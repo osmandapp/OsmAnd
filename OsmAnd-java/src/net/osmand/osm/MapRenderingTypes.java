@@ -543,7 +543,7 @@ public class MapRenderingTypes {
 		
 		rtype.onlyPoint = Boolean.parseBoolean(parser.getAttributeValue("", "point")); //$NON-NLS-1$
 		rtype.relation = Boolean.parseBoolean(parser.getAttributeValue("", "relation")); //$NON-NLS-1$
-		if (!rtype.isAdditional() && !rtype.isText()) {			
+		if (rtype.isMain()) {			
 			rtype.namePrefix = parser.getAttributeValue("", "namePrefix"); //$NON-NLS-1$
 			if (rtype.namePrefix == null) {
 				rtype.namePrefix = "";

@@ -174,9 +174,10 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	@Override
 	public void itemSelected(City obj) {
 		settings.setLastSearchedCity(obj.getId(), obj.getName(region.useEnglishNames()), obj.getLocation());
-		if (region.getCityById(obj.getId(), obj.getName(region.useEnglishNames())) == null) {
-			region.addCityToPreloadedList((City) obj);
-		}
+		// Hardy: Looks like disabling this fixes the issue of the Search City dialogue becoming non-functional after the first tapping on a found village (not city) ... (while selected village is still remembered on the dialog for future reference!)
+		//if (region.getCityById(obj.getId(), obj.getName(region.useEnglishNames())) == null) {
+		//	region.addCityToPreloadedList((City) obj);
+		//}
 		quitActivity(SearchStreetByNameActivity.class);
 	}
 
