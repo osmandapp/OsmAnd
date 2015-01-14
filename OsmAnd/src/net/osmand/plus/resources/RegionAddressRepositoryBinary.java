@@ -129,17 +129,15 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	
 	@Override
 	public synchronized void preloadStreets(City o, ResultMatcher<Street> resultMatcher) {
-		//Looks like o can be null here, question is why
-		if (o!=null) {
-			Collection<Street> streets = o.getStreets();
-			if(!streets.isEmpty()){
-				return;
-			}
-			try {
-				file.preloadStreets(o, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
-			} catch (IOException e) {
-				log.error("Disk operation failed" , e); //$NON-NLS-1$
-			}
+		//TODO: Check NPE, looks like o can be null here, question is why
+		Collection<Street> streets = o.getStreets();
+		if(!streets.isEmpty()){
+			return;
+		}
+		try {
+			file.preloadStreets(o, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
+		} catch (IOException e) {
+			log.error("Disk operation failed" , e); //$NON-NLS-1$
 		}
 	}
 
