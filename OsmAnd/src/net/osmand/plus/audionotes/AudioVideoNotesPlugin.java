@@ -303,10 +303,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			String additional = "";
 			if (duration > 0) {
 				int d = (int) (duration / 1000);
-				additional += Algorithms.formatDuration(d);
+				additional += "(" + Algorithms.formatDuration(d) + ")";
 			}
 			if (!available) {
-				additional += "(" + ctx.getString(R.string.recording_unavailable) + ")";
+				additional += "[" + ctx.getString(R.string.recording_unavailable) + "]";
 			}
 			return additional;
 		}

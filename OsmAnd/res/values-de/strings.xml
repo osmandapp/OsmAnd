@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -1338,9 +1338,9 @@
 	<string name="recording_playing">Aus der angegebenen Aufnahme wird abgespielt.\n%1$s</string>
 	<string name="recording_context_menu_arecord">Audio-Notiz aufnehmen</string>
 	<string name="recording_context_menu_vrecord">Video-Notiz aufnehmen</string>
-	<string name="recording_description">Aufnahme %1$s %2$s von %3$s</string>
+	<string name="recording_description">Aufnahme %1$s %3$s %2$s</string>
 	<string name="recording_context_menu_show">Anzeigen</string>
-	<string name="recording_photo_description">Foto %1$s von %2$s</string>
+	<string name="recording_photo_description">Foto %1$s %2$s</string>
 	<string name="recording_context_menu_precord">Foto aufnehmen</string>
 	<string name="recording_can_not_be_played">Aufnahme kann nicht abgespielt werden</string>
 	<string name="recording_context_menu_delete">Aufnahme löschen</string>
