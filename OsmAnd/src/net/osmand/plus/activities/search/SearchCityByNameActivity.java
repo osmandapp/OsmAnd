@@ -62,7 +62,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	@Override
 	protected void reset() {
 		searchVillagesMode = -1;
-		addFooterViews()
+		addFooterViews();
 		super.reset();
 	}
 
