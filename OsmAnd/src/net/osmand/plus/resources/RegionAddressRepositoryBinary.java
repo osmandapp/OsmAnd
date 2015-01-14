@@ -129,18 +129,18 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	
 	@Override
 	public synchronized void preloadStreets(City o, ResultMatcher<Street> resultMatcher) {
+		//Looks like o can be null here, question is why
 		if (o!=null) {
 			Collection<Street> streets = o.getStreets();
 			if(!streets.isEmpty()){
 				return;
 			}
+			try {
+				file.preloadStreets(o, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
+			} catch (IOException e) {
+				log.error("Disk operation failed" , e); //$NON-NLS-1$
+			}
 		}
-		try {
-			file.preloadStreets(o, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
-		} catch (IOException e) {
-			log.error("Disk operation failed" , e); //$NON-NLS-1$
-		}
-		
 	}
 
 //	// not use ccontains It is really slow, takes about 10 times more than other steps
