@@ -225,7 +225,7 @@
     <string name="recording_can_not_be_played">Запіс не можа быць прайграны</string>
     <string name="recording_context_menu_delete">Выдаліць запіс</string>
     <string name="recording_context_menu_play">Граць</string>
-    <string name="recording_description">Запіс %1$s %2$s у %3$s</string>
+    <string name="recording_description">Запіс %1$s %3$s %2$s</string>
     <string name="recording_default_name">запіс</string>
     <string name="av_control_stop">Cтоп</string>
     <string name="av_control_start">Запіс</string>
