@@ -1148,11 +1148,11 @@
     <string name="local_indexes_cat_srtm">등고선 데이터</string>
     <string name="local_indexes_cat_av">소리/영상 데이터</string>
     <string name="stop_routing_confirm">운행을 중지하시겠습니까 ?</string>
-    <string name="clear_dest_confirm">도착지 (및 경유지) 를지우겠습니까?</string>
+    <string name="clear_dest_confirm">도착지 (및 경유지) 를 지우겠습니까?</string>
     <string name="precise_routing_mode_descr">고장없이 정확한 경로를 계산(라우팅) 할 수 있습니다. 현 단계에서는 거리가 한정되어있고 게다가 느립니다.</string>
     <string name="precise_routing_mode">정확한 라우팅 모드</string>
     <string name="recording_context_menu_show">표시</string>
-    <string name="recording_photo_description">사진 %1$s of %2$s</string>
+    <string name="recording_photo_description">사진 %1$s %2$s</string>
     <string name="av_def_action_picture">사진 찍기</string>
     <string name="recording_context_menu_precord">사진 찍기</string>
     <string name="dropbox_plugin_description">Dropbox 플러그인은 Dropbox 계정으로 GPX경로와 소리/영상 노트를 동기화 할 수 있습니다 .</string>
@@ -1186,7 +1186,7 @@
     <string name="recording_can_not_be_played">레코딩을 재생할 수 없습니다</string>
     <string name="recording_context_menu_delete">레코딩 삭제</string>
     <string name="recording_context_menu_play">재생</string>
-    <string name="recording_description">레코딩 %1$s %2$s of %3$s</string>
+    <string name="recording_description">레코딩 %1$s %3$s %2$s</string>
     <string name="recording_default_name">레코딩</string>
     <string name="av_control_stop">정지</string>
     <string name="av_control_start">A/V 찍기</string>
