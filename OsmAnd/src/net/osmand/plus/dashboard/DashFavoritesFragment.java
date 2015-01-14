@@ -36,7 +36,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * Created by Denis on 24.11.2014.
+ * Created by Denis
+ * on 24.11.2014.
  */
 public class DashFavoritesFragment extends DashBaseFragment implements FavouritesDbHelper.FavoritesUpdatedListener {
 	public static final String TAG = "DASH_FAVORITES_FRAGMENT";
@@ -143,8 +144,16 @@ public class DashFavoritesFragment extends DashBaseFragment implements Favourite
 			View view = inflater.inflate(R.layout.dash_favorites_item, null, false);
 			TextView name = (TextView) view.findViewById(R.id.name);
 			TextView label = (TextView) view.findViewById(R.id.distance);
-			ImageView icon = (ImageView) view.findViewById(R.id.icon);
 			ImageView direction = (ImageView) view.findViewById(R.id.direction);
+			if (point.getCategory().length() > 0) {
+				((TextView) view.findViewById(R.id.group_name)).setText(point.getCategory());
+			} else {
+				view.findViewById(R.id.group_image).setVisibility(View.GONE);
+			}
+
+
+			((ImageView) view.findViewById(R.id.icon)).
+					setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), point.getColor()));
 
 			if(loc != null){
 				direction.setVisibility(View.VISIBLE);
@@ -152,7 +161,7 @@ public class DashFavoritesFragment extends DashBaseFragment implements Favourite
 			}
 			arrows.add(direction);
 			name.setText(point.getName());
-			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), point.getColor()));
+
 			//LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
 					loc.getLatitude(), loc.getLongitude()));
