@@ -32,7 +32,7 @@
     <string name="recording_can_not_be_played">Optagelse kan ikke afspilles</string>
     <string name="recording_context_menu_delete">Slet optagelse</string>
     <string name="recording_context_menu_play">Afspil</string>
-    <string name="recording_description">Optagelse %1$s %2$s af %3$s</string>
+    <string name="recording_description">Optagelse %1$s %3$s %2$s</string>
     <string name="recording_default_name">optager</string>
     <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Audio-/videonoter</string>
@@ -113,7 +113,7 @@
     <string name="precise_routing_mode_descr">Aktiver for at beregne præcise ruter uden fejl. Stadig begrænset af afstand og langsom.</string>
     <string name="precise_routing_mode">Nøjagtig ruteplanlægning (alfa)</string>
     <string name="recording_context_menu_show">Vis</string>
-    <string name="recording_photo_description">Foto %1$s af %2$s</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Tag et foto</string>
     <string name="recording_context_menu_precord">Tag et foto</string>
     <string name="target_point">Rutepunkt %1$s</string>
