@@ -60,13 +60,6 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	}
 
 	@Override
-	protected void reset() {
-		searchVillagesMode = -1;
-		addFooterViews();
-		super.reset();
-	}
-
-	@Override
 	public AsyncTask<Object, ?, ?> getInitializeTask() {
 		return new AsyncTask<Object, City, List<City>>(){
 			@Override
