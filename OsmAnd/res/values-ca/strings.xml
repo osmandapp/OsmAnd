@@ -1013,7 +1013,7 @@
     <string name="intermediate_points_change_order">Canvia l\'ordre</string>
     <string name="recording_delete_confirm">Voleu eliminar aquest enregistrament?</string>
     <string name="recording_default_name">enregistrament</string>
-    <string name="recording_description">Enregistrament %1$s %2$s a %3$s</string>
+    <string name="recording_description">Enregistrament %1$s %3$s %2$s</string>
     <string name="layer_recordings">Capa d\'enregistraments</string>
     <string name="recording_can_not_be_played">No es pot reproduir l\'enregistrament</string>
     <string name="av_control_stop">Atura</string>
@@ -1128,7 +1128,7 @@
     <string name="stop_routing_confirm">Esteu segurs de què voleu parar la navegació?</string>
     <string name="clear_dest_confirm">Esteu segurs de què voleu eliminar la vostra destinació?</string>
     <string name="recording_context_menu_show">Mostra</string>
-    <string name="recording_photo_description">Fotografia %1$s de %2$s</string>
+    <string name="recording_photo_description">Fotografia %1$s %2$s</string>
     <string name="av_def_action_picture">Fes una fotografia</string>
     <string name="recording_context_menu_precord">Fes una fotografia</string>
     <string name="download_hillshade_item">Ombrejat del relleu</string>
