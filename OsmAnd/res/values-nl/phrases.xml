@@ -173,7 +173,7 @@
 	<string name="poi_kindergarten">Kleuterschool</string>
 	<string name="poi_university">Universiteit</string>
 
-	<string name="poi_college">College</string>
+	<string name="poi_college">Hogeschool</string>
 	<string name="poi_prison">Gevangenis</string>
 	<string name="poi_embassy">Ambassade</string>
 	<string name="poi_government">Regering</string>
@@ -438,4 +438,40 @@
 
 	<string name="poi_power_substation">Onderstation</string>
 	<string name="poi_power_transformer">Transformator</string>
+	<string name="poi_aerialway_station">Kabelbaanstation</string>
+	<string name="poi_recycling">Recyclage</string>
+	<string name="poi_landfill">Stortplaats</string>
+	<string name="poi_surveillance">Bewaking</string>
+	<string name="poi_works">Fabriek</string>
+	<string name="poi_construction">Werken</string>
+	<string name="poi_mineshaft">Mijnschacht</string>
+	<string name="poi_petroleum_well">Oliebron</string>
+	<string name="poi_windmill">Windmolen</string>
+	<string name="poi_salt_pond">Zoutwinning</string>
+	<string name="poi_driving_school">Rijschool</string>
+	<string name="poi_courthouse">Gerechtsgebouw</string>
+	<string name="poi_healthcare_alternative">Alternatieve geneeskunde</string>
+	<string name="poi_healthcare_centre">Gezondheidscentrum</string>
+	<string name="poi_midwife">Vroedvrouw</string>
+	<string name="poi_occupational_therapist">Ergotherapeut</string>
+	<string name="poi_healthcare_rehabilitation">Revalidatie</string>
+	<string name="poi_sports_centre">Sportcentrum</string>
+	<string name="poi_golf_course">Golfbaan</string>
+	<string name="poi_ice_rink">Schaatsbaan</string>
+	<string name="poi_running_track">Looppiste</string>
+	<string name="poi_bicycle_track">Fietspiste</string>
+	<string name="poi_archery">Boogschieten</string>
+	<string name="poi_athletics">Athletiek</string>
+	<string name="poi_basketball">Basketbal</string>
+	<string name="poi_chess">Schaak</string>
+	<string name="poi_climbing">Klimmen</string>
+	<string name="poi_cricket">Cricket</string>
+	<string name="poi_cycling">Fietsen</string>
+	<string name="poi_diving">Duiken</string>
+	<string name="poi_dog_racing">Hondenrennen</string>
+	<string name="poi_golf">Golf</string>
+	<string name="poi_gymnastics">Turnen</string>
+	<string name="poi_handball">Handbal</string>
+	<string name="poi_horse_racing">Paardenrennen</string>
+	<string name="poi_ice_skating">Ijsschaatsen</string>
 	</resources>
