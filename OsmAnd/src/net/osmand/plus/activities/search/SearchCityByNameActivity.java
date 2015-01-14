@@ -58,7 +58,13 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		final StringMatcherMode startsWith = CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH;
 		return new CityComparator(startsWith, en);
 	}
-	
+
+	@Override
+	protected void reset() {
+		searchVillagesMode = -1;
+		super.reset();
+	}
+
 	@Override
 	public AsyncTask<Object, ?, ?> getInitializeTask() {
 		return new AsyncTask<Object, City, List<City>>(){
