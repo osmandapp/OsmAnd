@@ -275,7 +275,7 @@
   <string name="search_offline_geo_error">Impossibile leggere geo intent \'%s\'</string>
   <string name="search_osm_offline">Ricerca indirizzo usando le mappe offline</string>
   <string name="system_locale">Sistema</string>
-  <string name="preferred_locale_descr">Seleziona lingua interfaccia</string>
+  <string name="preferred_locale_descr">Seleziona lingua interfaccia (si prega di riavviare OsmAnd dopo il cambio)</string>
   <string name="preferred_locale">Lingua interfaccia</string>
   <string name="tip_map_switch">Scegli una Fonte della Mappa</string>
   

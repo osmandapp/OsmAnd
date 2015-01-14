@@ -79,16 +79,9 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 				getTargets().navigateToPoint(latlon, true, -1);
 			} else {
 				getTargets().setStartPoint(latlon, true, null);
-				//TODO: Hardy: Looks like there is a small bug somewhere: Re-selecting the "From" or "To" point during an ongoing route calculation (and only then) seems to only interrupt the ongoing route calculation. but not restart it, if (and only if) a route origin other than "Current position" is set. (Looks like this case is treated like a mere position update in our RoutingHelper, so normally no complete re-calculation is needed.)
 			}
 			contextMenu.setLocation(latlon, null);
 			showDialog();
-				//-Test code only--
-				//Try force resuming route re-caculation if stopped due to Issue2515
-				// interesting: putting one or more of the next lines here destroys the alternating "interrupted route calculation won't re-start" behavior and causes the route calculation to NEVER re-start!
-				//routingHelper.recalculateRouteDueToSettingsChange();
-				//routingHelper.recalculateRouteDueToSettingsChange();
-				//-----------------
 			return true;
 		}
 		return super.onSingleTap(point, tileBox);

@@ -32,7 +32,7 @@
     <string name="recording_can_not_be_played">Optagelse kan ikke afspilles</string>
     <string name="recording_context_menu_delete">Slet optagelse</string>
     <string name="recording_context_menu_play">Afspil</string>
-    <string name="recording_description">Optagelse %1$s %2$s af %3$s</string>
+    <string name="recording_description">Optagelse %1$s %3$s %2$s</string>
     <string name="recording_default_name">optager</string>
     <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Audio-/videonoter</string>
@@ -113,7 +113,7 @@
     <string name="precise_routing_mode_descr">Aktiver for at beregne præcise ruter uden fejl. Stadig begrænset af afstand og langsom.</string>
     <string name="precise_routing_mode">Nøjagtig ruteplanlægning (alfa)</string>
     <string name="recording_context_menu_show">Vis</string>
-    <string name="recording_photo_description">Foto %1$s af %2$s</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Tag et foto</string>
     <string name="recording_context_menu_precord">Tag et foto</string>
     <string name="target_point">Rutepunkt %1$s</string>
@@ -761,7 +761,7 @@
 	<string name="search_offline_geo_error">Kunne ikke fortolke geografisk hensigt \'%s\'</string>
 	<string name="search_osm_offline">Søg geografisk placering</string>
 	<string name="system_locale">System</string>
-	<string name="preferred_locale_descr">Vælg sprog</string>
+	<string name="preferred_locale_descr">Vælg sprog (genstart OsmAnd efter skift)</string>
 	<string name="preferred_locale">Sprog</string>
 	<string name="incomplete_locale">ufuldstændig</string>
 	<string name="tip_map_switch">Vælg kortkilde</string>

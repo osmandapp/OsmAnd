@@ -519,7 +519,7 @@
 	<string name="search_offline_geo_error">無法解析地理含義 \'%s\'</string>
 	<string name="search_osm_offline">查尋地理位置</string>
 	<string name="system_locale">系統</string>
-	<string name="preferred_locale_descr">選擇顯示語言</string>
+	<string name="preferred_locale_descr">選擇顯示語言（在更改後，請重新啟動 OsmAnd )</string>
 	<string name="preferred_locale">顯示語言</string>
 	<string name="tip_map_switch">選擇地圖來源</string>
 	<string name="tip_map_switch_t_v2">"地圖來源與圖層顯示可以透過\'選單\'-&gt;\'組態地圖\'來改變。
@@ -1065,7 +1065,7 @@
     <string name="precise_routing_mode">精確的路線 (alpha)</string>
     <string name="precise_routing_mode_descr">允許去預估精確而無差錯的路線。仍然有距離限制並且緩慢。</string>
     <string name="recording_context_menu_show">顯示</string>
-    <string name="recording_photo_description">照片 %1$s 中的 %2$s</string>
+    <string name="recording_photo_description">照片 %1$s %2$s</string>
     <string name="av_def_action_picture">拍攝照片</string>
     <string name="recording_context_menu_precord">拍攝照片</string>
     <string name="dropbox_plugin_description">Dropbox 的外掛元件可以讓軌跡和音訊/視訊注解同步到您的 Dropbox 帳戶。</string>
@@ -1111,7 +1111,7 @@
     <string name="recording_can_not_be_played">不能播放記錄</string>
     <string name="recording_context_menu_delete">刪除記錄</string>
     <string name="recording_context_menu_play">播放</string>
-    <string name="recording_description">錄製 %1$s %2$s 中的 %3$s</string>
+    <string name="recording_description">錄製 %1$s %3$s %2$s</string>
     <string name="recording_default_name">錄製中</string>
     <string name="av_control_stop">停止</string>
     <string name="av_control_start">開始</string>

@@ -318,7 +318,7 @@ public class RoutingHelper {
 		}
 
 		if (calculateRoute) {
-			recalculateRouteInBackground(false, currentLocation, finalLocation, intermediatePoints, currentGPXRoute, 
+			recalculateRouteInBackground(currentLocation, finalLocation, intermediatePoints, currentGPXRoute, 
 					previousRoute.isCalculated() ? previousRoute : null, false, !targetPointsChanged);
 		} else {
 			Thread job = currentRunningJob;
@@ -709,6 +709,7 @@ public class RoutingHelper {
 		
 		private final RouteCalculationParams params;
 		private boolean paramsChanged;
+		private Thread prevRunningJob;
 
 		public RouteRecalculationThread(String name, RouteCalculationParams params, boolean paramsChanged) {
 			super(name);
@@ -730,10 +731,26 @@ public class RoutingHelper {
 		
 		@Override
 		public void run() {
-			
+			synchronized (RoutingHelper.this) {
+				currentRunningJob = this;
+			}
+			if(prevRunningJob != null) {
+				while(prevRunningJob.isAlive()){
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				synchronized (RoutingHelper.this) {
+					currentRunningJob = this;
+				}
+			} 
 			RouteCalculationResult res = provider.calculateRouteImpl(params);
 			if (params.calculationProgress.isCancelled) {
-				currentRunningJob = null;
+				synchronized (RoutingHelper.this) {
+					currentRunningJob = null;
+				}
 				return;
 			}
 			final boolean onlineSourceWithoutInternet = !res.isCalculated() && params.type.isOnline() && !settings.isInternetConnectionAvailable();
@@ -773,43 +790,50 @@ public class RoutingHelper {
 			}
 			lastTimeEvaluatedRoute = System.currentTimeMillis();
 		}
+
+		public void setWaitPrevJob(Thread prevRunningJob) {
+			this.prevRunningJob = prevRunningJob;
+		}
 	}
 	
 	public void recalculateRouteDueToSettingsChange() {
-		//This should fix route-recalculation if settings change during ongoing calculation
 		clearCurrentRoute(finalLocation, intermediatePoints);
-		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, 
-				true, false);
+		recalculateRouteInBackground(lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, true, false);
 	}
 	
-	private void recalculateRouteInBackground(boolean force, final Location start, final LatLon end, final List<LatLon> intermediates,
+	private void recalculateRouteInBackground(final Location start, final LatLon end, final List<LatLon> intermediates,
 			final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute, boolean paramsChanged, boolean onlyStartPointChanged){
 		if (start == null || end == null) {
 			return;
 		}
-		if (currentRunningJob == null) {
-			// do not evaluate very often
-			if (force || System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {
-				RouteCalculationParams params = new RouteCalculationParams();
-				params.start = start;
-				params.end = end;
-				params.intermediates = intermediates;
-				params.gpxRoute = gpxRoute == null ? null : gpxRoute.build(start, settings);
-				params.onlyStartPointChanged = onlyStartPointChanged;
-				params.previousToRecalculate = previousRoute;
-				params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
-				params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
-				params.type = settings.ROUTER_SERVICE.getModeValue(mode);
-				params.mode = mode;
-				params.ctx = app;
-				if (previousRoute == null && params.type == RouteService.OSMAND) {
-					params.calculationProgress = new RouteCalculationProgress();
-					updateProgress(params.calculationProgress);
+		// do not evaluate very often
+		if ((currentRunningJob == null && System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval)
+				|| paramsChanged || !onlyStartPointChanged) {
+			RouteCalculationParams params = new RouteCalculationParams();
+			params.start = start;
+			params.end = end;
+			params.intermediates = intermediates;
+			params.gpxRoute = gpxRoute == null ? null : gpxRoute.build(start, settings);
+			params.onlyStartPointChanged = onlyStartPointChanged;
+			params.previousToRecalculate = previousRoute;
+			params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
+			params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
+			params.type = settings.ROUTER_SERVICE.getModeValue(mode);
+			params.mode = mode;
+			params.ctx = app;
+			if (previousRoute == null && params.type == RouteService.OSMAND) {
+				params.calculationProgress = new RouteCalculationProgress();
+				updateProgress(params.calculationProgress);
+			}
+			synchronized (this) {
+				final Thread prevRunningJob = currentRunningJob;
+				RouteRecalculationThread newThread = new RouteRecalculationThread(
+						"Calculating route", params, paramsChanged); //$NON-NLS-1$
+				currentRunningJob = newThread;
+				if (prevRunningJob != null) {
+					newThread.setWaitPrevJob(prevRunningJob);
 				}
-				synchronized (this) {
-					currentRunningJob = new RouteRecalculationThread("Calculating route", params, paramsChanged); //$NON-NLS-1$
-					currentRunningJob.start();
-				}
+				currentRunningJob.start();
 			}
 		}
 	}

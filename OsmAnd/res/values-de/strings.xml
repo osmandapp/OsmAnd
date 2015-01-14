@@ -125,30 +125,7 @@
 	<string name="snap_to_road">Auf Straße einrasten</string>
 	<string name="osmand_play_title_30_chars">OsmAnd Karten &amp; Navigation</string>
 	<string name="osmand_short_description_80_chars">Globale Landkarten- und Navigations-Applikation für Offline und Online-Karten</string>
-	<string name="osmand_long_description_1000_chars">
-		OsmAnd (OSM Automated Navigation Directions)
-
-		OsmAnd ist eine Open-Source-Navigationsapplikation mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap (OSM) Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine offline und online Routing-Funktion inklusive Sprachnavigation.
-
-		Einige der Kernfunktionen:
-		- Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden)
-		- Kompakte Vektorkarten für die ganze Welt verfügbar
-		- Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus
-		- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz
-		- Offline Adress- und POI-Suche
-		- Offlinenavigation für kurze Distanzen (experimentell)
-		- Auto-, Fahrrad- und Fußgänger-Modus mit
-		-  optionaler automatischer Tag-Nacht-Umschaltung der Anzeige
-		-  optionalem geschwindigkeitsabhängigem Kartenmaßstab
-		-  optionaler Kartenausrichtung nach Kompass oder Bewegungsrichtung
-		-  optionaler Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
-
-		Einschränkungen dieser kostenlosen Version von OsmAnd:
-		- Anzahl der Kartendownloads
-		- Kein Zugriff auf Wikipedia Offline-POIs
-
-		OsmAnd wird aktiv weiterentwickelt und das Projekt benötigt Mittel für die Entwicklung, die Komplettierung und den Test (Fahrten) neuer Funktionen. Bitte erwägen Sie den Kauf von OsmAnd+, die Förderung spezieller Funktionen oder eine allgemeine Spende auf osmand.net.
-	</string>
+	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd ist eine Open-Source-Navigationsapplikation mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap (OSM) Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine offline und online Routing-Funktion inklusive Sprachnavigation. Einige der Kernfunktionen: - Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden) - Kompakte Vektorkarten für die ganze Welt verfügbar - Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus - Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz - Offline Adress- und POI-Suche - Offlinenavigation für kurze Distanzen (experimentell) - Auto-, Fahrrad- und Fußgänger-Modus mit - optionaler automatischer Tag-Nacht-Umschaltung der Anzeige - optionalem geschwindigkeitsabhängigem Kartenmaßstab - optionaler Kartenausrichtung nach Kompass oder Bewegungsrichtung - optionaler Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen Einschränkungen dieser kostenlosen Version von OsmAnd: - Anzahl der Kartendownloads - Kein Zugriff auf Wikipedia Offline-POIs OsmAnd wird aktiv weiterentwickelt und das Projekt benötigt Mittel für die Entwicklung, die Komplettierung und den Test (Fahrten) neuer Funktionen. Bitte erwägen Sie den Kauf von OsmAnd+, die Förderung spezieller Funktionen oder eine allgemeine Spende auf osmand.net. "</string>
 	
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Karten &amp; Navigation</string>
 	<string name="osmand_plus_short_description_80_chars">Globale Landkarten- und Navigations-Applikation für Offline und Online-Karten</string>
@@ -966,9 +943,9 @@
 	<string name="transport_to_go_before">vorherige Strecke</string>
 	<string name="transport_stops_to_pass">zu passierende Haltestellen</string>
 	<string name="transport_route_distance">Streckenlänge</string>
-	<string name="transport">Öffentlicher Personenverkehr</string>
+	<string name="transport">ÖPNV</string>
 	<string name="default_buttons_ok">OK</string>
-	<string name="show_transport_over_map_description">Öffentl. Haltestellen auf der Karte anzeigen</string>
+	<string name="show_transport_over_map_description">ÖPNV-Haltestellen auf der Karte anzeigen</string>
 	<string name="show_transport_over_map">Haltestellen anzeigen</string>
 	<string name="hello">Navigationsanwendung OsmAnd</string>
 	<string name="update_poi_success">POI-Daten wurden erfolgreich aktualisiert ({0} wurden geladen)</string>
@@ -1361,9 +1338,9 @@
 	<string name="recording_playing">Aus der angegebenen Aufnahme wird abgespielt.\n%1$s</string>
 	<string name="recording_context_menu_arecord">Audio-Notiz aufnehmen</string>
 	<string name="recording_context_menu_vrecord">Video-Notiz aufnehmen</string>
-	<string name="recording_description">Aufnahme %1$s %2$s von %3$s</string>
+	<string name="recording_description">Aufnahme %1$s %3$s %2$s</string>
 	<string name="recording_context_menu_show">Anzeigen</string>
-	<string name="recording_photo_description">Foto %1$s von %2$s</string>
+	<string name="recording_photo_description">Foto %1$s %2$s</string>
 	<string name="recording_context_menu_precord">Foto aufnehmen</string>
 	<string name="recording_can_not_be_played">Aufnahme kann nicht abgespielt werden</string>
 	<string name="recording_context_menu_delete">Aufnahme löschen</string>
@@ -1538,9 +1515,9 @@
 \n Hinweis 1: Die ursprünglichen Dateien bleiben hiervon unberührt, können aber nachfolgend manuell gelöscht werden.
 \n Hinweis 2: Die Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden."</string>
 	<string name="application_dir_change_warning2">Soll OsmAnd auch die Dateien an den neuen Speicherort verschieben? Mit \'Nein\' wird OsmAnd den neuen Speicherort nur anlegen und als Standard verwenden.</string>
-	<string name="copying_osmand_one_file_descr">Datei (%s) wird an den neuen Speicherort kopiert&#8230;</string>
-	<string name="copying_osmand_files_descr">OsmAnd-Dateien werden zum neuen Speicherort (%s) kopiert&#8230;</string>
-	<string name="copying_osmand_files">OsmAnd-Dateien werden kopiert&#8230;</string>
+	<string name="copying_osmand_one_file_descr">Datei (%s) wird an den neuen Speicherort kopiert…</string>
+	<string name="copying_osmand_files_descr">OsmAnd-Dateien werden zum neuen Speicherort (%s) kopiert…</string>
+	<string name="copying_osmand_files">OsmAnd-Dateien werden kopiert…</string>
 	<string name="calculate_osmand_route_gpx">OsmAnd-Offline-Route berechnen</string>
 	<string name="app_mode_truck">LKW</string>
 	<string name="guidance_preferences_descr">Navigations-Einstellungen</string>
@@ -1838,7 +1815,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungs-Einstellungen und des persönlichen Überwachungs-Kanals</string>
-	<string name="osmo_plugin_description">"Erweiterte OpenStreetMap-basierte Live-Überwachung, siehe http://osmo.mobi … Ermöglicht die Positionsdarstellung in von einzelnen Geräten in Echtzeit. Bei anonym erstellten Gruppen sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff."</string>
+	<string name="osmo_plugin_description">"Erweiterte OpenStreetMap-basierte Live-Überwachung, siehe http://osmo.mobi … Ermöglicht die Positionsdarstellung in von einzelnen Geräten in Echtzeit. Bei anonym erstellten Gruppen sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff. "</string>
 	<string name="osmo_plugin_name">OsMo (Erweiterte Live-Überwachung)</string>
 	<string name="osmo_settings">OsMo OpenStreetMap-Überwachung</string>
 	<string name="osmo_io_error">OsMo Verbindungsproblem: </string>
@@ -1999,7 +1976,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="wake_on_voice">Bildschirm aktivieren</string>
     <string name="wake_on_voice_descr">Bildschirm bei Navigationsanweisung aktivieren</string>
     <string name="wake_on_voice_never">Niemals</string>
-    <string name="select_impassable_road">Auf Karte auswählen&#8230;</string>
+    <string name="select_impassable_road">Auf Karte auswählen…</string>
     <string name="impassable_road">Straße blockieren…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Straßen- und Eisenbahnlinien</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Stadtbahnlinien</string>
@@ -2044,7 +2021,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="show_railway_warnings">Eisenbahnübergänge anzeigen</string>
     <string name="show_pedestrian_warnings">Fußgängerübergänge anzeigen</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikanischer Straßenatlas</string>
-    <string name="routing_attr_no_new_routing_name">Routing v1.9 nicht verwenden</string>
+    <string name="routing_attr_no_new_routing_name">Routing-Regeln v1.9 nicht verwenden</string>
     <string name="routing_attr_no_new_routing_description">Neuen Routenalgorithmus nicht verwenden</string>
     <string name="speak_pedestrian">Fußgängerübergänge ankündigen</string>
     </resources>

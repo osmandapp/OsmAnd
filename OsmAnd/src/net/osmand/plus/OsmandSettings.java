@@ -773,7 +773,7 @@ public class OsmandSettings {
 		new EnumIntPreference<AutoZoomMap>("auto_zoom_map_new", AutoZoomMap.NONE,
 				AutoZoomMap.values()).makeProfile().cache();
 	{
-		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, AutoZoomMap.FARTHEST);
+		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, AutoZoomMap.FAR);
 		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, AutoZoomMap.NONE);
 		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, AutoZoomMap.NONE);
 	}
@@ -1869,16 +1869,18 @@ public class OsmandSettings {
 	}
 	
 	public enum AutoZoomMap {
-		NONE(R.string.auto_zoom_none, 0f),
-		FARTHEST(R.string.auto_zoom_farthest, 1f),
-		FAR(R.string.auto_zoom_far, 1.4f),
-		CLOSE(R.string.auto_zoom_close, 2f)
+		NONE(R.string.auto_zoom_none, 0f, 18),
+		FARTHEST(R.string.auto_zoom_farthest, 1f, 17f),
+		FAR(R.string.auto_zoom_far, 1.4f, 18f),
+		CLOSE(R.string.auto_zoom_close, 2f, 19f)
 		;
 		public final float coefficient;
 		public final int name;
-		AutoZoomMap(int name, float coefficient) {
+		public final float maxZoom;
+		AutoZoomMap(int name, float coefficient, float maxZoom) {
 			this.name = name;
 			this.coefficient = coefficient;
+			this.maxZoom = maxZoom;
 			
 		}
 	}

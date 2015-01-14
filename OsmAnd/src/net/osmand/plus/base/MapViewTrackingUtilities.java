@@ -197,19 +197,19 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					// decrease a bit
 					zdelta += 1;
 				}
+				double targetZoom = Math.max(tb.getZoom() + tb.getZoomFloatPart() + zdelta, settings.AUTO_ZOOM_MAP.get().maxZoom); 
 				int threshold = settings.AUTO_FOLLOW_ROUTE.get();
 				if (now - lastTimeAutoZooming > 4500 && (now - lastTimeAutoZooming > threshold || !isUserZoomed)) {
 					isUserZoomed = false;
 					lastTimeAutoZooming = now;
-					double settingsZoomScale = Math.log(mapView.getSettingsMapDensity()) / Math.log(2.0f);
-					double zoomScale = Math.log(tb.getMapDensity()) / Math.log(2.0f);
-					double complexZoom = tb.getZoom() + zoomScale + zdelta;
+//					double settingsZoomScale = Math.log(mapView.getSettingsMapDensity()) / Math.log(2.0f);
+//					double zoomScale = Math.log(tb.getMapDensity()) / Math.log(2.0f);
+//					double complexZoom = tb.getZoom() + zoomScale + zdelta;
 					// round to 0.33
-					double newZoom = Math.round((complexZoom - settingsZoomScale) * 3) / 3f;
-					int newIntegerZoom = (int)Math.round(newZoom);
-					double nzscale = newZoom - newIntegerZoom + settingsZoomScale;
-					mapView.setComplexZoom(newIntegerZoom, Math.pow(2, nzscale));
-					// mapView.getAnimatedDraggingThread().startZooming(mapView.getFloatZoom() + zdelta, false);
+					targetZoom = Math.round(targetZoom * 3) / 3f;
+					int newIntegerZoom = (int)Math.round(targetZoom);
+					double zPart = targetZoom - newIntegerZoom;
+					 mapView.getAnimatedDraggingThread().startZooming(newIntegerZoom, zPart, false);
 				}
 			}
 		}

@@ -472,7 +472,7 @@
   <string name="search_offline_geo_error">Nedá sa parsovať geo obsah: "%s"</string>
   <string name="search_osm_offline">Nájsť adresu použitím stiahnutých máp</string>
   <string name="system_locale">Systémový</string>
-  <string name="preferred_locale_descr">Zmeniť zobrazovaný jazyk</string>
+  <string name="preferred_locale_descr">Zmeniť zobrazovaný jazyk (po zmene je potrebné reštartovať OsmAnd)</string>
   <string name="preferred_locale">Jazyk zobrazenia</string>
   <string name="tip_map_switch">Vyberte zdroj mapy</string>
   

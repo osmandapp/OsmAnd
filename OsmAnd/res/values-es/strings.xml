@@ -272,7 +272,7 @@
   <string name="search_offline_geo_error">No se pudo analizar el filtro \'%s\'</string>
   <string name="search_osm_offline">Buscar dirección usando mapas sin conexión</string>
   <string name="system_locale">Sistema</string>
-  <string name="preferred_locale_descr">Selecciona el idioma de visualización</string>
+  <string name="preferred_locale_descr">Selecciona el idioma de visualización (por favor, reinicie OsmAnd después del cambio)</string>
   <string name="preferred_locale">Idioma de la pantalla</string>
   <string name="tip_map_switch">Elige una Fuente de mapa</string>
   
@@ -1119,7 +1119,7 @@
     <string name="recording_playing">Reproduciendo audio de la grabación especificada.\n%1$s</string>
     <string name="tip_recent_changes_1_1_0_t">"Cambios en versión 1.1.0 :\n\t* Extra de cálculo de distancia\n\t* Extra de notas de audio\n\t* Extra de curvas de nivel\n\t* Corrección de errores\n\t* Opción de estilo de mapas \'Vista de tour\' con más detalles de mapa, nuevos estilos de carreteras, más contraste y opción para travesías alpinas (escala SAC)\n\t* Correción de desplazamiento del geoide EGM96 para lecturas GPS de altitud"
     </string>
-    <string name="recording_description">Grabado %1$s %2$s en %3$s</string>
+    <string name="recording_description">Grabado %1$s %3$s %2$s</string>
     <string name="srtm_paid_version_msg">Considere la compra del extra de curvas de nivel en la Tienda para apoyar desarrollos adicionales.</string>
     <string name="srtm_paid_version_title">Extra curvas de nivel</string>
     <string name="dropbox_plugin_description">El extra de Dropbox permite sincronizar trazas y notas de audio/vídeo con tu cuenta de dropbox.</string>
@@ -1127,7 +1127,7 @@
     
     <string name="intermediate_points_change_order">Cambiar orden</string>
     <string name="recording_context_menu_show">Mostrar</string>
-    <string name="recording_photo_description">Foto %1$s de %2$s</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Hacer una foto</string>
     <string name="recording_context_menu_precord">Hacer una foto</string>
     <string name="stop_routing_confirm">¿Seguro que quieres parar la navegación?</string>
@@ -1832,7 +1832,7 @@
     <string name="search_radius_proximity">En las proximidades de</string>
     <string name="tip_recent_changes_1_9_t">"Cambios en 1.9: * Actualizados los estilos de los mapas con renderizado de la superficie de la carretera, capas de transporte y símbolos de senderismo * Búsqueda de puntos de interés a lo largo de la ruta * Marcar carretera como intransitable por sesión * Más sencillo la descarga y actualización de mapas * Recibir notificaciones visuales y sonoras al acercarse a un punto de la ruta * Imprimir itinerario e información de giros * Soporte de carriles de giro * Soporte a  Android Wear * Muchos cambios en la IU * Acercamiento separado por tamaño de texto en el mapa * Notificación de audio especial en caso de que esté fuera de la ruta * Funcionalidad de inicio de sesión en OsMo * Corregidas incompatibilidades de versión de OsMo "</string>
     <string name="rendering_category_routes">Rutas</string>
-    <string name="select_impassable_road">Seleccionar en el mapa</string>
+    <string name="select_impassable_road">Seleccionar en el mapa…</string>
     <string name="impassable_road">Evitar carreteras…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Rutas de tranvía y tren</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rutas de tren</string>

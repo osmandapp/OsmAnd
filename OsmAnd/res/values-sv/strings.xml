@@ -528,7 +528,7 @@
 <string name="search_offline_geo_error">Det gick inte att tolka geo uppsåt \'%s\'</string>
 <string name="search_osm_offline">Sök adress med hjälp av offline-kartor</string>
 <string name="system_locale">System</string>
-<string name="preferred_locale_descr">Välj visningsspråk</string>
+<string name="preferred_locale_descr">Välj visningsspråk (starta om OsmAnd efter språkbyte)</string>
 <string name="preferred_locale">Visningsspråk</string>
 <string name="tip_map_switch">Kartkälla</string>
 <string name="tip_app_mode">Användarprofil</string>
@@ -945,7 +945,7 @@
     <string name="recording_can_not_be_played">Inspelningen kan inte spelas upp</string>
     <string name="recording_context_menu_delete">Ta bort inspelningen</string>
     <string name="recording_context_menu_play">Spela upp</string>
-    <string name="recording_description">Inspelning %1$s %2$s av %3$s</string>
+    <string name="recording_description">Inspelning %1$s %3$s %2$s</string>
     <string name="recording_default_name">spelar in</string>
     <string name="av_control_stop">Stoppa</string>
     <string name="map_widget_av_notes">Ljud-/Videoanteckningar</string>
@@ -981,7 +981,7 @@
     <string name="stop_routing_confirm">Är det säkert att du vill avbryta navigeringen?</string>
     <string name="clear_dest_confirm">Är det säkert att du vill ta bort din destinationspunkt (samt waypoints)?</string>
     <string name="recording_context_menu_show">Visa</string>
-    <string name="recording_photo_description">Foto %1$s av %2$s</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="recording_context_menu_precord">Ta ett foto</string>
     <string name="dropbox_plugin_name">Modul för Dropbox</string>
     

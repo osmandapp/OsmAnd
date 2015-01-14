@@ -164,7 +164,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public void onTwoFingerTap() {
 			afterTwoFingerTap = true;
-			getAnimatedDraggingThread().startZooming(getZoom()-1,true);
+			getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), true);
 		}
 	};
 	
@@ -290,7 +290,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void setIntZoom(int zoom) {
 		if (mainLayer != null && zoom <= mainLayer.getMaximumShownMapZoom() && zoom >= mainLayer.getMinimumShownMapZoom()) {
 			animatedDraggingThread.stopAnimating();
-			currentViewport.setZoomAndAnimation(zoom, 0);
+			currentViewport.setZoomAndAnimation(zoom, 0, 0);
 			currentViewport.setRotate(zoom > LOWEST_ZOOM_TO_ROTATE ? rotate : 0);
 			refreshMap();
 		}
@@ -299,7 +299,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void setComplexZoom(int zoom, double mapDensity) {
 		if (mainLayer != null && zoom <= mainLayer.getMaximumShownMapZoom() && zoom >= mainLayer.getMinimumShownMapZoom()) {
 			animatedDraggingThread.stopAnimating();
-			currentViewport.setZoomWithAnimate(zoom, 0);
+			currentViewport.setZoomAndAnimation(zoom, 0);
 			currentViewport.setMapDensity(mapDensity);
 			currentViewport.setRotate(zoom > LOWEST_ZOOM_TO_ROTATE ? rotate : 0);
 			refreshMap();
@@ -350,6 +350,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public int getZoom() {
 		return currentViewport.getZoom();
 	}
+	
+	public double getZoomFractionalPart() {
+		return currentViewport.getZoomFloatPart();
+	}
 
 	public double getSettingsMapDensity() {
 		return (getSettings().MAP_DENSITY.get()) * Math.max(1, getDensity());
@@ -385,7 +389,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (mainLayer.getMinimumShownMapZoom() > zoom) {
 			zoom = mainLayer.getMinimumShownMapZoom();
 		}
-		currentViewport.setZoomAndAnimation(zoom, 0);
+		currentViewport.setZoomAndAnimation(zoom, 0, 0);
 		refreshMap();
 	}
 
@@ -414,6 +418,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final float x2 = calc.getPixXFromTile(rb.x, rb.y, cz);
 			final float y1 = calc.getPixYFromTile(lt.x, lt.y, cz);
 			final float y2 = calc.getPixYFromTile(rb.x, rb.y, cz);
+//			LatLon lt = bufferImgLoc.getLeftTopLatLon();
+//			LatLon rb = bufferImgLoc.getRightBottomLatLon();
+//			final float x1 = calc.getPixXFromLatLon(lt.getLatitude(), lt.getLongitude());
+//			final float x2 = calc.getPixXFromLatLon(rb.getLatitude(), rb.getLongitude());
+//			final float y1 = calc.getPixYFromLatLon(lt.getLatitude(), lt.getLongitude());
+//			final float y2 = calc.getPixYFromLatLon(rb.getLatitude(), rb.getLongitude());
 			if (!bufferBitmap.isRecycled()) {
 				RectF rct = new RectF(x1, y1, x2, y2);
 				canvas.drawBitmap(bufferBitmap, null, rct, paintImg);
@@ -678,8 +688,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	protected void setZoomAnimate(int zoom, boolean notify) {
-		currentViewport.setZoomWithAnimate(zoom, 0);
+	protected void setFractionalZoom(int zoom, double zoomPart, boolean notify) {
+		currentViewport.setZoomAndAnimation(zoom, 0, zoomPart);
 		refreshMap();
 		if (locationListener != null && notify) {
 			locationListener.locationChanged(getLatitude(), getLongitude(), this);
@@ -687,17 +697,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	// for internal usage
-	protected void zoomToAnimate(double tzoom, boolean notify) {
-		int zoom = getZoom();
-		double zoomToAnimate = tzoom - zoom;
-		if (zoomToAnimate >= 1) {
-			zoom += (int) zoomToAnimate;
-			zoomToAnimate -= (int) zoomToAnimate;
-		}
-		while (zoomToAnimate < 0) {
-			zoom--;
-			zoomToAnimate += 1;
-		}
+	protected void zoomToAnimate(int zoom, double zoomToAnimate, boolean notify) {
 		if (mainLayer != null && mainLayer.getMaximumShownMapZoom() >= zoom && mainLayer.getMinimumShownMapZoom() <= zoom) {
 			currentViewport.setZoomAndAnimation(zoom, zoomToAnimate);
 			currentViewport.setRotate(zoom > LOWEST_ZOOM_TO_ROTATE ? rotate : 0);
@@ -866,13 +866,22 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final RotatedTileBox calc = initialViewport.copy();
 			calc.setLatLonCenter(initialCenterLatLon.getLatitude(), initialCenterLatLon.getLongitude());
 
-			double calcZoom = initialViewport.getZoom() + dz ;
 			float calcRotate = calc.getRotate() + angle;
 			calc.setRotate(calcRotate);
-			calc.setZoomAnimation(dz);
+			calc.setZoomAndAnimation(initialViewport.getZoom(), 
+					dz, initialViewport.getZoomFloatPart());
 			final LatLon r = calc.getLatLonFromPixel(cp.x + dx, cp.y + dy);
 			setLatLon(r.getLatitude(), r.getLongitude());
-			zoomToAnimate((float) calcZoom, true);
+			int baseZoom = initialViewport.getZoom();
+			while(initialViewport.getZoomFloatPart() + dz  > 1) {
+				dz --;
+				baseZoom ++;
+			}
+			while(initialViewport.getZoomFloatPart() + dz  < 0) {
+				dz ++;
+				baseZoom --;
+			}
+			zoomToAnimate(baseZoom, dz, true);
 			rotateToAnimate(calcRotate);
 		}
 

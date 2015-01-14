@@ -42,8 +42,10 @@ public class RouteResultPreparation {
 		splitRoadsAndAttachRoadSegments(ctx, result);
 		// calculate time
 		calculateTimeSpeed(ctx, result);
-
+		
 		addTurnInfo(ctx.leftSideNavigation, result);
+		determineTurnsToMerge(ctx.leftSideNavigation, result);
+		addTurnInfoDescriptions(result);
 		return result;
 	}
 
@@ -331,8 +333,6 @@ public class RouteResultPreparation {
 
 
 	private void addTurnInfo(boolean leftside, List<RouteSegmentResult> result) {
-		int prevSegment = -1;
-		float dist = 0;
 		int next = 1;
 		for (int i = 0; i <= result.size(); i = next) {
 			TurnType t = null;
@@ -341,47 +341,31 @@ public class RouteResultPreparation {
 				t = getTurnInfo(result, i, leftside);
 				// justify turn
 				if(t != null && i < result.size() - 1) {
-					boolean tl = TurnType.TL == t.getValue();
-					boolean tr = TurnType.TR == t.getValue();
-					if(tl || tr) {
-						TurnType tnext = getTurnInfo(result, i + 1, leftside);
-						if (tnext != null && result.get(i).getDistance() < 35) { //
-							boolean ut = true;
-							if (i > 0) {
-								double uTurn = MapUtils.degreesDiff(result.get(i - 1).getBearingEnd(), result
-										.get(i + 1).getBearingBegin());
-								if (Math.abs(uTurn) < 120) {
-									ut = false;
-								}
-							}
-							String highway = result.get(i).getObject().getHighway();
-							if(highway == null || highway.endsWith("track") || highway.endsWith("services") || highway.endsWith("service")
-									|| highway.endsWith("path")) {
-								ut = false;
-							}
-							if (ut) {
-								if (tl && TurnType.TL == tnext.getValue()) {
-									next = i + 2;
-									t = TurnType.valueOf(TurnType.TU, false);
-								} else if (tr && TurnType.TR == tnext.getValue()) {
-									next = i + 2;
-									t = TurnType.valueOf(TurnType.TU, true);
-								}
-							}
-						}
+					TurnType jt = justifyUTurn(leftside, result, i, t);
+					if(jt != null) {
+						t = jt;
+						next = i + 2;
 					}
 				}
 				result.get(i).setTurnType(t);
 			}
-			if (t != null || i == result.size()) {
+		}
+	}
+
+	protected void addTurnInfoDescriptions(List<RouteSegmentResult> result) {
+		int prevSegment = -1;
+		float dist = 0;
+		for (int i = 0; i <= result.size(); i++) {
+			if (i == result.size() || result.get(i).getTurnType() != null) {
 				if (prevSegment >= 0) {
 					String turn = result.get(prevSegment).getTurnType().toString();
 					if (result.get(prevSegment).getTurnType().getLanes() != null) {
 						turn += Arrays.toString(result.get(prevSegment).getTurnType().getLanes());
 					}
-					result.get(prevSegment).setDescription(turn + MessageFormat.format(" and go {0,number,#.##} meters", dist));
-					if(result.get(prevSegment).getTurnType().isSkipToSpeak()) {
-						result.get(prevSegment).setDescription("-*"+result.get(prevSegment).getDescription());
+					result.get(prevSegment).setDescription(
+							turn + MessageFormat.format(" and go {0,number,#.##} meters", dist));
+					if (result.get(prevSegment).getTurnType().isSkipToSpeak()) {
+						result.get(prevSegment).setDescription("-*" + result.get(prevSegment).getDescription());
 					}
 				}
 				prevSegment = i;
@@ -391,8 +375,37 @@ public class RouteResultPreparation {
 				dist += result.get(i).getDistance();
 			}
 		}
+	}
 
-		determineTurnsToMerge(leftside, result);
+	protected TurnType justifyUTurn(boolean leftside, List<RouteSegmentResult> result, int i, TurnType t) {
+		boolean tl = TurnType.TL == t.getValue();
+		boolean tr = TurnType.TR == t.getValue();
+		if(tl || tr) {
+			TurnType tnext = getTurnInfo(result, i + 1, leftside);
+			if (tnext != null && result.get(i).getDistance() < 35) { //
+				boolean ut = true;
+				if (i > 0) {
+					double uTurn = MapUtils.degreesDiff(result.get(i - 1).getBearingEnd(), result
+							.get(i + 1).getBearingBegin());
+					if (Math.abs(uTurn) < 120) {
+						ut = false;
+					}
+				}
+				String highway = result.get(i).getObject().getHighway();
+				if(highway == null || highway.endsWith("track") || highway.endsWith("services") || highway.endsWith("service")
+						|| highway.endsWith("path")) {
+					ut = false;
+				}
+				if (ut) {
+					if (tl && TurnType.TL == tnext.getValue()) {
+						return TurnType.valueOf(TurnType.TU, false);
+					} else if (tr && TurnType.TR == tnext.getValue()) {
+						return TurnType.valueOf(TurnType.TU, true);
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	private void determineTurnsToMerge(boolean leftside, List<RouteSegmentResult> result) {
@@ -420,14 +433,21 @@ public class RouteResultPreparation {
 				continue;
 			}
 
-			// Only allow slight turns that are nearby to be merged.
-			if (currentSegment.getDistance() < 60 && nextTurn.getLanes().length <= currentTurn.getLanes().length
-					&& TurnType.isSlightTurn(currentTurn.getValue())) {
+			// Only allow slight turns that are nearby to be merged. 
+			// [disabled cause it is valuable for two consequent sharp turns as well]
+			// the distance could be longer on highways and shorter in city
+			String hw = currentSegment.getObject().getHighway();
+			double mergeDistance = 200;
+			if(hw != null && (hw.startsWith("trunk") || hw.startsWith("motorway"))) {
+				mergeDistance = 400;
+			}
+			if (currentSegment.getDistance() < mergeDistance/* 
+					&& TurnType.isSlightTurn(currentTurn.getValue())*/) {
 				mergeTurnLanes(leftside, currentSegment, nextSegment);
 			}
 		}
 	}
-
+	
 	private void mergeTurnLanes(boolean leftSide, RouteSegmentResult currentSegment, RouteSegmentResult nextSegment) {
 		TurnType currentTurn = currentSegment.getTurnType();
 		TurnType nextTurn = nextSegment.getTurnType();
@@ -435,36 +455,75 @@ public class RouteResultPreparation {
 			&& TurnType.getPrimaryTurn(nextTurn.getLanes()[0]) != 0;
 		if (isUsingTurnLanes) {
 			int[] lanes = new int[currentTurn.getLanes().length];
-			// Unset the allowed lane bit
-			for (int i = 0; i < lanes.length; i++) {
-				lanes[i] = currentTurn.getLanes()[i] & ~1;
-			}
-
-			// Find the first lane that matches (based on the turn being taken), and how many lanes match
-			int matchingIndex = 0;
-			int maxMatchedLanes = 0;
-			for (int i = 0; i < lanes.length; i++) {
-				int matchedLanes = 0;
-				for (int j = 0; j < nextTurn.getLanes().length - i; j++) {
-					if (TurnType.getPrimaryTurn(nextTurn.getLanes()[j])
-                            == TurnType.getPrimaryTurn(currentTurn.getLanes()[i + j])) {
-						matchedLanes++;
+			int activeIndex = -1;
+			int activeLen = 0;
+			// define enabled lanes 
+			for(int i = 0; i < lanes.length; i++) {
+				int ln = currentTurn.getLanes()[i];
+				lanes[i] = ln & ~1;
+				if((ln & 1) > 0) {
+					if(activeIndex == -1) {
+						activeIndex = i;
+						activeLen++;
 					} else {
-						break;
+						activeLen++;
 					}
 				}
-				if (matchedLanes > maxMatchedLanes) {
-					matchingIndex = i;
-					maxMatchedLanes = matchedLanes;
-				}
 			}
-			if (maxMatchedLanes <= 1) {
+			if(activeLen < 2) {
 				return;
 			}
-
-			// Copy the allowed bit from the next segment's lanes to the current segment's matching lanes
-			for (int i = matchingIndex; i - matchingIndex < nextTurn.getLanes().length; i++) {
-				lanes[i] |= nextTurn.getLanes()[i - matchingIndex] & 1;
+			int targetActiveIndex = -1;
+			int targetActiveLen = 0;
+			int[] nextLanes = nextTurn.getLanes();
+			for(int i = 0; i < nextLanes.length; i++) {
+				int ln = nextLanes[i];
+				if((ln & 1) > 0) {
+					if(targetActiveIndex == -1) {
+						targetActiveIndex = i;
+						targetActiveLen++;
+					} else {
+						targetActiveLen++;
+					}
+				}
+			}
+			if(targetActiveIndex == -1) {
+				return;
+			}
+			boolean changed = false;
+			// next turn is left
+			if(targetActiveIndex == 0) {
+				// let only the most left lanes be enabled
+				if(targetActiveLen <= activeLen) {
+					activeLen = targetActiveLen;
+					changed = true;
+				}
+			} else if(targetActiveIndex + targetActiveLen == nextLanes.length) {
+				// next turn is right
+				// let only the most right lanes be enabled
+				if(targetActiveLen <= activeLen) {
+					activeIndex += (activeLen - targetActiveLen);
+					changed = true;
+				}
+			} else {
+				// next turn is get through (take out the left and the right turn) 
+				if(nextLanes.length >= activeLen) {
+					float ratio = (nextLanes.length / (float)activeLen); 
+					activeLen =  (int) Math.ceil(targetActiveLen * ratio);
+					activeIndex = (int) Math.floor(targetActiveIndex / ratio);
+					changed = true;
+				}
+			}
+			if(!changed) {
+				return;
+			}
+			
+			
+			// set the allowed lane bit
+			for (int i = 0; i < lanes.length; i++) {
+				if(i >= activeIndex && i < activeIndex + activeLen) {
+					lanes[i] |= 1;
+				}
 			}
 			currentTurn.setLanes(lanes);
 			int turn = inferTurnFromLanes(lanes);
