@@ -126,6 +126,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 								.getItemId(0));
 					}
 				}
+				finish();
 			} else {
 				AccessibleToast.makeText(GeoIntentActivity.this,
 						getString(R.string.search_offline_geo_error, intent.getData()), Toast.LENGTH_LONG).show();
