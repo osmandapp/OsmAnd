@@ -45,7 +45,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 			public void onClick(View v) {
 				searchVillagesMode = 1;
 				research();
-				searchVillages.setVisibility(View.GONE);
+				//searchVillages.setVisibility(View.GONE);
 			}
 		});
 		getListView().addFooterView(ll);
@@ -58,7 +58,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		final StringMatcherMode startsWith = CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH;
 		return new CityComparator(startsWith, en);
 	}
-	
+
 	@Override
 	public AsyncTask<Object, ?, ?> getInitializeTask() {
 		return new AsyncTask<Object, City, List<City>>(){
@@ -173,7 +173,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	@Override
 	public void itemSelected(City obj) {
 		settings.setLastSearchedCity(obj.getId(), obj.getName(region.useEnglishNames()), obj.getLocation());
-		// Hardy: Looks like disabling this fixes the issue of the Search City dialogue becoming non-functional after the first tapping on a found village (not city) ... (while selected village is still remembered on the dialog for future reference!)
+		// Hardy: Looks like disabling the next 3 lines fixes the issue of the Search City dialogue becoming non-functional after the first tapping on a found village (not city) ... (while selected village is still remembered on the dialog for future reference!)
 		//if (region.getCityById(obj.getId(), obj.getName(region.useEnglishNames())) == null) {
 		//	region.addCityToPreloadedList((City) obj);
 		//}

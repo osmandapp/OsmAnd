@@ -129,6 +129,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	
 	@Override
 	public synchronized void preloadStreets(City o, ResultMatcher<Street> resultMatcher) {
+		//TODO: Check NPE, looks like o can be null here, question is why
 		Collection<Street> streets = o.getStreets();
 		if(!streets.isEmpty()){
 			return;
@@ -138,7 +139,6 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		} catch (IOException e) {
 			log.error("Disk operation failed" , e); //$NON-NLS-1$
 		}
-		
 	}
 
 //	// not use ccontains It is really slow, takes about 10 times more than other steps

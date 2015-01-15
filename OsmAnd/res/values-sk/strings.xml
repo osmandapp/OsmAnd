@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
-  <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
+  <string name="recording_photo_description">Fotografia %1$s %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
   <string name="enable_plugin_monitoring_services">Na použitie služieb pre záznam pozície zapnite monitorovacie zásuvné moduly (stopovanie, stopovanie naživo)</string>
@@ -1157,7 +1157,7 @@
     <string name="recording_can_not_be_played">Nahrávanie nemôže byť prehrané</string>
     <string name="recording_context_menu_delete">Odstrániť záznam</string>
     <string name="recording_context_menu_play">Prehrať</string>
-    <string name="recording_description">Záznam %1$s %2$s v %3$s</string>
+    <string name="recording_description">Záznam %1$s %2$s %3$s</string>
     <string name="recording_default_name">nahrávka</string>
     <string name="av_control_stop">Zastaviť</string>
     <string name="av_control_start">Nahrať</string>
