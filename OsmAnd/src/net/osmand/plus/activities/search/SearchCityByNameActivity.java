@@ -45,7 +45,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 			public void onClick(View v) {
 				searchVillagesMode = 1;
 				research();
-				searchVillages.setVisibility(View.GONE);
+				//searchVillages.setVisibility(View.GONE);
 			}
 		});
 		getListView().addFooterView(ll);
