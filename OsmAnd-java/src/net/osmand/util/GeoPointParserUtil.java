@@ -408,11 +408,11 @@ public class GeoPointParserUtil {
 		} else {
 			double aLat = actual.getLatitude(), eLat = expected.getLatitude(), aLon = actual.getLongitude(), eLon = expected.getLongitude();
 			int aZoom = actual.getZoom(), eZoom = expected.getZoom();
-			String aName = actual.getName(), eName = expected.getName();
-			if (eName != null) {
-				if (!aName.equals(eName)) {
-					throw new RuntimeException("Point name\\capture is not equal; actual=" + aName + ", expected="
-							+ eName);
+			String aLabel = actual.getLabel(), eLabel = expected.getLabel();
+			if (eLabel != null) {
+				if (!aLabel.equals(eLabel)) {
+					throw new RuntimeException("Point label is not equal; actual="
+							+ aLabel + ", expected=" + eLabel);
 				}
 			}
 			if (!areCloseEnough(eLat, aLat, 5)) {
@@ -435,11 +435,11 @@ public class GeoPointParserUtil {
 		} else {
 			double aLat = actual.getLatitude(), eLat = expected.getLatitude(), aLon = actual.getLongitude(), eLon = expected.getLongitude();
 			int aZoom = actual.getZoom(), eZoom = expected.getZoom();
-			String aName = actual.getName(), eName = expected.getName();
-			if (eName != null) {
-				if (!aName.equals(eName)) {
-					throw new RuntimeException("Point name\\capture is not equal; actual=" + aName + ", expected="
-							+ eName);
+			String aLabel = actual.getLabel(), eLabel = expected.getLabel();
+			if (eLabel != null) {
+				if (!aLabel.equals(eLabel)) {
+					throw new RuntimeException("Point label is not equal; actual="
+							+ aLabel + ", expected=" + eLabel);
 				}
 			}
 			if (((int)eLat) != ((int)aLat)) {
@@ -780,10 +780,10 @@ public class GeoPointParserUtil {
 	public static class GeoParsedPoint {
 		private static final int NO_ZOOM = -1;
 
-		private double lat;
-		private double lon;
+		private double lat = 0;
+		private double lon = 0;
 		private int zoom = NO_ZOOM;
-		private String name;
+		private String label;
 		private String query;
 		private boolean geoPoint;
 		private boolean geoAddress;
@@ -795,10 +795,10 @@ public class GeoPointParserUtil {
 			this.geoPoint = true;
 		}
 
-		public GeoParsedPoint(double lat, double lon, String name) {
+		public GeoParsedPoint(double lat, double lon, String label) {
 			this(lat, lon);
-			if (name != null)
-				this.name = name.replaceAll("\\+", " ");
+			if (label != null)
+				this.label = label.replaceAll("\\+", " ");
 		}
 
 		public GeoParsedPoint(double lat, double lon, int zoom) {
@@ -806,8 +806,8 @@ public class GeoPointParserUtil {
 			this.zoom = zoom;
 		}
 
-		public GeoParsedPoint(double lat, double lon, int zoom, String name) {
-			this(lat, lon, name);
+		public GeoParsedPoint(double lat, double lon, int zoom, String label) {
+			this(lat, lon, label);
 			this.zoom = zoom;
 		}
 
@@ -839,8 +839,8 @@ public class GeoPointParserUtil {
 			return zoom;
 		}
 
-		public String getName() {
-			return name;
+		public String getLabel() {
+			return label;
 		}
 
 		public String getQuery() {
@@ -855,6 +855,10 @@ public class GeoPointParserUtil {
 			return geoAddress;
 		}
 
+		/**
+		 * Generates a URI string according to http://geouri.org and
+		 * https://developer.android.com/guide/components/intents-common.html#Maps
+		 */
 		@Override
 		public String toString() {
 			return isGeoPoint() ? "GeoParsedPoint [lat=" + lat + ", lon=" + lon + ", zoom=" + zoom + ", name=" + name
