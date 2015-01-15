@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -151,9 +152,6 @@ public class FavouritesDbHelper {
 		}
 		FavoriteGroup group = getOrCreateGroup(p, 0);
 
-		//making sure that dublicated names will not occur in favorites
-		checkDublicates(p);
-
 		if (!p.getName().equals("")) {
 			p.setVisible(group.visible);
 			p.setColor(group.color);
@@ -167,45 +165,45 @@ public class FavouritesDbHelper {
 		return true;
 	}
 	
-	private void checkDublicates(FavouritePoint p){
-		boolean fl = true;
+	public static AlertDialog.Builder checkDublicates(FavouritePoint p, FavouritesDbHelper fdb, Context uiContext) {
 		boolean emoticons = false;
 		String index = "";
 		int number = 0;
 		String name = checkEmoticons(p.getName());
 		String category = checkEmoticons(p.getCategory());
 		p.setCategory(category);
-		if (name.length() != p.getName().length()){
+		if (name.length() != p.getName().length()) {
 			emoticons = true;
 		}
-		while (fl){
+		boolean fl = true;
+		while (fl) {
 			fl = false;
-			for (FavouritePoint fp : cachedFavoritePoints){
-				if (fp.getName().equals(name)){
+			for (FavouritePoint fp : fdb.getFavouritePoints()) {
+				if (fp.getName().equals(name)) {
 					number++;
 					index = " (" + number + ")";
 					name = p.getName() + index;
-					fl=true;
+					fl = true;
 					break;
 				}
 			}
 		}
-		if ((index.length() > 0 || emoticons)&&
-				context.getMapActivity() != null){
-			AlertDialog.Builder builder = new AlertDialog.Builder(context.getMapActivity());
+		if ((index.length() > 0 || emoticons) ) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(uiContext);
 			builder.setTitle(R.string.fav_point_dublicate);
-			if (emoticons){
-				builder.setMessage(context.getString(R.string.fav_point_emoticons_message, name));
+			if (emoticons) {
+				builder.setMessage(uiContext.getString(R.string.fav_point_emoticons_message, name));
 			} else {
-				builder.setMessage(context.getString(R.string.fav_point_dublicate_message, name));
+				builder.setMessage(uiContext.getString(R.string.fav_point_dublicate_message, name));
 			}
 			builder.setPositiveButton(R.string.default_buttons_ok, null);
 			p.setName(name);
-			builder.show();
+			return builder;
 		}
+		return null;
 	}
 
-	public String checkEmoticons(String name){
+	public static String checkEmoticons(String name){
 		char[] chars = name.toCharArray();
 		int index;
 		char ch1;
@@ -317,7 +315,7 @@ public class FavouritesDbHelper {
 		return false;
 	}
 
-	private File getExternalFile() {
+	public File getExternalFile() {
 		return new File(context.getAppPath(null), FILE_TO_SAVE);
 	}
 	
