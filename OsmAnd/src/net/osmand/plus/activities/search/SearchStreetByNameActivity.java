@@ -54,10 +54,10 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	@Override
 	protected void reset() {
 		searchWithCity = -1;
-		osmandSettings.setLastSearchedStreet("", null);
-		osmandSettings.setLastSearchedIntersectedStreet("", null);
-		osmandSettings.setLastSearchedBuilding("", null);
-		osmandSettings.setLastSearchedPoint(null);
+		//osmandSettings.setLastSearchedStreet("", null);
+		//osmandSettings.setLastSearchedIntersectedStreet("", null);
+		//osmandSettings.setLastSearchedBuilding("", null);
+		//osmandSettings.setLastSearchedPoint(null);
 		super.reset();
 	}
 

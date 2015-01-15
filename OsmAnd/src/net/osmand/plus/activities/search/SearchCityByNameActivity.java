@@ -35,12 +35,12 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	@Override
 	protected void reset() {
 		searchVillagesMode = -1;
-		osmandSettings.setLastSearchedPostcode("", null);
-		osmandSettings.setLastSearchedCity(0L, "", null);
-		osmandSettings.setLastSearchedStreet("", null);
-		osmandSettings.setLastSearchedIntersectedStreet("", null);
-		osmandSettings.setLastSearchedBuilding("", null);
-		osmandSettings.setLastSearchedPoint(null);
+		//osmandSettings.setLastSearchedPostcode("", null);
+		//osmandSettings.setLastSearchedCity(0L, "", null);
+		//osmandSettings.setLastSearchedStreet("", null);
+		//osmandSettings.setLastSearchedIntersectedStreet("", null);
+		//osmandSettings.setLastSearchedBuilding("", null);
+		//osmandSettings.setLastSearchedPoint(null);
 		super.reset();
 	}
 
