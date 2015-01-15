@@ -367,6 +367,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			if (MORE_VALUE.equals(newValue)) {
 				// listPref.set(oldValue); // revert the change..
 				final Intent intent = new Intent(this, DownloadActivity.class);
+				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
 				intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
 				startActivity(intent);
 			} else {
