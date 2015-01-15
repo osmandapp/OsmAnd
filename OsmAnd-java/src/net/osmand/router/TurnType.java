@@ -163,14 +163,10 @@ public class TurnType {
 	}
 	
 	// Note that the primary turn will be the one displayed on the map.
-	public static void setPrimaryTurn(int[] lanes, int lane, int turnType) {
-		lanes[lane] |= (turnType << 1);
+	public static void setPrimaryTurnAndReset(int[] lanes, int lane, int turnType) {
+		lanes[lane] = (turnType << 1);
 	}
 	
-	public void setPrimaryTurn(int lane, int turnType) {
-		lanes[lane] &= ~(15 << 1);
-		lanes[lane] |= (turnType << 1);
-	}
 	
 	public static int getPrimaryTurn(int laneValue) {
 		// Get the primary turn modifier for the lane
@@ -179,10 +175,6 @@ public class TurnType {
 
 	public static void setSecondaryTurn(int[] lanes, int lane, int turnType) {
 		lanes[lane] &= ~(15 << 5);
-		lanes[lane] |= (turnType << 5);
-	}
-	
-	public void setSecondaryTurn(int lane, int turnType) {
 		lanes[lane] |= (turnType << 5);
 	}
 
@@ -249,11 +241,11 @@ public class TurnType {
 	}
 
 	public static boolean isLeftTurn(int type) {
-		return type == TL || type == TSHL || type == TSLL;
+		return type == TL || type == TSHL || type == TSLL || type == TRU;
 	}
 	
 	public static boolean isRightTurn(int type) {
-		return type == TR || type == TSHR || type == TSLR;
+		return type == TR || type == TSHR || type == TSLR || type == TU;
 	}
 
 	public static boolean isSlightTurn(int type) {
