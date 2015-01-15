@@ -47,7 +47,8 @@
             android:id="@+id/check_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="2dip"
+            android:layout_marginRight="6dip"
+
             android:button="@drawable/ic_btn_wocheckbox"
             android:focusable="false" />
     </LinearLayout>
