@@ -101,10 +101,10 @@ public class AvoidSpecificRoads {
 	public void showDialog(final MapActivity mapActivity) {
 		Builder bld = new AlertDialog.Builder(mapActivity);
 		bld.setTitle(R.string.impassable_road);
-		final ArrayAdapter<?>  listAdapter = createAdapter(mapActivity);
 		if (missingRoads.size() == 0){
 			bld.setMessage(R.string.avoid_roads_msg);
 		} else {
+			final ArrayAdapter<?>  listAdapter = createAdapter(mapActivity);
 			bld.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
