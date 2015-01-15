@@ -518,10 +518,10 @@ public class RouteResultPreparation {
 			}
 		} else {
 			// next turn is get through (take out the left and the right turn)
-			if (target.originalLanes.length >= active.activeLen) {
-				float ratio = (target.originalLanes.length / (float) active.activeLen);
-				active.activeEndIndex = (int) Math.ceil(target.activeEndIndex * ratio);
-				active.activeStartIndex = (int) Math.floor(target.activeStartIndex / ratio);
+			if (target.activeLen < active.activeLen) {
+				float ratio = (active.activeLen - target.activeLen) / 2f;
+				active.activeEndIndex = (int) Math.ceil(active.activeEndIndex - ratio);
+				active.activeStartIndex = (int) Math.floor(active.activeStartIndex + ratio);
 				changed = true;
 			}
 		}
@@ -1064,7 +1064,18 @@ public class RouteResultPreparation {
 
 		// Checking to see that there is only one unique turn
 		if (possibleTurns.size() == 1) {
-			return possibleTurns.iterator().next();
+			int infer = possibleTurns.iterator().next();
+			for(int i = 0; i < oLanes.length; i++) {
+				if(TurnType.getSecondaryTurn(oLanes[i]) == infer) {
+					int pt = TurnType.getPrimaryTurn(oLanes[i]);
+					int en = oLanes[i] & 1;
+					TurnType.setPrimaryTurnAndReset(oLanes, i, infer);
+					oLanes[i] |= en;
+					TurnType.setSecondaryTurn(oLanes, i, pt);
+				}
+				
+			}
+			return infer;
 		}
 
 		return 0;
