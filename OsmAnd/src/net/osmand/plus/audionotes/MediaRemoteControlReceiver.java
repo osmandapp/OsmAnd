@@ -11,9 +11,11 @@ public class MediaRemoteControlReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		if (Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())) {
 			AudioVideoNotesPlugin plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
-			if(plugin != null && intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT) != null) {
+			if(plugin != null && intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT) != null && 
+					plugin.getActivity() != null) {
 //				System.out.println("OsmAnd AV Button pressed " + intent.getIntExtra(Intent.EXTRA_KEY_EVENT, 0));
 				// Toast.makeText(context, "Button pressed " + intent.getIntExtra(Intent.EXTRA_KEY_EVENT, 0), Toast.LENGTH_LONG).show();
+				plugin.defaultAction(plugin.getActivity());
 			}
 		}
 	}
