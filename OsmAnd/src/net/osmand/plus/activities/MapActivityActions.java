@@ -416,7 +416,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				});
 			} else {
-				bld.setTitle(R.string.use_displayed_track_for_navigation);
+				bld.setTitle(R.string.navigation_over_track);
 				ArrayAdapter<GPXFile> adapter =new ArrayAdapter<GPXFile>(mapActivity, R.layout.drawer_list_item, gpxFiles){
 					@Override
 					public View getView(int position, View convertView, ViewGroup parent) {
