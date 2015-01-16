@@ -183,9 +183,9 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		settings.setLastSearchedCity(obj.getId(), obj.getName(region.useEnglishNames()), obj.getLocation());
 		// Issue 2535: Disabling the next 3 lines fixes the issue of the Search City dialogue becoming non-functional after the first tapping on a found village (not city)
 		//             but then the issue is still present once a neighborhood street is selected on the Search Street screen
-		if (region.getCityById(obj.getId(), obj.getName(region.useEnglishNames())) == null) {
-			region.addCityToPreloadedList((City) obj);
-		}
+		//if (region.getCityById(obj.getId(), obj.getName(region.useEnglishNames())) == null) {
+		//	region.addCityToPreloadedList((City) obj);
+		//}
 		quitActivity(SearchStreetByNameActivity.class);
 	}
 	
