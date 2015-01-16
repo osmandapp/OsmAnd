@@ -59,7 +59,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	
 	@Override
 	public synchronized void preloadCities(ResultMatcher<City> resultMatcher) {
-//		if (cities.isEmpty()) {
+		if (cities.isEmpty()) {
 			try {
 				List<City> cs = file.getCities(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher), 
 						BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
@@ -76,7 +76,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			} catch (IOException e) {
 				log.error("Disk operation failed", e); //$NON-NLS-1$
 			}
-//		}
+		}
 	}
 	
 	public City getClosestCity(LatLon l, List<City> cache) {
@@ -163,7 +163,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		if (cities.isEmpty()) {
 			preloadCities(resultMatcher);
 			citiesToFill.addAll(cities.values());
-//			return citiesToFill;
+			return citiesToFill;
 		}
 
 		preloadCities(null);
