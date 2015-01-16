@@ -60,13 +60,14 @@ public class BinaryInspector {
 		// test cases show info
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
-				"-vpoi",
+//				"-vpoi",
 //				"-vmap", "-vmapobjects", 
 //				"-vrouting",
-//				"-vaddress", "-vcities", "-vstreets", "-vstreetgroups","-vbuildings", 
+//				"-vaddress", "-vcities","-vstreetgroups", 
+//				"-vstreets", "-vbuildings", "-vintersections", 
 //				"-zoom=16",
 //				"-bbox=1.74,51.17,1.75,51.16", 
-				"/home/victor/projects/osmand/osm-gen/Map.obf"
+//				"/home/victor/projects/osmand/osm-gen/Map.obf"
 					});
 		} else {
 			in.inspector(args);
@@ -566,7 +567,7 @@ public class BinaryInspector {
 			}
 			println(":");
 			
-			for (City c : cities) {				
+			for (City c : cities) {		
 				int size = index.preloadStreets(c, null);
 				List<Street> streets = new ArrayList<Street>(c.getStreets());
 				print(MessageFormat.format("\t\t''{0}'' [{1,number,#}], {2,number,#} street(s) size {3,number,#} bytes",
