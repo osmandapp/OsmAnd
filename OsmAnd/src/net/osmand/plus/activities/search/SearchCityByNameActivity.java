@@ -36,6 +36,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	protected void reset() {
 		//searchVillagesMode = -1;
 		//osmandSettings.setLastSearchedCity(-1L, "", null);
+getInitializeTask();
 		super.reset();
 	}
 
