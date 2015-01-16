@@ -27,10 +27,7 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 
 	@Override
 	protected void reset() {
-		//osmandSettings.setLastSearchedStreet("", null);
 		//osmandSettings.setLastSearchedIntersectedStreet("", null);
-		//osmandSettings.setLastSearchedBuilding("", null);
-		//osmandSettings.setLastSearchedPoint(null);
 		super.reset();
 	}
 

@@ -34,13 +34,8 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 
 	@Override
 	protected void reset() {
-		searchVillagesMode = -1;
-		//osmandSettings.setLastSearchedPostcode("", null);
-		//osmandSettings.setLastSearchedCity(0L, "", null);
-		//osmandSettings.setLastSearchedStreet("", null);
-		//osmandSettings.setLastSearchedIntersectedStreet("", null);
-		//osmandSettings.setLastSearchedBuilding("", null);
-		//osmandSettings.setLastSearchedPoint(null);
+		//searchVillagesMode = -1;
+		//osmandSettings.setLastSearchedCity(-1L, "", null);
 		super.reset();
 	}
 
@@ -58,7 +53,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 			public void onClick(View v) {
 				searchVillagesMode = 1;
 				research();
-				//searchVillages.setVisibility(View.GONE);
+				searchVillages.setVisibility(View.GONE);
 			}
 		});
 		getListView().addFooterView(ll);

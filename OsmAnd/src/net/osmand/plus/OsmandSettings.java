@@ -1507,7 +1507,7 @@ public class OsmandSettings {
 	public static final String LAST_SEARCHED_REGION = "last_searched_region"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_CITY = "last_searched_city"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_CITY_NAME = "last_searched_city_name"; //$NON-NLS-1$
-	public static final String lAST_SEARCHED_POSTCODE= "last_searched_postcode"; //$NON-NLS-1$
+	public static final String LAST_SEARCHED_POSTCODE= "last_searched_postcode"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_STREET = "last_searched_street"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_BUILDING = "last_searched_building"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_INTERSECTED_STREET = "last_searched_intersected_street"; //$NON-NLS-1$
@@ -1541,7 +1541,7 @@ public class OsmandSettings {
 
 	public boolean setLastSearchedRegion(String region, LatLon l) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences).putString(LAST_SEARCHED_REGION, region).putLong(LAST_SEARCHED_CITY, -1).
-			putString(LAST_SEARCHED_CITY_NAME, "").putString(lAST_SEARCHED_POSTCODE, "").
+			putString(LAST_SEARCHED_CITY_NAME, "").putString(LAST_SEARCHED_POSTCODE, "").
 			putString(LAST_SEARCHED_STREET,"").putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$ //$NON-NLS-2$
 		if (settingsAPI.contains(globalPreferences,LAST_SEARCHED_INTERSECTED_STREET)) {
 			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
@@ -1552,12 +1552,12 @@ public class OsmandSettings {
 	}
 	
 	public String getLastSearchedPostcode(){
-		return settingsAPI.getString(globalPreferences, lAST_SEARCHED_POSTCODE, null);	
+		return settingsAPI.getString(globalPreferences, LAST_SEARCHED_POSTCODE, null);
 	}
 	
 	public boolean setLastSearchedPostcode(String postcode, LatLon point){
-		SettingsEditor edit = settingsAPI.edit(globalPreferences).putLong(LAST_SEARCHED_CITY, -1).putString(LAST_SEARCHED_STREET, "").putString( //$NON-NLS-1$
-				LAST_SEARCHED_BUILDING, "").putString(lAST_SEARCHED_POSTCODE, postcode); //$NON-NLS-1$
+		SettingsEditor edit = settingsAPI.edit(globalPreferences).putLong(LAST_SEARCHED_CITY, -1).putString(LAST_SEARCHED_STREET, "") //$NON-NLS-1$
+				.putString(LAST_SEARCHED_BUILDING, "").putString(LAST_SEARCHED_POSTCODE, postcode); //$NON-NLS-1$
 		if(settingsAPI.contains(globalPreferences,LAST_SEARCHED_INTERSECTED_STREET)){
 			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
 		}
@@ -1576,8 +1576,8 @@ public class OsmandSettings {
 
 	public boolean setLastSearchedCity(Long cityId, String name, LatLon point) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences).putLong(LAST_SEARCHED_CITY, cityId).putString(LAST_SEARCHED_CITY_NAME, name).
-				putString(LAST_SEARCHED_STREET, "").putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
-		edit.remove(lAST_SEARCHED_POSTCODE);
+				putString(LAST_SEARCHED_STREET, "").putString(LAST_SEARCHED_BUILDING, "").putString(LAST_SEARCHED_POSTCODE, ""); //$NON-NLS-1$
+		//edit.remove(LAST_SEARCHED_POSTCODE);
 		if(settingsAPI.contains(globalPreferences,LAST_SEARCHED_INTERSECTED_STREET)){
 			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
 		}

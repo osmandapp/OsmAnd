@@ -38,9 +38,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 
 	@Override
 	protected void reset() {
-		//osmandSettings.setLastSearchedIntersectedStreet("", null);
 		//osmandSettings.setLastSearchedBuilding("", null);
-		//osmandSettings.setLastSearchedPoint(null);
 		super.reset();
 	}
 
