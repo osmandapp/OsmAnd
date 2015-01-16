@@ -13,6 +13,7 @@ import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.util.MapUtils;
@@ -29,7 +30,19 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	private RegionAddressRepository region;
 	private int searchVillagesMode = -1;
 	private Button searchVillages;
-	
+	private OsmandSettings osmandSettings;
+
+	@Override
+	protected void reset() {
+		searchVillagesMode = -1;
+		//osmandSettings.setLastSearchedPostcode("", null);
+		//osmandSettings.setLastSearchedCity(0L, "", null);
+		//osmandSettings.setLastSearchedStreet("", null);
+		//osmandSettings.setLastSearchedIntersectedStreet("", null);
+		//osmandSettings.setLastSearchedBuilding("", null);
+		//osmandSettings.setLastSearchedPoint(null);
+		super.reset();
+	}
 
 	@Override
 	protected void addFooterViews() {

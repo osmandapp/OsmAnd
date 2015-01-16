@@ -474,4 +474,53 @@
 	<string name="poi_handball">Handbal</string>
 	<string name="poi_horse_racing">Paardenrennen</string>
 	<string name="poi_ice_skating">Ijsschaatsen</string>
+	<string name="poi_telephone_exchange">Telefooncentrale</string>
+
+	<string name="poi_waste_disposal">Afvalverwerking</string>
+	<string name="poi_waste_basket">Prullenbak</string>
+
+	<string name="poi_adit">Horizontale mijnschacht</string>
+	<string name="poi_survey_point">Landmeetpunt</string>
+	<string name="poi_quarry">Groeve</string>
+	<string name="poi_cricket_nets">Cricket-netten</string>
+
+	<string name="poi_social_facility">Sociale voorziening</string>
+	<string name="poi_register_office">Burgerlijke stand</string>
+	<string name="poi_bailiff">Baljuw</string>
+	<string name="poi_prosecutor">Aanklager</string>
+	<string name="poi_pension_fund">Pensioenfonds</string>
+	<string name="poi_migration">Migratie</string>
+	<string name="poi_tax_inspection">Belastingsinspectie</string>
+	<string name="poi_administrative_office">Administratief kantoor</string>
+	<string name="poi_speech_therapist">Logopedist</string>
+	<string name="poi_healthcare_yes">Medische voorziening</string>
+
+	<string name="poi_telecommunication_office">Telecommunicatiekantoor</string>
+	<string name="poi_employment_agency">Arbeidsbureau</string>
+	<string name="poi_it_office">IT-kantoor</string>
+	<string name="poi_newspaper_office">Krantenkantoor</string>
+	<string name="poi_pitch">Sportveld</string>
+	<string name="poi_leisure_track">Circuit</string>
+	<string name="poi_horse_track">Paardenrenbaan</string>
+	<string name="poi_raceway">Racecircuit</string>
+	<string name="poi_9pin">Kegelen</string>
+	<string name="poi_10pin">Bowlen</string>
+	<string name="poi_power_generator">Stroomgenerator</string>
+
+	<string name="poi_american_football">American football</string>
+	<string name="poi_australian_football">Australian football</string>
+	<string name="poi_base">Basejumpen</string>
+	<string name="poi_baseball">Honkbal</string>
+	<string name="poi_beachvolleyball">Beachvolleybal</string>
+	<string name="poi_bmx_sport">BMX</string>
+	<string name="poi_boules">Petanque</string>
+	<string name="poi_bowls">Bowls</string>
+	<string name="poi_canadian_football">Canadian football</string>
+	<string name="poi_canoe">Kano</string>
+	<string name="poi_croquet">Croquet</string>
+	<string name="poi_scuba_diving">Duiksport</string>
+	<string name="poi_equestrian">Paardrijden</string>
+	<string name="poi_hockey">Hockey</string>
+	<string name="poi_ice_stock">IJsstokschieten</string>
+	<string name="poi_korfbal">Korfbal</string>
 	</resources>

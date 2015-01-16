@@ -516,7 +516,7 @@
   <string name="transport_searching_transport">Openbaar vervoer-resultaten (geen bestemming):</string>
   <string name="transport_searching_route">Openbaar vervoer-resultaten ({0} naar bestemming):</string>
   <string name="transport_search_none">geen</string>
-  <string name="transport_search_again">Opnieuw OV zoeken</string>
+  <string name="transport_search_again">Opnieuw openbaar vervoer zoeken</string>
   <string name="map_index">Kaart</string>
   <string name="voice">Opgenomen stem</string>
   <string name="no_vector_map_loaded">Geen vectorkaarten geladen</string>
@@ -525,7 +525,7 @@
   <string name="layer_gpx_layer">GPX-track…</string>
   <string name="error_reading_gpx">Fout bij het lezen van GPX-gegevens</string>
   <string name="vector_data">Offline vectorkaarten</string>
-  <string name="transport_context_menu">Zoek vervoer op halte</string>
+  <string name="transport_context_menu">Zoek openbaar vervoer op halte</string>
   <string name="point_on_map">Locatie:\n Lat %1$.5f\n Lon %2$.5f</string>
   <string name="osb_bug_name">Bug</string>
   <string name="poi_context_menu_modify">Wijzig interessepunt</string>
@@ -547,7 +547,7 @@
   <string name="none_region_found">Geen offline-gegevens voor regio gevonden op de SD kaart. Download regio\'s van het internet.</string>
   <string name="poi_namefinder_query_empty">Type een zoekwoord om een interessepunt te vinden</string>
   <string name="any_poi">Alle</string>
-  <string name="layer_transport_route">OV-verbindingen</string>
+  <string name="layer_transport_route">Openbaar vervoer-verbindingen</string>
   <string name="thanks_yandex_traffic">Met dank aan Yandex voor de verkeersinformatie.</string>
   <string name="layer_yandex_traffic">Yandex Traffic</string>
   <string name="layer_route">Route</string>
@@ -1202,7 +1202,7 @@
     <string name="recording_can_not_be_played">Opname kan niet worden afgespeeld</string>
     <string name="recording_context_menu_delete">Wis opname</string>
     <string name="recording_context_menu_play">Afspelen</string>
-    <string name="recording_description">Opname %1$s %2$s van %3$s</string>
+    <string name="recording_description">Opname %1$s %3$s %2$s</string>
     <string name="recording_default_name">opname</string>
     <string name="av_control_stop">Stop</string>
     <string name="av_control_start">Start</string>
@@ -1226,7 +1226,7 @@
     <string name="dropbox_plugin_description">De Dropbox-plugin kan tracks en audio/video-notities synchroniseren met je Dropbox-account.</string>
     <string name="dropbox_plugin_name">Dropbox-plugin</string>
     <string name="recording_context_menu_show">Toon</string>
-    <string name="recording_photo_description">Foto %1$s van %2$s</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Neem een foto</string>
     <string name="recording_context_menu_precord">Neem een foto</string>
     <string name="stop_routing_confirm">Navigatie stoppen?</string>

@@ -15,6 +15,7 @@ import net.osmand.data.MapObject.MapObjectComparator;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
 import net.osmand.plus.resources.RegionAddressRepository;
@@ -33,7 +34,8 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	private City city;
 	private Button searchAllStrets;
 	private int searchWithCity = -1; // -1 - default, 0 - filter city, 1 - deep search
-	
+	private OsmandSettings osmandSettings;
+
 	@Override
 	protected Comparator<? super Street> createComparator() {
 		return new MapObjectComparator(getMyApplication().getSettings().usingEnglishNames()) {
@@ -48,13 +50,16 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 			}
 		};
 	}
-	
+
 	@Override
 	protected void reset() {
 		searchWithCity = -1;
+		//osmandSettings.setLastSearchedStreet("", null);
+		//osmandSettings.setLastSearchedIntersectedStreet("", null);
+		//osmandSettings.setLastSearchedBuilding("", null);
+		//osmandSettings.setLastSearchedPoint(null);
 		super.reset();
 	}
-	
 
 	@Override
 	protected void addFooterViews() {
