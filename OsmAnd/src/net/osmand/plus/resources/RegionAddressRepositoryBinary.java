@@ -304,7 +304,9 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 						}
 						return false;
 					}
-				}), id < -1 ? BinaryMapAddressReaderAdapter.POSTCODES_TYPE : BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
+				//Ceck if this is mixed up
+				//}), id < -1 ? BinaryMapAddressReaderAdapter.POSTCODES_TYPE : BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
+				}), id < -1 ? BinaryMapAddressReaderAdapter.VILLAGES_TYPE : BinaryMapAddressReaderAdapter.POSTCODES_TYPE);
 			} catch (IOException e) {
 				log.error("Disk operation failed", e); //$NON-NLS-1$
 			}
