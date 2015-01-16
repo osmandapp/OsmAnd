@@ -793,7 +793,7 @@ public class RouteResultPreparation {
 					// sometimes slight right turn goes to the road with 2 lanes 
 					// the better situation to group all the lanes and 
 					// when ';' we know for sure the lane combines 2 group
-					roads -= 2;
+					roads --;
 				}
 				lanes -= cnt;
 				// we already found slight turn others are turn in different direction
