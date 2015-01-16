@@ -405,7 +405,15 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			}
 		}
 	}
-	
+
+	public void loadGpxFromDatabase(){
+		Map<String, GPXFile> files = collectRecordedData();
+		for (Map.Entry<String, GPXFile> entry : files.entrySet()){
+			currentTrack.getGpxFile().points.addAll(entry.getValue().points);
+			currentTrack.getGpxFile().tracks.addAll(entry.getValue().tracks);
+		}
+	}
+
 	public boolean getIsRecording() {
 		return isRecording;
 	}
