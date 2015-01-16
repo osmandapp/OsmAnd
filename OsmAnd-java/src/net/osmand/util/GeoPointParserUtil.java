@@ -22,6 +22,58 @@ public class GeoPointParserUtil {
 		int z = GeoParsedPoint.NO_ZOOM;
 		String url;
 
+		String noQueryParameters[] = {
+			"geo:0,0",
+			"geo:0,0?",
+			"http://download.osmand.net/go",
+			"http://download.osmand.net/go?",
+		};
+		for (String s: noQueryParameters) {
+			URI uri = URI.create(s);
+			Map<String, String> map = getQueryParameters(uri);
+			System.out.print(s + " map: " + map.size() + "...");
+			if (map.size() != 0) {
+				System.out.println("");
+				throw new RuntimeException("Map should be 0 but is " + map.size());
+			}
+			System.out.println(" Passed!");
+		}
+
+		String oneQueryParameter[] = {
+			"geo:0,0?m",
+			"geo:0,0?m=",
+			"geo:0,0?m=foo",
+			"http://download.osmand.net/go?lat",
+			"http://download.osmand.net/go?lat=",
+			"http://download.osmand.net/go?lat=34.99393",
+		};
+		for (String s: oneQueryParameter) {
+			URI uri = URI.create(s);
+			Map<String, String> map = getQueryParameters(uri);
+			System.out.print(s + " map: " + map.size() + "...");
+			if (map.size() != 1) {
+				System.out.println("");
+				throw new RuntimeException("Map should be 1 but is " + map.size());
+			}
+			System.out.println(" Passed!");
+		}
+
+		String twoQueryParameters[] = {
+			"geo:0,0?z=11&q=Lots+Of+Stuff",
+			"http://download.osmand.net/go?lat=34.99393&lon=-110.12345",
+			"http://download.osmand.net/go?lat=34.99393&lon=-110.12345#this+should+be+ignored",
+		};
+		for (String s: twoQueryParameters) {
+			URI uri = URI.create(s);
+			Map<String, String> map = getQueryParameters(uri);
+			System.out.print(s + " map: " + map.size() + "...");
+			if (map.size() != 2) {
+				System.out.println("");
+				throw new RuntimeException("Map should be 2 but is " + map.size());
+			}
+			System.out.println(" Passed!");
+		}
+
 		// geo:34,-106
 		url = "geo:" + ilat + "," + ilon;
 		System.out.println("url: " + url);
@@ -518,6 +570,43 @@ public class GeoPointParserUtil {
 			}
 		}
 		return value;
+	}
+
+    /**
+     * This parses out all of the parameters in the query string for both
+     * http: and geo: URIs.  This will only work on URIs with valid syntax, so
+     * it will not work on URIs that do odd things like have a query string in
+     * the fragment, like this one:
+     * http://www.amap.com/#!poi!!q=38.174596,114.995033|2|%E5%AE%BE%E9%A6%86&radius=1000
+     *
+	 * @param uri
+	 * @return {@link Map<String, String>} a Map of the query parameters
+     */
+	private static Map<String, String> getQueryParameters(URI uri) {
+        final LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
+        String query = null;
+        if (uri.isOpaque()) {
+            String schemeSpecificPart = uri.getSchemeSpecificPart();
+            int pos = schemeSpecificPart.indexOf("?");
+            if (pos == schemeSpecificPart.length()) {
+                query = "";
+            } else if (pos > -1) {
+                query = schemeSpecificPart.substring(pos + 1);
+            }
+        } else {
+            query = uri.getQuery();
+        }
+        if (query != null && !query.equals("")) {
+            String[] params = query.split("&");
+            for (String p : params) {
+                String[] keyValue = p.split("=");
+                if (keyValue.length == 1)
+                    map.put(keyValue[0], "");
+                else if (keyValue.length > 1)
+                    map.put(keyValue[0], keyValue[1]);
+            }
+		}
+		return map;
 	}
 
 	/**
