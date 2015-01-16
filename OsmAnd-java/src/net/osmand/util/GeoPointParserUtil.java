@@ -642,14 +642,16 @@ public class GeoPointParserUtil {
             String path = uri.getPath();
 			if (path == null) {
 				path = "";
-			} else if (path.startsWith("/")) {
-				path = path.substring(1);
 			}
             String fragment = uri.getFragment();
             String query = uri.getQuery();
             if(query == null) {
             	// DOUBLE check this may be wrong test of openstreetmap.de (looks very weird url and server doesn't respond)
-            	query = path;
+				if (path.startsWith("/")) {
+					query = path.substring(1);
+				} else {
+					query = path;
+				}
             }
             
             Map<String, String> params = new HashMap<String, String>();
@@ -672,9 +674,9 @@ public class GeoPointParserUtil {
                 if (host.equals("osm.org") || host.endsWith("openstreetmap.org")) {
                     Pattern p;
                     Matcher matcher;
-                    if (path.startsWith("go/")) { // short URL form
+                    if (path.startsWith("/go/")) { // short URL form
                         p = Pattern.compile("^/go/([A-Za-z0-9_@~]+-*)(?:.*)");
-                        matcher = p.matcher(uri.getPath());
+                        matcher = p.matcher(path);
                         if (matcher.matches()) {
                             return MapUtils.decodeShortLinkString(matcher.group(1));
                         }
