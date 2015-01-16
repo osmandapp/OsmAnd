@@ -119,7 +119,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	
 	@Override
 	public synchronized void addCityToPreloadedList(City city) {
-		if (!cities.containsKey(id)) {
+		if (!cities.containsKey(city.getID())) {
 			cities.put(city.getId(), city);
 		}
 	}
