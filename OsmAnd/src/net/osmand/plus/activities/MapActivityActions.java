@@ -623,6 +623,10 @@ public class MapActivityActions implements DialogProvider {
 				}
 			});
 		}
+		refreshDrawer();
+	}
+
+	public void refreshDrawer(){
 		switch (currentDrawer){
 			case MAIN_MENU:
 				prepareOptionsMenu(createMainOptionsMenu());
