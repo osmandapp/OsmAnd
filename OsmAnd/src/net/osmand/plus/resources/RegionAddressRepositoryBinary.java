@@ -160,11 +160,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	@Override
 	public List<City> fillWithSuggestedCities(String name, final ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
 		List<City> citiesToFill = new ArrayList<City>();
-		if (cities.isEmpty()) {
+//		if (cities.isEmpty()) {
 			preloadCities(resultMatcher);
 			citiesToFill.addAll(cities.values());
 			return citiesToFill;
-		}
+//		}
 
 		preloadCities(null);
 		if (name.length() == 0) {
@@ -304,9 +304,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 						}
 						return false;
 					}
-				//Ceck if this is mixed up
-				//}), id < -1 ? BinaryMapAddressReaderAdapter.POSTCODES_TYPE : BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
-				}), id < -1 ? BinaryMapAddressReaderAdapter.VILLAGES_TYPE : BinaryMapAddressReaderAdapter.POSTCODES_TYPE);
+				}), id < -1 ? BinaryMapAddressReaderAdapter.POSTCODES_TYPE : BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
 			} catch (IOException e) {
 				log.error("Disk operation failed", e); //$NON-NLS-1$
 			}
