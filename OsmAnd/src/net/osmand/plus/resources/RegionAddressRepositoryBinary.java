@@ -160,11 +160,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	@Override
 	public List<City> fillWithSuggestedCities(String name, final ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
 		List<City> citiesToFill = new ArrayList<City>();
-//		if (cities.isEmpty()) {
+		if (cities.isEmpty()) {
 			preloadCities(resultMatcher);
 			citiesToFill.addAll(cities.values());
-			return citiesToFill;
-//		}
+//			return citiesToFill;
+		}
 
 		preloadCities(null);
 		if (name.length() == 0) {
