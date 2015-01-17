@@ -254,7 +254,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="distance_measurement_save_gpx">Sarba comente GPX</string>
     <string name="distance_measurement_load_gpx">Aberi GPX esistente</string>
     <string name="wait_current_task_finished">Pro piaghere iseta sa fine de su traballu presente</string>
-    <string name="use_kalman_filter_compass_descr">Imprea su filtru pro istransire traviaduras de sa bùssola</string>
+    <string name="use_kalman_filter_compass_descr">Minimat s\'abbolotu de sa bùssola ma annanghet inèrtzia/preìtia</string>
     <string name="use_kalman_filter_compass">Impreu de su filtru de Kalman</string>
     <string name="access_mark_final_location_first">Modalidade de atzessu fatzilidadu: issebera in antis sa destinatzione</string> 
     <string name="use_magnetic_sensor_descr">Imprea su sensore magneticu pro determinare su balore de sa bùssola imbetzes de su sensore de orientamentu</string>
