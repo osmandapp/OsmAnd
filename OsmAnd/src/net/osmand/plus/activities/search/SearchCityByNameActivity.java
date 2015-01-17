@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
-//import net.osmand.IProgress;
+import net.osmand.IProgress;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
@@ -39,13 +39,15 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		//osmandSettings.setLastSearchedCity(-1L, "", null);
 
 		//Issue 2535: Try to reload indexes as workaround
-		//            This creates the issue immeadiately after tapping "Reset", but then going back to the searchAdressFragment screen resets the issue and everything works(!?)
+		//            This creates the issue immediately after tapping "Reset", but then going back to the searchAdressFragment screen resets the issue and everything works(!?)
 		new AsyncTask<Void, Void, List<String>>() {
 			@Override
 			protected List<String> doInBackground(Void... params) {
-				return getMyApplication().getResourceManager().reloadIndexes();
+				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
 			}
 		}.execute();
+		createComparator();
+		getInitializeTask();
 
 		super.reset();
 	}
