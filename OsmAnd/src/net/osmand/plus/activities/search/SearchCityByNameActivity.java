@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
+import net.osmand.IProgress;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
@@ -36,6 +37,16 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	protected void reset() {
 		//searchVillagesMode = -1;
 		//osmandSettings.setLastSearchedCity(-1L, "", null);
+
+		//Issue 2535: Try reload indexes as workaround
+		new AsyncTask<Void, Void, List<String>>() {
+			@Override
+			protected List<String> doInBackground(Void... params) {
+				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
+			}
+		}.execute();
+		getInitializeTask();
+
 		super.reset();
 	}
 
