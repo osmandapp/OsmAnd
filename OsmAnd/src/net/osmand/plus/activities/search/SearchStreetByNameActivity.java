@@ -53,6 +53,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 
 	@Override
 	protected void reset() {
+		//This is really only a "clear input text field", hence do not reset settings here
 		//searchWithCity = -1;
 		//osmandSettings.setLastSearchedStreet("", null);
 		super.reset();

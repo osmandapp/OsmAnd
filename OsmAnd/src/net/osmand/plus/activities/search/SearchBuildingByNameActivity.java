@@ -38,6 +38,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 
 	@Override
 	protected void reset() {
+		//This is really only a "clear input text field", hence do not reset settings here
 		//osmandSettings.setLastSearchedBuilding("", null);
 		super.reset();
 	}

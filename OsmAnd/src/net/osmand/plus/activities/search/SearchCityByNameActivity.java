@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
-import net.osmand.IProgress;
+//import net.osmand.IProgress;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
@@ -35,19 +35,18 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 
 	@Override
 	protected void reset() {
+		//This is really only a "clear input text field", hence do not reset settings here
 		//searchVillagesMode = -1;
 		//osmandSettings.setLastSearchedCity(-1L, "", null);
 
 		//Issue 2535: Try to reload indexes as workaround
 		//            This creates the issue immediately after tapping "Reset", but then going back to the searchAdressFragment screen resets the issue and everything works(!?)
-		new AsyncTask<Void, Void, List<String>>() {
-			@Override
-			protected List<String> doInBackground(Void... params) {
-				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
-			}
-		}.execute();
-		createComparator();
-		getInitializeTask();
+		//new AsyncTask<Void, Void, List<String>>() {
+		//	@Override
+		//	protected List<String> doInBackground(Void... params) {
+		//		return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
+		//	}
+		//}.execute();
 
 		super.reset();
 	}
