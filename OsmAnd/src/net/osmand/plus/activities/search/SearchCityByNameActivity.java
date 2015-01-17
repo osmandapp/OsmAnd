@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.content.Intent;
 
 public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City> {
 
@@ -45,7 +46,8 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
 			}
 		}.execute();
-		getInitializeTask();
+		finish();
+		startActivity(createIntent(SearchCityByNameActivity.class));
 
 		super.reset();
 	}
