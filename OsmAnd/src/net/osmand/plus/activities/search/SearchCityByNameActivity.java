@@ -36,6 +36,15 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	protected void reset() {
 		//searchVillagesMode = -1;
 		//osmandSettings.setLastSearchedCity(-1L, "", null);
+
+		//Issue 2535: Try reload indexes as workaround
+		new AsyncTask<Void, Void, List<String>>() {
+			@Override
+			protected List<String> doInBackground(Void... params) {
+				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
+			}
+		}.execute();
+
 		super.reset();
 	}
 
