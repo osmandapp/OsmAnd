@@ -1877,4 +1877,5 @@
 	<string name="show_pedestrian_warnings">Fodgængerovergange</string>
     <string name="speak_pedestrian">Fodgængerovergange</string>
     <string name="rendering_value__name">Standard</string>
+	<string name="save_track_to_gpx_globally_headline">On demand sporingslogning</string>
 	</resources>
