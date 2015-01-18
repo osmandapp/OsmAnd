@@ -49,7 +49,10 @@ public class HillshadeLayer extends MapTileLayer {
 			@Override
 			protected Void doInBackground(Void... params) {
 				File tilesDir = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
-				sqliteDb = SQLiteDatabase.openOrCreateDatabase(new File(tilesDir, HILLSHADE_CACHE) , null);
+				// fix http://stackoverflow.com/questions/26937152/workaround-for-nexus-9-sqlite-file-write-operations-on-external-dirs
+				sqliteDb = SQLiteDatabase.openDatabase(new File(tilesDir, HILLSHADE_CACHE).getPath() , 
+						 null, SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING
+						    | SQLiteDatabase.CREATE_IF_NECESSARY );
 				if(sqliteDb.getVersion() == 0) {
 					sqliteDb.setVersion(1);
 					sqliteDb.execSQL("CREATE TABLE TILE_SOURCES(filename varchar2(256), date_modified int, left int, right int, top int, bottom int)");
