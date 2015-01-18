@@ -1557,7 +1557,7 @@
     <string name="osmo_plugin_description">"OpenStreetMap - avanceret live overvågning, se http://osmo.mobi. Spor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing. Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator. Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem. "</string>
     <string name="osmo_plugin_name">OsMo (avanceret live overvågning)</string>
     <string name="osmo_settings">OpenStreetMap overvågning</string>
-   	<string name="keep_informing_never">Aldrig</string>
+   	<string name="keep_informing_never">Kun manuelt (tryk på pilen)</string>
     <string name="keep_informing_descr">Gentag navigationsinstruktioner med jævne mellemrum</string>
     <string name="keep_informing">Gentag navigationsinstruktioner</string>
 	<string name="arrival_distance">Meddel ankomst</string>
