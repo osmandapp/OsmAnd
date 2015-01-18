@@ -74,7 +74,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		long javaTotal = Runtime.getRuntime().totalMemory() / (1024*1024l);
 		long dalvikSize = android.os.Debug.getNativeHeapAllocatedSize() / (1024*1024l);
 		pref.setSummary(getString(R.string.global_app_allocated_memory_descr, javaAvailMem, javaTotal, dalvikSize));
-		pref.setSelectable(false);
+		pref.setEnabled(false);
 		cat.addPreference(pref);
 		
 //		ActivityManager activityManager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
@@ -103,7 +103,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			pref.setSummary(getString(R.string.day_night_info_description, "null",
 					"null"));
 		}
-		pref.setSelectable(false);
+		pref.setEnabled(false);
 		cat.addPreference(pref);	
 	}
 	
