@@ -48,6 +48,10 @@ public class WaypointHelper {
 	private static final int LONG_ANNOUNCE_RADIUS = 700;
 	private static final int SHORT_ANNOUNCE_RADIUS = 150;
 	private static final int ALARMS_ANNOUNCE_RADIUS = 150;
+	
+	// don't annoy users by lots of announcements
+	private static final int APPROACH_POI_LIMIT = 3;
+	private static final int ANNOUNCE_POI_LIMIT = 3;
 
 	OsmandApplication app;
 	// every time we modify this collection, we change the reference (copy on write list)
@@ -342,6 +346,9 @@ public class WaypointHelper {
 						kIterator++;
 					}
 					if (!announcePoints.isEmpty()) {
+						if(announcePoints.size() > ANNOUNCE_POI_LIMIT) {
+							announcePoints = announcePoints.subList(0, ANNOUNCE_POI_LIMIT);
+						}
 						if (type == WAYPOINTS) {
 							getVoiceRouter().announceWaypoint(announcePoints);
 						} else if (type == POI) {
@@ -353,6 +360,9 @@ public class WaypointHelper {
 						}
 					}
 					if (!approachPoints.isEmpty()) {
+						if(approachPoints.size() > APPROACH_POI_LIMIT) {
+							approachPoints = approachPoints.subList(0, APPROACH_POI_LIMIT);
+						}
 						if (type == WAYPOINTS) {
 							getVoiceRouter().approachWaypoint(lastKnownLocation, approachPoints);
 						} else if (type == POI) {
