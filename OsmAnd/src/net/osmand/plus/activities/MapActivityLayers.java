@@ -217,7 +217,7 @@ public class MapActivityLayers {
 	
 	
 
-	public void showGPXFileLayer(List<String> files, final OsmandMapTileView mapView) {
+	public AlertDialog showGPXFileLayer(List<String> files, final OsmandMapTileView mapView) {
 		final OsmandSettings settings = getApplication().getSettings();
 		CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
 			@Override
@@ -243,14 +243,15 @@ public class MapActivityLayers {
 							mapView.getZoom(), true);
 				}
 				mapView.refreshMap();
+				activity.getMapActions().refreshDrawer();
 				return true;
 			}
 		};
 
 		if (files == null) {
-			GpxUiHelper.selectGPXFile(activity, true, true, callbackWithObject);
+			return GpxUiHelper.selectGPXFile(activity, true, true, callbackWithObject);
 		} else {
-			GpxUiHelper.selectGPXFile(files, activity, true, true, callbackWithObject);
+			return GpxUiHelper.selectGPXFile(files, activity, true, true, callbackWithObject);
 		}
 	}
 	

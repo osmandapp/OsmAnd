@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import android.view.ViewGroup;
+import android.widget.*;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.IndexConstants;
@@ -57,14 +59,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ListView;
-import android.widget.Toast;
 
 public class MapActivityActions implements DialogProvider {
 	
@@ -402,26 +396,49 @@ public class MapActivityActions implements DialogProvider {
 	public void enterRoutePlanningMode(final LatLon from, final String fromName, boolean useCurrentGPX) {
 		List<SelectedGpxFile> selectedGPXFiles = mapActivity.getMyApplication().getSelectedGpxHelper()
 				.getSelectedGPXFiles();
-		GPXFile gpxFile = null;
+		final List<GPXFile> gpxFiles = new ArrayList<GPXFile>();
 		for (SelectedGpxFile gs : selectedGPXFiles) {
 			if (!gs.isShowCurrentTrack() && !gs.notShowNavigationDialog) {
 				if (gs.getGpxFile().hasRtePt() || gs.getGpxFile().hasTrkpt()) {
-					gpxFile = gs.getGpxFile();
-					break;
+					gpxFiles.add(gs.getGpxFile());
 				}
 			}
 		}
-		final GPXFile f = gpxFile;
-		if (gpxFile != null && !useCurrentGPX) {
 
+		if (gpxFiles.size() > 0 && !useCurrentGPX) {
 			Builder bld = new AlertDialog.Builder(mapActivity);
-			bld.setMessage(R.string.use_displayed_track_for_navigation);
-			bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					enterRoutePlanningModeImpl(f, from, fromName);
-				}
-			});
+			if (gpxFiles.size() == 1){
+				bld.setMessage(R.string.use_displayed_track_for_navigation);
+				bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						enterRoutePlanningModeImpl(gpxFiles.get(0), from, fromName);
+					}
+				});
+			} else {
+				bld.setTitle(R.string.navigation_over_track);
+				ArrayAdapter<GPXFile> adapter =new ArrayAdapter<GPXFile>(mapActivity, R.layout.drawer_list_item, gpxFiles){
+					@Override
+					public View getView(int position, View convertView, ViewGroup parent) {
+						if (convertView == null){
+							convertView = mapActivity.getLayoutInflater().inflate(R.layout.drawer_list_item, null);
+						}
+						String path = getItem(position).path;
+						String name = path.substring(path.lastIndexOf("/") + 1,path.length());
+						((TextView)convertView.findViewById(R.id.title)).setText(name);
+						convertView.findViewById(R.id.icon).setVisibility(View.GONE);
+						convertView.findViewById(R.id.check_item).setVisibility(View.GONE);
+						return convertView;
+					}
+				};
+				bld.setAdapter(adapter, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						enterRoutePlanningModeImpl(gpxFiles.get(i), from, fromName);
+					}
+				});
+			}
+
 			bld.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -430,7 +447,7 @@ public class MapActivityActions implements DialogProvider {
 			});
 			bld.show();
 		} else {
-			enterRoutePlanningModeImpl(useCurrentGPX ? f : null, from, fromName);
+			enterRoutePlanningModeImpl(useCurrentGPX ? gpxFiles.get(0) : null, from, fromName);
 		}
 	}
 	
@@ -606,6 +623,10 @@ public class MapActivityActions implements DialogProvider {
 				}
 			});
 		}
+		refreshDrawer();
+	}
+
+	public void refreshDrawer(){
 		switch (currentDrawer){
 			case MAIN_MENU:
 				prepareOptionsMenu(createMainOptionsMenu());

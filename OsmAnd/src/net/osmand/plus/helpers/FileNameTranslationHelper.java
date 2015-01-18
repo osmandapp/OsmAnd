@@ -3,13 +3,13 @@ package net.osmand.plus.helpers;
 import android.content.Context;
 import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
 import java.lang.reflect.Field;
 
 /**
- * Created by Barsik on 07.07.2014.
+ * Created by Barsik
+ * on 07.07.2014.
  */
 public class FileNameTranslationHelper {
 
