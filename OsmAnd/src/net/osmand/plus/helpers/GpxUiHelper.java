@@ -141,7 +141,8 @@ public class GpxUiHelper {
 			if(showCurrentGpx){
 				allGpxList.add(0, activity.getString(R.string.show_current_gpx_title));
 			}
-			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, allGpxList, selectedGpxList, multipleChoice);
+			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, allGpxList, selectedGpxList, multipleChoice,
+					showCurrentGpx);
 
 			return createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, allGpxList, adapter);
 		}
@@ -161,14 +162,16 @@ public class GpxUiHelper {
 				list.add(0, activity.getString(R.string.show_current_gpx_title));
 			}
 
-			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, list, null, multipleChoice);
+			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, list, null, multipleChoice,
+					showCurrentGpx);
 			return createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, list, adapter);
 		}
 		return null;
 	}
 
 	private static ContextMenuAdapter createGpxContextMenuAdapter(Activity activity, List<String> allGpxList,
-																  List<String> selectedGpxList, boolean multipleChoice) {
+																  List<String> selectedGpxList, boolean multipleChoice, 
+																  boolean showCurrentTrack) {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
 		//element position in adapter
 		int i = 0;
@@ -184,16 +187,27 @@ public class GpxUiHelper {
 
 			//if there's some selected files - need to mark them as selected
 			if (selectedGpxList != null) {
-				for (String file : selectedGpxList) {
-					if (file.endsWith(fileName)) {
-						adapter.setSelection(i, 1);
-						break;
-					}
-				}
+				updateSelection(selectedGpxList, showCurrentTrack, adapter, i, fileName);
 			}
 			i++;
 		}
 		return adapter;
+	}
+
+	protected static void updateSelection(List<String> selectedGpxList, boolean showCurrentTrack,
+			final ContextMenuAdapter adapter, int i, String fileName) {
+		if(i == 0 && showCurrentTrack) {
+			if(selectedGpxList.contains("")) {
+				adapter.setSelection(i, 1);
+			}
+		} else {
+			for (String file : selectedGpxList) {
+				if (file.endsWith(fileName)) {
+					adapter.setSelection(i, 1);
+					break;
+				}
+			}
+		}
 	}
 	
 	private static void setDescripionInDialog(final ArrayAdapter<?> adapter, final ContextMenuAdapter cmAdapter, Activity activity,

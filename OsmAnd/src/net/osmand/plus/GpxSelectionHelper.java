@@ -324,7 +324,7 @@ public class GpxSelectionHelper {
 						selectedGPXFiles.add(savingTrackHelper.getCurrentTrack());
 					}
 				}
-			} catch (JSONException e) {
+			} catch (Exception e) {
 				app.getSettings().SELECTED_GPX.set("");
 				e.printStackTrace();
 			}
@@ -337,10 +337,10 @@ public class GpxSelectionHelper {
 			if(s.gpxFile != null && !s.notShowNavigationDialog) {
 				JSONObject obj = new JSONObject();
 				try {
-					if(!Algorithms.isEmpty(s.gpxFile.path)) {
-						obj.put(FILE, s.gpxFile.path);
-					} else {
+					if(s.isShowCurrentTrack()) {
 						obj.put(CURRENT_TRACK, true);
+					} else if(!Algorithms.isEmpty(s.gpxFile.path)) {
+						obj.put(FILE, s.gpxFile.path);
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -410,10 +410,14 @@ public class GpxSelectionHelper {
 			if(gpxFile.tracks.size() > 0) {
 				this.color = gpxFile.tracks.get(0).getColor(0);
 			}
+			processPoints();
+		}
+
+		public void processPoints() {
 			this.processedPointsToDisplay = gpxFile.proccessPoints();
 			if(this.processedPointsToDisplay.isEmpty()) {
 				this.processedPointsToDisplay = gpxFile.processRoutePoints();
-				routePoints = true;
+				routePoints = !this.processedPointsToDisplay.isEmpty();
 			}
 		}
 		
@@ -434,6 +438,11 @@ public class GpxSelectionHelper {
 		}
 		
 		public GPXFile getGpxFile() {
+			return gpxFile;
+		}
+		
+		public GPXFile getModifiableGpxFile() {
+			// call process points after
 			return gpxFile;
 		}
 		

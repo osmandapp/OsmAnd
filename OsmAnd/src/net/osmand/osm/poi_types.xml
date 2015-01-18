@@ -1,0 +1,727 @@
+<?xml version="1.0" ?>
+<poi_types>
+	<poi_category name="shop">
+		<poi_filter name="shop_food">
+			<poi_type name="bakery" tag="shop" value="bakery"></poi_type>
+			<poi_type name="alcohol" tag="shop" value="alcohol"></poi_type>
+			<poi_type name="convenience" tag="shop" value="convenience"></poi_type>
+			<poi_type name="mall" tag="shop" value="mall"></poi_type>
+			<poi_type name="beverages" tag="shop" value="beverages"></poi_type>
+			<poi_type name="butcher" tag="shop" value="butcher"></poi_type>
+			<poi_type name="deli" tag="shop" value="deli"></poi_type>
+			<poi_type name="shop_farm" tag="shop" value="farm"></poi_type>
+			<poi_type name="greengrocer" tag="shop" value="greengrocer"></poi_type>
+			<poi_type name="seafood" tag="shop" value="seafood"></poi_type>
+			<poi_type name="confectionery" tag="shop" value="confectionery"></poi_type>
+			<poi_type name="ice_cream" tag="shop" value="ice_cream"></poi_type>
+			<poi_type name="supermarket" tag="shop" value="supermarket"></poi_type>
+			<poi_type name="shop_tea" tag="shop" value="tea"></poi_type>
+			<poi_type name="dairy" tag="shop" value="dairy"></poi_type>
+			<poi_type name="vending_machine" tag="amenity" value="vending_machine"></poi_type>
+		</poi_filter>
+		<poi_type name="bookshop" tag="shop" value="books"></poi_type>
+		<poi_type name="bicycle_shop" tag="shop" value="bicycle"></poi_type>
+		<poi_type name="mall" tag="shop" value="mall"></poi_type>
+		<poi_type name="anime_shop" tag="shop" value="anime"></poi_type>
+		<poi_type name="antiques_shop" tag="shop" value="antiques"></poi_type>
+		<poi_type name="art_shop" tag="shop" value="art"></poi_type>
+		<poi_type name="baby_goods" tag="shop" value="baby_goods"></poi_type>
+		<poi_type name="bag_shop" tag="shop" value="bag"></poi_type>
+		<poi_type name="bathroom_furnishing_shop" tag="shop" value="bathroom_furnishing"></poi_type>
+		<poi_type name="bed_shop" tag="shop" value="bed"></poi_type>
+		<poi_type name="boutique" tag="shop" value="boutique"></poi_type>
+		<poi_type name="carpet_shop" tag="shop" value="carpet"></poi_type>
+		<poi_type name="charity" tag="shop" value="charity"></poi_type>
+		<poi_type name="chemist_shop" tag="shop" value="chemist"></poi_type>
+		<poi_type name="clothes_shop" tag="shop" value="clothes"></poi_type>
+		<poi_type name="children_clothes_shop" tag="shop" value="clothes" tag2="clothes" value2="children"></poi_type>
+		<poi_type name="shoes" tag="shop" value="shoes"></poi_type>
+		<poi_type name="computer_shop" tag="shop" value="computer"></poi_type>
+		<poi_type name="copyshop" tag="shop" value="copyshop"></poi_type>
+		<poi_type name="curtain_shop" tag="shop" value="curtain"></poi_type>
+		<poi_type name="fabric_shop" tag="shop" value="fabric"></poi_type>
+		<poi_type name="bedding_shop" tag="shop" value="bedding"></poi_type>
+		<poi_type name="dive_shop" tag="shop" value="dive"></poi_type>
+		<poi_type name="doityourself_shop" tag="shop" value="doityourself"></poi_type>
+		<poi_type name="erotic_shop" tag="shop" value="erotic"></poi_type>
+		<poi_type name="fishing_shop" tag="shop" value="fishing"></poi_type>
+		<poi_type name="florist" tag="shop" value="florist"></poi_type>
+		<poi_type name="frame_shop" tag="shop" value="frame"></poi_type>
+		<poi_type name="furniture_shop" tag="shop" value="furniture"></poi_type>
+		<poi_type name="garden_centre" tag="shop" value="garden_centre"></poi_type>
+		<poi_type name="gas_shop" tag="shop" value="gas"></poi_type>
+		<poi_type name="general_shop" tag="shop" value="general"></poi_type>
+		<poi_type name="gift_shop" tag="shop" value="gift"></poi_type>
+		<poi_type name="glaziery_shop" tag="shop" value="glaziery"></poi_type>
+		<poi_type name="hardware_shop" tag="shop" value="hardware"></poi_type>
+		<poi_type name="hearing_aids_shop" tag="shop" value="hearing_aids"></poi_type>
+		<poi_type name="herbalist" tag="shop" value="herbalist"></poi_type>
+		<poi_type name="hifi_shop" tag="shop" value="hifi"></poi_type>
+		<poi_type name="houseware_shop" tag="shop" value="houseware"></poi_type>
+		<poi_type name="hunting_shop" tag="shop" value="hunting"></poi_type>
+		<poi_type name="interior_decoration_shop" tag="shop" value="interior_decoration"></poi_type>
+		<poi_type name="jewelry_shop" tag="shop" value="jewelry"></poi_type>
+		<poi_type name="kiosk" tag="shop" value="kiosk"></poi_type>
+		<poi_type name="kitchen_shop" tag="shop" value="kitchen"></poi_type>
+		<poi_type name="mobile_phone_shop" tag="shop" value="mobile_phone"></poi_type>
+		<poi_type name="motorcycle_shop" tag="shop" value="motorcycle"></poi_type>
+		<poi_type name="musical_instrument_shop" tag="shop" value="musical_instrument"></poi_type>
+		<poi_type name="newsagent_shop" tag="shop" value="newsagent"></poi_type>
+		<poi_type name="optician_shop" tag="shop" value="optician"></poi_type>
+		<poi_type name="organic_shop" tag="shop" value="organic"></poi_type>
+		<poi_type name="outdoor_shop" tag="shop" value="outdoor"></poi_type>
+		<poi_type name="paint_shop" tag="shop" value="paint"></poi_type>
+		<poi_type name="pet_shop" tag="shop" value="pet"></poi_type>
+		<poi_type name="radiotechnics_shop" tag="shop" value="radiotechnics"></poi_type>
+		<poi_type name="second_hand" tag="shop" value="second_hand"></poi_type>
+		<poi_type name="ship_chandler" tag="shop" value="ship_chandler"></poi_type>
+		<poi_type name="sports_shop" tag="shop" value="sports"></poi_type>
+		<poi_type name="stationery_shop" tag="shop" value="stationery"></poi_type>
+		<poi_type name="tableware_shop" tag="shop" value="tableware"></poi_type>
+		<poi_type name="ticket_shop" tag="shop" value="ticket"></poi_type>
+		<poi_type name="tobacco_shop" tag="shop" value="tobacco"></poi_type>
+		<poi_type name="toys_shop" tag="shop" value="toys"></poi_type>
+		<poi_type name="trade_shop" tag="shop" value="trade"></poi_type>
+		<poi_type name="vacuum_cleaner_shop" tag="shop" value="vacuum_cleaner"></poi_type>
+		<poi_type name="variety_store" tag="shop" value="variety_store"></poi_type>
+		<poi_type name="video_shop" tag="shop" value="video"></poi_type>
+		<poi_type name="window_blind_shop" tag="shop" value="window_blind"></poi_type>
+		<poi_type name="supermarket" tag="shop" value="supermarket"></poi_type>
+		<poi_type name="department_store" tag="shop" value="department_store"></poi_type>
+		<poi_type name="electronics_shop" tag="shop" value="electronics"></poi_type>
+		<poi_type name="car_shop" tag="shop" value="car"></poi_type>
+		<poi_type name="car_parts_shop" tag="shop" value="car_parts"></poi_type>
+		<poi_type name="atv_shop" tag="shop" value="atv"></poi_type>
+		<poi_type name="pawnbroker" tag="shop" value="pawnbroker"></poi_type>
+		<poi_type name="cosmetics_shop" tag="shop" value="cosmetics"></poi_type>
+		<poi_type name="marketplace" tag="amenity" value="marketplace"></poi_type>
+		<poi_type name="sewing_shop" tag="shop" value="sewing"></poi_type>
+	</poi_category>
+	<poi_category name="emergency">
+		<poi_type name="police" tag="amenity" value="police"></poi_type>
+		<poi_type name="fire_station" tag="amenity" value="fire_station"></poi_type>
+		<poi_type name="emergency_phone" tag="emergency" value="phone"></poi_type>
+		<poi_type name="fire_hydrant" tag="emergency" value="fire_hydrant"></poi_type>
+		<poi_type name="fire_extinguisher" tag="emergency" value="fire_extinguisher"></poi_type>
+		<poi_type name="fire_flapper" tag="emergency" value="fire_flapper"></poi_type>
+		<poi_type name="fire_hose" tag="emergency" value="fire_hose"></poi_type>
+		<poi_type name="fire_water_pond" tag="emergency" value="fire_water_pond"></poi_type>
+		<poi_type name="grit_bin" tag="amenity" value="grit_bin"></poi_type>
+		<poi_type name="ambulance_station" tag="emergency" value="ambulance_station"></poi_type>
+		<poi_type name="ses_station" tag="emergency" value="ses_station"></poi_type>
+		<poi_type name="emergency_access_point" tag="highway" value="emergency_access_point"></poi_type>
+	</poi_category>
+	<poi_category name="transportation">
+		<poi_filter name="road_obstacles">
+			<poi_type name="ford" tag="highway" value="ford"></poi_type>
+			<poi_type name="mountain_pass" tag="mountain_pass" value="yes"></poi_type>
+			<poi_type name="gate" tag="barrier" value="gate"></poi_type>
+			<poi_type name="city_wall" tag="barrier" value="city_wall"></poi_type>
+			<poi_type name="lift_gate" tag="barrier" value="lift_gate"></poi_type>
+			<poi_type name="toll_booth" tag="barrier" value="toll_booth"></poi_type>
+			<poi_type name="border_control" tag="barrier" value="border_control"></poi_type>
+			<poi_type name="traffic_calming_bump" tag="traffic_calming" value="bump"></poi_type>
+			<poi_type name="traffic_calming_hump" tag="traffic_calming" value="hump"></poi_type>
+			<poi_type name="traffic_calming_cushion" tag="traffic_calming" value="cushion"></poi_type>
+			<poi_type name="traffic_calming_chicane" tag="traffic_calming" value="chicane"></poi_type>
+			<poi_type name="traffic_calming_rumble_strip" tag="traffic_calming" value="rumble_strip"></poi_type>
+			<poi_type name="traffic_calming_table" tag="traffic_calming" value="table"></poi_type>
+			<poi_type name="traffic_calming_choker" tag="traffic_calming" value="choker"></poi_type>
+			<poi_type name="traffic_signals" tag="highway" value="traffic_signals"></poi_type>
+		</poi_filter>
+		<poi_filter name="personal_transport">
+			<poi_type name="car_repair" tag="shop" value="car_repair"></poi_type>
+			<poi_type name="service_tyres" tag="shop" value="car_repair" tag2="service" value2="tyres"></poi_type>
+			<poi_type name="vehicle_inspection" tag="amenity" value="vehicle_inspection"></poi_type>
+			<poi_type name="car_wash" tag="amenity" value="car_wash"></poi_type>
+			<poi_type name="fuel" tag="amenity" value="fuel"></poi_type>
+			<poi_type name="charging_station" tag="amenity" value="charging_station"></poi_type>
+			<poi_type name="vehicle_ramp" tag="amenity" value="vehicle_ramp"></poi_type>
+			<poi_type name="compressed_air" tag="amenity" value="compressed_air"></poi_type>
+			<poi_type name="parking" tag="amenity" value="parking"></poi_type>
+			<poi_type name="motorcycle_parking" tag="amenity" value="motorcycle_parking"></poi_type>
+			<poi_type name="parking_entrance" tag="amenity" value="parking_entrance"></poi_type>
+			<poi_type name="garages" tag="landuse" value="garages"></poi_type>
+		</poi_filter>
+		<poi_filter name="public_transport">
+			<poi_type name="public_transport_platform" tag="public_transport" value="platform"></poi_type>
+			<poi_type name="public_transport_platform_bus" tag="public_transport" value="platform" tag2="route" value2="bus"></poi_type>
+			<poi_type name="public_transport_platform_trolleybus" tag="public_transport" value="platform" tag2="route" value2="trolleybus"></poi_type>
+			<poi_type name="bus_stop" tag="highway" value="bus_stop"></poi_type>
+			<poi_type name="public_transport_platform_tram" tag="public_transport" value="platform" tag2="route" value2="tram"></poi_type>
+			<poi_type name="tram_stop" tag="railway" value="tram_stop"></poi_type>
+			<poi_type name="public_transport_station" tag="public_transport" value="station"></poi_type>
+			<poi_type name="bus_station" tag="amenity" value="bus_station"></poi_type>
+			<poi_type name="railway_station" tag="railway" value="station"></poi_type>
+			<poi_type name="railway_platform" tag="railway" value="platform"></poi_type>
+			<poi_type name="railway_halt" tag="railway" value="halt"></poi_type>
+			<poi_type name="subway_entrance" tag="railway" value="subway_entrance"></poi_type>
+			<poi_type name="subway_station" tag="railway" value="station" tag2="station" value2="subway"></poi_type>
+			<poi_type name="taxi" tag="amenity" value="taxi"></poi_type>
+			<poi_type name="funicular" tag="railway" value="funicular"></poi_type>
+		</poi_filter>
+		<poi_filter name="air_transport">
+			<poi_type name="airport" tag="aeroway" value="aerodrome"></poi_type>
+			<poi_type name="helipad" tag="aeroway" value="helipad"></poi_type>
+			<poi_type name="runway" tag="aeroway" value="runway"></poi_type>
+			<poi_type name="aeroway_terminal" tag="aeroway" value="terminal"></poi_type>
+			<poi_type name="aeroway_gate" tag="aeroway" value="gate"></poi_type>
+		</poi_filter>
+		<poi_filter name="water_transport">
+			<poi_type name="slipway" tag="leisure" value="slipway"></poi_type>
+			<poi_type name="ferry_terminal" tag="amenity" value="ferry_terminal"></poi_type>
+			<poi_type name="lighthouse" tag="man_made" value="lighthouse"></poi_type>
+		</poi_filter>
+		<poi_filter name="bicycle_transport">
+			<poi_type name="bicycle_rental" tag="amenity" value="bicycle_rental"></poi_type>
+			<poi_type name="bicycle_parking" tag="amenity" value="bicycle_parking"></poi_type>
+		</poi_filter>
+		<poi_filter name="aerialway_transport">
+			<poi_type name="aerialway_station" tag="aerialway" value="station"></poi_type>
+			<poi_type name="aerialway_cable_car" tag="aerialway" value="cable_car"></poi_type>
+			<poi_type name="aerialway_gondola" tag="aerialway" value="gondola"></poi_type>
+			<poi_type name="aerialway_chair_lift" tag="aerialway" value="chair_lift"></poi_type>
+			<poi_type name="aerialway_t_bar" tag="aerialway" value="t-bar"></poi_type>
+			<poi_type name="aerialway_j_bar" tag="aerialway" value="j-bar"></poi_type>
+			<poi_type name="aerialway_platter" tag="aerialway" value="platter"></poi_type>
+			<poi_type name="aerialway_mixed_lift" tag="aerialway" value="mixed_lift"></poi_type>
+			<poi_type name="aerialway_drag_lift" tag="aerialway" value="drag_lift"></poi_type>
+			<poi_type name="aerialway_rope_tow" tag="aerialway" value="rope_tow"></poi_type>
+			<poi_type name="aerialway_goods" tag="aerialway" value="goods"></poi_type>
+			<poi_type name="aerialway_magic_carpet" tag="aerialway" value="magic_carpet"></poi_type>
+		</poi_filter>
+		<poi_filter name="transport_constructions">
+			<poi_type name="tunnel" tag="man_made" value="tunnel"></poi_type>
+			<poi_type name="bridge" tag="man_made" value="bridge"></poi_type>
+		</poi_filter>
+		<poi_type name="speed_camera" tag="highway" value="speed_camera"></poi_type>
+		<poi_type name="turning_circle" tag="highway" value="turning_circle"></poi_type>
+		<poi_type name="motorway_junction" tag="highway" value="motorway_junction"></poi_type>
+	</poi_category>
+	<poi_category name="man_made">
+		<poi_filter name="transport_constructions">
+			<poi_type name="tunnel" tag="man_made" value="tunnel"></poi_type>
+			<poi_type name="bridge" tag="man_made" value="bridge"></poi_type>
+		</poi_filter>
+		<poi_filter name="water_supply">
+			<poi_type name="water_well" tag="man_made" value="water_well"></poi_type>
+			<poi_type name="standpipe" tag="man_made" value="standpipe"></poi_type>
+			<poi_type name="water_works" tag="man_made" value="water_works"></poi_type>
+			<poi_type name="boatyard" tag="waterway" value="boatyard"></poi_type>
+			<poi_type name="wastewater_plant" tag="man_made" value="wastewater_plant"></poi_type>
+			<poi_type name="water_tower" tag="man_made" value="water_tower"></poi_type>
+			<poi_type name="lock_gate" tag="waterway" value="lock_gate"></poi_type>
+			<poi_type name="waterway_turning_point" tag="waterway" value="turning_point"></poi_type>
+			<poi_type name="weir" tag="waterway" value="weir"></poi_type>
+			<poi_type name="dam" tag="man_made" value="dam"></poi_type>
+			<poi_type name="mill_pond" tag="waterway" value="mill_pond"></poi_type>
+			<poi_type name="water_mill" tag="man_made" value="water_mill"></poi_type>
+			<poi_type name="salt_pond" tag="landuse" value="salt_pond"></poi_type>
+		</poi_filter>
+		<poi_filter name="power">
+			<poi_type name="power_substation" tag="power" value="substation"></poi_type>
+			<poi_type name="power_transformer" tag="power" value="transformer"></poi_type>
+			<poi_type name="power_plant" tag="plant:output:electricity" value="*" tag2="power" value2="plant"></poi_type>
+			<poi_type name="power_generator" tag="power" value="generator" tag2="generator:output:electricity" value2="*"></poi_type>
+		</poi_filter>
+		<poi_filter name="communications">
+			<poi_type name="post_office" tag="amenity" value="post_office"></poi_type>
+			<poi_type name="post_box" tag="amenity" value="post_box"></poi_type>
+			<poi_type name="telephone" tag="amenity" value="telephone"></poi_type>
+			<poi_type name="emergency_phone" tag="emergency" value="phone"></poi_type>
+			<poi_type name="communication_tower" tag="man_made" value="communications_tower"></poi_type>
+			<poi_type name="telephone_exchange" tag="man_made" value="telephone_exchange"></poi_type>
+		</poi_filter>
+		<poi_filter name="trash_disposal">
+			<poi_type name="recycling" tag="amenity" value="recycling"></poi_type>
+			<poi_type name="landfill" tag="landuse" value="landfill"></poi_type>
+			<poi_type name="waste_disposal" tag="amenity" value="waste_disposal"></poi_type>
+			<poi_type name="waste_basket" tag="amenity" value="waste_basket"></poi_type>
+		</poi_filter>
+		<poi_type name="pier" tag="man_made" value="pier"></poi_type>
+		<poi_type name="surveillance" tag="man_made" value="surveillance"></poi_type>
+		<poi_type name="observatory" tag="man_made" value="observatory"></poi_type>
+		<poi_type name="astronomical_observatory" tag="man_made" value="observatory" tag2="observatory:type" value2="astronomical"></poi_type>
+		<poi_type name="tower" tag="man_made" value="tower"></poi_type>
+		<poi_type name="mast" tag="man_made" value="mast"></poi_type>
+		<poi_type name="radar" tag="man_made" value="monitoring_station" tag2="monitoring_station" value2="radar"></poi_type>
+		<poi_type name="construction" tag="landuse" value="construction"></poi_type>
+		<poi_type name="works" tag="man_made" value="works"></poi_type>
+		<poi_type name="mineshaft" tag="man_made" value="mineshaft"></poi_type>
+		<poi_type name="adit" tag="man_made" value="adit"></poi_type>
+		<poi_type name="petroleum_well" tag="man_made" value="petroleum_well"></poi_type>
+		<poi_type name="survey_point" tag="man_made" value="survey_point"></poi_type>
+		<poi_type name="windmill" tag="man_made" value="windmill"></poi_type>
+		<poi_type name="quarry" tag="landuse" value="quarry"></poi_type>
+		<poi_type name="vineyard" tag="landuse" value="vineyard"></poi_type>
+		<poi_type name="orchard" tag="landuse" value="orchard"></poi_type>
+		<poi_type name="cricket_nets" tag="sport" value="cricket_nets"></poi_type>
+	</poi_category>
+	<poi_category name="education">
+		<poi_type name="driving_school" tag="amenity" value="driving_school"></poi_type>
+		<poi_type name="school" tag="amenity" value="school"></poi_type>
+		<poi_type name="kindergarten" tag="amenity" value="kindergarten"></poi_type>
+		<poi_type name="library" tag="amenity" value="library"></poi_type>
+		<poi_type name="college" tag="amenity" value="college"></poi_type>
+		<poi_type name="university" tag="amenity" value="university"></poi_type>
+	</poi_category>
+	<poi_category name="administrative">
+		<poi_type name="social_facility" tag="amenity" value="social_facility"></poi_type>
+		<poi_type name="police" tag="amenity" value="police"></poi_type>
+		<poi_type name="courthouse" tag="amenity" value="courthouse"></poi_type>
+		<poi_type name="prison" tag="amenity" value="prison"></poi_type>
+		<poi_type name="register_office" tag="amenity" value="register_office"></poi_type>
+		<poi_type name="embassy" tag="amenity" value="embassy"></poi_type>
+		<poi_type name="government" tag="office" value="government"></poi_type>
+		<poi_type name="bailiff" tag="office" value="government" tag2="government" value2="bailiff"></poi_type>
+		<poi_type name="prosecutor" tag="office" value="government" tag2="government" value2="prosecutor"></poi_type>
+		<poi_type name="pension_fund" tag="office" value="government" tag2="government" value2="pension_fund"></poi_type>
+		<poi_type name="migration" tag="office" value="government" tag2="government" value2="migration"></poi_type>
+		<poi_type name="tax_inspection" tag="office" value="government" tag2="government" value2="taxes"></poi_type>
+		<poi_type name="administrative_office" tag="office" value="administrative"></poi_type>
+		<poi_type name="town_hall" tag="amenity" value="townhall"></poi_type>
+		<poi_type name="customs" tag="amenity" value="customs"></poi_type>
+		<poi_type name="city" tag="place" value="city"></poi_type>
+		<poi_type name="town" tag="place" value="town"></poi_type>
+		<poi_type name="village" tag="place" value="village"></poi_type>
+		<poi_type name="hamlet" tag="place" value="hamlet"></poi_type>
+		<poi_type name="isolated_dwelling" tag="place" value="isolated_dwelling"></poi_type>
+		<poi_type name="suburb" tag="place" value="suburb"></poi_type>
+		<poi_type name="neighbourhood" tag="place" value="neighbourhood"></poi_type>
+		<poi_type name="locality" tag="place" value="locality"></poi_type>
+		<poi_type name="place_allotments" tag="place" value="allotments"></poi_type>
+		<poi_type name="place_farm" tag="place" value="farm"></poi_type>
+	</poi_category>
+	<poi_category name="healthcare">
+		<poi_type name="pharmacy" tag="amenity" value="pharmacy"></poi_type>
+		<poi_type name="hospital" tag="amenity" value="hospital"></poi_type>
+		<poi_type name="doctors" tag="amenity" value="doctors"></poi_type>
+		<poi_type name="clinic" tag="amenity" value="clinic"></poi_type>
+		<poi_type name="first_aid" tag="amenity" value="first_aid"></poi_type>
+		<poi_type name="dentist" tag="amenity" value="dentist"></poi_type>
+		<poi_type name="nursing_home" tag="amenity" value="nursing_home"></poi_type>
+		<poi_type name="baby_hatch" tag="amenity" value="baby_hatch"></poi_type>
+		<poi_type name="veterinary" tag="amenity" value="veterinary"></poi_type>
+		<poi_type name="ambulance_station" tag="emergency" value="ambulance_station"></poi_type>
+		<poi_type name="sanatorium" tag="amenity" value="sanatorium"></poi_type>
+		<poi_type name="healthcare_alternative" tag="healthcare" value="alternative"></poi_type>
+		<poi_type name="audiologist" tag="healthcare" value="audiologist"></poi_type>
+		<poi_type name="blood_bank" tag="healthcare" value="blood_bank"></poi_type>
+		<poi_type name="healthcare_centre" tag="healthcare" value="centre"></poi_type>
+		<poi_type name="midwife" tag="healthcare" value="midwife"></poi_type>
+		<poi_type name="occupational_therapist" tag="healthcare" value="occupational_therapist"></poi_type>
+		<poi_type name="optometrist" tag="healthcare" value="optometrist"></poi_type>
+		<poi_type name="physiotherapist" tag="healthcare" value="physiotherapist"></poi_type>
+		<poi_type name="podiatrist" tag="healthcare" value="podiatrist"></poi_type>
+		<poi_type name="psychotherapist" tag="healthcare" value="psychotherapist"></poi_type>
+		<poi_type name="healthcare_rehabilitation" tag="healthcare" value="rehabilitation"></poi_type>
+		<poi_type name="speech_therapist" tag="healthcare" value="speech_therapist"></poi_type>
+		<poi_type name="healthcare_yes" tag="healthcare" value="yes"></poi_type>
+	</poi_category>
+	<poi_category name="office">
+		<poi_type name="company" tag="office" value="company"></poi_type>
+		<poi_type name="insurance" tag="office" value="insurance"></poi_type>
+		<poi_type name="estate_agent" tag="office" value="estate_agent"></poi_type>
+		<poi_type name="lawyer" tag="office" value="lawyer"></poi_type>
+		<poi_type name="telecommunication_office" tag="office" value="telecommunication"></poi_type>
+		<poi_type name="travel_agent" tag="office" value="travel_agent"></poi_type>
+		<poi_type name="ngo" tag="office" value="ngo"></poi_type>
+		<poi_type name="town_hall" tag="amenity" value="townhall"></poi_type>
+		<poi_type name="accountant" tag="office" value="accountant"></poi_type>
+		<poi_type name="employment_agency" tag="office" value="employment_agency"></poi_type>
+		<poi_type name="research_office" tag="office" value="research"></poi_type>
+		<poi_type name="it_office" tag="office" value="it"></poi_type>
+		<poi_type name="newspaper_office" tag="office" value="newspaper"></poi_type>
+		<poi_type name="architect_office" tag="office" value="architect"></poi_type>
+		<poi_type name="advertising_agency" tag="office" value="advertising_agency"></poi_type>
+		<poi_type name="educational_institution" tag="office" value="educational_institution"></poi_type>
+		<poi_type name="studio" tag="amenity" value="studio"></poi_type>
+		<poi_type name="bookmaker" tag="shop" value="bookmaker"></poi_type>
+	</poi_category>
+	<poi_category name="sport">
+		<poi_type name="stadium" tag="leisure" value="stadium"></poi_type>
+		<poi_type name="sports_centre" tag="leisure" value="sports_centre"></poi_type>
+		<poi_type name="golf_course" tag="leisure" value="golf_course"></poi_type>
+		<poi_type name="ice_rink" tag="leisure" value="ice_rink"></poi_type>
+		<poi_type name="pitch" tag="leisure" value="pitch"></poi_type>
+		<poi_type name="leisure_track" tag="leisure" value="track"></poi_type>
+		<poi_type name="running_track" tag="sport" value="running" tag2="leisure" value2="track"></poi_type>
+		<poi_type name="bicycle_track" tag="sport" value="cycling" tag2="leisure" value2="track"></poi_type>
+		<poi_type name="horse_track" tag="sport" value="horse_racing" tag2="leisure" value2="track"></poi_type>
+		<poi_type name="raceway" tag="highway" value="raceway"></poi_type>
+		<poi_type name="club_sport" tag="club" value="sport"></poi_type>
+		<poi_type name="9pin" tag="sport" value="9pin"></poi_type>
+		<poi_type name="10pin" tag="sport" value="10pin"></poi_type>
+		<poi_type name="archery" tag="sport" value="archery"></poi_type>
+		<poi_type name="athletics" tag="sport" value="athletics"></poi_type>
+		<poi_type name="american_football" tag="sport" value="american_football"></poi_type>
+		<poi_type name="australian_football" tag="sport" value="australian_football"></poi_type>
+		<poi_type name="base" tag="sport" value="base"></poi_type>
+		<poi_type name="baseball" tag="sport" value="baseball"></poi_type>
+		<poi_type name="basketball" tag="sport" value="basketball"></poi_type>
+		<poi_type name="beachvolleyball" tag="sport" value="beachvolleyball"></poi_type>
+		<poi_type name="bmx_sport" tag="sport" value="bmx"></poi_type>
+		<poi_type name="boules" tag="sport" value="boules"></poi_type>
+		<poi_type name="bowls" tag="sport" value="bowls"></poi_type>
+		<poi_type name="canadian_football" tag="sport" value="canadian_football"></poi_type>
+		<poi_type name="canoe" tag="sport" value="canoe"></poi_type>
+		<poi_type name="chess" tag="sport" value="chess"></poi_type>
+		<poi_type name="climbing" tag="sport" value="climbing"></poi_type>
+		<poi_type name="cricket" tag="sport" value="cricket"></poi_type>
+		<poi_type name="croquet" tag="sport" value="croquet"></poi_type>
+		<poi_type name="cycling" tag="sport" value="cycling"></poi_type>
+		<poi_type name="diving" tag="sport" value="diving"></poi_type>
+		<poi_type name="scuba_diving" tag="sport" value="scuba_diving"></poi_type>
+		<poi_type name="dog_racing" tag="sport" value="dog_racing"></poi_type>
+		<poi_type name="equestrian" tag="sport" value="equestrian"></poi_type>
+		<poi_type name="football" tag="sport" value="football"></poi_type>
+		<poi_type name="golf" tag="sport" value="golf"></poi_type>
+		<poi_type name="gymnastics" tag="sport" value="gymnastics"></poi_type>
+		<poi_type name="handball" tag="sport" value="handball"></poi_type>
+		<poi_type name="hockey" tag="sport" value="hockey"></poi_type>
+		<poi_type name="horse_racing" tag="sport" value="horse_racing"></poi_type>
+		<poi_type name="ice_skating" tag="sport" value="ice_skating"></poi_type>
+		<poi_type name="ice_stock" tag="sport" value="ice_stock"></poi_type>
+		<poi_type name="korfbal" tag="sport" value="korfball"></poi_type>
+		<poi_type name="motor_sport" tag="sport" value="motor"></poi_type>
+		<poi_type name="multi_sport" tag="sport" value="multi"></poi_type>
+		<poi_type name="orienteering" tag="sport" value="orienteering"></poi_type>
+		<poi_type name="paddle_tennis" tag="sport" value="paddle_tennis"></poi_type>
+		<poi_type name="paragliding" tag="sport" value="paragliding"></poi_type>
+		<poi_type name="pelota" tag="sport" value="pelota"></poi_type>
+		<poi_type name="racquet" tag="sport" value="racquet"></poi_type>
+		<poi_type name="roller_skating" tag="sport" value="roller_skating"></poi_type>
+		<poi_type name="rowing" tag="sport" value="rowing"></poi_type>
+		<poi_type name="rugby" tag="sport" value="rugby"></poi_type>
+		<poi_type name="sailing" tag="sport" value="sailing"></poi_type>
+		<poi_type name="shooting" tag="sport" value="shooting"></poi_type>
+		<poi_type name="skating" tag="sport" value="skating"></poi_type>
+		<poi_type name="skateboard" tag="sport" value="skateboard"></poi_type>
+		<poi_type name="skiing" tag="sport" value="skiing"></poi_type>
+		<poi_type name="soccer" tag="sport" value="soccer"></poi_type>
+		<poi_type name="surfing" tag="sport" value="surfing"></poi_type>
+		<poi_type name="swimming" tag="sport" value="swimming"></poi_type>
+		<poi_type name="table_tennis" tag="sport" value="table_tennis"></poi_type>
+		<poi_type name="tennis" tag="sport" value="tennis"></poi_type>
+		<poi_type name="toboggan" tag="sport" value="toboggan"></poi_type>
+		<poi_type name="volleyball" tag="sport" value="volleyball"></poi_type>
+	</poi_category>
+	<poi_category name="tourism">
+		<poi_filter name="sights">
+			<poi_type name="museum" tag="tourism" value="museum"></poi_type>
+			<poi_type name="memorial" tag="historic" value="memorial"></poi_type>
+			<poi_type name="artwork" tag="tourism" value="artwork"></poi_type>
+			<poi_type name="archaeological_site" tag="historic" value="archaeological_site"></poi_type>
+			<poi_type name="palaeontological_site" tag="geological" value="palaeontological_site"></poi_type>
+			<poi_type name="battlefield" tag="historic" value="battlefield"></poi_type>
+			<poi_type name="boundary_stone" tag="historic" value="boundary_stone"></poi_type>
+			<poi_type name="cannon" tag="historic" value="cannon"></poi_type>
+			<poi_type name="castle" tag="historic" value="castle"></poi_type>
+			<poi_type name="city_gate" tag="historic" value="city_gate"></poi_type>
+			<poi_type name="fort" tag="historic" value="fort"></poi_type>
+			<poi_type name="fountain" tag="amenity" value="fountain"></poi_type>
+			<poi_type name="ruins_historic" tag="historic" value="ruins"></poi_type>
+			<poi_type name="rune_stone" tag="historic" value="rune_stone"></poi_type>
+			<poi_type name="wreck" tag="historic" value="wreck"></poi_type>
+			<poi_type name="ship_historic" tag="historic" value="ship"></poi_type>
+			<poi_type name="mine_historic" tag="historic" value="mine"></poi_type>
+			<poi_type name="monument" tag="historic" value="monument"></poi_type>
+			<poi_type name="viewpoint" tag="tourism" value="viewpoint"></poi_type>
+			<poi_type name="zoo" tag="tourism" value="zoo"></poi_type>
+			<poi_type name="aquarium" tag="tourism" value="aquarium"></poi_type>
+			<poi_type name="theme_park" tag="tourism" value="theme_park"></poi_type>
+			<poi_type name="lighthouse" tag="man_made" value="lighthouse"></poi_type>
+		</poi_filter>
+		<poi_filter name="attraction">
+			<poi_type name="attraction" tag="tourism" value="attraction"></poi_type>
+			<poi_type name="amusement_ride" tag="tourism" value="amusement_ride"></poi_type>
+			<poi_type name="attraction_animal" tag="tourism" value="animal"></poi_type>
+			<poi_type name="ferris_wheel" tag="tourism" value="big_wheel"></poi_type>
+			<poi_type name="carousel" tag="tourism" value="carousel"></poi_type>
+			<poi_type name="maze" tag="tourism" value="maze"></poi_type>
+			<poi_type name="roller_coaster" tag="tourism" value="roller_coaster"></poi_type>
+			<poi_type name="slide" tag="tourism" value="slide"></poi_type>
+			<poi_type name="summer_toboggan" tag="tourism" value="summer_toboggan"></poi_type>
+			<poi_type name="swing_carousel" tag="tourism" value="swing_carousel"></poi_type>
+			<poi_type name="attraction_train" tag="tourism" value="train"></poi_type>
+			<poi_type name="water_slide" tag="tourism" value="water_slide"></poi_type>
+		</poi_filter>
+		<poi_filter name="lodging">
+			<poi_type name="hotel" tag="tourism" value="hotel"></poi_type>
+			<poi_type name="guest_house" tag="tourism" value="guest_house"></poi_type>
+			<poi_type name="hostel" tag="tourism" value="hostel"></poi_type>
+			<poi_type name="motel" tag="tourism" value="motel"></poi_type>
+			<poi_type name="alpine_hut" tag="tourism" value="alpine_hut"></poi_type>
+			<poi_type name="chalet" tag="tourism" value="chalet"></poi_type>
+		</poi_filter>
+		<poi_type name="place_of_worship" tag="amenity" value="place_of_worship"></poi_type>
+		<poi_type name="place_of_worship_christian" tag="religion" value="christian" tag2="amenity" value2="place_of_worship"></poi_type>
+		<poi_type name="place_of_worship_jewish" tag="religion" value="jewish" tag2="amenity" value2="place_of_worship"></poi_type>
+		<poi_type name="place_of_worship_muslim" tag="religion" value="muslim" tag2="amenity" value2="place_of_worship"></poi_type>
+		<poi_type name="place_of_worship_sikh" tag="religion" value="sikh" tag2="amenity" value2="place_of_worship"></poi_type>
+		<poi_type name="place_of_worship_buddhist" tag="religion" value="buddhist" tag2="amenity" value2="place_of_worship"></poi_type>
+		<poi_type name="place_of_worship_hindu" tag="religion" value="hindu" tag2="amenity" value2="place_of_worship"></poi_type>
+		<poi_type name="place_of_worship_shinto" tag="religion" value="shinto" tag2="amenity" value2="place_of_worship"></poi_type>
+		<poi_type name="place_of_worship_taoist" tag="religion" value="taoist" tag2="amenity" value2="place_of_worship"></poi_type>
+		<poi_type name="monastery" tag="amenity" value="monastery"></poi_type>
+		<poi_type name="historic_monastery" tag="historic" value="monastery"></poi_type>
+		<poi_type name="wayside_cross" tag="historic" value="wayside_cross"></poi_type>
+		<poi_type name="wayside_shrine" tag="historic" value="wayside_shrine"></poi_type>
+		<poi_type name="tourism_information" tag="tourism" value="information"></poi_type>
+		<poi_type name="clock" tag="amenity" value="clock"></poi_type>
+		<poi_type name="travel_agent" tag="office" value="travel_agent"></poi_type>
+		<poi_type name="viewpoint" tag="tourism" value="viewpoint"></poi_type>
+		<poi_type name="camp_site" tag="tourism" value="camp_site"></poi_type>
+		<poi_type name="caravan_site" tag="tourism" value="caravan_site"></poi_type>
+		<poi_type name="picnic_site" tag="tourism" value="picnic_site"></poi_type>
+		<poi_type name="spring" tag="natural" value="spring"></poi_type>
+		<poi_type name="hot_spring" tag="natural" value="hot_spring"></poi_type>
+		<poi_type name="cemetery" tag="landuse" value="cemetery"></poi_type>
+		<poi_type name="grave_yard" tag="amenity" value="grave_yard"></poi_type>
+		<poi_type name="shelter" tag="amenity" value="shelter"></poi_type>
+		<poi_type name="club_tourism" tag="club" value="tourism"></poi_type>
+		<poi_type name="funicular" tag="railway" value="funicular"></poi_type>
+		<poi_type name="resort" tag="leisure" value="resort"></poi_type>
+	</poi_category>
+	<poi_category name="leisure">
+		<poi_filter name="clubs">
+			<poi_type name="club_art" tag="club" value="art"></poi_type>
+			<poi_type name="club_astronomy" tag="club" value="astronomy"></poi_type>
+			<poi_type name="club_computer" tag="club" value="computer"></poi_type>
+			<poi_type name="club_board_games" tag="club" value="board_games"></poi_type>
+			<poi_type name="club_motorcycle" tag="club" value="motorcycle"></poi_type>
+			<poi_type name="club_sport" tag="club" value="sport"></poi_type>
+			<poi_type name="club_game" tag="club" value="game"></poi_type>
+			<poi_type name="club_automobile" tag="club" value="automobile"></poi_type>
+			<poi_type name="club_chess" tag="club" value="chess"></poi_type>
+			<poi_type name="club_cinema" tag="club" value="cinema"></poi_type>
+			<poi_type name="club_fan" tag="club" value="fan"></poi_type>
+			<poi_type name="club_fishing" tag="club" value="fishing"></poi_type>
+			<poi_type name="club_veterans" tag="club" value="veterans"></poi_type>
+			<poi_type name="club_linux" tag="club" value="linux"></poi_type>
+			<poi_type name="club_theatre" tag="club" value="theatre"></poi_type>
+			<poi_type name="club_history" tag="club" value="history"></poi_type>
+			<poi_type name="club_music" tag="club" value="music"></poi_type>
+			<poi_type name="club_ethnic" tag="club" value="ethnic"></poi_type>
+			<poi_type name="club_nature" tag="club" value="nature"></poi_type>
+			<poi_type name="club_photography" tag="club" value="photography"></poi_type>
+			<poi_type name="club_hunting" tag="club" value="hunting"></poi_type>
+			<poi_type name="club_shooting" tag="club" value="shooting"></poi_type>
+			<poi_type name="club_tourism" tag="club" value="tourism"></poi_type>
+			<poi_type name="club_charity" tag="club" value="charity"></poi_type>
+		</poi_filter>
+		<poi_type name="library" tag="amenity" value="library"></poi_type>
+		<poi_type name="arts_centre" tag="amenity" value="arts_centre"></poi_type>
+		<poi_type name="cinema" tag="amenity" value="cinema"></poi_type>
+		<poi_type name="casino" tag="amenity" value="casino"></poi_type>
+		<poi_type name="community_centre" tag="amenity" value="community_centre"></poi_type>
+		<poi_type name="social_centre" tag="amenity" value="social_centre"></poi_type>
+		<poi_type name="theatre" tag="amenity" value="theatre"></poi_type>
+		<poi_type name="circus" tag="theatre:genre" value="circus" tag2="amenity" value2="theatre"></poi_type>
+		<poi_type name="museum" tag="tourism" value="museum"></poi_type>
+		<poi_type name="dance_floor" tag="leisure" value="dance"></poi_type>
+		<poi_type name="zoo" tag="tourism" value="zoo"></poi_type>
+		<poi_type name="nightclub" tag="amenity" value="nightclub"></poi_type>
+		<poi_type name="stripclub" tag="amenity" value="stripclub"></poi_type>
+		<poi_type name="beach_resort" tag="leisure" value="beach_resort"></poi_type>
+		<poi_type name="dog_park" tag="leisure" value="dog_park"></poi_type>
+		<poi_type name="fishing_place" tag="leisure" value="fishing"></poi_type>
+		<poi_type name="hunting_stand" tag="amenity" value="hunting_stand"></poi_type>
+		<poi_type name="harbour" tag="harbour" value="yes"></poi_type>
+		<poi_type name="marina" tag="leisure" value="marina"></poi_type>
+		<poi_type name="slipway" tag="leisure" value="slipway"></poi_type>
+		<poi_type name="miniature_golf" tag="leisure" value="miniature_golf"></poi_type>
+		<poi_type name="playground" tag="leisure" value="playground"></poi_type>
+		<poi_type name="swimming_pool" tag="leisure" value="swimming_pool"></poi_type>
+		<poi_type name="water_park" tag="leisure" value="water_park"></poi_type>
+		<poi_type name="park" tag="leisure" value="park"></poi_type>
+		<poi_type name="sauna" tag="amenity" value="sauna"></poi_type>
+		<poi_type name="theme_park" tag="tourism" value="theme_park"></poi_type>
+	</poi_category>
+	<poi_category name="food">
+		<poi_type name="cafe" tag="amenity" value="cafe"></poi_type>
+		<poi_type name="biergarten" tag="amenity" value="biergarten"></poi_type>
+		<poi_type name="restaurant" tag="amenity" value="restaurant"></poi_type>
+		<poi_type name="fast_food" tag="amenity" value="fast_food"></poi_type>
+		<poi_type name="bar" tag="amenity" value="bar"></poi_type>
+		<poi_type name="pub" tag="amenity" value="pub"></poi_type>
+		<poi_type name="food_court" tag="amenity" value="food_court"></poi_type>
+		<poi_type name="drinking_water" tag="amenity" value="drinking_water"></poi_type>
+		<poi_type name="barbecue" tag="amenity" value="bbq"></poi_type>
+	</poi_category>
+	<poi_category name="service">
+		<poi_filter name="craft">
+			<poi_type name="agricultural_engines_craft" tag="craft" value="agricultural_engines"></poi_type>
+			<poi_type name="basket_maker" tag="craft" value="basket_maker"></poi_type>
+			<poi_type name="beekeeper" tag="craft" value="beekeeper"></poi_type>
+			<poi_type name="blacksmith" tag="craft" value="blacksmith"></poi_type>
+			<poi_type name="brewery" tag="craft" value="brewery"></poi_type>
+			<poi_type name="boatbuilder" tag="craft" value="boatbuilder"></poi_type>
+			<poi_type name="bookbinder" tag="craft" value="bookbinder"></poi_type>
+			<poi_type name="carpenter" tag="craft" value="carpenter"></poi_type>
+			<poi_type name="carpet_layer" tag="craft" value="carpet_layer"></poi_type>
+			<poi_type name="caterer" tag="craft" value="caterer"></poi_type>
+			<poi_type name="clockmaker" tag="craft" value="clockmaker"></poi_type>
+			<poi_type name="dressmaker" tag="craft" value="dressmaker"></poi_type>
+			<poi_type name="electrician" tag="craft" value="electrician"></poi_type>
+			<poi_type name="gardener" tag="craft" value="gardener"></poi_type>
+			<poi_type name="glaziery_craft" tag="craft" value="glaziery"></poi_type>
+			<poi_type name="handicraft" tag="craft" value="handicraft"></poi_type>
+			<poi_type name="hvac_craft" tag="craft" value="hvac"></poi_type>
+			<poi_type name="insulation_craft" tag="craft" value="insulation"></poi_type>
+			<poi_type name="jeweller" tag="craft" value="jeweller"></poi_type>
+			<poi_type name="locksmith" tag="craft" value="locksmith"></poi_type>
+			<poi_type name="key_cutter" tag="craft" value="key_cutter"></poi_type>
+			<poi_type name="metal_construction_craft" tag="craft" value="metal_construction"></poi_type>
+			<poi_type name="optician" tag="craft" value="optician"></poi_type>
+			<poi_type name="painter" tag="craft" value="painter"></poi_type>
+			<poi_type name="parquet_layer" tag="craft" value="parquet_layer"></poi_type>
+			<poi_type name="photographer" tag="craft" value="photographer"></poi_type>
+			<poi_type name="photographic_laboratory" tag="craft" value="photographic_laboratory"></poi_type>
+			<poi_type name="plasterer" tag="craft" value="plasterer"></poi_type>
+			<poi_type name="plumber" tag="craft" value="plumber"></poi_type>
+			<poi_type name="pottery_craft" tag="craft" value="pottery"></poi_type>
+			<poi_type name="rigger" tag="craft" value="rigger"></poi_type>
+			<poi_type name="roofer" tag="craft" value="roofer"></poi_type>
+			<poi_type name="saddler" tag="craft" value="saddler"></poi_type>
+			<poi_type name="sailmaker" tag="craft" value="sailmaker"></poi_type>
+			<poi_type name="sawmill" tag="craft" value="sawmill"></poi_type>
+			<poi_type name="scaffolder" tag="craft" value="scaffolder"></poi_type>
+			<poi_type name="sculptor" tag="craft" value="sculptor"></poi_type>
+			<poi_type name="shoemaker" tag="craft" value="shoemaker"></poi_type>
+			<poi_type name="stand_builder" tag="craft" value="stand_builder"></poi_type>
+			<poi_type name="stonemason" tag="craft" value="stonemason"></poi_type>
+			<poi_type name="sun_protection_craft" tag="craft" value="sun_protection"></poi_type>
+			<poi_type name="sweep" tag="craft" value="sweep"></poi_type>
+			<poi_type name="tailor" tag="craft" value="tailor"></poi_type>
+			<poi_type name="tiler" tag="craft" value="tiler"></poi_type>
+			<poi_type name="tinsmith" tag="craft" value="tinsmith"></poi_type>
+			<poi_type name="upholsterer" tag="craft" value="upholsterer"></poi_type>
+			<poi_type name="watchmaker" tag="craft" value="watchmaker"></poi_type>
+			<poi_type name="window_construction" tag="craft" value="window_construction"></poi_type>
+		</poi_filter>
+		<poi_type name="funeral_directors" tag="shop" value="funeral_directors"></poi_type>
+		<poi_type name="currencyexchange" tag="amenity" value="bureau_de_change"></poi_type>
+		<poi_type name="driving_school" tag="amenity" value="driving_school"></poi_type>
+		<poi_type name="computer_craft" tag="craft" value="computer"></poi_type>
+		<poi_type name="post_office" tag="amenity" value="post_office"></poi_type>
+		<poi_type name="post_box" tag="amenity" value="post_box"></poi_type>
+		<poi_type name="beauty_salon" tag="shop" value="beauty"></poi_type>
+		<poi_type name="beauty_salon_nails" tag="shop" value="beauty" tag2="beauty" value2="nails"></poi_type>
+		<poi_type name="hairdresser" tag="shop" value="hairdresser"></poi_type>
+		<poi_type name="massage" tag="shop" value="massage"></poi_type>
+		<poi_type name="tattoo" tag="shop" value="tattoo"></poi_type>
+		<poi_type name="dry_cleaning" tag="shop" value="dry_cleaning"></poi_type>
+		<poi_type name="laundry" tag="shop" value="laundry"></poi_type>
+		<poi_type name="car_rental" tag="amenity" value="car_rental"></poi_type>
+		<poi_type name="car_sharing" tag="amenity" value="car_sharing"></poi_type>
+		<poi_type name="bicycle_rental" tag="amenity" value="bicycle_rental"></poi_type>
+		<poi_type name="boat_sharing" tag="amenity" value="boat_sharing"></poi_type>
+		<poi_type name="dock" tag="waterway" value="dock"></poi_type>
+		<poi_type name="charging_station" tag="amenity" value="charging_station"></poi_type>
+		<poi_type name="toilets" tag="amenity" value="toilets"></poi_type>
+		<poi_type name="telephone" tag="amenity" value="telephone"></poi_type>
+		<poi_type name="sauna" tag="amenity" value="sauna"></poi_type>
+		<poi_type name="brothel" tag="amenity" value="brothel"></poi_type>
+		<poi_type name="recycling" tag="amenity" value="recycling"></poi_type>
+		<poi_type name="mortuary" tag="amenity" value="mortuary"></poi_type>
+		<poi_type name="crematorium" tag="amenity" value="crematorium"></poi_type>
+		<poi_type name="internet_cafe" tag="amenity" value="internet_cafe"></poi_type>
+	</poi_category>
+	<poi_category name="finance">
+		<poi_type name="bank" tag="amenity" value="bank"></poi_type>
+		<poi_type name="atm" tag="amenity" value="atm"></poi_type>
+		<poi_type name="money_lender" tag="shop" value="money_lender"></poi_type>
+		<poi_type name="pawnbroker" tag="shop" value="pawnbroker"></poi_type>
+		<poi_type name="currencyexchange" tag="amenity" value="bureau_de_change"></poi_type>
+		<poi_type name="accountant" tag="office" value="accountant"></poi_type>
+		<poi_type name="bitcoin_yes" tag="bitcoin" value="yes"></poi_type>
+	</poi_category>
+	<poi_category name="natural">
+		<poi_type name="cave_entrance" tag="natural" value="cave_entrance"></poi_type>
+		<poi_type name="peak" tag="natural" value="peak"></poi_type>
+		<poi_type name="saddle" tag="natural" value="saddle"></poi_type>
+		<poi_type name="volcano" tag="natural" value="volcano"></poi_type>
+		<poi_type name="glacier" tag="natural" value="glacier"></poi_type>
+		<poi_type name="crater" tag="natural" value="crater"></poi_type>
+		<poi_type name="ridge" tag="natural" value="ridge"></poi_type>
+		<poi_type name="sinkhole" tag="natural" value="sinkhole"></poi_type>
+		<poi_type name="waterfall" tag="natural" value="waterfall"></poi_type>
+		<poi_type name="rapids" tag="waterway" value="rapids"></poi_type>
+		<poi_type name="spring" tag="natural" value="spring"></poi_type>
+		<poi_type name="hot_spring" tag="natural" value="hot_spring"></poi_type>
+		<poi_type name="geyser" tag="natural" value="geyser"></poi_type>
+		<poi_type name="river" tag="waterway" value="river"></poi_type>
+		<poi_type name="stream" tag="waterway" value="stream"></poi_type>
+		<poi_type name="stone" tag="natural" value="stone"></poi_type>
+		<poi_type name="cape" tag="natural" value="cape"></poi_type>
+		<poi_type name="beach" tag="natural" value="beach"></poi_type>
+		<poi_type name="bay" tag="natural" value="bay"></poi_type>
+		<poi_type name="fjord" tag="natural" value="fjord"></poi_type>
+		<poi_type name="reef" tag="natural" value="reef"></poi_type>
+		<poi_type name="wetland" tag="natural" value="wetland"></poi_type>
+		<poi_type name="nature_reserve" tag="leisure" value="nature_reserve"></poi_type>
+		<poi_type name="strait" tag="natural" value="strait"></poi_type>
+		<poi_type name="island" tag="place" value="island"></poi_type>
+		<poi_type name="islet" tag="place" value="islet"></poi_type>
+	</poi_category>
+	<poi_category name="seamark">
+		<poi_type name="seamark_anchorage" tag="seamark" value="anchorage"></poi_type>
+		<poi_type name="seamark_anchor_berth" tag="seamark" value="anchor_berth"></poi_type>
+		<poi_type name="seamark_beacon" tag="man_made" value="beacon"></poi_type>
+		<poi_type name="seamark_beacon_cardinal" tag="seamark" value="beacon_cardinal"></poi_type>
+		<poi_type name="seamark_beacon_lateral" tag="seamark" value="beacon_lateral"></poi_type>
+		<poi_type name="seamark_beacon_safe_water" tag="seamark" value="beacon_safe_water"></poi_type>
+		<poi_type name="seamark_beacon_special_purpose" tag="seamark" value="beacon_special_purpose"></poi_type>
+		<poi_type name="seamark_berth" tag="seamark" value="berth"></poi_type>
+		<poi_type name="seamark_building" tag="seamark" value="building"></poi_type>
+		<poi_type name="seamark_bridge" tag="seamark" value="bridge"></poi_type>
+		<poi_type name="seamark_buoy_cardinal" tag="seamark" value="buoy_cardinal"></poi_type>
+		<poi_type name="seamark_buoy_installation" tag="seamark" value="buoy_installation"></poi_type>
+		<poi_type name="seamark_buoy_isolated_danger" tag="seamark" value="buoy_isolated_danger"></poi_type>
+		<poi_type name="seamark_buoy_lateral" tag="seamark" value="buoy_lateral"></poi_type>
+		<poi_type name="seamark_buoy_safe_water" tag="seamark" value="buoy_safe_water"></poi_type>
+		<poi_type name="seamark_buoy_special_purpose" tag="seamark" value="buoy_special_purpose"></poi_type>
+		<poi_type name="seamark_daymark" tag="seamark" value="daymark"></poi_type>
+		<poi_type name="seamark_distance_mark" tag="seamark" value="distance_mark"></poi_type>
+		<poi_type name="seamark_dry_dock" tag="seamark" value="dry_dock"></poi_type>
+		<poi_type name="seamark_dyke" tag="seamark" value="dyke"></poi_type>
+		<poi_type name="seamark_floating_dock" tag="seamark" value="floating_dock"></poi_type>
+		<poi_type name="seamark_fog_signal" tag="seamark" value="fog_signal"></poi_type>
+		<poi_type name="seamark_harbour_basin" tag="seamark" value="harbour_basin"></poi_type>
+		<poi_type name="seamark_harbour" tag="seamark" value="harbour"></poi_type>
+		<poi_type name="seamark_landmark" tag="seamark" value="landmark"></poi_type>
+		<poi_type name="seamark_light" tag="seamark" value="light"></poi_type>
+		<poi_type name="seamark_light_major" tag="seamark" value="light_major"></poi_type>
+		<poi_type name="seamark_light_minor" tag="seamark" value="light_minor"></poi_type>
+		<poi_type name="seamark_light_float" tag="seamark" value="light_float"></poi_type>
+		<poi_type name="seamark_light_vessel" tag="seamark" value="light_vessel"></poi_type>
+		<poi_type name="seamark_mooring" tag="seamark" value="mooring"></poi_type>
+		<poi_type name="seamark_notice" tag="seamark" value="notice"></poi_type>
+		<poi_type name="seamark_pile" tag="seamark" value="pile"></poi_type>
+		<poi_type name="seamark_radar_transponder" tag="seamark" value="radar_transponder"></poi_type>
+		<poi_type name="seamark_radio_station" tag="seamark" value="radio_station"></poi_type>
+		<poi_type name="seamark_signal_station_traffic" tag="seamark" value="signal_station_traffic"></poi_type>
+		<poi_type name="seamark_signal_station_warning" tag="seamark" value="signal_station_warning"></poi_type>
+		<poi_type name="seamark_small_craft_facility" tag="seamark" value="small_craft_facility"></poi_type>
+		<poi_type name="seamark_topmark" tag="seamark" value="topmark"></poi_type>
+		<poi_type name="seamark_rock" tag="seamark" value="rock"></poi_type>
+		<poi_type name="seamark_wreck" tag="seamark" value="wreck"></poi_type>
+	</poi_category>
+	<poi_category name="military">
+		<poi_type name="military" tag="landuse" value="military"></poi_type>
+		<poi_type name="military_airfield" tag="military" value="airfield"></poi_type>
+		<poi_type name="military_bunker" tag="building" value="bunker"></poi_type>
+		<poi_type name="military_barracks" tag="military" value="barracks"></poi_type>
+		<poi_type name="military_danger_area" tag="military" value="danger_area"></poi_type>
+		<poi_type name="military_range" tag="military" value="range"></poi_type>
+		<poi_type name="military_naval_base" tag="military" value="naval_base"></poi_type>
+		<poi_type name="military_nuclear_explosion_site" tag="military" value="nuclear_explosion_site"></poi_type>
+	</poi_category>
+	<poi_category name="entertainment">
+	</poi_category>
+	<poi_category name="osmwiki">
+	</poi_category>
+	<poi_category name="user_defined_other">
+	</poi_category>
+</poi_types>
