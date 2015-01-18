@@ -1887,4 +1887,5 @@
     <string name="speak_pedestrian">Anunciar pasos de peatones</string>
     <string name="rendering_value__name">Por defecto</string>
 	<string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
+	<string name="navigation_over_track">¿Empezar navegación sobre traza?</string>
 	</resources>
