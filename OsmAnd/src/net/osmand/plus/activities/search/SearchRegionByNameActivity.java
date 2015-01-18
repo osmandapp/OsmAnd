@@ -9,6 +9,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.resources.RegionAddressRepository;
 import android.app.Activity;
 import android.os.Bundle;
@@ -56,7 +57,8 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 	
 	@Override
 	public String getText(RegionAddressRepository obj) {
-		return obj.getName().replace('_', ' ');
+		return FileNameTranslationHelper.getFileName(this,
+				getMyApplication().getResourceManager().getOsmandRegions(), obj.getName());
 	}
 
 	@Override

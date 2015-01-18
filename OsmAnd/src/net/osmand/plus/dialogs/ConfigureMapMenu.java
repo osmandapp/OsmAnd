@@ -115,7 +115,7 @@ public class ConfigureMapMenu {
 		}
 
 		@Override
-		public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+		public boolean onContextMenuClick(final ArrayAdapter<?> adapter, int itemId, final int pos, boolean isChecked) {
 			OsmandSettings settings = ma.getMyApplication().getSettings();
 			if (itemId == R.string.layer_poi) {
 				if (isChecked) {
@@ -130,7 +130,14 @@ public class ConfigureMapMenu {
 				if (ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles()) {
 					ma.getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
 				} else {
-					ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
+					AlertDialog dialog = ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
+					dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+						@Override
+						public void onCancel(DialogInterface dialogInterface) {
+							cm.setSelection(pos, 0);
+							adapter.notifyDataSetChanged();
+						}
+					});
 				}
 				// TODO: tick mark of "Show GPX" needs to be synced after return form sub-selection screen (user may or may not have selected files!)
 			} else if (itemId == R.string.layer_transport_route) {

@@ -596,6 +596,8 @@ public class OsmandApplication extends Application {
 					} catch (RuntimeException e) {
 						warnings.add(e.getMessage());
 					}
+				} else {
+					savingTrackHelper.loadGpxFromDatabase();
 				}
 			}
 			if(getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()){
