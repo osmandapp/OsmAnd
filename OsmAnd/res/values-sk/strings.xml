@@ -2028,4 +2028,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="routing_attr_no_new_routing_description">Nepoužívať pravidlá výpočtu trasy zavedené vo verzii 1.9</string>
     <string name="speak_pedestrian">Oznamovať priechody pre chodcov</string>
     <string name="rendering_value__name">Predvolené</string>
+	<string name="save_track_to_gpx_globally_headline">Záznam trasy v prípade potreby</string>
 	</resources>
