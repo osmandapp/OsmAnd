@@ -1895,4 +1895,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="routing_attr_no_new_routing_name">Ne pas utiliser la version 1.9 des calculs de route</string>
     <string name="speak_pedestrian">Annoncer les passages piéton</string>
     <string name="rendering_value__name">Par défaut</string>
+	<string name="avoid_roads_msg">Vous pouvez changer l\'itinéraire en sélectionnant les routes à éviter</string>
+    <string name="navigation_over_track">Démarrer la navigation sur les pistes ?</string>
+	<string name="save_track_to_gpx_globally_headline">Enregistrement de traces à la demande</string>
 	</resources>
