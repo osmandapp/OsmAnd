@@ -639,7 +639,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if (info.gpx != null && info.gpx.showCurrentTrack) {
 				catName = info.name;
 			} else {
-				catName = app.getString(R.string.local_indexes_cat_gpx) + " " + info.subfolder;
+				//local_indexes_cat_gpx now obsolete in new UI screen which shows only GPX data
+				//catName = app.getString(R.string.local_indexes_cat_gpx) + " " + info.subfolder;
+				catName = "" + info.subfolder;
 			}
 			int found = -1;
 			// search from end
