@@ -113,7 +113,7 @@
   <string name="init_native_library">Inicializando biblioteca nativa…</string>
   <string name="choose_auto_follow_route">Auto-centrar vista de mapa</string>
   <string name="choose_auto_follow_route_descr">Tiempo hasta que la vista del mapa vuelve a sincronizarse con la posición actual</string>
-  <string name="auto_follow_route_never">Nunca</string>
+  <string name="auto_follow_route_never">Nunca (pulsa la flecha azul para iniciar manualmente el guiado)</string>
   <string name="auto_follow_route_navigation">Auto-centrar sólo nav</string>
   <string name="auto_follow_route_navigation_descr">Auto-centra la vista del mapa sólo durante la navegación.</string>
   <string name="auto_follow_location_enabled">Auto-centrar vista del mapa activado.</string>
@@ -746,7 +746,7 @@
   <string name="poi_dialog_comment_default">Cambiando PDI</string>
   <string name="poi_dialog_other_tags_message">Se preservan las otras etiquetas</string>
   <string name="default_buttons_commit">Confirmar</string>
-  <string name="default_buttons_reset">Reiniciar</string>
+  <string name="default_buttons_reset">Limpiar</string>
   <string name="filter_current_poiButton">Filtro</string>
   <string name="edit_filter_delete_menu_item">Borrar</string>
   <string name="edit_filter_save_as_menu_item">Guardar como</string>
@@ -1566,7 +1566,7 @@
    	<string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
 	<string name="share_route_subject">Ruta compartida vía OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato inválido: %s</string>
-<string name="keep_informing_never">Nunca</string>
+<string name="keep_informing_never">Sólo manualmente (pulsa la flecha)</string>
     <string name="keep_informing_descr">Re-anunciar instrucciones de navegación a intervalos regulares</string>
     <string name="keep_informing">Repetir instrucciones de navegación</string>
 	<string name="arrival_distance">Anuncio de llegada</string>
@@ -1842,7 +1842,7 @@
     <string name="rendering_attr_busRoutes_name">Rutas de autobús</string>
     <string name="rendering_category_hide">Ocultar</string>
     <string name="wake_on_voice">Encender pantalla</string>
-    <string name="wake_on_voice_descr">Encender la pantalla del dispositivo al aproximarse a un giro</string>
+    <string name="wake_on_voice_descr">Enciende la pantalla del dispositivo al aproximarse a un giro</string>
     <string name="lock_screen_request_explanation">%1$s necesita este permiso para apagar la pantalla para la característica de ahorro energético.</string>
     <string name="wake_on_voice_never">Nunca</string>
     <string name="advanced_settings">Avanzado</string>
@@ -1886,4 +1886,5 @@
     <string name="navigate_point_northing">Al norte</string>
     <string name="speak_pedestrian">Anunciar pasos de peatones</string>
     <string name="rendering_value__name">Por defecto</string>
+	<string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
 	</resources>

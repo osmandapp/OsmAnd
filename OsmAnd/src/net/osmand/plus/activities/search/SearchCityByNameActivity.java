@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
+//import net.osmand.IProgress;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
@@ -34,13 +35,19 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 
 	@Override
 	protected void reset() {
-		searchVillagesMode = -1;
-		//osmandSettings.setLastSearchedPostcode("", null);
-		//osmandSettings.setLastSearchedCity(0L, "", null);
-		//osmandSettings.setLastSearchedStreet("", null);
-		//osmandSettings.setLastSearchedIntersectedStreet("", null);
-		//osmandSettings.setLastSearchedBuilding("", null);
-		//osmandSettings.setLastSearchedPoint(null);
+		//This is really only a "clear input text field", hence do not reset settings here
+		//searchVillagesMode = -1;
+		//osmandSettings.setLastSearchedCity(-1L, "", null);
+
+		//Issue 2535: Try to reload indexes as workaround
+		//            This creates the issue immediately after tapping "Reset", but then going back to the searchAdressFragment screen resets the issue and everything works(!?)
+		//new AsyncTask<Void, Void, List<String>>() {
+		//	@Override
+		//	protected List<String> doInBackground(Void... params) {
+		//		return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
+		//	}
+		//}.execute();
+
 		super.reset();
 	}
 
@@ -58,7 +65,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 			public void onClick(View v) {
 				searchVillagesMode = 1;
 				research();
-				//searchVillages.setVisibility(View.GONE);
+				searchVillages.setVisibility(View.GONE);
 			}
 		});
 		getListView().addFooterView(ll);
@@ -186,7 +193,8 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	@Override
 	public void itemSelected(City obj) {
 		settings.setLastSearchedCity(obj.getId(), obj.getName(region.useEnglishNames()), obj.getLocation());
-		// Hardy: Looks like disabling the next 3 lines fixes the issue of the Search City dialogue becoming non-functional after the first tapping on a found village (not city) ... (while selected village is still remembered on the dialog for future reference!)
+		// Issue 2535: Disabling the next 3 lines fixes the issue of the Search City dialogue becoming non-functional after the first tapping on a found village (not city)
+		//             but then the issue is still present once a neighborhood street is selected on the Search Street screen
 		//if (region.getCityById(obj.getId(), obj.getName(region.useEnglishNames())) == null) {
 		//	region.addCityToPreloadedList((City) obj);
 		//}

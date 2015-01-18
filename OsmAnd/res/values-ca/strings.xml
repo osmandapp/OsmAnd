@@ -234,7 +234,7 @@
 <string name="index_name_tts_voice">Indicadors de veu (sintetitzats amb TTS, recomanat)</string>
 <string name="native_library_not_supported">La llibreria nativa no està suportada en aquest dispositiu.</string>
 <string name="init_native_library">S\'està inicialitzant la llibreria nativa…</string>
-<string name="auto_follow_route_never">Mai</string>
+<string name="auto_follow_route_never">Mai (premeu la fletxa blava per iniciar manualment la navegació)</string>
 <string name="pref_vector_rendering">Opcions específiques de renderització dels vectors</string>
 <string name="delete_confirmation_msg">Voleu suprimir %1$s?</string>
 <string name="city_type_town">Poble</string>
@@ -942,7 +942,7 @@
 	<string name="osb_comment_menu_item">Afegeix un comentari</string>
 	<string name="osb_comment_dialog_success">El comentari s\'ha afegit correctament</string>
 	<string name="poi_remove_success">El PDI s\'ha eliminat correctament</string>
-	<string name="default_buttons_reset">Reinicia</string>
+	<string name="default_buttons_reset">Neteja</string>
 	<string name="edit_filter_delete_dialog_title">Voleu eliminar el filtre seleccionat?</string>
 	<string name="tip_day_night_mode_t_v2">"L\'aspecte dels mapes vectorials pot canviar entre dia (clar) i nit (fosc). Els colors de nit són més segurs per la conducció nocturna.
 \n\nPodeu assignar un criteri pel canvi de dia/nit a «Menú» -&gt; «Configuració del mapa» -&gt;«Mapa dia/nit».
@@ -1526,7 +1526,7 @@
 	<string name="share_route_subject">Ruta compartida via OsmAnd</string>
 	<string name="arrival_distance">Anunci d\'arribada</string>
     <string name="arrival_distance_descr">Quan aviat vol l\'anunci d\'arribada?</string>
-    <string name="keep_informing_never">Mai</string>
+    <string name="keep_informing_never">Només manualment (premeu fletxa)</string>
     <string name="keep_informing_descr">Anunci d\'instruccions de navegació a intervals regulars</string>
     <string name="keep_informing">Repetir instruccions de navegació</string>
 	<string name="navigation_intent_invalid">Format no vàlid: %s</string>
@@ -1817,7 +1817,7 @@
     <string name="impassable_road">Evita carreteres…</string>
     <string name="rendering_category_hide">Amaga</string>
     <string name="wake_on_voice">Activa la pantalla</string>
-    <string name="wake_on_voice_descr">Activa la pantalla del dispositiu en aproximar-se a un gir</string>
+    <string name="wake_on_voice_descr">Activa la pantalla del dispositiu (si no ho està ) en aproximar-se a un gir</string>
     <string name="lock_screen_request_explanation">"%1$s necessita  aquest permís per la funcionalitat de posar la pantalla en mode d\'estalvi d\'energia."</string>
     <string name="wake_on_voice_never">Mai</string>
     <string name="advanced_settings">Avançat</string>

@@ -879,7 +879,9 @@ public class MapActivityActions implements DialogProvider {
 			}).reg();
 		}
 		final OsmAndLocationProvider loc = app.getLocationProvider();
-		if (app.getTargetPointsHelper().getPointToNavigate() != null || loc.getLocationSimulation().isRouteAnimating()) {
+		// Shorten menus by showing this only to control ongoing simulation. Simulation start happens via Waypoint dialog.
+		//if (app.getTargetPointsHelper().getPointToNavigate() != null || loc.getLocationSimulation().isRouteAnimating()) {
+		if (app.getTargetPointsHelper().getPointToNavigate() != null && loc.getLocationSimulation().isRouteAnimating()) {
 			if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
 				optionsMenuHelper
 						.item(loc.getLocationSimulation().isRouteAnimating() ? R.string.animate_route_off : R.string.animate_route)

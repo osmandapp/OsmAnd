@@ -27,10 +27,8 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 
 	@Override
 	protected void reset() {
-		//osmandSettings.setLastSearchedStreet("", null);
+		//This is really only a "clear input text field", hence do not reset settings here
 		//osmandSettings.setLastSearchedIntersectedStreet("", null);
-		//osmandSettings.setLastSearchedBuilding("", null);
-		//osmandSettings.setLastSearchedPoint(null);
 		super.reset();
 	}
 

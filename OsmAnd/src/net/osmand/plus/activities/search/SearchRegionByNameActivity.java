@@ -32,13 +32,8 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 
 	@Override
 	protected void reset() {
+		//This is really only a "clear input text field", hence do not reset settings here
 		//osmandSettings.setLastSearchedRegion("", null);
-		//osmandSettings.setLastSearchedPostcode("", null);
-		//osmandSettings.setLastSearchedCity(0L, "", null);
-		//osmandSettings.setLastSearchedStreet("", null);
-		//osmandSettings.setLastSearchedIntersectedStreet("", null);
-		//osmandSettings.setLastSearchedBuilding("", null);
-		//osmandSettings.setLastSearchedPoint(null);
 		super.reset();
 	}
 

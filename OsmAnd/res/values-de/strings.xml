@@ -38,6 +38,7 @@
 	<string name="background_service_int_descr">GPS Aufwach-Intervall für Hintergrunddienst</string>
 	<string name="background_service_int">GPS Aufwach-Intervall</string>
 	<string name="save_track_to_gpx_globally">Aufzeichnung in GPX-Datei</string>
+	<string name="save_track_to_gpx_globally_headline">GPX-Aufzeichnung bei Bedarf</string>
 	<string name="save_track_to_gpx_globally_descr">Generelle Positionsaufzeichnung kann man mit der Schaltfläche \'GPX-Aufnahme\' direkt auf dem Kartenbildschirm aktivieren oder deaktivieren</string>
 	<string name="save_current_track">Track jetzt speichern</string>
 	<string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
@@ -370,7 +371,7 @@
 	<string name="init_native_library">Native Bibliothek wird initialisiert…</string>
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
 	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung</string>
-	<string name="auto_follow_route_never">Nie</string>
+	<string name="auto_follow_route_never">Nie (Klick auf blauen Pfeil startet Navigation manuell)</string>
 	<string name="auto_follow_route_navigation">Nachführung nur bei aktiver Navigation</string>
 	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation.</string>
 	<string name="auto_follow_location_enabled">Kartennachführung aktiv.</string>
@@ -1548,7 +1549,7 @@
 	<string name="share_fav">Teilen</string>
 	<string name="share_fav_subject">Über OsmAnd geteilte Favoriten</string>
 	<string name="use_points_as_intermediates">Route zwischen Punkten berechnen</string>
-	<string name="keep_informing_never">Niemals</string>
+	<string name="keep_informing_never">Nur manuell (Klick auf Pfeil)</string>
 	<string name="keep_informing_descr">Navigationsanweisungen in regelmäßigen Abständen wiederholen</string>
 	<string name="keep_informing">Navigationsanweisungen wiederholen</string>
 	<string name="arrival_distance">Zielankündigung</string>
@@ -1974,7 +1975,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_category_others">Sonstiges</string>
     <string name="rendering_attr_tramRoutes_name">Straßenbahnenlinien</string>
     <string name="wake_on_voice">Bildschirm aktivieren</string>
-    <string name="wake_on_voice_descr">Bildschirm bei Navigationsanweisung aktivieren</string>
+    <string name="wake_on_voice_descr">Bildschirm bei Navigationsanweisung aktivieren (falls aus)</string>
     <string name="wake_on_voice_never">Niemals</string>
     <string name="select_impassable_road">Auf Karte auswählen…</string>
     <string name="impassable_road">Straße blockieren…</string>

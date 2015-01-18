@@ -54,8 +54,8 @@
 	<string name="rendering_attr_tramTrainRoutes_name">Tram and train routes</string>
 	<string name="rendering_attr_subwayMode_name">Subway routes</string>
     <string name="lock_screen_request_explanation">%1$s needs this permission to turn off the screen for the power saving feature.</string>
-    <string name="wake_on_voice">Turn on the screen</string>
-    <string name="wake_on_voice_descr">Turn on the device screen when approaching a turn</string>
+    <string name="wake_on_voice">Turn screen on</string>
+    <string name="wake_on_voice_descr">Turn on device screen (if off) when approaching a turn</string>
     <string name="wake_on_voice_never">Never</string>
     <string name="select_impassable_road">Select on map&#8230;</string>
     <string name="impassable_road">Avoid roads&#8230;</string>
@@ -141,6 +141,7 @@
 	<string name="background_service_int">GPS Wake-up interval</string>
 	<string name="enable_sleep_mode">Enable GPS sleep mode</string>
 	<string name="save_track_to_gpx_globally">Log track to GPX file</string>
+	<string name="save_track_to_gpx_globally_headline">On demand track logging</string>
 	<string name="save_track_to_gpx_globally_descr">General position logging to a GPX file can be turned on or off using the GPX recording widget on the map screen</string>
 	<string name="save_current_track_descr">Save current track to SD now</string>
 	<string name="save_current_track">Save current GPX track</string>
@@ -1427,8 +1428,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="init_native_library">Initializing native library&#8230;</string>
 	<string name="choose_auto_follow_route">Auto-center map view</string>
 	<string name="choose_auto_follow_route_descr">Time until map view synchronizes with current position</string>
-	<string name="auto_follow_route_never">Never</string>
-	<string name="keep_informing_never">Never</string>
+	<string name="auto_follow_route_never">Never (tap blue arrow to start guidance manually)</string>
+	<string name="keep_informing_never">Only manually (tap arrow)</string>
     <string name="keep_informing_descr">Re-announce navigation instructions at regular intervals</string>
     <string name="keep_informing">Repeat navigation instructions</string>
 	<string name="auto_follow_route_navigation">Auto-center nav only</string>
@@ -2038,7 +2039,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_dialog_comment_default">POI changing</string>
 	<string name="poi_dialog_other_tags_message">All other tags are preserved</string>
 	<string name="default_buttons_commit">Commit</string>
-	<string name="default_buttons_reset">Reset</string>
+	<string name="default_buttons_reset">Clear</string>
 	<string name="filter_current_poiButton">Filter</string>
 	<string name="edit_filter_delete_menu_item">Delete</string>
 	<string name="edit_filter_save_as_menu_item">Save As</string>
