@@ -809,7 +809,7 @@
   <string name="poi_dialog_comment_default">POI módosítás</string>
   <string name="poi_dialog_other_tags_message">Minden más paraméter megmarad</string>
   <string name="default_buttons_commit">Alkalmaz</string>
-  <string name="default_buttons_reset">Visszaállítás</string>
+  <string name="default_buttons_reset">Törlés</string>
   <string name="filter_current_poiButton">Szűrő</string>
   <string name="edit_filter_delete_menu_item">Töröl</string>
   <string name="edit_filter_save_as_menu_item">Mentés más néven</string>
@@ -1132,7 +1132,7 @@
     <string name="osmand_srtm_long_description_1000_chars">Ez a bővítmény szintvonalakat szolgáltat, amik az OsmAndban offline térképként megjeleníthetőek. A globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, ami a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági Minisztérium, a Trade and Industry (METI) és a Japán Űrügynökség (J-spacesystems) közös projektje.</string>
     <string name="av_widget_action_descr">Válaszd ki a vezérlőgomb alapértelmezett működési módját</string>
     <string name="av_widget_action">Alapértelmezett mód</string>
-    <string name="recording_description">Felvétel %1$s %2$s dátum: %3$s</string>
+    <string name="recording_description">Felvétel %1$s %3$s %2$s</string>
     <string name="srtm_paid_version_msg">Kérlek fontold meg a Szintvonal bővítmény megvásárlását a Play Store-ban, ezzel támogatva a további fejlesztéseket.</string>
     <string name="srtm_paid_version_title">Szintvonal bővítmény</string>
     
@@ -1145,7 +1145,7 @@
     <string name="precise_routing_mode_descr">Pontos útvonaltervező engedélyezése hibamentes, pontos útvonalak tervezéséhez. Jelenleg lassú, kis távolságokra működik.</string>
     <string name="precise_routing_mode">Pontos útvonaltervezés (kísérleti)</string>
     <string name="recording_context_menu_show">Mutat</string>
-    <string name="recording_photo_description">Fénykép %1$s készült: %2$s</string>
+    <string name="recording_photo_description">Fénykép %1$s %2$s</string>
     <string name="av_def_action_picture">Fénykép készítése</string>
     <string name="recording_context_menu_precord">Fénykép készítése</string>
     <string name="dist_control_start">Start</string>
