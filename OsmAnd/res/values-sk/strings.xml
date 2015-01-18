@@ -276,7 +276,7 @@
   <string name="init_native_library">Inicializácia natívnej knižnice…</string>
   <string name="choose_auto_follow_route">Automatické centrovanie</string>
   <string name="choose_auto_follow_route_descr">Čas pokiaľ sa mapové zobrazenie zosynchronizuje s pozíciou</string>
-  <string name="auto_follow_route_never">Nikdy</string>
+  <string name="auto_follow_route_never">Nikdy (použite modrú šípku pre spustenie pokynov)</string>
   <string name="auto_follow_route_navigation">Autom. nasledovanie iba pri navigácii</string>
   <string name="auto_follow_route_navigation_descr">Povoliť autom. nasledovanie pozície iba v režime navigácie.</string>
   <string name="auto_follow_location_enabled">Automatické nasledovanie je povolené.</string>
@@ -950,7 +950,7 @@
   <string name="poi_dialog_comment_default">Zmena POI</string>
   <string name="poi_dialog_other_tags_message">Všetky ostatné tagy ponechané</string>
   <string name="default_buttons_commit">Uložiť</string>
-  <string name="default_buttons_reset">Reset</string>
+  <string name="default_buttons_reset">Vymazať</string>
   <string name="filter_current_poiButton">Filter</string>
   <string name="edit_filter_delete_menu_item">Vymazať</string>
   <string name="edit_filter_save_as_menu_item">Uložiť ako</string>
@@ -1700,7 +1700,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_plugin_description">"OpenStreetMap pokročilé sledovanie naživo, pozrite http://osmo.mobi. Ponúka možnosti sledovania iných zariadení a byť sledovaný. Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania. Anonymné skupiny sú obmedzené na počet dní a pre niektoré funkcie nie je diaľkové ovládanie ani administrátor skupiny. Plne funkčné skupiny sa vytvárajú na webstránke a sú prístupné len registrovaným používateľom. "</string>
     <string name="osmo_plugin_name">OsMo</string>
     <string name="osmo_settings">OpenStreetMap sledovanie</string>
-   	<string name="keep_informing_never">Nikdy</string>
+   	<string name="keep_informing_never">Len ručne (použiť šípku)</string>
     <string name="keep_informing_descr">Opakuj navigačné pokyny v pravidelných intervaloch</string>
     <string name="keep_informing">Opakuj navigačné pokyny</string>
 	<string name="arrival_distance">Oznámenie príjazdu</string>
