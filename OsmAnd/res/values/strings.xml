@@ -54,8 +54,8 @@
 	<string name="rendering_attr_tramTrainRoutes_name">Tram and train routes</string>
 	<string name="rendering_attr_subwayMode_name">Subway routes</string>
     <string name="lock_screen_request_explanation">%1$s needs this permission to turn off the screen for the power saving feature.</string>
-    <string name="wake_on_voice">Turn on the screen</string>
-    <string name="wake_on_voice_descr">Turn on the device screen when approaching a turn</string>
+    <string name="wake_on_voice">Turn screen on</string>
+    <string name="wake_on_voice_descr">Turn on device screen (if off) when approaching a turn</string>
     <string name="wake_on_voice_never">Never</string>
     <string name="select_impassable_road">Select on map&#8230;</string>
     <string name="impassable_road">Avoid roads&#8230;</string>
