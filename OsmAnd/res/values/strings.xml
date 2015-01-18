@@ -266,7 +266,7 @@
     <string name="gpx_selection_segment_title">Segment</string>
     <string name="gpx_selection_number_of_points"> %1$s points</string>
     <string name="gpx_selection_point">Point %1$s</string>
-    <string name="gpx_selection_current_track">recording</string>
+    <!-- string name="gpx_selection_current_track">recording</string -->
     <string name="gpx_selection_route_points">%1$s \nRoute points %2$s</string>
     <string name="gpx_selection_points">%1$s \nPoints</string>
     <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
@@ -748,7 +748,7 @@
     <string name="recording_context_menu_delete">Delete recording</string>
     <string name="recording_context_menu_play">Play</string>
     <string name="recording_description">Recording %1$s %3$s %2$s</string>
-    <string name="recording_default_name">recording</string>
+    <string name="recording_default_name">Recording</string>
     <string name="av_control_stop">Stop</string>
     <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Audio/video notes</string>

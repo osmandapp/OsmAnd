@@ -74,7 +74,7 @@ public class GpxSelectionHelper {
 	private void collectDisplayGroups(List<GpxDisplayGroup> dg, GPXFile g) {
 		String name = g.path;
 		if(g.showCurrentTrack){
-			name =  getString(R.string.gpx_selection_current_track);
+			name =  getString(R.string.gpx_available_current_track);
 		} else {
 			int i = name.lastIndexOf('/');
 			if(i >= 0) {

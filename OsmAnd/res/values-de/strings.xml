@@ -1333,7 +1333,7 @@
 	<string name="recording_delete_confirm">Wollen Sie diese Aufnahme löschen?</string>
 	<string name="recording_unavailable">nicht verfügbar</string>
 	<string name="recording_context_menu_play">Wiedergabe</string>
-	<string name="recording_default_name">Aufnehmen</string>
+	<string name="recording_default_name">Aufnahme</string>
 	<string name="recording_error">Fehler bei der Aufnahme</string>
 	<string name="recording_is_recorded">Audio/Video wird aufgenommen. Zum Stoppen drücken Sie das A/V-Widget.</string>
 	<string name="recording_playing">Aus der angegebenen Aufnahme wird abgespielt.\n%1$s</string>
@@ -1908,7 +1908,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="gpx_selection_segment_title">Abschnitt</string>
 	<string name="gpx_selection_number_of_points"> %1$s Punkte</string>
 	<string name="gpx_selection_point">Punkt %1$s</string>
-	<string name="gpx_selection_current_track">Aufnahme</string>
+	<!-- string name="gpx_selection_current_track">Aufnahme</string -->
 	<string name="gpx_selection_route_points">%1$s \nRoutenpunkte %2$s</string>
 	<string name="gpx_selection_points">%1$s \nPunkte</string>
 	<string name="gpx_selection_track">%1$s \nTrack %2$s</string>
