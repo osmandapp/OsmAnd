@@ -408,7 +408,7 @@
 	<string name="init_native_library">Αρχικοποίηση εγγενούς βιβλιοθήκης…</string>
 	<string name="choose_auto_follow_route">Αυτο-κεντράρισμα όψης χάρτη</string>
 	<string name="choose_auto_follow_route_descr">Χρόνος μέχρι η οπτική του χάρτη συγχρονιστεί με την τρέχουσα θέση</string>
-	<string name="auto_follow_route_never">Ποτέ</string>
+	<string name="auto_follow_route_never">Ποτέ (Πατήστε το μπλε βέλος για να αρχίσει η καθοδήγηση χειροκίνητα)</string>
 	<string name="auto_follow_route_navigation">Αυτο-κεντράρισμα μόνο κατά την πλοήγηση</string>
 	<string name="auto_follow_route_navigation_descr">Αυτο-κεντραρισμένη οπτική χάρτη μόνο κατά την πλοήγηση.</string>
 	<string name="auto_follow_location_enabled">Αυτο-κεντράρισμα χάρτη σε χρήση.</string>
@@ -1040,7 +1040,7 @@
 	<string name="poi_dialog_comment_default">Αλλαγή ΣΕ</string>
 	<string name="poi_dialog_other_tags_message">Όλες οι άλλες ετικέτες διατηρούνται</string>
 	<string name="default_buttons_commit">Commit</string>
-	<string name="default_buttons_reset">Επαναφορά</string>
+	<string name="default_buttons_reset">Καθαρισμός</string>
 	<string name="filter_current_poiButton">Φιλτράρισμα</string>
 	<string name="edit_filter_delete_menu_item">Διαγραφή</string>
 	<string name="edit_filter_save_as_menu_item">Αποθήκευση Ως</string>
@@ -1541,7 +1541,7 @@
 	<string name="share_route_as_gpx">Διαμοιρασμός διαδρομής ως αρχείο GPX</string>
 	<string name="arrival_distance">Ανακοίνωση άφιξης</string>
     <string name="arrival_distance_descr">Πόσο σύντομα θέλετε την αναγγελία άφιξης;</string>
-    <string name="keep_informing_never">Ποτέ</string>
+    <string name="keep_informing_never">Μόνο χειροκίνητα (πατήστε το βέλος)</string>
     <string name="keep_informing">Επανάληψη οδηγιών πλοήγησης</string>
 	<string name="local_index_mi_export">Εξαγωγή</string>
 	<string name="import_file_favourites">Αποθήκευση ως αρχείο GPX ή εισαγωγή στα αγαπημένα;</string>
@@ -1682,7 +1682,7 @@
     <string name="error_avoid_specific_road">Δεν βρέθηκε παράκαμψη</string>
     <string name="osmo_use_https_descr">Χρήση ασφαλούς σύνδεσης με τον διακομιστή</string>
     <string name="advanced_settings">Προηγμένες</string>
-	<string name="wake_on_voice">Άναμμα της οθόνης</string>
+	<string name="wake_on_voice">Άναμμα οθόνης</string>
     <string name="map_widget_appearance_rem">Εναπομείναντα στοιχεία</string>
     <string name="speed_limit_exceed_message">Επιλέξτε το περιθώριο του ορίου ταχύτητας, πάνω από το οποίο θα ακούτε ηχητική προειδοποίηση.</string>
 	<string name="fav_point_dublicate_message">Αλλάχτηκε το όνομα του αγαπημένου σημείου σε %1$s για να αποφευχθούν διπλά ονόματα.</string>
