@@ -75,6 +75,8 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		long dalvikSize = android.os.Debug.getNativeHeapAllocatedSize() / (1024*1024l);
 		pref.setSummary(getString(R.string.global_app_allocated_memory_descr, javaAvailMem, javaTotal, dalvikSize));
 		pref.setEnabled(false);
+		//Use setEnabled(false) only, this way you can produce more contrast by/while tapping it when needed
+		//pref.setSelectable(false);
 		cat.addPreference(pref);
 		
 //		ActivityManager activityManager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
@@ -89,6 +91,8 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				, mem.nativePrivateDirty / 1024, mem.dalvikPrivateDirty / 1024 , mem.otherPrivateDirty / 1024
 				, mem.nativePss / 1024, mem.dalvikPss / 1024 , mem.otherPss / 1024));
 		pref.setEnabled(false);
+		//Use setEnabled(false) only, this way you can produce more contrast by/while tapping it when needed
+		//pref.setSelectable(false);
 		cat.addPreference(pref);
 		
 		
@@ -104,6 +108,8 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 					"null"));
 		}
 		pref.setEnabled(false);
+		//Use setEnabled(false) only, this way you can produce more contrast by/while tapping it when needed
+		//pref.setSelectable(false);
 		cat.addPreference(pref);	
 	}
 	

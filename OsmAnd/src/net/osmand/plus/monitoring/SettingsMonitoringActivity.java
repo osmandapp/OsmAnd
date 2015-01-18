@@ -62,6 +62,8 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		Preference globalrecord = new Preference(this);
 		globalrecord.setSummary(R.string.save_track_to_gpx_globally_descr);
 		globalrecord.setEnabled(false);
+		//Use setEnabled(false) only, this way you can produce more contrast by/while tapping it when needed
+		//globalrecord.setSelectable(false);
 		cat.addPreference(globalrecord);
 
 		if(settings.SAVE_GLOBAL_TRACK_REMEMBER.get()) {
