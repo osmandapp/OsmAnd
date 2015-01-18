@@ -102,7 +102,7 @@
   <string name="init_native_library">Chargement …</string>
   <string name="choose_auto_follow_route">Centrer automatiquement la carte</string>
   <string name="choose_auto_follow_route_descr">Temps avant que la carte se recentre sur la position actuelle</string>
-  <string name="auto_follow_route_never">Jamais</string>
+  <string name="auto_follow_route_never">Jamais (Appuyez sur la flèche pour démarrer manuellement la navigation)</string>
   <string name="auto_follow_route_navigation">Recentrage automatique navigation</string>
   <string name="auto_follow_route_navigation_descr">Recentrage automatique uniquement pendant la navigation.</string>
   <string name="auto_follow_location_enabled">Recentrage automatique activé.</string>
@@ -1586,7 +1586,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osmo_conn_successfull">Connexion établie : %1$s </string>
 	<string name="osmo_auto_send_locations_descr">Démarrer automatiquement une session de suivi et l\'envoi des emplacements dès le démarrage de l\'application</string>
 	<string name="osmo_auto_send_locations">Démarrage automatique de session de suivi</string>
-<string name="keep_informing_never">Jamais</string>
+<string name="keep_informing_never">Manuelle (en appuyant sur la flèche)</string>
 <string name="keep_informing_descr">Répéter les instructions de navigation à intervalles réguliers</string>
 <string name="keep_informing">Répéter les instructions de navigation</string>
 <string name="navigation_intent_invalid">Format invalide : %s</string>
