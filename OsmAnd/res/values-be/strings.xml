@@ -835,7 +835,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="init_native_library">Ініцыалізацыя свойскіх бібліятэк…</string>
 	<string name="choose_auto_follow_route">Аўтаматычнае цэнтраваньне мапы</string>
 	<string name="choose_auto_follow_route_descr">Час, праз які мапа вернецца да бягучага месцазнаходжаньня</string>
-	<string name="auto_follow_route_never">Ніколі</string>
+	<string name="auto_follow_route_never">Ніколі (націскаць на сінюю стрэлку для навігацыі)</string>
 	<string name="auto_follow_route_navigation">Аўтаматычнае цэнтраваньне толькі падчас навігацыі</string>
 	<string name="auto_follow_route_navigation_descr">Аўтаматычнае цэнтраваньне толькі падчас навігацыі.</string>
 	<string name="auto_follow_location_enabled">Аўтаматычнае цэнтраваньне падчас карыстаньня.</string>
@@ -1597,7 +1597,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="share_route_subject">Маршрут апублікаваны з дапамогай OsmAnd</string>
 	<string name="navigation_intent_invalid">Няправільны фармат: %s</string>
 <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> мапа з выявамі</string>
-	<string name="keep_informing_never">Ніколі</string>
+	<string name="keep_informing_never">Толькі ўручную (націскаць на стрэлку)</string>
     <string name="keep_informing_descr">Паўтараць навігацыйныя інструкцыі праз рэгулярныя прамежкі часу</string>
     <string name="keep_informing">Паўтараць навігацыйныя інструкцыі</string>
 	<string name="arrival_distance">Абвяшчэньне прыбыцьця</string>
