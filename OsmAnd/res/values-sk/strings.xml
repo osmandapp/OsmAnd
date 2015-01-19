@@ -2029,4 +2029,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="speak_pedestrian">Oznamovať priechody pre chodcov</string>
     <string name="rendering_value__name">Predvolené</string>
 	<string name="save_track_to_gpx_globally_headline">Záznam trasy v prípade potreby</string>
-	</resources>
+	<string name="navigation_over_track">Spustiť navigáciu po stope?</string>
+	<string name="avoid_roads_msg">Môžete zmeniť trasu zvolením ciest, ktorým je nutné sa vyhnúť</string>
+    </resources>
