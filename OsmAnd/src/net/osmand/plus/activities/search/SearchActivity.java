@@ -131,10 +131,10 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 			TabSpec historyTab = tabHost.newTabSpec(SEARCH_HISTORY).setIndicator(
 					getTabIndicator(tabHost, R.drawable.tab_search_history_icon, R.string.history));
 			mTabsAdapter.addTab(historyTab, getFragment(HISTORY_TAB_INDEX), null);
-			TabSpec transportTab = tabHost.newTabSpec(SEARCH_TRANSPORT).setIndicator(
-					getTabIndicator(tabHost, R.drawable.tab_search_transport_icon, R.string.transport));
-			mTabsAdapter.addTab(transportTab, getFragment(TRANSPORT_TAB_INDEX), null);
-			tabHost.setCurrentTab(tab);
+//			TabSpec transportTab = tabHost.newTabSpec(SEARCH_TRANSPORT).setIndicator(
+//					getTabIndicator(tabHost, R.drawable.tab_search_transport_icon, R.string.transport));
+//			mTabsAdapter.addTab(transportTab, getFragment(TRANSPORT_TAB_INDEX), null);
+			tabHost.setCurrentTab(Math.min(tab , HISTORY_TAB_INDEX));
 		} else {
 			setContentView(R.layout.search_activity_single);
 			Class<?> cl = getFragment(tab);

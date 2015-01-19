@@ -41,7 +41,7 @@ public class DashDownloadMapsFragment extends DashBaseFragment {
 			public void onClick(View view) {
 				final Intent intent = new Intent(view.getContext(), getMyApplication().getAppCustomization().getDownloadIndexActivity());
 				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.LOCAL_TAB);
-				intent.putExtra(DownloadActivity.SINGLE_TAB, true);
+				//intent.putExtra(DownloadActivity.SINGLE_TAB, true);
 				getActivity().startActivity(intent);				
 			}
 		});
@@ -53,7 +53,7 @@ public class DashDownloadMapsFragment extends DashBaseFragment {
 			public void onClick(View view) {
 				final Intent intent = new Intent(view.getContext(), getMyApplication().getAppCustomization().getDownloadIndexActivity());
 				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
-				intent.putExtra(DownloadActivity.SINGLE_TAB, true);
+				//intent.putExtra(DownloadActivity.SINGLE_TAB, true);
 				getActivity().startActivity(intent);
 			}
 		});
