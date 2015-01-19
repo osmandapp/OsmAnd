@@ -1100,7 +1100,7 @@
     <string name="recording_can_not_be_played">La grabación no se puede reproducir</string>
     <string name="recording_context_menu_delete">Eliminar grabación</string>
     <string name="recording_context_menu_play">Reproducir</string>
-    <string name="recording_default_name">grabación</string>
+    <string name="recording_default_name">Grabación</string>
     <string name="av_control_stop">Parar</string>
     <string name="av_control_start">Iniciar</string>
     <string name="map_widget_av_notes">Notas de audio</string>
