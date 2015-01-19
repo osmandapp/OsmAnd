@@ -990,10 +990,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="error_doing_search">Памылка пры аўтаномным пошуку</string>
 	<string name="search_offline_geo_error">Немагчыма апрацаваць запыт \'%s\'</string>
 	<string name="search_osm_offline">Пошук ў лакальных картах</string>
-	<string name="system_locale">Сістэма</string>
+	<string name="system_locale">Сістэмная</string>
 	<string name="preferred_locale_descr">Выбар мовы інтэрфэйсу (перазапусьціце OsmAnd пасьля зьмены)</string>
 	<string name="preferred_locale">Мова інтэрфэйсу</string>
-	<string name="incomplete_locale">няскончана</string>
+	<string name="incomplete_locale">няскончаны</string>
 	<string name="tip_map_switch">Абраць крыніцу мапы</string>
 	<string name="tip_app_mode">Профіль</string>
 	<string name="tip_app_mode_t_v2">OsmAnd падтрымлівае розныя профілі для розных рэжымаў. ↵ 
