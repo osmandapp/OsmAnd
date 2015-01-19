@@ -1649,7 +1649,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="osmo_settings_descr">Nastavi možnosti sledenja in osebni sledilni kanal</string>
     <string name="osmo_plugin_description">"OpenStreetMap napredno sledenje v živo, oglejte si http://osmo.mobi. Omogoča možnosti sledenja drugih naprav in biti sleden. Ustvarite anonimne skupine, katerih člani si med seboj delite lokacije. Ponuja različne možnosti za trajno sledenje ali sledenje v okviru sej. Anonimne skupine so omejene na nekaj dni in nekatere funkcije, npr. ni upravljanja na daljavo in ni skrbnika skupine. Polno delujoče skupine je potrebno ustvariti na spletnem mestu in le registrirani uporabniki imajo dostop do njih. "</string>
     <string name="osmo_plugin_name">OsMo (Napredno sledenje v živo)</string>
-    <string name="keep_informing_never">Nikoli</string>
+    <string name="keep_informing_never">Samo ročno (tapnite puščico)</string>
     <string name="keep_informing_descr">Napoveduj navigacijska navodila v rednih časovnih presledkih</string>
     <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
 	<string name="osmo_settings">OpenStreetMap sledenje</string>
