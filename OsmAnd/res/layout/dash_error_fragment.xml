@@ -7,7 +7,9 @@
               android:layout_height="wrap_content">
 	<LinearLayout android:orientation="horizontal"
 				  android:layout_width="wrap_content"
-				  android:layout_height="wrap_content">
+				  android:layout_height="wrap_content"
+				  android:layout_marginTop="10dp"
+				  android:layout_marginBottom="10dp">
 		<ImageView android:src="@drawable/ic_crashlog"
 				   android:layout_marginLeft="@dimen/dashFavIconMargin"
 				   android:layout_marginRight="@dimen/dashFavIconMargin"

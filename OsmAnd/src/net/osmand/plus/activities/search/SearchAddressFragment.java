@@ -224,7 +224,7 @@ public class SearchAddressFragment extends Fragment {
 				building = null;
 				searchPoint = null;
 				osmandSettings.setLastSearchedBuilding("", null);
-				osmandSettings.setLastSearchedPoint(null);
+				//also empties Point, REMOVES intersecting street
 				updateUI();
 			}
 		 });
@@ -236,9 +236,7 @@ public class SearchAddressFragment extends Fragment {
 				building = null;
 				searchPoint = null;
 				osmandSettings.setLastSearchedStreet("", null);
-				osmandSettings.setLastSearchedIntersectedStreet("", null);
-				osmandSettings.setLastSearchedBuilding("", null);
-				osmandSettings.setLastSearchedPoint(null);
+				//also empties Building, (Intersecting Street), Point
 				updateUI();
 			}
 		 });
@@ -251,12 +249,8 @@ public class SearchAddressFragment extends Fragment {
 				street2 = null;
 				building = null;
 				searchPoint = null;
-				osmandSettings.setLastSearchedPostcode("", null);
-				osmandSettings.setLastSearchedCity(0L, "", null);
-				osmandSettings.setLastSearchedStreet("", null);
-				osmandSettings.setLastSearchedIntersectedStreet("", null);
-				osmandSettings.setLastSearchedBuilding("", null);
-				osmandSettings.setLastSearchedPoint(null);
+				osmandSettings.setLastSearchedCity(-1L, "", null);
+				//also empties Street, (Intersecting Street), Building, Point, REMOVES Postcode
 				updateUI();
 			}
 		 });
@@ -271,12 +265,7 @@ public class SearchAddressFragment extends Fragment {
 				building = null;
 				searchPoint = null;
 				osmandSettings.setLastSearchedRegion("", null);
-				osmandSettings.setLastSearchedPostcode("", null);
-				osmandSettings.setLastSearchedCity(0L, "", null);
-				osmandSettings.setLastSearchedStreet("", null);
-				osmandSettings.setLastSearchedIntersectedStreet("", null);
-				osmandSettings.setLastSearchedBuilding("", null);
-				osmandSettings.setLastSearchedPoint(null);
+				// also empties City, Postcode, Street, (Interseting street), Building, Point
 				updateUI();
 			}
 		});

@@ -15,6 +15,7 @@ import net.osmand.data.MapObject.MapObjectComparator;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
 import net.osmand.plus.resources.RegionAddressRepository;
@@ -33,7 +34,8 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	private City city;
 	private Button searchAllStrets;
 	private int searchWithCity = -1; // -1 - default, 0 - filter city, 1 - deep search
-	
+	private OsmandSettings osmandSettings;
+
 	@Override
 	protected Comparator<? super Street> createComparator() {
 		return new MapObjectComparator(getMyApplication().getSettings().usingEnglishNames()) {
@@ -48,13 +50,14 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 			}
 		};
 	}
-	
+
 	@Override
 	protected void reset() {
-		searchWithCity = -1;
+		//This is really only a "clear input text field", hence do not reset settings here
+		//searchWithCity = -1;
+		//osmandSettings.setLastSearchedStreet("", null);
 		super.reset();
 	}
-	
 
 	@Override
 	protected void addFooterViews() {
@@ -214,7 +217,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	@Override
 	public void itemSelected(Street obj) {
 		if(!Algorithms.objectEquals(settings.getLastSearchedCity(), obj.getCity().getId())) {
-			settings.setLastSearchedCity(obj.getCity().getId(), obj.getCity().getName(), obj.getLocation());
+			settings.setLastSearchedCity(obj.getCity().getId(), obj.getCity().getName(region.useEnglishNames()), obj.getLocation());
 		}
 		settings.setLastSearchedStreet(obj.getName(region.useEnglishNames()), obj.getLocation());
 //		if(obj.getBuildings().size() == 0){

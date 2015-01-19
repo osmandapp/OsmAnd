@@ -9,7 +9,9 @@ import android.widget.AdapterView;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.resources.RegionAddressRepository;
 import android.app.Activity;
 import android.os.Bundle;
@@ -17,7 +19,8 @@ import android.widget.Toast;
 
 
 public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<RegionAddressRepository> {
-	
+	private OsmandSettings osmandSettings;
+
 	@Override
 	protected Comparator<? super RegionAddressRepository> createComparator() {
 		return new Comparator<RegionAddressRepository>() {
@@ -29,7 +32,14 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 			}
 		};
 	}
-	
+
+	@Override
+	protected void reset() {
+		//This is really only a "clear input text field", hence do not reset settings here
+		//osmandSettings.setLastSearchedRegion("", null);
+		super.reset();
+	}
+
 	@Override
 	protected LatLon getLocation(RegionAddressRepository item) {
 		return item.getEstimatedRegionCenter();
@@ -49,7 +59,8 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 	
 	@Override
 	public String getText(RegionAddressRepository obj) {
-		return obj.getName().replace('_', ' ');
+		return FileNameTranslationHelper.getFileName(this,
+				getMyApplication().getResourceManager().getOsmandRegions(), obj.getName());
 	}
 
 	@Override

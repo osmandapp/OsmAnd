@@ -377,7 +377,7 @@
 	<string name="init_native_library">初始化原生函式庫…</string>
 	<string name="choose_auto_follow_route">地圖檢視自動置中</string>
 	<string name="choose_auto_follow_route_descr">一段時間後地圖會移到目前位置</string>
-	<string name="auto_follow_route_never">永不</string>
+	<string name="auto_follow_route_never">永不（輕點藍色箭頭可啟動手動引導）</string>
 	<string name="auto_follow_route_navigation">只有導航時自動置中</string>
 	<string name="auto_follow_route_navigation_descr">只有在導航時，地圖檢視自動置中。</string>
 	<string name="auto_follow_location_enabled">使用地圖檢視自動置中。</string>
@@ -983,7 +983,7 @@
 	<string name="poi_dialog_comment_default">興趣點變更中</string>
 	<string name="poi_dialog_other_tags_message">所有其它的標誌已保存</string>
 	<string name="default_buttons_commit">提交</string>
-	<string name="default_buttons_reset">重置</string>
+	<string name="default_buttons_reset">清除</string>
 	<string name="filter_current_poiButton">篩選</string>
 	<string name="edit_filter_delete_menu_item">刪除</string>
 	<string name="edit_filter_save_as_menu_item">另存</string>
@@ -1547,7 +1547,7 @@
     <string name="osmo_settings">OpenStreetMap 監控</string>
    	<string name="osmo_settings_descr">組態監控設定值和安裝個人監控頻道</string>
     <string name="osmo_plugin_description">"OpenStreetMap 進階即時監控，跟蹤其它裝置並進行追蹤，請參閱 http://osmo.mobi。建立匿名群組，分享彼此的位置和交流。它具有各種設定用於連線階段追蹤或持續的追蹤。匿名群組是有限制天數和一些功能，也就是沒有遠端控制和群組管理員。完整的功能需在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
-    <string name="keep_informing_never">永不</string>
+    <string name="keep_informing_never">只有手動（輕點箭頭）</string>
     <string name="keep_informing_descr">按照定期間隔重新通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
 	<string name="arrival_distance">到達預告</string>
@@ -1824,8 +1824,8 @@
     <string name="impassable_road">避開的道路…</string>
     <string name="rendering_attr_tramTrainRoutes_name">有軌電車和火車路線</string>
     <string name="rendering_category_hide">隱藏</string>
-    <string name="wake_on_voice">開啟螢幕</string>
-    <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕</string>
+    <string name="wake_on_voice">將螢幕開啟</string>
+    <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕 (螢幕關閉時)</string>
     <string name="lock_screen_request_explanation">為了節電作用 %1$s 需要此許可權才能關閉螢幕。</string>
     <string name="wake_on_voice_never">永不</string>
     <string name="advanced_settings">進階</string>
@@ -1869,4 +1869,7 @@
 	<string name="show_pedestrian_warnings">顯示行人穿越道</string>
     <string name="speak_pedestrian">通報行人穿越道</string>
     <string name="rendering_value__name">預設</string>
+	<string name="navigation_over_track">開始導航覆蓋在軌跡上嗎？</string>
+	<string name="avoid_roads_msg">您可以經由選擇道路，以避免更改路線</string>
+    <string name="save_track_to_gpx_globally_headline">要求軌跡日誌</string>
 	</resources>

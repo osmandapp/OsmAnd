@@ -630,7 +630,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if (info.gpx != null && info.gpx.showCurrentTrack) {
 				catName = info.name;
 			} else {
-				catName = app.getString(R.string.local_indexes_cat_gpx) + " " + info.subfolder;
+				//local_indexes_cat_gpx now obsolete in new UI screen which shows only GPX data
+				//catName = app.getString(R.string.local_indexes_cat_gpx) + " " + info.subfolder;
+				catName = "" + info.subfolder;
 			}
 			int found = -1;
 			// search from end
@@ -800,7 +802,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			// search from end
 			for (int i = category.size() - 1; i >= 0; i--) {
 				String cat = category.get(i);
-				if (Algorithms.objectEquals(getActivity().getString(R.string.local_indexes_cat_gpx) + " " + g.subfolder, cat)) {
+				//local_indexes_cat_gpx now obsolete in new UI screen which shows only GPX data
+				//if (Algorithms.objectEquals(getActivity().getString(R.string.local_indexes_cat_gpx) + " " + g.subfolder, cat)) {
+				if (Algorithms.objectEquals("" + g.subfolder, cat)) {
 					found = i;
 					break;
 				}

@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
@@ -103,11 +104,10 @@ public class ConfigureMapMenu {
 		@Override
 		public boolean onRowItemClick(ArrayAdapter<?> adapter, View view, int itemId, int pos) {
 			if(itemId == R.string.layer_poi && cm.getSelection(pos) == 1) {
-				ma.getMapLayers().selectPOIFilterLayer(ma.getMapView(), null);
+				selectPOILayer(ma.getMyApplication().getSettings());
 				return false;
 			} else if(itemId == R.string.layer_gpx_layer && cm.getSelection(pos) == 1) {
 				ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
-				// TODO: tick mark of "Show GPX" needs to be synced after return form sub-selection screen (user may or may not have selected files!)
 				return false;
 			} else  {
 				return super.onRowItemClick(adapter, view, itemId, pos);
@@ -115,13 +115,14 @@ public class ConfigureMapMenu {
 		}
 
 		@Override
-		public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-			OsmandSettings settings = ma.getMyApplication().getSettings();
+		public boolean onContextMenuClick(final ArrayAdapter<?> adapter, int itemId, final int pos, boolean isChecked) {
+			final OsmandSettings settings = ma.getMyApplication().getSettings();
 			if (itemId == R.string.layer_poi) {
-				if (isChecked) {
-					ma.getMapLayers().selectPOIFilterLayer(ma.getMapView(), null);
-				}
 				settings.SHOW_POI_OVER_MAP.set(isChecked);
+				if (isChecked) {
+					selectPOILayer(settings);
+				}
+				
 			} else if (itemId == R.string.layer_amenity_label) {
 				settings.SHOW_POI_LABEL.set(isChecked);
 			} else if (itemId == R.string.layer_favorites) {
@@ -130,15 +131,36 @@ public class ConfigureMapMenu {
 				if (ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles()) {
 					ma.getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
 				} else {
-					ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
+					AlertDialog dialog = ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
+					dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+						@Override
+						public void onCancel(DialogInterface dialogInterface) {
+							cm.setSelection(pos, 0);
+							adapter.notifyDataSetChanged();
+						}
+					});
 				}
-				// TODO: tick mark of "Show GPX" needs to be synced after return form sub-selection screen (user may or may not have selected files!)
 			} else if (itemId == R.string.layer_transport_route) {
 				ma.getMapLayers().getTransportInfoLayer().setVisible(isChecked);
 			}
 			ma.getMapLayers().updateLayers(ma.getMapView());
 			ma.getMapView().refreshMap();
 			return false;
+		}
+
+		protected void selectPOILayer(final OsmandSettings settings) {
+			final PoiFilter[] selected = new PoiFilter[1]; 
+			AlertDialog dlg = ma.getMapLayers().selectPOIFilterLayer(ma.getMapView(), selected);
+			dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+				
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					if(selected[0] == null) {		
+						settings.SHOW_POI_OVER_MAP.set(selected[0] != null);
+					}
+					ma.getMapActions().refreshDrawer();
+				}
+			});
 		}
 	}
 

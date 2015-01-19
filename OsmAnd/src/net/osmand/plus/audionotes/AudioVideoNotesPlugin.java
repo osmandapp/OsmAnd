@@ -507,7 +507,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	private void defaultAction(final MapActivity mapActivity) {
+	public void defaultAction(final MapActivity mapActivity) {
 		final Location loc = app.getLocationProvider().getLastKnownLocation();
 		// double lat = mapActivity.getMapView().getLatitude();
 		// double lon = mapActivity.getMapView().getLongitude();
@@ -590,6 +590,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public void mapActivityPause(MapActivity activity) {
 		stopRecording(activity);
+	}
+	
+	@Override
+	public void mapActivityResume(MapActivity activity) {
+		this.activity = activity;;
+	}
+	
+	public MapActivity getActivity() {
+		return activity;
 	}
 
 	public void recordVideo(final double lat, final double lon, final MapActivity mapActivity) {

@@ -376,20 +376,23 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		assert track.segments.size() == points.size(); 
 		if (points.size() == 0 || newSegment) {
 			points.add(new ArrayList<WptPt>());
+		}
+		if(track.segments.size() == 0 || newSegment) {
 			track.segments.add(new TrkSegment());
 		}
 		if (pt != null) {
 			int ind = points.size() - 1;
 			List<WptPt> last = points.get(ind);
 			last.add(pt);
-			track.segments.get(ind).points.add(pt);
+			TrkSegment lt = track.segments.get(track.segments.size() - 1);
+			lt.points.add(pt);
 		}
 	}
 	
 	public void insertPointData(double lat, double lon, long time, String description) {
 		final WptPt pt = new WptPt(lat, lon, time, Double.NaN, 0, Double.NaN);
 		pt.name = description;
-		currentTrack.getGpxFile().points.add(pt);
+		currentTrack.getModifiableGpxFile().points.add(pt);
 		execWithClose(updatePointsScript, new Object[] { lat, lon, time, description });
 	}
 	
@@ -405,7 +408,16 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			}
 		}
 	}
-	
+
+	public void loadGpxFromDatabase(){
+		Map<String, GPXFile> files = collectRecordedData();
+		for (Map.Entry<String, GPXFile> entry : files.entrySet()){
+			currentTrack.getModifiableGpxFile().points.addAll(entry.getValue().points);
+			currentTrack.getModifiableGpxFile().tracks.addAll(entry.getValue().tracks);
+		}
+		currentTrack.processPoints();
+	}
+
 	public boolean getIsRecording() {
 		return isRecording;
 	}

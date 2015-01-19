@@ -197,7 +197,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					// decrease a bit
 					zdelta += 1;
 				}
-				double targetZoom = Math.max(tb.getZoom() + tb.getZoomFloatPart() + zdelta, settings.AUTO_ZOOM_MAP.get().maxZoom); 
+				double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zdelta, settings.AUTO_ZOOM_MAP.get().maxZoom); 
 				int threshold = settings.AUTO_FOLLOW_ROUTE.get();
 				if (now - lastTimeAutoZooming > 4500 && (now - lastTimeAutoZooming > threshold || !isUserZoomed)) {
 					isUserZoomed = false;
