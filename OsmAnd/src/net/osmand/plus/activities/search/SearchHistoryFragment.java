@@ -1,8 +1,10 @@
 package net.osmand.plus.activities.search;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v4.app.ListFragment;
+import android.view.*;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmAndFormatter;
@@ -20,10 +22,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -67,6 +66,7 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		});
 		getListView().addFooterView(clearButton);
 		setListAdapter(historyAdapter);
+		setHasOptionsMenu(true);
 	}
 	
 	
@@ -176,4 +176,10 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		}
 	}
 
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		if (getActivity() instanceof SearchActivity) {
+			((SearchActivity)getActivity()).setupBottomMenu(new ArrayList<BottomMenuItem>());
+		}
+	}
 }

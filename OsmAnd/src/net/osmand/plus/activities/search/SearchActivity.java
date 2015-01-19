@@ -11,8 +11,8 @@ import java.util.Locale;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.view.*;
+import android.widget.*;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -33,16 +33,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-import android.widget.TabWidget;
-import android.widget.TextView;
 import android.support.v7.app.ActionBar.OnNavigationListener;
 
 public class SearchActivity extends ActionBarActivity implements OsmAndLocationListener {
@@ -82,13 +73,14 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 	private TabsAdapter mTabsAdapter;
 	List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 	private boolean showOnlyOneTab;
-	
-	
+
 	public interface SearchActivityChild {
 		
 		public void locationUpdate(LatLon l);
 	}
-	
+
+
+
 	private View getTabIndicator(TabHost tabHost, int imageId, int stringId){
 		View r = getLayoutInflater().inflate(R.layout.search_main_tab_header, tabHost, false);
 		ImageView tabImage = (ImageView)r.findViewById(R.id.TabImage);
@@ -104,9 +96,6 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 		super.onCreate(savedInstanceState);
 		long t = System.currentTimeMillis();
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
-		}
 		setContentView(R.layout.search_main);
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		Integer tab = settings.SEARCH_TAB.get();
@@ -189,7 +178,7 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 
 	protected Class<?> getFragment(int tab) {
 		if(tab == POI_TAB_INDEX) {
-			return SearchPoiFilterActivity.class;
+			return SearchPoiFilterFragment.class;
 		} else if(tab == ADDRESS_TAB_INDEX) {
 			return searchOnLine ? SearchAddressOnlineFragment.class : SearchAddressFragment.class;
 		} else if(tab == LOCATION_TAB_INDEX) {
@@ -201,7 +190,7 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 		} else if(tab == FAVORITES_TAB_INDEX) {
 			return FavouritesListFragment.class;
 		}
-		return SearchPoiFilterActivity.class;
+		return SearchPoiFilterFragment.class;
 	}
 	
 	@Override
@@ -295,8 +284,33 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 			}
 		}
 	}
-	
-	
+
+	public void setupBottomMenu(List<BottomMenuItem> menuItems) {
+		LinearLayout bottomControls = (LinearLayout) findViewById(R.id.bottomControls);
+		if (bottomControls == null) {
+			return;
+		}
+		bottomControls.removeAllViews();
+
+		if (menuItems.size() == 0) {
+			findViewById(R.id.devider).setVisibility(View.GONE);
+		} else {
+			findViewById(R.id.devider).setVisibility(View.VISIBLE);
+		}
+
+		for (BottomMenuItem item : menuItems) {
+			ImageButton imageButton = new ImageButton(this);
+			imageButton.setImageResource(item.getIcon());
+			TableRow.LayoutParams params = new TableRow.LayoutParams(0,
+					ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
+			params.gravity = Gravity.CENTER_VERTICAL;
+			imageButton.setLayoutParams(params);
+			imageButton.setOnClickListener(item.getOnClickListener());
+			imageButton.setBackgroundResource(R.drawable.bottom_menu_item);
+			bottomControls.addView(imageButton);
+		}
+	}
+
 	public void updateLocation(net.osmand.Location location){
 		if (location != null) {
 			updateSearchPoint(new LatLon(location.getLatitude(), location.getLongitude()),

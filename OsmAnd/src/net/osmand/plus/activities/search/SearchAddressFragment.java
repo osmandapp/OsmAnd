@@ -1,6 +1,8 @@
 package net.osmand.plus.activities.search;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -93,73 +95,73 @@ public class SearchAddressFragment extends Fragment {
 				}
 			});
 		} else {
-			MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to);
-			MenuItemCompat.setShowAsAction(menuItem,
-					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
-			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					select(NAVIGATE_TO);
-					return true;
-				}
-			});
+			List<BottomMenuItem> menuItems = new ArrayList<BottomMenuItem>();
+			BottomMenuItem menuItem = new BottomMenuItem().
+					setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark).
+					setMsg(R.string.context_menu_item_directions_to).
+					setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							select(NAVIGATE_TO);
+						}
+					});
+			menuItems.add(menuItem);
+
 			TargetPointsHelper targets = ((OsmandApplication) getApplication()).getTargetPointsHelper();
+			menuItem = new BottomMenuItem();
 			if (targets.getPointToNavigate() != null) {
-				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point);
-				MenuItemCompat.setShowAsAction(menuItem,
-						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flage_light : R.drawable.ic_action_flage_dark);
+				menuItem.setIcon(light ? R.drawable.ic_action_flage_light : R.drawable.ic_action_flage_dark).
+						setMsg(R.string.context_menu_item_intermediate_point);
 			} else {
-				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point);
-				MenuItemCompat.setShowAsAction(menuItem,
-						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flag_light : R.drawable.ic_action_flag_dark);
+				menuItem.setIcon(light ? R.drawable.ic_action_flag_light : R.drawable.ic_action_flag_dark).
+						setMsg(R.string.context_menu_item_destination_point);
 			}
-			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			menuItem.setOnClickListener(new View.OnClickListener() {
 				@Override
-				public boolean onMenuItemClick(MenuItem item) {
+				public void onClick(View v) {
 					select(ADD_WAYPOINT);
-					return true;
 				}
 			});
-			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map);
-			MenuItemCompat.setShowAsAction(menuItem,
-					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
+			menuItems.add(menuItem);
 
-			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					select(SHOW_ON_MAP);
-					return true;
-				}
-			});
-			
-			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.add_to_favourite);
-			MenuItemCompat.setShowAsAction(menuItem,
-					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
+			menuItem = new BottomMenuItem().
+					setIcon(light ?  R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark).
+					setMsg(R.string.search_shown_on_map).
+					setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							select(SHOW_ON_MAP);
+						}
+					});
+			menuItems.add(menuItem);
 
-			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					select(ADD_TO_FAVORITE);
-					return true;
-				}
-			});
-			menuItem = menu.add(0, ONLINE_SEARCH, 0, R.string.search_online_address);
-			MenuItemCompat.setShowAsAction(menuItem,
-					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark);
-			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					((SearchActivity) getActivity()).startSearchAddressOnline();
-					return true;
-				}
-			});
-		} 
+			menuItem = new BottomMenuItem().
+					setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark).
+					setMsg(R.string.add_to_favourite).
+					setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							select(ADD_TO_FAVORITE);
+						}
+					});
+			menuItems.add(menuItem);
+
+			menuItem = new BottomMenuItem().
+					setIcon(light ? R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark).
+					setMsg(R.string.search_online_address).
+					setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							((SearchActivity) getActivity()).startSearchAddressOnline();
+						}
+					});
+			menuItems.add(menuItem);
+
+			if (getActivity() instanceof SearchActivity) {
+				((SearchActivity)getActivity()).setupBottomMenu(menuItems);
+			}
+		}
+
 	}
 	
 	private OsmandApplication getApplication() {

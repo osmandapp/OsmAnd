@@ -45,5 +45,19 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+
+		<View android:id="@+id/devider"
+			  android:layout_width="match_parent"
+			  android:layout_height="1dp"
+			  android:background="@color/dashboard_divider"/>
+
+		<LinearLayout android:orientation="horizontal"
+					  android:id="@+id/bottomControls"
+					  android:layout_width="fill_parent"
+					  android:background="@color/dashboard_black"
+					  android:layout_height="wrap_content"/>
+
     </LinearLayout>
+
+
 </TabHost>

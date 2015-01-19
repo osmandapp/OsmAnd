@@ -58,33 +58,34 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		MenuItem menuItem;
 		boolean light = ((OsmandApplication) getActivity().getApplication()).getSettings().isLightActionBar();
-		menuItem = menu.add(0, 1, 0, R.string.search_offline_clear_search);
-		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gremove_light : R.drawable.ic_action_gremove_dark);
+		List<BottomMenuItem> menuItems = new ArrayList<BottomMenuItem>();
+		BottomMenuItem menuItem = new BottomMenuItem().
+				setIcon(light ? R.drawable.ic_action_gremove_light : R.drawable.ic_action_gremove_dark).
+				setMsg(R.string.search_offline_clear_search).
+				setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						searchText.setText("");
+						adapter.clear();
+					}
+				});
+		menuItems.add(menuItem);
 
-		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				searchText.setText("");
-				adapter.clear();
-				return true;
-			}
-		});
+		menuItem = new BottomMenuItem().
+				setIcon(light ?  R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark).
+				setMsg(R.string.search_offline_address).
+				setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						((SearchActivity) getActivity()).startSearchAddressOffline();
+					}
+				});
+		menuItems.add(menuItem);
+
 		if (getActivity() instanceof SearchActivity) {
-			menuItem = menu.add(0, 0, 0, R.string.search_offline_address);
-			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark);
-			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					((SearchActivity) getActivity()).startSearchAddressOffline();
-					return true;
-				}
-			});
+			((SearchActivity)getActivity()).setupBottomMenu(menuItems);
 		}
-		
 	}
 	
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {

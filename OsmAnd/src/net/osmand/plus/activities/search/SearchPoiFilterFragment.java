@@ -9,6 +9,7 @@ import java.util.List;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBarActivity;
+import android.view.*;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.NameFinderPoiFilter;
@@ -23,9 +24,6 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -35,12 +33,13 @@ import android.widget.Toast;
 
 
 
-public class SearchPoiFilterActivity extends ListFragment implements SearchActivityChild {
+public class SearchPoiFilterFragment extends ListFragment implements SearchActivityChild {
 
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	public static final int REQUEST_POI_EDIT = 55;
-	
+
+
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class SearchPoiFilterActivity extends ListFragment implements SearchActiv
 				return false;
 			}
 		});
-		
+		setHasOptionsMenu(true);
 		refreshPoiListAdapter();
 	}
 
@@ -178,6 +177,11 @@ public class SearchPoiFilterActivity extends ListFragment implements SearchActiv
 			return (row);
 		}
 
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		((SearchActivity)getActivity()).setupBottomMenu(new ArrayList<BottomMenuItem>());
 	}
 
 	@Override
