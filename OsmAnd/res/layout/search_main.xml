@@ -46,7 +46,7 @@
             android:layout_weight="1" />
 
 
-		<View android:id="@+id/devider"
+		<View android:id="@+id/divider"
 			  android:layout_width="match_parent"
 			  android:layout_height="1dp"
 			  android:background="@color/dashboard_divider"/>

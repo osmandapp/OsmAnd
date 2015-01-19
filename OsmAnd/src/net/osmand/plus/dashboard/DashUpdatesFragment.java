@@ -49,7 +49,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			public void onClick(View view) {
 				final Intent intent = new Intent(view.getContext(), getMyApplication().getAppCustomization().getDownloadIndexActivity());
 				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.UPDATES_TAB);
-				intent.putExtra(DownloadActivity.SINGLE_TAB, true);
+				//intent.putExtra(DownloadActivity.SINGLE_TAB, true);
 				getActivity().startActivity(intent);
 			}
 		});

@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -27,6 +28,7 @@ public class DashSearchFragment extends DashBaseFragment {
 		setupButtons(view);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		((TextView) view.findViewById(R.id.search_for)).setTypeface(typeface);
+		((Button) view.findViewById(R.id.recents)).setTypeface(typeface);
 		return view;
 	}
 
