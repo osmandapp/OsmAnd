@@ -33,7 +33,7 @@
     <string name="recording_context_menu_delete">Slet optagelse</string>
     <string name="recording_context_menu_play">Afspil</string>
     <string name="recording_description">Optagelse %1$s %3$s %2$s</string>
-    <string name="recording_default_name">optager</string>
+    <string name="recording_default_name">Optager</string>
     <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Audio-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd udvidelse for offline højdekurver</string>
@@ -521,7 +521,7 @@
 	<string name="init_native_library">Initialisere indbygget bibliotek…</string>
 	<string name="choose_auto_follow_route">Autocentrer kortvisning</string>
 	<string name="choose_auto_follow_route_descr">Tid indtil kortvisning synkroniseres med aktuel position</string>
-	<string name="auto_follow_route_never">Aldrig</string>
+	<string name="auto_follow_route_never">Aldrig (tryk på blå pil for at starte vejledning manuelt)</string>
 	<string name="auto_follow_route_navigation">Autocentrer kun navigation</string>
 	<string name="auto_follow_route_navigation_descr">Autocentrer kun kortvisning under navigation.</string>
 	<string name="auto_follow_location_enabled">Autocentrer kort.</string>
@@ -960,7 +960,7 @@
 	<string name="edit_filter_save_as_menu_item">Gem som</string>
 	<string name="edit_filter_delete_menu_item">Slet</string>
 	<string name="filter_current_poiButton">Filter</string>
-	<string name="default_buttons_reset">Nulstil</string>
+	<string name="default_buttons_reset">Ryd</string>
 	<string name="poi_dialog_other_tags_message">Alle de øvrige mærker bevares</string>
 	<string name="poi_dialog_comment">Kommentar</string>
 	<string name="poi_dialog_opening_hours">Åben</string>
@@ -1557,7 +1557,7 @@
     <string name="osmo_plugin_description">"OpenStreetMap - avanceret live overvågning, se http://osmo.mobi. Spor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing. Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator. Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem. "</string>
     <string name="osmo_plugin_name">OsMo (avanceret live overvågning)</string>
     <string name="osmo_settings">OpenStreetMap overvågning</string>
-   	<string name="keep_informing_never">Aldrig</string>
+   	<string name="keep_informing_never">Kun manuelt (tryk på pilen)</string>
     <string name="keep_informing_descr">Gentag navigationsinstruktioner med jævne mellemrum</string>
     <string name="keep_informing">Gentag navigationsinstruktioner</string>
 	<string name="arrival_distance">Meddel ankomst</string>
@@ -1833,7 +1833,7 @@
     <string name="impassable_road">Undgå veje…</string>
     <string name="rendering_category_hide">Skjul</string>
     <string name="wake_on_voice">Tænd for skærmen</string>
-    <string name="wake_on_voice_descr">Tænd for skærmen ved navigationsinstruktioner</string>
+    <string name="wake_on_voice_descr">Tænd for skærmen (hvis slukket) ved navigationsinstruktioner</string>
     <string name="lock_screen_request_explanation">%1$s behøver denne tilladelse til at slukke for skærmen for strømbesparende funktion.</string>
     <string name="wake_on_voice_never">Aldrig</string>
     <string name="advanced_settings">Avanceret</string>
@@ -1877,4 +1877,7 @@
 	<string name="show_pedestrian_warnings">Fodgængerovergange</string>
     <string name="speak_pedestrian">Fodgængerovergange</string>
     <string name="rendering_value__name">Standard</string>
-	</resources>
+	<string name="save_track_to_gpx_globally_headline">On demand sporingslogning</string>
+	<string name="navigation_over_track">Start navigation over spor?</string>
+	<string name="avoid_roads_msg">Du kan ændre ruten ved at vælge veje der skal undgås</string>
+    </resources>

@@ -21,7 +21,6 @@ public class OsMoTracker implements OsMoReactor {
 	private OsmandPreference<Integer> pref;
 	private String sessionURL;
 	private Map<String, OsMoDevice> trackingDevices = new java.util.concurrent.ConcurrentHashMap<String, OsMoGroupsStorage.OsMoDevice>();
-	private OsmandPreference<Boolean> autoStart;
 	private OsmandPreference<Boolean> stateSendLocation;
 	
 	public interface OsmoTrackerListener {
@@ -30,11 +29,10 @@ public class OsMoTracker implements OsMoReactor {
 	}
 	
 
-	public OsMoTracker(OsMoService service, OsmandPreference<Integer> interval,
-			OsmandPreference<Boolean> autoStart, OsmandPreference<Boolean> stateSendLocation) {
+	public OsMoTracker(OsMoService service, OsmandPreference<Integer> interval, 
+			OsmandPreference<Boolean> stateSendLocation) {
 		this.service = service;
 		this.pref = interval;
-		this.autoStart = autoStart;
 		this.stateSendLocation = stateSendLocation;
 		service.registerReactor(this);
 	}
@@ -52,16 +50,17 @@ public class OsMoTracker implements OsMoReactor {
 	
 	public void enableTracker() {
 		if(!isEnabledTracker()) {
-			stateSendLocation.set(true);
-			service.pushCommand("TRACKER_SESSION_OPEN");
+			enableTrackerCmd();
 		}
+	}
+	
+	public void enableTrackerCmd() {
+		stateSendLocation.set(true);
+		service.pushCommand("TRACKER_SESSION_OPEN");
 	}
 	
 	public void disableTracker() {
 		if(isEnabledTracker()) {
-			if(autoStart.get()) {
-				autoStart.set(false);
-			}
 			stateSendLocation.set(false);
 			service.pushCommand("TRACKER_SESSION_CLOSE");
 		}
@@ -114,7 +113,7 @@ public class OsMoTracker implements OsMoReactor {
 	}
 
 	public void sendCoordinate(Location location) {
-		if(stateSendLocation.set(true) && location != null) {
+		if(stateSendLocation.get() && location != null) {
 			long ltime = lastBufferLocation == null ? 0 : lastBufferLocation.getTime();
 			
 			if (location.getTime() - ltime  > pref.get()) {
@@ -218,11 +217,8 @@ public class OsMoTracker implements OsMoReactor {
 
 	@Override
 	public void onConnected() {
-		if(autoStart.get() || stateSendLocation.get()) {
-			if(autoStart.get() && !stateSendLocation.get()) {
-				stateSendLocation.set(true);
-			}
-			enableTracker();
+		if(stateSendLocation.get()) {
+			enableTrackerCmd();
 		}
 	}
 

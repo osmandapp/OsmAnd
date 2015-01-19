@@ -181,6 +181,7 @@ public class FavouritesDbHelper {
 		}
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
+			sortAll();
 		}
 
 		return true;
@@ -430,6 +431,9 @@ public class FavouritesDbHelper {
 		};
 		for(FavoriteGroup g : favoriteGroups) {
 			Collections.sort(g.points, favoritesComparator);
+		}
+		if(cachedFavoritePoints != null) {
+			Collections.sort(cachedFavoritePoints, favoritesComparator);
 		}
 	}
 	

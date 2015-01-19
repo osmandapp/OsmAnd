@@ -68,7 +68,7 @@
 <string name="poi_dialog_comment_default">Ändring av POI</string>
 <string name="poi_dialog_other_tags_message">Alla andra taggar sparas</string>
 <string name="default_buttons_commit">Skicka in</string>
-<string name="default_buttons_reset">Återställ</string>
+<string name="default_buttons_reset">Töm</string>
 <string name="filter_current_poiButton">Filter</string>
 <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 <string name="default_buttons_no">Nej</string>
@@ -395,7 +395,7 @@
 <string name="init_native_library">Initierar inbyggt bibliotek …</string>
 <string name="choose_auto_follow_route">Auto-centrerad kartvy</string>
 <string name="choose_auto_follow_route_descr">Tid tills kartvyn synkroniseras med aktuell position</string>
-<string name="auto_follow_route_never">Aldrig</string>
+<string name="auto_follow_route_never">Aldrig (tryck på den blå pilen för att starta vägledning manuellt)</string>
 <string name="auto_follow_route_navigation">Auto-centrera endast nav</string>
 <string name="auto_follow_route_navigation_descr">Auto-centrera kartan endast vid navigering.</string>
 <string name="auto_follow_location_enabled">Auto-centrera aktuell kartvy.</string>
@@ -946,7 +946,7 @@
     <string name="recording_context_menu_delete">Ta bort inspelningen</string>
     <string name="recording_context_menu_play">Spela upp</string>
     <string name="recording_description">Inspelning %1$s %3$s %2$s</string>
-    <string name="recording_default_name">spelar in</string>
+    <string name="recording_default_name">Spelar in</string>
     <string name="av_control_stop">Stoppa</string>
     <string name="map_widget_av_notes">Ljud-/Videoanteckningar</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-modul för höjdkurvor offline</string>
@@ -1445,7 +1445,7 @@
 	<string name="interrupt_music">Avbryt musik</string>
 	<string name="share_route_as_gpx">Dela rutt som GPX-fil</string>
 	<string name="share_route_subject">Utdelad rutt via OsmAnd</string>
-	<string name="keep_informing_never">Aldrig</string>
+	<string name="keep_informing_never">Endast manuellt (tryck på pilen)</string>
     <string name="keep_informing_descr">Läs upp navigationsinstruktioner med regelbundna intervall</string>
     <string name="keep_informing">Upprepa navigationsinstruktioner</string>
 	
@@ -1724,7 +1724,7 @@
     <string name="impassable_road">Undvik vägar …</string>
     <string name="rendering_category_hide">Dölj</string>
     <string name="wake_on_voice">Slå på skärmen</string>
-    <string name="wake_on_voice_descr">Slå på skärmen när jag närmar mig en sväng</string>
+    <string name="wake_on_voice_descr">Slå på skärmen (om den är av) när jag närmar mig en sväng</string>
     <string name="lock_screen_request_explanation">%1$s behöver denna tillåtelse för att stänga av skärmen för strömsparningsfunktionen.</string>
     <string name="wake_on_voice_never">Aldrig</string>
     <string name="advanced_settings">Avancerat</string>
@@ -1769,4 +1769,5 @@
     <string name="voices">Röstprompter</string>
 	<string name="speak_pedestrian">Meddela om övergångsställen</string>
     <string name="rendering_value__name">Standard</string>
-	</resources>
+	<string name="avoid_roads_msg">Du kan ändra rutten genom att markera vägar att undvika</string>
+    </resources>

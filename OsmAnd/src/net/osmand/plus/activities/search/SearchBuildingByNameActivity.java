@@ -9,6 +9,7 @@ import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
 import net.osmand.plus.resources.RegionAddressRepository;
@@ -21,6 +22,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	private RegionAddressRepository region;
 	private City city;
 	private Street street;
+	private OsmandSettings osmandSettings;
 	
 	@Override
 	protected Comparator<? super Building> createComparator() {
@@ -33,7 +35,14 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 			}
 		};
 	}
-	
+
+	@Override
+	protected void reset() {
+		//This is really only a "clear input text field", hence do not reset settings here
+		//osmandSettings.setLastSearchedBuilding("", null);
+		super.reset();
+	}
+
 	@Override
 	public AsyncTask<Object, ?, ?> getInitializeTask() {
 		return new AsyncTask<Object, Void, List<Building>>(){

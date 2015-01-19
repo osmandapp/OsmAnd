@@ -54,7 +54,9 @@ public class BaseLocationIndexRepository<T extends MapObject> {
 			// close previous db
 			db.close();
 		}
-		db = SQLiteDatabase.openOrCreateDatabase(file, null);
+		// fix http://stackoverflow.com/questions/26937152/workaround-for-nexus-9-sqlite-file-write-operations-on-external-dirs
+		db = SQLiteDatabase.openDatabase(file.getPath(), null,
+						 SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING| SQLiteDatabase.CREATE_IF_NECESSARY);
 		name = file.getName().substring(0, file.getName().indexOf('.'));
 		if(db.getVersion() != version){
 			db.close();

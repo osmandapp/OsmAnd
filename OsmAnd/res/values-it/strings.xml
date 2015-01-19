@@ -94,7 +94,7 @@
   <string name="init_native_library">Inizializzazione libreria nativa…</string>
   <string name="choose_auto_follow_route">Centra automaticamente la mappa</string>
   <string name="choose_auto_follow_route_descr">Scegli intervallo di tempo per seguire automaticamente la posizione attuale</string>
-  <string name="auto_follow_route_never">Mai</string>
+  <string name="auto_follow_route_never">Mai (tap sulla freccia blu per avviare la navigazione manualmente)</string>
   <string name="auto_follow_route_navigation">Centra automaticamente solo in navigazione</string>
   <string name="auto_follow_route_navigation_descr">Centra automaticamente la visione della mappa solo durante la navigazione.</string>
   <string name="auto_follow_location_enabled">Visualizzazione mappa centrata automaticamente.</string>
@@ -751,7 +751,7 @@
   <string name="poi_dialog_comment_default">Cambio PDI</string>
   <string name="poi_dialog_other_tags_message">Tutte le altre etichette sono conservate</string>
   <string name="default_buttons_commit">Esegui</string>
-  <string name="default_buttons_reset">Ripristina</string>
+  <string name="default_buttons_reset">Cancella</string>
   <string name="filter_current_poiButton">Filtro</string>
   <string name="edit_filter_delete_menu_item">Elimina</string>
   <string name="edit_filter_save_as_menu_item">Salva come</string>
@@ -1211,8 +1211,8 @@
     <string name="recording_can_not_be_played">La registrazione non può essere riprodotta</string>
     <string name="recording_context_menu_delete">Elimina la registrazione</string>
     <string name="recording_context_menu_play">Riproduci</string>
-    <string name="recording_description">Registrazione %1$s %2$s di %3$s</string>
-    <string name="recording_default_name">registrazione</string>
+    <string name="recording_description">Registrazione %1$s %3$s %2$s</string>
+    <string name="recording_default_name">Registrazione in corso</string>
     <string name="av_control_stop">Ferma</string>
     <string name="av_control_start">Avvia</string>
     <string name="map_widget_av_notes">Note audio/video</string>
@@ -1225,7 +1225,7 @@
     <string name="recording_context_menu_show">Visualizza</string>
     <string name="av_def_action_picture">Scatta una foto</string>
     <string name="recording_context_menu_precord">Scatta una foto</string>
-    <string name="recording_photo_description">Foto %1$s a %2$s</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="stop_routing_confirm">Sei sicuro di voler fermare la navigazione?</string>
     <string name="clear_dest_confirm">Sei sicuro di voler eliminare la tua destinazione (e i punti intermedi)?</string>
     <string name="precise_routing_mode_descr">Abilita per calcolare percorsi precisi senza intoppi. È lento e limitato in distanza.</string>
@@ -1723,7 +1723,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_plugin_description">"OpenStreetMap monitoraggio avanzato in diretta, vedi http://osmo.mobi. Fornisce la possibilità di tracciare altri dispositivi e di essere tracciati. Crea gruppo anonimi, condivide reciprocamente la posizione e comunica. Sono disponibili varie impostazioni di monitoraggio, per la sessione in corso o permanenti. I gruppi anonimi sono limitati a un numero di giorni e alcune funzioni es. non c\'è il controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. "</string>
     <string name="osmo_plugin_name">OsMo (Monitoraggio avanzato in tempo reale)</string>
     <string name="osmo_settings">Monitoraggio OpenStreetMap</string>
-   	<string name="keep_informing_never">Mai</string>
+   	<string name="keep_informing_never">Solo manualmente (tap sulla freccia)</string>
     <string name="keep_informing_descr">Annuncia nuovamente a intervalli regolari le indicazioni di navigazione</string>
     <string name="keep_informing">Ripeti le istruzioni di navigazione</string>
 	<string name="arrival_distance">Annuncio arrivo</string>
@@ -2000,7 +2000,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="impassable_road">Evita strade …</string>
     <string name="rendering_category_hide">Nascondi</string>
     <string name="wake_on_voice">Accendi lo schermo</string>
-    <string name="wake_on_voice_descr">Accendi lo schermo all\'approssimarsi di una svolta</string>
+    <string name="wake_on_voice_descr">Accendi lo schermo (se spento) all\'approssimarsi di una svolta</string>
     <string name="wake_on_voice_never">Mai</string>
     <string name="lock_screen_request_explanation">%1$s necessita di questa autorizzazione per spegnere lo schermo per la funzionalità di risparmio energetico.</string>
     <string name="advanced_settings">Avanzato</string>
@@ -2044,4 +2044,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="show_pedestrian_warnings">Mostra gli attraversamenti pedonali</string>
     <string name="speak_pedestrian">Annuncia gli attraversamenti pedonali</string>
     <string name="rendering_value__name">Preimpostato</string>
+	<string name="navigation_over_track">Iniziare la navigazione sulla traccia?</string>
+	<string name="avoid_roads_msg">Puoi modificare il percorso selezionando le strade da evitare</string>
+    <string name="save_track_to_gpx_globally_headline">Registrazione della traccia su richiesta</string>
 	</resources>
