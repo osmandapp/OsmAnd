@@ -105,16 +105,16 @@ public class GpxUiHelper {
 
 		// 4. Elevation, eleUp, eleDown, if recorded
 		if (analysis.isElevationSpecified()) {
-			description.append("<br/>");
+			description.append(nl);
 			description.append(app.getString(R.string.gpx_info_avg_altitude,
 					getColorValue(speedClr, OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app), html)));
-			description.append("<br/>");
+			description.append(nl);
 			String min = getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.minElevation, app), html);
 			String max = getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app), html);
 			String asc = getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app), html);
 			String desc = getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app), html);
 			description.append(app.getString(R.string.gpx_info_diff_altitude,min +" - " + max ));
-			description.append("<br/>");
+			description.append(nl);
 			description.append(app.getString(R.string.gpx_info_asc_altitude,"\u2193 " + desc + "   \u2191 " + asc + ""));
 		}
 
@@ -122,8 +122,8 @@ public class GpxUiHelper {
 		if(analysis.isSpeedSpecified()){
 			String avg = getColorValue(speedClr, OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app), html);
 			String max = getColorValue(ascClr, OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app), html);
-			description.append("<br/>").append(app.getString(R.string.gpx_info_average_speed,avg));
-			description.append("<br/>").append(app.getString(R.string.gpx_info_maximum_speed,max));
+			description.append(nl).append(app.getString(R.string.gpx_info_average_speed,avg));
+			description.append(nl).append(app.getString(R.string.gpx_info_maximum_speed,max));
 		}
 		return description.toString();
 	}
