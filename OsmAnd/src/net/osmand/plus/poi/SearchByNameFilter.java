@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.poi;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -8,11 +8,14 @@ import java.util.List;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.R.string;
 import net.osmand.util.MapUtils;
 
-public class SearchByNameFilter extends PoiFilter {
+public class SearchByNameFilter extends PoiLegacyFilter {
 
-	public static final String FILTER_ID = PoiFilter.BY_NAME_FILTER_ID; //$NON-NLS-1$
+	public static final String FILTER_ID = PoiLegacyFilter.BY_NAME_FILTER_ID; //$NON-NLS-1$
 	
 	List<Amenity> searchedAmenities = new ArrayList<Amenity>();
 	

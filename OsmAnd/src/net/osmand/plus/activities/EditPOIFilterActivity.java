@@ -20,12 +20,12 @@ import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.PoiFilter;
-import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.SpecialPhrases;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchPOIActivity;
+import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -39,7 +39,7 @@ import android.widget.LinearLayout.LayoutParams;
  */
 public class EditPOIFilterActivity extends OsmandListActivity {
 	public static final String AMENITY_FILTER = "net.osmand.amenity_filter"; //$NON-NLS-1$
-	private PoiFilter filter;
+	private PoiLegacyFilter filter;
 	private PoiFiltersHelper helper;
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
@@ -153,7 +153,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				PoiFilter nFilter = new PoiFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), (OsmandApplication) getApplication());
+				PoiLegacyFilter nFilter = new PoiLegacyFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), (OsmandApplication) getApplication());
 				if (helper.createPoiFilter(nFilter)) {
 					AccessibleToast.makeText(
 							EditPOIFilterActivity.this,

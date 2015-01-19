@@ -16,9 +16,9 @@ import net.osmand.osm.MapRenderingTypes;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -52,7 +52,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	private ResourceManager resourceManager;
 	private RoutingHelper routingHelper;
-	private PoiFilter filter;
+	private PoiLegacyFilter filter;
 	private MapTextLayer mapTextLayer;
 	
 	/// cache for displayed POI
@@ -103,11 +103,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		};
 	}
 
-	public PoiFilter getFilter() {
+	public PoiLegacyFilter getFilter() {
 		return filter;
 	}
 
-	public void setFilter(PoiFilter filter) {
+	public void setFilter(PoiLegacyFilter filter) {
 		this.filter = filter;
 		data.clearCache();
 	}
