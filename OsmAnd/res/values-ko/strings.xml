@@ -189,7 +189,7 @@
 	<string name="init_native_library">기본 라이브러리 초기화중…</string>
 	<string name="choose_auto_follow_route">자동-센터 지도 보기</string>
 	<string name="choose_auto_follow_route_descr">지도 보기가 현재 위치와 동기화하여 복귀할 때까지 걸리는 시간입니다</string>
-	<string name="auto_follow_route_never">결코(Never)</string>
+	<string name="auto_follow_route_never">결코(Never : 수동으로 길안내를 시작하기 위해 파란 화살표를 누르세요)</string>
 	<string name="auto_follow_route_navigation">자동-센터 운행 전용</string>
 	<string name="auto_follow_route_navigation_descr">운행 중에만 자동-센터 지도 보기를 사용합니다.</string>
 	<string name="auto_follow_location_enabled">자동-센터 지도 보기 사용 중입니다.</string>
@@ -1772,7 +1772,7 @@
 	<string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
 	<string name="arrival_distance">도착 알림</string>
     <string name="arrival_distance_descr">도착 알림을 원하세요 ?</string>
-    <string name="keep_informing_never">결코</string>
+    <string name="keep_informing_never">수동으로 (화살표를 누르세요)</string>
     <string name="keep_informing_descr">정기적인 간격으로 운행 명령을 다시 알리기</string>
     <string name="keep_informing">운행 명령을 반복</string>
 	<string name="navigation_intent_invalid">잘못된 포맷 : %s</string>
@@ -2063,7 +2063,7 @@
     <string name="rendering_attr_tramTrainRoutes_name">전차 및 기차 노선</string>
     <string name="rendering_category_hide">숨기기</string>
     <string name="wake_on_voice">화면 켜기</string>
-    <string name="wake_on_voice_descr">교차로에 접근할 때 전화 화면 켜기</string>
+    <string name="wake_on_voice_descr">교차로에 접근할 때 화면 켜기</string>
     <string name="lock_screen_request_explanation">%1$의 절전 기능에 대한 화면을 해제 하려면 이 권한이 필요 합니다.</string>
     <string name="wake_on_voice_never">결코</string>
     <string name="advanced_settings">고급</string>
