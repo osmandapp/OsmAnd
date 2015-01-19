@@ -468,7 +468,7 @@
 	<string name="live_monitoring_interval">Interval for online sporing</string>
 	<string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, long={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}</string>
 	<string name="live_monitoring_url">Webadresse for online sporing</string>
-	<string name="gpx_monitoring_disabled_warn">Aktiver \'Log spor til GPX-fil\' indstilling.</string>
+	<string name="gpx_monitoring_disabled_warn">Log spor med GPX modul eller via \'Tur optagelse\' indstillinger.</string>
 	<string name="show_current_gpx_title">Vis aktuelt spor</string>
 	<string name="free_version_message">Den gratis version af OsmAnd er begrænset til at hente %1$s kort og understøtter ikke offline Wikipedia artikler.</string>
 	<string name="free_version_title">Gratis version</string>
