@@ -1821,4 +1821,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="rendering_value__name">Predefinidu</string>
 	<string name="navigation_over_track">Incumentzare su nàvigu in sa rasta?</string>
 	<string name="avoid_roads_msg">Podes cambiare s\'àndala ischertande sas istradas de istransire</string>
-    </resources>
+    <string name="save_track_to_gpx_globally_headline">Registratzione de sa rasta a segus de rechesta</string>
+	</resources>
