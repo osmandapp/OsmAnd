@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.view.*;
+import android.view.MenuItem.OnMenuItemClickListener;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
@@ -31,9 +35,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Xml;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -44,13 +45,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
-
-public class SearchAddressOnlineFragment extends SherlockFragment implements SearchActivityChild, OnItemClickListener {
+public class SearchAddressOnlineFragment extends Fragment implements SearchActivityChild, OnItemClickListener {
 	
 	private LatLon location;
 	private final static Log log = PlatformUtil.getLog(SearchAddressOnlineFragment.class);
@@ -63,32 +58,34 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		MenuItem menuItem;
 		boolean light = ((OsmandApplication) getActivity().getApplication()).getSettings().isLightActionBar();
-		menuItem = menu.add(0, 1, 0, R.string.search_offline_clear_search).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT );
-		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gremove_light : R.drawable.ic_action_gremove_dark);
+		List<BottomMenuItem> menuItems = new ArrayList<BottomMenuItem>();
+		BottomMenuItem menuItem = new BottomMenuItem().
+				setIcon(light ? R.drawable.ic_action_gremove_light : R.drawable.ic_action_gremove_dark).
+				setMsg(R.string.search_offline_clear_search).
+				setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						searchText.setText("");
+						adapter.clear();
+					}
+				});
+		menuItems.add(menuItem);
 
-		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-				searchText.setText("");
-				adapter.clear();
-				return true;
-			}
-		});
+		menuItem = new BottomMenuItem().
+				setIcon(light ?  R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark).
+				setMsg(R.string.search_offline_address).
+				setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						((SearchActivity) getActivity()).startSearchAddressOffline();
+					}
+				});
+		menuItems.add(menuItem);
+
 		if (getActivity() instanceof SearchActivity) {
-			menuItem = menu.add(0, 0, 0, R.string.search_offline_address).setShowAsActionFlags(
-					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark);
-			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-					((SearchActivity) getActivity()).startSearchAddressOffline();
-					return true;
-				}
-			});
+			((SearchActivity)getActivity()).setupBottomMenu(menuItems);
 		}
-		
 	}
 	
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {

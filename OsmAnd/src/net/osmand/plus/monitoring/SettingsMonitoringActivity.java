@@ -1,6 +1,7 @@
 package net.osmand.plus.monitoring;
 
 
+import android.view.Window;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandSettings;
@@ -20,7 +21,6 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 
-import com.actionbarsherlock.view.Window;
 
 public class SettingsMonitoringActivity extends SettingsBaseActivity {
 	private CheckBoxPreference routeServiceEnabled;
@@ -35,14 +35,14 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 	public SettingsMonitoringActivity() {
 		super(true);
 	}
-	
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 		super.onCreate(savedInstanceState);
-		setSupportProgressBarIndeterminateVisibility(false);
-		getSupportActionBar().setTitle(R.string.monitoring_settings);
+		//setSupportProgressBarIndeterminateVisibility(false);
+		getToolbar().setTitle(R.string.monitoring_settings);
 		PreferenceScreen grp = getPreferenceScreen();
 		
 		createLoggingSection(grp);
@@ -121,7 +121,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 	}
 	
 	private void saveCurrentTracks(final SavingTrackHelper helper) {
-		setSupportProgressBarIndeterminateVisibility(true);
+		//setSupportProgressBarIndeterminateVisibility(true);
 		getMyApplication().getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, Void>() {
 
 			@Override
@@ -133,7 +133,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 			}
 			@Override
 			protected void onPostExecute(Void result) {
-				setSupportProgressBarIndeterminateVisibility(false);
+				//setSupportProgressBarIndeterminateVisibility(false);
 			}
 
 		}, (Void) null);

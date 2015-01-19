@@ -9,6 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import android.view.Window;
 import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -52,7 +53,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.actionbarsherlock.view.Window;
 
 public class SettingsGeneralActivity extends SettingsBaseActivity {
 
@@ -61,13 +61,13 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	private ListPreference applicationModePreference;
 	private ListPreference drivingRegionPreference;
 
-	
+
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
-		setSupportProgressBarIndeterminateVisibility(false);
-		getSupportActionBar().setTitle(R.string.global_app_settings);
+		getToolbar().setTitle(R.string.global_app_settings);
 		addPreferencesFromResource(R.xml.general_settings);
 		String[] entries;
 		String[] entrieValues;
@@ -543,10 +543,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	}
 
 	public void reloadIndexes() {
-		setSupportProgressBarIndeterminateVisibility(true);
-		final CharSequence oldTitle = getSupportActionBar().getTitle();
-		getSupportActionBar(). setTitle(getString(R.string.loading_data));
-		getSupportActionBar().setSubtitle(getString(R.string.reading_indexes));
+		setProgressVisibility(true);
+		final CharSequence oldTitle = getToolbar().getTitle();
+		getToolbar(). setTitle(getString(R.string.loading_data));
+		getToolbar().setSubtitle(getString(R.string.reading_indexes));
 		new AsyncTask<Void, Void, List<String>>() {
 
 			@Override
@@ -556,10 +556,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			
 			protected void onPostExecute(List<String> result) {
 				showWarnings(result);
-				getSupportActionBar().setTitle(oldTitle);
-				getSupportActionBar().setSubtitle("");
-				setSupportProgressBarIndeterminateVisibility(false);
-			};
+				getToolbar().setTitle(oldTitle);
+				getToolbar().setSubtitle("");
+				setProgressVisibility(false);
+			}
 			
 		}.execute();
 	}
@@ -571,8 +571,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 				@Override
 				protected void onPreExecute() {
-					setSupportProgressBarIndeterminateVisibility(true);
-				};
+					setProgressVisibility(true);
+				}
 
 				@Override
 				protected Void doInBackground(Void... params) {
@@ -582,11 +582,11 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 				@Override
 				protected void onPostExecute(Void result) {
-					setSupportProgressBarIndeterminateVisibility(false);
+					setProgressVisibility(false);
 					if (!NativeOsmandLibrary.isNativeSupported(storage, getMyApplication())) {
 						AccessibleToast.makeText(SettingsGeneralActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
 					}
-				};
+				}
 			}.execute();
 		}
 	}

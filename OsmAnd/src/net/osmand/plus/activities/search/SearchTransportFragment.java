@@ -7,6 +7,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.support.v4.app.Fragment;
+import android.view.*;
 import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -30,10 +32,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -44,9 +43,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 
-public class SearchTransportFragment extends SherlockFragment implements SearchActivityChild, OnItemClickListener {
+public class SearchTransportFragment extends Fragment implements SearchActivityChild, OnItemClickListener {
 
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
@@ -109,7 +107,8 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 		
 		if(intermediateList.getCount() == 0){
 			intermediateListAdapater.add(null);
-		}	
+		}
+		setHasOptionsMenu(true);
 		return view;
 	}
 	
@@ -324,10 +323,9 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				int i = which;
-				if(i >= 0){
-					TransportStop stop = stops.get(i);
-					showContextMenuOnStop(stop, item, i);
+				if(which >= 0){
+					TransportStop stop = stops.get(which);
+					showContextMenuOnStop(stop, item, which);
 				}
 			}
 			
@@ -626,6 +624,11 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 
 	}
 
-
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		if (getActivity() instanceof SearchActivity) {
+			((SearchActivity)getActivity()).setupBottomMenu(new ArrayList<BottomMenuItem>());
+		}
+	}
 
 }

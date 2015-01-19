@@ -9,7 +9,7 @@
     <dimen name="dashFavIconSize">28dp</dimen>
     <dimen name="dashFavIconMargin">12dp</dimen>
     <dimen name="dashFavDirectionSize">10dp</dimen>
-    <dimen name="dashMapHeight">110dp</dimen>
+    <dimen name="dashMapHeight">250dp</dimen>
     <dimen name="dashNoteIconSize">28dp</dimen>
     <dimen name="dashPluginPadding">4dp</dimen>
     <dimen name="dashPluginMargin">8dp</dimen>
@@ -19,7 +19,7 @@
     <dimen name="dashPadding">6dp</dimen>
     <dimen name="dashAboutTextSize">20sp</dimen>
     <dimen name="dashCardMargin">4dp</dimen>
-
+	<dimen name="abp__shadow_height">4dp</dimen>
 
     <!-- TextSizes -->
     <dimen name="showAllButtonTextSize">12sp</dimen>

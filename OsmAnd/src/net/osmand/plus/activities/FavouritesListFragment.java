@@ -3,9 +3,12 @@
  */
 package net.osmand.plus.activities;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import android.support.v4.app.ListFragment;
+import android.view.*;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
@@ -13,6 +16,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.search.BottomMenuItem;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -23,9 +27,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -33,12 +34,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
-import com.actionbarsherlock.app.SherlockListFragment;
-
 /**
  * 
  */
-public class FavouritesListFragment extends SherlockListFragment implements SearchActivityChild {
+public class FavouritesListFragment extends ListFragment implements SearchActivityChild {
 
 	public static final String SELECT_FAVORITE_POINT_INTENT_KEY = "SELECT_FAVORITE_POINT_INTENT_KEY"; 
 	public static final int SELECT_FAVORITE_POINT_RESULT_OK = 1;
@@ -57,6 +56,7 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 		OsmandApplication app = (OsmandApplication) getApplication();
 		favouritesAdapter = new FavouritesAdapter(activity, app.getFavorites().getFavouritePoints());
 		setListAdapter(favouritesAdapter);
+		setHasOptionsMenu(true);
 	}
 
 	private OsmandApplication getApplication() {
@@ -99,8 +99,15 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 	public boolean isSelectFavoriteMode(){
 		return selectFavoriteMode;
 	}
-	
-	
+
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		if (getActivity() instanceof SearchActivity) {
+			((SearchActivity)getActivity()).setupBottomMenu(new ArrayList<BottomMenuItem>());
+		}
+	}
+
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		

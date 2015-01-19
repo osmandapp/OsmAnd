@@ -32,11 +32,12 @@ import android.preference.PreferenceScreen;
 public class SettingsAudioVideoActivity extends SettingsBaseActivity {
 
 	private static final Log log = PlatformUtil.getLog(AudioVideoNotesPlugin.class);
-	
+
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setTitle(R.string.av_settings);
+		getToolbar().setTitle(R.string.av_settings);
 		PreferenceScreen grp = getPreferenceScreen();
 		AudioVideoNotesPlugin p = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
 		if (p != null) {

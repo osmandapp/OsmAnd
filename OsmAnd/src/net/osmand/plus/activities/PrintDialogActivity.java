@@ -3,6 +3,8 @@
  */
 package net.osmand.plus.activities;
 
+import android.support.v7.app.ActionBarActivity;
+import android.view.Window;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.annotation.SuppressLint;
@@ -20,13 +22,11 @@ import android.print.PrintManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Window;
 
 /**
  *
  */
-public class PrintDialogActivity extends SherlockFragmentActivity {
+public class PrintDialogActivity extends ActionBarActivity {
 	private WebView webView;
 	PrintJobId printJobId = null;
 
@@ -35,8 +35,10 @@ public class PrintDialogActivity extends SherlockFragmentActivity {
         //This has to be called before setContentView and you must use the
         //class in com.actionbarsherlock.view and NOT android.view
 		((OsmandApplication) getApplication()).applyTheme(this);
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		}
 		super.onCreate(icicle);
 		setSupportProgressBarIndeterminateVisibility(false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);

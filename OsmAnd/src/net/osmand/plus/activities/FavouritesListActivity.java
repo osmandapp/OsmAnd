@@ -1,11 +1,12 @@
 package net.osmand.plus.activities;
 
+import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import net.osmand.plus.OsmandApplication;
 import android.os.Bundle;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-public class FavouritesListActivity extends SherlockFragmentActivity {
+public class FavouritesListActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +22,7 @@ public class FavouritesListActivity extends SherlockFragmentActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
 		case android.R.id.home:

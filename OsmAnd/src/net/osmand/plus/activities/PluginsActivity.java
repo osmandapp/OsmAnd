@@ -4,6 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import android.widget.*;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -11,10 +12,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class PluginsActivity extends OsmandListActivity {
 
@@ -40,13 +37,6 @@ public class PluginsActivity extends OsmandListActivity {
 	}
 	
 	
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-				
-		click(position);
-	}
-
 	private void click(int position) {
 		OsmandPlugin item = getListAdapter().getItem(position);
 		boolean enable = !restartPlugins.contains(item.getId());
@@ -67,7 +57,12 @@ public class PluginsActivity extends OsmandListActivity {
 	public OsmandPluginsAdapter getListAdapter() {
 		return (OsmandPluginsAdapter) super.getListAdapter();
 	}
-	
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		click(position);
+	}
+
 	protected class OsmandPluginsAdapter extends ArrayAdapter<OsmandPlugin> {
 		
 		public OsmandPluginsAdapter(List<OsmandPlugin> plugins) {

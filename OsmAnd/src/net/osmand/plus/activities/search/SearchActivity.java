@@ -8,6 +8,11 @@ import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
 
+import android.content.pm.ActivityInfo;
+import android.os.Build;
+import android.support.v7.app.ActionBarActivity;
+import android.view.*;
+import android.widget.*;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -22,29 +27,16 @@ import net.osmand.util.Algorithms;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-import android.widget.TabWidget;
-import android.widget.TextView;
+import android.support.v7.app.ActionBar.OnNavigationListener;
 
-import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-
-
-public class SearchActivity extends SherlockFragmentActivity implements OsmAndLocationListener {
+public class SearchActivity extends ActionBarActivity implements OsmAndLocationListener {
 	private static final String SEARCH_HISTORY = "Search_History";
 	private static final String SEARCH_FAVORITES = "Search_Favorites";
 	private static final String SEARCH_TRANSPORT = "Search_Transport";
@@ -81,13 +73,14 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 	private TabsAdapter mTabsAdapter;
 	List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 	private boolean showOnlyOneTab;
-	
-	
+
 	public interface SearchActivityChild {
 		
 		public void locationUpdate(LatLon l);
 	}
-	
+
+
+
 	private View getTabIndicator(TabHost tabHost, int imageId, int stringId){
 		View r = getLayoutInflater().inflate(R.layout.search_main_tab_header, tabHost, false);
 		ImageView tabImage = (ImageView)r.findViewById(R.id.TabImage);
@@ -102,7 +95,6 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		long t = System.currentTimeMillis();
-		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		setContentView(R.layout.search_main);
 		settings = ((OsmandApplication) getApplication()).getSettings();
@@ -144,9 +136,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 			mTabsAdapter.addTab(transportTab, getFragment(TRANSPORT_TAB_INDEX), null);
 			tabHost.setCurrentTab(tab);
 		} else {
-			FrameLayout fl = new FrameLayout(this);
-			fl.setId(R.id.layout);
-			setContentView(fl);
+			setContentView(R.layout.search_activity_single);
 			Class<?> cl = getFragment(tab);
 			try {
 				getSupportFragmentManager().beginTransaction().replace(R.id.layout, (Fragment) cl.newInstance()).commit();
@@ -188,7 +178,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 
 	protected Class<?> getFragment(int tab) {
 		if(tab == POI_TAB_INDEX) {
-			return SearchPoiFilterActivity.class;
+			return SearchPoiFilterFragment.class;
 		} else if(tab == ADDRESS_TAB_INDEX) {
 			return searchOnLine ? SearchAddressOnlineFragment.class : SearchAddressFragment.class;
 		} else if(tab == LOCATION_TAB_INDEX) {
@@ -200,11 +190,11 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 		} else if(tab == FAVORITES_TAB_INDEX) {
 			return FavouritesListFragment.class;
 		}
-		return SearchPoiFilterActivity.class;
+		return SearchPoiFilterFragment.class;
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
 		case android.R.id.home:
@@ -216,7 +206,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 	}
 
 	private void setTopSpinner() {
-		spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), R.layout.sherlock_spinner_item, 
+		spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), android.R.layout.simple_spinner_item,
 				new ArrayList<String>(Arrays.asList(new String[]{
 						getString(R.string.search_position_undefined),
 						getString(R.string.search_position_current_location),
@@ -225,7 +215,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 						getString(R.string.search_position_address)
 					}))
 				);
-		spinnerAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
+		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, new OnNavigationListener() {
 			
 			@Override
@@ -294,8 +284,33 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 			}
 		}
 	}
-	
-	
+
+	public void setupBottomMenu(List<BottomMenuItem> menuItems) {
+		LinearLayout bottomControls = (LinearLayout) findViewById(R.id.bottomControls);
+		if (bottomControls == null) {
+			return;
+		}
+		bottomControls.removeAllViews();
+
+		if (menuItems.size() == 0) {
+			findViewById(R.id.devider).setVisibility(View.GONE);
+		} else {
+			findViewById(R.id.devider).setVisibility(View.VISIBLE);
+		}
+
+		for (BottomMenuItem item : menuItems) {
+			ImageButton imageButton = new ImageButton(this);
+			imageButton.setImageResource(item.getIcon());
+			TableRow.LayoutParams params = new TableRow.LayoutParams(0,
+					ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
+			params.gravity = Gravity.CENTER_VERTICAL;
+			imageButton.setLayoutParams(params);
+			imageButton.setOnClickListener(item.getOnClickListener());
+			imageButton.setBackgroundResource(R.drawable.bottom_menu_item);
+			bottomControls.addView(imageButton);
+		}
+	}
+
 	public void updateLocation(net.osmand.Location location){
 		if (location != null) {
 			updateSearchPoint(new LatLon(location.getLatitude(), location.getLongitude()),

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import android.widget.*;
 import net.osmand.AndroidUtils;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
@@ -31,11 +32,6 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Filterable;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class ContributionVersionActivity extends OsmandListActivity {
 
@@ -191,28 +187,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		
 	}
 	
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-		final OsmAndBuild item = (OsmAndBuild) getListAdapter().getItem(position);
-		Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(MessageFormat.format(getString(R.string.install_selected_build), item.tag, 
-				AndroidUtils.formatDate(getMyApplication(), item.date.getTime()), item.size));
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				currentSelectedBuild = item;
-				int kb = (int) (Double.parseDouble(item.size) * 1024);
-				startThreadOperation(INSTALL_BUILD, getString(R.string.downloading_build), kb);
-			}
-		});
-		
-		builder.setNegativeButton(R.string.default_buttons_no, null);
-		builder.show();
-		
-	}
-	
+
 	@Override
 	public OsmandBuildsAdapter getListAdapter() {
 		return (OsmandBuildsAdapter) super.getListAdapter();
@@ -227,8 +202,28 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			progressDlg = null;
 		}
 	}
-	
-	
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		final OsmAndBuild item = (OsmAndBuild) getListAdapter().getItem(position);
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(MessageFormat.format(getString(R.string.install_selected_build), item.tag,
+				AndroidUtils.formatDate(getMyApplication(), item.date.getTime()), item.size));
+		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				currentSelectedBuild = item;
+				int kb = (int) (Double.parseDouble(item.size) * 1024);
+				startThreadOperation(INSTALL_BUILD, getString(R.string.downloading_build), kb);
+			}
+		});
+
+		builder.setNegativeButton(R.string.default_buttons_no, null);
+		builder.show();
+	}
+
+
 	protected class OsmandBuildsAdapter extends ArrayAdapter<OsmAndBuild> implements Filterable {
 		
 

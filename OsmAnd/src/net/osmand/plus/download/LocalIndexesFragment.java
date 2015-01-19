@@ -13,6 +13,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.view.ActionMode;
+import android.view.*;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
@@ -39,11 +43,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StatFs;
 import android.text.method.LinkMovementMethod;
-import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -52,13 +52,6 @@ import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.ActionMode.Callback;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.SubMenu;
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
@@ -99,7 +92,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		return view;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked","deprecation"})
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -132,7 +125,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				int group = ExpandableListView.getPackedPositionGroup(packedPos);
 				int child = ExpandableListView.getPackedPositionChild(packedPos);
 				if (child >= 0 && group >= 0) {
-					final LocalIndexInfo point = (LocalIndexInfo) listAdapter.getChild(group, child);
+					final LocalIndexInfo point = listAdapter.getChild(group, child);
 					showContextMenu(point);
 				}
 			}
@@ -479,6 +472,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 //		return super.onRetainNonConfigurationInstance();
 //	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		if (!this.isAdded()) {
@@ -519,23 +513,24 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 						.listen(listener).position(4).reg();
 		OsmandPlugin.onOptionsMenuActivity(getDownloadActivity(), null, optionsMenuAdapter);
 		// doesn't work correctly
-		int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
+		//int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
+		int max = 4;
 		SubMenu split = null;
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
 			if (j + 1 >= max && optionsMenuAdapter.length() > max) {
 				if (split == null) {
 					split = menu.addSubMenu(0, 1, j + 1, R.string.default_buttons_other_actions);
-					split.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
-							: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
-					split.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+//					split.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
+//							: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
+					split.getItem();
+					MenuItemCompat.setShowAsAction(split.getItem(),MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
 				item = split.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
-				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM );
+				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
 			} else {
 				item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
-				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM  
-						);
+				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
 			}
 			if (optionsMenuAdapter.getImageId(j, isLightActionBar()) != 0) {
 				item.setIcon(optionsMenuAdapter.getImageId(j, isLightActionBar()));
@@ -603,7 +598,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		
 		selectionMode = true;
 		selectedItems.clear();
-		actionMode = getDownloadActivity().startActionMode(new Callback() {
+		actionMode = getDownloadActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -612,8 +607,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				if (actionIconId != 0) {
 					it.setIcon(actionIconId);
 				}
-				it.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM |
-						MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.setShowAsAction(it, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
+						MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 				return true;
 			}
 
@@ -652,7 +647,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		//findViewById(R.id.DescriptionText).setVisibility(View.GONE);
 		listAdapter.notifyDataSetChanged();
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	private void updateDescriptionTextWithSize(){
 		File dir = getMyApplication().getAppPath("").getParentFile();
 		String size = formatGb.format(new Object[]{0});
@@ -911,7 +907,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		@Override
 		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 			View v = convertView;
-			final LocalIndexInfo child = (LocalIndexInfo) getChild(groupPosition, childPosition);
+			final LocalIndexInfo child = getChild(groupPosition, childPosition);
 			if (v == null ) {
 				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
@@ -1008,8 +1004,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
 			List<LocalIndexInfo> list = data.get(group);
 			int size = 0;
-			for (int i = 0; i < list.size(); i++) {
-				int sz = list.get(i).getSize();
+			for (LocalIndexInfo aList : list) {
+				int sz = aList.getSize();
 				if (sz < 0) {
 					size = 0;
 					break;

@@ -2,25 +2,18 @@ package net.osmand.plus.dashboard;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.*;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.app.SherlockListActivity;
-import com.actionbarsherlock.internal.widget.IcsAdapterView;
-import com.actionbarsherlock.view.MenuItem;
+import android.widget.ListView;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 
 import java.util.ArrayList;
@@ -29,7 +22,7 @@ import java.util.List;
 /**
  * Created by Denis on 23.12.2014.
  */
-public class DashAudioVideoNotesActivity extends SherlockListActivity {
+public class DashAudioVideoNotesActivity extends ActionBarActivity {
 	AudioVideoNotesPlugin plugin;
 	List<AudioVideoNotesPlugin.Recording> items;
 	NotesAdapter listAdapter;
@@ -40,15 +33,21 @@ public class DashAudioVideoNotesActivity extends SherlockListActivity {
 		setContentView(R.layout.editing_poi_filter);
 
 		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
-
-		ColorDrawable color = new ColorDrawable(getResources().getColor(R.color.actionbar_color));
+		int c = getResources().getColor(R.color.actionbar_color);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+			Window window = getWindow();
+			window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+			window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			window.setStatusBarColor(c);
+		}
+		ColorDrawable color = new ColorDrawable(c);
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle(R.string.audionotes_plugin_name);
 		actionBar.setBackgroundDrawable(color);
 		actionBar.setIcon(android.R.color.transparent);
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		getListView().setBackgroundColor(getResources().getColor(R.color.dashboard_background));
+		findViewById(android.R.id.list).setBackgroundColor(getResources().getColor(R.color.dashboard_background));
 	}
 
 	@Override
@@ -56,7 +55,7 @@ public class DashAudioVideoNotesActivity extends SherlockListActivity {
 		super.onResume();
 		items = new ArrayList<AudioVideoNotesPlugin.Recording>(plugin.getAllRecordings());
 		listAdapter = new NotesAdapter(items);
-		setListAdapter(listAdapter);
+		((ListView)findViewById(android.R.id.list)).setAdapter(listAdapter);
 	}
 
 	private void showContextMenu(final AudioVideoNotesPlugin.Recording recording){

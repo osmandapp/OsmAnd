@@ -1,8 +1,7 @@
 package net.osmand.access;
 
+import android.support.v7.app.ActionBarActivity;
 import android.view.MotionEvent;
-
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 // Provide some additional accessibility means for activity view elements.
 //
@@ -10,7 +9,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 // and then add view elements you wish to be accessible
 // to the accessibleContent list.
 //
-public class AccessibleActivity extends SherlockFragmentActivity implements AccessibleContent.Callback {
+public class AccessibleActivity extends ActionBarActivity implements AccessibleContent.Callback {
 
     // List of accessible views. Use accessibleContent.add(element)
     // to add element to it.

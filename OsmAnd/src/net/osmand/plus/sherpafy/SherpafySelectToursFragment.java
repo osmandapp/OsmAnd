@@ -2,6 +2,9 @@ package net.osmand.plus.sherpafy;
 
 import java.util.List;
 
+import android.support.v4.app.ListFragment;
+import android.support.v4.view.MenuItemCompat;
+import android.view.*;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -14,9 +17,6 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -27,13 +27,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockListFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
-public class SherpafySelectToursFragment extends SherlockListFragment {
+public class SherpafySelectToursFragment extends ListFragment {
 	private static final int ACTION_DOWNLOAD = 5;
 	OsmandApplication app;
 	private SherpafyCustomization custom;
@@ -44,7 +39,7 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		app = (OsmandApplication) getSherlockActivity().getApplication();
+		app = (OsmandApplication) getActivity().getApplication();
 		custom = (SherpafyCustomization) app.getAppCustomization();
 		setHasOptionsMenu(true);
 		refreshAdapter();
@@ -62,13 +57,14 @@ public class SherpafySelectToursFragment extends SherlockListFragment {
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, ACTION_DOWNLOAD, 0, R.string.sherpafy_download_tours).setShowAsActionFlags(
-				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		MenuItem menuItem = menu.add(0, ACTION_DOWNLOAD, 0, R.string.sherpafy_download_tours);
+		MenuItemCompat.setShowAsAction(menuItem,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 //		boolean light = true; //app.getSettings().isLightActionBar();
 		//menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
-		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
-			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+			public boolean onMenuItemClick(MenuItem item) {
 				openAccessCode();
 				return true;
 			}

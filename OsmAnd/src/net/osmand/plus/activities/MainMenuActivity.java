@@ -6,6 +6,12 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Random;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
+import android.view.*;
+import android.widget.LinearLayout;
 import net.osmand.Location;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -14,10 +20,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.dashboard.DashDownloadMapsFragment;
-import net.osmand.plus.dashboard.DashErrorFragment;
-import net.osmand.plus.dashboard.DashFavoritesFragment;
-import net.osmand.plus.dashboard.DashUpdatesFragment;
+import net.osmand.plus.dashboard.*;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
@@ -44,14 +47,9 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 
 /**
  */
@@ -72,6 +70,61 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	private static final int SETTINGS_ID = 1;
 	private static final int EXIT_ID = 2;
 
+	private static final int START_ALPHA = 60;
+
+	int defaultMargin;
+
+	private Drawable actionBarBackground;
+	FloatingActionButton fabButton;
+
+	private NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView.OnScrollChangedListener() {
+		public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
+			//making background of actionbar transparent with scroll
+			final int imageHeight = findViewById(R.id.map_image).getMeasuredHeight();
+			final int headerHeight = imageHeight - getSupportActionBar().getHeight();
+			final float ratio = (float) Math.min(Math.max(t, 0), headerHeight) / headerHeight;
+			final int newAlpha = (int) (ratio * 255);
+			if (headerHeight < t){
+				//hiding action bar - showing floating button
+				//getSupportActionBar().hide();
+				fabButton.showFloatingActionButton();
+			} else {
+				//getSupportActionBar().show();
+				fabButton.hideFloatingActionButton();
+
+				//makes other cards to move on top of the map card to make it look like android animations
+				View fragments = findViewById(R.id.fragments);
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+				int margintop = -(int)(ratio * 60);
+				Resources r = getResources();
+				int px = (int) TypedValue.applyDimension(
+						TypedValue.COMPLEX_UNIT_DIP,
+						margintop,
+						r.getDisplayMetrics());
+				params.setMargins(0, px + defaultMargin, 0, 0);
+				fragments.setLayoutParams(params);
+			}
+			if (newAlpha > START_ALPHA) {
+				actionBarBackground.setAlpha(newAlpha);
+			}
+
+		}
+	};
+
+	private Drawable.Callback mDrawableCallback = new Drawable.Callback() {
+		@Override
+		public void invalidateDrawable(Drawable who) {
+			getSupportActionBar().setBackgroundDrawable(who);
+		}
+
+		@Override
+		public void scheduleDrawable(Drawable who, Runnable what, long when) {
+		}
+
+		@Override
+		public void unscheduleDrawable(Drawable who, Runnable what) {
+		}
+	};
 
 	@Override
 	public void onPause() {
@@ -101,22 +154,28 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		setContentView(R.layout.dashboard);
 
 		String textVersion = Version.getFullVersion(getMyApplication());
-		if (textVersion.indexOf("#") != -1) {
+		if (textVersion.contains("#")) {
 			textVersion = textVersion.substring(0, textVersion.indexOf("#") + 1);
 		}
-		getSupportActionBar().setTitle(textVersion);
-		ColorDrawable color = new ColorDrawable(getResources().getColor(R.color.actionbar_color));
-		getSupportActionBar().setBackgroundDrawable(color);
-		getSupportActionBar().setIcon(android.R.color.transparent);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle(textVersion);
+		actionBar.setIcon(android.R.color.transparent);
+		actionBarBackground = new ColorDrawable(Color.argb(180, 0, 0, 0));
+		actionBarBackground.setAlpha(START_ALPHA);
+		actionBar.setBackgroundDrawable(actionBarBackground);
+		((NotifyingScrollView)findViewById(R.id.main_scroll)).setOnScrollChangedListener(onScrollChangedListener);
+		//setting up callback for drawable on actionbar for old android
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+			actionBarBackground.setCallback(mDrawableCallback);
+		}
 
 		boolean firstTime = initApp(this, getMyApplication());
 		if (getMyApplication().getAppCustomization().checkExceptionsOnStart()) {
 			checkPreviousRunsForExceptions(firstTime);
 		}
-		setupContributionVersion();
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			final FloatingActionButton fabButton = new FloatingActionButton.Builder(this)
+			fabButton = new FloatingActionButton.Builder(this)
 					.withDrawable(getResources().getDrawable(R.drawable.ic_action_map))
 					.withButtonColor(Color.parseColor("#ff8f00"))
 					.withGravity(Gravity.BOTTOM | Gravity.RIGHT)
@@ -128,40 +187,15 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 					startMapActivity();
 				}
 			});
-
-			final ScrollView mainScroll = (ScrollView) findViewById(R.id.main_scroll);
-			if (mainScroll == null){
-				return;
-			}
-			mainScroll.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-				private int previousScroll = 0;
-
-				@Override
-				public void onScrollChanged() {
-					int scrollY = mainScroll.getScrollY();
-					if (previousScroll == scrollY || mainScroll.getChildCount() == 0){
-						return;
-					}
-
-					if (scrollY > previousScroll && previousScroll >= 0){
-						if (!fabButton.isHidden() ){
-							fabButton.hideFloatingActionButton();
-						}
-					} else {
-						int layoutHeight = mainScroll.getChildAt(0).getMeasuredHeight();
-						int scrollHeight = scrollY + mainScroll.getHeight();
-						//scroll can actually be more than entire layout height
-						if (fabButton.isHidden() && scrollHeight < layoutHeight){
-							fabButton.showFloatingActionButton();
-						}
-					}
-					previousScroll = scrollY;
-				}
-
-			});
 		}
+		fabButton.hideFloatingActionButton();
 		getLocationProvider().addCompassListener(this);
 		getLocationProvider().registerOrUnregisterCompassListener(true);
+
+		defaultMargin = (int) TypedValue.applyDimension(
+				TypedValue.COMPLEX_UNIT_DIP,
+				-40,
+				getResources().getDisplayMetrics());
 	}
 
 	@Override
@@ -181,44 +215,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		if (resultCode == APP_EXIT_CODE) {
 			getMyApplication().closeApplication(this);
 		}
-	}
-
-	protected void setupContributionVersion() {
-		findViewById(R.id.credentials).setVisibility(View.VISIBLE);
-//Copyright notes and links have been put on the 'About' screen
-//		final TextView textVersionView = (TextView) findViewById(R.id.Copyright);
-//		final Calendar inst = Calendar.getInstance();
-//		inst.setTime(new Date());
-//		final String textVersion = "\u00A9 OsmAnd " + inst.get(Calendar.YEAR);
-//		textVersionView.setText(textVersion);
-//		final SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
-//		textVersionView.setOnClickListener(new OnClickListener(){
-//			int i = 0;
-//			@Override
-//			public void onClick(View v) {
-//				if(i++ > 8 && Version.isDeveloperVersion(getMyApplication())) {
-//					prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
-//					enableLink(DashboardActivity.this, textVersion, textVersionView);
-//				}
-//			}
-//		});
-		// only one commit should be with contribution version flag
-//		 prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
-//		if (prefs.contains(CONTRIBUTION_VERSION_FLAG) && Version.isDeveloperVersion(getMyApplication())) {
-//			enableLink(this, textVersion, textVersionView);
-//		}
-		final TextView about = (TextView) findViewById(R.id.About);
-		final String aboutString = getString(R.string.about_settings);
-		SpannableString ss = new SpannableString(aboutString);
-		ClickableSpan clickableSpan = new ClickableSpan() {
-			@Override
-			public void onClick(View textView) {
-				showAboutDialog(MainMenuActivity.this, getMyApplication());
-			}
-		};
-		ss.setSpan(clickableSpan, 0, aboutString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		about.setText(ss);
-		about.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
 	private void addErrorFragment() {
@@ -381,12 +377,12 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, HELP_ID, 0, R.string.tips_and_tricks).setIcon(R.drawable.ic_ac_help)
-				.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		menu.add(0, SETTINGS_ID, 0, R.string.settings).setIcon(R.drawable.ic_ac_settings)
-				.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		menu.add(0, EXIT_ID, 0, R.string.exit_Button).setIcon(R.drawable.ic_ac_close)
-				.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		MenuItem menuItem = menu.add(0, HELP_ID, 0, R.string.tips_and_tricks).setIcon(R.drawable.ic_ac_help);
+		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		menuItem = menu.add(0, SETTINGS_ID, 0, R.string.settings).setIcon(R.drawable.ic_ac_settings);
+		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		menuItem = menu.add(0, EXIT_ID, 0, R.string.exit_Button).setIcon(R.drawable.ic_ac_close);
+		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		return true;
 	}
 

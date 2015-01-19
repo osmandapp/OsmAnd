@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import android.support.v4.view.MenuItemCompat;
+import android.view.*;
+import android.widget.AdapterView;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
@@ -29,19 +32,11 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Xml;
-import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.Window;
 
 public class LocalOpenstreetmapActivity extends OsmandListActivity {
 
@@ -68,7 +63,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.local_openstreetmap);
 		getSupportActionBar().setTitle(R.string.download_files);
@@ -95,16 +90,16 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		createMenuItem(menu, UPLOAD_ID, R.string.local_openstreetmap_uploadall, R.drawable.ic_action_gup_light, R.drawable.ic_action_gup_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, BACKUP_ID, R.string.local_osm_changes_backup, R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, DELETE_ID, R.string.local_osm_changes_delete_all, R.drawable.ic_action_gdiscard_light, R.drawable.ic_action_gdiscard_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == UPLOAD_ID) {
 			toUpload = dataPoints.toArray(new OsmPoint[0]);
 			showDialog(DIALOG_PROGRESS_UPLOAD);
@@ -163,12 +158,12 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 		int itemId = item.getItemId();
 		if(itemId == R.id.showmod) {
 			OsmandSettings settings = getMyApplication().getSettings();
-			OsmPoint info = (OsmPoint) listAdapter.getItem(pos);
+			OsmPoint info = listAdapter.getItem(pos);
 			settings.setMapLocationToShow(info.getLatitude(), info.getLongitude(), settings.getLastKnownMapZoom());
 			MapActivity.launchMapActivityMoveToTop(LocalOpenstreetmapActivity.this);
 			return true;
 		} else if(itemId == R.id.deletemod) {
-			OsmPoint info = (OsmPoint) listAdapter.getItem(pos);
+			OsmPoint info = listAdapter.getItem(pos);
 			if (info.getGroup() == OsmPoint.Group.POI) {
 				dbpoi.deletePOI((OpenstreetmapPoint) info);
 			} else if (info.getGroup() == OsmPoint.Group.BUG) {
@@ -219,7 +214,12 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 			break;
 		}
 	}
-	
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+	}
+
 	public class BackupOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPoint, String> {
 
 		

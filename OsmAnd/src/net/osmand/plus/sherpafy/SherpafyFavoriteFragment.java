@@ -1,5 +1,9 @@
 package net.osmand.plus.sherpafy;
 
+import android.support.v4.view.MenuItemCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import net.osmand.plus.R;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import android.os.Bundle;
@@ -8,10 +12,6 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 public class SherpafyFavoriteFragment extends SherpafyStageInfoFragment {
 	private static final int SHOW_ON_MAP = 10;
@@ -45,9 +45,9 @@ public class SherpafyFavoriteFragment extends SherpafyStageInfoFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		((TourViewActivity) getSherlockActivity()).createMenuItem(menu, SHOW_ON_MAP, R.string.show_poi_on_map,
+		((TourViewActivity) getActivity()).createMenuItem(menu, SHOW_ON_MAP, R.string.show_poi_on_map,
 				R.drawable.ic_action_map_marker_light, R.drawable.ic_action_map_marker_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT, new OnMenuItemClickListener() {
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT, new MenuItem.OnMenuItemClickListener() {
 
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
@@ -56,12 +56,12 @@ public class SherpafyFavoriteFragment extends SherpafyStageInfoFragment {
 				});
 	}
 
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == SHOW_ON_MAP) {
-			((TourViewActivity) getSherlockActivity()).goToMap(fav.location);
+			((TourViewActivity) getActivity()).goToMap(fav.location);
 			return true;
 		} else if (item.getItemId() == android.R.id.home) {
-			((TourViewActivity) getSherlockActivity()).showSelectedItem();
+			((TourViewActivity) getActivity()).showSelectedItem();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
