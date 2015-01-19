@@ -1012,7 +1012,7 @@
     <string name="route_descr_lat_lon">Lat %1$.3f long %2$.3f</string>
     <string name="intermediate_points_change_order">Canvia l\'ordre</string>
     <string name="recording_delete_confirm">Voleu eliminar aquest enregistrament?</string>
-    <string name="recording_default_name">enregistrament</string>
+    <string name="recording_default_name">Enregistrament</string>
     <string name="recording_description">Enregistrament %1$s %3$s %2$s</string>
     <string name="layer_recordings">Capa d\'enregistraments</string>
     <string name="recording_can_not_be_played">No es pot reproduir l\'enregistrament</string>
