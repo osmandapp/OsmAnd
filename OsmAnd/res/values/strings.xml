@@ -1347,7 +1347,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="live_monitoring_interval">Online tracking interval</string>
 	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">Online tracking web address</string>
-	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX file\' settings.</string>
+	<string name="gpx_monitoring_disabled_warn">Log track using GPX widget or via \'Trip recording\' settings.</string>
 	<string name="show_current_gpx_title">Show current track</string>
 	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0:
 		\n\t- Offline wikipedia data with articles
