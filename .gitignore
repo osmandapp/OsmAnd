@@ -31,3 +31,7 @@ out/
 
 # Output files
 /build
+
+# Ant and Eclipse
+bin/
+gen/
