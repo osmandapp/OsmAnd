@@ -639,7 +639,7 @@
 	<string name="local_indexes_cat_backup">Deaktiviert</string>
 	<string name="local_indexes_cat_tts">Sprachansagen (TTS)</string>
 	<string name="local_indexes_cat_voice">Sprachansagen (Aufnahmen)</string>
-	<string name="local_indexes_cat_gpx">GPX-Daten</string>
+	<!-- string name="local_indexes_cat_gpx">GPX-Daten</string -->
 	<string name="local_indexes_cat_tile">Online- und Kachel-Karten</string>
 	<string name="local_indexes_cat_map">Offline-Karten</string>
 	<string name="local_indexes_cat_poi">POI-Daten</string>
