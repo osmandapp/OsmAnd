@@ -38,7 +38,7 @@ public class DashSearchFragment extends DashBaseFragment {
 
 	protected void searchActivity(final Activity activity, final OsmAndAppCustomization appCustomization, int tab) {
 		final Intent search = new Intent(activity, appCustomization.getSearchActivity());
-		search.putExtra(SearchActivity.SHOW_ONLY_ONE_TAB, true);
+		//search.putExtra(SearchActivity.SHOW_ONLY_ONE_TAB, true);
 		search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		getMyApplication().getSettings().SEARCH_TAB.set(tab);
 		activity.startActivity(search);
@@ -69,25 +69,10 @@ public class DashSearchFragment extends DashBaseFragment {
 				searchActivity(activity, appCustomization, SearchActivity.LOCATION_TAB_INDEX);
 			}
 		});
-
-		(view.findViewById(R.id.fav_btn)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				searchActivity(activity, appCustomization, SearchActivity.FAVORITES_TAB_INDEX);
-			}
-		});
-
-		(view.findViewById(R.id.history)).setOnClickListener(new View.OnClickListener() {
+		(view.findViewById(R.id.recents)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				searchActivity(activity, appCustomization, SearchActivity.HISTORY_TAB_INDEX);
-			}
-		});
-
-		(view.findViewById(R.id.transport)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				searchActivity(activity, appCustomization, SearchActivity.TRANSPORT_TAB_INDEX);
 			}
 		});
 	}
