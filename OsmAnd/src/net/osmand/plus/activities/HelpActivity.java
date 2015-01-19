@@ -31,11 +31,11 @@ public class HelpActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
-		super.onCreate(savedInstanceState);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		}
+		super.onCreate(savedInstanceState);
 		wv = new WebView(this);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		String title = getString(R.string.help);
