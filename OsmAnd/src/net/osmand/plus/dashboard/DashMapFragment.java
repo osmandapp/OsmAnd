@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.os.AsyncTask;
 import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.ImageView;
@@ -17,23 +16,17 @@ import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.MapTextLayer;
-import net.osmand.plus.views.OsmAndMapSurfaceView;
-import net.osmand.plus.views.OsmandMapTileView;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
- * Created by Denis on 24.11.2014.
+ * Created by Denis on
+ * 24.11.2014.
  */
 public class DashMapFragment extends DashBaseFragment implements IMapDownloaderCallback {
 
@@ -64,18 +57,7 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_map_fragment, container, false);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
-		((TextView) view.findViewById(R.id.map_text)).setTypeface(typeface);
-		((Button) view.findViewById(R.id.show_map)).setTypeface(typeface);
 
-		(view.findViewById(R.id.show_map)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startMapActivity();
-			}
-
-
-		});
 		view.findViewById(R.id.map_image).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -126,10 +108,11 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!getMyApplication().isApplicationInitializing()) {
+        if (!getMyApplication().isApplicationInitializing()) {
 			updateMapImage();
 		}
-	}
+
+    }
 
 	@Override
 	public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
@@ -151,7 +134,7 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 	private void applicationInitialized(View view) {
 		updateMapImage();
 		view.findViewById(R.id.loading).setVisibility(View.GONE);
-		MainMenuActivity dashboardActivity = ((MainMenuActivity) getSherlockActivity());
+		MainMenuActivity dashboardActivity = ((MainMenuActivity) getActivity());
 		if (dashboardActivity != null) {
 			dashboardActivity.updateDownloads();
 			view.findViewById(R.id.map_image).setVisibility(View.VISIBLE);
@@ -167,6 +150,7 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 		setMapImage(getMyApplication().getResourceManager().getRenderer().getBitmap());
 	}
 
+	@SuppressWarnings("deprecation")
 	private void updateMapImage() {
 		MapRenderRepositories repositories = getMyApplication().getResourceManager().getRenderer();
 		if(repositories.getBitmap() != null) {

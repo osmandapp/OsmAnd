@@ -2,6 +2,8 @@ package net.osmand.plus.sherpafy;
 
 import java.util.List;
 
+import android.support.v4.app.ListFragment;
+import android.view.MenuItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -22,10 +24,8 @@ import android.widget.ImageView.ScaleType;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockListFragment;
-import com.actionbarsherlock.view.MenuItem;
 
-public class SherpafyFavoritesListFragment extends SherlockListFragment {
+public class SherpafyFavoritesListFragment extends ListFragment {
 	
 	OsmandApplication app;
 	private SherpafyCustomization customization;
@@ -40,7 +40,7 @@ public class SherpafyFavoritesListFragment extends SherlockListFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		app = (OsmandApplication) getSherlockActivity().getApplication();
+		app = (OsmandApplication) getActivity().getApplication();
 		customization = (SherpafyCustomization) app.getAppCustomization();
 		String id = getArguments().getString("TOUR");
 		for (TourInformation ti : customization.getTourInformations()) {
@@ -68,7 +68,7 @@ public class SherpafyFavoritesListFragment extends SherlockListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Object item = getListAdapter().getItem(position);
 		if (item instanceof StageFavorite) {
-			((TourViewActivity) getSherlockActivity()).showFavoriteFragment(stage, (StageFavorite) item);
+			((TourViewActivity) getActivity()).showFavoriteFragment(stage, (StageFavorite) item);
 		}
 	}
 
@@ -76,7 +76,7 @@ public class SherpafyFavoritesListFragment extends SherlockListFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
-			((TourViewActivity) getSherlockActivity()).showSelectedItem();
+			((TourViewActivity) getActivity()).showSelectedItem();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

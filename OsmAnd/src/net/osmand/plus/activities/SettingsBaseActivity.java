@@ -9,8 +9,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import android.os.Build;
 import android.preference.*;
+import android.view.MenuItem;
+import android.widget.AdapterView;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -20,7 +21,6 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.views.SeekBarPreference;
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -33,10 +33,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
 
-public abstract class SettingsBaseActivity extends SherlockPreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
+public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
+		implements OnPreferenceChangeListener, OnPreferenceClickListener {
 
 
 	
@@ -289,7 +288,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
 		case android.R.id.home:
@@ -299,16 +298,15 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		}
 		return false;
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
-		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setTitle(R.string.settings_activity);
-		// R.drawable.tab_settings_screen_icon
+		//getToolbar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+
 		super.onCreate(savedInstanceState);
-		
+		getToolbar().setTitle(R.string.settings_activity);
 		settings = getMyApplication().getSettings();
 		
 		if (profileSettings) {
@@ -318,24 +316,30 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 					modes.add(a);
 				}
 			}
-			getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+			//getToolbar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 			List<String> s = new ArrayList<String>();
 			for (ApplicationMode a : modes) {
 				s.add(a.toHumanString(getMyApplication()));
 			}
 
-			ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(),
-					R.layout.sherlock_spinner_item, s);
-			spinnerAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
-			getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, new OnNavigationListener() {
+			ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_spinner_item, s);
+			spinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+			getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+				@Override
+				public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+					settings.APPLICATION_MODE.set(modes.get(position));
+					updateAllSettings();
+				}
 
 				@Override
-				public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-					settings.APPLICATION_MODE.set(modes.get(itemPosition));
-					updateAllSettings();
-					return true;
+				public void onNothingSelected(AdapterView<?> parent) {
+
 				}
 			});
+
+			getSpinner().setAdapter(spinnerAdapter);
+			getSpinner().setVisibility(View.VISIBLE);
 		}
 		setPreferenceScreen(getPreferenceManager().createPreferenceScreen(this));
     }
@@ -351,7 +355,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 			previousAppMode = settings.getApplicationMode();
 			boolean found = setSelectedAppMode(previousAppMode);
 			if (!found) {
-				getSupportActionBar().setSelectedNavigationItem(0);
+				getSpinner().setSelection(0);
 			}
 		} else {
 			updateAllSettings();
@@ -385,7 +389,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		boolean found = false;
 		for (ApplicationMode a : modes) {
 			if (am == a) {
-				getSupportActionBar().setSelectedNavigationItem(ind);
+				getSpinner().setSelection(ind);
 				found = true;
 				break;
 			}
@@ -439,7 +443,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		// handle boolean prefences
+		// handle boolean preferences
 		OsmandPreference<Boolean> boolPref = booleanPreferences.get(preference.getKey());
 		OsmandPreference<Integer> seekPref = seekBarPreferences.get(preference.getKey());
 		OsmandPreference<Object> listPref = (OsmandPreference<Object>) listPreferences.get(preference.getKey());

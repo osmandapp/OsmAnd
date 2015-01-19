@@ -40,6 +40,18 @@
 						  android:textColor="@color/dashboard_blue"
 						  android:layout_width="wrap_content"
 						  android:layout_height="wrap_content"/>
+				<ImageView android:id="@+id/group_image"
+						   android:layout_marginLeft="4dp"
+						   android:src="@drawable/ic_small_group"
+						   android:layout_width="wrap_content"
+						   android:layout_height="wrap_content"/>
+				<TextView android:id="@+id/group_name"
+						  android:layout_marginLeft="4dp"
+						  android:layout_gravity="center_vertical"
+						  android:textSize="@dimen/showAllButtonTextSize"
+						  android:textColor="@color/dashboard_descr_colol"
+						  android:layout_width="wrap_content"
+						  android:layout_height="wrap_content"/>
 			</LinearLayout>
 
         </LinearLayout>

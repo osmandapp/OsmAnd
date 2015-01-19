@@ -72,7 +72,7 @@ public class DashErrorFragment extends DashBaseFragment {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainMenuActivity dashboardActivity =((MainMenuActivity)getSherlockActivity());
+                MainMenuActivity dashboardActivity =((MainMenuActivity)getActivity());
                 if (dashboardActivity != null) {
                     dashboardActivity.getSupportFragmentManager().beginTransaction().remove(DashErrorFragment.this).commit();
                 }

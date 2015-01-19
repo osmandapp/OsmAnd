@@ -24,6 +24,6 @@
         android:layout_marginRight="0dp"
         android:layout_marginTop="0dp"
         android:layout_weight="1"
-        android:groupIndicator="@android:color/transparent"></ExpandableListView>
+        android:groupIndicator="@android:color/transparent"/>
 
 </LinearLayout>

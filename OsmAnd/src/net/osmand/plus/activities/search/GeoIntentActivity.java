@@ -1,5 +1,6 @@
 package net.osmand.plus.activities.search;
 
+import android.widget.*;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.util.ArrayList;
@@ -37,10 +38,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class GeoIntentActivity extends OsmandListActivity {
 
@@ -74,6 +71,15 @@ public class GeoIntentActivity extends OsmandListActivity {
 			task.execute();
 			setIntent(null);
 		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		MapObject item = ((MapObjectAdapter) getListAdapter()).getItem(position);
+		OsmandSettings settings = getMyApplication().getSettings();
+		settings.setMapLocationToShow(item.getLocation().getLatitude(), item.getLocation().getLongitude(),
+				settings.getLastKnownMapZoom(), getString(item)); //$NON-NLS-1$
+		MapActivity.launchMapActivityMoveToTop(this);
 	}
 
 	private class GeoIntentTask extends AsyncTask<Void, Void, ExecutionResult> {
@@ -116,7 +122,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 					final List<MapObject> places = new ArrayList<MapObject>(result.getMapObjects());
 					setListAdapter(new MapObjectAdapter(places));
 					if (places.size() == 1) {
-						onListItemClick(getListView(), getListAdapter().getView(0, null, null), 0, getListAdapter()
+						onItemClick(getListView(), getListAdapter().getView(0, null, null), 0, getListAdapter()
 								.getItemId(0));
 					}
 				}
@@ -174,15 +180,6 @@ public class GeoIntentActivity extends OsmandListActivity {
 		return getString(R.string.address) + " : " + o.toString();
 	}
 
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-		MapObject item = ((MapObjectAdapter) getListAdapter()).getItem(position);
-		OsmandSettings settings = getMyApplication().getSettings();
-		settings.setMapLocationToShow(item.getLocation().getLatitude(), item.getLocation().getLongitude(),
-				settings.getLastKnownMapZoom(), getString(item)); //$NON-NLS-1$
-		MapActivity.launchMapActivityMoveToTop(this);
-	}
 
 	@Override
 	protected void onStop() {

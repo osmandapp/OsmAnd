@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-	android:id="@+id/main_scroll"
-    android:background="@color/dashboard_background" >
+<net.osmand.plus.dashboard.NotifyingScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+											   android:layout_width="match_parent"
+											   android:layout_height="match_parent"
+											   android:id="@+id/main_scroll"
+											   android:background="@color/dashboard_background">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/dashPadding" >
-        <LinearLayout 
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+		<fragment
+				xmlns:android="http://schemas.android.com/apk/res/android"
+				android:id="@+id/mapFragment"
+				android:layout_marginRight="-3dp"
+				android:layout_marginLeft="-3dp"
+				android:layout_marginTop="-3dp"
+				android:name="net.osmand.plus.dashboard.DashMapFragment"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+
+        <LinearLayout android:id="@+id/fragments"
             android:orientation="vertical"
             android:layout_width="match_parent"
-        	android:layout_height="match_parent">
+        	android:layout_height="match_parent"
+			android:layout_marginTop="-40dp"
+			android:padding="@dimen/dashPadding" >
 
 			<LinearLayout android:id="@+id/content"
 						  android:orientation="vertical"
@@ -22,12 +34,7 @@
 
 			<fragment
 					xmlns:android="http://schemas.android.com/apk/res/android"
-					android:name="net.osmand.plus.dashboard.DashMapFragment"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"/>
-
-			<fragment
-					xmlns:android="http://schemas.android.com/apk/res/android"
+					android:id="@+id/SearchFragment"
 					android:name="net.osmand.plus.dashboard.DashSearchFragment"
                     android:layout_marginTop="@dimen/dashCardMargin"
 					android:layout_width="match_parent"
@@ -35,6 +42,7 @@
 
 			<fragment
 					xmlns:android="http://schemas.android.com/apk/res/android"
+					android:id="@+id/FavoritesFragment"
 					android:name="net.osmand.plus.dashboard.DashFavoritesFragment"
                     android:layout_marginTop="@dimen/dashCardMargin"
                     android:layout_width="match_parent"
@@ -42,6 +50,7 @@
 
 			<fragment
 					xmlns:android="http://schemas.android.com/apk/res/android"
+					android:id="@+id/NotesFragment"
 					android:name="net.osmand.plus.dashboard.DashAudioVideoNotesFragment"
                     android:layout_marginTop="@dimen/dashCardMargin"
 					android:layout_width="match_parent"
@@ -56,6 +65,7 @@
 
 			<fragment
 					xmlns:android="http://schemas.android.com/apk/res/android"
+					android:id="@+id/UpdateFragment"
 					android:name="net.osmand.plus.dashboard.DashUpdatesFragment"
                     android:layout_marginTop="@dimen/dashCardMargin"
 					android:layout_width="match_parent"
@@ -63,36 +73,18 @@
 
 			<fragment
 					xmlns:android="http://schemas.android.com/apk/res/android"
+					android:id="@+id/PluginFragment"
 					android:name="net.osmand.plus.dashboard.DashPluginsFragment"
                     android:layout_marginTop="@dimen/dashCardMargin"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
 		</LinearLayout>
 
-        <LinearLayout android:id="@+id/credentials"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            android:padding="@dimen/dashPadding"
-            android:baselineAligned="false">
+		<!--To make sure that floating button is always visible-->
+	<View	android:layout_width="match_parent"
+			android:layout_height="76dp"
+			android:orientation="vertical"/>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_weight="0.5" >
-
-                <TextView
-                    android:id="@+id/About"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|bottom"
-                    android:text="@string/about_settings"
-                    android:textSize="@dimen/dashAboutTextSize" />
-            </LinearLayout>
-
-        </LinearLayout>
     </LinearLayout>
 
-</ScrollView>
+</net.osmand.plus.dashboard.NotifyingScrollView>

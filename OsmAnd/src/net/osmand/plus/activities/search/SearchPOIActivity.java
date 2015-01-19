@@ -4,6 +4,11 @@
 package net.osmand.plus.activities.search;
 
 
+import android.content.Context;
+import android.support.v4.view.MenuItemCompat;
+import android.view.*;
+import android.view.MenuItem.OnMenuItemClickListener;
+import android.widget.*;
 import gnu.trove.set.hash.TLongHashSet;
 
 import java.util.ArrayList;
@@ -48,18 +53,10 @@ import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
-import android.graphics.Path;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
@@ -72,28 +69,8 @@ import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.text.util.Linkify;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.actionbarsherlock.internal.ResourcesCompat;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
-import com.actionbarsherlock.view.Window;
 
 /**
  * Search poi activity
@@ -141,11 +118,12 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		boolean light = getMyApplication().getSettings().isLightActionBar();
-		searchPOILevel = menu.add(0, SEARCH_MORE, 0, R.string.search_POI_level_btn).setShowAsActionFlags(
-				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		searchPOILevel = menu.add(0, SEARCH_MORE, 0, R.string.search_POI_level_btn);
+		MenuItemCompat.setShowAsAction(searchPOILevel,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		searchPOILevel.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
-			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+			public boolean onMenuItemClick(MenuItem item) {
 
 				return searchMore();
 			}
@@ -153,12 +131,13 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		});
 		updateSearchPoiTextButton(false);
 		
-		showFilterItem = menu.add(0, FILTER, 0, R.string.search_poi_filter).setShowAsActionFlags(
-				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		showFilterItem = menu.add(0, FILTER, 0, R.string.search_poi_filter);
+		MenuItemCompat.setShowAsAction(showFilterItem,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		showFilterItem = showFilterItem.setIcon(light ? R.drawable.ic_action_filter_light: R.drawable.ic_action_filter_dark);
 		showFilterItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
-			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+			public boolean onMenuItemClick(MenuItem item) {
 				if(isSearchByNameFilter()){
 					Intent newIntent = new Intent(SearchPOIActivity.this, EditPOIFilterActivity.class);
 					newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, PoiFilter.CUSTOM_FILTER_ID);
@@ -184,12 +163,13 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		}
 		
 
-		showOnMapItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(
-				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		showOnMapItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map);
+		MenuItemCompat.setShowAsAction(showOnMapItem,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		showOnMapItem = showOnMapItem.setIcon(light ? R.drawable.ic_action_map_marker_light : R.drawable.ic_action_map_marker_dark);
 		showOnMapItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
-			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+			public boolean onMenuItemClick(MenuItem item) {
 				if (searchFilter.getVisibility() == View.VISIBLE) {
 					filter.setNameFilter(searchFilter.getText().toString());
 				}
@@ -231,13 +211,13 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	
 	@Override
 	public void onCreate(Bundle icicle) {
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(icicle);
 		setContentView(R.layout.searchpoi);
 		
 		getSupportActionBar().setTitle(R.string.searchpoi_activity);
 		getSupportActionBar().setIcon(R.drawable.tab_search_poi_icon);
-		getSherlock().setProgressBarIndeterminateVisibility(false);
+		//getSherlock().setProgressBarIndeterminateVisibility(false);
 		
 		app = (OsmandApplication)getApplication();
 		
@@ -435,7 +415,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			searchPOILevel.setEnabled(enabled);
 			searchPOILevel.setTitle(title);
 		}
-		if(ResourcesCompat.getResources_getBoolean(this, R.bool.abs__split_action_bar_is_narrow)) {
+		//if(ResourcesCompat.getResources_getBoolean(this, R.bool.abs__split_action_bar_is_narrow)) {
+		if(true) {
 			searchFooterButton.setVisibility(View.GONE);
 		} else {
 			searchFooterButton.setVisibility(View.VISIBLE);
@@ -552,31 +533,31 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	
 
 	@Override
-	public void onListItemClick(ListView parent, final View v, int position, long id) {
+	public void onItemClick(AdapterView<?> parent,final View view, int position, long id) {
 		final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
-		ContextMenuAdapter adapter = new ContextMenuAdapter(v.getContext());
-		adapter.setAnchor(v);
+		ContextMenuAdapter adapter = new ContextMenuAdapter(view.getContext());
+		adapter.setAnchor(view);
 		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(), settings.usingEnglishNames());
 		String name = poiSimpleFormat;
 		int z = Math.max(16, settings.getLastKnownMapZoom());
-		
+
 		DirectionsDialogs.createDirectionsActions(adapter, amenity.getLocation(), amenity, name, z, this, true );
 		final String d = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity, false);
-		if(d.toString().trim().length() > 0) { 
+		if(d.toString().trim().length() > 0) {
 			Item poiDescr = adapter.item(R.string.poi_context_menu_showdescription).icons(
 					R.drawable.ic_action_note_dark, R.drawable.ic_action_note_light);
 			poiDescr.listen(new OnContextMenuClick() {
-				
+
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					// Build text(amenity)
-					
+
 					// Find and format links
 					SpannableString spannable = new SpannableString(d);
 					Linkify.addLinks(spannable, Linkify.ALL);
 
 					// Create dialog
-					Builder bs = new AlertDialog.Builder(v.getContext());
+					Builder bs = new AlertDialog.Builder(view.getContext());
 					bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(),
 							settings.usingEnglishNames()));
 					bs.setMessage(spannable);
@@ -593,7 +574,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		if (((OsmandApplication)getApplication()).accessibilityEnabled()) {
 			Item showDetails = adapter.item(R.string.show_details);
 			showDetails.listen(new OnContextMenuClick() {
-				
+
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					showPOIDetails(amenity, settings.usingEnglishNames());
@@ -602,11 +583,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			}).reg();
 		}
 		MapActivityActions.showObjectContextMenu(adapter, this, null);
-		
-		
 	}
-	
-	
+
+
 	static class SearchAmenityRequest {
 		private static final int SEARCH_AGAIN = 1;
 		private static final int NEW_SEARCH_INIT = 2;
@@ -640,7 +619,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		@Override
 		protected void onPreExecute() {
-			getSherlock().setProgressBarIndeterminateVisibility(true);
+			//getSherlock().setProgressBarIndeterminateVisibility(true);
 			if(searchPOILevel != null) {
 				searchPOILevel.setEnabled(false);
 			}
@@ -662,7 +641,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		
 		@Override
 		protected void onPostExecute(List<Amenity> result) {
-			getSherlock().setProgressBarIndeterminateVisibility(false);
+			//getSherlock().setProgressBarIndeterminateVisibility(false);
 			updateSearchPoiTextButton(true);
 			if (isNameFinderFilter()) {
 				if (!Algorithms.isEmpty(((NameFinderPoiFilter) filter).getLastError())) {

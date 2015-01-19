@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:tools="http://schemas.android.com/tools"
+			  xmlns:app="http://schemas.android.com/apk/res-auto"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical"
+			  tools:context="com.antonioleiva.materialeverywhere.SettingsActivity" >
+
+	<android.support.v7.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/colorPrimary"
+			android:minHeight="?attr/actionBarSize"
+			app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+		<Spinner
+				android:id="@+id/spinner_nav"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"/>
+
+		<ProgressBar android:id="@+id/ProgressBar"
+					 android:layout_width="wrap_content"
+					 android:layout_height="wrap_content"
+					 android:layout_gravity="right"/>
+
+			</android.support.v7.widget.Toolbar>
+
+	<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" >
+
+		<ListView
+				android:id="@android:id/list"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" />
+
+		<ImageView
+				android:id="@+id/shadowView"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/abp__shadow_height"
+				android:src="@drawable/preference_activity_action_bar_shadow"
+				tools:ignore="ContentDescription" />
+	</FrameLayout>
+
+</LinearLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/tabhost"
+	android:layout_marginTop="?attr/actionBarSize"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -44,5 +45,19 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+
+		<View android:id="@+id/devider"
+			  android:layout_width="match_parent"
+			  android:layout_height="1dp"
+			  android:background="@color/dashboard_divider"/>
+
+		<LinearLayout android:orientation="horizontal"
+					  android:id="@+id/bottomControls"
+					  android:layout_width="fill_parent"
+					  android:background="@color/dashboard_black"
+					  android:layout_height="wrap_content"/>
+
     </LinearLayout>
+
+
 </TabHost>

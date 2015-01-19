@@ -2,15 +2,19 @@ package net.osmand.plus.sherpafy;
 
 import java.util.WeakHashMap;
 
+import android.content.pm.ActivityInfo;
+import android.os.Build;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadIndexFragment;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -27,14 +31,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
-
 /**
  */
-public class TourViewActivity extends SherlockFragmentActivity {
+public class TourViewActivity extends ActionBarActivity {
 
 	private enum viewState {
 		STATE_LOADING,
@@ -79,7 +78,9 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				return;
 			}
 		}
-		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		}
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setTitle(R.string.sherpafy_app_name);
@@ -226,14 +227,15 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	}
 
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType,
-								   final OnMenuItemClickListener listener) {
+								   final MenuItem.OnMenuItemClickListener listener) {
 		// int r = getMyApplication().getSettings().isLightActionBar() ? iconLight : iconDark;
 		int r = iconLight;
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
 		if (r != 0) {
 			menuItem.setIcon(r);
 		}
-		menuItem.setShowAsActionFlags(menuItemType).setOnMenuItemClickListener(listener);
+		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
+		menuItem.setOnMenuItemClickListener(listener);
 		return menuItem;
 	}
 
@@ -241,7 +243,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		return (OsmandApplication) getApplication();
 	}
 
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home && mDrawerToggle.isDrawerIndicatorEnabled()) {
 			if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
 				mDrawerLayout.closeDrawer(mDrawerList);

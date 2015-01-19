@@ -4,6 +4,8 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import android.view.View;
+import android.widget.AdapterView;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
@@ -66,6 +68,10 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 		((OsmandApplication) getApplication()).getSettings().setLastSearchedRegion(obj.getName(), obj.getEstimatedRegionCenter());
 		quitActivity(SearchCityByNameActivity.class);
 	}
-	
-	
+
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+	}
 }

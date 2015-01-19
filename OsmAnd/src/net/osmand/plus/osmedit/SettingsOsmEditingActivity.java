@@ -14,11 +14,11 @@ import android.text.InputType;
 
 public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 
-	
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setTitle(R.string.osm_settings);
+		getToolbar().setTitle(R.string.osm_settings);
 		PreferenceScreen grp = getPreferenceScreen();
 
 		EditTextPreference userName = createEditTextPreference(settings.USER_NAME, R.string.user_name, R.string.user_name_descr);

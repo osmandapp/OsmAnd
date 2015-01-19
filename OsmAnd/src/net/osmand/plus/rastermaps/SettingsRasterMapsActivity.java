@@ -23,11 +23,12 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 	private ListPreference underlayPreference;
 	public static final String MORE_VALUE = "MORE_VALUE";
 	public static final String DEFINE_EDIT = "DEFINE_EDIT";
-	
+
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setTitle(R.string.online_map_settings);
+		getToolbar().setTitle(R.string.online_map_settings);
 		PreferenceScreen grp = getPreferenceScreen();
 		OnPreferenceChangeListener listener = createPreferenceListener();
 		

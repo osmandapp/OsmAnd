@@ -1,12 +1,12 @@
 package net.osmand.plus.dashboard;
 
-import com.actionbarsherlock.app.SherlockFragment;
+import android.support.v4.app.Fragment;
 import net.osmand.plus.OsmandApplication;
 
 /**
  * Created by Denis on 24.11.2014.
  */
-public class DashBaseFragment extends SherlockFragment {
+public class DashBaseFragment extends Fragment {
 
 	public OsmandApplication getMyApplication(){
 		if (getActivity() == null){

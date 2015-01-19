@@ -6,6 +6,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import android.app.FragmentManager;
+import android.view.MenuItem;
+import android.view.Window;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -29,7 +32,6 @@ import android.widget.ProgressBar;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.actionbarsherlock.view.Window;
 
 /**
  * Created by Denis on 08.09.2014.
@@ -65,10 +67,10 @@ public class DownloadActivity extends BaseDownloadActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
+		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		updateDownloads();
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setProgressBarIndeterminateVisibility(false);
+		setSupportProgressBarIndeterminateVisibility(false);
 
 		setContentView(R.layout.tab_content);
 		singleTab = getIntent() != null && getIntent().getBooleanExtra(SINGLE_TAB, false);
@@ -176,7 +178,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
 			case android.R.id.home:

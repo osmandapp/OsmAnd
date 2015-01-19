@@ -25,12 +25,11 @@ import android.view.View;
 
 public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 
-	
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setTitle(R.string.debugging_and_development);
+		getToolbar().setTitle(R.string.debugging_and_development);
 		PreferenceScreen cat = getPreferenceScreen();
 		
 		CheckBoxPreference dbg = createCheckBoxPreference(settings.DEBUG_RENDERING_INFO, 

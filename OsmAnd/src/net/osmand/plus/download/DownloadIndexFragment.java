@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
+import android.view.*;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -22,9 +25,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -32,11 +32,6 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.SubMenu;
 
 public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	
@@ -139,9 +134,9 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		final List<DownloadActivityType> downloadTypes = getDownloadActivity().getDownloadTypes();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(actionBar.getThemedContext(), R.layout.sherlock_spinner_item,
+		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(actionBar.getThemedContext(), android.R.layout.simple_spinner_item,
 				toString(downloadTypes));
-		spinnerAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
+		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		actionBar.setListNavigationCallbacks(spinnerAdapter, new ActionBar.OnNavigationListener() {
 
 			@Override
@@ -156,16 +151,16 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 				MenuItem item = menu.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
 				item.setIcon(isLightActionBar() ? R.drawable.ic_action_refresh_light :
 					R.drawable.ic_action_refresh_dark);
-				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			} else {
 				SubMenu s = menu.addSubMenu(0, MORE_ID, 0, R.string.default_buttons_other_actions);
 				s.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
 				s.add(0, SELECT_ALL_ID, 0, R.string.select_all);
 				s.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
 
-				s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
-						: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
-				s.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//				s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
+//						: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
+				MenuItemCompat.setShowAsAction(s.getItem(), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			}
 		}
 	}

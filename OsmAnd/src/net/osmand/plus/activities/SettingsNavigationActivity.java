@@ -53,7 +53,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setTitle(R.string.routing_settings);
+		getToolbar().setTitle(R.string.routing_settings);
 	
 		createUI();
     }
@@ -91,7 +91,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			startActivityForResult(intent, DEVICE_ADMIN_REQUEST);
 		}
 	};
-	
+
+
 	private void createUI() {
 		addPreferencesFromResource(R.xml.navigation_settings);
 		PreferenceScreen screen = getPreferenceScreen();

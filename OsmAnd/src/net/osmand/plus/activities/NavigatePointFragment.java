@@ -2,14 +2,23 @@ package net.osmand.plus.activities;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.activities.search.BottomMenuItem;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.dialogs.DirectionsDialogs;
@@ -30,15 +39,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
-public class NavigatePointFragment extends SherlockFragment implements SearchActivityChild {
+public class NavigatePointFragment extends Fragment implements SearchActivityChild {
 	int currentFormat = Location.FORMAT_DEGREES;
 	
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
@@ -64,7 +68,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 
 		location = null;
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-		Intent intent = getSherlockActivity().getIntent();
+		Intent intent = getActivity().getIntent();
 		if(intent != null){
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
@@ -91,7 +95,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 			}
 		}
 		return view;
-	};
+	}
 	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -110,57 +114,60 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 		boolean light = app.getSettings().isLightActionBar();
-		com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to).setShowAsActionFlags(
-				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
-		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-				select(NAVIGATE_TO);
-				return true;
-			}
-		});
+
+		List<BottomMenuItem> menuItems = new ArrayList<BottomMenuItem>();
+		BottomMenuItem menuItem = new BottomMenuItem().
+				setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark).
+				setMsg(R.string.context_menu_item_directions_to).
+				setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						select(NAVIGATE_TO);
+					}
+				});
+		menuItems.add(menuItem);
+
 		TargetPointsHelper targets = app.getTargetPointsHelper();
+		menuItem = new BottomMenuItem();
 		if (targets.getPointToNavigate() != null) {
-			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point).setShowAsActionFlags(
-					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flage_light
-					: R.drawable.ic_action_flage_dark);
+			menuItem.setIcon(light ? R.drawable.ic_action_flage_light : R.drawable.ic_action_flage_dark).
+					setMsg(R.string.context_menu_item_intermediate_point);
 		} else {
-			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point).setShowAsActionFlags(
-					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flag_light
-					: R.drawable.ic_action_flag_dark);
+			menuItem.setIcon(light ? R.drawable.ic_action_flag_light : R.drawable.ic_action_flag_dark).
+					setMsg(R.string.context_menu_item_destination_point);
 		}
-			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-					select(ADD_WAYPOINT);
-					return true;
-				}
-			});
-		//}
-		menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
-
-		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		menuItem.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-				select(SHOW_ON_MAP);
-				return true;
+			public void onClick(View v) {
+				select(ADD_WAYPOINT);
 			}
 		});
-		
-		menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.add_to_favourite).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
+		menuItems.add(menuItem);
 
-		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-				select(ADD_TO_FAVORITE);
-				return true;
-			}
-		});
+		menuItem = new BottomMenuItem().
+				setIcon(light ?  R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark).
+				setMsg(R.string.search_shown_on_map).
+				setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						select(SHOW_ON_MAP);
+					}
+				});
+		menuItems.add(menuItem);
+
+
+		menuItem = new BottomMenuItem().
+				setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark).
+				setMsg(R.string.add_to_favourite).
+				setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						select(ADD_TO_FAVORITE);
+					}
+				});
+		menuItems.add(menuItem);
+
+		((SearchActivity)getActivity()).setupBottomMenu(menuItems);
 	}
 	
 	@Override
@@ -247,7 +254,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		currentFormat = Location.FORMAT_DEGREES;
 		showCurrentFormat(new LatLon(latitude, longitude));
 		final Spinner format = ((Spinner)view.findViewById(R.id.Format));
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getSherlockActivity(), android.R.layout.simple_spinner_item, new String[] {
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, new String[] {
 				getString(R.string.navigate_point_format_D),
 				getString(R.string.navigate_point_format_DM),
 				getString(R.string.navigate_point_format_DMS),
@@ -274,10 +281,10 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 				try { 
 					LatLon loc = parseLocation();
 					currentFormat = newFormat;
-					((TextView) view.findViewById(R.id.ValidateTextView)).setVisibility(View.INVISIBLE);
+					view.findViewById(R.id.ValidateTextView).setVisibility(View.INVISIBLE);
 					showCurrentFormat(loc);
 				} catch (RuntimeException e) {
-					((TextView) view.findViewById(R.id.ValidateTextView)).setVisibility(View.VISIBLE);
+					view.findViewById(R.id.ValidateTextView).setVisibility(View.VISIBLE);
 					((TextView) view.findViewById(R.id.ValidateTextView)).setText(R.string.invalid_locations);
 					Log.w(PlatformUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
 				}
@@ -391,7 +398,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 			}
 			
 		} catch (RuntimeException e) {
-			((TextView) view.findViewById(R.id.ValidateTextView)).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.ValidateTextView).setVisibility(View.VISIBLE);
 			((TextView) view.findViewById(R.id.ValidateTextView)).setText(R.string.invalid_locations);
 			Log.w(PlatformUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
 		}
