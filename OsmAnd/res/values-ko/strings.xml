@@ -2107,4 +2107,7 @@
 	<string name="show_pedestrian_warnings">보행자 횡단보도 표시</string>
     <string name="speak_pedestrian">보행자 횡단보도 알리기</string>
     <string name="rendering_value__name">기본값</string>
+	<string name="navigation_over_track">경로를 따라 운행을 시작할까요?</string>
+	<string name="avoid_roads_msg">원하는 도로를 선택하여 경로를 변경할 수 있습니다</string>
+    <string name="save_track_to_gpx_globally_headline">트랙 로깅 요구</string>
 	</resources>
