@@ -503,6 +503,7 @@ public class GPXUtilities {
 		public GPXTrackAnalysis getAnalysis(long fileTimestamp) {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
 			g.wptPoints = points.size();
+			g.totalTracks = 0;
 			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
 			for(int i = 0; i< tracks.size() ; i++){
 				Track subtrack = tracks.get(i);

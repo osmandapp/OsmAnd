@@ -229,7 +229,7 @@
   <string name="live_monitoring_interval">Interval stopovania naživo</string>
   <string name="live_monitoring_url_descr">Zadajte webovú adresu stopovania naživo so syntaxom parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Webová adresa stopovania naživo</string>
-  <string name="gpx_monitoring_disabled_warn">Prosím, zapnite "Logovať stopu do GPX súboru" v stopovacích nastaveniach.</string>
+  <string name="gpx_monitoring_disabled_warn">Zaznamenajte stopu pomocou GPX nástroja alebo cez nastavenia \"Záznamenávanie výletu\".</string>
   <string name="show_current_gpx_title">Zobraziť aktuálnu stopu</string>
   <string name="tip_recent_changes_0_7_0_t">"Zmeny vo verzii 0.7.0 :
 \n\t- Údaje článkov offline wikipedie
@@ -1158,7 +1158,7 @@
     <string name="recording_context_menu_delete">Odstrániť záznam</string>
     <string name="recording_context_menu_play">Prehrať</string>
     <string name="recording_description">Záznam %1$s %2$s %3$s</string>
-    <string name="recording_default_name">nahrávka</string>
+    <string name="recording_default_name">Nahrávka</string>
     <string name="av_control_stop">Zastaviť</string>
     <string name="av_control_start">Nahrať</string>
     <string name="map_widget_av_notes">Zvukové poznámky</string>
