@@ -505,7 +505,7 @@
 	
 	<string name="choose_auto_follow_route">Avtomatsko centriranje zemljevida</string>
 	<string name="choose_auto_follow_route_descr">Čas za avtomatsko centriranje zemljevida s trenutnim položajem</string>
-	<string name="auto_follow_route_never">Nikoli</string>
+	<string name="auto_follow_route_never">Nikoli (tapnite modro puščico za ročni začetek usmerjanja)</string>
 	<string name="fast_route_mode">Najhitrejša pot</string>
 	<string name="fast_route_mode_descr">Vključi za najhitrejšo oz. izključi za najkrajšo pot </string>
 	<string name="search_position_undefined">Nedoločeno</string>
@@ -712,7 +712,7 @@
 	<string name="live_monitoring_interval">Interval sledenja v živo</string>
 	<string name="live_monitoring_url_descr">Navedite spletne naslove z naslednjo sintakso za parametre: geogr. šir.={0}, geogr. dolž.={1}, čas={2}, hdop={3}, višina={4}, hitrost={5}, usmeritev={6}</string>
 	<string name="live_monitoring_url">Spletni naslov za sledenje v živo</string>
-	<string name="gpx_monitoring_disabled_warn">Omogočite nastavitev \'Beleži sled v datoteko GPX\'.</string>
+	<string name="gpx_monitoring_disabled_warn">Beleženje sledi preko GPS widget-a ali nastavitve \'Beleženje sledi\'.</string>
 	<string name="profile_settings">Za profil določene nastavitve</string>
 	<string name="settings_preset">Uporabniški profil</string>
 	<string name="global_settings">Splošne nastavitve</string>
@@ -1117,7 +1117,7 @@
     <string name="download_select_map_types">Drugi zemljevidi</string>
     <string name="recording_context_menu_play">Predvajaj</string>
     <string name="recording_description">Snemanje %1$s %3$s %2$s</string>
-    <string name="recording_default_name">snemanje</string>
+    <string name="recording_default_name">Snemanje</string>
     <string name="av_control_stop">Ustavi</string>
     <string name="map_widget_av_notes">Zvočni zapisi</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd vtičnik za izohipse brez povezave</string>
@@ -1901,7 +1901,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_category_details">Podrobnosti</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Proge vlakov</string>
     <string name="wake_on_voice">Vklopiti zaslon</string>
-    <string name="wake_on_voice_descr">Zaslon naprave se vklopi, ko se približujete obratu</string>
+    <string name="wake_on_voice_descr">Vklopi zaslon naprave (če izklopljen), ko se približujete obratu</string>
     <string name="wake_on_voice_never">Nikoli</string>
     <string name="rendering_category_transport">Prevoz</string>
     <string name="rendering_category_others">Druge lastnosti zemljevida</string>
