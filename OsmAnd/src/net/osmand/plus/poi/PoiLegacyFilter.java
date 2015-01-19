@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.poi;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -13,10 +13,13 @@ import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.util.MapUtils;
 import android.content.Context;
 
-public class PoiFilter {
+public class PoiLegacyFilter {
 	
 	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
 	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
@@ -39,7 +42,7 @@ public class PoiFilter {
 	
 	
 	// constructor for standard filters
-	public PoiFilter(AmenityType type, OsmandApplication application){
+	public PoiLegacyFilter(AmenityType type, OsmandApplication application){
 		this.app = application;
 		isStandardFilter = true;
 		filterId = STD_PREFIX + type;
@@ -53,7 +56,7 @@ public class PoiFilter {
 	}
 	
 	// constructor for user defined filters
-	public PoiFilter(String name, String filterId, Map<AmenityType, LinkedHashSet<String>> acceptedTypes, OsmandApplication app){
+	public PoiLegacyFilter(String name, String filterId, Map<AmenityType, LinkedHashSet<String>> acceptedTypes, OsmandApplication app){
 		this.app = app;
 		isStandardFilter = false;
 		if(filterId == null){

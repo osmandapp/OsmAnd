@@ -30,21 +30,21 @@ import net.osmand.osm.MapRenderingTypes;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.Item;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
-import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.poi.NameFinderPoiFilter;
+import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.SearchByNameFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.util.Algorithms;
@@ -92,7 +92,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private static final int ORIENTATION_270 = 1;
 	private static final int ORIENTATION_180 = 2;
 
-	private PoiFilter filter;
+	private PoiLegacyFilter filter;
 	private AmenityAdapter amenityAdapter;
 	private EditText searchFilter;
 	private View searchFilterLayout;
@@ -140,7 +140,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			public boolean onMenuItemClick(MenuItem item) {
 				if(isSearchByNameFilter()){
 					Intent newIntent = new Intent(SearchPOIActivity.this, EditPOIFilterActivity.class);
-					newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, PoiFilter.CUSTOM_FILTER_ID);
+					newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, PoiLegacyFilter.CUSTOM_FILTER_ID);
 					if(location != null) {
 						newIntent.putExtra(EditPOIFilterActivity.SEARCH_LAT, location.getLatitude());
 						newIntent.putExtra(EditPOIFilterActivity.SEARCH_LON, location.getLongitude());
@@ -300,7 +300,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		
 		
 		String filterId = bundle.getString(AMENITY_FILTER);
-		PoiFilter filter = app.getPoiFilters().getFilterById(filterId);
+		PoiLegacyFilter filter = app.getPoiFilters().getFilterById(filterId);
 		if (filter != this.filter) {
 			this.filter = filter;
 			if (filter != null) {
@@ -358,7 +358,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		if(loc != null){
 			Map<AmenityType, List<String>> map = app.getResourceManager().searchAmenityCategoriesByName(query, loc.getLatitude(), loc.getLongitude());
 			if(!map.isEmpty()){
-				PoiFilter filter = ((OsmandApplication)getApplication()).getPoiFilters().getFilterById(PoiFilter.CUSTOM_FILTER_ID);
+				PoiLegacyFilter filter = ((OsmandApplication)getApplication()).getPoiFilters().getFilterById(PoiLegacyFilter.CUSTOM_FILTER_ID);
 				if(filter != null){
 					showFilterItem.setVisible(true);
 					filter.setMapToAccept(map);
@@ -451,7 +451,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	}
 	
 	public boolean isSearchByNameFilter(){
-		return filter != null && PoiFilter.BY_NAME_FILTER_ID.equals(filter.getFilterId()); 
+		return filter != null && PoiLegacyFilter.BY_NAME_FILTER_ID.equals(filter.getFilterId()); 
 	}
 	
 

@@ -30,6 +30,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;

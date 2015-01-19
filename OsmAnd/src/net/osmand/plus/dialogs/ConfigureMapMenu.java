@@ -15,11 +15,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
+import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -149,7 +149,7 @@ public class ConfigureMapMenu {
 		}
 
 		protected void selectPOILayer(final OsmandSettings settings) {
-			final PoiFilter[] selected = new PoiFilter[1]; 
+			final PoiLegacyFilter[] selected = new PoiLegacyFilter[1]; 
 			AlertDialog dlg = ma.getMapLayers().selectPOIFilterLayer(ma.getMapView(), selected);
 			dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
 				

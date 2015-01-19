@@ -23,10 +23,10 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.PoiFilter;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.IntermediatePointsDialog;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -523,7 +523,7 @@ public class WaypointHelper {
 
 
 	protected void calculatePoi(RouteCalculationResult route, List<LocationPointWrapper> locationPoints) {
-		PoiFilter pf = getPoiFilter();
+		PoiLegacyFilter pf = getPoiFilter();
 		if (pf != null) {
 			final List<Location> locs = route.getImmutableAllLocations();
 			List<Amenity> amenities = app.getResourceManager().searchAmenitiesOnThePath(locs, poiSearchDeviationRadius,
@@ -602,7 +602,7 @@ public class WaypointHelper {
 
 
 	/// 
-	public PoiFilter getPoiFilter() {
+	public PoiLegacyFilter getPoiFilter() {
 		return app.getPoiFilters().getFilterById(app.getSettings().getPoiFilterForMap());
 	}
 	public boolean showPOI() {

@@ -15,7 +15,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.plus.PoiFilter;
+import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -83,7 +83,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	
 	@Override
 	public synchronized List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, 
-			final PoiFilter filter, final List<Amenity> amenities, ResultMatcher<Amenity> matcher) {
+			final PoiLegacyFilter filter, final List<Amenity> amenities, ResultMatcher<Amenity> matcher) {
 		long now = System.currentTimeMillis();
 		SearchPoiTypeFilter poiTypeFilter = new SearchPoiTypeFilter(){
 			@Override
@@ -108,7 +108,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	}
 
 	@Override
-	public synchronized List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, final PoiFilter filter, ResultMatcher<Amenity> matcher) {
+	public synchronized List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, final PoiLegacyFilter filter, ResultMatcher<Amenity> matcher) {
 		long now = System.currentTimeMillis();
 		SearchPoiTypeFilter poiTypeFilter = new SearchPoiTypeFilter(){
 			@Override

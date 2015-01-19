@@ -48,8 +48,6 @@ public class MapPoiTypes {
 					if (name.equals("category")) { //$NON-NLS-1$
 						parentCategory = parser.getAttributeValue("","name");
 						poiParentCategory = parser.getAttributeValue("","poi_category");
-						poiParentPrefix = parser.getAttributeValue("","poi_prefix");
-						order = parser.getAttributeValue("","order");
 					}
 				}
 			}
@@ -68,5 +66,9 @@ public class MapPoiTypes {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public static void main(String[] args) {
+		getDefault()	;
 	}
 }

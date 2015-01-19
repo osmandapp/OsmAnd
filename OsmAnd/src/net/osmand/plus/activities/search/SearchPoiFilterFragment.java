@@ -12,14 +12,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
-import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.PoiFilter;
-import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
-import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
+import net.osmand.plus.poi.NameFinderPoiFilter;
+import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.SearchByNameFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
 import android.content.Intent;
@@ -51,8 +51,8 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
-				PoiFilter poi = ((AmenityAdapter) getListAdapter()).getItem(pos);
-				if(!poi.isStandardFilter() || poi.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
+				PoiLegacyFilter poi = ((AmenityAdapter) getListAdapter()).getItem(pos);
+				if(!poi.isStandardFilter() || poi.getFilterId().equals(PoiLegacyFilter.CUSTOM_FILTER_ID)) {
 					showEditActivity(poi);
 					return true;
 				}
@@ -65,7 +65,7 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 
 	public void refreshPoiListAdapter() {
 		PoiFiltersHelper poiFilters = getApp().getPoiFilters();
-		List<PoiFilter> filters = new ArrayList<PoiFilter>() ;
+		List<PoiLegacyFilter> filters = new ArrayList<PoiLegacyFilter>() ;
 		filters.addAll(poiFilters.getTopStandardFilters());
 		filters.addAll(poiFilters.getUserDefinedPoiFilters());
 		filters.addAll(poiFilters.getOsmDefinedPoiFilters());
@@ -95,7 +95,7 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 		}
 	}
 
-	private void showEditActivity(PoiFilter poi) {
+	private void showEditActivity(PoiLegacyFilter poi) {
 		Intent newIntent = new Intent(getActivity(), EditPOIFilterActivity.class);
 		// folder selected
 		newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
@@ -112,8 +112,8 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 
 	@Override
 	public void onListItemClick(ListView parent, View v, int position, long id) {
-		final PoiFilter filter = ((AmenityAdapter) getListAdapter()).getItem(position);
-		if (filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
+		final PoiLegacyFilter filter = ((AmenityAdapter) getListAdapter()).getItem(position);
+		if (filter.getFilterId().equals(PoiLegacyFilter.CUSTOM_FILTER_ID)) {
 			filter.clearFilter();
 			showEditActivity(filter);
 			return;
@@ -133,8 +133,8 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 
 
 
-	class AmenityAdapter extends ArrayAdapter<PoiFilter> {
-		AmenityAdapter(List<PoiFilter> list) {
+	class AmenityAdapter extends ArrayAdapter<PoiLegacyFilter> {
+		AmenityAdapter(List<PoiLegacyFilter> list) {
 			super(getActivity(), R.layout.searchpoifolder_list, list);
 		}
 
@@ -147,11 +147,11 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			}
 			TextView label = (TextView) row.findViewById(R.id.folder_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.folder_icon);
-			final PoiFilter model = getItem(position);
+			final PoiLegacyFilter model = getItem(position);
 			label.setText(model.getName());
-			if(model.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
+			if(model.getFilterId().equals(PoiLegacyFilter.CUSTOM_FILTER_ID)) {
 				icon.setImageResource(android.R.drawable.ic_input_get);
-			} else if (model.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)) {
+			} else if (model.getFilterId().equals(PoiLegacyFilter.BY_NAME_FILTER_ID)) {
 				icon.setImageResource(android.R.drawable.ic_search_category_default);
 			} else {
 				if(RenderingIcons.containsBigIcon(model.getSimplifiedId())) {

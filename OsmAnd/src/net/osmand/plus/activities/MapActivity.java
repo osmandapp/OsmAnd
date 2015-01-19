@@ -27,7 +27,6 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -37,6 +36,7 @@ import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
+import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -336,9 +336,9 @@ public class MapActivity extends AccessibleActivity {
 		updateApplicationModeSettings();
 		
 		String filterId = settings.getPoiFilterForMap();
-		PoiFilter poiFilter = app.getPoiFilters().getFilterById(filterId);
+		PoiLegacyFilter poiFilter = app.getPoiFilters().getFilterById(filterId);
 		if (poiFilter == null) {
-			poiFilter = new PoiFilter(null, app);
+			poiFilter = new PoiLegacyFilter(null, app);
 		}
 
 		mapLayers.getPoiMapLayer().setFilter(poiFilter);
