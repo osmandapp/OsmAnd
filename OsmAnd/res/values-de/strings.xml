@@ -1922,7 +1922,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="gpx_visibility_txt">Sichtbarkeit</string>
 	<string name="gpx_tags_txt">Tags</string>
 	<string name="gpx_description_txt">Beschreibung</string>
-	<string name="gpx_monitoring_disabled_warn">Bitte Aufzeichnung unter \'Einstellungen\' → \'Navigation\' aktivieren.</string>
+	<string name="gpx_monitoring_disabled_warn">Aufzeichnung mit dem GPX-Knopf oder unter \'Einstellungen\' → \'Strecken-Aufzeichnung\' aktivieren.</string>
 	<string name="gpx_navigation">GPX-Route wählen</string>
 	<string name="gpx_option_reverse_route">GPX-Route umkehren</string>
 	<string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
