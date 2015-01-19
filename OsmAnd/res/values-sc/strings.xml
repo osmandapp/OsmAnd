@@ -384,7 +384,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="recording_context_menu_delete">Burra sa registratzione</string>
     <string name="recording_context_menu_play">Reprodui</string>
     <string name="recording_description">Registratzione %1$s %3$s %2$s</string>
-    <string name="recording_default_name">registratzione</string>
+    <string name="recording_default_name">Registrande</string>
     <string name="av_control_stop">Stop</string>
     <string name="av_control_start">Avia/Inghitza</string>
     <string name="map_widget_av_notes">Notas àudio/vìdeo</string>
@@ -1645,7 +1645,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="poi_remove_success">PDI burradu curretamente</string>
 	<string name="poi_error_unexpected_template">Errore ispessadu durante s\'esecutzione de s\'atzione {0}.</string>
 	<string name="default_buttons_commit">Esegui</string>
-	<string name="default_buttons_reset">Riprìstina</string>
+	<string name="default_buttons_reset">Burra</string>
 	<string name="edit_filter_delete_dialog_title">Burrare su filtru ischertadu?</string>
 	<string name="edit_filter_delete_message">Su filtru {0} est istadu burradu</string>
 	<string name="edit_filter_create_message">Su filtru {0} est istadu burradu</string>
