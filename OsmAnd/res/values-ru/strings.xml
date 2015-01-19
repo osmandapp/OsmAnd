@@ -195,7 +195,7 @@
   <string name="live_monitoring_interval">Интервал онлайн слежения</string>
   <string name="live_monitoring_url_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Web адрес онлайн слежения</string>
-  <string name="gpx_monitoring_disabled_warn">Пожалуйста включите \"Записывать путь в GPX\" в Настройках.</string>
+  <string name="gpx_monitoring_disabled_warn">Записывать треки используя GPX виджет или выбрав \"Запись поездки\" в Настройках.</string>
   <string name="show_current_gpx_title">Показывать текущий путь</string>
   <string name="tip_recent_changes_0_7_0_t">Изменения в 0.7.0:
 		\n\t- Локальные карты Wikipedia со статьями
