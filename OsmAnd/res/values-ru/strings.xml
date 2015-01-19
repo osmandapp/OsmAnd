@@ -35,7 +35,7 @@
     <string name="recording_context_menu_delete">Удалить запись</string>
     <string name="recording_context_menu_play">Воспроизвести</string>
     <string name="recording_description">Запись %1$s %3$s %2$s</string>
-    <string name="recording_default_name">запись</string>
+    <string name="recording_default_name">Запись</string>
     <string name="av_control_stop">Cтоп</string>
     <string name="av_control_start">Запись</string>
     <string name="map_widget_av_notes">Аудио заметки</string>
@@ -1850,4 +1850,6 @@
 	<string name="traffic_warning_pedestrian">Пешеходный переход</string>
 	<string name="speak_pedestrian">Сообщать о пешеходных переходах</string>
     <string name="rendering_value__name">По умолчанию</string>
-	</resources>
+	<string name="navigation_over_track">Начать навигацию по треку?</string>
+	<string name="avoid_roads_msg">Вы можете изменить маршрут, выбрав дороги, которые стоит избегать</string>
+    </resources>
