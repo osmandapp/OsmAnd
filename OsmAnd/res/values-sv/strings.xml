@@ -325,7 +325,7 @@
 <string name="live_monitoring_interval">Intervall för direktspårning</string>
 <string name="live_monitoring_url_descr">Ange webbadressen med parametersyntax: lat={0}, lon={1}, tidsstämpel={2}, hdop={3}, höjd={4}, hastighet={5}, bearing={6}</string>
 <string name="live_monitoring_url">Webbadress för direktspårning</string>
-<string name="gpx_monitoring_disabled_warn">Aktivera \'Logga spår till GPX-fil\'-inställningar.</string>
+<string name="gpx_monitoring_disabled_warn">Logga spår med GPX-widget eller via inställningen \'Trippinspelning\'.</string>
 <string name="show_current_gpx_title">Visa aktuellt spår</string>
 <string name="tip_recent_changes_0_7_0_t">"Förändringar i 0.7.0:
 \n\t- Offline Wikipedia-uppgifter med artiklar
