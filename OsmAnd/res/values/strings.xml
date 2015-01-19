@@ -1536,7 +1536,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_indexes_cat_backup">Deactivated</string>
 	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
 	<string name="local_indexes_cat_voice">Voice data (recorded)</string>
-	<string name="local_indexes_cat_gpx">GPX data</string>
+	<!-- string name="local_indexes_cat_gpx">GPX data</string -->
 	<string name="local_indexes_cat_poi">POI data</string>
 	<string name="ttsvoice">TTS voice</string>
 	<string name="search_offline_clear_search">New Search</string>
