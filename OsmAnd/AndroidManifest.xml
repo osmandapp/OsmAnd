@@ -196,6 +196,8 @@
 				<data android:host="here.com" />
 				<data android:host="www.here.com" />
 				<data android:host="share.here.com" />
+				<data android:host="map.wap.qq.com" />
+				<data android:host="map.qq.com" />
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />

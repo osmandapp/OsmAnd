@@ -480,6 +480,20 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
+		// http://map.wap.qq.com/loc/detail.jsp?sid=AU8f3ck87L6XDmytunBm4iWg&g_ut=2&city=%E5%8C%97%E4%BA%AC&key=NOBU%20Beijing&x=116.48177&y=39.91082&md=10461366113386140862
+		z = GeoParsedPoint.NO_ZOOM;
+		url = "http://map.wap.qq.com/loc/detail.jsp?sid=AU8f3ck87L6XDmytunBm4iWg&g_ut=2&city=%E5%8C%97%E4%BA%AC&key=NOBU%20Beijing&x=" + dlon + "&y=" + dlat + "&md=10461366113386140862";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
+		// http://map.qq.com/AppBox/print/?t=&c=%7B%22base%22%3A%7B%22l%22%3A11%2C%22lat%22%3A39.90403%2C%22lng%22%3A116.407526%7D%7D
+		z = 11;
+		url = "http://map.qq.com/AppBox/print/?t=&c=%7B%22base%22%3A%7B%22l%22%3A11%2C%22lat%22%3A" + dlat + "%2C%22lng%22%3A" + dlon + "%7D%7D";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
         /* URLs straight from various services, instead of generated here */
         
         String urls[] = {
@@ -505,6 +519,10 @@ public class GeoPointParserUtil {
             "http://share.here.com/l/52.5134272,13.3778416,Hannah-Arendt-Stra%C3%9Fe?z=16.0&t=normal",
             "https://www.here.com/location?map=52.5134272,13.3778416,16,normal&msg=Hannah-Arendt-Stra%C3%9Fe",
             "https://www.here.com/?map=48.23145,16.38454,15,normal",
+            "http://map.wap.qq.com/loc/detail.jsp?sid=AU8f3ck87L6XDmytunBm4iWg&g_ut=2&city=%E5%8C%97%E4%BA%AC&key=NOBU%20Beijing&x=116.48177&y=39.91082&md=10461366113386140862",
+            "http://map.wap.qq.com/loc/d.jsp?c=113.275020,39.188380&m=113.275020,39.188380&n=%E9%BC%93%E6%A5%BC&a=%E5%B1%B1%E8%A5%BF%E7%9C%81%E5%BF%BB%E5%B7%9E%E5%B8%82%E7%B9%81%E5%B3%99%E5%8E%BF+&p=+&i=16959367104973338386&z=0",
+            "http://map.wap.qq.com/loc/d.jsp?c=113.275020,39.188380&m=113.275020,39.188380&n=%E9%BC%93%E6%A5%BC&a=%E5%B1%B1%E8%A5%BF%E7%9C%81%E5%BF%BB%E5%B7%9E%E5%B8%82%E7%B9%81%E5%B3%99%E5%8E%BF+&p=+&i=16959367104973338386&z=0&m",
+            "http://map.qq.com/AppBox/print/?t=&c=%7B%22base%22%3A%7B%22l%22%3A11%2C%22lat%22%3A39.90403%2C%22lng%22%3A116.407526%7D%7D",
         };
 
         for (String u : urls) {
@@ -545,7 +563,7 @@ public class GeoPointParserUtil {
 				throw new RuntimeException("Zoom is not equal; actual=" + aZoom + ", expected=" + eZoom);
 			}
 		}
-		System.out.println("Passed!");
+		System.out.println("Passed: " + actual);
 	}
 
 	private static void assertApproximateGeoPoint(GeoParsedPoint actual, GeoParsedPoint expected) {
@@ -693,6 +711,8 @@ public class GeoPointParserUtil {
             simpleDomains.add("www.openstreetmap.de");
 
 
+			final Pattern commaSeparatedPairPattern = Pattern.compile("([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)");
+
             try {
                 if (host.equals("osm.org") || host.endsWith("openstreetmap.org")) {
                     Pattern p;
@@ -832,6 +852,59 @@ public class GeoPointParserUtil {
 							return new GeoParsedPoint(matcher.group(1), matcher.group(2), z, matcher.group(3));
 						}
 					}
+				} else if (host.endsWith(".qq.com")) {
+					Map<String, String> queryMap = getQueryParameters(uri);
+					String x = null;
+					String y = null;
+					String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
+					String label = null;
+					if (queryMap.containsKey("city")) {
+						label = queryMap.get("city");
+					} else if (queryMap.containsKey("key")) {
+						label = queryMap.get("key");
+					} else if (queryMap.containsKey("a")) {
+						label = queryMap.get("a");
+					} else if (queryMap.containsKey("n")) {
+						label = queryMap.get("n");
+					}
+					String m = queryMap.get("m");
+					if (m != null) {
+						Matcher matcher = commaSeparatedPairPattern.matcher(m);
+						if (matcher.matches()) {
+							x = matcher.group(2);
+							y = matcher.group(1);
+						}
+					}
+					String c = queryMap.get("c");
+					if (c != null) {
+						// there are two different patterns of data that can be in ?c=
+						Matcher matcher = commaSeparatedPairPattern.matcher(c);
+						if (matcher.matches()) {
+							x = matcher.group(2);
+							y = matcher.group(1);
+						} else {
+							x = c.replaceAll(".*\"lng\":\\s*([+\\-]?[0-9.]+).*", "$1");
+							if (x == null) // try 'lon' for the second time
+								x = c.replaceAll(".*\"lon\":\\s*([+\\-]?[0-9.]+).*", "$1");
+							y = c.replaceAll(".*\"lat\":\\s*([+\\-]?[0-9.]+).*", "$1");
+							z = c.replaceAll(".*\"l\":\\s*([+-]?[0-9.]+).*", "$1");
+							return new GeoParsedPoint(y, x, z, label);
+						}
+					}
+					for (String key : new String[]{"centerX", "x", "x1", "x2"}) {
+						if (queryMap.containsKey(key)) {
+							x = queryMap.get(key);
+							break;
+						}
+					}
+					for (String key : new String[]{"centerY", "y", "y1", "y2"}) {
+						if (queryMap.containsKey(key)) {
+							y = queryMap.get(key);
+							break;
+						}
+					}
+					if (x != null && y != null)
+						return new GeoParsedPoint(y, x, z, label);
 				}
 
             } catch (RuntimeException e) {
