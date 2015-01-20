@@ -108,7 +108,9 @@ public class DownloadOsmandIndexesHelper {
 				log.info(strUrl);
 				XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
 				URLConnection connection = NetworkUtils.getHttpURLConnection(strUrl);
-				parser.setInput(new GZIPInputStream(connection.getInputStream()), "UTF-8"); //$NON-NLS-1$
+				InputStream in = connection.getInputStream();
+				GZIPInputStream gzin = new GZIPInputStream(in);
+				parser.setInput(gzin, "UTF-8"); //$NON-NLS-1$
 				int next;
 				while((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
 					if (next == XmlPullParser.START_TAG) {
@@ -125,6 +127,8 @@ public class DownloadOsmandIndexesHelper {
 					}
 				}
 				result.sort();
+				gzin.close();
+				in.close();
 			} catch (IOException e) {
 				log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
 				return null;
