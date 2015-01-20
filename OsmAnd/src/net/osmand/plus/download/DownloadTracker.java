@@ -13,6 +13,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 
@@ -102,8 +103,7 @@ public class DownloadTracker {
 			}
 
 			log.debug(urlString);
-			URL url = new URL(urlString.toString());
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			HttpURLConnection conn = NetworkUtils.getHttpURLConnection(urlString.toString());
 			conn.setConnectTimeout(5000);
 			conn.setDoInput(false);
 			conn.setDoOutput(false);

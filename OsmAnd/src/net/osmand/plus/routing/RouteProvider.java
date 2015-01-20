@@ -27,6 +27,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -1103,8 +1104,7 @@ public class RouteProvider {
 		
 		log.info("URL route " + uri);
 		
-		URL url = new URL(uri.toString());
-		URLConnection connection = url.openConnection();
+		URLConnection connection = NetworkUtils.getHttpURLConnection(uri.toString());
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
 //		StringBuilder content = new StringBuilder();
 //		BufferedReader rs = new BufferedReader(new InputStreamReader(connection.getInputStream()));

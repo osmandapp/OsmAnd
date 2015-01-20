@@ -14,6 +14,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -43,6 +44,7 @@ import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -94,6 +96,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		
 		addLocalPrefs((PreferenceGroup) screen.findPreference("localization"));
 		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
+		addProxyPrefs((PreferenceGroup) screen.findPreference("proxy"));
 		addMiscPreferences((PreferenceGroup) screen.findPreference("misc"));
 
 		
@@ -260,6 +263,54 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
 			((ListPreference) screen.findPreference(settings.PREFERRED_LOCALE.getId())).setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
 		}
+	}
+
+
+
+
+	private void addProxyPrefs(PreferenceGroup proxy) {
+		CheckBoxPreference enableProxyPref = (CheckBoxPreference) proxy.findPreference(settings.ENABLE_PROXY.getId());
+		enableProxyPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+				@Override
+				public boolean onPreferenceChange(Preference preference, Object newValue) {
+					if ((Boolean) newValue)
+						NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
+					else
+						NetworkUtils.setProxy(null, 0);
+					return true;
+				}
+			});
+
+		EditTextPreference hostPref = (EditTextPreference) proxy.findPreference(settings.PROXY_HOST.getId());
+		hostPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+				@Override
+				public boolean onPreferenceChange(Preference preference, Object newValue) {
+					System.out.println("PROXY newValue: " + newValue);
+					settings.PROXY_HOST.set((String) newValue);
+					NetworkUtils.setProxy((String) newValue, settings.PROXY_PORT.get());
+					return true;
+				}
+			});
+
+		EditTextPreference portPref = (EditTextPreference) proxy.findPreference(settings.PROXY_PORT.getId());
+		portPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+				@Override
+				public boolean onPreferenceChange(Preference preference, Object newValue) {
+					System.out.println("PROXY newValue: " + newValue);
+					int port = -1;
+					String portString = (String) newValue;
+					try {
+						port = Integer.valueOf(portString.replaceAll("[^0-9]", ""));
+					} catch (NumberFormatException e1) {
+					}
+					settings.PROXY_PORT.set(port);
+					NetworkUtils.setProxy(settings.PROXY_HOST.get(), port);
+					return true;
+				}
+			});
 	}
 
 

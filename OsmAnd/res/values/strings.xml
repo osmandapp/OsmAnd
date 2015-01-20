@@ -155,6 +155,13 @@
 	<string name="save_track_interval_descr">Choose logging interval for track recording during navigation</string>
 	<string name="voice_provider_descr">Select voice guidance for navigation</string>
 	<string name="voice_provider">Voice guidance</string>
+	<string name="proxy_pref_title">Proxy</string>
+	<string name="enable_proxy_title">Enable HTTP Proxy</string>
+	<string name="enable_proxy_descr">Configure HTTP Proxy for all network requests</string>
+	<string name="proxy_host_title">Proxy Host</string>
+	<string name="proxy_host_descr">Configure your proxy\'s hostname (e.g. 127.0.0.1)</string>
+	<string name="proxy_port_title">Proxy Port</string>
+	<string name="proxy_port_descr">Configure your proxy\'s port number (e.g. 8118)</string>
 	<string name="tips_and_tricks">Help</string>
 	<string name="tip_initial">Help</string>
 	<string name="tip_initial_t">OsmAnd is a navigation application with many features. 

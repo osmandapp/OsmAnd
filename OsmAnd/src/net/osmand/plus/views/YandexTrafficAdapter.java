@@ -6,10 +6,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.util.Algorithms;
 
@@ -65,7 +67,8 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 		if (mTimestamp == null || (System.currentTimeMillis() - lastTimestampUpdated) > DELTA) {
 			log.info("Updating timestamp"); //$NON-NLS-1$
 			try {
-				BufferedInputStream in = new BufferedInputStream(new URL(YANDEX_BASE_URL + "/trf/stat.js").openStream(), 1024); //$NON-NLS-1$
+				URLConnection connection = NetworkUtils.getHttpURLConnection(YANDEX_BASE_URL + "/trf/stat.js");
+				BufferedInputStream in = new BufferedInputStream(connection.getInputStream(), 1024); //$NON-NLS-1$
 				ByteArrayOutputStream dataStream = new ByteArrayOutputStream();
 				BufferedOutputStream out = new BufferedOutputStream(dataStream, 1024);
 				Algorithms.streamCopy(in, out);
