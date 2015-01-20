@@ -45,7 +45,7 @@
   <string name="live_monitoring_interval">Intervalo de seguimiento en directo</string>
   <string name="live_monitoring_url_descr">Especifica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Dirección web de Seguimiento en directo</string>
-  <string name="gpx_monitoring_disabled_warn">Habilite la opción \'Guardar traza en fichero GPX\'.</string>
+  <string name="gpx_monitoring_disabled_warn">Registra trazas usando el control GPX o mediante la opción \'Grabación de viaje\'.</string>
   <string name="show_current_gpx_title">Mostrar traza actual</string>
   <string name="tip_recent_changes_0_7_0_t">"Cambios en 0.7.0 : \n\t- Artículos de wikipedia sin conexión de datos \n\t- Mapas actualizados \n\t- Otras pequeñas funcionalidades "</string>
   <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas y no soporta artículos de wikipedia sin conexión.</string>
@@ -1889,4 +1889,11 @@
 	<string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
 	<string name="navigation_over_track">¿Empezar navegación sobre traza?</string>
 	<string name="avoid_roads_msg">Puedes cambiar la ruta seleccionando los caminos a evitar</string>
-    </resources>
+    <string name="proxy_pref_title">Proxy</string>
+    <string name="proxy_pref_descr">Configura un proxy de acceso a internet</string>
+    <string name="settings_privacy">Privacidad</string>
+    <string name="recents">RECIENTES</string>
+	<string name="enable_proxy_title">Activar Proxy HTTP</string>
+	<string name="enable_proxy_descr">Configurar Proxy HTTP para todas las peticiones de red</string>
+	<string name="proxy_host_title">Host proxy</string>
+	</resources>
