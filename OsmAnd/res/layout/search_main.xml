@@ -2,17 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+     android:layout_marginTop="?attr/actionBarSize">
 
     <com.example.android.common.view.SlidingTabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <FrameLayout
-        android:id="@android:id/tabcontent"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
