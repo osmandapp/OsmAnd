@@ -7,9 +7,10 @@ public class PoiType {
 	private MapPoiTypes poiTypes;
 	private PoiCategory category;
 	
-	public PoiType(MapPoiTypes poiTypes, PoiCategory category){
+	public PoiType(MapPoiTypes poiTypes, PoiCategory category, String name){
 		this.poiTypes = poiTypes;
 		this.category = category;
+		name = name;
 	}
 	
 	public String getTranslationName() {

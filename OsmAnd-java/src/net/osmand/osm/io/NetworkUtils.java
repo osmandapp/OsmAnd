@@ -165,6 +165,10 @@ public class NetworkUtils {
 			proxy = null;
 		}
 	}
+	
+	public static Proxy getProxy() {
+		return proxy;
+	}
 
 	public static HttpURLConnection getHttpURLConnection(String urlString) throws MalformedURLException, IOException {
 		return getHttpURLConnection(new URL(urlString));

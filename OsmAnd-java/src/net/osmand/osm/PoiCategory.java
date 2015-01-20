@@ -1,21 +1,19 @@
 package net.osmand.osm;
 
-public class PoiCategory {
-	
-	private String name;
-	private String translationName;
-	private MapPoiTypes poiTypes;
-	
-	public PoiCategory(MapPoiTypes poiTypes){
-		this.poiTypes = poiTypes;
-	}
-	
-	public String getTranslationName() {
-		return translationName;
-	}
-	
-	public String getName() {
-		return name;
-	}
+import java.util.ArrayList;
+import java.util.List;
 
+public class PoiCategory extends PoiFilter {
+	
+	private List<PoiFilter> poiFilters = new ArrayList<PoiFilter>();
+	
+	public PoiCategory(MapPoiTypes registry, String keyName){
+		super(registry, keyName);
+	}
+	
+	public void addPoiType(PoiFilter poi) {
+		poiFilters.add(poi);
+	}
+	
+	
 }

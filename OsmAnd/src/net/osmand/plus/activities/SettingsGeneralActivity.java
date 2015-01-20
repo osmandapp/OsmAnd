@@ -266,51 +266,50 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	}
 
 
-
+	protected void enableProxy(boolean enable) {
+		if (enable) {
+			NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
+		} else {
+			NetworkUtils.setProxy(null, 0);
+		}
+	}
 
 	private void addProxyPrefs(PreferenceGroup proxy) {
-		CheckBoxPreference enableProxyPref = (CheckBoxPreference) proxy.findPreference(settings.ENABLE_PROXY.getId());
+		CheckBoxPreference enableProxyPref = (CheckBoxPreference) proxy.findPreference("enable_proxy");
 		enableProxyPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				enableProxy((Boolean) newValue);
+				return true;
+			}
 
-				@Override
-				public boolean onPreferenceChange(Preference preference, Object newValue) {
-					if ((Boolean) newValue)
-						NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
-					else
-						NetworkUtils.setProxy(null, 0);
-					return true;
-				}
-			});
-
+		});
 		EditTextPreference hostPref = (EditTextPreference) proxy.findPreference(settings.PROXY_HOST.getId());
 		hostPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-				@Override
-				public boolean onPreferenceChange(Preference preference, Object newValue) {
-					System.out.println("PROXY newValue: " + newValue);
-					settings.PROXY_HOST.set((String) newValue);
-					NetworkUtils.setProxy((String) newValue, settings.PROXY_PORT.get());
-					return true;
-				}
-			});
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				settings.PROXY_HOST.set((String) newValue);
+				enableProxy(NetworkUtils.getProxy() != null);
+				return true;
+			}
+		});
 
 		EditTextPreference portPref = (EditTextPreference) proxy.findPreference(settings.PROXY_PORT.getId());
 		portPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
-				@Override
-				public boolean onPreferenceChange(Preference preference, Object newValue) {
-					System.out.println("PROXY newValue: " + newValue);
-					int port = -1;
-					String portString = (String) newValue;
-					try {
-						port = Integer.valueOf(portString.replaceAll("[^0-9]", ""));
-					} catch (NumberFormatException e1) {
-					}
-					settings.PROXY_PORT.set(port);
-					NetworkUtils.setProxy(settings.PROXY_HOST.get(), port);
-					return true;
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				int port = -1;
+				String portString = (String) newValue;
+				try {
+					port = Integer.valueOf(portString.replaceAll("[^0-9]", ""));
+				} catch (NumberFormatException e1) {
 				}
-			});
+				settings.PROXY_PORT.set(port);
+				enableProxy(NetworkUtils.getProxy() != null);
+				return true;
+			}
+		});
 	}
 
 
