@@ -1770,4 +1770,6 @@
 	<string name="speak_pedestrian">Meddela om övergångsställen</string>
     <string name="rendering_value__name">Standard</string>
 	<string name="avoid_roads_msg">Du kan ändra rutten genom att markera vägar att undvika</string>
-    </resources>
+    <string name="recents">TIDIGARE</string>
+	<string name="save_track_to_gpx_globally_headline">Spårloggning på begäran</string>
+	</resources>
