@@ -1990,4 +1990,11 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="avoid_roads_msg">Вы можаце зьмяніць маршрут пазначыўшы якія дарогі варта пазьбягаць</string>
     <string name="navigation_over_track">Пачаць навігацыю ўздоўж сьледу?</string>
 	<string name="recents">НЯДАЎНІЯ</string>
+	<string name="proxy_pref_title">Проксі</string>
+	<string name="enable_proxy_title">Уключыць HTTP-проксі</string>
+	<string name="enable_proxy_descr">Наладзіць HTTP-проксі для ўсіх сеткавых запытаў</string>
+	<string name="proxy_host_title">Хост проксі</string>
+	<string name="proxy_host_descr">Задайце хостнэйм вашага проксі (напрыклад 127.0.0.1)</string>
+	<string name="proxy_port_title">Порт проксі</string>
+	<string name="proxy_port_descr">Задайце нумар парта вашага проксі (напрыклад 8118)</string>
 	</resources>
