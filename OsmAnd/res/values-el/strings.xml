@@ -1146,7 +1146,7 @@
     <string name="recording_context_menu_delete">Διαγραφή εγγραφής</string>
     <string name="recording_context_menu_play">Αναπαραγωγή</string>
     <string name="recording_description">Εγγραφή %1$s %3$s %2$s</string>
-    <string name="recording_default_name">εγγραφή</string>
+    <string name="recording_default_name">Εγγραφή</string>
     <string name="map_widget_av_notes">Σημειώσεις ήχου/video</string>
     <string name="av_def_action_video">Εγγραφή video</string>
     <string name="av_def_action_audio">Εγγραφή ήχου</string>
