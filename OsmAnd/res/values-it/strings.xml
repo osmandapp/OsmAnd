@@ -2048,4 +2048,12 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="avoid_roads_msg">Puoi variare il percorso selezionando le strade da evitare</string>
     <string name="save_track_to_gpx_globally_headline">Registrazione della traccia su richiesta</string>
 	<string name="recents">RECENTI</string>
-	</resources>
+	<string name="enable_proxy_title">Abilita HTTP Proxy</string>
+	<string name="enable_proxy_descr">Configura HTTP Proxy per tutte le richieste della rete</string>
+	<string name="proxy_host_title">Proxy Host</string>
+	<string name="proxy_host_descr">Configura il tuo proxy hostname (es. 127.0.0.1)</string>
+	<string name="proxy_port_title">Porta Proxy</string>
+	<string name="proxy_port_descr">Configura il numero della tua porta proxy (es. 8118)</string>
+	<string name="proxy_pref_descr">"Imposta una connessione a internet tramite  proxy"</string>
+    <string name="settings_privacy">Privacy</string>
+    </resources>
