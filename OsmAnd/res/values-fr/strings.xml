@@ -1898,4 +1898,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="avoid_roads_msg">Vous pouvez modifier l\'itinéraire en sélectionnant les routes à éviter.</string>
     <string name="navigation_over_track">Démarrer la navigation sur les pistes ?</string>
 	<string name="save_track_to_gpx_globally_headline">Enregistrement de traces à la demande</string>
+	<string name="recents">Récents</string>
 	</resources>
