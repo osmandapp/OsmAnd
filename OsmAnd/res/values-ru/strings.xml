@@ -1852,4 +1852,5 @@
     <string name="rendering_value__name">По умолчанию</string>
 	<string name="navigation_over_track">Начать навигацию по треку?</string>
 	<string name="avoid_roads_msg">Вы можете изменить маршрут, выбрав дороги, которые стоит избегать</string>
-    </resources>
+    <string name="save_track_to_gpx_globally_headline">Запись трека по требованию</string>
+	</resources>
