@@ -64,7 +64,8 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 		if(getActivity() instanceof SearchActivity) {
 			menu = ((SearchActivity) getActivity()).getClearToolbar(true).getMenu();
 		}
-		MenuItem menuItem = menu.add(0, 1, 0, R.string.search_offline_clear_search).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT );
+		MenuItem menuItem = menu.add(0, 1, 0, R.string.search_offline_clear_search);
+		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gremove_light : R.drawable.ic_action_gremove_dark);
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -76,8 +77,8 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 			}
 		});
 		if (getActivity() instanceof SearchActivity) {
-			menuItem = menu.add(0, 0, 0, R.string.search_offline_address).setShowAsActionFlags(
-					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			menuItem = menu.add(0, 0, 0, R.string.search_offline_address);
+			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override

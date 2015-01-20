@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			 android:layout_marginTop="?attr/actionBarSize"
-			 android:orientation="vertical"
-			 android:layout_width="match_parent"
-			 android:layout_height="match_parent">
+			  android:layout_marginTop="?attr/actionBarSize"
+			  android:orientation="vertical"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent">
 
 	<LinearLayout android:id="@+id/layout"
 				  android:orientation="vertical"
@@ -13,8 +13,9 @@
 				  android:layout_weight="1"/>
 
 
-	<android.support.v7.widget.Toolbar android:orientation="horizontal"
-				  android:id="@+id/bottomControls"
-				  android:layout_width="fill_parent"
-				  android:layout_height="wrap_content"/>
+	<net.osmand.plus.activities.search.toolbar.SplitToolbar
+			android:orientation="horizontal"
+			android:id="@+id/bottomControls"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"/>
 </LinearLayout>

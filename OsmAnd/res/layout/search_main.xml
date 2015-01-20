@@ -17,7 +17,7 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <android.support.v7.widget.Toolbar
+    <net.osmand.plus.activities.search.toolbar.SplitToolbar
         android:id="@+id/bottomControls"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
