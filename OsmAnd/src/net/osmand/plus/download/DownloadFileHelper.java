@@ -14,6 +14,7 @@ import java.util.zip.ZipInputStream;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -66,7 +67,7 @@ public class DownloadFileHelper {
 							} catch (InterruptedException e) {
 							}
 						}
-						HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+						HttpURLConnection conn = NetworkUtils.getHttpURLConnection(url);
 						conn.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
 						conn.setReadTimeout(30000);
 						if (fileread > 0) {

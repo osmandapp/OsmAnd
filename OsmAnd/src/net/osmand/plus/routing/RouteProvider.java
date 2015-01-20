@@ -27,6 +27,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -67,6 +68,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import btools.routingapp.IBRouterService;
 
@@ -1079,12 +1081,17 @@ public class RouteProvider {
 	}
 	protected RouteCalculationResult findOSRMRoute(RouteCalculationParams params)
 			throws MalformedURLException, IOException, JSONException {
-		// http://router.project-osrm.org/viaroute?loc=52.28,4.83&loc=52.35,4.95&alt=false&output=gpx
+		// https://router.project-osrm.org/viaroute?loc=52.28,4.83&loc=52.35,4.95&alt=false&output=gpx
 		List<Location> res = new ArrayList<Location>();
 		StringBuilder uri = new StringBuilder();
 		// possibly hide that API key because it is privacy of osmand
 		// A6421860EBB04234AB5EF2D049F2CD8F key is compromised
-		uri.append("http://router.project-osrm.org/viaroute?alt=false"); //$NON-NLS-1$
+		String scheme = "";
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD)
+			scheme = "https";
+		else
+			scheme = "http";
+		uri.append(scheme + "://router.project-osrm.org/viaroute?alt=false"); //$NON-NLS-1$
 		uri.append("&loc=").append(String.valueOf(params.start.getLatitude()));
 		uri.append(",").append(String.valueOf(params.start.getLongitude()));
 		if(params.intermediates != null && params.intermediates.size() > 0) {
@@ -1097,8 +1104,7 @@ public class RouteProvider {
 		
 		log.info("URL route " + uri);
 		
-		URL url = new URL(uri.toString());
-		URLConnection connection = url.openConnection();
+		URLConnection connection = NetworkUtils.getHttpURLConnection(uri.toString());
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
 //		StringBuilder content = new StringBuilder();
 //		BufferedReader rs = new BufferedReader(new InputStreamReader(connection.getInputStream()));

@@ -3,6 +3,7 @@ package net.osmand.plus.poi;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.R.string;
@@ -76,8 +78,8 @@ public class NameFinderPoiFilter extends PoiLegacyFilter {
 			lastError = "";
 			String urlq = NOMINATIM_API + URLEncoder.encode(query)+ "?format=xml&addressdetails=1&limit="+LIMIT+"&bounded=1&"+viewbox;
 			log.info(urlq);
-			URL url = new URL(urlq); //$NON-NLS-1$
-			InputStream stream = url.openStream();
+			URLConnection connection = NetworkUtils.getHttpURLConnection(urlq); //$NON-NLS-1$
+			InputStream stream = connection.getInputStream();
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(stream, "UTF-8"); //$NON-NLS-1$
 			int eventType;

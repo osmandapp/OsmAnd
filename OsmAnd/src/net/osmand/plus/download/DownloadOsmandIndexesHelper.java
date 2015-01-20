@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.zip.GZIPInputStream;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 
@@ -104,9 +106,11 @@ public class DownloadOsmandIndexesHelper {
 				String strUrl = ctx.getAppCustomization().getIndexesUrl();
 				
 				log.info(strUrl);
-				URL url = new URL(strUrl ); 
 				XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
-				parser.setInput(new GZIPInputStream(url.openStream()), "UTF-8"); //$NON-NLS-1$
+				URLConnection connection = NetworkUtils.getHttpURLConnection(strUrl);
+				InputStream in = connection.getInputStream();
+				GZIPInputStream gzin = new GZIPInputStream(in);
+				parser.setInput(gzin, "UTF-8"); //$NON-NLS-1$
 				int next;
 				while((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
 					if (next == XmlPullParser.START_TAG) {
@@ -123,6 +127,8 @@ public class DownloadOsmandIndexesHelper {
 					}
 				}
 				result.sort();
+				gzin.close();
+				in.close();
 			} catch (IOException e) {
 				log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
 				return null;
