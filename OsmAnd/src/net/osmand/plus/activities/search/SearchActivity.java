@@ -114,6 +114,7 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 		showOnlyOneTab = getIntent() != null && getIntent().getBooleanExtra(SHOW_ONLY_ONE_TAB, false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle("");
+		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#39464d")));
 //		getSupportActionBar().setTitle(R.string.select_search_position);
 
         
