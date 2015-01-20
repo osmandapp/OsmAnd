@@ -2047,4 +2047,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="navigation_over_track">Iniziare la navigazione sulla traccia?</string>
 	<string name="avoid_roads_msg">Puoi variare il percorso selezionando le strade da evitare</string>
     <string name="save_track_to_gpx_globally_headline">Registrazione della traccia su richiesta</string>
+	<string name="recents">RECENTI</string>
 	</resources>
