@@ -1,5 +1,6 @@
 package net.osmand.plus.activities.search;
 
+
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -8,11 +9,6 @@ import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
 
-import android.content.pm.ActivityInfo;
-import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
-import android.view.*;
-import android.widget.*;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -25,24 +21,26 @@ import net.osmand.plus.activities.FavouritesListFragment;
 import net.osmand.plus.activities.NavigatePointFragment;
 import net.osmand.util.Algorithms;
 import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.widget.TabHost.TabSpec;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBar.OnNavigationListener;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+
+import com.example.android.common.view.SlidingTabLayout;
 
 public class SearchActivity extends ActionBarActivity implements OsmAndLocationListener {
-	private static final String SEARCH_HISTORY = "Search_History";
-	private static final String SEARCH_FAVORITES = "Search_Favorites";
-	private static final String SEARCH_TRANSPORT = "Search_Transport";
-	private static final String SEARCH_LOCATION = "Search_Location";
-	private static final String SEARCH_ADDRESS = "Search_Address";
-	private static final String SEARCH_POI = "Search_POI";
 	public static final int POI_TAB_INDEX = 0;
 	public static final int ADDRESS_TAB_INDEX = 1;
 	public static final int LOCATION_TAB_INDEX = 2;
@@ -70,24 +68,38 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 	private static boolean searchOnLine = false;
 	private ArrayAdapter<String> spinnerAdapter;
 	private OsmandSettings settings;
-	private TabsAdapter mTabsAdapter;
 	List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 	private boolean showOnlyOneTab;
 
+	private List<TabItem> mTabs = new ArrayList<TabItem>();
+	private ViewPager mViewPager;
+	private SlidingTabLayout mSlidingTabLayout;
+	
 	public interface SearchActivityChild {
 		
 		public void locationUpdate(LatLon l);
 	}
 
+	private static class TabItem {
+		private final CharSequence mTitle;
+		private final int mIcon;
+        private final int mIndicatorColor;
+        private final int mDividerColor;
+        private final Class<?> fragment;
+        
+		public TabItem(CharSequence mTitle, int mIcon, int mIndicatorColor, int mDividerColor, Class<?> fragment) {
+			this.mTitle = mTitle;
+			this.mIcon = mIcon;
+			this.mIndicatorColor = mIndicatorColor;
+			this.mDividerColor = mDividerColor;
+			this.fragment = fragment;
+		}
+        
+	}
 
 
-	private View getTabIndicator(TabHost tabHost, int imageId, int stringId){
-		View r = getLayoutInflater().inflate(R.layout.search_main_tab_header, tabHost, false);
-		ImageView tabImage = (ImageView)r.findViewById(R.id.TabImage);
-		tabImage.setImageResource(imageId);
-		tabImage.setBackgroundResource(R.drawable.tab_icon_background);
-		tabImage.setContentDescription(getString(stringId));
-		return r;
+	private TabItem getTabIndicator(int iconId, int resId, Class<?> fragment){
+		return new TabItem(getString(resId), iconId, Color.DKGRAY, Color.LTGRAY, fragment);
 	}
 	
 	@Override
@@ -107,34 +119,36 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
         
 		
 		if (!showOnlyOneTab) {
-			final TextView tabinfo  = (TextView) findViewById(R.id.textViewADesc);
-			TabWidget tabs = (TabWidget) findViewById(android.R.id.tabs);
-			tabs.setBackgroundResource(R.drawable.tab_icon_background);
-			
-	        TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
-	        tabHost.setup();
-	        ViewPager mViewPager = (ViewPager)findViewById(R.id.pager);
-			mTabsAdapter = new TabsAdapter(this, tabHost, tabinfo, mViewPager, settings);
-			TabSpec poiTab = tabHost.newTabSpec(SEARCH_POI).setIndicator(
-					getTabIndicator(tabHost, R.drawable.tab_search_poi_icon, R.string.poi));
-			mTabsAdapter.addTab(poiTab, getFragment(POI_TAB_INDEX), null);
-			TabSpec addressSpec = tabHost.newTabSpec(SEARCH_ADDRESS).setIndicator(
-					getTabIndicator(tabHost, R.drawable.tab_search_address_icon, R.string.address));
-			mTabsAdapter.addTab(addressSpec, getFragment(ADDRESS_TAB_INDEX), null);
+	        mViewPager = (ViewPager)findViewById(R.id.pager);
+	        mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
 
-			TabSpec locationTab = tabHost.newTabSpec(SEARCH_LOCATION).setIndicator(
-					getTabIndicator(tabHost, R.drawable.tab_search_location_icon, R.string.search_tabs_location));
-			mTabsAdapter.addTab(locationTab, getFragment(LOCATION_TAB_INDEX), null);
-			TabSpec favoriteTab = tabHost.newTabSpec(SEARCH_FAVORITES).setIndicator(
-					getTabIndicator(tabHost, R.drawable.tab_search_favorites_icon, R.string.favorite));
-			mTabsAdapter.addTab(favoriteTab, getFragment(FAVORITES_TAB_INDEX), null);
-			TabSpec historyTab = tabHost.newTabSpec(SEARCH_HISTORY).setIndicator(
-					getTabIndicator(tabHost, R.drawable.tab_search_history_icon, R.string.history));
-			mTabsAdapter.addTab(historyTab, getFragment(HISTORY_TAB_INDEX), null);
-//			TabSpec transportTab = tabHost.newTabSpec(SEARCH_TRANSPORT).setIndicator(
-//					getTabIndicator(tabHost, R.drawable.tab_search_transport_icon, R.string.transport));
-//			mTabsAdapter.addTab(transportTab, getFragment(TRANSPORT_TAB_INDEX), null);
-			tabHost.setCurrentTab(Math.min(tab , HISTORY_TAB_INDEX));
+			mTabs.add(getTabIndicator(R.drawable.tab_search_poi_icon, R.string.poi, getFragment(POI_TAB_INDEX)));
+			mTabs.add(getTabIndicator(R.drawable.tab_search_address_icon, R.string.address, getFragment(ADDRESS_TAB_INDEX)));
+			mTabs.add(getTabIndicator(R.drawable.tab_search_location_icon, R.string.search_tabs_location, getFragment(LOCATION_TAB_INDEX)));
+			mTabs.add(getTabIndicator(R.drawable.tab_search_favorites_icon, R.string.favorite, getFragment(FAVORITES_TAB_INDEX)));
+			mTabs.add(getTabIndicator(R.drawable.tab_search_history_icon, R.string.history, getFragment(HISTORY_TAB_INDEX)));
+
+			
+			mViewPager.setAdapter(new SearchFragmentPagerAdapter(getSupportFragmentManager()));
+			mSlidingTabLayout.setViewPager(mViewPager);
+			
+			mViewPager.setCurrentItem(Math.min(tab , HISTORY_TAB_INDEX));
+			mSlidingTabLayout.setOnPageChangeListener(new OnPageChangeListener() {
+				
+				@Override
+				public void onPageSelected(int arg0) {
+					settings.SEARCH_TAB.set(arg0);
+				}
+				
+				@Override
+				public void onPageScrolled(int arg0, float arg1, int arg2) {
+				}
+				
+				@Override
+				public void onPageScrollStateChanged(int arg0) {
+					
+				}
+			});
 		} else {
 			setContentView(R.layout.search_activity_single);
 			Class<?> cl = getFragment(tab);
@@ -284,32 +298,15 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 			}
 		}
 	}
-
-	public void setupBottomMenu(List<BottomMenuItem> menuItems) {
-		LinearLayout bottomControls = (LinearLayout) findViewById(R.id.bottomControls);
-		if (bottomControls == null) {
-			return;
-		}
-		bottomControls.removeAllViews();
-
-		if (menuItems.size() == 0) {
-			findViewById(R.id.devider).setVisibility(View.GONE);
-		} else {
-			findViewById(R.id.devider).setVisibility(View.VISIBLE);
-		}
-
-		for (BottomMenuItem item : menuItems) {
-			ImageButton imageButton = new ImageButton(this);
-			imageButton.setImageResource(item.getIcon());
-			TableRow.LayoutParams params = new TableRow.LayoutParams(0,
-					ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
-			params.gravity = Gravity.CENTER_VERTICAL;
-			imageButton.setLayoutParams(params);
-			imageButton.setOnClickListener(item.getOnClickListener());
-			imageButton.setBackgroundResource(R.drawable.bottom_menu_item);
-			bottomControls.addView(imageButton);
-		}
+	
+	public Toolbar getClearToolbar(boolean visible) {
+		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);
+		tb.setTitle(null);
+		tb.getMenu().clear();
+		tb.setVisibility(visible? View.VISIBLE : View.GONE);
+		return tb;
 	}
+
 
 	public void updateLocation(net.osmand.Location location){
 		if (location != null) {
@@ -410,128 +407,42 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 	}
 	
 
-    /**
-     * This is a helper class that implements the management of tabs and all
-     * details of connecting a ViewPager with associated TabHost.  It relies on a
-     * trick.  Normally a tab host has a simple API for supplying a View or
-     * Intent that each tab will show.  This is not sufficient for switching
-     * between pages.  So instead we make the content part of the tab host
-     * 0dp high (it is not shown) and the TabsAdapter supplies its own dummy
-     * view to show as the tab content.  It listens to changes in tabs, and takes
-     * care of switch to the correct paged in the ViewPager whenever the selected
-     * tab changes.
-     */
-    public static class TabsAdapter extends FragmentPagerAdapter
-            implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
-        private final Context mContext;
-        private final TabHost mTabHost;
-        private final ViewPager mViewPager;
-        private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
-		private TextView tabInfo;
-		private OsmandSettings osmSettings;
+    class SearchFragmentPagerAdapter extends FragmentPagerAdapter
+            /*implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener*/ {
 
-        static final class TabInfo {
-            private final String tag;
-            private Class<?> clss;
-            private Bundle args;
-
-            TabInfo(String _tag, Class<?> _class, Bundle _args) {
-                tag = _tag;
-                clss = _class;
-                args = _args;
-            }
+        SearchFragmentPagerAdapter(FragmentManager fm) {
+            super(fm);
         }
 
-        static class DummyTabFactory implements TabHost.TabContentFactory {
-            private final Context mContext;
-
-            public DummyTabFactory(Context context) {
-                mContext = context;
-            }
-
-            @Override
-            public View createTabContent(String tag) {
-                View v = new View(mContext);
-                v.setMinimumWidth(0);
-                v.setMinimumHeight(0);
-                return v;
-            }
+        /**
+         * Return the {@link android.support.v4.app.Fragment} to be displayed at {@code position}.
+         * <p>
+         * Here we return the value returned from {@link SamplePagerItem#createFragment()}.
+         */
+        @Override
+        public Fragment getItem(int i) {
+            try {
+				return (Fragment) mTabs.get(i).fragment.newInstance();
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
         }
-
-        public TabsAdapter(FragmentActivity activity, TabHost tabHost, TextView tabinfo, ViewPager pager, OsmandSettings settings) {
-            super(activity.getSupportFragmentManager());
-            mContext = activity;
-            mTabHost = tabHost;
-			tabInfo = tabinfo;
-            mViewPager = pager;
-			osmSettings = settings;
-            mTabHost.setOnTabChangedListener(this);
-            mViewPager.setAdapter(this);
-            mViewPager.setOnPageChangeListener(this);
-        }
-
-        public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args) {
-            tabSpec.setContent(new DummyTabFactory(mContext));
-            String tag = tabSpec.getTag();
-
-            TabInfo info = new TabInfo(tag, clss, args);
-            mTabs.add(info);
-            mTabHost.addTab(tabSpec);
-            notifyDataSetChanged();
-        }
-        
 
         @Override
         public int getCount() {
             return mTabs.size();
         }
-        
-        @Override
-        public Fragment getItem(int position) {
-            TabInfo info = mTabs.get(position);
-            return Fragment.instantiate(mContext, info.clss.getName(), info.args);
-        }
 
+        // BEGIN_INCLUDE (pageradapter_getpagetitle)
+        /**
+         * Return the title of the item at {@code position}. This is important as what this method
+         * returns is what is displayed in the {@link SlidingTabLayout}.
+         * <p>
+         * Here we return the value returned from {@link SamplePagerItem#getTitle()}.
+         */
         @Override
-		public void onTabChanged(String tabId) {
-			int position = mTabHost.getCurrentTab();
-			osmSettings.SEARCH_TAB.set(position);
-			mViewPager.setCurrentItem(position);
-			if (SEARCH_POI.equals(tabId)) {
-				tabInfo.setText(R.string.poi_search_desc);
-			} else if (SEARCH_ADDRESS.equals(tabId)) {
-				tabInfo.setText(searchOnLine ? R.string.search_osm_nominatim : R.string.address_search_desc);
-			} else if (SEARCH_LOCATION.equals(tabId)) {
-				tabInfo.setText(R.string.navpoint_search_desc);
-			} else if (SEARCH_TRANSPORT.equals(tabId)) {
-				tabInfo.setText(R.string.transport_search_desc);
-			} else if (SEARCH_FAVORITES.equals(tabId)) {
-				tabInfo.setText(R.string.favourites_search_desc);
-			} else if (SEARCH_HISTORY.equals(tabId)) {
-				tabInfo.setText(R.string.history_search_desc);
-			}
-		}
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            // Unfortunately when TabHost changes the current tab, it kindly
-            // also takes care of putting focus on it when not in touch mode.
-            // The jerk.
-            // This hack tries to prevent this from pulling focus out of our
-            // ViewPager.
-            TabWidget widget = mTabHost.getTabWidget();
-            int oldFocusability = widget.getDescendantFocusability();
-            widget.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-            mTabHost.setCurrentTab(position);
-            widget.setDescendantFocusability(oldFocusability);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
+        public CharSequence getPageTitle(int position) {
+            return mTabs.get(position).mTitle;
         }
     }
 

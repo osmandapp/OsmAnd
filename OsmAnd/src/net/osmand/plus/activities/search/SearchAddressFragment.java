@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -80,11 +81,15 @@ public class SearchAddressFragment extends Fragment {
 
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
 		boolean light = ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
+		Menu menu = onCreate;
+		if(getActivity() instanceof SearchActivity) {
+			menu = ((SearchActivity) getActivity()).getClearToolbar(true).getMenu();
+		}
 		if(getActivity() instanceof SearchAddressActivity) {
-			MenuItem menuItem = menu.add(0, SELECT_POINT, 0, "");
-			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+			MenuItem menuItem = menu.add(0, SELECT_POINT, 0, "").setShowAsActionFlags(
+					MenuItem.SHOW_AS_ACTION_ALWAYS );
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_ok_light : R.drawable.ic_action_ok_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -94,71 +99,63 @@ public class SearchAddressFragment extends Fragment {
 				}
 			});
 		} else {
-			List<BottomMenuItem> menuItems = new ArrayList<BottomMenuItem>();
-			BottomMenuItem menuItem = new BottomMenuItem().
-					setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark).
-					setMsg(R.string.context_menu_item_directions_to).
-					setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							select(NAVIGATE_TO);
-						}
-					});
-			menuItems.add(menuItem);
-
-			TargetPointsHelper targets = ((OsmandApplication) getApplication()).getTargetPointsHelper();
-			menuItem = new BottomMenuItem();
-			if (targets.getPointToNavigate() != null) {
-				menuItem.setIcon(light ? R.drawable.ic_action_flage_light : R.drawable.ic_action_flage_dark).
-						setMsg(R.string.context_menu_item_intermediate_point);
-			} else {
-				menuItem.setIcon(light ? R.drawable.ic_action_flag_light : R.drawable.ic_action_flag_dark).
-						setMsg(R.string.context_menu_item_destination_point);
-			}
-			menuItem.setOnClickListener(new View.OnClickListener() {
+			MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to).setShowAsActionFlags(
+					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
-				public void onClick(View v) {
-					select(ADD_WAYPOINT);
+				public boolean onMenuItemClick(MenuItem item) {
+					select(NAVIGATE_TO);
+					return true;
 				}
 			});
-			menuItems.add(menuItem);
-
-			menuItem = new BottomMenuItem().
-					setIcon(light ?  R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark).
-					setMsg(R.string.search_shown_on_map).
-					setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							select(SHOW_ON_MAP);
-						}
-					});
-			menuItems.add(menuItem);
-
-			menuItem = new BottomMenuItem().
-					setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark).
-					setMsg(R.string.add_to_favourite).
-					setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							select(ADD_TO_FAVORITE);
-						}
-					});
-			menuItems.add(menuItem);
-
-			menuItem = new BottomMenuItem().
-					setIcon(light ? R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark).
-					setMsg(R.string.search_online_address).
-					setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							((SearchActivity) getActivity()).startSearchAddressOnline();
-						}
-					});
-			menuItems.add(menuItem);
-
-			if (getActivity() instanceof SearchActivity) {
-				((SearchActivity)getActivity()).setupBottomMenu(menuItems);
+			TargetPointsHelper targets = ((OsmandApplication) getApplication()).getTargetPointsHelper();
+			if (targets.getPointToNavigate() != null) {
+				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point).setShowAsActionFlags(
+						MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flage_light : R.drawable.ic_action_flage_dark);
+			} else {
+				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point).setShowAsActionFlags(
+						MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flag_light : R.drawable.ic_action_flag_dark);
 			}
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					select(ADD_WAYPOINT);
+					return true;
+				}
+			});
+			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
+
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					select(SHOW_ON_MAP);
+					return true;
+				}
+			});
+			
+			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.add_to_favourite).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
+
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					select(ADD_TO_FAVORITE);
+					return true;
+				}
+			});
+			menuItem = menu.add(0, ONLINE_SEARCH, 0, R.string.search_online_address).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark);
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					((SearchActivity) getActivity()).startSearchAddressOnline();
+					return true;
+				}
+			});
 		}
 
 	}

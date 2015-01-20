@@ -162,10 +162,8 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 
 			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
 			Display display = wm.getDefaultDisplay();
-			final Point pnt = new Point();
-			display.getSize(pnt);
-			int height = pnt.y; // (int) getActivity().getResources().getDimension(R.dimen.dashMapHeight);
-			int width = pnt.x;// display.getWidth();
+			int height = display.getHeight(); // (int) getActivity().getResources().getDimension(R.dimen.dashMapHeight);
+			int width = display.getWidth();
 
 			WindowManager mgr = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
 			DisplayMetrics dm = new DisplayMetrics();

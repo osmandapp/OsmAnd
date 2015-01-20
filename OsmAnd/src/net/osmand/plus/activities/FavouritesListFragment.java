@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import android.support.v4.app.ListFragment;
+import android.support.v7.widget.Toolbar;
 import android.view.*;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -16,7 +17,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.search.BottomMenuItem;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -102,9 +102,9 @@ public class FavouritesListFragment extends ListFragment implements SearchActivi
 
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		if (getActivity() instanceof SearchActivity) {
-			((SearchActivity)getActivity()).setupBottomMenu(new ArrayList<BottomMenuItem>());
+	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
+		if(getActivity() instanceof SearchActivity) {
+			((SearchActivity) getActivity()).getClearToolbar(false);
 		}
 	}
 

@@ -9,6 +9,7 @@ import java.util.List;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.*;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
@@ -180,8 +181,10 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 	}
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		((SearchActivity)getActivity()).setupBottomMenu(new ArrayList<BottomMenuItem>());
+	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
+		if(getActivity() instanceof SearchActivity) {
+			((SearchActivity) getActivity()).getClearToolbar(false);
+		}
 	}
 
 	@Override

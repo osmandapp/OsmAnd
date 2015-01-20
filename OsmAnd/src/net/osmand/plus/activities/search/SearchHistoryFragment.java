@@ -20,6 +20,7 @@ import net.osmand.util.MapUtils;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
 import android.view.View.OnClickListener;
@@ -177,9 +178,9 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 	}
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		if (getActivity() instanceof SearchActivity) {
-			((SearchActivity)getActivity()).setupBottomMenu(new ArrayList<BottomMenuItem>());
+	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
+		if(getActivity() instanceof SearchActivity) {
+			 ((SearchActivity) getActivity()).getClearToolbar(false);
 		}
 	}
 }

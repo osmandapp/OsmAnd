@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.*;
 import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
@@ -625,9 +626,9 @@ public class SearchTransportFragment extends Fragment implements SearchActivityC
 	}
 
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		if (getActivity() instanceof SearchActivity) {
-			((SearchActivity)getActivity()).setupBottomMenu(new ArrayList<BottomMenuItem>());
+	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
+		if(getActivity() instanceof SearchActivity) {
+			 ((SearchActivity) getActivity()).getClearToolbar(false);
 		}
 	}
 

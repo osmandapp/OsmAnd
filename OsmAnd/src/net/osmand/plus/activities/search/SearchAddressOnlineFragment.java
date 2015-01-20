@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.view.MenuItem.OnMenuItemClickListener;
 import net.osmand.PlatformUtil;
@@ -57,34 +58,34 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 	
 	
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
 		boolean light = ((OsmandApplication) getActivity().getApplication()).getSettings().isLightActionBar();
-		List<BottomMenuItem> menuItems = new ArrayList<BottomMenuItem>();
-		BottomMenuItem menuItem = new BottomMenuItem().
-				setIcon(light ? R.drawable.ic_action_gremove_light : R.drawable.ic_action_gremove_dark).
-				setMsg(R.string.search_offline_clear_search).
-				setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						searchText.setText("");
-						adapter.clear();
-					}
-				});
-		menuItems.add(menuItem);
+		Menu menu = onCreate;
+		if(getActivity() instanceof SearchActivity) {
+			menu = ((SearchActivity) getActivity()).getClearToolbar(true).getMenu();
+		}
+		MenuItem menuItem = menu.add(0, 1, 0, R.string.search_offline_clear_search).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT );
+		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gremove_light : R.drawable.ic_action_gremove_dark);
 
-		menuItem = new BottomMenuItem().
-				setIcon(light ?  R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark).
-				setMsg(R.string.search_offline_address).
-				setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						((SearchActivity) getActivity()).startSearchAddressOffline();
-					}
-				});
-		menuItems.add(menuItem);
-
+		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				searchText.setText("");
+				adapter.clear();
+				return true;
+			}
+		});
 		if (getActivity() instanceof SearchActivity) {
-			((SearchActivity)getActivity()).setupBottomMenu(menuItems);
+			menuItem = menu.add(0, 0, 0, R.string.search_offline_address).setShowAsActionFlags(
+					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark);
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					((SearchActivity) getActivity()).startSearchAddressOffline();
+					return true;
+				}
+			});
 		}
 	}
 	

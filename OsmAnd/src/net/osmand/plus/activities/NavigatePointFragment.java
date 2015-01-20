@@ -2,23 +2,14 @@ package net.osmand.plus.activities;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.activities.search.BottomMenuItem;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.dialogs.DirectionsDialogs;
@@ -28,9 +19,15 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -111,63 +108,65 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	
 	
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 		boolean light = app.getSettings().isLightActionBar();
-
-		List<BottomMenuItem> menuItems = new ArrayList<BottomMenuItem>();
-		BottomMenuItem menuItem = new BottomMenuItem().
-				setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark).
-				setMsg(R.string.context_menu_item_directions_to).
-				setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						select(NAVIGATE_TO);
-					}
-				});
-		menuItems.add(menuItem);
-
-		TargetPointsHelper targets = app.getTargetPointsHelper();
-		menuItem = new BottomMenuItem();
-		if (targets.getPointToNavigate() != null) {
-			menuItem.setIcon(light ? R.drawable.ic_action_flage_light : R.drawable.ic_action_flage_dark).
-					setMsg(R.string.context_menu_item_intermediate_point);
-		} else {
-			menuItem.setIcon(light ? R.drawable.ic_action_flag_light : R.drawable.ic_action_flag_dark).
-					setMsg(R.string.context_menu_item_destination_point);
+		Menu menu = onCreate;
+		if(getActivity() instanceof SearchActivity) {
+			menu = ((SearchActivity) getActivity()).getClearToolbar(true).getMenu();
 		}
-		menuItem.setOnClickListener(new View.OnClickListener() {
+		MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to).setShowAsActionFlags(
+				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
+		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
 			@Override
-			public void onClick(View v) {
-				select(ADD_WAYPOINT);
+			public boolean onMenuItemClick(MenuItem item) {
+				select(NAVIGATE_TO);
+				return true;
 			}
 		});
-		menuItems.add(menuItem);
+		TargetPointsHelper targets = app.getTargetPointsHelper();
+		if (targets.getPointToNavigate() != null) {
+			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point).setShowAsActionFlags(
+					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flage_light
+					: R.drawable.ic_action_flage_dark);
+		} else {
+			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point).setShowAsActionFlags(
+					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flag_light
+					: R.drawable.ic_action_flag_dark);
+		}
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					select(ADD_WAYPOINT);
+					return true;
+				}
+			});
+		//}
+		menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
 
-		menuItem = new BottomMenuItem().
-				setIcon(light ?  R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark).
-				setMsg(R.string.search_shown_on_map).
-				setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						select(SHOW_ON_MAP);
-					}
-				});
-		menuItems.add(menuItem);
+		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				select(SHOW_ON_MAP);
+				return true;
+			}
+		});
+		
+		menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.add_to_favourite).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
 
-
-		menuItem = new BottomMenuItem().
-				setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark).
-				setMsg(R.string.add_to_favourite).
-				setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						select(ADD_TO_FAVORITE);
-					}
-				});
-		menuItems.add(menuItem);
-
-		((SearchActivity)getActivity()).setupBottomMenu(menuItems);
+		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				select(ADD_TO_FAVORITE);
+				return true;
+			}
+		});
 	}
 	
 	@Override
