@@ -460,6 +460,26 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
+		// http://share.here.com/l/52.5134272,13.3778416,Hannah-Arendt-Stra%C3%9Fe?z=16.0&t=normal
+		url = "http://share.here.com/l/" + dlat + "," + dlon + ",Hannah-Arendt-Stra%C3%9Fe?z=" + z + "&t=normal";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
+		// https://www.here.com/location?map=52.5134272,13.3778416,16,normal&msg=Hannah-Arendt-Stra%C3%9Fe
+		z = 16;
+		url = "https://www.here.com/location?map=" + dlat + "," + dlon + "," + z + ",normal&msg=Hannah-Arendt-Stra%C3%9Fe";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
+		// https://www.here.com/?map=48.23145,16.38454,15,normal
+		z = 16;
+		url = "https://www.here.com/?map=" + dlat + "," + dlon + "," + z + ",normal";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
         /* URLs straight from various services, instead of generated here */
         
         String urls[] = {
@@ -482,6 +502,9 @@ public class GeoPointParserUtil {
             "http://www.amap.com/#!poi!!q=38.179456,114.98577|3|B013706PJN",
             "http://www.amap.com/#!poi!!q=38.174596,114.995033|2|%E5%AE%BE%E9%A6%86&radius=1000",
             "http://www.amap.com/?p=B013704EJT,38.17914,114.976337,%E6%97%A0%E6%9E%81%E5%8E%BF%E4%BA%BA%E6%B0%91%E6%94%BF%E5%BA%9C,%E5%BB%BA%E8%AE%BE%E4%B8%9C%E8%B7%AF12%E5%8F%B7",
+            "http://share.here.com/l/52.5134272,13.3778416,Hannah-Arendt-Stra%C3%9Fe?z=16.0&t=normal",
+            "https://www.here.com/location?map=52.5134272,13.3778416,16,normal&msg=Hannah-Arendt-Stra%C3%9Fe",
+            "https://www.here.com/?map=48.23145,16.38454,15,normal",
         };
 
         for (String u : urls) {
@@ -784,6 +807,31 @@ public class GeoPointParserUtil {
 							}
 						}
 					}
+				} else if (host.equals("here.com") || host.endsWith(".here.com")) { // www.here.com, share.here.com, here.com 
+					Map<String, String> queryMap = getQueryParameters(uri);
+					String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
+					String label = null;
+					if (queryMap.containsKey("msg")) {
+						label = queryMap.get("msg");
+					}
+					if (queryMap.containsKey("z")) {
+						z = queryMap.get("z");
+					}
+					if (queryMap.containsKey("map")) {
+						String[] mapArray = queryMap.get("map").split(",");
+						if (mapArray.length > 2) {
+							return new GeoParsedPoint(mapArray[0], mapArray[1], mapArray[2], label);
+						} else if (mapArray.length > 1) {
+							return new GeoParsedPoint(mapArray[0], mapArray[1], z, label);
+						}
+					}
+					if (path.startsWith("/l/")) {
+						Pattern p = Pattern.compile("^/l/([+-]?\\d+(?:\\.\\d+)),([+-]?\\d+(?:\\.\\d+)),(.*)");
+						Matcher matcher = p.matcher(path);
+						if (matcher.matches()) {
+							return new GeoParsedPoint(matcher.group(1), matcher.group(2), z, matcher.group(3));
+						}
+					}
 				}
 
             } catch (RuntimeException e) {
@@ -984,6 +1032,11 @@ public class GeoPointParserUtil {
 		public GeoParsedPoint(double lat, double lon, int zoom, String label) {
 			this(lat, lon, label);
 			this.zoom = zoom;
+		}
+
+		public GeoParsedPoint(String latString, String lonString, String zoomString, String label) throws NumberFormatException {
+			this(latString, lonString, zoomString);
+			this.label = label;
 		}
 
 		public GeoParsedPoint(String latString, String lonString, String zoomString) throws NumberFormatException {

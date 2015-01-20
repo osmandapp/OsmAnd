@@ -193,6 +193,9 @@
 				<data android:host="map.baidu.com" />
 				<data android:host="wb.amap.com" />
 				<data android:host="www.amap.com" />
+				<data android:host="here.com" />
+				<data android:host="www.here.com" />
+				<data android:host="share.here.com" />
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
