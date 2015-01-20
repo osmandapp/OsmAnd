@@ -1880,4 +1880,5 @@
 	<string name="save_track_to_gpx_globally_headline">On demand sporingslogning</string>
 	<string name="navigation_over_track">Start navigation over spor?</string>
 	<string name="avoid_roads_msg">Du kan ændre ruten ved at vælge veje der skal undgås</string>
-    </resources>
+    <string name="recents">SENESTE</string>
+	</resources>
