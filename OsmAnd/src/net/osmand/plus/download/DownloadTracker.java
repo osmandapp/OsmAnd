@@ -40,7 +40,6 @@ public class DownloadTracker {
 		return (new Random(System.currentTimeMillis()).nextInt(100000000) + 100000000) + "";
 	}
 
-	static final String beaconUrl = "http://www.google-analytics.com/__utm.gif";
 	static final String analyticsVersion = "4.3"; // Analytics version - AnalyticsVersion
 
 	public void trackEvent(OsmandApplication a,
@@ -86,6 +85,12 @@ public class DownloadTracker {
 			parameters.put("utme", MessageFormat.format("5({0}*{1}*{2})({3})", category, action, label == null ? "" : label, value)
 					+ customVars);
 
+			String scheme = "";
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD)
+				scheme = "https";
+			else
+				scheme = "http";
+			String beaconUrl = scheme + "://www.google-analytics.com/__utm.gif";
 			StringBuilder urlString = new StringBuilder(beaconUrl + "?");
 			Iterator<Entry<String, String>> it = parameters.entrySet().iterator();
 			while (it.hasNext()) {

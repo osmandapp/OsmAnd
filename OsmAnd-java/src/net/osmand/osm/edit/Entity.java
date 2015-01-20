@@ -67,7 +67,7 @@ public abstract class Entity {
 		}
 
 		public String getOsmUrl() {
-			final String browseUrl = "http://www.openstreetmap.org/browse/";
+			final String browseUrl = "https://www.openstreetmap.org/browse/";
 			if (type == EntityType.NODE)
 				return browseUrl + "node/" + id;
 			if (type == EntityType.WAY)
