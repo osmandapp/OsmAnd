@@ -30,7 +30,7 @@
   <string name="live_monitoring_interval">Intervallo del Live tracking</string>
   <string name="live_monitoring_url_descr">Specifica l\'indirizzo internet con la sintassi dei parametri: lat={0}, lon={1}, data/ora={2}, hdop={3}, altitudine={4}, velocità={5}, angolo={6}</string>
   <string name="live_monitoring_url">Indirizzo internet per il tracking in diretta</string>
-  <string name="gpx_monitoring_disabled_warn">Abilita nelle impostazioni \'Registrazione della traccia nel file GPX\'.</string>
+  <string name="gpx_monitoring_disabled_warn">Registra la traccia usando il widget GPX o le impostazioni \'Registrazione viaggi\'.</string>
   <string name="show_current_gpx_title">Visualizza la traccia corrente</string>
   <string name="tip_recent_changes_0_7_0_t">Novità della v. 0.7.0:
 		\n\t- Articoli di Wikipedia accessibili offline
