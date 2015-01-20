@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+// 1. fix_apostrophe_issues
 //<target name="fix_apostrophe_issues">
 //<replace token="version='1.0'" value="version=&quot;1.0&quot;" encoding="UTF-8">
 //<fileset dir="res" includes="**/strings.xml" />
@@ -12,6 +13,32 @@ apply plugin: 'com.android.application'
 //                       <fileset dir="res" includes="**/strings.xml" />
 //</replaceregexp>
 //       </target>
+
+
+// 2. AndroidManifest.xml (versionCode, package, android:process)
+// <replaceregexp file="AndroidManifest.xml" match='android:versionCode="(.*)"' replace='android:versionCode="${build.version.code}"' byline="true" />
+
+// 3. sherpafy
+// <property name="package.name" value="net.osmand.sherpafy" />
+// <property name="app.name" value="Sherpafy" />
+// icon
+
+// 4. Filter fonts
+// <unzip src="OsmAndCore_android.aar" dest=".">
+//            <patternset>
+//                <include name="assets/**/map/fonts/OpenSans/*"/>
+//                <include name="assets/**/map/fonts/NotoSans/*"/>
+//            </patternset>
+//        </unzip>
+
+// 5. no_translate.xml (versionFeatures, app.edition, build.version  )
+//    <condition>
+//                <isset property="versionFeatures" />
+//            </condition>
+//            <then>
+//                <replaceregexp file="res/values/no_translate.xml" match='versionFeatures"&gt;(.*)&lt;  
+//                replace='versionFeatures"&gt;${versionFeatures}&lt;' byline="true" />
+
 
 android {
     compileSdkVersion 21
@@ -75,11 +102,10 @@ android {
             ]
             renderscript.srcDirs = ["src"]
             res.srcDirs = [
-                    "res",
-                    "../../resources/rendering_styles/style-icons/"
+                    "res"                    
             ]
             assets.srcDirs = [
-                    "assets",
+                    fileTree(dir:"assets", exclude: ["voice/*", "specialphrases/*"]),
                     "voiceAssets",
                     "helpAssets"
             ]
@@ -88,19 +114,7 @@ android {
 
     flavorDimensions "version", "distribution", "abi"
     productFlavors {
-        // ABI
-        x86 {
-            flavorDimension "abi"
-            ndk {
-                abiFilter "x86"
-            }
-        }
-        mips {
-            flavorDimension "abi"
-            ndk {
-                abiFilter "mips"
-            }
-        }
+        // ABI        
         armv7 {
             flavorDimension "abi"
             ndk {
@@ -111,6 +125,18 @@ android {
             flavorDimension "abi"
             ndk {
                 abiFilter "armeabi"
+            }
+        }
+        x86 {
+            flavorDimension "abi"
+            ndk {
+                abiFilter "x86"
+            }
+        }
+        mips {
+            flavorDimension "abi"
+            ndk {
+                abiFilter "mips"
             }
         }
         fat {
@@ -134,10 +160,14 @@ android {
         */
 
         // Distribution
-        googleplay {
+        night {
             flavorDimension "distribution"
         }
         /*
+        googleplay {
+            flavorDimension "distribution"
+        }
+        
         amazon {
             flavorDimension "distribution"
         }
@@ -176,6 +206,12 @@ task collectRenderingStyles(type: Sync) {
     include "*.xml"
 }
 
+task copyStyleIcons(type: Copy) {
+    from "../../resources/rendering_styles/style-icons/"
+    into "res/"
+    include "**/*.png"
+}
+
 task collectRegionsInfo(type: Copy) {
     from "../../resources/countries-info"
     into "resourcesSrc/net/osmand/map"
@@ -202,6 +238,7 @@ task collectMiscResources(type: Copy) {
 
 task collectExternalResources << {}
 collectExternalResources.dependsOn collectVoiceAssets,
+        copyStyleIcons,
         collectRoutingResources,
         collectRenderingStyles,
         collectRegionsInfo,
@@ -246,7 +283,7 @@ repositories {
 
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"], exclude: ["QtAndroid-bundled.jar", "QtAndroidAccessibility-bundled.jar"])
-    compile "com.actionbarsherlock:actionbarsherlock:4.4.0@aar"
+    compile 'com.android.support:appcompat-v7:21.0.3'
     compile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
     debugCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
     nativeDebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
