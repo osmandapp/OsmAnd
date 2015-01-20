@@ -306,7 +306,7 @@
 	<string name="live_monitoring_interval">線上即時追蹤間隔</string>
 	<string name="live_monitoring_url_descr">指定位置的參數語法：lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">線上即時追蹤網路地址</string>
-	<string name="gpx_monitoring_disabled_warn">請啟用\'記錄軌跡成 GPX 檔案\'設定。</string>
+	<string name="gpx_monitoring_disabled_warn">使用 GPX 小工具或透過 \'旅程記錄\'的設定以記錄軌跡。</string>
 	<string name="show_current_gpx_title">顯示目前軌跡</string>
 	<string name="free_version_message">此 OsmAnd 免費版，有下載 %1$s 次限制，且不支援離線維基百科的文章資料。</string>
 	<string name="free_version_title">免費版</string>
@@ -1872,4 +1872,5 @@
 	<string name="navigation_over_track">開始導航覆蓋在軌跡上嗎？</string>
 	<string name="avoid_roads_msg">您可以經由選擇道路，以避免更改路線</string>
     <string name="save_track_to_gpx_globally_headline">要求軌跡日誌</string>
+	<string name="recents">最新的</string>
 	</resources>
