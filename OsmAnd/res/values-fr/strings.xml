@@ -1900,13 +1900,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="save_track_to_gpx_globally_headline">Enregistrement de traces à la demande</string>
 	<string name="recents">Récents</string>
 	<string name="proxy_pref_title">Proxy</string>
-    <string name="enable_proxy_descr">Configurer le proxy http pour toutes les requêtes réseau</string>
-	<string name="proxy_host_title">Hôte proxy</string>
-	<string name="proxy_host_descr">Configurez le nom d\'hôte de votre proxy (par exemple 127.0.0.1)</string>
-	<string name="proxy_port_title">Port proxy</string>
-	<string name="proxy_port_descr">Configurez le numéro de port de votre proxy (par exemple 8118)</string>
+    <string name="enable_proxy_descr">Configurer le mandataire HTTP pour toutes les requêtes réseau</string>
+	<string name="proxy_host_title">Serveur mandataire</string>
+	<string name="proxy_host_descr">Configurez le serveur mandataire (par exemple 127.0.0.1)</string>
+	<string name="proxy_port_title">Port du mandataire</string>
+	<string name="proxy_port_descr">Configurez le numéro de port de votre mandataire (par exemple 8118)</string>
 	<string name="proxy_pref_descr">Définir un proxy pour les communications Internet</string>
     <string name="settings_privacy">Confidentialité</string>
     <string name="rendering_attr_streetLighting_name">Éclairage public</string>
-    <string name="enable_proxy_title">Activer le proxy http</string>
+    <string name="enable_proxy_title">Activer le mandataire HTTP</string>
 	</resources>
