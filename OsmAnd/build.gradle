@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
-// 0. Download OsmAndCore_wrapper for build
+// Assets (fonts, sounds, bundle.xml, style.css)
+// 0. Update! OsmAndCore_wrapper for build ()
 // +1. AndroidManifest.xml (+versionCode/APK_NUMBER_VERSION, +package, +android:process, +icon)
 
 // 2. no_translate.xml (versionFeatures, app.edition, build.version  )
@@ -86,12 +87,10 @@ android {
             ]
             renderscript.srcDirs = ["src"]
             res.srcDirs = [
-                    "res"                    
+                "res"                    
             ]
             assets.srcDirs = [
-                    fileTree(dir:"assets", exclude: ["voice/*", "specialphrases/*"]),
-                    "voiceAssets",
-                    "helpAssets"
+                'assets'
             ]
         }
         free {
@@ -168,7 +167,7 @@ android {
 
 task collectVoiceAssets(type: Sync) {
     from "../../resources"
-    into "voiceAssets"
+    into "assets/voice"
     include "specialphrases/**"
     include "voice/**/*.p"
 }
@@ -199,9 +198,13 @@ task collectRegionsInfo(type: Copy) {
 
 task collectHelpContents(type: Sync) {
     from "../../help"
-    into "helpAssets/help"
+    into "assets/help"
     include "*.html"
     include "images/**/*.png"
+
+    from "assets/"
+    into "assets/help"
+    include "style.css"
 }
 
 task collectMiscResources(type: Copy) {
@@ -223,7 +226,7 @@ collectExternalResources.dependsOn collectVoiceAssets,
         collectRegionsInfo,
         collectHelpContents,
         collectMiscResources
-        
+
 tasks.withType(JavaCompile) {
     compileTask -> compileTask.dependsOn << collectExternalResources
 }
