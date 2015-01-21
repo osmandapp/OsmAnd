@@ -131,6 +131,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
 		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_light,
 				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS
 						| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
