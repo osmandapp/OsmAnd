@@ -47,8 +47,8 @@ android {
         minSdkVersion 9
         targetSdkVersion 21
 
-        versionCode System.getenv("APK_NUMBER_VERSION").toInteger(  ) ?: System.getenv("APK_NUMBER_VERSION").toInteger()
-        versionName System.getenv("APK_VERSION") ?:  System.getenv("APK_VERSION")
+        versionCode System.getenv("APK_NUMBER_VERSION")? System.getenv("APK_NUMBER_VERSION").toInteger(): versionCode
+        versionName System.getenv("APK_VERSION") ?:  versionName
     }
 
     lintOptions {
