@@ -1062,7 +1062,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="live_monitoring_interval">Intervallu de s\'arrastamentu in dereta (in lìnia)</string>
 	<string name="live_monitoring_url_descr">Dislinda s\'indiritzu ìnternet cun sa sintassi de sos paràmetros: lat={0}, lon={1}, data/ora={2}, hdop={3}, artària={4}, lestresa={5}, àngulu={6}</string>
 	<string name="live_monitoring_url">Indiritzu ìnternet pro s\'arrastamentu in dereta</string>
-	<string name="gpx_monitoring_disabled_warn">Abìlita in sas impostaduras \'Registratzione de sa rasta in su documentu GPX\'.</string>
+	<string name="gpx_monitoring_disabled_warn">Registra sa rasta impreande su widget GPX o sas impostaduras \'Registratzione biàgios\'.</string>
 	<string name="tip_recent_changes_0_7_0_t">"Modìficas in sa 0.7.0:
 \n\t- Artìculos de Wikipeda atzessìbiles sena lìnia
 \n\t- Mapas agiornadas
@@ -1822,4 +1822,15 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="navigation_over_track">Incumentzare su nàvigu in sa rasta?</string>
 	<string name="avoid_roads_msg">Podes cambiare s\'àndala ischertande sas istradas de istransire</string>
     <string name="save_track_to_gpx_globally_headline">Registratzione de sa rasta a segus de rechesta</string>
-	</resources>
+	<string name="settings_privacy">Privadesa</string>
+    <string name="recents">REGHENTES</string>
+	<string name="enable_proxy_title">Abìlita HTTP Proxy</string>
+	<string name="enable_proxy_descr">Cunfigura HTTP Proxy pro totu sas rechestas de sa retza</string>
+	<string name="proxy_host_title">Proxy Host</string>
+	<string name="proxy_host_descr">Cunfigura su proxy hostname tuo (es. 127.0.0.1)</string>
+	<string name="proxy_port_title">Ghenna Proxy</string>
+	<string name="proxy_port_descr">Cunfigura su nùmeru de sa ghenna proxy tua (es. 8118)</string>
+	<string name="proxy_pref_title">Proxy</string>
+    <string name="proxy_pref_descr">Imposta una cunnessione a ìnternet tramite proxy</string>
+    <string name="rendering_attr_streetLighting_name">Illuminatzione pùblica</string>
+    </resources>
