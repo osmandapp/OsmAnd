@@ -616,7 +616,7 @@
 <string name="live_monitoring_interval">Interval de seguiment en viu</string>
 <string name="live_monitoring_interval_descr">Interval de seguiment en viu especific</string>
 <string name="live_monitoring_url">Adreça web de seguiment en viu</string>
-<string name="gpx_monitoring_disabled_warn">Si us plau habiliteu l\'opció «Enregistra camí a fitxer GPX».</string>
+<string name="gpx_monitoring_disabled_warn">Registreu traces utilitzant el giny GPX o amb la configuració «Enregistra viatge».</string>
 <string name="binary_map_download_success">"Baixada amb èxit.
 \n\t\n\tPer usar-lo activeu «Menú» -&gt; «Configuració del mapa» -&gt; «Font de mapa...» -&gt; «Mapes de vectors fora de línia». "</string>
 <string name="pref_overlay">Capa de fons/Cap superposada</string>
