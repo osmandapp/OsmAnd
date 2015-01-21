@@ -1907,4 +1907,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="proxy_port_descr">Configurez le numéro de port de votre proxy (par exemple 8118)</string>
 	<string name="proxy_pref_descr">Définir un proxy pour les communications Internet</string>
     <string name="settings_privacy">Confidentialité</string>
-    </resources>
+    <string name="rendering_attr_streetLighting_name">Éclairage public</string>
+    <string name="enable_proxy_title">Activer le proxy http</string>
+	</resources>
