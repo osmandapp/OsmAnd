@@ -1,28 +1,23 @@
 apply plugin: 'com.android.application'
 
+// TODO
 // 0. Update! OsmAndCore_wrapper for build ()
-// +1. AndroidManifest.xml (+versionCode/APK_NUMBER_VERSION, +package, +android:process, +icon)
-
-// 2. no_translate.xml (versionFeatures, app.edition, build.version  )
+// 1. no_translate.xml (versionFeatures, app.edition, build.version  )
 //    <condition>
 //                <isset property="versionFeatures" />
 //            </condition>
 //            <then>
 //                <replaceregexp file="res/values/no_translate.xml" match='versionFeatures"&gt;(.*)&lt;  
 //                replace='versionFeatures"&gt;${versionFeatures}&lt;' byline="true" />
-// 3. Filter fonts
+// 2. Filter fonts
 // <unzip src="OsmAndCore_android.aar" dest=".">
 //            <patternset>
 //                <include name="assets/**/map/fonts/OpenSans/*"/>
 //                <include name="assets/**/map/fonts/NotoSans/*"/>
 //            </patternset>
 //        </unzip>
-// 4. fix_apostrophe_issues (replace match="[^=]([^\\])'" replace="\1\\\\'") res/**/strings.xml
-
-
-// 5. sherpafy/free/paid
-// <property name="package.name" value="net.osmand.sherpafy" />
-// <property name="app.name" value="Sherpafy" />
+// 3. fix_apostrophe_issues (replace match="[^=]([^\\])'" replace="\1\\\\'") res/**/strings.xml
+// 4. sherpafy/free/paid
 
 android {
     compileSdkVersion 21
@@ -165,10 +160,15 @@ android {
 }
 
 task collectVoiceAssets(type: Sync) {
-    from "../../resources"
-    into "assets"
-    include "specialphrases/**"
+    from "../../resources/voice"
+    into "assets/voice"
     include "voice/**/*.p"
+}
+
+task collectSpecialPhrasesAssets(type: Sync) {
+    from "../../resources/voice"
+    into "assets/specialphrases"
+    include "specialphrases/*.txt"
 }
 
 task collectRoutingResources(type: Sync) {
@@ -177,7 +177,7 @@ task collectRoutingResources(type: Sync) {
     include "*.xml"
 }
 
-task collectRenderingStyles(type: Sync) {
+task collectRenderingStylesResources(type: Sync) {
     from "../../resources/rendering_styles"
     into "resourcesSrc/net/osmand/render"
     include "*.xml"
@@ -189,13 +189,13 @@ task copyStyleIcons(type: Copy) {
     include "**/*.png"
 }
 
-task collectRegionsInfo(type: Copy) {
+task collectRegionsInfoResources(type: Copy) {
     from "../../resources/countries-info"
     into "resourcesSrc/net/osmand/map"
     include "regions.ocbf"
 }
 
-task collectHelpContents(type: Sync) {
+task collectHelpContentsAssets(type: Sync) {
     from "../../help"
     into "assets/help"
     include "*.html"
@@ -219,12 +219,13 @@ task collectMiscResources(type: Copy) {
 
 task collectExternalResources << {}
 collectExternalResources.dependsOn collectVoiceAssets,
-        copyStyleIcons,
+        collectSpecialPhrasesAssets,
+        collectHelpContentsAssets,
         collectRoutingResources,
-        collectRenderingStyles,
-        collectRegionsInfo,
-        collectHelpContents,
-        collectMiscResources
+        collectRenderingStylesResources,
+        collectRegionsInfoResources,
+        collectMiscResources,
+        copyStyleIcons
 
 tasks.withType(JavaCompile) {
     compileTask -> compileTask.dependsOn << collectExternalResources
