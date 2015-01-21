@@ -1772,4 +1772,7 @@
 	<string name="avoid_roads_msg">Du kan ändra rutten genom att markera vägar att undvika</string>
     <string name="recents">TIDIGARE</string>
 	<string name="save_track_to_gpx_globally_headline">Spårloggning på begäran</string>
-	</resources>
+	<string name="proxy_pref_title">Proxy</string>
+    <string name="proxy_pref_descr">Ställ in en anslutning till Internet via proxy</string>
+    <string name="settings_privacy">Anonymitet</string>
+    </resources>
