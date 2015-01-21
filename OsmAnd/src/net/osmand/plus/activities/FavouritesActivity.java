@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.Window;
 import net.osmand.plus.GpxSelectionHelper;
@@ -53,9 +54,6 @@ public class FavouritesActivity extends ActionBarActivity {
         //class in com.actionbarsherlock.view and NOT android.view
 		((OsmandApplication) getApplication()).applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
-		}
 		super.onCreate(icicle);
 		setSupportProgressBarIndeterminateVisibility(false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -140,6 +138,13 @@ public class FavouritesActivity extends ActionBarActivity {
 		}
 	}
 
+	public Toolbar getClearToolbar(boolean visible) {
+		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);
+		tb.setTitle(null);
+		tb.getMenu().clear();
+		tb.setVisibility(visible? View.VISIBLE : View.GONE);
+		return tb;
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
