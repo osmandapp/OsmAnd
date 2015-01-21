@@ -1865,7 +1865,7 @@
 	<string name="avoid_roads_msg">Podeu condicionar la ruta seleccionant vies a evitar</string>
     <string name="save_track_to_gpx_globally_headline">Registre de traces a petició</string>
 	<string name="recents">RECENTS</string>
-	<string name="proxy_pref_title">Proxy</string>
+	<string name="proxy_pref_title">Servidor intermediari</string>
     <string name="proxy_pref_descr">Configuració d\'un proxy per accedir internet</string>
     <string name="settings_privacy">Privacitat</string>
     <string name="enable_proxy_title">Activa Proxy HTTP</string>
