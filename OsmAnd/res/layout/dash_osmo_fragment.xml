@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:background="@drawable/bg_cardui"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent">
+	<LinearLayout android:id="@+id/header_layout"
+				  android:orientation="horizontal"
+				  android:layout_width="fill_parent"
+				  android:layout_height="@dimen/dashHeaderHeight">
+		<TextView android:id="@+id/osmo_text"
+				  android:text="@string/map_widget_av_notes"
+				  style="@style/DashboardSubHeader"/>
+		<Button android:id="@+id/manage"
+				android:text="@string/show_all"
+				style="@style/DashboardGeneralButton"/>
+	</LinearLayout>
+
+	<LinearLayout android:orientation="vertical"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content">
+		<LinearLayout android:orientation="horizontal"
+					  android:layout_width="fill_parent"
+					  android:layout_height="@dimen/dashHeaderHeight">
+			<TextView android:text="@string/my_location"
+					  style="@style/DashboardSubHeader"
+					  android:layout_weight="1"/>
+			<Button android:id="@+id/share"
+					android:text="@string/show_all"
+					style="@style/DashboardGeneralButton"/>
+			<include layout="@layout/check_item_rel" />
+		</LinearLayout>
+
+		<View android:background="@color/dashboard_divider"
+			  android:layout_width="match_parent"
+			  android:layout_height="1dp"/>
+
+		<LinearLayout android:orientation="horizontal"
+					  android:layout_width="match_parent"
+					  android:layout_height="wrap_content">
+			<ImageView android:id="@+id/points_icon"
+					   android:layout_marginLeft="@dimen/subHeaderMarginLeft"
+					   android:src="@drawable/ic_small_point"
+					   android:layout_width="wrap_content"
+					   android:layout_height="wrap_content"/>
+			<TextView android:id="@+id/points_count"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"/>
+
+			<ImageView android:id="@+id/distance_icon"
+					   android:src="@drawable/ic_small_distance"
+					   android:layout_width="wrap_content"
+					   android:layout_height="wrap_content"/>
+			<TextView android:id="@+id/distance"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"/>
+
+			<ImageView android:id="@+id/time_icon"
+					   android:src="@drawable/ic_small_time"
+					   android:layout_width="wrap_content"
+					   android:layout_height="wrap_content"/>
+			<TextView android:id="@+id/time"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:layout_marginRight="@dimen/showAllButtonMarginRight"/>
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout android:orientation="vertical"
+				  android:id="@+id/items"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

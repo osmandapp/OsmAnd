@@ -16,7 +16,7 @@
 				android:text="@string/show_all"
 				style="@style/DashboardGeneralButton"/>
 	</LinearLayout>
-	<LinearLayout android:id="@+id/favorites"
+	<LinearLayout android:id="@+id/items"
 				  android:orientation="vertical"
 				  android:layout_width="fill_parent"
 				  android:layout_height="wrap_content"/>

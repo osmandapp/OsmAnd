@@ -389,7 +389,7 @@ public class GpxUiHelper {
 			}
 		}
 	}
-	private static List<String> getSortedGPXFilenames(File dir) {
+	public static List<String> getSortedGPXFilenames(File dir) {
 		return getSortedGPXFilenames(dir, null);
 	}
 	
