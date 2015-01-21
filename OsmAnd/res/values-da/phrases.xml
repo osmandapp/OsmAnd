@@ -15,7 +15,7 @@
         <string name="poi_supermarket">Supermarked</string>
         <string name="poi_shop_tea">Tehandel</string>
         <string name="poi_dairy">Mejeriudsalg</string>
-        <string name="poi_vending_machine">Automat</string>
+        <string name="poi_vending_machine">Salgsautomat</string>
 
         <string name="poi_bookshop">Boghandel</string>
         <string name="poi_bicycle_shop">Cykelhandler</string>
@@ -23,7 +23,7 @@
         <string name="poi_antiques_shop">Antikviteter</string>
         <string name="poi_art_shop">Kunsthandler</string>
         <string name="poi_baby_goods">Babyudstryr</string>
-        <string name="poi_bag_shop">Tasker</string>
+        <string name="poi_bag_shop">Taskebutik</string>
         <string name="poi_bathroom_furnishing_shop">Badeværelsesmøbler</string>
         <string name="poi_bed_shop">Soveværelsesmøbler</string>
         <string name="poi_boutique">Modebutik</string>
@@ -68,7 +68,7 @@
         <string name="poi_outdoor_shop">Friluftsudstyr</string>
         <string name="poi_paint_shop">Malerværksted</string>
         <string name="poi_pet_shop">Dyrehandel</string>
-        <string name="poi_radiotechnics_shop">Radiodele</string>
+        <string name="poi_radiotechnics_shop">Radioteknik</string>
         <string name="poi_second_hand">Genbrugsbutik</string>
         <string name="poi_ship_chandler">Skibsproviant</string>
         <string name="poi_sports_shop">Sportsforretning</string>
@@ -76,7 +76,7 @@
         <string name="poi_tableware_shop">Isenkræmmer</string>
         <string name="poi_ticket_shop">Biletter</string>
         <string name="poi_tobacco_shop">Tobak</string>
-        <string name="poi_toys_shop">Legetøj</string>
+        <string name="poi_toys_shop">Legetøjsbuttik</string>
         <string name="poi_trade_shop">Handelsplads</string>
         <string name="poi_vacuum_cleaner_shop">Støvsuger</string>
         <string name="poi_variety_store">Fastpris butik</string>
@@ -124,7 +124,7 @@
         <string name="poi_service_tyres">Dækservice</string>
         <string name="poi_vehicle_inspection">Bilsyn</string>
         <string name="poi_car_wash">Bilvask</string>
-        <string name="poi_fuel">Benzintank</string>
+        <string name="poi_fuel">Tankstation</string>
         <string name="poi_charging_station">Ladestation</string>
         <string name="poi_vehicle_ramp">Kørerampe</string>
         <string name="poi_compressed_air">Trykluft</string>
