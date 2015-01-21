@@ -234,7 +234,7 @@
 <string name="index_name_tts_voice">Indicadors de veu (sintetitzats amb TTS, recomanat)</string>
 <string name="native_library_not_supported">La llibreria nativa no està suportada en aquest dispositiu.</string>
 <string name="init_native_library">S\'està inicialitzant la llibreria nativa…</string>
-<string name="auto_follow_route_never">Mai (premeu la fletxa blava per iniciar manualment la navegació)</string>
+<string name="auto_follow_route_never">Mai (premeu la fletxa blava per iniciar la navegació manualment)</string>
 <string name="pref_vector_rendering">Opcions específiques de renderització dels vectors</string>
 <string name="delete_confirmation_msg">Voleu suprimir %1$s?</string>
 <string name="city_type_town">Poble</string>
@@ -616,7 +616,7 @@
 <string name="live_monitoring_interval">Interval de seguiment en viu</string>
 <string name="live_monitoring_interval_descr">Interval de seguiment en viu especific</string>
 <string name="live_monitoring_url">Adreça web de seguiment en viu</string>
-<string name="gpx_monitoring_disabled_warn">Registreu traces utilitzant el giny GPX o amb la configuració «Enregistra viatge».</string>
+<string name="gpx_monitoring_disabled_warn">Registreu traces amb el giny GPX o amb la configuració «Enregistrament del trajecte».</string>
 <string name="binary_map_download_success">"Baixada amb èxit.
 \n\t\n\tPer usar-lo activeu «Menú» -&gt; «Configuració del mapa» -&gt; «Font de mapa...» -&gt; «Mapes de vectors fora de línia». "</string>
 <string name="pref_overlay">Capa de fons/Cap superposada</string>
@@ -631,7 +631,7 @@
 <string name="map_underlay_descr">Escolliu el mapa de fons</string>
 <string name="map_overlay_descr">Escolliu el mapa superposat</string>
 <string name="tip_location_sharing">Comparteix una ubicació</string>
-<string name="preferred_locale_descr">Seleccioneu la llengua (reinicieu OsmAnd després de modificar-la)</string>
+<string name="preferred_locale_descr">Seleccioneu la llengua (reinicieu l\'OsmAnd després de canviar-la)</string>
 <string name="tip_app_mode_t_v2">L\'OsmAnd suporta diferents (i personalitzables) perfils d\'aplicació per a diferents usos.
 \n\nPodeu canviar de perfil amb el boto a la cantonada inferior esquerra de la pantalla del mapa(icona de cotxe,bici o vianant), o quan creeu una ruta.
 	</string>
@@ -1817,7 +1817,7 @@
     <string name="impassable_road">Evita carreteres…</string>
     <string name="rendering_category_hide">Amaga</string>
     <string name="wake_on_voice">Activa la pantalla</string>
-    <string name="wake_on_voice_descr">Activa la pantalla del dispositiu (si no ho està ) en aproximar-se a un gir</string>
+    <string name="wake_on_voice_descr">Activa la pantalla del dispositiu (si no ho està) en aproximar-se a un gir</string>
     <string name="lock_screen_request_explanation">"%1$s necessita  aquest permís per la funcionalitat de posar la pantalla en mode d\'estalvi d\'energia."</string>
     <string name="wake_on_voice_never">Mai</string>
     <string name="advanced_settings">Avançat</string>
@@ -1861,17 +1861,17 @@
     <string name="routing_attr_no_new_routing_description">No feu ús de les preferències de navegació introduïdes a la v1.9</string>
     <string name="speak_pedestrian">Anuncia els passos de zebra</string>
     <string name="rendering_value__name">Renderització per defecte</string>
-	<string name="navigation_over_track">Iniciar la navegació sobre la traça?</string>
-	<string name="avoid_roads_msg">Podeu condicionar la ruta seleccionant vies a evitar</string>
+	<string name="navigation_over_track">Voleu iniciar la navegació sobre la traça?</string>
+	<string name="avoid_roads_msg">Podeu condicionar la ruta amb la selecció de les vies a evitar</string>
     <string name="save_track_to_gpx_globally_headline">Registre de traces a petició</string>
 	<string name="recents">RECENTS</string>
 	<string name="proxy_pref_title">Servidor intermediari</string>
     <string name="proxy_pref_descr">Configuració d\'un servidor intermediari per accedir a internet</string>
     <string name="settings_privacy">Privacitat</string>
-    <string name="enable_proxy_title">Activa Proxy HTTP</string>
-	<string name="enable_proxy_descr">Configureu Proxy HTTP per totes les peticions de xarxa</string>
-	<string name="proxy_host_title">Host proxy</string>
-	<string name="proxy_host_descr">Configureu el nom de host del vostre proxy\' (p.e. 127.0.0.1)</string>
-	<string name="proxy_port_title">Port proxy</string>
-	<string name="proxy_port_descr">Configureu el número de port del vostre proxy (per exemple 8118)</string>
+    <string name="enable_proxy_title">Activa el servidor intermediari HTTP</string>
+	<string name="enable_proxy_descr">Configureu un servidor intermediari HTTP per totes les peticions de xarxa</string>
+	<string name="proxy_host_title">Amfitrió del servidor intermediari</string>
+	<string name="proxy_host_descr">Configureu el nom de l\'amfitrió del vostre servidor intermediari (p.ex. 127.0.0.1)</string>
+	<string name="proxy_port_title">Port del servidor intermediari</string>
+	<string name="proxy_port_descr">Configureu el número de port del vostre servidor intermediari (p.ex. 8118)</string>
 	</resources>
