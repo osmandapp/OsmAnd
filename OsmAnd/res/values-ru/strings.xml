@@ -1853,4 +1853,13 @@
 	<string name="navigation_over_track">Начать навигацию по треку?</string>
 	<string name="avoid_roads_msg">Вы можете изменить маршрут, выбрав дороги, которые стоит избегать</string>
     <string name="save_track_to_gpx_globally_headline">Запись трека по требованию</string>
+	<string name="proxy_pref_title">Прокси-сервер</string>
+    <string name="proxy_pref_descr">Настройка интернет соединения через прокси-сервер</string>
+    <string name="settings_privacy">Приватность</string>
+    <string name="enable_proxy_title">Включить HTTP прокси-сервер</string>
+	<string name="enable_proxy_descr">Настройка HTTP прокси-сервера для всех сетевых запросов</string>
+	<string name="proxy_host_title">Адрес прокси-сервера</string>
+	<string name="proxy_host_descr">Настройте имя хоста вашего прокси-сервера (например, 127.0.0.1)</string>
+	<string name="proxy_port_title">Порт прокси-сервера</string>
+	<string name="proxy_port_descr">Настройте номер порта вашего прокси-сервера (например, 8118)</string>
 	</resources>
