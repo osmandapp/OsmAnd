@@ -1862,4 +1862,5 @@
 	<string name="proxy_host_descr">Настройте имя хоста вашего прокси-сервера (например, 127.0.0.1)</string>
 	<string name="proxy_port_title">Порт прокси-сервера</string>
 	<string name="proxy_port_descr">Настройте номер порта вашего прокси-сервера (например, 8118)</string>
+	<string name="recents">НЕДАВНИЕ</string>
 	</resources>
