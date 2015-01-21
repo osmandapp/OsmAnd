@@ -1,44 +1,27 @@
 apply plugin: 'com.android.application'
 
-// 1. fix_apostrophe_issues
-//<target name="fix_apostrophe_issues">
-//<replace token="version='1.0'" value="version=&quot;1.0&quot;" encoding="UTF-8">
-//<fileset dir="res" includes="**/strings.xml" />
-//</replace>
-//               <replace token="encoding='utf-8'" value="encoding=&quot;utf-8&quot;" encoding="UTF-8">
-//                       <fileset dir="res" includes="**/strings.xml" />
-//</replace>
-//
-//               <replaceregexp  match="([^\\])'" replace="\1\\\\'" flags="-g" byline="off" encoding="UTF-8">
-//                       <fileset dir="res" includes="**/strings.xml" />
-//</replaceregexp>
-//       </target>
+// +1. AndroidManifest.xml (+versionCode/APK_NUMBER_VERSION, +package, +android:process, +icon)
 
-
-// 2. AndroidManifest.xml (versionCode, package, android:process)
-// <replaceregexp file="AndroidManifest.xml" match='android:versionCode="(.*)"' replace='android:versionCode="${build.version.code}"' byline="true" />
-
-// 3. sherpafy
-// <property name="package.name" value="net.osmand.sherpafy" />
-// <property name="app.name" value="Sherpafy" />
-// icon
-
-// 4. Filter fonts
-// <unzip src="OsmAndCore_android.aar" dest=".">
-//            <patternset>
-//                <include name="assets/**/map/fonts/OpenSans/*"/>
-//                <include name="assets/**/map/fonts/NotoSans/*"/>
-//            </patternset>
-//        </unzip>
-
-// 5. no_translate.xml (versionFeatures, app.edition, build.version  )
+// 2. no_translate.xml (versionFeatures, app.edition, build.version  )
 //    <condition>
 //                <isset property="versionFeatures" />
 //            </condition>
 //            <then>
 //                <replaceregexp file="res/values/no_translate.xml" match='versionFeatures"&gt;(.*)&lt;  
 //                replace='versionFeatures"&gt;${versionFeatures}&lt;' byline="true" />
+// 3. Filter fonts
+// <unzip src="OsmAndCore_android.aar" dest=".">
+//            <patternset>
+//                <include name="assets/**/map/fonts/OpenSans/*"/>
+//                <include name="assets/**/map/fonts/NotoSans/*"/>
+//            </patternset>
+//        </unzip>
+// 4. fix_apostrophe_issues (replace match="[^=]([^\\])'" replace="\1\\\\'") res/**/strings.xml
 
+
+// 5. sherpafy/free/paid
+// <property name="package.name" value="net.osmand.sherpafy" />
+// <property name="app.name" value="Sherpafy" />
 
 android {
     compileSdkVersion 21
@@ -64,8 +47,8 @@ android {
         minSdkVersion 9
         targetSdkVersion 21
 
-        versionCode System.getenv("APK_NUMBER_VERSION") ?: versionCode
-        versionName System.getenv("APK_VERSION") ?: versionName
+        versionCode System.getenv("APK_NUMBER_VERSION").toInteger(  ) ?: System.getenv("APK_NUMBER_VERSION").toInteger()
+        versionName System.getenv("APK_VERSION") ?:  System.getenv("APK_VERSION")
     }
 
     lintOptions {
@@ -110,9 +93,12 @@ android {
                     "helpAssets"
             ]
         }
+        free {
+            manifest.srcFile "AndroidManifest-free.xml"
+        }
     }
 
-    flavorDimensions "version", "distribution", "abi"
+    flavorDimensions "version", "abi"
     productFlavors {
         // ABI        
         armv7 {
@@ -148,7 +134,7 @@ android {
             flavorDimension "version"
             applicationId "net.osmand"
         }
-        paid {
+        full {
             flavorDimension "version"
             applicationId "net.osmand.plus"
         }
@@ -159,19 +145,6 @@ android {
         }
         */
 
-        // Distribution
-        night {
-            flavorDimension "distribution"
-        }
-        /*
-        googleplay {
-            flavorDimension "distribution"
-        }
-        
-        amazon {
-            flavorDimension "distribution"
-        }
-        */
     }
 
     buildTypes {
@@ -181,9 +154,14 @@ android {
         nativeDebug {
             signingConfig signingConfigs.development
         }
+        legacyDebug {
+            signingConfig signingConfigs.development
+        }
         release {
             signingConfig signingConfigs.publishing
         }
+
+
     }
 }
 
@@ -282,10 +260,10 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: "libs", include: ["*.jar"], exclude: ["QtAndroid-bundled.jar", "QtAndroidAccessibility-bundled.jar"])
+    compile fileTree(dir: "libs", include: ["*.jar"], exclude: ["QtAndroid-bundled.jar", "QtAndroidAccessibility-bundled.jar", "android-support*.jar", "OsmAndCore_wrapper.jar"])
     compile 'com.android.support:appcompat-v7:21.0.3'
-    compile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
-    debugCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
+    debugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+    legacyDebugCompile fileTree(dir: "libs", include: ["OsmAndCore_wrapper.jar"])
     nativeDebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
     releaseCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 }
