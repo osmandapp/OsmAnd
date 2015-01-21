@@ -1890,4 +1890,5 @@
 	<string name="proxy_host_descr">Konfigurer proxy værtsnavn (f.eks. 127.0.0.1)</string>
 	<string name="proxy_port_title">Proxy port</string>
 	<string name="proxy_port_descr">Konfigurer proxy portnummer (f.eks. 8118)</string>
-	</resources>
+	<string name="rendering_attr_streetLighting_name">Gadebelysning</string>
+    </resources>
