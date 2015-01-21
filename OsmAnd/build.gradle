@@ -1,23 +1,26 @@
 apply plugin: 'com.android.application'
 
+// Global Paramers accepted
+// APK_NUMBER_VERSION - version number of apk
+// APK_VERSION - version name like 2.1 (subsitute of app_version in no_translate.xml)
+// APP_NAME - app name
+// APP_EDITION - used for build numbers
+// APP_FEATURES - features +play_market +gps_status -parking_plugin -blackberry -free_version -amazon
+    
+
 // TODO
-// 0. Update! OsmAndCore_wrapper for build ()
-// 1. no_translate.xml (versionFeatures, app.edition, build.version  )
-//    <condition>
-//                <isset property="versionFeatures" />
-//            </condition>
-//            <then>
-//                <replaceregexp file="res/values/no_translate.xml" match='versionFeatures"&gt;(.*)&lt;  
-//                replace='versionFeatures"&gt;${versionFeatures}&lt;' byline="true" />
-// 2. Filter fonts
+// 0. Update OsmAndCore_wrapper for build (implement )
+// 1. Filter fonts
 // <unzip src="OsmAndCore_android.aar" dest=".">
 //            <patternset>
 //                <include name="assets/**/map/fonts/OpenSans/*"/>
 //                <include name="assets/**/map/fonts/NotoSans/*"/>
 //            </patternset>
 //        </unzip>
-// 3. fix_apostrophe_issues (replace match="[^=]([^\\])'" replace="\1\\\\'") res/**/strings.xml
-// 4. sherpafy/free/paid
+// 2. fix_apostrophe_issues (replace match="[^=]([^\\])'" replace="\1\\\\'") res/**/strings.xml
+// 3. sherpafy/free/paid
+// 4. Release signature
+// 5. APP_NAME, APP_EDITION uses flavor
 
 android {
     compileSdkVersion 21
@@ -71,17 +74,18 @@ android {
             aidl.srcDirs = ["src"]
             java.srcDirs = [
                     "src",
-                    fileTree(dir: "../OsmAnd-java/src", exclude: "**/PlatformUtil.java"),
-                    "resourcesSrc"
+                    fileTree(dir: "../OsmAnd-java/src", exclude: "**/PlatformUtil.java")
+              //      "resourcesSrc"
             ]
             resources.srcDirs = [
-                    "src",
-                    "../OsmAnd-java/src",
-                    "resourcesSrc"
+                    "src"
+             //      "../OsmAnd-java/src"    
+             //       "resourcesSrc"
             ]
             renderscript.srcDirs = ["src"]
             res.srcDirs = [
-                "res"                    
+                'res'
+
             ]
             assets.srcDirs = [
                 'assets'
@@ -155,8 +159,30 @@ android {
             signingConfig signingConfigs.publishing
         }
 
-
     }
+}
+
+def replaceNoTranslate(line) {
+    if(line.contains("\"app_name\"") && System.getenv("APP_NAME")) {
+        return line.replaceAll(">[^<]*<", " >"+System.getenv("APP_NAME")+"<")
+    }
+    if(line.contains("\"app_edition\"") && System.getenv("APP_EDITION")) {
+        return line.replaceAll(">[^<]*<", " >"+System.getenv("APP_EDITION")+"<")
+    }
+    if(line.contains("\"versionFeatures\"") && System.getenv("APP_FEATURES")) {
+        return line.replaceAll(">[^<]*<", " >"+System.getenv("APP_FEATURES")+"<")
+    }
+    return line;
+}
+
+task updateNoTranslate(type: Copy) {
+    from('.') {
+        include 'no_translate.xml'
+        filter {
+            line -> replaceNoTranslate(line);
+        }
+    }
+    into 'res/values/'
 }
 
 task collectVoiceAssets(type: Sync) {
@@ -171,30 +197,6 @@ task collectSpecialPhrasesAssets(type: Sync) {
     include "specialphrases/*.txt"
 }
 
-task collectRoutingResources(type: Sync) {
-    from "../../resources/routing"
-    into "resourcesSrc/net/osmand/router"
-    include "*.xml"
-}
-
-task collectRenderingStylesResources(type: Sync) {
-    from "../../resources/rendering_styles"
-    into "resourcesSrc/net/osmand/render"
-    include "*.xml"
-}
-
-task copyStyleIcons(type: Copy) {
-    from "../../resources/rendering_styles/style-icons/"
-    into "res/"
-    include "**/*.png"
-}
-
-task collectRegionsInfoResources(type: Copy) {
-    from "../../resources/countries-info"
-    into "resourcesSrc/net/osmand/map"
-    include "regions.ocbf"
-}
-
 task collectHelpContentsAssets(type: Sync) {
     from "../../help"
     into "assets/help"
@@ -206,16 +208,43 @@ task collectHelpContentsAssets(type: Sync) {
     include "style.css"
 }
 
+task collectRoutingResources(type: Sync) {
+    from "../../resources/routing"
+    into "src/net/osmand/router"
+    include "*.xml"
+}
+
+
 task collectMiscResources(type: Copy) {
-    into "resourcesSrc/net/osmand/osm"
+    into "src/net/osmand/osm"
     from("../../resources/obf_creation") {
         include "rendering_types.xml"
     }
     from("../../resources/poi") {
         include "poi_types.xml"
-    }
-    
+    }   
 }
+
+task collectRenderingStylesResources(type: Sync) {
+    from "../../resources/rendering_styles"
+    into "src/net/osmand/render"
+    include "*.xml"
+}
+
+
+task collectRegionsInfoResources(type: Copy) {
+    from "../../resources/countries-info"
+    into "resourcesSrc/net/osmand/map"
+    include "regions.ocbf"
+}
+
+
+task copyStyleIcons(type: Copy) {
+    from "../../resources/rendering_styles/style-icons/"
+    into "res/"
+    include "**/*.png"
+}
+
 
 task collectExternalResources << {}
 collectExternalResources.dependsOn collectVoiceAssets,
@@ -225,11 +254,13 @@ collectExternalResources.dependsOn collectVoiceAssets,
         collectRenderingStylesResources,
         collectRegionsInfoResources,
         collectMiscResources,
-        copyStyleIcons
+        copyStyleIcons,
+        updateNoTranslate
 
 tasks.withType(JavaCompile) {
     compileTask -> compileTask.dependsOn << collectExternalResources
 }
+
 
 task downloadAAR {
     def f = new File("libs/OsmAndCore_wrapper.jar")

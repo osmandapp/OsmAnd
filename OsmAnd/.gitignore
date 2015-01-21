@@ -1,5 +1,6 @@
 bin/
 dist/
+res/values/no_translate.xml
 assets/specialphrases/*
 assets/voice/*
 gen/
