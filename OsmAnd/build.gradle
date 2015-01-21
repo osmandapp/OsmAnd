@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+// 0. Download OsmAndCore_wrapper for build
 // +1. AndroidManifest.xml (+versionCode/APK_NUMBER_VERSION, +package, +android:process, +icon)
 
 // 2. no_translate.xml (versionFeatures, app.edition, build.version  )
@@ -222,8 +223,16 @@ collectExternalResources.dependsOn collectVoiceAssets,
         collectRegionsInfo,
         collectHelpContents,
         collectMiscResources
+        
 tasks.withType(JavaCompile) {
     compileTask -> compileTask.dependsOn << collectExternalResources
+}
+
+task downloadAAR {
+    def f = new File("libs/OsmAndCore_wrapper.jar")
+    if (!f.exists()) {
+        new URL("http://builder.osmand.net:81/binaries/android/OsmAndCore_wrapper.jar").withInputStream{ i -> f.withOutputStream{ it << i }}
+    }
 }
 
 // Legacy core build
@@ -246,7 +255,7 @@ task cleanupDuplicatesInCore(type: Delete) {
     delete "libs/x86/libgnustl_shared.so"
 }
 tasks.withType(JavaCompile) {
-    compileTask -> compileTask.dependsOn << [buildOsmAndCore, cleanupDuplicatesInCore]
+    compileTask -> compileTask.dependsOn << [buildOsmAndCore, downloadAAR, cleanupDuplicatesInCore]
 }
 
 repositories {
@@ -258,6 +267,7 @@ repositories {
         }
     }
 }
+
 
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"], exclude: ["QtAndroid-bundled.jar", "QtAndroidAccessibility-bundled.jar", "android-support*.jar", "OsmAndCore_wrapper.jar"])
