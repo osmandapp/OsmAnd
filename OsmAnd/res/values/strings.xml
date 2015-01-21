@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rendering_attr_streetLighting_name">Street lighting</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Setup a proxy internet communication</string>
     <string name="settings_privacy">Privacy</string>
