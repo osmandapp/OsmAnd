@@ -1881,4 +1881,13 @@
 	<string name="navigation_over_track">Start navigation over spor?</string>
 	<string name="avoid_roads_msg">Du kan ændre ruten ved at vælge veje der skal undgås</string>
     <string name="recents">SENESTE</string>
+	<string name="proxy_pref_title">Proxy</string>
+    <string name="proxy_pref_descr">Opsæt en proxy internetkommunikation</string>
+    <string name="settings_privacy">Beskyttelse af personlige oplysninger</string>
+    <string name="enable_proxy_title">Aktiver HTTP Proxy</string>
+	<string name="enable_proxy_descr">Konfigurere HTTP-proxyserveren for alle netværksanmodninger</string>
+	<string name="proxy_host_title">Proxy vært</string>
+	<string name="proxy_host_descr">Konfigurere dit proxy værtsnavn (f.eks. 127.0.0.1)</string>
+	<string name="proxy_port_title">Proxy port</string>
+	<string name="proxy_port_descr">Konfigurere dit proxy portnummer (f.eks. 8118)</string>
 	</resources>
