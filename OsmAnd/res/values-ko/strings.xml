@@ -2111,4 +2111,14 @@
 	<string name="avoid_roads_msg">원하는 도로를 선택하여 경로를 변경할 수 있습니다</string>
     <string name="save_track_to_gpx_globally_headline">트랙 로깅 요구</string>
 	<string name="recents">최근</string>
+	<string name="rendering_attr_streetLighting_name">거리 조명</string>
+    <string name="proxy_pref_title">프록시</string>
+    <string name="proxy_pref_descr">프록시 인터넷 통신 설정</string>
+    <string name="settings_privacy">프라이버시</string>
+    <string name="enable_proxy_title">HTTP 프록시 사용</string>
+	<string name="enable_proxy_descr">모든 네트워크 요청에 대해 HTTP 프록시 구성</string>
+	<string name="proxy_host_title">프록시 호스트</string>
+	<string name="proxy_host_descr">프록시 호스트 이름 구성 (예: 127.0.0.1)</string>
+	<string name="proxy_port_title">프록시 포트</string>
+	<string name="proxy_port_descr">당신의 프록시 포트 번호 구성 (예: 8118)</string>
 	</resources>
