@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 
-// Assets (fonts, sounds, bundle.xml, style.css)
 // 0. Update! OsmAndCore_wrapper for build ()
 // +1. AndroidManifest.xml (+versionCode/APK_NUMBER_VERSION, +package, +android:process, +icon)
 
@@ -167,7 +166,7 @@ android {
 
 task collectVoiceAssets(type: Sync) {
     from "../../resources"
-    into "assets/voice"
+    into "assets"
     include "specialphrases/**"
     include "voice/**/*.p"
 }
@@ -208,14 +207,14 @@ task collectHelpContents(type: Sync) {
 }
 
 task collectMiscResources(type: Copy) {
-    from("../../../resources/obf_creation") {
+    into "resourcesSrc/net/osmand/osm"
+    from("../../resources/obf_creation") {
         include "rendering_types.xml"
     }
-    from("../../../resources/poi") {
+    from("../../resources/poi") {
         include "poi_types.xml"
     }
-
-    into "resourcesSrc/net/osmand/osm"
+    
 }
 
 task collectExternalResources << {}
