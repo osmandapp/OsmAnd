@@ -1883,7 +1883,7 @@
     <string name="recents">SENESTE</string>
 	<string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Opsæt en proxy internetkommunikation</string>
-    <string name="settings_privacy">Beskyttelse af personlige oplysninger</string>
+    <string name="settings_privacy">Privatliv</string>
     <string name="enable_proxy_title">Aktiver HTTP proxy</string>
 	<string name="enable_proxy_descr">Konfigurer HTTP-proxyserveren for alle netværksanmodninger</string>
 	<string name="proxy_host_title">Proxy vært</string>
