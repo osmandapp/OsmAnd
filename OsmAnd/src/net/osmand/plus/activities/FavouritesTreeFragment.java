@@ -30,6 +30,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.ColorDialogs;
@@ -299,6 +300,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
 		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_light,
 				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS
 						| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
