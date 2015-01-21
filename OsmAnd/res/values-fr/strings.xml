@@ -27,7 +27,7 @@
   <string name="live_monitoring_interval">Intervalle pour le suivi en ligne</string>
   <string name="live_monitoring_url_descr">Préciser l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Adresse web pour le suivi en ligne</string>
-  <string name="gpx_monitoring_disabled_warn">Veuillez activer \'Enregistrer l\'itinéraire en GPX\' dans les paramètres de suivi.</string>
+  <string name="gpx_monitoring_disabled_warn">Enregistrer la trace avec le gadget GPX ou avec le paramètre d\' \"Enregistrement de traces\".</string>
   <string name="show_current_gpx_title">Afficher la trace en cours</string>
   <string name="tip_recent_changes_0_7_0_t">Changements en 0.7.0 :
 \n\t- Données Wikipedia hors-ligne avec articles
@@ -1907,4 +1907,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="proxy_port_descr">Configurez le numéro de port de votre proxy (par exemple 8118)</string>
 	<string name="proxy_pref_descr">Définir un proxy pour les communications Internet</string>
     <string name="settings_privacy">Confidentialité</string>
-    </resources>
+    <string name="rendering_attr_streetLighting_name">Éclairage public</string>
+    <string name="enable_proxy_title">Activer le proxy http</string>
+	</resources>
