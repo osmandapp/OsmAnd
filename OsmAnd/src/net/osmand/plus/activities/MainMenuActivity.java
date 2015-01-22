@@ -84,7 +84,14 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			final int headerHeight = imageHeight - getSupportActionBar().getHeight();
 			final float ratio = (float) Math.min(Math.max(t, 0), headerHeight) / headerHeight;
 			final int newAlpha = (int) (ratio * 255);
-			if (headerHeight < t){
+			int margintop = -(int)(ratio * 60);
+			Resources r = getResources();
+			int px = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP,
+					margintop,
+					r.getDisplayMetrics());
+			int margin = px + defaultMargin;
+			if (headerHeight < t - margin){
 				//hiding action bar - showing floating button
 				//getSupportActionBar().hide();
 				fabButton.showFloatingActionButton();
@@ -95,13 +102,8 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 				//makes other cards to move on top of the map card to make it look like android animations
 				View fragments = findViewById(R.id.fragments);
 				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-				int margintop = -(int)(ratio * 60);
-				Resources r = getResources();
-				int px = (int) TypedValue.applyDimension(
-						TypedValue.COMPLEX_UNIT_DIP,
-						margintop,
-						r.getDisplayMetrics());
-				params.setMargins(0, px + defaultMargin, 0, 0);
+
+				params.setMargins(0, margin, 0, 0);
 				fragments.setLayoutParams(params);
 			}
 			if (newAlpha > START_ALPHA) {
