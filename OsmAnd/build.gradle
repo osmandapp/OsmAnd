@@ -9,7 +9,7 @@ apply plugin: 'com.android.application'
     
 
 // TODO
-// 0. Update OsmAndCore_wrapper for build (implement )
+// 0. Update OsmAndCore_wrapper for build (use ivy )
 // 1. Filter fonts
 // <unzip src="OsmAndCore_android.aar" dest=".">
 //            <patternset>
