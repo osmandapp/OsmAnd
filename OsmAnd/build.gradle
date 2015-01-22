@@ -94,6 +94,11 @@ android {
         free {
             manifest.srcFile "AndroidManifest-free.xml"
         }
+        debug {
+            jniLibs.srcDirs = [
+                fileTree(dir: "libs", exclude: "**/libgnustl_shared.so")
+            ]
+        }
     }
 
     flavorDimensions "version", "abi"
@@ -282,6 +287,12 @@ task buildOsmAndCore(type: Exec) {
 }
 task cleanupDuplicatesInCore(type: Delete) {
     dependsOn buildOsmAndCore
+    // doesn't work for legacy debug builds
+    // delete "libs/armeabi/libgnustl_shared.so"
+    // delete "libs/armeabi-v7a/libgnustl_shared.so"
+    // delete "libs/mips/libgnustl_shared.so"
+    // delete "libs/x86/libgnustl_shared.so"
+
 }
 tasks.withType(JavaCompile) {
     compileTask -> compileTask.dependsOn << [buildOsmAndCore, downloadAAR, cleanupDuplicatesInCore]
