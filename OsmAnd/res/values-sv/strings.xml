@@ -1775,4 +1775,12 @@
 	<string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Ställ in en anslutning till Internet via proxy</string>
     <string name="settings_privacy">Anonymitet</string>
-    </resources>
+    <string name="rendering_attr_streetLighting_name">Gatubelysning</string>
+    <string name="enable_proxy_title">Aktivera HTTP-proxy</string>
+	<string name="enable_proxy_descr">Konfigurera HTTP-proxy för alla nätverksbegäran</string>
+	<string name="proxy_host_title">Proxy-värd</string>
+	<string name="proxy_host_descr">Konfigurera ditt proxy-värdnamn (t.ex. 127.0.0.1)</string>
+	<string name="proxy_port_title">Proxy-port</string>
+	<string name="proxy_port_descr">Konfigurera ditt proxy-portnummer (t.ex. 8118)</string>
+	<string name="navigation_over_track">Starta navigering längs spår?</string>
+	</resources>
