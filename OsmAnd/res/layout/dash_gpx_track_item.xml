@@ -12,6 +12,7 @@
 		<LinearLayout android:orientation="vertical"
 					  android:layout_width="0dp"
 					  android:layout_weight="1"
+					  android:layout_gravity="center_vertical"
 					  android:layout_marginLeft="@dimen/subHeaderMarginLeft"
 					  android:layout_marginRight="@dimen/showAllButtonMarginRight"
 					  android:layout_height="wrap_content">
@@ -34,6 +35,7 @@
 
 				<ImageView android:id="@+id/distance_icon"
 						   android:src="@drawable/ic_small_distance"
+						   android:layout_marginLeft="@dimen/dashPluginMargin"
 						   android:layout_gravity="center_vertical"
 						   android:layout_width="wrap_content"
 						   android:layout_height="wrap_content"/>
@@ -62,8 +64,8 @@
 
 		<ImageView android:id="@+id/show_on_map"
 				   android:layout_gravity="center_vertical"
-				   android:layout_width="wrap_content"
-				   android:layout_height="wrap_content"/>
+				   android:layout_width="@dimen/dashListItemHeight"
+				   android:layout_height="@dimen/dashListItemHeight"/>
 	</LinearLayout>
 
 
