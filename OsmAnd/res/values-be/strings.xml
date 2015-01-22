@@ -1999,4 +1999,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="proxy_port_descr">Задайце нумар парта вашага проксі (напрыклад 8118)</string>
 	<string name="proxy_pref_descr">Наладзіць Інтэрнэт сувязь праз проксі</string>
     <string name="settings_privacy">Прыватнасьць</string>
+    <string name="rendering_attr_streetLighting_name">Вулічнае асьвятленьне</string>
     </resources>
