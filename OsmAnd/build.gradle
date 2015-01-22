@@ -282,11 +282,6 @@ task buildOsmAndCore(type: Exec) {
 }
 task cleanupDuplicatesInCore(type: Delete) {
     dependsOn buildOsmAndCore
-
-    delete "libs/armeabi/libgnustl_shared.so"
-    delete "libs/armeabi-v7a/libgnustl_shared.so"
-    delete "libs/mips/libgnustl_shared.so"
-    delete "libs/x86/libgnustl_shared.so"
 }
 tasks.withType(JavaCompile) {
     compileTask -> compileTask.dependsOn << [buildOsmAndCore, downloadAAR, cleanupDuplicatesInCore]
