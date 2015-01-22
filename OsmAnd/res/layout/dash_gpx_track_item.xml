@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:layout_width="match_parent"
+			  android:layout_height="@dimen/dashListItemHeight">
+	<View android:layout_width="match_parent"
+		  android:background="@color/dashboard_divider"
+		  android:layout_height="1dp"/>
+	<LinearLayout android:orientation="horizontal"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content">
+		<LinearLayout android:orientation="vertical"
+					  android:layout_width="0dp"
+					  android:layout_weight="1"
+					  android:layout_marginLeft="@dimen/subHeaderMarginLeft"
+					  android:layout_marginRight="@dimen/showAllButtonMarginRight"
+					  android:layout_height="wrap_content">
+			<TextView android:id="@+id/name"
+					  android:textColor="@color/dashboard_black"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"/>
+			<LinearLayout android:orientation="horizontal"
+						  android:layout_width="match_parent"
+						  android:layout_height="wrap_content">
+				<ImageView android:id="@+id/points_icon"
+						   android:src="@drawable/ic_small_point"
+						   android:layout_gravity="center_vertical"
+						   android:layout_width="wrap_content"
+						   android:layout_height="wrap_content"/>
+				<TextView android:id="@+id/points_count"
+						  android:textColor="@color/dashboard_descr_colol"
+						  android:layout_width="wrap_content"
+						  android:layout_height="wrap_content"/>
+
+				<ImageView android:id="@+id/distance_icon"
+						   android:src="@drawable/ic_small_distance"
+						   android:layout_gravity="center_vertical"
+						   android:layout_width="wrap_content"
+						   android:layout_height="wrap_content"/>
+				<TextView android:id="@+id/distance"
+						  android:textColor="@color/dashboard_descr_colol"
+						  android:layout_width="wrap_content"
+						  android:layout_height="wrap_content"/>
+
+				<ImageView android:id="@+id/time_icon"
+						   android:src="@drawable/ic_small_time"
+						   android:layout_gravity="center_vertical"
+						   android:layout_width="wrap_content"
+						   android:layout_height="wrap_content"/>
+				<TextView android:id="@+id/time"
+						  android:textColor="@color/dashboard_descr_colol"
+						  android:layout_width="wrap_content"
+						  android:layout_height="wrap_content"/>
+			</LinearLayout>
+		</LinearLayout>
+
+		<ImageView android:id="@+id/stop"
+				   android:visibility="gone"
+				   android:layout_gravity="center_vertical"
+				   android:layout_width="wrap_content"
+				   android:layout_height="wrap_content"/>
+
+		<ImageView android:id="@+id/show_on_map"
+				   android:layout_gravity="center_vertical"
+				   android:layout_width="wrap_content"
+				   android:layout_height="wrap_content"/>
+	</LinearLayout>
+
+
+</LinearLayout>
