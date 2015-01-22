@@ -1885,7 +1885,7 @@
     <string name="proxy_pref_descr">Opsæt en proxy internetkommunikation</string>
     <string name="settings_privacy">Privatliv</string>
     <string name="enable_proxy_title">Aktiver HTTP proxy</string>
-	<string name="enable_proxy_descr">Konfigurer HTTP-proxyserveren for alle netværksanmodninger</string>
+	<string name="enable_proxy_descr">Konfigurer HTTP-proxy for alle netværksanmodninger</string>
 	<string name="proxy_host_title">Proxy vært</string>
 	<string name="proxy_host_descr">Konfigurer proxy værtsnavn (f.eks. 127.0.0.1)</string>
 	<string name="proxy_port_title">Proxy port</string>
