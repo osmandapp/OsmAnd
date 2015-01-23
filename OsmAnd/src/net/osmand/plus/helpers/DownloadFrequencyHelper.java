@@ -1,6 +1,5 @@
 package net.osmand.plus.helpers;
 
-import android.content.Context;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI;
 
@@ -13,25 +12,21 @@ import java.util.List;
  */
 public class DownloadFrequencyHelper {
 
-    private static final String DB_NAME = "search_history"; //$NON-NLS-1$
+    private static final String DB_NAME = "download_history"; //$NON-NLS-1$
     private static final int DB_VERSION = 1;
     private static final String HISTORY_TABLE_NAME = "history"; //$NON-NLS-1$
     private static final String HISTORY_COL_NAME = "name"; //$NON-NLS-1$
-    private static final String HISTORY_COL_TIME = "time"; //$NON-NLS-1$
-    private static final String HISTORY_COL_TYPE = "type"; //$NON-NLS-1$
-    private static final String HISTORY_COL_LAT = "latitude"; //$NON-NLS-1$
-    private static final String HISTORY_COL_LON = "longitude"; //$NON-NLS-1$
+    private static final String HISTORY_COL_COUNT = "count"; //$NON-NLS-1$
     private static final String HISTORY_TABLE_CREATE =   "CREATE TABLE " + HISTORY_TABLE_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
-            HISTORY_COL_NAME + " TEXT, " + 	HISTORY_COL_TIME + " long, " + HISTORY_COL_TYPE + " TEXT, " + 	 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            HISTORY_COL_LAT + " double, " +HISTORY_COL_LON + " double);"; //$NON-NLS-1$ //$NON-NLS-2$
+            HISTORY_COL_NAME + " TEXT, " + HISTORY_COL_COUNT + " long);"; //$NON-NLS-1$ //$NON-NLS-2$
 
     private OsmandApplication app;
 
     public static class HistoryEntry {
-        int count;
+        long count;
         String name;
 
-        public HistoryEntry(int count, String name){
+        public HistoryEntry(String name, long count){
             this.count = count;
             this.name = name;
 
@@ -41,7 +36,7 @@ public class DownloadFrequencyHelper {
             return name;
         }
 
-        public int getCount() {
+        public long getCount() {
             return count;
         }
     }
@@ -55,7 +50,7 @@ public class DownloadFrequencyHelper {
         if (conn.getVersion() == 0 || DB_VERSION != conn.getVersion()) {
             if (readonly) {
                 conn.close();
-                conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+                conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, true);
             }
             if (conn.getVersion() == 0) {
                 conn.setVersion(DB_VERSION);
@@ -106,7 +101,7 @@ public class DownloadFrequencyHelper {
         if(db != null){
             try {
                 db.execSQL(
-                        "UPDATE " + HISTORY_TABLE_NAME + " SET time = ? WHERE " + HISTORY_COL_NAME + " = ?", new Object[] { System.currentTimeMillis(), e.getName() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        "UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_COUNT + " = ? WHERE " + HISTORY_COL_NAME + " = ?", new Object[] { e.getCount(), e.getName() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
             } finally {
                 db.close();
             }
@@ -120,7 +115,7 @@ public class DownloadFrequencyHelper {
         if(db != null){
             try {
                 db.execSQL(
-                        "INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?)", new Object[] { e.getName(), System.currentTimeMillis(), null, e.getCount()}); //$NON-NLS-1$ //$NON-NLS-2$
+                        "INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?)", new Object[] { e.getName(), e.getCount()}); //$NON-NLS-1$ //$NON-NLS-2$
             } finally {
                 db.close();
             }
@@ -129,17 +124,38 @@ public class DownloadFrequencyHelper {
         return false;
     }
 
+    public long getCount(String name) {
+        SQLiteAPI.SQLiteConnection db = openConnection(true);
+        long count = 0;
+        if(db != null){
+            try {
+                SQLiteAPI.SQLiteCursor query = db.rawQuery(
+                        "SELECT " + HISTORY_COL_COUNT + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+                                HISTORY_TABLE_NAME + " WHERE " + HISTORY_COL_NAME + "='" + name + "'", null); //$NON-NLS-1$//$NON-NLS-2$
+                if (query.moveToFirst()) {
+                    do {
+                        count = query.getInt(0);
+                    } while (query.moveToNext());
+                }
+                query.close();
+            } finally {
+                db.close();
+            }
+        }
+        return count;
+    }
+
     public List<HistoryEntry> getEntries(){
         List<HistoryEntry> entries = new ArrayList<HistoryEntry>();
         SQLiteAPI.SQLiteConnection db = openConnection(true);
         if(db != null){
             try {
                 SQLiteAPI.SQLiteCursor query = db.rawQuery(
-                        "SELECT " + HISTORY_COL_NAME + ", " + HISTORY_COL_LAT + "," + HISTORY_COL_LON + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-                                HISTORY_TABLE_NAME + " ORDER BY " + HISTORY_COL_TIME + " DESC", null); //$NON-NLS-1$//$NON-NLS-2$
+                        "SELECT " + HISTORY_COL_NAME + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+                                HISTORY_TABLE_NAME + " ORDER BY " + HISTORY_COL_COUNT + " DESC", null); //$NON-NLS-1$//$NON-NLS-2$
                 if (query.moveToFirst()) {
                     do {
-                        HistoryEntry e = new HistoryEntry((int)query.getInt(1), query.getString(0));
+                        HistoryEntry e = new HistoryEntry(query.getString(0), query.getInt(1));
                         entries.add(e);
                     } while (query.moveToNext());
                 }
