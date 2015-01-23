@@ -2032,4 +2032,14 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="navigation_over_track">Spustiť navigáciu po stope?</string>
 	<string name="avoid_roads_msg">Môžete zmeniť trasu zvolením ciest, ktorým je nutné sa vyhnúť</string>
     <string name="recents">NEDÁVNE</string>
+	<string name="rendering_attr_streetLighting_name">Pouličné osvetlenie</string>
+    <string name="proxy_pref_title">Proxy server</string>
+    <string name="proxy_pref_descr">Nastaviť pripojenie na Internet cez proxy</string>
+    <string name="settings_privacy">Súkromie</string>
+    <string name="enable_proxy_title">Povoliť HTTP Proxy server</string>
+	<string name="enable_proxy_descr">Nastaviť HTTP Proxy server pre všetky sieťové požiadavky</string>
+	<string name="proxy_host_title">Proxy server</string>
+	<string name="proxy_host_descr">Nastaviť meno proxy servera (napr. 127.0.0.1)</string>
+	<string name="proxy_port_title">Proxy port</string>
+	<string name="proxy_port_descr">Nastaviť port proxy servera (napr. 8118)</string>
 	</resources>
