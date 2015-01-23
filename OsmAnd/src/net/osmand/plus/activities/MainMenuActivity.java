@@ -94,10 +94,14 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			if (headerHeight < t - margin){
 				//hiding action bar - showing floating button
 				//getSupportActionBar().hide();
-				fabButton.showFloatingActionButton();
+				if (fabButton != null) {
+					fabButton.showFloatingActionButton();
+				}
 			} else {
 				//getSupportActionBar().show();
-				fabButton.hideFloatingActionButton();
+				if (fabButton != null) {
+					fabButton.hideFloatingActionButton();
+				}
 
 				//makes other cards to move on top of the map card to make it look like android animations
 				View fragments = findViewById(R.id.fragments);
@@ -189,8 +193,9 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 					startMapActivity();
 				}
 			});
+			fabButton.hideFloatingActionButton();
 		}
-		fabButton.hideFloatingActionButton();
+
 		getLocationProvider().addCompassListener(this);
 		getLocationProvider().registerOrUnregisterCompassListener(true);
 
