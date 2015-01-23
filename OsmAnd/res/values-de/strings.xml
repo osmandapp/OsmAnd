@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -2025,4 +2025,17 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="routing_attr_no_new_routing_name">Routing-Regeln v1.9 nicht verwenden</string>
     <string name="routing_attr_no_new_routing_description">Neuen Routenalgorithmus nicht verwenden</string>
     <string name="speak_pedestrian">Fußgängerübergänge ankündigen</string>
+    <string name="rendering_attr_streetLighting_name">Straßenbeleuchtung</string>
+    <string name="proxy_pref_title">Proxy</string>
+    <string name="settings_privacy">Privatsphäre</string>
+    <string name="rendering_value__name">Standard</string>
+	<string name="enable_proxy_title">HTTP-Proxy aktivieren</string>
+	<string name="enable_proxy_descr">HTTP-Proxy für alle Netzwerkanfragen konfigurieren</string>
+	<string name="proxy_host_title">Proxy-Host</string>
+	<string name="proxy_host_descr">Konfigurieren Sie den Hostnamen ihres Proxys (z.B. 127.0.0.1)</string>
+	<string name="proxy_port_title">Proxy-Port</string>
+	<string name="proxy_port_descr">Konfigurieren Sie die Portnummer Ihres Proxys (z.B. 8118)</string>
+	<string name="proxy_pref_descr">Eine Proxy-Internet-Kommunikation aufsetzen</string>
+    <string name="navigation_over_track">Navigation über Strecke starten?</string>
+	<string name="avoid_roads_msg">Sie können die Route ändern, indem Sie die Straßen auswählen, die vermieden werden sollen</string>
     </resources>

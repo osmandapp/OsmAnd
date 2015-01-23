@@ -123,7 +123,7 @@ public class AvoidSpecificRoads {
 				selectFromMap(mapActivity);
 			}
 		});
-		bld.setNegativeButton(R.string.default_buttons_cancel, null);
+		bld.setNegativeButton(R.string.close, null);
 		bld.show();
 	}
 	

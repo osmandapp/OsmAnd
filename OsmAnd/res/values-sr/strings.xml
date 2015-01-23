@@ -203,7 +203,7 @@
 	<string name="show_route">Детаљи руте</string>
 	<string name="poi_namefinder_query_empty">Унети упит за претрагу POI</string>
 	<string name="layer_transport_route">Рута транспорта</string>
-	<string name="layer_osm_bugs">OSM bugs (online)</string>
+	<string name="layer_osm_bugs">Дневник грешака ОСМ-а на мрежи</string>
 	<string name="layer_poi">POI…</string>
 	<string name="context_menu_item_search_poi">Претрага POI</string>
 	<string name="where_am_i">Где сам ја?</string>
@@ -346,4 +346,14 @@
 	<string name="rendering_value_orange_name">Наранџаста</string>
     <string name="traffic_warning_railways">Пружни прелаз</string>
 	<string name="show_railway_warnings">Приказуј пружне прелазе</string>
-	</resources>
+	<string name="rendering_attr_streetLighting_name">Осветљење улице</string>
+    <string name="proxy_pref_title">Мрежни посредник</string>
+    <string name="proxy_pref_descr">Подесите мрежног посредника за интернет</string>
+    <string name="settings_privacy">Приватност</string>
+    <string name="routing_attr_no_new_routing_name">Без усмеравања по издању v1.9</string>
+    <string name="routing_attr_no_new_routing_description">Немој да користиш правила усмеравања из издања v1.9</string>
+    <string name="rendering_attr_transportStops_name">Станице</string>
+    <string name="navigate_point_northing">Географска ширина</string>
+    <string name="navigate_point_easting">Географска дужина</string>
+    <string name="error_avoid_specific_road">Нисам пронашао заобилазнице</string>
+    </resources>
