@@ -15,7 +15,7 @@
     <string name="settings_privacy">Privacy</string>
     <string name="recents">RECENTS</string>
 	<string name="navigation_over_track">Start navigation over track?</string>
-	<string name="avoid_roads_msg">You can change route by selecting roads to avoid</string>
+	<string name="avoid_roads_msg">You can trigger an alternative route by selecting roads to avoid</string>
     <string name="rendering_value__name">Default</string>
 	<string name="speak_pedestrian">Announce pedestrian crosswalks</string>
     <string name="rendering_attr_roadStyle_name">Road style</string>
