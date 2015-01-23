@@ -14,6 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.support.v4.app.Fragment;
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -87,7 +88,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
 
@@ -303,10 +303,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			String additional = "";
 			if (duration > 0) {
 				int d = (int) (duration / 1000);
-				additional += Algorithms.formatDuration(d);
+				additional += "(" + Algorithms.formatDuration(d) + ")";
 			}
 			if (!available) {
-				additional += "(" + ctx.getString(R.string.recording_unavailable) + ")";
+				additional += "[" + ctx.getString(R.string.recording_unavailable) + "]";
 			}
 			return additional;
 		}
@@ -507,7 +507,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	private void defaultAction(final MapActivity mapActivity) {
+	public void defaultAction(final MapActivity mapActivity) {
 		final Location loc = app.getLocationProvider().getLastKnownLocation();
 		// double lat = mapActivity.getMapView().getLatitude();
 		// double lon = mapActivity.getMapView().getLongitude();
@@ -590,6 +590,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public void mapActivityPause(MapActivity activity) {
 		stopRecording(activity);
+	}
+	
+	@Override
+	public void mapActivityResume(MapActivity activity) {
+		this.activity = activity;;
+	}
+	
+	public MapActivity getActivity() {
+		return activity;
 	}
 
 	public void recordVideo(final double lat, final double lon, final MapActivity mapActivity) {
@@ -1098,7 +1107,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void contextMenuLocalIndexes(Activity activity, SherlockFragment fragment, Object obj,
+	public void contextMenuLocalIndexes(Activity activity, Fragment fragment, Object obj,
 			ContextMenuAdapter adapter) {
 		if (activity instanceof DownloadActivity) {
 			final DownloadActivity la = (DownloadActivity) activity;

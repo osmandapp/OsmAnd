@@ -223,7 +223,7 @@
   <string name="search_position_undefined">Nedefinováno</string>
   <string name="search_position_fixed">Opraveno</string>
   <string name="search_position_current_location">Momentální polohy…</string>
-  <string name="search_position_map_view">Posledního místa na mapě</string>
+  <string name="search_position_map_view">Současný střed mapy</string>
   <string name="select_search_position">Počáteční bod:</string>
   <string name="context_menu_item_search">Hledat</string>
   <string name="tip_recent_changes_0_6_7_t">"Poslední změny ve verzi 0.6.7 :
@@ -317,7 +317,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Zastaralý formát mapových dat \'\'{0}\'\' není podporován</string>
   <string name="poi_filter_car_aid">Autoservis</string>
-  <string name="poi_filter_closest_poi">Nejbližší POI</string>
+  <string name="poi_filter_closest_poi">Nejbližší bod zájmu</string>
   <string name="poi_filter_custom_filter">Vlastní filtr</string>
   <string name="poi_filter_food_shop">Potraviny</string>
   <string name="poi_filter_for_tourists">Pro turisty</string>
@@ -399,7 +399,7 @@
   <string name="search_offline_geo_error">Nemohu rozpoznat geo intent:\'%s\'</string>
   <string name="search_osm_offline">Hledat adresu pomocí offline map</string>
   <string name="system_locale">Podle systému</string>
-  <string name="preferred_locale_descr">Volba jazyka</string>
+  <string name="preferred_locale_descr">Volba jazyka (po změně je nutné restartovat OsmAnd)</string>
   <string name="preferred_locale">Jazyk</string>
   <string name="tip_map_switch">Zdroj map</string>
   
@@ -572,7 +572,7 @@
   <string name="first_time_download">Stáhnout regiony</string>
   <string name="first_time_msg">Děkujeme, že jste si zvolili OsmAnd. Abyste mohli využívat všech možností aplikace, potřebujete soubory s mapami a hlasem, které si můžete stáhnout (Nastavení → Spravovat mapové soubory) nebo připravit sami. Poté budete moci hledat podle adres, hledat body zájmu (POI) a spojení veřejnou dopravou.</string>
   <string name="search_poi_location">Hledám signál…</string>
-  <string name="search_near_map">Hledat poblíž poslední polohy</string>
+  <string name="search_near_map">Hledat poblíž současného středu mapy</string>
   <string name="search_nearby">Hledat poblíž</string>
   <string name="map_orientation_default">Automaticky</string>
   <string name="map_orientation_portrait">Na výšku</string>
@@ -1131,7 +1131,7 @@
 \n\t* Modul měření vzdálenosti\n\t* Modul zvykové poznámky\n\t* Modul vrstevnice\n\t* Opravení chyb\n\t* Nový styl mapy \'Touring view\' s více mapovými detaily, novými styly vykreslování silnic, větším kontrastem a možností horské turistiky (značení SAC)\n\t* Korekce výpočtu výšky EGM96 "</string>
     <string name="recording_unavailable">nedostupné</string>
     <string name="layer_recordings">Audio/video nahrávky</string>
-    <string name="recording_description">Nahrávka %1$s %2$s na %3$s</string>
+    <string name="recording_description">Nahrávka %1$s %3$s %2$s</string>
     <string name="recording_default_name">nahrávám</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd modul pro offline zobrazování vrstevnic</string>
     
@@ -1148,7 +1148,7 @@
     <string name="stop_routing_confirm">Opravdu chcete zastavit navigaci?</string>
     <string name="clear_dest_confirm">Opravdu chcete smazat cíl?</string>
     <string name="recording_context_menu_show">Zobrazit</string>
-    <string name="recording_photo_description">Foto %1$s v %2$s</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Vyfotit</string>
     <string name="recording_context_menu_precord">Vyfotit</string>
     <string name="local_indexes_cat_av">Zvuková a video data</string>
@@ -1208,7 +1208,7 @@
     <string name="monitoring_settings_descr">Konfigurace záznamů vašich cest</string>
     <string name="install_paid">Instalovat plnou verzi</string>
     <string name="cancel_navigation">Zastavit navigaci</string>
-    <string name="use_kalman_filter_compass_descr">Použít Kalmanův filtr k zabránění odchylek kompasu</string>
+    <string name="use_kalman_filter_compass_descr">Sníží šum v hodnotách z kompasu, ale zpomalí změny směru</string>
     <string name="use_kalman_filter_compass">Použít Kalmanův filtr</string>
     <string name="use_magnetic_sensor">Používat magnetický senzor</string>
     <string name="access_mark_final_location_first">Usnadnění: vyberte prosím nejdříve cíl</string> 
@@ -1761,7 +1761,7 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Sdílené mikrobusové linky</string>
     <string name="tip_recent_changes_1_9_t">"Změny v 1.9: * Aktualizované mapové styly s vykreslováním povrchu cest, dopravou a turistickými symboly * Hledání POI podél trasy * Značení neprůchodných cest v rámci relace * Jednodušší stahování a aktualizace map * Vizuální a zvukové upozornění na blížící se průjezdní bod * Tisk itineráře a odbočovacích pokynů * Podpora odbočovacích pruhů * Podpora Android Wear * Mnoho změn zobrazení * Oddělení mapového přiblížení a velikosti písma * Zvukové upozornění při odchýlení z trasy * Přihlášení do služby OsMo * Oprava nekompatibilit s verzí OsMo "</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tramvajové a vlakové linky</string>
-    <string name="select_impassable_road">Vybrat na mapě</string>
+    <string name="select_impassable_road">Vybrat na mapě…</string>
     <string name="impassable_road">Vyhnout se cestám…</string>
     <string name="rendering_category_hide">Skrýt</string>
     <string name="wake_on_voice">Zapnout obrazovku</string>
@@ -1810,4 +1810,5 @@ s často kladenými otázkami.</string>
     <string name="routing_attr_no_new_routing_name">Nepoužívat routovací pravidla v1.9</string>
     <string name="routing_attr_no_new_routing_description">Nepoužívat pravidla výpočtu trasy zavedené ve verzi 1.9</string>
     <string name="speak_pedestrian">Oznamovat přechody pro chodce</string>
-    </resources>
+    <string name="rendering_value__name">Výchozí</string>
+	</resources>

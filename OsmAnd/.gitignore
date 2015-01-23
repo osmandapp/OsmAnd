@@ -1,11 +1,13 @@
 bin/
 dist/
+res/values/no_translate.xml
 assets/specialphrases/*
 assets/voice/*
 gen/
 local.properties
 raw/
 obj/
+libgnustl/
 cpd.xml
 jni/Local.mk
 out/

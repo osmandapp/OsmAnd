@@ -22,11 +22,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.PoiFilter;
-import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.render.RenderingIcons;
@@ -217,7 +217,7 @@ public class MapActivityLayers {
 	
 	
 
-	public void showGPXFileLayer(List<String> files, final OsmandMapTileView mapView) {
+	public AlertDialog showGPXFileLayer(List<String> files, final OsmandMapTileView mapView) {
 		final OsmandSettings settings = getApplication().getSettings();
 		CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
 			@Override
@@ -227,7 +227,7 @@ public class MapActivityLayers {
 					if (g.showCurrentTrack) {
 						if (!settings.SAVE_TRACK_TO_GPX.get() && !
 								settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-							AccessibleToast.makeText(activity, R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
+							AccessibleToast.makeText(activity, R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_LONG).show();
 						} else {
 							g.path = getString(R.string.show_current_gpx_title);
 						}
@@ -243,14 +243,15 @@ public class MapActivityLayers {
 							mapView.getZoom(), true);
 				}
 				mapView.refreshMap();
+				activity.getMapActions().refreshDrawer();
 				return true;
 			}
 		};
 
 		if (files == null) {
-			GpxUiHelper.selectGPXFile(activity, true, true, callbackWithObject);
+			return GpxUiHelper.selectGPXFile(activity, true, true, callbackWithObject);
 		} else {
-			GpxUiHelper.selectGPXFile(files, activity, true, true, callbackWithObject);
+			return GpxUiHelper.selectGPXFile(files, activity, true, true, callbackWithObject);
 		}
 	}
 	
@@ -258,8 +259,8 @@ public class MapActivityLayers {
 	
 	
 	
-	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiFilter[] selected){
-		final List<PoiFilter> userDefined = new ArrayList<PoiFilter>();
+	public AlertDialog selectPOIFilterLayer(final OsmandMapTileView mapView, final PoiLegacyFilter[] selected){
+		final List<PoiLegacyFilter> userDefined = new ArrayList<PoiLegacyFilter>();
 		OsmandApplication app = (OsmandApplication)getApplication();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
@@ -272,7 +273,7 @@ public class MapActivityLayers {
 		// 2nd custom
 		adapter.item(getString(R.string.poi_filter_custom_filter)).icon(RenderingIcons.getBigIconResourceId("user_defined")).reg();
 		
-		for (PoiFilter f : poiFilters.getUserDefinedPoiFilters()) {
+		for (PoiLegacyFilter f : poiFilters.getUserDefinedPoiFilters()) {
 			Item it = adapter.item(f.getName());
 			if (RenderingIcons.containsBigIcon(f.getSimplifiedId())) {
 				it.icon(RenderingIcons.getBigIconResourceId(f.getSimplifiedId()));
@@ -297,7 +298,7 @@ public class MapActivityLayers {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(which == 1){
-					String filterId = PoiFilter.CUSTOM_FILTER_ID; 
+					String filterId = PoiLegacyFilter.CUSTOM_FILTER_ID; 
 					getApplication().getSettings().setPoiFilterForMap(filterId);
 					Intent newIntent = new Intent(activity, EditPOIFilterActivity.class);
 					newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, filterId);
@@ -314,7 +315,7 @@ public class MapActivityLayers {
 						filterId = PoiFiltersHelper.getOsmDefinedFilterId(categories[which - userDefined.size() - 2]);
 					}
 					getApplication().getSettings().setPoiFilterForMap(filterId);
-					PoiFilter f = poiFilters.getFilterById(filterId);
+					PoiLegacyFilter f = poiFilters.getFilterById(filterId);
 					if (f != null) {
 						f.clearNameFilter();
 					}

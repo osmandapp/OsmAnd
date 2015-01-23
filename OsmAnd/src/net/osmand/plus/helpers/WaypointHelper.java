@@ -23,10 +23,10 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.PoiFilter;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.IntermediatePointsDialog;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -48,6 +48,10 @@ public class WaypointHelper {
 	private static final int LONG_ANNOUNCE_RADIUS = 700;
 	private static final int SHORT_ANNOUNCE_RADIUS = 150;
 	private static final int ALARMS_ANNOUNCE_RADIUS = 150;
+	
+	// don't annoy users by lots of announcements
+	private static final int APPROACH_POI_LIMIT = 3;
+	private static final int ANNOUNCE_POI_LIMIT = 3;
 
 	OsmandApplication app;
 	// every time we modify this collection, we change the reference (copy on write list)
@@ -342,6 +346,9 @@ public class WaypointHelper {
 						kIterator++;
 					}
 					if (!announcePoints.isEmpty()) {
+						if(announcePoints.size() > ANNOUNCE_POI_LIMIT) {
+							announcePoints = announcePoints.subList(0, ANNOUNCE_POI_LIMIT);
+						}
 						if (type == WAYPOINTS) {
 							getVoiceRouter().announceWaypoint(announcePoints);
 						} else if (type == POI) {
@@ -353,6 +360,9 @@ public class WaypointHelper {
 						}
 					}
 					if (!approachPoints.isEmpty()) {
+						if(approachPoints.size() > APPROACH_POI_LIMIT) {
+							approachPoints = approachPoints.subList(0, APPROACH_POI_LIMIT);
+						}
 						if (type == WAYPOINTS) {
 							getVoiceRouter().approachWaypoint(lastKnownLocation, approachPoints);
 						} else if (type == POI) {
@@ -513,7 +523,7 @@ public class WaypointHelper {
 
 
 	protected void calculatePoi(RouteCalculationResult route, List<LocationPointWrapper> locationPoints) {
-		PoiFilter pf = getPoiFilter();
+		PoiLegacyFilter pf = getPoiFilter();
 		if (pf != null) {
 			final List<Location> locs = route.getImmutableAllLocations();
 			List<Amenity> amenities = app.getResourceManager().searchAmenitiesOnThePath(locs, poiSearchDeviationRadius,
@@ -592,7 +602,7 @@ public class WaypointHelper {
 
 
 	/// 
-	public PoiFilter getPoiFilter() {
+	public PoiLegacyFilter getPoiFilter() {
 		return app.getPoiFilters().getFilterById(app.getSettings().getPoiFilterForMap());
 	}
 	public boolean showPOI() {

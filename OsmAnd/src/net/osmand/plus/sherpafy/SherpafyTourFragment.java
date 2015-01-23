@@ -3,6 +3,10 @@ package net.osmand.plus.sherpafy;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.support.v4.app.ListFragment;
+import android.support.v7.app.ActionBarActivity;
+import android.view.*;
+import android.view.MenuItem.OnMenuItemClickListener;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -11,9 +15,6 @@ import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
@@ -22,13 +23,8 @@ import android.widget.ImageView.ScaleType;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockListFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
-public class SherpafyTourFragment extends SherlockListFragment {
+public class SherpafyTourFragment extends ListFragment {
 	private static final int SHARE_ID = 6;
 	private static final int START = 7;
 	OsmandApplication app;
@@ -62,7 +58,7 @@ public class SherpafyTourFragment extends SherlockListFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		app = (OsmandApplication) getSherlockActivity().getApplication();
+		app = (OsmandApplication) getActivity().getApplication();
 		customization = (SherpafyCustomization) app.getAppCustomization();
 		String id = getArguments().getString("TOUR");
 		for (TourInformation ti : customization.getTourInformations()) {
@@ -78,7 +74,7 @@ public class SherpafyTourFragment extends SherlockListFragment {
 	public void onResume() {
 		super.onResume();
 		if(tour != null) {
-			getSherlockActivity().getSupportActionBar().setTitle(tour.getName());
+			((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(tour.getName());
 		}
 	}
 
@@ -87,14 +83,14 @@ public class SherpafyTourFragment extends SherlockListFragment {
 		if (position > 0) {
 			StageItem si = (StageItem) getListAdapter().getItem(position - 1);
 			if (si.type instanceof StageInformation) {
-				((TourViewActivity) getSherlockActivity()).selectMenu(si.type);
+				((TourViewActivity) getActivity()).selectMenu(si.type);
 			} else {
 				if (si.type == StageItemType.GALLERY) {
 					// ((TourViewActivity) getSherlockActivity()).showGallery(tour);
 				} else if (si.type == StageItemType.OVERVIEW) {
-					((TourViewActivity) getSherlockActivity()).showDetailedOverview(si.header, tour.getFulldescription());
+					((TourViewActivity) getActivity()).showDetailedOverview(si.header, tour.getFulldescription());
 				} else if (si.type == StageItemType.INSTRUCTIONS) {
-					((TourViewActivity) getSherlockActivity()).showDetailedInstructions(si.header, tour.getInstructions());
+					((TourViewActivity) getActivity()).showDetailedInstructions(si.header, tour.getInstructions());
 				}
 			}
 		}
@@ -112,11 +108,11 @@ public class SherpafyTourFragment extends SherlockListFragment {
 					return onOptionsItemSelected(item);
 				}
 			};
-			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, START, 
+			((TourViewActivity) getActivity()).createMenuItem(menu, START,
 					current ? R.string.continue_tour : R.string.start_tour , 
 					0, 0,
 					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT, oic);
-			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, SHARE_ID, R.string.share_fav,
+			((TourViewActivity) getActivity()).createMenuItem(menu, SHARE_ID, R.string.share_fav,
 					R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
 					MenuItem.SHOW_AS_ACTION_IF_ROOM, oic);
 		}
@@ -134,7 +130,7 @@ public class SherpafyTourFragment extends SherlockListFragment {
 			sd.showDialog();
 			return true;
 		} else if(item.getItemId() == START) {
-			((TourViewActivity) getSherlockActivity()).startTour(tour);
+			((TourViewActivity) getActivity()).startTour(tour);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

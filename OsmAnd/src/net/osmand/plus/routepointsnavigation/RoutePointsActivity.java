@@ -2,6 +2,11 @@ package net.osmand.plus.routepointsnavigation;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.view.ActionMode;
+import android.view.*;
+import android.widget.*;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
@@ -23,18 +28,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.Window;
 
 /**
  * Created by Bars on 13.06.2014.
@@ -57,7 +51,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		this.app = (OsmandApplication) getApplication();
 		plugin = OsmandPlugin.getEnabledPlugin(RoutePointsPlugin.class);
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		setSupportProgressBarIndeterminateVisibility(false);
 		getSupportActionBar().setTitle(R.string.route_points_activity);
@@ -146,10 +140,9 @@ public class RoutePointsActivity extends OsmandListActivity {
 	}
 	
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		RoutePoint rp = adapter.getItem(position);
-		getSherlock().startActionMode(getPointActionModeCallback(rp));
+		getSupportActionBar().startActionMode(getPointActionModeCallback(rp));
 		adapter.notifyDataSetChanged();
 	}
 
@@ -167,7 +160,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 
 		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
-			ViewHolder holder = null;
+			ViewHolder holder;
 			if (convertView == null) {
 				LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				convertView = vi.inflate(R.layout.route_point_info, null);
@@ -224,7 +217,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 	private void saveGPXAsync() {
 		new AsyncTask<SelectedRouteGpxFile, Void, Void>() {
 			protected void onPreExecute() {
-				getSherlock().setProgressBarIndeterminateVisibility(true);
+				//getSherlock().setProgressBarIndeterminateVisibility(true);
 			}
 
 			@Override
@@ -236,7 +229,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 			}
 
 			protected void onPostExecute(Void result) {
-				getSherlock().setProgressBarIndeterminateVisibility(false);
+				//getSherlock().setProgressBarIndeterminateVisibility(false);
 
 			}
 		}.execute(plugin.getCurrentRoute());
@@ -250,12 +243,12 @@ public class RoutePointsActivity extends OsmandListActivity {
 			public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
 				selectedItem = rp;
 				createMenuItem(menu, MARK_AS_CURRENT_ID, R.string.mark_as_current, R.drawable.ic_action_signpost_light, R.drawable.ic_action_signpost_dark,
-						MenuItem.SHOW_AS_ACTION_IF_ROOM);
+						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				createMenuItem(menu, AS_VISITED_ID, !rp.isVisited() ? 
 						R.string.mark_as_visited : R.string.mark_as_not_visited, R.drawable.ic_action_ok_light, R.drawable.ic_action_ok_dark,
-						MenuItem.SHOW_AS_ACTION_IF_ROOM);
+						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				createMenuItem(menu, POI_ON_MAP_ID, R.string.show_poi_on_map, R.drawable.ic_action_map_marker_light, R.drawable.ic_action_map_marker_dark,
-						MenuItem.SHOW_AS_ACTION_IF_ROOM);
+						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				return true;
 			}
 
@@ -300,18 +293,18 @@ public class RoutePointsActivity extends OsmandListActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) {
 		createMenuItem(menu, OK_ID, R.string.default_buttons_ok, 
 				R.drawable.ic_action_map_marker_light, R.drawable.ic_action_map_marker_dark ,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		createMenuItem(menu, NAVIGATE_DIALOG_ID, R.string.navigate_dialog,
 				R.drawable.ic_action_gdirections_light, R.drawable.ic_action_gdirections_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == OK_ID) {
 			finish();
 			return true;

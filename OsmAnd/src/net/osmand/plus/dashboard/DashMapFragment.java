@@ -2,7 +2,11 @@ package net.osmand.plus.dashboard;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.Point;
+import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.ImageView;
 import net.osmand.data.LatLon;
@@ -12,26 +16,23 @@ import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.MapTextLayer;
-import net.osmand.plus.views.OsmAndMapSurfaceView;
-import net.osmand.plus.views.OsmandMapTileView;
-import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
- * Created by Denis on 24.11.2014.
+ * Created by Denis on
+ * 24.11.2014.
  */
 public class DashMapFragment extends DashBaseFragment implements IMapDownloaderCallback {
 
 	public static final String TAG = "DASH_MAP_FRAGMENT";
+	
+	private Paint paintBmp;
 
 	@Override
 	public void onDestroy() {
@@ -43,6 +44,10 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getMyApplication().getResourceManager().getMapTileDownloader().addDownloaderCallback(this);
+		paintBmp = new Paint();
+		paintBmp.setAntiAlias(true);
+		paintBmp.setFilterBitmap(true);
+		paintBmp.setDither(true);
 	}
 
 	protected void startMapActivity() {
@@ -52,18 +57,7 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_map_fragment, container, false);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
-		((TextView) view.findViewById(R.id.map_text)).setTypeface(typeface);
-		((Button) view.findViewById(R.id.show_map)).setTypeface(typeface);
 
-		(view.findViewById(R.id.show_map)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startMapActivity();
-			}
-
-
-		});
 		view.findViewById(R.id.map_image).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -74,17 +68,36 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 		return view;
 	}
 
-	private void setMapImage(View view) {
-		if (view == null) {
-			return;
-		}
-		final Bitmap image = getMyApplication().getResourceManager().getRenderer().getBitmap();
-		final ImageView map = (ImageView) view.findViewById(R.id.map_image);
-		if (image != null) {
+	private void setMapImage(final Bitmap image) {
+		final View view = getView();
+		if (view != null && image != null) {
 			getActivity().runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					map.setImageBitmap(image);
+					final ImageView mapView = (ImageView) view.findViewById(R.id.map_image);
+					mapView.setImageDrawable(new Drawable(){
+
+						@Override
+						public void draw(Canvas canvas) {
+//							int h = mapView.getHeight();
+//							int w = mapView.getWidth();
+							canvas.drawBitmap(image, 0, 0, paintBmp);
+						}
+
+						@Override
+						public void setAlpha(int alpha) {
+						}
+
+						@Override
+						public void setColorFilter(ColorFilter cf) {
+						}
+
+						@Override
+						public int getOpacity() {
+							return 0;
+						}
+						
+					});
 				}
 			});
 
@@ -95,10 +108,11 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!getMyApplication().isApplicationInitializing()) {
+        if (!getMyApplication().isApplicationInitializing()) {
 			updateMapImage();
 		}
-	}
+
+    }
 
 	@Override
 	public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
@@ -120,7 +134,7 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 	private void applicationInitialized(View view) {
 		updateMapImage();
 		view.findViewById(R.id.loading).setVisibility(View.GONE);
-		MainMenuActivity dashboardActivity = ((MainMenuActivity) getSherlockActivity());
+		MainMenuActivity dashboardActivity = ((MainMenuActivity) getActivity());
 		if (dashboardActivity != null) {
 			dashboardActivity.updateDownloads();
 			view.findViewById(R.id.map_image).setVisibility(View.VISIBLE);
@@ -133,23 +147,37 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 			ResourceManager mgr = getMyApplication().getResourceManager();
 			mgr.tileDownloaded(request);
 		}
-		setMapImage(getView());
+		setMapImage(getMyApplication().getResourceManager().getRenderer().getBitmap());
 	}
 
+	@SuppressWarnings("deprecation")
 	private void updateMapImage() {
 		MapRenderRepositories repositories = getMyApplication().getResourceManager().getRenderer();
-		LatLon lm = getMyApplication().getSettings().getLastKnownMapLocation();
-		int zm = getMyApplication().getSettings().getLastKnownMapZoom();
+		if(repositories.getBitmap() != null) {
+			setMapImage(repositories.getBitmap());
+		} else {
 
-		WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-		Display display = wm.getDefaultDisplay();
-		int height = (int) getActivity().getResources().getDimension(R.dimen.dashMapHeight);
-		int width = display.getWidth();
+			LatLon lm = getMyApplication().getSettings().getLastKnownMapLocation();
+			int zm = getMyApplication().getSettings().getLastKnownMapZoom();
 
-		RotatedTileBox rotatedTileBox = new RotatedTileBox.RotatedTileBoxBuilder().
-				setZoom(zm).setLocation(lm.getLatitude(), lm.getLongitude()).
-				setPixelDimensions(width, height).build();
-		repositories.loadMap(rotatedTileBox,
-				getMyApplication().getResourceManager().getMapTileDownloader().getDownloaderCallbacks());
+			WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+			Display display = wm.getDefaultDisplay();
+			int height = display.getHeight(); // (int) getActivity().getResources().getDimension(R.dimen.dashMapHeight);
+			int width = display.getWidth();
+
+			WindowManager mgr = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+			DisplayMetrics dm = new DisplayMetrics();
+			mgr.getDefaultDisplay().getMetrics(dm);
+			RotatedTileBox currentViewport = new RotatedTileBox.RotatedTileBoxBuilder().setZoom(zm)
+					.setLocation(lm.getLatitude(), lm.getLongitude()).setPixelDimensions(width, height).build();
+			currentViewport.setDensity(dm.density);
+			currentViewport.setMapDensity(getSettingsMapDensity(dm.density));
+			repositories.loadMap(currentViewport, getMyApplication().getResourceManager().getMapTileDownloader()
+					.getDownloaderCallbacks());
+		}
+	}
+	
+	public double getSettingsMapDensity(double density) {
+		return (getMyApplication().getSettings().MAP_DENSITY.get()) * Math.max(1, density);
 	}
 }

@@ -32,8 +32,8 @@
     <string name="recording_can_not_be_played">Optagelse kan ikke afspilles</string>
     <string name="recording_context_menu_delete">Slet optagelse</string>
     <string name="recording_context_menu_play">Afspil</string>
-    <string name="recording_description">Optagelse %1$s %2$s af %3$s</string>
-    <string name="recording_default_name">optager</string>
+    <string name="recording_description">Optagelse %1$s %3$s %2$s</string>
+    <string name="recording_default_name">Optager</string>
     <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Audio-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd udvidelse for offline højdekurver</string>
@@ -113,7 +113,7 @@
     <string name="precise_routing_mode_descr">Aktiver for at beregne præcise ruter uden fejl. Stadig begrænset af afstand og langsom.</string>
     <string name="precise_routing_mode">Nøjagtig ruteplanlægning (alfa)</string>
     <string name="recording_context_menu_show">Vis</string>
-    <string name="recording_photo_description">Foto %1$s af %2$s</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Tag et foto</string>
     <string name="recording_context_menu_precord">Tag et foto</string>
     <string name="target_point">Rutepunkt %1$s</string>
@@ -468,7 +468,7 @@
 	<string name="live_monitoring_interval">Interval for online sporing</string>
 	<string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, long={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}</string>
 	<string name="live_monitoring_url">Webadresse for online sporing</string>
-	<string name="gpx_monitoring_disabled_warn">Aktiver \'Log spor til GPX-fil\' indstilling.</string>
+	<string name="gpx_monitoring_disabled_warn">Log spor med GPX modul eller via \'Tur optagelse\' indstillinger.</string>
 	<string name="show_current_gpx_title">Vis aktuelt spor</string>
 	<string name="free_version_message">Den gratis version af OsmAnd er begrænset til at hente %1$s kort og understøtter ikke offline Wikipedia artikler.</string>
 	<string name="free_version_title">Gratis version</string>
@@ -521,7 +521,7 @@
 	<string name="init_native_library">Initialisere indbygget bibliotek…</string>
 	<string name="choose_auto_follow_route">Autocentrer kortvisning</string>
 	<string name="choose_auto_follow_route_descr">Tid indtil kortvisning synkroniseres med aktuel position</string>
-	<string name="auto_follow_route_never">Aldrig</string>
+	<string name="auto_follow_route_never">Aldrig (tryk på blå pil for at starte vejledning manuelt)</string>
 	<string name="auto_follow_route_navigation">Autocentrer kun navigation</string>
 	<string name="auto_follow_route_navigation_descr">Autocentrer kun kortvisning under navigation.</string>
 	<string name="auto_follow_location_enabled">Autocentrer kort.</string>
@@ -761,7 +761,7 @@
 	<string name="search_offline_geo_error">Kunne ikke fortolke geografisk hensigt \'%s\'</string>
 	<string name="search_osm_offline">Søg geografisk placering</string>
 	<string name="system_locale">System</string>
-	<string name="preferred_locale_descr">Vælg sprog</string>
+	<string name="preferred_locale_descr">Vælg sprog (genstart OsmAnd efter skift)</string>
 	<string name="preferred_locale">Sprog</string>
 	<string name="incomplete_locale">ufuldstændig</string>
 	<string name="tip_map_switch">Vælg kortkilde</string>
@@ -960,7 +960,7 @@
 	<string name="edit_filter_save_as_menu_item">Gem som</string>
 	<string name="edit_filter_delete_menu_item">Slet</string>
 	<string name="filter_current_poiButton">Filter</string>
-	<string name="default_buttons_reset">Nulstil</string>
+	<string name="default_buttons_reset">Ryd</string>
 	<string name="poi_dialog_other_tags_message">Alle de øvrige mærker bevares</string>
 	<string name="poi_dialog_comment">Kommentar</string>
 	<string name="poi_dialog_opening_hours">Åben</string>
@@ -1557,7 +1557,7 @@
     <string name="osmo_plugin_description">"OpenStreetMap - avanceret live overvågning, se http://osmo.mobi. Spor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing. Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator. Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem. "</string>
     <string name="osmo_plugin_name">OsMo (avanceret live overvågning)</string>
     <string name="osmo_settings">OpenStreetMap overvågning</string>
-   	<string name="keep_informing_never">Aldrig</string>
+   	<string name="keep_informing_never">Kun manuelt (tryk på pilen)</string>
     <string name="keep_informing_descr">Gentag navigationsinstruktioner med jævne mellemrum</string>
     <string name="keep_informing">Gentag navigationsinstruktioner</string>
 	<string name="arrival_distance">Meddel ankomst</string>
@@ -1829,11 +1829,11 @@
     <string name="rendering_attr_trolleybusRoutes_name">Trolleybusruter</string>
     <string name="rendering_attr_busRoutes_name">Busruter</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tog- og sporvognsruter</string>
-    <string name="select_impassable_road">Vælg på kort</string>
+    <string name="select_impassable_road">Vælg på kort…</string>
     <string name="impassable_road">Undgå veje…</string>
     <string name="rendering_category_hide">Skjul</string>
     <string name="wake_on_voice">Tænd for skærmen</string>
-    <string name="wake_on_voice_descr">Tænd for skærmen ved navigationsinstruktioner</string>
+    <string name="wake_on_voice_descr">Tænd for skærmen (hvis slukket) ved navigationsinstruktioner</string>
     <string name="lock_screen_request_explanation">%1$s behøver denne tilladelse til at slukke for skærmen for strømbesparende funktion.</string>
     <string name="wake_on_voice_never">Aldrig</string>
     <string name="advanced_settings">Avanceret</string>
@@ -1876,4 +1876,19 @@
 	<string name="show_railway_warnings">Jernbaneoverskæringer</string>
 	<string name="show_pedestrian_warnings">Fodgængerovergange</string>
     <string name="speak_pedestrian">Fodgængerovergange</string>
+    <string name="rendering_value__name">Standard</string>
+	<string name="save_track_to_gpx_globally_headline">On demand sporingslogning</string>
+	<string name="navigation_over_track">Start navigation over spor?</string>
+	<string name="avoid_roads_msg">Du kan ændre ruten ved at vælge veje der skal undgås</string>
+    <string name="recents">SENESTE</string>
+	<string name="proxy_pref_title">Proxy</string>
+    <string name="proxy_pref_descr">Opsæt en proxy internetkommunikation</string>
+    <string name="settings_privacy">Privatliv</string>
+    <string name="enable_proxy_title">Aktiver HTTP proxy</string>
+	<string name="enable_proxy_descr">Konfigurer HTTP-proxy for alle netværksanmodninger</string>
+	<string name="proxy_host_title">Proxy vært</string>
+	<string name="proxy_host_descr">Konfigurer proxy værtsnavn (f.eks. 127.0.0.1)</string>
+	<string name="proxy_port_title">Proxy port</string>
+	<string name="proxy_port_descr">Konfigurer proxy portnummer (f.eks. 8118)</string>
+	<string name="rendering_attr_streetLighting_name">Gadebelysning</string>
     </resources>

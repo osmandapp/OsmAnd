@@ -3,6 +3,8 @@ package net.osmand.osm;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.osmand.PlatformUtil;
 
@@ -14,6 +16,7 @@ public class MapPoiTypes {
 	private static MapPoiTypes DEFAULT_INSTANCE = null;
 	private static final Log log = PlatformUtil.getLog(MapRenderingTypes.class);
 	private String resourceName;
+	private List<PoiCategory> categories = new ArrayList<PoiCategory>(); 
 	
 	public MapPoiTypes(String fileName){
 		this.resourceName = fileName;
@@ -38,22 +41,30 @@ public class MapPoiTypes {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			int tok;
 			parser.setInput(is, "UTF-8");
-			String parentCategory = null;
-			String poiParentCategory = null;
-			String poiParentPrefix  = null;
-			String order = null;
+			PoiCategory lastCategory = null;
+			PoiFilter lastFilter = null;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					String name = parser.getName();
-					if (name.equals("category")) { //$NON-NLS-1$
-						parentCategory = parser.getAttributeValue("","name");
-						poiParentCategory = parser.getAttributeValue("","poi_category");
-						poiParentPrefix = parser.getAttributeValue("","poi_prefix");
-						order = parser.getAttributeValue("","order");
+					if (name.equals("category")) { 
+						lastCategory = new PoiCategory(this, parser.getAttributeValue("","name"));
+						categories.add(lastCategory);
+					} else if(name.equals("poi_type")){
+						PoiType tp = new PoiType(this,
+								lastCategory, parser.getAttributeValue("","name"));
+						lastCategory.addPoiType(tp);
+						if(lastFilter != null) {
+							lastFilter.addPoiType(tp);
+						}
+					}
+				} else if (tok == XmlPullParser.END_TAG) {
+					String name = parser.getName();
+					if (name.equals("poi_filter")) { 
+						lastFilter = null;
 					}
 				}
 			}
-			log.info("Time to init " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
+			log.info("Time to init poi types" + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 			is.close();
 		} catch (IOException e) {
 			log.error("Unexpected error", e); //$NON-NLS-1$
@@ -68,5 +79,9 @@ public class MapPoiTypes {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public static void main(String[] args) {
+		getDefault()	;
 	}
 }

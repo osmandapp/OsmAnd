@@ -30,7 +30,7 @@
   <string name="live_monitoring_interval">Intervallo del Live tracking</string>
   <string name="live_monitoring_url_descr">Specifica l\'indirizzo internet con la sintassi dei parametri: lat={0}, lon={1}, data/ora={2}, hdop={3}, altitudine={4}, velocità={5}, angolo={6}</string>
   <string name="live_monitoring_url">Indirizzo internet per il tracking in diretta</string>
-  <string name="gpx_monitoring_disabled_warn">Abilita nelle impostazioni \'Registrazione della traccia nel file GPX\'.</string>
+  <string name="gpx_monitoring_disabled_warn">Registra la traccia usando il widget GPX o le impostazioni \'Registrazione viaggi\'.</string>
   <string name="show_current_gpx_title">Visualizza la traccia corrente</string>
   <string name="tip_recent_changes_0_7_0_t">Novità della v. 0.7.0:
 		\n\t- Articoli di Wikipedia accessibili offline
@@ -94,7 +94,7 @@
   <string name="init_native_library">Inizializzazione libreria nativa…</string>
   <string name="choose_auto_follow_route">Centra automaticamente la mappa</string>
   <string name="choose_auto_follow_route_descr">Scegli intervallo di tempo per seguire automaticamente la posizione attuale</string>
-  <string name="auto_follow_route_never">Mai</string>
+  <string name="auto_follow_route_never">Mai (tap sulla freccia blu per avviare la navigazione manualmente)</string>
   <string name="auto_follow_route_navigation">Centra automaticamente solo in navigazione</string>
   <string name="auto_follow_route_navigation_descr">Centra automaticamente la visione della mappa solo durante la navigazione.</string>
   <string name="auto_follow_location_enabled">Visualizzazione mappa centrata automaticamente.</string>
@@ -141,7 +141,7 @@
   <string name="search_position_undefined">Non definito</string>
   <string name="search_position_fixed">Fissato</string>
   <string name="search_position_current_location">Posizione corrente…</string>
-  <string name="search_position_map_view">Ultima vista mappa</string>
+  <string name="search_position_map_view">Attuale centro della mappa</string>
   <string name="select_search_position">Origine:</string>
   <string name="context_menu_item_search">Cerca nelle vicinanze</string>
   <string name="tip_recent_changes_0_6_7_t">Novità nella versione 0.6.7:
@@ -275,7 +275,7 @@
   <string name="search_offline_geo_error">Impossibile leggere geo intent \'%s\'</string>
   <string name="search_osm_offline">Ricerca indirizzo usando le mappe offline</string>
   <string name="system_locale">Sistema</string>
-  <string name="preferred_locale_descr">Seleziona lingua interfaccia</string>
+  <string name="preferred_locale_descr">Seleziona lingua interfaccia (si prega di riavviare OsmAnd dopo il cambio)</string>
   <string name="preferred_locale">Lingua interfaccia</string>
   <string name="tip_map_switch">Scegli una Fonte della Mappa</string>
   
@@ -353,7 +353,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Il formato dati mappa \'\'{0}\'\' è deprecato e non è supportato</string>
   <string name="poi_filter_car_aid">Servizi automobile</string>
-  <string name="poi_filter_closest_poi">Tutti i PDI più vicini</string>
+  <string name="poi_filter_closest_poi">PDI più vicini</string>
   <string name="poi_filter_custom_filter">Filtro personalizzato</string>
   <string name="poi_filter_food_shop">Alimentari</string>
   <string name="poi_filter_for_tourists">Turistico</string>
@@ -509,7 +509,7 @@
   <string name="first_time_download">Scarica le regioni</string>
   <string name="first_time_msg">Grazie di utilizzare OsmAnd. Per molte delle caratteristiche dell\'applicazione, hai bisogno dei dati offline locali, che possono essere scaricati da \'Impostazioni\'→\'Gestisci i file mappe\'. Sarà poi possibile visualizzare mappe, cercare indirizzi, PDI, e trovare trasporti pubblici.</string>
   <string name="search_poi_location">Ricerca segnale GPS…</string>
-  <string name="search_near_map">Ricerca vicino all\'ultima posizione sulla mappa</string>
+  <string name="search_near_map">Ricerca vicino all\'attuale centro della mappa</string>
   <string name="search_nearby">Ricerca vicino</string>
   <string name="map_orientation_default">Orientamento predefinito</string>
   <string name="map_orientation_portrait">Verticale</string>
@@ -751,7 +751,7 @@
   <string name="poi_dialog_comment_default">Cambio PDI</string>
   <string name="poi_dialog_other_tags_message">Tutte le altre etichette sono conservate</string>
   <string name="default_buttons_commit">Esegui</string>
-  <string name="default_buttons_reset">Ripristina</string>
+  <string name="default_buttons_reset">Cancella</string>
   <string name="filter_current_poiButton">Filtro</string>
   <string name="edit_filter_delete_menu_item">Elimina</string>
   <string name="edit_filter_save_as_menu_item">Salva come</string>
@@ -1038,13 +1038,13 @@
 		\n\t* \'Nella direzione del movimento\' - La mappa sarà sempre allineata alla vostra direzione
 		\n\t* \'Con la bussola\' - La mappa sarà sempre allineata alla lettura della bussola del dispositivo
 	</string>
-<string name="tip_day_night_mode_t_v2">"Per le mappe vettoriali offline, l\'aspetto della mappa può essere cambiato fra diurno (luminoso) e notturno (scuro). I colori notturni sono più sicuri e meno fastidiosi per la guida di notte.
+<string name="tip_day_night_mode_t_v2">"Per le mappe vettoriali l\'aspetto della mappa può essere cambiato fra diurno (luminoso) e notturno (scuro). I colori notturni sono più sicuri e meno fastidiosi per la guida di notte.
 \n\nSi può impostare una regola per il cambio giorno/notte in \'Menu\' → \'Configura la mappa\' → \'Mappa giorno/notte\'.
 \n\nLe opzioni sono:
 \n\t* \'Alba/Tramonto\': automatico, in base alla posizione del sole (preimpostato)
 \n\t* \'Giorno\': usa sempre il modo diurno
 \n\t* \'Notte\': usa sempre il modo notturno
-\n\t* \'Sensore di luminosità\': l\'aspetto della mappa è controllato dal sensore di luminosità del dispositivo (solo se presente) "</string>
+\n\t* \'Sensore luce\': l\'aspetto della mappa è controllato dal sensore di luminosità del dispositivo (solo se presente) "</string>
 <string name="tip_map_switch_t_v2">"La sorgente della mappa e i livelli visualizzati sono cambiati attraverso \'Menu\'-&gt;\'Configura la mappa\'.
 \n\nSotto \'Sorgente mappa…\' puoi scegliere di usare le mappe vettoriali offline precaricate (predefinito, sono necessarie anche per la navigazione offline), le sorgenti di tasselli predefinite -online o caricate in cache offline- (attiva il plugin \'Mappe online\' in \'Impostazioni\' → \'Gestore plugin\' per averle), o mappe create manualmente usando per esempio OsmAndMapCreator sul PC.
 \n\nOsmAnd supporta anche sorgenti personalizzate. "</string>
@@ -1211,8 +1211,8 @@
     <string name="recording_can_not_be_played">La registrazione non può essere riprodotta</string>
     <string name="recording_context_menu_delete">Elimina la registrazione</string>
     <string name="recording_context_menu_play">Riproduci</string>
-    <string name="recording_description">Registrazione %1$s %2$s di %3$s</string>
-    <string name="recording_default_name">registrazione</string>
+    <string name="recording_description">Registrazione %1$s %3$s %2$s</string>
+    <string name="recording_default_name">Registrazione in corso</string>
     <string name="av_control_stop">Ferma</string>
     <string name="av_control_start">Avvia</string>
     <string name="map_widget_av_notes">Note audio/video</string>
@@ -1225,7 +1225,7 @@
     <string name="recording_context_menu_show">Visualizza</string>
     <string name="av_def_action_picture">Scatta una foto</string>
     <string name="recording_context_menu_precord">Scatta una foto</string>
-    <string name="recording_photo_description">Foto %1$s a %2$s</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="stop_routing_confirm">Sei sicuro di voler fermare la navigazione?</string>
     <string name="clear_dest_confirm">Sei sicuro di voler eliminare la tua destinazione (e i punti intermedi)?</string>
     <string name="precise_routing_mode_descr">Abilita per calcolare percorsi precisi senza intoppi. È lento e limitato in distanza.</string>
@@ -1444,7 +1444,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="use_magnetic_sensor_descr">Utilizza il sensore magnetico per determinare il valore della bussola invece del sensore di orientamento</string>
     <string name="use_magnetic_sensor">Utilizza il sensore magnetico (bussola)</string>
     <string name="local_indexes_cat_srtm">Dati isocline</string>
-    <string name="use_kalman_filter_compass_descr">Usare il filtro di Kalman per evitare aberrazioni della bussola</string>
+    <string name="use_kalman_filter_compass_descr">Riduce il rumore delle letture della bussola ma introduce dell\'inerzia</string>
     <string name="use_kalman_filter_compass">Uso del filtro di Kalman</string>
     <string name="access_mark_final_location_first">Modalità di accesso facilitato: selezionare prima la destinazione</string> 
     <string name="wait_current_task_finished">Prego attendere il termine dell\'operazione</string>
@@ -1723,7 +1723,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_plugin_description">"OpenStreetMap monitoraggio avanzato in diretta, vedi http://osmo.mobi. Fornisce la possibilità di tracciare altri dispositivi e di essere tracciati. Crea gruppo anonimi, condivide reciprocamente la posizione e comunica. Sono disponibili varie impostazioni di monitoraggio, per la sessione in corso o permanenti. I gruppi anonimi sono limitati a un numero di giorni e alcune funzioni es. non c\'è il controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. "</string>
     <string name="osmo_plugin_name">OsMo (Monitoraggio avanzato in tempo reale)</string>
     <string name="osmo_settings">Monitoraggio OpenStreetMap</string>
-   	<string name="keep_informing_never">Mai</string>
+   	<string name="keep_informing_never">Solo manualmente (tap sulla freccia)</string>
     <string name="keep_informing_descr">Annuncia nuovamente a intervalli regolari le indicazioni di navigazione</string>
     <string name="keep_informing">Ripeti le istruzioni di navigazione</string>
 	<string name="arrival_distance">Annuncio arrivo</string>
@@ -1859,7 +1859,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="local_index_unselect_gpx_file">Deseleziona</string>
     <string name="local_index_select_gpx_file">Seleziona per visualizzarlo</string>
     <string name="route_descr_destination">Destinazione</string>
-    <string name="no_index_file_to_download">Niente da scaricare, per favore controllare la connessione internet.</string>
+    <string name="no_index_file_to_download">Non è stato trovato niente da scaricare, per favore controllare la connessione internet.</string>
     <string name="osmo_gpx_points_downloaded">Scaricati %1$s punti OsMo.</string>
     <string name="osmo_auto_connect_descr">Connettiti al servizio automaticamente dopo l\'accensione</string>
     <string name="osmo_auto_connect">Connesione automatica</string>
@@ -1996,11 +1996,11 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_attr_trolleybusRoutes_name">Percorsi in filobus</string>
     <string name="rendering_attr_busRoutes_name">Percorsi in bus</string>
     <string name="rendering_attr_tramTrainRoutes_name">Percorsi tram e treno</string>
-    <string name="select_impassable_road">Seleziona nella mappa</string>
+    <string name="select_impassable_road">Seleziona nella mappa…</string>
     <string name="impassable_road">Evita strade …</string>
     <string name="rendering_category_hide">Nascondi</string>
     <string name="wake_on_voice">Accendi lo schermo</string>
-    <string name="wake_on_voice_descr">Accendi lo schermo all\'approssimarsi di una svolta</string>
+    <string name="wake_on_voice_descr">Accendi lo schermo (se spento) all\'approssimarsi di una svolta</string>
     <string name="wake_on_voice_never">Mai</string>
     <string name="lock_screen_request_explanation">%1$s necessita di questa autorizzazione per spegnere lo schermo per la funzionalità di risparmio energetico.</string>
     <string name="advanced_settings">Avanzato</string>
@@ -2036,11 +2036,26 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_orange_name">Arancione</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlante strade tedesche</string>
     <string name="rendering_value_americanRoadAtlas_name">Atlante strade americane</string>
-    <string name="routing_attr_no_new_routing_name">Non usare il calcolo del percorso v1.9</string>
+    <string name="routing_attr_no_new_routing_name">Ignora le regole di calcolo del percorso v1.9</string>
     <string name="routing_attr_no_new_routing_description">Non usare le regole di calcolo del percorso introdotte nella v1.9</string>
     <string name="traffic_warning_railways">Passaggio a livello</string>
 	<string name="traffic_warning_pedestrian">Attraversamento pedonale</string>
 	<string name="show_railway_warnings">Mostra i passaggi a livello</string>
 	<string name="show_pedestrian_warnings">Mostra gli attraversamenti pedonali</string>
     <string name="speak_pedestrian">Annuncia gli attraversamenti pedonali</string>
+    <string name="rendering_value__name">Preimpostato</string>
+	<string name="navigation_over_track">Iniziare la navigazione sulla traccia?</string>
+	<string name="avoid_roads_msg">Puoi variare il percorso selezionando le strade da evitare</string>
+    <string name="save_track_to_gpx_globally_headline">Registrazione della traccia su richiesta</string>
+	<string name="recents">RECENTI</string>
+	<string name="enable_proxy_title">Abilita HTTP Proxy</string>
+	<string name="enable_proxy_descr">Configura HTTP Proxy per tutte le richieste della rete</string>
+	<string name="proxy_host_title">Proxy Host</string>
+	<string name="proxy_host_descr">Configura il tuo proxy hostname (es. 127.0.0.1)</string>
+	<string name="proxy_port_title">Porta Proxy</string>
+	<string name="proxy_port_descr">Configura il numero della tua porta proxy (es. 8118)</string>
+	<string name="proxy_pref_descr">Imposta una connessione a internet tramite proxy</string>
+    <string name="settings_privacy">Privacy</string>
+    <string name="rendering_attr_streetLighting_name">Illuminazione stradale</string>
+    <string name="proxy_pref_title">Proxy</string>
     </resources>

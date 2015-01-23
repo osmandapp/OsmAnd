@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
-  <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
+  <string name="recording_photo_description">Fotografia %1$s %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
   <string name="enable_plugin_monitoring_services">Na použitie služieb pre záznam pozície zapnite monitorovacie zásuvné moduly (stopovanie, stopovanie naživo)</string>
@@ -229,7 +229,7 @@
   <string name="live_monitoring_interval">Interval stopovania naživo</string>
   <string name="live_monitoring_url_descr">Zadajte webovú adresu stopovania naživo so syntaxom parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Webová adresa stopovania naživo</string>
-  <string name="gpx_monitoring_disabled_warn">Prosím, zapnite "Logovať stopu do GPX súboru" v stopovacích nastaveniach.</string>
+  <string name="gpx_monitoring_disabled_warn">Zaznamenajte stopu pomocou GPX nástroja alebo cez nastavenia \"Záznamenávanie výletu\".</string>
   <string name="show_current_gpx_title">Zobraziť aktuálnu stopu</string>
   <string name="tip_recent_changes_0_7_0_t">"Zmeny vo verzii 0.7.0 :
 \n\t- Údaje článkov offline wikipedie
@@ -276,7 +276,7 @@
   <string name="init_native_library">Inicializácia natívnej knižnice…</string>
   <string name="choose_auto_follow_route">Automatické centrovanie</string>
   <string name="choose_auto_follow_route_descr">Čas pokiaľ sa mapové zobrazenie zosynchronizuje s pozíciou</string>
-  <string name="auto_follow_route_never">Nikdy</string>
+  <string name="auto_follow_route_never">Nikdy (použite modrú šípku pre spustenie pokynov)</string>
   <string name="auto_follow_route_navigation">Autom. nasledovanie iba pri navigácii</string>
   <string name="auto_follow_route_navigation_descr">Povoliť autom. nasledovanie pozície iba v režime navigácie.</string>
   <string name="auto_follow_location_enabled">Automatické nasledovanie je povolené.</string>
@@ -472,7 +472,7 @@
   <string name="search_offline_geo_error">Nedá sa parsovať geo obsah: "%s"</string>
   <string name="search_osm_offline">Nájsť adresu použitím stiahnutých máp</string>
   <string name="system_locale">Systémový</string>
-  <string name="preferred_locale_descr">Zmeniť zobrazovaný jazyk</string>
+  <string name="preferred_locale_descr">Zmeniť zobrazovaný jazyk (po zmene je potrebné reštartovať OsmAnd)</string>
   <string name="preferred_locale">Jazyk zobrazenia</string>
   <string name="tip_map_switch">Vyberte zdroj mapy</string>
   
@@ -950,7 +950,7 @@
   <string name="poi_dialog_comment_default">Zmena POI</string>
   <string name="poi_dialog_other_tags_message">Všetky ostatné tagy ponechané</string>
   <string name="default_buttons_commit">Uložiť</string>
-  <string name="default_buttons_reset">Reset</string>
+  <string name="default_buttons_reset">Vymazať</string>
   <string name="filter_current_poiButton">Filter</string>
   <string name="edit_filter_delete_menu_item">Vymazať</string>
   <string name="edit_filter_save_as_menu_item">Uložiť ako</string>
@@ -1157,8 +1157,8 @@
     <string name="recording_can_not_be_played">Nahrávanie nemôže byť prehrané</string>
     <string name="recording_context_menu_delete">Odstrániť záznam</string>
     <string name="recording_context_menu_play">Prehrať</string>
-    <string name="recording_description">Záznam %1$s %2$s v %3$s</string>
-    <string name="recording_default_name">nahrávka</string>
+    <string name="recording_description">Záznam %1$s %2$s %3$s</string>
+    <string name="recording_default_name">Nahrávka</string>
     <string name="av_control_stop">Zastaviť</string>
     <string name="av_control_start">Nahrať</string>
     <string name="map_widget_av_notes">Zvukové poznámky</string>
@@ -1700,7 +1700,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_plugin_description">"OpenStreetMap pokročilé sledovanie naživo, pozrite http://osmo.mobi. Ponúka možnosti sledovania iných zariadení a byť sledovaný. Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania. Anonymné skupiny sú obmedzené na počet dní a pre niektoré funkcie nie je diaľkové ovládanie ani administrátor skupiny. Plne funkčné skupiny sa vytvárajú na webstránke a sú prístupné len registrovaným používateľom. "</string>
     <string name="osmo_plugin_name">OsMo</string>
     <string name="osmo_settings">OpenStreetMap sledovanie</string>
-   	<string name="keep_informing_never">Nikdy</string>
+   	<string name="keep_informing_never">Len ručne (použiť šípku)</string>
     <string name="keep_informing_descr">Opakuj navigačné pokyny v pravidelných intervaloch</string>
     <string name="keep_informing">Opakuj navigačné pokyny</string>
 	<string name="arrival_distance">Oznámenie príjazdu</string>
@@ -1981,7 +1981,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_busRoutes_name">Autobusové linky</string>
     <string name="wake_on_voice">Rozsvietiť obrazovku</string>
     <string name="wake_on_voice_descr">Rozsvietiť obrazovku keď sa blíži odbočenie</string>
-    <string name="select_impassable_road">Vybrať na mape</string>
+    <string name="select_impassable_road">Vybrať na mape…</string>
     <string name="impassable_road">Vyhnúť sa cestám…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Linky električiek a vlakov</string>
     <string name="rendering_category_hide">Skryť</string>
@@ -2001,7 +2001,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="everything_up_to_date">Všetky súbory sú aktuálne</string>
     <string name="use_opengl_render">Použiť vykresľovanie OpenGL</string>
     <string name="use_opengl_render_descr">Použiť hardvérovo urýchľované vykresľovanie pomocou OpenGL (nemusí na niektorých zariadeniach fungovať)</string>
-    <string name="no_internet_connection">Sťahovanie nie je možné, prosím pripojte sa na WiFi, aby bolo možné pokračovať.</string>
+    <string name="no_internet_connection">Sťahovanie nie je možné, prosím skontrolujte pripojenie na Internet.</string>
     <string name="navigate_point_zone">Zóna</string>
     <string name="download_tab_downloads">Všetky sťahovania</string>
     <string name="download_tab_updates">Aktualizácie</string>
@@ -2027,4 +2027,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="routing_attr_no_new_routing_name">Bez smerovacích pravidiel verzie 1.9</string>
     <string name="routing_attr_no_new_routing_description">Nepoužívať pravidlá výpočtu trasy zavedené vo verzii 1.9</string>
     <string name="speak_pedestrian">Oznamovať priechody pre chodcov</string>
-    </resources>
+    <string name="rendering_value__name">Predvolené</string>
+	<string name="save_track_to_gpx_globally_headline">Záznam trasy v prípade potreby</string>
+	<string name="navigation_over_track">Spustiť navigáciu po stope?</string>
+	<string name="avoid_roads_msg">Môžete zmeniť trasu zvolením ciest, ktorým je nutné sa vyhnúť</string>
+    <string name="recents">NEDÁVNE</string>
+	</resources>

@@ -7,6 +7,11 @@ import java.io.File;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.Window;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -26,13 +31,10 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Window;
-
 /**
  *
  */
-public class FavouritesActivity extends SherlockFragmentActivity {
+public class FavouritesActivity extends ActionBarActivity {
 
 	private static final String FAVOURITES_INFO = "FAVOURITES_INFO";
 	private static final String TRACKS = "TRACKS";
@@ -51,8 +53,7 @@ public class FavouritesActivity extends SherlockFragmentActivity {
         //This has to be called before setContentView and you must use the
         //class in com.actionbarsherlock.view and NOT android.view
 		((OsmandApplication) getApplication()).applyTheme(this);
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(icicle);
 		setSupportProgressBarIndeterminateVisibility(false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -71,9 +72,7 @@ public class FavouritesActivity extends SherlockFragmentActivity {
 		}
 		
 		if(!hasGpx) {
-			FrameLayout fl = new FrameLayout(this);
-			fl.setId(R.id.layout);
-			setContentView(fl);
+			setContentView(R.layout.search_activity_single);
 			getSupportFragmentManager().beginTransaction().add(R.id.layout, new FavouritesTreeFragment()).commit();
 		} else {
 			setContentView(R.layout.tab_content);
@@ -139,9 +138,16 @@ public class FavouritesActivity extends SherlockFragmentActivity {
 		}
 	}
 
+	public Toolbar getClearToolbar(boolean visible) {
+		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);
+		tb.setTitle(null);
+		tb.getMenu().clear();
+		tb.setVisibility(visible? View.VISIBLE : View.GONE);
+		return tb;
+	}
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
 		case android.R.id.home:

@@ -494,6 +494,33 @@ public class BinaryRoutePlanner {
 		}
 		return directionAllowed;
 	}
+	
+	private boolean checkViaRestrictions(RouteSegment from, RouteSegment to) {
+		if(from != null && to != null) {
+			long fid = to.getRoad().getId();
+			for(int i = 0; i < from.getRoad().getRestrictionLength(); i++) {
+				long id = from.getRoad().getRestrictionId(i);
+				if(fid == id) {
+					int tp = from.getRoad().getRestrictionType(i);
+					if(tp == MapRenderingTypes.RESTRICTION_NO_LEFT_TURN || 
+							tp == MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN || 
+							tp == MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON || 
+							tp == MapRenderingTypes.RESTRICTION_NO_U_TURN) {
+						return false;
+					}
+					break;
+				}
+			}
+		}
+		return true;
+	}
+	
+	private RouteSegment getParentDiffId(RouteSegment s) {
+		while(s.getParentRoute() != null && s.getParentRoute().getRoad().getId() == s.getRoad().getId()) {
+			s = s.getParentRoute();
+		}
+		return s.getParentRoute();
+	}
 
 	private boolean checkIfOppositieSegmentWasVisited(final RoutingContext ctx, boolean reverseWaySearch,
 			PriorityQueue<RouteSegment> graphSegments, RouteSegment segment, TLongObjectHashMap<RouteSegment> oppositeSegments,
@@ -502,20 +529,24 @@ public class BinaryRoutePlanner {
 		long opp = calculateRoutePointId(road, segment.isPositive() ? segmentPoint - 1 : segmentPoint, !segment.isPositive());
 		if (oppositeSegments.containsKey(opp)) {
 			RouteSegment opposite = oppositeSegments.get(opp);
-			FinalRouteSegment frs = new FinalRouteSegment(road, segmentPoint);
-			float distStartObstacles = segment.distanceFromStart
-					+ calculateTimeWithObstacles(ctx, road, segmentDist, obstaclesTime);
-			frs.setParentRoute(segment);
-			frs.setParentSegmentEnd(segmentPoint);
-			frs.reverseWaySearch = reverseWaySearch;
-			frs.distanceFromStart = opposite.distanceFromStart + distStartObstacles;
-			frs.distanceToEnd = 0;
-			frs.opposite = opposite;
-			graphSegments.add(frs);
-			if(TRACE_ROUTING){
-				printRoad("  >> Final segment : ", frs, reverseWaySearch);
+			RouteSegment to = reverseWaySearch ? getParentDiffId(segment) : getParentDiffId(opposite);
+			RouteSegment from = !reverseWaySearch ? getParentDiffId(segment) : getParentDiffId(opposite);
+			if (checkViaRestrictions(from, to)) {
+				FinalRouteSegment frs = new FinalRouteSegment(road, segmentPoint);
+				float distStartObstacles = segment.distanceFromStart
+						+ calculateTimeWithObstacles(ctx, road, segmentDist, obstaclesTime);
+				frs.setParentRoute(segment);
+				frs.setParentSegmentEnd(segmentPoint);
+				frs.reverseWaySearch = reverseWaySearch;
+				frs.distanceFromStart = opposite.distanceFromStart + distStartObstacles;
+				frs.distanceToEnd = 0;
+				frs.opposite = opposite;
+				graphSegments.add(frs);
+				if (TRACE_ROUTING) {
+					printRoad("  >> Final segment : ", frs, reverseWaySearch);
+				}
+				return true;
 			}
-			return true;
 		}
 		return false;
 	}
@@ -554,17 +585,30 @@ public class BinaryRoutePlanner {
 	}
 
 
-	private boolean proccessRestrictions(RoutingContext ctx, RouteDataObject road, RouteSegment inputNext, boolean reverseWay) {
-		ctx.segmentsToVisitPrescripted.clear();
-		ctx.segmentsToVisitNotForbidden.clear();
-		boolean exclusiveRestriction = false;
-		RouteSegment next = inputNext;
-		if (!reverseWay && road.getRestrictionLength() == 0) {
-			return false;
-		}
+	private boolean proccessRestrictions(RoutingContext ctx, RouteSegment segment, RouteSegment inputNext, boolean reverseWay) {
 		if(!ctx.getRouter().restrictionsAware()) {
 			return false;
 		}
+		RouteDataObject road = segment.getRoad();
+		RouteSegment parent = getParentDiffId(segment);
+		if (!reverseWay && road.getRestrictionLength() == 0 && 
+				(parent == null || parent.getRoad().getRestrictionLength() == 0)) {
+			return false;
+		}
+		ctx.segmentsToVisitPrescripted.clear();
+		ctx.segmentsToVisitNotForbidden.clear();
+		processRestriction(ctx, inputNext, reverseWay, false, road);
+		if(parent != null) {
+			processRestriction(ctx, inputNext, reverseWay, true, parent.getRoad());
+		}
+		return true;
+	}
+
+
+	protected void processRestriction(RoutingContext ctx, RouteSegment inputNext, boolean reverseWay, boolean via,
+			RouteDataObject road) {
+		RouteSegment next = inputNext;
+		boolean exclusiveRestriction = false;
 		while (next != null) {
 			int type = -1;
 			if (!reverseWay) {
@@ -607,26 +651,32 @@ public class BinaryRoutePlanner {
 			} else if (type == MapRenderingTypes.RESTRICTION_NO_LEFT_TURN || type == MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN
 					|| type == MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON || type == MapRenderingTypes.RESTRICTION_NO_U_TURN) {
 				// next = next.next; continue;
+				if(via) {
+					ctx.segmentsToVisitPrescripted.remove(next);
+				}
 			} else if (type == -1) {
 				// case no restriction
 				ctx.segmentsToVisitNotForbidden.add(next);
 			} else {
-				// case exclusive restriction (only_right, only_straight, ...)
-				// 1. in case we are going backward we should not consider only_restriction
-				// as exclusive because we have many "in" roads and one "out"
-				// 2. in case we are going forward we have one "in" and many "out"
-				if (!reverseWay) {
-					exclusiveRestriction = true;
-					ctx.segmentsToVisitNotForbidden.clear();
-					ctx.segmentsToVisitPrescripted.add(next);
-				} else {
-					ctx.segmentsToVisitNotForbidden.add(next);
+				if (!via) {
+					// case exclusive restriction (only_right, only_straight, ...)
+					// 1. in case we are going backward we should not consider only_restriction
+					// as exclusive because we have many "in" roads and one "out"
+					// 2. in case we are going forward we have one "in" and many "out"
+					if (!reverseWay) {
+						exclusiveRestriction = true;
+						ctx.segmentsToVisitNotForbidden.clear();
+						ctx.segmentsToVisitPrescripted.add(next);
+					} else {
+						ctx.segmentsToVisitNotForbidden.add(next);
+					}
 				}
 			}
 			next = next.next;
 		}
-		ctx.segmentsToVisitPrescripted.addAll(ctx.segmentsToVisitNotForbidden);
-		return true;
+		if(!via) {
+			ctx.segmentsToVisitPrescripted.addAll(ctx.segmentsToVisitNotForbidden);
+		}
 	}
 	
 	
@@ -643,7 +693,7 @@ public class BinaryRoutePlanner {
 		if(inputNext != null && inputNext.getRoad().getId() == segment.getRoad().getId() && inputNext.next == null) {
 			thereAreRestrictions = false;
 		} else {
-			thereAreRestrictions = proccessRestrictions(ctx, segment.road, inputNext, reverseWaySearch);
+			thereAreRestrictions = proccessRestrictions(ctx, segment, inputNext, reverseWaySearch);
 			if (thereAreRestrictions) {
 				nextIterator = ctx.segmentsToVisitPrescripted.iterator();
 				if (TRACE_ROUTING) {

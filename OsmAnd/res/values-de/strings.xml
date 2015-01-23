@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -38,6 +38,7 @@
 	<string name="background_service_int_descr">GPS Aufwach-Intervall für Hintergrunddienst</string>
 	<string name="background_service_int">GPS Aufwach-Intervall</string>
 	<string name="save_track_to_gpx_globally">Aufzeichnung in GPX-Datei</string>
+	<string name="save_track_to_gpx_globally_headline">GPX-Aufzeichnung bei Bedarf</string>
 	<string name="save_track_to_gpx_globally_descr">Generelle Positionsaufzeichnung kann man mit der Schaltfläche \'GPX-Aufnahme\' direkt auf dem Kartenbildschirm aktivieren oder deaktivieren</string>
 	<string name="save_current_track">Track jetzt speichern</string>
 	<string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
@@ -125,30 +126,7 @@
 	<string name="snap_to_road">Auf Straße einrasten</string>
 	<string name="osmand_play_title_30_chars">OsmAnd Karten &amp; Navigation</string>
 	<string name="osmand_short_description_80_chars">Globale Landkarten- und Navigations-Applikation für Offline und Online-Karten</string>
-	<string name="osmand_long_description_1000_chars">
-		OsmAnd (OSM Automated Navigation Directions)
-
-		OsmAnd ist eine Open-Source-Navigationsapplikation mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap (OSM) Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine offline und online Routing-Funktion inklusive Sprachnavigation.
-
-		Einige der Kernfunktionen:
-		- Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden)
-		- Kompakte Vektorkarten für die ganze Welt verfügbar
-		- Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus
-		- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz
-		- Offline Adress- und POI-Suche
-		- Offlinenavigation für kurze Distanzen (experimentell)
-		- Auto-, Fahrrad- und Fußgänger-Modus mit
-		-  optionaler automatischer Tag-Nacht-Umschaltung der Anzeige
-		-  optionalem geschwindigkeitsabhängigem Kartenmaßstab
-		-  optionaler Kartenausrichtung nach Kompass oder Bewegungsrichtung
-		-  optionaler Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
-
-		Einschränkungen dieser kostenlosen Version von OsmAnd:
-		- Anzahl der Kartendownloads
-		- Kein Zugriff auf Wikipedia Offline-POIs
-
-		OsmAnd wird aktiv weiterentwickelt und das Projekt benötigt Mittel für die Entwicklung, die Komplettierung und den Test (Fahrten) neuer Funktionen. Bitte erwägen Sie den Kauf von OsmAnd+, die Förderung spezieller Funktionen oder eine allgemeine Spende auf osmand.net.
-	</string>
+	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd ist eine Open-Source-Navigationsapplikation mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap (OSM) Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine offline und online Routing-Funktion inklusive Sprachnavigation. Einige der Kernfunktionen: - Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden) - Kompakte Vektorkarten für die ganze Welt verfügbar - Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus - Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz - Offline Adress- und POI-Suche - Offlinenavigation für kurze Distanzen (experimentell) - Auto-, Fahrrad- und Fußgänger-Modus mit - optionaler automatischer Tag-Nacht-Umschaltung der Anzeige - optionalem geschwindigkeitsabhängigem Kartenmaßstab - optionaler Kartenausrichtung nach Kompass oder Bewegungsrichtung - optionaler Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen Einschränkungen dieser kostenlosen Version von OsmAnd: - Anzahl der Kartendownloads - Kein Zugriff auf Wikipedia Offline-POIs OsmAnd wird aktiv weiterentwickelt und das Projekt benötigt Mittel für die Entwicklung, die Komplettierung und den Test (Fahrten) neuer Funktionen. Bitte erwägen Sie den Kauf von OsmAnd+, die Förderung spezieller Funktionen oder eine allgemeine Spende auf osmand.net. "</string>
 	
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Karten &amp; Navigation</string>
 	<string name="osmand_plus_short_description_80_chars">Globale Landkarten- und Navigations-Applikation für Offline und Online-Karten</string>
@@ -393,7 +371,7 @@
 	<string name="init_native_library">Native Bibliothek wird initialisiert…</string>
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
 	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung</string>
-	<string name="auto_follow_route_never">Nie</string>
+	<string name="auto_follow_route_never">Nie (Klick auf blauen Pfeil startet Navigation manuell)</string>
 	<string name="auto_follow_route_navigation">Nachführung nur bei aktiver Navigation</string>
 	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation.</string>
 	<string name="auto_follow_location_enabled">Kartennachführung aktiv.</string>
@@ -661,7 +639,7 @@
 	<string name="local_indexes_cat_backup">Deaktiviert</string>
 	<string name="local_indexes_cat_tts">Sprachansagen (TTS)</string>
 	<string name="local_indexes_cat_voice">Sprachansagen (Aufnahmen)</string>
-	<string name="local_indexes_cat_gpx">GPX-Daten</string>
+	<!-- string name="local_indexes_cat_gpx">GPX-Daten</string -->
 	<string name="local_indexes_cat_tile">Online- und Kachel-Karten</string>
 	<string name="local_indexes_cat_map">Offline-Karten</string>
 	<string name="local_indexes_cat_poi">POI-Daten</string>
@@ -729,7 +707,7 @@
 	<string name="search_offline_geo_error">Konnte geointent nicht verarbeiten: \'%s\'</string>
 	<string name="search_osm_offline">Adresssuche mit Offline-Daten</string>
 	<string name="system_locale">Systemeinstellung</string>
-	<string name="preferred_locale_descr">Anzeigesprache wählen</string>
+	<string name="preferred_locale_descr">Anzeigesprache wählen (OsmAnd nach Änderungen neu starten)</string>
 	<string name="preferred_locale">Anzeigesprache</string>
 	<string name="tip_map_switch">Kartenquelle auswählen</string>
 	<string name="tip_map_switch_t_v2">Die Kartenquelle und die angezeigten Ebenen können in der Kartenansicht über \'Menü\' → \'Karte konfigurieren\' gewählt werden.
@@ -966,9 +944,9 @@
 	<string name="transport_to_go_before">vorherige Strecke</string>
 	<string name="transport_stops_to_pass">zu passierende Haltestellen</string>
 	<string name="transport_route_distance">Streckenlänge</string>
-	<string name="transport">Öffentlicher Personenverkehr</string>
+	<string name="transport">ÖPNV</string>
 	<string name="default_buttons_ok">OK</string>
-	<string name="show_transport_over_map_description">Öffentl. Haltestellen auf der Karte anzeigen</string>
+	<string name="show_transport_over_map_description">ÖPNV-Haltestellen auf der Karte anzeigen</string>
 	<string name="show_transport_over_map">Haltestellen anzeigen</string>
 	<string name="hello">Navigationsanwendung OsmAnd</string>
 	<string name="update_poi_success">POI-Daten wurden erfolgreich aktualisiert ({0} wurden geladen)</string>
@@ -1355,15 +1333,15 @@
 	<string name="recording_delete_confirm">Wollen Sie diese Aufnahme löschen?</string>
 	<string name="recording_unavailable">nicht verfügbar</string>
 	<string name="recording_context_menu_play">Wiedergabe</string>
-	<string name="recording_default_name">Aufnehmen</string>
+	<string name="recording_default_name">Aufnahme</string>
 	<string name="recording_error">Fehler bei der Aufnahme</string>
 	<string name="recording_is_recorded">Audio/Video wird aufgenommen. Zum Stoppen drücken Sie das A/V-Widget.</string>
 	<string name="recording_playing">Aus der angegebenen Aufnahme wird abgespielt.\n%1$s</string>
 	<string name="recording_context_menu_arecord">Audio-Notiz aufnehmen</string>
 	<string name="recording_context_menu_vrecord">Video-Notiz aufnehmen</string>
-	<string name="recording_description">Aufnahme %1$s %2$s von %3$s</string>
+	<string name="recording_description">Aufnahme %1$s %3$s %2$s</string>
 	<string name="recording_context_menu_show">Anzeigen</string>
-	<string name="recording_photo_description">Foto %1$s von %2$s</string>
+	<string name="recording_photo_description">Foto %1$s %2$s</string>
 	<string name="recording_context_menu_precord">Foto aufnehmen</string>
 	<string name="recording_can_not_be_played">Aufnahme kann nicht abgespielt werden</string>
 	<string name="recording_context_menu_delete">Aufnahme löschen</string>
@@ -1538,9 +1516,9 @@
 \n Hinweis 1: Die ursprünglichen Dateien bleiben hiervon unberührt, können aber nachfolgend manuell gelöscht werden.
 \n Hinweis 2: Die Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden."</string>
 	<string name="application_dir_change_warning2">Soll OsmAnd auch die Dateien an den neuen Speicherort verschieben? Mit \'Nein\' wird OsmAnd den neuen Speicherort nur anlegen und als Standard verwenden.</string>
-	<string name="copying_osmand_one_file_descr">Datei (%s) wird an den neuen Speicherort kopiert&#8230;</string>
-	<string name="copying_osmand_files_descr">OsmAnd-Dateien werden zum neuen Speicherort (%s) kopiert&#8230;</string>
-	<string name="copying_osmand_files">OsmAnd-Dateien werden kopiert&#8230;</string>
+	<string name="copying_osmand_one_file_descr">Datei (%s) wird an den neuen Speicherort kopiert…</string>
+	<string name="copying_osmand_files_descr">OsmAnd-Dateien werden zum neuen Speicherort (%s) kopiert…</string>
+	<string name="copying_osmand_files">OsmAnd-Dateien werden kopiert…</string>
 	<string name="calculate_osmand_route_gpx">OsmAnd-Offline-Route berechnen</string>
 	<string name="app_mode_truck">LKW</string>
 	<string name="guidance_preferences_descr">Navigations-Einstellungen</string>
@@ -1571,7 +1549,7 @@
 	<string name="share_fav">Teilen</string>
 	<string name="share_fav_subject">Über OsmAnd geteilte Favoriten</string>
 	<string name="use_points_as_intermediates">Route zwischen Punkten berechnen</string>
-	<string name="keep_informing_never">Niemals</string>
+	<string name="keep_informing_never">Nur manuell (Klick auf Pfeil)</string>
 	<string name="keep_informing_descr">Navigationsanweisungen in regelmäßigen Abständen wiederholen</string>
 	<string name="keep_informing">Navigationsanweisungen wiederholen</string>
 	<string name="arrival_distance">Zielankündigung</string>
@@ -1838,7 +1816,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungs-Einstellungen und des persönlichen Überwachungs-Kanals</string>
-	<string name="osmo_plugin_description">"Erweiterte OpenStreetMap-basierte Live-Überwachung, siehe http://osmo.mobi … Ermöglicht die Positionsdarstellung in von einzelnen Geräten in Echtzeit. Bei anonym erstellten Gruppen sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff."</string>
+	<string name="osmo_plugin_description">"Erweiterte OpenStreetMap-basierte Live-Überwachung, siehe http://osmo.mobi … Ermöglicht die Positionsdarstellung in von einzelnen Geräten in Echtzeit. Bei anonym erstellten Gruppen sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff. "</string>
 	<string name="osmo_plugin_name">OsMo (Erweiterte Live-Überwachung)</string>
 	<string name="osmo_settings">OsMo OpenStreetMap-Überwachung</string>
 	<string name="osmo_io_error">OsMo Verbindungsproblem: </string>
@@ -1930,7 +1908,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="gpx_selection_segment_title">Abschnitt</string>
 	<string name="gpx_selection_number_of_points"> %1$s Punkte</string>
 	<string name="gpx_selection_point">Punkt %1$s</string>
-	<string name="gpx_selection_current_track">Aufnahme</string>
+	<!-- string name="gpx_selection_current_track">Aufnahme</string -->
 	<string name="gpx_selection_route_points">%1$s \nRoutenpunkte %2$s</string>
 	<string name="gpx_selection_points">%1$s \nPunkte</string>
 	<string name="gpx_selection_track">%1$s \nTrack %2$s</string>
@@ -1944,7 +1922,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="gpx_visibility_txt">Sichtbarkeit</string>
 	<string name="gpx_tags_txt">Tags</string>
 	<string name="gpx_description_txt">Beschreibung</string>
-	<string name="gpx_monitoring_disabled_warn">Bitte Aufzeichnung unter \'Einstellungen\' → \'Navigation\' aktivieren.</string>
+	<string name="gpx_monitoring_disabled_warn">Aufzeichnung mit dem GPX-Knopf oder unter \'Einstellungen\' → \'Strecken-Aufzeichnung\' aktivieren.</string>
 	<string name="gpx_navigation">GPX-Route wählen</string>
 	<string name="gpx_option_reverse_route">GPX-Route umkehren</string>
 	<string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
@@ -1997,9 +1975,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_category_others">Sonstiges</string>
     <string name="rendering_attr_tramRoutes_name">Straßenbahnenlinien</string>
     <string name="wake_on_voice">Bildschirm aktivieren</string>
-    <string name="wake_on_voice_descr">Bildschirm bei Navigationsanweisung aktivieren</string>
+    <string name="wake_on_voice_descr">Bildschirm bei Navigationsanweisung aktivieren (falls aus)</string>
     <string name="wake_on_voice_never">Niemals</string>
-    <string name="select_impassable_road">Auswählen auf der Karte</string>
+    <string name="select_impassable_road">Auf Karte auswählen…</string>
     <string name="impassable_road">Straße blockieren…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Straßen- und Eisenbahnlinien</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Stadtbahnlinien</string>
@@ -2044,7 +2022,20 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="show_railway_warnings">Eisenbahnübergänge anzeigen</string>
     <string name="show_pedestrian_warnings">Fußgängerübergänge anzeigen</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikanischer Straßenatlas</string>
-    <string name="routing_attr_no_new_routing_name">Routing v1.9 nicht verwenden</string>
+    <string name="routing_attr_no_new_routing_name">Routing-Regeln v1.9 nicht verwenden</string>
     <string name="routing_attr_no_new_routing_description">Neuen Routenalgorithmus nicht verwenden</string>
     <string name="speak_pedestrian">Fußgängerübergänge ankündigen</string>
+    <string name="rendering_attr_streetLighting_name">Straßenbeleuchtung</string>
+    <string name="proxy_pref_title">Proxy</string>
+    <string name="settings_privacy">Privatsphäre</string>
+    <string name="rendering_value__name">Standard</string>
+	<string name="enable_proxy_title">HTTP-Proxy aktivieren</string>
+	<string name="enable_proxy_descr">HTTP-Proxy für alle Netzwerkanfragen konfigurieren</string>
+	<string name="proxy_host_title">Proxy-Host</string>
+	<string name="proxy_host_descr">Konfigurieren Sie den Hostnamen ihres Proxys (z.B. 127.0.0.1)</string>
+	<string name="proxy_port_title">Proxy-Port</string>
+	<string name="proxy_port_descr">Konfigurieren Sie die Portnummer Ihres Proxys (z.B. 8118)</string>
+	<string name="proxy_pref_descr">Eine Proxy-Internet-Kommunikation aufsetzen</string>
+    <string name="navigation_over_track">Navigation über Strecke starten?</string>
+	<string name="avoid_roads_msg">Sie können die Route ändern, indem Sie die Straßen auswählen, die vermieden werden sollen</string>
     </resources>

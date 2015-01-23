@@ -306,7 +306,7 @@
 	<string name="general_settings_descr">Določi splošne nastavitve</string>
 	<string name="global_app_settings">Splošne nastavitve aplikacije</string>
 	<string name="preferred_locale">Jezik</string>
-	<string name="preferred_locale_descr">Izberite jezik uporabniškega vmesnika</string>
+	<string name="preferred_locale_descr">Izberite jezik uporabniškega vmesnika (ponovno zaženite OsmAnd po zamenjavi)</string>
 	<string name="map_widget_show_destination_arrow">Prikaži smer cilja</string>
     <string name="enable_plugin_monitoring_services">Omogoči vtičnike za nadzor (beleženje, sledenje v živo) za uporabljanje nadzornih storitev</string>
     <string name="non_optimal_route_calculation">Izračunaj morda ne-optimalne poti na dolge razdalje</string>
@@ -505,13 +505,13 @@
 	
 	<string name="choose_auto_follow_route">Avtomatsko centriranje zemljevida</string>
 	<string name="choose_auto_follow_route_descr">Čas za avtomatsko centriranje zemljevida s trenutnim položajem</string>
-	<string name="auto_follow_route_never">Nikoli</string>
+	<string name="auto_follow_route_never">Nikoli (tapnite modro puščico za ročni začetek usmerjanja)</string>
 	<string name="fast_route_mode">Najhitrejša pot</string>
 	<string name="fast_route_mode_descr">Vključi za najhitrejšo oz. izključi za najkrajšo pot </string>
 	<string name="search_position_undefined">Nedoločeno</string>
 	<string name="search_position_fixed">" "</string>
 	<string name="search_position_current_location">Trenutni položaj …</string>
-	<string name="search_position_map_view">Zadnji pogled zemljevida</string>
+	<string name="search_position_map_view">Center trenutnega zemljevida</string>
 	<string name="search_position_address">Naslov …</string>
 	<string name="city_type_city">Mesto</string>
 	<string name="city_type_hamlet">Zaselek</string>
@@ -682,7 +682,7 @@
     <string name="first_time_msg">Hvala, ker uporabljate OsmAnd. Za uporabo veliko zmožnosti tega programa, boste potrebovali krajevne podatke, ki jih lahko prejmete preko \'Nastavitve\' → \'Upravljanje datotek zemljevidov\'. Potem boste lahko videli zemljevide, našli naslove, našli točke POI in našli javni prevoz.</string>    
 	<string name="local_indexes_cat_tile">Spletni zemljevidi in ploščice zemljevidov</string>
 	<string name="map_online_data">Spletni zemljevidi in ploščice zemljevidov</string>
-	<string name="default_buttons_reset">Ponastavi</string>
+	<string name="default_buttons_reset">Počisti</string>
 	<string name="scroll_map_by_gestures_descr">Drsanje po zemljevidi s kretnjami na zaslonu na dotik</string>
 	<string name="scroll_map_by_gestures">Naravno drsenje zemljevida</string>
 	<string name="zoom_by_trackball_descr">Spremeni povečavo zemljevida z vodoravnimi premiki sledilne žogice</string>
@@ -712,7 +712,7 @@
 	<string name="live_monitoring_interval">Interval sledenja v živo</string>
 	<string name="live_monitoring_url_descr">Navedite spletne naslove z naslednjo sintakso za parametre: geogr. šir.={0}, geogr. dolž.={1}, čas={2}, hdop={3}, višina={4}, hitrost={5}, usmeritev={6}</string>
 	<string name="live_monitoring_url">Spletni naslov za sledenje v živo</string>
-	<string name="gpx_monitoring_disabled_warn">Omogočite nastavitev \'Beleži sled v datoteko GPX\'.</string>
+	<string name="gpx_monitoring_disabled_warn">Beleženje sledi preko GPS widget-a ali nastavitve \'Beleženje sledi\'.</string>
 	<string name="profile_settings">Za profil določene nastavitve</string>
 	<string name="settings_preset">Uporabniški profil</string>
 	<string name="global_settings">Splošne nastavitve</string>
@@ -944,7 +944,7 @@
 	<string name="first_time_continue">Kasneje</string>
 	<string name="first_time_download">Prenos območij</string>
 	<string name="search_poi_location">Iskanje znaka …</string>
-	<string name="search_near_map">Iskanje v bližini zadnje lokacije</string>
+	<string name="search_near_map">Iskanje v bližini zadnje lokacije na zemljevidu</string>
 	<string name="tip_map_switch_t_v2">"Vir zemljevida in prikazane plasti lahko spreminjate preko \'Meni\' → \'Nastavitve zemljevida\'.
 \n\nPod \'Vir zemljevida …\' lahko izberete med uporabo prednaloženih vektorskih zemljevidov za delo brez povezave, vnaprej določenih spletnih zemljevidov (za to aktivirajte vtičnik \'Spletni zemljevidi\' v \'Nastavitve\' → \'Upravljalnik vtičnikov\'), ali ročno ustvarjenih zemljevidov z uporabo npr. OsmAndMapCreator-ja na računalniku.
 \n\nOsmAnd podpira tudi vire po meri. "</string>
@@ -1116,8 +1116,8 @@
     <string name="srtm_plugin_name">Vtičnik Izohipse</string>
     <string name="download_select_map_types">Drugi zemljevidi</string>
     <string name="recording_context_menu_play">Predvajaj</string>
-    <string name="recording_description">Snemanje %1$s %2$s na %3$s</string>
-    <string name="recording_default_name">snemanje</string>
+    <string name="recording_description">Snemanje %1$s %3$s %2$s</string>
+    <string name="recording_default_name">Snemanje</string>
     <string name="av_control_stop">Ustavi</string>
     <string name="map_widget_av_notes">Zvočni zapisi</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd vtičnik za izohipse brez povezave</string>
@@ -1172,7 +1172,7 @@
     <string name="dropbox_plugin_description">Vtičnik Dropbox omogoča sinhronizacijo datotek sledi in video/zvočnih posnetkov z vašim dropbox uporabniškim računom.</string>
     <string name="dropbox_plugin_name">Vtičnik Dropbox</string>
     <string name="recording_context_menu_show">Prikaži</string>
-    <string name="recording_photo_description">Fotografija %1$s ob %2$s</string>
+    <string name="recording_photo_description">Fotografija %1$s %2$s</string>
     <string name="av_def_action_picture">Posnami fotografijo</string>
     <string name="recording_context_menu_precord">Posnami fotografijo</string>
     <string name="stop_routing_confirm">Ali ste prepričani, da želite prekiniti navigacijo?</string>
@@ -1272,7 +1272,7 @@
     <string name="osmand_distance_planning_plugin_name">Računanje razdalj in Orodje za načrtovanje</string>
     <string name="distance_measurement_finish_subtrack">Začni novo pod-sled</string>
     <string name="wait_current_task_finished">Počakajte, da je trenutna naloga končana</string>
-    <string name="use_kalman_filter_compass_descr">Uporaba Kalmanovega filtra za preprečevanje odstopanj kompasa</string>
+    <string name="use_kalman_filter_compass_descr">Zmanjšuje šum pri branju kompasa, vendar dodaja inercijo</string>
     <string name="use_kalman_filter_compass">Uporabi Kalmanov filter</string>
     <string name="access_mark_final_location_first">Način dostopnosti: prosim, najprej izberite cilj</string> 
     <string name="use_magnetic_sensor_descr">Namesto senzorja usmerjenosti, za določanje vrednosti kompasa uporabljaj magnetni senzor</string>
@@ -1649,7 +1649,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="osmo_settings_descr">Nastavi možnosti sledenja in osebni sledilni kanal</string>
     <string name="osmo_plugin_description">"OpenStreetMap napredno sledenje v živo, oglejte si http://osmo.mobi. Omogoča možnosti sledenja drugih naprav in biti sleden. Ustvarite anonimne skupine, katerih člani si med seboj delite lokacije. Ponuja različne možnosti za trajno sledenje ali sledenje v okviru sej. Anonimne skupine so omejene na nekaj dni in nekatere funkcije, npr. ni upravljanja na daljavo in ni skrbnika skupine. Polno delujoče skupine je potrebno ustvariti na spletnem mestu in le registrirani uporabniki imajo dostop do njih. "</string>
     <string name="osmo_plugin_name">OsMo (Napredno sledenje v živo)</string>
-    <string name="keep_informing_never">Nikoli</string>
+    <string name="keep_informing_never">Samo ročno (tapnite puščico)</string>
     <string name="keep_informing_descr">Napoveduj navigacijska navodila v rednih časovnih presledkih</string>
     <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
 	<string name="osmo_settings">OpenStreetMap sledenje</string>
@@ -1889,7 +1889,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="text_size_descr">Nastavite velikost napisov na zemljevidu.</string>
     <string name="text_size">Velikost napisov</string>
     <string name="rendering_attr_osmcTraces_name">Prosojnica s simboli za pohodništvo</string>
-    <string name="select_impassable_road">Izberi na zemljevidu</string>
+    <string name="select_impassable_road">Izberi na zemljevidu …</string>
     <string name="impassable_road">Izogibanje cestam…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Proge tramvaja in vlaka</string>
     <string name="rendering_attr_busRoutes_name">Proge avtobusov</string>
@@ -1901,7 +1901,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_category_details">Podrobnosti</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Proge vlakov</string>
     <string name="wake_on_voice">Vklopiti zaslon</string>
-    <string name="wake_on_voice_descr">Zaslon naprave se vklopi, ko se približujete obratu</string>
+    <string name="wake_on_voice_descr">Vklopi zaslon naprave (če izklopljen), ko se približujete obratu</string>
     <string name="wake_on_voice_never">Nikoli</string>
     <string name="rendering_category_transport">Prevoz</string>
     <string name="rendering_category_others">Druge lastnosti zemljevida</string>
@@ -1967,4 +1967,9 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="navigate_point_zone">Območje</string>
     <string name="navigate_point_northing">y koordinata</string>
     <string name="navigate_point_easting">x koordinata</string>
-    </resources>
+    <string name="rendering_value__name">Privzeto</string>
+	<string name="recents">NEDAVNI</string>
+	<string name="navigation_over_track">Začetek navigacije po sledi?</string>
+	<string name="avoid_roads_msg">Pot lahko spremenite tako, da izberete ceste, katerih se je treba izogibati</string>
+    <string name="save_track_to_gpx_globally_headline">Shranjevanje sledi na zahtevo</string>
+	</resources>

@@ -11,46 +11,35 @@ import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import android.support.v4.view.MenuItemCompat;
+import android.view.*;
+import android.widget.*;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.PoiFilter;
-import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.SpecialPhrases;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchPOIActivity;
+import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 
 /**
  * 
  */
 public class EditPOIFilterActivity extends OsmandListActivity {
 	public static final String AMENITY_FILTER = "net.osmand.amenity_filter"; //$NON-NLS-1$
-	private PoiFilter filter;
+	private PoiLegacyFilter filter;
 	private PoiFiltersHelper helper;
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
@@ -103,15 +92,15 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		}
 		createMenuItem(menu, SAVE_FILTER, R.string.edit_filter_save_as_menu_item, 
 				R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark ,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		createMenuItem(menu, FILTER, R.string.filter_current_poiButton, 
 				0, 0,
 				//R.drawable.a_1_navigation_accept_light, R.drawable.a_1_navigation_accept_dark,
-				MenuItem.SHOW_AS_ACTION_WITH_TEXT | MenuItem.SHOW_AS_ACTION_ALWAYS);
+				MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT | MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		if(!filter.isStandardFilter()){
 			createMenuItem(menu, DELETE_FILTER, R.string.edit_filter_delete_menu_item, 
 					R.drawable.ic_action_gdiscard_light, R.drawable.ic_action_gdiscard_dark,
-					MenuItem.SHOW_AS_ACTION_IF_ROOM);
+					MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		}
 		return super.onCreateOptionsMenu(menu);
 	}	
@@ -164,7 +153,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				PoiFilter nFilter = new PoiFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), (OsmandApplication) getApplication());
+				PoiLegacyFilter nFilter = new PoiLegacyFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), (OsmandApplication) getApplication());
 				if (helper.createPoiFilter(nFilter)) {
 					AccessibleToast.makeText(
 							EditPOIFilterActivity.this,
@@ -305,7 +294,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	}
 	
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		showDialog(getListAdapter().getItem(position));
 	}
 

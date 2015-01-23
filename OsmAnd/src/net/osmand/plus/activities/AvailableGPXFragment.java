@@ -12,6 +12,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.SearchView;
+import android.view.*;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
@@ -39,11 +44,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
-import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -54,13 +55,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.ActionMode.Callback;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.widget.SearchView;
-import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
@@ -137,12 +131,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
 		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_light,
-				R.drawable.ic_action_search_dark, MenuItem.SHOW_AS_ACTION_ALWAYS
-						| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-		searchView = new com.actionbarsherlock.widget.SearchView(getActivity());
-		mi.setActionView(searchView);
-		searchView.setOnQueryTextListener(new OnQueryTextListener() {
+				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS
+						| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+		searchView = new SearchView(getActivity());
+		MenuItemCompat.setActionView(mi,searchView);
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
 			@Override
 			public boolean onQueryTextSubmit(String query) {
@@ -185,12 +180,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light).listen(listener).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
 				.icons(R.drawable.ic_action_refresh_dark, R.drawable.ic_action_refresh_light).listen(listener).reg();
-		OsmandPlugin.onOptionsMenuActivity(getSherlockActivity(), this, optionsMenuAdapter);
+		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
 			item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
-			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
-			);
+			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 			if (optionsMenuAdapter.getImageId(j, isLightActionBar()) != 0) {
 				item.setIcon(optionsMenuAdapter.getImageId(j, isLightActionBar()));
 			}
@@ -223,12 +217,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public void showProgressBar() {
-		getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
+		//getActivity().setSupportProgressBarIndeterminateVisibility(true);
 	}
 
 	public void hideProgressBar() {
-		if (getSherlockActivity() != null){
-			getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
+		if (getActivity() != null){
+			//getActivity().setSupportProgressBarIndeterminateVisibility(false);
 		}
 	}
 
@@ -245,7 +239,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		selectedItems.clear();
 		final Set<GpxInfo> originalSelectedItems = listAdapter.getSelectedGpx();
 		selectedItems.addAll(originalSelectedItems);
-		actionMode = getSherlockActivity().startActionMode(new Callback() {
+		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -253,8 +247,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				updateSelectionMode(mode);
 				MenuItem it = menu.add(R.string.show_gpx_route);
 				it.setIcon(!isLightActionBar() ? R.drawable.ic_action_map_marker_dark : R.drawable.ic_action_map_marker_light);
-				it.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM |
-						MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.setShowAsAction(it, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 				return true;
 			}
 
@@ -308,7 +301,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		selectionMode = true;
 		selectedItems.clear();
-		actionMode = getSherlockActivity().startActionMode(new Callback() {
+		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -317,8 +310,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				if (actionIconId != 0) {
 					it.setIcon(actionIconId);
 				}
-				it.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM |
-						MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.setShowAsAction(it, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 				return true;
 			}
 
@@ -466,7 +458,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			adapter.item(R.string.local_index_mi_delete).listen(listener).reg();
 			adapter.item(R.string.local_index_mi_export).listen(listener).reg();
 		}
-		OsmandPlugin.onContextMenuActivity(getSherlockActivity(), this, info, adapter);
+		OsmandPlugin.onContextMenuActivity(getActivity(), this, info, adapter);
 	}
 
 	private void showContextMenu(final GpxInfo info) {
@@ -510,7 +502,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPreExecute() {
-			getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
+			((ActionBarActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(true);
 			listAdapter.clear();
 		}
 
@@ -537,8 +529,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPostExecute(List<GpxInfo> result) {
 			this.result = result;
-			if(getSherlockActivity() != null) {
-				getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
+			if(getActivity() != null) {
+				((ActionBarActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 			}
 		}
 
@@ -639,7 +631,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if (info.gpx != null && info.gpx.showCurrentTrack) {
 				catName = info.name;
 			} else {
-				catName = app.getString(R.string.local_indexes_cat_gpx) + " " + info.subfolder;
+				//local_indexes_cat_gpx now obsolete in new UI screen which shows only GPX data
+				//catName = app.getString(R.string.local_indexes_cat_gpx) + " " + info.subfolder;
+				catName = "" + info.subfolder;
 			}
 			int found = -1;
 			// search from end
@@ -809,7 +803,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			// search from end
 			for (int i = category.size() - 1; i >= 0; i--) {
 				String cat = category.get(i);
-				if (Algorithms.objectEquals(getActivity().getString(R.string.local_indexes_cat_gpx) + " " + g.subfolder, cat)) {
+				//local_indexes_cat_gpx now obsolete in new UI screen which shows only GPX data
+				//if (Algorithms.objectEquals(getActivity().getString(R.string.local_indexes_cat_gpx) + " " + g.subfolder, cat)) {
+				if (Algorithms.objectEquals("" + g.subfolder, cat)) {
 					found = i;
 					break;
 				}
@@ -880,13 +876,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPreExecute() {
-			getSherlockActivity().setProgressBarIndeterminateVisibility(true);
+			((ActionBarActivity)getActivity()).setProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			getSherlockActivity().setProgressBarIndeterminateVisibility(false);
-			AccessibleToast.makeText(getSherlockActivity(), result, Toast.LENGTH_LONG).show();
+			((ActionBarActivity)getActivity()).setProgressBarIndeterminateVisibility(false);
+			AccessibleToast.makeText(getActivity(), result, Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -926,13 +922,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPreExecute() {
-			getSherlockActivity().setProgressBarIndeterminateVisibility(true);
+			((ActionBarActivity)getActivity()).setProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
 			selectedGpxHelper.runUiListeners();
-			getSherlockActivity().setProgressBarIndeterminateVisibility(false);
+			((ActionBarActivity)getActivity()).setProgressBarIndeterminateVisibility(false);
 			if (showOnMap && toShow != null) {
 				getMyApplication().getSettings().setMapLocationToShow(toShow.lat, toShow.lon,
 						getMyApplication().getSettings().getLastKnownMapZoom());
@@ -963,13 +959,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			@Override
 			protected void onPreExecute() {
-				getSherlockActivity().setProgressBarIndeterminateVisibility(true);
+				((ActionBarActivity)getActivity()).setProgressBarIndeterminateVisibility(true);
 			}
 
 			@Override
 			protected void onPostExecute(Void result) {
-				if (getSherlockActivity() != null){
-					getSherlockActivity().setProgressBarIndeterminateVisibility(false);
+				if (getActivity() != null){
+					((ActionBarActivity)getActivity()).setProgressBarIndeterminateVisibility(false);
 				}
 				if (info.gpx != null){
 					getMyApplication().getSelectedGpxHelper().selectGpxFile(info.gpx, selected, true);

@@ -11,6 +11,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import android.support.v4.view.MenuItemCompat;
+import android.view.*;
+import android.widget.*;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.plus.GPXUtilities;
@@ -30,16 +33,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 
 /**
  *
@@ -106,9 +100,23 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 		setListAdapter(new RouteInfoAdapter(helper.getRouteDirections()));
 	}
 
+
 	@Override
-	public void onListItemClick(ListView parent, View v, int position, long id) {
-		// headers are included
+	public boolean onCreateOptionsMenu(Menu menu) {
+		createMenuItem(menu, PRINT, R.string.print_route,
+				R.drawable.ic_action_gprint_light, R.drawable.ic_action_gprint_dark,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		createMenuItem(menu, SAVE, R.string.save_route_as_gpx,
+				R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		createMenuItem(menu, SHARE, R.string.share_route_as_gpx,
+				R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		if(position < 1){
 			return;
 		}
@@ -121,20 +129,6 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 					Math.max(13, settings.getLastKnownMapZoom()), null, item.getDescriptionRoutePart() + " " + getTimeDescription(item), null);
 			MapActivity.launchMapActivityMoveToTop(this);
 		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		createMenuItem(menu, PRINT, R.string.print_route,
-				R.drawable.ic_action_gprint_light, R.drawable.ic_action_gprint_dark,
-				MenuItem.SHOW_AS_ACTION_ALWAYS);
-		createMenuItem(menu, SAVE, R.string.save_route_as_gpx,
-				R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
-				MenuItem.SHOW_AS_ACTION_ALWAYS);
-		createMenuItem(menu, SHARE, R.string.share_route_as_gpx,
-				R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
-				MenuItem.SHOW_AS_ACTION_ALWAYS);
-		return super.onCreateOptionsMenu(menu);
 	}
 
 	class RouteInfoAdapter extends ArrayAdapter<RouteDirectionInfo> {

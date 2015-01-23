@@ -30,6 +30,12 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 
 public class FavouritesDbHelper {
 
+	public interface FavoritesUpdatedListener {
+		void updateFavourites();
+	}
+
+	private List<FavoritesUpdatedListener> favoritesUpdatedListeners = new ArrayList<FavoritesUpdatedListener>();
+
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(FavouritesDbHelper.class);
 	
 	public static final String FILE_TO_SAVE = "favourites.gpx"; //$NON-NLS-1$
@@ -82,10 +88,25 @@ public class FavouritesDbHelper {
 		if(changed) {
 			saveCurrentPointsIntoFile();
 		}
+		favouritesUpdated();
 		
 	}
 
+	private void favouritesUpdated(){
+		for (FavoritesUpdatedListener listener : favoritesUpdatedListeners){
+			listener.updateFavourites();
+		}
+	}
 
+	public void addFavoritesUpdatedListener(FavoritesUpdatedListener listener){
+		if (!favoritesUpdatedListeners.contains(listener)){
+			favoritesUpdatedListeners.add(listener);
+		}
+	}
+
+	public void removeFavoritesUpdatedListener(FavoritesUpdatedListener listener){
+		favoritesUpdatedListeners.remove(listener);
+	}
 
 	private boolean merge(Map<String, FavouritePoint> source, Map<String, FavouritePoint> destination) {
 		boolean changed = false;
@@ -160,6 +181,7 @@ public class FavouritesDbHelper {
 		}
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
+			sortAll();
 		}
 
 		return true;
@@ -409,6 +431,9 @@ public class FavouritesDbHelper {
 		};
 		for(FavoriteGroup g : favoriteGroups) {
 			Collections.sort(g.points, favoritesComparator);
+		}
+		if(cachedFavoritePoints != null) {
+			Collections.sort(cachedFavoritePoints, favoritesComparator);
 		}
 	}
 	

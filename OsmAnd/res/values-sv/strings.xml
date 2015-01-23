@@ -68,7 +68,7 @@
 <string name="poi_dialog_comment_default">Ändring av POI</string>
 <string name="poi_dialog_other_tags_message">Alla andra taggar sparas</string>
 <string name="default_buttons_commit">Skicka in</string>
-<string name="default_buttons_reset">Återställ</string>
+<string name="default_buttons_reset">Töm</string>
 <string name="filter_current_poiButton">Filter</string>
 <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 <string name="default_buttons_no">Nej</string>
@@ -325,7 +325,7 @@
 <string name="live_monitoring_interval">Intervall för direktspårning</string>
 <string name="live_monitoring_url_descr">Ange webbadressen med parametersyntax: lat={0}, lon={1}, tidsstämpel={2}, hdop={3}, höjd={4}, hastighet={5}, bearing={6}</string>
 <string name="live_monitoring_url">Webbadress för direktspårning</string>
-<string name="gpx_monitoring_disabled_warn">Aktivera \'Logga spår till GPX-fil\'-inställningar.</string>
+<string name="gpx_monitoring_disabled_warn">Logga spår med GPX-widget eller via inställningen \'Trippinspelning\'.</string>
 <string name="show_current_gpx_title">Visa aktuellt spår</string>
 <string name="tip_recent_changes_0_7_0_t">"Förändringar i 0.7.0:
 \n\t- Offline Wikipedia-uppgifter med artiklar
@@ -395,7 +395,7 @@
 <string name="init_native_library">Initierar inbyggt bibliotek …</string>
 <string name="choose_auto_follow_route">Auto-centrerad kartvy</string>
 <string name="choose_auto_follow_route_descr">Tid tills kartvyn synkroniseras med aktuell position</string>
-<string name="auto_follow_route_never">Aldrig</string>
+<string name="auto_follow_route_never">Aldrig (tryck på den blå pilen för att starta vägledning manuellt)</string>
 <string name="auto_follow_route_navigation">Auto-centrera endast nav</string>
 <string name="auto_follow_route_navigation_descr">Auto-centrera kartan endast vid navigering.</string>
 <string name="auto_follow_location_enabled">Auto-centrera aktuell kartvy.</string>
@@ -528,7 +528,7 @@
 <string name="search_offline_geo_error">Det gick inte att tolka geo uppsåt \'%s\'</string>
 <string name="search_osm_offline">Sök adress med hjälp av offline-kartor</string>
 <string name="system_locale">System</string>
-<string name="preferred_locale_descr">Välj visningsspråk</string>
+<string name="preferred_locale_descr">Välj visningsspråk (starta om OsmAnd efter språkbyte)</string>
 <string name="preferred_locale">Visningsspråk</string>
 <string name="tip_map_switch">Kartkälla</string>
 <string name="tip_app_mode">Användarprofil</string>
@@ -945,8 +945,8 @@
     <string name="recording_can_not_be_played">Inspelningen kan inte spelas upp</string>
     <string name="recording_context_menu_delete">Ta bort inspelningen</string>
     <string name="recording_context_menu_play">Spela upp</string>
-    <string name="recording_description">Inspelning %1$s %2$s av %3$s</string>
-    <string name="recording_default_name">spelar in</string>
+    <string name="recording_description">Inspelning %1$s %3$s %2$s</string>
+    <string name="recording_default_name">Spelar in</string>
     <string name="av_control_stop">Stoppa</string>
     <string name="map_widget_av_notes">Ljud-/Videoanteckningar</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-modul för höjdkurvor offline</string>
@@ -981,7 +981,7 @@
     <string name="stop_routing_confirm">Är det säkert att du vill avbryta navigeringen?</string>
     <string name="clear_dest_confirm">Är det säkert att du vill ta bort din destinationspunkt (samt waypoints)?</string>
     <string name="recording_context_menu_show">Visa</string>
-    <string name="recording_photo_description">Foto %1$s av %2$s</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="recording_context_menu_precord">Ta ett foto</string>
     <string name="dropbox_plugin_name">Modul för Dropbox</string>
     
@@ -1445,7 +1445,7 @@
 	<string name="interrupt_music">Avbryt musik</string>
 	<string name="share_route_as_gpx">Dela rutt som GPX-fil</string>
 	<string name="share_route_subject">Utdelad rutt via OsmAnd</string>
-	<string name="keep_informing_never">Aldrig</string>
+	<string name="keep_informing_never">Endast manuellt (tryck på pilen)</string>
     <string name="keep_informing_descr">Läs upp navigationsinstruktioner med regelbundna intervall</string>
     <string name="keep_informing">Upprepa navigationsinstruktioner</string>
 	
@@ -1720,11 +1720,11 @@
     <string name="rendering_attr_trolleybusRoutes_name">Trådbusslinjer</string>
     <string name="rendering_attr_busRoutes_name">Busslinjer</string>
     <string name="rendering_attr_tramTrainRoutes_name">Spårvagns- och tåglinjer</string>
-    <string name="select_impassable_road">Välj på kartan</string>
+    <string name="select_impassable_road">Välj på kartan …</string>
     <string name="impassable_road">Undvik vägar …</string>
     <string name="rendering_category_hide">Dölj</string>
     <string name="wake_on_voice">Slå på skärmen</string>
-    <string name="wake_on_voice_descr">Slå på skärmen när jag närmar mig en sväng</string>
+    <string name="wake_on_voice_descr">Slå på skärmen (om den är av) när jag närmar mig en sväng</string>
     <string name="lock_screen_request_explanation">%1$s behöver denna tillåtelse för att stänga av skärmen för strömsparningsfunktionen.</string>
     <string name="wake_on_voice_never">Aldrig</string>
     <string name="advanced_settings">Avancerat</string>
@@ -1768,4 +1768,19 @@
 	<string name="route_descr_destination">Destination</string>
     <string name="voices">Röstprompter</string>
 	<string name="speak_pedestrian">Meddela om övergångsställen</string>
-    </resources>
+    <string name="rendering_value__name">Standard</string>
+	<string name="avoid_roads_msg">Du kan ändra rutten genom att markera vägar att undvika</string>
+    <string name="recents">TIDIGARE</string>
+	<string name="save_track_to_gpx_globally_headline">Spårloggning på begäran</string>
+	<string name="proxy_pref_title">Proxy</string>
+    <string name="proxy_pref_descr">Ställ in en anslutning till Internet via proxy</string>
+    <string name="settings_privacy">Anonymitet</string>
+    <string name="rendering_attr_streetLighting_name">Gatubelysning</string>
+    <string name="enable_proxy_title">Aktivera HTTP-proxy</string>
+	<string name="enable_proxy_descr">Konfigurera HTTP-proxy för alla nätverksbegäran</string>
+	<string name="proxy_host_title">Proxy-värd</string>
+	<string name="proxy_host_descr">Konfigurera ditt proxy-värdnamn (t.ex. 127.0.0.1)</string>
+	<string name="proxy_port_title">Proxy-port</string>
+	<string name="proxy_port_descr">Konfigurera ditt proxy-portnummer (t.ex. 8118)</string>
+	<string name="navigation_over_track">Starta navigering längs spår?</string>
+	</resources>

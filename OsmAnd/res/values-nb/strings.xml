@@ -236,7 +236,7 @@
 	 
 	<string name="choose_auto_follow_route">Auto-sentrer kartvisning</string>
 	<string name="choose_auto_follow_route_descr">Tid til kartvisning synkroniseres med gjeldende posisjon</string>
-	<string name="auto_follow_route_never">Aldri</string>
+	<string name="auto_follow_route_never">Aldri (trykk blå pil for å starte veiledning manuelt)</string>
 	<string name="pref_raster_map">Kartkilde-innstillinger</string>
 	<string name="pref_vector_map">Vektorkart-innstillinger</string>
 	<string name="delete_confirmation_msg">Slette %1$s?</string>
@@ -267,7 +267,7 @@
 	<string name="search_position_undefined">Udefinert</string>
 	<string name="search_position_fixed">Fast</string>
 	<string name="search_position_current_location">Gjeldende posisjon…</string>
-	<string name="search_position_map_view">Siste kartvisning</string>
+	<string name="search_position_map_view">Gjeldende kartsenter</string>
 	<string name="select_search_position">Utgangspunkt:</string>
 	<string name="context_menu_item_search">Søk nær her</string>
 	<string name="save_route_dialog_title">Lagre rute som GPX-spor</string>
@@ -324,7 +324,7 @@
 \n\nFor å vise alle favorittpunkter direkte på kartet, aktiver på kartskjermen laget \'Favoritter\' i \'Meny\' → \'Still inn kart\'. "</string>
 	<string name="search_osm_offline">Søk geografisk plassering</string>
 	<string name="system_locale">System</string>
-	<string name="preferred_locale_descr">Velg visningsspråk</string>
+	<string name="preferred_locale_descr">Velg visningsspråk (start OsmAnd på nytt etter endring)</string>
 	<string name="preferred_locale">Visningsspråk</string>
 	<string name="tip_map_switch">Velg en kartkilde</string>
 	<string name="tip_map_switch_t_v2">"Kartkilden og kartlag som vises endres via \'Meny\' → \'Still inn kart\'.
@@ -391,7 +391,7 @@
 	<string name="km_h">km/t</string>
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">Foreldet kartdataformat \'\'{0}\'\' støttes ikke</string>
-	<string name="poi_filter_closest_poi">Nærmeste interessepunkt</string>
+	<string name="poi_filter_closest_poi">Nærmeste interessepunkter</string>
 	<string name="poi_filter_custom_filter">Egendefinert filter</string>
 	<string name="specified_dir_doesnt_exist">Kan ikke finne den spesifiserte mappen.</string>
 	<string name="application_dir">Datalagringsmappe</string>
@@ -463,7 +463,7 @@
 	<string name="search_poi_filter">Filter</string>
 	<string name="voice_provider_descr">Velg taleveiledning for navigering</string>
 	<string name="voice_provider">Taleveiledning</string>
-	<string name="search_near_map">Søk i nærheten av siste kartplassering</string>
+	<string name="search_near_map">Søk i nærheten av gjeldende kartsenter</string>
 	<string name="search_nearby">Søk i nærheten</string>
 	<string name="map_orientation_default">Samme som enhet</string>
 	<string name="map_orientation_portrait">Portrett</string>
@@ -626,7 +626,7 @@
 	<string name="poi_dialog_comment">Kommentar</string>
 	<string name="poi_dialog_comment_default">Interessepunkt endres</string>
 	<string name="default_buttons_commit">Send</string>
-	<string name="default_buttons_reset">Tilbakestill</string>
+	<string name="default_buttons_reset"/>
 	<string name="filter_current_poiButton">Filter</string>
 	<string name="edit_filter_delete_menu_item">Slett</string>
 	<string name="edit_filter_save_as_menu_item">Lagre som</string>
@@ -798,7 +798,7 @@
 	<string name="prefs_plugins">Programtillegg</string>
 	<string name="show_point_options">Bruk posisjon…</string>
 	<string name="wake_on_voice">Slå på skjermen</string>
-    <string name="select_impassable_road">Velg på kart</string>
+    <string name="select_impassable_road">Velg på kart…</string>
     <string name="impassable_road">Unngå veier…</string>
     <string name="rendering_attr_busRoutes_name">Bussruter</string>
     <string name="rendering_category_hide">Skjul</string>
@@ -844,7 +844,7 @@
     <string name="targets">Reisemål</string>
     <string name="rendering_attr_hideBuildings_name">Skjul bygninger</string>
     <string name="osmand_parking_warning">Varsel</string>
-	<string name="wake_on_voice_descr">Slå på enhetens skjerm når du nærmer deg en sving</string>
+	<string name="wake_on_voice_descr">Slå på enhetens skjerm (hvis av) når du nærmer deg en sving</string>
     <string name="wake_on_voice_never">Aldri</string>
     <string name="search_radius_proximity">I nærhet av</string>
     <string name="speed_limit_exceed_message">Velg toleransemargin for fartsgrense, overskrides denne vil du få talevarsel.</string>
@@ -894,7 +894,7 @@
 	<string name="routing_attr_weight_description">Angi kjøretøyets vekt som er tillatt på ruter</string>
     <string name="copying_osmand_files_descr">Kopierer OsmAnd-datafiler til det nye stedet (%s)…</string>
     <string name="distance_measurement_clear_route">Slett alle punkter</string>
-    <string name="use_kalman_filter_compass_descr">Bruk Kalmanfilter for å unngå kompassavvik</string>
+    <string name="use_kalman_filter_compass_descr">Reduserer støy i kompassavlesninger, men legger til treghet</string>
     <string name="use_kalman_filter_compass">Bruk Kalmanfilter</string>
     <string name="other_location">Annen</string>
     <string name="available_downloads_left">Er tilgjengelig %1$d filer til nedlasting</string>
@@ -1037,7 +1037,7 @@
 	<string name="gpx_visibility_txt">Synlighet</string>
 	<string name="gpx_description_txt">Beskrivelse</string>
 	<string name="use_transparent_map_theme">Gjennomsiktig tema</string>
-	<string name="keep_informing_never">Aldri</string>
+	<string name="keep_informing_never">Bare manuelt (trykk pil)</string>
     <string name="local_index_installed">Utgave</string>
 	<string name="local_index_mi_export">Eksporter</string>
 	<string name="gpx_option_destination_point">Bruk gjeldende mål</string>
@@ -1190,4 +1190,6 @@
 	<string name="lock_screen_request_explanation">%1$s trenger denne tillatelsen til å slå av skjermen (Strømsparingsfunksjon).</string>
     <string name="show_all">VIS ALLE</string>
 	<string name="speak_pedestrian">Meld om fotgjengeroverganger</string>
+    <string name="rendering_value__name">Standard</string>
+	<string name="rendering_attr_streetLighting_name">Gatebelysning</string>
     </resources>

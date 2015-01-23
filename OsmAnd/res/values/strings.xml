@@ -9,6 +9,13 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rendering_attr_streetLighting_name">Street lighting</string>
+    <string name="proxy_pref_title">Proxy</string>
+    <string name="proxy_pref_descr">Setup a proxy internet communication</string>
+    <string name="settings_privacy">Privacy</string>
+    <string name="recents">RECENTS</string>
+	<string name="navigation_over_track">Start navigation over track?</string>
+	<string name="avoid_roads_msg">You can trigger an alternative route by selecting roads to avoid</string>
     <string name="rendering_value__name">Default</string>
 	<string name="speak_pedestrian">Announce pedestrian crosswalks</string>
     <string name="rendering_attr_roadStyle_name">Road style</string>
@@ -54,10 +61,10 @@
 	<string name="rendering_attr_tramTrainRoutes_name">Tram and train routes</string>
 	<string name="rendering_attr_subwayMode_name">Subway routes</string>
     <string name="lock_screen_request_explanation">%1$s needs this permission to turn off the screen for the power saving feature.</string>
-    <string name="wake_on_voice">Turn on the screen</string>
-    <string name="wake_on_voice_descr">Turn on the device screen when approaching a turn</string>
+    <string name="wake_on_voice">Turn screen on</string>
+    <string name="wake_on_voice_descr">Turn on device screen (if off) when approaching a turn</string>
     <string name="wake_on_voice_never">Never</string>
-    <string name="select_impassable_road">Select on map</string>
+    <string name="select_impassable_road">Select on map&#8230;</string>
     <string name="impassable_road">Avoid roads&#8230;</string>
     <string name="tip_recent_changes_1_9_t">Changes in 1.9:
         * Updated maps styles with road surface rendering, transport layers and hiking symbols
@@ -141,6 +148,7 @@
 	<string name="background_service_int">GPS Wake-up interval</string>
 	<string name="enable_sleep_mode">Enable GPS sleep mode</string>
 	<string name="save_track_to_gpx_globally">Log track to GPX file</string>
+	<string name="save_track_to_gpx_globally_headline">On demand track logging</string>
 	<string name="save_track_to_gpx_globally_descr">General position logging to a GPX file can be turned on or off using the GPX recording widget on the map screen</string>
 	<string name="save_current_track_descr">Save current track to SD now</string>
 	<string name="save_current_track">Save current GPX track</string>
@@ -151,6 +159,13 @@
 	<string name="save_track_interval_descr">Choose logging interval for track recording during navigation</string>
 	<string name="voice_provider_descr">Select voice guidance for navigation</string>
 	<string name="voice_provider">Voice guidance</string>
+	
+	<string name="enable_proxy_title">Enable HTTP Proxy</string>
+	<string name="enable_proxy_descr">Configure HTTP Proxy for all network requests</string>
+	<string name="proxy_host_title">Proxy Host</string>
+	<string name="proxy_host_descr">Configure your proxy\'s hostname (e.g. 127.0.0.1)</string>
+	<string name="proxy_port_title">Proxy Port</string>
+	<string name="proxy_port_descr">Configure your proxy\'s port number (e.g. 8118)</string>
 	<string name="tips_and_tricks">Help</string>
 	<string name="tip_initial">Help</string>
 	<string name="tip_initial_t">OsmAnd is a navigation application with many features. 
@@ -263,7 +278,7 @@
     <string name="gpx_selection_segment_title">Segment</string>
     <string name="gpx_selection_number_of_points"> %1$s points</string>
     <string name="gpx_selection_point">Point %1$s</string>
-    <string name="gpx_selection_current_track">recording</string>
+    <!-- string name="gpx_selection_current_track">recording</string -->
     <string name="gpx_selection_route_points">%1$s \nRoute points %2$s</string>
     <string name="gpx_selection_points">%1$s \nPoints</string>
     <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
@@ -702,7 +717,7 @@
     <string name="precise_routing_mode_descr">Enable to calculate precise routes without glitches. Still distance-limited and slow.</string>
     <string name="precise_routing_mode">Precise routing (alpha)</string>
     <string name="recording_context_menu_show">Show</string>
-    <string name="recording_photo_description">Photo %1$s of %2$s</string>
+    <string name="recording_photo_description">Photo %1$s %2$s</string>
     <string name="av_def_action_picture">Take a photo</string>
     <string name="recording_context_menu_precord">Take a photo</string>
     <string name="dropbox_plugin_description">Dropbox plugin allows to synchronize tracks and audio/video notes with your dropbox account.</string>
@@ -744,8 +759,8 @@
     <string name="recording_can_not_be_played">Recording can not be played</string>
     <string name="recording_context_menu_delete">Delete recording</string>
     <string name="recording_context_menu_play">Play</string>
-    <string name="recording_description">Recording %1$s %2$s of %3$s</string>
-    <string name="recording_default_name">recording</string>
+    <string name="recording_description">Recording %1$s %3$s %2$s</string>
+    <string name="recording_default_name">Recording</string>
     <string name="av_control_stop">Stop</string>
     <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Audio/video notes</string>
@@ -1344,7 +1359,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="live_monitoring_interval">Online tracking interval</string>
 	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">Online tracking web address</string>
-	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX file\' settings.</string>
+	<string name="gpx_monitoring_disabled_warn">Log track using GPX widget or via \'Trip recording\' settings.</string>
 	<string name="show_current_gpx_title">Show current track</string>
 	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0:
 		\n\t- Offline wikipedia data with articles
@@ -1427,8 +1442,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="init_native_library">Initializing native library&#8230;</string>
 	<string name="choose_auto_follow_route">Auto-center map view</string>
 	<string name="choose_auto_follow_route_descr">Time until map view synchronizes with current position</string>
-	<string name="auto_follow_route_never">Never</string>
-	<string name="keep_informing_never">Never</string>
+	<string name="auto_follow_route_never">Never (tap blue arrow to start guidance manually)</string>
+	<string name="keep_informing_never">Only manually (tap arrow)</string>
     <string name="keep_informing_descr">Re-announce navigation instructions at regular intervals</string>
     <string name="keep_informing">Repeat navigation instructions</string>
 	<string name="auto_follow_route_navigation">Auto-center nav only</string>
@@ -1533,7 +1548,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_indexes_cat_backup">Deactivated</string>
 	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
 	<string name="local_indexes_cat_voice">Voice data (recorded)</string>
-	<string name="local_indexes_cat_gpx">GPX data</string>
+	<!-- string name="local_indexes_cat_gpx">GPX data</string -->
 	<string name="local_indexes_cat_poi">POI data</string>
 	<string name="ttsvoice">TTS voice</string>
 	<string name="search_offline_clear_search">New Search</string>
@@ -1600,7 +1615,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
 	<string name="search_osm_offline">Search geo location</string>
 	<string name="system_locale">System</string>
-	<string name="preferred_locale_descr">Select display language</string>
+	<string name="preferred_locale_descr">Select display language (please restart OsmAnd after changing)</string>
 	<string name="preferred_locale">Display language</string>
 	<string name="incomplete_locale">incomplete</string>
 	<string name="tip_map_switch">Select a Map Source</string>
@@ -2038,7 +2053,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_dialog_comment_default">POI changing</string>
 	<string name="poi_dialog_other_tags_message">All other tags are preserved</string>
 	<string name="default_buttons_commit">Commit</string>
-	<string name="default_buttons_reset">Reset</string>
+	<string name="default_buttons_reset">Clear</string>
 	<string name="filter_current_poiButton">Filter</string>
 	<string name="edit_filter_delete_menu_item">Delete</string>
 	<string name="edit_filter_save_as_menu_item">Save As</string>

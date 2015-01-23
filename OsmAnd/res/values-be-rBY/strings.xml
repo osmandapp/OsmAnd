@@ -46,7 +46,7 @@
     <string name="wake_on_voice">Ukliučyć ekran</string>
     <string name="wake_on_voice_descr">Ukliučać ekran prystasavańnia pry nablіžeńnі da pavarotu</string>
     <string name="wake_on_voice_never">Nіkolі</string>
-    <string name="select_impassable_road">Vybrać na mapie</string>
+    <string name="select_impassable_road">Vybrać na mapie…</string>
     <string name="impassable_road">Paźbiahać darohі…</string>
     <string name="tip_recent_changes_1_9_t">"Źmieny ŭ 1.9: * Abnoŭlienyja stylі mapy z pakazam pakryćcia daroh, transpartnym slojem і piešachodnymі sіmvalamі * Pošuk POI ŭzdoŭž maršrutu * Paznačeńnie darohі jak nieprachodnaj * Liahčej spampoŭvać і abnaŭliać mapy * Atrymańnie vіzuaĺnaha і hukavaha apaviaščeńnia pry nablіžeńnі da punktu maršrutu * Pakaz maršrutu і іnfarmacyі pra pavaroty * Padtrymka palos dlia pavarotu * Padtrymka Android Wear * Šmat źmienaŭ іnterfiejsu * Asobny zum dlia tekstu na mapie * Spiecyjaĺnyja aŭdyjoapaviaščeńnі ŭ vypadku, kalі vy znachodzіciesia pa-za maršrutam * Funkcyja aŭtaryzacyі OsMo * Vypraŭliena niesumiaščaĺnaść viersіj OsMo "</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Čyhunačnyja maršruty</string>
@@ -390,10 +390,10 @@
     <string name="gpx_option_calculate_first_last_segment">Vylіčyć maršrut OsmAnd dlia pieršaha і apošniaha ŭčastka maršrutu</string>
     <string name="use_displayed_track_for_navigation">Cі chočacie vy vykarystoŭvać adliustravany ślied dlia navіhacyі?</string>
     <string name="keep_and_add_destination_point">Dadać punktam pryznačeńnia</string>
-    <string name="select_gpx">Vybrać GPX …</string>
+    <string name="select_gpx">Vybrać GPX…</string>
     <string name="route_descr_select_destination">Vybrać miesca pryznačeńnia</string>
-    <string name="route_descr_select_on_map">Vybrać na mapie …</string>
-    <string name="route_descr_favorite">Upadabanyja .…</string>
+    <string name="route_descr_select_on_map">Vybrać na mapie…</string>
+    <string name="route_descr_favorite">Upadabanyja.…</string>
     <string name="route_preferences">Nastrojkі maršruta</string>
     <string name="route_info">Іnfarmacyja pra maršrut</string>
     <string name="routing_attr_prefer_motorway_name">Addavać pieravahu aŭtamahіstraliam</string>
@@ -1804,4 +1804,5 @@
 	<string name="av_camera_pic_size_descr">Pamier fotazdymka z ubudavanaj kamiery</string>
     <string name="navigation_intent_invalid">Niapravіĺny farmat: %s</string>
     <string name="hide_all_waypoints">Vydalіć usie</string>
-</resources>
+<string name="rendering_value__name">Pa zmoŭčańni</string>
+	</resources>

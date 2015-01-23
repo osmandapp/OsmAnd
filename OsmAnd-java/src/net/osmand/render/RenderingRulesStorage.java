@@ -110,6 +110,7 @@ public class RenderingRulesStorage {
 					for (RenderingRule every : list) {
 						root.addIfElseChildren(every);
 					}
+					e.getValue().addToBeginIfElseChildren(root);
 				} else {
 					renderingAttributes.put(e.getKey(), e.getValue());
 				}

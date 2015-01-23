@@ -1,5 +1,6 @@
 package net.osmand.plus.sherpafy;
 
+import android.support.v4.app.Fragment;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -16,9 +17,8 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 
-public class SherpafyStageInfoFragment extends SherlockFragment {
+public class SherpafyStageInfoFragment extends Fragment {
 	public static final String STAGE_PARAM = "STAGE";
 	public static final String TOUR_PARAM = "TOUR";
 	OsmandApplication app;
@@ -35,7 +35,7 @@ public class SherpafyStageInfoFragment extends SherlockFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		app = (OsmandApplication) getSherlockActivity().getApplication();
+		app = (OsmandApplication) getActivity().getApplication();
 		customization = (SherpafyCustomization) app.getAppCustomization();
 
 		setHasOptionsMenu(true);

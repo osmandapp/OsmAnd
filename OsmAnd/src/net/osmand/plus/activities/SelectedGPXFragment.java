@@ -1,5 +1,7 @@
 package net.osmand.plus.activities;
 
+import android.support.v7.app.ActionBarActivity;
+import android.view.*;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.text.Collator;
@@ -31,11 +33,7 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -48,8 +46,6 @@ import android.widget.SectionIndexer;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
 
 public class SelectedGPXFragment extends OsmandExpandableListFragment {
 
@@ -157,7 +153,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				}
 			}
 		});
-		TextView tv = new TextView(getSherlockActivity());
+		TextView tv = new TextView(getActivity());
 		tv.setText(R.string.none_selected_gpx);
 		tv.setTextSize(24);
 		//((ViewGroup)getExpandableListView().getParent()).addView(tv); 
@@ -202,12 +198,12 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		if (gpxDisplayItem.locationStart != null) {
 			adapter.item(R.string.show_gpx_route).listen(listener).reg();
 		}
-		OsmandPlugin.onContextMenuActivity(getSherlockActivity(), this, gpxDisplayItem, adapter);
+		OsmandPlugin.onContextMenuActivity(getActivity(), this, gpxDisplayItem, adapter);
 	}
 
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -247,6 +243,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		((FavouritesActivity) getActivity()).getClearToolbar(false);
 //		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_light,
 //				R.drawable.ic_action_search_dark, MenuItem.SHOW_AS_ACTION_ALWAYS
 //						| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
@@ -269,11 +266,11 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public void showProgressBar() {
-		getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
+		((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
 	}
 
 	public void hideProgressBar() {
-		getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
+		((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 	}
 
 	private void selectSplitDistance(final GpxDisplayGroup model) {
@@ -341,12 +338,12 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			
 			protected void onPostExecute(Void result) {
 				adapter.notifyDataSetChanged();
-				getSherlockActivity().setProgressBarIndeterminateVisibility(false);
-			};
+				(getActivity()).setProgressBarIndeterminateVisibility(false);
+			}
 			
 			protected void onPreExecute() {
-				getSherlockActivity().setProgressBarIndeterminateVisibility(true);
-			};
+				(getActivity()).setProgressBarIndeterminateVisibility(true);
+			}
 
 			@Override
 			protected Void doInBackground(Void... params) {

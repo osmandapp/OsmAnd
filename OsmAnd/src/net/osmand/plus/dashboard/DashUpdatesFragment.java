@@ -23,7 +23,8 @@ import android.view.ViewGroup;
 import net.osmand.plus.helpers.FontCache;
 
 /**
- * Created by Denis on 21.11.2014.
+ * Created by Denis
+ * on 21.11.2014.
  */
 public class DashUpdatesFragment extends DashBaseFragment {
 
@@ -48,7 +49,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			public void onClick(View view) {
 				final Intent intent = new Intent(view.getContext(), getMyApplication().getAppCustomization().getDownloadIndexActivity());
 				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.UPDATES_TAB);
-				intent.putExtra(DownloadActivity.SINGLE_TAB, true);
+				//intent.putExtra(DownloadActivity.SINGLE_TAB, true);
 				getActivity().startActivity(intent);
 			}
 		});
@@ -159,6 +160,11 @@ public class DashUpdatesFragment extends DashBaseFragment {
 				return;
 			}
 			cancelButton.setImageResource(R.drawable.cancel_button);
+			View view = (View)cancelButton.getParent();
+			if (view != null &&
+					view.findViewById(R.id.map_descr) != null){
+				view.findViewById(R.id.map_descr).setVisibility(View.GONE);
+			}
 			cancelButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {

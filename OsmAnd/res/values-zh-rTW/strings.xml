@@ -306,7 +306,7 @@
 	<string name="live_monitoring_interval">線上即時追蹤間隔</string>
 	<string name="live_monitoring_url_descr">指定位置的參數語法：lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">線上即時追蹤網路地址</string>
-	<string name="gpx_monitoring_disabled_warn">請啟用\'記錄軌跡成 GPX 檔案\'設定。</string>
+	<string name="gpx_monitoring_disabled_warn">使用 GPX 小工具或透過 \'旅程記錄\'的設定以記錄軌跡。</string>
 	<string name="show_current_gpx_title">顯示目前軌跡</string>
 	<string name="free_version_message">此 OsmAnd 免費版，有下載 %1$s 次限制，且不支援離線維基百科的文章資料。</string>
 	<string name="free_version_title">免費版</string>
@@ -377,7 +377,7 @@
 	<string name="init_native_library">初始化原生函式庫…</string>
 	<string name="choose_auto_follow_route">地圖檢視自動置中</string>
 	<string name="choose_auto_follow_route_descr">一段時間後地圖會移到目前位置</string>
-	<string name="auto_follow_route_never">永不</string>
+	<string name="auto_follow_route_never">永不（輕點藍色箭頭可啟動手動引導）</string>
 	<string name="auto_follow_route_navigation">只有導航時自動置中</string>
 	<string name="auto_follow_route_navigation_descr">只有在導航時，地圖檢視自動置中。</string>
 	<string name="auto_follow_location_enabled">使用地圖檢視自動置中。</string>
@@ -519,7 +519,7 @@
 	<string name="search_offline_geo_error">無法解析地理含義 \'%s\'</string>
 	<string name="search_osm_offline">查尋地理位置</string>
 	<string name="system_locale">系統</string>
-	<string name="preferred_locale_descr">選擇顯示語言</string>
+	<string name="preferred_locale_descr">選擇顯示語言（在更改後，請重新啟動 OsmAnd )</string>
 	<string name="preferred_locale">顯示語言</string>
 	<string name="tip_map_switch">選擇地圖來源</string>
 	<string name="tip_map_switch_t_v2">"地圖來源與圖層顯示可以透過\'選單\'-&gt;\'組態地圖\'來改變。
@@ -983,7 +983,7 @@
 	<string name="poi_dialog_comment_default">興趣點變更中</string>
 	<string name="poi_dialog_other_tags_message">所有其它的標誌已保存</string>
 	<string name="default_buttons_commit">提交</string>
-	<string name="default_buttons_reset">重置</string>
+	<string name="default_buttons_reset">清除</string>
 	<string name="filter_current_poiButton">篩選</string>
 	<string name="edit_filter_delete_menu_item">刪除</string>
 	<string name="edit_filter_save_as_menu_item">另存</string>
@@ -1065,7 +1065,7 @@
     <string name="precise_routing_mode">精確的路線 (alpha)</string>
     <string name="precise_routing_mode_descr">允許去預估精確而無差錯的路線。仍然有距離限制並且緩慢。</string>
     <string name="recording_context_menu_show">顯示</string>
-    <string name="recording_photo_description">照片 %1$s 中的 %2$s</string>
+    <string name="recording_photo_description">照片 %1$s %2$s</string>
     <string name="av_def_action_picture">拍攝照片</string>
     <string name="recording_context_menu_precord">拍攝照片</string>
     <string name="dropbox_plugin_description">Dropbox 的外掛元件可以讓軌跡和音訊/視訊注解同步到您的 Dropbox 帳戶。</string>
@@ -1111,7 +1111,7 @@
     <string name="recording_can_not_be_played">不能播放記錄</string>
     <string name="recording_context_menu_delete">刪除記錄</string>
     <string name="recording_context_menu_play">播放</string>
-    <string name="recording_description">錄製 %1$s %2$s 中的 %3$s</string>
+    <string name="recording_description">錄製 %1$s %3$s %2$s</string>
     <string name="recording_default_name">錄製中</string>
     <string name="av_control_stop">停止</string>
     <string name="av_control_start">開始</string>
@@ -1547,7 +1547,7 @@
     <string name="osmo_settings">OpenStreetMap 監控</string>
    	<string name="osmo_settings_descr">組態監控設定值和安裝個人監控頻道</string>
     <string name="osmo_plugin_description">"OpenStreetMap 進階即時監控，跟蹤其它裝置並進行追蹤，請參閱 http://osmo.mobi。建立匿名群組，分享彼此的位置和交流。它具有各種設定用於連線階段追蹤或持續的追蹤。匿名群組是有限制天數和一些功能，也就是沒有遠端控制和群組管理員。完整的功能需在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
-    <string name="keep_informing_never">永不</string>
+    <string name="keep_informing_never">只有手動（輕點箭頭）</string>
     <string name="keep_informing_descr">按照定期間隔重新通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
 	<string name="arrival_distance">到達預告</string>
@@ -1820,12 +1820,12 @@
     <string name="rendering_attr_shareTaxiRoutes_name">分享計程車路線</string>
     <string name="rendering_attr_trolleybusRoutes_name">無軌電車路線</string>
     <string name="rendering_attr_busRoutes_name">公車路線</string>
-    <string name="select_impassable_road">在地圖上選取</string>
+    <string name="select_impassable_road">在地圖上選取…</string>
     <string name="impassable_road">避開的道路…</string>
     <string name="rendering_attr_tramTrainRoutes_name">有軌電車和火車路線</string>
     <string name="rendering_category_hide">隱藏</string>
-    <string name="wake_on_voice">開啟螢幕</string>
-    <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕</string>
+    <string name="wake_on_voice">將螢幕開啟</string>
+    <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕 (螢幕關閉時)</string>
     <string name="lock_screen_request_explanation">為了節電作用 %1$s 需要此許可權才能關閉螢幕。</string>
     <string name="wake_on_voice_never">永不</string>
     <string name="advanced_settings">進階</string>
@@ -1842,7 +1842,7 @@
     <string name="use_opengl_render">使用 OpenGL 繪製</string>
     <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能在某些裝置上無法工作）</string>
     <string name="dismiss">排除</string>
-    <string name="no_internet_connection">不能下載。請檢查您的網路連線。</string>
+    <string name="no_internet_connection">不能下載，請檢查您的網路連線。</string>
     <string name="download_tab_downloads">全部下載</string>
     <string name="download_tab_updates">更新</string>
     <string name="download_tab_local">本機</string>
@@ -1868,4 +1868,19 @@
 	<string name="show_railway_warnings">顯示鐵路平交道</string>
 	<string name="show_pedestrian_warnings">顯示行人穿越道</string>
     <string name="speak_pedestrian">通報行人穿越道</string>
-    </resources>
+    <string name="rendering_value__name">預設</string>
+	<string name="navigation_over_track">開始導航覆蓋在軌跡上嗎？</string>
+	<string name="avoid_roads_msg">您可以經由選擇道路，以避免更改路線</string>
+    <string name="save_track_to_gpx_globally_headline">要求軌跡日誌</string>
+	<string name="recents">最新的</string>
+	<string name="rendering_attr_streetLighting_name">街道照明設備</string>
+    <string name="proxy_pref_title">代理伺服器</string>
+    <string name="proxy_pref_descr">設定代理伺服器網路通信</string>
+    <string name="settings_privacy">隱私</string>
+    <string name="enable_proxy_title">啟用 HTTP 代理伺服器</string>
+	<string name="enable_proxy_descr">對所有的網路請求，組態 HTTP 代理伺服器</string>
+	<string name="proxy_host_title">代理伺服器主機</string>
+	<string name="proxy_host_descr">組態您代理伺服器的主機名稱 (例如 127.0.0.1)</string>
+	<string name="proxy_port_title">代理伺服器埠</string>
+	<string name="proxy_port_descr">組態您代理伺服器的埠號 (例如 8118)</string>
+	</resources>

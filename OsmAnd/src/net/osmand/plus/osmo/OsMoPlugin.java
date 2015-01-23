@@ -71,7 +71,6 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		this.app = app;
 		service = new OsMoService(app, this);
 		tracker = new OsMoTracker(service, app.getSettings().OSMO_SAVE_TRACK_INTERVAL,
-				app.getSettings().OSMO_AUTO_SEND_LOCATIONS,
 				app.getSettings().OSMO_SEND_LOCATIONS_STATE);
 		deviceControl = new OsMoControlDevice(app, this, service, tracker);
 		groups = new OsMoGroups(this, service, tracker, app);

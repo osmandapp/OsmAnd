@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import android.app.FragmentManager;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -23,14 +22,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.actionbarsherlock.view.Window;
 
 /**
  * Created by Denis on 08.09.2014.
@@ -50,6 +50,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	private String initialFilter = "";
 	private boolean singleTab;
+	
 
 	public static final String FILTER_KEY = "filter";
 	public static final String FILTER_CAT = "filter_cat";
@@ -59,21 +60,16 @@ public class DownloadActivity extends BaseDownloadActivity {
 	public static final String DOWNLOAD_TAB = "download";
 	public static final String UPDATES_TAB = "updates";
 	public static final String SINGLE_TAB = "SINGLE_TAB";
+	private List<DownloadActivityType> downloadTypes = new ArrayList<DownloadActivityType>();
 
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		BaseDownloadActivity.downloadListIndexThread.resetUiActivity(DownloadActivity.class);
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
+		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		updateDownloads();
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setProgressBarIndeterminateVisibility(false);
+		setSupportProgressBarIndeterminateVisibility(false);
 
 		setContentView(R.layout.tab_content);
 		singleTab = getIntent() != null && getIntent().getBooleanExtra(SINGLE_TAB, false);
@@ -140,9 +136,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 		});
 
-		final List<DownloadActivityType> downloadTypes = getDownloadTypes();
+		downloadTypes = createDownloadTypes();
 		final Intent intent = getIntent();
-		setType(downloadTypes.get(0));
 		if (intent != null && intent.getExtras() != null) {
 			final String filter = intent.getExtras().getString(FILTER_KEY);
 			if (filter != null) {
@@ -153,12 +148,12 @@ public class DownloadActivity extends BaseDownloadActivity {
 			if (filterCat != null) {
 				DownloadActivityType type = DownloadActivityType.getIndexType(filterCat.toLowerCase());
 				if (type != null) {
-					setType(type);
 					downloadTypes.remove(type);
 					downloadTypes.add(0, type);
 				}
 			}
 		}
+		changeType(downloadTypes.get(0));
 
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -182,7 +177,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
 			case android.R.id.home:
@@ -200,8 +195,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 	public List<LocalIndexInfo> getLocalIndexInfos(){
 		return localIndexInfos;
 	}
-
-	public void setType(DownloadActivityType type) { this.type = type;}
 
 	public void changeType(final DownloadActivityType tp) {
 		//invalidateOptionsMenu();
@@ -344,8 +337,13 @@ public class DownloadActivity extends BaseDownloadActivity {
 //			getExpandableListView().scrollTo(x, y);
 //		}
 	}
-
+	
+	
 	public List<DownloadActivityType> getDownloadTypes() {
+		return downloadTypes;
+	}
+
+	public List<DownloadActivityType> createDownloadTypes() {
 		List<DownloadActivityType> items = new ArrayList<DownloadActivityType>();
 		items.add(DownloadActivityType.NORMAL_FILE);
 		items.add(DownloadActivityType.VOICE_FILE);

@@ -29,16 +29,16 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 
 	private Preference debugPref;
 	private Preference trackerId;
-	private CheckBoxPreference sendLocationsref;
+//	private CheckBoxPreference sendLocationsref;
 	
 	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 30, 60, 90};
 	public static final int[] MINUTES = new int[] {2, 3, 5};
-	
-	
+
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setTitle(R.string.osmo_settings);
+		getToolbar().setTitle(R.string.osmo_settings);
 		PreferenceScreen grp = getPreferenceScreen();
 		
 		
@@ -54,11 +54,11 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		autoConnectref.setSummary(R.string.osmo_auto_connect_descr);
 		grp.addPreference(autoConnectref);
 		
-		sendLocationsref = createCheckBoxPreference(settings.OSMO_AUTO_SEND_LOCATIONS);
-		sendLocationsref.setTitle(R.string.osmo_auto_send_locations);
-		sendLocationsref.setSummary(R.string.osmo_auto_send_locations_descr);
-		sendLocationsref.setEnabled(settings.OSMO_AUTO_CONNECT.get());
-		grp.addPreference(sendLocationsref);
+//		sendLocationsref = createCheckBoxPreference(settings.OSMO_AUTO_SEND_LOCATIONS);
+//		sendLocationsref.setTitle(R.string.osmo_auto_send_locations);
+//		sendLocationsref.setSummary(R.string.osmo_auto_send_locations_descr);
+//		sendLocationsref.setEnabled(settings.OSMO_AUTO_CONNECT.get());
+//		grp.addPreference(sendLocationsref);
 		
 		grp.addPreference(createTimeListPreference(settings.OSMO_SAVE_TRACK_INTERVAL, SECONDS,
 				MINUTES, 1000, R.string.osmo_track_interval, R.string.osmo_track_interval_descr));
@@ -178,17 +178,12 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		boolean p = super.onPreferenceChange(preference, newValue);
 		String id = preference.getKey();
-		if (id.equals(settings.OSMO_AUTO_SEND_LOCATIONS.getId())) {
-			if ((Boolean) newValue) {
-				final OsMoPlugin plugin = OsMoPlugin.getEnabledPlugin(OsMoPlugin.class);
-				plugin.getTracker().enableTracker();
-			}
-		} else if (id.equals(settings.OSMO_AUTO_CONNECT.getId())) {
+		if (id.equals(settings.OSMO_AUTO_CONNECT.getId())) {
 			if ((Boolean) newValue) {
 				final OsMoPlugin plugin = OsMoPlugin.getEnabledPlugin(OsMoPlugin.class);
 				plugin.getService().connect(false);
 			}
-			sendLocationsref.setEnabled(settings.OSMO_AUTO_CONNECT.get());
+//			sendLocationsref.setEnabled(settings.OSMO_AUTO_CONNECT.get());
 		}
 		return p;
 	}

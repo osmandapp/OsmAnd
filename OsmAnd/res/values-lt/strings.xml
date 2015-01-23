@@ -340,7 +340,7 @@
   <string name="search_position_undefined">Nenurodyta</string>
   <string name="search_position_fixed"/>
   <string name="search_position_current_location">Esama vieta…</string>
-  <string name="search_position_map_view">Paskutinė žiūrėta žemėlapio vieta</string>
+  <string name="search_position_map_view">Esamo žemėlapio centras</string>
   <string name="select_search_position">Pradžia:</string>
   <string name="context_menu_item_search">Ieškoti netoliese nuo čia</string>
   <string name="tip_recent_changes_0_6_7_t">Pakeitimai 0.6.7 versijoje : 
@@ -477,7 +477,7 @@
   <string name="search_offline_geo_error">Nepavyko suprasti geo poreikio \'%s\'</string>
   <string name="search_osm_offline">Ieškoti adreso parsiųstuose žemėlapiuose</string>
   <string name="system_locale">Sistemos</string>
-  <string name="preferred_locale_descr">Pasirinkite programos kalbą</string>
+  <string name="preferred_locale_descr">Pasirinkite programos kalbą (pakeitę kalbą iš naujo aktyvuokite OsmAnd)</string>
   <string name="preferred_locale">Programos kalba</string>
   <string name="tip_map_switch">Pasirinkti žemėlapių šaltinį</string>
   
@@ -1151,8 +1151,8 @@
     <string name="audionotes_plugin_name">Audio užrašų įskiepis</string>
     
 	
-<string name="osmand_srtm_short_description_80_chars">OsmAnd įskiepis skirtas aukščio kontūrų linijoms</string>
-    <string name="osmand_srtm_long_description_1000_chars">Šis įskiepis įgalina aukščio kontūrų linijas OsmAnd parsiųstuose žemėlapiuose. Pasaulio duomenys (tarp 70 laipsnių šiaurės ir 70 laipsnių pietų) yra paremti SRTM (Shuttle Radar Topography Mission) ir ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), vaizdo fiksavimo instrumentas ant Terra, NASA Earth Observing System palydovo. ASTER yra bendradarbiavimo tarp NASA, Japonijos ekonomikos, prekybos ir industrijos (METI) ministerijos ir Japan Space Systems (J-spacesystems) projektas.</string>
+<string name="osmand_srtm_short_description_80_chars">OsmAnd įskiepis, skirtas aukščio kontūrų linijoms</string>
+    <string name="osmand_srtm_long_description_1000_chars">Šis įskiepis įgalina aukščio kontūrų linijas OsmAnd parsiųstuose žemėlapiuose. Pasaulio duomenys (tarp 70 laipsnių šiaurės ir 70 laipsnių pietų) yra paremti SRTM (Shuttle Radar Topography Mission) ir ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), vaizdo fiksavimo instrumento Terra, NASA Earth Observing System palydovo, matavimais. ASTER yra bendradarbiavimo tarp NASA, Japonijos ekonomikos, prekybos ir industrijos (METI) ministerijos ir Japan Space Systems (J-spacesystems) projektas.</string>
     
     
     <string name="map_widget_distancemeasurement">Atstumo matavimas</string>
@@ -1832,7 +1832,7 @@
     <string name="rendering_attr_trolleybusRoutes_name">Troleibusų maršrutai</string>
     <string name="rendering_attr_tramRoutes_name">Tramvajų maršrutai</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Traukinių maršrutai</string>
-    <string name="select_impassable_road">Pasirinkite žemėlapį</string>
+    <string name="select_impassable_road">Pasirinkite žemėlapyje…</string>
     <string name="impassable_road">Vengti kelių…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tramvajų ir traukinių maršrutai</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Maršrutinis taksi</string>
@@ -1882,4 +1882,5 @@
 	<string name="show_pedestrian_warnings">Rodyti pėsčiųjų perėjas</string>
     <string name="speak_pedestrian">Pranešti apie perėjas</string>
     <string name="traffic_warning_pedestrian">Pėčiųjų perėja</string>
+	<string name="rendering_value__name">Numatytasis</string>
 	</resources>

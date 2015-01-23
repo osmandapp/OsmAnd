@@ -36,16 +36,15 @@ import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.BusyIndicator;
-import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.Version;
-import net.osmand.plus.download.BaseDownloadActivity;
+import net.osmand.plus.poi.NameFinderPoiFilter;
+import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.SearchByNameFilter;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.resources.AsyncLoadingThread.MapLoadRequest;
@@ -719,7 +718,7 @@ public class ResourceManager {
 		return publish;
 	}
 	
-	public List<Amenity> searchAmenities(PoiFilter filter,
+	public List<Amenity> searchAmenities(PoiLegacyFilter filter,
 			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, final ResultMatcher<Amenity> matcher) {
 		final List<Amenity> amenities = new ArrayList<Amenity>();
 		searchAmenitiesInProgress = true;
@@ -825,7 +824,7 @@ public class ResourceManager {
 		return map;
 	}
 	
-	public List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, PoiFilter filter, ResultMatcher<Amenity> matcher) {
+	public List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, PoiLegacyFilter filter, ResultMatcher<Amenity> matcher) {
 		searchAmenitiesInProgress = true;
 		final List<Amenity> amenities = new ArrayList<Amenity>();
 		try {

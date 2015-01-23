@@ -26,7 +26,8 @@ public class SettingsActivity extends SettingsBaseActivity {
 	private Preference general;
 	private Preference routing;
 	private Preference about;
-	
+
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

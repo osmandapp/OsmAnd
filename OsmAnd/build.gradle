@@ -1,17 +1,28 @@
 apply plugin: 'com.android.application'
 
-//<target name="fix_apostrophe_issues">
-//<replace token="version='1.0'" value="version=&quot;1.0&quot;" encoding="UTF-8">
-//<fileset dir="res" includes="**/strings.xml" />
-//</replace>
-//               <replace token="encoding='utf-8'" value="encoding=&quot;utf-8&quot;" encoding="UTF-8">
-//                       <fileset dir="res" includes="**/strings.xml" />
-//</replace>
-//
-//               <replaceregexp  match="([^\\])'" replace="\1\\\\'" flags="-g" byline="off" encoding="UTF-8">
-//                       <fileset dir="res" includes="**/strings.xml" />
-//</replaceregexp>
-//       </target>
+// Global Paramers accepted
+// APK_NUMBER_VERSION - version number of apk
+// APK_VERSION - version name like 2.1 (subsitute of app_version in no_translate.xml)
+// APP_NAME - app name
+// APP_EDITION - used for build numbers
+// APP_FEATURES - features +play_market +gps_status -parking_plugin -blackberry -free_version -amazon
+    
+
+// TODO
+// 0. Update OsmAndCore_wrapper for build (use ivy )
+// 1. Filter fonts
+// <unzip src="OsmAndCore_android.aar" dest=".">
+//            <patternset>
+//                <include name="assets/**/map/fonts/OpenSans/*"/>
+//                <include name="assets/**/map/fonts/NotoSans/*"/>
+//            </patternset>
+//        </unzip>
+// Less important
+// 2. fix_apostrophe_issues (replace match="[^=]([^\\])'" replace="\1\\\\'") res/**/strings.xml
+// 3. sherpafy/free/paid
+// 4. Release signature
+// 5. APP_NAME, APP_EDITION uses flavor
+
 
 android {
     compileSdkVersion 21
@@ -37,8 +48,8 @@ android {
         minSdkVersion 9
         targetSdkVersion 21
 
-        versionCode System.getenv("APK_NUMBER_VERSION") ?: versionCode
-        versionName System.getenv("APK_VERSION") ?: versionName
+        versionCode System.getenv("APK_NUMBER_VERSION")? System.getenv("APK_NUMBER_VERSION").toInteger(): versionCode
+        versionName System.getenv("APK_VERSION") ?:  versionName
     }
 
     lintOptions {
@@ -65,42 +76,34 @@ android {
             aidl.srcDirs = ["src"]
             java.srcDirs = [
                     "src",
-                    fileTree(dir: "../OsmAnd-java/src", exclude: "**/PlatformUtil.java"),
-                    "resourcesSrc"
+                    fileTree(dir: "../OsmAnd-java/src", exclude: "**/PlatformUtil.java")
             ]
             resources.srcDirs = [
-                    "src",
-                    "../OsmAnd-java/src",
-                    "resourcesSrc"
+                    "src"
             ]
             renderscript.srcDirs = ["src"]
             res.srcDirs = [
-                    "res",
-                    "../../resources/rendering_styles/style-icons/"
+                'res'
+
             ]
             assets.srcDirs = [
-                    "assets",
-                    "voiceAssets",
-                    "helpAssets"
+                'assets'
+            ]
+        }
+        free {
+            manifest.srcFile "AndroidManifest-free.xml"
+        }
+
+        legacy {
+            jniLibs.srcDirs = [
+                "libgnustl"
             ]
         }
     }
 
-    flavorDimensions "version", "distribution", "abi"
+    flavorDimensions "version", "abi", "coreversion"
     productFlavors {
-        // ABI
-        x86 {
-            flavorDimension "abi"
-            ndk {
-                abiFilter "x86"
-            }
-        }
-        mips {
-            flavorDimension "abi"
-            ndk {
-                abiFilter "mips"
-            }
-        }
+        // ABI        
         armv7 {
             flavorDimension "abi"
             ndk {
@@ -113,6 +116,18 @@ android {
                 abiFilter "armeabi"
             }
         }
+        x86 {
+            flavorDimension "abi"
+            ndk {
+                abiFilter "x86"
+            }
+        }
+        mips {
+            flavorDimension "abi"
+            ndk {
+                abiFilter "mips"
+            }
+        }
         fat {
             flavorDimension "abi"
         }
@@ -122,26 +137,19 @@ android {
             flavorDimension "version"
             applicationId "net.osmand"
         }
-        paid {
+        full {
             flavorDimension "version"
             applicationId "net.osmand.plus"
         }
-        /*
-        sherpafy {
-            flavorDimension "version"
-            applicationId "net.osmand.sherpafy"
-        }
-        */
 
-        // Distribution
-        googleplay {
-            flavorDimension "distribution"
+        legacy {
+            flavorDimension "coreversion"
         }
-        /*
-        amazon {
-            flavorDimension "distribution"
+
+        qtcore {
+            flavorDimension "coreversion"
         }
-        */
+
     }
 
     buildTypes {
@@ -154,61 +162,116 @@ android {
         release {
             signingConfig signingConfigs.publishing
         }
+
     }
 }
 
+
+def replaceNoTranslate(line) {
+    if(line.contains("\"app_name\"") && System.getenv("APP_NAME")) {
+        return line.replaceAll(">[^<]*<", " >"+System.getenv("APP_NAME")+"<")
+    }
+    if(line.contains("\"app_edition\"") && System.getenv("APP_EDITION")) {
+        return line.replaceAll(">[^<]*<", " >"+System.getenv("APP_EDITION")+"<")
+    }
+    if(line.contains("\"versionFeatures\"") && System.getenv("APP_FEATURES")) {
+        return line.replaceAll(">[^<]*<", " >"+System.getenv("APP_FEATURES")+"<")
+    }
+    return line;
+}
+
+task updateNoTranslate(type: Copy) {
+    from('.') {
+        include 'no_translate.xml'
+        filter {
+            line -> replaceNoTranslate(line);
+        }
+    }
+    into 'res/values/'
+}
+
 task collectVoiceAssets(type: Sync) {
-    from "../../resources"
-    into "voiceAssets"
-    include "specialphrases/**"
-    include "voice/**/*.p"
+    from "../../resources/voice"
+    into "assets/voice"
+    include "**/*.p"
+}
+
+task collectSpecialPhrasesAssets(type: Sync) {
+    from "../../resources/specialphrases"
+    into "assets/specialphrases"
+    include "*.txt"
+}
+
+task collectHelpContentsAssets(type: Sync) {
+    from "../../help"
+    into "assets/help"
+    include "*.html"
+    include "images/**/*.png"
+
+    from "assets/"
+    into "assets/help"
+    include "style.css"
 }
 
 task collectRoutingResources(type: Sync) {
     from "../../resources/routing"
-    into "resourcesSrc/net/osmand/router"
+    into "src/net/osmand/router"
     include "*.xml"
 }
 
-task collectRenderingStyles(type: Sync) {
+
+task collectMiscResources(type: Copy) {
+    into "src/net/osmand/osm"
+    from("../../resources/obf_creation") {
+        include "rendering_types.xml"
+    }
+    from("../../resources/poi") {
+        include "poi_types.xml"
+    }   
+}
+
+task collectRenderingStylesResources(type: Sync) {
     from "../../resources/rendering_styles"
-    into "resourcesSrc/net/osmand/render"
+    into "src/net/osmand/render"
     include "*.xml"
 }
 
-task collectRegionsInfo(type: Copy) {
+
+task collectRegionsInfoResources(type: Copy) {
     from "../../resources/countries-info"
-    into "resourcesSrc/net/osmand/map"
+    into "src/net/osmand/map"
     include "regions.ocbf"
 }
 
-task collectHelpContents(type: Sync) {
-    from "../../help"
-    into "helpAssets/help"
-    include "*.html"
-    include "images/**/*.png"
+
+task copyStyleIcons(type: Copy) {
+    from "../../resources/rendering_styles/style-icons/"
+    into "res/"
+    include "**/*.png"
 }
 
-task collectMiscResources(type: Copy) {
-    from("../../../resources/obf_creation") {
-        include "rendering_types.xml"
-    }
-    from("../../../resources/poi") {
-        include "poi_types.xml"
-    }
-
-    into "resourcesSrc/net/osmand/osm"
-}
 
 task collectExternalResources << {}
 collectExternalResources.dependsOn collectVoiceAssets,
+        collectSpecialPhrasesAssets,
+        collectHelpContentsAssets,
         collectRoutingResources,
-        collectRenderingStyles,
-        collectRegionsInfo,
-        collectHelpContents,
-        collectMiscResources
+        collectRenderingStylesResources,
+        collectRegionsInfoResources,
+        collectMiscResources,
+        copyStyleIcons,
+        updateNoTranslate
+
 tasks.withType(JavaCompile) {
     compileTask -> compileTask.dependsOn << collectExternalResources
+}
+
+
+task downloadAAR {
+    def f = new File("libs/OsmAndCore_wrapper.jar")
+    if (!f.exists()) {
+        new URL("http://builder.osmand.net:81/binaries/android/OsmAndCore_wrapper.jar").withInputStream{ i -> f.withOutputStream{ it << i }}
+    }
 }
 
 // Legacy core build
@@ -222,16 +285,27 @@ task buildOsmAndCore(type: Exec) {
         commandLine "cmd", "/c", "echo", "Not supported"
     }
 }
-task cleanupDuplicatesInCore(type: Delete) {
-    dependsOn buildOsmAndCore
 
-    delete "libs/armeabi/libgnustl_shared.so"
-    delete "libs/armeabi-v7a/libgnustl_shared.so"
-    delete "libs/mips/libgnustl_shared.so"
-    delete "libs/x86/libgnustl_shared.so"
+task cleanupDuplicatesInCore() {
+    dependsOn buildOsmAndCore
+    // doesn't work for legacy debug builds
+    doLast {
+        file("libgnustl/armeabi").mkdirs()
+        println file("libs/armeabi/libgnustl_shared.so").renameTo(file("libgnustl/armeabi/libgnustl_shared.so"))
+        file("libgnustl/armeabi-v7a").mkdirs()
+        println file("libs/armeabi-v7a/libgnustl_shared.so").renameTo(file("libgnustl/armeabi-v7a/libgnustl_shared.so"))
+        file("libgnustl/mips").mkdirs()
+        println file("libs/mips/libgnustl_shared.so").renameTo(file("libgnustl/mips/libgnustl_shared.so"))
+        file("libgnustl/x86").mkdirs()
+        println file("libs/x86/libgnustl_shared.so").renameTo(file("libgnustl/x86/libgnustl_shared.so"))
+    }
 }
 tasks.withType(JavaCompile) {
-    compileTask -> compileTask.dependsOn << [buildOsmAndCore, cleanupDuplicatesInCore]
+    compileTask -> compileTask.dependsOn << [buildOsmAndCore, downloadAAR, cleanupDuplicatesInCore]
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn << [buildOsmAndCore, downloadAAR]
 }
 
 repositories {
@@ -245,10 +319,10 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: "libs", include: ["*.jar"], exclude: ["QtAndroid-bundled.jar", "QtAndroidAccessibility-bundled.jar"])
-    compile "com.actionbarsherlock:actionbarsherlock:4.4.0@aar"
-    compile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
-    debugCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
-    nativeDebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
-    releaseCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
+    compile fileTree(dir: "libs", include: ["*.jar"], exclude: ["QtAndroid-bundled.jar", "QtAndroidAccessibility-bundled.jar", "android-support*.jar", "OsmAndCore_wrapper.jar"])
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+    legacyCompile fileTree(dir: "libs", include: ["OsmAndCore_wrapper.jar"])
+    //nativeDebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
+    //releaseCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 }

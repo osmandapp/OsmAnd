@@ -11,6 +11,7 @@ import java.net.URLEncoder;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.Base64;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -76,7 +77,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	private String editingPOI(String url, String requestMethod, String userOperation) {
 		try {
-			HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 			log.info("Editing poi " + url);
 			connection.setConnectTimeout(15000);
 			connection.setRequestMethod(requestMethod);

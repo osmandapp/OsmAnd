@@ -773,7 +773,7 @@ public class OsmandSettings {
 		new EnumIntPreference<AutoZoomMap>("auto_zoom_map_new", AutoZoomMap.NONE,
 				AutoZoomMap.values()).makeProfile().cache();
 	{
-		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, AutoZoomMap.FARTHEST);
+		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, AutoZoomMap.FAR);
 		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, AutoZoomMap.NONE);
 		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, AutoZoomMap.NONE);
 	}
@@ -796,6 +796,8 @@ public class OsmandSettings {
 	
 	public final CommonPreference<Boolean> INTERRUPT_MUSIC = new BooleanPreference("interrupt_music", false).makeGlobal();
 
+	public final CommonPreference<String> PROXY_HOST = new StringPreference("proxy_host", "127.0.0.1").makeGlobal();
+	public final CommonPreference<Integer> PROXY_PORT = new IntPreference("proxy_port", 8118).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$
@@ -884,8 +886,6 @@ public class OsmandSettings {
 			Build.VERSION.SDK_INT < 14/*Build.VERSION_CODES.ICE_CREAM_SANDWICH*/? false : true).makeGlobal();
 	
 	public final OsmandPreference<Long> OSMO_LAST_PING = new LongPreference("osmo_last_ping", 0).makeGlobal().cache();
-	
-	public final OsmandPreference<Boolean> OSMO_AUTO_SEND_LOCATIONS = new BooleanPreference("osmo_automatically_send_locations", false).makeGlobal();
 	
 	public final OsmandPreference<Boolean> OSMO_SEND_LOCATIONS_STATE = new BooleanPreference("osmo_send_locations", false).cache().makeGlobal();
 	
@@ -1507,7 +1507,7 @@ public class OsmandSettings {
 	public static final String LAST_SEARCHED_REGION = "last_searched_region"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_CITY = "last_searched_city"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_CITY_NAME = "last_searched_city_name"; //$NON-NLS-1$
-	public static final String lAST_SEARCHED_POSTCODE= "last_searched_postcode"; //$NON-NLS-1$
+	public static final String LAST_SEARCHED_POSTCODE= "last_searched_postcode"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_STREET = "last_searched_street"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_BUILDING = "last_searched_building"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_INTERSECTED_STREET = "last_searched_intersected_street"; //$NON-NLS-1$
@@ -1541,7 +1541,7 @@ public class OsmandSettings {
 
 	public boolean setLastSearchedRegion(String region, LatLon l) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences).putString(LAST_SEARCHED_REGION, region).putLong(LAST_SEARCHED_CITY, -1).
-			putString(LAST_SEARCHED_CITY_NAME, "").putString(lAST_SEARCHED_POSTCODE, "").
+			putString(LAST_SEARCHED_CITY_NAME, "").putString(LAST_SEARCHED_POSTCODE, "").
 			putString(LAST_SEARCHED_STREET,"").putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$ //$NON-NLS-2$
 		if (settingsAPI.contains(globalPreferences,LAST_SEARCHED_INTERSECTED_STREET)) {
 			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
@@ -1552,12 +1552,12 @@ public class OsmandSettings {
 	}
 	
 	public String getLastSearchedPostcode(){
-		return settingsAPI.getString(globalPreferences, lAST_SEARCHED_POSTCODE, null);	
+		return settingsAPI.getString(globalPreferences, LAST_SEARCHED_POSTCODE, null);
 	}
 	
 	public boolean setLastSearchedPostcode(String postcode, LatLon point){
-		SettingsEditor edit = settingsAPI.edit(globalPreferences).putLong(LAST_SEARCHED_CITY, -1).putString(LAST_SEARCHED_STREET, "").putString( //$NON-NLS-1$
-				LAST_SEARCHED_BUILDING, "").putString(lAST_SEARCHED_POSTCODE, postcode); //$NON-NLS-1$
+		SettingsEditor edit = settingsAPI.edit(globalPreferences).putLong(LAST_SEARCHED_CITY, -1).putString(LAST_SEARCHED_STREET, "") //$NON-NLS-1$
+				.putString(LAST_SEARCHED_BUILDING, "").putString(LAST_SEARCHED_POSTCODE, postcode); //$NON-NLS-1$
 		if(settingsAPI.contains(globalPreferences,LAST_SEARCHED_INTERSECTED_STREET)){
 			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
 		}
@@ -1576,8 +1576,8 @@ public class OsmandSettings {
 
 	public boolean setLastSearchedCity(Long cityId, String name, LatLon point) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences).putLong(LAST_SEARCHED_CITY, cityId).putString(LAST_SEARCHED_CITY_NAME, name).
-				putString(LAST_SEARCHED_STREET, "").putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
-		edit.remove(lAST_SEARCHED_POSTCODE);
+				putString(LAST_SEARCHED_STREET, "").putString(LAST_SEARCHED_BUILDING, "").putString(LAST_SEARCHED_POSTCODE, ""); //$NON-NLS-1$
+		//edit.remove(LAST_SEARCHED_POSTCODE);
 		if(settingsAPI.contains(globalPreferences,LAST_SEARCHED_INTERSECTED_STREET)){
 			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
 		}
@@ -1869,16 +1869,18 @@ public class OsmandSettings {
 	}
 	
 	public enum AutoZoomMap {
-		NONE(R.string.auto_zoom_none, 0f),
-		FARTHEST(R.string.auto_zoom_farthest, 1f),
-		FAR(R.string.auto_zoom_far, 1.4f),
-		CLOSE(R.string.auto_zoom_close, 2f)
+		NONE(R.string.auto_zoom_none, 0f, 18),
+		FARTHEST(R.string.auto_zoom_farthest, 1f, 15.5f),
+		FAR(R.string.auto_zoom_far, 1.4f, 17f),
+		CLOSE(R.string.auto_zoom_close, 2f, 19f)
 		;
 		public final float coefficient;
 		public final int name;
-		AutoZoomMap(int name, float coefficient) {
+		public final float maxZoom;
+		AutoZoomMap(int name, float coefficient, float maxZoom) {
 			this.name = name;
 			this.coefficient = coefficient;
+			this.maxZoom = maxZoom;
 			
 		}
 	}

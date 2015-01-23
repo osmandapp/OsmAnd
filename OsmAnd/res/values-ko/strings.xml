@@ -92,7 +92,7 @@
 	<string name="live_monitoring_interval">온라인 트래킹 시간 간격</string>
 	<string name="live_monitoring_url_descr">온라인 트래킹할 웹 주소를 지정합니다. 매개변수 형식 : 위도={0}, 경도={1}, 시간={2}, hdop={3}, 고도={4}, 속도={5}, bearing={6}</string>
 	<string name="live_monitoring_url">온라인 트래킹 웹 주소</string>
-	<string name="gpx_monitoring_disabled_warn">\'트랙을 GPX 파일로 기록\' 설정을 활성화 하세요.</string>
+	<string name="gpx_monitoring_disabled_warn">"GPX 위젯을 사용하거나  \'경로 레코딩\' 설정을 통해서 경로를 기록하세요."</string>
 	<string name="show_current_gpx_title">현재의 GPX 경로를 표시합니다</string>
 	<string name="tip_recent_changes_0_7_0_t">0.7.0 버전에 대한 변경 사항들 :
 		\n\t- 오프라인 위키피디아 기사 포함 데이터
@@ -189,7 +189,7 @@
 	<string name="init_native_library">기본 라이브러리 초기화중…</string>
 	<string name="choose_auto_follow_route">자동-센터 지도 보기</string>
 	<string name="choose_auto_follow_route_descr">지도 보기가 현재 위치와 동기화하여 복귀할 때까지 걸리는 시간입니다</string>
-	<string name="auto_follow_route_never">결코(Never)</string>
+	<string name="auto_follow_route_never">결코(Never : 수동으로 길안내를 시작하기 위해 파란 화살표를 누르세요)</string>
 	<string name="auto_follow_route_navigation">자동-센터 운행 전용</string>
 	<string name="auto_follow_route_navigation_descr">운행 중에만 자동-센터 지도 보기를 사용합니다.</string>
 	<string name="auto_follow_location_enabled">자동-센터 지도 보기 사용 중입니다.</string>
@@ -387,7 +387,7 @@
 	<string name="search_osm_offline">지오 위치 검색</string>
 
 	<string name="system_locale">시스템 언어</string>
-	<string name="preferred_locale_descr">표시 언어를 선택합니다</string>
+	<string name="preferred_locale_descr">언어 선택 (OsmAnd를 재시작해 주세요)</string>
 	<string name="preferred_locale">언어 표시</string>
 
 	<string name="tip_map_switch">지도 소스를 선택</string>
@@ -883,7 +883,7 @@
 <string name="poi_dialog_comment_default">POI 변경</string>
 <string name="poi_dialog_other_tags_message">모든 다른 태그는 보존된다</string>
 <string name="default_buttons_commit">반영</string>
-<string name="default_buttons_reset">재설정</string>
+<string name="default_buttons_reset">지우기</string>
 <string name="filter_current_poiButton">필터</string>
 <string name="edit_filter_delete_menu_item">삭제</string>
 <string name="edit_filter_save_as_menu_item">다른이름으로 저장</string>
@@ -1148,11 +1148,11 @@
     <string name="local_indexes_cat_srtm">등고선 데이터</string>
     <string name="local_indexes_cat_av">소리/영상 데이터</string>
     <string name="stop_routing_confirm">운행을 중지하시겠습니까 ?</string>
-    <string name="clear_dest_confirm">도착지 (및 경유지) 를지우겠습니까?</string>
+    <string name="clear_dest_confirm">도착지 (및 경유지) 를 지우겠습니까?</string>
     <string name="precise_routing_mode_descr">고장없이 정확한 경로를 계산(라우팅) 할 수 있습니다. 현 단계에서는 거리가 한정되어있고 게다가 느립니다.</string>
     <string name="precise_routing_mode">정확한 라우팅 모드</string>
     <string name="recording_context_menu_show">표시</string>
-    <string name="recording_photo_description">사진 %1$s of %2$s</string>
+    <string name="recording_photo_description">사진 %1$s %2$s</string>
     <string name="av_def_action_picture">사진 찍기</string>
     <string name="recording_context_menu_precord">사진 찍기</string>
     <string name="dropbox_plugin_description">Dropbox 플러그인은 Dropbox 계정으로 GPX경로와 소리/영상 노트를 동기화 할 수 있습니다 .</string>
@@ -1186,7 +1186,7 @@
     <string name="recording_can_not_be_played">레코딩을 재생할 수 없습니다</string>
     <string name="recording_context_menu_delete">레코딩 삭제</string>
     <string name="recording_context_menu_play">재생</string>
-    <string name="recording_description">레코딩 %1$s %2$s of %3$s</string>
+    <string name="recording_description">레코딩 %1$s %3$s %2$s</string>
     <string name="recording_default_name">레코딩</string>
     <string name="av_control_stop">정지</string>
     <string name="av_control_start">A/V 찍기</string>
@@ -1772,7 +1772,7 @@
 	<string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
 	<string name="arrival_distance">도착 알림</string>
     <string name="arrival_distance_descr">도착 알림을 원하세요 ?</string>
-    <string name="keep_informing_never">결코</string>
+    <string name="keep_informing_never">수동으로 (화살표를 누르세요)</string>
     <string name="keep_informing_descr">정기적인 간격으로 운행 명령을 다시 알리기</string>
     <string name="keep_informing">운행 명령을 반복</string>
 	<string name="navigation_intent_invalid">잘못된 포맷 : %s</string>
@@ -2058,12 +2058,12 @@
     <string name="rendering_attr_shareTaxiRoutes_name">택시 노선 공유</string>
     <string name="rendering_attr_trolleybusRoutes_name">무궤도 전차 노선</string>
     <string name="rendering_attr_busRoutes_name">버스 노선</string>
-    <string name="select_impassable_road">지도에서 선택</string>
+    <string name="select_impassable_road">지도에서 선택…</string>
     <string name="impassable_road">도로 회피…</string>
     <string name="rendering_attr_tramTrainRoutes_name">전차 및 기차 노선</string>
     <string name="rendering_category_hide">숨기기</string>
     <string name="wake_on_voice">화면 켜기</string>
-    <string name="wake_on_voice_descr">교차로에 접근할 때 전화 화면 켜기</string>
+    <string name="wake_on_voice_descr">교차로에 접근할 때 화면 켜기</string>
     <string name="lock_screen_request_explanation">%1$의 절전 기능에 대한 화면을 해제 하려면 이 권한이 필요 합니다.</string>
     <string name="wake_on_voice_never">결코</string>
     <string name="advanced_settings">고급</string>
@@ -2106,4 +2106,19 @@
 	<string name="show_railway_warnings">철도 교차로 표시</string>
 	<string name="show_pedestrian_warnings">보행자 횡단보도 표시</string>
     <string name="speak_pedestrian">보행자 횡단보도 알리기</string>
-    </resources>
+    <string name="rendering_value__name">기본값</string>
+	<string name="navigation_over_track">경로를 따라 운행을 시작할까요?</string>
+	<string name="avoid_roads_msg">원하는 도로를 선택하여 경로를 변경할 수 있습니다</string>
+    <string name="save_track_to_gpx_globally_headline">트랙 로깅 요구</string>
+	<string name="recents">최근</string>
+	<string name="rendering_attr_streetLighting_name">거리 조명</string>
+    <string name="proxy_pref_title">프록시</string>
+    <string name="proxy_pref_descr">프록시 인터넷 통신 설정</string>
+    <string name="settings_privacy">프라이버시</string>
+    <string name="enable_proxy_title">HTTP 프록시 사용</string>
+	<string name="enable_proxy_descr">모든 네트워크 요청에 대해 HTTP 프록시 구성</string>
+	<string name="proxy_host_title">프록시 호스트</string>
+	<string name="proxy_host_descr">프록시 호스트 이름 구성 (예: 127.0.0.1)</string>
+	<string name="proxy_port_title">프록시 포트</string>
+	<string name="proxy_port_descr">당신의 프록시 포트 번호 구성 (예: 8118)</string>
+	</resources>

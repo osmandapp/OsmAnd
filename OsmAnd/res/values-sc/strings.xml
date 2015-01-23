@@ -254,7 +254,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="distance_measurement_save_gpx">Sarba comente GPX</string>
     <string name="distance_measurement_load_gpx">Aberi GPX esistente</string>
     <string name="wait_current_task_finished">Pro piaghere iseta sa fine de su traballu presente</string>
-    <string name="use_kalman_filter_compass_descr">Imprea su filtru pro istransire traviaduras de sa bùssola</string>
+    <string name="use_kalman_filter_compass_descr">Minimat s\'abbolotu de sa bùssola ma annanghet inèrtzia/preìtia</string>
     <string name="use_kalman_filter_compass">Impreu de su filtru de Kalman</string>
     <string name="access_mark_final_location_first">Modalidade de atzessu fatzilidadu: issebera in antis sa destinatzione</string> 
     <string name="use_magnetic_sensor_descr">Imprea su sensore magneticu pro determinare su balore de sa bùssola imbetzes de su sensore de orientamentu</string>
@@ -341,7 +341,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="precise_routing_mode_descr">Abìlita pro calculare àndalas pretzisas sena attoppos. Est lentu e limitadu in sa distantzia.</string>
     <string name="precise_routing_mode">Calculu pretzisu de s\'àndala (alfa)</string>
     <string name="recording_context_menu_show">Ammustra</string>
-    <string name="recording_photo_description">Foto %1$s a %2$s</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Iscata una foto</string>
     <string name="recording_context_menu_precord">Iscata una foto</string>
     <string name="av_use_external_camera_descr">Imprea s\'aplicu de sistema pro sas fotos</string>
@@ -383,8 +383,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="recording_can_not_be_played">Sa registratzione non podet èssere reprodota</string>
     <string name="recording_context_menu_delete">Burra sa registratzione</string>
     <string name="recording_context_menu_play">Reprodui</string>
-    <string name="recording_description">Registratzione %1$s %2$s de %3$s</string>
-    <string name="recording_default_name">registratzione</string>
+    <string name="recording_description">Registratzione %1$s %3$s %2$s</string>
+    <string name="recording_default_name">Registrande</string>
     <string name="av_control_stop">Stop</string>
     <string name="av_control_start">Avia/Inghitza</string>
     <string name="map_widget_av_notes">Notas àudio/vìdeo</string>
@@ -917,8 +917,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="tip_day_night_mode">Modalidade die/note</string>
 	<string name="tip_osm_improve">Megiora sos datos OSM</string>
 	<string name="tip_navigation">Nàvigu</string>
-	<string name="auto_follow_route_never">Mai</string>
-	<string name="keep_informing_never">Mai</string>
+	<string name="auto_follow_route_never">Mai (carca sa fritza biaita pro aviare manualmente sa ghia)</string>
+	<string name="keep_informing_never">Manualmente ebbia (carca sa fritza)</string>
     <string name="keep_informing">Torra a repìtere sas istrutziones de nàvigu</string>
 	<string name="pref_raster_map">Impostaduras de sa mitza de sa mapa</string>
 	<string name="pref_vector_map">Impostaduras de sa mapa vetoriale</string>
@@ -1062,7 +1062,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="live_monitoring_interval">Intervallu de s\'arrastamentu in dereta (in lìnia)</string>
 	<string name="live_monitoring_url_descr">Dislinda s\'indiritzu ìnternet cun sa sintassi de sos paràmetros: lat={0}, lon={1}, data/ora={2}, hdop={3}, artària={4}, lestresa={5}, àngulu={6}</string>
 	<string name="live_monitoring_url">Indiritzu ìnternet pro s\'arrastamentu in dereta</string>
-	<string name="gpx_monitoring_disabled_warn">Abìlita in sas impostaduras \'Registratzione de sa rasta in su documentu GPX\'.</string>
+	<string name="gpx_monitoring_disabled_warn">Registra sa rasta impreande su widget GPX o sas impostaduras \'Registratzione biàgios\'.</string>
 	<string name="tip_recent_changes_0_7_0_t">"Modìficas in sa 0.7.0:
 \n\t- Artìculos de Wikipeda atzessìbiles sena lìnia
 \n\t- Mapas agiornadas
@@ -1228,7 +1228,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="search_offline_geo_error">Impossìbile lèghere geo intent \'%s\'</string>
 	<string name="search_osm_offline">Chirca indiritzu impreande sas mapas non in lìnia</string>
 	<string name="system_locale">Sistema</string>
-	<string name="preferred_locale_descr">Ischerta limba interfàtzia</string>
+	<string name="preferred_locale_descr">Ischerta limba interfàtzia (pro piaghere torra a allùere OsmAnd a pustis de su càmbiu)</string>
 	<string name="preferred_locale">Limba interfàtzia</string>
 	<string name="incomplete_locale">non cumpridu</string>
 	<string name="tip_map_switch">Issèbera una Mitza pro sa Mapa</string>
@@ -1645,7 +1645,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="poi_remove_success">PDI burradu curretamente</string>
 	<string name="poi_error_unexpected_template">Errore ispessadu durante s\'esecutzione de s\'atzione {0}.</string>
 	<string name="default_buttons_commit">Esegui</string>
-	<string name="default_buttons_reset">Riprìstina</string>
+	<string name="default_buttons_reset">Burra</string>
 	<string name="edit_filter_delete_dialog_title">Burrare su filtru ischertadu?</string>
 	<string name="edit_filter_delete_message">Su filtru {0} est istadu burradu</string>
 	<string name="edit_filter_create_message">Su filtru {0} est istadu burradu</string>
@@ -1773,7 +1773,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="rendering_attr_tramTrainRoutes_name">Àndalas tram e trenu</string>
     <string name="wake_on_voice">Allughe s\'ischermu</string>
     <string name="wake_on_voice_descr">Allughe s\'ischermu cando b\'est una bortada a curtzu</string>
-    <string name="select_impassable_road">Ischerta in sa mapa</string>
+    <string name="select_impassable_road">Ischerta in sa mapa…</string>
     <string name="impassable_road">Istransi istradas…</string>
     <string name="rendering_category_hide">Cua</string>
     <string name="wake_on_voice_never">Mai</string>
@@ -1818,4 +1818,19 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="show_railway_warnings">Ammustra sas rugradas ferroviàrias</string>
 	<string name="show_pedestrian_warnings">Ammustra sas istrìscias pedonales</string>
     <string name="speak_pedestrian">Annùntzia sos atraessamentos pedonales</string>
+    <string name="rendering_value__name">Predefinidu</string>
+	<string name="navigation_over_track">Incumentzare su nàvigu in sa rasta?</string>
+	<string name="avoid_roads_msg">Podes cambiare s\'àndala ischertande sas istradas de istransire</string>
+    <string name="save_track_to_gpx_globally_headline">Registratzione de sa rasta a segus de rechesta</string>
+	<string name="settings_privacy">Privadesa</string>
+    <string name="recents">REGHENTES</string>
+	<string name="enable_proxy_title">Abìlita HTTP Proxy</string>
+	<string name="enable_proxy_descr">Cunfigura HTTP Proxy pro totu sas rechestas de sa retza</string>
+	<string name="proxy_host_title">Proxy Host</string>
+	<string name="proxy_host_descr">Cunfigura su proxy hostname tuo (es. 127.0.0.1)</string>
+	<string name="proxy_port_title">Ghenna Proxy</string>
+	<string name="proxy_port_descr">Cunfigura su nùmeru de sa ghenna proxy tua (es. 8118)</string>
+	<string name="proxy_pref_title">Proxy</string>
+    <string name="proxy_pref_descr">Imposta una cunnessione a ìnternet tramite proxy</string>
+    <string name="rendering_attr_streetLighting_name">Illuminatzione pùbblica</string>
     </resources>

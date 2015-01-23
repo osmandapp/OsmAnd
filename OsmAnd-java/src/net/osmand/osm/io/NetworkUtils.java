@@ -9,6 +9,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
@@ -21,12 +24,15 @@ import org.apache.commons.logging.Log;
 
 public class NetworkUtils {
 	private static final Log log = PlatformUtil.getLog(NetworkUtils.class);
+
+	private static Proxy proxy = null;
+
 	public static String sendGetRequest(String urlText, String userNamePassword){
 		URL url;
 		try {
 			log.info("GET : " + urlText);
 			url = new URL(urlText);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			HttpURLConnection conn = getHttpURLConnection(urlText);
 			conn.setDoInput(true);
 			conn.setDoOutput(false);
 			conn.setRequestMethod("GET");
@@ -151,4 +157,28 @@ public class NetworkUtils {
 		}
 	}
 
+	public static void setProxy(String host, int port) {
+		if(host != null && port > 0) {
+			InetSocketAddress isa = new InetSocketAddress(host, port);
+			proxy = new Proxy(Proxy.Type.HTTP, isa);
+		} else {
+			proxy = null;
+		}
+	}
+	
+	public static Proxy getProxy() {
+		return proxy;
+	}
+
+	public static HttpURLConnection getHttpURLConnection(String urlString) throws MalformedURLException, IOException {
+		return getHttpURLConnection(new URL(urlString));
+	}
+
+	public static HttpURLConnection getHttpURLConnection(URL url) throws IOException {
+		if (proxy != null) {
+			return (HttpURLConnection) url.openConnection(proxy);
+		} else {
+			return (HttpURLConnection) url.openConnection();
+		}
+	}
 }

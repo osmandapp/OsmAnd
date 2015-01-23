@@ -10,7 +10,7 @@
   <string name="pref_vector_map">Ustawienia mapy wektorowej</string>
   <string name="choose_auto_follow_route">Autocentrowanie mapy</string>
   <string name="choose_auto_follow_route_descr">Opóźnienie, po którym mapa zacznie podążać za aktualną pozycją GPS</string>
-  <string name="auto_follow_route_never">Nigdy</string>
+  <string name="auto_follow_route_never">Nigdy (dotknij niebieskiej strzałki, aby rozpocząć ręcznie)</string>
   <string name="auto_follow_route_navigation">Auto-podążanie za pozycją</string>
   <string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
   <string name="auto_follow_location_enabled">Podążanie za pozycją jest włączone.</string>
@@ -52,7 +52,7 @@
   <string name="search_position_undefined">Niezdefiniowane</string>
   <string name="search_position_fixed">Ustalono</string>
   <string name="search_position_current_location">Obecna pozycja…</string>
-  <string name="search_position_map_view">Ostatni widok mapy</string>
+  <string name="search_position_map_view">Aktualny środek mapy</string>
   <string name="select_search_position">Szukaj w pobliżu:</string>
   <string name="context_menu_item_search">Szukaj w pobliżu</string>
   <string name="tip_recent_changes_0_6_7_t">"Zmiany dla wersji 0.6.7: \n\t- możliwość pobrania map bezpośrednio z poziomu aplikacji (pobierz, usuń, zrób kopię zapasową danych bezpośrednio w OsmAnd) \n\t- ulubione punkty i grupy (kategoryzuj, usuń, zarządzaj ulubionymi) \n\t- GPX Explorer w aplikacji (see tracks, distance, average speed, elevation, etc.) \n\t- nawigacja w oparciu o track GPX (useful options, continue navigation after crash, supports roundabouts) \n\t- możliwość zapisania trasy jako ślad GPX do wykorzystania w trybie offline \n\t- poprawiono monitorowanie GPX (filtruje niektóre nieprecyzyjne położenia i zapisuje precyzję/wysokość/prędkość) \n\t- możliwość wysłania śladu GPX dla społeczności OSM (http://download.osmand.net/gpx/) \n\t- usprawnienie rendera wektorowego \n\t- usprawnienie mechanizmu TTS (dokładny dystans) \n\t- poprawki różnych błędów "</string>
@@ -177,7 +177,7 @@
   <string name="search_offline_geo_error">Nie można zinterpretować \'%s\'</string>
   <string name="search_osm_offline">Wyszukaj adres korzystając z map offline</string>
   <string name="system_locale">Systemowy</string>
-  <string name="preferred_locale_descr">Wybierz język interfejsu</string>
+  <string name="preferred_locale_descr">Wybierz język interfejsu (zrestartuj OsmAnd po zmianie)</string>
   <string name="preferred_locale">Język interfejsu</string>
   <string name="tip_map_switch">Wybierz źródło mapy</string>
   
@@ -418,7 +418,7 @@
   <string name="first_time_download">Pobierz region</string>
   <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które pobierzesz w \'Ustawienia\' → \'Zarządzaniu plikami map\'. Dzięki nim będziesz mógł przeglądać mapy, wyszukiwać adresy, POI i transport publiczny.</string>
   <string name="search_poi_location">Wyszukiwanie sygnału…</string>
-  <string name="search_near_map">Szukaj w pobliżu ostatniej pozycji</string>
+  <string name="search_near_map">Szukaj w pobliżu aktualnego środka mapy</string>
   <string name="search_nearby">Szukaj w pobliżu</string>
   <string name="map_orientation_default">Jak w urządzeniu</string>
   <string name="map_orientation_portrait">Pionowo</string>
@@ -668,7 +668,7 @@
   <string name="poi_dialog_comment_default">Zmiana POI</string>
   <string name="poi_dialog_other_tags_message">Wszystkie pozostałe tagi pozostają bez zmian</string>
   <string name="default_buttons_commit">Wyślij</string>
-  <string name="default_buttons_reset">Resetuj</string>
+  <string name="default_buttons_reset">Wyczyść</string>
   <string name="filter_current_poiButton">Filtr</string>
   <string name="edit_filter_delete_menu_item">Usuń</string>
   <string name="edit_filter_save_as_menu_item">Zapisz jako</string>
@@ -1136,8 +1136,8 @@
     <string name="recording_can_not_be_played">Nagranie nie może zostać odtworzone</string>
     <string name="recording_context_menu_delete">Usuń nagranie</string>
     <string name="recording_context_menu_play">Odtwórz</string>
-    <string name="recording_description">Nagranie %1$s %2$s w %3$s</string>
-    <string name="recording_default_name">nagranie</string>
+    <string name="recording_description">Nagranie %1$s %3$s %2$s</string>
+    <string name="recording_default_name">Nagranie</string>
     <string name="av_control_stop">Stop</string>
     <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Notatki audio/video</string>
@@ -1155,7 +1155,7 @@
     <string name="recording_context_menu_vrecord">Nagraj notatkę wideo</string>
     <string name="osmand_srtm_long_description_1000_chars">Ta wtyczka dostarcza poziomice, które mogą być wyświetlane na mapach offline w OsmAnd. Światowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems).</string>
     <string name="recording_context_menu_show">Pokaż</string>
-    <string name="recording_photo_description">Zdjęcie %1$s w %2$s</string>
+    <string name="recording_photo_description">Zdjęcie %1$s %2$s</string>
     <string name="av_def_action_picture">Zrób zdjęcie</string>
     <string name="recording_context_menu_precord">Zrób zdjęcie</string>
     <string name="stop_routing_confirm">Czy na pewno chcesz zatrzymać nawigację?</string>
@@ -1236,7 +1236,7 @@
     <string name="use_magnetic_sensor_descr">Użyj czujnika pola magnetycznego, aby określić kierunek kompasu</string>
     <string name="use_magnetic_sensor">Użyj czujnika magnetycznego (kompas)</string>
     <string name="local_indexes_cat_srtm">Dane poziomic</string>
-    <string name="use_kalman_filter_compass_descr">Użyj filtru Kalmana, aby uniknąć odchyleń kompasu</string>
+    <string name="use_kalman_filter_compass_descr">Redukuje szumy w odczytach kompasu, ale zwiększa bezwładność</string>
     <string name="use_kalman_filter_compass">Użyj filtru Kalmana</string>
     <string name="access_mark_final_location_first">Tryb ułatwień dostępu: wybierz najpierw punkt docelowy</string> 
     <string name="wait_current_task_finished">Zaczekaj aż bieżące zadanie zostanie zakończone</string>
@@ -1661,7 +1661,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_plugin_description">"OpenStreetMap zaawansowany monitoring na żywo, zobacz http://osmo.mobi. Daje możliwość śledzenia innych urządzeń i vice versa. Twórz anonimowe grupy, dziel się lokalizacją i prowadź komunikację. System ma wiele ustawień dla śledzenia w sesji lub stałego śledzenia. Grupy anonimowe mają ograniczenia czasowe i funkcjonalne, np. nie ma zdalnej kontroli i administratora grupy. W pełni funkcjonalne grupy powinny być tworzone przez witrynę, a dostęp zarezerwowany tylko dla zarejestrowanych użytkowników. "</string>
     <string name="osmo_plugin_name">OsMo (Zaawansowany Monitoring na Żywo)</string>
     <string name="osmo_settings">Monitoring OpenStreetMap</string>
-   	<string name="keep_informing_never">Nigdy</string>
+   	<string name="keep_informing_never">Tylko ręcznie (naciśnij strzałkę)</string>
     <string name="keep_informing_descr">Podawaj instrukcje nawigacji w regularnych odstępach czasu</string>
     <string name="keep_informing">Powtarzaj instrukcje nawigacji</string>
 	<string name="arrival_distance">Informacja o odległości do celu</string>
@@ -1934,7 +1934,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="search_radius_proximity">W odległości</string>
     <string name="wake_on_voice">Włącz ekran</string>
     <string name="wake_on_voice_descr">Włącz ekran urządzenia podczas zbliżania się do skrętu</string>
-    <string name="select_impassable_road">Zaznacz na mapie</string>
+    <string name="select_impassable_road">Zaznacz na mapie…</string>
     <string name="impassable_road">Unikaj dróg…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Trasy tramwajowe i kolejowe</string>
     <string name="tip_recent_changes_1_9_t">"Zmiany w 1.9: * Aktualizacja stylów mapy z renderowaniem warstw nawierzchni drogi, transportu i symboli turystycznych * Wyszukiwanie punktów POI wzdłuż trasy * Zaznaczanie nieprzejezdnej drogi dla danego przejazdu * Ułatwienia pobrania i aktualizacji mapy * Otrzymywanie powiadomień wizualnych i audio podczas zbliżania się do punktu * Drukuj informacje o trasie i manewrach * Wsparcie dla asystenta pasa ruchu * Wsparcie Android Wear * Dużo zmian UI * Oddzielne powiększenie rozmiaru dla tekstu na mapie * Specjalne powiadomienia dźwiękowe w przypadku zjechania z trasy * Funkcjonalności logowania do Osmo * Poprawienie niezgodności wersji OsMo "</string>
@@ -1949,7 +1949,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_use_https_descr">Użyj bezpiecznego połączenia z serwerem</string>
     <string name="osmo_use_https">Użyj HTTPS</string>
 	<string name="advanced_settings">Zaawansowane</string>
-	<string name="home_button">Dom</string>
+	<string name="home_button">Ekran startowy</string>
     <string name="map_update">Dostępne aktualizacje dla %1$s map</string>
 	<string name="search_for">Wyszukaj</string>
 	<string name="show_map">POKAŻ MAPĘ</string>
@@ -1986,4 +1986,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="show_railway_warnings">Pokazuj przejazdy kolejowe</string>
 	<string name="show_pedestrian_warnings">Pokazuj przejścia dla pieszych</string>
     <string name="speak_pedestrian">Informuj o przejściach dla pieszych</string>
-    </resources>
+    <string name="rendering_value__name">Domyślne</string>
+	</resources>

@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import android.os.Build;
+import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
@@ -29,12 +32,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
 
 /**
  * Test Voice activity
  */
-public class TestVoiceActivity extends SherlockActivity {
+public class TestVoiceActivity extends ActionBarActivity {
 
 
 
@@ -42,7 +44,9 @@ public class TestVoiceActivity extends SherlockActivity {
 	public void onCreate(Bundle icicle) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(icicle);
-		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		}
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
@@ -225,7 +229,7 @@ public class TestVoiceActivity extends SherlockActivity {
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
 		case android.R.id.home:

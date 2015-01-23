@@ -234,7 +234,7 @@
 <string name="index_name_tts_voice">Indicadors de veu (sintetitzats amb TTS, recomanat)</string>
 <string name="native_library_not_supported">La llibreria nativa no està suportada en aquest dispositiu.</string>
 <string name="init_native_library">S\'està inicialitzant la llibreria nativa…</string>
-<string name="auto_follow_route_never">Mai</string>
+<string name="auto_follow_route_never">Mai (premeu la fletxa blava per iniciar la navegació manualment)</string>
 <string name="pref_vector_rendering">Opcions específiques de renderització dels vectors</string>
 <string name="delete_confirmation_msg">Voleu suprimir %1$s?</string>
 <string name="city_type_town">Poble</string>
@@ -616,7 +616,7 @@
 <string name="live_monitoring_interval">Interval de seguiment en viu</string>
 <string name="live_monitoring_interval_descr">Interval de seguiment en viu especific</string>
 <string name="live_monitoring_url">Adreça web de seguiment en viu</string>
-<string name="gpx_monitoring_disabled_warn">Si us plau habiliteu l\'opció «Enregistra camí a fitxer GPX».</string>
+<string name="gpx_monitoring_disabled_warn">Registreu traces amb el giny GPX o amb la configuració «Enregistrament del trajecte».</string>
 <string name="binary_map_download_success">"Baixada amb èxit.
 \n\t\n\tPer usar-lo activeu «Menú» -&gt; «Configuració del mapa» -&gt; «Font de mapa...» -&gt; «Mapes de vectors fora de línia». "</string>
 <string name="pref_overlay">Capa de fons/Cap superposada</string>
@@ -631,7 +631,7 @@
 <string name="map_underlay_descr">Escolliu el mapa de fons</string>
 <string name="map_overlay_descr">Escolliu el mapa superposat</string>
 <string name="tip_location_sharing">Comparteix una ubicació</string>
-<string name="preferred_locale_descr">Selecciona la llengua a mostrar</string>
+<string name="preferred_locale_descr">Seleccioneu la llengua (reinicieu l\'OsmAnd després de canviar-la)</string>
 <string name="tip_app_mode_t_v2">L\'OsmAnd suporta diferents (i personalitzables) perfils d\'aplicació per a diferents usos.
 \n\nPodeu canviar de perfil amb el boto a la cantonada inferior esquerra de la pantalla del mapa(icona de cotxe,bici o vianant), o quan creeu una ruta.
 	</string>
@@ -942,7 +942,7 @@
 	<string name="osb_comment_menu_item">Afegeix un comentari</string>
 	<string name="osb_comment_dialog_success">El comentari s\'ha afegit correctament</string>
 	<string name="poi_remove_success">El PDI s\'ha eliminat correctament</string>
-	<string name="default_buttons_reset">Reinicia</string>
+	<string name="default_buttons_reset">Neteja</string>
 	<string name="edit_filter_delete_dialog_title">Voleu eliminar el filtre seleccionat?</string>
 	<string name="tip_day_night_mode_t_v2">"L\'aspecte dels mapes vectorials pot canviar entre dia (clar) i nit (fosc). Els colors de nit són més segurs per la conducció nocturna.
 \n\nPodeu assignar un criteri pel canvi de dia/nit a «Menú» -&gt; «Configuració del mapa» -&gt;«Mapa dia/nit».
@@ -1012,8 +1012,8 @@
     <string name="route_descr_lat_lon">Lat %1$.3f long %2$.3f</string>
     <string name="intermediate_points_change_order">Canvia l\'ordre</string>
     <string name="recording_delete_confirm">Voleu eliminar aquest enregistrament?</string>
-    <string name="recording_default_name">enregistrament</string>
-    <string name="recording_description">Enregistrament %1$s %2$s a %3$s</string>
+    <string name="recording_default_name">Enregistrament</string>
+    <string name="recording_description">Enregistrament %1$s %3$s %2$s</string>
     <string name="layer_recordings">Capa d\'enregistraments</string>
     <string name="recording_can_not_be_played">No es pot reproduir l\'enregistrament</string>
     <string name="av_control_stop">Atura</string>
@@ -1128,7 +1128,7 @@
     <string name="stop_routing_confirm">Esteu segurs de què voleu parar la navegació?</string>
     <string name="clear_dest_confirm">Esteu segurs de què voleu eliminar la vostra destinació?</string>
     <string name="recording_context_menu_show">Mostra</string>
-    <string name="recording_photo_description">Fotografia %1$s de %2$s</string>
+    <string name="recording_photo_description">Fotografia %1$s %2$s</string>
     <string name="av_def_action_picture">Fes una fotografia</string>
     <string name="recording_context_menu_precord">Fes una fotografia</string>
     <string name="download_hillshade_item">Ombrejat del relleu</string>
@@ -1166,7 +1166,7 @@
     <string name="distance_measurement_save_gpx">Desa com a GPX</string>
     <string name="distance_measurement_load_gpx">Obre un fitxer GPX existent</string>
     <string name="wait_current_task_finished">Espereu fins que finalitzi la tasca actual</string>
-    <string name="use_kalman_filter_compass_descr">Utilitzeu el filtre Kalman per evitar interferències a la brúixola</string>
+    <string name="use_kalman_filter_compass_descr">Allisat de la brúixola per estabilitzar lectures afegint inèrcia</string>
     <string name="use_kalman_filter_compass">Usa el filtre Kalman</string>
     <string name="access_mark_final_location_first">Mode d\'accessibilitat: seleccioneu primer la destinació</string> 
     <string name="use_magnetic_sensor_descr">Podeu usar el sensor magnètic per determinar el valor la brúixola en comptes del sensor d\'orientació</string>
@@ -1526,7 +1526,7 @@
 	<string name="share_route_subject">Ruta compartida via OsmAnd</string>
 	<string name="arrival_distance">Anunci d\'arribada</string>
     <string name="arrival_distance_descr">Quan aviat vol l\'anunci d\'arribada?</string>
-    <string name="keep_informing_never">Mai</string>
+    <string name="keep_informing_never">Només manualment (premeu fletxa)</string>
     <string name="keep_informing_descr">Anunci d\'instruccions de navegació a intervals regulars</string>
     <string name="keep_informing">Repetir instruccions de navegació</string>
 	<string name="navigation_intent_invalid">Format no vàlid: %s</string>
@@ -1813,11 +1813,11 @@
     <string name="rendering_attr_trolleybusRoutes_name">Rutes de troleibús</string>
     <string name="rendering_attr_busRoutes_name">Rutes de bus</string>
     <string name="rendering_attr_tramTrainRoutes_name">Rutes de tramvia i tren</string>
-    <string name="select_impassable_road">Selecciona en el mapa</string>
+    <string name="select_impassable_road">Selecciona en el mapa…</string>
     <string name="impassable_road">Evita carreteres…</string>
     <string name="rendering_category_hide">Amaga</string>
     <string name="wake_on_voice">Activa la pantalla</string>
-    <string name="wake_on_voice_descr">Activa la pantalla del dispositiu en aproximar-se a un gir</string>
+    <string name="wake_on_voice_descr">Activa la pantalla del dispositiu (si no ho està) en aproximar-se a un gir</string>
     <string name="lock_screen_request_explanation">"%1$s necessita  aquest permís per la funcionalitat de posar la pantalla en mode d\'estalvi d\'energia."</string>
     <string name="wake_on_voice_never">Mai</string>
     <string name="advanced_settings">Avançat</string>
@@ -1860,4 +1860,18 @@
     <string name="routing_attr_no_new_routing_name">Sense preferències de navegació v1.9</string>
     <string name="routing_attr_no_new_routing_description">No feu ús de les preferències de navegació introduïdes a la v1.9</string>
     <string name="speak_pedestrian">Anuncia els passos de zebra</string>
-    </resources>
+    <string name="rendering_value__name">Renderització per defecte</string>
+	<string name="navigation_over_track">Voleu iniciar la navegació sobre la traça?</string>
+	<string name="avoid_roads_msg">Podeu condicionar la ruta amb la selecció de les vies a evitar</string>
+    <string name="save_track_to_gpx_globally_headline">Registre de traces a petició</string>
+	<string name="recents">RECENTS</string>
+	<string name="proxy_pref_title">Servidor intermediari</string>
+    <string name="proxy_pref_descr">Configuració d\'un servidor intermediari per accedir a internet</string>
+    <string name="settings_privacy">Privacitat</string>
+    <string name="enable_proxy_title">Activa el servidor intermediari HTTP</string>
+	<string name="enable_proxy_descr">Configureu un servidor intermediari HTTP per totes les peticions de xarxa</string>
+	<string name="proxy_host_title">Amfitrió del servidor intermediari</string>
+	<string name="proxy_host_descr">Configureu el nom de l\'amfitrió del vostre servidor intermediari (p.ex. 127.0.0.1)</string>
+	<string name="proxy_port_title">Port del servidor intermediari</string>
+	<string name="proxy_port_descr">Configureu el número de port del vostre servidor intermediari (p.ex. 8118)</string>
+	</resources>

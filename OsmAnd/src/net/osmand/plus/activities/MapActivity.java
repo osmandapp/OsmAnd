@@ -23,12 +23,10 @@ import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
-import net.osmand.plus.DeviceAdminRecv;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -38,11 +36,11 @@ import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
+import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
-import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmAndMapLayersView;
 import net.osmand.plus.views.OsmAndMapSurfaceView;
@@ -56,19 +54,15 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.PowerManager;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -134,8 +128,8 @@ public class MapActivity extends AccessibleActivity {
 		app = getMyApplication();
 		settings = app.getSettings();
 		app.applyTheme(this);
+		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// Full screen is not used here
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
@@ -342,9 +336,9 @@ public class MapActivity extends AccessibleActivity {
 		updateApplicationModeSettings();
 		
 		String filterId = settings.getPoiFilterForMap();
-		PoiFilter poiFilter = app.getPoiFilters().getFilterById(filterId);
+		PoiLegacyFilter poiFilter = app.getPoiFilters().getFilterById(filterId);
 		if (poiFilter == null) {
-			poiFilter = new PoiFilter(null, app);
+			poiFilter = new PoiLegacyFilter(null, app);
 		}
 
 		mapLayers.getPoiMapLayer().setFilter(poiFilter);
@@ -488,12 +482,18 @@ public class MapActivity extends AccessibleActivity {
 //		if (settings.AUTO_ZOOM_MAP.get() == AutoZoomMap.NONE) {
 //			changeLocation = false;
 //		}
+		
+//		double curZoom = mapView.getZoom() + mapView.getZoomFractionalPart() + stp * 0.3;
+//		int newZoom = (int) Math.round(curZoom);
+//		double zoomFrac = curZoom - newZoom;
+		
 		final int newZoom = mapView.getZoom() + stp;
+		final double zoomFrac = mapView.getZoomFractionalPart();
 		if (newZoom > 22) {
 			AccessibleToast.makeText(this, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			return;
 		}
-		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
+		mapView.getAnimatedDraggingThread().startZooming(newZoom, zoomFrac, changeLocation);
 		if (app.accessibilityEnabled())
 			AccessibleToast.makeText(this, getString(R.string.zoomIs) + " " + newZoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 		showAndHideMapPosition();

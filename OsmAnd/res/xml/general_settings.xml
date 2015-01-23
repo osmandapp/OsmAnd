@@ -13,7 +13,20 @@
 	<PreferenceCategory android:title="@string/voice_pref_title" android:key="voice">
 	    <ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
 	</PreferenceCategory>
+	
 	<PreferenceCategory android:title="@string/misc_pref_title" android:key="misc">
 		<ListPreference android:key="osmand_theme" android:title="@string/choose_osmand_theme" android:summary="@string/choose_osmand_theme_descr"></ListPreference>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="@string/settings_privacy">
+	    <PreferenceScreen android:title="@string/proxy_pref_title" android:description="@string/proxy_pref_descr" android:key="proxy">
+        <CheckBoxPreference
+            android:key="enable_proxy" android:title="@string/enable_proxy_title" android:summary="@string/enable_proxy_descr" android:defaultValue="false" />
+        <EditTextPreference
+            android:key="proxy_host" android:title="@string/proxy_host_title" android:summary="@string/proxy_host_descr" android:dependency="enable_proxy"
+            android:defaultValue="127.0.0.1" />
+        <EditTextPreference
+            android:key="proxy_port" android:title="@string/proxy_port_title" android:summary="@string/proxy_port_descr" android:dependency="enable_proxy"
+            android:defaultValue="8118" />
+        </PreferenceScreen>
 	</PreferenceCategory>
 </PreferenceScreen>

@@ -9,10 +9,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import android.view.Window;
 import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -42,6 +44,7 @@ import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -52,7 +55,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.actionbarsherlock.view.Window;
 
 public class SettingsGeneralActivity extends SettingsBaseActivity {
 
@@ -61,13 +63,13 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	private ListPreference applicationModePreference;
 	private ListPreference drivingRegionPreference;
 
-	
+
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
-		setSupportProgressBarIndeterminateVisibility(false);
-		getSupportActionBar().setTitle(R.string.global_app_settings);
+		getToolbar().setTitle(R.string.global_app_settings);
 		addPreferencesFromResource(R.xml.general_settings);
 		String[] entries;
 		String[] entrieValues;
@@ -94,6 +96,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		
 		addLocalPrefs((PreferenceGroup) screen.findPreference("localization"));
 		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
+		addProxyPrefs((PreferenceGroup) screen.findPreference("proxy"));
 		addMiscPreferences((PreferenceGroup) screen.findPreference("misc"));
 
 		
@@ -153,6 +156,9 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		
 		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/
 		String incompleteSuffix = " (" + getString(R.string.incomplete_locale) + ")";
+		// Add this in Latin also so it can be more easily identified if foreign language has been selected by mistake
+		String latinSystemDefaultSuffix = " (" + getString(R.string.system_locale_no_translate) + ")";
+
 		//getResources().getAssets().getLocales();
 		entrieValues = new String[] { "",
 				"en",
@@ -203,7 +209,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				"uk",
 				"vi",
 				"cy"};
-		entries = new String[] { getString(R.string.system_locale), 
+		entries = new String[] { getString(R.string.system_locale) + latinSystemDefaultSuffix,
 				getString(R.string.lang_en),
 				getString(R.string.lang_af),
 				getString(R.string.lang_al) + incompleteSuffix,
@@ -253,6 +259,57 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				getString(R.string.lang_vi) + incompleteSuffix,
 				getString(R.string.lang_cy) + incompleteSuffix,};
 		registerListPreference(settings.PREFERRED_LOCALE, screen, entries, entrieValues);
+		// Display "Device language" in Latin for all non-en languages
+		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
+			((ListPreference) screen.findPreference(settings.PREFERRED_LOCALE.getId())).setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
+		}
+	}
+
+
+	protected void enableProxy(boolean enable) {
+		if (enable) {
+			NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
+		} else {
+			NetworkUtils.setProxy(null, 0);
+		}
+	}
+
+	private void addProxyPrefs(PreferenceGroup proxy) {
+		CheckBoxPreference enableProxyPref = (CheckBoxPreference) proxy.findPreference("enable_proxy");
+		enableProxyPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				enableProxy((Boolean) newValue);
+				return true;
+			}
+
+		});
+		EditTextPreference hostPref = (EditTextPreference) proxy.findPreference(settings.PROXY_HOST.getId());
+		hostPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				settings.PROXY_HOST.set((String) newValue);
+				enableProxy(NetworkUtils.getProxy() != null);
+				return true;
+			}
+		});
+
+		EditTextPreference portPref = (EditTextPreference) proxy.findPreference(settings.PROXY_PORT.getId());
+		portPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				int port = -1;
+				String portString = (String) newValue;
+				try {
+					port = Integer.valueOf(portString.replaceAll("[^0-9]", ""));
+				} catch (NumberFormatException e1) {
+				}
+				settings.PROXY_PORT.set(port);
+				enableProxy(NetworkUtils.getProxy() != null);
+				return true;
+			}
+		});
 	}
 
 
@@ -360,6 +417,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			if (MORE_VALUE.equals(newValue)) {
 				// listPref.set(oldValue); // revert the change..
 				final Intent intent = new Intent(this, DownloadActivity.class);
+				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
 				intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
 				startActivity(intent);
 			} else {
@@ -535,10 +593,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	}
 
 	public void reloadIndexes() {
-		setSupportProgressBarIndeterminateVisibility(true);
-		final CharSequence oldTitle = getSupportActionBar().getTitle();
-		getSupportActionBar(). setTitle(getString(R.string.loading_data));
-		getSupportActionBar().setSubtitle(getString(R.string.reading_indexes));
+		setProgressVisibility(true);
+		final CharSequence oldTitle = getToolbar().getTitle();
+		getToolbar(). setTitle(getString(R.string.loading_data));
+		getToolbar().setSubtitle(getString(R.string.reading_indexes));
 		new AsyncTask<Void, Void, List<String>>() {
 
 			@Override
@@ -548,10 +606,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			
 			protected void onPostExecute(List<String> result) {
 				showWarnings(result);
-				getSupportActionBar().setTitle(oldTitle);
-				getSupportActionBar().setSubtitle("");
-				setSupportProgressBarIndeterminateVisibility(false);
-			};
+				getToolbar().setTitle(oldTitle);
+				getToolbar().setSubtitle("");
+				setProgressVisibility(false);
+			}
 			
 		}.execute();
 	}
@@ -563,8 +621,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 				@Override
 				protected void onPreExecute() {
-					setSupportProgressBarIndeterminateVisibility(true);
-				};
+					setProgressVisibility(true);
+				}
 
 				@Override
 				protected Void doInBackground(Void... params) {
@@ -574,11 +632,11 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 				@Override
 				protected void onPostExecute(Void result) {
-					setSupportProgressBarIndeterminateVisibility(false);
+					setProgressVisibility(false);
 					if (!NativeOsmandLibrary.isNativeSupported(storage, getMyApplication())) {
 						AccessibleToast.makeText(SettingsGeneralActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
 					}
-				};
+				}
 			}.execute();
 		}
 	}

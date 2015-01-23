@@ -103,7 +103,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	private String sendRequest(String url, String requestMethod, String requestBody, String userOperation, boolean doAuthenticate) {
 		log.info("Sending request " + url); //$NON-NLS-1$
 		try {
-			HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 			
 			connection.setConnectTimeout(15000);
 			connection.setRequestMethod(requestMethod);

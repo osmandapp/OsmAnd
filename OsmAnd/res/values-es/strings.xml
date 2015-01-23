@@ -45,7 +45,7 @@
   <string name="live_monitoring_interval">Intervalo de seguimiento en directo</string>
   <string name="live_monitoring_url_descr">Especifica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Dirección web de Seguimiento en directo</string>
-  <string name="gpx_monitoring_disabled_warn">Habilite la opción \'Guardar traza en fichero GPX\'.</string>
+  <string name="gpx_monitoring_disabled_warn">Registra trazas usando el control GPX o mediante la opción \'Grabación de viaje\'.</string>
   <string name="show_current_gpx_title">Mostrar traza actual</string>
   <string name="tip_recent_changes_0_7_0_t">"Cambios en 0.7.0 : \n\t- Artículos de wikipedia sin conexión de datos \n\t- Mapas actualizados \n\t- Otras pequeñas funcionalidades "</string>
   <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas y no soporta artículos de wikipedia sin conexión.</string>
@@ -113,7 +113,7 @@
   <string name="init_native_library">Inicializando biblioteca nativa…</string>
   <string name="choose_auto_follow_route">Auto-centrar vista de mapa</string>
   <string name="choose_auto_follow_route_descr">Tiempo hasta que la vista del mapa vuelve a sincronizarse con la posición actual</string>
-  <string name="auto_follow_route_never">Nunca</string>
+  <string name="auto_follow_route_never">Nunca (pulsa la flecha azul para iniciar manualmente el guiado)</string>
   <string name="auto_follow_route_navigation">Auto-centrar sólo nav</string>
   <string name="auto_follow_route_navigation_descr">Auto-centra la vista del mapa sólo durante la navegación.</string>
   <string name="auto_follow_location_enabled">Auto-centrar vista del mapa activado.</string>
@@ -272,7 +272,7 @@
   <string name="search_offline_geo_error">No se pudo analizar el filtro \'%s\'</string>
   <string name="search_osm_offline">Buscar dirección usando mapas sin conexión</string>
   <string name="system_locale">Sistema</string>
-  <string name="preferred_locale_descr">Selecciona el idioma de visualización</string>
+  <string name="preferred_locale_descr">Selecciona el idioma de visualización (por favor, reinicie OsmAnd después del cambio)</string>
   <string name="preferred_locale">Idioma de la pantalla</string>
   <string name="tip_map_switch">Elige una Fuente de mapa</string>
   
@@ -502,8 +502,7 @@
   <string name="route_head">Cabecera</string>
   <string name="first_time_continue">Después</string>
   <string name="first_time_download">Descargar regiones</string>
-  <string name="first_time_msg">Gracias por elegir OsmAnd.
-Para poder usar muchas características de la aplicación necesitas algunos datos regionales, que puedes descargar vía \'Opciones\' → \'Gestionar mapas\'. Después, podrás ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
+  <string name="first_time_msg">Gracias por elegir OsmAnd. Para poder usar muchas características de la aplicación necesitas algunos datos regionales, que puedes descargar vía \'Opciones\' → \'Gestionar mapas\'. Entonces podrás ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
   <string name="search_poi_location">Buscando señal…</string>
   <string name="search_near_map">Buscar cerca del centro del mapa</string>
   <string name="search_nearby">Buscar cercanos</string>
@@ -747,7 +746,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="poi_dialog_comment_default">Cambiando PDI</string>
   <string name="poi_dialog_other_tags_message">Se preservan las otras etiquetas</string>
   <string name="default_buttons_commit">Confirmar</string>
-  <string name="default_buttons_reset">Reiniciar</string>
+  <string name="default_buttons_reset">Limpiar</string>
   <string name="filter_current_poiButton">Filtro</string>
   <string name="edit_filter_delete_menu_item">Borrar</string>
   <string name="edit_filter_save_as_menu_item">Guardar como</string>
@@ -1101,7 +1100,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="recording_can_not_be_played">La grabación no se puede reproducir</string>
     <string name="recording_context_menu_delete">Eliminar grabación</string>
     <string name="recording_context_menu_play">Reproducir</string>
-    <string name="recording_default_name">grabación</string>
+    <string name="recording_default_name">Grabación</string>
     <string name="av_control_stop">Parar</string>
     <string name="av_control_start">Iniciar</string>
     <string name="map_widget_av_notes">Notas de audio</string>
@@ -1120,7 +1119,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="recording_playing">Reproduciendo audio de la grabación especificada.\n%1$s</string>
     <string name="tip_recent_changes_1_1_0_t">"Cambios en versión 1.1.0 :\n\t* Extra de cálculo de distancia\n\t* Extra de notas de audio\n\t* Extra de curvas de nivel\n\t* Corrección de errores\n\t* Opción de estilo de mapas \'Vista de tour\' con más detalles de mapa, nuevos estilos de carreteras, más contraste y opción para travesías alpinas (escala SAC)\n\t* Correción de desplazamiento del geoide EGM96 para lecturas GPS de altitud"
     </string>
-    <string name="recording_description">Grabado %1$s %2$s en %3$s</string>
+    <string name="recording_description">Grabado %1$s %3$s %2$s</string>
     <string name="srtm_paid_version_msg">Considere la compra del extra de curvas de nivel en la Tienda para apoyar desarrollos adicionales.</string>
     <string name="srtm_paid_version_title">Extra curvas de nivel</string>
     <string name="dropbox_plugin_description">El extra de Dropbox permite sincronizar trazas y notas de audio/vídeo con tu cuenta de dropbox.</string>
@@ -1128,7 +1127,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     
     <string name="intermediate_points_change_order">Cambiar orden</string>
     <string name="recording_context_menu_show">Mostrar</string>
-    <string name="recording_photo_description">Foto %1$s de %2$s</string>
+    <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Hacer una foto</string>
     <string name="recording_context_menu_precord">Hacer una foto</string>
     <string name="stop_routing_confirm">¿Seguro que quieres parar la navegación?</string>
@@ -1567,7 +1566,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
    	<string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
 	<string name="share_route_subject">Ruta compartida vía OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato inválido: %s</string>
-<string name="keep_informing_never">Nunca</string>
+<string name="keep_informing_never">Sólo manualmente (pulsa la flecha)</string>
     <string name="keep_informing_descr">Re-anunciar instrucciones de navegación a intervalos regulares</string>
     <string name="keep_informing">Repetir instrucciones de navegación</string>
 	<string name="arrival_distance">Anuncio de llegada</string>
@@ -1833,7 +1832,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="search_radius_proximity">En las proximidades de</string>
     <string name="tip_recent_changes_1_9_t">"Cambios en 1.9: * Actualizados los estilos de los mapas con renderizado de la superficie de la carretera, capas de transporte y símbolos de senderismo * Búsqueda de puntos de interés a lo largo de la ruta * Marcar carretera como intransitable por sesión * Más sencillo la descarga y actualización de mapas * Recibir notificaciones visuales y sonoras al acercarse a un punto de la ruta * Imprimir itinerario e información de giros * Soporte de carriles de giro * Soporte a  Android Wear * Muchos cambios en la IU * Acercamiento separado por tamaño de texto en el mapa * Notificación de audio especial en caso de que esté fuera de la ruta * Funcionalidad de inicio de sesión en OsMo * Corregidas incompatibilidades de versión de OsMo "</string>
     <string name="rendering_category_routes">Rutas</string>
-    <string name="select_impassable_road">Seleccionar en el mapa</string>
+    <string name="select_impassable_road">Seleccionar en el mapa…</string>
     <string name="impassable_road">Evitar carreteras…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Rutas de tranvía y tren</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rutas de tren</string>
@@ -1843,7 +1842,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="rendering_attr_busRoutes_name">Rutas de autobús</string>
     <string name="rendering_category_hide">Ocultar</string>
     <string name="wake_on_voice">Encender pantalla</string>
-    <string name="wake_on_voice_descr">Encender la pantalla del dispositivo al aproximarse a un giro</string>
+    <string name="wake_on_voice_descr">Enciende la pantalla del dispositivo al aproximarse a un giro</string>
     <string name="lock_screen_request_explanation">%1$s necesita este permiso para apagar la pantalla para la característica de ahorro energético.</string>
     <string name="wake_on_voice_never">Nunca</string>
     <string name="advanced_settings">Avanzado</string>
@@ -1860,7 +1859,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="error_avoid_specific_road">No se ha encontrado circunvalación</string>
     <string name="everything_up_to_date">Todos los archivos actualizados</string>
     <string name="dismiss">Descartar</string>
-    <string name="no_internet_connection">Imposible descargar, compruebe su conexión a Internet.</string>
+    <string name="no_internet_connection">Imposible descargar; por favor, comprueba tu conexión a Internet.</string>
     <string name="download_tab_downloads">Todas las descargas</string>
     <string name="download_tab_updates">Actualizaciones</string>
     <string name="download_tab_local">Local</string>
@@ -1886,4 +1885,18 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="navigate_point_easting">Al este</string>
     <string name="navigate_point_northing">Al norte</string>
     <string name="speak_pedestrian">Anunciar pasos de peatones</string>
-    </resources>
+    <string name="rendering_value__name">Por defecto</string>
+	<string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
+	<string name="navigation_over_track">¿Empezar navegación sobre traza?</string>
+	<string name="avoid_roads_msg">Puedes cambiar la ruta seleccionando los caminos a evitar</string>
+    <string name="proxy_pref_title">Proxy</string>
+    <string name="proxy_pref_descr">Configurar un proxy de acceso a Internet</string>
+    <string name="settings_privacy">Privacidad</string>
+    <string name="recents">RECIENTES</string>
+	<string name="enable_proxy_title">Activar Proxy HTTP</string>
+	<string name="enable_proxy_descr">Configurar Proxy HTTP para todas las peticiones de red</string>
+	<string name="proxy_host_title">Host proxy</string>
+	<string name="proxy_port_title">Puerto del proxy</string>
+	<string name="proxy_port_descr">Configurar el número de puerto de tu proxy (p.e. 8118)</string>
+	<string name="proxy_host_descr">Configura el hostname de tu proxy (p.e. 127.0.0.1)</string>
+	</resources>
