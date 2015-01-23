@@ -17,10 +17,12 @@ apply plugin: 'com.android.application'
 //                <include name="assets/**/map/fonts/NotoSans/*"/>
 //            </patternset>
 //        </unzip>
+// Less important
 // 2. fix_apostrophe_issues (replace match="[^=]([^\\])'" replace="\1\\\\'") res/**/strings.xml
 // 3. sherpafy/free/paid
 // 4. Release signature
 // 5. APP_NAME, APP_EDITION uses flavor
+
 
 android {
     compileSdkVersion 21
@@ -75,12 +77,9 @@ android {
             java.srcDirs = [
                     "src",
                     fileTree(dir: "../OsmAnd-java/src", exclude: "**/PlatformUtil.java")
-              //      "resourcesSrc"
             ]
             resources.srcDirs = [
                     "src"
-             //      "../OsmAnd-java/src"    
-             //       "resourcesSrc"
             ]
             renderscript.srcDirs = ["src"]
             res.srcDirs = [
@@ -94,14 +93,15 @@ android {
         free {
             manifest.srcFile "AndroidManifest-free.xml"
         }
-        debug {
+
+        legacy {
             jniLibs.srcDirs = [
-                fileTree(dir: "libs", exclude: "**/libgnustl_shared.so")
+                "libgnustl"
             ]
         }
     }
 
-    flavorDimensions "version", "abi"
+    flavorDimensions "version", "abi", "coreversion"
     productFlavors {
         // ABI        
         armv7 {
@@ -141,12 +141,14 @@ android {
             flavorDimension "version"
             applicationId "net.osmand.plus"
         }
-        /*
-        sherpafy {
-            flavorDimension "version"
-            applicationId "net.osmand.sherpafy"
+
+        legacy {
+            flavorDimension "coreversion"
         }
-        */
+
+        qtcore {
+            flavorDimension "coreversion"
+        }
 
     }
 
@@ -157,15 +159,13 @@ android {
         nativeDebug {
             signingConfig signingConfigs.development
         }
-        legacyDebug {
-            signingConfig signingConfigs.development
-        }
         release {
             signingConfig signingConfigs.publishing
         }
 
     }
 }
+
 
 def replaceNoTranslate(line) {
     if(line.contains("\"app_name\"") && System.getenv("APP_NAME")) {
@@ -285,17 +285,27 @@ task buildOsmAndCore(type: Exec) {
         commandLine "cmd", "/c", "echo", "Not supported"
     }
 }
-task cleanupDuplicatesInCore(type: Delete) {
+
+task cleanupDuplicatesInCore() {
     dependsOn buildOsmAndCore
     // doesn't work for legacy debug builds
-    // delete "libs/armeabi/libgnustl_shared.so"
-    // delete "libs/armeabi-v7a/libgnustl_shared.so"
-    // delete "libs/mips/libgnustl_shared.so"
-    // delete "libs/x86/libgnustl_shared.so"
-
+    doLast {
+        file("libgnustl/armeabi").mkdirs()
+        println file("libs/armeabi/libgnustl_shared.so").renameTo(file("libgnustl/armeabi/libgnustl_shared.so"))
+        file("libgnustl/armeabi-v7a").mkdirs()
+        println file("libs/armeabi-v7a/libgnustl_shared.so").renameTo(file("libgnustl/armeabi-v7a/libgnustl_shared.so"))
+        file("libgnustl/mips").mkdirs()
+        println file("libs/mips/libgnustl_shared.so").renameTo(file("libgnustl/mips/libgnustl_shared.so"))
+        file("libgnustl/x86").mkdirs()
+        println file("libs/x86/libgnustl_shared.so").renameTo(file("libgnustl/x86/libgnustl_shared.so"))
+    }
 }
 tasks.withType(JavaCompile) {
     compileTask -> compileTask.dependsOn << [buildOsmAndCore, downloadAAR, cleanupDuplicatesInCore]
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn << [buildOsmAndCore, downloadAAR]
 }
 
 repositories {
@@ -308,12 +318,11 @@ repositories {
     }
 }
 
-
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"], exclude: ["QtAndroid-bundled.jar", "QtAndroidAccessibility-bundled.jar", "android-support*.jar", "OsmAndCore_wrapper.jar"])
     compile 'com.android.support:appcompat-v7:21.0.3'
-    debugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
-    legacyDebugCompile fileTree(dir: "libs", include: ["OsmAndCore_wrapper.jar"])
-    nativeDebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
-    releaseCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
+    qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+    legacyCompile fileTree(dir: "libs", include: ["OsmAndCore_wrapper.jar"])
+    //nativeDebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
+    //releaseCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 }
