@@ -34,14 +34,6 @@
 
 			<fragment
 					xmlns:android="http://schemas.android.com/apk/res/android"
-					android:id="@+id/ErrorFragment"
-					android:name="net.osmand.plus.dashboard.DashErrorFragment"
-					android:layout_marginTop="@dimen/dashCardMargin"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"/>
-
-			<fragment
-					xmlns:android="http://schemas.android.com/apk/res/android"
 					android:id="@+id/SearchFragment"
 					android:name="net.osmand.plus.dashboard.DashSearchFragment"
                     android:layout_marginTop="@dimen/dashCardMargin"

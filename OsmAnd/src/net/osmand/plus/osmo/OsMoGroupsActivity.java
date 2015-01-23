@@ -126,8 +126,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	@Override
 	public void onCreate(Bundle icicle) {
 		// This has to be called before setContentView and you must use the
-		// class in com.actionbarsherlock.view and NOT android.view
-		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		//TODO: remove this deprecated code with toolbar
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		}

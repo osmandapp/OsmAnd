@@ -16,7 +16,7 @@ import android.view.View;
 
 
 public abstract class OsmandExpandableListActivity extends
-		ActionBarActivity {
+		ActionBarProgressActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

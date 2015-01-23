@@ -18,7 +18,7 @@ import android.view.View;
 
 
 public abstract class OsmandListActivity extends
-		ActionBarActivity implements AdapterView.OnItemClickListener {
+		ActionBarProgressActivity implements AdapterView.OnItemClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

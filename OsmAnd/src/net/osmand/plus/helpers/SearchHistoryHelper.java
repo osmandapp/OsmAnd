@@ -1,8 +1,9 @@
-package net.osmand.plus;
+package net.osmand.plus.helpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 

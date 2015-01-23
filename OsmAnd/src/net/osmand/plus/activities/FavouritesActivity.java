@@ -34,7 +34,7 @@ import android.widget.TextView;
 /**
  *
  */
-public class FavouritesActivity extends ActionBarActivity {
+public class FavouritesActivity extends ActionBarProgressActivity {
 
 	private static final String FAVOURITES_INFO = "FAVOURITES_INFO";
 	private static final String TRACKS = "TRACKS";
@@ -53,7 +53,6 @@ public class FavouritesActivity extends ActionBarActivity {
         //This has to be called before setContentView and you must use the
         //class in com.actionbarsherlock.view and NOT android.view
 		((OsmandApplication) getApplication()).applyTheme(this);
-		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(icicle);
 		setSupportProgressBarIndeterminateVisibility(false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
