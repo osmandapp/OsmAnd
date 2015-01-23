@@ -523,4 +523,20 @@
 	<string name="poi_hockey">Hockey</string>
 	<string name="poi_ice_stock">IJsstokschieten</string>
 	<string name="poi_korfbal">Korfbal</string>
+	<string name="poi_motor_sport">Motorsport</string>
+	<string name="poi_multi_sport">Meerdere sporten</string>
+	<string name="poi_paddle_tennis">Tafeltennis</string>
+	<string name="poi_roller_skating">Rolschaatsen</string>
+	<string name="poi_rowing">Roeien</string>
+	<string name="poi_shooting">Schieten</string>
+	<string name="poi_skating">Skaten</string>
+	<string name="poi_skateboard">Skateboard</string>
+	<string name="poi_skiing">Skiën</string>
+	<string name="poi_soccer">Voetbal</string>
+	<string name="poi_surfing">Surfen</string>
+	<string name="poi_swimming">Zwemmen</string>
+	<string name="poi_table_tennis">Tafeltennis</string>
+	<string name="poi_tennis">Tennis</string>
+	<string name="poi_volleyball">Volleybal</string>
+
 	</resources>
