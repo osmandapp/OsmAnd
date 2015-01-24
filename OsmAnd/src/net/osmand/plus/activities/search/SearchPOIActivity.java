@@ -4,6 +4,7 @@
 package net.osmand.plus.activities.search;
 
 
+import android.support.v7.widget.Toolbar;
 import gnu.trove.set.hash.TLongHashSet;
 
 import java.util.ArrayList;
@@ -131,10 +132,11 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		menu = getClearToolbar(true).getMenu();
 		boolean light = getMyApplication().getSettings().isLightActionBar();
 		searchPOILevel = menu.add(0, SEARCH_MORE, 0, R.string.search_POI_level_btn);
 		MenuItemCompat.setShowAsAction(searchPOILevel,
-				MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		searchPOILevel.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -147,7 +149,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		
 		showFilterItem = menu.add(0, FILTER, 0, R.string.search_poi_filter);
 		MenuItemCompat.setShowAsAction(showFilterItem,
-				MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		showFilterItem = showFilterItem.setIcon(light ? R.drawable.ic_action_filter_light: R.drawable.ic_action_filter_dark);
 		showFilterItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
@@ -179,7 +181,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		showOnMapItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map);
 		MenuItemCompat.setShowAsAction(showOnMapItem,
-				MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		showOnMapItem = showOnMapItem.setIcon(light ? R.drawable.ic_action_map_marker_light : R.drawable.ic_action_map_marker_dark);
 		showOnMapItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
@@ -198,6 +200,14 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			}
 		});
 		return true;
+	}
+
+	public Toolbar getClearToolbar(boolean visible) {
+		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);
+		tb.setTitle(null);
+		tb.getMenu().clear();
+		tb.setVisibility(visible? View.VISIBLE : View.GONE);
+		return tb;
 	}
 	
 	private boolean searchMore() {
