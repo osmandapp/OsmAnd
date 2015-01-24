@@ -49,7 +49,7 @@ android {
         targetSdkVersion 21
 
         versionCode System.getenv("APK_NUMBER_VERSION")? System.getenv("APK_NUMBER_VERSION").toInteger(): versionCode
-        versionName System.getenv("APK_VERSION") ?:  versionName
+        versionName System.getenv("APK_VERSION") ?: versionName
     }
 
     lintOptions {
@@ -101,7 +101,7 @@ android {
         }
     }
 
-    flavorDimensions "version", "abi", "coreversion"
+    flavorDimensions "version", "coreversion", "abi"
     productFlavors {
         // ABI        
         armv7 {
@@ -142,6 +142,7 @@ android {
             applicationId "net.osmand.plus"
         }
 
+        // CoreVersion
         legacy {
             flavorDimension "coreversion"
         }
@@ -149,7 +150,6 @@ android {
         qtcore {
             flavorDimension "coreversion"
         }
-
     }
 
     buildTypes {
@@ -162,10 +162,8 @@ android {
         release {
             signingConfig signingConfigs.publishing
         }
-
     }
 }
-
 
 def replaceNoTranslate(line) {
     if(line.contains("\"app_name\"") && System.getenv("APP_NAME")) {
@@ -219,7 +217,6 @@ task collectRoutingResources(type: Sync) {
     include "*.xml"
 }
 
-
 task collectMiscResources(type: Copy) {
     into "src/net/osmand/osm"
     from("../../resources/obf_creation") {
@@ -236,20 +233,17 @@ task collectRenderingStylesResources(type: Sync) {
     include "*.xml"
 }
 
-
 task collectRegionsInfoResources(type: Copy) {
     from "../../resources/countries-info"
     into "src/net/osmand/map"
     include "regions.ocbf"
 }
 
-
 task copyStyleIcons(type: Copy) {
     from "../../resources/rendering_styles/style-icons/"
     into "res/"
     include "**/*.png"
 }
-
 
 task collectExternalResources << {}
 collectExternalResources.dependsOn collectVoiceAssets,
@@ -261,16 +255,9 @@ collectExternalResources.dependsOn collectVoiceAssets,
         collectMiscResources,
         copyStyleIcons,
         updateNoTranslate
-
-tasks.withType(JavaCompile) {
-    compileTask -> compileTask.dependsOn << collectExternalResources
-}
-
-
-task downloadAAR {
-    def f = new File("libs/OsmAndCore_wrapper.jar")
-    if (!f.exists()) {
-        new URL("http://builder.osmand.net:81/binaries/android/OsmAndCore_wrapper.jar").withInputStream{ i -> f.withOutputStream{ it << i }}
+tasks.whenTaskAdded { task ->
+    if (task.name.startsWith("generate") && task.name.endsWith("Resources")) {
+        task.dependsOn collectExternalResources
     }
 }
 
@@ -301,11 +288,7 @@ task cleanupDuplicatesInCore() {
     }
 }
 tasks.withType(JavaCompile) {
-    compileTask -> compileTask.dependsOn << [buildOsmAndCore, downloadAAR, cleanupDuplicatesInCore]
-}
-
-tasks.withType(JavaCompile) {
-    compileTask -> compileTask.dependsOn << [buildOsmAndCore, downloadAAR]
+    compileTask -> compileTask.dependsOn << [buildOsmAndCore, cleanupDuplicatesInCore]
 }
 
 repositories {
@@ -319,10 +302,10 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: "libs", include: ["*.jar"], exclude: ["QtAndroid-bundled.jar", "QtAndroidAccessibility-bundled.jar", "android-support*.jar", "OsmAndCore_wrapper.jar"])
+    compile fileTree(dir: "libs", include: ["*.jar"], exclude: ["QtAndroid-bundled.jar", "QtAndroidAccessibility-bundled.jar", "android-support*.jar"])
     compile 'com.android.support:appcompat-v7:21.0.3'
     qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
-    legacyCompile fileTree(dir: "libs", include: ["OsmAndCore_wrapper.jar"])
+    legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
     //nativeDebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
     //releaseCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 }
