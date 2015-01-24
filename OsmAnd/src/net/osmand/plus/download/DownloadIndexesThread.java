@@ -24,7 +24,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
-import net.osmand.plus.helpers.DownloadFrequencyHelper;
+import net.osmand.plus.helpers.DatabaseHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
 
@@ -58,17 +58,17 @@ public class DownloadIndexesThread {
 	private java.text.DateFormat dateFormat;
 	private List<IndexItem> itemsToUpdate = new ArrayList<IndexItem>();
 
-	DownloadFrequencyHelper dbHelper;
+	DatabaseHelper dbHelper;
 
 	public DownloadIndexesThread(Context ctx) {
 		this.ctx = ctx;
 		app = (OsmandApplication) ctx.getApplicationContext();
 		downloadFileHelper = new DownloadFileHelper(app);
 		dateFormat = app.getResourceManager().getDateFormat();
-		dbHelper = new DownloadFrequencyHelper(app);
+		dbHelper = new DatabaseHelper(app);
 	}
 
-	public DownloadFrequencyHelper getDbHelper(){
+	public DatabaseHelper getDbHelper(){
 		return dbHelper;
 	}
 
@@ -155,12 +155,12 @@ public class DownloadIndexesThread {
 						uiActivity.updateDownloadButton(false);
 						DownloadEntry item = (DownloadEntry)o;
 						String name = item.item.getBasename();
-						long count = dbHelper.getCount(name) + 1;
-						DownloadFrequencyHelper.HistoryEntry entry = new DownloadFrequencyHelper.HistoryEntry(name,count);
+						long count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
+						DatabaseHelper.HistoryEntry entry = new DatabaseHelper.HistoryEntry(name,count);
 						if (count == 1) {
-							dbHelper.add(entry);
+							dbHelper.add(entry, DatabaseHelper.DOWNLOAD_ENTRY);
 						} else {
-							dbHelper.update(entry);
+							dbHelper.update(entry, DatabaseHelper.DOWNLOAD_ENTRY);
 						}
 					}
 				} else if (o instanceof IndexItem) {
@@ -170,8 +170,8 @@ public class DownloadIndexesThread {
 						uiActivity.updateDownloadButton(false);
 						IndexItem item = (IndexItem)o;
 
-						long count = dbHelper.getCount(item.getBasename()) + 1;
-						dbHelper.add(new DownloadFrequencyHelper.HistoryEntry(item.getBasename(), count));
+						long count = dbHelper.getCount(item.getBasename(), DatabaseHelper.DOWNLOAD_ENTRY) + 1;
+						dbHelper.add(new DatabaseHelper.HistoryEntry(item.getBasename(), count), DatabaseHelper.DOWNLOAD_ENTRY);
 					}
 				} else if (o instanceof String) {
 					String message = (String) o;
