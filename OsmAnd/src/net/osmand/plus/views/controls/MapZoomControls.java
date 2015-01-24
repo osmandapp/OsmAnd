@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import net.osmand.core.android.MapRendererContext;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandSettings;
@@ -15,6 +17,7 @@ import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.ShadowText;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
@@ -268,6 +271,10 @@ public class MapZoomControls extends MapControls {
 								int p = tlist.get(which);
 								mapDensity.set(p / 100.0f);
 								view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
+								MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+								if(mapContext != null) {
+									mapContext.updateMapSettings();
+								}
 								dialog.dismiss();
 							}
 						});
