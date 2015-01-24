@@ -9,7 +9,6 @@ apply plugin: 'com.android.application'
     
 
 // TODO
-// 0. Update OsmAndCore_wrapper for build (use ivy )
 // 1. Filter fonts
 // <unzip src="OsmAndCore_android.aar" dest=".">
 //            <patternset>
@@ -305,7 +304,8 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: "libs", include: ["*.jar"], exclude: ["QtAndroid-bundled.jar", "QtAndroidAccessibility-bundled.jar", "android-support*.jar"])
+    compile fileTree(dir: "libs", include: ["*.jar"], exclude: ["QtAndroid-bundled.jar", "QtAndroidAccessibility-bundled.jar", "android-support*.jar", "OsmAndCore_android.jar", 
+    "OsmAndCore_wrapper.jar"])
     compile 'com.android.support:appcompat-v7:21.0.3'
     qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
     legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
