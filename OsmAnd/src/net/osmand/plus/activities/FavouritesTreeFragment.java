@@ -339,11 +339,11 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 		if (!MenuItemCompat.isActionViewExpanded(mi)) {
 			createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_light,
-					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, SELECT_DESTINATIONS_ID, R.string.select_destination_and_intermediate_points, R.drawable.ic_action_flage_light,
-					R.drawable.ic_action_flage_dark, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+					R.drawable.ic_action_flage_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, DELETE_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_light,
-					R.drawable.ic_action_delete_dark, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+					R.drawable.ic_action_delete_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 //			createMenuItem(menu, EXPORT_ID, R.string.export_fav, R.drawable.ic_action_gsave_light,
 //					R.drawable.ic_action_gsave_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM);
 			
@@ -363,7 +363,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-				selectionMode = true;
+				enableSelectionMode(true);
 				createMenuItem(menu, SELECT_DESTINATIONS_ACTION_MODE_ID, R.string.select_destination_and_intermediate_points,
 						R.drawable.ic_action_flage_light, R.drawable.ic_action_flage_dark,
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
@@ -381,7 +381,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
-				selectionMode = false;
+				enableSelectionMode(false);
 				favouritesAdapter.notifyDataSetInvalidated();
 			}
 
@@ -414,11 +414,12 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 	}
 
 	private void enterDeleteMode() {
+
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-				selectionMode = true;
+				enableSelectionMode(true);
 				createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete,
 						R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
@@ -436,7 +437,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
-				selectionMode = false;
+				enableSelectionMode(false);
 				favouritesAdapter.notifyDataSetInvalidated();
 			}
 
@@ -452,7 +453,12 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 		});
 
 	}
-	
+
+	private void enableSelectionMode(boolean selectionMode) {
+		this.selectionMode = selectionMode;
+		((FavouritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
+	}
+
 	protected void openChangeGroupDialog(final FavoriteGroup group) {
 		Builder bld = new AlertDialog.Builder(getActivity());
 		View favEdit = getActivity().getLayoutInflater().inflate(R.layout.fav_group_edit, null);

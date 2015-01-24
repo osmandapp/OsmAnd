@@ -184,7 +184,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
 			item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
-			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			if (optionsMenuAdapter.getImageId(j, isLightActionBar()) != 0) {
 				item.setIcon(optionsMenuAdapter.getImageId(j, isLightActionBar()));
 			}
@@ -234,8 +234,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
+	private void enableSelectionMode(boolean selectionMode) {
+		this.selectionMode = selectionMode;
+		((FavouritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
+	}
+
 	private void openShowOnMapMode() {
-		selectionMode = true;
+		enableSelectionMode(true);
 		selectedItems.clear();
 		final Set<GpxInfo> originalSelectedItems = listAdapter.getSelectedGpx();
 		selectedItems.addAll(originalSelectedItems);
@@ -243,7 +248,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-				selectionMode = true;
+				enableSelectionMode(true);
 				updateSelectionMode(mode);
 				MenuItem it = menu.add(R.string.show_gpx_route);
 				it.setIcon(!isLightActionBar() ? R.drawable.ic_action_map_marker_dark : R.drawable.ic_action_map_marker_light);
@@ -275,7 +280,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
-				selectionMode = false;
+				enableSelectionMode(false);
 				getView().findViewById(R.id.DescriptionText).setVisibility(View.GONE);
 				runSelection(false);
 				listAdapter.notifyDataSetChanged();
@@ -299,13 +304,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			return;
 		}
 
-		selectionMode = true;
+		enableSelectionMode(true);
 		selectedItems.clear();
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-				selectionMode = true;
+				enableSelectionMode(true);
 				MenuItem it = menu.add(actionResId);
 				if (actionIconId != 0) {
 					it.setIcon(actionIconId);
@@ -337,7 +342,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
-				selectionMode = false;
+				enableSelectionMode(false);
 				getView().findViewById(R.id.DescriptionText).setVisibility(View.GONE);
 				listAdapter.notifyDataSetChanged();
 			}

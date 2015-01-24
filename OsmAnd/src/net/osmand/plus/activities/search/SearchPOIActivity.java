@@ -225,13 +225,12 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	
 	@Override
 	public void onCreate(Bundle icicle) {
-		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(icicle);
 		setContentView(R.layout.searchpoi);
 		
 		getSupportActionBar().setTitle(R.string.searchpoi_activity);
 		getSupportActionBar().setIcon(R.drawable.tab_search_poi_icon);
-		//getSherlock().setProgressBarIndeterminateVisibility(false);
+		setSupportProgressBarIndeterminateVisibility(false);
 		
 		app = (OsmandApplication)getApplication();
 		

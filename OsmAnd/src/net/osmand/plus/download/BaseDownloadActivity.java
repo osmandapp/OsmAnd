@@ -22,6 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
@@ -34,9 +35,10 @@ import android.widget.Toast;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 
 /**
- * Created by Denis on 25.11.2014.
+ * Created by Denis
+ * on 25.11.2014.
  */
-public class BaseDownloadActivity extends ActionBarActivity {
+public class BaseDownloadActivity extends ActionBarProgressActivity {
 	protected DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
 	protected OsmandSettings settings;
 	public static DownloadIndexesThread downloadListIndexThread;

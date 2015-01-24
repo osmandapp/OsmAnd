@@ -55,7 +55,7 @@ public class DashFavoritesFragment extends DashBaseFragment implements Favourite
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_favorites_fragment, container, false);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		((TextView) view.findViewById(R.id.fav_text)).setTypeface(typeface);
 		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
@@ -132,7 +132,7 @@ public class DashFavoritesFragment extends DashBaseFragment implements Favourite
 				return (dist - dist2);
 			}
 		});
-		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.favorites);
+		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);
 		favorites.removeAllViews();
 		if (points.size() > 3){
 			while (points.size() != 3){

@@ -25,7 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Denis on 15.12.2014.
+ * Created by Denis
+ * on 15.12.2014.
  */
 public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	AudioVideoNotesPlugin plugin;

@@ -26,7 +26,7 @@ import android.webkit.WebViewClient;
 /**
  *
  */
-public class PrintDialogActivity extends ActionBarActivity {
+public class PrintDialogActivity extends ActionBarProgressActivity {
 	private WebView webView;
 	PrintJobId printJobId = null;
 
@@ -35,7 +35,6 @@ public class PrintDialogActivity extends ActionBarActivity {
         //This has to be called before setContentView and you must use the
         //class in com.actionbarsherlock.view and NOT android.view
 		((OsmandApplication) getApplication()).applyTheme(this);
-		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		}

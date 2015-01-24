@@ -24,6 +24,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
+import net.osmand.plus.helpers.DownloadFrequencyHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
 
@@ -57,14 +58,20 @@ public class DownloadIndexesThread {
 	private java.text.DateFormat dateFormat;
 	private List<IndexItem> itemsToUpdate = new ArrayList<IndexItem>();
 
+	DownloadFrequencyHelper dbHelper;
 
 	public DownloadIndexesThread(Context ctx) {
 		this.ctx = ctx;
 		app = (OsmandApplication) ctx.getApplicationContext();
 		downloadFileHelper = new DownloadFileHelper(app);
 		dateFormat = app.getResourceManager().getDateFormat();
+		dbHelper = new DownloadFrequencyHelper(app);
 	}
-	
+
+	public DownloadFrequencyHelper getDbHelper(){
+		return dbHelper;
+	}
+
 	public void clear() {
 		indexFiles = null;
 	}
@@ -146,12 +153,25 @@ public class DownloadIndexesThread {
 					if (uiActivity != null) {
 						uiActivity.downloadListUpdated();
 						uiActivity.updateDownloadButton(false);
+						DownloadEntry item = (DownloadEntry)o;
+						String name = item.item.getBasename();
+						long count = dbHelper.getCount(name) + 1;
+						DownloadFrequencyHelper.HistoryEntry entry = new DownloadFrequencyHelper.HistoryEntry(name,count);
+						if (count == 1) {
+							dbHelper.add(entry);
+						} else {
+							dbHelper.update(entry);
+						}
 					}
 				} else if (o instanceof IndexItem) {
 					entriesToDownload.remove(o);
 					if (uiActivity != null) {
 						uiActivity.downloadListUpdated();
 						uiActivity.updateDownloadButton(false);
+						IndexItem item = (IndexItem)o;
+
+						long count = dbHelper.getCount(item.getBasename()) + 1;
+						dbHelper.add(new DownloadFrequencyHelper.HistoryEntry(item.getBasename(), count));
 					}
 				} else if (o instanceof String) {
 					String message = (String) o;

@@ -56,12 +56,21 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
 
+			<fragment
+					xmlns:android="http://schemas.android.com/apk/res/android"
+					android:id="@+id/TracksFragment"
+					android:name="net.osmand.plus.dashboard.DashTrackFragment"
+					android:layout_marginTop="@dimen/dashCardMargin"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"/>
+
 			<!--<fragment-->
 					<!--xmlns:android="http://schemas.android.com/apk/res/android"-->
 					<!--android:name="net.osmand.plus.dashboard.DashDownloadMapsFragment"-->
                     <!--android:layout_marginTop="@dimen/dashCardMargin"-->
 					<!--android:layout_width="match_parent"-->
 					<!--android:layout_height="wrap_content"/>-->
+
 
 			<fragment
 					xmlns:android="http://schemas.android.com/apk/res/android"
@@ -82,7 +91,7 @@
 
 		<!--To make sure that floating button is always visible-->
 	<View	android:layout_width="match_parent"
-			android:layout_height="76dp"
+			android:layout_height="@dimen/dashFABMargin"
 			android:orientation="vertical"/>
 
     </LinearLayout>

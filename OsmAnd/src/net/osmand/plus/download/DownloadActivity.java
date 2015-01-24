@@ -62,16 +62,16 @@ public class DownloadActivity extends BaseDownloadActivity {
 	public static final String SINGLE_TAB = "SINGLE_TAB";
 	private List<DownloadActivityType> downloadTypes = new ArrayList<DownloadActivityType>();
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
-		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
+		setupIntermediateProgressBar();
 		updateDownloads();
-		setSupportProgressBarIndeterminateVisibility(false);
+
 
 		setContentView(R.layout.tab_content);
+		findViewById(R.id.bottomControls).setVisibility(View.GONE);
 		singleTab = getIntent() != null && getIntent().getBooleanExtra(SINGLE_TAB, false);
 		int currentTab = 0;
 		String tab = getIntent() == null || getIntent().getExtras() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);
@@ -158,6 +158,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
+
 
 
 
