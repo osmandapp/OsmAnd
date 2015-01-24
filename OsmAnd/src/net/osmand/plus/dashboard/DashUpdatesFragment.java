@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import android.graphics.Typeface;
-import android.media.Image;
 import android.widget.*;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BasicProgressAsyncTask;
@@ -20,7 +19,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import net.osmand.plus.helpers.DownloadFrequencyHelper;
+import net.osmand.plus.helpers.DatabaseHelper;
 import net.osmand.plus.helpers.FontCache;
 
 /**
@@ -79,8 +78,9 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		Collections.sort(itemList, new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem indexItem, IndexItem t1) {
-				DownloadFrequencyHelper helper = BaseDownloadActivity.downloadListIndexThread.getDbHelper();
-				return (int)(helper.getCount(t1.getBasename()) - helper.getCount(indexItem.getBasename()));
+				DatabaseHelper helper = BaseDownloadActivity.downloadListIndexThread.getDbHelper();
+				return (int)(helper.getCount(t1.getBasename(), DatabaseHelper.DOWNLOAD_ENTRY) -
+						helper.getCount(indexItem.getBasename(), DatabaseHelper.DOWNLOAD_ENTRY));
 			}
 		});
 		View mainView = getView();

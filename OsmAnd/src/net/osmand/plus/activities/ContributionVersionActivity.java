@@ -54,7 +54,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		pathToDownload = getMyApplication().getAppPath("osmandToInstall.apk");
-		setContentView(android.R.layout.list_content);
+		setContentView(R.layout.default_list_view);
 		getSupportActionBar().setSubtitle(R.string.select_build_to_install);
 		
 		String installDate = getMyApplication().getSettings().CONTRIBUTION_INSTALL_APP_DATE.get();
