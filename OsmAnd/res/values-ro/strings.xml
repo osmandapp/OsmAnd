@@ -1360,7 +1360,7 @@
 	<string name="save_track_to_gpx_globally">Salveaza track-ul intr-un fișier GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Salvarea pozitiei generale intr-un fișier GPX poate fi activată prin intermediul widget-ului de inregistrare GPX de pe fereastra hărții</string>
 	<string name="save_track_interval_globally">Interval de salvare</string>
-	<string name="rendering_attr_publicTransportMode_name">Modul transport public</string>
+	<string name="rendering_attr_publicTransportMode_name">Autobuz, troleibuz, rute de transfer</string>
 	<string name="monitoring_settings">Înregistrare călătorie</string>
     <string name="monitoring_settings_descr">Configurare mod înregistrare călătorie</string>
     <string name="int_hour">h</string>
