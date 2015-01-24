@@ -79,6 +79,10 @@ public class Version {
 		Version v = getVersion(ctx);
 		return v.appVersion;
 	}
+
+	public static String getBuildAppEdition(OsmandApplication ctx){
+		return ctx.getString(R.string.app_edition);
+	}
 	
 	public static String getAppName(OsmandApplication ctx){
 		Version v = getVersion(ctx);

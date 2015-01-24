@@ -145,6 +145,10 @@ public class FavouritesActivity extends ActionBarProgressActivity {
 		return tb;
 	}
 
+	public void setToolbarVisibility(boolean visible){
+		findViewById(R.id.bottomControls).setVisibility(visible? View.VISIBLE : View.GONE);
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();

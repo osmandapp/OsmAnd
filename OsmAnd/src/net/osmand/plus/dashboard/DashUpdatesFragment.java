@@ -20,6 +20,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import net.osmand.plus.helpers.DownloadFrequencyHelper;
 import net.osmand.plus.helpers.FontCache;
 
 /**
@@ -70,6 +71,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			cancelButton = null;
 		}
 		updatedDownloadsList(BaseDownloadActivity.downloadListIndexThread.getItemsToUpdate());
+
 	}
 
 	public void updatedDownloadsList(List<IndexItem> list) {
@@ -77,7 +79,8 @@ public class DashUpdatesFragment extends DashBaseFragment {
 		Collections.sort(itemList, new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem indexItem, IndexItem t1) {
-				return (int)(t1.getTimestamp() - indexItem.getTimestamp());
+				DownloadFrequencyHelper helper = BaseDownloadActivity.downloadListIndexThread.getDbHelper();
+				return (int)(helper.getCount(t1.getBasename()) - helper.getCount(indexItem.getBasename()));
 			}
 		});
 		View mainView = getView();

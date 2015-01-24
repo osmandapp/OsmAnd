@@ -67,7 +67,11 @@ public class DownloadIndexesThread {
 		dateFormat = app.getResourceManager().getDateFormat();
 		dbHelper = new DownloadFrequencyHelper(app);
 	}
-	
+
+	public DownloadFrequencyHelper getDbHelper(){
+		return dbHelper;
+	}
+
 	public void clear() {
 		indexFiles = null;
 	}
@@ -150,9 +154,7 @@ public class DownloadIndexesThread {
 						uiActivity.downloadListUpdated();
 						uiActivity.updateDownloadButton(false);
 						DownloadEntry item = (DownloadEntry)o;
-						String name = item.assetName != null ?
-								item.assetName.substring(item.assetName.lastIndexOf("/") + 1) :
-								item.baseName;
+						String name = item.item.getBasename();
 						long count = dbHelper.getCount(name) + 1;
 						DownloadFrequencyHelper.HistoryEntry entry = new DownloadFrequencyHelper.HistoryEntry(name,count);
 						if (count == 1) {
@@ -168,8 +170,8 @@ public class DownloadIndexesThread {
 						uiActivity.updateDownloadButton(false);
 						IndexItem item = (IndexItem)o;
 
-						long count = dbHelper.getCount(item.fileName) + 1;
-						dbHelper.add(new DownloadFrequencyHelper.HistoryEntry(item.fileName, count));
+						long count = dbHelper.getCount(item.getBasename()) + 1;
+						dbHelper.add(new DownloadFrequencyHelper.HistoryEntry(item.getBasename(), count));
 					}
 				} else if (o instanceof String) {
 					String message = (String) o;

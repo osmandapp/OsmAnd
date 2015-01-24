@@ -478,6 +478,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		if (!this.isAdded()) {
 			return;
 		}
+
 		//fixes issue when local files not shown after switching tabs
 		//Next line throws NPE in some circumstances when called from dashboard and listAdpater=null is not checked for. (Checking !this.isAdded above is not sufficient!)
 		if (listAdapter != null && listAdapter.getGroupCount() == 0 && getDownloadActivity().getLocalIndexInfos().size() > 0) {

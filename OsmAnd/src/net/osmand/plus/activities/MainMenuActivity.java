@@ -247,32 +247,10 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			edition = activity.getString(R.string.local_index_installed) + " : \t" + activity.getString(R.string.app_edition);
 		}
 		SharedPreferences prefs = app.getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
-		if (prefs.contains(CONTRIBUTION_VERSION_FLAG) && Version.isDeveloperVersion(app)) {
-			//Next 7 lines produced bogus Edition dates in many situtations, let us try (see above) to use the BUILD_ID as delivered from builder
-			//try {
-			//PackageManager pm = activity.getPackageManager();
-			//ApplicationInfo appInfo = pm.getApplicationInfo(OsmandApplication.class.getPackage().getName(), 0);
-			//Date date = new Date(new File(appInfo.sourceDir).lastModified());
-			//edition = activity.getString(R.string.local_index_installed) + " : \t" + DateFormat.getDateFormat(app).format(date);
-			//} catch (Exception e) {
-			//}
-			SpannableString content = new SpannableString(vt + version + "\n" +
-					edition + "\n\n" +
-					activity.getString(R.string.about_content));
-			content.setSpan(new ClickableSpan() {
-				@Override
-				public void onClick(View widget) {
-					final Intent mapIntent = new Intent(activity, ContributionVersionActivity.class);
-					activity.startActivityForResult(mapIntent, 0);
-				}
 
-			}, st, st + version.length(), 0);
-			tv.setText(content);
-		} else {
-			tv.setText(vt + version + "\n" +
-					edition + "\n\n" +
-					activity.getString(R.string.about_content));
-		}
+		tv.setText(vt + version + "\n" +
+				edition + "\n\n" +
+				activity.getString(R.string.about_content));
 
 		tv.setPadding(5, 0, 5, 5);
 		tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
