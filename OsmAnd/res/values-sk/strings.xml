@@ -2042,4 +2042,10 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="proxy_host_descr">Nastaviť meno proxy servera (napr. 127.0.0.1)</string>
 	<string name="proxy_port_title">Proxy port</string>
 	<string name="proxy_port_descr">Nastaviť port proxy servera (napr. 8118)</string>
-	</resources>
+	<string name="version_settings_descr">Stiahnuť vývojové verzie</string>
+    <string name="version_settings">Verzie</string>
+    <string name="points">Body</string>
+    <string name="tracks">Stopy</string>
+    <string name="my_location">Moja poloha</string>
+    <string name="osm_editing_manage">Spravovať</string>
+    </resources>
