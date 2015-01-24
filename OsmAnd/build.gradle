@@ -172,6 +172,9 @@ def replaceNoTranslate(line) {
     if(line.contains("\"app_edition\"") && System.getenv("APP_EDITION")) {
         return line.replaceAll(">[^<]*<", " >"+System.getenv("APP_EDITION")+"<")
     }
+    if(line.contains("\"app_version\"") && System.getenv("APK_VERSION")) {
+        return line.replaceAll(">[^<]*<", " >\1"+System.getenv("APK_VERSION")+"<")
+    }
     if(line.contains("\"versionFeatures\"") && System.getenv("APP_FEATURES")) {
         return line.replaceAll(">[^<]*<", " >"+System.getenv("APP_FEATURES")+"<")
     }
