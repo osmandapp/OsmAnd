@@ -864,7 +864,7 @@
 	<string name="save_current_track_descr">現在就將目前的軌跡存到 SD 卡</string>
 	<string name="save_current_track">儲存目前的 GPX 軌跡</string>
 	<string name="save_track_interval">在導航期間的記錄間隔</string>
-	<string name="save_track_interval_descr">在導航整個期間，為軌跡記錄選取記錄間隔</string>
+	<string name="save_track_interval_descr">在整個導航期間，為軌跡記錄選取記錄間隔</string>
 	<string name="save_track_to_gpx_descrp">在整個導航期間，軌跡將會儲存在 track 資料夾</string>
 	<string name="save_track_to_gpx">導航期間記錄軌跡成 GPX 檔案</string>
 	<string name="update_tile">更新地圖</string>
@@ -1870,7 +1870,7 @@
     <string name="speak_pedestrian">通報行人穿越道</string>
     <string name="rendering_value__name">預設</string>
 	<string name="navigation_over_track">開始導航覆蓋在軌跡上嗎？</string>
-	<string name="avoid_roads_msg">您可以經由選擇道路，以避免更改路線</string>
+	<string name="avoid_roads_msg">您可以觸發一條替代線路，經由選擇道路去避免</string>
     <string name="save_track_to_gpx_globally_headline">要求軌跡日誌</string>
 	<string name="recents">最新的</string>
 	<string name="rendering_attr_streetLighting_name">街道照明設備</string>
