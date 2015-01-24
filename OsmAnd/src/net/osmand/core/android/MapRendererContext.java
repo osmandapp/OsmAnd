@@ -226,7 +226,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		}
 		// Create new OBF map symbols provider
 		obfMapSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider, getReferenceTileSize(),
-				app.getSettings().TEXT_SCALE.get());
+				app.getSettings().TEXT_SCALE.get() / app.getSettings().MAP_DENSITY.get());
 		// If there's bound view, add new provider
 		if (mapRendererView != null) {
 			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);

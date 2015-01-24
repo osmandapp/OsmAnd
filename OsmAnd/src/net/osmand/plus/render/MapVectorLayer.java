@@ -14,6 +14,7 @@ import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -136,7 +137,9 @@ public class MapVectorLayer extends BaseMapLayer {
 					mapRenderer.setMapLayerConfiguration(1, mapLayerConfiguration);
 				}
 				// opengl renderer
-				mapRenderer.setTarget(new PointI(tilesRect.getCenter31X(), tilesRect.getCenter31Y()));
+				LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2, tilesRect.getPixHeight() / 2);
+				mapRenderer.setTarget(new PointI(MapUtils.get31TileNumberX(ll.getLongitude()), 
+						MapUtils.get31TileNumberY(ll.getLatitude())));
 				mapRenderer.setAzimuth(-tilesRect.getRotate());
 				mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect
 						.getZoomAnimation() + tilesRect.getZoomFloatPart()));
