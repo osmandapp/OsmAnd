@@ -48,7 +48,7 @@ android {
         targetSdkVersion 21
 
         versionCode System.getenv("APK_NUMBER_VERSION")? System.getenv("APK_NUMBER_VERSION").toInteger(): versionCode
-        versionName System.getenv("APK_VERSION")? System.getenv("APK_NUMBER_VERSION").toString(): versionName
+        versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
     }
 
     lintOptions {
