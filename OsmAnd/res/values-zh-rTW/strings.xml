@@ -1884,7 +1884,7 @@
 	<string name="proxy_port_title">代理伺服器埠</string>
 	<string name="proxy_port_descr">組態您代理伺服器的埠號 (例如 8118)</string>
 	<string name="version_settings_descr">下載 nightly builds 版</string>
-    <string name="version_settings">Builds</string>
+    <string name="version_settings">建構</string>
     <string name="points">點</string>
     <string name="tracks">軌跡</string>
     <string name="my_location">我的位置</string>
