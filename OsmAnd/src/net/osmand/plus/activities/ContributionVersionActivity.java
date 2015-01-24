@@ -16,7 +16,6 @@ import android.widget.*;
 import net.osmand.AndroidUtils;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;

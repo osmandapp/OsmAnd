@@ -57,12 +57,6 @@ public class SettingsActivity extends SettingsBaseActivity {
 				startActivity(new Intent(this, SettingsNavigationActivity.class));
 			} 
 		}
-		about = new Preference(this);
-		about.setOnPreferenceClickListener(this);
-		about.setSummary(R.string.about_settings_descr);
-		about.setTitle(R.string.about_settings);
-		about.setKey("about");
-		screen.addPreference(about);
 		if ((Version.getBuildAppEdition(getMyApplication()).length() > 0
 				|| Version.isDeveloperVersion(getMyApplication())) &&
 				OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null){
@@ -73,6 +67,12 @@ public class SettingsActivity extends SettingsBaseActivity {
 			version.setKey("version");
 			screen.addPreference(version);
 		}
+		about = new Preference(this);
+		about.setOnPreferenceClickListener(this);
+		about.setSummary(R.string.about_settings_descr);
+		about.setTitle(R.string.about_settings);
+		about.setKey("about");
+		screen.addPreference(about);
     }
 
 	@Override
