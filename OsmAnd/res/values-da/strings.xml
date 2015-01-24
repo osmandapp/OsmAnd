@@ -1891,4 +1891,10 @@
 	<string name="proxy_port_title">Proxy port</string>
 	<string name="proxy_port_descr">Konfigurer proxy portnummer (f.eks. 8118)</string>
 	<string name="rendering_attr_streetLighting_name">Gadebelysning</string>
+    <string name="tracks">Spor</string>
+    <string name="my_location">Min placering</string>
+    <string name="osm_editing_manage">Administrer</string>
+    <string name="version_settings_descr">Hent natlige versioner</string>
+    <string name="version_settings">Versioner</string>
+    <string name="points">Punkter</string>
     </resources>
