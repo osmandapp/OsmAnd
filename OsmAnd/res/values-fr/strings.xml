@@ -1909,4 +1909,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="settings_privacy">Confidentialité</string>
     <string name="rendering_attr_streetLighting_name">Éclairage public</string>
     <string name="enable_proxy_title">Activer le mandataire HTTP</string>
-	</resources>
+	<string name="version_settings_descr">Télécharger les versions en cours développement</string>
+    <string name="version_settings">Builds</string>
+    <string name="points">Points</string>
+    <string name="tracks">Traces</string>
+    <string name="my_location">Ma position</string>
+    <string name="osm_editing_manage">Gérer</string>
+    </resources>
