@@ -15,7 +15,7 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 	@Override
 	public SQLiteConnection getOrCreateDatabase(String name, boolean readOnly) {
 		android.database.sqlite.SQLiteDatabase db = app.openOrCreateDatabase(name,
-				readOnly? SQLiteDatabase.OPEN_READONLY : SQLiteDatabase.OPEN_READWRITE, null);
+				readOnly? SQLiteDatabase.OPEN_READONLY : (SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING), null);
 		if(db == null) {
 			return null;
 		}

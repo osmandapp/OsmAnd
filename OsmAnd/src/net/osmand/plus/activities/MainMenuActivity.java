@@ -84,24 +84,30 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			final int headerHeight = imageHeight - getSupportActionBar().getHeight();
 			final float ratio = (float) Math.min(Math.max(t, 0), headerHeight) / headerHeight;
 			final int newAlpha = (int) (ratio * 255);
-			if (headerHeight < t){
+			int margintop = -(int)(ratio * 60);
+			Resources r = getResources();
+			int px = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP,
+					margintop,
+					r.getDisplayMetrics());
+			int margin = px + defaultMargin;
+			if (headerHeight < t - margin){
 				//hiding action bar - showing floating button
 				//getSupportActionBar().hide();
-				fabButton.showFloatingActionButton();
+				if (fabButton != null) {
+					fabButton.showFloatingActionButton();
+				}
 			} else {
 				//getSupportActionBar().show();
-				fabButton.hideFloatingActionButton();
+				if (fabButton != null) {
+					fabButton.hideFloatingActionButton();
+				}
 
 				//makes other cards to move on top of the map card to make it look like android animations
 				View fragments = findViewById(R.id.fragments);
 				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-				int margintop = -(int)(ratio * 60);
-				Resources r = getResources();
-				int px = (int) TypedValue.applyDimension(
-						TypedValue.COMPLEX_UNIT_DIP,
-						margintop,
-						r.getDisplayMetrics());
-				params.setMargins(0, px + defaultMargin, 0, 0);
+
+				params.setMargins(0, margin, 0, 0);
 				fragments.setLayoutParams(params);
 			}
 			if (newAlpha > START_ALPHA) {
@@ -187,8 +193,9 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 					startMapActivity();
 				}
 			});
+			fabButton.hideFloatingActionButton();
 		}
-		fabButton.hideFloatingActionButton();
+
 		getLocationProvider().addCompassListener(this);
 		getLocationProvider().registerOrUnregisterCompassListener(true);
 
@@ -240,32 +247,10 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 			edition = activity.getString(R.string.local_index_installed) + " : \t" + activity.getString(R.string.app_edition);
 		}
 		SharedPreferences prefs = app.getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
-		if (prefs.contains(CONTRIBUTION_VERSION_FLAG) && Version.isDeveloperVersion(app)) {
-			//Next 7 lines produced bogus Edition dates in many situtations, let us try (see above) to use the BUILD_ID as delivered from builder
-			//try {
-			//PackageManager pm = activity.getPackageManager();
-			//ApplicationInfo appInfo = pm.getApplicationInfo(OsmandApplication.class.getPackage().getName(), 0);
-			//Date date = new Date(new File(appInfo.sourceDir).lastModified());
-			//edition = activity.getString(R.string.local_index_installed) + " : \t" + DateFormat.getDateFormat(app).format(date);
-			//} catch (Exception e) {
-			//}
-			SpannableString content = new SpannableString(vt + version + "\n" +
-					edition + "\n\n" +
-					activity.getString(R.string.about_content));
-			content.setSpan(new ClickableSpan() {
-				@Override
-				public void onClick(View widget) {
-					final Intent mapIntent = new Intent(activity, ContributionVersionActivity.class);
-					activity.startActivityForResult(mapIntent, 0);
-				}
 
-			}, st, st + version.length(), 0);
-			tv.setText(content);
-		} else {
-			tv.setText(vt + version + "\n" +
-					edition + "\n\n" +
-					activity.getString(R.string.about_content));
-		}
+		tv.setText(vt + version + "\n" +
+				edition + "\n\n" +
+				activity.getString(R.string.about_content));
 
 		tv.setPadding(5, 0, 5, 5);
 		tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);

@@ -51,7 +51,6 @@ public class RoutePointsActivity extends OsmandListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		this.app = (OsmandApplication) getApplication();
 		plugin = OsmandPlugin.getEnabledPlugin(RoutePointsPlugin.class);
-		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		setSupportProgressBarIndeterminateVisibility(false);
 		getSupportActionBar().setTitle(R.string.route_points_activity);

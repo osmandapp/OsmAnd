@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.ImageView;
@@ -134,9 +133,13 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 	private void applicationInitialized(View view) {
 		updateMapImage();
 		view.findViewById(R.id.loading).setVisibility(View.GONE);
-		MainMenuActivity dashboardActivity = ((MainMenuActivity) getActivity());
-		if (dashboardActivity != null) {
-			dashboardActivity.updateDownloads();
+		MainMenuActivity mainMenuActivity = ((MainMenuActivity) getActivity());
+		if (mainMenuActivity != null) {
+			if (System.currentTimeMillis() - getMyApplication().getSettings().LAST_UPDATES_CARD_REFRESH.get()
+					> 12*60*60*1000 ) {
+				getMyApplication().getSettings().LAST_UPDATES_CARD_REFRESH.set(System.currentTimeMillis());
+				mainMenuActivity.updateDownloads();
+			}
 			view.findViewById(R.id.map_image).setVisibility(View.VISIBLE);
 		}
 	}

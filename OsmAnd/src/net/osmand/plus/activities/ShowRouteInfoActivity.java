@@ -51,12 +51,11 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		ListView lv = new ListView(this);
-		lv.setId(android.R.id.list);
+		setContentView(R.layout.default_list_view);
+		ListView lv = (ListView) findViewById(android.R.id.list);
 		header = new TextView(this);
 		helper = ((OsmandApplication)getApplication()).getRoutingHelper();
 		lv.addHeaderView(header);
-		setContentView(lv);
 		dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 

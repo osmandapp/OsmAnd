@@ -18,7 +18,7 @@ import android.view.View;
 
 
 public abstract class OsmandListActivity extends
-		ActionBarActivity implements AdapterView.OnItemClickListener {
+		ActionBarProgressActivity implements AdapterView.OnItemClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,20 +62,10 @@ public abstract class OsmandListActivity extends
 		return menuItem;
 	}
 
-	public void fixBackgroundRepeat(View view) {
-		Drawable bg = view.getBackground();
-		if (bg != null) {
-			if (bg instanceof BitmapDrawable) {
-				BitmapDrawable bmp = (BitmapDrawable) bg;
-				// bmp.mutate(); // make sure that we aren't sharing state anymore
-				bmp.setTileModeXY(TileMode.REPEAT, TileMode.REPEAT);
-			}
-		}
-	}
-
-
 	public void setListAdapter(ListAdapter adapter){
 		((ListView)findViewById(android.R.id.list)).setAdapter(adapter);
+		setOnItemClickListener(this);
+
 	}
 
 	public ListView getListView() {

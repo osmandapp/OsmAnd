@@ -1,6 +1,5 @@
 package net.osmand.plus.activities.search;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.support.v4.app.ListFragment;
@@ -11,8 +10,8 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.SearchHistoryHelper;
-import net.osmand.plus.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.dialogs.DirectionsDialogs;
@@ -20,7 +19,6 @@ import net.osmand.util.MapUtils;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
 import android.view.View.OnClickListener;

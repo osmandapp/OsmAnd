@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import net.osmand.plus.Version;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
 
 public class SettingsActivity extends SettingsBaseActivity {
 
@@ -26,6 +28,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 	private Preference general;
 	private Preference routing;
 	private Preference about;
+	private Preference version;
 
 
 	@Override
@@ -53,6 +56,16 @@ public class SettingsActivity extends SettingsBaseActivity {
 			} else if(s == SCREEN_NAVIGATION_SETTINGS){
 				startActivity(new Intent(this, SettingsNavigationActivity.class));
 			} 
+		}
+		if ((Version.getBuildAppEdition(getMyApplication()).length() > 0
+				|| Version.isDeveloperVersion(getMyApplication())) &&
+				OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null){
+			version = new Preference(this);
+			version.setOnPreferenceClickListener(this);
+			version.setSummary(R.string.version_settings_descr);
+			version.setTitle(R.string.version_settings);
+			version.setKey("version");
+			screen.addPreference(version);
 		}
 		about = new Preference(this);
 		about.setOnPreferenceClickListener(this);
@@ -100,6 +113,9 @@ public class SettingsActivity extends SettingsBaseActivity {
 		} else if (preference == plugins) {
 			startActivityForResult(new Intent(this, getMyApplication().getAppCustomization().getPluginsActivity()), PLUGINS_SELECTION_REQUEST);
 			return true;
+		} else if (preference == version){
+			final Intent mapIntent = new Intent(this, ContributionVersionActivity.class);
+			this.startActivityForResult(mapIntent, 0);
 		} else {
 			super.onPreferenceClick(preference);
 		}
