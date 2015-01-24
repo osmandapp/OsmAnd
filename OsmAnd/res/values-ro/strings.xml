@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
     <string name="tip_recent_changes_1_0_0_t">Modificări în versiunea 1.0.0 :
 \n\t* Rutare îmbunătățită, mai rapidă și mai exactă (până la 250 km)
@@ -94,7 +94,7 @@
 	<string name="day_night_info_description">Răsărit : %1$s \nApus : %2$s</string>
 	<string name="day_night_info">Info zi/noapte</string>
 	<string name="map_widget_day_night">Hartă zi/noapte</string>
-	<string name="map_widget_vector_attributes">Atribute randare:</string>
+	<string name="map_widget_vector_attributes">Atribute randare</string>
 	<string name="map_widget_renderer">Stil randare</string>
 	
 	
@@ -417,7 +417,7 @@
 \n\t\'Fără rotire (nordul sus) - Harta nu va rotită (nordul va fi întotdeauna către în sus)
 \n\t\'Către direcția de mișcare\' - Harta va fi permanent aliniată cu direcția de deplasare
 \n\t\'Conform busolei\' - Harta va fi permanent aliniată cu direcția specificată de busola integrată dispozitivului "</string>
-	<string name="binary_map_download_success">Descărcare efectuată cu succes.\n\t\n\tPentru activare folosiți \'Meniu\' -&gt; \'Straturi\' -&gt; \'Surse pentru hartă…\' -&gt; \'Hărți vectoriale offline\'.</string>
+	<string name="binary_map_download_success">"Descărcare efectuată cu succes.\n\t\t\n\t\tPentru activare folosiți \'Meniu\' -&gt; \'Setări hartă\' -&gt; \'Surse pentru hartă…\'\t\'Hărți vectoriale offline\'. "</string>
 	<string name="tip_day_night_mode">Mod zi/noapte</string>
 	<string name="tip_day_night_mode_t_v2">"\tPentru unele hărți, reprezentarea acestora poate schimbată între zi (culori deschise) și noapte (culori închise).
 \n\tCulorile închise sunt mai sigure pentru conducerea pe timp de noapte.
@@ -635,7 +635,11 @@
 	<string name="tip_app_mode_t_v2">"\tOsmAnd suportă profiluri personalizate diferite pentru diferite situații de utilizare.
 \n\tProfilurile se pot schimba via butonul de profiluri din colțul din stânga jos al modului Hartă(icoane ce reprezintă o mașină, o bicicletă sau un pieton) sau când se creează o rută. "</string>
 	<string name="tip_navigation">Navigare</string>
-	<string name="tip_navigation_t">\tÎnainte de a porni navigarea trebuie aleasă o destinație. După aceea apăsați \'Meniu\' -&gt; \'Navigare\' și selectați tipul navigării.</string>
+	<string name="tip_navigation_t">"To get directions to a place, either directly long-click on it on the map, (then tap its description marker and select \'Directions to\'), or select \'Directions to\' after tapping any entry in a search results list or favorite list.
+\n\nThe destination is marked as a target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+\n\nYou may chose either \'Start navigation\', which means that OsmAnd would live-guide you, give you voice instructions (if enabled), etc. Or you can select \'Display route\', resulting in static route without any live-guideance or adjustments as you move.
+\n\nTo display a route to the selected destination from any point other than your current position, select the start point on the map and tap \'Directions from\'.
+\n\nIf you use \'Directions from\' together with \'Start navigation\', OsmAnd will switch to your actual position as soon as it is found (so this can be used to jump-start routing before the position is found), while \'Directions from\' in combination with \'Display route\' just shows you the route from any arbitrary point you had selected without subsequent updates. "</string>
 	<string name="tip_search">Căutare</string>
 	<string name="tip_search_t">\tPuteți căuta locuri direct pe hartă, după adresă, poziție, POI (punct de interes) sau ca punct favorit predefinit.
 		\n\t\'Căutare\' în meniul principal oferă accesul la modulul de căutare. Pentru toate rezultatele căutării meniul oferă două opțiuni: \'Setează ca destinație\' sau \'Arată pe hartă\'.
@@ -1191,10 +1195,10 @@
     <string name="android_19_location_disabled">Începând cu versiunea KitKat nu poți descărca și actualiza harta în locația de stocare anterioară (%s). Vrei să o schimbi cu una permisă și să copiezi toate fișierele acolo?
 	\n Notă : fișierele vechi vor rămâne nemodificate.
 	\n Notă : nu va fi posibilă partajarea fișierelor între OsmAnd și OsmAnd+. </string>
-    <string name="application_dir_change_warning2">OsmAnd ar putea încerca să mute datele la noua destinație. Dorești asta ?</string>
-    <string name="copying_osmand_one_file_descr">Se copiază fișierul (%s) la noua destinație...</string>
-    <string name="copying_osmand_files_descr">Se copiază fișierele OsmAnd la noua destinație (%s)</string>
-    <string name="copying_osmand_files">Se copiază fișierele OsmAnd</string>
+    <string name="application_dir_change_warning2">Dorești ca OsmAnd sa copieze și fișierele cu date în noua destinație? Selectează \'Nu\' ca OsmAnd să creeze și să folosească noul director.</string>
+    <string name="copying_osmand_one_file_descr">Se copiază fișierul (%s) la noua destinație…</string>
+    <string name="copying_osmand_files_descr">Se copiază fișierele OsmAnd la noua destinație (%s)…</string>
+    <string name="copying_osmand_files">Se copiază fișierele OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">Calculează ruta OsmAnd în mod deconectat</string>
     <string name="app_mode_truck">Camion</string>
     <string name="guidance_preferences_descr">Preferințe navigație</string>
@@ -1366,13 +1370,13 @@
     <string name="waypoints">Puncte de referință</string>
     <string name="targets">Destinații</string>
     <string name="download_additional_maps">Descarcă hărțile lipsă %1$s (%2$d MB)?</string>
-    <string name="more">Mai mult...</string>
+    <string name="more">Mai mult…</string>
     <string name="rendering_value_browse_map_name">Derulează hartă</string>  
     <string name="rendering_value_car_name">Mașină</string>
     <string name="rendering_value_bicycle_name">Bicicletă</string>
     <string name="rendering_value_pedestrian_name">Pieton</string>
     <string name="rendering_attr_coloredBuildings_name">Cladiri colorate</string>
-    <string name="osmo_invite">Invită...</string>
+    <string name="osmo_invite">Invită…</string>
     <string name="osmo_leave_confirmation_msg">Vrei să părăsești grupul %1$s?</string>
     <string name="osmo_specify_tracker_id">Vă rugăm să specificați id</string>
     <string name="continue_navigation">Coninuați navigația</string>
@@ -1486,4 +1490,9 @@
     <string name="fav_point_dublicate_message">Am schimbat numele punctelor favorite în %1$s pentru a evita numele duplicate.</string>
     <string name="text_size_descr">Setați mărimea textului pe hartă.</string>
     <string name="text_size">Mărimea textului</string>
-    </resources>
+    <string name="rendering_attr_streetLighting_name">Lumină stradală</string>
+    <string name="proxy_pref_title">Proxy</string>
+    <string name="points">Puncte</string>
+    <string name="my_location">Locația mea</string>
+    <string name="rendering_value__name">Implicit</string>
+	</resources>
