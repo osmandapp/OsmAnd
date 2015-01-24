@@ -351,7 +351,7 @@
 	<string name="poi_soccer">축구</string>
 	<string name="poi_surfing">서핑</string>
 	<string name="poi_swimming">수영</string>
-	<string name="poi_table_tennis">테이블 테니스</string>
+	<string name="poi_table_tennis">탁구</string>
 	<string name="poi_tennis">테니스</string>
 	<string name="poi_toboggan">토보간</string>
 	<string name="poi_volleyball">배구</string>
@@ -645,4 +645,5 @@
 	<string name="poi_aquarium">아쿠아리움</string>
 	<string name="poi_mast">돛대</string>
 	<string name="poi_radar">레이더</string>
+	<string name="poi_team_handball">핸드볼</string>
 	</resources>
