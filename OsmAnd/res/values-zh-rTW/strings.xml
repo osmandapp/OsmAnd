@@ -1883,4 +1883,10 @@
 	<string name="proxy_host_descr">組態您代理伺服器的主機名稱 (例如 127.0.0.1)</string>
 	<string name="proxy_port_title">代理伺服器埠</string>
 	<string name="proxy_port_descr">組態您代理伺服器的埠號 (例如 8118)</string>
-	</resources>
+	<string name="version_settings_descr">下載 nightly builds 版</string>
+    <string name="version_settings">Builds</string>
+    <string name="points">點</string>
+    <string name="tracks">軌跡</string>
+    <string name="my_location">我的位置</string>
+    <string name="osm_editing_manage">管理</string>
+    </resources>
