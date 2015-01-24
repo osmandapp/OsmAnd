@@ -2000,4 +2000,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="proxy_pref_descr">Наладзіць Інтэрнэт сувязь праз проксі</string>
     <string name="settings_privacy">Прыватнасьць</string>
     <string name="rendering_attr_streetLighting_name">Вулічнае асьвятленьне</string>
+    <string name="version_settings_descr">Сьцягваць начныя зборкі</string>
+    <string name="version_settings">Зборкі</string>
+    <string name="points">Кропкі</string>
+    <string name="tracks">Сьляды</string>
+    <string name="my_location">Маё месцазнаходжаньне</string>
+    <string name="osm_editing_manage">Кіраваць</string>
     </resources>
