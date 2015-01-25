@@ -17,11 +17,11 @@
 
 
 	<target name="download_resources">
-	    <get src="http://builder.osmand.net:81/binaries/android/OsmAndCore_wrapper.jar"
+	    <get src="http://builder.osmand.net/binaries/android/OsmAndCore_wrapper.jar"
 	        dest="libs/OsmAndCore_wrapper.jar" usetimestamp="true"/>
-	    <get src="http://builder.osmand.net:81/ivy/net.osmand/OsmAndCore_android/0.1-SNAPSHOT/OsmAndCore_android-0.1-SNAPSHOT.aar"
+	    <get src="http://builder.osmand.net/ivy/net.osmand/OsmAndCore_android/0.1-SNAPSHOT/OsmAndCore_android-0.1-SNAPSHOT.aar"
 	        dest="OsmAndCore_android.aar" usetimestamp="true"/>
-	    <get src="http://builder.osmand.net:81/ivy/net.osmand/OsmAndCore_androidNativeRelease/0.1-SNAPSHOT/OsmAndCore_androidNativeRelease-0.1-SNAPSHOT.aar"
+	    <get src="http://builder.osmand.net/ivy/net.osmand/OsmAndCore_androidNativeRelease/0.1-SNAPSHOT/OsmAndCore_androidNativeRelease-0.1-SNAPSHOT.aar"
 	        dest="OsmAndCore_androidNativeRelease.aar" usetimestamp="true"/>
 	</target>
 	

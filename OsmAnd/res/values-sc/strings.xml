@@ -1833,4 +1833,10 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Imposta una cunnessione a ìnternet tramite proxy</string>
     <string name="rendering_attr_streetLighting_name">Illuminatzione pùbblica</string>
+    <string name="version_settings_descr">Iscàrriga versiones de isvilupu</string>
+    <string name="version_settings">Versiones</string>
+    <string name="points">Puntos</string>
+    <string name="tracks">Rastas</string>
+    <string name="my_location">Positzione mea</string>
+    <string name="osm_editing_manage">Gesti</string>
     </resources>
