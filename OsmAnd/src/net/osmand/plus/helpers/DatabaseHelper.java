@@ -15,7 +15,7 @@ public class DatabaseHelper {
     public static final int DOWNLOAD_ENTRY = 0;
     public static final int FAVORITES_ENTRY = 1;
 
-    private static final String DB_NAME = "download_history"; //$NON-NLS-1$
+    private static final String DB_NAME = "usage_history"; //$NON-NLS-1$
     private static final int DB_VERSION = 1;
 
     private static final String DOWNLOADS_TABLE_NAME = "downloads"; //$NON-NLS-1$
