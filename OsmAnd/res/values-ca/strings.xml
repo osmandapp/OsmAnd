@@ -1862,7 +1862,7 @@
     <string name="speak_pedestrian">Anuncia els passos de zebra</string>
     <string name="rendering_value__name">Renderització per defecte</string>
 	<string name="navigation_over_track">Voleu iniciar la navegació sobre la traça?</string>
-	<string name="avoid_roads_msg">Podeu condicionar la ruta amb la selecció de les vies a evitar</string>
+	<string name="avoid_roads_msg">Podeu generar una ruta alternativa amb la selecció de les vies a evitar</string>
     <string name="save_track_to_gpx_globally_headline">Registre de traces a petició</string>
 	<string name="recents">RECENTS</string>
 	<string name="proxy_pref_title">Servidor intermediari</string>
@@ -1874,4 +1874,11 @@
 	<string name="proxy_host_descr">Configureu el nom de l\'amfitrió del vostre servidor intermediari (p.ex. 127.0.0.1)</string>
 	<string name="proxy_port_title">Port del servidor intermediari</string>
 	<string name="proxy_port_descr">Configureu el número de port del vostre servidor intermediari (p.ex. 8118)</string>
-	</resources>
+	<string name="points">Punts</string>
+    <string name="tracks">Traces</string>
+    <string name="my_location">La vostra posició</string>
+    <string name="osm_editing_manage">Gestió</string>
+    <string name="version_settings_descr">Baixada de les darreres actualitzacions</string>
+    <string name="version_settings">Versions</string>
+    <string name="rendering_attr_streetLighting_name">Enllumenat dels carrers</string>
+    </resources>
