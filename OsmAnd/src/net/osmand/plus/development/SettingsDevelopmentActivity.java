@@ -78,7 +78,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 				@Override
 				final Intent mapIntent = new Intent(SettingsDevelopmentActivity.this, ContributionVersionActivity.class);
-				this.startActivityForResult(mapIntent, 0);
+				startActivityForResult(mapIntent, 0);
 			});
 			cat.addPreference(pref);
 		}
