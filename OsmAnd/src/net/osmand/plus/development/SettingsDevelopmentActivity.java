@@ -79,7 +79,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				@Override
 				public boolean onPreferenceClick(Preference preference) {
 					startActivityForResult(new Intent(SettingsDevelopmentActivity.this, ContributionVersionActivity.class));
-					return(false);
+					return false;
 				}
 			});
 			cat.addPreference(pref);
