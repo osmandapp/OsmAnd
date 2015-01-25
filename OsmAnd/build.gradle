@@ -183,7 +183,7 @@ def replaceNoTranslate(line) {
 
 task updateNoTranslate(type: Copy) {
     from('.') {
-        include 'no_translate.xml'
+        include "no_translate.xml"
         filter {
             line -> replaceNoTranslate(line);
         }
