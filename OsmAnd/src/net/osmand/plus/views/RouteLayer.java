@@ -173,7 +173,7 @@ public class RouteLayer extends OsmandMapLayer {
 				tx.add(x);
 				ty.add(y);
 			}
-			calculatePath(tb, tx, ty, path);
+			int pth = calculatePath(tb, tx, ty, path, null);
 			
 			if(isPaint_1) {
 				canvas.drawPath(path, paint_1);
@@ -186,7 +186,15 @@ public class RouteLayer extends OsmandMapLayer {
 				canvas.drawPath(path, paint2);
 			}
 			if(tb.getZoomAnimation() == 0) {
-				drawArrowsOverPath(canvas, path, coloredArrowUp);
+				if(pth <= 1) {
+					drawArrowsOverPath(canvas, path, coloredArrowUp);
+				} else {
+					ArrayList<Path> lst = new ArrayList<Path>();
+					calculatePath(tb, tx, ty, path, lst);
+					for(Path l : lst) {
+						drawArrowsOverPath(canvas, l, coloredArrowUp);
+					}
+				}
 			}
 		}
 	}

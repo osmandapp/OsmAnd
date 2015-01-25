@@ -337,7 +337,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			tx.add(x);
 			ty.add(y);
 		}
-		calculatePath(tb, tx, ty, path);
+		calculatePath(tb, tx, ty, path, null);
 		if(isPaint_1) {
 			canvas.drawPath(path, paint_1);
 		}
