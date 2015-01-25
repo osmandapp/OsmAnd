@@ -63,7 +63,7 @@
 	<string name="poi_fire_extinguisher">Extintor</string>
 	<string name="poi_fire_hose">Mànega d\'incendis</string>
 	<string name="poi_ambulance_station">Parc d\'ambulàncies</string>
-	<string name="poi_mountain_pass">Port de muntanya</string>
+	<string name="poi_mountain_pass">Coll</string>
 	<string name="poi_city_wall">Muralla</string>
 	<string name="poi_vehicle_inspection">Inspecció de vehicles</string>
 	<string name="poi_military_nuclear_explosion_site">Lloc d\'explosió nuclear</string>
@@ -154,21 +154,21 @@
 	<string name="poi_bridge">Pont</string>
 
 	<string name="poi_vacuum_cleaner_shop">Aspiradores i aparells de neteja</string>
-	<string name="poi_motorway_junction">Sortida d\'autopista</string>
+	<string name="poi_motorway_junction">Creuament d\'autopistes</string>
 
 	<string name="poi_water_well">Pou d\'aigua</string>
 	<string name="poi_boatyard">Drassana</string>
 	<string name="poi_wastewater_plant">Planta de tractament d\'aigües residuals</string>
 	<string name="poi_water_tower">Torre d\'aigua</string>
 	<string name="poi_lock_gate">Resclosa</string>
-	<string name="poi_weir">Abocador d\'aigua</string>
+	<string name="poi_weir">Sobreeixidor</string>
 	<string name="poi_dam">Presa d\'aigua</string>
 	<string name="poi_water_mill">Molí hidràulic</string>
 
 	<string name="poi_power_substation">Subestació elèctrica</string>
 	<string name="poi_power_transformer">Transformador elèctric</string>
 	<string name="poi_power_plant">Central energètica</string>
-	<string name="poi_power_generator">Generador d\'energia</string>
+	<string name="poi_power_generator">Generador elèctric</string>
 
 	<string name="poi_post_office">Oficina de correus</string>
 	<string name="poi_post_box">Bústia de correus</string>
@@ -182,7 +182,7 @@
 	<string name="poi_waste_basket">Paperera</string>
 
 	<string name="poi_pier">Moll</string>
-	<string name="poi_surveillance">Equip de vigilància</string>
+	<string name="poi_surveillance">Vigilància</string>
 	<string name="poi_observatory">Observatori</string>
 	<string name="poi_astronomical_observatory">Observatori astronòmic</string>
 	<string name="poi_tower">Torre</string>

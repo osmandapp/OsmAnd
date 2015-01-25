@@ -48,7 +48,7 @@ android {
         targetSdkVersion 21
 
         versionCode System.getenv("APK_NUMBER_VERSION")? System.getenv("APK_NUMBER_VERSION").toInteger(): versionCode
-        versionName System.getenv("APK_VERSION") ?: versionName
+        versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
     }
 
     lintOptions {
@@ -167,16 +167,17 @@ android {
 
 def replaceNoTranslate(line) {
     if(line.contains("\"app_name\"") && System.getenv("APP_NAME")) {
-        return line.replaceAll(">[^<]*<", " >"+System.getenv("APP_NAME")+"<")
+        return line.replaceAll(">[^<]*<", ">"+System.getenv("APP_NAME")+"<")
     }
     if(line.contains("\"app_edition\"") && System.getenv("APP_EDITION")) {
-        return line.replaceAll(">[^<]*<", " >"+System.getenv("APP_EDITION")+"<")
+        return line.replaceAll(">[^<]*<", ">"+System.getenv("APP_EDITION")+"<")
     }
     if(line.contains("\"app_version\"") && System.getenv("APK_VERSION")) {
-        return line.replaceAll(">[^<]*<", " >\1"+System.getenv("APK_VERSION")+"<")
+	// appends build number to version number for dev builds
+        return line.replaceAll("</", System.getenv("APK_VERSION")+"</")
     }
     if(line.contains("\"versionFeatures\"") && System.getenv("APP_FEATURES")) {
-        return line.replaceAll(">[^<]*<", " >"+System.getenv("APP_FEATURES")+"<")
+        return line.replaceAll(">[^<]*<", ">"+System.getenv("APP_FEATURES")+"<")
     }
     return line;
 }

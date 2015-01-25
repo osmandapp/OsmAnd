@@ -2108,7 +2108,7 @@
     <string name="speak_pedestrian">보행자 횡단보도 알리기</string>
     <string name="rendering_value__name">기본값</string>
 	<string name="navigation_over_track">경로를 따라 운행을 시작할까요?</string>
-	<string name="avoid_roads_msg">원하는 도로를 선택하여 경로를 변경할 수 있습니다</string>
+	<string name="avoid_roads_msg">원하는 도로를 선택하여 대체 경로를 실행할 수 있습니다</string>
     <string name="save_track_to_gpx_globally_headline">트랙 로깅 요구</string>
 	<string name="recents">최근</string>
 	<string name="rendering_attr_streetLighting_name">거리 조명</string>
@@ -2121,4 +2121,10 @@
 	<string name="proxy_host_descr">프록시 호스트 이름 구성 (예: 127.0.0.1)</string>
 	<string name="proxy_port_title">프록시 포트</string>
 	<string name="proxy_port_descr">당신의 프록시 포트 번호 구성 (예: 8118)</string>
-	</resources>
+	<string name="version_settings_descr">야간 빌드를 다운로드</string>
+    <string name="version_settings">빌드</string>
+    <string name="points">장소</string>
+    <string name="tracks">경로</string>
+    <string name="my_location">내 위치</string>
+    <string name="osm_editing_manage">관리</string>
+    </resources>
