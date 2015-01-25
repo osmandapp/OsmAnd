@@ -561,4 +561,16 @@ public class RotatedTileBox {
 		return lat;
 	}
 
+	@Override
+	public String toString() {
+		return "RotatedTileBox [lat=" + lat + ", lon=" + lon + ", rotate="
+				+ rotate + ", density=" + density + ", zoom=" + zoom
+				+ ", mapDensity=" + mapDensity + ", zoomAnimation="
+				+ zoomAnimation + ", zoomFloatPart=" + zoomFloatPart + ", cx="
+				+ cx + ", cy=" + cy + ", pixWidth=" + pixWidth + ", pixHeight="
+				+ pixHeight + "]";
+	}
+
+	
+	
 }
