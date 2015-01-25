@@ -188,7 +188,7 @@ task updateNoTranslate(type: Copy) {
             line -> replaceNoTranslate(line);
         }
     }
-    into 'res/values/'
+    into "res/values/"
 }
 
 task collectVoiceAssets(type: Sync) {
