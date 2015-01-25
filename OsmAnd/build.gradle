@@ -183,12 +183,12 @@ def replaceNoTranslate(line) {
 
 task updateNoTranslate(type: Copy) {
     from('.') {
-        include "no_translate.xml"
+        include 'no_translate.xml'
         filter {
             line -> replaceNoTranslate(line);
         }
     }
-    into "res/values/"
+    into 'res/values/'
 }
 
 task collectVoiceAssets(type: Sync) {
