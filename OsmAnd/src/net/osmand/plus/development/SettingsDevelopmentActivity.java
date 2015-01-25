@@ -79,6 +79,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				@Override
 				final Intent mapIntent = new Intent(SettingsDevelopmentActivity.this, ContributionVersionActivity.class);
 				startActivityForResult(mapIntent, 0);
+				return false;
 			});
 			cat.addPreference(pref);
 		}
