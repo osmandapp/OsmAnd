@@ -77,9 +77,8 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			pref.setKey("version");
 			pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 				@Override
-				final Intent mapIntent = new Intent(SettingsDevelopmentActivity.this, ContributionVersionActivity.class);
-				startActivityForResult(mapIntent, 0);
-				return false;
+				final Intent mapIntent = new Intent(this, ContributionVersionActivity.class);
+				this.startActivityForResult(mapIntent, 0);
 			});
 			cat.addPreference(pref);
 		}
