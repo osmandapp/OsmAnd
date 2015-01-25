@@ -75,12 +75,13 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			pref.setTitle(R.string.version_settings);
 			pref.setSummary(R.string.version_settings_descr);
 			pref.setKey("version");
-//TODO
-//			pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-//				@Override
-//				final Intent mapIntent = new Intent(this, ContributionVersionActivity.class);
-//				this.startActivityForResult(mapIntent, 0);
-//			});
+			pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+				@Override
+				public boolean onPreferenceClick(Preference preference) {
+					startActivityForResult(new Intent(SettingsDevelopmentActivity.this, ContributionVersionActivity.class));
+					return(false);
+				}
+			});
 			cat.addPreference(pref);
 		}
 
