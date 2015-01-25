@@ -172,6 +172,7 @@ def replaceNoTranslate(line) {
         return line.replaceAll(">[^<]*<", ">"+System.getenv("APP_EDITION")+"<")
     }
     if(line.contains("\"app_version\"") && System.getenv("APK_VERSION")) {
+	// appends build number to version number for dev builds
         return line.replaceAll("</", System.getenv("APK_VERSION")+"</")
     }
     if(line.contains("\"versionFeatures\"") && System.getenv("APP_FEATURES")) {
