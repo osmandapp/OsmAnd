@@ -32,6 +32,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.audionotes.MediaRemoteControlReceiver;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.GpxImportHelper;
@@ -54,6 +55,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -647,6 +649,9 @@ public class MapActivity extends AccessibleActivity {
 	
 	@Override
 	protected void onPause() {
+		if(atlasMapRendererView != null) {
+			atlasMapRendererView.handleOnPause();
+		}
 		super.onPause();
 		app.getLocationProvider().pauseAllUpdates();
 		app.getDaynightHelper().stopSensorIfNeeded();
@@ -665,9 +670,6 @@ public class MapActivity extends AccessibleActivity {
 		app.getResourceManager().interruptRendering();
 		app.getResourceManager().setBusyIndicator(null);
 		OsmandPlugin.onMapActivityPause(this);
-		if(atlasMapRendererView != null) {
-			atlasMapRendererView.handleOnPause();
-		}
 	}
 
 	

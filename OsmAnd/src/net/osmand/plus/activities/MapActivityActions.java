@@ -857,15 +857,7 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
-		optionsMenuHelper.item(R.string.show_point_options)
-				.icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
-						return true;
-					}
-				}).reg();
+		
 
 		optionsMenuHelper.item(R.string.configure_map).icons(R.drawable.ic_action_layers_dark, R.drawable.ic_action_layers_light)
 				.listen(new OnContextMenuClick() {
@@ -876,6 +868,27 @@ public class MapActivityActions implements DialogProvider {
 						return false;
 					}
 				}).reg();
+		
+		optionsMenuHelper.item(R.string.show_point_options)
+		.icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light)
+		.listen(new OnContextMenuClick() {
+			@Override
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+				return true;
+			}
+		}).reg();
+		
+		optionsMenuHelper.item(R.string.show_point_options)
+		.icons(R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_light)
+		.listen(new OnContextMenuClick() {
+			@Override
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+				final Intent settings = new Intent(mapActivity, getMyApplication().getAppCustomization().getSettingsActivity());
+				mapActivity.startActivity(settings);
+				return true;
+			}
+		}).reg();
 
 		optionsMenuHelper.item(R.string.layer_map_appearance).icons(R.drawable.ic_configure_screen_dark, R.drawable.ic_configure_screen_light)
 			.listen(new OnContextMenuClick() {

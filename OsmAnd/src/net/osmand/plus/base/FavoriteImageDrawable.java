@@ -42,7 +42,6 @@ public class FavoriteImageDrawable extends Drawable {
 		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_fav_light);
 		bmpDest = new RectF(); 
 		paintOuter = new Paint();
-		paintOuter.setColor(0x88555555);
 		paintOuter.setAntiAlias(true);
 		paintOuter.setStyle(Style.FILL_AND_STROKE);
 		paintBmp = new Paint();
@@ -51,6 +50,7 @@ public class FavoriteImageDrawable extends Drawable {
 		paintBmp.setDither(true);
 		paintInnerCircle = new Paint();
 		paintInnerCircle.setStyle(Style.FILL_AND_STROKE);
+		paintOuter.setColor(color == 0 || color == Color.BLACK ?   0x88555555 : color );
 		paintInnerCircle.setColor(color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : color);
 		paintInnerCircle.setAntiAlias(true);
 	}
@@ -91,7 +91,7 @@ public class FavoriteImageDrawable extends Drawable {
 		Rect bs = getBounds();
 		int min = Math.min(bs.width(), bs.height());
 		int r = (int) (min / 2);
-		int rs = (int) (min / 2 - 2 * density);
+		int rs = (int) (min / 2 - 1);
 		canvas.drawCircle(min / 2 , min / 2 + density, r, paintOuter);
 		canvas.drawCircle(min / 2 , min / 2 + density, rs, paintInnerCircle);
 		drawable.draw(canvas);
