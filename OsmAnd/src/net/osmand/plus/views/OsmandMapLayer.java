@@ -1,10 +1,14 @@
 package net.osmand.plus.views;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.util.Map;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.util.MapAlgorithms;
 import android.graphics.Canvas;
+import android.graphics.Path;
 import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.view.MotionEvent;
@@ -69,6 +73,49 @@ public abstract class OsmandMapLayer {
 		}
 	}
 	
+	
+	private boolean isIn(int x, int y, int lx, int ty, int rx, int by) {
+		return x >= lx && x <= rx && y >= ty && y <= by;
+	}
+	
+	public void calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, Path path) {
+		boolean start = false;
+		int px = xs.get(0);
+		int py = ys.get(0);
+		int h = tb.getPixHeight();
+		int w = tb.getPixWidth();
+		boolean pin = isIn(px, py, 0, 0, w, h);
+		for(int i = 1; i < xs.size(); i++) {
+			int x = xs.get(i);
+			int y = ys.get(i);
+			boolean in = isIn(x, y, 0, 0, w, h);
+			if(pin && in) {
+				if(!start) {
+					path.moveTo(px, py);
+				}
+				path.lineTo(x, y);
+				start = true;
+			} else{
+				long intersection = MapAlgorithms.calculateIntersection(x, y, px, py, 0, w, h, 0);
+				if(intersection != -1) {
+					int bx = (int) (intersection >> 32);
+					int by = (int) (intersection & 0xffffffff);
+					if(!start) {
+						path.moveTo(bx, by);
+					}
+					path.lineTo(x, y);
+					start = true;
+				}  else {
+					start = false;
+				}
+			}
+			pin = in;
+			px = x;
+			py = y;
+		}
+	}
+	
+
 	public abstract class MapLayerData<T> {
 		public int ZOOM_THRESHOLD = 1;
 		public RotatedTileBox queriedBox;

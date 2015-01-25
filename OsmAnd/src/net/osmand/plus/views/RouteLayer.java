@@ -1,5 +1,7 @@
 package net.osmand.plus.views;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +10,7 @@ import net.osmand.Location;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.routing.RoutingHelper;
@@ -161,16 +164,17 @@ public class RouteLayer extends OsmandMapLayer {
 	private void drawSegment(RotatedTileBox tb, Canvas canvas) {
 		if (points.size() > 0) {
 			paint.setStrokeWidth(12 * tb.getDensity());
-			
-			int px = tb.getPixXFromLonNoRot(points.get(0).getLongitude());
-			int py = tb.getPixYFromLatNoRot(points.get(0).getLatitude());
-			path.moveTo(px, py);
-			for (int i = 1; i < points.size(); i++) {
+			TIntArrayList tx = new TIntArrayList();
+			TIntArrayList ty = new TIntArrayList();
+			for (int i = 0; i < points.size(); i++) {
 				Location o = points.get(i);
 				int x = tb.getPixXFromLonNoRot(o.getLongitude());
 				int y = tb.getPixYFromLatNoRot(o.getLatitude());
-				path.lineTo(x, y);
+				tx.add(x);
+				ty.add(y);
 			}
+			calculatePath(tb, tx, ty, path);
+			
 			if(isPaint_1) {
 				canvas.drawPath(path, paint_1);
 			}
