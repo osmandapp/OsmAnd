@@ -10,6 +10,8 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.plus.Version;
+//import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.util.SunriseSunset;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -65,10 +67,25 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			}
 		});
 		cat.addPreference(pref);
-		
+
+		if ((Version.getBuildAppEdition(getMyApplication()).length() > 0
+				|| Version.isDeveloperVersion(getMyApplication()))) {
+				//&& OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null){
+			pref = new Preference(this);
+			pref.setTitle(R.string.version_settings);
+			pref.setSummary(R.string.version_settings_descr);
+			pref.setKey("version");
+			pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+				@Override
+				final Intent mapIntent = new Intent(SettingsDevelopmentActivity.this, ContributionVersionActivity.class);
+				this.startActivityForResult(mapIntent, 0);
+			});
+			cat.addPreference(pref);
+		}
+
 		pref = new Preference(this);
 		pref.setTitle(R.string.global_app_allocated_memory);
-		
+
 		long javaAvailMem = (Runtime.getRuntime().totalMemory() -  Runtime.getRuntime().freeMemory())/ (1024*1024l);
 		long javaTotal = Runtime.getRuntime().totalMemory() / (1024*1024l);
 		long dalvikSize = android.os.Debug.getNativeHeapAllocatedSize() / (1024*1024l);
