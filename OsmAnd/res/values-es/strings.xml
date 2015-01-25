@@ -1899,4 +1899,6 @@
 	<string name="proxy_port_title">Puerto del proxy</string>
 	<string name="proxy_port_descr">Configurar el número de puerto de tu proxy (p.e. 8118)</string>
 	<string name="proxy_host_descr">Configura el hostname de tu proxy (p.e. 127.0.0.1)</string>
-	</resources>
+	<string name="version_settings_descr">Descargar versiones de desarrollo (nightly builds)</string>
+    <string name="version_settings">Compilaciones</string>
+    </resources>
