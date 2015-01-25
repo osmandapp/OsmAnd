@@ -100,6 +100,7 @@ public abstract class OsmandMapLayer {
 				if (intersection != -1) {
 					px = (int) (intersection >> 32);
 					py = (int) (intersection & 0xffffffff);
+					draw = true;
 				}
 			}
 			if (draw) {
