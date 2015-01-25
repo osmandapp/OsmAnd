@@ -158,20 +158,23 @@ public class DatabaseHelper {
                         query =  db.rawQuery(
                                 "SELECT " + HISTORY_COL_COUNT + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
                                         DOWNLOADS_TABLE_NAME + " WHERE " + HISTORY_COL_NAME + "='" + name + "'", null); //$NON-NLS-1$//$NON-NLS-2$
+                        break;
                     case FAVORITES_ENTRY:
                         query =  db.rawQuery(
                                 "SELECT " + HISTORY_COL_COUNT + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
                                         FAVORITES_TABLE_NAME + " WHERE " + HISTORY_COL_NAME + "='" + name + "'", null); //$NON-NLS-1$//$NON-NLS-2$
+                        break;
                     default:
-                        query =  db.rawQuery("not supported", null); //$NON-NLS-1$//$NON-NLS-2$
+                    	query = null;
+                    	break;
                 }
 
-                if (query.moveToFirst()) {
-                    do {
-                        count = query.getInt(0);
-                    } while (query.moveToNext());
-                }
-                query.close();
+				if (query != null) {
+					if (query.moveToFirst()) {
+						count = query.getInt(0);
+					}
+					query.close();
+				}
             } finally {
                 db.close();
             }
@@ -190,20 +193,26 @@ public class DatabaseHelper {
                         query = db.rawQuery(
                                 "SELECT " + HISTORY_COL_NAME + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
                                         DOWNLOADS_TABLE_NAME + " ORDER BY " + HISTORY_COL_COUNT + " DESC", null); //$NON-NLS-1$//$NON-NLS-2$
+                        break;
                     case FAVORITES_ENTRY:
                         query = db.rawQuery(
                                 "SELECT " + HISTORY_COL_NAME + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
                                         FAVORITES_TABLE_NAME + " ORDER BY " + HISTORY_COL_COUNT + " DESC", null); //$NON-NLS-1$//$NON-NLS-2$
+                        break;
                     default:
-                        query =  db.rawQuery("not supported", null); //$NON-NLS-1$//$NON-NLS-2$
+                        query = null; //$NON-NLS-1$//$NON-NLS-2$
+                        break;
                 }
-                if (query.moveToFirst()) {
-                    do {
-                        HistoryEntry e = new HistoryEntry(query.getString(0), query.getInt(1));
-                        entries.add(e);
-                    } while (query.moveToNext());
-                }
-                query.close();
+				if (query != null) {
+					if (query.moveToFirst()) {
+						do {
+							HistoryEntry e = new HistoryEntry(
+									query.getString(0), query.getInt(1));
+							entries.add(e);
+						} while (query.moveToNext());
+					}
+					query.close();
+				}
             } finally {
                 db.close();
             }
