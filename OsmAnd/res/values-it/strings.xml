@@ -2058,7 +2058,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="settings_privacy">Privacy</string>
     <string name="rendering_attr_streetLighting_name">Illuminazione stradale</string>
     <string name="proxy_pref_title">Proxy</string>
-    <string name="version_settings_descr">Download nightly builds</string>
+    <string name="version_settings_descr">Download versioni di sviluppo</string>
     <string name="version_settings">Versioni</string>
     <string name="points">Punti</string>
     <string name="tracks">Tracce</string>
