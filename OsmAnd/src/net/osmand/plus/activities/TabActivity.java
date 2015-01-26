@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
-import android.view.ViewParent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +19,11 @@ public class TabActivity extends ActionBarProgressActivity {
 		return new TabItem(getString(resId), Color.DKGRAY, Color.LTGRAY, fragment);
 	}
 
-	protected List<TabItem> mTabs = new ArrayList<TabItem>();
-
-	protected static class TabItem {
-		private final CharSequence mTitle;
+	public static class TabItem {
+		public final CharSequence mTitle;
 		private final int mIndicatorColor;
 		private final int mDividerColor;
-		private final Class<?> fragment;
+		public final Class<?> fragment;
 
 		public TabItem(CharSequence mTitle, int mIndicatorColor, int mDividerColor, Class<?> fragment) {
 			this.mTitle = mTitle;
@@ -38,14 +34,17 @@ public class TabActivity extends ActionBarProgressActivity {
 
 	}
 
-	protected void setViewPagerAdapter(ViewPager pager){
-		pager.setAdapter(new SearchFragmentPagerAdapter(getSupportFragmentManager()));
+	protected void setViewPagerAdapter(ViewPager pager, List<TabItem> items){
+		pager.setAdapter(new OsmandFragmentPagerAdapter(getSupportFragmentManager(), items));
 	}
 
-	protected class SearchFragmentPagerAdapter extends FragmentPagerAdapter {
+	public static class OsmandFragmentPagerAdapter extends FragmentPagerAdapter {
 
-		SearchFragmentPagerAdapter(FragmentManager fm) {
+		private List<TabItem> mTabs;
+
+		public OsmandFragmentPagerAdapter(FragmentManager fm, List<TabItem> items) {
 			super(fm);
+			mTabs = items;
 		}
 
 		/**

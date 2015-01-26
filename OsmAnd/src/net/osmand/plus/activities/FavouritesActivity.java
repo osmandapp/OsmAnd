@@ -80,11 +80,13 @@ public class FavouritesActivity extends TabActivity {
 			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 			Integer tab = settings.FAVORITES_TAB.get();
 			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+
+			List<TabItem> mTabs = new ArrayList<TabItem>();
 			mTabs.add(getTabIndicator(R.string.my_favorites, FavouritesTreeFragment.class));
 			mTabs.add(getTabIndicator(R.string.my_tracks, AvailableGPXFragment.class));
 			mTabs.add(getTabIndicator(R.string.selected_track, SelectedGPXFragment.class));
 
-			setViewPagerAdapter(mViewPager);
+			setViewPagerAdapter(mViewPager, mTabs);
 			mSlidingTabLayout.setViewPager(mViewPager);
 
 

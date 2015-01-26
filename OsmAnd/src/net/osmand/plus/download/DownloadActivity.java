@@ -6,6 +6,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import android.app.FragmentManager;
+import android.graphics.Color;
+import android.support.v4.app.FragmentPagerAdapter;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -13,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.app.AlertDialog;
@@ -30,15 +34,14 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TabHost;
 import android.widget.TextView;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 
 /**
- * Created by Denis on 08.09.2014.
+ * Created by Denis
+ * on 08.09.2014.
  */
 public class DownloadActivity extends BaseDownloadActivity {
-
-	private TabHost tabHost;
-	private FavouritesActivity.TabsAdapter mTabsAdapter;
 
 	private View progressView;
 	private ProgressBar indeterminateProgressBar;
@@ -50,7 +53,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	private String initialFilter = "";
 	private boolean singleTab;
-	
+
+	List<TabActivity.TabItem> mTabs = new ArrayList<TabActivity.TabItem>();
 
 	public static final String FILTER_KEY = "filter";
 	public static final String FILTER_CAT = "filter_cat";
@@ -95,18 +99,17 @@ public class DownloadActivity extends BaseDownloadActivity {
 				getSupportFragmentManager().beginTransaction().add(R.id.layout, f, tag).commit();
 			}
 		} else {
-			tabHost = (TabHost) findViewById(android.R.id.tabhost);
-			tabHost.setup();
 			ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-			mTabsAdapter = new FavouritesActivity.TabsAdapter(this, tabHost, viewPager, settings, false);
-			mTabsAdapter.addTab(tabHost.newTabSpec("LOCAL_INDEX").setIndicator(getString(R.string.download_tab_local)),
-					LocalIndexesFragment.class, null);
-			mTabsAdapter.addTab(tabHost.newTabSpec("DOWNLOADS")
-					.setIndicator(getString(R.string.download_tab_downloads)), DownloadIndexFragment.class, null);
-			mTabsAdapter.addTab(tabHost.newTabSpec("UPDATES").setIndicator(getString(R.string.download_tab_updates)),
-					UpdatesIndexFragment.class, null);
+			PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 
-			tabHost.setCurrentTab(currentTab);
+			mTabs.add(new TabActivity.TabItem(getString(R.string.download_tab_local), Color.DKGRAY, Color.LTGRAY, LocalIndexesFragment.class));
+			mTabs.add(new TabActivity.TabItem(getString(R.string.download_tab_downloads), Color.DKGRAY, Color.LTGRAY, DownloadIndexFragment.class));
+			mTabs.add(new TabActivity.TabItem(getString(R.string.download_tab_updates), Color.DKGRAY, Color.LTGRAY, UpdatesIndexFragment.class));
+
+			viewPager.setAdapter(new TabActivity.OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
+			mSlidingTabLayout.setViewPager(viewPager);
+
+			viewPager.setCurrentItem(currentTab);
 		}
 
 		settings = ((OsmandApplication)getApplication()).getSettings();

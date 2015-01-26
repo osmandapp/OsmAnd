@@ -98,7 +98,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		if (!showOnlyOneTab) {
 			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
 			PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
-
+			List<TabItem> mTabs = new ArrayList<TabItem>();
 			mTabs.add(getTabIndicator(R.string.poi, getFragment(POI_TAB_INDEX)));
 			mTabs.add(getTabIndicator(R.string.address, getFragment(ADDRESS_TAB_INDEX)));
 			mTabs.add(getTabIndicator(R.string.search_tabs_location, getFragment(LOCATION_TAB_INDEX)));
@@ -106,7 +106,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 			mTabs.add(getTabIndicator(R.string.history, getFragment(HISTORY_TAB_INDEX)));
 
 			
-			setViewPagerAdapter(mViewPager);
+			setViewPagerAdapter(mViewPager, mTabs);
 			mSlidingTabLayout.setViewPager(mViewPager);
 			
 			mViewPager.setCurrentItem(Math.min(tab, HISTORY_TAB_INDEX));
