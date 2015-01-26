@@ -44,11 +44,12 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 21
+	minSdkVersion 9
+	targetSdkVersion 21
 
-        versionCode System.getenv("APK_NUMBER_VERSION")? System.getenv("APK_NUMBER_VERSION").toInteger(): versionCode
-        versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
+	versionCode System.getenv("APK_NUMBER_VERSION")? System.getenv("APK_NUMBER_VERSION").toInteger(): versionCode
+	//versionName already assigned in code
+	//versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
     }
 
     lintOptions {
@@ -149,14 +150,13 @@ android {
         qtcore {
             flavorDimension "coreversion"
         }
-
-        qtcoredebug {
-            flavorDimension "coreversion"
-        }
     }
 
     buildTypes {
         debug {
+            signingConfig signingConfigs.development
+        }
+        nativeDebug {
             signingConfig signingConfigs.development
         }
         release {
@@ -183,10 +183,6 @@ def replaceNoTranslate(line) {
 }
 
 task updateNoTranslate(type: Copy) {
-    inputs.property 'appName', System.getenv().get("APP_NAME")
-    inputs.property 'appEdition', System.getenv().get("APP_EDITION")
-    inputs.property 'appFeatures', System.getenv().get("APP_FEATURES")
-    inputs.property 'apkVersion', System.getenv().get("APK_VERSION")
     from('.') {
         include 'no_translate.xml'
         filter {
@@ -302,7 +298,7 @@ tasks.withType(JavaCompile) {
 repositories {
     ivy {
         name = "OsmAndBinariesIvy"
-        url = "http://builder.osmand.net"
+        url = "http://builder.osmand.net:81"
         layout "pattern" , {
             artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
         }
@@ -313,9 +309,8 @@ dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"], exclude: ["QtAndroid-bundled.jar", "QtAndroidAccessibility-bundled.jar", "android-support*.jar", "OsmAndCore_android.jar", 
     "OsmAndCore_wrapper.jar"])
     compile 'com.android.support:appcompat-v7:21.0.3'
+    qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
     legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
-    qtcoredebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
-    qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar" // not a debug ?
-    qtcoreCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
-    qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"    
+    //nativeDebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
+    //releaseCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 }
