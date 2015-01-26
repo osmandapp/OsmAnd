@@ -1901,4 +1901,10 @@
 	<string name="proxy_host_descr">Configura el hostname de tu proxy (p.e. 127.0.0.1)</string>
 	<string name="version_settings_descr">Descargar versiones de desarrollo (nightly builds)</string>
     <string name="version_settings">Compilaciones</string>
+    <string name="gps_status">Estado GPS</string>
+    <string name="rendering_attr_streetLighting_name">Iluminación de la calle</string>
+    <string name="points">Puntos</string>
+    <string name="tracks">Pistas</string>
+    <string name="my_location">Mi localización</string>
+    <string name="osm_editing_manage">Administrar</string>
     </resources>

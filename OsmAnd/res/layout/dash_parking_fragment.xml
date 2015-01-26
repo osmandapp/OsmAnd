@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:background="@drawable/bg_cardui"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent">
+
+	<LinearLayout android:orientation="horizontal"
+				  android:layout_width="match_parent"
+				  android:background="@color/dashboard_blue"
+				  android:layout_height="@dimen/dash_parking_height">
+		<ImageView android:id="@+id/direction_icon"
+				   android:layout_gravity="center_vertical"
+				   android:layout_marginLeft="@dimen/dashFavIconMargin"
+				   android:layout_marginRight="@dimen/dashFavIconMargin"
+				   android:layout_width="wrap_content"
+				   android:layout_height="wrap_content"/>
+
+		<LinearLayout android:orientation="vertical"
+					  android:layout_gravity="center_vertical"
+					  android:layout_width="0dp"
+					  android:layout_weight="1"
+					  android:layout_height="wrap_content">
+			<TextView android:id="@+id/distance"
+					  android:layout_width="match_parent"
+					  android:layout_height="wrap_content"/>
+			<TextView android:id="@+id/name"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"/>
+		</LinearLayout>
+
+		<LinearLayout android:orientation="vertical"
+					  android:layout_width="wrap_content"
+					  android:layout_gravity="center_vertical"
+					  android:layout_marginRight="@dimen/dashFavIconMargin"
+					  android:layout_height="wrap_content">
+			<TextView android:id="@+id/next_turn_distance"
+					  android:layout_width="match_parent"
+					  android:layout_height="wrap_content"/>
+			<TextView android:id="@+id/next_turn"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"/>
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<Button android:id="@+id/remove_tag"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/remove_the_tag"
+			style="@style/DashboardGeneralButton"/>
+
+</LinearLayout>

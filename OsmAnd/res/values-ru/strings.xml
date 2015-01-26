@@ -1868,4 +1868,6 @@
     <string name="version_settings">Сборки</string>
     <string name="tracks">Треки</string>
     <string name="my_location">Мое местоположение</string>
+    <string name="gps_status">Статус GPS</string>
+    <string name="points">Точки</string>
     </resources>

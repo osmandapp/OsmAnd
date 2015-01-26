@@ -44,11 +44,12 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 21
+	minSdkVersion 9
+	targetSdkVersion 21
 
-        versionCode System.getenv("APK_NUMBER_VERSION")? System.getenv("APK_NUMBER_VERSION").toInteger(): versionCode
-        versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
+	versionCode System.getenv("APK_NUMBER_VERSION")? System.getenv("APK_NUMBER_VERSION").toInteger(): versionCode
+	//versionName already assigned in code
+	//versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
     }
 
     lintOptions {
@@ -150,9 +151,9 @@ android {
             flavorDimension "coreversion"
         }
 
-        qtcoredebug {
-            flavorDimension "coreversion"
-        }
+	qtcoredebug {
+	    flavorDimension "coreversion"
+	}
     }
 
     buildTypes {
@@ -317,5 +318,5 @@ dependencies {
     qtcoredebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
     qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar" // not a debug ?
     qtcoreCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
-    qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"    
+    qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 }

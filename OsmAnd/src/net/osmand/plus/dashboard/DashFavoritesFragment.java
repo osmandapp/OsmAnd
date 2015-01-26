@@ -39,16 +39,9 @@ import android.widget.TextView;
  * Created by Denis
  * on 24.11.2014.
  */
-public class DashFavoritesFragment extends DashBaseFragment implements FavouritesDbHelper.FavoritesUpdatedListener {
+public class DashFavoritesFragment extends DashLocationFragment implements FavouritesDbHelper.FavoritesUpdatedListener {
 	public static final String TAG = "DASH_FAVORITES_FRAGMENT";
 	private net.osmand.Location location = null;
-	private LatLon loc = null;
-	private Float heading = null;
-
-	private static final int ORIENTATION_0 = 0;
-	private static final int ORIENTATION_90 = 3;
-	private static final int ORIENTATION_270 = 1;
-	private static final int ORIENTATION_180 = 2;
 
 	private List<ImageView> arrows = new ArrayList<ImageView>();
 	List<FavouritePoint> points = new ArrayList<FavouritePoint>();
@@ -81,17 +74,6 @@ public class DashFavoritesFragment extends DashBaseFragment implements Favourite
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		//'location' seems actually not needed in this Fragment, as both setupFavorites and updateArrow only reference lastKnownMapLocation
-		//if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
-		//	if(!getMyApplication().getSettings().isLastKnownMapLocation()) {
-		//		// show first time when application ran
-		//		location = getMyApplication().getLocationProvider().getFirstTimeRunDefaultLocation();
-		//	} else {
-		//		location = getLocationProvider().getLastKnownLocation();
-		//	}
-		//}
-
 		//This is used as origin for both Fav-list and direction arrows
 		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
 			loc = getMyApplication().getSettings().getLastKnownMapLocation();
@@ -157,7 +139,8 @@ public class DashFavoritesFragment extends DashBaseFragment implements Favourite
 
 			if(loc != null){
 				direction.setVisibility(View.VISIBLE);
-				updateArrow(point, direction);
+				updateArrow(new LatLon(point.getLatitude(), point.getLongitude()), direction,
+						10, R.drawable.ic_destination_arrow);
 			}
 			arrows.add(direction);
 			name.setText(point.getName());
@@ -194,79 +177,22 @@ public class DashFavoritesFragment extends DashBaseFragment implements Favourite
 
 		for (int i = 0; i < arrows.size(); i++) {
 			arrows.get(i).setVisibility(View.VISIBLE);
-			updateArrow(points.get(i), arrows.get(i));
+			updateArrow(new LatLon(points.get(i).getLatitude(),points.get(i).getLongitude()),
+					arrows.get(i), 10,  R.drawable.ic_destination_arrow);
 		}
 	}
 
-	private void updateArrow(FavouritePoint point, ImageView direction) {
-		float[] mes = new float[2];
-		LatLon l = new LatLon(point.getLatitude(), point.getLongitude());
-		Location.distanceBetween(l.getLatitude(), l.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
-		DirectionDrawable draw = new DirectionDrawable(getActivity(), 10, 10, true);
-		Float h = heading;
-		float a = h != null ? h : 0;
-
-		//Hardy: getRotation() is the correction if device's screen orientation != the default display's standard orientation
-		int screenOrientation = 0;
-		screenOrientation = ((WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
-		switch (screenOrientation)
-		{
-		case ORIENTATION_0:   // Device default (normally portrait)
-			screenOrientation = 0;
-			break;
-		case ORIENTATION_90:  // Landscape right
-			screenOrientation = 90;
-			break;
-		case ORIENTATION_270: // Landscape left
-			screenOrientation = 270;
-			break;
-		case ORIENTATION_180: // Upside down
-			screenOrientation = 180;
-			break;
-		}
-
-		//Looks like screenOrientation correction must not be applied for devices without compass?
-		Sensor compass  = ((SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-		if (compass == null) {
-			screenOrientation = 0;
-		}
-
-		draw.setAngle(mes[1] - a + 180 + screenOrientation);
-
-		direction.setImageDrawable(draw);
-	}
-
-	public void updateCompassValue(float value) {
-		//heading = value;
-		//updateArrows();
-		//99 in next line used to one-time initalize arrows (with reference vs. fixed-north direction) on non-compass devices
-		float lastHeading = heading != null ? heading : 99;
-		heading = value;
-		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+	@Override
+	public boolean updateCompassValue(float value) {
+		if (super.updateCompassValue(value)){
 			updateArrows();
-		} else {
-			heading = lastHeading;
 		}
+		return true;
 	}
 
+	@Override
 	public void updateLocation(Location location) {
-		//'location' seems actually not needed in this Fragment, as both setupFavorites and updateArrow only reference lastKnownMapLocation
-		//if (location != null) {
-			//this.location = location;
-			//Next line commented out so that reference is always lastKnownMapLocation, because this is also always used as reference in setupFavorites
-		//	loc = new LatLon(location.getLatitude(), location.getLongitude());
-		//} else if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
-		//	loc = getMyApplication().getSettings().getLastKnownMapLocation();
-		//} else {
-		//	return;
-		//}
-
-		//This is used as origin for both Fav-list and direction arrows
-		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
-			loc = getMyApplication().getSettings().getLastKnownMapLocation();
-		} else {
-			loc = new LatLon(0f, 0f);
-		}
+		super.updateLocation(location);
 		updateArrows();
 	}
 
