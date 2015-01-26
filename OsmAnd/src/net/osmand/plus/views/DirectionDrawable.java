@@ -8,19 +8,24 @@ import android.view.WindowManager;
 import net.osmand.plus.R;
 
 /**
- * Created by Denis on 10.12.2014.
+ * Created by Denis
+ * on 10.12.2014.
  */
 public class DirectionDrawable extends Drawable {
 	Paint paintRouteDirection;
 	float width;
 	float height;
 	Context ctx;
-	boolean favorite;
 	private float angle;
+	int resourceId = -1;
+
+	public DirectionDrawable(Context ctx, float width, float height, int resourceId) {
+		this(ctx, width, height);
+		this.resourceId = resourceId;
+	}
 
 
-	public DirectionDrawable(Context ctx, float width, float height, boolean favorite) {
-		this.favorite = favorite;
+	public DirectionDrawable(Context ctx, float width, float height) {
 		this.ctx = ctx;
 		this.width = width;
 		this.height = height;
@@ -47,9 +52,9 @@ public class DirectionDrawable extends Drawable {
 
 	@Override
 	public void draw(Canvas canvas) {
-		if (favorite) {
+		if (resourceId != -1) {
 			canvas.rotate(angle, canvas.getHeight()/2, canvas.getWidth()/2);
-			Bitmap arrow = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_destination_arrow);
+			Bitmap arrow = BitmapFactory.decodeResource(ctx.getResources(), resourceId);
 			canvas.drawBitmap(arrow, null, new Rect(0,0,arrow.getHeight(), arrow.getWidth()), null);
 		} else {
 			canvas.rotate(angle, canvas.getHeight()/2, canvas.getWidth() / 2);
@@ -79,7 +84,7 @@ public class DirectionDrawable extends Drawable {
 		int w = 4;
 		float sarrowL = 8; // side of arrow
 		float harrowL = (float) Math.sqrt(2) * sarrowL; // hypotenuse of arrow
-		float hpartArrowL = (float) (harrowL - w) / 2;
+		float hpartArrowL = (harrowL - w) / 2;
 		Path path = new Path();
 		path.moveTo(width / 2, height - (height - h) / 3);
 		path.rMoveTo(w / 2, 0);

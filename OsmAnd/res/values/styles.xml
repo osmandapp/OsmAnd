@@ -19,6 +19,11 @@
         <item name="android:textSize">@dimen/subHeaderTextSize</item>
     </style>
 
+    <style name="DashParkingText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/dashParkingTextSize</item>
+    </style>
+
     <style name="DashboardGeneralButton">
         <item name="android:layout_marginRight">@dimen/showAllButtonMarginRight</item>
         <item name="android:layout_width">wrap_content</item>

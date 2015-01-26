@@ -275,24 +275,26 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	/**
 	 * Method creates confirmation dialog for deletion of a parking location.
 	 */
-	private void showDeleteDialog(final MapActivity mapActivity) {
-		Builder confirm = new AlertDialog.Builder(mapActivity);
-		confirm.setTitle(mapActivity.getString(R.string.osmand_parking_delete));
-		confirm.setMessage(mapActivity.getString(R.string.osmand_parking_delete_confirm));
+	public AlertDialog showDeleteDialog(final Activity activity) {
+		Builder confirm = new AlertDialog.Builder(activity);
+		confirm.setTitle(activity.getString(R.string.osmand_parking_delete));
+		confirm.setMessage(activity.getString(R.string.osmand_parking_delete_confirm));
 		confirm.setCancelable(true);
 		confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				showDeleteEventWarning(mapActivity);
+				showDeleteEventWarning(activity);
 				if(parkingLayer != null) {
 					parkingLayer.refresh();
 				}
 				clearParkingPosition();
-				mapActivity.getMapView().refreshMap();
+				if (activity instanceof MapActivity){
+					((MapActivity)activity).getMapView().refreshMap();
+				}
 			}
 		});
 		confirm.setNegativeButton(R.string.default_buttons_cancel, null);
-		confirm.show();
+		return confirm.show();
 	}
 	
 	/**
@@ -384,13 +386,13 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	/**
 	 * Method shows warning, if previously the event for time-limited parking was added to Calendar app.
-	 * @param mapActivity
+	 * @param activity
 	 */
-	private void showDeleteEventWarning(final MapActivity mapActivity) {
+	private void showDeleteEventWarning(final Activity activity) {
 		if (isParkingEventAdded()) {
-			Builder deleteEventWarning = new AlertDialog.Builder(mapActivity);
-			deleteEventWarning.setTitle(mapActivity.getString(R.string.osmand_parking_warning));
-			deleteEventWarning.setMessage(mapActivity.getString(R.string.osmand_parking_warning_text));
+			Builder deleteEventWarning = new AlertDialog.Builder(activity);
+			deleteEventWarning.setTitle(activity.getString(R.string.osmand_parking_warning));
+			deleteEventWarning.setMessage(activity.getString(R.string.osmand_parking_warning_text));
 			deleteEventWarning.setNeutralButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {						
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
