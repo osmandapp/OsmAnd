@@ -2065,4 +2065,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="my_location">La mia posizione</string>
     <string name="osm_editing_manage">Gestisci</string>
     <string name="gps_status">Stato GPS</string>
+    <string name="parking_place">Parcheggio</string>
+    <string name="remove_the_tag">RIMUOVI IL TAG</string>
     </resources>
