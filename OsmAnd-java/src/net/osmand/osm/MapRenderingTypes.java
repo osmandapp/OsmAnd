@@ -620,16 +620,17 @@ public class MapRenderingTypes {
 		if (!Algorithms.isEmpty(parser.getAttributeValue("", "order"))) {
 			rtype.order = Integer.parseInt(parser.getAttributeValue("", "order"));
 		}
-		if (poiTag != null && poiCategory != null && poiCategory.length() > 0) {
+		if (poiCategory != null && poiCategory.length() > 0) {
 			rtype.poiCategory = AmenityType.getAndRegisterType(parser.getAttributeValue("", "poi_category"));
 			rtype.poiSpecified = true;
 			rtype.relation = Boolean.parseBoolean(parser.getAttributeValue("", "relation"));
 			rtype.poiWithNameOnly = Boolean.parseBoolean(parser.getAttributeValue("", "poi_with_name"));
 			rtype.poiPrefix = parser.getAttributeValue("", "poi_prefix");
 			rtype.onlyPoi = true;
-
-			rtype.tagValuePattern = new TagValuePattern(poiTag, null);
-			return registerRuleType(rtype);
+			if (poiTag != null) {
+				rtype.tagValuePattern = new TagValuePattern(poiTag, null);
+				return registerRuleType(rtype);
+			}
 		}
 		return rtype;
 	}
