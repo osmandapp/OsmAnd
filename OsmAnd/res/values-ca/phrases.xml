@@ -316,8 +316,39 @@
 	<string name="poi_car_wash">Neteja de cotxes</string>
 	<string name="poi_fuel">Benzinera</string>
 	<string name="poi_charging_station">Estació de recàrrega</string>
-	<string name="poi_seamark_wreck">Restes naufragi</string>
+	<string name="poi_seamark_wreck">Restes de naufragi</string>
 
-	<string name="poi_seamark_radio_station">Emissor de radio</string>
+	<string name="poi_seamark_radio_station">Emissor de ràdio</string>
 	<string name="poi_seamark_mooring">Amarratge</string>
+	<string name="poi_seamark_rock">Roca o corall</string>
+	<string name="poi_rowing">Rem</string>
+	<string name="poi_rugby_union">Rugbi a 15</string>
+	<string name="poi_rugby_league">Rugbi a 13</string>
+	<string name="poi_shooting">Tir</string>
+	<string name="poi_skating">Patinatge</string>
+	<string name="poi_skateboard">Monopatí</string>
+	<string name="poi_skiing">Esquí</string>
+	<string name="poi_soccer">Futbol</string>
+	<string name="poi_surfing">Surf</string>
+	<string name="poi_swimming">Natació</string>
+	<string name="poi_table_tennis">Ping-pong</string>
+	<string name="poi_team_handball">Handbol</string>
+	<string name="poi_tennis">Tennis</string>
+	<string name="poi_toboggan">Tobogan</string>
+	<string name="poi_volleyball">Voleibol</string>
+
+	<string name="poi_museum">Museu</string>
+	<string name="poi_archaeological_site">Restes arqueològiques</string>
+	<string name="poi_boundary_stone">Fita de terme</string>
+	<string name="poi_cannon">Canó històric</string>
+	<string name="poi_castle">Castell</string>
+	<string name="poi_fort">Fortalesa</string>
+	<string name="poi_rune_stone">Pedra rúnica</string>
+	<string name="poi_wreck">Vaixell naufragat</string>
+	<string name="poi_monument">Monument</string>
+	<string name="poi_zoo">Zoològic</string>
+	<string name="poi_aquarium">Aquari</string>
+	<string name="poi_theme_park">Parc temàtic</string>
+	
+	<string name="poi_attraction">Atractiu turístic</string>
 	</resources>
