@@ -2,9 +2,10 @@ apply plugin: 'com.android.application'
 
 // Global Paramers accepted
 // APK_NUMBER_VERSION - version number of apk
-// APK_VERSION - version name like 2.1 (subsitute of app_version in no_translate.xml)
+// APK_VERSION - build number like #9999Z, for dev builds appended to app_version like 2.0.0 in no_translate.xml)
+//               flavor                 Z : M=-master, D=-design, B=-Blackberry, MD=-main-default, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
 // TARGET_APP_NAME - app name
-// APP_EDITION - used for build numbers
+// APP_EDITION - date stamp of builds
 // APP_FEATURES - features +play_market +gps_status -parking_plugin -blackberry -free_version -amazon
     
 
