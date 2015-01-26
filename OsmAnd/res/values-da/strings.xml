@@ -1897,4 +1897,5 @@
     <string name="version_settings_descr">"Hent aktuelle  udviklingsversioner"</string>
     <string name="version_settings">Versioner</string>
     <string name="points">Punkter</string>
+    <string name="gps_status">GPS status</string>
     </resources>
