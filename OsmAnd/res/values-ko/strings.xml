@@ -2128,4 +2128,6 @@
     <string name="my_location">내 위치</string>
     <string name="osm_editing_manage">관리</string>
     <string name="gps_status">GPS status</string>
+    <string name="parking_place">주차장</string>
+    <string name="remove_the_tag">태그를 제거</string>
     </resources>
