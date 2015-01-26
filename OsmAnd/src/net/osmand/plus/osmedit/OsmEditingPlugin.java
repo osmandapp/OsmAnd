@@ -94,21 +94,10 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		activity.addDialogProvider(getBugsLayer(activity));
 	}
 	
+	
 	@Override
-	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
-		Preference grp = new Preference(activity);
-		grp.setTitle(R.string.osm_settings);
-		grp.setSummary(R.string.osm_settings_descr);
-		grp.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				activity.startActivity(new Intent(activity, SettingsOsmEditingActivity.class));
-				return true;
-			}
-		});
-		screen.addPreference(grp);
-		
+	public Class<? extends Activity> getSettingsActivity() {
+		return SettingsOsmEditingActivity.class;
 	}
 	
 	public EditingPOIActivity getPoiActions(MapActivity activity) {

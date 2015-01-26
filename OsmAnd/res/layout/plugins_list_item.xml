@@ -2,19 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:background="?attr/expandable_category_color"
         android:paddingBottom="3dp"
-        android:paddingTop="6dp">
+        android:paddingTop="6dp" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp">
+            android:paddingLeft="5dp" >
 
             <CheckBox
                 android:id="@+id/check_item"
@@ -34,6 +35,21 @@
             android:text="@string/extra_settings"
             android:textColor="?android:textColorPrimary"
             android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_vertical" >
+
+            <ImageView
+                android:id="@+id/settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="1dp"
+                android:focusable="false"
+                android:src="@drawable/ic_action_settings_dark" />
+        </RelativeLayout>
     </LinearLayout>
 
     <TextView
@@ -48,8 +64,7 @@
         android:text="@string/osmand_extra_settings_description"
         android:textColor="?android:textColorSecondary"
         android:textSize="14sp"
-        android:visibility="gone">
-
+        android:visibility="gone" >
     </TextView>
 
 </LinearLayout>

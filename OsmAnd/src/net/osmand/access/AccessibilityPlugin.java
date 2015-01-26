@@ -5,6 +5,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import android.app.Activity;
 import android.content.Intent;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -39,22 +40,10 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	public void registerLayers(MapActivity activity) {
 	}
 	
+	
 	@Override
-	public void settingsActivityCreate(final SettingsActivity activity, final PreferenceScreen screen) {
-		Preference grp = new Preference(activity);
-		grp.setTitle(R.string.accessibility_preferences);
-		grp.setSummary(R.string.accessibility_preferences_descr);
-		grp.setKey("accessibility_preferences");
-		grp.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				activity.startActivity(new Intent(activity, SettingsAccessibilityActivity.class));
-				return true;
-			}
-		});
-		screen.addPreference(grp);
-
+	public Class<? extends Activity> getSettingsActivity() {
+		return SettingsAccessibilityActivity.class;
 	}
 
 

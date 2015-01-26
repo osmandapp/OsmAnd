@@ -242,23 +242,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 	}
 	
-
 	@Override
-	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
-		Preference grp = new Preference(activity);
-		grp.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				activity.startActivity(new Intent(activity, SettingsRasterMapsActivity.class));
-				return true;
-			}
-		});
-		grp.setSummary(R.string.online_map_settings_descr);
-		grp.setTitle(R.string.online_map_settings);
-		grp.setKey("map_settings");
-		screen.addPreference(grp);
-		
+	public Class<? extends Activity> getSettingsActivity() {
+		return SettingsRasterMapsActivity.class;
 	}
 
 	

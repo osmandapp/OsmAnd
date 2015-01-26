@@ -41,6 +41,7 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -314,20 +315,8 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	}
 
 	@Override
-	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
-		Preference grp = new Preference(activity);
-		grp.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				activity.startActivity(new Intent(activity, SettingsOsMoActivity.class));
-				return true;
-			}
-		});
-		grp.setSummary(R.string.osmo_settings_descr);
-		grp.setTitle(R.string.osmo_settings);
-		grp.setKey("osmo_settings");
-		screen.addPreference(grp);
+	public Class<? extends Activity> getSettingsActivity() {
+		return SettingsOsMoActivity.class;
 	}
 	
 	@Override

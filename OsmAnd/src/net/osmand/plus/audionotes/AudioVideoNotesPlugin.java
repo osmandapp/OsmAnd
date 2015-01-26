@@ -1037,20 +1037,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
-		Preference grp = new Preference(activity);
-		grp.setTitle(R.string.av_settings);
-		grp.setSummary(R.string.av_settings_descr);
-		grp.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				activity.startActivity(new Intent(activity, SettingsAudioVideoActivity.class));
-				return true;
-			}
-		});
-		screen.addPreference(grp);
+	public Class<? extends Activity> getSettingsActivity() {
+		return SettingsAudioVideoActivity.class;
 	}
+	
 
 	@Override
 	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {

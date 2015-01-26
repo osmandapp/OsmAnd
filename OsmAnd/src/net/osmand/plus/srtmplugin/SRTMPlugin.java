@@ -1,5 +1,6 @@
 package net.osmand.plus.srtmplugin;
 
+import android.app.Activity;
 import android.widget.ArrayAdapter;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
@@ -109,6 +110,11 @@ public class SRTMPlugin extends OsmandPlugin {
 	
 	@Override
 	public void disable(OsmandApplication app) {
+	}
+	
+	@Override
+	public Class<? extends Activity> getSettingsActivity() {
+		return null;
 	}
 
 }

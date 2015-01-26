@@ -30,6 +30,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -37,6 +38,7 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.MapUtils;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
@@ -53,6 +55,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.os.AsyncTask;
+import android.preference.PreferenceScreen;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -642,4 +645,11 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		}
 
 	}
+	
+
+	@Override
+	public Class<? extends Activity> getSettingsActivity() {
+		return null;
+	}
+	
 }

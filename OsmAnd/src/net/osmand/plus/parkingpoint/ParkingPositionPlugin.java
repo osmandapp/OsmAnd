@@ -20,6 +20,7 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -504,5 +505,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingPlaceControl.setText(null, null);
 		parkingPlaceControl.setImageDrawable(map.getResources().getDrawable(R.drawable.widget_parking));
 		return parkingPlaceControl;
+	}
+	
+	@Override
+	public Class<? extends Activity> getSettingsActivity() {
+		return null;
 	}
 }

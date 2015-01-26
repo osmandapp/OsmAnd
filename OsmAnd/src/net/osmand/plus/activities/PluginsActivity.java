@@ -4,14 +4,19 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import android.widget.*;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 public class PluginsActivity extends OsmandListActivity {
 
@@ -92,6 +97,19 @@ public class PluginsActivity extends OsmandListActivity {
 			TextView nameView = (TextView) row.findViewById(R.id.plugin_name);
 			nameView.setText(plugin.getName());
 			nameView.setContentDescription(plugin.getName() + " " + getString(toBeEnabled ? R.string.item_checked : R.string.item_unchecked));
+			
+			View rw = row.findViewById(R.id.settings);
+			final Class<? extends Activity> st = plugin.getSettingsActivity();
+			rw.setVisibility(toBeEnabled && st != null ? View.VISIBLE : View.GONE);
+			rw.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					if (st != null) {
+						startActivity(new Intent(PluginsActivity.this, st));
+					}
+				}
+			});
 			
 			
 			TextView description = (TextView) row.findViewById(R.id.plugin_descr);

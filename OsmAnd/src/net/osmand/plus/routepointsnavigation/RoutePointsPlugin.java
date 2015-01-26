@@ -3,6 +3,7 @@ package net.osmand.plus.routepointsnavigation;
 import java.io.File;
 import java.util.*;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.Gravity;
@@ -529,5 +530,10 @@ public class RoutePointsPlugin extends OsmandPlugin {
 				}
 			}.execute(getCurrentRoute());
 		}
+	}
+	
+	@Override
+	public Class<? extends Activity> getSettingsActivity() {
+		return null;
 	}
 }
