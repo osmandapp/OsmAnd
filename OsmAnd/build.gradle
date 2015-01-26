@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 // Global Paramers accepted
 // APK_NUMBER_VERSION - version number of apk
 // APK_VERSION - version name like 2.1 (subsitute of app_version in no_translate.xml)
-// APP_NAME - app name
+// TARGET_APP_NAME - app name
 // APP_EDITION - used for build numbers
 // APP_FEATURES - features +play_market +gps_status -parking_plugin -blackberry -free_version -amazon
     
@@ -20,7 +20,7 @@ apply plugin: 'com.android.application'
 // 2. fix_apostrophe_issues (replace match="[^=]([^\\])'" replace="\1\\\\'") res/**/strings.xml
 // 3. sherpafy/free/paid
 // 4. Release signature
-// 5. APP_NAME, APP_EDITION uses flavor
+// 5. TARGET_APP_NAME, APP_EDITION uses flavor
 
 
 android {
@@ -167,8 +167,8 @@ android {
 }
 
 def replaceNoTranslate(line) {
-    if(line.contains("\"app_name\"") && System.getenv("APP_NAME")) {
-        return line.replaceAll(">[^<]*<", ">"+System.getenv("APP_NAME")+"<")
+    if(line.contains("\"app_name\"") && System.getenv("TARGET_APP_NAME")) {
+        return line.replaceAll(">[^<]*<", ">"+System.getenv("TARGET_APP_NAME")+"<")
     }
     if(line.contains("\"app_edition\"") && System.getenv("APP_EDITION")) {
         return line.replaceAll(">[^<]*<", ">"+System.getenv("APP_EDITION")+"<")
