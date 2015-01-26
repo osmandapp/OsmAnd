@@ -1915,4 +1915,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="tracks">Traces</string>
     <string name="my_location">Ma position</string>
     <string name="osm_editing_manage">Gérer</string>
+    <string name="gps_status">Statut GPS</string>
     </resources>
