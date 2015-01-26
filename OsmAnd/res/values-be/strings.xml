@@ -2007,4 +2007,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="my_location">Маё месцазнаходжаньне</string>
     <string name="osm_editing_manage">Кіраваць</string>
     <string name="gps_status">Стан GPS</string>
+    <string name="parking_place">Парковачнае месца</string>
+    <string name="remove_the_tag">Выдаліць тэг</string>
     </resources>
