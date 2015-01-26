@@ -1881,4 +1881,5 @@
     <string name="version_settings_descr">Baixada de les darreres actualitzacions</string>
     <string name="version_settings">Versions</string>
     <string name="rendering_attr_streetLighting_name">Enllumenat dels carrers</string>
+    <string name="gps_status">Estat GPS</string>
     </resources>
