@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.FavouritesListActivity;
 import net.osmand.plus.activities.FavouritesListFragment;
 import net.osmand.plus.activities.NavigatePointFragment;
+import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.util.Algorithms;
 import android.app.ActionBar;
@@ -42,7 +43,7 @@ import android.widget.Button;
 
 import com.example.android.common.view.SlidingTabLayout;
 
-public class SearchActivity extends ActionBarActivity implements OsmAndLocationListener {
+public class SearchActivity extends TabActivity implements OsmAndLocationListener {
 	public static final int POI_TAB_INDEX = 0;
 	public static final int ADDRESS_TAB_INDEX = 1;
 	public static final int LOCATION_TAB_INDEX = 2;
@@ -73,35 +74,13 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 	List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 	private boolean showOnlyOneTab;
 
-	private List<TabItem> mTabs = new ArrayList<TabItem>();
+
 
 	public interface SearchActivityChild {
 		
 		public void locationUpdate(LatLon l);
 	}
 
-	private static class TabItem {
-		private final CharSequence mTitle;
-		private final int mIcon;
-        private final int mIndicatorColor;
-        private final int mDividerColor;
-        private final Class<?> fragment;
-        
-		public TabItem(CharSequence mTitle, int mIcon, int mIndicatorColor, int mDividerColor, Class<?> fragment) {
-			this.mTitle = mTitle;
-			this.mIcon = mIcon;
-			this.mIndicatorColor = mIndicatorColor;
-			this.mDividerColor = mDividerColor;
-			this.fragment = fragment;
-		}
-        
-	}
-
-
-	private TabItem getTabIndicator(int iconId, int resId, Class<?> fragment){
-		return new TabItem(getString(resId), iconId, Color.DKGRAY, Color.LTGRAY, fragment);
-	}
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
@@ -115,23 +94,19 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle("");
 		getSupportActionBar().setElevation(0);
-//		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#39464d")));
-//		getSupportActionBar().setTitle(R.string.select_search_position);
 
-        
-		
 		if (!showOnlyOneTab) {
 			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
 			PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 
-			mTabs.add(getTabIndicator(R.drawable.tab_search_poi_icon, R.string.poi, getFragment(POI_TAB_INDEX)));
-			mTabs.add(getTabIndicator(R.drawable.tab_search_address_icon, R.string.address, getFragment(ADDRESS_TAB_INDEX)));
-			mTabs.add(getTabIndicator(R.drawable.tab_search_location_icon, R.string.search_tabs_location, getFragment(LOCATION_TAB_INDEX)));
-			mTabs.add(getTabIndicator(R.drawable.tab_search_favorites_icon, R.string.favorite, getFragment(FAVORITES_TAB_INDEX)));
-			mTabs.add(getTabIndicator(R.drawable.tab_search_history_icon, R.string.history, getFragment(HISTORY_TAB_INDEX)));
+			mTabs.add(getTabIndicator(R.string.poi, getFragment(POI_TAB_INDEX)));
+			mTabs.add(getTabIndicator(R.string.address, getFragment(ADDRESS_TAB_INDEX)));
+			mTabs.add(getTabIndicator(R.string.search_tabs_location, getFragment(LOCATION_TAB_INDEX)));
+			mTabs.add(getTabIndicator(R.string.favorite, getFragment(FAVORITES_TAB_INDEX)));
+			mTabs.add(getTabIndicator(R.string.history, getFragment(HISTORY_TAB_INDEX)));
 
 			
-			mViewPager.setAdapter(new SearchFragmentPagerAdapter(getSupportFragmentManager()));
+			setViewPagerAdapter(mViewPager);
 			mSlidingTabLayout.setViewPager(mViewPager);
 			
 			mViewPager.setCurrentItem(Math.min(tab, HISTORY_TAB_INDEX));
@@ -409,41 +384,6 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 	}
 	
 
-    class SearchFragmentPagerAdapter extends FragmentPagerAdapter
-            /*implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener*/ {
 
-        SearchFragmentPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        /**
-         * Return the {@link android.support.v4.app.Fragment} to be displayed at {@code position}.
-         * <p>
-         */
-        @Override
-        public Fragment getItem(int i) {
-            try {
-				return (Fragment) mTabs.get(i).fragment.newInstance();
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-        }
-
-        @Override
-        public int getCount() {
-            return mTabs.size();
-        }
-
-        // BEGIN_INCLUDE (pageradapter_getpagetitle)
-        /**
-         * Return the title of the item at {@code position}. This is important as what this method
-         * returns is what is displayed in the {@link SlidingTabLayout}.
-         * <p>
-         */
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mTabs.get(position).mTitle;
-        }
-    }
 
 }
