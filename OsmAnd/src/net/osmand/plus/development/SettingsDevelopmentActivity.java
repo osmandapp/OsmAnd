@@ -68,23 +68,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		});
 		cat.addPreference(pref);
 
-		if ((Version.getBuildAppEdition(getMyApplication()).length() > 0
-				|| Version.isDeveloperVersion(getMyApplication()))) {
-				//&& OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null){
-			pref = new Preference(this);
-			pref.setTitle(R.string.version_settings);
-			pref.setSummary(R.string.version_settings_descr);
-			pref.setKey("version");
-//TODO			pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-//				@Override
-//				public boolean onPreferenceClick(Preference preference) {
-//					startActivityForResult(new Intent(SettingsDevelopmentActivity.this, ContributionVersionActivity.class));
-//					return false;
-//				}
-//			});
-			cat.addPreference(pref);
-		}
-
 		pref = new Preference(this);
 		pref.setTitle(R.string.global_app_allocated_memory);
 
