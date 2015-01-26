@@ -1896,7 +1896,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="speak_pedestrian">Annoncer les passages piéton</string>
     <string name="rendering_value__name">Par défaut</string>
 	<string name="avoid_roads_msg">Vous pouvez générer un itinéraire alternatif en sélectionnant les routes à éviter.</string>
-    <string name="navigation_over_track">Démarrer la navigation sur les pistes ?</string>
+    <string name="navigation_over_track">Démarrer la navigation sur cette trace ?</string>
 	<string name="save_track_to_gpx_globally_headline">Enregistrement de traces à la demande</string>
 	<string name="recents">Récents</string>
 	<string name="proxy_pref_title">Proxy</string>
@@ -1916,6 +1916,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="my_location">Ma position</string>
     <string name="osm_editing_manage">Gérer</string>
     <string name="gps_status">Statut GPS</string>
-    <string name="parking_place">Place de parking</string>
-    <string name="remove_the_tag">Enlever l\'attribut</string>
+    <string name="parking_place">Place de stationnement</string>
+    <string name="remove_the_tag">Retirer l\'étiquette</string>
     </resources>
