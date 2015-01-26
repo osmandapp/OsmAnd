@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.FavouritesListActivity;
 import net.osmand.plus.activities.FavouritesListFragment;
 import net.osmand.plus.activities.NavigatePointFragment;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.util.Algorithms;
 import android.app.ActionBar;
 import android.content.Intent;
@@ -73,9 +74,7 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 	private boolean showOnlyOneTab;
 
 	private List<TabItem> mTabs = new ArrayList<TabItem>();
-	private ViewPager mViewPager;
-	private SlidingTabLayout mSlidingTabLayout;
-	
+
 	public interface SearchActivityChild {
 		
 		public void locationUpdate(LatLon l);
@@ -115,14 +114,15 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 		showOnlyOneTab = getIntent() != null && getIntent().getBooleanExtra(SHOW_ONLY_ONE_TAB, false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle("");
-		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#39464d")));
+		getSupportActionBar().setElevation(0);
+//		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#39464d")));
 //		getSupportActionBar().setTitle(R.string.select_search_position);
 
         
 		
 		if (!showOnlyOneTab) {
-	        mViewPager = (ViewPager)findViewById(R.id.pager);
-	        mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+			PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 
 			mTabs.add(getTabIndicator(R.drawable.tab_search_poi_icon, R.string.poi, getFragment(POI_TAB_INDEX)));
 			mTabs.add(getTabIndicator(R.drawable.tab_search_address_icon, R.string.address, getFragment(ADDRESS_TAB_INDEX)));
@@ -134,21 +134,21 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
 			mViewPager.setAdapter(new SearchFragmentPagerAdapter(getSupportFragmentManager()));
 			mSlidingTabLayout.setViewPager(mViewPager);
 			
-			mViewPager.setCurrentItem(Math.min(tab , HISTORY_TAB_INDEX));
+			mViewPager.setCurrentItem(Math.min(tab, HISTORY_TAB_INDEX));
 			mSlidingTabLayout.setOnPageChangeListener(new OnPageChangeListener() {
-				
+
 				@Override
 				public void onPageSelected(int arg0) {
 					settings.SEARCH_TAB.set(arg0);
 				}
-				
+
 				@Override
 				public void onPageScrolled(int arg0, float arg1, int arg2) {
 				}
-				
+
 				@Override
 				public void onPageScrollStateChanged(int arg0) {
-					
+
 				}
 			});
 		} else {
@@ -419,7 +419,6 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
         /**
          * Return the {@link android.support.v4.app.Fragment} to be displayed at {@code position}.
          * <p>
-         * Here we return the value returned from {@link SamplePagerItem#createFragment()}.
          */
         @Override
         public Fragment getItem(int i) {
@@ -440,7 +439,6 @@ public class SearchActivity extends ActionBarActivity implements OsmAndLocationL
          * Return the title of the item at {@code position}. This is important as what this method
          * returns is what is displayed in the {@link SlidingTabLayout}.
          * <p>
-         * Here we return the value returned from {@link SamplePagerItem#getTitle()}.
          */
         @Override
         public CharSequence getPageTitle(int position) {
