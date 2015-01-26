@@ -28,7 +28,8 @@
         <TextView
             android:id="@+id/plugin_name"
             style="@style/ListText"
-            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="top"
             android:paddingRight="10dp"
@@ -36,7 +37,7 @@
             android:textColor="?android:textColorPrimary"
             android:textStyle="bold" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_gravity="center_vertical" >
@@ -48,8 +49,8 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="1dp"
                 android:focusable="false"
-                android:src="@drawable/ic_action_settings_dark" />
-        </RelativeLayout>
+                android:src="@drawable/ic_action_settings_light" />
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
