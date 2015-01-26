@@ -64,13 +64,13 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"/>
 
-			<fragment
-					xmlns:android="http://schemas.android.com/apk/res/android"
-					android:id="@+id/TracksFragment"
-					android:name="net.osmand.plus.dashboard.DashTrackFragment"
-					android:layout_marginTop="@dimen/dashCardMargin"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"/>
+			<!--<fragment-->
+					<!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+					<!--android:id="@+id/TracksFragment"-->
+					<!--android:name="net.osmand.plus.dashboard.DashTrackFragment"-->
+					<!--android:layout_marginTop="@dimen/dashCardMargin"-->
+					<!--android:layout_width="match_parent"-->
+					<!--android:layout_height="wrap_content"/>-->
 
 			<!--<fragment-->
 					<!--xmlns:android="http://schemas.android.com/apk/res/android"-->
