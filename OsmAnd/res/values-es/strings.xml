@@ -1904,7 +1904,7 @@
     <string name="gps_status">Estado GPS</string>
     <string name="rendering_attr_streetLighting_name">Iluminación de la calle</string>
     <string name="points">Puntos</string>
-    <string name="tracks">Trazas</string>
+    <string name="tracks">Pistas</string>
     <string name="my_location">Mi localización</string>
     <string name="osm_editing_manage">Administrar</string>
     </resources>
