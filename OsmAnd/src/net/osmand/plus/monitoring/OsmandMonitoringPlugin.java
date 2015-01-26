@@ -38,7 +38,10 @@ import android.graphics.drawable.Drawable;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -351,12 +354,28 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			String title, final int[] seconds, final int[] minutes, final ValueHolder<Boolean> choice, final ValueHolder<Integer> v, OnClickListener onclick){
 		Builder dlg = new AlertDialog.Builder(uiCtx);
 		dlg.setTitle(title);
+		WindowManager mgr = (WindowManager) uiCtx.getSystemService(Context.WINDOW_SERVICE);
+		DisplayMetrics dm = new DisplayMetrics();
+		mgr.getDefaultDisplay().getMetrics(dm);
+		LinearLayout ll = createIntervalChooseLayout(uiCtx, patternMsg, seconds, minutes,
+				choice, v, dm);
+		dlg.setView(ll);
+		dlg.setPositiveButton(R.string.default_buttons_ok, onclick);
+		dlg.setNegativeButton(R.string.default_buttons_cancel, null);
+		dlg.show();
+	}
+
+	public static LinearLayout createIntervalChooseLayout(final Context uiCtx,
+			final String patternMsg, final int[] seconds, final int[] minutes,
+			final ValueHolder<Boolean> choice, final ValueHolder<Integer> v, DisplayMetrics dm) {
 		LinearLayout ll = new LinearLayout(uiCtx);
 		final TextView tv = new TextView(uiCtx);
-		tv.setPadding(7, 3, 7, 0);
+		tv.setPadding((int)(7 * dm.density), (int)(3 * dm.density), (int)(7* dm.density), 0);
 		tv.setText(String.format(patternMsg, uiCtx.getString(R.string.int_continuosly)));
+		
+		
 		SeekBar sp = new SeekBar(uiCtx);
-		sp.setPadding(7, 5, 7, 0);
+		sp.setPadding((int)(7 * dm.density), (int)(5 * dm.density), (int)(7* dm.density), 0);
 		final int secondsLength = seconds.length;
     	final int minutesLength = minutes.length;
     	sp.setMax(secondsLength + minutesLength - 1);
@@ -410,7 +429,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			cb.setText(R.string.remember_choice);
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT);
-			lp.setMargins(7, 10, 7, 0);
+			lp.setMargins((int)(7* dm.density), (int)(10* dm.density), (int)(7* dm.density), 0);
 			cb.setLayoutParams(lp);
 			cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -422,10 +441,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			});
 			ll.addView(cb);
 		}
-		dlg.setView(ll);
-		dlg.setPositiveButton(R.string.default_buttons_ok, onclick);
-		dlg.setNegativeButton(R.string.default_buttons_cancel, null);
-		dlg.show();
+		return ll;
 	}
 	
 	

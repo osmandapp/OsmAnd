@@ -901,17 +901,6 @@ public class MapActivityActions implements DialogProvider {
 
 		
 		//////////// Others
-		if (Version.isGpsStatusEnabled(app)) {
-			optionsMenuHelper.item(R.string.show_gps_status).icons(R.drawable.ic_action_gabout_dark, R.drawable.ic_action_gabout_light )
-				.listen(new OnContextMenuClick() {
-
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					new StartGPSStatus(mapActivity).run();
-					return true;
-				}
-			}).reg();
-		}
 		final OsmAndLocationProvider loc = app.getLocationProvider();
 		// this is development functionality so it should stay preferrably here
 			if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {

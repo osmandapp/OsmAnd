@@ -1,15 +1,19 @@
 package net.osmand.plus.views.mapwidgets;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.*;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -18,18 +22,28 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.ShadowText;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -127,17 +141,41 @@ public class MapInfoWidgetsFactory {
 				} else {
 					final MonitoringInfoControl.ValueHolder<Integer> vs = new MonitoringInfoControl.ValueHolder<Integer>();
 					vs.value = app.getSettings().SERVICE_OFF_INTERVAL.get();
-					OsmandMonitoringPlugin.showIntervalChooseDialog(map, app.getString(R.string.gps_wake_up_timer) + " : %s",
-							app.getString(R.string.enable_sleep_mode),
+					final AlertDialog[] dlgshow = new AlertDialog[1]; 
+					Builder dlg = new AlertDialog.Builder(map);
+					dlg.setTitle(app.getString(R.string.enable_sleep_mode));
+					WindowManager mgr = (WindowManager) map.getSystemService(Context.WINDOW_SERVICE);
+					DisplayMetrics dm = new DisplayMetrics();
+					mgr.getDefaultDisplay().getMetrics(dm);
+					LinearLayout ll = OsmandMonitoringPlugin.createIntervalChooseLayout(map,
+							app.getString(R.string.gps_wake_up_timer) + " : %s",
 							OsmandMonitoringPlugin.SECONDS,
 							OsmandMonitoringPlugin.MINUTES,
-							null, vs, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									app.getSettings().SERVICE_OFF_INTERVAL.set(vs.value);
-									app.startNavigationService(NavigationService.USED_BY_GPX);
-								}
-							});
+							null, vs, dm);
+					if (Version.isGpsStatusEnabled(app)) {
+						Button sp = new Button(map);
+						sp.setPadding((int)(7 * dm.density), (int)(5 * dm.density), (int)(7* dm.density), 0);
+						sp.setOnClickListener(new View.OnClickListener() {
+							
+							@Override
+							public void onClick(View v) {
+								dlgshow[0].dismiss();
+								new StartGPSStatus(map).run();
+							}
+						});
+						ll.addView(sp);
+					}
+					dlg.setView(ll);
+					dlg.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							app.getSettings().SERVICE_OFF_INTERVAL.set(vs.value);
+							app.startNavigationService(NavigationService.USED_BY_GPX);
+						}
+					});
+					dlg.setNegativeButton(R.string.default_buttons_cancel, null);
+					dlgshow[0] = dlg.show();
+
 				}
 
 			}
