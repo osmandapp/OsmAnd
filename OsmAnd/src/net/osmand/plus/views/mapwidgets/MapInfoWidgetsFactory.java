@@ -153,17 +153,12 @@ public class MapInfoWidgetsFactory {
 							OsmandMonitoringPlugin.MINUTES,
 							null, vs, dm);
 					if (Version.isGpsStatusEnabled(app)) {
-						Button sp = new Button(map);
-						sp.setPadding((int)(7 * dm.density), (int)(5 * dm.density), (int)(7* dm.density), 0);
-						sp.setOnClickListener(new View.OnClickListener() {
-							
+						dlg.setNeutralButton(R.string.gps_status, new DialogInterface.OnClickListener() {
 							@Override
-							public void onClick(View v) {
-								dlgshow[0].dismiss();
-								new StartGPSStatus(map).run();
+							public void onClick(DialogInterface dialog, int which) {
+								new StartGPSStatus(map).run();								
 							}
 						});
-						ll.addView(sp);
 					}
 					dlg.setView(ll);
 					dlg.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
