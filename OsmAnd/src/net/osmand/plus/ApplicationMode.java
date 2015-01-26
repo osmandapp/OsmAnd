@@ -69,7 +69,7 @@ public class ApplicationMode {
 		regWidget("time", all);
 		regWidget("speed", exceptPedestrianAndDefault);
 		regWidget("max_speed", CAR);
-		regWidget("gps_info", DEFAULT);
+		regWidget("gps_info", none);
 		regWidget("altitude", pedestrianBicycle);
 		
 		// top
