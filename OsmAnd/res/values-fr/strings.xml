@@ -1910,10 +1910,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_attr_streetLighting_name">Éclairage public</string>
     <string name="enable_proxy_title">Activer le mandataire HTTP</string>
 	<string name="version_settings_descr">Télécharger les versions en cours développement</string>
-    <string name="version_settings">Builds</string>
+    <string name="version_settings">Versions de développement</string>
     <string name="points">Points</string>
     <string name="tracks">Traces</string>
     <string name="my_location">Ma position</string>
     <string name="osm_editing_manage">Gérer</string>
     <string name="gps_status">Statut GPS</string>
+    <string name="parking_place">Place de parking</string>
+    <string name="remove_the_tag">Enlever l\'attribut</string>
     </resources>
