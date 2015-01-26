@@ -785,7 +785,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				}
 			}
 			if(loc != null){
-				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height, false);
+				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height);
 				Float h = heading;
 				float a = h != null ? h : 0;
 

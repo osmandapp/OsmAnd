@@ -21,7 +21,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="jdk" jdkName="1.6" jdkType="JavaSDK" />
+    <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
     <orderEntry type="module-library">
       <library name="bsh-core-2.0b4.jar">
         <CLASSES>
@@ -105,4 +105,3 @@
     </orderEntry>
   </component>
 </module>
-

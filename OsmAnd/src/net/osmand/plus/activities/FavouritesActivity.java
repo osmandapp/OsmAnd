@@ -4,20 +4,18 @@
 package net.osmand.plus.activities;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Intent;
-import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.Window;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -25,16 +23,20 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
+import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.dashboard.DashDownloadMapsFragment;
+import net.osmand.plus.dashboard.DashUpdatesFragment;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 /**
  *
  */
-public class FavouritesActivity extends ActionBarProgressActivity {
+public class FavouritesActivity extends TabActivity {
 
 	private static final String FAVOURITES_INFO = "FAVOURITES_INFO";
 	private static final String TRACKS = "TRACKS";
@@ -43,10 +45,8 @@ public class FavouritesActivity extends ActionBarProgressActivity {
 	public static int GPX_TAB = 1;
 	public static int SELECTED_GPX_TAB = 2;
 	public static String TAB_PARAM = "TAB_PARAM";
-	private TabsAdapter mTabsAdapter;
 	private TabSpec selectedTrack;
-	private TabHost tabHost;
-
+	protected List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -74,33 +74,40 @@ public class FavouritesActivity extends ActionBarProgressActivity {
 			setContentView(R.layout.search_activity_single);
 			getSupportFragmentManager().beginTransaction().add(R.id.layout, new FavouritesTreeFragment()).commit();
 		} else {
-			setContentView(R.layout.tab_content);
-			tabHost = (TabHost) findViewById(android.R.id.tabhost);
-			tabHost.setup();
+			setContentView(R.layout.search_main);
 
+			PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 			Integer tab = settings.FAVORITES_TAB.get();
 			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
-			mTabsAdapter = new TabsAdapter(this, tabHost, mViewPager, settings, true);
-			mTabsAdapter.addTab(tabHost.newTabSpec(FAVOURITES_INFO).setIndicator(getString(R.string.my_favorites)),
-					FavouritesTreeFragment.class, null);
-			mTabsAdapter.addTab(tabHost.newTabSpec(TRACKS).setIndicator(getString(R.string.my_tracks)),
-					AvailableGPXFragment.class, null);
-			selectedTrack = mTabsAdapter.addTab(tabHost.newTabSpec(SELECTED_TRACK).setIndicator(getString(R.string.selected_track)),
-					SelectedGPXFragment.class, null);
+
+			List<TabItem> mTabs = new ArrayList<TabItem>();
+			mTabs.add(getTabIndicator(R.string.my_favorites, FavouritesTreeFragment.class));
+			mTabs.add(getTabIndicator(R.string.my_tracks, AvailableGPXFragment.class));
+			mTabs.add(getTabIndicator(R.string.selected_track, SelectedGPXFragment.class));
+
+			setViewPagerAdapter(mViewPager, mTabs);
+			mSlidingTabLayout.setViewPager(mViewPager);
+
+
 			Intent intent = getIntent();
 			if(intent != null) {
 				int tt = intent.getIntExtra(TAB_PARAM, -1);
 				if(tt >= 0) {
-					tabHost.setCurrentTab(tt);
+					mViewPager.setCurrentItem(tt);
 				}
 			} else {
-				tabHost.setCurrentTab(tab);
+				mViewPager.setCurrentItem(tab);
 			}
 			updateSelectedTracks();
 		}
 	}
-	
+
+	@Override
+	public void onAttachFragment(Fragment fragment) {
+		fragList.add(new WeakReference<Fragment>(fragment));
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -118,22 +125,24 @@ public class FavouritesActivity extends ActionBarProgressActivity {
 		super.onPause();
 		((OsmandApplication) getApplication()).getSelectedGpxHelper().setUiListener(FavouritesActivity.class, null);
 	}
-	
+
 	public void updateSelectedTracks() {
-		if (selectedTrack != null) {
-			GpxSelectionHelper gpx = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
-			String vl = getString(R.string.selected_track);
-			if (gpx.isShowingAnyGpxFiles()) {
-				vl += " (" + gpx.getSelectedGPXFiles().size()
-						+ ")";
-			} else {
-				vl += " (0)";
+		for (WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if (f instanceof SelectedGPXFragment && !f.isDetached()) {
+				GpxSelectionHelper gpx = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
+				String vl = getString(R.string.selected_track);
+				if (gpx.isShowingAnyGpxFiles()) {
+					vl += " (" + gpx.getSelectedGPXFiles().size()
+							+ ")";
+				} else {
+					vl += " (0)";
+				}
+				try{
+					((TextView)f.getView().findViewById(android.R.id.title)).setText(vl);
+				} catch (NullPointerException e) {
+				}
 			}
-			try {
-				((TextView)tabHost.getTabWidget().getChildAt(2).findViewById(android.R.id.title)).setText(vl);
-			} catch (Exception e) {
-			}
-			mTabsAdapter.notifyDataSetChanged();
 		}
 	}
 

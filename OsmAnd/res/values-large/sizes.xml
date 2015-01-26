@@ -21,9 +21,11 @@
     <dimen name="dashPadding">9dp</dimen>
     <dimen name="dashAboutTextSize">30sp</dimen>
     <dimen name="dashCardMargin">6dp</dimen>
+    <dimen name="dash_parking_height">60dp</dimen>
 
     <!-- TextSizes -->
     <dimen name="showAllButtonTextSize">16sp</dimen>
     <dimen name="subHeaderTextSize">21sp</dimen>
     <dimen name="dashFavNameTextSize">24sp</dimen>
+    <dimen name="dashParkingTextSize">24sp</dimen>
 </resources>

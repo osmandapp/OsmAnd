@@ -479,8 +479,8 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	public void updateCompassValue(float value) {
 		for (WeakReference<Fragment> ref : fragList) {
 			Fragment f = ref.get();
-			if (f instanceof DashFavoritesFragment && !f.isDetached()) {
-				((DashFavoritesFragment) f).updateCompassValue(value);
+			if (f instanceof DashLocationFragment && !f.isDetached()) {
+				((DashLocationFragment) f).updateCompassValue(value);
 			}
 		}
 	}
@@ -489,8 +489,8 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	public void updateLocation(Location location) {
 		for (WeakReference<Fragment> ref : fragList) {
 			Fragment f = ref.get();
-			if (f instanceof DashFavoritesFragment && !f.isDetached()) {
-				((DashFavoritesFragment) f).updateLocation(location);
+			if (f instanceof DashLocationFragment && !f.isDetached()) {
+				((DashLocationFragment) f).updateLocation(location);
 			}
 		}
 	}
