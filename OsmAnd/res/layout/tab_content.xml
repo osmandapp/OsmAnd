@@ -1,116 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/tabhost"
-	android:paddingTop="?attr/actionBarSize"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="fill_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical"
+			  android:layout_marginTop="?attr/actionBarSize">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+	<net.osmand.plus.views.controls.PagerSlidingTabStrip
+			android:id="@+id/sliding_tabs"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:background="?attr/colorPrimary"/>
 
-        <net.osmand.plus.views.controls.PagerSlidingTabStrip
-                android:id="@+id/sliding_tabs"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"/>
+	<android.support.v4.view.ViewPager
+			android:id="@+id/pager"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"/>
 
-        <LinearLayout
-                android:id="@+id/ProgressView"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+	<net.osmand.plus.activities.search.toolbar.SplitToolbar
+			android:id="@+id/bottomControls"
+			android:background="?attr/bottomToolBarColor"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"/>
 
-            <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="5dp"
-                    android:gravity="center_vertical|left"
-                    android:orientation="horizontal">
-
-                <ProgressBar
-                        android:id="@+id/IndeterminateProgressBar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:indeterminate="true"
-                        android:indeterminateOnly="true"
-                        android:visibility="gone" />
-
-                <TextView
-                        android:id="@+id/ProgressPercent"
-                        android:layout_width="48dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:gravity="right|center_vertical"
-                        android:text=""
-                        android:textSize="14sp" />
-
-                <TextView
-                        android:id="@+id/ProgressMessage"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="3dp"
-                        android:layout_toLeftOf="@id/ProgressPercent"
-                        android:layout_toRightOf="@id/IndeterminateProgressBar"
-                        android:ellipsize="end"
-                        android:gravity="left|center_vertical"
-                        android:singleLine="true"
-                        android:text=""
-                        android:textSize="14sp" />
-            </RelativeLayout>
-
-            <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                <ProgressBar
-                        android:id="@+id/DeterminateProgressBar"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                <ImageView
-                        android:id="@+id/Cancel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/a_1_navigation_cancel_small_dark" />
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <net.osmand.plus.CustomPager
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/DownloadButton"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_marginTop="3dp"
-            android:gravity="center"
-            android:text="@string/download_files"
-            android:visibility="gone" />
-
-        <net.osmand.plus.activities.search.toolbar.SplitToolbar
-                android:id="@+id/bottomControls"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-    </LinearLayout>
-
-</TabHost>
+</LinearLayout>

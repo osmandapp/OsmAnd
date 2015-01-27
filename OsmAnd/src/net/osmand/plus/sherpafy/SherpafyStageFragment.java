@@ -115,7 +115,7 @@ public class SherpafyStageFragment extends Fragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.tab_content, container, false);
+		view = inflater.inflate(R.layout.download, container, false);
 		tabHost = (TabHost) view.findViewById(android.R.id.tabhost);
 		tabHost.setup();
 

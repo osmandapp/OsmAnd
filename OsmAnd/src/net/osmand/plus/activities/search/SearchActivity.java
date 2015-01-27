@@ -24,24 +24,17 @@ import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.util.Algorithms;
 import android.app.ActionBar;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBar.OnNavigationListener;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-
-import com.example.android.common.view.SlidingTabLayout;
 
 public class SearchActivity extends TabActivity implements OsmAndLocationListener {
 	public static final int POI_TAB_INDEX = 0;
@@ -86,8 +79,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		long t = System.currentTimeMillis();
-		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		setContentView(R.layout.search_main);
+		setContentView(R.layout.tab_content);
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		Integer tab = settings.SEARCH_TAB.get();
 		showOnlyOneTab = getIntent() != null && getIntent().getBooleanExtra(SHOW_ONLY_ONE_TAB, false);

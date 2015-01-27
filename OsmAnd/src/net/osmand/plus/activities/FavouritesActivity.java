@@ -27,10 +27,6 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
-import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.dashboard.DashDownloadMapsFragment;
-import net.osmand.plus.dashboard.DashUpdatesFragment;
-import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 /**
@@ -57,6 +53,7 @@ public class FavouritesActivity extends TabActivity {
 		setSupportProgressBarIndeterminateVisibility(false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle(R.string.favorites_Button);
+		getSupportActionBar().setElevation(0);
 //		getSupportActionBar().setTitle("");
 		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
 		File[] lf = ((OsmandApplication) getApplication()).getAppPath(TRACKS).listFiles();
@@ -74,7 +71,7 @@ public class FavouritesActivity extends TabActivity {
 			setContentView(R.layout.search_activity_single);
 			getSupportFragmentManager().beginTransaction().add(R.id.layout, new FavouritesTreeFragment()).commit();
 		} else {
-			setContentView(R.layout.search_main);
+			setContentView(R.layout.tab_content);
 
 			PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();

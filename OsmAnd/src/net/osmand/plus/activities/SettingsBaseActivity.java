@@ -303,8 +303,6 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
-		//getToolbar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.settings_activity);
 		settings = getMyApplication().getSettings();
@@ -316,7 +314,6 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 					modes.add(a);
 				}
 			}
-			//getToolbar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 			List<String> s = new ArrayList<String>();
 			for (ApplicationMode a : modes) {
 				s.add(a.toHumanString(getMyApplication()));

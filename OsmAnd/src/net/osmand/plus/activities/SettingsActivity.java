@@ -4,6 +4,7 @@ package net.osmand.plus.activities;
 import java.io.File;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import android.content.Intent;
@@ -33,6 +34,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings_pref);
 		PreferenceScreen screen = getPreferenceScreen();

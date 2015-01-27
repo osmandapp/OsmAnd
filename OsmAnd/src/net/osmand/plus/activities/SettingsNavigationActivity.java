@@ -5,13 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.DeviceAdminRecv;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.*;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -52,6 +48,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.routing_settings);
 	

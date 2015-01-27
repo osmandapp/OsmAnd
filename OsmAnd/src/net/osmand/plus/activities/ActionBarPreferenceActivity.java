@@ -43,6 +43,11 @@ public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
 				finish();
 			}
 		});
+		if (((OsmandApplication)getApplication()).getSettings().isLightActionBar()){
+			toolbar.setBackgroundColor(getResources().getColor(R.color.actionbar_light_color));
+		} else {
+			toolbar.setBackgroundColor(getResources().getColor(R.color.actionbar_dark_color));
+		}
 		getSpinner().setVisibility(View.GONE);
 		setProgressVisibility(false);
 	}

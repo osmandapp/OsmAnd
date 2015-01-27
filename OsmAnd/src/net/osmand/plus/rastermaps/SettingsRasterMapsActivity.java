@@ -5,6 +5,7 @@ import java.util.Map;
 
 import net.osmand.ResultMatcher;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.views.SeekBarPreference;
@@ -27,6 +28,7 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.online_map_settings);
 		PreferenceScreen grp = getPreferenceScreen();

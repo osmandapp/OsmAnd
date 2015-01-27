@@ -17,6 +17,7 @@ import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_I
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_MACRO;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_CONTINUOUS;
 ////
+import net.osmand.plus.OsmandApplication;
 import org.apache.commons.logging.Log;
 import net.osmand.PlatformUtil;
 import java.util.List;
@@ -36,6 +37,7 @@ public class SettingsAudioVideoActivity extends SettingsBaseActivity {
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.av_settings);
 		PreferenceScreen grp = getPreferenceScreen();

@@ -6,6 +6,7 @@
     <declare-styleable name="OsmAndTheme">
         <attr name="expandable_category_color" format="reference"/>
         <attr name="reset_image" format="reference"/>
+        <attr name="bottomToolBarColor" format="color" />
     </declare-styleable>
 
         <declare-styleable name="PagerSlidingTabStrip">
