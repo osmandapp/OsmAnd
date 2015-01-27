@@ -1840,4 +1840,6 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="my_location">Positzione mea</string>
     <string name="osm_editing_manage">Gesti</string>
     <string name="gps_status">Istadu GPS</string>
+    <string name="parking_place">Parchègiu</string>
+    <string name="remove_the_tag">BOGA SU TAG</string>
     </resources>
