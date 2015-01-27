@@ -25,6 +25,7 @@ public class MapPoiTypes {
 	public static MapPoiTypes getDefault() {
 		if(DEFAULT_INSTANCE == null){
 			DEFAULT_INSTANCE = new MapPoiTypes(null);
+			DEFAULT_INSTANCE.init();
 		}
 		return DEFAULT_INSTANCE;
 	}
@@ -46,15 +47,26 @@ public class MapPoiTypes {
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					String name = parser.getName();
-					if (name.equals("category")) { 
+					if (name.equals("poi_category")) { 
 						lastCategory = new PoiCategory(this, parser.getAttributeValue("","name"));
 						categories.add(lastCategory);
+					} else if (name.equals("poi_filter")) {
+						PoiFilter tp = new PoiFilter(this, lastCategory,
+								parser.getAttributeValue("", "name"));
+						lastFilter = tp;
+						lastCategory.addPoiType(tp);
 					} else if(name.equals("poi_type")){
 						PoiType tp = new PoiType(this,
 								lastCategory, parser.getAttributeValue("","name"));
-						lastCategory.addPoiType(tp);
+						tp.setOsmTag(parser.getAttributeValue("","tag"));
+						tp.setOsmValue(parser.getAttributeValue("","value"));
+						tp.setOsmTag2(parser.getAttributeValue("","tag2"));
+						tp.setOsmValue2(parser.getAttributeValue("","value2"));
+						
 						if(lastFilter != null) {
 							lastFilter.addPoiType(tp);
+						} else {
+							lastCategory.addPoiType(tp);
 						}
 					}
 				} else if (tok == XmlPullParser.END_TAG) {
@@ -81,7 +93,32 @@ public class MapPoiTypes {
 		}
 	}
 	
-	public static void main(String[] args) {
-		getDefault()	;
+	public List<PoiCategory> getCategories() {
+		return categories;
 	}
+	
+	private static void print(MapPoiTypes df) {
+		List<PoiCategory> pc = df.getCategories();
+		for(PoiCategory p : pc) {
+			System.out.println("Category " + p.getName());
+			for(PoiFilter f : p.getPoiFilters()) {
+				System.out.println(" Filter " + f.getName());
+				print("  ", f);
+			}
+			print(" ", p);
+		}
+		
+	}
+	
+	private static void print(String indent, PoiFilter f) {
+		for(PoiType pt : f.getPoiTypes()) {
+			System.out.println(indent + " Type " + pt.getName());
+		}
+	}
+
+	public static void main(String[] args) {
+		print(getDefault())	;
+	}
+
+	
 }
