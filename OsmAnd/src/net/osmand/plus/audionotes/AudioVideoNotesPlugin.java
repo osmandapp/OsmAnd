@@ -22,7 +22,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
-import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -45,6 +44,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.StackWidgetView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
+import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -553,7 +553,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private File getBaseFileName(double lat, double lon, OsmandApplication app, String ext) {
-		String basename = MapUtils.createShortLocString(lat, lon, 15);
+		String basename = MapUtils.createShortLinkString(lat, lon, 15);
 		int k = 1;
 		File f = app.getAppPath(IndexConstants.AV_INDEX_DIR);
 		f.mkdirs();
@@ -943,9 +943,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			encodeName = encodeName.substring(0, i);
 		}
 		r.file = f;
-		LatLon l = MapUtils.decodeShortLocString(encodeName);
-		r.lat = l.getLatitude();
-		r.lon = l.getLongitude();
+		GeoParsedPoint geo = MapUtils.decodeShortLinkString(encodeName);
+		r.lat = geo.getLatitude();
+		r.lon = geo.getLongitude();
 		Float heading = app.getLocationProvider().getHeading();
 		Location loc = app.getLocationProvider().getLastKnownLocation();
 		if (lastTakingPhoto != null && lastTakingPhoto.getName().equals(f.getName()) && heading != null) {

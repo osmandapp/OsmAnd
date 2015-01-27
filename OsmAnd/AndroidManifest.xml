@@ -79,7 +79,11 @@
 			</intent-filter>
 
 			<intent-filter>
-				<data android:scheme="http" android:host="download.osmand.net" android:path="go" />
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+				<data android:host="osmand.net" />
+				<data android:host="download.osmand.net" />
+				<data android:path="go" />
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
@@ -177,10 +181,16 @@
 				<category android:name="android.intent.category.BROWSABLE"/>
 			</intent-filter>
 			<intent-filter>
-				<data android:scheme="http" android:host="maps.google.com" />
-				<data android:scheme="https" android:host="maps.google.com" />
-				<data android:scheme="http" android:host="maps.yandex.ru" />
-				<data android:scheme="https" android:host="maps.yandex.ru" />
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+				<data android:host="maps.google.com" />
+				<data android:host="maps.yandex.ru" />
+				<data android:host="maps.yandex.com" />
+				<data android:host="www.openstreetmap.org" />
+				<data android:host="openstreetmap.org" />
+				<data android:host="osm.org" />
+				<data android:host="map.baidu.cn" />
+				<data android:host="map.baidu.com" />
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
@@ -188,13 +198,6 @@
 			<intent-filter>
 				<data android:scheme="http" android:host="www.google.com" android:pathPrefix="/maps" />
 				<data android:scheme="https" android:host="www.google.com" android:pathPrefix="/maps" />
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-			</intent-filter>
-			<intent-filter>
-				<data android:scheme="http" android:host="www.openstreetmap.org" />
-				<data android:scheme="https" android:host="www.openstreetmap.org" />
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
