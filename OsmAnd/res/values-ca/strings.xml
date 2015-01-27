@@ -1882,4 +1882,6 @@
     <string name="version_settings">Versions</string>
     <string name="rendering_attr_streetLighting_name">Enllumenat dels carrers</string>
     <string name="gps_status">Estat del GPS</string>
+    <string name="parking_place">Plaça d\'aparcament</string>
+    <string name="remove_the_tag">Treure l\'etiqueta</string>
     </resources>
