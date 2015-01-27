@@ -316,11 +316,11 @@
 	<string name="poi_car_wash">Neteja de cotxes</string>
 	<string name="poi_fuel">Benzinera</string>
 	<string name="poi_charging_station">Estació de recàrrega</string>
-	<string name="poi_seamark_wreck">Restes de naufragi</string>
+	<string name="poi_seamark_wreck">Naufragi, senyal marítim</string>
 
-	<string name="poi_seamark_radio_station">Emissor de ràdio</string>
+	<string name="poi_seamark_radio_station">Emissor de ràdio, senyal marítim</string>
 	<string name="poi_seamark_mooring">Amarratge</string>
-	<string name="poi_seamark_rock">Roca o corall</string>
+	<string name="poi_seamark_rock">Roca o corall, senyal marítim</string>
 	<string name="poi_rowing">Rem</string>
 	<string name="poi_rugby_union">Rugbi a 15</string>
 	<string name="poi_rugby_league">Rugbi a 13</string>
@@ -351,4 +351,11 @@
 	<string name="poi_theme_park">Parc temàtic</string>
 	
 	<string name="poi_attraction">Atractiu turístic</string>
+	<string name="poi_memorial">Memorial</string>
+	<string name="poi_artwork">Obra d\'art</string>
+	<string name="poi_battlefield">Antic camp de batalla</string>
+	<string name="poi_city_gate">Porta de la ciutat</string>
+	<string name="poi_fountain">Font ornamental</string>
+	<string name="poi_ruins_historic">Runes històriques</string>
+	<string name="poi_ship_historic">Vaixell històric</string>
 	</resources>
