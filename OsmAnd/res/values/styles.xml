@@ -71,6 +71,8 @@
 		<item name="windowActionBarOverlay">true</item>
         <item name="bottomToolBarColor">@color/tool_bar_light_color</item>
         <item name="pstsTabBackground">@color/actionbar_light_color</item>
+        <item name="pstsIndicatorColor">@color/color_white</item>
+        <item name="pstsTextColor">@color/color_white</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
     </style>
@@ -82,6 +84,7 @@
         <item name="windowActionBarOverlay">true</item>
         <item name="bottomToolBarColor">@color/tool_bar_dark_color</item>
         <item name="pstsTabBackground">@color/actionbar_dark_color</item>
+        <item name="pstsIndicatorColor">@color/actionbar_light_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
     </style>
@@ -89,13 +92,12 @@
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="reset_image">@drawable/ic_action_delete_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
         <item name="expandable_category_color">@color/group_background</item>
-        <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
-        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="bottomToolBarColor">@color/tool_bar_dark_color</item>
         <item name="pstsTabBackground">@color/actionbar_dark_color</item>
+        <item name="pstsIndicatorColor">@color/actionbar_light_color</item>
+        <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
+        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
     </style>
-
-
 
     <style name="Widget.Styled.ActionBarDark" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@color/actionbar_dark_color</item>
@@ -105,6 +107,12 @@
     <style name="Widget.Styled.ActionBarLight" parent="Widget.AppCompat.Light.ActionBar.Solid">
         <item name="background">@color/actionbar_light_color</item>
         <item name="android:background">@color/actionbar_light_color</item>
+        <item name="android:titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+        <item name="titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+    </style>
+
+    <style name="Widget.Styled.LightActionBarHeader" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/color_white</item>
     </style>
 
 	<style name="Widget.Spinner" parent="android:Widget">
