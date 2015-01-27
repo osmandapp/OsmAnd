@@ -1878,8 +1878,8 @@
     <string name="tracks">Traces</string>
     <string name="my_location">La vostra posició</string>
     <string name="osm_editing_manage">Gestió</string>
-    <string name="version_settings_descr">Baixada de les darreres actualitzacions</string>
+    <string name="version_settings_descr">Baixada de les darreres versions</string>
     <string name="version_settings">Versions</string>
     <string name="rendering_attr_streetLighting_name">Enllumenat dels carrers</string>
-    <string name="gps_status">Estat GPS</string>
+    <string name="gps_status">Estat del GPS</string>
     </resources>
