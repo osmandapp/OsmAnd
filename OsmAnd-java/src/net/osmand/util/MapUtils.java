@@ -8,6 +8,7 @@ import java.util.List;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadPoint;
+import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 
 
 /**
@@ -20,7 +21,9 @@ import net.osmand.data.QuadPoint;
  */
 public class MapUtils {
 	
-	private static final String BASE_SHORT_OSM_URL = "http://osm.org/go/";
+    // TODO change the hostname back to osm.org once HTTPS works for it
+    // https://github.com/openstreetmap/operations/issues/2
+    private static final String BASE_SHORT_OSM_URL = "https://openstreetmap.org/go/";
 	
 	/**
      * This array is a lookup table that translates 6-bit positive integer
@@ -32,7 +35,7 @@ public class MapUtils {
         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
         'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '@'
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '~'
     };
 
 	public static double getDistance(LatLon l, double latitude, double longitude){
@@ -275,16 +278,19 @@ public class MapUtils {
 		});
 	}
 	
+	public static String buildGeoUrl(double latitude, double longitude, int zoom) {
+        return "geo:" + ((float) latitude) + "," + ((float)longitude) + "?z=" + zoom;
+	}
 	
 	// Examples
 //	System.out.println(buildShortOsmUrl(51.51829d, 0.07347d, 16)); // http://osm.org/go/0EEQsyfu
 //	System.out.println(buildShortOsmUrl(52.30103d, 4.862927d, 18)); // http://osm.org/go/0E4_JiVhs
 //	System.out.println(buildShortOsmUrl(40.59d, -115.213d, 9)); // http://osm.org/go/TelHTB--
 	public static String buildShortOsmUrl(double latitude, double longitude, int zoom){
-        return BASE_SHORT_OSM_URL + createShortLocString(latitude, longitude, zoom) + "?m";
+        return BASE_SHORT_OSM_URL + createShortLinkString(latitude, longitude, zoom) + "?m";
 	}
 
-	public static String createShortLocString(double latitude, double longitude, int zoom) {
+	public static String createShortLinkString(double latitude, double longitude, int zoom) {
 		long lat = (long) (((latitude + 90d)/180d)*(1L << 32));
 		long lon = (long) (((longitude + 180d)/360d)*(1L << 32));
 		long code = interleaveBits(lon, lat);
@@ -301,44 +307,44 @@ public class MapUtils {
 		return str;
 	}
 	
-	@SuppressWarnings("unused")
-	public static LatLon decodeShortLocString(String s) {
+	public static GeoParsedPoint decodeShortLinkString(String s) {
+		// convert old shortlink format to current one
+		s = s.replaceAll("@", "~");
+		int i = 0;
 		long x = 0;
 		long y = 0;
-	    int z = 0;
-		int z_offset = 0;
+		int z = -8;
 
-		for (int i = 0; i < s.length(); i++) {
-			if (s.charAt(i) == '-') {
-				z_offset--;
-				continue;
-			}
+		for (i = 0; i < s.length(); i++) {
+			int digit = -1;
 			char c = s.charAt(i);
-			for (int j = 0; j < intToBase64.length; j++) {
+			for (int j = 0; j < intToBase64.length; j++)
 				if (c == intToBase64[j]) {
-					for (int k = 0; k < 3; k++) {
-						x <<= 1;
-						if ((j & 32) != 0) {
-							x = x | 1;
-						}
-						j <<= 1;
-						y <<= 1;
-						if ((j & 32) != 0) {
-							y = y | 1;
-						}
-						j <<= 1;
-					}
-					z += 3;
+					digit = j;
 					break;
 				}
+			if (digit < 0)
+				break;
+			if (digit < 0)
+				break;
+			// distribute 6 bits into x and y
+			x <<= 3;
+			y <<= 3;
+			for (int j = 2; j >= 0; j--) {
+				x |= ((digit & (1 << (j+j+1))) == 0 ? 0 : (1 << j));
+				y |= ((digit & (1 << (j+j))) == 0 ? 0 : (1 << j));
 			}
+			z += 3;
 		}
-		x <<= (32 - z);
-		y <<= (32 - z);
-//		int zoom = z - 8 - ((3 + z_offset) % 3);
-		double dlat = (180d * (y) / ((double)(1L << 32))) - 90d;
-		double dlon = (360d * (x)/ ((double)(1L << 32))) - 180d;
-		return new LatLon(dlat, dlon);
+		double lon = x * Math.pow(2, 2 - 3 * i) * 90. - 180;
+		double lat = y * Math.pow(2, 2 - 3 * i) * 45. - 90;
+		// adjust z
+		if(i < s.length() && s.charAt(i) == '-') {
+			z -= 2;
+			if(i + 1 < s.length() && s.charAt(i + 1) == '-')
+				z++;
+		}
+		return new GeoParsedPoint(lat, lon, z);
 	}
 	
 	/**	
