@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="actionbar_color">#ff8f00</color>
+    <color name="actionbar_dark_color">#39464d</color>
+	<color name="tool_bar_dark_color">#CC080B0D</color>
+	<color name="actionbar_light_color">#ff8f00</color>
+	<color name="tool_bar_light_color">#CC080B0D</color>
+
 	<color name="dashboard_descr_colol">#727272</color>
 	<color name="dashboard_background">#eaeaea</color>
-	<color name="dashboard_divider">#f0f0f0</color>
+	<color name="dashboard_divider">#F0F0F0</color>
 	<color name="dashboard_black">#212121</color>
 	<color name="dashboard_blue">#536DFE</color>
     <color name="gpx_color_point">#cd2c33</color>

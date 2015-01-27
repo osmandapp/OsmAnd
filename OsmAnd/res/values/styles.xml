@@ -69,33 +69,50 @@
         <item name="expandable_category_color">@color/group_background</item>
         <item name="reset_image">@drawable/ic_action_delete_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
 		<item name="windowActionBarOverlay">true</item>
+        <item name="bottomToolBarColor">@color/tool_bar_light_color</item>
+        <item name="pstsTabBackground">@color/actionbar_light_color</item>
+        <item name="pstsIndicatorColor">@color/color_white</item>
+        <item name="pstsTextColor">@color/color_white</item>
+        <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
+        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
     </style>
-    <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!--<item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowBackground">@color/activity_background</item>
-        <item name="android:colorBackground">@color/activity_background</item>
-        <item name="android:colorBackgroundCacheHint">?android:attr/colorBackground</item>
-         <item name="android:textColor">@color/activity_text</item>
-        <item name="android:textColorPrimary">@color/activity_text</item>
-        <item name="android:textColorSecondary">@color/activity_text</item>
-        <item name="android:textColorTertiary">@color/activity_text</item>
-        <item name="android:listViewStyle">@style/OsmandListView</item> 
-        -->
-        <item name="reset_image">@drawable/ic_action_delete_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
-        <item name="expandable_category_color">@color/group_background</item>
-        <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
-        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
-    </style>
+
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
         <item name="reset_image">@drawable/ic_action_delete_dark</item> <!--  @drawable/a_1_navigation_cancel_dark -->
         <item name="expandable_category_color">?android:attr/colorBackground</item>
-		<item name="android:spinnerStyle">@style/Widget.Spinner</item>
-		<item name="windowActionBarOverlay">true</item>
-     </style>
-     
-    <style name="Widget.Styled.ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="background">@drawable/bg_striped</item>
-        <item name="android:background">@drawable/bg_striped</item>
+        <item name="android:spinnerStyle">@style/Widget.Spinner</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="bottomToolBarColor">@color/tool_bar_dark_color</item>
+        <item name="pstsTabBackground">@color/actionbar_dark_color</item>
+        <item name="pstsIndicatorColor">@color/actionbar_light_color</item>
+        <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
+        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
+    </style>
+
+    <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="reset_image">@drawable/ic_action_delete_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
+        <item name="expandable_category_color">@color/group_background</item>
+        <item name="bottomToolBarColor">@color/tool_bar_dark_color</item>
+        <item name="pstsTabBackground">@color/actionbar_dark_color</item>
+        <item name="pstsIndicatorColor">@color/actionbar_light_color</item>
+        <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
+        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
+    </style>
+
+    <style name="Widget.Styled.ActionBarDark" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@color/actionbar_dark_color</item>
+        <item name="android:background">@color/actionbar_dark_color</item>
+    </style>
+
+    <style name="Widget.Styled.ActionBarLight" parent="Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="background">@color/actionbar_light_color</item>
+        <item name="android:background">@color/actionbar_light_color</item>
+        <item name="android:titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+        <item name="titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+    </style>
+
+    <style name="Widget.Styled.LightActionBarHeader" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/color_white</item>
     </style>
 
 	<style name="Widget.Spinner" parent="android:Widget">

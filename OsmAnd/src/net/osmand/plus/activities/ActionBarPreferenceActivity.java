@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import android.app.Activity;
+import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
@@ -43,6 +44,13 @@ public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
 				finish();
 			}
 		});
+		if (((OsmandApplication)getApplication()).getSettings().isLightActionBar()){
+			toolbar.setBackgroundColor(getResources().getColor(R.color.actionbar_light_color));
+			toolbar.setTitleTextColor(getResources().getColor(R.color.color_white));
+		} else {
+			toolbar.setBackgroundColor(getResources().getColor(R.color.actionbar_dark_color));
+
+		}
 		getSpinner().setVisibility(View.GONE);
 		setProgressVisibility(false);
 	}

@@ -1,6 +1,7 @@
 package net.osmand.plus.osmedit;
 
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import android.content.Intent;
@@ -17,6 +18,7 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.osm_settings);
 		PreferenceScreen grp = getPreferenceScreen();

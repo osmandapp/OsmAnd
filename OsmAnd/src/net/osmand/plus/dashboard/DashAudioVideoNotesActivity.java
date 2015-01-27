@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Denis on 23.12.2014.
+ * Created by Denis
+ * on 23.12.2014.
  */
 public class DashAudioVideoNotesActivity extends ActionBarActivity {
 	AudioVideoNotesPlugin plugin;
@@ -33,17 +34,13 @@ public class DashAudioVideoNotesActivity extends ActionBarActivity {
 		setContentView(R.layout.editing_poi_filter);
 
 		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
-		int c = getResources().getColor(R.color.actionbar_color);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
 			Window window = getWindow();
 			window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 			window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-			window.setStatusBarColor(c);
 		}
-		ColorDrawable color = new ColorDrawable(c);
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle(R.string.audionotes_plugin_name);
-		actionBar.setBackgroundDrawable(color);
 		actionBar.setIcon(android.R.color.transparent);
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);

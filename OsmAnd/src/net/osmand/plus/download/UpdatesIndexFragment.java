@@ -21,7 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Denis on 09.09.2014.
+ * Created by Denis
+ * on 09.09.2014.
  */
 public class UpdatesIndexFragment extends ListFragment {
 

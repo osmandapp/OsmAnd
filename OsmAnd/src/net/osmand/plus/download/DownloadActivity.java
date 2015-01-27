@@ -14,7 +14,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
@@ -28,11 +27,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TabHost;
 import android.widget.TextView;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
@@ -70,12 +67,9 @@ public class DownloadActivity extends BaseDownloadActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
-		setupIntermediateProgressBar();
 		updateDownloads();
 
-
-		setContentView(R.layout.tab_content);
-		findViewById(R.id.bottomControls).setVisibility(View.GONE);
+		setContentView(R.layout.download);
 		singleTab = getIntent() != null && getIntent().getBooleanExtra(SINGLE_TAB, false);
 		int currentTab = 0;
 		String tab = getIntent() == null || getIntent().getExtras() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);

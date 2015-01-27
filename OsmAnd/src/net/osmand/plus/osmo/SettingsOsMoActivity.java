@@ -4,6 +4,7 @@ package net.osmand.plus.osmo;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
@@ -37,6 +38,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.osmo_settings);
 		PreferenceScreen grp = getPreferenceScreen();

@@ -1,6 +1,7 @@
 package net.osmand.access;
 
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
@@ -22,6 +23,7 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.accessibility_preferences);
 		PreferenceScreen grp = getPreferenceScreen();
