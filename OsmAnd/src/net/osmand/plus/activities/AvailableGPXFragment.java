@@ -192,9 +192,18 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				.icons(R.drawable.ic_action_refresh_dark, R.drawable.ic_action_refresh_dark).listen(listener).reg();
 		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
-			MenuItem item;
+			final MenuItem item;
 			item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+			if (isOrientationPortrait()){
+				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem menuItem) {
+						onOptionsItemSelected(item);
+						return true;
+					}
+				});
+			}
 			if (optionsMenuAdapter.getImageId(j, isLightActionBar()) != 0) {
 				item.setIcon(optionsMenuAdapter.getImageId(j, false));
 			}
