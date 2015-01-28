@@ -84,7 +84,6 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		Integer tab = settings.SEARCH_TAB.get();
 		showOnlyOneTab = getIntent() != null && getIntent().getBooleanExtra(SHOW_ONLY_ONE_TAB, false);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle("");
 		getSupportActionBar().setElevation(0);
 

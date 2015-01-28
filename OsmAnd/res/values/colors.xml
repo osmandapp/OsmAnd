@@ -3,7 +3,7 @@
     <color name="actionbar_dark_color">#39464d</color>
 	<color name="tool_bar_dark_color">#CC080B0D</color>
 	<color name="actionbar_light_color">#ff8f00</color>
-	<color name="tool_bar_light_color">#CC080B0D</color>
+	<color name="tool_bar_light_color">#b4ff8f00</color>
 
 	<color name="dashboard_descr_colol">#727272</color>
 	<color name="dashboard_background">#eaeaea</color>

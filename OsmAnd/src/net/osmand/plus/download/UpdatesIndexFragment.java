@@ -107,8 +107,7 @@ public class UpdatesIndexFragment extends ListFragment {
 
 		if (getMyApplication().getAppCustomization().showDownloadExtraActions()) {
 			MenuItem item = menu.add(0, DownloadIndexFragment.RELOAD_ID, 0, R.string.update_downlod_list);
-			item.setIcon(isLightActionBar() ? R.drawable.ic_action_refresh_light :
-				R.drawable.ic_action_refresh_dark);
+			item.setIcon(R.drawable.ic_action_refresh_dark);
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			SubMenu s = menu.addSubMenu(0, DownloadIndexFragment.MORE_ID, 0, R.string.default_buttons_other_actions);
 			s.add(0, DownloadIndexFragment.SELECT_ALL_ID, 0, R.string.select_all);

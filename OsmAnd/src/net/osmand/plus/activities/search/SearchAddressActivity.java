@@ -1,14 +1,14 @@
 package net.osmand.plus.activities.search;
 
 import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import net.osmand.plus.OsmandApplication;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 
 
-public class SearchAddressActivity extends ActionBarActivity {
+public class SearchAddressActivity extends OsmandActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,6 @@ public class SearchAddressActivity extends ActionBarActivity {
 			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		}
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		if (savedInstanceState == null) {
 			// During initial setup, plug in the details fragment.
 			SearchAddressFragment details = new SearchAddressFragment();

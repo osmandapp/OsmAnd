@@ -40,7 +40,6 @@ public class PrintDialogActivity extends ActionBarProgressActivity {
 		}
 		super.onCreate(icicle);
 		setSupportProgressBarIndeterminateVisibility(false);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle(R.string.print_route);
 
 		setContentView(R.layout.print_dialog);

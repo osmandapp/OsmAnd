@@ -889,7 +889,7 @@ public class MapActivityActions implements DialogProvider {
 			}).reg();
 
 		optionsMenuHelper.item(R.string.settings_activity)
-		.icons(R.drawable.ic_action_settings_light, R.drawable.ic_action_settings_dark)
+		.icons(R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_light)
 		.listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

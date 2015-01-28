@@ -5,12 +5,12 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
@@ -36,7 +36,7 @@ import android.widget.Toast;
 /**
  * Test Voice activity
  */
-public class TestVoiceActivity extends ActionBarActivity {
+public class TestVoiceActivity extends OsmandActionBarActivity {
 
 
 
@@ -48,8 +48,7 @@ public class TestVoiceActivity extends ActionBarActivity {
 			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		}
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		
+
 		final OsmandApplication app = ((OsmandApplication) getApplication());
 		
 		
