@@ -172,7 +172,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				} else if (itemId == R.string.show_gpx_route) {
 					openShowOnMapMode();
 				} else if (itemId == R.string.local_index_mi_delete) {
-					openSelectionMode(itemId, R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light,
+					openSelectionMode(itemId, R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark,
 							new DialogInterface.OnClickListener() {
 
 								@Override
@@ -278,7 +278,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				enableSelectionMode(true);
 				updateSelectionMode(mode);
 				MenuItem it = menu.add(R.string.show_gpx_route);
-				it.setIcon(!isLightActionBar() ? R.drawable.ic_action_map_marker_dark : R.drawable.ic_action_map_marker_light);
+				it.setIcon(!isLightActionBar() ? R.drawable.ic_action_map_marker_dark : R.drawable.ic_action_map_marker_dark);
 				MenuItemCompat.setShowAsAction(it, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 				return true;
 			}

@@ -430,7 +430,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				enableSelectionMode(true);
 				createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete,
-						R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
+						R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark,
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				favoritesSelected.clear();
 				groupsToDelete.clear();
