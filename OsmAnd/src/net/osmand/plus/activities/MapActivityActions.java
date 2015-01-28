@@ -859,16 +859,6 @@ public class MapActivityActions implements DialogProvider {
 				}).reg();
 		
 
-		optionsMenuHelper.item(R.string.configure_map).icons(R.drawable.ic_action_layers_dark, R.drawable.ic_action_layers_light)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						currentDrawer = DrawerType.CONFIGURE_MAP;
-						prepareConfigureMap();
-						return false;
-					}
-				}).reg();
-		
 		optionsMenuHelper.item(R.string.show_point_options)
 		.icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light)
 		.listen(new OnContextMenuClick() {
@@ -878,7 +868,26 @@ public class MapActivityActions implements DialogProvider {
 				return true;
 			}
 		}).reg();
-		
+
+		optionsMenuHelper.item(R.string.configure_map).icons(R.drawable.ic_action_layers_dark, R.drawable.ic_action_layers_light)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						currentDrawer = DrawerType.CONFIGURE_MAP;
+						prepareConfigureMap();
+						return false;
+					}
+				}).reg();
+
+		optionsMenuHelper.item(R.string.layer_map_appearance).icons(R.drawable.ic_configure_screen_dark, R.drawable.ic_configure_screen_light)
+			.listen(new OnContextMenuClick() {
+				@Override
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					prepareConfigureScreen();
+					return false;
+				}
+			}).reg();
+
 		optionsMenuHelper.item(R.string.settings_activity)
 		.icons(R.drawable.ic_action_settings_light, R.drawable.ic_action_settings_dark)
 		.listen(new OnContextMenuClick() {
@@ -890,16 +899,6 @@ public class MapActivityActions implements DialogProvider {
 			}
 		}).reg();
 
-		optionsMenuHelper.item(R.string.layer_map_appearance).icons(R.drawable.ic_configure_screen_dark, R.drawable.ic_configure_screen_light)
-			.listen(new OnContextMenuClick() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					prepareConfigureScreen();
-					return false;
-				}
-			}).reg();
-
-		
 		//////////// Others
 		final OsmAndLocationProvider loc = app.getLocationProvider();
 		// this is development functionality so it should stay preferrably here
