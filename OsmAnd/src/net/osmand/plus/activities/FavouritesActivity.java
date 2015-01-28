@@ -51,11 +51,9 @@ public class FavouritesActivity extends TabActivity {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(icicle);
 		setSupportProgressBarIndeterminateVisibility(false);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle(R.string.favorites_Button);
 		getSupportActionBar().setElevation(0);
-//		getSupportActionBar().setTitle("");
-		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
+
 		File[] lf = ((OsmandApplication) getApplication()).getAppPath(TRACKS).listFiles();
 		boolean hasGpx =  false;
 		if(lf != null) {
@@ -98,6 +96,7 @@ public class FavouritesActivity extends TabActivity {
 			}
 			updateSelectedTracks();
 		}
+		//setupHomeButton();
 	}
 
 	@Override

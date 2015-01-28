@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -17,7 +16,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 
-public class HelpActivity extends ActionBarActivity {
+public class HelpActivity extends OsmandActionBarActivity {
 	
 	private static final String FILE_ANDROID_ASSET_HELP = "file:///android_asset/help/";
 	public static final String URL = "url";
@@ -37,7 +36,6 @@ public class HelpActivity extends ActionBarActivity {
 		}
 		super.onCreate(savedInstanceState);
 		wv = new WebView(this);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		String title = getString(R.string.help);
 		String url = "index.html";
 		if(getIntent() != null) {

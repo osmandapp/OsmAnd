@@ -501,16 +501,16 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			}
 		};
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
-						.icons(R.drawable.ic_action_refresh_dark, R.drawable.ic_action_refresh_light)
+						.icon(R.drawable.ic_action_refresh_dark)
 						.listen(listener).position(1).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_backup)
-						.icons(R.drawable.ic_action_undo_dark, R.drawable.ic_action_undo_light)
+						.icon(R.drawable.ic_action_undo_dark)
 						.listen(listener).position(2).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_restore)
-				.icons(R.drawable.ic_action_redo_dark, R.drawable.ic_action_redo_dark)
+				.icon(R.drawable.ic_action_redo_dark)
 						.listen(listener).position(3).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_delete)
-						.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light)
+						.icon(R.drawable.ic_action_delete_dark)
 						.listen(listener).position(4).reg();
 		OsmandPlugin.onOptionsMenuActivity(getDownloadActivity(), null, optionsMenuAdapter);
 		// doesn't work correctly

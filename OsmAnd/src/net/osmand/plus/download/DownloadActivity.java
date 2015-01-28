@@ -8,6 +8,8 @@ import java.util.Map;
 
 import android.app.FragmentManager;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentPagerAdapter;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
@@ -151,9 +153,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 			}
 		}
 		changeType(downloadTypes.get(0));
-
-		getSupportActionBar().setHomeButtonEnabled(true);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 

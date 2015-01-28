@@ -1,7 +1,6 @@
 package net.osmand.plus.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -9,7 +8,7 @@ import android.widget.ProgressBar;
  * Created by Denis
  * on 23.01.15.
  */
-public class ActionBarProgressActivity extends ActionBarActivity {
+public class ActionBarProgressActivity extends OsmandActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
