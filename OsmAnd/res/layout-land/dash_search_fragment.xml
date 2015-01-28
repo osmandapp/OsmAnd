@@ -3,7 +3,7 @@
     android:id="@+id/search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_cardui"
+    android:background="?attr/card_bg"
     android:orientation="vertical" >
 
     <LinearLayout

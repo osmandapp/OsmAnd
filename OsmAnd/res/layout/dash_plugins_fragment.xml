@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:orientation="vertical"
-			  android:background="@drawable/bg_cardui"
+			  android:background="?attr/card_bg"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent">
 	<LinearLayout android:orientation="horizontal"

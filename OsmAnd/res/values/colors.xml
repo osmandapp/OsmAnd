@@ -82,5 +82,7 @@
 	<color name="sherpafy_add_text">#b9b9b9</color>
 
     <color name="dark_drawer_bg_color">#303030</color>
-	
+
+	<color name="card_bg_color_light">#ffffff</color>
+	<color name="card_bg_color_dark">#333b40</color>
 </resources>

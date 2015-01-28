@@ -75,6 +75,7 @@
         <item name="pstsTextColor">@color/color_white</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
+		<item name="card_bg">@drawable/bg_card_light</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -87,6 +88,7 @@
         <item name="pstsIndicatorColor">@color/actionbar_light_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
+		<item name="card_bg">@drawable/bg_card_dark</item>
     </style>
 
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
