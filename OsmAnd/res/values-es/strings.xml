@@ -1888,13 +1888,13 @@
     <string name="rendering_value__name">Por defecto</string>
 	<string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
 	<string name="navigation_over_track">¿Empezar navegación sobre traza?</string>
-	<string name="avoid_roads_msg">Puedes cambiar la ruta seleccionando los caminos a evitar</string>
+	<string name="avoid_roads_msg">Puedes obtener una ruta alternativa seleccionando las carreteras a evitar</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Configurar un proxy de acceso a Internet</string>
     <string name="settings_privacy">Privacidad</string>
     <string name="recents">RECIENTES</string>
 	<string name="enable_proxy_title">Activar Proxy HTTP</string>
-	<string name="enable_proxy_descr">Configurar Proxy HTTP para todas las peticiones de red</string>
+	<string name="enable_proxy_descr">Configura Proxy HTTP para todas las peticiones de red</string>
 	<string name="proxy_host_title">Host proxy</string>
 	<string name="proxy_port_title">Puerto del proxy</string>
 	<string name="proxy_port_descr">Configurar el número de puerto de tu proxy (p.e. 8118)</string>
@@ -1904,8 +1904,8 @@
     <string name="gps_status">Estado GPS</string>
     <string name="rendering_attr_streetLighting_name">Iluminación de la calle</string>
     <string name="points">Puntos</string>
-    <string name="tracks">Pistas</string>
-    <string name="my_location">Mi localización</string>
+    <string name="tracks">Trazas</string>
+    <string name="my_location">Mi ubicación</string>
     <string name="osm_editing_manage">Administrar</string>
     <string name="parking_place">Área de aparcamiento</string>
     <string name="remove_the_tag">QUITA LA ETIQUETA</string>
