@@ -302,22 +302,12 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
-		boolean portrait = orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
-				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
-		if (portrait) {
-			menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
-		} else {
-			((FavouritesActivity) getActivity()).getClearToolbar(false);
-		}
 
 		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
-				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 		searchView = new SearchView(getActivity());
 		MenuItemCompat.setActionView(mi, searchView);
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-
 			@Override
 			public boolean onQueryTextSubmit(String query) {
 				favouritesAdapter.getFilter().filter(query);
@@ -331,7 +321,6 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			}
 		});
 		MenuItemCompat.setOnActionExpandListener(mi, new MenuItemCompat.OnActionExpandListener() {
-
 			@Override
 			public boolean onMenuItemActionExpand(MenuItem item) {
 				return true;
@@ -345,6 +334,17 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 				return true;
 			}
 		});
+
+		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
+		boolean portrait = orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
+				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+		if (portrait) {
+			menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
+		} else {
+			((FavouritesActivity) getActivity()).getClearToolbar(false);
+		}
+
+
 
 		if (!MenuItemCompat.isActionViewExpanded(mi)) {
 			createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_dark,

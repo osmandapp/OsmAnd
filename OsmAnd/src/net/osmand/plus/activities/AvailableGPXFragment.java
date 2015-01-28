@@ -30,7 +30,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.util.Algorithms;
@@ -134,14 +133,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
-		boolean portrait = orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
-				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
-		if (portrait) {
-			menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
-		} else {
-			((FavouritesActivity) getActivity()).getClearToolbar(false);
-		}
 
 		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
 				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS
@@ -162,6 +153,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				return true;
 			}
 		});
+
+		if (isOrientationPortrait()) {
+			menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
+		} else {
+			((FavouritesActivity) getActivity()).getClearToolbar(false);
+		}
+
+
 
 		optionsMenuAdapter = new ContextMenuAdapter(getActivity());
 		OnContextMenuClick listener = new OnContextMenuClick() {
@@ -197,10 +196,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			if (optionsMenuAdapter.getImageId(j, isLightActionBar()) != 0) {
-				item.setIcon(optionsMenuAdapter.getImageId(j, isLightActionBar()));
+				item.setIcon(optionsMenuAdapter.getImageId(j, false));
 			}
 
 		}
+	}
+
+	private boolean isOrientationPortrait() {
+		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
+		return orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
+				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
 	}
 
 	public void doAction(int actionResId) {
@@ -228,12 +233,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public void showProgressBar() {
-		//getActivity().setSupportProgressBarIndeterminateVisibility(true);
+		((FavouritesActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(true);
 	}
 
 	public void hideProgressBar() {
 		if (getActivity() != null){
-			//getActivity().setSupportProgressBarIndeterminateVisibility(false);
+			((FavouritesActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 		}
 	}
 
@@ -247,7 +252,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
-		((FavouritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
+		if (isOrientationPortrait()) {
+			((FavouritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
+		}
 	}
 
 	private void openShowOnMapMode() {
@@ -685,7 +692,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 			View v = convertView;
-			final GpxInfo child = (GpxInfo) getChild(groupPosition, childPosition);
+			final GpxInfo child = getChild(groupPosition, childPosition);
 			if (v == null) {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				v = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
@@ -892,12 +899,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPreExecute() {
-			((ActionBarActivity)getActivity()).setProgressBarIndeterminateVisibility(true);
+			getActivity().setProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			((ActionBarActivity)getActivity()).setProgressBarIndeterminateVisibility(false);
+			getActivity().setProgressBarIndeterminateVisibility(false);
 			AccessibleToast.makeText(getActivity(), result, Toast.LENGTH_LONG).show();
 		}
 	}
@@ -944,7 +951,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPostExecute(String result) {
 			selectedGpxHelper.runUiListeners();
-			((ActionBarActivity)getActivity()).setProgressBarIndeterminateVisibility(false);
+			getActivity().setProgressBarIndeterminateVisibility(false);
 			if (showOnMap && toShow != null) {
 				getMyApplication().getSettings().setMapLocationToShow(toShow.lat, toShow.lon,
 						getMyApplication().getSettings().getLastKnownMapZoom());
@@ -975,13 +982,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			@Override
 			protected void onPreExecute() {
-				((ActionBarActivity)getActivity()).setProgressBarIndeterminateVisibility(true);
+				getActivity().setProgressBarIndeterminateVisibility(true);
 			}
 
 			@Override
 			protected void onPostExecute(Void result) {
 				if (getActivity() != null){
-					((ActionBarActivity)getActivity()).setProgressBarIndeterminateVisibility(false);
+					getActivity().setProgressBarIndeterminateVisibility(false);
 				}
 				if (info.gpx != null){
 					getMyApplication().getSelectedGpxHelper().selectGpxFile(info.gpx, selected, true);

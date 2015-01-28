@@ -85,8 +85,6 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		}
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setTitle(R.string.search_activity);
 		getSupportActionBar().setIcon(R.drawable.tab_search_address_icon);
 	}
 	

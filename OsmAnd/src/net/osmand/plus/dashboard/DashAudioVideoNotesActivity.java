@@ -2,18 +2,16 @@ package net.osmand.plus.dashboard;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 
 import java.util.ArrayList;
@@ -23,7 +21,7 @@ import java.util.List;
  * Created by Denis
  * on 23.12.2014.
  */
-public class DashAudioVideoNotesActivity extends ActionBarActivity {
+public class DashAudioVideoNotesActivity extends OsmandActionBarActivity {
 	AudioVideoNotesPlugin plugin;
 	List<AudioVideoNotesPlugin.Recording> items;
 	NotesAdapter listAdapter;
@@ -42,8 +40,7 @@ public class DashAudioVideoNotesActivity extends ActionBarActivity {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle(R.string.audionotes_plugin_name);
 		actionBar.setIcon(android.R.color.transparent);
-		actionBar.setHomeButtonEnabled(true);
-		actionBar.setDisplayHomeAsUpEnabled(true);
+
 		findViewById(android.R.id.list).setBackgroundColor(getResources().getColor(R.color.dashboard_background));
 	}
 
