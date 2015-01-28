@@ -846,7 +846,7 @@ public class GeoPointParserUtil {
 
 		private String formatDouble(double d) {
 			if(d == (long) d)
-				return String.format("%d", (long)d);
+				return String.format(Locale.ENGLISH, "%d", (long)d);
 			else
 				return String.format("%s", d);
 		}
