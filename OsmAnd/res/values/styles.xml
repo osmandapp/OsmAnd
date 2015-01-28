@@ -71,6 +71,7 @@
 		<item name="windowActionBarOverlay">true</item>
         <item name="bottomToolBarColor">@color/tool_bar_light_color</item>
         <item name="pstsTabBackground">@color/actionbar_light_color</item>
+        <item name="pstsUnderlineColor">@color/actionbar_light_color</item>
         <item name="pstsIndicatorColor">@color/color_white</item>
         <item name="pstsTextColor">@color/color_white</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
@@ -84,7 +85,9 @@
         <item name="windowActionBarOverlay">true</item>
         <item name="bottomToolBarColor">@color/tool_bar_dark_color</item>
         <item name="pstsTabBackground">@color/actionbar_dark_color</item>
+        <item name="pstsUnderlineColor">@color/actionbar_dark_color</item>
         <item name="pstsIndicatorColor">@color/actionbar_light_color</item>
+        <item name="pstsTextColor">@color/color_white</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
     </style>

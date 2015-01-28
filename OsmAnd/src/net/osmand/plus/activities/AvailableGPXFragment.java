@@ -12,6 +12,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import android.content.pm.ActivityInfo;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
@@ -29,7 +30,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -131,8 +134,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
-		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_light,
+		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
+		boolean portrait = orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
+				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+		if (portrait) {
+			menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
+		} else {
+			((FavouritesActivity) getActivity()).getClearToolbar(false);
+		}
+
+		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
 				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS
 						| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 		searchView = new SearchView(getActivity());
@@ -175,11 +186,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		};
 		optionsMenuAdapter.item(R.string.show_gpx_route)
-				.icons(R.drawable.ic_action_map_marker_dark, R.drawable.ic_action_map_marker_light).listen(listener).reg();
+				.icons(R.drawable.ic_action_map_marker_dark, R.drawable.ic_action_map_marker_dark).listen(listener).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_delete)
-				.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light).listen(listener).reg();
+				.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark).listen(listener).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
-				.icons(R.drawable.ic_action_refresh_dark, R.drawable.ic_action_refresh_light).listen(listener).reg();
+				.icons(R.drawable.ic_action_refresh_dark, R.drawable.ic_action_refresh_dark).listen(listener).reg();
 		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;

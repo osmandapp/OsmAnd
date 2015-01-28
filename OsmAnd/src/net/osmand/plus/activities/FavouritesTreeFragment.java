@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import android.content.pm.ActivityInfo;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.SearchView;
@@ -34,6 +35,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
@@ -300,10 +302,17 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
-		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_light,
-				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS
-						| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
+		boolean portrait = orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
+				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+		if (portrait) {
+			menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
+		} else {
+			((FavouritesActivity) getActivity()).getClearToolbar(false);
+		}
+
+		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
+				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		searchView = new SearchView(getActivity());
 		MenuItemCompat.setActionView(mi, searchView);
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -338,11 +347,11 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 		});
 
 		if (!MenuItemCompat.isActionViewExpanded(mi)) {
-			createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_light,
+			createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_dark,
 					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			createMenuItem(menu, SELECT_DESTINATIONS_ID, R.string.select_destination_and_intermediate_points, R.drawable.ic_action_flage_light,
+			createMenuItem(menu, SELECT_DESTINATIONS_ID, R.string.select_destination_and_intermediate_points, R.drawable.ic_action_flage_dark,
 					R.drawable.ic_action_flage_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			createMenuItem(menu, DELETE_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_light,
+			createMenuItem(menu, DELETE_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_dark,
 					R.drawable.ic_action_delete_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 //			createMenuItem(menu, EXPORT_ID, R.string.export_fav, R.drawable.ic_action_gsave_light,
 //					R.drawable.ic_action_gsave_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM);
