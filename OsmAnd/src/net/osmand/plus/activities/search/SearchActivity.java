@@ -78,8 +78,9 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	protected void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
+		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		long t = System.currentTimeMillis();
-		setContentView(R.layout.tab_content);
+ 		setContentView(R.layout.tab_content);
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		Integer tab = settings.SEARCH_TAB.get();
 		showOnlyOneTab = getIntent() != null && getIntent().getBooleanExtra(SHOW_ONLY_ONE_TAB, false);

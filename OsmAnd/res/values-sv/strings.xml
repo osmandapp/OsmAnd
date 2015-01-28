@@ -1769,7 +1769,7 @@
     <string name="voices">Röstprompter</string>
 	<string name="speak_pedestrian">Meddela om övergångsställen</string>
     <string name="rendering_value__name">Standard</string>
-	<string name="avoid_roads_msg">Du kan ändra rutten genom att markera vägar att undvika</string>
+	<string name="avoid_roads_msg">Du kan ändra till en alternativ rutt genom att välja vägar att undvika</string>
     <string name="recents">TIDIGARE</string>
 	<string name="save_track_to_gpx_globally_headline">Spårloggning på begäran</string>
 	<string name="proxy_pref_title">Proxy</string>
@@ -1783,4 +1783,13 @@
 	<string name="proxy_port_title">Proxy-port</string>
 	<string name="proxy_port_descr">Konfigurera ditt proxy-portnummer (t.ex. 8118)</string>
 	<string name="navigation_over_track">Starta navigering längs spår?</string>
-	</resources>
+	<string name="parking_place">P-plats</string>
+    <string name="remove_the_tag">TA BORT TAGGEN</string>
+    <string name="gps_status">GPS-status</string>
+    <string name="version_settings_descr">Hämta \"nattversioner\"</string>
+    <string name="version_settings">Versioner</string>
+    <string name="points">Punkter</string>
+    <string name="tracks">Spår</string>
+    <string name="my_location">Min plats</string>
+    <string name="osm_editing_manage">Hantera</string>
+    </resources>
