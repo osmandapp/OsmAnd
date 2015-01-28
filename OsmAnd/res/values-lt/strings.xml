@@ -293,7 +293,7 @@
   <string name="init_native_library">Inicializuojama aparatinė biblioteka…</string>
   <string name="choose_auto_follow_route">Automatinis žemėlapio centravimas</string>
   <string name="choose_auto_follow_route_descr">Laikas po kurio žemėlapio vaizdas bus sinchronizuotas su dabartine pozicija</string>
-  <string name="auto_follow_route_never">Niekada</string>
+  <string name="auto_follow_route_never">Niekada (spauskite mėlyną rodyklę,jei norite naviguoti rankiniu būdu)</string>
   <string name="auto_follow_route_navigation">Automatiškai centruoti tik navigacijos metu</string>
   <string name="auto_follow_route_navigation_descr">Automatiškai centruoti žemėlapį tik, kai veikia navigacija.</string>
   <string name="auto_follow_location_enabled">Naudojamas automatinis žemėlapio centravimas.</string>
@@ -1192,7 +1192,7 @@
     <string name="recording_context_menu_delete">Ištrinti įrašą</string>
     <string name="recording_context_menu_play">Groti</string>
     <string name="recording_description">Įrašas %1$s %2$s prie %3$s</string>
-    <string name="recording_default_name">įrašas</string>
+    <string name="recording_default_name">Įrašas</string>
     <string name="av_control_start">Įrašyti</string>
     <string name="map_widget_av_notes">Audio užrašai</string>
     <string name="av_control_stop">Stop</string>
@@ -1561,7 +1561,7 @@
     <string name="osmo_plugin_description">"OpenStreetMap-Monitoring - pažangus tiesioginis stebėjimas http://osmo.mobi. Suteikia daug galimybių būti stebimam ir stebėti kitus įrenginius. Susikurkite anonimines grupes, bendrinkite vienas kito vietą ir bendraukite. Ši paslauga turi įvairių nustatymų vienkartiniam ir pastoviam sekimui. Anoniminės grupės gyvuoja tik kelias dienas su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. Viso funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti. "</string>
     <string name="osmo_plugin_name">OsMo (Pažangus tiesioginis stebėjimas)</string>
     <string name="osmo_settings">OpenStreetMap stebėjimas</string>
-   	<string name="keep_informing_never">Niekada</string>
+   	<string name="keep_informing_never">Tik rankiniu būdu (spauskite rodyklę)</string>
     <string name="keep_informing_descr">Maršruto instrukcijas pakartotinai pranešinėti reguliariais intervalais</string>
     <string name="keep_informing">Pakartoti maršruto instrukcijas</string>
 	<string name="arrival_distance">Pranešimas apie atvykimą</string>
@@ -1838,7 +1838,7 @@
     <string name="rendering_attr_shareTaxiRoutes_name">Maršrutinis taksi</string>
     <string name="rendering_category_hide">Slėpti</string>
     <string name="wake_on_voice">Įjungti ekraną</string>
-    <string name="wake_on_voice_descr">Įjungti ekraną artėjant prie posūkio</string>
+    <string name="wake_on_voice_descr">Įjungti ekraną (jei išjungtas) artėjant prie posūkio</string>
     <string name="lock_screen_request_explanation">%1$s prašo leidimo išjungti ekraną tausojant energiją.</string>
     <string name="wake_on_voice_never">Niekada</string>
     <string name="osmo_use_https">Naudoti HTTPS</string>
@@ -1883,4 +1883,27 @@
     <string name="speak_pedestrian">Pranešti apie perėjas</string>
     <string name="traffic_warning_pedestrian">Pėčiųjų perėja</string>
 	<string name="rendering_value__name">Numatytasis</string>
+	<string name="parking_place">Parkavimo vieta</string>
+    <string name="remove_the_tag">PAŠALINTI ŽYMĄ</string>
+    <string name="gps_status">GPS statusas</string>
+    <string name="version_settings_descr">Atsisiųsti nightly sąrankas</string>
+    <string name="version_settings">Sąrankos</string>
+    <string name="rendering_attr_streetLighting_name">Gatvės apšvietimas</string>
+    <string name="proxy_pref_title">Proksi serveris</string>
+    <string name="proxy_pref_descr">Prisijungimo prie interneto per proksi serverį nustatymai</string>
+    <string name="settings_privacy">Privatumas</string>
+    <string name="points">Taškai</string>
+    <string name="tracks">Keliai</string>
+    <string name="my_location">Mano dabatinė vieta</string>
+    <string name="osm_editing_manage">Valdyti</string>
+    <string name="recents">PASTARIEJI</string>
+	<string name="navigation_over_track">Pradėti navigaciją keliu?</string>
+	<string name="avoid_roads_msg">Galite pasirinkti kitą maršrutą, pažymėdami norimus aplenkti kelius</string>
+    <string name="save_track_to_gpx_globally_headline">Privalomas kelio log įrašymas</string>
+	<string name="enable_proxy_title">Įjungti HTTP proksi serverį</string>
+	<string name="proxy_host_title">Proksi serverio adresas</string>
+	<string name="proxy_host_descr">Nurodykite jūsų proksi serverio pavadinimą (pvz., 127.0.0.1)</string>
+	<string name="proxy_port_title">Proksi serverio portas</string>
+	<string name="proxy_port_descr">Nurodykite jūsų proksi serverio porto numerį (pvz., 8118)</string>
+	<string name="enable_proxy_descr">Configure HTTP Proxy for all network requests</string>
 	</resources>
