@@ -90,6 +90,8 @@
         <item name="pstsUnderlineColor">@color/actionbar_dark_color</item>
         <item name="pstsIndicatorColor">@color/actionbar_light_color</item>
         <item name="pstsTextColor">@color/color_white</item>
+        <item name="android:actionModeBackground">@color/actionbar_dark_color</item>
+        <item name="actionModeBackground">@color/actionbar_dark_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
     </style>
