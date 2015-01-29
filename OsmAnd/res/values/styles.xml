@@ -78,6 +78,8 @@
         <item name="actionModeBackground">@color/actionbar_light_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
+		<item name="android:actionModeCloseDrawable">@drawable/action_mode_back</item>
+		<item name="actionModeCloseDrawable">@drawable/action_mode_back</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -94,6 +96,8 @@
         <item name="actionModeBackground">@color/actionbar_dark_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
+		<item name="android:actionModeCloseDrawable">@drawable/action_mode_back</item>
+		<item name="actionModeCloseDrawable">@drawable/action_mode_back</item>
     </style>
 
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">

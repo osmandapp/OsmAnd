@@ -144,6 +144,7 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
+		haveHomeButton = false;
 		if (getIntent() != null) {
 			Intent intent = getIntent();
 			if (intent.getExtras() != null && intent.getExtras().containsKey(APP_EXIT_KEY)) {
