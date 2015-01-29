@@ -31,12 +31,10 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
-import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -64,7 +62,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class FavouritesTreeFragment extends OsmandExpandableListFragment {
+public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 	public static final int SEARCH_ID = -1;
 //	public static final int EXPORT_ID = 0;
@@ -339,9 +337,9 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 		boolean portrait = orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
 				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
 		if (portrait) {
-			menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
+			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
 		} else {
-			((FavouritesActivity) getActivity()).getClearToolbar(false);
+			((FavoritesActivity) getActivity()).getClearToolbar(false);
 		}
 
 
@@ -465,7 +463,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
-		((FavouritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
+		((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
 	}
 
 	protected void openChangeGroupDialog(final FavoriteGroup group) {

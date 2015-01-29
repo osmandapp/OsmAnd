@@ -155,9 +155,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		});
 
 		if (isOrientationPortrait()) {
-			menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
+			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
 		} else {
-			((FavouritesActivity) getActivity()).getClearToolbar(false);
+			((FavoritesActivity) getActivity()).getClearToolbar(false);
 		}
 
 
@@ -242,12 +242,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public void showProgressBar() {
-		((FavouritesActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(true);
+		((FavoritesActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(true);
 	}
 
 	public void hideProgressBar() {
 		if (getActivity() != null){
-			((FavouritesActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(false);
+			((FavoritesActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 		}
 	}
 
@@ -262,7 +262,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
 		if (isOrientationPortrait()) {
-			((FavouritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
+			((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
 		}
 	}
 

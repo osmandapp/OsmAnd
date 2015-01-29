@@ -32,7 +32,7 @@ import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 /**
  *
  */
-public class FavouritesActivity extends TabActivity {
+public class FavoritesActivity extends TabActivity {
 
 	private static final String FAVOURITES_INFO = "FAVOURITES_INFO";
 	private static final String TRACKS = "TRACKS";
@@ -67,7 +67,7 @@ public class FavouritesActivity extends TabActivity {
 		
 		if(!hasGpx) {
 			setContentView(R.layout.search_activity_single);
-			getSupportFragmentManager().beginTransaction().add(R.id.layout, new FavouritesTreeFragment()).commit();
+			getSupportFragmentManager().beginTransaction().add(R.id.layout, new FavoritesTreeFragment()).commit();
 		} else {
 			setContentView(R.layout.tab_content);
 
@@ -77,7 +77,7 @@ public class FavouritesActivity extends TabActivity {
 			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
 
 			List<TabItem> mTabs = new ArrayList<TabItem>();
-			mTabs.add(getTabIndicator(R.string.my_favorites, FavouritesTreeFragment.class));
+			mTabs.add(getTabIndicator(R.string.my_favorites, FavoritesTreeFragment.class));
 			mTabs.add(getTabIndicator(R.string.my_tracks, AvailableGPXFragment.class));
 			mTabs.add(getTabIndicator(R.string.selected_track, SelectedGPXFragment.class));
 
@@ -107,7 +107,7 @@ public class FavouritesActivity extends TabActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		((OsmandApplication) getApplication()).getSelectedGpxHelper().setUiListener(FavouritesActivity.class,new Runnable() {
+		((OsmandApplication) getApplication()).getSelectedGpxHelper().setUiListener(FavoritesActivity.class,new Runnable() {
 			
 			@Override
 			public void run() {
@@ -119,7 +119,7 @@ public class FavouritesActivity extends TabActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		((OsmandApplication) getApplication()).getSelectedGpxHelper().setUiListener(FavouritesActivity.class, null);
+		((OsmandApplication) getApplication()).getSelectedGpxHelper().setUiListener(FavoritesActivity.class, null);
 	}
 
 	public void updateSelectedTracks() {

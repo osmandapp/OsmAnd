@@ -37,7 +37,7 @@ import android.widget.TextView.BufferType;
 /**
  * 
  */
-public class FavouritesListFragment extends ListFragment implements SearchActivityChild {
+public class FavoritesListFragment extends ListFragment implements SearchActivityChild {
 
 	public static final String SELECT_FAVORITE_POINT_INTENT_KEY = "SELECT_FAVORITE_POINT_INTENT_KEY"; 
 	public static final int SELECT_FAVORITE_POINT_RESULT_OK = 1;
