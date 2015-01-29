@@ -398,7 +398,6 @@ public class GeoPointParserUtil {
 	private static boolean areCloseEnough(double a, double b, long howClose) {
 		long aRounded = (long) Math.round(a * Math.pow(10, howClose));
 		long bRounded = (long) Math.round(b * Math.pow(10, howClose));
-		System.out.println("areCloseEnough: " + aRounded + ", " + bRounded);
 		return aRounded == bRounded;
 	}
 
