@@ -952,13 +952,13 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				0, 0,/*R.drawable.ic_action_marker_light,*/
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, SHARE_SESSION, R.string.osmo_share_session, 
-				R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
+				R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		createMenuItem(menu, CREATE_GROUP, R.string.osmo_create_group, 
-				R.drawable.ic_action_plus_light, R.drawable.ic_action_plus_dark,
+				R.drawable.ic_action_plus_dark, R.drawable.ic_action_plus_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, SETTINGS_ID, R.string.settings, 
-				R.drawable.ic_action_settings_light, R.drawable.ic_action_settings_dark,
+				R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		return super.onCreateOptionsMenu(menu);
 	}

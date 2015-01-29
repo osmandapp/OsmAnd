@@ -83,6 +83,8 @@
 		<item name="actionModeCloseDrawable">@drawable/action_mode_back</item>
 		<item name="android:actionModeStyle">@style/WhiteActionMode</item>
 		<item name="actionModeStyle">@style/WhiteActionMode</item>
+		<item name="android:actionMenuTextColor">@color/color_white</item>
+		<item name="actionMenuTextColor">@color/color_white</item>
 		<item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
     </style>
 
