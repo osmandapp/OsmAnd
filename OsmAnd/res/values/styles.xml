@@ -76,10 +76,12 @@
         <item name="pstsTextColor">@color/color_white</item>
         <item name="android:actionModeBackground">@color/actionbar_light_color</item>
         <item name="actionModeBackground">@color/actionbar_light_color</item>
-        <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
 		<item name="android:actionModeCloseDrawable">@drawable/action_mode_back</item>
 		<item name="actionModeCloseDrawable">@drawable/action_mode_back</item>
+		<item name="android:actionModeStyle">@style/WhiteActionMode</item>
+		<item name="actionModeStyle">@style/WhiteActionMode</item>
+		<item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -96,8 +98,6 @@
         <item name="actionModeBackground">@color/actionbar_dark_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
-		<item name="android:actionModeCloseDrawable">@drawable/action_mode_back</item>
-		<item name="actionModeCloseDrawable">@drawable/action_mode_back</item>
     </style>
 
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -130,7 +130,16 @@
 		<item name="android:colorBackground">@color/dashboard_black</item>
 		<item name="android:clickable">true</item>
 	</style>
-	
+
+	<style name="WhiteActionMode" parent="@style/Widget.AppCompat.ActionMode">
+		<item name="android:titleTextStyle">@style/WhiteActionModeTitleTextStyle</item>
+		<item name="titleTextStyle">@style/WhiteActionModeTitleTextStyle</item>
+	</style>
+
+	<style name="WhiteActionModeTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionMode.Title">
+		<item name="android:textColor">@color/color_white</item>
+	</style>
+
 	<!-- Dialog popup -->
 	<style name="Animations" />
 	<!-- PopDownMenu -->
