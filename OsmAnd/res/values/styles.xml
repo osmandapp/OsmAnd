@@ -67,6 +67,8 @@
 
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
         <item name="expandable_category_color">@color/group_background</item>
+		<item name="android:actionDropDownStyle">@style/Widget.LightSpinner</item>
+		<item name="actionDropDownStyle">@style/Widget.LightSpinner</item>
         <item name="reset_image">@drawable/ic_action_delete_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
 		<item name="windowActionBarOverlay">true</item>
         <item name="bottomToolBarColor">@color/tool_bar_light_color</item>
@@ -86,8 +88,10 @@
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
         <item name="reset_image">@drawable/ic_action_delete_dark</item> <!--  @drawable/a_1_navigation_cancel_dark -->
+		<item name="android:actionDropDownStyle">@style/Widget.DarkActionSpinner</item>
+		<item name="actionDropDownStyle">@style/Widget.DarkActionSpinner</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>
-        <item name="android:spinnerStyle">@style/Widget.Spinner</item>
+        <item name="android:spinnerStyle">@style/Widget.DarkSpinner</item>
         <item name="windowActionBarOverlay">true</item>
         <item name="bottomToolBarColor">@color/tool_bar_dark_color</item>
         <item name="pstsTabBackground">@color/actionbar_dark_color</item>
@@ -126,9 +130,19 @@
         <item name="android:textColor">@color/color_white</item>
     </style>
 
-	<style name="Widget.Spinner" parent="android:Widget">
-		<item name="android:colorBackground">@color/dashboard_black</item>
-		<item name="android:clickable">true</item>
+	<style name="Widget.DarkSpinner" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
+		<item name="android:popupBackground">@color/actionbar_dark_color</item>
+		<item name="android:textColor">@color/color_white</item>
+	</style>
+
+	<style name="Widget.DarkActionSpinner" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
+		<item name="android:popupBackground">@color/actionbar_dark_color</item>
+		<item name="android:textColor">@color/color_white</item>
+	</style>
+
+	<style name="Widget.LightSpinner" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
+		<item name="android:popupBackground">@color/actionbar_light_color</item>
+		<item name="android:textColor">@color/color_white</item>
 	</style>
 
 	<style name="WhiteActionMode" parent="@style/Widget.AppCompat.ActionMode">
