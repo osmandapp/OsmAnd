@@ -46,6 +46,7 @@ public class RendererRegistry {
 		internalRenderers.put("LightRS", "LightRS" + ".render.xml");
 		internalRenderers.put("High-contrast-roads", "High-contrast-roads" + ".render.xml");
 		internalRenderers.put("Winter-and-ski", "Winter-and-ski" + ".render.xml");
+		internalRenderers.put("Nautical", "nautical" + ".render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {
