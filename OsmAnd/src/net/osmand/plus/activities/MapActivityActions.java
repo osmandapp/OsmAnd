@@ -32,7 +32,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
-import net.osmand.plus.activities.actions.ShareLocation;
+import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
@@ -44,6 +44,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -348,8 +349,7 @@ public class MapActivityActions implements DialogProvider {
 						openIntermediatePointsDialog();
 					}
 				} else if (standardId == R.string.context_menu_item_share_location) {
-					enhance(dialogBundle,latitude,longitude,mapActivity.getMapView().getZoom());
-					new ShareLocation(mapActivity).run();
+					mapActivity.shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
 				} else if (standardId == R.string.context_menu_item_add_favorite) {
 					addFavouritePoint(latitude, longitude);
 				}

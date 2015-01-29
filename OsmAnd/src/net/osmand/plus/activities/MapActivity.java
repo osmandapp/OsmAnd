@@ -50,6 +50,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -836,5 +837,15 @@ public class MapActivity extends AccessibleActivity {
 		return getWindow().getDecorView().findViewById(android.R.id.content);
 	}
 
-
+    /* Share/SEND location to another app for a specific action (message, QRCode, etc) */
+	public void shareLocation(double latitude, double longitude, int zoom) {
+		String shortOsmandNetUrl = MapUtils.buildShortOsmandNetUrl(latitude, longitude, zoom);
+		String geoUrl = MapUtils.buildGeoUrl(latitude, longitude, zoom);
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.putExtra(Intent.EXTRA_SUBJECT, geoUrl);
+		intent.putExtra(Intent.EXTRA_TEXT,
+						getString(R.string.send_location_sms_pattern, geoUrl, shortOsmandNetUrl));
+		startActivity(intent);
+	}
 }
