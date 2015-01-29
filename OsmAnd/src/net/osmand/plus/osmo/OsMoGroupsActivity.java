@@ -138,7 +138,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				new OsMoIntentHandler(app, osMoPlugin).execute(getIntent());
 			}
 		}
-		setContentView(R.layout.expandable_list);
+		setContentView(R.layout.osmo_group_list);
 		getSupportActionBar().setTitle(R.string.osmo_activity);
 		setSupportProgressBarIndeterminateVisibility(false);
 		setupHeader();
