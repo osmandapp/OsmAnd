@@ -1696,4 +1696,11 @@
 	<string name="use_displayed_track_for_navigation">Θέλετε να χρησιμοποιήσετε το εμφανιζόμενο ίχνος για πλοήγηση;</string>
     <string name="route_descr_destination">Προορισμός</string>
     <string name="voices">Φωνητικές οδηγίες</string>
+	<string name="parking_place">Χώρος στάθμευσης</string>
+    <string name="gps_status">Κατάσταση GPS</string>
+    <string name="points">Σημεία</string>
+    <string name="tracks">Ίχνη</string>
+    <string name="my_location">Η τοποθεσία μου</string>
+    <string name="recents">ΠΡΟΣΦΑΤΑ</string>
+	<string name="navigation_over_track">Έναρξη πλοήγησης βάσει ίχνους;</string>
 	</resources>
