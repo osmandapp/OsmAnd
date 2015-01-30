@@ -77,9 +77,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		long javaTotal = Runtime.getRuntime().totalMemory() / (1024*1024l);
 		long dalvikSize = android.os.Debug.getNativeHeapAllocatedSize() / (1024*1024l);
 		pref.setSummary(getString(R.string.global_app_allocated_memory_descr, javaAvailMem, javaTotal, dalvikSize));
-		pref.setEnabled(false);
-		//Use setEnabled(false) only, this way you can produce more contrast by/while tapping it when needed
-		//pref.setSelectable(false);
+		pref.setSelectable(false);
+		//setEnabled(false) creates bad readability on some devices
+		//pref.setEnabled(false);
 		cat.addPreference(pref);
 		
 //		ActivityManager activityManager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
@@ -93,9 +93,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref.setSummary(getString(R.string.native_app_allocated_memory_descr 
 				, mem.nativePrivateDirty / 1024, mem.dalvikPrivateDirty / 1024 , mem.otherPrivateDirty / 1024
 				, mem.nativePss / 1024, mem.dalvikPss / 1024 , mem.otherPss / 1024));
-		pref.setEnabled(false);
-		//Use setEnabled(false) only, this way you can produce more contrast by/while tapping it when needed
-		//pref.setSelectable(false);
+		pref.setSelectable(false);
+		//setEnabled(false) creates bad readability on some devices
+		//pref.setEnabled(false);
 		cat.addPreference(pref);
 		
 		
@@ -110,9 +110,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			pref.setSummary(getString(R.string.day_night_info_description, "null",
 					"null"));
 		}
-		pref.setEnabled(false);
-		//Use setEnabled(false) only, this way you can produce more contrast by/while tapping it when needed
-		//pref.setSelectable(false);
+		pref.setSelectable(false);
+		//setEnabled(false) creates bad readability on some devices
+		//pref.setEnabled(false);
 		cat.addPreference(pref);	
 	}
 	
