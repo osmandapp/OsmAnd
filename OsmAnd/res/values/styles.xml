@@ -65,9 +65,9 @@
     </style>
 
 	<style name="SettingsLightTheme" parent="Theme.AppCompat.Light">
-		<item name="android:listChoiceIndicatorMultiple">@drawable/check_light</item>
 		<item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
 		<item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
+		<item name="android:listChoiceIndicatorMultiple">@drawable/check_light</item>
 	</style>
 
 	<style name="SettingsDarkTheme" parent="Theme.AppCompat">
