@@ -142,20 +142,6 @@
         <item name="android:textColor">@color/color_white</item>
     </style>
 
-	<style name="Widget.DarkSpinner" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
-		<item name="android:popupBackground">@color/actionbar_dark_color</item>
-		<item name="android:textColor">@color/color_white</item>
-	</style>
-
-	<style name="Widget.DarkActionSpinner" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
-		<item name="android:popupBackground">@color/actionbar_dark_color</item>
-	</style>
-
-	<style name="Widget.LightSpinner" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
-		<item name="android:popupBackground">@color/actionbar_light_color</item>
-		<item name="android:textColor">@color/color_white</item>
-	</style>
-
 	<style name="WhiteActionMode" parent="@style/Widget.AppCompat.ActionMode">
 		<item name="android:titleTextStyle">@style/WhiteActionModeTitleTextStyle</item>
 		<item name="titleTextStyle">@style/WhiteActionModeTitleTextStyle</item>
