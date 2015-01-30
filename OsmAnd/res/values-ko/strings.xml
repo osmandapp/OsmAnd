@@ -59,7 +59,7 @@
 	
 	<string name="rendering_out_of_memory">선택 영역을 표시할 충분한 프로세스 메모리가 없습니다</string>
 	<string name="use_fluorescent_overlays">형광색상 중첩(오버레이)</string>
-	<string name="use_fluorescent_overlays_descr">형광색상으로 경로를 표시합니다</string>
+	<string name="use_fluorescent_overlays_descr">경로(트랙과 루트)를 표시하기 위해 형광색을 사용합니다</string>
 	<string name="offline_edition">오프라인 편집</string>
 	<string name="offline_edition_descr">오프라인 편집을 항상 사용합니다</string>
 
@@ -92,7 +92,7 @@
 	<string name="live_monitoring_interval">온라인 트래킹 시간 간격</string>
 	<string name="live_monitoring_url_descr">온라인 트래킹할 웹 주소를 지정합니다. 매개변수 형식 : 위도={0}, 경도={1}, 시간={2}, hdop={3}, 고도={4}, 속도={5}, bearing={6}</string>
 	<string name="live_monitoring_url">온라인 트래킹 웹 주소</string>
-	<string name="gpx_monitoring_disabled_warn">"GPX 위젯을 사용하거나  \'경로 레코딩\' 설정을 통해서 경로를 기록하세요."</string>
+	<string name="gpx_monitoring_disabled_warn">"GPX 위젯을 사용하거나  \'트랙 레코딩\' 설정을 통해서 트랙을 기록하세요."</string>
 	<string name="show_current_gpx_title">현재의 GPX 경로를 표시합니다</string>
 	<string name="tip_recent_changes_0_7_0_t">0.7.0 버전에 대한 변경 사항들 :
 		\n\t- 오프라인 위키피디아 기사 포함 데이터
@@ -145,7 +145,7 @@
 	<string name="tip_rotation_switching">지도 방향</string>
 	
 
-	<string name="binary_map_download_success">"성공적으로 다운로드하였습니다.\n\n 사용하려면 [메뉴-&gt;지도 구성-&gt;지도 소스-&gt;오프라인 벡터 지도] 를 활성화 하세요. "</string>
+	<string name="binary_map_download_success">"성공적으로 다운로드하였습니다.\n\n 사용하려면 [메뉴-&gt;맵 구성-&gt;맵 소스-&gt;오프라인 벡터 맵] 을 체크하세요. "</string>
 
 	<string name="tip_day_night_mode">주간/야간 모드</string>
 		
@@ -379,7 +379,7 @@
 	<string name="tip_favorites_t">"자주 사용되는 포인트는 아래처럼 즐겨 찾기에 저장할 수 있습니다. ↵
 \n\n포인트를 즐겨 찾기에 저장하려면 맵 컨텍스트 메뉴로 이동하여 \'즐겨 찾기에 추가\'옵션을 선택하고 이름을 붙여주세요.
 \n\n즐겨 찾기 저장 후 \'메인 메뉴\'-&gt; \'저장소\'를 통해 사용할 수 있습니다.  \'즐겨 찾기\'메뉴에서 즐겨 찾기를 길게 누르면 탐색 할 옵션이 나타나고, 편집 및 삭제할 수 있습니다. ↵
-\n\n지도에 직접 모든 즐겨 찾기 지점을 표시하려면 \'맵 컨텍스트 메뉴\'-&gt; \'지도 구성\'의 \'즐겨 찾기\'레이어를 활성화하십시오. "</string>
+\n\n지도에 직접 모든 즐겨 찾기 지점을 표시하려면 \'맵 컨텍스트 메뉴\'-&gt; \'맵 구성\'  ~ \'즐겨 찾기\' 를 체크하세요. "</string>
 
 	<string name="create_poi_link_to_osm_doc">이미지와 함께 <u>온라인 OSM</u> 맵 분류</string>
     <string name="error_doing_search">오프라인 검색에서 오류가 발생하였습니다</string>
@@ -515,7 +515,7 @@
 	<string name="continuous_rendering">연속 렌더링</string>
 	<string name="continuous_rendering_descr">전체 이미지 대신 연속 렌더링을 표시합니다</string>
 	<string name="rendering_exception">선택 영역을 렌더링하는 도중 오류가 발생하였습니다</string>
-	<string name="show_point_options">포인트…</string>
+	<string name="show_point_options">위치…</string>
 	<string name="renderer_load_sucess">렌더러가 성공적으로 적재되었습니다</string>
 	<string name="renderer_load_exception">예외발생: 렌더러가 적재되지 않았습니다</string>
 	<string name="renderers">벡터 렌더러</string>
@@ -702,7 +702,7 @@
 	<string name="recalculate_route_to_your_location">전송 모드 :</string>
 	<string name="mark_final_location_first">먼저 도착지를 선택하세요</string>
 	<string name="get_directions">운행시작</string>
-    <string name="show_gps_status">GPS Status 표시</string>
+    <string name="show_gps_status">GPS 상태 표시</string>
 	<string name="opening_hours">오프닝 시간</string>
 	<string name="opening_changeset">변경사항 여는중…</string>
 	<string name="closing_changeset">변경사항 닫는중…</string>
@@ -720,7 +720,7 @@
 	<string name="error_occurred_saving_gpx">GPX를 저장하는 도중 오류가 발생하였습니다</string>
 	<string name="error_calculating_route">경로 탐색 도중 오류</string>
 	<string name="error_calculating_route_occured">경로를 찾는 도중 오류가 발생하였습니다</string>
-	<string name="empty_route_calculated">경로를 찾지 못하였습니다</string>									
+	<string name="empty_route_calculated">탐색한 경로를 찾지 못하였습니다</string>									
 	<string name="new_route_calculated_dist">새로운 경로를 찾았습니다, 거리</string>
 	<string name="arrived_at_destination">도착지에 도착하였습니다</string>
 	<string name="invalid_locations">좌표가 유효하지 않습니다!</string>
@@ -802,7 +802,7 @@
 <string name="choose_available_region">목록에서 지역을 선택합니다</string>
 <string name="choose_intersected_street">교차로를 선택합니다</string>
 <string name="Closest_Amenities">근접한 시설들</string>
-<string name="app_mode_default">지도 찾아보기</string>
+<string name="app_mode_default">지도 보기</string>
 <string name="app_mode_car">자동차</string>
 <string name="app_mode_bicycle">자전거</string>
 <string name="app_mode_pedestrian">보행자</string>
@@ -823,7 +823,7 @@
 <string name="search_address_building">빌딩</string>
 <string name="search_address_building_option">빌딩</string>
 <string name="search_address_street_option">교차로</string>
-<string name="search_tabs_location">위치</string>
+<string name="search_tabs_location">좌표</string>
 <string name="context_menu_item_add_favorite">즐겨찾기에 추가</string>
 <string name="context_menu_item_update_map">지도 업데이트</string>
 <string name="context_menu_item_open_bug">OSM 버그 열기</string>
@@ -1118,8 +1118,8 @@
          \n\t* 나침반을 안정화하기 위해 추가 설정
          \n\t* 지도 화면에서 좌상단 버튼는  메뉴버튼을 대체
     </string>
-    <string name="monitoring_settings">경로 레코딩</string>
-    <string name="monitoring_settings_descr">경로를 기록하는 방법을 구성합니다</string>
+    <string name="monitoring_settings">트랙 레코딩</string>
+    <string name="monitoring_settings_descr">트랙을 기록하는 방법을 구성합니다</string>
     <string name="osmand_monitoring_plugin_description">절전모드(스크린 끄기)에서 트래킹 및 경로탐색 활성화, 주기적으로 GPS 장치가 작동중일 때 . 표시 설정은 로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 트랙을 기록하는 설비 가능.</string>
     <string name="osmand_monitoring_plugin_name">로깅 서비스</string>
     <string name="osmand_background_plugin_description">주기적으로 GPS 장치를 On 시켜 절전모드(스크린 끄기)에서 트래킹 및 운행을 가능하게 합니다.</string>
@@ -1429,7 +1429,7 @@
 	<string name="show_traffic_warnings">교통 경고 표시</string>
 	<string name="avoid_toll_roads">유료 도로 회피</string>
 	<string name="continue_follow_previous_route_auto">이전 운행은 아직 끝나지 안났습니다. 계속 운행을 하시겠습니까? (%1$s 초)</string>
-	<string name="route_updated_loc_found">위치가 확정되면 경로를 탐색합니다</string>
+	<string name="route_updated_loc_found">현재 위치가 확정되면 경로를 탐색합니다</string>
 	<string name="osmand_parking_hours">시간</string>
 	<string name="osmand_parking_minutes">분</string>
 	<string name="osmand_parking_position_description_add_time">자동차를 ~에 주차했습니다 :</string>
@@ -1512,7 +1512,7 @@
 	<string name="osmand_accessibility_description">접근성(내게 필요한) 기능에 대한 설정을 표시하기.</string>
 	<string name="extra_settings">고급 설정</string>
 	<string name="osmand_monitoring_description">로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 경로를 기록하기 위한 설정 기능을 표시합니다.</string>
-	<string name="osmand_extra_settings_description">고급 지도 구성(지도 상세보기) 및 일부 장치 특성에 대한 설정을 표시합니다.</string>
+	<string name="osmand_extra_settings_description">고급 맵 구성(지도 상세보기) 및 일부 장치 특성에 대한 설정을 표시합니다.</string>
 	<string name="osmand_development_plugin_description">모의 주행이나 렌더링 성능 표시와 같은 개발 및 디버깅 기능에 대한 설정을 표시합니다.</string>
 	<string name="plugins_screen">플러그인</string>
 	<string name="select_plugin_to_activate">활성화 또는 비활성화 하기위해 플러그인을 터치합니다.(OsmAnd는 재시작해야 합니다)</string>
@@ -1984,7 +1984,7 @@
 <string name="av_camera_pic_size">카메라 사진 크기</string>
 	<string name="av_camera_pic_size_descr">내부 카메라 사진 크기 선택</string>
     <string name="announce_nearby_favorites">가까운 즐겨찾기 알리기</string>
-<string name="rendering_value_browse_map_name">지도 찾아보기</string>  
+<string name="rendering_value_browse_map_name">지도 보기</string>  
     <string name="rendering_value_car_name">자동차</string>
     <string name="rendering_value_bicycle_name">자전거</string>
     <string name="rendering_value_pedestrian_name">보행자</string>
@@ -2040,7 +2040,7 @@
 	<string name="map_widget_right">오른쪽 패널</string>
 	<string name="map_widget_left">왼쪽 패널</string>
     <string name="layers_category_show">표시</string>
-	<string name="configure_map">지도 구성</string>
+	<string name="configure_map">맵 구성</string>
     <string name="search_radius_proximity">근접에서</string>
     <string name="tip_recent_changes_1_9_t">"버전 1.9 변경사항 : 
 \n* 도로 표면 렌더링으로 지도 스타일 업데이트\n* 전송 계층 및 기호 하이킹 심볼 업데이트\n* 경로를 따라 POI 검색
