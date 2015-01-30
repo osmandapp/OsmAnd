@@ -64,6 +64,17 @@
 		<item name="windowActionBarOverlay">true</item>
     </style>
 
+	<style name="SettingsLightTheme" parent="Theme.AppCompat.Light">
+		<item name="android:listChoiceIndicatorMultiple">@drawable/check_light</item>
+		<item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
+		<item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
+	</style>
+
+	<style name="SettingsDarkTheme" parent="Theme.AppCompat">
+		<item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
+		<item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
+		<item name="android:listChoiceIndicatorMultiple">@drawable/check_dark</item>
+	</style>
 
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
         <item name="expandable_category_color">@color/group_background</item>
@@ -79,21 +90,18 @@
         <item name="pstsTextColor">@color/color_white</item>
         <item name="android:actionModeBackground">@color/actionbar_light_color</item>
         <item name="actionModeBackground">@color/actionbar_light_color</item>
-        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
 		<item name="android:actionModeCloseDrawable">@drawable/action_mode_back</item>
 		<item name="actionModeCloseDrawable">@drawable/action_mode_back</item>
 		<item name="android:actionModeStyle">@style/WhiteActionMode</item>
 		<item name="actionModeStyle">@style/WhiteActionMode</item>
 		<item name="android:actionMenuTextColor">@color/color_white</item>
 		<item name="actionMenuTextColor">@color/color_white</item>
+		<item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
 		<item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
-		<item name="android:listChoiceIndicatorMultiple">@drawable/check_light</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
         <item name="reset_image">@drawable/ic_action_delete_dark</item> <!--  @drawable/a_1_navigation_cancel_dark -->
-		<!--<item name="android:actionDropDownStyle">@style/Widget.DarkActionSpinner</item>-->
-		<!--<item name="actionDropDownStyle">@style/Widget.DarkActionSpinner</item>-->
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="windowActionBarOverlay">true</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_dark</item>
@@ -106,7 +114,6 @@
         <item name="actionModeBackground">@color/actionbar_dark_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
-		<item name="android:listChoiceIndicatorMultiple">@drawable/check_dark</item>
     </style>
 
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -142,7 +149,6 @@
 
 	<style name="Widget.DarkActionSpinner" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
 		<item name="android:popupBackground">@color/actionbar_dark_color</item>
-		<item name="android:textColor">@color/color_white</item>
 	</style>
 
 	<style name="Widget.LightSpinner" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">

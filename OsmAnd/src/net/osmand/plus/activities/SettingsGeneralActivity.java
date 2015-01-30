@@ -64,7 +64,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	private ListPreference drivingRegionPreference;
 
 
-
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);

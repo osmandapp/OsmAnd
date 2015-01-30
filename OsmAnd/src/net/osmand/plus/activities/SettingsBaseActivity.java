@@ -304,10 +304,9 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	@SuppressWarnings("deprecation")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
-		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.settings_activity);
-		settings = getMyApplication().getSettings();
+
 		
 		if (profileSettings) {
 			modes.clear();
