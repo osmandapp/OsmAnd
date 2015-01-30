@@ -43,6 +43,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.FontCache;
 
 
 import java.util.Locale;
@@ -50,7 +51,7 @@ import java.util.Locale;
 public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private static final float OPAQUE = 1.0f;
-	private static final float HALF_TRANSP = 0.5f;
+	private static final float HALF_TRANSP = 0.6f;
 
 	public interface CustomTabProvider {
 		public View getCustomTabView(ViewGroup parent, int position);
@@ -110,7 +111,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private int tabPadding = 12;
 	private int tabTextSize = 14;
 	private int tabTextColor = 0;
-	private float tabTextAlpha = OPAQUE;
+	private float tabTextAlpha = HALF_TRANSP;
 	private float tabTextSelectedAlpha = OPAQUE;
 
 	private int padding = 0;
@@ -120,8 +121,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private boolean isPaddingMiddle = false;
 
 	private Typeface tabTypeface = null;
-	private int tabTypefaceStyle = Typeface.BOLD;
-	private int tabTypefaceSelectedStyle = Typeface.BOLD;
+	private int tabTypefaceStyle = Typeface.NORMAL;
+	private int tabTypefaceSelectedStyle = Typeface.NORMAL;
 
 	private int scrollOffset;
 	private int lastScrollX = 0;
@@ -159,13 +160,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		// get system attrs (android:textSize and android:textColor)
 		TypedArray a = context.obtainStyledAttributes(attrs, ATTRS);
 		tabTextSize = a.getDimensionPixelSize(TEXT_SIZE_INDEX, tabTextSize);
-		ColorStateList colorStateList = a.getColorStateList(TEXT_COLOR_INDEX);
 		int textPrimaryColor = a.getColor(TEXT_COLOR_PRIMARY, android.R.color.white);
-//		if (colorStateList != null) {
-//			tabTextColor = colorStateList;
-//		} else {
-//			tabTextColor = getColorStateList(textPrimaryColor);
-//		}
 
 		underlineColor = textPrimaryColor;
 		dividerColor = textPrimaryColor;
@@ -195,8 +190,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		isPaddingMiddle = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsPaddingMiddle, isPaddingMiddle);
 		tabTypefaceStyle = a.getInt(R.styleable.PagerSlidingTabStrip_pstsTextStyle, Typeface.BOLD);
 		tabTypefaceSelectedStyle = a.getInt(R.styleable.PagerSlidingTabStrip_pstsTextSelectedStyle, Typeface.BOLD);
-		tabTextAlpha = a.getFloat(R.styleable.PagerSlidingTabStrip_pstsTextAlpha, OPAQUE);
+		tabTextAlpha = a.getFloat(R.styleable.PagerSlidingTabStrip_pstsTextAlpha, HALF_TRANSP);
 		tabTextSelectedAlpha = a.getFloat(R.styleable.PagerSlidingTabStrip_pstsTextSelectedAlpha, OPAQUE);
+		tabTypeface = FontCache.getRobotoMedium(context);
 		a.recycle();
 
 		setMarginBottomTabContainer();

@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.preference.*;
 import android.view.MenuItem;
 import android.widget.AdapterView;

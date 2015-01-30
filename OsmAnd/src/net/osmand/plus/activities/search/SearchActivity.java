@@ -16,8 +16,8 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.FavouritesListActivity;
-import net.osmand.plus.activities.FavouritesListFragment;
+import net.osmand.plus.activities.FavoritesListActivity;
+import net.osmand.plus.activities.FavoritesListFragment;
 import net.osmand.plus.activities.NavigatePointFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -171,7 +171,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		} else if(tab == TRANSPORT_TAB_INDEX) {
 			return SearchTransportFragment.class;
 		} else if(tab == FAVORITES_TAB_INDEX) {
-			return FavouritesListFragment.class;
+			return FavoritesListFragment.class;
 		}
 		return SearchPoiFilterFragment.class;
 	}
@@ -218,9 +218,9 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 						if (position == POSITION_LAST_MAP_VIEW) {
 							updateSearchPoint(settings.getLastKnownMapLocation(), getString(R.string.select_search_position) + " " + getString(R.string.search_position_map_view), false);
 						} else if (position == POSITION_FAVORITES) {
-							Intent intent = new Intent(SearchActivity.this, FavouritesListActivity.class);
+							Intent intent = new Intent(SearchActivity.this, FavoritesListActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-							intent.putExtra(FavouritesListFragment.SELECT_FAVORITE_POINT_INTENT_KEY, (Serializable) null);
+							intent.putExtra(FavoritesListFragment.SELECT_FAVORITE_POINT_INTENT_KEY, (Serializable) null);
 							startActivityForResult(intent, REQUEST_FAVORITE_SELECT);
 							getSupportActionBar().setSelectedNavigationItem(0);
 						} else if (position == POSITION_ADDRESS) {
@@ -249,8 +249,8 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		if(requestCode == REQUEST_FAVORITE_SELECT && resultCode == FavouritesListFragment.SELECT_FAVORITE_POINT_RESULT_OK){
-			FavouritePoint p = (FavouritePoint) data.getSerializableExtra(FavouritesListFragment.SELECT_FAVORITE_POINT_INTENT_KEY);
+		if(requestCode == REQUEST_FAVORITE_SELECT && resultCode == FavoritesListFragment.SELECT_FAVORITE_POINT_RESULT_OK){
+			FavouritePoint p = (FavouritePoint) data.getSerializableExtra(FavoritesListFragment.SELECT_FAVORITE_POINT_INTENT_KEY);
 			if (p != null) {
 				LatLon latLon = new LatLon(p.getLatitude(), p.getLongitude());
 				updateSearchPoint(latLon, getString(R.string.select_search_position) + " " + p.getName(), false);

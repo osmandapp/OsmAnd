@@ -243,7 +243,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		((FavouritesActivity) getActivity()).getClearToolbar(false);
+		((FavoritesActivity) getActivity()).getClearToolbar(false);
 //		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_light,
 //				R.drawable.ic_action_search_dark, MenuItem.SHOW_AS_ACTION_ALWAYS
 //						| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);

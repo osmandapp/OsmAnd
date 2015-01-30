@@ -13,6 +13,8 @@ import net.osmand.plus.R;
  */
 public class OsmandActionBarActivity extends ActionBarActivity {
 
+	protected boolean haveHomeButton = true;
+
     //should be called after set content view
     protected void setupHomeButton(){
         Drawable back = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -25,18 +27,24 @@ public class OsmandActionBarActivity extends ActionBarActivity {
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
-        setupHomeButton();
+		if (haveHomeButton) {
+			setupHomeButton();
+		}
     }
 
     @Override
     public void setContentView(View view) {
         super.setContentView(view);
-        setupHomeButton();
+		if (haveHomeButton) {
+			setupHomeButton();
+		}
     }
 
     @Override
     public void setContentView(View view, ViewGroup.LayoutParams params) {
         super.setContentView(view, params);
-        setupHomeButton();
+		if (haveHomeButton) {
+			setupHomeButton();
+		}
     }
 }

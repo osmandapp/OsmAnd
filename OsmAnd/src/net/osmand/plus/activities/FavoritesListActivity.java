@@ -5,7 +5,7 @@ import net.osmand.plus.OsmandApplication;
 import android.os.Bundle;
 
 
-public class FavouritesListActivity extends OsmandActionBarActivity {
+public class FavoritesListActivity extends OsmandActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -13,7 +13,7 @@ public class FavouritesListActivity extends OsmandActionBarActivity {
 		super.onCreate(savedInstanceState);
 		if (savedInstanceState == null) {
 			// During initial setup, plug in the details fragment.
-			FavouritesListFragment details = new FavouritesListFragment();
+			FavoritesListFragment details = new FavoritesListFragment();
 			details.setArguments(getIntent().getExtras());
 			getSupportFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
 		}
