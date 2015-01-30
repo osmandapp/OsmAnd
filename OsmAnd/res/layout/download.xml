@@ -94,6 +94,8 @@
 			android:id="@+id/DownloadButton"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
+			android:background="?attr/downloadButtonBackground"
+			android:textColor="?attr/pstsTextColor"
 			android:gravity="center"
 			android:text="@string/download_files"
 			android:visibility="gone"/>
