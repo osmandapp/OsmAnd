@@ -141,8 +141,8 @@
 
 		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" />
 		<activity android:name="net.osmand.plus.activities.ShowRouteInfoActivity" android:label="@string/show_route" />
-		<activity android:name=".activities.FavoritesListActivity" android:label="@string/favourites_list_activity" />
-		<activity android:name=".activities.FavoritesActivity" android:windowSoftInputMode="adjustPan" />
+		<activity android:name="net.osmand.plus.activities.FavoritesListActivity" android:label="@string/favourites_list_activity" />
+		<activity android:name="net.osmand.plus.activities.FavoritesActivity" android:windowSoftInputMode="adjustPan" />
 		<activity android:name="net.osmand.plus.activities.PluginsActivity" />
 		<activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity" />
 
