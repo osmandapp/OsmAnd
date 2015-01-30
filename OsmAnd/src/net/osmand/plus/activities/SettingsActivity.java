@@ -40,8 +40,6 @@ public class SettingsActivity extends SettingsBaseActivity {
 		PreferenceScreen screen = getPreferenceScreen();
 		localIndexes =(Preference) screen.findPreference("local_indexes");
 		localIndexes.setOnPreferenceClickListener(this);
-//		bidforfix = (Preference) screen.findPreference("bidforfix");
-//		bidforfix.setOnPreferenceClickListener(this);
 		plugins = (Preference) screen.findPreference("plugins");
 		plugins.setOnPreferenceClickListener(this);
 		general = (Preference) screen.findPreference("general_settings");

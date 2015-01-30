@@ -10,7 +10,7 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.MainMenuActivity;
-import net.osmand.plus.activities.FavouritesActivity;
+import net.osmand.plus.activities.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
@@ -60,8 +60,8 @@ public class OsmAndAppCustomization {
 		return SearchActivity.class;
 	}
 	
-	public Class<FavouritesActivity> getFavoritesActivity(){
-		return FavouritesActivity.class;
+	public Class<FavoritesActivity> getFavoritesActivity(){
+		return FavoritesActivity.class;
 	}
 
 	public Class<MainMenuActivity> getMainMenuActivity() {
