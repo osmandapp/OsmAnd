@@ -12,6 +12,10 @@
 		<attr name="ic_extension" format="reference" />
 		<attr name="ic_overflow_menu" format="reference" />
 		<attr name="ic_plugin_options" format="reference" />
+		<attr name="dashboardGeneralButtonStyle" format="reference" />
+		<attr name="dashboardSubHeaderStyle" format="reference" />
+		<attr name="dashboard_divider" format="reference" />
+		<attr name="dashboard_button" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
@@ -42,4 +46,8 @@
         <attr name="pstsTextAlpha" format="float"/>
         <attr name="pstsTextSelectedAlpha" format="float"/>
     </declare-styleable>
+	
+	<declare-styleable name="OsmandWidgets">
+		<attr name="typeface" format="string|reference"/>
+	</declare-styleable>
 </resources>

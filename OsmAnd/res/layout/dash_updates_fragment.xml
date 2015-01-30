@@ -12,10 +12,10 @@
 			android:layout_height="@dimen/dashHeaderHeight">
 		<TextView android:text="@string/map_update"
 				  android:id="@+id/header"
-				  style="@style/DashboardSubHeader"/>
+				  style="?attr/dashboardSubHeaderStyle"/>
 		<Button android:id="@+id/show_all"
 				android:text="@string/show_all"
-				style="@style/DashboardGeneralButton"/>
+				style="?attr/dashboardGeneralButtonStyle"/>
 	</LinearLayout>
 
 	<LinearLayout android:id="@+id/updates_items"

@@ -11,15 +11,16 @@
 		android:layout_height="@dimen/dashHeaderHeight"
 		android:orientation="horizontal">
 
-		<TextView
+		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/plugin_text"
-			style="@style/DashboardSubHeader"
+			style="?attr/dashboardSubHeaderStyle"
 			android:text="@string/prefs_plugins"/>
 
-		<Button
+		<net.osmand.plus.widgets.ButtonEx
 			android:id="@+id/show_all"
-			style="@style/DashboardGeneralButton"
-			android:text="@string/show_all"/>
+			style="?attr/dashboardGeneralButtonStyle"
+			android:text="@string/show_all"
+			/>
 	</LinearLayout>
 
 	<LinearLayout

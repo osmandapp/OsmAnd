@@ -8,16 +8,15 @@ import java.util.Random;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.helpers.FontCache;
+
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,15 +30,15 @@ public class DashPluginsFragment extends DashBaseFragment {
 	private ArrayList<CompoundButton> checks;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_plugins_fragment, container, false);
-		Typeface typeface = FontCache.getRobotoMedium(getActivity());
-		((TextView) view.findViewById(R.id.plugin_text)).setTypeface(typeface);
-		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+							 @Nullable Bundle savedInstanceState) {
+		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_plugins_fragment,
+				container, false);
 		view.findViewById(R.id.show_all).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startActivityForResult(new Intent(getActivity(), getMyApplication().getAppCustomization().getPluginsActivity()), 1);
+				startActivityForResult(new Intent(getActivity(),
+						getMyApplication().getAppCustomization().getPluginsActivity()), 1);
 			}
 		});
 		LinearLayout layout = (LinearLayout) view.findViewById(R.id.plugins);
@@ -92,10 +91,12 @@ public class DashPluginsFragment extends DashBaseFragment {
 		
 		for (int i = 0; i < showedPlugins.size(); i++) {
 			final OsmandPlugin plugin = showedPlugins.get(i);
-			View view = inflater.inflate(R.layout.dash_plugin_item, null, false);
+			View view = inflater.inflate(R.layout.dash_plugin_item, layout, false);
+
 			((TextView) view.findViewById(R.id.plugin_name)).setText(plugin.getName());
-			((TextView) view.findViewById(R.id.plugin_descr)).setText(plugin.getDescription());
-			
+			((ImageView) view.findViewById(R.id.plugin_logo)).setImageResource(
+					plugin.getLogoResourceId());
+
 			CompoundButton check = (CompoundButton) view.findViewById(R.id.check_item);
 			checks.add(check);
 			check.setChecked(enabledPlugins.contains(plugin));

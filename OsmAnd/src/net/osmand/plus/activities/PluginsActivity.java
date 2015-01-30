@@ -3,7 +3,6 @@ package net.osmand.plus.activities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.osmo.OsMoPlugin;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -87,9 +86,7 @@ public class PluginsActivity extends OsmandListActivity {
 			view.setTag(plugin);
 
 			ImageView pluginLogo = (ImageView)view.findViewById(R.id.plugin_logo);
-			if (plugin.getId().equals(OsMoPlugin.ID)) {
-				pluginLogo.setImageResource(R.drawable.ic_osmo_dark);
-			}
+			pluginLogo.setImageResource(plugin.getLogoResourceId());
 
 			TextView pluginName = (TextView)view.findViewById(R.id.plugin_name);
 			pluginName.setText(plugin.getName());
