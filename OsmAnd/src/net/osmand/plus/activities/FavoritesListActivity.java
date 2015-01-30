@@ -1,21 +1,19 @@
 package net.osmand.plus.activities;
 
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import net.osmand.plus.OsmandApplication;
 import android.os.Bundle;
 
 
-public class FavouritesListActivity extends ActionBarActivity {
+public class FavoritesListActivity extends OsmandActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		if (savedInstanceState == null) {
 			// During initial setup, plug in the details fragment.
-			FavouritesListFragment details = new FavouritesListFragment();
+			FavoritesListFragment details = new FavoritesListFragment();
 			details.setArguments(getIntent().getExtras());
 			getSupportFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
 		}

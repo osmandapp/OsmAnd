@@ -725,7 +725,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="index_name_wiki">PDI Wikipedia mondiale</string>
 	<string name="update_poi_is_not_available_for_zoom">S\'agiornamentu de sos PDI non est disponìbile pro livellos de zoom bassos</string>
 	<string name="tip_update_index_t">"Mapas agiorndas sunt fundamentales pro sa visione sena lìnia, pro sa chirca tramite PDI/indiritzu, e pro su nàvigu sena lìnia. OsmAnd frunidi unu gestore de sas mapas pro las isgarrigare e pro chircare pro agiornamentos.
-\n\nPro isgarrigare mapas bae in \'Impostaduras\' → \'Gesti documentos mapas\' → \'Isgàrriga\'.
+\n\nPro isgarrigare mapas bae in \'Impostaduras\' → \'Amministra documentos de sas mapas\' → \'Isgàrriga\'.
 \n\nA pustis chi sa lista globale de sas regiones at a èssere istada isgarrigada, carca in supra de unu ogetu pro isgarrigare o carrigare unu documentu. Pro piaghere nota s\'isseberadore de tiou de documentu in sa parte arta de s\'ischermu pro ischertare su tipu de isgarrigamentu chi boles (mapas regulares, umbraduras de sos rilievos, etc.).
 \n\nPodes filtrare sa lista de sas regiones iscrivende carchi lètera, o  ischertande s\'optzione \'Impostaduras\' → \'Filtra isgarrigadas \' pro bìere agiornamentos pro petzi sos datos chi tenes giai in su dispositivu.
 \n\n\t* Boghes in \'birde\' indicana documentos de datos identicos in su dispositivu e in su server
@@ -969,7 +969,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="history_search_desc">Cronologia chircas</string>
 	<string name="download_link_and_local_description">Carcare inoghe pro iscarrigare o carrigare documentos de mapas sena lìnia.
 \nCarca un\'elementu esistente pro bìdere prus minujos, carca e mantène carcau pro deativare o cantzellare. Datos currentes in su dispositivu (%1$s lìberos):</string>
-	<string name="index_settings_descr">Iscàrriga e gesti sas mapas non in lìnia sarbadas in su dispositivu</string>
+	<string name="index_settings_descr">Iscàrriga e amministra sas mapas non in lìnia sarbadas in su dispositivu</string>
 	<string name="map_online_plugin_is_not_installed">Abìlita su plugin pro sas mapas sena lìnia pro ammustrare àteras mitzas</string>
 	<string name="osmand_monitoring_description">Ammustra sas impostaduras pro fatzilitare sa registratzione in unu documentu GPX o in lìnia impreande uu servìtziu web.</string>
 	<string name="hide_all_waypoints">Burralos totus</string>
@@ -983,7 +983,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="poi_error_info_not_loaded">Informatziones relatas a su nodu non carrigadas</string>
 	<string name="poi_error_io_error_template">Errore de I/O durante s\'esecutzione de s\'atzione {0}.</string>
 	<string name="poi_action_succeded_template">Atzione {0} reseddida cumpridamente.</string>
-	<string name="first_time_msg">Gratzias pro s\'impreu de OsmAnd. Pro meda de sas caraterìsticas de s\'àplicu tènes bisongiu de datos locales sena lìnia, chi podent èssere icarrigadas dae \'Impostaduras\'→\'Gesti sos documentos mapas\'. A pustis at a èssere possìbile ammustrare mapas, chircare indirìtzos, PDI, e agatare trasportos pùblicos.</string>    
+	<string name="first_time_msg">Gratzias pro s\'impreu de OsmAnd. Pro meda de sas caraterìsticas de s\'àplicu tènes bisongiu de datos locales sena lìnia, chi podent èssere icarrigadas dae \'Impostaduras\'→\'Amministra sos documentos de sas mapas\'. A pustis at a èssere possìbile ammustrare mapas, chircare indirìtzos, PDI, e agatare trasportos pùblicos.</string>    
 	<string name="basemap_was_selected_to_download">Sa mapa de base est pedida pro su funtzionamentu curretu de s\'àplicu e est idada ischertada pro s\'iscarrigamentu.</string>
 	<string name="osmand_extra_settings_description">Ammustra sas impostaduras pro sa cunfiguratzione avantzada de sa mapa (comente aumentare sos minujos) e calicunas de dispositivos dislindados.</string>
 	<string name="osmand_development_plugin_description">Ammustra impostaduras pro funtzionalidades in isvilupu e debug comente su nàvigu animadu o ammustrare sa prestatzione de su rendering.</string>
@@ -1005,7 +1005,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="osm_editing_plugin_description">Ammustra sasimpostaduras netzessàrias pro cuntribuire ad OSM comente sa regorta/muda de sos PDI de OSM, apèrrere/cummentare errores de OSM e inviare documentos GPX registrados (rechedet sas credentziales de OSM).</string>
 	<string name="play_commands_of_currently_selected_voice">Riprodui sos cumandos de sa boghe como seletzionada</string>
 	<string name="test_voice_prompts">Proa sos cumandos vocales</string>    
-	<string name="switch_to_raster_map_to_see">Peruna mapa vetoriale est disponìbile pro custa positzione. Ne podes iscarrigare una in Impostaduras (Gesti sos datos mapas), o colare a sas mapas in lìnia (abìlita sas mapas in lìnia pro lu fàghere).</string>
+	<string name="switch_to_raster_map_to_see">Peruna mapa vetoriale est disponìbile pro custa positzione. Ne podes iscarrigare una in Impostaduras (Amministra sos documentos de sas mapas), o colare a sas mapas in lìnia (abìlita sas mapas in lìnia pro lu fàghere).</string>
 	<string name="tip_recent_changes_0_7_2_t">"Mudas in sa 0.7.2:
 \n\t- Disinnu nativu pro totu sos dispositivos
 \n\t- Creatzione sena lìnia de sos PDI
@@ -1057,7 +1057,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="local_openstreetmap_upload">Càrriga sa modìfica in OSM</string>
 	<string name="local_openstreetmap_delete">Burra sa modìfica</string>
 	<string name="local_openstreetmap_descr_title">Muda asìncrona de OSM:</string>
-	<string name="local_openstreetmap_settings_descr">Ammustra e gesti sos PDI/errores OSM in intro de su database locale</string>
+	<string name="local_openstreetmap_settings_descr">Ammustra e amministra sos PDI/errores OSM in intro de su database locale</string>
 	<string name="live_monitoring_interval_descr">Dislinda s\'intervallu de s\'arrastamentu in lìnia</string>
 	<string name="live_monitoring_interval">Intervallu de s\'arrastamentu in dereta (in lìnia)</string>
 	<string name="live_monitoring_url_descr">Dislinda s\'indiritzu ìnternet cun sa sintassi de sos paràmetros: lat={0}, lon={1}, data/ora={2}, hdop={3}, artària={4}, lestresa={5}, àngulu={6}</string>
@@ -1072,7 +1072,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="index_name_tts_voice">Indicatziones vocales (TTS-sintetizadas, preferìbiles)</string>
 	<string name="amenity_type_user_defined">Definidu dae s\'impitadore</string>
 	<string name="fav_export_confirmation">Esistint documentos cun prefèrridos esportados giai. Los boles remplasare?</string>
-	<string name="index_settings">Gesti sos documentos de sas mapas</string>
+	<string name="index_settings">Amministra sos documentos de sas mapas</string>
 	<string name="user_name_descr">Netzessàriu pro imbiare contributos a openstreetmap.org</string>
 	<string name="user_password_descr">Netzessària pro imbiare contributos a openstreetmap.org</string>
 	<string name="osmand_service">Servìtziu \"a reposu\"</string>
@@ -1167,7 +1167,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="local_index_items_restored">%1$d de %2$d ogetu/os ativadu/os curretamente.</string>
 	<string name="local_index_no_items_to_do">Perunu ogetu dae %1$s</string>
 	<string name="local_index_action_do">Istas pro %1$s %2$s ogetu/os. Sighire?</string>
-	<string name="local_index_descr_title">Gesti sos documentos de sas mapas</string>
+	<string name="local_index_descr_title">Amministra sos documentos de sas mapas</string>
 	<string name="local_index_mi_restore">Ativa</string>
 	<string name="local_index_mi_backup">Deativa</string>
 	<string name="local_index_mi_delete">Burra</string>
@@ -1675,7 +1675,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="off_router_service_no_gps_available">Su servìtziu de nàvigu a reposu de OsmAnd netzèssitat de su sistema de positzionamentu ativadu.</string>
 	<string name="tip_recent_changes_0_6_7_t">"Mudas in sa 0.6.7:
 \n\t- Gestore datos non in lìnia (iscàrriga, burra, ativa / deativa datos sena lìnia deretamente dae OsmAnd)
-\n\t- Puntos prefèrridos e grupos (categoriza, burra, gesti sos prefèrridos)
+\n\t- Puntos prefèrridos e grupos (categoriza, burra, amministra sos prefèrridos)
 \n\t- GPX Explorer in s\'aplicu (bie minujas de sas rastas, distantzia, lestresa, artària, etc.)
 \n\t- Nàvigu GPX (prus optziones, sighi su nàvigu a pustis de un errore (crash), suportu pro sas rutundas)
 \n\t- Funtzione pro sarbare s\'àndala in formatu GPX e l\'impreare sena lìnia\n\t- Megiorada sa compidada GPX (logos non pretzisos filtrados e datos pro cuidadu/artària/lestresa sarbados)
@@ -1805,7 +1805,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="dash_download_msg_none">Boles iscarrigare una mapa non in lìnia?</string>
     <string name="dash_download_msg">As iscarrigadu %1$s mapas</string>
     <string name="dash_download_new_one">Iscàrriga una mapa noa</string>
-    <string name="dash_download_manage">Gesti</string>
+    <string name="dash_download_manage">Amministra</string>
     <string name="rendering_attr_roadStyle_name">Istile disinnu de sas istradas</string>
     <string name="rendering_value_default_name">Predefinidu</string>
     <string name="rendering_value_orange_name">Arantzu</string>
@@ -1838,7 +1838,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="points">Puntos</string>
     <string name="tracks">Rastas</string>
     <string name="my_location">Positzione mea</string>
-    <string name="osm_editing_manage">Gesti</string>
+    <string name="osm_editing_manage">Amministra</string>
     <string name="gps_status">Istadu GPS</string>
     <string name="parking_place">Parchègiu</string>
     <string name="remove_the_tag">BOGA SU TAG</string>

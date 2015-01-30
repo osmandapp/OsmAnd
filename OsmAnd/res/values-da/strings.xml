@@ -468,7 +468,7 @@
 	<string name="live_monitoring_interval">Interval for online sporing</string>
 	<string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, long={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}</string>
 	<string name="live_monitoring_url">Webadresse for online sporing</string>
-	<string name="gpx_monitoring_disabled_warn">Log spor med GPX modul eller via \'Tur optagelse\' indstillinger.</string>
+	<string name="gpx_monitoring_disabled_warn">Log spor med GPX modul eller via indstillinger \'Tur optagelse\'.</string>
 	<string name="show_current_gpx_title">Vis aktuelt spor</string>
 	<string name="free_version_message">Den gratis version af OsmAnd er begrænset til at hente %1$s kort og understøtter ikke offline Wikipedia artikler.</string>
 	<string name="free_version_title">Gratis version</string>
@@ -1005,7 +1005,7 @@
 	<string name="first_time_continue">Senere</string>
 	<string name="first_time_download">Hent regioner</string>
 	<string name="search_poi_location">Søger efter signal…</string>
-	<string name="search_near_map">Søg i nærheden af nuværende kortcenter</string>
+	<string name="search_near_map">Søg i nærheden af nuværende midte på kortet</string>
 	<string name="search_nearby">Søg i nærheden</string>
 	<string name="map_orientation_default">Samme som enhed</string>
 	<string name="map_orientation_portrait">Stående</string>
@@ -1879,7 +1879,7 @@
     <string name="rendering_value__name">Standard</string>
 	<string name="save_track_to_gpx_globally_headline">On demand sporingslogning</string>
 	<string name="navigation_over_track">Start navigation langs spor?</string>
-	<string name="avoid_roads_msg">Du kan generere en alternativ rute ved at vælge veje der skal undgås</string>
+	<string name="avoid_roads_msg">Generere en alternativ rute ved at vælge veje der skal undgås</string>
     <string name="recents">SENESTE</string>
 	<string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Opsæt en proxy til internetkommunikation</string>

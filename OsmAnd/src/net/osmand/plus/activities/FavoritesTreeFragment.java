@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import android.content.pm.ActivityInfo;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.SearchView;
@@ -30,11 +31,10 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.helpers.WaypointDialogHelper;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -62,7 +62,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class FavouritesTreeFragment extends OsmandExpandableListFragment {
+public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 	public static final int SEARCH_ID = -1;
 //	public static final int EXPORT_ID = 0;
@@ -300,15 +300,12 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		menu = ((FavouritesActivity) getActivity()).getClearToolbar(true).getMenu();
-		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_light,
-				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS
-						| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+
+		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
+				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 		searchView = new SearchView(getActivity());
 		MenuItemCompat.setActionView(mi, searchView);
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-
 			@Override
 			public boolean onQueryTextSubmit(String query) {
 				favouritesAdapter.getFilter().filter(query);
@@ -322,7 +319,6 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			}
 		});
 		MenuItemCompat.setOnActionExpandListener(mi, new MenuItemCompat.OnActionExpandListener() {
-
 			@Override
 			public boolean onMenuItemActionExpand(MenuItem item) {
 				return true;
@@ -337,12 +333,23 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			}
 		});
 
+		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
+		boolean portrait = orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
+				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+		if (portrait) {
+			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
+		} else {
+			((FavoritesActivity) getActivity()).getClearToolbar(false);
+		}
+
+
+
 		if (!MenuItemCompat.isActionViewExpanded(mi)) {
-			createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_light,
+			createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_dark,
 					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			createMenuItem(menu, SELECT_DESTINATIONS_ID, R.string.select_destination_and_intermediate_points, R.drawable.ic_action_flage_light,
+			createMenuItem(menu, SELECT_DESTINATIONS_ID, R.string.select_destination_and_intermediate_points, R.drawable.ic_action_flage_dark,
 					R.drawable.ic_action_flage_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			createMenuItem(menu, DELETE_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_light,
+			createMenuItem(menu, DELETE_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_dark,
 					R.drawable.ic_action_delete_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 //			createMenuItem(menu, EXPORT_ID, R.string.export_fav, R.drawable.ic_action_gsave_light,
 //					R.drawable.ic_action_gsave_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -365,7 +372,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				enableSelectionMode(true);
 				createMenuItem(menu, SELECT_DESTINATIONS_ACTION_MODE_ID, R.string.select_destination_and_intermediate_points,
-						R.drawable.ic_action_flage_light, R.drawable.ic_action_flage_dark,
+						R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_dark,
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				favoritesSelected.clear();
 				groupsToDelete.clear();
@@ -421,7 +428,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				enableSelectionMode(true);
 				createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete,
-						R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
+						R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark,
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				favoritesSelected.clear();
 				groupsToDelete.clear();
@@ -456,7 +463,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
-		((FavouritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
+		((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
 	}
 
 	protected void openChangeGroupDialog(final FavoriteGroup group) {

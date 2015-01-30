@@ -1,7 +1,7 @@
 package net.osmand.access;
 
-import android.support.v7.app.ActionBarActivity;
 import android.view.MotionEvent;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 
 // Provide some additional accessibility means for activity view elements.
 //
@@ -9,7 +9,7 @@ import android.view.MotionEvent;
 // and then add view elements you wish to be accessible
 // to the accessibleContent list.
 //
-public class AccessibleActivity extends ActionBarActivity implements AccessibleContent.Callback {
+public class AccessibleActivity extends OsmandActionBarActivity implements AccessibleContent.Callback {
 
     // List of accessible views. Use accessibleContent.add(element)
     // to add element to it.

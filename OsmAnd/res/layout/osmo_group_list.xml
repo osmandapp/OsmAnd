@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="fill_parent"
+			  android:layout_height="fill_parent"
+			  android:orientation="vertical"
+			  android:layout_marginTop="?attr/actionBarSize">
+
+	<TextView
+			android:id="@+id/DescriptionText"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="5dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_marginTop="3dp"
+			android:text=""
+			android:visibility="gone" />
+
+	<ExpandableListView
+			android:id="@android:id/list"
+			style="@style/OsmandListView"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_marginLeft="0dp"
+			android:layout_marginRight="0dp"
+			android:layout_marginTop="0dp"
+			android:layout_weight="1"
+			android:groupIndicator="@android:color/transparent"/>
+
+</LinearLayout>

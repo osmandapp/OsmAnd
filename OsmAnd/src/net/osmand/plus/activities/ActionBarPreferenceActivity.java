@@ -2,7 +2,9 @@ package net.osmand.plus.activities;
 
 import android.app.Activity;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -37,20 +39,18 @@ public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
 			shadowView = null;
 		}
 		toolbar.setClickable(true);
-		toolbar.setNavigationIcon(getResIdFromAttribute(this, R.attr.homeAsUpIndicator));
+		Drawable back = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		back.setColorFilter(0xffffffff, PorterDuff.Mode.MULTIPLY);
+		toolbar.setNavigationIcon(back);
+		toolbar.setBackgroundColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTabBackground)));
+		toolbar.setTitleTextColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTextColor)));
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
 				finish();
 			}
 		});
-		if (((OsmandApplication)getApplication()).getSettings().isLightActionBar()){
-			toolbar.setBackgroundColor(getResources().getColor(R.color.actionbar_light_color));
-			toolbar.setTitleTextColor(getResources().getColor(R.color.color_white));
-		} else {
-			toolbar.setBackgroundColor(getResources().getColor(R.color.actionbar_dark_color));
 
-		}
 		getSpinner().setVisibility(View.GONE);
 		setProgressVisibility(false);
 	}

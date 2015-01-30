@@ -5,12 +5,12 @@ import java.util.WeakHashMap;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
@@ -33,7 +33,7 @@ import android.widget.TextView;
 
 /**
  */
-public class TourViewActivity extends ActionBarActivity {
+public class TourViewActivity extends OsmandActionBarActivity {
 
 	private enum viewState {
 		STATE_LOADING,
@@ -81,8 +81,6 @@ public class TourViewActivity extends ActionBarActivity {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		}
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setTitle(R.string.sherpafy_app_name);
 
 		setContentView(R.layout.sherpafy_browse_tour);
