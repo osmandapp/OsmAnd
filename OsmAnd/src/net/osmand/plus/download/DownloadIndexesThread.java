@@ -391,6 +391,7 @@ public class DownloadIndexesThread {
 	public void runReloadIndexFiles() {
 		checkRunning();
 		indexFiles = null;
+		updateLoadedFiles();
 		final BasicProgressAsyncTask<Void, Void, IndexFileList> inst = new BasicProgressAsyncTask<Void, Void, IndexFileList>(ctx) {
 
 			@Override
