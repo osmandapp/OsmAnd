@@ -1918,4 +1918,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="gps_status">Statut GPS</string>
     <string name="parking_place">Place de stationnement</string>
     <string name="remove_the_tag">Retirer l\'étiquette</string>
-    </resources>
+    <string name="enable_plugin">Activer</string>
+	<string name="disable_plugin">Désactiver</string>
+</resources>
