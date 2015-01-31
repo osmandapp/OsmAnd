@@ -3,7 +3,7 @@
     android:id="@+id/search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_cardui"
+    android:background="?attr/card_bg"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -12,20 +12,20 @@
 
         <TextView
             android:id="@+id/search_for"
-            style="@style/DashboardSubHeader"
+            style="?attr/dashboardSubHeaderStyle"
             android:layout_width="wrap_content"
             android:text="@string/search_for" />
 
         <Button
             android:id="@+id/recents"
-            style="@style/DashboardGeneralButton"
+            style="?attr/dashboardGeneralButtonStyle"
             android:text="@string/recents" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/dashboard_divider" />
+		android:background="?attr/dashboard_divider" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/dashboard_divider" />
+			android:background="?attr/dashboard_divider" />
 
         <Button
             android:id="@+id/address"
@@ -52,7 +52,7 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/dashboard_divider" />
+			android:background="?attr/dashboard_divider" />
 
         <Button
             android:id="@+id/coord"

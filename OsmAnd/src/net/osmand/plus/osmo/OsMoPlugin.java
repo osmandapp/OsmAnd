@@ -117,7 +117,10 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		return app.getString(R.string.osmo_plugin_name);
 	}
 	
-	
+	@Override
+	public int getLogoResourceId() {
+		return R.drawable.ic_osmo_dark;
+	}
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {

@@ -1892,4 +1892,6 @@
     <string name="gps_status">GPS 狀態</string>
     <string name="parking_place">停車地點</string>
     <string name="remove_the_tag">移除標記</string>
-    </resources>
+    <string name="enable_plugin">啟用</string>
+	<string name="disable_plugin">停用</string>
+</resources>

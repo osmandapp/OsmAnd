@@ -3,10 +3,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:orientation="vertical"
 			  android:layout_width="match_parent"
-			  android:background="@drawable/dashboard_button"
+			  android:background="?attr/dashboard_button"
 			  android:layout_height="@dimen/dashListItemHeight">
     <View android:layout_width="match_parent"
-          android:background="@color/dashboard_divider"
+		  android:background="?attr/dashboard_divider"
           android:layout_height="1dp"/>
     <LinearLayout android:orientation="horizontal"
                   android:layout_width="match_parent"
@@ -59,7 +59,7 @@
         <ImageButton android:id="@+id/navigate_to"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_action_gdirections_light"
-                android:background="@drawable/dashboard_button"
+                android:background="?attr/dashboard_button"
                 android:layout_marginLeft="@dimen/dashFavIconMargin"
                 android:layout_width="@dimen/dashListItemHeight"
                 android:layout_height="@dimen/dashListItemHeight"/>

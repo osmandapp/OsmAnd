@@ -14,25 +14,50 @@
 		<item name="android:layout_height">fill_parent</item>
         <item name="android:paddingBottom">@dimen/subHeaderPadding</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/dashboard_black</item>
-        <item name="android:layout_marginLeft">@dimen/subHeaderMarginLeft</item>
         <item name="android:textSize">@dimen/subHeaderTextSize</item>
+		<item name="typeface">@string/font_roboto_medium</item>
     </style>
+
+	<!-- Pre-v17 version -->
+	<style name="DashboardSubHeader.Compat" parent="DashboardSubHeader">
+		<item name="android:layout_marginLeft">@dimen/subHeaderMarginLeft</item>
+	</style>
+
+	<style name="DashboardSubHeader.Light" parent="DashboardSubHeader.Compat">
+		<item name="android:textColor">@color/dashboard_subheader_text_light</item>
+	</style>
+
+	<style name="DashboardSubHeader.Dark" parent="DashboardSubHeader.Compat">
+		<item name="android:textColor">@color/dashboard_subheader_text_dark</item>
+	</style>
 
     <style name="DashParkingText">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/dashParkingTextSize</item>
     </style>
 
-    <style name="DashboardGeneralButton">
-        <item name="android:layout_marginRight">@dimen/showAllButtonMarginRight</item>
+	<style name="DashboardGeneralButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/showAllButtonHeight</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textSize">@dimen/showAllButtonTextSize</item>
-        <item name="android:textColor">@color/dashboard_blue</item>
-        <item name="android:background">@drawable/dashboard_button</item>
+        <item name="typeface">@string/font_roboto_medium</item>
     </style>
+
+	<!-- Pre-v17 version -->
+	<style name="DashboardGeneralButton.Compat" parent="DashboardGeneralButton">
+		<item name="android:layout_marginRight">@dimen/showAllButtonMarginRight</item>
+	</style>
+
+	<style name="DashboardGeneralButton.Light" parent="DashboardGeneralButton.Compat">
+		<item name="android:textColor">@color/dashboard_general_button_light</item>
+		<item name="android:background">@drawable/dashboard_button_light</item>
+	</style>
+
+	<style name="DashboardGeneralButton.Dark" parent="DashboardGeneralButton.Compat">
+		<item name="android:textColor">@color/dashboard_general_button_dark</item>
+		<item name="android:background">@drawable/dashboard_button_dark</item>
+	</style>
 
     <style name="DashboardSearchButton">
         <item name="android:paddingTop">@dimen/dashSearchPaddingTop</item>
@@ -41,7 +66,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">@dimen/showAllButtonTextSize</item>
         <item name="android:textColor">@color/dashboard_black</item>
-        <item name="android:background">@drawable/dashboard_button</item>
+        <item name="android:background">@drawable/dashboard_button_light</item>
 		<item name="android:gravity">bottom|center_horizontal</item>
 		<item name="android:paddingBottom">@dimen/dashSearchPaddingBot</item>
     </style>
@@ -98,6 +123,15 @@
 		<item name="actionMenuTextColor">@color/color_white</item>
 		<item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
 		<item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
+		<item name="card_bg">@drawable/bg_card_light</item>
+		<item name="ic_action_check">@drawable/ic_action_check_light</item>
+		<item name="ic_extension">@drawable/ic_extension_light</item>
+		<item name="ic_overflow_menu">@drawable/ic_overflow_menu_light</item>
+		<item name="ic_plugin_options">@drawable/ic_plugin_options_light</item>
+		<item name="dashboardGeneralButtonStyle">@style/DashboardGeneralButton.Light</item>
+		<item name="dashboardSubHeaderStyle">@style/DashboardSubHeader.Light</item>
+		<item name="dashboard_divider">@color/dashboard_divider_light</item>
+		<item name="dashboard_button">@drawable/dashboard_button_light</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -114,6 +148,15 @@
         <item name="actionModeBackground">@color/actionbar_dark_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
+		<item name="card_bg">@drawable/bg_card_dark</item>
+		<item name="ic_action_check">@drawable/ic_action_check_dark</item>
+		<item name="ic_extension">@drawable/ic_extension_dark</item>
+		<item name="ic_overflow_menu">@drawable/ic_overflow_menu_dark</item>
+		<item name="ic_plugin_options">@drawable/ic_plugin_options_dark</item>
+		<item name="dashboardGeneralButtonStyle">@style/DashboardGeneralButton.Dark</item>
+		<item name="dashboardSubHeaderStyle">@style/DashboardSubHeader.Dark</item>
+		<item name="dashboard_divider">@color/dashboard_divider_dark</item>
+		<item name="dashboard_button">@drawable/dashboard_button_dark</item>
     </style>
 
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
