@@ -604,7 +604,7 @@ public class DownloadIndexesThread {
 			String indexfilesdate = indexFileNames.get(sfName);
 			if (date != null &&
 					!date.equals(indexactivateddate) &&
-					!date.equals(indexfilesdate)) &&
+					!date.equals(indexfilesdate) &&
 					indexActivatedFileNames.containsKey(sfName)) {
 				stillUpdate.add(item);
 			}
