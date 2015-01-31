@@ -244,19 +244,21 @@ public class UpdatesIndexFragment extends ListFragment {
 								+ indexActivatedFileNames.get(sfName));
 						name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					} else if (e.getDate(format).equals(indexFileNames.get(sfName))) {
-						name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
-								+ indexFileNames.get(sfName));
-						name.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+						//Hide deactivated files from update list
+						//name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
+						//		+ indexFileNames.get(sfName));
+						//name.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 					} else if (updatableResource) {
 						name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
 						name.setTextColor(updateColor); // LIGHT_BLUE
 						name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					} else {
-						name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
-								+ indexFileNames.get(sfName));
-						name.setTextColor(updateColor); // LIGHT_BLUE
-						name.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+						//Hide deactivated files from update list
+						//name.setText(name.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : "
+						//		+ indexFileNames.get(sfName));
+						//name.setTextColor(updateColor); // LIGHT_BLUE
+						//name.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 					}
 				}
 			}
