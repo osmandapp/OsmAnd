@@ -2051,4 +2051,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="parking_place">Parkovacie miesto</string>
     <string name="remove_the_tag">ODSTRÁNIŤ ZNAČKU</string>
     <string name="gps_status">Stav GPS</string>
-    </resources>
+    <string name="enable_plugin">Zapnúť</string>
+	<string name="disable_plugin">Vypnúť</string>
+</resources>
