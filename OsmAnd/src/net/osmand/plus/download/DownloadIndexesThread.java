@@ -578,8 +578,6 @@ public class DownloadIndexesThread {
 		if (date != null &&
 				!date.equals(indexactivateddate) &&
 				!date.equals(indexfilesdate)) {
-				//Discrimination if item is deactivated should actually be made elsewhere in the code (DownloadIndexAdapter, UpdateIndexFragment, etc.)
-				//indexActivatedFileNames.containsKey(sfName)) {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra) ||
 					item.getType() == DownloadActivityType.ROADS_FILE ||
 					item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
