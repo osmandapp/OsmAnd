@@ -576,7 +576,7 @@ public class DownloadIndexesThread {
 		String indexfilesdate = indexFileNames.get(sfName);
 		if (date != null &&
 				!date.equals(indexactivateddate) &&
-				!date.equals(indexfilesdate) && {
+				!date.equals(indexfilesdate)) {
 				//This is checked in DownloadIndexAdapter: indexActivatedFileNames.containsKey(sfName)) {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra) ||
 					item.getType() == DownloadActivityType.ROADS_FILE ||
@@ -604,7 +604,7 @@ public class DownloadIndexesThread {
 			String indexfilesdate = indexFileNames.get(sfName);
 			if (date != null &&
 					!date.equals(indexactivateddate) &&
-					!date.equals(indexfilesdate) && {
+					!date.equals(indexfilesdate)) {
 					//This is checked in DownloadIndexAdapter: indexActivatedFileNames.containsKey(sfName)) {
 				stillUpdate.add(item);
 			}
