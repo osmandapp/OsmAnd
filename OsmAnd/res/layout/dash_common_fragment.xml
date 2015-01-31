@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:id="@+id/main_fav"
-			  android:background="@drawable/bg_cardui"
+			  android:background="?attr/card_bg"
 			  android:layout_width="fill_parent"
 			  android:layout_height="wrap_content"
 			  android:orientation="vertical">
@@ -11,10 +11,10 @@
 				  android:layout_height="@dimen/dashHeaderHeight">
 		<TextView android:id="@+id/fav_text"
 				  android:text="@string/my_data_Button"
-				  style="@style/DashboardSubHeader"/>
+				  style="?attr/dashboardSubHeaderStyle"/>
 		<Button android:id="@+id/show_all"
 				android:text="@string/show_all"
-				style="@style/DashboardGeneralButton"/>
+				style="?attr/dashboardGeneralButtonStyle"/>
 	</LinearLayout>
 	<LinearLayout android:id="@+id/items"
 				  android:orientation="vertical"

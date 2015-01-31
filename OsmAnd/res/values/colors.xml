@@ -7,9 +7,14 @@
 
 	<color name="dashboard_descr_colol">#727272</color>
 	<color name="dashboard_background">#eaeaea</color>
-	<color name="dashboard_divider">#F0F0F0</color>
+	<color name="dashboard_divider_light">#F0F0F0</color>
+	<color name="dashboard_divider_dark">#3d474c</color>
 	<color name="dashboard_black">#212121</color>
 	<color name="dashboard_blue">#536DFE</color>
+	<color name="dashboard_subheader_text_dark">#b4c3cc</color>
+	<color name="dashboard_subheader_text_light">#212121</color>
+	<color name="dashboard_general_button_dark">#ff8f00</color>
+	<color name="dashboard_general_button_light">#536DFE</color>
     <color name="gpx_color_point">#cd2c33</color>
     <color name="gpx_speed">#c79c00</color>
     <color name="gpx_altitude_desc">#32CD32</color>
@@ -82,5 +87,7 @@
 	<color name="sherpafy_add_text">#b9b9b9</color>
 
     <color name="dark_drawer_bg_color">#303030</color>
-	
+
+	<color name="card_bg_color_light">#ffffff</color>
+	<color name="card_bg_color_dark">#333b40</color>
 </resources>

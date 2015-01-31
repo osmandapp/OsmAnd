@@ -4,7 +4,7 @@
 			  android:layout_width="match_parent"
 			  android:layout_height="@dimen/dashListItemHeight">
 	<View android:layout_width="match_parent"
-		  android:background="@color/dashboard_divider"
+		  android:background="?attr/dashboard_divider"
 		  android:layout_height="1dp"/>
 	<LinearLayout android:orientation="horizontal"
 				  android:layout_width="match_parent"

@@ -47,6 +47,10 @@ public abstract class OsmandPlugin {
 	public abstract String getDescription();
 	
 	public abstract String getName();
+
+	public int getLogoResourceId() {
+		return R.drawable.ic_extension_dark;
+	}
 	
 	public abstract Class<? extends Activity> getSettingsActivity();
 	

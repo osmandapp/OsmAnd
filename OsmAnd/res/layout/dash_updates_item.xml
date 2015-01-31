@@ -7,7 +7,7 @@
 			  android:layout_marginRight="@dimen/dashFavIconMargin"
 			  android:layout_height="@dimen/dashListItemHeight">
 	<View android:layout_width="match_parent"
-		  android:background="@color/dashboard_divider"
+		  android:background="?attr/dashboard_divider"
 		  android:layout_height="1dp"/>
 	<LinearLayout android:orientation="horizontal"
 				  android:layout_marginLeft="@dimen/subHeaderMarginLeft"
@@ -36,7 +36,7 @@
 		<ImageButton android:id="@+id/btn_download"
 				android:layout_gravity="center_vertical"
 				android:src="@drawable/download_button"
-				android:background="@drawable/dashboard_button"
+				android:background="?attr/dashboard_button"
 				android:layout_width="@dimen/dashListItemHeight"
 				android:layout_height="@dimen/dashListItemHeight"/>
 	</LinearLayout>
