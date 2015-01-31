@@ -2130,4 +2130,6 @@
     <string name="gps_status">GPS status</string>
     <string name="parking_place">주차장</string>
     <string name="remove_the_tag">태그를 제거</string>
-    </resources>
+    <string name="enable_plugin">사용가능</string>
+	<string name="disable_plugin">사용안함</string>
+</resources>
