@@ -2009,4 +2009,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="gps_status">Стан GPS</string>
     <string name="parking_place">Парковачнае месца</string>
     <string name="remove_the_tag">Выдаліць тэг</string>
-    </resources>
+    <string name="enable_plugin">Уключыць</string>
+	<string name="disable_plugin">Адключыць</string>
+</resources>
