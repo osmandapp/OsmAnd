@@ -432,7 +432,6 @@ public class DownloadIndexesThread {
 				}
 				currentRunningTask.remove(this);
 				if (uiActivity != null) {
-					uiActivity.downloadedIndexes();
 					uiActivity.updateProgress(false);
 					runCategorization(uiActivity.getDownloadType());
 				}
