@@ -577,7 +577,7 @@ public class DownloadIndexesThread {
 		if (date != null &&
 				!date.equals(indexactivateddate) &&
 				!date.equals(indexfilesdate)) {
-				//This is checked in DownloadIndexAdapter: indexActivatedFileNames.containsKey(sfName)) {
+				//Discrimintaion if item is deactivated to be made elsewhere in the code (DonwloadIndexAdapter, UpdateIndexFragment, etc.): indexActivatedFileNames.containsKey(sfName)) {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra) ||
 					item.getType() == DownloadActivityType.ROADS_FILE ||
 					item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
@@ -604,8 +604,8 @@ public class DownloadIndexesThread {
 			String indexfilesdate = indexFileNames.get(sfName);
 			if (date != null &&
 					!date.equals(indexactivateddate) &&
-					!date.equals(indexfilesdate)) {
-					//This is checked in DownloadIndexAdapter: indexActivatedFileNames.containsKey(sfName)) {
+					!date.equals(indexfilesdate)) &&
+					indexActivatedFileNames.containsKey(sfName)) {
 				stillUpdate.add(item);
 			}
 		}
