@@ -1792,4 +1792,6 @@
     <string name="tracks">Spår</string>
     <string name="my_location">Min plats</string>
     <string name="osm_editing_manage">Hantera</string>
-    </resources>
+    <string name="enable_plugin">Aktivera</string>
+	<string name="disable_plugin">Inaktivera</string>
+</resources>
