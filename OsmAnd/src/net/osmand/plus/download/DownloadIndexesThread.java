@@ -390,6 +390,7 @@ public class DownloadIndexesThread {
 	
 	public void runReloadIndexFiles() {
 		checkRunning();
+		indexFiles = null;
 		final BasicProgressAsyncTask<Void, Void, IndexFileList> inst = new BasicProgressAsyncTask<Void, Void, IndexFileList>(ctx) {
 
 			@Override
