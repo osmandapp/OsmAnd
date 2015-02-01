@@ -17,7 +17,7 @@
 	<color name="dashboard_general_button_light">#536DFE</color>
 
 	<color name="color_transparent">#00000000</color>
-	<color name="widgettext_night">0xffC8C8C8</color>
+	<color name="widgettext_night">#ffC8C8C8</color>
 
 	<!-- style colors  -->
 	<color name="group_background">#A5A5A5</color>
