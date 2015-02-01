@@ -2140,4 +2140,28 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
     <string name="dash_download_msg">%1$sのマップをダウンロードしました</string>
     <string name="dash_download_new_one">新しいマップをダウンロード</string>
     <string name="dash_download_manage">管理</string>
-    </resources>
+    <string name="map_locale">マップ使用言語</string>
+    <string name="rendering_attr_transportStops_name">停留所</string>
+    <string name="navigate_point_zone">区域</string>
+    <string name="navigate_point_northing">北進</string>
+    <string name="navigate_point_easting">東進</string>
+    <string name="download_tab_downloads">すべてのダウンロード</string>
+    <string name="download_tab_updates">更新</string>
+    <string name="download_tab_local">ローカル</string>
+	<string name="no_internet_connection">ダウンロード出来ません、インターネット接続を確認してください。</string>
+    <string name="dismiss">退ける</string>
+    <string name="everything_up_to_date">すべてのファイルを最新状態に</string>
+    <string name="use_opengl_render">OpenGLレンダリングを使用</string>
+    <string name="use_opengl_render_descr">ハードウェアのOpenGLレンダリングを使用(デバイスによっては動作しません)</string>
+    <string name="error_avoid_specific_road">バイパスが見つかりません</string>
+    <string name="save_track_to_gpx_globally_headline">要求時に経路を保存</string>
+	<string name="enable_proxy_title">HTTPプロキシを有効</string>
+	<string name="enable_proxy_descr">すべてのネットワーク接続に使うHTTPプロキシを設定する</string>
+	<string name="proxy_host_title">プロキシホスト</string>
+	<string name="proxy_host_descr">プロキシのホスト名を設定(例：127.0.0.1)</string>
+	<string name="proxy_port_title">プロキシポート</string>
+	<string name="proxy_port_descr">プロキシのポート番号設定(例：8118)</string>
+	<string name="voices">音声プロンプト</string>
+	<string name="enable_plugin">有効</string>
+	<string name="disable_plugin">無効</string>
+</resources>
