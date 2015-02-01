@@ -388,7 +388,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (themeId != calcThemeId) {
 			themeId = calcThemeId;
 			boolean textBold = following;
-			int textColor = nightMode ? 0xffC8C8C8:Color.BLACK ;
+			int textColor = nightMode ? view.getResources().getColor(R.color.widgettext_night):Color.BLACK ;
 			int textShadowColor = transparent && !nightMode? Color.WHITE : Color.TRANSPARENT ;
 			int boxTop;
 			int boxTopStack;

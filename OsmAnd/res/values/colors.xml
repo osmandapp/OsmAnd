@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="actionbar_dark_color">#39464d</color>
+	<color name="actionbar_dark_color">#39464d</color>
 	<color name="tool_bar_dark_color">#CC080B0D</color>
 	<color name="actionbar_light_color">#ff8f00</color>
 	<color name="tool_bar_light_color">#b4ff8f00</color>
@@ -15,20 +15,13 @@
 	<color name="dashboard_subheader_text_light">#212121</color>
 	<color name="dashboard_general_button_dark">#ff8f00</color>
 	<color name="dashboard_general_button_light">#536DFE</color>
-    <color name="gpx_color_point">#cd2c33</color>
-    <color name="gpx_speed">#c79c00</color>
-    <color name="gpx_altitude_desc">#32CD32</color>
-    <color name="gpx_altitude_asc">#EE3232</color>
-    <color name="gpx_distance_color">#ffa500</color>
-    <color name="gpx_time_span_color">#0080FF</color>
-
-
-	<color name="background_tab_pressed">#1AFFFFFF</color>
 
 	<color name="color_transparent">#00000000</color>
-    <color name="color_favorite">#eecc22</color>
+	<color name="widgettext_night">0xffC8C8C8</color>
+
 	<!-- style colors  -->
 	<color name="group_background">#A5A5A5</color>
+	<color name="background_tab_pressed">#1AFFFFFF</color>
 	<!-- <color name="activity_background">#666666</color>  -->
 
 	<!-- Distance to object suitable for all themes -->
@@ -40,6 +33,16 @@
 	
 	<color name="row_selection_color">#CC33BBE0</color>
 	
+	<!-- GPX analysis colors -->
+	<color name="gpx_color_point">#cd2c33</color>
+	<color name="gpx_speed">#c79c00</color>
+	<color name="gpx_altitude_desc">#32CD32</color>
+	<color name="gpx_altitude_asc">#EE3232</color>
+	<color name="gpx_distance_color">#ffa500</color>
+	<color name="gpx_time_span_color">#0080FF</color>
+
+	<color name="color_favorite">#eecc22</color>
+
 	<!-- Themed color list items -->
 	<!-- invalid -red, localindex not supported,  -->
 	<color name="color_invalid">#EE3232</color>
@@ -86,7 +89,7 @@
 	<color name="sherpafy_selection">#ff33b5e5</color>
 	<color name="sherpafy_add_text">#b9b9b9</color>
 
-    <color name="dark_drawer_bg_color">#303030</color>
+	<color name="dark_drawer_bg_color">#303030</color>
 
 	<color name="card_bg_color_light">#ffffff</color>
 	<color name="card_bg_color_dark">#333b40</color>
