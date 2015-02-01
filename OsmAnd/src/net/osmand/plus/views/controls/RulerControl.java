@@ -16,6 +16,10 @@ import android.widget.FrameLayout;
 
 public class RulerControl extends MapControls {
 
+	//ruler and ruler label appeareance:
+	//  Day view:   color black, shadowColor white (transpparent skin or not)
+	//  Night view: color widgettext_night, shadowColor always use widget background color of non-transparent night skin (from box_night_free_simple.9.png, is #dc262626)
+
 		ShadowText cacheRulerText = null;
 		double cacheRulerZoom = 0;
 		double cacheRulerTileX = 0;
@@ -79,6 +83,7 @@ public class RulerControl extends MapControls {
 			} 
 			
 			if (cacheRulerText != null) {
+				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
 				Rect bounds = rulerDrawable.getBounds();
 				int bottom = (int) (view.getHeight() - vmargin);
 				if(bounds.bottom != bottom) {
@@ -88,6 +93,7 @@ public class RulerControl extends MapControls {
 					rulerDrawable.invalidateSelf();
 				}
 				rulerDrawable.draw(canvas);
+				rulerTextPaint.setShadowColor(nightMode ? 0xdc262626:Color.WHITE);
 				cacheRulerText.draw(canvas, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,
 						rulerTextPaint, shadowColor);
 			}
