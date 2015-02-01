@@ -391,6 +391,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 			int textColor = nightMode ? view.getResources().getColor(R.color.widgettext_night):Color.BLACK;
 			// Night shadowColor always use widgettext_shadow_night, same as widget background color for non-transparent night skin (from box_night_free_simple.9.png)
 			int textShadowColor = nightMode? view.getResources().getColor(R.color.widgettext_shadow_night) : Color.WHITE;
+			if (transparent && !nighMode) then {
+				textShadowColor = Color.TRANSPARENT;
+			}
 			int boxTop;
 			int boxTopStack;
 			int boxTopR;
