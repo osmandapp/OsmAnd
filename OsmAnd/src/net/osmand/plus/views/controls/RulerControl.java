@@ -85,6 +85,7 @@ public class RulerControl extends MapControls {
 			
 			if (cacheRulerText != null) {
 				boolean isNight = nightMode == null ? false : nightMode.isNightMode();
+				rulerDrawable = (isNight ? mapActivity.getResources().getDrawable(R.drawable.ruler_night) : mapActivity.getResources().getDrawable(R.drawable.ruler));
 				Rect bounds = rulerDrawable.getBounds();
 				int bottom = (int) (view.getHeight() - vmargin);
 				if(bounds.bottom != bottom) {
@@ -93,7 +94,6 @@ public class RulerControl extends MapControls {
 					rulerDrawable.setBounds(bounds);
 					rulerDrawable.invalidateSelf();
 				}
-				rulerDrawable = (isNight ? mapActivity.getResources().getDrawable(R.drawable.ruler_night) : mapActivity.getResources().getDrawable(R.drawable.ruler));
 				rulerDrawable.draw(canvas);
 
 				int shadowColor = isNight == true ? 0xdc262626 : Color.WHITE;
