@@ -30,6 +30,7 @@ public class RulerControl extends MapControls {
 		Drawable rulerDrawable;
 		TextPaint rulerTextPaint;
 		final static double screenRulerPercent = 0.25;
+		boolean isNightRemembered = false;
 		
 		public RulerControl(MapZoomControls zoomControls, MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 			super(mapActivity, showUIHandler, scaleCoefficient);
@@ -65,7 +66,7 @@ public class RulerControl extends MapControls {
 			// update cache
 			if (view.isZooming()) {
 				cacheRulerText = null;
-			} else if(((tb.getZoom()) != cacheRulerZoom ||
+			} else if(((isNight != isNightRemembered) || (tb.getZoom() != cacheRulerZoom) ||
 					Math.abs(tb.getCenterTileX() - cacheRulerTileX) +  Math.abs(tb.getCenterTileY() - cacheRulerTileY) > 1) && 
 					 tb.getPixWidth() > 0){
 				cacheRulerZoom = (tb.getZoom());
@@ -101,5 +102,6 @@ public class RulerControl extends MapControls {
 				cacheRulerText.draw(canvas, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,
 						rulerTextPaint, shadowColor);
 			}
+			isNightRemembered = isNight;
 		}
 	}
