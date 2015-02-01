@@ -18,6 +18,8 @@
 
 	<color name="color_transparent">#00000000</color>
 	<color name="widgettext_night">#ffC8C8C8</color>
+	<!-- widgettext_shadow_night is the same as widget background color for non-transparent night skin (from box_night_free_simple.9.png) -->
+	<color name="widgettext_shadow_night">#dc262626</color>
 
 	<!-- style colors  -->
 	<color name="group_background">#A5A5A5</color>

@@ -19,7 +19,7 @@ public class RulerControl extends MapControls {
 
 	//ruler and ruler label appeareance:
 	//  Day view:   color black, shadowColor white (transpparent skin or not)
-	//  Night view: color widgettext_night, shadowColor always use widget background color for non-transparent night skin (from box_night_free_simple.9.png, is #dc262626)
+	//  Night view: color widgettext_night, shadowColor always use widgettext_shadow_night, same as widget background color for non-transparent night skin (from box_night_free_simple.9.png)
 
 		ShadowText cacheRulerText = null;
 		double cacheRulerZoom = 0;
@@ -98,7 +98,7 @@ public class RulerControl extends MapControls {
 				}
 				rulerDrawable.draw(canvas);
 
-				int shadowColor = isNight == true ? 0xdc262626 : Color.WHITE;
+				int shadowColor = isNight == true ? mapActivity.getResources().getColor(R.color.widgettext_shadow_night) : Color.WHITE;
 				cacheRulerText.draw(canvas, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,
 						rulerTextPaint, shadowColor);
 			}
