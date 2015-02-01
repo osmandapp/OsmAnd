@@ -19,7 +19,7 @@ public class RulerControl extends MapControls {
 
 	//ruler and ruler label appeareance:
 	//  Day view:   color black, shadowColor white (transpparent skin or not)
-	//  Night view: color widgettext_night, shadowColor always use widget background color of non-transparent night skin (from box_night_free_simple.9.png, is #dc262626)
+	//  Night view: color widgettext_night, shadowColor always use widget background color for non-transparent night skin (from box_night_free_simple.9.png, is #dc262626)
 
 		ShadowText cacheRulerText = null;
 		double cacheRulerZoom = 0;
