@@ -60,6 +60,8 @@ public class RulerControl extends MapControls {
 				return;
 			}
 			OsmandMapTileView view = mapActivity.getMapView();
+			boolean isNight = nightMode == null ? false : nightMode.isNightMode();
+
 			// update cache
 			if (view.isZooming()) {
 				cacheRulerText = null;
@@ -76,6 +78,7 @@ public class RulerControl extends MapControls {
 				int cacheRulerDistPix = (int) (pixDensity * roundedDist);
 				cacheRulerText = ShadowText.create(OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getApplication()));
 				cacheRulerTextLen = rulerTextPaint.measureText(cacheRulerText.getText());
+				rulerDrawable = (isNight ? mapActivity.getResources().getDrawable(R.drawable.ruler_night) : mapActivity.getResources().getDrawable(R.drawable.ruler));
 				Rect bounds = rulerDrawable.getBounds();
 				bounds.right = (int) (view.getWidth() - 7 * scaleCoefficient);
 				bounds.left = bounds.right - cacheRulerDistPix;
@@ -84,8 +87,6 @@ public class RulerControl extends MapControls {
 			} 
 			
 			if (cacheRulerText != null) {
-				boolean isNight = nightMode == null ? false : nightMode.isNightMode();
-				//rulerDrawable = (isNight ? mapActivity.getResources().getDrawable(R.drawable.ruler_night) : mapActivity.getResources().getDrawable(R.drawable.ruler));
 				Rect bounds = rulerDrawable.getBounds();
 				int bottom = (int) (view.getHeight() - vmargin);
 				if(bounds.bottom != bottom) {
