@@ -83,7 +83,7 @@ public class RulerControl extends MapControls {
 			} 
 			
 			if (cacheRulerText != null) {
-				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
+				boolean isNight = nightMode == null ? false : nightMode.isNightMode();
 				Rect bounds = rulerDrawable.getBounds();
 				int bottom = (int) (view.getHeight() - vmargin);
 				if(bounds.bottom != bottom) {
@@ -92,8 +92,10 @@ public class RulerControl extends MapControls {
 					rulerDrawable.setBounds(bounds);
 					rulerDrawable.invalidateSelf();
 				}
+				//rulerDrawable = (isNight ? mapActivity.getResources().getDrawable(R.drawable.ruler_night):mapActivity.getResources().getDrawable(R.drawable.ruler));
 				rulerDrawable.draw(canvas);
-				rulerTextPaint.setShadowColor(nightMode ? 0xdc262626:Color.WHITE);
+
+				rulerTextPaint.setShadowColor(isNight ? 0xdc262626:Color.WHITE);
 				cacheRulerText.draw(canvas, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,
 						rulerTextPaint, shadowColor);
 			}
