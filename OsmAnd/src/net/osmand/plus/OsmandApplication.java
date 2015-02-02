@@ -810,11 +810,7 @@ public class OsmandApplication extends Application {
 			if (c instanceof ActionBarActivity) {
 				ab = ((ActionBarActivity) c).getSupportActionBar();
 			}
-//			else if (c instanceof SherlockListActivity) {
-//				ab = ((SherlockListActivity) c).getSupportActionBar();
-//			} else if (c instanceof Expandable) {
-//				ab = ((SherlockExpandableListActivity) c).getSupportActionBar();
-//			}
+
 			if (ab != null) {
 				BitmapDrawable bg = (BitmapDrawable) getResources().getDrawable(R.drawable.bg_striped);
 				bg.setTileModeXY(TileMode.REPEAT, TileMode.REPEAT);

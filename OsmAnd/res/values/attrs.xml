@@ -7,6 +7,7 @@
         <attr name="expandable_category_color" format="reference"/>
         <attr name="reset_image" format="reference"/>
         <attr name="bottomToolBarColor" format="color" />
+		<attr name="downloadButtonBackground" format="reference" />
 		<attr name="card_bg" format="reference" />
 		<attr name="ic_action_check" format="reference" />
 		<attr name="ic_extension" format="reference" />
