@@ -1874,4 +1874,5 @@
     <string name="remove_the_tag">УДАЛИТЬ ТЕГ</string>
     <string name="enable_plugin">Включить</string>
 	<string name="disable_plugin">Отключить</string>
-</resources>
+<string name="osm_editing_manage">Управление</string>
+    </resources>
