@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -25,12 +26,14 @@ public class GeoPointParserUtil {
 		url = "geo:" + ilat + "," + ilon;
 		System.out.println("url: " + url);
 		GeoParsedPoint actual = GeoPointParserUtil.parse(url);
+		assertUrlEquals(url, actual.getGeoUriString());
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon));
 
 		// geo:34.99393,-106.61568
 		url = "geo:" + dlat + "," + dlon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
+		assertUrlEquals(url, actual.getGeoUriString());
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
 
 		// geo:34.99393,-106.61568?z=11
@@ -38,6 +41,7 @@ public class GeoPointParserUtil {
 		url = "geo:" + dlat + "," + dlon + "?z=" + z;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
+		assertUrlEquals(url, actual.getGeoUriString());
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
 		// geo:34.99393,-106.61568 (Treasure Island)
@@ -60,16 +64,23 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z, name));
 
+		// geo:34.99393,-106.61568?q=34.99393,-106.61568(Treasure+Island)
+		z = GeoParsedPoint.NO_ZOOM;
+		url = "geo:" + dlat + "," + dlon + "?q=" + dlat + "," + dlon + "(" + URLEncoder.encode(name) + ")";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z, name));
+		assertUrlEquals(url, actual.getGeoUriString());
+
 		// 0,0?q=34,-106(Treasure Island)
 		z = GeoParsedPoint.NO_ZOOM;
-		url = "geo:0,0?q=" + ilat + "," + ilon + " (" + name + ")";
-		System.out.println("url: " + url);
+		url = "geo:0,0?q=" + ilat + "," + ilon + "(" + name + ")";
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z, name));
 
 		// 0,0?q=34.99393,-106.61568(Treasure Island)
 		z = GeoParsedPoint.NO_ZOOM;
-		url = "geo:0,0?q=" + dlat + "," + dlon + " (" + name + ")";
+		url = "geo:0,0?q=" + dlat + "," + dlon + "(" + name + ")";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z, name));
@@ -91,10 +102,26 @@ public class GeoPointParserUtil {
 		// google calendar
 		// geo:0,0?q=760 West Genesee Street Syracuse NY 13204
 		String qstr = "760 West Genesee Street Syracuse NY 13204";
+		url = "geo:0,0?q=" + URLEncoder.encode(qstr);
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qstr));
+		assertUrlEquals(url, actual.getGeoUriString());
+
+		// geo:0,0?q=760 West Genesee Street Syracuse NY 13204
+		qstr = "760 West Genesee Street Syracuse NY 13204";
 		url = "geo:0,0?q=" + qstr;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(qstr));
+
+		// geo:0,0?z=11&q=1600+Amphitheatre+Parkway,+CA
+		qstr = "1600 Amphitheatre Parkway, CA";
+		url = "geo:0,0?q=" + URLEncoder.encode(qstr);
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qstr));
+		assertUrlEquals(url, actual.getGeoUriString());
 
 		// geo:0,0?z=11&q=1600+Amphitheatre+Parkway,+CA
 		qstr = "1600 Amphitheatre Parkway, CA";
@@ -398,7 +425,6 @@ public class GeoPointParserUtil {
 	private static boolean areCloseEnough(double a, double b, long howClose) {
 		long aRounded = (long) Math.round(a * Math.pow(10, howClose));
 		long bRounded = (long) Math.round(b * Math.pow(10, howClose));
-		System.out.println("areCloseEnough: " + aRounded + ", " + bRounded);
 		return aRounded == bRounded;
 	}
 
@@ -409,11 +435,11 @@ public class GeoPointParserUtil {
 		} else {
 			double aLat = actual.getLatitude(), eLat = expected.getLatitude(), aLon = actual.getLongitude(), eLon = expected.getLongitude();
 			int aZoom = actual.getZoom(), eZoom = expected.getZoom();
-			String aName = actual.getName(), eName = expected.getName();
-			if (eName != null) {
-				if (!aName.equals(eName)) {
-					throw new RuntimeException("Point name\\capture is not equal; actual=" + aName + ", expected="
-							+ eName);
+			String aLabel = actual.getLabel(), eLabel = expected.getLabel();
+			if (eLabel != null) {
+				if (!aLabel.equals(eLabel)) {
+					throw new RuntimeException("Point label is not equal; actual="
+							+ aLabel + ", expected=" + eLabel);
 				}
 			}
 			if (!areCloseEnough(eLat, aLat, 5)) {
@@ -436,11 +462,11 @@ public class GeoPointParserUtil {
 		} else {
 			double aLat = actual.getLatitude(), eLat = expected.getLatitude(), aLon = actual.getLongitude(), eLon = expected.getLongitude();
 			int aZoom = actual.getZoom(), eZoom = expected.getZoom();
-			String aName = actual.getName(), eName = expected.getName();
-			if (eName != null) {
-				if (!aName.equals(eName)) {
-					throw new RuntimeException("Point name\\capture is not equal; actual=" + aName + ", expected="
-							+ eName);
+			String aLabel = actual.getLabel(), eLabel = expected.getLabel();
+			if (eLabel != null) {
+				if (!aLabel.equals(eLabel)) {
+					throw new RuntimeException("Point label is not equal; actual="
+							+ aLabel + ", expected=" + eLabel);
 				}
 			}
 			if (((int)eLat) != ((int)aLat)) {
@@ -455,6 +481,11 @@ public class GeoPointParserUtil {
 		}
 		System.out.println("Passed!");
 	}
+
+    private static void assertUrlEquals(String actual, String expected) {
+        if (actual == null || !actual.equals(expected))
+            throw new RuntimeException("URLs not equal; actual=" + actual + ", expected=" + expected);
+    }
 
 	private static String getQueryParameter(final String param, URI uri) {
 		final String query = uri.getQuery();
@@ -474,8 +505,7 @@ public class GeoPointParserUtil {
 	/**
 	 * Parses geo and map intents:
 	 *
-	 * @param uri
-	 *            The URI object
+	 * @param uriString The URI as a String
 	 * @return {@link GeoParsedPoint}
 	 */
 	public static GeoParsedPoint parse(final String uriString) {
@@ -781,10 +811,10 @@ public class GeoPointParserUtil {
 	public static class GeoParsedPoint {
 		private static final int NO_ZOOM = -1;
 
-		private double lat;
-		private double lon;
+		private double lat = 0;
+		private double lon = 0;
 		private int zoom = NO_ZOOM;
-		private String name;
+		private String label;
 		private String query;
 		private boolean geoPoint;
 		private boolean geoAddress;
@@ -796,10 +826,10 @@ public class GeoPointParserUtil {
 			this.geoPoint = true;
 		}
 
-		public GeoParsedPoint(double lat, double lon, String name) {
+		public GeoParsedPoint(double lat, double lon, String label) {
 			this(lat, lon);
-			if (name != null)
-				this.name = name.replaceAll("\\+", " ");
+			if (label != null)
+				this.label = label.replaceAll("\\+", " ");
 		}
 
 		public GeoParsedPoint(double lat, double lon, int zoom) {
@@ -807,8 +837,8 @@ public class GeoPointParserUtil {
 			this.zoom = zoom;
 		}
 
-		public GeoParsedPoint(double lat, double lon, int zoom, String name) {
-			this(lat, lon, name);
+		public GeoParsedPoint(double lat, double lon, int zoom, String label) {
+			this(lat, lon, label);
 			this.zoom = zoom;
 		}
 
@@ -840,8 +870,8 @@ public class GeoPointParserUtil {
 			return zoom;
 		}
 
-		public String getName() {
-			return name;
+		public String getLabel() {
+			return label;
 		}
 
 		public String getQuery() {
@@ -852,8 +882,57 @@ public class GeoPointParserUtil {
 			return geoPoint;
 		}
 
+		private String formatDouble(double d) {
+			if(d == (long) d)
+				return String.format(Locale.ENGLISH, "%d", (long)d);
+			else
+				return String.format("%s", d);
+		}
+
 		public boolean isGeoAddress() {
 			return geoAddress;
+		}
+
+		/**
+		 * Generates a URI string according to https://tools.ietf.org/html/rfc5870 and
+		 * https://developer.android.com/guide/components/intents-common.html#Maps
+		 */
+		@Override
+		public String getGeoUriString() {
+			String uriString;
+			if (isGeoPoint()) {
+				String latlon = formatDouble(lat) + "," + formatDouble(lon);
+				uriString = "geo:" + latlon;
+				LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
+				if (zoom != NO_ZOOM)
+					map.put("z", String.valueOf(zoom));
+				if (query != null)
+					map.put("q", URLEncoder.encode(query));
+				if (label != null)
+					if (query == null)
+						map.put("q", latlon + "(" + URLEncoder.encode(label) + ")");
+				if (map.size() > 0)
+					uriString += "?";
+				int i = 0;
+				for (String key : map.keySet()) {
+					if (i > 0)
+						uriString += "&";
+					uriString += key + "=" + map.get(key);
+					i++;
+				}
+				return uriString;
+			}
+			if (isGeoAddress()) {
+				uriString = "geo:0,0";
+				if (query != null) {
+					uriString += "?";
+					if (zoom != NO_ZOOM)
+						uriString += "z=" + zoom + "&";
+					uriString += "q=" + URLEncoder.encode(query);
+				}
+				return uriString;
+			}
+			return null;
 		}
 
 		@Override

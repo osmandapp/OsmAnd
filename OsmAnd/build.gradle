@@ -73,30 +73,18 @@ android {
 			jni.srcDirs = []
 			jniLibs.srcDirs = ["libs"]
 			aidl.srcDirs = ["src"]
-			java.srcDirs = [
-					"src",
-					fileTree(dir: "../OsmAnd-java/src", exclude: "**/PlatformUtil.java")
-			]
-			resources.srcDirs = [
-					"src"
-			]
+			java.srcDirs = ["src"]
+			resources.srcDirs = ["src"]
 			renderscript.srcDirs = ["src"]
-			res.srcDirs = [
-					'res'
-
-			]
-			assets.srcDirs = [
-					'assets'
-			]
+			res.srcDirs = ["res"]
+			assets.srcDirs = ["assets"]
 		}
 		free {
 			manifest.srcFile "AndroidManifest-free.xml"
 		}
 
 		legacy {
-			jniLibs.srcDirs = [
-					"libgnustl"
-			]
+			jniLibs.srcDirs = ["libgnustl"]
 		}
 	}
 
@@ -311,6 +299,7 @@ repositories {
 }
 
 dependencies {
+	compile project(":OsmAnd-java")
 	compile fileTree(
 			dir: "libs",
 			include: ["*.jar"],
