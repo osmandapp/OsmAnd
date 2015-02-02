@@ -397,29 +397,29 @@ public class GeoPointParserUtil {
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
 		// http://www.google.com/maps/place/760+West+Genesee+Street+Syracuse+NY+13204
-		qstr = "760+West+Genesee+Street+Syracuse+NY+13204";
-		url = "http://www.google.com/maps/place/" + qstr;
+		qstr = "760 West Genesee Street Syracuse NY 13204";
+		url = "http://www.google.com/maps/place/" + URLEncoder.encode(qstr);
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(qstr));
 
 		// http://maps.google.com/maps?q=760+West+Genesee+Street+Syracuse+NY+13204
-		qstr = "760+West+Genesee+Street+Syracuse+NY+13204";
-		url = "http://www.google.com/maps?q=" + qstr;
+		qstr = "760 West Genesee Street Syracuse NY 13204";
+		url = "http://www.google.com/maps?q=" + URLEncoder.encode(qstr);
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(qstr));
 
 		// http://maps.google.com/maps?daddr=760+West+Genesee+Street+Syracuse+NY+13204
-		qstr = "760+West+Genesee+Street+Syracuse+NY+13204";
-		url = "http://www.google.com/maps?daddr=" + qstr;
+		qstr = "760 West Genesee Street Syracuse NY 13204";
+		url = "http://www.google.com/maps?daddr=" + URLEncoder.encode(qstr);
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(qstr));
 
 		// http://www.google.com/maps/dir/Current+Location/760+West+Genesee+Street+Syracuse+NY+13204
-		qstr = "760+West+Genesee+Street+Syracuse+NY+13204";
-		url = "http://www.google.com/maps/dir/Current+Location/" + qstr;
+		qstr = "760 West Genesee Street Syracuse NY 13204";
+		url = "http://www.google.com/maps/dir/Current+Location/" + URLEncoder.encode(qstr);
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(qstr));
@@ -536,6 +536,8 @@ public class GeoPointParserUtil {
             "http://maps.yandex.com/?text=Australia%2C%20Victoria%2C%20Christmas%20Hills&sll=145.319026%2C-37.650344&ll=145.319026%2C-37.650344&spn=0.352249%2C0.151501&z=12&l=map",
             "http://maps.apple.com/?q=Bargou,+Tunisien",
             "http://maps.apple.com/?daddr=Bargou,+Tunisien",
+            "http://maps.apple.com/?lsp=7618&q=40.738065,-73.988898&sll=40.738065,-73.988898",
+            "http://maps.apple.com/?lsp=9902&auid=13787349062281695774&sll=40.694576,-73.982992&q=Garden%20Nail%20%26%20Spa&hnear=325%20Gold%20St%2C%20Brooklyn%2C%20NY%20%2011201-3054%2C%20United%20States",
         };
 
 		for (String u : urls) {
@@ -576,7 +578,8 @@ public class GeoPointParserUtil {
 	private static void assertGeoPoint(GeoParsedPoint actual, GeoParsedPoint expected) {
 		if (expected.getQuery() != null) {
 			if (!expected.getQuery().equals(actual.getQuery()))
-				throw new RuntimeException("Query param not equal");
+				throw new RuntimeException("Query param not equal:\n'" +
+                                           actual.getQuery() + "' != '" + expected.getQuery());
 		} else {
 			double aLat = actual.getLatitude(), eLat = expected.getLatitude(), aLon = actual.getLongitude(), eLon = expected.getLongitude();
 			int aZoom = actual.getZoom(), eZoom = expected.getZoom();
@@ -668,7 +671,7 @@ public class GeoPointParserUtil {
                 query = schemeSpecificPart.substring(pos + 1);
             }
         } else {
-            query = uri.getQuery();
+            query = uri.getRawQuery();
         }
         return getQueryParameters(query);
     }
@@ -682,7 +685,7 @@ public class GeoPointParserUtil {
                 if (keyValue.length == 1)
                     map.put(keyValue[0], "");
                 else if (keyValue.length > 1)
-                    map.put(keyValue[0], keyValue[1]);
+                    map.put(keyValue[0], URLDecoder.decode(keyValue[1]));
             }
 		}
 		return map;
@@ -1101,7 +1104,7 @@ public class GeoPointParserUtil {
 		    }
 		    return new GeoParsedPoint(lat, lon, zoom);
 		}
-		return new GeoParsedPoint(opath);
+		return new GeoParsedPoint(URLDecoder.decode(opath));
 	}
 
     private static String[] silentSplit(String vl, String split) {
@@ -1190,6 +1193,9 @@ public class GeoPointParserUtil {
 			this.zoom = NO_ZOOM;
 		}
 
+		/**
+		 * Accepts a plain {@code String}, not URL-encoded
+		 */
 		public GeoParsedPoint(String query) {
 			super();
 			this.query = query;
