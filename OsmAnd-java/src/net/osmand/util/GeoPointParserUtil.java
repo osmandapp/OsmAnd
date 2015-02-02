@@ -624,7 +624,6 @@ public class GeoPointParserUtil {
 	 * @return {@link Map<String, String>} a Map of the query parameters
      */
 	private static Map<String, String> getQueryParameters(URI uri) {
-        final LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
         String query = null;
         if (uri.isOpaque()) {
             String schemeSpecificPart = uri.getSchemeSpecificPart();
@@ -637,6 +636,11 @@ public class GeoPointParserUtil {
         } else {
             query = uri.getQuery();
         }
+        return getQueryParameters(query);
+    }
+
+	private static Map<String, String> getQueryParameters(String query) {
+        final LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
         if (query != null && !query.equals("")) {
             String[] params = query.split("&");
             for (String p : params) {
@@ -685,23 +689,7 @@ public class GeoPointParserUtil {
 				path = "";
 			}
             String fragment = uri.getFragment();
-            String query = uri.getQuery();
-            if(query == null) {
-            	// DOUBLE check this may be wrong test of openstreetmap.de (looks very weird url and server doesn't respond)
-				if (path.startsWith("/")) {
-					query = path.substring(1);
-				} else {
-					query = path;
-				}
-            }
-            
-            Map<String, String> params = new HashMap<String, String>();
-            for(String vl : query.split("&")) {
-            	int i = vl.indexOf('=');
-            	if(i > 0) {
-            		params.put(vl.substring(0, i), vl.substring(i + 1));
-            	}
-            }
+
             // lat-double, lon - double, zoom or z - int
             Set<String> simpleDomains = new HashSet<String>();
             simpleDomains.add("osmand.net");
@@ -738,17 +726,21 @@ public class GeoPointParserUtil {
 								lon = parseSilentDouble(vls[2]);
 							}
 						}
-						// the query string sometimes has higher resolution
-						// values
-						if(params.containsKey("mlat") && params.containsKey("mlon")) {
-							lat = parseSilentDouble(params.get("mlat"));
-							lon = parseSilentDouble(params.get("mlon"));
+						// the query string sometimes has higher resolution values
+						String mlat = getQueryParameter("mlat", uri);
+						if(mlat != null) {
+							lat = parseSilentDouble(mlat);
+						}
+						String mlon = getQueryParameter("mlon", uri);
+						if(mlon != null) {
+							lon = parseSilentDouble(mlon);
 						}
 						return new GeoParsedPoint(lat, lon, zoom);
 					}
                 } else if (host.startsWith("map.baidu.")) { // .com and .cn both work
                     /* Baidu Map uses a custom format for lat/lon., it is basically standard lat/lon
                      * multiplied by 100,000, then rounded to an integer */
+					Map<String, String> params = getQueryParameters(uri);
                     String zm = params.get("l");
                     String[] vls = silentSplit(params.get("c"),",");
                     if ( vls != null && vls.length >= 2) {
@@ -758,6 +750,11 @@ public class GeoPointParserUtil {
                         return new GeoParsedPoint(lat, lon, zoom);
                     }
 				} else if (simpleDomains.contains(host)) {
+					Map<String, String> params = getQueryParameters(uri);
+					if(uri.getQuery() == null && params.size() == 0) {
+						// DOUBLE check this may be wrong test of openstreetmap.de (looks very weird url and server doesn't respond)
+						params = getQueryParameters(path.substring(1));
+					}
 					if (params.containsKey("lat") && params.containsKey("lon")) {
 						final double lat = parseSilentDouble(params.get("lat"));
 						final double lon = parseSilentDouble(params.get("lon"));
@@ -772,6 +769,7 @@ public class GeoPointParserUtil {
 				} else if (host.equals("maps.yandex.ru")
 						|| host.equals("yandex.ru")
 						|| host.equals("www.yandex.ru")) {
+					Map<String, String> params = getQueryParameters(uri);
 					String zm = params.get("z");
                     String[] vls = silentSplit(params.get("ll"),",");
                     if ( vls != null && vls.length >= 2) {
@@ -784,6 +782,7 @@ public class GeoPointParserUtil {
 				} else if (host.equals("maps.google.com")
 						|| host.equals("google.com")
 						|| host.equals("www.google.com")) {
+					Map<String, String> params = getQueryParameters(uri);
 					if(params.containsKey("daddr")){
 						return parseGoogleMapsPath(params.get("daddr"), params);
 					} else if(params.containsKey("saddr")){
@@ -828,17 +827,17 @@ public class GeoPointParserUtil {
 						}
 					}
 				} else if (host.equals("here.com") || host.endsWith(".here.com")) { // www.here.com, share.here.com, here.com 
-					Map<String, String> queryMap = getQueryParameters(uri);
+					Map<String, String> params = getQueryParameters(uri);
 					String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
 					String label = null;
-					if (queryMap.containsKey("msg")) {
-						label = queryMap.get("msg");
+					if (params.containsKey("msg")) {
+						label = params.get("msg");
 					}
-					if (queryMap.containsKey("z")) {
-						z = queryMap.get("z");
+					if (params.containsKey("z")) {
+						z = params.get("z");
 					}
-					if (queryMap.containsKey("map")) {
-						String[] mapArray = queryMap.get("map").split(",");
+					if (params.containsKey("map")) {
+						String[] mapArray = params.get("map").split(",");
 						if (mapArray.length > 2) {
 							return new GeoParsedPoint(mapArray[0], mapArray[1], mapArray[2], label);
 						} else if (mapArray.length > 1) {
@@ -853,21 +852,21 @@ public class GeoPointParserUtil {
 						}
 					}
 				} else if (host.endsWith(".qq.com")) {
-					Map<String, String> queryMap = getQueryParameters(uri);
+					Map<String, String> params = getQueryParameters(uri);
 					String x = null;
 					String y = null;
 					String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
 					String label = null;
-					if (queryMap.containsKey("city")) {
-						label = queryMap.get("city");
-					} else if (queryMap.containsKey("key")) {
-						label = queryMap.get("key");
-					} else if (queryMap.containsKey("a")) {
-						label = queryMap.get("a");
-					} else if (queryMap.containsKey("n")) {
-						label = queryMap.get("n");
+					if (params.containsKey("city")) {
+						label = params.get("city");
+					} else if (params.containsKey("key")) {
+						label = params.get("key");
+					} else if (params.containsKey("a")) {
+						label = params.get("a");
+					} else if (params.containsKey("n")) {
+						label = params.get("n");
 					}
-					String m = queryMap.get("m");
+					String m = params.get("m");
 					if (m != null) {
 						Matcher matcher = commaSeparatedPairPattern.matcher(m);
 						if (matcher.matches()) {
@@ -875,7 +874,7 @@ public class GeoPointParserUtil {
 							y = matcher.group(1);
 						}
 					}
-					String c = queryMap.get("c");
+					String c = params.get("c");
 					if (c != null) {
 						// there are two different patterns of data that can be in ?c=
 						Matcher matcher = commaSeparatedPairPattern.matcher(c);
@@ -892,14 +891,14 @@ public class GeoPointParserUtil {
 						}
 					}
 					for (String key : new String[]{"centerX", "x", "x1", "x2"}) {
-						if (queryMap.containsKey(key)) {
-							x = queryMap.get(key);
+						if (params.containsKey(key)) {
+							x = params.get(key);
 							break;
 						}
 					}
 					for (String key : new String[]{"centerY", "y", "y1", "y2"}) {
-						if (queryMap.containsKey(key)) {
-							y = queryMap.get(key);
+						if (params.containsKey(key)) {
+							y = params.get(key);
 							break;
 						}
 					}
