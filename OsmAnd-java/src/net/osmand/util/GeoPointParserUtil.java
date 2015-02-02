@@ -3,7 +3,11 @@ package net.osmand.util;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -391,10 +395,6 @@ public class GeoPointParserUtil {
         }
 	}
 
-	private static boolean areCloseEnough(int a, int b) {
-		return a == b;
-	}
-
 	private static boolean areCloseEnough(double a, double b, long howClose) {
 		long aRounded = (long) Math.round(a * Math.pow(10, howClose));
 		long bRounded = (long) Math.round(b * Math.pow(10, howClose));
@@ -493,165 +493,128 @@ public class GeoPointParserUtil {
                 return null;
             else
                 host = host.toLowerCase(Locale.US);
+            String path = uri.getPath();
+			if (path == null) {
+				path = "";
+			} else if (path.startsWith("/")) {
+				path = path.substring(1);
+			}
+            String fragment = uri.getFragment();
+            String query = uri.getQuery();
+            if(query == null) {
+            	// DOUBLE check this may be wrong test of openstreetmap.de (looks very weird url and server doesn't respond)
+            	query = path;
+            }
+            
+            Map<String, String> params = new HashMap<String, String>();
+            for(String vl : query.split("&")) {
+            	int i = vl.indexOf('=');
+            	if(i > 0) {
+            		params.put(vl.substring(0, i), vl.substring(i + 1));
+            	}
+            }
+            // lat-double, lon - double, zoom or z - int
+            Set<String> simpleDomains = new HashSet<String>();
+            simpleDomains.add("osmand.net");
+            simpleDomains.add("www.osmand.net");
+            simpleDomains.add("download.osmand.net");
+            simpleDomains.add("openstreetmap.de");
+            simpleDomains.add("www.openstreetmap.de");
 
-			final String schemeSpecific = uri.getSchemeSpecificPart();
-			if (schemeSpecific == null)
-				return null;
-
-			final String[] osmandNetSite = { "//download.osmand.net/go?" };
-
-			final String[] osmandNetPattern = { "lat=([+-]?\\d+(?:\\.\\d+)?)&lon=([+-]?\\d+(?:\\.\\d+)?)&?(z=\\d{1,2})" };
-
-			final String[] openstreetmapDeSite = { "//openstreetmap.de/", "//www.openstreetmap.de/" };
-
-			final String[] openstreetmapDePattern = {
-					"(?:.*)zoom=(\\d{1,2})&lat=([+-]?\\d+(?:\\.\\d+)?)&lon=([+-]?\\d+(?:\\.\\d+)?)(?:.*)",
-					"(?:.*)lat=([+-]?\\d+(?:\\.\\d+)?)&lon=([+-]?\\d+(?:\\.\\d+)?)&?(z(?:oom)?=\\d{1,2})(?:.*)" };
-
-			final String[] googleComSite = { "//www.google.com/maps/", "//maps.google.com/maps", "//maps.google.com" };
-
-			final String[] googleComPattern = {
-					"(?:.*)[@/]([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?),(\\d{1,2}z)(?:.*)",
-					"(?:.*)ll=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.+)(z=\\d{1,2})(?:.*)",
-					"(?:.*)q=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)&?(z=\\d{1,2})",
-					"(?:.*)(q=)([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)",
-					"(?:.*)q=loc:([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)&?(z=\\d{1,2})(?:.*)",
-					"(?:.*)(q=loc:)([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)",
-					"(.*)daddr=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)",
-					"(.*)/([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.*)" };
-
-			final String[] yandexRuSite = { "//maps.yandex.ru/" };
-
-			final String[] yandexRuPattern = { "(?:.*)ll=([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)(?:.+)(z=\\d{1,2})(?:.*)" };
-
-			final String sites[][] = { osmandNetSite, openstreetmapDeSite,
-					googleComSite, yandexRuSite };
-
-			final String patterns[][] = { osmandNetPattern,
-					openstreetmapDePattern, googleComPattern, yandexRuPattern };
 
             try {
                 if (host.equals("osm.org") || host.endsWith("openstreetmap.org")) {
                     Pattern p;
                     Matcher matcher;
-                    String path = uri.getPath();
-                    if (path != null && path.startsWith("/go/")) { // short URL form
+                    if (path.startsWith("go/")) { // short URL form
                         p = Pattern.compile("^/go/([A-Za-z0-9_@~]+-*)(?:.*)");
                         matcher = p.matcher(uri.getPath());
                         if (matcher.matches()) {
                             return MapUtils.decodeShortLinkString(matcher.group(1));
                         }
-                    } else { // data in the query and/or feature strings
-                        String lat = "0";
-                        String lon = "0";
-                        String zoom = String.valueOf(GeoParsedPoint.NO_ZOOM);
-                        String fragment = uri.getFragment();
-                        if (fragment != null) {
-                            p = Pattern.compile("(?:map=)?(\\d{1,2})/([+-]?\\d+(?:\\.\\d+)?)/([+-]?\\d+(?:\\.\\d+)?)(?:.*)");
-                            matcher = p.matcher(fragment);
-                            if (matcher.matches()) {
-                                zoom = matcher.group(1);
-                                lat = matcher.group(2);
-                                lon = matcher.group(3);
-                            }
-                        }
-                        String query = uri.getQuery();
-                        if (query != null) {
-                            // the query string sometimes has higher resolution values
-                            p = Pattern.compile("(?:.*)mlat=([+-]?\\d+(?:\\.\\d+)?)(?:.*)&mlon=([+-]?\\d+(?:\\.\\d+)?)(?:.*)?");
-                            matcher = p.matcher(query);
-                            if (matcher.matches()) {
-                                lat = matcher.group(1);
-                                lon = matcher.group(2);
-                            }
-                        }
-                        return new GeoParsedPoint(lat, lon, zoom);
-                    }
-                } else if (schemeSpecific.startsWith("//map.baidu.")) { // .com and .cn both work
-                    /* Baidu Map uses a custom format for lat/lon., it is basically standard lat/lon
-                     * multiplied by 100,000, then rounded to an integer */
-                    Pattern p = Pattern.compile(".*[/?&]l=(\\d{1,2}).*&c=([+-]?\\d+),([+-]?\\d+).*");
-                    Matcher matcher = p.matcher(schemeSpecific);
-                    if (matcher.matches()) {
-                        double lat = Integer.valueOf(matcher.group(2)) / 100000.;
-                        double lon = Integer.valueOf(matcher.group(3)) / 100000.;
-                        int zoom = parseZoom(matcher.group(1));
-                        return new GeoParsedPoint(lat, lon, zoom);
-                    }
-                }
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-                return null;
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                return null;
-            }
-
-			// search by geo coordinates
-			for (int s = 0; s < sites.length; s++) {
-				for (int si = 0; si < sites[s].length; si++) {
-					if (schemeSpecific.startsWith(sites[s][si])) {
-						for (int p = 0; p < patterns[s].length; p++) {
-							String subString = schemeSpecific.substring(sites[s][si].length());
-
-							if (subString.equals("")) {
-								subString = uri.getFragment();
+					} else { // data in the query and/or feature strings
+						double lat = 0;
+						double lon = 0;
+						int zoom = GeoParsedPoint.NO_ZOOM;
+						if (fragment != null) {
+							if(fragment.startsWith("map=")) {
+								fragment = fragment.substring("map=".length());
 							}
-
-							final Matcher matcher = Pattern.compile(patterns[s][p]).matcher(subString);
-
-							if (matcher.matches()) {
-								try {
-
-									final double lat;
-									final double lon;
-									int zoom;
-
-									// check sequence of values
-									if (matcher.group(3).contains("z=")) {
-										lat = Double.valueOf(matcher.group(1));
-										lon = Double.valueOf(matcher.group(2));
-										zoom = Integer.valueOf(matcher.group(3).substring("z=".length()));
-									} else if (matcher.group(3).contains("zoom=")) {
-										lat = Double.valueOf(matcher.group(1));
-										lon = Double.valueOf(matcher.group(2));
-										zoom = Integer.valueOf(matcher.group(3).substring("zoom=".length()));
-									} else if (matcher.group(3).contains("z")) {
-										lat = Double.valueOf(matcher.group(1));
-										lon = Double.valueOf(matcher.group(2));
-										zoom = Integer.valueOf(matcher.group(3).substring(0,
-												matcher.group(3).length() - 1));
-									} else {
-										lat = Double.valueOf(matcher.group(2));
-										lon = Double.valueOf(matcher.group(3));
-										try {
-											zoom = Integer.valueOf(matcher.group(1));
-										} catch (NumberFormatException e) {
-											zoom = GeoParsedPoint.NO_ZOOM;
-										}
-									}
-
-									return new GeoParsedPoint(lat, lon, zoom);
-								} catch (NumberFormatException e) {
-									return null;
-								}
+							String[] vls = fragment.split("/");
+							if(vls.length >= 3) {
+								zoom = parseZoom(vls[0]);
+								lat = parseSilentDouble(vls[1]);
+								lon = parseSilentDouble(vls[2]);
 							}
 						}
-						break;
+						// the query string sometimes has higher resolution
+						// values
+						if(params.containsKey("mlat") && params.containsKey("mlon")) {
+							lat = parseSilentDouble(params.get("mlat"));
+							lon = parseSilentDouble(params.get("mlon"));
+						}
+						return new GeoParsedPoint(lat, lon, zoom);
+					}
+                } else if (host.startsWith("map.baidu.")) { // .com and .cn both work
+                    /* Baidu Map uses a custom format for lat/lon., it is basically standard lat/lon
+                     * multiplied by 100,000, then rounded to an integer */
+                    String zm = params.get("l");
+                    String[] vls = silentSplit(params.get("c"),",");
+                    if ( vls != null && vls.length >= 2) {
+                        double lat = parseSilentInt(vls[0]) / 100000.;
+                        double lon = parseSilentInt(vls[1]) / 100000.;
+                        int zoom = parseZoom(zm);
+                        return new GeoParsedPoint(lat, lon, zoom);
+                    }
+				} else if (simpleDomains.contains(host)) {
+					if (params.containsKey("lat") && params.containsKey("lon")) {
+						final double lat = parseSilentDouble(params.get("lat"));
+						final double lon = parseSilentDouble(params.get("lon"));
+						int zoom = GeoParsedPoint.NO_ZOOM;
+						if (params.containsKey("z")) {
+							zoom = parseZoom(params.get("z"));
+						} else if (params.containsKey("zoom")) {
+							zoom = parseZoom(params.get("zoom"));
+						}
+						return new GeoParsedPoint(lat, lon, zoom);
+					}
+				} else if (host.equals("maps.yandex.ru")
+						|| host.equals("yandex.ru")
+						|| host.equals("www.yandex.ru")) {
+					String zm = params.get("z");
+                    String[] vls = silentSplit(params.get("ll"),",");
+                    if ( vls != null && vls.length >= 2) {
+                        double lat = parseSilentDouble(vls[0]);
+                        double lon = parseSilentDouble(vls[1]) ;
+                        int zoom = parseZoom(zm);
+                        return new GeoParsedPoint(lat, lon, zoom);
+                    } 
+					
+				} else if (host.equals("maps.google.com")
+						|| host.equals("google.com")
+						|| host.equals("www.google.com")) {
+					if(params.containsKey("daddr")){
+						return parseGoogleMapsPath(params.get("daddr"), params);
+					} else if(params.containsKey("saddr")){
+						return parseGoogleMapsPath(params.get("saddr"), params);
+					} else if(params.containsKey("q")){
+						return parseGoogleMapsPath(params.get("q"), params);
+					}
+					
+					String[] pathPrefixes = new String[] { "/@", "/ll=",
+							"loc:", "/" };
+					for (String pref : pathPrefixes) {
+						if (path.contains(pref)) {
+							path = path.substring(path.lastIndexOf(pref)
+									+ pref.length());
+							return parseGoogleMapsPath(path, params);
+						}
 					}
 				}
-			}
-			// search by address string
-			final String[] googleComAddressPattern = new String[] { "(?:.*)daddr=(.*)", "q=(.*)", "(?:.*)/(.*)" };
-			for (int s = 0; s < googleComSite.length; s++) {
-				for (int p = 0; p < googleComAddressPattern.length; p++) {
-					final String subString = schemeSpecific.substring(googleComSite[s].length());
-					final Matcher matcher = Pattern.compile(googleComAddressPattern[p]).matcher(subString);
-					if (matcher.matches()) {
-						return new GeoParsedPoint(matcher.group(1));
-					}
-				}
-			}
+
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
 			return null;
 		} else if ("geo".equals(scheme) || "osmand.geo".equals(scheme)) {
 			String schemeSpecific = uri.getSchemeSpecificPart();
@@ -731,13 +694,89 @@ public class GeoPointParserUtil {
 		return null;
 	}
 
-    private static int parseZoom(String zoom) {
-        try {
-            return Integer.valueOf(zoom);
-        } catch (NumberFormatException e) {
-            return GeoParsedPoint.NO_ZOOM;
-        }
-    }
+	private static GeoParsedPoint parseGoogleMapsPath(String opath, Map<String, String> params) {
+		String zmPart = "";
+		String descr = "";
+		String path = opath;
+		if(path.contains("&")){
+			String[] vls = path.split("&");
+			path = vls[0];
+			for(int i = 1; i < vls.length; i++) {
+				int ik = vls[i].indexOf('=');
+            	if(ik > 0) {
+            		params.put(vls[i].substring(0, ik), vls[i].substring(ik + 1));
+            	}
+			}
+		}
+		if (path.contains("+")) {
+			path = path.substring(0, path.indexOf("+"));
+			descr = path.substring(path.indexOf("+") + 1);
+			if (descr.contains(")")) {
+				descr = descr.substring(0, descr.indexOf(")"));
+			}
+
+		}
+		if(params.containsKey("z")) {
+			zmPart = params.get("z");
+		}
+		String[] vls = silentSplit(path, ",");
+		
+		if(vls.length >= 2) {
+			double lat = parseSilentDouble(vls[0]);
+		    double lon = parseSilentDouble(vls[1]) ;
+		    int zoom = GeoParsedPoint.NO_ZOOM;
+		    if(vls.length >= 3 || zmPart.length() > 0) {
+		    	if(zmPart.length() == 0){
+		    		zmPart = vls[2];
+		    	}
+		    	if(zmPart.startsWith("z=")) {
+		    		zmPart = zmPart.substring(2);
+		    	} else if(zmPart.contains("z")) {
+		    		zmPart = zmPart.substring(0, zmPart.indexOf('z'));
+		    	}
+		    	zoom = parseZoom(zmPart);
+		    }
+		    return new GeoParsedPoint(lat, lon, zoom);
+		}
+		return new GeoParsedPoint(opath);
+	}
+
+    private static String[] silentSplit(String vl, String split) {
+    	if(vl == null) {
+    		return null;
+    	}
+    	return vl.split(split);
+	}
+
+	private static int parseZoom(String zoom) {
+		try {
+			if (zoom != null) {
+				return Integer.valueOf(zoom);
+			}
+		} catch (NumberFormatException e) {
+		}
+		return GeoParsedPoint.NO_ZOOM;
+	}
+	
+	private static double parseSilentDouble(String zoom) {
+		try {
+			if (zoom != null) {
+				return Double.valueOf(zoom);
+			}
+		} catch (NumberFormatException e) {
+		}
+		return 0;
+	}
+	
+	private static int parseSilentInt(String zoom) {
+		try {
+			if (zoom != null) {
+				return Integer.valueOf(zoom);
+			}
+		} catch (NumberFormatException e) {
+		}
+		return 0;
+	}
 
 	public static class GeoParsedPoint {
 		private static final int NO_ZOOM = -1;
