@@ -127,6 +127,9 @@
 		<item name="dashboard_divider">@color/dashboard_divider_light</item>
 		<item name="dashboard_button">@drawable/dashboard_button_light</item>
 		<item name="dashboardSearchButtonStyle">@style/DashboardSearchButton.Light</item>
+		<item name="ic_action_info2">@drawable/ic_action_info2_light</item>
+		<item name="ic_action_home2">@drawable/ic_action_home2_light</item>
+		<item name="ic_action_marker2">@drawable/ic_action_marker2_light</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -155,6 +158,9 @@
 		<item name="dashboard_divider">@color/dashboard_divider_dark</item>
 		<item name="dashboard_button">@drawable/dashboard_button_dark</item>
 		<item name="dashboardSearchButtonStyle">@style/DashboardSearchButton.Dark</item>
+		<item name="ic_action_info2">@drawable/ic_action_info2_dark</item>
+		<item name="ic_action_home2">@drawable/ic_action_home2_dark</item>
+		<item name="ic_action_marker2">@drawable/ic_action_marker2_dark</item>
     </style>
 
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
