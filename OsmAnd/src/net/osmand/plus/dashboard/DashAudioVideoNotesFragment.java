@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import net.osmand.plus.OsmAndAppCustomization;
+
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -91,7 +90,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 
 		for (final AudioVideoNotesPlugin.Recording recording : notes){
 			LayoutInflater inflater = getActivity().getLayoutInflater();
-			View view = inflater.inflate(R.layout.dash_note_item, null, false);
+			View view = inflater.inflate(R.layout.dash_audio_video_notes_item, null, false);
 
 			getNoteView(recording, view, getActivity(), plugin);
 			view.setOnClickListener(new View.OnClickListener() {

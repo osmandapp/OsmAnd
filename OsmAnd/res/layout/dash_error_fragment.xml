@@ -35,7 +35,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:text="@string/send_report"
-                style="@style/DashboardGeneralButton"/>
+				style="?attr/dashboardGeneralButtonStyle"/>
         <View android:layout_width="1dp"
 			  android:background="?attr/dashboard_divider"
               android:layout_height="match_parent"/>
@@ -44,7 +44,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="@string/dismiss"
-                style="@style/DashboardGeneralButton"/>
+				style="?attr/dashboardGeneralButtonStyle"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -103,7 +103,7 @@ public class DashAudioVideoNotesActivity extends OsmandActionBarActivity {
 
 	class NotesAdapter extends ArrayAdapter<AudioVideoNotesPlugin.Recording> {
 		NotesAdapter(List<AudioVideoNotesPlugin.Recording> recordingList) {
-			super(DashAudioVideoNotesActivity.this, R.layout.dash_note_item, recordingList);
+			super(DashAudioVideoNotesActivity.this, R.layout.dash_audio_video_notes_item, recordingList);
 		}
 
 		@Override
@@ -111,7 +111,7 @@ public class DashAudioVideoNotesActivity extends OsmandActionBarActivity {
 			LayoutInflater inflater = getLayoutInflater();
 			View row = convertView;
 			if (row == null){
-				row = inflater.inflate(R.layout.dash_note_item, parent, false);
+				row = inflater.inflate(R.layout.dash_audio_video_notes_item, parent, false);
 				row.findViewById(R.id.divider).setVisibility(View.GONE);
 			}
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
