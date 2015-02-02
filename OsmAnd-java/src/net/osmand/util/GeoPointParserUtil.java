@@ -511,6 +511,7 @@ public class GeoPointParserUtil {
             "https://www.openstreetmap.org/#map=0/180.0/180.0",
             "https://www.openstreetmap.org/#map=6/33.907/34.662",
             "https://www.openstreetmap.org/?mlat=49.56275939941406&mlon=17.291107177734375#map=8/49.563/17.291",
+            "https://www.google.at/maps/place/Bargou,+Tunesien/@36.0922506,9.5676327,15z/data=!3m1!4b1!4m2!3m1!1s0x12fc5d0b4dc5e66f:0xbd3618c6193d14cd",
             "http://www.amap.com/#!poi!!q=38.174596,114.995033,%E6%B2%B3%E5%8C%97%E7%9C%81%E7%9F%B3%E5%AE%B6%E5%BA%84%E5%B8%82%E6%97%A0%E6%9E%81%E5%8E%BF",
             "http://wb.amap.com/?p=B013706PJN,38.179456,114.98577,%E6%96%B0%E4%B8%9C%E6%96%B9%E5%A4%A7%E9%85%92%E5%BA%97(%E4%BF%9D%E9%99%A9%E8%8A%B1...,%E5%BB%BA%E8%AE%BE%E8%B7%AF67%E5%8F%B7",
             "http://www.amap.com/#!poi!!q=38.179456,114.98577|3|B013706PJN",
@@ -792,9 +793,7 @@ public class GeoPointParserUtil {
 							return new GeoParsedPoint(matcher.group(1), matcher.group(2), z, params.get("text"));
 						}
 					}
-				} else if (host.equals("maps.google.com")
-						|| host.equals("google.com")
-						|| host.equals("www.google.com")) {
+				} else if (host.matches("(?:www\\.)?(?:maps\\.)?google\\.[a-z]+")) {
 					Map<String, String> params = getQueryParameters(uri);
 					if(params.containsKey("daddr")){
 						return parseGoogleMapsPath(params.get("daddr"), params);
