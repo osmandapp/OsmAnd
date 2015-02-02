@@ -897,7 +897,6 @@ public class GeoPointParserUtil {
 		 * Generates a URI string according to https://tools.ietf.org/html/rfc5870 and
 		 * https://developer.android.com/guide/components/intents-common.html#Maps
 		 */
-		@Override
 		public String getGeoUriString() {
 			String uriString;
 			if (isGeoPoint()) {
@@ -937,8 +936,8 @@ public class GeoPointParserUtil {
 
 		@Override
 		public String toString() {
-			return isGeoPoint() ? "GeoParsedPoint [lat=" + lat + ", lon=" + lon + ", zoom=" + zoom + ", name=" + name
-					+ "]" : "GeoParsedPoint [query=" + query;
+			return isGeoPoint() ? "GeoParsedPoint [lat=" + lat + ", lon=" + lon + ", zoom=" + zoom
+					+ ", label=" + label + "]" : "GeoParsedPoint [query=" + query;
 		}
 
 	}
