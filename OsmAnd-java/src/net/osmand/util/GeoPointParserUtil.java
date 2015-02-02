@@ -523,14 +523,30 @@ public class GeoPointParserUtil {
             "http://map.wap.qq.com/loc/d.jsp?c=113.275020,39.188380&m=113.275020,39.188380&n=%E9%BC%93%E6%A5%BC&a=%E5%B1%B1%E8%A5%BF%E7%9C%81%E5%BF%BB%E5%B7%9E%E5%B8%82%E7%B9%81%E5%B3%99%E5%8E%BF+&p=+&i=16959367104973338386&z=0",
             "http://map.wap.qq.com/loc/d.jsp?c=113.275020,39.188380&m=113.275020,39.188380&n=%E9%BC%93%E6%A5%BC&a=%E5%B1%B1%E8%A5%BF%E7%9C%81%E5%BF%BB%E5%B7%9E%E5%B8%82%E7%B9%81%E5%B3%99%E5%8E%BF+&p=+&i=16959367104973338386&z=0&m",
             "http://map.qq.com/AppBox/print/?t=&c=%7B%22base%22%3A%7B%22l%22%3A11%2C%22lat%22%3A39.90403%2C%22lng%22%3A116.407526%7D%7D",
+            "http://maps.yandex.com/?text=Australia%2C%20Victoria%2C%20Christmas%20Hills&sll=145.319026%2C-37.650344&ll=145.319026%2C-37.650344&spn=0.352249%2C0.151501&z=12&l=map",
         };
 
-        for (String u : urls) {
-            System.out.println("url: " + u);
-            actual = GeoPointParserUtil.parse(u);
-            assert(actual != null);
-            System.out.println("Properly parsed!");
-        }
+		for (String u : urls) {
+			System.out.println("url: " + u);
+			actual = GeoPointParserUtil.parse(u);
+			if (actual == null)
+				throw new RuntimeException(u + " not parsable!");
+			System.out.println("Properly parsed as: " + actual);
+		}
+
+		// these URLs are not parsable, but should not crash or cause problems
+		String[] unparsableUrls = {
+			"http://maps.yandex.ru/-/CVCw6M9g",
+			"http://maps.yandex.com/-/CVCXEKYW",
+		};
+
+		for (String u : unparsableUrls) {
+			System.out.println("url: " + u);
+			actual = GeoPointParserUtil.parse(u);
+			if (actual != null)
+				throw new RuntimeException(u + " not parsable, but parse did not return null!");
+			System.out.println("Handled URL");
+		}
 	}
 
 	private static boolean areCloseEnough(double a, double b, long howClose) {
@@ -766,16 +782,14 @@ public class GeoPointParserUtil {
 						}
 						return new GeoParsedPoint(lat, lon, zoom);
 					}
-				} else if (host.equals("maps.yandex.ru")
-						|| host.equals("yandex.ru")
-						|| host.equals("www.yandex.ru")) {
+				} else if (host.matches("(?:www\\.)?(?:maps\\.)?yandex\\.[a-z]+")) {
 					Map<String, String> params = getQueryParameters(uri);
 					String ll = params.get("ll");
 					if (ll != null) {
 						Matcher matcher = commaSeparatedPairPattern.matcher(ll);
 						if (matcher.matches()) {
 							String z = String.valueOf(parseZoom(params.get("z")));
-							return new GeoParsedPoint(matcher.group(1), matcher.group(2), z);
+							return new GeoParsedPoint(matcher.group(1), matcher.group(2), z, params.get("text"));
 						}
 					}
 				} else if (host.equals("maps.google.com")
