@@ -22,7 +22,8 @@
 	<dimen name="abp__shadow_height">4dp</dimen>
     <dimen name="dashFABMargin">0dp</dimen>
     <dimen name="dash_parking_height">100dp</dimen>
-    <dimen name="search_content_padding">16dp</dimen>
+    <dimen name="list_content_padding">16dp</dimen>
+    <dimen name="list_header_padding">8dp</dimen>
 
     <!-- TextSizes -->
     <dimen name="showAllButtonTextSize">12sp</dimen>

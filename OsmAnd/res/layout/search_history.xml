@@ -12,8 +12,8 @@
 
     <Button
         android:id="@+id/clearAll"
-        android:layout_marginLeft="@dimen/search_content_padding"
-        android:layout_marginRight="@dimen/search_content_padding"
+        android:layout_marginLeft="@dimen/list_content_padding"
+        android:layout_marginRight="@dimen/list_content_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

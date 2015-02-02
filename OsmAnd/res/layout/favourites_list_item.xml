@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingBottom="5dp"
-    android:paddingLeft="@dimen/search_content_padding"
-    android:paddingRight="@dimen/search_content_padding"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingRight="@dimen/list_content_padding"
     android:paddingTop="5dp">
 
     <LinearLayout

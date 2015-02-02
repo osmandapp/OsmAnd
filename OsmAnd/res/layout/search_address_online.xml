@@ -8,8 +8,8 @@
         android:id="@+id/LinearLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/search_content_padding"
-        android:paddingRight="@dimen/search_content_padding"
+        android:paddingLeft="@dimen/list_content_padding"
+        android:paddingRight="@dimen/list_content_padding"
         android:layout_marginTop="5dp">
 
         <ProgressBar
