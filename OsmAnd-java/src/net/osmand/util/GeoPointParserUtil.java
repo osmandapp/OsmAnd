@@ -770,15 +770,14 @@ public class GeoPointParserUtil {
 						|| host.equals("yandex.ru")
 						|| host.equals("www.yandex.ru")) {
 					Map<String, String> params = getQueryParameters(uri);
-					String zm = params.get("z");
-                    String[] vls = silentSplit(params.get("ll"),",");
-                    if ( vls != null && vls.length >= 2) {
-                        double lat = parseSilentDouble(vls[0]);
-                        double lon = parseSilentDouble(vls[1]) ;
-                        int zoom = parseZoom(zm);
-                        return new GeoParsedPoint(lat, lon, zoom);
-                    } 
-					
+					String ll = params.get("ll");
+					if (ll != null) {
+						Matcher matcher = commaSeparatedPairPattern.matcher(ll);
+						if (matcher.matches()) {
+							String z = String.valueOf(parseZoom(params.get("z")));
+							return new GeoParsedPoint(matcher.group(1), matcher.group(2), z);
+						}
+					}
 				} else if (host.equals("maps.google.com")
 						|| host.equals("google.com")
 						|| host.equals("www.google.com")) {
