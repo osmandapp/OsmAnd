@@ -1,37 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:background="?attr/card_bg"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-    <TextView android:id="@+id/message"
-              android:layout_height="wrap_content"
-              android:padding="@dimen/dashFavIconMargin"
-              android:layout_width="match_parent"
-              android:gravity="center_horizontal"
-              android:textColor="@color/dashboard_black"
-              android:layout_gravity="center_horizontal"/>
-    <View android:layout_width="match_parent"
-          android:background="?attr/dashboard_divider"
-          android:layout_height="1dp"/>
-    <LinearLayout android:layout_width="fill_parent"
-                  android:orientation="horizontal"
-                  android:layout_height="@dimen/dashHeaderHeight">
-        <Button android:id="@+id/local_downloads"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="@string/dash_download_manage"
-				style="?attr/dashboardGeneralButtonStyle"/>
-        <View android:layout_width="1dp"
-			  android:background="?attr/dashboard_divider"
-              android:layout_height="match_parent"/>
-        <Button android:id="@+id/download_new_map"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/dash_download_new_one"
-				style="?attr/dashboardGeneralButtonStyle"/>
-    </LinearLayout>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/card_bg"
+	android:orientation="vertical">
+
+	<TextView
+		android:id="@+id/message"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:gravity="center_horizontal"
+		android:padding="@dimen/dashFavIconMargin"
+		android:textColor="?android:textColorPrimary"
+		tools:text="@string/lorem_ipsum"/>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider"/>
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/dashHeaderHeight"
+		android:orientation="horizontal">
+
+		<Button
+			android:id="@+id/local_downloads"
+			style="?attr/dashboardGeneralButtonStyle"
+			android:layout_width="0dp"
+			android:layout_weight="1"
+			android:text="@string/dash_download_manage"/>
+
+		<View
+			android:layout_width="1dp"
+			android:layout_height="match_parent"
+			android:background="?attr/dashboard_divider"/>
+
+		<Button
+			android:id="@+id/download_new_map"
+			style="?attr/dashboardGeneralButtonStyle"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/dash_download_new_one"/>
+	</LinearLayout>
 
 </LinearLayout>
