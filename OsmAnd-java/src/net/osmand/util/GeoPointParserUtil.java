@@ -550,6 +550,12 @@ public class GeoPointParserUtil {
 		String[] unparsableUrls = {
 			"http://maps.yandex.ru/-/CVCw6M9g",
 			"http://maps.yandex.com/-/CVCXEKYW",
+			"http://goo.gl/maps/Cji0V",
+			"http://amap.com/0F0i02",
+			"http://j.map.baidu.com/oXrVz",
+			"http://l.map.qq.com/9741483212?m",
+			"http://map.qq.com/?l=261496722",
+			"http://her.is/vLCEXE",
 		};
 
 		for (String u : unparsableUrls) {
