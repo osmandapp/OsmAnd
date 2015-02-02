@@ -96,8 +96,7 @@
 		<item name="windowActionBarOverlay">true</item>
     </style>
 
-
-    <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
+	<style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
         <item name="expandable_category_color">@color/group_background</item>
 		<item name="android:actionDropDownStyle">@style/Widget.LightSpinner</item>
 		<item name="actionDropDownStyle">@style/Widget.LightSpinner</item>
