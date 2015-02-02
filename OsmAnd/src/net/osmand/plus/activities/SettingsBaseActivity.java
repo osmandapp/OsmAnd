@@ -13,7 +13,9 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.preference.*;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -304,10 +306,10 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	@SuppressWarnings("deprecation")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
-		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
-		getToolbar().setTitle(R.string.settings_activity);
 		settings = getMyApplication().getSettings();
+		getToolbar().setTitle(R.string.settings_activity);
+
 		
 		if (profileSettings) {
 			modes.clear();
@@ -321,8 +323,9 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 				s.add(a.toHumanString(getMyApplication()));
 			}
 
-			ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
+			SpinnerAdapter spinnerAdapter = new SpinnerAdapter(this,
 					android.R.layout.simple_spinner_item, s);
+
 			spinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
 			getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 				@Override
@@ -344,6 +347,23 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
     }
 
 
+	class SpinnerAdapter extends ArrayAdapter<String>{
+
+
+		public SpinnerAdapter(Context context, int resource, List<String> objects) {
+			super(context, resource, objects);
+		}
+
+		@Override
+		public View getDropDownView(int position, View convertView, ViewGroup parent) {
+			View view = super.getDropDownView(position, convertView, parent);
+			if (!settings.isLightActionBar()){
+				TextView textView = (TextView) view.findViewById(android.R.id.text1);
+				textView.setBackgroundColor(getResources().getColor(R.color.actionbar_dark_color));
+			}
+			return view;
+		}
+	}
 	
 
 
