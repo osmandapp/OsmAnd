@@ -13,8 +13,8 @@
 	<color name="dashboard_blue">#536DFE</color>
 	<color name="dashboard_subheader_text_dark">#b4c3cc</color>
 	<color name="dashboard_subheader_text_light">#212121</color>
-	<color name="dashboard_general_button_dark">#ff8f00</color>
-	<color name="dashboard_general_button_light">#536DFE</color>
+	<color name="dashboard_general_button_text_dark">#ff8f00</color>
+	<color name="dashboard_general_button_text_light">#536DFE</color>
 
 	<color name="color_transparent">#00000000</color>
 	<color name="widgettext_night">#ffC8C8C8</color>

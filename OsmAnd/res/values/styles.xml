@@ -50,12 +50,12 @@
 	</style>
 
 	<style name="DashboardGeneralButton.Light" parent="DashboardGeneralButton.Compat">
-		<item name="android:textColor">@color/dashboard_general_button_light</item>
+		<item name="android:textColor">@color/dashboard_general_button_text_light</item>
 		<item name="android:background">@drawable/dashboard_button_light</item>
 	</style>
 
 	<style name="DashboardGeneralButton.Dark" parent="DashboardGeneralButton.Compat">
-		<item name="android:textColor">@color/dashboard_general_button_dark</item>
+		<item name="android:textColor">@color/dashboard_general_button_text_dark</item>
 		<item name="android:background">@drawable/dashboard_button_dark</item>
 	</style>
 
@@ -64,12 +64,19 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
+		<item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:textSize">@dimen/showAllButtonTextSize</item>
-        <item name="android:textColor">@color/dashboard_black</item>
-        <item name="android:background">@drawable/dashboard_button_light</item>
 		<item name="android:gravity">bottom|center_horizontal</item>
 		<item name="android:paddingBottom">@dimen/dashSearchPaddingBot</item>
     </style>
+
+	<style name="DashboardSearchButton.Light" parent="DashboardSearchButton">
+		<item name="android:background">@drawable/dashboard_button_light</item>
+	</style>
+
+	<style name="DashboardSearchButton.Dark" parent="DashboardSearchButton">
+		<item name="android:background">@drawable/dashboard_button_dark</item>
+	</style>
 
     <style name="ListText">
         <item name="android:textSize">20sp</item>
@@ -120,6 +127,7 @@
 		<item name="dashboardSubHeaderStyle">@style/DashboardSubHeader.Light</item>
 		<item name="dashboard_divider">@color/dashboard_divider_light</item>
 		<item name="dashboard_button">@drawable/dashboard_button_light</item>
+		<item name="dashboardSearchButtonStyle">@style/DashboardSearchButton.Light</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -147,6 +155,7 @@
 		<item name="dashboardSubHeaderStyle">@style/DashboardSubHeader.Dark</item>
 		<item name="dashboard_divider">@color/dashboard_divider_dark</item>
 		<item name="dashboard_button">@drawable/dashboard_button_dark</item>
+		<item name="dashboardSearchButtonStyle">@style/DashboardSearchButton.Dark</item>
     </style>
 
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">

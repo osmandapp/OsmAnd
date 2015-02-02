@@ -33,7 +33,7 @@
 
         <Button
             android:id="@+id/poi"
-            style="@style/DashboardSearchButton"
+			style="?attr/dashboardSearchButtonStyle"
             android:drawableTop="@drawable/ic_action_info2"
             android:text="@string/poi" />
 
@@ -44,7 +44,7 @@
 
         <Button
             android:id="@+id/address"
-            style="@style/DashboardSearchButton"
+			style="?attr/dashboardSearchButtonStyle"
             android:drawableTop="@drawable/ic_action_home2"
             android:text="@string/address" />
 
@@ -55,7 +55,7 @@
 
         <Button
             android:id="@+id/coord"
-            style="@style/DashboardSearchButton"
+			style="?attr/dashboardSearchButtonStyle"
             android:drawableTop="@drawable/ic_action_marker2"
             android:text="@string/coordinates" />
 

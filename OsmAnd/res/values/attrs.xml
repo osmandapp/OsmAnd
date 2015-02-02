@@ -16,6 +16,7 @@
 		<attr name="dashboardSubHeaderStyle" format="reference" />
 		<attr name="dashboard_divider" format="reference" />
 		<attr name="dashboard_button" format="reference" />
+		<attr name="dashboardSearchButtonStyle" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

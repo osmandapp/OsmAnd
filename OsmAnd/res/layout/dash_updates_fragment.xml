@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	android:id="@+id/maps"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/card_bg"
+	android:orientation="vertical">
 
-<LinearLayout android:id="@+id/maps"
-			  xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:orientation="vertical"
-			  android:background="?attr/card_bg"
-			  android:layout_width="match_parent"
-			  android:layout_height="wrap_content">
 	<LinearLayout
-			android:layout_gravity="center_vertical"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/dashHeaderHeight">
-		<TextView android:text="@string/map_update"
-				  android:id="@+id/header"
-				  style="?attr/dashboardSubHeaderStyle"/>
-		<Button android:id="@+id/show_all"
-				android:text="@string/show_all"
-				style="?attr/dashboardGeneralButtonStyle"/>
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dashHeaderHeight"
+		android:layout_gravity="center_vertical">
+
+		<TextView
+			android:id="@+id/header"
+			style="?attr/dashboardSubHeaderStyle"
+			android:text="@string/map_update"/>
+
+		<Button
+			android:id="@+id/show_all"
+			style="?attr/dashboardGeneralButtonStyle"
+			android:text="@string/show_all"/>
 	</LinearLayout>
 
-	<LinearLayout android:id="@+id/updates_items"
-				  android:orientation="vertical"
-				  android:layout_width="fill_parent"
-				  android:layout_height="wrap_content"/>
+	<LinearLayout
+		android:id="@+id/updates_items"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"/>
 
 </LinearLayout>
