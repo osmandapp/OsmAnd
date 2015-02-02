@@ -326,6 +326,18 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
+		// http://www.google.com/maps/?q=loc:34,-106&z=11
+		url = "http://www.google.com/maps/?q=loc:" + ilat + "," + ilon + "&z=" + z;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
+
+		// http://www.google.com/maps/?q=loc:34.99393,-106.61568&z=11
+		url = "http://www.google.com/maps/?q=loc:" + dlat + "," + dlon + "&z=" + z;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
 		// whatsapp
 		// http://maps.google.com/maps/q=loc:34,-106 (You)
 		z = GeoParsedPoint.NO_ZOOM;
@@ -538,6 +550,9 @@ public class GeoPointParserUtil {
             "http://maps.apple.com/?daddr=Bargou,+Tunisien",
             "http://maps.apple.com/?lsp=7618&q=40.738065,-73.988898&sll=40.738065,-73.988898",
             "http://maps.apple.com/?lsp=9902&auid=13787349062281695774&sll=40.694576,-73.982992&q=Garden%20Nail%20%26%20Spa&hnear=325%20Gold%20St%2C%20Brooklyn%2C%20NY%20%2011201-3054%2C%20United%20States",
+            "https://www.google.com/maps/place/Wild+Herb+Market/@33.32787,-105.66291,14z/data=!4m5!1m2!2m1!1sfood!3m1!1s0x86e1ce2079e1f94b:0x1d7460465dcaf3ed",
+            "http://www.google.com/maps/search/food/@34,-106,14z",
+            "http://www.google.com/maps/search/food/@34.99393,-106.61568,14z",
         };
 
 		for (String u : urls) {
