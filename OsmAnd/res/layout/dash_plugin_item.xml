@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
+
 	<View
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:background="?attr/dashboard_divider" />
+		android:background="?attr/dashboard_divider"/>
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="54dp"
 		android:orientation="horizontal">
+
 		<ImageView
 			android:id="@+id/plugin_logo"
 			android:layout_width="32dp"
@@ -27,18 +29,40 @@
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/plugin_name"
 			android:layout_width="0dp"
-			android:layout_weight="1"
 			android:layout_height="match_parent"
-			android:layout_marginTop="4dp"
 			android:layout_marginBottom="4dp"
-			android:gravity="center_vertical"
+			android:layout_marginTop="4dp"
+			android:layout_weight="1"
 			android:ellipsize="end"
+			android:gravity="center_vertical"
 			android:maxLines="2"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="16sp"
 			osmand:typeface="@string/font_roboto_regular"
-			tools:text="@string/lorem_ipsum" />
+			tools:text="@string/lorem_ipsum"/>
 
-		<include layout="@layout/check_item_rel" />
+		<net.osmand.plus.widgets.SwitchEx
+			android:id="@+id/check_item"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginTop="6dp"
+			android:layout_marginBottom="6dp"
+			android:layout_marginLeft="6dp"
+			android:layout_marginStart="6dp"
+			android:layout_marginRight="16dp"
+			android:layout_marginEnd="16dp"
+			android:background="@drawable/switch_ex_background"
+			android:minHeight="0dp"
+			android:minWidth="0dp"
+			android:paddingTop="8dp"
+			android:paddingBottom="8dp"
+			android:paddingLeft="9.5dp"
+			android:paddingRight="9.5dp"
+			android:textAllCaps="true"
+			android:textOff="@string/enable_plugin"
+			android:textOn="@string/disable_plugin"
+			android:textSize="12sp"
+			osmand:typeface="@string/font_roboto_medium"/>
 	</LinearLayout>
 </LinearLayout>

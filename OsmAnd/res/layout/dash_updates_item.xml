@@ -1,44 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/dashListItemHeight"
+	android:layout_marginLeft="@dimen/dashFavIconMargin"
+	android:layout_marginRight="@dimen/dashFavIconMargin"
+	android:orientation="vertical">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:orientation="vertical"
-			  android:layout_width="match_parent"
-			  android:layout_marginLeft="@dimen/dashFavIconMargin"
-			  android:layout_marginRight="@dimen/dashFavIconMargin"
-			  android:layout_height="@dimen/dashListItemHeight">
-	<View android:layout_width="match_parent"
-		  android:background="?attr/dashboard_divider"
-		  android:layout_height="1dp"/>
-	<LinearLayout android:orientation="horizontal"
-				  android:layout_marginLeft="@dimen/subHeaderMarginLeft"
-				  android:layout_width="fill_parent"
-				  android:layout_height="fill_parent">
-		<LinearLayout android:orientation="vertical"
-					  android:layout_gravity="center_vertical"
-					  android:layout_width="0dp"
-					  android:layout_weight="1"
-					  android:layout_height="wrap_content">
-			<TextView android:id="@+id/map_name"
-					  android:textColor="@color/dashboard_black"
-					  android:textSize="@dimen/dashFavNameTextSize"
-					  android:layout_width="wrap_content"
-					  android:layout_height="wrap_content"/>
-			<TextView android:id="@+id/map_descr"
-					  android:textColor="@color/dashboard_descr_colol"
-					  android:layout_width="wrap_content"
-					  android:layout_height="wrap_content"/>
-			<ProgressBar android:id="@+id/ProgressBar"
-						 android:visibility="gone"
-						 style="?android:attr/progressBarStyleHorizontal"
-						 android:layout_width="fill_parent"
-						 android:layout_height="wrap_content"/>
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider" />
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_marginLeft="@dimen/subHeaderMarginLeft"
+		android:layout_marginStart="@dimen/subHeaderMarginLeft"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/map_name"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/dashFavNameTextSize"
+				android:lines="1"
+				android:maxLines="1"
+				android:ellipsize="end"
+				tools:text="@string/lorem_ipsum" />
+
+			<TextView
+				android:id="@+id/map_descr"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="?android:textColorSecondary"
+				tools:text="@string/lorem_ipsum" />
+
+			<ProgressBar
+				android:id="@+id/ProgressBar"
+				style="?android:attr/progressBarStyleHorizontal"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:visibility="gone" />
 		</LinearLayout>
-		<ImageButton android:id="@+id/btn_download"
-				android:layout_gravity="center_vertical"
-				android:src="@drawable/download_button"
-				android:background="?attr/dashboard_button"
-				android:layout_width="@dimen/dashListItemHeight"
-				android:layout_height="@dimen/dashListItemHeight"/>
+
+		<ImageButton
+			android:id="@+id/btn_download"
+			android:layout_width="@dimen/dashListItemHeight"
+			android:layout_height="@dimen/dashListItemHeight"
+			android:layout_gravity="center_vertical"
+			android:background="?attr/dashboard_button"
+			android:src="@drawable/download_button"/>
 	</LinearLayout>
 
 </LinearLayout>

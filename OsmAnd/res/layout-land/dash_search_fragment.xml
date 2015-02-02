@@ -33,8 +33,8 @@
 
         <Button
             android:id="@+id/poi"
-            style="@style/DashboardSearchButton"
-            android:drawableTop="@drawable/ic_action_info2"
+			style="?attr/dashboardSearchButtonStyle"
+            android:drawableTop="?attr/ic_action_info2"
             android:text="@string/poi" />
 
         <View
@@ -44,8 +44,8 @@
 
         <Button
             android:id="@+id/address"
-            style="@style/DashboardSearchButton"
-            android:drawableTop="@drawable/ic_action_home2"
+			style="?attr/dashboardSearchButtonStyle"
+            android:drawableTop="?attr/ic_action_home2"
             android:text="@string/address" />
 
         <View
@@ -55,8 +55,8 @@
 
         <Button
             android:id="@+id/coord"
-            style="@style/DashboardSearchButton"
-            android:drawableTop="@drawable/ic_action_marker2"
+			style="?attr/dashboardSearchButtonStyle"
+            android:drawableTop="?attr/ic_action_marker2"
             android:text="@string/coordinates" />
 
     </LinearLayout>

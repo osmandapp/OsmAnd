@@ -557,7 +557,8 @@ public class DownloadIndexesThread {
 			itemsToUpdate.clear();
 			for (IndexItem item : filtered) {
 				boolean outdated = checkIfItemOutdated(item);
-				if(outdated) {
+				//include only activated files here
+				if(outdated && indexActivatedFileNames.containsKey(item.getTargetFileName())) {
 					itemsToUpdate.add(item);
 				}
 			}
@@ -576,8 +577,7 @@ public class DownloadIndexesThread {
 		String indexfilesdate = indexFileNames.get(sfName);
 		if (date != null &&
 				!date.equals(indexactivateddate) &&
-				!date.equals(indexfilesdate) &&
-				indexActivatedFileNames.containsKey(sfName)) {
+				!date.equals(indexfilesdate)) {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra) ||
 					item.getType() == DownloadActivityType.ROADS_FILE ||
 					item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){

@@ -36,9 +36,9 @@ android {
 
 		publishing {
 			storeFile file("osmand_key")
-			storePassword System.getenv("PWD")
+			storePassword System.getenv("OSMAND_APK_PASSWORD")
 			keyAlias "androiddebugkey"
-			keyPassword System.getenv("PWD")
+			keyPassword System.getenv("OSMAND_APK_PASSWORD")
 		}
 	}
 

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/search"
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/card_bg"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/dashHeaderHeight" >
+        android:layout_height="@dimen/dashHeaderHeight">
 
         <TextView
             android:id="@+id/search_for"
@@ -30,12 +31,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dashSearchBtnHeight"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/poi"
-            style="@style/DashboardSearchButton"
-            android:drawableTop="@drawable/ic_action_info2"
+            style="?attr/dashboardSearchButtonStyle"
+            android:drawableTop="?attr/ic_action_info2"
             android:text="@string/poi" />
 
         <View
@@ -45,8 +46,8 @@
 
         <Button
             android:id="@+id/address"
-            style="@style/DashboardSearchButton"
-            android:drawableTop="@drawable/ic_action_home2"
+			style="?attr/dashboardSearchButtonStyle"
+            android:drawableTop="?attr/ic_action_home2"
             android:text="@string/address" />
 
         <View
@@ -56,8 +57,8 @@
 
         <Button
             android:id="@+id/coord"
-            style="@style/DashboardSearchButton"
-            android:drawableTop="@drawable/ic_action_marker2"
+			style="?attr/dashboardSearchButtonStyle"
+            android:drawableTop="?attr/ic_action_marker2"
             android:text="@string/coordinates" />
     </LinearLayout>
 

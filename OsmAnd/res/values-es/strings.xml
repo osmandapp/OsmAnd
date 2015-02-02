@@ -1909,4 +1909,6 @@
     <string name="osm_editing_manage">Administrar</string>
     <string name="parking_place">Área de aparcamiento</string>
     <string name="remove_the_tag">QUITA LA ETIQUETA</string>
-    </resources>
+    <string name="enable_plugin">Habilitar</string>
+	<string name="disable_plugin">Deshabilitar</string>
+</resources>

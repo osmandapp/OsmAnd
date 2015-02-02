@@ -73,7 +73,10 @@ public class EntityParser {
 		am.setType(type);
 		am.setSubType(subtype);
 		am.setAdditionalInfo(types.getAmenityAdditionalInfo(tagValues, type, subtype));
-		am.setAdditionalInfo("website", getWebSiteURL(entity));
+		String wbs = getWebSiteURL(entity);
+		if(wbs != null) {
+			am.setAdditionalInfo("website", wbs);
+		}
 		return am;
 	}
 

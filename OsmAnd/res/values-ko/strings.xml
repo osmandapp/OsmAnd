@@ -1132,7 +1132,7 @@
     <string name="default_buttons_other_actions">다른 액션</string>
     <string name="available_downloads_left">"다운로드 할 파일  %1$d 가능"</string>
     
-	<string name="layer_hillshade">음영 레이어</string>
+	<string name="layer_hillshade">음영기복 레이어</string>
     <string name="map_widget_gps_info">GPS 정보</string>
     <string name="access_arrival_time">도착 시간</string>
     <string name="item_checked">확인</string>

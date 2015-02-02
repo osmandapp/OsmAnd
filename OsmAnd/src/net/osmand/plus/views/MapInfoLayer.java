@@ -388,8 +388,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (themeId != calcThemeId) {
 			themeId = calcThemeId;
 			boolean textBold = following;
-			int textColor = nightMode ? 0xffC8C8C8:Color.BLACK ;
-			int textShadowColor = transparent && !nightMode? Color.WHITE : Color.TRANSPARENT ;
+			int textColor = nightMode ? view.getResources().getColor(R.color.widgettext_night):Color.BLACK;
+			// Night shadowColor always use widgettext_shadow_night, same as widget background color for non-transparent night skin (from box_night_free_simple.9.png)
+			int textShadowColor = nightMode? view.getResources().getColor(R.color.widgettext_shadow_night) : Color.WHITE;
+			if (!transparent && !nightMode) {
+				textShadowColor = Color.TRANSPARENT;
+			}
 			int boxTop;
 			int boxTopStack;
 			int boxTopR;

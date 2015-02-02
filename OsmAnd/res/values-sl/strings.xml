@@ -1970,6 +1970,27 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="rendering_value__name">Privzeto</string>
 	<string name="recents">NEDAVNI</string>
 	<string name="navigation_over_track">Začetek navigacije po sledi?</string>
-	<string name="avoid_roads_msg">Pot lahko spremenite tako, da izberete ceste, katerih se je treba izogibati</string>
+	<string name="avoid_roads_msg">Alternativno pot lahko spremenite posledično tako, da izberete ceste, katerih se je treba izogibati</string>
     <string name="save_track_to_gpx_globally_headline">Shranjevanje sledi na zahtevo</string>
-	</resources>
+	<string name="parking_place">Parkirno mesto</string>
+    <string name="remove_the_tag">ODSTRANJEVANJE OZNAKE</string>
+    <string name="gps_status">GPS Status</string>
+    <string name="version_settings_descr">Prenos nočne gradnje</string>
+    <string name="version_settings">Gradnje</string>
+    <string name="rendering_attr_streetLighting_name">Ulična razsvetljava</string>
+    <string name="proxy_pref_title">Proxy</string>
+    <string name="proxy_pref_descr">Nastavitev proxy internetne komunikacije</string>
+    <string name="settings_privacy">Zasebnost</string>
+    <string name="points">Točke</string>
+    <string name="tracks">Sledi</string>
+    <string name="my_location">Moja lokacija</string>
+    <string name="osm_editing_manage">Upravljaj</string>
+    <string name="enable_proxy_title">Omogoči HTTP Proxy</string>
+	<string name="enable_proxy_descr">Konfiguriranje HTTP Proxy-ja za vse omrežne zahteve</string>
+	<string name="proxy_host_title">Proxy gostitelj</string>
+	<string name="proxy_host_descr">Nastavitev imena gostitelja vašega proxy-ja (npr. 127.0.0.1)</string>
+	<string name="proxy_port_title">Vrata proxy-ja</string>
+	<string name="proxy_port_descr">Nastavitev številko vrat vašega proxy-ja (npr. 8118)</string>
+	<string name="enable_plugin">Omogoči</string>
+	<string name="disable_plugin">Onemogoči</string>
+</resources>

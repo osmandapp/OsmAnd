@@ -43,7 +43,7 @@ public class DashErrorFragment extends DashBaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "osmand.app+crash@gmail.com" }); //$NON-NLS-1$
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "crash@osmand.net" }); //$NON-NLS-1$
                 File file = getMyApplication().getAppPath(OsmandApplication.EXCEPTION_PATH);
                 intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
                 intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$

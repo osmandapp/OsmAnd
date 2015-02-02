@@ -42,7 +42,6 @@ import android.widget.SeekBar;
 
 public class MapControlsLayer extends OsmandMapLayer {
 
-	private static final int NIGHT_COLOR = 0xffC8C8C8;
 	private static final int TIMEOUT_TO_SHOW_BUTTONS = 5000;
 	private final MapActivity mapActivity;
 	private int shadowColor = -1;
@@ -156,7 +155,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
 		boolean isNight = nightMode != null && nightMode.isNightMode();
 		int shadw = isNight ? Color.TRANSPARENT : Color.WHITE;
-		int textColor = isNight ? NIGHT_COLOR : Color.BLACK ;
+		int textColor = isNight ? mapActivity.getResources().getColor(R.color.widgettext_night) : Color.BLACK ;
 		if(shadowColor != shadw) {
 			shadowColor = shadw;
 			updatextColor(textColor, shadw, rulerControl, zoomControls, mapMenuControls);

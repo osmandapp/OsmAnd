@@ -11,11 +11,17 @@ public class PoiFilter {
 	private String translationName;
 	private MapPoiTypes registry;
 	private List<PoiType> poiTypes = new ArrayList<PoiType>();
-	private Map<String, PoiType> map = new LinkedHashMap<String, PoiType>(); 
+	private Map<String, PoiType> map = new LinkedHashMap<String, PoiType>();
+	private PoiCategory pc; 
 
-	public PoiFilter(MapPoiTypes registry, String keyName){
+	public PoiFilter(MapPoiTypes registry, PoiCategory pc, String keyName){
 		this.registry = registry;
+		this.pc = pc;
 		this.keyName = keyName;
+	}
+	
+	public PoiCategory getPoiCategory() {
+		return pc;
 	}
 	
 	public String getTranslationName() {
