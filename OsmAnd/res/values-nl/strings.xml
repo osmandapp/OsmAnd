@@ -2059,7 +2059,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osm_editing_manage">Beheer</string>
     <string name="recents">RECENT</string>
 	<string name="navigation_over_track">Navigatie over spoor starten?</string>
-	<string name="avoid_roads_msg">Je kan een alternatieve route vinden door aan te geven welke wegen niet gebruikt mogen worden.</string>
+	<string name="avoid_roads_msg">Je kan een alternatieve route vinden door aan te geven welke wegen niet gebruikt mogen worden</string>
     <string name="save_track_to_gpx_globally_headline">Spoorloggen op aanvraag</string>
 	<string name="enable_proxy_title">HTTP-proxy aanzetten</string>
 	<string name="enable_proxy_descr">HTTP-proxy instellen voor alle netwerkverzoeken</string>
