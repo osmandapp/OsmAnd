@@ -257,7 +257,7 @@
   <string name="default_buttons_save">Bewaar</string>
   <string name="menu_save_directions">Bewaar navigatie-aanwijzingen</string>
   <string name="local_index_upload_gpx_description">Upload GPX-bestanden naar Openstreetmap. Ze worden gebruikt om de kaarten te verbeteren.</string>
-  <string name="local_index_items_uploaded">%1$d of %2$d gegevens succesvol ge-upload.</string>
+  <string name="local_index_items_uploaded">%1$d of %2$d bestanden succesvol ge-upload.</string>
   <string name="local_index_mi_upload_gpx">Stuur naar OpenStreetMap</string>
   <string name="show_more_map_detail">Toon meer kaartdetails</string>
   <string name="show_more_map_detail_descr">Toon sommige vectorkaartdetails (wegen enz.) al op lager zoomniveau</string>
@@ -277,9 +277,9 @@
   
   
 <string name="local_index_installed">Editie</string>
-  <string name="local_index_items_backuped">%1$d van %2$d gegevens succesvol gedeactiveerd.</string>
-  <string name="local_index_items_deleted">%1$d van %2$d gegevens succesvol verwijderd.</string>
-  <string name="local_index_items_restored">%1$d van %2$d gegevens succesvol geactiveerd.</string>
+  <string name="local_index_items_backuped">%1$d van %2$d bestanden succesvol gedeactiveerd.</string>
+  <string name="local_index_items_deleted">%1$d van %2$d bestanden succesvol verwijderd.</string>
+  <string name="local_index_items_restored">%1$d van %2$d bestanden succesvol geactiveerd.</string>
   <string name="local_index_no_items_to_do">Voor %1$s: geen bestanden</string>
   <string name="local_index_action_do">%1$s: %2$s bestanden. Doorgaan?</string>
   <string name="local_index_descr_title">Kaartbeheer</string>
@@ -2069,4 +2069,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="proxy_port_descr">Stel het poortnummer van je proxy in (bv. 8118)</string>
 	<string name="enable_plugin">Aanzetten</string>
 	<string name="disable_plugin">Uitzetten</string>
+<string name="plugin_description_title">Omschrijving</string>
+	<string name="plugin_settings_button_caption">Instellingen</string>
 </resources>
