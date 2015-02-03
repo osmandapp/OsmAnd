@@ -2049,4 +2049,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="proxy_port_descr">Einen Proxy\'s Port einrichten (Bsp. 8118)</string>
     <string name="enable_plugin">Aktivieren</string>
     <string name="disable_plugin">Deaktivieren</string>
-    </resources>
+    <string name="plugin_description_title">Beschreibung</string>
+	<string name="plugin_settings_button_caption">Einstellungen</string>
+</resources>

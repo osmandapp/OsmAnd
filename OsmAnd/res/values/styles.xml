@@ -143,6 +143,7 @@
 		<item name="ic_action_home2">@drawable/ic_action_home2_light</item>
 		<item name="ic_action_marker2">@drawable/ic_action_marker2_light</item>
         <item name="search_background">@color/search_background_dark</item>
+		<item name="ic_action_settings">@drawable/ic_action_settings_light</item>
         <item name="android:actionModeCloseDrawable">@drawable/action_mode_back</item>
         <item name="actionModeCloseDrawable">@drawable/action_mode_back</item>
         <item name="android:actionModeStyle">@style/WhiteActionMode</item>
@@ -177,7 +178,8 @@
 		<item name="ic_action_info2">@drawable/ic_action_info2_dark</item>
 		<item name="ic_action_home2">@drawable/ic_action_home2_dark</item>
 		<item name="ic_action_marker2">@drawable/ic_action_marker2_dark</item>
-        <item name="search_background">@color/color_white</item>
+		<item name="search_background">@color/color_white</item>
+		<item name="ic_action_settings">@drawable/ic_action_settings_dark</item>
     </style>
 
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
