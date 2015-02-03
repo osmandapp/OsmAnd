@@ -3,16 +3,23 @@ apply plugin: 'java'
 sourceSets {
 	main {
 		java {
-			srcDirs = [
-					"src"
-			]
+			srcDirs = ["src"]
 		}
 	}
 }
 
-// This is Android-specific
-jar {
-	exclude "**/PlatformUtil.*"
+configurations {
+	android
+}
+
+task androidJar(type: Jar) {
+	appendix = "android"
+	from sourceSets.main.output
+	exclude("**/PlatformUtil.*")
+}
+
+artifacts {
+	android androidJar
 }
 
 dependencies {

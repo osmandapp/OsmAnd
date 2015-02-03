@@ -299,7 +299,7 @@ repositories {
 }
 
 dependencies {
-	compile project(":OsmAnd-java")
+	compile project(path: ":OsmAnd-java", configuration: "android")
 	compile fileTree(
 			dir: "libs",
 			include: ["*.jar"],
