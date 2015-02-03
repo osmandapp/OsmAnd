@@ -1794,4 +1794,6 @@
     <string name="osm_editing_manage">Hantera</string>
     <string name="enable_plugin">Aktivera</string>
 	<string name="disable_plugin">Inaktivera</string>
-</resources>
+<string name="plugin_settings_button_caption">Inställningar</string>
+<string name="plugin_description_title">Beskrivning</string>
+	</resources>
