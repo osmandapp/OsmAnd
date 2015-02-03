@@ -9,7 +9,6 @@
 		<LinearLayout android:id="@+id/loading"
 					  android:layout_width="fill_parent"
 					  android:layout_height="@dimen/dashMapHeight"
-					  android:paddingTop="?attr/actionBarSize"
 					  android:gravity="center_vertical|center_horizontal"
 					  android:orientation="horizontal">
 

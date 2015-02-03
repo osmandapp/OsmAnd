@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingRight="@dimen/list_content_padding"
     android:orientation="horizontal">
 
     <!-- 	<TextView android:id="@+id/distance_label" android:layout_marginLeft="5dp"
@@ -21,7 +23,6 @@
         android:background="?attr/reset_image"
         android:contentDescription="@string/default_buttons_delete"
         android:paddingLeft="2dp"
-        android:paddingRight="2dp"
         android:paddingTop="2dp" />
 
 </LinearLayout>

@@ -8,6 +8,8 @@
 	<color name="download_pressed_light">#8cff8f00</color>
 	<color name="download_pressed_dark">#be39464d</color>
 
+    <color name="search_background_dark">#292f33</color>
+
 
 	<color name="dashboard_descr_colol">#727272</color>
 	<color name="dashboard_background">#eaeaea</color>
