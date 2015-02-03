@@ -1,2 +1,6 @@
 include ':OsmAnd-java'
 include ':OsmAnd'
+include ':plugins:OsmAnd-AddressPlugin'
+include ':plugins:Osmand-ParkingPlugin'
+include ':plugins:Osmand-Sherpafy'
+include ':plugins:Osmand-SRTMPlugin'
