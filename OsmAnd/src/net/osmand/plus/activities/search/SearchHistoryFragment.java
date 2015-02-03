@@ -22,9 +22,12 @@ import android.support.v4.app.FragmentActivity;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
 import android.view.View.OnClickListener;
+import android.widget.AbsListView;
+import android.widget.ActionMenuView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -39,10 +42,21 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 	private HistoryAdapter historyAdapter;
 
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.search_history, container, false);
+		clearButton = (Button) view.findViewById(R.id.clearAll);
+		clearButton.setText(R.string.clear_all);
+		clearButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				helper.removeAll();
+				historyAdapter.clear();
+				clearButton.setVisibility(View.GONE);
+			}
+		});
+		return view;
 	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,17 +67,6 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		historyAdapter = new HistoryAdapter(helper.getHistoryEntries());
-		clearButton = new Button(getActivity());
-		clearButton.setText(R.string.clear_all);
-		clearButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				helper.removeAll();
-				historyAdapter.clear();
-				clearButton.setVisibility(View.GONE);
-			}
-		});
-		getListView().addFooterView(clearButton);
 		setListAdapter(historyAdapter);
 		setHasOptionsMenu(true);
 	}

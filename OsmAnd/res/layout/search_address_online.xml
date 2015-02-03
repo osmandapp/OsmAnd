@@ -8,14 +8,15 @@
         android:id="@+id/LinearLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
+        android:paddingLeft="@dimen/list_content_padding"
+        android:paddingRight="@dimen/list_content_padding"
         android:layout_marginTop="5dp">
 
         <ProgressBar
             android:id="@+id/ProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible"></ProgressBar>
+            android:visibility="invisible"/>
 
         <EditText
             android:id="@+id/SearchText"
@@ -23,14 +24,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/hint_search_online"
-            android:text=""></EditText>
+            android:text=""/>
 
         <Button
             android:id="@+id/SearchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
-            android:text="@string/search_button"></Button>
+            android:text="@string/search_button"/>
     </LinearLayout>
 
     <ListView
@@ -38,6 +39,6 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        style="@style/OsmandListView"></ListView>
+        style="@style/OsmandListView"/>
 
 </LinearLayout>

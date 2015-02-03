@@ -192,7 +192,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		tabTypefaceSelectedStyle = a.getInt(R.styleable.PagerSlidingTabStrip_pstsTextSelectedStyle, Typeface.BOLD);
 		tabTextAlpha = a.getFloat(R.styleable.PagerSlidingTabStrip_pstsTextAlpha, HALF_TRANSP);
 		tabTextSelectedAlpha = a.getFloat(R.styleable.PagerSlidingTabStrip_pstsTextSelectedAlpha, OPAQUE);
-		tabTypeface = FontCache.getRobotoMedium(context);
+        if (!isInEditMode()) {
+            tabTypeface = FontCache.getRobotoMedium(context);
+        }
 		a.recycle();
 
 		setMarginBottomTabContainer();

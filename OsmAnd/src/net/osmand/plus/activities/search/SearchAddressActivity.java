@@ -5,6 +5,8 @@ import android.view.MenuItem;
 import net.osmand.plus.OsmandApplication;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+
+import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 
 
@@ -13,10 +15,8 @@ public class SearchAddressActivity extends OsmandActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
-		}
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.single_fragment_layout);
 		if (savedInstanceState == null) {
 			// During initial setup, plug in the details fragment.
 			SearchAddressFragment details = new SearchAddressFragment();

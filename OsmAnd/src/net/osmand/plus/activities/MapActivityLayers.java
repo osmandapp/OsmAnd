@@ -328,6 +328,7 @@ public class MapActivityLayers {
 			}
 			
 		});
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		return builder.show();
 	}
 

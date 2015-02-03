@@ -49,6 +49,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -1003,6 +1004,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			v.findViewById(R.id.explist_indicator).setVisibility(View.GONE);
 
 			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
+			nameView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 			List<LocalIndexInfo> list = data.get(group);
 			int size = 0;
 			for (LocalIndexInfo aList : list) {

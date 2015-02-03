@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingRight="@dimen/list_content_padding"
     android:orientation="horizontal">
 
     <TextView
@@ -9,7 +11,6 @@
         style="@style/ListText.Small"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
         android:gravity="left" />
 
     <TextView
