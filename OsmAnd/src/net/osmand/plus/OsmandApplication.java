@@ -21,6 +21,7 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
+import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
@@ -795,10 +796,11 @@ public class OsmandApplication extends Application {
 
 	public void applyTheme(Context c) {
 		int t = R.style.OsmandLightDarkActionBarTheme;
+        boolean mainmenu = c instanceof MainMenuActivity;
 		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME) {
-			t = R.style.OsmandDarkTheme;
+			t = mainmenu ? R.style.DashboardDarkTheme : R.style.OsmandDarkTheme;
 		} else if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME) {
-			t = R.style.OsmandLightTheme;
+			t = mainmenu ? R.style.DashboardLightTheme : R.style.OsmandLightTheme;
 		} else if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_DARK_ACTIONBAR_THEME) {
 			t = R.style.OsmandLightDarkActionBarTheme;
 		}
