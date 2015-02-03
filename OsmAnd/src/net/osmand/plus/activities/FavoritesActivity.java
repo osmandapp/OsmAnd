@@ -46,8 +46,6 @@ public class FavoritesActivity extends TabActivity {
 
 	@Override
 	public void onCreate(Bundle icicle) {
-        //This has to be called before setContentView and you must use the
-        //class in com.actionbarsherlock.view and NOT android.view
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(icicle);
 		getSupportActionBar().setTitle(R.string.favorites_Button);

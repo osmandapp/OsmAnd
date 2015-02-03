@@ -81,7 +81,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	private Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<FavoriteGroup>();
 	private ActionMode actionMode;
 	private SearchView searchView;
-	protected boolean hideActionBar;
 
 	@Override
 	public void onAttach(Activity activity) {
