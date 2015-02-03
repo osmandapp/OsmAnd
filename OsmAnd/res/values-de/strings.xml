@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -968,7 +968,7 @@
 	<string name="searching">Suchen…</string>
 	<string name="searching_address">Adresse suchen…</string>
 	<string name="search_osm_nominatim">Online-Suche mit OSM Nominatim</string>
-	<string name="hint_search_online">Hausnummer, Straße, Ort</string>
+	<string name="hint_search_online">Online-Suche: Hausnummer, Straße, Ort</string>
 	<string name="search_offline_address">Offline-Suche</string>
 	<string name="search_online_address">Internet verwenden</string>
 	<string name="max_level_download_tile">Max. Online-Zoom</string>
