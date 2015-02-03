@@ -131,7 +131,7 @@
   <string name="live_monitoring_interval">Interval voor online tracking</string>
   <string name="live_monitoring_url_descr">Specificeer het webadres met parameters: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Webadres voor online tracking</string>
-  <string name="gpx_monitoring_disabled_warn">Zet eerst \'Registreer track in GPX-bestand\' aan.</string>
+  <string name="gpx_monitoring_disabled_warn">Log spoor met GPX-widget of via de \'Tripopname\'-instellingen.</string>
   <string name="show_current_gpx_title">Toon huidige track</string>
   <string name="tip_recent_changes_0_7_0_t">"Wijzigingen in 0.7.0 : \n\t- Offline Wikipedia gegevens met artikelen \n\t- Vernieuwde kaarten \n\t- Andere kleine features "</string>
   <string name="free_version_message">Deze gratis versie van OsmAnd is beperkt tot %1$s downloads en ondersteunt geen offline Wikipedia artikelen.</string>
@@ -203,7 +203,7 @@
   <string name="init_native_library">Voorbereiden interne bibliotheek…</string>
   <string name="choose_auto_follow_route">Kaartpositie volgen</string>
   <string name="choose_auto_follow_route_descr">Tijd totdat kaartweergave wordt gesynchroniseerd met de positie</string>
-  <string name="auto_follow_route_never">Nooit</string>
+  <string name="auto_follow_route_never">Nooit (druk op de blauwe pijl om begeleiding handmatig te starten)</string>
   <string name="auto_follow_route_navigation">Alleen automatisch volgen tijdens navigatie</string>
   <string name="auto_follow_route_navigation_descr">Alleen automatisch volgen tijdens navigatie.</string>
   <string name="auto_follow_location_enabled">Automatisch kaart volgen in gebruik.</string>
@@ -847,7 +847,7 @@
   <string name="poi_dialog_comment_default">Interessepunt aangepast</string>
   <string name="poi_dialog_other_tags_message">Alle andere tags blijven bewaard</string>
   <string name="default_buttons_commit">Bevestigen</string>
-  <string name="default_buttons_reset">Reset</string>
+  <string name="default_buttons_reset">Wis</string>
   <string name="filter_current_poiButton">Filter</string>
   <string name="edit_filter_delete_menu_item">Verwijder</string>
   <string name="edit_filter_save_as_menu_item">Bewaar als</string>
@@ -1203,7 +1203,7 @@
     <string name="recording_context_menu_delete">Wis opname</string>
     <string name="recording_context_menu_play">Afspelen</string>
     <string name="recording_description">Opname %1$s %3$s %2$s</string>
-    <string name="recording_default_name">opname</string>
+    <string name="recording_default_name">Opname</string>
     <string name="av_control_stop">Stop</string>
     <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Audio/video-notities</string>
@@ -1716,7 +1716,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_plugin_description">"Geavanceerde live monitoring - zie http://osmo.mobi. Volg andere toestellen en laat jezelf volgen. Maak anonieme groepen, deel je positie en communiceer. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen. Anonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden: zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde gebruikers kunnen ze gebruiken. "</string>
     <string name="osmo_plugin_name">OsMo (geavanceerde live monitoring)</string>
     <string name="osmo_settings">OpenStreetMap Monitoring (OsMo)</string>
-   	<string name="keep_informing_never">Niet herhalen</string>
+   	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
     <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig</string>
     <string name="keep_informing">Herhaal de aanwijzingen</string>
 	<string name="arrival_distance">Aankondigen van de bestemming</string>
@@ -1997,7 +1997,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_attr_busRoutes_name">Buslijnen</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tram- en treinverbindingen</string>
     <string name="wake_on_voice">Zet het scherm aan</string>
-    <string name="wake_on_voice_descr">Zet het scherm aan bij het naderen van een bocht</string>
+    <string name="wake_on_voice_descr">Zet het scherm aan (indien het uit staat) bij het naderen van een bocht</string>
     <string name="select_impassable_road">Selecteer op kaart…</string>
     <string name="impassable_road">Vermijd wegen…</string>
     <string name="rendering_category_hide">Verberg</string>
@@ -2044,4 +2044,29 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="show_pedestrian_warnings">Toon voetgangers oversteekplaatsen</string>
     <string name="speak_pedestrian">Meld oversteekplaatsen</string>
     <string name="rendering_value__name">Standaard</string>
-	</resources>
+	<string name="parking_place">Parkeerplaats</string>
+    <string name="remove_the_tag">VERWIJDER DE TAG</string>
+    <string name="gps_status">GPS-status</string>
+    <string name="version_settings_descr">Nightly builds downloaden</string>
+    <string name="version_settings">Builds</string>
+    <string name="rendering_attr_streetLighting_name">Straatverlichting</string>
+    <string name="proxy_pref_title">Proxy</string>
+    <string name="proxy_pref_descr">Stel een proxy voor internetcommunicatie in</string>
+    <string name="settings_privacy">Privacy</string>
+    <string name="points">Punten</string>
+    <string name="tracks">Sporen</string>
+    <string name="my_location">Mijn locatie</string>
+    <string name="osm_editing_manage">Beheer</string>
+    <string name="recents">RECENT</string>
+	<string name="navigation_over_track">Navigatie over spoor starten?</string>
+	<string name="avoid_roads_msg">Je kan een alternatieve route krijgen door te vermijden wegen te selecteren</string>
+    <string name="save_track_to_gpx_globally_headline">Spoorloggen op aanvraag</string>
+	<string name="enable_proxy_title">HTTP-proxy aanzetten</string>
+	<string name="enable_proxy_descr">HTTP-proxy instellen voor alle netwerkverzoeken</string>
+	<string name="proxy_host_title">Proxy-host</string>
+	<string name="proxy_host_descr">Stel de hostname van je proxy in (bv. 127.0.0.1)</string>
+	<string name="proxy_port_title">Proxy-poort</string>
+	<string name="proxy_port_descr">Stel het poortnummer van je proxy in (bv. 8118)</string>
+	<string name="enable_plugin">Aanzetten</string>
+	<string name="disable_plugin">Uitzetten</string>
+</resources>
