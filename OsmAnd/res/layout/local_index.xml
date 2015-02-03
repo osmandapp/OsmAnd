@@ -23,6 +23,6 @@
         android:layout_marginTop="0dp"
         android:layout_weight="1"
         android:groupIndicator="@android:color/transparent"
-        style="@style/OsmandListView"></ExpandableListView>
+        style="@style/OsmandListView"/>
 
 </LinearLayout>

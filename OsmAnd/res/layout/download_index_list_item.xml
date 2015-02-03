@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:paddingTop="1dp"
     android:paddingBottom="1dp"
-    android:paddingRight="8dp">
+    android:paddingRight="@dimen/list_content_padding"
+    android:paddingLeft="@dimen/list_content_padding">
 
     <LinearLayout
         android:layout_width="wrap_content"

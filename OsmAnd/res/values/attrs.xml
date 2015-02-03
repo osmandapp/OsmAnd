@@ -21,6 +21,7 @@
 		<attr name="ic_action_info2" format="reference" />
 		<attr name="ic_action_home2" format="reference" />
 		<attr name="ic_action_marker2" format="reference" />
+        <attr name="search_background" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

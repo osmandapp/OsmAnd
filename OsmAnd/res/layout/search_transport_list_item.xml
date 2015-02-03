@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingRight="@dimen/list_content_padding"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/search_icon"
         android:layout_width="25dp"
         android:layout_height="fill_parent"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
         android:paddingTop="2dp" />
 
     <TextView
