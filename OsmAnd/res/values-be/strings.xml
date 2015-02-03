@@ -1244,7 +1244,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="searching">Пошук…</string>
 	<string name="searching_address">Пошук адрасу…</string>
 	<string name="search_osm_nominatim">Сеткавы пошук праз OSM Nominatim</string>
-	<string name="hint_search_online">Нумар дому, вуліца, горад</string>
+	<string name="hint_search_online">Інтэрнэт-пошук: горад, вуліца, дом</string>
 	<string name="search_offline_address">Пазасеціўны пошук</string>
 	<string name="search_online_address">Сеціўны пошук</string>
 	<string name="max_level_download_tile">Максімальнае павелічэньне онлайн мапаў</string>
