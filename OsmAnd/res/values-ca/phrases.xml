@@ -358,4 +358,7 @@
 	<string name="poi_fountain">Font ornamental</string>
 	<string name="poi_ruins_historic">Runes històriques</string>
 	<string name="poi_ship_historic">Vaixell històric</string>
+	<string name="poi_seamark_signal_station_traffic"/>
+	<string name="poi_seamark_dyke">Dic</string>
+	<string name="poi_seamark_floating_dock">Moll flotant</string>
 	</resources>
