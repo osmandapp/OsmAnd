@@ -563,7 +563,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				@Override
 				protected void onPreExecute() {
 					showProgressBar();
-				};
+				}
 
 				@Override
 				protected void onPostExecute(String warning) {
