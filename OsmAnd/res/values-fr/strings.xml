@@ -560,7 +560,7 @@
   <string name="searching">Recherche en cours…</string>
   <string name="searching_address">Recherche de l\'adresse…</string>
   <string name="search_osm_nominatim">Recherche de l\'adresse via OSM Nominatim</string>
-  <string name="hint_search_online">Numéro du bâtiment, rue, ville</string>
+  <string name="hint_search_online">Recherche en ligne : Numéro, rue, ville</string>
   <string name="search_offline_address">Hors-ligne</string>
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Niveau de zoom maximum</string>
