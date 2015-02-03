@@ -1832,4 +1832,10 @@ s často kladenými otázkami.</string>
 	<string name="proxy_host_descr">Nastavit hostname proxy (např. 127.0.0.1)</string>
 	<string name="proxy_port_title">Port proxy</string>
 	<string name="proxy_port_descr">Nastavit číslo portu proxy (např. 8118)</string>
-	</resources>
+	<string name="parking_place">Parkoviště</string>
+    <string name="remove_the_tag">ODSTRANIT TAG</string>
+    <string name="enable_plugin">Zapnout</string>
+	<string name="disable_plugin">Vypnout</string>
+	<string name="plugin_description_title">Popisek</string>
+	<string name="plugin_settings_button_caption">Nastavení</string>
+</resources>
