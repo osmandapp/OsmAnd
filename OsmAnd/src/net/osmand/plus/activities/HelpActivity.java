@@ -102,7 +102,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		createMenuItem(menu, HOME, R.string.home, 
-				R.drawable.ic_action_home_light, R.drawable.ic_action_home_dark,
+				R.drawable.ic_action_home_dark, R.drawable.ic_action_home_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
 		createMenuItem(menu, BACK, R.string.previous_button,
 				0, 0, //R.drawable.ic_action_home_light, R.drawable.ic_action_home_dark,
@@ -111,7 +111,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 				0, 0, //R.drawable.ic_action_home_light, R.drawable.ic_action_home_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
 		createMenuItem(menu, CLOSE, R.string.close, 
-				R.drawable.ic_action_ok_light, R.drawable.ic_action_ok_dark,
+				R.drawable.ic_action_ok_dark, R.drawable.ic_action_ok_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
 		return super.onCreateOptionsMenu(menu);
 	}
