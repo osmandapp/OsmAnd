@@ -44,13 +44,9 @@ public class PluginsActivity extends OsmandListActivity {
 			return;
 		}
 
-		//TODO: open details
-		togglePluginEnabled(plugin);
-	}
-
-	private void togglePluginEnabled(OsmandPlugin plugin) {
-		boolean isEnabled = OsmandPlugin.getEnabledPlugins().contains(plugin);
-		enableDisablePlugin(plugin, !isEnabled);
+		Intent intent = new Intent(this, PluginActivity.class);
+		intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
+		startActivity(intent);
 	}
 
 	private void enableDisablePlugin(OsmandPlugin plugin, boolean enable) {
