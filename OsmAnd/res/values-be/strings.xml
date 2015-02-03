@@ -2011,4 +2011,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="remove_the_tag">Выдаліць тэг</string>
     <string name="enable_plugin">Уключыць</string>
 	<string name="disable_plugin">Адключыць</string>
+<string name="plugin_description_title">Апісаньне</string>
+	<string name="plugin_settings_button_caption">Налады</string>
 </resources>
