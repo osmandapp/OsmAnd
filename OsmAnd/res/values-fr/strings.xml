@@ -1920,4 +1920,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="remove_the_tag">Retirer l\'étiquette</string>
     <string name="enable_plugin">Activer</string>
 	<string name="disable_plugin">Désactiver</string>
+<string name="plugin_description_title">Description</string>
+	<string name="plugin_settings_button_caption">Paramètres</string>
 </resources>
