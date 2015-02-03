@@ -1,9 +1,16 @@
 package net.osmand.plus.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 
@@ -44,8 +51,67 @@ public class PluginActivity extends OsmandActionBarActivity {
 			finish();
 			return;
 		}
+		boolean isEnabled = OsmandPlugin.getEnabledPlugins().contains(plugin);
 
 		setContentView(R.layout.plugin);
 		getSupportActionBar().setTitle(plugin.getName());
+
+		TextView descriptionView = (TextView)findViewById(R.id.plugin_description);
+		descriptionView.setText(plugin.getDescription());
+
+		final Class<? extends Activity> settingsActivity = plugin.getSettingsActivity();
+		final Button settingsButton = (Button)findViewById(R.id.plugin_settings);
+		if (settingsActivity == null) {
+			settingsButton.setVisibility(View.GONE);
+		} else {
+			settingsButton.setEnabled(isEnabled);
+			settingsButton.setVisibility(View.VISIBLE);
+			settingsButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					startActivity(new Intent(PluginActivity.this, settingsActivity));
+				}
+			});
+		}
+
+		CompoundButton enableDisableButton = (CompoundButton)findViewById(
+				R.id.plugin_enable_disable);
+		enableDisableButton.setChecked(isEnabled);
+		enableDisableButton.setOnCheckedChangeListener(
+				new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				boolean isEnabled = OsmandPlugin.getEnabledPlugins().contains(plugin);
+				if (isEnabled == isChecked) {
+					return;
+				}
+
+				boolean ok = OsmandPlugin.enablePlugin((OsmandApplication)getApplication(), plugin,
+						isChecked);
+				settingsButton.setEnabled(isChecked && ok);
+			}
+		});
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		CompoundButton enableDisableButton = (CompoundButton)findViewById(
+				R.id.plugin_enable_disable);
+		boolean isEnabled = OsmandPlugin.getEnabledPlugins().contains(plugin);
+		enableDisableButton.setChecked(isEnabled);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		switch (itemId) {
+			case android.R.id.home:
+				finish();
+				return true;
+
+		}
+		return false;
 	}
 }

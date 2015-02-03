@@ -142,6 +142,7 @@
 		<item name="ic_action_info2">@drawable/ic_action_info2_light</item>
 		<item name="ic_action_home2">@drawable/ic_action_home2_light</item>
 		<item name="ic_action_marker2">@drawable/ic_action_marker2_light</item>
+		<item name="ic_action_settings">@drawable/ic_action_settings_light</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -171,6 +172,7 @@
 		<item name="ic_action_info2">@drawable/ic_action_info2_dark</item>
 		<item name="ic_action_home2">@drawable/ic_action_home2_dark</item>
 		<item name="ic_action_marker2">@drawable/ic_action_marker2_dark</item>
+		<item name="ic_action_settings">@drawable/ic_action_settings_dark</item>
     </style>
 
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
