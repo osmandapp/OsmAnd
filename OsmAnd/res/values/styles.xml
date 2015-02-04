@@ -100,6 +100,8 @@
 		<item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
 		<item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
 		<item name="android:listChoiceIndicatorMultiple">@drawable/check_light</item>
+		<item name="android:textColorPrimary">@color/color_black</item>
+		<item name="android:textColorSecondary">@color/color_black</item>
 	</style>
 
 	<style name="SettingsDarkTheme" parent="Theme.AppCompat">
