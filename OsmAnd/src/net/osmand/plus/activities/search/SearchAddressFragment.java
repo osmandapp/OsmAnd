@@ -97,7 +97,7 @@ public class SearchAddressFragment extends Fragment {
 		if(getActivity() instanceof SearchAddressActivity) {
 			MenuItem menuItem = menu.add(0, SELECT_POINT, 0, "");
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_ok_dark : R.drawable.ic_action_ok_dark);
+			menuItem = menuItem.setIcon(R.drawable.ic_action_ok_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
@@ -108,7 +108,7 @@ public class SearchAddressFragment extends Fragment {
 		} else {
 			MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to);
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
+			menuItem = menuItem.setIcon(R.drawable.ic_action_gdirections_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
@@ -120,11 +120,11 @@ public class SearchAddressFragment extends Fragment {
 			if (targets.getPointToNavigate() != null) {
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point);
 				MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flage_light : R.drawable.ic_action_flage_dark);
+				menuItem = menuItem.setIcon(R.drawable.ic_action_flage_dark);
 			} else {
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point);
 				MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flag_light : R.drawable.ic_action_flag_dark);
+				menuItem = menuItem.setIcon(R.drawable.ic_action_flag_dark);
 			}
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -135,7 +135,7 @@ public class SearchAddressFragment extends Fragment {
 			});
 			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map);
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
+			menuItem = menuItem.setIcon(R.drawable.ic_action_marker_dark);
 
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -158,7 +158,7 @@ public class SearchAddressFragment extends Fragment {
 			});
 			menuItem = menu.add(0, ONLINE_SEARCH, 0, R.string.search_online_address);
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark);
+			menuItem = menuItem.setIcon(R.drawable.ic_action_gnext_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {

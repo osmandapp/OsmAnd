@@ -138,6 +138,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS
 						| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 		searchView = new SearchView(getActivity());
+		FavoritesActivity.updateSearchView(getActivity(), searchView);
 		MenuItemCompat.setActionView(mi,searchView);
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
@@ -154,7 +155,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		});
 
-		if (isOrientationPortrait()) {
+		if (ScreenOrientationHelper.isOrientationPortrait(getActivity())) {
 			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
 		} else {
 			((FavoritesActivity) getActivity()).getClearToolbar(false);
@@ -195,7 +196,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			final MenuItem item;
 			item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			if (isOrientationPortrait()){
+			if (ScreenOrientationHelper.isOrientationPortrait(getActivity())){
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem menuItem) {
@@ -211,11 +212,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private boolean isOrientationPortrait() {
-		int orientation = ScreenOrientationHelper.getScreenOrientation(getActivity());
-		return orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
-				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
-	}
 
 	public void doAction(int actionResId) {
 		if (actionResId == R.string.local_index_mi_delete) {
@@ -261,7 +257,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
-		if (isOrientationPortrait()) {
+		if (ScreenOrientationHelper.isOrientationPortrait(getActivity())) {
 			((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
 		}
 	}

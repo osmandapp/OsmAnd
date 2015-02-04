@@ -37,4 +37,5 @@
     <string name="app_edition"></string>
     <string name="preferred_locale_no_translate">Display language</string>
     <string name="system_locale_no_translate">Device language</string>
+	<string name="osmo">OsMo</string>
 </resources>

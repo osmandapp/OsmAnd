@@ -150,7 +150,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		showFilterItem = menu.add(0, FILTER, 0, R.string.search_poi_filter);
 		MenuItemCompat.setShowAsAction(showFilterItem,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		showFilterItem = showFilterItem.setIcon(light ? R.drawable.ic_action_filter_light: R.drawable.ic_action_filter_dark);
+		showFilterItem = showFilterItem.setIcon(R.drawable.ic_action_filter_dark);
 		showFilterItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -182,7 +182,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		showOnMapItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map);
 		MenuItemCompat.setShowAsAction(showOnMapItem,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		showOnMapItem = showOnMapItem.setIcon(light ? R.drawable.ic_action_map_marker_light : R.drawable.ic_action_map_marker_dark);
+		showOnMapItem = showOnMapItem.setIcon(R.drawable.ic_action_map_marker_dark);
 		showOnMapItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
