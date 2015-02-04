@@ -2132,4 +2132,6 @@
     <string name="remove_the_tag">태그를 제거</string>
     <string name="enable_plugin">사용가능</string>
 	<string name="disable_plugin">사용안함</string>
+<string name="plugin_description_title">설명</string>
+	<string name="plugin_settings_button_caption">설정</string>
 </resources>
