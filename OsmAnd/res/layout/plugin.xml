@@ -32,7 +32,7 @@
 				android:layout_marginTop="9dp"
 				android:layout_gravity="center_vertical|start"
 				android:textSize="12sp"
-				android:textAllCaps="true"
+				osmand:textAllCapsCompat="true"
 				android:textColor="?android:textColorPrimary"
 				android:background="@null"
 				android:drawableLeft="?attr/ic_action_settings"
@@ -57,7 +57,7 @@
 				android:paddingLeft="9.5dp"
 				android:paddingRight="9.5dp"
 				android:paddingTop="8dp"
-				android:textAllCaps="true"
+				osmand:textAllCapsCompat="true"
 				android:textColor="@color/switch_ex_text_color"
 				android:textOff="@string/enable_plugin"
 				android:textOn="@string/disable_plugin"
@@ -72,7 +72,7 @@
 			android:layout_marginRight="16dp"
 			android:layout_marginTop="16dp"
 			android:text="@string/plugin_description_title"
-			android:textAllCaps="true"
+			osmand:textAllCapsCompat="true"
 			osmand:typeface="@string/font_roboto_medium"/>
 
 		<net.osmand.plus.widgets.TextViewEx
