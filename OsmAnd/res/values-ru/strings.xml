@@ -1875,4 +1875,6 @@
     <string name="enable_plugin">Включить</string>
 	<string name="disable_plugin">Отключить</string>
 <string name="osm_editing_manage">Управление</string>
-    </resources>
+    <string name="plugin_description_title">Описание</string>
+	<string name="plugin_settings_button_caption">Настройки</string>
+</resources>
