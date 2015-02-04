@@ -2071,4 +2071,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="disable_plugin">Disattiva</string>
 <string name="plugin_description_title">Descrizione</string>
 	<string name="plugin_settings_button_caption">Impostazioni</string>
-</resources>
+<string name="edit_group">Modifica il gruppo</string>
+    </resources>
