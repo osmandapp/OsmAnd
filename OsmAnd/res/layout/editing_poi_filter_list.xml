@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -14,6 +15,10 @@
     <TextView
         android:id="@+id/filter_poi_label"
         style="@style/ListText"
+		android:textColor="?android:textColorPrimary"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+		android:ellipsize="end"
+		android:maxLines="1"
+		tools:text="@string/lorem_ipsum"/>
 </LinearLayout>

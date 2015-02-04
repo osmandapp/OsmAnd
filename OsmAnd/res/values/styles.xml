@@ -201,7 +201,9 @@
         <item name="background">@color/actionbar_light_color</item>
         <item name="android:background">@color/actionbar_light_color</item>
         <item name="android:titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
-        <item name="titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+		<item name="titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+		<item name="android:subtitleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+		<item name="subtitleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
     </style>
 
     <style name="Widget.Styled.LightActionBarHeader" parent="@android:style/TextAppearance">
