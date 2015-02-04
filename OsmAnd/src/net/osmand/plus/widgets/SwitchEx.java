@@ -21,43 +21,23 @@ public class SwitchEx extends ToggleButton {
 	public SwitchEx(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
-		if (attrs != null) {
-			TypedArray resolvedAttrs = context.getTheme().obtainStyledAttributes(attrs,
-					R.styleable.OsmandWidgets, 0, 0);
-			parseAttributes(resolvedAttrs);
-			resolvedAttrs.recycle();
-		}
+		TextViewEx.parseAttributes(this, attrs, 0, 0);
 	}
 
-	public SwitchEx(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
+	public SwitchEx(Context context, AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
 
-		if (attrs != null) {
-			TypedArray resolvedAttrs = context.getTheme().obtainStyledAttributes(attrs,
-					R.styleable.OsmandWidgets, 0, 0);
-			parseAttributes(resolvedAttrs);
-			resolvedAttrs.recycle();
-		}
+		TextViewEx.parseAttributes(this, attrs, defStyleAttr, 0);
 	}
 
 	@TargetApi(21)
 	public SwitchEx(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
-		if (attrs != null) {
-			TypedArray resolvedAttrs = context.getTheme().obtainStyledAttributes(attrs,
-					R.styleable.OsmandWidgets, defStyleAttr, defStyleRes);
-			parseAttributes(resolvedAttrs);
-			resolvedAttrs.recycle();
-		}
+		TextViewEx.parseAttributes(this, attrs, defStyleAttr, defStyleRes);
 	}
 
-	private void parseAttributes(TypedArray resolvedAttributes) {
-		if (resolvedAttributes.hasValue(R.styleable.OsmandWidgets_typeface) && !isInEditMode()) {
-			String typefaceName = resolvedAttributes.getString(R.styleable.OsmandWidgets_typeface);
-			Typeface typeface = FontCache.getFont(getContext(), typefaceName);
-			if (typeface != null)
-				setTypeface(typeface);
-		}
+	public void setAllCapsCompat(boolean allCaps) {
+		TextViewEx.setAllCapsCompat(this, allCaps);
 	}
 }

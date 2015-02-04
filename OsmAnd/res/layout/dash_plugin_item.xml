@@ -59,7 +59,7 @@
 			android:paddingBottom="8dp"
 			android:paddingLeft="9.5dp"
 			android:paddingRight="9.5dp"
-			android:textAllCaps="true"
+			osmand:textAllCapsCompat="true"
 			android:textColor="@color/switch_ex_text_color"
 			android:textOff="@string/enable_plugin"
 			android:textOn="@string/disable_plugin"

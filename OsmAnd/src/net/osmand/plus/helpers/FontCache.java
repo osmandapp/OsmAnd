@@ -5,8 +5,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 
 public class FontCache {
+	private static final String TAG = "FontCache";
     private static Map<String, Typeface> fontMap = new ConcurrentHashMap<String, Typeface>();
     public static final String ROBOTO_MEDIUM = "fonts/Roboto-Medium.ttf";
     public static final String ROBOTO_REGULAR = "fonts/Roboto-Regular.ttf";
@@ -16,12 +18,19 @@ public class FontCache {
     }
  
 	public static Typeface getFont(Context context, String fontName) {
-		if (fontMap.containsKey(fontName)) {
-			return fontMap.get(fontName);
-		} else {
-			Typeface tf = Typeface.createFromAsset(context.getAssets(), fontName);
-			fontMap.put(fontName, tf);
-			return tf;
+		Typeface typeface = fontMap.get(fontName);
+		if (typeface != null)
+			return typeface;
+
+		try {
+			typeface = Typeface.createFromAsset(context.getAssets(), fontName);
+		} catch(Exception e) {
+			Log.e(TAG, "Failed to create typeface from asset '" + fontName + "'", e);
+			return null;
 		}
+		if (typeface == null)
+			return null;
+		fontMap.put(fontName, typeface);
+		return typeface;
 	}
 }

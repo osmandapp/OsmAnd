@@ -54,7 +54,10 @@
         <attr name="pstsTextSelectedAlpha" format="float"/>
     </declare-styleable>
 	
-	<declare-styleable name="OsmandWidgets">
+	<declare-styleable name="TextViewEx">
 		<attr name="typeface" format="string|reference"/>
+		<attr name="textAllCapsCompat" format="reference|boolean" />
 	</declare-styleable>
+	<!--<declare-styleable name="ButtonEx" parent="TextViewEx" />
+	<declare-styleable name="SwitchEx" parent="ButtonEx" />-->
 </resources>
