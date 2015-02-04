@@ -2053,4 +2053,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="gps_status">Stav GPS</string>
     <string name="enable_plugin">Zapnúť</string>
 	<string name="disable_plugin">Vypnúť</string>
+<string name="edit_group">Upraviť skupinu</string>
+    <string name="plugin_description_title">Popis</string>
+	<string name="plugin_settings_button_caption">Nastavenia</string>
 </resources>
