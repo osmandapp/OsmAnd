@@ -670,7 +670,7 @@
   <string name="searching">Поиск…</string>
   <string name="searching_address">Поиск адреса…</string>
   <string name="search_osm_nominatim">Поиск адреса в OSM Nominatim</string>
-  <string name="hint_search_online">Город, улица, дом</string>
+  <string name="hint_search_online">Онлайн поиск: Номер дома, улица, Город</string>
   <string name="search_offline_address">Локальный</string>
   <string name="search_online_address">Интернет</string>
   <string name="max_level_download_tile">Уровень детализации</string>
