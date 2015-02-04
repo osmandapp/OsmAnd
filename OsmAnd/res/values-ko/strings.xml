@@ -674,7 +674,7 @@
 	<string name="searching">검색 중…</string>
 	<string name="searching_address">주소 검색 중…</string>
 	<string name="search_osm_nominatim">OSM 지명을 사용하여 온라인 검색</string>
-	<string name="hint_search_online">집 번호, 거리, 도시</string>
+	<string name="hint_search_online">온라인 검색: 주소, 거리, 도시</string>
 	<string name="search_offline_address">오프라인 검색</string>
 	<string name="search_online_address">온라인 검색</string>
 	<string name="max_level_download_tile">최대 온라인 줌</string>
