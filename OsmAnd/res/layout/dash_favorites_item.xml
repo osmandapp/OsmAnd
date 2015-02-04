@@ -66,6 +66,7 @@
 					android:id="@+id/group_image"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
 					android:layout_marginLeft="4dp"
 					android:src="@drawable/ic_small_group"/>
 
