@@ -8,7 +8,7 @@
     <net.osmand.plus.views.controls.PagerSlidingTabStrip
         android:id="@+id/sliding_tabs"
         android:layout_width="fill_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="@dimen/tab_height"
         android:background="?attr/colorPrimary" />
 
     <LinearLayout
