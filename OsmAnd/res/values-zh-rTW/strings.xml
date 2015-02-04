@@ -793,7 +793,7 @@
 	<string name="searching">查尋中…</string>
 	<string name="searching_address">地址查尋中…</string>
 	<string name="search_osm_nominatim">使用 OSM Nominatim 線上查尋</string>
-	<string name="hint_search_online">門號、街道、縣市</string>
+	<string name="hint_search_online">線上查尋：門號、街道、縣市</string>
 	<string name="search_offline_address">離線查尋</string>
 	<string name="search_online_address">線上查尋</string>
 	<string name="max_level_download_tile">線上最大縮放比</string>
@@ -1894,4 +1894,6 @@
     <string name="remove_the_tag">移除標記</string>
     <string name="enable_plugin">啟用</string>
 	<string name="disable_plugin">停用</string>
+<string name="plugin_description_title">描述</string>
+	<string name="plugin_settings_button_caption">設定</string>
 </resources>
