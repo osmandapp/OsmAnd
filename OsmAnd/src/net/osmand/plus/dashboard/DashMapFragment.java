@@ -29,6 +29,8 @@ import android.widget.TextView;
  */
 public class DashMapFragment extends DashBaseFragment implements IMapDownloaderCallback {
 
+	private static final int CARD_INTERVAL_UPDATE = 60*1000;//4*60*60*1000;
+
 	public static final String TAG = "DASH_MAP_FRAGMENT";
 	
 	private Paint paintBmp;
@@ -136,7 +138,7 @@ public class DashMapFragment extends DashBaseFragment implements IMapDownloaderC
 		MainMenuActivity mainMenuActivity = ((MainMenuActivity) getActivity());
 		if (mainMenuActivity != null) {
 			if (System.currentTimeMillis() - getMyApplication().getSettings().LAST_UPDATES_CARD_REFRESH.get()
-					> 12*60*60*1000 ) {
+					> CARD_INTERVAL_UPDATE && getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
 				getMyApplication().getSettings().LAST_UPDATES_CARD_REFRESH.set(System.currentTimeMillis());
 				mainMenuActivity.updateDownloads();
 			}
