@@ -1904,4 +1904,5 @@
 	<string name="disable_plugin">Deaktiver</string>
 <string name="plugin_description_title">Beskrivelse</string>
 	<string name="plugin_settings_button_caption">Indstillinger</string>
-</resources>
+<string name="edit_group">Rediger gruppe</string>
+    </resources>
