@@ -752,7 +752,7 @@
   <string name="searching">Ieškoma…</string>
   <string name="searching_address">Ieškomas adresas…</string>
   <string name="search_osm_nominatim">Ieškoti adreso naudojant OSM Nominatim</string>
-  <string name="hint_search_online">Namo numeris, gatvė, miestas</string>
+  <string name="hint_search_online">Paieška tinkle: namo numeris, gatvė, miestas</string>
   <string name="search_offline_address">Be interneto</string>
   <string name="search_online_address">Internete</string>
   <string name="max_level_download_tile">Didžiausias mastelis interneto žemėlapiui</string>
@@ -1905,7 +1905,9 @@
 	<string name="proxy_host_descr">Nurodykite jūsų proksi serverio pavadinimą (pvz., 127.0.0.1)</string>
 	<string name="proxy_port_title">Proksi serverio portas</string>
 	<string name="proxy_port_descr">Nurodykite jūsų proksi serverio porto numerį (pvz., 8118)</string>
-	<string name="enable_proxy_descr">Configure HTTP Proxy for all network requests</string>
+	<string name="enable_proxy_descr">"Konfigūruoti  HTTP proksi serverį visoms tinklo užklausoms"</string>
 	<string name="enable_plugin">Įjungti</string>
 	<string name="disable_plugin">Išjungti</string>
+<string name="plugin_description_title">Aprašymas</string>
+	<string name="plugin_settings_button_caption">Nustatymai</string>
 </resources>
