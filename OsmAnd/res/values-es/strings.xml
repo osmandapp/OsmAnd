@@ -1913,4 +1913,5 @@
 	<string name="disable_plugin">Deshabilitar</string>
 <string name="plugin_description_title">Descripción</string>
 	<string name="plugin_settings_button_caption">Opciones</string>
-</resources>
+<string name="edit_group">Editar grupo</string>
+    </resources>
