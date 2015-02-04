@@ -3,6 +3,8 @@
 			  xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
     android:paddingLeft="@dimen/list_content_padding"
     android:paddingRight="@dimen/list_content_padding"
     android:orientation="horizontal">
