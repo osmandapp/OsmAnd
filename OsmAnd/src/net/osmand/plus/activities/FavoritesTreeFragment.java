@@ -28,6 +28,7 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -356,6 +357,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		}
 	}
 
+
+
 	public void showProgressBar() {
 		getActionBarActivity().setSupportProgressBarIndeterminateVisibility(true);
 	}
@@ -475,6 +478,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		
 		final CheckBox checkBox = (CheckBox) favEdit.findViewById(R.id.Visibility);
 		checkBox.setChecked(group.visible);
+		bld.setTitle(R.string.edit_group);
 		bld.setView(favEdit);
 		bld.setNegativeButton(R.string.default_buttons_cancel, null);
 		bld.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
