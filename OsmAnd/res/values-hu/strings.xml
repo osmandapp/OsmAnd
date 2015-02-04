@@ -1813,4 +1813,9 @@
     <string name="speak_pedestrian">Gyalogátkelőhelyek bejelentése</string>
     <string name="rendering_value__name">Alapértelmezett</string>
 	<string name="save_track_to_gpx_globally_headline">Nyomvonalrögzítés igény szerint</string>
-	</resources>
+	<string name="parking_place">Parkolóhely</string>
+    <string name="gps_status">GSP Státusz</string>
+    <string name="rendering_attr_streetLighting_name">Közvilágítás</string>
+    <string name="proxy_pref_title">Proxy</string>
+    <string name="proxy_pref_descr">Proxy internetkapcsolat beállítása</string>
+    </resources>
