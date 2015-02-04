@@ -109,12 +109,11 @@ public class UpdatesIndexFragment extends ListFragment {
 			MenuItem item = menu.add(0, DownloadIndexFragment.RELOAD_ID, 0, R.string.update_downlod_list);
 			item.setIcon(R.drawable.ic_action_refresh_dark);
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			SubMenu s = menu.addSubMenu(0, DownloadIndexFragment.MORE_ID, 0, R.string.default_buttons_other_actions);
+			SubMenu s = menu.addSubMenu(0, DownloadIndexFragment.MORE_ID, 0, -1);
+			s.setIcon(isLightActionBar() ? R.drawable.ic_overflow_menu_light
+					: R.drawable.ic_overflow_menu_dark);
 			s.add(0, DownloadIndexFragment.SELECT_ALL_ID, 0, R.string.select_all);
 			s.add(0, DownloadIndexFragment.DESELECT_ALL_ID, 0, R.string.deselect_all);
-
-//			s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
-//					: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
 			MenuItemCompat.setShowAsAction(s.getItem(), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		}
 	}

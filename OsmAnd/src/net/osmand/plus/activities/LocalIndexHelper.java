@@ -17,14 +17,7 @@ import java.util.TimeZone;
 import java.util.TreeSet;
 
 import net.osmand.IndexConstants;
-import net.osmand.binary.BinaryIndexPart;
-import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.MapIndex;
-import net.osmand.binary.BinaryMapIndexReader.MapRoot;
-import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
@@ -34,7 +27,6 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.download.LocalIndexesFragment.LoadLocalIndexTask;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
-import net.osmand.util.MapUtils;
 import android.content.Context;
 import android.os.Build;
 
@@ -88,9 +80,6 @@ public class LocalIndexHelper {
 			}
 			String descr = "";
 			descr += app.getString(R.string.local_index_tile_data_name, template.getName());
-			descr += "\n" + app.getString(R.string.local_index_tile_data_minzoom, template.getMinimumZoomSupported());
-			descr += "\n" + app.getString(R.string.local_index_tile_data_maxzoom, template.getMaximumZoomSupported());
-			descr += "\n" + app.getString(R.string.local_index_tile_data_downloadable, template.couldBeDownloadedFromInternet());
 			if(template.getExpirationTimeMinutes() >= 0) {
 				descr += "\n" + app.getString(R.string.local_index_tile_data_expire, template.getExpirationTimeMinutes());
 			}
@@ -203,63 +192,13 @@ public class LocalIndexHelper {
 	
 	private MessageFormat format = new MessageFormat("\t {0}, {1} NE \n\t {2}, {3} NE", Locale.US);
 
-	private String formatLatLonBox(int left, int right, int top, int bottom) {
-		double l = MapUtils.get31LongitudeX(left);
-		double r = MapUtils.get31LongitudeX(right);
-		double t = MapUtils.get31LatitudeY(top);
-		double b = MapUtils.get31LatitudeY(bottom);
-		return format.format(new Object[] { l, t, r, b });
-	}
-	
-	private String formatLatLonBox(double l, double r, double t, double b) {
-		return format.format(new Object[] { l, t, r, b });
-	}
-
 	private void updateObfFileInformation(LocalIndexInfo info, File mapFile) {
 		try {
 			RandomAccessFile mf = new RandomAccessFile(mapFile, "r");
 			BinaryMapIndexReader reader = new BinaryMapIndexReader(mf);
 			
 			info.setNotSupported(reader.getVersion() != IndexConstants.BINARY_MAP_VERSION);
-			List<BinaryIndexPart> indexes = reader.getIndexes();
 			StringBuilder builder = new StringBuilder();
-			for(BinaryIndexPart part : indexes){
-				if(part instanceof MapIndex){
-					MapIndex mi = ((MapIndex) part);
-					builder.append(app.getString(R.string.local_index_map_data)).append(": ").
-						append(mi.getName()).append("\n");
-					if(mi.getRoots().size() > 0){
-						MapRoot mapRoot = mi.getRoots().get(0);
-						String box = formatLatLonBox(mapRoot.getLeft(), mapRoot.getRight(), mapRoot.getTop(), mapRoot.getBottom());
-						builder.append(box).append("\n");
-					}
-				} else if(part instanceof PoiRegion){
-					PoiRegion mi = ((PoiRegion) part);
-					builder.append(app.getString(R.string.local_index_poi_data)).append(": ").
-						append(mi.getName()).append("\n");
-					String box = formatLatLonBox(mi.getLeftLongitude(), mi.getRightLongitude(), 
-							mi.getTopLatitude(), mi.getBottomLatitude());
-					builder.append(box).append("\n");
-				} else if(part instanceof RouteRegion){
-					RouteRegion mi = ((RouteRegion) part);
-					builder.append(app.getString(R.string.local_index_routing_data)).append(": ").
-						append(mi.getName()).append("\n");
-					String box = formatLatLonBox(mi.getLeftLongitude(), mi.getRightLongitude(), 
-							mi.getTopLatitude(), mi.getBottomLatitude());
-					builder.append(box).append("\n");
-				} else if(part instanceof TransportIndex){
-					TransportIndex mi = ((TransportIndex) part);
-					int sh = (31 - BinaryMapIndexReader.TRANSPORT_STOP_ZOOM);
-					builder.append(app.getString(R.string.local_index_transport_data)).append(": ").
-						append(mi.getName()).append("\n");
-					String box = formatLatLonBox(mi.getLeft() << sh, mi.getRight() << sh, mi.getTop() << sh, mi.getBottom() << sh);
-					builder.append(box).append("\n");
-				} else if(part instanceof AddressRegion){
-					AddressRegion mi = ((AddressRegion) part);
-					builder.append(app.getString(R.string.local_index_address_data)).append(": ").
-						append(mi.getName()).append("\n");
-				}
-			}
 			builder.append(getInstalledDate(reader.getDateCreated(), null));
 			info.setDescription(builder.toString());
 			reader.close();
