@@ -8,7 +8,9 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import net.osmand.plus.GpxSelectionHelper;
@@ -23,6 +25,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
@@ -161,6 +164,23 @@ public class FavoritesActivity extends TabActivity {
 
 		}
 		return false;
+	}
+
+	public static void updateSearchView(Activity activity, SearchView searchView) {
+		//do not ever do like this
+		OsmandApplication app = (OsmandApplication)activity.getApplication();
+		if (app.getSettings().isLightContent()){
+			try {
+				ImageView cancelIcon = (ImageView) searchView.findViewById(R.id.search_close_btn);
+				cancelIcon.setImageResource(R.drawable.ic_action_gremove_dark);
+				ImageView searchIcon = (ImageView) searchView.findViewById(R.id.search_voice_btn);
+				searchIcon.setImageResource(R.drawable.ic_action_search_dark);
+				SearchView.SearchAutoComplete searchBadge = (SearchView.SearchAutoComplete) searchView.findViewById(R.id.search_src_text);
+				searchBadge.setTextColor(activity.getResources().getColor(R.color.color_white));
+			} catch (NullPointerException e){
+
+			}
+		}
 	}
 }
 

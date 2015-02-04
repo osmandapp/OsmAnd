@@ -8,9 +8,12 @@ import java.io.InputStreamReader;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.*;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.ScreenOrientationHelper;
+
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -35,7 +38,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		}
 		super.onCreate(savedInstanceState);
-		wv = new WebView(this);
+
 		String title = getString(R.string.help);
 		String url = "index.html";
 		if(getIntent() != null) {
@@ -49,7 +52,8 @@ public class HelpActivity extends OsmandActionBarActivity {
 			}
 		}
 		getSupportActionBar().setTitle(title);
-		setContentView(wv);
+		setContentView(R.layout.help_activity);
+		wv = (WebView) findViewById(R.id.webView);
 		wv.setFocusable(true);
         wv.setFocusableInTouchMode(true);
 		wv.requestFocus(View.FOCUS_DOWN);
@@ -101,18 +105,23 @@ public class HelpActivity extends OsmandActionBarActivity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		if (ScreenOrientationHelper.isOrientationPortrait(this)){
+			menu = getClearToolbar(true).getMenu();
+		} else {
+			getClearToolbar(false);
+		}
 		createMenuItem(menu, HOME, R.string.home, 
 				R.drawable.ic_action_home_dark, R.drawable.ic_action_home_dark,
-				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, BACK, R.string.previous_button,
-				0, 0, //R.drawable.ic_action_home_light, R.drawable.ic_action_home_dark,
-				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
+				R.drawable.ic_action_undo_dark, R.drawable.ic_action_undo_dark,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 		createMenuItem(menu, FORWARD, R.string.next_button,
-				0, 0, //R.drawable.ic_action_home_light, R.drawable.ic_action_home_dark,
-				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
+				R.drawable.ic_action_redo_dark, R.drawable.ic_action_redo_dark,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 		createMenuItem(menu, CLOSE, R.string.close, 
-				R.drawable.ic_action_ok_dark, R.drawable.ic_action_ok_dark,
-				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
+				R.drawable.ic_action_close_dark, R.drawable.ic_action_close_dark,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -161,5 +170,13 @@ public class HelpActivity extends OsmandActionBarActivity {
 	
 	public boolean isLightActionBar() {
 		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
+	}
+
+	public Toolbar getClearToolbar(boolean visible) {
+		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);
+		tb.setTitle(null);
+		tb.getMenu().clear();
+		tb.setVisibility(visible? View.VISIBLE : View.GONE);
+		return tb;
 	}
 }

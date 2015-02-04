@@ -139,7 +139,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		}
 		setContentView(R.layout.osmo_group_list);
-		getSupportActionBar().setTitle(R.string.osmo_activity);
+		getSupportActionBar().setTitle(R.string.osmo);
 		setSupportProgressBarIndeterminateVisibility(false);
 		setupHeader();
 		setupFooter();
@@ -1152,10 +1152,15 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 			}
-			View v = row.findViewById(R.id.settings);
+			ImageView v = (ImageView) row.findViewById(R.id.settings);
 			if(model.isMainGroup()) {
 				v.setVisibility(View.GONE);
 			} else {
+				if (getMyApplication().getSettings().isLightContent()){
+					v.setImageResource(R.drawable.ic_action_settings_light);
+				} else {
+					v.setImageResource(R.drawable.ic_action_settings_dark);
+				}
 				v.setVisibility(View.VISIBLE);
 				v.setOnClickListener(new View.OnClickListener() {
 					

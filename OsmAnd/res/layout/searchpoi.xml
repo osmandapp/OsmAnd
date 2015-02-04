@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>    <!-- This file is at /res/layout/list.xml -->
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
@@ -16,6 +17,8 @@
             android:id="@+id/TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+			android:textColor="?android:textColorPrimary"
+			tools:text="@string/lorem_ipsum"
             android:text="@string/search_poi_filter" />
 
         <EditText
