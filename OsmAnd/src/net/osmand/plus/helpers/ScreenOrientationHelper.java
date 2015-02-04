@@ -1,6 +1,7 @@
 package net.osmand.plus.helpers;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -74,4 +75,10 @@ public class ScreenOrientationHelper {
 
         return orientation;
     }
+
+	public static boolean isOrientationPortrait(Activity ctx) {
+		int orientation = ScreenOrientationHelper.getScreenOrientation(ctx);
+		return orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
+				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+	}
 }
