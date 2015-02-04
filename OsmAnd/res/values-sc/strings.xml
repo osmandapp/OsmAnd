@@ -1474,7 +1474,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="searching">Chirca…</string>
 	<string name="searching_address">Chirca indiritzu…</string>
 	<string name="search_osm_nominatim">Chirca indiritzu cun OSM Nominatim</string>
-	<string name="hint_search_online">Nùmeru tzìvicu, istrada, tzitade</string>
+	<string name="hint_search_online">Chirca in lìnia: nùmeru tzìvicu, istrada, tzitade</string>
 	<string name="search_offline_address">Sena lìnia</string>
 	<string name="search_online_address">Ìnternet</string>
 	<string name="max_level_download_tile">Max zoom in lìnia</string>
@@ -1844,4 +1844,6 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="remove_the_tag">BOGA SU TAG</string>
     <string name="enable_plugin">Abìlita</string>
 	<string name="disable_plugin">Disabìlita</string>
+<string name="plugin_description_title">Descritzione</string>
+	<string name="plugin_settings_button_caption">Impostaduras</string>
 </resources>
