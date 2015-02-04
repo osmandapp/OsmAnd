@@ -122,15 +122,18 @@ public class DashPluginsFragment extends DashBaseFragment {
 	private void inflatePluginView(LayoutInflater inflater, ViewGroup container,
 								   OsmandPlugin plugin) {
 		boolean isEnabled = OsmandPlugin.getEnabledPlugins().contains(plugin);
-		boolean hasSettings = (plugin.getSettingsActivity() != null);
 
 		View view = inflater.inflate(R.layout.dash_plugin_item, container, false);
 		view.setTag(plugin);
-		if (isEnabled && hasSettings) {
-			view.setOnClickListener(pluginSettingsListener);
-		} else {
-			view.setOnClickListener(pluginDetailsListener);
-		}
+
+		// To discuss: too much confusing and not consistent
+//		boolean hasSettings = (plugin.getSettingsActivity() != null);
+//		if (isEnabled && hasSettings) {
+//			view.setOnClickListener(pluginSettingsListener);
+//		} else {
+//		view.setOnClickListener(pluginDetailsListener);
+//		}
+		view.setOnClickListener(pluginDetailsListener);
 
 		TextView nameView = (TextView)view.findViewById(R.id.plugin_name);
 		nameView.setText(plugin.getName());

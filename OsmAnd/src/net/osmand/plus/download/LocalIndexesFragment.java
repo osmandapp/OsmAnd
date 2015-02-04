@@ -13,10 +13,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.view.ActionMode;
-import android.view.*;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
@@ -42,8 +38,19 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StatFs;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.view.ActionMode;
 import android.text.method.LinkMovementMethod;
+import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.SubMenu;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -504,27 +511,24 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
 						.icon(R.drawable.ic_action_refresh_dark)
 						.listen(listener).position(1).reg();
-		optionsMenuAdapter.item(R.string.local_index_mi_backup)
-						.icon(R.drawable.ic_action_undo_dark)
-						.listen(listener).position(2).reg();
-		optionsMenuAdapter.item(R.string.local_index_mi_restore)
-				.icon(R.drawable.ic_action_redo_dark)
-						.listen(listener).position(3).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_delete)
 						.icon(R.drawable.ic_action_delete_dark)
+						.listen(listener).position(2).reg();
+		optionsMenuAdapter.item(R.string.local_index_mi_backup)
+						.listen(listener).position(3).reg();
+		optionsMenuAdapter.item(R.string.local_index_mi_restore)
 						.listen(listener).position(4).reg();
 		OsmandPlugin.onOptionsMenuActivity(getDownloadActivity(), null, optionsMenuAdapter);
 		// doesn't work correctly
 		//int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
-		int max = 4;
+		int max = 3;
 		SubMenu split = null;
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
 			if (j + 1 >= max && optionsMenuAdapter.length() > max) {
 				if (split == null) {
 					split = menu.addSubMenu(0, 1, j + 1, R.string.default_buttons_other_actions);
-//					split.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
-//							: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
+					split.setIcon(isLightActionBar() ? R.drawable.ic_overflow_menu_light : R.drawable.ic_overflow_menu_dark );
 					split.getItem();
 					MenuItemCompat.setShowAsAction(split.getItem(),MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
