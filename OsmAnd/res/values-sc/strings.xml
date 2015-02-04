@@ -1846,4 +1846,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="disable_plugin">Disabìlita</string>
 <string name="plugin_description_title">Descritzione</string>
 	<string name="plugin_settings_button_caption">Impostaduras</string>
-</resources>
+<string name="edit_group">Modìfica su grupu</string>
+    </resources>
