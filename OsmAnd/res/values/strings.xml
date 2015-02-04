@@ -9,7 +9,6 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="osmo">OsMo</string>
 	<string name="edit_group">Edit group</string>
     <string name="parking_place">Parking place</string>
     <string name="remove_the_tag">REMOVE THE TAG</string>
