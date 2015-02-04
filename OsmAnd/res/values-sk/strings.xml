@@ -747,10 +747,10 @@
   <string name="search_nothing_found">Nič sa nenašlo</string>
   <string name="searching">Vyhľadávanie…</string>
   <string name="searching_address">Hľadá sa adresa…</string>
-  <string name="search_osm_nominatim">Hľadanie adresy použitím OSM Nominatim</string>
-  <string name="hint_search_online">Číslo domu, ulica, mesto</string>
-  <string name="search_offline_address">Offline</string>
-  <string name="search_online_address">Internet</string>
+  <string name="search_osm_nominatim">Online hľadanie adresy použitím OSM Nominatim</string>
+  <string name="hint_search_online">Online hľadanie: Číslo domu, ulica, mesto</string>
+  <string name="search_offline_address">Offline hľadanie</string>
+  <string name="search_online_address">Online hľadanie</string>
   <string name="max_level_download_tile">Max. online úroveň priblíženia</string>
   <string name="max_level_download_tile_descr">Výber maximálnej úrovne priblíženia na stiahnutie</string>
   <string name="route_general_information">Celková vzdialenosť %1$s, čas cestovania %2$d h %3$d m.</string>

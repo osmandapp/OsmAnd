@@ -1796,4 +1796,5 @@
 	<string name="disable_plugin">Inaktivera</string>
 <string name="plugin_settings_button_caption">Inställningar</string>
 <string name="plugin_description_title">Beskrivning</string>
-	</resources>
+	<string name="edit_group">Redigera grupp</string>
+    </resources>
