@@ -1080,7 +1080,7 @@
 	<string name="searching">Søger…</string>
 	<string name="searching_address">Søger adresse…</string>
 	<string name="search_osm_nominatim">Online søgning ved hjælp af OSM Nominatim</string>
-	<string name="hint_search_online">Husnummer, gade, by</string>
+	<string name="hint_search_online">Online-søgning: husnummer, gade, by</string>
 	<string name="search_online_address">Online søgning</string>
 	<string name="max_level_download_tile">Maks online zoom</string>
 	<string name="max_level_download_tile_descr">Vælg maksimum zoomniveau der hentes for online delkort</string>
