@@ -2071,4 +2071,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="disable_plugin">Uitzetten</string>
 <string name="plugin_description_title">Omschrijving</string>
 	<string name="plugin_settings_button_caption">Instellingen</string>
-</resources>
+<string name="edit_group">Bewerk groep</string>
+    </resources>
