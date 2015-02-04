@@ -6,12 +6,6 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Random;
 
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
-import android.view.*;
-import android.widget.LinearLayout;
 import net.osmand.Location;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -20,7 +14,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.dashboard.*;
+import net.osmand.plus.dashboard.DashDownloadMapsFragment;
+import net.osmand.plus.dashboard.DashErrorFragment;
+import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.dashboard.DashUpdatesFragment;
+import net.osmand.plus.dashboard.NotifyingScrollView;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
@@ -37,16 +35,23 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.SpannableString;
-import android.text.Spanned;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -65,7 +70,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
-	private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
 	private static final int HELP_ID = 0;
 	private static final int SETTINGS_ID = 1;
 	private static final int EXIT_ID = 2;
