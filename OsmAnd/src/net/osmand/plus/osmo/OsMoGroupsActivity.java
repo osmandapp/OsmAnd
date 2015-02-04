@@ -9,7 +9,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
 import android.view.*;
 import gnu.trove.list.array.TIntArrayList;
-
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +17,6 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
@@ -42,6 +40,7 @@ import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.util.MapUtils;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -128,7 +127,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		// This has to be called before setContentView and you must use the
 		//TODO: remove this deprecated code with toolbar
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+			setWindowOptionsDeprecated();
 		}
 		super.onCreate(icicle);
 		app = (OsmandApplication) getApplication();
@@ -172,6 +171,12 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				return true;
 			}
 		});
+	}
+
+	@SuppressLint("NewApi")
+	private void setWindowOptionsDeprecated() {
+		getWindow().setUiOptions(
+				ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 	}
 
 	private void setupHeader() {
