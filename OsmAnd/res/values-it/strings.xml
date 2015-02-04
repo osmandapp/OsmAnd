@@ -554,7 +554,7 @@
   <string name="searching">Ricerca…</string>
   <string name="searching_address">Ricerca indirizzo…</string>
   <string name="search_osm_nominatim">Ricerca indirizzo con OSM Nominatim</string>
-  <string name="hint_search_online">Numero civico, strada, città</string>
+  <string name="hint_search_online">Ricerca online: numero civico, strada, città</string>
   <string name="search_offline_address">Offline</string>
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Max zoom online</string>
