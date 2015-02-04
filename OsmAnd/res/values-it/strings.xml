@@ -2069,4 +2069,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="remove_the_tag">RIMUOVI IL TAG</string>
     <string name="enable_plugin">Attiva</string>
 	<string name="disable_plugin">Disattiva</string>
+<string name="plugin_description_title">Descrizione</string>
+	<string name="plugin_settings_button_caption">Impostazioni</string>
 </resources>
