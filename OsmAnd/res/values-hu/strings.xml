@@ -96,7 +96,7 @@
   <string name="live_monitoring_interval">Online rögzítési sűrűség</string>
   <string name="live_monitoring_url_descr">Add meg a használni kívánt webcímet az alábbi szintaxissal: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Online rögzítés webcíme</string>
-  <string name="gpx_monitoring_disabled_warn">Kérlek engedélyezd az \'Útvonal rögzítése GPX-be\' beállítást.</string>
+  <string name="gpx_monitoring_disabled_warn">Nyomvonal naplózása GPX gombbal vagy az Útvonalrögzítés beállításokban.</string>
   <string name="show_current_gpx_title">Aktív útvonalrögzítés</string>
   <string name="tip_recent_changes_0_7_0_t">A 0.7.0 verzió változásai: \n\t- Internet nélkül is használható Wikipédia szócikkek \n\t- Frissített térképek \n\t- Egyéb hasznos apró funkciók
 	</string>
@@ -166,7 +166,7 @@
   <string name="init_native_library">Natív renderelő inicializálása…</string>
   <string name="choose_auto_follow_route">Automatikus követés ideje</string>
   <string name="choose_auto_follow_route_descr">Válaszd ki, mennyi idő múlva ugorjon vissza a térkép a pozíciódhoz</string>
-  <string name="auto_follow_route_never">Soha</string>
+  <string name="auto_follow_route_never">Soha (a vezetés manuális indításához kattints a kék nyílra)</string>
   <string name="auto_follow_route_navigation">Követés csak navigáció közben</string>
   <string name="auto_follow_route_navigation_descr">Csak navigáció közben követi automatikusan a pozíciódat a térkép.</string>
   <string name="auto_follow_location_enabled">Automatikus követés.</string>
@@ -565,7 +565,7 @@
   <string name="route_head">Előre</string>
   <string name="first_time_continue">Tovább</string>
   <string name="first_time_download">Térképadatok letöltése</string>
-  <string name="first_time_msg">Köszönjük, hogy az OsmAndot használod! Hogy a program minden lehetőségét kihasználhasd, regionális offline adatokra lesz szükséged, amiket a \'Beállítások\' → \'Térképek kezelése\' menüben szerezhetsz be. Ezt követően tudsz majd térképet nézni, címre, POI-ra és tömegközlekedési eszközre keresni.</string>
+  <string name="first_time_msg">Köszönjük, hogy az OsmAndot használod! Hogy a program minden lehetőségét kihasználhasd, regionális offline adatokra lesz szükséged, amiket a \'Beállítások\' → \'Térképek kezelése\' menüben szerezhetsz be. Ezt követően tudsz majd térképet nézni, címre, POI-ra keresni, útvonalat tervezni.</string>
   <string name="search_poi_location">Jel keresése…</string>
   <string name="search_near_map">Keresés a jelenlegi térkép középpontja közelében</string>
   <string name="search_nearby">Keresés a közelben</string>
@@ -612,7 +612,7 @@
   <string name="searching">Keresés…</string>
   <string name="searching_address">Cím keresés…</string>
   <string name="search_osm_nominatim">Cím keresése OSM Nominatim felhasználásával</string>
-  <string name="hint_search_online">Házszám, utca, település</string>
+  <string name="hint_search_online">Online keresés: Házszám, utca, település</string>
   <string name="search_offline_address">Offline</string>
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Max. online nagyítás</string>
@@ -1110,7 +1110,7 @@
     <string name="recording_can_not_be_played">A felvételt nem lehet lejátszani</string>
     <string name="recording_context_menu_delete">Felvétel törlése</string>
     <string name="recording_context_menu_play">Lejátszás</string>
-    <string name="recording_default_name">felvétel</string>
+    <string name="recording_default_name">Felvétel</string>
     <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Hangjegyzetek</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd bővítmény offline szintvonalakhoz</string>
@@ -1488,7 +1488,7 @@
 	<string name="share_route_subject">OsmAnd segítségével megosztott útvonal</string>
 	<string name="arrival_distance">Megérkezés bemondása</string>
     <string name="arrival_distance_descr">Milyen korán szeretnéd hallani a megérkezés bejelentését?</string>
-    <string name="keep_informing_never">Soha</string>
+    <string name="keep_informing_never">Csak kézzel (kattints a nyílra)</string>
     <string name="keep_informing_descr">Navigációs utasítások újra bemondása rendszeres időközönként</string>
     <string name="keep_informing">Navigációs utasítások ismétlése</string>
 	<string name="navigation_intent_invalid">Érvénytelen formátum: %s</string>
@@ -1820,4 +1820,22 @@
     <string name="proxy_pref_descr">Proxy internetkapcsolat beállítása</string>
     <string name="settings_privacy">Adatvédelem</string>
     <string name="points">Pontok</string>
+    <string name="tracks">Nyomvonalak</string>
+    <string name="my_location">Pozícióm</string>
+    <string name="osm_editing_manage">Kezelés</string>
+    <string name="recents">LEGUTÓBBI</string>
+	<string name="navigation_over_track">Indítasz navigációt a nyomvonal mentén?</string>
+	<string name="avoid_roads_msg">Elkerülendő utcák kiválasztásával megváltoztathatod a tervezett útvonalat</string>
+    <string name="enable_proxy_title">HTTP proxy engedélyezése</string>
+	<string name="enable_proxy_descr">HTTP proxy beállítása minden hálózati kéréshez</string>
+	<string name="proxy_host_title">Proxy hosztnév</string>
+	<string name="proxy_host_descr">Állítsd be a proxy szervered hosztnevét (pl. 127.0.0.1)</string>
+	<string name="proxy_port_title">Proxy port</string>
+	<string name="proxy_port_descr">Állítsd be a proxy szervered portszámát (pl. 8118)</string>
+	<string name="enable_plugin">Engedélyezés</string>
+	<string name="disable_plugin">Letiltás</string>
+	<string name="plugin_description_title">Leírás</string>
+	<string name="plugin_settings_button_caption">Beállítások</string>
+<string name="edit_group">Csoport szerkesztése</string>
+    <string name="remove_the_tag">CÍMKE ELTÁVOLÍTÁSA</string>
     </resources>
