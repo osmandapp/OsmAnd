@@ -51,7 +51,7 @@
 				<fragment
 						android:id="@+id/NotesFragment"
 						xmlns:android="http://schemas.android.com/apk/res/android"
-						android:name="net.osmand.plus.dashboard.DashAudioVideoNotesFragment"
+						android:name="net.osmand.plus.audionotes.DashAudioVideoNotesFragment"
 						android:layout_marginTop="@dimen/dashCardMargin"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"/>
