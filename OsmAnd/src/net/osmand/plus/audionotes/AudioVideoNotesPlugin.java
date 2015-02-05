@@ -1151,7 +1151,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			@Override
 			public int compare(Recording object1, Recording object2) {
 				long l1 = object1.file.lastModified();
-				long l2 = object1.file.lastModified();
+				long l2 = object2.file.lastModified();
 				return l1 < l2 ? 1 : -1;
 			}
 		});
