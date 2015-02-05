@@ -103,4 +103,10 @@
 	<color name="card_bg_color_dark">#333b40</color>
 
 	<color name="get_button_text">#ffffff</color>
+
+	<color name="plugin_details_header_bg_light">#ffffff</color>
+	<color name="plugin_details_header_bg_dark">#333b40</color>
+
+	<color name="plugin_details_header2_bg_light">#dbdbdb</color>
+	<color name="plugin_details_header2_bg_dark">#ffffff</color>
 </resources>
