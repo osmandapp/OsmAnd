@@ -5,13 +5,18 @@ package net.osmand.plus.activities;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ImageSpan;
 import android.view.MenuItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
@@ -168,18 +173,31 @@ public class FavoritesActivity extends TabActivity {
 
 	public static void updateSearchView(Activity activity, SearchView searchView) {
 		//do not ever do like this
-		OsmandApplication app = (OsmandApplication)activity.getApplication();
-		if (app.getSettings().isLightContent()){
-			try {
-				ImageView cancelIcon = (ImageView) searchView.findViewById(R.id.search_close_btn);
-				cancelIcon.setImageResource(R.drawable.ic_action_gremove_dark);
-				ImageView searchIcon = (ImageView) searchView.findViewById(R.id.search_voice_btn);
-				searchIcon.setImageResource(R.drawable.ic_action_search_dark);
-				SearchView.SearchAutoComplete searchBadge = (SearchView.SearchAutoComplete) searchView.findViewById(R.id.search_src_text);
-				searchBadge.setTextColor(activity.getResources().getColor(R.color.color_white));
-			} catch (NullPointerException e){
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		if (!app.getSettings().isLightContent()) {
+			return;
+		}
+		try {
+			ImageView cancelIcon = (ImageView) searchView.findViewById(R.id.search_close_btn);
+			cancelIcon.setImageResource(R.drawable.ic_action_gremove_dark);
+			//styling search hint icon and text
+			SearchView.SearchAutoComplete searchEdit = (SearchView.SearchAutoComplete) searchView.findViewById(R.id.search_src_text);
+			searchEdit.setTextColor(activity.getResources().getColor(R.color.color_white));
+			Class<?> clazz = Class.forName("android.widget.SearchView$SearchAutoComplete");
 
-			}
+			SpannableStringBuilder stopHint = new SpannableStringBuilder("   ");
+			Method textSizeMethod = clazz.getMethod("getTextSize");
+			Float rawTextSize = (Float)textSizeMethod.invoke(searchEdit);
+			int textSize = (int) (rawTextSize * 1.25);
+
+			//setting icon as spannable
+			Drawable searchIcon = activity.getResources().getDrawable(R.drawable.ic_action_search_dark);
+			searchIcon.setBounds(0,0, textSize, textSize);
+			stopHint.setSpan(new ImageSpan(searchIcon), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			Method setHintMethod = clazz.getMethod("setHint", CharSequence.class);
+			setHintMethod.invoke(searchEdit, stopHint);
+		} catch (Exception e) {
+
 		}
 	}
 }
