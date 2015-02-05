@@ -1896,4 +1896,5 @@
 	<string name="disable_plugin">停用</string>
 <string name="plugin_description_title">描述</string>
 	<string name="plugin_settings_button_caption">設定</string>
-</resources>
+<string name="edit_group">編輯群組</string>
+    </resources>
