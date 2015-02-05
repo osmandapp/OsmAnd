@@ -6,6 +6,7 @@ import net.osmand.plus.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
@@ -13,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class PluginsActivity extends OsmandListActivity {
@@ -80,8 +81,22 @@ public class PluginsActivity extends OsmandListActivity {
 
 			view.setTag(plugin);
 
-			ImageView pluginLogo = (ImageView)view.findViewById(R.id.plugin_logo);
+			ImageButton pluginLogo = (ImageButton)view.findViewById(R.id.plugin_logo);
 			pluginLogo.setImageResource(plugin.getLogoResourceId());
+			if (plugin.isActive()) {
+				pluginLogo.setBackgroundResource(R.drawable.bg_plugin_logo_enabled);
+			} else {
+				TypedArray attributes =  getTheme().obtainStyledAttributes(
+						new int[] {R.attr.bg_plugin_logo_disabled});
+				pluginLogo.setBackgroundDrawable(attributes.getDrawable(0));
+				attributes.recycle();
+			}
+			pluginLogo.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					enableDisablePlugin(plugin, !plugin.isActive());
+				}
+			});
 
 			TextView pluginName = (TextView)view.findViewById(R.id.plugin_name);
 			pluginName.setText(plugin.getName());

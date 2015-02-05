@@ -14,12 +14,12 @@
 		android:layout_height="match_parent"
 		android:orientation="horizontal">
 
-		<ImageView
+		<ImageButton
 			android:id="@+id/plugin_logo"
 			android:layout_width="64dp"
 			android:layout_height="64dp"
 			android:layout_margin="8dp"
-			android:background="@drawable/bg_plugin_logo"
+			android:background="@drawable/bg_plugin_logo_enabled"
 			android:scaleType="center"
 			tools:src="@drawable/ic_extension_dark"/>
 
@@ -29,8 +29,8 @@
 			android:layout_marginBottom="8dp"
 			android:layout_marginLeft="6dp"
 			android:layout_marginStart="6dp"
-			android:layout_marginRight="16dp"
-			android:layout_marginEnd="16dp"
+			android:layout_marginRight="36dp"
+			android:layout_marginEnd="36dp"
 			android:layout_marginTop="8dp"
 			android:layout_weight="1"
 			android:orientation="vertical">
@@ -40,8 +40,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="4dp"
-				android:layout_marginRight="50dp"
-				android:layout_marginEnd="50dp"
 				android:ellipsize="end"
 				android:lines="1"
 				android:maxLines="1"
@@ -68,12 +66,13 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="top|end"
-		android:orientation="horizontal">
+		android:orientation="vertical">
 
 		<ImageView
 			android:id="@+id/plugin_is_enabled"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
 			android:layout_marginTop="6dp"
 			android:src="?attr/ic_action_check"
 			android:visibility="invisible"
@@ -83,6 +82,7 @@
 			android:id="@+id/plugin_options"
 			android:layout_width="36dp"
 			android:layout_height="36dp"
+			android:layout_marginTop="6dp"
 			android:background="?attr/ic_plugin_options"/>
 	</LinearLayout>
 </FrameLayout>

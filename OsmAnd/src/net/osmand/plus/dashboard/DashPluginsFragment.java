@@ -6,7 +6,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,16 +30,6 @@ public class DashPluginsFragment extends DashBaseFragment {
 				return;
 			}
 			OsmandPlugin.enablePlugin(getMyApplication(), plugin, isChecked);
-		}
-	};
-
-	private final View.OnClickListener pluginSettingsListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			OsmandPlugin plugin = (OsmandPlugin)view.getTag();
-
-			Class<? extends Activity> settingsActivity = plugin.getSettingsActivity();
-			startActivity(new Intent(getActivity(), settingsActivity));
 		}
 	};
 
@@ -80,7 +69,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 			if (pluginsContainer.getChildCount() > 2) {
 				break;
 			}
-			if (plugin instanceof  OsmandDevelopmentPlugin) {
+			if (plugin instanceof OsmandDevelopmentPlugin) {
 				continue;
 			}
 			if (enabledPlugins.contains(plugin)) {

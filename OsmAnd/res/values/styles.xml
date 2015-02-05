@@ -158,6 +158,9 @@
         <item name="actionModeStyle">@style/WhiteActionMode</item>
         <item name="android:actionMenuTextColor">@color/color_white</item>
         <item name="actionMenuTextColor">@color/color_white</item>
+		<item name="switch_ex_background">@drawable/switch_ex_background_light</item>
+		<item name="switch_ex_text_color">@color/switch_ex_button_text_light</item>
+		<item name="bg_plugin_logo_disabled">@drawable/bg_plugin_logo_disabled_light</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -188,6 +191,9 @@
 		<item name="ic_action_marker2">@drawable/ic_action_marker2_dark</item>
 		<item name="search_background">@color/color_white</item>
 		<item name="ic_action_settings">@drawable/ic_action_settings_dark</item>
+		<item name="switch_ex_background">@drawable/switch_ex_background_dark</item>
+		<item name="switch_ex_text_color">@color/switch_ex_button_text_dark</item>
+		<item name="bg_plugin_logo_disabled">@drawable/bg_plugin_logo_disabled_dark</item>
     </style>
 
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
