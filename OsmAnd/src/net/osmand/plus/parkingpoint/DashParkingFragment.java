@@ -1,4 +1,4 @@
-package net.osmand.plus.dashboard;
+package net.osmand.plus.parkingpoint;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,8 +15,8 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.util.MapUtils;
 
 /**

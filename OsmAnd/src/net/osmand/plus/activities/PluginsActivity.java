@@ -77,7 +77,6 @@ public class PluginsActivity extends OsmandListActivity {
 			}
 
 			final OsmandPlugin plugin = getItem(position);
-			final boolean isEnabled = OsmandPlugin.getEnabledPlugins().contains(plugin);
 
 			view.setTag(plugin);
 
@@ -86,7 +85,7 @@ public class PluginsActivity extends OsmandListActivity {
 
 			TextView pluginName = (TextView)view.findViewById(R.id.plugin_name);
 			pluginName.setText(plugin.getName());
-			pluginName.setContentDescription(plugin.getName() + " " + getString(isEnabled
+			pluginName.setContentDescription(plugin.getName() + " " + getString(plugin.isActive()
 					? R.string.item_checked
 					: R.string.item_unchecked));
 
@@ -94,7 +93,7 @@ public class PluginsActivity extends OsmandListActivity {
 			pluginDescription.setText(plugin.getDescription());
 
 			View pluginIsEnabled = view.findViewById(R.id.plugin_is_enabled);
-			pluginIsEnabled.setVisibility(isEnabled ? View.VISIBLE : View.INVISIBLE);
+			pluginIsEnabled.setVisibility(plugin.isActive() ? View.VISIBLE : View.INVISIBLE);
 
 			View pluginOptions = view.findViewById(R.id.plugin_options);
 			pluginOptions.setOnClickListener(new View.OnClickListener() {
@@ -109,18 +108,17 @@ public class PluginsActivity extends OsmandListActivity {
 	}
 
 	private void showOptionsMenu(View v, final OsmandPlugin plugin) {
-		final boolean isEnabled = OsmandPlugin.getEnabledPlugins().contains(plugin);
 		final Class<? extends Activity> settingsActivity = plugin.getSettingsActivity();
 
 		final PopupMenu optionsMenu = new PopupMenu(this, v);
 
-		MenuItem enableDisableItem = optionsMenu.getMenu().add(isEnabled
+		MenuItem enableDisableItem = optionsMenu.getMenu().add(plugin.isActive()
 				? R.string.disable_plugin
 				: R.string.enable_plugin);
 		enableDisableItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				enableDisablePlugin(plugin, !isEnabled);
+				enableDisablePlugin(plugin, !plugin.isActive());
 				optionsMenu.dismiss();
 				return true;
 			}
@@ -136,7 +134,7 @@ public class PluginsActivity extends OsmandListActivity {
 					return true;
 				}
 			});
-			settingsItem.setEnabled(isEnabled);
+			settingsItem.setEnabled(plugin.isActive());
 		}
 
 		optionsMenu.show();

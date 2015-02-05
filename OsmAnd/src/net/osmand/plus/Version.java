@@ -13,7 +13,7 @@ public class Version {
 	
 	
 	public static boolean isGpsStatusEnabled(OsmandApplication ctx) {
-		return ctx.getString(R.string.versionFeatures).contains("+gps_status") && !isBlackberry(ctx);
+		return isGooglePlayEnabled(ctx) && !isBlackberry(ctx);
 	}
 	
 	public static boolean isBlackberry(OsmandApplication ctx) {
@@ -39,18 +39,6 @@ public class Version {
 	
 	public static boolean isGooglePlayEnabled(OsmandApplication ctx) {
 		return ctx.getString(R.string.versionFeatures).contains("+play_market");
-	}
-	
-	public static boolean isFreeVersionEnabled(OsmandApplication ctx) {
-		return ctx.getString(R.string.versionFeatures).contains("+free_version");
-	}
-	
-	public static boolean isParkingPluginInlined(OsmandApplication ctx) {
-		return ctx.getString(R.string.versionFeatures).contains("+parking_plugin");
-	}
-	
-	public static boolean isRouteNavPluginInlined(OsmandApplication ctx) {
-		return ctx.getString(R.string.versionFeatures).contains("+route_nav");
 	}
 	
 	public static boolean isSherpafy(OsmandApplication ctx) {
@@ -103,7 +91,7 @@ public class Version {
 	}
 	
 	public static boolean isFreeVersion(OsmandApplication ctx){
-		return ctx.getPackageName().equals(FREE_VERSION_NAME) || isFreeVersionEnabled(ctx);
+		return ctx.getPackageName().equals(FREE_VERSION_NAME);
 		
 	}
 	

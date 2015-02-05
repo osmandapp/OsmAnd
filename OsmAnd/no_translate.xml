@@ -14,7 +14,7 @@
     <string name="ga_api_key">UA-28342846-2</string>
     <string name="ga_dispatchPeriod">10</string>
     <string name="ga_debug">true</string>
-    <string name="versionFeatures">+play_market +gps_status -parking_plugin -blackberry -free_version -amazon</string>
+    <string name="versionFeatures">+play_market -amazon -blackberry</string>
     <string name="next_tips_and_tricks_not_translate"></string>
     <string name="openstreetmap_copyright"><a href="http://www.openstreetmap.org/copyright">&#169; OpenStreetMap</a></string>
     <string name="about_content">Data is powered by OpenStreetMap ODbL, &#169; <a href="http://www.openstreetmap.org/copyright">http://www.openstreetmap.org/copyright</a>.

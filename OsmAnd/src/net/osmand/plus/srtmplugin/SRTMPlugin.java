@@ -27,24 +27,10 @@ public class SRTMPlugin extends OsmandPlugin {
 		return paid ? ID : FREE_ID;
 	}
 
-	public SRTMPlugin(OsmandApplication app, boolean paid) {
+	public SRTMPlugin(OsmandApplication app) {
 		this.app = app;
-		this.paid = paid;
-		OsmandSettings settings = app.getSettings();
-		CommonPreference<String> pref = settings.getCustomRenderProperty("contourLines");
-		if(pref.get().equals("")) {
-			for(ApplicationMode m : ApplicationMode.allPossibleValues()) {
-				if(pref.getModeValue(m).equals("")) {
-					pref.setModeValue(m, "13");
-				}
-			}
-		}
-
 	}
 	
-	public boolean isPaid() {
-		return paid;
-	}
 
 	@Override
 	public String getDescription() {
@@ -59,6 +45,15 @@ public class SRTMPlugin extends OsmandPlugin {
 	@Override
 	public boolean init(final OsmandApplication app) {
 		HILLSHADE = app.getSettings().registerBooleanPreference("hillshade_layer", true);
+		OsmandSettings settings = app.getSettings();
+		CommonPreference<String> pref = settings.getCustomRenderProperty("contourLines");
+		if(pref.get().equals("")) {
+			for(ApplicationMode m : ApplicationMode.allPossibleValues()) {
+				if(pref.getModeValue(m).equals("")) {
+					pref.setModeValue(m, "13");
+				}
+			}
+		}
 		return true;
 	}
 

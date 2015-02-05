@@ -6,7 +6,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,12 +27,9 @@ public class DashPluginsFragment extends DashBaseFragment {
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			OsmandPlugin plugin = (OsmandPlugin)buttonView.getTag();
-			boolean isEnabled = OsmandPlugin.getEnabledPlugins().contains(plugin);
-
-			if (isEnabled == isChecked) {
+			if (plugin.isActive() == isChecked) {
 				return;
 			}
-
 			OsmandPlugin.enablePlugin(getMyApplication(), plugin, isChecked);
 		}
 	};
@@ -72,7 +68,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 		});
 
 		LinearLayout pluginsContainer = (LinearLayout) contentView.findViewById(R.id.plugins);
-		List<OsmandPlugin> enabledPlugins = OsmandPlugin.getEnabledPlugins();
+		List<OsmandPlugin> enabledPlugins = OsmandPlugin.getAvailablePlugins();
 		for(OsmandPlugin plugin : enabledPlugins) {
 			if (plugin instanceof  OsmandDevelopmentPlugin) {
 				continue;
@@ -107,11 +103,10 @@ public class DashPluginsFragment extends DashBaseFragment {
 		}
 		LinearLayout pluginsContainer = (LinearLayout) contentView.findViewById(R.id.plugins);
 
-		List<OsmandPlugin> enabledPlugins = OsmandPlugin.getEnabledPlugins();
 		for (int pluginIndex = 0; pluginIndex < pluginsContainer.getChildCount(); pluginIndex++) {
 			View pluginView = pluginsContainer.getChildAt(pluginIndex);
 			OsmandPlugin plugin = (OsmandPlugin)pluginView.getTag();
-			boolean isEnabled = enabledPlugins.contains(plugin);
+			boolean isEnabled = plugin.isActive();
 
 			CompoundButton enableDisableButton = (CompoundButton) pluginView.findViewById(
 					R.id.check_item);
@@ -121,7 +116,6 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 	private void inflatePluginView(LayoutInflater inflater, ViewGroup container,
 								   OsmandPlugin plugin) {
-		boolean isEnabled = OsmandPlugin.getEnabledPlugins().contains(plugin);
 
 		View view = inflater.inflate(R.layout.dash_plugin_item, container, false);
 		view.setTag(plugin);
@@ -143,7 +137,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 		CompoundButton enableDisableButton = (CompoundButton)view.findViewById(R.id.check_item);
 		enableDisableButton.setTag(plugin);
-		enableDisableButton.setChecked(isEnabled);
+		enableDisableButton.setChecked(plugin.isActive());
 		enableDisableButton.setOnCheckedChangeListener(enableDisableListener);
 
 		container.addView(view);

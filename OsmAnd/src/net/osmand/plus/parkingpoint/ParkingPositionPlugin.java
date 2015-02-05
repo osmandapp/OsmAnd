@@ -43,6 +43,7 @@ import android.widget.TimePicker;
 public class ParkingPositionPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.parking.position";
+	public static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
 	public final static String PARKING_POINT_LAT = "parking_point_lat"; //$NON-NLS-1$
 	public final static String PARKING_POINT_LON = "parking_point_lon"; //$NON-NLS-1$
 	public final static String PARKING_TYPE = "parking_type"; //$NON-NLS-1$

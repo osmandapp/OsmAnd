@@ -305,7 +305,6 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	public void categorizationFinished(List<IndexItem> filtered, List<IndexItemCategory> cats) {
 		Map<String, String> indexActivatedFileNames = getDownloadActivity().getIndexActivatedFileNames();
 		Map<String, String> indexFileNames = getDownloadActivity().getIndexFileNames();
-		DownloadActivityType type = getDownloadActivity().getDownloadType();
 		DownloadIndexAdapter a = ((DownloadIndexAdapter) getExpandableListAdapter());
 		if (a == null){
 			return;
@@ -314,25 +313,5 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		a.setIndexFiles(filtered, cats);
 		a.notifyDataSetChanged();
 		a.getFilter().filter(getFilterText());
-		if ((type == DownloadActivityType.SRTM_COUNTRY_FILE || type == DownloadActivityType.HILLSHADE_FILE)
-				&& OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) instanceof SRTMPlugin
-				&& !OsmandPlugin.getEnabledPlugin(SRTMPlugin.class).isPaid()) {
-			AlertDialog.Builder msg = new AlertDialog.Builder(getDownloadActivity());
-			msg.setTitle(R.string.srtm_paid_version_title);
-			msg.setMessage(R.string.srtm_paid_version_msg);
-			msg.setNegativeButton(R.string.button_upgrade_osmandplus, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:net.osmand.srtmPlugin.paid"));
-					try {
-						getDownloadActivity().startActivity(intent);
-					} catch (ActivityNotFoundException e) {
-					}
-				}
-			});
-			msg.setPositiveButton(R.string.default_buttons_ok, null);
-			msg.show();
-		}
-
 	}
 }

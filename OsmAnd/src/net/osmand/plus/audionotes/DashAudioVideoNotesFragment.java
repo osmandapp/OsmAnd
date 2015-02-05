@@ -1,5 +1,13 @@
-package net.osmand.plus.dashboard;
+package net.osmand.plus.audionotes;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashBaseFragment;
+import net.osmand.plus.helpers.FontCache;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,15 +21,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.helpers.FontCache;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Denis

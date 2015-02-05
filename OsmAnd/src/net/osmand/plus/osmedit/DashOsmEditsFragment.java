@@ -1,5 +1,9 @@
-package net.osmand.plus.dashboard;
+package net.osmand.plus.osmedit;
 
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.dashboard.DashBaseFragment;
+import net.osmand.plus.helpers.FontCache;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,10 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
 
 /**
  * Created by Denis

@@ -1,5 +1,15 @@
-package net.osmand.plus.dashboard;
+package net.osmand.plus.monitoring;
 
+import java.io.File;
+import java.util.List;
+
+import net.osmand.IndexConstants;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.R;
+import net.osmand.plus.dashboard.DashBaseFragment;
+import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.helpers.GpxUiHelper;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -10,15 +20,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import net.osmand.IndexConstants;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.OsmAndAppCustomization;
-import net.osmand.plus.R;
-import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.helpers.GpxUiHelper;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * Created by Denis

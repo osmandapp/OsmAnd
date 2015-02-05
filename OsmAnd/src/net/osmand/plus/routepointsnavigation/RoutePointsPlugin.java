@@ -35,7 +35,7 @@ import android.view.View;
 public class RoutePointsPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.route.stepsPlugin";
-
+	public static final String ROUTE_POINTS_PLUGIN_COMPONENT = "net.osmand.routePointsPlugin";
 	private static final String VISITED_KEY = "VISITED_KEY";
 	private static final String DELIVERED_KEY = "DELIVERED_KEY";
 

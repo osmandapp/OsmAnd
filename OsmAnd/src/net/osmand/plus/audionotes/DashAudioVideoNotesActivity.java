@@ -1,21 +1,25 @@
-package net.osmand.plus.dashboard;
+package net.osmand.plus.audionotes;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Denis

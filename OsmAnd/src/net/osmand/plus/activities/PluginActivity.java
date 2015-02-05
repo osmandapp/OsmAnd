@@ -51,7 +51,6 @@ public class PluginActivity extends OsmandActionBarActivity {
 			finish();
 			return;
 		}
-		boolean isEnabled = OsmandPlugin.getEnabledPlugins().contains(plugin);
 
 		setContentView(R.layout.plugin);
 		getSupportActionBar().setTitle(plugin.getName());
@@ -64,7 +63,7 @@ public class PluginActivity extends OsmandActionBarActivity {
 		if (settingsActivity == null) {
 			settingsButton.setVisibility(View.GONE);
 		} else {
-			settingsButton.setEnabled(isEnabled);
+			settingsButton.setEnabled(plugin.isActive());
 			settingsButton.setVisibility(View.VISIBLE);
 			settingsButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -76,13 +75,12 @@ public class PluginActivity extends OsmandActionBarActivity {
 
 		CompoundButton enableDisableButton = (CompoundButton)findViewById(
 				R.id.plugin_enable_disable);
-		enableDisableButton.setChecked(isEnabled);
+		enableDisableButton.setChecked(plugin.isActive());
 		enableDisableButton.setOnCheckedChangeListener(
 				new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				boolean isEnabled = OsmandPlugin.getEnabledPlugins().contains(plugin);
-				if (isEnabled == isChecked) {
+				if (plugin.isActive() == isChecked) {
 					return;
 				}
 
@@ -99,8 +97,7 @@ public class PluginActivity extends OsmandActionBarActivity {
 
 		CompoundButton enableDisableButton = (CompoundButton)findViewById(
 				R.id.plugin_enable_disable);
-		boolean isEnabled = OsmandPlugin.getEnabledPlugins().contains(plugin);
-		enableDisableButton.setChecked(isEnabled);
+		enableDisableButton.setChecked(plugin.isActive());
 	}
 
 	@Override
