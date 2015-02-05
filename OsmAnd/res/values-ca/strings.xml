@@ -897,7 +897,7 @@
 	<string name="history">Historial</string>
 	<string name="uploading">Enviant…</string>
 	<string name="search_osm_nominatim">Cerca una adreça utilitzant OSM Nominatim</string>
-	<string name="hint_search_online">Núm. de la casa, carrer, ciutat</string>
+	<string name="hint_search_online">Cerca en línia: Núm. de la casa, carrer, ciutat</string>
 	<string name="max_level_download_tile_descr">Seleccioneu el nivell màxim de zoom per baixar les tessel·les dels mapes en línia</string>
 	<string name="route_general_information">Distància total %1$s, temps de viatge %2$d h %3$d m.</string>
 	<string name="router_service_descr">Escolliu un servei de navegació en línia o fora de línia</string>
