@@ -2134,4 +2134,5 @@
 	<string name="disable_plugin">사용안함</string>
 <string name="plugin_description_title">설명</string>
 	<string name="plugin_settings_button_caption">설정</string>
-</resources>
+<string name="edit_group">그룹 편집</string>
+    </resources>
