@@ -86,7 +86,7 @@ public class PluginsActivity extends OsmandListActivity {
 			if (plugin.isActive()) {
 				pluginLogo.setBackgroundResource(R.drawable.bg_plugin_logo_enabled);
 			} else {
-				TypedArray attributes =  getTheme().obtainStyledAttributes(
+				TypedArray attributes = getTheme().obtainStyledAttributes(
 						new int[] {R.attr.bg_plugin_logo_disabled});
 				pluginLogo.setBackgroundDrawable(attributes.getDrawable(0));
 				attributes.recycle();

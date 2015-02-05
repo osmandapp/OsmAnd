@@ -3,6 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/dash_plugin_item"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
@@ -17,7 +18,7 @@
 		android:layout_height="54dp"
 		android:orientation="horizontal">
 
-		<ImageView
+		<ImageButton
 			android:id="@+id/plugin_logo"
 			android:layout_width="32dp"
 			android:layout_height="32dp"
@@ -43,7 +44,7 @@
 
 		<net.osmand.plus.widgets.SwitchEx
 			android:id="@+id/check_item"
-			android:layout_width="wrap_content"
+			android:layout_width="90dp"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_marginTop="6dp"
@@ -54,7 +55,6 @@
 			android:layout_marginEnd="16dp"
 			android:background="?attr/switch_ex_background"
 			android:minHeight="0dp"
-			android:minWidth="0dp"
 			android:paddingTop="8dp"
 			android:paddingBottom="8dp"
 			android:paddingLeft="9.5dp"

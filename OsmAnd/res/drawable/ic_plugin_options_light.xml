@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-	<item>
+	<item
+		android:top="6dp"
+		android:right="2dp">
 		<bitmap
 			android:src="@drawable/ic_overflow_menu_light"
-			android:gravity="center" />
+			android:gravity="top|end" />
 	</item>
 </layer-list>

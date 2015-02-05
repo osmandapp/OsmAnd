@@ -62,17 +62,16 @@
 		</LinearLayout>
 	</LinearLayout>
 
-	<LinearLayout
+	<FrameLayout
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="top|end"
-		android:orientation="vertical">
+		android:layout_height="match_parent"
+		android:layout_gravity="top|end">
 
 		<ImageView
 			android:id="@+id/plugin_is_enabled"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center_horizontal"
+			android:layout_gravity="center_horizontal|top"
 			android:layout_marginTop="6dp"
 			android:src="?attr/ic_action_check"
 			android:visibility="invisible"
@@ -83,6 +82,7 @@
 			android:layout_width="36dp"
 			android:layout_height="36dp"
 			android:layout_marginTop="6dp"
+			android:layout_gravity="center_horizontal|bottom"
 			android:background="?attr/ic_plugin_options"/>
-	</LinearLayout>
+	</FrameLayout>
 </FrameLayout>

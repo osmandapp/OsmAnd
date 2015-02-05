@@ -2,18 +2,20 @@ package net.osmand.plus.dashboard;
 
 import java.util.List;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,11 +27,25 @@ public class DashPluginsFragment extends DashBaseFragment {
 			new CompoundButton.OnCheckedChangeListener() {
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			OsmandPlugin plugin = (OsmandPlugin)buttonView.getTag();
+			View pluginView = AndroidUtils.findParentViewById(buttonView, R.id.dash_plugin_item);
+			OsmandPlugin plugin = (OsmandPlugin)pluginView.getTag();
 			if (plugin.isActive() == isChecked) {
 				return;
 			}
-			OsmandPlugin.enablePlugin(getMyApplication(), plugin, isChecked);
+			if (OsmandPlugin.enablePlugin(getMyApplication(), plugin, isChecked)) {
+				updatePluginState(pluginView);
+			}
+		}
+	};
+
+	private final View.OnClickListener toggleEnableDisableListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+			View pluginView = AndroidUtils.findParentViewById(view, R.id.dash_plugin_item);
+			OsmandPlugin plugin = (OsmandPlugin)pluginView.getTag();
+			if (OsmandPlugin.enablePlugin(getMyApplication(), plugin, !plugin.isActive())) {
+				updatePluginState(pluginView);
+			}
 		}
 	};
 
@@ -94,40 +110,48 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 		for (int pluginIndex = 0; pluginIndex < pluginsContainer.getChildCount(); pluginIndex++) {
 			View pluginView = pluginsContainer.getChildAt(pluginIndex);
-			OsmandPlugin plugin = (OsmandPlugin)pluginView.getTag();
-			boolean isEnabled = plugin.isActive();
 
-			CompoundButton enableDisableButton = (CompoundButton) pluginView.findViewById(
-					R.id.check_item);
-			enableDisableButton.setChecked(isEnabled);
+			updatePluginState(pluginView);
+		}
+	}
+
+	private void updatePluginState(View pluginView) {
+		OsmandPlugin plugin = (OsmandPlugin)pluginView.getTag();
+		boolean isEnabled = plugin.isActive();
+
+		CompoundButton enableDisableButton = (CompoundButton)pluginView.findViewById(
+				R.id.check_item);
+		enableDisableButton.setChecked(isEnabled);
+
+		ImageButton logoView = (ImageButton)pluginView.findViewById(R.id.plugin_logo);
+		if (plugin.isActive()) {
+			logoView.setBackgroundResource(R.drawable.bg_plugin_logo_enabled);
+		} else {
+			TypedArray attributes = getActivity().getTheme().obtainStyledAttributes(
+					new int[] {R.attr.bg_plugin_logo_disabled});
+			logoView.setBackgroundDrawable(attributes.getDrawable(0));
+			attributes.recycle();
 		}
 	}
 
 	private void inflatePluginView(LayoutInflater inflater, ViewGroup container,
 								   OsmandPlugin plugin) {
-
 		View view = inflater.inflate(R.layout.dash_plugin_item, container, false);
 		view.setTag(plugin);
 
-		// To discuss: too much confusing and not consistent
-//		boolean hasSettings = (plugin.getSettingsActivity() != null);
-//		if (isEnabled && hasSettings) {
-//			view.setOnClickListener(pluginSettingsListener);
-//		} else {
-//		view.setOnClickListener(pluginDetailsListener);
-//		}
 		view.setOnClickListener(pluginDetailsListener);
 
 		TextView nameView = (TextView)view.findViewById(R.id.plugin_name);
 		nameView.setText(plugin.getName());
 
-		ImageView logoView = (ImageView)view.findViewById(R.id.plugin_logo);
+		ImageButton logoView = (ImageButton)view.findViewById(R.id.plugin_logo);
+		logoView.setOnClickListener(toggleEnableDisableListener);
 		logoView.setImageResource(plugin.getLogoResourceId());
 
 		CompoundButton enableDisableButton = (CompoundButton)view.findViewById(R.id.check_item);
-		enableDisableButton.setTag(plugin);
-		enableDisableButton.setChecked(plugin.isActive());
 		enableDisableButton.setOnCheckedChangeListener(enableDisableListener);
+
+		updatePluginState(view);
 
 		container.addView(view);
 	}
