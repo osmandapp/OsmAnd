@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
@@ -2051,4 +2051,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="disable_plugin">Deaktivieren</string>
     <string name="plugin_description_title">Beschreibung</string>
 	<string name="plugin_settings_button_caption">Einstellungen</string>
-</resources>
+<string name="plugin_install_needs_network">Die Installation dieses Plugins benötigt eine Internet-Verbindung.</string>
+<string name="edit_group">Gruppe bearbeiten</string>
+    </resources>
