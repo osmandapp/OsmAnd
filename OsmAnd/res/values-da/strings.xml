@@ -1905,4 +1905,5 @@
 <string name="plugin_description_title">Beskrivelse</string>
 	<string name="plugin_settings_button_caption">Indstillinger</string>
 <string name="edit_group">Rediger gruppe</string>
-    </resources>
+    <string name="plugin_install_needs_network">Der behøves en internetforbindelse for at installere udvidelsen.</string>
+</resources>
