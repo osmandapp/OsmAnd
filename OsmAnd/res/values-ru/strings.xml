@@ -1877,4 +1877,5 @@
 <string name="osm_editing_manage">Управление</string>
     <string name="plugin_description_title">Описание</string>
 	<string name="plugin_settings_button_caption">Настройки</string>
-</resources>
+<string name="edit_group">Редактировать группу</string>
+    </resources>
