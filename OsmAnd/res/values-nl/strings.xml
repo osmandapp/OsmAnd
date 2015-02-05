@@ -2072,4 +2072,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 <string name="plugin_description_title">Omschrijving</string>
 	<string name="plugin_settings_button_caption">Instellingen</string>
 <string name="edit_group">Bewerk groep</string>
-    </resources>
+    <string name="plugin_install_needs_network">Om deze plugin te installeren is een internetverbinding nodig.</string>
+</resources>
