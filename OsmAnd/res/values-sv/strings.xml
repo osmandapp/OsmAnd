@@ -1797,4 +1797,5 @@
 <string name="plugin_settings_button_caption">Inställningar</string>
 <string name="plugin_description_title">Beskrivning</string>
 	<string name="edit_group">Redigera grupp</string>
-    </resources>
+    <string name="plugin_install_needs_network">En Internetuppkoppling krävs för att installera denna modul.</string>
+</resources>
