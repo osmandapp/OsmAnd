@@ -1910,4 +1910,5 @@
 	<string name="disable_plugin">Išjungti</string>
 <string name="plugin_description_title">Aprašymas</string>
 	<string name="plugin_settings_button_caption">Nustatymai</string>
-</resources>
+<string name="edit_group">Redaguoti grupę</string>
+    </resources>
