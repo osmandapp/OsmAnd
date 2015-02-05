@@ -101,4 +101,6 @@
 
 	<color name="card_bg_color_light">#ffffff</color>
 	<color name="card_bg_color_dark">#333b40</color>
+
+	<color name="get_button_text">#ffffff</color>
 </resources>

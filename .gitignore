@@ -29,5 +29,8 @@ out/
 # MacOSX
 .DS_Store
 
+# Windows
+Thumbs.db
+
 # Output files
 /build
