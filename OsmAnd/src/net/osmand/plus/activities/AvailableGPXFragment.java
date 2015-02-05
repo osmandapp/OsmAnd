@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 import android.content.pm.ActivityInfo;
+import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
@@ -151,6 +152,23 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onQueryTextChange(String newText) {
 				listAdapter.getFilter().filter(newText);
+				return true;
+			}
+		});
+		MenuItemCompat.setOnActionExpandListener(mi, new MenuItemCompat.OnActionExpandListener() {
+			@Override
+			public boolean onMenuItemActionExpand(MenuItem item) {
+				return true;
+			}
+
+			@Override
+			public boolean onMenuItemActionCollapse(MenuItem item) {
+				// Needed to hide intermediate progress bar after closing action mode
+				 new Handler().postDelayed(new Runnable() {
+					public void run() {
+						hideProgressBar();
+					}
+				}, 100);
 				return true;
 			}
 		});

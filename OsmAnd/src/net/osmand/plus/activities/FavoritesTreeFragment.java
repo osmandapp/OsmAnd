@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import android.content.pm.ActivityInfo;
+import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.SearchView;
@@ -332,7 +333,12 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				favouritesAdapter.setFilterResults(null);
 				favouritesAdapter.synchronizeGroups();
 				favouritesAdapter.notifyDataSetChanged();
-				hideProgressBar();
+				// Needed to hide intermediate progress bar after closing action mode
+				new Handler().postDelayed(new Runnable() {
+					public void run() {
+						hideProgressBar();
+					}
+				}, 100);
 				return true;
 			}
 		});
