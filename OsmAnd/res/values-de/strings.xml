@@ -2040,7 +2040,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osm_editing_manage">Verwalten</string>
     <string name="recents">VERLAUF</string>
     <string name="navigation_over_track">Navigation über Strecke starten?</string>
-    <string name="avoid_roads_msg">Sie können die Route ändern, indem Sie die Straßen auswählen, die vermieden werden sollen</string>
+    <string name="avoid_roads_msg">Durch Setzen einer Straßensperrung kann eine alternative Route berechnet werden:</string>
     <string name="enable_proxy_title">HTTP-Proxy aktivieren</string>
     <string name="enable_proxy_descr">HTTP-Proxy für alle Netzwerkanfragen einrichten</string>
     <string name="proxy_host_title">Proxy-Host</string>
