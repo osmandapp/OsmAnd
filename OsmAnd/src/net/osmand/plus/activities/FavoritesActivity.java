@@ -183,19 +183,15 @@ public class FavoritesActivity extends TabActivity {
 			//styling search hint icon and text
 			SearchView.SearchAutoComplete searchEdit = (SearchView.SearchAutoComplete) searchView.findViewById(R.id.search_src_text);
 			searchEdit.setTextColor(activity.getResources().getColor(R.color.color_white));
-			Class<?> clazz = Class.forName("android.widget.SearchView$SearchAutoComplete");
-
 			SpannableStringBuilder stopHint = new SpannableStringBuilder("   ");
-			Method textSizeMethod = clazz.getMethod("getTextSize");
-			Float rawTextSize = (Float)textSizeMethod.invoke(searchEdit);
+			Float rawTextSize = searchEdit.getTextSize();
 			int textSize = (int) (rawTextSize * 1.25);
 
 			//setting icon as spannable
 			Drawable searchIcon = activity.getResources().getDrawable(R.drawable.ic_action_search_dark);
 			searchIcon.setBounds(0,0, textSize, textSize);
 			stopHint.setSpan(new ImageSpan(searchIcon), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			Method setHintMethod = clazz.getMethod("setHint", CharSequence.class);
-			setHintMethod.invoke(searchEdit, stopHint);
+			searchEdit.setHint(stopHint);
 		} catch (Exception e) {
 
 		}
