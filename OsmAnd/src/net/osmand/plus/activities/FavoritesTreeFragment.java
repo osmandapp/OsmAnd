@@ -330,6 +330,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				favouritesAdapter.setFilterResults(null);
 				favouritesAdapter.synchronizeGroups();
 				favouritesAdapter.notifyDataSetChanged();
+				hideProgressBar();
 				return true;
 			}
 		});

@@ -7,12 +7,31 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import net.osmand.plus.Version;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
+import android.text.method.LinkMovementMethod;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 public class SettingsActivity extends SettingsBaseActivity {
 
@@ -108,7 +127,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 			startActivity(new Intent(this, SettingsNavigationActivity.class));
 			return true;
 		} else if (preference == about) {
-			MainMenuActivity.showAboutDialog(this, getMyApplication());
+			showAboutDialog(getMyApplication());
 			return true;
 		} else if (preference == plugins) {
 			startActivityForResult(new Intent(this, getMyApplication().getAppCustomization().getPluginsActivity()), PLUGINS_SELECTION_REQUEST);
@@ -120,6 +139,58 @@ public class SettingsActivity extends SettingsBaseActivity {
 			super.onPreferenceClick(preference);
 		}
 		return false;
+	}
+	
+	public void showAboutDialog(final OsmandApplication app) {
+		final Dialog dialog = new Dialog(this, 
+				app.getSettings().isLightContent() ?
+						R.style.OsmandLightTheme:
+							R.style.OsmandDarkTheme);
+		LinearLayout ll = new LinearLayout(this);
+		ll.setOrientation(LinearLayout.VERTICAL);
+		Toolbar tb = new Toolbar(this);
+		tb.setClickable(true);
+		Drawable back = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		back.setColorFilter(0xffffffff, PorterDuff.Mode.MULTIPLY);
+		tb.setNavigationIcon(back);
+		tb.setTitle(R.string.about_settings);
+		tb.setBackgroundColor(getResources().getColor( getResIdFromAttribute(this, R.attr.pstsTabBackground)));
+		tb.setTitleTextColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTextColor)));
+		tb.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				dialog.dismiss();
+			}
+		});
+		ScrollView sv = new ScrollView(this);
+		TextView tv = new TextView(this);
+		sv.addView(tv);
+		String version = Version.getFullVersion(app);
+		String vt = this.getString(R.string.about_version) + "\t";
+		String edition = "";
+		if (!this.getString(R.string.app_edition).equals("")) {
+			edition = this.getString(R.string.local_index_installed) + " : \t" + this.getString(R.string.app_edition);
+		}
+		tv.setText(vt + version + "\n" +
+				edition + "\n\n" +
+				this.getString(R.string.about_content));
+
+		DisplayMetrics m = new DisplayMetrics();
+
+		WindowManager mgr = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+		mgr.getDefaultDisplay().getMetrics(m);
+		int dp = (int) (5 * m.density);
+		tv.setPadding(3 * dp , dp, 3 * dp, dp);
+		tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
+		if(app.getSettings().isLightContent() ) {
+			tv.setTextColor(Color.BLACK);
+		}
+//		tv.setMovementMethod(LinkMovementMethod.getInstance());
+		ll.addView(tb);
+		ll.addView(sv);
+		dialog.setContentView(ll);
+		dialog.show();
+//		bld.setPositiveButton(R.string.default_buttons_ok, null);
 	}
 
 	

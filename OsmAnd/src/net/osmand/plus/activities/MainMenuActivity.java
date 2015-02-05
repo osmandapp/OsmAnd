@@ -238,34 +238,6 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 		}
 	}
 
-	public static void showAboutDialog(final Activity activity, final OsmandApplication app) {
-		Builder bld = new AlertDialog.Builder(activity);
-		bld.setTitle(R.string.about_settings);
-		ScrollView sv = new ScrollView(activity);
-		TextView tv = new TextView(activity);
-		sv.addView(tv);
-		String version = Version.getFullVersion(app);
-		String vt = activity.getString(R.string.about_version) + "\t";
-		int st = vt.length();
-		String edition = "";
-		if (!activity.getString(R.string.app_edition).equals("")) {
-			edition = activity.getString(R.string.local_index_installed) + " : \t" + activity.getString(R.string.app_edition);
-		}
-		SharedPreferences prefs = app.getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
-
-		tv.setText(vt + version + "\n" +
-				edition + "\n\n" +
-				activity.getString(R.string.about_content));
-
-		tv.setPadding(5, 0, 5, 5);
-		tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
-		tv.setMovementMethod(LinkMovementMethod.getInstance());
-		bld.setView(sv);
-		bld.setPositiveButton(R.string.default_buttons_ok, null);
-		bld.show();
-
-	}
-
 
 	protected boolean initApp(final Activity activity, OsmandApplication app) {
 		final OsmAndAppCustomization appCustomization = app.getAppCustomization();
