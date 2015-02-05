@@ -1914,4 +1914,5 @@
 <string name="plugin_description_title">Descripción</string>
 	<string name="plugin_settings_button_caption">Opciones</string>
 <string name="edit_group">Editar grupo</string>
-    </resources>
+    <string name="plugin_install_needs_network">Necesitas una conexión a Internet para instalar este plugin.</string>
+</resources>
