@@ -12,6 +12,7 @@
 	<net.osmand.plus.activities.search.toolbar.SplitToolbar
 		android:orientation="horizontal"
 		android:id="@+id/bottomControls"
+		android:background="?attr/bottomToolBarColor"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"/>
 </LinearLayout>
