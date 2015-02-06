@@ -1889,4 +1889,5 @@
 <string name="plugin_description_title">Descripció</string>
 	<string name="plugin_settings_button_caption">Configuració</string>
 <string name="edit_group">Edició del grup</string>
-    </resources>
+    <string name="plugin_install_needs_network">Us cal una connexió a internet per instal·lar aquest connector.</string>
+</resources>
