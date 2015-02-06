@@ -548,8 +548,8 @@
   <string name="search_nothing_found">No se encontró nada</string>
   <string name="searching">Buscando…</string>
   <string name="searching_address">Buscando dirección…</string>
-  <string name="search_osm_nominatim">Buscar dirección usando OSM Nominatim</string>
-  <string name="hint_search_online">Busqueda online: Número de casa, calle, ciudad</string>
+  <string name="search_osm_nominatim">Buscar en línea usando OSM Nominatim</string>
+  <string name="hint_search_online">Búsqueda en línea: Número de casa, calle, ciudad</string>
   <string name="search_offline_address">Búsqueda sin conexión</string>
   <string name="search_online_address">Búsqueda en línea</string>
   <string name="max_level_download_tile">Máx. acercamiento con conexión</string>
