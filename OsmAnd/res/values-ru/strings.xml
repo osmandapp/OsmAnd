@@ -1878,4 +1878,5 @@
     <string name="plugin_description_title">Описание</string>
 	<string name="plugin_settings_button_caption">Настройки</string>
 <string name="edit_group">Редактировать группу</string>
-    </resources>
+    <string name="plugin_install_needs_network">Вам необходимо интернет соединение для установки этого плагина.</string>
+</resources>
