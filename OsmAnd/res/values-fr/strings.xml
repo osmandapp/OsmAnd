@@ -1924,4 +1924,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="plugin_settings_button_caption">Paramètres</string>
 <string name="edit_group">Modifier le groupe</string>
     <string name="plugin_install_needs_network">Vous devez être connectés à Internet pour installer ce greffon.</string>
+<string name="enable_plugin2">Activer</string>
+	<string name="disable_plugin2">Désactiver</string>
+	<string name="get_plugin">Récupérer</string>
 </resources>
