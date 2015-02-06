@@ -492,7 +492,7 @@
 	<string name="search_nothing_found">Ingenting funnet</string>
 	<string name="searching">Søker…</string>
 	<string name="searching_address">Søker adresse…</string>
-	<string name="hint_search_online">Husnummer, gate, by</string>
+	<string name="hint_search_online">Nettbasert søk: Husnummer, gate, by</string>
 	<string name="search_offline_address">Offline-søk</string>
 	<string name="search_online_address">Nettbasert søk</string>
 	<string name="max_level_download_tile">Maks. nettbasert zoom</string>
@@ -1192,4 +1192,10 @@
 	<string name="speak_pedestrian">Meld om fotgjengeroverganger</string>
     <string name="rendering_value__name">Standard</string>
 	<string name="rendering_attr_streetLighting_name">Gatebelysning</string>
+    <string name="edit_group">Rediger gruppe</string>
+    <string name="parking_place">Parkeringsplass</string>
+    <string name="points">Punkter</string>
+    <string name="tracks">Spor</string>
+    <string name="my_location">Min posisjon</string>
+    <string name="gps_status">GPS-status</string>
     </resources>
