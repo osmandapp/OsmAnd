@@ -795,14 +795,12 @@ public class OsmandApplication extends Application {
 	}
 
 	public void applyTheme(Context c) {
-		int t = R.style.OsmandLightDarkActionBarTheme;
+		int t = R.style.OsmandDarkTheme;
         boolean mainmenu = c instanceof MainMenuActivity;
 		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME) {
 			t = mainmenu ? R.style.DashboardDarkTheme : R.style.OsmandDarkTheme;
 		} else if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME) {
 			t = mainmenu ? R.style.DashboardLightTheme : R.style.OsmandLightTheme;
-		} else if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_DARK_ACTIONBAR_THEME) {
-			t = R.style.OsmandLightDarkActionBarTheme;
 		}
 		setLanguage(c);
 		c.setTheme(t);

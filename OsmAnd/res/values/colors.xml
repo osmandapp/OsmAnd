@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<color name="expandable_list_item_dark">#292f33</color>
+	<color name="expandable_list_item_light">@color/color_white</color>
+
 	<color name="actionbar_dark_color">#39464d</color>
 	<color name="tool_bar_color_dark">#CC080B0D</color>
 	<color name="actionbar_light_color">#ff8f00</color>

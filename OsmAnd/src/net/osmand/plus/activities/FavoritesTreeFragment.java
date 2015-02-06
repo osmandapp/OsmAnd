@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import android.content.pm.ActivityInfo;
+import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.SearchView;
@@ -200,8 +201,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				getExpandableListView(), false);
 		final AutoCompleteTextView cat = (AutoCompleteTextView) v.findViewById(R.id.Category);
 		final EditText editText = (EditText) v.findViewById(R.id.Name);
+		final EditText editDescr = (EditText) v.findViewById(R.id.descr);
 		builder.setView(v);
 		editText.setText(point.getName());
+		editDescr.setText(point.getDescription());
 		cat.setText(point.getCategory());
 		cat.setThreshold(1);
 		List<FavoriteGroup> gs = helper.getFavoriteGroups();
@@ -215,7 +218,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				boolean edited = helper.editFavouriteName(point, editText.getText().toString().trim(), cat.getText()
-						.toString());
+						.toString(), editDescr.getText().toString());
 				if (edited) {
 					favouritesAdapter.synchronizeGroups();
 				}
@@ -329,7 +332,12 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				favouritesAdapter.setFilterResults(null);
 				favouritesAdapter.synchronizeGroups();
 				favouritesAdapter.notifyDataSetChanged();
-				hideProgressBar();
+				// Needed to hide intermediate progress bar after closing action mode
+				new Handler().postDelayed(new Runnable() {
+					public void run() {
+						hideProgressBar();
+					}
+				}, 100);
 				return true;
 			}
 		});
@@ -700,7 +708,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 							R.layout.expandable_list_item_category_btn, parent, false);
 				fixBackgroundRepeat(row);
 			}
-			adjustIndicator(groupPosition, isExpanded, row);
+			adjustIndicator(groupPosition, isExpanded, row, getMyApplication().getSettings().isLightContent());
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final FavoriteGroup model = getGroup(groupPosition);
 			label.setText(model.name.length() == 0? getString(R.string.favourites_activity) : model.name);

@@ -221,7 +221,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		TextView item = (TextView) row.findViewById(R.id.category_name);
 		item.setText(group.name);
 		item.setLinkTextColor(Color.YELLOW);
-		adjustIndicator(groupPosition, isExpanded, v);
+		adjustIndicator(groupPosition, isExpanded, v, app.getSettings().isLightContent());
 		return row;
 	}
 
