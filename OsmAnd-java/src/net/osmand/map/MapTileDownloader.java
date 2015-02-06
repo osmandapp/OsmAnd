@@ -4,6 +4,8 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
@@ -106,6 +108,18 @@ public class MapTileDownloader {
 		
 		public void setError(boolean error){
 			this.error = error;
+		}
+		
+		public void saveTile(InputStream inputStream) throws IOException {
+			OutputStream stream = null;
+			try {
+				stream = new FileOutputStream(fileToSave);
+				Algorithms.streamCopy(inputStream, stream);
+				stream.flush();
+			} finally {
+				Algorithms.closeStream(inputStream);
+				Algorithms.closeStream(stream);
+			}
 		}
 	}
 	
@@ -218,6 +232,7 @@ public class MapTileDownloader {
 					log.debug("Start downloading tile : " + request.url); //$NON-NLS-1$
 				}
 				long time = System.currentTimeMillis();
+				request.setError(false);
 				try {
 					request.fileToSave.getParentFile().mkdirs();
 					URL url = new URL(request.url);
@@ -226,15 +241,7 @@ public class MapTileDownloader {
 					connection.setConnectTimeout(CONNECTION_TIMEOUT);
 					connection.setReadTimeout(CONNECTION_TIMEOUT);
 					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
-					FileOutputStream stream = null;
-					try {
-						stream = new FileOutputStream(request.fileToSave);
-						Algorithms.streamCopy(inputStream, stream);
-						stream.flush();
-					} finally {
-						Algorithms.closeStream(inputStream);
-						Algorithms.closeStream(stream);
-					}
+					request.saveTile(inputStream);
 					if (log.isDebugEnabled()) {
 						log.debug("Downloading tile : " + request.url + " successfull " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					}

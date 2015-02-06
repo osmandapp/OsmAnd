@@ -1,7 +1,14 @@
 package net.osmand.plus.resources;
 
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -14,6 +21,8 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.BusyIndicator;
+import net.osmand.plus.SQLiteTileSource;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -166,6 +175,30 @@ public class AsyncLoadingThread extends Thread {
 			this.tileSource = source;
 			this.tileId = tileId;
 		}
+		
+		public void saveTile(InputStream inputStream) throws IOException {
+			if(tileSource instanceof SQLiteTileSource){
+				ByteArrayOutputStream stream = null;
+				try {
+					stream = new ByteArrayOutputStream(inputStream.available());
+					Algorithms.streamCopy(inputStream, stream);
+					stream.flush();
+
+					try {
+						((SQLiteTileSource) tileSource).insertImage(xTile, yTile, zoom, stream.toByteArray());
+					} catch (IOException e) {
+						log.warn("Tile x="+xTile +" y="+ yTile+" z="+ zoom+" couldn't be read", e);  //$NON-NLS-1$//$NON-NLS-2$
+					}
+				} finally {
+					Algorithms.closeStream(inputStream);
+					Algorithms.closeStream(stream);
+				}				
+			}
+			else {
+				super.saveTile(inputStream);
+			}
+		}
+
 	}
 
 	protected class MapObjectLoadRequest<T> implements ResultMatcher<T> {
