@@ -1,43 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingBottom="5dp"
-    android:paddingLeft="@dimen/list_content_padding"
-    android:paddingRight="@dimen/list_content_padding"
-    android:paddingTop="5dp">
+			  android:layout_width="fill_parent"
+			  android:layout_height="@dimen/list_item_height"
+			  android:orientation="horizontal"
+			  android:paddingBottom="5dp"
+			  android:paddingLeft="@dimen/list_content_padding"
+			  android:paddingRight="@dimen/list_content_padding"
+			  android:paddingTop="5dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+	<CheckBox
+		android:id="@+id/check_item"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:focusable="false"
+		android:gravity="center_vertical"
+		android:visibility="gone"/>
 
-        <CheckBox
-            android:id="@+id/check_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:focusable="false"
-            android:visibility="gone" />
-    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/favourite_icon"
-        android:layout_width="25dp"
-        android:paddingRight="2dp"
-        android:paddingTop="2dp"
-        android:layout_height="fill_parent" />
+	<ImageView
+		android:id="@+id/favourite_icon"
+		android:layout_width="25dp"
+		android:layout_height="fill_parent"
+		android:paddingRight="2dp"
+		android:paddingTop="2dp"/>
 
-    <TextView
-        android:id="@+id/favourite_label"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="10dp"
-		android:textColor="?android:textColorPrimary"
-        android:layout_height="wrap_content"
-		android:maxLines="1"
+	<TextView
+		android:id="@+id/favourite_label"
+		style="@style/ListText"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginLeft="10dp"
 		android:ellipsize="end"
-		tools:text="@string/lorem_ipsum"
-        style="@style/ListText" />
+		android:maxLines="1"
+		android:textColor="?android:textColorPrimary"
+		tools:text="@string/lorem_ipsum"/>
 
 </LinearLayout>

@@ -1,52 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/list_content_padding"
-    android:paddingRight="@dimen/list_content_padding"
-    android:paddingTop="4dp"
-    android:paddingBottom="4dp">
+			  xmlns:tools="http://schemas.android.com/tools"
+			  android:layout_width="fill_parent"
+			  android:layout_height="@dimen/list_item_height"
+			  android:orientation="horizontal"
+			  android:paddingBottom="4dp"
+			  android:paddingLeft="@dimen/list_content_padding"
+			  android:paddingRight="@dimen/list_content_padding"
+			  android:paddingTop="4dp">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent">
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
 
-            <CheckBox
-                android:id="@+id/check_local_index"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:focusable="false" />
-        </LinearLayout>
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="fill_parent">
 
-        <TextView
-            android:id="@+id/local_index_name"
-            android:gravity="center_vertical"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            style="@style/ListText.Small"/>
+				<CheckBox
+					android:id="@+id/check_local_index"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:focusable="false"
+					android:gravity="center_vertical"/>
+			</LinearLayout>
 
-        <TextView
-            android:id="@+id/local_index_size"
-            android:layout_marginLeft="3dp"
-            android:gravity="right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/ListText.Small"/>
-    </LinearLayout>
+			<TextView
+				android:id="@+id/local_index_name"
+				style="@style/ListText.Small"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:maxLines="1"
+				tools:text="@string/lorem_ipsum"/>
 
-    <TextView
-        android:id="@+id/local_index_descr"
-        android:gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxLines="25"
-        style="@style/ListText.Small"/>
+			<TextView
+				android:id="@+id/local_index_size"
+				style="@style/ListText.Small"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="3dp"
+				android:gravity="right"/>
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/local_index_descr"
+			style="@style/ListText.Small"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:maxLines="25"
+			tools:text="@string/lorem_ipsum"/>
+
+	</LinearLayout>
+
 
 </LinearLayout>
