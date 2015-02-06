@@ -2,6 +2,7 @@ package net.osmand.plus.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -58,46 +59,48 @@ public class PluginActivity extends OsmandActionBarActivity {
 		TextView descriptionView = (TextView)findViewById(R.id.plugin_description);
 		descriptionView.setText(plugin.getDescription());
 
-		final Class<? extends Activity> settingsActivity = plugin.getSettingsActivity();
-		final Button settingsButton = (Button)findViewById(R.id.plugin_settings);
-		if (settingsActivity == null) {
-			settingsButton.setVisibility(View.GONE);
-		} else {
-			settingsButton.setEnabled(plugin.isActive());
-			settingsButton.setVisibility(View.VISIBLE);
-			settingsButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					startActivity(new Intent(PluginActivity.this, settingsActivity));
-				}
-			});
-		}
+		Button settingsButton = (Button)findViewById(R.id.plugin_settings);
+		settingsButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				startActivity(new Intent(PluginActivity.this, plugin.getSettingsActivity()));
+			}
+		});
 
 		CompoundButton enableDisableButton = (CompoundButton)findViewById(
 				R.id.plugin_enable_disable);
-		enableDisableButton.setChecked(plugin.isActive());
 		enableDisableButton.setOnCheckedChangeListener(
 				new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (plugin.isActive() == isChecked) {
-					return;
-				}
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						if (plugin.isActive() == isChecked) {
+							return;
+						}
 
-				boolean ok = OsmandPlugin.enablePlugin((OsmandApplication)getApplication(), plugin,
-						isChecked);
-				settingsButton.setEnabled(isChecked && ok);
+						boolean ok = OsmandPlugin.enablePlugin((OsmandApplication)getApplication(),
+								plugin, isChecked);
+						if (!ok) {
+							return;
+						}
+						updateState();
+					}
+				});
+		Button getButton = (Button)findViewById(R.id.plugin_get);
+		getButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
 			}
 		});
+
+		updateState();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 
-		CompoundButton enableDisableButton = (CompoundButton)findViewById(
-				R.id.plugin_enable_disable);
-		enableDisableButton.setChecked(plugin.isActive());
+		updateState();
 	}
 
 	@Override
@@ -110,5 +113,34 @@ public class PluginActivity extends OsmandActionBarActivity {
 
 		}
 		return false;
+	}
+
+	private void updateState() {
+		CompoundButton enableDisableButton = (CompoundButton)findViewById(
+				R.id.plugin_enable_disable);
+		Button getButton = (Button)findViewById(R.id.plugin_get);
+		Button settingsButton = (Button)findViewById(R.id.plugin_settings);
+		View installHeader = findViewById(R.id.plugin_install_header);
+
+		if (plugin.needsInstallation()) {
+			getButton.setVisibility(View.VISIBLE);
+			enableDisableButton.setVisibility(View.GONE);
+			settingsButton.setVisibility(View.GONE);
+			installHeader.setVisibility(View.VISIBLE);
+		} else {
+			getButton.setVisibility(View.GONE);
+			enableDisableButton.setVisibility(View.VISIBLE);
+			enableDisableButton.setChecked(plugin.isActive());
+
+			final Class<? extends Activity> settingsActivity = plugin.getSettingsActivity();
+			if (settingsActivity == null) {
+				settingsButton.setVisibility(View.GONE);
+			} else {
+				settingsButton.setEnabled(plugin.isActive());
+				settingsButton.setVisibility(View.VISIBLE);
+			}
+
+			installHeader.setVisibility(View.GONE);
+		}
 	}
 }

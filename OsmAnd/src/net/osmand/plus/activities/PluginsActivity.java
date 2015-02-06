@@ -128,8 +128,8 @@ public class PluginsActivity extends OsmandListActivity {
 		final PopupMenu optionsMenu = new PopupMenu(this, v);
 
 		MenuItem enableDisableItem = optionsMenu.getMenu().add(plugin.isActive()
-				? R.string.disable_plugin
-				: R.string.enable_plugin);
+				? R.string.disable_plugin2
+				: R.string.enable_plugin2);
 		enableDisableItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

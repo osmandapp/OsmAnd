@@ -35,7 +35,7 @@
             android:id="@+id/check_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_action_settings_dark"
+            android:src="@drawable/ic_action_settings_enabled_dark"
             android:focusable="false"
             android:gravity="center_vertical" />
 

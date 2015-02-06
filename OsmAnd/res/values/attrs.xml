@@ -27,8 +27,9 @@
 		<attr name="switch_ex_text_color" format="color|reference" />
 		<attr name="bg_plugin_logo_disabled" format="reference" />
 		<attr name="plugin_details_header_bg" format="color|reference" />
-		<attr name="plugin_details_header2_bg" format="color|reference" />
+		<attr name="plugin_details_install_header_bg" format="color|reference" />
 		<attr name="ic_world_globe" format="reference" />
+		<attr name="plugin_description_header_text_color" format="color|reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

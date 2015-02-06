@@ -533,8 +533,8 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			} else if(model.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
 				ch.setVisibility(View.VISIBLE);
 				ch.setImageDrawable(getMyActivity().getResources().getDrawable(
-						app.getSettings().isLightContent() ? R.drawable.ic_action_settings_light
-								: R.drawable.ic_action_settings_dark));
+						app.getSettings().isLightContent() ? R.drawable.ic_action_settings_enabled_light
+								: R.drawable.ic_action_settings_enabled_dark));
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
