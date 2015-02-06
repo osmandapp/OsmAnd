@@ -708,7 +708,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 							R.layout.expandable_list_item_category_btn, parent, false);
 				fixBackgroundRepeat(row);
 			}
-			adjustIndicator(groupPosition, isExpanded, row);
+			adjustIndicator(groupPosition, isExpanded, row, getMyApplication().getSettings().isLightContent());
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final FavoriteGroup model = getGroup(groupPosition);
 			label.setText(model.name.length() == 0? getString(R.string.favourites_activity) : model.name);

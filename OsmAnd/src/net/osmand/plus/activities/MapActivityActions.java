@@ -131,12 +131,9 @@ public class MapActivityActions implements DialogProvider {
     private Dialog createAddWaypointDialog(final Bundle args) {
     	Builder builder = new AlertDialog.Builder(mapActivity);
 		builder.setTitle(R.string.add_waypoint_dialog_title);
-		FrameLayout parent = new FrameLayout(mapActivity);
-		final EditText editText = new EditText(mapActivity);
-		editText.setId(android.R.id.edit);
-		parent.setPadding(15, 0, 15, 0);
-		parent.addView(editText);
-		builder.setView(parent);
+		View view = mapActivity.getLayoutInflater().inflate(R.layout.add_gpx_point_dialog, null);
+		final EditText editText = (EditText) view.findViewById(android.R.id.edit);
+		builder.setView(view);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override

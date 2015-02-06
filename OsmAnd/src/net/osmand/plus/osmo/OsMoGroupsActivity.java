@@ -1142,8 +1142,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				row = inflater.inflate(R.layout.osmo_group_item, parent, false);
 				//fixBackgroundRepeat(row);
 			}
-			
-			adjustIndicator(groupPosition, isExpanded, row);
+			boolean light = getMyApplication().getSettings().isLightContent();
+			adjustIndicator(groupPosition, isExpanded, row, light);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final OsMoGroup model = getGroup(groupPosition);
 			if(selectedObject == model) {
@@ -1161,7 +1161,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			if(model.isMainGroup()) {
 				v.setVisibility(View.GONE);
 			} else {
-				if (getMyApplication().getSettings().isLightContent()){
+				if (light){
 					v.setImageResource(R.drawable.ic_action_settings_enabled_light);
 				} else {
 					v.setImageResource(R.drawable.ic_action_settings_enabled_dark);

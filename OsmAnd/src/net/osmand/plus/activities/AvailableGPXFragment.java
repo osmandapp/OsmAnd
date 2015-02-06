@@ -783,7 +783,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				v = inflater.inflate(net.osmand.plus.R.layout.expandable_list_item_category, parent, false);
 			}
 			StringBuilder t = new StringBuilder(group);
-			adjustIndicator(groupPosition, isExpanded, v);
+			adjustIndicator(groupPosition, isExpanded, v, getMyApplication().getSettings().isLightContent());
 			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
 			List<GpxInfo> list = data.get(group);
 			int size = 0;
