@@ -438,7 +438,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						device != null && device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				///
 				if (device != null) {
-					createMenuItem(menu, SETTINGS_DEV_ID, R.string.settings, R.drawable.ic_action_settings_light, R.drawable.ic_action_settings_dark,
+					createMenuItem(menu, SETTINGS_DEV_ID, R.string.settings, R.drawable.ic_action_settings_enabled_light, R.drawable.ic_action_settings_enabled_dark,
 							// there is a bug in Android 4.2 layout
 							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER : MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				}
@@ -963,7 +963,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				R.drawable.ic_action_plus_dark, R.drawable.ic_action_plus_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, SETTINGS_ID, R.string.settings, 
-				R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_dark,
+				R.drawable.ic_action_settings_enabled_dark, R.drawable.ic_action_settings_enabled_dark,
 				MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -1162,9 +1162,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				v.setVisibility(View.GONE);
 			} else {
 				if (getMyApplication().getSettings().isLightContent()){
-					v.setImageResource(R.drawable.ic_action_settings_light);
+					v.setImageResource(R.drawable.ic_action_settings_enabled_light);
 				} else {
-					v.setImageResource(R.drawable.ic_action_settings_dark);
+					v.setImageResource(R.drawable.ic_action_settings_enabled_dark);
 				}
 				v.setVisibility(View.VISIBLE);
 				v.setOnClickListener(new View.OnClickListener() {

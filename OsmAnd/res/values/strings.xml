@@ -2085,9 +2085,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_camera_pic_size_descr">Select internal camera Picture Size</string>
     <string name="navigation_intent_invalid">Invalid format: %s</string>
     <string name="hide_all_waypoints">Remove all</string>
-	<string name="enable_plugin">Enable</string>
-	<string name="disable_plugin">Disable</string>
+	<string name="enable_plugin">Disabled</string>
+	<string name="disable_plugin">Enabled</string>
+	<string name="enable_plugin2">Enable</string>
+	<string name="disable_plugin2">Disable</string>
 	<string name="plugin_description_title">Description</string>
 	<string name="plugin_settings_button_caption">Settings</string>
 	<string name="plugin_install_needs_network">You need an Internet connection to install this plugin.</string>
+	<string name="get_plugin">Get</string>
 </resources>

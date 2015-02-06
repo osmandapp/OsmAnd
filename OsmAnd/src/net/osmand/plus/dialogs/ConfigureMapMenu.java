@@ -29,7 +29,6 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
-import android.preference.PreferenceGroup;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -65,7 +64,7 @@ public class ConfigureMapMenu {
 
 		createLayersItems(adapter, ma);
 		if (!advanced){
-			adapter.item(R.string.btn_advanced_mode).icons(R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_light)
+			adapter.item(R.string.btn_advanced_mode).icons(R.drawable.ic_action_settings_enabled_dark, R.drawable.ic_action_settings_enabled_light)
 					.selected(advanced ? 1 : 0)
 					.listen(new OnContextMenuClick() {
 						@Override
