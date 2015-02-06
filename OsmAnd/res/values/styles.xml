@@ -160,6 +160,7 @@
 		<item name="plugin_details_install_header_bg">@color/plugin_details_install_header_bg_light</item>
 		<item name="ic_world_globe">@drawable/ic_world_globe_light</item>
 		<item name="plugin_description_header_text_color">#727272</item>
+		<item name="expandable_list_item_background">@color/expandable_list_item_light</item>
 	</style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -197,6 +198,7 @@
 		<item name="plugin_details_install_header_bg">@color/plugin_details_install_header_bg_dark</item>
 		<item name="ic_world_globe">@drawable/ic_world_globe_dark</item>
 		<item name="plugin_description_header_text_color">#70818c</item>
+		<item name="expandable_list_item_background">@color/expandable_list_item_dark</item>
     </style>
 
     <style name="Widget.Styled.ActionBarDark" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">

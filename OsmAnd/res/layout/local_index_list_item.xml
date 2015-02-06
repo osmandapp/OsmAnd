@@ -7,6 +7,7 @@
 			  android:paddingBottom="4dp"
 			  android:paddingLeft="@dimen/list_content_padding"
 			  android:paddingRight="@dimen/list_content_padding"
+			  android:background="?attr/expandable_list_item_background"
 			  android:paddingTop="4dp">
 
 	<LinearLayout

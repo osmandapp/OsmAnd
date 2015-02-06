@@ -7,6 +7,7 @@
 			  android:paddingBottom="5dp"
 			  android:paddingLeft="@dimen/list_content_padding"
 			  android:paddingRight="@dimen/list_content_padding"
+			  android:background="?attr/expandable_list_item_background"
 			  android:paddingTop="5dp">
 
 	<CheckBox
