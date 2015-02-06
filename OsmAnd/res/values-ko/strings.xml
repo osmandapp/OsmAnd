@@ -2135,4 +2135,5 @@
 <string name="plugin_description_title">설명</string>
 	<string name="plugin_settings_button_caption">설정</string>
 <string name="edit_group">그룹 편집</string>
-    </resources>
+    <string name="plugin_install_needs_network">이 플러그인을 설치 하려면 인터넷에 연결을 해야 합니다.</string>
+</resources>
