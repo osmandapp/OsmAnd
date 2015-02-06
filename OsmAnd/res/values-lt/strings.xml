@@ -216,7 +216,7 @@
   <string name="live_monitoring_interval">Tiesioginio sekimo intervalas</string>
   <string name="live_monitoring_url_descr">Nurodykite interneto adresą su tokia parametrų sintakse : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Tiesioginio sekimo tarnybos interneto adresas</string>
-  <string name="gpx_monitoring_disabled_warn">Turite įjungti \'Išsaugoti kelionės istoriją į GPX\' sekimo nustatymą.</string>
+  <string name="gpx_monitoring_disabled_warn">Įrašyti kelionę naudojant GPX valdiklį arba per \'Išsaugoti kelionės istoriją\' nustatymą.</string>
   <string name="show_current_gpx_title">Rodyti dabartinės kelionės istoriją</string>
   <string name="tip_recent_changes_0_7_0_t">Pakeitimai 0.7.0 versijoje :
 		\n\t- Įrenginyje išsaugomi Wikipedia straipsniai
@@ -1906,10 +1906,13 @@
 	<string name="proxy_port_title">Proksi serverio portas</string>
 	<string name="proxy_port_descr">Nurodykite jūsų proksi serverio porto numerį (pvz., 8118)</string>
 	<string name="enable_proxy_descr">"Konfigūruoti  HTTP proksi serverį visoms tinklo užklausoms"</string>
-	<string name="enable_plugin">Įjungti</string>
-	<string name="disable_plugin">Išjungti</string>
+	<string name="enable_plugin">Išjungta</string>
+	<string name="disable_plugin">Įjungta</string>
 <string name="plugin_description_title">Aprašymas</string>
 	<string name="plugin_settings_button_caption">Nustatymai</string>
 <string name="edit_group">Redaguoti grupę</string>
     <string name="plugin_install_needs_network">Prisijunkite prie interneto, jei norite įdiegti šį priedą.</string>
+<string name="enable_plugin2">Įjungti</string>
+	<string name="disable_plugin2">Išjungti</string>
+	<string name="get_plugin">Gauti</string>
 </resources>

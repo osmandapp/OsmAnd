@@ -1918,10 +1918,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="gps_status">Statut GPS</string>
     <string name="parking_place">Place de stationnement</string>
     <string name="remove_the_tag">Retirer l\'étiquette</string>
-    <string name="enable_plugin">Activer</string>
-	<string name="disable_plugin">Désactiver</string>
+    <string name="enable_plugin">Désactiver</string>
+	<string name="disable_plugin">Activer</string>
 <string name="plugin_description_title">Description</string>
 	<string name="plugin_settings_button_caption">Paramètres</string>
 <string name="edit_group">Modifier le groupe</string>
     <string name="plugin_install_needs_network">Vous devez être connectés à Internet pour installer ce greffon.</string>
+<string name="enable_plugin2">Activer</string>
+	<string name="disable_plugin2">Désactiver</string>
+	<string name="get_plugin">Récupérer</string>
 </resources>
