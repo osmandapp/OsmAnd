@@ -12,6 +12,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -19,6 +20,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import bsh.Interpreter;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,14 +35,16 @@ public class SQLiteTileSource implements ITileSource {
 	private ITileSource base;
 	private String urlTemplate = null;
 	private String name;
-	private SQLiteConnection db;
+	private SQLiteConnection db = null;
 	private final File file;
 	private int minZoom = 1;
 	private int maxZoom = 17; 
 	private boolean inversiveZoom = true; // BigPlanet
 	private boolean timeSupported = false;
 	private int expirationTimeMillis = -1; // never
-
+	private boolean isEllipsoid = false;
+	private String rule = null;
+	
 	static final int tileSize = 256;
 	private OsmandApplication ctx;
 	private boolean onlyReadonlyAvailable = false;
@@ -100,6 +104,7 @@ public class SQLiteTileSource implements ITileSource {
 		return base != null ? base.getTileSize() : tileSize;
 	}
 
+	Interpreter bshInterpreter = null;
 	@Override
 	public String getUrlToLoad(int x, int y, int zoom) {
 		if (zoom > maxZoom)
@@ -108,7 +113,22 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null || db.isReadOnly() || urlTemplate == null){
 			return null;
 		}
-		return MessageFormat.format(urlTemplate, zoom+"", x+"", y+"");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+
+		if(TileSourceManager.RULE_BEANSHELL.equalsIgnoreCase(rule)){
+			try {
+				if(bshInterpreter == null){
+					bshInterpreter = new Interpreter();
+					bshInterpreter.eval(urlTemplate);
+				}
+				return (String) bshInterpreter.eval("getTileUrl("+zoom+","+x+","+y+");");
+			} catch (bsh.EvalError e) {
+				log.error(e.getMessage(), e);
+				return null;
+			}
+		}
+		else {
+			return MessageFormat.format(urlTemplate, zoom+"", x+"", y+"");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+		}
 	}
 
 	@Override
@@ -160,8 +180,13 @@ public class SQLiteTileSource implements ITileSource {
 					if(url != -1) {
 						String template = cursor.getString(url);
 						if(!Algorithms.isEmpty(template)){
-							urlTemplate = template;
+							//urlTemplate = template;
+							urlTemplate = TileSourceTemplate.normalizeUrl(template);
 						}
+					}
+					int ruleId = list.indexOf("rule");
+					if(ruleId != -1) {
+						rule = cursor.getString(ruleId);
 					}
 					int tnumbering = list.indexOf("tilenumbering");
 					if(tnumbering != -1) {
@@ -186,6 +211,13 @@ public class SQLiteTileSource implements ITileSource {
 						}
 					} else {
 						addInfoColumn("expireminutes", "0");
+					}
+					int ellipsoid = list.indexOf("ellipsoid");
+					if(ellipsoid != -1) {
+						int set = (int) cursor.getInt(ellipsoid);
+						if(set == 1){
+							this.isEllipsoid = true;
+						}
 					}
 					//boolean inversiveInfoZoom = tnumbering != -1 && "BigPlanet".equals(cursor.getString(tnumbering));
 					boolean inversiveInfoZoom = inversiveZoom;
@@ -363,18 +395,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	private static final int BUF_SIZE = 1024;
 	
-	/**
-	 * Makes method synchronized to give a little more time for get methods and 
-	 * let all writing attempts to wait outside of this method   
-	 */
-	public synchronized void insertImage(int x, int y, int zoom, File fileToSave) throws IOException {
-		SQLiteConnection db = getDatabase();
-		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
-			return;
-		}
-		if (exists(x, y, zoom)) {
-			return;
-		}
+	public void insertImage(int x, int y, int zoom, File fileToSave) throws IOException {
 		ByteBuffer buf = ByteBuffer.allocate((int) fileToSave.length());
 		FileInputStream is = new FileInputStream(fileToSave);
 		int i = 0;
@@ -383,21 +404,35 @@ public class SQLiteTileSource implements ITileSource {
 			buf.put(b, 0, i);
 		}
 
+		insertImage(x, y, zoom, buf.array());
+		is.close();
+	}
+	/**
+	 * Makes method synchronized to give a little more time for get methods and 
+	 * let all writing attempts to wait outside of this method   
+	 */
+	public /*synchronized*/ void insertImage(int x, int y, int zoom, byte[] dataToSave) throws IOException {
+		SQLiteConnection db = getDatabase();
+		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
+			return;
+		}
+		/*if (exists(x, y, zoom)) {
+			return;
+		}*/
 		
-		String query = timeSupported ? "INSERT INTO tiles(x,y,z,s,image,time) VALUES(?, ?, ?, ?, ?, ?)"
-				: "INSERT INTO tiles(x,y,z,s,image) VALUES(?, ?, ?, ?, ?)";
+		String query = timeSupported ? "INSERT OR REPLACE INTO tiles(x,y,z,s,image,time) VALUES(?, ?, ?, ?, ?, ?)"
+				: "INSERT OR REPLACE INTO tiles(x,y,z,s,image) VALUES(?, ?, ?, ?, ?)";
 		net.osmand.plus.api.SQLiteAPI.SQLiteStatement statement = db.compileStatement(query); //$NON-NLS-1$
 		statement.bindLong(1, x);
 		statement.bindLong(2, y);
 		statement.bindLong(3, getFileZoom(zoom));
 		statement.bindLong(4, 0);
-		statement.bindBlob(5, buf.array());
+		statement.bindBlob(5, dataToSave);
 		if (timeSupported) {
 			statement.bindLong(6, System.currentTimeMillis());
 		}
 		statement.execute();
 		statement.close();
-		is.close();
 
 	}
 
@@ -406,6 +441,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 	
 	public void closeDB(){
+		bshInterpreter = null;
 		if(db != null){
 			db.close();
 			db = null;
@@ -422,7 +458,8 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public boolean isEllipticYTile() {
-		return false;
+		return this.isEllipsoid;
+		//return false;
 	}
 
 	public int getExpirationTimeMinutes() {
