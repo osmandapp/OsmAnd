@@ -1792,10 +1792,13 @@
     <string name="tracks">Spår</string>
     <string name="my_location">Min plats</string>
     <string name="osm_editing_manage">Hantera</string>
-    <string name="enable_plugin">Aktivera</string>
-	<string name="disable_plugin">Inaktivera</string>
+    <string name="enable_plugin">Inaktiverad</string>
+	<string name="disable_plugin">Aktiverad</string>
 <string name="plugin_settings_button_caption">Inställningar</string>
 <string name="plugin_description_title">Beskrivning</string>
 	<string name="edit_group">Redigera grupp</string>
     <string name="plugin_install_needs_network">En Internetuppkoppling krävs för att installera denna modul.</string>
+<string name="enable_plugin2">Aktivera</string>
+	<string name="disable_plugin2">Inaktivera</string>
+	<string name="get_plugin">Hämta</string>
 </resources>
