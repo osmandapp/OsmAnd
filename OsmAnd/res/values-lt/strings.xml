@@ -1912,4 +1912,7 @@
 	<string name="plugin_settings_button_caption">Nustatymai</string>
 <string name="edit_group">Redaguoti grupę</string>
     <string name="plugin_install_needs_network">Prisijunkite prie interneto, jei norite įdiegti šį priedą.</string>
+<string name="enable_plugin2">Įjungti</string>
+	<string name="disable_plugin2">Išjungti</string>
+	<string name="get_plugin">Gauti</string>
 </resources>
