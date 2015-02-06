@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+	android:id="@+id/dash_plugin_item"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
@@ -17,12 +18,12 @@
 		android:layout_height="54dp"
 		android:orientation="horizontal">
 
-		<ImageView
+		<ImageButton
 			android:id="@+id/plugin_logo"
 			android:layout_width="32dp"
 			android:layout_height="32dp"
 			android:layout_margin="11dp"
-			android:background="@drawable/bg_plugin_logo"
+			android:background="@drawable/bg_plugin_logo_enabled"
 			android:scaleType="center"
 			tools:src="@drawable/ic_extension_dark"/>
 
@@ -41,29 +42,56 @@
 			osmand:typeface="@string/font_roboto_regular"
 			tools:text="@string/lorem_ipsum"/>
 
-		<net.osmand.plus.widgets.SwitchEx
-			android:id="@+id/check_item"
-			android:layout_width="wrap_content"
+		<FrameLayout
+			android:layout_width="90dp"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
-			android:layout_marginTop="6dp"
 			android:layout_marginBottom="6dp"
-			android:layout_marginLeft="6dp"
-			android:layout_marginStart="6dp"
-			android:layout_marginRight="16dp"
 			android:layout_marginEnd="16dp"
-			android:background="@drawable/switch_ex_background"
-			android:minHeight="0dp"
-			android:minWidth="0dp"
-			android:paddingTop="8dp"
-			android:paddingBottom="8dp"
-			android:paddingLeft="9.5dp"
-			android:paddingRight="9.5dp"
-			osmand:textAllCapsCompat="true"
-			android:textColor="@color/switch_ex_text_color"
-			android:textOff="@string/enable_plugin"
-			android:textOn="@string/disable_plugin"
-			android:textSize="12sp"
-			osmand:typeface="@string/font_roboto_medium"/>
+			android:layout_marginLeft="6dp"
+			android:layout_marginRight="16dp"
+			android:layout_marginStart="6dp"
+			android:layout_marginTop="6dp">
+
+			<net.osmand.plus.widgets.SwitchEx
+				android:id="@+id/plugin_enable_disable"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/switch_ex_background"
+				android:minHeight="0dp"
+				android:paddingBottom="8dp"
+				android:paddingLeft="9.5dp"
+				android:paddingRight="9.5dp"
+				android:paddingTop="8dp"
+				android:textColor="?attr/switch_ex_text_color"
+				android:textOff="@string/enable_plugin"
+				android:textOn="@string/disable_plugin"
+				android:textSize="12sp"
+				android:lines="1"
+				android:maxLines="1"
+				android:ellipsize="end"
+				osmand:textAllCapsCompat="true"
+				osmand:typeface="@string/font_roboto_medium"/>
+
+			<net.osmand.plus.widgets.ButtonEx
+				android:id="@+id/get_plugin"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@drawable/get_button_background"
+				android:minHeight="0dp"
+				android:paddingBottom="8dp"
+				android:paddingLeft="9.5dp"
+				android:paddingRight="9.5dp"
+				android:paddingTop="8dp"
+				android:textColor="@color/get_button_text"
+				android:text="@string/get_plugin"
+				android:textSize="12sp"
+				android:lines="1"
+				android:maxLines="1"
+				android:ellipsize="end"
+				osmand:textAllCapsCompat="true"
+				osmand:typeface="@string/font_roboto_medium"/>
+		</FrameLayout>
+
 	</LinearLayout>
 </LinearLayout>

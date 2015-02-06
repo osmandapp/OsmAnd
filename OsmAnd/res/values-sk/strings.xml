@@ -2056,4 +2056,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 <string name="edit_group">Upraviť skupinu</string>
     <string name="plugin_description_title">Popis</string>
 	<string name="plugin_settings_button_caption">Nastavenia</string>
+<string name="plugin_install_needs_network">Pre nainštalovanie tohto doplnku potrebujete pripojenie na Internet.</string>
 </resources>

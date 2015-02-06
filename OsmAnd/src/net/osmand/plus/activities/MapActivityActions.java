@@ -31,10 +31,8 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.activities.actions.ShareLocation;
-import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
@@ -889,7 +887,7 @@ public class MapActivityActions implements DialogProvider {
 			}).reg();
 
 		optionsMenuHelper.item(R.string.settings_activity)
-		.icons(R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_light)
+		.icons(R.drawable.ic_action_settings_enabled_dark, R.drawable.ic_action_settings_enabled_light)
 		.listen(new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

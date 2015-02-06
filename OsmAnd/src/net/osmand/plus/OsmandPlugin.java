@@ -73,12 +73,16 @@ public abstract class OsmandPlugin {
 		return active;
 	}
 	
-	public boolean couldBeActivated() {
+	public boolean needsInstallation() {
 		return installURL != null;
 	}
 	
 	public void setInstallURL(String installURL) {
 		this.installURL = installURL;
+	}
+
+	public String getInstallURL() {
+		return installURL;
 	}
 	
 	public void disable(OsmandApplication app) {};
@@ -208,10 +212,20 @@ public abstract class OsmandPlugin {
 		return allPlugins;
 	}
 	
-	public static Iterable<OsmandPlugin> getEnabledPlugins(){
+	public static List<OsmandPlugin> getEnabledPlugins(){
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for(OsmandPlugin p : allPlugins) {
 			if(p.isActive()) {
+				lst.add(p);
+			}
+		}
+		return lst;
+	}
+
+	public static List<OsmandPlugin> getNotEnabledPlugins(){
+		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		for(OsmandPlugin p : allPlugins) {
+			if(!p.isActive()) {
 				lst.add(p);
 			}
 		}

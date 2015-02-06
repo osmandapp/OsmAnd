@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
@@ -1824,4 +1824,58 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="int_hour">h</string>
     <string name="duration">Duração</string>
     <string name="distance">Distância</string>
-    </resources>
+    <string name="gps_status">Status do GPS</string>
+    <string name="proxy_pref_title">Proxy</string>
+    <string name="settings_privacy">Privacidade</string>
+    <string name="points">Pontos</string>
+    <string name="my_location">Meus locais</string>
+    <string name="recents">RECENTES</string>
+	<string name="avoid_roads_msg">Você pode inciar rotas alternativas selecionando estradas a serem evitadas</string>
+    <string name="rendering_value__name">Padrão</string>
+	<string name="speak_pedestrian">Anunciar faixas de pedestre</string>
+    <string name="rendering_attr_roadStyle_name">Estilo de estrada</string>
+    <string name="rendering_value_default_name">Padrão</string>
+    <string name="rendering_value_orange_name">Laranja</string>
+    <string name="rendering_value_germanRoadAtlas_name">Atlas de rodovias alemãs</string>
+	<string name="traffic_warning_railways">Cruzamento de ferrovia</string>
+	<string name="traffic_warning_pedestrian">Cruzamento de faixa de pedestre</string>
+	<string name="show_railway_warnings">Exibir cruzamento de ferrovia</string>
+	<string name="show_pedestrian_warnings">Exibir faixas de pedestre</string>
+    <string name="rendering_value_americanRoadAtlas_name">Atlas de rodovias americanas</string>
+    <string name="routing_attr_no_new_routing_name">Regras de roteamento No v1.9</string>
+    <string name="remove_the_tag">REMOVA A TAG</string>
+    <string name="routing_attr_no_new_routing_description">Não use as regras de roteamento introduzidas na versão 1.9</string>
+    <string name="dash_download_msg_none">Deseja baixar mapas offline?</string>
+    <string name="dash_download_msg">Você baixou %1$s mapas</string>
+    <string name="dash_download_new_one">Baixe um novo mapa</string>
+    <string name="map_locale">Idioma do mapa</string>
+    <string name="navigate_point_zone">Zona</string>
+    <string name="download_tab_downloads">Todos os Downloads</string>
+    <string name="download_tab_updates">Atualizações</string>
+    <string name="download_tab_local">Local</string>
+	<string name="no_internet_connection">Download não é possível, por favor, verifique sua conexão com a internet.</string>
+    <string name="everything_up_to_date">Todos os arquivos foram atualizados</string>
+    <string name="use_opengl_render">Use o renderizador OpenGL</string>
+    <string name="home_button">Inicio</string>
+    <string name="osmo_use_https">Use HTTPS</string>
+	<string name="advanced_settings">Avançado</string>
+	<string name="map_update">Atualizações disponives para %1$s mapas</string>
+	<string name="search_for">Procurar por</string>
+	<string name="show_map">EXIBIR MAPA</string>
+	<string name="show_all">EXIBIR TODOS</string>
+	<string name="coordinates">Coordenadas</string>
+	<string name="rendering_attr_subwayMode_name">Rodas de metrô</string>
+    <string name="lock_screen_request_explanation">%1$s precisa dessa permissão para desligar a tela para economizar energia.</string>
+    <string name="wake_on_voice_never">Nunca</string>
+    <string name="select_impassable_road">Selecione o mapa…</string>
+    <string name="impassable_road">Evitar estradas…</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Rota de trem</string>
+    <string name="rendering_attr_tramRoutes_name">Rota de bonde</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Compartilhar rota de taxi</string>
+    <string name="rendering_attr_busRoutes_name">Rotas de onibus</string>
+    <string name="rendering_category_hide">Esconder</string>
+    <string name="rendering_category_routes">Rotas</string>
+    <string name="rendering_category_details">Detalhes</string>
+    <string name="map_widget_appearance_rem">Elementos restantes</string>
+    <string name="plugin_install_needs_network">Você precisa de uma conexão com a internet para instalar este plugin.</string>
+</resources>

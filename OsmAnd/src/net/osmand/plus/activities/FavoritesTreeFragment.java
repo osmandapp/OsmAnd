@@ -29,7 +29,6 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -739,8 +738,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				final ImageView ch = (ImageView) row.findViewById(R.id.check_item);
 				ch.setVisibility(View.VISIBLE);
 				ch.setImageDrawable(getActivity().getResources().getDrawable(
-						getMyApplication().getSettings().isLightContent() ? R.drawable.ic_action_settings_light
-								: R.drawable.ic_action_settings_dark));
+						getMyApplication().getSettings().isLightContent() ? R.drawable.ic_action_settings_enabled_light
+								: R.drawable.ic_action_settings_enabled_dark));
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {

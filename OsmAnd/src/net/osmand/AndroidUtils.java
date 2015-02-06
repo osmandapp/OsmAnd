@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.view.ViewParent;
 import android.view.inputmethod.InputMethodManager;
 
 public class AndroidUtils {
@@ -48,5 +49,19 @@ public class AndroidUtils {
 	
 	public static String formatTime(Context ctx, long time) {
 		return DateFormat.getTimeFormat(ctx).format(new Date(time));
+	}
+
+	public static View findParentViewById(View view, int id) {
+		ViewParent viewParent = view.getParent();
+
+		while (viewParent != null && viewParent instanceof View) {
+			View parentView = (View)viewParent;
+			if (parentView.getId() == id)
+				return parentView;
+
+			viewParent = parentView.getParent();
+		}
+
+		return null;
 	}
 }
