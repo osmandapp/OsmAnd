@@ -522,7 +522,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			if(isArgumentTrue(ARG_TO_EXPAND_TRACK_INFO)) {
 				row.findViewById(R.id.explist_indicator).setVisibility(View.GONE);
 			} else {
-				adjustIndicator(groupPosition, isExpanded, row);
+				adjustIndicator(groupPosition, isExpanded, row, app.getSettings().isLightContent());
 			}
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final GpxDisplayGroup model = getGroup(groupPosition);

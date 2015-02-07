@@ -30,6 +30,7 @@
 		<attr name="plugin_details_install_header_bg" format="color|reference" />
 		<attr name="ic_world_globe" format="reference" />
 		<attr name="plugin_description_header_text_color" format="color|reference" />
+		<attr name="expandable_list_item_background" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
