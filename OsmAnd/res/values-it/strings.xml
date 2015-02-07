@@ -2073,4 +2073,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="plugin_settings_button_caption">Impostazioni</string>
 <string name="edit_group">Modifica il gruppo</string>
     <string name="plugin_install_needs_network">È necessario la connessione a internet per installare questo componente aggiuntivo.</string>
+<string name="enable_plugin2">Attiva</string>
+	<string name="disable_plugin2">Disattiva</string>
+	<string name="get_plugin">Ottieni</string>
 </resources>
