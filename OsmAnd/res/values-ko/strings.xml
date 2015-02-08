@@ -2130,10 +2130,13 @@
     <string name="gps_status">GPS status</string>
     <string name="parking_place">주차장</string>
     <string name="remove_the_tag">태그를 제거</string>
-    <string name="enable_plugin">사용가능</string>
-	<string name="disable_plugin">사용안함</string>
+    <string name="enable_plugin">비활성화됨</string>
+	<string name="disable_plugin">활성화됨</string>
 <string name="plugin_description_title">설명</string>
 	<string name="plugin_settings_button_caption">설정</string>
 <string name="edit_group">그룹 편집</string>
     <string name="plugin_install_needs_network">이 플러그인을 설치 하려면 인터넷에 연결을 해야 합니다.</string>
+<string name="enable_plugin2">활성화</string>
+	<string name="disable_plugin2">비활성화</string>
+	<string name="get_plugin">가져오기</string>
 </resources>

@@ -850,7 +850,7 @@
 	<string name="searching">Αναζήτηση…</string>
 	<string name="searching_address">Αναζήτηση διεύθυνσης…</string>
 	<string name="search_osm_nominatim">Αναζήτηση διεύθυνσης χρησιμοποιώντας το OSM Nominatim</string>
-	<string name="hint_search_online">Αριθμός σπιτιού, οδός, πόλη</string>
+	<string name="hint_search_online">Online αναζήτηση: Αριθμός σπιτιού, οδός, πόλη</string>
 	<string name="search_offline_address">Χωρίς σύνδεση</string>
 	<string name="search_online_address">Διαδίκτυο</string>
 	<string name="max_level_download_tile">Μεγ. online κλίμακα</string>
@@ -1703,4 +1703,9 @@
     <string name="my_location">Η τοποθεσία μου</string>
     <string name="recents">ΠΡΟΣΦΑΤΑ</string>
 	<string name="navigation_over_track">Έναρξη πλοήγησης βάσει ίχνους;</string>
+	<string name="edit_group">Επεξεργασία ομάδας</string>
+    <string name="remove_the_tag">ΑΦΑΙΡΕΣΗ ΕΤΙΚΕΤΑΣ</string>
+    <string name="proxy_pref_title">Διαμεσολαβητής</string>
+    <string name="osm_editing_manage">Διαχείριση</string>
+    <string name="rendering_value__name">Προκαθορισμένο</string>
 	</resources>

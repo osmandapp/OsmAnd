@@ -40,6 +40,7 @@ public class SQLiteTileSource implements ITileSource {
 	private boolean inversiveZoom = true; // BigPlanet
 	private boolean timeSupported = false;
 	private int expirationTimeMillis = -1; // never
+	private boolean isEllipsoid = false;
 
 	static final int tileSize = 256;
 	private OsmandApplication ctx;
@@ -186,6 +187,13 @@ public class SQLiteTileSource implements ITileSource {
 						}
 					} else {
 						addInfoColumn("expireminutes", "0");
+					}
+					int ellipsoid = list.indexOf("ellipsoid");
+					if(ellipsoid != -1) {
+						int set = (int) cursor.getInt(ellipsoid);
+						if(set == 1){
+							this.isEllipsoid = true;
+						}
 					}
 					//boolean inversiveInfoZoom = tnumbering != -1 && "BigPlanet".equals(cursor.getString(tnumbering));
 					boolean inversiveInfoZoom = inversiveZoom;
@@ -422,7 +430,8 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public boolean isEllipticYTile() {
-		return false;
+		return this.isEllipsoid;
+		//return false;
 	}
 
 	public int getExpirationTimeMinutes() {

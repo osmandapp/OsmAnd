@@ -56,7 +56,7 @@
     <string name="index_name_gb">Europa - Britannia Manna</string>
     <string name="calculate_osmand_route_without_internet">Càlcula un\'àndala cun OsmAnd sena impreare internet</string>
     <string name="gpx_option_calculate_first_last_segment">Càlcula un\'àndala cun OsmAnd pro su primu e s\'ùrtimu segmentu de sa caminera</string>
-    <string name="use_displayed_track_for_navigation">Boles impreare s\'àndala visualizada pro su nàvigu?</string>
+    <string name="use_displayed_track_for_navigation">Boles impreare s\'àndala ammustrada pro su nàvigu?</string>
     <string name="keep_and_add_destination_point">Annànghe unu puntu de destinatzione</string>
     <string name="select_gpx">Issèbera GPX…</string>
     <string name="route_descr_select_destination">Issèbera sa destinatzione</string>
@@ -564,7 +564,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="select_index_file_to_download">No est istadu agatau nudda. Si no agatades sa zona vostra la podies ingendrare bois (bie http://osmand.net).</string>
     <string name="none_selected_gpx">Perunu documentu GPX ischertau. Pro ischertare tene carcau in supra de una de sas rastas disponìbiles.</string>
     <string name="local_index_unselect_gpx_file">Boga s\'ischerta</string>
-    <string name="local_index_select_gpx_file">Ischerta pro lu visualizare</string>
+    <string name="local_index_select_gpx_file">Ischerta pro l\'ammustrare</string>
     <string name="gpx_split_interval">Intervallu partidura</string>
     <string name="sort_by_distance">Òrdina pro distàntzia</string>
     <string name="sort_by_name">Òrdina pro nùmene</string>
@@ -1077,7 +1077,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="user_password_descr">Netzessària pro imbiare contributos a openstreetmap.org</string>
 	<string name="osmand_service">Servìtziu \"a reposu\"</string>
 	<string name="osmand_service_descr">Impreadu pro esecutare OsmAnd cun s\'ischermu mortu</string>
-	<string name="tip_rotation_switching_t_v2">"Podes mudare comente boles sa rotatzione de sa visualizatzione de sa mapa carcande in s\'icona de sa bùssola in s\'ischermu de sa mapa.
+	<string name="tip_rotation_switching_t_v2">"Podes mudare comente boles sa rotatzione de s\'immàgine de sa mapa carcande in s\'icona de sa bùssola in s\'ischermu de sa mapa.
 \n\nSas optziones sunt:
 \n\t* \'Non rotare (nord in supra)\': Sa mapa no at a èssere rotada. Su nord at a èssere semper in artu
 \n\t* \'In sa diretzione de su movimentu\': Sa mapa at a èssere aliniada cun sa diretzione tua
@@ -1842,9 +1842,13 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="gps_status">Istadu GPS</string>
     <string name="parking_place">Parchègiu</string>
     <string name="remove_the_tag">BOGA SU TAG</string>
-    <string name="enable_plugin">Abìlita</string>
-	<string name="disable_plugin">Disabìlita</string>
+    <string name="enable_plugin">Disabilitadu</string>
+	<string name="disable_plugin">Abilitadu</string>
 <string name="plugin_description_title">Descritzione</string>
 	<string name="plugin_settings_button_caption">Impostaduras</string>
 <string name="edit_group">Modìfica su grupu</string>
-    </resources>
+    <string name="enable_plugin2">Abìlita</string>
+	<string name="disable_plugin2">Disabìlita</string>
+	<string name="plugin_install_needs_network">Est netzessària sa cunnessione a ìnternet pro installare custu cumponente annuntilu (plugin).</string>
+	<string name="get_plugin">Iscàrriga</string>
+</resources>
