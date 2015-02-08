@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.preference.PreferenceScreen;
 import android.support.v4.app.Fragment;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -18,7 +19,7 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.openseamapsplugin.OpenSeaMapsPlugin;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmo.OsMoPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
@@ -62,8 +63,9 @@ public abstract class OsmandPlugin {
 	
 	/**
 	 * Initialize plugin runs just after creation
+	 * @param activity TODO
 	 */
-	public abstract boolean init(OsmandApplication app);
+	public abstract boolean init(OsmandApplication app, Activity activity);
 	
 	public void setActive(boolean active) {
 		this.active = active;
@@ -100,7 +102,7 @@ public abstract class OsmandPlugin {
 		checkMarketPlugin(app, new ParkingPositionPlugin(app), false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, new RoutePointsPlugin(app), false /*FIXME*/, RoutePointsPlugin.ROUTE_POINTS_PLUGIN_COMPONENT, null);
-		checkMarketPlugin(app, new OpenSeaMapsPlugin(app), false, OpenSeaMapsPlugin.COMPONENT, null);
+		checkMarketPlugin(app, new NauticalMapsPlugin(app), false, NauticalMapsPlugin.COMPONENT, null);
 		checkMarketPlugin(app, new SkiMapsPlugin(app), false, SkiMapsPlugin.COMPONENT, null);
 		allPlugins.add(new DistanceCalculatorPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
@@ -110,7 +112,7 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin plugin : allPlugins) {
 			if (enabledPlugins.contains(plugin.getId()) || plugin.isActive()) {
 				try {
-					if (plugin.init(app)) {
+					if (plugin.init(app, null)) {
 						plugin.setActive(true);
 					}
 				} catch (Exception e) {
@@ -141,9 +143,9 @@ public abstract class OsmandPlugin {
 		}
 	}
 	
-	public static boolean enablePlugin(OsmandApplication app, OsmandPlugin plugin, boolean enable) {
+	public static boolean enablePlugin(Activity activity, OsmandApplication app, OsmandPlugin plugin, boolean enable) {
 		if (enable) {
-			if (!plugin.init(app)) {
+			if (!plugin.init(app, activity)) {
 				plugin.setActive(false);
 				return false;
 			} else {

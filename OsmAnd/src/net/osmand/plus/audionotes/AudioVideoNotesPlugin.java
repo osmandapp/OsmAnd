@@ -366,7 +366,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean init(final OsmandApplication app) {
+	public boolean init(final OsmandApplication app, Activity activity) {
 		initializeRemoteControlRegistrationMethods();
 		AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
 		if (am != null) {

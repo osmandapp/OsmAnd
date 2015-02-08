@@ -74,7 +74,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	}
 
 	@Override
-	public boolean init(OsmandApplication app) {
+	public boolean init(OsmandApplication app, Activity activity) {
 		settings = app.getSettings();
 		return true;
 	}

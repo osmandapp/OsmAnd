@@ -77,7 +77,7 @@ public class PluginActivity extends OsmandActionBarActivity {
 							return;
 						}
 
-						boolean ok = OsmandPlugin.enablePlugin((OsmandApplication)getApplication(),
+						boolean ok = OsmandPlugin.enablePlugin(PluginActivity.this, (OsmandApplication)getApplication(),
 								plugin, isChecked);
 						if (!ok) {
 							return;

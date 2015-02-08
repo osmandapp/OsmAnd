@@ -58,7 +58,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 	
 	@Override
-	public boolean init(OsmandApplication app) {
+	public boolean init(OsmandApplication app, Activity activity) {
 		settings = app.getSettings();
 		return true;
 	}

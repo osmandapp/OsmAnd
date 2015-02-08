@@ -37,22 +37,12 @@ public class DashPluginsFragment extends DashBaseFragment {
 			if (plugin.isActive() == isChecked || plugin.needsInstallation()) {
 				return;
 			}
-			if (OsmandPlugin.enablePlugin(getMyApplication(), plugin, isChecked)) {
+			if (OsmandPlugin.enablePlugin(getActivity(), getMyApplication(), plugin, isChecked)) {
 				updatePluginState(pluginView);
 			}
 		}
 	};
 
-	private final View.OnClickListener toggleEnableDisableListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			View pluginView = AndroidUtils.findParentViewById(view, R.id.dash_plugin_item);
-			OsmandPlugin plugin = (OsmandPlugin)pluginView.getTag();
-			if (OsmandPlugin.enablePlugin(getMyApplication(), plugin, !plugin.isActive())) {
-				updatePluginState(pluginView);
-			}
-		}
-	};
 
 	private final View.OnClickListener getListener = new View.OnClickListener() {
 		@Override
@@ -164,7 +154,6 @@ public class DashPluginsFragment extends DashBaseFragment {
 		nameView.setText(plugin.getName());
 
 		ImageButton logoView = (ImageButton)view.findViewById(R.id.plugin_logo);
-		logoView.setOnClickListener(toggleEnableDisableListener);
 		logoView.setImageResource(plugin.getLogoResourceId());
 
 		CompoundButton enableDisableButton =

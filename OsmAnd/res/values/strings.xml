@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="plugin_ski_name">Ski Maps</string>
+    <string name="plugin_nautical_name">Nautical Maps</string>
+    <string name="world_ski_missing">In order to display ski maps, the special offline map needs to be downloaded</string>
+    <string name="nautical_maps_missing">In order to display nautical maps, the special offline map needs to be downloaded</string>
 	<string name="edit_group">Edit group</string>
     <string name="parking_place">Parking place</string>
     <string name="remove_the_tag">REMOVE THE TAG</string>

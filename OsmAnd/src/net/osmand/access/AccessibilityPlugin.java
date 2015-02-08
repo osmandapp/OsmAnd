@@ -20,7 +20,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	}
 	
 	@Override
-	public boolean init(OsmandApplication app) {
+	public boolean init(OsmandApplication app, Activity activity) {
 		return true;
 	}
 	

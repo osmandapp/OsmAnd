@@ -51,7 +51,7 @@ public class PluginsActivity extends OsmandListActivity {
 	}
 
 	private void enableDisablePlugin(OsmandPlugin plugin, boolean enable) {
-		boolean ok = OsmandPlugin.enablePlugin(((OsmandApplication) getApplication()), plugin,
+		boolean ok = OsmandPlugin.enablePlugin(this, ((OsmandApplication) getApplication()), plugin,
 				enable);
 		if (!ok) {
 			return;
@@ -94,7 +94,11 @@ public class PluginsActivity extends OsmandListActivity {
 			pluginLogo.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					enableDisablePlugin(plugin, !plugin.isActive());
+					if(!plugin.isActive() && plugin.needsInstallation()) {
+						// nothing
+					} else {
+						enableDisablePlugin(plugin, !plugin.isActive());
+					}
 				}
 			});
 
@@ -126,18 +130,20 @@ public class PluginsActivity extends OsmandListActivity {
 		final Class<? extends Activity> settingsActivity = plugin.getSettingsActivity();
 
 		final PopupMenu optionsMenu = new PopupMenu(this, v);
-
-		MenuItem enableDisableItem = optionsMenu.getMenu().add(plugin.isActive()
-				? R.string.disable_plugin2
-				: R.string.enable_plugin2);
-		enableDisableItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				enableDisablePlugin(plugin, !plugin.isActive());
-				optionsMenu.dismiss();
-				return true;
-			}
-		});
+		if (plugin.isActive() || !plugin.needsInstallation()) {
+			MenuItem enableDisableItem = optionsMenu.getMenu().add(
+					plugin.isActive() ? R.string.disable_plugin2
+							: R.string.enable_plugin2);
+			enableDisableItem
+					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							enableDisablePlugin(plugin, !plugin.isActive());
+							optionsMenu.dismiss();
+							return true;
+						}
+					});
+		}
 
 		if (settingsActivity != null) {
 			MenuItem settingsItem = optionsMenu.getMenu().add(R.string.settings);

@@ -79,7 +79,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	}
 
 	@Override
-	public boolean init(final OsmandApplication app) {
+	public boolean init(final OsmandApplication app, Activity activity) {
 		if(app.getSettings().OSMO_AUTO_CONNECT.get() || 
 				(System.currentTimeMillis() - app.getSettings().OSMO_LAST_PING.get() < 5 * 60 * 1000 )) {
 			service.connect(true);
