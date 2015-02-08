@@ -41,7 +41,7 @@ public class SkiMapsPlugin extends OsmandPlugin {
 			previousRenderer = app.getSettings().RENDERER.get(); 
 			app.getSettings().RENDERER.set(RendererRegistry.WINTER_SKI_RENDER);
 			if(!app.getResourceManager().getIndexFileNames().containsKey("World-ski"+
-					"_" +IndexConstants.BINARY_MAP_VERSION + IndexConstants.BINARY_MAP_INDEX_EXT)){
+					 IndexConstants.BINARY_MAP_INDEX_EXT)){
 				Builder dlg = new AlertDialog.Builder(activity);
 				dlg.setMessage(net.osmand.plus.R.string.world_ski_missing);
 				dlg.setPositiveButton(net.osmand.plus.R.string.default_buttons_ok, new OnClickListener() {
