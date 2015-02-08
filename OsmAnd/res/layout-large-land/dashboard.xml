@@ -12,7 +12,6 @@
 
 		<fragment
 				android:id="@+id/MapFragment"
-				xmlns:android="http://schemas.android.com/apk/res/android"
 				android:name="net.osmand.plus.dashboard.DashMapFragment"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"/>
@@ -35,14 +34,12 @@
 							  android:layout_height="wrap_content"/>
 				<fragment
 						android:id="@+id/SearchFragment"
-						xmlns:android="http://schemas.android.com/apk/res/android"
 						android:name="net.osmand.plus.dashboard.DashSearchFragment"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"/>
 
 				<fragment
 						android:id="@+id/FavoritesFragment"
-						xmlns:android="http://schemas.android.com/apk/res/android"
 						android:name="net.osmand.plus.dashboard.DashFavoritesFragment"
 						android:layout_marginTop="@dimen/dashCardMargin"
 						android:layout_width="match_parent"
@@ -50,7 +47,6 @@
 
 				<fragment
 						android:id="@+id/NotesFragment"
-						xmlns:android="http://schemas.android.com/apk/res/android"
 						android:name="net.osmand.plus.audionotes.DashAudioVideoNotesFragment"
 						android:layout_marginTop="@dimen/dashCardMargin"
 						android:layout_width="match_parent"
@@ -74,7 +70,6 @@
 
 				<fragment
 						android:id="@+id/UpdateFragment"
-						xmlns:android="http://schemas.android.com/apk/res/android"
 						android:name="net.osmand.plus.dashboard.DashUpdatesFragment"
 						android:layout_marginTop="@dimen/dashCardMargin"
 						android:layout_width="match_parent"
@@ -82,7 +77,6 @@
 
 				<fragment
 						android:id="@+id/PluginFragment"
-						xmlns:android="http://schemas.android.com/apk/res/android"
 						android:name="net.osmand.plus.dashboard.DashPluginsFragment"
 						android:layout_marginTop="@dimen/dashCardMargin"
 						android:layout_width="match_parent"

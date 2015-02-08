@@ -437,7 +437,7 @@ public class ResourceManager {
 					Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"),
 							new FileOutputStream(file));
 				}
-			}
+			} 
 			regions.prepareFile(file.getAbsolutePath());
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
