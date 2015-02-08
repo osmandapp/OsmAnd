@@ -45,7 +45,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 			previousRenderer = app.getSettings().RENDERER.get(); 
 			app.getSettings().RENDERER.set(RendererRegistry.NAUTICAL_RENDER);
 			if(!app.getResourceManager().getIndexFileNames().containsKey("World_seamarks"+
-					"_" +IndexConstants.BINARY_MAP_VERSION + IndexConstants.BINARY_MAP_INDEX_EXT)){
+					 IndexConstants.BINARY_MAP_INDEX_EXT)){
 				Builder dlg = new AlertDialog.Builder(activity);
 				dlg.setMessage(net.osmand.plus.R.string.nautical_maps_missing);
 				dlg.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
