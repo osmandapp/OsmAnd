@@ -1801,4 +1801,8 @@
 <string name="enable_plugin2">Aktivera</string>
 	<string name="disable_plugin2">Inaktivera</string>
 	<string name="get_plugin">Hämta</string>
-</resources>
+<string name="plugin_ski_name">Skidkartor</string>
+    <string name="plugin_nautical_name">Sjökort</string>
+    <string name="world_ski_missing">För att kunna visa skidkartor måste den speciella offline-kartan hämtas</string>
+    <string name="nautical_maps_missing">För att kunna visa sjökort måste den speciella offline-kartan hämtas</string>
+	</resources>
