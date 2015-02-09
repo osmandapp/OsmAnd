@@ -25,7 +25,7 @@
     <dimen name="list_content_padding">16dp</dimen>
     <dimen name="list_header_padding">8dp</dimen>
     <dimen name="tab_height">48dp</dimen>
-	<dimen name="list_item_height">48dp</dimen>
+	<dimen name="list_item_height">50dp</dimen>
 
     <!-- TextSizes -->
     <dimen name="showAllButtonTextSize">12sp</dimen>
