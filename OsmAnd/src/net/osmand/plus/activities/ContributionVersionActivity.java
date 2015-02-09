@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import android.widget.*;
 import net.osmand.AndroidUtils;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
@@ -27,10 +26,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Filterable;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class ContributionVersionActivity extends OsmandListActivity {
 
@@ -128,7 +131,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			AccessibleToast.makeText(
 					this,
 					MessageFormat.format(getString(R.string.build_installed), currentSelectedBuild.tag, 
-							AndroidUtils.formatDate(getMyApplication(), currentSelectedBuild.date.getTime())), Toast.LENGTH_LONG).show();
+							AndroidUtils.formatDateTime(getMyApplication(), currentSelectedBuild.date.getTime())), Toast.LENGTH_LONG).show();
 		}
 		getMyApplication().getSettings().CONTRIBUTION_INSTALL_APP_DATE.set(dateFormat.format(d));
 	}
@@ -145,13 +148,14 @@ public class ContributionVersionActivity extends OsmandListActivity {
 
 						String path = parser.getAttributeValue(null, "path"); //$NON-NLS-1$
 						String size = parser.getAttributeValue(null, "size"); //$NON-NLS-1$
-						String date = parser.getAttributeValue(null, "date"); //$NON-NLS-1$
+						String date = parser.getAttributeValue(null, "timestamp"); //$NON-NLS-1$
 						String tag = parser.getAttributeValue(null, "tag"); //$NON-NLS-1$
 						Date d = null;
 						if (date != null) {
 							try {
-								d = dateFormat.parse(date);
-							} catch (ParseException e) {
+								d = new Date(Long.parseLong(date));
+							} catch (RuntimeException e) {
+								e.printStackTrace();
 							}
 						}
 						OsmAndBuild build = new OsmAndBuild(path, size, d, tag);
@@ -207,7 +211,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		final OsmAndBuild item = (OsmAndBuild) getListAdapter().getItem(position);
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(MessageFormat.format(getString(R.string.install_selected_build), item.tag,
-				AndroidUtils.formatDate(getMyApplication(), item.date.getTime()), item.size));
+				AndroidUtils.formatDateTime(getMyApplication(), item.date.getTime()), item.size));
 		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 
 			@Override
@@ -244,7 +248,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			
 			TextView description = (TextView) row.findViewById(R.id.download_descr);
 			StringBuilder format = new StringBuilder();
-			format.append(AndroidUtils.formatDate(getMyApplication(), build.date.getTime()))/*.append(" : ").append(build.size).append(" MB")*/;
+			format.append(AndroidUtils.formatDateTime(getMyApplication(), build.date.getTime()))/*.append(" : ").append(build.size).append(" MB")*/;
 			description.setText(format.toString());
 
 			int color = getResources().getColor(R.color.color_unknown);
