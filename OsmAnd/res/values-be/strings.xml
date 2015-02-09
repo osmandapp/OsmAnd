@@ -2019,4 +2019,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 <string name="enable_plugin2">Уключыць</string>
 	<string name="disable_plugin2">Адключыць</string>
 	<string name="get_plugin">Атрымаць</string>
-</resources>
+<string name="plugin_ski_name">Лыжныя мапы</string>
+    <string name="plugin_nautical_name">Марскія мапы</string>
+    <string name="world_ski_missing">Для адлюстраваньня лыжных мап неабходна сьцягнуць адмысловыя мапы</string>
+    <string name="nautical_maps_missing">Для адлюстраваньня марскіх мап неабходна сьцягнуць адмысловыя мапы</string>
+	</resources>
