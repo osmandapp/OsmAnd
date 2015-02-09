@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+	android:background="?attr/colorPrimary"
     android:orientation="vertical">
 
     <ListView
@@ -9,5 +10,5 @@
         style="@style/OsmandListView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:choiceMode="multipleChoice" />
+		android:choiceMode="multipleChoice" />
 </LinearLayout>

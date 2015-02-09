@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+	android:layout_height="wrap_content"
+	android:minHeight="@dimen/list_item_height"
     android:paddingBottom="5dp"
     android:paddingTop="5dp"
     android:paddingLeft="@dimen/list_content_padding"
@@ -12,6 +13,7 @@
     <TextView
         android:id="@+id/label"
         style="@style/ListText"
+		android:layout_gravity="center_vertical"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="3dp"
@@ -24,6 +26,7 @@
     <ImageButton
         android:id="@+id/remove"
         android:contentDescription="@string/default_buttons_delete"
+		android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/reset_image"

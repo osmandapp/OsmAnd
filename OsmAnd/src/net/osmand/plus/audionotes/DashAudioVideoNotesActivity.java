@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -32,6 +33,7 @@ public class DashAudioVideoNotesActivity extends OsmandActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		((OsmandApplication)getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.editing_poi_filter);
 
@@ -44,8 +46,6 @@ public class DashAudioVideoNotesActivity extends OsmandActionBarActivity {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle(R.string.audionotes_plugin_name);
 		actionBar.setIcon(android.R.color.transparent);
-
-		findViewById(android.R.id.list).setBackgroundColor(getResources().getColor(R.color.dashboard_background));
 	}
 
 	@Override
@@ -117,6 +117,12 @@ public class DashAudioVideoNotesActivity extends OsmandActionBarActivity {
 			if (row == null){
 				row = inflater.inflate(R.layout.dash_audio_video_notes_item, parent, false);
 				row.findViewById(R.id.divider).setVisibility(View.GONE);
+			}
+			boolean light = ((OsmandApplication)getApplication()).getSettings().isLightContent();
+			if (light) {
+				row.setBackgroundColor(getResources().getColor(R.color.expandable_list_item_light));
+			} else {
+				row.setBackgroundColor(getResources().getColor(R.color.expandable_list_item_dark));
 			}
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
 			DashAudioVideoNotesFragment.getNoteView(recording, row, DashAudioVideoNotesActivity.this, plugin);

@@ -14,6 +14,8 @@
         android:id="@+id/clearAll"
         android:layout_marginLeft="@dimen/list_content_padding"
         android:layout_marginRight="@dimen/list_content_padding"
+		android:background="?attr/downloadButtonBackground"
+		android:textColor="?attr/pstsTextColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

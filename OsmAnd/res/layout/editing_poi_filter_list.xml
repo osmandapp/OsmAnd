@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+	android:layout_height="wrap_content"
+	android:minHeight="@dimen/list_item_height"
     android:orientation="horizontal">
 
 
     <CheckBox
         android:id="@+id/filter_poi_check"
+		android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -16,7 +18,8 @@
         android:id="@+id/filter_poi_label"
         style="@style/ListText"
 		android:textColor="?android:textColorPrimary"
-        android:layout_width="fill_parent"
+		android:layout_gravity="center_vertical"
+		android:layout_width="fill_parent"
         android:layout_height="wrap_content"
 		android:ellipsize="end"
 		android:maxLines="1"
