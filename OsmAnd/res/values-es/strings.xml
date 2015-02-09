@@ -1909,10 +1909,17 @@
     <string name="osm_editing_manage">Administrar</string>
     <string name="parking_place">Área de aparcamiento</string>
     <string name="remove_the_tag">QUITA LA ETIQUETA</string>
-    <string name="enable_plugin">Habilitar</string>
-	<string name="disable_plugin">Deshabilitar</string>
+    <string name="enable_plugin">Desactivado</string>
+	<string name="disable_plugin">Activado</string>
 <string name="plugin_description_title">Descripción</string>
 	<string name="plugin_settings_button_caption">Opciones</string>
 <string name="edit_group">Editar grupo</string>
     <string name="plugin_install_needs_network">Necesitas una conexión a Internet para instalar este plugin.</string>
+<string name="plugin_ski_name">Mapas de esquí</string>
+    <string name="plugin_nautical_name">Mapas náuticos</string>
+    <string name="world_ski_missing">Para mostrar mapas de esquí, debes descargar el mapa especial</string>
+    <string name="nautical_maps_missing">Para mostrar mapas náuticos, debes descargar el mapa especial</string>
+	<string name="enable_plugin2">Activar</string>
+	<string name="disable_plugin2">Desactivar</string>
+	<string name="get_plugin">Obtener</string>
 </resources>
