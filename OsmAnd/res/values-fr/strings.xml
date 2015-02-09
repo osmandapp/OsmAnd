@@ -1927,4 +1927,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="enable_plugin2">Activer</string>
 	<string name="disable_plugin2">Désactiver</string>
 	<string name="get_plugin">Récupérer</string>
-</resources>
+<string name="plugin_ski_name">Pistes de ski</string>
+    <string name="plugin_nautical_name">Cartes marines</string>
+    <string name="world_ski_missing">Pour afficher les pistes de ski, une carte hors ligne doit être téléchargée.</string>
+    <string name="nautical_maps_missing">Pour afficher les cartes marines, une carte hors ligne doit être téléchargée.</string>
+	</resources>
