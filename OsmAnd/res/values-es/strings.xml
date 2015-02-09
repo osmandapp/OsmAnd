@@ -502,7 +502,7 @@
   <string name="route_head">Cabecera</string>
   <string name="first_time_continue">Después</string>
   <string name="first_time_download">Descargar regiones</string>
-  <string name="first_time_msg">Gracias por elegir OsmAnd. Para poder usar muchas características de la aplicación necesitas algunos datos regionales, que puedes descargar vía \'Opciones\' → \'Gestionar mapas\'. Entonces podrás ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
+  <string name="first_time_msg">Gracias por usar OsmAnd. Para muchas características de la aplicación necesitas algunos datos regionales, que puedes descargar vía \'Opciones\' → \'Gestionar mapas\'. Entonces podrás ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
   <string name="search_poi_location">Buscando señal…</string>
   <string name="search_near_map">Buscar cerca del centro del mapa</string>
   <string name="search_nearby">Buscar cercanos</string>
@@ -1902,7 +1902,7 @@
 	<string name="version_settings_descr">Descargar versiones de desarrollo (nightly builds)</string>
     <string name="version_settings">Compilaciones</string>
     <string name="gps_status">Estado GPS</string>
-    <string name="rendering_attr_streetLighting_name">Iluminación de la calle</string>
+    <string name="rendering_attr_streetLighting_name">Alumbrado público</string>
     <string name="points">Puntos</string>
     <string name="tracks">Trazas</string>
     <string name="my_location">Mi ubicación</string>
