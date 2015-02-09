@@ -30,7 +30,7 @@ import bsh.Interpreter;
 
 public class TileSourceManager {
 	private static final Log log = PlatformUtil.getLog(TileSourceManager.class);
-	private static final String RULE_BEANSHELL = "beanshell";
+	public static final String RULE_BEANSHELL = "beanshell";
 	public static final String RULE_YANDEX_TRAFFIC = "yandex_traffic";
 	private static final String RULE_WMS = "wms_tile";
 
