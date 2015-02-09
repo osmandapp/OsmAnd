@@ -12,6 +12,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -19,6 +20,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import bsh.Interpreter;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,7 +35,7 @@ public class SQLiteTileSource implements ITileSource {
 	private ITileSource base;
 	private String urlTemplate = null;
 	private String name;
-	private SQLiteConnection db;
+	private SQLiteConnection db = null;
 	private final File file;
 	private int minZoom = 1;
 	private int maxZoom = 17; 
@@ -41,7 +43,8 @@ public class SQLiteTileSource implements ITileSource {
 	private boolean timeSupported = false;
 	private int expirationTimeMillis = -1; // never
 	private boolean isEllipsoid = false;
-
+	private String rule = null;
+	
 	static final int tileSize = 256;
 	private OsmandApplication ctx;
 	private boolean onlyReadonlyAvailable = false;
@@ -101,6 +104,7 @@ public class SQLiteTileSource implements ITileSource {
 		return base != null ? base.getTileSize() : tileSize;
 	}
 
+	Interpreter bshInterpreter = null;
 	@Override
 	public String getUrlToLoad(int x, int y, int zoom) {
 		if (zoom > maxZoom)
@@ -109,7 +113,22 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null || db.isReadOnly() || urlTemplate == null){
 			return null;
 		}
-		return MessageFormat.format(urlTemplate, zoom+"", x+"", y+"");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+
+		if(TileSourceManager.RULE_BEANSHELL.equalsIgnoreCase(rule)){
+			try {
+				if(bshInterpreter == null){
+					bshInterpreter = new Interpreter();
+					bshInterpreter.eval(urlTemplate);
+				}
+				return (String) bshInterpreter.eval("getTileUrl("+zoom+","+x+","+y+");");
+			} catch (bsh.EvalError e) {
+				log.error(e.getMessage(), e);
+				return null;
+			}
+		}
+		else {
+			return MessageFormat.format(urlTemplate, zoom+"", x+"", y+"");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+		}
 	}
 
 	@Override
@@ -414,6 +433,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 	
 	public void closeDB(){
+		bshInterpreter = null;
 		if(db != null){
 			db.close();
 			db = null;
