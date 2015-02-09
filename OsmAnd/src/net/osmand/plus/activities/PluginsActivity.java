@@ -50,6 +50,13 @@ public class PluginsActivity extends OsmandListActivity {
 		startActivity(intent);
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		getListAdapter().notifyDataSetChanged();
+	}
+
 	private void enableDisablePlugin(OsmandPlugin plugin, boolean enable) {
 		boolean ok = OsmandPlugin.enablePlugin(this, ((OsmandApplication) getApplication()), plugin,
 				enable);
