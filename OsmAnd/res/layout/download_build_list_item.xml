@@ -18,8 +18,9 @@
         android:layout_marginLeft="3dp"
         android:gravity="center_vertical"
 		android:layout_gravity="center_vertical"
-        android:layout_width="105dp"
+        android:layout_width="90dp"
+        android:maxLines="2"
         android:layout_height="wrap_content"
-        android:textSize="19sp"/>
+        android:textSize="15sp"/>
 
 </LinearLayout>
