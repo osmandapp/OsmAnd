@@ -1909,4 +1909,8 @@
 <string name="enable_plugin2">Aktiver</string>
 	<string name="disable_plugin2">Deaktiver</string>
 	<string name="get_plugin">Hent</string>
-</resources>
+<string name="plugin_ski_name">Skikort</string>
+    <string name="plugin_nautical_name">Søkort</string>
+    <string name="world_ski_missing">For at vise skikort, skal særlige offline kort hentes</string>
+    <string name="nautical_maps_missing">For at vise søkort, skal det særlige offline kort hentes</string>
+	</resources>
