@@ -1915,4 +1915,7 @@
 <string name="enable_plugin2">Įjungti</string>
 	<string name="disable_plugin2">Išjungti</string>
 	<string name="get_plugin">Gauti</string>
-</resources>
+<string name="plugin_ski_name">Slidinėjimo žemėlapiai</string>
+    <string name="world_ski_missing">Tam, kad būtų atvaizduojami slidinėjimo žemėlapiai, būtina atsisiųsti specializuotus žemėlapius</string>
+    <string name="nautical_maps_missing">Tam, kad būtų atvaizduojami jūriniai žemėlapiai, būtina atsisiųsti specializuotus žemėlapius</string>
+	</resources>
