@@ -1191,7 +1191,7 @@
     <string name="recording_can_not_be_played">Įrašo neina pagroti</string>
     <string name="recording_context_menu_delete">Ištrinti įrašą</string>
     <string name="recording_context_menu_play">Groti</string>
-    <string name="recording_description">Įrašas %1$s %2$s prie %3$s</string>
+    <string name="recording_description">"Įrašas %1$s  %3$s %2$s"</string>
     <string name="recording_default_name">Įrašas</string>
     <string name="av_control_start">Įrašyti</string>
     <string name="map_widget_av_notes">Audio užrašai</string>
