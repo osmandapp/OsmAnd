@@ -116,7 +116,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if(!Algorithms.objectEquals(overlay, layer.getMap())){
 			if(overlay == null){
 				mapView.removeLayer(layer);
-			} else {
+			} else if (mapView.getMapRenderer() == null) {
 				mapView.addLayer(layer, layerOrder);
 			}
 			layer.setMap(overlay);
