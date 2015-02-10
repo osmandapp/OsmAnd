@@ -183,6 +183,10 @@ public class SQLiteTileSource implements ITileSource {
 							urlTemplate = template;
 						}
 					}
+					int ruleId = list.indexOf("rule");
+					if(ruleId != -1) {
+						rule = cursor.getString(ruleId);
+					}
 					int tnumbering = list.indexOf("tilenumbering");
 					if(tnumbering != -1) {
 						inversiveZoom = "BigPlanet".equalsIgnoreCase(cursor.getString(tnumbering));
