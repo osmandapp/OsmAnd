@@ -2073,4 +2073,10 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="plugin_settings_button_caption">Instellingen</string>
 <string name="edit_group">Bewerk groep</string>
     <string name="plugin_install_needs_network">Om deze plugin te installeren is een internetverbinding nodig.</string>
+<string name="plugin_nautical_name">Nautische kaarten</string>
+    <string name="world_ski_missing">Om skikaarten te kunnen gebruiken moet u aparte kaarten downloaden.</string>
+    <string name="nautical_maps_missing">Om nautische kaarten te kunnen gebruiken moet u aparte kaarten downloaden.</string>
+	<string name="enable_plugin2">Activeren</string>
+	<string name="disable_plugin2">Deactiveren</string>
+	<string name="get_plugin">Verkrijg</string>
 </resources>
