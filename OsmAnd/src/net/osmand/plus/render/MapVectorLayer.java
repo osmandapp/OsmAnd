@@ -109,7 +109,7 @@ public class MapVectorLayer extends BaseMapLayer {
 						// TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
 						// mapRenderer.setMapLayerProvider(-1, prov.instantiateProxy(true));
 						// prov.swigReleaseOwnership();
-						mapView.setMapLayerProvider(-1, net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
+						mapRenderer.setMapLayerProvider(-1, net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
 					} else {
 						mapRenderer.resetMapLayerProvider(-1);
 					}
@@ -127,7 +127,7 @@ public class MapVectorLayer extends BaseMapLayer {
 						//TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
 						//mapRenderer.setMapLayerProvider(1, prov.instantiateProxy(true));
 						//prov.swigReleaseOwnership();
-						mapView.setMapLayerProvider(1, net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
+						mapRenderer.setMapLayerProvider(1, net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
 					} else {
 						mapRenderer.resetMapLayerProvider(1);
 					}
