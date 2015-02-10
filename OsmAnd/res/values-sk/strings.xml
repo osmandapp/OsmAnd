@@ -2060,4 +2060,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 <string name="enable_plugin2">Zapnúť</string>
 	<string name="disable_plugin2">Vypnúť</string>
 	<string name="get_plugin">Získať</string>
-</resources>
+<string name="plugin_ski_name">Lyžiarske mapy</string>
+    <string name="plugin_nautical_name">Námorné mapy</string>
+    <string name="world_ski_missing">Pre zobrazenie lyžiarskym máp je potrebné stiahnuť samostatnú lyžiarsku mapu pre offline použitie</string>
+    <string name="nautical_maps_missing">Pre zobrazenie námorných máp je potrebné stiahnuť samostatnú námornú mapu pre offline použitie</string>
+	</resources>
