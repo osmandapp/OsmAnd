@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -33,6 +34,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
@@ -62,6 +64,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
@@ -82,6 +86,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	private Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<FavoriteGroup>();
 	private ActionMode actionMode;
 	private SearchView searchView;
+
+	protected LatLon loc = null;
+	protected Float heading = null;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -125,6 +132,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		// final LatLon mapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 		favouritesAdapter.synchronizeGroups();
 
+		loc = getMyApplication().getSettings().getLastKnownMapLocation();
 		if(favouritesAdapter.getGroupCount() > 0 && 
 				"".equals(favouritesAdapter.getGroup(0).name)) {
 			getExpandableListView().expandGroup(0);
@@ -761,7 +769,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				row = inflater.inflate(R.layout.favourites_list_item, parent, false);
 			}
 
-			TextView label = (TextView) row.findViewById(R.id.favourite_label);
+			TextView name = (TextView) row.findViewById(R.id.favourite_label);
+			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
 			row.setTag(model);
@@ -770,11 +779,19 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
 			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
-			label.setText(distance + model.getName(), TextView.BufferType.SPANNABLE);
-			label.setTypeface(Typeface.DEFAULT, model.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
-			((Spannable) label.getText()).setSpan(
-					new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
-					0);
+			name.setText(model.getName(), TextView.BufferType.SPANNABLE);
+			name.setTypeface(Typeface.DEFAULT, model.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
+			distanceText.setText(distance);
+			distanceText.setTextColor(getResources().getColor(R.color.color_distance));
+			row.findViewById(R.id.group_image).setVisibility(View.GONE);
+
+			if(loc != null){
+				ImageView direction = (ImageView) row.findViewById(R.id.direction);
+				direction.setVisibility(View.VISIBLE);
+				DashLocationFragment.updateArrow(getActivity(), loc, new LatLon(model.getLatitude(), model.getLongitude()), direction,
+						10, R.drawable.ic_destination_arrow, heading);
+			}
+
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 			if (selectionMode) {
 				ch.setVisibility(View.VISIBLE);
@@ -862,5 +879,32 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		}
 	}
 
+	public void updateLocation(Location location) {
+		//This is used as origin for both Fav-list and direction arrows
+		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
+			loc = getMyApplication().getSettings().getLastKnownMapLocation();
+		} else {
+			loc = new LatLon(0f, 0f);
+		}
+		updateArrows();
+	}
 
+	public boolean updateCompassValue(float value) {
+		//heading = value;
+		//updateArrows();
+		//99 in next line used to one-time initalize arrows (with reference vs. fixed-north direction) on non-compass devices
+		float lastHeading = heading != null ? heading : 99;
+		heading = value;
+		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			updateArrows();
+			return true;
+		} else {
+			heading = lastHeading;
+		}
+		return false;
+	}
+
+	private void updateArrows(){
+		favouritesAdapter.notifyDataSetChanged();
+	}
 }

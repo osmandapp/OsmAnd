@@ -1,5 +1,6 @@
 package net.osmand.plus.dashboard;
 
+import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -36,16 +37,17 @@ public class DashLocationFragment extends DashBaseFragment {
 		}
 	}
 
-	protected void updateArrow(LatLon l, ImageView direction, int size, int resourceId) {
+	public static void updateArrow(Activity ctx, LatLon currentLocation, LatLon pointLocation,
+								   ImageView direction, int size, int resourceId, Float heading) {
 		float[] mes = new float[2];
-		Location.distanceBetween(l.getLatitude(), l.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
-		DirectionDrawable draw = new DirectionDrawable(getActivity(), size, size, resourceId);
+		Location.distanceBetween(pointLocation.getLatitude(), pointLocation.getLongitude(), currentLocation.getLatitude(), currentLocation.getLongitude(), mes);
+		DirectionDrawable draw = new DirectionDrawable(ctx, size, size, resourceId);
 		Float h = heading;
 		float a = h != null ? h : 0;
 
 		//Hardy: getRotation() is the correction if device's screen orientation != the default display's standard orientation
 		int screenOrientation = 0;
-		screenOrientation = ((WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+		screenOrientation = ((WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 		switch (screenOrientation)
 		{
 			case ORIENTATION_0:   // Device default (normally portrait)
@@ -63,7 +65,7 @@ public class DashLocationFragment extends DashBaseFragment {
 		}
 
 		//Looks like screenOrientation correction must not be applied for devices without compass?
-		Sensor compass  = ((SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+		Sensor compass  = ((SensorManager) ctx.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 		if (compass == null) {
 			screenOrientation = 0;
 		}
