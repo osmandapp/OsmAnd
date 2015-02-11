@@ -122,7 +122,7 @@ public class DashAudioVideoNotesActivity extends OsmandActionBarActivity {
 			if (light) {
 				row.setBackgroundColor(getResources().getColor(R.color.expandable_list_item_light));
 			} else {
-				row.setBackgroundColor(getResources().getColor(R.color.expandable_list_item_dark));
+				row.setBackgroundColor(getResources().getColor(R.color.list_item_background_dark));
 			}
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
 			DashAudioVideoNotesFragment.getNoteView(recording, row, DashAudioVideoNotesActivity.this, plugin);

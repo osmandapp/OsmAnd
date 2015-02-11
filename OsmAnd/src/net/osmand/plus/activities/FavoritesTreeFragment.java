@@ -745,9 +745,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			} else {
 				final ImageView ch = (ImageView) row.findViewById(R.id.check_item);
 				ch.setVisibility(View.VISIBLE);
-				ch.setImageDrawable(getActivity().getResources().getDrawable(
-						getMyApplication().getSettings().isLightContent() ? R.drawable.ic_action_settings_enabled_light
-								: R.drawable.ic_action_settings_enabled_dark));
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
