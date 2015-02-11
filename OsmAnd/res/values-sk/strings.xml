@@ -2064,4 +2064,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="plugin_nautical_name">Námorné mapy</string>
     <string name="world_ski_missing">Pre zobrazenie lyžiarskym máp je potrebné stiahnuť samostatnú lyžiarsku mapu pre offline použitie</string>
     <string name="nautical_maps_missing">Pre zobrazenie námorných máp je potrebné stiahnuť samostatnú námornú mapu pre offline použitie</string>
-	</resources>
+	<string name="rendering_attr_pisteGrooming_name">Úprava zjazdovky</string>
+    </resources>
