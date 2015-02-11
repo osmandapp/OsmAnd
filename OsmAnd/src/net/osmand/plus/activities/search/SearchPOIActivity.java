@@ -288,7 +288,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		setListAdapter(amenityAdapter);
 
 		boolean light = getMyApplication().getSettings().isLightContent();
-		Drawable arrowImage = getResources().getDrawable(R.drawable.ic_destination_arrow);
+		Drawable arrowImage = getResources().getDrawable(R.drawable.ic_destination_arrow_white);
 		if (light) {
 			arrowImage.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
 		} else {
@@ -796,7 +796,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				}
 			}
 			if(loc != null){
-				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height, R.drawable.ic_destination_arrow);
+				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height, R.drawable.ic_destination_arrow_white);
 				Float h = heading;
 				float a = h != null ? h : 0;
 
