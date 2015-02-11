@@ -1853,4 +1853,6 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="get_plugin">Iscàrriga</string>
 <string name="plugin_nautical_name">Mapas nàuticas</string>
     <string name="world_ski_missing">Pro bìdere sas mapas ispetziales pro s\'iscì, depent èssere iscarrigadas</string>
-    </resources>
+    <string name="plugin_ski_name">Mapas iscì</string>
+    <string name="nautical_maps_missing">Pro bìdere sas mapas ispetziales nàuticas, depent èssere iscarrigadas</string>
+	</resources>

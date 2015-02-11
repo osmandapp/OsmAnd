@@ -2080,4 +2080,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="plugin_nautical_name">Mappe nautiche</string>
     <string name="world_ski_missing">Per visualizzare le mappe speciali offline per lo sci, necessitano di essere scaricate</string>
     <string name="nautical_maps_missing">Per visualizzare le mappe speciali offline nautiche, necessitano di essere scaricate</string>
-	</resources>
+	<string name="rendering_attr_pisteGrooming_name">Batti pista</string>
+    </resources>
