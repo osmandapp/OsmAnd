@@ -1805,4 +1805,5 @@
     <string name="plugin_nautical_name">Sjökort</string>
     <string name="world_ski_missing">För att kunna visa skidkartor måste den speciella offline-kartan hämtas</string>
     <string name="nautical_maps_missing">För att kunna visa sjökort måste den speciella offline-kartan hämtas</string>
-	</resources>
+	<string name="rendering_attr_pisteGrooming_name">Pist- och spårpreparering</string>
+    </resources>
