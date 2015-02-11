@@ -1905,4 +1905,5 @@
     <string name="plugin_nautical_name">航海地圖</string>
     <string name="world_ski_missing">要顯示滑雪地圖，需要有已下載的專用離線地圖</string>
     <string name="nautical_maps_missing">要顯示航海地圖，需要有已下載的專用離線地圖</string>
-	</resources>
+	<string name="rendering_attr_pisteGrooming_name">滑雪道修整</string>
+    </resources>
