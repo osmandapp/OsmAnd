@@ -1884,10 +1884,16 @@
     <string name="gps_status">Estat del GPS</string>
     <string name="parking_place">Lloc d\'aparcament</string>
     <string name="remove_the_tag">Treure l\'etiqueta</string>
-    <string name="enable_plugin">Activa</string>
-	<string name="disable_plugin">Desactiva</string>
+    <string name="enable_plugin">Desactivat</string>
+	<string name="disable_plugin">Activat</string>
 <string name="plugin_description_title">Descripció</string>
 	<string name="plugin_settings_button_caption">Configuració</string>
 <string name="edit_group">Edició del grup</string>
     <string name="plugin_install_needs_network">Us cal una connexió a internet per instal·lar aquest connector.</string>
-</resources>
+<string name="plugin_ski_name">Pistes d\'esquí</string>
+    <string name="plugin_nautical_name">Cartes marines</string>
+    <string name="world_ski_missing">Per veure les pistes d\'esquí cal que baixeu un mapa específic</string>
+    <string name="nautical_maps_missing">Per accedir a cartes marines cal que baixeu un mapa específic</string>
+	<string name="enable_plugin2">Activa</string>
+	<string name="disable_plugin2">Desactiva</string>
+	</resources>

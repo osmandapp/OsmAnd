@@ -1851,4 +1851,6 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="disable_plugin2">Disabìlita</string>
 	<string name="plugin_install_needs_network">Est netzessària sa cunnessione a ìnternet pro installare custu cumponente annuntilu (plugin).</string>
 	<string name="get_plugin">Iscàrriga</string>
-</resources>
+<string name="plugin_nautical_name">Mapas nàuticas</string>
+    <string name="world_ski_missing">Pro bìdere sas mapas ispetziales pro s\'iscì, depent èssere iscarrigadas</string>
+    </resources>

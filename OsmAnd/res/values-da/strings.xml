@@ -1913,4 +1913,5 @@
     <string name="plugin_nautical_name">Søkort</string>
     <string name="world_ski_missing">For at vise skikort, skal det særlige offline kort hentes</string>
     <string name="nautical_maps_missing">For at vise søkort, skal det særlige offline kort hentes</string>
-	</resources>
+	<string name="rendering_attr_pisteGrooming_name">Piste preparering</string>
+    </resources>

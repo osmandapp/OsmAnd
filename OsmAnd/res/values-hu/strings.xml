@@ -1844,4 +1844,8 @@
 	<string name="plugin_install_needs_network">Internetkapcsolat szükséges a bővítmény telepítéséhez.</string>
 	<string name="get_plugin">Beszerzés</string>
 <string name="version_settings">Összeállítások</string>
-    </resources>
+    <string name="plugin_ski_name">Sítérképek</string>
+    <string name="plugin_nautical_name">Hajózási térképek</string>
+    <string name="world_ski_missing">A sítérképek megjelenítése érdekében a speciális kapcsolat nélküli térkép letöltése szükséges</string>
+    <string name="nautical_maps_missing">A hajózási térképek megjelenítése érdekében a speciális kapcsolat nélküli térkép letöltése szükséges</string>
+	</resources>
