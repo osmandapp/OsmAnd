@@ -1838,4 +1838,9 @@ s často kladenými otázkami.</string>
 	<string name="disable_plugin">Vypnout</string>
 	<string name="plugin_description_title">Popisek</string>
 	<string name="plugin_settings_button_caption">Nastavení</string>
-</resources>
+<string name="edit_group">Upravit skupinu</string>
+    <string name="nautical_maps_missing">Pro zobrazování námořních map je třeba stáhnout speciální mapu</string>
+	<string name="world_ski_missing">Pro zobrazování hvězdných map je třeba stáhnout speciální mapu</string>
+    <string name="plugin_ski_name">Hvězdné mapy</string>
+    <string name="plugin_nautical_name">Námořní mapy</string>
+    </resources>
