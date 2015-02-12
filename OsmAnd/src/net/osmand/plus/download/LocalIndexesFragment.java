@@ -527,15 +527,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			if (j + 1 >= max && optionsMenuAdapter.length() > max) {
 				if (split == null) {
 					split = menu.addSubMenu(0, 1, j + 1, R.string.default_buttons_other_actions);
-					split.setIcon(R.drawable.ic_overflow_menu_light);
+					split.setIcon(R.drawable.ic_overflow_menu_white);
 					split.getItem();
-					MenuItemCompat.setShowAsAction(split.getItem(),MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+					MenuItemCompat.setShowAsAction(split.getItem(),MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
 				item = split.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
-				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
+				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 			} else {
 				item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
-				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
+				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 			}
 			if (optionsMenuAdapter.getImageId(j, isLightActionBar()) != 0) {
 				item.setIcon(optionsMenuAdapter.getImageId(j, isLightActionBar()));

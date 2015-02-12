@@ -110,8 +110,7 @@ public class UpdatesIndexFragment extends ListFragment {
 			item.setIcon(R.drawable.ic_action_refresh_dark);
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			SubMenu s = menu.addSubMenu(0, DownloadIndexFragment.MORE_ID, 0, "");
-			s.setIcon(isLightActionBar() ? R.drawable.ic_overflow_menu_light
-					: R.drawable.ic_overflow_menu_dark);
+			s.setIcon(R.drawable.ic_overflow_menu_white);
 			s.add(0, DownloadIndexFragment.SELECT_ALL_ID, 0, R.string.select_all);
 			s.add(0, DownloadIndexFragment.DESELECT_ALL_ID, 0, R.string.deselect_all);
 			MenuItemCompat.setShowAsAction(s.getItem(), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
