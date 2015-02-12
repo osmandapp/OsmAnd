@@ -232,7 +232,7 @@ public class GpxUiHelper {
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		Builder b = new AlertDialog.Builder(activity);
 		// final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
-		final boolean light = app.getSettings().isLightContentMenu();
+		final boolean light = app.getSettings().isLightContent();
 		final int layout;
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			layout = R.layout.list_menu_item;

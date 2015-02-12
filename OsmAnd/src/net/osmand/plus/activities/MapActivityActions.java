@@ -317,7 +317,7 @@ public class MapActivityActions implements DialogProvider {
 		
 		final Builder builder = new AlertDialog.Builder(mapActivity);
 		final ArrayAdapter<?>  listAdapter =
-				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContentMenu());
+				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 
 			@Override
@@ -641,12 +641,8 @@ public class MapActivityActions implements DialogProvider {
 	public void prepareOptionsMenu(final ContextMenuAdapter cm) {
 		refreshDrawer = false;
 		final ArrayAdapter<?> listAdapter =
-				cm.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContentMenu());
+				cm.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
 		mDrawerList.setAdapter(listAdapter);
-		mDrawerList.setDivider(mapActivity.getResources().getDrawable(R.drawable.drawer_divider));
-		final int colorHint = cm.getBackgroundColor(mapActivity, getMyApplication().getSettings().isLightContentMenu());
-		mDrawerList.setBackgroundColor(colorHint);
-		mDrawerList.setCacheColorHint(colorHint);
 		mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -945,12 +941,6 @@ public class MapActivityActions implements DialogProvider {
 		ArrayAdapter<Object> listAdapter = waypointDialogHelper.getWaypointsDrawerAdapter(mapActivity, running, flat);
 		mDrawerList.setAdapter(listAdapter);
 		refreshDrawer = false;
-		mDrawerList.setDivider(mapActivity.getResources().getDrawable(R.drawable.drawer_divider));
-		final int color = getMyApplication().getSettings().isLightContentMenu() ? mapActivity
-				.getResources().getColor(R.color.color_white) : mapActivity.getResources().getColor(
-				R.color.dark_drawer_bg_color);
-		mDrawerList.setBackgroundColor(color);
-		mDrawerList.setCacheColorHint(color);
 		mDrawerList.setOnItemClickListener(waypointDialogHelper.getDrawerItemClickListener(mapActivity, running,
 				listAdapter, null));
 	}

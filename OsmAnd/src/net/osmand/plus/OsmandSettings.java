@@ -1756,7 +1756,7 @@ public class OsmandSettings {
 	
 	public static final int OSMAND_DARK_THEME = 0;
 	public static final int OSMAND_LIGHT_THEME = 1;
-	public static final int OSMAND_LIGHT_DARK_ACTIONBAR_THEME = 2;
+
 
 	public final CommonPreference<Integer> SEARCH_TAB = 
 			new IntPreference("SEARCH_TAB", 0).makeGlobal().cache();
@@ -1771,18 +1771,11 @@ public class OsmandSettings {
 		return OSMAND_THEME.get() == OSMAND_LIGHT_THEME;
 	}
 	
-	public boolean isLightContentMenu(){
-		return OSMAND_THEME.get() != OSMAND_DARK_THEME  || Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB;
-	}
-	
+
 	public boolean isLightContent(){
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
-			return false;
-		}
 		return OSMAND_THEME.get() != OSMAND_DARK_THEME ;
 	}
-	
-	
+
 	
 	public final CommonPreference<Boolean> FLUORESCENT_OVERLAYS = 
 			new BooleanPreference("fluorescent_overlays", false).makeGlobal().cache();
