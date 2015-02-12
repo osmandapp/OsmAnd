@@ -4,6 +4,7 @@
         <attr name="maxVisibleWidth" format="dimension"/>
     </declare-styleable>
     <declare-styleable name="OsmAndTheme">
+		<attr name="list_divider" format="color"/>
         <attr name="expandable_category_color" format="reference"/>
         <attr name="reset_image" format="reference"/>
         <attr name="bottomToolBarColor" format="color" />
