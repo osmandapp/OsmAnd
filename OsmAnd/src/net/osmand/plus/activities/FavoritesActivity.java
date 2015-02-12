@@ -18,7 +18,10 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.view.MenuItem;
+
+import net.osmand.Location;
 import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -35,12 +38,14 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
+
+import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 /**
  *
  */
-public class FavoritesActivity extends TabActivity {
+public class FavoritesActivity extends TabActivity implements OsmAndLocationProvider.OsmAndCompassListener, OsmAndLocationProvider.OsmAndLocationListener {
 
 	private static final String FAVOURITES_INFO = "FAVOURITES_INFO";
 	private static final String TRACKS = "TRACKS";
@@ -119,12 +124,28 @@ public class FavoritesActivity extends TabActivity {
 				updateSelectedTracks();
 			}
 		});
+
+		if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
+			getLocationProvider().addCompassListener(this);
+			getLocationProvider().registerOrUnregisterCompassListener(true);
+		}
 	}
-	
+
+	public OsmandApplication getMyApplication() {
+		return (OsmandApplication) getApplication();
+	}
+
+	private OsmAndLocationProvider getLocationProvider() {
+		return getMyApplication().getLocationProvider();
+	}
+
 	@Override
 	protected void onPause() {
 		super.onPause();
 		((OsmandApplication) getApplication()).getSelectedGpxHelper().setUiListener(FavoritesActivity.class, null);
+		getLocationProvider().pauseAllUpdates();
+		getLocationProvider().removeLocationListener(this);
+		getLocationProvider().removeCompassListener(this);
 	}
 
 	public void updateSelectedTracks() {
@@ -194,6 +215,26 @@ public class FavoritesActivity extends TabActivity {
 			searchEdit.setHint(stopHint);
 		} catch (Exception e) {
 
+		}
+	}
+
+	@Override
+	public void updateCompassValue(float value) {
+		for (WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if (f instanceof FavoritesTreeFragment && !f.isDetached()) {
+				((FavoritesTreeFragment) f).updateCompassValue(value);
+			}
+		}
+	}
+
+	@Override
+	public void updateLocation(Location location) {
+		for (WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if (f instanceof FavoritesTreeFragment && !f.isDetached()) {
+				((FavoritesTreeFragment) f).updateLocation(location);
+			}
 		}
 	}
 }

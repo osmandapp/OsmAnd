@@ -139,8 +139,8 @@ public class DashFavoritesFragment extends DashLocationFragment implements Favou
 
 			if(loc != null){
 				direction.setVisibility(View.VISIBLE);
-				updateArrow(new LatLon(point.getLatitude(), point.getLongitude()), direction,
-						10, R.drawable.ic_destination_arrow);
+				updateArrow(getActivity(), loc, new LatLon(point.getLatitude(), point.getLongitude()), direction,
+						10, R.drawable.ic_destination_arrow, heading);
 			}
 			arrows.add(direction);
 			name.setText(point.getName());
@@ -177,8 +177,8 @@ public class DashFavoritesFragment extends DashLocationFragment implements Favou
 
 		for (int i = 0; i < arrows.size(); i++) {
 			arrows.get(i).setVisibility(View.VISIBLE);
-			updateArrow(new LatLon(points.get(i).getLatitude(),points.get(i).getLongitude()),
-					arrows.get(i), 10,  R.drawable.ic_destination_arrow);
+			updateArrow(getActivity(), loc, new LatLon(points.get(i).getLatitude(), points.get(i).getLongitude()),
+					arrows.get(i), 10, R.drawable.ic_destination_arrow, heading);
 		}
 	}
 

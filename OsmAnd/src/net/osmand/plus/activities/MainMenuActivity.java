@@ -26,7 +26,6 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.sherpafy.TourViewActivity;
 import net.osmand.plus.views.controls.FloatingActionButton;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -139,9 +138,9 @@ public class MainMenuActivity extends BaseDownloadActivity implements OsmAndLoca
 	@Override
 	public void onPause() {
 		super.onPause();
-		getMyApplication().getLocationProvider().pauseAllUpdates();
-		getMyApplication().getLocationProvider().removeLocationListener(this);
-		getMyApplication().getLocationProvider().removeCompassListener(this);
+		getLocationProvider().pauseAllUpdates();
+		getLocationProvider().removeLocationListener(this);
+		getLocationProvider().removeCompassListener(this);
 	}
 
 	@Override

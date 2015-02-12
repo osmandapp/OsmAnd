@@ -1,25 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+			  xmlns:tools="http://schemas.android.com/tools"
+			  android:layout_width="fill_parent"
+			  android:layout_height="fill_parent"
+			  android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/DescriptionText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="10dp"
-        android:text="@string/download_link_and_local_description" />
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingLeft="@dimen/dialog_content_margin"
+		android:paddingRight="@dimen/dialog_content_margin"
+		android:paddingTop="10dp">
 
-    <ExpandableListView
-        android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:groupIndicator="@android:color/transparent"
-        style="@style/OsmandListView"/>
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<TextView
+
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:text="@string/device_memory"/>
+
+			<TextView
+				android:id="@+id/DescriptionText"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/free"/>
+		</LinearLayout>
+
+		<ProgressBar
+			android:id="@+id/DeterminateProgressBar"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1" />
+
+
+	</LinearLayout>
+
+
+	<ExpandableListView
+		android:id="@android:id/list"
+		style="@style/OsmandListView"
+		android:layout_width="fill_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:groupIndicator="@android:color/transparent"/>
 
 </LinearLayout>

@@ -4,6 +4,8 @@
 package net.osmand.plus.activities.search;
 
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.Toolbar;
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -284,6 +286,14 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		addFooterView();
 		amenityAdapter = new AmenityAdapter(new ArrayList<Amenity>());
 		setListAdapter(amenityAdapter);
+
+		boolean light = getMyApplication().getSettings().isLightContent();
+		Drawable arrowImage = getResources().getDrawable(R.drawable.ic_destination_arrow_white);
+		if (light) {
+			arrowImage.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+		} else {
+			arrowImage.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+		}
 		
 		
 		
@@ -760,6 +770,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			}
 			float[] mes = null;
 			TextView label = (TextView) row.findViewById(R.id.poi_label);
+			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			ImageView direction = (ImageView) row.findViewById(R.id.poi_direction);
 			ImageView icon = (ImageView) row.findViewById(R.id.poi_icon);
 			Amenity amenity = getItem(position);
@@ -785,7 +796,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				}
 			}
 			if(loc != null){
-				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height);
+				DirectionDrawable draw = new DirectionDrawable(SearchPOIActivity.this, width, height, R.drawable.ic_destination_arrow_white);
 				Float h = heading;
 				float a = h != null ? h : 0;
 
@@ -844,8 +855,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				distance = " " + OsmAndFormatter.getFormattedDistance((int) mes[0], getMyApplication()) + "  "; //$NON-NLS-1$
 			}
 			String poiType = OsmAndFormatter.getPoiStringWithoutType(amenity, settings.usingEnglishNames());
-			label.setText(distance + poiType, TextView.BufferType.SPANNABLE);
-			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1, 0);
+			label.setText(poiType);
+			distanceText.setText(distance);
 			return (row);
 		}
 		

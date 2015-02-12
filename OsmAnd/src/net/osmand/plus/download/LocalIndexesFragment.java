@@ -86,7 +86,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.local_index, container, false);
 
-//		getDownloadActivity().getSupportActionBar().setTitle(R.string.local_index_descr_title);
 		getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
 
 		ExpandableListView listView = (ExpandableListView)view.findViewById(android.R.id.list);
@@ -663,7 +662,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) }); 
 		}
 
-		String text = getString(R.string.local_index_description, size);
+		String text = getString(R.string.free, size);
 		int l = text.indexOf('.');
 		if(l == -1) {
 			l = text.length();
