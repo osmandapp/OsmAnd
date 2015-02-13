@@ -250,7 +250,6 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		});
 
 		if (indexFileNames != null) {
-
 			if (e.isAlreadyDownloaded(indexFileNames)) {
 				if (e.getType() == DownloadActivityType.HILLSHADE_FILE
 						|| e.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
@@ -267,17 +266,19 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					String sfName = e.getTargetFileName();
 					final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
 					if (updatableResource && !DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e)) {
-						edition.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
-								+ indexActivatedFileNames.get(sfName));
+						description.setText(indexActivatedFileNames.get(sfName) + " " + e.getSizeDescription(clctx));
 					} else if (indexFileNames.containsKey(sfName) && !DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e)) {
-						edition.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
-								+ indexFileNames.get(sfName));
+						description.setText(indexFileNames.get(sfName) + " " + e.getSizeDescription(clctx));
 					} else if (updatableResource) {
+						String updatedDescr =  indexActivatedFileNames.get(sfName) + " " + e.getSizeDescription(clctx);
+						description.setText(updatedDescr);
 						edition.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
-								+ indexActivatedFileNames.get(sfName));
+								+ e.getDate(format));
 					} else {
-						edition.setText(name.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+						description.setText(name.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexFileNames.get(sfName));
+						edition.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+								+ e.getDate(format));
 					}
 				}
 			}
