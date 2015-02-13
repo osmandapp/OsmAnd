@@ -1896,4 +1896,6 @@
     <string name="nautical_maps_missing">Per accedir a cartes marines cal que baixeu un mapa específic</string>
 	<string name="enable_plugin2">Activa</string>
 	<string name="disable_plugin2">Desactiva</string>
-	</resources>
+	<string name="rendering_attr_pisteGrooming_name">Pista condicionada</string>
+    <string name="get_plugin">Obté</string>
+</resources>

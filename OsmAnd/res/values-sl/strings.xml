@@ -328,7 +328,7 @@
 	<string name="snap_to_road">Pripni na cesto</string>
 	<string name="osmand_short_description_80_chars">OsmAnd je odprtokodna navigacijska aplikacija z offline in online zemljevidi</string>
 	<string name="osmand_plus_short_description_80_chars">OsmAnd je odprtokodna navigacijska aplikacija z offline in online zemljevidi</string>
-	<string name="tip_update_index">Posodobitev map brez povezave</string>
+	<string name="tip_update_index">Posodobitev zemljevidov za delovanje brez povezave</string>
 	<string name="filterpoi_activity">Ustvari POI filter</string>
 	<string name="recalculate_route_to_your_location">Način prevoza:</string>
 	<string name="select_navigation_mode">Izberi način prevoza</string>
@@ -983,7 +983,7 @@
 	<string name="searching">Iskanje …</string>
 	<string name="searching_address">Iskanje naslova …</string>
 	<string name="search_osm_nominatim">Iskanje naslova z OSM Nominatim</string>
-	<string name="hint_search_online">Hišna številka, ulica, kraj</string>
+	<string name="hint_search_online">Spletno iskanje: hišna številka, ulica, kraj</string>
 	<string name="search_offline_address">Iskanje brez povezave</string>
 	<string name="search_online_address">Iskanje v povezavi</string>
 	<string name="max_level_download_tile">Maks. povečava za spletne</string>
@@ -1039,15 +1039,15 @@
 	<string name="map_tile_source">Vir koščkov zemljevida</string>
 	<string name="map_source">Vir zemljevida</string>
 	<string name="download_indexes">Prenos krajevnih podatkov</string>
-	<string name="tip_recent_changes_0_8_0_t">"Spremembe v 0.8.0:
-\n\t- Plugin functionality
-\n\t- Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager. You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.
-\n\t- New offline map data support\n\t- Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed).
-\n\t- You need to download completely new offline data (old data will not be supported anymore)
-\n\t- Offline Routing
-\n\t- Offline routing becomes more robust
-\n\t- Usability and UI experience
-\n\t- Improved in many areas "</string>
+	<string name="tip_recent_changes_0_8_0_t">"Spremembe v 0.8.0:\n\t- *Plugin functionality*
+\n\t - Most functionality is grouped by features and can be enabled/disabled in the Settings/Plugins. You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.
+\n\t- *New offline map data support*
+\n\t - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed).
+\n\t - You need to download completely new offline data (old data will not be supported anymore)
+\n\t- *Offline Routing*
+\n\t - Offline routing becomes more robust
+\n\t *Usability and UI experience*
+\n\t - Improved in many areas "</string>
 	<string name="tip_recent_changes_0_7_2_t">"Spremembe v 0.7.2:
 \n\t- Native rendering for all devices
 \n\t- Offline POI editing
@@ -1991,6 +1991,17 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="proxy_host_descr">Nastavitev imena gostitelja vašega proxy-ja (npr. 127.0.0.1)</string>
 	<string name="proxy_port_title">Vrata proxy-ja</string>
 	<string name="proxy_port_descr">Nastavitev številko vrat vašega proxy-ja (npr. 8118)</string>
-	<string name="enable_plugin">Omogoči</string>
-	<string name="disable_plugin">Onemogoči</string>
+	<string name="enable_plugin">Onemogočeno</string>
+	<string name="disable_plugin">Omogočeno</string>
+<string name="plugin_ski_name">Smučarske karte</string>
+    <string name="plugin_nautical_name">Navtične karte</string>
+    <string name="world_ski_missing">Če želite prikazati smučarske karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
+    <string name="nautical_maps_missing">Če želite prikazati navtične karte, morate prenesti posebne zemljevide za delovanje brez povezave</string>
+	<string name="edit_group">Urejanje skupine</string>
+    <string name="enable_plugin2">Omogoči</string>
+	<string name="disable_plugin2">Onemogoči</string>
+	<string name="plugin_description_title">Opis</string>
+	<string name="plugin_settings_button_caption">Nastavitve</string>
+	<string name="plugin_install_needs_network">Za namestitev tega vtičnika potrebujete internetno povezavo.</string>
+	<string name="get_plugin">Pridobi</string>
 </resources>
