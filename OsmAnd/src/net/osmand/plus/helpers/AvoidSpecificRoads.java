@@ -62,7 +62,7 @@ public class AvoidSpecificRoads {
 				}
 				final RouteDataObject obj = getItem(position);
 				v.findViewById(R.id.all_points).setVisibility(View.GONE);
-				((ImageView) v.findViewById(R.id.waypoint_icon)).setImageResource(app.getSettings().isLightContentMenu() ?
+				((ImageView) v.findViewById(R.id.waypoint_icon)).setImageResource(app.getSettings().isLightContent() ?
 						R.drawable.ic_action_road_works_light : R.drawable.ic_action_road_works_dark);
 				double dist = MapUtils.getDistance(mapLocation, MapUtils.get31LatitudeY(obj.getPoint31YTile(0)),
 						MapUtils.get31LongitudeX(obj.getPoint31XTile(0)));
@@ -71,7 +71,7 @@ public class AvoidSpecificRoads {
 				((TextView) v.findViewById(R.id.waypoint_text)).setText(getText(obj));
 				ImageButton remove = (ImageButton) v.findViewById(R.id.info_close);
 				remove.setVisibility(View.VISIBLE);
-				remove.setImageResource(app.getSettings().isLightContentMenu() ?
+				remove.setImageResource(app.getSettings().isLightContent() ?
 						R.drawable.ic_action_gremove_light : R.drawable.ic_action_gremove_dark);
 				remove.setOnClickListener(new View.OnClickListener() {
 

@@ -31,9 +31,6 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 
 	private Map<String, String> indexFileNames = null;
 	private Map<String, String> indexActivatedFileNames = null;
-	private int okColor;
-	private int defaultColor;
-	private int updateColor;
 	private OsmandRegions osmandRegions;
 	private java.text.DateFormat format;
 	private OsmandApplication app;
@@ -45,11 +42,8 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		app = downloadFragment.getMyApplication();
 		list = new ArrayList<IndexItemCategory>(IndexItemCategory.categorizeIndexItems(app, indexFiles));
 		format = downloadFragment.getMyApplication().getResourceManager().getDateFormat();
-		okColor = downloadFragment.getResources().getColor(R.color.color_ok);
 		TypedArray ta = downloadFragment.getDownloadActivity().getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
-		defaultColor = ta.getColor(0, downloadFragment.getResources().getColor(R.color.color_unknown));
 		ta.recycle();
-		updateColor = downloadFragment.getResources().getColor(R.color.color_update);
 		osmandRegions = downloadFragment.getMyApplication().getResourceManager().getOsmandRegions();
 	}
 
@@ -233,13 +227,15 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 			v = inflater.inflate(net.osmand.plus.R.layout.download_index_list_item, parent, false);
 		}
 		final View row = v;
-		TextView item = (TextView) row.findViewById(R.id.download_item);
+		TextView name = (TextView) row.findViewById(R.id.name);
+		TextView edition = (TextView) row.findViewById(R.id.update_descr);
+		edition.setText("");
 		TextView description = (TextView) row.findViewById(R.id.download_descr);
 		IndexItem e = (IndexItem) getChild(groupPosition, childPosition);
 		OsmandApplication clctx = downloadFragment.getMyApplication();
-		String eName = e.getVisibleDescription(clctx) + "\n" + e.getVisibleName(clctx, osmandRegions);
-		item.setText(eName.trim()); //$NON-NLS-1$
-		String d = e.getDate(format) + "\n" + e.getSizeDescription(clctx);
+		String eName = e.getVisibleName(clctx, osmandRegions);
+		name.setText(eName.trim()); //$NON-NLS-1$
+		String d = e.getDate(format) + " " + e.getSizeDescription(clctx);
 		description.setText(d.trim());
 
 		CheckBox ch = (CheckBox) row.findViewById(R.id.check_download_item);
@@ -254,50 +250,35 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		});
 
 		if (indexFileNames != null) {
-			
-			if (!e.isAlreadyDownloaded(indexFileNames)) {
-				item.setTextColor(defaultColor);
-				item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-			} else {
-				if(e.getType() == DownloadActivityType.HILLSHADE_FILE
-						|| e.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
-					item.setTextColor(okColor); // GREEN
+
+			if (e.isAlreadyDownloaded(indexFileNames)) {
+				if (e.getType() == DownloadActivityType.HILLSHADE_FILE
+						|| e.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
 					String sfName = e.getTargetFileName();
 					if (indexActivatedFileNames.containsKey(sfName)) {
-						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-					// next case since present hillshade files cannot be deactivated, but are not in indexActivatedFileNames
+						name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+						// next case since present hillshade files cannot be deactivated, but are not in indexActivatedFileNames
 					} else if (e.getType() == DownloadActivityType.HILLSHADE_FILE) {
-						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+						name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					} else {
-						item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+						name.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 					}
 				} else if (e.getDate(format) != null) {
 					String sfName = e.getTargetFileName();
 					final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
 					if (updatableResource && !DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e)) {
-						item.setText(item.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+						edition.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
-						item.setTextColor(okColor); // GREEN
-						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					} else if (indexFileNames.containsKey(sfName) && !DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e)) {
-						item.setText(item.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+						edition.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexFileNames.get(sfName));
-						item.setTextColor(okColor);
-						item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 					} else if (updatableResource) {
-						item.setText(item.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+						edition.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
-						item.setTextColor(updateColor); // LIGHT_BLUE
-						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					} else {
-						item.setText(item.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+						edition.setText(name.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexFileNames.get(sfName));
-						item.setTextColor(updateColor);
-						item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 					}
-				} else {
-					item.setTextColor(okColor);
-					item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				}
 			}
 		}

@@ -6,11 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import android.app.FragmentManager;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.support.v4.app.FragmentPagerAdapter;
+
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -111,7 +108,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 		settings = ((OsmandApplication)getApplication()).getSettings();
 
 		indeterminateProgressBar = (ProgressBar) findViewById(R.id.IndeterminateProgressBar);
-		determinateProgressBar = (ProgressBar) findViewById(R.id.DeterminateProgressBar);
+		determinateProgressBar = (ProgressBar) findViewById(R.id.memory_progress);
 		progressView = findViewById(R.id.ProgressView);
 		progressMessage = (TextView) findViewById(R.id.ProgressMessage);
 		progressPercent = (TextView) findViewById(R.id.ProgressPercent);

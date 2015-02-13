@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="expandable_list_item_dark">#292f33</color>
+
+	<color name="list_divider_dark">#1f2326</color>
+	<color name="list_divider_light">@color/color_white</color>
+	<color name="list_background_dark">#292f33</color>
+	<color name="list_sub_menu_background_dark">#475259</color>
 	<color name="expandable_list_item_light">@color/color_white</color>
+	<color name="list_item_background_dark">#333b40</color>
+
 
 	<color name="actionbar_dark_color">#39464d</color>
 	<color name="tool_bar_color_dark">#CC080B0D</color>
@@ -108,7 +114,7 @@
 	<color name="get_button_text">#ffffff</color>
 
 	<color name="plugin_details_header_bg_light">#ffffff</color>
-	<color name="plugin_details_header_bg_dark">#333b40</color>
+
 
 	<color name="plugin_details_install_header_bg_light">#dbdbdb</color>
 	<color name="plugin_details_install_header_bg_dark">#2d3438</color>

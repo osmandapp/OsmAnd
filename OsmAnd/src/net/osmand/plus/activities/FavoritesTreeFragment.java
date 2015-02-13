@@ -1,14 +1,19 @@
 package net.osmand.plus.activities;
 
+import android.app.Dialog;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.SearchView;
 import android.view.*;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -29,11 +35,14 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.util.MapUtils;
@@ -47,8 +56,6 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
-import android.text.Spannable;
-import android.text.style.ForegroundColorSpan;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -82,6 +89,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	private Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<FavoriteGroup>();
 	private ActionMode actionMode;
 	private SearchView searchView;
+
+	protected LatLon loc = null;
+	protected Float heading = null;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -125,6 +135,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		// final LatLon mapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 		favouritesAdapter.synchronizeGroups();
 
+		loc = getMyApplication().getSettings().getLastKnownMapLocation();
 		if(favouritesAdapter.getGroupCount() > 0 && 
 				"".equals(favouritesAdapter.getGroup(0).name)) {
 			getExpandableListView().expandGroup(0);
@@ -153,43 +164,45 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 			updateSelectionMode(actionMode);
 		} else {
+			final FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(groupPosition, childPosition);
+
 			ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
 			qa.setAnchor(v);
 			final OsmandSettings settings = getMyApplication().getSettings();
-			final FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(groupPosition, childPosition);
+
 			String name = getString(R.string.favorite) + ": " + point.getName();
 			LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
-			OnClickListener onshow = new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					settings.SHOW_FAVORITES.set(true);
-				}
-			};
-			DirectionsDialogs.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(),
+			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
+			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, point, name, settings.getLastKnownMapZoom(),
 					getActivity(), true, false);
-			Item edit = qa.item(R.string.favourites_context_menu_edit).icons(
-					R.drawable.ic_action_edit_dark, R.drawable.ic_action_edit_light);
-			edit.listen(
-					new OnContextMenuClick() {
-						
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-							editPoint(point);
-							return true;
-						}
-					}).reg();
-			Item delete = qa.item(R.string.favourites_context_menu_delete).icons(
-					R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light);
-			delete.listen(
-					new OnContextMenuClick() {
-						
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-							deletePoint(point);
-							return true;
-						}
-					}).reg();
-			MapActivityActions.showObjectContextMenu(qa, getActivity(), onshow);
+
+
+
+//			DirectionsDialogs.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(),
+//					getActivity(), true, false);
+			boolean light = getMyApplication().getSettings().isLightContent();
+			MenuItem item = optionsMenu.getMenu().add(R.string.favourites_context_menu_edit)
+					.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					editPoint(point);
+					return true;
+				}
+			});
+
+			item = optionsMenu.getMenu().add(R.string.favourites_context_menu_delete)
+					.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					deletePoint(point);
+
+					return true;
+				}
+			});
+
+			optionsMenu.show();
 		}
 		return true;
 	}
@@ -737,9 +750,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			} else {
 				final ImageView ch = (ImageView) row.findViewById(R.id.check_item);
 				ch.setVisibility(View.VISIBLE);
-				ch.setImageDrawable(getActivity().getResources().getDrawable(
-						getMyApplication().getSettings().isLightContent() ? R.drawable.ic_action_settings_enabled_light
-								: R.drawable.ic_action_settings_enabled_dark));
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -761,7 +771,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				row = inflater.inflate(R.layout.favourites_list_item, parent, false);
 			}
 
-			TextView label = (TextView) row.findViewById(R.id.favourite_label);
+			TextView name = (TextView) row.findViewById(R.id.favourite_label);
+			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
 			row.setTag(model);
@@ -770,11 +781,19 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
 			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
-			label.setText(distance + model.getName(), TextView.BufferType.SPANNABLE);
-			label.setTypeface(Typeface.DEFAULT, model.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
-			((Spannable) label.getText()).setSpan(
-					new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
-					0);
+			name.setText(model.getName(), TextView.BufferType.SPANNABLE);
+			name.setTypeface(Typeface.DEFAULT, model.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
+			distanceText.setText(distance);
+			distanceText.setTextColor(getResources().getColor(R.color.color_distance));
+			row.findViewById(R.id.group_image).setVisibility(View.GONE);
+
+			if(loc != null){
+				ImageView direction = (ImageView) row.findViewById(R.id.direction);
+				direction.setVisibility(View.VISIBLE);
+				DashLocationFragment.updateArrow(getActivity(), loc, new LatLon(model.getLatitude(), model.getLongitude()), direction,
+						10, R.drawable.ic_destination_arrow, heading);
+			}
+
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 			if (selectionMode) {
 				ch.setVisibility(View.VISIBLE);
@@ -862,5 +881,33 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		}
 	}
 
+	public void updateLocation(Location location) {
+		//This is used as origin for both Fav-list and direction arrows
+		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
+			loc = getMyApplication().getSettings().getLastKnownMapLocation();
+		} else {
+			loc = new LatLon(0f, 0f);
+		}
+		updateArrows();
+	}
 
+	public boolean updateCompassValue(float value) {
+		//heading = value;
+		//updateArrows();
+		//99 in next line used to one-time initalize arrows (with reference vs. fixed-north direction) on non-compass devices
+		float lastHeading = heading != null ? heading : 99;
+		heading = value;
+		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			updateArrows();
+			return true;
+		} else {
+			heading = lastHeading;
+		}
+		return false;
+	}
+
+
+	private void updateArrows(){
+		favouritesAdapter.notifyDataSetChanged();
+	}
 }

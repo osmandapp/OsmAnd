@@ -20,6 +20,6 @@
 			android:id="@+id/bottomControls"
 			android:background="?attr/bottomToolBarColor"
 			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"/>
+			android:layout_height="@dimen/bottom_tool_bar_size"/>
 
 </LinearLayout>

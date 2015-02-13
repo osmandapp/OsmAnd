@@ -4,6 +4,7 @@
         <attr name="maxVisibleWidth" format="dimension"/>
     </declare-styleable>
     <declare-styleable name="OsmAndTheme">
+		<attr name="list_divider" format="color"/>
         <attr name="expandable_category_color" format="reference"/>
         <attr name="reset_image" format="reference"/>
         <attr name="bottomToolBarColor" format="color" />
@@ -31,6 +32,9 @@
 		<attr name="ic_world_globe" format="reference" />
 		<attr name="plugin_description_header_text_color" format="color|reference" />
 		<attr name="expandable_list_item_background" format="color"/>
+		<attr name="expandable_list_background" format="color"/>
+		<attr name="list_settings_icon" format="reference"/>
+		<attr name="size_progress_bar" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

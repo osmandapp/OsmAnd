@@ -86,7 +86,7 @@ public class DashParkingFragment extends DashLocationFragment {
 		ImageView direction = (ImageView) mainView.findViewById(R.id.direction_icon);
 		if (loc != null){
 			direction.setVisibility(View.VISIBLE);
-			updateArrow(position, direction, 10, R.drawable.ic_destination_arrow);
+			updateArrow(getActivity(), loc, position, direction, 10, R.drawable.ic_destination_arrow, heading);
 		}
 	}
 
