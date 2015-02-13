@@ -663,7 +663,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		if(dir.canRead()){
 			StatFs fs = new StatFs(dir.getAbsolutePath());
 			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) });
-			percent = (int) (fs.getAvailableBytes() * 100 / fs.getTotalBytes());
+			percent = (int) (fs.getAvailableBlocks() * 100 / fs.getBlockCount());
 		}
 		sizeProgress.setProgress(percent);
 		String text = getString(R.string.free, size);
