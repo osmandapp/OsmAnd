@@ -182,6 +182,13 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 			TextView label = (TextView) row.findViewById(R.id.favourite_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = getItem(position);
+			if (!model.getCategory().isEmpty()){
+				row.findViewById(R.id.group_image).setVisibility(View.VISIBLE);
+			} else {
+				row.findViewById(R.id.group_image).setVisibility(View.GONE);
+			}
+			((TextView) row.findViewById(R.id.group_name)).setText(model.getCategory());
+
 			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, model.getColor()));
 			String distance = "";
 			if (location != null) {
