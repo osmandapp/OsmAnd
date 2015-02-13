@@ -1922,4 +1922,6 @@
 	<string name="enable_plugin2">Activar</string>
 	<string name="disable_plugin2">Desactivar</string>
 	<string name="get_plugin">Obtener</string>
-</resources>
+<string name="free">"Libre %1$s "</string>
+	<string name="device_memory">Memoria del dispositivo</string>
+    </resources>
