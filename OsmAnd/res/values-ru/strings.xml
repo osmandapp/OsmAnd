@@ -1886,4 +1886,6 @@
     <string name="plugin_nautical_name">Морские карты</string>
     <string name="world_ski_missing">Для отображения лыжных карт необходимо загрузить данные специализированные карты</string>
     <string name="nautical_maps_missing">Для отображения морских карт необходимо загрузить данные специализированные карты</string>
+	<string name="device_memory">Память устройства</string>
+    <string name="free">"Свободно %1$s "</string>
 	</resources>
