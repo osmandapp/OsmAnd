@@ -2065,4 +2065,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="world_ski_missing">Pre zobrazenie lyžiarskym máp je potrebné stiahnuť samostatnú lyžiarsku mapu pre offline použitie</string>
     <string name="nautical_maps_missing">Pre zobrazenie námorných máp je potrebné stiahnuť samostatnú námornú mapu pre offline použitie</string>
 	<string name="rendering_attr_pisteGrooming_name">Úprava zjazdovky</string>
+    <string name="free">"%1$s voľných "</string>
+	<string name="device_memory">Pamäť zariadenia</string>
     </resources>
