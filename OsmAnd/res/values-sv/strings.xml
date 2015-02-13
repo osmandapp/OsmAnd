@@ -1806,4 +1806,6 @@
     <string name="world_ski_missing">För att kunna visa skidkartor måste den speciella offline-kartan hämtas</string>
     <string name="nautical_maps_missing">För att kunna visa sjökort måste den speciella offline-kartan hämtas</string>
 	<string name="rendering_attr_pisteGrooming_name">Pist- och spårpreparering</string>
+    <string name="free">"Ledigt %1$s "</string>
+	<string name="device_memory">Intern lagring</string>
     </resources>
