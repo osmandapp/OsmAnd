@@ -1914,4 +1914,6 @@
     <string name="world_ski_missing">For at vise skikort, skal det særlige offline kort hentes</string>
     <string name="nautical_maps_missing">For at vise søkort, skal det særlige offline kort hentes</string>
 	<string name="rendering_attr_pisteGrooming_name">Pistepreparering</string>
+    <string name="free">"Fri %1$s "</string>
+	<string name="device_memory">Enhedens hukommelse</string>
     </resources>
