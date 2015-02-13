@@ -119,6 +119,7 @@
     </style>
 
 	<style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
+		<item name="list_divider">@color/list_divider_dark</item>
         <item name="reset_image">@drawable/ic_action_delete_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_light</item>
@@ -166,6 +167,7 @@
 	</style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+		<item name="list_divider">@color/list_divider_light</item>
         <item name="reset_image">@drawable/ic_action_delete_dark</item> <!--  @drawable/a_1_navigation_cancel_dark -->
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_dark</item>

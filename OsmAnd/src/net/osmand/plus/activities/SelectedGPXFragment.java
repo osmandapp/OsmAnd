@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.PopupMenu;
 import android.view.*;
 import gnu.trove.list.array.TIntArrayList;
 
@@ -630,9 +631,10 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			String name = app.getString(R.string.favorite) + ": " + child.name;
 			LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
 			OsmandSettings settings = app.getSettings();
-			DirectionsDialogs.createDirectionsActions(qa, location, child.locationStart, name, settings.getLastKnownMapZoom(), getMyActivity(),
-					true, false);
-			MapActivityActions.showObjectContextMenu(qa, getMyActivity(), null);
+			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
+			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, child.locationStart, name, settings.getLastKnownMapZoom(),
+					getActivity(), true, false);
+			optionsMenu.show();
 		} else {
 			child.expanded = !child.expanded;
 			adapter.notifyDataSetInvalidated();

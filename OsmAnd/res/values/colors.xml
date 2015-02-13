@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<color name="list_divider_dark">#1f2326</color>
+	<color name="list_divider_light">@color/color_white</color>
 	<color name="list_background_dark">#292f33</color>
 	<color name="list_sub_menu_background_dark">#475259</color>
 	<color name="expandable_list_item_light">@color/color_white</color>

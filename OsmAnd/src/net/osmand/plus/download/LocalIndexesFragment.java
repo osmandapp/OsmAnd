@@ -527,15 +527,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			if (j + 1 >= max && optionsMenuAdapter.length() > max) {
 				if (split == null) {
 					split = menu.addSubMenu(0, 1, j + 1, R.string.default_buttons_other_actions);
-					split.setIcon(isLightActionBar() ? R.drawable.ic_overflow_menu_light : R.drawable.ic_overflow_menu_dark );
+					split.setIcon(R.drawable.ic_overflow_menu_white);
 					split.getItem();
-					MenuItemCompat.setShowAsAction(split.getItem(),MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+					MenuItemCompat.setShowAsAction(split.getItem(),MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 				}
 				item = split.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
-				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
+				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 			} else {
 				item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
-				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM );
+				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
 			}
 			if (optionsMenuAdapter.getImageId(j, isLightActionBar()) != 0) {
 				item.setIcon(optionsMenuAdapter.getImageId(j, isLightActionBar()));
@@ -994,20 +994,17 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			LocalIndexInfo group = getGroup(groupPosition);
 			if (v == null) {
 				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				v = inflater.inflate(net.osmand.plus.R.layout.expandable_list_item_category, parent, false);
+				v = inflater.inflate(R.layout.local_index_list_category, parent, false);
 			}
-			StringBuilder t = new StringBuilder(group.getType().getHumanString(getDownloadActivity()));
+			StringBuilder name = new StringBuilder(group.getType().getHumanString(getDownloadActivity()));
 			if(group.getSubfolder() != null) {
-				t.append(" ").append(group.getSubfolder());
+				name.append(" ").append(group.getSubfolder());
 			}
 			if (group.isBackupedData()) {
-				t.append(" - ").append(getString(R.string.local_indexes_cat_backup));
+				name.append(" - ").append(getString(R.string.local_indexes_cat_backup));
 			}
-
-			v.findViewById(R.id.explist_indicator).setVisibility(View.GONE);
-
 			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
-			nameView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+			TextView sizeView = ((TextView) v.findViewById(R.id.category_size));
 			List<LocalIndexInfo> list = data.get(group);
 			int size = 0;
 			for (LocalIndexInfo aList : list) {
@@ -1019,16 +1016,17 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 					size += sz;
 				}
 			}
+			String sz = "";
 			if (size > 0) {
-				String sz;
 				if (size > 1 << 20) {
 					sz = formatGb.format(new Object[] { (float) size / (1 << 20) });
 				} else {
 					sz = formatMb.format(new Object[] { (float) size / (1 << 10) });
 				}
-				t.append(" [").append(sz).append("]");
+
 			}
-			nameView.setText(t.toString());
+			sizeView.setText(sz);
+			nameView.setText(name.toString());
 			if (!group.isBackupedData()) {
 				nameView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			} else {

@@ -46,6 +46,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
+		android:background="?attr/expandable_list_background"
         android:divider="@drawable/divider"
         android:dividerHeight="1dp" />
 

@@ -137,7 +137,7 @@ public class ContextMenuAdapter {
 		if (holoLight) {
 			return ctx.getResources().getColor(R.color.color_white);
 		} else {
-			return ctx.getResources().getColor(R.color.dark_drawer_bg_color);
+			return ctx.getResources().getColor(R.color.list_background_dark);
 		}
 	}
 	
