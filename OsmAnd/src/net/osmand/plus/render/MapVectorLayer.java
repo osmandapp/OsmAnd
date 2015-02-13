@@ -117,7 +117,7 @@ public class MapVectorLayer extends BaseMapLayer {
 				if (st.MAP_TRANSPARENCY.get() != cachedMapTransparency) {
 					cachedMapTransparency = st.MAP_TRANSPARENCY.get();
 					MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-					mapLayerConfiguration.setOpacity(((float)cachedMapTransparency) / 255.0f);
+					mapLayerConfiguration.setOpacityFactor(((float)cachedMapTransparency) / 255.0f);
 					mapRenderer.setMapLayerConfiguration(0, mapLayerConfiguration);
 				}
 				if (!Algorithms.objectEquals(st.MAP_OVERLAY.get(), cachedOverlay)) {
@@ -135,7 +135,7 @@ public class MapVectorLayer extends BaseMapLayer {
 				if (st.MAP_OVERLAY_TRANSPARENCY.get() != cachedOverlayTransparency) {
 					cachedOverlayTransparency = st.MAP_OVERLAY_TRANSPARENCY.get();
 					MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-					mapLayerConfiguration.setOpacity(((float)cachedOverlayTransparency) / 255.0f);
+					mapLayerConfiguration.setOpacityFactor(((float)cachedOverlayTransparency) / 255.0f);
 					mapRenderer.setMapLayerConfiguration(1, mapLayerConfiguration);
 				}
 				// opengl renderer
