@@ -3,6 +3,7 @@ package net.osmand.plus.activities.search;
 import java.util.List;
 
 import android.support.v4.app.ListFragment;
+import android.support.v7.widget.PopupMenu;
 import android.view.*;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
@@ -114,19 +115,12 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 	}
 
 	private void selectModel(final HistoryEntry model, View v) {
-		ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
-		qa.setAnchor(v);
 		String name = model.getName();
+		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		OsmandSettings settings = ((OsmandApplication) getActivity().getApplication()).getSettings();
-		OnClickListener onShow = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				helper.selectEntry(model);				
-			}
-		};
-		DirectionsDialogs.createDirectionsActions(qa, new LatLon(model.getLat(), model.getLon()),
+		DirectionsDialogs.createDirectionsActionsPopUpMenu(optionsMenu, new LatLon(model.getLat(), model.getLon()),
 				model, name, settings.getLastKnownMapZoom(), getActivity(), false);
-		MapActivityActions.showObjectContextMenu(qa, getActivity(), onShow);
+		optionsMenu.show();
 	}
 
 	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {

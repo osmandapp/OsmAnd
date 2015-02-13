@@ -56,7 +56,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
-import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,6 +81,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	private ActionMode actionMode;
 
 	private TextView descriptionText;
+	private ProgressBar sizeProgress;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -94,7 +95,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		expandAllGroups();
 		setListView(listView);
 		//getDownloadActivity().getSupportActionBar().setLogo(R.drawable.tab_download_screen_icon);
-		descriptionText = (TextView) view.findViewById(R.id.DescriptionText);
+		descriptionText = (TextView) view.findViewById(R.id.memory_size);
+		sizeProgress = (ProgressBar) view.findViewById(R.id.memory_progress);
 		updateDescriptionTextWithSize();
 		return view;
 	}
@@ -657,11 +659,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	private void updateDescriptionTextWithSize(){
 		File dir = getMyApplication().getAppPath("").getParentFile();
 		String size = formatGb.format(new Object[]{0});
+		int percent = 0;
 		if(dir.canRead()){
 			StatFs fs = new StatFs(dir.getAbsolutePath());
-			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) }); 
+			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) });
+			percent = (int) (fs.getAvailableBytes() * 100 / fs.getTotalBytes());
 		}
-
+		sizeProgress.setProgress(percent);
 		String text = getString(R.string.free, size);
 		int l = text.indexOf('.');
 		if(l == -1) {

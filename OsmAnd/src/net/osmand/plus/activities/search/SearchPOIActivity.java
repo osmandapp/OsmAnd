@@ -6,6 +6,7 @@ package net.osmand.plus.activities.search;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -568,21 +569,19 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	@Override
 	public void onItemClick(AdapterView<?> parent,final View view, int position, long id) {
 		final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
-		ContextMenuAdapter adapter = new ContextMenuAdapter(view.getContext());
-		adapter.setAnchor(view);
 		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(), settings.usingEnglishNames());
 		String name = poiSimpleFormat;
 		int z = Math.max(16, settings.getLastKnownMapZoom());
-
-		DirectionsDialogs.createDirectionsActions(adapter, amenity.getLocation(), amenity, name, z, this, true );
+		final PopupMenu optionsMenu = new PopupMenu(this, view);
+		DirectionsDialogs.createDirectionsActionsPopUpMenu(optionsMenu, amenity.getLocation(), amenity, name, z, this, true);
 		final String d = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity, false);
 		if(d.toString().trim().length() > 0) {
-			Item poiDescr = adapter.item(R.string.poi_context_menu_showdescription).icons(
-					R.drawable.ic_action_note_dark, R.drawable.ic_action_note_light);
-			poiDescr.listen(new OnContextMenuClick() {
-
+			MenuItem item = optionsMenu.getMenu().add(R.string.poi_context_menu_showdescription).
+					setIcon(getMyApplication().getSettings().isLightContent() ?
+							R.drawable.ic_action_note_light : R.drawable.ic_action_note_dark);
+			item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+				public boolean onMenuItemClick(MenuItem item) {
 					// Build text(amenity)
 
 					// Find and format links
@@ -602,20 +601,19 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					textView.setLinksClickable(true);
 					return true;
 				}
-			}).reg();
+			});
 		}
 		if (((OsmandApplication)getApplication()).accessibilityEnabled()) {
-			Item showDetails = adapter.item(R.string.show_details);
-			showDetails.listen(new OnContextMenuClick() {
-
+			MenuItem item = optionsMenu.getMenu().add(R.string.show_details);
+			item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+				public boolean onMenuItemClick(MenuItem item) {
 					showPOIDetails(amenity, settings.usingEnglishNames());
 					return true;
 				}
-			}).reg();
+			});
 		}
-		MapActivityActions.showObjectContextMenu(adapter, this, null);
+		optionsMenu.show();
 	}
 
 

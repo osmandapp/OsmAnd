@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -227,12 +228,11 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		Place item = adapter.getItem(position);
-		ContextMenuAdapter qa = new ContextMenuAdapter(view.getContext());
-		qa.setAnchor(view);
-		DirectionsDialogs.createDirectionsActions(qa, new LatLon(item.lat, item.lon), item, 
-				getString(R.string.address)+ " : " + item.displayName, Math.max(15, settings.getLastKnownMapZoom()), 
+		final PopupMenu optionsMenu = new PopupMenu(getActivity(), view);
+		DirectionsDialogs.createDirectionsActionsPopUpMenu(optionsMenu, new LatLon(item.lat, item.lon), item,
+				getString(R.string.address) + " : " + item.displayName, Math.max(15, settings.getLastKnownMapZoom()),
 				getActivity(), true);
-		MapActivityActions.showObjectContextMenu(qa, getActivity(), null);
+		optionsMenu.show();
 	}
 	
 	private static class Place {

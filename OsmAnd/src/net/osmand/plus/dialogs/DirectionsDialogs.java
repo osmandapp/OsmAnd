@@ -52,12 +52,13 @@ public class DirectionsDialogs {
 		}
 	}
 	
-	public static void createDirectionsActions(final ContextMenuAdapter qa , final LatLon location, final Object obj, final String name, 
-    		final int z, final Activity activity, final boolean saveHistory) {
-		createDirectionsActions(qa, location, obj, name, z, activity, saveHistory, true);
+	public static void createDirectionsActionsPopUpMenu(final PopupMenu optionsMenu , final LatLon location, final Object obj, final String name,
+											   final int z, final Activity activity, final boolean saveHistory) {
+		createDirectionActionsPopUpMenu(optionsMenu, location, obj, name, z, activity, saveHistory, true);
 	}
 
-	public static PopupMenu createDirectionActionsPopUpMenu(final PopupMenu optionsMenu, final LatLon location, final Object obj, final String name,
+
+	public static void createDirectionActionsPopUpMenu(final PopupMenu optionsMenu, final LatLon location, final Object obj, final String name,
 															final int z, final Activity activity, final boolean saveHistory, boolean favorite) {
 		setupPopUpMenuIcon(optionsMenu);
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
@@ -121,75 +122,8 @@ public class DirectionsDialogs {
 				}
 			});
 		}
-
-		return optionsMenu;
 	}
 	
-	public static void createDirectionsActions(final ContextMenuAdapter qa , final LatLon location, final Object obj, final String name, 
-    		final int z, final Activity activity, final boolean saveHistory, boolean favorite) {
-
-		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
-		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		
-		
-		Item dir = qa.item(R.string.context_menu_item_directions_to).icons(
-				R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light);
-		dir.listen(
-				new OnContextMenuClick() {
-					
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						directionsToDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
-						return true;
-					}
-				}).reg();
-		Item intermediate; 
-		if (targetPointsHelper.getPointToNavigate() != null) {
-			intermediate = qa.item(R.string.context_menu_item_intermediate_point).icons(
-					R.drawable.ic_action_flage_dark,R.drawable.ic_action_flage_light);
-		} else {
-			intermediate = qa.item(R.string.context_menu_item_destination_point).icons(
-					R.drawable.ic_action_flag_dark, R.drawable.ic_action_flag_light);
-		}
-		intermediate.listen(new OnContextMenuClick() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-				addWaypointDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
-				return true;
-			}
-		}).reg();
-
-		Item showOnMap = qa.item(R.string.show_poi_on_map).icons(
-				R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light );
-		showOnMap.listen(
-				new OnContextMenuClick() {
-					
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), z, saveHistory ? name : null, name,
-								obj); //$NON-NLS-1$
-						MapActivity.launchMapActivityMoveToTop(activity);
-						return true;
-					}
-				}).reg();
-		if (favorite) {
-			Item addToFavorite = qa.item(R.string.add_to_favourite).icons(
-					R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light);
-			addToFavorite.listen(new OnContextMenuClick() {
-
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					Bundle args = new Bundle();
-					Dialog dlg = FavoriteDialogs.createAddFavouriteDialog(activity, args);
-					dlg.show();
-					FavoriteDialogs.prepareAddFavouriteDialog(activity, dlg, args, location.getLatitude(), location.getLongitude(),
-							name);
-					return true;
-				}
-			}).reg();
-		}
-	}
-
 	public static void addWaypointDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name) {
 		final OsmandApplication ctx = (OsmandApplication) act.getApplication();
 		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();

@@ -34,6 +34,7 @@
 		<attr name="expandable_list_item_background" format="color"/>
 		<attr name="expandable_list_background" format="color"/>
 		<attr name="list_settings_icon" format="reference"/>
+		<attr name="size_progress_bar" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

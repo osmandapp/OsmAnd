@@ -12,7 +12,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -322,7 +321,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
 				enableSelectionMode(false);
-				getView().findViewById(R.id.DescriptionText).setVisibility(View.GONE);
+				getView().findViewById(R.id.memory_size).setVisibility(View.GONE);
 				runSelection(false);
 				listAdapter.notifyDataSetChanged();
 			}
@@ -384,15 +383,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
 				enableSelectionMode(false);
-				getView().findViewById(R.id.DescriptionText).setVisibility(View.GONE);
+				getView().findViewById(R.id.memory_size).setVisibility(View.GONE);
 				listAdapter.notifyDataSetChanged();
 			}
 
 		});
 
 		if (R.string.local_index_mi_upload_gpx == actionResId) {
-			((TextView) getView().findViewById(R.id.DescriptionText)).setText(R.string.local_index_upload_gpx_description);
-			((TextView) getView().findViewById(R.id.DescriptionText)).setVisibility(View.VISIBLE);
+			((TextView) getView().findViewById(R.id.memory_size)).setText(R.string.local_index_upload_gpx_description);
+			((TextView) getView().findViewById(R.id.memory_size)).setVisibility(View.VISIBLE);
 		}
 		listAdapter.notifyDataSetChanged();
 	}
