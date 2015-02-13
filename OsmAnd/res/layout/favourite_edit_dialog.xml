@@ -1,57 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="3dp"
-    android:paddingRight="3dp"
-    android:stretchColumns="1">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="fill_parent"
+			  android:layout_height="wrap_content"
+			  android:orientation="vertical">
 
-    <TableRow>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/favourites_edit_dialog_name" />
-
-        <EditText
-            android:id="@+id/Name"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="3dp"
-            android:selectAllOnFocus="true" />
-    </TableRow>
-
-	<TableRow>
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingBottom="@dimen/dialog_content_bottom_margin"
+		android:paddingLeft="@dimen/dialog_content_margin"
+		android:paddingRight="@dimen/dialog_content_margin"
+		android:paddingTop="@dimen/dialog_content_bottom_margin">
 
 		<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/osmo_group_description" />
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/dialog_elements_vertical_margin"
+			android:text="@string/favourites_edit_dialog_name"/>
 
 		<EditText
-				android:id="@+id/descr"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:completionThreshold="1"
-				android:inputType="textCapWords"
-				android:paddingLeft="3dp"
-				android:selectAllOnFocus="true" />
-	</TableRow>
+			android:id="@+id/Name"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:selectAllOnFocus="true"/>
 
-    <TableRow>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/favourites_edit_dialog_category" />
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/dialog_elements_vertical_margin"
+			android:text="@string/favourites_edit_dialog_category"/>
 
-        <AutoCompleteTextView
-            android:id="@+id/Category"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:completionThreshold="1"
-            android:inputType="textCapWords"
-            android:paddingLeft="3dp"
-            android:selectAllOnFocus="true" />
-    </TableRow>
-</TableLayout>
+		<AutoCompleteTextView
+			android:id="@+id/Category"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:completionThreshold="1"
+			android:inputType="textCapWords"
+			android:selectAllOnFocus="true"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/dialog_elements_vertical_margin"
+			android:text="@string/osmo_group_description"/>
+
+		<EditText
+			android:id="@+id/descr"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:completionThreshold="1"
+			android:inputType="textCapWords"
+			android:selectAllOnFocus="true"/>
+	</LinearLayout>
+
+</LinearLayout>

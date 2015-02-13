@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import android.support.v4.app.ListFragment;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
 import net.osmand.data.FavouritePoint;
@@ -115,18 +116,10 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 			FavouritePoint point = favouritesAdapter.getItem(position);
 			String name = getString(R.string.favorite) + ": " + point.getName();
 			LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
-			View.OnClickListener onshow = new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					settings.SHOW_FAVORITES.set(true);							
-				}
-			};
-			ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
-			qa.setAnchor(v);
-			DirectionsDialogs.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), getActivity(),
-					true, false);
-			MapActivityActions.showObjectContextMenu(qa, getActivity(), onshow);
+			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
+			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, point, name, settings.getLastKnownMapZoom(),
+					getActivity(), true, false);
+			optionsMenu.show();
 		} else {
 			Intent intent = getActivity().getIntent();
 			intent.putExtra(SELECT_FAVORITE_POINT_INTENT_KEY, favouritesAdapter.getItem(position));

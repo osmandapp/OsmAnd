@@ -16,7 +16,6 @@ import net.osmand.plus.activities.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.activities.EnumAdapter;
 import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -25,10 +24,6 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -232,7 +227,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		Builder bldr = new AlertDialog.Builder(la);
 		LayoutInflater inflater = (LayoutInflater)la.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		final View view = inflater.inflate(R.layout.send_gpx_osm, null);
-		final EditText descr = (EditText) view.findViewById(R.id.DescriptionText);
+		final EditText descr = (EditText) view.findViewById(R.id.memory_size);
 		if(info.length > 0 && info[0].getFileName() != null) {
 			int dt = info[0].getFileName().indexOf('.');
 			descr.setText(info[0].getFileName().substring(0, dt));

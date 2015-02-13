@@ -292,7 +292,7 @@ public class MapActivityLayers {
 			it.reg();
 		}
 		Builder builder = new AlertDialog.Builder(activity);
-		ListAdapter listAdapter =adapter.createListAdapter(activity, app.getSettings().isLightContentMenu());
+		ListAdapter listAdapter =adapter.createListAdapter(activity, app.getSettings().isLightContent());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener(){
 
 			@Override

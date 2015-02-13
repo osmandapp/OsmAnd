@@ -804,19 +804,6 @@ public class OsmandApplication extends Application {
 		}
 		setLanguage(c);
 		c.setTheme(t);
-		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_DARK_ACTIONBAR_THEME
-				&& Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			ActionBar ab = null;
-			if (c instanceof ActionBarActivity) {
-				ab = ((ActionBarActivity) c).getSupportActionBar();
-			}
-
-			if (ab != null) {
-				BitmapDrawable bg = (BitmapDrawable) getResources().getDrawable(R.drawable.bg_striped);
-				bg.setTileModeXY(TileMode.REPEAT, TileMode.REPEAT);
-				ab.setBackgroundDrawable(bg);
-			}
-		}
 	}
 	
 	public IBRouterService getBRouterService() {

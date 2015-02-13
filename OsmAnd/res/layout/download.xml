@@ -74,7 +74,7 @@
             android:orientation="horizontal">
 
             <ProgressBar
-                android:id="@+id/DeterminateProgressBar"
+                android:id="@+id/memory_progress"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
     <Button
         android:id="@+id/DownloadButton"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/bottom_tool_bar_size"
         android:background="?attr/downloadButtonBackground"
         android:gravity="center"
         android:text="@string/download_files"
