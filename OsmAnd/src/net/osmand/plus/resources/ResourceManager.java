@@ -210,7 +210,7 @@ public class ResourceManager {
 		if(request instanceof TileLoadDownloadRequest){
 			TileLoadDownloadRequest req = ((TileLoadDownloadRequest) request);
 			imagesOnFS.put(req.tileId, Boolean.TRUE);
-			if(req.fileToSave != null && req.tileSource instanceof SQLiteTileSource){
+/*			if(req.fileToSave != null && req.tileSource instanceof SQLiteTileSource){
 				try {
 					((SQLiteTileSource) req.tileSource).insertImage(req.xTile, req.yTile, req.zoom, req.fileToSave);
 				} catch (IOException e) {
@@ -225,7 +225,7 @@ public class ResourceManager {
 						req.fileToSave.getParentFile().getParentFile().delete();
 					}
 				}
-			}
+			}*/
 		}
 		
 	}
@@ -437,7 +437,7 @@ public class ResourceManager {
 					Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"),
 							new FileOutputStream(file));
 				}
-			} 
+			}
 			regions.prepareFile(file.getAbsolutePath());
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);

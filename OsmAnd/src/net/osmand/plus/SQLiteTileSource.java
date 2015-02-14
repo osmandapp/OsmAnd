@@ -394,18 +394,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	private static final int BUF_SIZE = 1024;
 	
-	/**
-	 * Makes method synchronized to give a little more time for get methods and 
-	 * let all writing attempts to wait outside of this method   
-	 */
-	public synchronized void insertImage(int x, int y, int zoom, File fileToSave) throws IOException {
-		SQLiteConnection db = getDatabase();
-		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
-			return;
-		}
-		if (exists(x, y, zoom)) {
-			return;
-		}
+	public void insertImage(int x, int y, int zoom, File fileToSave) throws IOException {
 		ByteBuffer buf = ByteBuffer.allocate((int) fileToSave.length());
 		FileInputStream is = new FileInputStream(fileToSave);
 		int i = 0;
@@ -414,21 +403,36 @@ public class SQLiteTileSource implements ITileSource {
 			buf.put(b, 0, i);
 		}
 
+		insertImage(x, y, zoom, buf.array());
+		is.close();
+	}
+	/**
+	 * Makes method synchronized to give a little more time for get methods and 
+	 * let all writing attempts to wait outside of this method   
+	 */
+	public /*synchronized*/ void insertImage(int x, int y, int zoom, byte[] dataToSave) throws IOException {
+		SQLiteConnection db = getDatabase();
+		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
+			return;
+		}
+		/*There is no sense to downoad and do not save. If needed, check should perform before downlad 
+		  if (exists(x, y, zoom)) {
+			return;
+		}*/
 		
-		String query = timeSupported ? "INSERT INTO tiles(x,y,z,s,image,time) VALUES(?, ?, ?, ?, ?, ?)"
-				: "INSERT INTO tiles(x,y,z,s,image) VALUES(?, ?, ?, ?, ?)";
+		String query = timeSupported ? "INSERT OR REPLACE INTO tiles(x,y,z,s,image,time) VALUES(?, ?, ?, ?, ?, ?)"
+				: "INSERT OR REPLACE INTO tiles(x,y,z,s,image) VALUES(?, ?, ?, ?, ?)";
 		net.osmand.plus.api.SQLiteAPI.SQLiteStatement statement = db.compileStatement(query); //$NON-NLS-1$
 		statement.bindLong(1, x);
 		statement.bindLong(2, y);
 		statement.bindLong(3, getFileZoom(zoom));
 		statement.bindLong(4, 0);
-		statement.bindBlob(5, buf.array());
+		statement.bindBlob(5, dataToSave);
 		if (timeSupported) {
 			statement.bindLong(6, System.currentTimeMillis());
 		}
 		statement.execute();
 		statement.close();
-		is.close();
 
 	}
 
