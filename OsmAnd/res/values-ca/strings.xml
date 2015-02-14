@@ -1898,4 +1898,6 @@
 	<string name="disable_plugin2">Desactiva</string>
 	<string name="rendering_attr_pisteGrooming_name">Pista condicionada</string>
     <string name="get_plugin">Obtén</string>
-</resources>
+<string name="free">"%1$s disponible.. "</string>
+	<string name="device_memory">Memòria del dispositiu</string>
+    </resources>
