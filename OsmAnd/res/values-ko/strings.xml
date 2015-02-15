@@ -2144,4 +2144,7 @@
     <string name="world_ski_missing">스키 지도를 표시 하려면, 특정 오프라인 지도를 다운로드 해야 합니다</string>
     <string name="nautical_maps_missing">항해 지도 표시 하려면, 특정 오프라인 지도를 다운로드 해야 합니다</string>
 	<string name="rendering_attr_pisteGrooming_name">Piste grooming (손질)</string>
+    <string name="rendering_attr_pisteRoutes_name">Piste 노선</string>
+	<string name="free">"무료 %1$s "</string>
+	<string name="device_memory">장치 메모리</string>
     </resources>
