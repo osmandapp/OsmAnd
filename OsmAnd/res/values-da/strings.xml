@@ -1916,4 +1916,5 @@
 	<string name="rendering_attr_pisteGrooming_name">Pistepreparering</string>
     <string name="free">"Tilgængeligt %1$s "</string>
 	<string name="device_memory">Lagerplads</string>
-    </resources>
+    <string name="rendering_attr_pisteRoutes_name">Pisteruter</string>
+	</resources>
