@@ -126,7 +126,7 @@ public abstract class OsmandPlugin {
 		boolean marketEnabled = Version.isMarketEnabled(app);
 		boolean pckg = isPackageInstalled(id, app) || 
 						isPackageInstalled(id2, app);
-		if(Version.isDeveloperVersion(app) && !paid) {
+		if((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !paid) {
 			// for test reasons
 			marketEnabled = false;
 		}
