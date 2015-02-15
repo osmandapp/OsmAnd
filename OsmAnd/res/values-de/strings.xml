@@ -2040,7 +2040,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osm_editing_manage">Verwalten</string>
     <string name="recents">VERLAUF</string>
     <string name="navigation_over_track">Navigation über Strecke starten?</string>
-    <string name="avoid_roads_msg">Durch Setzen einer Straßensperrung kann eine alternative Route berechnet werden:</string>
+    <string name="avoid_roads_msg">Sie können die Route ändern, indem Sie die Straßen auswählen, die vermieden werden sollen</string>
     <string name="enable_proxy_title">HTTP-Proxy aktivieren</string>
     <string name="enable_proxy_descr">HTTP-Proxy für alle Netzwerkanfragen einrichten</string>
     <string name="proxy_host_title">Proxy-Host</string>
@@ -2049,8 +2049,18 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="proxy_port_descr">Einen Proxy\'s Port einrichten (Bsp. 8118)</string>
     <string name="enable_plugin">Deaktivieren</string>
     <string name="disable_plugin">Aktivieren</string>
+    <string name="enable_plugin2">Aktivieren</string>
+    <string name="disable_plugin2">Deaktivieren</string>
     <string name="plugin_description_title">Beschreibung</string>
-	<string name="plugin_settings_button_caption">Einstellungen</string>
-<string name="plugin_install_needs_network">Die Installation dieses Plugins benötigt eine Internet-Verbindung.</string>
-<string name="edit_group">Gruppe bearbeiten</string>
+    <string name="plugin_settings_button_caption">Einstellungen</string>
+    <string name="plugin_install_needs_network">Die Installation dieses Plugins benötigt eine Internet-Verbindung.</string>
+    <string name="edit_group">Gruppe bearbeiten</string>
+    <string name="free">Frei %1$s </string>
+    <string name="device_memory">Gerätespeicher</string>
+    <string name="rendering_attr_pisteGrooming_name">Pistenpflege</string>
+    <string name="plugin_ski_name">Ski-Karten</string>
+    <string name="plugin_nautical_name">See-Karten</string>
+    <string name="world_ski_missing">Um Ski-Karten anzeigen zu können, muss die spezielle Offline-Karte heruntergeladen werden!</string>
+    <string name="nautical_maps_missing">Um See-Karten anzeigen zu können, muss die spezielle Offline-Karte heruntergeladen werden!</string>
+    <string name="get_plugin">Erhalten</string>
     </resources>
