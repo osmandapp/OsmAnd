@@ -1808,4 +1808,5 @@
 	<string name="rendering_attr_pisteGrooming_name">Pist- och spårpreparering</string>
     <string name="free">"Ledigt %1$s "</string>
 	<string name="device_memory">Intern lagring</string>
-    </resources>
+    <string name="rendering_attr_pisteRoutes_name">Pister och spår</string>
+	</resources>
