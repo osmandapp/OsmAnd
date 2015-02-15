@@ -1858,4 +1858,5 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="rendering_attr_pisteGrooming_name">Pista abbatigada</string>
     <string name="free">"Lìbera %1$s "</string>
 	<string name="device_memory">Memòria dispositivu</string>
-    </resources>
+    <string name="rendering_attr_pisteRoutes_name">Àndalas in pista</string>
+	</resources>
