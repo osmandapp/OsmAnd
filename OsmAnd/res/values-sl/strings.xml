@@ -2004,4 +2004,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="plugin_settings_button_caption">Nastavitve</string>
 	<string name="plugin_install_needs_network">Za namestitev tega vtičnika potrebujete internetno povezavo.</string>
 	<string name="get_plugin">Pridobi</string>
-</resources>
+<string name="rendering_attr_pisteRoutes_name">Smučarske proge</string>
+	<string name="free">"Prosto %1$s "</string>
+	<string name="device_memory">Pomnilnik naprave</string>
+    <string name="rendering_attr_pisteGrooming_name">Teptanje smučarskih prog</string>
+    </resources>
