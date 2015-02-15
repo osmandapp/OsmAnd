@@ -1,16 +1,9 @@
 package net.osmand.plus.skimapsplugin;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.render.RendererRegistry;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 
 public class SkiMapsPlugin extends OsmandPlugin {
 
@@ -40,30 +33,6 @@ public class SkiMapsPlugin extends OsmandPlugin {
 			// called from UI 
 			previousRenderer = app.getSettings().RENDERER.get(); 
 			app.getSettings().RENDERER.set(RendererRegistry.WINTER_SKI_RENDER);
-			if(!app.getResourceManager().getIndexFileNames().containsKey("World-ski"+
-					 IndexConstants.BINARY_MAP_INDEX_EXT)){
-				Builder dlg = new AlertDialog.Builder(activity);
-				dlg.setMessage(net.osmand.plus.R.string.world_ski_missing);
-				dlg.setPositiveButton(net.osmand.plus.R.string.default_buttons_ok, new OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						final Intent intent = new Intent(activity, app.getAppCustomization().getDownloadIndexActivity());
-						intent.putExtra(DownloadActivity.FILTER_KEY, app.getString(net.osmand.plus.R.string.index_item_world_ski));
-						intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
-						activity.startActivity(intent);
-					}
-				});
-				dlg.setNegativeButton(net.osmand.plus.R.string.default_buttons_cancel, new OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						app.getSettings().RENDERER.set(previousRenderer);						
-					}
-				});
-				dlg.show();
-			}
-			
 		}
 		return true;
 	}

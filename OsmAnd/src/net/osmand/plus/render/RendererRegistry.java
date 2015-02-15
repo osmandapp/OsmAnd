@@ -26,7 +26,7 @@ public class RendererRegistry {
 	public final static String DEFAULT_RENDER = "OsmAnd";  //$NON-NLS-1$
 	public final static String NAUTICAL_RENDER = "Nautical";  //$NON-NLS-1$
 
-	public static final String WINTER_SKI_RENDER = "Winter-and-ski";
+	public static final String WINTER_SKI_RENDER = "Winter and ski";
 	
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
@@ -44,12 +44,11 @@ public class RendererRegistry {
 	
 	public RendererRegistry(){
 		internalRenderers.put(DEFAULT_RENDER, "default.render.xml");
-		internalRenderers.put("Touring-view_(more-contrast-and-details)", "Touring-view_(more-contrast-and-details)" +".render.xml");
 		internalRenderers.put("UniRS", "UniRS" + ".render.xml");
+		internalRenderers.put("Touring view (contrast and details)", "Touring-view_(more-contrast-and-details)" +".render.xml");
 		internalRenderers.put("LightRS", "LightRS" + ".render.xml");
-		internalRenderers.put("High-contrast-roads", "High-contrast-roads" + ".render.xml");
-		internalRenderers.put(WINTER_SKI_RENDER, "Winter-and-ski" + ".render.xml");
 		internalRenderers.put(NAUTICAL_RENDER, "nautical" + ".render.xml");
+		internalRenderers.put(WINTER_SKI_RENDER, "skimap" + ".render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {
@@ -143,7 +142,6 @@ public class RendererRegistry {
 		return main;
 	}
 
-	@SuppressWarnings("resource")
 	public InputStream getInputStream(String name) throws FileNotFoundException {
 		InputStream is;
 		if("default".equalsIgnoreCase(name)) {
