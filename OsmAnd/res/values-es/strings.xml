@@ -1924,4 +1924,6 @@
 	<string name="get_plugin">Obtener</string>
 <string name="free">"Libre %1$s "</string>
 	<string name="device_memory">Memoria del dispositivo</string>
+    <string name="rendering_attr_pisteRoutes_name">Rutas de pista</string>
+	<string name="rendering_attr_pisteGrooming_name">Arreglo de pista</string>
     </resources>
