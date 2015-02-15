@@ -2067,4 +2067,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="rendering_attr_pisteGrooming_name">Úprava zjazdovky</string>
     <string name="free">"%1$s voľných "</string>
 	<string name="device_memory">Pamäť zariadenia</string>
-    </resources>
+    <string name="rendering_attr_pisteRoutes_name">Lyžiarske trate</string>
+	</resources>
