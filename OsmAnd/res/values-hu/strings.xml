@@ -1848,4 +1848,6 @@
     <string name="plugin_nautical_name">Hajózási térképek</string>
     <string name="world_ski_missing">A sítérképek megjelenítése érdekében a speciális kapcsolat nélküli térkép letöltése szükséges</string>
     <string name="nautical_maps_missing">A hajózási térképek megjelenítése érdekében a speciális kapcsolat nélküli térkép letöltése szükséges</string>
+	<string name="device_memory">Eszköz memóriája</string>
+    <string name="free">"Szabad %1$s "</string>
 	</resources>
