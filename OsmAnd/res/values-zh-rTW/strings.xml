@@ -1908,4 +1908,5 @@
 	<string name="rendering_attr_pisteGrooming_name">滑雪道修整</string>
     <string name="free">"%1$s 可用 "</string>
 	<string name="device_memory">裝置記憶體</string>
-    </resources>
+    <string name="rendering_attr_pisteRoutes_name">滑雪道路線</string>
+	</resources>
