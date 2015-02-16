@@ -390,7 +390,7 @@ public class TileSourceManager {
 	}
 
 	public static TileSourceTemplate getMapnikSource(){
-		return new TileSourceTemplate("Mapnik", "http://mapnik.osmand.net/{0}/{1}/{2}.png", ".png", 19, 1, 256, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("OsmAnd (online tiles)", "http://tile.osmand.net/hd/{0}/{1}/{2}.png", ".png", 19, 1, 512, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	public static TileSourceTemplate getCycleMapSource(){
