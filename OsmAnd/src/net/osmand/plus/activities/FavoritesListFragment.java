@@ -6,6 +6,8 @@ package net.osmand.plus.activities;
 import java.util.Comparator;
 import java.util.List;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.ListFragment;
 import android.support.v7.widget.PopupMenu;
 import android.view.*;
@@ -45,7 +47,7 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 	private boolean selectFavoriteMode;
 	private OsmandSettings settings;
 	private LatLon location;
-	
+
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -84,6 +86,7 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 			}
 		}
 		locationUpdate(location);
+
 	}
 
 	@Override
@@ -129,6 +132,7 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 		private Activity activity;
 		private LatLon location;
 		private OsmandApplication app;
+		Drawable arrowImage;
 		
 		public LatLon getLocation() {
 			return location;
@@ -159,6 +163,14 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 			super(activity, R.layout.favourites_list_item, list);
 			this.activity = activity;
 			this.app = ((OsmandApplication) activity.getApplication());
+			boolean light = app.getSettings().isLightContent();
+			arrowImage = activity.getResources().getDrawable(R.drawable.ic_destination_arrow_white);
+			arrowImage.mutate();
+			if (light) {
+				arrowImage.setColorFilter(activity.getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+			} else {
+				arrowImage.setColorFilter(activity.getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+			}
 		}
 		
 		public String getName(FavouritePoint model){
@@ -176,8 +188,12 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 				row = inflater.inflate(R.layout.favourites_list_item, parent, false);
 			}
 
-			TextView label = (TextView) row.findViewById(R.id.favourite_label);
+			TextView name = (TextView) row.findViewById(R.id.favourite_label);
+			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
+			ImageView direction = (ImageView) row.findViewById(R.id.direction);
+			direction.setImageDrawable(arrowImage);
+			direction.setVisibility(View.VISIBLE);
 			final FavouritePoint model = getItem(position);
 			if (!model.getCategory().isEmpty()){
 				row.findViewById(R.id.group_image).setVisibility(View.VISIBLE);
@@ -193,9 +209,8 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 						.getLongitude()));
 				distance = OsmAndFormatter.getFormattedDistance(dist, app) + "  " ;
 			}
-			
-			label.setText(distance + getName(model), BufferType.SPANNABLE);
-			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(activity.getResources().getColor(R.color.color_distance)), 0, distance.length(), 0);
+			distanceText.setText(distance);
+			name.setText(getName(model));
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 			row.findViewById(R.id.favourite_icon).setVisibility(View.VISIBLE);
 			ch.setVisibility(View.GONE);
@@ -204,5 +219,7 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 
 	}
 
-
+	public OsmandApplication getMyApplication() {
+		return (OsmandApplication)getActivity().getApplication();
+	}
 }

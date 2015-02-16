@@ -1,6 +1,7 @@
 package net.osmand.plus.render;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.TileSourceProxyProvider;
 import net.osmand.core.jni.MapLayerConfiguration;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
