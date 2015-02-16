@@ -43,6 +43,7 @@
     <!-- TextSizes -->
 	<dimen name="list_header_text_size">14sp</dimen>
     <dimen name="showAllButtonTextSize">12sp</dimen>
+	<dimen name="download_descr_text_size">12sp</dimen>
     <dimen name="subHeaderTextSize">14sp</dimen>
     <dimen name="dashFavNameTextSize">16sp</dimen>
     <dimen name="dashProgressTextSize">18sp</dimen>

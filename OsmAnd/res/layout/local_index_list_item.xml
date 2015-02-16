@@ -74,9 +74,8 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		style="?attr/dashboardGeneralButtonStyle"
-		android:layout_marginTop="@dimen/list_header_settings_top_margin"
 		android:layout_marginRight="0dp"
-		android:layout_gravity="top"
+		android:layout_gravity="center_vertical"
 		android:focusable="false"
 		android:src="?attr/list_settings_icon"/>
 
