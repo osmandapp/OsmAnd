@@ -60,6 +60,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,6 +88,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	private TextView descriptionText;
 	private ProgressBar sizeProgress;
 
+	Drawable backup;
+	Drawable sdcard;
+	Drawable planet;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.local_index, container, false);
@@ -102,6 +107,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		descriptionText = (TextView) view.findViewById(R.id.memory_size);
 		sizeProgress = (ProgressBar) view.findViewById(R.id.memory_progress);
 		updateDescriptionTextWithSize();
+		colorDrawables();
 		return view;
 	}
 
@@ -123,7 +129,19 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		}
 		setHasOptionsMenu(true);
 	}
-	
+
+	private void colorDrawables(){
+		boolean light = getMyApplication().getSettings().isLightContent();
+		backup = getActivity().getResources().getDrawable(R.drawable.ic_type_archive);
+		backup.mutate();
+		if (light) {
+			backup.setColorFilter(0xff727272, PorterDuff.Mode.MULTIPLY);
+		}
+		sdcard = getActivity().getResources().getDrawable(R.drawable.ic_sdcard);
+		sdcard.mutate();
+		sdcard.setColorFilter(getActivity().getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -936,6 +954,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 					openPopUpMenu(v, child);
 				}
 			});
+			ImageView icon = (ImageView) v.findViewById(R.id.icon);
+			if (child.isBackupedData()) {
+				icon.setImageDrawable(backup);
+			} else {
+				icon.setImageDrawable(sdcard);
+			}
+
+
+
 			viewName.setText(getNameToDisplay(child));
 			if (child.isNotSupported()) {
 				viewName.setTextColor(warningColor);
@@ -976,6 +1003,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			final CheckBox checkbox = (CheckBox) v.findViewById(R.id.check_local_index);
 			checkbox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 			if (selectionMode) {
+				icon.setVisibility(View.GONE);
 				checkbox.setChecked(selectedItems.contains(child));
 				checkbox.setOnClickListener(new View.OnClickListener() {
 					
@@ -988,6 +1016,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 						}
 					}
 				});
+			} else {
+				icon.setVisibility(View.VISIBLE);
 			}
 			
 
@@ -999,11 +1029,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 			DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 			final boolean restore = info.isBackupedData();
-			Drawable backup = getActivity().getResources().getDrawable(R.drawable.ic_type_archive);
-			backup.mutate();
-			if (light) {
-				backup.setColorFilter(0xff727272, PorterDuff.Mode.MULTIPLY);
-			}
+
 			MenuItem item = optionsMenu.getMenu().add(restore? R.string.local_index_mi_restore : R.string.local_index_mi_backup)
 					.setIcon(backup);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
