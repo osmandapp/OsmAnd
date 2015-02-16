@@ -3,45 +3,42 @@
 			  xmlns:tools="http://schemas.android.com/tools"
 			  android:layout_width="fill_parent"
 			  android:layout_height="wrap_content"
+			  android:background="?attr/expandable_list_item_background"
 			  android:minHeight="@dimen/list_item_height"
 			  android:orientation="horizontal"
 			  android:paddingBottom="4dp"
 			  android:paddingLeft="@dimen/list_content_padding"
 			  android:paddingRight="@dimen/list_content_padding"
-			  android:background="?attr/expandable_list_item_background"
+			  android:descendantFocusability="blocksDescendants"
 			  android:paddingTop="4dp">
 
-	<LinearLayout
+	<CheckBox
+		android:id="@+id/check_local_index"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:focusable="false"
+		android:gravity="center_vertical"/>
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
 		android:layout_gravity="center_vertical"
+		android:layout_weight="1"
 		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/local_index_name"
+			style="@style/ListText.Small"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			tools:text="@string/app_version"/>
+
 
 		<LinearLayout
 			android:layout_width="fill_parent"
-			android:layout_height="wrap_content">
-
-			<LinearLayout
-				android:layout_width="wrap_content"
-				android:layout_height="fill_parent">
-
-				<CheckBox
-					android:id="@+id/check_local_index"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:focusable="false"
-					android:gravity="center_vertical"/>
-			</LinearLayout>
-
-			<TextView
-				android:id="@+id/local_index_name"
-				style="@style/ListText.Small"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:gravity="center_vertical"
-				android:maxLines="1"
-				tools:text="@string/lorem_ipsum"/>
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
 
 			<TextView
 				android:id="@+id/local_index_size"
@@ -49,19 +46,31 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginLeft="3dp"
-				android:gravity="right"/>
-		</LinearLayout>
+				android:gravity="right"
+				tools:text="@string/app_version"/>
 
-		<TextView
-			android:id="@+id/local_index_descr"
-			style="@style/ListText.Small"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:gravity="center_vertical"
-			android:maxLines="25"
-			tools:text="@string/lorem_ipsum"/>
+			<TextView
+				android:id="@+id/local_index_descr"
+				style="@style/ListText.Small"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical"
+				android:layout_marginLeft="7dp"
+				android:maxLines="25"
+				tools:text="@string/app_mode_aircraft"/>
+		</LinearLayout>
 
 	</LinearLayout>
 
+	<ImageButton
+		android:id="@+id/options"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		style="?attr/dashboardGeneralButtonStyle"
+		android:layout_marginTop="@dimen/list_header_settings_top_margin"
+		android:layout_marginRight="0dp"
+		android:layout_gravity="top"
+		android:focusable="false"
+		android:src="?attr/list_settings_icon"/>
 
 </LinearLayout>

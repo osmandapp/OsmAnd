@@ -3,17 +3,14 @@
  */
 package net.osmand.plus.activities;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import android.support.v4.app.ListFragment;
 import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.Toolbar;
 import android.view.*;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
