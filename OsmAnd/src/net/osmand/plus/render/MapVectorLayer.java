@@ -106,10 +106,10 @@ public class MapVectorLayer extends BaseMapLayer {
 					cachedUnderlay = st.MAP_UNDERLAY.get();
 					ITileSource tileSource = st.getTileSourceByName(cachedUnderlay, false);
 					if (tileSource != null) {
-						// TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
-						// mapRenderer.setMapLayerProvider(-1, prov.instantiateProxy(true));
-						// prov.swigReleaseOwnership();
-						mapRenderer.setMapLayerProvider(-1, net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
+						 TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
+						 mapRenderer.setMapLayerProvider(-1, prov.instantiateProxy(true));
+						 prov.swigReleaseOwnership();
+//						mapRenderer.setMapLayerProvider(-1, net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
 					} else {
 						mapRenderer.resetMapLayerProvider(-1);
 					}
@@ -124,10 +124,10 @@ public class MapVectorLayer extends BaseMapLayer {
 					cachedOverlay = st.MAP_OVERLAY.get();
 					ITileSource tileSource = st.getTileSourceByName(cachedOverlay, false);
 					if (tileSource != null) {
-						//TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
-						//mapRenderer.setMapLayerProvider(1, prov.instantiateProxy(true));
-						//prov.swigReleaseOwnership();
-						mapRenderer.setMapLayerProvider(1, net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
+						TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
+						mapRenderer.setMapLayerProvider(1, prov.instantiateProxy(true));
+						prov.swigReleaseOwnership();
+//						mapRenderer.setMapLayerProvider(1, net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
 					} else {
 						mapRenderer.resetMapLayerProvider(1);
 					}

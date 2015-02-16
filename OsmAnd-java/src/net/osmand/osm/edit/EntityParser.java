@@ -19,9 +19,6 @@ import net.osmand.util.Algorithms;
 public class EntityParser {
 	
 	public static void parseMapObject(MapObject mo, Entity e) {
-		parseMapObject(mo, e, e.getId());
-	}
-	public static void parseMapObject(MapObject mo, Entity e, long lid) {
 		mo.setId(e.getId());
 		if(mo instanceof Amenity) {
 			mo.setId((e.getId() << 1) + ((e instanceof Node) ? 0 : 1));

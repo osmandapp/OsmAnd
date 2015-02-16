@@ -309,6 +309,9 @@ public class OsmandRegions {
 			String prefix = getPrefix(o).toLowerCase();
 			String locPrefix = downloadNamesToLocaleNames.get(prefix);
 			String locName = downloadNamesToLocaleNames.get(downloadName);
+			if(locPrefix == null || locName == null) {
+				throw new IllegalStateException("There is no prefix registered for " + downloadName + " (" + prefix + ") ");
+			}
 			downloadNamesToLocaleNames.put(downloadName, locPrefix + " " + locName);
 			String index = downloadNamesToLowercaseIndex.get(downloadName);
 			downloadNamesToLowercaseIndex.put(downloadName, index + " " + prefix + " " + locPrefix.toLowerCase());
