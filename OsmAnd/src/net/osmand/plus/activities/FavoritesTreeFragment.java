@@ -1,8 +1,8 @@
 package net.osmand.plus.activities;
 
-import android.app.Dialog;
 import android.content.pm.ActivityInfo;
-import android.os.Bundle;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
@@ -12,8 +12,6 @@ import android.view.*;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.io.File;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,26 +21,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.Item;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.util.MapUtils;
@@ -56,7 +48,6 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
@@ -89,9 +80,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	private Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<FavoriteGroup>();
 	private ActionMode actionMode;
 	private SearchView searchView;
-
-	protected LatLon loc = null;
-	protected Float heading = null;
+	Drawable arrowImage;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -101,6 +90,15 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		favouritesAdapter = new FavouritesAdapter();
 		favouritesAdapter.synchronizeGroups();
 		setAdapter(favouritesAdapter);
+
+		boolean light = getMyApplication().getSettings().isLightContent();
+		arrowImage = getResources().getDrawable(R.drawable.ic_destination_arrow_white);
+		arrowImage.mutate();
+		if (light) {
+			arrowImage.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+		} else {
+			arrowImage.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+		}
 	}
 
 	private void deleteFavorites() {
@@ -135,8 +133,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		// final LatLon mapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 		favouritesAdapter.synchronizeGroups();
 
-		loc = getMyApplication().getSettings().getLastKnownMapLocation();
-		if(favouritesAdapter.getGroupCount() > 0 && 
+		if(favouritesAdapter.getGroupCount() > 0 &&
 				"".equals(favouritesAdapter.getGroup(0).name)) {
 			getExpandableListView().expandGroup(0);
 		}
@@ -787,12 +784,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			distanceText.setTextColor(getResources().getColor(R.color.color_distance));
 			row.findViewById(R.id.group_image).setVisibility(View.GONE);
 
-			if(loc != null){
-				ImageView direction = (ImageView) row.findViewById(R.id.direction);
-				direction.setVisibility(View.VISIBLE);
-				DashLocationFragment.updateArrow(getActivity(), loc, new LatLon(model.getLatitude(), model.getLongitude()), direction,
-						10, R.drawable.ic_destination_arrow, heading);
-			}
+			ImageView direction = (ImageView) row.findViewById(R.id.direction);
+			direction.setVisibility(View.VISIBLE);
+			direction.setImageDrawable(arrowImage);
 
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 			if (selectionMode) {
@@ -879,35 +873,5 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				collapseTrees(5);
 			}
 		}
-	}
-
-	public void updateLocation(Location location) {
-		//This is used as origin for both Fav-list and direction arrows
-		if (getMyApplication().getSettings().getLastKnownMapLocation() != null) {
-			loc = getMyApplication().getSettings().getLastKnownMapLocation();
-		} else {
-			loc = new LatLon(0f, 0f);
-		}
-		updateArrows();
-	}
-
-	public boolean updateCompassValue(float value) {
-		//heading = value;
-		//updateArrows();
-		//99 in next line used to one-time initalize arrows (with reference vs. fixed-north direction) on non-compass devices
-		float lastHeading = heading != null ? heading : 99;
-		heading = value;
-		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
-			updateArrows();
-			return true;
-		} else {
-			heading = lastHeading;
-		}
-		return false;
-	}
-
-
-	private void updateArrows(){
-		favouritesAdapter.notifyDataSetChanged();
 	}
 }

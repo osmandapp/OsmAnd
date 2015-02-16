@@ -295,9 +295,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		} else {
 			arrowImage.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
 		}
-		
-		
-		
 	}
 
 	private void addFooterView() {

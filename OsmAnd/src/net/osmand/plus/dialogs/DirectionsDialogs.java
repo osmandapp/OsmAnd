@@ -157,7 +157,7 @@ public class DirectionsDialogs {
 		}
 	}
 
-	private static void setupPopUpMenuIcon(PopupMenu menu){
+	public static void setupPopUpMenuIcon(PopupMenu menu){
 		try {
 			Field[] fields = menu.getClass().getDeclaredFields();
 			for (Field field : fields) {

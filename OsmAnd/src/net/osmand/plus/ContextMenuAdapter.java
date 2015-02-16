@@ -1,7 +1,5 @@
 package net.osmand.plus;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.widget.*;
 import gnu.trove.list.array.TIntArrayList;
 

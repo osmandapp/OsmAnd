@@ -45,7 +45,7 @@ import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 /**
  *
  */
-public class FavoritesActivity extends TabActivity implements OsmAndLocationProvider.OsmAndCompassListener, OsmAndLocationProvider.OsmAndLocationListener {
+public class FavoritesActivity extends TabActivity {
 
 	private static final String FAVOURITES_INFO = "FAVOURITES_INFO";
 	private static final String TRACKS = "TRACKS";
@@ -125,10 +125,6 @@ public class FavoritesActivity extends TabActivity implements OsmAndLocationProv
 			}
 		});
 
-		if (getMyApplication().getFavorites().getFavouritePoints().size() > 0) {
-			getLocationProvider().addCompassListener(this);
-			getLocationProvider().registerOrUnregisterCompassListener(true);
-		}
 	}
 
 	public OsmandApplication getMyApplication() {
@@ -143,9 +139,6 @@ public class FavoritesActivity extends TabActivity implements OsmAndLocationProv
 	protected void onPause() {
 		super.onPause();
 		((OsmandApplication) getApplication()).getSelectedGpxHelper().setUiListener(FavoritesActivity.class, null);
-		getLocationProvider().pauseAllUpdates();
-		getLocationProvider().removeLocationListener(this);
-		getLocationProvider().removeCompassListener(this);
 	}
 
 	public void updateSelectedTracks() {
@@ -215,26 +208,6 @@ public class FavoritesActivity extends TabActivity implements OsmAndLocationProv
 			searchEdit.setHint(stopHint);
 		} catch (Exception e) {
 
-		}
-	}
-
-	@Override
-	public void updateCompassValue(float value) {
-		for (WeakReference<Fragment> ref : fragList) {
-			Fragment f = ref.get();
-			if (f instanceof FavoritesTreeFragment && !f.isDetached()) {
-				((FavoritesTreeFragment) f).updateCompassValue(value);
-			}
-		}
-	}
-
-	@Override
-	public void updateLocation(Location location) {
-		for (WeakReference<Fragment> ref : fragList) {
-			Fragment f = ref.get();
-			if (f instanceof FavoritesTreeFragment && !f.isDetached()) {
-				((FavoritesTreeFragment) f).updateLocation(location);
-			}
 		}
 	}
 }

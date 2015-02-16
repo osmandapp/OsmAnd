@@ -26,6 +26,7 @@ import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -34,13 +35,16 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StatFs;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.PopupMenu;
 import android.text.method.LinkMovementMethod;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -56,6 +60,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,6 +88,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	private TextView descriptionText;
 	private ProgressBar sizeProgress;
 
+	Drawable backup;
+	Drawable sdcard;
+	Drawable planet;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.local_index, container, false);
@@ -98,6 +107,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		descriptionText = (TextView) view.findViewById(R.id.memory_size);
 		sizeProgress = (ProgressBar) view.findViewById(R.id.memory_progress);
 		updateDescriptionTextWithSize();
+		colorDrawables();
 		return view;
 	}
 
@@ -119,7 +129,19 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		}
 		setHasOptionsMenu(true);
 	}
-	
+
+	private void colorDrawables(){
+		boolean light = getMyApplication().getSettings().isLightContent();
+		backup = getActivity().getResources().getDrawable(R.drawable.ic_type_archive);
+		backup.mutate();
+		if (light) {
+			backup.setColorFilter(0xff727272, PorterDuff.Mode.MULTIPLY);
+		}
+		sdcard = getActivity().getResources().getDrawable(R.drawable.ic_sdcard);
+		sdcard.mutate();
+		sdcard.setColorFilter(getActivity().getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -172,25 +194,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
-				if (resId == R.string.local_index_mi_rename) {
-					renameFile(info);
-				} else if (resId == R.string.local_index_mi_restore) {
-					new LocalIndexOperationTask(RESTORE_OPERATION).execute(info);
-				} else if (resId == R.string.local_index_mi_delete) {
-					Builder confirm = new AlertDialog.Builder(getActivity());
-					confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							new LocalIndexOperationTask(DELETE_OPERATION).execute(info);	
-						}
-					});
-					confirm.setNegativeButton(R.string.default_buttons_no, null);
-					confirm.setMessage(getString(R.string.delete_confirmation_msg, info.getFileName()));
-					confirm.show();
-				} else if (resId == R.string.local_index_mi_backup) {
-					new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);
-				}
-				return true;
+				return performBasicOperation(resId, info);
 			}
 		};
 		if(info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.SRTM_DATA){
@@ -204,7 +208,29 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		adapter.item(R.string.local_index_mi_rename).listen(listener).position(3).reg();
 		adapter.item(R.string.local_index_mi_delete).listen(listener).position(4).reg();
 	}
-	
+
+	private boolean performBasicOperation(int resId, final LocalIndexInfo info) {
+		if (resId == R.string.local_index_mi_rename) {
+			renameFile(info);
+		} else if (resId == R.string.local_index_mi_restore) {
+			new LocalIndexOperationTask(RESTORE_OPERATION).execute(info);
+		} else if (resId == R.string.local_index_mi_delete) {
+			Builder confirm = new Builder(getActivity());
+			confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					new LocalIndexOperationTask(DELETE_OPERATION).execute(info);
+				}
+			});
+			confirm.setNegativeButton(R.string.default_buttons_no, null);
+			confirm.setMessage(getString(R.string.delete_confirmation_msg, info.getFileName()));
+			confirm.show();
+		} else if (resId == R.string.local_index_mi_backup) {
+			new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);
+		}
+		return true;
+	}
+
 	private void renameFile(LocalIndexInfo info) {
 		final File f = new File(info.getPathToData());
 		Builder b = new AlertDialog.Builder(getActivity());
@@ -922,6 +948,21 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				v = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
 			}
 			TextView viewName = ((TextView) v.findViewById(R.id.local_index_name));
+			v.findViewById(R.id.options).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					openPopUpMenu(v, child);
+				}
+			});
+			ImageView icon = (ImageView) v.findViewById(R.id.icon);
+			if (child.isBackupedData()) {
+				icon.setImageDrawable(backup);
+			} else {
+				icon.setImageDrawable(sdcard);
+			}
+
+
+
 			viewName.setText(getNameToDisplay(child));
 			if (child.isNotSupported()) {
 				viewName.setTextColor(warningColor);
@@ -962,6 +1003,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			final CheckBox checkbox = (CheckBox) v.findViewById(R.id.check_local_index);
 			checkbox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 			if (selectionMode) {
+				icon.setVisibility(View.GONE);
 				checkbox.setChecked(selectedItems.contains(child));
 				checkbox.setOnClickListener(new View.OnClickListener() {
 					
@@ -974,10 +1016,49 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 						}
 					}
 				});
+			} else {
+				icon.setVisibility(View.VISIBLE);
 			}
 			
 
 			return v;
+		}
+
+		private void openPopUpMenu(View v, final LocalIndexInfo info) {
+			boolean light = getMyApplication().getSettings().isLightContent();
+			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
+			DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+			final boolean restore = info.isBackupedData();
+
+			MenuItem item = optionsMenu.getMenu().add(restore? R.string.local_index_mi_restore : R.string.local_index_mi_backup)
+					.setIcon(backup);
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					performBasicOperation(restore ? R.string.local_index_mi_restore : R.string.local_index_mi_backup, info);
+					return true;
+				}
+			});
+			item = optionsMenu.getMenu().add(R.string.favourites_context_menu_edit)
+					.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					performBasicOperation(R.string.local_index_mi_rename, info);
+					return true;
+				}
+			});
+
+			item = optionsMenu.getMenu().add(R.string.favourites_context_menu_delete)
+					.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					performBasicOperation(R.string.local_index_mi_delete, info);
+					return true;
+				}
+			});
+			optionsMenu.show();
 		}
 
 		private String getNameToDisplay(LocalIndexInfo child) {

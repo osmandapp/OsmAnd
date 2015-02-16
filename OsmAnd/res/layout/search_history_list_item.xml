@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:minHeight="@dimen/list_item_height"
-    android:paddingBottom="5dp"
-    android:paddingTop="5dp"
-    android:paddingLeft="@dimen/list_content_padding"
-    android:paddingRight="@dimen/list_content_padding"
-    android:orientation="horizontal">
+			  android:layout_width="fill_parent"
+			  android:layout_height="wrap_content"
+			  android:minHeight="@dimen/list_item_height"
+			  android:orientation="horizontal"
+			  android:paddingBottom="5dp"
+			  android:paddingLeft="@dimen/list_content_padding"
+			  android:paddingRight="@dimen/list_content_padding"
+			  android:paddingTop="5dp">
 
-    <TextView
-        android:id="@+id/label"
-        style="@style/ListText"
+	<TextView
+		android:id="@+id/label"
+		style="@style/ListText"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
 		android:layout_gravity="center_vertical"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="3dp"
-		android:textColor="?android:textColorPrimary"
-		android:maxLines="1"
+		android:layout_marginRight="3dp"
+		android:layout_weight="1"
 		android:ellipsize="end"
-		tools:text="@string/lorem_ipsum"
-        android:layout_weight="1" />
+		android:maxLines="1"
+		android:textColor="?android:textColorPrimary"
+		tools:text="@string/lorem_ipsum"/>
 
-    <ImageButton
-        android:id="@+id/remove"
-        android:contentDescription="@string/default_buttons_delete"
+	<ImageButton
+		android:id="@+id/remove"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 		android:layout_gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?attr/reset_image"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        android:paddingTop="2dp" />
+		android:background="?attr/reset_image"
+		android:contentDescription="@string/default_buttons_delete"
+		android:paddingLeft="2dp"
+		android:paddingRight="2dp"
+		android:paddingTop="2dp"/>
 
 </LinearLayout>
