@@ -1,5 +1,6 @@
 package net.osmand.plus.download;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -36,26 +38,35 @@ public class UpdatesIndexFragment extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.update_index, container, false);
-		CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
-		selectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		final CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
+		selectAll.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				for (IndexItem item : indexItems) {
-					if (isChecked) {
-						List<DownloadEntry> download = item.createDownloadEntry(getMyApplication(), item.getType(), new ArrayList<DownloadEntry>());
-						if (download.size() > 0) {
-							getDownloadActivity().getEntriesToDownload().put(item, download);
-							getDownloadActivity().updateDownloadButton(true);
-						}
-					} else {
-						getDownloadActivity().getEntriesToDownload().remove(item);
-						getDownloadActivity().updateDownloadButton(true);
-					}
-				}
+			public void onClick(View v) {
+				if (selectAll.isChecked()) {
+					selectAll();
+				} else {
+					deselectAll();
 
+				}
+				listAdapter.notifyDataSetInvalidated();
 			}
 		});
 		return view;
+	}
+
+	private void refreshSelectAll() {
+		View view = getView();
+		if (view == null) {
+			return;
+		}
+		CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
+		for (IndexItem item : indexItems) {
+			if (!getDownloadActivity().getEntriesToDownload().containsKey(item)){
+				selectAll.setChecked(false);
+				return;
+			}
+		}
+		selectAll.setChecked(true);
 	}
 
 	private void setSelectAllVisibility(boolean visible) {
@@ -133,15 +144,15 @@ public class UpdatesIndexFragment extends ListFragment {
 			ch.setChecked(!ch.isChecked());
 			getDownloadActivity().getEntriesToDownload().remove(e);
 			getDownloadActivity().updateDownloadButton(true);
-			return;
+		} else {
+			List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), e.getType(), new ArrayList<DownloadEntry>());
+			if (download.size() > 0) {
+				getDownloadActivity().getEntriesToDownload().put(e, download);
+				getDownloadActivity().updateDownloadButton(true);
+				ch.setChecked(!ch.isChecked());
+			}
 		}
-
-		List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), e.getType(), new ArrayList<DownloadEntry>());
-		if (download.size() > 0) {
-			getDownloadActivity().getEntriesToDownload().put(e, download);
-			getDownloadActivity().updateDownloadButton(true);
-			ch.setChecked(!ch.isChecked());
-		}
+		refreshSelectAll();
 	}
 
 	public DownloadActivity getDownloadActivity() {
@@ -158,11 +169,6 @@ public class UpdatesIndexFragment extends ListFragment {
 			MenuItem item = menu.add(0, DownloadIndexFragment.RELOAD_ID, 0, R.string.update_downlod_list);
 			item.setIcon(R.drawable.ic_action_refresh_dark);
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			SubMenu s = menu.addSubMenu(0, DownloadIndexFragment.MORE_ID, 0, "");
-			s.setIcon(R.drawable.ic_overflow_menu_white);
-			s.add(0, DownloadIndexFragment.SELECT_ALL_ID, 0, R.string.select_all);
-			s.add(0, DownloadIndexFragment.DESELECT_ALL_ID, 0, R.string.deselect_all);
-			MenuItemCompat.setShowAsAction(s.getItem(), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		}
 	}
 
@@ -265,10 +271,11 @@ public class UpdatesIndexFragment extends ListFragment {
 			} else {
 				ch.setVisibility(View.VISIBLE);
 			}
+
 			String eName = e.getVisibleName(getMyApplication(), osmandRegions);
 
-			name.setText(eName.trim().replace('\n', ' ')); //$NON-NLS-1$
-			String d = e.getDate(format) + "  " + e.getSizeDescription(getMyApplication());
+			name.setText(eName.trim().replace('\n', ' ').replace("TTS","")); //$NON-NLS-1$
+			String d =   getMapDescription(e);
 			description.setText(d);
 
 			ch.setChecked(getDownloadActivity().getEntriesToDownload().containsKey(e));
@@ -297,4 +304,27 @@ public class UpdatesIndexFragment extends ListFragment {
 		}
 	}
 
+	private String getMapDescription(IndexItem item){
+		String typeName = getTypeName(item.getType().getResource());
+		String date = item.getDate(new SimpleDateFormat("dd.MM.yyyy"));
+		String size = item.getSizeDescription(getActivity());
+		return typeName + "  " + date + "  " + size;
+
+	}
+
+	private String getTypeName(int resId){
+		Activity activity = getActivity();
+		if (resId == R.string.download_regular_maps){
+			return activity.getString(R.string.map_view);
+		} else if (resId == R.string.voices){
+			return activity.getString(R.string.ttsvoice);
+		} else if (resId == R.string.download_roads_only_maps){
+			return activity.getString(R.string.roads_only);
+		} else if (resId == R.string.download_srtm_maps){
+			return activity.getString(R.string.download_srtm_maps);
+		} else if (resId == R.string.download_hillshade_maps){
+			return activity.getString(R.string.download_hillshade_maps);
+		}
+		return "";
+	}
 }

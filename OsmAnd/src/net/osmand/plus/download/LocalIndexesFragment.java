@@ -60,6 +60,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -103,7 +104,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		listView.setAdapter(listAdapter);
 		expandAllGroups();
 		setListView(listView);
-		//getDownloadActivity().getSupportActionBar().setLogo(R.drawable.tab_download_screen_icon);
 		descriptionText = (TextView) view.findViewById(R.id.memory_size);
 		sizeProgress = (ProgressBar) view.findViewById(R.id.memory_progress);
 		updateDescriptionTextWithSize();
@@ -288,6 +288,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		protected void onProgressUpdate(LocalIndexInfo... values) {
 			for (LocalIndexInfo v : values) {
 				listAdapter.addLocalIndexInfo(v);
+				descriptionLoader = new LoadLocalIndexDescriptionTask();
+				descriptionLoader.execute(v);
 			}
 			listAdapter.notifyDataSetChanged();
 			expandAllGroups();
@@ -300,6 +302,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			} else {
 				for (LocalIndexInfo v : result) {
 					listAdapter.addLocalIndexInfo(v);
+					descriptionLoader = new LoadLocalIndexDescriptionTask();
+					descriptionLoader.execute(v);
 				}
 				listAdapter.notifyDataSetChanged();
 				expandAllGroups();
@@ -464,15 +468,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+		if (!selectionMode){
+			return true;
+		}
 		LocalIndexInfo item = listAdapter.getChild(groupPosition, childPosition);
-		item.setExpanded(!item.isExpanded());
-		if (item.isExpanded()) {
-			descriptionLoader = new LoadLocalIndexDescriptionTask();
-			descriptionLoader.execute(item);
-		}
-		if(selectionMode){
-			selectedItems.add(item);
-		}
+		selectedItems.add(item);
 		listAdapter.notifyDataSetInvalidated();
 		return true;
 	}
@@ -489,6 +489,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		super.onPause();
 		if(operationTask != null){
 			operationTask.cancel(true);
+		}
+		if(descriptionLoader != null){
+			descriptionLoader.cancel(true);
 		}
 	}
 
@@ -536,15 +539,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			}
 		};
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
-						.icon(R.drawable.ic_action_refresh_dark)
-						.listen(listener).position(1).reg();
+				.icon(R.drawable.ic_action_refresh_dark)
+				.listen(listener).position(1).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_delete)
-						.icon(R.drawable.ic_action_delete_dark)
-						.listen(listener).position(2).reg();
+				.icon(R.drawable.ic_action_delete_dark)
+				.listen(listener).position(2).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_backup)
-						.listen(listener).position(3).reg();
+				.listen(listener).position(3).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_restore)
-						.listen(listener).position(4).reg();
+				.listen(listener).position(4).reg();
 		OsmandPlugin.onOptionsMenuActivity(getDownloadActivity(), null, optionsMenuAdapter);
 		// doesn't work correctly
 		//int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
@@ -624,6 +627,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		final String actionButton = value;
 		if(listAdapter.getGroupCount() == 0){
 			listAdapter.cancelFilter();
+			expandAllGroups();
+			listAdapter.notifyDataSetChanged();
 			AccessibleToast.makeText(getDownloadActivity(), getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 			return;
 		}
@@ -705,7 +710,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		if (itemId == R.string.local_index_mi_reload) {
 			reloadIndexes();
 		} else if (itemId == R.string.local_index_mi_delete) {
-			openSelectionMode(itemId, R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light,
+			openSelectionMode(itemId, R.drawable.ic_action_delete_dark,
 					new DialogInterface.OnClickListener() {
 
 						@Override
@@ -714,7 +719,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 						}
 					}, null, null);
 		} else if (itemId == R.string.local_index_mi_backup) {
-			openSelectionMode(itemId, R.drawable.ic_action_undo_dark, R.drawable.ic_action_undo_light,
+			openSelectionMode(itemId, R.drawable.ic_type_archive,
 					new DialogInterface.OnClickListener() {
 
 						@Override
@@ -723,7 +728,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 						}
 					}, Boolean.FALSE, LocalIndexType.MAP_DATA);
 		} else if (itemId == R.string.local_index_mi_restore) {
-			openSelectionMode(itemId, R.drawable.ic_action_redo_dark, R.drawable.ic_action_redo_light,
+			openSelectionMode(itemId, R.drawable.ic_type_archive,
 					new DialogInterface.OnClickListener() {
 
 						@Override
@@ -735,7 +740,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		}
 	}
 	
-	public void openSelectionMode(int stringRes, int darkIcon, int lightIcon, DialogInterface.OnClickListener listener, Boolean backup,
+	public void openSelectionMode(int stringRes, int darkIcon, DialogInterface.OnClickListener listener, Boolean backup,
 			LocalIndexType filter) {
 		if (backup != null) {
 			listAdapter.filterCategories(backup);
@@ -743,7 +748,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		if (filter != null) {
 			listAdapter.filterCategories(filter);
 		}
-		openSelectionMode(stringRes, !isLightActionBar() ? darkIcon : lightIcon, listener);
+		openSelectionMode(stringRes, darkIcon, listener);
 	}
 	
 
@@ -948,7 +953,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				v = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
 			}
 			TextView viewName = ((TextView) v.findViewById(R.id.local_index_name));
-			v.findViewById(R.id.options).setOnClickListener(new View.OnClickListener() {
+			ImageButton options = (ImageButton) v.findViewById(R.id.options);
+			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					openPopUpMenu(v, child);
@@ -961,8 +967,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				icon.setImageDrawable(sdcard);
 			}
 
-
-
 			viewName.setText(getNameToDisplay(child));
 			if (child.isNotSupported()) {
 				viewName.setTextColor(warningColor);
@@ -974,7 +978,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				// users confused okColor here with "uptodate", so let's leave white (black in dark app theme) as "isLoaded"
 				//viewName.setTextColor(okColor);
 				viewName.setTextColor(defaultColor);
-				viewName.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
 			} else {
 				viewName.setTextColor(defaultColor);
 				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
@@ -982,6 +985,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 					viewName.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 				}
 			}
+			TextView sizeText = (TextView) v.findViewById(R.id.local_index_size);
 			if (child.getSize() >= 0) {
 				String size;
 				if (child.getSize() > 100) {
@@ -989,21 +993,21 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				} else {
 					size = child.getSize() + " kB";
 				}
-				((TextView) v.findViewById(R.id.local_index_size)).setText(size);
+				sizeText.setText(size);
+				sizeText.setVisibility(View.VISIBLE);
 			} else {
-				((TextView) v.findViewById(R.id.local_index_size)).setText("");
+				sizeText.setVisibility(View.GONE);
 			}
 			TextView descr = ((TextView) v.findViewById(R.id.local_index_descr));
-			if (child.isExpanded()) {
-				descr.setVisibility(View.VISIBLE);
-				descr.setText(child.getDescription());
-			} else {
-				descr.setVisibility(View.GONE);
-			}
+			descr.setVisibility(View.VISIBLE);
+			descr.setText(child.getDescription());
+
+
 			final CheckBox checkbox = (CheckBox) v.findViewById(R.id.check_local_index);
 			checkbox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 			if (selectionMode) {
 				icon.setVisibility(View.GONE);
+				options.setVisibility(View.GONE);
 				checkbox.setChecked(selectedItems.contains(child));
 				checkbox.setOnClickListener(new View.OnClickListener() {
 					
@@ -1016,11 +1020,18 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 						}
 					}
 				});
+
 			} else {
+				options.setVisibility(View.VISIBLE);
 				icon.setVisibility(View.VISIBLE);
 			}
-			
 
+			v.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					onChildClick(null, v, groupPosition, childPosition, 0);
+				}
+			});
 			return v;
 		}
 
@@ -1039,7 +1050,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 					return true;
 				}
 			});
-			item = optionsMenu.getMenu().add(R.string.favourites_context_menu_edit)
+			item = optionsMenu.getMenu().add(R.string.local_index_mi_rename)
 					.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
@@ -1049,7 +1060,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				}
 			});
 
-			item = optionsMenu.getMenu().add(R.string.favourites_context_menu_delete)
+			item = optionsMenu.getMenu().add(R.string.edit_filter_delete_menu_item)
 					.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
