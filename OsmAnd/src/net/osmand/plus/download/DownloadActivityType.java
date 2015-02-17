@@ -44,7 +44,10 @@ public class DownloadActivityType {
 			byTag.put(st, this);
 		}
 	}
-	
+
+	public int getResource(){
+		return resource;
+	}
 	
 	public String getTag() {
 		return tags[0];

@@ -1039,7 +1039,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 					return true;
 				}
 			});
-			item = optionsMenu.getMenu().add(R.string.favourites_context_menu_edit)
+			item = optionsMenu.getMenu().add(R.string.local_index_mi_rename)
 					.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
@@ -1049,7 +1049,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				}
 			});
 
-			item = optionsMenu.getMenu().add(R.string.favourites_context_menu_delete)
+			item = optionsMenu.getMenu().add(R.string.edit_filter_delete_menu_item)
 					.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override

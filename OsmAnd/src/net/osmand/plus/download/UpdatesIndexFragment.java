@@ -1,5 +1,6 @@
 package net.osmand.plus.download;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -269,10 +271,11 @@ public class UpdatesIndexFragment extends ListFragment {
 			} else {
 				ch.setVisibility(View.VISIBLE);
 			}
+
 			String eName = e.getVisibleName(getMyApplication(), osmandRegions);
 
-			name.setText(eName.trim().replace('\n', ' ')); //$NON-NLS-1$
-			String d = e.getDate(format) + "  " + e.getSizeDescription(getMyApplication());
+			name.setText(eName.trim().replace('\n', ' ').replace("TTS","")); //$NON-NLS-1$
+			String d =   getMapDescription(e);
 			description.setText(d);
 
 			ch.setChecked(getDownloadActivity().getEntriesToDownload().containsKey(e));
@@ -301,4 +304,27 @@ public class UpdatesIndexFragment extends ListFragment {
 		}
 	}
 
+	private String getMapDescription(IndexItem item){
+		String typeName = getTypeName(item.getType().getResource());
+		String date = item.getDate(new SimpleDateFormat("dd.MM.yyyy"));
+		String size = item.getSizeDescription(getActivity());
+		return typeName + "  " + date + "  " + size;
+
+	}
+
+	private String getTypeName(int resId){
+		Activity activity = getActivity();
+		if (resId == R.string.download_regular_maps){
+			return activity.getString(R.string.map_view);
+		} else if (resId == R.string.voices){
+			return activity.getString(R.string.ttsvoice);
+		} else if (resId == R.string.download_roads_only_maps){
+			return activity.getString(R.string.roads_only);
+		} else if (resId == R.string.download_srtm_maps){
+			return activity.getString(R.string.download_srtm_maps);
+		} else if (resId == R.string.download_hillshade_maps){
+			return activity.getString(R.string.download_hillshade_maps);
+		}
+		return "";
+	}
 }
