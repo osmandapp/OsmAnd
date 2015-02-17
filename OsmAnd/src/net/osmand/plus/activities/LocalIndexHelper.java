@@ -43,17 +43,25 @@ public class LocalIndexHelper {
 	
 	
 	public String getInstalledDate(File f){
-		return getInstalledDate(f.lastModified(), null);
+		return getInstalledDateEdition(f.lastModified(), null);
 	}
 	
-	public String getInstalledDate(long t, TimeZone timeZone){
+	public String getInstalledDateEdition(long t, TimeZone timeZone){
 		DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
 		if(timeZone != null) {
 			dateFormat.setTimeZone(timeZone);
 		}
 		return app.getString(R.string.local_index_installed) + " : " + dateFormat.format(new Date(t));
 	}
-	
+
+	public String getInstalledDate(long t, TimeZone timeZone){
+		DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
+		if(timeZone != null) {
+			dateFormat.setTimeZone(timeZone);
+		}
+		return dateFormat.format(new Date(t));
+	}
+
 	public void updateDescription(LocalIndexInfo info){
 		File f = new File(info.getPathToData());
 		if(info.getType() == LocalIndexType.MAP_DATA){
