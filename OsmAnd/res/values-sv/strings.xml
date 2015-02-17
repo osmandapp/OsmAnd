@@ -1809,4 +1809,5 @@
     <string name="free">"Ledigt %1$s "</string>
 	<string name="device_memory">Intern lagring</string>
     <string name="rendering_attr_pisteRoutes_name">Pister och spår</string>
-	</resources>
+	<string name="roads_only">Endast vägar</string>
+    </resources>
