@@ -490,6 +490,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		if(operationTask != null){
 			operationTask.cancel(true);
 		}
+		if(descriptionLoader != null){
+			descriptionLoader.cancel(true);
+		}
 	}
 
 	@Override
@@ -996,7 +999,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				sizeText.setVisibility(View.GONE);
 			}
 			TextView descr = ((TextView) v.findViewById(R.id.local_index_descr));
-
 			descr.setVisibility(View.VISIBLE);
 			descr.setText(child.getDescription());
 
