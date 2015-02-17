@@ -3,7 +3,8 @@
 			  xmlns:tools="http://schemas.android.com/tools"
 			  android:orientation="horizontal"
 			  android:layout_width="fill_parent"
-			  android:layout_height="@dimen/list_header_height"
+			  android:layout_height="wrap_content"
+			  android:minHeight="@dimen/list_header_height"
 			  android:paddingLeft="@dimen/list_header_padding">
 
 	<ImageView
@@ -19,7 +20,6 @@
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="@dimen/list_header_text_left_margin"
 		android:layout_marginTop="@dimen/list_header_top_margin"
-		android:maxLines="1"
 		android:textSize="@dimen/list_header_text_size"
 		tools:text="@string/lorem_ipsum"/>
 

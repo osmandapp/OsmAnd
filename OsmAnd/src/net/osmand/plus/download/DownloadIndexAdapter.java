@@ -228,8 +228,10 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		}
 		final View row = v;
 		TextView name = (TextView) row.findViewById(R.id.name);
-		TextView edition = (TextView) row.findViewById(R.id.update_descr);
-		edition.setText("");
+		TextView update = (TextView) row.findViewById(R.id.update_descr);
+		update.setText("");
+		TextView uptodate = (TextView) row.findViewById(R.id.uptodate_descr);
+		uptodate.setText("");
 		TextView description = (TextView) row.findViewById(R.id.download_descr);
 		IndexItem e = (IndexItem) getChild(groupPosition, childPosition);
 		OsmandApplication clctx = downloadFragment.getMyApplication();
@@ -264,21 +266,38 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					}
 				} else if (e.getDate(format) != null) {
 					String sfName = e.getTargetFileName();
+
 					final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
 					if (updatableResource && !DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e)) {
 						description.setText(indexActivatedFileNames.get(sfName) + " " + e.getSizeDescription(clctx));
+						//up to date
+						uptodate.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+								+ indexActivatedFileNames.get(sfName));
+						uptodate.setVisibility(View.VISIBLE);
+						update.setVisibility(View.GONE);
 					} else if (indexFileNames.containsKey(sfName) && !DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e)) {
 						description.setText(indexFileNames.get(sfName) + " " + e.getSizeDescription(clctx));
+						//up to date
+						uptodate.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+								+ indexFileNames.get(sfName));
+						uptodate.setVisibility(View.VISIBLE);
+						update.setVisibility(View.GONE);
 					} else if (updatableResource) {
 						String updatedDescr =  indexActivatedFileNames.get(sfName) + " " + e.getSizeDescription(clctx);
 						description.setText(updatedDescr);
-						edition.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+						//needed to be updated
+						update.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ e.getDate(format));
+						uptodate.setVisibility(View.GONE);
+						update.setVisibility(View.VISIBLE);
 					} else {
 						description.setText(name.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexFileNames.get(sfName));
-						edition.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+						//needed to be updated
+						update.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
 								+ e.getDate(format));
+						uptodate.setVisibility(View.GONE);
+						update.setVisibility(View.VISIBLE);
 					}
 				}
 			}
