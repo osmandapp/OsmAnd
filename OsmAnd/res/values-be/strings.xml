@@ -2027,4 +2027,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="free">"Вольна %1$s "</string>
 	<string name="device_memory">Памяць прыстасаваньня</string>
     <string name="rendering_attr_pisteRoutes_name">Лыжныя трасы</string>
-	</resources>
+	<string name="roads_only">Толькі дарогі</string>
+    </resources>
