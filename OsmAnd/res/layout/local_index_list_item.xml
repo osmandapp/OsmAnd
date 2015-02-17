@@ -50,19 +50,16 @@
 
 			<TextView
 				android:id="@+id/local_index_size"
-				style="@style/ListText.Small"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:gravity="right"
+				android:layout_marginRight="7dp"
 				tools:text="@string/app_version"/>
 
 			<TextView
 				android:id="@+id/local_index_descr"
-				style="@style/ListText.Small"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical"
-				android:layout_marginLeft="7dp"
 				android:maxLines="25"
 				tools:text="@string/app_mode_aircraft"/>
 		</LinearLayout>
@@ -71,8 +68,8 @@
 
 	<ImageButton
 		android:id="@+id/options"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+		android:layout_width="@dimen/list_item_height"
+		android:layout_height="@dimen/list_item_height"
 		style="?attr/dashboardGeneralButtonStyle"
 		android:layout_marginRight="0dp"
 		android:layout_gravity="center_vertical"

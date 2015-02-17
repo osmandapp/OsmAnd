@@ -624,6 +624,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		final String actionButton = value;
 		if(listAdapter.getGroupCount() == 0){
 			listAdapter.cancelFilter();
+			expandAllGroups();
+			listAdapter.notifyDataSetChanged();
 			AccessibleToast.makeText(getDownloadActivity(), getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 			return;
 		}
@@ -980,6 +982,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 					viewName.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 				}
 			}
+			TextView sizeText = (TextView) v.findViewById(R.id.local_index_size);
 			if (child.getSize() >= 0) {
 				String size;
 				if (child.getSize() > 100) {
@@ -987,14 +990,16 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				} else {
 					size = child.getSize() + " kB";
 				}
-				((TextView) v.findViewById(R.id.local_index_size)).setText(size);
+				sizeText.setText(size);
+				sizeText.setVisibility(View.VISIBLE);
 			} else {
-				((TextView) v.findViewById(R.id.local_index_size)).setText("");
+				sizeText.setVisibility(View.GONE);
 			}
 			TextView descr = ((TextView) v.findViewById(R.id.local_index_descr));
 
 			descr.setVisibility(View.VISIBLE);
 			descr.setText(child.getDescription());
+
 
 			final CheckBox checkbox = (CheckBox) v.findViewById(R.id.check_local_index);
 			checkbox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
