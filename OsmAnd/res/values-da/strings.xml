@@ -1917,4 +1917,5 @@
     <string name="free">"Tilgængelig %1$s "</string>
 	<string name="device_memory">Lagerplads</string>
     <string name="rendering_attr_pisteRoutes_name">Pisteruter</string>
-	</resources>
+	<string name="roads_only">Kun veje</string>
+    </resources>
