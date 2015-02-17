@@ -1919,4 +1919,6 @@
     <string name="world_ski_missing">Tam, kad būtų atvaizduojami slidinėjimo žemėlapiai, būtina atsisiųsti specializuotus žemėlapius</string>
     <string name="nautical_maps_missing">Tam, kad būtų atvaizduojami jūriniai žemėlapiai, būtina atsisiųsti specializuotus žemėlapius</string>
 	<string name="plugin_nautical_name">Jūriniai žemėlapiai</string>
-    </resources>
+    <string name="device_memory">Įrenginio atmintis</string>
+    <string name="free">"Laisva %1$s "</string>
+	</resources>
