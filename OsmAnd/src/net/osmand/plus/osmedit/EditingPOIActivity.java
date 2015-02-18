@@ -4,13 +4,16 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.MapRenderingTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.EntityParser;
 import net.osmand.osm.edit.Node;
@@ -86,11 +89,15 @@ public class EditingPOIActivity implements DialogProvider {
 
 	private static Bundle dialogBundle = new Bundle();
 	private OsmandSettings settings;
+	private MapPoiTypes poiTypes;
+	private Map<String, PoiType> allTranslatedSubTypes;
 	
 
 	public EditingPOIActivity(MapActivity uiContext){
 		this.ctx = uiContext;
 
+		poiTypes = uiContext.getMyApplication().getPoiTypes();
+		allTranslatedSubTypes = poiTypes.getAllTranslatedNames();
 		settings = ((OsmandApplication) uiContext.getApplication()).getSettings();
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 			this.openstreetmapUtil = new OpenstreetmapLocalUtil(ctx);
@@ -127,11 +134,11 @@ public class EditingPOIActivity implements DialogProvider {
 	public void showCreateDialog(double latitude, double longitude){
 		Node n = new Node(latitude, longitude, -1);
 		n.putTag(OSMTagKey.OPENING_HOURS.getValue(), ""); //$NON-NLS-1$
-		showPOIDialog(DIALOG_CREATE_POI, n, AmenityType.OTHER, "");
+		showPOIDialog(DIALOG_CREATE_POI, n, poiTypes.getOtherPoiCategory(), "");
 	}
 
-	private void showPOIDialog(int dialogID, Node n, AmenityType type, String subType) {
-		Amenity a = EntityParser.parseAmenity(n, type, subType, null,  MapRenderingTypes.getDefault());
+	private void showPOIDialog(int dialogID, Node n, PoiCategory type, String subType) {
+		Amenity a = EntityParser.parseAmenity(n, type, subType, null, MapRenderingTypes.getDefault());
 		dialogBundle.putSerializable(KEY_AMENITY, a);
 		dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
 		ctx.showDialog(dialogID);
@@ -269,7 +276,13 @@ public class EditingPOIActivity implements DialogProvider {
         } else {
         	value.setHint("Value");
         }
-        Set<String> subCategories = MapRenderingTypes.getDefault().getAmenityNameToType().keySet();
+        Set<String> subCategories = new LinkedHashSet<String>();
+        // could be osm values
+//		for (String s : poiTypes.getAllTranslatedNames().keySet()) {
+//			if (!subCategories.contains(s)) {
+//				subCategories.add(s);
+//			}
+//		} ;
         ArrayAdapter<Object> valueAdapter = new ArrayAdapter<Object>(ctx, R.layout.list_textview, subCategories.toArray());
         value.setThreshold(1);
         value.setAdapter(valueAdapter);
@@ -374,11 +387,11 @@ public class EditingPOIActivity implements DialogProvider {
 			public void afterTextChanged(Editable s) {
 				String str = s.toString();
 				a.setSubType(str);
-				AmenityType t = MapRenderingTypes.getDefault().getAmenityNameToType().get(str);
-				if(t != null && a.getType() != t){
-					a.setType(t);
-					typeButton.setText(OsmAndFormatter.toPublicString(t, ctx.getMyApplication()));
-					updateSubTypesAdapter(t);
+				PoiType st = allTranslatedSubTypes.get(str);
+				if(st != null && a.getType() != st.getCategory() && st.getCategory() != null){
+					a.setType(st.getCategory());
+					typeButton.setText(st.getCategory().getTranslation());
+					updateSubTypesAdapter(st.getCategory());
 				}
 				
 			}
@@ -448,11 +461,16 @@ public class EditingPOIActivity implements DialogProvider {
 				final String msg = n.getId() == -1 ? resources.getString(R.string.poi_action_add) : resources
 						.getString(R.string.poi_action_change);
 				OsmPoint.Action action = n.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
-				StringBuilder tag = new StringBuilder();
-				StringBuilder value = new StringBuilder();
 				String subType = typeText.getText().toString();
-				MapRenderingTypes.getDefault().getAmenityTagValue(a.getType(), subType, tag, value);
-				n.putTag(tag.toString(), value.toString());
+				if(allTranslatedSubTypes.get(subType) != null) {
+					PoiType pt = allTranslatedSubTypes.get(subType);
+					n.putTag(pt.getOsmTag()	, pt.getOsmValue());
+					if(pt.getOsmTag2() != null) {
+						n.putTag(pt.getOsmTag2(), pt.getOsmValue2());
+					}
+				} else {
+					n.putTag(a.getType().getDefaultTag(), subType);
+				}
 				String name = nameText.getText().toString();
 				if(name.length() > 0) {
 					n.putTag(OSMTagKey.NAME.getValue(), name);
@@ -508,11 +526,10 @@ public class EditingPOIActivity implements DialogProvider {
 		}
 	}
 
-	private void updateSubTypesAdapter(AmenityType t){
-		
-		Set<String> subCategories = new LinkedHashSet<String>(MapRenderingTypes.getDefault().getAmenityAllSubCategories(t));
-		for(String s : MapRenderingTypes.getDefault().getAmenityNameToType().keySet()){
-			if(!subCategories.contains(s)){
+	private void updateSubTypesAdapter(PoiCategory poiCategory) {
+		Set<String> subCategories = new LinkedHashSet<String>(poiTypes.getAllTranslatedNames(poiCategory).keySet());
+		for (String s : poiTypes.getAllTranslatedNames().keySet()) {
+			if (!subCategories.contains(s)) {
 				subCategories.add(s);
 			}
 		}
@@ -522,7 +539,7 @@ public class EditingPOIActivity implements DialogProvider {
 	
 	private void updateType(Amenity a){
 		typeText.setText(a.getSubType());
-		typeButton.setText(OsmAndFormatter.toPublicString(a.getType(), ctx.getMyApplication()));
+		typeButton.setText(a.getType().getTranslation());
 		updateSubTypesAdapter(a.getType());
 	}
 	
@@ -602,63 +619,62 @@ public class EditingPOIActivity implements DialogProvider {
 	public Dialog onCreateDialog(int id) {
 		Bundle args = dialogBundle;
 		switch (id) {
-			case DIALOG_CREATE_POI:
-			case DIALOG_EDIT_POI:
-				return createPOIDialog(id,args);
-			case DIALOG_DELETE_POI:
-				return createDeleteDialog(args);
-			case DIALOG_SUB_CATEGORIES: {
-				Builder builder = new AlertDialog.Builder(ctx);
-				final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
-				final String[] subCats = MapRenderingTypes.getDefault().getAmenityAllSubCategories(a.getType()).
-						toArray(new String[0]);
-				builder.setItems(subCats, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						typeText.setText(subCats[which]);
-						a.setSubType(subCats[which]);
-						ctx.removeDialog(DIALOG_SUB_CATEGORIES);
-					}
-				});
-				builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						ctx.removeDialog(DIALOG_SUB_CATEGORIES);
-					}
-				});
-				return builder.create();
-			}
-			case DIALOG_POI_TYPES: {
-				final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
-				Builder builder = new AlertDialog.Builder(ctx);
-				final AmenityType[] categories = AmenityType.getCategories();
-				String[] vals = new String[categories.length];
-				for(int i=0; i<vals.length; i++){
-					vals[i] = OsmAndFormatter.toPublicString(categories[i], ctx.getMyApplication()); 
+		case DIALOG_CREATE_POI:
+		case DIALOG_EDIT_POI:
+			return createPOIDialog(id, args);
+		case DIALOG_DELETE_POI:
+			return createDeleteDialog(args);
+		case DIALOG_SUB_CATEGORIES: {
+			Builder builder = new AlertDialog.Builder(ctx);
+			final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
+			final String[] subCats = poiTypes.getAllTranslatedNames(a.getType()).keySet().toArray(new String[0]);
+			builder.setItems(subCats, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					typeText.setText(subCats[which]);
+					a.setSubType(subCats[which]);
+					ctx.removeDialog(DIALOG_SUB_CATEGORIES);
 				}
-				builder.setItems(vals, new Dialog.OnClickListener(){
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						AmenityType aType = categories[which];
-						if(aType != a.getType()){
-							a.setType(aType);
-							a.setSubType(""); //$NON-NLS-1$
-							updateType(a);
-						}
-						ctx.removeDialog(DIALOG_POI_TYPES);
-					}
-				});
-				builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						ctx.removeDialog(DIALOG_POI_TYPES);
-					}
-				});
-				return builder.create();
+			});
+			builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					ctx.removeDialog(DIALOG_SUB_CATEGORIES);
+				}
+			});
+			return builder.create();
+		}
+		case DIALOG_POI_TYPES: {
+			final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
+			Builder builder = new AlertDialog.Builder(ctx);
+			final List<PoiCategory> categories = poiTypes.getCategories();
+			String[] vals = new String[categories.size()];
+			for (int i = 0; i < vals.length; i++) {
+				vals[i] = categories.get(i).getTranslation();
 			}
-			case DIALOG_OPENING_HOURS: {
-				return createOpenHoursDlg();
-			}
+			builder.setItems(vals, new Dialog.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					PoiCategory aType = categories.get(which);
+					if (aType != a.getType()) {
+						a.setType(aType);
+						a.setSubType(""); //$NON-NLS-1$
+						updateType(a);
+					}
+					ctx.removeDialog(DIALOG_POI_TYPES);
+				}
+			});
+			builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					ctx.removeDialog(DIALOG_POI_TYPES);
+				}
+			});
+			return builder.create();
+		}
+		case DIALOG_OPENING_HOURS: {
+			return createOpenHoursDlg();
+		}
 		}
 		return null;
 	}

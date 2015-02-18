@@ -12,7 +12,9 @@ import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.TransportStop;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.MapRenderingTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
 
@@ -63,7 +65,7 @@ public class EntityParser {
 		mo.setName(op);
 	}
 	
-	public static Amenity parseAmenity(Entity entity, AmenityType type, String subtype, Map<String, String> tagValues,
+	public static Amenity parseAmenity(Entity entity, PoiCategory type, String subtype, Map<String, String> tagValues,
 			MapRenderingTypes types) {
 		Amenity am = new Amenity();
 		parseMapObject(am, entity);
@@ -72,7 +74,8 @@ public class EntityParser {
 		}
 		am.setType(type);
 		am.setSubType(subtype);
-		am.setAdditionalInfo(types.getAmenityAdditionalInfo(tagValues, type, subtype));
+		AmenityType at = AmenityType.findOrCreateTypeNoReg(type.getKeyName());
+		am.setAdditionalInfo(types.getAmenityAdditionalInfo(tagValues, at, subtype));
 		String wbs = getWebSiteURL(entity);
 		if(wbs != null) {
 			am.setAdditionalInfo("website", wbs);
@@ -109,7 +112,7 @@ public class EntityParser {
 	}
 	
 	public static List<Amenity> parseAmenities(MapRenderingTypes renderingTypes,
-			Entity entity, List<Amenity> amenitiesList){
+			MapPoiTypes poiTypes, Entity entity, List<Amenity> amenitiesList){
 		amenitiesList.clear();
 		// it could be collection of amenities
 		boolean relation = entity instanceof Relation;
@@ -123,7 +126,8 @@ public class EntityParser {
 							: renderingTypes.getAmenityType(e.getKey(), e.getValue(), hasName );
 					if (type != null) {
 						String subtype = renderingTypes.getAmenitySubtype(e.getKey(), e.getValue());
-						Amenity a = parseAmenity(entity, type, subtype, tags, renderingTypes);
+						PoiCategory pc = poiTypes.getPoiCategoryByName(type.getCategoryName(), true);
+						Amenity a = parseAmenity(entity, pc, subtype, tags, renderingTypes);
 						if (checkAmenitiesToAdd(a, amenitiesList) && !"no".equals(subtype)) {
 							amenitiesList.add(a);
 						}

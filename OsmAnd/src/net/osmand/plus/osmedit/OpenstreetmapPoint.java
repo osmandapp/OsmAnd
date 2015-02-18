@@ -27,10 +27,9 @@ public class OpenstreetmapPoint extends OsmPoint implements Serializable {
 	}
 
 	public String getType() {
-		String type = AmenityType.valueToString(AmenityType.OTHER);
-		for(String k : entity.getTagKeySet()){
-			if (!OSMTagKey.NAME.getValue().equals(k) &&
-				!OSMTagKey.OPENING_HOURS.getValue().equals(k)) {
+		String type = "amenity";
+		for (String k : entity.getTagKeySet()) {
+			if (!OSMTagKey.NAME.getValue().equals(k) && !OSMTagKey.OPENING_HOURS.getValue().equals(k)) {
 				type = k;
 				break;
 			}

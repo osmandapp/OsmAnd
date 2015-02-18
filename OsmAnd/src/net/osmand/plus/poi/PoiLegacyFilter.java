@@ -1,5 +1,6 @@
 package net.osmand.plus.poi;
 
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -9,10 +10,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -26,7 +27,8 @@ public class PoiLegacyFilter {
 	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id"; //$NON-NLS-1$
 	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name"; //$NON-NLS-1$
 	
-	private Map<AmenityType, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<AmenityType, LinkedHashSet<String>>();
+	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
+			LinkedHashSet<String>>();
 	private String filterByName = null;
 
 	protected String filterId;
@@ -39,15 +41,16 @@ public class PoiLegacyFilter {
 	protected int distanceInd = 1;
 	// in kilometers
 	protected double[] distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 50, 100, 200, 500 };
+	private final MapPoiTypes poiTypes;
 	
 	
 	// constructor for standard filters
-	public PoiLegacyFilter(AmenityType type, OsmandApplication application){
+	public PoiLegacyFilter(PoiCategory type, OsmandApplication application){
 		this.app = application;
 		isStandardFilter = true;
 		filterId = STD_PREFIX + type;
-		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : OsmAndFormatter.toPublicString(type, 
-				application); //$NON-NLS-1$
+		poiTypes = application.getPoiTypes();
+		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : type.getTranslation(); //$NON-NLS-1$
 		if(type == null){
 			initSearchAll();
 		} else {
@@ -56,9 +59,10 @@ public class PoiLegacyFilter {
 	}
 	
 	// constructor for user defined filters
-	public PoiLegacyFilter(String name, String filterId, Map<AmenityType, LinkedHashSet<String>> acceptedTypes, OsmandApplication app){
+	public PoiLegacyFilter(String name, String filterId, Map<PoiCategory, LinkedHashSet<String>> acceptedTypes, OsmandApplication app){
 		this.app = app;
 		isStandardFilter = false;
+		poiTypes = app.getPoiTypes();
 		if(filterId == null){
 			filterId = USER_PREFIX + name.replace(' ', '_').toLowerCase();
 		}
@@ -88,7 +92,7 @@ public class PoiLegacyFilter {
 	}
 	
 	private void initSearchAll(){
-		for(AmenityType t : AmenityType.getCategories()){
+		for(PoiCategory t : poiTypes.getCategories()){
 			acceptedTypes.put(t, null);
 		}
 		distanceToSearchValues = new double[] {0.5, 1, 2, 5, 10, 20, 50, 100};
@@ -191,20 +195,20 @@ public class PoiLegacyFilter {
 	 * @param type
 	 * @return null if all subtypes are accepted/ empty list if type is not accepted at all
 	 */
-	public Set<String> getAcceptedSubtypes(AmenityType type){
+	public Set<String> getAcceptedSubtypes(PoiCategory type){
 		if(!acceptedTypes.containsKey(type)){
 			return Collections.emptySet();
 		}
 		return acceptedTypes.get(type);
 	}
 	
-	public boolean isTypeAccepted(AmenityType t){
+	public boolean isTypeAccepted(PoiCategory t){
 		return acceptedTypes.containsKey(t);
 	}
 	
-	public boolean acceptTypeSubtype(AmenityType t, String subtype){
-		if(!AmenityType.isRegisteredType(t)) {
-			t = AmenityType.USER_DEFINED;
+	public boolean acceptTypeSubtype(PoiCategory t, String subtype){
+		if(!poiTypes.isRegisteredType(t)) {
+			t = poiTypes.getOtherPoiCategory();
 		}
 		if(!acceptedTypes.containsKey(t)){
 			return false;
@@ -217,12 +221,12 @@ public class PoiLegacyFilter {
 	}
 	
 	public void clearFilter(){
-		acceptedTypes = new LinkedHashMap<AmenityType, LinkedHashSet<String>>();
+		acceptedTypes = new LinkedHashMap<PoiCategory, LinkedHashSet<String>>();
 	}
 	
 	public boolean areAllTypesAccepted(){
-		if(AmenityType.getCategoriesSize() == acceptedTypes.size()){
-			for(AmenityType a : acceptedTypes.keySet()){
+		if(poiTypes.getCategories().size() == acceptedTypes.size()){
+			for(PoiCategory a : acceptedTypes.keySet()){
 				if(acceptedTypes.get(a) != null){
 					return false;
 				}
@@ -233,7 +237,7 @@ public class PoiLegacyFilter {
 	}
 	
 	
-	public void setTypeToAccept(AmenityType type, boolean accept){
+	public void setTypeToAccept(PoiCategory type, boolean accept){
 		if(accept){
 			acceptedTypes.put(type, new LinkedHashSet<String>());
 		} else {
@@ -241,11 +245,11 @@ public class PoiLegacyFilter {
 		}
 	}
 	
-	public void setMapToAccept(Map<AmenityType, List<String>> newMap) {
-		Iterator<Entry<AmenityType, List<String>>> iterator = newMap.entrySet().iterator();
+	public void setMapToAccept(Map<PoiCategory, List<String>> newMap) {
+		Iterator<Entry<PoiCategory, List<String>>> iterator = newMap.entrySet().iterator();
 		acceptedTypes.clear();
 		while(iterator.hasNext()){
-			Entry<AmenityType, List<String>> e = iterator.next();
+			Entry<PoiCategory, List<String>> e = iterator.next();
 			if(e.getValue() == null){
 				acceptedTypes.put(e.getKey(), null);
 			} else {
@@ -254,49 +258,13 @@ public class PoiLegacyFilter {
 		}
 	}
 	
-	public String buildSqlWhereFilter(){
-		if(areAllTypesAccepted()){
-			return null;
-		}
-		assert IndexConstants.POI_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-		if(acceptedTypes.size() == 0){
-			return "1 > 1";  //$NON-NLS-1$
-		}
-		StringBuilder b = new StringBuilder();
-		b.append("("); //$NON-NLS-1$
-		boolean first = true;
-		for(AmenityType a : acceptedTypes.keySet()){
-			if(first){
-				first = false;
-			} else {
-				b.append(" OR "); //$NON-NLS-1$
-			}
-			b.append("(type = '").append(AmenityType.valueToString(a)).append("'"); //$NON-NLS-1$ //$NON-NLS-2$
-			if(acceptedTypes.get(a) != null){
-				LinkedHashSet<String> list = acceptedTypes.get(a);
-				b.append(" AND subtype IN ("); //$NON-NLS-1$
-				boolean bfirst = true;
-				for(String s : list){
-					if(bfirst){
-						bfirst = false;
-					} else {
-						b.append(", "); //$NON-NLS-1$
-					}
-					b.append("'").append(s).append("'"); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-				b.append(")"); //$NON-NLS-1$
-			}
-			b.append(")"); //$NON-NLS-1$
-		}
-		b.append(")"); //$NON-NLS-1$
-		return b.toString();
+	
+	
+	public Map<PoiCategory, LinkedHashSet<String>> getAcceptedTypes(){
+		return new LinkedHashMap<PoiCategory, LinkedHashSet<String>>(acceptedTypes);
 	}
 	
-	public Map<AmenityType, LinkedHashSet<String>> getAcceptedTypes(){
-		return new LinkedHashMap<AmenityType, LinkedHashSet<String>>(acceptedTypes);
-	}
-	
-	public void selectSubTypesToAccept(AmenityType t, LinkedHashSet<String> accept){
+	public void selectSubTypesToAccept(PoiCategory t, LinkedHashSet<String> accept){
 		acceptedTypes.put(t, accept);
 	}
 	

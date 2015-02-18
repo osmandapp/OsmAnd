@@ -12,7 +12,6 @@ import java.util.List;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -276,7 +275,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 			}
 
 			Amenity point = new Amenity();
-			((Amenity) point).setType(AmenityType.USER_DEFINED);
+			((Amenity) point).setType(getMyApplication().getPoiTypes().getUserDefinedCategory());
 			((Amenity) point).setSubType("");
 			point.setLocation(lat, lon);
 			point.setName("Lat: " + lat + ",Lon:" + lon);
@@ -380,7 +379,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 	}
 
 	@SuppressWarnings("unused")
-	private static class GeoPointSearch implements MyService {
+	private class GeoPointSearch implements MyService {
 		private final MapObject point;
 		private final int zoom;
 
@@ -400,7 +399,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 			final Amenity amenity = new Amenity();
 			amenity.setLocation(lat, lon);
 			amenity.setName(name);
-			amenity.setType(AmenityType.USER_DEFINED);
+			amenity.setType(getMyApplication().getPoiTypes().getUserDefinedCategory());
 			amenity.setSubType("");
 
 			this.point = amenity;

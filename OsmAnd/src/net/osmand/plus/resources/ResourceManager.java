@@ -27,7 +27,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
@@ -35,6 +34,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.OsmandRegions;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -812,8 +812,8 @@ public class ResourceManager {
 		return amenities;
 	}
 	
-	public Map<AmenityType, List<String>> searchAmenityCategoriesByName(String searchQuery, double lat, double lon) {
-		Map<AmenityType, List<String>> map = new LinkedHashMap<AmenityType, List<String>>();
+	public Map<PoiCategory, List<String>> searchAmenityCategoriesByName(String searchQuery, double lat, double lon) {
+		Map<PoiCategory, List<String>> map = new LinkedHashMap<PoiCategory, List<String>>();
 		for (AmenityIndexRepository index : amenityRepositories) {
 			if (index instanceof AmenityIndexRepositoryBinary) {
 				if (index.checkContains(lat, lon)) {

@@ -7,10 +7,9 @@ import java.util.List;
 
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.R.string;
 import net.osmand.util.MapUtils;
 
 public class SearchByNameFilter extends PoiLegacyFilter {
@@ -22,7 +21,7 @@ public class SearchByNameFilter extends PoiLegacyFilter {
 	private String query = ""; //$NON-NLS-1$
 	
 	public SearchByNameFilter(OsmandApplication application) {
-		super(application.getString(R.string.poi_filter_by_name), FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application);
+		super(application.getString(R.string.poi_filter_by_name), FILTER_ID, new LinkedHashMap<PoiCategory, LinkedHashSet<String>>(), application);
 		this.distanceToSearchValues = new double[] {100, 1000, 5000};
 		this.isStandardFilter = true;
 	}

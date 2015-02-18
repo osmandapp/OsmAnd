@@ -18,11 +18,11 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LocationPoint;
-import net.osmand.osm.MapRenderingTypes;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
+import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.IntermediatePointsDialog;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -675,14 +675,17 @@ public class WaypointHelper {
 		public Drawable getDrawable(Context uiCtx, OsmandApplication app) {
 			if(type == POI) {
 				Amenity amenity = ((AmenityLocationPoint) point).a;
-				StringBuilder tag = new StringBuilder();
-				StringBuilder value = new StringBuilder();
-				MapRenderingTypes.getDefault().getAmenityTagValue(amenity.getType(), amenity.getSubType(),
-						tag, value);
-				if(RenderingIcons.containsBigIcon(tag + "_" + value)) {
-					return uiCtx.getResources().getDrawable(RenderingIcons.getBigIconResourceId(tag + "_" + value));
-				} else if(RenderingIcons.containsBigIcon(value.toString())) {
-					return uiCtx.getResources().getDrawable(RenderingIcons.getBigIconResourceId(value.toString()));
+				PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+				if (st != null) {
+					if (RenderingIcons.containsBigIcon(st.getKeyName())) {
+						return uiCtx.getResources().getDrawable(
+								RenderingIcons.getBigIconResourceId(st.getKeyName()));
+					} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+						return uiCtx.getResources().getDrawable(
+								RenderingIcons.getBigIconResourceId(st.getOsmTag() + "_" + st.getOsmValue()));
+					} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+						return uiCtx.getResources().getDrawable(RenderingIcons.getBigIconResourceId(st.getOsmValue()));
+					}
 				}
 				return null;
 			} else if(type == TARGETS) {

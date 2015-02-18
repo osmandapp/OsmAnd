@@ -8,26 +8,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.MainMenuActivity;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
@@ -60,8 +59,6 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
-import android.graphics.Shader.TileMode;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -88,6 +85,7 @@ public class OsmandApplication extends Application {
 
 	ResourceManager resourceManager = null;
 	PoiFiltersHelper poiFilters = null;
+	MapPoiTypes poiTypes = null;
 	RoutingHelper routingHelper = null;
 	FavouritesDbHelper favorites = null;
 	CommandPlayer player = null;
@@ -158,6 +156,7 @@ public class OsmandApplication extends Application {
 
 		applyTheme(this);
 		
+		poiTypes = initPoiTypes();
 		routingHelper = new RoutingHelper(this, player);
 		taskManager = new OsmAndTaskManager(this);
 		resourceManager = new ResourceManager(this);
@@ -175,7 +174,6 @@ public class OsmandApplication extends Application {
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
-		
 		checkPreferredLocale();
 		startApplication();
 		if (LOG.isDebugEnabled()) {
@@ -189,6 +187,32 @@ public class OsmandApplication extends Application {
 		}
 
 
+	}
+	
+	public MapPoiTypes getPoiTypes() {
+		if(poiTypes == null) {
+			throw new IllegalStateException("State exception");
+		}
+		return poiTypes;
+	}
+
+	private MapPoiTypes initPoiTypes() {
+		return MapPoiTypes.initDefault(new MapPoiTypes.PoiTranslator() {
+			
+			@Override
+			public String getTranslation(AbstractPoiType type) {
+				try {
+					Field f = R.string.class.getField("poi_" + type.getKeyName());
+					if (f != null) {
+						Integer in = (Integer) f.get(null);
+						return getString(in);
+					}
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
+				}
+				return null;
+			}
+		});
 	}
 
 	private void createInUiThread() {
@@ -546,13 +570,6 @@ public class OsmandApplication extends Application {
 		List<String> warnings = new ArrayList<String>();
 		try {
 			favorites.loadFavorites();
-			try {
-				SpecialPhrases.setLanguage(this, osmandSettings);
-			} catch (IOException e) {
-				LOG.error("I/O exception", e);
-				warnings.add("Error while reading the special phrases. Restart OsmAnd if possible");
-			}
-			
 			if (!"qnx".equals(System.getProperty("os.name"))) {
 				if (osmandSettings.USE_OPENGL_RENDER.get()) {
 					boolean success = false;

@@ -10,10 +10,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.data.AmenityType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.R.string;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
@@ -39,9 +39,11 @@ public class PoiFiltersHelper {
 	private static final String UDF_PARKING = "parking";
 	
 	private static final String[] DEL = new String[] {};
+	private MapPoiTypes poiTypes;
 	
 	public PoiFiltersHelper(OsmandApplication application){
 		this.application = application;
+		poiTypes = application.getPoiTypes();
 	}
 	public NameFinderPoiFilter getNameFinderPOIFilter() {
 		if(nameFinderPOIFilter == null){
@@ -73,14 +75,14 @@ public class PoiFiltersHelper {
 		return findPoiFilter(filterId, getUserDefinedPoiFilters(), getTopStandardFilters(), getOsmDefinedPoiFilters());
 	}
 	
-	private void putAll(Map<AmenityType, LinkedHashSet<String>> types, AmenityType tp){
-		types.put(tp, null);
+	private void putAll(Map<PoiCategory, LinkedHashSet<String>> types, String tp) {
+		types.put(poiTypes.getPoiCategoryByName(tp), null);
 	}
-	
-	private void putValues(Map<AmenityType, LinkedHashSet<String>> types, AmenityType tp,String... vls){
+
+	private void putValues(Map<PoiCategory, LinkedHashSet<String>> types, String p, String... vls) {
 		LinkedHashSet<String> list = new LinkedHashSet<String>();
-        Collections.addAll(list, vls);
-		types.put(tp, list);
+		Collections.addAll(list, vls);
+		types.put(poiTypes.getPoiCategoryByName(p), list);
 	}
 	
 	private List<PoiLegacyFilter> getUserDefinedDefaultFilters() {
@@ -108,35 +110,35 @@ public class PoiFiltersHelper {
 		return filters;
 	}
 	
-	private Map<AmenityType, LinkedHashSet<String>> configureDefaultUserDefinedFilter(Map<AmenityType, LinkedHashSet<String>> types, String key) {
+	private Map<PoiCategory, LinkedHashSet<String>> configureDefaultUserDefinedFilter(Map<PoiCategory, LinkedHashSet<String>> types, String key) {
 		if(types == null) {
-			types = new LinkedHashMap<AmenityType, LinkedHashSet<String>>();
+			types = new LinkedHashMap<PoiCategory, LinkedHashSet<String>>();
 		}
 		if(UDF_ACCOMMODATION.equals(key)){
-			putValues(types, AmenityType.TOURISM, "camp_site",
+			putValues(types, "tourism", "camp_site",
 					"caravan_site","picnic_site","alpine_hut", "chalet","guest_house",
 					"hostel", "hotel","motel");
 		} else if (UDF_CAR_AID.equals(key)) {
-			putValues(types, AmenityType.TRANSPORTATION, "fuel", "car_wash", "car_repair","car", "car_sharing");
-			putValues(types, AmenityType.SHOP, "fuel", "car_wash", "car_repair","car", "car_parts");
+			putValues(types, "transportation", "fuel", "car_wash", "car_repair","car", "car_sharing");
+			putValues(types, "shop", "fuel", "car_wash", "car_repair","car", "car_parts");
 		} else if (UDF_FOOD_SHOP.equals(key)) {
-			putValues(types, AmenityType.SHOP, "alcohol", "bakery", "beverages", "butcher", "convenience", "department_store",
+			putValues(types, "shop", "alcohol", "bakery", "beverages", "butcher", "convenience", "department_store",
 					"convenience", "farm", "general", "ice_cream", "kiosk", "seafood", "supermarket", "variety_store");
 		} else if(UDF_FOR_TOURISTS.equals(key)){
-			putAll(types, AmenityType.HISTORIC);
-			putAll(types, AmenityType.TOURISM);
-			putAll(types, AmenityType.FINANCE);
-			putAll(types, AmenityType.OSMWIKI);
-			putValues(types, AmenityType.OTHER, "place_of_worship", "internet_access_wlan", "internet_access_wired",
+			putAll(types, "historic");
+			putAll(types, "tourism");
+			putAll(types, "finance");
+			putAll(types, "osmwiki");
+			putValues(types, "other", "place_of_worship", "internet_access_wlan", "internet_access_wired",
 					"internet_access_terminal", "internet_access_public", "internet_access_service",
 					"embassy", "marketplace", "post_office", "telephone", "toilets", "emergency_phone");
 		} else if(UDF_FUEL.equals(key)){
-			putValues(types, AmenityType.TRANSPORTATION, "fuel");
+			putValues(types, "transportation", "fuel");
 		} else if (UDF_PARKING.equals(key)) {
-			putValues(types, AmenityType.TRANSPORTATION, "parking",
+			putValues(types, "transportation", "parking",
 					"bicycle_parking");
 		} else if (UDF_PUBLIC_TRANSPORT.equals(key)) {
-			putValues(types, AmenityType.TRANSPORTATION, "public_transport_stop_position", "public_transport_platform",
+			putValues(types, "transportation", "public_transport_stop_position", "public_transport_platform",
 					"public_transport_station",
 					// railway
 					"railway_platform", "railway_station", "halt", "tram_stop", "subway_entrance", "railway_buffer_stop",
@@ -151,19 +153,19 @@ public class PoiFiltersHelper {
 					// "rail", "tram", "light_rail", "subway", "railway_narrow_gauge", "railway_monorail", "railway_funicular"
 					);
 		} else if (UDF_RESTAURANTS.equals(key)) {
-			putValues(types, AmenityType.SUSTENANCE, "restaurant",
+			putValues(types, "sustenance", "restaurant",
 					"cafe", "food_court", "fast_food", "pub", "bar", "biergarten");
 		} else if (UDF_SIGHTSEEING.equals(key)) {
-			putAll(types, AmenityType.HISTORIC);
-			putValues(types, AmenityType.TOURISM, "attraction",
+			putAll(types, "historic");
+			putValues(types, "tourism", "attraction",
 					"artwork","zoo","theme_park", "museum","viewpoint");
-			putAll(types, AmenityType.OSMWIKI);
-			putValues(types, AmenityType.OTHER, "place_of_worship");
+			putAll(types, "osmwiki");
+			putValues(types, "other", "place_of_worship");
 		} else if (UDF_EMERGENCY.equals(key)) {
-			putAll(types, AmenityType.HEALTHCARE);
-			putAll(types, AmenityType.EMERGENCY);
+			putAll(types, "healthcare");
+			putAll(types, "emergency");
 		} else if (UDF_ENTERTAINMENT.equals(key)) {
-			putAll(types, AmenityType.ENTERTAINMENT);
+			putAll(types, "entertainment");
 		}
 		return types;
 	}
@@ -194,7 +196,7 @@ public class PoiFiltersHelper {
 		if (cacheTopStandardFilters == null) {
 			cacheTopStandardFilters = new ArrayList<PoiLegacyFilter>();
 			PoiLegacyFilter filter = new PoiLegacyFilter(application.getString(R.string.poi_filter_custom_filter),
-					PoiLegacyFilter.CUSTOM_FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application); //$NON-NLS-1$
+					PoiLegacyFilter.CUSTOM_FILTER_ID, new LinkedHashMap<PoiCategory, LinkedHashSet<String>>(), application); //$NON-NLS-1$
 			filter.setStandardFilter(true);
 			cacheTopStandardFilters.add(filter);
 			cacheTopStandardFilters.add(new PoiLegacyFilter(null, application));
@@ -205,8 +207,8 @@ public class PoiFiltersHelper {
 		return Collections.unmodifiableList(cacheTopStandardFilters);
 	}
 	
-	public static String getOsmDefinedFilterId(AmenityType t){
-		return PoiLegacyFilter.STD_PREFIX + t;
+	public static String getOsmDefinedFilterId(PoiCategory t){
+		return PoiLegacyFilter.STD_PREFIX + t.getKeyName();
 	}
 	
 	public void updateFilters(boolean onlyAddFilters){
@@ -219,7 +221,7 @@ public class PoiFiltersHelper {
 	public List<PoiLegacyFilter> getOsmDefinedPoiFilters(){
 		if(cacheOsmDefinedFilters == null){
 			cacheOsmDefinedFilters = new ArrayList<PoiLegacyFilter>();
-			for(AmenityType t : AmenityType.getCategories()){
+			for(PoiCategory t : poiTypes.getCategories()){
 				cacheOsmDefinedFilters.add(new PoiLegacyFilter(t, application));
 			}
 			final Collator instance = Collator.getInstance();
@@ -394,18 +396,18 @@ public class PoiFiltersHelper {
 	    		if(!addOnlyCategories){
 	    			db.execSQL("INSERT INTO " + FILTER_NAME + " VALUES (?, ?, ?)",new Object[]{p.getName(), p.getFilterId(), p.getFilterByName()}); //$NON-NLS-1$ //$NON-NLS-2$
 	    		}
-	    		Map<AmenityType, LinkedHashSet<String>> types = p.getAcceptedTypes();
+	    		Map<PoiCategory, LinkedHashSet<String>> types = p.getAcceptedTypes();
 	    		SQLiteStatement insertCategories = db.compileStatement("INSERT INTO " +  CATEGORIES_NAME + " VALUES (?, ?, ?)"); //$NON-NLS-1$ //$NON-NLS-2$
-	    		for(AmenityType a : types.keySet()){
+	    		for(PoiCategory a : types.keySet()){
 	    			if(types.get(a) == null){
 		    			insertCategories.bindString(1, p.getFilterId());
-						insertCategories.bindString(2, AmenityType.valueToString(a));
+						insertCategories.bindString(2, a.getTranslation());
 						insertCategories.bindNull(3);
     					insertCategories.execute();
 	    			} else {
 	    				for(String s : types.get(a)){
 	    					insertCategories.bindString(1, p.getFilterId());
-	    					insertCategories.bindString(2, AmenityType.valueToString(a));
+	    					insertCategories.bindString(2, a.getTranslation());
 	    					insertCategories.bindString(3, s);
 	    					insertCategories.execute();
 	    				}
@@ -422,15 +424,15 @@ public class PoiFiltersHelper {
 	    	if(conn != null){
 	    		SQLiteCursor query = conn.rawQuery("SELECT " + CATEGORIES_FILTER_ID +", " + CATEGORIES_COL_CATEGORY +"," + CATEGORIES_COL_SUBCATEGORY +" FROM " +  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 	    				CATEGORIES_NAME, null);
-	    		Map<String, Map<AmenityType, LinkedHashSet<String>>> map = new LinkedHashMap<String, Map<AmenityType,LinkedHashSet<String>>>();
+	    		Map<String, Map<PoiCategory, LinkedHashSet<String>>> map = new LinkedHashMap<String, Map<PoiCategory,LinkedHashSet<String>>>();
 	    		if(query.moveToFirst()){
 	    			do {
 	    				String filterId = query.getString(0);
 	    				if(!map.containsKey(filterId)){
-	    					map.put(filterId, new LinkedHashMap<AmenityType, LinkedHashSet<String>>());
+	    					map.put(filterId, new LinkedHashMap<PoiCategory, LinkedHashSet<String>>());
 	    				}
-	    				Map<AmenityType, LinkedHashSet<String>> m = map.get(filterId);
-	    				AmenityType a = AmenityType.findOrCreateTypeNoReg(query.getString(1));
+	    				Map<PoiCategory, LinkedHashSet<String>> m = map.get(filterId);
+	    				PoiCategory a = poiTypes.getPoiCategoryByName(query.getString(1));
 	    				String subCategory = query.getString(2);
 	    				if(subCategory == null){
 	    					m.put(a, null);
@@ -450,7 +452,8 @@ public class PoiFiltersHelper {
 	    			do {
 	    				String filterId = query.getString(0);
 	    				if(map.containsKey(filterId)){
-	    					PoiLegacyFilter filter = new PoiLegacyFilter(query.getString(1), filterId, map.get(filterId), application);
+	    					PoiLegacyFilter filter = new PoiLegacyFilter(query.getString(1), filterId,
+	    							map.get(filterId), application);
 	    					filter.setFilterByName(query.getString(2));
 	    					list.add(filter);
 	    				}

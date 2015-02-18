@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import net.osmand.Location;
+import net.osmand.osm.PoiCategory;
 
 
 public class Amenity extends MapObject  {
@@ -16,7 +17,7 @@ public class Amenity extends MapObject  {
 	
 	private static final long serialVersionUID = 132083949926339552L;
 	private String subType;
-	private AmenityType type;
+	private PoiCategory type;
 	// duplicate for fast access
 	private String openingHours;
 	private Map<String, String> additionalInfo;
@@ -31,7 +32,7 @@ public class Amenity extends MapObject  {
 		public Location pointB;
 	}
 	
-	public AmenityType getType(){
+	public PoiCategory getType(){
 		return type;
 	}
 	
@@ -39,7 +40,7 @@ public class Amenity extends MapObject  {
 		return subType;
 	}
 	
-	public void setType(AmenityType type) {
+	public void setType(PoiCategory type) {
 		this.type = type;
 	}
 	

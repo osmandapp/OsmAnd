@@ -334,7 +334,6 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.optionsMenuFragment(activity, fragment, optionsMenuAdapter);
 		}
-		
 	}
 
 
