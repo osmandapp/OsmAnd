@@ -61,6 +61,7 @@ public class MapPoiTypes {
 	}
 	
 	public PoiCategory getPoiCategoryByName(String name) {
+		name = name.toLowerCase();
 		return getPoiCategoryByName(name, false);
 	}
 	
