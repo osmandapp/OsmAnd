@@ -251,55 +251,32 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 			}
 		});
 
-		if (indexFileNames != null) {
-			if (e.isAlreadyDownloaded(indexFileNames)) {
-				if (e.getType() == DownloadActivityType.HILLSHADE_FILE
-						|| e.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
-					String sfName = e.getTargetFileName();
-					if (indexActivatedFileNames.containsKey(sfName)) {
-						name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-						// next case since present hillshade files cannot be deactivated, but are not in indexActivatedFileNames
-					} else if (e.getType() == DownloadActivityType.HILLSHADE_FILE) {
-						name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-					} else {
-						name.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
-					}
-				} else if (e.getDate(format) != null) {
-					String sfName = e.getTargetFileName();
-
-					final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
-					if (updatableResource && !DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e)) {
-						description.setText(indexActivatedFileNames.get(sfName) + " " + e.getSizeDescription(clctx));
-						//up to date
-						uptodate.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + ": "
-								+ indexActivatedFileNames.get(sfName));
-						uptodate.setVisibility(View.VISIBLE);
-						update.setVisibility(View.GONE);
-					} else if (indexFileNames.containsKey(sfName) && !DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e)) {
-						description.setText(indexFileNames.get(sfName) + " " + e.getSizeDescription(clctx));
-						//up to date
-						uptodate.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + ": "
-								+ indexFileNames.get(sfName));
-						uptodate.setVisibility(View.VISIBLE);
-						update.setVisibility(View.GONE);
-					} else if (updatableResource) {
-						String updatedDescr =  indexActivatedFileNames.get(sfName) + " " + e.getSizeDescription(clctx);
-						description.setText(updatedDescr);
-						//needed to be updated
-						update.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + ": "
-								+ e.getDate(format));
-						uptodate.setVisibility(View.GONE);
-						update.setVisibility(View.VISIBLE);
-					} else {
-						description.setText(name.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + ": "
-								+ indexFileNames.get(sfName));
-						//needed to be updated
-						update.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + ": "
-								+ e.getDate(format));
-						uptodate.setVisibility(View.GONE);
-						update.setVisibility(View.VISIBLE);
-					}
+		if (indexFileNames != null && e.isAlreadyDownloaded(indexFileNames)) {
+			if (e.getType() == DownloadActivityType.HILLSHADE_FILE
+					|| e.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
+				String sfName = e.getTargetFileName();
+				if (indexActivatedFileNames.containsKey(sfName)) {
+					name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+					// next case since present hillshade files cannot be deactivated, but are not in
+					// indexActivatedFileNames
+				} else if (e.getType() == DownloadActivityType.HILLSHADE_FILE) {
+					name.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+				} else {
+					name.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 				}
+			} else  {
+				String sfName = e.getTargetFileName();
+				final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
+				String date = updatableResource ? indexActivatedFileNames.get(sfName) : indexFileNames.get(sfName);
+				boolean outdated = DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e);
+				description.setText(date + " " + e.getSizeDescription(clctx));
+				// up to date
+				String updateDescr = downloadFragment.getResources().getString(R.string.local_index_installed) + ": "
+						+ date;
+				uptodate.setText(updateDescr);
+				update.setText(updateDescr);
+				uptodate.setVisibility(outdated ? View.VISIBLE : View.GONE);
+				update.setVisibility(outdated ? View.GONE : View.VISIBLE);
 			}
 		}
 		return row;

@@ -185,15 +185,9 @@ public abstract class OsmandPlugin {
 	
 	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {}
 	
-	public void loadLocalIndexes(List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {}
-	
 	public void updateLocation(Location location) {}
 	
 	public void contextMenuLocalIndexes(Activity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {};
-	
-	public void updateLocalIndexDescription(LocalIndexInfo info) {}
-	
-	public void optionsMenuLocalIndexes(Activity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {};
 	
 	public List<String> indexingFiles(IProgress progress) {	return null;}
 	
@@ -327,17 +321,6 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.registerOptionsMenuItems(map, helper);
 		}
-	}
-	public static void onUpdateLocalIndexDescription(LocalIndexInfo info) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.updateLocalIndexDescription(info);
-		}
-	}
-	
-	public static void onLoadLocalIndexes(List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.loadLocalIndexes(result, loadTask);
-		}		
 	}
 	
 	public static void onContextMenuActivity(Activity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {

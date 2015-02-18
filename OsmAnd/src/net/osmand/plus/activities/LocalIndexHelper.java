@@ -2,26 +2,18 @@ package net.osmand.plus.activities;
 
 
 import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.text.DateFormat;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.TimeZone;
-import java.util.TreeSet;
 
 import net.osmand.IndexConstants;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.download.LocalIndexesFragment.LoadLocalIndexTask;
@@ -65,22 +57,20 @@ public class LocalIndexHelper {
 	public void updateDescription(LocalIndexInfo info){
 		File f = new File(info.getPathToData());
 		if(info.getType() == LocalIndexType.MAP_DATA){
-			updateObfFileInformation(info, f);
+			Map<String, String> ifns = app.getResourceManager().getIndexFileNames();
+			if(ifns.containsKey(info.getFileName())) {
+				info.setDescription(ifns.get(info.getFileName()));
+			} else {
+				info.setDescription(getInstalledDate(f));
+			}
 		} else if(info.getType() == LocalIndexType.VOICE_DATA){
 			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.TTS_VOICE_DATA){
 			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.TILES_DATA){
-			Set<Integer> zooms = new TreeSet<Integer>();
 			ITileSource template ;
 			if(f.isDirectory() && TileSourceManager.isTileSourceMetaInfoExist(f)){
 				template = TileSourceManager.createTileSourceTemplate(new File(info.getPathToData()));
-				for(String s : f.list()){
-					try {
-						zooms.add(Integer.parseInt(s));
-					} catch (NumberFormatException e) {
-					}
-				}
 			} else if(f.isFile() && f.getName().endsWith(SQLiteTileSource.EXT)){
 				template = new SQLiteTileSource(app, f, TileSourceManager.getKnownSourceTemplates());
 			} else {
@@ -91,10 +81,7 @@ public class LocalIndexHelper {
 			if(template.getExpirationTimeMinutes() >= 0) {
 				descr += "\n" + app.getString(R.string.local_index_tile_data_expire, template.getExpirationTimeMinutes());
 			}
-			descr += "\n" + app.getString(R.string.local_index_tile_data_zooms, zooms.toString());
 			info.setDescription(descr);
-		} else {
-			OsmandPlugin.onUpdateLocalIndexDescription(info);
 		}
 	}
 
@@ -109,7 +96,6 @@ public class LocalIndexHelper {
 		loadSrtmData(app.getAppPath(IndexConstants.SRTM_INDEX_DIR), result, loadTask);
 		loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), result, false, loadTask);
 		loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
-		OsmandPlugin.onLoadLocalIndexes(result, loadTask);
 		
 		return result;
 	}
@@ -128,6 +114,7 @@ public class LocalIndexHelper {
 						}
 					}
 					if(info != null){
+						updateDescription(info);
 						result.add(info);
 						loadTask.loadFile(info);
 					}
@@ -141,6 +128,7 @@ public class LocalIndexHelper {
 			for (File tileFile : listFilesSorted(tilesPath)) {
 				if (tileFile.isFile() && tileFile.getName().endsWith(SQLiteTileSource.EXT)) {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup);
+					updateDescription(info);
 					result.add(info);
 					loadTask.loadFile(info);
 				} else if (tileFile.isDirectory()) {
@@ -149,9 +137,9 @@ public class LocalIndexHelper {
 					if(!TileSourceManager.isTileSourceMetaInfoExist(tileFile)){
 						info.setCorrupted(true);
 					}
+					updateDescription(info);
 					result.add(info);
 					loadTask.loadFile(info);
-					
 				}
 			}
 		}
@@ -172,6 +160,7 @@ public class LocalIndexHelper {
 			for (File mapFile : listFilesSorted(mapPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.SRTM_DATA, mapFile, false);
+					updateDescription(info);
 					result.add(info);
 					loadTask.loadFile(info);
 				}
@@ -188,6 +177,7 @@ public class LocalIndexHelper {
 					if(loadedMaps.containsKey(mapFile.getName()) && !backup){
 						info.setLoaded(true);
 					}
+					updateDescription(info);
 					result.add(info);
 					loadTask.loadFile(info);
 				}
@@ -198,24 +188,6 @@ public class LocalIndexHelper {
 	
 
 	
-	private MessageFormat format = new MessageFormat("\t {0}, {1} NE \n\t {2}, {3} NE", Locale.US);
-
-	private void updateObfFileInformation(LocalIndexInfo info, File mapFile) {
-		try {
-			RandomAccessFile mf = new RandomAccessFile(mapFile, "r");
-			BinaryMapIndexReader reader = new BinaryMapIndexReader(mf);
-			
-			info.setNotSupported(reader.getVersion() != IndexConstants.BINARY_MAP_VERSION);
-			StringBuilder builder = new StringBuilder();
-			builder.append(getInstalledDate(reader.getDateCreated(), null));
-			info.setDescription(builder.toString());
-			reader.close();
-		} catch (IOException e) {
-			info.setCorrupted(true);
-		}
-		
-	}
-
 
 
 	public enum LocalIndexType {
