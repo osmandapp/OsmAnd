@@ -52,7 +52,6 @@ import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapEncodingRule;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapRootLevel;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -60,6 +59,8 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.edit.Way;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -1240,7 +1241,7 @@ public class BinaryMapIndexReader {
 		return req.getSearchResults();
 	}
 	
-	public Map<AmenityType, List<String> > searchPoiCategoriesByName(String query, Map<AmenityType, List<String> > map) throws IOException {
+	public Map<PoiCategory, List<String> > searchPoiCategoriesByName(String query, Map<PoiCategory, List<String> > map) throws IOException {
 		if (query == null || query.length() == 0) {
 			throw new IllegalArgumentException();
 		}
@@ -1249,7 +1250,7 @@ public class BinaryMapIndexReader {
 			poiAdapter.initCategories(poiIndex);
 			for (int i = 0; i < poiIndex.categories.size(); i++) {
 				String cat = poiIndex.categories.get(i);
-				AmenityType catType = poiIndex.categoriesType.get(i);
+				PoiCategory catType = poiIndex.categoriesType.get(i);
 				if (CollatorStringMatcher.cmatches(collator, cat, query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)) {
 					map.put(catType, null);
 				} else {
@@ -1495,7 +1496,7 @@ public class BinaryMapIndexReader {
 	
 	public static interface SearchPoiTypeFilter {
 		
-		public boolean accept(AmenityType type, String subcategory);
+		public boolean accept(PoiCategory type, String subcategory);
 		
 	}
 	
@@ -1900,14 +1901,15 @@ public class BinaryMapIndexReader {
 
 	private static void testSearchOnthePath(BinaryMapIndexReader reader) throws IOException {
 		float radius = 1000;
+		final MapPoiTypes poiTypes = MapPoiTypes.getDefault();
 		long now = System.currentTimeMillis();
 		println("Searching poi on the path...");
 		final List<Location> locations = readGPX(new File(
 				""));
 		SearchRequest<Amenity> req = buildSearchPoiRequest(locations, radius, new SearchPoiTypeFilter() {
 			@Override
-			public boolean accept(AmenityType type, String subcategory) {
-				if (type == AmenityType.SHOP && subcategory.contains("super")) {
+			public boolean accept(PoiCategory type, String subcategory) {
+				if (type == poiTypes.getPoiCategoryByName("shop") && subcategory.contains("super")) {
 					return true;
 				}
 				return false;
@@ -2021,7 +2023,7 @@ public class BinaryMapIndexReader {
 
 		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, -1, new SearchPoiTypeFilter() {
 			@Override
-			public boolean accept(AmenityType type, String subcategory) {
+			public boolean accept(PoiCategory type, String subcategory) {
 				return true;
 			}
 

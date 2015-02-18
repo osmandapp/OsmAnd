@@ -5,27 +5,23 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PoiFilter {
+public class PoiFilter extends AbstractPoiType {
 	
-	private String keyName;
-	private String translationName;
-	private MapPoiTypes registry;
+	private PoiCategory pc; 
 	private List<PoiType> poiTypes = new ArrayList<PoiType>();
 	private Map<String, PoiType> map = new LinkedHashMap<String, PoiType>();
-	private PoiCategory pc; 
 
 	public PoiFilter(MapPoiTypes registry, PoiCategory pc, String keyName){
-		this.registry = registry;
+		super(keyName, registry);
 		this.pc = pc;
-		this.keyName = keyName;
 	}
 	
 	public PoiCategory getPoiCategory() {
 		return pc;
 	}
 	
-	public String getTranslationName() {
-		return translationName;
+	public PoiType getPoiTypeByKeyName(String kn) {
+		return map.get(kn);
 	}
 	
 	public void addPoiType(PoiType type) {
@@ -33,7 +29,6 @@ public class PoiFilter {
 			poiTypes.add(type);
 			map.put(type.getName(), type);
 		}
-		
 	}
 	
 	public List<PoiType> getPoiTypes() {

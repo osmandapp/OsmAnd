@@ -1,10 +1,14 @@
 package net.osmand.osm;
 
-public class PoiType {
+public class PoiType extends AbstractPoiType {
+
+
+	public PoiType(MapPoiTypes poiTypes, PoiCategory category, String name){
+		super(name, poiTypes);
+		this.category = category;
+	}
+
 	
-	private String name;
-	private String translationName;
-	private MapPoiTypes poiTypes;
 	public String getOsmTag() {
 		return osmTag;
 	}
@@ -43,22 +47,10 @@ public class PoiType {
 	private String osmValue;
 	private String osmValue2;
 	
-	public PoiType(MapPoiTypes poiTypes, PoiCategory category, String name){
-		this.poiTypes = poiTypes;
-		this.category = category;
-		this.name = name;
-	}
 	
 	public PoiCategory getCategory() {
 		return category;
 	}
 	
-	public String getTranslationName() {
-		return translationName;
-	}
-	
-	public String getName() {
-		return name;
-	}
 
 }

@@ -43,9 +43,6 @@ public class MapRenderingTypes {
 	private static char TAG_DELIMETER = '/'; //$NON-NLS-1$
 	
 	private String resourceName = null;
-	private Map<AmenityType, Map<String, String>> amenityTypeNameToTagVal = null;
-	private Map<String, AmenityType> amenityNameToType = null;
-	private Map<String, Map<String, String>> amenityAllTypeNameToTagVal = null;
 	
 	protected Map<String, MapRulType> types = null;
 	protected List<MapRulType> typeList = new ArrayList<MapRulType>();
@@ -84,81 +81,6 @@ public class MapRenderingTypes {
 			init();
 		}
 	}
-	
-	public void getAmenityTagValue(AmenityType type, String subType, StringBuilder tag, StringBuilder value) {
-		tag.setLength(0);
-		tag.append(type.getDefaultTag());
-		value.setLength(0);
-		value.append(subType);
-		Map<AmenityType, Map<String, String>> m = getAmenityTypeNameToTagVal();
-		if (m.containsKey(type)) {
-			Map<String, String> map = m.get(type);
-			if (map.containsKey(subType)) {
-				String res = map.get(subType);
-				if (res != null) {
-					int i = res.indexOf(' ');
-					if (i != -1) {
-						tag.setLength(0);
-						tag.append(res.substring(0, i));
-						value.setLength(0);
-						value.append(res.substring(i + 1));
-					} else {
-						tag.setLength(0);
-						tag.append(res);
-					}
-				}
-			}
-		}		
-	}
-
-	private Map<AmenityType, Map<String, String>> getAmenityTypeNameToTagVal() {
-		if (amenityTypeNameToTagVal == null) {
-			Map<String, MapRulType> types = getEncodingRuleTypes();
-			amenityTypeNameToTagVal = new LinkedHashMap<AmenityType, Map<String, String>>();
-			for(MapRulType type : types.values()){
-				if(type.poiCategory != null && type.targetTagValue == null) {
-					if(!amenityTypeNameToTagVal.containsKey(type.poiCategory)) {
-						amenityTypeNameToTagVal.put(type.poiCategory, new TreeMap<String, String>());
-					}
-					String name = type.getValue();
-					if (name != null) {
-						if (type.poiPrefix != null) {
-							name = type.poiPrefix + name;
-							amenityTypeNameToTagVal.get(type.poiCategory).put(name, type.getTag() + " " + type.getValue());
-						} else {
-							amenityTypeNameToTagVal.get(type.poiCategory).put(name, type.getTag());
-						}
-					}
-				}
-			}
-		}
-		return amenityTypeNameToTagVal;
-	}
-
-	private Map<String, Map<String, String>> getAmenityAllTypeNameToTagVal() {
-		if (amenityAllTypeNameToTagVal == null) {
-			Map<String, MapRulType> types = getEncodingRuleTypes();
-			amenityAllTypeNameToTagVal = new LinkedHashMap<String, Map<String, String>>();
-			for(MapRulType type : types.values()){
-				if(type.category != null && type.targetTagValue == null) {
-					if(!amenityAllTypeNameToTagVal.containsKey(type.category)) {
-						amenityAllTypeNameToTagVal.put(type.category, new TreeMap<String, String>());
-					}
-					String name = type.getValue();
-					if (name != null) {
-						if (type.poiPrefix != null) {
-							name = type.poiPrefix + name;
-							amenityAllTypeNameToTagVal.get(type.category).put(name, type.getTag() + " " + type.getValue());
-						} else {
-							amenityAllTypeNameToTagVal.get(type.category).put(name, type.getTag());
-						}
-					}
-				}
-			}
-		}
-		return amenityAllTypeNameToTagVal;
-	}
-
 	public Collection<Map<String, String>> splitTagsIntoDifferentObjects(final Map<String, String> tags) {
 		// check open sea maps tags
 		boolean split = splitIsNeeded(tags);
@@ -229,45 +151,8 @@ public class MapRenderingTypes {
 		}
 		return value;
 	}
-
-	public Map<String, AmenityType> getAmenityNameToType(){
-		if(amenityNameToType == null){
-			amenityNameToType = new LinkedHashMap<String, AmenityType>();
-			Map<AmenityType, Map<String, String>> map = getAmenityTypeNameToTagVal();
-			Iterator<Entry<AmenityType, Map<String, String>>> iter = map.entrySet().iterator();
-			while(iter.hasNext()){
-				Entry<AmenityType, Map<String, String>> e = iter.next();
-				for(String t : e.getValue().keySet()){
-					if (t != null) {
-						if (amenityNameToType.containsKey(t)) {
-							System.err.println("Conflict " + t + " " + amenityNameToType.get(t) + " <> " + e.getKey());
-						} else {
-                            amenityNameToType.put(t, e.getKey());
-                        }
-
-					}
-				}
-			}
-		}
-		return amenityNameToType; 
-	}
 	
-	public Collection<String> getAmenitySubCategories(AmenityType t){
-		Map<AmenityType, Map<String, String>> amenityTypeNameToTagVal = getAmenityTypeNameToTagVal();
-		if(!amenityTypeNameToTagVal.containsKey(t)){
-			return Collections.emptyList(); 
-		}
-		return amenityTypeNameToTagVal.get(t).keySet();
-	}
-
-	public Collection<String> getAmenityAllSubCategories(AmenityType t){
-		Map<String, Map<String, String>> amenityAllTypeNameToTagVal = getAmenityAllTypeNameToTagVal();
-		if(!amenityAllTypeNameToTagVal.containsKey(t.getCategoryName())){
-			return Collections.emptyList(); 
-		}
-		return amenityAllTypeNameToTagVal.get(t.getCategoryName()).keySet();
-	}
-
+	
 	public MapRulType getTypeByInternalId(int id) {
 		return typeList.get(id);
 	}

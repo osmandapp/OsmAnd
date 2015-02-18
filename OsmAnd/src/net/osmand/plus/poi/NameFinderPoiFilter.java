@@ -2,7 +2,6 @@ package net.osmand.plus.poi;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -11,11 +10,10 @@ import java.util.List;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.R.string;
 import net.osmand.util.MapUtils;
 import net.sf.junidecode.Junidecode;
 
@@ -85,6 +83,7 @@ public class NameFinderPoiFilter extends PoiLegacyFilter {
 			int eventType;
 			int namedDepth= 0;
 			Amenity a = null;
+			MapPoiTypes poiTypes = ((OsmandApplication) getApplication()).getPoiTypes();
 			while ((eventType = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (eventType == XmlPullParser.START_TAG) {
 					if (parser.getName().equals("searchresults")) { //$NON-NLS-1$
@@ -106,7 +105,7 @@ public class NameFinderPoiFilter extends PoiLegacyFilter {
 								String name = parser.getAttributeValue("", "display_name");  //$NON-NLS-1$//$NON-NLS-2$
 								a.setName(name);
 								a.setEnName(Junidecode.unidecode(name));
-								a.setType(AmenityType.OTHER);
+								a.setType(poiTypes.getOtherPoiCategory());
 								a.setSubType(parser.getAttributeValue("", "type"));  //$NON-NLS-1$//$NON-NLS-2$
 								if (matcher == null || matcher.publish(a)) {
 									searchedAmenities.add(a);

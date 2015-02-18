@@ -8,11 +8,11 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.osm.MapRenderingTypes;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmAndFormatter;
@@ -21,7 +21,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
@@ -206,6 +205,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			data.queryNewData(tileBox);
 			objects = data.getResults();
 			if (objects != null) {
+				MapPoiTypes poiTypes = view.getApplication().getPoiTypes();
 				int r = getRadiusPoi(tileBox);
 				for (Amenity o : objects) {
 					int x = (int) tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
@@ -215,13 +215,15 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 					canvas.drawCircle(x, y, r, pointAltUI);
 					canvas.drawCircle(x, y, r, point);
 					String id = null;
-					StringBuilder tag = new StringBuilder();
-					StringBuilder value = new StringBuilder();
-					MapRenderingTypes.getDefault().getAmenityTagValue(o.getType(), o.getSubType(), tag, value);
-					if (RenderingIcons.containsIcon(tag + "_" + value)) {
-						id = tag + "_" + value;
-					} else if (RenderingIcons.containsIcon(tag.toString())) {
-						id = tag.toString();
+					PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
+					if (st != null) {
+						if (RenderingIcons.containsIcon(st.getKeyName())) {
+							id = st.getKeyName();
+						} else if (RenderingIcons.containsIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+							id = st.getOsmTag() + "_" + st.getOsmValue();
+						} else if (RenderingIcons.containsIcon(st.getOsmValue())) {
+							id = st.getOsmValue();
+						}
 					}
 					if (id != null) {
 						Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id);
@@ -301,7 +303,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		Builder bs = new AlertDialog.Builder(view.getContext());
 		bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(a, view.getApplication(),
 				view.getSettings().usingEnglishNames()));
-		if (a.getType() == AmenityType.OSMWIKI) {
+		if (a.getType().isWiki()) {
 			bs.setMessage(a.getDescription());
 		} else {
 			bs.setMessage(OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a, false));

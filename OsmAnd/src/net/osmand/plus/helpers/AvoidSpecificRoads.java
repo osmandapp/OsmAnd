@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;

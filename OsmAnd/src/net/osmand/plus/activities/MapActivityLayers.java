@@ -10,14 +10,13 @@ import net.osmand.CallbackWithObject;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.Item;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -25,8 +24,8 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.render.RenderingIcons;
@@ -283,11 +282,11 @@ public class MapActivityLayers {
 			it.reg();
 			userDefined.add(f);
 		}
-		final AmenityType[] categories = AmenityType.getCategories();
-		for(AmenityType t : categories){
-			Item it = adapter.item(OsmAndFormatter.toPublicString(t, activity.getMyApplication()));
-			if(RenderingIcons.containsBigIcon(t.toString().toLowerCase())) {
-				it.icon(RenderingIcons.getBigIconResourceId(t.toString().toLowerCase()));
+		final List<PoiCategory> categories = getApplication().getPoiTypes().getCategories();
+		for(PoiCategory t : categories){
+			Item it = adapter.item(t.getTranslation());
+			if(RenderingIcons.containsBigIcon(t.getKeyName())) {
+				it.icon(RenderingIcons.getBigIconResourceId(t.getKeyName()));
 			}
 			it.reg();
 		}
@@ -312,7 +311,7 @@ public class MapActivityLayers {
 					} else if (which <= userDefined.size() + 1) {
 						filterId = userDefined.get(which - 2).getFilterId();
 					} else {
-						filterId = PoiFiltersHelper.getOsmDefinedFilterId(categories[which - userDefined.size() - 2]);
+						filterId = PoiFiltersHelper.getOsmDefinedFilterId(categories.get(which - userDefined.size() - 2));
 					}
 					getApplication().getSettings().setPoiFilterForMap(filterId);
 					PoiLegacyFilter f = poiFilters.getFilterById(filterId);

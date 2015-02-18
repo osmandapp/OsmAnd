@@ -23,6 +23,9 @@ import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.sf.junidecode.Junidecode;
@@ -50,7 +53,7 @@ public class BinaryMapPoiReaderAdapter {
 	public static class PoiRegion extends BinaryIndexPart {
 
 		List<String> categories = new ArrayList<String>();
-		List<AmenityType> categoriesType = new ArrayList<AmenityType>();
+		List<PoiCategory> categoriesType = new ArrayList<PoiCategory>();
 		List<List<String> > subcategories = new ArrayList<List<String> >();
 		List<PoiSubType> subTypes = new ArrayList<PoiSubType>();
 		
@@ -100,10 +103,13 @@ public class BinaryMapPoiReaderAdapter {
 	
 	private CodedInputStream codedIS;
 	private final BinaryMapIndexReader map;
+
+	private MapPoiTypes poiTypes;
 	
 	protected BinaryMapPoiReaderAdapter(BinaryMapIndexReader map){
 		this.codedIS = map.codedIS;
 		this.map = map;
+		this.poiTypes = MapPoiTypes.getDefault();
 	}
 
 	private void skipUnknownField(int t) throws IOException {
@@ -199,7 +205,7 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndCategoryTable.CATEGORY_FIELD_NUMBER :
 				String cat = codedIS.readString().intern();
 				region.categories.add(cat);
-				region.categoriesType.add(AmenityType.findOrCreateTypeNoReg(cat));
+				region.categoriesType.add(poiTypes.getPoiCategoryByName(cat));
 				region.subcategories.add(new ArrayList<String>());
 				break;
 			case OsmandOdb.OsmAndCategoryTable.SUBCATEGORIES_FIELD_NUMBER :
@@ -615,7 +621,7 @@ public class BinaryMapPoiReaderAdapter {
 		int x = 0;
 		int y = 0;
 		StringBuilder retValue = new StringBuilder();
-		AmenityType amenityType = null;
+		PoiCategory amenityType = null;
 		LinkedList<String> textTags = null;
 		while(true){
 			int t = codedIS.readTag();
@@ -688,7 +694,7 @@ public class BinaryMapPoiReaderAdapter {
 				int cat = codedIS.readUInt32();
 				int subcatId = cat >> SHIFT_BITS_CATEGORY;
 				int catId = cat & CATEGORY_MASK;
-				AmenityType type = AmenityType.OTHER;
+				PoiCategory type = poiTypes.getOtherPoiCategory();
 				String subtype = "";
 				if (catId < region.categoriesType.size()) {
 					type = region.categoriesType.get(catId);
@@ -756,7 +762,7 @@ public class BinaryMapPoiReaderAdapter {
 //				}
 //				break;
 			case OsmandOdb.OsmAndPoiCategories.CATEGORIES_FIELD_NUMBER:
-				AmenityType type = AmenityType.OTHER;
+				PoiCategory type = poiTypes.getOtherPoiCategory();
 				String subcat = "";
 				int cat = codedIS.readUInt32();
 				int subcatId = cat >> SHIFT_BITS_CATEGORY;

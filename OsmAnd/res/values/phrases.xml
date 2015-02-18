@@ -1,6 +1,26 @@
 <?xml version="1.0" ?>
 <resources>
-
+<!--  categories -->
+	<string name="poi_shop">Shop</string>
+	<string name="poi_emergency">Emergency</string>
+	<string name="poi_transportation">Transportation</string>
+	<string name="poi_man_made">Man made</string>
+	<string name="poi_education">Education</string>
+	<string name="poi_administrative">Administrative</string>
+	<string name="poi_healthcare">Healthcare</string>
+	<string name="poi_office">Office</string>
+	<string name="poi_sport">Sport</string>
+	<string name="poi_tourism">Tourism</string>
+	<string name="poi_entertainment">Leisure</string>
+	<string name="poi_sustenance">Food</string>
+	<string name="poi_service">Service</string>
+	<string name="poi_finance">Finance</string>
+	<string name="poi_natural">Natural</string>
+	<string name="poi_seamark">Nautical</string>
+	<string name="poi_military">Military</string>
+	<string name="poi_osmwiki">Wikipedia</string>
+	<string name="poi_user_defined_other">User defined</string>
+	
 	<string name="poi_palaeontological_site">Palaeontological site</string>
 
 	<string name="poi_bakery">Bakery</string>
@@ -640,7 +660,7 @@
 	<string name="poi_seamark_rock">Rock, seamark</string>
 	<string name="poi_seamark_wreck">Wreck, seamark</string>
 
-	<string name="poi_military">Military zone</string>
+	<string name="poi_military_landuse">Military zone</string>
 	<string name="poi_military_airfield">Military airfield</string>
 	<string name="poi_military_bunker">Military bunker</string>
 	<string name="poi_military_barracks">Barracks</string>

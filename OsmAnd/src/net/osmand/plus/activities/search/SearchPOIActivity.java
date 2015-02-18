@@ -4,10 +4,6 @@
 package net.osmand.plus.activities.search;
 
 
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.Toolbar;
 import gnu.trove.set.hash.TLongHashSet;
 
 import java.util.ArrayList;
@@ -23,12 +19,9 @@ import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.NavigationInfo;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
-import net.osmand.osm.MapRenderingTypes;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.Item;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -38,7 +31,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.poi.NameFinderPoiFilter;
@@ -55,6 +47,8 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
@@ -62,12 +56,12 @@ import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
-import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ForegroundColorSpan;
 import android.text.util.Linkify;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -77,7 +71,6 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -387,7 +380,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private void showPoiCategoriesByNameFilter(String query, net.osmand.Location loc){
 		OsmandApplication app = (OsmandApplication) getApplication();
 		if(loc != null){
-			Map<AmenityType, List<String>> map = app.getResourceManager().searchAmenityCategoriesByName(query, loc.getLatitude(), loc.getLongitude());
+			Map<PoiCategory, List<String>> map = app.getResourceManager().searchAmenityCategoriesByName(query, loc.getLatitude(), loc.getLongitude());
 			if(!map.isEmpty()){
 				PoiLegacyFilter filter = ((OsmandApplication)getApplication()).getPoiFilters().getFilterById(PoiLegacyFilter.CUSTOM_FILTER_ID);
 				if(filter != null){
@@ -401,13 +394,13 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		}
 	}
 	
-	private String typesToString(Map<AmenityType, List<String>> map) {
+	private String typesToString(Map<PoiCategory, List<String>> map) {
 		StringBuilder b = new StringBuilder();
 		int count = 0;
-		Iterator<Entry<AmenityType, List<String>>> iterator = map.entrySet().iterator();
+		Iterator<Entry<PoiCategory, List<String>>> iterator = map.entrySet().iterator();
 		while(iterator.hasNext() && count < 4){
-			Entry<AmenityType, List<String>> e = iterator.next();
-			b.append("\n").append(OsmAndFormatter.toPublicString(e.getKey(), getMyApplication())).append(" - ");
+			Entry<PoiCategory, List<String>> e = iterator.next();
+			b.append("\n").append(e.getKey().getTranslation()).append(" - ");
 			if(e.getValue() == null){
 				b.append("...");
 			} else {
@@ -833,14 +826,17 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					direction.setImageResource(R.drawable.closed_poi);
 				}
 			}
-			StringBuilder tag = new StringBuilder();
-			StringBuilder value = new StringBuilder();
-			MapRenderingTypes.getDefault().getAmenityTagValue(amenity.getType(), amenity.getSubType(),
-					tag, value);
-			if(RenderingIcons.containsBigIcon(tag + "_" + value)) {
-				icon.setImageResource(RenderingIcons.getBigIconResourceId(tag + "_" + value));
-			} else if(RenderingIcons.containsBigIcon(value.toString())) {
-				icon.setImageResource(RenderingIcons.getBigIconResourceId(value.toString()));
+			PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+			if (st != null) {
+				if (RenderingIcons.containsBigIcon(st.getKeyName())) {
+					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getKeyName()));
+				} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getOsmTag() + "_" + st.getOsmValue()));
+				} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+					icon.setImageResource(RenderingIcons.getBigIconResourceId(st.getOsmValue()));
+				} else {
+					icon.setImageDrawable(null);
+				}
 			} else {
 				icon.setImageDrawable(null);
 			}

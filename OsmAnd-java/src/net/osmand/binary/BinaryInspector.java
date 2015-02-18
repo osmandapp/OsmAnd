@@ -39,11 +39,11 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
+import net.osmand.osm.PoiCategory;
 import net.osmand.util.MapUtils;
 
 import com.google.protobuf.CodedOutputStream;
@@ -841,7 +841,7 @@ public class BinaryInspector {
 				verbose.getZoom(),
 				new SearchPoiTypeFilter() {
 					@Override
-					public boolean accept(AmenityType type, String subcategory) {
+					public boolean accept(PoiCategory type, String subcategory) {
 						return true;
 					}
 					

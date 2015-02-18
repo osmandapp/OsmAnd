@@ -14,7 +14,7 @@ import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.util.MapUtils;
 
@@ -49,7 +49,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	}
 	
 	
-	public synchronized Map<AmenityType, List<String>> searchAmenityCategoriesByName(String query, Map<AmenityType, List<String>> map) {
+	public synchronized Map<PoiCategory, List<String>> searchAmenityCategoriesByName(String query, Map<PoiCategory, List<String>> map) {
 		try {
 			return index.searchPoiCategoriesByName(query, map);
 		} catch (IOException e) {
@@ -87,7 +87,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		long now = System.currentTimeMillis();
 		SearchPoiTypeFilter poiTypeFilter = new SearchPoiTypeFilter(){
 			@Override
-			public boolean accept(AmenityType type, String subcategory) {
+			public boolean accept(PoiCategory type, String subcategory) {
 				return filter.acceptTypeSubtype(type, subcategory);
 			}
 		};
@@ -112,7 +112,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		long now = System.currentTimeMillis();
 		SearchPoiTypeFilter poiTypeFilter = new SearchPoiTypeFilter(){
 			@Override
-			public boolean accept(AmenityType type, String subcategory) {
+			public boolean accept(PoiCategory type, String subcategory) {
 				return filter.acceptTypeSubtype(type, subcategory);
 			}
 		};
