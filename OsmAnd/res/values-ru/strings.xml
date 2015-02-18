@@ -1888,4 +1888,5 @@
     <string name="nautical_maps_missing">Для отображения морских карт необходимо загрузить данные специализированные карты</string>
 	<string name="device_memory">Память устройства</string>
     <string name="free">"Свободно %1$s "</string>
-	</resources>
+	<string name="roads_only">Только дороги</string>
+    </resources>
