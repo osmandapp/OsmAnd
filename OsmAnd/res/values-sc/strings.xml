@@ -1860,4 +1860,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="device_memory">Memòria dispositivu</string>
     <string name="rendering_attr_pisteRoutes_name">Àndalas in pista</string>
 	<string name="roads_only">Istradas ebbia</string>
-    </resources>
+    <string name="watch">Relògiu</string>
+	<string name="notes">Notas</string>
+	<string name="online_map">Mapa in lìnia</string>
+	</resources>
