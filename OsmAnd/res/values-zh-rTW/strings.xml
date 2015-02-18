@@ -1910,7 +1910,7 @@
 	<string name="device_memory">裝置記憶體</string>
     <string name="rendering_attr_pisteRoutes_name">滑雪道路線</string>
 	<string name="roads_only">僅道路</string>
-    <string name="watch">手錶</string>
+    <string name="watch">觀看</string>
 	<string name="notes">備註</string>
 	<string name="online_map">線上地圖</string>
 	</resources>
