@@ -503,7 +503,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				.listen(listener).position(3).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_restore)
 				.listen(listener).position(4).reg();
-		OsmandPlugin.onOptionsMenuActivity(getDownloadActivity(), null, optionsMenuAdapter);
 		// doesn't work correctly
 		//int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
 		int max = 3;

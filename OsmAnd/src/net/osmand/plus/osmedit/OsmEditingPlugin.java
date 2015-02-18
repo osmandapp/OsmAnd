@@ -158,7 +158,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 	
 	@Override
-	public void contextMenuLocalIndexes(final Activity la, final Fragment fragment, final Object info, ContextMenuAdapter adapter) {
+	public void contextMenuFragment(final Activity la, final Fragment fragment, final Object info, ContextMenuAdapter adapter) {
 		if (fragment instanceof AvailableGPXFragment) {
 			adapter.item(R.string.local_index_mi_upload_gpx)
 					.icons(R.drawable.ic_action_gup_dark, R.drawable.ic_action_gup_light)
@@ -174,7 +174,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 	
 	@Override
-	public void optionsMenuLocalIndexes(final Activity activity, final Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
+	public void optionsMenuFragment(final Activity activity, final Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
 		if (fragment instanceof AvailableGPXFragment) {
 			final AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
 			optionsMenuAdapter.item(R.string.local_index_mi_upload_gpx)

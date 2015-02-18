@@ -1,18 +1,14 @@
 package net.osmand.plus;
 
 
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.preference.PreferenceScreen;
-import android.support.v4.app.Fragment;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.download.LocalIndexesFragment.LoadLocalIndexTask;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
@@ -31,9 +27,11 @@ import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.preference.PreferenceScreen;
+import android.support.v4.app.Fragment;
 
 public abstract class OsmandPlugin {
 	
@@ -187,7 +185,9 @@ public abstract class OsmandPlugin {
 	
 	public void updateLocation(Location location) {}
 	
-	public void contextMenuLocalIndexes(Activity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {};
+	public void contextMenuFragment(Activity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {}
+	
+	public void optionsMenuFragment(Activity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {}
 	
 	public List<String> indexingFiles(IProgress progress) {	return null;}
 	
@@ -325,14 +325,14 @@ public abstract class OsmandPlugin {
 	
 	public static void onContextMenuActivity(Activity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.contextMenuLocalIndexes(activity, fragment, info, adapter);
+			plugin.contextMenuFragment(activity, fragment, info, adapter);
 		}
 	}
 	
 	
 	public static void onOptionsMenuActivity(Activity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.optionsMenuLocalIndexes(activity, fragment, optionsMenuAdapter);
+			plugin.optionsMenuFragment(activity, fragment, optionsMenuAdapter);
 		}
 		
 	}
