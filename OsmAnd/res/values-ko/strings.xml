@@ -2147,4 +2147,5 @@
     <string name="rendering_attr_pisteRoutes_name">Piste 경로</string>
 	<string name="free">"무료 %1$s "</string>
 	<string name="device_memory">장치 메모리</string>
+    <string name="roads_only">도로 전용</string>
     </resources>
