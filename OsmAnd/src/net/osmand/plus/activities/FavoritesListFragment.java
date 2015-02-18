@@ -25,14 +25,11 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.content.Intent;
-import android.text.Spannable;
-import android.text.style.ForegroundColorSpan;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.TextView.BufferType;
 
 /**
  * 
