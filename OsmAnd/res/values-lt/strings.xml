@@ -1921,4 +1921,5 @@
 	<string name="plugin_nautical_name">Jūriniai žemėlapiai</string>
     <string name="device_memory">Įrenginio atmintis</string>
     <string name="free">"Laisva %1$s "</string>
-	</resources>
+	<string name="roads_only">Tik keliai</string>
+    </resources>
