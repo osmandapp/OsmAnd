@@ -5,10 +5,10 @@
 			  android:layout_height="wrap_content"
 			  android:background="?attr/expandable_list_item_background"
 			  android:minHeight="@dimen/list_item_height"
-			  android:paddingBottom="1dp"
+			  android:paddingBottom="@dimen/download_item_vertical_padding"
 			  android:paddingLeft="@dimen/list_content_padding"
 			  android:paddingRight="@dimen/list_content_padding"
-			  android:paddingTop="1dp">
+			  android:paddingTop="@dimen/download_item_vertical_padding">
 
 	<CheckBox
 		android:id="@+id/check_download_item"
@@ -28,7 +28,6 @@
 			style="@style/ListText.Small"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
 			tools:text="@string/lorem_ipsum"/>
 
 		<LinearLayout

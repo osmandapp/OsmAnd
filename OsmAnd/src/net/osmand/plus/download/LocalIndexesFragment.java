@@ -805,7 +805,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		List<LocalIndexInfo> filterCategory = null;
 		int warningColor;
 		int okColor;
-		int defaultColor;
 		int corruptedColor;
 		Context ctx;
 
@@ -814,7 +813,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			warningColor = ctx.getResources().getColor(R.color.color_warning);
 			okColor = ctx.getResources().getColor(R.color.color_ok);
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
-			defaultColor = ta.getColor(0, ctx.getResources().getColor(R.color.color_unknown));
 			ta.recycle();
 			corruptedColor = ctx.getResources().getColor(R.color.color_invalid);
 		}
@@ -970,17 +968,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			viewName.setText(getNameToDisplay(child));
 			if (child.isNotSupported()) {
 				viewName.setTextColor(warningColor);
-				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			} else if (child.isCorrupted()) {
 				viewName.setTextColor(corruptedColor);
-				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			} else if (child.isLoaded()) {
 				// users confused okColor here with "uptodate", so let's leave white (black in dark app theme) as "isLoaded"
 				//viewName.setTextColor(okColor);
-				viewName.setTextColor(defaultColor);
 			} else {
-				viewName.setTextColor(defaultColor);
-				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				if (child.isBackupedData()) {
 					viewName.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 				}

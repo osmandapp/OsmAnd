@@ -6,8 +6,10 @@
 			  android:background="?attr/expandable_list_item_background"
 			  android:minHeight="@dimen/list_item_height"
 			  android:orientation="horizontal"
+			  android:paddingBottom="@dimen/download_item_vertical_padding"
 			  android:paddingLeft="@dimen/list_content_padding"
-			  android:paddingRight="@dimen/list_content_padding">
+			  android:paddingRight="@dimen/list_content_padding"
+			  android:paddingTop="@dimen/download_item_vertical_padding">
 
 	<CheckBox
 		android:id="@+id/check_local_index"
@@ -39,7 +41,6 @@
 			style="@style/ListText.Small"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:gravity="center_vertical"
 			tools:text="@string/app_version"/>
 
 
