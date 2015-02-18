@@ -48,10 +48,10 @@ public class PoiLegacyFilter {
 	public PoiLegacyFilter(PoiCategory type, OsmandApplication application){
 		this.app = application;
 		isStandardFilter = true;
-		filterId = STD_PREFIX + type;
+		filterId = STD_PREFIX + (type == null? null: type.getName());
 		poiTypes = application.getPoiTypes();
 		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : type.getTranslation(); //$NON-NLS-1$
-		if(type == null){
+		if (type == null) {
 			initSearchAll();
 		} else {
 			acceptedTypes.put(type, null);
