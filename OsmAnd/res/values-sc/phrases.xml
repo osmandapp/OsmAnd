@@ -600,4 +600,6 @@
 	<string name="poi_natural">Naturale</string>
 	<string name="poi_seamark">Nàuticu</string>
 	<string name="poi_osmwiki">Wikipedia</string>
+	<string name="poi_military_landuse">Zona militare</string>
+	<string name="poi_emergency">Emergèntzia</string>
 	</resources>
