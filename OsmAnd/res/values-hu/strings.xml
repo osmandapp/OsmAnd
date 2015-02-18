@@ -1850,4 +1850,7 @@
     <string name="nautical_maps_missing">A hajózási térképek megjelenítése érdekében a speciális kapcsolat nélküli térkép letöltése szükséges</string>
 	<string name="device_memory">Eszköz memóriája</string>
     <string name="free">"Szabad %1$s "</string>
-	</resources>
+	<string name="roads_only">Csak utak</string>
+    <string name="rendering_attr_pisteRoutes_name">Síútvonalak</string>
+	<string name="rendering_attr_pisteGrooming_name">Síútvonal javítás</string>
+    </resources>
