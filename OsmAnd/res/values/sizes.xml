@@ -39,7 +39,6 @@
 	<dimen name="dialog_content_margin">24dp</dimen>
 	<dimen name="dialog_content_bottom_margin">16dp</dimen>
 	<dimen name="local_size_height">34dp</dimen>
-	<dimen name="download_item_vertical_padding">4dp</dimen>
 
     <!-- TextSizes -->
 	<dimen name="list_header_text_size">14sp</dimen>

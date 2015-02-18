@@ -271,14 +271,14 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					if (updatableResource && !DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e)) {
 						description.setText(indexActivatedFileNames.get(sfName) + " " + e.getSizeDescription(clctx));
 						//up to date
-						uptodate.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+						uptodate.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + ": "
 								+ indexActivatedFileNames.get(sfName));
 						uptodate.setVisibility(View.VISIBLE);
 						update.setVisibility(View.GONE);
 					} else if (indexFileNames.containsKey(sfName) && !DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e)) {
 						description.setText(indexFileNames.get(sfName) + " " + e.getSizeDescription(clctx));
 						//up to date
-						uptodate.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+						uptodate.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + ": "
 								+ indexFileNames.get(sfName));
 						uptodate.setVisibility(View.VISIBLE);
 						update.setVisibility(View.GONE);
@@ -286,15 +286,15 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 						String updatedDescr =  indexActivatedFileNames.get(sfName) + " " + e.getSizeDescription(clctx);
 						description.setText(updatedDescr);
 						//needed to be updated
-						update.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+						update.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + ": "
 								+ e.getDate(format));
 						uptodate.setVisibility(View.GONE);
 						update.setVisibility(View.VISIBLE);
 					} else {
-						description.setText(name.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+						description.setText(name.getText() + "\n" + downloadFragment.getResources().getString(R.string.local_index_installed) + ": "
 								+ indexFileNames.get(sfName));
 						//needed to be updated
-						update.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + " : "
+						update.setText(downloadFragment.getResources().getString(R.string.local_index_installed) + ": "
 								+ e.getDate(format));
 						uptodate.setVisibility(View.GONE);
 						update.setVisibility(View.VISIBLE);
