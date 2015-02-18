@@ -1466,7 +1466,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="routing_preferences_descr">Paramètres d\'itinéraire</string>
     <string name="android_19_location_disabled">Depuis Android 4.4 (KitKat), vous ne pouvez plus télécharger et mettre à jour les cartes dans le dossier (%s) utilisé jusqu\'à présent. Voulez-vous utiliser le nouveau dossier et y copier l\'ensemble des fichiers OsmAnd ?
 \n Note 1 : Les anciens fichiers seront conservés (mais vous pouvez les supprimer manuellement)\n Note 2 : En raison de ce nouveau dossier de stockage, il ne sera plus possible de partager des fichiers entre OsmAnd et OsmAnd+.</string>
-    <string name="application_dir_change_warning2">Souhaitez-vous qu\'OsmAnd copie aussi ses données vers la nouvelle destination ? (choisissez \'Non\' pour qu\'OsmAnd crée et utilise un nouveau dossier vierge)</string>
+    <string name="application_dir_change_warning2">Souhaitez-vous qu\'OsmAnd copie aussi ses données vers la nouvelle destination ? Si vous choisissez \'Non\' OsmAnd ne fera que créer et utiliser le nouveau dossier.</string>
     <string name="copying_osmand_one_file_descr">Copie du fichier (%s) vers le nouvel emplacement…</string>
     <string name="copying_osmand_files_descr">Copie des fichiers de données OsmAnd vers la nouvelle destination (%s)…</string>
     <string name="copying_osmand_files">Copie des fichiers de données OsmAnd…</string>
@@ -1875,7 +1875,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="navigate_point_easting">Abscisse</string>
     <string name="navigate_point_northing">Ordonnée</string>
     <string name="download_tab_local">Local</string>
-	<string name="map_locale">Langue pour la carte</string>
+	<string name="map_locale">Langue de la carte</string>
     <string name="rendering_attr_transportStops_name">Arrêts de transports en commun</string>
     <string name="voices">Guidage vocal</string>
 	<string name="dash_download_msg_none">Souhaitez-vous télécharger des cartes hors-ligne ?</string>
@@ -1887,12 +1887,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_value_orange_name">Orange</string>
     <string name="traffic_warning_railways">Passage à niveau</string>
 	<string name="traffic_warning_pedestrian">Passage piéton</string>
-	<string name="show_railway_warnings">Afficher les alertes de voie ferrée</string>
-	<string name="show_pedestrian_warnings">Afficher les alertes de passage piéton</string>
-    <string name="rendering_value_germanRoadAtlas_name">Atlas de routes allemandes</string>
+	<string name="show_railway_warnings">Afficher les traversées de voie ferrée</string>
+	<string name="show_pedestrian_warnings">Afficher les passages piétons</string>
+    <string name="rendering_value_germanRoadAtlas_name">Atlas des routes allemandes</string>
 	<string name="rendering_value_americanRoadAtlas_name">Atlas des routes américaines</string>
-    <string name="routing_attr_no_new_routing_description">Ne pas utiliser les nouvelles règles de routage de la version 1.9</string>
-    <string name="routing_attr_no_new_routing_name">Ne pas utiliser la version 1.9 des calculs de route</string>
+    <string name="routing_attr_no_new_routing_description">Ne pas utiliser les règles de routage ajoutées dans la version 1.9</string>
+    <string name="routing_attr_no_new_routing_name">Ne pas utiliser les règles de routage de la version 1.9</string>
     <string name="speak_pedestrian">Annoncer les passages piéton</string>
     <string name="rendering_value__name">Par défaut</string>
 	<string name="avoid_roads_msg">Vous pouvez générer un itinéraire alternatif en sélectionnant les routes à éviter.</string>
@@ -1915,7 +1915,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="tracks">Traces</string>
     <string name="my_location">Ma position</string>
     <string name="osm_editing_manage">Gérer</string>
-    <string name="gps_status">Statut GPS</string>
+    <string name="gps_status">État du GPS</string>
     <string name="parking_place">Place de stationnement</string>
     <string name="remove_the_tag">Retirer l\'étiquette</string>
     <string name="enable_plugin">Désactivé</string>
@@ -1933,7 +1933,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="nautical_maps_missing">Pour afficher les cartes marines, une carte hors ligne doit être téléchargée.</string>
 	<string name="rendering_attr_pisteGrooming_name">Damage des pistes</string>
     <string name="free">"%1$s libre "</string>
-	<string name="device_memory">Mémoire sur l\'appareil</string>
+	<string name="device_memory">Mémoire de l\'appareil</string>
     <string name="notes">Notes</string>
 	<string name="online_map">Carte en ligne</string>
 	<string name="roads_only">Routes uniquement</string>
