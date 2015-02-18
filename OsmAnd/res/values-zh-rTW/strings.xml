@@ -1909,4 +1909,5 @@
     <string name="free">"%1$s 可用 "</string>
 	<string name="device_memory">裝置記憶體</string>
     <string name="rendering_attr_pisteRoutes_name">滑雪道路線</string>
-	</resources>
+	<string name="roads_only">僅道路</string>
+    </resources>
