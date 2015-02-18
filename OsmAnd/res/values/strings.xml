@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="watch">Watch</string>
+	<string name="notes">Notes</string>
+	<string name="online_map">Online map</string>
 	<string name="roads_only">Roads only</string>
     <string name="rendering_attr_pisteRoutes_name">Piste routes</string>
 	<string name="free">Free %1$s </string>

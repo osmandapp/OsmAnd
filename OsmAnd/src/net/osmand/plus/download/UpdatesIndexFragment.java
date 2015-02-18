@@ -75,9 +75,9 @@ public class UpdatesIndexFragment extends ListFragment {
 			return;
 		}
 		if (visible) {
-			view.findViewById(R.id.header).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.header_layout).setVisibility(View.VISIBLE);
 		} else {
-			view.findViewById(R.id.header).setVisibility(View.GONE);
+			view.findViewById(R.id.header_layout).setVisibility(View.GONE);
 		}
 	}
 
@@ -115,7 +115,7 @@ public class UpdatesIndexFragment extends ListFragment {
 			return;
 		}
 		String header = getActivity().getString(R.string.download_tab_updates) + " - " + indexItems.size();
-		((TextView) view.findViewById(R.id.updates)).
+		((TextView) view.findViewById(R.id.header)).
 				setText(header);
 	}
 
