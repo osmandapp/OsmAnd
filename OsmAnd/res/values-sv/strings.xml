@@ -1810,4 +1810,6 @@
 	<string name="device_memory">Intern lagring</string>
     <string name="rendering_attr_pisteRoutes_name">Pister och spår</string>
 	<string name="roads_only">Endast vägar</string>
-    </resources>
+    <string name="notes">Anteckningar</string>
+	<string name="online_map">Online-karta</string>
+	</resources>
