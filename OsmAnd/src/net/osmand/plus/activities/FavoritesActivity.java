@@ -5,7 +5,6 @@ package net.osmand.plus.activities;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,27 +18,20 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.view.MenuItem;
 
-import net.osmand.Location;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-import android.widget.TabWidget;
 import android.widget.TextView;
 
-import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.activities.places.NotesFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 /**
@@ -89,6 +81,8 @@ public class FavoritesActivity extends TabActivity {
 			List<TabItem> mTabs = new ArrayList<TabItem>();
 			mTabs.add(getTabIndicator(R.string.my_favorites, FavoritesTreeFragment.class));
 			mTabs.add(getTabIndicator(R.string.my_tracks, AvailableGPXFragment.class));
+
+			mTabs.add(getTabIndicator(R.string.notes, NotesFragment.class));
 			mTabs.add(getTabIndicator(R.string.selected_track, SelectedGPXFragment.class));
 
 			setViewPagerAdapter(mViewPager, mTabs);

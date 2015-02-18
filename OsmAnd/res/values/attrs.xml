@@ -15,6 +15,7 @@
 		<attr name="ic_overflow_menu" format="reference" />
 		<attr name="ic_plugin_options" format="reference" />
 		<attr name="dashboardGeneralButtonStyle" format="reference" />
+		<attr name="options_button_background" format="reference"/>
 		<attr name="dashboardSubHeaderStyle" format="reference" />
 		<attr name="dashboard_divider" format="reference" />
 		<attr name="dashboard_button" format="reference" />

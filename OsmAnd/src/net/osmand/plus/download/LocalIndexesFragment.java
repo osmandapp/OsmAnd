@@ -287,6 +287,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {
 			for (LocalIndexInfo v : values) {
+				//do not show recordings
+				if (v.getType() == LocalIndexType.AV_DATA){
+					continue;
+				}
 				listAdapter.addLocalIndexInfo(v);
 				descriptionLoader = new LoadLocalIndexDescriptionTask();
 				descriptionLoader.execute(v);
@@ -301,6 +305,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				listAdapter.clear();
 			} else {
 				for (LocalIndexInfo v : result) {
+					//do not show recordings
+					if (v.getType() == LocalIndexType.AV_DATA){
+						continue;
+					}
 					listAdapter.addLocalIndexInfo(v);
 					descriptionLoader = new LoadLocalIndexDescriptionTask();
 					descriptionLoader.execute(v);
@@ -502,13 +510,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		descriptionLoader.cancel(true);
 	}
 	
-//	@Override
-//	public Object onRetainNonConfigurationInstance() {
-//		if(asyncLoader != null){
-//			return asyncLoader.getResult();
-//		}
-//		return super.onRetainNonConfigurationInstance();
-//	}
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -521,6 +522,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		//Next line throws NPE in some circumstances when called from dashboard and listAdpater=null is not checked for. (Checking !this.isAdded above is not sufficient!)
 		if (listAdapter != null && listAdapter.getGroupCount() == 0 && getDownloadActivity().getLocalIndexInfos().size() > 0) {
 			for(LocalIndexInfo info : getDownloadActivity().getLocalIndexInfos()) {
+				//do not show recordings
+				if (info.getType() == LocalIndexType.AV_DATA){
+					continue;
+				}
 				listAdapter.addLocalIndexInfo(info);
 			}
 			listAdapter.sortData();
@@ -805,7 +810,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		List<LocalIndexInfo> filterCategory = null;
 		int warningColor;
 		int okColor;
-		int defaultColor;
 		int corruptedColor;
 		Context ctx;
 
@@ -814,7 +818,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			warningColor = ctx.getResources().getColor(R.color.color_warning);
 			okColor = ctx.getResources().getColor(R.color.color_ok);
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
-			defaultColor = ta.getColor(0, ctx.getResources().getColor(R.color.color_unknown));
 			ta.recycle();
 			corruptedColor = ctx.getResources().getColor(R.color.color_invalid);
 		}
@@ -970,17 +973,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			viewName.setText(getNameToDisplay(child));
 			if (child.isNotSupported()) {
 				viewName.setTextColor(warningColor);
-				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			} else if (child.isCorrupted()) {
 				viewName.setTextColor(corruptedColor);
-				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			} else if (child.isLoaded()) {
 				// users confused okColor here with "uptodate", so let's leave white (black in dark app theme) as "isLoaded"
 				//viewName.setTextColor(okColor);
-				viewName.setTextColor(defaultColor);
 			} else {
-				viewName.setTextColor(defaultColor);
-				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				if (child.isBackupedData()) {
 					viewName.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 				}
@@ -998,9 +996,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			} else {
 				sizeText.setVisibility(View.GONE);
 			}
+
 			TextView descr = ((TextView) v.findViewById(R.id.local_index_descr));
-			descr.setVisibility(View.VISIBLE);
-			descr.setText(child.getDescription());
+			if (child.getType() == LocalIndexType.TILES_DATA) {
+				descr.setText(R.string.online_map);
+			} else {
+				descr.setVisibility(View.VISIBLE);
+				descr.setText(child.getDescription());
+			}
+
 
 
 			final CheckBox checkbox = (CheckBox) v.findViewById(R.id.check_local_index);
@@ -1040,16 +1044,19 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 			DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 			final boolean restore = info.isBackupedData();
+			MenuItem item;
+			if (info.getType() == LocalIndexType.MAP_DATA) {
+				item = optionsMenu.getMenu().add(restore? R.string.local_index_mi_restore : R.string.local_index_mi_backup)
+						.setIcon(backup);
+				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						performBasicOperation(restore ? R.string.local_index_mi_restore : R.string.local_index_mi_backup, info);
+						return true;
+					}
+				});
+			}
 
-			MenuItem item = optionsMenu.getMenu().add(restore? R.string.local_index_mi_restore : R.string.local_index_mi_backup)
-					.setIcon(backup);
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					performBasicOperation(restore ? R.string.local_index_mi_restore : R.string.local_index_mi_backup, info);
-					return true;
-				}
-			});
 			item = optionsMenu.getMenu().add(R.string.local_index_mi_rename)
 					.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

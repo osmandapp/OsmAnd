@@ -18,7 +18,6 @@
     <ExpandableListView
         android:id="@android:id/list"
         style="@style/OsmandListView"
-		android:divider="@drawable/divider"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
 		android:background="?attr/expandable_list_background"

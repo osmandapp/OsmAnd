@@ -5,6 +5,7 @@
 			  android:layout_width="fill_parent"
 			  android:layout_height="wrap_content"
 			  android:minHeight="@dimen/list_header_height"
+			  android:paddingRight="@dimen/list_content_padding"
 			  android:paddingLeft="@dimen/list_header_padding">
 
 	<ImageView
