@@ -1926,4 +1926,5 @@
 	<string name="device_memory">Memoria del dispositivo</string>
     <string name="rendering_attr_pisteRoutes_name">Rutas de pista</string>
 	<string name="rendering_attr_pisteGrooming_name">Arreglo de pista</string>
+    <string name="roads_only">Sólo carreteras</string>
     </resources>
