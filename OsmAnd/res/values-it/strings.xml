@@ -2084,4 +2084,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="free">"Libera %1$s "</string>
 	<string name="device_memory">Memoria dispositivo</string>
     <string name="rendering_attr_pisteRoutes_name">Percorsi su pista</string>
-	</resources>
+	<string name="roads_only">Solo strade</string>
+    </resources>
