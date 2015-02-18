@@ -213,11 +213,9 @@ public class DownloadActivityType {
 		
 		if (this == VOICE_FILE) {
 			if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
-				return ctx.getString(R.string.voice) + "\n" + 
-						FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
+				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
 			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
-				return ctx.getString(R.string.ttsvoice) + "\n" +
-						FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
+				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
 			}
 			return getBasename(indexItem);
 		}
