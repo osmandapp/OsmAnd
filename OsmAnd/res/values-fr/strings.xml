@@ -1934,4 +1934,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="rendering_attr_pisteGrooming_name">Damage des pistes</string>
     <string name="free">"%1$s libre "</string>
 	<string name="device_memory">Mémoire sur l\'appareil</string>
-    </resources>
+    <string name="notes">Notes</string>
+	<string name="online_map">Carte en ligne</string>
+	<string name="roads_only">Routes uniquement</string>
+    <string name="rendering_attr_pisteRoutes_name">Pistes</string>
+	<string name="watch">Regarder</string>
+	</resources>
