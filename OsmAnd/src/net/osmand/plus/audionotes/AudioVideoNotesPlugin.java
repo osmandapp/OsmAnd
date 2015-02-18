@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -31,13 +30,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.LocalIndexesFragment.LoadLocalIndexTask;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -71,11 +65,7 @@ import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.Surface;
@@ -1057,92 +1047,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return false;
 	}
 
-	public class RecordingLocalIndexInfo extends LocalIndexInfo {
 
-		private Recording rec;
 
-		public RecordingLocalIndexInfo(Recording r) {
-			super(LocalIndexType.AV_DATA, r.file, false);
-			this.rec = r;
-		}
-
-		@Override
-		public String getName() {
-			return rec.getSmallDescription(app);
-		}
-
-	}
-
-	@Override
-	public void loadLocalIndexes(List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {
-		List<LocalIndexInfo> progress = new ArrayList<LocalIndexInfo>();
-		for (Recording r : getRecordingsSorted()) {
-			LocalIndexInfo info = new RecordingLocalIndexInfo(r);
-			result.add(info);
-			progress.add(info);
-			if (progress.size() > 7) {
-				loadTask.loadFile(progress.toArray(new LocalIndexInfo[progress.size()]));
-				progress.clear();
-			}
-
-		}
-		if (!progress.isEmpty()) {
-			loadTask.loadFile(progress.toArray(new LocalIndexInfo[progress.size()]));
-		}
-	}
-
-	@Override
-	public void updateLocalIndexDescription(LocalIndexInfo info) {
-		if (info instanceof RecordingLocalIndexInfo) {
-			info.setDescription(((RecordingLocalIndexInfo) info).rec.getDescription(app));
-		}
-	}
-
-	@Override
-	public void contextMenuLocalIndexes(Activity activity, Fragment fragment, Object obj,
-			ContextMenuAdapter adapter) {
-		if (activity instanceof DownloadActivity) {
-			final DownloadActivity la = (DownloadActivity) activity;
-			LocalIndexInfo info = (LocalIndexInfo) obj;
-			if (info.getType() == LocalIndexType.AV_DATA) {
-				final RecordingLocalIndexInfo ri = (RecordingLocalIndexInfo) info;
-				OnContextMenuClick listener = new OnContextMenuClick() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						playRecording(la, ri.rec);
-						return true;
-					}
-				};
-				if (ri.rec.isPhoto()) {
-					adapter.item(R.string.recording_context_menu_show)
-							.icons(R.drawable.ic_action_eye_dark, R.drawable.ic_action_eye_light).listen(listener)
-							.reg();
-				} else {
-					adapter.item(R.string.recording_context_menu_play)
-							.icons(R.drawable.ic_action_play_dark, R.drawable.ic_action_play_light).listen(listener)
-							.reg();
-				}
-				adapter.item(R.string.show_location)
-						.icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light)
-						.listen(new OnContextMenuClick() {
-							@Override
-							public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-								SHOW_RECORDINGS.set(true);
-								app.getSettings().setMapLocationToShow(ri.rec.lat, ri.rec.lon,
-										app.getSettings().getLastKnownMapZoom());
-								MapActivity.launchMapActivityMoveToTop(la);
-								return true;
-							}
-						}).reg();
-			}
-		}
-	}
-
+	
 	public Collection<Recording> getAllRecordings() {
 		return recordingByFileName.values();
 	}
 
-	private Recording[] getRecordingsSorted() {
+	protected Recording[] getRecordingsSorted() {
 		checkRecordings();
 		Collection<Recording> allObjects = getAllRecordings();
 		Recording[] res = allObjects.toArray(new Recording[allObjects.size()]);

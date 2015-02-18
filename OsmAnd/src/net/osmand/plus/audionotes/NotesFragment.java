@@ -1,4 +1,4 @@
-package net.osmand.plus.activities.places;
+package net.osmand.plus.audionotes;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,13 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-
 import android.support.v4.app.ListFragment;
 
 import java.util.ArrayList;
@@ -45,7 +43,7 @@ public class NotesFragment extends ListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		items = new ArrayList<>(plugin.getAllRecordings());
+		items = new ArrayList<Recording>(plugin.getAllRecordings());
 		listAdapter = new NotesAdapter(items);
 		getListView().setAdapter(listAdapter);
 	}

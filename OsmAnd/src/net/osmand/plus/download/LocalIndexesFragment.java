@@ -71,7 +71,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 	private LoadLocalIndexTask asyncLoader;
 	private LocalIndexesAdapter listAdapter;
-	private LoadLocalIndexDescriptionTask descriptionLoader;
 	private AsyncTask<LocalIndexInfo, ?, ?> operationTask;
 
 	private boolean selectionMode = false;
@@ -115,9 +114,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		descriptionLoader = new LoadLocalIndexDescriptionTask();
-
 		if (asyncLoader == null || asyncLoader.getResult() == null) {
 			// getLastNonConfigurationInstance method should be in onCreate() method
 			// (onResume() doesn't work)
@@ -287,13 +283,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {
 			for (LocalIndexInfo v : values) {
-				//do not show recordings
-				if (v.getType() == LocalIndexType.AV_DATA){
-					continue;
-				}
 				listAdapter.addLocalIndexInfo(v);
-				descriptionLoader = new LoadLocalIndexDescriptionTask();
-				descriptionLoader.execute(v);
 			}
 			listAdapter.notifyDataSetChanged();
 			expandAllGroups();
@@ -305,13 +295,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				listAdapter.clear();
 			} else {
 				for (LocalIndexInfo v : result) {
-					//do not show recordings
-					if (v.getType() == LocalIndexType.AV_DATA){
-						continue;
-					}
 					listAdapter.addLocalIndexInfo(v);
-					descriptionLoader = new LoadLocalIndexDescriptionTask();
-					descriptionLoader.execute(v);
 				}
 				listAdapter.notifyDataSetChanged();
 				expandAllGroups();
@@ -447,32 +431,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	
 	
 
-	public class LoadLocalIndexDescriptionTask extends AsyncTask<LocalIndexInfo, LocalIndexInfo, LocalIndexInfo[]> {
-
-		@Override
-		protected LocalIndexInfo[] doInBackground(LocalIndexInfo... params) {
-			LocalIndexHelper helper = new LocalIndexHelper(getMyApplication());
-			for (LocalIndexInfo i : params) {
-				helper.updateDescription(i);
-			}
-			return params;
-		}
-
-		@Override
-		protected void onPreExecute() {
-		}
-
-		@Override
-		protected void onProgressUpdate(LocalIndexInfo... values) {
-			listAdapter.notifyDataSetChanged();
-		}
-
-		@Override
-		protected void onPostExecute(LocalIndexInfo[] result) {
-			listAdapter.notifyDataSetChanged();
-		}
-
-	}
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
@@ -498,16 +456,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		if(operationTask != null){
 			operationTask.cancel(true);
 		}
-		if(descriptionLoader != null){
-			descriptionLoader.cancel(true);
-		}
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		asyncLoader.cancel(true);
-		descriptionLoader.cancel(true);
 	}
 	
 
@@ -522,10 +476,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		//Next line throws NPE in some circumstances when called from dashboard and listAdpater=null is not checked for. (Checking !this.isAdded above is not sufficient!)
 		if (listAdapter != null && listAdapter.getGroupCount() == 0 && getDownloadActivity().getLocalIndexInfos().size() > 0) {
 			for(LocalIndexInfo info : getDownloadActivity().getLocalIndexInfos()) {
-				//do not show recordings
-				if (info.getType() == LocalIndexType.AV_DATA){
-					continue;
-				}
 				listAdapter.addLocalIndexInfo(info);
 			}
 			listAdapter.sortData();

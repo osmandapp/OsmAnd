@@ -17,7 +17,6 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.view.MenuItem;
-
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -30,8 +29,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
-
-import net.osmand.plus.activities.places.NotesFragment;
+import net.osmand.plus.audionotes.NotesFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 /**

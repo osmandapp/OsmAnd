@@ -223,8 +223,8 @@ public class LocalIndexHelper {
 		TILES_DATA(R.string.local_indexes_cat_tile),
 		SRTM_DATA(R.string.local_indexes_cat_srtm),
 		VOICE_DATA(R.string.local_indexes_cat_voice),
-		TTS_VOICE_DATA(R.string.local_indexes_cat_tts),
-		AV_DATA(R.string.local_indexes_cat_av);;
+		TTS_VOICE_DATA(R.string.local_indexes_cat_tts);
+//		AV_DATA(R.string.local_indexes_cat_av);;
 		
 		private final int resId;
 
