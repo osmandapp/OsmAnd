@@ -1918,4 +1918,7 @@
 	<string name="device_memory">Lagerplads</string>
     <string name="rendering_attr_pisteRoutes_name">Pisteruter</string>
 	<string name="roads_only">Kun veje</string>
-    </resources>
+    <string name="notes">Noter</string>
+	<string name="online_map">Online kort</string>
+	<string name="watch">Overvåg</string>
+	</resources>
