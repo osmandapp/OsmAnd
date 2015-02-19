@@ -2031,4 +2031,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="watch">Сачыць</string>
 	<string name="notes">Нататкі</string>
 	<string name="online_map">Інтэрнэт мапа</string>
+	<string name="share_note">Падзяліцца нататкаю</string>
+	<string name="rename_recording">Пераназваць запіс</string>
+	<string name="export">Экспарт</string>
 	</resources>
