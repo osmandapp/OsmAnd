@@ -2,6 +2,8 @@ package net.osmand.plus.audionotes;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.PopupMenu;
@@ -145,6 +147,21 @@ public class NotesFragment extends ListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
+				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+				if (recording.isPhoto()) {
+					Uri screenshotUri = Uri.parse(recording.file.getAbsolutePath());
+					sharingIntent.setType("image/*");
+					sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+				} else if (recording.isAudio()) {
+					Uri audioUri = Uri.parse(recording.file.getAbsolutePath());
+					sharingIntent.setType("audio/*");
+					sharingIntent.putExtra(Intent.EXTRA_STREAM, audioUri);
+				} else if (recording.isVideo()) {
+					Uri videoUri = Uri.parse(recording.file.getAbsolutePath());
+					sharingIntent.setType("video/*");
+					sharingIntent.putExtra(Intent.EXTRA_STREAM, videoUri);
+				}
+				startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_note)));
 				return true;
 			}
 		});
