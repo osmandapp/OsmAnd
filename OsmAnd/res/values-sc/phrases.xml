@@ -605,4 +605,10 @@
 	<string name="poi_education">Annestru/Educatzione</string>
 	<string name="poi_administrative">Amministrativu</string>
 	<string name="poi_sustenance">Màndigu</string>
+	<string name="poi_transportation">Trasportu</string>
+	<string name="poi_man_made">Istrutura artifitziale</string>
+	<string name="poi_healthcare">Salude</string>
+	<string name="poi_entertainment">Tempus lìberu</string>
+	<string name="poi_user_defined_other">Definidu dae s\'impitadore</string>
+	
 	</resources>
