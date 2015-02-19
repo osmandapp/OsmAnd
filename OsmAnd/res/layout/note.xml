@@ -48,6 +48,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:gravity="center_vertical"
+			android:textSize="@dimen/download_descr_text_size"
 			android:maxLines="25"
 			tools:text="@string/app_mode_aircraft"/>
 

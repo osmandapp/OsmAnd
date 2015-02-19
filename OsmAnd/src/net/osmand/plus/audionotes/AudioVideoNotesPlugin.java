@@ -137,8 +137,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 
 		public File file;
-		public String name;
 
+		private String name;
 		private double lat;
 		private double lon;
 		private long duration = -1;
@@ -168,6 +168,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					}
 				}
 			}
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getName() {
+			return name;
 		}
 
 		public boolean isPhoto() {
@@ -301,6 +309,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return additional;
 		}
 
+		public void setDescription() {
+			//TODO implement setting description
+		}
 	}
 
 	private static void initializeRemoteControlRegistrationMethods() {
