@@ -849,7 +849,7 @@ public class BinaryInspector {
 				new ResultMatcher<Amenity>() {
 					@Override
 					public boolean publish(Amenity object) {
-						println(object.getType().toString() + " : " + object.getSubType() + " " + object.getName() + " " + object.getLocation() + " id=" + (object.getId() >> 1) + " " +
+						println(object.getType().getKeyName() + " : " + object.getSubType() + " " + object.getName() + " " + object.getLocation() + " id=" + (object.getId() >> 1) + " " +
 									object.getAdditionalInfo());
 						return false;
 					}
