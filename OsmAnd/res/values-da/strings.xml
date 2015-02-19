@@ -1921,4 +1921,7 @@
     <string name="notes">Noter</string>
 	<string name="online_map">Online kort</string>
 	<string name="watch">Overvåg</string>
+	<string name="share_note">Del note</string>
+	<string name="rename_recording">Omdøb optagelse</string>
+	<string name="export">Eksport</string>
 	</resources>
