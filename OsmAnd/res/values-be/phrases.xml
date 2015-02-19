@@ -598,7 +598,7 @@
 	<string name="poi_seamark_signal_station_warning">Сыгнал небясьпекі</string>
 	<string name="poi_seamark_wreck">Караблекрушэньне (навігацыйны знак)</string>
 
-	<string name="poi_military">Ваенная зона</string>
+	<string name="poi_military">Вайсковае</string>
 	<string name="poi_military_airfield">Ваенны аэрадром</string>
 	<string name="poi_military_bunker">Ваенны бункер</string>
 	<string name="poi_military_barracks">Баракі</string>
@@ -654,4 +654,16 @@
 	<string name="poi_tourism">Турызм</string>
 	<string name="poi_sustenance">Ежа</string>
 	<string name="poi_service">Сэрвіс</string>
+	<string name="poi_finance">Фінансы</string>
+	<string name="poi_natural">Прырода</string>
+	<string name="poi_osmwiki">Вікіпэдыя</string>
+	<string name="poi_user_defined_other">Карыстальніцкія</string>
+	
+	<string name="poi_military_landuse">Вайсковая зона</string>
+	<string name="poi_emergency">Аварыйнае</string>
+	<string name="poi_administrative">Адміністрацыйнае</string>
+	<string name="poi_healthcare">Ахова здароўя</string>
+	<string name="poi_seamark">Марское</string>
+	<string name="poi_entertainment">Адпачынак</string>
+	<string name="poi_man_made">Антрапагеннае</string>
 	</resources>
