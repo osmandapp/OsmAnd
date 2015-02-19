@@ -613,7 +613,7 @@
 	<string name="poi_glacier">Ледник</string>
 	<string name="poi_river">Река</string>
 	<string name="poi_stream">Ручей</string>
-	<string name="poi_military">Военная зона</string>
+	<string name="poi_military">Военное</string>
 	<string name="poi_pier">Пирс</string>
 	<string name="poi_observatory">Обсерватория</string>
 	<string name="poi_astronomical_observatory">Астрономическая обсерватория</string>
@@ -648,4 +648,16 @@
 	<string name="poi_summer_toboggan">Летние санки</string>
 	<string name="poi_dock">Док</string>
 	<string name="poi_roller_coaster">Американские горки</string>
+	<string name="poi_shop">Магазин</string>
+	<string name="poi_education">Образование</string>
+	<string name="poi_office">Офис</string>
+	<string name="poi_sport">Спорт</string>
+	<string name="poi_tourism">Туризм</string>
+	<string name="poi_service">Сервис</string>
+	<string name="poi_finance">Финансы</string>
+	<string name="poi_natural">Природа</string>
+	<string name="poi_osmwiki">Википедия</string>
+	<string name="poi_user_defined_other">Пользовательские</string>
+	
+	<string name="poi_military_landuse">Военная зона</string>
 	</resources>
