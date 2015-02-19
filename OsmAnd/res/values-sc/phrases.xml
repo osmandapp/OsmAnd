@@ -602,4 +602,7 @@
 	<string name="poi_osmwiki">Wikipedia</string>
 	<string name="poi_military_landuse">Zona militare</string>
 	<string name="poi_emergency">Emergèntzia</string>
+	<string name="poi_education">Annestru/Educatzione</string>
+	<string name="poi_administrative">Amministrativu</string>
+	<string name="poi_sustenance">Màndigu</string>
 	</resources>
