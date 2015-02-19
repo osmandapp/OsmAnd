@@ -60,7 +60,7 @@ public class NotesFragment extends ListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		((FavoritesActivity) getActivity()).getClearToolbar(false); 
+		((FavoritesActivity) getActivity()).getClearToolbar(false);
 	}
 
 	@Override

@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.SearchView;
 import android.view.*;
 import net.osmand.IndexConstants;
@@ -30,6 +31,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.util.Algorithms;
@@ -54,6 +56,8 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,12 +66,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 
 	public static final int SEARCH_ID = -1;
-	public static final int ACTION_ID = 0;
-	protected static final int DELETE_ACTION_ID = 1;
+//	public static final int ACTION_ID = 0;
+//	protected static final int DELETE_ACTION_ID = 1;
 	private boolean selectionMode = false;
-	private List<GpxInfo> selectedItems = new ArrayList<GpxInfo>();
+	private List<GpxInfo> selectedItems = new ArrayList<>();
 	private ActionMode actionMode;
-	private SearchView searchView;
 	private LoadGpxTask asyncLoader;
 	private GpxIndexesAdapter listAdapter;
 	MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
@@ -99,17 +102,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View vs = super.onCreateView(inflater, container, savedInstanceState);
-		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-			@Override
-			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-				long packedPos = ((ExpandableListContextMenuInfo) menuInfo).packedPosition;
-				int group = ExpandableListView.getPackedPositionGroup(packedPos);
-				int child = ExpandableListView.getPackedPositionChild(packedPos);
-				if (child >= 0 && group >= 0) {
-					showContextMenu(listAdapter.getChild(group, child));
-				}
-			}
-		});
 		return vs;
 	}
 
@@ -137,9 +129,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
 				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS
 						| MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-		searchView = new SearchView(getActivity());
+		SearchView searchView = new SearchView(getActivity());
 		FavoritesActivity.updateSearchView(getActivity(), searchView);
-		MenuItemCompat.setActionView(mi,searchView);
+		MenuItemCompat.setActionView(mi, searchView);
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
 			@Override
@@ -464,21 +456,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					sendIntent.setType("application/gpx+xml");
 					startActivity(sendIntent);
 				} else if (resId == R.string.show_gpx_route) {
-					info.updateGpxInfo(getMyApplication());
-					boolean e = true;
-					if (info != null && info.gpx != null) {
-						WptPt loc = info.gpx.findPointToShow();
-						OsmandSettings settings = getMyApplication().getSettings();
-						if (loc != null) {
-							settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
-							e = false;
-							getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(info.gpx);
-							MapActivity.launchMapActivityMoveToTop(getActivity());
-						}
-					}
-					if (e) {
-						AccessibleToast.makeText(getActivity(), R.string.gpx_file_is_empty, Toast.LENGTH_LONG).show();
-					}
+					showGpxOnMap(info);
 				}
 				return true;
 			}
@@ -504,6 +482,24 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			adapter.item(R.string.local_index_mi_export).listen(listener).reg();
 		}
 		OsmandPlugin.onContextMenuActivity(getActivity(), this, info, adapter);
+	}
+
+	private void showGpxOnMap(GpxInfo info) {
+		info.updateGpxInfo(getMyApplication());
+		boolean e = true;
+		if (info != null && info.gpx != null) {
+			WptPt loc = info.gpx.findPointToShow();
+			OsmandSettings settings = getMyApplication().getSettings();
+			if (loc != null) {
+				settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
+				e = false;
+				getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(info.gpx);
+				MapActivity.launchMapActivityMoveToTop(getActivity());
+			}
+		}
+		if (e) {
+			AccessibleToast.makeText(getActivity(), R.string.gpx_file_is_empty, Toast.LENGTH_LONG).show();
+		}
 	}
 
 	private void showContextMenu(final GpxInfo info) {
@@ -576,6 +572,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			this.result = result;
 			if(getActivity() != null) {
 				((ActionBarActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(false);
+			}
+			if (listAdapter.getGroupCount() > 0){
+				getExpandableListView().expandGroup(0);
 			}
 		}
 
@@ -712,7 +711,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 
 		@Override
-		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 			View v = convertView;
 			final GpxInfo child = getChild(groupPosition, childPosition);
 			if (v == null) {
@@ -750,8 +749,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			} else {
 				descr.setVisibility(View.GONE);
 			}
+			ImageButton options = (ImageButton) v.findViewById(R.id.options);
+			options.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					openPopUpMenu(v, child);
+				}
+			});
 			final CheckBox checkbox = (CheckBox) v.findViewById(R.id.check_local_index);
 			checkbox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
+			ImageView icon = (ImageView) v.findViewById(R.id.icon);
 			if (selectionMode) {
 				checkbox.setChecked(selectedItems.contains(child));
 				checkbox.setOnClickListener(new View.OnClickListener() {
@@ -767,9 +774,19 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 						updateSelectionMode(actionMode);
 					}
 				});
+				icon.setVisibility(View.GONE);
+				options.setVisibility(View.GONE);
+			} else {
+				icon.setVisibility(View.VISIBLE);
+				options.setVisibility(View.VISIBLE);
 			}
 
-
+			v.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					onChildClick(null, v, groupPosition, childPosition, 0);
+				}
+			});
 			return v;
 		}
 
@@ -859,6 +876,63 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				data.get(category.get(found)).remove(g);
 			}
 		}
+	}
+
+	private void openPopUpMenu(View v, final GpxInfo gpxInfo) {
+		boolean light = getMyApplication().getSettings().isLightContent();
+		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
+		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+		MenuItem item = optionsMenu.getMenu().add(R.string.show_gpx_route)
+				.setIcon(light ? R.drawable.ic_action_map_marker_light : R.drawable.ic_action_map_marker_dark);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				showGpxOnMap(gpxInfo);
+				return true;
+			}
+		});
+
+		item = optionsMenu.getMenu().add(R.string.local_index_mi_rename)
+				.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+
+				return true;
+			}
+		});
+
+		item = optionsMenu.getMenu().add(R.string.export)
+				.setIcon(light ? R.drawable.ic_action_gup_light : R.drawable.ic_action_gup_dark);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+
+				return true;
+			}
+		});
+
+		item = optionsMenu.getMenu().add(R.string.edit_filter_delete_menu_item)
+				.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				builder.setMessage(R.string.recording_delete_confirm);
+				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						operationTask = new DeleteGpxTask();
+						operationTask.execute(gpxInfo);
+					}
+				});
+				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.show();
+				return true;
+			}
+		});
+		optionsMenu.show();
+
 	}
 
 	public class LoadLocalIndexDescriptionTask extends AsyncTask<GpxInfo, GpxInfo, GpxInfo[]> {
@@ -1185,8 +1259,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				description = gpx.warning;
 			} else {
 				// 'Long-press for options' message
-				description = GpxUiHelper.getDescription(app, gpx, file, true) +
-						app.getString(R.string.local_index_gpx_info_show);
+				description = GpxUiHelper.getDescription(app, gpx, file, true);
 			}
 			htmlDescription = null;
 			getHtmlDescription();
