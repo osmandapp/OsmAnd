@@ -646,4 +646,12 @@
 	<string name="poi_seamark_light_vessel">Агонь плывучага маяка (судна)</string>
 	<string name="poi_seamark_small_craft_facility">Лодкавая станцыя</string>
 	<string name="poi_team_handball">Гандбол</string>
+	<string name="poi_shop">Крама</string>
+	<string name="poi_transportation">Транспарт</string>
+	<string name="poi_education">Адукацыя</string>
+	<string name="poi_office">Офіс</string>
+	<string name="poi_sport">Спорт</string>
+	<string name="poi_tourism">Турызм</string>
+	<string name="poi_sustenance">Ежа</string>
+	<string name="poi_service">Сэрвіс</string>
 	</resources>
