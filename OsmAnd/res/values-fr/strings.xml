@@ -1892,7 +1892,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_value_germanRoadAtlas_name">Atlas des routes allemandes</string>
 	<string name="rendering_value_americanRoadAtlas_name">Atlas des routes américaines</string>
     <string name="routing_attr_no_new_routing_description">Ne pas utiliser les règles de routage ajoutées dans la version 1.9</string>
-    <string name="routing_attr_no_new_routing_name">Ne pas utiliser les règles de routage de la version 1.9</string>
+    <string name="routing_attr_no_new_routing_name">Ne pas utiliser le calcul d\'itinéraire de la version 1.9</string>
     <string name="speak_pedestrian">Annoncer les passages piéton</string>
     <string name="rendering_value__name">Par défaut</string>
 	<string name="avoid_roads_msg">Vous pouvez générer un itinéraire alternatif en sélectionnant les routes à éviter.</string>
@@ -1938,5 +1938,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="online_map">Carte en ligne</string>
 	<string name="roads_only">Routes uniquement</string>
     <string name="rendering_attr_pisteRoutes_name">Pistes</string>
-	<string name="watch">Regarder</string>
+	<string name="watch">Surveiller</string>
 	</resources>
