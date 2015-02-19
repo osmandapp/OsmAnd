@@ -1853,4 +1853,7 @@
 	<string name="roads_only">Csak utak</string>
     <string name="rendering_attr_pisteRoutes_name">Síútvonalak</string>
 	<string name="rendering_attr_pisteGrooming_name">Síútvonal javítás</string>
-    </resources>
+    <string name="watch">Óra</string>
+	<string name="notes">Jegyzetek</string>
+	<string name="online_map">Online térkép</string>
+	</resources>
