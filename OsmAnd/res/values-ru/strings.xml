@@ -1889,4 +1889,5 @@
 	<string name="device_memory">Память устройства</string>
     <string name="free">"Свободно %1$s "</string>
 	<string name="roads_only">Только дороги</string>
-    </resources>
+    <string name="online_map">Онлайн карта</string>
+	</resources>
