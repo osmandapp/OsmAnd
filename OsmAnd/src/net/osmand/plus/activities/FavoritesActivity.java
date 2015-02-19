@@ -83,7 +83,8 @@ public class FavoritesActivity extends TabActivity {
 			mTabs.add(getTabIndicator(R.string.my_favorites, FavoritesTreeFragment.class));
 			mTabs.add(getTabIndicator(R.string.my_tracks, AvailableGPXFragment.class));
 			AudioVideoNotesPlugin audioVideoNotesPlugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
-			if (audioVideoNotesPlugin != null && audioVideoNotesPlugin.getAllRecordings().size() > 0){
+			if (audioVideoNotesPlugin != null && audioVideoNotesPlugin.isActive()
+					&& audioVideoNotesPlugin.getAllRecordings().size() > 0){
 				mTabs.add(getTabIndicator(R.string.notes, NotesFragment.class));
 			}
 			mTabs.add(getTabIndicator(R.string.selected_track, SelectedGPXFragment.class));
