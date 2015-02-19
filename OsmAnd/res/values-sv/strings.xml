@@ -1812,4 +1812,7 @@
 	<string name="roads_only">Endast vägar</string>
     <string name="notes">Anteckningar</string>
 	<string name="online_map">Online-karta</string>
+	<string name="share_note">Dela anteckning</string>
+	<string name="rename_recording">Byt namn på inspelning</string>
+	<string name="export">Exportera</string>
 	</resources>
