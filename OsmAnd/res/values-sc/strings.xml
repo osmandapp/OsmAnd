@@ -1863,4 +1863,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="watch">Relògiu</string>
 	<string name="notes">Notas</string>
 	<string name="online_map">Mapa in lìnia</string>
+	<string name="share_note">Cumpartzi sa nota</string>
+	<string name="rename_recording">Torra a numenare sa registratzione</string>
+	<string name="export">Esporta</string>
 	</resources>
