@@ -1922,4 +1922,7 @@
     <string name="device_memory">Įrenginio atmintis</string>
     <string name="free">"Laisva %1$s "</string>
 	<string name="roads_only">Tik keliai</string>
-    </resources>
+    <string name="watch">Stebėti</string>
+	<string name="notes">Pastabos</string>
+	<string name="online_map">Žemėlapis online</string>
+	</resources>
