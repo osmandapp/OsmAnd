@@ -631,7 +631,7 @@
 	<string name="poi_glacier">Gletscher</string>
 	<string name="poi_river">Flod</string>
 	<string name="poi_stream">Vandløb</string>
-	<string name="poi_military">Militærområde</string>
+	<string name="poi_military">Militær</string>
 	<string name="poi_observatory">Observatorium</string>
 	<string name="poi_astronomical_observatory">Astronomisk observatorium</string>
 	<string name="poi_hot_spring">Varm kilde</string>
@@ -670,16 +670,16 @@
 	<string name="poi_man_made">Menneskeskabt</string>
 	<string name="poi_education">Uddannelse</string>
 	<string name="poi_administrative">Administrativ</string>
-	<string name="poi_healthcare">Sundhed</string>
+	<string name="poi_healthcare">Sundhedsydelser</string>
 	<string name="poi_office">Kontor</string>
 	<string name="poi_sport">Sport</string>
 	<string name="poi_tourism">Turisme</string>
 	<string name="poi_entertainment">Fritid</string>
 	<string name="poi_sustenance">Mad</string>
-	<string name="poi_service">Service</string>
+	<string name="poi_service">Serviceydelser</string>
 	<string name="poi_finance">Finansiel</string>
-	<string name="poi_natural">Natur</string>
-	<string name="poi_seamark">Nautisk</string>
+	<string name="poi_natural">Naturlig</string>
+	<string name="poi_seamark">Maritimt</string>
 	<string name="poi_osmwiki">Wikipedia</string>
 	<string name="poi_user_defined_other">Brugerdefineret</string>
 	
