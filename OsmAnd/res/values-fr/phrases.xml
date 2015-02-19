@@ -635,4 +635,24 @@
 	<string name="poi_mast">Mât</string>
 	<string name="poi_radar">Radar</string>
 	<string name="poi_aquarium">Aquarium</string>
+	<string name="poi_shop">Commerce</string>
+	<string name="poi_emergency">Urgences</string>
+	<string name="poi_transportation">Transport</string>
+	<string name="poi_man_made">Infrastructure</string>
+	<string name="poi_education">Éducation</string>
+	<string name="poi_administrative">Territoire</string>
+	<string name="poi_healthcare">Santé</string>
+	<string name="poi_office">Service</string>
+	<string name="poi_sport">Sport</string>
+	<string name="poi_tourism">Tourisme</string>
+	<string name="poi_entertainment">Loisir</string>
+	<string name="poi_sustenance">Alimentaire</string>
+	<string name="poi_service">Service</string>
+	<string name="poi_finance">Argent</string>
+	<string name="poi_natural">Nature</string>
+	<string name="poi_seamark">Nautique</string>
+	<string name="poi_osmwiki">Wikipédia</string>
+	<string name="poi_user_defined_other">Défini par l\'utilisateur</string>
+	
+	<string name="poi_military_landuse">Zone militaire</string>
 	</resources>
