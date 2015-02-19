@@ -2072,14 +2072,14 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="plugin_description_title">Descrizione</string>
 	<string name="plugin_settings_button_caption">Impostazioni</string>
 <string name="edit_group">Modifica il gruppo</string>
-    <string name="plugin_install_needs_network">È necessario la connessione a internet per installare questo componente aggiuntivo.</string>
+    <string name="plugin_install_needs_network">Per installare questo componente aggiuntivo è necessaria la connessione a internet.</string>
 <string name="enable_plugin2">Attiva</string>
 	<string name="disable_plugin2">Disattiva</string>
 	<string name="get_plugin">Ottieni</string>
 <string name="plugin_ski_name">Mappe sci</string>
     <string name="plugin_nautical_name">Mappe nautiche</string>
-    <string name="world_ski_missing">Per visualizzare le mappe speciali offline per lo sci, necessitano di essere scaricate</string>
-    <string name="nautical_maps_missing">Per visualizzare le mappe speciali offline nautiche, necessitano di essere scaricate</string>
+    <string name="world_ski_missing">Per visualizzare le mappe per lo sci è necessario scaricare la mappa speciale offline</string>
+    <string name="nautical_maps_missing">Per visualizzare le mappe nautiche è necessario scaricare la mappa speciale offline</string>
 	<string name="rendering_attr_pisteGrooming_name">Batti pista</string>
     <string name="free">"Libera %1$s "</string>
 	<string name="device_memory">Memoria dispositivo</string>
@@ -2088,4 +2088,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="watch">Orologio</string>
 	<string name="notes">Nore</string>
 	<string name="online_map">Mappa online</string>
+	<string name="export">Esporta</string>
+	<string name="share_note">Condividi l\'appunto</string>
 	</resources>
