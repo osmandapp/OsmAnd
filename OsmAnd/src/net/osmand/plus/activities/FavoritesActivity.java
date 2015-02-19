@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
+
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.audionotes.NotesFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
@@ -79,8 +82,10 @@ public class FavoritesActivity extends TabActivity {
 			List<TabItem> mTabs = new ArrayList<TabItem>();
 			mTabs.add(getTabIndicator(R.string.my_favorites, FavoritesTreeFragment.class));
 			mTabs.add(getTabIndicator(R.string.my_tracks, AvailableGPXFragment.class));
-
-			mTabs.add(getTabIndicator(R.string.notes, NotesFragment.class));
+			AudioVideoNotesPlugin audioVideoNotesPlugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+			if (audioVideoNotesPlugin != null && audioVideoNotesPlugin.getAllRecordings().size() > 0){
+				mTabs.add(getTabIndicator(R.string.notes, NotesFragment.class));
+			}
 			mTabs.add(getTabIndicator(R.string.selected_track, SelectedGPXFragment.class));
 
 			setViewPagerAdapter(mViewPager, mTabs);

@@ -1,5 +1,7 @@
 package net.osmand.plus.audionotes;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.PopupMenu;
@@ -8,12 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import android.support.v4.app.ListFragment;
@@ -43,10 +48,11 @@ public class NotesFragment extends ListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		items = new ArrayList<Recording>(plugin.getAllRecordings());
+		items = new ArrayList<>(plugin.getAllRecordings());
 		listAdapter = new NotesAdapter(items);
 		getListView().setAdapter(listAdapter);
 	}
+
 
 	@Override
 	public void onPause() {
@@ -60,7 +66,7 @@ public class NotesFragment extends ListFragment {
 
 	class NotesAdapter extends ArrayAdapter<AudioVideoNotesPlugin.Recording> {
 		NotesAdapter(List<AudioVideoNotesPlugin.Recording> recordingList) {
-			super(getActivity(), R.layout.dash_audio_video_notes_item, recordingList);
+			super(getActivity(), R.layout.note, recordingList);
 		}
 
 		@Override
@@ -72,9 +78,10 @@ public class NotesFragment extends ListFragment {
 			}
 
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
-			if (recording.name != null){
-				((TextView) row.findViewById(R.id.name)).setText(recording.name);
+			if (recording.getName() != null){
+				((TextView) row.findViewById(R.id.name)).setText(recording.getName());
 				((TextView) row.findViewById(R.id.descr)).setText(recording.getDescription(getActivity()));
+				row.findViewById(R.id.descr).setVisibility(View.VISIBLE);
 			} else {
 				((TextView) row.findViewById(R.id.name)).setText(recording.getDescription(getActivity()));
 				row.findViewById(R.id.descr).setVisibility(View.GONE);
@@ -126,6 +133,9 @@ public class NotesFragment extends ListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
+				getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, null, recording.getName(),
+						recording); //$NON-NLS-1$
+				MapActivity.launchMapActivityMoveToTop(getActivity());
 				return true;
 			}
 		});
@@ -144,6 +154,7 @@ public class NotesFragment extends ListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
+				editNote(recording);
 				return true;
 			}
 		});
@@ -153,11 +164,42 @@ public class NotesFragment extends ListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				plugin.deleteRecording(recording);
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				builder.setMessage(R.string.recording_delete_confirm);
+				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						plugin.deleteRecording(recording);
+						listAdapter.remove(recording);
+					}
+				});
+				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.show();
 				return true;
 			}
 		});
 		optionsMenu.show();
+	}
+
+	private void editNote(final Recording recording) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setTitle(R.string.rename_recording);
+		final View v = getActivity().getLayoutInflater().inflate(R.layout.note_edit_dialog,
+				getListView(), false);
+		final EditText editText = (EditText) v.findViewById(R.id.name);
+		builder.setView(v);
+		editText.setText(recording.getName());
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				recording.setName(editText.getText().toString());
+				recording.setDescription();
+				listAdapter.notifyDataSetInvalidated();
+			}
+		});
+		builder.create().show();
+		editText.requestFocus();
 	}
 
 }
