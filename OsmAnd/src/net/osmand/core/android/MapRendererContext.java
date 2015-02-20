@@ -106,23 +106,18 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		recreateRasterAndSymbolsProvider();
 	}
 
-	protected float getDisplayDensityFactor() {
-		return app.getSettings().MAP_DENSITY.get() * Math.max(1, density);
-	}
-
 	protected int getRasterTileSize() {
 		return Integer.highestOneBit((int) getReferenceTileSize() - 1) * 2;
 	}
 	
 	private float getReferenceTileSize() {
-		return 256 * getDisplayDensityFactor();
+		return 256 * app.getSettings().MAP_DENSITY.get() * Math.max(1, density);
 	}
 	
 	/**
 	 * Update map presentation environment and everything that depends on it
 	 */
 	private void updateMapPresentationEnvironment() {
-		float displayDensityFactor = getDisplayDensityFactor();
 		// Create new map presentation environment
 		String langId = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		// TODO make setting
@@ -156,10 +151,10 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
             }
 		}
 		ResolvedMapStyle mapStyle = mapStyles.get(rendName);
-		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, displayDensityFactor);
+		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, density);
 		if (this.presentationObjectParams == null || !this.presentationObjectParams.equalsFields(pres)) {
 			this.presentationObjectParams = pres;
-			mapPresentationEnvironment = new MapPresentationEnvironment(mapStyle, displayDensityFactor, langId,
+			mapPresentationEnvironment = new MapPresentationEnvironment(mapStyle, density, langId,
 					langPref);
 		}
 
@@ -226,7 +221,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		}
 		// Create new OBF map symbols provider
 		obfMapSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider, getReferenceTileSize(),
-				app.getSettings().TEXT_SCALE.get() / app.getSettings().MAP_DENSITY.get());
+				app.getSettings().TEXT_SCALE.get());
 		// If there's bound view, add new provider
 		if (mapRendererView != null) {
 			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
