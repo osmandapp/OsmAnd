@@ -1929,4 +1929,7 @@
     <string name="roads_only">Sólo carreteras</string>
     <string name="share_note">Compartir nota</string>
 	<string name="rename_recording">Renombrar grabación</string>
+	<string name="notes">Notas</string>
+	<string name="online_map">Mapa en línea</string>
+	<string name="export">Exportar</string>
 	</resources>
