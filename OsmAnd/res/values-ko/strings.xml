@@ -2151,4 +2151,7 @@
     <string name="watch">시계</string>
 	<string name="notes">노트</string>
 	<string name="online_map">온라인 지도</string>
+	<string name="share_note">노트 공유</string>
+	<string name="rename_recording">레코딩 재명명</string>
+	<string name="export">내보내기</string>
 	</resources>
