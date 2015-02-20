@@ -24,6 +24,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -235,8 +236,7 @@ public class MapTileDownloader {
 				long time = System.currentTimeMillis();
 				request.setError(false);
 				try {
-					URL url = new URL(request.url);
-					URLConnection connection = url.openConnection();
+					URLConnection connection = NetworkUtils.getHttpURLConnection(request.url);
 					connection.setRequestProperty("User-Agent", USER_AGENT); //$NON-NLS-1$
 					connection.setConnectTimeout(CONNECTION_TIMEOUT);
 					connection.setReadTimeout(CONNECTION_TIMEOUT);

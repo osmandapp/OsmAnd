@@ -14,6 +14,7 @@ import java.util.List;
 
 import net.osmand.AndroidUtils;
 import net.osmand.access.AccessibleToast;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.R;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -138,7 +139,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	
 	protected void executeThreadOperation(int operationId) throws Exception {
 		if(operationId == DOWNLOAD_BUILDS_LIST){
-			URLConnection connection = new URL(URL_TO_RETRIEVE_BUILDS).openConnection();
+			URLConnection connection = NetworkUtils.getHttpURLConnection(URL_TO_RETRIEVE_BUILDS);
 			XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
 			parser.setInput(connection.getInputStream(), "UTF-8");
 			int next;
@@ -164,7 +165,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 				}
 			}
 		} else if(operationId == INSTALL_BUILD){
-			URLConnection connection = new URL(URL_GET_BUILD + currentSelectedBuild.path).openConnection();
+			URLConnection connection = NetworkUtils.getHttpURLConnection(URL_GET_BUILD + currentSelectedBuild.path);
 			if(pathToDownload.exists()){
 				pathToDownload.delete();
 			}

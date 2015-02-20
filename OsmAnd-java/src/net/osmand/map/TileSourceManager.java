@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -401,7 +402,7 @@ public class TileSourceManager {
 	public static List<TileSourceTemplate> downloadTileSourceTemplates(String versionAsUrl) {
 		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
 		try {
-			URLConnection connection = new URL("http://download.osmand.net//tile_sources.php?" + versionAsUrl).openConnection();
+			URLConnection connection = NetworkUtils.getHttpURLConnection("http://download.osmand.net//tile_sources.php?" + versionAsUrl);
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(connection.getInputStream(), "UTF-8");
 			int tok;
