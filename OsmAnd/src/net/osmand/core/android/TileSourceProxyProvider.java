@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import net.osmand.IndexConstants;
 import net.osmand.core.jni.AlphaChannelPresence;
+import net.osmand.core.jni.MapStubStyle;
 import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TileId;
@@ -20,6 +21,11 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	public TileSourceProxyProvider(OsmandApplication app, ITileSource tileSource) {
 		this.app = app;
 		this.tileSource = tileSource;
+	}
+
+	@Override
+	public MapStubStyle getDesiredStubsStyle() {
+		return MapStubStyle.Unspecified;
 	}
 	
 	@Override
