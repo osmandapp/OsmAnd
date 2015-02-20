@@ -1037,7 +1037,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="amenity_type_historic">Гістарычны</string>
 	<string name="amenity_type_landuse">Землекарыстаньне</string>
 	<string name="amenity_type_leisure">Вольны час</string>
-	<string name="amenity_type_man_made">Створана чалавекам</string>
+	<string name="amenity_type_man_made">Антрапагеннае</string>
 	<string name="amenity_type_military">Ваеннае</string>
 	<string name="amenity_type_natural">Прырода</string>
 	<string name="amenity_type_office">Офіс</string>

@@ -1890,4 +1890,6 @@
     <string name="free">"Свободно %1$s "</string>
 	<string name="roads_only">Только дороги</string>
     <string name="online_map">Онлайн карта</string>
+	<string name="rename_recording">Переименовать запись</string>
+	<string name="export">Экспорт</string>
 	</resources>

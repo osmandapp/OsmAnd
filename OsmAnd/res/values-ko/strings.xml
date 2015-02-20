@@ -2099,7 +2099,7 @@
     <string name="rendering_value_orange_name">오렌지</string>
     <string name="rendering_value_germanRoadAtlas_name">독일 도로 지도</string>
     <string name="rendering_value_americanRoadAtlas_name">미국 도로 지도</string>
-    <string name="routing_attr_no_new_routing_name">No v1.9 라우팅 룰</string>
+    <string name="routing_attr_no_new_routing_name">No v1.9 라우팅 규칙</string>
     <string name="routing_attr_no_new_routing_description">v1.9에서 도입된 라우팅 룰을 사용하지 마십시오</string>
     <string name="traffic_warning_railways">철도 교차로</string>
 	<string name="traffic_warning_pedestrian">보행자 횡단보도</string>
