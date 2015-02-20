@@ -1913,4 +1913,7 @@
     <string name="watch">觀看</string>
 	<string name="notes">備註</string>
 	<string name="online_map">線上地圖</string>
+	<string name="share_note">分享筆記</string>
+	<string name="rename_recording">重新命名記錄</string>
+	<string name="export">匯出</string>
 	</resources>
