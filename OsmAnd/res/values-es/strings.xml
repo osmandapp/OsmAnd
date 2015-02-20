@@ -1927,4 +1927,6 @@
     <string name="rendering_attr_pisteRoutes_name">Rutas de pista</string>
 	<string name="rendering_attr_pisteGrooming_name">Arreglo de pista</string>
     <string name="roads_only">Sólo carreteras</string>
-    </resources>
+    <string name="share_note">Compartir nota</string>
+	<string name="rename_recording">Renombrar grabación</string>
+	</resources>
