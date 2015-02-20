@@ -180,7 +180,8 @@ public class SQLiteTileSource implements ITileSource {
 					if(url != -1) {
 						String template = cursor.getString(url);
 						if(!Algorithms.isEmpty(template)){
-							urlTemplate = template;
+							//urlTemplate = template;
+							urlTemplate = TileSourceTemplate.normalizeUrl(template);
 						}
 					}
 					int ruleId = list.indexOf("rule");

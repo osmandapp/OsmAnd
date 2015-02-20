@@ -63,6 +63,14 @@ public class TileSourceManager {
 			this.bitDensity = bitDensity;
 		}
 		
+		public static String normalizeUrl(String url){
+			if(url != null){
+				url = url.replaceAll("\\{\\$z\\}", "{0}"); //$NON-NLS-1$ //$NON-NLS-2$
+				url = url.replaceAll("\\{\\$x\\}", "{1}"); //$NON-NLS-1$//$NON-NLS-2$
+				url = url.replaceAll("\\{\\$y\\}", "{2}"); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			return url;
+		}
 		public void setMinZoom(int minZoom) {
 			this.minZoom = minZoom;
 		}
@@ -344,9 +352,10 @@ public class TileSourceManager {
 							new FileInputStream(readUrl), "UTF-8")); //$NON-NLS-1$
 					url = reader.readLine();
 					// 
-					url = url.replaceAll("\\{\\$z\\}", "{0}"); //$NON-NLS-1$ //$NON-NLS-2$
-					url = url.replaceAll("\\{\\$x\\}", "{1}"); //$NON-NLS-1$//$NON-NLS-2$
-					url = url.replaceAll("\\{\\$y\\}", "{2}"); //$NON-NLS-1$ //$NON-NLS-2$
+					//url = url.replaceAll("\\{\\$z\\}", "{0}"); //$NON-NLS-1$ //$NON-NLS-2$
+					//url = url.replaceAll("\\{\\$x\\}", "{1}"); //$NON-NLS-1$//$NON-NLS-2$
+					//url = url.replaceAll("\\{\\$y\\}", "{2}"); //$NON-NLS-1$ //$NON-NLS-2$
+					url = TileSourceTemplate.normalizeUrl(url);
 					reader.close();
 				}
 			} catch (IOException e) {
@@ -479,9 +488,12 @@ public class TileSourceManager {
 		if (name == null || (urlTemplate == null && !ignoreTemplate)) {
 			return null;
 		}
-		if(urlTemplate != null){
-			urlTemplate.replace("${x}", "{1}").replace("${y}", "{2}").replace("${z}", "{0}");
-		}
+		//As I see, here is no changes to urlTemplate  
+		//if(urlTemplate != null){
+			//urlTemplate.replace("${x}", "{1}").replace("${y}", "{2}").replace("${z}", "{0}");
+		//}
+		urlTemplate = TileSourceTemplate.normalizeUrl(urlTemplate);
+
 		int maxZoom = parseInt(attributes, "max_zoom", 18);
 		int minZoom = parseInt(attributes, "min_zoom", 5);
 		int tileSize = parseInt(attributes, "tile_size", 256);
