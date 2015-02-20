@@ -277,13 +277,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 
 		public String getDescription(Context ctx) {
-			String nm = name == null ? "" : name;
 			String time = AndroidUtils.formatDateTime(ctx, file.lastModified());
 			if (isPhoto()) {
-				return ctx.getString(R.string.recording_photo_description, nm, time).trim();
+				return ctx.getString(R.string.recording_photo_description, "", time).trim();
 			}
 			updateInternalDescription();
-			return ctx.getString(R.string.recording_description, nm, getDuration(ctx), time)
+			return ctx.getString(R.string.recording_description, "", getDuration(ctx), time)
 					.trim();
 		}
 

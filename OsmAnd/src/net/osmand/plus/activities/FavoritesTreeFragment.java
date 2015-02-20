@@ -173,10 +173,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, point, name, settings.getLastKnownMapZoom(),
 					getActivity(), true, false);
 
-
-
-//			DirectionsDialogs.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(),
-//					getActivity(), true, false);
 			boolean light = getMyApplication().getSettings().isLightContent();
 			MenuItem item = optionsMenu.getMenu().add(R.string.favourites_context_menu_edit)
 					.setIcon(light ? R.drawable.ic_action_edit_light : R.drawable.ic_action_edit_dark);

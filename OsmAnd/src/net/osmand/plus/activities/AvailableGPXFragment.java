@@ -34,6 +34,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -97,12 +98,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	public List<GpxInfo> getSelectedItems() {
 		return selectedItems;
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View vs = super.onCreateView(inflater, container, savedInstanceState);
-		return vs;
 	}
 
 	@Override
@@ -731,6 +726,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				viewName.setTextColor(defaultColor);
 				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			}
+			TextView sizeText = (TextView) v.findViewById(R.id.local_index_size);
 			if (child.getSize() >= 0) {
 				String size;
 				if (child.getSize() > 100) {
@@ -738,16 +734,18 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				} else {
 					size = child.getSize() + " kB";
 				}
-				((TextView) v.findViewById(R.id.local_index_size)).setText(size);
+				sizeText.setText(size);
 			} else {
-				((TextView) v.findViewById(R.id.local_index_size)).setText("");
+				sizeText.setText("");
 			}
 			TextView descr = ((TextView) v.findViewById(R.id.local_index_descr));
 			if (child.isExpanded()) {
 				descr.setVisibility(View.VISIBLE);
 				descr.setText(child.getHtmlDescription());
+				sizeText.setVisibility(View.GONE);
 			} else {
 				descr.setVisibility(View.GONE);
+				sizeText.setVisibility(View.VISIBLE);
 			}
 			ImageButton options = (ImageButton) v.findViewById(R.id.options);
 			options.setOnClickListener(new View.OnClickListener() {
@@ -902,15 +900,19 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		});
 
-		item = optionsMenu.getMenu().add(R.string.export)
-				.setIcon(light ? R.drawable.ic_action_gup_light : R.drawable.ic_action_gup_dark);
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
+		final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		if (osmEditingPlugin != null && osmEditingPlugin.isActive()){
+			item = optionsMenu.getMenu().add(R.string.export)
+					.setIcon(light ? R.drawable.ic_action_gup_light : R.drawable.ic_action_gup_dark);
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					osmEditingPlugin.sendGPXFiles(getActivity(), AvailableGPXFragment.this, gpxInfo);
+					return true;
+				}
+			});
 
-				return true;
-			}
-		});
+		}
 
 		item = optionsMenu.getMenu().add(R.string.edit_filter_delete_menu_item)
 				.setIcon(light ? R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);

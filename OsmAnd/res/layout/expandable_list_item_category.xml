@@ -29,6 +29,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/list_header_settings_top_margin"
+		android:background="?attr/options_button_background"
 		android:focusable="false"
 		android:visibility="gone"/>
 
