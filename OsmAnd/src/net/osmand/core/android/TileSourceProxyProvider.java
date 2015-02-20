@@ -1,5 +1,7 @@
 package net.osmand.core.android;
 
+import android.graphics.Bitmap;
+
 import java.io.IOException;
 
 import net.osmand.IndexConstants;
@@ -12,6 +14,7 @@ import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_ImageMapLayerProvider;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.resources.ResourceManager;
 
 public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 
@@ -42,6 +45,19 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 	public SWIGTYPE_p_QByteArray obtainImage(TileId tileId, ZoomLevel zoom) {
 		byte[] image;
 		try {
+			ResourceManager rm = app.getResourceManager();
+			String tileFilename = rm.calculateTileId(tileSource, tileId.getX(), tileId.getY(),
+					zoom.swigValue());
+
+			if (!rm.tileExistOnFileSystem(tileFilename, tileSource, tileId.getX(), tileId.getY(),
+					zoom.swigValue())) {
+				Bitmap loadedBitmap = null;
+				while (loadedBitmap == null) {
+					loadedBitmap = rm.getTileImageForMapSync(tileFilename, tileSource,
+							tileId.getX(), tileId.getY(), zoom.swigValue(), true);
+				}
+			}
+
 			image = tileSource.getBytes(tileId.getX(), tileId.getY(), zoom.swigValue(),
 					app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath());
 		} catch(IOException e) {
