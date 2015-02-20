@@ -53,7 +53,7 @@
 	<string name="poi_carpet_shop">Carpet shop</string>
 	<string name="poi_chemist_shop">Drug store</string>
 	<string name="poi_clothes_shop">Apparel store</string>
-	<string name="poi_children_clothes_shop">Childrens apparel</string>
+	<string name="poi_child_clothes_shop">Childrens apparel</string>
 	<string name="poi_shoes">Shoe store</string>
 	<string name="poi_computer_shop">Computer store</string>
 	<string name="poi_copyshop">Copy shop</string>
