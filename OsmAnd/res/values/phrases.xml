@@ -30,7 +30,7 @@
 	<string name="poi_beverages">Beverage store</string>
 	<string name="poi_butcher">Meat market</string>
 	<string name="poi_deli">Deli</string>
-	<string name="poi_shop_farm">Farm shop</string>
+	<string name="poi_farm">Farm shop</string>
 	<string name="poi_greengrocer">Greengrocery</string>
 	<string name="poi_seafood">Seafood store</string>
 	<string name="poi_confectionery">Confectionery</string>
@@ -69,7 +69,7 @@
 	<string name="poi_furniture_shop">Furniture store</string>
 	<string name="poi_garden_centre">Garden center</string>
 	<string name="poi_gas_shop">Liquid gas store</string>
-	<string name="poi_general_shop">General store</string>
+	<string name="poi_general">General store</string>
 	<string name="poi_gift_shop">Gift shop</string>
 	<string name="poi_glaziery_shop">Glaziery</string>
 	<string name="poi_hardware_shop">Hardware store</string>
@@ -107,8 +107,8 @@
 	<string name="poi_window_blind_shop">Window blind store</string>
 	<string name="poi_department_store">Department store</string>
 	<string name="poi_electronics_shop">Electronics store</string>
-	<string name="poi_car_shop">Car shop</string>
-	<string name="poi_car_parts_shop">Car parts</string>
+	<string name="poi_car">Car shop</string>
+	<string name="poi_car_parts">Car parts</string>
 	<string name="poi_atv_shop">Quad store</string>
 	<string name="poi_cosmetics_shop">Cosmetics</string>
 	<string name="poi_marketplace">Marketplace</string>
@@ -160,15 +160,17 @@
 	<string name="poi_public_transport_platform_bus">Bus stop</string>
 	<string name="poi_public_transport_platform_trolleybus">Trolleybus stop</string>
 	<string name="poi_bus_stop">Bus stop (obsolete)</string>
+	<string name="poi_public_transport_stop_position">Public transport stop position</string>
 	<string name="poi_public_transport_platform_tram">Tram stop</string>
 	<string name="poi_tram_stop">Tram stop (obsolete)</string>
 	<string name="poi_public_transport_station">Public transport station</string>
 	<string name="poi_bus_station">Bus station (obsolete)</string>
 	<string name="poi_railway_station">Railway station (obsolete)</string>
 	<string name="poi_railway_platform">Railway platform (obsolete)</string>
-	<string name="poi_railway_halt">Railway stop (obsolete)</string>
+	<string name="poi_halt">Railway stop (obsolete)</string>
 	<string name="poi_subway_entrance">Subway entrance</string>
 	<string name="poi_subway_station">Subway station</string>
+	<string name="poi_railway_buffer_stop">Railway buffer stop</string>
 	<string name="poi_taxi">Taxi stand</string>
 
 	<string name="poi_airport">Airport</string>
@@ -423,6 +425,7 @@
 	<string name="poi_attraction_train">Train (attraction)</string>
 	<string name="poi_water_slide">Water slide</string>
 
+	<string name="poi_lodging">Lodging</string>
 	<string name="poi_hotel">Hotel</string>
 	<string name="poi_guest_house">Guest house</string>
 	<string name="poi_hostel">Hostel</string>
@@ -440,6 +443,13 @@
 	<string name="poi_place_of_worship_hindu">Place of worship: hindu</string>
 	<string name="poi_place_of_worship_shinto">Place of worship: shinto</string>
 	<string name="poi_place_of_worship_taoist">Place of worship: taoist</string>
+
+	<string name="poi_internet_access_wlan">Internet access: wlan</string>
+	<string name="poi_internet_access_terminal">Internet access: terminal</string>
+	<string name="poi_internet_access_wired">Internet access: wired</string>
+	<string name="poi_internet_access_public">Internet access: public</string>
+	<string name="poi_internet_access_service">Internet access: service</string>
+	
 	<string name="poi_monastery">Monastery</string>
 	<string name="poi_historic_monastery">Historic monastery</string>
 	<string name="poi_wayside_cross">Wayside cross</string>
