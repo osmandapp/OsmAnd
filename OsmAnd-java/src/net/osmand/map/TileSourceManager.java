@@ -487,6 +487,7 @@ public class TileSourceManager {
 		if (name == null || (urlTemplate == null && !ignoreTemplate)) {
 			return null;
 		}
+		//As I see, here is no changes to urlTemplate  
 		//if(urlTemplate != null){
 			//urlTemplate.replace("${x}", "{1}").replace("${y}", "{2}").replace("${z}", "{0}");
 		//}
