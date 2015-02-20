@@ -28,7 +28,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
@@ -40,14 +39,13 @@ import net.osmand.plus.views.controls.PagerSlidingTabStrip;
  */
 public class FavoritesActivity extends TabActivity {
 
-	private static final String FAVOURITES_INFO = "FAVOURITES_INFO";
+//	private static final String FAVOURITES_INFO = "FAVOURITES_INFO";
 	private static final String TRACKS = "TRACKS";
-	private static final String SELECTED_TRACK = "SELECTED_TRACK";
-	public static int FAVORITES_TAB = 0;
-	public static int GPX_TAB = 1;
-	public static int SELECTED_GPX_TAB = 2;
+//	private static final String SELECTED_TRACK = "SELECTED_TRACK";
+//	public static int FAVORITES_TAB = 0;
+//	public static int GPX_TAB = 1;
+//	public static int SELECTED_GPX_TAB = 2;
 	public static String TAB_PARAM = "TAB_PARAM";
-	private TabSpec selectedTrack;
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 
 	@Override
@@ -81,12 +79,12 @@ public class FavoritesActivity extends TabActivity {
 
 			List<TabItem> mTabs = new ArrayList<TabItem>();
 			mTabs.add(getTabIndicator(R.string.my_favorites, FavoritesTreeFragment.class));
-			mTabs.add(getTabIndicator(R.string.my_tracks, AvailableGPXFragment.class));
 			AudioVideoNotesPlugin audioVideoNotesPlugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
 			if (audioVideoNotesPlugin != null && audioVideoNotesPlugin.isActive()
 					&& audioVideoNotesPlugin.getAllRecordings().size() > 0){
 				mTabs.add(getTabIndicator(R.string.notes, NotesFragment.class));
 			}
+			mTabs.add(getTabIndicator(R.string.my_tracks, AvailableGPXFragment.class));
 			mTabs.add(getTabIndicator(R.string.selected_track, SelectedGPXFragment.class));
 
 			setViewPagerAdapter(mViewPager, mTabs);
@@ -205,7 +203,7 @@ public class FavoritesActivity extends TabActivity {
 			stopHint.setSpan(new ImageSpan(searchIcon), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			searchEdit.setHint(stopHint);
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 }

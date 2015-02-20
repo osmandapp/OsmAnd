@@ -3,7 +3,7 @@
 											   android:layout_width="match_parent"
 											   android:layout_height="match_parent"
 											   android:id="@+id/main_scroll"
-											   android:background="@color/dashboard_background">
+											   android:background="?attr/expandable_list_background">
 
     <LinearLayout
         android:layout_width="match_parent"
