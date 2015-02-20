@@ -621,7 +621,7 @@
 	<string name="poi_seamark_rock">바위, seamark</string>
 	<string name="poi_seamark_wreck">난파선, seamark</string>
 
-	<string name="poi_military">군사 지역</string>
+	<string name="poi_military">군대</string>
 	<string name="poi_military_airfield">군 비행장</string>
 	<string name="poi_military_bunker">군사 벙커</string>
 	<string name="poi_military_barracks">병영</string>
