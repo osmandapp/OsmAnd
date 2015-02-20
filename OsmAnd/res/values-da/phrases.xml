@@ -687,4 +687,18 @@
 	<string name="poi_child_clothes_shop">Børnetøj</string>
 	<string name="poi_apartment">Lejlighed</string>
 
+	<string name="poi_farm">Gårdbutik</string>
+	<string name="poi_car_parts">Bildele</string>
+	<string name="poi_public_transport_stop_position">Offentlig transport stoppested</string>
+	<string name="poi_halt">Jernbane stop (forældet)</string>
+	<string name="poi_lodging">Logi</string>
+	<string name="poi_internet_access_wlan">Internetadgang: wlan</string>
+	<string name="poi_internet_access_terminal">Internetadgang: terminal</string>
+	<string name="poi_internet_access_wired">Internetadgang: kabel</string>
+	<string name="poi_internet_access_public">Internetadgang: offentlig</string>
+	<string name="poi_internet_access_service">Internetadgang: service</string>
+	
+	<string name="poi_general">Landhandel</string>
+	<string name="poi_car">Bil butik</string>
+	<string name="poi_railway_buffer_stop">Jernbane sporstopper</string>
 	</resources>
