@@ -646,4 +646,27 @@
 	<string name="poi_mast">돛대</string>
 	<string name="poi_radar">레이더</string>
 	<string name="poi_team_handball">핸드볼</string>
+	<string name="poi_shop">가게</string>
+	<string name="poi_emergency">응급기관</string>
+	<string name="poi_transportation">대중교통</string>
+	<string name="poi_man_made">인공물</string>
+	<string name="poi_education">교육기관</string>
+	<string name="poi_administrative">관리</string>
+	<string name="poi_healthcare">병의원</string>
+	<string name="poi_office">사무실</string>
+	<string name="poi_sport">스포츠</string>
+	<string name="poi_tourism">관광</string>
+	<string name="poi_entertainment">레저</string>
+	<string name="poi_sustenance">음식</string>
+	<string name="poi_service">서비스</string>
+	<string name="poi_finance">금융</string>
+	<string name="poi_natural">자연경관</string>
+	<string name="poi_seamark">항해</string>
+	<string name="poi_osmwiki">위키백과</string>
+	<string name="poi_user_defined_other">사용자 정의</string>
+	
+	<string name="poi_child_clothes_shop">어린이 의류</string>
+	<string name="poi_apartment">아파트</string>
+
+	<string name="poi_military_landuse">군사 지역</string>
 	</resources>
