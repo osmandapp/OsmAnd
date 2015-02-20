@@ -246,25 +246,6 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
 		((FavoritesActivity) getActivity()).getClearToolbar(false);
-//		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_light,
-//				R.drawable.ic_action_search_dark, MenuItem.SHOW_AS_ACTION_ALWAYS
-//						| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-//		searchView = new com.actionbarsherlock.widget.SearchView(getDownloadActivity());
-//		mi.setActionView(searchView);
-//		searchView.setOnQueryTextListener(new OnQueryTextListener() {
-//
-//			@Override
-//			public boolean onQueryTextSubmit(String query) {
-//				return true;
-//			}
-//
-//			@Override
-//			public boolean onQueryTextChange(String newText) {
-//				return true;
-//			}
-//		});
-//		createMenuItem(menu, ACTION_ID, R.string.export_fav, R.drawable.ic_action_gsave_light,
-//				R.drawable.ic_action_gsave_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM);
 	}
 
 	public void showProgressBar() {
@@ -534,8 +515,8 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			} else if(model.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
 				ch.setVisibility(View.VISIBLE);
 				ch.setImageDrawable(getMyActivity().getResources().getDrawable(
-						app.getSettings().isLightContent() ? R.drawable.ic_action_settings_enabled_light
-								: R.drawable.ic_action_settings_enabled_dark));
+						app.getSettings().isLightContent() ? R.drawable.ic_overflow_menu_light
+								: R.drawable.ic_overflow_menu_dark));
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -547,8 +528,8 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 					model.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
 				ch.setVisibility(View.VISIBLE);
 				ch.setImageDrawable(getMyActivity().getResources().getDrawable(
-						app.getSettings().isLightContent() ? R.drawable.ic_action_fav_light
-								: R.drawable.ic_action_fav_dark));
+						app.getSettings().isLightContent() ? R.drawable.ic_overflow_menu_light
+								: R.drawable.ic_overflow_menu_dark));
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {

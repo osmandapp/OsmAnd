@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import net.osmand.plus.activities.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+
 import android.support.v4.app.ListFragment;
 
 import java.util.ArrayList;
@@ -42,8 +44,8 @@ public class NotesFragment extends ListFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		setHasOptionsMenu(true);
 		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
-
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.select_all).setVisibility(View.GONE);
 		((TextView) view.findViewById(R.id.header)).setText(R.string.notes);
@@ -60,6 +62,7 @@ public class NotesFragment extends ListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		menu.clear();
 		((FavoritesActivity) getActivity()).getClearToolbar(false);
 	}
 
@@ -70,7 +73,7 @@ public class NotesFragment extends ListFragment {
 
 
 	public OsmandApplication getMyApplication() {
-		return (OsmandApplication)getActivity().getApplication();
+		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	class NotesAdapter extends ArrayAdapter<AudioVideoNotesPlugin.Recording> {
@@ -82,24 +85,28 @@ public class NotesFragment extends ListFragment {
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View row = convertView;
-			if (row == null){
+			if (row == null) {
 				row = inflater.inflate(R.layout.note, parent, false);
 			}
 
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
-			if (recording.getName() != null){
-				((TextView) row.findViewById(R.id.name)).setText(recording.getName());
-				((TextView) row.findViewById(R.id.descr)).setText(recording.getDescription(getActivity()));
-				row.findViewById(R.id.descr).setVisibility(View.VISIBLE);
-			} else {
-				((TextView) row.findViewById(R.id.name)).setText(recording.getDescription(getActivity()));
-				row.findViewById(R.id.descr).setVisibility(View.GONE);
+			String name = recording.getName();
+			TextView nameText = ((TextView) row.findViewById(R.id.name));
+			if (name != null) {
+				nameText.setText(name);
+			} else if (recording.isAudio()) {
+				nameText.setText(R.string.audio);
+			} else if (recording.isVideo()) {
+				nameText.setText(R.string.video);
+			} else if (recording.isPhoto()) {
+				nameText.setText(R.string.photo);
 			}
+			((TextView) row.findViewById(R.id.descr)).setText(recording.getDescription(getActivity()));
 
 			ImageView icon = (ImageView) row.findViewById(R.id.icon);
-			if (recording.isAudio()){
+			if (recording.isAudio()) {
 				icon.setImageResource(R.drawable.ic_type_audio);
-			} else if (recording.isVideo()){
+			} else if (recording.isVideo()) {
 				icon.setImageResource(R.drawable.ic_type_video);
 			} else {
 				icon.setImageResource(R.drawable.ic_type_img);
@@ -111,23 +118,35 @@ public class NotesFragment extends ListFragment {
 					openPopUpMenu(v, recording);
 				}
 			});
+			row.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					showOnMap(recording);
+				}
+			});
 			return row;
 		}
 	}
 
-	private void openPopUpMenu(View v,final AudioVideoNotesPlugin.Recording recording) {
+	private void showOnMap(Recording recording) {
+		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, null, recording.getName(),
+				recording); //$NON-NLS-1$
+		MapActivity.launchMapActivityMoveToTop(getActivity());
+	}
+
+	private void openPopUpMenu(View v, final AudioVideoNotesPlugin.Recording recording) {
 		boolean light = getMyApplication().getSettings().isLightContent();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		MenuItem item;
 		boolean isPhoto = recording.isPhoto();
 		final int playIcon;
-		if(isPhoto){
+		if (isPhoto) {
 			playIcon = light ? R.drawable.ic_action_eye_light : R.drawable.ic_action_eye_dark;
 		} else {
 			playIcon = light ? R.drawable.ic_play_light : R.drawable.ic_play_dark;
 		}
-		item = optionsMenu.getMenu().add(isPhoto ?  R.string.watch : R.string.recording_context_menu_play)
+		item = optionsMenu.getMenu().add(isPhoto ? R.string.watch : R.string.recording_context_menu_play)
 				.setIcon(playIcon);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
@@ -142,9 +161,7 @@ public class NotesFragment extends ListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, null, recording.getName(),
-						recording); //$NON-NLS-1$
-				MapActivity.launchMapActivityMoveToTop(getActivity());
+				showOnMap(recording);
 				return true;
 			}
 		});
@@ -225,5 +242,6 @@ public class NotesFragment extends ListFragment {
 		builder.create().show();
 		editText.requestFocus();
 	}
+
 
 }
