@@ -574,8 +574,7 @@ public class RouteProvider {
 		}
 		uri.append("&fast=").append(params.fast ? "1" : "0").append("&layer=mapnik"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		log.info("URL route " + uri);
-		URL url = new URL(uri.toString());
-		URLConnection connection = url.openConnection();
+		URLConnection connection = NetworkUtils.getHttpURLConnection(uri.toString());
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
 		DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document doc = dom.parse(new InputSource(new InputStreamReader(connection.getInputStream())));
@@ -949,9 +948,7 @@ public class RouteProvider {
 		// .append("&language=").append(Locale.getDefault().getLanguage());
 
 		log.info("URL route " + request);
-		URI uri = URI.create(request.toString());
-		URL url = uri.toURL();
-		URLConnection connection = url.openConnection();
+		URLConnection connection = NetworkUtils.getHttpURLConnection(request.toString());
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
 
 		DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();

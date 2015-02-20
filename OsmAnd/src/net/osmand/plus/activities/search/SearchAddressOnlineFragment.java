@@ -17,6 +17,7 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -174,8 +175,7 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 					b.append("&q=").append(URLEncoder.encode(search, "UTF-8")); //$NON-NLS-1$
 					
 					log.info("Searching address at : " + b); //$NON-NLS-1$
-					URL url = new URL(b.toString());
-					URLConnection conn = url.openConnection();
+					URLConnection conn = NetworkUtils.getHttpURLConnection(b.toString());
 					conn.setDoInput(true);
 					conn.setRequestProperty("User-Agent", Version.getFullVersion((OsmandApplication) getActivity().getApplication())); //$NON-NLS-1$
 					conn.connect();

@@ -16,6 +16,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
@@ -256,8 +257,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		b.append(",").append(topLatitude); //$NON-NLS-1$
 		try {
 			log.info("Loading bugs " + b); //$NON-NLS-1$
-			URL url = new URL(b.toString());
-			URLConnection connection = url.openConnection();
+			URLConnection connection = NetworkUtils.getHttpURLConnection(b.toString());
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			XmlPullParser parser = Xml.newPullParser();
 			parser.setInput(reader);
