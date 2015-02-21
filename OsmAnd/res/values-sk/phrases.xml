@@ -1,2 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_shop">Obchod</string>
+	<string name="poi_emergency">Núdzová situácia/Záchrana</string>
+	<string name="poi_transportation">Doprava</string>
+	<string name="poi_man_made">Ľudské stavby</string>
+	<string name="poi_education">Vzdelávanie</string>
+	<string name="poi_administrative">Administratívne hranice</string>
+	<string name="poi_healthcare">Zdravotníctvo</string>
+	<string name="poi_office">Úrady/kancelárie</string>
+	<string name="poi_sport">Šport</string>
+	<string name="poi_tourism">Cestovanie/Turizmus</string>
+	<string name="poi_entertainment">Oddych</string>
+	<string name="poi_sustenance">Jedlo</string>
+	<string name="poi_service">Služby</string>
+	<string name="poi_finance">Peniaze</string>
+	<string name="poi_natural">Príroda</string>
+	<string name="poi_seamark">Námorníctvo</string>
+	<string name="poi_military">Armáda</string>
+	<string name="poi_osmwiki">Wikipedia</string>
+	<string name="poi_user_defined_other">Používateľské</string>
+	
+	<string name="poi_palaeontological_site">Paleontologické nálezisko</string>
+
+	<string name="poi_bakery">Pekáreň</string>
+	<string name="poi_alcohol">Alkohol</string>
+	<string name="poi_convenience">Malé potraviny</string>
+	<string name="poi_mall">Nákupné centrum</string>
+	<string name="poi_beverages">Nápoje</string>
+	<string name="poi_butcher">Mäsiarstvo</string>
+	<string name="poi_deli">Delikatesy</string>
+	</resources>
