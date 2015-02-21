@@ -655,4 +655,22 @@
 	<string name="poi_user_defined_other">Défini par l\'utilisateur</string>
 	
 	<string name="poi_military_landuse">Zone militaire</string>
+	<string name="poi_farm">Échoppe paysanne</string>
+	<string name="poi_wine">Caviste</string>
+
+	<string name="poi_child_clothes_shop">Vêtements pour enfants</string>
+	<string name="poi_general">Magasin général</string>
+	<string name="poi_car">Magasin automobile</string>
+	<string name="poi_car_parts">Pièces automobiles</string>
+	<string name="poi_public_transport_stop_position">Arrêt de transports en commun</string>
+	<string name="poi_halt">Arrêt ferroviaire</string>
+	<string name="poi_lodging">Hébergement</string>
+	<string name="poi_apartment">Appartement</string>
+
+	<string name="poi_internet_access_wlan">Accès Internet : sans-fil</string>
+	<string name="poi_internet_access_terminal">Accès Internet : terminal</string>
+	<string name="poi_internet_access_wired">Accès Internet : filaire</string>
+	<string name="poi_internet_access_public">Accès Internet : public</string>
+	<string name="poi_internet_access_service">Accès Internet : service</string>
+	
 	</resources>
