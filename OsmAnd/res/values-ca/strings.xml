@@ -1900,4 +1900,7 @@
     <string name="get_plugin">Obtén</string>
 <string name="free">"%1$s disponible "</string>
 	<string name="device_memory">Memòria del dispositiu</string>
-    </resources>
+    <string name="audio">Audio</string>
+	<string name="video">Video</string>
+	<string name="photo">Fotografia</string>
+	</resources>
