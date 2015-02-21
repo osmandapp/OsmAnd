@@ -669,4 +669,17 @@
 	<string name="poi_apartment">아파트</string>
 
 	<string name="poi_military_landuse">군사 지역</string>
+	<string name="poi_general">일반 상점</string>
+	<string name="poi_car">자동차 가게</string>
+	<string name="poi_car_parts">자동차 부품</string>
+	<string name="poi_public_transport_stop_position">대중 교통 정류장 위치</string>
+	<string name="poi_halt">철도 정거장 (사용 되지 않음)</string>
+	<string name="poi_railway_buffer_stop">철도 버퍼 정거장</string>
+	<string name="poi_lodging">숙박</string>
+	<string name="poi_internet_access_wlan">인터넷 접속: 무선랜</string>
+	<string name="poi_internet_access_terminal">인터넷 접속: 터미널</string>
+	<string name="poi_internet_access_wired">인터넷 접속: 유선</string>
+	<string name="poi_internet_access_public">인터넷 접속: 공용</string>
+	<string name="poi_internet_access_service">인터넷 접속: 서비스</string>
+	
 	</resources>
