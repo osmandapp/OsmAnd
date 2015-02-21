@@ -669,4 +669,18 @@
 	<string name="poi_apartment">Апартамэнты</string>
 
 	<string name="poi_child_clothes_shop">Дзіцячае адзеньне</string>
+	<string name="poi_wine">Вінная крама</string>
+
+	<string name="poi_car_parts">Аўтазапчасткі</string>
+	<string name="poi_public_transport_stop_position">Месца прыпынку грамадзкага транспарту</string>
+	<string name="poi_halt">Чыгуначны прыпынак (састарэла)</string>
+	<string name="poi_internet_access_wlan">Доступ у Інтэрнэт: WLAN</string>
+	<string name="poi_internet_access_terminal">Доступ у Інтэрнэт: тэрмінал</string>
+	<string name="poi_internet_access_wired">Доступ у Інтэрнэт: дротавы</string>
+	<string name="poi_internet_access_public">Доступ у Інтэрнэт: агульны</string>
+	<string name="poi_internet_access_service">Доступ у Інтэрнэт: паслугі</string>
+	
+	<string name="poi_farm">Фермэрская крама</string>
+	<string name="poi_car">Аўтакрама</string>
+	<string name="poi_lodging">Начлег</string>
 	</resources>
