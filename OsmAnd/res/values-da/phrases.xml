@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
         <string name="poi_bakery">Bager</string>
-        <string name="poi_alcohol">Vinhandel</string>
+        <string name="poi_alcohol">Spiritus</string>
         <string name="poi_convenience">Nærbutik</string>
         <string name="poi_mall">Butikscenter</string>
         <string name="poi_beverages">Drikkevarebutik</string>
@@ -683,7 +683,7 @@
 	<string name="poi_osmwiki">Wikipedia</string>
 	<string name="poi_user_defined_other">Brugerdefineret</string>
 	
-	<string name="poi_military_landuse">Militære zone</string>
+	<string name="poi_military_landuse">Militærzone</string>
 	<string name="poi_child_clothes_shop">Børnetøj</string>
 	<string name="poi_apartment">Lejlighed</string>
 
