@@ -1815,4 +1815,7 @@
 	<string name="share_note">Dela anteckning</string>
 	<string name="rename_recording">Byt namn på inspelning</string>
 	<string name="export">Exportera</string>
+	<string name="audio">Ljud</string>
+	<string name="video">Video</string>
+	<string name="photo">Foton</string>
 	</resources>
