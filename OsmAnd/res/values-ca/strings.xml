@@ -1903,4 +1903,8 @@
     <string name="audio">Audio</string>
 	<string name="video">Video</string>
 	<string name="photo">Fotografia</string>
+	<string name="share_note">Comparteix nota</string>
+	<string name="rename_recording">Reanomena gravació</string>
+	<string name="watch">Mira</string>
+	<string name="notes">Notes</string>
 	</resources>
