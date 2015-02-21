@@ -2154,4 +2154,7 @@
 	<string name="share_note">노트 공유</string>
 	<string name="rename_recording">레코딩 재명명</string>
 	<string name="export">내보내기</string>
+	<string name="audio">오디오</string>
+	<string name="video">비디오</string>
+	<string name="photo">사진</string>
 	</resources>
