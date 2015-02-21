@@ -1900,11 +1900,13 @@
     <string name="get_plugin">Obtén</string>
 <string name="free">"%1$s disponible "</string>
 	<string name="device_memory">Memòria del dispositiu</string>
-    <string name="audio">Audio</string>
-	<string name="video">Video</string>
+    <string name="audio">Àudio</string>
+	<string name="video">Vídeo</string>
 	<string name="photo">Fotografia</string>
 	<string name="share_note">Comparteix nota</string>
 	<string name="rename_recording">Reanomena gravació</string>
 	<string name="watch">Mira</string>
 	<string name="notes">Notes</string>
-	</resources>
+	<string name="online_map">Mapa en línia</string>
+	<string name="roads_only">Només carreteres</string>
+    </resources>
