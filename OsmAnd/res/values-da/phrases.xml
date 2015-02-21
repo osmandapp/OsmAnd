@@ -694,7 +694,7 @@
 	<string name="poi_lodging">Logi</string>
 	<string name="poi_internet_access_wlan">Internetadgang: wlan</string>
 	<string name="poi_internet_access_terminal">Internetadgang: terminal</string>
-	<string name="poi_internet_access_wired">Internetadgang: kabel</string>
+	<string name="poi_internet_access_wired">Internetadgang: kablet</string>
 	<string name="poi_internet_access_public">Internetadgang: offentlig</string>
 	<string name="poi_internet_access_service">Internetadgang: service</string>
 	
