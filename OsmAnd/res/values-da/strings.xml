@@ -359,7 +359,7 @@
 	<string name="online_map_settings_descr">Konfigurer online- eller gemte delkortkilder</string>
 	<string name="map_settings">Kortindstillinger</string>
 	<string name="map_settings_descr">Konfigurer kortvisning</string>
-	<string name="osmand_background_plugin_description">Vis indstillinger til at aktivere sporing og navigation i dvale (slukket skærm) tilstand via periodisk at vække GPS-enheden.</string>
+	<string name="osmand_background_plugin_description">Viser indstillinger til at aktivere sporing og navigation i dvale (slukket skærm) tilstand via periodisk at vække GPS-enheden.</string>
 	<string name="osmand_accessibility_description">Vis indstillinger for specielle tilgængelighedsfunktioner.</string>
 	<string name="extra_settings">Avancerede indstillinger</string>
 	<string name="osmand_monitoring_description">Vis knappen og indstillinger som muliggør optagelse af dine ture til en lokal GPX-fil eller til en online webtjeneste.</string>
@@ -1909,7 +1909,7 @@
 <string name="enable_plugin2">Aktiver</string>
 	<string name="disable_plugin2">Deaktiver</string>
 	<string name="get_plugin">Hent</string>
-<string name="plugin_ski_name">Skikort</string>
+<string name="plugin_ski_name">Skikortvisning</string>
     <string name="plugin_nautical_name">Nautisk kortvisning</string>
     <string name="world_ski_missing">For at vise skikort, skal det særlige offline kort hentes</string>
     <string name="nautical_maps_missing">For at vise søkort, skal det særlige offline kort hentes</string>
