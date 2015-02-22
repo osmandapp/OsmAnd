@@ -1856,4 +1856,10 @@
     <string name="watch">Óra</string>
 	<string name="notes">Jegyzetek</string>
 	<string name="online_map">Online térkép</string>
+	<string name="audio">Hang</string>
+	<string name="video">Videó</string>
+	<string name="photo">Fénykép</string>
+	<string name="share_note">Jegyzet megosztása</string>
+	<string name="rename_recording">Felvétel átnevezése</string>
+	<string name="export">Exportálás</string>
 	</resources>
