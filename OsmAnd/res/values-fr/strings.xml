@@ -1945,4 +1945,18 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="share_note">Partager les notes</string>
 	<string name="rename_recording">Renommer l\'enregistrement</string>
 	<string name="export">Exporter</string>
+	<string name="plugin_ski_descr2">Une carte mondiale affichant les pistes de ski alpin et de ski de fond est disponible en téléchargement sous \"Carte mondiale de Ski\".</string>
+	<string name="plugin_ski_descr1">Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales ainsi que les pistes de ski.</string>
+	<string name="plugin_nautical_descr1">Activer cette vue bascule vers le style \"Nautique\", affichant une carte marine avec les marques de navigation.</string>
+	<string name="plugin_touringview_descr1">Activer cette vue bascule vers le style \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers.</string>
+	<string name="plugin_touringview_descr2">Cet affichage, quelque soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de route (routes, pistes, chemins ...) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules.</string>
+	<string name="plugin_touringview_name">Grand tourisme</string>
+
+	<string name="plugin_touringview_descr3">Il n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.</string>
+	<string name="plugin_touringview_descr4">Cet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".</string>
+	<string name="plugin_ski_descr3">Cet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".</string>
+
+	<string name="plugin_nautical_descr3">Cet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".</string>
+
+	<string name="plugin_nautical_descr2">Une carte marine mondiale est disponible en une seul téléchargement nommé \"Carte marine\".</string>
 	</resources>
