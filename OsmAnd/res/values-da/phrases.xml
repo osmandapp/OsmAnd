@@ -699,7 +699,7 @@
 	<string name="poi_internet_access_service">Internetadgang: service</string>
 	
 	<string name="poi_general">Landhandel</string>
-	<string name="poi_car">Bil butik</string>
+	<string name="poi_car">Bilbutik</string>
 	<string name="poi_railway_buffer_stop">Jernbane sporstopper</string>
 	<string name="poi_wine">Vinhandel</string>
 
