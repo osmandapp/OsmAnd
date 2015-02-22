@@ -20,7 +20,7 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	public String getDescription() {
 		return "Activating this view changes the map style to \'Winter and ski\', showing all landscape features under wintery conditions."
 				+ "A global map displaying all ski slopes and cross country ski routes in this view is available under Downloads as \'World ski map\'.\n\n"
-				+ "This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure Maps\' as desired.";
+				+ "This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.";
 	}
 
 	@Override

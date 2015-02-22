@@ -28,9 +28,9 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public String getDescription() {
-		return "Activating this view changes the map style to Nautical, thus showing all nautical navigation marks and chart symbols.\n\n "
+		return "Activating this view changes the map style to Nautical, thus showing all nautical navigation marks and chart symbols.\n\n"
 				+ "A map file containing all nautical symbols globally is availabe as one single download called \'World seamarks\'.\n\n"
-				+ "This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure Maps\' as desired.";
+				+ "This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.";
 	}
 
 	@Override
