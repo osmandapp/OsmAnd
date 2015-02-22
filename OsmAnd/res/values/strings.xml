@@ -200,8 +200,7 @@
 	</string>
     <string name="monitoring_settings">Trip recording</string>
     <string name="monitoring_settings_descr">Configure how to record your trips</string>
-    <string name="record_plugin_description">Save your tracks via one button touch on the map screen.
-        Show the settings to record your trips to local GPX files or online using a web service.</string>
+    <string name="record_plugin_description">Activates the functionality to save your tracks via one button touch on the map screen and shows the settings to record your trips to local GPX files or to an online web service.</string>
     <string name="record_plugin_name">Record your trips</string>
     <string name="int_hour">h</string>
     <string name="duration">Duration</string>
@@ -402,7 +401,7 @@
     <string name="osmo_settings_debug">Debug information</string>
     <string name="osmo_settings_descr">Configure monitoring settings and setup personal monitoring channel</string>
     <string name="osmo_settings">OpenStreetMap Monitoring</string>
-    <string name="osmo_plugin_description">OpenStreetMap advanced live monitoring, see http://osmo.mobi. Track other devices and be tracked. 
+    <string name="osmo_plugin_description">Shows the settings to use OpenStreetMap advanced live monitoring, see http://osmo.mobi. Track other devices and be tracked. 
         Create anonymous groups, share each other\'s location, and communicate. Has various settings for session tracking or permanent tracking.
         Anonymous groups are limited for a number of days and for some feature, i.e. there is no remote control and group administrator. 
         Fully functional groups should be created on the website and only registered users have access to them.
@@ -690,7 +689,7 @@
         \n\t* Additional settings for stabilizing compass
         \n\t* Top left button on the map screen replaces Menu button
     </string>
-    <string name="osmand_background_plugin_description">Show settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
+    <string name="osmand_background_plugin_description">Shows the settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
     <string name="contribution_activity">Install version</string>
     <string name="choose_osmand_theme_descr">Choose application theme</string>
     <string name="choose_osmand_theme">App theme</string>
@@ -797,11 +796,11 @@
     <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location …\" to assign a note to the specified location</string>
     <string name="monitoring_control_stop">Stop</string>
     <string name="map_widget_audionotes">Audio notes</string>
-    <string name="audionotes_plugin_description">Take audio/video notes during the trip</string>
+    <string name="audionotes_plugin_description">Shows the button to take audio/video notes during a trip</string>
     <string name="audionotes_plugin_name">Audio/video notes</string>
     <string name="index_srtm_parts">parts</string>
     <string name="index_srtm_ele">Contour lines</string>
-    <string name="srtm_plugin_description">Facilitates downloading offline contour lines and hillshades (\'Settings\' → \'Manage map files\' → \'Download\' → Select desired map type).</string>
+    <string name="srtm_plugin_description">External plugin (separate download) facilitating to download offline contour lines and hillshades (\'Settings\' → \'Manage map files\' → \'Download\' → Select desired map type). These be can be displayed in combination with the OsmAnd offline maps.</string>
     <string name="srtm_plugin_name">Contour lines plugin</string>
     <string name="download_select_map_types">Other maps</string>
     <string name="download_roads_only_item">Roads only</string>
@@ -1195,7 +1194,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parking point</string>
-	<string name="osmand_parking_plugin_description">This plugin allows to store the location of your parked car.</string>
+	<string name="osmand_parking_plugin_description">External plugin (separate download) allowing to memorize the location of your parked car.</string>
 	<string name="osmand_parking_plugin_name">Parking Position Plugin</string>
 	<string name="context_menu_item_add_parking_point">Mark as a parking position</string>
 	<string name="context_menu_item_delete_parking_point">Delete a parking marker</string>
@@ -1240,20 +1239,20 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_indexes_cat_tile">Online and tile maps</string>
 	<string name="local_indexes_cat_map">Offline maps (vector)</string>
 	<string name="index_settings_descr">Download and manage offline map files stored on your device</string>
-	<string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
+	<string name="map_online_plugin_is_not_installed">Enable the Online maps plugin to select different map sources</string>
 	<string name="map_online_data">Online and tile maps</string>
 	<string name="map_online_data_descr">Use online maps (download and cache tiles on SD card)</string>
 	<string name="online_map_settings">Online maps</string>
 	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
 	<string name="map_settings">Map Settings</string>
 	<string name="map_settings_descr">Configure the map display</string>
-	<string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd data folder.</string>
+	<string name="osmand_rastermaps_plugin_description">Shows the settings to use a variety of online or cached tile maps, both as main map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd data folder.</string>
 	
-	<string name="osmand_accessibility_description">Show settings for special accessibility features.</string>
+	<string name="osmand_accessibility_description">Shows the settings for special accessibility features.</string>
 	<string name="extra_settings">Advanced settings</string>
-	<string name="osmand_monitoring_description">Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
+	<string name="osmand_monitoring_description">Shows the button and settings facilitating to record your trips to a local GPX file or to an online web service.</string>
 	<string name="osmand_extra_settings_description">Display settings for advanced map configuration (like increase map details) and some device-specifics.</string>
-	<string name="osmand_development_plugin_description">Show settings for development and debugging features like route simulation or rendering performance display.</string>
+	<string name="osmand_development_plugin_description">Shows the settings for development and debugging features like route simulation or rendering performance indication.</string>
 	<string name="plugins_screen">Plugins</string>
 	<string name="prefs_plugins_descr">Plugins activate advanced settings and additional functionality</string>
 	<string name="prefs_plugins">Plugins</string>
@@ -1269,7 +1268,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t  *Usability and UI experience*
 		\n\t	- Improved in many areas		
 	</string>
-	<string name="osm_editing_plugin_description">Show settings needed for OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
+	<string name="osm_editing_plugin_description">Shows the settings needed for OSM contributions like creating / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
 	<string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
 	<string name="debugging_and_development">OsmAnd development</string>
