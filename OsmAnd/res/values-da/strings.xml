@@ -362,7 +362,7 @@
 	<string name="osmand_background_plugin_description">Vis indstillinger til at aktivere sporing og navigation i dvale (slukket skærm) tilstand via periodisk at vække GPS-enheden.</string>
 	<string name="osmand_accessibility_description">Vis indstillinger for specielle tilgængelighedsfunktioner.</string>
 	<string name="extra_settings">Avancerede indstillinger</string>
-	<string name="osmand_monitoring_description">Vis indstillinger som muliggør optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
+	<string name="osmand_monitoring_description">Vis knappen og indstillinger som muliggør optagelse af dine ture til en lokal GPX-fil eller til en online webtjeneste.</string>
 	<string name="osmand_rastermaps_plugin_description">Vis indstillinger til at konfigurere en række online eller cachelagrede delkort som basiskort eller som over-/ underlejringskort. Disse kort kan også fremstilles offline og kopieres til OsmAnd datamappen.</string>
 	<string name="osmand_extra_settings_description">Vis indstillinger for avanceret kortkonfiguration (som at øge kortdetaljer) og nogle enhedsspecifikke indstillinger.</string>
 	<string name="osmand_development_plugin_description">Vis indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller optegningsydeevne.</string>
