@@ -82,7 +82,7 @@
 	<string name="poi_interior_decoration_shop">Interior decoration store</string>
 	<string name="poi_jewelry_shop">Jewelry store</string>
 	<string name="poi_kiosk">Kiosk</string>
-	<string name="poi_kitchen_shop">Kitchenware</string>
+	<string name="poi_kitchen_shop">Kitchen furnishings</string>
 	<string name="poi_mobile_phone_shop">Cell phone store</string>
 	<string name="poi_motorcycle_shop">Motorcycle shop</string>
 	<string name="poi_musical_instrument_shop">Musical instruments</string>
@@ -316,7 +316,7 @@
 	<string name="poi_telecommunication_office">Telecommunication office</string>
 	<string name="poi_ngo">NGO</string>
 	<string name="poi_town_hall">Town hall</string>
-	<string name="poi_employment_agency">Employement office</string>
+	<string name="poi_employment_agency">Employment office</string>
 	<string name="poi_research_office">Research office</string>
 	<string name="poi_it_office">IT office</string>
 	<string name="poi_newspaper_office">Newspaper office</string>
