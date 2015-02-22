@@ -18,9 +18,9 @@ public class SkiMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public String getDescription() {
-		return "Nautical Maps plugin provides maps for pistes based on OSM data.\n "
-				+ "(Here could be description of provided details)\n"
-				+ "It changes default rendering style to 'Winter-Ski'. You can change it back in 'Configure Map' menu (Translation)";
+		return "Activating this view changes the map style to \'Winter and ski\', showing all landscape features under wintery conditions."
+				+ "A global map displaying all ski slopes and cross country ski routes in this view is available under Downloads as \'World ski map\'.\n\n"
+				+ "This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure Maps\' as desired.";
 	}
 
 	@Override
