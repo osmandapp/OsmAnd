@@ -22,8 +22,8 @@
 	<string name="free">Free %1$s </string>
 	<string name="device_memory">Device memory</string>
     <string name="rendering_attr_pisteGrooming_name">Piste grooming</string>
-    <string name="plugin_ski_name">Ski Maps</string>
-    <string name="plugin_nautical_name">Nautical Maps</string>
+    <string name="plugin_ski_name">Ski map view</string>
+    <string name="plugin_nautical_name">Nautical map view</string>
     <string name="world_ski_missing">In order to display ski maps, the special offline map needs to be downloaded</string>
     <string name="nautical_maps_missing">In order to display nautical maps, the special offline map needs to be downloaded</string>
 	<string name="edit_group">Edit group</string>
