@@ -201,7 +201,7 @@
     <string name="monitoring_settings">Trip recording</string>
     <string name="monitoring_settings_descr">Configure how to record your trips</string>
     <string name="record_plugin_description">Activates the functionality to save your tracks via one button touch on the map screen and shows the settings to record your trips to local GPX files or to an online web service.</string>
-    <string name="record_plugin_name">Record your trips</string>
+    <string name="record_plugin_name">Trip recording</string>
     <string name="int_hour">h</string>
     <string name="duration">Duration</string>
     <string name="distance">Distance</string>
