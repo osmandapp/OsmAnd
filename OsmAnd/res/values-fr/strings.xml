@@ -56,7 +56,7 @@
   <string name="fav_export_confirmation">Un fichier de favoris précédemment exporté existe déjà. Voulez vous le remplacer ?</string>
   <string name="profile_settings">Paramètres pour le profil</string>
   <string name="settings_preset">Profil par défaut</string>
-  <string name="settings_preset_descr">Sélectionnez le profil d\'utilisation par défaut. Les paramètres de rendu et de navigation de chaque profil sont mémorisés.</string>
+  <string name="settings_preset_descr">Les paramètres d’affichage et de navigation sont mémorisés dans un profil. Créez votre profil par défaut ici.</string>
   
   
   <string name="routing_settings">Navigation</string>
@@ -258,7 +258,7 @@
   <string name="tile_source_already_installed">Carte déjà installée, paramètres seront mis à jour</string>
   <string name="select_tile_source_to_install">Sélectionnez les cartes à installer ou mettre à jour</string>
   <string name="internet_not_available">Une connexion Internet est nécessaire pour cette opération mais est indisponible</string>
-  <string name="install_more">Installer d\'autres langues …</string>
+  <string name="install_more">Installer plus…</string>
   <string name="tip_update_index">Mise à jour des cartes hors-ligne</string>
   <string name="tip_update_index_t">"Il est très important d\'avoir des données cartographiques à jour pour la visualisation des cartes hors-ligne, la recherche de points d\'intérêt ou d\'adresses, et la navigation hors-ligne. OsmAnd fournit un gestionnaire de données qui permet de télécharger ces cartes hors-ligne (et d\'autres données), et de vérifier si des mises à jour sont disponibles.
 \n\tPour télécharger ou vérifier les mises à jour, allez dans \'Menu Principal\' → \'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des données hors-ligne\'.
@@ -290,8 +290,7 @@
   <string name="tip_app_mode">Mode de fonctionnement</string>
   
   <string name="tip_navigation">Navigation</string>
-  <string name="tip_navigation_t">"La navigation vers un point peut être lancée soit directement par un appui long à son emplacement sur la carte (une bulle apparaît alors, sur laquelle un appui court ouvre le menu contextuel avec le choix \'Aller vers le point\'), soit par un appui court sur un favori ou un résultat de recherche (en choisissant alors \'Navigation\').
-\n\tLa destination est alors indiquée par un point et un drapeau à damier. OsmAnd affiche la distance qui vous en sépare, et sa direction (par une flèche orange). "</string>
+  <string name="tip_navigation_t">"La navigation vers un point peut être lancée soit directement depuis la carte (à l\'emplacement souhaité sur la carte faites un appui long, dans la bulle qui apparaît faites un appui court puis dans le menu contextuel sélectionnez \"Définir comme destination\"), soit par un appui court depuis la liste de vos favoris ou les résultats d\'une recherche (choisissez alors \"Aller vers ce point\").\n\nLa destination est alors indiquée par un point et un drapeau à damier. OsmAnd affiche la distance qui vous en sépare, et sa direction (par une flèche orange).\n\nVous pouvez, soit sélectionner \"Démarrer la navigation\", ce qui signifie qu\'OsmAnd vous guidera en temps réel en vous donnant les indications vocales (si activées) etc… soit sélectionner \"Afficher la route\", ce qui affichera la carte de manière statique sans tenir compte de votre position. "</string>
   <string name="tip_search">Recherche</string>
   <string name="tip_search_t">"Vous pouvez rechercher un lieu via l\'option \'Rechercher autour du point\' dans le menu contextuel de la carte, ou via \'Menu\' → \'Rechercher\'.
 \n\nVous pouvez alors rechercher :
@@ -480,7 +479,7 @@
   <string name="int_seconds">secondes</string>
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">Choisir un intervalle d\'actualisation de votre position pour le service en arrière-plan</string>
-  <string name="background_service_int">Intervalle de positionnement GPS</string>
+  <string name="background_service_int">Intervalle de réveil du GPS</string>
   <string name="background_service_provider_descr">Choisir un fournisseur de géolocalisation pour le service arrière-plan</string>
   <string name="background_service_provider">Fournisseur de géolocalisation</string>
   <string name="background_router_service_descr">Activer le service en arrière-plan pour suivre votre position en continu</string>
@@ -491,7 +490,7 @@
   <string name="search_poi_filter">Filtre</string>
   <string name="menu_mute_off">Son activé</string>
   <string name="menu_mute_on">Son désactivé</string>
-  <string name="voice_provider_descr">Sélectionnez la langue à employer pour le guidage vocal</string>
+  <string name="voice_provider_descr">Sélectionnez la langue de guidage vocal</string>
   <string name="voice_provider">Guidage vocal</string>
   <string name="voice_data_initializing">Initialisation des données vocales…</string>
   <string name="voice_data_not_supported">Les données vocales utilisent une version non supportée</string>
@@ -767,7 +766,7 @@
   <string name="confirm_interrupt_download">Voulez-vous interrompre le téléchargement ?</string>
   <string name="basemap_was_selected_to_download">Carte mondiale de base requise pour le bon fonctionnement, sélectionnée pour téléchargement.</string>
   
-  <string name="map_online_plugin_is_not_installed">Activer le greffon des cartes en ligne pour sélectionner différentes sources de cartes</string>
+  <string name="map_online_plugin_is_not_installed">Activez le greffon \"Cartes en ligne\" pour sélectionner différentes sources de cartes</string>
   <string name="map_online_data">Carte en ligne (tuiles)</string>
   <string name="map_online_data_descr">Utiliser une carte en ligne (télécharger et conserver en cache les tuiles de carte sur la carte SD)</string>
   <string name="online_map_settings">Cartes en ligne</string>
@@ -780,7 +779,7 @@
   <string name="extra_settings">Paramètres avancés</string>
   <string name="osmand_monitoring_description">Ce greffon permet l\'enregistrement de vos itinéraires en fichiers GPX et le suivi en direct grâce à un service web.</string>
   <string name="osmand_extra_settings_description">Ce greffon permet de gérer des paramètres de configuration avancés et propres à certains appareils.</string>
-  <string name="osmand_development_plugin_description">Ce greffon permet la gestion de paramètres de développement et de débogage tels que la navigation animée ou l\'affichage des temps de rendu.</string>
+  <string name="osmand_development_plugin_description">Ce greffon permet de gérer les paramètres de développement et de débogage tels que la simulation de navigation ou l\'affichage des performances du rendu.</string>
   <string name="plugins_screen">Gestionnaire des greffons</string>
   <string name="select_plugin_to_activate">Touchez un greffon pour l\'activer ou le désactiver (le redémarrage d\'OsmAnd peut être nécessaire).</string>
   <string name="prefs_plugins_descr">Les greffons fournissent à l\'application des paramètres avancés et des fonctionnalités supplémentaires.</string>
@@ -916,8 +915,8 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Emplacement de stationnement</string>
-  <string name="osmand_parking_plugin_description">Ce greffon permet d\'enregistrer l\'emplacement où est garé votre véhicule.</string>
-  <string name="osmand_parking_plugin_name">Greffon OsmAnd-Parking</string>
+  <string name="osmand_parking_plugin_description">Ce greffon (téléchargement requis) permet d\'enregistrer l\'emplacement où est garé votre véhicule.</string>
+  <string name="osmand_parking_plugin_name">Emplacement de stationnement (greffon externe)</string>
   <string name="context_menu_item_add_parking_point">Marquer comme emplacement de stationnement</string>
   <string name="context_menu_item_delete_parking_point">Supprimer un emplacement de stationnement</string>
   <string name="starting_point_too_far">Point de départ trop éloigné de la route la plus proche.</string>
@@ -1101,7 +1100,7 @@
     <string name="osmodroid_plugin_name">Greffon OsMoDroid</string>
 	<string name="index_srtm_ele">Courbes de niveau</string>
     <string name="srtm_plugin_description">Ce greffon permet de télécharger les courbes de niveaux et les reliefs de montagne pour une région spécifique (\'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des données hors-ligne\', puis sélectionner le type de carte désiré), et de les utiliser avec les cartes hors-ligne.</string>
-    <string name="srtm_plugin_name">Courbes de niveau</string>
+    <string name="srtm_plugin_name">Courbes de niveau (greffon supplémentaire)</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
     <string name="index_srtm_parts">parties</string>
@@ -1110,7 +1109,7 @@
 <string name="audionotes_location_not_defined">La position à associer à la note n\'est pas encore défini. Utilisez le menu \'Utiliser ce point\' pour spécifier la position à associer à la note.</string>
     <string name="monitoring_control_stop">Arrêter</string>
     <string name="map_widget_audionotes">Notes audio</string>
-    <string name="audionotes_plugin_description">Ce greffon permet de prendre des notes audio/vidéo/photo durant le voyage.</string>
+    <string name="audionotes_plugin_description">Affiche le bouton permettant de prendre des notes photo/audio/vidéo durant le voyage</string>
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
     
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-ligne</string>
@@ -1209,7 +1208,7 @@
 	<string name="hno">Numéro de bâtiment</string>
     <string name="tip_recent_changes_1_3_t">"Changements en 1.3 :\n\t* Support des écrans larges comme les tablettes\n\t* Thème Holo\n\t* Options de stabilisation du compas\n\t* Le bouton en haut à gauche de l\'écran remplace le bouton Menu. "</string>
     <string name="monitoring_settings">Enregistrement de traces</string>
-    <string name="monitoring_settings_descr">Configurer l\'enregistrement de vos traces</string>
+    <string name="monitoring_settings_descr">Configurez l\'enregistrement de vos itinéraires</string>
     <string name="osmand_monitoring_plugin_description">Ce greffon permet d\'activer le suivi et la navigation en arrière-plan (écran éteint) en réveillant périodiquement le dispositif GPS. Affiche les paramètres facilitant l\'enregistrement de vos traces vers des fichiers GPX locaux, ou en ligne via un service Web.</string>
     <string name="osmand_monitoring_plugin_name">Services de suivi</string>
     <string name="choose_osmand_theme_descr">Sélectionnez le thème de l\'application</string>
@@ -1318,7 +1317,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="gpx_file_name">Nom du fichier GPX</string>
     <string name="gpx_saved_sucessfully">L\'enregistrement du fichier GPX {0} a réussi.</string>
     <string name="osmand_distance_planning_plugin_description">Ce greffon permet de créer un chemin (ou d\'ouvrir et modifier un fichier GPX existant) pour mesurer la distance entre des points et de l\'enregistrer au format GPX. Peut être utilisé pour préparer un itinéraire GPX.</string>
-    <string name="osmand_distance_planning_plugin_name">Mesure de distance et outil de planification</string>
+    <string name="osmand_distance_planning_plugin_name">Mesure de distance et Outil de planification</string>
     <string name="default_buttons_do_not_show_again">Ne plus afficher</string>
     <string name="local_osm_changes_backup_successful">Fichier de modifications OSM %1$s généré avec succès</string>
     <string name="local_osm_changes_backup_failed">Échec de la sauvegarde des modifications OSM</string>
@@ -1426,7 +1425,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="default_or">ou</string>
 	<string name="route_is_too_long">Le calcul d’itinéraire par OsmAnd peut prendre beaucoup de temps (et peut même parfois ne pas aboutir) pour des points séparés de plus de 200 km. Veuillez ajouter des étapes intermédiaires pour une meilleure performance.</string>
 	<string name="auto_zoom_none">Pas de zoom automatique</string>
-	<string name="auto_zoom_close">Rapproché</string>
+	<string name="auto_zoom_close">Pour agrandir</string>
 	<string name="auto_zoom_far">Modéré</string>
 	<string name="auto_zoom_farthest">Éloigné</string>
 	<string name="tip_map_styles_t">"OsmAnd propose différents styles de rendu pour l\'affichage des cartes vectorielles hors-ligne, en fonction de vos besoins.
@@ -1434,14 +1433,14 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 \n\t* le style \'Touring view\', qui fournit les informations les plus détaillées possibles pour le voyage et le tourisme, avec des optimisations pour les conducteurs professionnels (contraste élevé, distinction claire des différentes routes), des options pour la randonnée alpine (Alpine hiking, classification du Club Alpin Suisse), l\'affichage des symboles de randonnée, des véloroutes
 \n\t* \'High contrast roads\' affiche les routes avec des couleurs très accentuées pour les situations de forte luminosité.
 \n\t* \'Cycle-map\' est optimisé pour l\'affichage des voies pour cyclistes.
-\n\t* \'Winter and ski\' crée une vue hivernale du paysage, et montre les domaines skiables (nécessite le téléchargement de la carte \'Monde - Ski\')
+\n\t* \'Hiver et Ski\' crée une vue hivernale du paysage, et montre les domaines skiables (nécessite le téléchargement de la carte \'Monde - Ski\')
 \n\t* \'Topo-map-assimilation\' est optimisé pour la randonnée, et affiche les chemins en fonction de la classification du Club Alpin Suisse (SAC scale), ainsi que les symboles de randonnée. "</string>
     <string name="remember_choice">Mémoriser mon choix</string>
-    <string name="gps_status_eclipsim">GPS Status</string>
+    <string name="gps_status_eclipsim">État du GPS</string>
     <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer un itinéraire</string>
     <string name="animate_routing_route">Simulation de l\'itinéraire calculé </string>
     <string name="animate_routing_gpx">Simulation suivant une trace GPX</string>
-    <string name="tip_faq_t">\tMerci de visiter https://code.google.com/p/osmand/wiki/FAQ pour la Foire Aux Questions.</string>
+    <string name="tip_faq_t">Rendez-vous sur https://code.google.com/p/osmand/wiki/FAQ pour la Foire Aux Questions.</string>
     <string name="tip_faq">Foire Aux Questions</string>
     <string name="local_osm_changes_delete_all_confirm">Vous allez supprimer %1$d modifications OSM. Êtes-vous sûr ?</string>
     <string name="local_osm_changes_delete_all">Supprimer tout</string>
@@ -1485,7 +1484,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
 	<string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
 	<string name="routing_attr_weight_name">Limite de poids</string>
-	<string name="routing_attr_weight_description">Spécifier la limite de poids devant être autorisée sur les routes</string>
+	<string name="routing_attr_weight_description">Spécifiez la limite de poids à respecter pour emprunter les routes</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Sélectionnez la destination</string>
     <string name="route_descr_select_on_map">Sélectionner sur la carte…</string>
@@ -1494,17 +1493,16 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="route_info">Informations sur l\'itinéraire</string>
     <string name="keep_and_add_destination_point">Ajouter comme destination</string>
     <string name="use_displayed_track_for_navigation">Voulez-vous suivre la trace affichée à l\'écran ?</string>
-    <string name="tip_recent_changes_1_7_1_t">Changements en version 1.7 :
-    \n\t* IMPORTANT : Les cartes doivent être postérieures à février 2014.
+    <string name="tip_recent_changes_1_7_1_t">"Changements en version 1.7 :
+\n\t* IMPORTANT : Les cartes doivent être postérieures à février 2014.
 \n\t* Navigation entièrement mise à jour (rapide et précise).
-    \n\t* Nouvel écran d\'élaboration de l\'itinéraire (plus intuitif et plus puissant)
-    \n\t* Possibilité d\'utiliser les itinéraires GPX via le bouton Paramètres d\'itinéraire
-    \n\t* Boutons se masquant automatiquement durant la navigation
-    \n\t* Calcul d\'un itinéraire hors-ligne jusqu\'au début de l\'itinéraire GPX (option \'Suivre l\'ensemble de la trace\')
+\n\t* Nouvel écran d\'élaboration de l\'itinéraire (plus intuitif et plus puissant)
+\n\t* Possibilité d\'utiliser les itinéraires GPX via le bouton Paramètres d\'itinéraire
+\n\t* Boutons se masquant automatiquement durant la navigation
+\n\t* Calcul d\'un itinéraire hors-ligne jusqu\'au début de l\'itinéraire GPX (option \'Suivre l\'ensemble de la trace\')
 \n\t* Simulation active dans les tunnels
-\n\t* Nombreuses petites améliorations de l\'expérience utilisateur et de l\'utilisabilité
-\n\t* Paramétrage de la vitesse d\'élocution
-    </string>
+\n\t* Nombreuses petites améliorations de l\'expérience utilisateur
+\n\t* Paramétrage de la vitesse d\'élocution "</string>
     <string name="gpx_option_calculate_first_last_segment">Calculer un itinéraire OsmAnd pour le début et la fin de l\'itinéraire</string>
     <string name="calculate_osmand_route_without_internet">Calculer un itinéraire OsmAnd hors-ligne</string>
     <string name="index_name_italy">Europe - Italie</string>
@@ -1669,7 +1667,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="my_data_Button">Favoris</string>
     <string name="my_data_activity">Favoris</string>
     <string name="selected_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
-    <string name="delay_navigation_start">Démarrer la navigation automatiquement</string>
+    <string name="delay_navigation_start">Démarrer la navigation pas à pas automatiquement</string>
     <string name="selected">sélectionné(s)</string>
     <string name="gpx_split_interval">Intervalle de division</string>
     <string name="local_index_gpx_info_show">\n\nAppui long pour afficher les options</string>
@@ -1795,12 +1793,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="flat_list_waypoints">Tous</string>
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">Enregistrez vos traces grâce au bouton sur la carte. Affichez les paramètres pour l\'enregistrement des traces dans des fichiers GPX locaux ou en ligne avec un service Web.</string>
-    <string name="record_plugin_name">Enregistrez vos itinéraires</string>
+    <string name="record_plugin_name">Enregistrez votre itinéraire</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
     <string name="distance">Distance</string>
     <string name="rendering_attr_publicTransportMode_name">Itinéraires de bus, tramways, et navettes</string>
-	<string name="save_track_to_gpx_globally">Enregistrer les traces dans un fichier GPX</string>
+	<string name="save_track_to_gpx_globally">Enregistrer l\'itinéraire dans un fichier GPX</string>
 	<string name="save_track_to_gpx_globally_descr">L\'enregistrement de la position dans un fichier GPX peut être activé ou désactivé grâce au gadget sur la carte.</string>
 	<string name="save_track_interval_globally">Intervalle d\'enregistrement</string>
 	<string name="confirm_every_run">Toujours demander</string>
@@ -1821,26 +1819,26 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_native_render">Utiliser le moteur natif de rendu</string>
     <string name="use_native_render_descr">Utiliser le moteur de rendu C++ au lieu de Java</string>
     <string name="print_route">Exporter l\'itinéraire</string>
-    <string name="fav_point_emoticons_message">Le nom de votre favori sera %1$s car les émoticônes ne sont pas autorisés.</string>
-    <string name="speed_limit_exceed">Marge tolérée aux limites de vitesse</string>
-	<string name="speed_limit_exceed_message">Indiquez la marge à tolérer aux limitations de vitesse avant le déclenchement des annonces vocales.</string>
+    <string name="fav_point_emoticons_message">Le nom de votre favori a été modifié en %1$s car les émoticônes ne sont pas autorisés.</string>
+    <string name="speed_limit_exceed">Marge de tolérance aux limites de vitesse</string>
+	<string name="speed_limit_exceed_message">Indiquez la marge de tolérance à ajouter à la limitations de vitesse et au dessus de laquelle vous recevrez une alerte vocale.</string>
 	<string name="osmo_device_not_found">Périphérique introuvable</string>
-    <string name="osmo_no_connection_msg">Le service OsMo n\'est pas disponible :\n- Vérifier la connexion;\n- Vérifier les paramètres;\n- Vérifier notre Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Le service OsMo n\'est pas disponible :\n- Vérifier la connexion;\n- Vérifier les paramètres;\n- Vérifier notre page Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Un utilisateur anonyme ne peut pas :\n- Créer des groupes;\n- Synchroniser les groupes et les périphériques avec le serveur;\n- Gérer les groupes et les périphériques dans un espace privé.</string>
     <string name="anonymous_user">Utilisateur anonyme</string>
     <string name="logged_as">Connecté entant que %1$s</string>
 	<string name="rendering_category_details">Détails</string>
     <string name="rendering_category_transport">Transport</string>
     <string name="rendering_category_others">Autres éléments de la carte</string>
-    <string name="map_widget_appearance_rem">Autres éléments</string>
+    <string name="map_widget_appearance_rem">Éléments restants</string>
     <string name="map_widget_top">Barre d\'état</string>
 	<string name="map_widget_right">Panneau de droite</string>
 	<string name="map_widget_left">Panneau de gauche</string>
     <string name="layers_category_show">Afficher</string>
-	<string name="configure_map">Affichage de la carte</string>
+	<string name="configure_map">Configurer la carte</string>
     <string name="search_radius_proximity">A proximité de</string>
     <string name="rendering_category_routes">Routes</string>
-    <string name="tip_recent_changes_1_9_t">"Nouveautés de la version 1.9 : * Mise à jour des styles de cartes avec un rendu fonction du revêtement de la route, couches de transport et symboles de randonnées pédestres * Recherche de PI le long de l\'itinéraire * Marquer temporairement une route comme non traversable * Téléchargement et mise à jour des cartes facilités * Notification audio visuelle à l\'approche des points de passage * Imprimer l\'itinéraire détaillé * Gestion des lignes de présélection * Support d\'Android Wear * Beaucoup de changement de l\'interface * Zoom séparé pour la taille du texte sur la carte * Notification spéciales dans le cas où le véhicule quitte l\'itinéraire * Connexion OsMo * Corrections des incompatibilités de versions pour OsMo "</string>
+    <string name="tip_recent_changes_1_9_t">"Nouveautés de la version 1.9 : * Mise à jour des styles de cartes faisant état de la nature du revêtement routier, calques de transports public et de symboles de randonnées pédestres * Recherche de PI le long de l\'itinéraire * Marquage temporaire d\'une route non praticable * Amélioration du téléchargement et des mises à jour des cartes * Notification auditive et visuelle à l\'approche des points de passage * Impression de l\'itinéraire détaillé * Gestion des listes de bifurcation * Supporte Android Wear * Nombreuses modifications de l\'interface * Zoom séparé pour la taille du texte de la carte * Notification audible spéciale en cas de hors route * Fonction de connexion OsMo * Corrections des problèmes d\'incompatibilité de versions pour OsMo "</string>
     <string name="rendering_attr_busRoutes_name">Lignes de bus</string>
     <string name="rendering_attr_trolleybusRoutes_name">Lignes de tramway</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Itinéraires de chemin de fer</string>
@@ -1851,7 +1849,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="impassable_road">Évitez les routes…</string>
     <string name="rendering_category_hide">Masquer</string>
     <string name="wake_on_voice">Allumer l\'écran</string>
-    <string name="wake_on_voice_descr">Allumer l\'écran à l\'approche d\'une bifurcation</string>
+    <string name="wake_on_voice_descr">Allumer l\'écran (si éteint) à l\'approche d\'une bifurcation</string>
     <string name="lock_screen_request_explanation">%1$s a besoin de cette permission pour éteindre l\'écran en mode économie d\'énergie.</string>
     <string name="wake_on_voice_never">Jamais</string>
     <string name="advanced_settings">Avancé</string>
@@ -1865,7 +1863,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="map_update">Mise à jour disponible pour %1$s carte(s)</string>
 	<string name="error_avoid_specific_road">Aucun raccourci n\'a été trouvé</string>
     <string name="use_opengl_render">Utiliser le rendu OpenGL</string>
-    <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (cette option peut être inefficace sur certains appareils)</string>
+    <string name="use_opengl_render_descr">Utiliser le rendu matériel accéléré OpenGL (cette option peut être inopérante sur certains appareils)</string>
     <string name="everything_up_to_date">Tous les fichiers sont à jour</string>
     <string name="dismiss">Ignorer</string>
     <string name="no_internet_connection">Téléchargement impossible. Veuillez vous connecter à Internet (Wifi ou données mobiles) pour poursuivre.</string>
@@ -1893,22 +1891,22 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="rendering_value_americanRoadAtlas_name">Atlas des routes américaines</string>
     <string name="routing_attr_no_new_routing_description">Ne pas utiliser les règles de routage ajoutées dans la version 1.9</string>
     <string name="routing_attr_no_new_routing_name">Ne pas utiliser le calcul d\'itinéraire de la version 1.9</string>
-    <string name="speak_pedestrian">Annoncer les passages piéton</string>
+    <string name="speak_pedestrian">Annoncer les passages piétons</string>
     <string name="rendering_value__name">Par défaut</string>
 	<string name="avoid_roads_msg">Vous pouvez générer un itinéraire alternatif en sélectionnant les routes à éviter.</string>
     <string name="navigation_over_track">Démarrer la navigation sur cette trace ?</string>
 	<string name="save_track_to_gpx_globally_headline">Enregistrement de traces à la demande</string>
 	<string name="recents">Récents</string>
 	<string name="proxy_pref_title">Proxy</string>
-    <string name="enable_proxy_descr">Configurer le mandataire HTTP pour toutes les requêtes réseau</string>
-	<string name="proxy_host_title">Serveur mandataire</string>
-	<string name="proxy_host_descr">Configurez le serveur mandataire (par exemple 127.0.0.1)</string>
-	<string name="proxy_port_title">Port du mandataire</string>
-	<string name="proxy_port_descr">Configurez le numéro de port de votre mandataire (par exemple 8118)</string>
+    <string name="enable_proxy_descr">Configurer le mandataire HTTP (Proxy) pour toutes les requêtes réseau</string>
+	<string name="proxy_host_title">Serveur mandataire (Proxy)</string>
+	<string name="proxy_host_descr">Configurez le serveur mandataire (Proxy). Par exemple : 127.0.0.1</string>
+	<string name="proxy_port_title">Port du mandataire (Proxy)</string>
+	<string name="proxy_port_descr">Configurez le numéro de port de votre mandataire (Proxy). Par exemple : 8118</string>
 	<string name="proxy_pref_descr">Définir un proxy pour les communications Internet</string>
     <string name="settings_privacy">Confidentialité</string>
     <string name="rendering_attr_streetLighting_name">Éclairage public</string>
-    <string name="enable_proxy_title">Activer le mandataire HTTP</string>
+    <string name="enable_proxy_title">Activer le mandataire HTTP (Proxy)</string>
 	<string name="version_settings_descr">Télécharger les versions en cours développement</string>
     <string name="version_settings">Versions de développement</string>
     <string name="points">Points</string>
@@ -1923,10 +1921,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="plugin_description_title">Description</string>
 	<string name="plugin_settings_button_caption">Paramètres</string>
 <string name="edit_group">Modifier le groupe</string>
-    <string name="plugin_install_needs_network">Vous devez être connectés à Internet pour installer ce greffon.</string>
+    <string name="plugin_install_needs_network">Vous devez être connecté à Internet pour installer ce greffon.</string>
 <string name="enable_plugin2">Activer</string>
 	<string name="disable_plugin2">Désactiver</string>
-	<string name="get_plugin">Récupérer</string>
+	<string name="get_plugin">Obtenir</string>
 <string name="plugin_ski_name">Pistes de ski</string>
     <string name="plugin_nautical_name">Cartes marines</string>
     <string name="world_ski_missing">Pour afficher les pistes de ski, une carte hors ligne doit être téléchargée.</string>
@@ -1942,12 +1940,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="audio">Audio</string>
 	<string name="video">Vidéo</string>
 	<string name="photo">Photo</string>
-	<string name="share_note">Partager les notes</string>
+	<string name="share_note">Partager la note</string>
 	<string name="rename_recording">Renommer l\'enregistrement</string>
 	<string name="export">Exporter</string>
-	<string name="plugin_ski_descr2">Une carte mondiale affichant les pistes de ski alpin et de ski de fond est disponible en téléchargement sous \"Carte mondiale de Ski\".</string>
+	<string name="plugin_ski_descr2">Une carte mondiale affichant les pistes de ski alpin et de ski de fond est disponible en téléchargement sous \"Monde - Ski\".</string>
 	<string name="plugin_ski_descr1">Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales ainsi que les pistes de ski.</string>
-	<string name="plugin_nautical_descr1">Activer cette vue bascule vers le style \"Nautique\", affichant une carte marine avec les marques de navigation.</string>
+	<string name="plugin_nautical_descr1">Activer cette vue bascule vers le style \"Nautique\", affichant une carte avec le balisage pour la navigation.</string>
 	<string name="plugin_touringview_descr1">Activer cette vue bascule vers le style \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers.</string>
 	<string name="plugin_touringview_descr2">Cet affichage, quelque soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de route (routes, pistes, chemins ...) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules.</string>
 	<string name="plugin_touringview_name">Grand tourisme</string>
