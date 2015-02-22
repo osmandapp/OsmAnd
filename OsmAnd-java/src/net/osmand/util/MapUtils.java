@@ -21,9 +21,7 @@ import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
  */
 public class MapUtils {
 	
-    // TODO change the hostname back to osm.org once HTTPS works for it
-    // https://github.com/openstreetmap/operations/issues/2
-    private static final String BASE_SHORT_OSM_URL = "https://openstreetmap.org/go/";
+    private static final String BASE_SHORT_OSM_URL = "https://osm.org/go/";
 	
 	/**
      * This array is a lookup table that translates 6-bit positive integer
