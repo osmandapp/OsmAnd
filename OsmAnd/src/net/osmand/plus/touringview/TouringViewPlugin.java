@@ -44,7 +44,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 		if(activity != null) {
 			// called from UI 
 			previousRenderer = app.getSettings().RENDERER.get(); 
-			app.getSettings().RENDERER.set(RendererRegistry.NAUTICAL_RENDER);			
+			app.getSettings().RENDERER.set(RendererRegistry.TOURING_VIEW);
 		}
 		return true;
 	}
@@ -52,7 +52,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	@Override
 	public void disable(OsmandApplication app) {
 		super.disable(app);
-		if(app.getSettings().RENDERER.get().equals(RendererRegistry.NAUTICAL_RENDER)) {
+		if(app.getSettings().RENDERER.get().equals(RendererRegistry.TOURING_VIEW)) {
 			app.getSettings().RENDERER.set(previousRenderer);
 		}
 	}

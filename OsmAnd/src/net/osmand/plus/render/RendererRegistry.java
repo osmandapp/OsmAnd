@@ -24,9 +24,9 @@ public class RendererRegistry {
 	private final static Log log = PlatformUtil.getLog(RendererRegistry.class);
 	
 	public final static String DEFAULT_RENDER = "OsmAnd";  //$NON-NLS-1$
+	public final static String TOURING_VIEW = "Touring view (contrast and details)";  //$NON-NLS-1$
+	public final static String WINTER_SKI_RENDER = "Winter and ski";  //$NON-NLS-1$
 	public final static String NAUTICAL_RENDER = "Nautical";  //$NON-NLS-1$
-
-	public static final String WINTER_SKI_RENDER = "Winter and ski";
 	
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
@@ -44,8 +44,8 @@ public class RendererRegistry {
 	
 	public RendererRegistry(){
 		internalRenderers.put(DEFAULT_RENDER, "default.render.xml");
+		internalRenderers.put("TOURING_VIEW", "Touring-view_(more-contrast-and-details)" +".render.xml");
 		internalRenderers.put("UniRS", "UniRS" + ".render.xml");
-		internalRenderers.put("Touring view (contrast and details)", "Touring-view_(more-contrast-and-details)" +".render.xml");
 		internalRenderers.put("LightRS", "LightRS" + ".render.xml");
 		internalRenderers.put(NAUTICAL_RENDER, "nautical" + ".render.xml");
 		internalRenderers.put(WINTER_SKI_RENDER, "skimap" + ".render.xml");
