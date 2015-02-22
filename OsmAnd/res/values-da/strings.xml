@@ -51,8 +51,8 @@
     <string name="audionotes_plugin_name">Audio-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">Eksterne udvidelse (hentes separat) som muliggør at hente offline højdekurver og relief (\'Indstillinger\' → \'Administrer kortfiler\' → \'Hent\' → Vælg den ønskede korttype).Disse kan vises i kombination med OsmAnd offline kort.</string>
-    <string name="srtm_plugin_name">Højdekurver</string>
+    <string name="srtm_plugin_description">Ekstern udvidelse (hentes separat) som muliggør at hente offline højdekurver og relief (\'Indstillinger\' → \'Administrer kortfiler\' → \'Hent\' → Vælg den ønskede korttype). Disse kan vises i kombination med OsmAnd offline kort.</string>
+    <string name="srtm_plugin_name">Højdekurver (ekstern udvidelse)</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
     <string name="download_srtm_maps">Højdekurver</string>
@@ -303,7 +303,7 @@
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkeringssted</string>
 	<string name="osmand_parking_plugin_description">Ekstern udvidelse (hentes separat) gør det muligt at huske placeringen af den parkerede bil.</string>
-	<string name="osmand_parking_plugin_name">Parkeringsplads</string>
+	<string name="osmand_parking_plugin_name">Parkeringsposition (ekstern udvidelse)</string>
 	<string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
 	<string name="context_menu_item_delete_parking_point">Slet en parkeringsmarkør</string>
 	<string name="gpxup_public">Offentligt</string>
