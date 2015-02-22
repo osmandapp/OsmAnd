@@ -833,8 +833,8 @@
   <string name="map_settings">- Térképbeállítások</string>
   <string name="map_settings_descr">Térképmegjelenítés beállításai</string>
   <string name="osmand_rastermaps_plugin_description">Internetes és letöltött raszteres térképek alap, vagy rátét / alátét térképként használatához tartozó beállítások megjelenítése. A térképeket előre is el lehet készíteni és bemásolni az OsmAnd könyvárába.</string>
-  <string name="osmand_background_plugin_description">Beállítások útvonal felvételéhez vagy a navigációhoz energiatakarékos üzemmódban (kikapcsolt képernyővel) úgy, hogy bizonyos időközönként felébreszti a GPS eszközt és felveszi az aktuális pozíciót az útvonalhoz.</string>
-  <string name="osmand_accessibility_description">Akadálymentesítési beállítások elérését teszi lehetővé.</string>
+  <string name="osmand_background_plugin_description">Megjeleníti az útvonal követéséhez és a navigációhoz engedélyezett beállításokat alvó üzemmódban (kikapcsolt képernyővel) úgy, hogy bizonyos időközönként felébreszti a GPS eszközt.</string>
+  <string name="osmand_accessibility_description">Megjeleníti a speciális akadálymentesítési lehetőségek beállításait.</string>
   <string name="extra_settings">Haladó beállítások</string>
   <string name="osmand_monitoring_description">Az útvonal GPX fájlba való felvételét vagy webes alkalmazással való követést lehetővé tevő beállítások megjelenítése.</string>
   <string name="osmand_extra_settings_description">Kibővített térképbeállítások és pár eszközre jellemző beállítás megjelenítése.</string>
@@ -844,7 +844,7 @@
   <string name="prefs_plugins_descr">A bővítmények további funkciókkal és beállításokkal bővítik az alkalmazást</string>
   <string name="prefs_plugins">Bővítménykezelő</string>
   <string name="tip_recent_changes_0_8_0_t">"A 0.8.0 kiadás változásai:\n\t- *Beépülők*\n\t - Egyes funkciók csoportosítva engedélyezhetők és letilthatók a Bővítménykezelőben. Engedélyezhetsz online térképforrásokat, útvonalrögzítést, sok egyéb új és korábban is meglévő eszközt.\n\t- *Új offline térképadat formátum*\n\t - A térképrenderelés gyorsabb és pontosabb lett (a partvonalak hibája javításra került).\n\t - Az offline térképadatokat újra le kell töltened (a régi adatok nem támogatottak).\n\t- *Offline útvonaltervezés*\n\t - Az offline útvonaltervező sokkal gyorsabb lett\n\t- *Felhasználói élmény*\n\t - A felhasználói felület több helyen is csinosodott "</string>
-  <string name="osm_editing_plugin_description">Beállítások kezelése OSM POI objektumok gyűjtéséhez / módosításához, OSM hibajelzések készítéséhez, és felvett GPX fájlok feltöltéséhez. (OSM felhasználói név szükséges.)</string>
+  <string name="osm_editing_plugin_description">Megjeleníti az OSM hozzájárulásokhoz szükséges beállításokat, úgymint OSM POI objektumok létrehozása / módosítása, OSM hibák nyitása / hozzászólások írása, illetve a rögzített GPX fájlok közreadása (OSM hitelesítési adatokat igényel).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektoros térképek gyorsabban rajzolódnak. Nem minden eszközön működik.</string>
   
   <string name="play_commands_of_currently_selected_voice">Hangutasítások kimondása a kiválasztott hanggal</string>
@@ -896,8 +896,8 @@
   <string name="osmand_parking_pm">du.</string>
   <string name="osmand_parking_am">de.</string>
   <string name="osmand_parking_position_name">Parkolási pont</string>
-  <string name="osmand_parking_plugin_description">A bővítmény segítségével feljegyezheted, hogy hol parkoltad le az autódat.</string>
-  <string name="osmand_parking_plugin_name">Parkolási Hely Bővítmény</string>
+  <string name="osmand_parking_plugin_description">Külső bővítmény (különálló letöltés), amely lehetővé teszi annak megjegyzését, hogy hol parkoltad le az autódat.</string>
+  <string name="osmand_parking_plugin_name">Parkolási hely (külső bővítmény)</string>
   <string name="context_menu_item_add_parking_point">Megjelölés parkolási helyként</string>
   <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
   <string name="starting_point_too_far">A kezdőpont közelében nem található út.</string>
@@ -1080,7 +1080,7 @@
     <string name="rendering_attr_noAdminboundaries_name">Határvonalak elrejtése</string>
 	<string name="rendering_attr_noAdminboundaries_description">Nem jeleníti meg az adminisztratív határokat 5-9 szinten</string>
 	<string name="download_srtm_maps">Szintvonal térképek</string>
-    <string name="srtm_plugin_name">Szintvonal bővítmény</string>
+    <string name="srtm_plugin_name">Szintvonalak (külső bővítmény)</string>
     <string name="index_srtm_ele">Szintvonalak</string>
     <string name="index_srtm_parts">darab</string>
     <string name="download_select_map_types">Egyéb térképek</string>
@@ -1117,7 +1117,7 @@
     
     
     <string name="map_widget_distancemeasurement">Távolságmérés</string>
-    <string name="audionotes_plugin_description">Hangjegyzetek készítése utazás közben</string>
+    <string name="audionotes_plugin_description">Megjelenít egy gombot az utazás közben történő hang- és videojegyzetek készítéséhez</string>
     <string name="av_def_action_video">Videofelvétel</string>
     <string name="av_def_action_audio">Hangfelvétel</string>
     <string name="av_video_format_descr">Válassz videó kimeneti formátumot</string>
@@ -1227,7 +1227,7 @@
     <string name="gpx_file_name">GPX fájlnév</string>
     <string name="gpx_saved_sucessfully">GPX fájl sikeresen elmentve ide: {0}</string>
     <string name="osmand_distance_planning_plugin_description">A pontok közti távolság méréséhez készíts egy útvonalat. Nyiss meg egy meglévő GPX fájlt szerkesztésre és mentsd el. Használhatod GPX alapú útvonaltervezésre is.</string>
-    <string name="osmand_distance_planning_plugin_name">Távolságkalkulátor &amp; Tervező eszköz</string>
+    <string name="osmand_distance_planning_plugin_name">Távolságszámító és tervezőeszköz</string>
     <string name="use_distance_measurement_help">* Pont lerakásához koppints.\n * Nyomd meg hosszan a térképet az előző pont törléséhez.\n * Nyomd meg hosszan a pontot leírás csatolásához és megtekintéséhez.\n * További műveletekért kattints a vezérlőgombra.</string>
     <string name="default_buttons_do_not_show_again">Ne mutasd újra</string>
     <string name="distance_measurement_start_editing">Szerkesztés indítása</string>
@@ -1469,9 +1469,9 @@
     <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal számítása az első és utolsó útszakaszra</string>
     <string name="osmo_settings_uuid">Egyedi eszközazonosító</string>
     <string name="osmo_settings_descr">Monitorozási beállítások és személyes monitorozási csatorna</string>
-    <string name="osmo_plugin_description">"OpenStreetMap – fejlett live monitoring sok funkcióval (lásd: http://osmo.mobi). Kövess más eszközöket, vagy követtesd magad. Készíts névtelen csoportokat, osszátok meg egymás helyzetét és kommunikáljatok. Különféle beállítások munkamenet és állandó követéshez. A névtelen csoportokba csak taglétszámban és időben korlátozottak. Teljes funkcionalitású csoportokat a weboldalon lehet létrehozni, regisztráció után. "</string>
-    <string name="osmo_plugin_name">OsMo (Fejlett Live Monitoring)</string>
-    <string name="osmo_settings">OpenStreetMap Monitoring</string>
+    <string name="osmo_plugin_description">"Megjeleníti a speciális valósidejű OsMo megfigyeléshez használandó beállításokat (lásd: http://osmo.mobi). Kövess más eszközöket, vagy követtesd magad. Készíts névtelen csoportokat, osszátok meg egymás helyzetét és kommunikáljatok. Különféle beállítások munkamenet és állandó követéshez. A névtelen csoportokba csak taglétszámban és időben korlátozottak. Teljes funkcionalitású csoportokat a weboldalon lehet létrehozni, regisztráció után. "</string>
+    <string name="osmo_plugin_name">OsMo megfigyelés</string>
+    <string name="osmo_settings">OsMo megfigyelés</string>
    	<string name="always_center_position_on_map">Pozíció megjelenítése mindig középen</string>
     <string name="voice_pref_title">Hang</string>
     <string name="misc_pref_title">Egyebek</string>
@@ -1708,7 +1708,7 @@
     <string name="rendering_value_bicycle_name">Kerékpár</string>
     <string name="rendering_value_pedestrian_name">Gyalogos</string>
     <string name="record_plugin_description">Rögzíti az útvonalaidat egy kattintással a térkép képernyőn. Megjeleníti az útvonal GPX-fájlba mentésének és online webszolgáltatásra küldésének a beállításait.</string>
-    <string name="record_plugin_name">Útvonalaid rögzítése</string>
+    <string name="record_plugin_name">Útvonal rögzítése</string>
     <string name="int_hour">ó</string>
     <string name="duration">Időtartam</string>
     <string name="distance">Távolság</string>
@@ -1844,8 +1844,8 @@
 	<string name="plugin_install_needs_network">Internetkapcsolat szükséges a bővítmény telepítéséhez.</string>
 	<string name="get_plugin">Beszerzés</string>
 <string name="version_settings">Összeállítások</string>
-    <string name="plugin_ski_name">Sítérképek</string>
-    <string name="plugin_nautical_name">Hajózási térképek</string>
+    <string name="plugin_ski_name">Sítérkép nézet</string>
+    <string name="plugin_nautical_name">Hajózási térkép nézet</string>
     <string name="world_ski_missing">A sítérképek megjelenítése érdekében a speciális kapcsolat nélküli térkép letöltése szükséges</string>
     <string name="nautical_maps_missing">A hajózási térképek megjelenítése érdekében a speciális kapcsolat nélküli térkép letöltése szükséges</string>
 	<string name="device_memory">Eszköz memóriája</string>
@@ -1862,4 +1862,6 @@
 	<string name="share_note">Jegyzet megosztása</string>
 	<string name="rename_recording">Felvétel átnevezése</string>
 	<string name="export">Exportálás</string>
+	<string name="plugin_touringview_name">Túratérkép nézet</string>
+
 	</resources>
