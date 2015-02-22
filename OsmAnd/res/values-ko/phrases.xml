@@ -59,7 +59,7 @@
 	<string name="poi_interior_decoration_shop">실내 장식 가게</string>
 	<string name="poi_jewelry_shop">보석 상점</string>
 	<string name="poi_kiosk">키오스크</string>
-	<string name="poi_kitchen_shop">주방용품</string>
+	<string name="poi_kitchen_shop">부엌 가구</string>
 	<string name="poi_mobile_phone_shop">휴대 전화 가게</string>
 	<string name="poi_motorcycle_shop">오토바이 가게</string>
 	<string name="poi_musical_instrument_shop">악기</string>
@@ -279,7 +279,7 @@
 	<string name="poi_telecommunication_office">원거리 통신 사무실</string>
 	<string name="poi_ngo">NGO</string>
 	<string name="poi_town_hall">타운 홀</string>
-	<string name="poi_employment_agency">Employement 사무실</string>
+	<string name="poi_employment_agency">Employment 사무실</string>
 	<string name="poi_research_office">연구 사무실</string>
 	<string name="poi_it_office">IT 사무실</string>
 	<string name="poi_newspaper_office">신문 사무실</string>
