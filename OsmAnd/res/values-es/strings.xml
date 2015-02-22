@@ -1935,4 +1935,6 @@
 	<string name="audio">Audio</string>
 	<string name="video">Vídeo</string>
 	<string name="photo">Foto</string>
+	<string name="plugin_nautical_descr1">"Activando esta vista cambia el estilo de mapa a Náutico, mostrando así toda   marcas de navegación y símbolos gráficos náuticos."</string>
+	<string name="plugin_nautical_descr2">Un archivo de mapa que contiene todos los símbolos náuticos a nivel mundial está disponible como una descarga única llamada \'Balizas mundiales\'.</string>
 	</resources>
