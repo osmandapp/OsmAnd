@@ -47,7 +47,7 @@
     <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering ...\' for at tildele en note til den angivne placering</string>
     <string name="monitoring_control_stop">Stop</string>
     <string name="map_widget_audionotes">Audionoter</string>
-    <string name="audionotes_plugin_description">Optag audio-/videonoter under turen</string>
+    <string name="audionotes_plugin_description">Viser knappen til at optage audio-/videonoter under turen</string>
     <string name="audionotes_plugin_name">Audio-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
@@ -352,7 +352,7 @@
 	<string name="local_indexes_cat_map">Offlinekort (vektor)</string>
 	
 	<string name="index_settings_descr">Hent og administrer offline kortfiler gemt på enheden</string>
-	<string name="map_online_plugin_is_not_installed">Aktiver onlinekort udvidelse for at vælge andre kortkilder</string>
+	<string name="map_online_plugin_is_not_installed">Aktiver onlinekort udvidelsen for at vælge andre kortkilder</string>
 	<string name="map_online_data">Online- og delkort</string>
 	<string name="map_online_data_descr">Brug onlinekort (hent og gem midlertidig delkort på SD-kort)</string>
 	<string name="online_map_settings">Onlinekort</string>
@@ -1554,7 +1554,7 @@
 	<string name="navigation_intent_invalid">Ugyldigt format: %s</string>
 <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
-    <string name="osmo_plugin_description">"OpenStreetMap - avanceret live overvågning, se http://osmo.mobi. Spor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing. Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator. Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem. "</string>
+    <string name="osmo_plugin_description">"Viser indstillingerne til at bruge OpenStreetMap - avanceret live overvågning, se http://osmo.mobi. Spor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing. Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator. Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem. "</string>
     <string name="osmo_plugin_name">OsMo (avanceret live overvågning)</string>
     <string name="osmo_settings">OpenStreetMap overvågning</string>
    	<string name="keep_informing_never">Kun manuelt (tryk på pilen)</string>
@@ -1780,7 +1780,7 @@
     <string name="duration">Varighed</string>
     <string name="int_hour">t</string>
     <string name="record_plugin_name">Optag dine ture</string>
-    <string name="record_plugin_description">Gem dine spor via et tryk på en knap på skærmen. Vis indstillinger til optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
+    <string name="record_plugin_description">"Aktiverer funktionen for at gemme  dine spor via et tryk på en knap på skærmen og viser indstillinger til optagelse af dine ture til lokale GPX-filer eller til en online webtjeneste."</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus-, shuttlebusruter</string>
 	<string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
 	<string name="save_track_interval_globally">Logningsinterval</string>
