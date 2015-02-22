@@ -363,14 +363,14 @@
 	<string name="osmand_accessibility_description">Vis indstillinger for specielle tilgængelighedsfunktioner.</string>
 	<string name="extra_settings">Avancerede indstillinger</string>
 	<string name="osmand_monitoring_description">Vis knappen og indstillinger som muliggør optagelse af dine ture til en lokal GPX-fil eller til en online webtjeneste.</string>
-	<string name="osmand_rastermaps_plugin_description">Vis indstillinger til at konfigurere en række online eller cachelagrede delkort som basiskort eller som over-/ underlejringskort. Disse kort kan også fremstilles offline og kopieres til OsmAnd datamappen.</string>
+	<string name="osmand_rastermaps_plugin_description">Viser indstillinger til at konfigurere en række online eller cachelagrede delkort som basiskort eller som over-/ underlejringskort. Disse kort kan også fremstilles offline og kopieres til OsmAnd datamappen.</string>
 	<string name="osmand_extra_settings_description">Vis indstillinger for avanceret kortkonfiguration (som at øge kortdetaljer) og nogle enhedsspecifikke indstillinger.</string>
 	<string name="osmand_development_plugin_description">Viser indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller optegningsydeevne indikation.</string>
 	<string name="plugins_screen">Udvidelser</string>
 	<string name="select_plugin_to_activate">Tryk på en udvidelse for at aktivere eller deaktivere den. (Genstart af OsmAnd kan være nødvendig.)</string>
 	<string name="prefs_plugins_descr">Udvidelser aktiverer avancerede indstillinger og ekstra funktionalitet</string>
 	<string name="prefs_plugins">Udvidelser</string>
-	<string name="osm_editing_plugin_description">Vis indstillinger, der kræves for OSM tilbagemelding, som f.eks. at indsamle/ændre OSM interessepunkter (IP), åbne/kommentere OSM fejl, og bidrage med optagede GPX-filer (kræver OSM legitimationsoplysninger).</string>
+	<string name="osm_editing_plugin_description">Viser indstillinger, der kræves for OSM bidrag, som f.eks. at oprette / redigere OSM interessepunkter (IP), åbne/kommentere OSM fejl, og bidrage med optagede GPX-filer (kræver OSM legitimationsoplysninger).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorkort vises sandsynligvis hurtigere. Fungerer muligvis ikke godt på nogle enheder.</string>
 	<string name="play_commands_of_currently_selected_voice">Afspil kommandoer med den valgte stemme</string>
 	<string name="debugging_and_development">OsmAnd udvikling</string>
@@ -1910,7 +1910,7 @@
 	<string name="disable_plugin2">Deaktiver</string>
 	<string name="get_plugin">Hent</string>
 <string name="plugin_ski_name">Skikort</string>
-    <string name="plugin_nautical_name">Søkort</string>
+    <string name="plugin_nautical_name">Nautisk kortvisning</string>
     <string name="world_ski_missing">For at vise skikort, skal det særlige offline kort hentes</string>
     <string name="nautical_maps_missing">For at vise søkort, skal det særlige offline kort hentes</string>
 	<string name="rendering_attr_pisteGrooming_name">Pistepreparering</string>
