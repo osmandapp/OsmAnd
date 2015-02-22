@@ -150,7 +150,7 @@
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">停車地點</string>
 	<string name="osmand_parking_plugin_description">該外掛元件可儲存您的愛車停車地點。</string>
-	<string name="osmand_parking_plugin_name">停車地點外掛元件</string>
+	<string name="osmand_parking_plugin_name">停車地點（外掛元件）</string>
 	<string name="context_menu_item_add_parking_point">標記為停車地點</string>
 	<string name="context_menu_item_delete_parking_point">刪除停車標記</string>
 	<string name="gpxup_public">公用的</string>
@@ -204,9 +204,9 @@
 	<string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在休眠模式下(螢幕關閉)顯示設定以啟用追蹤與導航。</string>
 	<string name="osmand_accessibility_description">顯示專用的無障礙功能設定。</string>
 	<string name="extra_settings">進階設定</string>
-	<string name="osmand_monitoring_description">顯示設定，便於記錄您到當地旅程的 GPX 檔案或在線上使用網站的服務...</string>
+	<string name="osmand_monitoring_description">顯示按鈕和設定，便於記錄您到當地旅程的 GPX 檔案或在線上網站的服務...</string>
 	<string name="osmand_extra_settings_description">顯示進階的地圖組態(比如增加地圖細節)和一些裝置的詳情。</string>
-	<string name="osmand_development_plugin_description">顯示開發與除錯功能的設定，如導航模擬或繪製顯示效能。</string>
+	<string name="osmand_development_plugin_description">顯示開發與除錯功能的設定，如導航模擬或繪製效能表示。</string>
 	<string name="plugins_screen">外掛元件管理</string>
 	<string name="select_plugin_to_activate">點觸外掛元件來啟用或停用。(可能需要重新啟動 OsmAnd。)</string>
 	<string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能</string>
@@ -999,7 +999,7 @@
     <string name="plugin_distance_point_ele">標高</string>
     <string name="gpx_file_name">GPX 檔案名稱</string>
     <string name="gpx_saved_sucessfully">GPX 檔案已完全成功儲存到{0}</string>
-    <string name="osmand_distance_planning_plugin_description">建立測量標點之間的距離路徑（或是利用/修改現有的 GPX 檔案）。另存為 GPX，可以用來規劃 GPX 路線。</string>
+    <string name="osmand_distance_planning_plugin_description">啟動小工具以允許在地圖上使用點觸建立路徑（或是利用/修改現有的 GPX 檔案）。結果可以存為 GPX，這個可以用來規劃 GPX 路線。</string>
     <string name="osmand_distance_planning_plugin_name">距離計算器和規劃工具</string>
     <string name="local_osm_changes_backup_failed">備份 OSM 的變更失敗</string>
     <string name="local_osm_changes_backup">備份 OSM 的變更</string>
@@ -1120,11 +1120,11 @@
     <string name="map_widget_distancemeasurement">測量距離</string>
     <string name="monitoring_control_stop">停止</string>
     <string name="map_widget_audionotes">音訊注解</string>
-    <string name="audionotes_plugin_description">在旅途中錄取音訊/視訊注解</string>
+    <string name="audionotes_plugin_description">顯示按鈕以在旅程中記錄音訊/視訊等注解</string>
     <string name="audionotes_plugin_name">音訊/視訊注解</string>
     <string name="index_srtm_parts">部件</string>
     <string name="index_srtm_ele">等高線</string>
-    <string name="srtm_plugin_name">等高線外掛元件</string>
+    <string name="srtm_plugin_name">等高線（外掛元件）</string>
     <string name="download_select_map_types">其它地圖</string>
     <string name="download_roads_only_item">僅道路</string>
     <string name="download_srtm_maps">等高線</string>
@@ -1543,10 +1543,10 @@
 	<string name="share_route_subject">藉由 OsmAnd 分享路線</string>
 	<string name="navigation_intent_invalid">無效的格式：%s</string>
 <string name="osmo_settings_uuid">專有的裝置 ID</string>
-    <string name="osmo_plugin_name">OsMo (進階即時監視)</string>
-    <string name="osmo_settings">OpenStreetMap 監控</string>
+    <string name="osmo_plugin_name">OsMo (監視)</string>
+    <string name="osmo_settings">OsMo 監控</string>
    	<string name="osmo_settings_descr">組態監控設定值和安裝個人監控頻道</string>
-    <string name="osmo_plugin_description">"OpenStreetMap 進階即時監控，跟蹤其它裝置並進行追蹤，請參閱 http://osmo.mobi。建立匿名群組，分享彼此的位置和交流。它具有各種設定用於連線階段追蹤或持續的追蹤。匿名群組是有限制天數和一些功能，也就是沒有遠端控制和群組管理員。完整的功能需在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
+    <string name="osmo_plugin_description">"OsMo 進階即時監控，跟蹤其它裝置並進行追蹤，請參閱 http://osmo.mobi。建立匿名群組，分享彼此的位置和交流。它具有各種設定用於連線階段追蹤或持續的追蹤。匿名群組是有限制天數和一些功能，也就是沒有遠端控制和群組管理員。完整的功能需在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
     <string name="keep_informing_never">只有手動（輕點箭頭）</string>
     <string name="keep_informing_descr">按照定期間隔重新通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
@@ -1768,8 +1768,8 @@
     <string name="speak_poi">通報附近 POI</string>
     <string name="flat_list_waypoints">全部</string>
     <string name="index_tours">旅遊</string>
-    <string name="record_plugin_description">在地圖螢幕上透過點觸按鈕儲存您的軌跡。顯示設定，便於記錄您到當地旅程的 GPX 檔案或在線上使用網站的服務。</string>
-    <string name="record_plugin_name">記錄您的行程</string>
+    <string name="record_plugin_description">在地圖螢幕上透過點觸按鈕啟動儲存您的軌跡的功能。並顯示設定，便於記錄您到當地旅程的 GPX 檔案或在線上的網站服務。</string>
+    <string name="record_plugin_name">正在記錄行程</string>
     <string name="int_hour">小時</string>
     <string name="duration">持續時間</string>
     <string name="distance">距離</string>
@@ -1901,8 +1901,8 @@
 	<string name="disable_plugin2">停用</string>
 	<string name="plugin_install_needs_network">您需要連接網際網路來安裝這個外掛程式。</string>
 	<string name="get_plugin">接收</string>
-<string name="plugin_ski_name">滑雪地圖</string>
-    <string name="plugin_nautical_name">航海地圖</string>
+<string name="plugin_ski_name">檢視滑雪地圖</string>
+    <string name="plugin_nautical_name">檢視航海地圖</string>
     <string name="world_ski_missing">要顯示滑雪地圖，需要有已下載的專用離線地圖</string>
     <string name="nautical_maps_missing">要顯示航海地圖，需要有已下載的專用離線地圖</string>
 	<string name="rendering_attr_pisteGrooming_name">滑雪道修整</string>
@@ -1919,4 +1919,6 @@
 	<string name="audio">音訊</string>
 	<string name="video">視訊</string>
 	<string name="photo">照片</string>
+	<string name="plugin_touringview_name">旅遊地圖檢視</string>
+
 	</resources>
