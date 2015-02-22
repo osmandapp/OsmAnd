@@ -24,7 +24,7 @@
         <string name="poi_art_shop">Kunsthandler</string>
         <string name="poi_baby_goods">Babyudstryr</string>
         <string name="poi_bag_shop">Taskebutik</string>
-        <string name="poi_bathroom_furnishing_shop">Badeværelsesmøbler</string>
+        <string name="poi_bathroom_furnishing_shop">Badeværelsesinventar</string>
         <string name="poi_bed_shop">Soveværelsesmøbler</string>
         <string name="poi_boutique">Modebutik</string>
         <string name="poi_carpet_shop">Tæppeforretning</string>
@@ -58,7 +58,7 @@
         <string name="poi_interior_decoration_shop">Boligindretning</string>
         <string name="poi_jewelry_shop">Smykkeforretning</string>
         <string name="poi_kiosk">Kiosk</string>
-        <string name="poi_kitchen_shop">Køkkengrej</string>
+        <string name="poi_kitchen_shop">Køkkenudstyr</string>
         <string name="poi_mobile_phone_shop">Mobiltelefoner</string>
         <string name="poi_motorcycle_shop">Motorcykler</string>
         <string name="poi_musical_instrument_shop">Musikinstrumenter</string>
