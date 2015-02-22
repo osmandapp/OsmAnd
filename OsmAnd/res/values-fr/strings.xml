@@ -1939,4 +1939,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="roads_only">Routes uniquement</string>
     <string name="rendering_attr_pisteRoutes_name">Pistes</string>
 	<string name="watch">Surveiller</string>
+	<string name="audio">Audio</string>
+	<string name="video">Vidéo</string>
+	<string name="photo">Photo</string>
+	<string name="share_note">Partager les notes</string>
+	<string name="rename_recording">Renommer l\'enregistrement</string>
+	<string name="export">Exporter</string>
 	</resources>
