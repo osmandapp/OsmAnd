@@ -1990,7 +1990,7 @@
     <string name="rendering_value_pedestrian_name">보행자</string>
     <string name="more">더 보기…</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
-    <string name="record_plugin_description">지도 화면에 하나의 버튼 터치로 경로를 저장 합니다. 로컬 GPX 파일 또는 웹 서비스를 사용하여 온라인에 경로를 기록하기 위해 설정을 보여줍니다.</string>
+    <string name="record_plugin_description">지도 화면에 하나의 버튼 터치로 경로를 저장하기 위해 기능을 활성화 합니다. 로컬 GPX 파일 또는 웹 서비스를 사용하여 온라인에 경로를 기록하기 위해 설정을 보여줍니다.</string>
     <string name="record_plugin_name">경로 기록</string>
     <string name="int_hour">h</string>
     <string name="duration">경과시간</string>
