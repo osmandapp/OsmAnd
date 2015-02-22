@@ -21,7 +21,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	private OsmandApplication app;
 	
 
-	public NauticalMapsPlugin(OsmandApplication app) {
+	public TouringViewPlugin(OsmandApplication app) {
 		this.app = app;
 	}
 	
