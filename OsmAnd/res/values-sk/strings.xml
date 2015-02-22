@@ -88,24 +88,24 @@
   <string name="bg_service_screen_lock">Zamknúť obrazovku</string>
   <string name="bg_service_screen_lock_toast">Obrazovka je uzamknutá</string>
   <string name="bg_service_interval">Nastaviť prebúdzací interval:</string>
-  <string name="map_online_plugin_is_not_installed">Povoľte zásuvný modul s online mapami na výber rozličných mapových zdrojov</string>
+  <string name="map_online_plugin_is_not_installed">Povoľte zásuvný modul Online mapy, aby bolo možné vybrať rozličné mapové zdroje</string>
   <string name="map_online_data">Online mapy (dlaždice)</string>
   <string name="map_online_data_descr">Použitie online máp (ich stiahnutie a uloženie na SD kartu)</string>
   <string name="online_map_settings">Online mapy</string>
   <string name="online_map_settings_descr">Konfigurácia online mapových zdrojov</string>
   <string name="map_settings">- Nastavenia mapy</string>
   <string name="map_settings_descr">Konfigurácia mapového zobrazenia</string>
-  <string name="osmand_rastermaps_plugin_description">Zobrazenie nastavení pre nakonfigurovanie rozličných online alebo ukladaných máp ako základnú mapu alebo ako prekrývaciu / podkladovú mapu. Tieto mapy môžu byť tiež pripravené offline a skopírované do dátového priečinka OsmAnd.</string>
-  <string name="osmand_background_plugin_description">Zobrazenie nastavení na povolenie stopovania a navigácie v režime spánku (vypnutá obrazovka) pravidelným prebúdzaním GPS zariadenia.</string>
-  <string name="osmand_accessibility_description">Zobrazenie nastavení pre špeciálne funkcie uľahčenia prístupu.</string>
+  <string name="osmand_rastermaps_plugin_description">Zobrazí nastavenia pre použitie rozličných online alebo ukladaných máp ako hlavnú mapu alebo ako prekrývaciu / podkladovú mapu. Tieto mapy môžu byť tiež pripravené offline a skopírované do dátového priečinka OsmAnd.</string>
+  <string name="osmand_background_plugin_description">Zobrazí nastavenia na povolenie stopovania a navigácie v režime spánku (vypnutá obrazovka) pravidelným prebúdzaním GPS zariadenia.</string>
+  <string name="osmand_accessibility_description">Zobrazí nastavenia pre špeciálne funkcie uľahčenia prístupu.</string>
   <string name="extra_settings">Pokročilé nastavenia</string>
-  <string name="osmand_monitoring_description">Tento modul Vám umožní zaznamenávať Vaše cesty, ukladať GPX súbory a vykonávať živé sledovanie založené na webovej službe.</string>
+  <string name="osmand_monitoring_description">Zobrazí tlačidlo a nastavenia pre zaznamenávanie vašich ciest do GPX súborov alebo na online webovú službu.</string>
   <string name="osmand_extra_settings_description">Zobrazenie nastavení pre pokročilú konfiguráciu mapy (ako zvýšenie detailov mapy) a niektoré špecifiká zariadenia.</string>
-  <string name="osmand_development_plugin_description">Zobrazenie nastavení pre funkcie vývoja a ladenia ako animovanie navigácie alebo zobrazenie výkonu vykreslovania.</string>
-  <string name="plugins_screen">Správca zásuvných modulov</string>
+  <string name="osmand_development_plugin_description">Zobrazí nastavenia pre funkcie vývoja a ladenia ako simulácia trasy alebo zobrazenie výkonu vykresľovania.</string>
+  <string name="plugins_screen">Zásuvné moduly</string>
   <string name="select_plugin_to_activate">Ťuknutím na zásuvný modul ho aktivujete. (Pre aplikovanie zmien môže byť vyžadovaný reštart.)</string>
   <string name="prefs_plugins_descr">Zásuvné moduly aktivujú pokročilé nastavenia a dodatočné funkcie</string>
-  <string name="prefs_plugins">Správca zásuvných modulov</string>
+  <string name="prefs_plugins">Zásuvné moduly</string>
   <string name="tip_recent_changes_0_8_0_t">Zmeny vo verzii 0.8.0:
 		\n\t- *Funkcia zásuvných modulov*
 		\n\t    - Väčšina funkčnosti je zoskupená podľa funkcií, ktoré môžu byť zapnuté/vypnuté v Správcovi zásuvných modulov. Môžete povoliť (online alebo uložené) zdroje mapových dlaždíc, nastavenia stopovania a mnoho iných nových a predošle existujúcich funkcií.
@@ -117,13 +117,13 @@
 		\n\t- *Použiteľnosť a grafické rozhranie*
 		\n\t    - Vylepšené v mnohých smeroch		
 	</string>
-  <string name="osm_editing_plugin_description">Zobrazenie nastavení potrebných pre spätnú väzbu pre OSM ako je zbieranie / úprava OSM POI objektov, otváranie / komentovanie OSM chýb a prispievanie zaznamenanými GPX súbormi (vyžaduje OSM prihlásenie).</string>
+  <string name="osm_editing_plugin_description">Zobrazí nastavenia potrebné pre prispievanie do OSM pomocou vytvárania / úpravy OSM objektov záujmu, otvárania / komentovania OSM chýb a prispievanie zaznamenanými GPX súbormi (vyžaduje OSM prihlásenie).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
   <string name="play_commands_of_currently_selected_voice">Prehranie povelov pre aktuálne zvolený hlas</string>
   <string name="debugging_and_development">Vývoj OsmAndu</string>
   <string name="native_rendering">Natívne vykresľovanie</string>
   <string name="test_voice_prompts">Test hlasových povelov</string>
-  <string name="switch_to_raster_map_to_see">Nie je dostupná offline vektorová mapa pre túto oblasť. Môžete ju stiahnuť v Nastaveniach (Mapové súbory), alebo prepnúť na online mapy.</string>
+  <string name="switch_to_raster_map_to_see">Nie je dostupná offline vektorová mapa pre túto oblasť. Môžete ju stiahnuť v Nastaveniach (Spravovať mapové súbory), alebo prepnúť na online mapy (je potrebné zapnúť modul pre Online mapy).</string>
   <string name="tip_recent_changes_0_7_2_t">"Zmeny vo verzii 0.7.2 :
 \n\t- Natívne vykresľovanie pre všetky zariadenia
 \n\t- Offline upravovanie POI bodov
@@ -461,12 +461,11 @@
 \n\nPo uložení potom môžete k nemu jednoducho pristupovať cez Hlavné Menu → Moje miesta. Dlhým kliknutím na obľúbený bod v zozname Obľúbené môžete k tomuto bodu navigovať, upraviť ho alebo vymazať.
 \n\nNa zobrazenie všetkých Obľúbených bodov priamo na mape môžete zapnúť vrstvu Obľúbené miesta cez Kontextové menu mapy → Zobrazenie. "</string>
   <string name="tip_osm_improve">Vylepšovanie dát v Openstreetmap</string>
-  <string name="tip_osm_improve_t">OsmAnd používa mapy založené na dátach Openstreetmap.org (OSM) a nie je navrhnutý len pre cestovanie a navigovanie, ale aj pre vylepšovanie a pomoc projektu Openstreetmap. Iba pár kliknutiami môžete jednoducho vytvoriť a nahrať nový bod záujmu (POI) alebo OSM chybu.
-		\n\nNajprv musíte povoliť modul "OSM upravovanie" v "Nastavenia" → "Správca zásuvných modulov". Potom zadať Vaše prihlasovacie údaje v "Nastavenia" → "OSM upravovanie".
-		\n\nNa pridanie nového POI použite možnosť "Vytvoriť POI" v kontextovom menu mapy. Potom môžete postupovať so zadávaním informácií o novom POI v dialógu vytvárania POI a nakoniec ho nahrať.
-		\n\nAk nájdete na mape nejakú chybu, môžete to oznámiť Openstreetmap komunite, ktorá potom môže tento problém rýchlejšie odstrániť. Na pridanie OSM chyby použite možnosť "Otvoriť OSM chybu" v kontextovom menu mapy. Potom zadajte podrobný popis problému a nakoniec ho odoslať tlačidlom "Pridať".
-		\n\nOsmAnd môže dočasne uložiť Vaše záznamy offline v zariadení (pozrite príslušné nastavenie) avšak na odoslanie Vašich nových POI a OSM chýb je potrebné pripojenie na Internet.
-	</string>
+  <string name="tip_osm_improve_t">"OsmAnd používa mapy založené na dátach Openstreetmap.org (OSM) a nie je navrhnutý len pre cestovanie a navigovanie, ale aj pre vylepšovanie a pomoc projektu Openstreetmap. Iba pár kliknutiami môžete jednoducho vytvoriť a nahrať nový bod záujmu (POI) alebo OSM chybu.
+\n\nNajprv musíte povoliť modul \"OSM upravovanie\" v Nastavenia → \"Správca zásuvných modulov\". Potom zadať Vaše prihlasovacie údaje v Nastavenia → \"OSM upravovanie\".
+\n\nNa pridanie nového POI použite možnosť \"Vytvoriť POI\" v kontextovom menu mapy. Potom môžete postupovať so zadávaním informácií o novom POI v dialógu vytvárania POI a nakoniec ho nahrať.
+\n\nAk nájdete na mape nejakú chybu, môžete to oznámiť Openstreetmap komunite, ktorá potom môže tento problém rýchlejšie odstrániť. Na pridanie OSM chyby použite možnosť \"Otvoriť OSM chybu\" v kontextovom menu mapy. Potom zadajte podrobný popis problému a nakoniec ho odoslať tlačidlom Pridať.
+\n\nOsmAnd môže dočasne uložiť Vaše záznamy offline v zariadení (pozrite príslušné nastavenie) avšak na odoslanie Vašich nových POI a OSM chýb je potrebné pripojenie na Internet. "</string>
   <string name="create_poi_link_to_osm_doc">" "<u>Online OSM</u> mapová klasifikácia s obrázkami"</string>
   <string name="error_doing_search">Prihodila sa chyba pri offline hľadaní</string>
   <string name="search_offline_geo_error">Nedá sa parsovať geo obsah: "%s"</string>
@@ -1021,8 +1020,8 @@
   <string name="osmand_parking_pm">popoludní</string>
   <string name="osmand_parking_am">dopoludnia</string>
   <string name="osmand_parking_position_name">Parkovací bod</string>
-  <string name="osmand_parking_plugin_description">Tento zás. modul umožňuje uložiť umiestnenie Vášho zaparkovaného auta.</string>
-  <string name="osmand_parking_plugin_name">Zásuvný modul parkovacieho miesta</string>
+  <string name="osmand_parking_plugin_description">Externý zásuvný modul (samostatne stiahnuteľný), ktorý umožňuje zapamätať umiestnenie vášho zaparkovaného auta.</string>
+  <string name="osmand_parking_plugin_name">Parkovacie miesto (externý zásuvný modul)</string>
   <string name="context_menu_item_add_parking_point">Označiť ako parkovacie miesto</string>
   <string name="context_menu_item_delete_parking_point">Zmazať parkovaciu značku</string>
   <string name="starting_point_too_far">Počiatočný bod je príliš ďaleko od najbližšej cesty.</string>
@@ -1083,10 +1082,9 @@
 		\n\t* "Nočný režim": vždy používať nočný režim
 		\n\t* "Svetelný senzor": režim je riadený svetelným senzorom v zariadení (iba ak je vo výbave)
 	</string>	
-	<string name="tip_map_switch_t_v2">Zdroj mapy a zobrazené vrstvy sa nastavujú pomocou "Menu" → "Zobrazenie".
-		\n\nPomocou "Zdroj mapy..." môžete vybrať predinštalované offline vektorové mapy (potrebné aj pre offline navigáciu) alebo preddefinované on-line dlaždicové mapy (potrebné aktivovať modul "Online mapy" v "Nastavenia" → "Správca zásuvných modulov") alebo mapy ručne vytvorené pomocou napr. OsmAndMapCreator na PC.
-		\n\nOsmAnd tiež podporuje vlastné zdroje máp.
-	</string>
+	<string name="tip_map_switch_t_v2">"Zdroj mapy a zobrazené vrstvy sa nastavujú pomocou Menu → Zobrazenie.
+\n\nPomocou Zdroj mapy... môžete vybrať predinštalované offline vektorové mapy (potrebné aj pre offline navigáciu) alebo preddefinované on-line dlaždicové mapy (potrebné aktivovať modul \"Online mapy\" v Nastavenia → \"Správca zásuvných modulov\") alebo mapy ručne vytvorené pomocou napr. OsmAndMapCreator na PC.
+\n\nOsmAnd tiež podporuje vlastné zdroje máp. "</string>
 	<string name="tip_app_mode_t_v2">OsmAnd podporuje rôzne (nastaviteľné) aplikačné profily pre rôzne prípady použitia.
 		\n\nProfily môžete zmeniť pomocou tlačidla profilu v ľavom dolnom rohu obrazovky mapy (ikona auto, bicykel alebo pešia) alebo pri vytváraní navigačnej trasy.
 	</string>
@@ -1127,7 +1125,7 @@
 		\n\nNa lepšie aproximácie týchto miestnych systémov sa používa referenčný systém EGM96.
 		\n\nOsmAnd zobrazí nadmorskú výšku Vašej pozície v systéme EGM96 ak si stiahnete súbor "World altitude correction" (WW15MGH.DAC) cez "Nastavenia" → "Správca mapových súborov". (Pôvodný je v http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin má starú verziu a je potrebné ju aktualizovať.</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid modul je starej verzie a je potrebné ho aktualizovať.</string>
     
     <string name="osmodroid_plugin_name">OsMoDroid zásuvný modul</string>
 	<string name="index_srtm_parts">časti</string>
@@ -1172,10 +1170,10 @@
     <string name="audionotes_location_not_defined">Umiestnenie na spojenie s poznámkou ešte nie je definované. Ak chcete priradiť poznámku k vybranému umiestneniu, použite "Použiť umiestnenie…"</string>
     <string name="monitoring_control_stop">Zastaviť</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
-    <string name="audionotes_plugin_description">Vytváranie zvukových poznámok počas cestovania</string>
+    <string name="audionotes_plugin_description">Zobrazí tlačidlo na vytváranie zvukových poznámok počas cestovania</string>
     <string name="audionotes_plugin_name">Modul pre audio/video poznámky</string>
-    <string name="srtm_plugin_description">Tento modul umožňuje sťahovanie offline vrstevníc a tieňovaní svahov ("Nastavenia" → "Správca mapových súborov" → vyberte požadovaný typ máp).</string>
-    <string name="srtm_plugin_name">Modul vrstevníc</string>
+    <string name="srtm_plugin_description">Externý doplnok (samostatne stiahnuteľný), ktorý umožňuje sťahovanie offline vrstevníc a tieňovaní svahov (Nastavenia → Správca mapových súborov → vyberte požadovaný typ máp).</string>
+    <string name="srtm_plugin_name">Vrstevnice (externý zásuvný modul)</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
     <string name="download_srtm_maps">Údaje vrstevníc</string>
     
@@ -1190,12 +1188,11 @@
     <string name="dist_control_start">Začiatok</string>
     <string name="precise_routing_mode">Precízna navigácia (vo vývoji)</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="tip_recent_changes_1_1_2_t">Zmeny vo verzii 1.1.2:
+    <string name="tip_recent_changes_1_1_2_t">"Zmeny vo verzii 1.1.2:
 \n\t* Vylepšenie zásuvného modulu pre Audio/video (fotografie s informáciami EXIF)
 \n\t* Opravená použiteľnosť a prepracovaný zásuvný modul pre vrstevnice
-\n\t* Balíky s tieňovanými rleiéfmi pre zás. modul s vrstevnicami
-\n\t* Opravy chýb (suboptimálna navigácia)
-    </string>
+\n\t* Balíky s tieňovanými reliéfmi pre zás. modul s vrstevnicami
+\n\t* Opravy chýb (suboptimálna navigácia) "</string>
     <string name="av_use_external_camera_descr">Použiť systémovú aplikáciu na zachytenie fotografie</string>
     <string name="av_use_external_camera">Použiť aplikáciu Fotoaparát</string>
     <string name="download_hillshade_item">Tieňovaný reliéf</string>
@@ -1285,7 +1282,7 @@
     <string name="intermediate_items_sort_by_distance">Zoptimalizuj</string>
     
 	
-	<string name="osmand_distance_planning_plugin_description">Vytvorenie cesty (alebo použite/upravite existujúce GPX súbory) pre meranie vzdialenosti medzi bodmi. Uložiť ako GPX, možno použiť pre plánovanie GPX trasy.</string>
+	<string name="osmand_distance_planning_plugin_description">Zapne nástroj umožňujúci vytvorenie cesty kliknutím na mapu (alebo použiť/upraviť existujúce GPX súbory) pre meranie vzdialenosti medzi bodmi. Výsledok je možné uložiť ako GPX, čo možno použiť pre plánovanie GPX trasy.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulačka vzdialenosti a plánovač cesty</string>
     <string name="use_distance_measurement_help">* Kliknutím označiť miesto.\n
     * Stlačte a podržte na mape na odstránenie predchádzajúceho bodu.\n
@@ -1551,19 +1548,18 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="animate_routing_route_not_calculated">Prosím najprv vypočítajte trasu</string>
     <string name="animate_routing_route">Simulovať pomocou vypočítanej trasy </string>
     <string name="animate_routing_gpx">Simulovať pomocou stopy GPX</string>
-    <string name="tip_recent_changes_1_2_t">Opravy v 1.2.1:
-	    \n\t*Opravený Geo Intent (Foursquare, c:geo)
-	    \n\t*Opravené trasenie obrazovky pri navigácii
-	    \n\t*Iné malé opravy
-	    \n\nZmeny v 1.2:
-		\n\t* Opravy chýb (vyladené navigovanie, vyhľadávanie, nahrávanie, hlasové pokyny, vylepšenia zobrazenia)
-		\n\t* Ľahšie nastavenie prekryvu tieňovanými svahmi (vyžaduje plugin Contour lines)
-		\n\t* Linky maps.google.com sú akceptované
-		\n\t* Nový widget (GPS info) 
-		\n\t* Podpora viacerých okien na nových zariadeniach Samsung
-		\n\t* Kalmanov filter pre kompas
-		\n\t* Podpora pre hodinky Pebble
-	</string>
+    <string name="tip_recent_changes_1_2_t">"Opravy v 1.2.1:
+\n\t*Opravený Geo Intent (Foursquare, c:geo)
+\n\t*Opravené trasenie obrazovky pri navigácii
+\n\t*Iné malé opravy
+\n\nZmeny v 1.2:
+\n\t* Opravy chýb (vyladené navigovanie, vyhľadávanie, nahrávanie, hlasové pokyny, vylepšenia zobrazenia)
+\n\t* Ľahšie nastavenie prekryvu tieňovanými svahmi (vyžaduje zásuvný modul Contour lines)
+\n\t* Linky maps.google.com sú akceptované
+\n\t* Nový widget (GPS info)
+\n\t* Podpora viacerých okien na nových zariadeniach Samsung
+\n\t* Kalmanov filter pre kompas
+\n\t* Podpora pre hodinky Pebble "</string>
     <string name="tip_navigation_t">"Pre získanie pokynov k cieľovému bodu buď podržte miesto na mape (potom kliknite na jeho popis a vyberte \"Pokyny sem\") alebo vyberte \"Pokyny sem\" po kliknutí na výsledok hľadania alebo obľúbeného bodu.
 \n\nCieľ je vyznačený ako cieľová vlajka na mape a OsmAnd zobrazí vzdialenosť k nemu a smer k nemu (oranžový trojuholník).
 \n\nMôžete zvoliť Pokyny a OsmAnd bude navigovať, podávať hlasové inštrukcie (ak sú povolené), atď. Alebo môžete zvoliť Zobraziť trasu, čo spôsobí zobrazenie statickej trasy bez navigácie a prispôsobenia vášmu pohybu.
@@ -1697,9 +1693,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="lang_cy">Welšsky (Cymraeg)</string>
 	<string name="osmo_settings_uuid">Jedinečné ID zariadenia</string>
     <string name="osmo_settings_descr">Zmeniť nastavenia monitorovania a nastaviť osobný monitorovací kanál</string>
-    <string name="osmo_plugin_description">"OpenStreetMap pokročilé sledovanie naživo, pozrite http://osmo.mobi. Ponúka možnosti sledovania iných zariadení a byť sledovaný. Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania. Anonymné skupiny sú obmedzené na počet dní a pre niektoré funkcie nie je diaľkové ovládanie ani administrátor skupiny. Plne funkčné skupiny sa vytvárajú na webstránke a sú prístupné len registrovaným používateľom. "</string>
-    <string name="osmo_plugin_name">OsMo</string>
-    <string name="osmo_settings">OpenStreetMap sledovanie</string>
+    <string name="osmo_plugin_description">"Zobrazí nastavenia pre použitie pokročilého sledovania naživo cez OsMo, pozrite http://osmo.mobi. Ponúka možnosti sledovania iných zariadení a byť sledovaný. Vytvorte anonymné skupiny, zdieľajte vzájomne polohu a komunikujte. Rôzne možnosti nastavenia krátkodobého a dlhodobého sledovania. Anonymné skupiny sú obmedzené na počet dní a pre niektoré funkcie nie je diaľkové ovládanie ani administrátor skupiny. Plne funkčné skupiny sa vytvárajú na webstránke a sú prístupné len registrovaným používateľom. "</string>
+    <string name="osmo_plugin_name">OsMo sledovanie</string>
+    <string name="osmo_settings">OsMo sledovanie</string>
    	<string name="keep_informing_never">Len ručne (použiť šípku)</string>
     <string name="keep_informing_descr">Opakuj navigačné pokyny v pravidelných intervaloch</string>
     <string name="keep_informing">Opakuj navigačné pokyny</string>
@@ -1927,8 +1923,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="speak_poi">Oznamovať blízke body záujmu</string>
     <string name="flat_list_waypoints">Všetky</string>
     <string name="index_tours">Výlety</string>
-    <string name="record_plugin_description">Uložte vaše stopy jedným stlačením tlačidla na mape. Zobrazte nastavenia pre zaznamenanie výletov do lokálneho GPX súboru alebo na webovú službu.</string>
-    <string name="record_plugin_name">Zaznamenajte vaše výlety</string>
+    <string name="record_plugin_description">Zapne možnosť uloženia vašich stôp jedným stlačením tlačidla na mape. Taktiež zobrazí nastavenia pre zaznamenanie výletov do lokálneho GPX súboru alebo na online webovú službu.</string>
+    <string name="record_plugin_name">Zaznamenávanie výletov</string>
     <string name="int_hour">hod</string>
     <string name="duration">Trvanie</string>
     <string name="distance">Vzdialenosť</string>
@@ -2056,12 +2052,12 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 <string name="edit_group">Upraviť skupinu</string>
     <string name="plugin_description_title">Popis</string>
 	<string name="plugin_settings_button_caption">Nastavenia</string>
-<string name="plugin_install_needs_network">Pre nainštalovanie tohto doplnku potrebujete pripojenie na Internet.</string>
+<string name="plugin_install_needs_network">Pre nainštalovanie tohto zásuvného modulu potrebujete pripojenie na Internet.</string>
 <string name="enable_plugin2">Zapnúť</string>
 	<string name="disable_plugin2">Vypnúť</string>
 	<string name="get_plugin">Získať</string>
-<string name="plugin_ski_name">Lyžiarske mapy</string>
-    <string name="plugin_nautical_name">Námorné mapy</string>
+<string name="plugin_ski_name">Lyžiarsky mapový pohľad</string>
+    <string name="plugin_nautical_name">Námorný mapový pohľad</string>
     <string name="world_ski_missing">Pre zobrazenie lyžiarskym máp je potrebné stiahnuť samostatnú lyžiarsku mapu pre offline použitie</string>
     <string name="nautical_maps_missing">Pre zobrazenie námorných máp je potrebné stiahnuť samostatnú námornú mapu pre offline použitie</string>
 	<string name="rendering_attr_pisteGrooming_name">Úprava zjazdovky</string>
@@ -2077,4 +2073,18 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="online_map">Online mapa</string>
 	<string name="roads_only">Iba cesty</string>
     <string name="export">Exportovať</string>
+	<string name="plugin_nautical_descr1">Aktivovaním tohto pohľadu sa zobrazí námorná mapa zobrazujúca všetky námorné značky a symboly.</string>
+	<string name="plugin_nautical_descr2">Mapový súbor obsahujúci námorné symboly pre celý svet je dostupný pod názvom \"Svetové námorné značky\".</string>
+	<string name="plugin_nautical_descr3">Tento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
+
+	<string name="plugin_ski_descr1">Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Winter and ski\", ktorý zobrazuje krajinné útvary v zimných podmienkach.</string>
+	<string name="plugin_ski_descr2">Mapový súbor obsahujúci všetky lyžiarske svahy a bežecké trate je dostupný na stiahnutie pod názvom \"Svetová lyžiarska mapa\".</string>
+	<string name="plugin_ski_descr3">Tento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
+
+	<string name="plugin_touringview_descr4">Tento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
+	<string name="plugin_touringview_descr1">Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Touring view\", ktorý obsahuje viac detailov pre cestovateľov a profesionálnych vodičov.</string>
+	<string name="plugin_touringview_descr2">Tento pohľad poskytuje vo všetkých priblíženiach mapy maximum cestovných detailov (napr. cesty, chodníky a orientačné značky). Taktiež zobrazuje typy ciest v jednoznačne odlišných farbách, čo je užitočné napríklad pre veľké vozidlá.</string>
+	<string name="plugin_touringview_descr3">Nie je potrebné stiahnuť samostatný súbor, tento pohľad používa štandardné mapové súbory.</string>
+	<string name="plugin_touringview_name">Cestovný mapový pohľad (Touring view)</string>
+
 	</resources>
