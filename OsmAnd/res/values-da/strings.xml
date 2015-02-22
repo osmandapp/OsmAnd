@@ -302,7 +302,7 @@
 	<string name="osmand_parking_position_description_add">Afhent bilen på:</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkeringssted</string>
-	<string name="osmand_parking_plugin_description">Gør det muligt at gemme placeringen af den parkerede bil.</string>
+	<string name="osmand_parking_plugin_description">Ekstern udvidelse (hentes separat) gør det muligt at huske placeringen af den parkerede bil.</string>
 	<string name="osmand_parking_plugin_name">Parkeringsplads</string>
 	<string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
 	<string name="context_menu_item_delete_parking_point">Slet en parkeringsmarkør</string>
