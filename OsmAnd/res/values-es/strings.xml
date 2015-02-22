@@ -1932,4 +1932,7 @@
 	<string name="notes">Notas</string>
 	<string name="online_map">Mapa en línea</string>
 	<string name="export">Exportar</string>
+	<string name="audio">Audio</string>
+	<string name="video">Vídeo</string>
+	<string name="photo">Foto</string>
 	</resources>
