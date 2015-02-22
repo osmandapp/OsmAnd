@@ -1554,9 +1554,9 @@
 	<string name="navigation_intent_invalid">Ugyldigt format: %s</string>
 <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
-    <string name="osmo_plugin_description">"Viser indstillingerne til at bruge OpenStreetMap - avanceret live overvågning, se http://osmo.mobi. Spor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing. Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator. Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem. "</string>
-    <string name="osmo_plugin_name">OsMo (avanceret live overvågning)</string>
-    <string name="osmo_settings">OpenStreetMap overvågning</string>
+    <string name="osmo_plugin_description">"Viser indstillingerne til at bruge OsMo avanceret live overvågning, se http://osmo.mobi. Spor andre enheder og bliv selv sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing. Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator. Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem. "</string>
+    <string name="osmo_plugin_name">OsMo overvågning</string>
+    <string name="osmo_settings">OsMo overvågning</string>
    	<string name="keep_informing_never">Kun manuelt (tryk på pilen)</string>
     <string name="keep_informing_descr">Gentag navigationsinstruktioner med jævne mellemrum</string>
     <string name="keep_informing">Gentag navigationsinstruktioner</string>
@@ -1779,7 +1779,7 @@
     <string name="distance">Afstand</string>
     <string name="duration">Varighed</string>
     <string name="int_hour">t</string>
-    <string name="record_plugin_name">Optag dine ture</string>
+    <string name="record_plugin_name">Optag ture</string>
     <string name="record_plugin_description">"Aktiverer funktionen for at gemme  dine spor via et tryk på en knap på skærmen og viser indstillinger til optagelse af dine ture til lokale GPX-filer eller til en online webtjeneste."</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus-, shuttlebusruter</string>
 	<string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
