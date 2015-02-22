@@ -15,13 +15,14 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.touringview.TouringViewPlugin;
+import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmo.OsMoPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepointsnavigation.RoutePointsPlugin;
-import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -95,13 +96,15 @@ public abstract class OsmandPlugin {
 		allPlugins.add(rasterMapsPlugin);
 		allPlugins.add(new OsmandMonitoringPlugin(app));
 		allPlugins.add(new OsMoPlugin(app));
-		
 		checkMarketPlugin(app, new SRTMPlugin(app), true, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT);
-		checkMarketPlugin(app, new ParkingPositionPlugin(app), false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
-		allPlugins.add(new AudioVideoNotesPlugin(app));
-		checkMarketPlugin(app, new RoutePointsPlugin(app), false /*FIXME*/, RoutePointsPlugin.ROUTE_POINTS_PLUGIN_COMPONENT, null);
+
+		checkMarketPlugin(app, new TouringViewPlugin(app), false, TouringViewPlugin.COMPONENT, null);
 		checkMarketPlugin(app, new NauticalMapsPlugin(app), false, NauticalMapsPlugin.COMPONENT, null);
 		checkMarketPlugin(app, new SkiMapsPlugin(app), false, SkiMapsPlugin.COMPONENT, null);
+
+		checkMarketPlugin(app, new RoutePointsPlugin(app), false /*FIXME*/, RoutePointsPlugin.ROUTE_POINTS_PLUGIN_COMPONENT, null);
+		allPlugins.add(new AudioVideoNotesPlugin(app));
+		checkMarketPlugin(app, new ParkingPositionPlugin(app), false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
 		allPlugins.add(new DistanceCalculatorPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
