@@ -51,7 +51,7 @@
     <string name="audionotes_plugin_name">Audio-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">Muliggør at hente offline højdekurver og relief (\'Indstillinger\' → \'Administrer kortfiler\' → \'Hent\' → Vælg den ønskede korttype).</string>
+    <string name="srtm_plugin_description">Eksterne udvidelse (hentes separat) som muliggør at hente offline højdekurver og relief (\'Indstillinger\' → \'Administrer kortfiler\' → \'Hent\' → Vælg den ønskede korttype).Disse kan vises i kombination med OsmAnd offline kort.</string>
     <string name="srtm_plugin_name">Højdekurver</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
