@@ -3,8 +3,8 @@
     <string name="rp_current_route">Current route:</string>
     <string name="route_points_no_gpx">No route</string>
     <string name="rp_current_route_not_available">Please select a route</string>
-    <string name="route_plugin_name">Navigate Route Plugin</string>
-    <string name="route_plugin_descr">Navigate predefined GPX route with multiple points</string>
+    <string name="route_plugin_name">Navigate predefined tours</string>
+    <string name="route_plugin_descr">Activates functionality allowing to follow a predefined GPX tour</string>
     <string name="mark_as_visited">Mark as visited</string>
     <string name="mark_as_not_visited">Mark as not-visited</string>
     <string name="mark_as_current">Go to this point</string>
