@@ -1,30 +1,21 @@
 package net.osmand.plus.touringview;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.render.RendererRegistry;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 
-public class NauticalMapsPlugin extends OsmandPlugin {
+public class TouringViewPlugin extends OsmandPlugin {
 
 	public static final String ID = "touringView.plugin";
 	public static final String COMPONENT = "net.osmand.touringviewPlugin";
 	private static String previousRenderer = RendererRegistry.DEFAULT_RENDER;
 	private OsmandApplication app;
-	
 
 	public TouringViewPlugin(OsmandApplication app) {
 		this.app = app;
 	}
-	
 
 	@Override
 	public String getDescription() {
@@ -57,12 +48,10 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 		}
 	}
 
-
 	@Override
 	public String getId() {
 		return ID;
 	}
-
 
 	@Override
 	public Class<? extends Activity> getSettingsActivity() {
