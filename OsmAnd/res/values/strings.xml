@@ -19,7 +19,7 @@
 	<string name="plugin_ski_descr3">This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.</string>
 
 	<string name="plugin_touringview_descr1">Activating this view changes the map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.</string>
-	<string name="plugin_touringview_descr2">This view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks), and clearly depicts all types of roads unambiguously by color coding, which is useful when e.g. driving large vehicles.</string>
+	<string name="plugin_touringview_descr2">This view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks). It also clearly depicts all types of roads unambiguously by color coding, which is useful when e.g. driving large vehicles.</string>
 	<string name="plugin_touringview_descr3">A special map download is not needed, the view is created from our standard maps.</string>
 	<string name="plugin_touringview_descr4">This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.</string>
 	<string name="plugin_touringview_name">Touring map view</string>
