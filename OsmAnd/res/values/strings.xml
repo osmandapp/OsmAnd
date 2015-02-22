@@ -801,7 +801,7 @@
     <string name="index_srtm_parts">parts</string>
     <string name="index_srtm_ele">Contour lines</string>
     <string name="srtm_plugin_description">External plugin (separate download) facilitating to download offline contour lines and hillshades (\'Settings\' → \'Manage map files\' → \'Download\' → Select desired map type). These be can be displayed in combination with the OsmAnd offline maps.</string>
-    <string name="srtm_plugin_name">Contour lines plugin</string>
+    <string name="srtm_plugin_name">Contour Lines (external plugin)</string>
     <string name="download_select_map_types">Other maps</string>
     <string name="download_roads_only_item">Roads only</string>
     <string name="download_srtm_maps">Contour lines</string>
@@ -1195,7 +1195,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parking point</string>
 	<string name="osmand_parking_plugin_description">External plugin (separate download) allowing to memorize the location of your parked car.</string>
-	<string name="osmand_parking_plugin_name">Parking Position Plugin</string>
+	<string name="osmand_parking_plugin_name">Parking Position (external plugin)</string>
 	<string name="context_menu_item_add_parking_point">Mark as a parking position</string>
 	<string name="context_menu_item_delete_parking_point">Delete a parking marker</string>
 	<string name="gpxup_public">Public</string>
