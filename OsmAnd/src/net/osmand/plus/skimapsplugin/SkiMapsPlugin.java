@@ -46,12 +46,10 @@ public class SkiMapsPlugin extends OsmandPlugin {
 		}
 	}
 
-
 	@Override
 	public String getId() {
 		return ID;
 	}
-
 
 	@Override
 	public Class<? extends Activity> getSettingsActivity() {
