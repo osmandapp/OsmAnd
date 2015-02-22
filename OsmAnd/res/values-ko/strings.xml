@@ -1766,8 +1766,8 @@
 	<string name="osmo_settings_uuid">고유 장치 id</string>
     <string name="osmo_settings_descr">모니터링 설정을 구성하고 개인 모니터링 채널을 설정</string>
     <string name="osmo_plugin_description">"OpenStreetMap 고급 실시간 모니터링. 이에 대해서는 http://osmo.mobi를 참조 하십시오. 다른 장치를 추적하고 추적받는 가능성을 제공 합니다. 익명 그룹을 만들고, 서로의 위치를 공유하고 소통한다. 세션 트래킹 또는 영구 트래킹에 대한 다양한 설정을 합니다. 익명그룹는 수많은 날에 제한되며  일부 기능 즉, 원격 제어 및 그룹 관리자는 제한된다. 완벽하게 기능적인 그룹은 웹사이트에 생성하고 그들에게 등록된 사용자만 액세스할 수 있습니다. "</string>
-    <string name="osmo_plugin_name">OsMo (친구위치 공유)</string>
-    <string name="osmo_settings">OsMo</string>
+    <string name="osmo_plugin_name">OsMo 모니터링</string>
+    <string name="osmo_settings">OsMo 모니터링</string>
    	<string name="share_route_as_gpx">루트를 GPX 파일로 공유</string>
 	<string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
 	<string name="arrival_distance">도착 알림</string>
@@ -1991,7 +1991,7 @@
     <string name="more">더 보기…</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
     <string name="record_plugin_description">지도 화면에 하나의 버튼 터치로 경로를 저장하기 위해 기능을 활성화 합니다. 로컬 GPX 파일 또는 웹 서비스를 사용하여 온라인에 경로를 기록하기 위해 설정을 보여줍니다.</string>
-    <string name="record_plugin_name">경로 기록</string>
+    <string name="record_plugin_name">경로 레코딩</string>
     <string name="int_hour">h</string>
     <string name="duration">경과시간</string>
     <string name="distance">거리</string>
