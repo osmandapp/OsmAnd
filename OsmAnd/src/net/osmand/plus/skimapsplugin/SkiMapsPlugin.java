@@ -2,6 +2,7 @@ package net.osmand.plus.skimapsplugin;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
 import net.osmand.plus.render.RendererRegistry;
 import android.app.Activity;
 
@@ -18,9 +19,9 @@ public class SkiMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public String getDescription() {
-		return "Activating this view changes the map style to \'Winter and ski\', showing all landscape features under wintery conditions."
-				+ "A global map displaying all ski slopes and cross country ski routes in this view is available under Downloads as \'World ski map\'.\n\n"
-				+ "This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.";
+		return app.getString(net.osmand.plus.R.string.plugin_ski_descr1) + "\n\n"
+		+ app.getString(net.osmand.plus.R.string.plugin_ski_descr2) + "\n\n"
+		+ app.getString(net.osmand.plus.R.string.plugin_ski_descr3);
 	}
 
 	@Override

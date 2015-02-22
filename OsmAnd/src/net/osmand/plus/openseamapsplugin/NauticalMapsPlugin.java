@@ -24,13 +24,12 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	public NauticalMapsPlugin(OsmandApplication app) {
 		this.app = app;
 	}
-	
 
 	@Override
 	public String getDescription() {
-		return "Activating this view changes the map style to Nautical, thus showing all nautical navigation marks and chart symbols.\n\n"
-				+ "A map file containing all nautical symbols globally is availabe as one single download called \'World seamarks\'.\n\n"
-				+ "This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.";
+		return app.getString(net.osmand.plus.R.string.plugin_nautical_descr1) + "\n\n"
+		+ app.getString(net.osmand.plus.R.string.plugin_nautical_descr2) + "\n\n"
+		+ app.getString(net.osmand.plus.R.string.plugin_nautical_descr3);
 	}
 
 	@Override
@@ -80,12 +79,10 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 		}
 	}
 
-
 	@Override
 	public String getId() {
 		return ID;
 	}
-
 
 	@Override
 	public Class<? extends Activity> getSettingsActivity() {

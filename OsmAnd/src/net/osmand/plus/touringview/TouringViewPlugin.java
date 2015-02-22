@@ -19,15 +19,15 @@ public class TouringViewPlugin extends OsmandPlugin {
 
 	@Override
 	public String getDescription() {
-		return "Activating this view changes the map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.\n\n"
-				+ "This view provides, at any give map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks), and clearly depicts all types of roads unambiguously by color coding, which is useful when e.g. driving large vehicles.\n\n"
-				+ "A special map download is not needed, the view is created from our standard maps.\n\n"
-				+ "This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.";
+		return app.getString(net.osmand.plus.R.string.plugin_touringview_descr1) + "\n\n"
+		+ app.getString(net.osmand.plus.R.string.plugin_touringview_descr2) + "\n\n"
+		+ app.getString(net.osmand.plus.R.string.plugin_touringview_descr3) + "\n\n"
+		+ app.getString(net.osmand.plus.R.string.plugin_touringview_descr4);
 	}
 
 	@Override
 	public String getName() {
-		return app.getString(net.osmand.plus.R.string.plugin_touring_view);
+		return app.getString(net.osmand.plus.R.string.plugin_touringview_name);
 	}
 
 	@Override
