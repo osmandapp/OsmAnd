@@ -1847,8 +1847,11 @@ s často kladenými otázkami.</string>
 	<string name="rename_recording">Přejmenovat záznam</string>
 	<string name="notes">Poznámky</string>
 	<string name="online_map">Online mapa</string>
-	<string name="roads_only">Pouze silnice</string>
+	<string name="roads_only">Pouze cesty</string>
     <string name="rendering_attr_pisteRoutes_name">Lyžařské tratě</string>
 	<string name="free">"%1$s volných "</string>
 	<string name="device_memory">Paměť zařízení</string>
-    </resources>
+    <string name="audio">Audio</string>
+	<string name="video">Video</string>
+	<string name="photo">Fotografie</string>
+	</resources>
