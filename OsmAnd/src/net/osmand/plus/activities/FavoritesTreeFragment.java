@@ -204,7 +204,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	private boolean editPoint(final FavouritePoint point) {
 		Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.favourites_context_menu_edit);
-		final View v = getActivity().getLayoutInflater().inflate(R.layout.favourite_edit_dialog,
+		final View v = getActivity().getLayoutInflater().inflate(R.layout.favorite_edit_dialog,
 				getExpandableListView(), false);
 		final AutoCompleteTextView cat = (AutoCompleteTextView) v.findViewById(R.id.Category);
 		final EditText editText = (EditText) v.findViewById(R.id.Name);
@@ -762,7 +762,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
-				row = inflater.inflate(R.layout.favourites_list_item, parent, false);
+				row = inflater.inflate(R.layout.favorites_list_item, parent, false);
 			}
 
 			TextView name = (TextView) row.findViewById(R.id.favourite_label);

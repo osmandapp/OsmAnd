@@ -21,7 +21,6 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.content.Intent;
@@ -156,7 +155,7 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 		}
 
 		public FavouritesAdapter(Activity activity, List<FavouritePoint> list) {
-			super(activity, R.layout.favourites_list_item, list);
+			super(activity, R.layout.favorites_list_item, list);
 			this.activity = activity;
 			this.app = ((OsmandApplication) activity.getApplication());
 			boolean light = app.getSettings().isLightContent();
@@ -178,7 +177,7 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = activity.getLayoutInflater();
-				row = inflater.inflate(R.layout.favourites_list_item, parent, false);
+				row = inflater.inflate(R.layout.favorites_list_item, parent, false);
 			}
 
 			TextView name = (TextView) row.findViewById(R.id.favourite_label);
