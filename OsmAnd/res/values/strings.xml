@@ -29,6 +29,7 @@
 	<string name="photo">Photo</string>
 	<string name="share_note">Share note</string>
 	<string name="rename_recording">Rename recording</string>
+    <string name="location_on_map">Location:\n Lat %1$s\n Lon %2$s</string>
 	<string name="watch">Watch</string>
 	<string name="notes">Notes</string>
 	<string name="online_map">Online map</string>
@@ -1790,7 +1791,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="error_reading_gpx">Error reading GPX data</string>
 	<string name="vector_data">Offline vector maps</string>
 	<string name="transport_context_menu">Search transport at stop</string>
-	<string name="point_on_map">Location:\n Lat %1$.5f\n Lon %2$.5f</string>
 	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Modify POI</string>
 	<string name="poi_context_menu_delete">Delete POI</string>

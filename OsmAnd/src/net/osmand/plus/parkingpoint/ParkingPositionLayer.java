@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -177,8 +178,9 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	}
 	
 	@Override
-	public String getObjectName(Object o) {
-		return view.getContext().getString(R.string.osmand_parking_position_name);
+	public PointDescription getObjectName(Object o) {
+		return new PointDescription(PointDescription.POINT_TYPE_MARKER,
+				view.getContext().getString(R.string.osmand_parking_position_name), "");
 	}
 	
 	public void refresh() {

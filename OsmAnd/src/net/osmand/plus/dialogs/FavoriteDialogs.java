@@ -11,6 +11,7 @@ import java.util.List;
 import net.osmand.AndroidUtils;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmAndFormatter;
@@ -153,9 +154,10 @@ public class FavoriteDialogs {
 		return al;
 	}
 	
-	public static void prepareAddFavouriteDialog(Activity activity, Dialog dialog, Bundle args, double lat, double lon, String name) {
+	public static void prepareAddFavouriteDialog(Activity activity, Dialog dialog, Bundle args, double lat, double lon, PointDescription desc) {
 		final Resources resources = activity.getResources();
-		if(name == null) {
+		String name = desc == null ? "" : desc.getName();
+		if(name.length() == 0) {
 			name = resources.getString(R.string.add_favorite_dialog_default_favourite_name);
 		}
 		OsmandApplication app = (OsmandApplication) activity.getApplication();

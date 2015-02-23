@@ -24,6 +24,7 @@ import java.util.Set;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
@@ -167,10 +168,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			qa.setAnchor(v);
 			final OsmandSettings settings = getMyApplication().getSettings();
 
-			String name = getString(R.string.favorite) + ": " + point.getName();
 			LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
 			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
-			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, point, name, settings.getLastKnownMapZoom(),
+			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, point, 
+					new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()), settings.getLastKnownMapZoom(),
 					getActivity(), true, false);
 
 			boolean light = getMyApplication().getSettings().isLightContent();
@@ -427,7 +428,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			for(FavouritePoint fp : favoritesSelected) {
 				targetPointsHelper.navigateToPoint(new LatLon(fp.getLatitude(), fp.getLongitude()), false, 
 						targetPointsHelper.getIntermediatePoints().size() + 1, 
-						getString(R.string.favorite) + ": " + fp.getName());		
+						new PointDescription(PointDescription.POINT_TYPE_FAVORITE, fp.getName()));		
 			}
 			if(getMyApplication().getRoutingHelper().isRouteCalculated()) {
 				targetPointsHelper.updateRouteAndReferesh(true);

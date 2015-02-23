@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -290,18 +291,22 @@ public class SearchAddressFragment extends Fragment {
 	}
 	
 	public static class AddressInformation {
-		String historyName = null;
-		String objectName = "";
+		String objectType = "";
 		int zoom = 14;
+		public String objectName ="";
+		
+		public PointDescription getHistoryName() {
+			return new PointDescription(PointDescription.POINT_TYPE_ADDRESS, objectType, objectName);
+		}
 		
 		public static AddressInformation build2StreetIntersection(Context ctx, OsmandSettings settings){
 			AddressInformation ai = new AddressInformation();
 			String postcode = settings.getLastSearchedPostcode();
 			String city = settings.getLastSearchedCityName();
 			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
-			ai.objectName = settings.getLastSearchedStreet();
-			ai.historyName = MessageFormat.format(ctx != null ? ctx.getString(R.string.search_history_int_streets) : "", settings.getLastSearchedStreet(),
-					settings.getLastSearchedIntersectedStreet(), cityName);
+			ai.objectName = settings.getLastSearchedStreet() +" x " +
+ 					settings.getLastSearchedIntersectedStreet() + " " + cityName;
+			ai.objectType = ctx.getString(R.string.search_address_street_option);
 			ai.zoom = 17;
 			return ai;
 		}
@@ -312,8 +317,8 @@ public class SearchAddressFragment extends Fragment {
 			String city = settings.getLastSearchedCityName();
 			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
 			String street = settings.getLastSearchedStreet();
-			ai.objectName = street;
-			ai.historyName = MessageFormat.format(ctx != null ? ctx.getString(R.string.search_history_street) : "", street, cityName);
+			ai.objectName = cityName + ", " + street;
+			ai.objectType = ctx.getString(R.string.search_address_street);
 			ai.zoom = 16;
 			return ai;
 		}
@@ -326,9 +331,8 @@ public class SearchAddressFragment extends Fragment {
 			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
 			String street = settings.getLastSearchedStreet();
 			String building = settings.getLastSearchedBuilding();
-			ai.objectName = street + " " + building;
-			ai.historyName = MessageFormat.format(ctx != null ? ctx.getString(R.string.search_history_building) : "", building, street,
-					cityName);
+			ai.objectName = cityName+", "+ street + " " + building;
+			ai.objectType = ctx.getString(R.string.search_address_building);;
 			ai.zoom = 17;
 			return ai;
 		}
@@ -336,8 +340,8 @@ public class SearchAddressFragment extends Fragment {
 		public static AddressInformation buildCity(Context ctx, OsmandSettings settings){
 			AddressInformation ai = new AddressInformation();
 			String city = settings.getLastSearchedCityName();
-			ai.historyName = MessageFormat.format(ctx != null ? ctx.getString(R.string.search_history_city) : "", city);
 			ai.objectName = city;
+			ai.objectType = ctx.getString(R.string.search_address_city);
 			ai.zoom = 14;
 			return ai;
 		}
@@ -362,7 +366,8 @@ public class SearchAddressFragment extends Fragment {
 			Bundle b = new Bundle();
 			Dialog dlg = FavoriteDialogs.createAddFavouriteDialog(getActivity(), b);
 			dlg.show();
-			FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, b, searchPoint.getLatitude(), searchPoint.getLongitude(), ai.objectName);
+			FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, b, searchPoint.getLatitude(), searchPoint.getLongitude(), 
+					ai.getHistoryName());
 		} else if(mode == SELECT_POINT ){
 			Intent intent = getActivity().getIntent();
 			intent.putExtra(SELECT_ADDRESS_POINT_INTENT_KEY, ai.objectName);
@@ -372,11 +377,11 @@ public class SearchAddressFragment extends Fragment {
 			getActivity().finish();
 		} else {
 			if (mode == NAVIGATE_TO) {
-				DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(),  ai.historyName);
+				DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(),  ai.getHistoryName());
 			} else if (mode == ADD_WAYPOINT) {
-				DirectionsDialogs.addWaypointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(), ai.historyName);
+				DirectionsDialogs.addWaypointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(), ai.getHistoryName());
 			} else if (mode == SHOW_ON_MAP) {
-				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), ai.zoom, ai.historyName);
+				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), ai.zoom, ai.getHistoryName());
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			}
 		}

@@ -4,15 +4,15 @@ package net.osmand.plus;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
-
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.MapUtils;
+import android.content.Context;
 
 public class TargetPointsHelper {
 
@@ -26,43 +26,47 @@ public class TargetPointsHelper {
 	
 	public static class TargetPoint implements LocationPoint {
 		public LatLon point;
-		public String name;
+		private PointDescription pointDescription;
 		public int index;
 		public boolean intermediate;
 		
-		public TargetPoint(LatLon point, String name) {
+		public TargetPoint(LatLon point, PointDescription name) {
 			this.point = point;
-			this.name = name;
+			this.pointDescription = name;
 		}
 
-		public TargetPoint(LatLon point, String name, int index) {
+		public TargetPoint(LatLon point, PointDescription name, int index) {
 			this.point = point;
-			this.name = name;
+			this.pointDescription = name;
 			this.index = index;
 			this.intermediate = true;
 		}
+		
+		public PointDescription getPointDescription(Context ctx) {
+			if (!intermediate) {
+				return new PointDescription(PointDescription.POINT_TYPE_TARGET, ctx.getString(R.string.destination_point, ""), 
+						getOnlyName());
+			} else {
+				return new PointDescription(PointDescription.POINT_TYPE_TARGET, (index + 1) + ". " + ctx.getString(R.string.intermediate_point, ""), 
+						getOnlyName());
+			}
+		}
+		
+		public PointDescription getOriginalPointDescription() {
+			return pointDescription;
+		};
+		
+		public String getOnlyName() {
+			return pointDescription == null ? "" : pointDescription.getName();
+		}
 
-		public static TargetPoint create(LatLon point, String name) {
+		public static TargetPoint create(LatLon point, PointDescription name) {
 			if(point != null) {
 				return new TargetPoint(point, name);
 			}
 			return null;
 		}
 		
-		private String vName() {
-			if(name.trim().length()==0) {
-				return "";
-			}
-			return ": " + name;
-		}
-		
-		public  String getVisibleName(Context ctx) {
-			if (!intermediate) {
-				return ctx.getString(R.string.destination_point, "")  + vName();
-			} else {
-				return (index + 1) + ". " + ctx.getString(R.string.intermediate_point, "")  + vName();
-			}
-		}
 
 		public double getLatitude() {
 			return point.getLatitude();
@@ -70,11 +74,6 @@ public class TargetPointsHelper {
 		
 		public double getLongitude() {
 			return point.getLongitude();
-		}
-
-		@Override
-		public String getName(Context ctx) {
-			return getVisibleName(ctx);
 		}
 
 		@Override
@@ -103,7 +102,7 @@ public class TargetPointsHelper {
 		List<LatLon> ips = settings.getIntermediatePoints();
 		List<String> desc = settings.getIntermediatePointDescriptions(ips.size());
 		for(int i = 0; i < ips.size(); i++) {
-			intermediatePoints.add(new TargetPoint(ips.get(i), desc.get(i), i));
+			intermediatePoints.add(new TargetPoint(ips.get(i), PointDescription.deserializeFromString(desc.get(i)), i));
 		}
 	}
 	
@@ -115,7 +114,7 @@ public class TargetPointsHelper {
 		return pointToStart;
 	}
 	
-	public String getStartPointDescription(){
+	public PointDescription getStartPointDescription(){
 		return settings.getStartPointDescription();
 	}
 	
@@ -170,7 +169,7 @@ public class TargetPointsHelper {
 	public void makeWayPointDestination(boolean updateRoute, int index){
 		pointToNavigate = intermediatePoints.remove(index);
 		settings.setPointToNavigate(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(),
-				pointToNavigate.name);
+				pointToNavigate.pointDescription);
 		settings.deleteIntermediatePoint(index);
 		updateRouteAndReferesh(updateRoute);
 	}
@@ -184,7 +183,7 @@ public class TargetPointsHelper {
 				settings.deleteIntermediatePoint(sz- 1);
 				pointToNavigate = intermediatePoints.remove(sz - 1);
 				settings.setPointToNavigate(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(),
-						pointToNavigate.name);
+						pointToNavigate.pointDescription);
 			}
 		} else {
 			settings.deleteIntermediatePoint(index);
@@ -268,12 +267,12 @@ public class TargetPointsHelper {
 			ArrayList<String> names = new ArrayList<String>(subList.size());
 			ArrayList<LatLon> ls = new ArrayList<LatLon>(subList.size());
 			for(int i = 0; i < subList.size(); i++) {
-				names.add(subList.get(i).name);
+				names.add(PointDescription.serializeToString(subList.get(i).pointDescription));
 				ls.add(subList.get(i).point);
 			}
 			settings.saveIntermediatePoints(ls, names);
 			TargetPoint p = point.get(point.size() - 1);
-			settings.setPointToNavigate(p.getLatitude(), p.getLongitude(), p.name);
+			settings.setPointToNavigate(p.getLatitude(), p.getLongitude(), p.pointDescription);
 		} else {
 			settings.clearIntermediatePoints();
 		}
@@ -306,13 +305,13 @@ public class TargetPointsHelper {
 		navigateToPoint(point, updateRoute, intermediate, null);
 	}
 
-	public void navigateToPoint(LatLon point, boolean updateRoute, int intermediate, String historyName){
+	public void navigateToPoint(LatLon point, boolean updateRoute, int intermediate, PointDescription historyName){
 		if(point != null){
 			if(intermediate < 0 || intermediate > intermediatePoints.size()) {
 				if(intermediate > intermediatePoints.size()) {
 					TargetPoint pn = getPointToNavigate();
 					if(pn != null) {
-						settings.insertIntermediatePoint(pn.getLatitude(), pn.getLongitude(), pn.name,
+						settings.insertIntermediatePoint(pn.getLatitude(), pn.getLongitude(), pn.pointDescription,
 								intermediatePoints.size());
 					}
 				}
@@ -329,7 +328,7 @@ public class TargetPointsHelper {
 		updateRouteAndReferesh(updateRoute);
 	}
 
-	public void setStartPoint(LatLon startPoint, boolean updateRoute, String name) {
+	public void setStartPoint(LatLon startPoint, boolean updateRoute, PointDescription name) {
 		if(startPoint != null) {
 			settings.setPointToStart(startPoint.getLatitude(), startPoint.getLongitude(), name);
 		} else {

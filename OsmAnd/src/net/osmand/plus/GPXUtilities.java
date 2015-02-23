@@ -12,7 +12,6 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -31,6 +30,7 @@ import java.util.TimeZone;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
+import net.osmand.data.PointDescription;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -115,9 +115,10 @@ public class GPXUtilities {
 			return lon;
 		}
 
+		
 		@Override
-		public String getName(Context ctx) {
-			return name;
+		public PointDescription getPointDescription(Context ctx) {
+			return new PointDescription(PointDescription.POINT_TYPE_WPT, name);
 		}
 
 		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop) {

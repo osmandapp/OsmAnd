@@ -6,6 +6,7 @@ import java.util.List;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -164,7 +165,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 		} else {
 			textDist.setText("");
 		}
-		text.setText(point.getName(app));
+		text.setText(PointDescription.getSimpleName(point, app));
 //			((Spannable) text.getText()).setSpan(
 //					new ForegroundColorSpan(ctx.getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
 //					0);
@@ -687,7 +688,7 @@ public class WaypointDialogHelper implements OsmAndLocationListener {
 				ctx.getMapLayers()
 						.getContextMenuLayer()
 						.setLocation(new LatLon(locationPoint.getLatitude(), locationPoint.getLongitude()),
-								locationPoint.getName(ctx));
+								PointDescription.getSimpleName(locationPoint, ctx));
 				dialog.dismiss();
 			}
 		}

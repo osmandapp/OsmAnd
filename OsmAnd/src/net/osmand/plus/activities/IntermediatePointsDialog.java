@@ -143,7 +143,7 @@ public class IntermediatePointsDialog {
 								TargetPoint start ;
 								if(activity instanceof MapActivity) {
 									LatLon ll = new LatLon(((MapActivity) activity).getMapView().getLatitude(), ((MapActivity) activity).getMapView().getLongitude());
-									start = TargetPoint.create(ll, "");
+									start = TargetPoint.create(ll, null);
 								} else {
 									start = lt.get(0);
 								}
@@ -209,7 +209,7 @@ public class IntermediatePointsDialog {
 				} else {
 					nm += app.getString(R.string.destination_point, distString);
 				}
-				String descr = tp.name;
+				String descr = tp.getOnlyName();
 				if(descr != null && descr.trim().length() > 0) {
 					nm += "\n" + descr;
 				}

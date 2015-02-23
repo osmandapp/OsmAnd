@@ -8,6 +8,7 @@ import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -403,9 +404,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 	
 	@Override
-	public String getObjectName(Object o) {
+	public PointDescription getObjectName(Object o) {
 		if(o instanceof WptPt){
-			return ((WptPt)o).name; //$NON-NLS-1$
+			return new PointDescription(PointDescription.POINT_TYPE_WPT, ((WptPt)o).name); //$NON-NLS-1$
 		}
 		return null;
 	}

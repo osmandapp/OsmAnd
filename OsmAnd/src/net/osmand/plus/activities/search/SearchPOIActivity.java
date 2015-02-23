@@ -20,6 +20,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.access.NavigationInfo;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndConstants;
@@ -560,7 +561,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	public void onItemClick(AdapterView<?> parent,final View view, int position, long id) {
 		final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
 		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(), settings.usingEnglishNames());
-		String name = poiSimpleFormat;
+		PointDescription name = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
 		int z = Math.max(16, settings.getLastKnownMapZoom());
 		final PopupMenu optionsMenu = new PopupMenu(this, view);
 		DirectionsDialogs.createDirectionsActionsPopUpMenu(optionsMenu, amenity.getLocation(), amenity, name, z, this, true);

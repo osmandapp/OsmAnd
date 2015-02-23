@@ -14,6 +14,7 @@ import java.util.WeakHashMap;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.util.Algorithms;
 
@@ -300,9 +301,10 @@ public class TourInformation {
 		public double getLongitude() {
 			return location.getLongitude();
 		}
-
-		public String getName(Context ctx) {
-			return name;
+		
+		@Override
+		public PointDescription getPointDescription(Context ctx) {
+			return new PointDescription(PointDescription.POINT_TYPE_WPT, name);
 		}
 		
 		public String getName() {
