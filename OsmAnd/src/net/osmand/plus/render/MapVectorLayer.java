@@ -114,7 +114,7 @@ public class MapVectorLayer extends BaseMapLayer {
 						mapRenderer.resetMapLayerProvider(-1);
 					}
 				}
-				if (st.MAP_TRANSPARENCY.get() != cachedMapTransparency) {
+				if (!Algorithms.objectEquals(st.MAP_TRANSPARENCY.get(), cachedMapTransparency)) {
 					cachedMapTransparency = st.MAP_TRANSPARENCY.get();
 					MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 					mapLayerConfiguration.setOpacityFactor(((float)cachedMapTransparency) / 255.0f);
@@ -132,7 +132,7 @@ public class MapVectorLayer extends BaseMapLayer {
 						mapRenderer.resetMapLayerProvider(1);
 					}
 				}
-				if (st.MAP_OVERLAY_TRANSPARENCY.get() != cachedOverlayTransparency) {
+				if (!Algorithms.objectEquals(st.MAP_OVERLAY_TRANSPARENCY.get(), cachedOverlayTransparency)) {
 					cachedOverlayTransparency = st.MAP_OVERLAY_TRANSPARENCY.get();
 					MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 					mapLayerConfiguration.setOpacityFactor(((float)cachedOverlayTransparency) / 255.0f);
@@ -145,6 +145,8 @@ public class MapVectorLayer extends BaseMapLayer {
 				mapRenderer.setAzimuth(-tilesRect.getRotate());
 				mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect
 						.getZoomAnimation() + tilesRect.getZoomFloatPart()));
+				float zoomMagnifier = st.MAP_DENSITY.get();
+				mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 			} else {
 				if (!view.isZooming()) {
 					if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings)) {

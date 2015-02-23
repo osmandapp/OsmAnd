@@ -107,11 +107,11 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 	}
 
 	protected int getRasterTileSize() {
-		return Integer.highestOneBit((int) getReferenceTileSize() - 1) * 2;
+		return (int)(getReferenceTileSize() * app.getSettings().MAP_DENSITY.get());
 	}
 	
 	private float getReferenceTileSize() {
-		return 256 * app.getSettings().MAP_DENSITY.get() * Math.max(1, density);
+		return 256 * Math.max(1, density);
 	}
 	
 	/**
@@ -151,10 +151,12 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
             }
 		}
 		ResolvedMapStyle mapStyle = mapStyles.get(rendName);
-		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, density);
+		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, density,
+				app.getSettings().MAP_DENSITY.get(), app.getSettings().TEXT_SCALE.get());
 		if (this.presentationObjectParams == null || !this.presentationObjectParams.equalsFields(pres)) {
 			this.presentationObjectParams = pres;
-			mapPresentationEnvironment = new MapPresentationEnvironment(mapStyle, density, langId,
+			mapPresentationEnvironment = new MapPresentationEnvironment(mapStyle, density,
+					app.getSettings().MAP_DENSITY.get(), app.getSettings().TEXT_SCALE.get(), langId,
 					langPref);
 		}
 
@@ -220,8 +222,8 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 			mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
 		}
 		// Create new OBF map symbols provider
-		obfMapSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider, getReferenceTileSize(),
-				app.getSettings().TEXT_SCALE.get());
+		obfMapSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider,
+				getReferenceTileSize());
 		// If there's bound view, add new provider
 		if (mapRendererView != null) {
 			mapRendererView.addSymbolsProvider(obfMapSymbolsProvider);
@@ -247,21 +249,30 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 		String langId ;
 		LanguagePreference langPref;
 		ResolvedMapStyle mapStyle;
-		double displayDensityFactor;
+		float displayDensityFactor;
+		float mapScaleFactor;
+		float symbolsScaleFactor;
 		
 		public CachedMapPresentation(String langId,
 				LanguagePreference langPref, ResolvedMapStyle mapStyle,
-				double displayDensityFactor) {
+				float displayDensityFactor,
+				float mapScaleFactor,
+				float symbolsScaleFactor) {
 			this.langId = langId;
 			this.langPref = langPref;
 			this.mapStyle = mapStyle;
 			this.displayDensityFactor = displayDensityFactor;
+			this.mapScaleFactor = mapScaleFactor;
+			this.symbolsScaleFactor = symbolsScaleFactor;
 		}
 		
 		
 		public boolean equalsFields(CachedMapPresentation other ) {
-			if (Double.doubleToLongBits(displayDensityFactor) != Double
-					.doubleToLongBits(other.displayDensityFactor))
+			if (Double.compare(displayDensityFactor, other.displayDensityFactor) != 0)
+				return false;
+			if (Double.compare(mapScaleFactor, other.mapScaleFactor) != 0)
+				return false;
+			if (Double.compare(symbolsScaleFactor, other.symbolsScaleFactor) != 0)
 				return false;
 			if (langId == null) {
 				if (other.langId != null)
