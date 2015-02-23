@@ -1941,4 +1941,5 @@
 	<string name="plugin_touringview_descr2">Visning giver, på et givet kortzoom, den maksimale mængde rejseoplysninger til rådighed i kortdata (især veje, spor, stier, og orienteringsmærker). Det viser også tydeligt alle vejtyper utvetydigt med farvekoder, som er nyttigt, f.eks ved med kørsel store køretøjer.</string>
 	<string name="plugin_touringview_descr3">Et særligt kort er ikke nødvendigt, visningen er skabt ud fra standardkort.</string>
 	<string name="plugin_touringview_descr4">Visningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.</string>
+	<string name="location_on_map">Placering:\n Lat %1$s\n Long %2$s</string>
 	</resources>
