@@ -1957,4 +1957,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="plugin_nautical_descr3">Cet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".</string>
 
 	<string name="plugin_nautical_descr2">Une carte marine mondiale est disponible en une seul téléchargement nommé \"Carte marine\".</string>
+	<string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
 	</resources>
