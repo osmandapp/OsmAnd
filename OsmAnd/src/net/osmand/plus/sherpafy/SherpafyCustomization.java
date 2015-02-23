@@ -711,7 +711,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			WptPt lp = gpx.getLastPoint();
 			if (lp != null) {
 				TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-				targetPointsHelper.navigateToPoint(new LatLon(lp.lat, lp.lon), true, -1, lp.name);
+				targetPointsHelper.navigateToPoint(new LatLon(lp.lat, lp.lon), true, -1, lp.getPointDescription(a));
 				app.getSettings().navigateDialog(true);
 			}
 		}

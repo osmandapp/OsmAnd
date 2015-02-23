@@ -9,6 +9,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
 import android.view.*;
 import gnu.trove.list.array.TIntArrayList;
+
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,10 +18,12 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
@@ -528,7 +531,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						MapActivity.getSingleMapViewTrackingUtilities().setMapLinkedToLocation(false);
 						if (location != null) {
 							app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), app.getSettings().getLastKnownMapZoom(),
-									null, device.getVisibleName(), device);
+									new PointDescription(PointDescription.POINT_TYPE_MARKER, device.getVisibleName()), false,
+									device);
 						}
 						OsMoPositionLayer.setFollowTrackerId(device);
 						MapActivity.launchMapActivityMoveToTop(OsMoGroupsActivity.this);

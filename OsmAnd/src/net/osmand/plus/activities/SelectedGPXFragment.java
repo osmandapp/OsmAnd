@@ -12,6 +12,7 @@ import java.util.List;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
@@ -190,7 +191,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				if (resId == R.string.show_gpx_route) {
 					OsmandSettings settings = app.getSettings();
 					settings.setMapLocationToShow(gpxDisplayItem.locationStart.lat, gpxDisplayItem.locationStart.lon,
-							settings.getLastKnownMapZoom(), Html.fromHtml(gpxDisplayItem.name).toString());
+							settings.getLastKnownMapZoom(), new PointDescription(PointDescription.POINT_TYPE_WPT, Html.fromHtml(gpxDisplayItem.name).toString()));
 					MapActivity.launchMapActivityMoveToTop(getMyActivity());
 				}
 				return true;
@@ -609,7 +610,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
 			ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
 			qa.setAnchor(v);
-			String name = app.getString(R.string.favorite) + ": " + child.name;
+			PointDescription name = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, child.name);
 			LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
 			OsmandSettings settings = app.getSettings();
 			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);

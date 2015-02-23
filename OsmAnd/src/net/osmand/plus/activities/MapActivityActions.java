@@ -15,6 +15,7 @@ import net.osmand.Location;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
@@ -333,17 +334,18 @@ public class MapActivityActions implements DialogProvider {
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					mapActivity.startActivity(intent);
 				} else if (standardId == R.string.context_menu_item_directions_to) {
-					targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, "");
+					targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, null);
 					enterRoutePlanningMode(null, null, false);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
-					String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
-					enterRoutePlanningMode(new LatLon(latitude, longitude), name, false);
+					List<PointDescription> nms = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectNames();
+					enterRoutePlanningMode(new LatLon(latitude, longitude), nms.isEmpty() ? null : nms.get(0), false);
 				} else if (standardId == R.string.context_menu_item_intermediate_point || 
 						standardId == R.string.context_menu_item_destination_point) {
 					boolean dest = standardId == R.string.context_menu_item_destination_point;
-					String selected = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
+					List<PointDescription> nms = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectNames();
 					targets.navigateToPoint(new LatLon(latitude, longitude), true,
-							dest ? -1 : targets.getIntermediatePoints().size(), dest? "" : selected);
+							dest ? -1 : targets.getIntermediatePoints().size(), nms.size() == 0?null : 
+								nms.get(0));
 					if(targets.getIntermediatePoints().size() > 0) {
 						openIntermediatePointsDialog();
 					}
@@ -388,7 +390,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 	
-	public void enterRoutePlanningMode(final LatLon from, final String fromName, boolean useCurrentGPX) {
+	public void enterRoutePlanningMode(final LatLon from, final PointDescription fromName, boolean useCurrentGPX) {
 		List<SelectedGpxFile> selectedGPXFiles = mapActivity.getMyApplication().getSelectedGpxHelper()
 				.getSelectedGPXFiles();
 		final List<GPXFile> gpxFiles = new ArrayList<GPXFile>();
@@ -446,7 +448,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 	
-	private void enterRoutePlanningModeImpl(GPXFile gpxFile, LatLon from, String fromName) {
+	private void enterRoutePlanningModeImpl(GPXFile gpxFile, LatLon from, PointDescription fromName) {
 
 		ApplicationMode mode = settings.DEFAULT_APPLICATION_MODE.get();
 		ApplicationMode selected = settings.APPLICATION_MODE.get();
@@ -549,7 +551,8 @@ public class MapActivityActions implements DialogProvider {
 		switch (id) {
 		case DIALOG_ADD_FAVORITE:
 			FavoriteDialogs.prepareAddFavouriteDialog(mapActivity, dialog, args,
-					args.getDouble(KEY_LATITUDE), args.getDouble(KEY_LONGITUDE),args.getString(KEY_NAME));
+					args.getDouble(KEY_LATITUDE), args.getDouble(KEY_LONGITUDE),
+					new PointDescription(PointDescription.POINT_TYPE_FAVORITE, args.getString(KEY_NAME)));
 			break;
 		case DIALOG_ADD_WAYPOINT:
 			EditText v = (EditText) dialog.getWindow().findViewById(android.R.id.edit);

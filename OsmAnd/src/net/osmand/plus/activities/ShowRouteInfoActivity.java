@@ -16,6 +16,7 @@ import android.view.*;
 import android.widget.*;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmAndFormatter;
@@ -125,7 +126,9 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			MapRouteInfoControl.directionInfo = position - 1;
 			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 			settings.setMapLocationToShow(loc.getLatitude(),loc.getLongitude(),
-					Math.max(13, settings.getLastKnownMapZoom()), null, item.getDescriptionRoutePart() + " " + getTimeDescription(item), null);
+					Math.max(13, settings.getLastKnownMapZoom()), 
+					new PointDescription(PointDescription.POINT_TYPE_MARKER, item.getDescriptionRoutePart() + " " + getTimeDescription(item)),
+					false, null);
 			MapActivity.launchMapActivityMoveToTop(this);
 		}
 	}

@@ -13,29 +13,24 @@ import java.util.List;
 public class DatabaseHelper {
 
     public static final int DOWNLOAD_ENTRY = 0;
-    public static final int FAVORITES_ENTRY = 1;
 
     private static final String DB_NAME = "usage_history"; //$NON-NLS-1$
     private static final int DB_VERSION = 1;
 
     private static final String DOWNLOADS_TABLE_NAME = "downloads"; //$NON-NLS-1$
-    private static final String FAVORITES_TABLE_NAME = "favorites"; //$NON-NLS-1$
 
     private static final String HISTORY_COL_NAME = "name"; //$NON-NLS-1$
     private static final String HISTORY_COL_COUNT = "count"; //$NON-NLS-1$
     private static final String DOWNLOAD_TABLE_CREATE =   "CREATE TABLE " + DOWNLOADS_TABLE_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
             HISTORY_COL_NAME + " TEXT, " + HISTORY_COL_COUNT + " long);"; //$NON-NLS-1$ //$NON-NLS-2$
 
-    private static final String FAVORITES_TABLE_CREATE =   "CREATE TABLE " + FAVORITES_TABLE_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
-            HISTORY_COL_NAME + " TEXT, " + HISTORY_COL_COUNT + " long);"; //$NON-NLS-1$ //$NON-NLS-2$
-
     private OsmandApplication app;
 
-    public static class HistoryEntry {
+    public static class HistoryDownloadEntry {
         long count;
         String name;
 
-        public HistoryEntry(String name, long count){
+        public HistoryDownloadEntry(String name, long count){
             this.count = count;
             this.name = name;
 
@@ -74,21 +69,18 @@ public class DatabaseHelper {
 
     public void onCreate(SQLiteAPI.SQLiteConnection db) {
         db.execSQL(DOWNLOAD_TABLE_CREATE);
-        db.execSQL(FAVORITES_TABLE_CREATE);
     }
 
     public void onUpgrade(SQLiteAPI.SQLiteConnection db, int oldVersion, int newVersion) {
     }
 
-    public boolean remove(HistoryEntry e, int type){
+    public boolean remove(HistoryDownloadEntry e, int type){
         SQLiteAPI.SQLiteConnection db = openConnection(false);
         if(db != null){
             try {
                 switch (type){
                     case DOWNLOAD_ENTRY:
                         db.execSQL("DELETE FROM " + DOWNLOADS_TABLE_NAME + " WHERE " + HISTORY_COL_NAME + " = ?", new Object[] { e.getName() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                    case FAVORITES_ENTRY:
-                        db.execSQL("DELETE FROM " + FAVORITES_TABLE_NAME + " WHERE " + HISTORY_COL_NAME + " = ?", new Object[] { e.getName() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                 }
             } finally {
                 db.close();
@@ -111,15 +103,13 @@ public class DatabaseHelper {
         return false;
     }
 
-    public boolean update(HistoryEntry e, int type){
+    public boolean update(HistoryDownloadEntry e, int type){
         SQLiteAPI.SQLiteConnection db = openConnection(false);
         if(db != null){
             try {
                 switch (type) {
                     case DOWNLOAD_ENTRY:
                         db.execSQL("UPDATE " + DOWNLOADS_TABLE_NAME + " SET " + HISTORY_COL_COUNT + " = ? WHERE " + HISTORY_COL_NAME + " = ?", new Object[] { e.getCount(), e.getName() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                    case FAVORITES_ENTRY:
-                        db.execSQL("UPDATE " + FAVORITES_TABLE_NAME + " SET " + HISTORY_COL_COUNT + " = ? WHERE " + HISTORY_COL_NAME + " = ?", new Object[] { e.getCount(), e.getName() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                 }
             } finally {
                 db.close();
@@ -129,15 +119,13 @@ public class DatabaseHelper {
         return false;
     }
 
-    public boolean add(HistoryEntry e, int type){
+    public boolean add(HistoryDownloadEntry e, int type){
         SQLiteAPI.SQLiteConnection db = openConnection(false);
         if(db != null){
             try {
                 switch (type) {
                     case DOWNLOAD_ENTRY:
                         db.execSQL("INSERT INTO " + DOWNLOADS_TABLE_NAME + " VALUES (?, ?)", new Object[] { e.getName(), e.getCount()}); //$NON-NLS-1$ //$NON-NLS-2$
-                    case FAVORITES_ENTRY:
-                        db.execSQL("INSERT INTO " + FAVORITES_TABLE_NAME + " VALUES (?, ?)", new Object[] { e.getName(), e.getCount()}); //$NON-NLS-1$ //$NON-NLS-2$
                 }
             } finally {
                 db.close();
@@ -159,11 +147,6 @@ public class DatabaseHelper {
                                 "SELECT " + HISTORY_COL_COUNT + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
                                         DOWNLOADS_TABLE_NAME + " WHERE " + HISTORY_COL_NAME + "='" + name + "'", null); //$NON-NLS-1$//$NON-NLS-2$
                         break;
-                    case FAVORITES_ENTRY:
-                        query =  db.rawQuery(
-                                "SELECT " + HISTORY_COL_COUNT + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-                                        FAVORITES_TABLE_NAME + " WHERE " + HISTORY_COL_NAME + "='" + name + "'", null); //$NON-NLS-1$//$NON-NLS-2$
-                        break;
                     default:
                     	query = null;
                     	break;
@@ -182,8 +165,8 @@ public class DatabaseHelper {
         return count;
     }
 
-    public List<HistoryEntry> getEntries(int type){
-        List<HistoryEntry> entries = new ArrayList<HistoryEntry>();
+    public List<HistoryDownloadEntry> getEntries(int type){
+        List<HistoryDownloadEntry> entries = new ArrayList<HistoryDownloadEntry>();
         SQLiteAPI.SQLiteConnection db = openConnection(true);
         if(db != null){
             try {
@@ -194,11 +177,6 @@ public class DatabaseHelper {
                                 "SELECT " + HISTORY_COL_NAME + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
                                         DOWNLOADS_TABLE_NAME + " ORDER BY " + HISTORY_COL_COUNT + " DESC", null); //$NON-NLS-1$//$NON-NLS-2$
                         break;
-                    case FAVORITES_ENTRY:
-                        query = db.rawQuery(
-                                "SELECT " + HISTORY_COL_NAME + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-                                        FAVORITES_TABLE_NAME + " ORDER BY " + HISTORY_COL_COUNT + " DESC", null); //$NON-NLS-1$//$NON-NLS-2$
-                        break;
                     default:
                         query = null; //$NON-NLS-1$//$NON-NLS-2$
                         break;
@@ -206,7 +184,7 @@ public class DatabaseHelper {
 				if (query != null) {
 					if (query.moveToFirst()) {
 						do {
-							HistoryEntry e = new HistoryEntry(
+							HistoryDownloadEntry e = new HistoryDownloadEntry(
 									query.getString(0), query.getInt(1));
 							entries.add(e);
 						} while (query.moveToNext());

@@ -1,21 +1,25 @@
 package net.osmand.plus.routepointsnavigation;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 import net.osmand.data.LatLon;
-import net.osmand.plus.*;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.MapInfoLayer;
@@ -24,10 +28,18 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.text.format.DateFormat;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 /**
  * Created by Barsik on 10.06.2014.
@@ -261,7 +273,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		public UUID id;
 
 		public String getName() {
-			return wpt.name;
+			return wpt.name == null ? "" : wpt.name;
 		}
 
 		public WptPt getWpt() {
@@ -401,7 +413,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 			RoutePoint first = currentPoints.get(0);
 			if (!first.isVisited()) {
-				app.getTargetPointsHelper().navigateToPoint(first.getPoint(), true, -1, first.getName());
+				app.getTargetPointsHelper().navigateToPoint(first.getPoint(), true, -1, 
+						new PointDescription(PointDescription.POINT_TYPE_WPT, first.getName()));
 				first.isNextNavigate = true;
 				return true;
 			} else {
@@ -445,7 +458,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			if (rt != null) {
 				TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 				TargetPoint pointToNavigate = targetPointsHelper.getPointToNavigate();
-				String locName = pointToNavigate == null ? null : pointToNavigate.name; 
+				String locName = pointToNavigate == null ? null : pointToNavigate.getOnlyName(); 
 				for (int i = 0; i < rt.points.size(); i++) {
 					WptPt wptPt = rt.points.get(i);
 					RoutePoint rtp = new RoutePoint(wptPt);
@@ -473,7 +486,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			}
 			rp.isNextNavigate = true;
 			sortPoints();
-			app.getTargetPointsHelper().navigateToPoint(rp.getPoint(), true, -1, rp.getName());
+			app.getTargetPointsHelper().navigateToPoint(rp.getPoint(), true, -1, 
+					new PointDescription(PointDescription.POINT_TYPE_WPT, rp.getName()));
 		}
 
 		public void updateCurrentTargetPoint() {
@@ -481,11 +495,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			TargetPoint tp = targetPointsHelper.getPointToNavigate();
 			for (int i = 0; i < currentPoints.size(); i++) {
 				RoutePoint rtp = currentPoints.get(i);
-				rtp.isNextNavigate = rtp.visitedTime == 0 && tp != null && !Algorithms.isEmpty(tp.name) && tp.name.equals(rtp.getName());
-				if (rtp.isNextNavigate) {
-					tp.name = "";
-				}
-
+				rtp.isNextNavigate = rtp.visitedTime == 0 && tp != null && !Algorithms.isEmpty(tp.getOnlyName()) &&
+						tp.getOnlyName().equals(rtp.getName());
 			}
 			sortPoints();
 		}

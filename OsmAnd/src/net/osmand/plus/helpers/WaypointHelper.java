@@ -16,6 +16,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
+import net.osmand.data.PointDescription;
 import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LocationPoint;
 import net.osmand.osm.PoiType;
@@ -783,9 +784,10 @@ public class WaypointHelper {
 			return a.getLocation().getLongitude();
 		}
 
+		
 		@Override
-		public String getName(Context ctx) {
-			return OsmAndFormatter.getPoiSimpleFormat(a, ctx, app.getSettings().usingEnglishNames());
+		public PointDescription getPointDescription(Context ctx) {
+			return new PointDescription(PointDescription.POINT_TYPE_POI, OsmAndFormatter.getPoiSimpleFormat(a, ctx, app.getSettings().usingEnglishNames()));
 		}
 
 		@Override

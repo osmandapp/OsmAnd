@@ -19,7 +19,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -27,7 +27,6 @@ import net.osmand.plus.activities.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-
 import android.support.v4.app.ListFragment;
 
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class NotesFragment extends ListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		items = new ArrayList<>(plugin.getAllRecordings());
+		items = new ArrayList<Recording>(plugin.getAllRecordings());
 		listAdapter = new NotesAdapter(items);
 		getListView().setAdapter(listAdapter);
 	}
@@ -129,7 +128,8 @@ public class NotesFragment extends ListFragment {
 	}
 
 	private void showOnMap(Recording recording) {
-		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, null, recording.getName(),
+		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, 
+				new PointDescription(PointDescription.POINT_TYPE_NOTE, recording.getName()), true,
 				recording); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}

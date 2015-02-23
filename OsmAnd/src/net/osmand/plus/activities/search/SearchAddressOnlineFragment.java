@@ -17,7 +17,11 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+<<<<<<< HEAD
 import net.osmand.osm.io.NetworkUtils;
+=======
+import net.osmand.data.PointDescription;
+>>>>>>> Update recents
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -230,7 +234,7 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 		Place item = adapter.getItem(position);
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), view);
 		DirectionsDialogs.createDirectionsActionsPopUpMenu(optionsMenu, new LatLon(item.lat, item.lon), item,
-				getString(R.string.address) + " : " + item.displayName, Math.max(15, settings.getLastKnownMapZoom()),
+				new PointDescription(PointDescription.POINT_TYPE_ADDRESS, item.displayName), Math.max(15, settings.getLastKnownMapZoom()),
 				getActivity(), true);
 		optionsMenu.show();
 	}

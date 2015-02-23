@@ -4,6 +4,7 @@ import android.content.Context;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LocationPoint;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 
 public class AlarmInfo implements LocationPoint {
@@ -146,10 +147,10 @@ public class AlarmInfo implements LocationPoint {
 		}
 		return 0;
 	}
-
+	
 	@Override
-	public String getName(Context ctx) {
-		return type.getVisualName(ctx);
+	public PointDescription getPointDescription(Context ctx) {
+		return new PointDescription(PointDescription.POINT_TYPE_ALARM, type.getVisualName(ctx));
 	}
 
 	@Override

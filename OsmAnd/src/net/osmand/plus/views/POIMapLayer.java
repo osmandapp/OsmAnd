@@ -9,6 +9,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.MapPoiTypes;
@@ -320,9 +321,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
-	public String getObjectName(Object o) {
+	public PointDescription getObjectName(Object o) {
 		if (o instanceof Amenity) {
-			return ((Amenity) o).getName(); //$NON-NLS-1$
+			return new PointDescription(PointDescription.POINT_TYPE_POI, ((Amenity) o).getName()); 
 		}
 		return null;
 	}

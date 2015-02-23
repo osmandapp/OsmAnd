@@ -9,11 +9,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import alice.util.Sleep;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -41,7 +41,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		
 		public String getObjectDescription(Object o);
 		
-		public String getObjectName(Object o);
+		public PointDescription getObjectName(Object o);
 		
 		
 	}
@@ -196,9 +196,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public void setLocation(LatLon loc, String description){
 		latLon = loc;
 		if(latLon != null){
-			if(description == null || description.length() == 0){
-				description = view.getContext().getString(R.string.point_on_map, 
-						latLon.getLatitude(), latLon.getLongitude());
+			if(description == null){
+				description = PointDescription.LOCATION_POINT.getFullPlainName(activity, loc.getLatitude(), loc.getLongitude());
 			}
 			textView.setText(Html.fromHtml(description.replace("\n", "<br/>")));
 		} else {
@@ -309,6 +308,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return getSelectedObjectInfo(true);
 	}
 	
+	public List<PointDescription> getSelectedObjectNames() {
+		List<PointDescription> list = new ArrayList<PointDescription>();
+		Iterator<Entry<Object, IContextMenuProvider>> it = selectedObjects.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<Object, IContextMenuProvider> e = it.next();
+			PointDescription onames = e.getValue().getObjectName(e.getKey());
+			if (onames != null) {
+				list.add(onames);
+			}
+		}
+		return list;
+	}
+	
 	public String getSelectedObjectDescription(){
 		return getSelectedObjectInfo(false);
 	}
@@ -327,7 +339,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					description.append("\n" + (i + 1) + ". ");
 				}
 				if(name) {
-					description.append(e.getValue().getObjectName(e.getKey()));
+					PointDescription nm = e.getValue().getObjectName(e.getKey());
+					LatLon ll = e.getValue().getObjectLocation(e.getKey());
+					description.append(nm.getFullPlainName(activity, ll == null? 0 : ll.getLatitude(), ll == null? 0 
+							: ll.getLongitude()));
 				} else {
 					description.append(e.getValue().getObjectDescription(e.getKey()));
 				}

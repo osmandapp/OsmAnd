@@ -14,6 +14,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
@@ -611,7 +612,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		@Override
 		public String getObjectDescription(Object o) {
 			if(o instanceof WptPt) {
-				String desc = getObjectName(o); 
+				PointDescription desc = getObjectName(o); 
 				List<String> l = new ArrayList<String>();
 				if(!Double.isNaN(((WptPt) o).ele)) {
 					l.add(app.getString(R.string.plugin_distance_point_ele) + " "+ OsmAndFormatter.getFormattedDistance((float) ((WptPt) o).ele, app)); 
@@ -628,18 +629,18 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(app);
 					l.add(app.getString(R.string.plugin_distance_point_time) + " "+ dateFormat.format(date) + " " + timeFormat.format(date)); 
 				}
-				return desc + " " + l;
+				return desc.getName() + " " + l;
 			}
 			return null;
 		}
 
 		@Override
-		public String getObjectName(Object o) {
+		public PointDescription getObjectName(Object o) {
 			if(o instanceof WptPt) {
 				if(((WptPt) o).desc == null) {
-					return app.getString(R.string.plugin_distance_point); 
+					return new PointDescription(PointDescription.POINT_TYPE_MARKER, app.getString(R.string.plugin_distance_point));
 				}
-				return ((WptPt) o).desc;
+				return new PointDescription(PointDescription.POINT_TYPE_MARKER, ((WptPt) o).desc );
 			}
 			return null;
 		}

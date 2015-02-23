@@ -7,6 +7,7 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
@@ -167,12 +168,12 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 	
 	@Override
-	public String getObjectName(Object o) {
+	public PointDescription getObjectName(Object o) {
 		if(o instanceof Recording){
 			if(((Recording)o).getName() == null) {
-				return view.getResources().getString(R.string.recording_default_name);
+				return new PointDescription(PointDescription.POINT_TYPE_NOTE, view.getResources().getString(R.string.recording_default_name));
 			}
-			return ((Recording)o).getName(); //$NON-NLS-1$
+			return new PointDescription(PointDescription.POINT_TYPE_NOTE, ((Recording)o).getName());
 		}
 		return null;
 	}

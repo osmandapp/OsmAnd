@@ -5,6 +5,7 @@ import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
@@ -45,7 +46,7 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 	}
 
 	@Override
-	public String getObjectName(Object o) {
+	public PointDescription getObjectName(Object o) {
 		return null;
 	}
 

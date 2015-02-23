@@ -3,6 +3,7 @@ package net.osmand.plus.audionotes;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -95,8 +96,9 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, null,
-							recording.getName() != null ? recording.getName() : recording.getDescription(getActivity()),
+					getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, 
+							new PointDescription(PointDescription.POINT_TYPE_NOTE, 
+							recording.getName() != null ? recording.getName() : recording.getDescription(getActivity())), true,
 							recording); //$NON-NLS-1$
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
