@@ -19,6 +19,9 @@ import net.osmand.util.MapUtils;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -35,6 +38,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -135,6 +139,7 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 
 	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
 		private LatLon location;
+		Drawable arrowImage;
 
 		public void updateLocation(LatLon l) {
 			location = l;
@@ -143,6 +148,14 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 
 		public HistoryAdapter(List<HistoryEntry> list) {
 			super(getActivity(), R.layout.search_history_list_item, list);
+			arrowImage = getResources().getDrawable(R.drawable.ic_destination_arrow_white);
+			arrowImage.mutate();
+			boolean light = getMyApplication().getSettings().isLightContent();
+			if (light) {
+				arrowImage.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+			} else {
+				arrowImage.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+			}
 		}
 
 		@Override
@@ -155,6 +168,8 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 			TextView nameText = (TextView) row.findViewById(R.id.name);
 			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			String distance = "";
+			ImageView arrow = (ImageView) row.findViewById(R.id.direction);
+			arrow.setImageDrawable(arrowImage);
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
 			final HistoryEntry model = getItem(position);
 			if (location != null) {
