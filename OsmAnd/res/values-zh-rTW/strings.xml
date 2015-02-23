@@ -149,7 +149,7 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">停車地點</string>
-	<string name="osmand_parking_plugin_description">該外掛元件可儲存您的愛車停車地點。</string>
+	<string name="osmand_parking_plugin_description">該外掛元件（單獨下載）可記住您的愛車停車地點。</string>
 	<string name="osmand_parking_plugin_name">停車地點（外掛元件）</string>
 	<string name="context_menu_item_add_parking_point">標記為停車地點</string>
 	<string name="context_menu_item_delete_parking_point">刪除停車標記</string>
@@ -200,7 +200,7 @@
 	<string name="online_map_settings_descr">組態線上或暫存的地圖圖磚來源</string>
 	<string name="map_settings">地圖設定</string>
 	<string name="map_settings_descr">組態地圖顯示</string>
-	<string name="osmand_rastermaps_plugin_description">顯示設定以組態多種線上或快取地圖圖磚，以作為基本地圖或者覆蓋/襯底的地圖，這些地圖還可以在離線時準備，並複製到 OsmAnd 資料夾中。</string>
+	<string name="osmand_rastermaps_plugin_description">顯示設定以使用多種線上或快取地圖圖磚，以作為主要地圖或者覆疊/襯底的地圖，這些地圖還可以在離線時準備，並複製到 OsmAnd 資料夾中。</string>
 	<string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在休眠模式下(螢幕關閉)顯示設定以啟用追蹤與導航。</string>
 	<string name="osmand_accessibility_description">顯示專用的無障礙功能設定。</string>
 	<string name="extra_settings">進階設定</string>
@@ -211,7 +211,7 @@
 	<string name="select_plugin_to_activate">點觸外掛元件來啟用或停用。(可能需要重新啟動 OsmAnd。)</string>
 	<string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能</string>
 	<string name="prefs_plugins">外掛元件管理</string>
-	<string name="osm_editing_plugin_description">顯示 OSM 回報所需的設定，如收集/修改 OSM POI 物件、開啟/評論 OSM 錯誤、提供 GPX 檔案(需有OSM帳號)。</string>
+	<string name="osm_editing_plugin_description">顯示 OSM 貢獻所需的設定，如建立/修改 OSM POI 物件、開啟/評論 OSM 錯誤、提供 GPX 檔案(需有OSM帳號)。</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">向量地圖一般而言顯示速度更快，但可能在某些裝置上無法使用。</string>
 	<string name="play_commands_of_currently_selected_voice">用目前選擇的語音播放指令</string>
 	<string name="debugging_and_development">OsmAnd 開發</string>
@@ -1171,7 +1171,7 @@
 	<string name="intermediate_items_sort_return">在到達目的地之間路途上，沿路的中途點已採取了最佳化的排列。</string>
     <string name="osmand_srtm_long_description_1000_chars">這個外掛元件提供了等高線，可以在 OsmAnd 的離線地圖中顯示。全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。</string>
     <string name="audionotes_location_not_defined">以位置去關聯的注解尚未下定義。\"使用位置 …\"，把注解分配給指定的位置</string>
-    <string name="srtm_plugin_description">簡易下載離線的等高線和地形陰影（\'設定\' -&gt; \'管理地圖檔案\' -&gt; \'下載\' -&gt; 選擇所需的地圖類型）。</string>
+    <string name="srtm_plugin_description">外掛元件（單獨下載）便於下載離線的等高線和地形陰影（\'設定\' -&gt; \'管理地圖檔案\' -&gt; \'下載\' -&gt; 選擇所需的地圖類型）。這些可以與 OsmAnd 離線地圖結合在一起顯示。</string>
     <string name="tip_recent_changes_0_7_2_t">在0.7.2的變更：
 		\n\t- Native rendering for all devices
 		\n\t- Offline POI editing
@@ -1921,4 +1921,10 @@
 	<string name="photo">照片</string>
 	<string name="plugin_touringview_name">旅遊地圖檢視</string>
 
+	<string name="plugin_nautical_descr1">啟動此檢視更改地圖到航海顯示樣式，從而顯示所有航海航行的標記和航線標誌。</string>
+	<string name="plugin_nautical_descr2">包含了全部可利用的全球航海標誌的一個單一下載的地圖檔案，被稱為 \'全球航線標識\'。</string>
+	<string name="plugin_ski_descr1">啟動此檢視，更改了地圖樣式到 \'冬天和滑雪 \'。顯示出冬天的條件下，所有的景觀特徵。</string>
+	<string name="plugin_ski_descr2">全球地圖上顯示所有的滑雪斜坡和越野滑雪路線，在此檢視之下可獲得\'世界滑雪地圖\'下載。</string>
+	<string name="plugin_touringview_descr1">啟動此檢視的地圖樣式更改為\'旅遊檢視\'，這是給旅客和職業司機的一種特殊的高細節檢視。</string>
+	<string name="plugin_touringview_descr3">不需要下載特殊的地圖，視圖是從我們標準的地圖所建立的。</string>
 	</resources>
