@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent">
+
+	<LinearLayout android:id="@+id/current_track"
+				  android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<include android:layout_height="wrap_content"
+				 android:layout_width="match_parent"
+				 layout="@layout/dash_gpx_track_item"/>
+
+		<Button android:id="@+id/map_btn"
+				android:text="@string/back_to_map"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+
+		</LinearLayout>
+
+
+	<ExpandableListView
+		android:id="@android:id/list"
+		style="@style/OsmandListView"
+		android:layout_width="fill_parent"
+		android:layout_height="0dp"
+		android:background="?attr/expandable_list_background"
+		android:layout_marginLeft="0dp"
+		android:layout_marginRight="0dp"
+		android:layout_marginTop="0dp"
+		android:layout_weight="1"
+		android:groupIndicator="@android:color/transparent"/>
+
+
+</LinearLayout>
