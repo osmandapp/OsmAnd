@@ -2085,8 +2085,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="device_memory">Memoria dispositivo</string>
     <string name="rendering_attr_pisteRoutes_name">Percorsi su pista</string>
 	<string name="roads_only">Solo strade</string>
-    <string name="watch">Orologio</string>
-	<string name="notes">Nore</string>
+    <string name="watch">Guarda</string>
+	<string name="notes">Note</string>
 	<string name="online_map">Mappa online</string>
 	<string name="export">Esporta</string>
 	<string name="share_note">Condividi l\'appunto</string>
