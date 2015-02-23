@@ -53,12 +53,12 @@
   <string name="map_settings">Налаштування мапи</string>
   <string name="map_settings_descr">Налаштування відображення карти</string>
   <string name="osmand_rastermaps_plugin_description">Втулок дозволяє використовувати різні джерела онлайн мап, а також підготовлені растрові мапи як базову мапу або підкладку. Мапи можуть бути підготовленими на комп’ютері і скопійовані в теку з даними OsmAnd.</string>
-  <string name="osmand_background_plugin_description">Налаштування для навігації і запису маршрутів в енергозберігаючому режимі. Втулок працює в фоновому режимі і періодично активує GPS для запису маршруту або відтворення голосових команд.</string>
+  <string name="osmand_background_plugin_description">Показує налаштування для навігації і запису маршрутів в енергозберігаючому режимі. Втулок працює в фоновому режимі і періодично активує GPS для запису маршруту або відтворення голосових команд.</string>
   <string name="osmand_accessibility_description">Втулок містить налаштування допоміжних можливостей.</string>
   <string name="extra_settings">Розширені налаштування</string>
-  <string name="osmand_monitoring_description">Цей втулок дозволяє записувати маршрути в GPX файли або відправляти дані про поточне місцезнаходження до зовнішньої веб службі, яка візуалізує маршрут в реальному часі.</string>
+  <string name="osmand_monitoring_description">Показує кнопку для запису маршруту в GPX файли або відправки даніх про поточне місцезнаходження до зовнішньої веб службі, яка візуалізує маршрут в реальному часі.</string>
   <string name="osmand_extra_settings_description">Втулок дозволяє налаштовувати відображення мапи з врахуванням параметрів пристрою.</string>
-  <string name="osmand_development_plugin_description">Втулок надає можливості для пошуку помилок і розробки, наприклад моделювання навігації чи показ продуктивності рендерингу.</string>
+  <string name="osmand_development_plugin_description">Показує налаштування для пошуку помилок і розробки, наприклад моделювання навігації чи показ продуктивності рендерингу.</string>
   <string name="plugins_screen">Втулки</string>
   <string name="select_plugin_to_activate">Виберіть втулок, щоб активувати або деактивувати його (можливо потрібно буде перезавантажити програму)</string>
   <string name="prefs_plugins_descr">Втулки надають додаткові можливості</string>
@@ -75,7 +75,7 @@
 		\n\t  *Графічний інтерфейс і взаємодія*
 		\n\t	- Покращено у багатьох напрямках		
 	</string>
-  <string name="osm_editing_plugin_description">Втулок для роботи з OSM. Дає можливість створювати і редагувати POI, надсилати неточності в OSM, завантажувати треки GPX (потребує облікових даних в OSM).</string>
+  <string name="osm_editing_plugin_description">Показує налаштування для учасників спільноти OSM. Дає можливість створювати і редагувати POI, надсилати неточності в OSM, завантажувати треки GPX (потребує облікових даних в OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Векторні мапи відображаються швидше. Підтримуються не всіма пристроями.</string>
   
   <string name="play_commands_of_currently_selected_voice">Відтворити команди вибраним голосом</string>
@@ -901,8 +901,8 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Місце паркування</string>
-  <string name="osmand_parking_plugin_description">Втулок дозволяє запам’ятати місце, де припарковано ваш автомобіль.</string>
-  <string name="osmand_parking_plugin_name">Втулок місця паркування</string>
+  <string name="osmand_parking_plugin_description">Зовній втулок (завантажується окремо) дозволяє запам’ятати місце, де припарковано ваш автомобіль.</string>
+  <string name="osmand_parking_plugin_name">Місця паркування (зовнішній втулок)</string>
   <string name="context_menu_item_add_parking_point">Відмітити місце паркування</string>
   <string name="context_menu_item_delete_parking_point">Вилучити маркер місця паркування</string>
   <string name="starting_point_too_far">Початок маршруту надто далеко від найближчої дороги.</string>
@@ -1054,12 +1054,12 @@
     
     <string name="map_widget_distancemeasurement">Вимірювання відстаней</string>
     <string name="map_widget_audionotes">Аудіо замітки</string>
-    <string name="audionotes_plugin_description">Робіть аудіо/відео замітки під час подорожей</string>
+    <string name="audionotes_plugin_description">Показує кнопку для створення аудіо/відео заміток під час подорожей</string>
     <string name="audionotes_plugin_name">Аудіо/відео замітки</string>
     <string name="index_srtm_parts">частин</string>
     <string name="index_srtm_ele">Ізолінії висот</string>
-    <string name="srtm_plugin_description">Втулок дозволяє завантажувати дані ізоліній висот (\'Налаштування\' → \'Управління мапами\' → \'Завантажити\' → Виберіть потрібний тип мапи).</string>
-    <string name="srtm_plugin_name">Втулок Ізолінії висот</string>
+    <string name="srtm_plugin_description">Зовнішній втулок (завантажується окремо) дозволяє завантажувати дані ізоліній висот (\'Налаштування\' → \'Управління мапами\' → \'Завантажити\' → Виберіть потрібний тип мапи). Вони можуть показуватись разом з локальними мапами OsmAnd.</string>
+    <string name="srtm_plugin_name">Ізолінії висот (зовнішній втулок)</string>
     <string name="download_select_map_types">Інші мапи</string>
     <string name="download_roads_only_item">Тільки дороги</string>
     <string name="download_srtm_maps">Ізолінії висот</string>
@@ -1328,7 +1328,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="local_osm_changes_backup_successful">Файл змін OSM успішно створений в %1$s</string>
     <string name="osmand_distance_planning_plugin_name">Інструмент підрахунку відстані і планування</string>
     <string name="please_select_address">Виберіть місто або вулицю</string>
-    <string name="osmand_distance_planning_plugin_description">Створити маршрут (чи використати існуючий GPX-файл) для підрахунку відстані між точками. Зберегти для подальшого використання.</string>
+    <string name="osmand_distance_planning_plugin_description">Актівує віджет для створення маршрутів натисканням на мапі (чи використати існуючий GPX-файл) для підрахунку відстані між точками. Результат може бути збережений як GPX для подальшого використання.</string>
     <string name="distance_measurement_finish_subtrack">Виміряти нову ділянку</string>
     <string name="tip_recent_changes_1_4_t">Зміни в 1.4:
 	\n\t* Можливість оптимального впорядкування проміжних точок маршруту (задача комівояжера, сортування за відстанню)
@@ -1714,9 +1714,9 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_mode_off">Старт сесії OsMo</string>
     <string name="osmo_settings_debug">Інформація для відлагодження</string>
     <string name="osmo_settings_descr">Налаштування параметрів моніторингу та встановлення персонального каналу моніторингу</string>
-    <string name="osmo_settings">OpenStreetMap Моніторинг</string>
-    <string name="osmo_plugin_description">"Прогресивний онлайн моніторинг на основі OpenStreetMap, дивіться http://osmo.mobi. Відстежуйте інші пристрої та діліться з іншими вашим місцезнаходженням. Створюйте анонімні групи, діліться один з одним своїм положенням та спілкуйтесь. Різноманітні налаштування сесій чи постійне відстеження. Анонімні групи мають обмеження у кілька днів та у функціях, ними неможливо керувати віддалено та вони не мають адміністраторів. Групи з повним набором функцій можуть бути створені на веб-сайті і тільки зареєстровані користувачі матимуть до них доступ. "</string>
-    <string name="osmo_plugin_name">OsMo (Передовий онлайн моніторинг)</string>
+    <string name="osmo_settings">OsMo моніторинг</string>
+    <string name="osmo_plugin_description">"Показує налаштування прогресивного онлайн моніторингу OsMo, дивіться http://osmo.mobi. Відстежуйте інші пристрої та діліться з іншими вашим місцезнаходженням. Створюйте анонімні групи, діліться один з одним своїм положенням та спілкуйтесь. Різноманітні налаштування сесій чи постійне відстеження. Анонімні групи мають обмеження у кілька днів та у функціях, ними неможливо керувати віддалено та вони не мають адміністраторів. Групи з повним набором функцій можуть бути створені на веб-сайті і тільки зареєстровані користувачі матимуть до них доступ. "</string>
+    <string name="osmo_plugin_name">OsMo моніторинг</string>
    	<string name="always_center_position_on_map">Показувати положення завжди в центрі</string>
     <string name="voice_pref_title">Голос</string>
     <string name="misc_pref_title">Різне</string>
@@ -1899,12 +1899,12 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_value_car_name">Автівка</string>
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пішохід</string>
-    <string name="record_plugin_description">Зберігати свої треки натисканням одної кнопки на мапі. Показати налаштування запису своїх подорожей у локальні файли GPX, чи вебсервісом онлайн.</string>
+    <string name="record_plugin_description">Активує можливість зберігати свої треки натисканням одної кнопки на мапі та показує налаштування запису своїх подорожей у локальні файли GPX, чи на онлайн вебсервісі.</string>
     <string name="save_track_to_gpx_globally">Писати трек у файл GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Загальний запис місцезнаходження в файл GPX можна ввімкнути або вимкнути кнопкою запису GPX на екрані з мапою</string>
 	<string name="save_track_interval_globally">Інтервал записування</string>
 	<string name="rendering_attr_publicTransportMode_name">Маршрути автобусів, тролейбусів та маршруток</string>
-	<string name="record_plugin_name">Запис власних подорожей</string>
+	<string name="record_plugin_name">Запис подорожей</string>
     <string name="int_hour">г</string>
     <string name="duration">Тривалісьть</string>
     <string name="distance">Віддаль</string>
@@ -2059,4 +2059,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="plugin_settings_button_caption">Налаштування</string>
 	<string name="plugin_install_needs_network">Для встановлення цього втулку вам потрібне з’єднання з Інтерент.</string>
 	<string name="get_plugin">Отримати</string>
-</resources>
+<string name="plugin_nautical_descr1">Активація цього стилю змінює вигляд мапи на Морську, на якій показуються всі навігаційні знаки та символи.</string>
+	<string name="plugin_nautical_descr2">Файл з даними містить всі навігаційні символи, у вигляди єдиного файлу з назвою \'World seamarks\'.</string>
+	<string name="plugin_nautical_descr3">Цей стиль може бути скасовано шляхом його деактивації тут або зміною в пункті \'Стиль мапи\' меню \'Налаштування мапи\' на потрібний.</string>
+
+	</resources>
