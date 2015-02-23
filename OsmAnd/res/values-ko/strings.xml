@@ -2157,4 +2157,8 @@
 	<string name="audio">소리</string>
 	<string name="video">영상</string>
 	<string name="photo">사진</string>
+	<string name="plugin_nautical_descr1">지도 스타일을 항해 지도로 변경하기 위해 보기를 활성화 합니다, 그러하여 모든 해상 운행 마크와 차트 심볼을 보여줍니다.</string>
+	<string name="plugin_nautical_descr2">"세계적으로 모든 항해 기호를 포함 하는 지도 파일은  \'세계 seamarks\' 라는 하나의 파일을 다운로드하여 이용할 수 있습니다."</string>
+	<string name="plugin_nautical_descr3">"다시 비활성화 하거나, 또는 \'지도 구성\' 하위메뉴인  \'지도 스타일\'을 변경하여 이 보기(View)를 되돌릴 수 있습니다."</string>
+
 	</resources>
