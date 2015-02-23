@@ -1927,4 +1927,5 @@
 	<string name="plugin_ski_descr2">全球地圖上顯示所有的滑雪斜坡和越野滑雪路線，在此檢視之下可獲得\'世界滑雪地圖\'下載。</string>
 	<string name="plugin_touringview_descr1">啟動此檢視的地圖樣式更改為\'旅遊檢視\'，這是給旅客和職業司機的一種特殊的高細節檢視。</string>
 	<string name="plugin_touringview_descr3">不需要下載特殊的地圖，視圖是從我們標準的地圖所建立的。</string>
+	<string name="plugin_touringview_descr2">此檢視提供了在任何給與的地圖縮放，（特別是公路、軌道、路徑和定位標記）在地圖資料中最大量可獲得的詳細行程。它也清楚地描繪了各類道路明確地色碼，例如駕駛大型車輛時，這是非常有用的。</string>
 	</resources>
