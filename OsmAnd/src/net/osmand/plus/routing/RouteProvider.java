@@ -1049,7 +1049,7 @@ public class RouteProvider {
             pt.lat = ps.get(k).getLatitude();
             pt.lon = ps.get(k).getLongitude();
             if(k < ps.size()) {
-                pt.name = ps.get(k).name +"";
+                pt.name = ps.get(k).getOnlyName() +"";
                 if(k == ps.size() - 1) {
                     String target = ctx.getString(R.string.destination_point, "" );
                     if(pt.name.startsWith(target)) {

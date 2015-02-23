@@ -14,9 +14,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -1278,10 +1280,10 @@ public class OsmandSettings {
 		return new LatLon(lat, lon);
 	}
 	
-	public String getAndClearMapLabelToShow(){
+	public PointDescription getAndClearMapLabelToShow(){
 		String label = settingsAPI.getString(globalPreferences,MAP_LABEL_TO_SHOW, null);
 		settingsAPI.edit(globalPreferences).remove(MAP_LABEL_TO_SHOW).commit();
-		return label;
+		return PointDescription.deserializeFromString(label);
 	}
 	
 	private Object objectToShow;
@@ -1295,30 +1297,30 @@ public class OsmandSettings {
 		return settingsAPI.getInt(globalPreferences,MAP_ZOOM_TO_SHOW, 5);
 	}
 	
-	public void setMapLocationToShow(double latitude, double longitude, int zoom, String historyDescription,
-			String labelToShow, Object toShow) {
+	public void setMapLocationToShow(double latitude, double longitude, int zoom, PointDescription pointDescription,
+			boolean addToHistory, Object toShow) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences);
 		edit.putFloat(MAP_LAT_TO_SHOW, (float) latitude);
 		edit.putFloat(MAP_LON_TO_SHOW, (float) longitude);
-		if (labelToShow != null) {
-			edit.putString(MAP_LABEL_TO_SHOW, labelToShow);
+		if (pointDescription != null) {
+			edit.putString(MAP_LABEL_TO_SHOW, PointDescription.serializeToString(pointDescription));
 		} else {
 			edit.remove(MAP_LABEL_TO_SHOW);
 		}
 		edit.putInt(MAP_ZOOM_TO_SHOW, zoom);
 		edit.commit();
 		objectToShow = toShow;
-		if(historyDescription != null){
-			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+		if(addToHistory){
+			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, pointDescription);
 		}
 	}
 	
 	public void setMapLocationToShow(double latitude, double longitude, int zoom) {
-		setMapLocationToShow(latitude, longitude, zoom,  null, null, null);
+		setMapLocationToShow(latitude, longitude, zoom,  null, false, null);
 	}
 
-	public void setMapLocationToShow(double latitude, double longitude, int zoom, String historyDescription){
-		setMapLocationToShow(latitude, longitude, zoom, historyDescription, historyDescription, null);
+	public void setMapLocationToShow(double latitude, double longitude, int zoom, PointDescription historyDescription){
+		setMapLocationToShow(latitude, longitude, zoom, historyDescription, true, null);
 	}
 
 	// Do not use that method if you want to show point on map. Use setMapLocationToShow
@@ -1368,12 +1370,14 @@ public class OsmandSettings {
 		return new LatLon(lat, lon);
 	}
 	
-	public String getStartPointDescription() {
-		return settingsAPI.getString(globalPreferences, START_POINT_DESCRIPTION, "");
+	public PointDescription getStartPointDescription() {
+		return 
+				PointDescription.deserializeFromString(settingsAPI.getString(globalPreferences, START_POINT_DESCRIPTION, ""));
 	}
 	
-	public String getPointNavigateDescription() {
-		return settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION, "");
+	public PointDescription getPointNavigateDescription() {
+		return 
+				PointDescription.deserializeFromString(settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION, ""));
 	}
 	
 	
@@ -1422,16 +1426,17 @@ public class OsmandSettings {
 		return list;
 	}
 	
-	public boolean insertIntermediatePoint(double latitude, double longitude, String historyDescription, int index) {
+	public boolean insertIntermediatePoint(double latitude, double longitude, PointDescription historyDescription, int index) {
 		List<LatLon> ps = getIntermediatePoints();
 		List<String> ds = getIntermediatePointDescriptions(ps.size());
 		ps.add(index, new LatLon(latitude, longitude));
-		ds.add(index, historyDescription);
+		ds.add(index, PointDescription.serializeToString(historyDescription));
 		if (historyDescription != null) {
 			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
 		}
 		return saveIntermediatePoints(ps,ds);
 	}
+	
 	public boolean deleteIntermediatePoint( int index) {
 		List<LatLon> ps = getIntermediatePoints();
 		List<String> ds = getIntermediatePointDescriptions(ps.size());
@@ -1474,23 +1479,20 @@ public class OsmandSettings {
 				remove(START_POINT_DESCRIPTION).commit();
 	}
 	
-	public boolean setPointToNavigate(double latitude, double longitude, String historyDescription) {
+	public boolean setPointToNavigate(double latitude, double longitude, PointDescription p) {
 		boolean add = settingsAPI.edit(globalPreferences).putFloat(POINT_NAVIGATE_LAT, (float) latitude).putFloat(POINT_NAVIGATE_LON, (float) longitude).commit();
-		settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_DESCRIPTION, historyDescription).commit();
+		settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_DESCRIPTION, PointDescription.serializeToString(p)).commit();
 		if(add){
-			if(historyDescription != null){
-				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+			if(p != null){
+				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, p);
 			}
 		}
 		return add;
 	}
 	
-	public boolean setPointToStart(double latitude, double longitude, String description) {
+	public boolean setPointToStart(double latitude, double longitude, PointDescription p) {
 		boolean add = settingsAPI.edit(globalPreferences).putFloat(START_POINT_LAT, (float) latitude).putFloat(START_POINT_LON, (float) longitude).commit();
-		if (description == null) {
-			description = "";
-		}
-		settingsAPI.edit(globalPreferences).putString(START_POINT_DESCRIPTION, description).commit();
+		settingsAPI.edit(globalPreferences).putString(START_POINT_DESCRIPTION, PointDescription.serializeToString(p)).commit();
 		return add;
 	}
 	
@@ -1737,6 +1739,8 @@ public class OsmandSettings {
 	
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference("CONTRIBUTION_INSTALL_APP_DATE", null).makeGlobal();
 	
+	
+	public final OsmandPreference<Integer> COORDINATES_FORMAT = new IntPreference("coordinates_format", PointDescription.FORMAT_DEGREES).makeGlobal();
 	
 	public final OsmandPreference<Boolean> FOLLOW_THE_ROUTE = new BooleanPreference("follow_to_route", false).makeGlobal();
 	public final OsmandPreference<String> FOLLOW_THE_GPX_ROUTE = new StringPreference("follow_gpx", null).makeGlobal();

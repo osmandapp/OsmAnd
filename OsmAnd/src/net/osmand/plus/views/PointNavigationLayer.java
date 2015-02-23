@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import java.util.List;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
@@ -201,15 +202,16 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public String getObjectDescription(Object o) {
 		if (o instanceof TargetPoint) {
-			return ((TargetPoint) o).getVisibleName(view.getContext());
+			return ((TargetPoint) o).getPointDescription(view.getContext()).getFullPlainName(view.getContext(),
+					((TargetPoint) o).getLatitude(), ((TargetPoint) o).getLongitude());
 		}
 		return null;
 	}
 
 	@Override
-	public String getObjectName(Object o) {
+	public PointDescription getObjectName(Object o) {
 		if (o instanceof TargetPoint) {
-			return ((TargetPoint) o).getVisibleName(view.getContext());
+			return ((TargetPoint) o).getPointDescription(view.getContext());
 		}
 		return null;
 	}

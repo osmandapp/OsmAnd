@@ -15,6 +15,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -165,19 +166,20 @@ public class GeoIntentActivity extends OsmandListActivity {
 			} else {
 				distanceLabel.setText(""); //$NON-NLS-1$
 			}
-			label.setText(getString(model));
+			label.setText(getString(model).getFullPlainName(getApplication(), 0, 0));
 			return row;
 		}
 	}
 
-	private String getString(MapObject o) {
+	private PointDescription getString(MapObject o) {
 		if (o instanceof Amenity) {
-			return OsmAndFormatter.getPoiSimpleFormat((Amenity) o, getMyApplication(), false);
+			return new PointDescription(PointDescription.POINT_TYPE_POI,
+					OsmAndFormatter.getPoiSimpleFormat((Amenity) o, getMyApplication(), false));
 		}
 		if (o instanceof Street) {
-			return getString(R.string.address) + " " + ((Street) o).getCity().getName() + " " + o.getName();
+			return new PointDescription(PointDescription.POINT_TYPE_ADDRESS, ((Street) o).getCity().getName() + " " + o.getName());
 		}
-		return getString(R.string.address) + " : " + o.toString();
+		return new PointDescription(PointDescription.POINT_TYPE_ADDRESS, o.toString());
 	}
 
 

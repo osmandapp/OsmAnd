@@ -156,7 +156,7 @@ public class DownloadIndexesThread {
 						DownloadEntry item = (DownloadEntry)o;
 						String name = item.item.getBasename();
 						long count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
-						DatabaseHelper.HistoryEntry entry = new DatabaseHelper.HistoryEntry(name,count);
+						DatabaseHelper.HistoryDownloadEntry entry = new DatabaseHelper.HistoryDownloadEntry(name,count);
 						if (count == 1) {
 							dbHelper.add(entry, DatabaseHelper.DOWNLOAD_ENTRY);
 						} else {
@@ -171,7 +171,7 @@ public class DownloadIndexesThread {
 						IndexItem item = (IndexItem)o;
 
 						long count = dbHelper.getCount(item.getBasename(), DatabaseHelper.DOWNLOAD_ENTRY) + 1;
-						dbHelper.add(new DatabaseHelper.HistoryEntry(item.getBasename(), count), DatabaseHelper.DOWNLOAD_ENTRY);
+						dbHelper.add(new DatabaseHelper.HistoryDownloadEntry(item.getBasename(), count), DatabaseHelper.DOWNLOAD_ENTRY);
 					}
 				} else if (o instanceof String) {
 					String message = (String) o;

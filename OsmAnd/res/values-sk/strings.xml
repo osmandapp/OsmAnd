@@ -462,7 +462,7 @@
 \n\nNa zobrazenie všetkých Obľúbených bodov priamo na mape môžete zapnúť vrstvu Obľúbené miesta cez Kontextové menu mapy → Zobrazenie. "</string>
   <string name="tip_osm_improve">Vylepšovanie dát v Openstreetmap</string>
   <string name="tip_osm_improve_t">"OsmAnd používa mapy založené na dátach Openstreetmap.org (OSM) a nie je navrhnutý len pre cestovanie a navigovanie, ale aj pre vylepšovanie a pomoc projektu Openstreetmap. Iba pár kliknutiami môžete jednoducho vytvoriť a nahrať nový bod záujmu (POI) alebo OSM chybu.
-\n\nNajprv musíte povoliť modul \"OSM upravovanie\" v Nastavenia → \"Správca zásuvných modulov\". Potom zadať Vaše prihlasovacie údaje v Nastavenia → \"OSM upravovanie\".
+\n\nNajprv musíte povoliť modul \"OSM upravovanie\" v Nastavenia → \"Zásuvné moduly\". Potom zadať Vaše prihlasovacie údaje v Nastavenia → \"OSM upravovanie\".
 \n\nNa pridanie nového POI použite možnosť \"Vytvoriť POI\" v kontextovom menu mapy. Potom môžete postupovať so zadávaním informácií o novom POI v dialógu vytvárania POI a nakoniec ho nahrať.
 \n\nAk nájdete na mape nejakú chybu, môžete to oznámiť Openstreetmap komunite, ktorá potom môže tento problém rýchlejšie odstrániť. Na pridanie OSM chyby použite možnosť \"Otvoriť OSM chybu\" v kontextovom menu mapy. Potom zadajte podrobný popis problému a nakoniec ho odoslať tlačidlom Pridať.
 \n\nOsmAnd môže dočasne uložiť Vaše záznamy offline v zariadení (pozrite príslušné nastavenie) avšak na odoslanie Vašich nových POI a OSM chýb je potrebné pripojenie na Internet. "</string>
@@ -1083,7 +1083,7 @@
 		\n\t* "Svetelný senzor": režim je riadený svetelným senzorom v zariadení (iba ak je vo výbave)
 	</string>	
 	<string name="tip_map_switch_t_v2">"Zdroj mapy a zobrazené vrstvy sa nastavujú pomocou Menu → Zobrazenie.
-\n\nPomocou Zdroj mapy... môžete vybrať predinštalované offline vektorové mapy (potrebné aj pre offline navigáciu) alebo preddefinované on-line dlaždicové mapy (potrebné aktivovať modul \"Online mapy\" v Nastavenia → \"Správca zásuvných modulov\") alebo mapy ručne vytvorené pomocou napr. OsmAndMapCreator na PC.
+\n\nPomocou \"Zdroj mapy...\" môžete vybrať predinštalované offline vektorové mapy (potrebné aj pre offline navigáciu) alebo preddefinované on-line dlaždicové mapy (potrebné aktivovať modul \"Online mapy\" v Nastavenia → \"Zásuvné moduly\") alebo mapy ručne vytvorené pomocou napr. OsmAndMapCreator na PC.
 \n\nOsmAnd tiež podporuje vlastné zdroje máp. "</string>
 	<string name="tip_app_mode_t_v2">OsmAnd podporuje rôzne (nastaviteľné) aplikačné profily pre rôzne prípady použitia.
 		\n\nProfily môžete zmeniť pomocou tlačidla profilu v ľavom dolnom rohu obrazovky mapy (ikona auto, bicykel alebo pešia) alebo pri vytváraní navigačnej trasy.
@@ -1160,7 +1160,7 @@
     <string name="av_control_stop">Zastaviť</string>
     <string name="av_control_start">Nahrať</string>
     <string name="map_widget_av_notes">Zvukové poznámky</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd modul pre vrstevnice</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd modul pre offline vrstevnice</string>
     <string name="osmand_srtm_long_description_1000_chars">Tento modul poskytuje vrstevnice, ktoré môžu byť zobrazené v OsmAnd offline mapách. Globálne údaje (medzi 70 stupňami severne a 70 stupňami južne) sú založené na meraní SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), zobrazovacieho nástroja na palube Terra, vlajkového satelitu NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonských vesmírnych systémov (J-spacesystems).</string>
     
     
@@ -1171,7 +1171,7 @@
     <string name="monitoring_control_stop">Zastaviť</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Zobrazí tlačidlo na vytváranie zvukových poznámok počas cestovania</string>
-    <string name="audionotes_plugin_name">Modul pre audio/video poznámky</string>
+    <string name="audionotes_plugin_name">Audio/video poznámky</string>
     <string name="srtm_plugin_description">Externý doplnok (samostatne stiahnuteľný), ktorý umožňuje sťahovanie offline vrstevníc a tieňovaní svahov (Nastavenia → Správca mapových súborov → vyberte požadovaný typ máp).</string>
     <string name="srtm_plugin_name">Vrstevnice (externý zásuvný modul)</string>
     <string name="download_select_map_types">Ďalšie mapy</string>

@@ -17,6 +17,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapAccessibilityActions;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
@@ -370,7 +371,7 @@ public class MapActivity extends AccessibleActivity {
 
 		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
 		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
-		String mapLabelToShow = settings.getAndClearMapLabelToShow();
+		PointDescription mapLabelToShow = settings.getAndClearMapLabelToShow();
 		Object toShow = settings.getAndClearObjectToShow();
 		int status = settings.isRouteToPointNavigateAndClear();
 		if(status != 0){
@@ -382,7 +383,8 @@ public class MapActivity extends AccessibleActivity {
 		}
 		if(mapLabelToShow != null && latLonToShow != null){
 			mapLayers.getContextMenuLayer().setSelectedObject(toShow);
-			mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow);
+			mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow.getFullPlainName(this, 
+					latLonToShow.getLatitude(), latLonToShow.getLongitude()));
 		}
 		if (latLonToShow != null && !latLonToShow.equals(cur)) {
 			mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(), latLonToShow.getLongitude(), 
@@ -799,7 +801,8 @@ public class MapActivity extends AccessibleActivity {
 						if (zoom != null) {
 							z = Integer.parseInt(zoom);
 						}
-						settings.setMapLocationToShow(lt, ln, z, getString(R.string.shared_location));
+						settings.setMapLocationToShow(lt, ln, z, new PointDescription(
+								PointDescription.POINT_TYPE_MARKER, getString(R.string.shared_location)));
 					} catch (NumberFormatException e) {
 					}
 				}

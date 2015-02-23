@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
-import android.graphics.PointF;
-import android.support.v4.app.FragmentActivity;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -14,7 +11,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import net.osmand.plus.views.FavoritesLayer;
-import net.osmand.plus.views.OsmandMapTileView;
+import android.graphics.PointF;
+import android.support.v4.app.FragmentActivity;
 
 public class StageFavoritesLayer extends FavoritesLayer {
 	

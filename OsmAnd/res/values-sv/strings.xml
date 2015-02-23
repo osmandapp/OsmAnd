@@ -151,9 +151,9 @@
 
 <string name="index_settings_descr">Ladda ner och hantera offline-kartor lagrade på din enhet</string>
 <string name="online_map_settings">Online-kartor</string>
-<string name="osmand_accessibility_description">Visa inställningar för speciella tillgänglighetsanpassningar.</string>
+<string name="osmand_accessibility_description">Visar inställningarna för speciella tillgänglighetsanpassningar.</string>
 <string name="extra_settings">Avancerade inställningar</string>
-<string name="osmand_monitoring_description">Visa inställningar som underlättar att spela in dina resor till GPX-filer eller att leva spår med hjälp av en webbtjänst.</string>
+<string name="osmand_monitoring_description">Visar knappen och inställningarna som underlättar att spela in dina resor till en lokal GPX-fil eller till en webbtjänst online.</string>
 <string name="debugging_and_development">Utveckling av OsmAnd</string>
 <string name="send_files_to_osm">Skicka GPX-filer till OSM?</string>
 <string name="gpx_visibility_txt">Synlighet</string>
@@ -205,8 +205,8 @@
 <string name="osmand_parking_pm">em</string>
 <string name="osmand_parking_am">fm</string>
 <string name="osmand_parking_position_name">Parkeringspunkt</string>
-<string name="osmand_parking_plugin_description">Denna plugin gör det möjligt att spara platsen där du parkerade bilen.</string>
-<string name="osmand_parking_plugin_name">Modul för parkeringsplats</string>
+<string name="osmand_parking_plugin_description">Extern modul (särskild nedladdning) som gör det möjligt att spara platsen där du parkerade bilen.</string>
+<string name="osmand_parking_plugin_name">Parkeringsplats (extern modul)</string>
 <string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
 <string name="context_menu_item_delete_parking_point">Ta bort P-markering</string>
 <string name="asap">Snarast</string>
@@ -227,16 +227,16 @@
 <string name="first_time_msg">Tack för att du använder OsmAnd. För många funktioner i programmet behöver du vissa regionala offline-data som du kan ladda ner via \'Inställningar\' -&gt; \'Hantera kartfiler\'. Därefter kommer du att kunna se kartor, hitta adresser, leta efter intressepunkter och hitta kollektivtrafik.</string>
 <string name="basemap_was_selected_to_download">En baskarta krävs för att appen ska fungera korrekt och den har markerats för nedladdning.</string>
 <string name="select_index_file_to_download">Hittade ingenting. Om du inte kan hitta din region, kan du skapa den själv (se http://osmand.net).</string>
-<string name="map_online_plugin_is_not_installed">Aktivera pluginen online-kartor för att välja olika kartkällor</string>
+<string name="map_online_plugin_is_not_installed">Aktivera modulen online-kartor för att välja olika kartkällor</string>
 <string name="map_online_data">Online-kartor och kartbitar (tiles)</string>
 <string name="map_online_data_descr">Använd online-kartor (ladda ner och cacha kartbitar på SD-kortet)</string>
 <string name="online_map_settings_descr">Konfigurera online- eller cachade källor för kartbitar</string>
 <string name="map_settings">Kartinställningar</string>
 <string name="map_settings_descr">Konfigurera kartvisning</string>
 <string name="osmand_rastermaps_plugin_description">Visa inställningar för att konfigurera en rad olika online-kartor eller cachade kartbitar som baskarta eller som överläggs-/underläggskartor. Dessa kartor kan också förberedas offline och kopieras till OsmAnd-datamappen.</string>
-<string name="osmand_background_plugin_description">Visa inställningar för att aktivera spårning och navigering i viloläge (skärm av) genom att periodvis väcka GPS-enheten.</string>
+<string name="osmand_background_plugin_description">Visa inställningarna för att aktivera spårning och navigering i viloläge (skärm av) genom att periodvis väcka GPS-enheten.</string>
 <string name="osmand_extra_settings_description">Visa inställningar för avancerad kartkonfiguration (som att öka kartdetaljer) och vissa enhetsspecifika inställningar.</string>
-<string name="osmand_development_plugin_description">Visa inställningar för utvecklings- och felsökningsfunktioner som ruttsimulering eller visning av renderingsprestanda.</string>
+<string name="osmand_development_plugin_description">Visar inställningarna för utvecklings- och felsökningsfunktioner som ruttsimulering eller visning av renderingsprestanda.</string>
 <string name="plugins_screen">Hantera insticksmoduler</string>
 <string name="tip_recent_changes_0_8_2_t">"Förändringar i 0.8.2 :\n\t* Förbättrad ruttuträkning\n\t* Widgets för dynamisk karta\n\t* Kartinställningar flyttade till kartskärmen\n\t* Lås skärm knapp med logga tjänster\n\t* Fixat arabiska, Kannada skript och RTL språk "</string>
 
@@ -954,12 +954,12 @@
     <string name="map_widget_distancemeasurement">Avståndsmätning</string>
     <string name="monitoring_control_stop">Stoppa</string>
     <string name="map_widget_audionotes">Ljudanteckningar</string>
-    <string name="audionotes_plugin_description">Gör ljud-/videoanteckningar under resan</string>
+    <string name="audionotes_plugin_description">Visar knapparna för ljud-/videoanteckningar under en resa</string>
     <string name="audionotes_plugin_name">Ljud-/Videoanteckningar</string>
     <string name="index_srtm_parts">delar</string>
     <string name="index_srtm_ele">Höjdkurvor</string>
     <string name="download_select_map_types">Andra kartor</string>
-    <string name="srtm_plugin_name">Modul för höjdkurvor</string>
+    <string name="srtm_plugin_name">Höjdkurvor (extern modul)</string>
     <string name="download_srtm_maps">Höjdkurvsdata</string>
     <string name="tip_recent_changes_1_1_0_t">"Förändringar i 1.1.0:
 \n\t* Insticksmodul för beräkning av avstånd\n\t* Insticksmodul för ljud-/videoanteckningar\n\t* Insticksmodul för höjdkurvor\n\t* Buggfixar
@@ -1438,8 +1438,8 @@
     <string name="navigation_intent_invalid">Ogiltigt format: %s</string>
 <string name="osmo_settings_uuid">Unikt enhets-id</string>
     <string name="osmo_settings_descr">Konfigurera inställningar för övervakning och ställ in personlig övervakningskanal</string>
-    <string name="osmo_plugin_name">OSMo (Avancerad direktspårning)</string>
-    <string name="osmo_settings">OpenStreetMap-övervakning</string>
+    <string name="osmo_plugin_name">OSMo-spårning</string>
+    <string name="osmo_settings">OsMo-spårning</string>
    	<string name="osmo_plugin_description">"OpenStreetMap - avancerad direktspårning, se http://osmo.mobi. Spåra andra enheter och bli spårad själv. Skapa anonyma grupper, dela med er av era positioner och kommunicera med varandra. Det finns olika inställningar för sessionsspårning eller permanent spårning. Anonyma grupper är begränsade till ett antal dagar och för vissa funktioner finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
     <string name="interrupt_music_descr">Avbryt musik vid meddelanden</string>
 	<string name="interrupt_music">Avbryt musik</string>
@@ -1667,8 +1667,8 @@
     <string name="speak_poi">Meddela om närbelägna intresssepunkter</string>
     <string name="index_tours">Rundturer</string>
     <string name="flat_list_waypoints">Alla</string>
-    <string name="record_plugin_description">Spara dina spår med ett tryck på en knapp på kartskärmen. Visa inställningar som underlättar inspelningen av dina resor till lokala GPX-filer eller online via en webbtjänst.</string>
-    <string name="record_plugin_name">Spela in dina resor</string>
+    <string name="record_plugin_description">Aktiverar möjligheten att spara dina spår med ett tryck på en knapp på kartskärmen och visar inställningarna att spela in dina resor till lokala GPX-filer eller till en webbtjänst online.</string>
+    <string name="record_plugin_name">Inspelning av resor</string>
     <string name="int_hour">h</string>
     <string name="duration">Längd</string>
     <string name="distance">Sträcka</string>
@@ -1801,8 +1801,8 @@
 <string name="enable_plugin2">Aktivera</string>
 	<string name="disable_plugin2">Inaktivera</string>
 	<string name="get_plugin">Hämta</string>
-<string name="plugin_ski_name">Skidkartor</string>
-    <string name="plugin_nautical_name">Sjökort</string>
+<string name="plugin_ski_name">Skidkartsvy</string>
+    <string name="plugin_nautical_name">Sjökortsvy</string>
     <string name="world_ski_missing">För att kunna visa skidkartor måste den speciella offline-kartan hämtas</string>
     <string name="nautical_maps_missing">För att kunna visa sjökort måste den speciella offline-kartan hämtas</string>
 	<string name="rendering_attr_pisteGrooming_name">Pist- och spårpreparering</string>
@@ -1818,4 +1818,14 @@
 	<string name="audio">Ljud</string>
 	<string name="video">Video</string>
 	<string name="photo">Foton</string>
+	<string name="plugin_nautical_descr1">Om du aktiverar denna vy ändras kartstilen till Nautisk och visar alla sjömärken och sjökortssymboler.</string>
+	<string name="plugin_nautical_descr2">En kartfil som innehåller alla nautiska symboler globalt finns tillgänglig som en enda nedladdning med namnet \'World seamarks\'.</string>
+	<string name="plugin_nautical_descr3">Denna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.</string>
+
+	<string name="plugin_ski_descr1">Om du aktiverar denna vy ändras kartstilen till Vinter och skidor, och visar landskapet i vinterskrud.</string>
+	<string name="plugin_ski_descr2">En global karta med alla pister och längdskidspår i denna vy finns tillgänglig under Hämtningar som \'World ski map\'.</string>
+	<string name="plugin_ski_descr3">Denna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.</string>
+
+	<string name="plugin_touringview_descr3">Ingen speciell hämtning av någon karta krävs; denna vy skapas med våra standardkartor.</string>
+	<string name="plugin_touringview_descr4">Denna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.</string>
 	</resources>

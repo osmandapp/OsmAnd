@@ -3,20 +3,19 @@ package net.osmand.plus.views.controls;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.view.*;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.FavoritesListFragment.FavouritesAdapter;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
@@ -33,6 +32,10 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.view.Gravity;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -216,11 +219,10 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				FavouritePoint fp = favouritesAdapter.getItem(position);
 				LatLon point = new LatLon(fp.getLatitude(), fp.getLongitude());
-				String name = mapActivity.getString(R.string.favorite) + ": " + fp.getName();
 				if(target) {
-					getTargets().navigateToPoint(point, true, -1, name);
+					getTargets().navigateToPoint(point, true, -1, fp.getPointDescription());
 				} else {
-					getTargets().setStartPoint(point, true, name);
+					getTargets().setStartPoint(point, true, fp.getPointDescription());
 				}
 				favoritesDialog.dismiss();
 				//Next 2 lines ensure Dialog is shown in the right correct position after a selection been made
@@ -360,7 +362,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 			return via;
 		}
 		for (int i = 0; i < points.size() ; i++) {
-			via += "\n - " + getRoutePointDescription(points.get(i).point, points.get(i).name);
+			via += "\n - " + getRoutePointDescription(points.get(i).point, points.get(i).getOnlyName());
 		}
 		return mapActivity.getString(R.string.route_via) + via;
 	}
@@ -387,7 +389,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		
 		TargetPoint start = getTargets().getPointToStart();
 		if (start != null) {
-			String oname = start.name != null && start.name.length() > 0 ? start.name
+			String oname = start.getOnlyName().length() > 0 ? start.getOnlyName()
 					: (mapActivity.getString(R.string.route_descr_map_location) + " " + getRoutePointDescription(start.getLatitude(), start.getLongitude()));
 			fromActions.add(oname);
 		}
@@ -416,7 +418,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		if (targets.getPointToNavigate() != null) {
 			toActions.add(mapActivity.getString(R.string.route_descr_destination) + " "
 					+ getRoutePointDescription(targets.getPointToNavigate().point, 
-							targets.getPointToNavigate().name));
+							targets.getPointToNavigate().getOnlyName()));
 		} else {
 			toSpinner.setPromptId(R.string.route_descr_select_destination);
 			toActions.add(mapActivity.getString(R.string.route_descr_select_destination));			

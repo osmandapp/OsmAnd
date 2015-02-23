@@ -363,7 +363,7 @@
 	<string name="osmand_accessibility_description">Viser indstillinger for specielle tilgængelighedsfunktioner.</string>
 	<string name="extra_settings">Avancerede indstillinger</string>
 	<string name="osmand_monitoring_description">Viser knappen og indstillinger som muliggør optagelse af dine ture til en lokal GPX-fil eller til en online webtjeneste.</string>
-	<string name="osmand_rastermaps_plugin_description">Viser indstillinger til at konfigurere en række online eller cachelagrede delkort som basiskort eller som over-/ underlejringskort. Disse kort kan også fremstilles offline og kopieres til OsmAnd datamappen.</string>
+	<string name="osmand_rastermaps_plugin_description">Viser indstillinger til at bruge en række online eller cachelagrede delkort som primær kort eller som over-/ underlejringskort. Disse kort kan også fremstilles offline og kopieres til OsmAnd datamappen.</string>
 	<string name="osmand_extra_settings_description">Vis indstillinger for avanceret kortkonfiguration (som at øge kortdetaljer) og nogle enhedsspecifikke indstillinger.</string>
 	<string name="osmand_development_plugin_description">Viser indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller optegningsydeevne indikation.</string>
 	<string name="plugins_screen">Udvidelser</string>
@@ -1298,7 +1298,7 @@
     <string name="distance_measurement_finish_subtrack">Begynd et nyt underspor</string>
     <string name="distance_measurement_clear_route">Slet punkter</string>
     <string name="plugin_distance_point_ele">højde</string>
-    <string name="osmand_distance_planning_plugin_description">Opret et spor (eller brug eksisterende GPX-filer) til at måle afstanden mellem punkter. Gem som GPX, kan bruges til at planlægge GPX-ruter.</string>
+    <string name="osmand_distance_planning_plugin_description">Aktiverer et modul, som gør det muligt at oprette spor ved at trykke på kortet (eller bruge / ændre eksisterende GPX-filer) til at måle afstanden mellem punkter. Resultaterne kan gemmes som GPX, der kan bruges til at planlægge GPX-ruter med.</string>
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
     <string name="use_distance_measurement_help">* Tryk for at markere et punkt.\n * Langt tryk på kortet for at slette tidligere punkt.\n * Langt tryk på punkt for at se og vedhæfte beskrivelse.\n * Klik på målemodul for at se flere handlinger.</string>
     <string name="delete_point">Slet punkt</string>
@@ -1864,7 +1864,7 @@
     <string name="dash_download_new_one">Hent nye kort</string>
     <string name="dash_download_manage">Administrer</string>
     <string name="voices">Stemmevejledning</string>
-	<string name="rendering_attr_roadStyle_name">Vejrepræsentation</string>
+	<string name="rendering_attr_roadStyle_name">Vejformat</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">Tysk vejkort</string>
@@ -1909,8 +1909,8 @@
 <string name="enable_plugin2">Aktiver</string>
 	<string name="disable_plugin2">Deaktiver</string>
 	<string name="get_plugin">Hent</string>
-<string name="plugin_ski_name">Skikortvisning</string>
-    <string name="plugin_nautical_name">Nautisk kortvisning</string>
+<string name="plugin_ski_name">Skikort</string>
+    <string name="plugin_nautical_name">Søkort</string>
     <string name="world_ski_missing">For at vise skikort, skal det særlige offline kort hentes</string>
     <string name="nautical_maps_missing">For at vise søkort, skal det særlige offline kort hentes</string>
 	<string name="rendering_attr_pisteGrooming_name">Pistepreparering</string>
@@ -1927,18 +1927,19 @@
 	<string name="audio">Audio</string>
 	<string name="video">Video</string>
 	<string name="photo">Foto</string>
-	<string name="plugin_touringview_name">Touring kortvisning</string>
+	<string name="plugin_touringview_name">Touring</string>
 
-	<string name="plugin_nautical_descr1">Aktivering af visningen ændrer kortformat til maritim, hvilket viser alle sømærker og diagram symboler.</string>
+	<string name="plugin_nautical_descr1">Aktivering ændrer kortformat til maritim, hvilket viser alle sømærker og søkortsymboler.</string>
 	<string name="plugin_nautical_descr2">Et kortfil, der indeholder alle maritime symboler er tilgængelig som \'Sømærker (på verdensplan)\'.</string>
 	<string name="plugin_nautical_descr3">Visningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.</string>
 
-	<string name="plugin_ski_descr1">Aktivering af visningen ændrer kortformat til \'Vinter og ski\', der viser alle landskabstræk under vinterlige forhold.</string>
-	<string name="plugin_ski_descr2">En global kort viser alle skiløjper og cross country skiruter i denne visning er tilgængelig som \'Skikort (på verdensplan)\'.</string>
+	<string name="plugin_ski_descr1">Aktivering ændrer kortformat til \'Vinter og ski\', der viser alle landskabstræk under vinterlige forhold.</string>
+	<string name="plugin_ski_descr2">Et kort som viser alle skiløjper og langrendsruter, kan hentes som \'Skikort (på verdensplan)\'.</string>
 	<string name="plugin_ski_descr3">Visningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.</string>
 
 	<string name="plugin_touringview_descr1">Aktivering af visningen ændrer kortformat til \'Touring\', det er en særlig højdetaljevisning for rejsende og erhvervschauffører.</string>
 	<string name="plugin_touringview_descr2">Visning giver, på et givet kortzoom, den maksimale mængde rejseoplysninger til rådighed i kortdata (især veje, spor, stier, og orienteringsmærker). Det viser også tydeligt alle vejtyper utvetydigt med farvekoder, som er nyttigt, f.eks ved med kørsel store køretøjer.</string>
-	<string name="plugin_touringview_descr3">En særlig kort er ikke nødvendigt, visningen er skabt ud fra standard kort.</string>
+	<string name="plugin_touringview_descr3">Et særligt kort er ikke nødvendigt, visningen er skabt ud fra standardkort.</string>
 	<string name="plugin_touringview_descr4">Visningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.</string>
+	<string name="location_on_map">Placering:\n Lat %1$s\n Long %2$s</string>
 	</resources>

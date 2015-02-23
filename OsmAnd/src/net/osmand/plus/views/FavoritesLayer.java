@@ -7,6 +7,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
@@ -150,9 +151,9 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 			int i = 0;
 			for(LocationPoint fav : favs) {
 				if (i++ > 0) {
-					res.append("\n\n");
+					res.append("\n");
 				}
-				res.append(getObjName() + " : " + fav.getName(view.getContext()));  //$NON-NLS-1$
+				res.append(PointDescription.getSimpleName(fav, view.getContext()));  //$NON-NLS-1$
 			}
 			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
 			return true;
@@ -167,7 +168,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 		if(o!= null && fcl.isInstance(o)) {
 			String desciption = ((FavouritePoint)o).getDescription() != null ?
 					" " + ((FavouritePoint)o).getDescription() : "";
-			return getObjName() + ": " + ((LocationPoint)o).getName(view.getContext())
+			return PointDescription.getSimpleName((LocationPoint) o, view.getContext()) + " "
 					+ desciption; //$NON-NLS-1$
 		}
 		return null;
@@ -176,9 +177,9 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	
 	
 	@Override
-	public String getObjectName(Object o) {
+	public PointDescription getObjectName(Object o) {
 		if(o instanceof LocationPoint){
-			return ((LocationPoint)o).getName(view.getContext()); //$NON-NLS-1$
+			return ((LocationPoint) o).getPointDescription(view.getContext()); //$NON-NLS-1$
 		}
 		return null;
 	}
@@ -238,7 +239,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 
 	@Override
 	public String getText(LocationPoint o) {
-		return o.getName(view.getContext());
+		return PointDescription.getSimpleName(o, view.getContext());
 	}
 	
 

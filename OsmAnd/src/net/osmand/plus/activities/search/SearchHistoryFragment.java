@@ -1,34 +1,34 @@
 package net.osmand.plus.activities.search;
 
+import java.text.MessageFormat;
 import java.util.List;
 
-import android.support.v4.app.ListFragment;
-import android.support.v7.widget.PopupMenu;
-import android.view.*;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.util.MapUtils;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.ListFragment;
+import android.support.v7.widget.PopupMenu;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
-import android.view.View.OnClickListener;
-import android.widget.AbsListView;
-import android.widget.ActionMenuView;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -94,6 +94,8 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		if (location == null) {
 			location = ((OsmandApplication) activity.getApplication()).getSettings().getLastKnownMapLocation();
 		}
+		historyAdapter.clear();
+		historyAdapter.addAll(helper.getHistoryEntries());
 		locationUpdate(location);
 		clearButton.setVisibility(historyAdapter.isEmpty() ? View.GONE : View.VISIBLE);
 		
@@ -115,11 +117,11 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 	}
 
 	private void selectModel(final HistoryEntry model, View v) {
-		String name = model.getName();
+		PointDescription name = model.getName();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		OsmandSettings settings = ((OsmandApplication) getActivity().getApplication()).getSettings();
 		DirectionsDialogs.createDirectionsActionsPopUpMenu(optionsMenu, new LatLon(model.getLat(), model.getLon()),
-				model, name, settings.getLastKnownMapZoom(), getActivity(), false);
+				model, name, settings.getLastKnownMapZoom(), getActivity(), true);
 		optionsMenu.show();
 	}
 
@@ -150,7 +152,8 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 				int dist = (int) (MapUtils.getDistance(location, model.getLat(), model.getLon()));
 				distance = OsmAndFormatter.getFormattedDistance(dist, (OsmandApplication) getActivity().getApplication()) + "  ";
 			}
-			label.setText(distance + model.getName(), BufferType.SPANNABLE);
+			String rnk = MessageFormat.format(" {0,number,#.##E00} ", ((float)model.getRank(System.currentTimeMillis())));
+			label.setText(distance + rnk  + model.getName().getName(), BufferType.SPANNABLE);
 			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length(), 0);
 			icon.setOnClickListener(new View.OnClickListener() {
 				@Override

@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.TargetPointsHelper;
@@ -92,7 +93,7 @@ public class OsMoControlDevice implements OsMoReactor {
 					robj.put("version", Version.getAppVersion(app));
 					TargetPointsHelper tg = app.getTargetPointsHelper();
 					if(tg.getPointToNavigate() != null) {
-						addPoint(robj, "target_", tg.getPointToNavigate().point, tg.getPointToNavigate().name);
+						addPoint(robj, "target_", tg.getPointToNavigate().point, tg.getPointToNavigate().getOriginalPointDescription());
 					}
 					List<TargetPoint> intermediatePoints = tg.getIntermediatePoints();
 					if (intermediatePoints.size() > 0) {
@@ -101,7 +102,7 @@ public class OsMoControlDevice implements OsMoReactor {
 						for (int i = 0; i < intermediatePoints.size(); i++) {
 							JSONObject js = new JSONObject();
 							ar.put(js);
-							addPoint(js, "", intermediatePoints.get(i).point, intermediatePoints.get(i).name);
+							addPoint(js, "", intermediatePoints.get(i).point, intermediatePoints.get(i).getOriginalPointDescription());
 						}
 					}
 					service.pushCommand("OSMAND_INFO|"+robj.toString());
@@ -118,11 +119,11 @@ public class OsMoControlDevice implements OsMoReactor {
 		return false;
 	}
 
-	private void addPoint(JSONObject robj, String prefix, LatLon pointToNavigate, String pointNavigateDescription) throws JSONException {
+	private void addPoint(JSONObject robj, String prefix, LatLon pointToNavigate, PointDescription pointNavigateDescription) throws JSONException {
 		robj.put(prefix+"lat", pointToNavigate.getLatitude());
 		robj.put(prefix+"lon", pointToNavigate.getLongitude());
 		if(pointNavigateDescription != null) {
-			robj.put(prefix+"name", pointNavigateDescription);
+			robj.put(prefix+"name", pointNavigateDescription.getName());
 		}
 	}
 

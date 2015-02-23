@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
@@ -246,11 +247,12 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	}
 
 	@Override
-	public String getObjectName(Object o) {
+	public PointDescription getObjectName(Object o) {
 //		if(o instanceof OsMoDevice) {
 //			return map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName();
 //		}
-		return getObjectDescription(o);
+		String desc = getObjectDescription(o);
+		return desc == null ? null : new PointDescription(PointDescription.POINT_TYPE_MARKER, desc);
 	}
 	
 	public void refresh() {

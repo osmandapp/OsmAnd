@@ -1,6 +1,7 @@
 package net.osmand.plus.dialogs;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.Item;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -24,7 +25,7 @@ import java.lang.reflect.Method;
 
 public class DirectionsDialogs {
 	
-	public static void directionsToDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name) {
+	public static void directionsToDialogAndLaunchMap(final Activity act, final double lat, final double lon, final PointDescription name) {
 		final OsmandApplication ctx = (OsmandApplication) act.getApplication();
 		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
 		if (targetPointsHelper.getIntermediatePoints().size() > 0) {
@@ -52,13 +53,13 @@ public class DirectionsDialogs {
 		}
 	}
 	
-	public static void createDirectionsActionsPopUpMenu(final PopupMenu optionsMenu , final LatLon location, final Object obj, final String name,
+	public static void createDirectionsActionsPopUpMenu(final PopupMenu optionsMenu , final LatLon location, final Object obj, final PointDescription name,
 											   final int z, final Activity activity, final boolean saveHistory) {
 		createDirectionActionsPopUpMenu(optionsMenu, location, obj, name, z, activity, saveHistory, true);
 	}
 
 
-	public static void createDirectionActionsPopUpMenu(final PopupMenu optionsMenu, final LatLon location, final Object obj, final String name,
+	public static void createDirectionActionsPopUpMenu(final PopupMenu optionsMenu, final LatLon location, final Object obj, final PointDescription name,
 															final int z, final Activity activity, final boolean saveHistory, boolean favorite) {
 		setupPopUpMenuIcon(optionsMenu);
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
@@ -100,7 +101,7 @@ public class DirectionsDialogs {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), z, saveHistory ? name : null, name,
+				app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), z, name, saveHistory,
 						obj); //$NON-NLS-1$
 				MapActivity.launchMapActivityMoveToTop(activity);
 				return true;
@@ -124,7 +125,7 @@ public class DirectionsDialogs {
 		}
 	}
 	
-	public static void addWaypointDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name) {
+	public static void addWaypointDialogAndLaunchMap(final Activity act, final double lat, final double lon, final PointDescription name) {
 		final OsmandApplication ctx = (OsmandApplication) act.getApplication();
 		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
 		if (targetPointsHelper.getPointToNavigate() != null) {

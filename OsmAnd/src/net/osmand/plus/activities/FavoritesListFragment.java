@@ -111,10 +111,9 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 		
 		if (!isSelectFavoriteMode()) {
 			FavouritePoint point = favouritesAdapter.getItem(position);
-			String name = getString(R.string.favorite) + ": " + point.getName();
 			LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
 			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
-			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, point, name, settings.getLastKnownMapZoom(),
+			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, point, point.getPointDescription(), settings.getLastKnownMapZoom(),
 					getActivity(), true, false);
 			optionsMenu.show();
 		} else {
@@ -171,10 +170,7 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 		}
 		
 		public String getName(FavouritePoint model){
-			if(Algorithms.isEmpty(model.getCategory())) {
-				return model.getName();
-			}
-			return model.getCategory() + ": " + model.getName();
+			return model.getName();
 		}
 		
 		@Override

@@ -28,6 +28,15 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return color;
 	}
 	
+	public PointDescription getPointDescription() {
+		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, name);
+	}
+	
+	@Override
+	public PointDescription getPointDescription(Context ctx) {
+		return getPointDescription();
+	}
+	
 	public void setColor(int color) {
 		this.color = color;
 	}

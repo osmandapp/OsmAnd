@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
@@ -155,8 +156,8 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
     }
 
     @Override
-    public String getObjectName(Object o) {
-        return mapView.getContext().getString(R.string.i_am_here);
+    public PointDescription getObjectName(Object o) {
+        return new PointDescription(PointDescription.POINT_TYPE_MARKER, mapView.getContext().getString(R.string.i_am_here));
     }
 
 }
