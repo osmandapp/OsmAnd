@@ -2148,7 +2148,7 @@
 	<string name="free">"무료 %1$s "</string>
 	<string name="device_memory">장치 메모리</string>
     <string name="roads_only">도로 전용</string>
-    <string name="watch">시계</string>
+    <string name="watch">보기(Watch)</string>
 	<string name="notes">노트</string>
 	<string name="online_map">온라인 지도</string>
 	<string name="share_note">노트 공유</string>
