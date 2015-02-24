@@ -9,21 +9,23 @@ import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
+import net.osmand.plus.activities.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.touringview.TouringViewPlugin;
-import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmo.OsMoPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routepointsnavigation.RoutePointsPlugin;
+import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.touringview.TouringViewPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
@@ -187,6 +189,8 @@ public abstract class OsmandPlugin {
 	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {}
 	
 	public void updateLocation(Location location) {}
+	
+	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {	}
 	
 	public void contextMenuFragment(Activity activity, Fragment fragment, Object info, ContextMenuAdapter adapter) {}
 	
@@ -371,7 +375,10 @@ public abstract class OsmandPlugin {
 		return getEnabledPlugin(OsmandDevelopmentPlugin.class) != null;
 	}
 
-	
-
+	public static void addMyPlacesTabPlugins(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
+		for(OsmandPlugin p : getEnabledPlugins()){
+			p.addMyPlacesTab(favoritesActivity, mTabs, intent);
+		}				
+	}
 
 }

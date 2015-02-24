@@ -8,31 +8,27 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ImageSpan;
-import android.view.MenuItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ImageSpan;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.audionotes.NotesFragment;
-import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 /**
  *
@@ -45,7 +41,7 @@ public class FavoritesActivity extends TabActivity {
 //	public static int FAVORITES_TAB = 0;
 //	public static int GPX_TAB = 1;
 //	public static int SELECTED_GPX_TAB = 2;
-	public static String TAB_PARAM = "TAB_PARAM";
+//	public static String TAB_PARAM = "TAB_PARAM";
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 
 	@Override
@@ -56,53 +52,39 @@ public class FavoritesActivity extends TabActivity {
 		getSupportActionBar().setElevation(0);
 
 		File[] lf = ((OsmandApplication) getApplication()).getAppPath(TRACKS).listFiles();
-		boolean hasGpx =  false;
-		if(lf != null) {
-			for(File t : lf) {
-				if(t.isDirectory() || (t.getName().toLowerCase().endsWith(".gpx"))) {
+		boolean hasGpx = false;
+		if (lf != null) {
+			for (File t : lf) {
+				if (t.isDirectory() || (t.getName().toLowerCase().endsWith(".gpx"))) {
 					hasGpx = true;
 					break;
 				}
 			}
 		}
+
+		setContentView(R.layout.tab_content);
+
+		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
+		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 		
-		if(!hasGpx) {
-			setContentView(R.layout.search_activity_single);
-			getSupportFragmentManager().beginTransaction().add(R.id.layout, new FavoritesTreeFragment()).commit();
-		} else {
-			setContentView(R.layout.tab_content);
+		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
 
-			PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
-			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
-			Integer tab = settings.FAVORITES_TAB.get();
-			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
-
-			List<TabItem> mTabs = new ArrayList<TabItem>();
-			mTabs.add(getTabIndicator(R.string.my_favorites, FavoritesTreeFragment.class));
-			AudioVideoNotesPlugin audioVideoNotesPlugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
-			if (audioVideoNotesPlugin != null && audioVideoNotesPlugin.isActive()
-					&& audioVideoNotesPlugin.getAllRecordings().size() > 0){
-				mTabs.add(getTabIndicator(R.string.notes, NotesFragment.class));
-			}
+		List<TabItem> mTabs = new ArrayList<TabItem>();
+		mTabs.add(getTabIndicator(R.string.my_favorites, FavoritesTreeFragment.class));
+		if (hasGpx) {
 			mTabs.add(getTabIndicator(R.string.my_tracks, AvailableGPXFragment.class));
 			mTabs.add(getTabIndicator(R.string.selected_track, SelectedGPXFragment.class));
-
-			setViewPagerAdapter(mViewPager, mTabs);
-			mSlidingTabLayout.setViewPager(mViewPager);
-
-
-			Intent intent = getIntent();
-			if(intent != null) {
-				int tt = intent.getIntExtra(TAB_PARAM, -1);
-				if(tt >= 0) {
-					mViewPager.setCurrentItem(tt);
-				}
-			} else {
-				mViewPager.setCurrentItem(tab);
-			}
-			updateSelectedTracks();
 		}
-		//setupHomeButton();
+		OsmandPlugin.addMyPlacesTabPlugins(this, mTabs, getIntent());
+		
+		Integer tab = settings.FAVORITES_TAB.get();
+		
+		setViewPagerAdapter(mViewPager, mTabs);
+		mSlidingTabLayout.setViewPager(mViewPager);
+
+		mViewPager.setCurrentItem(tab);
+		updateSelectedTracks();
+		// setupHomeButton();
 	}
 
 	@Override

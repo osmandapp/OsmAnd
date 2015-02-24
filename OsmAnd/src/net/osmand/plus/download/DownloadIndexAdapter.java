@@ -269,14 +269,12 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
 				String date = updatableResource ? indexActivatedFileNames.get(sfName) : indexFileNames.get(sfName);
 				boolean outdated = DownloadActivity.downloadListIndexThread.checkIfItemOutdated(e);
-				description.setText(date + " " + e.getSizeDescription(clctx));
-				// up to date
 				String updateDescr = downloadFragment.getResources().getString(R.string.local_index_installed) + ": "
 						+ date;
 				uptodate.setText(updateDescr);
 				update.setText(updateDescr);
-				uptodate.setVisibility(outdated ? View.VISIBLE : View.GONE);
-				update.setVisibility(outdated ? View.GONE : View.VISIBLE);
+				uptodate.setVisibility(!outdated ? View.VISIBLE : View.GONE);
+				update.setVisibility(!outdated ? View.GONE : View.VISIBLE);
 			}
 		}
 		return row;

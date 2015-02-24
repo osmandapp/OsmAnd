@@ -927,10 +927,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			} else if (child.isLoaded()) {
 				// users confused okColor here with "uptodate", so let's leave white (black in dark app theme) as "isLoaded"
 				//viewName.setTextColor(okColor);
+			}
+			if (child.isBackupedData()) {
+				viewName.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 			} else {
-				if (child.isBackupedData()) {
-					viewName.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
-				}
+				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			}
 			TextView sizeText = (TextView) v.findViewById(R.id.local_index_size);
 			if (child.getSize() >= 0) {
