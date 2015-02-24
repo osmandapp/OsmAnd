@@ -2167,4 +2167,11 @@
 	<string name="plugin_ski_descr3">"다시 비활성화 하거나, 또는 \'지도 구성\' 의 하위메뉴인  \'지도 스타일\'을 변경하여 보기(View)를 되돌릴 수 있습니다."</string>
 
 	<string name="plugin_touringview_descr1">"지도 스타일을  \'여행 보기\'로 변경합니다, 이는 여행자와 전문 드라이버을 위한 특별한 상세 보기를 지원합니다."</string>
+	<string name="plugin_touringview_descr2">이 보기는 다음을 제공 합니다, 어떤 주어진 된 지도 줌레벨에서, 여행의 최대 용량으로 지도 데이터 (특히 도로, 트랙, 경로 및 방향 표시)에서 사용할 수 있다. 그것은 또한 명확하게 (예를 들면 대형 차량 운전 하는 경우, 컬러 코딩으로) 모든 유형의 도로를 묘사합니다.</string>
+	<string name="plugin_touringview_descr3">특별한 지도 다운로드는 필요 하지 않습니다, 보기(View)는 표준 지도에서 만들어집니다.</string>
+	<string name="plugin_touringview_descr4">"다시 비활성화 하거나, 또는 \'지도 구성\' 의 하위메뉴인  \'지도 스타일\'을 변경하여 보기(View)를 되돌릴 수 있습니다."</string>
+	<string name="plugin_touringview_name">여행중인 지도 보기</string>
+
+	<string name="location_on_map">위치:
+\n위도 %1$s\n경도 %2$s</string>
 	</resources>
