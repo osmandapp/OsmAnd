@@ -6,9 +6,11 @@ import java.util.List;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -43,7 +45,9 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			@Override
 			public void onClick(View view) {
 				Activity activity = getActivity();
-				final Intent favorites = new Intent(activity, DashAudioVideoNotesActivity.class);
+				Class<FavoritesActivity> fa = getMyApplication().getAppCustomization().getFavoritesActivity();
+				final Intent favorites = new Intent(activity, fa);
+				favorites.putExtra("TAB", "AUDIO");
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(favorites);
 			}
@@ -98,7 +102,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 				public void onClick(View v) {
 					getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, 
 							new PointDescription(PointDescription.POINT_TYPE_NOTE, 
-							recording.getName() != null ? recording.getName() : recording.getDescription(getActivity())), true,
+							!Algorithms.isEmpty(recording.getName())? recording.getName() : recording.getDescription(getActivity())), true,
 							recording); //$NON-NLS-1$
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
