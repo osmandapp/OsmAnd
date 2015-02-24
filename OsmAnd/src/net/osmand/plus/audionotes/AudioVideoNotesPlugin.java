@@ -67,6 +67,7 @@ import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Display;
 import android.view.KeyEvent;
@@ -138,9 +139,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			this.file = f;
 		}
 
-		public File file;
+		private File file;
 
-		private String name;
 		private double lat;
 		private double lon;
 		private long duration = -1;
@@ -172,12 +172,26 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		}
 
-		public void setName(String name) {
-			this.name = name;
+		public File getFile() {
+			return file;
+		}
+
+		public boolean setName(String name) {
+			int index = file.getAbsolutePath().lastIndexOf("/") + 1;
+			if (index < 0){
+				return false;
+			}
+			File directory = new File(file.getAbsolutePath().substring(0, index));
+			File to        = new File(directory, name.trim());
+			if (file.renameTo(to)){
+				file = to;
+				return true;
+			}
+			return false;
 		}
 
 		public String getName() {
-			return name;
+			return file.getName();
 		}
 
 		public boolean isPhoto() {
@@ -289,13 +303,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 
 		public String getSmallDescription(Context ctx) {
-			String nm = name == null ? "" : name;
-			
+
 			String time = AndroidUtils.formatDateTime(ctx,file.lastModified());
 			if (isPhoto()) {
-				return ctx.getString(R.string.recording_photo_description, nm, time).trim();
+				return ctx.getString(R.string.recording_photo_description, "", time).trim();
 			}
-			return ctx.getString(R.string.recording_description, nm, "", time).trim();
+			return ctx.getString(R.string.recording_description, "", "", time).trim();
 		}
 
 		private String getDuration(Context ctx) {

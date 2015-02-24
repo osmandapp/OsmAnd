@@ -64,4 +64,13 @@
 		android:focusable="false"
 		android:src="?attr/list_settings_icon"/>
 
+	<ImageButton
+		android:id="@+id/play"
+		android:layout_width="@dimen/dashListItemHeight"
+		android:layout_height="@dimen/dashListItemHeight"
+		android:layout_gravity="center_vertical"
+		android:layout_marginLeft="@dimen/dashFavIconMargin"
+		android:background="?attr/dashboard_button"
+		android:src="@drawable/ic_play_light"/>
+
 </LinearLayout>
