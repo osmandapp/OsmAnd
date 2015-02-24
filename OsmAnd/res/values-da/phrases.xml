@@ -549,7 +549,7 @@
         <string name="poi_island">Ø</string>
         <string name="poi_islet">Holm</string>
 
-        <string name="poi_seamark_anchorage">Ankringsområde</string>
+        <string name="poi_seamark_anchorage">Ankerplads</string>
         <string name="poi_seamark_anchor_berth">Ankerplads</string>
         <string name="poi_seamark_beacon">Båke</string>
         <string name="poi_seamark_beacon_cardinal">Kompasbåke</string>
@@ -560,13 +560,13 @@
         <string name="poi_seamark_building">Sømærke bygning</string>
         <string name="poi_seamark_bridge">Sømærke bro</string>
         <string name="poi_seamark_buoy_cardinal">Kompastønde</string>
-        <string name="poi_seamark_buoy_installation">Installation tønde</string>
+        <string name="poi_seamark_buoy_installation">Installationstønde</string>
         <string name="poi_seamark_buoy_isolated_danger">Tønde, isoleret fare</string>
         <string name="poi_seamark_buoy_lateral">Sidetønde</string>
         <string name="poi_seamark_buoy_safe_water">Midtfarvandstønde</string>
         <string name="poi_seamark_buoy_special_purpose">Specialtønde</string>
         <string name="poi_seamark_daymark">Dagmærke</string>
-        <string name="poi_seamark_distance_mark">Distance mærke</string>
+        <string name="poi_seamark_distance_mark">Afstandsmærke</string>
         <string name="poi_seamark_dry_dock">Tørdok</string>
         <string name="poi_seamark_dyke">Dige</string>
         <string name="poi_seamark_floating_dock">Flydedok</string>
@@ -676,7 +676,7 @@
 	<string name="poi_tourism">Turisme</string>
 	<string name="poi_entertainment">Fritid</string>
 	<string name="poi_sustenance">Mad og spise</string>
-	<string name="poi_service">Serviceydelser</string>
+	<string name="poi_service">Tjenesteydelse</string>
 	<string name="poi_finance">Finansiel</string>
 	<string name="poi_natural">Natur</string>
 	<string name="poi_seamark">Maritimt</string>
