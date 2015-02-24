@@ -1935,13 +1935,13 @@
 	<string name="audio">Audio</string>
 	<string name="video">Vídeo</string>
 	<string name="photo">Foto</string>
-	<string name="plugin_nautical_descr1">Activando esta vista cambia el estilo de mapa a Náutico, mostrando así todas las marcas de navegación y símbolos gráficos náuticos.</string>
+	<string name="plugin_nautical_descr1">Activar esta vista cambia el estilo de mapa a Náutico, mostrando así todas las marcas de navegación y símbolos gráficos náuticos.</string>
 	<string name="plugin_nautical_descr2">Un archivo de mapa que contiene todos los símbolos náuticos a nivel mundial está disponible como una descarga única llamada \'Balizas mundiales\'.</string>
-	<string name="plugin_nautical_descr3">Esta vista se puede revertir o desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado .</string>
+	<string name="plugin_nautical_descr3">Esta vista se puede revertir desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado .</string>
 
-	<string name="plugin_ski_descr1">Activando estea vista cambia el estilo de mapa a \'invierno y esquí\', mostrando todas las características de terreno en condiciones invernales.</string>
-	<string name="plugin_ski_descr2">"Un mapa mundial que muestra todas las  pistas de esquí y las rutas de esquí de travesía con esta vista está disponible en Descargas como \'Mapa mundial de esquí\'."</string>
-	<string name="plugin_ski_descr3">Esta vista se puede revertir o desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado .</string>
+	<string name="plugin_ski_descr1">Activar esta vista cambia el estilo de mapa a \'invierno y esquí\', mostrando las características de terreno en condiciones invernales.</string>
+	<string name="plugin_ski_descr2">Un mapa mundial que muestra todas las pistas de esquí y las rutas de esquí de travesía con esta vista está disponible en Descargas como \'Mapa mundial de esquí\'.</string>
+	<string name="plugin_ski_descr3">Esta vista se puede revertir desactivándola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado.</string>
 
 	<string name="plugin_touringview_descr1">Activando esta vista cambia el estilo de mapa a \'Vista de Touring\', que es una vista de alto detalle especial para los viajeros y conductores profesionales.</string>
 	<string name="plugin_touringview_descr2">Esta vista proporciona, en cualquier nivel de zoom del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, pistas, senderos y marcas de orientación). También representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil cuando por ejemplo conduciendo vehículos grandes.</string>
