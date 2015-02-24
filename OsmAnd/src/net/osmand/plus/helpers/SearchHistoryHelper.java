@@ -367,7 +367,6 @@ public class SearchHistoryHelper {
 					"INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)", 
 					new Object[] { e.getSerializedName(), e.getLastAccessTime(), 
 							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon() }); //$NON-NLS-1$ //$NON-NLS-2$
-			System.out.println("Insert " + e.getSerializedName());
 		} 
 		
 		public List<HistoryEntry> getLegacyEntries(SQLiteConnection db){
@@ -433,8 +432,6 @@ public class SearchHistoryHelper {
 							}
 							entries.add(e);
 							st.put(e.getSerializedName(), e);
-							System.out.println(e.getSerializedName() + " ("+name+") " + new Date(e.getLastAccessTime()) + " " + 
-									e.getIntervalsValues() + " " + e.getIntervals());
 						} while (query.moveToNext());
 						if(reinsert) {
 							System.err.println("Reinsert all values");
