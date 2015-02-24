@@ -2094,7 +2094,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="audio">Audio</string>
 	<string name="video">Video</string>
 	<string name="photo">Foto</string>
-	<string name="plugin_nautical_descr1">Attivando questa vista lo stile della mappa diventerà Nautico, quindi mostrerà tutta la simbologia per la navigazione.</string>
+	<string name="plugin_nautical_descr1">Attivando questa visualizzazione lo stile della mappa diventerà Nautico, quindi mostrerà tutta la simbologia per la navigazione.</string>
 	<string name="plugin_nautical_descr2">È disponibile la mappa contenente tutta la simbologia nautica come singolo download sotto il nome \"World seamarks\".</string>
 	<string name="plugin_nautical_descr3">Ciò può essere invertito sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.</string>
 
