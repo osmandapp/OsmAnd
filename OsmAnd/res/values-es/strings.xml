@@ -1950,4 +1950,6 @@
 	<string name="plugin_touringview_descr4">La vista puede ser revertida desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' desde \'Configurar mapa\' como se quiera.</string>
 	<string name="location_on_map">Localización:\n Lat %1$s\n Lon %2$s</string>
 	<string name="watch">Ver</string>
+	<string name="plugin_touringview_name">Vista de mapa Touring</string>
+
 	</resources>
