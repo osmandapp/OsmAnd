@@ -1833,4 +1833,6 @@
 	<string name="plugin_touringview_descr2">Denna vy ger, vid varje zoomnivå, maximalt antal detaljer som är tillgängliga i kartdatat (speciellt vägar, stigar och orienteringsmärken). Den visar också alla vägtyper på ett mycket tydligt sätt via färgkoder något som är användbart t.ex vid framförande av stora fordon.</string>
 	<string name="plugin_touringview_name">Touring map-vy</string>
 
+	<string name="days_behind">dagar efter</string>
+	<string name="watch">Visa</string>
 	</resources>
