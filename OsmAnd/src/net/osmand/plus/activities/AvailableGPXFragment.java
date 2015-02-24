@@ -37,7 +37,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -111,27 +113,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			asyncLoader = new LoadGpxTask();
 			asyncLoader.execute(getActivity());
 		}
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
-		GpxSelectionHelper.SelectedGpxFile currentTrack = savingTrackHelper.getCurrentTrack();
-		View v = getView();
-		if (v == null){
-			return;
-		}
-		if (plugin != null && savingTrackHelper.getCurrentGpx() != null) {
 
+		updateCurrentTrack(getView());
 
-			v.findViewById(R.id.current_track).setVisibility(View.VISIBLE);
-			((TextView)v.findViewById(R.id.name)).setText(R.string.currently_recording_track);
-			String description = GpxUiHelper.getDescription(getMyApplication(), currentTrack.getGpxFile(), null, true);
-			int startindex = description.indexOf(">");
-			int endindex = description.indexOf("</font>");
-			String distnace = description.substring(startindex + 1, endindex);
-			((TextView)v.findViewById(R.id.distance)).setText(distnace);
-			v.findViewById(R.id.time_icon).setVisibility(View.GONE);
-		} else {
-			v.findViewById(R.id.current_track).setVisibility(View.GONE);
-		}
-		//TODO implement updating view of current track
 	}
 
 	@Override
@@ -142,6 +126,24 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
+	private void updateCurrentTrack(View v){
+		if (v == null){
+			return;
+		}
+		OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+
+		GpxSelectionHelper.SelectedGpxFile currentTrack = savingTrackHelper.getCurrentTrack();
+		if (plugin != null && savingTrackHelper.getCurrentGpx() != null) {
+			v.findViewById(R.id.current_track).setVisibility(View.VISIBLE);
+			String description = GpxUiHelper.getDescription(getMyApplication(), currentTrack.getGpxFile(), null, true);
+			int startindex = description.indexOf(">");
+			int endindex = description.indexOf("</font>");
+			String distance = description.substring(startindex + 1, endindex);
+			((TextView)v.findViewById(R.id.distance)).setText(distance);
+		} else {
+			v.findViewById(R.id.current_track).setVisibility(View.GONE);
+		}
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -150,6 +152,29 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if(this.adapter != null) {
 			listView.setAdapter(this.adapter);
 		}
+
+		((TextView)v.findViewById(R.id.name)).setText(R.string.currently_recording_track);
+		v.findViewById(R.id.time_icon).setVisibility(View.GONE);
+
+		Drawable icon = getResources().getDrawable(R.drawable.ic_action_rec_stop);
+		icon.mutate();
+		boolean light = getMyApplication().getSettings().isLightContent();
+		if (light){
+			icon.setColorFilter(0xff727272, PorterDuff.Mode.MULTIPLY);
+		}
+		ImageButton stop = ((ImageButton)v.findViewById(R.id.stop));
+		stop.setImageDrawable(icon);
+		stop.setVisibility(View.VISIBLE);
+
+		icon = getResources().getDrawable(R.drawable.ic_action_gsave_dark);
+		icon.mutate();
+		if  (light) {
+			icon.setColorFilter(0xff727272, PorterDuff.Mode.MULTIPLY);
+		}
+		ImageButton save = ((ImageButton)v.findViewById(R.id.show_on_map));
+		v.findViewById(R.id.divider).setVisibility(View.GONE);
+		save.setImageDrawable(icon);
+		updateCurrentTrack(v);
 		return v;
 	}
 
@@ -225,7 +250,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		};
 		optionsMenuAdapter.item(R.string.show_gpx_route)
-				.icons(R.drawable.ic_action_map_marker_dark, R.drawable.ic_action_map_marker_dark).listen(listener).reg();
+				.icons(R.drawable.ic_show_on_map, R.drawable.ic_show_on_map).listen(listener).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_delete)
 				.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark).listen(listener).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
@@ -531,26 +556,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			AccessibleToast.makeText(getActivity(), R.string.gpx_file_is_empty, Toast.LENGTH_LONG).show();
 		}
 	}
-
-	private void showContextMenu(final GpxInfo info) {
-		Builder builder = new AlertDialog.Builder(getActivity());
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(getActivity());
-		basicFileOperation(info, adapter);
-
-		String[] values = adapter.getItemNames();
-		builder.setItems(values, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				OnContextMenuClick clk = adapter.getClickAdapter(which);
-				if (clk != null) {
-					clk.onContextMenuClick(null, adapter.getElementId(which), which, false);
-				}
-			}
-
-		});
-		builder.show();
-	}
-
 
 	public class LoadGpxTask extends AsyncTask<Activity, GpxInfo, List<GpxInfo>> {
 
@@ -915,8 +920,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		boolean light = getMyApplication().getSettings().isLightContent();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+		Drawable showIcon = getResources().getDrawable(R.drawable.ic_show_on_map);
+		if (light) {
+			showIcon.mutate();
+			showIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+		}
 		MenuItem item = optionsMenu.getMenu().add(R.string.show_gpx_route)
-				.setIcon(light ? R.drawable.ic_action_map_marker_light : R.drawable.ic_action_map_marker_dark);
+				.setIcon(showIcon);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

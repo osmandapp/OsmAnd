@@ -49,6 +49,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 				final Intent favorites = new Intent(activity, fa);
 				favorites.putExtra("TAB", "AUDIO");
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.NOTES_TAB);
 				activity.startActivity(favorites);
 			}
 		});
@@ -104,6 +105,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 				}
 			});
 			view.findViewById(R.id.options).setVisibility(View.GONE);
+			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

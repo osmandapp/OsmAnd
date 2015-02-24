@@ -20,7 +20,9 @@
     <color name="search_background_dark">#292f33</color>
 
 
-	<color name="dashboard_descr_colol">#727272</color>
+	<color name="icon_color_light">#727272</color>
+
+	<color name="dashboard_gpx_on_map">#448AFF</color>
 	<color name="dashboard_background">#eaeaea</color>
 	<color name="dashboard_divider_light">#F0F0F0</color>
 	<color name="dashboard_divider_dark">#3d474c</color>

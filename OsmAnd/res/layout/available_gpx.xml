@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:orientation="vertical"
 			  android:layout_width="match_parent"
-			  android:layout_height="match_parent">
+			  android:layout_height="match_parent"
+			  android:orientation="vertical">
 
-	<LinearLayout android:id="@+id/current_track"
-				  android:orientation="vertical"
+	<LinearLayout
+		android:id="@+id/current_track"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content"
+		android:background="?attr/card_bg"
+		android:orientation="vertical">
 
-		<include android:layout_height="wrap_content"
-				 android:layout_width="match_parent"
-				 layout="@layout/dash_gpx_track_item"/>
+		<include
+			layout="@layout/dash_gpx_track_item"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"/>
 
-		<Button android:id="@+id/map_btn"
-				android:text="@string/back_to_map"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"/>
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/dashboard_divider"/>
 
-		</LinearLayout>
+		<Button
+			android:id="@+id/map_btn"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/expandable_list_item_background"
+			android:text="@string/back_to_map"/>
+
+	</LinearLayout>
 
 
 	<ExpandableListView
@@ -26,11 +36,11 @@
 		style="@style/OsmandListView"
 		android:layout_width="fill_parent"
 		android:layout_height="0dp"
-		android:background="?attr/expandable_list_background"
 		android:layout_marginLeft="0dp"
 		android:layout_marginRight="0dp"
 		android:layout_marginTop="0dp"
 		android:layout_weight="1"
+		android:background="?attr/expandable_list_background"
 		android:groupIndicator="@android:color/transparent"/>
 
 

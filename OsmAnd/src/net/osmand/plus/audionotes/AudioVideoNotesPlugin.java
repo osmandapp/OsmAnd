@@ -947,7 +947,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (getAllRecordings().size() > 0) {
 			mTabs.add(favoritesActivity.getTabIndicator(R.string.notes, NotesFragment.class));
 			if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
-				app.getSettings().FAVORITES_TAB.set(mTabs.size() - 1);
+				app.getSettings().FAVORITES_TAB.set(FavoritesActivity.NOTES_TAB);
 			}
 		}
 	}
