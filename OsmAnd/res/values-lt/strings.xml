@@ -82,7 +82,7 @@
   <string name="osmand_background_plugin_description">Rodyti nustatymus sekimui ir navigacijai miego režime (išjungus ekraną) periodiškai žadinant GPS įrenginį.</string>
   <string name="osmand_accessibility_description">Rodyti nustatymus specialiosios prieigos funkcionalumui.</string>
   <string name="extra_settings">Sudėtingesni nustatymai</string>
-  <string name="osmand_monitoring_description">Rodyti nustatymus leidžiančius jūsų nukeliautus maršrutus išsaugoti GPX failuose arba tiesiogiai sekti kelionės eigą naudojant interneto paslaugą.</string>
+  <string name="osmand_monitoring_description">Rodyti nustatymus, leidžiančius jūsų nukeliautus maršrutus išsaugoti GPX failuose arba tiesiogiai sekti kelionės eigą naudojant interneto paslaugą.</string>
   <string name="osmand_extra_settings_description">Rodyti nustatymus sudėtingesniam žemėlapio konfigūravimui (pvz. padidinti rodomų žemėlapio detalių kiekį) ir specifinius įrenginio nustatymus.</string>
   <string name="osmand_development_plugin_description">Rodyti nustatymus kūrimo ir klaidų paieškos funkcionalumui: pavyzdžiui animuotai navigacijai ar atvaizdavimo našumo informacijos rodymui.</string>
   <string name="plugins_screen">Įskiepių valdymas</string>
@@ -1147,7 +1147,7 @@
     <string name="srtm_plugin_name">SRTM įskiepis</string>
     <string name="download_select_map_types">Kiti žemėlapiai</string>
     <string name="download_srtm_maps">SRTM žemėlapiai</string>
-    <string name="audionotes_plugin_description">Audio užrašų įskiepio aprašymas</string>
+    <string name="audionotes_plugin_description">Rodomas audio/video įrašų mygtukas kelionės metu</string>
     <string name="audionotes_plugin_name">Audio užrašų įskiepis</string>
     
 	
@@ -1303,7 +1303,7 @@
     <string name="plugin_distance_point">Taškas</string>
     <string name="gpx_file_name">GPX failo pavadinimas</string>
     <string name="gpx_saved_sucessfully">GPX failas sėkmingai išsaugotas {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Kurti maršrutus (arba naudoti / keisti egzistuojančius GPX failus) atstumams tarp taškų matuoti. Išsaugojus GPX failą galima naudoti maršruto planavimui.</string>
+    <string name="osmand_distance_planning_plugin_description">Kurti maršrutus (arba naudoti/keisti egzistuojančius GPX failus) atstumams tarp taškų matuoti. Išsaugotą GPX failą galima naudoti maršruto planavimui.</string>
     <string name="osmand_distance_planning_plugin_name">Atstumo skaičiavimo ir planavimo įrankis</string>
     <string name="use_distance_measurement_help">* Palieskit etaškui pažymėti.\n * Paspauskite ant žemėlapio ir laikykite ankstesnio taško pašalinimui.\n * Paspauskite ant taško ir laikykite aprašymo peržiūrai ar sukūrimui.\n * Paspauskite ant matavimo įrankio kitiems veiksmams.</string>
     <string name="default_buttons_do_not_show_again">Daugiau neberodyti</string>
@@ -1558,9 +1558,9 @@
 	<string name="navigation_intent_invalid">Netinkamas formatas: %s</string>
 <string name="osmo_settings_uuid">Unikalus įrenginio ID</string>
     <string name="osmo_settings_descr">Konfigūruoti stebėjimo nustatymus ir nustatyti asmeninį stebėjimo kanalą</string>
-    <string name="osmo_plugin_description">"OpenStreetMap-Monitoring - pažangus tiesioginis stebėjimas http://osmo.mobi. Suteikia daug galimybių būti stebimam ir stebėti kitus įrenginius. Susikurkite anonimines grupes, bendrinkite vienas kito vietą ir bendraukite. Ši paslauga turi įvairių nustatymų vienkartiniam ir pastoviam sekimui. Anoniminės grupės gyvuoja tik kelias dienas su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. Viso funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti. "</string>
-    <string name="osmo_plugin_name">OsMo (Pažangus tiesioginis stebėjimas)</string>
-    <string name="osmo_settings">OpenStreetMap stebėjimas</string>
+    <string name="osmo_plugin_description">"Pateikia OsMo - pažangaus tiesioginio stebėjimo, nustatymus, daugiau http://osmo.mobi. Suteikia daug galimybių būti stebimam ir stebėti kitus įrenginius. Susikurkite anonimines grupes, bendrinkite vienas kito vietą ir bendraukite. Ši paslauga turi įvairių nustatymų vienkartiniam ir pastoviam sekimui. Anoniminės grupės gyvuoja tik kelias dienas su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. Viso funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti. "</string>
+    <string name="osmo_plugin_name">OsMo stebėjimas</string>
+    <string name="osmo_settings">OsMo stebėjimas</string>
    	<string name="keep_informing_never">Tik rankiniu būdu (spauskite rodyklę)</string>
     <string name="keep_informing_descr">Maršruto instrukcijas pakartotinai pranešinėti reguliariais intervalais</string>
     <string name="keep_informing">Pakartoti maršruto instrukcijas</string>
@@ -1789,7 +1789,7 @@
 	<string name="save_track_to_gpx_globally">Įrašyti maršrutą į GPX failą</string>
 	<string name="save_track_interval_globally">Įrašymo intervalas</string>
 	<string name="save_track_to_gpx_globally_descr">Bendras vietos išsaugojimas į GPX failą gali būti įjungtas ar išjungtas panaudojant GPX įrankį žemėlapio ekrane</string>
-	<string name="record_plugin_description">Kelionės istorijos išsaugojimas vieno mygtuko ekrane paspaudimu. Nustatymai kelionės istorijos išsaugojimui GPX faile ar naudojantis internetine paslauga.</string>
+	<string name="record_plugin_description">Išsaugo kelionės istoriją vieno mygtuko ekrane paspaudimu bei pateikia nustatymus, leidžiančius kelionės istoriją išsaugoti GPX faile ar naudojantis internetine paslauga.</string>
     <string name="confirm_every_run">Visada klausti</string>
 	<string name="save_global_track_interval_descr">Pasirinkite bendrojo maršruto įrašymo intervalą (įjungiama per GPX valdiklį žemėlapio rodinyje)</string>
 	<string name="save_global_track_interval">Bendras įrašymo intervalas</string>
@@ -1925,4 +1925,10 @@
     <string name="watch">Stebėti</string>
 	<string name="notes">Pastabos</string>
 	<string name="online_map">Žemėlapis online</string>
+	<string name="audio">Garsas</string>
+	<string name="video">Vaizdas</string>
+	<string name="photo">Foto</string>
+	<string name="rename_recording">Pervardinti įrašą</string>
+    <string name="location_on_map">Vieta:\n Plat. %1$s\n Ilg. %2$s</string>
+	<string name="export">Eksportuoti</string>
 	</resources>
