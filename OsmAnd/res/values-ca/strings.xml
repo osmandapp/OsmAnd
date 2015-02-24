@@ -1909,4 +1909,5 @@
 	<string name="notes">Notes</string>
 	<string name="online_map">Mapa en línia</string>
 	<string name="roads_only">Només carreteres</string>
-    </resources>
+    <string name="days_behind">dies de retard</string>
+	</resources>
