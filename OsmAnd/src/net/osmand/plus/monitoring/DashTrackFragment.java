@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -92,6 +93,9 @@ public class DashTrackFragment extends DashBaseFragment {
 					setText(distnace);
 			view.findViewById(R.id.time_icon).setVisibility(View.GONE);
 			//view.findViewById(R.id.distance_icon).setVisibility(View.GONE);
+			view.findViewById(R.id.stop).setVisibility(View.GONE);
+			((ImageButton)view.findViewById(R.id.show_on_map)).
+					setImageDrawable(getResources().getDrawable(R.drawable.ic_action_map));
 			tracks.addView(view);
 		}
 	}

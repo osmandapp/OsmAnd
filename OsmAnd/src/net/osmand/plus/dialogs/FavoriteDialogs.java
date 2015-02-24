@@ -175,7 +175,7 @@ public class FavoriteDialogs {
 	public  static Dialog createAddFavouriteDialog(final Activity activity, final Bundle args) {
     	Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.favourites_context_menu_edit);
-		final View v = activity.getLayoutInflater().inflate(R.layout.favourite_edit_dialog, null, false);
+		final View v = activity.getLayoutInflater().inflate(R.layout.favorite_edit_dialog, null, false);
 		final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
 		builder.setView(v);
 		final EditText editText =  (EditText) v.findViewById(R.id.Name);

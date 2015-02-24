@@ -27,6 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -39,6 +40,7 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -109,6 +111,27 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			asyncLoader = new LoadGpxTask();
 			asyncLoader.execute(getActivity());
 		}
+		OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+		GpxSelectionHelper.SelectedGpxFile currentTrack = savingTrackHelper.getCurrentTrack();
+		View v = getView();
+		if (v == null){
+			return;
+		}
+		if (plugin != null && savingTrackHelper.getCurrentGpx() != null) {
+
+
+			v.findViewById(R.id.current_track).setVisibility(View.VISIBLE);
+			((TextView)v.findViewById(R.id.name)).setText(R.string.currently_recording_track);
+			String description = GpxUiHelper.getDescription(getMyApplication(), currentTrack.getGpxFile(), null, true);
+			int startindex = description.indexOf(">");
+			int endindex = description.indexOf("</font>");
+			String distnace = description.substring(startindex + 1, endindex);
+			((TextView)v.findViewById(R.id.distance)).setText(distnace);
+			v.findViewById(R.id.time_icon).setVisibility(View.GONE);
+		} else {
+			v.findViewById(R.id.current_track).setVisibility(View.GONE);
+		}
+		//TODO implement updating view of current track
 	}
 
 	@Override
@@ -119,6 +142,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.available_gpx, container, false);
+		listView =(ExpandableListView) v.findViewById(android.R.id.list);
+		if(this.adapter != null) {
+			listView.setAdapter(this.adapter);
+		}
+		return v;
+	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
