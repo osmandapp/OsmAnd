@@ -30,7 +30,7 @@
 
 	</LinearLayout>
 
-	<LinearLayout
+	<LinearLayout android:id="@+id/on_map_layout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/card_bg"
