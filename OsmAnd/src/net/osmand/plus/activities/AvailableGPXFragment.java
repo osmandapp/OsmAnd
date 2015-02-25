@@ -20,6 +20,8 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -30,6 +32,7 @@ import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.util.Algorithms;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -73,7 +76,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 
 	public static final int SEARCH_ID = -1;
-//	public static final int ACTION_ID = 0;
+	//	public static final int ACTION_ID = 0;
 //	protected static final int DELETE_ACTION_ID = 1;
 	private boolean selectionMode = false;
 	private List<GpxInfo> selectedItems = new ArrayList<GpxInfo>();
@@ -126,20 +129,21 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private void updateCurrentTrack(View v){
-		if (v == null){
+	private void updateCurrentTrack(View v) {
+		if (v == null) {
 			return;
 		}
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
 
-		GpxSelectionHelper.SelectedGpxFile currentTrack = savingTrackHelper.getCurrentTrack();
-		if (plugin != null && savingTrackHelper.getCurrentGpx() != null) {
+		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+			GpxSelectionHelper.SelectedGpxFile currentTrack = savingTrackHelper.getCurrentTrack();
 			v.findViewById(R.id.current_track).setVisibility(View.VISIBLE);
 			String description = GpxUiHelper.getDescription(getMyApplication(), currentTrack.getGpxFile(), null, true);
 			int startindex = description.indexOf(">");
 			int endindex = description.indexOf("</font>");
 			String distance = description.substring(startindex + 1, endindex);
-			((TextView)v.findViewById(R.id.distance)).setText(distance);
+			String points = String.valueOf(currentTrack.getGpxFile().points.size());
+			((TextView) v.findViewById(R.id.points_count)).setText(points);
+			((TextView) v.findViewById(R.id.distance)).setText(distance);
 		} else {
 			v.findViewById(R.id.current_track).setVisibility(View.GONE);
 		}
@@ -148,34 +152,76 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.available_gpx, container, false);
-		listView =(ExpandableListView) v.findViewById(android.R.id.list);
-		if(this.adapter != null) {
+		listView = (ExpandableListView) v.findViewById(android.R.id.list);
+		if (this.adapter != null) {
 			listView.setAdapter(this.adapter);
 		}
 
-		((TextView)v.findViewById(R.id.name)).setText(R.string.currently_recording_track);
+		((TextView) v.findViewById(R.id.name)).setText(R.string.currently_recording_track);
 		v.findViewById(R.id.time_icon).setVisibility(View.GONE);
 
-		Drawable icon = getResources().getDrawable(R.drawable.ic_action_rec_stop);
+		createCurrentTrackView(v, getMyApplication());
+
+		v.findViewById(R.id.map_btn).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				MapActivity.launchMapActivityMoveToTop(getActivity());
+			}
+		});
+		return v;
+	}
+
+	public static void createCurrentTrackView(View v, final OsmandApplication app) {
+		Drawable icon = app.getResources().getDrawable(R.drawable.ic_action_rec_stop);
 		icon.mutate();
-		boolean light = getMyApplication().getSettings().isLightContent();
-		if (light){
+		boolean light = app.getSettings().isLightContent();
+		if (light) {
 			icon.setColorFilter(0xff727272, PorterDuff.Mode.MULTIPLY);
 		}
-		ImageButton stop = ((ImageButton)v.findViewById(R.id.stop));
+		ImageButton stop = ((ImageButton) v.findViewById(R.id.stop));
 		stop.setImageDrawable(icon);
+		stop.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Runnable run = new Runnable() {
+					@Override
+					public void run() {
+						final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+						plugin.stopRecording();
+					}
+				};
+				run.run();
+			}
+		});
 		stop.setVisibility(View.VISIBLE);
 
-		icon = getResources().getDrawable(R.drawable.ic_action_gsave_dark);
+		icon = app.getResources().getDrawable(R.drawable.ic_action_gsave_dark);
 		icon.mutate();
-		if  (light) {
+		if (light) {
 			icon.setColorFilter(0xff727272, PorterDuff.Mode.MULTIPLY);
 		}
-		ImageButton save = ((ImageButton)v.findViewById(R.id.show_on_map));
+		ImageButton save = ((ImageButton) v.findViewById(R.id.show_on_map));
+		save.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
+		save.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Runnable run = new Runnable() {
+					@Override
+					public void run() {
+						final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+						plugin.saveCurrentTrack();
+					}
+				};
+				run.run();
+			}
+		});
 		v.findViewById(R.id.divider).setVisibility(View.GONE);
 		save.setImageDrawable(icon);
-		updateCurrentTrack(v);
-		return v;
 	}
 
 	@Override
@@ -210,7 +256,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onMenuItemActionCollapse(MenuItem item) {
 				// Needed to hide intermediate progress bar after closing action mode
-				 new Handler().postDelayed(new Runnable() {
+				new Handler().postDelayed(new Runnable() {
 					public void run() {
 						hideProgressBar();
 					}
@@ -224,7 +270,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		} else {
 			((FavoritesActivity) getActivity()).getClearToolbar(false);
 		}
-
 
 
 		optionsMenuAdapter = new ContextMenuAdapter(getActivity());
@@ -260,7 +305,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			final MenuItem item;
 			item = menu.add(0, optionsMenuAdapter.getElementId(j), j + 1, optionsMenuAdapter.getItemName(j));
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			if (ScreenOrientationHelper.isOrientationPortrait(getActivity())){
+			if (ScreenOrientationHelper.isOrientationPortrait(getActivity())) {
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem menuItem) {
@@ -302,12 +347,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public void showProgressBar() {
-		((FavoritesActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(true);
+		((FavoritesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
 	}
 
 	public void hideProgressBar() {
-		if (getActivity() != null){
-			((FavoritesActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(false);
+		if (getActivity() != null) {
+			((FavoritesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 		}
 	}
 
@@ -322,7 +367,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
 		if (ScreenOrientationHelper.isOrientationPortrait(getActivity())) {
-			((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
+			((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode);
 		}
 	}
 
@@ -578,7 +623,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPreExecute() {
-			((ActionBarActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(true);
+			((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
 			listAdapter.clear();
 		}
 
@@ -605,10 +650,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPostExecute(List<GpxInfo> result) {
 			this.result = result;
-			if(getActivity() != null) {
-				((ActionBarActivity)getActivity()).setSupportProgressBarIndeterminateVisibility(false);
+			if (getActivity() != null) {
+				((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 			}
-			if (listAdapter.getGroupCount() > 0){
+			if (listAdapter.getGroupCount() > 0) {
 				getExpandableListView().expandGroup(0);
 			}
 		}
@@ -946,7 +991,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		});
 
 		final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
-		if (osmEditingPlugin != null && osmEditingPlugin.isActive()){
+		if (osmEditingPlugin != null && osmEditingPlugin.isActive()) {
 			item = optionsMenu.getMenu().add(R.string.export)
 					.setIcon(light ? R.drawable.ic_action_gup_light : R.drawable.ic_action_gup_dark);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -1088,7 +1133,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPreExecute() {
-			((ActionBarActivity)getActivity()).setProgressBarIndeterminateVisibility(true);
+			((ActionBarActivity) getActivity()).setProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override
@@ -1103,14 +1148,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private void loadGpxAsync(GpxInfo info, boolean isSelected){
+	private void loadGpxAsync(GpxInfo info, boolean isSelected) {
 		final boolean selected = isSelected;
 		new AsyncTask<GpxInfo, Void, Void>() {
 			GpxInfo info;
 
 			@Override
 			protected Void doInBackground(GpxInfo... params) {
-				if (params == null){
+				if (params == null) {
 					return null;
 				}
 				info = params[0];
@@ -1130,10 +1175,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			@Override
 			protected void onPostExecute(Void result) {
-				if (getActivity() != null){
+				if (getActivity() != null) {
 					getActivity().setProgressBarIndeterminateVisibility(false);
 				}
-				if (info.gpx != null){
+				if (info.gpx != null) {
 					getMyApplication().getSelectedGpxHelper().selectGpxFile(info.gpx, selected, true);
 					listAdapter.notifyDataSetChanged();
 					selectedGpxHelper.runUiListeners();

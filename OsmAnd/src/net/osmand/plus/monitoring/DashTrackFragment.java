@@ -8,10 +8,13 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.AvailableGPXFragment;
 import net.osmand.plus.activities.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -85,6 +88,28 @@ public class DashTrackFragment extends DashBaseFragment {
 			while (list.size() != 3) {
 				list.remove(3);
 			}
+		}
+
+		OsmandApplication app = getMyApplication();
+		SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
+		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+			list.remove(2);
+			LayoutInflater inflater = getActivity().getLayoutInflater();
+			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
+
+			AvailableGPXFragment.createCurrentTrackView(view, app);
+
+			GpxSelectionHelper.SelectedGpxFile currentTrack = savingTrackHelper.getCurrentTrack();
+			((TextView)view.findViewById(R.id.name)).setText(R.string.currently_recording_track);
+			String description = GpxUiHelper.getDescription(getMyApplication(), currentTrack.getGpxFile(), null, true);
+			int startindex = description.indexOf(">");
+			int endindex = description.indexOf("</font>");
+			String distance = description.substring(startindex + 1, endindex);
+			String points = String.valueOf(currentTrack.getGpxFile().points.size());
+
+			((TextView) view.findViewById(R.id.points_count)).setText(points);
+			((TextView)view.findViewById(R.id.distance)).setText(distance);
+			tracks.addView(view);
 		}
 
 		for (String filename : list) {
