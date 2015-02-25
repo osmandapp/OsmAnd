@@ -240,8 +240,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="plugin_distance_point">Puntu</string>
     <string name="gpx_file_name">Nùmene de su documentu GPX</string>
     <string name="gpx_saved_sucessfully">Documentu GPX sarbadu cun sutzessu in {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Creare àndalas (o impreare/mudare documentos GPX esistentes) pro medire sa distantzia intra \'e tres puntos. Sarbare comente GPX, at a poder èssere impreau pro pianificare una caminera GPX.</string>
-    <string name="osmand_distance_planning_plugin_name">Aina Calcoladore de distàntzia e Pianificatzione</string>
+    <string name="osmand_distance_planning_plugin_description">Ativat unu widget pro creare àndalas carcande in sa mapa (o impreare/mudare documentos GPX esistentes) pro medire sa distantzia intra \'e puntos diferentes. Sos resurtados podent èssere sarbados comente GPX, e ant a poder\'èssere impreados pro pianificare una caminera GPX.</string>
+    <string name="osmand_distance_planning_plugin_name">Aina calcoladore de distàntzia e pianificatzione</string>
     <string name="use_distance_measurement_help">* Toca pro sinnare unu puntu.\n 
         * Carca e tene carcau in sa mapa pro burrare sos puntos antepostos.\n
         * Carca e tene carcau supra de unu puntu pro bìdere e alliongiare una descrizione.\n
@@ -281,13 +281,13 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="monitoring_settings_descr">Cunfigura comente registrare sos biàgios tuos</string>
     <string name="osmo_settings_uuid">ID ùnicu de su dispositivu</string>
     <string name="osmo_settings_descr">Cunfigura sas impostaduras de compidada de su dispositivu e imposta su canale de compidada pessonale</string>
-    <string name="osmo_plugin_description">"OpenStreetMap Compidada - Compidada avantzada in dereta, bie http://osmo.mobi. Sighi àteros dispositivos  e fàghedi sighire. Crea grupos anònimos, cumpartzi sa positzione a manera retzìproca e comunica. Sunt disponìbiles meda impostaduras pro sa compidada, pro sa sessione in corso o permanentes. Sos grupos anònimos sunt limidados pro su nùmeru de dies e calicuna de sas funtziones, ad es. non b\'est su controllu remotu e nemmancu s\'amministradore de su grupu.Grupos cun totu sas funtzionalidades podent èssere creados in su giassu e petzi sos impitadores registrados podent atzèdere. Pro àteras informatziones: http://osmo.mobi. "</string>
-    <string name="osmo_plugin_name">OsMo (Compidada Avantzada in Dereta)</string>
-    <string name="osmo_settings">Compidada OpenStreetMap</string>
+    <string name="osmo_plugin_description">"Compidada OsMo - Compidada avantzada in dereta, bie http://osmo.mobi. Sighi àteros dispositivos  e fàghedi sighire. Crea grupos anònimos, cumpartzi sa positzione a manera retzìproca e comunica. Sunt disponìbiles meda impostaduras pro sa compidada, pro sa sessione in corso o permanentes. Sos grupos anònimos sunt limidados pro su nùmeru de dies e calicuna de sas funtziones, ad es. non b\'est su controllu remotu e nemmancu s\'amministradore de su grupu.Grupos cun totu sas funtzionalidades podent èssere creados in su giassu e petzi sos impitadores registrados podent atzèdere. Pro àteras informatziones: http://osmo.mobi. "</string>
+    <string name="osmo_plugin_name">Compidada OsMo</string>
+    <string name="osmo_settings">Compidada OsMo</string>
    	<string name="osmand_monitoring_plugin_description">Ativa sa compidada e su nàvigu in sa modalidade "a reposu" (ischermu istudau)impreande ischidaduras periòdicas de su dispositivu GPS.
         Ammustra sas impostaduras chi fatzititana sa regitratzione de sos biàgios in documentos GPX locales o in lìnia, impreande unu servitziu in retza.</string>
     <string name="osmand_monitoring_plugin_name">Servitzios de registratzione</string>
-    <string name="osmand_background_plugin_description">Ammustra sas impostaduras pro abilitare sa compidada e su nàvigu in modalidade " a reposu" (ischermu istudau)pro mèdiu de ischidaduras periòdicas de su GPS.</string>
+    <string name="osmand_background_plugin_description">Ammustrat sas impostaduras pro abilitare sa compidada e su nàvigu in modalidade a reposu (ischermu istudau) pro mèdiu de ischidaduras periòdicas de su GPS.</string>
     <string name="contribution_activity">Installa sa versione</string>
     <string name="choose_osmand_theme_descr">Issèbera su tema de s\'aplicu</string>
     <string name="choose_osmand_theme">Tema de s\'aplicu</string>
@@ -1718,8 +1718,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="speak_poi">Annùntzia PDI a curtzu</string>
     <string name="flat_list_waypoints">Totus</string>
     <string name="index_tours">Itineràrios</string>
-    <string name="record_plugin_description">Registra sas rastas tuas carcande su pursante in s\'ischermu de sa mapa. Ammustra sas impostaduras pro sa registratzione de sos biàgios tuos in documentos GPX localmente o in lìnia impreande unu servìtziu web.</string>
-    <string name="record_plugin_name">Registra sos biàgios tuos</string>
+    <string name="record_plugin_description">Ativat sa funtzionalidade de registratzione de sas rastas tuas carcande su pursante in s\'ischermu de sa mapa e ammustrat sas impostaduras pro sa registratzione de sos biàgios tuos in documentos GPX localmente o in lìnia impreande unu servìtziu web.</string>
+    <string name="record_plugin_name">Registratzione biàgios</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
     <string name="distance">Distantzia</string>
@@ -1869,4 +1869,12 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="audio">Àudio</string>
 	<string name="video">Vìdeo</string>
 	<string name="photo">Foto</string>
+	<string name="plugin_nautical_descr1">Ativande custa funtzionalidade s\'istile de sa mapa at a divènnere Nàuticu, e at a èssere disponìbile totu sa simbologia pro su nàvigu.</string>
+	<string name="plugin_nautical_descr2">Sa mapa cun totu sa simbologia nàutica globale est disponìbile comente iscarrigamentu ùnicu cun su nùmene \"World seamarks\".</string>
+	<string name="plugin_nautical_descr3">Custa vista podet èssere furriada siat disativande•la inoghe torra siat cambiande su \'Istile mapa\' in \'Cunfigura sa mapa\' comente boles tue.</string>
+
+	<string name="plugin_ski_descr1">Ativande custa vista s\'istile mapa at a divènnere \'Ierru e iscì\', ammustrande totu sas caraterìsticas de s\'iscenàriu in sas cunditziones de s\'ierru.</string>
+	<string name="plugin_ski_descr2">Est disponìbile una mapa cun totu sas pistas e s\'àndalas pro iscì de fundu suta de Iscarrigàbiles comente \'World ski map\'.</string>
+	<string name="plugin_ski_descr3">Custa vista podet èssere ripristinada disativande•la inoghe torra o cambiande s\'\'Istile mapa\' in \'Cunfigura mapa\'.</string>
+
 	</resources>
