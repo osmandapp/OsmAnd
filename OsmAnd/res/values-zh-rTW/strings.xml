@@ -1935,4 +1935,7 @@
 	<string name="plugin_ski_descr3">此檢視可以在這裡經由再次取消啟動，或透過 \'地圖式樣\' 之下的 \'組態地圖\' 這兩者中的任何一個更改而恢復它。</string>
 
 	<string name="plugin_touringview_descr4">此檢視可以在這裡經由再次取消啟動，或透過 \'地圖式樣\' 之下的 \'組態地圖\' 這兩者中的任何一個更改而恢復它。</string>
+	<string name="rename_failed">重新命名失敗。</string>
+	<string name="currently_recording_track">現在錄制的軌跡</string>
+	<string name="back_to_map">返回地圖</string>
 	</resources>
