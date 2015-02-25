@@ -92,7 +92,7 @@ public class NotesFragment extends ListFragment {
 			}
 
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
-			DashAudioVideoNotesFragment.getNoteView(recording, row, getActivity(), plugin);
+			DashAudioVideoNotesFragment.getNoteView(recording, row, getActivity());
 			row.findViewById(R.id.play).setVisibility(View.GONE);
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
 			options.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +113,7 @@ public class NotesFragment extends ListFragment {
 
 	private void showOnMap(Recording recording) {
 		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, 
-				new PointDescription(PointDescription.POINT_TYPE_NOTE, recording.getName()), true,
+				new PointDescription(PointDescription.POINT_TYPE_NOTE, recording.getName(getActivity())), true,
 				recording); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
@@ -223,7 +223,7 @@ public class NotesFragment extends ListFragment {
 			hash = fileName.substring(hashInd, fileName.length());
 		}
 
-		editText.setText(recording.getName());
+		editText.setText(recording.getName(getActivity()));
 		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
