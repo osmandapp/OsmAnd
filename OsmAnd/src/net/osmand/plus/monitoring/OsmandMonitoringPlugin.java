@@ -10,6 +10,7 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -256,29 +257,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				int which = holder[0];
 				int item = items.get(which);
 				if(item == R.string.save_current_track){
-					app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, Void>() {
-						
-						@Override
-						protected Void doInBackground(Void... params) {
-							isSaving = true;
-							try {
-								SavingTrackHelper helper = app.getSavingTrackHelper();
-								helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
-								helper.close();
-							} finally {
-								isSaving = false;
-							}
-							return null;
-						}
-
-					}, (Void) null);
+					saveCurrentTrack();
 				} else if(item == R.string.gpx_monitoring_start) {
 					startGPXMonitoring(map);
 				} else if(item == R.string.gpx_monitoring_stop) {
-					settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
-					if (app.getNavigationService() != null) {
-						app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);
-					}
+					stopRecording();
 				} else if(item == R.string.gpx_start_new_segment) {
 					app.getSavingTrackHelper().startNewSegment();
 				} else if(item == R.string.live_monitoring_stop) {
@@ -310,6 +293,32 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				}
 			});
 			bld.show();
+		}
+	}
+
+	public void saveCurrentTrack() {
+		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, Void>() {
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				isSaving = true;
+				try {
+					SavingTrackHelper helper = app.getSavingTrackHelper();
+					helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
+					helper.close();
+				} finally {
+					isSaving = false;
+				}
+				return null;
+			}
+
+		}, (Void) null);
+	}
+
+	public void stopRecording(){
+		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
+		if (app.getNavigationService() != null) {
+			app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);
 		}
 	}
 

@@ -13,6 +13,7 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
@@ -56,6 +57,7 @@ public class DashFavoritesFragment extends DashLocationFragment implements Favou
 				OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
 				final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.FAVORITES_TAB);
 				activity.startActivity(favorites);
 			}
 		});

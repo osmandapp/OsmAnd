@@ -28,6 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import android.support.v4.app.ListFragment;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,27 +90,8 @@ public class NotesFragment extends ListFragment {
 			}
 
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
-			String name = recording.getName();
-			TextView nameText = ((TextView) row.findViewById(R.id.name));
-			if (name != null) {
-				nameText.setText(name);
-			} else if (recording.isAudio()) {
-				nameText.setText(R.string.audio);
-			} else if (recording.isVideo()) {
-				nameText.setText(R.string.video);
-			} else if (recording.isPhoto()) {
-				nameText.setText(R.string.photo);
-			}
-			((TextView) row.findViewById(R.id.descr)).setText(recording.getDescription(getActivity()));
-
-			ImageView icon = (ImageView) row.findViewById(R.id.icon);
-			if (recording.isAudio()) {
-				icon.setImageResource(R.drawable.ic_type_audio);
-			} else if (recording.isVideo()) {
-				icon.setImageResource(R.drawable.ic_type_video);
-			} else {
-				icon.setImageResource(R.drawable.ic_type_img);
-			}
+			DashAudioVideoNotesFragment.getNoteView(recording, row, getActivity(), plugin);
+			row.findViewById(R.id.play).setVisibility(View.GONE);
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -173,15 +155,15 @@ public class NotesFragment extends ListFragment {
 			public boolean onMenuItemClick(MenuItem item) {
 				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
 				if (recording.isPhoto()) {
-					Uri screenshotUri = Uri.parse(recording.file.getAbsolutePath());
+					Uri screenshotUri = Uri.parse(recording.getFile().getAbsolutePath());
 					sharingIntent.setType("image/*");
 					sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
 				} else if (recording.isAudio()) {
-					Uri audioUri = Uri.parse(recording.file.getAbsolutePath());
+					Uri audioUri = Uri.parse(recording.getFile().getAbsolutePath());
 					sharingIntent.setType("audio/*");
 					sharingIntent.putExtra(Intent.EXTRA_STREAM, audioUri);
 				} else if (recording.isVideo()) {
-					Uri videoUri = Uri.parse(recording.file.getAbsolutePath());
+					Uri videoUri = Uri.parse(recording.getFile().getAbsolutePath());
 					sharingIntent.setType("video/*");
 					sharingIntent.putExtra(Intent.EXTRA_STREAM, videoUri);
 				}
@@ -229,12 +211,23 @@ public class NotesFragment extends ListFragment {
 				getListView(), false);
 		final EditText editText = (EditText) v.findViewById(R.id.name);
 		builder.setView(v);
-		editText.setText(recording.getName());
+		String fileName = recording.getName();
+		int extInd = recording.getName().lastIndexOf(".");
+		final String extension;
+		if (extInd >= 0){
+			extension = fileName.substring(extInd, fileName.length());
+		} else {
+			extension = "";
+		}
+
+		editText.setText(recording.getName().substring(0, extInd));
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				recording.setName(editText.getText().toString());
+				if(!recording.setName(editText.getText().toString() + extension)) {
+					Toast.makeText(getActivity(),R.string.rename_failed,Toast.LENGTH_SHORT).show();
+				}
 				recording.setDescription();
 				listAdapter.notifyDataSetInvalidated();
 			}
