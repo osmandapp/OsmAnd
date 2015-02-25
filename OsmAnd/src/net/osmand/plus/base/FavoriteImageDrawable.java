@@ -92,8 +92,8 @@ public class FavoriteImageDrawable extends Drawable {
 		int min = Math.min(bs.width(), bs.height());
 		int r = (int) (min / 2);
 		int rs = (int) (min / 2 - 1);
-		canvas.drawCircle(min / 2 , min / 2 + density, r, paintOuter);
-		canvas.drawCircle(min / 2 , min / 2 + density, rs, paintInnerCircle);
+		canvas.drawCircle(min / 2 , min / 2, r, paintOuter);
+		canvas.drawCircle(min / 2 , min / 2, rs, paintInnerCircle);
 		drawable.draw(canvas);
 	}
 	

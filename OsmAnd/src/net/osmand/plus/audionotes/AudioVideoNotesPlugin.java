@@ -30,8 +30,10 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -925,6 +927,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				updateWidgetIcon(recordControl);
 			}
 		});
+	}
+	
+	@Override
+	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
+		if (getAllRecordings().size() > 0) {
+			mTabs.add(favoritesActivity.getTabIndicator(R.string.notes, NotesFragment.class));
+			if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
+				app.getSettings().FAVORITES_TAB.set(mTabs.size() - 1);
+			}
+		}
 	}
 
 	public boolean indexSingleFile(File f) {

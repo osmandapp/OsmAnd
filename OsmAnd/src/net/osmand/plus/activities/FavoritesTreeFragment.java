@@ -134,11 +134,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		// final LatLon mapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 		favouritesAdapter.synchronizeGroups();
 
-		if(favouritesAdapter.getGroupCount() > 0 &&
-				"".equals(favouritesAdapter.getGroup(0).name)) {
-			getExpandableListView().expandGroup(0);
-		}
-
+		collapseTrees(5);
+//		if(favouritesAdapter.getGroupCount() > 0 &&
+//				"".equals(favouritesAdapter.getGroup(0).name)) {
+//			getExpandableListView().expandGroup(0);
+//		}
 	}
 	
 	private void updateSelectionMode(ActionMode m) {

@@ -2087,4 +2087,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="plugin_touringview_descr3">Nie je potrebné stiahnuť samostatný súbor, tento pohľad používa štandardné mapové súbory.</string>
 	<string name="plugin_touringview_name">Cestovný mapový pohľad (Touring view)</string>
 
+	<string name="location_on_map">Umiestnenie:\n Šírka %1$s\n Dĺžka %2$s</string>
+	<string name="watch">Zobraziť</string>
+	<string name="days_behind">dní pozadu</string>
 	</resources>

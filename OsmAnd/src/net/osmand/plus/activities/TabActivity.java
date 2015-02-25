@@ -1,13 +1,11 @@
 package net.osmand.plus.activities;
 
-import android.graphics.Color;
+import java.util.List;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Denis
@@ -15,20 +13,16 @@ import java.util.List;
  */
 public class TabActivity extends ActionBarProgressActivity {
 
-	protected TabItem getTabIndicator(int resId, Class<?> fragment){
-		return new TabItem(getString(resId), Color.DKGRAY, Color.LTGRAY, fragment);
+	public TabItem getTabIndicator(int resId, Class<?> fragment){
+		return new TabItem(getString(resId), fragment);
 	}
 
 	public static class TabItem {
 		public final CharSequence mTitle;
-		private final int mIndicatorColor;
-		private final int mDividerColor;
 		public final Class<?> fragment;
 
-		public TabItem(CharSequence mTitle, int mIndicatorColor, int mDividerColor, Class<?> fragment) {
+		public TabItem(CharSequence mTitle, Class<?> fragment) {
 			this.mTitle = mTitle;
-			this.mIndicatorColor = mIndicatorColor;
-			this.mDividerColor = mDividerColor;
 			this.fragment = fragment;
 		}
 

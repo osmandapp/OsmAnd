@@ -1930,16 +1930,17 @@
 	<string name="plugin_touringview_name">Touring</string>
 
 	<string name="plugin_nautical_descr1">Aktivering ændrer kortformat til maritim, hvilket viser alle sømærker og søkortsymboler.</string>
-	<string name="plugin_nautical_descr2">Et kortfil, der indeholder alle maritime symboler er tilgængelig som \'Sømærker (på verdensplan)\'.</string>
+	<string name="plugin_nautical_descr2">Et kort, der indeholder alle maritime symboler, kan hentes som \'Sømærker (på verdensplan)\'.</string>
 	<string name="plugin_nautical_descr3">Visningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.</string>
 
 	<string name="plugin_ski_descr1">Aktivering ændrer kortformat til \'Vinter og ski\', der viser alle landskabstræk under vinterlige forhold.</string>
 	<string name="plugin_ski_descr2">Et kort som viser alle skiløjper og langrendsruter, kan hentes som \'Skikort (på verdensplan)\'.</string>
 	<string name="plugin_ski_descr3">Visningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.</string>
 
-	<string name="plugin_touringview_descr1">Aktivering af visningen ændrer kortformat til \'Touring\', det er en særlig højdetaljevisning for rejsende og erhvervschauffører.</string>
+	<string name="plugin_touringview_descr1">Aktivering ændrer kortformat til \'Touring\', det er en særlig højdetaljevisning for rejsende og erhvervschauffører.</string>
 	<string name="plugin_touringview_descr2">Visning giver, på et givet kortzoom, den maksimale mængde rejseoplysninger til rådighed i kortdata (især veje, spor, stier, og orienteringsmærker). Det viser også tydeligt alle vejtyper utvetydigt med farvekoder, som er nyttigt, f.eks ved med kørsel store køretøjer.</string>
 	<string name="plugin_touringview_descr3">Et særligt kort er ikke nødvendigt, visningen er skabt ud fra standardkort.</string>
 	<string name="plugin_touringview_descr4">Visningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.</string>
 	<string name="location_on_map">Placering:\n Lat %1$s\n Long %2$s</string>
+	<string name="days_behind">dage bagefter</string>
 	</resources>

@@ -1958,4 +1958,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 
 	<string name="plugin_nautical_descr2">Une carte marine mondiale est disponible en une seul téléchargement nommé \"Carte marine\".</string>
 	<string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
+	<string name="days_behind">jours écoulés</string>
 	</resources>

@@ -114,7 +114,7 @@
 	<string name="local_indexes_cat_map">Offline-kart (vektor)</string>
 	
 	<string name="index_settings_descr">Last ned og håndter offline-kart lagret på enheten</string>
-	<string name="map_online_plugin_is_not_installed">Aktiver programtillegg for nettbaserte kart for å velge ulike kartkilder</string>
+	<string name="map_online_plugin_is_not_installed">Aktiver programtillegget for nettbaserte kart for å velge ulike kartkilder</string>
 	<string name="map_online_data">Nettbaserte- og flis-kart</string>
 	<string name="map_online_data_descr">Bruk nettbaserte kart (last ned og bufre fliser på SD-kort)</string>
 	<string name="online_map_settings">Nettbaserte kart</string>
@@ -322,7 +322,7 @@
 \n\nI lokalmenyen \'Bruk posisjon\' for et punkt, velg alternativet \'Legg til i favoritter\' og skriv deretter inn et navn for den.
 \n\nEtter å ha lagret en favoritt er den tilgjengelig via \'Meny\' → \'Mine steder\'. Trykking på en oppføring i \'Favoritter\'-listen gir muligheter som å navigere til den, redigere eller slette den.
 \n\nFor å vise alle favorittpunkter direkte på kartet, aktiver på kartskjermen laget \'Favoritter\' i \'Meny\' → \'Still inn kart\'. "</string>
-	<string name="search_osm_offline">Søk geografisk plassering</string>
+	<string name="search_osm_offline">Søk geografisk posisjon</string>
 	<string name="system_locale">System</string>
 	<string name="preferred_locale_descr">Velg visningsspråk (start OsmAnd på nytt etter endring)</string>
 	<string name="preferred_locale">Visningsspråk</string>
@@ -773,8 +773,8 @@
     <string name="osmo_settings_uuid">Unik enhets-id</string>
     <string name="osmo_settings_descr">Still inn overvåking og personlig overvåkingskanal</string>
     <string name="osmo_plugin_description"/>
-    <string name="osmo_plugin_name">OsMo (Avansert Live Overvåkning)</string>
-    <string name="osmo_settings">OpenStreetMap-overvåking</string>
+    <string name="osmo_plugin_name">OsMo-overvåking</string>
+    <string name="osmo_settings">OsMo-overvåking</string>
    	<string name="map_widget_top">Statuslinje</string>
 	<string name="map_preferred_locale_descr">Foretrukket språk for påskrifter på kartet (hvis det ikke er tilgjengelig skiftes til engelsk eller til lokale navn)</string>
     <string name="map_preferred_locale">Foretrukket språk på kart</string>
@@ -1015,7 +1015,7 @@
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>
     <string name="monitoring_control_stop">Stopp</string>
     <string name="index_srtm_ele">Koter</string>
-    <string name="srtm_plugin_name">Programtillegg for koter</string>
+    <string name="srtm_plugin_name">Koter (eksternt programtillegg)</string>
     <string name="download_select_map_types">Andre kart</string>
     <string name="download_roads_only_item">Bare veier</string>
     <string name="download_srtm_maps">Koter</string>
@@ -1055,7 +1055,7 @@
 	<string name="close">Lukk</string>
 	<string name="loading_data">Laster data…</string>
 	<string name="advanced_settings">Avansert</string>
-	<string name="srtm_plugin_description">Muliggjør å laste ned offline koter og relieff-skygger (\'Innstillinger\' → \'Karthåndtering\' → \'Last ned\' → Velg ønsket karttype).</string>
+	<string name="srtm_plugin_description">Eksternt programtillegg (separat nedlasting) muliggjør å laste ned offline koter og relieff-skygger (\'Innstillinger\' → \'Karthåndtering\' → \'Last ned\' → Velg ønsket karttype). Disse kan vises i kombinasjon med OsmAnd offline-kart.</string>
     <string name="tip_update_index_t">"Oppdaterte kartdata er viktig for offline kartvisning, for interessepunkt/adresse-søk og for offline navigering. OsmAnd tilbyr en filbehandler for kart til å laste ned disse offline-kartene og for å se etter tilgjengelige oppdateringer.
 \n\nFor å laste ned kart gå til \'Innstillinger\' → \'Karthåndtering\' → \'Last ned\'.
 \n\nEtter at den globale regionlisten er hentet fra internett, trykk på en oppføring for å laste ned eller oppdatere en fil. Vær oppmerksom på filtypevelgeren nær toppen av skjermen for å velge den typen nedlasting du ønsker (vanlige kart, relieff-overlegg etc.).
@@ -1099,7 +1099,7 @@
 	<string name="save_track_to_gpx_globally">Logg spor til GPX-fil</string>
 	<string name="monitoring_settings">Tur-opptak</string>
     <string name="monitoring_settings_descr">Still inn opptak av dine turer</string>
-    <string name="record_plugin_name">Ta opp dine turer</string>
+    <string name="record_plugin_name">Tur-opptak</string>
     <string name="download_additional_maps">Laste ned manglende kart %1$s (%2$d MB)?</string>
     <string name="osmo_invite">Inviter…</string>
     <string name="keep_navigation_service">Hold</string>
@@ -1130,7 +1130,7 @@
     <string name="copying_osmand_files">Kopierer OsmAnd-datafiler…</string>
     <string name="route_descr_destination">Reisemål</string>
     <string name="gpx_file_name">GPX-filnavn</string>
-    <string name="osmand_distance_planning_plugin_name">Distansekalkulator &amp; Planleggingsverktøy</string>
+    <string name="osmand_distance_planning_plugin_name">Distansekalkulator &amp; planleggingsverktøy</string>
     <string name="layer_hillshade">Relieffskyggelag</string>
     <string name="download_hillshade_item">Relieffskygge</string>
     <string name="download_hillshade_maps">Relieffskyggeoverlegg</string>
@@ -1158,7 +1158,7 @@
 	<string name="overlay_transparency">Overleggsgjennomsiktighet</string>
 	<string name="map_transparency_descr">Endre gjennomsiktighet for basiskart</string>
 	<string name="map_transparency">Gjennomsiktighet for basiskart</string>
-	<string name="send_location_sms_pattern">Plassering: %1$s\n%2$s</string>
+	<string name="send_location_sms_pattern">Posisjon: %1$s\n%2$s</string>
 	<string name="background_router_service">Kjør i hvilemodus</string>
 	<string name="menu_mute_off">Lyd er på</string>
 	<string name="menu_mute_on">Lyd er av</string>
@@ -1198,4 +1198,9 @@
     <string name="tracks">Spor</string>
     <string name="my_location">Min posisjon</string>
     <string name="gps_status">GPS-status</string>
+    <string name="location_on_map">Posisjon:\n Br %1$s\n Le %2$s</string>
+	<string name="online_map">Nettbasert kart</string>
+	<string name="roads_only">Bare veier</string>
+    <string name="free">"Ledig %1$s "</string>
+	<string name="device_memory">Enhetsminne</string>
     </resources>

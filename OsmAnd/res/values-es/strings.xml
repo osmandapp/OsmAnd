@@ -762,7 +762,7 @@
   <string name="confirm_interrupt_download">¿Quieres interrumpir la descarga de archivo?</string>
   <string name="basemap_was_selected_to_download">El Mapa Base (World Basemap) se necesita para el correcto funcionamiento de la aplicación y se seleccionó para su descarga.</string>
   
-  <string name="map_online_plugin_is_not_installed">Habilita el extra de mapas en línea para seleccionar diferentes fuentes de mapas</string>
+  <string name="map_online_plugin_is_not_installed">Habilita el plugin de mapas en línea para seleccionar diferentes fuentes de mapas</string>
   <string name="map_online_data">Mapas en línea y teselas</string>
   <string name="map_online_data_descr">Usar mapas en línea (descarga y guarda teselas en la tarjeta SD)</string>
   <string name="online_map_settings">Mapas en línea</string>
@@ -770,8 +770,8 @@
   <string name="map_settings">Configuraciones del mapa</string>
   <string name="map_settings_descr">Configurar la pantalla del mapa</string>
   <string name="osmand_rastermaps_plugin_description">Muestra opciones para configurar diversos mapas con conexión o de teselas guardadas como mapa base o como mapas superpuestos / subyacentes. Estos mapas también se pueden preparar sin conexión y copiarlos en la carpeta de datos de OsmAnd.</string>
-  <string name="osmand_background_plugin_description">Muestra configuraciones para habilitar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
-  <string name="osmand_accessibility_description">Muestra configuraciones para características especiales de accesibilidad.</string>
+  <string name="osmand_background_plugin_description">Muestra las configuraciones para habilitar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
+  <string name="osmand_accessibility_description">Muestra las configuraciones para características especiales de accesibilidad.</string>
   <string name="extra_settings">Configuraciones avanzadas</string>
   <string name="osmand_monitoring_description">Este agregado facilita el registro de sus excursiones a un fichero GPX o en directo usando un servicio web.</string>
   <string name="osmand_extra_settings_description">Muestra opciones para configuraciones avanzadas de mapa (como aumentar detalles del mapa) y algunas especificas de dispositivos.</string>
@@ -912,7 +912,7 @@
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Punto de aparcamiento</string>
   <string name="osmand_parking_plugin_description">Este extra permite guardar la ubicación de su automóvil aparcado.</string>
-  <string name="osmand_parking_plugin_name">Extra para posición de aparcamiento</string>
+  <string name="osmand_parking_plugin_name">Posición de aparcamiento (plugin externo)</string>
   <string name="context_menu_item_add_parking_point">Marcar como posición de aparcamiento</string>
   <string name="context_menu_item_delete_parking_point">Eliminar un marcador de aparcamiento</string>
   <string name="starting_point_too_far">Punto de inicio demasiado lejos de la carretera más cercana.</string>
@@ -1074,12 +1074,12 @@
 	<string name="index_srtm_parts">piezas</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
     <string name="srtm_plugin_description">Permite descargar curvas de nivel sin conexión y relieve sombreado (\'Opciones\' → \'Gestionar mapas\' → \'Descargar\' → Seleccionar el tipo de mapa deseado).</string>
-    <string name="srtm_plugin_name">Extra contornos de nivel</string>
+    <string name="srtm_plugin_name">Contornos de nivel (plugin externo)</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
     
 	
-<string name="audionotes_plugin_description">Toma notas de audio durante el viaje</string>
+<string name="audionotes_plugin_description">Muestra los botones para tomar notas de audio/video durante un viaje</string>
     <string name="audionotes_plugin_name">Extra de notas de audio</string>
     <string name="osmand_srtm_short_description_80_chars">Extra OsmAnd para curvas de nivel sin conexión</string>
     <string name="osmand_srtm_long_description_1000_chars">Este extra proporciona curvas de nivel que se pueden visualizar en mapas descargados de OsmAnd. Los datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones realizadas por SRTM (Shuttle Radar Topography Mission, Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
@@ -1271,7 +1271,7 @@
     <string name="gpx_file_name">Nombre del archivo GPX</string>
     <string name="gpx_saved_sucessfully">Archivo GPX guardado correctamente en {0}</string>
     <string name="osmand_distance_planning_plugin_description">Crear caminos (o usar / modificar archivos GPX existentes) para medir la distancia entre los puntos. Guardado como GPX, se puede utilizar para planificar rutas GPX.</string>
-    <string name="osmand_distance_planning_plugin_name">Cálculador de distancia y Herramienta de planificación</string>
+    <string name="osmand_distance_planning_plugin_name">Cálculador de distancia y herramienta de planificación</string>
     <string name="use_distance_measurement_help">* Toca para marcar un punto.\n * Mantenga pulsado el mapa para suprimir el punto anterior.\n * Mantenga pulsado el punto para ver e incluir descripción.\n * Pulse en el control de medición para ver más acciones.</string>
     <string name="default_buttons_do_not_show_again">No mostrar de nuevo</string>
     <string name="distance_measurement_start_editing">Comenzar edición</string>
@@ -1561,8 +1561,8 @@
 	<string name="osmo_settings_uuid">Id único del dispositivo</string>
     <string name="osmo_settings_descr">Configurar opciones de monitorización y configurar canal de monitoreo</string>
     <string name="osmo_plugin_description">"OpenStreetMap-Monitoring - Monitorización avanzada en directo. Proporciona la posibilidad de seguir otros dispositivos y ser seguido. Crea grupos anónimos, comparte las localizaciones de cada uno y comuníquense. Tiene varias opciones para seguimiento por sesión o permanente. Los grupos anónimos están limitados a varios días y a algunas funcionalidades, p.e. no hay control remoto ni administrador de grupo. Los grupos completamente funcionales deben ser creados en la web y solo los usuarios registrados tienen acceso a ellos. Por favor, lee más en http://osmo.mobi. "</string>
-    <string name="osmo_plugin_name">OsMo (Monitoreo avanzado en directo)</string>
-    <string name="osmo_settings">OpenStreetMap Monitoring</string>
+    <string name="osmo_plugin_name">OsMo monitoring</string>
+    <string name="osmo_settings">OsMo Monitoring</string>
    	<string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
 	<string name="share_route_subject">Ruta compartida vía OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato inválido: %s</string>
@@ -1788,7 +1788,7 @@
     <string name="int_hour">h</string>
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
-    <string name="record_plugin_name">Grabar tus viajes</string>
+    <string name="record_plugin_name">Grabación de viaje</string>
     <string name="record_plugin_description">Guarde sus trazas tocando un botón en la pantalla del mapa. Mostrar las configuraciones para grabar sus viajes a archivos GPX locales o usando un servicio web en línea.</string>
     <string name="rendering_attr_publicTransportMode_name">Rutas de autobús, trolebús y lanzadera</string>
 	<string name="save_track_to_gpx_globally">Guardar traza en fichero GPX</string>
@@ -1915,8 +1915,8 @@
 	<string name="plugin_settings_button_caption">Opciones</string>
 <string name="edit_group">Editar grupo</string>
     <string name="plugin_install_needs_network">Necesitas una conexión a Internet para instalar este plugin.</string>
-<string name="plugin_ski_name">Mapas de esquí</string>
-    <string name="plugin_nautical_name">Mapas náuticos</string>
+<string name="plugin_ski_name">Vista mapa de esquí</string>
+    <string name="plugin_nautical_name">Vista mapa náutico</string>
     <string name="world_ski_missing">Para mostrar mapas de esquí, debes descargar el mapa especial</string>
     <string name="nautical_maps_missing">Para mostrar mapas náuticos, debes descargar el mapa especial</string>
 	<string name="enable_plugin2">Activar</string>
@@ -1935,8 +1935,21 @@
 	<string name="audio">Audio</string>
 	<string name="video">Vídeo</string>
 	<string name="photo">Foto</string>
-	<string name="plugin_nautical_descr1">"Activando esta vista cambia el estilo de mapa a Náutico, mostrando así toda   marcas de navegación y símbolos gráficos náuticos."</string>
+	<string name="plugin_nautical_descr1">Activar esta vista cambia el estilo de mapa a Náutico, mostrando así todas las marcas de navegación y símbolos gráficos náuticos.</string>
 	<string name="plugin_nautical_descr2">Un archivo de mapa que contiene todos los símbolos náuticos a nivel mundial está disponible como una descarga única llamada \'Balizas mundiales\'.</string>
-	<string name="plugin_nautical_descr3">Esta vista se puede revertir o desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado .</string>
+	<string name="plugin_nautical_descr3">Esta vista se puede revertir desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado .</string>
+
+	<string name="plugin_ski_descr1">Activar esta vista cambia el estilo de mapa a \'invierno y esquí\', mostrando las características de terreno en condiciones invernales.</string>
+	<string name="plugin_ski_descr2">Un mapa mundial que muestra todas las pistas de esquí y las rutas de esquí de travesía con esta vista está disponible en Descargas como \'Mapa mundial de esquí\'.</string>
+	<string name="plugin_ski_descr3">Esta vista se puede revertir desactivándola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado.</string>
+
+	<string name="plugin_touringview_descr1">Activando esta vista cambia el estilo de mapa a \'Vista de Touring\', que es una vista de alto detalle especial para los viajeros y conductores profesionales.</string>
+	<string name="plugin_touringview_descr2">Esta vista proporciona, en cualquier nivel de zoom del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, pistas, senderos y marcas de orientación). También representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil cuando por ejemplo conduciendo vehículos grandes.</string>
+	<string name="days_behind">días atrás</string>
+	<string name="plugin_touringview_descr3">La descarga de un mapa especial no es necesaria, la vista es creada desde nuestros mapas estándar.</string>
+	<string name="plugin_touringview_descr4">La vista puede ser revertida desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' desde \'Configurar mapa\' como se quiera.</string>
+	<string name="location_on_map">Localización:\n Lat %1$s\n Lon %2$s</string>
+	<string name="watch">Ver</string>
+	<string name="plugin_touringview_name">Vista de mapa Touring</string>
 
 	</resources>

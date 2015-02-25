@@ -1456,8 +1456,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nome del file GPX</string>
     <string name="gpx_saved_sucessfully">File GPX salvato con successo in {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Creare percorsi (o usare/modificare file GPX esistenti) per misurare la distanza tra punti. Salvare come GPX, potrebbe essere utilizzato per pianificare un itinerario GPX.</string>
-    <string name="osmand_distance_planning_plugin_name">Strumento Calcolatore di distanza &amp; Pianificazione</string>
+    <string name="osmand_distance_planning_plugin_description">Attivatre un widget che permette di creare percorsi tappando sullo schermo (o usare/modificare file GPX esistenti) per misurare la distanza tra punti. I risultati possono essere salvati come GPX, potrebbe essere utilizzato per pianificare un itinerario GPX.</string>
+    <string name="osmand_distance_planning_plugin_name">Strumento calcolatore di distanza &amp; pianificazione</string>
     <string name="use_distance_measurement_help">* Toccare per segnare un punto.\n * Premere e tenere premuto sulla mappa per eliminare il punto precedente.\n * Premere e tenere premuto sul punto per vedere e allegare una descrizione.\n * Fare clic sul widget di misura per vedere ulteriori azioni.</string>
     <string name="default_buttons_do_not_show_again">Non mostrare nuovamente</string>
     <string name="distance_measurement_start_editing">Iniza a modificare</string>
@@ -1720,9 +1720,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="navigation_intent_invalid">Formato non valido: %s</string>
 <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
-    <string name="osmo_plugin_description">"OpenStreetMap monitoraggio avanzato in diretta, vedi http://osmo.mobi. Fornisce la possibilità di tracciare altri dispositivi e di essere tracciati. Crea gruppo anonimi, condivide reciprocamente la posizione e comunica. Sono disponibili varie impostazioni di monitoraggio, per la sessione in corso o permanenti. I gruppi anonimi sono limitati a un numero di giorni e alcune funzioni es. non c\'è il controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. "</string>
-    <string name="osmo_plugin_name">OsMo (Monitoraggio avanzato in tempo reale)</string>
-    <string name="osmo_settings">Monitoraggio OpenStreetMap</string>
+    <string name="osmo_plugin_description">"Mostra le impostazioni per il monitoraggio avanzato in diretta OsMo, vedi http://osmo.mobi. Fornisce la possibilità di tracciare altri dispositivi e di essere tracciati. Crea gruppo anonimi, condivide reciprocamente la posizione e comunica. Sono disponibili varie impostazioni di monitoraggio, per la sessione in corso o permanenti. I gruppi anonimi sono limitati a un numero di giorni e alcune funzioni es. non c\'è il controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. "</string>
+    <string name="osmo_plugin_name">Monitoraggio OsMo</string>
+    <string name="osmo_settings">Monitoraggio OsMO</string>
    	<string name="keep_informing_never">Solo manualmente (tap sulla freccia)</string>
     <string name="keep_informing_descr">Annuncia nuovamente a intervalli regolari le indicazioni di navigazione</string>
     <string name="keep_informing">Ripeti le istruzioni di navigazione</string>
@@ -1943,8 +1943,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="speak_poi">Annuncia PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
     <string name="flat_list_waypoints">Tutto</string>
-    <string name="record_plugin_description">Registra le tue tracce con il pulsante dedicato nello schermo della mappa. Mostra le impostazioni per la registrazione dei vostri viaggi in file GPX localmente o online utilizzando un servizio web.</string>
-    <string name="record_plugin_name">Registra i tuoi viaggi</string>
+    <string name="record_plugin_description">Attiva la funzionalità di registrazione delle tue tracce con il pulsante dedicato nello schermo della mappa e visualizza le impostazioni per la registrazione dei vostri viaggi in file GPX localmente o online utilizzando un servizio web.</string>
+    <string name="record_plugin_name">Registrazione viaggio</string>
     <string name="int_hour">h</string>
     <string name="duration">Durata</string>
     <string name="distance">Distanza</string>
@@ -2076,8 +2076,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="enable_plugin2">Attiva</string>
 	<string name="disable_plugin2">Disattiva</string>
 	<string name="get_plugin">Ottieni</string>
-<string name="plugin_ski_name">Mappe sci</string>
-    <string name="plugin_nautical_name">Mappe nautiche</string>
+<string name="plugin_ski_name">Viuslizzazione mappa sci</string>
+    <string name="plugin_nautical_name">Visualizzazione mappa nautica</string>
     <string name="world_ski_missing">Per visualizzare le mappe per lo sci è necessario scaricare la mappa speciale offline</string>
     <string name="nautical_maps_missing">Per visualizzare le mappe nautiche è necessario scaricare la mappa speciale offline</string>
 	<string name="rendering_attr_pisteGrooming_name">Batti pista</string>
@@ -2085,8 +2085,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="device_memory">Memoria dispositivo</string>
     <string name="rendering_attr_pisteRoutes_name">Percorsi su pista</string>
 	<string name="roads_only">Solo strade</string>
-    <string name="watch">Orologio</string>
-	<string name="notes">Nore</string>
+    <string name="watch">Guarda</string>
+	<string name="notes">Note</string>
 	<string name="online_map">Mappa online</string>
 	<string name="export">Esporta</string>
 	<string name="share_note">Condividi l\'appunto</string>
@@ -2094,4 +2094,19 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="audio">Audio</string>
 	<string name="video">Video</string>
 	<string name="photo">Foto</string>
+	<string name="plugin_nautical_descr1">Attivando questa visualizzazione lo stile della mappa diventerà Nautico, quindi mostrerà tutta la simbologia per la navigazione.</string>
+	<string name="plugin_nautical_descr2">È disponibile la mappa contenente tutta la simbologia nautica come singolo download sotto il nome \"World seamarks\".</string>
+	<string name="plugin_nautical_descr3">Ciò può essere invertito sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.</string>
+
+	<string name="plugin_ski_descr1">Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostrando tutte le caratteristiche dello scenario nelle condizioni invernali.</string>
+	<string name="plugin_ski_descr2">"È disponibile una mappa contenente tutte le piste e percorsi da fondo sotto \'Download\'  \"World ski map\"."</string>
+	<string name="plugin_touringview_descr3">Non è necessaria una mappa speciale, la visualizzazione è creata dalle mappe standard.</string>
+	<string name="plugin_touringview_name">Visualizzazione mappa turistica</string>
+
+	<string name="location_on_map">Localizzazione:\n Lat %1$s\n Lon %2$s</string>
+	<string name="plugin_ski_descr3">Questa visualizzazione può essere ripristinata sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.</string>
+
+	<string name="plugin_touringview_descr2">Questa visualizzazione fornisce, per ogni livello di zoom, il massimo dei dettagli di viaggio disponibili nei dati della mappa (particolari delle strade, sentieri e segni di orientamento). Rappresenta anche chiaramente tutte le strade ambigue tramite la colorazione distintiva, ciò risulta utile per esempio guidando autoveicoli di grandi dimensioni.</string>
+	<string name="plugin_touringview_descr4">Questa visualizzazione può essere ripristinata sia disattivandola nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.</string>
+	<string name="plugin_touringview_descr1">Attivando questa visualizzazione lo stile della mappa cambierà in \'Vista turistica\', questa è una visualizzazione particolarmente molto dettagliata per i turisti e autisti professionali.</string>
 	</resources>

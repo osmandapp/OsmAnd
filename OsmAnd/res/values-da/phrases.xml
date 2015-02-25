@@ -152,7 +152,7 @@
         <string name="poi_helipad">Helikopterlandingsplads</string>
         <string name="poi_runway">Landingsbane</string>
         <string name="poi_aeroway_terminal">Lufthavnsterminal</string>
-        <string name="poi_aeroway_gate">Gate</string>
+        <string name="poi_aeroway_gate">Lufthavnsgate</string>
 
         <string name="poi_slipway">Slæbested</string>
         <string name="poi_ferry_terminal">Færgeterminal</string>
@@ -468,7 +468,7 @@
         <string name="poi_electrician">Elektriker</string>
         <string name="poi_gardener">Gartner</string>
         <string name="poi_glaziery_craft">Glarmester</string>
-        <string name="poi_handicraft">Håndværker</string>
+        <string name="poi_handicraft">Kunsthåndværk</string>
         <string name="poi_hvac">VVS</string>
         <string name="poi_insulation_craft">Isolering</string>
         <string name="poi_jeweller">Juvelér</string>
@@ -699,7 +699,7 @@
 	<string name="poi_internet_access_service">Internetadgang: service</string>
 	
 	<string name="poi_general">Landhandel</string>
-	<string name="poi_car">Bilbutik</string>
+	<string name="poi_car">Bilforhandler</string>
 	<string name="poi_railway_buffer_stop">Jernbane sporstopper</string>
 	<string name="poi_wine">Vinhandel</string>
 

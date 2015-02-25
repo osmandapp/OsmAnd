@@ -10,16 +10,17 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.view.*;
 import android.widget.*;
-
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 import java.text.MessageFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -260,6 +261,7 @@ public class UpdatesIndexFragment extends ListFragment {
 
 			TextView name = (TextView) v.findViewById(R.id.download_item);
 			TextView description = (TextView) v.findViewById(R.id.download_descr);
+			TextView updateDescr = (TextView) v.findViewById(R.id.update_descr);
 			final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
 			IndexItem e = items.get(position);
 			if (e.getFileName().equals(getString(R.string.everything_up_to_date))) {
@@ -275,8 +277,23 @@ public class UpdatesIndexFragment extends ListFragment {
 			String eName = e.getVisibleName(getMyApplication(), osmandRegions);
 
 			name.setText(eName.trim().replace('\n', ' ').replace("TTS","")); //$NON-NLS-1$
-			String d =   getMapDescription(e);
+			String d =  getMapDescription(e);
 			description.setText(d);
+			
+			String sfName = e.getTargetFileName();
+			Map<String, String> indexActivatedFileNames = getMyApplication().getResourceManager().getIndexFileNames();
+			String dt = indexActivatedFileNames.get(sfName);
+			updateDescr.setText("");
+			if(dt != null ) {
+				try {
+					Date tm = format.parse(dt);
+					long days = Math.max(1, (e.getTimestamp() -  tm.getTime()) / (24 * 60 * 60 * 1000) + 1);  
+					updateDescr.setText(days + " " + getString(R.string.days_behind));
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+			}
+			
 
 			ch.setChecked(getDownloadActivity().getEntriesToDownload().containsKey(e));
 			ch.setOnClickListener(new View.OnClickListener() {
@@ -306,7 +323,7 @@ public class UpdatesIndexFragment extends ListFragment {
 
 	private String getMapDescription(IndexItem item){
 		String typeName = getTypeName(item.getType().getResource());
-		String date = item.getDate(new SimpleDateFormat("dd.MM.yyyy"));
+		String date = item.getDate(format);
 		String size = item.getSizeDescription(getActivity());
 		return typeName + "  " + date + "  " + size;
 

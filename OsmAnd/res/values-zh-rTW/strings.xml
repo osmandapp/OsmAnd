@@ -1928,4 +1928,11 @@
 	<string name="plugin_touringview_descr1">啟動此檢視的地圖樣式更改為\'旅遊檢視\'，這是給旅客和職業司機的一種特殊的高細節檢視。</string>
 	<string name="plugin_touringview_descr3">不需要下載特殊的地圖，視圖是從我們標準的地圖所建立的。</string>
 	<string name="plugin_touringview_descr2">此檢視提供了在任何給與的地圖縮放，（特別是公路、軌道、路徑和定位標記）在地圖資料中最大量可獲得的詳細行程。它也清楚地描繪了各類道路明確地色碼，例如駕駛大型車輛時，這是非常有用的。</string>
+	<string name="days_behind">之後的日子</string>
+	<string name="location_on_map">位置：\n 緯度 %1$s\n 經度 %2$s</string>
+	<string name="plugin_nautical_descr3">此檢視可以在這裡經由再次取消啟動，或透過 \'地圖式樣\' 之下的 \'組態地圖\' 這兩者中的任何一個更改而恢復它。</string>
+
+	<string name="plugin_ski_descr3">此檢視可以在這裡經由再次取消啟動，或透過 \'地圖式樣\' 之下的 \'組態地圖\' 這兩者中的任何一個更改而恢復它。</string>
+
+	<string name="plugin_touringview_descr4">此檢視可以在這裡經由再次取消啟動，或透過 \'地圖式樣\' 之下的 \'組態地圖\' 這兩者中的任何一個更改而恢復它。</string>
 	</resources>

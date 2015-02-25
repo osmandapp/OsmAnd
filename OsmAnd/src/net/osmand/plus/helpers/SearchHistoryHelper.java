@@ -7,9 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -142,7 +140,7 @@ public class SearchHistoryHelper {
 		}
 
 		public void setFrequency(String intervalsString, String values) {
-			if(!Algorithms.isEmpty(intervalsString) && !Algorithms.isEmpty(values)) {
+			if(Algorithms.isEmpty(intervalsString) || Algorithms.isEmpty(values)) {
 				markAsAccessed(this.lastAccessedTime);
 				return;
 			}
@@ -278,11 +276,11 @@ public class SearchHistoryHelper {
 					conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
 				}
 				if (conn.getVersion() == 0) {
-					conn.setVersion(DB_VERSION);
 					onCreate(conn);
 				} else {
 					onUpgrade(conn, conn.getVersion(), DB_VERSION);
 				}
+				conn.setVersion(DB_VERSION);
 
 			}
 			return conn;
@@ -337,7 +335,10 @@ public class SearchHistoryHelper {
 			if(db != null){
 				try {
 					db.execSQL(
-							"UPDATE " + HISTORY_TABLE_NAME + " SET time = ? and freq_intervals = ? and freq_values = ? WHERE " + HISTORY_COL_NAME + " = ?", 
+							"UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TIME + "= ? "+
+									", " + HISTORY_COL_FREQ_INTERVALS + " = ? " +
+									", " +HISTORY_COL_FREQ_VALUES + "= ? WHERE " +
+									HISTORY_COL_NAME + " = ?", 
 							new Object[] { e.getLastAccessTime(), e.getIntervals(), e.getIntervalsValues(),
 									e.getSerializedName() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				} finally {
@@ -417,24 +418,31 @@ public class SearchHistoryHelper {
 									" FROM " +	HISTORY_TABLE_NAME , null); //$NON-NLS-1$//$NON-NLS-2$
 					Map<String, HistoryEntry> st = new TreeMap<String, HistoryEntry>(); 
 					if (query.moveToFirst()) {
+						boolean reinsert = false;
 						do {
 							String name = query.getString(0);
-							HistoryEntry prev = st.get(name);
 							HistoryEntry e = new HistoryEntry(query.getDouble(1), query.getDouble(2), 
 									PointDescription.deserializeFromString(name));
 							long time = query.getLong(3);
 							e.setLastAccessTime(time);
 							e.setFrequency(query.getString(4), query.getString(5));
-							if(prev != null) {
-								entries.remove(prev);
-							}
-							if(prev != null || !Algorithms.objectEquals(name, e.getSerializedName())) {
-								removeQuery(name, db);
-								insert(e, db);
+							if(st.containsKey(name) || st.containsKey(e.getSerializedName()) 
+									|| !Algorithms.objectEquals(name, e.getSerializedName())) {
+								reinsert = true;
 							}
 							entries.add(e);
-							st.put(name, e);
+							st.put(e.getSerializedName(), e);
 						} while (query.moveToNext());
+						if(reinsert) {
+							System.err.println("Reinsert all values");
+							db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME); //$NON-NLS-1$
+							entries.clear();
+							entries.addAll(st.values());
+							for(HistoryEntry he : entries) {
+								insert(he, db);
+							}
+							
+						}
 					}
 					query.close();
 				} finally {
