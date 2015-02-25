@@ -1933,4 +1933,6 @@
 	<string name="export">Eksportuoti</string>
 	<string name="days_behind">dienas atsilikęs</string>
 	<string name="plugin_nautical_descr1">Aktyvavus šį rodinį bus rodomas jūrlapis su jūriniais navigaciniais ženklais ir simboliais.</string>
+	<string name="rename_failed">Nepavyko pervardinti.</string>
+	<string name="back_to_map">Grįžti į žemėlapį</string>
 	</resources>
