@@ -976,9 +976,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		Recording r = new Recording(f);
 		String encodeName = f.getName();
-		int i = encodeName.indexOf('-');
+		int i = encodeName.lastIndexOf('_');
 		if (i > 0) {
-			encodeName = encodeName.substring(0, i);
+			encodeName = encodeName.substring(i + 1);
 		}
 		i = encodeName.indexOf('.');
 		if (i > 0) {
