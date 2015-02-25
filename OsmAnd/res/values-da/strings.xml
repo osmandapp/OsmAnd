@@ -1946,6 +1946,6 @@
 	<string name="rename_failed">Fejl ved omdøbning.</string>
 	<string name="back_to_map">Tilbage til kortet</string>
 	<string name="currently_recording_track">Aktuelt optagelsesspor</string>
-	<string name="showed_on_map">Vist på kort</string>
+	<string name="showed_on_map">Vist på kortet</string>
 	<string name="turn_off_all">Deaktiver alle</string>
 	</resources>
