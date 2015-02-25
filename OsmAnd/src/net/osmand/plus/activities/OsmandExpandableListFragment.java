@@ -21,8 +21,8 @@ public abstract class OsmandExpandableListFragment extends Fragment
 		implements OnChildClickListener {
 	
 	
-	private ExpandableListView listView;
-	private ExpandableListAdapter adapter;
+	protected ExpandableListView listView;
+	protected ExpandableListAdapter adapter;
 
 
 	public OsmandApplication getMyApplication() {

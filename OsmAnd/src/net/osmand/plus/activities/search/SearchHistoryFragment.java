@@ -10,11 +10,19 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.util.MapUtils;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
@@ -24,11 +32,13 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -95,7 +105,9 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 			location = ((OsmandApplication) activity.getApplication()).getSettings().getLastKnownMapLocation();
 		}
 		historyAdapter.clear();
-		historyAdapter.addAll(helper.getHistoryEntries());
+		for(HistoryEntry entry : helper.getHistoryEntries()){
+			historyAdapter.add(entry);
+		}
 		locationUpdate(location);
 		clearButton.setVisibility(historyAdapter.isEmpty() ? View.GONE : View.VISIBLE);
 		
@@ -127,6 +139,7 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 
 	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
 		private LatLon location;
+		Drawable arrowImage;
 
 		public void updateLocation(LatLon l) {
 			location = l;
@@ -135,6 +148,14 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 
 		public HistoryAdapter(List<HistoryEntry> list) {
 			super(getActivity(), R.layout.search_history_list_item, list);
+			arrowImage = getResources().getDrawable(R.drawable.ic_destination_arrow_white);
+			arrowImage.mutate();
+			boolean light = getMyApplication().getSettings().isLightContent();
+			if (light) {
+				arrowImage.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+			} else {
+				arrowImage.setColorFilter(getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
+			}
 		}
 
 		@Override
@@ -144,33 +165,28 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.search_history_list_item, parent, false);
 			}
-			TextView label = (TextView) row.findViewById(R.id.label);
+			TextView nameText = (TextView) row.findViewById(R.id.name);
+			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			String distance = "";
-			ImageButton icon = (ImageButton) row.findViewById(R.id.remove);
+			ImageView arrow = (ImageView) row.findViewById(R.id.direction);
+			arrow.setImageDrawable(arrowImage);
+			ImageButton options = (ImageButton) row.findViewById(R.id.options);
 			final HistoryEntry model = getItem(position);
 			if (location != null) {
 				int dist = (int) (MapUtils.getDistance(location, model.getLat(), model.getLon()));
 				distance = OsmAndFormatter.getFormattedDistance(dist, (OsmandApplication) getActivity().getApplication()) + "  ";
 			}
-			String rnk = MessageFormat.format(" {0,number,#.##E00} ", ((float)model.getRank(System.currentTimeMillis())));
-			label.setText(distance + rnk  + model.getName().getName(), BufferType.SPANNABLE);
-			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length(), 0);
-			icon.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					helper.remove(model);
-					historyAdapter.remove(model);
-				}
+			distanceText.setText(distance);
+			nameText.setText(model.getName().getName(), BufferType.SPANNABLE);
 
-			});
-			View.OnClickListener clickListener = new View.OnClickListener() {
+			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					selectModel(model, v);
 				}
-			};
 
-			label.setOnClickListener(clickListener);
+			});
+
 			return row;
 		}
 	}
@@ -180,5 +196,9 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 		if(getActivity() instanceof SearchActivity) {
 			 ((SearchActivity) getActivity()).getClearToolbar(false);
 		}
+	}
+
+	public OsmandApplication getMyApplication() {
+		return (OsmandApplication) getActivity().getApplication();
 	}
 }

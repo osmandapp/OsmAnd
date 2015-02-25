@@ -22,7 +22,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:maxLines="3"
-					android:textColor="@color/dashboard_descr_colol"
+					android:textColor="@color/icon_color_light"
 					android:text="@string/loading_data"
 					android:textSize="@dimen/dashProgressTextSize"/>
 		</LinearLayout>
