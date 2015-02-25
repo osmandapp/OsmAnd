@@ -20,8 +20,6 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -62,12 +60,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,10 +79,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	//	public static final int ACTION_ID = 0;
 //	protected static final int DELETE_ACTION_ID = 1;
 	private boolean selectionMode = false;
-	private List<GpxInfo> selectedItems = new ArrayList<GpxInfo>();
+	private List<GpxInfo> selectedItems = new ArrayList<>();
 	private ActionMode actionMode;
 	private LoadGpxTask asyncLoader;
 	private GpxIndexesAdapter listAdapter;
+	private ShowedOnMapAdapter showOnMapAdapter;
 	MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 	private LoadLocalIndexDescriptionTask descriptionLoader;
 	private ContextMenuAdapter optionsMenuAdapter;
@@ -118,7 +119,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 
 		updateCurrentTrack(getView());
+	}
 
+	private void createShowedOnMapsView(View v) {
+		v.findViewById(R.id.on_map_layout).setVisibility(View.GONE);
+		ListView onMap = (ListView)v.findViewById(R.id.gpx_on_map);
+		showOnMapAdapter = new ShowedOnMapAdapter(getActivity(), R.layout.dash_gpx_track_item);
+		onMap.setAdapter(showOnMapAdapter);
 	}
 
 	@Override
@@ -168,6 +175,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			}
 		});
+
+		createShowedOnMapsView(v);
 		return v;
 	}
 
@@ -625,24 +634,36 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		protected void onPreExecute() {
 			((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
 			listAdapter.clear();
+			if (showOnMapAdapter != null) {
+				showOnMapAdapter.clear();
+			}
 		}
 
 		@Override
 		protected void onProgressUpdate(GpxInfo... values) {
 			for (GpxInfo v : values) {
 				listAdapter.addLocalIndexInfo(v);
+				if (selectedGpxHelper.getSelectedFileByName(v.getFileName()) != null){
+					showOnMapAdapter.add(v);
+				}
 			}
+			showOnMapAdapter.notifyDataSetChanged();
 			listAdapter.notifyDataSetChanged();
 		}
 
 		public void setResult(List<GpxInfo> result) {
 			this.result = result;
 			listAdapter.clear();
+			showOnMapAdapter.clear();
 			if (result != null) {
 				for (GpxInfo v : result) {
 					listAdapter.addLocalIndexInfo(v);
+					if (selectedGpxHelper.getSelectedFileByName(v.getFileName()) != null){
+						showOnMapAdapter.add(v);
+					}
 				}
 				listAdapter.notifyDataSetChanged();
+				showOnMapAdapter.notifyDataSetChanged();
 				onPostExecute(result);
 			}
 		}
@@ -669,7 +690,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		private void loadGPXData(File mapPath, List<GpxInfo> result, LoadGpxTask loadTask) {
 			if (mapPath.canRead()) {
-				List<GpxInfo> progress = new ArrayList<GpxInfo>();
+				List<GpxInfo> progress = new ArrayList<>();
 				loadGPXFolder(mapPath, result, loadTask, progress, "");
 				if (!progress.isEmpty()) {
 					loadTask.loadFile(progress.toArray(new GpxInfo[progress.size()]));
@@ -707,8 +728,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	protected class GpxIndexesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 
-		Map<String, List<GpxInfo>> data = new LinkedHashMap<String, List<GpxInfo>>();
-		List<String> category = new ArrayList<String>();
+		Map<String, List<GpxInfo>> data = new LinkedHashMap<>();
+		List<String> category = new ArrayList<>();
 		int warningColor;
 		int okColor;
 		int defaultColor;
@@ -725,11 +746,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 
 		public Set<GpxInfo> getSelectedGpx() {
-			Set<GpxInfo> originalSelectedItems = new HashSet<GpxInfo>();
+			Set<GpxInfo> originalSelectedItems = new HashSet<>();
 			for (List<GpxInfo> l : data.values()) {
 				if (l != null) {
 					for (GpxInfo g : l) {
-						boolean add = false;
+						boolean add;
 						if (g.gpx != null && g.gpx.showCurrentTrack) {
 							add = selectedGpxHelper.getSelectedCurrentRecordingTrack() != null;
 						} else {
@@ -1064,7 +1085,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			int total = 0;
 			for (GpxInfo info : params) {
 				if (!isCancelled() && (info.gpx == null || !info.gpx.showCurrentTrack)) {
-					boolean successfull = false;
+					boolean successfull;
 					successfull = Algorithms.removeAllFiles(info.file);
 					total++;
 					if (successfull) {
@@ -1133,7 +1154,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPreExecute() {
-			((ActionBarActivity) getActivity()).setProgressBarIndeterminateVisibility(true);
+			getActivity().setProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override
@@ -1200,7 +1221,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				results.count = 1;
 			} else {
 				String cs = constraint.toString().toLowerCase();
-				List<GpxInfo> res = new ArrayList<GpxInfo>();
+				List<GpxInfo> res = new ArrayList<>();
 				for (GpxInfo r : raw) {
 					if (r.getName().toLowerCase().indexOf(cs) != -1) {
 						res.add(r);
@@ -1218,10 +1239,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if (results.values != null) {
 				synchronized (listAdapter) {
 					listAdapter.clear();
+					showOnMapAdapter.clear();
 					for (GpxInfo i : ((List<GpxInfo>) results.values)) {
 						listAdapter.addLocalIndexInfo(i);
+						if (selectedGpxHelper.getSelectedFileByName(i.getFileName()) != null){
+							showOnMapAdapter.add(i);
+						}
 					}
 				}
+				showOnMapAdapter.notifyDataSetChanged();
 				listAdapter.notifyDataSetChanged();
 				if (constraint != null && constraint.length() > 3) {
 					collapseTrees(10);
@@ -1365,6 +1391,45 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				return "";
 			}
 			return fileName = file.getName();
+		}
+	}
+
+	class ShowedOnMapAdapter extends ArrayAdapter<GpxInfo>{
+
+		public ShowedOnMapAdapter(Context context, int resource) {
+			super(context, resource);
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View v = convertView;
+			if (v == null) {
+				LayoutInflater inflater = getActivity().getLayoutInflater();
+				v = inflater.inflate(R.layout.dash_gpx_track_item, parent, false);
+			}
+
+			GpxInfo gpxInfo = getItem(position);
+
+			TextView viewName = ((TextView) v.findViewById(R.id.name));
+			viewName.setText(gpxInfo.getName());
+
+			v.findViewById(R.id.show_on_map).setVisibility(View.GONE);
+			v.findViewById(R.id.stop).setVisibility(View.GONE);
+			v.findViewById(R.id.divider).setVisibility(View.GONE);
+			if (gpxInfo.gpx != null) {
+				String description = GpxUiHelper.getDescription(getMyApplication(), gpxInfo.gpx, gpxInfo.file, true);
+				int startindex = description.indexOf(">");
+				int endindex = description.indexOf("</font>");
+				String distnace = description.substring(startindex + 1, endindex);
+				((TextView) v.findViewById(R.id.distance)).
+						setText(distnace);
+
+			}
+
+			CompoundButton check = (CompoundButton)v.findViewById(R.id.check);
+			check.setVisibility(View.VISIBLE);
+
+			return v;
 		}
 	}
 }

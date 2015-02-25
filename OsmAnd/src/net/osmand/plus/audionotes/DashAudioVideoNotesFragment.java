@@ -97,7 +97,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.note, null, false);
 
-			getNoteView(recording, view, getActivity(), plugin);
+			getNoteView(recording, view, getActivity());
 			view.findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -111,7 +111,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 				public void onClick(View v) {
 					getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, 
 							new PointDescription(PointDescription.POINT_TYPE_NOTE, 
-							(recording.getName() != null) ? recording.getName() : recording.getDescription(getActivity())), true,
+							recording.getName(getActivity())), true,
 							recording); //$NON-NLS-1$
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
@@ -121,18 +121,10 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	}
 
 	public static void getNoteView(final AudioVideoNotesPlugin.Recording recording, View view,
-								   final Context ctx, final AudioVideoNotesPlugin plugin) {
-		String name = recording.getName();
+								   final Context ctx) {
+		String name = recording.getName(ctx);
 		TextView nameText = ((TextView) view.findViewById(R.id.name));
-		if (name != null) {
-			nameText.setText(name);
-		} else if (recording.isAudio()) {
-			nameText.setText(R.string.audio);
-		} else if (recording.isVideo()) {
-			nameText.setText(R.string.video);
-		} else if (recording.isPhoto()) {
-			nameText.setText(R.string.photo);
-		}
+		nameText.setText(name);
 		((TextView) view.findViewById(R.id.descr)).setText(recording.getDescription(ctx));
 
 		ImageView icon = (ImageView) view.findViewById(R.id.icon);
