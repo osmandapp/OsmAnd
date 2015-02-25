@@ -48,6 +48,7 @@ public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
 		}
 		tb.setClickable(true);
 		Drawable back = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		back.mutate();
 		back.setColorFilter(0xffffffff, PorterDuff.Mode.MULTIPLY);
 		tb.setNavigationIcon(back);
 		tb.setBackgroundColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTabBackground)));

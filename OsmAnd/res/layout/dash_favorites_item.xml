@@ -77,7 +77,7 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
 					android:layout_marginLeft="4dp"
-					android:textColor="@color/dashboard_descr_colol"
+					android:textColor="@color/icon_color_light"
 					android:textSize="@dimen/showAllButtonTextSize"/>
 			</LinearLayout>
 
