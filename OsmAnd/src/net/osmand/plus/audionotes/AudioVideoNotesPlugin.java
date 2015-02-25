@@ -21,6 +21,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
+import net.osmand.data.Street;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -190,8 +191,20 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return false;
 		}
 
-		public String getName() {
+		public String getFileName() {
 			return file.getName();
+		}
+
+		public String getName() {
+			String fileName = file.getName();
+
+			String hash;
+			int hashInd = fileName.lastIndexOf("_");
+			if (hashInd != -1) {
+				return fileName.substring(0, hashInd - 1);
+			} else {
+				return "";
+			}
 		}
 
 		public boolean isPhoto() {

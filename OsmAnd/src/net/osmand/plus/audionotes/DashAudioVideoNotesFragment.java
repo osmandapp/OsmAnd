@@ -124,7 +124,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 								   final Context ctx, final AudioVideoNotesPlugin plugin) {
 		String name = recording.getName();
 		TextView nameText = ((TextView) view.findViewById(R.id.name));
-		if (name != null) {
+		if (!name.isEmpty()) {
 			nameText.setText(name);
 		} else if (recording.isAudio()) {
 			nameText.setText(R.string.audio);

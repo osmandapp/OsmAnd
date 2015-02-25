@@ -29,6 +29,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.util.Algorithms;
@@ -62,12 +63,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -118,6 +122,18 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 
 		updateCurrentTrack(getView());
+		updateShowedOnMapTracks();
+
+	}
+
+	private void updateShowedOnMapTracks() {
+		View v = getView();
+		if (v == null) {
+			return;
+		}
+
+		ListView onMap = (ListView)v.findViewById(R.id.gpx_on_map);
+		onMap.setAdapter(new ShowedOnMapAdapter(getActivity(), R.layout.dash_gpx_track_item));
 
 	}
 
@@ -1365,6 +1381,42 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				return "";
 			}
 			return fileName = file.getName();
+		}
+	}
+
+	class ShowedOnMapAdapter extends ArrayAdapter<GpxInfo>{
+
+		public ShowedOnMapAdapter(Context context, int resource) {
+			super(context, resource);
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View v = convertView;
+			if (v == null) {
+				LayoutInflater inflater = getActivity().getLayoutInflater();
+				v = inflater.inflate(R.layout.dash_gpx_track_item, parent, false);
+			}
+
+			GpxInfo gpxInfo = getItem(position);
+
+			TextView viewName = ((TextView) v.findViewById(R.id.name));
+			viewName.setText(gpxInfo.getName());
+
+			v.findViewById(R.id.show_on_map).setVisibility(View.GONE);
+			v.findViewById(R.id.stop).setVisibility(View.GONE);
+			v.findViewById(R.id.divider).setVisibility(View.GONE);
+			String description = GpxUiHelper.getDescription(getMyApplication(), gpxInfo.gpx, gpxInfo.file, true);
+			int startindex = description.indexOf(">");
+			int endindex = description.indexOf("</font>");
+			String distnace = description.substring(startindex + 1, endindex);
+			((TextView) v.findViewById(R.id.distance)).
+					setText(distnace);
+
+			CompoundButton check = (CompoundButton)v.findViewById(R.id.check);
+			check.setVisibility(View.VISIBLE);
+
+			return v;
 		}
 	}
 }

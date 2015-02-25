@@ -1,6 +1,7 @@
 package net.osmand.plus.audionotes;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -211,21 +213,24 @@ public class NotesFragment extends ListFragment {
 				getListView(), false);
 		final EditText editText = (EditText) v.findViewById(R.id.name);
 		builder.setView(v);
-		String fileName = recording.getName();
-		int extInd = recording.getName().lastIndexOf(".");
-		final String extension;
-		if (extInd >= 0){
-			extension = fileName.substring(extInd, fileName.length());
+
+		String fileName = recording.getFileName();
+		final String hash;
+		int hashInd = fileName.lastIndexOf("_");
+		if (hashInd == -1) {
+			hash = "_" + fileName;
 		} else {
-			extension = "";
+			hash = fileName.substring(hashInd, fileName.length());
 		}
 
-		editText.setText(recording.getName().substring(0, extInd));
+		editText.setText(recording.getName());
+		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(!recording.setName(editText.getText().toString() + extension)) {
+				if(!recording.setName(editText.getText().toString() + hash)) {
 					Toast.makeText(getActivity(),R.string.rename_failed,Toast.LENGTH_SHORT).show();
 				}
 				recording.setDescription();

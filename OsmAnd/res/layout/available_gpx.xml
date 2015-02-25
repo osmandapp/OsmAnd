@@ -30,6 +30,36 @@
 
 	</LinearLayout>
 
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/card_bg"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:text="@string/showed_on_map"/>
+
+			<Button
+				android:id="@+id/turn_off_all"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/turn_off_all"/>
+
+		</LinearLayout>
+
+		<ListView
+			android:id="@+id/gpx_on_map"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"/>
+	</LinearLayout>
 
 	<ExpandableListView
 		android:id="@android:id/list"

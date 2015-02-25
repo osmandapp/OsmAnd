@@ -170,7 +170,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if(o instanceof Recording){
-			if(((Recording)o).getName() == null) {
+			if(((Recording)o).getName().isEmpty()) {
 				return new PointDescription(PointDescription.POINT_TYPE_NOTE, view.getResources().getString(R.string.recording_default_name));
 			}
 			return new PointDescription(PointDescription.POINT_TYPE_NOTE, ((Recording)o).getName());
