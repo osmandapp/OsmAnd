@@ -122,8 +122,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	private void createShowedOnMapsView(View v) {
-		v.findViewById(R.id.on_map_layout).setVisibility(View.GONE);
-		ListView onMap = (ListView)v.findViewById(R.id.gpx_on_map);
+		ListView onMap = (ListView) v.findViewById(R.id.gpx_on_map);
 		showOnMapAdapter = new ShowedOnMapAdapter(getActivity(), R.layout.dash_gpx_track_item);
 		onMap.setAdapter(showOnMapAdapter);
 	}
@@ -133,6 +132,18 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		super.onPause();
 		if (operationTask != null) {
 			operationTask.cancel(true);
+		}
+	}
+
+	private void setShowedOnMapVisibility(boolean visibility) {
+		View v = getView();
+		if (v == null) {
+			return;
+		}
+		if (visibility) {
+			v.findViewById(R.id.on_map_layout).setVisibility(View.VISIBLE);
+		} else {
+			v.findViewById(R.id.on_map_layout).setVisibility(View.GONE);
 		}
 	}
 
@@ -163,7 +174,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (this.adapter != null) {
 			listView.setAdapter(this.adapter);
 		}
-
+		setHasOptionsMenu(true);
 		((TextView) v.findViewById(R.id.name)).setText(R.string.currently_recording_track);
 		v.findViewById(R.id.time_icon).setVisibility(View.GONE);
 
@@ -643,7 +654,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		protected void onProgressUpdate(GpxInfo... values) {
 			for (GpxInfo v : values) {
 				listAdapter.addLocalIndexInfo(v);
-				if (selectedGpxHelper.getSelectedFileByName(v.getFileName()) != null){
+				if (selectedGpxHelper.getSelectedFileByName(v.getFileName()) != null) {
 					showOnMapAdapter.add(v);
 				}
 			}
@@ -658,7 +669,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if (result != null) {
 				for (GpxInfo v : result) {
 					listAdapter.addLocalIndexInfo(v);
-					if (selectedGpxHelper.getSelectedFileByName(v.getFileName()) != null){
+					if (selectedGpxHelper.getSelectedFileByName(v.getFileName()) != null) {
 						showOnMapAdapter.add(v);
 					}
 				}
@@ -676,6 +687,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 			if (listAdapter.getGroupCount() > 0) {
 				getExpandableListView().expandGroup(0);
+			}
+
+			if (showOnMapAdapter.getCount() > 0) {
+				setShowedOnMapVisibility(true);
+			} else {
+				setShowedOnMapVisibility(false);
 			}
 		}
 
@@ -1242,7 +1259,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					showOnMapAdapter.clear();
 					for (GpxInfo i : ((List<GpxInfo>) results.values)) {
 						listAdapter.addLocalIndexInfo(i);
-						if (selectedGpxHelper.getSelectedFileByName(i.getFileName()) != null){
+						if (selectedGpxHelper.getSelectedFileByName(i.getFileName()) != null) {
 							showOnMapAdapter.add(i);
 						}
 					}
@@ -1394,7 +1411,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	class ShowedOnMapAdapter extends ArrayAdapter<GpxInfo>{
+	class ShowedOnMapAdapter extends ArrayAdapter<GpxInfo> {
 
 		public ShowedOnMapAdapter(Context context, int resource) {
 			super(context, resource);
@@ -1426,7 +1443,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			}
 
-			CompoundButton check = (CompoundButton)v.findViewById(R.id.check);
+			CompoundButton check = (CompoundButton) v.findViewById(R.id.check);
 			check.setVisibility(View.VISIBLE);
 
 			return v;
