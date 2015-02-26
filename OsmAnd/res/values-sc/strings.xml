@@ -545,8 +545,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="rendering_attr_hideText_name">Cua su testu</string>
     <string name="rendering_attr_hideWoodScrubs_name">Cua padentes e buschedos</string>
     <string name="rendering_attr_buildings15zoom_name">Edifìtzios dae su zoom 15</string>
-    <string name="rendering_attr_moreDetailed_name">Prus detalliau (a sa minuda)</string>
-    <string name="rendering_attr_lessDetailed_name">Detalliau de mancu</string>
+    <string name="rendering_attr_moreDetailed_name">Prus minujas (a sa minuda)</string>
+    <string name="rendering_attr_lessDetailed_name">Minujas de mancu</string>
     <string name="rendering_attr_hideAccess_name">Cua sas restritziones de atzessu</string>
     <string name="rendering_attr_showAccess_name">Ammustra sas restritziones de atzessu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Ammustra sa calidade de sas istradas</string>
@@ -985,7 +985,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="poi_action_succeded_template">Atzione {0} reseddida cumpridamente.</string>
 	<string name="first_time_msg">Gratzias pro s\'impreu de OsmAnd. Pro meda de sas caraterìsticas de s\'àplicu tènes bisongiu de datos locales sena lìnia, chi podent èssere icarrigadas dae \'Impostaduras\'→\'Amministra sos documentos de sas mapas\'. A pustis at a èssere possìbile ammustrare mapas, chircare indirìtzos, PDI, e agatare trasportos pùblicos.</string>    
 	<string name="basemap_was_selected_to_download">Sa mapa de base est pedida pro su funtzionamentu curretu de s\'àplicu e est idada ischertada pro s\'iscarrigamentu.</string>
-	<string name="osmand_extra_settings_description">Ammustra sas impostaduras pro sa cunfiguratzione avantzada de sa mapa (comente aumentare sos minujos) e calicunas de dispositivos dislindados.</string>
+	<string name="osmand_extra_settings_description">Ammustra sas impostaduras pro sa cunfiguratzione avantzada de sa mapa (comente aumentare sas minujas) e calicunas de dispositivos dislindados.</string>
 	<string name="osmand_development_plugin_description">Ammustra impostaduras pro funtzionalidades in isvilupu e debug comente su nàvigu animadu o ammustrare sa prestatzione de su rendering.</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Sas mapas vetoriales diat dèpere apàrrere in manera prus lestra. In carchi dispositivu diat podere funtzionare male.</string>
 	<string name="osmand_parking_warning_text">Pretzdentemente est istada annangada a su tzeravallu/calendàriu tuo sa notìfica pro recuperare sa màchina. At a abarrare finas a cando non l\'as a burrare manualmente.</string>    
@@ -1737,7 +1737,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="traffic_warning_calming">Moderatzione de su tràficu</string>
     <string name="traffic_warning_speed_camera">Autovelox</string>
     <string name="traffic_warning">Avisu de tràficu</string>
-	<string name="local_index_description">Ischerta unu elementu esistente pro bìere prus detallios, carca e mantène carcau pro lu disativare o burrare. Datos como in su dispositivu (%1$s lìberos):</string>
+	<string name="local_index_description">Ischerta unu elementu esistente pro bìere prus minujas, carca e mantène carcau pro lu disativare o burrare. Datos como in su dispositivu (%1$s lìberos):</string>
 	<string name="text_size_descr">Issèbera sa mannària de su testu in sa mapa.</string>
     <string name="text_size">Mannària de su testu</string>
     <string name="fav_point_dublicate_message">Amus cambiau su nùmene de su prefèrridu tuo a %1$s pro evitare nùmenes dòpios.</string>
@@ -1871,10 +1871,23 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="photo">Foto</string>
 	<string name="plugin_nautical_descr1">Ativande custa funtzionalidade s\'istile de sa mapa at a divènnere Nàuticu, e at a èssere disponìbile totu sa simbologia pro su nàvigu.</string>
 	<string name="plugin_nautical_descr2">Sa mapa cun totu sa simbologia nàutica globale est disponìbile comente iscarrigamentu ùnicu cun su nùmene \"World seamarks\".</string>
-	<string name="plugin_nautical_descr3">Custa vista podet èssere furriada siat disativande•la inoghe torra siat cambiande su \'Istile mapa\' in \'Cunfigura sa mapa\' comente boles tue.</string>
+	<string name="plugin_nautical_descr3">Custa vista podet èssere furriada disativande•la inoghe torra siat cambiande s\' \'Istile mapa\' in \'Cunfigura sa mapa\' comente boles tue.</string>
 
 	<string name="plugin_ski_descr1">Ativande custa vista s\'istile mapa at a divènnere \'Ierru e iscì\', ammustrande totu sas caraterìsticas de s\'iscenàriu in sas cunditziones de s\'ierru.</string>
 	<string name="plugin_ski_descr2">Est disponìbile una mapa cun totu sas pistas e s\'àndalas pro iscì de fundu suta de Iscarrigàbiles comente \'World ski map\'.</string>
-	<string name="plugin_ski_descr3">Custa vista podet èssere ripristinada disativande•la inoghe torra o cambiande s\'\'Istile mapa\' in \'Cunfigura mapa\'.</string>
+	<string name="plugin_ski_descr3">Custa vista podet èssere furriada disativande•la inoghe torra o cambiande s\'\'Istile mapa\' in \'Cunfigura mapa\'.</string>
 
+	<string name="plugin_touringview_descr1">Ativande custa vista s\'istile de sa mapa at a colare a \'Vista turìstica\', una vista fata a sa minuda pro turistas, biagiatores e autistas professionistas.</string>
+	<string name="plugin_touringview_descr2">Custa vista frunit, pro cada livellu de zoom, su màssimu de sas minujas de biàgiu disponìbiles in sos datos de sa mapa (in particulare minujas de de sas istradas e de sas àndalas e sinnos de orientamentu). Rapresentat fintzas totu sas castas de istrada in manera crara tramite colores diferentes, agiudande meda, pro nàrrere, sos chi ghiant veìculos mannos meda.</string>
+	<string name="plugin_touringview_descr3">No est netzessària una mapa ispetziale, sa vista est creada dae sas mapas istandard.</string>
+	<string name="turn_off_all">Istuda totu</string>
+	<string name="showed_on_map">Ammustradu in sa mapa</string>
+	<string name="days_behind">dies faghet</string>
+	<string name="currently_recording_track">Rasta in registratzione como</string>
+	<string name="back_to_map">Torra a sa mapa</string>
+	<string name="plugin_touringview_name">Vista mapa turìstica</string>
+
+	<string name="location_on_map">Assètiu/Collocassione:\n Lat %1$s\n Lon %2$s</string>
+	<string name="rename_failed">Renumenatzione faddida.</string>
+	<string name="plugin_touringview_descr4">Custa vista podet èssere furriada disativande•la inoghe torra o cambiande s\' \'Istile mapa\' in \'Cunfigura mapa\' comente boles.</string>
 	</resources>
