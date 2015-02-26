@@ -1,6 +1,5 @@
 package net.osmand.plus.activities.search;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 import net.osmand.data.LatLon;
@@ -10,25 +9,18 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.util.MapUtils;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.support.v7.widget.PopupMenu;
-import android.text.Spannable;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -130,10 +122,22 @@ public class SearchHistoryFragment extends ListFragment implements SearchActivit
 
 	private void selectModel(final HistoryEntry model, View v) {
 		PointDescription name = model.getName();
+		boolean light = ((OsmandApplication) getActivity().getApplication()).getSettings().isLightContent();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		OsmandSettings settings = ((OsmandApplication) getActivity().getApplication()).getSettings();
 		DirectionsDialogs.createDirectionsActionsPopUpMenu(optionsMenu, new LatLon(model.getLat(), model.getLon()),
 				model, name, settings.getLastKnownMapZoom(), getActivity(), true);
+		MenuItem item = optionsMenu.getMenu().add(
+				R.string.edit_filter_delete_menu_item).setIcon(light ?
+				R.drawable.ic_action_delete_light : R.drawable.ic_action_delete_dark);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				helper.remove(model);
+				historyAdapter.remove(model);
+				return true;
+			}
+		});
 		optionsMenu.show();
 	}
 

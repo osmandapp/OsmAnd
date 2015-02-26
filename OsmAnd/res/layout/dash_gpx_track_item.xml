@@ -100,12 +100,7 @@
 			android:src="@drawable/ic_action_gsave_dark"/>
 
 
-		<CheckBox
-			android:id="@+id/check"
-			android:layout_width="@dimen/list_item_height"
-			android:layout_height="@dimen/list_item_height"
-			android:focusable="false"
-			android:visibility="gone"/>
+		<include layout="@layout/check_item_rel" />
 	</LinearLayout>
 
 
