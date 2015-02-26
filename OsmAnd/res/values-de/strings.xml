@@ -177,12 +177,12 @@
 	<string name="map_settings">Karten-Einstellungen</string>
 	<string name="map_settings_descr">Konfigurieren der Karten-Anzeige</string>
 	<string name="osmand_rastermaps_plugin_description">Ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen (auch als Over- oder Underlay). Online-Karten werden im Unterordner \'tiles\' zwischengespeichert. Karten-Kacheln können auch offline erstellt und in das Unterordner \'tiles\' kopiert werden.</string>
-	<string name="osmand_background_plugin_description">Zeigt Einstellungen für die Standort-Aufzeichnung oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
-	<string name="osmand_accessibility_description">Zeigt Einstellungen für spezielle Eingabehilfen.</string>
+	<string name="osmand_background_plugin_description">Zeigt die Einstellungen für die Standort-Aufzeichnung oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
+	<string name="osmand_accessibility_description">Zeigt die Einstellungen für spezielle Eingabehilfen.</string>
 	<string name="extra_settings">Erweiterte Einstellungen</string>
 	<string name="osmand_monitoring_description">Ermöglicht das Aufzeichnen zurückgelegter Strecken als lokale GPX-Datei oder online via Web-Service.</string>
 	<string name="osmand_extra_settings_description">Zeigt Einstellungen für erweiterte Kartenkonfiguration (z.B. mehr Details) und einige Gerätespezifika.</string>
-	<string name="osmand_development_plugin_description">Zeigt Einstellungen für Entwicklungs- und Fehlersuchhilfen wie simulierte Navigation oder die Messung der Render-Leistung.</string>
+	<string name="osmand_development_plugin_description">Zeigt die Einstellungen für Entwicklungs- und Fehlersuchhilfen wie simulierte Navigation oder die Messung der Render-Leistung.</string>
 	<string name="plugins_screen">Plugins</string>
 	<string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Zusatzdienste</string>
 	<string name="prefs_plugins">Plugins</string>
@@ -1199,7 +1199,7 @@
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Park-Position</string>
 	<string name="osmand_parking_plugin_description">Dieses Modul speichert den Standort eines geparkten Fahrzeugs.</string>
-	<string name="osmand_parking_plugin_name">Parkplatz-Standort-Plugin</string>
+	<string name="osmand_parking_plugin_name">Parkplatz-Standort (Externes Plugin)</string>
 	<string name="context_menu_item_add_parking_point">Parkplatz-Standort festlegen</string>
 	<string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
 	<string name="gpxup_public">Öffentlich</string>
@@ -1299,7 +1299,7 @@
 	<string name="zxing_barcode_scanner_not_found">Barcode-Scanner-Anwendung nicht installiert. Soll im Play-Store danach gesucht werden?</string>
 	<string name="close_changeset">Änderungssatz schließen</string>
 	<string name="incomplete_locale">unfertig</string>
-	<string name="srtm_plugin_name">Höhenlinien-Plugin</string>
+	<string name="srtm_plugin_name">Höhenlinien (Externes Plugin)</string>
 	<string name="srtm_plugin_description">Ermöglicht das Laden von offline Höhenlinien und Relief-Schattierungen (\'Einstellungen\ -&gt; \'Karten-Management\ -&gt; \'Herunterladen\ -&gt; \'Kartentyp wählen\).</string>
 	<string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
 	<string name="srtm_paid_version_msg">Bitte überlegen Sie, ob Sie durch den Kauf des Höhenlinien-Plugins im Play-Store die weitere Entwicklung unterstützen wollen.</string>
@@ -1816,8 +1816,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungs-Einstellungen und des persönlichen Überwachungs-Kanals</string>
 	<string name="osmo_plugin_description">"Erweiterte OpenStreetMap-basierte Live-Überwachung, siehe http://osmo.mobi … Ermöglicht die Positionsdarstellung in von einzelnen Geräten in Echtzeit. Bei anonym erstellten Gruppen sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff. "</string>
-	<string name="osmo_plugin_name">OsMo (Erweiterte Live-Überwachung)</string>
-	<string name="osmo_settings">OsMo OpenStreetMap-Überwachung</string>
+	<string name="osmo_plugin_name">OsMo-Überwachung</string>
+	<string name="osmo_settings">OsMo-Überwachung</string>
 	<string name="osmo_io_error">OsMo Verbindungsproblem: </string>
 	<string name="osmo_mode_on">OsMo-Sitzung beenden</string>
 	<string name="osmo_mode_off">OsMo-Sitzung starten</string>
@@ -1999,7 +1999,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (Funktioniert nicht auf allen Geräten)</string>
-    <string name="no_internet_connection">Herunterladen nicht möglich. Internet-Verbindung prüfen!</string>
+    <string name="no_internet_connection">Herunterladen nicht möglich. Bitte die Internet-Verbindung prüfen!</string>
     <string name="download_tab_downloads">Alle Downloads</string>
     <string name="download_tab_updates">Aktualisierungen</string>
     <string name="download_tab_local">Lokal</string>
@@ -2027,7 +2027,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_value__name">Standard</string>
     <string name="parking_place">Parkplätze</string>
     <string name="remove_the_tag">TAG ENTFERNEN</string>
-    <string name="gps_status">GPS Status</string>
+    <string name="gps_status">GPS-Status</string>
     <string name="version_settings_descr">Nightly-Builds herunterladen</string>
     <string name="version_settings">Builds</string>
     <string name="rendering_attr_streetLighting_name">Straßenbeleuchtung</string>
@@ -2058,9 +2058,33 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="free">Frei %1$s </string>
     <string name="device_memory">Gerätespeicher</string>
     <string name="rendering_attr_pisteGrooming_name">Pistenpflege</string>
-    <string name="plugin_ski_name">Ski-Karten</string>
-    <string name="plugin_nautical_name">See-Karten</string>
-    <string name="world_ski_missing">Um Ski-Karten anzeigen zu können, muss die spezielle Offline-Karte heruntergeladen werden!</string>
-    <string name="nautical_maps_missing">Um See-Karten anzeigen zu können, muss die spezielle Offline-Karte heruntergeladen werden!</string>
+    <string name="plugin_ski_name">Ski-Karten-Ansicht</string>
+    <string name="plugin_nautical_name">See-Karten-Ansicht</string>
+    <string name="world_ski_missing">Um Ski-Karten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
+    <string name="nautical_maps_missing">Um See-Karten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
     <string name="get_plugin">Erhalten</string>
-    </resources>
+    <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
+	<string name="currently_recording_track">Derzeit aufnehmender Track</string>
+	<string name="back_to_map">Zurück zur Karte</string>
+	<string name="plugin_nautical_descr1">Das Aktivieren dieser Ansicht ändert den Kartinstil zur See-Karte, es werden dann alle nautischen Navigationsmarken und Kartensymbolde angezeigt.</string>
+	<string name="plugin_nautical_descr2">Eine Karten-Datei, die weltweit alle Seezeichen enthält, ist als einzelne Karte mit dem Namen \'Seezeichen (weltweit)\' herunterladbar.</string>
+	<string name="plugin_ski_descr1">Das Aktivieren dieser Ansicht ändert den Kartinstil zur \'Winter- und Skikarte\', es werden dann alle winterlichen Landschaftselemente angezeigt.</string>
+	<string name="plugin_ski_descr2">Eine Karten-Datei, die weltweit alle Loipen und Abfahrtshänge enthält, ist als einzelne Karte mit dem Namen \'Ski-Karte (weltweit)\' herunterladbar.</string>
+	<string name="plugin_nautical_descr3">Diese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Karten-Stil\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.</string>
+
+	<string name="plugin_ski_descr3">Diese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Karten-Stil\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.</string>
+
+	<string name="plugin_touringview_descr3">Ein spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.</string>
+	<string name="plugin_touringview_descr4">Diese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Karten-Stil\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.</string>
+	<string name="audio">Audio</string>
+	<string name="video">Video</string>
+	<string name="photo">Foto</string>
+	<string name="rename_recording">Aufnahme umbenennen</string>
+    <string name="location_on_map">Position:\n Lat %1$s\n Lon %2$s</string>
+	<string name="notes">Notizen</string>
+	<string name="online_map">Online-Karte</string>
+	<string name="roads_only">Nur Straßen</string>
+    <string name="rendering_attr_pisteRoutes_name">Pisten</string>
+	<string name="export">Export</string>
+	<string name="watch">Ansehen</string>
+	</resources>
