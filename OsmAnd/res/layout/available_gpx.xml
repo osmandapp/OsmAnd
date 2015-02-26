@@ -51,9 +51,17 @@
 				android:id="@+id/turn_off_all"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				style="?attr/dashboardGeneralButtonStyle"
+				android:textColor="@color/color_distance"
 				android:text="@string/turn_off_all"/>
 
 		</LinearLayout>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/dashboard_divider"/>
+
 
 		<ListView
 			android:id="@+id/gpx_on_map"
