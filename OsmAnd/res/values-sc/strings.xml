@@ -440,7 +440,7 @@
 	<string name="rendering_attr_roadColors_description">Issèbera una cumbinatzione de colores pro sas istradas:</string>
 	<string name="rendering_attr_roadColors_name">Ischema de colores de sas istradas</string>
     <string name="map_widget_show_destination_arrow">Ammustra sa diretzione de sa destinatzione</string>
-    <string name="enable_plugin_monitoring_services">Abìlita su plugin de arrastamentu pro impreare sos servitzios de registratzione de sa positzione (registratzione GPX, compidada in lìnia)</string>
+    <string name="enable_plugin_monitoring_services">"Abìlita su plugin de arrastamentu pro impreare sos servitzios de registratzione de sa positzione (registratzione GPX,  arrastamentu in lìnia)"</string>
     <string name="non_optimal_route_calculation">Càlcula un’àndala, s’in casu mai fintzas non primorosa, pro sas distantzias longas</string>
 	<string name="gps_not_available">Ativa su GPS in sas impostaduras</string>
     <string name="tip_recent_changes_0_8_3_t">"Mudas in sa 0.8.3:
@@ -787,8 +787,8 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Puntu de parchègiu</string>
-	<string name="osmand_parking_plugin_description">Custu plugin agiùdada ad ammentare su logu de parchègiu de sa màchina tua.</string>
-	<string name="osmand_parking_plugin_name">Plugin positzione parchègiu</string>
+	<string name="osmand_parking_plugin_description">Custu plugin (de iscarrigare a banda) agiùdada ad ammentare su logu de parchègiu de sa màchina tua.</string>
+	<string name="osmand_parking_plugin_name">Plugin esternu positzione parchègiu</string>
 	<string name="context_menu_item_add_parking_point">Marca comente positzione de parchègiu</string>
 	<string name="gpxup_public">Pùblicu</string>
 	<string name="gpxup_identifiable">Identificàbile</string>
@@ -965,7 +965,7 @@
 \nCarca un\'elementu esistente pro bìdere prus minujos, carca e mantène carcau pro deativare o cantzellare. Datos currentes in su dispositivu (%1$s lìberos):</string>
 	<string name="index_settings_descr">Iscàrriga e amministra sas mapas non in lìnia sarbadas in su dispositivu</string>
 	<string name="map_online_plugin_is_not_installed">Abìlita su plugin pro sas mapas sena lìnia pro ammustrare àteras mitzas</string>
-	<string name="osmand_monitoring_description">Ammustra sas impostaduras pro fatzilitare sa registratzione in unu documentu GPX o in lìnia impreande uu servìtziu web.</string>
+	<string name="osmand_monitoring_description">Ammustrat su butone e sas impostaduras pro fatzilitare sa registratzione in unu documentu GPX o in lìnia in unu servìtziu web.</string>
 	<string name="hide_all_waypoints">Burralos totus</string>
 <string name="default_buttons_selectall">Ischerta totu</string>
 	<string name="edit_filter_delete_menu_item">Burra</string>
@@ -980,12 +980,12 @@
 	<string name="first_time_msg">Gratzias pro s’impreu de OsmAnd. Pro meda de sas caraterìsticas de s’àplicu tènes bisongiu de datos locales sena lìnia, chi podent èssere icarrigadas dae \'Impostaduras\'→\'Amministra sos documentos de sas mapas\'. A pustis at a èssere possìbile ammustrare mapas, chircare indirìtzos, PDI, e agatare trasportos pùblicos.</string>    
 	<string name="basemap_was_selected_to_download">Sa mapa de base est netzessària pro su funtzionamentu curretu de s’àplicu e est istada ischertada pro s’iscarrigamentu.</string>
 	<string name="osmand_extra_settings_description">Ammustra sas impostaduras pro sa cunfiguratzione avantzada de sa mapa (comente aumentare sas minujas) e calicunas de dispositivos dislindados.</string>
-	<string name="osmand_development_plugin_description">Ammustra impostaduras pro funtzionalidades in isvilupu e debug comente su nàvigu animadu o ammustrare sa prestatzione de su rendering.</string>
+	<string name="osmand_development_plugin_description">Ammustrat sas impostaduras pro funtzionalidades pro isvilupu e debug comente su nàvigu animadu o s’ammustrare sa prestatzione de su rèndering.</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Sas mapas vetoriales diat dèpere apàrrere in manera prus lestra. In carchi dispositivu diat podere funtzionare male.</string>
 	<string name="osmand_parking_warning_text">Pretzdentemente est istada annangada a su tzeravallu/calendàriu tuo sa notìfica pro recuperare sa màchina. At a abarrare finas a cando non l\'as a burrare manualmente.</string>    
 	<string name="rendering_attr_noPolygons_description">Faghe divènnere transparentes totu sas caraterìsticas de sas àreas de su terrinu</string>
 	<string name="rendering_attr_hmRendered_description">Aumenta sa cantidade ammustrada de minujos de sa mapa</string>
-	<string name="osmand_rastermaps_plugin_description">Ammustra sas impostaduras pro cunfigurare una variedade de mapas in lìnia o a tasseddos in cache comente mapa de base pro sas mapas subrapostas/de sutafondu. Custas mapas podent èssere fintzas ammaniadas sena lìnia e copiadas in sa cartella de sos datos de OsmAnd.</string>
+	<string name="osmand_rastermaps_plugin_description">Ammustrat sas impostaduras pro cunfigurare una variedade de mapas in lìnia o a tasseddos in cache comente mapa de base pro sas mapas subrapostas/de sutafondu. Custas mapas podent èssere fintzas ammaniadas sena lìnia e copiadas in sa cartella de sos datos de OsmAnd.</string>
 	
 	<string name="tip_recent_changes_0_8_0_t">"Mudas in sa 0.8.0:
 \n\t- *Funtzionalidade a plugin*
@@ -996,7 +996,7 @@
 \n\t- *Càlculu de s’àndala sena lìnia*
 \n\t - Su càlculu de sas àndala divènnidi prus sòlidu\n\t *Megioramentos impreabilidade e UI*
 \n\t - Megioramentos in medas àreas "</string>
-	<string name="osm_editing_plugin_description">Ammustra sasimpostaduras netzessàrias pro cuntribuire ad OSM comente sa regorta/muda de sos PDI de OSM, apèrrere/cummentare errores de OSM e inviare documentos GPX registrados (rechedet sas credentziales de OSM).</string>
+	<string name="osm_editing_plugin_description">Ammustrat sas impostaduras netzessàrias pro cuntribuire ad OSM comente sa creatzione e sa muda de sos PDI de OSM, apèrrere e cummentare errores de OSM e imbiare documentos GPX registrados (netzessitat de sas credentziales de OSM).</string>
 	<string name="play_commands_of_currently_selected_voice">Riprodui sos cumandos de sa boghe como seletzionada</string>
 	<string name="test_voice_prompts">Proa sos cumandos vocales</string>    
 	<string name="switch_to_raster_map_to_see">Peruna mapa vetoriale est disponìbile pro custa positzione. Ne podes iscarrigare una in Impostaduras (Amministra sos documentos de sas mapas), o colare a sas mapas in lìnia (abìlita sas mapas in lìnia pro lu fàghere).</string>
@@ -1845,9 +1845,9 @@
 	<string name="disable_plugin2">Disabìlita</string>
 	<string name="plugin_install_needs_network">Est netzessària sa cunnessione a ìnternet pro installare custu cumponente annuntilu (plugin).</string>
 	<string name="get_plugin">Iscàrriga</string>
-<string name="plugin_nautical_name">Mapas nàuticas</string>
+<string name="plugin_nautical_name">Vista mapa nàutica</string>
     <string name="world_ski_missing">Pro bìdere sas mapas ispetziales pro s’iscì, depent èssere iscarrigadas</string>
-    <string name="plugin_ski_name">Mapas iscì</string>
+    <string name="plugin_ski_name">Vista mapa iscì</string>
     <string name="nautical_maps_missing">Pro bìdere sas mapas ispetziales nàuticas, depent èssere iscarrigadas</string>
 	<string name="rendering_attr_pisteGrooming_name">Pista abbatigada</string>
     <string name="free">"Lìbera %1$s "</string>
