@@ -162,7 +162,7 @@ public class AsyncLoadingThread extends Thread {
 		resourceManger.getMapTileDownloader().requestToDownload(req);
 	}
 
-	protected static class TileLoadDownloadRequest extends DownloadRequest {
+	public static class TileLoadDownloadRequest extends DownloadRequest {
 
 		public final String tileId;
 		public final File dirWithTiles;
