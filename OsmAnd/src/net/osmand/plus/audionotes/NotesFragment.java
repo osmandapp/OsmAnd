@@ -1,6 +1,7 @@
 package net.osmand.plus.audionotes;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -28,6 +30,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import android.support.v4.app.ListFragment;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,27 +92,8 @@ public class NotesFragment extends ListFragment {
 			}
 
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
-			String name = recording.getName();
-			TextView nameText = ((TextView) row.findViewById(R.id.name));
-			if (name != null) {
-				nameText.setText(name);
-			} else if (recording.isAudio()) {
-				nameText.setText(R.string.audio);
-			} else if (recording.isVideo()) {
-				nameText.setText(R.string.video);
-			} else if (recording.isPhoto()) {
-				nameText.setText(R.string.photo);
-			}
-			((TextView) row.findViewById(R.id.descr)).setText(recording.getDescription(getActivity()));
-
-			ImageView icon = (ImageView) row.findViewById(R.id.icon);
-			if (recording.isAudio()) {
-				icon.setImageResource(R.drawable.ic_type_audio);
-			} else if (recording.isVideo()) {
-				icon.setImageResource(R.drawable.ic_type_video);
-			} else {
-				icon.setImageResource(R.drawable.ic_type_img);
-			}
+			DashAudioVideoNotesFragment.getNoteView(recording, row, getActivity());
+			row.findViewById(R.id.play).setVisibility(View.GONE);
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -129,7 +113,7 @@ public class NotesFragment extends ListFragment {
 
 	private void showOnMap(Recording recording) {
 		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15, 
-				new PointDescription(PointDescription.POINT_TYPE_NOTE, recording.getName()), true,
+				new PointDescription(PointDescription.POINT_TYPE_NOTE, recording.getName(getActivity())), true,
 				recording); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
@@ -173,15 +157,15 @@ public class NotesFragment extends ListFragment {
 			public boolean onMenuItemClick(MenuItem item) {
 				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
 				if (recording.isPhoto()) {
-					Uri screenshotUri = Uri.parse(recording.file.getAbsolutePath());
+					Uri screenshotUri = Uri.parse(recording.getFile().getAbsolutePath());
 					sharingIntent.setType("image/*");
 					sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
 				} else if (recording.isAudio()) {
-					Uri audioUri = Uri.parse(recording.file.getAbsolutePath());
+					Uri audioUri = Uri.parse(recording.getFile().getAbsolutePath());
 					sharingIntent.setType("audio/*");
 					sharingIntent.putExtra(Intent.EXTRA_STREAM, audioUri);
 				} else if (recording.isVideo()) {
-					Uri videoUri = Uri.parse(recording.file.getAbsolutePath());
+					Uri videoUri = Uri.parse(recording.getFile().getAbsolutePath());
 					sharingIntent.setType("video/*");
 					sharingIntent.putExtra(Intent.EXTRA_STREAM, videoUri);
 				}
@@ -229,12 +213,26 @@ public class NotesFragment extends ListFragment {
 				getListView(), false);
 		final EditText editText = (EditText) v.findViewById(R.id.name);
 		builder.setView(v);
-		editText.setText(recording.getName());
+
+		String fileName = recording.getFileName();
+		final String hash;
+		int hashInd = fileName.lastIndexOf("_");
+		if (hashInd == -1) {
+			hash = "_" + fileName;
+		} else {
+			hash = fileName.substring(hashInd, fileName.length());
+		}
+
+		editText.setText(recording.getName(getActivity()));
+		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				recording.setName(editText.getText().toString());
+				if(!recording.setName(editText.getText().toString() + hash)) {
+					Toast.makeText(getActivity(),R.string.rename_failed,Toast.LENGTH_SHORT).show();
+				}
 				recording.setDescription();
 				listAdapter.notifyDataSetInvalidated();
 			}

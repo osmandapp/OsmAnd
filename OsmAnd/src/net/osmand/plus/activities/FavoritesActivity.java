@@ -38,10 +38,12 @@ public class FavoritesActivity extends TabActivity {
 //	private static final String FAVOURITES_INFO = "FAVOURITES_INFO";
 	private static final String TRACKS = "TRACKS";
 //	private static final String SELECTED_TRACK = "SELECTED_TRACK";
-//	public static int FAVORITES_TAB = 0;
-//	public static int GPX_TAB = 1;
-//	public static int SELECTED_GPX_TAB = 2;
-//	public static String TAB_PARAM = "TAB_PARAM";
+	public static int FAVORITES_TAB = 0;
+	public static int GPX_TAB = 1;
+	public static int SELECTED_GPX_TAB = 2;
+	public static int NOTES_TAB = 3;
+	public static int OSM_EDITS_TAB = 4;
+	public static String TAB_PARAM = "TAB_PARAM";
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
 
 	@Override
@@ -78,10 +80,18 @@ public class FavoritesActivity extends TabActivity {
 		OsmandPlugin.addMyPlacesTabPlugins(this, mTabs, getIntent());
 		
 		Integer tab = settings.FAVORITES_TAB.get();
+		if (tab == NOTES_TAB) {
+			tab = mTabs.size() -1;
+		} else if (tab == OSM_EDITS_TAB) {
+			//TODO implement method of counting position for other plugins
+		}
 		
 		setViewPagerAdapter(mViewPager, mTabs);
 		mSlidingTabLayout.setViewPager(mViewPager);
 
+		if (tab > mTabs.size() - 1){
+			tab = 0;
+		}
 		mViewPager.setCurrentItem(tab);
 		updateSelectedTracks();
 		// setupHomeButton();

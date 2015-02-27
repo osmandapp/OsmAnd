@@ -1813,7 +1813,7 @@ s často kladenými otázkami.</string>
     <string name="rendering_value__name">Výchozí</string>
 	<string name="gps_status">GPS stav</string>
     <string name="version_settings_descr">Stáhnout vývojové verze</string>
-    <string name="version_settings">Verze</string>
+    <string name="version_settings">Vývojové verze</string>
     <string name="rendering_attr_streetLighting_name">Pouliční osvětlení</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Nastavit internetové proxy připojení</string>
@@ -1854,4 +1854,5 @@ s často kladenými otázkami.</string>
     <string name="audio">Audio</string>
 	<string name="video">Video</string>
 	<string name="photo">Fotografie</string>
+	<string name="watch">Zobrazit</string>
 	</resources>

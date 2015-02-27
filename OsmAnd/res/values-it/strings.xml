@@ -2109,4 +2109,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="plugin_touringview_descr2">Questa visualizzazione fornisce, per ogni livello di zoom, il massimo dei dettagli di viaggio disponibili nei dati della mappa (particolari delle strade, sentieri e segni di orientamento). Rappresenta anche chiaramente tutte le strade ambigue tramite la colorazione distintiva, ciò risulta utile per esempio guidando autoveicoli di grandi dimensioni.</string>
 	<string name="plugin_touringview_descr4">Questa visualizzazione può essere ripristinata sia disattivandola nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.</string>
 	<string name="plugin_touringview_descr1">Attivando questa visualizzazione lo stile della mappa cambierà in \'Vista turistica\', questa è una visualizzazione particolarmente molto dettagliata per i turisti e autisti professionali.</string>
+	<string name="back_to_map">Torna alla mappa</string>
+	<string name="rename_failed">Rinominazione fallita.</string>
+	<string name="turn_off_all">Spegni tutti</string>
+	<string name="showed_on_map">Visualizzato sulla mappa</string>
+	<string name="days_behind">giorni fa</string>
+	<string name="currently_recording_track">Traccia attualmente in registrazione</string>
 	</resources>

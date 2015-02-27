@@ -1147,7 +1147,7 @@
 	<string name="new_route_calculated_dist">Ny rute beregnet, afstand</string>
 	<string name="arrived_at_destination">Ankommet til destinationen</string>
 	<string name="invalid_locations">Koordinaterne er ugyldige!</string>
-	<string name="go_back_to_osmand">Tilbage til OsmAnd-kort</string>
+	<string name="go_back_to_osmand">Tilbage til OsmAnd-kortet</string>
 	<string name="close">Luk</string>
 	<string name="loading_data">Indlæser data…</string>
 	<string name="reading_indexes">Læser lokale data…</string>
@@ -1920,7 +1920,7 @@
 	<string name="roads_only">Kun veje</string>
     <string name="notes">Noter</string>
 	<string name="online_map">Online kort</string>
-	<string name="watch">Overvåg</string>
+	<string name="watch">Vis</string>
 	<string name="share_note">Del note</string>
 	<string name="rename_recording">Omdøb optagelse</string>
 	<string name="export">Eksport</string>
@@ -1943,4 +1943,9 @@
 	<string name="plugin_touringview_descr4">Visningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.</string>
 	<string name="location_on_map">Placering:\n Lat %1$s\n Long %2$s</string>
 	<string name="days_behind">dage bagefter</string>
+	<string name="rename_failed">Fejl ved omdøbning.</string>
+	<string name="back_to_map">Tilbage til kortet</string>
+	<string name="currently_recording_track">Aktuelt optagelsesspor</string>
+	<string name="showed_on_map">Vist på kortet</string>
+	<string name="turn_off_all">Deaktiver alle</string>
 	</resources>

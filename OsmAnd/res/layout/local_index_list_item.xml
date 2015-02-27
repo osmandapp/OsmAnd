@@ -15,8 +15,7 @@
 		android:focusable="false"
 		android:visibility="gone"
 		android:layout_marginRight="@dimen/local_index_check_right_margin"
-		android:layout_marginTop="@dimen/favorites_icon_top_margin"
-/>
+		android:layout_marginTop="@dimen/favorites_icon_top_margin"/>
 
 	<ImageView
 		android:id="@+id/icon"

@@ -963,7 +963,7 @@
     <string name="download_srtm_maps">Höjdkurvsdata</string>
     <string name="tip_recent_changes_1_1_0_t">"Förändringar i 1.1.0:
 \n\t* Insticksmodul för beräkning av avstånd\n\t* Insticksmodul för ljud-/videoanteckningar\n\t* Insticksmodul för höjdkurvor\n\t* Buggfixar
-\n\t* \'Touring View\' - kartutseende med mer kartdetaljer, nytt utseende för vägar, mer kontrast och fjällvandringsalternativ (SAC-skala)
+\n\t* \'Vägkartsvy\' - kartutseende med mer kartdetaljer, nytt utseende för vägar, mer kontrast och fjällvandringsalternativ (SAC-skala)
 \n\t* EGM96 geoid offsetkorrigering för GPS-höjdavläsningar "</string>
     
     
@@ -1828,11 +1828,16 @@
 
 	<string name="plugin_touringview_descr3">Ingen speciell hämtning av någon karta krävs; denna vy skapas med våra standardkartor.</string>
 	<string name="plugin_touringview_descr4">Denna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.</string>
-	<string name="plugin_touringview_descr1">Om du aktiverar denna vy ändras kartan till \'Touring view\', som är en speciell vy med mycket detaljer för resenärer och yrkesförare.</string>
+	<string name="plugin_touringview_descr1">Om du aktiverar denna vy ändras kartan till \'Vägkartsvy\', som är en speciell vy med mycket detaljer för resenärer och yrkesförare.</string>
 	<string name="location_on_map">Plats:\n Lat %1$s\n Lon %2$s</string>
 	<string name="plugin_touringview_descr2">Denna vy ger, vid varje zoomnivå, maximalt antal detaljer som är tillgängliga i kartdatat (speciellt vägar, stigar och orienteringsmärken). Den visar också alla vägtyper på ett mycket tydligt sätt via färgkoder något som är användbart t.ex vid framförande av stora fordon.</string>
-	<string name="plugin_touringview_name">Touring map-vy</string>
+	<string name="plugin_touringview_name">Vägkartsvy</string>
 
 	<string name="days_behind">dagar efter</string>
 	<string name="watch">Visa</string>
+	<string name="rename_failed">Namnbytet misslyckades.</string>
+	<string name="currently_recording_track">Spelar för tillfället in spår</string>
+	<string name="back_to_map">Tillbaka till kartan</string>
+	<string name="turn_off_all">Stäng av alla</string>
+	<string name="showed_on_map">Visade på kartan</string>
 	</resources>

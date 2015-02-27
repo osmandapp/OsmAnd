@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">اظهر</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="recording_context_menu_show">اظهر</string>
     <string name="av_def_action_picture">التقط صورة</string>
     
     <string name="av_def_action_video">تسجيل الفيديو</string>
@@ -1443,4 +1444,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	
 	<string name="osmand_net_previously_installed">هناك نسخة سابقة مثبّتة من OsmAnd. سوف تُنقل كل البيانات المُخزنة إلى التطبيق الجديد ما عدا النقاط المفضلة التي يجب عليك تصديرها من التطبيق القديم ثم استيرادها في التطبيق الجديد.</string>
 	<string name="gps_status_app_not_found">تطبيق GPS Status غير مثبّت. هل تريد البحث عنه في المتجر؟</string>
+    <string name="plugin_settings_button_caption">اعدادات</string>
+	<string name="plugin_description_title">الوصف</string>
+	<string name="video">فيديو</string>
+	<string name="photo">صورة</string>
+	<string name="rename_recording">إعادة تسمية تسجيل</string>
     </resources>
