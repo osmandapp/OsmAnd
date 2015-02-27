@@ -1929,11 +1929,11 @@
 	<string name="photo">Foto</string>
 	<string name="plugin_touringview_name">Touring</string>
 
-	<string name="plugin_nautical_descr1">Aktivering ændrer kortformat til maritim, hvilket viser alle sømærker og søkortsymboler.</string>
+	<string name="plugin_nautical_descr1">Aktivering ændrer kortformat til maritim, som viser alle sømærker og søkortsymboler.</string>
 	<string name="plugin_nautical_descr2">Et kort, der indeholder alle maritime symboler, kan hentes som \'Sømærker (på verdensplan)\'.</string>
 	<string name="plugin_nautical_descr3">Visningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.</string>
 
-	<string name="plugin_ski_descr1">Aktivering ændrer kortformat til \'Vinter og ski\', der viser alle landskabstræk under vinterlige forhold.</string>
+	<string name="plugin_ski_descr1">Aktivering ændrer kortformat til \'Vinter og ski\', som viser alle landskabstræk under vinterlige forhold.</string>
 	<string name="plugin_ski_descr2">Et kort som viser alle skiløjper og langrendsruter, kan hentes som \'Skikort (på verdensplan)\'.</string>
 	<string name="plugin_ski_descr3">Visningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.</string>
 
