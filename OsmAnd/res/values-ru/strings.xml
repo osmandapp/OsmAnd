@@ -70,7 +70,7 @@
     <string name="safe_mode_description">Запустить приложение в безопасном режиме (замедляет работу приложения, используя только Android функции).</string>
     <string name="safe_mode">Безопасный режим</string>
     <string name="native_library_not_running">Приложение запущено в безопасном режиме (отключите в Настройках).</string>
-    <string name="background_service_is_enabled_question">Фоновый режим все еще запущен. Вы хотите прервать его тоже?</string>
+    <string name="background_service_is_enabled_question">Фоновый режим всё ещё запущен. Вы хотите прервать его тоже?</string>
     <string name="tip_recent_changes_1_0_0_t">Изменения в 1.0.0:
 	\n\t* Улучшенная навигация: быстрее и расчёт до 250 км
 	\n\t* Новые компактные карты (исключительно дороги)
@@ -1810,7 +1810,7 @@
     <string name="wake_on_voice_never">Никогда</string>
     <string name="lock_screen_request_explanation">%1$s необходимо это разрешение, чтобы выключить экран для экономии энергии.</string>
     <string name="wake_on_voice">Авто-включение экрана перед поворотом</string>
-    <string name="wake_on_voice_descr">Включать экран устройства (если отключен) при приближении к повороту</string>
+    <string name="wake_on_voice_descr">Включать экран устройства (если отключён) при приближении к повороту</string>
     <string name="advanced_settings">Расширенные</string>
 	<string name="map_update">Карты доступные для обновления: %1$s</string>
 	<string name="coordinates">Координаты</string>
