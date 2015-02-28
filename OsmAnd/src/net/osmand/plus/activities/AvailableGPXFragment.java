@@ -20,6 +20,7 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -632,10 +633,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					GpxInfo info = new GpxInfo();
 					info.subfolder = gpxSubfolder;
 					info.file = gpxFile;
-					SelectedGpxFile ssgpx = sgpx.getSelectedFileByName(gpxFile.getAbsolutePath());
-					if(ssgpx != null ) {
-						info.analysis = ssgpx.getTrackAnalysis();
-					}
 					result.add(info);
 					progress.add(info);
 					if (progress.size() > 7) {
@@ -1351,10 +1348,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		} else {
 			viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 		}
-		if (selectedGpxHelper.getSelectedFileByName(child.getFileName()) != null) {
+		SelectedGpxFile sgpx = selectedGpxHelper.getSelectedFileByName(child.getFileName());
+		GPXTrackAnalysis analysis = null;
+		if (sgpx != null) {
 			icon.setImageDrawable(gpxOnMap);
+			analysis = sgpx.getTrackAnalysis();
 		}
-		boolean sectionRead = child.getAnalysis() == null;
+		boolean sectionRead = analysis == null;
 		if(sectionRead) {
 			v.findViewById(R.id.read_section).setVisibility(View.GONE);
 			v.findViewById(R.id.unknown_section).setVisibility(View.VISIBLE);
@@ -1381,7 +1381,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			TextView time = (TextView) v.findViewById(R.id.time);
 			TextView distance = (TextView) v.findViewById(R.id.distance);
 			TextView pointsCount= (TextView) v.findViewById(R.id.points_count);
-			GPXUtilities.GPXTrackAnalysis analysis = child.getAnalysis();
 			pointsCount.setText(analysis.wptPoints +"");
 			if(analysis.totalDistanceMoving != 0) {
 				distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app));

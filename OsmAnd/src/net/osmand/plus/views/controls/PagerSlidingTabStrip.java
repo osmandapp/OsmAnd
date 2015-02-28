@@ -70,8 +70,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			android.R.attr.textSize,
 			android.R.attr.textColor,
 			android.R.attr.paddingLeft,
-			android.R.attr.paddingRight,
-			android.R.attr.colorPrimary,
+			android.R.attr.paddingRight
 	};
 	// @formatter:on
 
@@ -83,7 +82,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private static final int TEXT_COLOR_INDEX = 2;
 	private static final int PADDING_LEFT_INDEX = 3;
 	private static final int PADDING_RIGHT_INDEX = 4;
-	private static final int COLOR_PRIMARY= 5;
 
 	private LinearLayout.LayoutParams defaultTabLayoutParams;
 	private LinearLayout.LayoutParams expandedTabLayoutParams;
@@ -172,7 +170,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		underlineColor = textPrimaryColor;
 		dividerColor = textPrimaryColor;
 		indicatorColor = textPrimaryColor;
-		indicatorBgColor = a.getColor(TEXT_COLOR_PRIMARY, Color.TRANSPARENT);
 		int paddingLeft = a.getDimensionPixelSize(PADDING_LEFT_INDEX, padding);
 		int paddingRight = a.getDimensionPixelSize(PADDING_RIGHT_INDEX, padding);
 		a.recycle();
@@ -192,6 +189,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		dividerPadding = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsDividerPadding, dividerPadding);
 		tabPadding = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsTabPaddingLeftRight, tabPadding);
 		tabBackgroundResId = a.getResourceId(R.styleable.PagerSlidingTabStrip_pstsTabBackground, tabBackgroundResId);
+		indicatorBgColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsTabBackground, Color.TRANSPARENT);
 		shouldExpand = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsShouldExpand, shouldExpand);
 		scrollOffset = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsScrollOffset, scrollOffset);
 		textAllCaps = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsTextAllCaps, textAllCaps);
