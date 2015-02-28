@@ -1876,7 +1876,6 @@
 		\n\nNo est netzessària una mapa ispetziale, sa vista est creada dae sas mapas istandard.
 		\n\nCusta vista podet èssere furriada disativande•la inoghe torra o cambiande s’\'Istile mapa\' in \'Cunfigura mapa\' comente boles.
 	</string>
-	</string>
 	<string name="turn_off_all">Istuda totu</string>
 	<string name="showed_on_map">Ammustradu in sa mapa</string>
 	<string name="days_behind">dies faghet</string>
@@ -1886,4 +1885,4 @@
 
 	<string name="location_on_map">Assètiu/Collocassione:\n Lat %1$s\n Lon %2$s</string>
 	<string name="rename_failed">Renumenatzione faddida.</string>
-	</resources>
+</resources>
