@@ -228,7 +228,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		return monitoringControl;
 	}
 
-	private void controlDialog(final MapActivity map) {
+	private void controlDialog(final Activity map) {
 		final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 		
 		Builder bld = new AlertDialog.Builder(map);
@@ -322,7 +322,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		}
 	}
 
-	private void startGPXMonitoring(MapActivity map) {
+	public void startGPXMonitoring(Activity map) {
 		app.getSavingTrackHelper().startNewSegment();
 		final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 		final ValueHolder<Boolean> choice = new ValueHolder<Boolean>();
@@ -358,7 +358,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		}
 		
 	}
-	
+
 	public static void showIntervalChooseDialog(final Context uiCtx, final String patternMsg,
 			String title, final int[] seconds, final int[] minutes, final ValueHolder<Boolean> choice, final ValueHolder<Integer> v, OnClickListener onclick){
 		Builder dlg = new AlertDialog.Builder(uiCtx);

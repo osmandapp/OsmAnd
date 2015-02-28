@@ -29,6 +29,7 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class DashTrackFragment extends DashBaseFragment {
 
 	private Drawable gpxOnMap;
 	private Drawable gpxNormal;
-	private java.text.DateFormat format;
+	private boolean previousRecordingState;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,7 +65,6 @@ public class DashTrackFragment extends DashBaseFragment {
 
 
 		((Button) view.findViewById(R.id.show_all)).setTypeface(typeface);
-		format = getMyApplication().getResourceManager().getDateFormat();
 
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -127,6 +127,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		LinearLayout tracks = (LinearLayout) mainView.findViewById(R.id.items);
 		tracks.removeAllViews();
 
+		previousRecordingState = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
 		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
@@ -142,6 +143,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			((TextView)view.findViewById(R.id.distance)).setText(
 					OsmAndFormatter.getFormattedDistance(savingTrackHelper.getDistance(), app));
 			tracks.addView(view);
+			startHandler(view);
 		}
 
 		for (String filename : list) {
@@ -173,5 +175,24 @@ public class DashTrackFragment extends DashBaseFragment {
 		settings.setMapLocationToShow(file.getLastPoint().lat, file.getLastPoint().lon, settings.getLastKnownMapZoom());
 		getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(file);
 		MapActivity.launchMapActivityMoveToTop(getActivity());
+	}
+
+	private void startHandler(final View v){
+		Handler updateCurrentRecordingTrack = new Handler();
+		if (previousRecordingState != getMyApplication().getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()){
+			setupGpxFiles();
+		} else {
+			updateCurrentRecordingTrack.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					AvailableGPXFragment.updateCurrentTrack(v, getActivity(), getMyApplication());
+
+					if (v != null) {
+						startHandler(v);
+					}
+				}
+			}, 2000);
+		}
+
 	}
 }

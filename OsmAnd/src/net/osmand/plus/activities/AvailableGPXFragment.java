@@ -34,6 +34,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -70,7 +71,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -110,6 +110,20 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		setAdapter(allGpxAdapter);
 	}
 
+	private void startHandler(){
+		Handler updateCurrentRecordingTrack = new Handler();
+		updateCurrentRecordingTrack.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				updateCurrentTrack(getView(), getActivity(), app);
+
+				if (getView() != null) {
+					startHandler();
+				}
+			}
+		}, 2000);
+	}
+
 	public List<GpxInfo> getSelectedItems() {
 		return selectedItems;
 	}
@@ -122,7 +136,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			asyncLoader.execute(getActivity());
 		}
 
-		updateCurrentTrack(getView());
+		updateCurrentTrack(getView(), getActivity(), app);
+		startHandler();
 	}
 
 
@@ -134,23 +149,50 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private void updateCurrentTrack(View v) {
+	public static void updateCurrentTrack(View v,final Activity ctx, OsmandApplication app) {
 		if (v == null) {
 			return;
 		}
 
-		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-			GpxSelectionHelper.SelectedGpxFile currentTrack = savingTrackHelper.getCurrentTrack();
-			v.findViewById(R.id.current_track).setVisibility(View.VISIBLE);
-			String description = GpxUiHelper.getDescription(getMyApplication(), currentTrack.getGpxFile(), null, true);
+		final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+		final boolean isRecording = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
+		Drawable icon = app.getResources().getDrawable(isRecording ? R.drawable.ic_action_rec_stop : R.drawable.ic_play_dark).mutate();
+		if (app.getSettings().isLightContent()) {
+			icon.setColorFilter(app.getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+		}
+
+		if (isRecording) {
+			v.findViewById(R.id.show_on_map).setVisibility(View.VISIBLE);
+		} else {
+			v.findViewById(R.id.show_on_map).setVisibility(View.GONE);
+		}
+		ImageButton stop = ((ImageButton) v.findViewById(R.id.stop));
+		stop.setImageDrawable(icon);
+		stop.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (isRecording) {
+					final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+					plugin.stopRecording();
+				} else {
+					plugin.startGPXMonitoring(ctx);
+				}
+			}
+		});
+
+		if (isRecording) {
+			GpxSelectionHelper.SelectedGpxFile currentTrack = app.getSavingTrackHelper().getCurrentTrack();
+			String description = GpxUiHelper.getDescription(app, currentTrack.getGpxFile(), null, true);
 			int startindex = description.indexOf(">");
 			int endindex = description.indexOf("</font>");
 			String distance = description.substring(startindex + 1, endindex);
 			String points = String.valueOf(currentTrack.getGpxFile().points.size());
 			((TextView) v.findViewById(R.id.points_count)).setText(points);
 			((TextView) v.findViewById(R.id.distance)).setText(distance);
+
 		} else {
-			v.findViewById(R.id.current_track).setVisibility(View.GONE);
+			v.findViewById(R.id.points_count).setVisibility(View.GONE);
+			v.findViewById(R.id.distance).setVisibility(View.GONE);
 		}
 	}
 
@@ -162,10 +204,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			listView.setAdapter(this.adapter);
 		}
 		setHasOptionsMenu(true);
-		((TextView) v.findViewById(R.id.name)).setText(R.string.currently_recording_track);
-		v.findViewById(R.id.time_icon).setVisibility(View.GONE);
+
 
 		createCurrentTrackView(v, getMyApplication());
+		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) == null) {
+			v.findViewById(R.id.current_track).setVisibility(View.GONE);
+		} else {
+			v.findViewById(R.id.current_track).setVisibility(View.VISIBLE);
+		}
 
 		v.findViewById(R.id.map_btn).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -184,31 +230,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public static void createCurrentTrackView(View v, final OsmandApplication app) {
-		Drawable icon = app.getResources().getDrawable(R.drawable.ic_action_rec_stop);
-		icon.mutate();
+		((TextView) v.findViewById(R.id.name)).setText(R.string.currently_recording_track);
+		v.findViewById(R.id.time_icon).setVisibility(View.GONE);
 		boolean light = app.getSettings().isLightContent();
-		if (light) {
-			icon.setColorFilter(app.getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
-		}
-		ImageButton stop = ((ImageButton) v.findViewById(R.id.stop));
-		stop.setImageDrawable(icon);
-		stop.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Runnable run = new Runnable() {
-					@Override
-					public void run() {
-						final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
-						plugin.stopRecording();
-					}
-				};
-				run.run();
-			}
-		});
-		stop.setVisibility(View.VISIBLE);
 
-		icon = app.getResources().getDrawable(R.drawable.ic_action_gsave_dark);
-		icon.mutate();
+		Drawable icon = app.getResources().getDrawable(R.drawable.ic_action_gsave_dark).mutate();
 		if (light) {
 			icon.setColorFilter(app.getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
 		}
@@ -233,6 +259,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		});
 		v.findViewById(R.id.divider).setVisibility(View.GONE);
+
+		v.findViewById(R.id.options).setVisibility(View.GONE);
+		v.findViewById(R.id.stop).setVisibility(View.VISIBLE);
 		save.setImageDrawable(icon);
 	}
 
@@ -1263,6 +1292,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 
 		public long getFileDate() {
+			if (file == null) {
+				return 0;
+			}
 			return file.lastModified();
 		}
 
@@ -1314,22 +1346,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private void adjustShowOnMapListViewSize() {
-		View v = getView();
-		if (v == null) {
-			return;
-		}
-		float size = getResources().getDimension(R.dimen.dashListItemHeight) * 3.5f;
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) size);
-		getView().findViewById(R.id.gpx_on_map).setLayoutParams(params);
-	}
-
-
 	public static void udpateGpxInfoView(View v, GpxInfo child, OsmandApplication app,
-						Drawable gpxNormal, Drawable gpxOnMap,
-						boolean isDashItem) {
+										 Drawable gpxNormal, Drawable gpxOnMap,
+										 boolean isDashItem) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
-		if(!isDashItem) {
+		if (!isDashItem) {
 			v.findViewById(R.id.divider).setVisibility(View.GONE);
 		} else {
 			v.findViewById(R.id.divider).setVisibility(View.VISIBLE);
@@ -1355,7 +1376,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			analysis = sgpx.getTrackAnalysis();
 		}
 		boolean sectionRead = analysis == null;
-		if(sectionRead) {
+		if (sectionRead) {
 			v.findViewById(R.id.read_section).setVisibility(View.GONE);
 			v.findViewById(R.id.unknown_section).setVisibility(View.VISIBLE);
 			String date = "";
@@ -1369,7 +1390,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 			DateFormat df = app.getResourceManager().getDateFormat();
 			long fd = child.getFileDate();
-			if(fd > 0) {
+			if (fd > 0) {
 				date = (df.format(new Date(fd)));
 			}
 			TextView sizeText = (TextView) v.findViewById(R.id.date_and_size_details);
@@ -1380,19 +1401,19 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			v.findViewById(R.id.unknown_section).setVisibility(View.GONE);
 			TextView time = (TextView) v.findViewById(R.id.time);
 			TextView distance = (TextView) v.findViewById(R.id.distance);
-			TextView pointsCount= (TextView) v.findViewById(R.id.points_count);
-			pointsCount.setText(analysis.wptPoints +"");
-			if(analysis.totalDistanceMoving != 0) {
+			TextView pointsCount = (TextView) v.findViewById(R.id.points_count);
+			pointsCount.setText(analysis.wptPoints + "");
+			if (analysis.totalDistanceMoving != 0) {
 				distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app));
 			} else {
 				distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 			}
 
-			if(analysis.isTimeSpecified()) {
-				if(analysis.isTimeMoving()) {
-					time.setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000))+"");
+			if (analysis.isTimeSpecified()) {
+				if (analysis.isTimeMoving()) {
+					time.setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000)) + "");
 				} else {
-					time.setText(Algorithms.formatDuration((int) (analysis.timeSpan/ 1000))+"");
+					time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000)) + "");
 				}
 			} else {
 				time.setText("");
