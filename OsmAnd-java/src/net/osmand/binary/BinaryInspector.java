@@ -67,7 +67,7 @@ public class BinaryInspector {
 //				"-vstreets", "-vbuildings", "-vintersections", 
 //				"-zoom=16",
 //				"-bbox=1.74,51.17,1.75,51.16", 
-//				"/home/victor/projects/osmand/osm-gen/Map.obf"
+//				"/Users/victorshcherb/osmand/osm-gen/World_seamarks_2.obf"
 					});
 		} else {
 			in.inspector(args);
