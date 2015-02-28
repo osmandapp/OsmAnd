@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -2073,23 +2073,23 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="online_map">Online mapa</string>
 	<string name="roads_only">Iba cesty</string>
     <string name="export">Exportovať</string>
-	<string name="plugin_nautical_descr1">Aktivovaním tohto pohľadu sa zobrazí námorná mapa zobrazujúca všetky námorné značky a symboly.</string>
-	<string name="plugin_nautical_descr2">Mapový súbor obsahujúci námorné symboly pre celý svet je dostupný pod názvom \"Svetové námorné značky\".</string>
-	<string name="plugin_nautical_descr3">Tento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
-
-	<string name="plugin_ski_descr1">Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Winter and ski\", ktorý zobrazuje krajinné útvary v zimných podmienkach.</string>
-	<string name="plugin_ski_descr2">Mapový súbor obsahujúci všetky lyžiarske svahy a bežecké trate je dostupný na stiahnutie pod názvom \"Svetová lyžiarska mapa\".</string>
-	<string name="plugin_ski_descr3">Tento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
-
-	<string name="plugin_touringview_descr4">Tento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".</string>
-	<string name="plugin_touringview_descr1">Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Touring view\", ktorý obsahuje viac detailov pre cestovateľov a profesionálnych vodičov.</string>
-	<string name="plugin_touringview_descr2">Tento pohľad poskytuje vo všetkých priblíženiach mapy maximum cestovných detailov (napr. cesty, chodníky a orientačné značky). Taktiež zobrazuje typy ciest v jednoznačne odlišných farbách, čo je užitočné napríklad pre veľké vozidlá.</string>
-	<string name="plugin_touringview_descr3">Nie je potrebné stiahnuť samostatný súbor, tento pohľad používa štandardné mapové súbory.</string>
+	<string name="plugin_nautical_descr">Aktivovaním tohto pohľadu sa zobrazí námorná mapa zobrazujúca všetky námorné značky a symboly.
+		\n\nMapový súbor obsahujúci námorné symboly pre celý svet je dostupný pod názvom \"Svetové námorné značky\".
+		\n\nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".
+	</string>
+	<string name="plugin_ski_descr">Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Winter and ski\", ktorý zobrazuje krajinné útvary v zimných podmienkach.
+		\n\nMapový súbor obsahujúci všetky lyžiarske svahy a bežecké trate je dostupný na stiahnutie pod názvom \"Svetová lyžiarska mapa\".
+		\n\nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".
+	</string>
+	<string name="plugin_touringview_descr">Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Touring view\", ktorý obsahuje viac detailov pre cestovateľov a profesionálnych vodičov.
+		\n\nTento pohľad poskytuje vo všetkých priblíženiach mapy maximum cestovných detailov (napr. cesty, chodníky a orientačné značky). Taktiež zobrazuje typy ciest v jednoznačne odlišných farbách, čo je užitočné napríklad pre veľké vozidlá.
+		\n\nNie je potrebné stiahnuť samostatný súbor, tento pohľad používa štandardné mapové súbory.
+		\n\nTento pohľad môže byť vypnutý jeho deaktivovaním tu alebo zmenou hodnoty v \"Štýl vykresľovania\" v \"Nastaviť mapu\".
+	</string>
 	<string name="plugin_touringview_name">Cestovný mapový pohľad (Touring view)</string>
-
 	<string name="location_on_map">Umiestnenie:\n Šírka %1$s\n Dĺžka %2$s</string>
 	<string name="watch">Zobraziť</string>
 	<string name="days_behind">dní pozadu</string>
 	<string name="rename_failed">Premenovanie zlyhalo.</string>
 	<string name="back_to_map">Späť na mapu</string>
-	</resources>
+</resources>

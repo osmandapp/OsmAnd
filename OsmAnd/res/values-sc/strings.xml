@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1863,17 +1863,18 @@
 	<string name="audio">Àudio</string>
 	<string name="video">Vìdeo</string>
 	<string name="photo">Foto</string>
-	<string name="plugin_nautical_descr1">Ativande custa funtzionalidade s’istile de sa mapa at a divènnere Nàuticu, e at a èssere disponìbile totu sa simbologia pro su nàvigu.</string>
-	<string name="plugin_nautical_descr2">Sa mapa cun totu sa simbologia nàutica globale est disponìbile comente iscarrigamentu ùnicu cun su nùmene \"World seamarks\".</string>
-	<string name="plugin_nautical_descr3">Custa vista podet èssere furriada disativande•la inoghe torra o cambiande s’\'Istile mapa\' in \'Cunfigura sa mapa\' comente boles tue.</string>
-
-	<string name="plugin_ski_descr1">Ativande custa vista s’istile mapa at a divènnere \'Ierru e iscì\', ammustrande totu sas caraterìsticas de s’iscenàriu in sas cunditziones de s’ierru.</string>
-	<string name="plugin_ski_descr2">Est disponìbile una mapa cun totu sas pistas e sas àndalas pro iscì de fundu suta de \'Iscarrigàbiles\', comente \'World ski map\'.</string>
-	<string name="plugin_ski_descr3">Custa vista podet èssere furriada disativande•la inoghe torra o cambiande s’\'Istile mapa\' in \'Cunfigura mapa\'.</string>
-
-	<string name="plugin_touringview_descr1">Ativande custa vista s’istile de sa mapa at a colare a \'Vista turìstica\', una vista fata a sa minuda pro turistas, biagiatores e autistas professionistas.</string>
-	<string name="plugin_touringview_descr2">Custa vista frunit, pro cada livellu de zoom, su màssimu de sas minujas de biàgiu disponìbiles in sos datos de sa mapa (in particulare minujas de de sas istradas e de sas àndalas e sinnos de orientamentu). Rapresentat fintzas totu sas castas de istrada in manera crara tramite colores diferentes, agiudande meda, pro nàrrere, sos chi ghiant veìculos mannos meda.</string>
-	<string name="plugin_touringview_descr3">No est netzessària una mapa ispetziale, sa vista est creada dae sas mapas istandard.</string>
+	<string name="plugin_nautical_descr">Ativande custa funtzionalidade s’istile de sa mapa at a divènnere Nàuticu, e at a èssere disponìbile totu sa simbologia pro su nàvigu.
+		\n\nSa mapa cun totu sa simbologia nàutica globale est disponìbile comente iscarrigamentu ùnicu cun su nùmene \"World seamarks\".
+		\n\nCusta vista podet èssere furriada disativande•la inoghe torra o cambiande s’\'Istile mapa\' in \'Cunfigura sa mapa\' comente boles tue.
+	</string>
+	<string name="plugin_ski_descr">Ativande custa vista s’istile mapa at a divènnere \'Ierru e iscì\', ammustrande totu sas caraterìsticas de s’iscenàriu in sas cunditziones de s’ierru.
+		\n\nEst disponìbile una mapa cun totu sas pistas e sas àndalas pro iscì de fundu suta de \'Iscarrigàbiles\', comente \'World ski map\'.
+		\n\nCusta vista podet èssere furriada disativande•la inoghe torra o cambiande s’\'Istile mapa\' in \'Cunfigura mapa\'.
+	</string>
+	<string name="plugin_touringview_descr">Ativande custa vista s’istile de sa mapa at a colare a \'Vista turìstica\', una vista fata a sa minuda pro turistas, biagiatores e autistas professionistas.
+		\n\nCusta vista frunit, pro cada livellu de zoom, su màssimu de sas minujas de biàgiu disponìbiles in sos datos de sa mapa (in particulare minujas de de sas istradas e de sas àndalas e sinnos de orientamentu). Rapresentat fintzas totu sas castas de istrada in manera crara tramite colores diferentes, agiudande meda, pro nàrrere, sos chi ghiant veìculos mannos meda.
+		\n\nNo est netzessària una mapa ispetziale, sa vista est creada dae sas mapas istandard.
+	</string>
 	<string name="turn_off_all">Istuda totu</string>
 	<string name="showed_on_map">Ammustradu in sa mapa</string>
 	<string name="days_behind">dies faghet</string>
