@@ -1895,4 +1895,6 @@
 	<string name="audio">Аудио</string>
 	<string name="video">Видео</string>
 	<string name="photo">Фото</string>
+	<string name="rename_failed">Не удалось переименовать.</string>
+	<string name="back_to_map">Вернуться на карту</string>
 	</resources>
