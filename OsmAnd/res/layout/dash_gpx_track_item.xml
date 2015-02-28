@@ -137,7 +137,6 @@
 			android:layout_width="@dimen/dashListItemHeight"
 			android:layout_height="@dimen/dashListItemHeight"
 			android:layout_gravity="center_vertical"
-			android:layout_marginRight="@dimen/favorites_icon_right_margin"
 			android:background="?attr/options_button_background"
 			android:src="@drawable/ic_action_rec_stop"
 			tools:visibility="visible"/>
@@ -145,8 +144,10 @@
 		<ImageButton
 			android:id="@+id/show_on_map"
 			android:visibility="gone"
+			tools:visibility="visible"
 			android:layout_width="@dimen/dashListItemHeight"
 			android:layout_height="@dimen/dashListItemHeight"
+			android:layout_marginLeft="@dimen/favorites_icon_right_margin"
 			android:layout_gravity="center_vertical"
 			android:background="?attr/options_button_background"
 			android:src="@drawable/ic_action_gsave_dark"/>
