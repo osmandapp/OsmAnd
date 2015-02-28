@@ -788,7 +788,7 @@
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Puntu de parchègiu</string>
 	<string name="osmand_parking_plugin_description">Custu plugin (de iscarrigare a banda) agiùdada ad ammentare su logu de parchègiu de sa màchina tua.</string>
-	<string name="osmand_parking_plugin_name">Plugin esternu positzione parchègiu</string>
+	<string name="osmand_parking_plugin_name">Plugin positzione parchègiu</string>
 	<string name="context_menu_item_add_parking_point">Marca comente positzione de parchègiu</string>
 	<string name="gpxup_public">Pùblicu</string>
 	<string name="gpxup_identifiable">Identificàbile</string>
