@@ -1117,8 +1117,7 @@
     <string name="recording_error">"Error durante la grabación" </string>
     <string name="recording_camera_not_available">La cámara no está disponible</string>
     <string name="recording_playing">Reproduciendo audio de la grabación especificada.\n%1$s</string>
-    <string name="tip_recent_changes_1_1_0_t">"Cambios en versión 1.1.0 :\n\t* Extra de cálculo de distancia\n\t* Extra de notas de audio\n\t* Extra de curvas de nivel\n\t* Corrección de errores\n\t* Opción de estilo de mapas \'Vista de tour\' con más detalles de mapa, nuevos estilos de carreteras, más contraste y opción para travesías alpinas (escala SAC)\n\t* Correción de desplazamiento del geoide EGM96 para lecturas GPS de altitud"
-    </string>
+    <string name="tip_recent_changes_1_1_0_t">"Cambios en versión 1.1.0 :\n\t* Extra de cálculo de distancia\n\t* Extra de notas de audio\n\t* Extra de curvas de nivel\n\t* Corrección de errores\n\t* Opción de estilo de mapas \'Vista de turismo\' con más detalles de mapa, nuevos estilos de carreteras, más contraste y opción para travesías alpinas (escala SAC)\n\t* Correción de desplazamiento del geoide EGM96 para lecturas GPS de altitud "</string>
     <string name="recording_description">Grabado %1$s %3$s %2$s</string>
     <string name="srtm_paid_version_msg">Considere la compra del extra de curvas de nivel en la Tienda para apoyar desarrollos adicionales.</string>
     <string name="srtm_paid_version_title">Extra curvas de nivel</string>
@@ -1944,7 +1943,7 @@
 	<string name="plugin_ski_descr3">Esta vista se puede revertir desactivándola de nuevo aquí, o cambiando el \'Estilo de mapa\' bajo \'Configurar mapa\' al valor deseado.</string>
 
 	<string name="plugin_touringview_descr1">Activando esta vista cambia el estilo de mapa a \'Vista de Touring\', que es una vista de alto detalle especial para los viajeros y conductores profesionales.</string>
-	<string name="plugin_touringview_descr2">Esta vista proporciona, en cualquier nivel de zoom del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, pistas, senderos y marcas de orientación). También representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil cuando por ejemplo conduciendo vehículos grandes.</string>
+	<string name="plugin_touringview_descr2">Esta vista proporciona, en cualquier nivel de zoom del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, pistas, senderos y marcas de orientación). También representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.</string>
 	<string name="days_behind">días atrás</string>
 	<string name="plugin_touringview_descr3">No es necesario descargar un mapa especial, la vista se crea a partir de nuestros mapas estándar.</string>
 	<string name="plugin_touringview_descr4">Esta vista puede ser revertida desactivandola de nuevo aquí, o cambiando el \'Estilo de mapa\' desde \'Configurar mapa\'.</string>
@@ -1952,7 +1951,7 @@
 	<string name="watch">Ver</string>
 	<string name="plugin_touringview_name">Vista de mapa Touring</string>
 
-	<string name="turn_off_all">Apagar todo</string>
+	<string name="turn_off_all">Apagar_todo</string>
 	<string name="showed_on_map">Mostrado en el mapa</string>
 	<string name="rename_failed">Falló el renombrado.</string>
 	<string name="currently_recording_track">Actualmente registrando traza</string>
