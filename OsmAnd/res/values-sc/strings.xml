@@ -1874,6 +1874,8 @@
 	<string name="plugin_touringview_descr">Ativande custa vista s’istile de sa mapa at a colare a \'Vista turìstica\', una vista fata a sa minuda pro turistas, biagiatores e autistas professionistas.
 		\n\nCusta vista frunit, pro cada livellu de zoom, su màssimu de sas minujas de biàgiu disponìbiles in sos datos de sa mapa (in particulare minujas de de sas istradas e de sas àndalas e sinnos de orientamentu). Rapresentat fintzas totu sas castas de istrada in manera crara tramite colores diferentes, agiudande meda, pro nàrrere, sos chi ghiant veìculos mannos meda.
 		\n\nNo est netzessària una mapa ispetziale, sa vista est creada dae sas mapas istandard.
+		\n\nCusta vista podet èssere furriada disativande•la inoghe torra o cambiande s’\'Istile mapa\' in \'Cunfigura mapa\' comente boles.
+	</string>
 	</string>
 	<string name="turn_off_all">Istuda totu</string>
 	<string name="showed_on_map">Ammustradu in sa mapa</string>
@@ -1884,5 +1886,4 @@
 
 	<string name="location_on_map">Assètiu/Collocassione:\n Lat %1$s\n Lon %2$s</string>
 	<string name="rename_failed">Renumenatzione faddida.</string>
-	<string name="plugin_touringview_descr4">Custa vista podet èssere furriada disativande•la inoghe torra o cambiande s’\'Istile mapa\' in \'Cunfigura mapa\' comente boles.</string>
 	</resources>
