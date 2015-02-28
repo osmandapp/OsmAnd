@@ -159,7 +159,7 @@ public class SearchAddressFragment extends Fragment {
 			});
 			menuItem = menu.add(0, ONLINE_SEARCH, 0, R.string.search_online_address);
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(R.drawable.ic_action_gnext_dark);
+			menuItem = menuItem.setIcon(R.drawable.ic_world_globe_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {

@@ -134,13 +134,13 @@
 	<string name="poi_public_transport_platform">대중 교통 정류장</string>
 	<string name="poi_public_transport_platform_bus">버스 정류장</string>
 	<string name="poi_public_transport_platform_trolleybus">무궤도 전차 정류장</string>
-	<string name="poi_bus_stop">버스 정류장 (사용 되지 않음)</string>
+	<string name="poi_bus_stop">버스 정류장</string>
 	<string name="poi_public_transport_platform_tram">트램 정류장</string>
-	<string name="poi_tram_stop">트램 정류장 (사용 되지 않음)</string>
+	<string name="poi_tram_stop">트램 정류장</string>
 	<string name="poi_public_transport_station">대중 교통 스테이션</string>
-	<string name="poi_bus_station">버스 정류장 (사용 되지 않음)</string>
-	<string name="poi_railway_station">기차역 (사용 되지 않음)</string>
-	<string name="poi_railway_platform">철도 플랫폼 (사용 되지 않음)</string>
+	<string name="poi_bus_station">버스 정류장</string>
+	<string name="poi_railway_station">기차역</string>
+	<string name="poi_railway_platform">철도 플랫폼</string>
 	<string name="poi_railway_halt">철도 정류장 (사용 되지 않음)</string>
 	<string name="poi_subway_entrance">지하철 입구</string>
 	<string name="poi_subway_station">지하철 역</string>
@@ -673,7 +673,7 @@
 	<string name="poi_car">자동차 가게</string>
 	<string name="poi_car_parts">자동차 부품</string>
 	<string name="poi_public_transport_stop_position">대중 교통 정류장 위치</string>
-	<string name="poi_halt">철도 정거장 (사용 되지 않음)</string>
+	<string name="poi_halt">철도 정거장</string>
 	<string name="poi_railway_buffer_stop">철도 버퍼 정거장</string>
 	<string name="poi_lodging">숙박</string>
 	<string name="poi_internet_access_wlan">인터넷 접속: 무선랜</string>

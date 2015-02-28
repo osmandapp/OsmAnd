@@ -136,13 +136,13 @@
         <string name="poi_public_transport_platform">Offentlig transport stoppested</string>
         <string name="poi_public_transport_platform_bus">Busstoppested</string>
         <string name="poi_public_transport_platform_trolleybus">Trolleybus stoppested</string>
-        <string name="poi_bus_stop">Busstoppested (forældet)</string>
+        <string name="poi_bus_stop">Busstoppested</string>
         <string name="poi_public_transport_platform_tram">Sporvognsstoppested</string>
-        <string name="poi_tram_stop">Sporvognsstoppestedet (forældet)</string>
+        <string name="poi_tram_stop">Sporvognsstoppestedet</string>
         <string name="poi_public_transport_station">Offentligtransport station</string>
-        <string name="poi_bus_station">Busstation (forældet)</string>
-        <string name="poi_railway_station">Banegård (forældet)</string>
-        <string name="poi_railway_platform">Perron (forældet)</string>
+        <string name="poi_bus_station">Busstation</string>
+        <string name="poi_railway_station">Banegård</string>
+        <string name="poi_railway_platform">Perron</string>
         <string name="poi_railway_halt">Trinbrædt (forældet)</string>
         <string name="poi_subway_entrance">Metroindgang</string>
         <string name="poi_subway_station">Metrostation</string>
@@ -690,7 +690,7 @@
 	<string name="poi_farm">Gårdbutik</string>
 	<string name="poi_car_parts">Bildele</string>
 	<string name="poi_public_transport_stop_position">Offentlig transport stoppested</string>
-	<string name="poi_halt">Jernbane stop (forældet)</string>
+	<string name="poi_halt">Jernbane stop</string>
 	<string name="poi_lodging">Logi</string>
 	<string name="poi_internet_access_wlan">Internetadgang: wlan</string>
 	<string name="poi_internet_access_terminal">Internetadgang: terminal</string>

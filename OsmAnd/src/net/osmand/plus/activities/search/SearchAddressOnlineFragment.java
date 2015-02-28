@@ -81,7 +81,7 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 		if (getActivity() instanceof SearchActivity) {
 			menuItem = menu.add(0, 0, 0, R.string.search_offline_address);
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(R.drawable.ic_action_gnext_dark);
+			menuItem = menuItem.setIcon(R.drawable.ic_sdcard);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {

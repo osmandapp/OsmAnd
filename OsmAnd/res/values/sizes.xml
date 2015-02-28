@@ -40,6 +40,8 @@
 	<dimen name="dialog_content_bottom_margin">16dp</dimen>
 	<dimen name="local_size_height">34dp</dimen>
 	<dimen name="favorite_icon_size">24dp</dimen>
+	<dimen name="gpx_small_icon_margin">3dp</dimen>
+	<dimen name="gpx_small_text_margin">14dp</dimen>
 
     <!-- TextSizes -->
 	<dimen name="list_header_text_size">14sp</dimen>

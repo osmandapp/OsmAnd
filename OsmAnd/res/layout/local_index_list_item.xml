@@ -19,7 +19,7 @@
 
 	<ImageView
 		android:id="@+id/icon"
-		android:src="@drawable/ic_sdcard"
+		android:src="@drawable/ic_gpx_track"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginRight="@dimen/favorites_icon_right_margin"

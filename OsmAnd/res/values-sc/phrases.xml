@@ -113,13 +113,13 @@
 	<string name="poi_public_transport_platform">Firmada trasportu pùblicu</string>
 	<string name="poi_public_transport_platform_bus">Firmada àutobus</string>
 	<string name="poi_public_transport_platform_trolleybus">Firmada filobus</string>
-	<string name="poi_bus_stop">Firmada àutobus (disusadu)</string>
+	<string name="poi_bus_stop">Firmada àutobus</string>
 	<string name="poi_public_transport_platform_tram">Firmada tram</string>
-	<string name="poi_tram_stop">Firmada tram (disusada)</string>
+	<string name="poi_tram_stop">Firmada tram</string>
 	<string name="poi_public_transport_station">Istatzione trasportu pùblicu</string>
-	<string name="poi_bus_station">Istatzione bus (disusadu)</string>
+	<string name="poi_bus_station">Istatzione bus</string>
 	<string name="poi_railway_station">Istatzione de sos trenos</string>
-	<string name="poi_railway_platform">Piattaredda ferroviària (disusasu)</string>
+	<string name="poi_railway_platform">Piattaredda ferroviària</string>
 	<string name="poi_railway_halt">Firmada de sos trenos (disusada)</string>
 	<string name="poi_subway_entrance">Intrada de sa metropolitana</string>
 	<string name="poi_subway_station">Istatzione de sa metropolitana</string>
@@ -624,6 +624,6 @@
 	<string name="poi_car">Cuntzessionàriu de màchinas</string>
 	<string name="poi_car_parts">Cantos de màchinas</string>
 	<string name="poi_public_transport_stop_position">Firmada de su trasportu pùblicu</string>
-	<string name="poi_halt">Firmada de sa ferrovia (obsoleta)</string>
+	<string name="poi_halt">Firmada de sa ferrovia</string>
 	<string name="poi_railway_buffer_stop">Denegante pro sos trenos</string>
 	</resources>
