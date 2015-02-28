@@ -131,9 +131,8 @@ public class DashTrackFragment extends DashBaseFragment {
 		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
-
 			AvailableGPXFragment.createCurrentTrackView(view, app);
-
+			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 
 			GpxSelectionHelper.SelectedGpxFile currentTrack = savingTrackHelper.getCurrentTrack();
 			((TextView)view.findViewById(R.id.name)).setText(R.string.currently_recording_track);
@@ -143,6 +142,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			((TextView)view.findViewById(R.id.distance)).setText(
 					OsmAndFormatter.getFormattedDistance(savingTrackHelper.getDistance(), app));
 			tracks.addView(view);
+			AvailableGPXFragment.updateCurrentTrack(view, getActivity(), getMyApplication());
 			startHandler(view);
 		}
 
