@@ -206,7 +206,7 @@
 <string name="osmand_parking_am">fm</string>
 <string name="osmand_parking_position_name">Parkeringspunkt</string>
 <string name="osmand_parking_plugin_description">Extern modul (särskild nedladdning) som gör det möjligt att spara platsen där du parkerade bilen.</string>
-<string name="osmand_parking_plugin_name">Parkeringsplats (extern modul)</string>
+<string name="osmand_parking_plugin_name">Parkeringsplats</string>
 <string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
 <string name="context_menu_item_delete_parking_point">Ta bort P-markering</string>
 <string name="asap">Snarast</string>
@@ -959,7 +959,7 @@
     <string name="index_srtm_parts">delar</string>
     <string name="index_srtm_ele">Höjdkurvor</string>
     <string name="download_select_map_types">Andra kartor</string>
-    <string name="srtm_plugin_name">Höjdkurvor (extern modul)</string>
+    <string name="srtm_plugin_name">Höjdkurvor</string>
     <string name="download_srtm_maps">Höjdkurvsdata</string>
     <string name="tip_recent_changes_1_1_0_t">"Förändringar i 1.1.0:
 \n\t* Insticksmodul för beräkning av avstånd\n\t* Insticksmodul för ljud-/videoanteckningar\n\t* Insticksmodul för höjdkurvor\n\t* Buggfixar
