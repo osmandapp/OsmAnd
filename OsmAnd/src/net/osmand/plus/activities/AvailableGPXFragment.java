@@ -95,6 +95,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private OsmandApplication app;
 	private Drawable gpxNormal;
 	private Drawable gpxOnMap;
+	boolean running = false;
 
 
 	@Override
@@ -115,9 +116,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		updateCurrentRecordingTrack.postDelayed(new Runnable() {
 			@Override
 			public void run() {
+				if (running) {
 				updateCurrentTrack(getView(), getActivity(), app);
-
-				if (getView() != null) {
 					startHandler();
 				}
 			}
@@ -137,6 +137,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 
 		updateCurrentTrack(getView(), getActivity(), app);
+		running = true;
 		startHandler();
 	}
 
@@ -144,6 +145,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onPause() {
 		super.onPause();
+		running = false;
 		if (operationTask != null) {
 			operationTask.cancel(true);
 		}

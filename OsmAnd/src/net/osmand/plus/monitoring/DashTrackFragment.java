@@ -48,6 +48,7 @@ public class DashTrackFragment extends DashBaseFragment {
 	private Drawable gpxOnMap;
 	private Drawable gpxNormal;
 	private boolean previousRecordingState;
+	boolean running;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,8 +82,15 @@ public class DashTrackFragment extends DashBaseFragment {
 	}
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		running = false;
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
+		running = true;
 		setupGpxFiles();
 	}
 
@@ -185,9 +193,8 @@ public class DashTrackFragment extends DashBaseFragment {
 			updateCurrentRecordingTrack.postDelayed(new Runnable() {
 				@Override
 				public void run() {
+					if (running) {
 					AvailableGPXFragment.updateCurrentTrack(v, getActivity(), getMyApplication());
-
-					if (v != null) {
 						startHandler(v);
 					}
 				}
