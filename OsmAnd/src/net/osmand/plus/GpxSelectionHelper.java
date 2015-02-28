@@ -401,6 +401,7 @@ public class GpxSelectionHelper {
 		private boolean showCurrentTrack;
 		private GPXFile gpxFile;
 		private int color;
+		private GPXTrackAnalysis trackAnalysis;
 		private List<List<WptPt>> processedPointsToDisplay = new ArrayList<List<WptPt>>();
 		private List<GpxDisplayGroup> displayGroups = null;
 		private boolean routePoints;
@@ -410,7 +411,12 @@ public class GpxSelectionHelper {
 			if(gpxFile.tracks.size() > 0) {
 				this.color = gpxFile.tracks.get(0).getColor(0);
 			}
+			trackAnalysis = gpxFile.getAnalysis(new File(gpxFile.path).lastModified());
 			processPoints();
+		}
+
+		public GPXTrackAnalysis getTrackAnalysis() {
+			return trackAnalysis;
 		}
 
 		public void processPoints() {
