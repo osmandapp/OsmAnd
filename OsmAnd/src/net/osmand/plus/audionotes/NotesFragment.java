@@ -213,16 +213,6 @@ public class NotesFragment extends ListFragment {
 				getListView(), false);
 		final EditText editText = (EditText) v.findViewById(R.id.name);
 		builder.setView(v);
-
-		String fileName = recording.getFileName();
-		final String hash;
-		int hashInd = fileName.lastIndexOf("_");
-		if (hashInd == -1) {
-			hash = "_" + fileName;
-		} else {
-			hash = fileName.substring(hashInd, fileName.length());
-		}
-
 		editText.setText(recording.getName(getActivity()));
 		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
@@ -230,7 +220,7 @@ public class NotesFragment extends ListFragment {
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(!recording.setName(editText.getText().toString() + hash)) {
+				if(!recording.setName(editText.getText().toString())) {
 					Toast.makeText(getActivity(),R.string.rename_failed,Toast.LENGTH_SHORT).show();
 				}
 				recording.setDescription();
