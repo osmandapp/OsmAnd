@@ -151,7 +151,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 		Toolbar tb = new Toolbar(this);
 		tb.setClickable(true);
 		Drawable back = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-		back.setColorFilter(0xffffffff, PorterDuff.Mode.MULTIPLY);
+		back.setColorFilter(app.getResources().getColor(R.color.color_white), PorterDuff.Mode.MULTIPLY);
 		tb.setNavigationIcon(back);
 		tb.setTitle(R.string.about_settings);
 		tb.setBackgroundColor(getResources().getColor( getResIdFromAttribute(this, R.attr.pstsTabBackground)));
