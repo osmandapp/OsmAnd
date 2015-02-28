@@ -20,8 +20,10 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -34,7 +36,6 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.util.Algorithms;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -423,7 +424,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				enableSelectionMode(true);
 				updateSelectionMode(mode);
 				MenuItem it = menu.add(R.string.show_gpx_route);
-				it.setIcon(!isLightActionBar() ? R.drawable.ic_action_map_marker_dark : R.drawable.ic_action_map_marker_dark);
+				it.setIcon(R.drawable.ic_action_done); 
 				MenuItemCompat.setShowAsAction(it, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 				return true;
 			}
@@ -439,7 +440,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				if (selectedItems.isEmpty()) {
 					return true;
 				}
-				runSelection(true);
+				runSelection(false);
 				actionMode.finish();
 				return true;
 			}
@@ -652,6 +653,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		private void loadGPXFolder(File mapPath, List<GpxInfo> result, LoadGpxTask loadTask,
 								   List<GpxInfo> progress, String gpxSubfolder) {
+			GpxSelectionHelper sgpx = app.getSelectedGpxHelper();
 			for (File gpxFile : listFilesSorted(mapPath)) {
 				if (gpxFile.isDirectory()) {
 					String sub = gpxSubfolder.length() == 0 ? gpxFile.getName() : gpxSubfolder + "/" + gpxFile.getName();
@@ -908,7 +910,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		Drawable showIcon = getResources().getDrawable(R.drawable.ic_show_on_map);
 		if (light) {
-			showIcon.mutate().setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+			showIcon = showIcon.mutate();
+			showIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
 		}
 		MenuItem item = optionsMenu.getMenu().add(R.string.show_gpx_route)
 				.setIcon(showIcon);
@@ -945,8 +948,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null && osmEditingPlugin.isActive()) {
+			Drawable exportIcon = getResources().getDrawable(R.drawable.ic_action_export);
+			if (light) {
+				exportIcon = exportIcon.mutate();
+				exportIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+			}			
 			item = optionsMenu.getMenu().add(R.string.export)
-					.setIcon(light ? R.drawable.ic_action_gup_light : R.drawable.ic_action_gup_dark);
+					.setIcon(exportIcon);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
@@ -1361,10 +1369,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		} else {
 			viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 		}
-		if (selectedGpxHelper.getSelectedFileByName(child.getFileName()) != null) {
+		SelectedGpxFile sgpx = selectedGpxHelper.getSelectedFileByName(child.getFileName());
+		GPXTrackAnalysis analysis = null;
+		if (sgpx != null) {
 			icon.setImageDrawable(gpxOnMap);
+			analysis = sgpx.getTrackAnalysis();
 		}
-		boolean sectionRead = child.getAnalysis() == null;
+		boolean sectionRead = analysis == null;
 		if (sectionRead) {
 			v.findViewById(R.id.read_section).setVisibility(View.GONE);
 			v.findViewById(R.id.unknown_section).setVisibility(View.VISIBLE);
@@ -1391,7 +1402,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			TextView time = (TextView) v.findViewById(R.id.time);
 			TextView distance = (TextView) v.findViewById(R.id.distance);
 			TextView pointsCount = (TextView) v.findViewById(R.id.points_count);
-			GPXUtilities.GPXTrackAnalysis analysis = child.getAnalysis();
 			pointsCount.setText(analysis.wptPoints + "");
 			if (analysis.totalDistanceMoving != 0) {
 				distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app));

@@ -150,7 +150,7 @@
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">停車地點</string>
 	<string name="osmand_parking_plugin_description">該外掛元件（單獨下載）可記住您的愛車停車地點。</string>
-	<string name="osmand_parking_plugin_name">停車地點（外掛元件）</string>
+	<string name="osmand_parking_plugin_name">停車地點</string>
 	<string name="context_menu_item_add_parking_point">標記為停車地點</string>
 	<string name="context_menu_item_delete_parking_point">刪除停車標記</string>
 	<string name="gpxup_public">公用的</string>
@@ -1124,7 +1124,7 @@
     <string name="audionotes_plugin_name">音訊/視訊注解</string>
     <string name="index_srtm_parts">部件</string>
     <string name="index_srtm_ele">等高線</string>
-    <string name="srtm_plugin_name">等高線（外掛元件）</string>
+    <string name="srtm_plugin_name">等高線</string>
     <string name="download_select_map_types">其它地圖</string>
     <string name="download_roads_only_item">僅道路</string>
     <string name="download_srtm_maps">等高線</string>

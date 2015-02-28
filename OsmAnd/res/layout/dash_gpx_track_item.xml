@@ -3,6 +3,7 @@
 			  xmlns:tools="http://schemas.android.com/tools"
 			  android:layout_width="match_parent"
 			  android:layout_height="wrap_content"
+			  android:background="?attr/expandable_list_item_background"
 			  android:minHeight="@dimen/dashListItemHeight"
 			  android:orientation="vertical">
 
@@ -42,6 +43,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
+			android:gravity="center_vertical"
 			android:layout_marginLeft="@dimen/subHeaderMarginLeft"
 			android:layout_marginRight="@dimen/showAllButtonMarginRight"
 			android:layout_weight="1"
@@ -49,6 +51,7 @@
 
 			<TextView
 				android:id="@+id/name"
+				android:textSize="@dimen/dashFavNameTextSize"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="?android:textColorPrimary"
@@ -74,7 +77,8 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
-					android:textColor="@color/icon_color_light"/>
+					android:textSize="@dimen/download_descr_text_size"
+					android:textColor="?android:textColorSecondary"/>
 
 				<ImageView
 					android:id="@+id/distance_icon"
@@ -89,7 +93,8 @@
 					android:layout_width="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
 					android:layout_height="wrap_content"
-					android:textColor="@color/icon_color_light"/>
+					android:textSize="@dimen/download_descr_text_size"
+					android:textColor="?android:textColorSecondary"/>
 
 				<ImageView
 					android:id="@+id/time_icon"
@@ -104,7 +109,8 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
-					android:textColor="@color/icon_color_light"/>
+					android:textSize="@dimen/download_descr_text_size"
+					android:textColor="?android:textColorSecondary"/>
 			</LinearLayout>
 
 			<LinearLayout
@@ -118,7 +124,8 @@
 					android:id="@+id/date_and_size_details"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:textColor="@color/icon_color_light"/>
+					android:textSize="@dimen/download_descr_text_size"
+					android:textColor="?android:textColorSecondary"/>
 
 			</LinearLayout>
 
@@ -128,6 +135,7 @@
 				android:visibility="gone"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:textSize="@dimen/download_descr_text_size"
 				android:textColor="?android:textColorPrimary"/>
 		</LinearLayout>
 

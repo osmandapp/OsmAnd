@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
@@ -356,10 +358,33 @@ public class GpxUiHelper {
 		}
 		return dlg;
 	}
+
+	public static List<String> getSortedGPXFilenamesByDate(File dir) {
+		final Map<String, Long> mp = new HashMap<String, Long>();
+		readGpxDirectory(dir, mp, "");
+		ArrayList<String> list = new ArrayList<String>(mp.keySet());
+		Collections.sort(list, new Comparator<String>() {
+			@Override
+			public int compare(String object1, String object2) {
+				Long l1 = mp.get(object1);
+				Long l2 = mp.get(object2);
+				if(l2 == null) {
+					l2 = 0l;
+				}
+				if(l1== null) {
+					l1 = 0l;
+				}
+				return l1 < l2 ? 1 : (l1 == l2 ? 0 : -1);
+			}
+		});
+		return list;
+	}
+
 	
-	private static List<String> getSortedGPXFilenames(File dir,String sub) {
-		final List<String> list = new ArrayList<String>();
-		readGpxDirectory(dir, list, "");
+	public static List<String> getSortedGPXFilenames(File dir) {
+		final Map<String, Long> mp = new HashMap<String, Long>();
+		readGpxDirectory(dir, mp, "");
+		ArrayList<String> list = new ArrayList<String>(mp.keySet());
 		Collections.sort(list, new Comparator<String>() {
 			@Override
 			public int compare(String object1, String object2) {
@@ -375,22 +400,19 @@ public class GpxUiHelper {
 		return list;
 	}
 
-	private static void readGpxDirectory(File dir, final List<String> list, String parent) {
+	private static void readGpxDirectory(File dir, final Map<String, Long> map, String parent) {
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (files != null) {
 				for (File f : files) {
 					if (f.getName().toLowerCase().endsWith(".gpx")) { //$NON-NLS-1$
-						list.add(parent + f.getName());
+						map.put(parent + f.getName(), f.lastModified());
 					} else if (f.isDirectory()) {
-						readGpxDirectory(f, list, parent + f.getName() + "/");
+						readGpxDirectory(f, map, parent + f.getName() + "/");
 					}
 				}
 			}
 		}
-	}
-	public static List<String> getSortedGPXFilenames(File dir) {
-		return getSortedGPXFilenames(dir, null);
 	}
 	
 	private static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile[]> callbackWithObject,

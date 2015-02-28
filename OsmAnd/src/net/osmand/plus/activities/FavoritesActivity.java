@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -72,6 +73,7 @@ public class FavoritesActivity extends TabActivity {
 		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
 
 		List<TabItem> mTabs = new ArrayList<TabItem>();
+//		mTabs.add(new TabItem("\t\t\t", FavoritesTreeFragment.class));
 		mTabs.add(getTabIndicator(R.string.my_favorites, FavoritesTreeFragment.class));
 		if (hasGpx) {
 			mTabs.add(getTabIndicator(R.string.my_tracks, AvailableGPXFragment.class));
@@ -92,7 +94,10 @@ public class FavoritesActivity extends TabActivity {
 		if (tab > mTabs.size() - 1){
 			tab = 0;
 		}
-		mViewPager.setCurrentItem(tab);
+		if(tab > 0) {
+			tab ++;
+		}
+		mViewPager.setCurrentItem(tab );
 		updateSelectedTracks();
 		// setupHomeButton();
 	}

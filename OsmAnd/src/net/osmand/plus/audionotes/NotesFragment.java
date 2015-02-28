@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -124,11 +126,15 @@ public class NotesFragment extends ListFragment {
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		MenuItem item;
 		boolean isPhoto = recording.isPhoto();
-		final int playIcon;
+		Drawable playIcon;
 		if (isPhoto) {
-			playIcon = light ? R.drawable.ic_action_eye_light : R.drawable.ic_action_eye_dark;
+			playIcon = getResources().getDrawable(R.drawable.ic_action_view);
+			if(light) {
+				playIcon = playIcon.mutate();
+				playIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), Mode.MULTIPLY);
+			}
 		} else {
-			playIcon = light ? R.drawable.ic_play_light : R.drawable.ic_play_dark;
+			playIcon = getResources().getDrawable(light ? R.drawable.ic_play_light : R.drawable.ic_play_dark);
 		}
 		item = optionsMenu.getMenu().add(isPhoto ? R.string.watch : R.string.recording_context_menu_play)
 				.setIcon(playIcon);
@@ -140,8 +146,13 @@ public class NotesFragment extends ListFragment {
 			}
 		});
 
+		Drawable showOnMap = getResources().getDrawable(R.drawable.ic_show_on_map);
+		if(light) {
+			showOnMap = showOnMap.mutate();
+			showOnMap.setColorFilter(getResources().getColor(R.color.icon_color_light), Mode.MULTIPLY);
+		}
 		item = optionsMenu.getMenu().add(R.string.search_shown_on_map)
-				.setIcon(light ? R.drawable.ic_action_map_marker_light : R.drawable.ic_action_map_marker_dark);
+				.setIcon(showOnMap);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -213,16 +224,6 @@ public class NotesFragment extends ListFragment {
 				getListView(), false);
 		final EditText editText = (EditText) v.findViewById(R.id.name);
 		builder.setView(v);
-
-		String fileName = recording.getFileName();
-		final String hash;
-		int hashInd = fileName.lastIndexOf("_");
-		if (hashInd == -1) {
-			hash = "_" + fileName;
-		} else {
-			hash = fileName.substring(hashInd, fileName.length());
-		}
-
 		editText.setText(recording.getName(getActivity()));
 		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
@@ -230,7 +231,7 @@ public class NotesFragment extends ListFragment {
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(!recording.setName(editText.getText().toString() + hash)) {
+				if(!recording.setName(editText.getText().toString())) {
 					Toast.makeText(getActivity(),R.string.rename_failed,Toast.LENGTH_SHORT).show();
 				}
 				recording.setDescription();

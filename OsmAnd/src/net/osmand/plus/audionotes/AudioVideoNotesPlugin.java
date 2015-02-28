@@ -178,12 +178,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 
 		public boolean setName(String name) {
-			int index = file.getAbsolutePath().lastIndexOf("/") + 1;
-			if (index < 0) {
-				return false;
+			File directory = file.getParentFile();			
+			String fileName = getFileName();
+			final String hashAndExtension;
+			int hashInd = fileName.lastIndexOf('_');
+			if (hashInd == -1) {
+				hashAndExtension = "_" + fileName;
+			} else {
+				hashAndExtension = fileName.substring(hashInd, fileName.length());
 			}
-			File directory = new File(file.getAbsolutePath().substring(0, index));
-			File to = new File(directory, name.trim());
+			File to = new File(directory, name+hashAndExtension);
 			if (file.renameTo(to)) {
 				file = to;
 				return true;
@@ -198,9 +202,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public String getName(Context ctx) {
 			String fileName = file.getName();
 
-			int hashInd = fileName.lastIndexOf("_");
+			int hashInd = fileName.lastIndexOf('_');
 			if (hashInd != -1) {
-				return fileName.substring(0, hashInd - 1);
+				return fileName.substring(0, hashInd);
 			} else if (this.isAudio()) {
 				return ctx.getResources().getString(R.string.audio);
 			} else if (this.isVideo()) {

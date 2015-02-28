@@ -1,18 +1,21 @@
 package net.osmand.plus.monitoring;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.activities.AvailableGPXFragment;
 import net.osmand.plus.activities.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
@@ -20,7 +23,6 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -87,9 +89,34 @@ public class DashTrackFragment extends DashBaseFragment {
 	private void setupGpxFiles() {
 		View mainView = getView();
 		final File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-		final List<String> list = GpxUiHelper.getSortedGPXFilenames(dir);
-
-
+		final OsmandApplication app = getMyApplication();
+		
+		SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
+		final List<String> list  = new ArrayList<String>();
+		for(SelectedGpxFile sg :  app.getSelectedGpxHelper().getSelectedGPXFiles() ) {
+			if(!sg.isShowCurrentTrack()) {
+				GPXFile gpxFile = sg.getGpxFile();
+				if(gpxFile != null) {
+					list.add(gpxFile.path);
+				}
+			}
+		}
+		int totalCount = 3 + list.size() / 2;
+		if(app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+			totalCount --;
+		}
+		if(list.size() < totalCount) {
+			final List<String> res = GpxUiHelper.getSortedGPXFilenamesByDate(dir);
+			for(String r : res) {
+				if(!list.contains(r)) {
+					list.add(r);
+					if(list.size() >= totalCount) {
+						break;
+					}
+				}
+			}
+		}
+		
 		if (list.size() == 0) {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
 			return;
@@ -99,17 +126,9 @@ public class DashTrackFragment extends DashBaseFragment {
 
 		LinearLayout tracks = (LinearLayout) mainView.findViewById(R.id.items);
 		tracks.removeAllViews();
-		if (list.size() > 3) {
-			while (list.size() != 3) {
-				list.remove(3);
-			}
-		}
 
-		final OsmandApplication app = getMyApplication();
-		SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
 		previousRecordingState = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
 		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-			list.remove(2);
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 
@@ -129,16 +148,8 @@ public class DashTrackFragment extends DashBaseFragment {
 
 		for (String filename : list) {
 			final File f = new File(dir, filename);
-			boolean haveInfo = false;
-			GpxSelectionHelper.SelectedGpxFile selectedGpxFile =
-					app.getSelectedGpxHelper().getSelectedFileByPath(f.getAbsolutePath());
-			GPXUtilities.GPXTrackAnalysis trackAnalysis = null;
-			if(selectedGpxFile != null) {
-				trackAnalysis = selectedGpxFile.getTrackAnalysis();
-			}
 			AvailableGPXFragment.GpxInfo info = new AvailableGPXFragment.GpxInfo();
 			info.subfolder = "";
-			info.setAnalysis(trackAnalysis);
 			info.file = f;
 
 			LayoutInflater inflater = getActivity().getLayoutInflater();
