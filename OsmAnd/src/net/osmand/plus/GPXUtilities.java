@@ -207,19 +207,6 @@ public class GPXUtilities {
 			return maxElevation != -100;
 		}
 		
-		public int getTimeHours(long time) {
-			return (int) ((time / 1000) / 3600);
-		}
-		
-		
-		public int getTimeSeconds(long time) {
-			return (int) ((time / 1000) % 60);
-		}
-
-		public int getTimeMinutes(long time) {
-			return (int) (((time / 1000) / 60) % 60);
-		}
-		
 		public boolean isSpeedSpecified() {
 			return avgSpeed > 0;
 		}
