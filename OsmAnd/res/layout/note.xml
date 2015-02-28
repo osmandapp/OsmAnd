@@ -46,6 +46,7 @@
 			<TextView
 				android:id="@+id/name"
 				style="@style/ListText.Small"
+				android:textColor="?android:textColorPrimary"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:maxLines="1"
@@ -57,6 +58,7 @@
 				android:id="@+id/descr"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:textColor="?android:textColorSecondary"
 				android:gravity="center_vertical"
 				android:textSize="@dimen/download_descr_text_size"
 				android:maxLines="25"

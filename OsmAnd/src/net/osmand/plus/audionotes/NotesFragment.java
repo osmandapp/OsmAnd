@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -124,11 +126,15 @@ public class NotesFragment extends ListFragment {
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		MenuItem item;
 		boolean isPhoto = recording.isPhoto();
-		final int playIcon;
+		Drawable playIcon;
 		if (isPhoto) {
-			playIcon = light ? R.drawable.ic_action_eye_light : R.drawable.ic_action_eye_dark;
+			playIcon = getResources().getDrawable(R.drawable.ic_action_view);
+			if(light) {
+				playIcon = playIcon.mutate();
+				playIcon.setColorFilter(getResources().getColor(R.color.icon_color_light), Mode.MULTIPLY);
+			}
 		} else {
-			playIcon = light ? R.drawable.ic_play_light : R.drawable.ic_play_dark;
+			playIcon = getResources().getDrawable(light ? R.drawable.ic_play_light : R.drawable.ic_play_dark);
 		}
 		item = optionsMenu.getMenu().add(isPhoto ? R.string.watch : R.string.recording_context_menu_play)
 				.setIcon(playIcon);
@@ -140,8 +146,13 @@ public class NotesFragment extends ListFragment {
 			}
 		});
 
+		Drawable showOnMap = getResources().getDrawable(R.drawable.ic_show_on_map);
+		if(light) {
+			showOnMap = showOnMap.mutate();
+			showOnMap.setColorFilter(getResources().getColor(R.color.icon_color_light), Mode.MULTIPLY);
+		}
 		item = optionsMenu.getMenu().add(R.string.search_shown_on_map)
-				.setIcon(light ? R.drawable.ic_action_map_marker_light : R.drawable.ic_action_map_marker_dark);
+				.setIcon(showOnMap);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
