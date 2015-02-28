@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -1943,20 +1943,20 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="share_note">Partager la note</string>
 	<string name="rename_recording">Renommer l\'enregistrement</string>
 	<string name="export">Exporter</string>
-	<string name="plugin_ski_descr2">Une carte mondiale affichant les pistes de ski alpin et de ski de fond est disponible en téléchargement sous \"Monde - Ski\".</string>
-	<string name="plugin_ski_descr1">Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales ainsi que les pistes de ski.</string>
-	<string name="plugin_nautical_descr1">Activer cette vue bascule vers le style \"Nautique\", affichant une carte avec le balisage pour la navigation.</string>
-	<string name="plugin_touringview_descr1">Activer cette vue bascule vers le style \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers.</string>
-	<string name="plugin_touringview_descr2">Cet affichage, quelque soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de route (routes, pistes, chemins ...) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules.</string>
+	<string name="plugin_ski_descr">Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales ainsi que les pistes de ski.
+		\n\nUne carte mondiale affichant les pistes de ski alpin et de ski de fond est disponible en téléchargement sous \"Monde - Ski\".
+		\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".
+	</string>
+	<string name="plugin_touringview_descr">Activer cette vue bascule vers le style \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers.
+		\n\nCet affichage, quelque soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de route (routes, pistes, chemins ...) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules.
+		\n\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
+		\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".
+	</string>
 	<string name="plugin_touringview_name">Grand tourisme</string>
-
-	<string name="plugin_touringview_descr3">Il n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.</string>
-	<string name="plugin_touringview_descr4">Cet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".</string>
-	<string name="plugin_ski_descr3">Cet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".</string>
-
-	<string name="plugin_nautical_descr3">Cet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".</string>
-
-	<string name="plugin_nautical_descr2">Une carte marine mondiale est disponible en une seul téléchargement nommé \"Carte marine\".</string>
+	<string name="plugin_nautical_descr">Activer cette vue bascule vers le style \"Nautique\", affichant une carte avec le balisage pour la navigation.
+		\n\nUne carte marine mondiale est disponible en une seul téléchargement nommé \"Carte marine\".
+		\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".
+	</string>
 	<string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
 	<string name="days_behind">jours écoulés</string>
 	<string name="rename_failed">Échec du renommage.</string>
