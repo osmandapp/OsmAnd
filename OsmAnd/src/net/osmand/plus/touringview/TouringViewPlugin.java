@@ -19,10 +19,7 @@ public class TouringViewPlugin extends OsmandPlugin {
 
 	@Override
 	public String getDescription() {
-		return app.getString(net.osmand.plus.R.string.plugin_touringview_descr1) + "\n\n"
-		+ app.getString(net.osmand.plus.R.string.plugin_touringview_descr2) + "\n\n"
-		+ app.getString(net.osmand.plus.R.string.plugin_touringview_descr3) + "\n\n"
-		+ app.getString(net.osmand.plus.R.string.plugin_touringview_descr4);
+		return app.getString(net.osmand.plus.R.string.plugin_touringview_descr);
 	}
 
 	@Override

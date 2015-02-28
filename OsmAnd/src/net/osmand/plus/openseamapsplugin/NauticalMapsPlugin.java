@@ -27,9 +27,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public String getDescription() {
-		return app.getString(net.osmand.plus.R.string.plugin_nautical_descr1) + "\n\n"
-		+ app.getString(net.osmand.plus.R.string.plugin_nautical_descr2) + "\n\n"
-		+ app.getString(net.osmand.plus.R.string.plugin_nautical_descr3);
+		return app.getString(net.osmand.plus.R.string.plugin_nautical_descr);
 	}
 
 	@Override
