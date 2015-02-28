@@ -2066,16 +2066,18 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
 	<string name="currently_recording_track">Derzeit aufnehmender Track</string>
 	<string name="back_to_map">Zurück zur Karte</string>
-	<string name="plugin_nautical_descr">Das Aktivieren dieser Ansicht ändert den Kartenstil zur See-Karte, es werden dann alle nautischen Navigationsmarken und Kartensymbolde angezeigt.
+	<string name="plugin_nautical_descr">Das Aktivieren dieser Ansicht ändert die Kartendartellung auf See-Karte, es werden dann alle nautischen Navigationsmarken und Kartensymbolde angezeigt.
 		\n\nEine Karten-Datei, die weltweit alle Seezeichen enthält, ist als einzelne Karte mit dem Namen \'Seezeichen (weltweit)\' herunterladbar.
-		\n\nDiese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Karten-Stil\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
+		\n\nDiese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
 	</string>
-	<string name="plugin_ski_descr">Das Aktivieren dieser Ansicht ändert den Kartinstil zur \'Winter- und Skikarte\', es werden dann alle winterlichen Landschaftselemente angezeigt.
+	<string name="plugin_ski_descr">Das Aktivieren dieser Ansicht ändert die Kartendarstellung auf \'Winter- und Skikarte\', es werden dann alle winterlichen Landschaftselemente angezeigt.
 		\n\nEine Karten-Datei, die weltweit alle Loipen und Abfahrtshänge enthält, ist als einzelne Karte mit dem Namen \'Ski-Karte (weltweit)\' herunterladbar.
-		\n\nDiese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Karten-Stil\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
+		\n\nDiese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
 	</string>
-	<string name="plugin_touringview_descr">(Hier fehlt noch was). Ein spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.
-		\n\nDiese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Karten-Stil\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
+	<string name="plugin_touringview_descr">Das Aktivieren dieser Ansicht wechselt die Kartendarstellung auf den \'Touring view\', dies ist eine speziell detaillierte Dartellung für Reisende und Berufsfahrer.
+		\n\nDiese Darstellung zeigt für jedem jedem Maßstab möglichst alle in den Daten enthaltenen Details an (insbesondere alle Straßen, Wege, Pfade, und Orientierungspunkte). Ferner werden die unterschiedlichen Straßentypen auch farblich klar unterscheidbar dargestellt, was speziell für Fahrer großer Fahzeuge unabdingbar sein kann.
+		\n\nEin spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.
+		\n\nDiese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder indem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
 	</string>
 	<string name="audio">Audio</string>
 	<string name="video">Video</string>
