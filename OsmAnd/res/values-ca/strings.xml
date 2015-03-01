@@ -61,8 +61,8 @@
 <string name="osmand_parking_pm">PM</string>
 <string name="osmand_parking_am">AM</string>
 <string name="osmand_parking_position_name">Punt d\'aparcament</string>
-<string name="osmand_parking_plugin_description">Aquest connector us permet desar la localització del vostre cotxe aparcat.</string>
-<string name="osmand_parking_plugin_name">Connector de posició d\'aparcament</string>
+<string name="osmand_parking_plugin_description">Connector extern (descàrrega addicional) que permet desar la localització del vostre cotxe aparcat.</string>
+<string name="osmand_parking_plugin_name">Posició d\'aparcament</string>
 <string name="context_menu_item_add_parking_point">Marca com a posició d\'aparcament</string>
 <string name="context_menu_item_delete_parking_point">Suprimeix un marcador d\'aparcament</string>
 <string name="gpxup_identifiable">Identificable</string>
@@ -1040,11 +1040,11 @@
     <string name="map_widget_distancemeasurement">Mesura de distàncies</string>
     <string name="audionotes_location_not_defined">Encara no teniu definida la localització de la nota. «Usa localització...» per assignar una nota a la localitzacio especificada</string>
     <string name="monitoring_control_stop">Aturar</string>
-    <string name="audionotes_plugin_description">Preneu notes d\'àudio durant el viatge</string>
+    <string name="audionotes_plugin_description">"Mostra el botó de registrar notes d\'àudio/vídeo  durant el viatge"</string>
     <string name="audionotes_plugin_name">Connector de notes d\'àudio</string>
     <string name="index_srtm_parts">peces</string>
     <string name="index_srtm_ele">Línies de nivell</string>
-    <string name="srtm_plugin_name">Connector de corbes de nivell</string>
+    <string name="srtm_plugin_name">Corbes de nivell</string>
     <string name="download_roads_only_item">"Carreteres "</string>
     <string name="download_regular_maps">Mapes estàndards</string>
     <string name="rendering_attr_noAdminboundaries_description">No mostra els límits administratius regionals (nivells 5 a 9)</string>
@@ -1085,7 +1085,7 @@
 	<string name="error_io_error">S\'ha produït un error E/S</string>
 	<string name="save_track_to_gpx">Desa la traça en un fitxer GPX durant la navegació</string>
 	<string name="use_english_names_descr">Escolliu entre noms nadius i noms anglesos</string>
-	<string name="srtm_plugin_description">Us facilita baixar relleu i corbes de nivell als mapes fora de línia («Paràmetres» → «Gestió d\'arxius de mapes» → «Baixa» → Selecció del tipus de mapa desitjat).</string>
+	<string name="srtm_plugin_description">"Un giny extern (a descarregar a part) permet baixar relleu i corbes de nivell  fora de línia («Paràmetres» → «Gestió d\'arxius de mapes» → «Baixa» → Selecció del tipus de mapa desitjat). Tot això es pot mostrar alhora combinat amb els mapes fora de línia d\'OsmAnd."</string>
     <string name="rendering_attr_showRoadMaps_description">Indiqueu quan mostrar mapes de només carreteres:</string>
 	<string name="tip_recent_changes_1_0_0_t">Canvis a la 1.0.0 :
 	\n\t* Encaminament millorat: més ràpid, més precís, fins a 250 km
@@ -1343,7 +1343,7 @@
     <string name="edit_tilesource_choose_existing">Tria existent…</string>
     <string name="map_widget_fps_info">Info depuració FPS</string>
 	<string name="intermediate_items_sort_return">Les fites intermèdies han estat re-ordenades per optimitzar la ruta.</string>
-    <string name="osmand_distance_planning_plugin_description">Creant itineraris i usant o modificant fitxers GPX existents podreu mesurar la distància entre punts. Si després els deseu, podreu usar-los per preparar més itineraris GPX.</string>
+    <string name="osmand_distance_planning_plugin_description">Activa un giny que permet crear itineraris prement sobre el mapa (usant o modificant fitxers GPX existents) per mesurar la distància entre punts. Els resultats es poden desar com GPX i podreu usar-los per preparar més itineraris GPX.</string>
     <string name="android_19_location_disabled">"Des de la versió 4.4 d\'Android (KitKat) no es pot descarregar i actualitzar després els  mapes a la mateixa carpeta (%s). Voleu canviar-la a un altre lloc permès i copiar-hi tots els arxius OsmAnd?
 \n Nota 1: Els vostres arxius obsolets  quedaran intactes (els podeu esborrar manualment).
 \n Nota 2: En el nou lloc d\'emmagatzemament no serà possible compartir arxius entre l\'OsmAnd i l\'OsmAnd+."</string>
@@ -1514,9 +1514,9 @@
 	</string>
     <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
     <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
-    <string name="osmo_plugin_description">"Monitorització avançada en temps real OpenStreetMap, veieu http://osmo.mobi. Seguiment d\'altres dispositius així com de ser seguit. Creeu grups anònims, compartiu ubicacions amb els altres membres i us permet comunicar-vos. Hi ha diferents paràmetres de seguiment puntual així com de seguiment permanent. Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup. Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés. Si us plau, llegiu-ne més a http://osmo.mobi. "</string>
-    <string name="osmo_plugin_name">OsMo (Monitorització avançada en temps real)</string>
-    <string name="osmo_settings">Monitorització de l\'OpenStreetMap</string>
+    <string name="osmo_plugin_description">"Per accedir a la configuració de la monitorització avançada en temps real OsMo, consulteu http://osmo.mobi. Seguiment d\'altres dispositius així com de ser seguit. Creeu grups anònims, compartiu ubicacions amb els altres membres i us permet comunicar-vos. Hi ha diferents paràmetres de seguiment puntual així com de seguiment permanent. Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup. Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés. Si us plau, llegiu-ne més a http://osmo.mobi. "</string>
+    <string name="osmo_plugin_name">Monitorització OsMo</string>
+    <string name="osmo_settings">Monitorització de l\'OsMo</string>
    	
     <string name="osmo_io_error">Problema de connexió amb OSMo: </string>
     <string name="osmo_mode_on">Atura la sessió a OsMo</string>    
@@ -1760,7 +1760,7 @@
     <string name="speak_poi">Indica els PDI propers</string>
     <string name="index_tours">Itineraris</string>
     <string name="flat_list_waypoints">Totes</string>
-    <string name="record_plugin_description">Enregistreu el vostre trajecte prement un botó sobre la pantalla del mapa. Reviseu la configuració de gravació dels vostres recorreguts a arxius locals GPX o a la xarxa utilitzant un servei web.</string>
+    <string name="record_plugin_description">Activeu la funció d\'enregistrar el vostre trajecte prement un botó sobre la pantalla del mapa i reviseu la configuració de gravació dels vostres recorreguts a arxius locals GPX o a un servei web.</string>
     <string name="record_plugin_name">Enregistrament de trajectes</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
@@ -1890,8 +1890,8 @@
 	<string name="plugin_settings_button_caption">Configuració</string>
 <string name="edit_group">Edició del grup</string>
     <string name="plugin_install_needs_network">Us cal una connexió a internet per instal·lar aquest connector.</string>
-<string name="plugin_ski_name">Pistes d\'esquí</string>
-    <string name="plugin_nautical_name">Cartes marines</string>
+<string name="plugin_ski_name">Vista mapa d\'esquí</string>
+    <string name="plugin_nautical_name">Vista cartes marines</string>
     <string name="world_ski_missing">Per veure les pistes d\'esquí cal que baixeu un mapa específic</string>
     <string name="nautical_maps_missing">Per accedir a cartes marines cal que baixeu un mapa específic</string>
 	<string name="enable_plugin2">Activa</string>
@@ -1910,4 +1910,5 @@
 	<string name="online_map">Mapa en línia</string>
 	<string name="roads_only">Només carreteres</string>
     <string name="days_behind">dies de retard</string>
+	<string name="turn_off_all">Apagueu_tot</string>
 	</resources>
