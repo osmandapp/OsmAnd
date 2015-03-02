@@ -136,7 +136,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			asyncLoader = new LoadGpxTask();
 			asyncLoader.execute(getActivity());
 		} else {
-			allGpxAdapter.addSelected();
+			allGpxAdapter.refreshSelected();
 			allGpxAdapter.notifyDataSetChanged();;
 		}
 
@@ -444,6 +444,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				runSelection(false);
 				actionMode.finish();
+				allGpxAdapter.refreshSelected();
 				allGpxAdapter.notifyDataSetChanged();
 				return true;
 			}
@@ -619,7 +620,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				for (GpxInfo v : result) {
 					allGpxAdapter.addLocalIndexInfo(v);
 				}
-				allGpxAdapter.addSelected();
+				allGpxAdapter.refreshSelected();
 				allGpxAdapter.notifyDataSetChanged();
 				onPostExecute(result);
 			}
@@ -628,7 +629,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPostExecute(List<GpxInfo> result) {
 			this.result = result;
-			allGpxAdapter.addSelected();
+			allGpxAdapter.refreshSelected();
 			if (getActivity() != null) {
 				((ActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 			}
@@ -658,7 +659,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		private void loadGPXFolder(File mapPath, List<GpxInfo> result, LoadGpxTask loadTask,
 								   List<GpxInfo> progress, String gpxSubfolder) {
-			GpxSelectionHelper sgpx = app.getSelectedGpxHelper();
 			for (File gpxFile : listFilesSorted(mapPath)) {
 				if (gpxFile.isDirectory()) {
 					String sub = gpxSubfolder.length() == 0 ? gpxFile.getName() : gpxSubfolder + "/" + gpxFile.getName();
@@ -703,7 +703,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			ta.recycle();
 		}
 
-		public void addSelected() {
+		public void refreshSelected() {
 			selected.clear();
 			selected.addAll(getSelectedGpx());			
 		}
@@ -1144,6 +1144,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		protected void onPostExecute(String result) {
 			selectedGpxHelper.runUiListeners();
 			getActivity().setProgressBarIndeterminateVisibility(false);
+			allGpxAdapter.refreshSelected();
+			allGpxAdapter.notifyDataSetChanged();
 			if (showOnMap && toShow != null) {
 				getMyApplication().getSettings().setMapLocationToShow(toShow.lat, toShow.lon,
 						getMyApplication().getSettings().getLastKnownMapZoom());
@@ -1225,7 +1227,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					for (GpxInfo i : ((List<GpxInfo>) results.values)) {
 						allGpxAdapter.addLocalIndexInfo(i);
 					}
-					allGpxAdapter.addSelected();
+					allGpxAdapter.refreshSelected();
 				}
 				allGpxAdapter.notifyDataSetChanged();
 				if (constraint != null && constraint.length() > 3) {

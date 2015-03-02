@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="recents">RECENTS</string>
     <string name="selected_tracks">Selected</string>
 	<string name="turn_off_all">Turn_off_all</string>
 	<string name="showed_on_map">Showed on map</string>
@@ -49,7 +50,6 @@
     <string name="tracks">Tracks</string>
     <string name="my_location">My location</string>
     <string name="osm_editing_manage">Manage</string>
-    <string name="recents">RECENTS</string>
 	<string name="navigation_over_track">Start navigation over track?</string>
 	<string name="avoid_roads_msg">You can trigger an alternative route by selecting roads to avoid</string>
     <string name="rendering_value__name">Default</string>
