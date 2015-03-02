@@ -94,9 +94,6 @@ public class FavoritesActivity extends TabActivity {
 		if (tab > mTabs.size() - 1){
 			tab = 0;
 		}
-		if(tab > 0) {
-			tab ++;
-		}
 		mViewPager.setCurrentItem(tab );
 		updateSelectedTracks();
 		// setupHomeButton();
