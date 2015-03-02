@@ -1,19 +1,20 @@
 package net.osmand.plus.activities;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
 
 /**
  * Created by Alexey Pelykh on 02.02.2015.
@@ -55,6 +56,10 @@ public class PluginActivity extends OsmandActionBarActivity {
 
 		setContentView(R.layout.plugin);
 		getSupportActionBar().setTitle(plugin.getName());
+		if(plugin.getAssetResourceName() != 0 && Build.VERSION.SDK_INT >= 14) {
+			ImageView img = (ImageView) findViewById(R.id.plugin_image);
+			img.setImageResource(plugin.getAssetResourceName());
+		}
 
 		TextView descriptionView = (TextView)findViewById(R.id.plugin_description);
 		descriptionView.setText(plugin.getDescription());

@@ -24,6 +24,17 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	public NauticalMapsPlugin(OsmandApplication app) {
 		this.app = app;
 	}
+	
+	@Override
+	public int getLogoResourceId() {
+		// TODO
+		return super.getLogoResourceId();
+	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.nautical_map;
+	}
 
 	@Override
 	public String getDescription() {

@@ -21,7 +21,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
-import net.osmand.data.Street;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -68,7 +67,6 @@ import android.media.MediaRecorder;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Display;
 import android.view.KeyEvent;
@@ -1243,7 +1241,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				camera.release();
 			}
 		}
-
+	}
+	
+	@Override
+	public int getLogoResourceId() {
+		return R.drawable.ic_type_video;
 	}
 
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.audio_video_notes;
+	}
 }

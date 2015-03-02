@@ -51,6 +51,8 @@ public abstract class OsmandPlugin {
 	public abstract String getDescription();
 	
 	public abstract String getName();
+	
+	public abstract int getAssetResourceName();
 
 	public int getLogoResourceId() {
 		return R.drawable.ic_extension_dark;
@@ -93,14 +95,14 @@ public abstract class OsmandPlugin {
 	
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
-		OsmandRasterMapsPlugin rasterMapsPlugin = new OsmandRasterMapsPlugin(app);
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
-		allPlugins.add(rasterMapsPlugin);
+		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
 		allPlugins.add(new OsMoPlugin(app));
 		checkMarketPlugin(app, new SRTMPlugin(app), true, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT);
 
-		checkMarketPlugin(app, new TouringViewPlugin(app), false, TouringViewPlugin.COMPONENT, null);
+		// ? questionable - definitely not market plugin 
+//		checkMarketPlugin(app, new TouringViewPlugin(app), false, TouringViewPlugin.COMPONENT, null);
 		checkMarketPlugin(app, new NauticalMapsPlugin(app), false, NauticalMapsPlugin.COMPONENT, null);
 		checkMarketPlugin(app, new SkiMapsPlugin(app), false, SkiMapsPlugin.COMPONENT, null);
 

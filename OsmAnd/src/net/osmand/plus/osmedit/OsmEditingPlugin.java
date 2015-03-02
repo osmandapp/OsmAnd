@@ -260,4 +260,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return app.getString(R.string.osm_settings);
 	}
 
+	@Override
+	public int getLogoResourceId() {
+		return R.drawable.ic_action_bug_dark;
+	}
+	
+	@Override
+	public int getAssetResourceName() {
+		return R.drawable.osm_editing;
+	}
 }

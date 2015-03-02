@@ -47,4 +47,14 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	}
 
 
+	@Override
+	public int getAssetResourceName() {
+		return 0;
+	}
+	
+	@Override
+	public int getLogoResourceId() {
+		// TODO
+		return super.getLogoResourceId();
+	}
 }
