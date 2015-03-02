@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   
   <string name="layer_map_appearance">Configura pantalla</string>
@@ -1957,4 +1957,5 @@
 	<string name="rename_failed">Falló el renombrado.</string>
 	<string name="currently_recording_track">Actualmente registrando traza</string>
 	<string name="back_to_map">Volver al mapa</string>
+	<string name="selected_tracks">Seleccionado(s)</string>
 	</resources>
